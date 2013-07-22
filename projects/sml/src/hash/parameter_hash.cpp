@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/sml/hash/nested_qname_hash.hpp"
-#include "dogen/sml/hash/operation_hash.hpp"
 #include "dogen/sml/hash/parameter_hash.hpp"
 
 namespace {
@@ -47,37 +46,18 @@ inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::ve
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_sml_parameter(const std::list<dogen::sml::parameter>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_boost_optional_dogen_sml_nested_qname(const boost::optional<dogen::sml::nested_qname>& v){
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace sml {
 
-std::size_t operation_hasher::hash(const operation&v) {
+std::size_t parameter_hasher::hash(const parameter&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
-    combine(seed, hash_std_list_dogen_sml_parameter(v.parameters()));
-    combine(seed, hash_boost_optional_dogen_sml_nested_qname(v.type()));
+    combine(seed, v.type());
 
     return seed;
 }

@@ -49,6 +49,7 @@ const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
 const std::string dia_model("dia");
 const std::string sml_model("sml");
+const std::string key_extractor_name("key_extractor");
 const std::string visitor_name("visitor");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
@@ -56,7 +57,10 @@ const std::string extract_name("extract");
 const std::string uint_name("unsigned int");
 const std::string id_name("id");
 const std::string version_name("version");
+const std::string visitor_argument_name("v");
+const std::string extractor_argument_name("e");
 const std::string visitor_doc("Visitor for ");
+const std::string key_extractor_doc("Extracts keys for type ");
 const std::string visit_operation_doc("Accept visits for type ");
 const std::string unversioned_key_doc("Unversioned key for ");
 const std::string versioned_key_doc("Versioned key for ");
@@ -136,12 +140,12 @@ boost::shared_ptr<abstract_object>
 injector::create_key_extractor(const keyed_entity& ke) const {
     auto r(boost::make_shared<service>());
     qname qn;
-    qn.simple_name(ke.name().simple_name() + "_" + visitor_name);
+    qn.simple_name(ke.name().simple_name() + "_" + key_extractor_name);
     qn.model_name(ke.name().model_name());
     qn.module_path(ke.name().module_path());
     qn.external_module_path(ke.name().external_module_path());
 
-    BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << qn.simple_name();
+    BOOST_LOG_SEV(lg, debug) << "Creating extractor: " << qn.simple_name();
 
     r->name(qn);
     r->generation_type(ke.generation_type());
@@ -149,13 +153,18 @@ injector::create_key_extractor(const keyed_entity& ke) const {
     r->type(service_types::key_extractor);
     r->documentation(visitor_doc + ke.name().simple_name());
 
-    operation opuv;
-    opuv.name(unversioned_name);
+    // FIXME: create these methods with correct names
+    parameter p;
+    p.name(extractor_argument_name);
 
     nested_qname nqn;
     nqn.type(ke.unversioned_key());
-    opuv.arguments().push_back(nqn);
-    // opuv.documentation(visit_operation_doc + l.simple_name());
+    p.type(nqn);
+
+    operation opuv;
+    opuv.name(unversioned_name);
+    opuv.parameters().push_back(p);
+    opuv.documentation(key_extractor_doc + ke.name().simple_name());
     r->operations().push_back(opuv);
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: " << qn.simple_name();
@@ -263,12 +272,16 @@ injector::create_visitor(const abstract_object& ao) const {
     // FIXME: hack for now
     r->leaves(ao.leaves());
     for (const auto& l : ao.leaves()) {
-        operation op;
-        op.name("visit");
+        parameter p;
+        p.name(visitor_argument_name);
 
         nested_qname nqn;
         nqn.type(l);
-        op.arguments().push_back(nqn);
+        p.type(nqn);
+
+        operation op;
+        op.name("visit");
+        op.parameters().push_back(p);
         op.documentation(visit_operation_doc + l.simple_name());
         r->operations().push_back(op);
     }

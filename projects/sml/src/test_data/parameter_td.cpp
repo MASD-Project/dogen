@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/sml/test_data/nested_qname_td.hpp"
-#include "dogen/sml/test_data/operation_td.hpp"
 #include "dogen/sml/test_data/parameter_td.hpp"
 
 namespace {
@@ -47,29 +46,9 @@ std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std
     return r;
 }
 
-dogen::sml::parameter
-create_dogen_sml_parameter(const unsigned int position) {
-    return dogen::sml::parameter_generator::create(position);
-}
-
-std::list<dogen::sml::parameter> create_std_list_dogen_sml_parameter(unsigned int position) {
-    std::list<dogen::sml::parameter> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_dogen_sml_parameter(position + i));
-    }
-    return r;
-}
-
 dogen::sml::nested_qname
 create_dogen_sml_nested_qname(const unsigned int position) {
     return dogen::sml::nested_qname_generator::create(position);
-}
-
-boost::optional<dogen::sml::nested_qname>
-create_boost_optional_dogen_sml_nested_qname(unsigned int position) {
-    boost::optional<dogen::sml::nested_qname> r(
-        create_dogen_sml_nested_qname(position));
-    return r;
 }
 
 }
@@ -77,32 +56,31 @@ create_boost_optional_dogen_sml_nested_qname(unsigned int position) {
 namespace dogen {
 namespace sml {
 
-operation_generator::operation_generator() : position_(0) { }
+parameter_generator::parameter_generator() : position_(0) { }
 
-void operation_generator::
+void parameter_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
     v.name(create_std_string(position + 2));
-    v.parameters(create_std_list_dogen_sml_parameter(position + 3));
-    v.type(create_boost_optional_dogen_sml_nested_qname(position + 4));
+    v.type(create_dogen_sml_nested_qname(position + 3));
 }
 
-operation_generator::result_type
-operation_generator::create(const unsigned int position) {
-    operation r;
-    operation_generator::populate(position, r);
+parameter_generator::result_type
+parameter_generator::create(const unsigned int position) {
+    parameter r;
+    parameter_generator::populate(position, r);
     return r;
 }
-operation_generator::result_type*
-operation_generator::create_ptr(const unsigned int position) {
-    operation* p = new operation();
-    operation_generator::populate(position, *p);
+parameter_generator::result_type*
+parameter_generator::create_ptr(const unsigned int position) {
+    parameter* p = new parameter();
+    parameter_generator::populate(position, *p);
     return p;
 }
 
-operation_generator::result_type
-operation_generator::operator()() {
+parameter_generator::result_type
+parameter_generator::operator()() {
     return create(position_++);
 }
 

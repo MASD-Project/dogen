@@ -18,52 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_OPERATION_HPP
-#define DOGEN_SML_TYPES_OPERATION_HPP
+#ifndef DOGEN_SML_TYPES_PARAMETER_HPP
+#define DOGEN_SML_TYPES_PARAMETER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include <boost/optional.hpp>
-#include <list>
 #include <string>
 #include <utility>
 #include <vector>
-#include "dogen/sml/serialization/operation_fwd_ser.hpp"
+#include "dogen/sml/serialization/parameter_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/parameter.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Represents a method in an object.
+ * @brief Parameter supplied to an operation.
  */
-class operation final {
+class parameter final {
 public:
-    operation() = default;
-    operation(const operation&) = default;
-    ~operation() = default;
+    parameter() = default;
+    parameter(const parameter&) = default;
+    parameter(parameter&&) = default;
+    ~parameter() = default;
 
 public:
-    operation(operation&& rhs);
-
-public:
-    operation(
+    parameter(
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const std::string& name,
-        const std::list<dogen::sml::parameter>& parameters,
-        const boost::optional<dogen::sml::nested_qname>& type);
+        const dogen::sml::nested_qname& type);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const operation& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const parameter& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, operation& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, parameter& v, unsigned int version);
 
 public:
     /**
@@ -91,7 +85,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the operation.
+     * @brief Name of the parameter.
      */
     /**@{*/
     const std::string& name() const;
@@ -101,41 +95,30 @@ public:
     /**@}*/
 
     /**
-     * @brief List of parameters that can be passed in to the operation.
+     * @brief Type of the parameter.
      */
     /**@{*/
-    const std::list<dogen::sml::parameter>& parameters() const;
-    std::list<dogen::sml::parameter>& parameters();
-    void parameters(const std::list<dogen::sml::parameter>& v);
-    void parameters(const std::list<dogen::sml::parameter>&& v);
-    /**@}*/
-
-    /**
-     * @brief Result of the operation, if any.
-     */
-    /**@{*/
-    const boost::optional<dogen::sml::nested_qname>& type() const;
-    boost::optional<dogen::sml::nested_qname>& type();
-    void type(const boost::optional<dogen::sml::nested_qname>& v);
-    void type(const boost::optional<dogen::sml::nested_qname>&& v);
+    const dogen::sml::nested_qname& type() const;
+    dogen::sml::nested_qname& type();
+    void type(const dogen::sml::nested_qname& v);
+    void type(const dogen::sml::nested_qname&& v);
     /**@}*/
 
 public:
-    bool operator==(const operation& rhs) const;
-    bool operator!=(const operation& rhs) const {
+    bool operator==(const parameter& rhs) const;
+    bool operator!=(const parameter& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(operation& other) noexcept;
-    operation& operator=(operation other);
+    void swap(parameter& other) noexcept;
+    parameter& operator=(parameter other);
 
 private:
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     std::string name_;
-    std::list<dogen::sml::parameter> parameters_;
-    boost::optional<dogen::sml::nested_qname> type_;
+    dogen::sml::nested_qname type_;
 };
 
 } }
@@ -144,8 +127,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::operation& lhs,
-    dogen::sml::operation& rhs) {
+    dogen::sml::parameter& lhs,
+    dogen::sml::parameter& rhs) {
     lhs.swap(rhs);
 }
 

@@ -21,7 +21,6 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
 #include "dogen/sml/io/parameter_io.hpp"
 
 
@@ -59,45 +58,15 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::parameter>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::nested_qname>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const operation& v) {
+std::ostream& operator<<(std::ostream& s, const parameter& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::sml::operation\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::parameter\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"parameters\": " << v.parameters() << ", "
       << "\"type\": " << v.type()
       << " }";
     return(s);

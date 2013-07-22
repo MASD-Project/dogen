@@ -32,6 +32,7 @@
 #include "dogen/sml/hash/nested_qname_hash.hpp"
 #include "dogen/sml/hash/operation_hash.hpp"
 #include "dogen/sml/hash/origin_types_hash.hpp"
+#include "dogen/sml/hash/parameter_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"

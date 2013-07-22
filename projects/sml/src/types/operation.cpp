@@ -27,36 +27,36 @@ operation::operation(operation&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       implementation_specific_parameters_(std::move(rhs.implementation_specific_parameters_)),
       name_(std::move(rhs.name_)),
-      arguments_(std::move(rhs.arguments_)),
-      return_type_(std::move(rhs.return_type_)) { }
+      parameters_(std::move(rhs.parameters_)),
+      type_(std::move(rhs.type_)) { }
 
 operation::operation(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const std::string& name,
-    const std::list<dogen::sml::nested_qname>& arguments,
-    const boost::optional<dogen::sml::nested_qname>& return_type)
+    const std::list<dogen::sml::parameter>& parameters,
+    const boost::optional<dogen::sml::nested_qname>& type)
     : documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
-      arguments_(arguments),
-      return_type_(return_type) { }
+      parameters_(parameters),
+      type_(type) { }
 
 void operation::swap(operation& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
-    swap(arguments_, other.arguments_);
-    swap(return_type_, other.return_type_);
+    swap(parameters_, other.parameters_);
+    swap(type_, other.type_);
 }
 
 bool operation::operator==(const operation& rhs) const {
     return documentation_ == rhs.documentation_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
-        arguments_ == rhs.arguments_ &&
-        return_type_ == rhs.return_type_;
+        parameters_ == rhs.parameters_ &&
+        type_ == rhs.type_;
 }
 
 operation& operation::operator=(operation other) {
@@ -113,36 +113,36 @@ void operation::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::list<dogen::sml::nested_qname>& operation::arguments() const {
-    return arguments_;
+const std::list<dogen::sml::parameter>& operation::parameters() const {
+    return parameters_;
 }
 
-std::list<dogen::sml::nested_qname>& operation::arguments() {
-    return arguments_;
+std::list<dogen::sml::parameter>& operation::parameters() {
+    return parameters_;
 }
 
-void operation::arguments(const std::list<dogen::sml::nested_qname>& v) {
-    arguments_ = v;
+void operation::parameters(const std::list<dogen::sml::parameter>& v) {
+    parameters_ = v;
 }
 
-void operation::arguments(const std::list<dogen::sml::nested_qname>&& v) {
-    arguments_ = std::move(v);
+void operation::parameters(const std::list<dogen::sml::parameter>&& v) {
+    parameters_ = std::move(v);
 }
 
-const boost::optional<dogen::sml::nested_qname>& operation::return_type() const {
-    return return_type_;
+const boost::optional<dogen::sml::nested_qname>& operation::type() const {
+    return type_;
 }
 
-boost::optional<dogen::sml::nested_qname>& operation::return_type() {
-    return return_type_;
+boost::optional<dogen::sml::nested_qname>& operation::type() {
+    return type_;
 }
 
-void operation::return_type(const boost::optional<dogen::sml::nested_qname>& v) {
-    return_type_ = v;
+void operation::type(const boost::optional<dogen::sml::nested_qname>& v) {
+    type_ = v;
 }
 
-void operation::return_type(const boost::optional<dogen::sml::nested_qname>&& v) {
-    return_type_ = std::move(v);
+void operation::type(const boost::optional<dogen::sml::nested_qname>&& v) {
+    type_ = std::move(v);
 }
 
 } }
