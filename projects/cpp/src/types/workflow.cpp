@@ -255,7 +255,9 @@ workflow::generate_file_infos_for_namespaces_activity() const {
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
-            register_header(fi);
+
+            if (cd.aspect_type() != aspect_types::forward_decls)
+                register_header(fi);
         }
     }
 
@@ -273,7 +275,9 @@ workflow::result_type workflow::generate_registrars_activity() const {
             const auto il(includer_.includes_for_registrar(cd));
             const auto fi(file_info_factory_.create_registrar(ri, cd, il));
             r.insert(format(fi));
-            register_header(fi);
+
+            if (cd.aspect_type() != aspect_types::forward_decls)
+                register_header(fi);
         }
     }
     return r;
@@ -310,7 +314,9 @@ workflow::result_type workflow::generate_visitors_activity() const {
             const auto il(includer_.includes_for_visitor(cd, rel));
             const auto fi(file_info_factory_.create_visitor(vi, cd, il));
             r.insert(format(fi));
-            register_header(fi);
+
+            if (cd.aspect_type() != aspect_types::forward_decls)
+                register_header(fi);
         }
     }
     return r;
@@ -327,7 +333,9 @@ workflow::result_type workflow::generate_enums_activity() const {
             const auto il(includer_.includes_for_enumeration(cd));
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
-            register_header(fi);
+
+            if (cd.aspect_type() != aspect_types::forward_decls)
+                register_header(fi);
         }
     }
     return r;
@@ -344,7 +352,9 @@ workflow::result_type workflow::generate_exceptions_activity() const {
             const auto il(includer_.includes_for_exception(cd));
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
-            register_header(fi);
+
+            if (cd.aspect_type() != aspect_types::forward_decls)
+                register_header(fi);
         }
     }
 

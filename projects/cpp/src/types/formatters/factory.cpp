@@ -24,6 +24,7 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
+#include "dogen/cpp/io/content_types_io.hpp"
 #include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/types/formatters/production_failure.hpp"
 #include "dogen/cpp/types/formatters/facet_includer.hpp"
@@ -170,13 +171,19 @@ factory::create(std::ostream& s, const content_descriptor& cd) const {
         case content_types::visitor:
             return visitor::create(s);
             break;
+        case content_types::exception:
+        case content_types::enumeration:
         case content_types::value_object:
             return create_main_formatter(s, cd);
+            break;
+        case content_types::user_defined_service:
+            return create_null_formatter(s);
             break;
         default: {
             std::ostringstream s;
             s << production_failure_msg << cd.facet_type() << ", "
-              << cd.file_type() << ", " << cd.aspect_type();
+              << cd.file_type() << ", " << cd.aspect_type() << ", "
+              << cd.content_type();
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(production_failure(s.str()));
         } };
