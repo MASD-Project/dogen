@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia_to_sml/types/validation_error.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"
 
@@ -184,7 +185,8 @@ void validator::validate_sml(const profile& p) const {
      * rule 6: non SML objects are not allowed to have concepts.
      */
     if (!p.unknown_stereotypes().empty()) {
-        BOOST_LOG_SEV(lg, error) << concepts_require_sml_object;
+        BOOST_LOG_SEV(lg, error) << concepts_require_sml_object << ": "
+                                 << p.unknown_stereotypes();
         BOOST_THROW_EXCEPTION(validation_error(concepts_require_sml_object));
     }
 }
