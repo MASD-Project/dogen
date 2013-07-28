@@ -84,12 +84,15 @@ void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
 
         using sml::value_object;
         const auto vo(boost::dynamic_pointer_cast<value_object>(k->second));
-        const auto ac(sml::value_object_types::associative_container);
-        if (vo->type() == ac && nqn.children().size() >= 1)
-            rel.keys().insert(nqn.children().front().type());
 
-        const auto sp(sml::value_object_types::smart_pointer);
-        is_pointer = vo->type() == sp;
+        if (vo) {
+            const auto ac(sml::value_object_types::associative_container);
+            if (vo->type() == ac && nqn.children().size() >= 1)
+                rel.keys().insert(nqn.children().front().type());
+
+            const auto sp(sml::value_object_types::smart_pointer);
+            is_pointer = vo->type() == sp;
+        }
     }
 
     const auto sn(qn.simple_name());

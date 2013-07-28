@@ -318,7 +318,9 @@ void serialization_implementation::format(const file_info& fi) {
             << "#endif" << std::endl;
     utility_.blank_line();
 
-    if (fi.descriptor().content_type() == content_types::value_object ||
+    if (fi.descriptor().content_type() == content_types::unversioned_key ||
+        fi.descriptor().content_type() == content_types::versioned_key ||
+        fi.descriptor().content_type() == content_types::value_object ||
         fi.descriptor().content_type() == content_types::entity ||
         fi.descriptor().content_type() == content_types::keyed_entity)
         format_class(fi);

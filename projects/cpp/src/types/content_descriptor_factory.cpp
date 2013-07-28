@@ -60,6 +60,8 @@ enabled_facets(const content_types ct) const {
     case content_types::exception:
         return std::set<cpp_facet_types> { cpp_facet_types::types };
 
+    case content_types::unversioned_key:
+    case content_types::versioned_key:
     case content_types::value_object:
     case content_types::entity:
     case content_types::keyed_entity:
@@ -84,6 +86,8 @@ bool content_descriptor_factory::has_implementation(
 
     using config::cpp_facet_types;
     switch(ct) {
+    case content_types::versioned_key:
+    case content_types::unversioned_key:
     case content_types::value_object:
     case content_types::entity:
     case content_types::keyed_entity:
@@ -123,6 +127,8 @@ bool content_descriptor_factory::has_forward_decls(
     using config::cpp_facet_types;
 
     switch(ct) {
+    case content_types::unversioned_key:
+    case content_types::versioned_key:
     case content_types::value_object:
     case content_types::entity:
     case content_types::keyed_entity:

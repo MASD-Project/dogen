@@ -174,6 +174,8 @@ factory::create(std::ostream& s, const content_descriptor& cd) const {
         case content_types::exception:
         case content_types::enumeration:
         case content_types::value_object:
+        case content_types::unversioned_key:
+        case content_types::versioned_key:
             return create_main_formatter(s, cd);
             break;
         case content_types::user_defined_service:

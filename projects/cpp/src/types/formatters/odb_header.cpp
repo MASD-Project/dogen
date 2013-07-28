@@ -152,7 +152,9 @@ void odb_header::format(const file_info& fi) {
     includes includes(stream_);
     includes.format(fi);
 
-    if (fi.descriptor().content_type() == content_types::value_object ||
+    if (fi.descriptor().content_type() == content_types::unversioned_key ||
+        fi.descriptor().content_type() == content_types::versioned_key ||
+        fi.descriptor().content_type() == content_types::value_object ||
         fi.descriptor().content_type() == content_types::entity ||
         fi.descriptor().content_type() == content_types::keyed_entity)
         format_class(fi);
