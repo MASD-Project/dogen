@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/io/class_types_io.hpp"
 #include "dogen/cpp/io/context_io.hpp"
@@ -91,6 +92,7 @@ void workflow::validate_settings() const {
 
 workflow::result_entry_type workflow::format(const file_info& fi) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << fi.file_path().string();
+    BOOST_LOG_SEV(lg, debug) << "Descriptor:" << fi.descriptor();
     formatters::factory factory(settings_);
     formatters::file_formatter::shared_ptr ff;
     std::ostringstream s;
