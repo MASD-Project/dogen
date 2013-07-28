@@ -138,26 +138,6 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     if (ao.parent_name())
         r.names().insert(*ao.parent_name());
 
-    if (ao.is_visitable()) {
-        // FIXME: the whole visitor handling is not ideal
-        auto qn(ao.name());
-        qn.simple_name(qn.simple_name() + "_visitor");
-        r.visitor(qn);
-    } else if (ao.original_parent_name()) {
-        auto opn(*ao.original_parent_name());
-        auto i(model_.objects().find(opn));
-        if (i == model_.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << opn;
-            BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
-                    boost::lexical_cast<std::string>(opn)));
-        }
-
-        if (i->second->is_visitable()) {
-            opn.simple_name(opn.simple_name() + "_visitor");
-            r.visitor(opn);
-        }
-    }
-
     r.is_parent(ao.is_parent());
     r.is_child(ao.parent_name());
     r.leaves().insert(ao.leaves().begin(), ao.leaves().end());
@@ -174,12 +154,11 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
         recurse_nested_qnames(nqn, r, is_pointer);
     }
 
-    // for (const auto op : ao.operations()) {
-    //     const auto nqn(op.type());
-    //     bool is_pointer(nqn.is_pointer());
-    //     recurse_nested_qnames(nqn, r, is_pointer);
-    // }
-
+    for (const auto op : ao.operations()) {
+        const auto nqn(*op.type());
+        bool is_pointer(nqn.is_pointer());
+        recurse_nested_qnames(nqn, r, is_pointer);
+    }
 
     for (const auto& n : r.names()) {
         if (r.forward_decls().find(n) != r.forward_decls().end())

@@ -113,6 +113,11 @@ private:
     create_visitor(const abstract_object& ao) const;
 
     /**
+     * @brief Injects an accept operation for the given visitor.
+     */
+    void inject_accept(abstract_object& ao, const abstract_object& v) const;
+
+    /**
      * @brief Injects visitors for objects that require them.
      */
     void inject_visitors(model& m) const;

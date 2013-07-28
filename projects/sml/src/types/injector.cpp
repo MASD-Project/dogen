@@ -71,6 +71,10 @@ const std::string duplicate_qname(
     "Attempt to add object with a name that already exists in model: ");
 const std::string zero_leaves("Type marked as visitable but has no leaves: ");
 
+const std::string accept_operation_name("accept");
+const std::string accept_argument_name("v");
+const std::string accept_operation_doc("Acceptor for ");
+
 class keyed_entity_visitor : public dogen::sml::type_visitor {
 public:
     typedef std::function<void(dogen::sml::keyed_entity&)> function_type;
@@ -269,8 +273,6 @@ injector::create_visitor(const abstract_object& ao) const {
     r->type(service_types::visitor);
     r->documentation(visitor_doc + ao.name().simple_name());
 
-    // FIXME: hack for now
-    r->leaves(ao.leaves());
     for (const auto& l : ao.leaves()) {
         parameter p;
         p.name(visitor_argument_name);
@@ -290,6 +292,22 @@ injector::create_visitor(const abstract_object& ao) const {
     return r;
 }
 
+void injector::
+inject_accept(abstract_object& ao, const abstract_object& v) const {
+    parameter p;
+    p.name(accept_argument_name);
+
+    nested_qname nqn;
+    nqn.type(v.name());
+    p.type(nqn);
+
+    operation op;
+    op.name(accept_operation_name);
+    op.parameters().push_back(p);
+    op.documentation(accept_operation_doc + v.name().simple_name());
+    ao.operations().push_back(op);
+}
+
 void injector::inject_visitors(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
 
@@ -305,7 +323,10 @@ void injector::inject_visitors(model& m) const {
             BOOST_THROW_EXCEPTION(injection_error(zero_leaves +
                     boost::lexical_cast<std::string>(ao.name())));
         }
-        visitors.push_back(create_visitor(ao));
+
+        const auto v(create_visitor(ao));
+        visitors.push_back(v);
+        inject_accept(ao, *v);
     }
 
     for (const auto v : visitors) {
