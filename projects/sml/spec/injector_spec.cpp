@@ -334,8 +334,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             const auto op(s.operations().front());
             BOOST_CHECK(!op.name().empty());
             BOOST_CHECK(!op.documentation().empty());
-            BOOST_REQUIRE(op.arguments().size() == 1);
-            BOOST_CHECK(is_type_zero(op.arguments().front().type()));
+            BOOST_REQUIRE(op.parameters().size() == 1);
+            BOOST_CHECK(is_type_zero(op.parameters().front().type().type()));
         }
     }
 
