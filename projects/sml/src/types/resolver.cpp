@@ -133,6 +133,8 @@ void resolver::validate_refinements(const concept& c) const {
 }
 
 qname resolver::resolve_partial_type(const qname& n) const {
+    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n;
+
     qname r(n);
 
     // first try the type as it was read originally.
@@ -204,10 +206,8 @@ qname resolver::resolve_partial_type(const qname& n) const {
 }
 
 void resolver::resolve_partial_type(nested_qname& n) const {
-    auto children(n.children());
-    for (auto i(children.begin()); i != children.end(); ++i)
-        resolve_partial_type(*i);
-    n.children(children);
+    for (auto& c : n.children())
+        resolve_partial_type(c);
 
     qname qn(resolve_partial_type(n.type()));
     BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type()
@@ -215,26 +215,39 @@ void resolver::resolve_partial_type(nested_qname& n) const {
     n.type(qn);
 }
 
-std::list<property> resolver::resolve_properties(const qname& owner,
-    const std::list<property>& unresolved_properties) const {
-    std::list<property> r;
-
-    for (auto p : unresolved_properties) {
+void resolver::
+resolve_properties(const qname& owner, std::list<property>& p) const {
+    for (auto& prop : p) {
         try {
-            auto t(p.type());
-            resolve_partial_type(t);
-            p.type(t);
-            r.push_back(p);
+            resolve_partial_type(prop.type());
         } catch (boost::exception& e) {
             std::ostringstream s;
             s << "Owner type name: " << owner.simple_name()
-              << " Property name: " << p.name()
-              << " Property type: " << p.type();
+              << " Property name: " << prop.name()
+              << " Property type: " << prop.type();
             e << errmsg_info(s.str());
             throw;
         }
     }
-    return r;
+}
+
+void resolver::
+resolve_operations(const qname& owner, std::list<operation>& op) const {
+    for (auto& operation : op) {
+        try {
+            if (!operation.type())
+                continue;
+
+            resolve_partial_type(*operation.type());
+        } catch (boost::exception& e) {
+            std::ostringstream s;
+            s << "Owner type name: " << owner.simple_name()
+              << " Operation name: " << operation.name()
+              << " Operation type: " << operation.type();
+            e << errmsg_info(s.str());
+            throw;
+        }
+    }
 }
 
 void resolver::require_not_has_resolved() const {
@@ -252,23 +265,28 @@ void resolver::resolve_concepts() {
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        c.properties(resolve_properties(c.name(), c.properties()));
+        resolve_properties(c.name(), c.properties());
         validate_refinements(c);
     }
 }
 
 void resolver::resolve_objects() {
+    BOOST_LOG_SEV(lg, debug) << "Objects found: " << model_.objects().size();
+
     for (auto& pair : model_.objects()) {
         auto& o(*pair.second);
+        BOOST_LOG_SEV(lg, debug) << "Resolving type " << o.name();
+
         if (o.generation_type() == generation_types::no_generation)
-            return;
+            continue;
 
         validate_inheritance_graph(o);
-        o.properties(resolve_properties(o.name(), o.properties()));
+        resolve_properties(o.name(), o.properties());
+        resolve_operations(o.name(), o.operations());
 
         //FIXME: start of biggest hack ever
         if (o.modeled_concepts().empty())
-            return;
+            continue;
 
         std::list<qname> expanded_modeled_concepts;
         for (const auto& qn : o.modeled_concepts())
@@ -292,7 +310,9 @@ void resolver::resolve_objects() {
         auto& o(*pair.second);
 
         if (o.modeled_concepts().empty())
-            return;
+            continue;
+
+        BOOST_LOG_SEV(lg, debug) << "Resolving concepts for type: " << o.name();
 
         // std::cout << "type2: " << o.name().type_name() << std::endl;
         // std::cout << "modeled: " << o.modeled_concepts().size()

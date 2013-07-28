@@ -50,9 +50,8 @@ const std::string type_does_not_have_a_parent(
 namespace dogen {
 namespace cpp {
 
-void extractor::
-recurse_nested_qnames(const sml::nested_qname& nqn, relationships& rel,
-    bool& is_pointer) const {
+void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
+    relationships& rel, bool& is_pointer) const {
 
     const auto qn(nqn.type());
     if (is_pointer)
@@ -148,13 +147,13 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
         properties_for_concept(qn, props, processed_qnames);
     props.insert(props.end(), ao.properties().begin(), ao.properties().end());
 
-    for (const auto prop : props) {
+    for (const auto& prop : props) {
         const auto nqn(prop.type());
         bool is_pointer(nqn.is_pointer());
         recurse_nested_qnames(nqn, r, is_pointer);
     }
 
-    for (const auto op : ao.operations()) {
+    for (const auto& op : ao.operations()) {
         const auto nqn(*op.type());
         bool is_pointer(nqn.is_pointer());
         recurse_nested_qnames(nqn, r, is_pointer);
