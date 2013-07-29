@@ -25,10 +25,10 @@
 #include <iterator>
 #include <algorithm>
 // #include <iostream>
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
 // #include "dogen/utility/io/set_io.hpp"
 // #include "dogen/utility/io/list_io.hpp"
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/value_object.hpp"
@@ -72,8 +72,7 @@ bool operator<(const qname& lhs, const qname& rhs) {
         (lhs.model_name() == rhs.model_name() &&
             (lhs.external_module_path() < rhs.external_module_path() ||
                 (lhs.external_module_path() == rhs.external_module_path() &&
-                    (lhs.simple_name() < rhs.simple_name() ||
-                        (lhs.simple_name() == rhs.simple_name())))));
+                    (lhs.simple_name() < rhs.simple_name()))));
 }
 
 resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
@@ -292,7 +291,7 @@ void resolver::resolve_objects() {
         for (const auto& qn : o.modeled_concepts())
             expand_concept_hierarchy(qn, expanded_modeled_concepts);
 
-        // std::cout << "type: " << o.name().type_name() << std::endl;
+        // std::cout << "type: " << o.name().simple_name() << std::endl;
 
         // std::cout << "after expand: " << expanded_modeled_concepts.size()
         //           << std::endl
@@ -314,9 +313,8 @@ void resolver::resolve_objects() {
 
         BOOST_LOG_SEV(lg, debug) << "Resolving concepts for type: " << o.name();
 
-        // std::cout << "type2: " << o.name().type_name() << std::endl;
-        // std::cout << "modeled: " << o.modeled_concepts().size()
-        // << std::endl;
+        // std::cout << "type2: " << o.name().simple_name() << std::endl;
+        // std::cout << "modeled: " << o.modeled_concepts().size() << std::endl;
 
         std::set<qname> mc;
         for (const auto& qn : o.modeled_concepts())
@@ -345,7 +343,12 @@ void resolver::resolve_objects() {
         for (const auto& qn : tmp) {
             if (result.find(qn) != result.end())
                 o.modeled_concepts().push_back(qn);
+            // else
+            //     std::cout << "could not find: " << qn.simple_name()
+            //               << " qn: " << qn
+            //               << std::endl;
         }
+        // std::cout << "mc size: " << o.modeled_concepts().size() << std::endl;
     }
 }
 
