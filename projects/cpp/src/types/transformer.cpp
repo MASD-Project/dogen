@@ -444,8 +444,13 @@ class_info transformer::to_class_info(const sml::abstract_object& ao) const {
 
     std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
-    for (const auto& qn : ao.modeled_concepts())
+    // std::cout << r.name() << " modeled concepts: "
+    //           << ao.modeled_concepts().size() << std::endl;
+
+    for (const auto& qn : ao.modeled_concepts()) {
+        // std::cout << "concept: " << qn.simple_name() << std::endl;
         properties_for_concept(qn, props, processed_qnames);
+    }
     props.insert(props.end(), ao.properties().begin(), ao.properties().end());
 
     for (const auto& prop : props) {
