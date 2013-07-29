@@ -359,7 +359,7 @@
 								<item>
 									<which>8</which>
 									<value class_id="22" tracking_level="0" version="0">
-										<value>31.2,10.6375;42.58,15.1375</value>
+										<value>31.2,10.6375;42.195,15.1375</value>
 									</value>
 								</item>
 							</values>
@@ -385,7 +385,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>11.279999999999999</value>
+										<value>10.895</value>
 									</value>
 								</item>
 							</values>
@@ -424,7 +424,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#entity, keyed, versioned#</value>
+										<value>#keyed entity, versioned#</value>
 									</value>
 								</item>
 							</values>
