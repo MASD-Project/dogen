@@ -587,6 +587,8 @@ void includer::append_self_dependencies(const content_descriptor& cd,
      * the serialisation forward declaration headers.
      */
     const auto is_serialisable(
+        cd.content_type() == content_types::unversioned_key ||
+        cd.content_type() == content_types::versioned_key ||
         cd.content_type() == content_types::value_object ||
         cd.content_type() == content_types::entity ||
         cd.content_type() == content_types::keyed_entity);
@@ -687,8 +689,8 @@ includes_for_exception(const content_descriptor& cd) const {
     return r;
 }
 
-inclusion_lists includer::
-includes_for_registrar(const content_descriptor& cd) const {
+inclusion_lists
+includer::includes_for_registrar(const content_descriptor& cd) const {
     inclusion_lists r;
 
     const auto flt(cd.file_type());
