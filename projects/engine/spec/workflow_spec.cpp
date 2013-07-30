@@ -126,6 +126,7 @@ using dogen::engine::generation_failure;
 
 BOOST_AUTO_TEST_SUITE(workflow)
 
+/*
 BOOST_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     SETUP_TEST_LOG("debug_options_generate_expected_debug_info");
     auto s(debug_dogen_mock_settings());
@@ -146,6 +147,7 @@ BOOST_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     const auto f(file_asserters());
     BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual(), f));
 }
+*/
 
 BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     SETUP_TEST_LOG("stdout_option_generates_expected_output");
