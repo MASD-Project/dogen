@@ -157,14 +157,17 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     }
 
     for (const auto& op : ao.operations()) {
+        for (const auto& p : op.parameters()) {
+            bool is_pointer(p.type().is_pointer());
+            recurse_nested_qnames(p.type(), r, is_pointer);
+        }
+
         if (!op.type())
             continue;
 
         const auto nqn(*op.type());
         bool is_pointer(nqn.is_pointer());
         recurse_nested_qnames(nqn, r, is_pointer);
-
-        // FIXME: do parameters too
     }
 
     for (const auto& n : r.names()) {
