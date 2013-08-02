@@ -174,7 +174,7 @@ add_dependencies(codegen codegen_${target})
 
 set(target dia_to_sml)
 add_custom_target(codegen_${target}
-    COMMENT "Generating engine model" VERBATIM
+    COMMENT "Generating Dia to SML model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -193,6 +193,29 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
+
+set(target cpp_formatters)
+add_custom_target(codegen_${target}
+    COMMENT "Generating C++ Formatters model" VERBATIM
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${dogen_binary}
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
+    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-enable-facet domain
+    --cpp-enable-facet io
+    --cpp-enable-facet hash
+    --cpp-enable-facet serialization
+    --cpp-enable-facet test_data
+    --cpp-disable-cmakelists
+    --ignore-files-matching-regex .*/CMakeLists.txt
+    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/test/.*
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
+
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()
