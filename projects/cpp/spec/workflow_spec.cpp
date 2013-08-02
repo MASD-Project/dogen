@@ -84,7 +84,7 @@ using dogen::utility::test::contains_checker;
 BOOST_AUTO_TEST_SUITE(workflow)
 
 /*
-BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
+BOOST_IGNORE_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
 
     const auto i(dia_sml::expected_class_in_a_package_sml_xml());
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
+BOOST_IGNORE_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     SETUP_TEST_LOG("empty_model_generates_expected_code");
 
     const auto i(dia_sml::expected_empty_sml_xml());
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
+BOOST_IGNORE_AUTO_TEST_CASE(comments_model_generates_expected_code) {
     SETUP_TEST_LOG("comments_model_generates_expected_code");
     const auto i(dia_sml::expected_comments_sml_xml());
     const auto a(dia_sml::actual_comments_cpp_xml());
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code) {
+BOOST_IGNORE_AUTO_TEST_CASE(enumeration_model_generates_expected_code) {
     SETUP_TEST_LOG("enumeration_model_generates_expected_code");
     const auto i(dia_sml::expected_enumeration_sml_xml());
     const auto a(dia_sml::actual_enumeration_cpp_xml());
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code) {
+BOOST_IGNORE_AUTO_TEST_CASE(exception_model_generates_expected_code) {
     SETUP_TEST_LOG("exception_model_generates_expected_code");
     const auto i(dia_sml::expected_exception_sml_xml());
     const auto a(dia_sml::actual_exception_cpp_xml());

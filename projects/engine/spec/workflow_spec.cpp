@@ -127,7 +127,7 @@ using dogen::engine::generation_failure;
 BOOST_AUTO_TEST_SUITE(workflow)
 
 /*
-BOOST_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
+BOOST_IGNORE_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     SETUP_TEST_LOG("debug_options_generate_expected_debug_info");
     auto s(debug_dogen_mock_settings());
     auto ts(s.troubleshooting());
