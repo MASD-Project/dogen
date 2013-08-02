@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/types/base_fwd.hpp"
-#include "dogen/trivial_inheritance/types/descendant1_fwd.hpp"
 #include "dogen/trivial_inheritance/types/descendant2_fwd.hpp"
 #include "dogen/trivial_inheritance/types/descendant3_fwd.hpp"
 

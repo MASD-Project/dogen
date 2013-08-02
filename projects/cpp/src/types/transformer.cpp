@@ -486,8 +486,10 @@ visitor_info transformer::to_visitor(const sml::service& s) const {
     r.name(s.name().simple_name());
     r.namespaces(to_namespace_list(s.name()));
 
-    for (const auto l : s.leaves())
-        r.types().push_back(to_qualified_name(l));
+    for (const auto op : s.operations()) {
+        for (const auto p : op.parameters())
+            r.types().push_back(to_qualified_name(p.type().type()));
+    }
 
     return r;
 }

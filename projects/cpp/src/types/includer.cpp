@@ -19,6 +19,7 @@
  *
  */
 #include <boost/range/algorithm.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/range/algorithm/find_first_of.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
@@ -478,7 +479,8 @@ void includer::append_relationship_dependencies(const relationships& rel,
          * for the dependency
          */
         const bool is_odb(cd.facet_type() == cpp_facet_types::odb);
-        if (is_header && !is_primitive && is_odb)
+        const bool is_visitor(boost::contains(n.simple_name(), "visitor"));
+        if (!is_visitor && is_header && !is_primitive && is_odb)
             il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
@@ -492,7 +494,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
         const bool is_td(cd.facet_type() == cpp_facet_types::test_data);
         const bool is_non_domain(is_hash || is_io || is_td || is_ser);
 
-        if (is_implementation && is_non_domain)
+        if (!is_visitor && is_implementation && is_non_domain)
             il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
@@ -512,8 +514,9 @@ void includer::append_relationship_dependencies(const relationships& rel,
             (settings_.use_integrated_io() || rel.is_parent() ||
                 rel.is_child()));
 
-        if (is_implementation && io_enabled_ && domain_with_io)
-            il.user().push_back(header_dependency(n, cpp_facet_types::io, main));
+        const auto io(cpp_facet_types::io);
+        if (!is_visitor && is_implementation && io_enabled_ && domain_with_io)
+            il.user().push_back(header_dependency(n, io, main));
     }
 
     for (const auto k : rel.keys()) {

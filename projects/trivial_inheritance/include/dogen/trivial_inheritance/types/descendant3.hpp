@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/trivial_inheritance/serialization/descendant3_fwd_ser.hpp"
-#include "dogen/trivial_inheritance/types/base_visitor.hpp"
 #include "dogen/trivial_inheritance/types/descendant1.hpp"
 
 namespace dogen {

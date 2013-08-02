@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include "dogen/trivial_inheritance/serialization/descendant1_fwd_ser.hpp"
 #include "dogen/trivial_inheritance/types/base.hpp"
-#include "dogen/trivial_inheritance/types/base_visitor.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
