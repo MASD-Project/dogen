@@ -479,7 +479,10 @@ void includer::append_relationship_dependencies(const relationships& rel,
          * for the dependency
          */
         const bool is_odb(cd.facet_type() == cpp_facet_types::odb);
-        const bool is_visitor(boost::contains(n.simple_name(), "visitor"));
+        // FIXME: massive hack
+        const bool is_visitor(
+            boost::contains(n.simple_name(), "visitor") &&
+            !boost::contains(n.simple_name(), "visitor_info"));
         if (!is_visitor && is_header && !is_primitive && is_odb)
             il.user().push_back(header_dependency(n, cd.facet_type(), main));
 

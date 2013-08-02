@@ -32,7 +32,6 @@
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type.hpp"
-#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {

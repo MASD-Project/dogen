@@ -290,8 +290,9 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
     }
 
     using sml::generation_types;
-    if (!ao.is_parent() && ao.parent_name() &&
-        ao.generation_type() == generation_types::full_generation) {
+    // FIXME: massive hack
+    const bool is_service(dynamic_cast<sml::service*>(&ao) != 0);
+    if (!ao.is_parent() && ao.parent_name() && !is_service) {
         auto parent(ao.parent_name());
         while (parent) {
             auto k(context_.leaves().find(*parent));

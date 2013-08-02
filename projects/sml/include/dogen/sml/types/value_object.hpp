@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include "dogen/sml/serialization/value_object_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/value_object_types.hpp"
 
 namespace dogen {

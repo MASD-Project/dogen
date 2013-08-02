@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/sml/types/abstract_entity_fwd.hpp"
-#include "dogen/sml/types/abstract_object_fwd.hpp"
 #include "dogen/sml/types/entity_fwd.hpp"
 #include "dogen/sml/types/enumeration_fwd.hpp"
 #include "dogen/sml/types/factory_fwd.hpp"
@@ -34,7 +32,6 @@
 #include "dogen/sml/types/primitive_fwd.hpp"
 #include "dogen/sml/types/repository_fwd.hpp"
 #include "dogen/sml/types/service_fwd.hpp"
-#include "dogen/sml/types/type_fwd.hpp"
 #include "dogen/sml/types/value_object_fwd.hpp"
 
 namespace dogen {

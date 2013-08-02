@@ -31,7 +31,6 @@
 #include "dogen/sml/serialization/abstract_entity_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/property.hpp"
-#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {

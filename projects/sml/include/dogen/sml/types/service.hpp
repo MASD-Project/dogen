@@ -30,7 +30,6 @@
 #include "dogen/sml/serialization/service_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/service_types.hpp"
-#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {

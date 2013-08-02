@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include "dogen/sml/serialization/entity_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_entity.hpp"
-#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {
