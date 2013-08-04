@@ -213,7 +213,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O2">
       <dia:attribute name="obj_pos">
@@ -365,7 +364,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
@@ -476,7 +474,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O5">
       <dia:attribute name="obj_pos">
@@ -489,7 +486,7 @@
         <dia:point val="9.45467,45.4489"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.9699999999999998"/>
+        <dia:real val="5.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -587,7 +584,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O6">
       <dia:attribute name="name">
@@ -659,7 +655,6 @@
         <dia:connection handle="0" to="O71" connection="6"/>
         <dia:connection handle="1" to="O65" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O7">
       <dia:attribute name="name">
@@ -731,7 +726,6 @@
         <dia:connection handle="0" to="O71" connection="6"/>
         <dia:connection handle="1" to="O64" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O8">
       <dia:attribute name="name">
@@ -774,7 +768,7 @@
         <dia:point val="132.162,48.5583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.412,37.8208;155.077,52.3583"/>
+        <dia:rectangle val="131.412,37.8208;155.077,51.6083"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -803,7 +797,6 @@
         <dia:connection handle="0" to="O73" connection="7"/>
         <dia:connection handle="1" to="O52" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O9">
       <dia:attribute name="name">
@@ -875,7 +868,6 @@
         <dia:connection handle="0" to="O50" connection="6"/>
         <dia:connection handle="1" to="O52" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O10">
       <dia:attribute name="name">
@@ -947,7 +939,6 @@
         <dia:connection handle="0" to="O71" connection="6"/>
         <dia:connection handle="1" to="O72" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O11">
       <dia:attribute name="name">
@@ -1019,7 +1010,6 @@
         <dia:connection handle="0" to="O71" connection="6"/>
         <dia:connection handle="1" to="O49" connection="2"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O12">
       <dia:attribute name="name">
@@ -1091,7 +1081,6 @@
         <dia:connection handle="0" to="O68" connection="6"/>
         <dia:connection handle="1" to="O48" connection="2"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O13">
       <dia:attribute name="name">
@@ -1163,7 +1152,6 @@
         <dia:connection handle="0" to="O68" connection="6"/>
         <dia:connection handle="1" to="O15" connection="0"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O14">
       <dia:attribute name="obj_pos">
@@ -1217,7 +1205,7 @@
         <dia:point val="111.88,57.5583"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.022500000000001"/>
+        <dia:real val="14.022499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1315,7 +1303,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O16">
       <dia:attribute name="obj_pos">
@@ -1481,7 +1468,7 @@
         <dia:point val="57.8797,13.5583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.2084,8.50833;58.6297,14.3583"/>
+        <dia:rectangle val="40.2084,7.80833;58.6297,14.3583"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1510,7 +1497,6 @@
         <dia:connection handle="0" to="O36" connection="0"/>
         <dia:connection handle="1" to="O35" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O20">
       <dia:attribute name="name">
@@ -1553,7 +1539,7 @@
         <dia:point val="62.6147,13.5583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.8647,8.50833;94.4184,14.3583"/>
+        <dia:rectangle val="61.8647,7.80833;94.4184,14.3583"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1582,7 +1568,6 @@
         <dia:connection handle="0" to="O36" connection="2"/>
         <dia:connection handle="1" to="O70" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O21">
       <dia:attribute name="obj_pos">
@@ -1671,7 +1656,7 @@
         <dia:point val="109.442,26.5583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.392,26.5083;119.69,29.6083"/>
+        <dia:rectangle val="109.392,26.5083;119.689,29.6083"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="109.442,26.5583"/>
@@ -1775,7 +1760,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O24">
       <dia:attribute name="obj_pos">
@@ -2214,7 +2198,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O33">
       <dia:attribute name="obj_pos">
@@ -2407,7 +2390,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O36">
       <dia:attribute name="obj_pos">
@@ -2518,7 +2500,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O37">
       <dia:attribute name="obj_pos">
@@ -2629,14 +2610,13 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O38">
       <dia:attribute name="obj_pos">
         <dia:point val="160.005,46.0583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="159.955,46.0083;167.083,49.1083"/>
+        <dia:rectangle val="159.955,46.0083;167.084,49.1083"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="160.005,46.0583"/>
@@ -2740,7 +2720,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
@@ -2753,7 +2732,7 @@
         <dia:point val="40.8797,34.5583"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.602499999999999"/>
+        <dia:real val="13.602500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2851,7 +2830,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O40">
       <dia:attribute name="obj_pos">
@@ -2864,7 +2842,7 @@
         <dia:point val="34.8797,26.5583"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.6225000000000005"/>
+        <dia:real val="9.6224999999999987"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2962,7 +2940,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O41">
       <dia:attribute name="obj_pos">
@@ -3073,7 +3050,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
@@ -3184,7 +3160,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O43">
       <dia:attribute name="obj_pos">
@@ -3295,7 +3270,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
@@ -3308,7 +3282,7 @@
         <dia:point val="51.8797,26.5583"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9574999999999996"/>
+        <dia:real val="6.9575000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3406,7 +3380,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O45">
       <dia:attribute name="obj_pos">
@@ -3517,7 +3490,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
@@ -3628,7 +3600,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O47">
       <dia:attribute name="obj_pos">
@@ -3739,14 +3710,13 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O48">
       <dia:attribute name="obj_pos">
         <dia:point val="130.88,57.5583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.83,57.5083;143.188,60.6083"/>
+        <dia:rectangle val="130.83,57.5083;143.189,60.6083"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="130.88,57.5583"/>
@@ -3850,7 +3820,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
@@ -3863,7 +3832,7 @@
         <dia:point val="97.6917,57.8083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.233515625000001"/>
+        <dia:real val="10.233515624999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3961,14 +3930,13 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O50">
       <dia:attribute name="obj_pos">
         <dia:point val="159.575,26.6208"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="159.525,26.5708;168.492,29.6708"/>
+        <dia:rectangle val="159.525,26.5708;168.493,29.6708"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="159.575,26.6208"/>
@@ -4072,7 +4040,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O51">
       <dia:attribute name="obj_pos">
@@ -4183,7 +4150,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O52">
       <dia:attribute name="obj_pos">
@@ -4196,7 +4162,7 @@
         <dia:point val="149.067,34.8708"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.619999999999999"/>
+        <dia:real val="11.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4294,7 +4260,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O53">
       <dia:attribute name="obj_pos">
@@ -4405,7 +4370,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O54">
       <dia:attribute name="obj_pos">
@@ -4516,7 +4480,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O55">
       <dia:attribute name="obj_pos">
@@ -4627,7 +4590,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O56">
       <dia:attribute name="obj_pos">
@@ -4738,7 +4700,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O57">
       <dia:attribute name="obj_pos">
@@ -4751,7 +4712,7 @@
         <dia:point val="95.8797,26.5583"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2175000000000002"/>
+        <dia:real val="6.2174999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4849,7 +4810,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O58">
       <dia:attribute name="obj_pos">
@@ -4960,7 +4920,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O59">
       <dia:attribute name="obj_pos">
@@ -5071,7 +5030,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O60">
       <dia:attribute name="obj_pos">
@@ -5166,7 +5124,7 @@
         <dia:point val="142.255,26.4958"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.595000000000001"/>
+        <dia:real val="13.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5264,7 +5222,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O63">
       <dia:attribute name="obj_pos">
@@ -5375,7 +5332,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O64">
       <dia:attribute name="obj_pos">
@@ -5388,7 +5344,7 @@
         <dia:point val="64.4417,45.4958"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.442500000000001"/>
+        <dia:real val="10.442499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5486,7 +5442,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O65">
       <dia:attribute name="obj_pos">
@@ -5597,7 +5552,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O66">
       <dia:attribute name="obj_pos">
@@ -5708,7 +5662,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O67">
       <dia:attribute name="obj_pos">
@@ -5860,7 +5813,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O69">
       <dia:attribute name="obj_pos">
@@ -6012,7 +5964,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O71">
       <dia:attribute name="obj_pos">
@@ -6025,7 +5976,7 @@
         <dia:point val="75.5677,34.3083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.4024999999999999"/>
+        <dia:real val="7.4025000000000007"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6123,7 +6074,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O72">
       <dia:attribute name="obj_pos">
@@ -6136,7 +6086,7 @@
         <dia:point val="74.5047,57.6208"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.9975"/>
+        <dia:real val="11.997499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6234,14 +6184,13 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O73">
       <dia:attribute name="obj_pos">
         <dia:point val="121.88,45.5583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.83,45.5083;132.212,48.6083"/>
+        <dia:rectangle val="121.83,45.5083;132.213,48.6083"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="121.88,45.5583"/>
@@ -6345,7 +6294,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O74">
       <dia:attribute name="obj_pos">
@@ -6456,7 +6404,6 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>
