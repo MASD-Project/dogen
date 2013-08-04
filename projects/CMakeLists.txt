@@ -154,6 +154,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/sml/include
     ${CMAKE_SOURCE_DIR}/projects/config/include
     ${CMAKE_SOURCE_DIR}/projects/cpp/include
+    ${CMAKE_SOURCE_DIR}/projects/cpp_formatters/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/engine/include
     ${CMAKE_SOURCE_DIR}/projects/driver/include
@@ -203,6 +204,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_formatters)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/engine)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver)
