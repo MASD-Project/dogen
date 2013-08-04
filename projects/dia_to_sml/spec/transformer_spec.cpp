@@ -129,11 +129,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
     const auto& obj(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::value_object&>(obj);
-    BOOST_CHECK(obj.name().model_name() == model_name);
-    BOOST_CHECK(!obj.name().simple_name().empty());
-    BOOST_CHECK(obj.properties().empty());
-    BOOST_CHECK(!obj.documentation().empty());
+    const auto vo(dynamic_cast<const dogen::sml::value_object&>(obj));
+    BOOST_CHECK(vo.name().model_name() == model_name);
+    BOOST_CHECK(!vo.name().simple_name().empty());
+    BOOST_CHECK(vo.properties().empty());
+    BOOST_CHECK(!vo.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expected_value_object) {
@@ -150,9 +150,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expe
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto& vo(*c.model().objects().begin()->second);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto vo(dynamic_cast<const dogen::sml::value_object&>(ao));
     BOOST_CHECK(vo.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::value_object&>(vo);
     BOOST_CHECK(is_type_zero(vo.name()));
     BOOST_CHECK(!vo.documentation().empty());
 }
@@ -192,10 +192,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
     const auto& e(*c.model().objects().begin()->second);
-    BOOST_CHECK(e.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::value_object&>(e);
-    BOOST_CHECK(is_type_zero(e.name()));
-    BOOST_CHECK(!e.documentation().empty());
+    const auto vo(dynamic_cast<const dogen::sml::value_object&>(e));
+    BOOST_CHECK(vo.name().model_name() == model_name);
+    BOOST_CHECK(is_type_zero(vo.name()));
+    BOOST_CHECK(!vo.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_service) {
@@ -212,9 +212,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto& s(*c.model().objects().begin()->second);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto s(dynamic_cast<const dogen::sml::service&>(ao));
     BOOST_CHECK(s.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::service&>(s);
     BOOST_CHECK(is_type_zero(s.name()));
     BOOST_CHECK(!s.documentation().empty());
 }
@@ -233,9 +233,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_transforms_into_expected_
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto& f(*c.model().objects().begin()->second);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto f(dynamic_cast<const dogen::sml::factory&>(ao));
     BOOST_CHECK(f.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::factory&>(f);
     BOOST_CHECK(is_type_zero(f.name()));
     BOOST_CHECK(!f.documentation().empty());
 }
@@ -254,9 +254,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_transforms_into_expect
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto& r(*c.model().objects().begin()->second);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto r(dynamic_cast<const dogen::sml::repository&>(ao));
     BOOST_CHECK(r.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::repository&>(r);
     BOOST_CHECK(is_type_zero(r.name()));
     BOOST_CHECK(!r.documentation().empty());
 }
@@ -275,9 +275,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_transforms_into_expe
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto& ke(*c.model().objects().begin()->second);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto ke(dynamic_cast<const dogen::sml::keyed_entity&>(ao));
     BOOST_CHECK(ke.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::keyed_entity&>(ke);
     BOOST_CHECK(is_type_zero(ke.name()));
     BOOST_CHECK(!ke.documentation().empty());
 }
@@ -296,9 +296,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_transforms_into_expected_e
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto& e(*c.model().objects().begin()->second);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto e(dynamic_cast<const dogen::sml::entity&>(ao));
     BOOST_CHECK(e.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::entity&>(e);
     BOOST_CHECK(is_type_zero(e.name()));
     BOOST_CHECK(!e.documentation().empty());
 }
@@ -346,7 +346,8 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
     BOOST_CHECK(obj.name().model_name() == model_name);
     BOOST_CHECK(!obj.name().simple_name().empty());
     BOOST_CHECK(obj.properties().empty());
-    dynamic_cast<const dogen::sml::value_object&>(obj);
+
+    const auto vo(dynamic_cast<const dogen::sml::value_object&>(obj));
     BOOST_REQUIRE(obj.name().module_path().size() == 1);
     BOOST_CHECK(obj.name().module_path().front() == pkg.name().simple_name());
     BOOST_CHECK(!obj.documentation().empty());
@@ -402,8 +403,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     BOOST_CHECK(pkg.name().module_path().empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& e(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::value_object&>(e);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto e(dynamic_cast<const dogen::sml::value_object&>(ao));
     BOOST_CHECK(e.name().model_name() == model_name);
     BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 1);
@@ -432,8 +433,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
     BOOST_CHECK(pkg.name().module_path().empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& s(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::service&>(s);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto s(dynamic_cast<const dogen::sml::service&>(ao));
     BOOST_CHECK(s.name().model_name() == model_name);
     BOOST_CHECK(!s.name().simple_name().empty());
     BOOST_REQUIRE(s.name().module_path().size() == 1);
@@ -462,8 +463,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_package_transforms_int
     BOOST_CHECK(pkg.name().module_path().empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& f(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::factory&>(f);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto f(dynamic_cast<const dogen::sml::factory&>(ao));
     BOOST_CHECK(f.name().model_name() == model_name);
     BOOST_CHECK(!f.name().simple_name().empty());
     BOOST_REQUIRE(f.name().module_path().size() == 1);
@@ -492,8 +493,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_package_transforms_
     BOOST_CHECK(pkg.name().module_path().empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& r(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::repository&>(r);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto r(dynamic_cast<const dogen::sml::repository&>(ao));
     BOOST_CHECK(r.name().model_name() == model_name);
     BOOST_CHECK(!r.name().simple_name().empty());
     BOOST_REQUIRE(r.name().module_path().size() == 1);
@@ -522,8 +523,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_package_transforms_into
     BOOST_CHECK(pkg.name().module_path().empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& e(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::entity&>(e);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto e(dynamic_cast<const dogen::sml::entity&>(ao));
     BOOST_CHECK(e.name().model_name() == model_name);
     BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 1);
@@ -552,8 +553,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_package_transform
     BOOST_CHECK(pkg.name().module_path().empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& ke(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::keyed_entity&>(ke);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto ke(dynamic_cast<const dogen::sml::keyed_entity&>(ao));
     BOOST_CHECK(ke.name().model_name() == model_name);
     BOOST_CHECK(!ke.name().simple_name().empty());
     BOOST_REQUIRE(ke.name().module_path().size() == 1);
@@ -642,7 +643,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) 
     BOOST_CHECK(obj.name().model_name() == model_name);
     BOOST_CHECK(!obj.name().simple_name().empty());
     BOOST_CHECK(obj.properties().empty());
-    dynamic_cast<const dogen::sml::value_object&>(obj);
+    const auto vo(dynamic_cast<const dogen::sml::value_object&>(obj));
     BOOST_REQUIRE(obj.name().module_path().size() == 2);
     BOOST_CHECK(obj.name().module_path().front() == first);
     BOOST_CHECK(obj.name().module_path().back() == second);
@@ -750,8 +751,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& e(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::value_object&>(e);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto e(dynamic_cast<const dogen::sml::value_object&>(ao));
     BOOST_CHECK(e.name().model_name() == model_name);
     BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 2);
@@ -806,8 +807,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transform
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& s(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::service&>(s);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto s(dynamic_cast<const dogen::sml::service&>(ao));
     BOOST_CHECK(s.name().model_name() == model_name);
     BOOST_CHECK(!s.name().simple_name().empty());
     BOOST_REQUIRE(s.name().module_path().size() == 2);
@@ -862,8 +863,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_two_packages_transform
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& f(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::factory&>(f);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto f(dynamic_cast<const dogen::sml::factory&>(ao));
     BOOST_CHECK(f.name().model_name() == model_name);
     BOOST_CHECK(!f.name().simple_name().empty());
     BOOST_REQUIRE(f.name().module_path().size() == 2);
@@ -918,8 +919,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_two_packages_transf
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& r(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::repository&>(r);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto r(dynamic_cast<const dogen::sml::repository&>(ao));
     BOOST_CHECK(r.name().model_name() == model_name);
     BOOST_CHECK(!r.name().simple_name().empty());
     BOOST_REQUIRE(r.name().module_path().size() == 2);
@@ -974,8 +975,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_two_packages_transforms
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& e(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::entity&>(e);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto e(dynamic_cast<const dogen::sml::entity&>(ao));
     BOOST_CHECK(e.name().model_name() == model_name);
     BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 2);
@@ -1030,8 +1031,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_two_packages_tran
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& ke(*c.model().objects().begin()->second);
-    dynamic_cast<const dogen::sml::keyed_entity&>(ke);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto ke(dynamic_cast<const dogen::sml::keyed_entity&>(ao));
     BOOST_CHECK(ke.name().model_name() == model_name);
     BOOST_CHECK(!ke.name().simple_name().empty());
     BOOST_REQUIRE(ke.name().module_path().size() == 2);
@@ -1226,9 +1227,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_property_transforms_into_value_object_wi
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto& vo(*c.model().objects().begin()->second);
+    const auto& ao(*c.model().objects().begin()->second);
+    const auto vo(dynamic_cast<const dogen::sml::value_object&>(ao));
     BOOST_CHECK(vo.name().model_name() == model_name);
-    dynamic_cast<const dogen::sml::value_object&>(vo);
+
     BOOST_CHECK(is_type_zero(vo.name()));
     BOOST_CHECK(!vo.documentation().empty());
     BOOST_REQUIRE(vo.properties().size() == 1);

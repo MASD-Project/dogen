@@ -61,19 +61,19 @@ const std::string io_facet_and_integrated_io_error(
     "Integrated IO cannot be used with the IO facet");
 const std::string dia_invalid_name("Dia object name is empty");
 
-std::vector<dogen::utility::test::file_asserter::shared_ptr>
-file_asserters() {
-    using dogen::utility::test::file_asserter;
-    std::vector<file_asserter::shared_ptr> r;
+// std::vector<dogen::utility::test::file_asserter::shared_ptr>
+// file_asserters() {
+//     using dogen::utility::test::file_asserter;
+//     std::vector<file_asserter::shared_ptr> r;
 
-    using dogen::dia::test::dia_file_asserter;
-    r.push_back(file_asserter::shared_ptr(new dia_file_asserter()));
+//     using dogen::dia::test::dia_file_asserter;
+//     r.push_back(file_asserter::shared_ptr(new dia_file_asserter()));
 
-    using dogen::sml::test::sml_file_asserter;
-    r.push_back(file_asserter::shared_ptr(new sml_file_asserter()));
+//     using dogen::sml::test::sml_file_asserter;
+//     r.push_back(file_asserter::shared_ptr(new sml_file_asserter()));
 
-    return r;
-}
+//     return r;
+// }
 
 dogen::config::settings
 default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
@@ -82,15 +82,15 @@ default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
         tds.target(), tds.actual(), module_path);
 }
 
-dogen::config::settings debug_dogen_mock_settings() {
-    typedef dogen::utility::test_data::debug_dogen tds;
-    using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::build_settings(
-        tds::target(),
-        tds::actual_src(),
-        tds::actual_include(),
-        empty_module_path);
-}
+// dogen::config::settings debug_dogen_mock_settings() {
+//     typedef dogen::utility::test_data::debug_dogen tds;
+//     using dogen::config::test::mock_settings_factory;
+//     return mock_settings_factory::build_settings(
+//         tds::target(),
+//         tds::actual_src(),
+//         tds::actual_include(),
+//         empty_module_path);
+// }
 
 dogen::config::settings empty_tds_mock_settings() {
     typedef dogen::utility::test_data::empty_tds tds;

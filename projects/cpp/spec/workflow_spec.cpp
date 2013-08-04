@@ -57,25 +57,25 @@ const std::string test_suite("workflow_spec");
 const std::string module_path("dogen");
 
 using boost::filesystem::path;
-bool test_workflow(path t, path e, path a) {
+// bool test_workflow(path t, path e, path a) {
 
-    using dogen::config::test::mock_settings_factory;
-    const auto s(mock_settings_factory::build_settings(t, a, module_path));
-    using dogen::utility::test::xml_deserialize;
-    const auto m(xml_deserialize<dogen::sml::model>(t));
+//     using dogen::config::test::mock_settings_factory;
+//     const auto s(mock_settings_factory::build_settings(t, a, module_path));
+//     using dogen::utility::test::xml_deserialize;
+//     const auto m(xml_deserialize<dogen::sml::model>(t));
 
-    workflow w(m, s.cpp());
-    auto actual_full_path(w.execute());
-    std::map<std::string, std::string> actual;
-    for (auto& pair : actual_full_path) {
-        const auto base(dia_sml::actual());
-        auto key(pair.first.generic_string());
-        using boost::replace_first;
-        replace_first(key, base.generic_string(), empty);
-        actual.insert(std::make_pair(key, pair.second));
-    }
-    return asserter::assert_object(e, a, actual);
-}
+//     workflow w(m, s.cpp());
+//     auto actual_full_path(w.execute());
+//     std::map<std::string, std::string> actual;
+//     for (auto& pair : actual_full_path) {
+//         const auto base(dia_sml::actual());
+//         auto key(pair.first.generic_string());
+//         using boost::replace_first;
+//         replace_first(key, base.generic_string(), empty);
+//         actual.insert(std::make_pair(key, pair.second));
+//     }
+//     return asserter::assert_object(e, a, actual);
+// }
 
 }
 
