@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class second_refinement_concept_model_hasher {
+struct second_refinement_concept_model_hasher {
 public:
     static std::size_t hash(const second_refinement_concept_model& v);
 };

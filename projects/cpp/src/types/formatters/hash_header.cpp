@@ -79,7 +79,7 @@ void hash_header::operator_bracket_method(const class_info& ci) {
 }
 
 void hash_header::hash_helper_class(const class_info& ci) {
-    stream_ << indenter_ << indenter_ << "class " << ci.name()
+    stream_ << indenter_ << indenter_ << "struct " << ci.name()
             << "_hasher ";
 
     utility_.open_scope();

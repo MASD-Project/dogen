@@ -31,7 +31,7 @@
 namespace dogen {
 namespace classes_without_package {
 
-class class_3_hasher {
+struct class_3_hasher {
 public:
     static std::size_t hash(const class_3& v);
 };

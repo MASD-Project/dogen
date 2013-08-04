@@ -31,7 +31,7 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-class move_ctor_base_hasher {
+struct move_ctor_base_hasher {
 public:
     static std::size_t hash(const move_ctor_base& v);
 };

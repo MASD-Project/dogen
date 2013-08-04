@@ -31,7 +31,7 @@
 namespace dogen {
 namespace exception {
 
-class a_class_hasher {
+struct a_class_hasher {
 public:
     static std::size_t hash(const a_class& v);
 };

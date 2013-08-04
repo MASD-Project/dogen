@@ -31,7 +31,7 @@
 namespace dogen {
 namespace trivial_association {
 
-class class_a_hasher {
+struct class_a_hasher {
 public:
     static std::size_t hash(const class_a& v);
 };

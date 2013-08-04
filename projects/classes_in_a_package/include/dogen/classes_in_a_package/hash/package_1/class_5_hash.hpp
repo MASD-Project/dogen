@@ -32,7 +32,7 @@ namespace dogen {
 namespace classes_in_a_package {
 namespace package_1 {
 
-class class_5_hasher {
+struct class_5_hasher {
 public:
     static std::size_t hash(const class_5& v);
 };

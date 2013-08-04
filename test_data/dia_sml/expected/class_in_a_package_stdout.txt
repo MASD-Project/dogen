@@ -57,7 +57,7 @@ Contents:
 namespace class_in_a_package {
 namespace package1 {
 
-class first_class_hasher {
+struct first_class_hasher {
 public:
     static std::size_t hash(const first_class& v);
 };

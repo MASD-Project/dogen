@@ -31,7 +31,7 @@
 namespace dogen {
 namespace comments {
 
-class multi_line_hasher {
+struct multi_line_hasher {
 public:
     static std::size_t hash(const multi_line& v);
 };

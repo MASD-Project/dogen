@@ -31,7 +31,7 @@
 namespace dogen {
 namespace std_model {
 
-class class_a_versioned_key_hasher {
+struct class_a_versioned_key_hasher {
 public:
     static std::size_t hash(const class_a_versioned_key& v);
 };

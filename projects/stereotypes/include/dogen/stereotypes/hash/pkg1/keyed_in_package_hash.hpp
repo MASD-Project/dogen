@@ -32,7 +32,7 @@ namespace dogen {
 namespace stereotypes {
 namespace pkg1 {
 
-class keyed_in_package_hasher {
+struct keyed_in_package_hasher {
 public:
     static std::size_t hash(const keyed_in_package& v);
 };

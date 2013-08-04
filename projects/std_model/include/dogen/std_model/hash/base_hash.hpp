@@ -31,7 +31,7 @@
 namespace dogen {
 namespace std_model {
 
-class base_hasher {
+struct base_hasher {
 public:
     static std::size_t hash(const base& v);
 };

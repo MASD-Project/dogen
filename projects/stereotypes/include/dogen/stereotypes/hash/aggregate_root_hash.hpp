@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class aggregate_root_hasher {
+struct aggregate_root_hasher {
 public:
     static std::size_t hash(const aggregate_root& v);
 };

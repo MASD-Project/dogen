@@ -31,7 +31,7 @@
 namespace dogen {
 namespace std_model {
 
-class class_j_hasher {
+struct class_j_hasher {
 public:
     static std::size_t hash(const class_j& v);
 };

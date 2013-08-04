@@ -32,7 +32,7 @@ namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
 
-class class_2_hasher {
+struct class_2_hasher {
 public:
     static std::size_t hash(const class_2& v);
 };

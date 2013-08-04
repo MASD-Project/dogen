@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class immutable_one_non_primitive_hasher {
+struct immutable_one_non_primitive_hasher {
 public:
     static std::size_t hash(const immutable_one_non_primitive& v);
 };

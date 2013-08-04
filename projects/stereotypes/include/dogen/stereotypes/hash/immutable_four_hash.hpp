@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class immutable_four_hasher {
+struct immutable_four_hasher {
 public:
     static std::size_t hash(const immutable_four& v);
 };

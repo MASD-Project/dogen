@@ -32,7 +32,7 @@ namespace dogen {
 namespace trivial_inheritance {
 namespace pkg3 {
 
-class child_hasher {
+struct child_hasher {
 public:
     static std::size_t hash(const child& v);
 };

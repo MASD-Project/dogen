@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class identity_and_other_ver_hasher {
+struct identity_and_other_ver_hasher {
 public:
     static std::size_t hash(const identity_and_other_ver& v);
 };

@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class fluent_hasher {
+struct fluent_hasher {
 public:
     static std::size_t hash(const fluent& v);
 };

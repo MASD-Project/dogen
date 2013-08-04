@@ -32,7 +32,7 @@ namespace dogen {
 namespace disable_facet_folders {
 namespace package1 {
 
-class first_class_hasher {
+struct first_class_hasher {
 public:
     static std::size_t hash(const first_class& v);
 };

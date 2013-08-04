@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class composite_identity_ver_unversioned_key_hasher {
+struct composite_identity_ver_unversioned_key_hasher {
 public:
     static std::size_t hash(const composite_identity_ver_unversioned_key& v);
 };

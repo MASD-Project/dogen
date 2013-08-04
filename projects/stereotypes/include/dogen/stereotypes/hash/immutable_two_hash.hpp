@@ -31,7 +31,7 @@
 namespace dogen {
 namespace stereotypes {
 
-class immutable_two_hasher {
+struct immutable_two_hasher {
 public:
     static std::size_t hash(const immutable_two& v);
 };

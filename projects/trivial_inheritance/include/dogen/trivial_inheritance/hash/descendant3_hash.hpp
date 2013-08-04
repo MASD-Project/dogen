@@ -31,7 +31,7 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-class descendant3_hasher {
+struct descendant3_hasher {
 public:
     static std::size_t hash(const descendant3& v);
 };

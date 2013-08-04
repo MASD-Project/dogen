@@ -31,7 +31,7 @@
 namespace dogen {
 namespace boost_model {
 
-class class_derived_hasher {
+struct class_derived_hasher {
 public:
     static std::size_t hash(const class_derived& v);
 };

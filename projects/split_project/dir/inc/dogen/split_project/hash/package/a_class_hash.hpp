@@ -32,7 +32,7 @@ namespace dogen {
 namespace split_project {
 namespace package {
 
-class a_class_hasher {
+struct a_class_hasher {
 public:
     static std::size_t hash(const a_class& v);
 };
