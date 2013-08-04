@@ -52,6 +52,12 @@ endmacro()
 # enable as many warnings as possible
 set(warning_flags "-Wall -Wextra")
 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    # disable mismatched tags as there are STL inconsistencies that
+    # make it a bit useless.
+    set(warning_flags "${warning_flags} -Wno-mismatched-tags")
+endif()
+
 # issue all the warnings demanded by strict iso c and iso c++
 set(warning_flags "${warning_flags} -pedantic")
 
