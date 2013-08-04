@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia_to_sml {
 
-class processed_property_hasher {
+struct processed_property_hasher {
 public:
     static std::size_t hash(const processed_property& v);
 };

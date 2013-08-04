@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class relationships_hasher {
+struct relationships_hasher {
 public:
     static std::size_t hash(const relationships& v);
 };

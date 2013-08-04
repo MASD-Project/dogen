@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-class factory_hasher {
+struct factory_hasher {
 public:
     static std::size_t hash(const factory& v);
 };

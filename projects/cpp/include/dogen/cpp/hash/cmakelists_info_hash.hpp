@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class cmakelists_info_hasher {
+struct cmakelists_info_hasher {
 public:
     static std::size_t hash(const cmakelists_info& v);
 };

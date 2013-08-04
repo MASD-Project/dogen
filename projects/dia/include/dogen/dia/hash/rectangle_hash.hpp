@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-class rectangle_hasher {
+struct rectangle_hasher {
 public:
     static std::size_t hash(const rectangle& v);
 };

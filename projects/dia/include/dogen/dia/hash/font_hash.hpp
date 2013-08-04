@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-class font_hasher {
+struct font_hasher {
 public:
     static std::size_t hash(const font& v);
 };

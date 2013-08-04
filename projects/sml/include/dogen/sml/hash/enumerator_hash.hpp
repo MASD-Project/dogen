@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-class enumerator_hasher {
+struct enumerator_hasher {
 public:
     static std::size_t hash(const enumerator& v);
 };

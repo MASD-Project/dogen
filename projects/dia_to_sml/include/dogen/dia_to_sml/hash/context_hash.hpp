@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia_to_sml {
 
-class context_hasher {
+struct context_hasher {
 public:
     static std::size_t hash(const context& v);
 };

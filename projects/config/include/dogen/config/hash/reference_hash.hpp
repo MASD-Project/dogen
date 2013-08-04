@@ -31,7 +31,7 @@
 namespace dogen {
 namespace config {
 
-class reference_hasher {
+struct reference_hasher {
 public:
     static std::size_t hash(const reference& v);
 };

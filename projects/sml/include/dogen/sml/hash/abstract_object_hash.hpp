@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-class abstract_object_hasher {
+struct abstract_object_hasher {
 public:
     static std::size_t hash(const abstract_object& v);
 };

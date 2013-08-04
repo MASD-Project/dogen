@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class odb_options_info_hasher {
+struct odb_options_info_hasher {
 public:
     static std::size_t hash(const odb_options_info& v);
 };

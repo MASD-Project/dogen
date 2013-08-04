@@ -31,7 +31,7 @@
 namespace dogen {
 namespace database {
 
-class primary_key_2_hasher {
+struct primary_key_2_hasher {
 public:
     static std::size_t hash(const primary_key_2& v);
 };

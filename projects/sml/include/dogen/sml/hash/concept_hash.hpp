@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-class concept_hasher {
+struct concept_hasher {
 public:
     static std::size_t hash(const concept& v);
 };

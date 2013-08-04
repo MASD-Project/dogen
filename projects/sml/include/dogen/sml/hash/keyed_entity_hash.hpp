@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-class keyed_entity_hasher {
+struct keyed_entity_hasher {
 public:
     static std::size_t hash(const keyed_entity& v);
 };

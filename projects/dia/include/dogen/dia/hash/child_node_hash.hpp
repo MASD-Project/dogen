@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-class child_node_hasher {
+struct child_node_hasher {
 public:
     static std::size_t hash(const child_node& v);
 };

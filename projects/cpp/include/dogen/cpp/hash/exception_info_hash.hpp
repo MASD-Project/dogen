@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class exception_info_hasher {
+struct exception_info_hasher {
 public:
     static std::size_t hash(const exception_info& v);
 };

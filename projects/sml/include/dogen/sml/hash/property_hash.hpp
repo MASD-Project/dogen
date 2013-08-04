@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-class property_hasher {
+struct property_hasher {
 public:
     static std::size_t hash(const property& v);
 };

@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia_to_sml {
 
-class node_hasher {
+struct node_hasher {
 public:
     static std::size_t hash(const node& v);
 };

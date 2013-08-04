@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class string_table_info_hasher {
+struct string_table_info_hasher {
 public:
     static std::size_t hash(const string_table_info& v);
 };

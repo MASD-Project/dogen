@@ -31,7 +31,7 @@
 namespace dogen {
 namespace config {
 
-class modeling_settings_hasher {
+struct modeling_settings_hasher {
 public:
     static std::size_t hash(const modeling_settings& v);
 };

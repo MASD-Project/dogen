@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class enum_info_hasher {
+struct enum_info_hasher {
 public:
     static std::size_t hash(const enum_info& v);
 };

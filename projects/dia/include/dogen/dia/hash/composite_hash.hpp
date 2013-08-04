@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-class composite_hasher {
+struct composite_hasher {
 public:
     static std::size_t hash(const composite& v);
 };

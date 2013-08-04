@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class nested_type_info_hasher {
+struct nested_type_info_hasher {
 public:
     static std::size_t hash(const nested_type_info& v);
 };

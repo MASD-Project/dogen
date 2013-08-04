@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-class layer_hasher {
+struct layer_hasher {
 public:
     static std::size_t hash(const layer& v);
 };

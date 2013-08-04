@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class class_info_hasher {
+struct class_info_hasher {
 public:
     static std::size_t hash(const class_info& v);
 };

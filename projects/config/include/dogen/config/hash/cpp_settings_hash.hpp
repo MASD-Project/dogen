@@ -31,7 +31,7 @@
 namespace dogen {
 namespace config {
 
-class cpp_settings_hasher {
+struct cpp_settings_hasher {
 public:
     static std::size_t hash(const cpp_settings& v);
 };

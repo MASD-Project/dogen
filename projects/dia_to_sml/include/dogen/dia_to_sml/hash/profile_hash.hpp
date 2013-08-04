@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia_to_sml {
 
-class profile_hasher {
+struct profile_hasher {
 public:
     static std::size_t hash(const profile& v);
 };

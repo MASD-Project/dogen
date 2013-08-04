@@ -31,7 +31,7 @@
 namespace dogen {
 namespace cpp {
 
-class inclusion_lists_hasher {
+struct inclusion_lists_hasher {
 public:
     static std::size_t hash(const inclusion_lists& v);
 };

@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-class integer_hasher {
+struct integer_hasher {
 public:
     static std::size_t hash(const integer& v);
 };

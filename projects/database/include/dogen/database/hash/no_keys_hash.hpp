@@ -31,7 +31,7 @@
 namespace dogen {
 namespace database {
 
-class no_keys_hasher {
+struct no_keys_hasher {
 public:
     static std::size_t hash(const no_keys& v);
 };

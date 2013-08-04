@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-class connection_hasher {
+struct connection_hasher {
 public:
     static std::size_t hash(const connection& v);
 };
