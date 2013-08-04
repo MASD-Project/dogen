@@ -11,6 +11,18 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Detect invalid child nodes
+
+When copying a set of classes from a diagram, where these classes
+where contained in a package, dia seems to copy across the =childnode=
+id. This is a problem because when pasted in a new diagram, if those
+classes are not in a package there is now the potential for total
+mismatching - for instance, they could be children of an
+association. Dogen should validate that children belong to UML
+elements which can have children, and if not issue good error
+messages - perhaps even talking about the possible cause for the
+error.
+
 *** Split C++ model                                                    :epic:
 
 We should move the transformation code outside of the C++ model -
