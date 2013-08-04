@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::sml::value_object> {
+struct hash<dogen::sml::value_object> {
 public:
     size_t operator()(const dogen::sml::value_object& v) const {
         return dogen::sml::value_object_hasher::hash(v);

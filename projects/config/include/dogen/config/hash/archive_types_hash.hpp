@@ -31,7 +31,7 @@
 namespace std {
 
 template<>
-class hash<dogen::config::archive_types> {
+struct hash<dogen::config::archive_types> {
 public:
     size_t operator()(const dogen::config::archive_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));

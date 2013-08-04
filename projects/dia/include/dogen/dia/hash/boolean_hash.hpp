@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::dia::boolean> {
+struct hash<dogen::dia::boolean> {
 public:
     size_t operator()(const dogen::dia::boolean& v) const {
         return dogen::dia::boolean_hasher::hash(v);

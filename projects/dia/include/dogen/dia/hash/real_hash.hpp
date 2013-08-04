@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::dia::real> {
+struct hash<dogen::dia::real> {
 public:
     size_t operator()(const dogen::dia::real& v) const {
         return dogen::dia::real_hasher::hash(v);

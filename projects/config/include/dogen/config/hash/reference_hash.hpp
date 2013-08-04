@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::config::reference> {
+struct hash<dogen::config::reference> {
 public:
     size_t operator()(const dogen::config::reference& v) const {
         return dogen::config::reference_hasher::hash(v);

@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::config::output_settings> {
+struct hash<dogen::config::output_settings> {
 public:
     size_t operator()(const dogen::config::output_settings& v) const {
         return dogen::config::output_settings_hasher::hash(v);

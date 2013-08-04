@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::dia_to_sml::profile> {
+struct hash<dogen::dia_to_sml::profile> {
 public:
     size_t operator()(const dogen::dia_to_sml::profile& v) const {
         return dogen::dia_to_sml::profile_hasher::hash(v);

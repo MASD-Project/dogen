@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::inclusion_lists> {
+struct hash<dogen::cpp::inclusion_lists> {
 public:
     size_t operator()(const dogen::cpp::inclusion_lists& v) const {
         return dogen::cpp::inclusion_lists_hasher::hash(v);

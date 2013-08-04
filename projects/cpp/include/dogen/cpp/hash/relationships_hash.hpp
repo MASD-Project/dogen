@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::relationships> {
+struct hash<dogen::cpp::relationships> {
 public:
     size_t operator()(const dogen::cpp::relationships& v) const {
         return dogen::cpp::relationships_hasher::hash(v);

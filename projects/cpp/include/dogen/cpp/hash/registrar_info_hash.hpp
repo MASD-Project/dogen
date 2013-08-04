@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::registrar_info> {
+struct hash<dogen::cpp::registrar_info> {
 public:
     size_t operator()(const dogen::cpp::registrar_info& v) const {
         return dogen::cpp::registrar_info_hasher::hash(v);

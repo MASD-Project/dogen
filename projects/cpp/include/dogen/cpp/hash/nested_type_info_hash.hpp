@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::nested_type_info> {
+struct hash<dogen::cpp::nested_type_info> {
 public:
     size_t operator()(const dogen::cpp::nested_type_info& v) const {
         return dogen::cpp::nested_type_info_hasher::hash(v);

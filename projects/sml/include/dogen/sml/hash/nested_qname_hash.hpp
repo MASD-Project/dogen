@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::sml::nested_qname> {
+struct hash<dogen::sml::nested_qname> {
 public:
     size_t operator()(const dogen::sml::nested_qname& v) const {
         return dogen::sml::nested_qname_hasher::hash(v);

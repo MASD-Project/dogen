@@ -31,7 +31,7 @@
 namespace std {
 
 template<>
-class hash<dogen::dia_to_sml::object_types> {
+struct hash<dogen::dia_to_sml::object_types> {
 public:
     size_t operator()(const dogen::dia_to_sml::object_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));

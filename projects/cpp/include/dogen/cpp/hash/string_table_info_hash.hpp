@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::string_table_info> {
+struct hash<dogen::cpp::string_table_info> {
 public:
     size_t operator()(const dogen::cpp::string_table_info& v) const {
         return dogen::cpp::string_table_info_hasher::hash(v);

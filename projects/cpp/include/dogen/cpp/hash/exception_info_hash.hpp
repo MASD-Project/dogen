@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::exception_info> {
+struct hash<dogen::cpp::exception_info> {
 public:
     size_t operator()(const dogen::cpp::exception_info& v) const {
         return dogen::cpp::exception_info_hasher::hash(v);

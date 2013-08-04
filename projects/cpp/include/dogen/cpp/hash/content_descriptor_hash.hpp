@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::content_descriptor> {
+struct hash<dogen::cpp::content_descriptor> {
 public:
     size_t operator()(const dogen::cpp::content_descriptor& v) const {
         return dogen::cpp::content_descriptor_hasher::hash(v);

@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::dia_to_sml::context> {
+struct hash<dogen::dia_to_sml::context> {
 public:
     size_t operator()(const dogen::dia_to_sml::context& v) const {
         return dogen::dia_to_sml::context_hasher::hash(v);

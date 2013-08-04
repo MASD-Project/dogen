@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::odb_options_info> {
+struct hash<dogen::cpp::odb_options_info> {
 public:
     size_t operator()(const dogen::cpp::odb_options_info& v) const {
         return dogen::cpp::odb_options_info_hasher::hash(v);

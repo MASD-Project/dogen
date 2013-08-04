@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::dia::font> {
+struct hash<dogen::dia::font> {
 public:
     size_t operator()(const dogen::dia::font& v) const {
         return dogen::dia::font_hasher::hash(v);

@@ -31,7 +31,7 @@
 namespace std {
 
 template<>
-class hash<dogen::cpp::file_types> {
+struct hash<dogen::cpp::file_types> {
 public:
     size_t operator()(const dogen::cpp::file_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));

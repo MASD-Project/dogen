@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::config::troubleshooting_settings> {
+struct hash<dogen::config::troubleshooting_settings> {
 public:
     size_t operator()(const dogen::config::troubleshooting_settings& v) const {
         return dogen::config::troubleshooting_settings_hasher::hash(v);

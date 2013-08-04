@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::database::no_keys_2> {
+struct hash<dogen::database::no_keys_2> {
 public:
     size_t operator()(const dogen::database::no_keys_2& v) const {
         return dogen::database::no_keys_2_hasher::hash(v);

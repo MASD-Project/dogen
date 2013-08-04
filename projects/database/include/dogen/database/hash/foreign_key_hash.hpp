@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::database::foreign_key> {
+struct hash<dogen::database::foreign_key> {
 public:
     size_t operator()(const dogen::database::foreign_key& v) const {
         return dogen::database::foreign_key_hasher::hash(v);

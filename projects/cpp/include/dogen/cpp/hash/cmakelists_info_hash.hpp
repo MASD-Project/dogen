@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::cpp::cmakelists_info> {
+struct hash<dogen::cpp::cmakelists_info> {
 public:
     size_t operator()(const dogen::cpp::cmakelists_info& v) const {
         return dogen::cpp::cmakelists_info_hasher::hash(v);
