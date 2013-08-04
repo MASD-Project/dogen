@@ -94,7 +94,7 @@ void hash_header::hash_helper_class(const class_info& ci) {
 
 void hash_header::hash_class(const class_info& ci) {
     stream_ << indenter_ << "template<>" << std::endl
-            << indenter_ << "class hash<";
+            << indenter_ << "struct hash<";
 
     qname qname(stream_);
     qname.format(ci);
@@ -122,7 +122,7 @@ void hash_header::format_enumeration(const file_info& fi) {
         utility_.blank_line();
 
         stream_ << indenter_ << "template<>" << std::endl
-                << indenter_ << "class hash<";
+                << indenter_ << "struct hash<";
 
         qname qnf(stream_);
         qnf.format(ei);

@@ -31,7 +31,7 @@
 namespace std {
 
 template<>
-class hash<dogen::enumeration::book_types> {
+struct hash<dogen::enumeration::book_types> {
 public:
     size_t operator()(const dogen::enumeration::book_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));

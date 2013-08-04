@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::trivial_inheritance::descendant3> {
+struct hash<dogen::trivial_inheritance::descendant3> {
 public:
     size_t operator()(const dogen::trivial_inheritance::descendant3& v) const {
         return dogen::trivial_inheritance::descendant3_hasher::hash(v);

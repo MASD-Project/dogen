@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::classes_without_package::class_1> {
+struct hash<dogen::classes_without_package::class_1> {
 public:
     size_t operator()(const dogen::classes_without_package::class_1& v) const {
         return dogen::classes_without_package::class_1_hasher::hash(v);

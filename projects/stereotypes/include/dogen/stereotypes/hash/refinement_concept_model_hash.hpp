@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::refinement_concept_model> {
+struct hash<dogen::stereotypes::refinement_concept_model> {
 public:
     size_t operator()(const dogen::stereotypes::refinement_concept_model& v) const {
         return dogen::stereotypes::refinement_concept_model_hasher::hash(v);

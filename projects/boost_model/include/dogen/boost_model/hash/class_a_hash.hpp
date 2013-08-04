@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::boost_model::class_a> {
+struct hash<dogen::boost_model::class_a> {
 public:
     size_t operator()(const dogen::boost_model::class_a& v) const {
         return dogen::boost_model::class_a_hasher::hash(v);

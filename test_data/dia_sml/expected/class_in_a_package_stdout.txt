@@ -67,7 +67,7 @@ public:
 namespace std {
 
 template<>
-class hash<class_in_a_package::package1::first_class> {
+struct hash<class_in_a_package::package1::first_class> {
 public:
     size_t operator()(const class_in_a_package::package1::first_class& v) const {
         return class_in_a_package::package1::first_class_hasher::hash(v);

@@ -42,7 +42,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::class_in_a_package::package1::first_class> {
+struct hash<dogen::class_in_a_package::package1::first_class> {
 public:
     size_t operator()(const dogen::class_in_a_package::package1::first_class& v) const {
         return dogen::class_in_a_package::package1::first_class_hasher::hash(v);

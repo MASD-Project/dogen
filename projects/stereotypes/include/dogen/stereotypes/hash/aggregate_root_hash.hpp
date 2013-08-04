@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::aggregate_root> {
+struct hash<dogen::stereotypes::aggregate_root> {
 public:
     size_t operator()(const dogen::stereotypes::aggregate_root& v) const {
         return dogen::stereotypes::aggregate_root_hasher::hash(v);

@@ -31,7 +31,7 @@
 namespace std {
 
 template<>
-class hash<dogen::enumeration::pkg1::shape_types> {
+struct hash<dogen::enumeration::pkg1::shape_types> {
 public:
     size_t operator()(const dogen::enumeration::pkg1::shape_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));

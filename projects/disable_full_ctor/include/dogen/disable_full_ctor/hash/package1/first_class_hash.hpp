@@ -42,7 +42,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::disable_full_ctor::package1::first_class> {
+struct hash<dogen::disable_full_ctor::package1::first_class> {
 public:
     size_t operator()(const dogen::disable_full_ctor::package1::first_class& v) const {
         return dogen::disable_full_ctor::package1::first_class_hasher::hash(v);

@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::just_identity> {
+struct hash<dogen::stereotypes::just_identity> {
 public:
     size_t operator()(const dogen::stereotypes::just_identity& v) const {
         return dogen::stereotypes::just_identity_hasher::hash(v);

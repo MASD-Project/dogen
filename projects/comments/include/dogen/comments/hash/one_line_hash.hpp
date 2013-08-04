@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::comments::one_line> {
+struct hash<dogen::comments::one_line> {
 public:
     size_t operator()(const dogen::comments::one_line& v) const {
         return dogen::comments::one_line_hasher::hash(v);

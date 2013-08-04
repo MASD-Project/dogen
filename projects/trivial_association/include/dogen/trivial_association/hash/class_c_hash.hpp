@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::trivial_association::class_c> {
+struct hash<dogen::trivial_association::class_c> {
 public:
     size_t operator()(const dogen::trivial_association::class_c& v) const {
         return dogen::trivial_association::class_c_hasher::hash(v);

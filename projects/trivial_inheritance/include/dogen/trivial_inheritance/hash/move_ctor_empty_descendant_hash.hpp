@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::trivial_inheritance::move_ctor_empty_descendant> {
+struct hash<dogen::trivial_inheritance::move_ctor_empty_descendant> {
 public:
     size_t operator()(const dogen::trivial_inheritance::move_ctor_empty_descendant& v) const {
         return dogen::trivial_inheritance::move_ctor_empty_descendant_hasher::hash(v);

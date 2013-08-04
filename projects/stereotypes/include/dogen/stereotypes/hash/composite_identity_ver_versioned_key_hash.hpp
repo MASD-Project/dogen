@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::composite_identity_ver_versioned_key> {
+struct hash<dogen::stereotypes::composite_identity_ver_versioned_key> {
 public:
     size_t operator()(const dogen::stereotypes::composite_identity_ver_versioned_key& v) const {
         return dogen::stereotypes::composite_identity_ver_versioned_key_hasher::hash(v);

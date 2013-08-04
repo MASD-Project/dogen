@@ -42,7 +42,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::enable_facet_hash::package1::first_class> {
+struct hash<dogen::enable_facet_hash::package1::first_class> {
 public:
     size_t operator()(const dogen::enable_facet_hash::package1::first_class& v) const {
         return dogen::enable_facet_hash::package1::first_class_hasher::hash(v);

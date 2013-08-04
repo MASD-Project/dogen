@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::identity_and_other_unversioned_key> {
+struct hash<dogen::stereotypes::identity_and_other_unversioned_key> {
 public:
     size_t operator()(const dogen::stereotypes::identity_and_other_unversioned_key& v) const {
         return dogen::stereotypes::identity_and_other_unversioned_key_hasher::hash(v);

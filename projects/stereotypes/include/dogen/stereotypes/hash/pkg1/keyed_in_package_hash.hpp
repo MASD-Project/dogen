@@ -42,7 +42,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::pkg1::keyed_in_package> {
+struct hash<dogen::stereotypes::pkg1::keyed_in_package> {
 public:
     size_t operator()(const dogen::stereotypes::pkg1::keyed_in_package& v) const {
         return dogen::stereotypes::pkg1::keyed_in_package_hasher::hash(v);

@@ -42,7 +42,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::split_project::package::a_class> {
+struct hash<dogen::split_project::package::a_class> {
 public:
     size_t operator()(const dogen::split_project::package::a_class& v) const {
         return dogen::split_project::package::a_class_hasher::hash(v);

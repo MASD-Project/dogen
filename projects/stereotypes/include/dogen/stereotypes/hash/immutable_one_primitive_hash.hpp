@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::immutable_one_primitive> {
+struct hash<dogen::stereotypes::immutable_one_primitive> {
 public:
     size_t operator()(const dogen::stereotypes::immutable_one_primitive& v) const {
         return dogen::stereotypes::immutable_one_primitive_hasher::hash(v);

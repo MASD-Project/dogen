@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::std_model::class_a_unversioned_key> {
+struct hash<dogen::std_model::class_a_unversioned_key> {
 public:
     size_t operator()(const dogen::std_model::class_a_unversioned_key& v) const {
         return dogen::std_model::class_a_unversioned_key_hasher::hash(v);

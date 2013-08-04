@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::fluent> {
+struct hash<dogen::stereotypes::fluent> {
 public:
     size_t operator()(const dogen::stereotypes::fluent& v) const {
         return dogen::stereotypes::fluent_hasher::hash(v);

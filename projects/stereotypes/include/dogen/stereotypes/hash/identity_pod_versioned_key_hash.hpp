@@ -41,7 +41,7 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::stereotypes::identity_pod_versioned_key> {
+struct hash<dogen::stereotypes::identity_pod_versioned_key> {
 public:
     size_t operator()(const dogen::stereotypes::identity_pod_versioned_key& v) const {
         return dogen::stereotypes::identity_pod_versioned_key_hasher::hash(v);
