@@ -193,6 +193,10 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
+add_dependencies(codegen codegen_${target})
 
 set(target cpp_formatters)
 add_custom_target(codegen_${target}
@@ -216,7 +220,7 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
-endif()
-add_dependencies(codegen codegen_${target})
+# if(use_latest_driver)
+#     add_dependencies(codegen_${target} driver)
+# endif()
+# add_dependencies(codegen codegen_${target})
