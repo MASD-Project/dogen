@@ -70,26 +70,6 @@ elements which can have children, and if not issue good error
 messages - perhaps even talking about the possible cause for the
 error.
 
-*** Split C++ model                                                    :epic:
-
-We should move the transformation code outside of the C++ model -
-this would make maintenance a lot easier. In fact there are three
-concerns here:
-
-- the C++ model, responsible for modeling the C++ types: enumeration,
-  namespace, class etc. this could stay as =cpp=.
-- the SML to C++ transformer, responsible for taking an SML
-  representation of a model and converting it to the C++ equivalent;
-  this is =sml_to_cpp=, since its a unidirectional transformation.
-  this would take a lot of classes such as locator, includer, etc;
-- the =writer= model, responsible for taking a C++ representation and
-  writing it to file.
-
-With this we would have much more cohesive code, without any of the
-complications we have at the moment.
-
-Also, this will make the [[*Make%20a%20more%20truthful%20C%2B%2B%20model][refactoring of C++]] a lot easier.
-
 *** Refactor Dia to SML transformer
 
 - remove all properties from context which are used only internally in
