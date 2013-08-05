@@ -27,11 +27,11 @@
 #include "dogen/cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/io/class_types_io.hpp"
 #include "dogen/cpp/io/context_io.hpp"
-#include "dogen/cpp/types/formatters/factory.hpp"
-#include "dogen/cpp/types/formatters/file_formatter.hpp"
-#include "dogen/cpp/types/formatters/src_cmakelists.hpp"
-#include "dogen/cpp/types/formatters/include_cmakelists.hpp"
-#include "dogen/cpp/types/formatters/odb_options.hpp"
+#include "dogen/cpp_formatters/types/factory.hpp"
+#include "dogen/cpp_formatters/types/file_formatter.hpp"
+#include "dogen/cpp_formatters/types/src_cmakelists.hpp"
+#include "dogen/cpp_formatters/types/include_cmakelists.hpp"
+#include "dogen/cpp_formatters/types/odb_options.hpp"
 #include "dogen/cpp/types/extractor.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
@@ -93,8 +93,8 @@ void workflow::validate_settings() const {
 workflow::result_entry_type workflow::format(const file_info& fi) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << fi.file_path().string();
     BOOST_LOG_SEV(lg, debug) << "Descriptor:" << fi.descriptor();
-    formatters::factory factory(settings_);
-    formatters::file_formatter::shared_ptr ff;
+    cpp_formatters::factory factory(settings_);
+    cpp_formatters::file_formatter::shared_ptr ff;
     std::ostringstream s;
     ff = factory.create(s, fi.descriptor());
     ff->format(fi);
@@ -395,7 +395,7 @@ workflow::result_type workflow::generate_cmakelists_activity() const {
         ci.product_name(model_.name().external_module_path().front());
 
     std::ostringstream stream;
-    formatters::src_cmakelists src(stream);
+    cpp_formatters::src_cmakelists src(stream);
     src.format(ci);
 
     workflow::result_type r;
@@ -408,7 +408,7 @@ workflow::result_type workflow::generate_cmakelists_activity() const {
         ci.file_path(locator_.absolute_path(ci.file_name()));
         BOOST_LOG_SEV(lg, debug) << "Formatting: " << ci.file_path().string();
 
-        formatters::include_cmakelists inc(stream, odb_enabled,
+        cpp_formatters::include_cmakelists inc(stream, odb_enabled,
             settings_.odb_facet_folder());
         inc.format(ci);
         r.insert(std::make_pair(ci.file_path(), stream.str()));
@@ -431,7 +431,7 @@ workflow::result_entry_type workflow::generate_odb_options_activity() const {
 
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << ooi.file_path().string();
     std::ostringstream stream;
-    formatters::odb_options f(stream);
+    cpp_formatters::odb_options f(stream);
     f.format(ooi);
 
     return std::make_pair(ooi.file_path(), stream.str());
