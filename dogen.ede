@@ -45,6 +45,7 @@
    "/projects/stereotypes/include"
    "/projects/database/include"
    "/projects/cpp/include"
+   "/projects/cpp_formatters/include"
    "/projects/dia_to_sml/include"
    )
  :system-include-path

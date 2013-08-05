@@ -18,18 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_TYPES_FACTORY_FWD_HPP
-#define DOGEN_CPP_FORMATTERS_TYPES_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace cpp_formatters {
+namespace cpp {
+namespace formatters {
 
 class factory;
 
-} }
+} } }
 
 #endif
