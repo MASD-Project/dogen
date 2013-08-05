@@ -37,7 +37,8 @@ Clock summary at [2013-07-23 Tue 07:48]
      CLOCK: [2013-07-15 Mon 08:28]--[2013-07-15 Mon 08:38] =>  0:10
      CLOCK: [2013-07-15 Mon 07:58]--[2013-07-15 Mon 08:20] =>  0:22
 
-*** IMPLEMENTATION Get all unit tests to pass after latest SML changes :story:
+*** COMPLETED Get all unit tests to pass after latest SML changes     :story:
+    CLOSED: [2013-08-05 Mon 23:23]
 **** COMPLETED Fix inclusion of model namespace documentation file
      CLOSED: [2013-07-22 Mon 08:11]
      CLOCK: [2013-07-22 Mon 07:48]--[2013-07-22 Mon 08:11] =>  0:23
@@ -48,7 +49,8 @@ Clock summary at [2013-07-23 Tue 07:48]
      CLOCK: [2013-07-22 Mon 08:26]--[2013-07-22 Mon 08:35] =>  0:09
      CLOCK: [2013-07-22 Mon 08:12]--[2013-07-22 Mon 08:16] =>  0:04
 
-*** Create a =key_extractor= service                                  :story:
+*** CANCELLED Create a =key_extractor= service                        :story:
+    CLOSED: [2013-08-05 Mon 23:23]
 
 Continuing from Sprint 26.
 
@@ -59,8 +61,10 @@ concept.
 Injector creates objects for these just like it does with keys; the
 C++ transformer intercepts them and generates the correct view models.
 
-*** Add content to the introduction in manual                         :story:
-*** Rename implementation specific parameters                         :story:
+*** CANCELLED Add content to the introduction in manual               :story:
+    CLOSED: [2013-08-05 Mon 23:23]
+*** CANCELLED Rename implementation specific parameters               :story:
+    CLOSED: [2013-08-05 Mon 23:23]
 
 These should really be called back end specific parameters at the SML
 level. At the dia level, if a parameter is passed in which has a
@@ -84,11 +88,13 @@ Name choices:
 - opaque parameters
 - untyped parameters
 
-*** Use explicit casting for versioned to unversioned conversions     :story:
+*** CANCELLED Use explicit casting for versioned to unversioned conversions :story:
+    CLOSED: [2013-08-05 Mon 23:23]
 
 Continuing from previous iteration, see description in Sprint 26.
 
-*** Consider not creating unversioned keys for single property        :story:
+*** CANCELLED Consider not creating unversioned keys for single property :story:
+    CLOSED: [2013-08-05 Mon 23:23]
 
 If a key is made up of a single property, its a bit nonsensical to
 create an unversioned key. We should only generate the versioned
