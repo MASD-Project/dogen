@@ -206,6 +206,34 @@ add_custom_target(codegen_${target}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
+    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-enable-facet domain
+    --cpp-enable-facet io
+    --cpp-enable-facet hash
+    --cpp-enable-facet serialization
+    --cpp-enable-facet test_data
+    --ignore-files-matching-regex .*/CMakeLists.txt
+    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/test/.*
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
+
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
+add_dependencies(codegen codegen_${target})
+
+set(target sml_to_cpp)
+add_custom_target(codegen_${target}
+    COMMENT "Generating SML to C++ model" VERBATIM
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${dogen_binary}
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io

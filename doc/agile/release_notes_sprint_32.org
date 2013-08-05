@@ -10,14 +10,15 @@ This file contains all stories that were closed during sprint 32.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-05 Mon 23:31]
+Clock summary at [2013-08-05 Mon 23:56]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:26* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:26 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:26 |
+| Headline                                                                   | Time   |      |      |
+|----------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                               | *0:58* |      |      |
+|----------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                            |        | 0:58 |      |
+| IMPLEMENTATION Release notes and backlog grooming                          |        |      | 0:26 |
+| IMPLEMENTATION Split transformation code from C++ model into its own model |        |      | 0:32 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -31,6 +32,7 @@ The =cpp_formatters= model is responsible for taking a C++
 representation and writing it to file.
 
 *** IMPLEMENTATION Split transformation code from C++ model into its own model :story:
+    CLOCK: [2013-08-05 Mon 23:24]--[2013-08-05 Mon 23:56] =>  0:32
 
 The SML to C++ transformer is responsible for taking an SML
 representation of a model and converting it to the C++ equivalent;
