@@ -10,37 +10,34 @@ This file contains all stories that were closed during sprint 32.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-05 Mon 23:24]
+Clock summary at [2013-08-05 Mon 23:31]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:19* |      |      |
+| *Total time*                                      | *0:26* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:19 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:19 |
+| Development Stories Implemented                   |        | 0:26 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:26 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-08-05 Mon 23:24]--[2013-08-05 Mon 23:31] =>  0:07
     CLOCK: [2013-08-05 Mon 23:05]--[2013-08-05 Mon 23:24] =>  0:19
 
-*** Split C++ model                                                    :epic:
+*** COMPLETED Split formatting code from C++ model into its own model :story:
+    CLOSED: [2013-08-05 Mon 23:27]
 
-We should move the transformation code outside of the C++ model -
-this would make maintenance a lot easier. In fact there are three
-concerns here:
+The =cpp_formatters= model is responsible for taking a C++
+representation and writing it to file.
 
-- the C++ model, responsible for modeling the C++ types: enumeration,
-  namespace, class etc. this could stay as =cpp=.
-- the SML to C++ transformer, responsible for taking an SML
-  representation of a model and converting it to the C++ equivalent;
-  this is =sml_to_cpp=, since its a unidirectional transformation.
-  this would take a lot of classes such as locator, includer, etc;
-- the =writer= model, responsible for taking a C++ representation and
-  writing it to file.
+*** IMPLEMENTATION Split transformation code from C++ model into its own model :story:
 
-With this we would have much more cohesive code, without any of the
-complications we have at the moment.
+The SML to C++ transformer is responsible for taking an SML
+representation of a model and converting it to the C++ equivalent;
+this is =sml_to_cpp=, since its a unidirectional transformation. It
+would takes a lot of classes such as locator, includer, etc;
 
-Also, this will make the [[*Make%20a%20more%20truthful%20C%2B%2B%20model][refactoring of C++]] a lot easier.
+*** Create a transformation workflow in C++ transformation model      :story:
+*** Create a formatting workflow in C++ formatters model              :story:
 
 ** Deprecated Development Stories
