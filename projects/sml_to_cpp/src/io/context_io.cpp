@@ -24,11 +24,11 @@
 #include "dogen/cpp/io/exception_info_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
-#include "dogen/cpp/io/relationships_io.hpp"
 #include "dogen/cpp/io/string_table_info_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml_to_cpp/io/context_io.hpp"
+#include "dogen/sml_to_cpp/io/relationships_io.hpp"
 
 namespace std {
 
@@ -50,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

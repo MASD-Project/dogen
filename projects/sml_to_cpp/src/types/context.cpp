@@ -25,7 +25,7 @@ namespace sml_to_cpp {
 
 context::context(
     const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& relationships,
+    const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& relationships,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
@@ -86,19 +86,19 @@ void context::classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::cl
     classes_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& context::relationships() const {
+const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& context::relationships() const {
     return relationships_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& context::relationships() {
+std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& context::relationships() {
     return relationships_;
 }
 
-void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v) {
+void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& v) {
     relationships_ = v;
 }
 
-void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>&& v) {
+void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>&& v) {
     relationships_ = std::move(v);
 }
 

@@ -35,7 +35,7 @@ using dogen::sml::test::mock_model_factory;
 namespace {
 
 const std::string empty;
-const std::string test_module("cpp_formatters");
+const std::string test_module("cpp");
 const std::string test_suite("transformer_spec");
 const std::string external_module("ext_module");
 

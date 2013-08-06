@@ -32,12 +32,12 @@
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
-#include "dogen/cpp/types/relationships.hpp"
 #include "dogen/cpp/types/string_table_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml_to_cpp/serialization/context_fwd_ser.hpp"
+#include "dogen/sml_to_cpp/types/relationships.hpp"
 
 namespace dogen {
 namespace sml_to_cpp {
@@ -55,7 +55,7 @@ public:
 public:
     context(
         const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes,
-        const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& relationships,
+        const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& relationships,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
@@ -85,10 +85,10 @@ public:
      * @brief All the relationships, by qname.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& relationships() const;
-    std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& relationships();
-    void relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v);
-    void relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>&& v);
+    const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& relationships() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& relationships();
+    void relationships(const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& v);
+    void relationships(const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>&& v);
     /**@}*/
 
     /**
@@ -163,7 +163,7 @@ public:
 
 private:
     std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> classes_;
-    std::unordered_map<dogen::sml::qname, dogen::cpp::relationships> relationships_;
+    std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships> relationships_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info> exceptions_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> registrars_;

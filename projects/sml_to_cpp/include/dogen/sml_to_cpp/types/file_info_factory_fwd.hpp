@@ -18,19 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/types/boost_model_helper.hpp"
-#include "dogen/sml_to_cpp/types/boost_types.hpp"
-#include "dogen/sml_to_cpp/types/context.hpp"
-#include "dogen/sml_to_cpp/types/extraction_error.hpp"
-#include "dogen/sml_to_cpp/types/extractor.hpp"
-#include "dogen/sml_to_cpp/types/file_info_factory.hpp"
-#include "dogen/sml_to_cpp/types/includer.hpp"
-#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
-#include "dogen/sml_to_cpp/types/locator.hpp"
-#include "dogen/sml_to_cpp/types/relationships.hpp"
-#include "dogen/sml_to_cpp/types/std_model_helper.hpp"
-#include "dogen/sml_to_cpp/types/std_types.hpp"
-#include "dogen/sml_to_cpp/types/transformation_error.hpp"
-#include "dogen/sml_to_cpp/types/transformer.hpp"
-#include "dogen/sml_to_cpp/types/workflow.hpp"
-#include "dogen/sml_to_cpp/types/workflow_failure.hpp"
+#ifndef DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_FWD_HPP
+#define DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace sml_to_cpp {
+
+class file_info_factory;
+
+} }
+
+#endif

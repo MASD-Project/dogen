@@ -23,11 +23,11 @@
 #include "dogen/cpp/hash/exception_info_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
-#include "dogen/cpp/hash/relationships_hash.hpp"
 #include "dogen/cpp/hash/string_table_info_hash.hpp"
 #include "dogen/cpp/hash/visitor_info_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml_to_cpp/hash/context_hash.hpp"
+#include "dogen/sml_to_cpp/hash/relationships_hash.hpp"
 
 namespace {
 
@@ -47,7 +47,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(c
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -119,7 +119,7 @@ std::size_t context_hasher::hash(const context&v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(v.classes()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_relationships(v.relationships()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(v.relationships()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(v.exceptions()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(v.enumerations()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(v.registrars()));
