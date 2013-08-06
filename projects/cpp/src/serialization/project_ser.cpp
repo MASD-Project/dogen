@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include "dogen/cpp/serialization/cmakelists_info_ser.hpp"
 #include "dogen/cpp/serialization/file_info_ser.hpp"
 #include "dogen/cpp/serialization/odb_options_info_ser.hpp"
@@ -47,7 +48,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("files", v.files_);
     ar << make_nvp("odb_options", v.odb_options_);
-    ar << make_nvp("cmakelists", v.cmakelists_);
+    ar << make_nvp("src_cmakelists", v.src_cmakelists_);
+    ar << make_nvp("include_cmakelists", v.include_cmakelists_);
 }
 
 template<typename Archive>
@@ -56,7 +58,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("files", v.files_);
     ar >> make_nvp("odb_options", v.odb_options_);
-    ar >> make_nvp("cmakelists", v.cmakelists_);
+    ar >> make_nvp("src_cmakelists", v.src_cmakelists_);
+    ar >> make_nvp("include_cmakelists", v.include_cmakelists_);
 }
 
 } }

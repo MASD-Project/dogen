@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <list>
 #include "dogen/cpp/serialization/project_fwd_ser.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
@@ -39,14 +40,17 @@ class project final {
 public:
     project() = default;
     project(const project&) = default;
-    project(project&&) = default;
     ~project() = default;
+
+public:
+    project(project&& rhs);
 
 public:
     project(
         const std::list<dogen::cpp::file_info>& files,
         const dogen::cpp::odb_options_info& odb_options,
-        const dogen::cpp::cmakelists_info& cmakelists);
+        const dogen::cpp::cmakelists_info& src_cmakelists,
+        const boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists);
 
 private:
     template<typename Archive>
@@ -66,10 +70,15 @@ public:
     void odb_options(const dogen::cpp::odb_options_info& v);
     void odb_options(const dogen::cpp::odb_options_info&& v);
 
-    const dogen::cpp::cmakelists_info& cmakelists() const;
-    dogen::cpp::cmakelists_info& cmakelists();
-    void cmakelists(const dogen::cpp::cmakelists_info& v);
-    void cmakelists(const dogen::cpp::cmakelists_info&& v);
+    const dogen::cpp::cmakelists_info& src_cmakelists() const;
+    dogen::cpp::cmakelists_info& src_cmakelists();
+    void src_cmakelists(const dogen::cpp::cmakelists_info& v);
+    void src_cmakelists(const dogen::cpp::cmakelists_info&& v);
+
+    const boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists() const;
+    boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists();
+    void include_cmakelists(const boost::optional<dogen::cpp::cmakelists_info>& v);
+    void include_cmakelists(const boost::optional<dogen::cpp::cmakelists_info>&& v);
 
 public:
     bool operator==(const project& rhs) const;
@@ -84,7 +93,8 @@ public:
 private:
     std::list<dogen::cpp::file_info> files_;
     dogen::cpp::odb_options_info odb_options_;
-    dogen::cpp::cmakelists_info cmakelists_;
+    dogen::cpp::cmakelists_info src_cmakelists_;
+    boost::optional<dogen::cpp::cmakelists_info> include_cmakelists_;
 };
 
 } }

@@ -48,6 +48,13 @@ create_dogen_cpp_cmakelists_info(const unsigned int position) {
     return dogen::cpp::cmakelists_info_generator::create(position);
 }
 
+boost::optional<dogen::cpp::cmakelists_info>
+create_boost_optional_dogen_cpp_cmakelists_info(unsigned int position) {
+    boost::optional<dogen::cpp::cmakelists_info> r(
+        create_dogen_cpp_cmakelists_info(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -59,7 +66,8 @@ void project_generator::
 populate(const unsigned int position, result_type& v) {
     v.files(create_std_list_dogen_cpp_file_info(position + 0));
     v.odb_options(create_dogen_cpp_odb_options_info(position + 1));
-    v.cmakelists(create_dogen_cpp_cmakelists_info(position + 2));
+    v.src_cmakelists(create_dogen_cpp_cmakelists_info(position + 2));
+    v.include_cmakelists(create_boost_optional_dogen_cpp_cmakelists_info(position + 3));
 }
 
 project_generator::result_type

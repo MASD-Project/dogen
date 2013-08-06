@@ -380,7 +380,12 @@ void workflow::generate_cmakelists_activity(cpp::project& p) const {
     if (!model_.name().external_module_path().empty())
         ci.product_name(model_.name().external_module_path().front());
 
-    p.cmakelists(ci);
+    p.src_cmakelists(ci);
+    if (!settings_.split_project()) {
+        const auto f(settings_.enabled_facets());
+        ci.file_path(locator_.absolute_path(ci.file_name()));
+        p.include_cmakelists(ci);
+    }
 }
 
 void workflow::generate_odb_options_activity(cpp::project& p) const {

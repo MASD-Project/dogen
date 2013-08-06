@@ -61,3 +61,4 @@
 #include "dogen/cpp_formatters/types/src_cmakelists.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/visitor.hpp"
+#include "dogen/cpp_formatters/types/workflow.hpp"

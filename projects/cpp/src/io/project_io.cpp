@@ -38,6 +38,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::fil
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::cmakelists_info>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 
@@ -46,7 +61,8 @@ std::ostream& operator<<(std::ostream& s, const project& v) {
       << "\"__type__\": " << "\"dogen::cpp::project\"" << ", "
       << "\"files\": " << v.files() << ", "
       << "\"odb_options\": " << v.odb_options() << ", "
-      << "\"cmakelists\": " << v.cmakelists()
+      << "\"src_cmakelists\": " << v.src_cmakelists() << ", "
+      << "\"include_cmakelists\": " << v.include_cmakelists()
       << " }";
     return(s);
 }

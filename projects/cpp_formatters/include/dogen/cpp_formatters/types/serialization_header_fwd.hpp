@@ -18,19 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_HEADER_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_HEADER_FWD_HPP
+#ifndef DOGEN_CPP_FORMATTERS_TYPES_SERIALIZATION_HEADER_FWD_HPP
+#define DOGEN_CPP_FORMATTERS_TYPES_SERIALIZATION_HEADER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace cpp {
-namespace formatters {
+namespace cpp_formatters {
 
 class serialization_header;
 
-} } }
+} }
 
 #endif

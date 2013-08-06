@@ -40,6 +40,16 @@ inline std::size_t hash_std_list_dogen_cpp_file_info(const std::list<dogen::cpp:
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_cpp_cmakelists_info(const boost::optional<dogen::cpp::cmakelists_info>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -50,7 +60,8 @@ std::size_t project_hasher::hash(const project&v) {
 
     combine(seed, hash_std_list_dogen_cpp_file_info(v.files()));
     combine(seed, v.odb_options());
-    combine(seed, v.cmakelists());
+    combine(seed, v.src_cmakelists());
+    combine(seed, hash_boost_optional_dogen_cpp_cmakelists_info(v.include_cmakelists()));
 
     return seed;
 }

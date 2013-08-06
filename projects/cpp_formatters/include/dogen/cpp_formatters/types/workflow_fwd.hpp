@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_TYPES_CLASS_IMPLEMENTATION_FWD_HPP
-#define DOGEN_CPP_FORMATTERS_TYPES_CLASS_IMPLEMENTATION_FWD_HPP
+#ifndef DOGEN_CPP_FORMATTERS_TYPES_WORKFLOW_FWD_HPP
+#define DOGEN_CPP_FORMATTERS_TYPES_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace cpp_formatters {
 
-class class_implementation;
+class workflow;
 
 } }
 
