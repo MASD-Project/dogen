@@ -46,6 +46,7 @@
    "/projects/database/include"
    "/projects/cpp/include"
    "/projects/cpp_formatters/include"
+   "/projects/sml_to_cpp/include"
    "/projects/dia_to_sml/include"
    )
  :system-include-path
