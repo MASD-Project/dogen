@@ -36,6 +36,7 @@
 #include "dogen/cpp/test_data/nested_type_info_td.hpp"
 #include "dogen/cpp/test_data/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/parent_info_td.hpp"
+#include "dogen/cpp/test_data/project_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/relationships_td.hpp"

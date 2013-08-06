@@ -18,28 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/boost_types_io.hpp"
-#include "dogen/cpp/io/class_info_io.hpp"
-#include "dogen/cpp/io/class_types_io.hpp"
+#include <ostream>
 #include "dogen/cpp/io/cmakelists_info_io.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/content_types_io.hpp"
-#include "dogen/cpp/io/context_io.hpp"
-#include "dogen/cpp/io/enum_info_io.hpp"
-#include "dogen/cpp/io/enumerator_info_io.hpp"
-#include "dogen/cpp/io/exception_info_io.hpp"
 #include "dogen/cpp/io/file_info_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/cpp/io/inclusion_lists_io.hpp"
-#include "dogen/cpp/io/namespace_info_io.hpp"
-#include "dogen/cpp/io/nested_type_info_io.hpp"
 #include "dogen/cpp/io/odb_options_info_io.hpp"
-#include "dogen/cpp/io/parent_info_io.hpp"
 #include "dogen/cpp/io/project_io.hpp"
-#include "dogen/cpp/io/property_info_io.hpp"
-#include "dogen/cpp/io/registrar_info_io.hpp"
-#include "dogen/cpp/io/relationships_io.hpp"
-#include "dogen/cpp/io/std_types_io.hpp"
-#include "dogen/cpp/io/string_table_info_io.hpp"
-#include "dogen/cpp/io/visitor_info_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::file_info>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace cpp {
+
+std::ostream& operator<<(std::ostream& s, const project& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::project\"" << ", "
+      << "\"files\": " << v.files() << ", "
+      << "\"odb_options\": " << v.odb_options() << ", "
+      << "\"cmakelists\": " << v.cmakelists()
+      << " }";
+    return(s);
+}
+
+} }

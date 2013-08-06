@@ -36,6 +36,7 @@
 #include "dogen/cpp/serialization/nested_type_info_ser.hpp"
 #include "dogen/cpp/serialization/odb_options_info_ser.hpp"
 #include "dogen/cpp/serialization/parent_info_ser.hpp"
+#include "dogen/cpp/serialization/project_ser.hpp"
 #include "dogen/cpp/serialization/property_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_ser.hpp"

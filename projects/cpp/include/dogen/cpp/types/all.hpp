@@ -45,6 +45,7 @@
 #include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp/types/odb_options_info.hpp"
 #include "dogen/cpp/types/parent_info.hpp"
+#include "dogen/cpp/types/project.hpp"
 #include "dogen/cpp/types/property_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/relationships.hpp"

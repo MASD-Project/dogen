@@ -18,28 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/aspect_types_hash.hpp"
-#include "dogen/cpp/hash/boost_types_hash.hpp"
-#include "dogen/cpp/hash/class_info_hash.hpp"
-#include "dogen/cpp/hash/class_types_hash.hpp"
 #include "dogen/cpp/hash/cmakelists_info_hash.hpp"
-#include "dogen/cpp/hash/content_descriptor_hash.hpp"
-#include "dogen/cpp/hash/content_types_hash.hpp"
-#include "dogen/cpp/hash/context_hash.hpp"
-#include "dogen/cpp/hash/enum_info_hash.hpp"
-#include "dogen/cpp/hash/enumerator_info_hash.hpp"
-#include "dogen/cpp/hash/exception_info_hash.hpp"
 #include "dogen/cpp/hash/file_info_hash.hpp"
-#include "dogen/cpp/hash/file_types_hash.hpp"
-#include "dogen/cpp/hash/inclusion_lists_hash.hpp"
-#include "dogen/cpp/hash/namespace_info_hash.hpp"
-#include "dogen/cpp/hash/nested_type_info_hash.hpp"
 #include "dogen/cpp/hash/odb_options_info_hash.hpp"
-#include "dogen/cpp/hash/parent_info_hash.hpp"
 #include "dogen/cpp/hash/project_hash.hpp"
-#include "dogen/cpp/hash/property_info_hash.hpp"
-#include "dogen/cpp/hash/registrar_info_hash.hpp"
-#include "dogen/cpp/hash/relationships_hash.hpp"
-#include "dogen/cpp/hash/std_types_hash.hpp"
-#include "dogen/cpp/hash/string_table_info_hash.hpp"
-#include "dogen/cpp/hash/visitor_info_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_dogen_cpp_file_info(const std::list<dogen::cpp::file_info>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace cpp {
+
+std::size_t project_hasher::hash(const project&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_list_dogen_cpp_file_info(v.files()));
+    combine(seed, v.odb_options());
+    combine(seed, v.cmakelists());
+
+    return seed;
+}
+
+} }

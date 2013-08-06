@@ -31,7 +31,10 @@ Clock summary at [2013-08-06 Tue 18:40]
 The =cpp_formatters= model is responsible for taking a C++
 representation and writing it to file.
 
-*** IMPLEMENTATION Split transformation code from C++ model into its own model :story:
+*** COMPLETED Split transformation code from C++ model into its own model :story:
+    CLOSED: [2013-08-06 Tue 22:58]
+    CLOCK: [2013-08-06 Tue 22:13]--[2013-08-06 Tue 22:57] =>  0:44
+    CLOCK: [2013-08-06 Tue 21:55]--[2013-08-06 Tue 22:13] =>  0:18
     CLOCK: [2013-08-06 Tue 18:14]--[2013-08-06 Tue 18:40] =>  0:26
     CLOCK: [2013-08-06 Tue 17:56]--[2013-08-06 Tue 18:08] =>  0:12
     CLOCK: [2013-08-06 Tue 08:24]--[2013-08-06 Tue 08:37] =>  0:13
@@ -43,7 +46,8 @@ representation of a model and converting it to the C++ equivalent;
 this is =sml_to_cpp=, since its a unidirectional transformation. It
 would takes a lot of classes such as locator, includer, etc;
 
-*** Create a transformation workflow in C++ transformation model      :story:
+*** COMPLETED Create a transformation workflow in C++ transformation model :story:
+    CLOSED: [2013-08-06 Tue 22:58]
 *** Create a formatting workflow in C++ formatters model              :story:
 
 ** Deprecated Development Stories
