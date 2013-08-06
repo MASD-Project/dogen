@@ -47,5 +47,5 @@ add_custom_target(run_cpp_formatters_spec
     DEPENDS cpp_formatters_spec)
 add_dependencies(run_all_specs run_cpp_formatters_spec)
 
-add_boost_tests(cpp ${cpp_formatters_spec_files})
+add_boost_tests(cpp_formatters ${cpp_formatters_spec_files})
 install(TARGETS cpp_formatters_spec RUNTIME DESTINATION bin COMPONENT tests)
