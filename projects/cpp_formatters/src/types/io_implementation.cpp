@@ -36,7 +36,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.formatters.io_implementation"));
+auto lg(logger_factory("cpp_formatters.io_implementation"));
 
 const std::string ostream("ostream");
 const std::string spaced_inserter(" << ");

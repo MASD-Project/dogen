@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.formatters.registrar_implementation"));
+auto lg(logger_factory("cpp_formatters.registrar_implementation"));
 
 const bool is_system(true);
 const bool is_user(false);

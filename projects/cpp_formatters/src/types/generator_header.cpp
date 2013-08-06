@@ -35,7 +35,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.formatters.generator_header"));
+auto lg(logger_factory("cpp_formatters.generator_header"));
 
 const std::string missing_class_info("Class info is empty");
 const std::string missing_enum_info("Enumeration info is empty");

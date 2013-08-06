@@ -35,7 +35,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.formatters.visitor"));
+auto lg(logger_factory("cpp_formatters.visitor"));
 const std::string missing_visitor_info("Visitor view model is empty");
 const std::string comments("Accept visits for type ");
 

@@ -36,7 +36,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.formatters.generator_implementation"));
+auto lg(logger_factory("cpp_formatters.generator_implementation"));
 
 const std::string int_type("int");
 const std::string bool_type("bool");

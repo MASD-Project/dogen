@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.formatters.inserter_implementation"));
+auto lg(logger_factory("cpp_formatters.inserter_implementation"));
 
 // FIXME: until we add support to indenter.
 const std::string special_indent("  ");
