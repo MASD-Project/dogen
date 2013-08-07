@@ -33,7 +33,7 @@
 #include "dogen/config/io/settings_io.hpp"
 #include "dogen/engine/types/housekeeper.hpp"
 #include "dogen/engine/types/generation_failure.hpp"
-#include "dogen/cpp/types/workflow_failure.hpp"
+#include "dogen/sml_to_cpp/types/workflow_failure.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp" // FIXME
 #include "dogen/engine/types/outputters/factory.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
@@ -138,7 +138,7 @@ void workflow::generate(const sml::model& m) const {
         boost::for_each(f.create(), lambda);
     } catch(const dogen::cpp_formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(dogen::engine::generation_failure(e.what()));
-    } catch(const dogen::cpp::workflow_failure& e) {
+    } catch(const dogen::sml_to_cpp::workflow_failure& e) {
         BOOST_THROW_EXCEPTION(dogen::engine::generation_failure(e.what()));
     }
 }

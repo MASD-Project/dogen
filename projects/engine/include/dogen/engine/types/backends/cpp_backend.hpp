@@ -32,7 +32,8 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/workflow.hpp"
+#include "dogen/cpp_formatters/types/workflow.hpp"
+#include "dogen/sml_to_cpp/types/workflow.hpp"
 #include "dogen/engine/types/backends/backend.hpp"
 
 namespace dogen {
@@ -57,8 +58,10 @@ public:
 public:
     backend::value_type generate() override;
     std::vector<boost::filesystem::path> managed_directories() const override;
+
 private:
-    cpp::workflow impl_;
+    sml_to_cpp::workflow transformer_;
+    cpp_formatters::workflow formatter_;
 };
 
 } } }

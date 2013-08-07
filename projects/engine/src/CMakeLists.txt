@@ -28,6 +28,7 @@ target_link_libraries(engine
     dia
     cpp
     cpp_formatters
+    sml_to_cpp
     config
     dia_to_sml
     utility

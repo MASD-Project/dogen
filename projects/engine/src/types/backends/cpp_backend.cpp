@@ -27,7 +27,7 @@ namespace backends {
 
 cpp_backend::
 cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
-    impl_(model, settings) { }
+    transformer_(model, settings), formatter_(settings) { }
 
 backend::ptr cpp_backend::
 create(const sml::model& model, const config::cpp_settings& settings) {
@@ -35,11 +35,13 @@ create(const sml::model& model, const config::cpp_settings& settings) {
 }
 
 backend::value_type cpp_backend::generate() {
-    return impl_.execute();
+    const auto project(transformer_.execute());
+    const auto r(formatter_.execute(project));
+    return r;
 }
 
 std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
-    return impl_.managed_directories();
+    return transformer_.managed_directories();
 }
 
 } } }

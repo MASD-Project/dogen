@@ -30,6 +30,8 @@ target_link_libraries(engine_spec
     engine
     utility
     cpp
+    cpp_formatters
+    sml_to_cpp
     dia
     sml
     config
