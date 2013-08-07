@@ -68,11 +68,7 @@ private:
      */
     void validate_settings() const;
 
-    /**
-     * @brief Register the file with registrar, if it's a header file.
-     */
-    void register_header(const cpp::file_info& fi) const;
-
+private:
     /**
      * @brief Recursively generates C++ class objects.
      */
@@ -93,11 +89,17 @@ private:
      */
     void transform_enumeration(const sml::enumeration& e);
 
-private:
     /**
      * @brief Creates all C++ types in the context.
      */
-    void populate_context_activity();
+    void transformation_sub_workflow();
+
+private:
+
+    /**
+     * @brief Register the file with registrar, if it's a header file.
+     */
+    void register_header(const cpp::file_info& fi) const;
 
     /**
      * @brief Generate C++ files for classes.
@@ -149,6 +151,11 @@ private:
      * @brief Generate all C++ files.
      */
     void generate_file_infos_activity(cpp::project& p) const;
+
+    /**
+     * @brief Perform the generation sub-workflow.
+     */
+    cpp::project generation_sub_workflow();
 
 public:
     /**

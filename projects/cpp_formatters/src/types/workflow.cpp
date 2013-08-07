@@ -48,7 +48,7 @@ workflow::
 workflow(const config::cpp_settings& settings) : settings_(settings) { }
 
 workflow::result_type
-workflow::generate_cmakelists_activity(const cpp::project& p) const {
+workflow::format_cmakelists_activity(const cpp::project& p) const {
     const auto src_path(p.src_cmakelists().file_path());
     BOOST_LOG_SEV(lg, debug) << "Formatting: " << src_path.string();
 
@@ -77,7 +77,7 @@ workflow::generate_cmakelists_activity(const cpp::project& p) const {
 }
 
 workflow::result_entry_type
-workflow::generate_odb_options_activity(const cpp::project& p) const {
+workflow::format_odb_options_activity(const cpp::project& p) const {
     const auto path(p.odb_options().file_path());
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << path.string();
 
@@ -89,7 +89,7 @@ workflow::generate_odb_options_activity(const cpp::project& p) const {
 }
 
 workflow::result_type
-workflow::generate_file_infos_activity(const cpp::project& p) const {
+workflow::format_file_infos_activity(const cpp::project& p) const {
     workflow::result_type r;
 
     std::map<config::cpp_facet_types, std::list<std::string> >
@@ -114,24 +114,24 @@ workflow::generate_file_infos_activity(const cpp::project& p) const {
 }
 
 workflow::result_type workflow::execute(const cpp::project& p) {
-    BOOST_LOG_SEV(lg, info) << "C++ backend started.";
+    BOOST_LOG_SEV(lg, info) << "C++ formatters workflow started.";
 
-    workflow::result_type r(generate_file_infos_activity(p));
+    workflow::result_type r(format_file_infos_activity(p));
     if (settings_.disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else {
-        const auto cm(generate_cmakelists_activity(p));
+        const auto cm(format_cmakelists_activity(p));
         r.insert(cm.begin(), cm.end());
     }
 
     const auto f(settings_.enabled_facets());
     const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
     if (odb_enabled)
-        r.insert(generate_odb_options_activity(p));
+        r.insert(format_odb_options_activity(p));
     else
         BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
 
-    BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
+    BOOST_LOG_SEV(lg, info) << "C++ formatters workflow finished.";
     return r;
 }
 

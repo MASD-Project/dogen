@@ -149,8 +149,8 @@ void workflow::transform_enumeration(const sml::enumeration& e) {
     transformer_.from_type(e);
 }
 
-void workflow::populate_context_activity() {
-    BOOST_LOG_SEV(lg, debug) << "Started populate context sub-workflow.";
+void workflow::transformation_sub_workflow() {
+    BOOST_LOG_SEV(lg, debug) << "Started transformation sub-workflow.";
 
     for (const auto& pair : model_.objects())
         transform_abstract_object(*pair.second);
@@ -166,7 +166,7 @@ void workflow::populate_context_activity() {
 
     transform_registrar();
 
-    BOOST_LOG_SEV(lg, debug) << "Finished populate context sub-workflow";
+    BOOST_LOG_SEV(lg, debug) << "Finished transformation sub-workflow";
     BOOST_LOG_SEV(lg, debug) << "context: " << context_;
 }
 
@@ -407,10 +407,7 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
     return locator_.managed_directories();
 }
 
-cpp::project workflow::execute() {
-    BOOST_LOG_SEV(lg, info) << "C++ backend started.";
-
-    populate_context_activity();
+cpp::project workflow::generation_sub_workflow() {
     cpp::project r;
     generate_file_infos_activity(r);
     if (settings_.disable_cmakelists())
@@ -425,7 +422,16 @@ cpp::project workflow::execute() {
     else
         BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
 
-    BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
+    return r;
+}
+
+cpp::project workflow::execute() {
+    BOOST_LOG_SEV(lg, info) << "SML to C++ workflow started.";
+
+    transformation_sub_workflow();
+    const auto r(generation_sub_workflow());
+
+    BOOST_LOG_SEV(lg, info) << "SML to C++ workflow finished.";
     return r;
 }
 

@@ -39,8 +39,8 @@ namespace dogen {
 namespace cpp_formatters {
 
 /**
- * @brief Orchestrates all the classes in the C++ model to go from an
- * SML model into a set of C++ files representing that model.
+ * @brief Given a C++ project, formats all of the C++ classes into a
+ * file representation.
  */
 class workflow final {
 public:
@@ -59,25 +59,19 @@ public:
 
 private:
     /**
-     * @brief Format the file info into a C++ file representation.
-     */
-    result_entry_type format(const cpp::file_info& fi) const;
-
-private:
-    /**
      * @brief Create the cmakelists makefiles.
      */
-    result_type generate_cmakelists_activity(const cpp::project& p) const;
+    result_type format_cmakelists_activity(const cpp::project& p) const;
 
     /**
      * @brief Creates the ODB compiler options file.
      */
-    result_entry_type generate_odb_options_activity(const cpp::project& p) const;
+    result_entry_type format_odb_options_activity(const cpp::project& p) const;
 
     /**
      * @brief Generate all C++ files.
      */
-    result_type generate_file_infos_activity(const cpp::project& p) const;
+    result_type format_file_infos_activity(const cpp::project& p) const;
 
 public:
     /**
