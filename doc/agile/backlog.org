@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Referenced models do not have link time dependencies              :story:
+
+For some reason, when a model references another model it doesn't seem
+to result in a link time dependency. To solve this problem we end up
+having to disable makefiles and then add dependencies manually.
+
+In addition, we also need a way to supply user defined linked
+libraries, which could be CMake variables. This could be done via
+implementation specific parameters at the model level.
+
 *** Split a fully formed model from partial models                    :story:
 
 We should really have two distinct types to represent the model that
