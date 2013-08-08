@@ -10,19 +10,20 @@ This file contains all stories that were closed during sprint 32.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-07 Wed 20:10]
+Clock summary at [2013-08-08 Thu 08:25]
 
 | Headline                                                              | Time   |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                          | *5:09* |      |      |
+| *Total time*                                                          | *5:33* |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                       |        | 5:09 |      |
-| IMPLEMENTATION Release notes and backlog grooming                     |        |      | 0:26 |
+| Development Stories Implemented                                       |        | 5:33 |      |
+| IMPLEMENTATION Release notes and backlog grooming                     |        |      | 0:28 |
 | COMPLETED Split transformation code from C++ model into its own model |        |      | 2:57 |
-| IMPLEMENTATION Create a formatting workflow in C++ formatters model   |        |      | 1:46 |
+| COMPLETED Create a formatting workflow in C++ formatters model        |        |      | 2:08 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-08-08 Thu 08:23]--[2013-08-08 Thu 08:25] =>  0:02
     CLOCK: [2013-08-05 Mon 23:24]--[2013-08-05 Mon 23:31] =>  0:07
     CLOCK: [2013-08-05 Mon 23:05]--[2013-08-05 Mon 23:24] =>  0:19
 
@@ -49,11 +50,17 @@ would takes a lot of classes such as locator, includer, etc;
 
 *** COMPLETED Create a transformation workflow in C++ transformation model :story:
     CLOSED: [2013-08-06 Tue 22:58]
-*** IMPLEMENTATION Create a formatting workflow in C++ formatters model :story:
-    CLOCK: [2013-08-08 Thu 08:01]
+*** COMPLETED Create a formatting workflow in C++ formatters model    :story:
+    CLOSED: [2013-08-08 Thu 08:23]
+    CLOCK: [2013-08-08 Thu 08:01]--[2013-08-08 Thu 08:23] =>  0:22
     CLOCK: [2013-08-07 Wed 19:01]--[2013-08-07 Wed 19:30] =>  0:29
     CLOCK: [2013-08-07 Wed 08:28]--[2013-08-07 Wed 08:34] =>  0:06
     CLOCK: [2013-08-07 Wed 07:47]--[2013-08-07 Wed 08:18] =>  0:31
     CLOCK: [2013-08-06 Tue 22:59]--[2013-08-06 Tue 23:39] =>  0:40
+
+*** IMPLEMENTATION Tidy-up all C++ models                             :story:
+
+- add comments
+- fix model layout
 
 ** Deprecated Development Stories
