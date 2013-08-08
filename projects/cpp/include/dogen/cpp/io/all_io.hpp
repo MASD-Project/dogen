@@ -36,6 +36,5 @@
 #include "dogen/cpp/io/project_io.hpp"
 #include "dogen/cpp/io/property_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
-#include "dogen/cpp/io/std_types_io.hpp"
 #include "dogen/cpp/io/string_table_info_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"

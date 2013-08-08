@@ -36,6 +36,5 @@
 #include "dogen/cpp/hash/project_hash.hpp"
 #include "dogen/cpp/hash/property_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
-#include "dogen/cpp/hash/std_types_hash.hpp"
 #include "dogen/cpp/hash/string_table_info_hash.hpp"
 #include "dogen/cpp/hash/visitor_info_hash.hpp"

@@ -20,6 +20,7 @@
  */
 #include "dogen/cpp_formatters/types/class_declaration.hpp"
 #include "dogen/cpp_formatters/types/class_implementation.hpp"
+#include "dogen/cpp_formatters/types/cpp_formatters.hpp"
 #include "dogen/cpp_formatters/types/domain_class_declaration.hpp"
 #include "dogen/cpp_formatters/types/domain_class_implementation.hpp"
 #include "dogen/cpp_formatters/types/domain_header.hpp"

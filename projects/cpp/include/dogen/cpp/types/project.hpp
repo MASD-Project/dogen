@@ -36,6 +36,9 @@
 namespace dogen {
 namespace cpp {
 
+/**
+ * @brief Represents a project composed of makefiles and C++ source code.
+ */
 class project final {
 public:
     project() = default;
@@ -60,25 +63,45 @@ private:
     friend void boost::serialization::load(Archive& ar, project& v, unsigned int version);
 
 public:
+    /**
+     * @brief C++ include and source files.
+     */
+    /**@{*/
     const std::list<dogen::cpp::file_info>& files() const;
     std::list<dogen::cpp::file_info>& files();
     void files(const std::list<dogen::cpp::file_info>& v);
     void files(const std::list<dogen::cpp::file_info>&& v);
+    /**@}*/
 
+    /**
+     * @brief The ODB options file.
+     */
+    /**@{*/
     const dogen::cpp::odb_options_info& odb_options() const;
     dogen::cpp::odb_options_info& odb_options();
     void odb_options(const dogen::cpp::odb_options_info& v);
     void odb_options(const dogen::cpp::odb_options_info&& v);
+    /**@}*/
 
+    /**
+     * @brief The CMake makefile for the source directory.
+     */
+    /**@{*/
     const dogen::cpp::cmakelists_info& src_cmakelists() const;
     dogen::cpp::cmakelists_info& src_cmakelists();
     void src_cmakelists(const dogen::cpp::cmakelists_info& v);
     void src_cmakelists(const dogen::cpp::cmakelists_info&& v);
+    /**@}*/
 
+    /**
+     * @brief The CMake makefile for the include directory.
+     */
+    /**@{*/
     const boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists() const;
     boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists();
     void include_cmakelists(const boost::optional<dogen::cpp::cmakelists_info>& v);
     void include_cmakelists(const boost::optional<dogen::cpp::cmakelists_info>&& v);
+    /**@}*/
 
 public:
     bool operator==(const project& rhs) const;

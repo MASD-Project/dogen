@@ -30,33 +30,37 @@ namespace dogen {
 /**
  * @brief CPP is the C++ model.
  *
- * CPP is responsible for converting a generic SML representation
- * into compilable C++ code, according to a set of well-defined
- * conventions.
+ * @section cpp_0 Objective
  *
- * @section cpp_0 Info postfix
+ * CPP aims to model the types available in the C++ type system as faithfuly
+ * as possible. However, for historical reasons, there are a number of types
+ * that do not follow this approach such as @e visitor, @e registrar, etc. Over
+ * time these types will be reimplemented in terms of the basic building blocks
+ * such as class, etc.
+ *
+ * @section cpp_1 Info postfix
  *
  * The types in the C++ meta-model should not have any prefixes or post-fixes
  * since they naturally belong to the CPP model. However, because names like
- * class and namespace clash with keywords, and to maintain consistency -
+ * @e class and @e namespace clash with keywords, and to maintain consistency -
  * perhaps foolishly - it was decided to use the postfix @e info on all types
  * which are part of the meta-model. Info was chosen very randomly, but it is
  * used by @e type_info, so that's at least one excuse.
  *
- * @section cpp_1 Using Clang AST as a C++ meta model
+ * @section cpp_2 Using Clang AST as a C++ meta model
  *
- * If implemented properly, the C++ model should really just generate
- * Clang AST and use the clang framework to perform the code generation.
- * However, it is non-trivial to create such transformers able to make a
- * valid AST for all the use cases we have (say boost serialisation, etc).
- * So we took the easy approach which is to create what can be thought of
- * as a high-level AST model, that represents C++ meta model concepts in
- * in a very high-level form. This form is suitable for our formatters.
+ * If implemented properly, dogen should really just generate a C++ AST via
+ * Clang and use the LLVM framework to perform the code generation. However,
+ * it is non-trivial to create transformers able to make a valid AST for
+ * all the use cases we have (say boost serialisation, etc). So we took the
+ * easy way out which is to create what can be thought of as a high-level AST
+ * model and hard-code all of the source in the @e cpp_transformers model.
  *
- * In the future we should consider a Clang based C++ backend, but we should
- * not reuse any of this code as its too far apart. On the plus side we can
- * start working on it side-by-side such that we have both backends and only
- * switch to Clang when it has 100% feature coverage.
+ * In the future we should consider a Clang based C++ backend. We will probably
+ * not reuse any of the code in the various C++ models as its too far apart
+ * from the Clang approach. On the plus side we can start working on it
+ * side-by-side such that we have both backends and only switch to Clang when
+ * it has 100% feature coverage.
  *
  */
 namespace cpp {

@@ -39,6 +39,5 @@
 #include "dogen/cpp/types/project.hpp"
 #include "dogen/cpp/types/property_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
-#include "dogen/cpp/types/std_types.hpp"
 #include "dogen/cpp/types/string_table_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
