@@ -42,10 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
     test_swap<aspect_types_generator>();
-    test_swap<boost_types_generator>();
     test_swap<file_types_generator>();
-    test_swap<relationships_generator>();
-    test_swap<std_types_generator>();
     test_swap<class_info_generator>();
     test_swap<cmakelists_info_generator>();
     test_swap<enum_info_generator>();

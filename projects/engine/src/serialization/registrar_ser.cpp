@@ -27,7 +27,6 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include "dogen/config/serialization/registrar_ser.hpp"
-#include "dogen/cpp/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -39,7 +38,6 @@ namespace engine {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    cpp::register_types(ar);
     config::register_types(ar);
     sml::register_types(ar);
 }

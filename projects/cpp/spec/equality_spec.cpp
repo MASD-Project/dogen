@@ -42,10 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
     test_equality<aspect_types_generator>();
-    test_equality<boost_types_generator>();
     test_equality<file_types_generator>();
-    test_equality<relationships_generator>();
-    test_equality<std_types_generator>();
     test_equality<class_info_generator>();
     test_equality<cmakelists_info_generator>();
     test_equality<enum_info_generator>();

@@ -42,10 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
     test_io<aspect_types_generator>();
-    test_io<boost_types_generator>();
     test_io<file_types_generator>();
-    test_io<relationships_generator>();
-    test_io<std_types_generator>();
     test_io<class_info_generator>();
     test_io<cmakelists_info_generator>();
     test_io<enum_info_generator>();

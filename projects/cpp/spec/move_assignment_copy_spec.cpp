@@ -42,10 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
     test_move_assignment_copy<aspect_types_generator>();
-    test_move_assignment_copy<boost_types_generator>();
     test_move_assignment_copy<file_types_generator>();
-    test_move_assignment_copy<relationships_generator>();
-    test_move_assignment_copy<std_types_generator>();
     test_move_assignment_copy<class_info_generator>();
     test_move_assignment_copy<cmakelists_info_generator>();
     test_move_assignment_copy<enum_info_generator>();

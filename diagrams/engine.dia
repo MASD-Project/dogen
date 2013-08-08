@@ -388,7 +388,7 @@
         <dia:point val="-13.5,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.55,91.95;23.625,96.25"/>
+        <dia:rectangle val="-13.55,91.95;23.625,95.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-13.5,92"/>
@@ -397,7 +397,7 @@
         <dia:real val="37.075000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.2000000000000002"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_backend#</dia:string>
@@ -486,31 +486,7 @@
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#impl_#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#cpp::workflow#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="1"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
+      <dia:attribute name="attributes"/>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
@@ -4562,7 +4538,7 @@
         <dia:point val="24.8988,-1.62531"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.8488,-1.67531;44.7138,0.124693"/>
+        <dia:rectangle val="24.8488,-1.67531;44.7138,0.12469"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4597,7 +4573,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="25.2488,-0.380307"/>
+            <dia:point val="25.2488,-0.38031"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4613,7 +4589,7 @@
         <dia:point val="34.7813,0.0746927"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.7124,0.00581426;38.1384,5.12898"/>
+        <dia:rectangle val="34.7124,0.00581434;38.1384,5.12898"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4906,7 +4882,7 @@ into the filesystem.#</dia:string>
         <dia:point val="-15.0792,-0.00864066"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.1292,-0.0586407;3.58083,6.54136"/>
+        <dia:rectangle val="-15.1292,-0.0586407;3.5808,6.54136"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

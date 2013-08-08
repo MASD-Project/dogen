@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/types/boost_model_helper.hpp"
+#include "dogen/sml_to_cpp/types/boost_model_helper.hpp" // FIXME: hack
 #include "dogen/cpp_formatters/types/includes.hpp"
 
 namespace {
@@ -45,8 +45,9 @@ void includes::format(std::list<std::string> v, bool is_system) {
     v.sort();
 
     // FIXME: hacks for headers that must be last
-    cpp::boost_model_helper boost_;
-    const auto gd(boost_.include(cpp::boost_types::serialization_gregorian_date));
+    sml_to_cpp::boost_model_helper boost_;
+    const auto gd(
+        boost_.include(sml_to_cpp::boost_types::serialization_gregorian_date));
     const auto i(std::find(v.begin(), v.end(), gd));
     if (i != v.end())
         v.splice(v.end(), v, i);
