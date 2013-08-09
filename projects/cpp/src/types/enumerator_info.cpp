@@ -25,23 +25,23 @@ namespace cpp {
 
 enumerator_info::enumerator_info(
     const std::string& name,
-    const std::string& value,
-    const std::string& documentation)
+    const std::string& documentation,
+    const std::string& value)
     : name_(name),
-      value_(value),
-      documentation_(documentation) { }
+      documentation_(documentation),
+      value_(value) { }
 
 void enumerator_info::swap(enumerator_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(value_, other.value_);
     swap(documentation_, other.documentation_);
+    swap(value_, other.value_);
 }
 
 bool enumerator_info::operator==(const enumerator_info& rhs) const {
     return name_ == rhs.name_ &&
-        value_ == rhs.value_ &&
-        documentation_ == rhs.documentation_;
+        documentation_ == rhs.documentation_ &&
+        value_ == rhs.value_;
 }
 
 enumerator_info& enumerator_info::operator=(enumerator_info other) {
@@ -66,22 +66,6 @@ void enumerator_info::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::string& enumerator_info::value() const {
-    return value_;
-}
-
-std::string& enumerator_info::value() {
-    return value_;
-}
-
-void enumerator_info::value(const std::string& v) {
-    value_ = v;
-}
-
-void enumerator_info::value(const std::string&& v) {
-    value_ = std::move(v);
-}
-
 const std::string& enumerator_info::documentation() const {
     return documentation_;
 }
@@ -96,6 +80,22 @@ void enumerator_info::documentation(const std::string& v) {
 
 void enumerator_info::documentation(const std::string&& v) {
     documentation_ = std::move(v);
+}
+
+const std::string& enumerator_info::value() const {
+    return value_;
+}
+
+std::string& enumerator_info::value() {
+    return value_;
+}
+
+void enumerator_info::value(const std::string& v) {
+    value_ = v;
+}
+
+void enumerator_info::value(const std::string&& v) {
+    value_ = std::move(v);
 }
 
 } }

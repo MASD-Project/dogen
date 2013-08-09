@@ -26,9 +26,11 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <list>
 #include <string>
 #include "dogen/cpp/serialization/enum_info_fwd_ser.hpp"
+#include "dogen/cpp/types/element_info.hpp"
 #include "dogen/cpp/types/enumerator_info.hpp"
 
 namespace dogen {
@@ -37,19 +39,20 @@ namespace cpp {
 /**
  * @brief Represents a C++ enum.
  */
-class enum_info final {
+class enum_info final : public dogen::cpp::element_info {
 public:
     enum_info() = default;
     enum_info(const enum_info&) = default;
     enum_info(enum_info&&) = default;
-    ~enum_info() = default;
+
+    virtual ~enum_info() noexcept { }
 
 public:
     enum_info(
+        const std::string& documentation,
         const std::string& name,
         const std::list<std::string>& namespaces,
         const std::list<dogen::cpp::enumerator_info>& enumerators,
-        const std::string& documentation,
         const std::string& type);
 
 private:
@@ -60,8 +63,13 @@ private:
     friend void boost::serialization::load(Archive& ar, enum_info& v, unsigned int version);
 
 public:
+    void to_stream(std::ostream& s) const override;
+
+public:
     /**
-     * @brief Name of the enumeration.
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
      */
     /**@{*/
     const std::string& name() const;
@@ -91,16 +99,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Documentation for the enumeration.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Underlying primitive type.
      */
     /**@{*/
@@ -117,6 +115,9 @@ public:
     }
 
 public:
+    bool equals(const dogen::cpp::element_info& other) const override;
+
+public:
     void swap(enum_info& other) noexcept;
     enum_info& operator=(enum_info other);
 
@@ -124,7 +125,6 @@ private:
     std::string name_;
     std::list<std::string> namespaces_;
     std::list<dogen::cpp::enumerator_info> enumerators_;
-    std::string documentation_;
     std::string type_;
 };
 

@@ -37,9 +37,7 @@ namespace cpp {
 std::size_t element_info_hasher::hash(const element_info&v) {
     std::size_t seed(0);
 
-    combine(seed, v.name());
     combine(seed, v.documentation());
-
     return seed;
 }
 

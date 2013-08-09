@@ -26,23 +26,23 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <string>
 #include "dogen/cpp/serialization/element_info_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class element_info final {
+class element_info {
 public:
     element_info() = default;
     element_info(const element_info&) = default;
     element_info(element_info&&) = default;
-    ~element_info() = default;
+
+    virtual ~element_info() noexcept = 0;
 
 public:
-    element_info(
-        const std::string& name,
-        const std::string& documentation);
+    explicit element_info(const std::string& documentation);
 
 private:
     template<typename Archive>
@@ -52,18 +52,9 @@ private:
     friend void boost::serialization::load(Archive& ar, element_info& v, unsigned int version);
 
 public:
-    /**
-     * @brief Name of the entity.
-     *
-     * Must be valid according to the rules for C++ names.
-     */
-    /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
-    /**@}*/
+    virtual void to_stream(std::ostream& s) const;
 
+public:
     /**
      * @brief Code comments.
      *
@@ -78,32 +69,26 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
+protected:
+    bool compare(const element_info& rhs) const;
 public:
-    bool operator==(const element_info& rhs) const;
-    bool operator!=(const element_info& rhs) const {
-        return !this->operator==(rhs);
-    }
+    virtual bool equals(const element_info& other) const = 0;
 
-public:
+protected:
     void swap(element_info& other) noexcept;
-    element_info& operator=(element_info other);
 
 private:
-    std::string name_;
     std::string documentation_;
 };
 
+inline element_info::~element_info() noexcept { }
+
+inline bool operator==(const element_info& lhs, const element_info& rhs) {
+    return lhs.equals(rhs);
+}
+
 } }
 
-namespace std {
 
-template<>
-inline void swap(
-    dogen::cpp::element_info& lhs,
-    dogen::cpp::element_info& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

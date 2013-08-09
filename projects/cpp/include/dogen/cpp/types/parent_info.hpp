@@ -59,7 +59,9 @@ private:
 
 public:
     /**
-     * @brief Name of the class.
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
      */
     /**@{*/
     const std::string& name() const;

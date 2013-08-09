@@ -37,8 +37,8 @@ std::ostream& operator<<(std::ostream& s, const enumerator_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::enumerator_info\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);
 }

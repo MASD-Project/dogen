@@ -55,7 +55,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<parent_info_generator>();
     test_move_assignment_copy<property_info_generator>();
     test_move_assignment_copy<registrar_info_generator>();
-    test_move_assignment_copy<string_table_info_generator>();
     test_move_assignment_copy<visitor_info_generator>();
 }
 

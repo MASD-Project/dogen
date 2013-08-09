@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/element_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 
 namespace {
@@ -46,9 +47,9 @@ exception_info_generator::exception_info_generator() : position_(0) { }
 
 void exception_info_generator::
 populate(const unsigned int position, result_type& v) {
-    v.documentation(create_std_string(position + 0));
-    v.name(create_std_string(position + 1));
-    v.namespaces(create_std_list_std_string(position + 2));
+    dogen::cpp::element_info_generator::populate(position, v);
+    v.name(create_std_string(position + 0));
+    v.namespaces(create_std_list_std_string(position + 1));
 }
 
 exception_info_generator::result_type

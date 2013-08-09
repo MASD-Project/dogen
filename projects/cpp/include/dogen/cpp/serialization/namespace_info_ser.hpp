@@ -26,7 +26,18 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/cpp/types/namespace_info.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::cpp::element_info,
+    dogen::cpp::namespace_info
+> : public mpl::true_ {};
+
+}
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::namespace_info)
 namespace boost {

@@ -72,8 +72,8 @@ std::ostream& operator<<(std::ostream& s, const property_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::property_info\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"type\": " << v.type() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"type\": " << v.type() << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent()

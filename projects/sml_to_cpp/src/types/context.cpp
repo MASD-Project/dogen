@@ -30,16 +30,14 @@ context::context(
     const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& string_tables)
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors)
     : classes_(classes),
       relationships_(relationships),
       exceptions_(exceptions),
       enumerations_(enumerations),
       registrars_(registrars),
       namespaces_(namespaces),
-      visitors_(visitors),
-      string_tables_(string_tables) { }
+      visitors_(visitors) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -50,7 +48,6 @@ void context::swap(context& other) noexcept {
     swap(registrars_, other.registrars_);
     swap(namespaces_, other.namespaces_);
     swap(visitors_, other.visitors_);
-    swap(string_tables_, other.string_tables_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -60,8 +57,7 @@ bool context::operator==(const context& rhs) const {
         enumerations_ == rhs.enumerations_ &&
         registrars_ == rhs.registrars_ &&
         namespaces_ == rhs.namespaces_ &&
-        visitors_ == rhs.visitors_ &&
-        string_tables_ == rhs.string_tables_;
+        visitors_ == rhs.visitors_;
 }
 
 context& context::operator=(context other) {
@@ -180,22 +176,6 @@ void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::v
 
 void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>&& v) {
     visitors_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& context::string_tables() const {
-    return string_tables_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& context::string_tables() {
-    return string_tables_;
-}
-
-void context::string_tables(const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& v) {
-    string_tables_ = v;
-}
-
-void context::string_tables(const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>&& v) {
-    string_tables_ = std::move(v);
 }
 
 } }

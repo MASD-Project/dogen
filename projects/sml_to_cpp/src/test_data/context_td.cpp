@@ -23,7 +23,6 @@
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
-#include "dogen/cpp/test_data/string_table_info_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml_to_cpp/test_data/context_td.hpp"
@@ -127,19 +126,6 @@ std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> create_std_unord
     return r;
 }
 
-dogen::cpp::string_table_info
-create_dogen_cpp_string_table_info(const unsigned int position) {
-    return dogen::cpp::string_table_info_generator::create(position);
-}
-
-std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_string_table_info(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_string_table_info(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -156,7 +142,6 @@ populate(const unsigned int position, result_type& v) {
     v.registrars(create_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(position + 4));
     v.namespaces(create_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(position + 5));
     v.visitors(create_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(position + 6));
-    v.string_tables(create_std_unordered_map_dogen_sml_qname_dogen_cpp_string_table_info(position + 7));
 }
 
 context_generator::result_type

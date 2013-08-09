@@ -61,7 +61,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<parent_info_generator>();
     rountrip_type<property_info_generator>();
     rountrip_type<registrar_info_generator>();
-    rountrip_type<string_table_info_generator>();
     rountrip_type<visitor_info_generator>();
 }
 

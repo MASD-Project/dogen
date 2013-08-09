@@ -28,12 +28,22 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/cpp/serialization/class_info_ser.hpp"
 #include "dogen/cpp/serialization/element_info_ser.hpp"
+#include "dogen/cpp/serialization/enum_info_ser.hpp"
+#include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/namespace_info_ser.hpp"
+#include "dogen/cpp/serialization/registrar_info_ser.hpp"
+#include "dogen/cpp/serialization/visitor_info_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
 #endif
+
+BOOST_CLASS_TRACKING(
+    dogen::cpp::element_info,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
@@ -42,7 +52,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::element_info& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
 }
 
@@ -50,7 +59,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::element_info& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
 }
 

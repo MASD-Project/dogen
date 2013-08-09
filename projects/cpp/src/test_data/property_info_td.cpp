@@ -65,8 +65,8 @@ property_info_generator::property_info_generator() : position_(0) { }
 void property_info_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.type(create_dogen_cpp_nested_type_info(position + 1));
-    v.documentation(create_std_string(position + 2));
+    v.documentation(create_std_string(position + 1));
+    v.type(create_dogen_cpp_nested_type_info(position + 2));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 3));
     v.is_immutable(create_bool(position + 4));
     v.is_fluent(create_bool(position + 5));

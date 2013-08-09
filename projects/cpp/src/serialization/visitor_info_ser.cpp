@@ -29,12 +29,17 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/cpp/serialization/element_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
 #endif
+
+BOOST_CLASS_TRACKING(
+    dogen::cpp::visitor_info,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
@@ -43,9 +48,10 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::visitor_info& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("element_info", base_object<dogen::cpp::element_info>(v));
+
     ar << make_nvp("name", v.name_);
     ar << make_nvp("types", v.types_);
-    ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("namespaces", v.namespaces_);
 }
 
@@ -53,9 +59,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::visitor_info& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("element_info", base_object<dogen::cpp::element_info>(v));
+
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("types", v.types_);
-    ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("namespaces", v.namespaces_);
 }
 

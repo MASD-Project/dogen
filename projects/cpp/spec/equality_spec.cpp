@@ -55,7 +55,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<parent_info_generator>();
     test_equality<property_info_generator>();
     test_equality<registrar_info_generator>();
-    test_equality<string_table_info_generator>();
     test_equality<visitor_info_generator>();
 }
 

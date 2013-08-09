@@ -55,7 +55,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<parent_info_generator>();
     test_swap<property_info_generator>();
     test_swap<registrar_info_generator>();
-    test_swap<string_table_info_generator>();
     test_swap<visitor_info_generator>();
 }
 

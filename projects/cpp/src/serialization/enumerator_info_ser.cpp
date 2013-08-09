@@ -43,8 +43,8 @@ void save(Archive& ar,
     const dogen::cpp::enumerator_info& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("value", v.value_);
     ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("value", v.value_);
 }
 
 template<typename Archive>
@@ -52,8 +52,8 @@ void load(Archive& ar,
     dogen::cpp::enumerator_info& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("value", v.value_);
     ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("value", v.value_);
 }
 
 } }

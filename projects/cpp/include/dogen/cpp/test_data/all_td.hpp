@@ -37,5 +37,4 @@
 #include "dogen/cpp/test_data/project_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
-#include "dogen/cpp/test_data/string_table_info_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"

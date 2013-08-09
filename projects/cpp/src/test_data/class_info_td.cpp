@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/cpp/test_data/class_info_td.hpp"
 #include "dogen/cpp/test_data/class_types_td.hpp"
+#include "dogen/cpp/test_data/element_info_td.hpp"
 #include "dogen/cpp/test_data/parent_info_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
@@ -106,6 +107,7 @@ class_info_generator::class_info_generator() : position_(0) { }
 
 void class_info_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::cpp::element_info_generator::populate(position, v);
     v.name(create_std_string(position + 0));
     v.namespaces(create_std_list_std_string(position + 1));
     v.properties(create_std_list_dogen_cpp_property_info(position + 2));
@@ -116,17 +118,16 @@ populate(const unsigned int position, result_type& v) {
     v.requires_manual_default_constructor(create_bool(position + 7));
     v.parents(create_std_list_dogen_cpp_parent_info(position + 8));
     v.is_parent(create_bool(position + 9));
-    v.documentation(create_std_string(position + 10));
-    v.original_parent_name(create_std_string(position + 11));
-    v.original_parent_name_qualified(create_std_string(position + 12));
-    v.leaves(create_std_list_std_string(position + 13));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 14));
-    v.is_comparable(create_bool(position + 15));
-    v.is_visitable(create_bool(position + 16));
-    v.is_immutable(create_bool(position + 17));
-    v.is_original_parent_visitable(create_bool(position + 18));
-    v.class_type(create_dogen_cpp_class_types(position + 19));
-    v.generation_type(create_dogen_sml_generation_types(position + 20));
+    v.original_parent_name(create_std_string(position + 10));
+    v.original_parent_name_qualified(create_std_string(position + 11));
+    v.leaves(create_std_list_std_string(position + 12));
+    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 13));
+    v.is_comparable(create_bool(position + 14));
+    v.is_visitable(create_bool(position + 15));
+    v.is_immutable(create_bool(position + 16));
+    v.is_original_parent_visitable(create_bool(position + 17));
+    v.class_type(create_dogen_cpp_class_types(position + 18));
+    v.generation_type(create_dogen_sml_generation_types(position + 19));
 }
 
 class_info_generator::result_type

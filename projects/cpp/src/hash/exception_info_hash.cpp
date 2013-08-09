@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/element_info_hash.hpp"
 #include "dogen/cpp/hash/exception_info_hash.hpp"
 
 namespace {
@@ -45,7 +46,8 @@ namespace cpp {
 std::size_t exception_info_hasher::hash(const exception_info&v) {
     std::size_t seed(0);
 
-    combine(seed, v.documentation());
+    combine(seed, dynamic_cast<const dogen::cpp::element_info&>(v));
+
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.namespaces()));
 

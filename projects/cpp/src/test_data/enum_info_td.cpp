@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/element_info_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/enumerator_info_td.hpp"
 
@@ -60,11 +61,11 @@ enum_info_generator::enum_info_generator() : position_(0) { }
 
 void enum_info_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::cpp::element_info_generator::populate(position, v);
     v.name(create_std_string(position + 0));
     v.namespaces(create_std_list_std_string(position + 1));
     v.enumerators(create_std_list_dogen_cpp_enumerator_info(position + 2));
-    v.documentation(create_std_string(position + 3));
-    v.type(create_std_string(position + 4));
+    v.type(create_std_string(position + 3));
 }
 
 enum_info_generator::result_type

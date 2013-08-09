@@ -18,37 +18,97 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/enumerator_info_io.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::enumerator_info>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
 enum_info::enum_info(
+    const std::string& documentation,
     const std::string& name,
     const std::list<std::string>& namespaces,
     const std::list<dogen::cpp::enumerator_info>& enumerators,
-    const std::string& documentation,
     const std::string& type)
-    : name_(name),
+    : dogen::cpp::element_info(documentation),
+      name_(name),
       namespaces_(namespaces),
       enumerators_(enumerators),
-      documentation_(documentation),
       type_(type) { }
 
+void enum_info::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::enum_info\"" << ", "
+      << "\"__parent_0__\": ";
+    element_info::to_stream(s);
+    s << ", "
+      << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
+      << "\"namespaces\": " << namespaces_ << ", "
+      << "\"enumerators\": " << enumerators_ << ", "
+      << "\"type\": " << "\"" << tidy_up_string(type_) << "\""
+      << " }";
+}
+
 void enum_info::swap(enum_info& other) noexcept {
+    element_info::swap(other);
+
     using std::swap;
     swap(name_, other.name_);
     swap(namespaces_, other.namespaces_);
     swap(enumerators_, other.enumerators_);
-    swap(documentation_, other.documentation_);
     swap(type_, other.type_);
 }
 
+bool enum_info::equals(const dogen::cpp::element_info& other) const {
+    const enum_info* const p(dynamic_cast<const enum_info* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool enum_info::operator==(const enum_info& rhs) const {
-    return name_ == rhs.name_ &&
+    return element_info::compare(rhs) &&
+        name_ == rhs.name_ &&
         namespaces_ == rhs.namespaces_ &&
         enumerators_ == rhs.enumerators_ &&
-        documentation_ == rhs.documentation_ &&
         type_ == rhs.type_;
 }
 
@@ -104,22 +164,6 @@ void enum_info::enumerators(const std::list<dogen::cpp::enumerator_info>& v) {
 
 void enum_info::enumerators(const std::list<dogen::cpp::enumerator_info>&& v) {
     enumerators_ = std::move(v);
-}
-
-const std::string& enum_info::documentation() const {
-    return documentation_;
-}
-
-std::string& enum_info::documentation() {
-    return documentation_;
-}
-
-void enum_info::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void enum_info::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const std::string& enum_info::type() const {

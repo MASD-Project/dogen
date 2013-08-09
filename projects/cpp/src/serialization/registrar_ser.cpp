@@ -27,6 +27,12 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include "dogen/config/serialization/registrar_ser.hpp"
+#include "dogen/cpp/serialization/class_info_ser.hpp"
+#include "dogen/cpp/serialization/enum_info_ser.hpp"
+#include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/namespace_info_ser.hpp"
+#include "dogen/cpp/serialization/registrar_info_ser.hpp"
+#include "dogen/cpp/serialization/visitor_info_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -40,6 +46,13 @@ template<typename Archive>
 void register_types(Archive& ar) {
     sml::register_types(ar);
     config::register_types(ar);
+
+    ar.template register_type<dogen::cpp::class_info>();
+    ar.template register_type<dogen::cpp::enum_info>();
+    ar.template register_type<dogen::cpp::exception_info>();
+    ar.template register_type<dogen::cpp::namespace_info>();
+    ar.template register_type<dogen::cpp::registrar_info>();
+    ar.template register_type<dogen::cpp::visitor_info>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

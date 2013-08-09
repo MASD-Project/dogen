@@ -33,6 +33,7 @@
 #include <boost/serialization/vector.hpp>
 #include "dogen/cpp/serialization/class_info_ser.hpp"
 #include "dogen/cpp/serialization/class_types_ser.hpp"
+#include "dogen/cpp/serialization/element_info_ser.hpp"
 #include "dogen/cpp/serialization/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/property_info_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
@@ -42,6 +43,10 @@
 #include "eos/portable_oarchive.hpp"
 #endif
 
+BOOST_CLASS_TRACKING(
+    dogen::cpp::class_info,
+    boost::serialization::track_selectively)
+
 namespace boost {
 namespace serialization {
 
@@ -49,6 +54,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::class_info& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("element_info", base_object<dogen::cpp::element_info>(v));
+
     ar << make_nvp("name", v.name_);
     ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("properties", v.properties_);
@@ -59,7 +66,6 @@ void save(Archive& ar,
     ar << make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar << make_nvp("parents", v.parents_);
     ar << make_nvp("is_parent", v.is_parent_);
-    ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar << make_nvp("leaves", v.leaves_);
@@ -76,6 +82,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::class_info& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("element_info", base_object<dogen::cpp::element_info>(v));
+
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("properties", v.properties_);
@@ -86,7 +94,6 @@ void load(Archive& ar,
     ar >> make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("is_parent", v.is_parent_);
-    ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar >> make_nvp("leaves", v.leaves_);

@@ -19,7 +19,13 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/class_info_td.hpp"
 #include "dogen/cpp/test_data/element_info_td.hpp"
+#include "dogen/cpp/test_data/enum_info_td.hpp"
+#include "dogen/cpp/test_data/exception_info_td.hpp"
+#include "dogen/cpp/test_data/namespace_info_td.hpp"
+#include "dogen/cpp/test_data/registrar_info_td.hpp"
+#include "dogen/cpp/test_data/visitor_info_td.hpp"
 
 namespace {
 
@@ -34,30 +40,26 @@ std::string create_std_string(const unsigned int position) {
 namespace dogen {
 namespace cpp {
 
-element_info_generator::element_info_generator() : position_(0) { }
 
 void element_info_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_std_string(position + 0));
-    v.documentation(create_std_string(position + 1));
+    v.documentation(create_std_string(position + 0));
 }
 
-element_info_generator::result_type
-element_info_generator::create(const unsigned int position) {
-    element_info r;
-    element_info_generator::populate(position, r);
-    return r;
-}
 element_info_generator::result_type*
 element_info_generator::create_ptr(const unsigned int position) {
-    element_info* p = new element_info();
-    element_info_generator::populate(position, *p);
-    return p;
+    if ((position % 5) == 0)
+        return dogen::cpp::enum_info_generator::create_ptr(position);
+    if ((position % 5) == 1)
+        return dogen::cpp::exception_info_generator::create_ptr(position);
+    if ((position % 5) == 2)
+        return dogen::cpp::registrar_info_generator::create_ptr(position);
+    if ((position % 5) == 3)
+        return dogen::cpp::namespace_info_generator::create_ptr(position);
+    if ((position % 5) == 4)
+        return dogen::cpp::visitor_info_generator::create_ptr(position);
+    return dogen::cpp::class_info_generator::create_ptr(position);
 }
 
-element_info_generator::result_type
-element_info_generator::operator()() {
-    return create(position_++);
-}
 
 } }

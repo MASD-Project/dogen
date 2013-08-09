@@ -45,8 +45,8 @@ public:
 public:
     enumerator_info(
         const std::string& name,
-        const std::string& value,
-        const std::string& documentation);
+        const std::string& documentation,
+        const std::string& value);
 
 private:
     template<typename Archive>
@@ -57,13 +57,29 @@ private:
 
 public:
     /**
-     * @brief Name of the enumeration member.
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
      */
     /**@{*/
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammar of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
     /**@}*/
 
     /**
@@ -74,18 +90,6 @@ public:
     std::string& value();
     void value(const std::string& v);
     void value(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Documentation for the enumerator.
-     *
-     * Should be very short as it is used inline.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
     /**@}*/
 
 public:
@@ -100,8 +104,8 @@ public:
 
 private:
     std::string name_;
-    std::string value_;
     std::string documentation_;
+    std::string value_;
 };
 
 } }

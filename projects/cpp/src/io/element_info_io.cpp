@@ -22,23 +22,11 @@
 #include <ostream>
 #include "dogen/cpp/io/element_info_io.hpp"
 
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
 namespace dogen {
 namespace cpp {
 
 std::ostream& operator<<(std::ostream& s, const element_info& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::element_info\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
-      << " }";
+    v.to_stream(s);
     return(s);
 }
 

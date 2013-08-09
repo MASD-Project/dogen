@@ -18,33 +18,77 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/cpp/io/element_info_io.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
 visitor_info::visitor_info(
+    const std::string& documentation,
     const std::string& name,
     const std::list<std::string>& types,
-    const std::string& documentation,
     const std::list<std::string>& namespaces)
-    : name_(name),
+    : dogen::cpp::element_info(documentation),
+      name_(name),
       types_(types),
-      documentation_(documentation),
       namespaces_(namespaces) { }
 
+void visitor_info::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::visitor_info\"" << ", "
+      << "\"__parent_0__\": ";
+    element_info::to_stream(s);
+    s << ", "
+      << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
+      << "\"types\": " << types_ << ", "
+      << "\"namespaces\": " << namespaces_
+      << " }";
+}
+
 void visitor_info::swap(visitor_info& other) noexcept {
+    element_info::swap(other);
+
     using std::swap;
     swap(name_, other.name_);
     swap(types_, other.types_);
-    swap(documentation_, other.documentation_);
     swap(namespaces_, other.namespaces_);
 }
 
+bool visitor_info::equals(const dogen::cpp::element_info& other) const {
+    const visitor_info* const p(dynamic_cast<const visitor_info* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool visitor_info::operator==(const visitor_info& rhs) const {
-    return name_ == rhs.name_ &&
+    return element_info::compare(rhs) &&
+        name_ == rhs.name_ &&
         types_ == rhs.types_ &&
-        documentation_ == rhs.documentation_ &&
         namespaces_ == rhs.namespaces_;
 }
 
@@ -84,22 +128,6 @@ void visitor_info::types(const std::list<std::string>& v) {
 
 void visitor_info::types(const std::list<std::string>&& v) {
     types_ = std::move(v);
-}
-
-const std::string& visitor_info::documentation() const {
-    return documentation_;
-}
-
-std::string& visitor_info::documentation() {
-    return documentation_;
-}
-
-void visitor_info::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void visitor_info::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const std::list<std::string>& visitor_info::namespaces() const {

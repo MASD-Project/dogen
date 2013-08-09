@@ -26,9 +26,11 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <list>
 #include <string>
 #include "dogen/cpp/serialization/namespace_info_fwd_ser.hpp"
+#include "dogen/cpp/types/element_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,17 +38,18 @@ namespace cpp {
 /**
  * @brief Represents a C++ namespace.
  */
-class namespace_info final {
+class namespace_info final : public dogen::cpp::element_info {
 public:
     namespace_info() = default;
     namespace_info(const namespace_info&) = default;
     namespace_info(namespace_info&&) = default;
-    ~namespace_info() = default;
+
+    virtual ~namespace_info() noexcept { }
 
 public:
     namespace_info(
-        const std::list<std::string>& namespaces,
-        const std::string& documentation);
+        const std::string& documentation,
+        const std::list<std::string>& namespaces);
 
 private:
     template<typename Archive>
@@ -54,6 +57,9 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, namespace_info& v, unsigned int version);
+
+public:
+    void to_stream(std::ostream& s) const override;
 
 public:
     /**
@@ -66,16 +72,6 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
-    /**
-     * @brief Documentation for the target namespace.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const namespace_info& rhs) const;
     bool operator!=(const namespace_info& rhs) const {
@@ -83,12 +79,14 @@ public:
     }
 
 public:
+    bool equals(const dogen::cpp::element_info& other) const override;
+
+public:
     void swap(namespace_info& other) noexcept;
     namespace_info& operator=(namespace_info other);
 
 private:
     std::list<std::string> namespaces_;
-    std::string documentation_;
 };
 
 } }

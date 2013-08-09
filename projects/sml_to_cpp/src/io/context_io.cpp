@@ -24,7 +24,6 @@
 #include "dogen/cpp/io/exception_info_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
-#include "dogen/cpp/io/string_table_info_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml_to_cpp/io/context_io.hpp"
@@ -156,24 +155,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace sml_to_cpp {
 
@@ -186,8 +167,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"registrars\": " << v.registrars() << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
-      << "\"visitors\": " << v.visitors() << ", "
-      << "\"string_tables\": " << v.string_tables()
+      << "\"visitors\": " << v.visitors()
       << " }";
     return(s);
 }

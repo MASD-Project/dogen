@@ -50,8 +50,8 @@ public:
 public:
     property_info(
         const std::string& name,
-        const dogen::cpp::nested_type_info& type,
         const std::string& documentation,
+        const dogen::cpp::nested_type_info& type,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_immutable,
         const bool is_fluent);
@@ -65,13 +65,29 @@ private:
 
 public:
     /**
-     * @brief Name of the property.
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
      */
     /**@{*/
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammar of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
     /**@}*/
 
     /**
@@ -82,16 +98,6 @@ public:
     dogen::cpp::nested_type_info& type();
     void type(const dogen::cpp::nested_type_info& v);
     void type(const dogen::cpp::nested_type_info&& v);
-    /**@}*/
-
-    /**
-     * @brief Documentation for the property
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
     /**@}*/
 
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
@@ -127,8 +133,8 @@ public:
 
 private:
     std::string name_;
-    dogen::cpp::nested_type_info type_;
     std::string documentation_;
+    dogen::cpp::nested_type_info type_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     bool is_immutable_;
     bool is_fluent_;

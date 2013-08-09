@@ -26,9 +26,11 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <list>
 #include <string>
 #include "dogen/cpp/serialization/exception_info_fwd_ser.hpp"
+#include "dogen/cpp/types/element_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,12 +38,13 @@ namespace cpp {
 /**
  * @brief Represents a C++ exception.
  */
-class exception_info final {
+class exception_info final : public dogen::cpp::element_info {
 public:
     exception_info() = default;
     exception_info(const exception_info&) = default;
     exception_info(exception_info&&) = default;
-    ~exception_info() = default;
+
+    virtual ~exception_info() noexcept { }
 
 public:
     exception_info(
@@ -57,22 +60,13 @@ private:
     friend void boost::serialization::load(Archive& ar, exception_info& v, unsigned int version);
 
 public:
-    /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
-     * for Java, etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
+    void to_stream(std::ostream& s) const override;
 
+public:
     /**
-     * @brief Name of the exception.
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
      */
     /**@{*/
     const std::string& name() const;
@@ -98,11 +92,13 @@ public:
     }
 
 public:
+    bool equals(const dogen::cpp::element_info& other) const override;
+
+public:
     void swap(exception_info& other) noexcept;
     exception_info& operator=(exception_info other);
 
 private:
-    std::string documentation_;
     std::string name_;
     std::list<std::string> namespaces_;
 };

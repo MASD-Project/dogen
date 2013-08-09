@@ -26,12 +26,14 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <list>
 #include <string>
 #include <utility>
 #include <vector>
 #include "dogen/cpp/serialization/class_info_fwd_ser.hpp"
 #include "dogen/cpp/types/class_types.hpp"
+#include "dogen/cpp/types/element_info.hpp"
 #include "dogen/cpp/types/parent_info.hpp"
 #include "dogen/cpp/types/property_info.hpp"
 #include "dogen/sml/types/generation_types.hpp"
@@ -42,17 +44,19 @@ namespace cpp {
 /**
  * @brief Represents a C++ class.
  */
-class class_info final {
+class class_info final : public dogen::cpp::element_info {
 public:
     class_info(const class_info&) = default;
     class_info(class_info&&) = default;
-    ~class_info() = default;
 
 public:
     class_info();
 
+    virtual ~class_info() noexcept { }
+
 public:
     class_info(
+        const std::string& documentation,
         const std::string& name,
         const std::list<std::string>& namespaces,
         const std::list<dogen::cpp::property_info>& properties,
@@ -63,7 +67,6 @@ public:
         const bool requires_manual_default_constructor,
         const std::list<dogen::cpp::parent_info>& parents,
         const bool is_parent,
-        const std::string& documentation,
         const std::string& original_parent_name,
         const std::string& original_parent_name_qualified,
         const std::list<std::string>& leaves,
@@ -83,8 +86,13 @@ private:
     friend void boost::serialization::load(Archive& ar, class_info& v, unsigned int version);
 
 public:
+    void to_stream(std::ostream& s) const override;
+
+public:
     /**
-     * @brief Name of the class.
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
      */
     /**@{*/
     const std::string& name() const;
@@ -183,16 +191,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Documentation for the property
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Parent at the root of a class hierarchy, if any.
      */
     /**@{*/
@@ -283,6 +281,9 @@ public:
     }
 
 public:
+    bool equals(const dogen::cpp::element_info& other) const override;
+
+public:
     void swap(class_info& other) noexcept;
     class_info& operator=(class_info other);
 
@@ -297,7 +298,6 @@ private:
     bool requires_manual_default_constructor_;
     std::list<dogen::cpp::parent_info> parents_;
     bool is_parent_;
-    std::string documentation_;
     std::string original_parent_name_;
     std::string original_parent_name_qualified_;
     std::list<std::string> leaves_;

@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/element_info_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 
 namespace {
@@ -46,8 +47,8 @@ namespace_info_generator::namespace_info_generator() : position_(0) { }
 
 void namespace_info_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::cpp::element_info_generator::populate(position, v);
     v.namespaces(create_std_list_std_string(position + 0));
-    v.documentation(create_std_string(position + 1));
 }
 
 namespace_info_generator::result_type

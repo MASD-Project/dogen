@@ -32,7 +32,6 @@
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
-#include "dogen/cpp/types/string_table_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -60,8 +59,7 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
-        const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors,
-        const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& string_tables);
+        const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors);
 
 private:
     template<typename Archive>
@@ -141,16 +139,6 @@ public:
     void visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>&& v);
     /**@}*/
 
-    /**
-     * @brief All C++ string tables.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& string_tables() const;
-    std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& string_tables();
-    void string_tables(const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& v);
-    void string_tables(const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>&& v);
-    /**@}*/
-
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -169,7 +157,6 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> registrars_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info> namespaces_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> visitors_;
-    std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info> string_tables_;
 };
 
 } }

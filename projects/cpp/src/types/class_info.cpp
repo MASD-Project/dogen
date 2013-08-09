@@ -18,7 +18,92 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/cpp/io/class_types_io.hpp"
+#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/parent_info_io.hpp"
+#include "dogen/cpp/io/property_info_io.hpp"
 #include "dogen/cpp/types/class_info.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::property_info>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::parent_info>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -37,6 +122,7 @@ class_info::class_info()
       generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
 
 class_info::class_info(
+    const std::string& documentation,
     const std::string& name,
     const std::list<std::string>& namespaces,
     const std::list<dogen::cpp::property_info>& properties,
@@ -47,7 +133,6 @@ class_info::class_info(
     const bool requires_manual_default_constructor,
     const std::list<dogen::cpp::parent_info>& parents,
     const bool is_parent,
-    const std::string& documentation,
     const std::string& original_parent_name,
     const std::string& original_parent_name_qualified,
     const std::list<std::string>& leaves,
@@ -58,7 +143,8 @@ class_info::class_info(
     const bool is_original_parent_visitable,
     const dogen::cpp::class_types& class_type,
     const dogen::sml::generation_types& generation_type)
-    : name_(name),
+    : dogen::cpp::element_info(documentation),
+      name_(name),
       namespaces_(namespaces),
       properties_(properties),
       all_properties_(all_properties),
@@ -68,7 +154,6 @@ class_info::class_info(
       requires_manual_default_constructor_(requires_manual_default_constructor),
       parents_(parents),
       is_parent_(is_parent),
-      documentation_(documentation),
       original_parent_name_(original_parent_name),
       original_parent_name_qualified_(original_parent_name_qualified),
       leaves_(leaves),
@@ -80,7 +165,44 @@ class_info::class_info(
       class_type_(class_type),
       generation_type_(generation_type) { }
 
+void class_info::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::class_info\"" << ", "
+      << "\"__parent_0__\": ";
+    element_info::to_stream(s);
+    s << ", "
+      << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
+      << "\"namespaces\": " << namespaces_ << ", "
+      << "\"properties\": " << properties_ << ", "
+      << "\"all_properties\": " << all_properties_ << ", "
+      << "\"has_primitive_properties\": " << has_primitive_properties_ << ", "
+      << "\"requires_stream_manipulators\": " << requires_stream_manipulators_ << ", "
+      << "\"requires_manual_move_constructor\": " << requires_manual_move_constructor_ << ", "
+      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
+      << "\"parents\": " << parents_ << ", "
+      << "\"is_parent\": " << is_parent_ << ", "
+      << "\"original_parent_name\": " << "\"" << tidy_up_string(original_parent_name_) << "\"" << ", "
+      << "\"original_parent_name_qualified\": " << "\"" << tidy_up_string(original_parent_name_qualified_) << "\"" << ", "
+      << "\"leaves\": " << leaves_ << ", "
+      << "\"implementation_specific_parameters\": " << implementation_specific_parameters_ << ", "
+      << "\"is_comparable\": " << is_comparable_ << ", "
+      << "\"is_visitable\": " << is_visitable_ << ", "
+      << "\"is_immutable\": " << is_immutable_ << ", "
+      << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
+      << "\"class_type\": " << class_type_ << ", "
+      << "\"generation_type\": " << generation_type_
+      << " }";
+}
+
 void class_info::swap(class_info& other) noexcept {
+    element_info::swap(other);
+
     using std::swap;
     swap(name_, other.name_);
     swap(namespaces_, other.namespaces_);
@@ -92,7 +214,6 @@ void class_info::swap(class_info& other) noexcept {
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
     swap(parents_, other.parents_);
     swap(is_parent_, other.is_parent_);
-    swap(documentation_, other.documentation_);
     swap(original_parent_name_, other.original_parent_name_);
     swap(original_parent_name_qualified_, other.original_parent_name_qualified_);
     swap(leaves_, other.leaves_);
@@ -105,8 +226,15 @@ void class_info::swap(class_info& other) noexcept {
     swap(generation_type_, other.generation_type_);
 }
 
+bool class_info::equals(const dogen::cpp::element_info& other) const {
+    const class_info* const p(dynamic_cast<const class_info* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool class_info::operator==(const class_info& rhs) const {
-    return name_ == rhs.name_ &&
+    return element_info::compare(rhs) &&
+        name_ == rhs.name_ &&
         namespaces_ == rhs.namespaces_ &&
         properties_ == rhs.properties_ &&
         all_properties_ == rhs.all_properties_ &&
@@ -116,7 +244,6 @@ bool class_info::operator==(const class_info& rhs) const {
         requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
         parents_ == rhs.parents_ &&
         is_parent_ == rhs.is_parent_ &&
-        documentation_ == rhs.documentation_ &&
         original_parent_name_ == rhs.original_parent_name_ &&
         original_parent_name_qualified_ == rhs.original_parent_name_qualified_ &&
         leaves_ == rhs.leaves_ &&
@@ -253,22 +380,6 @@ bool class_info::is_parent() const {
 
 void class_info::is_parent(const bool v) {
     is_parent_ = v;
-}
-
-const std::string& class_info::documentation() const {
-    return documentation_;
-}
-
-std::string& class_info::documentation() {
-    return documentation_;
-}
-
-void class_info::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void class_info::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const std::string& class_info::original_parent_name() const {

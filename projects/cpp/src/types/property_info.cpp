@@ -29,14 +29,14 @@ property_info::property_info()
 
 property_info::property_info(
     const std::string& name,
-    const dogen::cpp::nested_type_info& type,
     const std::string& documentation,
+    const dogen::cpp::nested_type_info& type,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const bool is_immutable,
     const bool is_fluent)
     : name_(name),
-      type_(type),
       documentation_(documentation),
+      type_(type),
       implementation_specific_parameters_(implementation_specific_parameters),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent) { }
@@ -44,8 +44,8 @@ property_info::property_info(
 void property_info::swap(property_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(type_, other.type_);
     swap(documentation_, other.documentation_);
+    swap(type_, other.type_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
@@ -53,8 +53,8 @@ void property_info::swap(property_info& other) noexcept {
 
 bool property_info::operator==(const property_info& rhs) const {
     return name_ == rhs.name_ &&
-        type_ == rhs.type_ &&
         documentation_ == rhs.documentation_ &&
+        type_ == rhs.type_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_;
@@ -82,22 +82,6 @@ void property_info::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const dogen::cpp::nested_type_info& property_info::type() const {
-    return type_;
-}
-
-dogen::cpp::nested_type_info& property_info::type() {
-    return type_;
-}
-
-void property_info::type(const dogen::cpp::nested_type_info& v) {
-    type_ = v;
-}
-
-void property_info::type(const dogen::cpp::nested_type_info&& v) {
-    type_ = std::move(v);
-}
-
 const std::string& property_info::documentation() const {
     return documentation_;
 }
@@ -112,6 +96,22 @@ void property_info::documentation(const std::string& v) {
 
 void property_info::documentation(const std::string&& v) {
     documentation_ = std::move(v);
+}
+
+const dogen::cpp::nested_type_info& property_info::type() const {
+    return type_;
+}
+
+dogen::cpp::nested_type_info& property_info::type() {
+    return type_;
+}
+
+void property_info::type(const dogen::cpp::nested_type_info& v) {
+    type_ = v;
+}
+
+void property_info::type(const dogen::cpp::nested_type_info&& v) {
+    type_ = std::move(v);
 }
 
 const std::vector<std::pair<std::string, std::string> >& property_info::implementation_specific_parameters() const {

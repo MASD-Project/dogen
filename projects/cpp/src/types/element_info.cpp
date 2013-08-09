@@ -18,48 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <ostream>
 #include "dogen/cpp/types/element_info.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace cpp {
 
-element_info::element_info(
-    const std::string& name,
-    const std::string& documentation)
-    : name_(name),
-      documentation_(documentation) { }
+element_info::element_info(const std::string& documentation)
+    : documentation_(documentation) { }
+
+void element_info::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::element_info\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\""
+      << " }";
+}
 
 void element_info::swap(element_info& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
     swap(documentation_, other.documentation_);
 }
 
-bool element_info::operator==(const element_info& rhs) const {
-    return name_ == rhs.name_ &&
-        documentation_ == rhs.documentation_;
-}
-
-element_info& element_info::operator=(element_info other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const std::string& element_info::name() const {
-    return name_;
-}
-
-std::string& element_info::name() {
-    return name_;
-}
-
-void element_info::name(const std::string& v) {
-    name_ = v;
-}
-
-void element_info::name(const std::string&& v) {
-    name_ = std::move(v);
+bool element_info::compare(const element_info& rhs) const {
+    return documentation_ == rhs.documentation_;
 }
 
 const std::string& element_info::documentation() const {

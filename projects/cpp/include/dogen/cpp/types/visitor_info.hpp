@@ -26,9 +26,11 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <list>
 #include <string>
 #include "dogen/cpp/serialization/visitor_info_fwd_ser.hpp"
+#include "dogen/cpp/types/element_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,18 +38,19 @@ namespace cpp {
 /**
  * @brief Represents a C++ class modeling the visitor pattern.
  */
-class visitor_info final {
+class visitor_info final : public dogen::cpp::element_info {
 public:
     visitor_info() = default;
     visitor_info(const visitor_info&) = default;
     visitor_info(visitor_info&&) = default;
-    ~visitor_info() = default;
+
+    virtual ~visitor_info() noexcept { }
 
 public:
     visitor_info(
+        const std::string& documentation,
         const std::string& name,
         const std::list<std::string>& types,
-        const std::string& documentation,
         const std::list<std::string>& namespaces);
 
 private:
@@ -58,8 +61,13 @@ private:
     friend void boost::serialization::load(Archive& ar, visitor_info& v, unsigned int version);
 
 public:
+    void to_stream(std::ostream& s) const override;
+
+public:
     /**
-     * @brief Name of the visitor
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
      */
     /**@{*/
     const std::string& name() const;
@@ -79,16 +87,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Documentation for the type.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Namespaces to which the type belongs to.
      */
     /**@{*/
@@ -105,13 +103,15 @@ public:
     }
 
 public:
+    bool equals(const dogen::cpp::element_info& other) const override;
+
+public:
     void swap(visitor_info& other) noexcept;
     visitor_info& operator=(visitor_info other);
 
 private:
     std::string name_;
     std::list<std::string> types_;
-    std::string documentation_;
     std::list<std::string> namespaces_;
 };
 

@@ -32,7 +32,6 @@
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
-#include "dogen/cpp/serialization/string_table_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/context_ser.hpp"
@@ -58,7 +57,6 @@ void save(Archive& ar,
     ar << make_nvp("registrars", v.registrars_);
     ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("visitors", v.visitors_);
-    ar << make_nvp("string_tables", v.string_tables_);
 }
 
 template<typename Archive>
@@ -72,7 +70,6 @@ void load(Archive& ar,
     ar >> make_nvp("registrars", v.registrars_);
     ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("visitors", v.visitors_);
-    ar >> make_nvp("string_tables", v.string_tables_);
 }
 
 } }

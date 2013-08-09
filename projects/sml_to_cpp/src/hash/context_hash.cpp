@@ -23,7 +23,6 @@
 #include "dogen/cpp/hash/exception_info_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
-#include "dogen/cpp/hash/string_table_info_hash.hpp"
 #include "dogen/cpp/hash/visitor_info_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml_to_cpp/hash/context_hash.hpp"
@@ -101,15 +100,6 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_string_table_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -125,7 +115,6 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(v.registrars()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(v.namespaces()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(v.visitors()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_string_table_info(v.string_tables()));
 
     return seed;
 }

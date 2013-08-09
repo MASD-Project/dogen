@@ -26,9 +26,11 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <list>
 #include <string>
 #include "dogen/cpp/serialization/registrar_info_fwd_ser.hpp"
+#include "dogen/cpp/types/element_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,15 +38,17 @@ namespace cpp {
 /**
  * @brief Represents a serialisation registrar for boost serialisation.
  */
-class registrar_info final {
+class registrar_info final : public dogen::cpp::element_info {
 public:
     registrar_info() = default;
     registrar_info(const registrar_info&) = default;
     registrar_info(registrar_info&&) = default;
-    ~registrar_info() = default;
+
+    virtual ~registrar_info() noexcept { }
 
 public:
     registrar_info(
+        const std::string& documentation,
         const std::list<std::string>& namespaces,
         const std::list<std::string>& leaves,
         const std::list<std::string>& model_dependencies);
@@ -55,6 +59,9 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, registrar_info& v, unsigned int version);
+
+public:
+    void to_stream(std::ostream& s) const override;
 
 public:
     /**
@@ -92,6 +99,9 @@ public:
     bool operator!=(const registrar_info& rhs) const {
         return !this->operator==(rhs);
     }
+
+public:
+    bool equals(const dogen::cpp::element_info& other) const override;
 
 public:
     void swap(registrar_info& other) noexcept;

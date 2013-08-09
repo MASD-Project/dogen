@@ -20,40 +20,14 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/cpp/io/element_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace cpp {
 
 std::ostream& operator<<(std::ostream& s, const registrar_info& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::registrar_info\"" << ", "
-      << "\"namespaces\": " << v.namespaces() << ", "
-      << "\"leaves\": " << v.leaves() << ", "
-      << "\"model_dependencies\": " << v.model_dependencies()
-      << " }";
+    v.to_stream(s);
     return(s);
 }
 

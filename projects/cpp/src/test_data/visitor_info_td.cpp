@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/element_info_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
 
 namespace {
@@ -46,10 +47,10 @@ visitor_info_generator::visitor_info_generator() : position_(0) { }
 
 void visitor_info_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::cpp::element_info_generator::populate(position, v);
     v.name(create_std_string(position + 0));
     v.types(create_std_list_std_string(position + 1));
-    v.documentation(create_std_string(position + 2));
-    v.namespaces(create_std_list_std_string(position + 3));
+    v.namespaces(create_std_list_std_string(position + 2));
 }
 
 visitor_info_generator::result_type
