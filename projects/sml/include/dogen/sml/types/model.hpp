@@ -106,7 +106,7 @@ public:
     /**
      * @brief Code comments.
      *
-     * These are expected to follow the grammer of the comment processing tools
+     * These are expected to follow the grammar of the comment processing tools
      * of the programming language in question, e.g. Doxygen for C++, JavaDoc
      * for Java, etc.
      */

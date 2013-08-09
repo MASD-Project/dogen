@@ -620,7 +620,7 @@ representation of the primitive type.#</dia:string>
         <dia:point val="-92,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3349999999999991"/>
+        <dia:real val="8.3350000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2264,7 +2264,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2638,7 +2638,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="3,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="31.684999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -3327,7 +3327,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="-32,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0924999999999994"/>
+        <dia:real val="7.0925000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3863,7 +3863,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="75,117"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.6225000000000005"/>
+        <dia:real val="6.6224999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -5959,7 +5959,7 @@ all types in the merged model.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Code comments.
 
-These are expected to follow the grammer of the comment processing tools
+These are expected to follow the grammar of the comment processing tools
 of the programming language in question, e.g. Doxygen for C++, JavaDoc
 for Java, etc.#</dia:string>
           </dia:attribute>
@@ -5991,7 +5991,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-72,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -10559,7 +10559,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-110.82,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-113.447,40.35;-110.07,51.6"/>
+        <dia:rectangle val="-113.447,40.35;-110.07,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
