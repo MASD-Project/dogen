@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/exception_info_hash.hpp"
+#include "dogen/cpp/hash/element_info_hash.hpp"
 
 namespace {
 
@@ -29,25 +29,16 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace cpp {
 
-std::size_t exception_info_hasher::hash(const exception_info&v) {
+std::size_t element_info_hasher::hash(const element_info&v) {
     std::size_t seed(0);
 
-    combine(seed, v.documentation());
     combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.namespaces()));
+    combine(seed, v.documentation());
 
     return seed;
 }

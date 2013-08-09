@@ -56,6 +56,7 @@ public:
 
 public:
     file_info(
+        const std::string& documentation,
         const dogen::cpp::content_descriptor& descriptor,
         const boost::optional<dogen::cpp::class_info>& class_info,
         const boost::optional<dogen::cpp::enum_info>& enum_info,
@@ -77,6 +78,20 @@ private:
     friend void boost::serialization::load(Archive& ar, file_info& v, unsigned int version);
 
 public:
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammar of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief Description of the file's content.
      */
@@ -208,6 +223,7 @@ public:
     file_info& operator=(file_info other);
 
 private:
+    std::string documentation_;
     dogen::cpp::content_descriptor descriptor_;
     boost::optional<dogen::cpp::class_info> class_info_;
     boost::optional<dogen::cpp::enum_info> enum_info_;

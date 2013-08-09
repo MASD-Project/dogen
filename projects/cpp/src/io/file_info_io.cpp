@@ -29,6 +29,14 @@
 #include "dogen/cpp/io/registrar_info_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
 
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::class_info>& v) {
@@ -89,14 +97,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
 
 }
 
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
@@ -147,6 +147,7 @@ namespace cpp {
 std::ostream& operator<<(std::ostream& s, const file_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::file_info\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"descriptor\": " << v.descriptor() << ", "
       << "\"class_info\": " << v.class_info() << ", "
       << "\"enum_info\": " << v.enum_info() << ", "

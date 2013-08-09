@@ -18,38 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/exception_info_hash.hpp"
+#ifndef DOGEN_CPP_IO_ELEMENT_INFO_IO_HPP
+#define DOGEN_CPP_IO_ELEMENT_INFO_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include <iosfwd>
+#include "dogen/cpp/types/element_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::size_t exception_info_hasher::hash(const exception_info&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.documentation());
-    combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.namespaces()));
-
-    return seed;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::element_info& v);
 
 } }
+
+#endif

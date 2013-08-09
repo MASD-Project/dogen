@@ -18,38 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/exception_info_hash.hpp"
+#ifndef DOGEN_CPP_HASH_ELEMENT_INFO_HASH_HPP
+#define DOGEN_CPP_HASH_ELEMENT_INFO_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include <functional>
+#include "dogen/cpp/types/element_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::size_t exception_info_hasher::hash(const exception_info&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.documentation());
-    combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.namespaces()));
-
-    return seed;
-}
+struct element_info_hasher {
+public:
+    static std::size_t hash(const element_info& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::cpp::element_info> {
+public:
+    size_t operator()(const dogen::cpp::element_info& v) const {
+        return dogen::cpp::element_info_hasher::hash(v);
+    }
+};
+
+}
+#endif

@@ -18,38 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/exception_info_hash.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_ELEMENT_INFO_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_ELEMENT_INFO_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/element_info.hpp"
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::element_info)
+namespace boost {
+namespace serialization {
 
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::element_info& v, unsigned int version);
 
-namespace dogen {
-namespace cpp {
-
-std::size_t exception_info_hasher::hash(const exception_info&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.documentation());
-    combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.namespaces()));
-
-    return seed;
-}
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::element_info& v, unsigned int version);
 
 } }
+
+#endif

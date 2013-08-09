@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 32.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-08 Thu 20:36]
+Clock summary at [2013-08-09 Fri 18:43]
 
 | Headline                                                              | Time   |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                          | *6:59* |      |      |
+| *Total time*                                                          | *7:15* |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                       |        | 6:59 |      |
+| Development Stories Implemented                                       |        | 7:15 |      |
 | IMPLEMENTATION Release notes and backlog grooming                     |        |      | 0:28 |
 | COMPLETED Split transformation code from C++ model into its own model |        |      | 2:57 |
 | COMPLETED Create a formatting workflow in C++ formatters model        |        |      | 2:08 |
-| IMPLEMENTATION Tidy-up all C++ models                                 |        |      | 1:26 |
+| IMPLEMENTATION Tidy-up all C++ models                                 |        |      | 1:42 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -60,6 +60,7 @@ would takes a lot of classes such as locator, includer, etc;
     CLOCK: [2013-08-06 Tue 22:59]--[2013-08-06 Tue 23:39] =>  0:40
 
 *** IMPLEMENTATION Tidy-up all C++ models                             :story:
+    CLOCK: [2013-08-09 Fri 18:27]--[2013-08-09 Fri 18:43] =>  0:16
     CLOCK: [2013-08-08 Thu 19:10]--[2013-08-08 Thu 20:36] =>  1:26
 
 - add comments

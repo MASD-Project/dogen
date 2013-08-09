@@ -30,6 +30,12 @@
 
 namespace {
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
 dogen::cpp::content_descriptor
 create_dogen_cpp_content_descriptor(const unsigned int position) {
     return dogen::cpp::content_descriptor_generator::create(position);
@@ -83,12 +89,6 @@ create_boost_optional_dogen_cpp_registrar_info(unsigned int position) {
     return r;
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
 std::list<std::string> create_std_list_std_string(unsigned int position) {
     std::list<std::string> r;
     for (unsigned int i(0); i < 10; ++i) {
@@ -137,18 +137,19 @@ file_info_generator::file_info_generator() : position_(0) { }
 
 void file_info_generator::
 populate(const unsigned int position, result_type& v) {
-    v.descriptor(create_dogen_cpp_content_descriptor(position + 0));
-    v.class_info(create_boost_optional_dogen_cpp_class_info(position + 1));
-    v.enum_info(create_boost_optional_dogen_cpp_enum_info(position + 2));
-    v.exception_info(create_boost_optional_dogen_cpp_exception_info(position + 3));
-    v.registrar_info(create_boost_optional_dogen_cpp_registrar_info(position + 4));
-    v.header_guard(create_std_string(position + 5));
-    v.system_includes(create_std_list_std_string(position + 6));
-    v.user_includes(create_std_list_std_string(position + 7));
-    v.file_path(create_boost_filesystem_path(position + 8));
-    v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 9));
-    v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 10));
-    v.relative_path(create_boost_filesystem_path(position + 11));
+    v.documentation(create_std_string(position + 0));
+    v.descriptor(create_dogen_cpp_content_descriptor(position + 1));
+    v.class_info(create_boost_optional_dogen_cpp_class_info(position + 2));
+    v.enum_info(create_boost_optional_dogen_cpp_enum_info(position + 3));
+    v.exception_info(create_boost_optional_dogen_cpp_exception_info(position + 4));
+    v.registrar_info(create_boost_optional_dogen_cpp_registrar_info(position + 5));
+    v.header_guard(create_std_string(position + 6));
+    v.system_includes(create_std_list_std_string(position + 7));
+    v.user_includes(create_std_list_std_string(position + 8));
+    v.file_path(create_boost_filesystem_path(position + 9));
+    v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 10));
+    v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 11));
+    v.relative_path(create_boost_filesystem_path(position + 12));
 }
 
 file_info_generator::result_type

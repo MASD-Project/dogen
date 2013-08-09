@@ -26,10 +26,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/element_info_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -41,20 +40,18 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::cpp::exception_info& v,
+    const dogen::cpp::element_info& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("namespaces", v.namespaces_);
+    ar << make_nvp("documentation", v.documentation_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::cpp::exception_info& v,
+    dogen::cpp::element_info& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("namespaces", v.namespaces_);
+    ar >> make_nvp("documentation", v.documentation_);
 }
 
 } }
@@ -62,21 +59,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::exception_info& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::cpp::exception_info& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::element_info& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::cpp::element_info& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::cpp::exception_info& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::cpp::exception_info& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::cpp::element_info& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::cpp::element_info& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::cpp::exception_info& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::cpp::exception_info& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::cpp::element_info& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::cpp::element_info& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::cpp::exception_info& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::cpp::exception_info& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::cpp::element_info& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::cpp::element_info& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::cpp::exception_info& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::cpp::exception_info& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::cpp::element_info& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::cpp::element_info& v, unsigned int version);
 #endif
 
 } }

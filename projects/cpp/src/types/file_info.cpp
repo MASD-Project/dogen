@@ -24,7 +24,8 @@ namespace dogen {
 namespace cpp {
 
 file_info::file_info(file_info&& rhs)
-    : descriptor_(std::move(rhs.descriptor_)),
+    : documentation_(std::move(rhs.documentation_)),
+      descriptor_(std::move(rhs.descriptor_)),
       class_info_(std::move(rhs.class_info_)),
       enum_info_(std::move(rhs.enum_info_)),
       exception_info_(std::move(rhs.exception_info_)),
@@ -38,6 +39,7 @@ file_info::file_info(file_info&& rhs)
       relative_path_(std::move(rhs.relative_path_)) { }
 
 file_info::file_info(
+    const std::string& documentation,
     const dogen::cpp::content_descriptor& descriptor,
     const boost::optional<dogen::cpp::class_info>& class_info,
     const boost::optional<dogen::cpp::enum_info>& enum_info,
@@ -50,7 +52,8 @@ file_info::file_info(
     const boost::optional<dogen::cpp::namespace_info>& namespace_info,
     const boost::optional<dogen::cpp::visitor_info>& visitor_info,
     const boost::filesystem::path& relative_path)
-    : descriptor_(descriptor),
+    : documentation_(documentation),
+      descriptor_(descriptor),
       class_info_(class_info),
       enum_info_(enum_info),
       exception_info_(exception_info),
@@ -65,6 +68,7 @@ file_info::file_info(
 
 void file_info::swap(file_info& other) noexcept {
     using std::swap;
+    swap(documentation_, other.documentation_);
     swap(descriptor_, other.descriptor_);
     swap(class_info_, other.class_info_);
     swap(enum_info_, other.enum_info_);
@@ -80,7 +84,8 @@ void file_info::swap(file_info& other) noexcept {
 }
 
 bool file_info::operator==(const file_info& rhs) const {
-    return descriptor_ == rhs.descriptor_ &&
+    return documentation_ == rhs.documentation_ &&
+        descriptor_ == rhs.descriptor_ &&
         class_info_ == rhs.class_info_ &&
         enum_info_ == rhs.enum_info_ &&
         exception_info_ == rhs.exception_info_ &&
@@ -98,6 +103,22 @@ file_info& file_info::operator=(file_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& file_info::documentation() const {
+    return documentation_;
+}
+
+std::string& file_info::documentation() {
+    return documentation_;
+}
+
+void file_info::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void file_info::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
 }
 
 const dogen::cpp::content_descriptor& file_info::descriptor() const {

@@ -45,9 +45,9 @@ public:
 
 public:
     exception_info(
+        const std::string& documentation,
         const std::string& name,
-        const std::list<std::string>& namespaces,
-        const std::string& documentation);
+        const std::list<std::string>& namespaces);
 
 private:
     template<typename Archive>
@@ -57,6 +57,20 @@ private:
     friend void boost::serialization::load(Archive& ar, exception_info& v, unsigned int version);
 
 public:
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammar of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief Name of the exception.
      */
@@ -77,16 +91,6 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
-    /**
-     * @brief Doxygen documentation.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const exception_info& rhs) const;
     bool operator!=(const exception_info& rhs) const {
@@ -98,9 +102,9 @@ public:
     exception_info& operator=(exception_info other);
 
 private:
+    std::string documentation_;
     std::string name_;
     std::list<std::string> namespaces_;
-    std::string documentation_;
 };
 
 } }

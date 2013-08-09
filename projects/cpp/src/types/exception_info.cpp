@@ -24,30 +24,46 @@ namespace dogen {
 namespace cpp {
 
 exception_info::exception_info(
+    const std::string& documentation,
     const std::string& name,
-    const std::list<std::string>& namespaces,
-    const std::string& documentation)
-    : name_(name),
-      namespaces_(namespaces),
-      documentation_(documentation) { }
+    const std::list<std::string>& namespaces)
+    : documentation_(documentation),
+      name_(name),
+      namespaces_(namespaces) { }
 
 void exception_info::swap(exception_info& other) noexcept {
     using std::swap;
+    swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(namespaces_, other.namespaces_);
-    swap(documentation_, other.documentation_);
 }
 
 bool exception_info::operator==(const exception_info& rhs) const {
-    return name_ == rhs.name_ &&
-        namespaces_ == rhs.namespaces_ &&
-        documentation_ == rhs.documentation_;
+    return documentation_ == rhs.documentation_ &&
+        name_ == rhs.name_ &&
+        namespaces_ == rhs.namespaces_;
 }
 
 exception_info& exception_info::operator=(exception_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& exception_info::documentation() const {
+    return documentation_;
+}
+
+std::string& exception_info::documentation() {
+    return documentation_;
+}
+
+void exception_info::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void exception_info::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
 }
 
 const std::string& exception_info::name() const {
@@ -80,22 +96,6 @@ void exception_info::namespaces(const std::list<std::string>& v) {
 
 void exception_info::namespaces(const std::list<std::string>&& v) {
     namespaces_ = std::move(v);
-}
-
-const std::string& exception_info::documentation() const {
-    return documentation_;
-}
-
-std::string& exception_info::documentation() {
-    return documentation_;
-}
-
-void exception_info::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void exception_info::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 } }

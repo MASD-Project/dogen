@@ -50,9 +50,9 @@ namespace cpp {
 std::ostream& operator<<(std::ostream& s, const exception_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::exception_info\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"namespaces\": " << v.namespaces() << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
+      << "\"namespaces\": " << v.namespaces()
       << " }";
     return(s);
 }

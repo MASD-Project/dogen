@@ -112,6 +112,7 @@ namespace cpp {
 std::size_t file_info_hasher::hash(const file_info&v) {
     std::size_t seed(0);
 
+    combine(seed, v.documentation());
     combine(seed, v.descriptor());
     combine(seed, hash_boost_optional_dogen_cpp_class_info(v.class_info()));
     combine(seed, hash_boost_optional_dogen_cpp_enum_info(v.enum_info()));

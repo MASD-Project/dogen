@@ -51,6 +51,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::file_info& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("descriptor", v.descriptor_);
     ar << make_nvp("class_info", v.class_info_);
     ar << make_nvp("enum_info", v.enum_info_);
@@ -69,6 +70,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::file_info& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("descriptor", v.descriptor_);
     ar >> make_nvp("class_info", v.class_info_);
     ar >> make_nvp("enum_info", v.enum_info_);

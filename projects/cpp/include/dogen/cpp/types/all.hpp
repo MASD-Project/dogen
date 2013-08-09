@@ -27,6 +27,7 @@
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
 #include "dogen/cpp/types/content_types.hpp"
 #include "dogen/cpp/types/cpp.hpp"
+#include "dogen/cpp/types/element_info.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/enumerator_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
