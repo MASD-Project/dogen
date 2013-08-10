@@ -118,7 +118,7 @@ well, located under the directory where you executed Dogen and named
 
 Bugs can be submitted using [[https://github.com/kitanda/dogen/issues][github Issues]].
 
-* Links of interest around code generation
+* Related Work
 
 Here we collect links to other C++ code generators, as well as
 interesting projects in this space on other languages, books and
@@ -140,3 +140,15 @@ papers we have read (or intend to read) on the subject, etc.
 - [[https://code.google.com/p/emf4cpp/][EMF4CPP - Eclipse Modeling Framework]]: C++ port of the EMF/eCore
   eclipse framework. As with Java it includes run time support. There
   is also [[http://apps.nabbel.es/dsdm2010/download_files/dsdm2010_senac.pdf][a paper]] on it.
+- [[http://www2.informatik.hu-berlin.de/~piefel/Documents/06CITSA-CMMCG.pdf][A Common Metamodel for Code Generation]]: Describes a meta-model
+  designed to model Java and C++.
+- [[http://marofra.com/oldhomepage/MetaCPlusPlusDoc/metacplusplus-1.html][The Meta-C++ User Manual]]: Another early C++ meta-modeling
+  tool. Contains interesting ideas around C++ meta-models.
+- The Columbus C++ Schema: Useful tool for re-engineering large C++
+  code bases. Contains a meta-model for C++. A number of papers have
+  been written about it:
+  - [[http://www.inf.u-szeged.hu/~beszedes/research/tech27_ferenc_r.pdf][Columbus – Reverse Engineering Tool and Schema for C++]]
+  - [[http://journal.ub.tu-berlin.de/eceasst/article/download/10/19][Third Workshop on Software Evolution through Transformations]]:
+    Embracing the Change
+  - [[www.inf.u-szeged.hu/~ferenc/research/ferencr_schema.ppt.pdf][Towards a Standard Schema for C/C++]]
+  - [[http://www.inf.u-szeged.hu/~ferenc/research/ferencr_columbus_schema_cpp.pdf][Data Exchange with the Columbus Schema for C++]]
