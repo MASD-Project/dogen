@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include "dogen/cpp/serialization/element_info_fwd_ser.hpp"
+#include "dogen/cpp/types/element_info_visitor.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -50,6 +51,12 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, element_info& v, unsigned int version);
+
+public:
+    virtual void accept(const element_info_visitor& v) const = 0;
+    virtual void accept(element_info_visitor& v) const = 0;
+    virtual void accept(const element_info_visitor& v) = 0;
+    virtual void accept(element_info_visitor& v) = 0;
 
 public:
     virtual void to_stream(std::ostream& s) const;

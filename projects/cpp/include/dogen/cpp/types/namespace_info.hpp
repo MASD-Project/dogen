@@ -59,6 +59,23 @@ private:
     friend void boost::serialization::load(Archive& ar, namespace_info& v, unsigned int version);
 
 public:
+    virtual void accept(const element_info_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(element_info_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const element_info_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(element_info_visitor& v) override {
+        v.visit(*this);
+    }
+
+public:
     void to_stream(std::ostream& s) const override;
 
 public:
