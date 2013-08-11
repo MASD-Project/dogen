@@ -150,5 +150,5 @@ papers we have read (or intend to read) on the subject, etc.
   - [[http://www.inf.u-szeged.hu/~beszedes/research/tech27_ferenc_r.pdf][Columbus – Reverse Engineering Tool and Schema for C++]]
   - [[http://journal.ub.tu-berlin.de/eceasst/article/download/10/19][Third Workshop on Software Evolution through Transformations]]:
     Embracing the Change
-  - [[www.inf.u-szeged.hu/~ferenc/research/ferencr_schema.ppt.pdf][Towards a Standard Schema for C/C++]]
+  - [[http://www.inf.u-szeged.hu/~ferenc/research/ferencr_schema.ppt.pdf][Towards a Standard Schema for C/C++]]
   - [[http://www.inf.u-szeged.hu/~ferenc/research/ferencr_columbus_schema_cpp.pdf][Data Exchange with the Columbus Schema for C++]]
