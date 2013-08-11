@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
 
 namespace dogen {

@@ -30,7 +30,7 @@
 #include <list>
 #include <string>
 #include "dogen/cpp/serialization/enum_info_fwd_ser.hpp"
-#include "dogen/cpp/types/element_info.hpp"
+#include "dogen/cpp/types/entity.hpp"
 #include "dogen/cpp/types/enumerator_info.hpp"
 
 namespace dogen {
@@ -39,7 +39,7 @@ namespace cpp {
 /**
  * @brief Represents a C++ enum.
  */
-class enum_info final : public dogen::cpp::element_info {
+class enum_info final : public dogen::cpp::entity {
 public:
     enum_info() = default;
     enum_info(const enum_info&) = default;
@@ -63,19 +63,19 @@ private:
     friend void boost::serialization::load(Archive& ar, enum_info& v, unsigned int version);
 
 public:
-    virtual void accept(const element_info_visitor& v) const override {
+    virtual void accept(const entity_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(element_info_visitor& v) const override {
+    virtual void accept(entity_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const element_info_visitor& v) override {
+    virtual void accept(const entity_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(element_info_visitor& v) override {
+    virtual void accept(entity_visitor& v) override {
         v.visit(*this);
     }
 
@@ -132,7 +132,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::cpp::element_info& other) const override;
+    bool equals(const dogen::cpp::entity& other) const override;
 
 public:
     void swap(enum_info& other) noexcept;

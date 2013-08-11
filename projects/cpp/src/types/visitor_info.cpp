@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 
 
@@ -53,7 +53,7 @@ visitor_info::visitor_info(
     const std::string& name,
     const std::list<std::string>& types,
     const std::list<std::string>& namespaces)
-    : dogen::cpp::element_info(documentation),
+    : dogen::cpp::entity(documentation),
       name_(name),
       types_(types),
       namespaces_(namespaces) { }
@@ -62,7 +62,7 @@ void visitor_info::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::visitor_info\"" << ", "
       << "\"__parent_0__\": ";
-    element_info::to_stream(s);
+    entity::to_stream(s);
     s << ", "
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"types\": " << types_ << ", "
@@ -71,7 +71,7 @@ void visitor_info::to_stream(std::ostream& s) const {
 }
 
 void visitor_info::swap(visitor_info& other) noexcept {
-    element_info::swap(other);
+    entity::swap(other);
 
     using std::swap;
     swap(name_, other.name_);
@@ -79,14 +79,14 @@ void visitor_info::swap(visitor_info& other) noexcept {
     swap(namespaces_, other.namespaces_);
 }
 
-bool visitor_info::equals(const dogen::cpp::element_info& other) const {
+bool visitor_info::equals(const dogen::cpp::entity& other) const {
     const visitor_info* const p(dynamic_cast<const visitor_info* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool visitor_info::operator==(const visitor_info& rhs) const {
-    return element_info::compare(rhs) &&
+    return entity::compare(rhs) &&
         name_ == rhs.name_ &&
         types_ == rhs.types_ &&
         namespaces_ == rhs.namespaces_;

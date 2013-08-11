@@ -43,7 +43,7 @@ namespace dogen {
 namespace cpp {
 
 /**
- * @brief Represents a C++ header or implementation file.
+ * @brief Represents a file containing C++ source code.
  */
 class file_info final {
 public:

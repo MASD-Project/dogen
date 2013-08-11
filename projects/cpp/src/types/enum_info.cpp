@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/enumerator_info_io.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
 
@@ -69,7 +69,7 @@ enum_info::enum_info(
     const std::list<std::string>& namespaces,
     const std::list<dogen::cpp::enumerator_info>& enumerators,
     const std::string& type)
-    : dogen::cpp::element_info(documentation),
+    : dogen::cpp::entity(documentation),
       name_(name),
       namespaces_(namespaces),
       enumerators_(enumerators),
@@ -79,7 +79,7 @@ void enum_info::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::enum_info\"" << ", "
       << "\"__parent_0__\": ";
-    element_info::to_stream(s);
+    entity::to_stream(s);
     s << ", "
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"namespaces\": " << namespaces_ << ", "
@@ -89,7 +89,7 @@ void enum_info::to_stream(std::ostream& s) const {
 }
 
 void enum_info::swap(enum_info& other) noexcept {
-    element_info::swap(other);
+    entity::swap(other);
 
     using std::swap;
     swap(name_, other.name_);
@@ -98,14 +98,14 @@ void enum_info::swap(enum_info& other) noexcept {
     swap(type_, other.type_);
 }
 
-bool enum_info::equals(const dogen::cpp::element_info& other) const {
+bool enum_info::equals(const dogen::cpp::entity& other) const {
     const enum_info* const p(dynamic_cast<const enum_info* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool enum_info::operator==(const enum_info& rhs) const {
-    return element_info::compare(rhs) &&
+    return entity::compare(rhs) &&
         name_ == rhs.name_ &&
         namespaces_ == rhs.namespaces_ &&
         enumerators_ == rhs.enumerators_ &&

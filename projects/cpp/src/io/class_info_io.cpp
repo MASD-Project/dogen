@@ -23,7 +23,7 @@
 #include <ostream>
 #include "dogen/cpp/io/class_info_io.hpp"
 #include "dogen/cpp/io/class_types_io.hpp"
-#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/parent_info_io.hpp"
 #include "dogen/cpp/io/property_info_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"

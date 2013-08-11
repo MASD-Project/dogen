@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/element_info_td.hpp"
+#include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
 
 namespace {
@@ -47,7 +47,7 @@ registrar_info_generator::registrar_info_generator() : position_(0) { }
 
 void registrar_info_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::cpp::element_info_generator::populate(position, v);
+    dogen::cpp::entity_generator::populate(position, v);
     v.namespaces(create_std_list_std_string(position + 0));
     v.leaves(create_std_list_std_string(position + 1));
     v.model_dependencies(create_std_list_std_string(position + 2));

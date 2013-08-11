@@ -59,12 +59,71 @@ would takes a lot of classes such as locator, includer, etc;
     CLOCK: [2013-08-07 Wed 07:47]--[2013-08-07 Wed 08:18] =>  0:31
     CLOCK: [2013-08-06 Tue 22:59]--[2013-08-06 Tue 23:39] =>  0:40
 
-*** IMPLEMENTATION Tidy-up all C++ models                             :story:
+*** COMPLETED Tidy-up all C++ models                                  :story:
+    CLOSED: [2013-08-11 Sun 12:21]
     CLOCK: [2013-08-09 Fri 23:04]--[2013-08-09 Fri 23:42] =>  0:38
     CLOCK: [2013-08-09 Fri 18:27]--[2013-08-09 Fri 18:43] =>  0:16
     CLOCK: [2013-08-08 Thu 19:10]--[2013-08-08 Thu 20:36] =>  1:26
 
 - add comments
 - fix model layout
+
+*** IMPLEMENTATION Make a more truthful C++ model                      :epic:
+
+The C++ model should really be a model of the _language_ not of
+high-level constructs such as exceptions, visitor, etc. We should only
+have a few types, and they should all be part of the C++
+language. Their names should match the names in the C++
+standard. Notes on types:
+
+- type: create a base class for everything that can be contained in a
+  file. types have names, comments.
+- file: files have a string property called licence, comments, the
+  include lists and a list of types.
+- include lists should be renamed to whatever terminology the standard
+  uses for include grouping; we should also check the names of user
+  and system includes.
+- namespace: type that contains types.
+- enum: contains just the enumerator.
+- variable: nested type.
+- function (which when in a class becomes a member
+  function). functions contain a member variable of type string called
+  implementation which has all the code for the function. they also
+  have a type argument for templates.
+- argument
+- class. has have a type argument for templates.
+- scope / visibility: public, private, protected.
+
+The job of the transformer is then to create the diversity of the
+classes needed to implement the different aspects and facets in a
+model. The class should contain:
+
+- licence
+- for each function, implementation; a string with the code for the
+  implementation of the function, as we would at present generate in
+  the formatter.
+
+We should end up with a single formatter which takes a file and
+converts it into C++ code. All the clever logic would be inside of the
+transformer.
+
+Once we have this in place, a transition to a clang based backend
+should be slightly easier, since the only (big) difference is the
+low-level AST generation inside of functions. It would still be a
+tough job.
+
+**** COMPLETED Create the basic set of classes with names out of the C++ standard
+     CLOSED: [2013-08-11 Sun 19:18]
+     CLOCK: [2013-08-11 Sun 17:49]--[2013-08-11 Sun 19:16] =>  1:27
+     CLOCK: [2013-08-11 Sun 16:00]--[2013-08-11 Sun 17:49] =>  1:49
+     CLOCK: [2013-08-11 Sun 12:21]--[2013-08-11 Sun 15:00] =>  2:39
+     CLOCK: [2013-08-11 Sun 12:00]--[2013-08-11 Sun 12:21] =>  0:21
+
+**** Rename =file_info= to source_file
+**** Add licence as a member in =source_file=
+**** Make members of =source_file= a pointer to element
+**** Create a mock factory for C++ model
+**** Create a basic =standard_transformer= that instantiates new classes
+**** Create a basic =standard_formatter= that formats new classes
 
 ** Deprecated Development Stories

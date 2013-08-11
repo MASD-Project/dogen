@@ -11,16 +11,6 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
-*** Referenced models do not have link time dependencies              :story:
-
-For some reason, when a model references another model it doesn't seem
-to result in a link time dependency. To solve this problem we end up
-having to disable makefiles and then add dependencies manually.
-
-In addition, we also need a way to supply user defined linked
-libraries, which could be CMake variables. This could be done via
-implementation specific parameters at the model level.
-
 *** Split a fully formed model from partial models                    :story:
 
 We should really have two distinct types to represent the model that
@@ -353,12 +343,6 @@ boost date time library.
 
 See boost documentation: [[http://www.boost.org/doc/libs/1_53_0/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone][Posix Time Zone]]
 
-*** Automatic commenting of enumeration properties
-
-When a pod has a property of an enumeration type, there is not much
-point in manually commenting the property. We could just use the brief
-of the enumeration if the user didn't supply any documentation.
-
 *** "Data driven" includer
 
 We should simply go through all the types in the SML model and for
@@ -379,51 +363,6 @@ There is nothing stopping us from using a GtkBuilder / Glade XML file
 as an input, create some SML from it and then generate code which
 would do the boiler plate setup of the UI. With a bit more work one
 could potentially even generate the bindings for a presentation model.
-
-*** Make a more truthful C++ model                                     :epic:
-
-The C++ model should really be a model of the _language_ not of
-high-level constructs such as exceptions, visitor, etc. We should only
-have a few types, and they should all be part of the C++
-language. Their names should match the names in the C++
-standard. Notes on types:
-
-- type: create a base class for everything that can be contained in a
-  file. types have names, comments.
-- file: files have a string property called licence, comments, the
-  include lists and a list of types.
-- include lists should be renamed to whatever terminology the standard
-  uses for include grouping; we should also check the names of user
-  and system includes.
-- namespace: type that contains types.
-- enum: contains just the enumerator.
-- variable: nested type.
-- function (which when in a class becomes a member
-  function). functions contain a member variable of type string called
-  implementation which has all the code for the function. they also
-  have a type argument for templates.
-- argument
-- class. has have a type argument for templates.
-- scope / visibility: public, private, protected.
-
-
-The job of the transformer is then to create the diversity of the
-classes needed to implement the different aspects and facets in a
-model. The class should contain:
-
-- licence
-- for each function, implementation; a string with the code for the
-  implementation of the function, as we would at present generate in
-  the formatter.
-
-We should end up with a single formatter which takes a file and
-converts it into C++ code. All the clever logic would be inside of the
-transformer.
-
-Once we have this in place, a transition to a clang based backend
-should be slightly easier, since the only (big) difference is the
-low-level AST generation inside of functions. It would still be a
-tough job.
 
 *** Consider renaming formatters
 

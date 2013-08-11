@@ -20,7 +20,7 @@
  */
 #include "dogen/cpp/hash/class_info_hash.hpp"
 #include "dogen/cpp/hash/class_types_hash.hpp"
-#include "dogen/cpp/hash/element_info_hash.hpp"
+#include "dogen/cpp/hash/entity_hash.hpp"
 #include "dogen/cpp/hash/parent_info_hash.hpp"
 #include "dogen/cpp/hash/property_info_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
@@ -82,7 +82,7 @@ namespace cpp {
 std::size_t class_info_hasher::hash(const class_info&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::cpp::element_info&>(v));
+    combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
 
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.namespaces()));

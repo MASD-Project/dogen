@@ -29,7 +29,7 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/cpp/serialization/element_info_ser.hpp"
+#include "dogen/cpp/serialization/entity_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/enumerator_info_ser.hpp"
 
@@ -49,7 +49,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::enum_info& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("element_info", base_object<dogen::cpp::element_info>(v));
+    ar << make_nvp("entity", base_object<dogen::cpp::entity>(v));
 
     ar << make_nvp("name", v.name_);
     ar << make_nvp("namespaces", v.namespaces_);
@@ -61,7 +61,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::enum_info& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("element_info", base_object<dogen::cpp::element_info>(v));
+    ar >> make_nvp("entity", base_object<dogen::cpp::entity>(v));
 
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("namespaces", v.namespaces_);

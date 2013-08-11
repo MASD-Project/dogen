@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/element_info_hash.hpp"
+#include "dogen/cpp/hash/entity_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 
 namespace {
@@ -46,7 +46,7 @@ namespace cpp {
 std::size_t namespace_info_hasher::hash(const namespace_info&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::cpp::element_info&>(v));
+    combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
 
     combine(seed, hash_std_list_std_string(v.namespaces()));
     return seed;

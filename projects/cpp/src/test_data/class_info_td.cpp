@@ -21,7 +21,7 @@
 #include <sstream>
 #include "dogen/cpp/test_data/class_info_td.hpp"
 #include "dogen/cpp/test_data/class_types_td.hpp"
-#include "dogen/cpp/test_data/element_info_td.hpp"
+#include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/parent_info_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
@@ -107,7 +107,7 @@ class_info_generator::class_info_generator() : position_(0) { }
 
 void class_info_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::cpp::element_info_generator::populate(position, v);
+    dogen::cpp::entity_generator::populate(position, v);
     v.name(create_std_string(position + 0));
     v.namespaces(create_std_list_std_string(position + 1));
     v.properties(create_std_list_dogen_cpp_property_info(position + 2));

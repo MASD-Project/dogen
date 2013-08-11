@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 
 
@@ -51,34 +51,34 @@ namespace cpp {
 namespace_info::namespace_info(
     const std::string& documentation,
     const std::list<std::string>& namespaces)
-    : dogen::cpp::element_info(documentation),
+    : dogen::cpp::entity(documentation),
       namespaces_(namespaces) { }
 
 void namespace_info::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::namespace_info\"" << ", "
       << "\"__parent_0__\": ";
-    element_info::to_stream(s);
+    entity::to_stream(s);
     s << ", "
       << "\"namespaces\": " << namespaces_
       << " }";
 }
 
 void namespace_info::swap(namespace_info& other) noexcept {
-    element_info::swap(other);
+    entity::swap(other);
 
     using std::swap;
     swap(namespaces_, other.namespaces_);
 }
 
-bool namespace_info::equals(const dogen::cpp::element_info& other) const {
+bool namespace_info::equals(const dogen::cpp::entity& other) const {
     const namespace_info* const p(dynamic_cast<const namespace_info* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool namespace_info::operator==(const namespace_info& rhs) const {
-    return element_info::compare(rhs) &&
+    return entity::compare(rhs) &&
         namespaces_ == rhs.namespaces_;
 }
 

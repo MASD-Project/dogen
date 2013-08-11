@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/cpp/io/class_types_io.hpp"
-#include "dogen/cpp/io/element_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/parent_info_io.hpp"
 #include "dogen/cpp/io/property_info_io.hpp"
 #include "dogen/cpp/types/class_info.hpp"
@@ -143,7 +143,7 @@ class_info::class_info(
     const bool is_original_parent_visitable,
     const dogen::cpp::class_types& class_type,
     const dogen::sml::generation_types& generation_type)
-    : dogen::cpp::element_info(documentation),
+    : dogen::cpp::entity(documentation),
       name_(name),
       namespaces_(namespaces),
       properties_(properties),
@@ -175,7 +175,7 @@ void class_info::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::class_info\"" << ", "
       << "\"__parent_0__\": ";
-    element_info::to_stream(s);
+    entity::to_stream(s);
     s << ", "
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"namespaces\": " << namespaces_ << ", "
@@ -201,7 +201,7 @@ void class_info::to_stream(std::ostream& s) const {
 }
 
 void class_info::swap(class_info& other) noexcept {
-    element_info::swap(other);
+    entity::swap(other);
 
     using std::swap;
     swap(name_, other.name_);
@@ -226,14 +226,14 @@ void class_info::swap(class_info& other) noexcept {
     swap(generation_type_, other.generation_type_);
 }
 
-bool class_info::equals(const dogen::cpp::element_info& other) const {
+bool class_info::equals(const dogen::cpp::entity& other) const {
     const class_info* const p(dynamic_cast<const class_info* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool class_info::operator==(const class_info& rhs) const {
-    return element_info::compare(rhs) &&
+    return entity::compare(rhs) &&
         name_ == rhs.name_ &&
         namespaces_ == rhs.namespaces_ &&
         properties_ == rhs.properties_ &&

@@ -33,7 +33,7 @@
 #include <vector>
 #include "dogen/cpp/serialization/class_info_fwd_ser.hpp"
 #include "dogen/cpp/types/class_types.hpp"
-#include "dogen/cpp/types/element_info.hpp"
+#include "dogen/cpp/types/entity.hpp"
 #include "dogen/cpp/types/parent_info.hpp"
 #include "dogen/cpp/types/property_info.hpp"
 #include "dogen/sml/types/generation_types.hpp"
@@ -44,7 +44,7 @@ namespace cpp {
 /**
  * @brief Represents a C++ class.
  */
-class class_info final : public dogen::cpp::element_info {
+class class_info final : public dogen::cpp::entity {
 public:
     class_info(const class_info&) = default;
     class_info(class_info&&) = default;
@@ -86,19 +86,19 @@ private:
     friend void boost::serialization::load(Archive& ar, class_info& v, unsigned int version);
 
 public:
-    virtual void accept(const element_info_visitor& v) const override {
+    virtual void accept(const entity_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(element_info_visitor& v) const override {
+    virtual void accept(entity_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const element_info_visitor& v) override {
+    virtual void accept(const entity_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(element_info_visitor& v) override {
+    virtual void accept(entity_visitor& v) override {
         v.visit(*this);
     }
 
@@ -298,7 +298,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::cpp::element_info& other) const override;
+    bool equals(const dogen::cpp::entity& other) const override;
 
 public:
     void swap(class_info& other) noexcept;
