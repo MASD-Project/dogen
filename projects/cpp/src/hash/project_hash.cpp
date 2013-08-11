@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/cpp/hash/cmakelists_info_hash.hpp"
-#include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/odb_options_info_hash.hpp"
 #include "dogen/cpp/hash/project_hash.hpp"
+#include "dogen/cpp/hash/source_file_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_cpp_file_info(const std::list<dogen::cpp::file_info>& v){
+inline std::size_t hash_std_list_dogen_cpp_source_file(const std::list<dogen::cpp::source_file>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -58,7 +58,7 @@ namespace cpp {
 std::size_t project_hasher::hash(const project&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_cpp_file_info(v.files()));
+    combine(seed, hash_std_list_dogen_cpp_source_file(v.files()));
     combine(seed, v.odb_options());
     combine(seed, v.src_cmakelists());
     combine(seed, hash_boost_optional_dogen_cpp_cmakelists_info(v.include_cmakelists()));

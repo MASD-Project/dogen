@@ -24,13 +24,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/io/content_types_io.hpp"
 #include "dogen/cpp/types/building_error.hpp"
-#include "dogen/sml_to_cpp/types/file_info_factory.hpp"
+#include "dogen/sml_to_cpp/types/source_file_factory.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.file_info_factory"));
+auto lg(logger_factory("cpp.source_file_factory"));
 
 const std::string empty;
 const std::string dot(".");
@@ -42,9 +42,9 @@ const std::string visitor_postfix("_visitor");
 namespace dogen {
 namespace sml_to_cpp {
 
-file_info_factory::file_info_factory(const locator& l) : locator_(l) { }
+source_file_factory::source_file_factory(const locator& l) : locator_(l) { }
 
-std::string file_info_factory::
+std::string source_file_factory::
 to_header_guard_name(const boost::filesystem::path& rp) const {
     bool is_first(true);
     std::ostringstream stream;
@@ -58,9 +58,9 @@ to_header_guard_name(const boost::filesystem::path& rp) const {
     return stream.str();
 }
 
-cpp::file_info file_info_factory::
+cpp::source_file source_file_factory::
 create(const cpp::content_descriptor& cd) const {
-    cpp::file_info r;
+    cpp::source_file r;
     r.descriptor(cd);
     r.file_path(locator_.absolute_path(cd));
 
@@ -72,64 +72,64 @@ create(const cpp::content_descriptor& cd) const {
     return r;
 }
 
-cpp::file_info file_info_factory::create(const cpp::enum_info& ei,
+cpp::source_file source_file_factory::create(const cpp::enum_info& ei,
     const cpp::content_descriptor& cd, const inclusion_lists& il) const {
-    cpp::file_info r(create(cd));
+    cpp::source_file r(create(cd));
     r.enum_info(ei);
     r.system_includes(il.system());
     r.user_includes(il.user());
     return r;
 }
 
-cpp::file_info file_info_factory::create(const cpp::exception_info& ei,
+cpp::source_file source_file_factory::create(const cpp::exception_info& ei,
     const cpp::content_descriptor& cd, const inclusion_lists& il) const {
-    cpp::file_info r(create(cd));
+    cpp::source_file r(create(cd));
     r.exception_info(ei);
     r.system_includes(il.system());
     r.user_includes(il.user());
     return r;
 }
 
-cpp::file_info file_info_factory::
+cpp::source_file source_file_factory::
 create(const cpp::namespace_info& ni, const cpp::content_descriptor& cd) const {
-    cpp::file_info r(create(cd));
+    cpp::source_file r(create(cd));
     r.namespace_info(ni);
     return r;
 }
 
-cpp::file_info file_info_factory::create(const cpp::class_info& ci,
+cpp::source_file source_file_factory::create(const cpp::class_info& ci,
     const cpp::content_descriptor& cd, const inclusion_lists& il) const {
-    cpp::file_info r(create(cd));
+    cpp::source_file r(create(cd));
     r.class_info(ci);
     r.system_includes(il.system());
     r.user_includes(il.user());
     return r;
 }
 
-cpp::file_info file_info_factory::
+cpp::source_file source_file_factory::
 create_includer(const cpp::content_descriptor& cd,
     const inclusion_lists& il) const {
-    cpp::file_info r(create(cd));
+    cpp::source_file r(create(cd));
     r.descriptor().content_type(cpp::content_types::includer);
     r.system_includes(il.system());
     r.user_includes(il.user());
     return r;
 }
 
-cpp::file_info file_info_factory::
+cpp::source_file source_file_factory::
 create_registrar(const cpp::registrar_info& ri,
     const cpp::content_descriptor& cd, const inclusion_lists& il) const {
-    cpp::file_info r(create(cd));
+    cpp::source_file r(create(cd));
     r.registrar_info(ri);
     r.system_includes(il.system());
     r.user_includes(il.user());
     return r;
 }
 
-cpp::file_info file_info_factory::
+cpp::source_file source_file_factory::
 create_visitor(const cpp::visitor_info& vi, const cpp::content_descriptor& cd,
     const inclusion_lists& il) const {
-    cpp::file_info r(create(cd));
+    cpp::source_file r(create(cd));
     r.visitor_info(vi);
     r.system_includes(il.system());
     r.user_includes(il.user());

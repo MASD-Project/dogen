@@ -19,21 +19,21 @@
  *
  */
 #include "dogen/cpp/test_data/cmakelists_info_td.hpp"
-#include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/project_td.hpp"
+#include "dogen/cpp/test_data/source_file_td.hpp"
 
 namespace {
 
-dogen::cpp::file_info
-create_dogen_cpp_file_info(const unsigned int position) {
-    return dogen::cpp::file_info_generator::create(position);
+dogen::cpp::source_file
+create_dogen_cpp_source_file(const unsigned int position) {
+    return dogen::cpp::source_file_generator::create(position);
 }
 
-std::list<dogen::cpp::file_info> create_std_list_dogen_cpp_file_info(unsigned int position) {
-    std::list<dogen::cpp::file_info> r;
+std::list<dogen::cpp::source_file> create_std_list_dogen_cpp_source_file(unsigned int position) {
+    std::list<dogen::cpp::source_file> r;
     for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_dogen_cpp_file_info(position + i));
+        r.push_back(create_dogen_cpp_source_file(position + i));
     }
     return r;
 }
@@ -64,7 +64,7 @@ project_generator::project_generator() : position_(0) { }
 
 void project_generator::
 populate(const unsigned int position, result_type& v) {
-    v.files(create_std_list_dogen_cpp_file_info(position + 0));
+    v.files(create_std_list_dogen_cpp_source_file(position + 0));
     v.odb_options(create_dogen_cpp_odb_options_info(position + 1));
     v.src_cmakelists(create_dogen_cpp_cmakelists_info(position + 2));
     v.include_cmakelists(create_boost_optional_dogen_cpp_cmakelists_info(position + 3));

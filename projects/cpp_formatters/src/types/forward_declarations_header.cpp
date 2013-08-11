@@ -99,14 +99,14 @@ format_domain_class(const cpp::class_info& ci) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_class(const cpp::file_info& fi) {
-    boost::optional<cpp::class_info> o(fi.class_info());
+void forward_declarations_header::format_class(const cpp::source_file& f) {
+    boost::optional<cpp::class_info> o(f.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const auto ft(fi.descriptor().facet_type());
+    const auto ft(f.descriptor().facet_type());
     const cpp::class_info& ci(*o);
     if (ft == config::cpp_facet_types::serialization)
         format_serialization_class(ci);
@@ -120,8 +120,8 @@ void forward_declarations_header::format_class(const cpp::file_info& fi) {
 }
 
 void forward_declarations_header::
-format_enumeration(const cpp::file_info& fi) {
-    const auto o(fi.enum_info());
+format_enumeration(const cpp::source_file& f) {
+    const auto o(f.enum_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -139,8 +139,8 @@ format_enumeration(const cpp::file_info& fi) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_exception(const cpp::file_info& fi) {
-    const auto o(fi.exception_info());
+void forward_declarations_header::format_exception(const cpp::source_file& f) {
+    const auto o(f.exception_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_exception_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
@@ -157,9 +157,9 @@ void forward_declarations_header::format_exception(const cpp::file_info& fi) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format(const cpp::file_info& fi) {
+void forward_declarations_header::format(const cpp::source_file& f) {
     using cpp::aspect_types;
-    if (fi.descriptor().aspect_type() != aspect_types::forward_decls) {
+    if (f.descriptor().aspect_type() != aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
@@ -169,24 +169,24 @@ void forward_declarations_header::format(const cpp::file_info& fi) {
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(fi.header_guard());
+    guards.format_start(f.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(fi);
+    includes.format(f);
 
     using cpp::content_types;
-    if (fi.descriptor().content_type() == content_types::unversioned_key ||
-        fi.descriptor().content_type() == content_types::versioned_key ||
-        fi.descriptor().content_type() == content_types::user_defined_service ||
-        fi.descriptor().content_type() == content_types::value_object ||
-        fi.descriptor().content_type() == content_types::entity ||
-        fi.descriptor().content_type() == content_types::keyed_entity)
-        format_class(fi);
-    else if (fi.descriptor().content_type() == content_types::enumeration)
-        format_enumeration(fi);
-    else if (fi.descriptor().content_type() == content_types::exception)
-        format_exception(fi);
+    if (f.descriptor().content_type() == content_types::unversioned_key ||
+        f.descriptor().content_type() == content_types::versioned_key ||
+        f.descriptor().content_type() == content_types::user_defined_service ||
+        f.descriptor().content_type() == content_types::value_object ||
+        f.descriptor().content_type() == content_types::entity ||
+        f.descriptor().content_type() == content_types::keyed_entity)
+        format_class(f);
+    else if (f.descriptor().content_type() == content_types::enumeration)
+        format_enumeration(f);
+    else if (f.descriptor().content_type() == content_types::exception)
+        format_exception(f);
 
     guards.format_end();
 }

@@ -29,7 +29,7 @@ create(std::ostream&) {
     return file_formatter::shared_ptr(new null_formatter);
 }
 
-void null_formatter::format(const cpp::file_info&) {
+void null_formatter::format(const cpp::source_file&) {
     return;
 }
 

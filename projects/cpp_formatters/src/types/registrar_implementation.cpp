@@ -58,8 +58,8 @@ create(std::ostream& stream, const bool disable_xml_serialization) {
         new registrar_implementation(stream, disable_xml_serialization));
 }
 
-void registrar_implementation::format(const cpp::file_info& fi) {
-    const auto o(fi.registrar_info());
+void registrar_implementation::format(const cpp::source_file& f) {
+    const auto o(f.registrar_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;
         BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));
@@ -70,7 +70,7 @@ void registrar_implementation::format(const cpp::file_info& fi) {
 
     const bool blank_line(false);
     includes includes(stream_, blank_line);
-    includes.format(fi);
+    includes.format(f);
 
     // FIXME: massive hack for EOS workaround
     stream_ << "#ifdef __linux__" << std::endl

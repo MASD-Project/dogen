@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/io/file_info_io.hpp"
+#include "dogen/cpp/io/source_file_io.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
@@ -108,8 +108,8 @@ void hash_header::hash_class(const cpp::class_info& ci) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::format_enumeration(const cpp::file_info& fi) {
-    const auto o(fi.enum_info());
+void hash_header::format_enumeration(const cpp::source_file& f) {
+    const auto o(f.enum_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -149,8 +149,8 @@ void hash_header::format_enumeration(const cpp::file_info& fi) {
     utility_.blank_line(2);
 }
 
-void hash_header::format_class(const cpp::file_info& fi) {
-    const auto o(fi.class_info());
+void hash_header::format_class(const cpp::source_file& f) {
+    const auto o(f.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
@@ -177,26 +177,26 @@ void hash_header::format_class(const cpp::file_info& fi) {
     utility_.blank_line();
 }
 
-void hash_header::format(const cpp::file_info& fi) {
+void hash_header::format(const cpp::source_file& f) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(fi.header_guard());
+    guards.format_start(f.header_guard());
     stream_ << std::endl;
 
     includes includes(stream_);
-    includes.format(fi);
+    includes.format(f);
 
     using cpp::content_types;
-    if (fi.descriptor().content_type() == content_types::unversioned_key ||
-        fi.descriptor().content_type() == content_types::versioned_key ||
-        fi.descriptor().content_type() == content_types::value_object ||
-        fi.descriptor().content_type() == content_types::entity ||
-        fi.descriptor().content_type() == content_types::keyed_entity)
-        format_class(fi);
-    else if (fi.descriptor().content_type() == content_types::enumeration)
-        format_enumeration(fi);
+    if (f.descriptor().content_type() == content_types::unversioned_key ||
+        f.descriptor().content_type() == content_types::versioned_key ||
+        f.descriptor().content_type() == content_types::value_object ||
+        f.descriptor().content_type() == content_types::entity ||
+        f.descriptor().content_type() == content_types::keyed_entity)
+        format_class(f);
+    else if (f.descriptor().content_type() == content_types::enumeration)
+        format_enumeration(f);
 
     guards.format_end();
 }

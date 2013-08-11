@@ -71,7 +71,7 @@ private:
     /**
      * @brief Generate all C++ files.
      */
-    result_type format_file_infos_activity(const cpp::project& p) const;
+    result_type format_source_files_activity(const cpp::project& p) const;
 
 public:
     /**

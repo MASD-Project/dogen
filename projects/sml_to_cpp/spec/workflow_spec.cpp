@@ -33,7 +33,7 @@
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/io/map_io.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
-#include "dogen/cpp/io/file_info_io.hpp"
+#include "dogen/cpp/io/source_file_io.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"

@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<enum_info_generator>();
     test_move_assignment_copy<enumerator_info_generator>();
     test_move_assignment_copy<exception_info_generator>();
-    test_move_assignment_copy<file_info_generator>();
+    test_move_assignment_copy<source_file_generator>();
     test_move_assignment_copy<namespace_info_generator>();
     test_move_assignment_copy<nested_type_info_generator>();
     test_move_assignment_copy<odb_options_info_generator>();

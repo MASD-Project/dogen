@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/source_file.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
@@ -55,11 +55,11 @@ private:
     void generator_class(const cpp::enum_info& ei);
 
 private:
-    void format_class(const cpp::file_info& fi);
-    void format_enumeration(const cpp::file_info& fi);
+    void format_class(const cpp::source_file& f);
+    void format_enumeration(const cpp::source_file& f);
 
 public:
-    virtual void format(const cpp::file_info& fi) override;
+    virtual void format(const cpp::source_file& f) override;
 
 private:
     std::ostream& stream_;

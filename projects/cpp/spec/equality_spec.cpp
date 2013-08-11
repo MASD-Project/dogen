@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<enum_info_generator>();
     test_equality<enumerator_info_generator>();
     test_equality<exception_info_generator>();
-    test_equality<file_info_generator>();
+    test_equality<source_file_generator>();
     test_equality<namespace_info_generator>();
     test_equality<nested_type_info_generator>();
     test_equality<odb_options_info_generator>();

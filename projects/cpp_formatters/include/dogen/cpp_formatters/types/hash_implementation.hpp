@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/source_file.hpp"
 #include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
@@ -72,11 +72,11 @@ private:
     void hasher_hash_method(const cpp::class_info& ci);
 
 private:
-    void format_class(const cpp::file_info& fi);
-    void format_enumeration(const cpp::file_info& fi);
+    void format_class(const cpp::source_file& f);
+    void format_enumeration(const cpp::source_file& f);
 
 public:
-    virtual void format(const cpp::file_info& fi) override;
+    virtual void format(const cpp::source_file& f) override;
 
 private:
     std::ostream& stream_;

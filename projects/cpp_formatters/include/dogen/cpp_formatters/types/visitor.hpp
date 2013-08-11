@@ -52,7 +52,7 @@ private:
     void format(const cpp::visitor_info& vi);
 
 public:
-    virtual void format(const cpp::file_info& fi) override;
+    virtual void format(const cpp::source_file& f) override;
 
 private:
     std::ostream& stream_;

@@ -71,8 +71,8 @@ void io_implementation::io_helper_methods(const cpp::class_info& ci) {
     i.format_helper_methods(ci);
 }
 
-void io_implementation::format_enumeration(const cpp::file_info& fi) {
-    const auto o(fi.enum_info());
+void io_implementation::format_enumeration(const cpp::source_file& f) {
+    const auto o(f.enum_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -135,8 +135,8 @@ void io_implementation::format_enumeration(const cpp::file_info& fi) {
     utility_.blank_line();
 }
 
-void io_implementation::format_class(const cpp::file_info& fi) {
-    const auto o(fi.class_info());
+void io_implementation::format_class(const cpp::source_file& f) {
+    const auto o(f.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
@@ -170,22 +170,22 @@ void io_implementation::format_class(const cpp::file_info& fi) {
     utility_.blank_line();
 }
 
-void io_implementation::format(const cpp::file_info& fi) {
+void io_implementation::format(const cpp::source_file& f) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
-    includes.format(fi);
+    includes.format(f);
 
     using cpp::content_types;
-    if (fi.descriptor().content_type() == content_types::unversioned_key ||
-        fi.descriptor().content_type() == content_types::versioned_key ||
-        fi.descriptor().content_type() == content_types::value_object ||
-        fi.descriptor().content_type() == content_types::entity ||
-        fi.descriptor().content_type() == content_types::keyed_entity)
-        format_class(fi);
-    else if (fi.descriptor().content_type() == content_types::enumeration)
-        format_enumeration(fi);
+    if (f.descriptor().content_type() == content_types::unversioned_key ||
+        f.descriptor().content_type() == content_types::versioned_key ||
+        f.descriptor().content_type() == content_types::value_object ||
+        f.descriptor().content_type() == content_types::entity ||
+        f.descriptor().content_type() == content_types::keyed_entity)
+        format_class(f);
+    else if (f.descriptor().content_type() == content_types::enumeration)
+        format_enumeration(f);
 }
 
 } }

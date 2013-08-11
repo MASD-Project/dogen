@@ -35,13 +35,13 @@
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/source_file.hpp"
 #include "dogen/sml_to_cpp/types/includer.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 #include "dogen/sml_to_cpp/types/transformer.hpp"
 #include "dogen/sml_to_cpp/types/extractor.hpp"
 #include "dogen/sml_to_cpp/types/context.hpp"
-#include "dogen/sml_to_cpp/types/file_info_factory.hpp"
+#include "dogen/sml_to_cpp/types/source_file_factory.hpp"
 #include "dogen/cpp/types/project.hpp"
 
 namespace dogen {
@@ -99,43 +99,43 @@ private:
     /**
      * @brief Register the file with registrar, if it's a header file.
      */
-    void register_header(const cpp::file_info& fi) const;
+    void register_header(const cpp::source_file& fi) const;
 
     /**
      * @brief Generate C++ files for classes.
      */
-    std::list<cpp::file_info> generate_file_infos_for_classes_activity() const;
+    std::list<cpp::source_file> generate_source_files_for_classes_activity() const;
 
     /**
      * @brief Generate C++ files for classes.
      */
-    std::list<cpp::file_info>
-        generate_file_infos_for_namespaces_activity() const;
+    std::list<cpp::source_file>
+        generate_source_files_for_namespaces_activity() const;
 
     /**
      * @brief Generate C++ files for registrars.
      */
-    std::list<cpp::file_info> generate_registrars_activity() const;
+    std::list<cpp::source_file> generate_registrars_activity() const;
 
     /**
      * @brief Generate C++ files for includers.
      */
-    std::list<cpp::file_info> generate_includers_activity() const;
+    std::list<cpp::source_file> generate_includers_activity() const;
 
     /**
      * @brief Generate C++ files for visitors.
      */
-    std::list<cpp::file_info> generate_visitors_activity() const;
+    std::list<cpp::source_file> generate_visitors_activity() const;
 
     /**
      * @brief Generate C++ files for enumerations.
      */
-    std::list<cpp::file_info> generate_enums_activity() const;
+    std::list<cpp::source_file> generate_enums_activity() const;
 
     /**
      * @brief Generate C++ files for exceptions.
      */
-    std::list<cpp::file_info> generate_exceptions_activity() const;
+    std::list<cpp::source_file> generate_exceptions_activity() const;
 
     /**
      * @brief Create the cmakelists makefiles.
@@ -150,7 +150,7 @@ private:
     /**
      * @brief Generate all C++ files.
      */
-    void generate_file_infos_activity(cpp::project& p) const;
+    void generate_source_files_activity(cpp::project& p) const;
 
     /**
      * @brief Perform the generation sub-workflow.
@@ -176,7 +176,7 @@ private:
     const config::cpp_settings settings_;
     const locator locator_;
     mutable includer includer_;
-    const file_info_factory file_info_factory_;
+    const source_file_factory source_file_factory_;
     transformer transformer_;
     const cpp::content_descriptor_factory descriptor_factory_;
     const extractor extractor_;

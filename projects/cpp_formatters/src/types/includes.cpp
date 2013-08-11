@@ -60,15 +60,15 @@ void includes::format(std::list<std::string> v, bool is_system) {
     }
 }
 
-void includes::format(const cpp::file_info& fi) {
-    const auto sys(fi.system_includes());
-    const auto usr(fi.user_includes());
+void includes::format(const cpp::source_file& f) {
+    const auto sys(f.system_includes());
+    const auto usr(f.user_includes());
 
     if (sys.empty() && usr.empty())
         return;
 
-    format(fi.system_includes(), is_system);
-    format(fi.user_includes(), is_user);
+    format(f.system_includes(), is_system);
+    format(f.user_includes(), is_user);
 
     if (blank_line_)
         utility_.blank_line();

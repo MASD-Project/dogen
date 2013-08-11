@@ -24,9 +24,9 @@
 #include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/io/enum_info_io.hpp"
 #include "dogen/cpp/io/exception_info_io.hpp"
-#include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
+#include "dogen/cpp/io/source_file_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
 
 
@@ -144,9 +144,9 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const file_info& v) {
+std::ostream& operator<<(std::ostream& s, const source_file& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::file_info\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::source_file\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"descriptor\": " << v.descriptor() << ", "
       << "\"class_info\": " << v.class_info() << ", "

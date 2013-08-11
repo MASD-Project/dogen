@@ -22,9 +22,9 @@
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/exception_info_hash.hpp"
-#include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
+#include "dogen/cpp/hash/source_file_hash.hpp"
 #include "dogen/cpp/hash/visitor_info_hash.hpp"
 
 namespace {
@@ -109,7 +109,7 @@ inline std::size_t hash_boost_optional_dogen_cpp_visitor_info(const boost::optio
 namespace dogen {
 namespace cpp {
 
-std::size_t file_info_hasher::hash(const file_info&v) {
+std::size_t source_file_hasher::hash(const source_file&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

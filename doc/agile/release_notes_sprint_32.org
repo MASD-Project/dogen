@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 32.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-09 Fri 23:42]
+Clock summary at [2013-08-11 Sun 23:52]
 
-| Headline                                                              | Time   |      |      |
-|-----------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                          | *7:53* |      |      |
-|-----------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                       |        | 7:53 |      |
-| IMPLEMENTATION Release notes and backlog grooming                     |        |      | 0:28 |
-| COMPLETED Split transformation code from C++ model into its own model |        |      | 2:57 |
-| COMPLETED Create a formatting workflow in C++ formatters model        |        |      | 2:08 |
-| IMPLEMENTATION Tidy-up all C++ models                                 |        |      | 2:20 |
+| Headline                                                              | Time    |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                          | *15:11* |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                       |         | 15:11 |      |
+| IMPLEMENTATION Release notes and backlog grooming                     |         |       | 0:28 |
+| COMPLETED Split transformation code from C++ model into its own model |         |       | 2:57 |
+| COMPLETED Create a formatting workflow in C++ formatters model        |         |       | 2:08 |
+| COMPLETED Tidy-up all C++ models                                      |         |       | 2:20 |
+| IMPLEMENTATION Make a more truthful C++ model                         |         |       | 7:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -119,7 +120,12 @@ tough job.
      CLOCK: [2013-08-11 Sun 12:21]--[2013-08-11 Sun 15:00] =>  2:39
      CLOCK: [2013-08-11 Sun 12:00]--[2013-08-11 Sun 12:21] =>  0:21
 
-**** Rename =file_info= to source_file
+**** COMPLETED Rename =file_info= to source_file
+     CLOSED: [2013-08-11 Sun 23:46]
+     CLOCK: [2013-08-11 Sun 23:38]--[2013-08-11 Sun 23:51] =>  0:13
+     CLOCK: [2013-08-11 Sun 23:31]--[2013-08-11 Sun 23:39] =>  0:08
+     CLOCK: [2013-08-11 Sun 22:50]--[2013-08-11 Sun 23:31] =>  0:41
+
 **** Add licence as a member in =source_file=
 **** Make members of =source_file= a pointer to element
 **** Create a mock factory for C++ model

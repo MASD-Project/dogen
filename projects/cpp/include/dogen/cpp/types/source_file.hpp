@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FILE_INFO_HPP
-#define DOGEN_CPP_TYPES_FILE_INFO_HPP
+#ifndef DOGEN_CPP_TYPES_SOURCE_FILE_HPP
+#define DOGEN_CPP_TYPES_SOURCE_FILE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include <list>
 #include <string>
-#include "dogen/cpp/serialization/file_info_fwd_ser.hpp"
+#include "dogen/cpp/serialization/source_file_fwd_ser.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
@@ -45,17 +45,17 @@ namespace cpp {
 /**
  * @brief Represents a file containing C++ source code.
  */
-class file_info final {
+class source_file final {
 public:
-    file_info() = default;
-    file_info(const file_info&) = default;
-    ~file_info() = default;
+    source_file() = default;
+    source_file(const source_file&) = default;
+    ~source_file() = default;
 
 public:
-    file_info(file_info&& rhs);
+    source_file(source_file&& rhs);
 
 public:
-    file_info(
+    source_file(
         const std::string& documentation,
         const dogen::cpp::content_descriptor& descriptor,
         const boost::optional<dogen::cpp::class_info>& class_info,
@@ -72,10 +72,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const file_info& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const source_file& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, file_info& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, source_file& v, unsigned int version);
 
 public:
     /**
@@ -213,14 +213,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const file_info& rhs) const;
-    bool operator!=(const file_info& rhs) const {
+    bool operator==(const source_file& rhs) const;
+    bool operator!=(const source_file& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(file_info& other) noexcept;
-    file_info& operator=(file_info other);
+    void swap(source_file& other) noexcept;
+    source_file& operator=(source_file other);
 
 private:
     std::string documentation_;
@@ -244,8 +244,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::file_info& lhs,
-    dogen::cpp::file_info& rhs) {
+    dogen::cpp::source_file& lhs,
+    dogen::cpp::source_file& rhs) {
     lhs.swap(rhs);
 }
 

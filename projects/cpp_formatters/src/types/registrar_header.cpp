@@ -53,8 +53,8 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new registrar_header(stream));
 }
 
-void registrar_header::format(const cpp::file_info& fi) {
-    const auto o(fi.registrar_info());
+void registrar_header::format(const cpp::source_file& f) {
+    const auto o(f.registrar_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;
         BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));
@@ -65,7 +65,7 @@ void registrar_header::format(const cpp::file_info& fi) {
 
     const bool blank_line(false);
     includes includes(stream_, blank_line);
-    includes.format(fi);
+    includes.format(f);
 
     {
         const auto ri(*o);

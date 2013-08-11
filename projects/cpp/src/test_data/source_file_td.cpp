@@ -23,9 +23,9 @@
 #include "dogen/cpp/test_data/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
-#include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
+#include "dogen/cpp/test_data/source_file_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
 
 namespace {
@@ -133,9 +133,9 @@ create_boost_optional_dogen_cpp_visitor_info(unsigned int position) {
 namespace dogen {
 namespace cpp {
 
-file_info_generator::file_info_generator() : position_(0) { }
+source_file_generator::source_file_generator() : position_(0) { }
 
-void file_info_generator::
+void source_file_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.descriptor(create_dogen_cpp_content_descriptor(position + 1));
@@ -152,21 +152,21 @@ populate(const unsigned int position, result_type& v) {
     v.relative_path(create_boost_filesystem_path(position + 12));
 }
 
-file_info_generator::result_type
-file_info_generator::create(const unsigned int position) {
-    file_info r;
-    file_info_generator::populate(position, r);
+source_file_generator::result_type
+source_file_generator::create(const unsigned int position) {
+    source_file r;
+    source_file_generator::populate(position, r);
     return r;
 }
-file_info_generator::result_type*
-file_info_generator::create_ptr(const unsigned int position) {
-    file_info* p = new file_info();
-    file_info_generator::populate(position, *p);
+source_file_generator::result_type*
+source_file_generator::create_ptr(const unsigned int position) {
+    source_file* p = new source_file();
+    source_file_generator::populate(position, *p);
     return p;
 }
 
-file_info_generator::result_type
-file_info_generator::operator()() {
+source_file_generator::result_type
+source_file_generator::operator()() {
     return create(position_++);
 }
 

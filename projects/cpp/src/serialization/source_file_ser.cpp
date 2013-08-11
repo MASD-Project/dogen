@@ -34,9 +34,9 @@
 #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
-#include "dogen/cpp/serialization/file_info_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
+#include "dogen/cpp/serialization/source_file_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
 
 #ifdef __linux__
@@ -49,7 +49,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::cpp::file_info& v,
+    const dogen::cpp::source_file& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("descriptor", v.descriptor_);
@@ -68,7 +68,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::cpp::file_info& v,
+    dogen::cpp::source_file& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("descriptor", v.descriptor_);
@@ -94,21 +94,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::file_info& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::cpp::file_info& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::source_file& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::cpp::source_file& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::cpp::file_info& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::cpp::file_info& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::cpp::source_file& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::cpp::source_file& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::cpp::file_info& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::cpp::file_info& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::cpp::source_file& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::cpp::source_file& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::cpp::file_info& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::cpp::file_info& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::cpp::source_file& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::cpp::source_file& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::cpp::file_info& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::cpp::file_info& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::cpp::source_file& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::cpp::source_file& v, unsigned int version);
 #endif
 
 } }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_HPP
-#define DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_HPP
+#ifndef DOGEN_SML_TO_CPP_TYPES_SOURCE_FILE_FACTORY_HPP
+#define DOGEN_SML_TO_CPP_TYPES_SOURCE_FILE_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/source_file.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 #include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
 
@@ -44,15 +44,15 @@ namespace sml_to_cpp {
  * @brief Generates the various file info representations for a given
  * SML type.
  */
-class file_info_factory {
+class source_file_factory {
 public:
-    file_info_factory() = delete;
-    file_info_factory(const file_info_factory&) = default;
-    ~file_info_factory() = default;
-    file_info_factory& operator=(const file_info_factory&) = delete;
+    source_file_factory() = delete;
+    source_file_factory(const source_file_factory&) = default;
+    ~source_file_factory() = default;
+    source_file_factory& operator=(const source_file_factory&) = delete;
 
 public:
-    explicit file_info_factory(const locator& l);
+    explicit source_file_factory(const locator& l);
 
 private:
     /**
@@ -65,49 +65,49 @@ private:
     /**
      * @brief Performs the initial setup of the file info.
      */
-    cpp::file_info create(const cpp::content_descriptor& cd) const;
+    cpp::source_file create(const cpp::content_descriptor& cd) const;
 
 public:
     /**
      * @brief Manufacture the file info for the given enum info.
      */
-    cpp::file_info create(const cpp::enum_info& ei,
+    cpp::source_file create(const cpp::enum_info& ei,
         const cpp::content_descriptor& cd, const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture all the file infos for the given exception.
      */
-    cpp::file_info create(const cpp::exception_info& ei,
+    cpp::source_file create(const cpp::exception_info& ei,
         const cpp::content_descriptor& cd, const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture all the file infos for the given namespace.
      */
-    cpp::file_info create(const cpp::namespace_info& ni,
+    cpp::source_file create(const cpp::namespace_info& ni,
         const cpp::content_descriptor& cd) const;
 
     /**
      * @brief Manufacture all the file infos for the given class.
      */
-    cpp::file_info create(const cpp::class_info& ci,
+    cpp::source_file create(const cpp::class_info& ci,
         const cpp::content_descriptor& cd, const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture file info for includer.
      */
-    cpp::file_info create_includer(const cpp::content_descriptor& cd,
+    cpp::source_file create_includer(const cpp::content_descriptor& cd,
         const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture file info for registrar.
      */
-    cpp::file_info create_registrar(const cpp::registrar_info& ri,
+    cpp::source_file create_registrar(const cpp::registrar_info& ri,
         const cpp::content_descriptor& cd, const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture file info for visitor.
      */
-    cpp::file_info create_visitor(const cpp::visitor_info& vi,
+    cpp::source_file create_visitor(const cpp::visitor_info& vi,
         const cpp::content_descriptor& cd, const inclusion_lists& il) const;
 
 private:

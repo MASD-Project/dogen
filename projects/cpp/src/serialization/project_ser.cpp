@@ -30,9 +30,9 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include "dogen/cpp/serialization/cmakelists_info_ser.hpp"
-#include "dogen/cpp/serialization/file_info_ser.hpp"
 #include "dogen/cpp/serialization/odb_options_info_ser.hpp"
 #include "dogen/cpp/serialization/project_ser.hpp"
+#include "dogen/cpp/serialization/source_file_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

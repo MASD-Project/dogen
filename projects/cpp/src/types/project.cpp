@@ -30,7 +30,7 @@ project::project(project&& rhs)
       include_cmakelists_(std::move(rhs.include_cmakelists_)) { }
 
 project::project(
-    const std::list<dogen::cpp::file_info>& files,
+    const std::list<dogen::cpp::source_file>& files,
     const dogen::cpp::odb_options_info& odb_options,
     const dogen::cpp::cmakelists_info& src_cmakelists,
     const boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists)
@@ -60,19 +60,19 @@ project& project::operator=(project other) {
     return *this;
 }
 
-const std::list<dogen::cpp::file_info>& project::files() const {
+const std::list<dogen::cpp::source_file>& project::files() const {
     return files_;
 }
 
-std::list<dogen::cpp::file_info>& project::files() {
+std::list<dogen::cpp::source_file>& project::files() {
     return files_;
 }
 
-void project::files(const std::list<dogen::cpp::file_info>& v) {
+void project::files(const std::list<dogen::cpp::source_file>& v) {
     files_ = v;
 }
 
-void project::files(const std::list<dogen::cpp::file_info>&& v) {
+void project::files(const std::list<dogen::cpp::source_file>&& v) {
     files_ = std::move(v);
 }
 

@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_FWD_HPP
-#define DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_HASH_SOURCE_FILE_HASH_HPP
+#define DOGEN_CPP_HASH_SOURCE_FILE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml_to_cpp {
+#include <functional>
+#include "dogen/cpp/types/source_file.hpp"
 
-class file_info_factory;
+namespace dogen {
+namespace cpp {
+
+struct source_file_hasher {
+public:
+    static std::size_t hash(const source_file& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::cpp::source_file> {
+public:
+    size_t operator()(const dogen::cpp::source_file& v) const {
+        return dogen::cpp::source_file_hasher::hash(v);
+    }
+};
+
+}
 #endif

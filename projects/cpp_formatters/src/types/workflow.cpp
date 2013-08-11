@@ -89,25 +89,25 @@ workflow::format_odb_options_activity(const cpp::project& p) const {
 }
 
 workflow::result_type
-workflow::format_file_infos_activity(const cpp::project& p) const {
+workflow::format_source_files_activity(const cpp::project& p) const {
     workflow::result_type r;
 
     std::map<config::cpp_facet_types, std::list<std::string> >
         headers_for_facet_;
 
-    for (const auto fi : p.files()) {
-        if (fi.descriptor().file_type() == cpp::file_types::header)
-            headers_for_facet_[fi.descriptor().facet_type()].
-                push_back(fi.relative_path().generic_string());
+    for (const auto f : p.files()) {
+        if (f.descriptor().file_type() == cpp::file_types::header)
+            headers_for_facet_[f.descriptor().facet_type()].
+                push_back(f.relative_path().generic_string());
 
-        BOOST_LOG_SEV(lg, debug) << "Formatting:" << fi.file_path().string();
-        BOOST_LOG_SEV(lg, debug) << "Descriptor:" << fi.descriptor();
+        BOOST_LOG_SEV(lg, debug) << "Formatting:" << f.file_path().string();
+        BOOST_LOG_SEV(lg, debug) << "Descriptor:" << f.descriptor();
         cpp_formatters::factory factory(settings_);
         cpp_formatters::file_formatter::shared_ptr ff;
         std::ostringstream s;
-        ff = factory.create(s, fi.descriptor());
-        ff->format(fi);
-        r.insert(std::make_pair(fi.file_path(), s.str()));
+        ff = factory.create(s, f.descriptor());
+        ff->format(f);
+        r.insert(std::make_pair(f.file_path(), s.str()));
     }
 
     return r;
@@ -116,7 +116,7 @@ workflow::format_file_infos_activity(const cpp::project& p) const {
 workflow::result_type workflow::execute(const cpp::project& p) {
     BOOST_LOG_SEV(lg, info) << "C++ formatters workflow started.";
 
-    workflow::result_type r(format_file_infos_activity(p));
+    workflow::result_type r(format_source_files_activity(p));
     if (settings_.disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else {

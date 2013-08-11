@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FILE_INFO_FWD_HPP
-#define DOGEN_CPP_TYPES_FILE_INFO_FWD_HPP
+#ifndef DOGEN_CPP_IO_SOURCE_FILE_IO_HPP
+#define DOGEN_CPP_IO_SOURCE_FILE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/cpp/types/source_file.hpp"
+
 namespace dogen {
 namespace cpp {
 
-class file_info;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::source_file& v);
 
 } }
 

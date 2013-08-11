@@ -356,7 +356,7 @@
         <dia:point val="56,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.3175,7.2;56.75,12.8"/>
+        <dia:rectangle val="39.3175,7.25;56.75,12.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -688,7 +688,7 @@
         <dia:point val="-1,12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.754999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -1968,7 +1968,7 @@
         <dia:point val="60.735,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.985,7.2;102.305,12.8"/>
+        <dia:rectangle val="59.985,7.25;102.305,12.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2608,7 +2608,7 @@
         <dia:point val="101,72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.664999999999999"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="34.000000000000021"/>
@@ -4965,7 +4965,7 @@
         <dia:point val="37,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.435"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -5450,19 +5450,19 @@ of relationship information.#</dia:string>
         <dia:point val="73,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,-8.05;80.715,-4.95"/>
+        <dia:rectangle val="72.95,-8.05;81.98,-4.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.665"/>
+        <dia:real val="8.9299999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_info_factory#</dia:string>
+        <dia:string>#source_file_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -5569,7 +5569,7 @@ of relationship information.#</dia:string>
         <dia:point val="-1,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.614999999999998"/>
+        <dia:real val="23.615000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.7000000000000002"/>

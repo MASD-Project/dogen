@@ -107,18 +107,18 @@ void visitor::format(const cpp::visitor_info& vi) {
     utility_.blank_line(2);
 }
 
-void visitor::format(const cpp::file_info& fi) {
+void visitor::format(const cpp::source_file& f) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(fi.header_guard());
+    guards.format_start(f.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(fi);
+    includes.format(f);
 
-    const auto o(fi.visitor_info());
+    const auto o(f.visitor_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_visitor_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_visitor_info));
