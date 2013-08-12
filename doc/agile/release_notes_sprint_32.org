@@ -126,8 +126,18 @@ tough job.
      CLOCK: [2013-08-11 Sun 23:31]--[2013-08-11 Sun 23:39] =>  0:08
      CLOCK: [2013-08-11 Sun 22:50]--[2013-08-11 Sun 23:31] =>  0:41
 
+**** CANCELLED Make members of =source_file= a pointer to element
+     CLOSED: [2013-08-12 Mon 07:53]
+
+Since the existing formatters are tactical and will be deleted when
+we're finished, there is no point in refactoring them. Instead, we'll
+just focus on the new formatters.
+
+**** IMPLEMENTATION Create a class to represent a namespace, with a scope
+     CLOCK: [2013-08-12 Mon 07:48]--[2013-08-12 Mon 08:15] =>  0:27
+
+**** Add scope to =source_file=
 **** Add licence as a member in =source_file=
-**** Make members of =source_file= a pointer to element
 **** Create a mock factory for C++ model
 **** Create a basic =standard_transformer= that instantiates new classes
 **** Create a basic =standard_formatter= that formats new classes
