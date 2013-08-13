@@ -11,6 +11,22 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Test data generator does not detect cycles in object graph        :story:
+
+At present we handle composition correctly, but not other forms of
+cycles in the object graph.
+
+Let model M be composed of class A with a member of type class B, and
+class B with a member of type =shared_ptr= to class A. The test data
+generated for such model will contain an infinite loop. We need a way
+to detect such loops, potentially in SML, and then generate code which
+breaks the loop.
+
+This could be done by explicitly checking if the type of any member
+variable loops back into the type itself. Of course one could conceive
+cycles that involve many edges in the object graph, and for these we'd
+still generate invalid code.
+
 *** Split a fully formed model from partial models                    :story:
 
 We should really have two distinct types to represent the model that
