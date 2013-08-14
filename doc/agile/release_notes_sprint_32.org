@@ -70,6 +70,51 @@ would takes a lot of classes such as locator, includer, etc;
 - fix model layout
 
 *** IMPLEMENTATION Make a more truthful C++ model                      :epic:
+    CLOCK: [2013-08-14 Wed 07:36]--[2013-08-14 Wed 08:20] =>  0:44
+
+Notes:
+
+This is not quite as trivial as first thought. The gist of it is as
+follows:
+
+- one could make a low-level model of the C++ language; this could be
+  done by either using clang/LLVM or by creating our own model. With
+  this approach, the formatter would either be the clang rewritter or
+  we could roll our own. The formatter would be very dumb, because the
+  AST contains a faithful description of the code to generate, down to
+  the last semi-colon. The downside to this approach is that
+  transforming an SML model into a clang AST (or any other AST that is
+  complete enough to generate C++ code) is a very error prone process
+  and it would be very difficult to maintain these transformers. Its
+  just too low-level to be practical.
+
+- one could make a high-level model of the C++ language: this was the
+  original approach, with concepts such as "visitor" and
+  "registrar". In this approach, we push some of the complexity of the
+  code generation into the type system, creating concepts such as
+  "header guards", "aspect types", "file types" and so on. None of
+  these concepts actually exist in the C++ language; these are just
+  high-level abstractions that enable us to express things in a less
+  verbose way than an AST would. The remaining complexity is then push
+  down to the formatters via hard-coding. This approach is great to
+  produce quick results because we just add whatever types we require
+  on the parts of the system we deem "variable" and hard-code at the
+  formatters level whatever we deem to be "constant". However,
+  this model is not very logical because its not modeling the C++
+  language; as such it looks haphazard in parts, and cobbled
+  together. It is also not very flexible; generating slightly
+  different classes requires adding more types because the model is
+  very rigid.
+
+- one could make an intermediate model of the C++ language: this seems
+  to be the right approach. In some cases we may need to go straight
+  down to the token level (e.g. pre-processor constructs); in some
+  other cases we may need high-level abstractions (e.g. forward
+  declaration, class implementation). We need a model that is loosely
+  based on a "reflection" model of the C++ language, but occasionally
+  drops down to the parsing level constructs. 
+
+Previous understanding:
 
 The C++ model should really be a model of the _language_ not of
 high-level constructs such as exceptions, visitor, etc. We should only
