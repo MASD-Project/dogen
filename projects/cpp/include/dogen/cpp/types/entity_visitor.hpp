@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/cpp/types/class_info_fwd.hpp"
-#include "dogen/cpp/types/class_specifier_fwd.hpp"
 #include "dogen/cpp/types/enum_info_fwd.hpp"
 #include "dogen/cpp/types/exception_info_fwd.hpp"
 #include "dogen/cpp/types/namespace_info_fwd.hpp"
@@ -99,16 +98,6 @@ public:
     virtual void visit(const dogen::cpp::visitor_info&) { }
     virtual void visit(dogen::cpp::visitor_info&) const { }
     virtual void visit(dogen::cpp::visitor_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::cpp::class_specifier
-     */
-    /**@{*/
-    virtual void visit(const dogen::cpp::class_specifier&) const { }
-    virtual void visit(const dogen::cpp::class_specifier&) { }
-    virtual void visit(dogen::cpp::class_specifier&) const { }
-    virtual void visit(dogen::cpp::class_specifier&) { }
     /**@}*/
 };
 

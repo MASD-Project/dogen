@@ -29,7 +29,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/class_info_ser.hpp"
-#include "dogen/cpp/serialization/class_specifier_ser.hpp"
 #include "dogen/cpp/serialization/entity_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"

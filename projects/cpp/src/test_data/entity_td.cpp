@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/class_info_td.hpp"
-#include "dogen/cpp/test_data/class_specifier_td.hpp"
 #include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
@@ -49,18 +48,16 @@ populate(const unsigned int position, result_type& v) {
 
 entity_generator::result_type*
 entity_generator::create_ptr(const unsigned int position) {
-    if ((position % 6) == 0)
+    if ((position % 5) == 0)
         return dogen::cpp::enum_info_generator::create_ptr(position);
-    if ((position % 6) == 1)
+    if ((position % 5) == 1)
         return dogen::cpp::exception_info_generator::create_ptr(position);
-    if ((position % 6) == 2)
+    if ((position % 5) == 2)
         return dogen::cpp::registrar_info_generator::create_ptr(position);
-    if ((position % 6) == 3)
+    if ((position % 5) == 3)
         return dogen::cpp::namespace_info_generator::create_ptr(position);
-    if ((position % 6) == 4)
+    if ((position % 5) == 4)
         return dogen::cpp::visitor_info_generator::create_ptr(position);
-    if ((position % 6) == 5)
-        return dogen::cpp::class_specifier_generator::create_ptr(position);
     return dogen::cpp::class_info_generator::create_ptr(position);
 }
 

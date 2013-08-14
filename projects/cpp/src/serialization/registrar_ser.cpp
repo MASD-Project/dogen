@@ -28,7 +28,6 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/cpp/serialization/class_info_ser.hpp"
-#include "dogen/cpp/serialization/class_specifier_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
@@ -49,7 +48,6 @@ void register_types(Archive& ar) {
     config::register_types(ar);
 
     ar.template register_type<dogen::cpp::class_info>();
-    ar.template register_type<dogen::cpp::class_specifier>();
     ar.template register_type<dogen::cpp::enum_info>();
     ar.template register_type<dogen::cpp::exception_info>();
     ar.template register_type<dogen::cpp::namespace_info>();
