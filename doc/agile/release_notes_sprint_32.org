@@ -10,21 +10,23 @@ This file contains all stories that were closed during sprint 32.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-11 Sun 23:52]
+Clock summary at [2013-08-23 Fri 07:49]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *15:11* |       |      |
+| *Total time*                                                          | *16:53* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                       |         | 15:11 |      |
-| IMPLEMENTATION Release notes and backlog grooming                     |         |       | 0:28 |
+| Development Stories Implemented                                       |         | 16:53 |      |
+| COMPLETED Release notes and backlog grooming                          |         |       | 0:35 |
 | COMPLETED Split transformation code from C++ model into its own model |         |       | 2:57 |
 | COMPLETED Create a formatting workflow in C++ formatters model        |         |       | 2:08 |
 | COMPLETED Tidy-up all C++ models                                      |         |       | 2:20 |
-| IMPLEMENTATION Make a more truthful C++ model                         |         |       | 7:18 |
+| CANCELLED Make a more truthful C++ model                              |         |       | 8:53 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-08-23 Fri 07:47]
+    CLOCK: [2013-08-15 Thu 18:22]--[2013-08-15 Thu 18:29] =>  0:07
     CLOCK: [2013-08-08 Thu 08:23]--[2013-08-08 Thu 08:25] =>  0:02
     CLOCK: [2013-08-05 Mon 23:24]--[2013-08-05 Mon 23:31] =>  0:07
     CLOCK: [2013-08-05 Mon 23:05]--[2013-08-05 Mon 23:24] =>  0:19
@@ -69,7 +71,10 @@ would takes a lot of classes such as locator, includer, etc;
 - add comments
 - fix model layout
 
-*** IMPLEMENTATION Make a more truthful C++ model                      :epic:
+*** CANCELLED Make a more truthful C++ model                           :epic:
+    CLOCK: [2013-08-15 Thu 18:29]
+    CLOCK: [2013-08-15 Thu 18:14]--[2013-08-15 Thu 18:22] =>  0:08
+    CLOCK: [2013-08-15 Thu 17:46]--[2013-08-15 Thu 18:02] =>  0:16
     CLOCK: [2013-08-14 Wed 07:36]--[2013-08-14 Wed 08:20] =>  0:44
 
 Notes:
@@ -112,7 +117,7 @@ follows:
   other cases we may need high-level abstractions (e.g. forward
   declaration, class implementation). We need a model that is loosely
   based on a "reflection" model of the C++ language, but occasionally
-  drops down to the parsing level constructs. 
+  drops down to the parsing level constructs.
 
 Previous understanding:
 
@@ -186,5 +191,26 @@ just focus on the new formatters.
 **** Create a mock factory for C++ model
 **** Create a basic =standard_transformer= that instantiates new classes
 **** Create a basic =standard_formatter= that formats new classes
+
+*** CANCELLED Create an SML level concept for facets
+
+In reality, "facets" are not a C++ thing; they are language
+neutral. They are, however, expressed differently in different
+languages. For example:
+
+- types: same on all languages
+- debug_printing: overloaded operator<< in C++, toString() in Java,
+  ToString() in C#, etc.
+- serialisation: slightly less obvious, but effectively the most
+  "native" serialisation available for the given programming
+  language. For C++ this is boost serialisation.
+- hashing: language specific support for hashing, in C++ either std
+  hash or boost hash, in Java/C# overloading of hash functions.
+- test_data: some facilities for test data generation
+- relational: bindings for relational databases. ODB in C++.
+
+We can introduce these concepts at the SML level, probably at the
+=model= and =abstract_object= level; we can then do further
+translation at the language level, as required.
 
 ** Deprecated Development Stories
