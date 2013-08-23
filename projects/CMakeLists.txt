@@ -181,7 +181,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/two_layers_with_objects/include
     ${CMAKE_SOURCE_DIR}/projects/dmp/include
     ${CMAKE_SOURCE_DIR}/projects/split_project/dir/inc
-    ${CMAKE_SOURCE_DIR}/projects/prototype/include
     ${CMAKE_SOURCE_DIR}/projects/trivial_inheritance/include
     ${CMAKE_SOURCE_DIR}/projects/trivial_association/include
     ${CMAKE_SOURCE_DIR}/projects/std_model/include
@@ -213,9 +212,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/engine)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/src)
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/spec)
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/sql)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_primitives)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_in_a_package)

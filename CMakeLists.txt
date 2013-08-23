@@ -79,7 +79,7 @@ else()
     message(STATUS "Profiling NOT enabled...")
 endif()
 
-# WinSock (for PQXX)
+# WinSock (for database)
 if (WIN32)
     find_library(WSOCK_LIB NAMES wsock32 DOC "The winsock library")
     if(WSOCK_LIB)
@@ -102,14 +102,6 @@ if (WIN32)
         message(FATAL_ERROR "mswsock not found.")
     endif()
 endif()
-
-# database
-# find_package(PQXX)
-# if(PQXX_FOUND)
-#     message(STATUS "Found libpqxx...")
-# else()
-#     message(FATAL_ERROR "libpqxx not found.")
-# endif()
 
 #
 # Test models
