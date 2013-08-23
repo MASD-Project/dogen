@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 33.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-23 Fri 08:17]
+Clock summary at [2013-08-23 Fri 08:49]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:30* |      |      |
+| *Total time*                                      | *0:39* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:30 |      |
+| Development Stories Implemented                   |        | 0:39 |      |
 | IMPLEMENTATION Release notes and backlog grooming |        |      | 0:13 |
 | COMPLETED Remove prototype model                  |        |      | 0:04 |
-| Create an intermediate C++ model                  |        |      | 0:13 |
+| Create an intermediate C++ model                  |        |      | 0:22 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -40,6 +40,7 @@ iteration (see Make a more truthful C++ model).
 
 **** COMPLETED Create the initial skeleton for the C++ IM
      CLOSED: [2013-08-23 Fri 08:17]
+     CLOCK: [2013-08-23 Fri 08:29]--[2013-08-23 Fri 08:38] =>  0:09
      CLOCK: [2013-08-23 Fri 08:04]--[2013-08-23 Fri 08:17] =>  0:13
 
 **** Create a mock factory for the C++ IM
