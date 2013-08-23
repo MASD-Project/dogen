@@ -72,7 +72,7 @@ would takes a lot of classes such as locator, includer, etc;
 - fix model layout
 
 *** CANCELLED Make a more truthful C++ model                           :epic:
-    CLOCK: [2013-08-15 Thu 18:29]
+    CLOCK: [2013-08-15 Thu 18:29]--[2013-08-15 Thu 19:05] =>  0:36
     CLOCK: [2013-08-15 Thu 18:14]--[2013-08-15 Thu 18:22] =>  0:08
     CLOCK: [2013-08-15 Thu 17:46]--[2013-08-15 Thu 18:02] =>  0:16
     CLOCK: [2013-08-14 Wed 07:36]--[2013-08-14 Wed 08:20] =>  0:44
