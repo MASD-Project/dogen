@@ -1,4 +1,4 @@
-#+title: Release Notes for Sprint 33
+g#+title: Release Notes for Sprint 33
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 33.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-23 Fri 08:49]
+Clock summary at [2013-08-25 Sun 23:37]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:39* |      |      |
+| *Total time*                                      | *6:55* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:39 |      |
+| Development Stories Implemented                   |        | 6:55 |      |
 | IMPLEMENTATION Release notes and backlog grooming |        |      | 0:13 |
 | COMPLETED Remove prototype model                  |        |      | 0:04 |
-| Create an intermediate C++ model                  |        |      | 0:22 |
+| IMPLEMENTATION Create an intermediate C++ model   |        |      | 6:38 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -33,10 +33,49 @@ Clock summary at [2013-08-23 Fri 08:49]
 We don't really need it any more, concepts can be tried directly with
 dogen.
 
-*** Create an intermediate C++ model                                   :epic:
+*** IMPLEMENTATION Create an intermediate C++ model                    :epic:
+    CLOCK: [2013-08-25 Sun 21:20]--[2013-08-25 Sun 23:36] =>  2:16
+    CLOCK: [2013-08-25 Sun 21:05]--[2013-08-25 Sun 21:20] =>  0:15
+    CLOCK: [2013-08-25 Sun 17:15]--[2013-08-25 Sun 20:30] =>  3:15
+    CLOCK: [2013-08-25 Sun 16:45]--[2013-08-25 Sun 17:15] =>  0:30
 
 This story is the result of the analysis story done on the previous
 iteration (see Make a more truthful C++ model).
+
+#+begin_src
+[shared_ptr]
+name = shared_ptr;
+namespaces = boost;
+is_smart_pointer = true;
+is_associative_container = false;
+is_sequence_container = false;
+requires_manual_move_constructor = false;
+requires_manual_default_constructor = false;
+
+[bool]
+name = bool;
+is_primitive = true;
+default_value = false;
+is_smart_pointer = false;
+is_associative_container = false;
+is_sequence_container = false;
+requires_manual_move_constructor = false;
+requires_manual_default_constructor = true;
+stream_style = boolean
+
+[double]
+name = double;
+is_primitive = true;
+default_value = 0.0d;
+is_smart_pointer = false;
+is_associative_container = false;
+is_sequence_container = false;
+requires_manual_move_constructor = false;
+requires_manual_default_constructor = true;
+stream_style = floating_point
+#+end_src
+
+
 
 **** COMPLETED Create the initial skeleton for the C++ IM
      CLOSED: [2013-08-23 Fri 08:17]

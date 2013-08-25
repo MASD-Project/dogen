@@ -254,9 +254,9 @@ if(use_latest_driver)
 endif()
 add_dependencies(codegen codegen_${target})
 
-set(target cppim)
+set(target om)
 add_custom_target(codegen_${target}
-    COMMENT "Generating C++ Intermediate Model" VERBATIM
+    COMMENT "Generating the Output Model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
