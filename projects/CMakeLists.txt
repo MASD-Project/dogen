@@ -158,6 +158,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/sml_to_cpp/include
     ${CMAKE_SOURCE_DIR}/projects/om/include
     ${CMAKE_SOURCE_DIR}/projects/om_formatters/include
+    ${CMAKE_SOURCE_DIR}/projects/sml_to_om/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/engine/include
     ${CMAKE_SOURCE_DIR}/projects/driver/include
@@ -214,6 +215,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/om)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/om/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/om_formatters)
 #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/om/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml_to_om)
+#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml_to_om/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/engine)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver)
