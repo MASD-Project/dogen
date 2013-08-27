@@ -10,19 +10,20 @@ This file contains all stories that were closed during sprint 33.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-25 Sun 23:37]
+Clock summary at [2013-08-27 Tue 21:41]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *6:55* |      |      |
+| *Total time*                                      | *8:12* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 6:55 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:13 |
+| Development Stories Implemented                   |        | 8:12 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:14 |
 | COMPLETED Remove prototype model                  |        |      | 0:04 |
-| IMPLEMENTATION Create an intermediate C++ model   |        |      | 6:38 |
+| IMPLEMENTATION Create an intermediate C++ model   |        |      | 7:54 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-08-27 Tue 21:40]--[2013-08-27 Tue 21:41] =>  0:01
     CLOCK: [2013-08-23 Fri 07:59]--[2013-08-23 Fri 08:00] =>  0:01
     CLOCK: [2013-08-23 Fri 07:47]--[2013-08-23 Fri 07:59] =>  0:08
 
@@ -34,6 +35,9 @@ We don't really need it any more, concepts can be tried directly with
 dogen.
 
 *** IMPLEMENTATION Create an intermediate C++ model                    :epic:
+    CLOCK: [2013-08-27 Tue 21:33]--[2013-08-27 Tue 21:39] =>  0:06
+    CLOCK: [2013-08-27 Tue 20:53]--[2013-08-27 Tue 21:33] =>  0:40
+    CLOCK: [2013-08-27 Tue 19:25]--[2013-08-27 Tue 19:55] =>  0:30
     CLOCK: [2013-08-25 Sun 21:20]--[2013-08-25 Sun 23:36] =>  2:16
     CLOCK: [2013-08-25 Sun 21:05]--[2013-08-25 Sun 21:20] =>  0:15
     CLOCK: [2013-08-25 Sun 17:15]--[2013-08-25 Sun 20:30] =>  3:15
@@ -41,6 +45,57 @@ dogen.
 
 This story is the result of the analysis story done on the previous
 iteration (see Make a more truthful C++ model).
+
+
+**** COMPLETED Create the initial skeleton for the C++ IM
+     CLOSED: [2013-08-23 Fri 08:17]
+     CLOCK: [2013-08-23 Fri 08:29]--[2013-08-23 Fri 08:38] =>  0:09
+     CLOCK: [2013-08-23 Fri 08:04]--[2013-08-23 Fri 08:17] =>  0:13
+
+**** Create a mock factory for the C++ IM
+**** Create a basic =standard_transformer= that instantiates new classes
+**** Create a basic =standard_formatter= that formats new classes
+
+*** Create an SML level concept for facets
+
+In reality, "facets" are not a C++ thing; they are language
+neutral. They are, however, expressed differently in different
+languages. For example:
+
+- types: same on all languages
+- debug_printing: overloaded operator<< in C++, toString() in Java,
+  ToString() in C#, etc.
+- serialisation: slightly less obvious, but effectively the most
+  "native" serialisation available for the given programming
+  language. For C++ this is boost serialisation.
+- hashing: language specific support for hashing, in C++ either std
+  hash or boost hash, in Java/C# overloading of hash functions.
+- test_data: some facilities for test data generation
+- relational: bindings for relational databases. ODB in C++.
+
+We can introduce these concepts at the SML level, probably at the
+=model= and =abstract_object= level; we can then do further
+translation at the language level, as required.
+
+*** Loading external models from file
+
+We should really use something like boost property tree to allow
+system models to be loaded from file. We can then convert primitives,
+boost, STL, etc to this. These "models" would then output both a SML
+model as well as some kind of CPP representation with include files,
+etc.
+
+We should call these "profiles" in the sense of ODB (the Qt profile,
+the boost profile, etc). A file should contain all types for that
+profile, from which we generate both the SML model and the inclusions
+for includer.
+
+Since INI files do not support nesting/collections, we probably need
+to use XML or JSON.
+
+See [[http://www.boost.org/doc/libs/1_53_0/doc/html/boost_propertytree/parsers.html#boost_propertytree.parsers.ini_parser][boost property tree]].
+
+Example file:
 
 #+begin_src
 [shared_ptr]
@@ -74,37 +129,5 @@ requires_manual_move_constructor = false;
 requires_manual_default_constructor = true;
 stream_style = floating_point
 #+end_src
-
-
-
-**** COMPLETED Create the initial skeleton for the C++ IM
-     CLOSED: [2013-08-23 Fri 08:17]
-     CLOCK: [2013-08-23 Fri 08:29]--[2013-08-23 Fri 08:38] =>  0:09
-     CLOCK: [2013-08-23 Fri 08:04]--[2013-08-23 Fri 08:17] =>  0:13
-
-**** Create a mock factory for the C++ IM
-**** Create a basic =standard_transformer= that instantiates new classes
-**** Create a basic =standard_formatter= that formats new classes
-
-*** Create an SML level concept for facets
-
-In reality, "facets" are not a C++ thing; they are language
-neutral. They are, however, expressed differently in different
-languages. For example:
-
-- types: same on all languages
-- debug_printing: overloaded operator<< in C++, toString() in Java,
-  ToString() in C#, etc.
-- serialisation: slightly less obvious, but effectively the most
-  "native" serialisation available for the given programming
-  language. For C++ this is boost serialisation.
-- hashing: language specific support for hashing, in C++ either std
-  hash or boost hash, in Java/C# overloading of hash functions.
-- test_data: some facilities for test data generation
-- relational: bindings for relational databases. ODB in C++.
-
-We can introduce these concepts at the SML level, probably at the
-=model= and =abstract_object= level; we can then do further
-translation at the language level, as required.
 
 ** Deprecated Development Stories

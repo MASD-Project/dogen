@@ -455,24 +455,6 @@ are about to write the message for an exception when we decide to
 throw. Instead we should just print unexpected/invalid value and cast
 it to a numeric value in brackets.
 
-*** Loading external models from file
-
-We should really use something like boost property tree to allow
-system models to be loaded from file. We can then convert primitives,
-boost, STL, etc to this. These "models" would then output both a SML
-model as well as some kind of CPP representation with include files,
-etc.
-
-We should call these "profiles" in the sense of ODB (the Qt profile,
-the boost profile, etc). A file should contain all types for that
-profile, from which we generate both the SML model and the inclusions
-for includer.
-
-Since INI files do not support nesting/collections, we probably need
-to use XML or JSON.
-
-See [[http://www.boost.org/doc/libs/1_53_0/doc/html/boost_propertytree/parsers.html#boost_propertytree.parsers.ini_parser][boost property tree]].
-
 *** Generate state diagrams
 
 There is nothing stopping us from reading the UML State Chart objects
