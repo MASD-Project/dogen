@@ -35,6 +35,7 @@ We don't really need it any more, concepts can be tried directly with
 dogen.
 
 *** IMPLEMENTATION Create an intermediate C++ model                    :epic:
+    CLOCK: [2013-08-27 Tue 21:47]--[2013-08-27 Tue 21:51] =>  0:04
     CLOCK: [2013-08-27 Tue 21:33]--[2013-08-27 Tue 21:39] =>  0:06
     CLOCK: [2013-08-27 Tue 20:53]--[2013-08-27 Tue 21:33] =>  0:40
     CLOCK: [2013-08-27 Tue 19:25]--[2013-08-27 Tue 19:55] =>  0:30

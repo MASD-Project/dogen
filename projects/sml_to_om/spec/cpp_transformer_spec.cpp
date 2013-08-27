@@ -18,6 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_om/types/context.hpp"
-#include "dogen/sml_to_om/types/cpp_transformer.hpp"
-#include "dogen/sml_to_om/types/transformation_error.hpp"
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/sml_to_om/types/all.hpp"
+#include "dogen/sml_to_om/io/all_io.hpp"
+#include "dogen/sml_to_om/test_data/all_td.hpp"
+
+namespace {
+
+const std::string empty;
+const std::string test_module("sml_to_om");
+const std::string test_suite("cpp_transformer_spec");
+
+}
+
+using namespace dogen::sml_to_om;
+using namespace dogen::utility::test;
+
+BOOST_AUTO_TEST_SUITE(cpp_transformer)
+
+BOOST_AUTO_TEST_CASE(transforming_empty_model_results_in_expected_cpp_project) {
+    SETUP_TEST_LOG("transforming_empty_model_results_in_expected_cpp_project");
+
+}
+
+BOOST_AUTO_TEST_SUITE_END()

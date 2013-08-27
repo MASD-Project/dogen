@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TO_OM_TYPES_TRANSFORMER_HPP
-#define DOGEN_SML_TO_OM_TYPES_TRANSFORMER_HPP
+#ifndef DOGEN_SML_TO_OM_TYPES_CPP_TRANSFORMER_HPP
+#define DOGEN_SML_TO_OM_TYPES_CPP_TRANSFORMER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -44,18 +44,18 @@ namespace dogen {
 namespace sml_to_om {
 
 /**
- * @brief Transforms an SML type into its corresponding OM type.
+ * @brief Transforms an SML type into its corresponding output type.
  */
-class transformer : public sml::type_visitor {
+class cpp_transformer : public sml::type_visitor {
 public:
-    transformer() = delete;
-    transformer(const transformer&) = default;
-    transformer& operator=(const transformer&) = delete;
-    transformer(transformer&& rhs) = default;
+    cpp_transformer() = delete;
+    cpp_transformer(const cpp_transformer&) = default;
+    cpp_transformer& operator=(const cpp_transformer&) = delete;
+    cpp_transformer(cpp_transformer&& rhs) = default;
 
 public:
-    transformer(const sml::model& m, context& c);
-    virtual ~transformer() noexcept { }
+    cpp_transformer(const sml::model& m, context& c);
+    virtual ~cpp_transformer() noexcept { }
 
 private:
     /**
@@ -78,7 +78,7 @@ private:
 
 public:
     /**
-     * @brief Transforms an SML type into the appropriate C++ object.
+     * @brief Transforms an SML type into the appropriate output object.
      */
     void from_type(const sml::type& t);
 

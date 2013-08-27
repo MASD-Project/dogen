@@ -1,2 +1,2 @@
 // dummy function to suppress ranlib warnings
-void transformer() { }
+void cpp_transformer() { }
