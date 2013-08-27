@@ -20,10 +20,16 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/types/entity.hpp"
+#include "dogen/sml/test/mock_model_factory.hpp"
+#include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/sml_to_om/types/all.hpp"
 #include "dogen/sml_to_om/io/all_io.hpp"
 #include "dogen/sml_to_om/test_data/all_td.hpp"
+
+using dogen::sml::test::mock_model_factory;
+using dogen::config::test::mock_settings_factory;
 
 namespace {
 
@@ -39,8 +45,17 @@ using namespace dogen::utility::test;
 BOOST_AUTO_TEST_SUITE(cpp_transformer)
 
 BOOST_AUTO_TEST_CASE(transforming_empty_model_results_in_expected_cpp_project) {
-    SETUP_TEST_LOG("transforming_empty_model_results_in_expected_cpp_project");
+    SETUP_TEST_LOG_SOURCE("transforming_empty_model_results_in_expected_cpp_project");
 
+    const auto m(mock_model_factory::build_single_type_model());
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.objects().size() == 1);
+
+    dogen::sml_to_om::context c;
+    const auto ft(mock_settings_factory::build_facets());
+    dogen::sml_to_om::cpp_transformer t(ft, m, c);
+    t.from_type(*m.objects().begin()->second);
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
 }
 
 BOOST_AUTO_TEST_SUITE_END()

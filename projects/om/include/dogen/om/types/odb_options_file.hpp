@@ -52,6 +52,7 @@ public:
         const boost::filesystem::path& full_path,
         const boost::filesystem::path& relative_path,
         const dogen::om::preamble& preamble,
+        const boost::optional<dogen::om::code_generation_marker>& marker,
         const dogen::om::licence& licence,
         const std::list<boost::shared_ptr<dogen::om::odb_option> >& features);
 

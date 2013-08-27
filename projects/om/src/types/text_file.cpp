@@ -19,9 +19,25 @@
  *
  */
 #include <ostream>
+#include "dogen/om/io/code_generation_marker_io.hpp"
 #include "dogen/om/io/licence_io.hpp"
 #include "dogen/om/io/preamble_io.hpp"
 #include "dogen/om/types/text_file.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::om::code_generation_marker>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace om {
@@ -30,16 +46,19 @@ text_file::text_file(text_file&& rhs)
     : full_path_(std::move(rhs.full_path_)),
       relative_path_(std::move(rhs.relative_path_)),
       preamble_(std::move(rhs.preamble_)),
+      marker_(std::move(rhs.marker_)),
       licence_(std::move(rhs.licence_)) { }
 
 text_file::text_file(
     const boost::filesystem::path& full_path,
     const boost::filesystem::path& relative_path,
     const dogen::om::preamble& preamble,
+    const boost::optional<dogen::om::code_generation_marker>& marker,
     const dogen::om::licence& licence)
     : full_path_(full_path),
       relative_path_(relative_path),
       preamble_(preamble),
+      marker_(marker),
       licence_(licence) { }
 
 void text_file::to_stream(std::ostream& s) const {
@@ -48,6 +67,7 @@ void text_file::to_stream(std::ostream& s) const {
       << "\"full_path\": " << "\"" << full_path_.generic_string() << "\"" << ", "
       << "\"relative_path\": " << "\"" << relative_path_.generic_string() << "\"" << ", "
       << "\"preamble\": " << preamble_ << ", "
+      << "\"marker\": " << marker_ << ", "
       << "\"licence\": " << licence_
       << " }";
 }
@@ -57,6 +77,7 @@ void text_file::swap(text_file& other) noexcept {
     swap(full_path_, other.full_path_);
     swap(relative_path_, other.relative_path_);
     swap(preamble_, other.preamble_);
+    swap(marker_, other.marker_);
     swap(licence_, other.licence_);
 }
 
@@ -64,6 +85,7 @@ bool text_file::compare(const text_file& rhs) const {
     return full_path_ == rhs.full_path_ &&
         relative_path_ == rhs.relative_path_ &&
         preamble_ == rhs.preamble_ &&
+        marker_ == rhs.marker_ &&
         licence_ == rhs.licence_;
 }
 
@@ -113,6 +135,22 @@ void text_file::preamble(const dogen::om::preamble& v) {
 
 void text_file::preamble(const dogen::om::preamble&& v) {
     preamble_ = std::move(v);
+}
+
+const boost::optional<dogen::om::code_generation_marker>& text_file::marker() const {
+    return marker_;
+}
+
+boost::optional<dogen::om::code_generation_marker>& text_file::marker() {
+    return marker_;
+}
+
+void text_file::marker(const boost::optional<dogen::om::code_generation_marker>& v) {
+    marker_ = v;
+}
+
+void text_file::marker(const boost::optional<dogen::om::code_generation_marker>&& v) {
+    marker_ = std::move(v);
 }
 
 const dogen::om::licence& text_file::licence() const {

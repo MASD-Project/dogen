@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+#ifndef DOGEN_OM_HASH_LICENCE_TYPES_HASH_HPP
+#define DOGEN_OM_HASH_LICENCE_TYPES_HASH_HPP
 
-namespace dogen {
-namespace om {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
-    return(s);
+#include <functional>
+#include "dogen/om/types/licence_types.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::om::licence_types> {
+public:
+    size_t operator()(const dogen::om::licence_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
 }
 
-} }
+#endif

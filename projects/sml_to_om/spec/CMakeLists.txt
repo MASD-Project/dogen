@@ -27,6 +27,8 @@ set(binary_name "dogen_sml_to_om_spec")
 set_target_properties(sml_to_om_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(sml_to_om_spec
+    config
+    sml
     om
     sml_to_om
     utility

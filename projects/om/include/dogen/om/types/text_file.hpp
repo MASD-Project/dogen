@@ -27,8 +27,10 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include <boost/optional.hpp>
 #include <iosfwd>
 #include "dogen/om/serialization/text_file_fwd_ser.hpp"
+#include "dogen/om/types/code_generation_marker.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/preamble.hpp"
 
@@ -53,6 +55,7 @@ public:
         const boost::filesystem::path& full_path,
         const boost::filesystem::path& relative_path,
         const dogen::om::preamble& preamble,
+        const boost::optional<dogen::om::code_generation_marker>& marker,
         const dogen::om::licence& licence);
 
 private:
@@ -96,6 +99,11 @@ public:
     void preamble(const dogen::om::preamble&& v);
     /**@}*/
 
+    const boost::optional<dogen::om::code_generation_marker>& marker() const;
+    boost::optional<dogen::om::code_generation_marker>& marker();
+    void marker(const boost::optional<dogen::om::code_generation_marker>& v);
+    void marker(const boost::optional<dogen::om::code_generation_marker>&& v);
+
     /**
      * @brief Licence for the content on the file.
      */
@@ -118,6 +126,7 @@ private:
     boost::filesystem::path full_path_;
     boost::filesystem::path relative_path_;
     dogen::om::preamble preamble_;
+    boost::optional<dogen::om::code_generation_marker> marker_;
     dogen::om::licence licence_;
 };
 

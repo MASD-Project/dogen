@@ -25,10 +25,12 @@
 #pragma once
 #endif
 
+#include <set>
 #include <list>
 #include <tuple>
 #include <unordered_set>
 #include <boost/optional.hpp>
+#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -54,7 +56,8 @@ public:
     cpp_transformer(cpp_transformer&& rhs) = default;
 
 public:
-    cpp_transformer(const sml::model& m, context& c);
+    cpp_transformer(const std::set<config::cpp_facet_types>& enabled_facets,
+        const sml::model& m, context& c);
     virtual ~cpp_transformer() noexcept { }
 
 private:
@@ -88,6 +91,7 @@ public:
     void from_module(const sml::module& m);
 
 private:
+    const std::set<config::cpp_facet_types>& enabled_facets_;
     const sml::model& model_;
     context& context_;
 };

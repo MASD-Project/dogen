@@ -18,17 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace om {
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const code_generation_marker& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::om::code_generation_marker\"" << ", "
+      << "\"text\": " << "\"" << tidy_up_string(v.text()) << "\""
+      << " }";
     return(s);
 }
 

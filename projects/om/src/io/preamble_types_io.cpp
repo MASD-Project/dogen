@@ -19,17 +19,34 @@
  *
  */
 #include <ostream>
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+#include <stdexcept>
+#include "dogen/om/io/preamble_types_io.hpp"
 
 namespace dogen {
 namespace om {
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
-    return(s);
+std::ostream& operator<<(std::ostream& s, const preamble_types& v) {
+    s << "{ " << "\"__type__\": " << "\"preamble_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case preamble_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case preamble_types::emacs:
+        attr = "\"emacs\"";
+        break;
+    case preamble_types::vi:
+        attr = "\"vi\"";
+        break;
+    case preamble_types::emacs_and_vi:
+        attr = "\"emacs_and_vi\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for preamble_types");
+    }
+    s << attr << " }";
+    return s;
 }
 
 } }

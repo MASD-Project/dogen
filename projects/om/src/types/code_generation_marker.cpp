@@ -18,18 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+#include "dogen/om/types/code_generation_marker.hpp"
 
 namespace dogen {
 namespace om {
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
-    return(s);
+code_generation_marker::code_generation_marker(const std::string& text)
+    : text_(text) { }
+
+void code_generation_marker::swap(code_generation_marker& other) noexcept {
+    using std::swap;
+    swap(text_, other.text_);
+}
+
+bool code_generation_marker::operator==(const code_generation_marker& rhs) const {
+    return text_ == rhs.text_;
+}
+
+code_generation_marker& code_generation_marker::operator=(code_generation_marker other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const std::string& code_generation_marker::text() const {
+    return text_;
+}
+
+std::string& code_generation_marker::text() {
+    return text_;
+}
+
+void code_generation_marker::text(const std::string& v) {
+    text_ = v;
+}
+
+void code_generation_marker::text(const std::string&& v) {
+    text_ = std::move(v);
 }
 
 } }

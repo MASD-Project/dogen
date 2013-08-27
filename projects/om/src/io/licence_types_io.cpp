@@ -19,17 +19,34 @@
  *
  */
 #include <ostream>
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+#include <stdexcept>
+#include "dogen/om/io/licence_types_io.hpp"
 
 namespace dogen {
 namespace om {
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
-    return(s);
+std::ostream& operator<<(std::ostream& s, const licence_types& v) {
+    s << "{ " << "\"__type__\": " << "\"licence_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case licence_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case licence_types::gpl_v2:
+        attr = "\"gpl_v2\"";
+        break;
+    case licence_types::gpl_v3:
+        attr = "\"gpl_v3\"";
+        break;
+    case licence_types::bsl:
+        attr = "\"bsl\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for licence_types");
+    }
+    s << attr << " }";
+    return s;
 }
 
 } }

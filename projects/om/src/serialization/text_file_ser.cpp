@@ -27,7 +27,9 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include "dogen/om/serialization/cmake_file_ser.hpp"
+#include "dogen/om/serialization/code_generation_marker_ser.hpp"
 #include "dogen/om/serialization/cpp_file_ser.hpp"
 #include "dogen/om/serialization/licence_ser.hpp"
 #include "dogen/om/serialization/odb_options_file_ser.hpp"
@@ -53,6 +55,7 @@ void save(Archive& ar,
     ar << make_nvp("full_path", v.full_path_.generic_string());
     ar << make_nvp("relative_path", v.relative_path_.generic_string());
     ar << make_nvp("preamble", v.preamble_);
+    ar << make_nvp("marker", v.marker_);
     ar << make_nvp("licence", v.licence_);
 }
 
@@ -67,6 +70,7 @@ void load(Archive& ar,
     ar >> make_nvp("relative_path", relative_path_tmp);
     v.relative_path_ = relative_path_tmp;
     ar >> make_nvp("preamble", v.preamble_);
+    ar >> make_nvp("marker", v.marker_);
     ar >> make_nvp("licence", v.licence_);
 }
 

@@ -19,9 +19,6 @@
  *
  */
 #include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/preamble_hash.hpp"
-#include "dogen/om/hash/text_file_hash.hpp"
 
 namespace {
 
@@ -32,30 +29,15 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_om_code_generation_marker(const boost::optional<dogen::om::code_generation_marker>& v){
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace om {
 
-std::size_t text_file_hasher::hash(const text_file&v) {
+std::size_t code_generation_marker_hasher::hash(const code_generation_marker&v) {
     std::size_t seed(0);
 
-    combine(seed, v.full_path().generic_string());
-    combine(seed, v.relative_path().generic_string());
-    combine(seed, v.preamble());
-    combine(seed, hash_boost_optional_dogen_om_code_generation_marker(v.marker()));
-    combine(seed, v.licence());
-
+    combine(seed, v.text());
     return seed;
 }
 

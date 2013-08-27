@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+#include "dogen/om/test_data/preamble_types_td.hpp"
 
 namespace dogen {
 namespace om {
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
-    return(s);
+preamble_types_generator::preamble_types_generator() : position_(0) { }
+void preamble_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<preamble_types>(position % 4);
+}
+
+preamble_types_generator::result_type
+preamble_types_generator::create(const unsigned int  position) {
+    result_type r;
+    preamble_types_generator::populate(position, r);
+    return r;
+}
+
+preamble_types_generator::result_type
+preamble_types_generator::operator()() {
+    return create(position_++);
 }
 
 } }

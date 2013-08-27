@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+#ifndef DOGEN_OM_TYPES_PREAMBLE_TYPES_HPP
+#define DOGEN_OM_TYPES_PREAMBLE_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace om {
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
-    return(s);
-}
+/**
+ * @brief Canned preamble types defined in the system.
+ */
+enum class preamble_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    emacs = 1,
+    vi = 2,
+    emacs_and_vi = 3
+};
 
 } }
+
+#endif

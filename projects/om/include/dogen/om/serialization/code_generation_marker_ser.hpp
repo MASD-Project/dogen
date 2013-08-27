@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
-#include "dogen/om/io/text_file_io.hpp"
+#ifndef DOGEN_OM_SERIALIZATION_CODE_GENERATION_MARKER_SER_HPP
+#define DOGEN_OM_SERIALIZATION_CODE_GENERATION_MARKER_SER_HPP
 
-namespace dogen {
-namespace om {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const text_file& v) {
-    v.to_stream(s);
-    return(s);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/om/types/code_generation_marker.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::om::code_generation_marker)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::om::code_generation_marker& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::om::code_generation_marker& v, unsigned int version);
 
 } }
+
+#endif
