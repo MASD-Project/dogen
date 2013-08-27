@@ -17,30 +17,31 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(om_spec_files "")
-file(GLOB_RECURSE om_spec_files RELATIVE
+set(sml_to_om_spec_files "")
+file(GLOB_RECURSE sml_to_om_spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(om_spec ${om_spec_files})
-set(binary_name "dogen_om_spec")
-set_target_properties(om_spec PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(sml_to_om_spec ${sml_to_om_spec_files})
+set(binary_name "dogen_sml_to_om_spec")
+set_target_properties(sml_to_om_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(om_spec
+target_link_libraries(sml_to_om_spec
     om
+    sml_to_om
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(om_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(sml_to_om_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_om_spec
-    COMMAND ${om_spec_cmd}
+add_custom_target(run_sml_to_om_spec
+    COMMAND ${sml_to_om_spec_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS om_spec)
-add_dependencies(run_all_specs run_om_spec)
+    DEPENDS sml_to_om_spec)
+add_dependencies(run_all_specs run_sml_to_om_spec)
 
-add_boost_tests(sml_to_om ${om_spec_files})
-install(TARGETS om_spec RUNTIME DESTINATION bin COMPONENT tests)
+add_boost_tests(sml_to_om ${sml_to_om_spec_files})
+install(TARGETS sml_to_om_spec RUNTIME DESTINATION bin COMPONENT tests)

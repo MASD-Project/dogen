@@ -18,29 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE om_spec
-#include <iostream>
-#include <boost/test/included/unit_test.hpp>
-#include <boost/test/unit_test_monitor.hpp>
-#include <boost/exception/diagnostic_information.hpp>
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/sml_to_om/types/all.hpp"
+#include "dogen/sml_to_om/io/all_io.hpp"
+#include "dogen/sml_to_om/hash/all_hash.hpp"
+#include "dogen/sml_to_om/test_data/all_td.hpp"
 
-namespace  {
+namespace {
 
-const std::string error_msg("Error during test");
-
-inline void translate(const boost::exception& e) {
-    std::cerr << std::endl << boost::diagnostic_information(e);
-    throw std::runtime_error(error_msg);
-}
-
-struct exception_fixture {
-    exception_fixture() {
-        ::boost::unit_test::unit_test_monitor.register_exception_translator<
-            boost::exception>(&translate);
-    }
-};
+const std::string empty;
+const std::string test_module("sml_to_om");
+const std::string test_suite("hashing_spec");
 
 }
 
-BOOST_GLOBAL_FIXTURE(exception_fixture)
+using namespace dogen::sml_to_om;
+using namespace dogen::utility::test;
+
+BOOST_AUTO_TEST_SUITE(hashing)
+
+BOOST_AUTO_TEST_CASE(validate_hashing) {
+    SETUP_TEST_LOG("validate_hashing");
+
+    // test_hashing<context_generator>();
+}
+
+BOOST_AUTO_TEST_SUITE_END()

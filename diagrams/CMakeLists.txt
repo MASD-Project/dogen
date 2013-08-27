@@ -285,13 +285,14 @@ add_custom_target(codegen_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/om.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
-#    --cpp-disable-cmakelists
+    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
