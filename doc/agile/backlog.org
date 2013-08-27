@@ -11,6 +11,17 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Adding linking libraries is not handled                           :story:
+
+At present whenever a model requires additional link library targets
+we need to disable CMake generation and do it by hand. However:
+
+- for well-known dependencies such as boost we could create a
+  convention (e.g. assume/require that the CMake boost libraries flags
+  are set via find boost)
+- for user level dependencies we should add implementation specific
+  parameters at the model level.
+
 *** Test data generator does not detect cycles in object graph        :story:
 
 At present we handle composition correctly, but not other forms of
