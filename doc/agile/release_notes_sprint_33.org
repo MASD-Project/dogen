@@ -35,6 +35,7 @@ We don't really need it any more, concepts can be tried directly with
 dogen.
 
 *** IMPLEMENTATION Create an intermediate C++ model                    :epic:
+    CLOCK: [2013-08-27 Tue 22:52]--[2013-08-27 Tue 23:01] =>  0:09
     CLOCK: [2013-08-27 Tue 21:52]--[2013-08-27 Tue 22:48] =>  0:56
     CLOCK: [2013-08-27 Tue 21:47]--[2013-08-27 Tue 21:51] =>  0:04
     CLOCK: [2013-08-27 Tue 21:33]--[2013-08-27 Tue 21:39] =>  0:06
@@ -97,39 +98,6 @@ to use XML or JSON.
 
 See [[http://www.boost.org/doc/libs/1_53_0/doc/html/boost_propertytree/parsers.html#boost_propertytree.parsers.ini_parser][boost property tree]].
 
-Example file:
-
-#+begin_src
-[shared_ptr]
-name = shared_ptr;
-namespaces = boost;
-is_smart_pointer = true;
-is_associative_container = false;
-is_sequence_container = false;
-requires_manual_move_constructor = false;
-requires_manual_default_constructor = false;
-
-[bool]
-name = bool;
-is_primitive = true;
-default_value = false;
-is_smart_pointer = false;
-is_associative_container = false;
-is_sequence_container = false;
-requires_manual_move_constructor = false;
-requires_manual_default_constructor = true;
-stream_style = boolean
-
-[double]
-name = double;
-is_primitive = true;
-default_value = 0.0d;
-is_smart_pointer = false;
-is_associative_container = false;
-is_sequence_container = false;
-requires_manual_move_constructor = false;
-requires_manual_default_constructor = true;
-stream_style = floating_point
-#+end_src
+Example file available at data/profiles/sample.ini
 
 ** Deprecated Development Stories
