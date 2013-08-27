@@ -60,7 +60,6 @@
 #include "dogen/om/types/doxygen_command_types.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/licence_factory.hpp"
-#include "dogen/om/types/licence_types.hpp"
 #include "dogen/om/types/odb_database_option.hpp"
 #include "dogen/om/types/odb_guard_prefix_option.hpp"
 #include "dogen/om/types/odb_include_regex_option.hpp"

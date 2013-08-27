@@ -57,7 +57,6 @@
 #include "dogen/om/test_data/doxygen_command_td.hpp"
 #include "dogen/om/test_data/doxygen_command_types_td.hpp"
 #include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/licence_types_td.hpp"
 #include "dogen/om/test_data/odb_database_option_td.hpp"
 #include "dogen/om/test_data/odb_guard_prefix_option_td.hpp"
 #include "dogen/om/test_data/odb_include_regex_option_td.hpp"

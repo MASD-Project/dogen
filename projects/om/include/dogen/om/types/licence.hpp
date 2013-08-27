@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <list>
 #include <string>
-#include <utility>
 #include "dogen/om/serialization/licence_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +45,7 @@ public:
 
 public:
     licence(
-        const std::list<std::pair<std::string, std::string> >& copyright_holders,
+        const std::list<std::string>& copyright_holders,
         const std::string& licence_text);
 
 private:
@@ -58,15 +57,15 @@ private:
 
 public:
     /**
-     * @brief List of Copyright holders.
+     * @brief All holders of copyright for the current file and associated period.
      *
      * A Copyright holder is a pair of name and email address.
      */
     /**@{*/
-    const std::list<std::pair<std::string, std::string> >& copyright_holders() const;
-    std::list<std::pair<std::string, std::string> >& copyright_holders();
-    void copyright_holders(const std::list<std::pair<std::string, std::string> >& v);
-    void copyright_holders(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::list<std::string>& copyright_holders() const;
+    std::list<std::string>& copyright_holders();
+    void copyright_holders(const std::list<std::string>& v);
+    void copyright_holders(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -90,7 +89,7 @@ public:
     licence& operator=(licence other);
 
 private:
-    std::list<std::pair<std::string, std::string> > copyright_holders_;
+    std::list<std::string> copyright_holders_;
     std::string licence_text_;
 };
 

@@ -24,7 +24,7 @@ namespace dogen {
 namespace om {
 
 licence::licence(
-    const std::list<std::pair<std::string, std::string> >& copyright_holders,
+    const std::list<std::string>& copyright_holders,
     const std::string& licence_text)
     : copyright_holders_(copyright_holders),
       licence_text_(licence_text) { }
@@ -46,19 +46,19 @@ licence& licence::operator=(licence other) {
     return *this;
 }
 
-const std::list<std::pair<std::string, std::string> >& licence::copyright_holders() const {
+const std::list<std::string>& licence::copyright_holders() const {
     return copyright_holders_;
 }
 
-std::list<std::pair<std::string, std::string> >& licence::copyright_holders() {
+std::list<std::string>& licence::copyright_holders() {
     return copyright_holders_;
 }
 
-void licence::copyright_holders(const std::list<std::pair<std::string, std::string> >& v) {
+void licence::copyright_holders(const std::list<std::string>& v) {
     copyright_holders_ = v;
 }
 
-void licence::copyright_holders(const std::list<std::pair<std::string, std::string> >&& v) {
+void licence::copyright_holders(const std::list<std::string>&& v) {
     copyright_holders_ = std::move(v);
 }
 

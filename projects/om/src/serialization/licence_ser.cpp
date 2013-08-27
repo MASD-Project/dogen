@@ -29,7 +29,6 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include <boost/serialization/utility.hpp>
 #include "dogen/om/serialization/licence_ser.hpp"
 
 #ifdef __linux__

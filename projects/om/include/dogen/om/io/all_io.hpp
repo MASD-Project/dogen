@@ -57,7 +57,6 @@
 #include "dogen/om/io/doxygen_command_io.hpp"
 #include "dogen/om/io/doxygen_command_types_io.hpp"
 #include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/licence_types_io.hpp"
 #include "dogen/om/io/odb_database_option_io.hpp"
 #include "dogen/om/io/odb_guard_prefix_option_io.hpp"
 #include "dogen/om/io/odb_include_regex_option_io.hpp"

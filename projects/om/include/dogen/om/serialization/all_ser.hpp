@@ -57,7 +57,6 @@
 #include "dogen/om/serialization/doxygen_command_ser.hpp"
 #include "dogen/om/serialization/doxygen_command_types_ser.hpp"
 #include "dogen/om/serialization/licence_ser.hpp"
-#include "dogen/om/serialization/licence_types_ser.hpp"
 #include "dogen/om/serialization/odb_database_option_ser.hpp"
 #include "dogen/om/serialization/odb_guard_prefix_option_ser.hpp"
 #include "dogen/om/serialization/odb_include_regex_option_ser.hpp"

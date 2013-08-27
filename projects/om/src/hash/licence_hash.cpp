@@ -29,18 +29,10 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
+        combine(seed, i);
     }
     return seed;
 }
@@ -53,7 +45,7 @@ namespace om {
 std::size_t licence_hasher::hash(const licence&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_pair_std_string_std_string_(v.copyright_holders()));
+    combine(seed, hash_std_list_std_string(v.copyright_holders()));
     combine(seed, v.licence_text());
 
     return seed;

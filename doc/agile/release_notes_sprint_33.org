@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 33.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-27 Tue 22:48]
+Clock summary at [2013-08-27 Tue 23:12]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *9:12* |      |      |
+| *Total time*                                      | *9:32* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 9:12 |      |
+| Development Stories Implemented                   |        | 9:32 |      |
 | IMPLEMENTATION Release notes and backlog grooming |        |      | 0:14 |
 | COMPLETED Remove prototype model                  |        |      | 0:04 |
-| IMPLEMENTATION Create an intermediate C++ model   |        |      | 8:54 |
+| IMPLEMENTATION Create an intermediate C++ model   |        |      | 9:14 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -35,6 +35,7 @@ We don't really need it any more, concepts can be tried directly with
 dogen.
 
 *** IMPLEMENTATION Create an intermediate C++ model                    :epic:
+    CLOCK: [2013-08-27 Tue 23:01]--[2013-08-27 Tue 23:12] =>  0:11
     CLOCK: [2013-08-27 Tue 22:52]--[2013-08-27 Tue 23:01] =>  0:09
     CLOCK: [2013-08-27 Tue 21:52]--[2013-08-27 Tue 22:48] =>  0:56
     CLOCK: [2013-08-27 Tue 21:47]--[2013-08-27 Tue 21:51] =>  0:04

@@ -57,7 +57,6 @@
 #include "dogen/om/hash/doxygen_command_hash.hpp"
 #include "dogen/om/hash/doxygen_command_types_hash.hpp"
 #include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/licence_types_hash.hpp"
 #include "dogen/om/hash/odb_database_option_hash.hpp"
 #include "dogen/om/hash/odb_guard_prefix_option_hash.hpp"
 #include "dogen/om/hash/odb_include_regex_option_hash.hpp"
