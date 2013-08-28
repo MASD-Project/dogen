@@ -28,8 +28,8 @@
 #include <algorithm>
 #include <list>
 #include <string>
-#include <utility>
 #include "dogen/om/serialization/preamble_fwd_ser.hpp"
+#include "dogen/om/types/preamble_field.hpp"
 
 namespace dogen {
 namespace om {
@@ -56,7 +56,7 @@ public:
 public:
     preamble(
         const std::string& prefix,
-        const std::list<std::pair<std::string, std::string> >& fields,
+        const std::list<dogen::om::preamble_field>& fields,
         const std::string& kvp_separator,
         const std::string& field_separator,
         const std::string& postfix);
@@ -83,10 +83,10 @@ public:
      * @brief List of all the parameters in the preamble, in order of appearence.
      */
     /**@{*/
-    const std::list<std::pair<std::string, std::string> >& fields() const;
-    std::list<std::pair<std::string, std::string> >& fields();
-    void fields(const std::list<std::pair<std::string, std::string> >& v);
-    void fields(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::list<dogen::om::preamble_field>& fields() const;
+    std::list<dogen::om::preamble_field>& fields();
+    void fields(const std::list<dogen::om::preamble_field>& v);
+    void fields(const std::list<dogen::om::preamble_field>&& v);
     /**@}*/
 
     /**
@@ -131,7 +131,7 @@ public:
 
 private:
     std::string prefix_;
-    std::list<std::pair<std::string, std::string> > fields_;
+    std::list<dogen::om::preamble_field> fields_;
     std::string kvp_separator_;
     std::string field_separator_;
     std::string postfix_;

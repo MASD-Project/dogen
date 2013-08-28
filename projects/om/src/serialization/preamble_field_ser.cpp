@@ -26,11 +26,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/om/serialization/preamble_field_ser.hpp"
-#include "dogen/om/serialization/preamble_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -42,24 +40,18 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::om::preamble& v,
+    const dogen::om::preamble_field& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("prefix", v.prefix_);
-    ar << make_nvp("fields", v.fields_);
-    ar << make_nvp("kvp_separator", v.kvp_separator_);
-    ar << make_nvp("field_separator", v.field_separator_);
-    ar << make_nvp("postfix", v.postfix_);
+    ar << make_nvp("name", v.name_);
+    ar << make_nvp("value", v.value_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::om::preamble& v,
+    dogen::om::preamble_field& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("prefix", v.prefix_);
-    ar >> make_nvp("fields", v.fields_);
-    ar >> make_nvp("kvp_separator", v.kvp_separator_);
-    ar >> make_nvp("field_separator", v.field_separator_);
-    ar >> make_nvp("postfix", v.postfix_);
+    ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("value", v.value_);
 }
 
 } }
@@ -67,21 +59,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::om::preamble& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::om::preamble& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::om::preamble_field& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::om::preamble_field& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::om::preamble& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::om::preamble& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::om::preamble_field& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::om::preamble_field& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::om::preamble& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::om::preamble& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::om::preamble_field& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::om::preamble_field& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::om::preamble& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::om::preamble& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::om::preamble_field& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::om::preamble_field& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::om::preamble& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::om::preamble& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::om::preamble_field& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::om::preamble_field& v, unsigned int version);
 #endif
 
 } }

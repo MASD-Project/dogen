@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/om/test_data/preamble_field_td.hpp"
-#include "dogen/om/test_data/preamble_td.hpp"
 
 namespace {
 
@@ -30,50 +29,34 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::om::preamble_field
-create_dogen_om_preamble_field(const unsigned int position) {
-    return dogen::om::preamble_field_generator::create(position);
-}
-
-std::list<dogen::om::preamble_field> create_std_list_dogen_om_preamble_field(unsigned int position) {
-    std::list<dogen::om::preamble_field> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_dogen_om_preamble_field(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
 namespace om {
 
-preamble_generator::preamble_generator() : position_(0) { }
+preamble_field_generator::preamble_field_generator() : position_(0) { }
 
-void preamble_generator::
+void preamble_field_generator::
 populate(const unsigned int position, result_type& v) {
-    v.prefix(create_std_string(position + 0));
-    v.fields(create_std_list_dogen_om_preamble_field(position + 1));
-    v.kvp_separator(create_std_string(position + 2));
-    v.field_separator(create_std_string(position + 3));
-    v.postfix(create_std_string(position + 4));
+    v.name(create_std_string(position + 0));
+    v.value(create_std_string(position + 1));
 }
 
-preamble_generator::result_type
-preamble_generator::create(const unsigned int position) {
-    preamble r;
-    preamble_generator::populate(position, r);
+preamble_field_generator::result_type
+preamble_field_generator::create(const unsigned int position) {
+    preamble_field r;
+    preamble_field_generator::populate(position, r);
     return r;
 }
-preamble_generator::result_type*
-preamble_generator::create_ptr(const unsigned int position) {
-    preamble* p = new preamble();
-    preamble_generator::populate(position, *p);
+preamble_field_generator::result_type*
+preamble_field_generator::create_ptr(const unsigned int position) {
+    preamble_field* p = new preamble_field();
+    preamble_field_generator::populate(position, *p);
     return p;
 }
 
-preamble_generator::result_type
-preamble_generator::operator()() {
+preamble_field_generator::result_type
+preamble_field_generator::operator()() {
     return create(position_++);
 }
 

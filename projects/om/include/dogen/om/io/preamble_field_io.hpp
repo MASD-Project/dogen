@@ -18,41 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/preamble_field_hash.hpp"
-#include "dogen/om/hash/preamble_hash.hpp"
+#ifndef DOGEN_OM_IO_PREAMBLE_FIELD_IO_HPP
+#define DOGEN_OM_IO_PREAMBLE_FIELD_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_om_preamble_field(const std::list<dogen::om::preamble_field>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include <iosfwd>
+#include "dogen/om/types/preamble_field.hpp"
 
 namespace dogen {
 namespace om {
 
-std::size_t preamble_hasher::hash(const preamble&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.prefix());
-    combine(seed, hash_std_list_dogen_om_preamble_field(v.fields()));
-    combine(seed, v.kvp_separator());
-    combine(seed, v.field_separator());
-    combine(seed, v.postfix());
-
-    return seed;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::om::preamble_field& v);
 
 } }
+
+#endif

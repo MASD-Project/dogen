@@ -18,41 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/preamble_field_hash.hpp"
-#include "dogen/om/hash/preamble_hash.hpp"
+#ifndef DOGEN_OM_TEST_DATA_PREAMBLE_FIELD_TD_HPP
+#define DOGEN_OM_TEST_DATA_PREAMBLE_FIELD_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_om_preamble_field(const std::list<dogen::om::preamble_field>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include "dogen/om/types/preamble_field.hpp"
 
 namespace dogen {
 namespace om {
 
-std::size_t preamble_hasher::hash(const preamble&v) {
-    std::size_t seed(0);
+class preamble_field_generator {
+public:
+    preamble_field_generator();
 
-    combine(seed, v.prefix());
-    combine(seed, hash_std_list_dogen_om_preamble_field(v.fields()));
-    combine(seed, v.kvp_separator());
-    combine(seed, v.field_separator());
-    combine(seed, v.postfix());
+public:
+    typedef dogen::om::preamble_field result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

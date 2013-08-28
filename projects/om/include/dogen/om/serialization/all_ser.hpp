@@ -62,6 +62,7 @@
 #include "dogen/om/serialization/odb_include_regex_option_ser.hpp"
 #include "dogen/om/serialization/odb_option_ser.hpp"
 #include "dogen/om/serialization/odb_options_file_ser.hpp"
+#include "dogen/om/serialization/preamble_field_ser.hpp"
 #include "dogen/om/serialization/preamble_ser.hpp"
 #include "dogen/om/serialization/registrar_ser.hpp"
 #include "dogen/om/serialization/text_file_ser.hpp"

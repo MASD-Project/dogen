@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/om/hash/preamble_field_hash.hpp"
-#include "dogen/om/hash/preamble_hash.hpp"
 
 namespace {
 
@@ -30,27 +29,16 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_om_preamble_field(const std::list<dogen::om::preamble_field>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace om {
 
-std::size_t preamble_hasher::hash(const preamble&v) {
+std::size_t preamble_field_hasher::hash(const preamble_field&v) {
     std::size_t seed(0);
 
-    combine(seed, v.prefix());
-    combine(seed, hash_std_list_dogen_om_preamble_field(v.fields()));
-    combine(seed, v.kvp_separator());
-    combine(seed, v.field_separator());
-    combine(seed, v.postfix());
+    combine(seed, v.name());
+    combine(seed, v.value());
 
     return seed;
 }

@@ -62,5 +62,6 @@
 #include "dogen/om/io/odb_include_regex_option_io.hpp"
 #include "dogen/om/io/odb_option_io.hpp"
 #include "dogen/om/io/odb_options_file_io.hpp"
+#include "dogen/om/io/preamble_field_io.hpp"
 #include "dogen/om/io/preamble_io.hpp"
 #include "dogen/om/io/text_file_io.hpp"

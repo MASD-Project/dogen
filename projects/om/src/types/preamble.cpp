@@ -25,7 +25,7 @@ namespace om {
 
 preamble::preamble(
     const std::string& prefix,
-    const std::list<std::pair<std::string, std::string> >& fields,
+    const std::list<dogen::om::preamble_field>& fields,
     const std::string& kvp_separator,
     const std::string& field_separator,
     const std::string& postfix)
@@ -74,19 +74,19 @@ void preamble::prefix(const std::string&& v) {
     prefix_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& preamble::fields() const {
+const std::list<dogen::om::preamble_field>& preamble::fields() const {
     return fields_;
 }
 
-std::list<std::pair<std::string, std::string> >& preamble::fields() {
+std::list<dogen::om::preamble_field>& preamble::fields() {
     return fields_;
 }
 
-void preamble::fields(const std::list<std::pair<std::string, std::string> >& v) {
+void preamble::fields(const std::list<dogen::om::preamble_field>& v) {
     fields_ = v;
 }
 
-void preamble::fields(const std::list<std::pair<std::string, std::string> >&& v) {
+void preamble::fields(const std::list<dogen::om::preamble_field>&& v) {
     fields_ = std::move(v);
 }
 

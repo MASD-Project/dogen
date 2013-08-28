@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/om/io/preamble_field_io.hpp"
 #include "dogen/om/io/preamble_io.hpp"
 
 
@@ -32,20 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::om::preamble_field>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

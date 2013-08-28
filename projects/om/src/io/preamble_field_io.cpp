@@ -18,41 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/preamble_field_hash.hpp"
-#include "dogen/om/hash/preamble_hash.hpp"
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/om/io/preamble_field_io.hpp"
 
-namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_om_preamble_field(const std::list<dogen::om::preamble_field>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
 }
 
 namespace dogen {
 namespace om {
 
-std::size_t preamble_hasher::hash(const preamble&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.prefix());
-    combine(seed, hash_std_list_dogen_om_preamble_field(v.fields()));
-    combine(seed, v.kvp_separator());
-    combine(seed, v.field_separator());
-    combine(seed, v.postfix());
-
-    return seed;
+std::ostream& operator<<(std::ostream& s, const preamble_field& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::om::preamble_field\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
+    return(s);
 }
 
 } }
