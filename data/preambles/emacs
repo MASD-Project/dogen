@@ -1,0 +1,16 @@
+# -*- mode: conf; tab-width: 4 -*-
+[c++]
+mode = c++;
+tab-width = 4;
+indent-tabs-mode = nil;
+c-basic-offset = 4;
+
+[cmake]
+mode = cmake;
+tab-width = 4;
+indent-tabs-mode = nil;
+
+[odb]
+mode = sh;
+tab-width = 4;
+indent-tabs-mode = nil;
