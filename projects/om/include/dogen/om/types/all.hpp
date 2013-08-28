@@ -68,5 +68,4 @@
 #include "dogen/om/types/om.hpp"
 #include "dogen/om/types/preamble.hpp"
 #include "dogen/om/types/preamble_factory.hpp"
-#include "dogen/om/types/preamble_types.hpp"
 #include "dogen/om/types/text_file.hpp"

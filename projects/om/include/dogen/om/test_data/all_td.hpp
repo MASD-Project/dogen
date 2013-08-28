@@ -63,5 +63,4 @@
 #include "dogen/om/test_data/odb_option_td.hpp"
 #include "dogen/om/test_data/odb_options_file_td.hpp"
 #include "dogen/om/test_data/preamble_td.hpp"
-#include "dogen/om/test_data/preamble_types_td.hpp"
 #include "dogen/om/test_data/text_file_td.hpp"
