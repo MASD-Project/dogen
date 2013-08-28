@@ -25,9 +25,10 @@ namespace dogen {
 namespace sml_to_om {
 
 cpp_transformer::
-cpp_transformer(const std::set<config::cpp_facet_types>& enabled_facets,
-    const sml::model& m, context& c) :
-    enabled_facets_(enabled_facets), model_(m), context_(c) { }
+cpp_transformer(const std::set<config::cpp_facet_types>& /*enabled_facets*/,
+    const sml::model& /*m*/, context& /*c*/)
+// : enabled_facets_(enabled_facets), model_(m), context_(c)
+{ }
 
 void cpp_transformer::properties_for_concept(const sml::qname& /*qn*/,
     std::list<sml::property>& /*properties*/,

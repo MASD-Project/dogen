@@ -29,8 +29,8 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "om/types/preamble_field.hpp"
-#include "om/types/preamble.hpp"
+#include "dogen/om/types/preamble_field.hpp"
+#include "dogen/om/types/preamble.hpp"
 
 namespace dogen {
 namespace om {
@@ -45,8 +45,8 @@ public:
 public:
     explicit preamble_factory(const boost::filesystem::path template_directory);
 
-private:
-    std::unordered_map<std::string, std::list<preamble_field> > templates_;
+// private:
+//     std::unordered_map<std::string, std::list<preamble_field> > templates_;
 };
 
 } }

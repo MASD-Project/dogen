@@ -91,9 +91,9 @@ public:
     void from_module(const sml::module& m);
 
 private:
-    const std::set<config::cpp_facet_types>& enabled_facets_;
-    const sml::model& model_;
-    context& context_;
+    // const std::set<config::cpp_facet_types>& enabled_facets_;
+    // const sml::model& model_;
+    // context& context_;
 };
 
 } }
