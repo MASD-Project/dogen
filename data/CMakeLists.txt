@@ -25,7 +25,7 @@ foreach(dir ${subdir})
         file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/data)
         install(
             DIRECTORY ${dir}/
-            DESTINATION share/data/${dir}
+            DESTINATION ${data_directory}/${dir}
             COMPONENT applications
             FILES_MATCHING PATTERN "*")
     endif()
