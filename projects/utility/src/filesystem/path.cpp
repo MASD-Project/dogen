@@ -34,7 +34,7 @@
 #include "dogen/utility/filesystem/file_not_found.hpp"
 
 #ifdef __APPLE__
-extern(C) int _NSGetExecutablePath(char* buf, uint* bufsize);
+extern "C" int _NSGetExecutablePath(char* buf, uint* bufsize);
 #endif
 
 namespace {
