@@ -64,4 +64,5 @@
 #include "dogen/om/io/odb_options_file_io.hpp"
 #include "dogen/om/io/preamble_field_io.hpp"
 #include "dogen/om/io/preamble_io.hpp"
+#include "dogen/om/io/preamble_scheme_io.hpp"
 #include "dogen/om/io/text_file_io.hpp"

@@ -79,10 +79,13 @@ Cannot be done as the installer may override it.
      CLOSED: [2013-09-07 Sat 18:07]
 
 *** IMPLEMENTATION Implement the preamble factory                     :story:
+**** COMPLETED load preambles from the data directory
+     CLOCK: [2013-09-07 Sat 20:10]--[2013-09-07 Sat 23:09] =>  2:59
+     CLOCK: [2013-09-07 Sat 18:15]--[2013-09-07 Sat 18:33] =>  0:18
+     CLOCK: [2013-09-07 Sat 18:04]--[2013-09-07 Sat 18:15] =>  0:11
+     CLOSED: [2013-09-07 Sat 23:10]
 
-- load preambles from the data directory
-- output them to file
-
+**** output preambles to file
 *** Create an SML level concept for facets                            :story:
 
 In reality, "facets" are not a C++ thing; they are language

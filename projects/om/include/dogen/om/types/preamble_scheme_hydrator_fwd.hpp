@@ -18,36 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_PREAMBLE_FACTORY_HPP
-#define DOGEN_OM_TYPES_PREAMBLE_FACTORY_HPP
+#ifndef DOGEN_OM_TYPES_PREAMBLE_SCHEME_HYDRATOR_FWD_HPP
+#define DOGEN_OM_TYPES_PREAMBLE_SCHEME_HYDRATOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_map>
-#include <boost/filesystem/path.hpp>
-#include "dogen/om/types/preamble_field.hpp"
-#include "dogen/om/types/preamble.hpp"
-
 namespace dogen {
 namespace om {
 
-class preamble_factory {
-public:
-    preamble_factory() = delete;
-    preamble_factory(const preamble_factory&) = default;
-    preamble_factory& operator=(const preamble_factory&) = delete;
-    preamble_factory(preamble_factory&& rhs) = default;
-
-public:
-    explicit preamble_factory(const boost::filesystem::path template_directory);
-
-// private:
-//     std::unordered_map<std::string, std::list<preamble_field> > templates_;
-};
+class preamble_scheme_hydrator;
 
 } }
 

@@ -64,4 +64,5 @@
 #include "dogen/om/hash/odb_options_file_hash.hpp"
 #include "dogen/om/hash/preamble_field_hash.hpp"
 #include "dogen/om/hash/preamble_hash.hpp"
+#include "dogen/om/hash/preamble_scheme_hash.hpp"
 #include "dogen/om/hash/text_file_hash.hpp"
