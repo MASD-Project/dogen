@@ -29,14 +29,21 @@
 #elif defined _WIN32
 #include <windows.h>
 #endif
-
 #include "dogen/config/version.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file_not_found.hpp"
 
+#ifdef __APPLE__
+extern(C) int _NSGetExecutablePath(char* buf, uint* bufsize);
+#endif
+
 namespace {
 
+const std::string unsupported_operative_system(
+    "Operative system not supported");
 const std::string readlink_not_found("All readlinks to proc failed.");
+const std::string executable_path_failure(
+    "Error while obtaining path to executable");
 
 const std::string linux_proc("/proc/self/exe");
 const std::string freebsd_proc("/proc/curproc/file");
@@ -56,7 +63,15 @@ namespace utility {
 namespace filesystem {
 
 boost::filesystem::path executable_directory() {
-#ifdef __unix__
+#if defined __APPLE__
+    char buffer[1024];
+    uint32_t size = sizeof(buffer);
+    if (_NSGetExecutablePath(buffer, &size) != 0)
+        BOOST_THROW_EXCEPTION(file_not_found(executable_path_failure));
+
+    return boost::filesystem::path(buffer).parent_path();
+
+#elif defined __unix__
     char buffer[1024];
 
     // try via proc first
@@ -77,6 +92,8 @@ boost::filesystem::path executable_directory() {
     char buffer[MAX_PATH];
     ::GetModuleFileName(NULL, buffer, MAX_PATH);
     return boost::filesystem::path(buffer).parent_path();
+#else
+    BOOST_THROW_EXCEPTION(file_not_found(unsupported_operative_system));
 #endif
 }
 
