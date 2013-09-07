@@ -34,7 +34,7 @@
 #include "dogen/utility/filesystem/file_not_found.hpp"
 
 #ifdef __APPLE__
-extern "C" int _NSGetExecutablePath(char* buf, uint* bufsize);
+extern "C" int _NSGetExecutablePath(char* buf, unsigned int * bufsize);
 #endif
 
 namespace {
@@ -65,7 +65,7 @@ namespace filesystem {
 boost::filesystem::path executable_directory() {
 #if defined __APPLE__
     char buffer[1024];
-    uint32_t size = sizeof(buffer);
+    unsigned int size = sizeof(buffer);
     if (_NSGetExecutablePath(buffer, &size) != 0)
         BOOST_THROW_EXCEPTION(file_not_found(executable_path_failure));
 
