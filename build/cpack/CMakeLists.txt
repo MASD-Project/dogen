@@ -168,6 +168,12 @@ if (WIN32)
     set(CPACK_SOURCE_GENERATOR "ZIP")
     set(CPACK_PACKAGE_EXECUTABLES "dogen_driver" "Dogen - domain generator")
 
+    if(CMAKE_CL_64)
+        set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES64")
+    else()
+        set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES")
+    endif()
+
     # There is a bug in NSI that does not handle full unix paths properly. Make
     # sure there is at least one set of four (4) backslashes.
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}-${DOGEN_VERSION}")
