@@ -20,6 +20,7 @@
 set(curdir ${CMAKE_CURRENT_SOURCE_DIR})
 file(GLOB subdir RELATIVE ${curdir} *)
 
+set(data_directory "share/data")
 foreach(dir ${subdir})
     if(IS_DIRECTORY ${curdir}/${dir})
         file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/data)

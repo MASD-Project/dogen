@@ -21,6 +21,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/test_data/test_data_exception.hpp"
 #include "dogen/utility/test_data/resolver.hpp"
 
@@ -36,15 +37,15 @@ namespace utility {
 namespace test_data {
 
 boost::filesystem::path resolver::test_data_directory() {
-    const boost::filesystem::path rel(relative_path_to_td_dir);
-    const boost::filesystem::path abs(boost::filesystem::absolute(rel));
+    const auto ed(filesystem::executable_directory());
+    const auto r(ed / relative_path_to_td_dir);
 
-    if (!boost::filesystem::exists(abs))
-    {
+    if (!boost::filesystem::exists(r)) {
         using dogen::utility::test_data::exception;
-        BOOST_THROW_EXCEPTION(exception(test_data_dir_not_found + abs.string()));
+        BOOST_THROW_EXCEPTION(
+            exception(test_data_dir_not_found + r.string()));
     }
-    return abs;
+    return r;
 }
 
 boost::filesystem::path

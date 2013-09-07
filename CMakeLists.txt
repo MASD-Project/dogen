@@ -246,9 +246,6 @@ add_dependencies(rebase rebase_codegen rebase_dataset)
 add_custom_target(diff)
 add_dependencies(diff diff_codegen diff_dataset)
 
-# data directory. used by the data and cpack makefiles
-set(data_directory "share/data")
-
 #
 # include all sub directories
 #

@@ -32,9 +32,10 @@
 namespace {
 
 const std::string test_module("utility");
-const std::string test_suite("kuito_spec");
+const std::string test_suite("file_spec");
 
-const std::string expected_content("some contentent\nmore than one line\nend\n");
+const std::string expected_content(
+    "some contentent\nmore than one line\nend\n");
 const std::string non_existent_file("non_existent_file.dia");
 const std::string file_not_found("File not found: ");
 

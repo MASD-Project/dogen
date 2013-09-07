@@ -17,16 +17,37 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/config/paths.hpp"
+#if defined __unix__ || defined __CYGWIN__
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#elif defined _WIN32
+#include <windows.h>
+#endif
+
+#include "dogen/config/version.hpp"
+#include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file_not_found.hpp"
 
 namespace {
 
-const boost::filesystem::path build_data_dir(DATA_DIRECTORY_BUILD);
-const boost::filesystem::path install_data_dir(DATA_DIRECTORY_INSTALL);
+const std::string readlink_not_found("All readlinks to proc failed.");
+
+const std::string linux_proc("/proc/self/exe");
+const std::string freebsd_proc("/proc/curproc/file");
+const std::string solaris_proc("/proc/self/path/a.out");
+
+const boost::filesystem::path in_current_dir("./data");
+const boost::filesystem::path in_dir_above("../data");
+const boost::filesystem::path in_share_data_dir("../share/data");
+const boost::filesystem::path in_share_dogen_versioned_dir(
+    "../share/dogen-" DOGEN_VERSION);
+const boost::filesystem::path in_share_dogen_dir("../share/dogen");
 
 }
 
@@ -34,14 +55,69 @@ namespace dogen {
 namespace utility {
 namespace filesystem {
 
-boost::filesystem::path data_directory() {
-    if (boost::filesystem::exists(build_data_dir))
-        return build_data_dir;
+boost::filesystem::path executable_directory() {
+#ifdef __unix__
+    char buffer[1024];
 
-    if (boost::filesystem::exists(install_data_dir))
-        return install_data_dir;
+    // try via proc first
+    ssize_t result = ::readlink(linux_proc.c_str(), buffer, sizeof(buffer) - 1);
+    if (result < 0)
+        result = ::readlink(freebsd_proc.c_str(), buffer, sizeof(buffer) - 1);
 
-    BOOST_THROW_EXCEPTION(file_not_found(install_data_dir.string()));
+    if (result < 0)
+        result = ::readlink(solaris_proc.c_str(), buffer, sizeof(buffer) - 1);
+
+    if (result <= 0)
+        BOOST_THROW_EXCEPTION(file_not_found(readlink_not_found));
+
+    buffer[result] = '\0';
+    return boost::filesystem::path(buffer).parent_path();
+
+#elif defined _WIN32
+    char buffer[MAX_PATH];
+    ::GetModuleFileName(NULL, buffer, MAX_PATH);
+    return boost::filesystem::path(buffer).parent_path();
+#endif
+}
+
+boost::filesystem::path data_files_directory() {
+    const auto ed(executable_directory());
+
+    // shouldn't really happen, but just in case.
+    auto r = boost::filesystem::absolute(ed / in_current_dir);
+    if (boost::filesystem::exists(r))
+        return r;
+
+    // build directory
+    r = boost::filesystem::absolute(ed / in_dir_above);
+    if (boost::filesystem::exists(r))
+        return r;
+
+    // Windows, OSX, linux opt install
+    r = boost::filesystem::absolute(ed / in_share_data_dir);
+    if (boost::filesystem::exists(r))
+        return r;
+
+    // linux distributor, versioned install
+    r = boost::filesystem::absolute(ed / in_share_dogen_versioned_dir);
+    if (boost::filesystem::exists(r))
+        return r;
+
+    // linux distributor, non-versioned install
+    r = boost::filesystem::absolute(ed / in_share_dogen_dir);
+    if (boost::filesystem::exists(r))
+        return r;
+
+    std::ostringstream s;
+    s << "Could not find data directory. Base directory: " << ed.string()
+      << ". Locations searched: "
+      << in_current_dir.string() << " "
+      << in_dir_above.string() << " "
+      << in_share_data_dir.string() << " "
+      << in_share_dogen_versioned_dir.string() << " "
+      << in_share_dogen_dir.string() << " ";
+
+    BOOST_THROW_EXCEPTION(file_not_found(s.str()));
 }
 
 } } }

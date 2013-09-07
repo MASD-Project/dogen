@@ -25,10 +25,6 @@ set(version_template "${CMAKE_CURRENT_SOURCE_DIR}/cpp/version.hpp.in")
 configure_file(${version_template} ${stage_inc_dir}/dogen/config/version.hpp)
 message(STATUS "Transformed version.hpp.")
 
-set(paths_template "${CMAKE_CURRENT_SOURCE_DIR}/cpp/paths.hpp.in")
-configure_file(${paths_template} ${stage_inc_dir}/dogen/config/paths.hpp)
-message(STATUS "Transformed paths.hpp.")
-
 set(doxy_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/dogen.in")
 configure_file(${doxy_template} ${stage_doxygen_dir}/dogen.doxy)
 message(STATUS "Transformed dogen.doxy.")

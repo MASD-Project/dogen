@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_UTILITY_FILESYSTEM_FILE_HPP
+#define DOGEN_UTILITY_FILESYSTEM_FILE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include <string>
 #include <boost/filesystem/path.hpp>
 
@@ -29,3 +36,5 @@ std::string read_file_content(boost::filesystem::path path);
 void write_file_content(boost::filesystem::path path, std::string content);
 
 } } }
+
+#endif
