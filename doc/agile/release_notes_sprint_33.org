@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 33.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-07 Sat 18:07]
+Clock summary at [2013-09-07 Sat 23:43]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *14:02* |       |      |
+| *Total time*                                                        | *18:01* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                     |         | 14:02 |      |
+| Development Stories Implemented                                     |         | 18:01 |      |
 | IMPLEMENTATION Release notes and backlog grooming                   |         |       | 0:14 |
 | COMPLETED Remove prototype model                                    |         |       | 0:04 |
 | COMPLETED Create the initial skeleton for the intermediate model    |         |       | 9:44 |
 | COMPLETED Add a data directory and populate it with main data files |         |       | 4:00 |
+| IMPLEMENTATION Implement the preamble factory                       |         |       | 3:59 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -79,11 +80,26 @@ Cannot be done as the installer may override it.
      CLOSED: [2013-09-07 Sat 18:07]
 
 *** IMPLEMENTATION Implement the preamble factory                     :story:
+    CLOCK: [2013-09-07 Sat 23:10]--[2013-09-07 Sat 23:41] =>  0:31
+
 **** COMPLETED load preambles from the data directory
      CLOCK: [2013-09-07 Sat 20:10]--[2013-09-07 Sat 23:09] =>  2:59
      CLOCK: [2013-09-07 Sat 18:15]--[2013-09-07 Sat 18:33] =>  0:18
      CLOCK: [2013-09-07 Sat 18:04]--[2013-09-07 Sat 18:15] =>  0:11
      CLOSED: [2013-09-07 Sat 23:10]
+
+**** Rename preamble to modeline
+
+[[https://help.gnome.org/users/gedit/stable/gedit-plugins-modelines.html.en][Apparently]] that is the correct name.
+
+**** Add support for start and end modelines
+
+**** Add negative tests
+
+- duplicate preamble schemes: test has same name as the real one
+- non-existent directory
+- directory is a file
+- invalid INI format
 
 **** output preambles to file
 *** Create an SML level concept for facets                            :story:
