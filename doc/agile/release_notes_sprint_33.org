@@ -10,16 +10,17 @@ This file contains all stories that were closed during sprint 33.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-28 Wed 09:15]
+Clock summary at [2013-09-07 Sat 18:07]
 
-| Headline                                          | Time    |       |      |
-|---------------------------------------------------+---------+-------+------|
-| *Total time*                                      | *10:02* |       |      |
-|---------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                   |         | 10:02 |      |
-| IMPLEMENTATION Release notes and backlog grooming |         |       | 0:14 |
-| COMPLETED Remove prototype model                  |         |       | 0:04 |
-| IMPLEMENTATION Create an intermediate C++ model   |         |       | 9:44 |
+| Headline                                                            | Time    |       |      |
+|---------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                        | *14:02* |       |      |
+|---------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                     |         | 14:02 |      |
+| IMPLEMENTATION Release notes and backlog grooming                   |         |       | 0:14 |
+| COMPLETED Remove prototype model                                    |         |       | 0:04 |
+| COMPLETED Create the initial skeleton for the intermediate model    |         |       | 9:44 |
+| COMPLETED Add a data directory and populate it with main data files |         |       | 4:00 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -34,7 +35,8 @@ Clock summary at [2013-08-28 Wed 09:15]
 We don't really need it any more, concepts can be tried directly with
 dogen.
 
-*** IMPLEMENTATION Create an intermediate C++ model                    :epic:
+*** COMPLETED Create the initial skeleton for the intermediate model  :story:
+    CLOSED: [2013-09-07 Sat 18:03]
     CLOCK: [2013-08-28 Wed 07:47]--[2013-08-28 Wed 08:17] =>  0:30
     CLOCK: [2013-08-27 Tue 23:01]--[2013-08-27 Tue 23:12] =>  0:11
     CLOCK: [2013-08-27 Tue 22:52]--[2013-08-27 Tue 23:01] =>  0:09
@@ -47,21 +49,41 @@ dogen.
     CLOCK: [2013-08-25 Sun 21:05]--[2013-08-25 Sun 21:20] =>  0:15
     CLOCK: [2013-08-25 Sun 17:15]--[2013-08-25 Sun 20:30] =>  3:15
     CLOCK: [2013-08-25 Sun 16:45]--[2013-08-25 Sun 17:15] =>  0:30
+    CLOCK: [2013-08-23 Fri 08:29]--[2013-08-23 Fri 08:38] =>  0:09
+    CLOCK: [2013-08-23 Fri 08:04]--[2013-08-23 Fri 08:17] =>  0:13
 
 This story is the result of the analysis story done on the previous
-iteration (see Make a more truthful C++ model).
+iteration (see Make a more truthful C++ model). The end result is we
+need a model designed specifically for outputting across programming
+languages. The objective of this story is to model the main entities
+in the model, in particular on the data side.
 
+*** COMPLETED Add a data directory and populate it with main data files :story:
+    CLOSED: [2013-09-07 Sat 18:07]
 
-**** COMPLETED Create the initial skeleton for the C++ IM
-     CLOSED: [2013-08-23 Fri 08:17]
-     CLOCK: [2013-08-23 Fri 08:29]--[2013-08-23 Fri 08:38] =>  0:09
-     CLOCK: [2013-08-23 Fri 08:04]--[2013-08-23 Fri 08:17] =>  0:13
+We need to make dogen more data driven. Things such as preambles,
+licences, etc should be read from file. In order to get this started
+we need generic support for data files, and it must integrate with
+packaging such that we find the data directory across all operative
+systems.
 
-**** Create a mock factory for the C++ IM
-**** Create a basic =standard_transformer= that instantiates new classes
-**** Create a basic =standard_formatter= that formats new classes
+**** CANCELLED Hard-code path to data directory
+     CLOSED: [2013-09-07 Sat 18:02]
 
-*** Create an SML level concept for facets
+Cannot be done as the installer may override it.
+
+**** COMPLETED Find the path of the running binary
+     CLOSED: [2013-09-07 Sat 18:02]
+     CLOCK: [2013-09-07 Sat 14:01]--[2013-09-07 Sat 18:01] =>  4:00
+**** COMPLETED Make the path to the data directory relative to running binary
+     CLOSED: [2013-09-07 Sat 18:07]
+
+*** IMPLEMENTATION Implement the preamble factory                     :story:
+
+- load preambles from the data directory
+- output them to file
+
+*** Create an SML level concept for facets                            :story:
 
 In reality, "facets" are not a C++ thing; they are language
 neutral. They are, however, expressed differently in different
@@ -82,7 +104,7 @@ We can introduce these concepts at the SML level, probably at the
 =model= and =abstract_object= level; we can then do further
 translation at the language level, as required.
 
-*** Loading external models from file
+*** Loading external models from file                                 :story:
 
 We should really use something like boost property tree to allow
 system models to be loaded from file. We can then convert primitives,
