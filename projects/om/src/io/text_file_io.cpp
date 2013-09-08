@@ -21,7 +21,7 @@
 #include <ostream>
 #include "dogen/om/io/code_generation_marker_io.hpp"
 #include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
+#include "dogen/om/io/modeline_io.hpp"
 #include "dogen/om/io/text_file_io.hpp"
 
 namespace dogen {

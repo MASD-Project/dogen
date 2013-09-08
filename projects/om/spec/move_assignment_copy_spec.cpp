@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
 
     // test_move_assignment_copy<cpp_file_generator>();
     // test_move_assignment_copy<cpp_project_generator>();
-    test_move_assignment_copy<preamble_generator>();
+    test_move_assignment_copy<modeline_generator>();
     test_move_assignment_copy<licence_generator>();
 }
 

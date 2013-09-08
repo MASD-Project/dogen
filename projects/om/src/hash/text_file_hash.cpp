@@ -20,7 +20,7 @@
  */
 #include "dogen/om/hash/code_generation_marker_hash.hpp"
 #include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/preamble_hash.hpp"
+#include "dogen/om/hash/modeline_hash.hpp"
 #include "dogen/om/hash/text_file_hash.hpp"
 
 namespace {
@@ -52,7 +52,7 @@ std::size_t text_file_hasher::hash(const text_file&v) {
 
     combine(seed, v.full_path().generic_string());
     combine(seed, v.relative_path().generic_string());
-    combine(seed, v.preamble());
+    combine(seed, v.modeline());
     combine(seed, hash_boost_optional_dogen_om_code_generation_marker(v.marker()));
     combine(seed, v.licence());
 

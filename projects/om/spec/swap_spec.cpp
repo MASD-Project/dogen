@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
     // test_swap<cpp_file_generator>();
     // test_swap<cpp_project_generator>();
-    test_swap<preamble_generator>();
+    test_swap<modeline_generator>();
     test_swap<licence_generator>();
 }
 

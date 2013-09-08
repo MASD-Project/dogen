@@ -42,5 +42,5 @@ add_custom_target(run_om_spec
     DEPENDS om_spec)
 add_dependencies(run_all_specs run_om_spec)
 
-add_boost_tests(sml_to_om ${om_spec_files})
+add_boost_tests(om ${om_spec_files})
 install(TARGETS om_spec RUNTIME DESTINATION bin COMPONENT tests)

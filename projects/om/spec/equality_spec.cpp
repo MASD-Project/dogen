@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
     // test_equality<cpp_file_generator>();
     // test_equality<cpp_project_generator>();
-    test_equality<preamble_generator>();
+    test_equality<modeline_generator>();
     test_equality<licence_generator>();
 }
 

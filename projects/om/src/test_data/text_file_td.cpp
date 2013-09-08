@@ -23,8 +23,8 @@
 #include "dogen/om/test_data/code_generation_marker_td.hpp"
 #include "dogen/om/test_data/cpp_file_td.hpp"
 #include "dogen/om/test_data/licence_td.hpp"
+#include "dogen/om/test_data/modeline_td.hpp"
 #include "dogen/om/test_data/odb_options_file_td.hpp"
-#include "dogen/om/test_data/preamble_td.hpp"
 #include "dogen/om/test_data/text_file_td.hpp"
 
 namespace {
@@ -36,9 +36,9 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-dogen::om::preamble
-create_dogen_om_preamble(const unsigned int position) {
-    return dogen::om::preamble_generator::create(position);
+dogen::om::modeline
+create_dogen_om_modeline(const unsigned int position) {
+    return dogen::om::modeline_generator::create(position);
 }
 
 dogen::om::code_generation_marker
@@ -68,7 +68,7 @@ void text_file_generator::
 populate(const unsigned int position, result_type& v) {
     v.full_path(create_boost_filesystem_path(position + 0));
     v.relative_path(create_boost_filesystem_path(position + 1));
-    v.preamble(create_dogen_om_preamble(position + 2));
+    v.modeline(create_dogen_om_modeline(position + 2));
     v.marker(create_boost_optional_dogen_om_code_generation_marker(position + 3));
     v.licence(create_dogen_om_licence(position + 4));
 }

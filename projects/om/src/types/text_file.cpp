@@ -21,7 +21,7 @@
 #include <ostream>
 #include "dogen/om/io/code_generation_marker_io.hpp"
 #include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/preamble_io.hpp"
+#include "dogen/om/io/modeline_io.hpp"
 #include "dogen/om/types/text_file.hpp"
 
 namespace boost {
@@ -45,19 +45,19 @@ namespace om {
 text_file::text_file(text_file&& rhs)
     : full_path_(std::move(rhs.full_path_)),
       relative_path_(std::move(rhs.relative_path_)),
-      preamble_(std::move(rhs.preamble_)),
+      modeline_(std::move(rhs.modeline_)),
       marker_(std::move(rhs.marker_)),
       licence_(std::move(rhs.licence_)) { }
 
 text_file::text_file(
     const boost::filesystem::path& full_path,
     const boost::filesystem::path& relative_path,
-    const dogen::om::preamble& preamble,
+    const dogen::om::modeline& modeline,
     const boost::optional<dogen::om::code_generation_marker>& marker,
     const dogen::om::licence& licence)
     : full_path_(full_path),
       relative_path_(relative_path),
-      preamble_(preamble),
+      modeline_(modeline),
       marker_(marker),
       licence_(licence) { }
 
@@ -66,7 +66,7 @@ void text_file::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::om::text_file\"" << ", "
       << "\"full_path\": " << "\"" << full_path_.generic_string() << "\"" << ", "
       << "\"relative_path\": " << "\"" << relative_path_.generic_string() << "\"" << ", "
-      << "\"preamble\": " << preamble_ << ", "
+      << "\"modeline\": " << modeline_ << ", "
       << "\"marker\": " << marker_ << ", "
       << "\"licence\": " << licence_
       << " }";
@@ -76,7 +76,7 @@ void text_file::swap(text_file& other) noexcept {
     using std::swap;
     swap(full_path_, other.full_path_);
     swap(relative_path_, other.relative_path_);
-    swap(preamble_, other.preamble_);
+    swap(modeline_, other.modeline_);
     swap(marker_, other.marker_);
     swap(licence_, other.licence_);
 }
@@ -84,7 +84,7 @@ void text_file::swap(text_file& other) noexcept {
 bool text_file::compare(const text_file& rhs) const {
     return full_path_ == rhs.full_path_ &&
         relative_path_ == rhs.relative_path_ &&
-        preamble_ == rhs.preamble_ &&
+        modeline_ == rhs.modeline_ &&
         marker_ == rhs.marker_ &&
         licence_ == rhs.licence_;
 }
@@ -121,20 +121,20 @@ void text_file::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
 }
 
-const dogen::om::preamble& text_file::preamble() const {
-    return preamble_;
+const dogen::om::modeline& text_file::modeline() const {
+    return modeline_;
 }
 
-dogen::om::preamble& text_file::preamble() {
-    return preamble_;
+dogen::om::modeline& text_file::modeline() {
+    return modeline_;
 }
 
-void text_file::preamble(const dogen::om::preamble& v) {
-    preamble_ = v;
+void text_file::modeline(const dogen::om::modeline& v) {
+    modeline_ = v;
 }
 
-void text_file::preamble(const dogen::om::preamble&& v) {
-    preamble_ = std::move(v);
+void text_file::modeline(const dogen::om::modeline&& v) {
+    modeline_ = std::move(v);
 }
 
 const boost::optional<dogen::om::code_generation_marker>& text_file::marker() const {

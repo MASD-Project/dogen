@@ -69,13 +69,13 @@ namespace om {
 cmake_file::cmake_file(
     const boost::filesystem::path& full_path,
     const boost::filesystem::path& relative_path,
-    const dogen::om::preamble& preamble,
+    const dogen::om::modeline& modeline,
     const boost::optional<dogen::om::code_generation_marker>& marker,
     const dogen::om::licence& licence,
     const std::list<boost::shared_ptr<dogen::om::cmake_feature> >& features)
     : dogen::om::text_file(full_path,
       relative_path,
-      preamble,
+      modeline,
       marker,
       licence),
       features_(features) { }

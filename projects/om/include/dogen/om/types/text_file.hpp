@@ -32,7 +32,7 @@
 #include "dogen/om/serialization/text_file_fwd_ser.hpp"
 #include "dogen/om/types/code_generation_marker.hpp"
 #include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/preamble.hpp"
+#include "dogen/om/types/modeline.hpp"
 
 namespace dogen {
 namespace om {
@@ -54,7 +54,7 @@ public:
     text_file(
         const boost::filesystem::path& full_path,
         const boost::filesystem::path& relative_path,
-        const dogen::om::preamble& preamble,
+        const dogen::om::modeline& modeline,
         const boost::optional<dogen::om::code_generation_marker>& marker,
         const dogen::om::licence& licence);
 
@@ -90,13 +90,13 @@ public:
     /**@}*/
 
     /**
-     * @brief The editor hints, etc for this file.
+     * @brief The editor variables for this file.
      */
     /**@{*/
-    const dogen::om::preamble& preamble() const;
-    dogen::om::preamble& preamble();
-    void preamble(const dogen::om::preamble& v);
-    void preamble(const dogen::om::preamble&& v);
+    const dogen::om::modeline& modeline() const;
+    dogen::om::modeline& modeline();
+    void modeline(const dogen::om::modeline& v);
+    void modeline(const dogen::om::modeline&& v);
     /**@}*/
 
     const boost::optional<dogen::om::code_generation_marker>& marker() const;
@@ -125,7 +125,7 @@ protected:
 private:
     boost::filesystem::path full_path_;
     boost::filesystem::path relative_path_;
-    dogen::om::preamble preamble_;
+    dogen::om::modeline modeline_;
     boost::optional<dogen::om::code_generation_marker> marker_;
     dogen::om::licence licence_;
 };

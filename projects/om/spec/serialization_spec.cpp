@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
 
     // rountrip_type<cpp_file_generator>();
     // rountrip_type<cpp_project_generator>();
-    rountrip_type<preamble_generator>();
+    rountrip_type<modeline_generator>();
     rountrip_type<licence_generator>();
 }
 

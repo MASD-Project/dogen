@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 
     // test_hashing<cpp_file_generator>();
     // test_hashing<cpp_project_generator>();
-    test_hashing<preamble_generator>();
+    test_hashing<modeline_generator>();
     test_hashing<licence_generator>();
 }
 

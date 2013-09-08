@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
 
     // test_io<cpp_file_generator>();
     // test_io<cpp_project_generator>();
-    test_io<preamble_generator>();
+    test_io<modeline_generator>();
     test_io<licence_generator>();
 }
 
