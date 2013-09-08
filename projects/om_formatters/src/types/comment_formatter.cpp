@@ -23,12 +23,14 @@
 
 namespace {
 
+const std::string empty;
 const std::string plain_c_style_start("/*");
 const std::string c_style_middle(" *");
 const std::string doxygen_c_style_start("/**");
 const std::string c_style_end("*/");
 const std::string plain_cpp_style("//");
 const std::string doxygen_cpp_style("///");
+const std::string doxygen_previous_identifier("<");
 const std::string shell_style("#");
 const std::string sql_style("--");
 const std::string space(" ");
@@ -41,34 +43,30 @@ namespace om_formatters {
 comment_formatter::comment_formatter()
     : start_on_first_line_(false),
       use_documentation_tool_markup_(false),
+      documenting_previous_identifier_(false),
       style_(comment_styles::c_style),
       last_line_is_blank_(false) { }
 
 comment_formatter::comment_formatter(
     const bool start_on_first_line,
     const bool use_documentation_tool_markup,
+    const bool documenting_previous_identifier,
     const comment_styles style,
     const bool last_line_is_blank)
     : start_on_first_line_(start_on_first_line),
       use_documentation_tool_markup_(use_documentation_tool_markup),
+      documenting_previous_identifier_(documenting_previous_identifier),
       style_(style),
       last_line_is_blank_(last_line_is_blank) { }
 
-std::string comment_formatter::format(const std::string& content) const {
-    return format(std::list<std::string> { content });
-}
-
 void comment_formatter::add_comment_start_marker(std::ostream& s) const {
     if (style_ == comment_styles::c_style) {
-        if (use_documentation_tool_markup_)
+        if (use_documentation_tool_markup_) {
             s << doxygen_c_style_start;
-        else
+            if (documenting_previous_identifier_)
+                s << doxygen_previous_identifier;
+        } else
             s << plain_c_style_start;
-    } else if (style_ == comment_styles::cpp_style) {
-        if (use_documentation_tool_markup_)
-            s << doxygen_cpp_style;
-        else
-            s << plain_cpp_style;
     } else
         add_comment_middle_marker(s);
 }
@@ -77,7 +75,13 @@ void comment_formatter::add_comment_middle_marker(std::ostream& s) const {
     if (style_ == comment_styles::c_style)
         s << c_style_middle;
     else if (style_ == comment_styles::cpp_style) {
-        s << plain_cpp_style;
+        if (use_documentation_tool_markup_) {
+            s << doxygen_cpp_style;
+            if (documenting_previous_identifier_)
+                s << doxygen_previous_identifier;
+        }
+        else
+            s << plain_cpp_style;
     } else if (style_ == comment_styles::shell_style) {
         s << shell_style;
     } else if (style_ == comment_styles::sql_style) {
@@ -88,6 +92,10 @@ void comment_formatter::add_comment_middle_marker(std::ostream& s) const {
 void comment_formatter::add_comment_end_marker(std::ostream& s) const {
     if (style_ == comment_styles::c_style)
         s << space << c_style_end << std::endl;
+}
+
+std::string comment_formatter::format(const std::string& content) const {
+    return format(std::list<std::string> { content });
 }
 
 std::string
@@ -102,23 +110,35 @@ comment_formatter::format(const std::list<std::string>& content,
     for (const auto& c : content) {
         content_found = content_found || !c.empty();
 
-        if (is_first_block && !line_between_blocks)
+        if (!is_first_block && line_between_blocks) {
+            add_comment_middle_marker(main_stream);
             main_stream << std::endl;
+        }
 
         std::istringstream content_stream(c);
         std::string line;
         while (std::getline(content_stream, line)) {
-            if (is_first_line && !start_on_first_line_)
-                main_stream << std::endl;
+            if (is_first_line) {
+                if (!start_on_first_line_) {
+                    main_stream << std::endl;
+                    add_comment_middle_marker(main_stream);
+                }
+            } else
+                add_comment_middle_marker(main_stream);
 
-            add_comment_middle_marker(main_stream);
-            main_stream << space << line << std::endl;
+            if (!line.empty())
+                main_stream << space << line;
+
+            main_stream << std::endl;
             is_first_line = false;
         }
         is_first_block = false;
     }
 
     if (!content_found) {
+        // if (!start_on_first_line_)
+            main_stream << std::endl;
+
         add_comment_middle_marker(main_stream);
         main_stream << std::endl;
     }

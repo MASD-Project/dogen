@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 33.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-08 Sun 17:57]
+Clock summary at [2013-09-08 Sun 21:59]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *23:47* |       |      |
+| *Total time*                                                        | *24:46* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                     |         | 23:47 |      |
+| Development Stories Implemented                                     |         | 24:46 |      |
 | IMPLEMENTATION Release notes and backlog grooming                   |         |       | 0:14 |
 | COMPLETED Remove prototype model                                    |         |       | 0:04 |
 | COMPLETED Create the initial skeleton for the intermediate model    |         |       | 9:44 |
 | COMPLETED Add a data directory and populate it with main data files |         |       | 4:00 |
 | COMPLETED Implement the preamble factory                            |         |       | 6:58 |
 | COMPLETED Create a modeline formatter                               |         |       | 1:38 |
-| IMPLEMENTATION Create a comments formatter                          |         |       | 1:09 |
+| COMPLETED Create a comments formatter                               |         |       | 2:08 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -132,7 +132,9 @@ tests:
     CLOCK: [2013-09-08 Sun 16:15]--[2013-09-08 Sun 16:23] =>  0:08
     CLOCK: [2013-09-08 Sun 14:45]--[2013-09-08 Sun 16:15] =>  1:30
 
-*** IMPLEMENTATION Create a comments formatter                        :story:
+*** COMPLETED Create a comments formatter                             :story:
+    CLOSED: [2013-09-08 Sun 21:59]
+    CLOCK: [2013-09-08 Sun 21:00]--[2013-09-08 Sun 21:59] =>  0:59
     CLOCK: [2013-09-08 Sun 17:44]--[2013-09-08 Sun 17:57] =>  0:13
     CLOCK: [2013-09-08 Sun 16:48]--[2013-09-08 Sun 17:44] =>  0:56
 

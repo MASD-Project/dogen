@@ -56,6 +56,8 @@ public:
      * @param use_documentation_tool_markup if true, where applicable
      * formatter will decorate comments with documentation tool
      * markup.
+     * @param documenting_previous_identifier if true, the comments refer to
+     * an identifier already defined.
      * @param style type of commenting to use.
      * @param blank_trailing_line if true, a blank line will be added
      * at the end.
@@ -63,6 +65,7 @@ public:
     comment_formatter(
         const bool start_on_first_line,
         const bool use_documentation_tool_markup,
+        const bool documenting_previous_identifier,
         const comment_styles style,
         const bool last_line_is_blank);
 
@@ -97,6 +100,7 @@ public:
 private:
     const bool start_on_first_line_;
     const bool use_documentation_tool_markup_;
+    const bool documenting_previous_identifier_;
     const comment_styles style_;
     const bool last_line_is_blank_;
 };
