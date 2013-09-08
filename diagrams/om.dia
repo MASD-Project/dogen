@@ -11275,19 +11275,19 @@ future with other languages such as Java, C# etc.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O97">
       <dia:attribute name="obj_pos">
-        <dia:point val="-45,-43"/>
+        <dia:point val="-37,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-45.05,-43.05;-13.265,-37.75"/>
+        <dia:rectangle val="-37.05,-43.05;-21.05,-39.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-45,-43"/>
+        <dia:point val="-37,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000002"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#modeline_group_hydrator#</dia:string>
@@ -11380,13 +11380,13 @@ future with other languages such as Java, C# etc.
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#modeline_group_hydrator#</dia:string>
+            <dia:string>#hydrate#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>##</dia:string>
+            <dia:string>#modeline_group#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11409,10 +11409,10 @@ future with other languages such as Java, C# etc.
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#template_directories#</dia:string>
+                <dia:string>#i#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::list&lt;boost::filesystem::path&gt;#</dia:string>
+                <dia:string>#std::istream#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11425,36 +11425,6 @@ future with other languages such as Java, C# etc.
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#hydrate#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,modeline_group&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="2"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
         </dia:composite>
       </dia:attribute>
       <dia:attribute name="template">
@@ -11500,17 +11470,17 @@ future with other languages such as Java, C# etc.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-29.1575,-37.8"/>
+        <dia:point val="-29.05,-39.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.79,-38.55;-28.4075,-24.2"/>
+        <dia:rectangle val="-38.79,-40.15;-28.3,-24.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-29.1575,-37.8"/>
-        <dia:point val="-29.1575,-32"/>
+        <dia:point val="-29.05,-39.4"/>
+        <dia:point val="-29.05,-32"/>
         <dia:point val="-38.74,-32"/>
         <dia:point val="-38.74,-25"/>
       </dia:attribute>
@@ -12188,17 +12158,17 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-29.1575,-43"/>
+        <dia:point val="-29.05,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.9075,-48.75;10.9775,-41.4"/>
+        <dia:rectangle val="-29.8,-48.75;10.9775,-41.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-29.1575,-43"/>
-        <dia:point val="-29.1575,-48"/>
+        <dia:point val="-29.05,-43"/>
+        <dia:point val="-29.05,-48"/>
         <dia:point val="10.7775,-48"/>
         <dia:point val="10.7775,-43"/>
       </dia:attribute>
@@ -12497,13 +12467,13 @@ For example, one may choose to have a set of modelines for @e emacs , or for
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O108">
       <dia:attribute name="obj_pos">
-        <dia:point val="-42,12"/>
+        <dia:point val="-42,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.05,11.95;-32.7975,16.45"/>
+        <dia:rectangle val="-42.05,9.95;-32.7975,14.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-42,12"/>
+        <dia:point val="-42,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.1524999999999999"/>
@@ -12693,16 +12663,16 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-39.205,-2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.955,-3.35;-37.2237,13.6"/>
+        <dia:rectangle val="-39.955,-3.35;-37.2237,11.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-39.205,-2.6"/>
-        <dia:point val="-39.205,5.05"/>
-        <dia:point val="-37.4237,5.05"/>
-        <dia:point val="-37.4237,12"/>
+        <dia:point val="-39.205,4"/>
+        <dia:point val="-37.4237,4"/>
+        <dia:point val="-37.4237,10"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12710,7 +12680,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>

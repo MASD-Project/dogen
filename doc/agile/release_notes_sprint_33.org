@@ -94,14 +94,33 @@ Cannot be done as the installer may override it.
 
 [[https://help.gnome.org/users/gedit/stable/gedit-plugins-modelines.html.en][Apparently]] that is the correct name.
 
-**** Add support for start and end modelines
+**** COMPLETED Add support for start and end modelines
+     CLOSED: [2013-09-08 Sun 11:41]
 
-**** Add negative tests
+**** COMPLETED Refactor directory code into utility
+     CLOSED: [2013-09-08 Sun 13:44]
+     CLOCK: [2013-09-08 Sun 12:01]--[2013-09-08 Sun 13:20] =>  1:19
 
-- duplicate preamble schemes: test has same name as the real one
+We should not duplicate the same code as we have in asserter but
+instead factor out the commonalities and put them in utility. The
+hydrator interface should deal only with an =std::istream= and all the
+file/directory manipulation should be external. this will make testing
+much easier and avoid code duplication.
+
+tests:
+
 - non-existent directory
 - directory is a file
+
+**** IMPLEMENTATION Add negative tests
+     CLOCK: [2013-09-08 Sun 11:40]--[2013-09-08 Sun 12:01] =>  0:21
+
+- duplicate preamble schemes: test has same name as the real one
 - invalid INI format
+- must supply editor
+- not defaulting location defaults to top
+- invalid editor
+- invalid location
 
 **** output preambles to file
 *** Create an SML level concept for facets                            :story:

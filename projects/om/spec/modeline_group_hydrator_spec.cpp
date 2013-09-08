@@ -19,14 +19,17 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include <boost/filesystem/fstream.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/om/types/all.hpp"
 #include "dogen/om/io/all_io.hpp"
 #include "dogen/om/test_data/all_td.hpp"
+#include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {
 
@@ -34,42 +37,50 @@ const std::string empty;
 const std::string test_module("om");
 const std::string test_suite("modeline_group_hydrator_spec");
 
-const std::string modeline_groups_dir("modeline_groups");
+const std::string duplicate_group("Duplicate modeline group");
+const std::string invalid_dir("INVALID_DIRECTORY__");
+const std::string dir_not_found_message("Could not find directory");
+const std::string not_a_dir_message("Not a directory");
+const std::string invalid_file_message("Failed to parse INI file");
+const std::string emacs_modeline_group("modeline_groups/emacs");
+const std::string invalid_ini_file("NOTINITFILE");
 
 }
 
 using namespace dogen::om;
 using namespace dogen::utility::test;
+using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(modeline_group_hydrator)
 
-BOOST_AUTO_TEST_CASE(modeline_group_hydrator_loads_expected_templates_from_data_directory) {
-    SETUP_TEST_LOG_SOURCE("modeline_group_hydrator_loads_expected_templates_from_data_directory");
-
+BOOST_AUTO_TEST_CASE(hydrating_emacs_modeline_group_results_in_expected_modelines) {
+    SETUP_TEST_LOG_SOURCE("hydrating_emacs_modeline_group_results_in_expected_modelines");
     using namespace dogen::utility::filesystem;
-    const std::list<boost::filesystem::path> d = {
-        // executable_directory()
-        data_files_directory() / modeline_groups_dir
-    };
+    boost::filesystem::path p(data_files_directory() / emacs_modeline_group);
+    boost::filesystem::ifstream s(p);
+    dogen::om::modeline_group_hydrator h;
+    const auto r(h.hydrate(s));
 
-    dogen::om::modeline_group_hydrator f(d);
-    const auto r(f.hydrate());
+    BOOST_LOG_SEV(lg, debug) << "modeline group: " << r;
+    for (const auto& modelines : r.modelines()) {
+        BOOST_CHECK(!modelines.first.empty());
+        BOOST_CHECK(!modelines.second.fields().empty());
 
-    BOOST_LOG_SEV(lg, debug) << "groups: " << r;
-    BOOST_CHECK(!r.empty());
-
-    for (const auto& groups : r) {
-        BOOST_CHECK(!groups.first.empty());
-        BOOST_CHECK(!groups.second.modelines().empty());
-        for (const auto& modelines : groups.second.modelines()) {
-            BOOST_CHECK(!modelines.first.empty());
-            BOOST_CHECK(!modelines.second.fields().empty());
-
-            // value  may be empty so nothing can be said about it.
-            for (const auto& fields : modelines.second.fields())
-                BOOST_CHECK(!fields.name().empty());
-        }
+        // value  may be empty so nothing can be said about it.
+        for (const auto& fields : modelines.second.fields())
+            BOOST_CHECK(!fields.name().empty());
     }
+}
+
+BOOST_AUTO_TEST_CASE(supplying_invalid_ini_file_throws) {
+    SETUP_TEST_LOG_SOURCE("supplying_invalid_ini_file_throws");
+
+    std::istringstream s(invalid_ini_file);
+    using namespace dogen::utility::filesystem;
+
+    dogen::om::modeline_group_hydrator f;
+    contains_checker<dogen::om::hydration_error> c(invalid_file_message);
+    BOOST_CHECK_EXCEPTION(f.hydrate(s), dogen::om::hydration_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

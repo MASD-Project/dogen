@@ -48,24 +48,6 @@ const std::string starts_with("assert starts with");
 const std::string directory("assert directory");
 const std::string file("assert file");
 
-std::set<path> items_in_directory(path top_dir) {
-    using namespace dogen::utility::log;
-    auto lg(dogen::utility::test::asserter::logger());
-    BOOST_LOG_SEV(lg, debug) << "finding items in directory for: " << top_dir;
-
-    std::set<path> r;
-    using boost::filesystem::recursive_directory_iterator;
-    for (recursive_directory_iterator end, dir(top_dir); dir != end; ++dir) {
-        const path p(*dir);
-        if (boost::filesystem::is_regular_file(p)) {
-            r.insert(p);
-            BOOST_LOG_SEV(lg, debug) << "adding item: " << p;
-        } else
-            BOOST_LOG_SEV(lg, debug) << "ignoring item: " << p;
-    }
-    return r;
-}
-
 std::set<std::string> normalise(path base, std::set<path> paths) {
     std::set<std::string> r;
     boost::copy(paths |
@@ -142,7 +124,7 @@ bool asserter::assert_directory(boost::filesystem::path expected_path,
     BOOST_LOG_SEV(lg_, debug) << "actual directory: " << actual_path;
 
     auto lambda([](path d){
-            return boost::make_tuple(d, items_in_directory(d));
+            return boost::make_tuple(d, filesystem::find_files(d));
         });
 
     const auto expected(lambda(expected_path));

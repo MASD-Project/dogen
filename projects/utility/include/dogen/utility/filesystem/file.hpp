@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <set>
 #include <string>
 #include <boost/filesystem/path.hpp>
 
@@ -32,8 +33,32 @@ namespace dogen {
 namespace utility {
 namespace filesystem {
 
+/**
+ * @brief Returns the contents of the file.
+ */
 std::string read_file_content(boost::filesystem::path path);
+
+/**
+ * @brief Writes the string to a file located at path.
+ */
 void write_file_content(boost::filesystem::path path, std::string content);
+
+/**
+ * @brief Returns all files available in directory, recursively.
+ *
+ * Returned paths are absolute paths.
+ */
+std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d);
+
+/**
+ * @brief Returns all files available in all input directories, recursively.
+ *
+ * Returned paths are absolute paths. If you supply the same directory
+ * multiple times, the files will be read multiple times but returned
+ * on once in the set.
+ */
+std::set<boost::filesystem::path>
+find_files(const std::list<boost::filesystem::path>& dirs);
 
 } } }
 

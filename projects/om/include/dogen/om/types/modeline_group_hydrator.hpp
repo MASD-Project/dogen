@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <list>
+
 #include <string>
-#include <unordered_map>
+#include <istream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/om/types/modeline_field.hpp"
 #include "dogen/om/types/modeline_group.hpp"
@@ -37,19 +37,10 @@ namespace om {
 
 class modeline_group_hydrator {
 public:
-    modeline_group_hydrator() = delete;
+    modeline_group_hydrator() = default;
     modeline_group_hydrator(const modeline_group_hydrator&) = default;
     modeline_group_hydrator& operator=(const modeline_group_hydrator&) = delete;
     modeline_group_hydrator(modeline_group_hydrator&& rhs) = default;
-
-public:
-    /**
-     * @brief Initialises the hydrator.
-     *
-     * @param directories directories to load groups from.
-     */
-    explicit modeline_group_hydrator(
-        const std::list<boost::filesystem::path>& directories);
 
 private:
     /**
@@ -80,26 +71,12 @@ private:
      */
     bool is_group_name_valid(const std::string& n) const;
 
-    /**
-     * @brief Returns all files in the directory.
-     */
-    std::list<boost::filesystem::path>
-    files_in_directory(const boost::filesystem::path& d) const;
-
-    /**
-     * @brief Hydrates an INI file.
-     */
-    modeline_group hydrate_file(const boost::filesystem::path& f) const;
-
 public:
     /**
      * @brief Hydrate all the modeline groups found in the
      * directories.
      */
-    std::unordered_map<std::string, modeline_group> hydrate() const;
-
-private:
-    const std::list<boost::filesystem::path>& directories_;
+    modeline_group hydrate(std::istream& i) const;
 };
 
 } }
