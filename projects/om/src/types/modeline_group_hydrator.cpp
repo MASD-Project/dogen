@@ -42,9 +42,11 @@ const std::string invalid_option_in_ini_file("Failed to read option in INI file:
 const std::string invalid_path("Failed to find INI file: ");
 const std::string invalid_directory("Not a directory: ");
 const std::string directory_not_found("Could not find directory: ");
+const std::string editor_not_supplied("Editor was not supplied");
 const std::string invalid_editor("Invalid or unsupported editor: ");
 const std::string invalid_location(
     "Invalid or unsupported modeline location: ");
+const std::string no_fields("Modeline must have at least one field");
 
 const std::string cpp_group_name("c++");
 const std::string odb_group_name("odb");
@@ -108,41 +110,63 @@ is_group_name_valid(const std::string& n) const {
         n == cmake_group_name;
 }
 
-modeline_group modeline_group_hydrator::hydrate(std::istream& i) const {
+void modeline_group_hydrator::validate_modeline(const modeline& m) const {
+    if (m.editor() == editors::invalid) {
+        BOOST_LOG_SEV(lg, error) << editor_not_supplied;
+        BOOST_THROW_EXCEPTION(hydration_error(editor_not_supplied));
+    }
+
+    if (m.fields().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_fields;
+        BOOST_THROW_EXCEPTION(hydration_error(no_fields));
+    }
+}
+
+modeline_group modeline_group_hydrator::read_stream(std::istream& i) const {
     modeline_group r;
+
+    using namespace boost::property_tree;
+    ptree pt;
+    read_ini(i, pt);
+    for (ptree::const_iterator i(pt.begin()); i != pt.end(); ++i) {
+        const auto& sn(i->first);
+        if (!is_group_name_valid(sn)) {
+            BOOST_LOG_SEV(lg, error) << invalid_group_name << sn;
+            BOOST_THROW_EXCEPTION(hydration_error(invalid_group_name + sn));
+        }
+
+        modeline m;
+        const auto node(i->second);
+        for (ptree::const_iterator j(node.begin()); j != node.end(); ++j) {
+            const auto field_name(j->first);
+            const auto field_value(j->second.get_value<std::string>());
+
+            if (field_name == editor_field)
+                m.editor(translate_editor_enum(field_value));
+            else if (field_name == location_field)
+                m.location(translate_location_enum(field_value));
+            else {
+                modeline_field f;
+                f.name(field_name);
+                f.value(translate_special_values(field_value));
+                m.fields().push_back(f);
+            }
+        }
+
+        if (m.location() == modeline_locations::invalid)
+            m.location(modeline_locations::top);
+
+        validate_modeline(m);
+
+        r.modelines().insert(std::make_pair(sn, m));
+    }
+    return r;
+}
+
+modeline_group modeline_group_hydrator::hydrate(std::istream& i) const {
     using namespace boost::property_tree;
     try {
-        ptree pt;
-        read_ini(i, pt);
-        for (ptree::const_iterator i(pt.begin()); i != pt.end(); ++i) {
-            const auto& sn(i->first);
-            if (!is_group_name_valid(sn)) {
-                BOOST_LOG_SEV(lg, error) << invalid_group_name << sn;
-                BOOST_THROW_EXCEPTION(
-                    hydration_error(invalid_group_name + sn));
-            }
-
-            modeline p;
-            for (ptree::const_iterator j(i->second.begin());
-                 j != i->second.end();
-                 ++j) {
-
-                const auto field_name(j->first);
-                const auto field_value(j->second.get_value<std::string>());
-
-                if (field_name == editor_field)
-                    p.editor(translate_editor_enum(field_value));
-                else if (field_name == location_field)
-                    p.location(translate_location_enum(field_value));
-                else {
-                    modeline_field f;
-                    f.name(field_name);
-                    f.value(translate_special_values(field_value));
-                    p.fields().push_back(f);
-                }
-            }
-            r.modelines().insert(std::make_pair(sn, p));
-        }
+        return read_stream(i);
     } catch (const ini_parser_error& e) {
         BOOST_LOG_SEV(lg, error) << invalid_ini_file << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_ini_file + e.what()));
@@ -156,7 +180,7 @@ modeline_group modeline_group_hydrator::hydrate(std::istream& i) const {
         BOOST_THROW_EXCEPTION(hydration_error(invalid_path + e.what()));
     }
 
-    return r;
+    // return modeline_group(); // keep compiler happy
 }
 
 } }

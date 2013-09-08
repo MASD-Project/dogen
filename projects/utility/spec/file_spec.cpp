@@ -160,6 +160,30 @@ BOOST_AUTO_TEST_CASE(find_files_returns_expected_files_when_not_recursing) {
     }
 }
 
+BOOST_AUTO_TEST_CASE(find_files_returns_expected_files_with_multiple_directories) {
+    SETUP_TEST_LOG_SOURCE("find_files_returns_expected_files_with_multiple_directories");
+    using dogen::utility::test_data::filesystem_tests;
+    const auto dirs = std::list<boost::filesystem::path> {
+        filesystem_tests::input(),
+        filesystem_tests::expected(),
+        filesystem_tests::actual(),
+    };
+    const auto files(dogen::utility::filesystem::find_files(dirs));
+    BOOST_LOG_SEV(lg, info) << "Files found: " << files;
+
+    BOOST_CHECK(files.size() == 6);
+
+    for (const auto& f : files) {
+        BOOST_CHECK(
+            compare_filenames(f, filesystem_tests::expected_some_file_txt()) ||
+            compare_filenames(
+                f, filesystem_tests::expected_file_to_overwrite_txt()) ||
+            compare_filenames(
+                f, filesystem_tests::input_non_empty_file_txt()) ||
+            compare_filenames(f, filesystem_tests::input_empty_file_txt()));
+    }
+}
+
 BOOST_AUTO_TEST_CASE(find_files_throws_when_argument_is_a_file) {
     SETUP_TEST_LOG_SOURCE("find_files_throws_when_argument_is_a_file");
     using dogen::utility::test_data::filesystem_tests;

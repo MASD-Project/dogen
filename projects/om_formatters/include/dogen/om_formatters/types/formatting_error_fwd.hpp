@@ -18,10 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om_formatters/types/cpp_class_formatter.hpp"
-#include "dogen/om_formatters/types/cpp_file_formatter.hpp"
-#include "dogen/om_formatters/types/formatted_file.hpp"
-#include "dogen/om_formatters/types/formatting_error.hpp"
-#include "dogen/om_formatters/types/modeline_formatter.hpp"
-#include "dogen/om_formatters/types/result.hpp"
-#include "dogen/om_formatters/types/workflow.hpp"
+#ifndef DOGEN_OM_FORMATTERS_TYPES_FORMATTING_ERROR_FWD_HPP
+#define DOGEN_OM_FORMATTERS_TYPES_FORMATTING_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
+
+namespace dogen {
+namespace om_formatters {
+
+class formatting_error;
+
+} }
+
+#endif

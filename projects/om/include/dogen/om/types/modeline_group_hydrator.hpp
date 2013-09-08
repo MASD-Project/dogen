@@ -71,6 +71,17 @@ private:
      */
     bool is_group_name_valid(const std::string& n) const;
 
+    /**
+     * @brief Checks the contents of the modeline and throws
+     * exceptions as required.
+     */
+    void validate_modeline(const modeline& mg) const;
+
+    /**
+     * @brief Parse the stream using INI syntax.
+     */
+    modeline_group read_stream(std::istream& i) const;
+
 public:
     /**
      * @brief Hydrate all the modeline groups found in the
