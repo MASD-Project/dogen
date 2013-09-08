@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TO_OM_TYPES_TRANSFORMATION_ERROR_FWD_HPP
-#define DOGEN_SML_TO_OM_TYPES_TRANSFORMATION_ERROR_FWD_HPP
+#ifndef DOGEN_SML_TO_OM_TYPES_WORKFLOW_FAILURE_HPP
+#define DOGEN_SML_TO_OM_TYPES_WORKFLOW_FAILURE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,23 @@
 namespace dogen {
 namespace sml_to_om {
 
-class transformation_error;
+/**
+ * @brief An error occured during workflow execution.
+ */
+class workflow_failure : public virtual std::exception, public virtual boost::exception {
+public:
+    workflow_failure() = default;
+    ~workflow_failure() noexcept = default;
+
+public:
+    workflow_failure(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
 

@@ -18,6 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_om/types/context.hpp"
-#include "dogen/sml_to_om/types/cpp_transformer.hpp"
-#include "dogen/sml_to_om/types/transformation_error.hpp"
+#include "dogen/sml_to_om/types/cpp_file_builder.hpp"
+#include "dogen/sml_to_om/types/cpp_project_workflow.hpp"
+#include "dogen/sml_to_om/types/workflow_failure.hpp"

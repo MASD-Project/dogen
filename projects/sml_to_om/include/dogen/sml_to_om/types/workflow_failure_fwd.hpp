@@ -18,19 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/om/io/cpp_project_io.hpp"
-#include "dogen/sml_to_om/io/context_io.hpp"
+#ifndef DOGEN_SML_TO_OM_TYPES_WORKFLOW_FAILURE_FWD_HPP
+#define DOGEN_SML_TO_OM_TYPES_WORKFLOW_FAILURE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace sml_to_om {
 
-std::ostream& operator<<(std::ostream& s, const context& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::sml_to_om::context\"" << ", "
-      << "\"project\": " << v.project()
-      << " }";
-    return(s);
-}
+class workflow_failure;
 
 } }
+
+#endif

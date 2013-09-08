@@ -60,6 +60,7 @@
 #include "dogen/om/types/doxygen_command_types.hpp"
 #include "dogen/om/types/editors.hpp"
 #include "dogen/om/types/hydration_error.hpp"
+#include "dogen/om/types/hydration_manager.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/licence_hydrator.hpp"
 #include "dogen/om/types/modeline.hpp"

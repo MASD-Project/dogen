@@ -18,4 +18,3 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_om/io/context_io.hpp"

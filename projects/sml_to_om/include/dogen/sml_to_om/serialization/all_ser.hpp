@@ -18,5 +18,4 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_om/serialization/context_ser.hpp"
 #include "dogen/sml_to_om/serialization/registrar_ser.hpp"

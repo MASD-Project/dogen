@@ -47,15 +47,15 @@ BOOST_AUTO_TEST_SUITE(cpp_transformer)
 BOOST_AUTO_TEST_CASE(transforming_empty_model_results_in_expected_cpp_project) {
     SETUP_TEST_LOG_SOURCE("transforming_empty_model_results_in_expected_cpp_project");
 
-    const auto m(mock_model_factory::build_single_type_model());
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 1);
+    // const auto m(mock_model_factory::build_single_type_model());
+    // BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    // BOOST_REQUIRE(m.objects().size() == 1);
 
-    dogen::sml_to_om::context c;
-    const auto ft(mock_settings_factory::build_facets());
-    dogen::sml_to_om::cpp_transformer t(ft, m, c);
-    t.from_type(*m.objects().begin()->second);
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    // dogen::sml_to_om::context c;
+    // const auto ft(mock_settings_factory::build_facets());
+    // dogen::sml_to_om::cpp_transformer t(ft, m, c);
+    // t.from_type(*m.objects().begin()->second);
+    // BOOST_LOG_SEV(lg, debug) << "context: " << c;
 }
 
 BOOST_AUTO_TEST_SUITE_END()

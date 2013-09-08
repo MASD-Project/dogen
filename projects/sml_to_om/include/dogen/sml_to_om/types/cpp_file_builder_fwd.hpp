@@ -18,28 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cpp_project_hash.hpp"
-#include "dogen/sml_to_om/hash/context_hash.hpp"
+#ifndef DOGEN_SML_TO_OM_TYPES_CPP_FILE_BUILDER_FWD_HPP
+#define DOGEN_SML_TO_OM_TYPES_CPP_FILE_BUILDER_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace sml_to_om {
 
-std::size_t context_hasher::hash(const context&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.project());
-    return seed;
-}
+class cpp_file_builder;
 
 } }
+
+#endif
