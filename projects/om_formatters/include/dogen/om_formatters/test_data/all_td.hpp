@@ -18,5 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/om_formatters/test_data/comment_styles_td.hpp"
 #include "dogen/om_formatters/test_data/formatted_file_td.hpp"
 #include "dogen/om_formatters/test_data/result_td.hpp"

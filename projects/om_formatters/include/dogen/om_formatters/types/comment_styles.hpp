@@ -18,6 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om_formatters/io/comment_styles_io.hpp"
-#include "dogen/om_formatters/io/formatted_file_io.hpp"
-#include "dogen/om_formatters/io/result_io.hpp"
+#ifndef DOGEN_OM_FORMATTERS_TYPES_COMMENT_STYLES_HPP
+#define DOGEN_OM_FORMATTERS_TYPES_COMMENT_STYLES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace om_formatters {
+
+/**
+ * @brief Supported styles of comments.
+ */
+enum class comment_styles : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    c_style = 1, ///< Original C programming language style.
+    cpp_style = 2, ///< One line, C++ style.
+    shell_style = 3, ///< Comments start with a hash.
+    sql_style = 4 ///< Comments start with a double-dash.
+};
+
+} }
+
+#endif

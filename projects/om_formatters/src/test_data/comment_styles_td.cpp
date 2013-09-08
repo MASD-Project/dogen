@@ -18,6 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om_formatters/io/comment_styles_io.hpp"
-#include "dogen/om_formatters/io/formatted_file_io.hpp"
-#include "dogen/om_formatters/io/result_io.hpp"
+#include "dogen/om_formatters/test_data/comment_styles_td.hpp"
+
+namespace dogen {
+namespace om_formatters {
+
+comment_styles_generator::comment_styles_generator() : position_(0) { }
+void comment_styles_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<comment_styles>(position % 5);
+}
+
+comment_styles_generator::result_type
+comment_styles_generator::create(const unsigned int  position) {
+    result_type r;
+    comment_styles_generator::populate(position, r);
+    return r;
+}
+
+comment_styles_generator::result_type
+comment_styles_generator::operator()() {
+    return create(position_++);
+}
+
+} }

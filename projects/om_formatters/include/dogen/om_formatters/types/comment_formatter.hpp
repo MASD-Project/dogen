@@ -1,0 +1,106 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef DOGEN_OM_FORMATTERS_TYPES_COMMENT_FORMATTER_FWD_HPP
+#define DOGEN_OM_FORMATTERS_TYPES_COMMENT_FORMATTER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <list>
+#include <string>
+#include <ostream>
+#include "dogen/om_formatters/types/comment_styles.hpp"
+
+namespace dogen {
+namespace om_formatters {
+
+/**
+ * @brief Formats input according to commenting options.
+ */
+class comment_formatter {
+    comment_formatter(const comment_formatter&) = default;
+    comment_formatter& operator=(const comment_formatter&) = delete;
+    comment_formatter(comment_formatter&& rhs) = default;
+
+public:
+    /**
+     * @brief Initialises formatter with default formatting
+     * configuration.
+     */
+    comment_formatter();
+
+    /**
+     * @brief Initialises the formatter.
+     *
+     * @param start_on_first_line if false, a blank line will be
+     * added. Otherwise content will start on the first line.
+     * @param use_documentation_tool_markup if true, where applicable
+     * formatter will decorate comments with documentation tool
+     * markup.
+     * @param style type of commenting to use.
+     * @param blank_trailing_line if true, a blank line will be added
+     * at the end.
+     */
+    comment_formatter(
+        const bool start_on_first_line,
+        const bool use_documentation_tool_markup,
+        const comment_styles style,
+        const bool last_line_is_blank);
+
+private:
+    /**
+     * @brief Starts the comment block.
+     */
+    void add_comment_start_marker(std::ostream& s) const;
+
+    /**
+     * @brief Any line in the middle between start and end.
+     */
+    void add_comment_middle_marker(std::ostream& s) const;
+
+    /**
+     * @brief Ends the comment block.
+     */
+    void add_comment_end_marker(std::ostream& s) const;
+
+public:
+    /**
+     * @brief
+     */
+    std::string format(const std::string& content) const;
+
+    /**
+     * @brief
+     */
+    std::string format(const std::list<std::string>& content,
+        const bool line_between_blocks = false) const;
+
+private:
+    const bool start_on_first_line_;
+    const bool use_documentation_tool_markup_;
+    const comment_styles style_;
+    const bool last_line_is_blank_;
+};
+
+} }
+
+#endif

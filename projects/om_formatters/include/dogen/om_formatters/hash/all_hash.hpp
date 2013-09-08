@@ -18,5 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/om_formatters/hash/comment_styles_hash.hpp"
 #include "dogen/om_formatters/hash/formatted_file_hash.hpp"
 #include "dogen/om_formatters/hash/result_hash.hpp"

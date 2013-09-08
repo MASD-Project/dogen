@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/om_formatters/serialization/comment_styles_ser.hpp"
 #include "dogen/om_formatters/serialization/formatted_file_ser.hpp"
 #include "dogen/om_formatters/serialization/registrar_ser.hpp"
 #include "dogen/om_formatters/serialization/result_ser.hpp"

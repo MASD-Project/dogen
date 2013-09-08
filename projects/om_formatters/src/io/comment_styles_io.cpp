@@ -18,6 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <stdexcept>
 #include "dogen/om_formatters/io/comment_styles_io.hpp"
-#include "dogen/om_formatters/io/formatted_file_io.hpp"
-#include "dogen/om_formatters/io/result_io.hpp"
+
+namespace dogen {
+namespace om_formatters {
+
+std::ostream& operator<<(std::ostream& s, const comment_styles& v) {
+    s << "{ " << "\"__type__\": " << "\"comment_styles\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case comment_styles::invalid:
+        attr = "\"invalid\"";
+        break;
+    case comment_styles::c_style:
+        attr = "\"c_style\"";
+        break;
+    case comment_styles::cpp_style:
+        attr = "\"cpp_style\"";
+        break;
+    case comment_styles::shell_style:
+        attr = "\"shell_style\"";
+        break;
+    case comment_styles::sql_style:
+        attr = "\"sql_style\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for comment_styles");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} }

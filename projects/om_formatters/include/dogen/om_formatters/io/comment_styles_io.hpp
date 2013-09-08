@@ -18,6 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om_formatters/io/comment_styles_io.hpp"
-#include "dogen/om_formatters/io/formatted_file_io.hpp"
-#include "dogen/om_formatters/io/result_io.hpp"
+#ifndef DOGEN_OM_FORMATTERS_IO_COMMENT_STYLES_IO_HPP
+#define DOGEN_OM_FORMATTERS_IO_COMMENT_STYLES_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/om_formatters/types/comment_styles.hpp"
+
+namespace dogen {
+namespace om_formatters {
+
+std::ostream& operator<<(std::ostream& s, const comment_styles& v);
+
+} }
+
+#endif
