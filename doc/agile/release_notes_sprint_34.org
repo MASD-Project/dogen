@@ -1,0 +1,68 @@
+g#+title: Release Notes for Sprint 34
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 34.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-09-09 Mon 08:14]
+
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:04* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:04 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:04 |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-09-09 Mon 08:10]--[2013-09-09 Mon 08:14] =>  0:04
+
+*** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+*** Create an SML level concept for facets                            :story:
+
+In reality, "facets" are not a C++ thing; they are language
+neutral. They are, however, expressed differently in different
+languages. For example:
+
+- types: same on all languages
+- debug_printing: overloaded operator<< in C++, toString() in Java,
+  ToString() in C#, etc.
+- serialisation: slightly less obvious, but effectively the most
+  "native" serialisation available for the given programming
+  language. For C++ this is boost serialisation.
+- hashing: language specific support for hashing, in C++ either std
+  hash or boost hash, in Java/C# overloading of hash functions.
+- test_data: some facilities for test data generation
+- relational: bindings for relational databases. ODB in C++.
+
+We can introduce these concepts at the SML level, probably at the
+=model= and =abstract_object= level; we can then do further
+translation at the language level, as required.
+
+*** Loading external models from file                                 :story:
+
+We should really use something like boost property tree to allow
+system models to be loaded from file. We can then convert primitives,
+boost, STL, etc to this. These "models" would then output both a SML
+model as well as some kind of CPP representation with include files,
+etc.
+
+We should call these "profiles" in the sense of ODB (the Qt profile,
+the boost profile, etc). A file should contain all types for that
+profile, from which we generate both the SML model and the inclusions
+for includer.
+
+Since INI files do not support nesting/collections, we probably need
+to use XML or JSON.
+
+See [[http://www.boost.org/doc/libs/1_53_0/doc/html/boost_propertytree/parsers.html#boost_propertytree.parsers.ini_parser][boost property tree]].
+
+Example file available at data/profiles/sample.ini
+
+** Deprecated Development Stories

@@ -26,7 +26,8 @@ Clock summary at [2013-09-08 Sun 21:59]
 | COMPLETED Create a comments formatter                               |         |       | 2:08 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-09-09 Mon 08:13]
     CLOCK: [2013-08-27 Tue 21:40]--[2013-08-27 Tue 21:41] =>  0:01
     CLOCK: [2013-08-23 Fri 07:59]--[2013-08-23 Fri 08:00] =>  0:01
     CLOCK: [2013-08-23 Fri 07:47]--[2013-08-23 Fri 07:59] =>  0:08
@@ -138,10 +139,12 @@ tests:
     CLOCK: [2013-09-08 Sun 17:44]--[2013-09-08 Sun 17:57] =>  0:13
     CLOCK: [2013-09-08 Sun 16:48]--[2013-09-08 Sun 17:44] =>  0:56
 
-*** IMPLEMENTATION Create a basic C++ workflow in SML to OM model
+*** CANCELLED Create a basic C++ workflow in SML to OM model
+    CLOSED: [2013-09-09 Mon 08:13]
     CLOCK: [2013-09-08 Sun 21:59]--[2013-09-08 Sun 22:36] =>  0:37
 
-*** Create an SML level concept for facets                            :story:
+*** CANCELLED Create an SML level concept for facets                  :story:
+    CLOSED: [2013-09-09 Mon 08:13]
 
 In reality, "facets" are not a C++ thing; they are language
 neutral. They are, however, expressed differently in different
@@ -162,7 +165,8 @@ We can introduce these concepts at the SML level, probably at the
 =model= and =abstract_object= level; we can then do further
 translation at the language level, as required.
 
-*** Loading external models from file                                 :story:
+*** CANCELLED Loading external models from file                       :story:
+    CLOSED: [2013-09-09 Mon 08:13]
 
 We should really use something like boost property tree to allow
 system models to be loaded from file. We can then convert primitives,
