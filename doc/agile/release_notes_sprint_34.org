@@ -10,20 +10,26 @@ This file contains all stories that were closed during sprint 34.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-09 Mon 08:14]
+Clock summary at [2013-09-09 Mon 21:58]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:04* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:04 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:04 |
+| Headline                                                               | Time   |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                           | *0:41* |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                        |        | 0:41 |      |
+| IMPLEMENTATION Release notes and backlog grooming                      |        |      | 0:04 |
+| IMPLEMENTATION Implement hydration manager in terms of other hydrators |        |      | 0:37 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-09-09 Mon 08:10]--[2013-09-09 Mon 08:14] =>  0:04
 
-*** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+*** IMPLEMENTATION Implement hydration manager in terms of other hydrators :story:
+    CLOCK: [2013-09-09 Mon 18:40]--[2013-09-09 Mon 18:43] =>  0:03
+    CLOCK: [2013-09-09 Mon 18:15]--[2013-09-09 Mon 18:40] =>  0:25
+    CLOCK: [2013-09-09 Mon 17:59]--[2013-09-09 Mon 18:08] =>  0:41
+
+*** Create a basic C++ workflow in SML to OM model                    :story:
 *** Create an SML level concept for facets                            :story:
 
 In reality, "facets" are not a C++ thing; they are language

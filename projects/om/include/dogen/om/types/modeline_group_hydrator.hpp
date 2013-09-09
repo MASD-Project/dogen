@@ -40,7 +40,7 @@ public:
     modeline_group_hydrator() = default;
     modeline_group_hydrator(const modeline_group_hydrator&) = default;
     modeline_group_hydrator& operator=(const modeline_group_hydrator&) = delete;
-    modeline_group_hydrator(modeline_group_hydrator&& rhs) = default;
+    modeline_group_hydrator(modeline_group_hydrator&&) = default;
 
 private:
     /**

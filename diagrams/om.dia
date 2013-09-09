@@ -489,7 +489,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="18,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="16.670000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1132,7 +1132,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="-38,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.134999999999998"/>
+        <dia:real val="20.135000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -2220,7 +2220,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="50,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.6549999999999994"/>
+        <dia:real val="7.6550000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2756,7 +2756,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="155,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.272499999999999"/>
+        <dia:real val="13.272500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -6406,7 +6406,7 @@ for Java, etc.#</dia:string>
         <dia:point val="224,23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8400000000000007"/>
+        <dia:real val="7.8399999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -8545,7 +8545,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-96,-51"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.160000000000004"/>
+        <dia:real val="30.16"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="21.700000000000003"/>
@@ -8793,7 +8793,7 @@ future with other languages such as Java, C# etc.
         <dia:point val="147,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.1139843749999994"/>
+        <dia:real val="7.1139843750000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -8903,7 +8903,7 @@ future with other languages such as Java, C# etc.
         <dia:point val="79,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.5850000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -9713,7 +9713,7 @@ future with other languages such as Java, C# etc.
         <dia:point val="146,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.518515625000001"/>
+        <dia:real val="13.518515624999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -11980,7 +11980,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-38.74,-22.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.49,-22.95;-32.21,-5.4"/>
+        <dia:rectangle val="-39.49,-22.95;-32.21,-6.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12161,7 +12161,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-21.1,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.85,-48.75;1.2,-41.4"/>
+        <dia:rectangle val="-21.85,-48.75;1.2,-42.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12232,7 +12232,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="8.555,-40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.805,-40.75;19.2,-23.4"/>
+        <dia:rectangle val="7.805,-40.75;19.2,-24.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12663,7 +12663,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-39.205,-2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.955,-3.35;-37.2237,11.6"/>
+        <dia:rectangle val="-39.955,-3.35;-37.2237,10.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12734,7 +12734,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-46,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-62.9125,-13.05;-45.25,-5.4"/>
+        <dia:rectangle val="-62.9125,-13.75;-45.25,-6.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12769,19 +12769,19 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-6,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,-65.05;32.28,-58.95"/>
+        <dia:rectangle val="-6.05,-66.55;27.685,-60.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-6,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="38.230000000000004"/>
+        <dia:real val="32.07"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#hydration_manager#</dia:string>
+        <dia:string>#hydration_workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -12871,61 +12871,13 @@ For example, one may choose to have a set of modelines for @e emacs , or for
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#hydrate_modeline_groups#</dia:string>
+            <dia:string>#hydrate#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,modeline_group&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="2"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters">
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#dirs#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#std::list&lt;boost::filesystem::path&gt;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#hydrate_licences#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,licence&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,Hydratee&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12967,9 +12919,26 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         </dia:composite>
       </dia:attribute>
       <dia:attribute name="template">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
-      <dia:attribute name="templates"/>
+      <dia:attribute name="templates">
+        <dia:composite type="umlformalparameter">
+          <dia:attribute name="name">
+            <dia:string>#Hydrator#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlformalparameter">
+          <dia:attribute name="name">
+            <dia:string>#Hydratee#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O112">
       <dia:attribute name="name">
@@ -13009,16 +12978,16 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-6,-59"/>
+        <dia:point val="-6,-60.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.05,-59.75;-5.25,-41.4"/>
+        <dia:rectangle val="-37.05,-61.35;-5.25,-42.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6,-59"/>
+        <dia:point val="-6,-60.6"/>
         <dia:point val="-6,-53"/>
         <dia:point val="-37,-53"/>
         <dia:point val="-37,-43"/>
@@ -13080,17 +13049,17 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="32.23,-59"/>
+        <dia:point val="26.07,-60.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.48,-59.75;51.27,-23.4"/>
+        <dia:rectangle val="25.32,-61.35;51.27,-24.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="32.23,-59"/>
-        <dia:point val="32.23,-53"/>
+        <dia:point val="26.07,-60.6"/>
+        <dia:point val="26.07,-53"/>
         <dia:point val="51.07,-53"/>
         <dia:point val="51.07,-25"/>
       </dia:attribute>
@@ -13151,17 +13120,17 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="13.115,-59"/>
+        <dia:point val="10.035,-60.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.505,-59.75;13.865,-41.4"/>
+        <dia:rectangle val="8.505,-61.35;10.785,-42.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="13.115,-59"/>
-        <dia:point val="13.115,-53"/>
+        <dia:point val="10.035,-60.6"/>
+        <dia:point val="10.035,-53"/>
         <dia:point val="8.555,-53"/>
         <dia:point val="8.555,-43"/>
       </dia:attribute>

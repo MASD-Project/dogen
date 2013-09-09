@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_HYDRATION_MANAGER_FWD_HPP
-#define DOGEN_OM_TYPES_HYDRATION_MANAGER_FWD_HPP
+#ifndef DOGEN_OM_TYPES_HYDRATION_WORKFLOW_FWD_HPP
+#define DOGEN_OM_TYPES_HYDRATION_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace om {
 
-class hydration_manager;
+class hydration_workflow;
 
 } }
 
