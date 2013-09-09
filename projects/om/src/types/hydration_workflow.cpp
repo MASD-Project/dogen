@@ -19,34 +19,17 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/om/types/licence_hydrator.hpp"
-#include "dogen/om/types/modeline_group_hydrator.hpp"
 #include "dogen/om/types/hydration_workflow.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("om.hydration_manager"));
+auto lg(logger_factory("om.hydration_workflow"));
 
 }
 
 namespace dogen {
 namespace om {
-
-std::unordered_map<std::string, modeline_group> hydration_workflow::
-hydrate_modeline_groups(const std::list<boost::filesystem::path> ) {
-    std::unordered_map<std::string, modeline_group> r;
-
-    return r;
-}
-
-std::unordered_map<std::string, licence> hydration_workflow::
-hydrate_licences(const std::list<boost::filesystem::path> ) {
-    std::unordered_map<std::string, licence> r;
-
-    return r;
-}
 
 } }

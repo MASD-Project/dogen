@@ -489,7 +489,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="18,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.670000000000002"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1132,7 +1132,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="-38,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.135000000000002"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -2220,7 +2220,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="50,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.6550000000000002"/>
+        <dia:real val="7.6549999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2756,7 +2756,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="155,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.272500000000001"/>
+        <dia:real val="13.272499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -6406,7 +6406,7 @@ for Java, etc.#</dia:string>
         <dia:point val="224,23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8399999999999999"/>
+        <dia:real val="7.8400000000000007"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -8545,7 +8545,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-96,-51"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.16"/>
+        <dia:real val="30.160000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="21.700000000000003"/>
@@ -8793,7 +8793,7 @@ future with other languages such as Java, C# etc.
         <dia:point val="147,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.1139843750000002"/>
+        <dia:real val="7.1139843749999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -8903,7 +8903,7 @@ future with other languages such as Java, C# etc.
         <dia:point val="79,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5850000000000009"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -9713,7 +9713,7 @@ future with other languages such as Java, C# etc.
         <dia:point val="146,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.518515624999999"/>
+        <dia:real val="13.518515625000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -12769,7 +12769,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-6,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,-66.55;27.685,-60.55"/>
+        <dia:rectangle val="-6.05,-65.75;27.685,-60.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-6,-65"/>
@@ -12925,14 +12925,6 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:composite type="umlformalparameter">
           <dia:attribute name="name">
             <dia:string>#Hydrator#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlformalparameter">
-          <dia:attribute name="name">
-            <dia:string>#Hydratee#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -13151,6 +13143,91 @@ For example, one may choose to have a set of modelines for @e emacs , or for
       <dia:connections>
         <dia:connection handle="0" to="O111" connection="6"/>
         <dia:connection handle="1" to="O104" connection="2"/>
+      </dia:connections>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O115">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-5.5,-72.25"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-5.55,-72.3;8.54,-70.5"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-5.5,-72.25"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="13.99"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="1.7000000000000002"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#ffffff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#Modeled as a stand alone function.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="-5.15,-71.005"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O116">
+      <dia:attribute name="obj_pos">
+        <dia:point val="1.495,-70.55"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="1.42583,-70.6192;10.2949,-64.6374"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="1.495,-70.55"/>
+        <dia:point val="10.035,-65"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="5.7651,-67.2751"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O115" connection="6"/>
+        <dia:connection handle="1" to="O111" connection="1"/>
       </dia:connections>
     </dia:object>
   </dia:layer>

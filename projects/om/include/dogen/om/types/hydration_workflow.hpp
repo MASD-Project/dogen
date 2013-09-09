@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_HYDRATION_MANAGER_FWD_HPP
-#define DOGEN_OM_TYPES_HYDRATION_MANAGER_FWD_HPP
+#ifndef DOGEN_OM_TYPES_HYDRATION_WORKFLOW_HPP
+#define DOGEN_OM_TYPES_HYDRATION_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,34 +29,29 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline_group.hpp"
+#include <boost/filesystem/fstream.hpp>
+#include "dogen/utility/filesystem/file.hpp"
 
 namespace dogen {
 namespace om {
 
-// template<typename Hydrator, typename Hydratee>
-class hydration_workflow {
-public:
-    hydration_workflow() = delete;
-    hydration_workflow(const hydration_workflow&) = delete;
-    hydration_workflow& operator=(const hydration_workflow&) = delete;
-    hydration_workflow(hydration_workflow&&) = default;
+/**
+ * @brief Hydrates all files found in the input directories.
+ */
+template<typename Hydrator>
+std::unordered_map<std::string, typename Hydrator::value_type>
+hydration_workflow(const std::list<boost::filesystem::path>& dirs) {
+    std::unordered_map<std::string, typename Hydrator::value_type> r;
 
-public:
-    /**
-     * @brief Hydrates all modeline groups found in the input
-     * directories.
-     */
-    static std::unordered_map<std::string, modeline_group>
-    hydrate_modeline_groups(const std::list<boost::filesystem::path> dirs);
+    const auto files(dogen::utility::filesystem::find_files(dirs));
+    Hydrator h;
+    for (const auto& f : files) {
+        boost::filesystem::ifstream s(f);
+        r.insert(std::make_pair(f.filename().string(), h.hydrate(s)));
+    }
 
-    /**
-     * @brief Hydrates all licences found in the input directories.
-     */
-    static std::unordered_map<std::string, licence>
-    hydrate_licences(const std::list<boost::filesystem::path> dirs);
-};
+    return r;
+}
 
 } }
 

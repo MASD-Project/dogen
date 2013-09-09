@@ -37,6 +37,9 @@ namespace om {
 
 class modeline_group_hydrator {
 public:
+    typedef modeline_group value_type;
+
+public:
     modeline_group_hydrator() = default;
     modeline_group_hydrator(const modeline_group_hydrator&) = default;
     modeline_group_hydrator& operator=(const modeline_group_hydrator&) = delete;
@@ -80,14 +83,14 @@ private:
     /**
      * @brief Parse the stream using INI syntax.
      */
-    modeline_group read_stream(std::istream& i) const;
+    value_type read_stream(std::istream& i) const;
 
 public:
     /**
      * @brief Hydrate all the modeline groups found in the
      * directories.
      */
-    modeline_group hydrate(std::istream& i) const;
+    value_type hydrate(std::istream& i) const;
 };
 
 } }

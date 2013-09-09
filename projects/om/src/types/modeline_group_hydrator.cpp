@@ -122,8 +122,9 @@ void modeline_group_hydrator::validate_modeline(const modeline& m) const {
     }
 }
 
-modeline_group modeline_group_hydrator::read_stream(std::istream& i) const {
-    modeline_group r;
+modeline_group_hydrator::value_type
+modeline_group_hydrator::read_stream(std::istream& i) const {
+    modeline_group_hydrator::value_type r;
 
     using namespace boost::property_tree;
     ptree pt;
@@ -163,7 +164,8 @@ modeline_group modeline_group_hydrator::read_stream(std::istream& i) const {
     return r;
 }
 
-modeline_group modeline_group_hydrator::hydrate(std::istream& i) const {
+modeline_group_hydrator::value_type
+modeline_group_hydrator::hydrate(std::istream& i) const {
     using namespace boost::property_tree;
     try {
         return read_stream(i);

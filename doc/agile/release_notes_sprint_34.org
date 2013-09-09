@@ -10,24 +10,30 @@ This file contains all stories that were closed during sprint 34.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-09 Mon 21:58]
+Clock summary at [2013-09-09 Mon 23:00]
 
-| Headline                                                               | Time   |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *0:41* |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 0:41 |      |
-| IMPLEMENTATION Release notes and backlog grooming                      |        |      | 0:04 |
-| IMPLEMENTATION Implement hydration manager in terms of other hydrators |        |      | 0:37 |
+| Headline                                                          | Time   |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                      | *1:31* |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                   |        | 1:31 |      |
+| IMPLEMENTATION Release notes and backlog grooming                 |        |      | 0:04 |
+| COMPLETED Implement hydration manager in terms of other hydrators |        |      | 1:27 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-09-09 Mon 08:10]--[2013-09-09 Mon 08:14] =>  0:04
 
-*** IMPLEMENTATION Implement hydration manager in terms of other hydrators :story:
+*** COMPLETED Implement hydration manager in terms of other hydrators :story:
+    CLOSED: [2013-09-09 Mon 22:59]
+    CLOCK: [2013-09-09 Mon 22:10]--[2013-09-09 Mon 23:00] =>  0:50
     CLOCK: [2013-09-09 Mon 18:40]--[2013-09-09 Mon 18:43] =>  0:03
     CLOCK: [2013-09-09 Mon 18:15]--[2013-09-09 Mon 18:40] =>  0:25
     CLOCK: [2013-09-09 Mon 17:59]--[2013-09-09 Mon 18:08] =>  0:41
+
+- renamed it to workflow since it brings together other objects in a
+  sequence of steps
+- made it a stand alone template function as its pretty trivial.
 
 *** Create a basic C++ workflow in SML to OM model                    :story:
 *** Create an SML level concept for facets                            :story:
