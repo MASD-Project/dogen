@@ -1,0 +1,310 @@
+{
+    "model_name" : "std",
+    "documentation" : "C++ Standard Library types.",
+    "origin" : "system",
+    "types" : [
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "int8_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.type.requires_manual_default_constructor" : true,
+                    "cpp.domain.header" : "cstdint"
+
+                }
+            ]
+        },
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "int16_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.type.requires_manual_default_constructor" : true,
+                    "cpp.domain.header" : "cstdint"
+
+                }
+            ]
+        },
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "int32_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.domain.header" : "cstdint",
+                    "cpp.type.requires_manual_default_constructor" : true
+                }
+            ]
+        },
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "int64_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.domain.header" : "cstdint",
+                    "cpp.type.requires_manual_default_constructor" : true
+                }
+            ]
+        },
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "uint8_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.domain.header" : "cstdint",
+                    "cpp.type.requires_manual_default_constructor" : true
+                }
+            ]
+        },
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "uint16_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.domain.header" : "cstdint",
+                    "cpp.type.requires_manual_default_constructor" : true
+                }
+            ]
+        },
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "uint32_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.domain.header" : "cstdint",
+                    "cpp.type.requires_manual_default_constructor" : true
+                }
+            ]
+        },
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "uint64_t",
+            "default_value" : "0",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "integer",
+                    "cpp.domain.header" : "cstdint",
+                    "cpp.type.requires_manual_default_constructor" : true
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "string",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "string",
+                    "cpp.domain.header" : "string",
+                    "cpp.boost.serialization.headers" : "boost/serialization/string.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "vector",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "sequence_container",
+                    "cpp.domain.header" : "vector",
+                    "cpp.boost.serialization.headers" : "boost/serialization/vector.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "deque",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "sequence_container",
+                    "cpp.domain.header" : "deque",
+                    "cpp.serialization.boost.header" : "boost/serialization/deque.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "array",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "sequence_container",
+                    "cpp.domain.header" : "array"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "list",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "sequence_container",
+                    "cpp.domain.header" : "list",
+                    "cpp.serialization.boost.header" : "boost/serialization/list.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "forward_list",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "sequence_container",
+                    "cpp.domain.header" : "forward_list"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "set",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "associative_container",
+                    "cpp.domain.header" : "set",
+                    "cpp.serialization.boost.header" : "boost/serialization/set.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "multiset",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "associative_container",
+                    "cpp.domain.header" : "multiset",
+                    "cpp.serialization.boost.header" : "boost/serialization/multiset.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "unordered_set",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "associative_container",
+                    "cpp.domain.header" : "unordered_set"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "map",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "associative_container",
+                    "cpp.domain.header" : "map",
+                    "cpp.serialization.boost.header" : "boost/serialization/map.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "multimap",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "associative_container",
+                    "cpp.domain.header" : "multimap",
+                    "cpp.serialization.boost.header" : "boost/serialization/multimap.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "multimap",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "associative_container",
+                    "cpp.domain.header" : "multimap",
+                    "cpp.serialization.boost.header" : "boost/serialization/multimap.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "unordered_map",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "associative_container",
+                    "cpp.domain.header" : "unordered_map"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "pair",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "pair",
+                    "cpp.serialization.boost.header" : "boost/serialization/pair.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "shared_ptr",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.domain.header" : "memory",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "weak_ptr",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.domain.header" : "memory",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "unique_ptr",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.domain.header" : "memory",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "function",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "functional",
+                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.test_data.status" : "unsupported",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        },
+               {
+            "meta_type" : "value_object",
+            "simple_name" : "optional",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.domain.header" : "functional",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        }
+    ]
+}

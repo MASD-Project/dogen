@@ -1,0 +1,163 @@
+{
+    "model_name" : "boost",
+    "documentation" : "Boost Library types.",
+    "origin" : "system",
+    "types" : [
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "shared_ptr",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.domain.header" : "boost/shared_ptr.hpp",
+                    "cpp.serialization.boost.header" : "boost/serialization/shared_ptr.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "weak_ptr",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.domain.header" : "boost/weak_ptr.hpp",
+                    "cpp.serialization.boost.header" : "boost/serialization/weak_ptr.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "scoped_ptr",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.domain.header" : "boost/scoped_ptr.hpp",
+                    "cpp.serialization.boost.header" : "boost/serialization/scoped_ptr.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "optional",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.family" : "smart_pointer",
+                    "cpp.type.requires_manual_move_constructor" : true,
+                    "cpp.domain.header" : "boost/optional.hpp",
+                    "cpp.serialization.boost.header" : "boost/serialization/optional.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "variant",
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.requires_manual_move_constructor" : true,
+                    "cpp.domain.header" : "boost/variant.hpp",
+                    "cpp.serialization.boost.header" : "boost/serialization/variant.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "io_service",
+            "module_path" : [
+                "asio",
+            ],
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "boost/asio/io_service.hpp",
+                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.test_data.status" : "unsupported",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "socket",
+            "module_path" : [
+                "asio", "ip", "tcp"
+            ],
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "boost/asio/ip/tcp.hpp",
+                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.test_data.status" : "unsupported",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "acceptor",
+            "module_path" : [
+                "asio", "ip", "tcp"
+            ],
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "boost/asio/ip/tcp.hpp",
+                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.test_data.status" : "unsupported",
+                    "cpp.serialization.boost.status" : "unsupported"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "path",
+            "module_path" : [
+                "filesystem"
+            ],
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.type.requires_manual_move_constructor" : true,
+                    "cpp.domain.header" : "boost/filesystem/path.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "date",
+            "module_path" : [
+                "gregorian"
+            ],
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "boost/date_time/gregorian/gregorian_types.hpp",
+                    "cpp.io.header" : "boost/date_time/gregorian/gregorian.hpp",
+                    "cpp.serialization.boost.header" : "boost/date_time/gregorian/greg_serialize.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "ptime",
+            "module_path" : [
+                "posix_time"
+            ],
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "boost/date_time/posix_time/posix_time_types.hpp",
+                    "cpp.serialization.boost.header" : "boost/date_time/posix_time/time_serialize.hpp",
+                    "cpp.io.header" : "boost/date_time/posix_time/posix_time.hpp"
+                }
+            ]
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "time_duration",
+            "module_path" : [
+                "posix_time"
+            ],
+            "implementation_specific_parameters" : [
+                {
+                    "cpp.domain.header" : "boost/date_time/posix_time/posix_time_types.hpp",
+                    "cpp.serialization.boost.header" : "boost/date_time/posix_time/time_serialize.hpp",
+                    "cpp.io.header" : "boost/date_time/posix_time/posix_time.hpp"
+                }
+            ]
+        }
+    ]
+}

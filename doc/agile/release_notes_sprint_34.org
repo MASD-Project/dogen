@@ -35,7 +35,25 @@ Clock summary at [2013-09-09 Mon 23:00]
   sequence of steps
 - made it a stand alone template function as its pretty trivial.
 
-*** Create a basic C++ workflow in SML to OM model                    :story:
+*** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+    CLOCK: [2013-09-10 Tue 07:49]--[2013-09-10 Tue 08:11] =>  0:22
+
+There is one fatal flaw in the current OM implementation: the
+formatters contain both the class structure and their
+implementation. By splitting the creation of the classes from the
+formatting, we've added an additional mapping step which is quite
+complex: e.g. how does one locate the formatter for the complete
+constructor. This would result in layers of binding with senseless
+names. Thus formatting cannot be split from the creation of C++ model
+types.
+
+This means the previous C++ model was wrong not because of the C++
+formatting model but because of the C++ model itself. We should not
+have tried to create an intermediate representation of C++, but
+instead created formatters that work at the SML level and they
+themselves perform the translation - collaborating with helper
+classes.
+
 *** Create an SML level concept for facets                            :story:
 
 In reality, "facets" are not a C++ thing; they are language
@@ -57,7 +75,17 @@ We can introduce these concepts at the SML level, probably at the
 =model= and =abstract_object= level; we can then do further
 translation at the language level, as required.
 
-*** Loading external models from file                                 :story:
+*** IMPLEMENTATION Loading external models from file                  :story:
+
+New understanding:
+
+Create JSON files that can be hydrated into SML, containing the main
+system models (primitives, boost and std). Add implementation specific
+parameters to provide all of the information that has been hard-coded
+into the transformer such as move constructor support, etc. Create an
+hydrator to read these files into SML.
+
+Original understanding:
 
 We should really use something like boost property tree to allow
 system models to be loaded from file. We can then convert primitives,
@@ -75,6 +103,27 @@ to use XML or JSON.
 
 See [[http://www.boost.org/doc/libs/1_53_0/doc/html/boost_propertytree/parsers.html#boost_propertytree.parsers.ini_parser][boost property tree]].
 
-Example file available at data/profiles/sample.ini
+Example file available at =data/profiles/sample.ini=.
+
+**** COMPLETED Rename profiles to library
+     CLOSED: [2013-09-13 Fri 18:31]
+
+This will be a system type library, with all the supported system models.
+
+**** COMPLETED Add JSON representations of all of the system models
+     CLOSED: [2013-09-13 Fri 18:32]
+     CLOCK: [2013-09-13 Fri 18:10]--[2013-09-13 Fri 18:29] =>  0:19
+     CLOCK: [2013-09-13 Thu 07:46]--[2013-09-13 Thu 08:30] =>  0:44
+     CLOCK: [2013-09-12 Thu 18:10]--[2013-09-12 Thu 18:43] =>  0:33
+     CLOCK: [2013-09-12 Thu 07:46]--[2013-09-12 Thu 08:18] =>  0:32
+     CLOCK: [2013-09-11 Wed 18:10]--[2013-09-11 Wed 18:43] =>  0:33
+     CLOCK: [2013-09-11 Wed 07:46]--[2013-09-11 Wed 08:18] =>  0:32
+
+*** Propagatable parameters                                           :story:
+
+Some implementation specific parameters should be propagated along the
+composition graph (e.g. boost serialisation status disabled). We could
+spot these parameters whilst building the model and do the propagation
+there and then.
 
 ** Deprecated Development Stories
