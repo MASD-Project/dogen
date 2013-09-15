@@ -119,6 +119,10 @@ This will be a system type library, with all the supported system models.
      CLOCK: [2013-09-11 Wed 18:10]--[2013-09-11 Wed 18:43] =>  0:33
      CLOCK: [2013-09-11 Wed 07:46]--[2013-09-11 Wed 08:18] =>  0:32
 
+**** IMPLEMENTATION Create an hydrator from JSON into SML
+     CLOCK: [2013-09-13 Fri 18:36]--[2013-09-13 Fri 18:40] =>  0:04
+     CLOCK: [2013-09-13 Fri 18:29]--[2013-09-13 Fri 18:35] =>  0:06
+
 *** Propagatable parameters                                           :story:
 
 Some implementation specific parameters should be propagated along the
