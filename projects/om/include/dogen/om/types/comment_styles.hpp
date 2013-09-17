@@ -18,17 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#ifndef DOGEN_OM_TYPES_COMMENT_STYLES_HPP
+#define DOGEN_OM_TYPES_COMMENT_STYLES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace om {
+
+/**
+ * @brief Supported styles of comments.
+ */
+enum class comment_styles : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    c_style = 1, ///< Original C programming language style.
+    cpp_style = 2, ///< One line, C++ style.
+    shell_style = 3, ///< Comments start with a hash.
+    sql_style = 4 ///< Comments start with a double-dash.
+};
+
+} }
+
+#endif

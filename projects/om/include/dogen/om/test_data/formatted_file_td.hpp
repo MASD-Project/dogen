@@ -18,17 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#ifndef DOGEN_OM_TEST_DATA_FORMATTED_FILE_TD_HPP
+#define DOGEN_OM_TEST_DATA_FORMATTED_FILE_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/om/types/formatted_file.hpp"
+
+namespace dogen {
+namespace om {
+
+class formatted_file_generator {
+public:
+    formatted_file_generator();
+
+public:
+    typedef dogen::om::formatted_file result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
+
+#endif

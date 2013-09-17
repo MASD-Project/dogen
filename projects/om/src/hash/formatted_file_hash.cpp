@@ -18,17 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
 #include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace om {
+
+std::size_t formatted_file_hasher::hash(const formatted_file&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.full_path().generic_string());
+    combine(seed, v.contents());
+
+    return seed;
+}
+
+} }

@@ -18,17 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#ifndef DOGEN_OM_SERIALIZATION_FORMATTED_FILE_SER_HPP
+#define DOGEN_OM_SERIALIZATION_FORMATTED_FILE_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/om/types/formatted_file.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::om::formatted_file)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::om::formatted_file& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::om::formatted_file& v, unsigned int version);
+
+} }
+
+#endif

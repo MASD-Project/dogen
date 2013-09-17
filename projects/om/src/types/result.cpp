@@ -18,17 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#include "dogen/om/types/result.hpp"
+
+namespace dogen {
+namespace om {
+
+result::result(const std::list<dogen::om::formatted_file>& files)
+    : files_(files) { }
+
+void result::swap(result& other) noexcept {
+    using std::swap;
+    swap(files_, other.files_);
+}
+
+bool result::operator==(const result& rhs) const {
+    return files_ == rhs.files_;
+}
+
+result& result::operator=(result other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const std::list<dogen::om::formatted_file>& result::files() const {
+    return files_;
+}
+
+std::list<dogen::om::formatted_file>& result::files() {
+    return files_;
+}
+
+void result::files(const std::list<dogen::om::formatted_file>& v) {
+    files_ = v;
+}
+
+void result::files(const std::list<dogen::om::formatted_file>&& v) {
+    files_ = std::move(v);
+}
+
+} }

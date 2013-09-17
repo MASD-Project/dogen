@@ -18,17 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#ifndef DOGEN_OM_SERIALIZATION_COMMENT_STYLES_SER_HPP
+#define DOGEN_OM_SERIALIZATION_COMMENT_STYLES_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "dogen/om/types/comment_styles.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::om::comment_styles& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("comment_styles", v);
+}
+
+#endif

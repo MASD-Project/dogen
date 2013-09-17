@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#ifndef DOGEN_OM_HASH_RESULT_HASH_HPP
+#define DOGEN_OM_HASH_RESULT_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/om/types/result.hpp"
+
+namespace dogen {
+namespace om {
+
+struct result_hasher {
+public:
+    static std::size_t hash(const result& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::om::result> {
+public:
+    size_t operator()(const dogen::om::result& v) const {
+        return dogen::om::result_hasher::hash(v);
+    }
+};
+
+}
+#endif

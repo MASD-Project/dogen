@@ -18,17 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#include <ostream>
+#include <stdexcept>
+#include "dogen/om/io/comment_styles_io.hpp"
+
+namespace dogen {
+namespace om {
+
+std::ostream& operator<<(std::ostream& s, const comment_styles& v) {
+    s << "{ " << "\"__type__\": " << "\"comment_styles\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case comment_styles::invalid:
+        attr = "\"invalid\"";
+        break;
+    case comment_styles::c_style:
+        attr = "\"c_style\"";
+        break;
+    case comment_styles::cpp_style:
+        attr = "\"cpp_style\"";
+        break;
+    case comment_styles::shell_style:
+        attr = "\"shell_style\"";
+        break;
+    case comment_styles::sql_style:
+        attr = "\"sql_style\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for comment_styles");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} }

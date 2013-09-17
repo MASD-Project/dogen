@@ -18,17 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#include "dogen/om/test_data/comment_styles_td.hpp"
+
+namespace dogen {
+namespace om {
+
+comment_styles_generator::comment_styles_generator() : position_(0) { }
+void comment_styles_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<comment_styles>(position % 5);
+}
+
+comment_styles_generator::result_type
+comment_styles_generator::create(const unsigned int  position) {
+    result_type r;
+    comment_styles_generator::populate(position, r);
+    return r;
+}
+
+comment_styles_generator::result_type
+comment_styles_generator::operator()() {
+    return create(position_++);
+}
+
+} }

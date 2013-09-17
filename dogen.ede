@@ -48,8 +48,6 @@
    "/projects/cpp_formatters/include"
    "/projects/sml_to_cpp/include"
    "/projects/om/include"
-   "/projects/om_formatters/include"
-   "/projects/sml_to_om/include"
    "/projects/cppim/include"
    "/projects/dia_to_sml/include"
    )

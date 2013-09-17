@@ -18,17 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
-#include "dogen/om/hash/code_generation_marker_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/formatted_file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/result_hash.hpp"
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/om/io/formatted_file_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace dogen {
+namespace om {
+
+std::ostream& operator<<(std::ostream& s, const formatted_file& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::om::formatted_file\"" << ", "
+      << "\"full_path\": " << "\"" << v.full_path().generic_string() << "\"" << ", "
+      << "\"contents\": " << "\"" << tidy_up_string(v.contents()) << "\""
+      << " }";
+    return(s);
+}
+
+} }

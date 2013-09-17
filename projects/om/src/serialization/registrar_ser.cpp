@@ -27,27 +27,8 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include "dogen/om/serialization/cmake_add_library_ser.hpp"
-#include "dogen/om/serialization/cmake_file_ser.hpp"
 #include "dogen/om/serialization/cmake_install_ser.hpp"
 #include "dogen/om/serialization/cmake_set_target_properties_ser.hpp"
-#include "dogen/om/serialization/cpp_argument_ser.hpp"
-#include "dogen/om/serialization/cpp_class_ser.hpp"
-#include "dogen/om/serialization/cpp_enumeration_ser.hpp"
-#include "dogen/om/serialization/cpp_file_ser.hpp"
-#include "dogen/om/serialization/cpp_function_ser.hpp"
-#include "dogen/om/serialization/cpp_header_guard_ser.hpp"
-#include "dogen/om/serialization/cpp_ifdef_ser.hpp"
-#include "dogen/om/serialization/cpp_include_directive_ser.hpp"
-#include "dogen/om/serialization/cpp_member_function_ser.hpp"
-#include "dogen/om/serialization/cpp_member_variable_ser.hpp"
-#include "dogen/om/serialization/cpp_namespace_ser.hpp"
-#include "dogen/om/serialization/cpp_pragma_ser.hpp"
-#include "dogen/om/serialization/cpp_typedef_ser.hpp"
-#include "dogen/om/serialization/cpp_variable_ser.hpp"
-#include "dogen/om/serialization/odb_database_option_ser.hpp"
-#include "dogen/om/serialization/odb_guard_prefix_option_ser.hpp"
-#include "dogen/om/serialization/odb_include_regex_option_ser.hpp"
-#include "dogen/om/serialization/odb_options_file_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
@@ -59,27 +40,8 @@ namespace om {
 template<typename Archive>
 void register_types(Archive& ar) {
     ar.template register_type<dogen::om::cmake_add_library>();
-    ar.template register_type<dogen::om::cmake_file>();
     ar.template register_type<dogen::om::cmake_install>();
     ar.template register_type<dogen::om::cmake_set_target_properties>();
-    ar.template register_type<dogen::om::cpp_argument>();
-    ar.template register_type<dogen::om::cpp_class>();
-    ar.template register_type<dogen::om::cpp_enumeration>();
-    ar.template register_type<dogen::om::cpp_file>();
-    ar.template register_type<dogen::om::cpp_function>();
-    ar.template register_type<dogen::om::cpp_header_guard>();
-    ar.template register_type<dogen::om::cpp_ifdef>();
-    ar.template register_type<dogen::om::cpp_include_directive>();
-    ar.template register_type<dogen::om::cpp_member_function>();
-    ar.template register_type<dogen::om::cpp_member_variable>();
-    ar.template register_type<dogen::om::cpp_namespace>();
-    ar.template register_type<dogen::om::cpp_pragma>();
-    ar.template register_type<dogen::om::cpp_typedef>();
-    ar.template register_type<dogen::om::cpp_variable>();
-    ar.template register_type<dogen::om::odb_database_option>();
-    ar.template register_type<dogen::om::odb_guard_prefix_option>();
-    ar.template register_type<dogen::om::odb_include_regex_option>();
-    ar.template register_type<dogen::om::odb_options_file>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);
