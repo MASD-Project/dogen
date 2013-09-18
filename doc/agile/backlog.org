@@ -11,6 +11,54 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Towards a more generic use of implementation specific parameters  :story:
+
+We should do an inventory of all dogen features which can be
+reimplemented as implementation specific parameters. For example,
+immutability should result in a generic parameter being added to the
+type at the SML level:
+
+: immutable = true
+
+which then gets resolved into a set of language specific parameters:
+
+: cpp.copy_constructor.status = disabled
+: cpp.setters.status = disabled
+: ...
+
+The formatter then looks for these tags to decide whether to add a
+method or not. If we had more languages, they would have equivalent
+formatting commands.
+
+The same would apply to facets. These would have a top-level generic
+parameter such as =hashing=:
+
+: hashing = true
+
+Which then expands to implementation specific hashing:
+
+: cpp.hashing.std_hashing = true
+
+or
+
+: cpp.hashing.boost_hashing = true
+
+The facet is now just a short-hand for a set of implementation
+specific parameters. There is some default mapping applied in this
+grouping. The user can shortcut the process by disabling the mapping
+and supplying implementation specific parameters:
+
+: hashing = false
+: cpp.hashing.boost_hashing = true
+
+Assuming =std_hashing= as a default.
+
+In addition, depending on the parameter, it may be propagatable /
+expandable. For example, if hashing is set to false in a type at the
+bottom of a graph relationship, we must propagate it to all members of
+the graph. Similarly, if hashing is disabled in the model, we must
+propagate it to all types in the model.
+
 *** Parameter to disable cpp file                                     :story:
 
 It would be really useful to define a implementation specific
