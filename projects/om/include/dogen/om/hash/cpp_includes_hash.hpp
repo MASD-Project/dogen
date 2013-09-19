@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/test_data/cmake_add_library_td.hpp"
-#include "dogen/om/test_data/cmake_feature_td.hpp"
-#include "dogen/om/test_data/cmake_install_td.hpp"
-#include "dogen/om/test_data/cmake_set_target_properties_td.hpp"
-#include "dogen/om/test_data/code_generation_marker_td.hpp"
-#include "dogen/om/test_data/comment_styles_td.hpp"
-#include "dogen/om/test_data/cpp_includes_td.hpp"
-#include "dogen/om/test_data/editors_td.hpp"
-#include "dogen/om/test_data/file_td.hpp"
-#include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/modeline_field_td.hpp"
-#include "dogen/om/test_data/modeline_group_td.hpp"
-#include "dogen/om/test_data/modeline_locations_td.hpp"
-#include "dogen/om/test_data/modeline_td.hpp"
+#ifndef DOGEN_OM_HASH_CPP_INCLUDES_HASH_HPP
+#define DOGEN_OM_HASH_CPP_INCLUDES_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/om/types/cpp_includes.hpp"
+
+namespace dogen {
+namespace om {
+
+struct cpp_includes_hasher {
+public:
+    static std::size_t hash(const cpp_includes& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::om::cpp_includes> {
+public:
+    size_t operator()(const dogen::om::cpp_includes& v) const {
+        return dogen::om::cpp_includes_hasher::hash(v);
+    }
+};
+
+}
+#endif

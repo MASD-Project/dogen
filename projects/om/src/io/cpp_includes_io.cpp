@@ -18,17 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/io/cmake_add_library_io.hpp"
-#include "dogen/om/io/cmake_feature_io.hpp"
-#include "dogen/om/io/cmake_install_io.hpp"
-#include "dogen/om/io/cmake_set_target_properties_io.hpp"
-#include "dogen/om/io/code_generation_marker_io.hpp"
-#include "dogen/om/io/comment_styles_io.hpp"
+#include <boost/algorithm/string.hpp>
+#include <ostream>
 #include "dogen/om/io/cpp_includes_io.hpp"
-#include "dogen/om/io/editors_io.hpp"
-#include "dogen/om/io/file_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/modeline_field_io.hpp"
-#include "dogen/om/io/modeline_group_io.hpp"
-#include "dogen/om/io/modeline_io.hpp"
-#include "dogen/om/io/modeline_locations_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace om {
+
+std::ostream& operator<<(std::ostream& s, const cpp_includes& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::om::cpp_includes\"" << ", "
+      << "\"system\": " << v.system() << ", "
+      << "\"user\": " << v.user()
+      << " }";
+    return(s);
+}
+
+} }

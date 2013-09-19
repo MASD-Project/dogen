@@ -18,17 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/test_data/cmake_add_library_td.hpp"
-#include "dogen/om/test_data/cmake_feature_td.hpp"
-#include "dogen/om/test_data/cmake_install_td.hpp"
-#include "dogen/om/test_data/cmake_set_target_properties_td.hpp"
-#include "dogen/om/test_data/code_generation_marker_td.hpp"
-#include "dogen/om/test_data/comment_styles_td.hpp"
-#include "dogen/om/test_data/cpp_includes_td.hpp"
-#include "dogen/om/test_data/editors_td.hpp"
-#include "dogen/om/test_data/file_td.hpp"
-#include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/modeline_field_td.hpp"
-#include "dogen/om/test_data/modeline_group_td.hpp"
-#include "dogen/om/test_data/modeline_locations_td.hpp"
-#include "dogen/om/test_data/modeline_td.hpp"
+#ifndef DOGEN_OM_TYPES_FORMATTER_FACTORY_FWD_HPP
+#define DOGEN_OM_TYPES_FORMATTER_FACTORY_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace om {
+
+class formatter_factory;
+
+} }
+
+#endif

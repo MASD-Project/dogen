@@ -562,7 +562,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="-27,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.544999999999998"/>
+        <dia:real val="30.545000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="28.900000000000002"/>
@@ -644,7 +644,7 @@ it has 100% feature coverage.
         <dia:point val="12.9167,116"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="18.000000000000004"/>
@@ -3042,7 +3042,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="5.9167,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -4562,7 +4562,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="112,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.619999999999999"/>
+        <dia:real val="12.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5230,7 +5230,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="92,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5850000000000009"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15.600000000000003"/>
@@ -6753,73 +6753,6 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:connection handle="0" to="O11" connection="2"/>
         <dia:connection handle="1" to="O22" connection="5"/>
       </dia:connections>
-    </dia:object>
-    <dia:object type="UML - Association" version="2" id="O46">
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="obj_pos">
-        <dia:point val="194.825,165"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="194.075,164.25;207.802,179.8"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="194.825,165"/>
-        <dia:point val="194.825,173"/>
-        <dia:point val="207.602,173"/>
-        <dia:point val="207.602,179"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
     </dia:object>
   </dia:layer>
 </dia:diagram>

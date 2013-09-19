@@ -18,17 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/test_data/cmake_add_library_td.hpp"
-#include "dogen/om/test_data/cmake_feature_td.hpp"
-#include "dogen/om/test_data/cmake_install_td.hpp"
-#include "dogen/om/test_data/cmake_set_target_properties_td.hpp"
-#include "dogen/om/test_data/code_generation_marker_td.hpp"
-#include "dogen/om/test_data/comment_styles_td.hpp"
-#include "dogen/om/test_data/cpp_includes_td.hpp"
-#include "dogen/om/test_data/editors_td.hpp"
-#include "dogen/om/test_data/file_td.hpp"
-#include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/modeline_field_td.hpp"
-#include "dogen/om/test_data/modeline_group_td.hpp"
-#include "dogen/om/test_data/modeline_locations_td.hpp"
-#include "dogen/om/test_data/modeline_td.hpp"
+#include "dogen/om/hash/file_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace om {
+
+std::size_t file_hasher::hash(const file&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.full_path().generic_string());
+    combine(seed, v.contents());
+
+    return seed;
+}
+
+} }

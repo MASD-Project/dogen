@@ -18,17 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/test_data/cmake_add_library_td.hpp"
-#include "dogen/om/test_data/cmake_feature_td.hpp"
-#include "dogen/om/test_data/cmake_install_td.hpp"
-#include "dogen/om/test_data/cmake_set_target_properties_td.hpp"
-#include "dogen/om/test_data/code_generation_marker_td.hpp"
-#include "dogen/om/test_data/comment_styles_td.hpp"
-#include "dogen/om/test_data/cpp_includes_td.hpp"
-#include "dogen/om/test_data/editors_td.hpp"
-#include "dogen/om/test_data/file_td.hpp"
-#include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/modeline_field_td.hpp"
-#include "dogen/om/test_data/modeline_group_td.hpp"
-#include "dogen/om/test_data/modeline_locations_td.hpp"
-#include "dogen/om/test_data/modeline_td.hpp"
+#include "dogen/om/hash/cpp_includes_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace om {
+
+std::size_t cpp_includes_hasher::hash(const cpp_includes&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_list_std_string(v.system()));
+    combine(seed, hash_std_list_std_string(v.user()));
+
+    return seed;
+}
+
+} }

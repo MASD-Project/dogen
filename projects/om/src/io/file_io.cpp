@@ -18,17 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/test_data/cmake_add_library_td.hpp"
-#include "dogen/om/test_data/cmake_feature_td.hpp"
-#include "dogen/om/test_data/cmake_install_td.hpp"
-#include "dogen/om/test_data/cmake_set_target_properties_td.hpp"
-#include "dogen/om/test_data/code_generation_marker_td.hpp"
-#include "dogen/om/test_data/comment_styles_td.hpp"
-#include "dogen/om/test_data/cpp_includes_td.hpp"
-#include "dogen/om/test_data/editors_td.hpp"
-#include "dogen/om/test_data/file_td.hpp"
-#include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/modeline_field_td.hpp"
-#include "dogen/om/test_data/modeline_group_td.hpp"
-#include "dogen/om/test_data/modeline_locations_td.hpp"
-#include "dogen/om/test_data/modeline_td.hpp"
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/om/io/file_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace dogen {
+namespace om {
+
+std::ostream& operator<<(std::ostream& s, const file& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::om::file\"" << ", "
+      << "\"full_path\": " << "\"" << v.full_path().generic_string() << "\"" << ", "
+      << "\"contents\": " << "\"" << tidy_up_string(v.contents()) << "\""
+      << " }";
+    return(s);
+}
+
+} }
