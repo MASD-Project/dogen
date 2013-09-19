@@ -9,8 +9,10 @@
             "implementation_specific_parameters" : [
                 {
                     "cpp.type.family" : "smart_pointer",
-                    "cpp.domain.header" : "boost/shared_ptr.hpp",
-                    "cpp.serialization.boost.header" : "boost/serialization/shared_ptr.hpp"
+                    "cpp.domain.header.file_name" : "boost/shared_ptr.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/serialization/shared_ptr.hpp",
+                    "cpp.serialization.boost.header.is_system" : true
                 }
             ]
         },
@@ -20,8 +22,10 @@
             "implementation_specific_parameters" : [
                 {
                     "cpp.type.family" : "smart_pointer",
-                    "cpp.domain.header" : "boost/weak_ptr.hpp",
-                    "cpp.serialization.boost.header" : "boost/serialization/weak_ptr.hpp"
+                    "cpp.domain.header.file_name" : "boost/weak_ptr.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/serialization/weak_ptr.hpp",
+                    "cpp.serialization.boost.header.is_system" : true
                 }
             ]
         },
@@ -31,8 +35,10 @@
             "implementation_specific_parameters" : [
                 {
                     "cpp.type.family" : "smart_pointer",
-                    "cpp.domain.header" : "boost/scoped_ptr.hpp",
-                    "cpp.serialization.boost.header" : "boost/serialization/scoped_ptr.hpp"
+                    "cpp.domain.header.file_name" : "boost/scoped_ptr.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/serialization/scoped_ptr.hpp",
+                    "cpp.serialization.boost.header.is_system" : true
                 }
             ]
         },
@@ -43,8 +49,10 @@
                 {
                     "cpp.type.family" : "smart_pointer",
                     "cpp.type.requires_manual_move_constructor" : true,
-                    "cpp.domain.header" : "boost/optional.hpp",
-                    "cpp.serialization.boost.header" : "boost/serialization/optional.hpp"
+                    "cpp.domain.header.file_name" : "boost/optional.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/serialization/optional.hpp",
+                    "cpp.serialization.boost.header.is_system" : true
                 }
             ]
         },
@@ -54,8 +62,10 @@
             "implementation_specific_parameters" : [
                 {
                     "cpp.type.requires_manual_move_constructor" : true,
-                    "cpp.domain.header" : "boost/variant.hpp",
-                    "cpp.serialization.boost.header" : "boost/serialization/variant.hpp"
+                    "cpp.domain.header.file_name" : "boost/variant.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/serialization/variant.hpp",
+                    "cpp.serialization.boost.header.is_system" : true
                 }
             ]
         },
@@ -67,7 +77,7 @@
             ],
             "implementation_specific_parameters" : [
                 {
-                    "cpp.domain.header" : "boost/asio/io_service.hpp",
+                    "cpp.domain.header.file_name" : "boost/asio/io_service.hpp",
                     "cpp.hash.std.status" : "unsupported",
                     "cpp.test_data.status" : "unsupported",
                     "cpp.serialization.boost.status" : "unsupported"
@@ -82,7 +92,7 @@
             ],
             "implementation_specific_parameters" : [
                 {
-                    "cpp.domain.header" : "boost/asio/ip/tcp.hpp",
+                    "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
                     "cpp.hash.std.status" : "unsupported",
                     "cpp.test_data.status" : "unsupported",
                     "cpp.serialization.boost.status" : "unsupported"
@@ -97,7 +107,7 @@
             ],
             "implementation_specific_parameters" : [
                 {
-                    "cpp.domain.header" : "boost/asio/ip/tcp.hpp",
+                    "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
                     "cpp.hash.std.status" : "unsupported",
                     "cpp.test_data.status" : "unsupported",
                     "cpp.serialization.boost.status" : "unsupported"
@@ -113,7 +123,8 @@
             "implementation_specific_parameters" : [
                 {
                     "cpp.type.requires_manual_move_constructor" : true,
-                    "cpp.domain.header" : "boost/filesystem/path.hpp"
+                    "cpp.domain.header.file_name" : "boost/filesystem/path.hpp",
+                    "cpp.domain.header.is_system" : true
                 }
             ]
         },
@@ -125,9 +136,12 @@
             ],
             "implementation_specific_parameters" : [
                 {
-                    "cpp.domain.header" : "boost/date_time/gregorian/gregorian_types.hpp",
-                    "cpp.io.header" : "boost/date_time/gregorian/gregorian.hpp",
-                    "cpp.serialization.boost.header" : "boost/date_time/gregorian/greg_serialize.hpp"
+                    "cpp.domain.header.file_name" : "boost/date_time/gregorian/gregorian_types.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.io.header.file_name" : "boost/date_time/gregorian/gregorian.hpp",
+                    "cpp.io.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/date_time/gregorian/greg_serialize.hpp",
+                    "cpp.serialization.boost.header.is_system" : true
                 }
             ]
         },
@@ -139,9 +153,12 @@
             ],
             "implementation_specific_parameters" : [
                 {
-                    "cpp.domain.header" : "boost/date_time/posix_time/posix_time_types.hpp",
-                    "cpp.serialization.boost.header" : "boost/date_time/posix_time/time_serialize.hpp",
-                    "cpp.io.header" : "boost/date_time/posix_time/posix_time.hpp"
+                    "cpp.domain.header.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
+                    "cpp.serialization.boost.header.is_system" : true,
+                    "cpp.io.header.file_name" : "boost/date_time/posix_time/posix_time.hpp",
+                    "cpp.io.header.is_system" : true
                 }
             ]
         },
@@ -153,9 +170,12 @@
             ],
             "implementation_specific_parameters" : [
                 {
-                    "cpp.domain.header" : "boost/date_time/posix_time/posix_time_types.hpp",
-                    "cpp.serialization.boost.header" : "boost/date_time/posix_time/time_serialize.hpp",
-                    "cpp.io.header" : "boost/date_time/posix_time/posix_time.hpp"
+                    "cpp.domain.header.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
+                    "cpp.domain.header.is_system" : true,
+                    "cpp.serialization.boost.header.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
+                    "cpp.serialization.boost.header.is_system" : true,
+                    "cpp.io.header.file_name" : "boost/date_time/posix_time/posix_time.hpp",
+                    "cpp.io.header.is_system" : true
                 }
             ]
         }
