@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 34.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-19 Thu 23:17]
+Clock summary at [2013-09-20 Fri 00:09]
 
 | Headline                                                          | Time   |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *7:00* |      |      |
+| *Total time*                                                      | *7:53* |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                   |        | 7:00 |      |
+| Development Stories Implemented                                   |        | 7:53 |      |
 | IMPLEMENTATION Release notes and backlog grooming                 |        |      | 0:04 |
 | COMPLETED Implement hydration manager in terms of other hydrators |        |      | 1:27 |
-| IMPLEMENTATION Create a basic C++ workflow in SML to OM model     |        |      | 2:06 |
+| IMPLEMENTATION Create a basic C++ workflow in SML to OM model     |        |      | 2:59 |
 | IMPLEMENTATION Loading external models from file                  |        |      | 3:23 |
 #+end:
 
@@ -38,6 +38,7 @@ Clock summary at [2013-09-19 Thu 23:17]
 - made it a stand alone template function as its pretty trivial.
 
 *** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+    CLOCK: [2013-09-19 Thu 23:16]--[2013-09-20 Fri 00:09] =>  0:53
     CLOCK: [2013-09-19 Thu 22:00]--[2013-09-19 Thu 23:16] =>  1:16
     CLOCK: [2013-09-19 Thu 18:27]--[2013-09-19 Thu 18:55] =>  0:28
     CLOCK: [2013-09-10 Tue 07:49]--[2013-09-10 Tue 08:11] =>  0:22

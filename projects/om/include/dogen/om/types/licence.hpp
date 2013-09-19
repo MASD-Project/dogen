@@ -46,7 +46,7 @@ public:
 public:
     licence(
         const std::list<std::string>& copyright_holders,
-        const std::string& licence_text);
+        const std::string& text);
 
 private:
     template<typename Archive>
@@ -72,10 +72,10 @@ public:
      * @brief Complete legal text for the licence.
      */
     /**@{*/
-    const std::string& licence_text() const;
-    std::string& licence_text();
-    void licence_text(const std::string& v);
-    void licence_text(const std::string&& v);
+    const std::string& text() const;
+    std::string& text();
+    void text(const std::string& v);
+    void text(const std::string&& v);
     /**@}*/
 
 public:
@@ -90,7 +90,7 @@ public:
 
 private:
     std::list<std::string> copyright_holders_;
-    std::string licence_text_;
+    std::string text_;
 };
 
 } }

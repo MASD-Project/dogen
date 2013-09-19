@@ -51,7 +51,7 @@ std::ostream& operator<<(std::ostream& s, const licence& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::om::licence\"" << ", "
       << "\"copyright_holders\": " << v.copyright_holders() << ", "
-      << "\"licence_text\": " << "\"" << tidy_up_string(v.licence_text()) << "\""
+      << "\"text\": " << "\"" << tidy_up_string(v.text()) << "\""
       << " }";
     return(s);
 }

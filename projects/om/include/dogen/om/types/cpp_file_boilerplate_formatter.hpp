@@ -18,17 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_CPP_FILE_FORMATTER_FWD_HPP
-#define DOGEN_OM_TYPES_CPP_FILE_FORMATTER_FWD_HPP
+#ifndef DOGEN_OM_TYPES_CPP_FILE_BOILERPLATE_FORMATTER_HPP
+#define DOGEN_OM_TYPES_CPP_FILE_BOILERPLATE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/om/types/licence.hpp"
+#include "dogen/om/types/modeline.hpp"
+#include "dogen/om/types/cpp_includes.hpp"
+
 namespace dogen {
 namespace om {
 
-class cpp_file_formatter;
+/**
+ * @brief Formats all of the boilerplate content in a C++ file such as
+ * licence, modeline, includes, etc.
+ */
+class cpp_file_boilerplate_formatter {
+public:
+    /**
+     * @brief Formats the initial section of boilerplate.
+     */
+    void format_begin(std::ostream& s, const licence& l, const modeline& m,
+        const std::string& marker, const cpp_includes& i,
+        const boost::filesystem::path relative_file_name) const;
+
+    /**
+     * @brief Formats the end of the boilerplate.
+     */
+    void format_end(std::ostream& s, const modeline& m) const;
+};
 
 } }
 

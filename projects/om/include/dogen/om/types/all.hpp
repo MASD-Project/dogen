@@ -27,7 +27,7 @@
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/comment_styles.hpp"
 #include "dogen/om/types/cpp_domain_header_formatter.hpp"
-#include "dogen/om/types/cpp_file_formatter.hpp"
+#include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 #include "dogen/om/types/cpp_include_formatter.hpp"
 #include "dogen/om/types/cpp_includer_formatter.hpp"
 #include "dogen/om/types/cpp_includes.hpp"

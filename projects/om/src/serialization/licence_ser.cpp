@@ -44,7 +44,7 @@ void save(Archive& ar,
     const dogen::om::licence& v,
     const unsigned int /*version*/) {
     ar << make_nvp("copyright_holders", v.copyright_holders_);
-    ar << make_nvp("licence_text", v.licence_text_);
+    ar << make_nvp("text", v.text_);
 }
 
 template<typename Archive>
@@ -52,7 +52,7 @@ void load(Archive& ar,
     dogen::om::licence& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("copyright_holders", v.copyright_holders_);
-    ar >> make_nvp("licence_text", v.licence_text_);
+    ar >> make_nvp("text", v.text_);
 }
 
 } }

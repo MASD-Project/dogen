@@ -25,19 +25,19 @@ namespace om {
 
 licence::licence(
     const std::list<std::string>& copyright_holders,
-    const std::string& licence_text)
+    const std::string& text)
     : copyright_holders_(copyright_holders),
-      licence_text_(licence_text) { }
+      text_(text) { }
 
 void licence::swap(licence& other) noexcept {
     using std::swap;
     swap(copyright_holders_, other.copyright_holders_);
-    swap(licence_text_, other.licence_text_);
+    swap(text_, other.text_);
 }
 
 bool licence::operator==(const licence& rhs) const {
     return copyright_holders_ == rhs.copyright_holders_ &&
-        licence_text_ == rhs.licence_text_;
+        text_ == rhs.text_;
 }
 
 licence& licence::operator=(licence other) {
@@ -62,20 +62,20 @@ void licence::copyright_holders(const std::list<std::string>&& v) {
     copyright_holders_ = std::move(v);
 }
 
-const std::string& licence::licence_text() const {
-    return licence_text_;
+const std::string& licence::text() const {
+    return text_;
 }
 
-std::string& licence::licence_text() {
-    return licence_text_;
+std::string& licence::text() {
+    return text_;
 }
 
-void licence::licence_text(const std::string& v) {
-    licence_text_ = v;
+void licence::text(const std::string& v) {
+    text_ = v;
 }
 
-void licence::licence_text(const std::string&& v) {
-    licence_text_ = std::move(v);
+void licence::text(const std::string&& v) {
+    text_ = std::move(v);
 }
 
 } }

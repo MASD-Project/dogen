@@ -47,7 +47,7 @@ licence_generator::licence_generator() : position_(0) { }
 void licence_generator::
 populate(const unsigned int position, result_type& v) {
     v.copyright_holders(create_std_list_std_string(position + 0));
-    v.licence_text(create_std_string(position + 1));
+    v.text(create_std_string(position + 1));
 }
 
 licence_generator::result_type
