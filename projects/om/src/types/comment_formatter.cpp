@@ -100,8 +100,8 @@ format(std::ostream& s, const std::string& content) const {
     format(s, std::list<std::string> { content });
 }
 
-void
-comment_formatter::format(std::ostream& s, const std::list<std::string>& content,
+void comment_formatter::
+format(std::ostream& s, const std::list<std::string>& content,
     const bool line_between_blocks) const {
     add_comment_start_marker(s);
 

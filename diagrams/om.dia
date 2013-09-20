@@ -263,7 +263,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="18,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.670000000000002"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -422,7 +422,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="147,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.1139843750000002"/>
+        <dia:real val="7.1139843749999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -683,7 +683,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="146,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.518515624999999"/>
+        <dia:real val="13.518515625000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -3509,7 +3509,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="1.7"/>
+        <dia:real val="1.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4069,6 +4069,23 @@ For example, one may choose to have a set of modelines for @e emacs , or for
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::ostream&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#m#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const modeline&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5332,7 +5349,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="44,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.435"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6124,7 +6141,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-34,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.829999999999998"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>

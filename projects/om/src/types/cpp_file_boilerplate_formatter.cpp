@@ -26,7 +26,6 @@
 
 namespace {
 
-const std::string blank_line;
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
@@ -46,27 +45,26 @@ add_modeline(std::list<std::string>& content, const modeline& m) const {
     content.push_back(s.str());
 }
 
-void cpp_file_boilerplate_formatter::add_marker(std::list<std::string>& content,
-    const std::string& marker) const {
+void cpp_file_boilerplate_formatter::
+add_marker(std::list<std::string>& content, const std::string& marker) const {
     if (marker.empty())
         return;
 
-    content.push_back(blank_line);
     content.push_back(marker);
 }
 
 void cpp_file_boilerplate_formatter::
 add_licence(std::list<std::string>& content, const licence& l) const {
-    const auto ch(l.copyright_holders());
-    if (!ch.empty()) {
-        content.push_back(blank_line);
-        content.insert(content.end(), ch.begin(), ch.end());
-    }
+    std::ostringstream s;
+    for (const auto h : l.copyright_holders())
+        s << h << std::endl;
 
-    if (!l.text().empty()) {
-        content.push_back(blank_line);
+    const auto holders(s.str());
+    if (!holders.empty())
+        content.push_back(holders);
+
+    if (!l.text().empty())
         content.push_back(l.text());
-    }
 }
 
 void cpp_file_boilerplate_formatter::
@@ -74,25 +72,53 @@ format_begin(std::ostream& s, const licence& l, const modeline& m,
     const std::string& marker, const cpp_includes& /*i*/,
     const boost::filesystem::path /*relative_file_name*/) const {
 
-    comment_formatter cf(
-        start_on_first_line,
-        !use_documentation_tool_markup,
-        !documenting_previous_identifier,
-        comment_styles::c_style,
-        last_line_is_blank);
-
+    const bool is_modeline_top(m.location() == modeline_locations::top);
     std::list<std::string> content;
-    if (m.location() == modeline_locations::top)
+    if (is_modeline_top)
         add_modeline(content, m);
 
     add_marker(content, marker);
     add_licence(content, l);
 
-    cf.format(s, content);
+    if (content.empty())
+        return;
+
+    if (is_modeline_top && content.size() == 1) {
+        comment_formatter cf(
+            start_on_first_line,
+            !use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            comment_styles::cpp_style,
+            !last_line_is_blank);
+
+        cf.format(s, content, !line_between_blocks);
+    } else {
+        comment_formatter cf(
+            is_modeline_top ? start_on_first_line : !start_on_first_line,
+            !use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            comment_styles::c_style,
+            last_line_is_blank);
+
+        cf.format(s, content, line_between_blocks);
+    }
 }
 
 void cpp_file_boilerplate_formatter::
-format_end(std::ostream& /*s*/, const modeline& /*m*/) const {
+format_end(std::ostream& s, const modeline& m) const {
+    if (m.location() == modeline_locations::bottom) {
+        std::list<std::string> content;
+        add_modeline(content, m);
+
+        comment_formatter cf(
+            !start_on_first_line,
+            !use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            comment_styles::c_style,
+            !last_line_is_blank);
+
+        cf.format(s, content);
+    }
 }
 
 } }
