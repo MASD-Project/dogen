@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
 #include <boost/filesystem/path.hpp>
@@ -42,9 +43,20 @@ namespace om {
 class cpp_file_boilerplate_formatter {
 private:
     /**
-     * @brief Return the modeline as a formatted string.
+     * @brief Adds the formatted modeline to the content.
      */
-    std::string format_modeline(const modeline& m) const;
+    void add_modeline(std::list<std::string>& content, const modeline& m) const;
+
+    /**
+     * @brief Adds the formatted modeline to the content.
+     */
+    void add_marker(std::list<std::string>& content,
+        const std::string& marker) const;
+
+    /**
+     * @brief Adds the formatted modeline to the content.
+     */
+    void add_licence(std::list<std::string>& content, const licence& l) const;
 
 public:
     /**

@@ -26,6 +26,7 @@
 
 namespace {
 
+const std::string blank_line;
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
@@ -37,29 +38,57 @@ const bool documenting_previous_identifier(true);
 namespace dogen {
 namespace om {
 
-std::string cpp_file_boilerplate_formatter::
-format_modeline(const modeline& m) const {
+void cpp_file_boilerplate_formatter::
+add_modeline(std::list<std::string>& content, const modeline& m) const {
     std::ostringstream s;
     modeline_formatter f;
     f.format(s, m);
-    return s.str();
+    content.push_back(s.str());
+}
+
+void cpp_file_boilerplate_formatter::add_marker(std::list<std::string>& content,
+    const std::string& marker) const {
+    if (marker.empty())
+        return;
+
+    content.push_back(blank_line);
+    content.push_back(marker);
 }
 
 void cpp_file_boilerplate_formatter::
-format_begin(std::ostream& s, const licence& /*l*/, const modeline& m,
-    const std::string& /*marker*/, const cpp_includes& /*i*/,
+add_licence(std::list<std::string>& content, const licence& l) const {
+    const auto ch(l.copyright_holders());
+    if (!ch.empty()) {
+        content.push_back(blank_line);
+        content.insert(content.end(), ch.begin(), ch.end());
+    }
+
+    if (!l.text().empty()) {
+        content.push_back(blank_line);
+        content.push_back(l.text());
+    }
+}
+
+void cpp_file_boilerplate_formatter::
+format_begin(std::ostream& s, const licence& l, const modeline& m,
+    const std::string& marker, const cpp_includes& /*i*/,
     const boost::filesystem::path /*relative_file_name*/) const {
 
     comment_formatter cf(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        dogen::om::comment_styles::c_style,
+        comment_styles::c_style,
         last_line_is_blank);
 
-    const auto modeline_str(format_modeline(m));
+    std::list<std::string> content;
     if (m.location() == modeline_locations::top)
-        cf.format(s, modeline_str);
+        add_modeline(content, m);
+
+    add_marker(content, marker);
+    add_licence(content, l);
+
+    cf.format(s, content);
 }
 
 void cpp_file_boilerplate_formatter::
