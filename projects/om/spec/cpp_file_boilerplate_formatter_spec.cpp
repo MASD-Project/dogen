@@ -71,6 +71,7 @@ BOOST_AUTO_TEST_SUITE(cpp_file_boilerplate_formatter)
 
 BOOST_AUTO_TEST_CASE(boilerplate_with_top_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("boilerplate_with_top_modeline_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
@@ -85,6 +86,7 @@ BOOST_AUTO_TEST_CASE(boilerplate_with_top_modeline_is_formatted_correctly) {
     const auto r(s.str());
     // BOOST_CHECK(!r.empty());
     BOOST_LOG_SEV(lg, debug) << "contents: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
 BOOST_AUTO_TEST_SUITE_END()

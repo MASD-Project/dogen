@@ -18,35 +18,48 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <ostream>
+#include "dogen/om/types/modeline_formatter.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 
-// namespace {
+namespace {
 
-// const bool start_on_first_line(true);
-// const bool use_documentation_tool_markup(true);
-// const bool last_line_is_blank(true);
-// const bool line_between_blocks(true);
-// const bool documenting_previous_identifier(true);
+const bool start_on_first_line(true);
+const bool use_documentation_tool_markup(true);
+const bool last_line_is_blank(true);
+const bool line_between_blocks(true);
+const bool documenting_previous_identifier(true);
 
-// }
+}
 
 namespace dogen {
 namespace om {
 
+std::string cpp_file_boilerplate_formatter::
+format_modeline(const modeline& m) const {
+    std::ostringstream s;
+    modeline_formatter f;
+    f.format(s, m);
+    return s.str();
+}
+
 void cpp_file_boilerplate_formatter::
-format_begin(std::ostream& /*s*/, const licence& /*l*/, const modeline& /*m*/,
+format_begin(std::ostream& s, const licence& /*l*/, const modeline& m,
     const std::string& /*marker*/, const cpp_includes& /*i*/,
     const boost::filesystem::path /*relative_file_name*/) const {
 
-    // comment_formatter cf(
-    //     !start_on_first_line,
-    //     use_documentation_tool_markup,
-    //     !documenting_previous_identifier,
-    //     dogen::om::comment_styles::c_style,
-    //     !last_line_is_blank);
+    comment_formatter cf(
+        start_on_first_line,
+        !use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::om::comment_styles::c_style,
+        last_line_is_blank);
 
+    const auto modeline_str(format_modeline(m));
+    if (m.location() == modeline_locations::top)
+        cf.format(s, modeline_str);
 }
 
 void cpp_file_boilerplate_formatter::

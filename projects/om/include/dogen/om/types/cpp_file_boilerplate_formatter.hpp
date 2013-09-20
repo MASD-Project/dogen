@@ -40,6 +40,12 @@ namespace om {
  * licence, modeline, includes, etc.
  */
 class cpp_file_boilerplate_formatter {
+private:
+    /**
+     * @brief Return the modeline as a formatted string.
+     */
+    std::string format_modeline(const modeline& m) const;
+
 public:
     /**
      * @brief Formats the initial section of boilerplate.
