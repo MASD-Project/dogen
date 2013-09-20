@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include <ostream>
+#include <iosfwd>
 #include "dogen/om/types/comment_styles.hpp"
 
 namespace dogen {
@@ -89,12 +89,12 @@ public:
     /**
      * @brief
      */
-    std::string format(const std::string& content) const;
+    void format(std::ostream& s, const std::string& content) const;
 
     /**
      * @brief
      */
-    std::string format(const std::list<std::string>& content,
+    void format(std::ostream& s, const std::list<std::string>& content,
         const bool line_between_blocks = false) const;
 
 private:

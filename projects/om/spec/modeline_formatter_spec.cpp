@@ -95,6 +95,13 @@ dogen::om::modeline mock_vim_modeline(const dogen::om::modeline_locations l) {
     return r;
 }
 
+std::string
+format(const dogen::om::modeline_formatter& f, const dogen::om::modeline& m) {
+    std::ostringstream s;
+    f.format(s, m);
+    return s.str();
+}
+
 }
 
 using namespace dogen::utility::test;
@@ -107,7 +114,7 @@ BOOST_AUTO_TEST_CASE(emacs_top_modeline_results_in_expected_modeline) {
 
     const auto m(mock_emacs_modeline(dogen::om::modeline_locations::top));
     dogen::om::modeline_formatter f;
-    const auto r(f.format(m));
+    const auto r(format(f, m));
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "expected: " << emacs_top_modeline;
     BOOST_CHECK(r == emacs_top_modeline);
@@ -120,7 +127,7 @@ BOOST_AUTO_TEST_CASE(emacs_bottom_modeline_results_in_expected_modeline) {
 
     const auto m(mock_emacs_modeline(dogen::om::modeline_locations::bottom));
     dogen::om::modeline_formatter f;
-    const auto r(f.format(m));
+    const auto r(format(f, m));
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "expected: " << emacs_bottom_modeline;
     BOOST_CHECK(r == emacs_bottom_modeline);
@@ -133,13 +140,13 @@ BOOST_AUTO_TEST_CASE(vim_top_modeline_results_in_expected_modeline) {
 
     const auto m0(mock_vim_modeline(dogen::om::modeline_locations::top));
     dogen::om::modeline_formatter f;
-    const auto r0(f.format(m0));
+    const auto r0(format(f, m0));
     BOOST_LOG_SEV(lg, debug) << "actual: " << r0;
     BOOST_LOG_SEV(lg, debug) << "expected: " << vim_modeline;
     BOOST_CHECK(r0 == vim_modeline);
 
     const auto m1(mock_vim_modeline(dogen::om::modeline_locations::bottom));
-    const auto r1(f.format(m1));
+    const auto r1(format(f, m1));
     BOOST_LOG_SEV(lg, debug) << "actual: " << r1;
     BOOST_LOG_SEV(lg, debug) << "expected: " << vim_modeline;
     BOOST_CHECK(r1 == vim_modeline);
@@ -158,7 +165,7 @@ BOOST_AUTO_TEST_CASE(modeline_with_unsupported_editor_throws) {
     contains_checker<formatting_error> c(unsupported_editor_message);
 
     dogen::om::modeline_formatter f;
-    BOOST_CHECK_EXCEPTION(f.format(m), formatting_error, c);
+    BOOST_CHECK_EXCEPTION(format(f, m), formatting_error, c);
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include <sstream>
 #include "dogen/om/types/comment_formatter.hpp"
 
@@ -94,15 +95,15 @@ void comment_formatter::add_comment_end_marker(std::ostream& s) const {
         s << space << c_style_end << std::endl;
 }
 
-std::string comment_formatter::format(const std::string& content) const {
-    return format(std::list<std::string> { content });
+void comment_formatter::
+format(std::ostream& s, const std::string& content) const {
+    format(s, std::list<std::string> { content });
 }
 
-std::string
-comment_formatter::format(const std::list<std::string>& content,
+void
+comment_formatter::format(std::ostream& s, const std::list<std::string>& content,
     const bool line_between_blocks) const {
-    std::ostringstream main_stream;
-    add_comment_start_marker(main_stream);
+    add_comment_start_marker(s);
 
     bool is_first_line(true);
     bool is_first_block(true);
@@ -111,8 +112,8 @@ comment_formatter::format(const std::list<std::string>& content,
         content_found = content_found || !c.empty();
 
         if (!is_first_block && line_between_blocks) {
-            add_comment_middle_marker(main_stream);
-            main_stream << std::endl;
+            add_comment_middle_marker(s);
+            s << std::endl;
         }
 
         std::istringstream content_stream(c);
@@ -120,37 +121,33 @@ comment_formatter::format(const std::list<std::string>& content,
         while (std::getline(content_stream, line)) {
             if (is_first_line) {
                 if (!start_on_first_line_) {
-                    main_stream << std::endl;
-                    add_comment_middle_marker(main_stream);
+                    s << std::endl;
+                    add_comment_middle_marker(s);
                 }
             } else
-                add_comment_middle_marker(main_stream);
+                add_comment_middle_marker(s);
 
             if (!line.empty())
-                main_stream << space << line;
+                s << space << line;
 
-            main_stream << std::endl;
+            s << std::endl;
             is_first_line = false;
         }
         is_first_block = false;
     }
 
     if (!content_found) {
-        // if (!start_on_first_line_)
-            main_stream << std::endl;
+        s << std::endl;
 
-        add_comment_middle_marker(main_stream);
-        main_stream << std::endl;
+        add_comment_middle_marker(s);
+        s << std::endl;
     }
 
     if (last_line_is_blank_) {
-        add_comment_middle_marker(main_stream);
-        main_stream << std::endl;
+        add_comment_middle_marker(s);
+        s << std::endl;
     }
-
-    add_comment_end_marker(main_stream);
-
-    return main_stream.str();
+    add_comment_end_marker(s);
 }
 
 } }

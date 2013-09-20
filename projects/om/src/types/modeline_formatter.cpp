@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
+#include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/om/io/modeline_io.hpp"
@@ -64,9 +64,8 @@ bool modeline_formatter::is_bottom_line(const om::modeline& m) const {
     return m.location() == om::modeline_locations::bottom;
 }
 
-std::string modeline_formatter::vim_modeline(const om::modeline& m) const {
-    std::ostringstream s;
-
+void modeline_formatter::
+vim_modeline(std::ostream& s, const om::modeline& m) const {
     s << vim_marker << space;
     bool is_first(true);
     for (const auto& f : m.fields()) {
@@ -79,13 +78,10 @@ std::string modeline_formatter::vim_modeline(const om::modeline& m) const {
 
         is_first = false;
     }
-    return s.str();
 }
 
-std::string
-modeline_formatter::emacs_top_modeline(const om::modeline& m) const {
-    std::ostringstream s;
-
+void modeline_formatter::
+emacs_top_modeline(std::ostream& s, const om::modeline& m) const {
     s << emacs_top_marker << space;
     bool is_first(true);
     for (const auto& f : m.fields()) {
@@ -97,32 +93,27 @@ modeline_formatter::emacs_top_modeline(const om::modeline& m) const {
         is_first = false;
     }
     s << space << emacs_top_marker;
-
-    return s.str();
 }
 
-std::string
-modeline_formatter::emacs_bottom_modeline(const om::modeline& m) const {
-    std::ostringstream s;
-
+void modeline_formatter::
+emacs_bottom_modeline(std::ostream& s, const om::modeline& m) const {
     s << emacs_bottom_start_marker << std::endl;
     for (const auto& f : m.fields()) {
         s << f.name() << emacs_field_separator << space << f.value()
           << std::endl;
     }
     s << emacs_bottom_end_marker << std::endl;
-
-    return s.str();
 }
 
-std::string modeline_formatter::format(const om::modeline& m) const {
+void modeline_formatter::
+format(std::ostream& s, const om::modeline& m) const {
     if (is_emacs(m)) {
         if (is_top_line(m))
-            return emacs_top_modeline(m);
+            return emacs_top_modeline(s, m);
         else if (is_bottom_line(m))
-            return emacs_bottom_modeline(m);
+            return emacs_bottom_modeline(s, m);
     } else if (is_vim(m))
-        return vim_modeline(m);
+        return vim_modeline(s, m);
 
     BOOST_LOG_SEV(lg, error) << unsupported_modeline << " contents: " << m;
     BOOST_THROW_EXCEPTION(formatting_error(unsupported_modeline));

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include <string>
 #include "dogen/om/types/modeline.hpp"
 
@@ -73,20 +74,20 @@ private:
     /**
      * @brief Creates a modeline for the vim editor.
      */
-    std::string vim_modeline(const om::modeline& m) const;
+    void vim_modeline(std::ostream& s, const om::modeline& m) const;
 
     /**
      * @brief Creates a modeline for the emacs editor, first line.
      */
-    std::string emacs_top_modeline(const om::modeline& m) const;
+    void emacs_top_modeline(std::ostream& s, const om::modeline& m) const;
 
     /**
      * @brief Creates a modeline for the emacs editor, last lines.
      */
-    std::string emacs_bottom_modeline(const om::modeline& m) const;
+    void emacs_bottom_modeline(std::ostream& s, const om::modeline& m) const;
 
 public:
-    std::string format(const om::modeline& m) const;
+    void format(std::ostream& s, const om::modeline& m) const;
 };
 
 } }
