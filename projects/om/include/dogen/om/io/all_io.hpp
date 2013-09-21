@@ -22,7 +22,6 @@
 #include "dogen/om/io/cmake_feature_io.hpp"
 #include "dogen/om/io/cmake_install_io.hpp"
 #include "dogen/om/io/cmake_set_target_properties_io.hpp"
-#include "dogen/om/io/code_generation_marker_io.hpp"
 #include "dogen/om/io/comment_styles_io.hpp"
 #include "dogen/om/io/cpp_includes_io.hpp"
 #include "dogen/om/io/editors_io.hpp"

@@ -41,6 +41,15 @@ namespace om {
  * licence, modeline, includes, etc.
  */
 class cpp_file_boilerplate_formatter {
+public:
+    cpp_file_boilerplate_formatter() = default;
+    cpp_file_boilerplate_formatter(
+        const cpp_file_boilerplate_formatter&) = default;
+    cpp_file_boilerplate_formatter& operator=(
+        const cpp_file_boilerplate_formatter&) = delete;
+    cpp_file_boilerplate_formatter(
+        cpp_file_boilerplate_formatter&& rhs) = default;
+
 private:
     /**
      * @brief Adds the formatted modeline to the content.

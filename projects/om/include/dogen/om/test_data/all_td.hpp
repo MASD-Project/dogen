@@ -22,7 +22,6 @@
 #include "dogen/om/test_data/cmake_feature_td.hpp"
 #include "dogen/om/test_data/cmake_install_td.hpp"
 #include "dogen/om/test_data/cmake_set_target_properties_td.hpp"
-#include "dogen/om/test_data/code_generation_marker_td.hpp"
 #include "dogen/om/test_data/comment_styles_td.hpp"
 #include "dogen/om/test_data/cpp_includes_td.hpp"
 #include "dogen/om/test_data/editors_td.hpp"

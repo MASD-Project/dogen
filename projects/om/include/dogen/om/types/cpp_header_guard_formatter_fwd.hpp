@@ -18,43 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/types/code_generation_marker.hpp"
+#ifndef DOGEN_OM_TYPES_CPP_HEADER_GUARD_FORMATTER_FWD_HPP
+#define DOGEN_OM_TYPES_CPP_HEADER_GUARD_FORMATTER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace om {
 
-code_generation_marker::code_generation_marker(const std::string& text)
-    : text_(text) { }
-
-void code_generation_marker::swap(code_generation_marker& other) noexcept {
-    using std::swap;
-    swap(text_, other.text_);
-}
-
-bool code_generation_marker::operator==(const code_generation_marker& rhs) const {
-    return text_ == rhs.text_;
-}
-
-code_generation_marker& code_generation_marker::operator=(code_generation_marker other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const std::string& code_generation_marker::text() const {
-    return text_;
-}
-
-std::string& code_generation_marker::text() {
-    return text_;
-}
-
-void code_generation_marker::text(const std::string& v) {
-    text_ = v;
-}
-
-void code_generation_marker::text(const std::string&& v) {
-    text_ = std::move(v);
-}
+class cpp_header_guard_formatter;
 
 } }
+
+#endif
