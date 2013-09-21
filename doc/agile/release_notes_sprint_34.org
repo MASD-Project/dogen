@@ -50,6 +50,7 @@ Creating a class with a list of paths does not compile. add a test to
 the boost model and fix it.
 
 *** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+    CLOCK: [2013-09-21 Sat 23:07]--[2013-09-22 Sun 00:34] =>  1:27
     CLOCK: [2013-09-21 Sat 02:59]--[2013-09-21 Sat 03:16] =>  0:14
     CLOCK: [2013-09-20 Fri 23:20]--[2013-09-21 Sat 02:35] =>  3:15
     CLOCK: [2013-09-20 Fri 18:10]--[2013-09-20 Fri 18:50] =>  0:40

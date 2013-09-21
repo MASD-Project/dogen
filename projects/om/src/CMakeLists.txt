@@ -26,4 +26,12 @@ add_library(om STATIC ${all_files})
 set_target_properties(om PROPERTIES
     OUTPUT_NAME dogen_om)
 
+target_link_libraries(om
+    sml
+    cpp_formatters # FIXME: hack
+    utility
+    ${Boost_LIBRARIES})
+
+set_target_properties(om PROPERTIES OUTPUT_NAME dogen_om)
+
 install(TARGETS om ARCHIVE DESTINATION lib COMPONENT libraries)

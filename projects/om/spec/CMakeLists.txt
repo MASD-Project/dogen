@@ -28,6 +28,8 @@ set_target_properties(om_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(om_spec
     om
+    sml
+    cpp_formatters #FIXME: hack
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
