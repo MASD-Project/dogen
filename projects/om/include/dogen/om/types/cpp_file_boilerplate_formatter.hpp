@@ -67,18 +67,47 @@ private:
      */
     void add_licence(std::list<std::string>& content, const licence& l) const;
 
+    /**
+     * @brief Formats the file's preamble.
+     *
+     * The preamble is made up of the modeline, any potential code
+     * generation marker and the licence.
+     */
+    void format_preamble(std::ostream& s, const licence& l, const modeline& m,
+        const std::string& marker) const;
+
+    /**
+     * @brief Formats the file's postamble.
+     *
+     * The postamble is composed of a bottom modeline, if any.
+     */
+    void format_postamble(std::ostream& s, const modeline& m) const;
+
+    /**
+     * @brief Formats the starting part of the header guards.
+     */
+    void format_guards_begin(std::ostream& s,
+        const boost::filesystem::path& relative_file_path) const;
+
+    /**
+     * @brief Formats the ending part of the header guards.
+     */
+    void format_guards_end(std::ostream& s,
+        const boost::filesystem::path& relative_file_path) const;
+
 public:
     /**
      * @brief Formats the initial section of boilerplate.
      */
     void format_begin(std::ostream& s, const licence& l, const modeline& m,
         const std::string& marker, const cpp_includes& i,
-        const boost::filesystem::path relative_file_name) const;
+        const boost::filesystem::path& relative_file_path) const;
 
     /**
      * @brief Formats the end of the boilerplate.
      */
-    void format_end(std::ostream& s, const modeline& m) const;
+    void format_end(std::ostream& s, const modeline& m,
+        const boost::filesystem::path& relative_file_path) const;
 };
 
 } }

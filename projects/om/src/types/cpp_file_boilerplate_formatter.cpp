@@ -22,6 +22,7 @@
 #include <ostream>
 #include "dogen/om/types/modeline_formatter.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
+#include "dogen/om/types/cpp_header_guard_formatter.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 
 namespace {
@@ -68,9 +69,8 @@ add_licence(std::list<std::string>& content, const licence& l) const {
 }
 
 void cpp_file_boilerplate_formatter::
-format_begin(std::ostream& s, const licence& l, const modeline& m,
-    const std::string& marker, const cpp_includes& /*i*/,
-    const boost::filesystem::path /*relative_file_name*/) const {
+format_preamble(std::ostream& s, const licence& l, const modeline& m,
+    const std::string& marker) const {
 
     const bool is_modeline_top(m.location() == modeline_locations::top);
     std::list<std::string> content;
@@ -104,8 +104,29 @@ format_begin(std::ostream& s, const licence& l, const modeline& m,
     }
 }
 
+void cpp_file_boilerplate_formatter::format_guards_begin(std::ostream& s,
+    const boost::filesystem::path& relative_file_path) const {
+    cpp_header_guard_formatter f;
+    f.format_begin(s, relative_file_path);
+}
+
+void cpp_file_boilerplate_formatter::format_guards_end(std::ostream& s,
+    const boost::filesystem::path& relative_file_path) const {
+    cpp_header_guard_formatter f;
+    f.format_end(s, relative_file_path);
+}
+
 void cpp_file_boilerplate_formatter::
-format_end(std::ostream& s, const modeline& m) const {
+format_begin(std::ostream& s, const licence& l, const modeline& m,
+    const std::string& marker, const cpp_includes& /*i*/,
+    const boost::filesystem::path& relative_file_path) const {
+
+    format_preamble(s, l, m, marker);
+    format_guards_begin(s, relative_file_path);
+}
+
+void cpp_file_boilerplate_formatter::
+format_postamble(std::ostream& s, const modeline& m) const {
     if (m.location() == modeline_locations::bottom) {
         std::list<std::string> content;
         add_modeline(content, m);
@@ -119,6 +140,13 @@ format_end(std::ostream& s, const modeline& m) const {
 
         cf.format(s, content);
     }
+}
+
+void cpp_file_boilerplate_formatter::
+format_end(std::ostream& s, const modeline& m,
+    const boost::filesystem::path& relative_file_path) const {
+    format_postamble(s, m);
+    format_guards_end(s, relative_file_path);
 }
 
 } }
