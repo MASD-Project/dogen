@@ -143,6 +143,53 @@ const std::string guards_with_top_modeline(R"(/* -*- a_field: a_value -*-
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#endif
+)");
+
+const std::string guards_with_bottom_modeline(R"(/*
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+#ifndef A_PATH_HPP
+#define A_PATH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+/*
+ * Local variables:
+ * a_field: a_value
+ * End:
+ */
+#endif
+)");
+
+const std::string includes_with_top_modeline(R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+#ifndef A_PATH_HPP
+#define A_PATH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <win32/system_inc_1>
+#include <unix/system_inc_2>
+#include "user_inc_1"
+#include "user_inc_2"
 #endif
 )");
 
@@ -397,6 +444,48 @@ BOOST_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
     const auto r(s.str());
     BOOST_CHECK(r == guards_with_top_modeline);
     BOOST_LOG_SEV(lg, debug) << "expected: " << guards_with_top_modeline;
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+}
+
+BOOST_AUTO_TEST_CASE(header_guards_with_bottom_modeline_are_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("header_guards_with_bottom_modeline_are_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+
+    const auto m(mock_modeline(dogen::om::modeline_locations::bottom));
+    const auto l(mock_licence());
+
+    std::ostringstream s;
+    dogen::om::cpp_file_boilerplate_formatter f;
+    f.format_begin(s, l, m, marker, empty_includes, a_path);
+    f.format_end(s, m, a_path);
+    const auto r(s.str());
+    BOOST_CHECK(r == guards_with_bottom_modeline);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << guards_with_bottom_modeline;
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+}
+
+BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("includes_are_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+
+    dogen::om::cpp_includes i;
+    i.system().push_back("win32/system_inc_1"); // FIXME
+    i.system().push_back("unix/system_inc_2");
+    i.user().push_back("user_inc_1");
+    i.user().push_back("user_inc_2");
+
+    const auto m(mock_modeline(dogen::om::modeline_locations::top));
+    const auto l(mock_licence());
+
+    std::ostringstream s;
+    dogen::om::cpp_file_boilerplate_formatter f;
+    f.format_begin(s, l, m, marker, i, a_path);
+    f.format_end(s, m, a_path);
+    const auto r(s.str());
+    BOOST_CHECK(r == includes_with_top_modeline);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << includes_with_top_modeline;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }

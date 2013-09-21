@@ -95,6 +95,11 @@ private:
     void format_guards_end(std::ostream& s,
         const boost::filesystem::path& relative_file_path) const;
 
+    /**
+     * @brief Formats the preprocessor includes.
+     */
+    void format_includes(std::ostream& s, const cpp_includes& i) const;
+
 public:
     /**
      * @brief Formats the initial section of boilerplate.

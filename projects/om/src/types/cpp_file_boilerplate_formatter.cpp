@@ -23,6 +23,7 @@
 #include "dogen/om/types/modeline_formatter.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/cpp_header_guard_formatter.hpp"
+#include "dogen/om/types/cpp_include_formatter.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 
 namespace {
@@ -108,6 +109,9 @@ void cpp_file_boilerplate_formatter::format_guards_begin(std::ostream& s,
     const boost::filesystem::path& relative_file_path) const {
     cpp_header_guard_formatter f;
     f.format_begin(s, relative_file_path);
+
+    if (!relative_file_path.empty())
+        s << std::endl;
 }
 
 void cpp_file_boilerplate_formatter::format_guards_end(std::ostream& s,
@@ -116,13 +120,21 @@ void cpp_file_boilerplate_formatter::format_guards_end(std::ostream& s,
     f.format_end(s, relative_file_path);
 }
 
+
+void cpp_file_boilerplate_formatter::
+format_includes(std::ostream& s, const cpp_includes& i) const {
+    cpp_include_formatter f;
+    f.format(s, i);
+}
+
 void cpp_file_boilerplate_formatter::
 format_begin(std::ostream& s, const licence& l, const modeline& m,
-    const std::string& marker, const cpp_includes& /*i*/,
+    const std::string& marker, const cpp_includes& i,
     const boost::filesystem::path& relative_file_path) const {
 
     format_preamble(s, l, m, marker);
     format_guards_begin(s, relative_file_path);
+    format_includes(s, i);
 }
 
 void cpp_file_boilerplate_formatter::
