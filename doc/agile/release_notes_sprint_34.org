@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 34.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-20 Fri 00:09]
+Clock summary at [2013-09-21 Sat 02:59]
 
-| Headline                                                          | Time   |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *7:53* |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                   |        | 7:53 |      |
-| IMPLEMENTATION Release notes and backlog grooming                 |        |      | 0:04 |
-| COMPLETED Implement hydration manager in terms of other hydrators |        |      | 1:27 |
-| IMPLEMENTATION Create a basic C++ workflow in SML to OM model     |        |      | 2:59 |
-| IMPLEMENTATION Loading external models from file                  |        |      | 3:23 |
+| Headline                                                          | Time    |       |      |
+|-------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                      | *12:46* |       |      |
+|-------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                   |         | 12:46 |      |
+| IMPLEMENTATION Release notes and backlog grooming                 |         |       | 0:04 |
+| COMPLETED Implement hydration manager in terms of other hydrators |         |       | 1:27 |
+| IMPLEMENTATION Create a basic C++ workflow in SML to OM model     |         |       | 7:27 |
+| =std::list= of =boost::filesystem::path= does not compile         |         |       | 0:25 |
+| IMPLEMENTATION Loading external models from file                  |         |       | 3:23 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -38,6 +39,9 @@ Clock summary at [2013-09-20 Fri 00:09]
 - made it a stand alone template function as its pretty trivial.
 
 *** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+    CLOCK: [2013-09-20 Fri 23:20]--[2013-09-21 Sat 02:35] =>  3:15
+    CLOCK: [2013-09-20 Fri 18:10]--[2013-09-20 Fri 18:50] =>  0:40
+    CLOCK: [2013-09-20 Fri 07:47]--[2013-09-20 Fri 08:20] =>  0:33
     CLOCK: [2013-09-19 Thu 23:16]--[2013-09-20 Fri 00:09] =>  0:53
     CLOCK: [2013-09-19 Thu 22:00]--[2013-09-19 Thu 23:16] =>  1:16
     CLOCK: [2013-09-19 Thu 18:27]--[2013-09-19 Thu 18:55] =>  0:28
@@ -58,6 +62,12 @@ have tried to create an intermediate representation of C++, but
 instead created formatters that work at the SML level and they
 themselves perform the translation - collaborating with helper
 classes.
+
+*** =std::list= of =boost::filesystem::path= does not compile
+    CLOCK: [2013-09-21 Sat 02:34]--[2013-09-21 Sat 02:59] =>  0:25
+
+Creating a class with a list of paths does not compile. add a test to
+the boost model and fix it.
 
 *** Create an SML level concept for facets                            :story:
 

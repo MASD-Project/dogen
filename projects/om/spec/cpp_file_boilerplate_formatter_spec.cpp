@@ -367,6 +367,22 @@ BOOST_AUTO_TEST_CASE(postamble_with_just_modeline_at_the_bottom_is_formatted_cor
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
+BOOST_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_content_results_in_no_boilerplate");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+
+    const modeline m;
+    std::ostringstream s;
+    dogen::om::cpp_file_boilerplate_formatter f;
+    f.format_begin(s, empty_licence, m, empty_marker, empty_includes, empty_path);
+    f.format_end(s, m, empty_path);
+    const auto r(s.str());
+    BOOST_CHECK(r.empty());
+    BOOST_LOG_SEV(lg, debug) << "expected: <empty>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+}
+
 BOOST_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("header_guards_with_top_modeline_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
