@@ -26,32 +26,27 @@ namespace boost_model {
 class_f::class_f(class_f&& rhs)
     : prop_0_(std::move(rhs.prop_0_)),
       prop_1_(std::move(rhs.prop_1_)),
-      prop_2_(std::move(rhs.prop_2_)),
-      prop_3_(std::move(rhs.prop_3_)) { }
+      prop_2_(std::move(rhs.prop_2_)) { }
 
 class_f::class_f(
-    const boost::filesystem::path& prop_0,
-    const boost::gregorian::date& prop_1,
-    const boost::posix_time::ptime& prop_2,
-    const boost::posix_time::time_duration& prop_3)
+    const boost::gregorian::date& prop_0,
+    const boost::posix_time::ptime& prop_1,
+    const boost::posix_time::time_duration& prop_2)
     : prop_0_(prop_0),
       prop_1_(prop_1),
-      prop_2_(prop_2),
-      prop_3_(prop_3) { }
+      prop_2_(prop_2) { }
 
 void class_f::swap(class_f& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
     swap(prop_2_, other.prop_2_);
-    swap(prop_3_, other.prop_3_);
 }
 
 bool class_f::operator==(const class_f& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         prop_1_ == rhs.prop_1_ &&
-        prop_2_ == rhs.prop_2_ &&
-        prop_3_ == rhs.prop_3_;
+        prop_2_ == rhs.prop_2_;
 }
 
 class_f& class_f::operator=(class_f other) {
@@ -60,68 +55,52 @@ class_f& class_f::operator=(class_f other) {
     return *this;
 }
 
-const boost::filesystem::path& class_f::prop_0() const {
+const boost::gregorian::date& class_f::prop_0() const {
     return prop_0_;
 }
 
-boost::filesystem::path& class_f::prop_0() {
+boost::gregorian::date& class_f::prop_0() {
     return prop_0_;
 }
 
-void class_f::prop_0(const boost::filesystem::path& v) {
+void class_f::prop_0(const boost::gregorian::date& v) {
     prop_0_ = v;
 }
 
-void class_f::prop_0(const boost::filesystem::path&& v) {
+void class_f::prop_0(const boost::gregorian::date&& v) {
     prop_0_ = std::move(v);
 }
 
-const boost::gregorian::date& class_f::prop_1() const {
+const boost::posix_time::ptime& class_f::prop_1() const {
     return prop_1_;
 }
 
-boost::gregorian::date& class_f::prop_1() {
+boost::posix_time::ptime& class_f::prop_1() {
     return prop_1_;
 }
 
-void class_f::prop_1(const boost::gregorian::date& v) {
+void class_f::prop_1(const boost::posix_time::ptime& v) {
     prop_1_ = v;
 }
 
-void class_f::prop_1(const boost::gregorian::date&& v) {
+void class_f::prop_1(const boost::posix_time::ptime&& v) {
     prop_1_ = std::move(v);
 }
 
-const boost::posix_time::ptime& class_f::prop_2() const {
+const boost::posix_time::time_duration& class_f::prop_2() const {
     return prop_2_;
 }
 
-boost::posix_time::ptime& class_f::prop_2() {
+boost::posix_time::time_duration& class_f::prop_2() {
     return prop_2_;
 }
 
-void class_f::prop_2(const boost::posix_time::ptime& v) {
+void class_f::prop_2(const boost::posix_time::time_duration& v) {
     prop_2_ = v;
 }
 
-void class_f::prop_2(const boost::posix_time::ptime&& v) {
+void class_f::prop_2(const boost::posix_time::time_duration&& v) {
     prop_2_ = std::move(v);
-}
-
-const boost::posix_time::time_duration& class_f::prop_3() const {
-    return prop_3_;
-}
-
-boost::posix_time::time_duration& class_f::prop_3() {
-    return prop_3_;
-}
-
-void class_f::prop_3(const boost::posix_time::time_duration& v) {
-    prop_3_ = v;
-}
-
-void class_f::prop_3(const boost::posix_time::time_duration&& v) {
-    prop_3_ = std::move(v);
 }
 
 } }

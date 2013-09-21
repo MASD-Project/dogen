@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include "dogen/trivial_inheritance/serialization/move_ctor_base_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/move_ctor_descendant_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

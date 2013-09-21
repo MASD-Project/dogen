@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <boost/filesystem/path.hpp>
 #include "dogen/boost_model/serialization/class_f_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,10 +44,9 @@ public:
 
 public:
     class_f(
-        const boost::filesystem::path& prop_0,
-        const boost::gregorian::date& prop_1,
-        const boost::posix_time::ptime& prop_2,
-        const boost::posix_time::time_duration& prop_3);
+        const boost::gregorian::date& prop_0,
+        const boost::posix_time::ptime& prop_1,
+        const boost::posix_time::time_duration& prop_2);
 
 private:
     template<typename Archive>
@@ -58,25 +56,20 @@ private:
     friend void boost::serialization::load(Archive& ar, class_f& v, unsigned int version);
 
 public:
-    const boost::filesystem::path& prop_0() const;
-    boost::filesystem::path& prop_0();
-    void prop_0(const boost::filesystem::path& v);
-    void prop_0(const boost::filesystem::path&& v);
+    const boost::gregorian::date& prop_0() const;
+    boost::gregorian::date& prop_0();
+    void prop_0(const boost::gregorian::date& v);
+    void prop_0(const boost::gregorian::date&& v);
 
-    const boost::gregorian::date& prop_1() const;
-    boost::gregorian::date& prop_1();
-    void prop_1(const boost::gregorian::date& v);
-    void prop_1(const boost::gregorian::date&& v);
+    const boost::posix_time::ptime& prop_1() const;
+    boost::posix_time::ptime& prop_1();
+    void prop_1(const boost::posix_time::ptime& v);
+    void prop_1(const boost::posix_time::ptime&& v);
 
-    const boost::posix_time::ptime& prop_2() const;
-    boost::posix_time::ptime& prop_2();
-    void prop_2(const boost::posix_time::ptime& v);
-    void prop_2(const boost::posix_time::ptime&& v);
-
-    const boost::posix_time::time_duration& prop_3() const;
-    boost::posix_time::time_duration& prop_3();
-    void prop_3(const boost::posix_time::time_duration& v);
-    void prop_3(const boost::posix_time::time_duration&& v);
+    const boost::posix_time::time_duration& prop_2() const;
+    boost::posix_time::time_duration& prop_2();
+    void prop_2(const boost::posix_time::time_duration& v);
+    void prop_2(const boost::posix_time::time_duration&& v);
 
 public:
     bool operator==(const class_f& rhs) const;
@@ -89,10 +82,9 @@ public:
     class_f& operator=(class_f other);
 
 private:
-    boost::filesystem::path prop_0_;
-    boost::gregorian::date prop_1_;
-    boost::posix_time::ptime prop_2_;
-    boost::posix_time::time_duration prop_3_;
+    boost::gregorian::date prop_0_;
+    boost::posix_time::ptime prop_1_;
+    boost::posix_time::time_duration prop_2_;
 };
 
 } }

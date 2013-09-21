@@ -163,7 +163,8 @@ bool requires_manual_move_constructor(const std::string type_name) {
     return
         type_name == "optional" ||
         type_name == "path" ||
-        type_name == "variant";
+        type_name == "variant" ||
+        type_name == "time_duration";
 }
 
 std::string to_identifiable_name(const std::string n) {

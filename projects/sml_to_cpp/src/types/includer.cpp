@@ -203,6 +203,23 @@ void includer::append_boost_dependencies(
     using config::cpp_facet_types;
     using cpp::file_types;
 
+    const bool is_serialization(
+        cd.facet_type() == cpp_facet_types::serialization);
+    const bool is_implementation(cd.file_type() == file_types::implementation);
+
+    // FIXME: massive hack. boost doesn't have support for
+    // serialisation so we are using our own hacked headers
+    auto lambda([&](const std::string& type) {
+            std::string private_ser_header("utility/serialization/");
+            private_ser_header+= type + ".hpp";
+            const auto epp(model_.name().external_module_path());
+            if (!epp.empty())
+                private_ser_header = epp.front() + "/" + private_ser_header;
+
+            if (is_implementation && is_serialization && sn == type)
+                il.user().push_back(private_ser_header);
+        });
+
     /*
      * boost::shared_ptr
      */
@@ -212,9 +229,6 @@ void includer::append_boost_dependencies(
     if (is_header && is_types && is_sp)
         il.system().push_back(boost_.include(boost_types::shared_ptr));
 
-    const bool is_serialization(
-        cd.facet_type() == cpp_facet_types::serialization);
-    const bool is_implementation(cd.file_type() == file_types::implementation);
     if (is_implementation && is_serialization && is_sp)
         il.system().push_back(
             boost_.include(boost_types::serialization_shared_ptr));
@@ -247,6 +261,7 @@ void includer::append_boost_dependencies(
     const bool is_path(sn == boost_.type(boost_types::filesystem_path));
     if (is_header && is_types && is_path)
         il.system().push_back(boost_.include(boost_types::filesystem_path));
+    lambda(boost_.type(boost_types::filesystem_path));
 
     const bool is_test_data(cd.facet_type() == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && is_path)
@@ -382,7 +397,7 @@ void includer::append_std_dependencies(const cpp::content_descriptor& cd,
         if (!epp.empty())
             private_ser_header = epp.front() + "/" + private_ser_header;
 
-        if (is_implementation && is_serialization && sn== type)
+        if (is_implementation && is_serialization && sn == type)
             il.user().push_back(private_ser_header);
         });
 

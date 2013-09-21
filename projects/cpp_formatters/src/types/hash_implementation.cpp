@@ -73,7 +73,8 @@ bool hash_implementation::is_hashable(const cpp::nested_type_info& nti) {
         !nti.is_optional_like() &&
         !nti.is_variant_like() &&
         !nti.is_ptime() &&
-        !nti.is_time_duration();
+        !nti.is_time_duration() &&
+        !nti.is_filesystem_path();
 }
 
 void hash_implementation::combine_function(const cpp::class_info& ci) {
@@ -90,6 +91,27 @@ void hash_implementation::combine_function(const cpp::class_info& ci) {
         stream_ << indenter_ << "std::hash<HashableType> hasher;" << std::endl
                 << indenter_ << "seed ^= hasher(value) + 0x9e3779b9 + "
                 << "(seed << 6) + (seed >> 2);" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::path_helper(const cpp::nested_type_info& nti) {
+    const std::string identifiable_type_name(nti.complete_identifiable_name());
+    const std::string type_name(nti.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_" << identifiable_type_name
+            << "(const " << type_name << "& v) ";
+
+    utility_.open_scope();
+    {
+        positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        stream_ << indenter_
+                << "combine(seed, v.generic_string());" << std::endl;
+        stream_ << indenter_ << "return seed;" << std::endl;
     }
     utility_.close_scope();
 }
@@ -476,6 +498,8 @@ recursive_helper_method_creator(const cpp::nested_type_info& nti,
         ptime_helper(nti);
     else if (nti.is_time_duration())
         time_duration_helper(nti);
+    else if (nti.is_filesystem_path())
+        path_helper(nti);
 
     types_done.insert(nti.complete_identifiable_name());
 }
@@ -521,10 +545,7 @@ void hash_implementation::hasher_hash_method(const cpp::class_info& ci) {
             utility_.blank_line();
 
         for (const auto p : props) {
-            if (p.type().is_filesystem_path()) {
-                stream_ << indenter_ << "combine(seed, v." << p.name()
-                        << "().generic_string());" << std::endl;
-            } else if (p.type().is_date()) {
+            if (p.type().is_date()) {
                     stream_ << indenter_ << "combine(seed, v." << p.name()
                             << "().modjulian_day());" << std::endl;
             } else if (is_hashable(p.type())) {

@@ -318,7 +318,8 @@ void generator_implementation::date_helper(const cpp::nested_type_info& nti) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "unsigned int day(position % 28);" << std::endl
+        stream_ << indenter_ << "unsigned int day((position + 1) % 27);"
+                << std::endl
                 << indenter_ << "boost::gregorian::date r(2002, 2, day);"
                 << std::endl
                 << indenter_ << "return r;" << std::endl;
@@ -338,13 +339,14 @@ void generator_implementation::ptime_helper(const cpp::nested_type_info& nti) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "unsigned int day(position % 28);" << std::endl
+        stream_ << indenter_ << "unsigned int day((position + 1) % 27);"
+                << std::endl
                 << indenter_ << "using boost::gregorian::date;" << std::endl
                 << indenter_ << "using boost::posix_time::ptime;"
                 << std::endl
                 << indenter_ << "using boost::posix_time::time_duration;"
                 << std::endl
-                << indenter_ << "date d(2002, 2, day);"
+                << indenter_ << "date d(2002, 2, day);" << std::endl
                 << indenter_
                 << "ptime r(d, time_duration(1,2,3));" << std::endl
                 << indenter_ << "return r;" << std::endl;

@@ -55,6 +55,7 @@ private:
     bool is_hashable(const cpp::nested_type_info& nti);
 
 private:
+    void path_helper(const cpp::nested_type_info& nti);
     void pair_helper(const cpp::nested_type_info& nti);
     void optional_helper(const cpp::nested_type_info& nti);
     void variant_helper(const cpp::nested_type_info& nti);

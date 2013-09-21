@@ -25,5 +25,6 @@
 #include "dogen/boost_model/types/class_derived.hpp"
 #include "dogen/boost_model/types/class_e.hpp"
 #include "dogen/boost_model/types/class_f.hpp"
+#include "dogen/boost_model/types/class_g.hpp"
 #include "dogen/boost_model/types/pkg1/class_c.hpp"
 #include "dogen/boost_model/types/some_service.hpp"

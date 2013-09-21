@@ -18,33 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/hash/move_ctor_base_hash.hpp"
+#ifndef DOGEN_BOOST_MODEL_TEST_DATA_CLASS_G_TD_HPP
+#define DOGEN_BOOST_MODEL_TEST_DATA_CLASS_G_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-}
+#include "dogen/boost_model/types/class_g.hpp"
 
 namespace dogen {
-namespace trivial_inheritance {
+namespace boost_model {
 
-std::size_t move_ctor_base_hasher::hash(const move_ctor_base&v) {
-    std::size_t seed(0);
+class class_g_generator {
+public:
+    class_g_generator();
 
-    combine(seed, hash_boost_filesystem_path(v.prop_0()));
-    return seed;
-}
+public:
+    typedef dogen::boost_model::class_g result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

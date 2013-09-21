@@ -25,4 +25,5 @@
 #include "dogen/boost_model/odb/class_derived_pragmas.hpp"
 #include "dogen/boost_model/odb/class_e_pragmas.hpp"
 #include "dogen/boost_model/odb/class_f_pragmas.hpp"
+#include "dogen/boost_model/odb/class_g_pragmas.hpp"
 #include "dogen/boost_model/odb/pkg1/class_c_pragmas.hpp"

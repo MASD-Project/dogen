@@ -20,7 +20,7 @@ void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)
 {
     std::string s;
     if(Archive::is_saving::value)
-        s = p.string();
+        s = p.generic_string();
     ar & boost::serialization::make_nvp("path", s);
     if(Archive::is_loading::value)
         p = s;

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/hash/class_f_hash.hpp"
+#include "dogen/boost_model/hash/class_g_hash.hpp"
 
 namespace {
 
@@ -29,17 +29,17 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_posix_time_ptime(const boost::posix_time::ptime& v) {
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
     std::size_t seed(0);
-    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));
-    boost::posix_time::time_duration d(v - epoch);
-    seed = static_cast<std::size_t>(d.total_seconds());
+    combine(seed, v.generic_string());
     return seed;
 }
 
-inline std::size_t hash_boost_posix_time_time_duration(const boost::posix_time::time_duration& v) {
+inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::filesystem::path>& v){
     std::size_t seed(0);
-    seed = static_cast<std::size_t>(v.total_seconds());
+    for (const auto i : v) {
+        combine(seed, hash_boost_filesystem_path(i));
+    }
     return seed;
 }
 
@@ -48,12 +48,11 @@ inline std::size_t hash_boost_posix_time_time_duration(const boost::posix_time::
 namespace dogen {
 namespace boost_model {
 
-std::size_t class_f_hasher::hash(const class_f&v) {
+std::size_t class_g_hasher::hash(const class_g&v) {
     std::size_t seed(0);
 
-    combine(seed, v.prop_0().modjulian_day());
-    combine(seed, hash_boost_posix_time_ptime(v.prop_1()));
-    combine(seed, hash_boost_posix_time_time_duration(v.prop_2()));
+    combine(seed, hash_boost_filesystem_path(v.prop_0()));
+    combine(seed, hash_std_list_boost_filesystem_path(v.prop_1()));
 
     return seed;
 }

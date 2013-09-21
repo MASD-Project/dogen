@@ -30,6 +30,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -40,7 +46,7 @@ std::size_t move_ctor_descendant_hasher::hash(const move_ctor_descendant&v) {
 
     combine(seed, dynamic_cast<const dogen::trivial_inheritance::move_ctor_base&>(v));
 
-    combine(seed, v.prop_1().generic_string());
+    combine(seed, hash_boost_filesystem_path(v.prop_1()));
     return seed;
 }
 

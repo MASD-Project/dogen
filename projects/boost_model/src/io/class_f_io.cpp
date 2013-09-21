@@ -29,10 +29,9 @@ namespace boost_model {
 std::ostream& operator<<(std::ostream& s, const class_f& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::boost_model::class_f\"" << ", "
-      << "\"prop_0\": " << "\"" << v.prop_0().generic_string() << "\"" << ", "
+      << "\"prop_0\": " << "\"" << v.prop_0() << "\"" << ", "
       << "\"prop_1\": " << "\"" << v.prop_1() << "\"" << ", "
-      << "\"prop_2\": " << "\"" << v.prop_2() << "\"" << ", "
-      << "\"prop_3\": " << "\"" << v.prop_3() << "\""
+      << "\"prop_2\": " << "\"" << v.prop_2() << "\""
       << " }";
     return(s);
 }

@@ -18,33 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/hash/move_ctor_base_hash.hpp"
+#ifndef DOGEN_BOOST_MODEL_HASH_CLASS_G_HASH_HPP
+#define DOGEN_BOOST_MODEL_HASH_CLASS_G_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-}
+#include <functional>
+#include "dogen/boost_model/types/class_g.hpp"
 
 namespace dogen {
-namespace trivial_inheritance {
+namespace boost_model {
 
-std::size_t move_ctor_base_hasher::hash(const move_ctor_base&v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_boost_filesystem_path(v.prop_0()));
-    return seed;
-}
+struct class_g_hasher {
+public:
+    static std::size_t hash(const class_g& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::boost_model::class_g> {
+public:
+    size_t operator()(const dogen::boost_model::class_g& v) const {
+        return dogen::boost_model::class_g_hasher::hash(v);
+    }
+};
+
+}
+#endif
