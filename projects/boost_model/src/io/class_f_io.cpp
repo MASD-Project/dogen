@@ -23,6 +23,48 @@
 #include <ostream>
 #include "dogen/boost_model/io/class_f_io.hpp"
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::gregorian::date>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << *i << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::posix_time::ptime>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << *i << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::posix_time::time_duration>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << *i << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace boost_model {
 
@@ -31,7 +73,10 @@ std::ostream& operator<<(std::ostream& s, const class_f& v) {
       << "\"__type__\": " << "\"dogen::boost_model::class_f\"" << ", "
       << "\"prop_0\": " << "\"" << v.prop_0() << "\"" << ", "
       << "\"prop_1\": " << "\"" << v.prop_1() << "\"" << ", "
-      << "\"prop_2\": " << "\"" << v.prop_2() << "\""
+      << "\"prop_2\": " << "\"" << v.prop_2() << "\"" << ", "
+      << "\"prop_3\": " << v.prop_3() << ", "
+      << "\"prop_4\": " << v.prop_4() << ", "
+      << "\"prop_5\": " << v.prop_5()
       << " }";
     return(s);
 }

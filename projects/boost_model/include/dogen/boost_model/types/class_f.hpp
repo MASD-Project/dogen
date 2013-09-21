@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <list>
 #include "dogen/boost_model/serialization/class_f_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +47,10 @@ public:
     class_f(
         const boost::gregorian::date& prop_0,
         const boost::posix_time::ptime& prop_1,
-        const boost::posix_time::time_duration& prop_2);
+        const boost::posix_time::time_duration& prop_2,
+        const std::list<boost::gregorian::date>& prop_3,
+        const std::list<boost::posix_time::ptime>& prop_4,
+        const std::list<boost::posix_time::time_duration>& prop_5);
 
 private:
     template<typename Archive>
@@ -71,6 +75,21 @@ public:
     void prop_2(const boost::posix_time::time_duration& v);
     void prop_2(const boost::posix_time::time_duration&& v);
 
+    const std::list<boost::gregorian::date>& prop_3() const;
+    std::list<boost::gregorian::date>& prop_3();
+    void prop_3(const std::list<boost::gregorian::date>& v);
+    void prop_3(const std::list<boost::gregorian::date>&& v);
+
+    const std::list<boost::posix_time::ptime>& prop_4() const;
+    std::list<boost::posix_time::ptime>& prop_4();
+    void prop_4(const std::list<boost::posix_time::ptime>& v);
+    void prop_4(const std::list<boost::posix_time::ptime>&& v);
+
+    const std::list<boost::posix_time::time_duration>& prop_5() const;
+    std::list<boost::posix_time::time_duration>& prop_5();
+    void prop_5(const std::list<boost::posix_time::time_duration>& v);
+    void prop_5(const std::list<boost::posix_time::time_duration>&& v);
+
 public:
     bool operator==(const class_f& rhs) const;
     bool operator!=(const class_f& rhs) const {
@@ -85,6 +104,9 @@ private:
     boost::gregorian::date prop_0_;
     boost::posix_time::ptime prop_1_;
     boost::posix_time::time_duration prop_2_;
+    std::list<boost::gregorian::date> prop_3_;
+    std::list<boost::posix_time::ptime> prop_4_;
+    std::list<boost::posix_time::time_duration> prop_5_;
 };
 
 } }

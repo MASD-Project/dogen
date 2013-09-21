@@ -62,6 +62,7 @@ private:
     void sequence_container_helper(const cpp::nested_type_info& nti);
     void associative_container_helper(const cpp::nested_type_info& nti);
     void smart_pointer_helper(const cpp::nested_type_info& nti);
+    void date_helper(const cpp::nested_type_info& nti);
     void ptime_helper(const cpp::nested_type_info& nti);
     void time_duration_helper(const cpp::nested_type_info& nti);
     void recursive_helper_method_creator(const cpp::nested_type_info& nti,

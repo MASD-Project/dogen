@@ -72,6 +72,7 @@ bool hash_implementation::is_hashable(const cpp::nested_type_info& nti) {
         !nti.is_pair() &&
         !nti.is_optional_like() &&
         !nti.is_variant_like() &&
+        !nti.is_date() &&
         !nti.is_ptime() &&
         !nti.is_time_duration() &&
         !nti.is_filesystem_path();
@@ -417,6 +418,30 @@ smart_pointer_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
+void hash_implementation::date_helper(const cpp::nested_type_info& nti) {
+    const std::string identifiable_type_name(
+        nti.complete_identifiable_name());
+    const std::string type_name(nti.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_" << identifiable_type_name
+            << "(const " << type_name << "& v) ";
+
+    utility_.open_scope();
+    {
+        positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        stream_ << indenter_
+                << "combine(seed, v.modjulian_day());"
+                << std::endl;
+
+        stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
 void hash_implementation::ptime_helper(const cpp::nested_type_info& nti) {
     const std::string identifiable_type_name(
         nti.complete_identifiable_name());
@@ -494,6 +519,8 @@ recursive_helper_method_creator(const cpp::nested_type_info& nti,
         optional_helper(nti);
     else if (nti.is_variant_like())
         variant_helper(nti);
+    else if (nti.is_date())
+        date_helper(nti);
     else if (nti.is_ptime())
         ptime_helper(nti);
     else if (nti.is_time_duration())

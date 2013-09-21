@@ -29,6 +29,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_gregorian_date(const boost::gregorian::date& v) {
+    std::size_t seed(0);
+    combine(seed, v.modjulian_day());
+    return seed;
+}
+
 inline std::size_t hash_boost_posix_time_ptime(const boost::posix_time::ptime& v) {
     std::size_t seed(0);
     const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));
@@ -43,6 +49,30 @@ inline std::size_t hash_boost_posix_time_time_duration(const boost::posix_time::
     return seed;
 }
 
+inline std::size_t hash_std_list_boost_gregorian_date(const std::list<boost::gregorian::date>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_boost_gregorian_date(i));
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_boost_posix_time_ptime(const std::list<boost::posix_time::ptime>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_boost_posix_time_ptime(i));
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_boost_posix_time_time_duration(const std::list<boost::posix_time::time_duration>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_boost_posix_time_time_duration(i));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -54,6 +84,9 @@ std::size_t class_f_hasher::hash(const class_f&v) {
     combine(seed, v.prop_0().modjulian_day());
     combine(seed, hash_boost_posix_time_ptime(v.prop_1()));
     combine(seed, hash_boost_posix_time_time_duration(v.prop_2()));
+    combine(seed, hash_std_list_boost_gregorian_date(v.prop_3()));
+    combine(seed, hash_std_list_boost_posix_time_ptime(v.prop_4()));
+    combine(seed, hash_std_list_boost_posix_time_time_duration(v.prop_5()));
 
     return seed;
 }

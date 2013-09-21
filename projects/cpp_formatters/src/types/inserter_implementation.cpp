@@ -114,7 +114,12 @@ sequence_container_helper(const cpp::nested_type_info& nti) {
                 stream_ << indenter_ << "if (i != v.begin()) s" << space_inserter
                         << utility_.quote(", ") << ";" << std::endl;
 
-                if (containee.is_string_like()) {
+                if (containee.is_date() || containee.is_ptime() ||
+                    containee.is_time_duration()) {
+                    stream_ << indenter_ << "s" << space_inserter
+                            << utility_.quote_escaped_streamed("*i")
+                            << ";" << std::endl;
+                } else if (containee.is_string_like()) {
                     const std::string tus(nti.is_char_like() ? "*i" :
                         "tidy_up_string(*i)");
                     stream_ << indenter_ << "s" << space_inserter
@@ -181,7 +186,11 @@ associative_container_helper(const cpp::nested_type_info& nti) {
                             colon) << ";" << std::endl;
 
                 const auto key(children.front());
-                if (key.is_string_like()) {
+                if (key.is_date() || key.is_ptime() || key.is_time_duration()) {
+                    stream_ << indenter_ << "s" << space_inserter
+                            << utility_.quote_escaped_streamed("i->first")
+                            << ";" << std::endl;
+                } else if (key.is_string_like()) {
                     const std::string tus(nti.is_char_like() ? "i->first" :
                         "tidy_up_string(i->first)");
                     stream_ << indenter_ << "s" << space_inserter
@@ -201,7 +210,12 @@ associative_container_helper(const cpp::nested_type_info& nti) {
                             colon) << ";" << std::endl;
 
                 const auto value(children.back());
-                if (value.is_string_like()) {
+                if (value.is_date() || value.is_ptime() ||
+                    value.is_time_duration()) {
+                    stream_ << indenter_ << "s" << space_inserter
+                            << utility_.quote_escaped_streamed("i->second")
+                            << ";" << std::endl;
+                } else if (value.is_string_like()) {
                     const std::string tus(nti.is_char_like() ? "i->second" :
                         "tidy_up_string(i->second)");
                     stream_ << indenter_ << "s" << space_inserter
