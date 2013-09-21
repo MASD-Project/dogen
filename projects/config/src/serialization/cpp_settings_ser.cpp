@@ -31,6 +31,7 @@
 #include <boost/serialization/string.hpp>
 #include "dogen/config/serialization/cpp_facet_types_ser.hpp"
 #include "dogen/config/serialization/cpp_settings_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

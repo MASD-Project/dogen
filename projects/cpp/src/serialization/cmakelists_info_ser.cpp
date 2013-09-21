@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/cmakelists_info_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

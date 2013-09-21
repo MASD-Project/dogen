@@ -30,6 +30,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
 inline std::size_t hash_std_vector_dogen_config_reference(const std::vector<dogen::config::reference>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -46,7 +52,7 @@ namespace config {
 std::size_t modeling_settings_hasher::hash(const modeling_settings&v) {
     std::size_t seed(0);
 
-    combine(seed, v.target().generic_string());
+    combine(seed, hash_boost_filesystem_path(v.target()));
     combine(seed, v.external_module_path());
     combine(seed, hash_std_vector_dogen_config_reference(v.references()));
     combine(seed, v.verbose());

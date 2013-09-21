@@ -30,6 +30,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
 inline std::size_t hash_std_set_dogen_config_cpp_facet_types(const std::set<dogen::config::cpp_facet_types>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -48,9 +54,9 @@ std::size_t cpp_settings_hasher::hash(const cpp_settings&v) {
 
     combine(seed, v.verbose());
     combine(seed, v.split_project());
-    combine(seed, v.project_directory().generic_string());
-    combine(seed, v.source_directory().generic_string());
-    combine(seed, v.include_directory().generic_string());
+    combine(seed, hash_boost_filesystem_path(v.project_directory()));
+    combine(seed, hash_boost_filesystem_path(v.source_directory()));
+    combine(seed, hash_boost_filesystem_path(v.include_directory()));
     combine(seed, v.disable_backend());
     combine(seed, v.disable_cmakelists());
     combine(seed, hash_std_set_dogen_config_cpp_facet_types(v.enabled_facets()));

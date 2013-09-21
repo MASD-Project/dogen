@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include "dogen/config/serialization/archive_types_ser.hpp"
 #include "dogen/config/serialization/troubleshooting_settings_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

@@ -38,6 +38,7 @@
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/source_file_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

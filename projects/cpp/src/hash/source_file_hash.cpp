@@ -84,6 +84,12 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
 inline std::size_t hash_boost_optional_dogen_cpp_namespace_info(const boost::optional<dogen::cpp::namespace_info>& v){
     std::size_t seed(0);
 
@@ -121,10 +127,10 @@ std::size_t source_file_hasher::hash(const source_file&v) {
     combine(seed, v.header_guard());
     combine(seed, hash_std_list_std_string(v.system_includes()));
     combine(seed, hash_std_list_std_string(v.user_includes()));
-    combine(seed, v.file_path().generic_string());
+    combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, hash_boost_optional_dogen_cpp_namespace_info(v.namespace_info()));
     combine(seed, hash_boost_optional_dogen_cpp_visitor_info(v.visitor_info()));
-    combine(seed, v.relative_path().generic_string());
+    combine(seed, hash_boost_filesystem_path(v.relative_path()));
 
     return seed;
 }

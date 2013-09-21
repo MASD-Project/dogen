@@ -31,6 +31,7 @@
 #include <boost/serialization/vector.hpp>
 #include "dogen/config/serialization/modeling_settings_ser.hpp"
 #include "dogen/config/serialization/reference_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
