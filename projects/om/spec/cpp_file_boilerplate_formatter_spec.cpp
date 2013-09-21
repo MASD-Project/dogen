@@ -34,8 +34,8 @@ const std::string test_module("om");
 const std::string test_suite("cpp_file_boilerplate_formatter_spec");
 const std::string marker("this is a marker");
 const std::string empty_marker;
-const dogen::om::licence empty_licence;
-const dogen::om::cpp_includes empty_includes;
+const dogen::om::licence empty_licence = dogen::om::licence();
+const dogen::om::cpp_includes empty_includes = dogen::om::cpp_includes();
 const boost::filesystem::path empty_path;
 const boost::filesystem::path a_path("a/path.hpp");
 

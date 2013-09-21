@@ -31,7 +31,7 @@
 namespace {
 
 const std::string test_module("om");
-const std::string test_suite("cpp_include_formatter_spec_spec");
+const std::string test_suite("cpp_include_formatter_spec");
 const dogen::om::cpp_includes empty_includes;
 
 const std::string with_includes(R"(#include <win32/system_inc_1>
@@ -45,7 +45,7 @@ const std::string with_includes(R"(#include <win32/system_inc_1>
 using namespace dogen::om;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(cpp_include_formatter_spec)
+BOOST_AUTO_TEST_SUITE(cpp_include_formatter)
 
 BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes) {
     SETUP_TEST_LOG_SOURCE("non_empty_includes_produces_expected_preprocessor_includes");
