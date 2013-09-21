@@ -227,8 +227,11 @@ dogen::om::licence mock_licence(const bool multiline = false) {
 
 dogen::om::cpp_includes mock_includes() {
     dogen::om::cpp_includes r;
-    r.user(std::list<std::string>{"user_include"});
-    r.system(std::list<std::string>{"system_include"});
+    // FIXME: bug in generic_string so not testing win32 paths atm
+    r.system().push_back("win32/system_inc_1");
+    r.system().push_back("unix/system_inc_2");
+    r.user().push_back("user_inc_1");
+    r.user().push_back("user_inc_2");
     return r;
 }
 
@@ -470,12 +473,7 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("includes_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    dogen::om::cpp_includes i;
-    i.system().push_back("win32/system_inc_1"); // FIXME
-    i.system().push_back("unix/system_inc_2");
-    i.user().push_back("user_inc_1");
-    i.user().push_back("user_inc_2");
-
+    const dogen::om::cpp_includes i(mock_includes());
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
 
