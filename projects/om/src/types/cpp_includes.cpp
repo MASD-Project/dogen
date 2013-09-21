@@ -24,8 +24,8 @@ namespace dogen {
 namespace om {
 
 cpp_includes::cpp_includes(
-    const std::list<std::string>& system,
-    const std::list<std::string>& user)
+    const std::list<boost::filesystem::path>& system,
+    const std::list<boost::filesystem::path>& user)
     : system_(system),
       user_(user) { }
 
@@ -46,35 +46,35 @@ cpp_includes& cpp_includes::operator=(cpp_includes other) {
     return *this;
 }
 
-const std::list<std::string>& cpp_includes::system() const {
+const std::list<boost::filesystem::path>& cpp_includes::system() const {
     return system_;
 }
 
-std::list<std::string>& cpp_includes::system() {
+std::list<boost::filesystem::path>& cpp_includes::system() {
     return system_;
 }
 
-void cpp_includes::system(const std::list<std::string>& v) {
+void cpp_includes::system(const std::list<boost::filesystem::path>& v) {
     system_ = v;
 }
 
-void cpp_includes::system(const std::list<std::string>&& v) {
+void cpp_includes::system(const std::list<boost::filesystem::path>&& v) {
     system_ = std::move(v);
 }
 
-const std::list<std::string>& cpp_includes::user() const {
+const std::list<boost::filesystem::path>& cpp_includes::user() const {
     return user_;
 }
 
-std::list<std::string>& cpp_includes::user() {
+std::list<boost::filesystem::path>& cpp_includes::user() {
     return user_;
 }
 
-void cpp_includes::user(const std::list<std::string>& v) {
+void cpp_includes::user(const std::list<boost::filesystem::path>& v) {
     user_ = v;
 }
 
-void cpp_includes::user(const std::list<std::string>&& v) {
+void cpp_includes::user(const std::list<boost::filesystem::path>&& v) {
     user_ = std::move(v);
 }
 

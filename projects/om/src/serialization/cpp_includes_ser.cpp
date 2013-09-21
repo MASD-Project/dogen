@@ -28,8 +28,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/string.hpp>
 #include "dogen/om/serialization/cpp_includes_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

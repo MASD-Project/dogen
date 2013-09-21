@@ -23,16 +23,17 @@
 
 namespace {
 
-std::string create_std_string(const unsigned int position) {
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
+std::list<boost::filesystem::path> create_std_list_boost_filesystem_path(unsigned int position) {
+    std::list<boost::filesystem::path> r;
     for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_std_string(position + i));
+        r.push_back(create_boost_filesystem_path(position + i));
     }
     return r;
 }
@@ -46,8 +47,8 @@ cpp_includes_generator::cpp_includes_generator() : position_(0) { }
 
 void cpp_includes_generator::
 populate(const unsigned int position, result_type& v) {
-    v.system(create_std_list_std_string(position + 0));
-    v.user(create_std_list_std_string(position + 1));
+    v.system(create_std_list_boost_filesystem_path(position + 0));
+    v.user(create_std_list_boost_filesystem_path(position + 1));
 }
 
 cpp_includes_generator::result_type

@@ -5155,13 +5155,13 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="44,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,-7.05;56.485,-3.35"/>
+        <dia:rectangle val="43.95,-7.05;61.105,-3.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="44,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -5259,7 +5259,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
             <dia:string>#system#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::filesystem::path&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5284,7 +5284,7 @@ These are expected to use angle brackets and be on the system path.#</dia:string
             <dia:string>#user#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::filesystem::path&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6950,7 +6950,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="45.2975,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.5475,-3.45;50.4175,10.8"/>
+        <dia:rectangle val="44.5475,-3.45;52.7275,10.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6958,8 +6958,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="45.2975,10"/>
         <dia:point val="45.2975,2.95"/>
-        <dia:point val="50.2175,2.95"/>
-        <dia:point val="50.2175,-3.4"/>
+        <dia:point val="52.5275,2.95"/>
+        <dia:point val="52.5275,-3.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -40,6 +40,7 @@ Clock summary at [2013-09-21 Sat 22:30]
 
 *** COMPLETED =std::list= of =boost::filesystem::path= does not compile :spike:
     CLOSED: [2013-09-21 Sat 22:30]
+    CLOCK: [2013-09-21 Sat 22:26]--[2013-09-21 Sat 23:07] =>  0:41
     CLOCK: [2013-09-21 Sat 21:55]--[2013-09-21 Sat 22:26] =>  0:31
     CLOCK: [2013-09-21 Sat 20:58]--[2013-09-21 Sat 21:30] =>  0:32
     CLOCK: [2013-09-21 Sat 20:30]--[2013-09-21 Sat 20:57] =>  0:27

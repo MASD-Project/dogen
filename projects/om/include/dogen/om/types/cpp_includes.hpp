@@ -26,8 +26,8 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include <list>
-#include <string>
 #include "dogen/om/serialization/cpp_includes_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,8 +45,8 @@ public:
 
 public:
     cpp_includes(
-        const std::list<std::string>& system,
-        const std::list<std::string>& user);
+        const std::list<boost::filesystem::path>& system,
+        const std::list<boost::filesystem::path>& user);
 
 private:
     template<typename Archive>
@@ -62,10 +62,10 @@ public:
      * These are expected to use angle brackets and be on the system path.
      */
     /**@{*/
-    const std::list<std::string>& system() const;
-    std::list<std::string>& system();
-    void system(const std::list<std::string>& v);
-    void system(const std::list<std::string>&& v);
+    const std::list<boost::filesystem::path>& system() const;
+    std::list<boost::filesystem::path>& system();
+    void system(const std::list<boost::filesystem::path>& v);
+    void system(const std::list<boost::filesystem::path>&& v);
     /**@}*/
 
     /**
@@ -74,10 +74,10 @@ public:
      * These are expected to use quotes and be on the user path.
      */
     /**@{*/
-    const std::list<std::string>& user() const;
-    std::list<std::string>& user();
-    void user(const std::list<std::string>& v);
-    void user(const std::list<std::string>&& v);
+    const std::list<boost::filesystem::path>& user() const;
+    std::list<boost::filesystem::path>& user();
+    void user(const std::list<boost::filesystem::path>& v);
+    void user(const std::list<boost::filesystem::path>&& v);
     /**@}*/
 
 public:
@@ -91,8 +91,8 @@ public:
     cpp_includes& operator=(cpp_includes other);
 
 private:
-    std::list<std::string> system_;
-    std::list<std::string> user_;
+    std::list<boost::filesystem::path> system_;
+    std::list<boost::filesystem::path> user_;
 };
 
 } }

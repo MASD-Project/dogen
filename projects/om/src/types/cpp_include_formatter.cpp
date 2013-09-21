@@ -40,16 +40,13 @@ namespace om {
 
 void cpp_include_formatter::
 format(std::ostream& s, const cpp_includes& i) const {
-    // FIXME: hack until we can replace strings with boost paths.
     for (const auto& inc : i.system()) {
-        const boost::filesystem::path p(inc);
-        s << include << open_system << p.generic_string()
+        s << include << open_system << inc.generic_string()
           << close_system << std::endl;
     }
 
     for (const auto& inc : i.user()) {
-        const boost::filesystem::path p(inc);
-        s << include << open_user << p.generic_string()
+        s << include << open_user << inc.generic_string()
           << close_user << std::endl;
     }
 }
