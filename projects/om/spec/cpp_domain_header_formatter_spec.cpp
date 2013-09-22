@@ -39,13 +39,17 @@ const std::string test_suite("cpp_domain_header_formatter_spec");
 const boost::filesystem::path empty_path;
 const boost::filesystem::path non_empty_path("a/file.hpp");
 
-const std::string with_guard(R"(#ifndef A_FILE_HPP
-#define A_FILE_HPP
+const std::string enumeration_two_enumerators(R"(namespace some_model_0 {
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-#endif
+/**
+ * @brief Some documentation
+ */
+enum class some_type_0 : unsigned int {
+    some_type_0 = 0, ///< Some documentation
+    some_type_1 = 1 ///< Some documentation
+};
+
+}
 )");
 
 }
@@ -58,8 +62,8 @@ typedef dogen::sml::test::mock_model_factory factory;
 
 BOOST_AUTO_TEST_SUITE(cpp_domain_header_formatter)
 
-BOOST_AUTO_TEST_CASE(enumeration_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("enumeration_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("enumeration_with_two_enumerators_produces_expected_domain_header");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto ot(object_types::enumeration);
@@ -73,8 +77,8 @@ BOOST_AUTO_TEST_CASE(enumeration_produces_expected_domain_header) {
     f.format(s, e, dogen::om::licence(), dogen::om::modeline(),
         std::string()/*marker*/, m);
     const auto r(s.str());
-    // BOOST_CHECK(r == with_guard);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << with_guard;
+    BOOST_CHECK(r == enumeration_two_enumerators);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }

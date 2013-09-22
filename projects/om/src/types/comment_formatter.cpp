@@ -35,6 +35,7 @@ const std::string doxygen_previous_identifier("<");
 const std::string shell_style("#");
 const std::string sql_style("--");
 const std::string space(" ");
+const std::string brief("@brief");
 
 }
 
@@ -127,13 +128,19 @@ format(std::ostream& s, const std::list<std::string>& content,
             } else
                 add_comment_middle_marker(s);
 
-            if (!line.empty())
-                s << space << line;
+            if (!line.empty()) {
+                s << space;
+                if (is_first_line && is_first_block &&
+                    use_documentation_tool_markup_ &&
+                    !documenting_previous_identifier_)
+                    s << brief << space;
+                s << line;
+            }
 
             s << std::endl;
             is_first_line = false;
         }
-        is_first_block = false;
+            is_first_block = false;
     }
 
     if (!content_found) {

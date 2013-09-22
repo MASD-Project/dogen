@@ -19,15 +19,23 @@
  *
  */
 #include <sstream>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/om/types/formatting_error.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 #include "dogen/om/types/cpp_domain_header_formatter.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
+auto lg(logger_factory("om_formatters.modeline_formatter"));
+
 const std::string empty;
+const std::string missing_stream_ptr("Stream pointer is null");
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
@@ -54,19 +62,34 @@ cpp_domain_header_formatter::cpp_domain_header_formatter()
           comment_styles::cpp_style,
           !last_line_is_blank) { }
 
+std::list<std::string> cpp_domain_header_formatter::
+namespaces(const sml::qname& qn) const {
+    std::list<std::string> r(qn.external_module_path());
+
+    if (!qn.model_name().empty())
+        r.push_back(qn.model_name());
+
+    const auto mp(qn.module_path());
+    r.insert(r.end(), mp.begin(), mp.end());
+
+    return r;
+}
+
 void cpp_domain_header_formatter::
 visit(const dogen::sml::enumeration& e) const {
     if (stream_ == nullptr) {
-        // throw
+        BOOST_LOG_SEV(lg, error) << missing_stream_ptr;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_stream_ptr));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Formatting enumeration: " << e.name();
 
     std::ostream& s(*stream_);
     cpp_formatters::indenter indenter;
     cpp_formatters::utility u(*stream_, indenter);
 
     {
-        std::list<std::string> namespaces;
-        cpp_formatters::namespace_helper ns(s, namespaces);
+        cpp_formatters::namespace_helper ns(s, namespaces(e.name()));
 
         u.blank_line();
 
@@ -82,21 +105,28 @@ visit(const dogen::sml::enumeration& e) const {
             std::ostringstream comment;
             for (const auto& enumerator : e.enumerators()) {
                 if (!is_first) {
-                    s << assignment.str() << "," << comment.str() << std::endl;
+                    const auto c(comment.str());
+                    s << assignment.str() << ",";
+                    if (!c.empty())
+                        s << " " << c;
                     assignment.str(empty);
                     comment.str(empty);
                 }
                 assignment << indenter << enumerator.name() << " = "
                            << enumerator.value();
-                doxygen_previous_.format(s, comment.str());
+                doxygen_previous_.format(comment, e.documentation());
                 is_first = false;
             }
-            s << assignment.str() << comment.str() << std::endl;
+
+            s << assignment.str();
+            const auto c(comment.str());
+            if (!c.empty())
+                s << " " << c;
         }
         s << indenter << "};" << std::endl;
         u.blank_line();
     }
-    u.blank_line(2);
+    u.blank_line();
 }
 
 void cpp_domain_header_formatter::

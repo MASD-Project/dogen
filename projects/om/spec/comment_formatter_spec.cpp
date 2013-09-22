@@ -67,7 +67,7 @@ const std::string function_doxygen(R"(/**
  * @brief Ends the comment block.
  */
 )");
-const std::string doxygen_brief("@brief Ends the comment block.");
+const std::string doxygen_brief("Ends the comment block.");
 
 const std::string modeline(
     "-*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-");
@@ -75,7 +75,7 @@ const std::string licence(R"(Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
 
 This program is free software; you can redistribute it and/or modify)");
 
-const std::string doxgen_multi_line(R"(@brief OM is the Output Model.
+const std::string doxgen_multi_line(R"(OM is the Output Model.
 
 @section om_0 Objective
 

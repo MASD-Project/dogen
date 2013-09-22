@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <ostream>
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
@@ -46,6 +48,9 @@ public:
 private:
     using sml::type_visitor::visit;
     void visit(const dogen::sml::enumeration& e) const override;
+
+private:
+    std::list<std::string> namespaces(const sml::qname& qn) const;
 
 public:
     void format(std::ostream& s, const sml::type& t, const licence& l,
