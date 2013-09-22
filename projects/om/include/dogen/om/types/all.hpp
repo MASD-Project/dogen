@@ -25,6 +25,7 @@
 #include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/comment_styles.hpp"
+#include "dogen/om/types/context.hpp"
 #include "dogen/om/types/cpp_domain_header_formatter.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 #include "dogen/om/types/cpp_header_guard_formatter.hpp"

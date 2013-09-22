@@ -29,6 +29,7 @@
 #include "dogen/om/serialization/cmake_add_library_ser.hpp"
 #include "dogen/om/serialization/cmake_install_ser.hpp"
 #include "dogen/om/serialization/cmake_set_target_properties_ser.hpp"
+#include "dogen/sml/serialization/registrar_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
@@ -39,6 +40,8 @@ namespace om {
 
 template<typename Archive>
 void register_types(Archive& ar) {
+    sml::register_types(ar);
+
     ar.template register_type<dogen::om::cmake_add_library>();
     ar.template register_type<dogen::om::cmake_install>();
     ar.template register_type<dogen::om::cmake_set_target_properties>();
