@@ -49,8 +49,7 @@ namespace dogen {
 namespace om {
 
 cpp_domain_header_formatter::cpp_domain_header_formatter()
-    : stream_(nullptr),
-      doxygen_next_(
+    : doxygen_next_(
           !start_on_first_line,
           use_documentation_tool_markup,
           !documenting_previous_identifier,
@@ -78,25 +77,25 @@ namespaces(const sml::qname& qn) const {
 
 void cpp_domain_header_formatter::
 visit(const dogen::sml::enumeration& e) const {
-    if (stream_ == nullptr) {
+    if (context_ == nullptr) {
         BOOST_LOG_SEV(lg, error) << missing_stream_ptr;
         BOOST_THROW_EXCEPTION(formatting_error(missing_stream_ptr));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Formatting enumeration: " << e.name();
 
-    std::ostream& s(*stream_);
     cpp_formatters::indenter indenter;
-    cpp_formatters::utility u(*stream_, indenter);
+    cpp_formatters::utility u(context_->stream(), indenter);
 
     {
-        cpp_formatters::namespace_helper ns(s, namespaces(e.name()));
+        cpp_formatters::namespace_helper
+            ns(context_->stream(), namespaces(e.name()));
 
         u.blank_line();
 
-        doxygen_next_.format(*stream_, e.documentation());
-        s << indenter << "enum class " << e.name().simple_name()
-          << " : unsigned int ";
+        doxygen_next_.format(context_->stream(), e.documentation());
+        context_->stream() << indenter << "enum class "
+                          << e.name().simple_name() << " : unsigned int ";
 
         u.open_scope();
         {
@@ -107,9 +106,9 @@ visit(const dogen::sml::enumeration& e) const {
             for (const auto& enumerator : e.enumerators()) {
                 if (!is_first) {
                     const auto c(comment.str());
-                    s << assignment.str() << ",";
+                    context_->stream() << assignment.str() << ",";
                     if (!c.empty())
-                        s << " " << c;
+                        context_->stream() << " " << c;
                     assignment.str(empty);
                     comment.str(empty);
                 }
@@ -119,12 +118,12 @@ visit(const dogen::sml::enumeration& e) const {
                 is_first = false;
             }
 
-            s << assignment.str();
+            context_->stream() << assignment.str();
             const auto c(comment.str());
             if (!c.empty())
-                s << " " << c;
+                context_->stream() << " " << c;
         }
-        s << indenter << "};" << std::endl;
+        context_->stream() << indenter << "};" << std::endl;
         u.blank_line();
     }
     u.blank_line();
@@ -133,9 +132,9 @@ visit(const dogen::sml::enumeration& e) const {
 void cpp_domain_header_formatter::
 format(std::ostream& s, const sml::type& t, const licence& l,
     const modeline& m, const std::string& marker,
-    const sml::model& /*model*/) const {
+    const sml::indexer_interface& indexer) const {
 
-    stream_ = &s;
+    context_ = std::unique_ptr<context>(new context(s, indexer));
 
     const cpp_includes i = cpp_includes();
     const boost::filesystem::path relative_file_path;
@@ -144,7 +143,7 @@ format(std::ostream& s, const sml::type& t, const licence& l,
     t.accept(*this);
     f.format_end(s, m, relative_file_path);
 
-    stream_ = nullptr;
+    context_ = std::unique_ptr<context>();
 }
 
 } }

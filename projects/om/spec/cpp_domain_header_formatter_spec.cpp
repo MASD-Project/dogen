@@ -25,6 +25,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
+#include "dogen/sml/types/indexer_interface.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/om/types/all.hpp"
 #include "dogen/om/io/all_io.hpp"
@@ -52,6 +53,40 @@ enum class some_type_0 : unsigned int {
 }
 )");
 
+class mock_indexer : public dogen::sml::indexer_interface {
+public:
+    mock_indexer() = default;
+    mock_indexer(const mock_indexer&) = default;
+    mock_indexer(mock_indexer&&) = default;
+    mock_indexer& operator=(const mock_indexer&) = default;
+
+public:
+    /**
+     * @pre is_indexed must be true.
+     */
+    std::list<dogen::sml::property>
+    all_properties(const dogen::sml::abstract_object&) const override {
+        return std::list<dogen::sml::property> {};
+    }
+
+    /**
+     * @pre is_indexed must be true.
+     */
+    std::list<dogen::sml::property>
+    local_properties(const dogen::sml::abstract_object&) const override {
+        return std::list<dogen::sml::property> {};
+    }
+
+    /**
+     * @pre is_indexed must be true.
+     */
+    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >
+    inehrited_properties(const dogen::sml::abstract_object&) const override {
+        return std::unordered_map<dogen::sml::qname,
+                                  std::list<dogen::sml::property> > {};
+    }
+};
+
 }
 
 using namespace dogen::om;
@@ -73,9 +108,10 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
+    mock_indexer mi;
     const auto e(m.enumerations().begin()->second);
     f.format(s, e, dogen::om::licence(), dogen::om::modeline(),
-        std::string()/*marker*/, m);
+        std::string()/*marker*/, mi);
     const auto r(s.str());
     BOOST_CHECK(r == enumeration_two_enumerators);
     BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators;

@@ -5947,13 +5947,13 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-34,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.05,46.95;-11.12,52.25"/>
+        <dia:rectangle val="-34.05,46.95;-5.73,52.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-34,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -6163,10 +6163,10 @@ These are expected to use quotes and be on the user path.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#model#</dia:string>
+                <dia:string>#indexer#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const sml::model&amp;#</dia:string>
+                <dia:string>#const sml::indexer_interface&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6188,17 +6188,17 @@ These are expected to use quotes and be on the user path.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O49">
       <dia:attribute name="obj_pos">
-        <dia:point val="-22.585,52.2"/>
+        <dia:point val="-19.89,52.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-23.435,52.15;-17.23,65.05"/>
+        <dia:rectangle val="-20.74,52.15;-17.23,65.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-22.585,52.2"/>
-        <dia:point val="-22.585,58"/>
+        <dia:point val="-19.89,52.2"/>
+        <dia:point val="-19.89,58"/>
         <dia:point val="-17.28,58"/>
         <dia:point val="-17.28,65"/>
       </dia:attribute>
@@ -6439,7 +6439,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-35.93,34.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-36.68,33.65;-22.385,47.8"/>
+        <dia:rectangle val="-36.68,33.65;-19.69,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6447,8 +6447,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-35.93,34.4"/>
         <dia:point val="-35.93,41"/>
-        <dia:point val="-22.585,41"/>
-        <dia:point val="-22.585,47"/>
+        <dia:point val="-19.89,41"/>
+        <dia:point val="-19.89,47"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

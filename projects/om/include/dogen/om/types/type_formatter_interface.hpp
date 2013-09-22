@@ -30,6 +30,7 @@
 #include "dogen/sml/types/type.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline.hpp"
+#include "dogen/sml/types/indexer_interface.hpp"
 
 namespace dogen {
 namespace om {
@@ -48,7 +49,7 @@ public:
 public:
     virtual void format(std::ostream& s, const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
-        const sml::model& model) const = 0;
+        const sml::indexer_interface& indexer) const = 0;
 };
 
 } }

@@ -44,7 +44,7 @@ public:
     indexer_interface& operator=(const indexer_interface&) = delete;
 
 public:
-    virtual ~indexer_interface() noexcept { }
+    virtual ~indexer_interface() noexcept;
 
 public:
     /**

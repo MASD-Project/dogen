@@ -26,9 +26,11 @@
 #endif
 
 #include <list>
+#include <memory>
 #include <ostream>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
+#include "dogen/om/types/context.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 
@@ -55,10 +57,10 @@ private:
 public:
     void format(std::ostream& s, const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
-        const sml::model& model) const override;
+        const sml::indexer_interface& indexer) const override;
 
 private:
-    mutable std::ostream* stream_ = nullptr;
+    mutable std::unique_ptr<context> context_;
     comment_formatter doxygen_next_;
     comment_formatter doxygen_previous_;
 };
