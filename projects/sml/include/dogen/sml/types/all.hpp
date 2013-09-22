@@ -30,6 +30,8 @@
 #include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/generalisation_traversal.hpp"
 #include "dogen/sml/types/generation_types.hpp"
+#include "dogen/sml/types/indexer.hpp"
+#include "dogen/sml/types/indexer_interface.hpp"
 #include "dogen/sml/types/injection_error.hpp"
 #include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/keyed_entity.hpp"
