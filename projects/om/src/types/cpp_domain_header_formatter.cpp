@@ -106,7 +106,7 @@ format(std::ostream& s, const sml::type& t, const licence& l,
 
     stream_ = &s;
 
-    const cpp_includes i;
+    const cpp_includes i = cpp_includes();
     const boost::filesystem::path relative_file_path;
     cpp_file_boilerplate_formatter f;
     f.format_begin(s, l, m, marker, i, relative_file_path);
