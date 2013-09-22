@@ -32,7 +32,7 @@ namespace {
 
 const std::string test_module("om");
 const std::string test_suite("cpp_include_formatter_spec");
-const dogen::om::cpp_includes empty_includes;
+const dogen::om::cpp_includes empty_includes = dogen::om::cpp_includes();
 
 const std::string with_includes(R"(#include <win32/system_inc_1>
 #include <unix/system_inc_2>
