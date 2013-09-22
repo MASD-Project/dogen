@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 34.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-22 Sun 20:10]
+Clock summary at [2013-09-22 Sun 23:53]
 
 | Headline                                                            | Time    |       |       |
 |---------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                        | *19:43* |       |       |
+| *Total time*                                                        | *20:51* |       |       |
 |---------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                     |         | 19:43 |       |
+| Development Stories Implemented                                     |         | 20:51 |       |
 | IMPLEMENTATION Release notes and backlog grooming                   |         |       |  0:04 |
 | COMPLETED Implement hydration manager in terms of other hydrators   |         |       |  1:27 |
 | COMPLETED =std::list= of =boost::filesystem::path= does not compile |         |       |  2:36 |
-| IMPLEMENTATION Create a basic C++ workflow in SML to OM model       |         |       | 12:13 |
+| IMPLEMENTATION Create a basic C++ workflow in SML to OM model       |         |       | 13:21 |
 | IMPLEMENTATION Loading external models from file                    |         |       |  3:23 |
 #+end:
 
@@ -50,6 +50,8 @@ Creating a class with a list of paths does not compile. add a test to
 the boost model and fix it.
 
 *** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+    CLOCK: [2013-09-22 Sun 23:14]--[2013-09-22 Sun 23:53] =>  0:39
+    CLOCK: [2013-09-22 Sun 22:45]--[2013-09-22 Sun 23:14] =>  0:29
     CLOCK: [2013-09-22 Sun 19:44]--[2013-09-22 Sun 20:10] =>  0:26
     CLOCK: [2013-09-22 Sun 19:09]--[2013-09-22 Sun 19:44] =>  0:35
     CLOCK: [2013-09-22 Sun 17:07]--[2013-09-22 Sun 19:08] =>  2:01

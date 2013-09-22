@@ -48,11 +48,49 @@ public:
     virtual ~cpp_domain_header_formatter() noexcept { }
 
 private:
-    using sml::type_visitor::visit;
-    void visit(const dogen::sml::enumeration& e) const override;
+    /**
+     * @brief Formats open class statements for the object.
+     */
+    void open_class(const sml::abstract_object& o) const;
+
+    /**
+     * @brief Formats close class statements for the object.
+     */
+    void close_class() const;
+    void compiler_generated_constuctors(const sml::abstract_object& o) const;
+    void default_constructor(const sml::abstract_object& o) const;
+    void move_constructor(const sml::abstract_object& o) const;
+    void complete_constructor(const sml::abstract_object& o) const;
+    void destructor(const sml::abstract_object& o) const;
+    void friends(const sml::abstract_object& o) const;
+    void getters_and_setters(const sml::abstract_object& o) const;
+    void member_variables(const sml::abstract_object& o) const;
+    void equality(const sml::abstract_object& o) const;
+    void to_stream(const sml::abstract_object& o) const;
+    void swap_and_assignment(const sml::abstract_object& o) const;
+    void visitor_method(const sml::abstract_object& o) const;
+    void format(const sml::abstract_object& o) const;
 
 private:
+    using sml::type_visitor::visit;
+    void visit(const sml::enumeration& e) const override;
+    void visit(const sml::service& s) const override;
+    void visit(const sml::factory& f) const override;
+    void visit(const sml::repository& r) const override;
+    void visit(const sml::value_object& vo) const override;
+    void visit(const sml::keyed_entity& ke) const override;
+    void visit(const sml::entity& e) const override;
+
+private:
+    /**
+     * @brief Returns all of the C++ namespaces implied by the qname.
+     */
     std::list<std::string> namespaces(const sml::qname& qn) const;
+
+    /**
+     * @brief Returns a C++ qualified name for the SML qname.
+     */
+    std::string cpp_qualified_name(const sml::qname& qn) const;
 
 public:
     void format(std::ostream& s, const sml::type& t, const licence& l,

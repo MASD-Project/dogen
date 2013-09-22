@@ -23,11 +23,20 @@
 namespace dogen {
 namespace om {
 
-context::context(std::ostream& s, const sml::indexer_interface& i)
-    : stream_(s), indexer_(i) { }
+context::context(std::ostream& s, const sml::indexer_interface& i,
+    cpp_formatters::indenter& ind, cpp_formatters::utility& u)
+    : stream_(s), indexer_(i), indenter_(ind), utility_(u) { }
 
 std::ostream& context::stream() {
     return stream_;
+}
+
+cpp_formatters::indenter& context::indenter() {
+    return indenter_;
+}
+
+cpp_formatters::utility& context::utility() {
+    return utility_;
 }
 
 const sml::indexer_interface& context::indexer() {

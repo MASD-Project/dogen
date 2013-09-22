@@ -25,6 +25,13 @@
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/entity.hpp"
+#include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/factory.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/repository.hpp"
+#include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/om/types/formatting_error.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 #include "dogen/om/types/cpp_domain_header_formatter.hpp"
@@ -42,6 +49,7 @@ const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
 const bool line_between_blocks(true);
 const bool documenting_previous_identifier(true);
+const std::string scope_operator("::");
 
 }
 
@@ -75,6 +83,24 @@ namespaces(const sml::qname& qn) const {
     return r;
 }
 
+std::string cpp_domain_header_formatter::
+cpp_qualified_name(const sml::qname& qn) const {
+    std::ostringstream s;
+
+    if (!qn.model_name().empty())
+        s << qn.model_name() << scope_operator;
+
+    bool is_first(false);
+    for (const auto& p : qn.module_path()) {
+        if (is_first)
+            s << scope_operator;
+        s << p;
+    }
+
+    s << qn.simple_name();
+    return s.str();
+}
+
 void cpp_domain_header_formatter::
 visit(const dogen::sml::enumeration& e) const {
     if (context_ == nullptr) {
@@ -83,50 +109,159 @@ visit(const dogen::sml::enumeration& e) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Formatting enumeration: " << e.name();
+    doxygen_next_.format(context_->stream(), e.documentation());
+    context_->stream() << context_->indenter() << "enum class "
+                      << e.name().simple_name() << " : unsigned int ";
 
-    cpp_formatters::indenter indenter;
-    cpp_formatters::utility u(context_->stream(), indenter);
-
+    context_->utility().open_scope();
     {
-        cpp_formatters::namespace_helper
-            ns(context_->stream(), namespaces(e.name()));
-
-        u.blank_line();
-
-        doxygen_next_.format(context_->stream(), e.documentation());
-        context_->stream() << indenter << "enum class "
-                          << e.name().simple_name() << " : unsigned int ";
-
-        u.open_scope();
-        {
-            cpp_formatters::positive_indenter_scope is(indenter);
-            bool is_first(true);
-            std::ostringstream assignment;
-            std::ostringstream comment;
-            for (const auto& enumerator : e.enumerators()) {
-                if (!is_first) {
-                    const auto c(comment.str());
-                    context_->stream() << assignment.str() << ",";
-                    if (!c.empty())
-                        context_->stream() << " " << c;
-                    assignment.str(empty);
-                    comment.str(empty);
-                }
-                assignment << indenter << enumerator.name() << " = "
-                           << enumerator.value();
-                doxygen_previous_.format(comment, e.documentation());
-                is_first = false;
+        cpp_formatters::positive_indenter_scope pis(context_->indenter());
+        bool is_first(true);
+        std::ostringstream assignment;
+        std::ostringstream comment;
+        for (const auto& enumerator : e.enumerators()) {
+            if (!is_first) {
+                const auto c(comment.str());
+                context_->stream() << assignment.str() << ",";
+                if (!c.empty())
+                    context_->stream() << " " << c;
+                assignment.str(empty);
+                comment.str(empty);
             }
-
-            context_->stream() << assignment.str();
-            const auto c(comment.str());
-            if (!c.empty())
-                context_->stream() << " " << c;
+            assignment << context_->indenter() << enumerator.name() << " = "
+                       << enumerator.value();
+            doxygen_previous_.format(comment, e.documentation());
+            is_first = false;
         }
-        context_->stream() << indenter << "};" << std::endl;
-        u.blank_line();
+
+        context_->stream() << assignment.str();
+        const auto c(comment.str());
+        if (!c.empty())
+            context_->stream() << " " << c;
     }
-    u.blank_line();
+    context_->stream() << context_->indenter() << "};" << std::endl;
+}
+
+void cpp_domain_header_formatter::
+open_class(const sml::abstract_object& o) const {
+    doxygen_next_.format(context_->stream(), o.documentation());
+    context_->stream() << context_->indenter() << "class "
+                      << o.name().simple_name();
+
+    if (!o.is_parent())
+        context_->stream() << " final";
+
+    if (o.parent_name()) {
+        context_->stream() << " :";
+
+        context_->stream() << " public ";
+        context_->stream() << cpp_qualified_name(*o.parent_name());
+    }
+    context_->stream() << " {" << std::endl;
+}
+
+void cpp_domain_header_formatter::close_class() const {
+    context_->stream() << context_->indenter() << "};" << std::endl;
+}
+
+void cpp_domain_header_formatter::
+compiler_generated_constuctors(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+default_constructor(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+move_constructor(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+complete_constructor(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+destructor(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+friends(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+getters_and_setters(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+member_variables(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+equality(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+to_stream(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+swap_and_assignment(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::
+visitor_method(const sml::abstract_object& /*o*/) const {
+}
+
+void cpp_domain_header_formatter::format(const sml::abstract_object& o) const {
+    open_class(o);
+    {
+        cpp_formatters::positive_indenter_scope s(context_->indenter());
+        compiler_generated_constuctors(o);
+        default_constructor(o);
+        destructor(o);
+        move_constructor(o);
+        // if (!disable_complete_constructor_)
+        complete_constructor(o);
+        friends(o);
+        visitor_method(o);
+        // if (!disable_io_)
+        to_stream(o);
+        getters_and_setters(o);
+        equality(o);
+        swap_and_assignment(o);
+        member_variables(o);
+    }
+    close_class();
+}
+
+void cpp_domain_header_formatter::
+visit(const dogen::sml::service& s) const {
+    format(s);
+}
+
+void cpp_domain_header_formatter::
+visit(const dogen::sml::factory& f) const {
+    format(f);
+}
+
+void cpp_domain_header_formatter::
+visit(const dogen::sml::repository& r) const {
+    format(r);
+}
+
+void cpp_domain_header_formatter::
+visit(const dogen::sml::value_object& vo) const {
+    format(vo);
+}
+
+void cpp_domain_header_formatter::
+visit(const dogen::sml::keyed_entity& ke) const {
+    format(ke);
+}
+
+void cpp_domain_header_formatter::
+visit(const dogen::sml::entity& e) const {
+    format(e);
 }
 
 void cpp_domain_header_formatter::
@@ -134,13 +269,22 @@ format(std::ostream& s, const sml::type& t, const licence& l,
     const modeline& m, const std::string& marker,
     const sml::indexer_interface& indexer) const {
 
-    context_ = std::unique_ptr<context>(new context(s, indexer));
+    cpp_formatters::indenter ind;
+    cpp_formatters::utility u(s, ind);
+    context_ = std::unique_ptr<context>(new context(s, indexer, ind, u));
 
     const cpp_includes i = cpp_includes();
     const boost::filesystem::path relative_file_path;
     cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, i, relative_file_path);
-    t.accept(*this);
+    {
+        const auto ns(namespaces(t.name()));
+        cpp_formatters::namespace_helper nsh(context_->stream(), ns);
+        context_->utility().blank_line();
+        f.format_begin(s, l, m, marker, i, relative_file_path);
+        t.accept(*this);
+        context_->utility().blank_line();
+    }
+    context_->utility().blank_line();
     f.format_end(s, m, relative_file_path);
 
     context_ = std::unique_ptr<context>();

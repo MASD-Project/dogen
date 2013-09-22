@@ -53,6 +53,17 @@ enum class some_type_0 : unsigned int {
 }
 )");
 
+const std::string value_object_no_properties(R"(namespace some_model_0 {
+
+/**
+ * @brief Some documentation
+ */
+class some_type_0 final {
+};
+
+}
+)");
+
 class mock_indexer : public dogen::sml::indexer_interface {
 public:
     mock_indexer() = default;
@@ -115,6 +126,27 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
     const auto r(s.str());
     BOOST_CHECK(r == enumeration_two_enumerators);
     BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators;
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+}
+
+BOOST_AUTO_TEST_CASE(value_object_with_no_properties_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("value_object_with_no_properties_produces_expected_domain_header");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+
+    const auto m(factory::build_single_type_model(0));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.objects().size() == 1);
+
+    std::ostringstream s;
+    dogen::om::cpp_domain_header_formatter f;
+    mock_indexer mi;
+    const auto& o(*m.objects().begin()->second);
+    f.format(s, o, dogen::om::licence(), dogen::om::modeline(),
+        std::string()/*marker*/, mi);
+    const auto r(s.str());
+    BOOST_CHECK(r == value_object_no_properties);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << value_object_no_properties;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
