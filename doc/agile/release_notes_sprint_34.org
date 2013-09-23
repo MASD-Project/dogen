@@ -10,21 +10,22 @@ This file contains all stories that were closed during sprint 34.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-22 Sun 23:53]
+Clock summary at [2013-09-23 Mon 07:54]
 
 | Headline                                                            | Time    |       |       |
 |---------------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                        | *20:51* |       |       |
 |---------------------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                                     |         | 20:51 |       |
-| IMPLEMENTATION Release notes and backlog grooming                   |         |       |  0:04 |
+| COMPLETED Release notes and backlog grooming                        |         |       |  0:04 |
 | COMPLETED Implement hydration manager in terms of other hydrators   |         |       |  1:27 |
 | COMPLETED =std::list= of =boost::filesystem::path= does not compile |         |       |  2:36 |
-| IMPLEMENTATION Create a basic C++ workflow in SML to OM model       |         |       | 13:21 |
-| IMPLEMENTATION Loading external models from file                    |         |       |  3:23 |
+| COMPLETED Create a basic C++ skeleton in SML to OM model            |         |       | 13:21 |
+| COMPLETED Define a JSON representation for SML models               |         |       |  3:23 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-09-23 Mon 07:53]
     CLOCK: [2013-09-09 Mon 08:10]--[2013-09-09 Mon 08:14] =>  0:04
 
 *** COMPLETED Implement hydration manager in terms of other hydrators :story:
@@ -49,7 +50,8 @@ Clock summary at [2013-09-22 Sun 23:53]
 Creating a class with a list of paths does not compile. add a test to
 the boost model and fix it.
 
-*** IMPLEMENTATION Create a basic C++ workflow in SML to OM model     :story:
+*** COMPLETED Create a basic C++ skeleton in SML to OM model          :story:
+    CLOSED: [2013-09-23 Mon 07:53]
     CLOCK: [2013-09-22 Sun 23:14]--[2013-09-22 Sun 23:53] =>  0:39
     CLOCK: [2013-09-22 Sun 22:45]--[2013-09-22 Sun 23:14] =>  0:29
     CLOCK: [2013-09-22 Sun 19:44]--[2013-09-22 Sun 20:10] =>  0:26
@@ -81,28 +83,8 @@ instead created formatters that work at the SML level and they
 themselves perform the translation - collaborating with helper
 classes.
 
-*** Create an SML level concept for facets                            :story:
-
-In reality, "facets" are not a C++ thing; they are language
-neutral. They are, however, expressed differently in different
-languages. For example:
-
-- types: same on all languages
-- debug_printing: overloaded operator<< in C++, toString() in Java,
-  ToString() in C#, etc.
-- serialisation: slightly less obvious, but effectively the most
-  "native" serialisation available for the given programming
-  language. For C++ this is boost serialisation.
-- hashing: language specific support for hashing, in C++ either std
-  hash or boost hash, in Java/C# overloading of hash functions.
-- test_data: some facilities for test data generation
-- relational: bindings for relational databases. ODB in C++.
-
-We can introduce these concepts at the SML level, probably at the
-=model= and =abstract_object= level; we can then do further
-translation at the language level, as required.
-
-*** IMPLEMENTATION Loading external models from file                  :story:
+*** COMPLETED Define a JSON representation for SML models             :story:
+    CLOSED: [2013-09-23 Mon 07:54]
 
 New understanding:
 
@@ -146,9 +128,31 @@ This will be a system type library, with all the supported system models.
      CLOCK: [2013-09-11 Wed 18:10]--[2013-09-11 Wed 18:43] =>  0:33
      CLOCK: [2013-09-11 Wed 07:46]--[2013-09-11 Wed 08:18] =>  0:32
 
-**** IMPLEMENTATION Create an hydrator from JSON into SML
+**** CANCELLED Create an hydrator from JSON into SML
+     CLOSED: [2013-09-23 Mon 07:54]
      CLOCK: [2013-09-13 Fri 18:36]--[2013-09-13 Fri 18:40] =>  0:04
      CLOCK: [2013-09-13 Fri 18:29]--[2013-09-13 Fri 18:35] =>  0:06
+
+*** Create an SML level concept for facets                            :story:
+
+In reality, "facets" are not a C++ thing; they are language
+neutral. They are, however, expressed differently in different
+languages. For example:
+
+- types: same on all languages
+- debug_printing: overloaded operator<< in C++, toString() in Java,
+  ToString() in C#, etc.
+- serialisation: slightly less obvious, but effectively the most
+  "native" serialisation available for the given programming
+  language. For C++ this is boost serialisation.
+- hashing: language specific support for hashing, in C++ either std
+  hash or boost hash, in Java/C# overloading of hash functions.
+- test_data: some facilities for test data generation
+- relational: bindings for relational databases. ODB in C++.
+
+We can introduce these concepts at the SML level, probably at the
+=model= and =abstract_object= level; we can then do further
+translation at the language level, as required.
 
 *** Propagatable parameters                                           :story:
 
