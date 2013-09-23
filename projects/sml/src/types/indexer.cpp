@@ -40,6 +40,10 @@ indexer::indexer(const model& m) : model_(m), is_indexed_(false) {
 
 void indexer::index() {
     is_indexed_ = true;
+    for (const auto& pair : model_.objects()) {
+        const auto& o(*pair.second);
+        local_properties_.insert(std::make_pair(o.name(), o.properties()));
+    }
 }
 
 bool indexer::is_indexed() const {
