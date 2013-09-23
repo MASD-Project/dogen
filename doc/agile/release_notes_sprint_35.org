@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-23 Mon 23:42]
+Clock summary at [2013-09-23 Mon 23:54]
 
 | Headline                                                | Time   |      |      |
 |---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *1:41* |      |      |
+| *Total time*                                            | *1:52* |      |      |
 |---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 1:41 |      |
+| Development Stories Implemented                         |        | 1:52 |      |
 | IMPLEMENTATION Release notes and backlog grooming       |        |      | 0:12 |
 | COMPLETED Refactor OM tests to avoid over-inclusion     |        |      | 0:32 |
-| IMPLEMENTATION Create a complete domain formatter in OM |        |      | 0:57 |
+| IMPLEMENTATION Create a complete domain formatter in OM |        |      | 1:08 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -44,7 +44,9 @@ The OM domain formatter must produce the same code as the C++
 formatter across all types. Add all infrastructure around it such as
 SML type visitors, etc.
 
-**** Implement class open and close methods
+**** COMPLETED Implement class open and close methods
+     CLOSED: [2013-09-23 Mon 23:54]
+     CLOCK: [2013-09-23 Mon 23:43]--[2013-09-23 Mon 23:54] =>  0:11
 
 *** Create an hydrator from JSON into SML                             :story:
 

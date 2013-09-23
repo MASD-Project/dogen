@@ -53,7 +53,7 @@ enum class some_type_0 : unsigned int {
 }
 )");
 
-const std::string value_object_no_properties(R"(namespace some_model_0 {
+const std::string object_no_properties(R"(namespace some_model_0 {
 
 /**
  * @brief Some documentation
@@ -64,12 +64,34 @@ class some_type_0 final {
 }
 )");
 
-const std::string value_object_inheritance(R"(namespace some_model_0 {
+const std::string parent_object(R"(namespace some_model_0 {
+
+/**
+ * @brief Some documentation
+ */
+class some_type_1 {
+};
+
+}
+)");
+
+const std::string leaf_child_object(R"(namespace some_model_0 {
 
 /**
  * @brief Some documentation
  */
 class some_type_0 final : public some_type_1 {
+};
+
+}
+)");
+
+const std::string non_leaf_child_object(R"(namespace some_model_0 {
+
+/**
+ * @brief Some documentation
+ */
+class some_type_1 : public some_type_2 {
 };
 
 }
@@ -113,6 +135,10 @@ bool is_type_zero(const dogen::sml::qname& qn) {
     return mock_model_factory::simple_name(0) == qn.simple_name();
 }
 
+bool is_type_one(const dogen::sml::qname& qn) {
+    return mock_model_factory::simple_name(1) == qn.simple_name();
+}
+
 }
 
 using namespace dogen::om;
@@ -145,8 +171,8 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
-BOOST_AUTO_TEST_CASE(value_object_with_no_properties_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("value_object_with_no_properties_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("object_with_no_properties_produces_expected_domain_header");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(factory::build_single_type_model(0));
@@ -160,14 +186,42 @@ BOOST_AUTO_TEST_CASE(value_object_with_no_properties_produces_expected_domain_he
     f.format(s, o, dogen::om::licence(), dogen::om::modeline(),
         std::string()/*marker*/, mi);
     const auto r(s.str());
-    BOOST_CHECK(r == value_object_no_properties);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << value_object_no_properties;
+    BOOST_CHECK(r == object_no_properties);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
-BOOST_AUTO_TEST_CASE(value_object_with_parent_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("value_object_with_parent_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("parent_object_produces_expected_domain_header");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+
+    const auto m(mock_model_factory::object_with_parent_in_the_same_model());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.objects().size() == 2);
+
+    boost::shared_ptr<dogen::sml::abstract_object> o;
+    for (const auto& pair : m.objects()) {
+        if (is_type_one(pair.first)) {
+            o = pair.second;
+            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
+        }
+    }
+
+    std::ostringstream s;
+    dogen::om::cpp_domain_header_formatter f;
+    mock_indexer mi;
+    f.format(s, *o, dogen::om::licence(), dogen::om::modeline(),
+        std::string()/*marker*/, mi);
+    const auto r(s.str());
+    BOOST_CHECK(r == parent_object);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object;
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+}
+
+BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("leaf_child_object_produces_expected_domain_header");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_model_factory::object_with_parent_in_the_same_model());
@@ -188,11 +242,39 @@ BOOST_AUTO_TEST_CASE(value_object_with_parent_produces_expected_domain_header) {
     f.format(s, *o, dogen::om::licence(), dogen::om::modeline(),
         std::string()/*marker*/, mi);
     const auto r(s.str());
-    BOOST_CHECK(r == value_object_inheritance);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << value_object_inheritance;
+    BOOST_CHECK(r == leaf_child_object);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
+BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("non_leaf_child_object_produces_expected_domain_header");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+
+    const auto m(mock_model_factory::
+        object_with_third_degree_parent_in_same_model());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.objects().size() == 4);
+
+    boost::shared_ptr<dogen::sml::abstract_object> o;
+    for (const auto& pair : m.objects()) {
+        if (is_type_one(pair.first)) {
+            o = pair.second;
+            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
+        }
+    }
+
+    std::ostringstream s;
+    dogen::om::cpp_domain_header_formatter f;
+    mock_indexer mi;
+    f.format(s, *o, dogen::om::licence(), dogen::om::modeline(),
+        std::string()/*marker*/, mi);
+    const auto r(s.str());
+    BOOST_CHECK(r == non_leaf_child_object);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object;
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+}
 
 BOOST_AUTO_TEST_SUITE_END()
