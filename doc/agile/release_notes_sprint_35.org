@@ -1,0 +1,63 @@
+g#+title: Release Notes for Sprint 35
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 35.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-09-23 Mon 08:00]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-09-23 Mon 07:50]--[2013-09-23 Mon 08:02] =>  0:12
+
+*** Create a complete domain formatter in OM                          :story:
+
+The OM domain formatter must produce the same code as the C++
+formatter across all types. Add all infrastructure around it such as
+SML type visitors, etc.
+
+*** Create an hydrator from JSON into SML                             :story:
+
+Using the JSON representation defined in the previous iteration (in
+data/library) and boost property tree, create an hydrator/transformer
+that generates SML models.
+
+*** Create an SML level concept for facets                            :story:
+
+In reality, "facets" are not a C++ thing; they are language
+neutral. They are, however, expressed differently in different
+languages. For example:
+
+- types: same on all languages
+- debug_printing: overloaded operator<< in C++, toString() in Java,
+  ToString() in C#, etc.
+- serialisation: slightly less obvious, but effectively the most
+  "native" serialisation available for the given programming
+  language. For C++ this is boost serialisation.
+- hashing: language specific support for hashing, in C++ either std
+  hash or boost hash, in Java/C# overloading of hash functions.
+- test_data: some facilities for test data generation
+- relational: bindings for relational databases. ODB in C++.
+
+We can introduce these concepts at the SML level, probably at the
+=model= and =abstract_object= level; we can then do further
+translation at the language level, as required.
+
+*** Propagatable parameters                                           :story:
+
+Some implementation specific parameters should be propagated along the
+composition graph (e.g. boost serialisation status disabled). We could
+spot these parameters whilst building the model and do the propagation
+there and then.
+
+** Deprecated Development Stories
