@@ -10,21 +10,41 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-23 Mon 08:00]
+Clock summary at [2013-09-23 Mon 23:42]
 
-| Headline     | Time   |
-|--------------+--------|
-| *Total time* | *0:00* |
+| Headline                                                | Time   |      |      |
+|---------------------------------------------------------+--------+------+------|
+| *Total time*                                            | *1:41* |      |      |
+|---------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                         |        | 1:41 |      |
+| IMPLEMENTATION Release notes and backlog grooming       |        |      | 0:12 |
+| COMPLETED Refactor OM tests to avoid over-inclusion     |        |      | 0:32 |
+| IMPLEMENTATION Create a complete domain formatter in OM |        |      | 0:57 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-09-23 Mon 07:50]--[2013-09-23 Mon 08:02] =>  0:12
 
-*** Create a complete domain formatter in OM                          :story:
+*** COMPLETED Refactor OM tests to avoid over-inclusion               :spike:
+    CLOSED: [2013-09-23 Mon 23:41]
+    CLOCK: [2013-09-23 Mon 23:05]--[2013-09-23 Mon 23:37] =>  0:32
+
+At present OM builds take too long on slow hardware because we are
+using the facet includers in tests. This means that every time a
+service changes one has to rebuild all the specs in OM. Include all
+the types manually in unit tests to reduce the dependencies.
+
+*** IMPLEMENTATION Create a complete domain formatter in OM           :story:
+    CLOCK: [2013-09-23 Mon 18:20]--[2013-09-23 Mon 18:50] =>  0:30
+    CLOCK: [2013-09-23 Mon 18:12]--[2013-09-23 Mon 18:17] =>  0:05
+    CLOCK: [2013-09-23 Mon 17:56]--[2013-09-23 Mon 18:05] =>  0:09
+    CLOCK: [2013-09-23 Mon 08:02]--[2013-09-23 Mon 08:15] =>  0:13
 
 The OM domain formatter must produce the same code as the C++
 formatter across all types. Add all infrastructure around it such as
 SML type visitors, etc.
+
+**** Implement class open and close methods
 
 *** Create an hydrator from JSON into SML                             :story:
 

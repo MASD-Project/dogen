@@ -21,11 +21,39 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/om/types/all.hpp"
-#include "dogen/om/io/all_io.hpp"
-#include "dogen/om/test_data/all_td.hpp"
-#include "dogen/om/serialization/all_ser.hpp"
 #include "dogen/om/serialization/registrar_ser.hpp"
+#include "dogen/om/types/licence.hpp"
+#include "dogen/om/io/licence_io.hpp"
+#include "dogen/om/test_data/licence_td.hpp"
+#include "dogen/om/serialization/licence_ser.hpp"
+#include "dogen/om/types/modeline.hpp"
+#include "dogen/om/io/modeline_io.hpp"
+#include "dogen/om/test_data/modeline_td.hpp"
+#include "dogen/om/serialization/modeline_ser.hpp"
+#include "dogen/om/types/modeline_group.hpp"
+#include "dogen/om/io/modeline_group_io.hpp"
+#include "dogen/om/test_data/modeline_group_td.hpp"
+#include "dogen/om/serialization/modeline_group_ser.hpp"
+#include "dogen/om/types/cpp_includes.hpp"
+#include "dogen/om/io/cpp_includes_io.hpp"
+#include "dogen/om/test_data/cpp_includes_td.hpp"
+#include "dogen/om/serialization/cpp_includes_ser.hpp"
+#include "dogen/om/types/editors.hpp"
+#include "dogen/om/io/editors_io.hpp"
+#include "dogen/om/test_data/editors_td.hpp"
+#include "dogen/om/serialization/editors_ser.hpp"
+#include "dogen/om/types/modeline_locations.hpp"
+#include "dogen/om/io/modeline_locations_io.hpp"
+#include "dogen/om/test_data/modeline_locations_td.hpp"
+#include "dogen/om/serialization/modeline_locations_ser.hpp"
+#include "dogen/om/types/modeline_field.hpp"
+#include "dogen/om/io/modeline_field_io.hpp"
+#include "dogen/om/test_data/modeline_field_td.hpp"
+#include "dogen/om/serialization/modeline_field_ser.hpp"
+#include "dogen/om/types/comment_styles.hpp"
+#include "dogen/om/io/comment_styles_io.hpp"
+#include "dogen/om/test_data/comment_styles_td.hpp"
+#include "dogen/om/serialization/comment_styles_ser.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
     dogen::om::register_types<Archive>(ar);
@@ -47,10 +75,14 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    // rountrip_type<cpp_file_generator>();
-    // rountrip_type<cpp_project_generator>();
-    rountrip_type<modeline_generator>();
     rountrip_type<licence_generator>();
+    rountrip_type<modeline_generator>();
+    rountrip_type<modeline_group_generator>();
+    rountrip_type<cpp_includes_generator>();
+    rountrip_type<editors_generator>();
+    rountrip_type<modeline_locations_generator>();
+    rountrip_type<modeline_field_generator>();
+    rountrip_type<comment_styles_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

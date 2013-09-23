@@ -47,7 +47,7 @@ hydration_workflow(const std::list<boost::filesystem::path>& dirs) {
     Hydrator h;
     for (const auto& f : files) {
         boost::filesystem::ifstream s(f);
-        r.insert(std::make_pair(f.filename().string(), h.hydrate(s)));
+        r.insert(std::make_pair(f.filename().generic_string(), h.hydrate(s)));
     }
 
     return r;

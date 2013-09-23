@@ -22,9 +22,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/om/types/modeline.hpp"
-#include "dogen/om/types/all.hpp"
-#include "dogen/om/io/all_io.hpp"
-#include "dogen/om/test_data/all_td.hpp"
+#include "dogen/om/types/modeline_formatter.hpp"
+#include "dogen/om/types/formatting_error.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {

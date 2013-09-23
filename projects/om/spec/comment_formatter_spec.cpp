@@ -22,9 +22,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/om/types/all.hpp"
-#include "dogen/om/io/all_io.hpp"
-#include "dogen/om/test_data/all_td.hpp"
+#include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {

@@ -26,9 +26,9 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
-#include "dogen/om/types/all.hpp"
-#include "dogen/om/io/all_io.hpp"
-#include "dogen/om/test_data/all_td.hpp"
+#include "dogen/om/types/modeline_group_hydrator.hpp"
+#include "dogen/om/io/modeline_group_io.hpp"
+#include "dogen/om/types/hydration_error.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {

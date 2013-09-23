@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
     dogen::sml_to_cpp::extractor x(m);
 
     std::array<bool, 2> found({{ false, false }});
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
@@ -203,7 +203,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
 
     dogen::sml_to_cpp::extractor x(m);
     bool found(false);
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
             BOOST_REQUIRE(pair.second->properties().size() == 1);
@@ -255,7 +255,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_
 
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
             BOOST_REQUIRE(pair.second->properties().size() == 1);
@@ -289,7 +289,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expect
 
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
             BOOST_REQUIRE(pair.second->properties().size() == 1);
@@ -323,7 +323,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_exp
 
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
             BOOST_REQUIRE(pair.second->properties().size() == 1);
@@ -358,7 +358,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_h
 
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
             BOOST_REQUIRE(pair.second->properties().size() == 1);
@@ -417,7 +417,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
 
     dogen::sml_to_cpp::extractor x(m);
     std::array<bool, 2> found({{ false, false }});
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
@@ -470,7 +470,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
     dogen::sml_to_cpp::extractor x(m);
 
     std::array<bool, 2> found({{ false, false }});
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
@@ -498,7 +498,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
 
             BOOST_CHECK(r.names().size() == 2);
             bool found_0(false), found_1(false);
-            for (const auto n : r.names()) {
+            for (const auto& n : r.names()) {
                 found_0 = found_0 || is_type_zero(n);
                 found_1 = found_1 || is_type_one(n);
             }
@@ -545,7 +545,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
     dogen::sml_to_cpp::extractor x(m);
 
     std::array<bool, 4> found({{ false, false, false, false }});
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
@@ -573,7 +573,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
 
             BOOST_REQUIRE(r.names().size() == 2);
             bool found_0(false), found_1(false);
-            for (const auto n : r.names()) {
+            for (const auto& n : r.names()) {
                 found_0 = found_0 || is_type_zero(n);
                 found_1 = found_1 || is_type_one(n);
             }
@@ -597,7 +597,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
 
             BOOST_REQUIRE(r.names().size() == 3);
             bool found_0(false), found_1(false), found_2(false);
-            for (const auto n : r.names()) {
+            for (const auto& n : r.names()) {
                 found_0 = found_0 || is_type_zero(n);
                 found_1 = found_1 || is_type_one(n);
                 found_2 = found_2 || is_type_two(n);
@@ -622,7 +622,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
 
             BOOST_REQUIRE(r.names().size() == 4);
             bool found_0(false), found_1(false), found_2(false), found_3(false);
-            for (const auto n : r.names()) {
+            for (const auto& n : r.names()) {
                 found_0 = found_0 || is_type_zero(n);
                 found_1 = found_1 || is_type_one(n);
                 found_2 = found_2 || is_type_two(n);
@@ -655,7 +655,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
     dogen::sml_to_cpp::extractor x(m);
 
     std::array<bool, 4> found({{ false, false, false, false }});
-    for (const auto pair : m.objects()) {
+    for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
@@ -719,7 +719,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
 
             BOOST_REQUIRE(r.names().size() == 4);
             bool found_0(false), found_1(false), found_2(false), found_3(false);
-            for (const auto n : r.names()) {
+            for (const auto& n : r.names()) {
                 found_0 = found_0 || is_type_zero(n);
                 found_1 = found_1 || is_type_one(n);
                 found_2 = found_2 || is_type_two(n);

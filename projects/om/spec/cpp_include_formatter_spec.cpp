@@ -24,9 +24,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
-#include "dogen/om/types/all.hpp"
-#include "dogen/om/io/all_io.hpp"
-#include "dogen/om/test_data/all_td.hpp"
+#include "dogen/om/types/cpp_include_formatter.hpp"
 
 namespace {
 

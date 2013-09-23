@@ -21,9 +21,30 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/om/types/all.hpp"
-#include "dogen/om/io/all_io.hpp"
-#include "dogen/om/test_data/all_td.hpp"
+#include "dogen/om/types/licence.hpp"
+#include "dogen/om/io/licence_io.hpp"
+#include "dogen/om/test_data/licence_td.hpp"
+#include "dogen/om/types/modeline.hpp"
+#include "dogen/om/io/modeline_io.hpp"
+#include "dogen/om/test_data/modeline_td.hpp"
+#include "dogen/om/types/modeline_group.hpp"
+#include "dogen/om/io/modeline_group_io.hpp"
+#include "dogen/om/test_data/modeline_group_td.hpp"
+#include "dogen/om/types/cpp_includes.hpp"
+#include "dogen/om/io/cpp_includes_io.hpp"
+#include "dogen/om/test_data/cpp_includes_td.hpp"
+#include "dogen/om/types/editors.hpp"
+#include "dogen/om/io/editors_io.hpp"
+#include "dogen/om/test_data/editors_td.hpp"
+#include "dogen/om/types/modeline_locations.hpp"
+#include "dogen/om/io/modeline_locations_io.hpp"
+#include "dogen/om/test_data/modeline_locations_td.hpp"
+#include "dogen/om/types/modeline_field.hpp"
+#include "dogen/om/io/modeline_field_io.hpp"
+#include "dogen/om/test_data/modeline_field_td.hpp"
+#include "dogen/om/types/comment_styles.hpp"
+#include "dogen/om/io/comment_styles_io.hpp"
+#include "dogen/om/test_data/comment_styles_td.hpp"
 
 namespace {
 
@@ -41,10 +62,14 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    // test_move_assignment_copy<cpp_file_generator>();
-    // test_move_assignment_copy<cpp_project_generator>();
-    test_move_assignment_copy<modeline_generator>();
     test_move_assignment_copy<licence_generator>();
+    test_move_assignment_copy<modeline_generator>();
+    test_move_assignment_copy<modeline_group_generator>();
+    test_move_assignment_copy<cpp_includes_generator>();
+    test_move_assignment_copy<editors_generator>();
+    test_move_assignment_copy<modeline_locations_generator>();
+    test_move_assignment_copy<modeline_field_generator>();
+    test_move_assignment_copy<comment_styles_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -155,7 +155,7 @@ open_class(const sml::abstract_object& o) const {
         context_->stream() << " :";
 
         context_->stream() << " public ";
-        context_->stream() << cpp_qualified_name(*o.parent_name());
+        context_->stream() << o.parent_name()->simple_name();
     }
     context_->stream() << " {" << std::endl;
 }

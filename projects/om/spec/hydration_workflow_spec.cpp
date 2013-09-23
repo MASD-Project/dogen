@@ -18,15 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <istream>
+#include <sstream>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
-#include "dogen/om/types/all.hpp"
-#include "dogen/om/io/all_io.hpp"
-#include "dogen/om/test_data/all_td.hpp"
+#include "dogen/om/types/hydration_workflow.hpp"
 
 namespace {
 
@@ -35,6 +34,23 @@ const std::string test_module("om");
 const std::string test_suite("hydration_workflow_spec");
 
 const std::string modeline_groups_dir("modeline_groups");
+
+class mock_hydrator {
+public:
+    typedef std::string value_type;
+
+    mock_hydrator() : counter_(0) { }
+
+    value_type hydrate(std::istream&) const {
+        ++counter_;
+        std::ostringstream s;
+        s << "file_" << counter_;
+        return s.str();
+    }
+
+private:
+    mutable unsigned int counter_;
+};
 
 }
 
@@ -51,23 +67,14 @@ BOOST_AUTO_TEST_CASE(hydrating_modeline_groups_in_data_directory_produces_expect
         data_files_directory() / modeline_groups_dir
     };
 
-    typedef dogen::om::modeline_group_hydrator hydrator;
-    const auto r(dogen::om::hydration_workflow<hydrator>(d));
+    const auto r(dogen::om::hydration_workflow<mock_hydrator>(d));
 
-    BOOST_LOG_SEV(lg, debug) << "groups: " << r;
+    BOOST_LOG_SEV(lg, debug) << "result: " << r;
     BOOST_CHECK(!r.empty());
 
-    for (const auto& groups : r) {
-        BOOST_CHECK(!groups.first.empty());
-        BOOST_CHECK(!groups.second.modelines().empty());
-        for (const auto& modelines : groups.second.modelines()) {
-            BOOST_CHECK(!modelines.first.empty());
-            BOOST_CHECK(!modelines.second.fields().empty());
-
-            // value  may be empty so nothing can be said about it.
-            for (const auto& fields : modelines.second.fields())
-                BOOST_CHECK(!fields.name().empty());
-        }
+    for (const auto& pair : r) {
+        BOOST_CHECK(!pair.first.empty());
+        BOOST_CHECK(!pair.second.empty());
     }
 }
 
