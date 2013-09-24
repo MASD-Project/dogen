@@ -1,0 +1,4157 @@
+diff --git a/data/library/cpp.boost.json b/data/library/cpp.boost.json
+index d26dc85..0c80fd1 100644
+--- a/data/library/cpp.boost.json
++++ b/data/library/cpp.boost.json
+@@ -6,7 +6,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "shared_ptr",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.domain.header.file_name" : "boost/shared_ptr.hpp",
+@@ -19,7 +19,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "weak_ptr",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.domain.header.file_name" : "boost/weak_ptr.hpp",
+@@ -32,7 +32,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "scoped_ptr",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.domain.header.file_name" : "boost/scoped_ptr.hpp",
+@@ -45,7 +45,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "optional",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.type.requires_manual_move_constructor" : true,
+@@ -59,7 +59,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "variant",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.requires_manual_move_constructor" : true,
+                     "cpp.domain.header.file_name" : "boost/variant.hpp",
+@@ -75,7 +75,7 @@
+             "module_path" : [
+                 "asio",
+             ],
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/asio/io_service.hpp",
+                     "cpp.hash.std.status" : "unsupported",
+@@ -90,7 +90,7 @@
+             "module_path" : [
+                 "asio", "ip", "tcp"
+             ],
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
+                     "cpp.hash.std.status" : "unsupported",
+@@ -105,7 +105,7 @@
+             "module_path" : [
+                 "asio", "ip", "tcp"
+             ],
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
+                     "cpp.hash.std.status" : "unsupported",
+@@ -120,7 +120,7 @@
+             "module_path" : [
+                 "filesystem"
+             ],
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.requires_manual_move_constructor" : true,
+                     "cpp.domain.header.file_name" : "boost/filesystem/path.hpp",
+@@ -134,7 +134,7 @@
+             "module_path" : [
+                 "gregorian"
+             ],
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/date_time/gregorian/gregorian_types.hpp",
+                     "cpp.domain.header.is_system" : true,
+@@ -151,7 +151,7 @@
+             "module_path" : [
+                 "posix_time"
+             ],
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
+                     "cpp.domain.header.is_system" : true,
+@@ -168,7 +168,7 @@
+             "module_path" : [
+                 "posix_time"
+             ],
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
+                     "cpp.domain.header.is_system" : true,
+diff --git a/data/library/cpp.std.json b/data/library/cpp.std.json
+index b4f5eea..6643d01 100644
+--- a/data/library/cpp.std.json
++++ b/data/library/cpp.std.json
+@@ -7,7 +7,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "int8_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true,
+@@ -20,7 +20,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "int16_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true,
+@@ -33,7 +33,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "int32_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.domain.header.file_name" : "cstdint",
+@@ -46,7 +46,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "int64_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.domain.header.file_name" : "cstdint",
+@@ -59,7 +59,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "uint8_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.domain.header.file_name" : "cstdint",
+@@ -72,7 +72,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "uint16_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.domain.header.file_name" : "cstdint",
+@@ -85,7 +85,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "uint32_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.domain.header.file_name" : "cstdint",
+@@ -98,7 +98,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "uint64_t",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.domain.header.file_name" : "cstdint",
+@@ -110,7 +110,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "string",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "string",
+                     "cpp.domain.header.file_name" : "string",
+@@ -123,7 +123,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "vector",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "sequence_container",
+                     "cpp.domain.header.file_name" : "vector",
+@@ -136,7 +136,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "deque",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "sequence_container",
+                     "cpp.domain.header.file_name" : "deque",
+@@ -149,7 +149,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "array",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "sequence_container",
+                     "cpp.domain.header.file_name" : "array",
+@@ -160,7 +160,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "list",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "sequence_container",
+                     "cpp.domain.header.file_name" : "list",
+@@ -173,7 +173,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "forward_list",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "sequence_container",
+                     "cpp.domain.header.file_name" : "forward_list",
+@@ -185,7 +185,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "set",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "associative_container",
+                     "cpp.domain.header.file_name" : "set",
+@@ -198,7 +198,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "multiset",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "associative_container",
+                     "cpp.domain.header.file_name" : "multiset",
+@@ -211,7 +211,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "unordered_set",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "associative_container",
+                     "cpp.domain.header.file_name" : "unordered_set",
+@@ -223,7 +223,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "map",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "associative_container",
+                     "cpp.domain.header.file_name" : "map",
+@@ -235,7 +235,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "multimap",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "associative_container",
+                     "cpp.domain.header.file_name" : "multimap",
+@@ -248,7 +248,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "multimap",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "associative_container",
+                     "cpp.domain.header.file_name" : "multimap",
+@@ -261,7 +261,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "unordered_map",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "associative_container",
+                     "cpp.domain.header.file_name" : "unordered_map",
+@@ -272,7 +272,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "pair",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "pair",
+                     "cpp.domain.header.is_system" : true,
+@@ -284,7 +284,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "shared_ptr",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.domain.header.file_name" : "memory",
+@@ -296,7 +296,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "weak_ptr",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.domain.header.file_name" : "memory",
+@@ -308,7 +308,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "unique_ptr",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.domain.header.file_name" : "memory",
+@@ -320,7 +320,7 @@
+         {
+             "meta_type" : "value_object",
+             "simple_name" : "function",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "functional",
+                     "cpp.hash.std.status" : "unsupported",
+@@ -332,7 +332,7 @@
+                {
+             "meta_type" : "value_object",
+             "simple_name" : "optional",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "smart_pointer",
+                     "cpp.domain.header.file_name" : "functional",
+diff --git a/data/library/hardware.json b/data/library/hardware.json
+index 34e05f9..07f3b3f 100644
+--- a/data/library/hardware.json
++++ b/data/library/hardware.json
+@@ -7,7 +7,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "bool",
+             "default_value" : "false",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "boolean",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -18,7 +18,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "char",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "character",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -29,7 +29,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "unsigned char",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "character",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -40,7 +40,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "int",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -51,7 +51,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "unsigned int",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -62,7 +62,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "short",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -73,7 +73,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "unsigned short",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -84,7 +84,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "long",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -95,7 +95,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "unsigned long",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -106,7 +106,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "long long",
+             "default_value" : "0",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "integer",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -117,7 +117,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "float",
+             "default_value" : "0.0f",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "floating_point",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -128,7 +128,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "double",
+             "default_value" : "0.0d",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "floating_point",
+                     "cpp.type.requires_manual_default_constructor" : true
+@@ -139,7 +139,7 @@
+             "meta_type" : "primitive",
+             "simple_name" : "long double",
+             "default_value" : "0.0d",
+-            "implementation_specific_parameters" : [
++            "opaque_parameters" : [
+                 {
+                     "cpp.type.family" : "floating_point",
+                     "cpp.type.requires_manual_default_constructor" : true
+diff --git a/diagrams/cpp.dia b/diagrams/cpp.dia
+index 149123f..f4f35ea 100644
+--- a/diagrams/cpp.dia
++++ b/diagrams/cpp.dia
+@@ -562,7 +562,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
+         <dia:point val="-27,27"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="30.545000000000002"/>
++        <dia:real val="30.544999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="28.900000000000002"/>
+@@ -638,13 +638,13 @@ it has 100% feature coverage.
+         <dia:point val="12.9167,116"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="12.8667,115.95;45.8067,134.05"/>
++        <dia:rectangle val="12.8667,115.95;37.7217,134.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="12.9167,116"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="32.839999999999996"/>
++        <dia:real val="24.754999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="18.000000000000004"/>
+@@ -1026,10 +1026,10 @@ descend from it. Names are in identifiable name format.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#implementation_specific_parameters#</dia:string>
++            <dia:string>#opaque_parameters#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string,std::string&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -3036,13 +3036,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="5.9167,146"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="5.8667,145.95;38.8067,152.05"/>
++        <dia:rectangle val="5.8667,145.95;30.7217,152.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="5.9167,146"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="32.839999999999996"/>
++        <dia:real val="24.754999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="6.0000000000000009"/>
+@@ -3160,10 +3160,10 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#implementation_specific_parameters#</dia:string>
++            <dia:string>#opaque_parameters#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string,std::string&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -3275,7 +3275,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="12.9167,134"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="12.1667,133.25;22.5367,146.75"/>
++        <dia:rectangle val="12.1667,133.25;18.4942,146.75"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -3283,8 +3283,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="12.9167,134"/>
+         <dia:point val="12.9167,140"/>
+-        <dia:point val="22.3367,140"/>
+-        <dia:point val="22.3367,145.95"/>
++        <dia:point val="18.2942,140"/>
++        <dia:point val="18.2942,145.95"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -3346,7 +3346,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="47.2892,163"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="38.7067,151.95;48.0392,163.8"/>
++        <dia:rectangle val="30.6217,151.95;48.0392,163.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -3354,8 +3354,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="47.2892,163"/>
+         <dia:point val="47.2892,158"/>
+-        <dia:point val="38.7567,158"/>
+-        <dia:point val="38.7567,152"/>
++        <dia:point val="30.6717,158"/>
++        <dia:point val="30.6717,152"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -4562,7 +4562,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="112,47"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="12.620000000000001"/>
++        <dia:real val="12.619999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -5186,17 +5186,17 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="45.7567,134"/>
++        <dia:point val="37.6717,134"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="45.0067,133.25;61.4467,146.8"/>
++        <dia:rectangle val="36.9217,133.25;61.4467,146.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="45.7567,134"/>
+-        <dia:point val="45.7567,140"/>
++        <dia:point val="37.6717,134"/>
++        <dia:point val="37.6717,140"/>
+         <dia:point val="61.2467,140"/>
+         <dia:point val="61.2467,146"/>
+       </dia:attribute>
+@@ -5230,7 +5230,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="92,47"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="8.5849999999999991"/>
++        <dia:real val="8.5850000000000009"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="15.600000000000003"/>
+@@ -6647,7 +6647,7 @@ Must be valid according to the rules for C++ names.#</dia:string>
+         <dia:point val="69.4475,93"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="29.2867,92.95;70.2975,116"/>
++        <dia:rectangle val="25.2442,92.95;70.2975,116"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -6655,8 +6655,8 @@ Must be valid according to the rules for C++ names.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="69.4475,93"/>
+         <dia:point val="69.4475,100"/>
+-        <dia:point val="29.3367,100"/>
+-        <dia:point val="29.3367,115.95"/>
++        <dia:point val="25.2942,100"/>
++        <dia:point val="25.2942,115.95"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index 18e6711..82763e8 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -620,7 +620,7 @@ representation of the primitive type.#</dia:string>
+         <dia:point val="-92,36"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="8.3349999999999991"/>
++        <dia:real val="8.3350000000000009"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -2264,7 +2264,7 @@ and all of the supported types within those models.#</dia:string>
+         <dia:real val="24.77"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.0999999999999996"/>
++        <dia:real val="4.1000000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000000000001"/>
+@@ -2638,7 +2638,7 @@ all types in the combined model.#</dia:string>
+         <dia:point val="3,11"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="31.685000000000002"/>
++        <dia:real val="31.684999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="7.5999999999999996"/>
+@@ -3327,7 +3327,7 @@ All of these steps are encompassed in the SML @ref workflow.
+         <dia:point val="-32,-6"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.0924999999999994"/>
++        <dia:real val="7.0925000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -3863,7 +3863,7 @@ All of these steps are encompassed in the SML @ref workflow.
+         <dia:point val="48,117"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="6.6225000000000005"/>
++        <dia:real val="6.6224999999999996"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -5982,16 +5982,16 @@ for Java, etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O48">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-72,50"/>
++        <dia:point val="-67.6667,50"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-72.05,49.95;-39.11,53.65"/>
++        <dia:rectangle val="-67.7167,49.95;-42.8617,53.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-72,50"/>
++        <dia:point val="-67.6667,50"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="32.839999999999996"/>
++        <dia:real val="24.754999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+@@ -6086,10 +6086,10 @@ for Java, etc.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#implementation_specific_parameters#</dia:string>
++            <dia:string>#opaque_parameters#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string,std::string&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -6291,17 +6291,17 @@ for Java, etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O51">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-55.58,53.6"/>
++        <dia:point val="-55.2892,53.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-60.795,53.55;-54.73,65.05"/>
++        <dia:rectangle val="-60.795,53.55;-54.4392,65.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-55.58,53.6"/>
+-        <dia:point val="-55.58,60"/>
++        <dia:point val="-55.2892,53.6"/>
++        <dia:point val="-55.2892,60"/>
+         <dia:point val="-60.745,60"/>
+         <dia:point val="-60.745,65"/>
+       </dia:attribute>
+@@ -8639,7 +8639,7 @@ object.#</dia:string>
+         <dia:point val="28.255,107.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="10.4712,106.85;29.005,117.8"/>
++        <dia:rectangle val="10.4713,106.85;29.005,117.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -10600,7 +10600,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="85,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="24.755000000000003"/>
++        <dia:real val="24.754999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="4.4000000000000004"/>
+@@ -10845,7 +10845,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="97.3775,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,52.65;98.1275,65.6"/>
++        <dia:rectangle val="49.4,51.95;98.1275,64.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -10884,7 +10884,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="151,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.134999999999998"/>
++        <dia:real val="20.135000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000002"/>
+@@ -11129,7 +11129,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="49.45,52.7"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,52.65;161.817,65.6"/>
++        <dia:rectangle val="49.4,51.95;161.817,64.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -11411,7 +11411,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="97.3775,68.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="96.6275,67.65;122.2,83.6"/>
++        <dia:rectangle val="96.6275,67.65;122.2,82.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -11482,7 +11482,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="161.067,69.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="132.46,68.45;161.817,83.6"/>
++        <dia:rectangle val="132.46,68.45;161.817,82.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -11553,7 +11553,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="49.45,57.5"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,57.45;122.75,86.3"/>
++        <dia:rectangle val="49.4,56.75;122.75,85.55"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -11822,7 +11822,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="49.45,52.7"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,52.65;188.93,65.6"/>
++        <dia:rectangle val="49.4,51.95;188.93,64.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -12020,7 +12020,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="117,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="24.755000000000003"/>
++        <dia:real val="24.754999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="6"/>
+@@ -12456,7 +12456,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="127.255,87"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="115.245,86.25;128.005,105.55"/>
++        <dia:rectangle val="115.245,86.25;128.005,104.75"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+diff --git a/doc/agile/backlog.org b/doc/agile/backlog.org
+index 179d456..f4a348f 100644
+--- a/doc/agile/backlog.org
++++ b/doc/agile/backlog.org
+@@ -112,30 +112,6 @@ Injector creates objects for these just like it does with keys; the
+ C++ transformer intercepts them and generates the correct view models.
+ 
+ *** Add content to the introduction in manual                         :story:
+-*** Rename implementation specific parameters                         :story:
+-
+-These should really be called back end specific parameters at the SML
+-level. At the dia level, if a parameter is passed in which has a
+-representation at the SML level it should simply be converted to this
+-representation instead of being added to the KVP.
+-
+-Actually, these are more like generic parameters:
+-
+-- at the dia level they are used to fill in gaps in dia (e.g. packages
+-  and diagrams do not have comments)
+-- at the SML level, they are used to add information which does not
+-  make sense for it to be in dia: is property key.
+-- at the backend level, they are used to provide information which
+-  does not make sense to live in SML: for example the ODB parameters.
+-
+-Also, when the string table support has been added, we need to create
+-a string table with all valid values for the parameter keys.
+-
+-Name choices:
+-
+-- opaque parameters
+-- untyped parameters
+-
+ *** Use explicit casting for versioned to unversioned conversions     :story:
+ 
+ Continuing from previous iteration, see description in Sprint 26.
+diff --git a/doc/agile/release_notes_sprint_35.org b/doc/agile/release_notes_sprint_35.org
+index 757508b..a8e63c6 100644
+--- a/doc/agile/release_notes_sprint_35.org
++++ b/doc/agile/release_notes_sprint_35.org
+@@ -34,6 +34,38 @@ using the facet includers in tests. This means that every time a
+ service changes one has to rebuild all the specs in OM. Include all
+ the types manually in unit tests to reduce the dependencies.
+ 
++*** IMPLEMENTATION Convert implementation specific parameters to unordered map :spike:
++    CLOCK: [2013-09-24 Tue 18:12]
++    CLOCK: [2013-09-24 Tue 17:56]--[2013-09-24 Tue 18:08] =>  0:12
++    CLOCK: [2013-09-24 Tue 08:13]--[2013-09-24 Tue 08:20] =>  0:07
++
++We need to do lookups into the parameters, so a vector is not suitable.
++
++*** COMPLETED Rename implementation specific parameters               :story:
++    CLOSED: [2013-09-24 Tue 18:33]
++
++These should really be called back end specific parameters at the SML
++level. At the dia level, if a parameter is passed in which has a
++representation at the SML level it should simply be converted to this
++representation instead of being added to the KVP.
++
++Actually, these are more like generic parameters:
++
++- at the dia level they are used to fill in gaps in dia (e.g. packages
++  and diagrams do not have comments)
++- at the SML level, they are used to add information which does not
++  make sense for it to be in dia: is property key.
++- at the backend level, they are used to provide information which
++  does not make sense to live in SML: for example the ODB parameters.
++
++Also, when the string table support has been added, we need to create
++a string table with all valid values for the parameter keys.
++
++Name choices:
++
++- opaque parameters
++- untyped parameters
++
+ *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
+     CLOCK: [2013-09-23 Mon 18:20]--[2013-09-23 Mon 18:50] =>  0:30
+     CLOCK: [2013-09-23 Mon 18:12]--[2013-09-23 Mon 18:17] =>  0:05
+diff --git a/projects/cpp/include/dogen/cpp/types/class_info.hpp b/projects/cpp/include/dogen/cpp/types/class_info.hpp
+index fcc3fb5..a5536a7 100644
+--- a/projects/cpp/include/dogen/cpp/types/class_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/class_info.hpp
+@@ -29,8 +29,7 @@
+ #include <iosfwd>
+ #include <list>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/cpp/serialization/class_info_fwd_ser.hpp"
+ #include "dogen/cpp/types/class_types.hpp"
+ #include "dogen/cpp/types/entity.hpp"
+@@ -70,7 +69,7 @@ public:
+         const std::string& original_parent_name,
+         const std::string& original_parent_name_qualified,
+         const std::list<std::string>& leaves,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const bool is_comparable,
+         const bool is_visitable,
+         const bool is_immutable,
+@@ -238,10 +237,10 @@ public:
+     void leaves(const std::list<std::string>&& v);
+     /**@}*/
+ 
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+ 
+     /**
+      * @brief If true, the C++ class has operator<  defined.
+@@ -318,7 +317,7 @@ private:
+     std::string original_parent_name_;
+     std::string original_parent_name_qualified_;
+     std::list<std::string> leaves_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     bool is_comparable_;
+     bool is_visitable_;
+     bool is_immutable_;
+diff --git a/projects/cpp/include/dogen/cpp/types/property_info.hpp b/projects/cpp/include/dogen/cpp/types/property_info.hpp
+index ed93547..c6ee60a 100644
+--- a/projects/cpp/include/dogen/cpp/types/property_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/property_info.hpp
+@@ -27,8 +27,7 @@
+ 
+ #include <algorithm>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/cpp/serialization/property_info_fwd_ser.hpp"
+ #include "dogen/cpp/types/nested_type_info.hpp"
+ 
+@@ -52,7 +51,7 @@ public:
+         const std::string& name,
+         const std::string& documentation,
+         const dogen::cpp::nested_type_info& type,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const bool is_immutable,
+         const bool is_fluent);
+ 
+@@ -100,10 +99,10 @@ public:
+     void type(const dogen::cpp::nested_type_info&& v);
+     /**@}*/
+ 
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+ 
+     /**
+      * @brief If true, the setter is not available for this property.
+@@ -135,7 +134,7 @@ private:
+     std::string name_;
+     std::string documentation_;
+     dogen::cpp::nested_type_info type_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     bool is_immutable_;
+     bool is_fluent_;
+ };
+diff --git a/projects/cpp/src/hash/class_info_hash.cpp b/projects/cpp/src/hash/class_info_hash.cpp
+index 5b76049..689f940 100644
+--- a/projects/cpp/src/hash/class_info_hash.cpp
++++ b/projects/cpp/src/hash/class_info_hash.cpp
+@@ -58,18 +58,11 @@ inline std::size_t hash_std_list_dogen_cpp_parent_info(const std::list<dogen::cp
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -97,7 +90,7 @@ std::size_t class_info_hasher::hash(const class_info&v) {
+     combine(seed, v.original_parent_name());
+     combine(seed, v.original_parent_name_qualified());
+     combine(seed, hash_std_list_std_string(v.leaves()));
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.is_comparable());
+     combine(seed, v.is_visitable());
+     combine(seed, v.is_immutable());
+diff --git a/projects/cpp/src/hash/property_info_hash.cpp b/projects/cpp/src/hash/property_info_hash.cpp
+index 7f1e764..aba6dfa 100644
+--- a/projects/cpp/src/hash/property_info_hash.cpp
++++ b/projects/cpp/src/hash/property_info_hash.cpp
+@@ -30,18 +30,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -57,7 +50,7 @@ std::size_t property_info_hasher::hash(const property_info&v) {
+     combine(seed, v.name());
+     combine(seed, v.documentation());
+     combine(seed, v.type());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.is_immutable());
+     combine(seed, v.is_fluent());
+ 
+diff --git a/projects/cpp/src/io/property_info_io.cpp b/projects/cpp/src/io/property_info_io.cpp
+index 567f843..bf6314d 100644
+--- a/projects/cpp/src/io/property_info_io.cpp
++++ b/projects/cpp/src/io/property_info_io.cpp
+@@ -34,26 +34,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -74,7 +65,7 @@ std::ostream& operator<<(std::ostream& s, const property_info& v) {
+       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+       << "\"type\": " << v.type() << ", "
+-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
++      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
+       << "\"is_immutable\": " << v.is_immutable() << ", "
+       << "\"is_fluent\": " << v.is_fluent()
+       << " }";
+diff --git a/projects/cpp/src/serialization/class_info_ser.cpp b/projects/cpp/src/serialization/class_info_ser.cpp
+index ccb112d..cf28e72 100644
+--- a/projects/cpp/src/serialization/class_info_ser.cpp
++++ b/projects/cpp/src/serialization/class_info_ser.cpp
+@@ -29,14 +29,13 @@
+ #include <boost/serialization/list.hpp>
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/cpp/serialization/class_info_ser.hpp"
+ #include "dogen/cpp/serialization/class_types_ser.hpp"
+ #include "dogen/cpp/serialization/entity_ser.hpp"
+ #include "dogen/cpp/serialization/parent_info_ser.hpp"
+ #include "dogen/cpp/serialization/property_info_ser.hpp"
+ #include "dogen/sml/serialization/generation_types_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -69,7 +68,7 @@ void save(Archive& ar,
+     ar << make_nvp("original_parent_name", v.original_parent_name_);
+     ar << make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
+     ar << make_nvp("leaves", v.leaves_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("is_comparable", v.is_comparable_);
+     ar << make_nvp("is_visitable", v.is_visitable_);
+     ar << make_nvp("is_immutable", v.is_immutable_);
+@@ -97,7 +96,7 @@ void load(Archive& ar,
+     ar >> make_nvp("original_parent_name", v.original_parent_name_);
+     ar >> make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
+     ar >> make_nvp("leaves", v.leaves_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("is_comparable", v.is_comparable_);
+     ar >> make_nvp("is_visitable", v.is_visitable_);
+     ar >> make_nvp("is_immutable", v.is_immutable_);
+diff --git a/projects/cpp/src/serialization/property_info_ser.cpp b/projects/cpp/src/serialization/property_info_ser.cpp
+index e08b16c..0aea576 100644
+--- a/projects/cpp/src/serialization/property_info_ser.cpp
++++ b/projects/cpp/src/serialization/property_info_ser.cpp
+@@ -28,10 +28,9 @@
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/cpp/serialization/nested_type_info_ser.hpp"
+ #include "dogen/cpp/serialization/property_info_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -48,7 +47,7 @@ void save(Archive& ar,
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("documentation", v.documentation_);
+     ar << make_nvp("type", v.type_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("is_immutable", v.is_immutable_);
+     ar << make_nvp("is_fluent", v.is_fluent_);
+ }
+@@ -60,7 +59,7 @@ void load(Archive& ar,
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("documentation", v.documentation_);
+     ar >> make_nvp("type", v.type_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("is_immutable", v.is_immutable_);
+     ar >> make_nvp("is_fluent", v.is_fluent_);
+ }
+diff --git a/projects/cpp/src/test_data/class_info_td.cpp b/projects/cpp/src/test_data/class_info_td.cpp
+index 32fb333..07bc3d8 100644
+--- a/projects/cpp/src/test_data/class_info_td.cpp
++++ b/projects/cpp/src/test_data/class_info_td.cpp
+@@ -72,18 +72,10 @@ std::list<dogen::cpp::parent_info> create_std_list_dogen_cpp_parent_info(unsigne
+     return r;
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -121,7 +113,7 @@ populate(const unsigned int position, result_type& v) {
+     v.original_parent_name(create_std_string(position + 10));
+     v.original_parent_name_qualified(create_std_string(position + 11));
+     v.leaves(create_std_list_std_string(position + 12));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 13));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 13));
+     v.is_comparable(create_bool(position + 14));
+     v.is_visitable(create_bool(position + 15));
+     v.is_immutable(create_bool(position + 16));
+diff --git a/projects/cpp/src/test_data/property_info_td.cpp b/projects/cpp/src/test_data/property_info_td.cpp
+index f0a1448..ed18096 100644
+--- a/projects/cpp/src/test_data/property_info_td.cpp
++++ b/projects/cpp/src/test_data/property_info_td.cpp
+@@ -35,18 +35,10 @@ create_dogen_cpp_nested_type_info(const unsigned int position) {
+     return dogen::cpp::nested_type_info_generator::create(position);
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -67,7 +59,7 @@ populate(const unsigned int position, result_type& v) {
+     v.name(create_std_string(position + 0));
+     v.documentation(create_std_string(position + 1));
+     v.type(create_dogen_cpp_nested_type_info(position + 2));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 3));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 3));
+     v.is_immutable(create_bool(position + 4));
+     v.is_fluent(create_bool(position + 5));
+ }
+diff --git a/projects/cpp/src/types/class_info.cpp b/projects/cpp/src/types/class_info.cpp
+index b311d6b..4033216 100644
+--- a/projects/cpp/src/types/class_info.cpp
++++ b/projects/cpp/src/types/class_info.cpp
+@@ -80,26 +80,17 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::par
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -136,7 +127,7 @@ class_info::class_info(
+     const std::string& original_parent_name,
+     const std::string& original_parent_name_qualified,
+     const std::list<std::string>& leaves,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const bool is_comparable,
+     const bool is_visitable,
+     const bool is_immutable,
+@@ -157,7 +148,7 @@ class_info::class_info(
+       original_parent_name_(original_parent_name),
+       original_parent_name_qualified_(original_parent_name_qualified),
+       leaves_(leaves),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       is_comparable_(is_comparable),
+       is_visitable_(is_visitable),
+       is_immutable_(is_immutable),
+@@ -190,7 +181,7 @@ void class_info::to_stream(std::ostream& s) const {
+       << "\"original_parent_name\": " << "\"" << tidy_up_string(original_parent_name_) << "\"" << ", "
+       << "\"original_parent_name_qualified\": " << "\"" << tidy_up_string(original_parent_name_qualified_) << "\"" << ", "
+       << "\"leaves\": " << leaves_ << ", "
+-      << "\"implementation_specific_parameters\": " << implementation_specific_parameters_ << ", "
++      << "\"opaque_parameters\": " << opaque_parameters_ << ", "
+       << "\"is_comparable\": " << is_comparable_ << ", "
+       << "\"is_visitable\": " << is_visitable_ << ", "
+       << "\"is_immutable\": " << is_immutable_ << ", "
+@@ -217,7 +208,7 @@ void class_info::swap(class_info& other) noexcept {
+     swap(original_parent_name_, other.original_parent_name_);
+     swap(original_parent_name_qualified_, other.original_parent_name_qualified_);
+     swap(leaves_, other.leaves_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(is_comparable_, other.is_comparable_);
+     swap(is_visitable_, other.is_visitable_);
+     swap(is_immutable_, other.is_immutable_);
+@@ -247,7 +238,7 @@ bool class_info::operator==(const class_info& rhs) const {
+         original_parent_name_ == rhs.original_parent_name_ &&
+         original_parent_name_qualified_ == rhs.original_parent_name_qualified_ &&
+         leaves_ == rhs.leaves_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         is_comparable_ == rhs.is_comparable_ &&
+         is_visitable_ == rhs.is_visitable_ &&
+         is_immutable_ == rhs.is_immutable_ &&
+@@ -430,20 +421,20 @@ void class_info::leaves(const std::list<std::string>&& v) {
+     leaves_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& class_info::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& class_info::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& class_info::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& class_info::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void class_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void class_info::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void class_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void class_info::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ bool class_info::is_comparable() const {
+diff --git a/projects/cpp/src/types/property_info.cpp b/projects/cpp/src/types/property_info.cpp
+index b128a2e..e1048f0 100644
+--- a/projects/cpp/src/types/property_info.cpp
++++ b/projects/cpp/src/types/property_info.cpp
+@@ -31,13 +31,13 @@ property_info::property_info(
+     const std::string& name,
+     const std::string& documentation,
+     const dogen::cpp::nested_type_info& type,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const bool is_immutable,
+     const bool is_fluent)
+     : name_(name),
+       documentation_(documentation),
+       type_(type),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       is_immutable_(is_immutable),
+       is_fluent_(is_fluent) { }
+ 
+@@ -46,7 +46,7 @@ void property_info::swap(property_info& other) noexcept {
+     swap(name_, other.name_);
+     swap(documentation_, other.documentation_);
+     swap(type_, other.type_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(is_immutable_, other.is_immutable_);
+     swap(is_fluent_, other.is_fluent_);
+ }
+@@ -55,7 +55,7 @@ bool property_info::operator==(const property_info& rhs) const {
+     return name_ == rhs.name_ &&
+         documentation_ == rhs.documentation_ &&
+         type_ == rhs.type_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         is_immutable_ == rhs.is_immutable_ &&
+         is_fluent_ == rhs.is_fluent_;
+ }
+@@ -114,20 +114,20 @@ void property_info::type(const dogen::cpp::nested_type_info&& v) {
+     type_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& property_info::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& property_info::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& property_info::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& property_info::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void property_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void property_info::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void property_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void property_info::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ bool property_info::is_immutable() const {
+diff --git a/projects/cpp_formatters/src/types/odb_header.cpp b/projects/cpp_formatters/src/types/odb_header.cpp
+index 5d6acc0..ae52e65 100644
+--- a/projects/cpp_formatters/src/types/odb_header.cpp
++++ b/projects/cpp_formatters/src/types/odb_header.cpp
+@@ -87,7 +87,7 @@ void odb_header::format_class(const cpp::source_file& f) {
+ 
+     const auto ei(*o);
+     {
+-        if (ei.implementation_specific_parameters().empty()) {
++        if (ei.opaque_parameters().empty()) {
+             stream_ << indenter_ << "// class has no ODB pragmas defined."
+                     << std::endl;
+             utility_.blank_line();
+@@ -99,7 +99,7 @@ void odb_header::format_class(const cpp::source_file& f) {
+         odb_stream << indenter_ << "#ifdef ODB_COMPILER" << std::endl
+                    << std::endl;
+ 
+-        for (const auto kvp : ei.implementation_specific_parameters()) {
++        for (const auto kvp : ei.opaque_parameters()) {
+             if (kvp.first == odb_key) {
+                 has_odb_parms = true;
+                 odb_stream << indenter_
+@@ -110,7 +110,7 @@ void odb_header::format_class(const cpp::source_file& f) {
+ 
+         odb_stream << std::endl;
+         for (const auto p : ei.properties()) {
+-            for (const auto kvp : p.implementation_specific_parameters()) {
++            for (const auto kvp : p.opaque_parameters()) {
+                 if (kvp.first == odb_key) {
+                     has_odb_parms = true;
+                     odb_stream << indenter_
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser.hpp
+index 4e1e4d6..90baa1e 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser.hpp
+@@ -25,13 +25,24 @@
+ #pragma once
+ #endif
+ 
+-#include <vector>
+ #include <string>
+ #include <utility>
++#include <unordered_map>
+ 
+ namespace dogen {
+ namespace dia_to_sml {
+ 
++/**
++ * @brief Parses comments in dia diagrams.
++ *
++ * Comments can be stored in class objects, member functions, note
++ * objects, etc.
++ *
++ * Any line starting with the well defined marker @e #DOGEN - known as
++ * the opaque parameter marker - will be interpreted as carrying an
++ * opaque parameter in a key-value pair form, where the key and the
++ * value are separated by the assignment operator @e =.
++ */
+ class comments_parser {
+ public:
+     comments_parser() = default;
+@@ -41,10 +52,25 @@ public:
+     comments_parser& operator=(const comments_parser&) = default;
+ 
+ public:
+-    typedef std::vector<std::pair<std::string, std::string> > kvp_vector_type;
++    typedef std::unordered_map<std::string, std::string> map_type;
+ 
+ public:
+-    std::pair<std::string, kvp_vector_type> parse(const std::string& c) const;
++    /**
++     * @brief Parses a string carrying the comments in the dia object.
++     *
++     * Note that the @e # markers used by dia are expected to have
++     * already been removed.
++     *
++     * @return pair where the first element contains all the text
++     * which does not start with the opaque parameter marker, and the
++     * second element is a key-value pair container with all of the
++     * keys and values of the lines that start with the opaque
++     * parameter marker.
++     *
++     * @pre lines starting with the opaque parameter marker must
++     * follow the defined syntax or else a parsing_error is thrown.
++     */
++    std::pair<std::string, map_type> parse(const std::string& c) const;
+ };
+ 
+ } }
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+index fa5767c..843133e 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+@@ -135,7 +135,7 @@ private:
+ 
+         const auto pair(comments_parser_->parse(o.comment()));
+         e.documentation(pair.first);
+-        e.implementation_specific_parameters(pair.second);
++        e.opaque_parameters(pair.second);
+     }
+ 
+     /**
+diff --git a/projects/dia_to_sml/spec/comments_parser_spec.cpp b/projects/dia_to_sml/spec/comments_parser_spec.cpp
+index 54c276d..3a509b4 100644
+--- a/projects/dia_to_sml/spec/comments_parser_spec.cpp
++++ b/projects/dia_to_sml/spec/comments_parser_spec.cpp
+@@ -23,7 +23,7 @@
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/io/pair_io.hpp"
+-#include "dogen/utility/io/vector_io.hpp"
++#include "dogen/utility/io/unordered_map_io.hpp"
+ #include "dogen/sml/types/model.hpp"
+ #include "dogen/dia_to_sml/types/parsing_error.hpp"
+ #include "dogen/dia_to_sml/types/comments_parser.hpp"
+@@ -50,6 +50,10 @@ const std::string kvp_2(
+ const std::string key_2("a strange key ");
+ const std::string value_2(" some really complicated value 1234");
+ 
++const std::string kvp_3("#DOGEN KEY3=VALUE3");
++const std::string key_3("KEY3");
++const std::string value_3("VALUE3");
++
+ const std::string kvp_no_key("#DOGEN some really complicated value 1234");
+ const std::string kvp_no_value("#DOGEN KEY=");
+ const std::string unknown_marker("#UNKNOWN a=b");
+@@ -57,6 +61,10 @@ const std::string marker_without_space("#DOGENa=b");
+ const std::string marker_with_leading_space(" #DOGEN a=b");
+ const std::string marker_in_lower_case("dogen a=b");
+ const std::string empty_kvp("#DOGEN ");
++const std::string duplicated_keys(R"(
++#DOGEN key1 = value1
++#DOGEN key1 = value2
++)");
+ 
+ const std::string no_sep_msg("Expected separator");
+ 
+@@ -160,8 +168,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_no_end_line_results_in_empty_doc
+ 
+     BOOST_CHECK(r.first.empty());
+     BOOST_REQUIRE(r.second.size() == 1);
+-    BOOST_CHECK(r.second[0].first == key_1);
+-    BOOST_CHECK(r.second[0].second == value_1);
++    const auto& pair(*r.second.begin());
++    BOOST_CHECK(pair.first == key_1);
++    BOOST_CHECK(pair.second == value_1);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_end_line_results_in_empty_documentation_and_expected_parameter) {
+@@ -177,8 +186,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_end_line_results_in_empty_docume
+ 
+     BOOST_CHECK(r.first.empty());
+     BOOST_REQUIRE(r.second.size() == 1);
+-    BOOST_CHECK(r.second[0].first == key_1);
+-    BOOST_CHECK(r.second[0].second == value_1);
++    const auto& pair(*r.second.begin());
++    BOOST_CHECK(pair.first == key_1);
++    BOOST_CHECK(pair.second == value_1);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(comment_with_complex_kvp_results_in_empty_documentation_and_expected_parameter) {
+@@ -191,8 +201,9 @@ BOOST_AUTO_TEST_CASE(comment_with_complex_kvp_results_in_empty_documentation_and
+     BOOST_LOG_SEV(lg, info) << "result: " << r;
+     BOOST_CHECK(r.first.empty());
+     BOOST_REQUIRE(r.second.size() == 1);
+-    BOOST_CHECK(r.second[0].first == key_2);
+-    BOOST_CHECK(r.second[0].second == value_2);
++    const auto& pair(*r.second.begin());
++    BOOST_CHECK(pair.first == key_2);
++    BOOST_CHECK(pair.second == value_2);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(comment_with_kvp_with_no_key_throws) {
+@@ -314,8 +325,9 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_with_kvp_results_in_expected_documentati
+     BOOST_CHECK(!std::getline(is, line));
+ 
+     BOOST_REQUIRE(r.second.size() == 1);
+-    BOOST_CHECK(r.second[0].first == key_1);
+-    BOOST_CHECK(r.second[0].second == value_1);
++    const auto& pair(*r.second.begin());
++    BOOST_CHECK(pair.first == key_2);
++    BOOST_CHECK(pair.second == value_2);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(comment_with_multiple_kvps_results_in_empty_documentation_and_expected_parameters) {
+@@ -333,15 +345,17 @@ BOOST_AUTO_TEST_CASE(comment_with_multiple_kvps_results_in_empty_documentation_a
+ 
+     BOOST_CHECK(r.first.empty());
+     BOOST_REQUIRE(r.second.size() == 3);
++    BOOST_CHECK(r.second.at(key_1) == value_1);
++    BOOST_CHECK(r.second.at(key_2) == value_2);
++    BOOST_CHECK(r.second.at(key_3) == value_3);
++}
+ 
+-    BOOST_CHECK(r.second[0].first == key_1);
+-    BOOST_CHECK(r.second[0].second == value_1);
+-
+-    BOOST_CHECK(r.second[1].first == key_2);
+-    BOOST_CHECK(r.second[1].second == value_2);
++BOOST_AUTO_TEST_CASE(comment_with_duplicated_keys_key_throws) {
++    SETUP_TEST_LOG_SOURCE("comment_with_duplicated_keys_key_throws");
+ 
+-    BOOST_CHECK(r.second[2].first == key_1);
+-    BOOST_CHECK(r.second[2].second == value_1);
++    BOOST_LOG_SEV(lg, info) << "input: " << duplicated_keys;
++    dogen::dia_to_sml::comments_parser cp;
++    BOOST_CHECK_THROW(cp.parse(duplicated_keys), parsing_error);
+ }
+ 
+ BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/dia_to_sml/spec/transformer_spec.cpp b/projects/dia_to_sml/spec/transformer_spec.cpp
+index 4f439ee..b61e0a9 100644
+--- a/projects/dia_to_sml/spec/transformer_spec.cpp
++++ b/projects/dia_to_sml/spec/transformer_spec.cpp
+@@ -1053,7 +1053,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "context: " << c;
+     BOOST_CHECK(!c.model().documentation().empty());
+-    BOOST_CHECK(c.model().implementation_specific_parameters().size() == 1);
++    BOOST_CHECK(c.model().opaque_parameters().size() == 1);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
+@@ -1068,7 +1068,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "context: " << c;
+     BOOST_CHECK(c.model().documentation().empty());
+-    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
++    BOOST_CHECK(c.model().opaque_parameters().empty());
+ }
+ 
+ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
+@@ -1083,7 +1083,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "context: " << c;
+     BOOST_CHECK(c.model().documentation().empty());
+-    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
++    BOOST_CHECK(c.model().opaque_parameters().empty());
+ }
+ 
+ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
+@@ -1099,12 +1099,12 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
+ 
+     BOOST_LOG_SEV(lg, debug) << "context: " << c;
+     BOOST_CHECK(c.model().documentation().empty());
+-    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
++    BOOST_CHECK(c.model().opaque_parameters().empty());
+     BOOST_REQUIRE(c.model().modules().size() == 1);
+ 
+     const auto p(c.model().modules().begin()->second);
+     BOOST_CHECK(!p.documentation().empty());
+-    BOOST_CHECK(!p.implementation_specific_parameters().empty());
++    BOOST_CHECK(!p.opaque_parameters().empty());
+ }
+ 
+ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
+@@ -1120,12 +1120,12 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
+ 
+     BOOST_LOG_SEV(lg, debug) << "context: " << c;
+     BOOST_CHECK(c.model().documentation().empty());
+-    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
++    BOOST_CHECK(c.model().opaque_parameters().empty());
+     BOOST_REQUIRE(c.model().modules().size() == 1);
+ 
+     const auto p(c.model().modules().begin()->second);
+     BOOST_CHECK(p.documentation().empty());
+-    BOOST_CHECK(p.implementation_specific_parameters().empty());
++    BOOST_CHECK(p.opaque_parameters().empty());
+ }
+ 
+ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
+@@ -1141,12 +1141,12 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "context: " << c;
+     BOOST_CHECK(c.model().documentation().empty());
+-    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
++    BOOST_CHECK(c.model().opaque_parameters().empty());
+     BOOST_REQUIRE(c.model().modules().size() == 1);
+ 
+     const auto p(c.model().modules().begin()->second);
+     BOOST_CHECK(p.documentation().empty());
+-    BOOST_CHECK(p.implementation_specific_parameters().empty());
++    BOOST_CHECK(p.opaque_parameters().empty());
+ }
+ 
+ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
+diff --git a/projects/dia_to_sml/src/types/comments_parser.cpp b/projects/dia_to_sml/src/types/comments_parser.cpp
+index 033362f..3dafce7 100644
+--- a/projects/dia_to_sml/src/types/comments_parser.cpp
++++ b/projects/dia_to_sml/src/types/comments_parser.cpp
+@@ -36,15 +36,17 @@ const std::string empty;
+ const std::string prefix("#DOGEN ");
+ const std::string equals("=");
+ const std::string separator_not_found("Expected separator on KVP.");
++const std::string duplicated_key("Duplicated key: ");
+ 
+ }
+ 
+ namespace dogen {
+ namespace dia_to_sml {
+ 
+-std::pair<std::string, comments_parser::kvp_vector_type>
++std::pair<std::string, comments_parser::map_type>
+ comments_parser::parse(const std::string& c) const {
+-    std::pair<std::string, kvp_vector_type> r;
++    std::pair<std::string, map_type> r;
++
+     if (c.empty())
+         return r;
+ 
+@@ -61,10 +63,13 @@ comments_parser::parse(const std::string& c) const {
+                 BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
+             }
+ 
+-            kvp_vector_type::value_type kvp;
+-            kvp.first = line.substr(0, pos);
+-            kvp.second = line.substr(pos + 1);
+-            r.second.push_back(kvp);
++            const auto key(line.substr(0, pos));
++            const auto value(line.substr(pos + 1));
++            const auto pair(r.second.insert(std::make_pair(key, value)));
++            if (pair.second) {
++                BOOST_LOG_SEV(lg, error) << duplicated_key << key;
++                BOOST_THROW_EXCEPTION(parsing_error(duplicated_key));
++            }
+         } else
+             documentation_stream << line << std::endl;
+     }
+diff --git a/projects/dia_to_sml/src/types/transformer.cpp b/projects/dia_to_sml/src/types/transformer.cpp
+index cc33341..728c578 100644
+--- a/projects/dia_to_sml/src/types/transformer.cpp
++++ b/projects/dia_to_sml/src/types/transformer.cpp
+@@ -190,7 +190,7 @@ sml::property transformer::to_property(const processed_property& p) const {
+ 
+     const auto pair(comments_parser_->parse(p.comment()));
+     r.documentation(pair.first);
+-    r.implementation_specific_parameters(pair.second);
++    r.opaque_parameters(pair.second);
+ 
+     return r;
+ }
+@@ -330,7 +330,7 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
+     ae.is_aggregate_root(p.is_aggregate_root());
+ 
+     for (const auto& p : ae.properties()) {
+-        for (const auto pair : p.implementation_specific_parameters()) {
++        for (const auto pair : p.opaque_parameters()) {
+             if (pair.first != identity_attribute_key)
+                 continue;
+ 
+@@ -462,7 +462,7 @@ void transformer::from_note(const processed_object& o) {
+ 
+     if (o.child_node_id().empty()) {
+         context_.model().documentation(pair.first);
+-        context_.model().implementation_specific_parameters(pair.second);
++        context_.model().opaque_parameters(pair.second);
+         return;
+     }
+ 
+@@ -483,7 +483,7 @@ void transformer::from_note(const processed_object& o) {
+                 i->second.simple_name()));
+     }
+     j->second.documentation(pair.first);
+-    j->second.implementation_specific_parameters(pair.second);
++    j->second.opaque_parameters(pair.second);
+ }
+ 
+ void transformer::to_concept(const processed_object& o, const profile& p) {
+diff --git a/projects/sml/include/dogen/sml/types/abstract_entity.hpp b/projects/sml/include/dogen/sml/types/abstract_entity.hpp
+index 2756cd0..2407dd2 100644
+--- a/projects/sml/include/dogen/sml/types/abstract_entity.hpp
++++ b/projects/sml/include/dogen/sml/types/abstract_entity.hpp
+@@ -73,7 +73,7 @@ public:
+ public:
+     abstract_entity(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/abstract_object.hpp b/projects/sml/include/dogen/sml/types/abstract_object.hpp
+index 9869145..2ed9593 100644
+--- a/projects/sml/include/dogen/sml/types/abstract_object.hpp
++++ b/projects/sml/include/dogen/sml/types/abstract_object.hpp
+@@ -30,8 +30,7 @@
+ #include <iosfwd>
+ #include <list>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/sml/serialization/abstract_object_fwd_ser.hpp"
+ #include "dogen/sml/types/generation_types.hpp"
+ #include "dogen/sml/types/operation.hpp"
+@@ -61,7 +60,7 @@ public:
+ public:
+     abstract_object(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/concept.hpp b/projects/sml/include/dogen/sml/types/concept.hpp
+index 8f6f9e3..9255bc9 100644
+--- a/projects/sml/include/dogen/sml/types/concept.hpp
++++ b/projects/sml/include/dogen/sml/types/concept.hpp
+@@ -28,8 +28,7 @@
+ #include <algorithm>
+ #include <list>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/sml/serialization/concept_fwd_ser.hpp"
+ #include "dogen/sml/types/generation_types.hpp"
+ #include "dogen/sml/types/operation.hpp"
+@@ -56,7 +55,7 @@ public:
+     concept(
+         const std::list<dogen::sml::property>& properties,
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+@@ -101,10 +100,10 @@ public:
+      * @brief Associated generic parameters which may be opaque.
+      */
+     /**@{*/
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+     /**@}*/
+ 
+     /**
+@@ -167,7 +166,7 @@ public:
+ private:
+     std::list<dogen::sml::property> properties_;
+     std::string documentation_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     dogen::sml::qname name_;
+     dogen::sml::generation_types generation_type_;
+     dogen::sml::origin_types origin_type_;
+diff --git a/projects/sml/include/dogen/sml/types/entity.hpp b/projects/sml/include/dogen/sml/types/entity.hpp
+index b1cf10c..7ad7551 100644
+--- a/projects/sml/include/dogen/sml/types/entity.hpp
++++ b/projects/sml/include/dogen/sml/types/entity.hpp
+@@ -47,7 +47,7 @@ public:
+ public:
+     entity(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/enumeration.hpp b/projects/sml/include/dogen/sml/types/enumeration.hpp
+index f48a431..86771e7 100644
+--- a/projects/sml/include/dogen/sml/types/enumeration.hpp
++++ b/projects/sml/include/dogen/sml/types/enumeration.hpp
+@@ -50,7 +50,7 @@ public:
+ public:
+     enumeration(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/factory.hpp b/projects/sml/include/dogen/sml/types/factory.hpp
+index 34fb95b..b2c82e2 100644
+--- a/projects/sml/include/dogen/sml/types/factory.hpp
++++ b/projects/sml/include/dogen/sml/types/factory.hpp
+@@ -47,7 +47,7 @@ public:
+ public:
+     factory(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/keyed_entity.hpp b/projects/sml/include/dogen/sml/types/keyed_entity.hpp
+index aa88190..baddfc9 100644
+--- a/projects/sml/include/dogen/sml/types/keyed_entity.hpp
++++ b/projects/sml/include/dogen/sml/types/keyed_entity.hpp
+@@ -58,7 +58,7 @@ public:
+ public:
+     keyed_entity(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/model.hpp b/projects/sml/include/dogen/sml/types/model.hpp
+index 93e866c..4c7a2b1 100644
+--- a/projects/sml/include/dogen/sml/types/model.hpp
++++ b/projects/sml/include/dogen/sml/types/model.hpp
+@@ -30,8 +30,6 @@
+ #include <string>
+ #include <unordered_map>
+ #include <unordered_set>
+-#include <utility>
+-#include <vector>
+ #include "dogen/sml/hash/qname_hash.hpp"
+ #include "dogen/sml/serialization/model_fwd_ser.hpp"
+ #include "dogen/sml/types/abstract_object_fwd.hpp"
+@@ -83,7 +81,7 @@ public:
+ public:
+     model(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+@@ -121,10 +119,10 @@ public:
+      * @brief Associated generic parameters which may be opaque.
+      */
+     /**@{*/
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+     /**@}*/
+ 
+     /**
+@@ -238,7 +236,7 @@ public:
+ 
+ private:
+     std::string documentation_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     dogen::sml::qname name_;
+     dogen::sml::generation_types generation_type_;
+     dogen::sml::origin_types origin_type_;
+diff --git a/projects/sml/include/dogen/sml/types/module.hpp b/projects/sml/include/dogen/sml/types/module.hpp
+index a9ce553..465922c 100644
+--- a/projects/sml/include/dogen/sml/types/module.hpp
++++ b/projects/sml/include/dogen/sml/types/module.hpp
+@@ -28,8 +28,7 @@
+ #include <algorithm>
+ #include <list>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/sml/serialization/module_fwd_ser.hpp"
+ #include "dogen/sml/types/generation_types.hpp"
+ #include "dogen/sml/types/origin_types.hpp"
+@@ -55,7 +54,7 @@ public:
+ public:
+     module(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+@@ -87,10 +86,10 @@ public:
+      * @brief Associated generic parameters which may be opaque.
+      */
+     /**@{*/
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+     /**@}*/
+ 
+     /**
+@@ -142,7 +141,7 @@ public:
+ 
+ private:
+     std::string documentation_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     dogen::sml::qname name_;
+     dogen::sml::generation_types generation_type_;
+     dogen::sml::origin_types origin_type_;
+diff --git a/projects/sml/include/dogen/sml/types/operation.hpp b/projects/sml/include/dogen/sml/types/operation.hpp
+index 5334201..9e395ea 100644
+--- a/projects/sml/include/dogen/sml/types/operation.hpp
++++ b/projects/sml/include/dogen/sml/types/operation.hpp
+@@ -29,8 +29,7 @@
+ #include <boost/optional.hpp>
+ #include <list>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/sml/serialization/operation_fwd_ser.hpp"
+ #include "dogen/sml/types/nested_qname.hpp"
+ #include "dogen/sml/types/parameter.hpp"
+@@ -53,7 +52,7 @@ public:
+ public:
+     operation(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const std::string& name,
+         const std::list<dogen::sml::parameter>& parameters,
+         const boost::optional<dogen::sml::nested_qname>& type);
+@@ -84,10 +83,10 @@ public:
+      * @brief Associated generic parameters which may be opaque.
+      */
+     /**@{*/
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+     /**@}*/
+ 
+     /**
+@@ -132,7 +131,7 @@ public:
+ 
+ private:
+     std::string documentation_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     std::string name_;
+     std::list<dogen::sml::parameter> parameters_;
+     boost::optional<dogen::sml::nested_qname> type_;
+diff --git a/projects/sml/include/dogen/sml/types/parameter.hpp b/projects/sml/include/dogen/sml/types/parameter.hpp
+index 6b81043..b75201b 100644
+--- a/projects/sml/include/dogen/sml/types/parameter.hpp
++++ b/projects/sml/include/dogen/sml/types/parameter.hpp
+@@ -27,8 +27,7 @@
+ 
+ #include <algorithm>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/sml/serialization/parameter_fwd_ser.hpp"
+ #include "dogen/sml/types/nested_qname.hpp"
+ 
+@@ -48,7 +47,7 @@ public:
+ public:
+     parameter(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const std::string& name,
+         const dogen::sml::nested_qname& type);
+ 
+@@ -78,10 +77,10 @@ public:
+      * @brief Associated generic parameters which may be opaque.
+      */
+     /**@{*/
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+     /**@}*/
+ 
+     /**
+@@ -116,7 +115,7 @@ public:
+ 
+ private:
+     std::string documentation_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     std::string name_;
+     dogen::sml::nested_qname type_;
+ };
+diff --git a/projects/sml/include/dogen/sml/types/primitive.hpp b/projects/sml/include/dogen/sml/types/primitive.hpp
+index ed32cf3..83d4aa1 100644
+--- a/projects/sml/include/dogen/sml/types/primitive.hpp
++++ b/projects/sml/include/dogen/sml/types/primitive.hpp
+@@ -47,7 +47,7 @@ public:
+ public:
+     primitive(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type);
+diff --git a/projects/sml/include/dogen/sml/types/property.hpp b/projects/sml/include/dogen/sml/types/property.hpp
+index cc7448e..8b120eb 100644
+--- a/projects/sml/include/dogen/sml/types/property.hpp
++++ b/projects/sml/include/dogen/sml/types/property.hpp
+@@ -27,8 +27,7 @@
+ 
+ #include <algorithm>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/sml/serialization/property_fwd_ser.hpp"
+ #include "dogen/sml/types/nested_qname.hpp"
+ 
+@@ -48,7 +47,7 @@ public:
+ public:
+     property(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const std::string& name,
+         const dogen::sml::nested_qname& type,
+         const std::string& default_value);
+@@ -79,10 +78,10 @@ public:
+      * @brief Associated generic parameters which may be opaque.
+      */
+     /**@{*/
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+     /**@}*/
+ 
+     /**
+@@ -132,7 +131,7 @@ public:
+ 
+ private:
+     std::string documentation_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     std::string name_;
+     dogen::sml::nested_qname type_;
+     std::string default_value_;
+diff --git a/projects/sml/include/dogen/sml/types/repository.hpp b/projects/sml/include/dogen/sml/types/repository.hpp
+index dec0909..af320e4 100644
+--- a/projects/sml/include/dogen/sml/types/repository.hpp
++++ b/projects/sml/include/dogen/sml/types/repository.hpp
+@@ -52,7 +52,7 @@ public:
+ public:
+     repository(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/service.hpp b/projects/sml/include/dogen/sml/types/service.hpp
+index 45f021c..31c0ab3 100644
+--- a/projects/sml/include/dogen/sml/types/service.hpp
++++ b/projects/sml/include/dogen/sml/types/service.hpp
+@@ -54,7 +54,7 @@ public:
+ public:
+     service(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/include/dogen/sml/types/type.hpp b/projects/sml/include/dogen/sml/types/type.hpp
+index ec99f5b..02e75c4 100644
+--- a/projects/sml/include/dogen/sml/types/type.hpp
++++ b/projects/sml/include/dogen/sml/types/type.hpp
+@@ -28,8 +28,7 @@
+ #include <algorithm>
+ #include <iosfwd>
+ #include <string>
+-#include <utility>
+-#include <vector>
++#include <unordered_map>
+ #include "dogen/sml/serialization/type_fwd_ser.hpp"
+ #include "dogen/sml/types/generation_types.hpp"
+ #include "dogen/sml/types/origin_types.hpp"
+@@ -55,7 +54,7 @@ public:
+ public:
+     type(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type);
+@@ -95,10 +94,10 @@ public:
+      * @brief Associated generic parameters which may be opaque.
+      */
+     /**@{*/
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
++    const std::unordered_map<std::string, std::string>& opaque_parameters() const;
++    std::unordered_map<std::string, std::string>& opaque_parameters();
++    void opaque_parameters(const std::unordered_map<std::string, std::string>& v);
++    void opaque_parameters(const std::unordered_map<std::string, std::string>&& v);
+     /**@}*/
+ 
+     /**
+@@ -138,7 +137,7 @@ protected:
+ 
+ private:
+     std::string documentation_;
+-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
++    std::unordered_map<std::string, std::string> opaque_parameters_;
+     dogen::sml::qname name_;
+     dogen::sml::generation_types generation_type_;
+     dogen::sml::origin_types origin_type_;
+diff --git a/projects/sml/include/dogen/sml/types/value_object.hpp b/projects/sml/include/dogen/sml/types/value_object.hpp
+index 525f173..849b233 100644
+--- a/projects/sml/include/dogen/sml/types/value_object.hpp
++++ b/projects/sml/include/dogen/sml/types/value_object.hpp
+@@ -54,7 +54,7 @@ public:
+ public:
+     value_object(
+         const std::string& documentation,
+-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++        const std::unordered_map<std::string, std::string>& opaque_parameters,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+diff --git a/projects/sml/src/hash/concept_hash.cpp b/projects/sml/src/hash/concept_hash.cpp
+index def7992..934774d 100644
+--- a/projects/sml/src/hash/concept_hash.cpp
++++ b/projects/sml/src/hash/concept_hash.cpp
+@@ -42,18 +42,11 @@ inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -84,7 +77,7 @@ std::size_t concept_hasher::hash(const concept&v) {
+ 
+     combine(seed, hash_std_list_dogen_sml_property(v.properties()));
+     combine(seed, v.documentation());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.name());
+     combine(seed, v.generation_type());
+     combine(seed, v.origin_type());
+diff --git a/projects/sml/src/hash/model_hash.cpp b/projects/sml/src/hash/model_hash.cpp
+index 526e091..e32804a 100644
+--- a/projects/sml/src/hash/model_hash.cpp
++++ b/projects/sml/src/hash/model_hash.cpp
+@@ -37,18 +37,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -130,7 +123,7 @@ std::size_t model_hasher::hash(const model&v) {
+     std::size_t seed(0);
+ 
+     combine(seed, v.documentation());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.name());
+     combine(seed, v.generation_type());
+     combine(seed, v.origin_type());
+diff --git a/projects/sml/src/hash/module_hash.cpp b/projects/sml/src/hash/module_hash.cpp
+index 008f11b..2f345e7 100644
+--- a/projects/sml/src/hash/module_hash.cpp
++++ b/projects/sml/src/hash/module_hash.cpp
+@@ -32,18 +32,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -65,7 +58,7 @@ std::size_t module_hasher::hash(const module&v) {
+     std::size_t seed(0);
+ 
+     combine(seed, v.documentation());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.name());
+     combine(seed, v.generation_type());
+     combine(seed, v.origin_type());
+diff --git a/projects/sml/src/hash/operation_hash.cpp b/projects/sml/src/hash/operation_hash.cpp
+index 55aec6a..7927d3c 100644
+--- a/projects/sml/src/hash/operation_hash.cpp
++++ b/projects/sml/src/hash/operation_hash.cpp
+@@ -31,18 +31,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -74,7 +67,7 @@ std::size_t operation_hasher::hash(const operation&v) {
+     std::size_t seed(0);
+ 
+     combine(seed, v.documentation());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.name());
+     combine(seed, hash_std_list_dogen_sml_parameter(v.parameters()));
+     combine(seed, hash_boost_optional_dogen_sml_nested_qname(v.type()));
+diff --git a/projects/sml/src/hash/parameter_hash.cpp b/projects/sml/src/hash/parameter_hash.cpp
+index bec4a65..8f2a868 100644
+--- a/projects/sml/src/hash/parameter_hash.cpp
++++ b/projects/sml/src/hash/parameter_hash.cpp
+@@ -30,18 +30,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -55,7 +48,7 @@ std::size_t parameter_hasher::hash(const parameter&v) {
+     std::size_t seed(0);
+ 
+     combine(seed, v.documentation());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.name());
+     combine(seed, v.type());
+ 
+diff --git a/projects/sml/src/hash/property_hash.cpp b/projects/sml/src/hash/property_hash.cpp
+index a9da202..0916281 100644
+--- a/projects/sml/src/hash/property_hash.cpp
++++ b/projects/sml/src/hash/property_hash.cpp
+@@ -30,18 +30,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -55,7 +48,7 @@ std::size_t property_hasher::hash(const property&v) {
+     std::size_t seed(0);
+ 
+     combine(seed, v.documentation());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.name());
+     combine(seed, v.type());
+     combine(seed, v.default_value());
+diff --git a/projects/sml/src/hash/type_hash.cpp b/projects/sml/src/hash/type_hash.cpp
+index 63aa472..57d5bbd 100644
+--- a/projects/sml/src/hash/type_hash.cpp
++++ b/projects/sml/src/hash/type_hash.cpp
+@@ -32,18 +32,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+-    std::size_t seed(0);
+-
+-    combine(seed, v.first);
+-    combine(seed, v.second);
+-    return seed;
+-}
+-
+-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
++inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, hash_std_pair_std_string_std_string(i));
++        combine(seed, i.first);
++        combine(seed, i.second);
+     }
+     return seed;
+ }
+@@ -57,7 +50,7 @@ std::size_t type_hasher::hash(const type&v) {
+     std::size_t seed(0);
+ 
+     combine(seed, v.documentation());
+-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
++    combine(seed, hash_std_unordered_map_std_string_std_string(v.opaque_parameters()));
+     combine(seed, v.name());
+     combine(seed, v.generation_type());
+     combine(seed, v.origin_type());
+diff --git a/projects/sml/src/io/concept_io.cpp b/projects/sml/src/io/concept_io.cpp
+index 6deed9d..0b193f6 100644
+--- a/projects/sml/src/io/concept_io.cpp
++++ b/projects/sml/src/io/concept_io.cpp
+@@ -51,26 +51,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -112,7 +103,7 @@ std::ostream& operator<<(std::ostream& s, const concept& v) {
+       << "\"__type__\": " << "\"dogen::sml::concept\"" << ", "
+       << "\"properties\": " << v.properties() << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
++      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
+       << "\"name\": " << v.name() << ", "
+       << "\"generation_type\": " << v.generation_type() << ", "
+       << "\"origin_type\": " << v.origin_type() << ", "
+diff --git a/projects/sml/src/io/model_io.cpp b/projects/sml/src/io/model_io.cpp
+index eddf34a..d1c7021 100644
+--- a/projects/sml/src/io/model_io.cpp
++++ b/projects/sml/src/io/model_io.cpp
+@@ -40,26 +40,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -210,7 +201,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
++      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
+       << "\"name\": " << v.name() << ", "
+       << "\"generation_type\": " << v.generation_type() << ", "
+       << "\"origin_type\": " << v.origin_type() << ", "
+diff --git a/projects/sml/src/io/module_io.cpp b/projects/sml/src/io/module_io.cpp
+index 02c9b9b..b18cb1f 100644
+--- a/projects/sml/src/io/module_io.cpp
++++ b/projects/sml/src/io/module_io.cpp
+@@ -35,26 +35,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -81,7 +72,7 @@ std::ostream& operator<<(std::ostream& s, const module& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::module\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
++      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
+       << "\"name\": " << v.name() << ", "
+       << "\"generation_type\": " << v.generation_type() << ", "
+       << "\"origin_type\": " << v.origin_type() << ", "
+diff --git a/projects/sml/src/io/operation_io.cpp b/projects/sml/src/io/operation_io.cpp
+index 5eba0b3..bb537a1 100644
+--- a/projects/sml/src/io/operation_io.cpp
++++ b/projects/sml/src/io/operation_io.cpp
+@@ -34,26 +34,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -95,7 +86,7 @@ std::ostream& operator<<(std::ostream& s, const operation& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::operation\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
++      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
+       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+       << "\"parameters\": " << v.parameters() << ", "
+       << "\"type\": " << v.type()
+diff --git a/projects/sml/src/io/parameter_io.cpp b/projects/sml/src/io/parameter_io.cpp
+index 8e388b8..3e836de 100644
+--- a/projects/sml/src/io/parameter_io.cpp
++++ b/projects/sml/src/io/parameter_io.cpp
+@@ -33,26 +33,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -65,7 +56,7 @@ std::ostream& operator<<(std::ostream& s, const parameter& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::parameter\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
++      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
+       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+       << "\"type\": " << v.type()
+       << " }";
+diff --git a/projects/sml/src/io/property_io.cpp b/projects/sml/src/io/property_io.cpp
+index b6bcd0e..11eb223 100644
+--- a/projects/sml/src/io/property_io.cpp
++++ b/projects/sml/src/io/property_io.cpp
+@@ -33,26 +33,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -65,7 +56,7 @@ std::ostream& operator<<(std::ostream& s, const property& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::property\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
++      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
+       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+       << "\"type\": " << v.type() << ", "
+       << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\""
+diff --git a/projects/sml/src/serialization/abstract_object_ser.cpp b/projects/sml/src/serialization/abstract_object_ser.cpp
+index 97bf168..42cf26b 100644
+--- a/projects/sml/src/serialization/abstract_object_ser.cpp
++++ b/projects/sml/src/serialization/abstract_object_ser.cpp
+@@ -30,8 +30,6 @@
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/optional.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/abstract_object_ser.hpp"
+ #include "dogen/sml/serialization/entity_ser.hpp"
+ #include "dogen/sml/serialization/factory_ser.hpp"
+@@ -45,6 +43,7 @@
+ #include "dogen/sml/serialization/service_ser.hpp"
+ #include "dogen/sml/serialization/type_ser.hpp"
+ #include "dogen/sml/serialization/value_object_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+diff --git a/projects/sml/src/serialization/concept_ser.cpp b/projects/sml/src/serialization/concept_ser.cpp
+index 35f285b..dbcf0fd 100644
+--- a/projects/sml/src/serialization/concept_ser.cpp
++++ b/projects/sml/src/serialization/concept_ser.cpp
+@@ -29,14 +29,13 @@
+ #include <boost/serialization/list.hpp>
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/concept_ser.hpp"
+ #include "dogen/sml/serialization/generation_types_ser.hpp"
+ #include "dogen/sml/serialization/operation_ser.hpp"
+ #include "dogen/sml/serialization/origin_types_ser.hpp"
+ #include "dogen/sml/serialization/property_ser.hpp"
+ #include "dogen/sml/serialization/qname_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -52,7 +51,7 @@ void save(Archive& ar,
+     const unsigned int /*version*/) {
+     ar << make_nvp("properties", v.properties_);
+     ar << make_nvp("documentation", v.documentation_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("generation_type", v.generation_type_);
+     ar << make_nvp("origin_type", v.origin_type_);
+@@ -66,7 +65,7 @@ void load(Archive& ar,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("properties", v.properties_);
+     ar >> make_nvp("documentation", v.documentation_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("generation_type", v.generation_type_);
+     ar >> make_nvp("origin_type", v.origin_type_);
+diff --git a/projects/sml/src/serialization/model_ser.cpp b/projects/sml/src/serialization/model_ser.cpp
+index 2a3c953..25bc214 100644
+--- a/projects/sml/src/serialization/model_ser.cpp
++++ b/projects/sml/src/serialization/model_ser.cpp
+@@ -29,8 +29,6 @@
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/shared_ptr.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/abstract_object_ser.hpp"
+ #include "dogen/sml/serialization/concept_ser.hpp"
+ #include "dogen/sml/serialization/enumeration_ser.hpp"
+@@ -56,7 +54,7 @@ void save(Archive& ar,
+     const dogen::sml::model& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("documentation", v.documentation_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("generation_type", v.generation_type_);
+     ar << make_nvp("origin_type", v.origin_type_);
+@@ -74,7 +72,7 @@ void load(Archive& ar,
+     dogen::sml::model& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("documentation", v.documentation_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("generation_type", v.generation_type_);
+     ar >> make_nvp("origin_type", v.origin_type_);
+diff --git a/projects/sml/src/serialization/module_ser.cpp b/projects/sml/src/serialization/module_ser.cpp
+index cbdf16f..701d0cb 100644
+--- a/projects/sml/src/serialization/module_ser.cpp
++++ b/projects/sml/src/serialization/module_ser.cpp
+@@ -29,12 +29,11 @@
+ #include <boost/serialization/list.hpp>
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/generation_types_ser.hpp"
+ #include "dogen/sml/serialization/module_ser.hpp"
+ #include "dogen/sml/serialization/origin_types_ser.hpp"
+ #include "dogen/sml/serialization/qname_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -49,7 +48,7 @@ void save(Archive& ar,
+     const dogen::sml::module& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("documentation", v.documentation_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("generation_type", v.generation_type_);
+     ar << make_nvp("origin_type", v.origin_type_);
+@@ -61,7 +60,7 @@ void load(Archive& ar,
+     dogen::sml::module& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("documentation", v.documentation_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("generation_type", v.generation_type_);
+     ar >> make_nvp("origin_type", v.origin_type_);
+diff --git a/projects/sml/src/serialization/operation_ser.cpp b/projects/sml/src/serialization/operation_ser.cpp
+index a69b389..81bf3be 100644
+--- a/projects/sml/src/serialization/operation_ser.cpp
++++ b/projects/sml/src/serialization/operation_ser.cpp
+@@ -30,11 +30,10 @@
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/optional.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/nested_qname_ser.hpp"
+ #include "dogen/sml/serialization/operation_ser.hpp"
+ #include "dogen/sml/serialization/parameter_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -49,7 +48,7 @@ void save(Archive& ar,
+     const dogen::sml::operation& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("documentation", v.documentation_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("parameters", v.parameters_);
+     ar << make_nvp("type", v.type_);
+@@ -60,7 +59,7 @@ void load(Archive& ar,
+     dogen::sml::operation& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("documentation", v.documentation_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("parameters", v.parameters_);
+     ar >> make_nvp("type", v.type_);
+diff --git a/projects/sml/src/serialization/parameter_ser.cpp b/projects/sml/src/serialization/parameter_ser.cpp
+index 007135e..efb0df5 100644
+--- a/projects/sml/src/serialization/parameter_ser.cpp
++++ b/projects/sml/src/serialization/parameter_ser.cpp
+@@ -28,10 +28,9 @@
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/nested_qname_ser.hpp"
+ #include "dogen/sml/serialization/parameter_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -46,7 +45,7 @@ void save(Archive& ar,
+     const dogen::sml::parameter& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("documentation", v.documentation_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("type", v.type_);
+ }
+@@ -56,7 +55,7 @@ void load(Archive& ar,
+     dogen::sml::parameter& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("documentation", v.documentation_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("type", v.type_);
+ }
+diff --git a/projects/sml/src/serialization/property_ser.cpp b/projects/sml/src/serialization/property_ser.cpp
+index b21c65d..a8eda59 100644
+--- a/projects/sml/src/serialization/property_ser.cpp
++++ b/projects/sml/src/serialization/property_ser.cpp
+@@ -28,10 +28,9 @@
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/nested_qname_ser.hpp"
+ #include "dogen/sml/serialization/property_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -46,7 +45,7 @@ void save(Archive& ar,
+     const dogen::sml::property& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("documentation", v.documentation_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("type", v.type_);
+     ar << make_nvp("default_value", v.default_value_);
+@@ -57,7 +56,7 @@ void load(Archive& ar,
+     dogen::sml::property& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("documentation", v.documentation_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("type", v.type_);
+     ar >> make_nvp("default_value", v.default_value_);
+diff --git a/projects/sml/src/serialization/type_ser.cpp b/projects/sml/src/serialization/type_ser.cpp
+index 3042805..41b543c 100644
+--- a/projects/sml/src/serialization/type_ser.cpp
++++ b/projects/sml/src/serialization/type_ser.cpp
+@@ -28,8 +28,6 @@
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/serialization/nvp.hpp>
+ #include <boost/serialization/string.hpp>
+-#include <boost/serialization/utility.hpp>
+-#include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/entity_ser.hpp"
+ #include "dogen/sml/serialization/enumeration_ser.hpp"
+ #include "dogen/sml/serialization/factory_ser.hpp"
+@@ -42,6 +40,7 @@
+ #include "dogen/sml/serialization/service_ser.hpp"
+ #include "dogen/sml/serialization/type_ser.hpp"
+ #include "dogen/sml/serialization/value_object_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -60,7 +59,7 @@ void save(Archive& ar,
+     const dogen::sml::type& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("documentation", v.documentation_);
+-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("generation_type", v.generation_type_);
+     ar << make_nvp("origin_type", v.origin_type_);
+@@ -71,7 +70,7 @@ void load(Archive& ar,
+     dogen::sml::type& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("documentation", v.documentation_);
+-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
++    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("generation_type", v.generation_type_);
+     ar >> make_nvp("origin_type", v.origin_type_);
+diff --git a/projects/sml/src/test_data/concept_td.cpp b/projects/sml/src/test_data/concept_td.cpp
+index 53bf12d..084e3a3 100644
+--- a/projects/sml/src/test_data/concept_td.cpp
++++ b/projects/sml/src/test_data/concept_td.cpp
+@@ -47,18 +47,10 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -110,7 +102,7 @@ void concept_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.properties(create_std_list_dogen_sml_property(position + 0));
+     v.documentation(create_std_string(position + 1));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 2));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 2));
+     v.name(create_dogen_sml_qname(position + 3));
+     v.generation_type(create_dogen_sml_generation_types(position + 4));
+     v.origin_type(create_dogen_sml_origin_types(position + 5));
+diff --git a/projects/sml/src/test_data/model_td.cpp b/projects/sml/src/test_data/model_td.cpp
+index 2fef804..9734b1b 100644
+--- a/projects/sml/src/test_data/model_td.cpp
++++ b/projects/sml/src/test_data/model_td.cpp
+@@ -37,18 +37,10 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -166,7 +158,7 @@ model_generator::model_generator() : position_(0) { }
+ void model_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 1));
+     v.name(create_dogen_sml_qname(position + 2));
+     v.generation_type(create_dogen_sml_generation_types(position + 3));
+     v.origin_type(create_dogen_sml_origin_types(position + 4));
+diff --git a/projects/sml/src/test_data/module_td.cpp b/projects/sml/src/test_data/module_td.cpp
+index fd31003..bdf1aab 100644
+--- a/projects/sml/src/test_data/module_td.cpp
++++ b/projects/sml/src/test_data/module_td.cpp
+@@ -32,18 +32,10 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -81,7 +73,7 @@ module_generator::module_generator() : position_(0) { }
+ void module_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 1));
+     v.name(create_dogen_sml_qname(position + 2));
+     v.generation_type(create_dogen_sml_generation_types(position + 3));
+     v.origin_type(create_dogen_sml_origin_types(position + 4));
+diff --git a/projects/sml/src/test_data/operation_td.cpp b/projects/sml/src/test_data/operation_td.cpp
+index 958dfa0..b41c503 100644
+--- a/projects/sml/src/test_data/operation_td.cpp
++++ b/projects/sml/src/test_data/operation_td.cpp
+@@ -31,18 +31,10 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -82,7 +74,7 @@ operation_generator::operation_generator() : position_(0) { }
+ void operation_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 1));
+     v.name(create_std_string(position + 2));
+     v.parameters(create_std_list_dogen_sml_parameter(position + 3));
+     v.type(create_boost_optional_dogen_sml_nested_qname(position + 4));
+diff --git a/projects/sml/src/test_data/parameter_td.cpp b/projects/sml/src/test_data/parameter_td.cpp
+index ac354d0..aaeb8c3 100644
+--- a/projects/sml/src/test_data/parameter_td.cpp
++++ b/projects/sml/src/test_data/parameter_td.cpp
+@@ -30,18 +30,10 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -61,7 +53,7 @@ parameter_generator::parameter_generator() : position_(0) { }
+ void parameter_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 1));
+     v.name(create_std_string(position + 2));
+     v.type(create_dogen_sml_nested_qname(position + 3));
+ }
+diff --git a/projects/sml/src/test_data/property_td.cpp b/projects/sml/src/test_data/property_td.cpp
+index ce52e63..0cf2efe 100644
+--- a/projects/sml/src/test_data/property_td.cpp
++++ b/projects/sml/src/test_data/property_td.cpp
+@@ -30,18 +30,10 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -61,7 +53,7 @@ property_generator::property_generator() : position_(0) { }
+ void property_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 1));
+     v.name(create_std_string(position + 2));
+     v.type(create_dogen_sml_nested_qname(position + 3));
+     v.default_value(create_std_string(position + 4));
+diff --git a/projects/sml/src/test_data/type_td.cpp b/projects/sml/src/test_data/type_td.cpp
+index 34ea334..3f549d9 100644
+--- a/projects/sml/src/test_data/type_td.cpp
++++ b/projects/sml/src/test_data/type_td.cpp
+@@ -40,18 +40,10 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::pair<std::string, std::string>
+-create_std_pair_std_string_std_string(unsigned int position) {
+-    std::pair<std::string, std::string> r(
+-        create_std_string(position),
+-        create_std_string(position));
+-    return r;
+-}
+-
+-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+-    std::vector<std::pair<std::string, std::string> > r;
++std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
++    std::unordered_map<std::string, std::string> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.push_back(create_std_pair_std_string_std_string(position + i));
++        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+     }
+     return r;
+ }
+@@ -80,7 +72,7 @@ namespace sml {
+ void type_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
++    v.opaque_parameters(create_std_unordered_map_std_string_std_string(position + 1));
+     v.name(create_dogen_sml_qname(position + 2));
+     v.generation_type(create_dogen_sml_generation_types(position + 3));
+     v.origin_type(create_dogen_sml_origin_types(position + 4));
+diff --git a/projects/sml/src/types/abstract_entity.cpp b/projects/sml/src/types/abstract_entity.cpp
+index b78d352..3b4e287 100644
+--- a/projects/sml/src/types/abstract_entity.cpp
++++ b/projects/sml/src/types/abstract_entity.cpp
+@@ -46,7 +46,7 @@ abstract_entity::abstract_entity()
+ 
+ abstract_entity::abstract_entity(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -66,7 +66,7 @@ abstract_entity::abstract_entity(
+     const bool is_aggregate_root,
+     const std::list<dogen::sml::property>& identity)
+     : dogen::sml::abstract_object(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type,
+diff --git a/projects/sml/src/types/abstract_object.cpp b/projects/sml/src/types/abstract_object.cpp
+index b9f96a4..328fa48 100644
+--- a/projects/sml/src/types/abstract_object.cpp
++++ b/projects/sml/src/types/abstract_object.cpp
+@@ -117,7 +117,7 @@ abstract_object::abstract_object(abstract_object&& rhs)
+ 
+ abstract_object::abstract_object(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -135,7 +135,7 @@ abstract_object::abstract_object(
+     const bool is_fluent,
+     const std::list<dogen::sml::qname>& modeled_concepts)
+     : dogen::sml::type(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type),
+diff --git a/projects/sml/src/types/concept.cpp b/projects/sml/src/types/concept.cpp
+index 96cef6f..71c321a 100644
+--- a/projects/sml/src/types/concept.cpp
++++ b/projects/sml/src/types/concept.cpp
+@@ -30,7 +30,7 @@ concept::concept()
+ concept::concept(
+     const std::list<dogen::sml::property>& properties,
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -38,7 +38,7 @@ concept::concept(
+     const std::list<dogen::sml::qname>& refines)
+     : properties_(properties),
+       documentation_(documentation),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       name_(name),
+       generation_type_(generation_type),
+       origin_type_(origin_type),
+@@ -49,7 +49,7 @@ void concept::swap(concept& other) noexcept {
+     using std::swap;
+     swap(properties_, other.properties_);
+     swap(documentation_, other.documentation_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(name_, other.name_);
+     swap(generation_type_, other.generation_type_);
+     swap(origin_type_, other.origin_type_);
+@@ -60,7 +60,7 @@ void concept::swap(concept& other) noexcept {
+ bool concept::operator==(const concept& rhs) const {
+     return properties_ == rhs.properties_ &&
+         documentation_ == rhs.documentation_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         name_ == rhs.name_ &&
+         generation_type_ == rhs.generation_type_ &&
+         origin_type_ == rhs.origin_type_ &&
+@@ -106,20 +106,20 @@ void concept::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& concept::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& concept::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& concept::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& concept::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void concept::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void concept::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void concept::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void concept::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ const dogen::sml::qname& concept::name() const {
+diff --git a/projects/sml/src/types/entity.cpp b/projects/sml/src/types/entity.cpp
+index f7cbd68..8c0208a 100644
+--- a/projects/sml/src/types/entity.cpp
++++ b/projects/sml/src/types/entity.cpp
+@@ -27,7 +27,7 @@ namespace sml {
+ 
+ entity::entity(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -47,7 +47,7 @@ entity::entity(
+     const bool is_aggregate_root,
+     const std::list<dogen::sml::property>& identity)
+     : dogen::sml::abstract_entity(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type,
+diff --git a/projects/sml/src/types/enumeration.cpp b/projects/sml/src/types/enumeration.cpp
+index 43ee0e9..0442d17 100644
+--- a/projects/sml/src/types/enumeration.cpp
++++ b/projects/sml/src/types/enumeration.cpp
+@@ -43,14 +43,14 @@ namespace sml {
+ 
+ enumeration::enumeration(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+     const dogen::sml::qname& underlying_type,
+     const std::vector<dogen::sml::enumerator>& enumerators)
+     : dogen::sml::type(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type),
+diff --git a/projects/sml/src/types/factory.cpp b/projects/sml/src/types/factory.cpp
+index 6dfc2a8..c4596a9 100644
+--- a/projects/sml/src/types/factory.cpp
++++ b/projects/sml/src/types/factory.cpp
+@@ -27,7 +27,7 @@ namespace sml {
+ 
+ factory::factory(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -45,7 +45,7 @@ factory::factory(
+     const bool is_fluent,
+     const std::list<dogen::sml::qname>& modeled_concepts)
+     : dogen::sml::abstract_object(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type,
+diff --git a/projects/sml/src/types/keyed_entity.cpp b/projects/sml/src/types/keyed_entity.cpp
+index 8013c2c..88407c8 100644
+--- a/projects/sml/src/types/keyed_entity.cpp
++++ b/projects/sml/src/types/keyed_entity.cpp
+@@ -49,7 +49,7 @@ keyed_entity::keyed_entity(keyed_entity&& rhs)
+ 
+ keyed_entity::keyed_entity(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -71,7 +71,7 @@ keyed_entity::keyed_entity(
+     const dogen::sml::qname& unversioned_key,
+     const boost::optional<dogen::sml::qname>& versioned_key)
+     : dogen::sml::abstract_entity(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type,
+diff --git a/projects/sml/src/types/model.cpp b/projects/sml/src/types/model.cpp
+index a5f4ca8..dbb72f7 100644
+--- a/projects/sml/src/types/model.cpp
++++ b/projects/sml/src/types/model.cpp
+@@ -39,7 +39,7 @@ model::model()
+ 
+ model::model(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -51,7 +51,7 @@ model::model(
+     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+     const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects)
+     : documentation_(documentation),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       name_(name),
+       generation_type_(generation_type),
+       origin_type_(origin_type),
+@@ -66,7 +66,7 @@ model::model(
+ void model::swap(model& other) noexcept {
+     using std::swap;
+     swap(documentation_, other.documentation_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(name_, other.name_);
+     swap(generation_type_, other.generation_type_);
+     swap(origin_type_, other.origin_type_);
+@@ -81,7 +81,7 @@ void model::swap(model& other) noexcept {
+ 
+ bool model::operator==(const model& rhs) const {
+     return documentation_ == rhs.documentation_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         name_ == rhs.name_ &&
+         generation_type_ == rhs.generation_type_ &&
+         origin_type_ == rhs.origin_type_ &&
+@@ -116,20 +116,20 @@ void model::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& model::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& model::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void model::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void model::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ const dogen::sml::qname& model::name() const {
+diff --git a/projects/sml/src/types/module.cpp b/projects/sml/src/types/module.cpp
+index b829de4..8535aa0 100644
+--- a/projects/sml/src/types/module.cpp
++++ b/projects/sml/src/types/module.cpp
+@@ -29,13 +29,13 @@ module::module()
+ 
+ module::module(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+     const std::list<dogen::sml::qname>& members)
+     : documentation_(documentation),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       name_(name),
+       generation_type_(generation_type),
+       origin_type_(origin_type),
+@@ -44,7 +44,7 @@ module::module(
+ void module::swap(module& other) noexcept {
+     using std::swap;
+     swap(documentation_, other.documentation_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(name_, other.name_);
+     swap(generation_type_, other.generation_type_);
+     swap(origin_type_, other.origin_type_);
+@@ -53,7 +53,7 @@ void module::swap(module& other) noexcept {
+ 
+ bool module::operator==(const module& rhs) const {
+     return documentation_ == rhs.documentation_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         name_ == rhs.name_ &&
+         generation_type_ == rhs.generation_type_ &&
+         origin_type_ == rhs.origin_type_ &&
+@@ -82,20 +82,20 @@ void module::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& module::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& module::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& module::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& module::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void module::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void module::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void module::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void module::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ const dogen::sml::qname& module::name() const {
+diff --git a/projects/sml/src/types/operation.cpp b/projects/sml/src/types/operation.cpp
+index 1d775bb..70083a1 100644
+--- a/projects/sml/src/types/operation.cpp
++++ b/projects/sml/src/types/operation.cpp
+@@ -25,19 +25,19 @@ namespace sml {
+ 
+ operation::operation(operation&& rhs)
+     : documentation_(std::move(rhs.documentation_)),
+-      implementation_specific_parameters_(std::move(rhs.implementation_specific_parameters_)),
++      opaque_parameters_(std::move(rhs.opaque_parameters_)),
+       name_(std::move(rhs.name_)),
+       parameters_(std::move(rhs.parameters_)),
+       type_(std::move(rhs.type_)) { }
+ 
+ operation::operation(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const std::string& name,
+     const std::list<dogen::sml::parameter>& parameters,
+     const boost::optional<dogen::sml::nested_qname>& type)
+     : documentation_(documentation),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       name_(name),
+       parameters_(parameters),
+       type_(type) { }
+@@ -45,7 +45,7 @@ operation::operation(
+ void operation::swap(operation& other) noexcept {
+     using std::swap;
+     swap(documentation_, other.documentation_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(name_, other.name_);
+     swap(parameters_, other.parameters_);
+     swap(type_, other.type_);
+@@ -53,7 +53,7 @@ void operation::swap(operation& other) noexcept {
+ 
+ bool operation::operator==(const operation& rhs) const {
+     return documentation_ == rhs.documentation_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         name_ == rhs.name_ &&
+         parameters_ == rhs.parameters_ &&
+         type_ == rhs.type_;
+@@ -81,20 +81,20 @@ void operation::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& operation::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& operation::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& operation::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& operation::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void operation::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void operation::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void operation::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void operation::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ const std::string& operation::name() const {
+diff --git a/projects/sml/src/types/parameter.cpp b/projects/sml/src/types/parameter.cpp
+index 71b58bf..b79871a 100644
+--- a/projects/sml/src/types/parameter.cpp
++++ b/projects/sml/src/types/parameter.cpp
+@@ -25,25 +25,25 @@ namespace sml {
+ 
+ parameter::parameter(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const std::string& name,
+     const dogen::sml::nested_qname& type)
+     : documentation_(documentation),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       name_(name),
+       type_(type) { }
+ 
+ void parameter::swap(parameter& other) noexcept {
+     using std::swap;
+     swap(documentation_, other.documentation_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(name_, other.name_);
+     swap(type_, other.type_);
+ }
+ 
+ bool parameter::operator==(const parameter& rhs) const {
+     return documentation_ == rhs.documentation_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         name_ == rhs.name_ &&
+         type_ == rhs.type_;
+ }
+@@ -70,20 +70,20 @@ void parameter::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& parameter::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& parameter::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& parameter::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& parameter::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void parameter::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void parameter::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void parameter::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void parameter::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ const std::string& parameter::name() const {
+diff --git a/projects/sml/src/types/primitive.cpp b/projects/sml/src/types/primitive.cpp
+index 42488d6..1609bde 100644
+--- a/projects/sml/src/types/primitive.cpp
++++ b/projects/sml/src/types/primitive.cpp
+@@ -27,12 +27,12 @@ namespace sml {
+ 
+ primitive::primitive(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type)
+     : dogen::sml::type(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type) { }
+diff --git a/projects/sml/src/types/property.cpp b/projects/sml/src/types/property.cpp
+index 6b973b4..9463a7e 100644
+--- a/projects/sml/src/types/property.cpp
++++ b/projects/sml/src/types/property.cpp
+@@ -25,12 +25,12 @@ namespace sml {
+ 
+ property::property(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const std::string& name,
+     const dogen::sml::nested_qname& type,
+     const std::string& default_value)
+     : documentation_(documentation),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       name_(name),
+       type_(type),
+       default_value_(default_value) { }
+@@ -38,7 +38,7 @@ property::property(
+ void property::swap(property& other) noexcept {
+     using std::swap;
+     swap(documentation_, other.documentation_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(name_, other.name_);
+     swap(type_, other.type_);
+     swap(default_value_, other.default_value_);
+@@ -46,7 +46,7 @@ void property::swap(property& other) noexcept {
+ 
+ bool property::operator==(const property& rhs) const {
+     return documentation_ == rhs.documentation_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         name_ == rhs.name_ &&
+         type_ == rhs.type_ &&
+         default_value_ == rhs.default_value_;
+@@ -74,20 +74,20 @@ void property::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& property::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& property::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& property::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& property::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void property::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void property::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void property::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void property::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ const std::string& property::name() const {
+diff --git a/projects/sml/src/types/repository.cpp b/projects/sml/src/types/repository.cpp
+index c3daed7..76c8f97 100644
+--- a/projects/sml/src/types/repository.cpp
++++ b/projects/sml/src/types/repository.cpp
+@@ -27,7 +27,7 @@ namespace sml {
+ 
+ repository::repository(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -45,7 +45,7 @@ repository::repository(
+     const bool is_fluent,
+     const std::list<dogen::sml::qname>& modeled_concepts)
+     : dogen::sml::abstract_object(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type,
+diff --git a/projects/sml/src/types/service.cpp b/projects/sml/src/types/service.cpp
+index fec0a12..86a5d2a 100644
+--- a/projects/sml/src/types/service.cpp
++++ b/projects/sml/src/types/service.cpp
+@@ -31,7 +31,7 @@ service::service()
+ 
+ service::service(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -50,7 +50,7 @@ service::service(
+     const std::list<dogen::sml::qname>& modeled_concepts,
+     const dogen::sml::service_types& type)
+     : dogen::sml::abstract_object(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type,
+diff --git a/projects/sml/src/types/type.cpp b/projects/sml/src/types/type.cpp
+index 181f0f3..571442b 100644
+--- a/projects/sml/src/types/type.cpp
++++ b/projects/sml/src/types/type.cpp
+@@ -35,26 +35,17 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+-
+-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->second) << "\"";
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+@@ -69,12 +60,12 @@ type::type()
+ 
+ type::type(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type)
+     : documentation_(documentation),
+-      implementation_specific_parameters_(implementation_specific_parameters),
++      opaque_parameters_(opaque_parameters),
+       name_(name),
+       generation_type_(generation_type),
+       origin_type_(origin_type) { }
+@@ -83,7 +74,7 @@ void type::to_stream(std::ostream& s) const {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::type\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
+-      << "\"implementation_specific_parameters\": " << implementation_specific_parameters_ << ", "
++      << "\"opaque_parameters\": " << opaque_parameters_ << ", "
+       << "\"name\": " << name_ << ", "
+       << "\"generation_type\": " << generation_type_ << ", "
+       << "\"origin_type\": " << origin_type_
+@@ -93,7 +84,7 @@ void type::to_stream(std::ostream& s) const {
+ void type::swap(type& other) noexcept {
+     using std::swap;
+     swap(documentation_, other.documentation_);
+-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
++    swap(opaque_parameters_, other.opaque_parameters_);
+     swap(name_, other.name_);
+     swap(generation_type_, other.generation_type_);
+     swap(origin_type_, other.origin_type_);
+@@ -101,7 +92,7 @@ void type::swap(type& other) noexcept {
+ 
+ bool type::compare(const type& rhs) const {
+     return documentation_ == rhs.documentation_ &&
+-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
++        opaque_parameters_ == rhs.opaque_parameters_ &&
+         name_ == rhs.name_ &&
+         generation_type_ == rhs.generation_type_ &&
+         origin_type_ == rhs.origin_type_;
+@@ -123,20 +114,20 @@ void type::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::vector<std::pair<std::string, std::string> >& type::implementation_specific_parameters() const {
+-    return implementation_specific_parameters_;
++const std::unordered_map<std::string, std::string>& type::opaque_parameters() const {
++    return opaque_parameters_;
+ }
+ 
+-std::vector<std::pair<std::string, std::string> >& type::implementation_specific_parameters() {
+-    return implementation_specific_parameters_;
++std::unordered_map<std::string, std::string>& type::opaque_parameters() {
++    return opaque_parameters_;
+ }
+ 
+-void type::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+-    implementation_specific_parameters_ = v;
++void type::opaque_parameters(const std::unordered_map<std::string, std::string>& v) {
++    opaque_parameters_ = v;
+ }
+ 
+-void type::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+-    implementation_specific_parameters_ = std::move(v);
++void type::opaque_parameters(const std::unordered_map<std::string, std::string>&& v) {
++    opaque_parameters_ = std::move(v);
+ }
+ 
+ const dogen::sml::qname& type::name() const {
+diff --git a/projects/sml/src/types/value_object.cpp b/projects/sml/src/types/value_object.cpp
+index f6cebe5..b2d966d 100644
+--- a/projects/sml/src/types/value_object.cpp
++++ b/projects/sml/src/types/value_object.cpp
+@@ -31,7 +31,7 @@ value_object::value_object()
+ 
+ value_object::value_object(
+     const std::string& documentation,
+-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
++    const std::unordered_map<std::string, std::string>& opaque_parameters,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+@@ -50,7 +50,7 @@ value_object::value_object(
+     const std::list<dogen::sml::qname>& modeled_concepts,
+     const dogen::sml::value_object_types& type)
+     : dogen::sml::abstract_object(documentation,
+-      implementation_specific_parameters,
++      opaque_parameters,
+       name,
+       generation_type,
+       origin_type,
+diff --git a/projects/sml_to_cpp/spec/transformer_spec.cpp b/projects/sml_to_cpp/spec/transformer_spec.cpp
+index ce71961..6b5edbd 100644
+--- a/projects/sml_to_cpp/spec/transformer_spec.cpp
++++ b/projects/sml_to_cpp/spec/transformer_spec.cpp
+@@ -428,7 +428,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
+     BOOST_CHECK(ci.original_parent_name().empty());
+     BOOST_CHECK(ci.original_parent_name_qualified().empty());
+     BOOST_CHECK(ci.leaves().empty());
+-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
++    BOOST_CHECK(ci.opaque_parameters().empty());
+     BOOST_CHECK(!ci.is_comparable());
+     BOOST_CHECK(!ci.is_visitable());
+     BOOST_CHECK(!ci.is_immutable());
+@@ -488,7 +488,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_property_results_in_expected_class
+     BOOST_CHECK(ci.original_parent_name().empty());
+     BOOST_CHECK(ci.original_parent_name_qualified().empty());
+     BOOST_CHECK(ci.leaves().empty());
+-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
++    BOOST_CHECK(ci.opaque_parameters().empty());
+     BOOST_CHECK(!ci.is_comparable());
+     BOOST_CHECK(!ci.is_visitable());
+     BOOST_CHECK(!ci.is_immutable());
+@@ -554,7 +554,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_bool_property_results_in_expected_
+     BOOST_CHECK(ci.original_parent_name().empty());
+     BOOST_CHECK(ci.original_parent_name_qualified().empty());
+     BOOST_CHECK(ci.leaves().empty());
+-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
++    BOOST_CHECK(ci.opaque_parameters().empty());
+     BOOST_CHECK(!ci.is_comparable());
+     BOOST_CHECK(!ci.is_visitable());
+     BOOST_CHECK(!ci.is_immutable());
+@@ -619,7 +619,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
+     BOOST_CHECK(ci.original_parent_name().empty());
+     BOOST_CHECK(ci.original_parent_name_qualified().empty());
+     BOOST_CHECK(ci.leaves().empty());
+-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
++    BOOST_CHECK(ci.opaque_parameters().empty());
+     BOOST_CHECK(!ci.is_comparable());
+     BOOST_CHECK(!ci.is_visitable());
+     BOOST_CHECK(!ci.is_immutable());
+@@ -686,7 +686,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
+     BOOST_CHECK(ci.original_parent_name().empty());
+     BOOST_CHECK(ci.original_parent_name_qualified().empty());
+     BOOST_CHECK(ci.leaves().empty());
+-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
++    BOOST_CHECK(ci.opaque_parameters().empty());
+     BOOST_CHECK(!ci.is_comparable());
+     BOOST_CHECK(!ci.is_visitable());
+     BOOST_CHECK(!ci.is_immutable());
+diff --git a/projects/sml_to_cpp/src/types/transformer.cpp b/projects/sml_to_cpp/src/types/transformer.cpp
+index c372dad..4dce065 100644
+--- a/projects/sml_to_cpp/src/types/transformer.cpp
++++ b/projects/sml_to_cpp/src/types/transformer.cpp
+@@ -340,8 +340,7 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
+ 
+     nti.complete_name(complete_name);
+     pi.type(nti);
+-    pi.implementation_specific_parameters(
+-        p.implementation_specific_parameters());
++    pi.opaque_parameters(p.opaque_parameters());
+ 
+     return std::make_tuple(pi,
+         has_primitive_properties,
+@@ -403,8 +402,8 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
+     r.generation_type(ao.generation_type());
+     r.class_type(cpp::class_types::user_defined);
+ 
+-    const auto& isp(ao.implementation_specific_parameters());
+-    r.implementation_specific_parameters(isp);
++    const auto& isp(ao.opaque_parameters());
++    r.opaque_parameters(isp);
+ 
+     const auto pn(ao.parent_name());
+     if (pn) {
