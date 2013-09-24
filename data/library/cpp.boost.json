@@ -6,7 +6,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "shared_ptr",
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.type.family" : "smart_pointer",
                     "cpp.domain.header.file_name" : "boost/shared_ptr.hpp",
@@ -19,7 +19,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "weak_ptr",
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.type.family" : "smart_pointer",
                     "cpp.domain.header.file_name" : "boost/weak_ptr.hpp",
@@ -32,7 +32,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "scoped_ptr",
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.type.family" : "smart_pointer",
                     "cpp.domain.header.file_name" : "boost/scoped_ptr.hpp",
@@ -45,7 +45,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "optional",
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.type.family" : "smart_pointer",
                     "cpp.type.requires_manual_move_constructor" : true,
@@ -59,7 +59,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "variant",
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.type.requires_manual_move_constructor" : true,
                     "cpp.domain.header.file_name" : "boost/variant.hpp",
@@ -75,7 +75,7 @@
             "module_path" : [
                 "asio",
             ],
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/asio/io_service.hpp",
                     "cpp.hash.std.status" : "unsupported",
@@ -90,7 +90,7 @@
             "module_path" : [
                 "asio", "ip", "tcp"
             ],
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
                     "cpp.hash.std.status" : "unsupported",
@@ -105,7 +105,7 @@
             "module_path" : [
                 "asio", "ip", "tcp"
             ],
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
                     "cpp.hash.std.status" : "unsupported",
@@ -120,7 +120,7 @@
             "module_path" : [
                 "filesystem"
             ],
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.type.requires_manual_move_constructor" : true,
                     "cpp.domain.header.file_name" : "boost/filesystem/path.hpp",
@@ -134,7 +134,7 @@
             "module_path" : [
                 "gregorian"
             ],
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/date_time/gregorian/gregorian_types.hpp",
                     "cpp.domain.header.is_system" : true,
@@ -151,7 +151,7 @@
             "module_path" : [
                 "posix_time"
             ],
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
                     "cpp.domain.header.is_system" : true,
@@ -168,7 +168,7 @@
             "module_path" : [
                 "posix_time"
             ],
-            "implementation_specific_parameters" : [
+            "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
                     "cpp.domain.header.is_system" : true,

@@ -25,12 +25,12 @@ namespace sml {
 
 property::property(
     const std::string& documentation,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const std::string& name,
     const dogen::sml::nested_qname& type,
     const std::string& default_value)
     : documentation_(documentation),
-      implementation_specific_parameters_(implementation_specific_parameters),
+      opaque_parameters_(opaque_parameters),
       name_(name),
       type_(type),
       default_value_(default_value) { }
@@ -38,7 +38,7 @@ property::property(
 void property::swap(property& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(opaque_parameters_, other.opaque_parameters_);
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(default_value_, other.default_value_);
@@ -46,7 +46,7 @@ void property::swap(property& other) noexcept {
 
 bool property::operator==(const property& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        opaque_parameters_ == rhs.opaque_parameters_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
         default_value_ == rhs.default_value_;
@@ -74,20 +74,20 @@ void property::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::vector<std::pair<std::string, std::string> >& property::implementation_specific_parameters() const {
-    return implementation_specific_parameters_;
+const std::list<std::pair<std::string, std::string> >& property::opaque_parameters() const {
+    return opaque_parameters_;
 }
 
-std::vector<std::pair<std::string, std::string> >& property::implementation_specific_parameters() {
-    return implementation_specific_parameters_;
+std::list<std::pair<std::string, std::string> >& property::opaque_parameters() {
+    return opaque_parameters_;
 }
 
-void property::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
-    implementation_specific_parameters_ = v;
+void property::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
+    opaque_parameters_ = v;
 }
 
-void property::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
-    implementation_specific_parameters_ = std::move(v);
+void property::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
+    opaque_parameters_ = std::move(v);
 }
 
 const std::string& property::name() const {

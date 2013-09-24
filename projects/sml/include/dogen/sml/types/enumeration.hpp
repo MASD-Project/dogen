@@ -50,7 +50,7 @@ public:
 public:
     enumeration(
         const std::string& documentation,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,

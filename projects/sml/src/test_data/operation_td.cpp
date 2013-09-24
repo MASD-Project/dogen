@@ -39,8 +39,8 @@ create_std_pair_std_string_std_string(unsigned int position) {
     return r;
 }
 
-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
-    std::vector<std::pair<std::string, std::string> > r;
+std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_string_std_string_(unsigned int position) {
+    std::list<std::pair<std::string, std::string> > r;
     for (unsigned int i(0); i < 10; ++i) {
         r.push_back(create_std_pair_std_string_std_string(position + i));
     }
@@ -82,7 +82,7 @@ operation_generator::operation_generator() : position_(0) { }
 void operation_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
+    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 1));
     v.name(create_std_string(position + 2));
     v.parameters(create_std_list_dogen_sml_parameter(position + 3));
     v.type(create_boost_optional_dogen_sml_nested_qname(position + 4));

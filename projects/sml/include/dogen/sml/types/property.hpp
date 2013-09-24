@@ -26,9 +26,9 @@
 #endif
 
 #include <algorithm>
+#include <list>
 #include <string>
 #include <utility>
-#include <vector>
 #include "dogen/sml/serialization/property_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 
@@ -48,7 +48,7 @@ public:
 public:
     property(
         const std::string& documentation,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const std::string& name,
         const dogen::sml::nested_qname& type,
         const std::string& default_value);
@@ -79,10 +79,10 @@ public:
      * @brief Associated generic parameters which may be opaque.
      */
     /**@{*/
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters() const;
+    std::list<std::pair<std::string, std::string> >& opaque_parameters();
+    void opaque_parameters(const std::list<std::pair<std::string, std::string> >& v);
+    void opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v);
     /**@}*/
 
     /**
@@ -132,7 +132,7 @@ public:
 
 private:
     std::string documentation_;
-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    std::list<std::pair<std::string, std::string> > opaque_parameters_;
     std::string name_;
     dogen::sml::nested_qname type_;
     std::string default_value_;

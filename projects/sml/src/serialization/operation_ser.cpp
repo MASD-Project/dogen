@@ -31,7 +31,6 @@
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
-#include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
 #include "dogen/sml/serialization/parameter_ser.hpp"
@@ -49,7 +48,7 @@ void save(Archive& ar,
     const dogen::sml::operation& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parameters", v.parameters_);
     ar << make_nvp("type", v.type_);
@@ -60,7 +59,7 @@ void load(Archive& ar,
     dogen::sml::operation& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parameters", v.parameters_);
     ar >> make_nvp("type", v.type_);

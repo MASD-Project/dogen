@@ -31,7 +31,7 @@ value_object::value_object()
 
 value_object::value_object(
     const std::string& documentation,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -50,7 +50,7 @@ value_object::value_object(
     const std::list<dogen::sml::qname>& modeled_concepts,
     const dogen::sml::value_object_types& type)
     : dogen::sml::abstract_object(documentation,
-      implementation_specific_parameters,
+      opaque_parameters,
       name,
       generation_type,
       origin_type,

@@ -93,7 +93,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, st
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -136,7 +136,7 @@ class_info::class_info(
     const std::string& original_parent_name,
     const std::string& original_parent_name_qualified,
     const std::list<std::string>& leaves,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const bool is_comparable,
     const bool is_visitable,
     const bool is_immutable,
@@ -157,7 +157,7 @@ class_info::class_info(
       original_parent_name_(original_parent_name),
       original_parent_name_qualified_(original_parent_name_qualified),
       leaves_(leaves),
-      implementation_specific_parameters_(implementation_specific_parameters),
+      opaque_parameters_(opaque_parameters),
       is_comparable_(is_comparable),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
@@ -190,7 +190,7 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"original_parent_name\": " << "\"" << tidy_up_string(original_parent_name_) << "\"" << ", "
       << "\"original_parent_name_qualified\": " << "\"" << tidy_up_string(original_parent_name_qualified_) << "\"" << ", "
       << "\"leaves\": " << leaves_ << ", "
-      << "\"implementation_specific_parameters\": " << implementation_specific_parameters_ << ", "
+      << "\"opaque_parameters\": " << opaque_parameters_ << ", "
       << "\"is_comparable\": " << is_comparable_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
@@ -217,7 +217,7 @@ void class_info::swap(class_info& other) noexcept {
     swap(original_parent_name_, other.original_parent_name_);
     swap(original_parent_name_qualified_, other.original_parent_name_qualified_);
     swap(leaves_, other.leaves_);
-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(opaque_parameters_, other.opaque_parameters_);
     swap(is_comparable_, other.is_comparable_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
@@ -247,7 +247,7 @@ bool class_info::operator==(const class_info& rhs) const {
         original_parent_name_ == rhs.original_parent_name_ &&
         original_parent_name_qualified_ == rhs.original_parent_name_qualified_ &&
         leaves_ == rhs.leaves_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        opaque_parameters_ == rhs.opaque_parameters_ &&
         is_comparable_ == rhs.is_comparable_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
@@ -430,20 +430,20 @@ void class_info::leaves(const std::list<std::string>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::vector<std::pair<std::string, std::string> >& class_info::implementation_specific_parameters() const {
-    return implementation_specific_parameters_;
+const std::list<std::pair<std::string, std::string> >& class_info::opaque_parameters() const {
+    return opaque_parameters_;
 }
 
-std::vector<std::pair<std::string, std::string> >& class_info::implementation_specific_parameters() {
-    return implementation_specific_parameters_;
+std::list<std::pair<std::string, std::string> >& class_info::opaque_parameters() {
+    return opaque_parameters_;
 }
 
-void class_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
-    implementation_specific_parameters_ = v;
+void class_info::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
+    opaque_parameters_ = v;
 }
 
-void class_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
-    implementation_specific_parameters_ = std::move(v);
+void class_info::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
+    opaque_parameters_ = std::move(v);
 }
 
 bool class_info::is_comparable() const {

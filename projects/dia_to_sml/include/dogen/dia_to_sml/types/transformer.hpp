@@ -135,7 +135,7 @@ private:
 
         const auto pair(comments_parser_->parse(o.comment()));
         e.documentation(pair.first);
-        e.implementation_specific_parameters(pair.second);
+        e.opaque_parameters(pair.second);
     }
 
     /**

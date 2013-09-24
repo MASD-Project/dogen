@@ -45,7 +45,7 @@ inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::stri
     return seed;
 }
 
-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
+inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_pair_std_string_std_string(i));
@@ -130,7 +130,7 @@ std::size_t model_hasher::hash(const model&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
+    combine(seed, hash_std_list_std_pair_std_string_std_string_(v.opaque_parameters()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());

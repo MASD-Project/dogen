@@ -340,8 +340,7 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
 
     nti.complete_name(complete_name);
     pi.type(nti);
-    pi.implementation_specific_parameters(
-        p.implementation_specific_parameters());
+    pi.opaque_parameters(p.opaque_parameters());
 
     return std::make_tuple(pi,
         has_primitive_properties,
@@ -403,8 +402,8 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
     r.generation_type(ao.generation_type());
     r.class_type(cpp::class_types::user_defined);
 
-    const auto& isp(ao.implementation_specific_parameters());
-    r.implementation_specific_parameters(isp);
+    const auto& isp(ao.opaque_parameters());
+    r.opaque_parameters(isp);
 
     const auto pn(ao.parent_name());
     if (pn) {

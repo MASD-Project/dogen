@@ -3,10 +3,10 @@
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
+	<opaque_parameters class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</implementation_specific_parameters>
+	</opaque_parameters>
 	<name class_id="10" tracking_level="0" version="0">
 		<model_name>all_primitives</model_name>
 		<external_module_path class_id="11" tracking_level="0" version="0">
@@ -74,10 +74,10 @@
 						<abstract_object class_id="22" tracking_level="0" version="0">
 							<type class_id="23" tracking_level="0" version="0">
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>
 									<model_name>all_primitives</model_name>
 									<external_module_path>
@@ -98,10 +98,10 @@
 								<item_version>0</item_version>
 								<item class_id="25" tracking_level="0" version="0">
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>bool_property</name>
 									<type class_id="26" tracking_level="0" version="0">
 										<type>
@@ -126,10 +126,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>char_property</name>
 									<type>
 										<type>
@@ -154,10 +154,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>uchar_property</name>
 									<type>
 										<type>
@@ -182,10 +182,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>int_property</name>
 									<type>
 										<type>
@@ -210,10 +210,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>uint_property</name>
 									<type>
 										<type>
@@ -238,10 +238,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>long_property</name>
 									<type>
 										<type>
@@ -266,10 +266,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>ulong_property</name>
 									<type>
 										<type>
@@ -294,10 +294,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>long_long_property</name>
 									<type>
 										<type>
@@ -322,10 +322,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>ulong_long_property</name>
 									<type>
 										<type>
@@ -350,10 +350,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>short_property</name>
 									<type>
 										<type>
@@ -378,10 +378,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>ushort_property</name>
 									<type>
 										<type>
@@ -406,10 +406,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>double_property</name>
 									<type>
 										<type>
@@ -434,10 +434,10 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>float_property</name>
 									<type>
 										<type>

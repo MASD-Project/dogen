@@ -3,10 +3,10 @@
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
+	<opaque_parameters class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</implementation_specific_parameters>
+	</opaque_parameters>
 	<name class_id="10" tracking_level="0" version="0">
 		<model_name>classes_inout_package</model_name>
 		<external_module_path class_id="11" tracking_level="0" version="0">
@@ -50,10 +50,10 @@
 			</first>
 			<second class_id="16" tracking_level="0" version="0">
 				<documentation></documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>classes_inout_package</model_name>
 					<external_module_path>
@@ -112,10 +112,10 @@
 					<abstract_object class_id="24" tracking_level="0" version="0">
 						<type class_id="25" tracking_level="0" version="0">
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>classes_inout_package</model_name>
 								<external_module_path>
@@ -136,10 +136,10 @@
 							<item_version>0</item_version>
 							<item class_id="27" tracking_level="0" version="0">
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type class_id="28" tracking_level="0" version="0">
 									<type>
@@ -212,10 +212,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>classes_inout_package</model_name>
 								<external_module_path>
@@ -237,10 +237,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>

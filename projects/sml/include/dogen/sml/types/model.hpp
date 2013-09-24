@@ -27,11 +27,11 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include <list>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
-#include <vector>
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/model_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_object_fwd.hpp"
@@ -83,7 +83,7 @@ public:
 public:
     model(
         const std::string& documentation,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
@@ -121,10 +121,10 @@ public:
      * @brief Associated generic parameters which may be opaque.
      */
     /**@{*/
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters() const;
+    std::list<std::pair<std::string, std::string> >& opaque_parameters();
+    void opaque_parameters(const std::list<std::pair<std::string, std::string> >& v);
+    void opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v);
     /**@}*/
 
     /**
@@ -238,7 +238,7 @@ public:
 
 private:
     std::string documentation_;
-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    std::list<std::pair<std::string, std::string> > opaque_parameters_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;

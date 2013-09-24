@@ -190,7 +190,7 @@ sml::property transformer::to_property(const processed_property& p) const {
 
     const auto pair(comments_parser_->parse(p.comment()));
     r.documentation(pair.first);
-    r.implementation_specific_parameters(pair.second);
+    r.opaque_parameters(pair.second);
 
     return r;
 }
@@ -330,7 +330,7 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
     ae.is_aggregate_root(p.is_aggregate_root());
 
     for (const auto& p : ae.properties()) {
-        for (const auto pair : p.implementation_specific_parameters()) {
+        for (const auto pair : p.opaque_parameters()) {
             if (pair.first != identity_attribute_key)
                 continue;
 
@@ -462,7 +462,7 @@ void transformer::from_note(const processed_object& o) {
 
     if (o.child_node_id().empty()) {
         context_.model().documentation(pair.first);
-        context_.model().implementation_specific_parameters(pair.second);
+        context_.model().opaque_parameters(pair.second);
         return;
     }
 
@@ -483,7 +483,7 @@ void transformer::from_note(const processed_object& o) {
                 i->second.simple_name()));
     }
     j->second.documentation(pair.first);
-    j->second.implementation_specific_parameters(pair.second);
+    j->second.opaque_parameters(pair.second);
 }
 
 void transformer::to_concept(const processed_object& o, const profile& p) {

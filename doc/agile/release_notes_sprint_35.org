@@ -10,16 +10,18 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-24 Tue 08:10]
+Clock summary at [2013-09-24 Tue 23:36]
 
-| Headline                                                | Time   |      |      |
-|---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *2:26* |      |      |
-|---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 2:26 |      |
-| IMPLEMENTATION Release notes and backlog grooming       |        |      | 0:12 |
-| COMPLETED Refactor OM tests to avoid over-inclusion     |        |      | 0:32 |
-| IMPLEMENTATION Create a complete domain formatter in OM |        |      | 1:42 |
+| Headline                                                     | Time   |      |      |
+|--------------------------------------------------------------+--------+------+------|
+| *Total time*                                                 | *4:22* |      |      |
+|--------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                              |        | 4:22 |      |
+| IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:12 |
+| COMPLETED Refactor OM tests to avoid over-inclusion          |        |      | 0:32 |
+| COMPLETED Convert implementation specific parameters to list |        |      | 1:06 |
+| COMPLETED Rename implementation specific parameters          |        |      | 0:50 |
+| IMPLEMENTATION Create a complete domain formatter in OM      |        |      | 1:42 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -33,6 +35,48 @@ At present OM builds take too long on slow hardware because we are
 using the facet includers in tests. This means that every time a
 service changes one has to rebuild all the specs in OM. Include all
 the types manually in unit tests to reduce the dependencies.
+
+*** COMPLETED Convert implementation specific parameters to list      :spike:
+    CLOSED: [2013-09-24 Tue 22:49]
+    CLOCK: [2013-09-24 Tue 23:19]--[2013-09-24 Tue 23:36] =>  0:17
+    CLOCK: [2013-09-24 Tue 22:49]--[2013-09-24 Tue 23:19] =>  0:30
+    CLOCK: [2013-09-24 Tue 17:56]--[2013-09-24 Tue 18:08] =>  0:12
+    CLOCK: [2013-09-24 Tue 08:13]--[2013-09-24 Tue 08:20] =>  0:07
+
+We need to do lookups into the parameters, so a vector is not
+suitable. change it to a =std::unordered_map=.
+
+Actually, It is not possible to do this due to the way ODB parameters
+work; we need to maintain the order defined by the user (and it needs
+to allow for duplicates). However, might as well use a =std::list= instead of
+a =std::vector=.
+
+*** COMPLETED Rename implementation specific parameters               :story:
+    CLOSED: [2013-09-24 Tue 18:33]
+    CLOCK: [2013-09-24 Tue 22:27]--[2013-09-24 Tue 22:49] =>  0:22
+    CLOCK: [2013-09-24 Tue 18:12]--[2013-09-24 Tue 18:40] =>  0:28
+
+These should really be called back end specific parameters at the SML
+level. At the dia level, if a parameter is passed in which has a
+representation at the SML level it should simply be converted to this
+representation instead of being added to the KVP.
+
+Actually, these are more like generic parameters:
+
+- at the dia level they are used to fill in gaps in dia (e.g. packages
+  and diagrams do not have comments)
+- at the SML level, they are used to add information which does not
+  make sense for it to be in dia: is property key.
+- at the backend level, they are used to provide information which
+  does not make sense to live in SML: for example the ODB parameters.
+
+Also, when the string table support has been added, we need to create
+a string table with all valid values for the parameter keys.
+
+Name choices:
+
+- opaque parameters
+- untyped parameters
 
 *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
     CLOCK: [2013-09-23 Mon 18:20]--[2013-09-23 Mon 18:50] =>  0:30

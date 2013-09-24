@@ -80,8 +80,8 @@ create_std_pair_std_string_std_string(unsigned int position) {
     return r;
 }
 
-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
-    std::vector<std::pair<std::string, std::string> > r;
+std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_string_std_string_(unsigned int position) {
+    std::list<std::pair<std::string, std::string> > r;
     for (unsigned int i(0); i < 10; ++i) {
         r.push_back(create_std_pair_std_string_std_string(position + i));
     }
@@ -121,7 +121,7 @@ populate(const unsigned int position, result_type& v) {
     v.original_parent_name(create_std_string(position + 10));
     v.original_parent_name_qualified(create_std_string(position + 11));
     v.leaves(create_std_list_std_string(position + 12));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 13));
+    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 13));
     v.is_comparable(create_bool(position + 14));
     v.is_visitable(create_bool(position + 15));
     v.is_immutable(create_bool(position + 16));

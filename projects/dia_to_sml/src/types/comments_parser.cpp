@@ -36,15 +36,17 @@ const std::string empty;
 const std::string prefix("#DOGEN ");
 const std::string equals("=");
 const std::string separator_not_found("Expected separator on KVP.");
+const std::string duplicated_key("Duplicated key: ");
 
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-std::pair<std::string, comments_parser::kvp_vector_type>
+std::pair<std::string, comments_parser::kvp_container_type>
 comments_parser::parse(const std::string& c) const {
-    std::pair<std::string, kvp_vector_type> r;
+    std::pair<std::string, kvp_container_type> r;
+
     if (c.empty())
         return r;
 
@@ -61,10 +63,9 @@ comments_parser::parse(const std::string& c) const {
                 BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
             }
 
-            kvp_vector_type::value_type kvp;
-            kvp.first = line.substr(0, pos);
-            kvp.second = line.substr(pos + 1);
-            r.second.push_back(kvp);
+            const auto key(line.substr(0, pos));
+            const auto value(line.substr(pos + 1));
+            r.second.push_back(std::make_pair(key, value));
         } else
             documentation_stream << line << std::endl;
     }

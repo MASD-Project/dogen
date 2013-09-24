@@ -23,7 +23,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/pair_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
@@ -49,6 +49,10 @@ const std::string kvp_2(
     "#DOGEN a strange key = some really complicated value 1234");
 const std::string key_2("a strange key ");
 const std::string value_2(" some really complicated value 1234");
+
+const std::string kvp_3("#DOGEN KEY3=VALUE3");
+const std::string key_3("KEY3");
+const std::string value_3("VALUE3");
 
 const std::string kvp_no_key("#DOGEN some really complicated value 1234");
 const std::string kvp_no_value("#DOGEN KEY=");
@@ -160,8 +164,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_no_end_line_results_in_empty_doc
 
     BOOST_CHECK(r.first.empty());
     BOOST_REQUIRE(r.second.size() == 1);
-    BOOST_CHECK(r.second[0].first == key_1);
-    BOOST_CHECK(r.second[0].second == value_1);
+    const auto& pair(*r.second.begin());
+    BOOST_CHECK(pair.first == key_1);
+    BOOST_CHECK(pair.second == value_1);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_end_line_results_in_empty_documentation_and_expected_parameter) {
@@ -177,8 +182,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_end_line_results_in_empty_docume
 
     BOOST_CHECK(r.first.empty());
     BOOST_REQUIRE(r.second.size() == 1);
-    BOOST_CHECK(r.second[0].first == key_1);
-    BOOST_CHECK(r.second[0].second == value_1);
+    const auto& pair(*r.second.begin());
+    BOOST_CHECK(pair.first == key_1);
+    BOOST_CHECK(pair.second == value_1);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_complex_kvp_results_in_empty_documentation_and_expected_parameter) {
@@ -191,8 +197,9 @@ BOOST_AUTO_TEST_CASE(comment_with_complex_kvp_results_in_empty_documentation_and
     BOOST_LOG_SEV(lg, info) << "result: " << r;
     BOOST_CHECK(r.first.empty());
     BOOST_REQUIRE(r.second.size() == 1);
-    BOOST_CHECK(r.second[0].first == key_2);
-    BOOST_CHECK(r.second[0].second == value_2);
+    const auto& pair(*r.second.begin());
+    BOOST_CHECK(pair.first == key_2);
+    BOOST_CHECK(pair.second == value_2);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_kvp_with_no_key_throws) {
@@ -285,7 +292,7 @@ BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation) {
 
 
 BOOST_AUTO_TEST_CASE(multi_line_comment_with_kvp_results_in_expected_documentation_and_expected_parameter) {
-    SETUP_TEST_LOG_SOURCE("multi_multi_line_comment_with_kvp_results_in_expected_documentation_and_expected_parameter");
+    SETUP_TEST_LOG_SOURCE("multi_line_comment_with_kvp_results_in_expected_documentation_and_expected_parameter");
 
     std::ostringstream os;
     os << line_1 << std::endl
@@ -314,17 +321,17 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_with_kvp_results_in_expected_documentati
     BOOST_CHECK(!std::getline(is, line));
 
     BOOST_REQUIRE(r.second.size() == 1);
-    BOOST_CHECK(r.second[0].first == key_1);
-    BOOST_CHECK(r.second[0].second == value_1);
+    const auto& pair(*r.second.begin());
+    BOOST_CHECK(pair.first == key_1);
+    BOOST_CHECK(pair.second == value_1);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_multiple_kvps_results_in_empty_documentation_and_expected_parameters) {
     SETUP_TEST_LOG_SOURCE("comment_with_multiple_kvps_results_in_empty_documentation_and_expected_parameters");
 
     std::ostringstream os;
-    os << kvp_1 << std::endl
-       << kvp_2 << std::endl
-       << kvp_1 << std::endl;
+    os << kvp_1 << std::endl << kvp_2 << std::endl
+       << kvp_3 << std::endl << kvp_1 << std::endl;
 
     BOOST_LOG_SEV(lg, info) << "input: " << os.str();
     dogen::dia_to_sml::comments_parser cp;
@@ -332,16 +339,20 @@ BOOST_AUTO_TEST_CASE(comment_with_multiple_kvps_results_in_empty_documentation_a
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
     BOOST_CHECK(r.first.empty());
-    BOOST_REQUIRE(r.second.size() == 3);
+    BOOST_REQUIRE(r.second.size() == 4);
 
-    BOOST_CHECK(r.second[0].first == key_1);
-    BOOST_CHECK(r.second[0].second == value_1);
+    auto i(r.second.begin());
+    BOOST_CHECK(i->first == key_1);
+    BOOST_CHECK(i->second == value_1);
 
-    BOOST_CHECK(r.second[1].first == key_2);
-    BOOST_CHECK(r.second[1].second == value_2);
+    BOOST_CHECK((++i)->first == key_2);
+    BOOST_CHECK(i->second == value_2);
 
-    BOOST_CHECK(r.second[2].first == key_1);
-    BOOST_CHECK(r.second[2].second == value_1);
+    BOOST_CHECK((++i)->first == key_3);
+    BOOST_CHECK(i->second == value_3);
+
+    // test duplicate keys
+    BOOST_CHECK((++i)->first == key_1);
+    BOOST_CHECK(i->second == value_1);
 }
-
 BOOST_AUTO_TEST_SUITE_END()

@@ -638,13 +638,13 @@ it has 100% feature coverage.
         <dia:point val="12.9167,116"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.8667,115.95;45.8067,134.05"/>
+        <dia:rectangle val="12.8667,115.95;38.4917,134.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="12.9167,116"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="18.000000000000004"/>
@@ -1026,10 +1026,10 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#implementation_specific_parameters#</dia:string>
+            <dia:string>#opaque_parameters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3036,13 +3036,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="5.9167,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.8667,145.95;38.8067,152.05"/>
+        <dia:rectangle val="5.8667,145.95;31.4917,152.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="5.9167,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -3160,10 +3160,10 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#implementation_specific_parameters#</dia:string>
+            <dia:string>#opaque_parameters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3275,7 +3275,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="12.9167,134"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.1667,133.25;22.5367,146.75"/>
+        <dia:rectangle val="12.1667,133.25;18.8792,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3283,8 +3283,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="12.9167,134"/>
         <dia:point val="12.9167,140"/>
-        <dia:point val="22.3367,140"/>
-        <dia:point val="22.3367,145.95"/>
+        <dia:point val="18.6792,140"/>
+        <dia:point val="18.6792,145.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3346,7 +3346,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="47.2892,163"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.7067,151.95;48.0392,163.8"/>
+        <dia:rectangle val="31.3917,151.95;48.0392,163.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3354,8 +3354,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="47.2892,163"/>
         <dia:point val="47.2892,158"/>
-        <dia:point val="38.7567,158"/>
-        <dia:point val="38.7567,152"/>
+        <dia:point val="31.4417,158"/>
+        <dia:point val="31.4417,152"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5186,17 +5186,17 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="45.7567,134"/>
+        <dia:point val="38.4417,134"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.0067,133.25;61.4467,146.8"/>
+        <dia:rectangle val="37.6917,133.25;61.4467,146.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="45.7567,134"/>
-        <dia:point val="45.7567,140"/>
+        <dia:point val="38.4417,134"/>
+        <dia:point val="38.4417,140"/>
         <dia:point val="61.2467,140"/>
         <dia:point val="61.2467,146"/>
       </dia:attribute>
@@ -6647,7 +6647,7 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:point val="69.4475,93"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.2867,92.95;70.2975,116"/>
+        <dia:rectangle val="25.6292,92.95;70.2975,116"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6655,8 +6655,8 @@ Must be valid according to the rules for C++ names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="69.4475,93"/>
         <dia:point val="69.4475,100"/>
-        <dia:point val="29.3367,100"/>
-        <dia:point val="29.3367,115.95"/>
+        <dia:point val="25.6792,100"/>
+        <dia:point val="25.6792,115.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

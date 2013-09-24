@@ -3,10 +3,10 @@
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
+	<opaque_parameters class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</implementation_specific_parameters>
+	</opaque_parameters>
 	<name class_id="10" tracking_level="0" version="0">
 		<model_name>enumeration</model_name>
 		<external_module_path class_id="11" tracking_level="0" version="0">
@@ -50,10 +50,10 @@
 			</first>
 			<second class_id="16" tracking_level="0" version="0">
 				<documentation></documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>enumeration</model_name>
 					<external_module_path>
@@ -106,10 +106,10 @@
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
 				<type class_id="22" tracking_level="0" version="0">
 					<documentation></documentation>
-					<implementation_specific_parameters>
+					<opaque_parameters>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
+					</opaque_parameters>
 					<name>
 						<model_name>enumeration</model_name>
 						<external_module_path>
@@ -188,10 +188,10 @@
 			<second object_id="_1">
 				<type>
 					<documentation></documentation>
-					<implementation_specific_parameters>
+					<opaque_parameters>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
+					</opaque_parameters>
 					<name>
 						<model_name>enumeration</model_name>
 						<external_module_path>
@@ -272,10 +272,10 @@
 
 this is a long comment
 </documentation>
-					<implementation_specific_parameters>
+					<opaque_parameters>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
+					</opaque_parameters>
 					<name>
 						<model_name>enumeration</model_name>
 						<external_module_path>
@@ -352,10 +352,10 @@ this is a long comment
 					<abstract_object class_id="28" tracking_level="0" version="0">
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>enumeration</model_name>
 								<external_module_path>
@@ -376,10 +376,10 @@ this is a long comment
 							<item_version>0</item_version>
 							<item class_id="30" tracking_level="0" version="0">
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>colour_type</name>
 								<type class_id="31" tracking_level="0" version="0">
 									<type>
@@ -404,10 +404,10 @@ this is a long comment
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>book_type</name>
 								<type>
 									<type>
@@ -432,10 +432,10 @@ this is a long comment
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>shape_type</name>
 								<type>
 									<type>

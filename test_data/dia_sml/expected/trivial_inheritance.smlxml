@@ -8,14 +8,14 @@ It includes the visitable stereotype since it only makes sense
 in the context of inheritance.
 
 </documentation>
-	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
+	<opaque_parameters class_id="9" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
 		<item class_id="10" tracking_level="0" version="0">
 			<first>COMMENT</first>
 			<second>true</second>
 		</item>
-	</implementation_specific_parameters>
+	</opaque_parameters>
 	<name class_id="11" tracking_level="0" version="0">
 		<model_name>trivial_inheritance</model_name>
 		<external_module_path class_id="12" tracking_level="0" version="0">
@@ -221,10 +221,10 @@ in the context of inheritance.
 			</first>
 			<second class_id="18" tracking_level="0" version="0">
 				<documentation></documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -260,10 +260,10 @@ in the context of inheritance.
 			</first>
 			<second>
 				<documentation></documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -299,10 +299,10 @@ in the context of inheritance.
 			</first>
 			<second>
 				<documentation></documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -338,10 +338,10 @@ in the context of inheritance.
 			</first>
 			<second>
 				<documentation></documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -401,10 +401,10 @@ in the context of inheritance.
 					<abstract_object class_id="26" tracking_level="0" version="0">
 						<type class_id="27" tracking_level="0" version="0">
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -426,10 +426,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item class_id="29" tracking_level="0" version="0">
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type class_id="30" tracking_level="0" version="0">
 									<type>
@@ -515,10 +515,10 @@ in the context of inheritance.
 						<type>
 							<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -613,10 +613,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -638,10 +638,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -739,10 +739,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -763,10 +763,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -888,10 +888,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -912,10 +912,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -1014,10 +1014,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1039,10 +1039,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -1127,10 +1127,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1224,10 +1224,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1321,10 +1321,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1345,10 +1345,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -1447,10 +1447,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1472,10 +1472,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -1575,10 +1575,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1599,10 +1599,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -1710,10 +1710,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1807,10 +1807,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1831,10 +1831,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -1933,10 +1933,10 @@ in the context of inheritance.
 						<type>
 							<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -1958,10 +1958,10 @@ in the context of inheritance.
 							<item>
 								<documentation>Force manual move constructor.
 </documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -2060,10 +2060,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2084,10 +2084,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -2172,10 +2172,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2243,10 +2243,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2314,10 +2314,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2409,10 +2409,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2504,10 +2504,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2613,10 +2613,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2637,10 +2637,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -2739,10 +2739,10 @@ in the context of inheritance.
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2764,10 +2764,10 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -2868,10 +2868,10 @@ in the context of inheritance.
 						<type>
 							<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>trivial_inheritance</model_name>
 								<external_module_path>
@@ -2893,10 +2893,10 @@ in the context of inheritance.
 							<item>
 								<documentation>Force manual move constructor.
 </documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>

@@ -87,7 +87,7 @@ void odb_header::format_class(const cpp::source_file& f) {
 
     const auto ei(*o);
     {
-        if (ei.implementation_specific_parameters().empty()) {
+        if (ei.opaque_parameters().empty()) {
             stream_ << indenter_ << "// class has no ODB pragmas defined."
                     << std::endl;
             utility_.blank_line();
@@ -99,7 +99,7 @@ void odb_header::format_class(const cpp::source_file& f) {
         odb_stream << indenter_ << "#ifdef ODB_COMPILER" << std::endl
                    << std::endl;
 
-        for (const auto kvp : ei.implementation_specific_parameters()) {
+        for (const auto kvp : ei.opaque_parameters()) {
             if (kvp.first == odb_key) {
                 has_odb_parms = true;
                 odb_stream << indenter_
@@ -110,7 +110,7 @@ void odb_header::format_class(const cpp::source_file& f) {
 
         odb_stream << std::endl;
         for (const auto p : ei.properties()) {
-            for (const auto kvp : p.implementation_specific_parameters()) {
+            for (const auto kvp : p.opaque_parameters()) {
                 if (kvp.first == odb_key) {
                     has_odb_parms = true;
                     odb_stream << indenter_

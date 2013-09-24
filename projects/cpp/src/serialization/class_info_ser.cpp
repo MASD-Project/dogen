@@ -30,7 +30,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
-#include <boost/serialization/vector.hpp>
 #include "dogen/cpp/serialization/class_info_ser.hpp"
 #include "dogen/cpp/serialization/class_types_ser.hpp"
 #include "dogen/cpp/serialization/entity_ser.hpp"
@@ -69,7 +68,7 @@ void save(Archive& ar,
     ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar << make_nvp("leaves", v.leaves_);
-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
@@ -97,7 +96,7 @@ void load(Archive& ar,
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar >> make_nvp("leaves", v.leaves_);
-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);

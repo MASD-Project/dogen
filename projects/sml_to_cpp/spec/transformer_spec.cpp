@@ -428,7 +428,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
     BOOST_CHECK(ci.original_parent_name().empty());
     BOOST_CHECK(ci.original_parent_name_qualified().empty());
     BOOST_CHECK(ci.leaves().empty());
-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
+    BOOST_CHECK(ci.opaque_parameters().empty());
     BOOST_CHECK(!ci.is_comparable());
     BOOST_CHECK(!ci.is_visitable());
     BOOST_CHECK(!ci.is_immutable());
@@ -488,7 +488,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_property_results_in_expected_class
     BOOST_CHECK(ci.original_parent_name().empty());
     BOOST_CHECK(ci.original_parent_name_qualified().empty());
     BOOST_CHECK(ci.leaves().empty());
-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
+    BOOST_CHECK(ci.opaque_parameters().empty());
     BOOST_CHECK(!ci.is_comparable());
     BOOST_CHECK(!ci.is_visitable());
     BOOST_CHECK(!ci.is_immutable());
@@ -554,7 +554,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_bool_property_results_in_expected_
     BOOST_CHECK(ci.original_parent_name().empty());
     BOOST_CHECK(ci.original_parent_name_qualified().empty());
     BOOST_CHECK(ci.leaves().empty());
-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
+    BOOST_CHECK(ci.opaque_parameters().empty());
     BOOST_CHECK(!ci.is_comparable());
     BOOST_CHECK(!ci.is_visitable());
     BOOST_CHECK(!ci.is_immutable());
@@ -619,7 +619,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
     BOOST_CHECK(ci.original_parent_name().empty());
     BOOST_CHECK(ci.original_parent_name_qualified().empty());
     BOOST_CHECK(ci.leaves().empty());
-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
+    BOOST_CHECK(ci.opaque_parameters().empty());
     BOOST_CHECK(!ci.is_comparable());
     BOOST_CHECK(!ci.is_visitable());
     BOOST_CHECK(!ci.is_immutable());
@@ -686,7 +686,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
     BOOST_CHECK(ci.original_parent_name().empty());
     BOOST_CHECK(ci.original_parent_name_qualified().empty());
     BOOST_CHECK(ci.leaves().empty());
-    BOOST_CHECK(ci.implementation_specific_parameters().empty());
+    BOOST_CHECK(ci.opaque_parameters().empty());
     BOOST_CHECK(!ci.is_comparable());
     BOOST_CHECK(!ci.is_visitable());
     BOOST_CHECK(!ci.is_immutable());

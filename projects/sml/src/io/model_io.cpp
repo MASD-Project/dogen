@@ -53,7 +53,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, st
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -210,7 +210,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
+      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "

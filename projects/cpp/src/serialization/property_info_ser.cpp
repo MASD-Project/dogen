@@ -26,10 +26,10 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
-#include <boost/serialization/vector.hpp>
 #include "dogen/cpp/serialization/nested_type_info_ser.hpp"
 #include "dogen/cpp/serialization/property_info_ser.hpp"
 
@@ -48,7 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("type", v.type_);
-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
 }
@@ -60,7 +60,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("type", v.type_);
-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
 }

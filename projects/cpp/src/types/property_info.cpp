@@ -31,13 +31,13 @@ property_info::property_info(
     const std::string& name,
     const std::string& documentation,
     const dogen::cpp::nested_type_info& type,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const bool is_immutable,
     const bool is_fluent)
     : name_(name),
       documentation_(documentation),
       type_(type),
-      implementation_specific_parameters_(implementation_specific_parameters),
+      opaque_parameters_(opaque_parameters),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent) { }
 
@@ -46,7 +46,7 @@ void property_info::swap(property_info& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(type_, other.type_);
-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(opaque_parameters_, other.opaque_parameters_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
 }
@@ -55,7 +55,7 @@ bool property_info::operator==(const property_info& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         type_ == rhs.type_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        opaque_parameters_ == rhs.opaque_parameters_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_;
 }
@@ -114,20 +114,20 @@ void property_info::type(const dogen::cpp::nested_type_info&& v) {
     type_ = std::move(v);
 }
 
-const std::vector<std::pair<std::string, std::string> >& property_info::implementation_specific_parameters() const {
-    return implementation_specific_parameters_;
+const std::list<std::pair<std::string, std::string> >& property_info::opaque_parameters() const {
+    return opaque_parameters_;
 }
 
-std::vector<std::pair<std::string, std::string> >& property_info::implementation_specific_parameters() {
-    return implementation_specific_parameters_;
+std::list<std::pair<std::string, std::string> >& property_info::opaque_parameters() {
+    return opaque_parameters_;
 }
 
-void property_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
-    implementation_specific_parameters_ = v;
+void property_info::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
+    opaque_parameters_ = v;
 }
 
-void property_info::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
-    implementation_specific_parameters_ = std::move(v);
+void property_info::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
+    opaque_parameters_ = std::move(v);
 }
 
 bool property_info::is_immutable() const {

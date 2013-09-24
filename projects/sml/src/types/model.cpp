@@ -39,7 +39,7 @@ model::model()
 
 model::model(
     const std::string& documentation,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -51,7 +51,7 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects)
     : documentation_(documentation),
-      implementation_specific_parameters_(implementation_specific_parameters),
+      opaque_parameters_(opaque_parameters),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -66,7 +66,7 @@ model::model(
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(opaque_parameters_, other.opaque_parameters_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -81,7 +81,7 @@ void model::swap(model& other) noexcept {
 
 bool model::operator==(const model& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        opaque_parameters_ == rhs.opaque_parameters_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -116,20 +116,20 @@ void model::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() const {
-    return implementation_specific_parameters_;
+const std::list<std::pair<std::string, std::string> >& model::opaque_parameters() const {
+    return opaque_parameters_;
 }
 
-std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() {
-    return implementation_specific_parameters_;
+std::list<std::pair<std::string, std::string> >& model::opaque_parameters() {
+    return opaque_parameters_;
 }
 
-void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
-    implementation_specific_parameters_ = v;
+void model::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
+    opaque_parameters_ = v;
 }
 
-void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
-    implementation_specific_parameters_ = std::move(v);
+void model::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
+    opaque_parameters_ = std::move(v);
 }
 
 const dogen::sml::qname& model::name() const {

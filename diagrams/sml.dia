@@ -5982,16 +5982,16 @@ for Java, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O48">
       <dia:attribute name="obj_pos">
-        <dia:point val="-72,50"/>
+        <dia:point val="-69,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.05,49.95;-39.11,53.65"/>
+        <dia:rectangle val="-69.05,49.95;-43.425,53.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-72,50"/>
+        <dia:point val="-69,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6086,10 +6086,10 @@ for Java, etc.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#implementation_specific_parameters#</dia:string>
+            <dia:string>#opaque_parameters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6291,17 +6291,17 @@ for Java, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="-55.58,53.6"/>
+        <dia:point val="-56.2375,53.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-60.795,53.55;-54.73,65.05"/>
+        <dia:rectangle val="-60.795,53.55;-55.3875,65.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-55.58,53.6"/>
-        <dia:point val="-55.58,60"/>
+        <dia:point val="-56.2375,53.6"/>
+        <dia:point val="-56.2375,60"/>
         <dia:point val="-60.745,60"/>
         <dia:point val="-60.745,65"/>
       </dia:attribute>
@@ -8639,7 +8639,7 @@ object.#</dia:string>
         <dia:point val="28.255,107.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.4712,106.85;29.005,117.8"/>
+        <dia:rectangle val="10.4713,106.85;29.005,117.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10845,7 +10845,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="97.3775,64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.4,52.65;98.1275,65.6"/>
+        <dia:rectangle val="49.4,51.95;98.1275,64.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11129,7 +11129,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="49.45,52.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.4,52.65;161.817,65.6"/>
+        <dia:rectangle val="49.4,51.95;161.817,64.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11411,7 +11411,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="97.3775,68.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.6275,67.65;122.2,83.6"/>
+        <dia:rectangle val="96.6275,67.65;122.2,82.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11482,7 +11482,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="161.067,69.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.46,68.45;161.817,83.6"/>
+        <dia:rectangle val="132.46,68.45;161.817,82.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11553,7 +11553,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="49.45,57.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.4,57.45;122.75,86.3"/>
+        <dia:rectangle val="49.4,56.75;122.75,85.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11822,7 +11822,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="49.45,52.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.4,52.65;188.93,65.6"/>
+        <dia:rectangle val="49.4,51.95;188.93,64.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12456,7 +12456,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="127.255,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="115.245,86.25;128.005,105.55"/>
+        <dia:rectangle val="115.245,86.25;128.005,104.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

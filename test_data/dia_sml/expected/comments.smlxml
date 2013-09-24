@@ -6,14 +6,14 @@
 
 This comment will be applied to the model namespace itself.
 </documentation>
-	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
+	<opaque_parameters class_id="9" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
 		<item class_id="10" tracking_level="0" version="0">
 			<first>COMMENT</first>
 			<second>true</second>
 		</item>
-	</implementation_specific_parameters>
+	</opaque_parameters>
 	<name class_id="11" tracking_level="0" version="0">
 		<model_name>comments</model_name>
 		<external_module_path class_id="12" tracking_level="0" version="0">
@@ -59,14 +59,14 @@ This comment will be applied to the model namespace itself.
 			<second class_id="17" tracking_level="0" version="0">
 				<documentation>package2
 </documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
 						<first>COMMENT</first>
 						<second>true</second>
 					</item>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>comments</model_name>
 					<external_module_path>
@@ -104,14 +104,14 @@ This comment will be applied to the model namespace itself.
 			<second>
 				<documentation>package
 </documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
 						<first>COMMENT</first>
 						<second>true</second>
 					</item>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>comments</model_name>
 					<external_module_path>
@@ -174,14 +174,14 @@ This comment will be applied to the model namespace itself.
 second line
 third line with &quot;quote&quot;
 </documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>key</first>
 									<second>value</second>
 								</item>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>comments</model_name>
 								<external_module_path>
@@ -250,10 +250,10 @@ third line with &quot;quote&quot;
 						<type>
 							<documentation>this is the brief comment
 </documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>comments</model_name>
 								<external_module_path>
@@ -275,10 +275,10 @@ third line with &quot;quote&quot;
 							<item class_id="30" tracking_level="0" version="0">
 								<documentation>another brief comment
 </documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type class_id="31" tracking_level="0" version="0">
 									<type>
@@ -306,10 +306,10 @@ third line with &quot;quote&quot;
 
 a second line
 </documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -334,10 +334,10 @@ a second line
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>

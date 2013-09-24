@@ -25,13 +25,24 @@
 #pragma once
 #endif
 
-#include <vector>
+#include <list>
 #include <string>
 #include <utility>
 
 namespace dogen {
 namespace dia_to_sml {
 
+/**
+ * @brief Parses comments in dia diagrams.
+ *
+ * Comments can be stored in class objects, member functions, note
+ * objects, etc.
+ *
+ * Any line starting with the well defined marker @e #DOGEN - known as
+ * the opaque parameter marker - will be interpreted as carrying an
+ * opaque parameter in a key-value pair form, where the key and the
+ * value are separated by the assignment operator @e =.
+ */
 class comments_parser {
 public:
     comments_parser() = default;
@@ -41,10 +52,26 @@ public:
     comments_parser& operator=(const comments_parser&) = default;
 
 public:
-    typedef std::vector<std::pair<std::string, std::string> > kvp_vector_type;
+    typedef std::list<std::pair<std::string, std::string> > kvp_container_type;
 
 public:
-    std::pair<std::string, kvp_vector_type> parse(const std::string& c) const;
+    /**
+     * @brief Parses a string carrying the comments in the dia object.
+     *
+     * Note that the @e # markers used by dia are expected to have
+     * already been removed.
+     *
+     * @return pair where the first element contains all the text
+     * which does not start with the opaque parameter marker, and the
+     * second element is a key-value pair container with all of the
+     * keys and values of the lines that start with the opaque
+     * parameter marker.
+     *
+     * @pre lines starting with the opaque parameter marker must
+     * follow the defined syntax or else a parsing_error is thrown.
+     */
+    std::pair<std::string, kvp_container_type>
+    parse(const std::string& c) const;
 };
 
 } }

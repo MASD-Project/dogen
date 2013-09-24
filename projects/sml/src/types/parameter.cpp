@@ -25,25 +25,25 @@ namespace sml {
 
 parameter::parameter(
     const std::string& documentation,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const std::string& name,
     const dogen::sml::nested_qname& type)
     : documentation_(documentation),
-      implementation_specific_parameters_(implementation_specific_parameters),
+      opaque_parameters_(opaque_parameters),
       name_(name),
       type_(type) { }
 
 void parameter::swap(parameter& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(opaque_parameters_, other.opaque_parameters_);
     swap(name_, other.name_);
     swap(type_, other.type_);
 }
 
 bool parameter::operator==(const parameter& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        opaque_parameters_ == rhs.opaque_parameters_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_;
 }
@@ -70,20 +70,20 @@ void parameter::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::vector<std::pair<std::string, std::string> >& parameter::implementation_specific_parameters() const {
-    return implementation_specific_parameters_;
+const std::list<std::pair<std::string, std::string> >& parameter::opaque_parameters() const {
+    return opaque_parameters_;
 }
 
-std::vector<std::pair<std::string, std::string> >& parameter::implementation_specific_parameters() {
-    return implementation_specific_parameters_;
+std::list<std::pair<std::string, std::string> >& parameter::opaque_parameters() {
+    return opaque_parameters_;
 }
 
-void parameter::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
-    implementation_specific_parameters_ = v;
+void parameter::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
+    opaque_parameters_ = v;
 }
 
-void parameter::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
-    implementation_specific_parameters_ = std::move(v);
+void parameter::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
+    opaque_parameters_ = std::move(v);
 }
 
 const std::string& parameter::name() const {

@@ -48,8 +48,8 @@ create_std_pair_std_string_std_string(unsigned int position) {
     return r;
 }
 
-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
-    std::vector<std::pair<std::string, std::string> > r;
+std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_string_std_string_(unsigned int position) {
+    std::list<std::pair<std::string, std::string> > r;
     for (unsigned int i(0); i < 10; ++i) {
         r.push_back(create_std_pair_std_string_std_string(position + i));
     }
@@ -80,7 +80,7 @@ namespace sml {
 void type_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
+    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 1));
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));

@@ -3,10 +3,10 @@
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
+	<opaque_parameters class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</implementation_specific_parameters>
+	</opaque_parameters>
 	<name class_id="10" tracking_level="0" version="0">
 		<model_name>std_model</model_name>
 		<external_module_path class_id="11" tracking_level="0" version="0">
@@ -77,10 +77,10 @@
 			</first>
 			<second class_id="17" tracking_level="0" version="0">
 				<documentation></documentation>
-				<implementation_specific_parameters>
+				<opaque_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
-				</implementation_specific_parameters>
+				</opaque_parameters>
 				<name>
 					<model_name>std_model</model_name>
 					<external_module_path>
@@ -139,10 +139,10 @@
 					<abstract_object class_id="25" tracking_level="0" version="0">
 						<type class_id="26" tracking_level="0" version="0">
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -163,10 +163,10 @@
 							<item_version>0</item_version>
 							<item class_id="28" tracking_level="0" version="0">
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type class_id="29" tracking_level="0" version="0">
 									<type>
@@ -210,10 +210,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -257,10 +257,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -304,10 +304,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_3</name>
 								<type>
 									<type>
@@ -379,10 +379,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -403,10 +403,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -431,10 +431,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -459,10 +459,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -487,10 +487,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_3</name>
 								<type>
 									<type>
@@ -515,10 +515,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_4</name>
 								<type>
 									<type>
@@ -543,10 +543,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_5</name>
 								<type>
 									<type>
@@ -571,10 +571,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_6</name>
 								<type>
 									<type>
@@ -599,10 +599,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_7</name>
 								<type>
 									<type>
@@ -674,10 +674,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -698,10 +698,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -745,10 +745,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -792,10 +792,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -840,10 +840,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_3</name>
 								<type>
 									<type>
@@ -887,10 +887,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_4</name>
 								<type>
 									<type>
@@ -934,10 +934,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_5</name>
 								<type>
 									<type>
@@ -1047,10 +1047,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -1071,10 +1071,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -1157,10 +1157,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -1243,10 +1243,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -1309,10 +1309,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_3</name>
 								<type>
 									<type>
@@ -1422,10 +1422,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -1446,10 +1446,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -1553,10 +1553,10 @@
 						<abstract_object>
 							<type>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>
 									<model_name>std_model</model_name>
 									<external_module_path>
@@ -1577,14 +1577,14 @@
 								<item_version>0</item_version>
 								<item>
 									<documentation></documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>1</count>
 										<item_version>0</item_version>
 										<item class_id="34" tracking_level="0" version="0">
 											<first>IDENTITY_ATTRIBUTE</first>
 											<second>true</second>
 										</item>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>prop0</name>
 									<type>
 										<type>
@@ -1610,10 +1610,10 @@
 								<item>
 									<documentation>test inclusion duplicates
 </documentation>
-									<implementation_specific_parameters>
+									<opaque_parameters>
 										<count>0</count>
 										<item_version>0</item_version>
-									</implementation_specific_parameters>
+									</opaque_parameters>
 									<name>prop1</name>
 									<type>
 										<type>
@@ -1669,14 +1669,14 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>1</count>
 									<item_version>0</item_version>
 									<item>
 										<first>IDENTITY_ATTRIBUTE</first>
 										<second>true</second>
 									</item>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop0</name>
 								<type>
 									<type>
@@ -1738,10 +1738,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -1763,10 +1763,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -1791,10 +1791,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -1838,10 +1838,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -1885,10 +1885,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_3</name>
 								<type>
 									<type>
@@ -1979,10 +1979,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -2003,10 +2003,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -2069,10 +2069,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -2135,10 +2135,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -2249,10 +2249,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -2273,10 +2273,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -2339,10 +2339,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -2405,10 +2405,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -2537,10 +2537,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -2561,10 +2561,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -2608,10 +2608,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -2655,10 +2655,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -2703,10 +2703,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_3</name>
 								<type>
 									<type>
@@ -2750,10 +2750,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_4</name>
 								<type>
 									<type>
@@ -2797,10 +2797,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_5</name>
 								<type>
 									<type>
@@ -2910,10 +2910,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -2934,10 +2934,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -2981,10 +2981,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -3076,10 +3076,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -3100,10 +3100,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_0</name>
 								<type>
 									<type>
@@ -3147,10 +3147,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -3194,10 +3194,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_2</name>
 								<type>
 									<type>
@@ -3242,10 +3242,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_3</name>
 								<type>
 									<type>
@@ -3289,10 +3289,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_4</name>
 								<type>
 									<type>
@@ -3336,10 +3336,10 @@
 							</item>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_5</name>
 								<type>
 									<type>
@@ -3449,10 +3449,10 @@
 					<abstract_object>
 						<type>
 							<documentation></documentation>
-							<implementation_specific_parameters>
+							<opaque_parameters>
 								<count>0</count>
 								<item_version>0</item_version>
-							</implementation_specific_parameters>
+							</opaque_parameters>
 							<name>
 								<model_name>std_model</model_name>
 								<external_module_path>
@@ -3473,10 +3473,10 @@
 							<item_version>0</item_version>
 							<item>
 								<documentation></documentation>
-								<implementation_specific_parameters>
+								<opaque_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
-								</implementation_specific_parameters>
+								</opaque_parameters>
 								<name>prop_1</name>
 								<type>
 									<type>

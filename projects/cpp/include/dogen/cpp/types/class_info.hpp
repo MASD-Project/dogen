@@ -30,7 +30,6 @@
 #include <list>
 #include <string>
 #include <utility>
-#include <vector>
 #include "dogen/cpp/serialization/class_info_fwd_ser.hpp"
 #include "dogen/cpp/types/class_types.hpp"
 #include "dogen/cpp/types/entity.hpp"
@@ -70,7 +69,7 @@ public:
         const std::string& original_parent_name,
         const std::string& original_parent_name_qualified,
         const std::list<std::string>& leaves,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const bool is_comparable,
         const bool is_visitable,
         const bool is_immutable,
@@ -238,10 +237,10 @@ public:
     void leaves(const std::list<std::string>&& v);
     /**@}*/
 
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    const std::list<std::pair<std::string, std::string> >& opaque_parameters() const;
+    std::list<std::pair<std::string, std::string> >& opaque_parameters();
+    void opaque_parameters(const std::list<std::pair<std::string, std::string> >& v);
+    void opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v);
 
     /**
      * @brief If true, the C++ class has operator<  defined.
@@ -318,7 +317,7 @@ private:
     std::string original_parent_name_;
     std::string original_parent_name_qualified_;
     std::list<std::string> leaves_;
-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    std::list<std::pair<std::string, std::string> > opaque_parameters_;
     bool is_comparable_;
     bool is_visitable_;
     bool is_immutable_;
