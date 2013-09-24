@@ -18,7 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/test/unit_test.hpp>
+#include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -27,9 +30,10 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/indexer_interface.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/abstract_object_io.hpp"
+#include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/om/types/cpp_domain_header_formatter.hpp"
-#include "dogen/om/test_data/all_td.hpp"
 
 using dogen::sml::test::mock_model_factory;
 
@@ -37,6 +41,9 @@ namespace {
 
 const std::string test_module("om");
 const std::string test_suite("cpp_domain_header_formatter_spec");
+const std::string empty_marker;
+const dogen::om::licence empty_licence = dogen::om::licence();
+const dogen::om::modeline empty_modeline = dogen::om::modeline();
 const boost::filesystem::path empty_path;
 const boost::filesystem::path non_empty_path("a/file.hpp");
 
@@ -131,12 +138,19 @@ public:
     }
 };
 
-bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::simple_name(0) == qn.simple_name();
-}
+const std::string element_not_found("element not found: ");
 
-bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::simple_name(1) == qn.simple_name();
+boost::shared_ptr<dogen::sml::abstract_object>
+find_object(const dogen::sml::model& m, const unsigned int n) {
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (mock_model_factory::simple_name(n) == qn.simple_name())
+            return pair.second;
+    }
+
+    BOOST_THROW_EXCEPTION(
+        dogen::utility::exception::exception(element_not_found +
+            boost::lexical_cast<std::string>(n)));
 }
 
 }
@@ -151,7 +165,6 @@ BOOST_AUTO_TEST_SUITE(cpp_domain_header_formatter)
 
 BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_header) {
     SETUP_TEST_LOG_SOURCE("enumeration_with_two_enumerators_produces_expected_domain_header");
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto ot(object_types::enumeration);
     const auto m(factory::build_single_type_model(0, ot));
@@ -162,18 +175,17 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
     dogen::om::cpp_domain_header_formatter f;
     mock_indexer mi;
     const auto e(m.enumerations().begin()->second);
-    f.format(s, e, dogen::om::licence(), dogen::om::modeline(),
-        std::string()/*marker*/, mi);
+    BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
+
+    f.format(s, e, empty_licence, empty_modeline, empty_marker, mi);
     const auto r(s.str());
     BOOST_CHECK(r == enumeration_two_enumerators);
     BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
 BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) {
     SETUP_TEST_LOG_SOURCE("object_with_no_properties_produces_expected_domain_header");
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(factory::build_single_type_model(0));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -182,99 +194,75 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_indexer mi;
-    const auto& o(*m.objects().begin()->second);
-    f.format(s, o, dogen::om::licence(), dogen::om::modeline(),
-        std::string()/*marker*/, mi);
+    const auto o(find_object(m, 0));
+    BOOST_LOG_SEV(lg, debug) << "object: " << *o;
+
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
     const auto r(s.str());
     BOOST_CHECK(r == object_no_properties);
     BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
 BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
     SETUP_TEST_LOG_SOURCE("parent_object_produces_expected_domain_header");
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_model_factory::object_with_parent_in_the_same_model());
-    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
-    boost::shared_ptr<dogen::sml::abstract_object> o;
-    for (const auto& pair : m.objects()) {
-        if (is_type_one(pair.first)) {
-            o = pair.second;
-            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
-        }
-    }
+    const auto o(find_object(m, 1));
+    BOOST_LOG_SEV(lg, debug) << "object: " << *o;
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_indexer mi;
-    f.format(s, *o, dogen::om::licence(), dogen::om::modeline(),
-        std::string()/*marker*/, mi);
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
     const auto r(s.str());
     BOOST_CHECK(r == parent_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
 BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
     SETUP_TEST_LOG_SOURCE("leaf_child_object_produces_expected_domain_header");
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_model_factory::object_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
-    boost::shared_ptr<dogen::sml::abstract_object> o;
-    for (const auto& pair : m.objects()) {
-        if (is_type_zero(pair.first)) {
-            o = pair.second;
-            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
-        }
-    }
+    const auto o(find_object(m, 0));
+    BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_indexer mi;
-    f.format(s, *o, dogen::om::licence(), dogen::om::modeline(),
-        std::string()/*marker*/, mi);
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
     const auto r(s.str());
     BOOST_CHECK(r == leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
 BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
     SETUP_TEST_LOG_SOURCE("non_leaf_child_object_produces_expected_domain_header");
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_model_factory::
         object_with_third_degree_parent_in_same_model());
-    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.objects().size() == 4);
 
-    boost::shared_ptr<dogen::sml::abstract_object> o;
-    for (const auto& pair : m.objects()) {
-        if (is_type_one(pair.first)) {
-            o = pair.second;
-            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
-        }
-    }
+    const auto o(find_object(m, 1));
+    BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_indexer mi;
-    f.format(s, *o, dogen::om::licence(), dogen::om::modeline(),
-        std::string()/*marker*/, mi);
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
     const auto r(s.str());
     BOOST_CHECK(r == non_leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
 BOOST_AUTO_TEST_SUITE_END()
