@@ -28,7 +28,7 @@
 #include <ostream>
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
-#include "dogen/sml/types/indexer_interface.hpp"
+#include "dogen/sml/types/property_cache_interface.hpp"
 
 namespace dogen {
 namespace om {
@@ -42,18 +42,18 @@ public:
     ~context() noexcept = default;
 
 public:
-    context(std::ostream& s, const sml::indexer_interface& i,
+    context(std::ostream& s, const sml::property_cache_interface& c,
         cpp_formatters::indenter& ind, cpp_formatters::utility& u);
 
 public:
     std::ostream& stream();
-    const sml::indexer_interface& indexer();
+    const sml::property_cache_interface& property_cache();
     cpp_formatters::indenter& indenter();
     cpp_formatters::utility& utility();
 
 private:
     std::ostream& stream_;
-    const sml::indexer_interface& indexer_;
+    const sml::property_cache_interface& property_cache_;
     cpp_formatters::indenter& indenter_;
     cpp_formatters::utility& utility_;
 };

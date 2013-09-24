@@ -18,18 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_INDEXER_FWD_HPP
-#define DOGEN_SML_TYPES_INDEXER_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/sml/types/property_cache_interface.hpp"
 
 namespace dogen {
 namespace sml {
 
-class indexer;
+property_cache_interface::~property_cache_interface() noexcept { }
 
 } }
-
-#endif

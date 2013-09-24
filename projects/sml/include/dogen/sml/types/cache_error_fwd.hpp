@@ -18,39 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_TYPE_FORMATTER_INTERFACE_HPP
-#define DOGEN_OM_TYPES_TYPE_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_SML_TYPES_CACHE_ERROR_FWD_HPP
+#define DOGEN_SML_TYPES_CACHE_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/type.hpp"
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
-namespace om {
+namespace sml {
 
-/**
- * @brief Formatter that is responsible for the formtatting of a
- * single type.
- */
-class type_formatter_interface {
-public:
-    type_formatter_interface() = default;
-    type_formatter_interface(const type_formatter_interface&) = default;
-    type_formatter_interface(type_formatter_interface&&) = default;
-    ~type_formatter_interface() = default;
-
-public:
-    virtual void format(std::ostream& s, const sml::type& t, const licence& l,
-        const modeline& m, const std::string& marker,
-        const sml::property_cache_interface& cache) const = 0;
-};
+class cache_error;
 
 } }
 

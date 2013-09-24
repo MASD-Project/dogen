@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_INDEXER_ERROR_FWD_HPP
-#define DOGEN_SML_TYPES_INDEXER_ERROR_FWD_HPP
+#ifndef DOGEN_OM_TYPES_OPAQUE_PARAMETER_STORE_FWD_HPP
+#define DOGEN_OM_TYPES_OPAQUE_PARAMETER_STORE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
-namespace sml {
+namespace om {
 
-class indexer_error;
+class opaque_parameter_store;
 
 } }
 

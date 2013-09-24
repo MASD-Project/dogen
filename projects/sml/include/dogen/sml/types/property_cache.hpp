@@ -18,77 +18,70 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_INDEXER_HPP
-#define DOGEN_SML_TYPES_INDEXER_HPP
+#ifndef DOGEN_SML_TYPES_PROPERTY_CACHE_HPP
+#define DOGEN_SML_TYPES_PROPERTY_CACHE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/indexer_interface.hpp"
+#include "dogen/sml/types/property_cache_interface.hpp"
 
 namespace dogen {
 namespace sml {
 
-class indexer : public indexer_interface {
+class property_cache : public property_cache_interface {
 public:
-    indexer() = delete;
-    indexer(const indexer&) = default;
-    indexer(indexer&&) = default;
-    indexer& operator=(const indexer&) = default;
+    property_cache(const property_cache&) = default;
+    property_cache(property_cache&&) = default;
+    property_cache& operator=(const property_cache&) = default;
 
 public:
-    virtual ~indexer() noexcept { }
+    property_cache();
+    virtual ~property_cache() noexcept { }
 
 public:
-    /**
-     * @brief Initialises the indexer.
-     *
-     * Note that no setup is done until @e index() is called.
-     *
-     * @param m model to index. must outlive the indexer.
-     */
-    explicit indexer(const model& m);
-
 public:
     /**
      * @brief Populates all the data structures required for querying.
+     *
+     * @param m model to populate the cache with.
      */
-    void index();
+    void populate(const sml::model& m);
 
     /**
-     * @brief Returns true if indexing has been done, false otherwise.
+     * @brief Returns true if populating has been done, false otherwise.
      */
-    bool is_indexed() const;
+    bool is_populated() const;
 
 private:
     /**
-     * @brief If not indexed throws an indexing error.
+     * @brief If not populated throws a population error.
      */
-    void ensure_indexed() const;
+    void ensure_populated() const;
 
 public:
     /**
-     * @pre is_indexed must be true.
-     */
-    std::list<property> all_properties(const abstract_object& o) const override;
-
-    /**
-     * @pre is_indexed must be true.
+     * @pre is_populated must be true.
      */
     std::list<property>
-    local_properties(const abstract_object& o) const override;
+    get_all_properties(const abstract_object& o) const override;
 
     /**
-     * @pre is_indexed must be true.
+     * @pre is_populated must be true.
+     */
+    std::list<property>
+    get_local_properties(const abstract_object& o) const override;
+
+    /**
+     * @pre is_populated must be true.
      */
     std::unordered_map<qname, std::list<property> >
-    inehrited_properties(const abstract_object& o) const override;
+    get_inehrited_properties(const abstract_object& o) const override;
 
 private:
-    const model& model_;
-    bool is_indexed_;
+    bool is_populated_;
     std::unordered_map<qname, std::list<property> > all_properties_;
     std::unordered_map<qname, std::list<property> > local_properties_;
     std::unordered_map<qname, std::list<property> > inherited_properties_;

@@ -20,46 +20,45 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/indexer_error.hpp"
-#include "dogen/sml/types/indexer.hpp"
+#include "dogen/sml/types/cache_error.hpp"
+#include "dogen/sml/types/property_cache.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
 auto lg(logger_factory("om_formatters.modeline_formatter"));
-const std::string not_indexed("Attempt to query without indexing");
+const std::string not_populated("Attempt to query cache without populating");
 
 }
 
 namespace dogen {
 namespace sml {
 
-indexer::indexer(const model& m) : model_(m), is_indexed_(false) {
-}
+property_cache::property_cache() : is_populated_(false) { }
 
-void indexer::index() {
-    is_indexed_ = true;
-    for (const auto& pair : model_.objects()) {
+void property_cache::populate(const model& m) {
+    is_populated_ = true;
+    for (const auto& pair : m.objects()) {
         const auto& o(*pair.second);
         local_properties_.insert(std::make_pair(o.name(), o.properties()));
     }
 }
 
-bool indexer::is_indexed() const {
-    return is_indexed_;
+bool property_cache::is_populated() const {
+    return is_populated_;
 }
 
-void indexer::ensure_indexed() const {
-    if (!is_indexed()) {
-        BOOST_LOG_SEV(lg, error) << not_indexed;
-        BOOST_THROW_EXCEPTION(indexer_error(not_indexed));
+void property_cache::ensure_populated() const {
+    if (!is_populated()) {
+        BOOST_LOG_SEV(lg, error) << not_populated;
+        BOOST_THROW_EXCEPTION(cache_error(not_populated));
     }
 }
 
 std::list<property>
-indexer::all_properties(const abstract_object& o) const {
-    ensure_indexed();
+property_cache::get_all_properties(const abstract_object& o) const {
+    ensure_populated();
     const auto i(all_properties_.find(o.name()));
     if (i != all_properties_.end())
         return i->second;
@@ -67,8 +66,8 @@ indexer::all_properties(const abstract_object& o) const {
 }
 
 std::list<property>
-indexer::local_properties(const abstract_object& o) const {
-    ensure_indexed();
+property_cache::get_local_properties(const abstract_object& o) const {
+    ensure_populated();
     const auto i(local_properties_.find(o.name()));
     if (i != local_properties_.end())
         return i->second;
@@ -76,8 +75,8 @@ indexer::local_properties(const abstract_object& o) const {
 }
 
 std::unordered_map<qname, std::list<property> >
-indexer::inehrited_properties(const abstract_object& o) const {
-    ensure_indexed();
+property_cache::get_inehrited_properties(const abstract_object& o) const {
+    ensure_populated();
     std::unordered_map<qname, std::list<property> > r;
 
     if (o.parent_name()) {

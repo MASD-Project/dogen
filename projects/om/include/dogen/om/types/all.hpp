@@ -47,5 +47,6 @@
 #include "dogen/om/types/modeline_group.hpp"
 #include "dogen/om/types/modeline_group_hydrator.hpp"
 #include "dogen/om/types/modeline_locations.hpp"
+#include "dogen/om/types/opaque_parameter_store.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 #include "dogen/om/types/workflow.hpp"

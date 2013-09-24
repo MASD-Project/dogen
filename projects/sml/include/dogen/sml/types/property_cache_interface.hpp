@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_INDEXER_INTERFACE_HPP
-#define DOGEN_SML_TYPES_INDEXER_INTERFACE_HPP
+#ifndef DOGEN_SML_TYPES_PROPERTY_CACHE_INTERFACE_HPP
+#define DOGEN_SML_TYPES_PROPERTY_CACHE_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,15 +36,15 @@ namespace sml {
 /**
  * @brief Indexes model information and provides a querying interface.
  */
-class indexer_interface {
+class property_cache_interface {
 public:
-    indexer_interface() = default;
-    indexer_interface(const indexer_interface&) = delete;
-    indexer_interface(indexer_interface&&) = delete;
-    indexer_interface& operator=(const indexer_interface&) = delete;
+    property_cache_interface() = default;
+    property_cache_interface(const property_cache_interface&) = delete;
+    property_cache_interface(property_cache_interface&&) = delete;
+    property_cache_interface& operator=(const property_cache_interface&) = delete;
 
 public:
-    virtual ~indexer_interface() noexcept;
+    virtual ~property_cache_interface() noexcept;
 
 public:
     /**
@@ -55,7 +55,7 @@ public:
      *
      */
     virtual std::list<property>
-    all_properties(const abstract_object& o) const = 0;
+    get_all_properties(const abstract_object& o) const = 0;
 
     /**
      * @brief Get the properties "local" to the object.
@@ -67,7 +67,7 @@ public:
      *
      */
     virtual std::list<property>
-    local_properties(const abstract_object& o) const = 0;
+    get_local_properties(const abstract_object& o) const = 0;
 
     /**
      * @brief Properties that the type inherited.
@@ -78,7 +78,7 @@ public:
      * @return map with properties, by parent.
      */
     virtual std::unordered_map<qname, std::list<property> >
-    inehrited_properties(const abstract_object& o) const = 0;
+    get_inehrited_properties(const abstract_object& o) const = 0;
 };
 
 } }

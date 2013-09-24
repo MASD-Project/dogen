@@ -166,6 +166,35 @@ void cpp_domain_header_formatter::close_class() const {
 
 void cpp_domain_header_formatter::
 compiler_generated_constuctors(const sml::abstract_object& /*o*/) const {
+    // context_->utility().public_access_specifier();
+
+    // const auto sn(o.name().simple_name());
+    // if (!ci.requires_manual_default_constructor())
+    //     context_->stream() << context_->indenter() << sn << "() = default;"
+    //                       << std::endl;
+
+    // context_->stream() << context_->indenter() << sn << "(const " << sn
+    //                   << "&) = default;" << std::endl;
+
+    // if (!ci.requires_manual_move_constructor()) {
+    //     context_->stream() << context_->indenter() << sn << "(" << sn
+    //                       << "&&) = default;" << std::endl;
+    // }
+
+    // if (!o.is_parent() && o.parent_name()) {
+    //     context_->stream() << context_->indenter() << "~" << sn
+    //                       << "() = default;" << std::endl;
+    // }
+
+    // if (o.is_immutable()) {
+    //     context_->stream() << context_->indenter() << sn << "& operator=(const "
+    //                       << sn << "&) = delete;" << std::endl;
+    // } else if (ci.all_properties().empty()) {
+    //     context_->stream() << context_->indenter()
+    //                       << sn << "& operator=(const " << sn << "&) = default;"
+    //                       << std::endl;
+    // }
+    // context_->utility().blank_line();
 }
 
 void cpp_domain_header_formatter::
@@ -267,11 +296,11 @@ visit(const dogen::sml::entity& e) const {
 void cpp_domain_header_formatter::
 format(std::ostream& s, const sml::type& t, const licence& l,
     const modeline& m, const std::string& marker,
-    const sml::indexer_interface& indexer) const {
+    const sml::property_cache_interface& cache) const {
 
     cpp_formatters::indenter ind;
     cpp_formatters::utility u(s, ind);
-    context_ = std::unique_ptr<context>(new context(s, indexer, ind, u));
+    context_ = std::unique_ptr<context>(new context(s, cache, ind, u));
 
     const cpp_includes i = cpp_includes();
     const boost::filesystem::path relative_file_path;

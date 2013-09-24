@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-24 Tue 23:36]
+Clock summary at [2013-09-25 Wed 00:24]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *4:22* |      |      |
+| *Total time*                                                 | *5:06* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 4:22 |      |
+| Development Stories Implemented                              |        | 5:06 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:12 |
 | COMPLETED Refactor OM tests to avoid over-inclusion          |        |      | 0:32 |
 | COMPLETED Convert implementation specific parameters to list |        |      | 1:06 |
 | COMPLETED Rename implementation specific parameters          |        |      | 0:50 |
+| IMPLEMENTATION Implement the property cache in SML           |        |      | 0:44 |
 | IMPLEMENTATION Create a complete domain formatter in OM      |        |      | 1:42 |
 #+end:
 
@@ -77,6 +78,9 @@ Name choices:
 
 - opaque parameters
 - untyped parameters
+
+*** IMPLEMENTATION Implement the property cache in SML                :story:
+    CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
 
 *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
     CLOCK: [2013-09-23 Mon 18:20]--[2013-09-23 Mon 18:50] =>  0:30

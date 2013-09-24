@@ -28,7 +28,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
-#include "dogen/sml/types/indexer_interface.hpp"
+#include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
@@ -104,35 +104,26 @@ class some_type_1 : public some_type_2 {
 }
 )");
 
-class mock_indexer : public dogen::sml::indexer_interface {
+class mock_property_cache : public dogen::sml::property_cache_interface {
 public:
-    mock_indexer() = default;
-    mock_indexer(const mock_indexer&) = default;
-    mock_indexer(mock_indexer&&) = default;
-    mock_indexer& operator=(const mock_indexer&) = default;
+    mock_property_cache() = default;
+    mock_property_cache(const mock_property_cache&) = default;
+    mock_property_cache(mock_property_cache&&) = default;
+    mock_property_cache& operator=(const mock_property_cache&) = default;
 
 public:
-    /**
-     * @pre is_indexed must be true.
-     */
     std::list<dogen::sml::property>
-    all_properties(const dogen::sml::abstract_object&) const override {
+    get_all_properties(const dogen::sml::abstract_object&) const override {
         return std::list<dogen::sml::property> {};
     }
 
-    /**
-     * @pre is_indexed must be true.
-     */
     std::list<dogen::sml::property>
-    local_properties(const dogen::sml::abstract_object&) const override {
+    get_local_properties(const dogen::sml::abstract_object&) const override {
         return std::list<dogen::sml::property> {};
     }
 
-    /**
-     * @pre is_indexed must be true.
-     */
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >
-    inehrited_properties(const dogen::sml::abstract_object&) const override {
+    get_inehrited_properties(const dogen::sml::abstract_object&) const override {
         return std::unordered_map<dogen::sml::qname,
                                   std::list<dogen::sml::property> > {};
     }
@@ -173,11 +164,11 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_indexer mi;
+    mock_property_cache c;
     const auto e(m.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
-    f.format(s, e, empty_licence, empty_modeline, empty_marker, mi);
+    f.format(s, e, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == enumeration_two_enumerators);
     BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators;
@@ -193,11 +184,11 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) 
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_indexer mi;
+    mock_property_cache c;
     const auto o(find_object(m, 0));
     BOOST_LOG_SEV(lg, debug) << "object: " << *o;
 
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == object_no_properties);
     BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties;
@@ -216,8 +207,8 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_indexer mi;
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
+    mock_property_cache c;
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == parent_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object;
@@ -236,8 +227,8 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_indexer mi;
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
+    mock_property_cache c;
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object;
@@ -257,8 +248,8 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_indexer mi;
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, mi);
+    mock_property_cache c;
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == non_leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object;

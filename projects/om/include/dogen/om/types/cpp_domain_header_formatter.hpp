@@ -30,6 +30,7 @@
 #include <ostream>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
+#include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/om/types/context.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
@@ -46,6 +47,22 @@ public:
 public:
     cpp_domain_header_formatter();
     virtual ~cpp_domain_header_formatter() noexcept { }
+
+private:
+    /**
+     * @brief Returns all of the C++ namespaces implied by the qname.
+     */
+    std::list<std::string> namespaces(const sml::qname& qn) const;
+
+    /**
+     * @brief Returns a C++ qualified name for the SML qname.
+     */
+    std::string cpp_qualified_name(const sml::qname& qn) const;
+
+    /**
+     * @brief Returns the opaque parameter for the given key.
+     */
+    std::string opaque_parameter(const std::string& key) const;
 
 private:
     /**
@@ -81,21 +98,10 @@ private:
     void visit(const sml::keyed_entity& ke) const override;
     void visit(const sml::entity& e) const override;
 
-private:
-    /**
-     * @brief Returns all of the C++ namespaces implied by the qname.
-     */
-    std::list<std::string> namespaces(const sml::qname& qn) const;
-
-    /**
-     * @brief Returns a C++ qualified name for the SML qname.
-     */
-    std::string cpp_qualified_name(const sml::qname& qn) const;
-
 public:
     void format(std::ostream& s, const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
-        const sml::indexer_interface& indexer) const override;
+        const sml::property_cache_interface& cache) const override;
 
 private:
     mutable std::unique_ptr<context> context_;
