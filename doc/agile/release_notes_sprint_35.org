@@ -10,18 +10,19 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-25 Wed 00:24]
+Clock summary at [2013-09-25 Wed 18:53]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *5:06* |      |      |
+| *Total time*                                                 | *6:32* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 5:06 |      |
+| Development Stories Implemented                              |        | 6:32 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:12 |
 | COMPLETED Refactor OM tests to avoid over-inclusion          |        |      | 0:32 |
 | COMPLETED Convert implementation specific parameters to list |        |      | 1:06 |
 | COMPLETED Rename implementation specific parameters          |        |      | 0:50 |
-| IMPLEMENTATION Implement the property cache in SML           |        |      | 0:44 |
+| IMPLEMENTATION Implement the property cache in SML           |        |      | 1:14 |
+| IMPLEMENTATION Implement the opaque parameter cache in SML   |        |      | 0:56 |
 | IMPLEMENTATION Create a complete domain formatter in OM      |        |      | 1:42 |
 #+end:
 
@@ -80,7 +81,13 @@ Name choices:
 - untyped parameters
 
 *** IMPLEMENTATION Implement the property cache in SML                :story:
+    CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08
+    CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
     CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
+
+*** IMPLEMENTATION Implement the opaque parameter cache in SML        :story:
+    CLOCK: [2013-09-25 Wed 18:02]--[2013-09-25 Wed 18:53] =>  0:51
+    CLOCK: [2013-09-25 Wed 17:57]--[2013-09-25 Wed 18:02] =>  0:05
 
 *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
     CLOCK: [2013-09-23 Mon 18:20]--[2013-09-23 Mon 18:50] =>  0:30
@@ -92,15 +99,16 @@ The OM domain formatter must produce the same code as the C++
 formatter across all types. Add all infrastructure around it such as
 SML type visitors, etc.
 
-**** COMPLETED Implement class open and close methods
+**** COMPLETED Implement class open and close methods                  :task:
      CLOSED: [2013-09-23 Mon 23:54]
      CLOCK: [2013-09-23 Mon 23:43]--[2013-09-23 Mon 23:54] =>  0:11
 
-**** COMPLETED Refactor unit tests with utility method
+**** COMPLETED Refactor unit tests with utility method                 :task:
      CLOSED: [2013-09-24 Tue 08:05]
      CLOCK: [2013-09-24 Tue 07:46]--[2013-09-24 Tue 08:10] =>  0:19
      CLOCK: [2013-09-24 Tue 07:33]--[2013-09-24 Tue 07:43] =>  0:18
 
+**** Add compiler generated constructors                               :task:
 *** Create an hydrator from JSON into SML                             :story:
 
 Using the JSON representation defined in the previous iteration (in

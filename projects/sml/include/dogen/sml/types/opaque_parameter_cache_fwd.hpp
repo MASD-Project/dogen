@@ -18,37 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_OPAQUE_PARAMETER_STORE_HPP
-#define DOGEN_OM_TYPES_OPAQUE_PARAMETER_STORE_HPP
+#ifndef DOGEN_SML_TYPES_OPAQUE_PARAMETER_CACHE_FWD_HPP
+#define DOGEN_SML_TYPES_OPAQUE_PARAMETER_CACHE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
-#include "dogen/sml/types/model.hpp"
-
 namespace dogen {
-namespace om {
+namespace sml {
 
-class opaque_parameter_store {
-public:
-    opaque_parameter_store() = delete;
-    ~opaque_parameter_store() = default;
-    opaque_parameter_store(const opaque_parameter_store&) = default;
-    opaque_parameter_store(opaque_parameter_store&&) = default;
-
-public:
-    explicit opaque_parameter_store(const sml::model& m);
-
-public:
-    std::string get(const std::string& key) const;
-
-public:
-    
-    
-};
+class opaque_parameter_cache;
 
 } }
 
