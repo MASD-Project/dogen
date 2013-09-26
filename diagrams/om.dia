@@ -263,7 +263,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="18,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.670000000000002"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -422,7 +422,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="147,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.1139843750000002"/>
+        <dia:real val="7.1139843749999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -683,7 +683,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="146,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.518515624999999"/>
+        <dia:real val="13.518515625000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -3321,7 +3321,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="1.7"/>
+        <dia:real val="1.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6991,7 +6991,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="44,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.754999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -7756,7 +7756,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-9,41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.079999999999998"/>
+        <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>

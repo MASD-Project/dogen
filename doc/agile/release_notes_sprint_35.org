@@ -86,6 +86,8 @@ Name choices:
     CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
 
 *** IMPLEMENTATION Implement the opaque parameter cache in SML        :story:
+    CLOCK: [2013-09-26 Thu 22:31]--[2013-09-26 Thu 23:31] =>  1:00
+    CLOCK: [2013-09-26 Thu 22:25]--[2013-09-26 Thu 22:31] =>  0:06
     CLOCK: [2013-09-26 Thu 19:11]--[2013-09-26 Thu 19:18] =>  0:07
     CLOCK: [2013-09-26 Thu 18:22]--[2013-09-26 Thu 18:43] =>  0:21
     CLOCK: [2013-09-25 Wed 18:02]--[2013-09-25 Wed 18:53] =>  0:51
