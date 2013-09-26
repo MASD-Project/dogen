@@ -29,10 +29,18 @@
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
+#include "dogen/sml/types/opaque_parameter_cache_interface.hpp"
 
 namespace dogen {
 namespace om {
 
+/**
+ * @brief Provides a context in which formatting operations occur.
+ *
+ * All parameters passed in to the context must have a lifetime
+ * greater than (or equal to) the context itself as it keeps
+ * references to them.
+ */
 class context {
 public:
     context() = delete;
@@ -42,18 +50,40 @@ public:
     ~context() noexcept = default;
 
 public:
-    context(std::ostream& s, const sml::property_cache_interface& c,
+    context(std::ostream& s, const sml::property_cache_interface& pc,
+        const sml::opaque_parameter_cache_interface& opc,
         cpp_formatters::indenter& ind, cpp_formatters::utility& u);
 
 public:
+    /**
+     * @brief Stream to which the formatted output will be sent.
+     */
     std::ostream& stream();
-    const sml::property_cache_interface& property_cache();
+
+    /**
+     * @brief Cache that provides access to properties in SML objects.
+     */
+    const sml::property_cache_interface& property_cache() const;
+
+    /**
+     * @brief Cache that provides access to opaque parameters.
+     */
+    const sml::opaque_parameter_cache_interface& opaque_parameter_cache() const;
+
+    /**
+     * @brief Indentation facilities.
+     */
     cpp_formatters::indenter& indenter();
+
+    /**
+     * @brief Formatting utility methods.
+     */
     cpp_formatters::utility& utility();
 
 private:
     std::ostream& stream_;
     const sml::property_cache_interface& property_cache_;
+    const sml::opaque_parameter_cache_interface& opaque_parameter_cache_;
     cpp_formatters::indenter& indenter_;
     cpp_formatters::utility& utility_;
 };

@@ -54,6 +54,12 @@ struct opaque_parameters {
     static const std::string comment;
 
     /**
+     * @brief Valid values for Boolean types.
+     */
+    static const std::string bool_true;
+    static const std::string bool_false;
+
+    /**
      * @brief All parameters specific to the C++ language.
      */
     struct cpp {

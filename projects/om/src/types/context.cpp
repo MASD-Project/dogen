@@ -23,9 +23,11 @@
 namespace dogen {
 namespace om {
 
-context::context(std::ostream& s, const sml::property_cache_interface& c,
+context::context(std::ostream& s, const sml::property_cache_interface& pc,
+    const sml::opaque_parameter_cache_interface& opc,
     cpp_formatters::indenter& ind, cpp_formatters::utility& u)
-    : stream_(s), property_cache_(c), indenter_(ind), utility_(u) { }
+    : stream_(s), property_cache_(pc), opaque_parameter_cache_(opc),
+      indenter_(ind), utility_(u) { }
 
 std::ostream& context::stream() {
     return stream_;
@@ -39,8 +41,13 @@ cpp_formatters::utility& context::utility() {
     return utility_;
 }
 
-const sml::property_cache_interface& context::property_cache() {
+const sml::property_cache_interface& context::property_cache() const {
     return property_cache_;
+}
+
+const sml::opaque_parameter_cache_interface&
+context::opaque_parameter_cache() const {
+    return opaque_parameter_cache_;
 }
 
 } }

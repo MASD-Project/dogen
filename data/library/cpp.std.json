@@ -323,7 +323,7 @@
             "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "functional",
-                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.hash.standard.status" : "unsupported",
                     "cpp.test_data.status" : "unsupported",
                     "cpp.serialization.boost.status" : "unsupported"
                 }

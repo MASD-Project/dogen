@@ -30,6 +30,7 @@
 #include "dogen/sml/types/type.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline.hpp"
+#include "dogen/sml/types/opaque_parameter_cache_interface.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
 
 namespace dogen {
@@ -47,9 +48,14 @@ public:
     ~type_formatter_interface() = default;
 
 public:
+    /**
+     * @brief Format the type according to some grammar into the
+     * stream.
+     */
     virtual void format(std::ostream& s, const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
-        const sml::property_cache_interface& cache) const = 0;
+        const sml::property_cache_interface& pc,
+        const sml::opaque_parameter_cache_interface& opc) const = 0;
 };
 
 } }

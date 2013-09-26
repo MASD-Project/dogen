@@ -86,10 +86,39 @@ Name choices:
     CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
 
 *** IMPLEMENTATION Implement the opaque parameter cache in SML        :story:
+    CLOCK: [2013-09-26 Thu 19:11]--[2013-09-26 Thu 19:18] =>  0:07
+    CLOCK: [2013-09-26 Thu 18:22]--[2013-09-26 Thu 18:43] =>  0:21
     CLOCK: [2013-09-25 Wed 18:02]--[2013-09-25 Wed 18:53] =>  0:51
     CLOCK: [2013-09-25 Wed 17:57]--[2013-09-25 Wed 18:02] =>  0:05
 
+There is a fundamental problem with the parameter cache approach: it
+does not take into account parameters in properties. If we were to
+create another layer in the cache, we would be duplicating the object
+graph that we already have in =abstract_object= so the entire idea is
+questionable.
+
+A much better way of doing this is to create two types of parameters:
+
+- sequence: odb pragmas
+- associative: everything else
+
+Also, parameters are really some kind of meta-data tag, so we should
+rename it to avoid confusion. So we have:
+
+- =tag_store=: place where all tags live. we should add methods for easy
+  tag retrieval with the right type.
+- =Taggable=: concept for those which have the ability of being tagged.
+- =tags=: property of Taggable entities.
+- =tag_router=: takes a pair of strings and routes it to the right
+  location on the =tag_store=.
+- =tagger=: visits the model as a graph and propagates tags across
+  generalisations and associations.
+
 *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
+    CLOCK: [2013-09-26 Thu 22:08]--[2013-09-26 Thu 22:25] =>  0:17
+    CLOCK: [2013-09-26 Thu 08:25]--[2013-09-26 Thu 08:33] =>  0:08
+    CLOCK: [2013-09-26 Thu 08:06]--[2013-09-26 Thu 08:18] =>  0:12
+    CLOCK: [2013-09-26 Thu 07:46]--[2013-09-26 Thu 08:06] =>  0:20
     CLOCK: [2013-09-23 Mon 18:20]--[2013-09-23 Mon 18:50] =>  0:30
     CLOCK: [2013-09-23 Mon 18:12]--[2013-09-23 Mon 18:17] =>  0:05
     CLOCK: [2013-09-23 Mon 17:56]--[2013-09-23 Mon 18:05] =>  0:09

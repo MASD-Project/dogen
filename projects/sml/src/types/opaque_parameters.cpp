@@ -25,12 +25,15 @@ namespace om {
 
 const std::string opaque_parameters::odb_pragma("ODB_PRAGMA");
 const std::string opaque_parameters::comment("COMMENT");
+const std::string opaque_parameters::bool_true("true");
+const std::string opaque_parameters::bool_false("false");
 const std::string opaque_parameters::cpp::type::family("cpp.type.family");
+const std::string opaque_parameters::cpp::domain::status("cpp.domain.status");
 const std::string opaque_parameters::cpp::domain::
-requires_manual_default_constructor("cpp.domain.requires_manual_default_constructor");
+requires_manual_default_constructor(
+    "cpp.domain.requires_manual_default_constructor");
 const std::string opaque_parameters::cpp::domain::
 requires_manual_move_constructor("cpp.domain.requires_manual_move_constructor");
-const std::string opaque_parameters::cpp::domain::status("cpp.domain.status");
 const std::string opaque_parameters::cpp::domain::header::file_name(
     "cpp.domain.header.file_name");
 const std::string opaque_parameters::cpp::domain::header::is_system(
@@ -47,8 +50,10 @@ const std::string opaque_parameters::cpp::serialization::boost::header::
 file_name("cpp.serialization.boost.header.file_name");
 const std::string opaque_parameters::cpp::serialization::boost::header::
 is_system("cpp.serialization.boost.header.is_system");
-const std::string opaque_parameters::cpp::io::status("");
-const std::string opaque_parameters::cpp::io::header::file_name("");
-const std::string opaque_parameters::cpp::io::header::is_system("");
+const std::string opaque_parameters::cpp::io::status("cpp.io.status");
+const std::string opaque_parameters::cpp::io::header::file_name(
+    "cpp.io.header.file_name");
+const std::string opaque_parameters::cpp::io::header::is_system(
+    "cpp.io.header.is_system");
 
 } }

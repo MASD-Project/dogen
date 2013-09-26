@@ -78,7 +78,7 @@
             "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/asio/io_service.hpp",
-                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.hash.standard.status" : "unsupported",
                     "cpp.test_data.status" : "unsupported",
                     "cpp.serialization.boost.status" : "unsupported"
                 }
@@ -93,7 +93,7 @@
             "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
-                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.hash.standard.status" : "unsupported",
                     "cpp.test_data.status" : "unsupported",
                     "cpp.serialization.boost.status" : "unsupported"
                 }
@@ -108,7 +108,7 @@
             "opaque_parameters" : [
                 {
                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
-                    "cpp.hash.std.status" : "unsupported",
+                    "cpp.hash.standard.status" : "unsupported",
                     "cpp.test_data.status" : "unsupported",
                     "cpp.serialization.boost.status" : "unsupported"
                 }

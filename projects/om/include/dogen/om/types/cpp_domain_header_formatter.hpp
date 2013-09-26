@@ -38,6 +38,10 @@
 namespace dogen {
 namespace om {
 
+/**
+ * @brief Formats SML types carrying domain objects into a C++
+ * representation.
+ */
 class cpp_domain_header_formatter : public type_formatter_interface,
                                     private sml::type_visitor {
 public:
@@ -60,9 +64,10 @@ private:
     std::string cpp_qualified_name(const sml::qname& qn) const;
 
     /**
-     * @brief Returns the opaque parameter for the given key.
+     * @brief Returns true if the object needs a manually generated
+     * move constructor.
      */
-    std::string opaque_parameter(const std::string& key) const;
+    bool requires_manual_move_constructor(const sml::qname& qn) const;
 
 private:
     /**
@@ -101,7 +106,8 @@ private:
 public:
     void format(std::ostream& s, const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
-        const sml::property_cache_interface& cache) const override;
+        const sml::property_cache_interface& pc,
+        const sml::opaque_parameter_cache_interface& opc) const override;
 
 private:
     mutable std::unique_ptr<context> context_;

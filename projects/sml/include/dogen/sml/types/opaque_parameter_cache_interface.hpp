@@ -36,7 +36,7 @@ namespace sml {
  */
 class opaque_parameter_cache_interface {
 public:
-    opaque_parameter_cache_interface() = delete;
+    opaque_parameter_cache_interface() = default;
     opaque_parameter_cache_interface(const opaque_parameter_cache_interface&) = default;
     opaque_parameter_cache_interface(opaque_parameter_cache_interface&&) = default;
 
