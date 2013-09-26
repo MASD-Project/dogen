@@ -1,0 +1,759 @@
+diff --git a/data/library/cpp.boost.json b/data/library/cpp.boost.json
+index 0c80fd1..96d0f5a 100644
+--- a/data/library/cpp.boost.json
++++ b/data/library/cpp.boost.json
+@@ -78,7 +78,7 @@
+             "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/asio/io_service.hpp",
+-                    "cpp.hash.std.status" : "unsupported",
++                    "cpp.hash.standard.status" : "unsupported",
+                     "cpp.test_data.status" : "unsupported",
+                     "cpp.serialization.boost.status" : "unsupported"
+                 }
+@@ -93,7 +93,7 @@
+             "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
+-                    "cpp.hash.std.status" : "unsupported",
++                    "cpp.hash.standard.status" : "unsupported",
+                     "cpp.test_data.status" : "unsupported",
+                     "cpp.serialization.boost.status" : "unsupported"
+                 }
+@@ -108,7 +108,7 @@
+             "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "boost/asio/ip/tcp.hpp",
+-                    "cpp.hash.std.status" : "unsupported",
++                    "cpp.hash.standard.status" : "unsupported",
+                     "cpp.test_data.status" : "unsupported",
+                     "cpp.serialization.boost.status" : "unsupported"
+                 }
+diff --git a/data/library/cpp.std.json b/data/library/cpp.std.json
+index 6643d01..97fad94 100644
+--- a/data/library/cpp.std.json
++++ b/data/library/cpp.std.json
+@@ -323,7 +323,7 @@
+             "opaque_parameters" : [
+                 {
+                     "cpp.domain.header.file_name" : "functional",
+-                    "cpp.hash.std.status" : "unsupported",
++                    "cpp.hash.standard.status" : "unsupported",
+                     "cpp.test_data.status" : "unsupported",
+                     "cpp.serialization.boost.status" : "unsupported"
+                 }
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index 01f0dd2..c90d970 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -3209,16 +3209,16 @@ all types in the combined model.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Note" version="0" id="O20">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-69,-11"/>
++        <dia:point val="-69,-17"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-69.05,-11.05;-36.48,37.15"/>
++        <dia:rectangle val="-69.05,-17.05;-36.48,31.15"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-69,-11"/>
++        <dia:point val="-69,-17"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="32.469999999999999"/>
+@@ -3305,7 +3305,7 @@ All of these steps are encompassed in the SML @ref workflow.
+             <dia:real val="0.80000000000000004"/>
+           </dia:attribute>
+           <dia:attribute name="pos">
+-            <dia:point val="-68.65,-9.755"/>
++            <dia:point val="-68.65,-15.755"/>
+           </dia:attribute>
+           <dia:attribute name="color">
+             <dia:color val="#000000"/>
+@@ -5982,16 +5982,16 @@ for Java, etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O48">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-69,50"/>
++        <dia:point val="-62,50"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-69.05,49.95;-43.425,53.65"/>
++        <dia:rectangle val="-62.05,49.95;-50.67,53.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-69,50"/>
++        <dia:point val="-62,50"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="25.524999999999999"/>
++        <dia:real val="11.279999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+@@ -6086,16 +6086,16 @@ for Java, etc.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#opaque_parameters#</dia:string>
++            <dia:string>#parameters#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::list&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
++            <dia:string>#parameter_store#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#Associated generic parameters which may be opaque.#</dia:string>
++            <dia:string>#Parameters associated with the object, opaque to SML.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -6291,17 +6291,17 @@ for Java, etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O51">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-56.2375,53.6"/>
++        <dia:point val="-56.36,53.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-60.795,53.55;-55.3875,65.05"/>
++        <dia:rectangle val="-60.795,53.55;-55.51,65.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-56.2375,53.6"/>
+-        <dia:point val="-56.2375,60"/>
++        <dia:point val="-56.36,53.6"/>
++        <dia:point val="-56.36,60"/>
+         <dia:point val="-60.745,60"/>
+         <dia:point val="-60.745,65"/>
+       </dia:attribute>
+@@ -9982,16 +9982,16 @@ came from.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#parameters#</dia:string>
++            <dia:string>#arguments#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::list&lt;parameter&gt;#</dia:string>
++            <dia:string>#std::list&lt;argument&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#List of parameters that can be passed in to the operation.#</dia:string>
++            <dia:string>#List of arguments that can be passed in to the operation.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -10363,13 +10363,13 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O89">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-120,36"/>
++        <dia:point val="-121,36"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-120.05,35.95;-106.745,40.45"/>
++        <dia:rectangle val="-121.05,35.95;-107.745,40.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-120,36"/>
++        <dia:point val="-121,36"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="13.205"/>
+@@ -10378,13 +10378,13 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:real val="4.4000000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#parameter#</dia:string>
++        <dia:string>#argument#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>#Documentable, Parameterisable#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="comment">
+-        <dia:string>#Parameter supplied to an operation.#</dia:string>
++        <dia:string>#Argument supplied to an operation.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="abstract">
+         <dia:boolean val="false"/>
+@@ -10559,7 +10559,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="-110.82,50"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-113.447,40.35;-110.07,50.8"/>
++        <dia:rectangle val="-114.447,40.35;-110.07,50.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -10567,8 +10567,8 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-110.82,50"/>
+         <dia:point val="-110.82,45"/>
+-        <dia:point val="-113.397,45"/>
+-        <dia:point val="-113.397,40.4"/>
++        <dia:point val="-114.397,45"/>
++        <dia:point val="-114.397,40.4"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -13163,5 +13163,234 @@ and values (where applicable) for opaque parameters.#</dia:string>
+         <dia:connection handle="1" to="O106" connection="1"/>
+       </dia:connections>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O112">
++      <dia:attribute name="obj_pos">
++        <dia:point val="-72,36"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="-72.05,35.95;-49.505,39.65"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="-72,36"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="22.445"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3.6000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#parameter_store#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Store for all of the different types of opaque parameters. #</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes">
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#sequence#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Parameters where the order of definition is of importance.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#associative#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::unordered_map&lt;std::string,std::string&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Parameters that are looked up on the basis of the key, and for which order is
++not a requirement. #</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++      </dia:attribute>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O113">
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="-56.36,50"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="-60.8275,39.55;-55.61,51.6"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="-56.36,50"/>
++        <dia:point val="-56.36,45"/>
++        <dia:point val="-60.7775,45"/>
++        <dia:point val="-60.7775,39.6"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O48" connection="1"/>
++        <dia:connection handle="1" to="O112" connection="6"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/doc/agile/release_notes_sprint_35.org b/doc/agile/release_notes_sprint_35.org
+index 34d37b8..6567e1e 100644
+--- a/doc/agile/release_notes_sprint_35.org
++++ b/doc/agile/release_notes_sprint_35.org
+@@ -86,10 +86,38 @@ Name choices:
+     CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
+ 
+ *** IMPLEMENTATION Implement the opaque parameter cache in SML        :story:
++    CLOCK: [2013-09-26 Thu 19:11]--[2013-09-26 Thu 19:18] =>  0:07
++    CLOCK: [2013-09-26 Thu 18:22]--[2013-09-26 Thu 18:43] =>  0:21
+     CLOCK: [2013-09-25 Wed 18:02]--[2013-09-25 Wed 18:53] =>  0:51
+     CLOCK: [2013-09-25 Wed 17:57]--[2013-09-25 Wed 18:02] =>  0:05
+ 
++There is a fundamental problem with the parameter cache approach: it
++does not take into account parameters in properties. If we were to
++create another layer in the cache, we would be duplicating the object
++graph that we already have in =abstract_object= so the entire idea is
++questionable.
++
++A much better way of doing this is to create two types of parameters:
++
++- sequence: odb pragmas
++- associative: everything else
++
++Also, parameters are really some kind of meta-data tag, so we should
++rename it to avoid confusion. So we have:
++
++- =tag_store=: place where all tags live. we should add methods for easy
++  tag retrieval with the right type.
++- =Taggable=: concept for those which have the ability of being tagged.
++- =tags=: property of Taggable entities.
++- =tag_router=: takes a pair of strings and routes it to the right
++  location on the =tag_store=.
++- =tagger=: visits the model as a graph and propagates tags across
++  generalisations and associations.
++
+ *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
++    CLOCK: [2013-09-26 Thu 08:25]--[2013-09-26 Thu 08:33] =>  0:08
++    CLOCK: [2013-09-26 Thu 08:06]--[2013-09-26 Thu 08:18] =>  0:12
++    CLOCK: [2013-09-26 Thu 07:46]--[2013-09-26 Thu 08:06] =>  0:20
+     CLOCK: [2013-09-23 Mon 18:20]--[2013-09-23 Mon 18:50] =>  0:30
+     CLOCK: [2013-09-23 Mon 18:12]--[2013-09-23 Mon 18:17] =>  0:05
+     CLOCK: [2013-09-23 Mon 17:56]--[2013-09-23 Mon 18:05] =>  0:09
+diff --git a/projects/om/include/dogen/om/types/context.hpp b/projects/om/include/dogen/om/types/context.hpp
+index a942cbc..8f2fc7b 100644
+--- a/projects/om/include/dogen/om/types/context.hpp
++++ b/projects/om/include/dogen/om/types/context.hpp
+@@ -29,10 +29,18 @@
+ #include "dogen/cpp_formatters/types/indenter.hpp"
+ #include "dogen/cpp_formatters/types/utility.hpp"
+ #include "dogen/sml/types/property_cache_interface.hpp"
++#include "dogen/sml/types/opaque_parameter_cache_interface.hpp"
+ 
+ namespace dogen {
+ namespace om {
+ 
++/**
++ * @brief Provides a context in which formatting operations occur.
++ *
++ * All parameters passed in to the context must have a lifetime
++ * greater than (or equal to) the context itself as it keeps
++ * references to them.
++ */
+ class context {
+ public:
+     context() = delete;
+@@ -42,18 +50,40 @@ public:
+     ~context() noexcept = default;
+ 
+ public:
+-    context(std::ostream& s, const sml::property_cache_interface& c,
++    context(std::ostream& s, const sml::property_cache_interface& pc,
++        const sml::opaque_parameter_cache_interface& opc,
+         cpp_formatters::indenter& ind, cpp_formatters::utility& u);
+ 
+ public:
++    /**
++     * @brief Stream to which the formatted output will be sent.
++     */
+     std::ostream& stream();
+-    const sml::property_cache_interface& property_cache();
++
++    /**
++     * @brief Cache that provides access to properties in SML objects.
++     */
++    const sml::property_cache_interface& property_cache() const;
++
++    /**
++     * @brief Cache that provides access to opaque parameters.
++     */
++    const sml::opaque_parameter_cache_interface& opaque_parameter_cache() const;
++
++    /**
++     * @brief Indentation facilities.
++     */
+     cpp_formatters::indenter& indenter();
++
++    /**
++     * @brief Formatting utility methods.
++     */
+     cpp_formatters::utility& utility();
+ 
+ private:
+     std::ostream& stream_;
+     const sml::property_cache_interface& property_cache_;
++    const sml::opaque_parameter_cache_interface& opaque_parameter_cache_;
+     cpp_formatters::indenter& indenter_;
+     cpp_formatters::utility& utility_;
+ };
+diff --git a/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp b/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp
+index 41346f3..6cbba86 100644
+--- a/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp
++++ b/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp
+@@ -38,6 +38,10 @@
+ namespace dogen {
+ namespace om {
+ 
++/**
++ * @brief Formats SML types carrying domain objects into a C++
++ * representation.
++ */
+ class cpp_domain_header_formatter : public type_formatter_interface,
+                                     private sml::type_visitor {
+ public:
+@@ -60,9 +64,10 @@ private:
+     std::string cpp_qualified_name(const sml::qname& qn) const;
+ 
+     /**
+-     * @brief Returns the opaque parameter for the given key.
++     * @brief Returns true if the object needs a manually generated
++     * move constructor.
+      */
+-    std::string opaque_parameter(const std::string& key) const;
++    bool requires_manual_move_constructor(const sml::qname& qn) const;
+ 
+ private:
+     /**
+@@ -101,7 +106,8 @@ private:
+ public:
+     void format(std::ostream& s, const sml::type& t, const licence& l,
+         const modeline& m, const std::string& marker,
+-        const sml::property_cache_interface& cache) const override;
++        const sml::property_cache_interface& pc,
++        const sml::opaque_parameter_cache_interface& opc) const override;
+ 
+ private:
+     mutable std::unique_ptr<context> context_;
+diff --git a/projects/om/include/dogen/om/types/type_formatter_interface.hpp b/projects/om/include/dogen/om/types/type_formatter_interface.hpp
+index 27d63f2..f381ec1 100644
+--- a/projects/om/include/dogen/om/types/type_formatter_interface.hpp
++++ b/projects/om/include/dogen/om/types/type_formatter_interface.hpp
+@@ -30,6 +30,7 @@
+ #include "dogen/sml/types/type.hpp"
+ #include "dogen/om/types/licence.hpp"
+ #include "dogen/om/types/modeline.hpp"
++#include "dogen/sml/types/opaque_parameter_cache_interface.hpp"
+ #include "dogen/sml/types/property_cache_interface.hpp"
+ 
+ namespace dogen {
+@@ -47,9 +48,14 @@ public:
+     ~type_formatter_interface() = default;
+ 
+ public:
++    /**
++     * @brief Format the type according to some grammar into the
++     * stream.
++     */
+     virtual void format(std::ostream& s, const sml::type& t, const licence& l,
+         const modeline& m, const std::string& marker,
+-        const sml::property_cache_interface& cache) const = 0;
++        const sml::property_cache_interface& pc,
++        const sml::opaque_parameter_cache_interface& opc) const = 0;
+ };
+ 
+ } }
+diff --git a/projects/om/src/types/context.cpp b/projects/om/src/types/context.cpp
+index e5b448c..1703349 100644
+--- a/projects/om/src/types/context.cpp
++++ b/projects/om/src/types/context.cpp
+@@ -39,8 +39,13 @@ cpp_formatters::utility& context::utility() {
+     return utility_;
+ }
+ 
+-const sml::property_cache_interface& context::property_cache() {
++const sml::property_cache_interface& context::property_cache() const {
+     return property_cache_;
+ }
+ 
++const sml::opaque_parameter_cache_interface&
++context::opaque_parameter_cache() const {
++    return opaque_parameter_cache_;
++}
++
+ } }
+diff --git a/projects/om/src/types/cpp_domain_header_formatter.cpp b/projects/om/src/types/cpp_domain_header_formatter.cpp
+index 2538dc67..7141500 100644
+--- a/projects/om/src/types/cpp_domain_header_formatter.cpp
++++ b/projects/om/src/types/cpp_domain_header_formatter.cpp
+@@ -24,6 +24,7 @@
+ #include "dogen/cpp_formatters/types/indenter.hpp"
+ #include "dogen/cpp_formatters/types/utility.hpp"
+ #include "dogen/cpp_formatters/types/namespace_helper.hpp"
++#include "dogen/sml/types/opaque_parameters.hpp"
+ #include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/sml/types/entity.hpp"
+ #include "dogen/sml/types/enumeration.hpp"
+@@ -101,6 +102,14 @@ cpp_qualified_name(const sml::qname& qn) const {
+     return s.str();
+ }
+ 
++bool cpp_domain_header_formatter::
++requires_manual_move_constructor(const sml::qname& qn) const {
++    const auto p(context_->opaque_parameter_cache().get_with_default(qn,
++            opaque_parameters::cpp::domain::requires_manual_move_constructor));
++
++    return p == opaque_parameters::bool_true;
++}
++
+ void cpp_domain_header_formatter::
+ visit(const dogen::sml::enumeration& e) const {
+     if (context_ == nullptr) {
+@@ -165,13 +174,15 @@ void cpp_domain_header_formatter::close_class() const {
+ }
+ 
+ void cpp_domain_header_formatter::
+-compiler_generated_constuctors(const sml::abstract_object& /*o*/) const {
+-    // context_->utility().public_access_specifier();
++compiler_generated_constuctors(const sml::abstract_object& o) const {
++    context_->utility().public_access_specifier();
+ 
+-    // const auto sn(o.name().simple_name());
+-    // if (!ci.requires_manual_default_constructor())
+-    //     context_->stream() << context_->indenter() << sn << "() = default;"
+-    //                       << std::endl;
++    const auto sn(o.name().simple_name());
++    if (context_->opaque_parameter_cache().get_with_default(o.name(),
++            opaque_parameters::cpp::domain::requires_manual_move_constructor) ==
++            opaque_parameters::bool_true)
++        context_->stream() << context_->indenter() << sn << "() = default;"
++                          << std::endl;
+ 
+     // context_->stream() << context_->indenter() << sn << "(const " << sn
+     //                   << "&) = default;" << std::endl;
+@@ -296,11 +307,12 @@ visit(const dogen::sml::entity& e) const {
+ void cpp_domain_header_formatter::
+ format(std::ostream& s, const sml::type& t, const licence& l,
+     const modeline& m, const std::string& marker,
+-    const sml::property_cache_interface& cache) const {
++    const sml::property_cache_interface& pc,
++    const sml::opaque_parameter_cache_interface& opc) const {
+ 
+     cpp_formatters::indenter ind;
+     cpp_formatters::utility u(s, ind);
+-    context_ = std::unique_ptr<context>(new context(s, cache, ind, u));
++    context_ = std::unique_ptr<context>(new context(s, pc, opc, ind, u));
+ 
+     const cpp_includes i = cpp_includes();
+     const boost::filesystem::path relative_file_path;
+diff --git a/projects/sml/include/dogen/sml/types/opaque_parameters.hpp b/projects/sml/include/dogen/sml/types/opaque_parameters.hpp
+index 11cf138..56f4201 100644
+--- a/projects/sml/include/dogen/sml/types/opaque_parameters.hpp
++++ b/projects/sml/include/dogen/sml/types/opaque_parameters.hpp
+@@ -54,6 +54,12 @@ struct opaque_parameters {
+     static const std::string comment;
+ 
+     /**
++     * @brief Valid values for Boolean types.
++     */
++    static const std::string bool_true;
++    static const std::string bool_false;
++
++    /**
+      * @brief All parameters specific to the C++ language.
+      */
+     struct cpp {
+diff --git a/projects/sml/src/types/opaque_parameters.cpp b/projects/sml/src/types/opaque_parameters.cpp
+index 8f8c6e8..9698836 100644
+--- a/projects/sml/src/types/opaque_parameters.cpp
++++ b/projects/sml/src/types/opaque_parameters.cpp
+@@ -25,12 +25,15 @@ namespace om {
+ 
+ const std::string opaque_parameters::odb_pragma("ODB_PRAGMA");
+ const std::string opaque_parameters::comment("COMMENT");
++const std::string opaque_parameters::bool_true("true");
++const std::string opaque_parameters::bool_false("false");
+ const std::string opaque_parameters::cpp::type::family("cpp.type.family");
++const std::string opaque_parameters::cpp::domain::status("cpp.domain.status");
+ const std::string opaque_parameters::cpp::domain::
+-requires_manual_default_constructor("cpp.domain.requires_manual_default_constructor");
++requires_manual_default_constructor(
++    "cpp.domain.requires_manual_default_constructor");
+ const std::string opaque_parameters::cpp::domain::
+ requires_manual_move_constructor("cpp.domain.requires_manual_move_constructor");
+-const std::string opaque_parameters::cpp::domain::status("cpp.domain.status");
+ const std::string opaque_parameters::cpp::domain::header::file_name(
+     "cpp.domain.header.file_name");
+ const std::string opaque_parameters::cpp::domain::header::is_system(
+@@ -47,8 +50,10 @@ const std::string opaque_parameters::cpp::serialization::boost::header::
+ file_name("cpp.serialization.boost.header.file_name");
+ const std::string opaque_parameters::cpp::serialization::boost::header::
+ is_system("cpp.serialization.boost.header.is_system");
+-const std::string opaque_parameters::cpp::io::status("");
+-const std::string opaque_parameters::cpp::io::header::file_name("");
+-const std::string opaque_parameters::cpp::io::header::is_system("");
++const std::string opaque_parameters::cpp::io::status("cpp.io.status");
++const std::string opaque_parameters::cpp::io::header::file_name(
++    "cpp.io.header.file_name");
++const std::string opaque_parameters::cpp::io::header::is_system(
++    "cpp.io.header.is_system");
+ 
+ } }
