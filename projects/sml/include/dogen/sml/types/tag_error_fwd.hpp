@@ -18,24 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/opaque_parameter_cache.hpp"
+#ifndef DOGEN_SML_TYPES_TAG_ERROR_FWD_HPP
+#define DOGEN_SML_TYPES_TAG_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace sml {
 
-void opaque_parameter_cache::populate(const model& /*m*/) {
-}
-
-std::string opaque_parameter_cache::
-get(const qname& /*qn*/, const std::string& /*key*/) const {
-    std::string r;
-    return r;
-}
-
-std::string opaque_parameter_cache::
-get_with_default(const qname& /*qn*/, const std::string& /*key*/) const {
-    std::string r;
-    return r;
-}
+class tag_error;
 
 } }
+
+#endif

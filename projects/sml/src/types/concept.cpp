@@ -30,7 +30,8 @@ concept::concept()
 concept::concept(
     const std::list<dogen::sml::property>& properties,
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
+    const std::unordered_map<std::string, std::string>& simple_tags,
+    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -38,7 +39,8 @@ concept::concept(
     const std::list<dogen::sml::qname>& refines)
     : properties_(properties),
       documentation_(documentation),
-      opaque_parameters_(opaque_parameters),
+      simple_tags_(simple_tags),
+      complex_tags_(complex_tags),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -49,7 +51,8 @@ void concept::swap(concept& other) noexcept {
     using std::swap;
     swap(properties_, other.properties_);
     swap(documentation_, other.documentation_);
-    swap(opaque_parameters_, other.opaque_parameters_);
+    swap(simple_tags_, other.simple_tags_);
+    swap(complex_tags_, other.complex_tags_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -60,7 +63,8 @@ void concept::swap(concept& other) noexcept {
 bool concept::operator==(const concept& rhs) const {
     return properties_ == rhs.properties_ &&
         documentation_ == rhs.documentation_ &&
-        opaque_parameters_ == rhs.opaque_parameters_ &&
+        simple_tags_ == rhs.simple_tags_ &&
+        complex_tags_ == rhs.complex_tags_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -106,20 +110,36 @@ void concept::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& concept::opaque_parameters() const {
-    return opaque_parameters_;
+const std::unordered_map<std::string, std::string>& concept::simple_tags() const {
+    return simple_tags_;
 }
 
-std::list<std::pair<std::string, std::string> >& concept::opaque_parameters() {
-    return opaque_parameters_;
+std::unordered_map<std::string, std::string>& concept::simple_tags() {
+    return simple_tags_;
 }
 
-void concept::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
-    opaque_parameters_ = v;
+void concept::simple_tags(const std::unordered_map<std::string, std::string>& v) {
+    simple_tags_ = v;
 }
 
-void concept::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
-    opaque_parameters_ = std::move(v);
+void concept::simple_tags(const std::unordered_map<std::string, std::string>&& v) {
+    simple_tags_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<std::string> >& concept::complex_tags() const {
+    return complex_tags_;
+}
+
+std::unordered_map<std::string, std::list<std::string> >& concept::complex_tags() {
+    return complex_tags_;
+}
+
+void concept::complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v) {
+    complex_tags_ = v;
+}
+
+void concept::complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+    complex_tags_ = std::move(v);
 }
 
 const dogen::sml::qname& concept::name() const {

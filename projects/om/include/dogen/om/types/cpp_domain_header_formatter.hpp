@@ -63,12 +63,6 @@ private:
      */
     std::string cpp_qualified_name(const sml::qname& qn) const;
 
-    /**
-     * @brief Returns true if the object needs a manually generated
-     * move constructor.
-     */
-    bool requires_manual_move_constructor(const sml::qname& qn) const;
-
 private:
     /**
      * @brief Formats open class statements for the object.
@@ -106,8 +100,7 @@ private:
 public:
     void format(std::ostream& s, const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
-        const sml::property_cache_interface& pc,
-        const sml::opaque_parameter_cache_interface& opc) const override;
+        const sml::property_cache_interface& c) const override;
 
 private:
     mutable std::unique_ptr<context> context_;

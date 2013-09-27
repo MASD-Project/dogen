@@ -29,13 +29,13 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include <boost/serialization/utility.hpp>
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -51,7 +51,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("properties", v.properties_);
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
+    ar << make_nvp("simple_tags", v.simple_tags_);
+    ar << make_nvp("complex_tags", v.complex_tags_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
@@ -65,7 +66,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
+    ar >> make_nvp("simple_tags", v.simple_tags_);
+    ar >> make_nvp("complex_tags", v.complex_tags_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);

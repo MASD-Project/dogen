@@ -18,42 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_OPAQUE_PARAMETER_CACHE_HPP
-#define DOGEN_SML_TYPES_OPAQUE_PARAMETER_CACHE_HPP
+#ifndef DOGEN_SML_TYPES_TAGGER_FWD_HPP
+#define DOGEN_SML_TYPES_TAGGER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/opaque_parameter_cache_interface.hpp"
-
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Cache for all opaque parameters in a given model, per type.
- */
-class opaque_parameter_cache : public opaque_parameter_cache_interface {
-public:
-    opaque_parameter_cache() = default;
-    opaque_parameter_cache(const opaque_parameter_cache&) = default;
-    opaque_parameter_cache(opaque_parameter_cache&&) = default;
-
-public:
-    virtual ~opaque_parameter_cache() noexcept { }
-
-public:
-    void populate(const model& m);
-
-public:
-    virtual std::string
-    get(const qname& qn, const std::string& key) const override;
-
-    virtual std::string
-    get_with_default(const qname& qn, const std::string& key) const override;
-};
+class tagger;
 
 } }
 

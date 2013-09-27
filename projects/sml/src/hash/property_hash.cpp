@@ -30,18 +30,28 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const std::unordered_map<std::string, std::list<std::string> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_list_std_string(i.second));
     }
     return seed;
 }
@@ -55,7 +65,8 @@ std::size_t property_hasher::hash(const property&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_std_list_std_pair_std_string_std_string_(v.opaque_parameters()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.simple_tags()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.complex_tags()));
     combine(seed, v.name());
     combine(seed, v.type());
     combine(seed, v.default_value());

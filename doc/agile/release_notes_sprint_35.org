@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-25 Wed 18:53]
+Clock summary at [2013-09-27 Fri 23:11]
 
-| Headline                                                     | Time   |      |      |
-|--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *6:32* |      |      |
-|--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 6:32 |      |
-| IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:12 |
-| COMPLETED Refactor OM tests to avoid over-inclusion          |        |      | 0:32 |
-| COMPLETED Convert implementation specific parameters to list |        |      | 1:06 |
-| COMPLETED Rename implementation specific parameters          |        |      | 0:50 |
-| IMPLEMENTATION Implement the property cache in SML           |        |      | 1:14 |
-| IMPLEMENTATION Implement the opaque parameter cache in SML   |        |      | 0:56 |
-| IMPLEMENTATION Create a complete domain formatter in OM      |        |      | 1:42 |
+| Headline                                                     | Time    |       |      |
+|--------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                 | *11:37* |       |      |
+|--------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                              |         | 11:37 |      |
+| IMPLEMENTATION Release notes and backlog grooming            |         |       | 0:12 |
+| COMPLETED Refactor OM tests to avoid over-inclusion          |         |       | 0:32 |
+| COMPLETED Convert implementation specific parameters to list |         |       | 1:06 |
+| COMPLETED Rename implementation specific parameters          |         |       | 0:50 |
+| IMPLEMENTATION Implement the property cache in SML           |         |       | 1:14 |
+| IMPLEMENTATION Add meta-data support to SML                  |         |       | 5:04 |
+| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 2:39 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -85,13 +85,18 @@ Name choices:
     CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
     CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
 
-*** IMPLEMENTATION Implement the opaque parameter cache in SML        :story:
+*** IMPLEMENTATION Add meta-data support to SML                       :story:
+    CLOCK: [2013-09-27 Fri 21:10]--[2013-09-27 Fri 23:10] =>  2:00
+    CLOCK: [2013-09-27 Fri 08:21]--[2013-09-27 Fri 08:30] =>  0:09
+    CLOCK: [2013-09-27 Fri 07:48]--[2013-09-27 Fri 08:13] =>  0:25
     CLOCK: [2013-09-26 Thu 22:31]--[2013-09-26 Thu 23:31] =>  1:00
     CLOCK: [2013-09-26 Thu 22:25]--[2013-09-26 Thu 22:31] =>  0:06
     CLOCK: [2013-09-26 Thu 19:11]--[2013-09-26 Thu 19:18] =>  0:07
     CLOCK: [2013-09-26 Thu 18:22]--[2013-09-26 Thu 18:43] =>  0:21
     CLOCK: [2013-09-25 Wed 18:02]--[2013-09-25 Wed 18:53] =>  0:51
     CLOCK: [2013-09-25 Wed 17:57]--[2013-09-25 Wed 18:02] =>  0:05
+
+New understanding:
 
 There is a fundamental problem with the parameter cache approach: it
 does not take into account parameters in properties. If we were to
@@ -115,6 +120,10 @@ rename it to avoid confusion. So we have:
   location on the =tag_store=.
 - =tagger=: visits the model as a graph and propagates tags across
   generalisations and associations.
+
+Old understanding:
+
+create a opaque parameter cache in SML.
 
 *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
     CLOCK: [2013-09-26 Thu 22:08]--[2013-09-26 Thu 22:25] =>  0:17

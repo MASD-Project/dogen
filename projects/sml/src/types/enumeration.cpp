@@ -43,14 +43,16 @@ namespace sml {
 
 enumeration::enumeration(
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
+    const std::unordered_map<std::string, std::string>& simple_tags,
+    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
     const dogen::sml::qname& underlying_type,
     const std::vector<dogen::sml::enumerator>& enumerators)
     : dogen::sml::type(documentation,
-      opaque_parameters,
+      simple_tags,
+      complex_tags,
       name,
       generation_type,
       origin_type),

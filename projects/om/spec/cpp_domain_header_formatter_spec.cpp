@@ -33,7 +33,6 @@
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/opaque_parameter_cache_interface.hpp"
 #include "dogen/om/types/cpp_domain_header_formatter.hpp"
 
 using dogen::sml::test::mock_model_factory;
@@ -130,30 +129,6 @@ public:
     }
 };
 
-class mock_opaque_parameter_cache :
-        public dogen::sml::opaque_parameter_cache_interface {
-public:
-    mock_opaque_parameter_cache() = default;
-    mock_opaque_parameter_cache(const mock_opaque_parameter_cache&) = default;
-    mock_opaque_parameter_cache(mock_opaque_parameter_cache&&) = default;
-    mock_opaque_parameter_cache&
-    operator=(const mock_opaque_parameter_cache&) = default;
-
-public:
-    std::string
-    get(const dogen::sml::qname& /*qn*/,
-        const std::string& /*key*/) const override {
-        std::string r;
-        return r;
-    }
-
-    std::string get_with_default(const dogen::sml::qname& /*qn*/,
-        const std::string& /*key*/) const override {
-        std::string r;
-        return r;
-    }
-};
-
 const std::string element_not_found("element not found: ");
 
 boost::shared_ptr<dogen::sml::abstract_object>
@@ -189,12 +164,11 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_property_cache pc;
-    mock_opaque_parameter_cache opc;
+    mock_property_cache c;
     const auto e(m.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
-    f.format(s, e, empty_licence, empty_modeline, empty_marker, pc, opc);
+    f.format(s, e, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == enumeration_two_enumerators);
     BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators;
@@ -210,12 +184,11 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) 
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_property_cache pc;
-    mock_opaque_parameter_cache opc;
+    mock_property_cache c;
     const auto o(find_object(m, 0));
     BOOST_LOG_SEV(lg, debug) << "object: " << *o;
 
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, pc, opc);
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == object_no_properties);
     BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties;
@@ -234,9 +207,8 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_property_cache pc;
-    mock_opaque_parameter_cache opc;
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, pc, opc);
+    mock_property_cache c;
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == parent_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object;
@@ -255,10 +227,9 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_property_cache pc;
-    mock_opaque_parameter_cache opc;
+    mock_property_cache c;
 
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, pc, opc);
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object;
@@ -278,10 +249,9 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
-    mock_property_cache pc;
-    mock_opaque_parameter_cache opc;
+    mock_property_cache c;
 
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, pc, opc);
+    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == non_leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object;

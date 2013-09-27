@@ -29,7 +29,7 @@
 #include <boost/optional.hpp>
 #include <list>
 #include <string>
-#include <utility>
+#include <unordered_map>
 #include "dogen/sml/serialization/operation_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/parameter.hpp"
@@ -52,7 +52,8 @@ public:
 public:
     operation(
         const std::string& documentation,
-        const std::list<std::pair<std::string, std::string> >& opaque_parameters,
+        const std::unordered_map<std::string, std::string>& simple_tags,
+        const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
         const std::string& name,
         const std::list<dogen::sml::parameter>& parameters,
         const boost::optional<dogen::sml::nested_qname>& type);
@@ -80,13 +81,27 @@ public:
     /**@}*/
 
     /**
-     * @brief Associated generic parameters which may be opaque.
+     * @brief Tags associated with the object, opaque to SML.
+     *
+     * Tags are in the format key-value pair.
      */
     /**@{*/
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters() const;
-    std::list<std::pair<std::string, std::string> >& opaque_parameters();
-    void opaque_parameters(const std::list<std::pair<std::string, std::string> >& v);
-    void opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::unordered_map<std::string, std::string>& simple_tags() const;
+    std::unordered_map<std::string, std::string>& simple_tags();
+    void simple_tags(const std::unordered_map<std::string, std::string>& v);
+    void simple_tags(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Tags associated with the object, opaque to SML.
+     *
+     * Tags are in the format key, value 1, ... value n. Order of defintion is respected.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::list<std::string> >& complex_tags() const;
+    std::unordered_map<std::string, std::list<std::string> >& complex_tags();
+    void complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v);
+    void complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v);
     /**@}*/
 
     /**
@@ -131,7 +146,8 @@ public:
 
 private:
     std::string documentation_;
-    std::list<std::pair<std::string, std::string> > opaque_parameters_;
+    std::unordered_map<std::string, std::string> simple_tags_;
+    std::unordered_map<std::string, std::list<std::string> > complex_tags_;
     std::string name_;
     std::list<dogen::sml::parameter> parameters_;
     boost::optional<dogen::sml::nested_qname> type_;

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_OPAQUE_PARAMETERS_HPP
-#define DOGEN_OM_TYPES_OPAQUE_PARAMETERS_HPP
+#ifndef DOGEN_SML_TYPES_TAGS_HPP
+#define DOGEN_SML_TYPES_TAGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,13 +28,13 @@
 #include <string>
 
 namespace dogen {
-namespace om {
+namespace sml {
 
 /**
  * @brief Constants for all keys that can be used in a opaque
  * parameter.
  */
-struct opaque_parameters {
+struct tags {
     /**
      * @brief Key used to denote an ODB pragma.
      *
@@ -52,6 +52,11 @@ struct opaque_parameters {
      * the meta-type's documentation.
      */
     static const std::string comment;
+
+    /**
+     * @brief Attribute that provides this entity its identity.
+     */
+    static const std::string identity_attribute;
 
     /**
      * @brief Valid values for Boolean types.

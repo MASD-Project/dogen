@@ -25,25 +25,29 @@ namespace sml {
 
 parameter::parameter(
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
+    const std::unordered_map<std::string, std::string>& simple_tags,
+    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
     const std::string& name,
     const dogen::sml::nested_qname& type)
     : documentation_(documentation),
-      opaque_parameters_(opaque_parameters),
+      simple_tags_(simple_tags),
+      complex_tags_(complex_tags),
       name_(name),
       type_(type) { }
 
 void parameter::swap(parameter& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(opaque_parameters_, other.opaque_parameters_);
+    swap(simple_tags_, other.simple_tags_);
+    swap(complex_tags_, other.complex_tags_);
     swap(name_, other.name_);
     swap(type_, other.type_);
 }
 
 bool parameter::operator==(const parameter& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        opaque_parameters_ == rhs.opaque_parameters_ &&
+        simple_tags_ == rhs.simple_tags_ &&
+        complex_tags_ == rhs.complex_tags_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_;
 }
@@ -70,20 +74,36 @@ void parameter::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& parameter::opaque_parameters() const {
-    return opaque_parameters_;
+const std::unordered_map<std::string, std::string>& parameter::simple_tags() const {
+    return simple_tags_;
 }
 
-std::list<std::pair<std::string, std::string> >& parameter::opaque_parameters() {
-    return opaque_parameters_;
+std::unordered_map<std::string, std::string>& parameter::simple_tags() {
+    return simple_tags_;
 }
 
-void parameter::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
-    opaque_parameters_ = v;
+void parameter::simple_tags(const std::unordered_map<std::string, std::string>& v) {
+    simple_tags_ = v;
 }
 
-void parameter::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
-    opaque_parameters_ = std::move(v);
+void parameter::simple_tags(const std::unordered_map<std::string, std::string>&& v) {
+    simple_tags_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<std::string> >& parameter::complex_tags() const {
+    return complex_tags_;
+}
+
+std::unordered_map<std::string, std::list<std::string> >& parameter::complex_tags() {
+    return complex_tags_;
+}
+
+void parameter::complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v) {
+    complex_tags_ = v;
+}
+
+void parameter::complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+    complex_tags_ = std::move(v);
 }
 
 const std::string& parameter::name() const {

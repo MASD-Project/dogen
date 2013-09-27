@@ -35,12 +35,17 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -48,13 +53,31 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, st
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::string> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -69,12 +92,14 @@ type::type()
 
 type::type(
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
+    const std::unordered_map<std::string, std::string>& simple_tags,
+    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type)
     : documentation_(documentation),
-      opaque_parameters_(opaque_parameters),
+      simple_tags_(simple_tags),
+      complex_tags_(complex_tags),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type) { }
@@ -83,7 +108,8 @@ void type::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::type\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-      << "\"opaque_parameters\": " << opaque_parameters_ << ", "
+      << "\"simple_tags\": " << simple_tags_ << ", "
+      << "\"complex_tags\": " << complex_tags_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_
@@ -93,7 +119,8 @@ void type::to_stream(std::ostream& s) const {
 void type::swap(type& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(opaque_parameters_, other.opaque_parameters_);
+    swap(simple_tags_, other.simple_tags_);
+    swap(complex_tags_, other.complex_tags_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -101,7 +128,8 @@ void type::swap(type& other) noexcept {
 
 bool type::compare(const type& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        opaque_parameters_ == rhs.opaque_parameters_ &&
+        simple_tags_ == rhs.simple_tags_ &&
+        complex_tags_ == rhs.complex_tags_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_;
@@ -123,20 +151,36 @@ void type::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& type::opaque_parameters() const {
-    return opaque_parameters_;
+const std::unordered_map<std::string, std::string>& type::simple_tags() const {
+    return simple_tags_;
 }
 
-std::list<std::pair<std::string, std::string> >& type::opaque_parameters() {
-    return opaque_parameters_;
+std::unordered_map<std::string, std::string>& type::simple_tags() {
+    return simple_tags_;
 }
 
-void type::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
-    opaque_parameters_ = v;
+void type::simple_tags(const std::unordered_map<std::string, std::string>& v) {
+    simple_tags_ = v;
 }
 
-void type::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
-    opaque_parameters_ = std::move(v);
+void type::simple_tags(const std::unordered_map<std::string, std::string>&& v) {
+    simple_tags_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<std::string> >& type::complex_tags() const {
+    return complex_tags_;
+}
+
+std::unordered_map<std::string, std::list<std::string> >& type::complex_tags() {
+    return complex_tags_;
+}
+
+void type::complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v) {
+    complex_tags_ = v;
+}
+
+void type::complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+    complex_tags_ = std::move(v);
 }
 
 const dogen::sml::qname& type::name() const {

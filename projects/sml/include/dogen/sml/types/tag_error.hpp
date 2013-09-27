@@ -18,42 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_TYPE_FORMATTER_INTERFACE_HPP
-#define DOGEN_OM_TYPES_TYPE_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_SML_TYPES_TAG_ERROR_HPP
+#define DOGEN_SML_TYPES_TAG_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/type.hpp"
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
-namespace om {
+namespace sml {
 
 /**
- * @brief Formatter that is responsible for the formtatting of a
- * single type.
+ * @brief An error has occurred while peforming an operation related to tagging.
  */
-class type_formatter_interface {
+class tag_error : public virtual std::exception, public virtual boost::exception {
 public:
-    type_formatter_interface() = default;
-    type_formatter_interface(const type_formatter_interface&) = default;
-    type_formatter_interface(type_formatter_interface&&) = default;
-    ~type_formatter_interface() = default;
+    tag_error() = default;
+    ~tag_error() noexcept = default;
 
 public:
-    /**
-     * @brief Format the type according to some grammar into the
-     * stream.
-     */
-    virtual void format(std::ostream& s, const sml::type& t, const licence& l,
-        const modeline& m, const std::string& marker,
-        const sml::property_cache_interface& pc) const = 0;
+    tag_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } }

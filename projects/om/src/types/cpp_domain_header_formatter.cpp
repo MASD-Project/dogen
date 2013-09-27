@@ -24,7 +24,6 @@
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
-#include "dogen/sml/types/opaque_parameters.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
@@ -100,14 +99,6 @@ cpp_qualified_name(const sml::qname& qn) const {
 
     s << qn.simple_name();
     return s.str();
-}
-
-bool cpp_domain_header_formatter::
-requires_manual_move_constructor(const sml::qname& qn) const {
-    const auto p(context_->opaque_parameter_cache().get_with_default(qn,
-            opaque_parameters::cpp::domain::requires_manual_move_constructor));
-
-    return p == opaque_parameters::bool_true;
 }
 
 void cpp_domain_header_formatter::
@@ -307,12 +298,11 @@ visit(const dogen::sml::entity& e) const {
 void cpp_domain_header_formatter::
 format(std::ostream& s, const sml::type& t, const licence& l,
     const modeline& m, const std::string& marker,
-    const sml::property_cache_interface& pc,
-    const sml::opaque_parameter_cache_interface& opc) const {
+    const sml::property_cache_interface& c) const {
 
     cpp_formatters::indenter ind;
     cpp_formatters::utility u(s, ind);
-    context_ = std::unique_ptr<context>(new context(s, pc, opc, ind, u));
+    context_ = std::unique_ptr<context>(new context(s, c, ind, u));
 
     const cpp_includes i = cpp_includes();
     const boost::filesystem::path relative_file_path;

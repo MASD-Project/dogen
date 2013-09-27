@@ -30,7 +30,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
-#include <boost/serialization/utility.hpp>
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
@@ -44,6 +43,7 @@
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

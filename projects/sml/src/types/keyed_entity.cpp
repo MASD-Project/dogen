@@ -49,7 +49,8 @@ keyed_entity::keyed_entity(keyed_entity&& rhs)
 
 keyed_entity::keyed_entity(
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
+    const std::unordered_map<std::string, std::string>& simple_tags,
+    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -71,7 +72,8 @@ keyed_entity::keyed_entity(
     const dogen::sml::qname& unversioned_key,
     const boost::optional<dogen::sml::qname>& versioned_key)
     : dogen::sml::abstract_entity(documentation,
-      opaque_parameters,
+      simple_tags,
+      complex_tags,
       name,
       generation_type,
       origin_type,

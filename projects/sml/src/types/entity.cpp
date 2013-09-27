@@ -27,7 +27,8 @@ namespace sml {
 
 entity::entity(
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
+    const std::unordered_map<std::string, std::string>& simple_tags,
+    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -47,7 +48,8 @@ entity::entity(
     const bool is_aggregate_root,
     const std::list<dogen::sml::property>& identity)
     : dogen::sml::abstract_entity(documentation,
-      opaque_parameters,
+      simple_tags,
+      complex_tags,
       name,
       generation_type,
       origin_type,

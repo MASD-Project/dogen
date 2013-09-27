@@ -32,10 +32,12 @@
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
-#include "dogen/dia/types/composite.hpp"
-#include "dogen/dia/types/attribute.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
+#include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/dia/types/composite.hpp"
+#include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -52,7 +54,6 @@ static logger lg(logger_factory("dia_to_sml.transformer"));
 const std::string empty;
 const std::string unsigned_int("unsigned int");
 const std::string identity_attribute_key("IDENTITY_ATTRIBUTE");
-const std::string comment_key("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Object has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
@@ -190,7 +191,8 @@ sml::property transformer::to_property(const processed_property& p) const {
 
     const auto pair(comments_parser_->parse(p.comment()));
     r.documentation(pair.first);
-    r.opaque_parameters(pair.second);
+    auto router(make_tag_router(r));
+    router.route(pair.second);
 
     return r;
 }
@@ -330,13 +332,9 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
     ae.is_aggregate_root(p.is_aggregate_root());
 
     for (const auto& p : ae.properties()) {
-        for (const auto pair : p.opaque_parameters()) {
-            if (pair.first != identity_attribute_key)
-                continue;
-
+        auto adaptor(make_tag_adaptor(p));
+        if (adaptor.has_identity())
             ae.identity().push_back(p);
-            break;
-        }
     }
 }
 
@@ -450,19 +448,15 @@ void transformer::from_note(const processed_object& o) {
         return;
 
     const auto pair(comments_parser_->parse(o.text()));
-    bool has_marker(false);
-    for (const auto& p : pair.second) {
-        has_marker = p.first == comment_key;
-        if (has_marker)
-            break;
-    }
-
-    if (!has_marker)
-        return;
-
+    sml::model& model(context_.model());
     if (o.child_node_id().empty()) {
-        context_.model().documentation(pair.first);
-        context_.model().opaque_parameters(pair.second);
+        auto router(make_tag_router(model));
+        router.route_if(pair.second, sml::tags::comment);
+
+        auto adaptor(make_tag_adaptor(model));
+        if (adaptor.has_comment())
+            model.documentation(pair.first);
+
         return;
     }
 
@@ -473,8 +467,8 @@ void transformer::from_note(const processed_object& o) {
             transformation_error(missing_module_for_id + o.child_node_id()));
     }
 
-    auto j(context_.model().modules().find(i->second));
-    if (j == context_.model().modules().end()) {
+    auto j(model.modules().find(i->second));
+    if (j == model.modules().end()) {
         BOOST_LOG_SEV(lg, error) << missing_module_for_qname
                                  << i->second.simple_name();
 
@@ -482,8 +476,14 @@ void transformer::from_note(const processed_object& o) {
             transformation_error(missing_module_for_qname +
                 i->second.simple_name()));
     }
-    j->second.documentation(pair.first);
-    j->second.opaque_parameters(pair.second);
+
+    sml::module& module(j->second);
+    auto router(make_tag_router(module));
+    router.route_if(pair.second, sml::tags::comment);
+
+    auto adaptor(make_tag_adaptor(module));
+    if (adaptor.has_comment())
+        module.documentation(pair.first);
 }
 
 void transformer::to_concept(const processed_object& o, const profile& p) {

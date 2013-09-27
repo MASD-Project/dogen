@@ -1042,7 +1042,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_two_packages_tran
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
-    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_object");
+    SETUP_TEST_LOG_SOURCE("uml_note_with_marker_transforms_into_model_comments");
 
     dogen::dia_to_sml::context c;
     c.model().name(mock_model_name(model_name));
@@ -1053,7 +1053,8 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(!c.model().documentation().empty());
-    BOOST_CHECK(c.model().opaque_parameters().size() == 1);
+    BOOST_CHECK(c.model().simple_tags().size() == 1);
+    BOOST_CHECK(c.model().complex_tags().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
@@ -1068,7 +1069,8 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().opaque_parameters().empty());
+    BOOST_CHECK(c.model().simple_tags().empty());
+    BOOST_CHECK(c.model().complex_tags().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
@@ -1083,7 +1085,8 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().opaque_parameters().empty());
+    BOOST_CHECK(c.model().simple_tags().empty());
+    BOOST_CHECK(c.model().complex_tags().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
@@ -1099,12 +1102,15 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().opaque_parameters().empty());
+    BOOST_CHECK(c.model().simple_tags().empty());
+    BOOST_CHECK(c.model().complex_tags().empty());
+
     BOOST_REQUIRE(c.model().modules().size() == 1);
 
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(!p.opaque_parameters().empty());
+    BOOST_CHECK(!p.simple_tags().empty());
+    BOOST_CHECK(p.complex_tags().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
@@ -1120,12 +1126,14 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().opaque_parameters().empty());
+    BOOST_CHECK(c.model().simple_tags().empty());
+    BOOST_CHECK(c.model().complex_tags().empty());
     BOOST_REQUIRE(c.model().modules().size() == 1);
 
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(p.documentation().empty());
-    BOOST_CHECK(p.opaque_parameters().empty());
+    BOOST_CHECK(p.simple_tags().empty());
+    BOOST_CHECK(p.complex_tags().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
@@ -1141,12 +1149,14 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().opaque_parameters().empty());
+    BOOST_CHECK(c.model().simple_tags().empty());
+    BOOST_CHECK(c.model().complex_tags().empty());
     BOOST_REQUIRE(c.model().modules().size() == 1);
 
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(p.documentation().empty());
-    BOOST_CHECK(p.opaque_parameters().empty());
+    BOOST_CHECK(p.simple_tags().empty());
+    BOOST_CHECK(p.complex_tags().empty());
 }
 
 BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {

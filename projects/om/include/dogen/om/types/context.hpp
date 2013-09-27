@@ -29,7 +29,6 @@
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
-#include "dogen/sml/types/opaque_parameter_cache_interface.hpp"
 
 namespace dogen {
 namespace om {
@@ -51,7 +50,6 @@ public:
 
 public:
     context(std::ostream& s, const sml::property_cache_interface& pc,
-        const sml::opaque_parameter_cache_interface& opc,
         cpp_formatters::indenter& ind, cpp_formatters::utility& u);
 
 public:
@@ -66,11 +64,6 @@ public:
     const sml::property_cache_interface& property_cache() const;
 
     /**
-     * @brief Cache that provides access to opaque parameters.
-     */
-    const sml::opaque_parameter_cache_interface& opaque_parameter_cache() const;
-
-    /**
      * @brief Indentation facilities.
      */
     cpp_formatters::indenter& indenter();
@@ -83,7 +76,6 @@ public:
 private:
     std::ostream& stream_;
     const sml::property_cache_interface& property_cache_;
-    const sml::opaque_parameter_cache_interface& opaque_parameter_cache_;
     cpp_formatters::indenter& indenter_;
     cpp_formatters::utility& utility_;
 };
