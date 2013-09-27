@@ -30,6 +30,8 @@ const std::string tags::bool_true("true");
 const std::string tags::bool_false("false");
 const std::string tags::cpp::type::family("cpp.type.family");
 const std::string tags::cpp::domain::status("cpp.domain.status");
+const std::string tags::cpp::domain::generate_explicitly_defaulted_functions(
+    "cpp.domain.generate_explicitly_defaulted_functions");
 const std::string tags::cpp::domain::
 requires_manual_default_constructor(
     "cpp.domain.requires_manual_default_constructor");

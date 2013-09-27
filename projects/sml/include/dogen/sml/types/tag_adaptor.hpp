@@ -58,6 +58,22 @@ public:
     bool has_identity() const;
 
     /**
+     * @brief Returns the value of "generate explicitly defaulted functions".
+     */
+    bool generate_explicitly_defaulted_functions() const;
+
+    /**
+     * @brief Returns the value of "requires manual default constructor".
+     */
+    bool requires_manual_default_constructor() const;
+
+    /**
+     * @brief Returns the value of "requires manual move constructor".
+     */
+    bool requires_manual_move_constructor() const;
+
+public:
+    /**
      * @brief Returns the odb pragmas.
      *
      * @deprecated this method is only needed for the transition to

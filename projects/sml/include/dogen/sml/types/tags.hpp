@@ -92,6 +92,12 @@ struct tags {
             static const std::string status;
 
             /**
+             * @brief If set to true, explicitly defaulted/deleted
+             * functions will not be generated.
+             */
+            static const std::string generate_explicitly_defaulted_functions;
+
+            /**
              * @brief If true, a manual default constructor is
              * generated, otherwise the compiler generated will be
              * used.

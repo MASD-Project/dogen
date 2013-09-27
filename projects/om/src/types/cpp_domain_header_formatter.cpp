@@ -25,6 +25,7 @@
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/tag_adaptor.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/factory.hpp"
@@ -144,7 +145,9 @@ visit(const dogen::sml::enumeration& e) const {
 
 void cpp_domain_header_formatter::
 open_class(const sml::abstract_object& o) const {
-    doxygen_next_.format(context_->stream(), o.documentation());
+    if (!o.documentation().empty())
+        doxygen_next_.format(context_->stream(), o.documentation());
+
     context_->stream() << context_->indenter() << "class "
                       << o.name().simple_name();
 
@@ -165,38 +168,46 @@ void cpp_domain_header_formatter::close_class() const {
 }
 
 void cpp_domain_header_formatter::
-compiler_generated_constuctors(const sml::abstract_object& /*o*/) const {
-    // context_->utility().public_access_specifier();
+compiler_generated_constuctors(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!adaptor.generate_explicitly_defaulted_functions())
+        return;
 
-    // const auto sn(o.name().simple_name());
-    // if (context_->opaque_parameter_cache().get_with_default(o.name(),
-    //         opaque_parameters::cpp::domain::requires_manual_move_constructor) ==
-    //         opaque_parameters::bool_true)
-    //     context_->stream() << context_->indenter() << sn << "() = default;"
-    //                       << std::endl;
+    context_->utility().public_access_specifier();
 
-    // context_->stream() << context_->indenter() << sn << "(const " << sn
-    //                   << "&) = default;" << std::endl;
+    const auto& sn(o.name().simple_name());
+    if (adaptor.requires_manual_default_constructor()) {
+        context_->stream() << context_->indenter() << sn << "() = default;"
+                          << std::endl;
+    }
 
-    // if (!ci.requires_manual_move_constructor()) {
-    //     context_->stream() << context_->indenter() << sn << "(" << sn
-    //                       << "&&) = default;" << std::endl;
-    // }
+    context_->stream() << context_->indenter() << sn << "(const " << sn
+                      << "&) = default;" << std::endl;
 
-    // if (!o.is_parent() && o.parent_name()) {
-    //     context_->stream() << context_->indenter() << "~" << sn
-    //                       << "() = default;" << std::endl;
-    // }
+    if (adaptor.requires_manual_move_constructor()) {
+        context_->stream() << context_->indenter() << sn << "(" << sn
+                          << "&&) = default;" << std::endl;
+    }
 
-    // if (o.is_immutable()) {
-    //     context_->stream() << context_->indenter() << sn << "& operator=(const "
-    //                       << sn << "&) = delete;" << std::endl;
-    // } else if (ci.all_properties().empty()) {
-    //     context_->stream() << context_->indenter()
-    //                       << sn << "& operator=(const " << sn << "&) = default;"
-    //                       << std::endl;
-    // }
-    // context_->utility().blank_line();
+    if (!o.is_parent() && o.parent_name()) {
+        context_->stream() << context_->indenter() << "~" << sn
+                          << "() = default;" << std::endl;
+    }
+
+    if (o.is_immutable()) {
+        context_->stream() << context_->indenter() << sn
+                          << "& operator=(const " << sn << "&) = delete;"
+                          << std::endl;
+    } else {
+        const auto p(context_->property_cache().get_all_properties(o));
+        if (p.empty()) {
+            context_->stream() << context_->indenter() << sn
+                              << "& operator=(const " << sn
+                              << "&) = default;"
+                              << std::endl;
+        }
+    }
+    context_->utility().blank_line();
 }
 
 void cpp_domain_header_formatter::

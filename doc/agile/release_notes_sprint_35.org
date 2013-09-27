@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-27 Fri 23:11]
+Clock summary at [2013-09-28 Sat 00:11]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *11:37* |       |      |
+| *Total time*                                                 | *12:38* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 11:37 |      |
+| Development Stories Implemented                              |         | 12:38 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |         |       | 0:12 |
 | COMPLETED Refactor OM tests to avoid over-inclusion          |         |       | 0:32 |
 | COMPLETED Convert implementation specific parameters to list |         |       | 1:06 |
 | COMPLETED Rename implementation specific parameters          |         |       | 0:50 |
+| COMPLETED Add meta-data support to SML                       |         |       | 5:04 |
 | IMPLEMENTATION Implement the property cache in SML           |         |       | 1:14 |
-| IMPLEMENTATION Add meta-data support to SML                  |         |       | 5:04 |
-| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 2:39 |
+| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 3:40 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -80,12 +80,8 @@ Name choices:
 - opaque parameters
 - untyped parameters
 
-*** IMPLEMENTATION Implement the property cache in SML                :story:
-    CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08
-    CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
-    CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
-
-*** IMPLEMENTATION Add meta-data support to SML                       :story:
+*** COMPLETED Add meta-data support to SML                            :story:
+    CLOSED: [2013-09-27 Fri 23:42]
     CLOCK: [2013-09-27 Fri 21:10]--[2013-09-27 Fri 23:10] =>  2:00
     CLOCK: [2013-09-27 Fri 08:21]--[2013-09-27 Fri 08:30] =>  0:09
     CLOCK: [2013-09-27 Fri 07:48]--[2013-09-27 Fri 08:13] =>  0:25
@@ -125,6 +121,11 @@ Old understanding:
 
 create a opaque parameter cache in SML.
 
+*** IMPLEMENTATION Implement the property cache in SML                :story:
+    CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08
+    CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
+    CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
+
 *** IMPLEMENTATION Create a complete domain formatter in OM           :story:
     CLOCK: [2013-09-26 Thu 22:08]--[2013-09-26 Thu 22:25] =>  0:17
     CLOCK: [2013-09-26 Thu 08:25]--[2013-09-26 Thu 08:33] =>  0:08
@@ -148,7 +149,9 @@ SML type visitors, etc.
      CLOCK: [2013-09-24 Tue 07:46]--[2013-09-24 Tue 08:10] =>  0:19
      CLOCK: [2013-09-24 Tue 07:33]--[2013-09-24 Tue 07:43] =>  0:18
 
-**** Add compiler generated constructors                               :task:
+**** IMPLEMENTATION Add compiler generated constructors                :task:
+     CLOCK: [2013-09-27 Fri 23:10]--[2013-09-28 Sat 00:11] =>  1:01
+
 *** Create an hydrator from JSON into SML                             :story:
 
 Using the JSON representation defined in the previous iteration (in

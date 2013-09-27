@@ -39,6 +39,32 @@ bool tag_adaptor::has_identity() const {
     return i != simple_tags_.end();
 }
 
+bool tag_adaptor::generate_explicitly_defaulted_functions() const {
+    const auto& key(tags::cpp::domain::generate_explicitly_defaulted_functions);
+    const auto i(simple_tags_.find(key));
+    if (i != simple_tags_.end())
+        return i->second == tags::bool_true;
+
+    return false;
+}
+
+bool tag_adaptor::requires_manual_default_constructor() const {
+    const auto& key(tags::cpp::domain::requires_manual_default_constructor);
+    const auto i(simple_tags_.find(key));
+    if (i != simple_tags_.end())
+        return i->second == tags::bool_true;
+
+    return false;
+}
+
+bool tag_adaptor::requires_manual_move_constructor() const {
+    const auto& key(tags::cpp::domain::requires_manual_move_constructor);
+    const auto i(simple_tags_.find(key));
+    if (i != simple_tags_.end())
+        return i->second == tags::bool_true;
+
+    return false;
+}
 
 std::list<std::pair<std::string,std::string> > tag_adaptor::odb_pragma() const {
     std::list<std::pair<std::string, std::string> > r;

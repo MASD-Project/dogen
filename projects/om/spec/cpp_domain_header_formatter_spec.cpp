@@ -27,6 +27,8 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/types/tag_router.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -104,6 +106,20 @@ class some_type_1 : public some_type_2 {
 }
 )");
 
+const std::string all_explicitly_defaulted_functions(R"(namespace some_model_0 {
+
+class some_type_0 final {
+public:
+    some_type_0() = default;
+    some_type_0(const some_type_0&) = default;
+    some_type_0(some_type_0&&) = default;
+    some_type_0& operator=(const some_type_0&) = default;
+
+};
+
+}
+)");
+
 class mock_property_cache : public dogen::sml::property_cache_interface {
 public:
     mock_property_cache() = default;
@@ -131,12 +147,25 @@ public:
 
 const std::string element_not_found("element not found: ");
 
-boost::shared_ptr<dogen::sml::abstract_object>
+const dogen::sml::abstract_object&
 find_object(const dogen::sml::model& m, const unsigned int n) {
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
         if (mock_model_factory::simple_name(n) == qn.simple_name())
-            return pair.second;
+            return *pair.second;
+    }
+
+    BOOST_THROW_EXCEPTION(
+        dogen::utility::exception::exception(element_not_found +
+            boost::lexical_cast<std::string>(n)));
+}
+
+dogen::sml::abstract_object&
+find_object(dogen::sml::model& m, const unsigned int n) {
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (mock_model_factory::simple_name(n) == qn.simple_name())
+            return *pair.second;
     }
 
     BOOST_THROW_EXCEPTION(
@@ -178,17 +207,17 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
 BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) {
     SETUP_TEST_LOG_SOURCE("object_with_no_properties_produces_expected_domain_header");
 
-    const auto m(factory::build_single_type_model(0));
+    const auto m(factory::build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_property_cache c;
-    const auto o(find_object(m, 0));
-    BOOST_LOG_SEV(lg, debug) << "object: " << *o;
+    const auto& o(find_object(m, 0));
+    BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
+    f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == object_no_properties);
     BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties;
@@ -202,13 +231,13 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
-    const auto o(find_object(m, 1));
-    BOOST_LOG_SEV(lg, debug) << "object: " << *o;
+    const auto& o(find_object(m, 1));
+    BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_property_cache c;
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
+    f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == parent_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object;
@@ -222,14 +251,14 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
-    const auto o(find_object(m, 0));
+    const auto& o(find_object(m, 0));
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_property_cache c;
 
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
+    f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object;
@@ -244,17 +273,48 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.objects().size() == 4);
 
-    const auto o(find_object(m, 1));
+    const auto& o(find_object(m, 1));
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
     dogen::om::cpp_domain_header_formatter f;
     mock_property_cache c;
 
-    f.format(s, *o, empty_licence, empty_modeline, empty_marker, c);
+    f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == non_leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object;
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+}
+
+BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("generating_explicitly_defaulted_functions_produces_expected_domain_header");
+
+    auto m(factory::build_single_type_model());
+    BOOST_CHECK(m.objects().size() == 1);
+    auto& o(find_object(m, 0));
+    o.documentation().clear();
+    auto router(dogen::sml::make_tag_router(o));
+    router.route(
+        dogen::sml::tags::cpp::domain::generate_explicitly_defaulted_functions,
+        dogen::sml::tags::bool_true);
+    router.route(
+        dogen::sml::tags::cpp::domain::requires_manual_default_constructor,
+        dogen::sml::tags::bool_true);
+    router.route(
+        dogen::sml::tags::cpp::domain::requires_manual_move_constructor,
+        dogen::sml::tags::bool_true);
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    std::ostringstream s;
+    dogen::om::cpp_domain_header_formatter f;
+    mock_property_cache c;
+
+    f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
+    const auto r(s.str());
+    BOOST_CHECK(r == all_explicitly_defaulted_functions);
+    BOOST_LOG_SEV(lg, debug) << "expected: "
+                             << all_explicitly_defaulted_functions;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
 }
 
