@@ -1,0 +1,2392 @@
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index 1fb85db..9ebeb36 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -65,19 +65,19 @@
+   <dia:layer name="Background" visible="true" active="true">
+     <dia:object type="UML - Class" version="0" id="O0">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-20,65"/>
++        <dia:point val="-15,65"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-20.05,64.95;-9.055,70.25"/>
++        <dia:rectangle val="-15.05,64.95;-4.055,71.85"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-20,65"/>
++        <dia:point val="-15,65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.895"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="5.2000000000000011"/>
++        <dia:real val="6.8000000000000007"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#property#</dia:string>
+@@ -241,6 +241,52 @@ representation of the primitive type.#</dia:string>
+             <dia:boolean val="false"/>
+           </dia:attribute>
+         </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#is_immutable#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#bool#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#If true, the property can only be read but not set.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#is_fluent#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#bool#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#If true, the property's setter will return the object iteself.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
+       </dia:attribute>
+       <dia:attribute name="operations"/>
+       <dia:attribute name="template">
+@@ -576,17 +622,17 @@ representation of the primitive type.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-9.105,65"/>
++        <dia:point val="-9.5525,65"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-9.855,54.35;5.995,65.8"/>
++        <dia:rectangle val="-10.3025,54.35;5.995,65.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-9.105,65"/>
+-        <dia:point val="-9.105,60"/>
++        <dia:point val="-9.5525,65"/>
++        <dia:point val="-9.5525,60"/>
+         <dia:point val="5.795,60"/>
+         <dia:point val="5.795,54.4"/>
+       </dia:attribute>
+@@ -605,7 +651,7 @@ representation of the primitive type.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O0" connection="2"/>
++        <dia:connection handle="0" to="O0" connection="1"/>
+         <dia:connection handle="1" to="O2" connection="6"/>
+       </dia:connections>
+     </dia:object>
+@@ -620,7 +666,7 @@ representation of the primitive type.#</dia:string>
+         <dia:point val="-98,36"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="8.3350000000000009"/>
++        <dia:real val="8.3349999999999991"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -2264,7 +2310,7 @@ and all of the supported types within those models.#</dia:string>
+         <dia:real val="24.77"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.1000000000000005"/>
++        <dia:real val="4.0999999999999996"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000000000001"/>
+@@ -2638,7 +2684,7 @@ all types in the combined model.#</dia:string>
+         <dia:point val="3,11"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="31.684999999999999"/>
++        <dia:real val="31.685000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="7.5999999999999996"/>
+@@ -3327,7 +3373,7 @@ All of these steps are encompassed in the SML @ref workflow.
+         <dia:point val="-32,-6"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.0925000000000002"/>
++        <dia:real val="7.0924999999999994"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -3854,16 +3900,16 @@ All of these steps are encompassed in the SML @ref workflow.
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O28">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="48,117"/>
++        <dia:point val="48,119"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="47.95,116.95;54.6725,122.25"/>
++        <dia:rectangle val="47.95,118.95;54.6725,124.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="48,117"/>
++        <dia:point val="48,119"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="6.6224999999999996"/>
++        <dia:real val="6.6225000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -4034,13 +4080,13 @@ All of these steps are encompassed in the SML @ref workflow.
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O29">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="6,69"/>
++        <dia:point val="6,70"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="5.95,68.95;16.56,72.65"/>
++        <dia:rectangle val="5.95,69.95;16.56,73.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="6,69"/>
++        <dia:point val="6,70"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.51"/>
+@@ -4170,13 +4216,13 @@ Aggregates a group of logically related types into a unit.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O30">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="80,104"/>
++        <dia:point val="80,106"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="79.95,103.95;92.1,107.65"/>
++        <dia:rectangle val="79.95,105.95;92.1,109.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="80,104"/>
++        <dia:point val="80,106"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="12.050000000000001"/>
+@@ -4352,13 +4398,13 @@ a concept, parent or the main properties container.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O31">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="41,104"/>
++        <dia:point val="41,106"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="40.95,103.95;51.56,107.65"/>
++        <dia:rectangle val="40.95,105.95;51.56,109.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="41,104"/>
++        <dia:point val="41,106"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.51"/>
+@@ -4490,19 +4536,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O32">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,93.6"/>
++        <dia:point val="58.9125,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.205,93.55;59.7625,104.05"/>
++        <dia:rectangle val="46.205,94.55;59.7625,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,93.6"/>
+-        <dia:point val="58.9125,99"/>
+-        <dia:point val="46.255,99"/>
+-        <dia:point val="46.255,104"/>
++        <dia:point val="58.9125,94.6"/>
++        <dia:point val="58.9125,101"/>
++        <dia:point val="46.255,101"/>
++        <dia:point val="46.255,106"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -4567,19 +4613,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="46.255,107.6"/>
++        <dia:point val="46.255,109.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="45.505,106.85;51.5113,117.8"/>
++        <dia:rectangle val="45.505,108.85;51.5113,119.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="46.255,107.6"/>
+-        <dia:point val="46.255,113"/>
+-        <dia:point val="51.3113,113"/>
+-        <dia:point val="51.3113,117"/>
++        <dia:point val="46.255,109.6"/>
++        <dia:point val="46.255,115"/>
++        <dia:point val="51.3113,115"/>
++        <dia:point val="51.3113,119"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -4602,13 +4648,13 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O34">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="59,104"/>
++        <dia:point val="59,106"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.95,103.95;63.4,107.05"/>
++        <dia:rectangle val="58.95,105.95;63.4,109.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="59,104"/>
++        <dia:point val="59,106"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="4.3499999999999996"/>
+@@ -4712,19 +4758,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O35">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,93.6"/>
++        <dia:point val="58.9125,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.0625,93.55;61.225,104.05"/>
++        <dia:rectangle val="58.0625,94.55;61.225,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,93.6"/>
+-        <dia:point val="58.9125,99"/>
+-        <dia:point val="61.175,99"/>
+-        <dia:point val="61.175,104"/>
++        <dia:point val="58.9125,94.6"/>
++        <dia:point val="58.9125,101"/>
++        <dia:point val="61.175,101"/>
++        <dia:point val="61.175,106"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -4753,13 +4799,13 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O36">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="70,104"/>
++        <dia:point val="70,106"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="69.95,103.95;75.21,107.05"/>
++        <dia:rectangle val="69.95,105.95;75.21,109.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="70,104"/>
++        <dia:point val="70,106"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="5.1600000000000001"/>
+@@ -4868,19 +4914,19 @@ underlying storage (for example, a relational database).#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O37">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,93.6"/>
++        <dia:point val="58.9125,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.0625,93.55;72.63,104.05"/>
++        <dia:rectangle val="58.0625,94.55;72.63,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,93.6"/>
+-        <dia:point val="58.9125,99"/>
+-        <dia:point val="72.58,99"/>
+-        <dia:point val="72.58,104"/>
++        <dia:point val="58.9125,94.6"/>
++        <dia:point val="58.9125,101"/>
++        <dia:point val="72.58,101"/>
++        <dia:point val="72.58,106"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -4909,13 +4955,13 @@ underlying storage (for example, a relational database).#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O38">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="47,69"/>
++        <dia:point val="47,70"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.95,68.95;57.56,72.65"/>
++        <dia:rectangle val="46.95,69.95;57.56,73.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="47,69"/>
++        <dia:point val="47,70"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.51"/>
+@@ -5991,7 +6037,7 @@ for Java, etc.#</dia:string>
+         <dia:point val="-70,50"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="27.065000000000001"/>
++        <dia:real val="27.064999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="4.4000000000000004"/>
+@@ -6711,13 +6757,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O56">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-70,77"/>
++        <dia:point val="-69,83"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-70.05,76.95;-65.215,80.05"/>
++        <dia:rectangle val="-69.05,82.95;-64.215,86.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-70,77"/>
++        <dia:point val="-69,83"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="4.7350000000000003"/>
+@@ -6824,16 +6870,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="-40.59,68.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-67.6825,68.55;-39.74,77.05"/>
++        <dia:rectangle val="-66.6825,68.55;-39.74,83.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="-40.59,68.6"/>
+-        <dia:point val="-40.59,73"/>
+-        <dia:point val="-67.6325,73"/>
+-        <dia:point val="-67.6325,77"/>
++        <dia:point val="-40.59,78"/>
++        <dia:point val="-66.6325,78"/>
++        <dia:point val="-66.6325,83"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6865,16 +6911,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="-60.745,68.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-67.6825,68.55;-59.895,77.05"/>
++        <dia:rectangle val="-66.6825,68.55;-59.895,83.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="-60.745,68.6"/>
+-        <dia:point val="-60.745,73"/>
+-        <dia:point val="-67.6325,73"/>
+-        <dia:point val="-67.6325,77"/>
++        <dia:point val="-60.745,78"/>
++        <dia:point val="-66.6325,78"/>
++        <dia:point val="-66.6325,83"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6942,16 +6988,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="22,58.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="11.205,57.65;22.75,69.7502"/>
++        <dia:rectangle val="11.205,57.65;22.75,70.7502"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="22,58.4"/>
+-        <dia:point val="22,64"/>
+-        <dia:point val="11.255,64"/>
+-        <dia:point val="11.255,68.9502"/>
++        <dia:point val="22,65"/>
++        <dia:point val="11.255,65"/>
++        <dia:point val="11.255,69.9502"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -7013,16 +7059,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="49.45,58.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="48.7,57.65;52.455,69.8"/>
++        <dia:rectangle val="48.7,57.65;52.455,70.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="49.45,58.4"/>
+-        <dia:point val="49.45,64"/>
+-        <dia:point val="52.255,64"/>
+-        <dia:point val="52.255,69"/>
++        <dia:point val="49.45,65"/>
++        <dia:point val="52.255,65"/>
++        <dia:point val="52.255,70"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -7045,13 +7091,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O61">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="33,82"/>
++        <dia:point val="33,83"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="32.95,81.95;37.6225,85.05"/>
++        <dia:rectangle val="32.95,82.95;37.6225,86.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="33,82"/>
++        <dia:point val="33,83"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="4.5724999999999998"/>
+@@ -7155,13 +7201,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O62">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="26,69"/>
++        <dia:point val="26,70"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="25.95,68.95;35.02,72.05"/>
++        <dia:rectangle val="25.95,69.95;35.02,73.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="26,69"/>
++        <dia:point val="26,70"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="8.9700000000000006"/>
+@@ -7265,19 +7311,19 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O63">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="30.485,72"/>
++        <dia:point val="30.485,73"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="29.635,71.95;35.3363,82.05"/>
++        <dia:rectangle val="29.635,72.95;35.3363,83.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="30.485,72"/>
+-        <dia:point val="30.485,77"/>
+-        <dia:point val="35.2863,77"/>
+-        <dia:point val="35.2863,82"/>
++        <dia:point val="30.485,73"/>
++        <dia:point val="30.485,78"/>
++        <dia:point val="35.2863,78"/>
++        <dia:point val="35.2863,83"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -7345,16 +7391,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="35.725,58.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="30.435,57.65;36.475,69.8"/>
++        <dia:rectangle val="30.435,57.65;36.475,70.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="35.725,58.4"/>
+-        <dia:point val="35.725,64"/>
+-        <dia:point val="30.485,64"/>
+-        <dia:point val="30.485,69"/>
++        <dia:point val="35.725,65"/>
++        <dia:point val="30.485,65"/>
++        <dia:point val="30.485,70"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -7377,13 +7423,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O65">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="7,82"/>
++        <dia:point val="7,83"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="6.95,81.95;21.795,86.45"/>
++        <dia:rectangle val="6.95,82.95;21.795,87.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="7,82"/>
++        <dia:point val="7,83"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="14.744999999999999"/>
+@@ -7731,18 +7777,18 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="14.3725,86.4"/>
++        <dia:point val="14.3725,87.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="6.8575,85.65;15.1225,96.8"/>
++        <dia:rectangle val="6.8575,86.65;15.1225,96.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="14.3725,86.4"/>
+-        <dia:point val="14.3725,91"/>
+-        <dia:point val="6.9075,91"/>
++        <dia:point val="14.3725,87.4"/>
++        <dia:point val="14.3725,92"/>
++        <dia:point val="6.9075,92"/>
+         <dia:point val="6.9075,96"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -7766,19 +7812,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O68">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="30.485,72"/>
++        <dia:point val="30.485,73"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="14.3225,71.95;31.335,82.05"/>
++        <dia:rectangle val="14.3225,72.95;31.335,83.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="30.485,72"/>
+-        <dia:point val="30.485,77"/>
+-        <dia:point val="14.3725,77"/>
+-        <dia:point val="14.3725,82"/>
++        <dia:point val="30.485,73"/>
++        <dia:point val="30.485,78"/>
++        <dia:point val="14.3725,78"/>
++        <dia:point val="14.3725,83"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -7807,19 +7853,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O69">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="30.485,72"/>
++        <dia:point val="30.485,73"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="29.635,71.95;58.9625,82.05"/>
++        <dia:rectangle val="29.635,72.95;58.9625,83.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="30.485,72"/>
+-        <dia:point val="30.485,77"/>
+-        <dia:point val="58.9125,77"/>
+-        <dia:point val="58.9125,82"/>
++        <dia:point val="30.485,73"/>
++        <dia:point val="30.485,78"/>
++        <dia:point val="58.9125,78"/>
++        <dia:point val="58.9125,83"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -7848,13 +7894,13 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O70">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="50,82"/>
++        <dia:point val="50,83"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.95,81.95;67.875,93.65"/>
++        <dia:rectangle val="49.95,82.95;67.875,94.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="50,82"/>
++        <dia:point val="50,83"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="17.824999999999999"/>
+@@ -8217,13 +8263,13 @@ or other comparable model types.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O71">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="23,104"/>
++        <dia:point val="23,106"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="22.95,103.95;33.56,107.65"/>
++        <dia:rectangle val="22.95,105.95;33.56,109.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="23,104"/>
++        <dia:point val="23,106"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.51"/>
+@@ -8355,13 +8401,13 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O72">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="6,117"/>
++        <dia:point val="6,119"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="5.95,116.95;15.0925,125.45"/>
++        <dia:rectangle val="5.95,118.95;15.0925,127.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="6,117"/>
++        <dia:point val="6,119"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="9.0425000000000004"/>
+@@ -8663,19 +8709,19 @@ object.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="28.255,107.6"/>
++        <dia:point val="28.255,109.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="10.4713,106.85;29.005,117.8"/>
++        <dia:rectangle val="10.4712,108.85;29.005,119.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="28.255,107.6"/>
+-        <dia:point val="28.255,113"/>
+-        <dia:point val="10.5213,113"/>
+-        <dia:point val="10.5213,117"/>
++        <dia:point val="28.255,109.6"/>
++        <dia:point val="28.255,115"/>
++        <dia:point val="10.5213,115"/>
++        <dia:point val="10.5213,119"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -8698,19 +8744,19 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O74">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,93.6"/>
++        <dia:point val="58.9125,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="28.205,93.55;59.7625,104.05"/>
++        <dia:rectangle val="28.205,94.55;59.7625,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,93.6"/>
+-        <dia:point val="58.9125,99"/>
+-        <dia:point val="28.255,99"/>
+-        <dia:point val="28.255,104"/>
++        <dia:point val="58.9125,94.6"/>
++        <dia:point val="58.9125,101"/>
++        <dia:point val="28.255,101"/>
++        <dia:point val="28.255,106"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -8739,19 +8785,19 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O75">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,93.6"/>
++        <dia:point val="58.9125,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.0625,93.55;86.075,104"/>
++        <dia:rectangle val="58.0625,94.55;86.075,106"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,93.6"/>
+-        <dia:point val="58.9125,99"/>
+-        <dia:point val="86.025,99"/>
+-        <dia:point val="86.025,103.95"/>
++        <dia:point val="58.9125,94.6"/>
++        <dia:point val="58.9125,101"/>
++        <dia:point val="86.025,101"/>
++        <dia:point val="86.025,105.95"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -8780,13 +8826,13 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O76">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="70,117"/>
++        <dia:point val="70,119"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="69.95,116.95;85.18,121.45"/>
++        <dia:rectangle val="69.95,118.95;85.18,123.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="70,117"/>
++        <dia:point val="70,119"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="15.130000000000001"/>
+@@ -8944,19 +8990,19 @@ key and the @e unversioned key. The first will contain the version property.#</d
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O77">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="86.025,107.6"/>
++        <dia:point val="86.025,109.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="77.515,107.55;86.875,117"/>
++        <dia:rectangle val="77.515,109.55;86.875,119"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="86.025,107.6"/>
+-        <dia:point val="86.025,113"/>
+-        <dia:point val="77.565,113"/>
+-        <dia:point val="77.565,116.95"/>
++        <dia:point val="86.025,109.6"/>
++        <dia:point val="86.025,115"/>
++        <dia:point val="77.565,115"/>
++        <dia:point val="77.565,118.95"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -8985,13 +9031,13 @@ key and the @e unversioned key. The first will contain the version property.#</d
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O78">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="94,117"/>
++        <dia:point val="94,119"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="93.95,116.95;98.4,120.05"/>
++        <dia:rectangle val="93.95,118.95;98.4,122.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="94,117"/>
++        <dia:point val="94,119"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="4.3499999999999996"/>
+@@ -9095,19 +9141,19 @@ key and the @e unversioned key. The first will contain the version property.#</d
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O79">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="86.025,107.6"/>
++        <dia:point val="86.025,109.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="85.175,107.55;96.225,117.05"/>
++        <dia:rectangle val="85.175,109.55;96.225,119.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="86.025,107.6"/>
+-        <dia:point val="86.025,113"/>
+-        <dia:point val="96.175,113"/>
+-        <dia:point val="96.175,117"/>
++        <dia:point val="86.025,109.6"/>
++        <dia:point val="86.025,115"/>
++        <dia:point val="96.175,115"/>
++        <dia:point val="96.175,119"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -9175,16 +9221,16 @@ key and the @e unversioned key. The first will contain the version property.#</d
+         <dia:point val="-34.18,68.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-34.93,67.85;-14.3525,73.05"/>
++        <dia:rectangle val="-34.93,67.85;-9.3525,78.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="-34.18,68.6"/>
+-        <dia:point val="-34.18,73"/>
+-        <dia:point val="-14.5525,73"/>
+-        <dia:point val="-14.5525,70.2"/>
++        <dia:point val="-34.18,78"/>
++        <dia:point val="-9.5525,78"/>
++        <dia:point val="-9.5525,71.8"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -9844,16 +9890,16 @@ came from.#</dia:string>
+         <dia:point val="-96.3975,68.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-97.2475,68.55;-67.5825,77.05"/>
++        <dia:rectangle val="-97.2475,68.55;-66.5825,83.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="-96.3975,68.6"/>
+-        <dia:point val="-96.3975,73"/>
+-        <dia:point val="-67.6325,73"/>
+-        <dia:point val="-67.6325,77"/>
++        <dia:point val="-96.3975,78"/>
++        <dia:point val="-66.6325,78"/>
++        <dia:point val="-66.6325,83"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -10618,16 +10664,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O91">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="85,64"/>
++        <dia:point val="90,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="84.95,63.25;112.91,68.45"/>
++        <dia:rectangle val="89.95,63.25;117.91,68.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="85,64"/>
++        <dia:point val="90,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="24.754999999999999"/>
++        <dia:real val="24.755000000000003"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="4.4000000000000004"/>
+@@ -10869,17 +10915,17 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="97.3775,64"/>
++        <dia:point val="102.377,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,51.95;98.1275,64.8"/>
++        <dia:rectangle val="49.4,51.95;103.127,64.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="97.3775,64"/>
+-        <dia:point val="97.3775,52.7"/>
++        <dia:point val="102.377,64"/>
++        <dia:point val="102.377,52.7"/>
+         <dia:point val="49.45,52.7"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -10902,16 +10948,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O93">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="151,64"/>
++        <dia:point val="158,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="150.95,63.25;174.29,69.25"/>
++        <dia:rectangle val="157.95,63.25;181.29,69.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="151,64"/>
++        <dia:point val="158,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.135000000000002"/>
++        <dia:real val="20.134999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000002"/>
+@@ -11156,15 +11202,15 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="49.45,52.7"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,51.95;161.817,64.8"/>
++        <dia:rectangle val="49.4,51.95;168.817,64.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="49.45,52.7"/>
+-        <dia:point val="161.067,52.7"/>
+-        <dia:point val="161.067,64"/>
++        <dia:point val="168.067,52.7"/>
++        <dia:point val="168.067,64"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="0"/>
+@@ -11451,17 +11497,17 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="97.3775,68.4"/>
++        <dia:point val="102.377,68.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="96.6275,67.65;122.2,82.8"/>
++        <dia:rectangle val="101.627,67.65;122.2,82.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="97.3775,68.4"/>
+-        <dia:point val="97.3775,76.05"/>
++        <dia:point val="102.377,68.4"/>
++        <dia:point val="102.377,76.05"/>
+         <dia:point val="122,76.05"/>
+         <dia:point val="122,82"/>
+       </dia:attribute>
+@@ -11522,17 +11568,17 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="161.067,69.2"/>
++        <dia:point val="168.067,69.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="148.63,68.45;161.817,82.8"/>
++        <dia:rectangle val="148.63,68.45;168.817,82.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="161.067,69.2"/>
+-        <dia:point val="161.067,76"/>
++        <dia:point val="168.067,69.2"/>
++        <dia:point val="168.067,76"/>
+         <dia:point val="148.68,76"/>
+         <dia:point val="148.68,82"/>
+       </dia:attribute>
+@@ -11603,8 +11649,8 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="49.45,57.5"/>
+-        <dia:point val="72,57.5"/>
+-        <dia:point val="72,84.7"/>
++        <dia:point val="75,57.5"/>
++        <dia:point val="75,84.7"/>
+         <dia:point val="122,84.7"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -11628,13 +11674,13 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O99">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="181,64"/>
++        <dia:point val="187,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="180.95,63.25;198.515,68.45"/>
++        <dia:rectangle val="186.95,63.25;204.515,68.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="181,64"/>
++        <dia:point val="187,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="14.359999999999999"/>
+@@ -11865,15 +11911,15 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="49.45,52.7"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,51.95;188.93,64.8"/>
++        <dia:rectangle val="49.4,51.95;194.93,64.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="49.45,52.7"/>
+-        <dia:point val="188.18,52.7"/>
+-        <dia:point val="188.18,64"/>
++        <dia:point val="194.18,52.7"/>
++        <dia:point val="194.18,64"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="0"/>
+@@ -12054,16 +12100,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O102">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="120,64"/>
++        <dia:point val="125,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="119.95,63.95;146.345,70.05"/>
++        <dia:rectangle val="124.95,63.95;151.345,70.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="120,64"/>
++        <dia:point val="125,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="26.295000000000002"/>
++        <dia:real val="26.294999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="6"/>
+@@ -12309,17 +12355,17 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O103">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="133.148,70"/>
++        <dia:point val="138.148,70"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="132.298,69.95;135.39,82.05"/>
++        <dia:rectangle val="135.29,69.95;138.998,82.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="133.148,70"/>
+-        <dia:point val="133.148,76"/>
++        <dia:point val="138.148,70"/>
++        <dia:point val="138.148,76"/>
+         <dia:point val="135.34,76"/>
+         <dia:point val="135.34,82"/>
+       </dia:attribute>
+@@ -12350,16 +12396,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O104">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="112,104"/>
++        <dia:point val="112,106"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="111.95,103.95;117.83,107.05"/>
++        <dia:rectangle val="111.95,105.95;117.83,109.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="112,104"/>
++        <dia:point val="112,106"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="5.7800000000000002"/>
++        <dia:real val="5.7799999999999994"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -12499,16 +12545,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="135.34,87.8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="114.84,87.05;136.09,104.75"/>
++        <dia:rectangle val="114.84,87.05;136.09,106.75"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="135.34,87.8"/>
+-        <dia:point val="135.34,99"/>
+-        <dia:point val="114.89,99"/>
+-        <dia:point val="114.89,103.95"/>
++        <dia:point val="135.34,101"/>
++        <dia:point val="114.89,101"/>
++        <dia:point val="114.89,105.95"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -12879,7 +12925,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="-52,4"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="25.154999999999998"/>
++        <dia:real val="25.155000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -13188,7 +13234,7 @@ tag containers.#</dia:string>
+         <dia:point val="-89,29"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="26.309999999999999"/>
++        <dia:real val="26.310000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -13384,7 +13430,7 @@ any entity which models the Taggable concept. Provides defaulting.#</dia:string>
+         <dia:point val="-85,4"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="23.614999999999998"/>
++        <dia:real val="23.615000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -13683,7 +13729,7 @@ and values (where applicable) for tags.#</dia:string>
+         <dia:point val="-66,-13"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="21.689999999999998"/>
++        <dia:real val="21.690000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+diff --git a/doc/agile/release_notes_sprint_35.org b/doc/agile/release_notes_sprint_35.org
+index 4f77fa3..baf3f89 100644
+--- a/doc/agile/release_notes_sprint_35.org
++++ b/doc/agile/release_notes_sprint_35.org
+@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 35.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2013-09-28 Sat 00:11]
++Clock summary at [2013-09-28 Sat 17:07]
+ 
+ | Headline                                                     | Time    |       |      |
+ |--------------------------------------------------------------+---------+-------+------|
+-| *Total time*                                                 | *12:38* |       |      |
++| *Total time*                                                 | *14:50* |       |      |
+ |--------------------------------------------------------------+---------+-------+------|
+-| Development Stories Implemented                              |         | 12:38 |      |
++| Development Stories Implemented                              |         | 14:50 |      |
+ | IMPLEMENTATION Release notes and backlog grooming            |         |       | 0:12 |
+ | COMPLETED Refactor OM tests to avoid over-inclusion          |         |       | 0:32 |
+ | COMPLETED Convert implementation specific parameters to list |         |       | 1:06 |
+ | COMPLETED Rename implementation specific parameters          |         |       | 0:50 |
+ | COMPLETED Add meta-data support to SML                       |         |       | 5:04 |
+ | IMPLEMENTATION Implement the property cache in SML           |         |       | 1:14 |
+-| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 3:40 |
++| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 5:52 |
+ #+end:
+ 
+ *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+@@ -150,6 +150,10 @@ SML type visitors, etc.
+      CLOCK: [2013-09-24 Tue 07:33]--[2013-09-24 Tue 07:43] =>  0:18
+ 
+ **** IMPLEMENTATION Add compiler generated constructors                :task:
++     CLOCK: [2013-09-28 Sat 15:34]--[2013-09-28 Sat 17:07] =>  1:33
++     CLOCK: [2013-09-28 Sat 15:02]--[2013-09-28 Sat 15:34] =>  0:32
++     CLOCK: [2013-09-28 Sat 14:59]--[2013-09-28 Sat 15:02] =>  0:03
++     CLOCK: [2013-09-28 Sat 11:02]--[2013-09-28 Sat 11:06] =>  0:04
+      CLOCK: [2013-09-27 Fri 23:10]--[2013-09-28 Sat 00:11] =>  1:01
+ 
+ *** Create an hydrator from JSON into SML                             :story:
+diff --git a/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp b/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp
+index ad50e28..f0acc6c 100644
+--- a/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp
++++ b/projects/om/include/dogen/om/types/cpp_domain_header_formatter.hpp
+@@ -73,13 +73,59 @@ private:
+      * @brief Formats close class statements for the object.
+      */
+     void close_class() const;
+-    void compiler_generated_constuctors(const sml::abstract_object& o) const;
++
++    /**
++     * @brief Formats the constructors that are compiler generated via
++     * the explicit default keyword.
++     */
++    void explicitly_defaulted_functions(const sml::abstract_object& o) const;
++
++    /**
++     * @brief Formats the default constructor.
++     */
+     void default_constructor(const sml::abstract_object& o) const;
++
++    /**
++     * @brief Formats the move constructor.
++     */
+     void move_constructor(const sml::abstract_object& o) const;
++
++    /**
++     * @brief Formats the complete constructor.
++     *
++     * A complete constructor is one that takes every member variable
++     * as an input.
++     */
+     void complete_constructor(const sml::abstract_object& o) const;
++
++    /**
++     * @brief Formats the destructor.
++     */
+     void destructor(const sml::abstract_object& o) const;
++
++    /**
++     * @brief Formats all the friend declarations.
++     */
+     void friends(const sml::abstract_object& o) const;
++
++    /**
++     * @brief Formats the getter and setter for a simple type.
++     */
++    void simple_type_getter_and_setter(const std::string& owner_name,
++        const sml::property& p) const;
++
++    /**
++     * @brief Formats the getter and setter for a compound type.
++     */
++    void compound_type_getter_and_setter(const std::string& owner_name,
++        const sml::property& p) const;
++
++    /**
++     * @brief Top-level method that expands all properties into
++     * getters and setters.
++     */
+     void getters_and_setters(const sml::abstract_object& o) const;
++
+     void member_variables(const sml::abstract_object& o) const;
+     void equality(const sml::abstract_object& o) const;
+     void to_stream(const sml::abstract_object& o) const;
+diff --git a/projects/om/include/dogen/om/types/cpp_file_boilerplate_formatter.hpp b/projects/om/include/dogen/om/types/cpp_file_boilerplate_formatter.hpp
+index f915b4c..b1ddeac 100644
+--- a/projects/om/include/dogen/om/types/cpp_file_boilerplate_formatter.hpp
++++ b/projects/om/include/dogen/om/types/cpp_file_boilerplate_formatter.hpp
+@@ -42,7 +42,6 @@ namespace om {
+  */
+ class cpp_file_boilerplate_formatter {
+ public:
+-    cpp_file_boilerplate_formatter() = default;
+     cpp_file_boilerplate_formatter(
+         const cpp_file_boilerplate_formatter&) = default;
+     cpp_file_boilerplate_formatter& operator=(
+@@ -50,6 +49,10 @@ public:
+     cpp_file_boilerplate_formatter(
+         cpp_file_boilerplate_formatter&& rhs) = default;
+ 
++public:
++    explicit cpp_file_boilerplate_formatter(
++        const bool generate_preamble = true);
++
+ private:
+     /**
+      * @brief Adds the formatted modeline to the content.
+@@ -113,6 +116,9 @@ public:
+      */
+     void format_end(std::ostream& s, const modeline& m,
+         const boost::filesystem::path& relative_file_path) const;
++
++private:
++    const bool generate_preamble_;
+ };
+ 
+ } }
+diff --git a/projects/om/spec/cpp_file_boilerplate_formatter_spec.cpp b/projects/om/spec/cpp_file_boilerplate_formatter_spec.cpp
+index ee0c2fc..64b3184 100644
+--- a/projects/om/spec/cpp_file_boilerplate_formatter_spec.cpp
++++ b/projects/om/spec/cpp_file_boilerplate_formatter_spec.cpp
+@@ -36,6 +36,7 @@ const dogen::om::licence empty_licence = dogen::om::licence();
+ const dogen::om::cpp_includes empty_includes = dogen::om::cpp_includes();
+ const boost::filesystem::path empty_path;
+ const boost::filesystem::path a_path("a/path.hpp");
++const bool generate_premable(true);
+ 
+ const std::string modeline_top(R"(/* -*- a_field: a_value -*-
+  *
+@@ -191,6 +192,20 @@ const std::string includes_with_top_modeline(R"(/* -*- a_field: a_value -*-
+ #endif
+ )");
+ 
++const std::string disabled_preamble(R"(#ifndef A_PATH_HPP
++#define A_PATH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <win32/system_inc_1>
++#include <unix/system_inc_2>
++#include "user_inc_1"
++#include "user_inc_2"
++#endif
++)");
++
+ dogen::om::modeline mock_modeline(const dogen::om::modeline_locations l) {
+     dogen::om::modeline r;
+     r.editor(dogen::om::editors::emacs);
+@@ -486,4 +501,23 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
+     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+ }
+ 
++BOOST_AUTO_TEST_CASE(disabled_preamble_is_formatted_correctly) {
++    SETUP_TEST_LOG_SOURCE("disabled_preamble_is_formatted_correctly");
++    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
++
++    const dogen::om::cpp_includes i(mock_includes());
++    const auto m(mock_modeline(dogen::om::modeline_locations::top));
++    const auto l(mock_licence());
++
++    std::ostringstream s;
++    dogen::om::cpp_file_boilerplate_formatter f(!generate_premable);
++    f.format_begin(s, l, m, marker, i, a_path);
++    f.format_end(s, m, a_path);
++    const auto r(s.str());
++    BOOST_CHECK(r == disabled_preamble);
++    BOOST_LOG_SEV(lg, debug) << "expected: " << disabled_preamble;
++    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
++    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
++}
++
+ BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/om/src/types/cpp_domain_header_formatter.cpp b/projects/om/src/types/cpp_domain_header_formatter.cpp
+index f555d44..ce0df44 100644
+--- a/projects/om/src/types/cpp_domain_header_formatter.cpp
++++ b/projects/om/src/types/cpp_domain_header_formatter.cpp
+@@ -168,7 +168,7 @@ void cpp_domain_header_formatter::close_class() const {
+ }
+ 
+ void cpp_domain_header_formatter::
+-compiler_generated_constuctors(const sml::abstract_object& o) const {
++explicitly_defaulted_functions(const sml::abstract_object& o) const {
+     auto adaptor(sml::make_tag_adaptor(o));
+     if (!adaptor.generate_explicitly_defaulted_functions())
+         return;
+@@ -189,7 +189,7 @@ compiler_generated_constuctors(const sml::abstract_object& o) const {
+                           << "&&) = default;" << std::endl;
+     }
+ 
+-    if (!o.is_parent() && o.parent_name()) {
++    if (!o.is_parent() && !o.parent_name()) {
+         context_->stream() << context_->indenter() << "~" << sn
+                           << "() = default;" << std::endl;
+     }
+@@ -211,54 +211,410 @@ compiler_generated_constuctors(const sml::abstract_object& o) const {
+ }
+ 
+ void cpp_domain_header_formatter::
+-default_constructor(const sml::abstract_object& /*o*/) const {
++default_constructor(const sml::abstract_object& o) const {
++    auto adaptor(sml::make_tag_adaptor(o));
++    if (!adaptor.requires_manual_default_constructor())
++        return;
++
++    context_->utility().public_access_specifier();
++    context_->stream() << context_->indenter()
++                      << o.name().simple_name() << "();" << std::endl;
++    context_->utility().blank_line();
+ }
+ 
+ void cpp_domain_header_formatter::
+-move_constructor(const sml::abstract_object& /*o*/) const {
++complete_constructor(const sml::abstract_object& o) const {
++    const auto& props(context_->property_cache().get_all_properties(o));
++    if (props.empty())
++        return;
++
++    context_->utility().public_access_specifier();
++    const auto sn(o.name().simple_name());
++    if (props.size() == 1) {
++        const auto p(*props.begin());
++        auto adaptor(sml::make_tag_adaptor(p));
++        context_->stream() << context_->indenter() << "explicit "
++                          << sn << "(const "
++                          << adaptor.complete_name();
++
++        if (adaptor.is_simple_type())
++            context_->stream() << "&";
++
++        context_->stream() << " " << p.name() << ");" << std::endl;
++        context_->utility().blank_line();
++        return;
++    }
++
++    context_->stream() << context_->indenter() << sn << "(";
++    {
++        cpp_formatters::positive_indenter_scope s(context_->indenter());
++        bool is_first(true);
++        for (const auto p : props) {
++            context_->stream() << (is_first ? "" : ",") << std::endl;
++
++            auto adaptor(sml::make_tag_adaptor(p));
++            context_->stream() << context_->indenter() << "const "
++                              << adaptor.complete_name();
++
++            if (adaptor.is_simple_type())
++                context_->stream() << "&";
++
++            context_->stream() << " " << p.name();
++            is_first = false;
++        }
++        context_->stream() << ");" << std::endl;
++    }
++    context_->utility().blank_line();
+ }
+ 
+ void cpp_domain_header_formatter::
+-complete_constructor(const sml::abstract_object& /*o*/) const {
++move_constructor(const sml::abstract_object& o) const {
++    auto adaptor(sml::make_tag_adaptor(o));
++    if (!adaptor.requires_manual_move_constructor())
++        return;
++
++    const auto& props(context_->property_cache().get_all_properties(o));
++    if (props.empty())
++        return;
++
++    context_->utility().public_access_specifier();
++    const auto sn(o.name().simple_name());
++    context_->stream() << context_->indenter() << sn << "(" << sn
++                      << "&& rhs);" << std::endl;
++    context_->utility().blank_line();
+ }
+ 
+ void cpp_domain_header_formatter::
+-destructor(const sml::abstract_object& /*o*/) const {
++destructor(const sml::abstract_object& o) const {
++    /*
++     * according to MEC++, item 33, base classes should always be
++     * abstract. this avoids all sorts of tricky problems with
++     * assignment and swap.
++     *
++     * incidentally, this also fixes some strange clang errors:
++     * undefined reference to `vtable.
++     */
++    const auto sn(o.name().simple_name());
++    if (o.is_parent()) {
++        context_->stream() << context_->indenter() << "virtual ~" << sn
++                          << "() noexcept = 0;" << std::endl;
++        context_->utility().blank_line();
++    } else if (o.parent_name()) {
++        context_->stream() << context_->indenter() << "virtual ~" << sn
++                          << "() noexcept { }" << std::endl;
++        context_->utility().blank_line();
++    }
+ }
+ 
+ void cpp_domain_header_formatter::
+-friends(const sml::abstract_object& /*o*/) const {
++friends(const sml::abstract_object& o) const {
++    auto adaptor(sml::make_tag_adaptor(o));
++    if (!adaptor.is_boost_serialization_enabled())
++        return;
++
++    const auto sn(o.name().simple_name());
++    context_->utility().private_access_specifier();
++
++    context_->stream() << context_->indenter()
++                      << "template<typename Archive>" << std::endl
++                      << context_->indenter()
++                      << "friend void boost::serialization::save(Archive& ar"
++                      << ", const " << sn << "& v, unsigned int version);"
++                      << std::endl;
++    context_->utility().blank_line();
++
++    context_->stream() << context_->indenter() << "template<typename Archive>"
++                      << std::endl
++                      << context_->indenter()
++                      << "friend void boost::serialization::load(Archive& ar"
++                      << ", " << sn << "& v, unsigned int version);"
++                      << std::endl;
++    context_->utility().blank_line();
++}
++
++void cpp_domain_header_formatter::simple_type_getter_and_setter(
++    const std::string& owner_name, const sml::property& p) const {
++    if (!p.documentation().empty())
++        doxygen_next_.format(context_->stream(), p.documentation());
++
++    if (!p.is_immutable())
++        dc.format_start_block(p.documentation());
++
++    auto adaptor(sml::make_tag_adaptor(p));
++    const auto cn(adaptor.complete_name());
++    context_->stream() << context_->indenter()
++                      << cn << " " << p.name() << "() const;" << std::endl;
++
++    if (!p.is_immutable()) {
++        context_->stream() << context_->indenter();
++        if (p.is_fluent())
++            context_->stream() << owner_name << "& ";
++        else
++            context_->stream() << "void ";
++
++        context_->stream() << p.name() << "(const " << cn;
++
++        if (!adaptor.is_simple_type())
++            context_->stream() << "&";
++
++        context_->stream() << " v);" << std::endl;
++    }
++
++    if (!p.is_immutable())
++        dc.format_end_block(p.documentation());
++    context_->utility().blank_line();
++}
++
++void cpp_domain_header_formatter::compound_type_getter_and_setter(
++    const std::string& owner_name, const sml::property& p) const {
++    if (!p.documentation().empty())
++        doxygen_next_.format(context_->stream(), p.documentation());
++
++    if (!p.is_immutable())
++        dc.format_start_block(p.documentation());
++
++    // const getter
++    auto adaptor(sml::make_tag_adaptor(p));
++    const auto cn(adaptor.complete_name());
++    context_->stream() << context_->indenter() << "const " << cn
++                      << "& " << p.name() << "() const;" << std::endl;
++
++    if (!p.is_immutable()) {
++        // Popsicle immutability
++        context_->stream() << context_->indenter() << "" << cn
++                          << "& " << p.name() << "();" << std::endl;
++
++        // traditional setter
++        context_->stream() << context_->indenter();
++        if (p.is_fluent())
++            context_->stream() << owner_name << "& ";
++        else
++            context_->stream() << "void ";
++        context_->stream() << p.name() << "(const " << cn;
++
++        if (!adaptor.is_simple_type())
++            context_->stream() << "&";
++
++        context_->stream() << " v);" << std::endl;
++
++        // move setter
++        context_->stream() << context_->indenter();
++        if (p.is_fluent())
++            context_->stream() << owner_name << "& ";
++        else
++            context_->stream() << "void ";
++        context_->stream() << p.name() << "(const " << cn;
++
++        if (!adaptor.is_simple_type())
++            context_->stream() << "&&";
++
++        context_->stream() << " v);" << std::endl;
++    }
++
++    if (!p.is_immutable())
++        dc.format_end_block(p.documentation());
++    context_->utility().blank_line();
+ }
+ 
+ void cpp_domain_header_formatter::
+-getters_and_setters(const sml::abstract_object& /*o*/) const {
++getters_and_setters(const sml::abstract_object& o) const {
++    if (o.properties().empty())
++        return;
++
++    context_->utility().public_access_specifier();
++    for (const auto p : o.properties()) {
++        auto adaptor(sml::make_tag_adaptor(p));
++        if (adaptor.is_simple_type()) {
++            simple_type_getter_and_setter(o.name().simple_name(), p);
++            continue;
++        }
++        compound_type_getter_and_setter(o.name().simple_name(), p);
++    }
+ }
+ 
+ void cpp_domain_header_formatter::
+-member_variables(const sml::abstract_object& /*o*/) const {
++member_variables(const sml::abstract_object& o) const {
++    if (o.properties().empty())
++        return;
++
++    context_->utility().public_access_specifier();
++    for (const auto p : o.properties()) {
++        auto adaptor(sml::make_tag_adaptor(p));
++        context_->stream() << context_->indenter()
++                          << adaptor.complete_name() << " "
++                          << context_->utility().as_member_variable(p.name())
++                          << ";"
++                          << std::endl;
++    }
+ }
+ 
+ void cpp_domain_header_formatter::
+-equality(const sml::abstract_object& /*o*/) const {
++equality(const sml::abstract_object& o) const {
++    // equality is only public in leaf classes - MEC++-33
++    const auto sn(o.name().simple_name());
++    if (o.is_parent()) {
++        context_->utility().protected_access_specifier();
++        context_->stream() << context_->indenter() << "bool compare(const "
++                          << sn << "& rhs) const;" << std::endl;
++    } else {
++        context_->utility().public_access_specifier();
++        context_->stream() << context_->indenter() << "bool operator==(const "
++                          << sn <<  "& rhs) const;" << std::endl;
++        context_->stream() << context_->indenter() << "bool operator!=(const "
++                          << sn << "& rhs) const ";
++        context_->utility().open_scope();
++        {
++            cpp_formatters::positive_indenter_scope s(context_->indenter());
++            context_->stream() << context_->indenter()
++                              << "return !this->operator==(rhs);"
++                              << std::endl;
++        }
++        context_->utility().close_scope();
++        context_->utility().blank_line();
++    }
++
++    if (!o.is_parent() && !o.parent_name())
++        return;
++
++    context_->utility().public_access_specifier();
++    if (o.is_parent() && !o.parent_name()) {
++        context_->stream() << context_->indenter()
++                          << "virtual bool equals(const " << sn
++                          <<  "& other) const = 0;"
++                          << std::endl;
++    } else if (o.is_parent()) {
++        context_->stream() << context_->indenter()
++                          << "virtual bool equals(const "
++                          << ci.original_parent_name_qualified()
++                          <<  "& other) const = 0;"
++                          << std::endl;
++    } else {
++        context_->stream() << context_->indenter()
++                          << "bool equals(const "
++                          << ci.original_parent_name_qualified()
++                          <<  "& other) const override;"
++                          << std::endl;
++    }
++    context_->utility().blank_line();
+ }
+ 
+ void cpp_domain_header_formatter::
+-to_stream(const sml::abstract_object& /*o*/) const {
++to_stream(const sml::abstract_object& o) const {
++    if (o.is_parent() && !o.parent_name())
++        return;
++
++    context_->utility().public_access_specifier();
++    if (o.is_parent()) {
++        context_->stream() << context_->indenter()
++                          << "virtual void to_stream("
++                          << "std::ostream& s) const;"
++                          << std::endl;
++    } else {
++        context_->stream() << context_->indenter()
++                          << "void to_stream(std::ostream& s) "
++                          << "const override;"
++                          << std::endl;
++    }
++    context_->utility().blank_line();
+ }
+ 
+ void cpp_domain_header_formatter::
+-swap_and_assignment(const sml::abstract_object& /*o*/) const {
++swap_and_assignment(const sml::abstract_object& o) const {
++    const auto props(context_->property_cache().get_all_properties(o));
++    if ((props.empty() && !o.is_parent()) || o.is_immutable())
++        return;
++
++    // swap is only public in leaf classes - MEC++-33
++    if (o.is_parent())
++        context_->utility().protected_access_specifier();
++    else
++        context_->utility().public_access_specifier();
++
++    const auto sn(o.name().simple_name());
++    context_->stream() << context_->indenter() << "void swap("
++                      << sn << "& other) noexcept;"
++                      << std::endl;
++
++    // assignment is only available in leaf classes - MEC++-33
++    if (!o.is_parent()) {
++        context_->stream() << context_->indenter() << sn << "& operator=("
++                          << sn << " other);" << std::endl;
++    }
++    context_->utility().blank_line();
+ }
+ 
+ void cpp_domain_header_formatter::
+-visitor_method(const sml::abstract_object& /*o*/) const {
++visitor_method(const sml::abstract_object& o) const {
++    const auto sn(o.name().simple_name());
++    if (o.is_visitable()) {
++        context_->utility().public_access_specifier();
++        context_->stream() << context_->indenter()
++                          << "virtual void accept(const " << sn
++                          << "_visitor& v) const = 0;" << std::endl;
++        context_->stream() << context_->indenter() << "virtual void accept("
++                          << sn << "_visitor& v) const = 0;" << std::endl;
++        context_->stream() << context_->indenter()
++                          << "virtual void accept(const " << sn
++                          << "_visitor& v) = 0;" << std::endl;
++        context_->stream() << context_->indenter() << "virtual void accept("
++                          << sn << "_visitor& v) = 0;" << std::endl;
++        context_->utility().blank_line();
++    } else if (ci.is_original_parent_visitable() && !o.is_parent()) {
++        context_->utility().public_access_specifier();
++        context_->stream() << context_->indenter()
++                          << "virtual void accept(const "
++                          << ci.original_parent_name()
++                          << "_visitor& v) const override {" << std::endl;
++
++        {
++            cpp_formatters::positive_indenter_scope s(context_->indenter());
++            context_->stream() << context_->indenter() << "v.visit(*this);"
++                              << std::endl;
++        }
++        context_->stream() << context_->indenter() << "}" << std::endl;
++        context_->utility().blank_line();
++        context_->stream() << context_->indenter() << "virtual void accept("
++                          << ci.original_parent_name()
++                          << "_visitor& v) const override {" << std::endl;
++
++        {
++            cpp_formatters::positive_indenter_scope s(context_->indenter());
++            context_->stream() << context_->indenter() << "v.visit(*this);"
++                              << std::endl;
++        }
++        context_->stream() << context_->indenter() << "}" << std::endl;
++        context_->utility().blank_line();
++        context_->stream() << context_->indenter()
++                          << "virtual void accept(const "
++                          << ci.original_parent_name()
++                          << "_visitor& v) override {" << std::endl;
++
++        {
++            cpp_formatters::positive_indenter_scope s(context_->indenter());
++            context_->stream() << context_->indenter() << "v.visit(*this);"
++                              << std::endl;
++        }
++        context_->stream() << context_->indenter() << "}" << std::endl;
++        context_->utility().blank_line();
++        context_->stream() << context_->indenter() << "virtual void accept("
++                          << ci.original_parent_name()
++                          << "_visitor& v) override {" << std::endl;
++
++        {
++            cpp_formatters::positive_indenter_scope s(context_->indenter());
++            context_->stream() << context_->indenter() << "v.visit(*this);"
++                              << std::endl;
++        }
++        context_->stream() << context_->indenter() << "}" << std::endl;
++        context_->utility().blank_line();
++    }
+ }
+ 
+ void cpp_domain_header_formatter::format(const sml::abstract_object& o) const {
+     open_class(o);
+     {
+         cpp_formatters::positive_indenter_scope s(context_->indenter());
+-        compiler_generated_constuctors(o);
++        explicitly_defaulted_functions(o);
+         default_constructor(o);
+         destructor(o);
+         move_constructor(o);
+@@ -317,7 +673,8 @@ format(std::ostream& s, const sml::type& t, const licence& l,
+ 
+     const cpp_includes i = cpp_includes();
+     const boost::filesystem::path relative_file_path;
+-    cpp_file_boilerplate_formatter f;
++    auto adaptor(sml::make_tag_adaptor(t));
++    cpp_file_boilerplate_formatter f(adaptor.generate_preamble());
+     {
+         const auto ns(namespaces(t.name()));
+         cpp_formatters::namespace_helper nsh(context_->stream(), ns);
+diff --git a/projects/om/src/types/cpp_file_boilerplate_formatter.cpp b/projects/om/src/types/cpp_file_boilerplate_formatter.cpp
+index c297c37..7f15913 100644
+--- a/projects/om/src/types/cpp_file_boilerplate_formatter.cpp
++++ b/projects/om/src/types/cpp_file_boilerplate_formatter.cpp
+@@ -39,6 +39,10 @@ const bool documenting_previous_identifier(true);
+ namespace dogen {
+ namespace om {
+ 
++cpp_file_boilerplate_formatter::
++cpp_file_boilerplate_formatter(const bool generate_preamble)
++    : generate_preamble_(generate_preamble) { }
++
+ void cpp_file_boilerplate_formatter::
+ add_modeline(std::list<std::string>& content, const modeline& m) const {
+     std::ostringstream s;
+@@ -73,6 +77,9 @@ void cpp_file_boilerplate_formatter::
+ format_preamble(std::ostream& s, const licence& l, const modeline& m,
+     const std::string& marker) const {
+ 
++    if (!generate_preamble_)
++        return;
++
+     const bool is_modeline_top(m.location() == modeline_locations::top);
+     std::list<std::string> content;
+     if (is_modeline_top)
+diff --git a/projects/sml/include/dogen/sml/types/property.hpp b/projects/sml/include/dogen/sml/types/property.hpp
+index 0744d6a..a4054dc 100644
+--- a/projects/sml/include/dogen/sml/types/property.hpp
++++ b/projects/sml/include/dogen/sml/types/property.hpp
+@@ -40,19 +40,23 @@ namespace sml {
+  */
+ class property final {
+ public:
+-    property() = default;
+     property(const property&) = default;
+     property(property&&) = default;
+     ~property() = default;
+ 
+ public:
++    property();
++
++public:
+     property(
+         const std::string& documentation,
+         const std::unordered_map<std::string, std::string>& simple_tags,
+         const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+         const std::string& name,
+         const dogen::sml::nested_qname& type,
+-        const std::string& default_value);
++        const std::string& default_value,
++        const bool is_immutable,
++        const bool is_fluent);
+ 
+ private:
+     template<typename Archive>
+@@ -135,6 +139,22 @@ public:
+     void default_value(const std::string&& v);
+     /**@}*/
+ 
++    /**
++     * @brief If true, the property can only be read but not set.
++     */
++    /**@{*/
++    bool is_immutable() const;
++    void is_immutable(const bool v);
++    /**@}*/
++
++    /**
++     * @brief If true, the property's setter will return the object iteself.
++     */
++    /**@{*/
++    bool is_fluent() const;
++    void is_fluent(const bool v);
++    /**@}*/
++
+ public:
+     bool operator==(const property& rhs) const;
+     bool operator!=(const property& rhs) const {
+@@ -152,6 +172,8 @@ private:
+     std::string name_;
+     dogen::sml::nested_qname type_;
+     std::string default_value_;
++    bool is_immutable_;
++    bool is_fluent_;
+ };
+ 
+ } }
+diff --git a/projects/sml/include/dogen/sml/types/sml.hpp b/projects/sml/include/dogen/sml/types/sml.hpp
+index 3a56d49..c0de99d 100644
+--- a/projects/sml/include/dogen/sml/types/sml.hpp
++++ b/projects/sml/include/dogen/sml/types/sml.hpp
+@@ -28,64 +28,8 @@
+ namespace dogen {
+ 
+ /**
+- * @brief SML is the Simplified Modeling Language.
+- *
+- * @section sml_0 Core Ideas
+- *
+- * SML has at its core the ideas explained by Eric Evans in Domain Driven
+- * Design (DDD), and it is mainly a domain model to model the DDD domian.
+- * However, it also contains some influences from Java's EMF - more precisely
+- * eCore, which was the first meta-model we looked at. eCore is itself rooted
+- * in UML. We also took some ideas from Stepanov and Jones, in Programming
+- * Elements (those which we could just about understand).
+- *
+- * In more general terms, SML is a meta-model - that is a model that models
+- * models - but we are not too hang-up on the classic terminology of meta-modeling
+- * because a lot of people find it confusing. Instead, we chose to use the
+- * @e ubiquitous @e language defined in th DDD book because its very clear, but
+- * avoids the complexity of the terms usually associated with meta-modeling.
+- *
+- * The objective of SML is to provide the required scaffoling to represent domain
+- * models, and to do so in a way that is programming language neutral. Thus is
+- * should provide a representation that is suitable for further transformations
+- * into models representing programing languages, and from there, to code
+- * generation.
+- *
+- * At the root of SML is the @ref model, short for domain model. It is the root
+- * of an aggregate containing a number of @e modeling @elements which together
+- * make up the software representation of a given domain model. The key types of
+- * modeling elements in SML are:
+- *
+- * @li @b model: the model itself, modeling domain models
+- * @li @b modules: packaging unit; logical sub-division of the model.
+- * @li @b concepts: not present in DDD; models the C++ notion of a concept.
+- * @li @b enumeration: value type that models enumerations
+- * @li @b primitive: value type that models primitive types such as int, etc.
+- * @li @b object: models the notion of an @e object as defined in object oriented
+- * languages.
+- *
+- * The remaining ideas are refinements of these core concepts.
+- *
+- * @section sml_1 Merging and Resolving
+- *
+- * SML models are expected to begin their life as disjointed models with lots of
+- * missing @e references to types. This expectation arises from the fact that we
+- * have most likely transformed some kind of external model into SML - a dia diagram,
+- * say - and that the tools used for working on that model are not aware of SML or
+- * its dependencies.
+- *
+- * Thus, in order to become useful, an SML model needs to be merged with all of its
+- * dependencies. This is done by providing the @e target model - i.e. that which one
+- * intends to really work on - and its @e references - i.e. any models which are
+- * picked up due to being referenced from within the tatget model - and pass them
+- * over to the @ref merger. It is the merger's job to create a @e merged model.
+- *
+- * A further step is still required, which is to @e resolve all of the references,
+- * to ensure we do not have any missing dependencies. This is the job of the
+- * @ref resolver.
+- *
+- * All of these steps are encompassed in the SML @ref workflow.
+- *
++ * @brief Traverses the model as a graph and propagates tags
++ * based on association and generalisation relationships.
+  */
+ namespace sml {
+ } }
+diff --git a/projects/sml/include/dogen/sml/types/tag_adaptor.hpp b/projects/sml/include/dogen/sml/types/tag_adaptor.hpp
+index f2f5d0a..04f233f 100644
+--- a/projects/sml/include/dogen/sml/types/tag_adaptor.hpp
++++ b/projects/sml/include/dogen/sml/types/tag_adaptor.hpp
+@@ -44,6 +44,13 @@ public:
+         const std::unordered_map<std::string, std::list<std::string> >&
+         complex_tags);
+ 
++private:
++    /**
++     * @brief Gets a boolean value, defaulting to true if it does not
++     * exist.
++     */
++    bool get_bool_with_false_default(const std::string& key) const;
++
+ public:
+     /**
+      * @brief Returns true if the tags contain the comment key, false
+@@ -72,6 +79,27 @@ public:
+      */
+     bool requires_manual_move_constructor() const;
+ 
++    /**
++     * @brief Returns the value of "generate preamble".
++     */
++    bool generate_preamble() const;
++
++    /**
++     * @brief Returns the value of "is simple type".
++     */
++    bool is_simple_type() const;
++
++    /**
++     * @brief Returns the value of "complete name".
++     */
++    std::string complete_name() const;
++
++    /**
++     * @brief Returns true if "boost serialization status" is set to
++     * enabled.
++     */
++    bool is_boost_serialization_enabled() const;
++
+ public:
+     /**
+      * @brief Returns the odb pragmas.
+diff --git a/projects/sml/include/dogen/sml/types/tags.hpp b/projects/sml/include/dogen/sml/types/tags.hpp
+index b66eb9c..3ccdebc 100644
+--- a/projects/sml/include/dogen/sml/types/tags.hpp
++++ b/projects/sml/include/dogen/sml/types/tags.hpp
+@@ -59,12 +59,26 @@ struct tags {
+     static const std::string identity_attribute;
+ 
+     /**
++     * @brief If set to true, the preamble will be generated.
++     *
++     * The preamble is made up of a modeline, copyright
++     * information and licensing details.
++     */
++    static const std::string generate_preamble;
++
++    /**
+      * @brief Valid values for Boolean types.
+      */
+     static const std::string bool_true;
+     static const std::string bool_false;
+ 
+     /**
++     * @brief Valid statuses.
++     */
++    static const std::string status_unsupported;
++    static const std::string status_supported;
++
++    /**
+      * @brief All parameters specific to the C++ language.
+      */
+     struct cpp {
+@@ -79,6 +93,18 @@ struct tags {
+              * data, etc.
+              */
+             static const std::string family;
++
++            /**
++             * @brief If true, the type is either a primitive or an
++             * enumeration.
++             */
++            static const std::string is_simple_type;
++
++            /**
++             * @brief Contains the complete name, as required for the
++             * type of a variable or argument.
++             */
++            static const std::string complete_name;
+         };
+ 
+         /**
+@@ -93,7 +119,10 @@ struct tags {
+ 
+             /**
+              * @brief If set to true, explicitly defaulted/deleted
+-             * functions will not be generated.
++             * functions will be generated.
++             *
++             * Note that other tags may still influence specific
++             * defaulted functions.
+              */
+             static const std::string generate_explicitly_defaulted_functions;
+ 
+diff --git a/projects/sml/src/hash/property_hash.cpp b/projects/sml/src/hash/property_hash.cpp
+index f6af505..4c9f703 100644
+--- a/projects/sml/src/hash/property_hash.cpp
++++ b/projects/sml/src/hash/property_hash.cpp
+@@ -70,6 +70,8 @@ std::size_t property_hasher::hash(const property&v) {
+     combine(seed, v.name());
+     combine(seed, v.type());
+     combine(seed, v.default_value());
++    combine(seed, v.is_immutable());
++    combine(seed, v.is_fluent());
+ 
+     return seed;
+ }
+diff --git a/projects/sml/src/io/property_io.cpp b/projects/sml/src/io/property_io.cpp
+index a7de776..7ad8639 100644
+--- a/projects/sml/src/io/property_io.cpp
++++ b/projects/sml/src/io/property_io.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ #include <boost/algorithm/string.hpp>
++#include <boost/io/ios_state.hpp>
+ #include <ostream>
+ #include "dogen/sml/io/nested_qname_io.hpp"
+ #include "dogen/sml/io/property_io.hpp"
+@@ -85,6 +86,12 @@ namespace dogen {
+ namespace sml {
+ 
+ std::ostream& operator<<(std::ostream& s, const property& v) {
++    boost::io::ios_flags_saver ifs(s);
++    s.setf(std::ios_base::boolalpha);
++    s.setf(std::ios::fixed, std::ios::floatfield);
++    s.precision(6);
++    s.setf(std::ios::showpoint);
++
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::property\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+@@ -92,7 +99,9 @@ std::ostream& operator<<(std::ostream& s, const property& v) {
+       << "\"complex_tags\": " << v.complex_tags() << ", "
+       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+       << "\"type\": " << v.type() << ", "
+-      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\""
++      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
++      << "\"is_immutable\": " << v.is_immutable() << ", "
++      << "\"is_fluent\": " << v.is_fluent()
+       << " }";
+     return(s);
+ }
+diff --git a/projects/sml/src/serialization/property_ser.cpp b/projects/sml/src/serialization/property_ser.cpp
+index 066a341..de6a130 100644
+--- a/projects/sml/src/serialization/property_ser.cpp
++++ b/projects/sml/src/serialization/property_ser.cpp
+@@ -51,6 +51,8 @@ void save(Archive& ar,
+     ar << make_nvp("name", v.name_);
+     ar << make_nvp("type", v.type_);
+     ar << make_nvp("default_value", v.default_value_);
++    ar << make_nvp("is_immutable", v.is_immutable_);
++    ar << make_nvp("is_fluent", v.is_fluent_);
+ }
+ 
+ template<typename Archive>
+@@ -63,6 +65,8 @@ void load(Archive& ar,
+     ar >> make_nvp("name", v.name_);
+     ar >> make_nvp("type", v.type_);
+     ar >> make_nvp("default_value", v.default_value_);
++    ar >> make_nvp("is_immutable", v.is_immutable_);
++    ar >> make_nvp("is_fluent", v.is_fluent_);
+ }
+ 
+ } }
+diff --git a/projects/sml/src/test_data/property_td.cpp b/projects/sml/src/test_data/property_td.cpp
+index 81be712..fb8350f 100644
+--- a/projects/sml/src/test_data/property_td.cpp
++++ b/projects/sml/src/test_data/property_td.cpp
+@@ -59,6 +59,10 @@ create_dogen_sml_nested_qname(const unsigned int position) {
+     return dogen::sml::nested_qname_generator::create(position);
+ }
+ 
++bool create_bool(const unsigned int position) {
++    return (position % 2) == 0;
++}
++
+ }
+ 
+ namespace dogen {
+@@ -74,6 +78,8 @@ populate(const unsigned int position, result_type& v) {
+     v.name(create_std_string(position + 3));
+     v.type(create_dogen_sml_nested_qname(position + 4));
+     v.default_value(create_std_string(position + 5));
++    v.is_immutable(create_bool(position + 6));
++    v.is_fluent(create_bool(position + 7));
+ }
+ 
+ property_generator::result_type
+diff --git a/projects/sml/src/types/property.cpp b/projects/sml/src/types/property.cpp
+index 3b683ae..41748ef 100644
+--- a/projects/sml/src/types/property.cpp
++++ b/projects/sml/src/types/property.cpp
+@@ -23,19 +23,27 @@
+ namespace dogen {
+ namespace sml {
+ 
++property::property()
++    : is_immutable_(static_cast<bool>(0)),
++      is_fluent_(static_cast<bool>(0)) { }
++
+ property::property(
+     const std::string& documentation,
+     const std::unordered_map<std::string, std::string>& simple_tags,
+     const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+     const std::string& name,
+     const dogen::sml::nested_qname& type,
+-    const std::string& default_value)
++    const std::string& default_value,
++    const bool is_immutable,
++    const bool is_fluent)
+     : documentation_(documentation),
+       simple_tags_(simple_tags),
+       complex_tags_(complex_tags),
+       name_(name),
+       type_(type),
+-      default_value_(default_value) { }
++      default_value_(default_value),
++      is_immutable_(is_immutable),
++      is_fluent_(is_fluent) { }
+ 
+ void property::swap(property& other) noexcept {
+     using std::swap;
+@@ -45,6 +53,8 @@ void property::swap(property& other) noexcept {
+     swap(name_, other.name_);
+     swap(type_, other.type_);
+     swap(default_value_, other.default_value_);
++    swap(is_immutable_, other.is_immutable_);
++    swap(is_fluent_, other.is_fluent_);
+ }
+ 
+ bool property::operator==(const property& rhs) const {
+@@ -53,7 +63,9 @@ bool property::operator==(const property& rhs) const {
+         complex_tags_ == rhs.complex_tags_ &&
+         name_ == rhs.name_ &&
+         type_ == rhs.type_ &&
+-        default_value_ == rhs.default_value_;
++        default_value_ == rhs.default_value_ &&
++        is_immutable_ == rhs.is_immutable_ &&
++        is_fluent_ == rhs.is_fluent_;
+ }
+ 
+ property& property::operator=(property other) {
+@@ -158,4 +170,20 @@ void property::default_value(const std::string&& v) {
+     default_value_ = std::move(v);
+ }
+ 
++bool property::is_immutable() const {
++    return is_immutable_;
++}
++
++void property::is_immutable(const bool v) {
++    is_immutable_ = v;
++}
++
++bool property::is_fluent() const {
++    return is_fluent_;
++}
++
++void property::is_fluent(const bool v) {
++    is_fluent_ = v;
++}
++
+ } }
+\ No newline at end of file
+diff --git a/projects/sml/src/types/tag_adaptor.cpp b/projects/sml/src/types/tag_adaptor.cpp
+index e1d8d5a..520e382 100644
+--- a/projects/sml/src/types/tag_adaptor.cpp
++++ b/projects/sml/src/types/tag_adaptor.cpp
+@@ -21,6 +21,12 @@
+ #include "dogen/sml/types/tags.hpp"
+ #include "dogen/sml/types/tag_adaptor.hpp"
+ 
++namespace {
++
++const std::string empty;
++
++}
++
+ namespace dogen {
+ namespace sml {
+ 
+@@ -39,8 +45,7 @@ bool tag_adaptor::has_identity() const {
+     return i != simple_tags_.end();
+ }
+ 
+-bool tag_adaptor::generate_explicitly_defaulted_functions() const {
+-    const auto& key(tags::cpp::domain::generate_explicitly_defaulted_functions);
++bool tag_adaptor::get_bool_with_false_default(const std::string& key) const {
+     const auto i(simple_tags_.find(key));
+     if (i != simple_tags_.end())
+         return i->second == tags::bool_true;
+@@ -48,20 +53,41 @@ bool tag_adaptor::generate_explicitly_defaulted_functions() const {
+     return false;
+ }
+ 
++bool tag_adaptor::generate_explicitly_defaulted_functions() const {
++    const auto& key(tags::cpp::domain::generate_explicitly_defaulted_functions);
++    return get_bool_with_false_default(key);
++}
++
+ bool tag_adaptor::requires_manual_default_constructor() const {
+     const auto& key(tags::cpp::domain::requires_manual_default_constructor);
+-    const auto i(simple_tags_.find(key));
+-    if (i != simple_tags_.end())
+-        return i->second == tags::bool_true;
+-
+-    return false;
++    return get_bool_with_false_default(key);
+ }
+ 
+ bool tag_adaptor::requires_manual_move_constructor() const {
+     const auto& key(tags::cpp::domain::requires_manual_move_constructor);
++    return get_bool_with_false_default(key);
++}
++
++bool tag_adaptor::generate_preamble() const {
++    return get_bool_with_false_default(tags::generate_preamble);
++}
++
++bool tag_adaptor::is_simple_type() const {
++    return get_bool_with_false_default(tags::cpp::type::is_simple_type);
++}
++
++std::string tag_adaptor::complete_name() const {
++    const auto i(simple_tags_.find(tags::cpp::type::complete_name));
++    if (i != simple_tags_.end())
++        return i->second;
++    return empty;
++}
++
++bool tag_adaptor::is_boost_serialization_enabled() const {
++    const auto& key(tags::cpp::serialization::boost::status);
+     const auto i(simple_tags_.find(key));
+     if (i != simple_tags_.end())
+-        return i->second == tags::bool_true;
++        return i->second == tags::status_supported;
+ 
+     return false;
+ }
+diff --git a/projects/sml/src/types/tags.cpp b/projects/sml/src/types/tags.cpp
+index ab6addc..16cb31f 100644
+--- a/projects/sml/src/types/tags.cpp
++++ b/projects/sml/src/types/tags.cpp
+@@ -26,9 +26,14 @@ namespace sml {
+ const std::string tags::odb_pragma("ODB_PRAGMA");
+ const std::string tags::comment("COMMENT");
+ const std::string tags::identity_attribute("IDENTITY_ATTRIBUTE");
++const std::string tags::generate_preamble("GENERATE_PREAMBLE");
+ const std::string tags::bool_true("true");
+ const std::string tags::bool_false("false");
++const std::string tags::status_unsupported("unsupported");
++const std::string tags::status_supported("supported");
+ const std::string tags::cpp::type::family("cpp.type.family");
++const std::string tags::cpp::type::is_simple_type("cpp.type.is_simple_type");
++const std::string tags::cpp::type::complete_name("cpp.type.complete_name");
+ const std::string tags::cpp::domain::status("cpp.domain.status");
+ const std::string tags::cpp::domain::generate_explicitly_defaulted_functions(
+     "cpp.domain.generate_explicitly_defaulted_functions");
