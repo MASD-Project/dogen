@@ -161,6 +161,9 @@ SML type visitors, etc.
      CLOCK: [2013-09-28 Sat 20:26]--[2013-09-28 Sat 22:53] =>  2:27
 
 **** IMPLEMENTATION Add tests for all permutations of the domain formatter :task:
+     CLOCK: [2013-09-28 Sat 23:16]--[2013-09-28 Sat 23:37] =>  0:21
+     CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
+
 *** Propagatable parameters                                           :story:
 
 Some implementation specific parameters should be propagated along the

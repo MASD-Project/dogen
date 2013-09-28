@@ -126,6 +126,41 @@ public:
 }
 )");
 
+const std::string manual_default_constructor(R"(namespace some_model_0 {
+
+class some_type_0 final {
+public:
+    some_type_0(const some_type_0&) = default;
+    some_type_0(some_type_0&&) = default;
+    ~some_type_0() = default;
+    some_type_0& operator=(const some_type_0&) = default;
+
+public:
+    some_type_0();
+};
+
+}
+)");
+
+const std::string manual_move_constructor(R"(namespace some_model_0 {
+
+class some_type_0 final {
+public:
+    some_type_0() = default;
+    some_type_0(const some_type_0&) = default;
+    ~some_type_0() = default;
+    some_type_0& operator=(const some_type_0&) = default;
+};
+
+}
+)");
+
+/*
+  FIXME: remvoed for now
+  public:
+  some_type_0(some_type_0&&);
+ */
+
 class mock_property_cache : public dogen::sml::property_cache_interface {
 public:
     mock_property_cache() = default;
@@ -316,6 +351,64 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     BOOST_CHECK(r == all_explicitly_defaulted_functions);
     BOOST_LOG_SEV(lg, debug) << "expected: "
                              << all_explicitly_defaulted_functions << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
+}
+
+BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("generating_manual_default_constructor_produces_expected_domain_header");
+
+    auto m(factory::build_single_type_model());
+    BOOST_CHECK(m.objects().size() == 1);
+    auto& o(find_object(m, 0));
+    o.documentation().clear();
+    auto router(dogen::sml::make_tag_router(o));
+    router.route(
+        dogen::sml::tags::cpp::domain::generate_explicitly_defaulted_functions,
+        dogen::sml::tags::bool_true);
+    router.route(
+        dogen::sml::tags::cpp::domain::requires_manual_default_constructor,
+        dogen::sml::tags::bool_true);
+
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    std::ostringstream s;
+    dogen::om::cpp_domain_header_formatter f;
+    mock_property_cache c;
+
+    f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
+    const auto r(s.str());
+    BOOST_CHECK(r == manual_default_constructor);
+    BOOST_LOG_SEV(lg, debug) << "expected: "
+                             << manual_default_constructor << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
+}
+
+BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_domain_header) {
+    SETUP_TEST_LOG_SOURCE("generating_manual_move_constructor_produces_expected_domain_header");
+
+    auto m(factory::build_single_type_model());
+    BOOST_CHECK(m.objects().size() == 1);
+    auto& o(find_object(m, 0));
+    o.documentation().clear();
+    auto router(dogen::sml::make_tag_router(o));
+    router.route(
+        dogen::sml::tags::cpp::domain::generate_explicitly_defaulted_functions,
+        dogen::sml::tags::bool_true);
+    router.route(
+        dogen::sml::tags::cpp::domain::requires_manual_move_constructor,
+        dogen::sml::tags::bool_true);
+
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    std::ostringstream s;
+    dogen::om::cpp_domain_header_formatter f;
+    mock_property_cache c;
+
+    f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
+    const auto r(s.str());
+    BOOST_CHECK(r == manual_move_constructor);
+    BOOST_LOG_SEV(lg, debug) << "expected: "
+                             << manual_move_constructor << "<end>";
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
