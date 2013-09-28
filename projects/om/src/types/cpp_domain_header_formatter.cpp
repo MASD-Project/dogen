@@ -161,6 +161,7 @@ open_class(const sml::abstract_object& o) const {
         context_->stream() << o.parent_name()->simple_name();
     }
     context_->stream() << " {" << std::endl;
+    context_->first_line_is_blank(false);
 }
 
 void cpp_domain_header_formatter::close_class() const {
@@ -168,15 +169,18 @@ void cpp_domain_header_formatter::close_class() const {
 }
 
 void cpp_domain_header_formatter::
-compiler_generated_constuctors(const sml::abstract_object& o) const {
+explicitly_defaulted_functions(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     if (!adaptor.generate_explicitly_defaulted_functions())
         return;
 
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
     context_->utility().public_access_specifier();
 
     const auto& sn(o.name().simple_name());
-    if (adaptor.requires_manual_default_constructor()) {
+    if (!adaptor.requires_manual_default_constructor()) {
         context_->stream() << context_->indenter() << sn << "() = default;"
                           << std::endl;
     }
@@ -184,12 +188,12 @@ compiler_generated_constuctors(const sml::abstract_object& o) const {
     context_->stream() << context_->indenter() << sn << "(const " << sn
                       << "&) = default;" << std::endl;
 
-    if (adaptor.requires_manual_move_constructor()) {
+    if (!adaptor.requires_manual_move_constructor()) {
         context_->stream() << context_->indenter() << sn << "(" << sn
                           << "&&) = default;" << std::endl;
     }
 
-    if (!o.is_parent() && o.parent_name()) {
+    if (!o.is_parent() && !o.parent_name()) {
         context_->stream() << context_->indenter() << "~" << sn
                           << "() = default;" << std::endl;
     }
@@ -207,70 +211,502 @@ compiler_generated_constuctors(const sml::abstract_object& o) const {
                               << std::endl;
         }
     }
+    context_->first_line_is_blank(true);
+}
+
+void cpp_domain_header_formatter::
+default_constructor(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!adaptor.requires_manual_default_constructor())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    context_->stream() << context_->indenter()
+                      << o.name().simple_name() << "();" << std::endl;
+    context_->first_line_is_blank(true);
+}
+
+void cpp_domain_header_formatter::
+complete_constructor(const sml::abstract_object& o) const {
+    {
+        auto adaptor(sml::make_tag_adaptor(o));
+        if (!adaptor.generate_complete_constructor())
+            return;
+    }
+
+    const auto& props(context_->property_cache().get_all_properties(o));
+    if (props.empty())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    const auto sn(o.name().simple_name());
+    if (props.size() == 1) {
+        const auto p(*props.begin());
+        auto adaptor(sml::make_tag_adaptor(p));
+        context_->stream() << context_->indenter() << "explicit "
+                          << sn << "(const "
+                          << adaptor.complete_name();
+
+        if (adaptor.is_simple_type())
+            context_->stream() << "&";
+
+        context_->stream() << " " << p.name() << ");" << std::endl;
+        context_->first_line_is_blank(true);
+        return;
+    }
+
+    context_->stream() << context_->indenter() << sn << "(";
+    {
+        cpp_formatters::positive_indenter_scope s(context_->indenter());
+        bool is_first(true);
+        for (const auto p : props) {
+            context_->stream() << (is_first ? "" : ",") << std::endl;
+
+            auto adaptor(sml::make_tag_adaptor(p));
+            context_->stream() << context_->indenter() << "const "
+                              << adaptor.complete_name();
+
+            if (adaptor.is_simple_type())
+                context_->stream() << "&";
+
+            context_->stream() << " " << p.name();
+            is_first = false;
+        }
+        context_->stream() << ");" << std::endl;
+    }
+    context_->first_line_is_blank(true);
+}
+
+void cpp_domain_header_formatter::
+move_constructor(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!adaptor.requires_manual_move_constructor())
+        return;
+
+    const auto& props(context_->property_cache().get_all_properties(o));
+    if (props.empty())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    const auto sn(o.name().simple_name());
+    context_->stream() << context_->indenter() << sn << "(" << sn
+                      << "&& rhs);" << std::endl;
+    context_->first_line_is_blank(true);
+}
+
+void cpp_domain_header_formatter::
+destructor(const sml::abstract_object& o) const {
+    if (!o.is_parent() && !o.parent_name())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    const auto sn(o.name().simple_name());
+    if (o.is_parent()) {
+        /*
+         * according to MEC++, item 33, base classes should always be
+         * abstract. this avoids all sorts of tricky problems with
+         * assignment and swap.
+         *
+         * incidentally, this also fixes some strange clang errors:
+         * undefined reference to `vtable.
+         */
+        context_->stream() << context_->indenter() << "virtual ~" << sn
+                          << "() noexcept = 0;" << std::endl;
+    } else if (o.parent_name()) {
+        context_->stream() << context_->indenter() << "virtual ~" << sn
+                          << "() noexcept { }" << std::endl;
+    }
+    context_->first_line_is_blank(true);
+}
+
+void cpp_domain_header_formatter::
+friends(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!adaptor.is_boost_serialization_enabled())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().private_access_specifier();
+    const auto sn(o.name().simple_name());
+    context_->stream() << context_->indenter()
+                      << "template<typename Archive>" << std::endl
+                      << context_->indenter()
+                      << "friend void boost::serialization::save(Archive& ar"
+                      << ", const " << sn << "& v, unsigned int version);"
+                      << std::endl;
     context_->utility().blank_line();
+
+    context_->stream() << context_->indenter() << "template<typename Archive>"
+                      << std::endl
+                      << context_->indenter()
+                      << "friend void boost::serialization::load(Archive& ar"
+                      << ", " << sn << "& v, unsigned int version);"
+                      << std::endl;
+    context_->first_line_is_blank(true);
+}
+
+void cpp_domain_header_formatter::simple_type_getter_and_setter(
+    const std::string& owner_name, const sml::property& p) const {
+    const auto doc(p.documentation());
+    if (!doc.empty())
+        doxygen_next_.format(context_->stream(), doc);
+
+    if (!p.is_immutable())
+        doxygen_next_.format_doxygen_start_block(context_->stream(), doc);
+
+    auto adaptor(sml::make_tag_adaptor(p));
+    const auto cn(adaptor.complete_name());
+    context_->stream() << context_->indenter()
+                      << cn << " " << p.name() << "() const;" << std::endl;
+
+    if (!p.is_immutable()) {
+        context_->stream() << context_->indenter();
+        if (p.is_fluent())
+            context_->stream() << owner_name << "& ";
+        else
+            context_->stream() << "void ";
+
+        context_->stream() << p.name() << "(const " << cn;
+
+        if (!adaptor.is_simple_type())
+            context_->stream() << "&";
+
+        context_->stream() << " v);" << std::endl;
+    }
+
+    if (!p.is_immutable())
+        doxygen_next_.format_doxygen_end_block(context_->stream(), doc);
+}
+
+void cpp_domain_header_formatter::compound_type_getter_and_setter(
+    const std::string& owner_name, const sml::property& p) const {
+    const auto doc(p.documentation());
+
+    if (!doc.empty())
+        doxygen_next_.format(context_->stream(), doc);
+
+    if (!p.is_immutable())
+        doxygen_next_.format_doxygen_start_block(context_->stream(), doc);
+
+    // const getter
+    auto adaptor(sml::make_tag_adaptor(p));
+    const auto cn(adaptor.complete_name());
+    context_->stream() << context_->indenter() << "const " << cn
+                      << "& " << p.name() << "() const;" << std::endl;
+
+    if (!p.is_immutable()) {
+        // Popsicle immutability
+        context_->stream() << context_->indenter() << "" << cn
+                          << "& " << p.name() << "();" << std::endl;
+
+        // traditional setter
+        context_->stream() << context_->indenter();
+        if (p.is_fluent())
+            context_->stream() << owner_name << "& ";
+        else
+            context_->stream() << "void ";
+        context_->stream() << p.name() << "(const " << cn;
+
+        if (!adaptor.is_simple_type())
+            context_->stream() << "&";
+
+        context_->stream() << " v);" << std::endl;
+
+        // move setter
+        context_->stream() << context_->indenter();
+        if (p.is_fluent())
+            context_->stream() << owner_name << "& ";
+        else
+            context_->stream() << "void ";
+        context_->stream() << p.name() << "(const " << cn;
+
+        if (!adaptor.is_simple_type())
+            context_->stream() << "&&";
+
+        context_->stream() << " v);" << std::endl;
+    }
+
+    if (!p.is_immutable())
+        doxygen_next_.format_doxygen_end_block(context_->stream(), doc);
 }
 
 void cpp_domain_header_formatter::
-default_constructor(const sml::abstract_object& /*o*/) const {
+getters_and_setters(const sml::abstract_object& o) const {
+    if (o.properties().empty())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    bool is_first(true);
+    for (const auto p : o.properties()) {
+        if (!is_first)
+            context_->utility().blank_line();
+
+        auto adaptor(sml::make_tag_adaptor(p));
+        if (adaptor.is_simple_type())
+            simple_type_getter_and_setter(o.name().simple_name(), p);
+        else
+            compound_type_getter_and_setter(o.name().simple_name(), p);
+        is_first = false;
+    }
+    context_->first_line_is_blank(true);
 }
 
 void cpp_domain_header_formatter::
-move_constructor(const sml::abstract_object& /*o*/) const {
+member_variables(const sml::abstract_object& o) const {
+    if (o.properties().empty())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    for (const auto p : o.properties()) {
+        auto adaptor(sml::make_tag_adaptor(p));
+        context_->stream() << context_->indenter()
+                          << adaptor.complete_name() << " "
+                          << context_->utility().as_member_variable(p.name())
+                          << ";"
+                          << std::endl;
+    }
+    context_->first_line_is_blank(true);
 }
 
 void cpp_domain_header_formatter::
-complete_constructor(const sml::abstract_object& /*o*/) const {
+equality(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!adaptor.generate_equality())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    const auto sn(o.name().simple_name());
+    if (o.is_parent()) {
+        // equality is only public in leaf classes - MEC++-33
+        context_->utility().protected_access_specifier();
+        context_->stream() << context_->indenter() << "bool compare(const "
+                          << sn << "& rhs) const;" << std::endl;
+    } else {
+        context_->utility().public_access_specifier();
+        context_->stream() << context_->indenter() << "bool operator==(const "
+                          << sn <<  "& rhs) const;" << std::endl;
+        context_->stream() << context_->indenter() << "bool operator!=(const "
+                          << sn << "& rhs) const ";
+        context_->utility().open_scope();
+        {
+            cpp_formatters::positive_indenter_scope s(context_->indenter());
+            context_->stream() << context_->indenter()
+                              << "return !this->operator==(rhs);"
+                              << std::endl;
+        }
+        context_->utility().close_scope();
+    }
+
+    if (!o.is_parent() && !o.parent_name())
+        return;
+
+    context_->utility().blank_line();
+    context_->utility().public_access_specifier();
+    if (o.is_parent() && !o.parent_name()) {
+        context_->stream() << context_->indenter()
+                          << "virtual bool equals(const " << sn
+                          <<  "& other) const = 0;"
+                          << std::endl;
+    } else if (o.is_parent()) {
+        context_->stream() << context_->indenter()
+                          << "virtual bool equals(const "
+                          << adaptor.qualified_original_parent_name()
+                          <<  "& other) const = 0;"
+                          << std::endl;
+    } else {
+        context_->stream() << context_->indenter()
+                          << "bool equals(const "
+                          << adaptor.qualified_original_parent_name()
+                          <<  "& other) const override;"
+                          << std::endl;
+    }
+    context_->first_line_is_blank(true);
 }
 
 void cpp_domain_header_formatter::
-destructor(const sml::abstract_object& /*o*/) const {
+to_stream(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!adaptor.is_io_enabled())
+        return;
+
+    if (o.is_parent() && !o.parent_name())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    if (o.is_parent()) {
+        context_->stream() << context_->indenter()
+                          << "virtual void to_stream("
+                          << "std::ostream& s) const;"
+                          << std::endl;
+    } else {
+        context_->stream() << context_->indenter()
+                          << "void to_stream(std::ostream& s) "
+                          << "const override;"
+                          << std::endl;
+    }
+    context_->first_line_is_blank(true);
 }
 
 void cpp_domain_header_formatter::
-friends(const sml::abstract_object& /*o*/) const {
+swap(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!adaptor.generate_swap())
+        return;
+
+    const auto props(context_->property_cache().get_all_properties(o));
+    if ((props.empty() && !o.is_parent()) || o.is_immutable())
+        return;
+
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    // swap is only public in leaf classes - MEC++-33
+    if (o.is_parent())
+        context_->utility().protected_access_specifier();
+    else
+        context_->utility().public_access_specifier();
+
+    const auto sn(o.name().simple_name());
+    context_->stream() << context_->indenter() << "void swap("
+                      << sn << "& other) noexcept;"
+                      << std::endl;
+    context_->first_line_is_blank(true);
 }
 
 void cpp_domain_header_formatter::
-getters_and_setters(const sml::abstract_object& /*o*/) const {
+assignment(const sml::abstract_object& o) const {
+    // assignment is only available in leaf classes - MEC++-33
+    const auto props(context_->property_cache().get_all_properties(o));
+    if (props.empty() || o.is_parent() || o.is_immutable())
+        return;
+
+    const auto sn(o.name().simple_name());
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
+
+    context_->utility().public_access_specifier();
+    context_->stream() << context_->indenter() << sn << "& operator=("
+                      << sn << " other);" << std::endl;
+    context_->first_line_is_blank(true);
 }
 
 void cpp_domain_header_formatter::
-member_variables(const sml::abstract_object& /*o*/) const {
-}
+visitor_method(const sml::abstract_object& o) const {
+    auto adaptor(sml::make_tag_adaptor(o));
+    if (!o.is_visitable() &&
+        !(adaptor.is_original_parent_visitable() && !o.is_parent()))
+        return;
 
-void cpp_domain_header_formatter::
-equality(const sml::abstract_object& /*o*/) const {
-}
+    if (context_->first_line_is_blank())
+        context_->utility().blank_line();
 
-void cpp_domain_header_formatter::
-to_stream(const sml::abstract_object& /*o*/) const {
-}
+    context_->utility().public_access_specifier();
+    const auto sn(o.name().simple_name());
+    const auto opn(adaptor.original_parent_name());
 
-void cpp_domain_header_formatter::
-swap_and_assignment(const sml::abstract_object& /*o*/) const {
-}
+    if (o.is_visitable()) {
+        context_->stream() << context_->indenter()
+                          << "virtual void accept(const " << sn
+                          << "_visitor& v) const = 0;" << std::endl;
+        context_->stream() << context_->indenter() << "virtual void accept("
+                          << sn << "_visitor& v) const = 0;" << std::endl;
+        context_->stream() << context_->indenter()
+                          << "virtual void accept(const " << sn
+                          << "_visitor& v) = 0;" << std::endl;
+        context_->stream() << context_->indenter() << "virtual void accept("
+                          << sn << "_visitor& v) = 0;" << std::endl;
+        context_->utility().blank_line();
+        return;
+    }
 
-void cpp_domain_header_formatter::
-visitor_method(const sml::abstract_object& /*o*/) const {
+    context_->utility().public_access_specifier();
+    context_->stream() << context_->indenter()
+                      << "virtual void accept(const "
+                      << opn << "_visitor& v) const override {"
+                      << std::endl;
+
+    {
+        cpp_formatters::positive_indenter_scope s(context_->indenter());
+        context_->stream() << context_->indenter() << "v.visit(*this);"
+                          << std::endl;
+    }
+    context_->stream() << context_->indenter() << "}" << std::endl;
+    context_->utility().blank_line();
+    context_->stream() << context_->indenter() << "virtual void accept("
+                      << opn << "_visitor& v) const override {"
+                      << std::endl;
+
+    {
+        cpp_formatters::positive_indenter_scope s(context_->indenter());
+        context_->stream() << context_->indenter() << "v.visit(*this);"
+                          << std::endl;
+    }
+    context_->stream() << context_->indenter() << "}" << std::endl;
+    context_->utility().blank_line();
+    context_->stream() << context_->indenter()
+                      << "virtual void accept(const "
+                      << opn << "_visitor& v) override {" << std::endl;
+
+    {
+        cpp_formatters::positive_indenter_scope s(context_->indenter());
+        context_->stream() << context_->indenter() << "v.visit(*this);"
+                          << std::endl;
+    }
+    context_->stream() << context_->indenter() << "}" << std::endl;
+    context_->utility().blank_line();
+    context_->stream() << context_->indenter() << "virtual void accept("
+                      << opn << "_visitor& v) override {" << std::endl;
+
+    {
+        cpp_formatters::positive_indenter_scope s(context_->indenter());
+        context_->stream() << context_->indenter() << "v.visit(*this);"
+                          << std::endl;
+    }
+    context_->stream() << context_->indenter() << "}" << std::endl;
+    context_->first_line_is_blank(true);
 }
 
 void cpp_domain_header_formatter::format(const sml::abstract_object& o) const {
     open_class(o);
     {
         cpp_formatters::positive_indenter_scope s(context_->indenter());
-        compiler_generated_constuctors(o);
+        explicitly_defaulted_functions(o);
         default_constructor(o);
         destructor(o);
         move_constructor(o);
-        // if (!disable_complete_constructor_)
         complete_constructor(o);
         friends(o);
         visitor_method(o);
-        // if (!disable_io_)
         to_stream(o);
         getters_and_setters(o);
         equality(o);
-        swap_and_assignment(o);
+        swap(o);
+        assignment(o);
         member_variables(o);
     }
     close_class();
@@ -317,7 +753,8 @@ format(std::ostream& s, const sml::type& t, const licence& l,
 
     const cpp_includes i = cpp_includes();
     const boost::filesystem::path relative_file_path;
-    cpp_file_boilerplate_formatter f;
+    auto adaptor(sml::make_tag_adaptor(t));
+    cpp_file_boilerplate_formatter f(adaptor.generate_preamble());
     {
         const auto ns(namespaces(t.name()));
         cpp_formatters::namespace_helper nsh(context_->stream(), ns);
@@ -328,7 +765,6 @@ format(std::ostream& s, const sml::type& t, const licence& l,
     }
     context_->utility().blank_line();
     f.format_end(s, m, relative_file_path);
-
     context_ = std::unique_ptr<context>();
 }
 

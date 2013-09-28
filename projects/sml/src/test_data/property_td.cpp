@@ -59,6 +59,10 @@ create_dogen_sml_nested_qname(const unsigned int position) {
     return dogen::sml::nested_qname_generator::create(position);
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -74,6 +78,8 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 3));
     v.type(create_dogen_sml_nested_qname(position + 4));
     v.default_value(create_std_string(position + 5));
+    v.is_immutable(create_bool(position + 6));
+    v.is_fluent(create_bool(position + 7));
 }
 
 property_generator::result_type

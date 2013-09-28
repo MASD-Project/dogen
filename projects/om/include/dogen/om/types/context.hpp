@@ -73,11 +73,20 @@ public:
      */
     cpp_formatters::utility& utility();
 
+    /**
+     * @brief If true, add a blank line at the start.
+     */
+    /**@{*/
+    bool first_line_is_blank() const;
+    void first_line_is_blank(bool value);
+    /**@}*/
+
 private:
     std::ostream& stream_;
     const sml::property_cache_interface& property_cache_;
     cpp_formatters::indenter& indenter_;
     cpp_formatters::utility& utility_;
+    bool first_line_is_blank_;
 };
 
 } }

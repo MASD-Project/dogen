@@ -59,10 +59,36 @@ struct tags {
     static const std::string identity_attribute;
 
     /**
+     * @brief If set to true, the preamble will be generated.
+     *
+     * The preamble is made up of a modeline, copyright
+     * information and licensing details.
+     */
+    static const std::string generate_preamble;
+
+    /**
+     * @brief Name of the top-level parent of the inheritance
+     * hierarchy.
+     */
+    static const std::string original_parent_name;
+
+    /**
+     * @brief True if the top-level parent of the hierarchy is
+     * visitable.
+     */
+    static const std::string is_original_parent_visitable;
+
+    /**
      * @brief Valid values for Boolean types.
      */
     static const std::string bool_true;
     static const std::string bool_false;
+
+    /**
+     * @brief Valid statuses.
+     */
+    static const std::string status_unsupported;
+    static const std::string status_supported;
 
     /**
      * @brief All parameters specific to the C++ language.
@@ -79,6 +105,31 @@ struct tags {
              * data, etc.
              */
             static const std::string family;
+
+            /**
+             * @brief If true, the type is either a primitive or an
+             * enumeration.
+             */
+            static const std::string is_simple_type;
+
+            /**
+             * @brief Contains the complete name, as required for the
+             * type of a variable or argument.
+             *
+             * Only makes sense for a property.
+             */
+            static const std::string complete_name;
+
+            /**
+             * @brief Fully-qualified name of the type.
+             */
+            static const std::string qualified_name;
+
+            /**
+             * @brief Fully-qualified name of the top-level parent of
+             * the hierarchy.
+             */
+            static const std::string qualified_original_parent_name;
         };
 
         /**
@@ -93,9 +144,30 @@ struct tags {
 
             /**
              * @brief If set to true, explicitly defaulted/deleted
-             * functions will not be generated.
+             * functions will be generated.
+             *
+             * Note that other tags may still influence specific
+             * defaulted functions.
              */
             static const std::string generate_explicitly_defaulted_functions;
+
+            /**
+             * @brief If set to true, a complete constructor will be
+             * generated.
+             */
+            static const std::string generate_complete_constructor;
+
+            /**
+             * @brief If set to true, equality operators will be
+             * generated.
+             */
+            static const std::string generate_equality;
+
+            /**
+             * @brief If set to true, swap function will be
+             * generated.
+             */
+            static const std::string generate_swap;
 
             /**
              * @brief If true, a manual default constructor is

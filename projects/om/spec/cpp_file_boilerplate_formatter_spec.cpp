@@ -36,6 +36,7 @@ const dogen::om::licence empty_licence = dogen::om::licence();
 const dogen::om::cpp_includes empty_includes = dogen::om::cpp_includes();
 const boost::filesystem::path empty_path;
 const boost::filesystem::path a_path("a/path.hpp");
+const bool generate_premable(true);
 
 const std::string modeline_top(R"(/* -*- a_field: a_value -*-
  *
@@ -178,6 +179,20 @@ const std::string includes_with_top_modeline(R"(/* -*- a_field: a_value -*-
  *
  */
 #ifndef A_PATH_HPP
+#define A_PATH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <win32/system_inc_1>
+#include <unix/system_inc_2>
+#include "user_inc_1"
+#include "user_inc_2"
+#endif
+)");
+
+const std::string disabled_preamble(R"(#ifndef A_PATH_HPP
 #define A_PATH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
@@ -482,6 +497,25 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     const auto r(s.str());
     BOOST_CHECK(r == includes_with_top_modeline);
     BOOST_LOG_SEV(lg, debug) << "expected: " << includes_with_top_modeline;
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
+}
+
+BOOST_AUTO_TEST_CASE(disabled_preamble_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("disabled_preamble_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+
+    const dogen::om::cpp_includes i(mock_includes());
+    const auto m(mock_modeline(dogen::om::modeline_locations::top));
+    const auto l(mock_licence());
+
+    std::ostringstream s;
+    dogen::om::cpp_file_boilerplate_formatter f(!generate_premable);
+    f.format_begin(s, l, m, marker, i, a_path);
+    f.format_end(s, m, a_path);
+    const auto r(s.str());
+    BOOST_CHECK(r == disabled_preamble);
+    BOOST_LOG_SEV(lg, debug) << "expected: " << disabled_preamble;
     BOOST_LOG_SEV(lg, debug) << "actual: " << r;
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }

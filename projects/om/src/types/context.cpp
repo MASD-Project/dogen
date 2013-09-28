@@ -25,7 +25,8 @@ namespace om {
 
 context::context(std::ostream& s, const sml::property_cache_interface& pc,
     cpp_formatters::indenter& ind, cpp_formatters::utility& u)
-    : stream_(s), property_cache_(pc), indenter_(ind), utility_(u) { }
+    : stream_(s), property_cache_(pc), indenter_(ind), utility_(u),
+      first_line_is_blank_(false) { }
 
 std::ostream& context::stream() {
     return stream_;
@@ -41,6 +42,14 @@ cpp_formatters::utility& context::utility() {
 
 const sml::property_cache_interface& context::property_cache() const {
     return property_cache_;
+}
+
+bool context::first_line_is_blank() const {
+    return first_line_is_blank_;
+}
+
+void context::first_line_is_blank(bool value) {
+    first_line_is_blank_ = value;
 }
 
 } }

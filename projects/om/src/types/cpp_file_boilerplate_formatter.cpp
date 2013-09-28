@@ -39,6 +39,10 @@ const bool documenting_previous_identifier(true);
 namespace dogen {
 namespace om {
 
+cpp_file_boilerplate_formatter::
+cpp_file_boilerplate_formatter(const bool generate_preamble)
+    : generate_preamble_(generate_preamble) { }
+
 void cpp_file_boilerplate_formatter::
 add_modeline(std::list<std::string>& content, const modeline& m) const {
     std::ostringstream s;
@@ -72,6 +76,9 @@ add_licence(std::list<std::string>& content, const licence& l) const {
 void cpp_file_boilerplate_formatter::
 format_preamble(std::ostream& s, const licence& l, const modeline& m,
     const std::string& marker) const {
+
+    if (!generate_preamble_)
+        return;
 
     const bool is_modeline_top(m.location() == modeline_locations::top);
     std::list<std::string> content;

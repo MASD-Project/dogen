@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-28 Sat 00:11]
+Clock summary at [2013-09-28 Sat 22:53]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *12:38* |       |      |
+| *Total time*                                                 | *17:17* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 12:38 |      |
+| Development Stories Implemented                              |         | 17:17 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |         |       | 0:12 |
 | COMPLETED Refactor OM tests to avoid over-inclusion          |         |       | 0:32 |
 | COMPLETED Convert implementation specific parameters to list |         |       | 1:06 |
 | COMPLETED Rename implementation specific parameters          |         |       | 0:50 |
 | COMPLETED Add meta-data support to SML                       |         |       | 5:04 |
 | IMPLEMENTATION Implement the property cache in SML           |         |       | 1:14 |
-| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 3:40 |
+| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 8:19 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -149,8 +149,27 @@ SML type visitors, etc.
      CLOCK: [2013-09-24 Tue 07:46]--[2013-09-24 Tue 08:10] =>  0:19
      CLOCK: [2013-09-24 Tue 07:33]--[2013-09-24 Tue 07:43] =>  0:18
 
-**** IMPLEMENTATION Add compiler generated constructors                :task:
+**** COMPLETED Add compiler generated constructors                     :task:
+     CLOSED: [2013-09-28 Sat 20:25]
+     CLOCK: [2013-09-28 Sat 15:34]--[2013-09-28 Sat 17:07] =>  1:33
+     CLOCK: [2013-09-28 Sat 15:02]--[2013-09-28 Sat 15:34] =>  0:32
+     CLOCK: [2013-09-28 Sat 14:59]--[2013-09-28 Sat 15:02] =>  0:03
+     CLOCK: [2013-09-28 Sat 11:02]--[2013-09-28 Sat 11:06] =>  0:04
      CLOCK: [2013-09-27 Fri 23:10]--[2013-09-28 Sat 00:11] =>  1:01
+**** COMPLETED Add remaining meta-data required to finish domain formatter :task:
+     CLOSED: [2013-09-28 Sat 22:53]
+     CLOCK: [2013-09-28 Sat 20:26]--[2013-09-28 Sat 22:53] =>  2:27
+
+**** IMPLEMENTATION Add tests for all permutations of the domain formatter :task:
+*** Propagatable parameters                                           :story:
+
+Some implementation specific parameters should be propagated along the
+composition graph (e.g. boost serialisation status disabled). We could
+spot these parameters whilst building the model and do the propagation
+there and then.
+
+We need to create language specific classes to propagate parameters,
+assign proper defaults to them, etc.
 
 *** Create an hydrator from JSON into SML                             :story:
 
@@ -178,12 +197,5 @@ languages. For example:
 We can introduce these concepts at the SML level, probably at the
 =model= and =abstract_object= level; we can then do further
 translation at the language level, as required.
-
-*** Propagatable parameters                                           :story:
-
-Some implementation specific parameters should be propagated along the
-composition graph (e.g. boost serialisation status disabled). We could
-spot these parameters whilst building the model and do the propagation
-there and then.
 
 ** Deprecated Development Stories

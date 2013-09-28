@@ -26,12 +26,28 @@ namespace sml {
 const std::string tags::odb_pragma("ODB_PRAGMA");
 const std::string tags::comment("COMMENT");
 const std::string tags::identity_attribute("IDENTITY_ATTRIBUTE");
+const std::string tags::generate_preamble("GENERATE_PREAMBLE");
+const std::string tags::original_parent_name("cpp.original_parent_name");
+const std::string tags::is_original_parent_visitable(
+    "is_original_parent_visitable");
 const std::string tags::bool_true("true");
 const std::string tags::bool_false("false");
+const std::string tags::status_unsupported("unsupported");
+const std::string tags::status_supported("supported");
 const std::string tags::cpp::type::family("cpp.type.family");
+const std::string tags::cpp::type::is_simple_type("cpp.type.is_simple_type");
+const std::string tags::cpp::type::complete_name("cpp.type.complete_name");
+const std::string tags::cpp::type::qualified_name("cpp.type.qualified_name");
+const std::string tags::cpp::type::qualified_original_parent_name(
+    "cpp.type.qualified_original_parent_name");
 const std::string tags::cpp::domain::status("cpp.domain.status");
 const std::string tags::cpp::domain::generate_explicitly_defaulted_functions(
     "cpp.domain.generate_explicitly_defaulted_functions");
+const std::string tags::cpp::domain::generate_complete_constructor(
+    "cpp.domain.generate_complete_constructor");
+const std::string tags::cpp::domain::generate_equality(
+    "cpp.domain.generate_equality");
+const std::string tags::cpp::domain::generate_swap("cpp.domain.generate_swap");
 const std::string tags::cpp::domain::
 requires_manual_default_constructor(
     "cpp.domain.requires_manual_default_constructor");

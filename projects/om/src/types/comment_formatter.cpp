@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <sstream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/om/types/comment_formatter.hpp"
 
 namespace {
@@ -36,6 +37,8 @@ const std::string shell_style("#");
 const std::string sql_style("--");
 const std::string space(" ");
 const std::string brief("@brief");
+const std::string block_start("@{");
+const std::string block_end("@}");
 
 }
 
@@ -94,6 +97,21 @@ void comment_formatter::add_comment_middle_marker(std::ostream& s) const {
 void comment_formatter::add_comment_end_marker(std::ostream& s) const {
     if (style_ == comment_styles::c_style)
         s << space << c_style_end << std::endl;
+}
+
+void comment_formatter::format_doxygen_block(std::ostream& s,
+    const std::string& block, const std::string& content) const {
+    if (!use_documentation_tool_markup_)
+        return;
+
+    std::string trimmed(boost::algorithm::trim_copy(content));
+    if (trimmed.empty())
+        return;
+
+    if (style_ == comment_styles::c_style)
+        s << doxygen_c_style_start << block << c_style_end;
+    else
+        s << doxygen_cpp_style << block;
 }
 
 void comment_formatter::
@@ -155,6 +173,16 @@ format(std::ostream& s, const std::list<std::string>& content,
         s << std::endl;
     }
     add_comment_end_marker(s);
+}
+
+void comment_formatter::format_doxygen_start_block(std::ostream& s,
+    const std::string& content) const {
+    format_doxygen_block(s, block_start, content);
+}
+
+void comment_formatter::format_doxygen_end_block(std::ostream& s,
+    const std::string& content) const {
+    format_doxygen_block(s, block_end, content);
 }
 
 } }

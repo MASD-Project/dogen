@@ -79,6 +79,8 @@ const std::string parent_object(R"(namespace some_model_0 {
  * @brief Some documentation
  */
 class some_type_1 {
+public:
+    virtual ~some_type_1() noexcept = 0;
 };
 
 }
@@ -90,6 +92,8 @@ const std::string leaf_child_object(R"(namespace some_model_0 {
  * @brief Some documentation
  */
 class some_type_0 final : public some_type_1 {
+public:
+    virtual ~some_type_0() noexcept { }
 };
 
 }
@@ -101,6 +105,8 @@ const std::string non_leaf_child_object(R"(namespace some_model_0 {
  * @brief Some documentation
  */
 class some_type_1 : public some_type_2 {
+public:
+    virtual ~some_type_1() noexcept = 0;
 };
 
 }
@@ -113,8 +119,8 @@ public:
     some_type_0() = default;
     some_type_0(const some_type_0&) = default;
     some_type_0(some_type_0&&) = default;
+    ~some_type_0() = default;
     some_type_0& operator=(const some_type_0&) = default;
-
 };
 
 }
@@ -200,8 +206,9 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
     f.format(s, e, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == enumeration_two_enumerators);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators
+                             << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) {
@@ -220,8 +227,8 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == object_no_properties);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
@@ -240,8 +247,8 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == parent_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
@@ -261,8 +268,8 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == leaf_child_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
@@ -283,8 +290,8 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
     BOOST_CHECK(r == non_leaf_child_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected_domain_header) {
@@ -298,12 +305,6 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     router.route(
         dogen::sml::tags::cpp::domain::generate_explicitly_defaulted_functions,
         dogen::sml::tags::bool_true);
-    router.route(
-        dogen::sml::tags::cpp::domain::requires_manual_default_constructor,
-        dogen::sml::tags::bool_true);
-    router.route(
-        dogen::sml::tags::cpp::domain::requires_manual_move_constructor,
-        dogen::sml::tags::bool_true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     std::ostringstream s;
@@ -314,8 +315,8 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     const auto r(s.str());
     BOOST_CHECK(r == all_explicitly_defaulted_functions);
     BOOST_LOG_SEV(lg, debug) << "expected: "
-                             << all_explicitly_defaulted_functions;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+                             << all_explicitly_defaulted_functions << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
 BOOST_AUTO_TEST_SUITE_END()

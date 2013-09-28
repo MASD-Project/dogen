@@ -40,10 +40,12 @@ namespace sml {
  */
 class property final {
 public:
-    property() = default;
     property(const property&) = default;
     property(property&&) = default;
     ~property() = default;
+
+public:
+    property();
 
 public:
     property(
@@ -52,7 +54,9 @@ public:
         const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
         const std::string& name,
         const dogen::sml::nested_qname& type,
-        const std::string& default_value);
+        const std::string& default_value,
+        const bool is_immutable,
+        const bool is_fluent);
 
 private:
     template<typename Archive>
@@ -135,6 +139,22 @@ public:
     void default_value(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the property can only be read but not set.
+     */
+    /**@{*/
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the property's setter will return the object iteself.
+     */
+    /**@{*/
+    bool is_fluent() const;
+    void is_fluent(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const property& rhs) const;
     bool operator!=(const property& rhs) const {
@@ -152,6 +172,8 @@ private:
     std::string name_;
     dogen::sml::nested_qname type_;
     std::string default_value_;
+    bool is_immutable_;
+    bool is_fluent_;
 };
 
 } }

@@ -42,13 +42,16 @@ namespace om {
  */
 class cpp_file_boilerplate_formatter {
 public:
-    cpp_file_boilerplate_formatter() = default;
     cpp_file_boilerplate_formatter(
         const cpp_file_boilerplate_formatter&) = default;
     cpp_file_boilerplate_formatter& operator=(
         const cpp_file_boilerplate_formatter&) = delete;
     cpp_file_boilerplate_formatter(
         cpp_file_boilerplate_formatter&& rhs) = default;
+
+public:
+    explicit cpp_file_boilerplate_formatter(
+        const bool generate_preamble = true);
 
 private:
     /**
@@ -113,6 +116,9 @@ public:
      */
     void format_end(std::ostream& s, const modeline& m,
         const boost::filesystem::path& relative_file_path) const;
+
+private:
+    const bool generate_preamble_;
 };
 
 } }

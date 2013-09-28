@@ -336,6 +336,8 @@ third line with &quot;quote&quot;
 									<is_pointer>0</is_pointer>
 								</type>
 								<default_value></default_value>
+								<is_immutable>0</is_immutable>
+								<is_fluent>0</is_fluent>
 							</item>
 							<item>
 								<documentation>the brief comment
@@ -373,6 +375,8 @@ a second line
 									<is_pointer>0</is_pointer>
 								</type>
 								<default_value></default_value>
+								<is_immutable>0</is_immutable>
+								<is_fluent>0</is_fluent>
 							</item>
 							<item>
 								<documentation></documentation>
@@ -407,6 +411,8 @@ a second line
 									<is_pointer>0</is_pointer>
 								</type>
 								<default_value></default_value>
+								<is_immutable>0</is_immutable>
+								<is_fluent>0</is_fluent>
 							</item>
 						</properties>
 						<operations>

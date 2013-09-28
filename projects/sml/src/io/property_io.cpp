@@ -19,6 +19,7 @@
  *
  */
 #include <boost/algorithm/string.hpp>
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
@@ -85,6 +86,12 @@ namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const property& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::property\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
@@ -92,7 +99,9 @@ std::ostream& operator<<(std::ostream& s, const property& v) {
       << "\"complex_tags\": " << v.complex_tags() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type\": " << v.type() << ", "
-      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\""
+      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
+      << "\"is_immutable\": " << v.is_immutable() << ", "
+      << "\"is_fluent\": " << v.is_fluent()
       << " }";
     return(s);
 }

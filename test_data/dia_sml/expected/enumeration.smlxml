@@ -443,6 +443,8 @@ this is a long comment
 									<is_pointer>0</is_pointer>
 								</type>
 								<default_value></default_value>
+								<is_immutable>0</is_immutable>
+								<is_fluent>0</is_fluent>
 							</item>
 							<item>
 								<documentation></documentation>
@@ -477,6 +479,8 @@ this is a long comment
 									<is_pointer>0</is_pointer>
 								</type>
 								<default_value></default_value>
+								<is_immutable>0</is_immutable>
+								<is_fluent>0</is_fluent>
 							</item>
 							<item>
 								<documentation></documentation>
@@ -512,6 +516,8 @@ this is a long comment
 									<is_pointer>0</is_pointer>
 								</type>
 								<default_value></default_value>
+								<is_immutable>0</is_immutable>
+								<is_fluent>0</is_fluent>
 							</item>
 						</properties>
 						<operations class_id="34" tracking_level="0" version="0">

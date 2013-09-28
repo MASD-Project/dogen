@@ -85,17 +85,41 @@ private:
      */
     void add_comment_end_marker(std::ostream& s) const;
 
+    /**
+     * @brief Generic method for adding doxygen blocks.
+     */
+    void format_doxygen_block(std::ostream& s, const std::string& block,
+        const std::string& content) const;
+
 public:
     /**
-     * @brief
+     * @brief Formats content as a comment into the stream.
      */
     void format(std::ostream& s, const std::string& content) const;
 
     /**
-     * @brief
+     * @brief Formats each entry in content into the stream as a
+     * comment.
+     *
+     * If @e line_between_blocks is true, a new line is inserted in
+     * between each entry of content.
      */
     void format(std::ostream& s, const std::list<std::string>& content,
         const bool line_between_blocks = false) const;
+
+    /**
+     * @brief Adds a doxygen block start to the stream if content is
+     * not empty.
+     */
+    void format_doxygen_start_block(std::ostream& s,
+        const std::string& content) const;
+
+    /**
+     * @brief Adds a doxygen block end to the stream if content is
+     * not empty.
+     */
+    void format_doxygen_end_block(std::ostream& s,
+        const std::string& content) const;
 
 private:
     const bool start_on_first_line_;

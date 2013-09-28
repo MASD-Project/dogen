@@ -23,19 +23,27 @@
 namespace dogen {
 namespace sml {
 
+property::property()
+    : is_immutable_(static_cast<bool>(0)),
+      is_fluent_(static_cast<bool>(0)) { }
+
 property::property(
     const std::string& documentation,
     const std::unordered_map<std::string, std::string>& simple_tags,
     const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
     const std::string& name,
     const dogen::sml::nested_qname& type,
-    const std::string& default_value)
+    const std::string& default_value,
+    const bool is_immutable,
+    const bool is_fluent)
     : documentation_(documentation),
       simple_tags_(simple_tags),
       complex_tags_(complex_tags),
       name_(name),
       type_(type),
-      default_value_(default_value) { }
+      default_value_(default_value),
+      is_immutable_(is_immutable),
+      is_fluent_(is_fluent) { }
 
 void property::swap(property& other) noexcept {
     using std::swap;
@@ -45,6 +53,8 @@ void property::swap(property& other) noexcept {
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(default_value_, other.default_value_);
+    swap(is_immutable_, other.is_immutable_);
+    swap(is_fluent_, other.is_fluent_);
 }
 
 bool property::operator==(const property& rhs) const {
@@ -53,7 +63,9 @@ bool property::operator==(const property& rhs) const {
         complex_tags_ == rhs.complex_tags_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
-        default_value_ == rhs.default_value_;
+        default_value_ == rhs.default_value_ &&
+        is_immutable_ == rhs.is_immutable_ &&
+        is_fluent_ == rhs.is_fluent_;
 }
 
 property& property::operator=(property other) {
@@ -156,6 +168,22 @@ void property::default_value(const std::string& v) {
 
 void property::default_value(const std::string&& v) {
     default_value_ = std::move(v);
+}
+
+bool property::is_immutable() const {
+    return is_immutable_;
+}
+
+void property::is_immutable(const bool v) {
+    is_immutable_ = v;
+}
+
+bool property::is_fluent() const {
+    return is_fluent_;
+}
+
+void property::is_fluent(const bool v) {
+    is_fluent_ = v;
 }
 
 } }
