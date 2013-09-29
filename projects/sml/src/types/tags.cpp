@@ -39,6 +39,11 @@ const std::string tags::status_unsupported("unsupported");
 const std::string tags::status_supported("supported");
 const std::string tags::status_handcrafted("handcrafted");
 
+const std::string tags::cpp::generate_forward_declaration(
+    "cpp.generate_forward_declaration");
+const std::string tags::cpp::generate_implementation(
+    "cpp.generate_implementation");
+
 const std::string tags::cpp::type::family("cpp.type.family");
 const std::string tags::cpp::type::is_simple_type("cpp.type.is_simple_type");
 const std::string tags::cpp::type::complete_name("cpp.type.complete_name");

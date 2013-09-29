@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-29 Sun 01:50]
+Clock summary at [2013-09-29 Sun 02:08]
 
 | Headline                                                     | Time    |       |       |
 |--------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                 | *19:49* |       |       |
+| *Total time*                                                 | *20:07* |       |       |
 |--------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                              |         | 19:49 |       |
+| Development Stories Implemented                              |         | 20:07 |       |
 | IMPLEMENTATION Release notes and backlog grooming            |         |       |  0:12 |
 | COMPLETED Refactor OM tests to avoid over-inclusion          |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list |         |       |  1:06 |
@@ -24,7 +24,7 @@ Clock summary at [2013-09-29 Sun 01:50]
 | COMPLETED Add meta-data support to SML                       |         |       |  5:04 |
 | IMPLEMENTATION Implement the property cache in SML           |         |       |  1:14 |
 | IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 10:42 |
-| IMPLEMENTATION Implement tagger                              |         |       |  0:09 |
+| IMPLEMENTATION Implement tagger                              |         |       |  0:27 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -171,6 +171,7 @@ SML type visitors, etc.
      CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
 
 *** IMPLEMENTATION Implement tagger                                   :story:
+    CLOCK: [2013-09-29 Sun 01:50]--[2013-09-29 Sun 02:08] =>  0:18
     CLOCK: [2013-09-29 Sun 00:01]--[2013-09-29 Sun 00:10] =>  0:09
 
 *** Propagatable parameters                                           :story:

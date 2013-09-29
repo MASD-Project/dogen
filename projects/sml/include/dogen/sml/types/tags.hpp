@@ -101,6 +101,18 @@ struct tags {
      */
     struct cpp {
         /**
+         * @brief If set to true, the forward declaration file will be
+         * generated.
+         */
+        static const std::string generate_forward_declaration;
+
+        /**
+         * @brief If set to true, the implementation file will be
+         * generated.
+         */
+        static const std::string generate_implementation;
+
+        /**
          * @brief C++ specific parameters that apply only to types.
          */
         struct type {
