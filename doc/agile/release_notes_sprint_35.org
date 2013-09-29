@@ -171,6 +171,8 @@ SML type visitors, etc.
      CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
 
 *** IMPLEMENTATION Implement tagger                                   :story:
+    CLOCK: [2013-09-29 Sun 18:43]--[2013-09-29 Sun 19:25] =>  0:42
+    CLOCK: [2013-09-29 Sun 18:23]--[2013-09-29 Sun 18:43] =>  0:20
     CLOCK: [2013-09-29 Sun 01:50]--[2013-09-29 Sun 02:08] =>  0:18
     CLOCK: [2013-09-29 Sun 00:01]--[2013-09-29 Sun 00:10] =>  0:09
 

@@ -30,35 +30,40 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Performs a traversal across all types in a domain model.
+ */
+/**@{*/
 template<typename EventVisitor>
 void all_types_traversal(const model& m, const EventVisitor& ev) {
     for (const auto& c : m.concepts())
-        ev.on_next_type(c);
+        ev(c);
 
     for (const auto& p : m.primitives())
-        ev.on_next_type(p);
+        ev(p);
 
     for (const auto& e : m.enumerations())
-        ev.on_next_type(e);
+        ev(e);
 
     for (const auto& o : m.objects())
-        ev.on_next_type(o);
+        ev(o);
 }
 
 template<typename EventVisitor>
 void all_types_traversal(model& m, EventVisitor& ev) {
     for (const auto& c : m.concepts())
-        ev.on_next_type(c);
+        ev(c);
 
     for (const auto& p : m.primitives())
-        ev.on_next_type(p);
+        ev(p);
 
     for (const auto& e : m.enumerations())
-        ev.on_next_type(e);
+        ev(e);
 
     for (const auto& o : m.objects())
-        ev.on_next_type(o);
+        ev(o);
 }
+/**@}*/
 
 } }
 
