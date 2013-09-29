@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Do not copy models in merger                                      :story:
+
+At present we are adding the partial models into the merger by copying
+them into an associative container. It would be nicer to avoid the
+copying as it adds no value. This should wait until we have a way to
+get performance numbers out.
+
 *** Towards a more generic use of implementation specific parameters  :story:
 
 We should do an inventory of all dogen features which can be
