@@ -176,7 +176,7 @@ SML type visitors, etc.
     CLOCK: [2013-09-29 Sun 01:50]--[2013-09-29 Sun 02:08] =>  0:18
     CLOCK: [2013-09-29 Sun 00:01]--[2013-09-29 Sun 00:10] =>  0:09
 
-*** Propagatable parameters                                           :story:
+**** Propagatable parameters                                          :story:
 
 Some implementation specific parameters should be propagated along the
 composition graph (e.g. boost serialisation status disabled). We could
@@ -186,7 +186,9 @@ there and then.
 We need to create language specific classes to propagate parameters,
 assign proper defaults to them, etc.
 
-*** Create an hydrator from JSON into SML                             :story:
+*** IMPLEMENTATION Create an hydrator from JSON into SML              :story:
+    CLOCK: [2013-09-29 Sun 19:34]--[2013-09-29 Sun 21:05] =>  1:31
+    CLOCK: [2013-09-29 Sun 19:25]--[2013-09-29 Sun 19:34] =>  0:09
 
 Using the JSON representation defined in the previous iteration (in
 data/library) and boost property tree, create an hydrator/transformer

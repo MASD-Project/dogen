@@ -287,7 +287,6 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     BOOST_CHECK_EXCEPTION(i.inject(m), injection_error, c);
 }
 
-
 BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     SETUP_TEST_LOG_SOURCE("visitable_object_has_visitor_injected");
 

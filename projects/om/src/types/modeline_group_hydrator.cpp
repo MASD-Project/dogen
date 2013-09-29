@@ -18,8 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
@@ -38,7 +36,8 @@ const std::string empty;
 const std::string duplicate_modeline_group("Duplicate modeline group found: ");
 const std::string invalid_group_name("Invalid group name: ");
 const std::string invalid_ini_file("Failed to parse INI file: ");
-const std::string invalid_option_in_ini_file("Failed to read option in INI file: ");
+const std::string invalid_option_in_ini_file(
+    "Failed to read option in INI file: ");
 const std::string invalid_path("Failed to find INI file: ");
 const std::string invalid_directory("Not a directory: ");
 const std::string directory_not_found("Could not find directory: ");
@@ -123,12 +122,12 @@ void modeline_group_hydrator::validate_modeline(const modeline& m) const {
 }
 
 modeline_group_hydrator::value_type
-modeline_group_hydrator::read_stream(std::istream& i) const {
+modeline_group_hydrator::read_stream(std::istream& s) const {
     modeline_group_hydrator::value_type r;
 
     using namespace boost::property_tree;
     ptree pt;
-    read_ini(i, pt);
+    read_ini(s, pt);
     for (ptree::const_iterator i(pt.begin()); i != pt.end(); ++i) {
         const auto& sn(i->first);
         if (!is_group_name_valid(sn)) {
@@ -165,10 +164,10 @@ modeline_group_hydrator::read_stream(std::istream& i) const {
 }
 
 modeline_group_hydrator::value_type
-modeline_group_hydrator::hydrate(std::istream& i) const {
+modeline_group_hydrator::hydrate(std::istream& s) const {
     using namespace boost::property_tree;
     try {
-        return read_stream(i);
+        return read_stream(s);
     } catch (const ini_parser_error& e) {
         BOOST_LOG_SEV(lg, error) << invalid_ini_file << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_ini_file + e.what()));
@@ -181,8 +180,6 @@ modeline_group_hydrator::hydrate(std::istream& i) const {
         BOOST_LOG_SEV(lg, error) << invalid_path << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_path + e.what()));
     }
-
-    // return modeline_group(); // keep compiler happy
 }
 
 } }

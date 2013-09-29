@@ -83,14 +83,14 @@ private:
     /**
      * @brief Parse the stream using INI syntax.
      */
-    value_type read_stream(std::istream& i) const;
+    value_type read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrate all the modeline groups found in the
      * directories.
      */
-    value_type hydrate(std::istream& i) const;
+    value_type hydrate(std::istream& s) const;
 };
 
 } }

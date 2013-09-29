@@ -7998,7 +7998,7 @@ support.#</dia:string>
                 <dia:string>#s#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::ostream&amp;#</dia:string>
+                <dia:string>#std::istream&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
