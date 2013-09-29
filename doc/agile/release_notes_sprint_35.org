@@ -10,20 +10,21 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-28 Sat 22:53]
+Clock summary at [2013-09-29 Sun 01:50]
 
-| Headline                                                     | Time    |       |      |
-|--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *17:17* |       |      |
-|--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 17:17 |      |
-| IMPLEMENTATION Release notes and backlog grooming            |         |       | 0:12 |
-| COMPLETED Refactor OM tests to avoid over-inclusion          |         |       | 0:32 |
-| COMPLETED Convert implementation specific parameters to list |         |       | 1:06 |
-| COMPLETED Rename implementation specific parameters          |         |       | 0:50 |
-| COMPLETED Add meta-data support to SML                       |         |       | 5:04 |
-| IMPLEMENTATION Implement the property cache in SML           |         |       | 1:14 |
-| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 8:19 |
+| Headline                                                     | Time    |       |       |
+|--------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                 | *19:49* |       |       |
+|--------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                              |         | 19:49 |       |
+| IMPLEMENTATION Release notes and backlog grooming            |         |       |  0:12 |
+| COMPLETED Refactor OM tests to avoid over-inclusion          |         |       |  0:32 |
+| COMPLETED Convert implementation specific parameters to list |         |       |  1:06 |
+| COMPLETED Rename implementation specific parameters          |         |       |  0:50 |
+| COMPLETED Add meta-data support to SML                       |         |       |  5:04 |
+| IMPLEMENTATION Implement the property cache in SML           |         |       |  1:14 |
+| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 10:42 |
+| IMPLEMENTATION Implement tagger                              |         |       |  0:09 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -160,9 +161,17 @@ SML type visitors, etc.
      CLOSED: [2013-09-28 Sat 22:53]
      CLOCK: [2013-09-28 Sat 20:26]--[2013-09-28 Sat 22:53] =>  2:27
 
+**** COMPLETED Clean up tag adaptor API
+     CLOSED: [2013-09-29 Sun 01:41]
+     CLOCK: [2013-09-29 Sun 01:41]--[2013-09-29 Sun 01:50] =>  0:09
+     CLOCK: [2013-09-29 Sun 00:10]--[2013-09-29 Sun 01:40] =>  1:30
+
 **** IMPLEMENTATION Add tests for all permutations of the domain formatter :task:
      CLOCK: [2013-09-28 Sat 23:16]--[2013-09-28 Sat 23:37] =>  0:21
      CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
+
+*** IMPLEMENTATION Implement tagger                                   :story:
+    CLOCK: [2013-09-29 Sun 00:01]--[2013-09-29 Sun 00:10] =>  0:09
 
 *** Propagatable parameters                                           :story:
 

@@ -79,8 +79,6 @@ const std::string parent_object(R"(namespace some_model_0 {
  * @brief Some documentation
  */
 class some_type_1 {
-public:
-    virtual ~some_type_1() noexcept = 0;
 };
 
 }
@@ -92,8 +90,6 @@ const std::string leaf_child_object(R"(namespace some_model_0 {
  * @brief Some documentation
  */
 class some_type_0 final : public some_type_1 {
-public:
-    virtual ~some_type_0() noexcept { }
 };
 
 }
@@ -105,8 +101,6 @@ const std::string non_leaf_child_object(R"(namespace some_model_0 {
  * @brief Some documentation
  */
 class some_type_1 : public some_type_2 {
-public:
-    virtual ~some_type_1() noexcept = 0;
 };
 
 }
@@ -338,7 +332,7 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     o.documentation().clear();
     auto router(dogen::sml::make_tag_router(o));
     router.route(
-        dogen::sml::tags::cpp::domain::generate_explicitly_defaulted_functions,
+        dogen::sml::tags::cpp::domain::generate_defaulted_functions,
         dogen::sml::tags::bool_true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -363,10 +357,10 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_dom
     o.documentation().clear();
     auto router(dogen::sml::make_tag_router(o));
     router.route(
-        dogen::sml::tags::cpp::domain::generate_explicitly_defaulted_functions,
+        dogen::sml::tags::cpp::domain::generate_defaulted_functions,
         dogen::sml::tags::bool_true);
     router.route(
-        dogen::sml::tags::cpp::domain::requires_manual_default_constructor,
+        dogen::sml::tags::cpp::domain::generate_explicit_default_constructor,
         dogen::sml::tags::bool_true);
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -392,10 +386,10 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_domain
     o.documentation().clear();
     auto router(dogen::sml::make_tag_router(o));
     router.route(
-        dogen::sml::tags::cpp::domain::generate_explicitly_defaulted_functions,
+        dogen::sml::tags::cpp::domain::generate_defaulted_functions,
         dogen::sml::tags::bool_true);
     router.route(
-        dogen::sml::tags::cpp::domain::requires_manual_move_constructor,
+        dogen::sml::tags::cpp::domain::generate_explicit_move_constructor,
         dogen::sml::tags::bool_true);
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;

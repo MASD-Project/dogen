@@ -44,104 +44,27 @@ public:
         const std::unordered_map<std::string, std::list<std::string> >&
         complex_tags);
 
-private:
-    /**
-     * @brief Gets a boolean value, defaulting to true if it does not
-     * exist.
-     */
-    bool get_bool_with_false_default(const std::string& key) const;
-
 public:
     /**
-     * @brief Returns true if the tags contain the comment key, false
-     * otherwise.
+     * @brief Returns true if the key exists, false otherwise.
      */
-    bool has_comment() const;
+    bool has_key(const std::string& key) const;
 
     /**
-     * @brief Returns true if the tags contain the identity key, false
-     * otherwise.
+     * @brief Returns true if the key exists and its value is set to
+     * boolean true.
      */
-    bool has_identity() const;
+    bool is_true(const std::string& key) const;
 
     /**
-     * @brief Returns the value of "original parent name".
+     * @brief Returns the negation of @e is_true.
      */
-    std::string original_parent_name() const;
+    bool is_false(const std::string& key) const;
 
     /**
-     * @brief Returns the value of "is original parent visitable".
+     * @brief Returns the value associated with the key, if it exists.
      */
-    bool is_original_parent_visitable() const;
-
-public:
-   /**
-     * @brief Returns the value of "generate explicitly defaulted
-     * functions".
-     */
-    bool generate_explicitly_defaulted_functions() const;
-
-    /**
-     * @brief Returns the value of "generate complete constructor".
-     */
-    bool generate_complete_constructor() const;
-
-    /**
-     * @brief Returns the value of "generate equality".
-     */
-    bool generate_equality() const;
-
-    /**
-     * @brief Returns the value of "generate swap".
-     */
-    bool generate_swap() const;
-
-    /**
-     * @brief Returns the value of "requires manual default constructor".
-     */
-    bool requires_manual_default_constructor() const;
-
-    /**
-     * @brief Returns the value of "requires manual move constructor".
-     */
-    bool requires_manual_move_constructor() const;
-
-    /**
-     * @brief Returns the value of "generate preamble".
-     */
-    bool generate_preamble() const;
-
-    /**
-     * @brief Returns the value of "is simple type".
-     */
-    bool is_simple_type() const;
-
-    /**
-     * @brief Fully-qualified name of the type.
-     */
-    std::string qualified_name() const;
-
-    /**
-     * @brief Fully-qualified name of the top-level parent of
-     * the hierarchy.
-     */
-    std::string qualified_original_parent_name() const;
-
-    /**
-     * @brief Returns the value of "complete name".
-     */
-    std::string complete_name() const;
-
-    /**
-     * @brief Returns true if "boost serialization status" is set to
-     * enabled.
-     */
-    bool is_boost_serialization_enabled() const;
-
-    /**
-     * @brief Returns true if "io status" is set to enabled.
-     */
-    bool is_io_enabled() const;
+    std::string get(const std::string& key) const;
 
 public:
     /**

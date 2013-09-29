@@ -35,7 +35,12 @@ tag_adaptor(const std::unordered_map<std::string, std::string>& simple_tags,
     const std::unordered_map<std::string, std::list<std::string> >&
     complex_tags) : simple_tags_(simple_tags), complex_tags_(complex_tags) { }
 
-bool tag_adaptor::get_bool_with_false_default(const std::string& key) const {
+bool tag_adaptor::has_key(const std::string& key) const {
+    const auto i(simple_tags_.find(key));
+    return i != simple_tags_.end();
+}
+
+bool tag_adaptor::is_true(const std::string& key) const {
     const auto i(simple_tags_.find(key));
     if (i != simple_tags_.end())
         return i->second == tags::bool_true;
@@ -43,103 +48,16 @@ bool tag_adaptor::get_bool_with_false_default(const std::string& key) const {
     return false;
 }
 
-bool tag_adaptor::has_comment() const {
-    const auto i(simple_tags_.find(tags::comment));
-    return i != simple_tags_.end();
+bool tag_adaptor::is_false(const std::string& key) const {
+    return !is_true(key);
 }
 
-bool tag_adaptor::has_identity() const {
-    const auto i(simple_tags_.find(tags::identity_attribute));
-    return i != simple_tags_.end();
-}
-
-std::string tag_adaptor::original_parent_name() const {
-    const auto i(simple_tags_.find(tags::original_parent_name));
-    if (i != simple_tags_.end())
-        return i->second;
-    return empty;
-}
-
-bool tag_adaptor::is_original_parent_visitable() const {
-    const auto& key(tags::is_original_parent_visitable);
-    return get_bool_with_false_default(key);
-}
-
-bool tag_adaptor::generate_explicitly_defaulted_functions() const {
-    const auto& key(tags::cpp::domain::generate_explicitly_defaulted_functions);
-    return get_bool_with_false_default(key);
-}
-
-bool tag_adaptor::generate_complete_constructor() const {
-    const auto& key(tags::cpp::domain::generate_complete_constructor);
-    return get_bool_with_false_default(key);
-}
-
-bool tag_adaptor::generate_equality() const {
-    const auto& key(tags::cpp::domain::generate_equality);
-    return get_bool_with_false_default(key);
-}
-
-bool tag_adaptor::generate_swap() const {
-    const auto& key(tags::cpp::domain::generate_swap);
-    return get_bool_with_false_default(key);
-}
-
-bool tag_adaptor::requires_manual_default_constructor() const {
-    const auto& key(tags::cpp::domain::requires_manual_default_constructor);
-    return get_bool_with_false_default(key);
-}
-
-bool tag_adaptor::requires_manual_move_constructor() const {
-    const auto& key(tags::cpp::domain::requires_manual_move_constructor);
-    return get_bool_with_false_default(key);
-}
-
-bool tag_adaptor::generate_preamble() const {
-    return get_bool_with_false_default(tags::generate_preamble);
-}
-
-bool tag_adaptor::is_simple_type() const {
-    return get_bool_with_false_default(tags::cpp::type::is_simple_type);
-}
-
-std::string tag_adaptor::qualified_name() const {
-    const auto i(simple_tags_.find(tags::cpp::type::qualified_name));
-    if (i != simple_tags_.end())
-        return i->second;
-    return empty;
-}
-
-std::string tag_adaptor::qualified_original_parent_name() const {
-    const auto i(simple_tags_.find(tags::cpp::type::qualified_name));
-    if (i != simple_tags_.end())
-        return i->second;
-    return empty;
-}
-
-std::string tag_adaptor::complete_name() const {
-    const auto i(simple_tags_.find(tags::cpp::type::complete_name));
-    if (i != simple_tags_.end())
-        return i->second;
-    return empty;
-}
-
-bool tag_adaptor::is_boost_serialization_enabled() const {
-    const auto& key(tags::cpp::serialization::boost::status);
+std::string tag_adaptor::get(const std::string& key) const {
     const auto i(simple_tags_.find(key));
     if (i != simple_tags_.end())
-        return i->second == tags::status_supported;
+        return i->second;
 
-    return false;
-}
-
-bool tag_adaptor::is_io_enabled() const {
-    const auto& key(tags::cpp::io::status);
-    const auto i(simple_tags_.find(key));
-    if (i != simple_tags_.end())
-        return i->second == tags::status_supported;
-
-    return false;
+    return empty;
 }
 
 std::list<std::pair<std::string,std::string> > tag_adaptor::odb_pragma() const {

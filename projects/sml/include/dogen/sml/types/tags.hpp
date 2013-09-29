@@ -79,6 +79,11 @@ struct tags {
     static const std::string is_original_parent_visitable;
 
     /**
+     * @brief If true, the type cannot be inherited from.
+     */
+    static const std::string is_final;
+
+    /**
      * @brief Valid values for Boolean types.
      */
     static const std::string bool_true;
@@ -89,6 +94,7 @@ struct tags {
      */
     static const std::string status_unsupported;
     static const std::string status_supported;
+    static const std::string status_handcrafted;
 
     /**
      * @brief All parameters specific to the C++ language.
@@ -143,13 +149,37 @@ struct tags {
             static const std::string status;
 
             /**
-             * @brief If set to true, explicitly defaulted/deleted
-             * functions will be generated.
+             * @brief If set to true, all special defaulted functions
+             * will be generated.
              *
              * Note that other tags may still influence specific
              * defaulted functions.
              */
-            static const std::string generate_explicitly_defaulted_functions;
+            static const std::string generate_defaulted_functions;
+
+            /**
+             * @brief If set to true, a default constructor will be
+             * generated.
+             */
+            static const std::string generate_explicit_default_constructor;
+
+            /**
+             * @brief If set to true, a move constructor will be
+             * generated.
+             */
+            static const std::string generate_explicit_move_constructor;
+
+            /**
+             * @brief If set to true, a destructor will be
+             * generated.
+             */
+            static const std::string generate_explicit_destructor;
+
+            /**
+             * @brief If set to true, an assignment operator will be
+             * generated.
+             */
+            static const std::string generate_explicit_assignment_operator;
 
             /**
              * @brief If set to true, a complete constructor will be
@@ -158,29 +188,33 @@ struct tags {
             static const std::string generate_complete_constructor;
 
             /**
-             * @brief If set to true, equality operators will be
+             * @brief If set to true, the equality operator will be
              * generated.
              */
             static const std::string generate_equality;
+
+            /**
+             * @brief If set to true, friends will be declared.
+             */
+            static const std::string generate_friends;
+
+            /**
+             * @brief If set to true, streaming methods will be
+             * generated.
+             */
+            static const std::string generate_to_stream;
+
+            /**
+             * @brief If set to true, the visitor accept methods will
+             * be generated.
+             */
+            static const std::string generate_accept;
 
             /**
              * @brief If set to true, swap function will be
              * generated.
              */
             static const std::string generate_swap;
-
-            /**
-             * @brief If true, a manual default constructor is
-             * generated, otherwise the compiler generated will be
-             * used.
-             */
-            static const std::string requires_manual_default_constructor;
-
-            /**
-             * @brief If true, a manual move constructor is generated,
-             * otherwise the compiler generated will be used.
-             */
-            static const std::string requires_manual_move_constructor;
 
             /**
              * @brief Parameters associated with the domain header file.

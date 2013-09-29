@@ -27,48 +27,67 @@ const std::string tags::odb_pragma("ODB_PRAGMA");
 const std::string tags::comment("COMMENT");
 const std::string tags::identity_attribute("IDENTITY_ATTRIBUTE");
 const std::string tags::generate_preamble("GENERATE_PREAMBLE");
-const std::string tags::original_parent_name("cpp.original_parent_name");
+const std::string tags::original_parent_name("original_parent_name");
 const std::string tags::is_original_parent_visitable(
     "is_original_parent_visitable");
+const std::string tags::is_final("is_final");
+
 const std::string tags::bool_true("true");
 const std::string tags::bool_false("false");
+
 const std::string tags::status_unsupported("unsupported");
 const std::string tags::status_supported("supported");
+const std::string tags::status_handcrafted("handcrafted");
+
 const std::string tags::cpp::type::family("cpp.type.family");
 const std::string tags::cpp::type::is_simple_type("cpp.type.is_simple_type");
 const std::string tags::cpp::type::complete_name("cpp.type.complete_name");
 const std::string tags::cpp::type::qualified_name("cpp.type.qualified_name");
 const std::string tags::cpp::type::qualified_original_parent_name(
     "cpp.type.qualified_original_parent_name");
+
 const std::string tags::cpp::domain::status("cpp.domain.status");
-const std::string tags::cpp::domain::generate_explicitly_defaulted_functions(
-    "cpp.domain.generate_explicitly_defaulted_functions");
+const std::string tags::cpp::domain::generate_defaulted_functions(
+    "cpp.domain.generate_defaulted_functions");
+const std::string tags::cpp::domain::generate_explicit_default_constructor(
+    "generate_explicit_default_constructor");
+const std::string tags::cpp::domain::generate_explicit_move_constructor(
+    "generate_explicit_move_constructor");
+const std::string tags::cpp::domain::generate_explicit_destructor(
+    "generate_explicit_destructor_constructor");
+const std::string tags::cpp::domain::generate_explicit_assignment_operator(
+    "generate_explicit_assignment_operator");
 const std::string tags::cpp::domain::generate_complete_constructor(
     "cpp.domain.generate_complete_constructor");
 const std::string tags::cpp::domain::generate_equality(
     "cpp.domain.generate_equality");
 const std::string tags::cpp::domain::generate_swap("cpp.domain.generate_swap");
-const std::string tags::cpp::domain::
-requires_manual_default_constructor(
-    "cpp.domain.requires_manual_default_constructor");
-const std::string tags::cpp::domain::
-requires_manual_move_constructor("cpp.domain.requires_manual_move_constructor");
+const std::string tags::cpp::domain::generate_friends(
+    "cpp.domain.generate_friends");
+const std::string tags::cpp::domain::generate_to_stream(
+    "cpp.domain.generate_to_stream");
+const std::string tags::cpp::domain::generate_accept(
+    "cpp.domain.generate_accept");
+
 const std::string tags::cpp::domain::header::file_name(
     "cpp.domain.header.file_name");
 const std::string tags::cpp::domain::header::is_system(
     "cpp.domain.header.is_system");
+
 const std::string tags::cpp::hash::standard::status(
     "cpp.hash.standard.status");
 const std::string tags::cpp::hash::standard::header::file_name(
     "cpp.hash.standard.header.file_name");
 const std::string tags::cpp::hash::standard::header::is_system(
     "cpp.hash.standard.header.is_system");
+
 const std::string tags::cpp::serialization::boost::status(
     "cpp.serialization.boost.status");
 const std::string tags::cpp::serialization::boost::header::
 file_name("cpp.serialization.boost.header.file_name");
 const std::string tags::cpp::serialization::boost::header::
 is_system("cpp.serialization.boost.header.is_system");
+
 const std::string tags::cpp::io::status("cpp.io.status");
 const std::string tags::cpp::io::header::file_name(
     "cpp.io.header.file_name");

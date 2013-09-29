@@ -333,7 +333,7 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
 
     for (const auto& p : ae.properties()) {
         auto adaptor(make_tag_adaptor(p));
-        if (adaptor.has_identity())
+        if (adaptor.has_key(sml::tags::identity_attribute))
             ae.identity().push_back(p);
     }
 }
@@ -454,7 +454,7 @@ void transformer::from_note(const processed_object& o) {
         router.route_if(pair.second, sml::tags::comment);
 
         auto adaptor(make_tag_adaptor(model));
-        if (adaptor.has_comment())
+        if (adaptor.has_key(sml::tags::comment))
             model.documentation(pair.first);
 
         return;
@@ -482,7 +482,7 @@ void transformer::from_note(const processed_object& o) {
     router.route_if(pair.second, sml::tags::comment);
 
     auto adaptor(make_tag_adaptor(module));
-    if (adaptor.has_comment())
+    if (adaptor.has_key(sml::tags::comment))
         module.documentation(pair.first);
 }
 
