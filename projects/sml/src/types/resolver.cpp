@@ -24,9 +24,6 @@
 #include <functional>
 #include <iterator>
 #include <algorithm>
-// #include <iostream>
-// #include "dogen/utility/io/set_io.hpp"
-// #include "dogen/utility/io/list_io.hpp"
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
@@ -65,7 +62,12 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace sml {
 
-// FIXME: hack
+/**
+ * @brief Add comparable support for qnames.
+ *
+ * This is required as part of the current (very sub-optimal)
+ * implementation of concept processing.
+ */
 bool operator<(const qname& lhs, const qname& rhs) {
     return
         lhs.model_name() < rhs.model_name() ||
@@ -97,9 +99,6 @@ expand_concept_hierarchy(const qname& qn, std::list<qname>& concepts) const {
 }
 
 void resolver::validate_inheritance_graph(const abstract_object& ao) const {
-    // FIXME: we should really just check that the parent exists since
-    // we know all objects get checked anyway. this results in a lot of
-    // double-checks for no reason.
     auto parent(ao.parent_name());
     while (parent) {
         qname pqn(*parent);
@@ -283,28 +282,29 @@ void resolver::resolve_objects() {
         resolve_properties(o.name(), o.properties());
         resolve_operations(o.name(), o.operations());
 
-        //FIXME: start of biggest hack ever
         if (o.modeled_concepts().empty())
             continue;
 
+        /*
+         * first pass to expand concepts. we basically want to find
+         * out the complete set of concepts this type models, taking
+         * into account all the refinement relationships they may have
+         * with other concepts.
+         */
         std::list<qname> expanded_modeled_concepts;
         for (const auto& qn : o.modeled_concepts())
             expand_concept_hierarchy(qn, expanded_modeled_concepts);
 
-        // std::cout << "type: " << o.name().simple_name() << std::endl;
-
-        // std::cout << "after expand: " << expanded_modeled_concepts.size()
-        //           << std::endl
-        //           << " " << expanded_modeled_concepts << std::endl;
-
         o.modeled_concepts().clear();
         for (const auto& qn : expanded_modeled_concepts)
             o.modeled_concepts().push_back(qn);
-
-        // std::cout << "modeled: " << o.modeled_concepts().size() << std::endl;
     }
 
-    //FIXME: biggest hack ever - continued
+    /*
+     * second pass to expand concepts. we now look at all of the
+     * inheritance relationships and remove any concepts which have
+     * already been modeled by the type's parent.
+     */
     for (auto& pair : model_.objects()) {
         auto& o(*pair.second);
 
@@ -312,10 +312,6 @@ void resolver::resolve_objects() {
             continue;
 
         BOOST_LOG_SEV(lg, debug) << "Resolving concepts for type: " << o.name();
-
-        // std::cout << "type2: " << o.name().simple_name() << std::endl;
-        // std::cout << "modeled: " << o.modeled_concepts().size() << std::endl;
-
         std::set<qname> mc;
         for (const auto& qn : o.modeled_concepts())
             mc.insert(qn);
@@ -330,25 +326,16 @@ void resolver::resolve_objects() {
             parent = i->second->parent_name();
         }
 
-        // std::cout << "pmc: " << pmc << std::endl
-        //           << "mc: " << mc  << std::endl;
-
         std::set<qname> result;
         std::set_difference(mc.begin(), mc.end(), pmc.begin(), pmc.end(),
             std::inserter(result, result.end()));
 
-        // std::cout << "result: " << result << std::endl;
         auto tmp(o.modeled_concepts());
         o.modeled_concepts().clear();
         for (const auto& qn : tmp) {
             if (result.find(qn) != result.end())
                 o.modeled_concepts().push_back(qn);
-            // else
-            //     std::cout << "could not find: " << qn.simple_name()
-            //               << " qn: " << qn
-            //               << std::endl;
         }
-        // std::cout << "mc size: " << o.modeled_concepts().size() << std::endl;
     }
 }
 
