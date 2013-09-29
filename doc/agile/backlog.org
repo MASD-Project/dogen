@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Concept resolution is not particularly clean                      :story:
+
+At present resolver is tasked with converting the hierarchy of
+concepts into a container with a set of =qnames= that represent the
+concepts the type models. It takes into account both the inheritance
+from a concept perspective (e.g. refinement) and the type-related
+inheritance (e.g. if our parent already models a concept we do not
+have to model it too). However, the code is very hacky and needs to be
+cleaned up.
+
 *** Do not copy models in merger                                      :story:
 
 At present we are adding the partial models into the merger by copying
