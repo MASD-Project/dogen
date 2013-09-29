@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Validate inheritance graph does a lot of double-checks            :story:
+
+In method =validate_inheritance_graph=, we should really just check
+that the parent exists since we know all objects get checked
+anyway. this results in a lot of double-checks for no reason.
+
 *** Concept resolution is not particularly clean                      :story:
 
 At present resolver is tasked with converting the hierarchy of
