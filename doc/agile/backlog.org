@@ -11,6 +11,21 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Create includers for value objects only                           :story:
+
+At present we are using the facet includers in unit tests. This is not
+ideal because it means that every time we do a change in a service
+header, all tests recompile. In reality we should have two types of
+inclusions:
+
+- canned tests should include only value objects, etc - e.g. no
+  services.
+- service tests should include the header for the service and any
+  additional dependencies the service may require.
+
+Perhaps we could have a second type of includer that only has value
+objects, etc.
+
 *** Validate inheritance graph does a lot of double-checks            :story:
 
 In method =validate_inheritance_graph=, we should really just check
