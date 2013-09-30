@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <iostream>
 #include <iosfwd>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/sml/types/type.hpp"
@@ -53,8 +52,6 @@ private:
         for (auto j(i->second.begin()); j != i->second.end(); ++j) {
             const auto field_name(j->first);
             const auto field_value(j->second.get_value<std::string>());
-            std::cout << "k: " << field_name << std::endl;
-            std::cout << "v: " << field_value << std::endl;
             router.route(field_name, field_value);
         }
     }

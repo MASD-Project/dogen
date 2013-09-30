@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -38,10 +39,9 @@ const std::string documentation("a_doc");
 const std::string type_name("a_type");
 const std::string model_key("model_key");
 const std::string model_value("model_value");
-const std::string odb_pragma_key("type_key");
 const std::string odb_pragma_value("odb_pragma_value");
 const std::string type_key("type_key");
-const std::string type_value("type_value");
+const std::string type_value("true");
 
 const std::string trivial_model(R"({
     "model_name" : "a_model",
@@ -60,22 +60,18 @@ const std::string tagged_model(R"({
     "model_name" : "a_model",
     "documentation" : "a_doc",
     "origin" : "system",
-    "tags" : [
-        {
+    "tags" : {
             "model_key" : "model_value",
-            "ODB_PRAGMA" : "odb_pragma"
-        }
-    ],
+            "ODB_PRAGMA" : "odb_pragma_value"
+    },
     "types" : [
         {
             "meta_type" : "value_object",
             "simple_name" : "a_type",
-            "tags" : [
-                {
-                    "type_key" : "type_value",
-                    "ODB_PRAGMA" : "type_odb_pragma"
-                }
-            ]
+            "tags" : {
+                    "type_key" : true,
+                    "ODB_PRAGMA" : "odb_pragma_value"
+            }
        }
    ]
 }
@@ -123,18 +119,20 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().model_name() == model_name);
     BOOST_CHECK(m.name().module_path().empty());
     BOOST_CHECK(m.name().external_module_path().empty());
-    // BOOST_CHECK(m.complex_tags().size() == 1);
+    BOOST_CHECK(m.complex_tags().size() == 1);
 
-    // const auto i(m.complex_tags().find(odb_pragma_key));
-    // BOOST_REQUIRE(i != m.complex_tags().end());
-    // BOOST_CHECK(i->second.size() != 0);
-    // BOOST_CHECK(i->second.front() == odb_pragma_value);
+    {
+        const auto i(m.complex_tags().find(dogen::sml::tags::odb_pragma));
+        BOOST_REQUIRE(i != m.complex_tags().end());
+        BOOST_CHECK(i->second.size() != 0);
+        BOOST_CHECK(i->second.front() == odb_pragma_value);
 
-    // BOOST_CHECK(m.simple_tags().size() == 1);
-    // const auto j(m.simple_tags().find(model_key));
-    // BOOST_REQUIRE(j != m.simple_tags().end());
-    // BOOST_CHECK(j->first != model_key);
-    // BOOST_CHECK(j->second == model_value);
+        BOOST_CHECK(m.simple_tags().size() == 1);
+        const auto j(m.simple_tags().find(model_key));
+        BOOST_REQUIRE(j != m.simple_tags().end());
+        BOOST_CHECK(j->first == model_key);
+        BOOST_CHECK(j->second == model_value);
+    }
 
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -146,6 +144,20 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(qn.model_name() == m.name().model_name());
     BOOST_CHECK(qn.module_path().empty());
     BOOST_CHECK(qn.external_module_path().empty());
+
+    {
+        const auto& o(*pair.second);
+        const auto i(o.complex_tags().find(dogen::sml::tags::odb_pragma));
+        BOOST_REQUIRE(i != o.complex_tags().end());
+        BOOST_CHECK(i->second.size() != 0);
+        BOOST_CHECK(i->second.front() == odb_pragma_value);
+
+        BOOST_CHECK(o.simple_tags().size() == 1);
+        const auto j(o.simple_tags().find(type_key));
+        BOOST_REQUIRE(j != o.simple_tags().end());
+        BOOST_CHECK(j->first == type_key);
+        BOOST_CHECK(j->second == type_value);
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

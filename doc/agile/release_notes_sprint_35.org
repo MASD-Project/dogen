@@ -199,6 +199,7 @@ We need to create language specific classes to propagate parameters,
 assign proper defaults to them, etc.
 
 *** IMPLEMENTATION Create an hydrator from JSON into SML              :story:
+    CLOCK: [2013-09-30 Mon 22:55]--[2013-09-30 Mon 23:20] =>  0:25
     CLOCK: [2013-09-29 Sun 19:34]--[2013-09-29 Sun 21:05] =>  1:31
     CLOCK: [2013-09-29 Sun 19:25]--[2013-09-29 Sun 19:34] =>  0:09
 
