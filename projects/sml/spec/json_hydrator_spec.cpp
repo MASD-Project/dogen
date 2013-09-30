@@ -42,6 +42,15 @@ const std::string model_value("model_value");
 const std::string odb_pragma_value("odb_pragma_value");
 const std::string type_key("type_key");
 const std::string type_value("true");
+const std::string module_path_key("module_path");
+const std::string module_path_value_1("module_1");
+const std::string module_path_value_2("module_2");
+const std::string module_path_value_3("module_3");
+
+const std::string missing_model_name("model_name");
+const std::string missing_type_name("simple_name");
+const std::string missing_origin("origin");
+const std::string missing_types("types");
 
 const std::string trivial_model(R"({
     "model_name" : "a_model",
@@ -50,7 +59,8 @@ const std::string trivial_model(R"({
     "types" : [
         {
             "meta_type" : "value_object",
-            "simple_name" : "a_type"
+            "simple_name" : "a_type",
+            "documentation" : "a_doc"
         }
      ]
   }
@@ -68,6 +78,7 @@ const std::string tagged_model(R"({
         {
             "meta_type" : "value_object",
             "simple_name" : "a_type",
+            "documentation" : "a_doc",
             "tags" : {
                     "type_key" : true,
                     "ODB_PRAGMA" : "odb_pragma_value"
@@ -77,6 +88,83 @@ const std::string tagged_model(R"({
 }
 )");
 
+const std::string no_documentation_model(R"({
+    "model_name" : "a_model",
+    "origin" : "system",
+    "types" : [
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "a_type"
+        }
+     ]
+  }
+)");
+
+const std::string no_name_model(R"({
+    "origin" : "system",
+    "types" : [
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "a_type"
+        }
+     ]
+  }
+)");
+
+const std::string no_type_name_model(R"({
+    "model_name" : "a_model",
+    "origin" : "system",
+    "types" : [
+        {
+            "meta_type" : "value_object"
+        }
+     ]
+  }
+)");
+
+const std::string no_origin_model(R"({
+    "model_name" : "a_model",
+    "types" : [
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "a_type"
+        }
+     ]
+  }
+)");
+
+const std::string no_types_model(R"({
+    "model_name" : "a_model",
+    "origin" : "system"
+  }
+)");
+
+const std::string empty_types_model(R"({
+    "model_name" : "a_model",
+    "origin" : "system",
+    "types" : [ ]
+  }
+)");
+
+const std::string module_path_model(R"({
+    "model_name" : "a_model",
+    "origin" : "system",
+    "module_path" : [ "module_1", "module_2", "module_3" ],
+    "types" : [
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "a_type",
+            "module_path" : [ "module_1" ]
+        }
+     ]
+  }
+)");
+
+dogen::sml::model hydrate(const std::string content) {
+    std::istringstream s(content);
+    dogen::sml::json_hydrator h;
+    return h.hydrate(s);
+}
 
 }
 
@@ -88,14 +176,13 @@ BOOST_AUTO_TEST_SUITE(json_hydrator)
 BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("trivial_model_hydrates_into_expected_model");
 
-    std::istringstream s(trivial_model);
-    dogen::sml::json_hydrator h;
-    const auto m(h.hydrate(s));
-
+    const auto m(hydrate(trivial_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
     BOOST_CHECK(m.name().model_name() == model_name);
     BOOST_CHECK(m.name().module_path().empty());
     BOOST_CHECK(m.name().external_module_path().empty());
+    BOOST_CHECK(m.documentation() == documentation);
 
     BOOST_REQUIRE(m.objects().size() == 1);
     const auto& pair(*m.objects().begin());
@@ -106,19 +193,19 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     BOOST_CHECK(qn.model_name() == m.name().model_name());
     BOOST_CHECK(qn.module_path().empty());
     BOOST_CHECK(qn.external_module_path().empty());
+    BOOST_CHECK(pair.second->documentation() == documentation);
 }
 
 BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("tagged_model_hydrates_into_expected_model");
 
-    std::istringstream s(tagged_model);
-    dogen::sml::json_hydrator h;
-    const auto m(h.hydrate(s));
-
+    const auto m(hydrate(tagged_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
     BOOST_CHECK(m.name().model_name() == model_name);
     BOOST_CHECK(m.name().module_path().empty());
     BOOST_CHECK(m.name().external_module_path().empty());
+    BOOST_CHECK(m.documentation() == documentation);
     BOOST_CHECK(m.complex_tags().size() == 1);
 
     {
@@ -144,6 +231,7 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(qn.model_name() == m.name().model_name());
     BOOST_CHECK(qn.module_path().empty());
     BOOST_CHECK(qn.external_module_path().empty());
+    BOOST_CHECK(pair.second->documentation() == documentation);
 
     {
         const auto& o(*pair.second);
@@ -157,6 +245,78 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
         BOOST_REQUIRE(j != o.simple_tags().end());
         BOOST_CHECK(j->first == type_key);
         BOOST_CHECK(j->second == type_value);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(no_documentation_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("no_documentation_model_hydrates_into_expected_model");
+
+    const auto m(hydrate(no_documentation_model));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    BOOST_CHECK(m.documentation().empty());
+    BOOST_REQUIRE(m.objects().size() == 1);
+    const auto& pair(*m.objects().begin());
+    BOOST_CHECK(pair.second->documentation().empty());
+}
+
+BOOST_AUTO_TEST_CASE(no_name_model_throws) {
+    SETUP_TEST_LOG_SOURCE("no_name_model_throws");
+    contains_checker<hydration_error> c(missing_model_name);
+    BOOST_CHECK_EXCEPTION(hydrate(no_name_model), hydration_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(no_type_name_model_throws) {
+    SETUP_TEST_LOG_SOURCE("no_type_name_model_throws");
+    contains_checker<hydration_error> c(missing_type_name);
+    BOOST_CHECK_EXCEPTION(hydrate(no_type_name_model), hydration_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(no_origin_model_throws) {
+    SETUP_TEST_LOG_SOURCE("no_origin_model_throws");
+    contains_checker<hydration_error> c(missing_origin);
+    BOOST_CHECK_EXCEPTION(hydrate(no_origin_model), hydration_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(no_types_model_throws) {
+    SETUP_TEST_LOG_SOURCE("no_types_model_throws");
+    contains_checker<hydration_error> c(missing_types);
+    BOOST_CHECK_EXCEPTION(hydrate(no_types_model), hydration_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(empty_types_model_throws) {
+    SETUP_TEST_LOG_SOURCE("empty_types_model_throws");
+    contains_checker<hydration_error> c(missing_types);
+    BOOST_CHECK_EXCEPTION(hydrate(empty_types_model), hydration_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("module_path_model_hydrates_into_expected_model");
+
+    const auto m(hydrate(module_path_model));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    {
+        const auto mp(m.name().module_path());
+        BOOST_REQUIRE(mp.size() == 3);
+        auto i(mp.begin());
+        BOOST_CHECK(*i == module_path_value_1);
+        BOOST_CHECK((*(++i)) == module_path_value_2);
+        BOOST_CHECK((*(++i)) == module_path_value_3);
+        BOOST_CHECK(m.name().external_module_path().empty());
+    }
+
+    BOOST_REQUIRE(m.objects().size() == 1);
+    const auto& pair(*m.objects().begin());
+    const auto& qn(pair.second->name());
+
+    BOOST_CHECK(pair.first == qn);
+    {
+        const auto mp(qn.module_path());
+        BOOST_REQUIRE(mp.size() == 1);
+        auto i(mp.begin());
+        BOOST_CHECK(*i == module_path_value_1);
+        BOOST_CHECK(qn.external_module_path().empty());
     }
 }
 

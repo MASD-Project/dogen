@@ -38,7 +38,7 @@ const std::string invalid_group_name("Invalid group name: ");
 const std::string invalid_ini_file("Failed to parse INI file: ");
 const std::string invalid_option_in_ini_file(
     "Failed to read option in INI file: ");
-const std::string invalid_path("Failed to find INI file: ");
+const std::string invalid_path("Failed to find INI path: ");
 const std::string invalid_directory("Not a directory: ");
 const std::string directory_not_found("Could not find directory: ");
 const std::string editor_not_supplied("Editor was not supplied");

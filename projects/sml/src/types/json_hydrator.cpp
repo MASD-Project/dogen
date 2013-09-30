@@ -54,7 +54,7 @@ const std::string tags_key("tags");
 const std::string invalid_json_file("Failed to parse JSON file: ");
 const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
-const std::string invalid_path("Failed to find JSON file: ");
+const std::string invalid_path("Failed to find JSON path: ");
 const std::string invalid_origin("Invalid value for origin: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
 const std::string model_has_no_types("Did not find any types in model");
@@ -72,24 +72,30 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
     qn.simple_name(simple_name_value);
 
+    const auto documentation(pt.get_optional<std::string>(documentation_key));
+
     const auto i(pt.find(module_path_key));
     if (i != pt.not_found()) {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
             qn.module_path().push_back(j->second.get_value<std::string>());
     }
 
+    const auto lambda([&](type& t) {
+            t.name(qn);
+            t.generation_type(generation_types::no_generation);
+            if (documentation)
+                t.documentation(*documentation);
+            read_tags<type>(pt, t);
+        });
+
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
     if (meta_type_value == meta_type_value_object_value) {
         auto vo(boost::make_shared<sml::value_object>());
-        vo->name(qn);
-        vo->generation_type(generation_types::no_generation);
-        read_tags(pt, *vo);
+        lambda(*vo);
         m.objects().insert(std::make_pair(qn, vo));
     } else if (meta_type_value == meta_type_primitive_value) {
         primitive p;
-        p.name(qn);
-        p.generation_type(generation_types::no_generation);
-        read_tags(pt, p);
+        lambda(p);
         m.primitives().insert(std::make_pair(qn, p));
     }
     else {
@@ -109,9 +115,16 @@ model json_hydrator::read_stream(std::istream& s) const {
 
     read_tags(pt, r);
     r.name().model_name(pt.get<std::string>(model_name_key));
-    const auto doc(pt.get_optional<std::string>(documentation_key));
-    if (doc)
-        r.documentation(*doc);
+
+    auto i(pt.find(module_path_key));
+    if (i != pt.not_found()) {
+        for (auto j(i->second.begin()); j != i->second.end(); ++j)
+            r.name().module_path().push_back(j->second.get_value<std::string>());
+    }
+
+    const auto documentation(pt.get_optional<std::string>(documentation_key));
+    if (documentation)
+        r.documentation(*documentation);
 
     const auto origin_value(pt.get<std::string>(origin_key));
     if (origin_value == origin_system_value)
@@ -123,8 +136,8 @@ model json_hydrator::read_stream(std::istream& s) const {
         BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
     }
 
-    const auto i(pt.find(types_key));
-    if (i == pt.not_found()) {
+    i = pt.find(types_key);
+    if (i == pt.not_found() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << model_has_no_types;
         BOOST_THROW_EXCEPTION(hydration_error(model_has_no_types));
     }
