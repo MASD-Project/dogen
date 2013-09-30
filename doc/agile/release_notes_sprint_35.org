@@ -10,23 +10,23 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-30 Mon 19:36]
+Clock summary at [2013-10-01 Tue 00:19]
 
 | Headline                                                     | Time    |       |       |
 |--------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                 | *23:58* |       |       |
+| *Total time*                                                 | *25:21* |       |       |
 |--------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                              |         | 23:58 |       |
+| Development Stories Implemented                              |         | 25:21 |       |
 | IMPLEMENTATION Release notes and backlog grooming            |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion          |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list |         |       |  1:06 |
 | COMPLETED Rename implementation specific parameters          |         |       |  0:50 |
 | COMPLETED Add meta-data support to SML                       |         |       |  5:04 |
 | COMPLETED Fix includes in SML tests                          |         |       |  0:42 |
+| COMPLETED Create an hydrator from JSON into SML              |         |       |  3:03 |
 | IMPLEMENTATION Implement the property cache in SML           |         |       |  1:14 |
 | IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 10:42 |
 | IMPLEMENTATION Implement tagger                              |         |       |  1:29 |
-| IMPLEMENTATION Create an hydrator from JSON into SML         |         |       |  1:40 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -134,6 +134,18 @@ At present we are using the facet includers in SML which results in
 really long compilations everytime we change a service. Manually fix
 the tests to only include the required objects.
 
+*** COMPLETED Create an hydrator from JSON into SML                   :story:
+    CLOSED: [2013-10-01 Tue 00:19]
+    CLOCK: [2013-10-01 Tue 00:03]--[2013-10-01 Tue 00:19] =>  0:16
+    CLOCK: [2013-09-30 Mon 23:21]--[2013-10-01 Tue 00:03] =>  0:42
+    CLOCK: [2013-09-30 Mon 22:55]--[2013-09-30 Mon 23:20] =>  0:25
+    CLOCK: [2013-09-29 Sun 19:34]--[2013-09-29 Sun 21:05] =>  1:31
+    CLOCK: [2013-09-29 Sun 19:25]--[2013-09-29 Sun 19:34] =>  0:09
+
+Using the JSON representation defined in the previous iteration (in
+data/library) and boost property tree, create an hydrator/transformer
+that generates SML models.
+
 *** IMPLEMENTATION Implement the property cache in SML                :story:
     CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08
     CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
@@ -197,16 +209,6 @@ there and then.
 
 We need to create language specific classes to propagate parameters,
 assign proper defaults to them, etc.
-
-*** IMPLEMENTATION Create an hydrator from JSON into SML              :story:
-    CLOCK: [2013-09-30 Mon 23:21]--[2013-10-01 Tue 00:03] =>  0:42
-    CLOCK: [2013-09-30 Mon 22:55]--[2013-09-30 Mon 23:20] =>  0:25
-    CLOCK: [2013-09-29 Sun 19:34]--[2013-09-29 Sun 21:05] =>  1:31
-    CLOCK: [2013-09-29 Sun 19:25]--[2013-09-29 Sun 19:34] =>  0:09
-
-Using the JSON representation defined in the previous iteration (in
-data/library) and boost property tree, create an hydrator/transformer
-that generates SML models.
 
 *** Create an SML level concept for facets                            :story:
 

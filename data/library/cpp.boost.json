@@ -63,7 +63,7 @@
             "meta_type" : "value_object",
             "simple_name" : "io_service",
             "module_path" : [
-                "asio",
+                "asio"
             ],
             "tags" : {
                 "cpp.domain.header.file_name" : "boost/asio/io_service.hpp",

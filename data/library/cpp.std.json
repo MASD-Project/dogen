@@ -40,7 +40,7 @@
             "meta_type" : "primitive",
             "simple_name" : "int64_t",
             "default_value" : "0",
-            "tags" : [
+            "tags" : {
                 "cpp.type.family" : "integer",
                 "cpp.domain.header.file_name" : "cstdint",
                 "cpp.domain.header.is_system" : true,

@@ -20,7 +20,9 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
+#include <boost/filesystem/fstream.hpp>
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/filesystem/path.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -46,6 +48,10 @@ const std::string module_path_key("module_path");
 const std::string module_path_value_1("module_1");
 const std::string module_path_value_2("module_2");
 const std::string module_path_value_3("module_3");
+
+const std::string cpp_std_model("library/cpp.std.json");
+const std::string cpp_boost_model("library/cpp.boost.json");
+const std::string hardware_model("library/hardware.json");
 
 const std::string missing_model_name("model_name");
 const std::string missing_type_name("simple_name");
@@ -318,6 +324,39 @@ BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {
         BOOST_CHECK(*i == module_path_value_1);
         BOOST_CHECK(qn.external_module_path().empty());
     }
+}
+
+BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("cpp_std_model_hydrates_into_expected_model");
+
+    using namespace dogen::utility::filesystem;
+    boost::filesystem::path p(data_files_directory() / cpp_std_model);
+    boost::filesystem::ifstream s(p);
+    dogen::sml::json_hydrator h;
+    const auto m(h.hydrate(s));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
+
+    using namespace dogen::utility::filesystem;
+    boost::filesystem::path p(data_files_directory() / cpp_boost_model);
+    boost::filesystem::ifstream s(p);
+    dogen::sml::json_hydrator h;
+    const auto m(h.hydrate(s));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+}
+
+BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("hardware_model_hydrates_into_expected_model");
+
+    using namespace dogen::utility::filesystem;
+    boost::filesystem::path p(data_files_directory() / hardware_model);
+    boost::filesystem::ifstream s(p);
+    dogen::sml::json_hydrator h;
+    const auto m(h.hydrate(s));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
 }
 
 BOOST_AUTO_TEST_SUITE_END()
