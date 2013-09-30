@@ -22,12 +22,12 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/types/all.hpp"
-#include "dogen/sml/io/all_io.hpp"
-#include "dogen/utility/test/equality_tester.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/merger.hpp"
+#include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 

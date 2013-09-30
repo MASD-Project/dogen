@@ -21,8 +21,12 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/types/all.hpp"
-#include "dogen/sml/io/all_io.hpp"
+#include "dogen/sml/types/boost_model_factory.hpp"
+#include "dogen/sml/types/std_model_factory.hpp"
+#include "dogen/sml/types/primitive_model_factory.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 namespace {
 

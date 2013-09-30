@@ -36,6 +36,12 @@ const std::string test_suite("json_hydrator_spec");
 const std::string model_name("a_model");
 const std::string documentation("a_doc");
 const std::string type_name("a_type");
+const std::string model_key("model_key");
+const std::string model_value("model_value");
+const std::string odb_pragma_key("type_key");
+const std::string odb_pragma_value("odb_pragma_value");
+const std::string type_key("type_key");
+const std::string type_value("type_value");
 
 const std::string trivial_model(R"({
     "model_name" : "a_model",
@@ -48,6 +54,31 @@ const std::string trivial_model(R"({
         }
      ]
   }
+)");
+
+const std::string tagged_model(R"({
+    "model_name" : "a_model",
+    "documentation" : "a_doc",
+    "origin" : "system",
+    "tags" : [
+        {
+            "model_key" : "model_value",
+            "ODB_PRAGMA" : "odb_pragma"
+        }
+    ],
+    "types" : [
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "a_type",
+            "tags" : [
+                {
+                    "type_key" : "type_value",
+                    "ODB_PRAGMA" : "type_odb_pragma"
+                }
+            ]
+       }
+   ]
+}
 )");
 
 
@@ -71,6 +102,42 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().external_module_path().empty());
 
     BOOST_REQUIRE(m.objects().size() == 1);
+    const auto& pair(*m.objects().begin());
+    const auto& qn(pair.second->name());
+
+    BOOST_CHECK(pair.first == qn);
+    BOOST_CHECK(qn.simple_name() == type_name);
+    BOOST_CHECK(qn.model_name() == m.name().model_name());
+    BOOST_CHECK(qn.module_path().empty());
+    BOOST_CHECK(qn.external_module_path().empty());
+}
+
+BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("tagged_model_hydrates_into_expected_model");
+
+    std::istringstream s(tagged_model);
+    dogen::sml::json_hydrator h;
+    const auto m(h.hydrate(s));
+
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_CHECK(m.name().model_name() == model_name);
+    BOOST_CHECK(m.name().module_path().empty());
+    BOOST_CHECK(m.name().external_module_path().empty());
+    // BOOST_CHECK(m.complex_tags().size() == 1);
+
+    // const auto i(m.complex_tags().find(odb_pragma_key));
+    // BOOST_REQUIRE(i != m.complex_tags().end());
+    // BOOST_CHECK(i->second.size() != 0);
+    // BOOST_CHECK(i->second.front() == odb_pragma_value);
+
+    // BOOST_CHECK(m.simple_tags().size() == 1);
+    // const auto j(m.simple_tags().find(model_key));
+    // BOOST_REQUIRE(j != m.simple_tags().end());
+    // BOOST_CHECK(j->first != model_key);
+    // BOOST_CHECK(j->second == model_value);
+
+    BOOST_REQUIRE(m.objects().size() == 1);
+
     const auto& pair(*m.objects().begin());
     const auto& qn(pair.second->name());
 
