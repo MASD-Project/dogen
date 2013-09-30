@@ -11,6 +11,48 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Consider adding merging code generation support                   :story:
+
+At present it is not possible to manually add methods to a class that
+was code generated; one must stop code generating the class and
+maintain the whole class manually. However, in some cases it makes
+sense to have a combination of both:
+
+- value objects need helper methods such as for example boolean
+  properties (e.g. =is_empty=) that make use of other properties, or
+  simple methods such as population etc that really belong to the
+  object rather than an external service
+- services sometimes need state and it would be good if we could
+  manage that via code generation.
+
+For this we need a merging code generator: that is, a code generator
+that is aware of code that was crafted manually and does not overwrite
+it - but instead "intelligently" merges manual with code generated
+code.
+
+From the beginning we avoided this because we thought it would be too
+complicated for dogen. However, its increasingly becoming apparent
+that this is a needed feature for the real world - there are many
+cases where we are working around this deficiency. A few solutions are
+possible:
+
+- let the code generator manage the header file and create two types
+  of CPP files, one which includes the other: a manual and an
+  "automatic" one. This would effectively separate the two types of
+  code. For this dogen would have to be able to generate complex types
+  in operations (e.g. we'd have to solve the lack of support for
+  =const std::string&=).
+- use clang to do the merging. this probably means adding some kind of
+  attribute to every method - possibly using C++ attribute support
+  (e.g. =[ [generated ] ]= and/or =[ [ manual ] ]= (spaces due to org
+  mode). We could then say to clang: read current state of the file,
+  grab every non-generated method and copy them across to the newly
+  code generated file. Merging could be the final stage before
+  writing. In addition, we should also have some meta-data to
+  determine which files require merging. The meta-data could be
+  populated automatically (e.g. grep for the manual attribute) or
+  manually.
+
 *** Create includers for value objects only                           :story:
 
 At present we are using the facet includers in unit tests. This is not
@@ -270,7 +312,7 @@ due to this are like so:
 : 2013-06-29 23:10:34.831294 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/sml/src/types/resolver.cpp(202): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname&) const
 : Dynamic exception type: boost::exception_detail::clone_impl<dogen::sml::resolution_error>
 
-*** Visitor adaptor for usage in rages
+*** Visitor adaptor for usage in ranges
 
 It would be great if we automatically generated an adaptor to visitors
 which could be plugged into a range. Internally the adaptor would
