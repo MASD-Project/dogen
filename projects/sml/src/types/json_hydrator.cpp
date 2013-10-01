@@ -35,6 +35,8 @@ namespace {
 
 auto lg(logger_factory("sml.json_hydrator"));
 
+const std::string empty;
+const std::string hardware_model_name("hardware");
 const std::string model_name_key("model_name");
 const std::string documentation_key("documentation");
 const std::string origin_key("origin");
@@ -64,21 +66,49 @@ const std::string model_has_no_types("Did not find any types in model");
 namespace dogen {
 namespace sml {
 
+std::string json_hydrator::model_name(const model& m) const {
+    if (m.name().model_name() == hardware_model_name)
+        return empty;
+    return m.name().model_name();
+}
+
+void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
+    model& m, qname& qn) const {
+    const auto i(pt.find(module_path_key));
+    if (i == pt.not_found())
+        return;
+
+    for (auto j(i->second.begin()); j != i->second.end(); ++j) {
+        const auto module_name(j->second.get_value<std::string>());
+        qn.module_path().push_back(module_name);
+
+        qname module_qn;
+        module_qn.simple_name(module_name);
+        module_qn.model_name(model_name(m));
+        auto mp(qn.module_path());
+        mp.pop_back();
+        module_qn.module_path(mp);
+
+        const auto i(m.modules().find(module_qn));
+        if (i == m.modules().end()) {
+            module mod;
+            mod.name(module_qn);
+            mod.origin_type(m.origin_type());
+            m.modules().insert(std::make_pair(module_qn, mod));
+        }
+    }
+}
+
 void json_hydrator::
 read_type(const boost::property_tree::ptree& pt, model& m) const {
     qname qn;
-    qn.model_name(m.name().model_name());
+    qn.model_name(model_name(m));
+    read_module_path(pt, m, qn);
 
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
     qn.simple_name(simple_name_value);
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
-
-    const auto i(pt.find(module_path_key));
-    if (i != pt.not_found()) {
-        for (auto j(i->second.begin()); j != i->second.end(); ++j)
-            qn.module_path().push_back(j->second.get_value<std::string>());
-    }
 
     const auto lambda([&](type& t) {
             t.name(qn);
@@ -115,12 +145,7 @@ model json_hydrator::read_stream(std::istream& s) const {
 
     read_tags(pt, r);
     r.name().model_name(pt.get<std::string>(model_name_key));
-
-    auto i(pt.find(module_path_key));
-    if (i != pt.not_found()) {
-        for (auto j(i->second.begin()); j != i->second.end(); ++j)
-            r.name().module_path().push_back(j->second.get_value<std::string>());
-    }
+    read_module_path(pt, r, r.name());
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)
@@ -136,7 +161,7 @@ model json_hydrator::read_stream(std::istream& s) const {
         BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
     }
 
-    i = pt.find(types_key);
+    const auto i(pt.find(types_key));
     if (i == pt.not_found() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << model_has_no_types;
         BOOST_THROW_EXCEPTION(hydration_error(model_has_no_types));

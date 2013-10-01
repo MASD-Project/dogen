@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-01 Tue 00:19]
+Clock summary at [2013-10-01 Tue 08:49]
 
 | Headline                                                     | Time    |       |       |
 |--------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                 | *25:21* |       |       |
+| *Total time*                                                 | *26:11* |       |       |
 |--------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                              |         | 25:21 |       |
+| Development Stories Implemented                              |         | 26:11 |       |
 | IMPLEMENTATION Release notes and backlog grooming            |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion          |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list |         |       |  1:06 |
 | COMPLETED Rename implementation specific parameters          |         |       |  0:50 |
 | COMPLETED Add meta-data support to SML                       |         |       |  5:04 |
 | COMPLETED Fix includes in SML tests                          |         |       |  0:42 |
-| COMPLETED Create an hydrator from JSON into SML              |         |       |  3:03 |
+| COMPLETED Create an hydrator from JSON into SML              |         |       |  3:53 |
 | IMPLEMENTATION Implement the property cache in SML           |         |       |  1:14 |
 | IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 10:42 |
 | IMPLEMENTATION Implement tagger                              |         |       |  1:29 |
@@ -136,6 +136,9 @@ the tests to only include the required objects.
 
 *** COMPLETED Create an hydrator from JSON into SML                   :story:
     CLOSED: [2013-10-01 Tue 00:19]
+    CLOCK: [2013-10-01 Tue 08:24]--[2013-10-01 Tue 08:37] =>  0:13
+    CLOCK: [2013-10-01 Tue 07:49]--[2013-10-01 Tue 08:19] =>  0:30
+    CLOCK: [2013-10-01 Tue 07:38]--[2013-10-01 Tue 07:45] =>  0:07
     CLOCK: [2013-10-01 Tue 00:03]--[2013-10-01 Tue 00:19] =>  0:16
     CLOCK: [2013-09-30 Mon 23:21]--[2013-10-01 Tue 00:03] =>  0:42
     CLOCK: [2013-09-30 Mon 22:55]--[2013-09-30 Mon 23:20] =>  0:25

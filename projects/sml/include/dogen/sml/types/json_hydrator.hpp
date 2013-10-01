@@ -34,6 +34,9 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Reads SML models from a well-defined JSON representation.
+ */
 class json_hydrator {
 public:
     json_hydrator() = default;
@@ -42,6 +45,29 @@ public:
     ~json_hydrator() noexcept = default;
 
 private:
+    /**
+     * @brief Returns the model name for all qnames other than the
+     * model itself.
+     *
+     * This hack is required purely for the hardware model, which has
+     * no model name for types, etc.
+     */
+    std::string model_name(const model& m) const;
+
+    /**
+     * @brief Reads a module path from the property tree and uses it
+     * to populate the qname.
+     *
+     * If the model does not contain all modules implied by the module
+     * path, it adds them to the model.
+     */
+    void read_module_path(const boost::property_tree::ptree& pt, model& m,
+        qname& qn) const;
+
+    /**
+     * @brief Reads all meta-data tags from the property tree, and
+     * tags the Taggable type with them.
+     */
     template<typename Taggable>
     void read_tags(const boost::property_tree::ptree& pt, Taggable& t) const {
         const auto i(pt.find("tags"));
@@ -56,13 +82,20 @@ private:
         }
     }
 
-    void read_tags(const boost::property_tree::ptree& pt, type& t) const;
-
+    /**
+     * @brief Reads an SML type from the property tree.
+     */
     void read_type(const boost::property_tree::ptree& pt, model& m) const;
 
+    /**
+     * @brief Reads the entire stream as a property tree.
+     */
     model read_stream(std::istream& s) const;
 
 public:
+    /**
+     * @brief Hydrates the model from the JSON stream.
+     */
     model hydrate(std::istream& s) const;
 };
 

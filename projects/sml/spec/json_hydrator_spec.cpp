@@ -23,10 +23,12 @@
 #include <boost/filesystem/fstream.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -49,9 +51,12 @@ const std::string module_path_value_1("module_1");
 const std::string module_path_value_2("module_2");
 const std::string module_path_value_3("module_3");
 
-const std::string cpp_std_model("library/cpp.std.json");
-const std::string cpp_boost_model("library/cpp.boost.json");
-const std::string hardware_model("library/hardware.json");
+const std::string cpp_std_model_path("library/cpp.std.json");
+const std::string cpp_std_model_name("std");
+const std::string cpp_boost_model_name("boost");
+const std::string cpp_boost_model_path("library/cpp.boost.json");
+const std::string hardware_model_path("library/hardware.json");
+const std::string hardware_model_name("hardware");
 
 const std::string missing_model_name("model_name");
 const std::string missing_type_name("simple_name");
@@ -330,33 +335,115 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("cpp_std_model_hydrates_into_expected_model");
 
     using namespace dogen::utility::filesystem;
-    boost::filesystem::path p(data_files_directory() / cpp_std_model);
+    boost::filesystem::path p(data_files_directory() / cpp_std_model_path);
     boost::filesystem::ifstream s(p);
     dogen::sml::json_hydrator h;
     const auto m(h.hydrate(s));
+
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_CHECK(m.name().model_name() == cpp_std_model_name);
+    BOOST_CHECK(m.origin_type() == dogen::sml::origin_types::system);
+
+    const auto& objects(m.objects());
+    BOOST_CHECK(!objects.empty());
+    for (const auto& pair : objects) {
+        const auto& o(*pair.second);
+        const auto qn(o.name());
+        BOOST_CHECK(qn.model_name() == cpp_std_model_name);
+        BOOST_CHECK(qn.external_module_path().empty());
+    }
+
+    const auto primitives(m.primitives());
+    BOOST_CHECK(!m.primitives().empty());
+    for (const auto& pair : primitives) {
+        const auto p(pair.second);
+        const auto qn(p.name());
+        BOOST_CHECK(qn.model_name() == cpp_std_model_name);
+        BOOST_CHECK(qn.external_module_path().empty());
+    }
+
+    BOOST_CHECK(m.enumerations().empty());
+    BOOST_CHECK(m.modules().empty());
+    BOOST_CHECK(m.references().empty());
+    BOOST_CHECK(m.leaves().empty());
+    BOOST_CHECK(m.name().external_module_path().empty());
 }
 
 BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
 
     using namespace dogen::utility::filesystem;
-    boost::filesystem::path p(data_files_directory() / cpp_boost_model);
+    boost::filesystem::path p(data_files_directory() / cpp_boost_model_path);
     boost::filesystem::ifstream s(p);
     dogen::sml::json_hydrator h;
     const auto m(h.hydrate(s));
+
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_CHECK(m.name().model_name() == cpp_boost_model_name);
+    BOOST_CHECK(m.origin_type() == dogen::sml::origin_types::system);
+
+    const auto& objects(m.objects());
+    BOOST_CHECK(!objects.empty());
+    for (const auto& pair : objects) {
+        const auto& o(*pair.second);
+        const auto qn(o.name());
+        BOOST_CHECK(qn.model_name() == cpp_boost_model_name);
+        BOOST_CHECK(qn.external_module_path().empty());
+        if (!qn.module_path().empty()) {
+            bool module_found(false);
+            for (const auto& pair : m.modules()) {
+                const auto mod(pair.second);
+                auto pp(mod.name().module_path());
+                pp.push_back(mod.name().simple_name());
+                BOOST_LOG_SEV(lg, info) << "Converted path: " << pp;
+                if (qn.module_path() == pp) {
+                    module_found = true;
+                    break;
+                }
+            }
+
+            if (!module_found)
+                BOOST_LOG_SEV(lg, error) << "Object has undefined module: "
+                                         << qn;
+            BOOST_CHECK(module_found);
+        }
+    }
+    BOOST_CHECK(m.primitives().empty());
+    BOOST_CHECK(m.enumerations().empty());
+    BOOST_CHECK(!m.modules().empty());
+    BOOST_CHECK(m.references().empty());
+    BOOST_CHECK(m.leaves().empty());
+    BOOST_CHECK(m.name().external_module_path().empty());
 }
 
 BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("hardware_model_hydrates_into_expected_model");
 
     using namespace dogen::utility::filesystem;
-    boost::filesystem::path p(data_files_directory() / hardware_model);
+    boost::filesystem::path p(data_files_directory() / hardware_model_path);
     boost::filesystem::ifstream s(p);
     dogen::sml::json_hydrator h;
     const auto m(h.hydrate(s));
+
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_CHECK(m.name().model_name() == hardware_model_name);
+    BOOST_CHECK(m.origin_type() == dogen::sml::origin_types::system);
+
+    BOOST_CHECK(m.objects().empty());
+    const auto primitives(m.primitives());
+    BOOST_CHECK(!primitives.empty());
+    for (const auto& pair : primitives) {
+        const auto p(pair.second);
+        const auto qn(p.name());
+        BOOST_CHECK(qn.model_name().empty());
+        BOOST_CHECK(qn.external_module_path().empty());
+    }
+
+    BOOST_CHECK(m.enumerations().empty());
+    BOOST_CHECK(m.modules().empty());
+    BOOST_CHECK(m.references().empty());
+    BOOST_CHECK(m.leaves().empty());
+    BOOST_CHECK(m.name().external_module_path().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
