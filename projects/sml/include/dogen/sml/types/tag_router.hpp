@@ -69,8 +69,10 @@ public:
 
     /**
      * @brief Routes only if @e key is in the kvp container.
+     *
+     * Returns true if routing was done.
      */
-    void route_if(const std::list<std::pair<std::string, std::string> >& kvps,
+    bool route_if(const std::list<std::pair<std::string, std::string> >& kvps,
         const std::string& key);
 
 private:

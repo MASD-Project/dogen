@@ -451,12 +451,11 @@ void transformer::from_note(const processed_object& o) {
     sml::model& model(context_.model());
     if (o.child_node_id().empty()) {
         auto router(make_tag_router(model));
-        router.route_if(pair.second, sml::tags::comment);
-
-        auto adaptor(make_tag_adaptor(model));
-        if (adaptor.has_key(sml::tags::comment))
+        const bool routed(router.route_if(pair.second, sml::tags::comment));
+        if (routed) {
+            auto adaptor(make_tag_adaptor(model));
             model.documentation(pair.first);
-
+        }
         return;
     }
 
@@ -479,11 +478,12 @@ void transformer::from_note(const processed_object& o) {
 
     sml::module& module(j->second);
     auto router(make_tag_router(module));
-    router.route_if(pair.second, sml::tags::comment);
-
-    auto adaptor(make_tag_adaptor(module));
-    if (adaptor.has_key(sml::tags::comment))
-        module.documentation(pair.first);
+    const bool routed(router.route_if(pair.second, sml::tags::comment));
+    if (routed) {
+        auto adaptor(make_tag_adaptor(module));
+        if (adaptor.has_key(sml::tags::comment))
+            module.documentation(pair.first);
+    }
 }
 
 void transformer::to_concept(const processed_object& o, const profile& p) {

@@ -65,7 +65,7 @@ route(const std::list<std::pair<std::string, std::string> >& kvps) {
         route(pair.first, pair.second);
 }
 
-void tag_router::
+bool tag_router::
 route_if(const std::list<std::pair<std::string, std::string> >& kvps,
     const std::string& key) {
     bool has_marker(false);
@@ -76,9 +76,10 @@ route_if(const std::list<std::pair<std::string, std::string> >& kvps,
     }
 
     if (!has_marker)
-        return;
+        return false;
 
     route(kvps);
+    return true;
 }
 
 } }
