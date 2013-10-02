@@ -1,0 +1,115 @@
+diff --git a/doc/agile/release_notes_sprint_35.org b/doc/agile/release_notes_sprint_35.org
+index 133cf6f..097cc10 100644
+--- a/doc/agile/release_notes_sprint_35.org
++++ b/doc/agile/release_notes_sprint_35.org
+@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 35.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2013-10-02 Wed 08:37]
++Clock summary at [2013-10-02 Wed 17:57]
+ 
+ | Headline                                                                 | Time    |       |       |
+ |--------------------------------------------------------------------------+---------+-------+-------|
+-| *Total time*                                                             | *27:52* |       |       |
++| *Total time*                                                             | *28:18* |       |       |
+ |--------------------------------------------------------------------------+---------+-------+-------|
+-| Development Stories Implemented                                          |         | 27:52 |       |
++| Development Stories Implemented                                          |         | 28:18 |       |
+ | IMPLEMENTATION Release notes and backlog grooming                        |         |       |  0:39 |
+ | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
+ | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
+@@ -27,7 +27,7 @@ Clock summary at [2013-10-02 Wed 08:37]
+ | COMPLETED Replace static factories for system models with json hydration |         |       |  1:41 |
+ | IMPLEMENTATION Implement the property cache in SML                       |         |       |  1:14 |
+ | IMPLEMENTATION Create a complete domain formatter in OM                  |         |       | 10:42 |
+-| IMPLEMENTATION Implement tagger                                          |         |       |  1:29 |
++| IMPLEMENTATION Implement tagger                                          |         |       |  1:55 |
+ #+end:
+ 
+ *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+@@ -208,6 +208,8 @@ SML type visitors, etc.
+      CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
+ 
+ *** IMPLEMENTATION Implement tagger                                   :story:
++    CLOCK: [2013-10-02 Wed 17:40]--[2013-10-02 Wed 17:57] =>  0:17
++    CLOCK: [2013-10-02 Wed 17:26]--[2013-10-02 Wed 17:35] =>  0:09
+     CLOCK: [2013-09-29 Sun 18:43]--[2013-09-29 Sun 19:25] =>  0:42
+     CLOCK: [2013-09-29 Sun 18:23]--[2013-09-29 Sun 18:43] =>  0:20
+     CLOCK: [2013-09-29 Sun 01:50]--[2013-09-29 Sun 02:08] =>  0:18
+diff --git a/projects/sml/include/dogen/sml/types/tagger.hpp b/projects/sml/include/dogen/sml/types/tagger.hpp
+index eca852f..b4d8d75 100644
+--- a/projects/sml/include/dogen/sml/types/tagger.hpp
++++ b/projects/sml/include/dogen/sml/types/tagger.hpp
+@@ -25,6 +25,10 @@
+ #pragma once
+ #endif
+ 
++#include <set>
++#include "dogen/config/types/cpp_facet_types.hpp"
++#include "dogen/sml/types/qname.hpp"
++#include "dogen/sml/types/type.hpp"
+ #include "dogen/sml/types/model.hpp"
+ 
+ namespace dogen {
+@@ -40,14 +44,20 @@ public:
+     tagger(const tagger&) = default;
+     tagger(tagger&&) = default;
+ 
+-// public:
+-//     tagger(model& m);
++public:
++    tagger(const std::set<config::cpp_facet_types>& enabled_facets);
++
++private:
++    std::string
++    filename_for_qname(const qname& qn, const config::cpp_facet_types ft) const;
+ 
+-// public:
+-//     void tag();
++    void tag_type(type& t) const;
++
++public:
++    void tag(model& m) const;
+ 
+-// private:
+-//     model& model_;
++private:
++    const std::set<config::cpp_facet_types> enabled_facets_;
+ };
+ 
+ } }
+diff --git a/projects/sml/src/types/tagger.cpp b/projects/sml/src/types/tagger.cpp
+index e25893c..f4083d0 100644
+--- a/projects/sml/src/types/tagger.cpp
++++ b/projects/sml/src/types/tagger.cpp
+@@ -19,16 +19,24 @@
+  *
+  */
+ #include "dogen/sml/types/tagger.hpp"
+-#include "dogen/sml/types/tagger.hpp"
+ 
+ namespace dogen {
+ namespace sml {
+ 
+-// tagger::tagger(model& m) : model_(m) { }
++tagger::tagger(const std::set<config::cpp_facet_types>& enabled_facets)
++    : enabled_facets_(enabled_facets) { }
++
++std::string tagger::
++filename_for_qname(const qname& qn, const config::cpp_facet_types ft) const {
++    
++}
+ 
+-// void tagger::tag() {
++void tagger::tag_type(type& t) const {
++    
++}
+ 
+-//     model_
+-// }
++void tagger::tag(model& m) const {
++    
++}
+ 
+ } }
