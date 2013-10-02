@@ -286,6 +286,14 @@
                 "cpp.domain.header.file_name" : "functional",
                 "cpp.serialization.boost.status" : "unsupported"
             }
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "ostream",
+            "tags" : {
+                "cpp.domain.header.file_name" : "ostream",
+                "cpp.serialization.boost.status" : "unsupported"
+            }
         }
     ]
 }
