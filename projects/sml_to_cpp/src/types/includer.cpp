@@ -32,7 +32,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("sml_to_cpp.includer"));
 
 const std::string empty;
-const std::string primitive_model("primitive_model");
+const std::string hardware_model("hardware_model");
 const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");
@@ -452,7 +452,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
             n.model_name() == boost_.model() || !header_and_domain) {
             names.insert(n);
             continue;
-        } else if (n.model_name() == primitive_model || is_primitive)
+        } else if (n.model_name() == hardware_model || is_primitive)
             continue;
 
         /*
@@ -476,7 +476,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
         } else if (n.model_name() == boost_.model()) {
             append_boost_dependencies(cd2, il);
             continue;
-        } else if (n.model_name() == primitive_model ||
+        } else if (n.model_name() == hardware_model ||
             n.model_name().empty())
             continue;
 
@@ -549,7 +549,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
         // keys from special models can be ignored
         if (k.model_name() == std_.model() ||
             k.model_name() == boost_.model() ||
-            k.model_name() == primitive_model)
+            k.model_name() == hardware_model)
             continue;
 
         /*

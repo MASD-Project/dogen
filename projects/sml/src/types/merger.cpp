@@ -36,7 +36,7 @@ namespace {
 auto lg(logger_factory("sml.merger"));
 
 const std::string empty;
-const std::string primitive_model_name("primitive_model");
+const std::string hardware_model_name("hardware");
 const std::string msising_dependency("Cannot find target dependency: ");
 const std::string missing_target("Target model not present");
 }
@@ -163,7 +163,7 @@ void merger::merge_model(const model& m) {
 
     for (const auto& p : m.primitives()) {
         // FIXME: mega hack to handle primitive model.
-        const auto pmn(mn == primitive_model_name ? empty : mn);
+        const auto pmn(mn == hardware_model_name ? empty : mn);
         check_qname(pmn, p.first, p.second.name());
         merged_model_.primitives().insert(p);
     }

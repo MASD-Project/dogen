@@ -95,6 +95,15 @@
         },
         {
             "meta_type" : "primitive",
+            "simple_name" : "unsigned long long",
+            "default_value" : "0",
+            "tags" : {
+                "cpp.type.family" : "integer",
+                "cpp.type.requires_manual_default_constructor" : true
+            }
+        },
+        {
+            "meta_type" : "primitive",
             "simple_name" : "float",
             "default_value" : "0.0f",
             "tags" : {

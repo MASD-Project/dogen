@@ -10,23 +10,24 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-01 Tue 08:49]
+Clock summary at [2013-10-02 Wed 08:37]
 
-| Headline                                                     | Time    |       |       |
-|--------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                 | *26:11* |       |       |
-|--------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                              |         | 26:11 |       |
-| IMPLEMENTATION Release notes and backlog grooming            |         |       |  0:39 |
-| COMPLETED Refactor OM tests to avoid over-inclusion          |         |       |  0:32 |
-| COMPLETED Convert implementation specific parameters to list |         |       |  1:06 |
-| COMPLETED Rename implementation specific parameters          |         |       |  0:50 |
-| COMPLETED Add meta-data support to SML                       |         |       |  5:04 |
-| COMPLETED Fix includes in SML tests                          |         |       |  0:42 |
-| COMPLETED Create an hydrator from JSON into SML              |         |       |  3:53 |
-| IMPLEMENTATION Implement the property cache in SML           |         |       |  1:14 |
-| IMPLEMENTATION Create a complete domain formatter in OM      |         |       | 10:42 |
-| IMPLEMENTATION Implement tagger                              |         |       |  1:29 |
+| Headline                                                                 | Time    |       |       |
+|--------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                             | *27:52* |       |       |
+|--------------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                          |         | 27:52 |       |
+| IMPLEMENTATION Release notes and backlog grooming                        |         |       |  0:39 |
+| COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
+| COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
+| COMPLETED Rename implementation specific parameters                      |         |       |  0:50 |
+| COMPLETED Add meta-data support to SML                                   |         |       |  5:04 |
+| COMPLETED Fix includes in SML tests                                      |         |       |  0:42 |
+| COMPLETED Create an hydrator from JSON into SML                          |         |       |  3:53 |
+| COMPLETED Replace static factories for system models with json hydration |         |       |  1:41 |
+| IMPLEMENTATION Implement the property cache in SML                       |         |       |  1:14 |
+| IMPLEMENTATION Create a complete domain formatter in OM                  |         |       | 10:42 |
+| IMPLEMENTATION Implement tagger                                          |         |       |  1:29 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -148,6 +149,15 @@ the tests to only include the required objects.
 Using the JSON representation defined in the previous iteration (in
 data/library) and boost property tree, create an hydrator/transformer
 that generates SML models.
+
+*** COMPLETED Replace static factories for system models with json hydration :story:
+    CLOSED: [2013-10-02 Wed 08:37]
+    CLOCK: [2013-10-02 Wed 08:30]--[2013-10-02 Wed 08:36] =>  0:06
+    CLOCK: [2013-10-02 Wed 07:46]--[2013-10-02 Wed 08:20] =>  0:34
+    CLOCK: [2013-10-02 Wed 07:33]--[2013-10-02 Wed 07:44] =>  0:11
+    CLOCK: [2013-10-01 Tue 22:04]--[2013-10-01 Tue 22:35] =>  0:31
+    CLOCK: [2013-10-01 Tue 18:20]--[2013-10-01 Tue 18:30] =>  0:10
+    CLOCK: [2013-10-01 Tue 18:01]--[2013-10-01 Tue 18:10] =>  0:09
 
 *** IMPLEMENTATION Implement the property cache in SML                :story:
     CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08

@@ -105,6 +105,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "vector",
+            "value_object_type" : "sequence_container",
             "tags" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.domain.header.file_name" : "vector",
@@ -116,6 +117,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "deque",
+            "value_object_type" : "sequence_container",
             "tags" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.domain.header.file_name" : "deque",
@@ -127,6 +129,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "array",
+            "value_object_type" : "sequence_container",
             "tags" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.domain.header.file_name" : "array",
@@ -136,6 +139,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "list",
+            "value_object_type" : "sequence_container",
             "tags" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.domain.header.file_name" : "list",
@@ -147,6 +151,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "forward_list",
+            "value_object_type" : "sequence_container",
             "tags" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.domain.header.file_name" : "forward_list",
@@ -156,6 +161,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "set",
+            "value_object_type" : "associative_container",
             "tags" : {
                 "cpp.type.family" : "associative_container",
                 "cpp.domain.header.file_name" : "set",
@@ -167,6 +173,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "multiset",
+            "value_object_type" : "associative_container",
             "tags" : {
                 "cpp.type.family" : "associative_container",
                 "cpp.domain.header.file_name" : "multiset",
@@ -178,6 +185,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "unordered_set",
+            "value_object_type" : "associative_container",
             "tags" : {
                 "cpp.type.family" : "associative_container",
                 "cpp.domain.header.file_name" : "unordered_set",
@@ -187,6 +195,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "map",
+            "value_object_type" : "associative_container",
             "tags" : {
                 "cpp.type.family" : "associative_container",
                 "cpp.domain.header.file_name" : "map",
@@ -197,17 +206,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "multimap",
-            "tags" : {
-                "cpp.type.family" : "associative_container",
-                "cpp.domain.header.file_name" : "multimap",
-                "cpp.domain.header.is_system" : true,
-                "cpp.serialization.boost.header.file_name" : "boost/serialization/multimap.hpp",
-                "cpp.serialization.boost.header.is_system" : true
-            }
-        },
-        {
-            "meta_type" : "value_object",
-            "simple_name" : "multimap",
+            "value_object_type" : "associative_container",
             "tags" : {
                 "cpp.type.family" : "associative_container",
                 "cpp.domain.header.file_name" : "multimap",
@@ -219,6 +218,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "unordered_map",
+            "value_object_type" : "associative_container",
             "tags" : {
                 "cpp.type.family" : "associative_container",
                 "cpp.domain.header.file_name" : "unordered_map",
@@ -238,6 +238,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "shared_ptr",
+            "value_object_type" : "smart_pointer",
             "tags" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.domain.header.file_name" : "memory",
@@ -248,6 +249,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "weak_ptr",
+            "value_object_type" : "smart_pointer",
             "tags" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.domain.header.file_name" : "memory",
@@ -258,6 +260,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "unique_ptr",
+            "value_object_type" : "smart_pointer",
             "tags" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.domain.header.file_name" : "memory",

@@ -51,6 +51,13 @@ const std::string meta_type_primitive_value("primitive");
 const std::string simple_name_key("simple_name");
 const std::string module_path_key("module_path");
 
+const std::string value_object_type_key("value_object_type");
+const std::string value_object_type_smart_pointer_value("smart_pointer");
+const std::string value_object_type_associative_container_value(
+    "associative_container");
+const std::string value_object_type_sequence_container_value(
+    "sequence_container");
+
 const std::string tags_key("tags");
 
 const std::string invalid_json_file("Failed to parse JSON file: ");
@@ -113,6 +120,7 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
     const auto lambda([&](type& t) {
             t.name(qn);
             t.generation_type(generation_types::no_generation);
+            t.origin_type(m.origin_type());
             if (documentation)
                 t.documentation(*documentation);
             read_tags<type>(pt, t);
@@ -122,6 +130,22 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
     if (meta_type_value == meta_type_value_object_value) {
         auto vo(boost::make_shared<sml::value_object>());
         lambda(*vo);
+
+        const auto vot(pt.get_optional<std::string>(value_object_type_key));
+        if (vot) {
+            if (*vot == value_object_type_smart_pointer_value) {
+                vo->type(value_object_types::smart_pointer);
+                vo->number_of_type_arguments(1);
+            } else if (*vot == value_object_type_associative_container_value) {
+                vo->type(value_object_types::associative_container);
+                vo->number_of_type_arguments(2);
+            } else if (*vot == value_object_type_sequence_container_value) {
+                vo->type(value_object_types::sequence_container);
+                vo->number_of_type_arguments(1);
+            }
+        } else
+            vo->type(value_object_types::plain);
+
         m.objects().insert(std::make_pair(qn, vo));
     } else if (meta_type_value == meta_type_primitive_value) {
         primitive p;

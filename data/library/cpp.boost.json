@@ -6,6 +6,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "shared_ptr",
+            "value_object_type" : "smart_pointer",
             "tags" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.domain.header.file_name" : "boost/shared_ptr.hpp",
@@ -17,6 +18,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "weak_ptr",
+            "value_object_type" : "smart_pointer",
             "tags" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.domain.header.file_name" : "boost/weak_ptr.hpp",
@@ -28,6 +30,7 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "scoped_ptr",
+            "value_object_type" : "smart_pointer",
             "tags" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.domain.header.file_name" : "boost/scoped_ptr.hpp",

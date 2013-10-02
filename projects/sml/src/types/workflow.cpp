@@ -18,13 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include "dogen/utility/filesystem/path.hpp"
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/sml/types/injector.hpp"
-#include "dogen/sml/types/primitive_model_factory.hpp"
-#include "dogen/sml/types/std_model_factory.hpp"
-#include "dogen/sml/types/boost_model_factory.hpp"
+#include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/workflow.hpp"
+
+namespace {
+
+const std::string library_dir("library");
+
+}
+
 
 namespace dogen {
 namespace sml {
@@ -65,9 +74,14 @@ std::list<model>
 workflow::augment_references_activity(const std::list<model>& references) {
     std::list<model> r(references);
     if (add_system_models_) {
-        r.push_back(sml::primitive_model_factory::create());
-        r.push_back(sml::std_model_factory::create());
-        r.push_back(sml::boost_model_factory::create());
+        using namespace dogen::utility::filesystem;
+        const auto dir(data_files_directory() / library_dir);
+        const auto files(find_files(dir));
+        dogen::sml::json_hydrator h;
+        for (const auto& f : files) {
+            boost::filesystem::ifstream s(f);
+            r.push_back(h.hydrate(s));
+        }
     }
     return r;
 }
