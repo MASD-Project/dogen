@@ -448,14 +448,15 @@ void transformer::from_note(const processed_object& o) {
         return;
 
     const auto pair(comments_parser_->parse(o.text()));
+    const auto& documentation(pair.first);
+    const auto& kvps(pair.second);
     sml::model& model(context_.model());
+    using sml::tags;
     if (o.child_node_id().empty()) {
         auto router(make_tag_router(model));
-        const bool routed(router.route_if(pair.second, sml::tags::comment));
-        if (routed) {
-            auto adaptor(make_tag_adaptor(model));
-            model.documentation(pair.first);
-        }
+        const bool routed(router.route_if_marker_found(tags::comment, kvps));
+        if (routed)
+            model.documentation(documentation);
         return;
     }
 
@@ -468,22 +469,17 @@ void transformer::from_note(const processed_object& o) {
 
     auto j(model.modules().find(i->second));
     if (j == model.modules().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_module_for_qname
-                                 << i->second.simple_name();
-
+        const auto sn(i->second.simple_name());
+        BOOST_LOG_SEV(lg, error) << missing_module_for_qname << sn;
         BOOST_THROW_EXCEPTION(
-            transformation_error(missing_module_for_qname +
-                i->second.simple_name()));
+            transformation_error(missing_module_for_qname + sn));
     }
 
     sml::module& module(j->second);
     auto router(make_tag_router(module));
-    const bool routed(router.route_if(pair.second, sml::tags::comment));
-    if (routed) {
-        auto adaptor(make_tag_adaptor(module));
-        if (adaptor.has_key(sml::tags::comment))
-            module.documentation(pair.first);
-    }
+    const bool routed(router.route_if_marker_found(tags::comment, kvps));
+    if (routed)
+        module.documentation(documentation);
 }
 
 void transformer::to_concept(const processed_object& o, const profile& p) {
