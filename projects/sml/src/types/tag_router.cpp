@@ -46,6 +46,11 @@ bool tag_router::is_complex(const std::string& key) const {
     return key == tags::odb_pragma;
 }
 
+bool tag_router::has_key(const std::string& key) const {
+    const auto i(simple_tags_.find(key));
+    return i != simple_tags_.end();
+}
+
 void tag_router::route(const std::string& key, const std::string& value) {
     if (is_complex(key)) {
         complex_tags_[key].push_back(value);
@@ -65,9 +70,8 @@ route(const std::list<std::pair<std::string, std::string> >& kvps) {
         route(pair.first, pair.second);
 }
 
-bool tag_router::
-route_if(const std::list<std::pair<std::string, std::string> >& kvps,
-    const std::string& key) {
+bool tag_router::route_if_marker_found(const std::string& key,
+    const std::list<std::pair<std::string, std::string> >& kvps) {
     bool has_marker(false);
     for (const auto& kvp : kvps) {
         has_marker = kvp.first == key;
@@ -79,6 +83,15 @@ route_if(const std::list<std::pair<std::string, std::string> >& kvps,
         return false;
 
     route(kvps);
+    return true;
+}
+
+bool tag_router::
+route_if_key_not_found(const std::string& key, const std::string& value) {
+    if (has_key(key))
+        return false;
+
+    simple_tags_.insert(std::make_pair(key, value));
     return true;
 }
 

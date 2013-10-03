@@ -151,12 +151,12 @@ struct tags {
         };
 
         /**
-         * @brief Parameters specific to the domain facet.
+         * @brief Parameters specific to the @e domain facet.
          */
         struct domain {
             /**
-             * @brief If set to disabled, the domain facet will not be
-             * generated for this type.
+             * @brief If set to disabled, the @e domain facet will not
+             * be generated for this type.
              */
             static const std::string status;
 
@@ -248,7 +248,7 @@ struct tags {
         };
 
         /**
-         * @brief Parameters specific to the hash facet.
+         * @brief Parameters specific to the @e hash facet.
          */
         struct hash {
             /**
@@ -260,7 +260,7 @@ struct tags {
              */
             struct standard {
                 /**
-                 * @brief If set to disabled, the hash facet will not
+                 * @brief If set to disabled, the @e hash facet will not
                  * be generated for this type.
                  */
                 static const std::string status;
@@ -286,7 +286,7 @@ struct tags {
         };
 
         /**
-         * @brief Parameters specific to the serialization facet.
+         * @brief Parameters specific to the @e serialization facet.
          */
         struct serialization {
             /**
@@ -346,6 +346,63 @@ struct tags {
                  */
                 static const std::string is_system;
 
+            };
+        };
+
+        /**
+         * @brief Parameters specific to the io facet.
+         */
+        struct test_data {
+            /**
+             * @brief If set to disabled, the @e test_data facet
+             * will not be generated for this type.
+             */
+            static const std::string status;
+
+            /**
+             * @brief Parameters associated with the @e test_data C++
+             * header file.
+             */
+            struct header {
+                /**
+                 * @brief Relative file name for the header file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the header file will use
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+        };
+
+        /**
+         * @brief Parameters specific to the @e odb facet.
+         */
+        struct odb {
+            /**
+             * @brief If set to disabled, the @e odb facet will not be
+             * generated for this type.
+             */
+            static const std::string status;
+
+            /**
+             * @brief Parameters associated with the io C++ header file.
+             */
+            struct header {
+                /**
+                 * @brief Relative file name for the header file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the header file will use
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
             };
         };
     };

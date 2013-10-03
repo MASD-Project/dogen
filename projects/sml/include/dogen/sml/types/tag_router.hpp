@@ -47,12 +47,18 @@ public:
     tag_router(std::unordered_map<std::string, std::string>& simple_tags,
         std::unordered_map<std::string, std::list<std::string> >& complex_tags);
 
-public:
+private:
     /**
      * @brief Returns true if the key belongs to the set of complex
      * tag keys.
      */
     bool is_complex(const std::string& key) const;
+
+    /**
+     * @brief Returns true if the key exists in the simple tags
+     * container.
+     */
+    bool has_key(const std::string& key) const;
 
 public:
     /**
@@ -68,12 +74,22 @@ public:
     void route(const std::list<std::pair<std::string, std::string> >& kvps);
 
     /**
-     * @brief Routes only if @e key is in the kvp container.
+     * @brief Routes only if @e marker is in the input kvp container,
+     * as a key.
      *
-     * Returns true if routing was done.
+     * @return true if routing was done, false otherwise.
      */
-    bool route_if(const std::list<std::pair<std::string, std::string> >& kvps,
-        const std::string& key);
+    bool route_if_marker_found(const std::string& marker,
+        const std::list<std::pair<std::string, std::string> >& kvps);
+
+    /**
+     * @brief Routes only if @e key is not in the simple tags
+     * container.
+     *
+     * @return true if routing was done, false otherwise.
+     */
+    bool route_if_key_not_found(const std::string& key,
+        const std::string& value);
 
 private:
     std::unordered_map<std::string, std::string>& simple_tags_;

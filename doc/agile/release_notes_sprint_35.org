@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-02 Wed 08:37]
+Clock summary at [2013-10-03 Thu 08:25]
 
 | Headline                                                                 | Time    |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                             | *27:52* |       |       |
+| *Total time*                                                             | *29:07* |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                          |         | 27:52 |       |
+| Development Stories Implemented                                          |         | 29:07 |       |
 | IMPLEMENTATION Release notes and backlog grooming                        |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
@@ -27,7 +27,7 @@ Clock summary at [2013-10-02 Wed 08:37]
 | COMPLETED Replace static factories for system models with json hydration |         |       |  1:41 |
 | IMPLEMENTATION Implement the property cache in SML                       |         |       |  1:14 |
 | IMPLEMENTATION Create a complete domain formatter in OM                  |         |       | 10:42 |
-| IMPLEMENTATION Implement tagger                                          |         |       |  1:29 |
+| IMPLEMENTATION Implement tagger                                          |         |       |  2:44 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -208,6 +208,13 @@ SML type visitors, etc.
      CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
 
 *** IMPLEMENTATION Implement tagger                                   :story:
+    CLOCK: [2013-10-03 Thu 07:22]--[2013-10-03 Thu 07:29] =>  0:07
+    CLOCK: [2013-10-03 Thu 07:17]--[2013-10-03 Thu 07:21] =>  0:04
+    CLOCK: [2013-10-03 Thu 07:00]--[2013-10-03 Thu 07:13] =>  0:13
+    CLOCK: [2013-10-03 Thu 06:40]--[2013-10-03 Thu 07:00] =>  0:20
+    CLOCK: [2013-10-03 Thu 06:32]--[2013-10-03 Thu 06:37] =>  0:05
+    CLOCK: [2013-10-02 Wed 17:40]--[2013-10-02 Wed 17:57] =>  0:17
+    CLOCK: [2013-10-02 Wed 17:26]--[2013-10-02 Wed 17:35] =>  0:09
     CLOCK: [2013-09-29 Sun 18:43]--[2013-09-29 Sun 19:25] =>  0:42
     CLOCK: [2013-09-29 Sun 18:23]--[2013-09-29 Sun 18:43] =>  0:20
     CLOCK: [2013-09-29 Sun 01:50]--[2013-09-29 Sun 02:08] =>  0:18

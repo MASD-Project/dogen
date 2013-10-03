@@ -18,17 +18,57 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/tagger.hpp"
+#include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/types/tag_router.hpp"
 #include "dogen/sml/types/tagger.hpp"
 
 namespace dogen {
 namespace sml {
 
-// tagger::tagger(model& m) : model_(m) { }
+tagger::tagger(const std::set<config::cpp_facet_types>& enabled_facets)
+    : enabled_facets_(enabled_facets) { }
 
-// void tagger::tag() {
+bool tagger::is_facet_enabled(const config::cpp_facet_types ft) const {
+    const auto i(enabled_facets_.find(ft));
+    return i != enabled_facets_.end();
+}
 
-//     model_
-// }
+std::string tagger::
+filename_for_qname(const qname& /*qn*/, const config::cpp_facet_types /*ft*/) const {
+    std::string r;
+    return r;
+}
+
+void tagger::tag_type(type& /*t*/) const {
+}
+
+void tagger::tag(model& m) const {
+    tag_router router(make_tag_router(m));
+    router.route_if_key_not_found(tags::generate_preamble, tags::bool_true);
+
+    using config::cpp_facet_types;
+    const auto& ss(tags::status_supported);
+    router.route_if_key_not_found(tags::cpp::domain::status, ss);
+
+    if (is_facet_enabled(cpp_facet_types::hash))
+        router.route_if_key_not_found(tags::cpp::hash::standard::status, ss);
+
+    if (is_facet_enabled(cpp_facet_types::io))
+        router.route_if_key_not_found(tags::cpp::io::status, ss);
+
+    if (is_facet_enabled(cpp_facet_types::serialization)) {
+        const auto& key(tags::cpp::serialization::boost::status);
+        router.route_if_key_not_found(key, ss);
+    }
+
+    if (is_facet_enabled(cpp_facet_types::test_data)) {
+        const auto& key(tags::cpp::test_data::status);
+        router.route_if_key_not_found(key, ss);
+    }
+
+    if (is_facet_enabled(cpp_facet_types::odb)) {
+        router.route_if_key_not_found(tags::cpp::odb::status, ss);
+    }
+}
 
 } }

@@ -25,6 +25,10 @@
 #pragma once
 #endif
 
+#include <set>
+#include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -40,14 +44,22 @@ public:
     tagger(const tagger&) = default;
     tagger(tagger&&) = default;
 
-// public:
-//     tagger(model& m);
+public:
+    tagger(const std::set<config::cpp_facet_types>& enabled_facets);
 
-// public:
-//     void tag();
+private:
+    bool is_facet_enabled(const config::cpp_facet_types ft) const;
 
-// private:
-//     model& model_;
+    std::string
+    filename_for_qname(const qname& qn, const config::cpp_facet_types ft) const;
+
+    void tag_type(type& t) const;
+
+public:
+    void tag(model& m) const;
+
+private:
+    const std::set<config::cpp_facet_types> enabled_facets_;
 };
 
 } }
