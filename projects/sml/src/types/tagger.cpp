@@ -48,7 +48,7 @@ void tagger::tag(model& m) const {
 
     using config::cpp_facet_types;
     const auto& ss(tags::status_supported);
-    router.route_if_key_not_found(tags::cpp::domain::status, ss);
+    router.route_if_key_not_found(tags::cpp::types::status, ss);
 
     if (is_facet_enabled(cpp_facet_types::hash))
         router.route_if_key_not_found(tags::cpp::hash::standard::status, ss);

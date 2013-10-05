@@ -208,6 +208,7 @@ SML type visitors, etc.
      CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
 
 *** IMPLEMENTATION Implement tagger                                   :story:
+    CLOCK: [2013-10-05 Sat 11:16]--[2013-10-05 Sat 11:38] =>  0:22
     CLOCK: [2013-10-03 Thu 07:22]--[2013-10-03 Thu 07:29] =>  0:07
     CLOCK: [2013-10-03 Thu 07:17]--[2013-10-03 Thu 07:21] =>  0:04
     CLOCK: [2013-10-03 Thu 07:00]--[2013-10-03 Thu 07:13] =>  0:13
@@ -219,6 +220,14 @@ SML type visitors, etc.
     CLOCK: [2013-09-29 Sun 18:23]--[2013-09-29 Sun 18:43] =>  0:20
     CLOCK: [2013-09-29 Sun 01:50]--[2013-09-29 Sun 02:08] =>  0:18
     CLOCK: [2013-09-29 Sun 00:01]--[2013-09-29 Sun 00:10] =>  0:09
+
+**** COMPLETED Split tags for files for each file type                 :task:
+     CLOSED: [2013-10-05 Sat 15:43]
+     CLOCK: [2013-10-05 Sat 14:27]--[2013-10-05 Sat 15:42] =>  1:15
+
+*** Rename domain header formatter to types header formatter          :spike:
+
+The name should reflect the facet name.
 
 **** Propagatable parameters                                          :story:
 

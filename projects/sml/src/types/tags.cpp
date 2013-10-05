@@ -26,7 +26,7 @@ namespace sml {
 const std::string tags::odb_pragma("ODB_PRAGMA");
 const std::string tags::comment("COMMENT");
 const std::string tags::identity_attribute("IDENTITY_ATTRIBUTE");
-const std::string tags::generate_preamble("GENERATE_PREAMBLE");
+const std::string tags::generate_preamble("generate_preamble");
 const std::string tags::original_parent_name("original_parent_name");
 const std::string tags::is_original_parent_visitable(
     "is_original_parent_visitable");
@@ -39,64 +39,214 @@ const std::string tags::status_unsupported("unsupported");
 const std::string tags::status_supported("supported");
 const std::string tags::status_handcrafted("handcrafted");
 
-const std::string tags::cpp::generate_forward_declaration(
-    "cpp.generate_forward_declaration");
-const std::string tags::cpp::generate_implementation(
-    "cpp.generate_implementation");
+/*
+ * cpp::types
+ */
+const std::string tags::cpp::types::status("cpp.types.status");
+const std::string tags::cpp::types::family("cpp.types.family");
+const std::string tags::cpp::types::is_simple_type("cpp.types.is_simple_type");
+const std::string tags::cpp::types::complete_name("cpp.types.complete_name");
+const std::string tags::cpp::types::qualified_name("cpp.types.qualified_name");
+const std::string tags::cpp::types::qualified_original_parent_name(
+    "cpp.types.qualified_original_parent_name");
 
-const std::string tags::cpp::type::family("cpp.type.family");
-const std::string tags::cpp::type::is_simple_type("cpp.type.is_simple_type");
-const std::string tags::cpp::type::complete_name("cpp.type.complete_name");
-const std::string tags::cpp::type::qualified_name("cpp.type.qualified_name");
-const std::string tags::cpp::type::qualified_original_parent_name(
-    "cpp.type.qualified_original_parent_name");
-
-const std::string tags::cpp::domain::status("cpp.domain.status");
-const std::string tags::cpp::domain::generate_defaulted_functions(
-    "cpp.domain.generate_defaulted_functions");
-const std::string tags::cpp::domain::generate_explicit_default_constructor(
+const std::string tags::cpp::types::generate_defaulted_functions(
+    "cpp.types.generate_defaulted_functions");
+const std::string tags::cpp::types::generate_explicit_default_constructor(
     "generate_explicit_default_constructor");
-const std::string tags::cpp::domain::generate_explicit_move_constructor(
-    "generate_explicit_move_constructor");
-const std::string tags::cpp::domain::generate_explicit_destructor(
-    "generate_explicit_destructor_constructor");
-const std::string tags::cpp::domain::generate_explicit_assignment_operator(
-    "generate_explicit_assignment_operator");
-const std::string tags::cpp::domain::generate_complete_constructor(
-    "cpp.domain.generate_complete_constructor");
-const std::string tags::cpp::domain::generate_equality(
-    "cpp.domain.generate_equality");
-const std::string tags::cpp::domain::generate_swap("cpp.domain.generate_swap");
-const std::string tags::cpp::domain::generate_friends(
-    "cpp.domain.generate_friends");
-const std::string tags::cpp::domain::generate_to_stream(
-    "cpp.domain.generate_to_stream");
-const std::string tags::cpp::domain::generate_accept(
-    "cpp.domain.generate_accept");
+const std::string tags::cpp::types::generate_explicit_move_constructor(
+    "cpp.types.generate_explicit_move_constructor");
+const std::string tags::cpp::types::generate_explicit_destructor(
+    "cpp.types.generate_explicit_destructor_constructor");
+const std::string tags::cpp::types::generate_explicit_assignment_operator(
+    "cpp.types.generate_explicit_assignment_operator");
+const std::string tags::cpp::types::generate_complete_constructor(
+    "cpp.types.generate_complete_constructor");
+const std::string tags::cpp::types::generate_equality(
+    "cpp.types.generate_equality");
+const std::string tags::cpp::types::generate_swap("cpp.types.generate_swap");
+const std::string tags::cpp::types::generate_friends(
+    "cpp.types.generate_friends");
+const std::string tags::cpp::types::generate_to_stream(
+    "cpp.types.generate_to_stream");
+const std::string tags::cpp::types::generate_accept(
+    "cpp.types.generate_accept");
 
-const std::string tags::cpp::domain::header::file_name(
-    "cpp.domain.header.file_name");
-const std::string tags::cpp::domain::header::is_system(
-    "cpp.domain.header.is_system");
+const std::string tags::cpp::types::header_file::generate(
+    "cpp.types.header_file.generate");
+const std::string tags::cpp::types::header_file::file_name(
+    "cpp.types.header_file.file_name");
+const std::string tags::cpp::types::header_file::is_system(
+    "cpp.types.header_file.is_system");
 
+const std::string tags::cpp::types::implementation_file::generate(
+    "cpp.types.implementation_file.generate");
+const std::string tags::cpp::types::implementation_file::file_name(
+    "cpp.types.implementation_file.file_name");
+const std::string tags::cpp::types::implementation_file::is_system(
+    "cpp.types.implementation_file.is_system");
+
+const std::string tags::cpp::types::forward_declarations_file::generate(
+    "cpp.types.forward_declarations_file.generate");
+const std::string tags::cpp::types::forward_declarations_file::file_name(
+    "cpp.types.forward_declarations_file.file_name");
+const std::string tags::cpp::types::forward_declarations_file::is_system(
+    "cpp.types.forward_declarations_file.is_system");
+
+const std::string tags::cpp::types::includers_file::generate(
+    "cpp.types.includers_file.generate");
+const std::string tags::cpp::types::includers_file::file_name(
+    "cpp.types.includers_file.file_name");
+const std::string tags::cpp::types::includers_file::is_system(
+    "cpp.types.includers_file.is_system");
+
+/*
+ * cpp::hash::standard
+ */
 const std::string tags::cpp::hash::standard::status(
     "cpp.hash.standard.status");
-const std::string tags::cpp::hash::standard::header::file_name(
-    "cpp.hash.standard.header.file_name");
-const std::string tags::cpp::hash::standard::header::is_system(
-    "cpp.hash.standard.header.is_system");
+const std::string tags::cpp::hash::standard::header_file::generate(
+    "cpp.types.header_file.generate");
+const std::string tags::cpp::hash::standard::header_file::file_name(
+    "cpp.types.header_file.file_name");
+const std::string tags::cpp::hash::standard::header_file::is_system(
+    "cpp.types.header_file.is_system");
 
+const std::string tags::cpp::hash::standard::implementation_file::generate(
+    "cpp.hash.standard.implementation_file.generate");
+const std::string tags::cpp::hash::standard::implementation_file::file_name(
+    "cpp.hash.standard.implementation_file.file_name");
+const std::string tags::cpp::hash::standard::implementation_file::is_system(
+    "cpp.hash.standard.implementation_file.is_system");
+
+const std::string tags::cpp::hash::standard::forward_declarations_file::generate(
+    "cpp.hash.standard.forward_declarations_file.generate");
+const std::string tags::cpp::hash::standard::forward_declarations_file::file_name(
+    "cpp.hash.standard.forward_declarations_file.file_name");
+const std::string tags::cpp::hash::standard::forward_declarations_file::is_system(
+    "cpp.hash.standard.forward_declarations_file.is_system");
+
+const std::string tags::cpp::hash::standard::includers_file::generate(
+    "cpp.hash.standard.includers_file.generate");
+const std::string tags::cpp::hash::standard::includers_file::file_name(
+    "cpp.hash.standard.includers_file.file_name");
+const std::string tags::cpp::hash::standard::includers_file::is_system(
+    "cpp.hash.standard.includers_file.is_system");
+
+/*
+ * cpp::serialization
+ */
 const std::string tags::cpp::serialization::boost::status(
     "cpp.serialization.boost.status");
-const std::string tags::cpp::serialization::boost::header::
-file_name("cpp.serialization.boost.header.file_name");
-const std::string tags::cpp::serialization::boost::header::
-is_system("cpp.serialization.boost.header.is_system");
 
+const std::string tags::cpp::serialization::boost::header_file::generate(
+    "cpp.serialization.boost.header_file.generate");
+const std::string tags::cpp::serialization::boost::header_file::file_name(
+    "cpp.serialization.boost.header_file.file_name");
+const std::string tags::cpp::serialization::boost::header_file::is_system(
+    "cpp.serialization.boost.header_file.is_system");
+
+const std::string tags::cpp::serialization::boost::implementation_file::generate(
+    "cpp.serialization.boost.implementation_file.generate");
+const std::string tags::cpp::serialization::boost::implementation_file::file_name(
+    "cpp.serialization.boost.implementation_file.file_name");
+const std::string tags::cpp::serialization::boost::implementation_file::is_system(
+    "cpp.serialization.boost.implementation_file.is_system");
+
+const std::string tags::cpp::serialization::boost::forward_declarations_file::generate(
+    "cpp.serialization.boost.forward_declarations_file.generate");
+const std::string tags::cpp::serialization::boost::forward_declarations_file::file_name(
+    "cpp.serialization.boost.forward_declarations_file.file_name");
+const std::string tags::cpp::serialization::boost::forward_declarations_file::is_system(
+    "cpp.serialization.boost.forward_declarations_file.is_system");
+
+const std::string tags::cpp::serialization::boost::includers_file::generate(
+    "cpp.serialization.boost.includers_file.generate");
+const std::string tags::cpp::serialization::boost::includers_file::file_name(
+    "cpp.serialization.boost.includers_file.file_name");
+const std::string tags::cpp::serialization::boost::includers_file::is_system(
+    "cpp.serialization.boost.includers_file.is_system");
+
+/*
+ * cpp::io
+ */
 const std::string tags::cpp::io::status("cpp.io.status");
-const std::string tags::cpp::io::header::file_name(
-    "cpp.io.header.file_name");
-const std::string tags::cpp::io::header::is_system(
-    "cpp.io.header.is_system");
+const std::string tags::cpp::io::header_file::generate(
+    "cpp.io.header_file.generate");
+const std::string tags::cpp::io::header_file::file_name(
+    "cpp.io.header_file.file_name");
+const std::string tags::cpp::io::header_file::is_system(
+    "cpp.io.header_file.is_system");
+
+const std::string tags::cpp::io::implementation_file::generate(
+    "cpp.io.implementation_file.generate");
+const std::string tags::cpp::io::implementation_file::file_name(
+    "cpp.io.implementation_file.file_name");
+const std::string tags::cpp::io::implementation_file::is_system(
+    "cpp.io.implementation_file.is_system");
+
+const std::string tags::cpp::io::forward_declarations_file::generate(
+    "cpp.io.forward_declarations_file.generate");
+const std::string tags::cpp::io::forward_declarations_file::file_name(
+    "cpp.io.forward_declarations_file.file_name");
+const std::string tags::cpp::io::forward_declarations_file::is_system(
+    "cpp.io.forward_declarations_file.is_system");
+
+const std::string tags::cpp::io::includers_file::generate(
+    "cpp.io.includers_file.generate");
+const std::string tags::cpp::io::includers_file::file_name(
+    "cpp.io.includers_file.file_name");
+const std::string tags::cpp::io::includers_file::is_system(
+    "cpp.io.includers_file.is_system");
+
+/*
+ * cpp::test_data
+ */
+const std::string tags::cpp::test_data::status("cpp.test_data.status");
+const std::string tags::cpp::test_data::header_file::generate(
+    "cpp.test_data.header_file.generate");
+const std::string tags::cpp::test_data::header_file::file_name(
+    "cpp.test_data.header_file.file_name");
+const std::string tags::cpp::test_data::header_file::is_system(
+    "cpp.test_data.header_file.is_system");
+
+const std::string tags::cpp::test_data::implementation_file::generate(
+    "cpp.test_data.implementation_file.generate");
+const std::string tags::cpp::test_data::implementation_file::file_name(
+    "cpp.test_data.implementation_file.file_name");
+const std::string tags::cpp::test_data::implementation_file::is_system(
+    "cpp.test_data.implementation_file.is_system");
+
+const std::string tags::cpp::test_data::forward_declarations_file::generate(
+    "cpp.test_data.forward_declarations_file.generate");
+const std::string tags::cpp::test_data::forward_declarations_file::file_name(
+    "cpp.test_data.forward_declarations_file.file_name");
+const std::string tags::cpp::test_data::forward_declarations_file::is_system(
+    "cpp.test_data.forward_declarations_file.is_system");
+
+const std::string tags::cpp::test_data::includers_file::generate(
+    "cpp.test_data.includers_file.generate");
+const std::string tags::cpp::test_data::includers_file::file_name(
+    "cpp.test_data.includers_file.file_name");
+const std::string tags::cpp::test_data::includers_file::is_system(
+    "cpp.test_data.includers_file.is_system");
+
+/*
+ * cpp::odb
+ */
+const std::string tags::cpp::odb::status("cpp.odb.status");
+const std::string tags::cpp::odb::header_file::generate(
+    "cpp.odb.header_file.generate");
+const std::string tags::cpp::odb::header_file::file_name(
+    "cpp.odb.header_file.file_name");
+const std::string tags::cpp::odb::header_file::is_system(
+    "cpp.odb.header_file.is_system");
+
+const std::string tags::cpp::odb::includers_file::generate(
+    "cpp.odb.includers_file.generate");
+const std::string tags::cpp::odb::includers_file::file_name(
+    "cpp.odb.includers_file.file_name");
+const std::string tags::cpp::odb::includers_file::is_system(
+    "cpp.odb.includers_file.is_system");
 
 } }

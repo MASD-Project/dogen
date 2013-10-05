@@ -101,21 +101,17 @@ struct tags {
      */
     struct cpp {
         /**
-         * @brief If set to true, the forward declaration file will be
-         * generated.
+         * @brief Parameters specific to the @e types facet.
+         *
+         * The types facet is the main domain facet.
          */
-        static const std::string generate_forward_declaration;
+        struct types {
+            /**
+             * @brief If set to disabled, the @e types facet will not
+             * be generated for this type or model.
+             */
+            static const std::string status;
 
-        /**
-         * @brief If set to true, the implementation file will be
-         * generated.
-         */
-        static const std::string generate_implementation;
-
-        /**
-         * @brief C++ specific parameters that apply only to types.
-         */
-        struct type {
             /**
              * @brief Family of the type.
              *
@@ -148,17 +144,6 @@ struct tags {
              * the hierarchy.
              */
             static const std::string qualified_original_parent_name;
-        };
-
-        /**
-         * @brief Parameters specific to the @e domain facet.
-         */
-        struct domain {
-            /**
-             * @brief If set to disabled, the @e domain facet will not
-             * be generated for this type.
-             */
-            static const std::string status;
 
             /**
              * @brief If set to true, all special defaulted functions
@@ -229,19 +214,95 @@ struct tags {
             static const std::string generate_swap;
 
             /**
-             * @brief Parameters associated with the domain header file.
+             * @brief Parameters associated with the types header file.
              */
-            struct header {
+            struct header_file {
                 /**
-                 * @brief Relative file name for the header file.
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
 
                 /**
-                 * @brief If true, the header file will use
+                 * @brief If true, the file will be included using
                  * angle-brackets in include statements. Quotes are
                  * used otherwise.
-                 *
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the implementation
+             * file.
+             */
+            struct implementation_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the forward
+             * declaration file.
+             */
+            struct forward_declarations_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the includers file.
+             */
+            struct includers_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
                  */
                 static const std::string is_system;
             };
@@ -266,19 +327,101 @@ struct tags {
                 static const std::string status;
 
                 /**
+                 * @brief If set to true, an include file that includes
+                 * all types in this facet will be generated.
+                 */
+                static const std::string generate_includers;
+
+                /**
                  * @brief Parameters associated with the hash header file.
                  */
-                struct header {
+                struct header_file {
                     /**
-                     * @brief Relative file name for the header file.
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
                      */
                     static const std::string file_name;
 
                     /**
-                     * @brief If true, the header file will use
+                     * @brief If true, the file will be included using
                      * angle-brackets in include statements. Quotes are
                      * used otherwise.
-                     *
+                     */
+                    static const std::string is_system;
+                };
+
+                /**
+                 * @brief Parameters associated with the implementation
+                 * file.
+                 */
+                struct implementation_file {
+                    /**
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
+                     */
+                    static const std::string file_name;
+
+                    /**
+                     * @brief If true, the file will be included using
+                     * angle-brackets in include statements. Quotes are
+                     * used otherwise.
+                     */
+                    static const std::string is_system;
+                };
+
+                /**
+                 * @brief Parameters associated with the forward
+                 * declaration file.
+                 */
+                struct forward_declarations_file {
+                    /**
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
+                     */
+                    static const std::string file_name;
+
+                    /**
+                     * @brief If true, the file will be included using
+                     * angle-brackets in include statements. Quotes are
+                     * used otherwise.
+                     */
+                    static const std::string is_system;
+                };
+
+                /**
+                 * @brief Parameters associated with the includers file.
+                 */
+                struct includers_file {
+                    /**
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
+                     */
+                    static const std::string file_name;
+
+                    /**
+                     * @brief If true, the file will be included using
+                     * angle-brackets in include statements. Quotes are
+                     * used otherwise.
                      */
                     static const std::string is_system;
                 };
@@ -303,17 +446,93 @@ struct tags {
                  * @brief Parameters associated with the boost
                  * serialization C++ header file.
                  */
-                struct header {
+                struct header_file {
                     /**
-                     * @brief Relative file name for the header file.
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
                      */
                     static const std::string file_name;
 
                     /**
-                     * @brief If true, the header file will use
+                     * @brief If true, the file will be included using
                      * angle-brackets in include statements. Quotes are
                      * used otherwise.
-                     *
+                     */
+                    static const std::string is_system;
+                };
+
+                /**
+                 * @brief Parameters associated with the implementation
+                 * file.
+                 */
+                struct implementation_file {
+                    /**
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
+                     */
+                    static const std::string file_name;
+
+                    /**
+                     * @brief If true, the file will be included using
+                     * angle-brackets in include statements. Quotes are
+                     * used otherwise.
+                     */
+                    static const std::string is_system;
+                };
+
+                /**
+                 * @brief Parameters associated with the forward
+                 * declaration file.
+                 */
+                struct forward_declarations_file {
+                    /**
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
+                     */
+                    static const std::string file_name;
+
+                    /**
+                     * @brief If true, the file will be included using
+                     * angle-brackets in include statements. Quotes are
+                     * used otherwise.
+                     */
+                    static const std::string is_system;
+                };
+
+                /**
+                 * @brief Parameters associated with the includers file.
+                 */
+                struct includers_file {
+                    /**
+                     * @brief If set to true, the file will be generated
+                     * for this entity.
+                     */
+                    static const std::string generate;
+
+                    /**
+                     * @brief Relative file name for the file.
+                     */
+                    static const std::string file_name;
+
+                    /**
+                     * @brief If true, the file will be included using
+                     * angle-brackets in include statements. Quotes are
+                     * used otherwise.
                      */
                     static const std::string is_system;
                 };
@@ -333,19 +552,95 @@ struct tags {
             /**
              * @brief Parameters associated with the io C++ header file.
              */
-            struct header {
+            struct header_file {
                 /**
-                 * @brief Relative file name for the header file.
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
 
                 /**
-                 * @brief If true, the header file will use
+                 * @brief If true, the file will be included using
                  * angle-brackets in include statements. Quotes are
                  * used otherwise.
                  */
                 static const std::string is_system;
+            };
 
+            /**
+             * @brief Parameters associated with the implementation
+             * file.
+             */
+            struct implementation_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the forward
+             * declaration file.
+             */
+            struct forward_declarations_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the includers file.
+             */
+            struct includers_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
             };
         };
 
@@ -363,14 +658,91 @@ struct tags {
              * @brief Parameters associated with the @e test_data C++
              * header file.
              */
-            struct header {
+            struct header_file {
                 /**
-                 * @brief Relative file name for the header file.
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
 
                 /**
-                 * @brief If true, the header file will use
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the implementation
+             * file.
+             */
+            struct implementation_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the forward
+             * declaration file.
+             */
+            struct forward_declarations_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the includers file.
+             */
+            struct includers_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
                  * angle-brackets in include statements. Quotes are
                  * used otherwise.
                  */
@@ -391,14 +763,43 @@ struct tags {
             /**
              * @brief Parameters associated with the io C++ header file.
              */
-            struct header {
+            struct header_file {
                 /**
-                 * @brief Relative file name for the header file.
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
 
                 /**
-                 * @brief If true, the header file will use
+                 * @brief If true, the file will be included using
+                 * angle-brackets in include statements. Quotes are
+                 * used otherwise.
+                 */
+                static const std::string is_system;
+            };
+
+            /**
+             * @brief Parameters associated with the includers file.
+             */
+            struct includers_file {
+                /**
+                 * @brief If set to true, the file will be generated
+                 * for this entity.
+                 */
+                static const std::string generate;
+
+                /**
+                 * @brief Relative file name for the file.
+                 */
+                static const std::string file_name;
+
+                /**
+                 * @brief If true, the file will be included using
                  * angle-brackets in include statements. Quotes are
                  * used otherwise.
                  */
