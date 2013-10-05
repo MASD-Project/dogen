@@ -1,15 +1,16 @@
 #+title: Backlog
-#+options: date:nil toc:nil author:nil num:nil
-#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
-#+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Backlog
+*** Consider adding YQL support                                       :story:
 
-This file contains all stories that haven't been assigned to a sprint.
+YQL offers a REST based API with lots of interesting information; an
+example of the information provided is available [[https://github.com/yql/yql-tables/blob/master/yahoo/finance/yahoo.finance.quant.xml][here]]. There should be
+somewhere a matching XML schema for each of these queries, at least
+for the end points that return XML. It would be great if one could
+take one of those schemas and generate an SML representation for them.
 
-** Development Stories
-
-Stories that we intend to look at, at some point.
+More generally, it would be great if dogen was able to create a domain
+model off of an XML schema. However, we already have the Code
+Synthesis [[http://www.codesynthesis.com/products/xsd/][XSD tool]] for that, so maybe this is just scope creep.
 
 *** Consider adding merging code generation support                   :story:
 
