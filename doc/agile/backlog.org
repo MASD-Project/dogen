@@ -1,4 +1,22 @@
 #+title: Backlog
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Backlog
+** Development Stories
+
+Stories that we intend to look at, at some point.
+
+*** Consider model as a container of types                            :story:
+
+At present model is composed of objects, primitives, concepts,
+modules, etc. We could bring together all descendants of types into a
+single container (e.g. types). However, in places we do thinks like
+looking at the primitive container to see if the container has any
+primitive types - these would become slower as we'd now be looking at
+the entire type collection. Need to look at all usages of these
+containers in the code to see if this would be a win or not.
 
 *** Consider adding YQL support                                       :story:
 
