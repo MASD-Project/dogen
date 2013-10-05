@@ -84,6 +84,13 @@ struct tags {
     static const std::string is_final;
 
     /**
+     * @brief If true, the project will be split.
+     *
+     * @deprecated used only for backwards compatibility.
+     */
+    static const std::string split_project;
+
+    /**
      * @brief Valid values for Boolean types.
      */
     static const std::string bool_true;
@@ -101,6 +108,41 @@ struct tags {
      */
     struct cpp {
         /**
+         * @brief Extension to use for header files, including the
+         * leading dot.
+         *
+         * Example: @e .hpp, @e .hxx
+         */
+        static const std::string header_file_extension;
+
+        /**
+         * @brief Extension to use for implementation files, including
+         * the leading dot.
+         *
+         * Example: @e .cpp, @e .cxx.
+         */
+        static const std::string implementation_file_extension;
+
+        /**
+         * @brief If true, files for each facet will be placed in a
+         * folder for the facet.
+         */
+        static const std::string enable_facet_folders;
+
+        /**
+         * @brief If true, each file in each facet will have a name
+         * unique across all facets.
+         *
+         * This is achieved by using the facet's postfix.
+         */
+        static const std::string enable_unique_file_names;
+
+        /**
+         * @brief Postfix to use for all forward declaration files.
+         */
+        static const std::string forward_declaration_postfix;
+
+        /**
          * @brief Parameters specific to the @e types facet.
          *
          * The types facet is the main domain facet.
@@ -111,6 +153,16 @@ struct tags {
              * be generated for this type or model.
              */
             static const std::string status;
+
+            /**
+             * @brief Name of the folder to use for this facet.
+             */
+            static const std::string directory_name;
+
+            /**
+             * @brief Postfix for all file names in the facet.
+             */
+            static const std::string postfix;
 
             /**
              * @brief Family of the type.
@@ -327,6 +379,11 @@ struct tags {
                 static const std::string status;
 
                 /**
+                 * @brief Name of the folder to use for this facet.
+                 */
+                static const std::string directory_name;
+
+                /**
                  * @brief If set to true, an include file that includes
                  * all types in this facet will be generated.
                  */
@@ -443,6 +500,17 @@ struct tags {
                 static const std::string status;
 
                 /**
+                 * @brief Name of the folder to use for this facet.
+                 */
+                static const std::string directory_name;
+
+                /**
+                 * @brief If true, serialization code will cater for
+                 * boost XML serialization.
+                 */
+                static const std::string enable_xml_serialization;
+
+                /**
                  * @brief Parameters associated with the boost
                  * serialization C++ header file.
                  */
@@ -550,6 +618,17 @@ struct tags {
             static const std::string status;
 
             /**
+             * @brief Name of the folder to use for this facet.
+             */
+            static const std::string directory_name;
+
+            /**
+             * @brief If true, IO operations will be in the class
+             * itself rather than on a separate facet.
+             */
+            static const std::string enable_integrated_io;
+
+            /**
              * @brief Parameters associated with the io C++ header file.
              */
             struct header_file {
@@ -653,6 +732,11 @@ struct tags {
              * will not be generated for this type.
              */
             static const std::string status;
+
+            /**
+             * @brief Name of the folder to use for this facet.
+             */
+            static const std::string directory_name;
 
             /**
              * @brief Parameters associated with the @e test_data C++
@@ -759,6 +843,11 @@ struct tags {
              * generated for this type.
              */
             static const std::string status;
+
+            /**
+             * @brief Name of the folder to use for this facet.
+             */
+            static const std::string directory_name;
 
             /**
              * @brief Parameters associated with the io C++ header file.

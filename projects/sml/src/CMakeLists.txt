@@ -23,6 +23,12 @@ file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(sml STATIC ${all_files})
+target_link_libraries(sml
+    config
+    utility
+    ${LIBXML2_LIBRARIES}
+    ${Boost_LIBRARIES})
+
 set_target_properties(sml PROPERTIES
     OUTPUT_NAME dogen_sml)
 

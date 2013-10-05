@@ -31,6 +31,7 @@ const std::string tags::original_parent_name("original_parent_name");
 const std::string tags::is_original_parent_visitable(
     "is_original_parent_visitable");
 const std::string tags::is_final("is_final");
+const std::string tags::split_project("split_project");
 
 const std::string tags::bool_true("true");
 const std::string tags::bool_false("false");
@@ -39,10 +40,22 @@ const std::string tags::status_unsupported("unsupported");
 const std::string tags::status_supported("supported");
 const std::string tags::status_handcrafted("handcrafted");
 
+const std::string tags::cpp::header_file_extension("cpp.header_file_extension");
+const std::string tags::cpp::implementation_file_extension(
+    "cpp.implementation_file_extension");
+
+const std::string tags::cpp::enable_facet_folders("cpp.enable_facet_folders");
+const std::string tags::cpp::enable_unique_file_names(
+    "cpp.enable_unique_file_names");
+const std::string tags::cpp::forward_declaration_postfix(
+    "cpp.forward_declaration_postfix");
+
 /*
  * cpp::types
  */
 const std::string tags::cpp::types::status("cpp.types.status");
+const std::string tags::cpp::types::directory_name("cpp.types.directory_name");
+const std::string tags::cpp::types::postfix("cpp.types.postfix");
 const std::string tags::cpp::types::family("cpp.types.family");
 const std::string tags::cpp::types::is_simple_type("cpp.types.is_simple_type");
 const std::string tags::cpp::types::complete_name("cpp.types.complete_name");
@@ -105,6 +118,9 @@ const std::string tags::cpp::types::includers_file::is_system(
  */
 const std::string tags::cpp::hash::standard::status(
     "cpp.hash.standard.status");
+const std::string tags::cpp::hash::standard::directory_name(
+    "cpp.hash.standard.directory_name");
+
 const std::string tags::cpp::hash::standard::header_file::generate(
     "cpp.types.header_file.generate");
 const std::string tags::cpp::hash::standard::header_file::file_name(
@@ -138,7 +154,10 @@ const std::string tags::cpp::hash::standard::includers_file::is_system(
  */
 const std::string tags::cpp::serialization::boost::status(
     "cpp.serialization.boost.status");
-
+const std::string tags::cpp::serialization::boost::directory_name(
+    "cpp.serialization.boost.directory_name");
+const std::string tags::cpp::serialization::boost::enable_xml_serialization(
+    "cpp.serialization.boost.enable_xml_serialization");
 const std::string tags::cpp::serialization::boost::header_file::generate(
     "cpp.serialization.boost.header_file.generate");
 const std::string tags::cpp::serialization::boost::header_file::file_name(
@@ -171,6 +190,10 @@ const std::string tags::cpp::serialization::boost::includers_file::is_system(
  * cpp::io
  */
 const std::string tags::cpp::io::status("cpp.io.status");
+const std::string tags::cpp::io::directory_name("cpp.io.directory_name");
+const std::string tags::cpp::io::enable_integrated_io(
+    "cpp.io.enable_integrated_io");
+
 const std::string tags::cpp::io::header_file::generate(
     "cpp.io.header_file.generate");
 const std::string tags::cpp::io::header_file::file_name(
@@ -203,6 +226,9 @@ const std::string tags::cpp::io::includers_file::is_system(
  * cpp::test_data
  */
 const std::string tags::cpp::test_data::status("cpp.test_data.status");
+const std::string tags::cpp::test_data::directory_name(
+    "cpp.test_data.directory_name");
+
 const std::string tags::cpp::test_data::header_file::generate(
     "cpp.test_data.header_file.generate");
 const std::string tags::cpp::test_data::header_file::file_name(
@@ -235,6 +261,8 @@ const std::string tags::cpp::test_data::includers_file::is_system(
  * cpp::odb
  */
 const std::string tags::cpp::odb::status("cpp.odb.status");
+const std::string tags::cpp::odb::directory_name("cpp.odb.directory_name");
+
 const std::string tags::cpp::odb::header_file::generate(
     "cpp.odb.header_file.generate");
 const std::string tags::cpp::odb::header_file::file_name(

@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-05 Sat 18:18]
+Clock summary at [2013-10-06 Sun 01:42]
 
 | Headline                                                                 | Time    |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                             | *30:57* |       |       |
+| *Total time*                                                             | *33:14* |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                          |         | 30:57 |       |
+| Development Stories Implemented                                          |         | 33:14 |       |
 | IMPLEMENTATION Release notes and backlog grooming                        |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
@@ -25,10 +25,10 @@ Clock summary at [2013-10-05 Sat 18:18]
 | COMPLETED Fix includes in SML tests                                      |         |       |  0:42 |
 | COMPLETED Create an hydrator from JSON into SML                          |         |       |  3:53 |
 | COMPLETED Replace static factories for system models with json hydration |         |       |  1:41 |
+| COMPLETED Rename domain header formatter to types header formatter       |         |       |  0:13 |
 | IMPLEMENTATION Implement the property cache in SML                       |         |       |  1:14 |
 | IMPLEMENTATION Create a complete domain formatter in OM                  |         |       | 10:42 |
-| IMPLEMENTATION Implement tagger                                          |         |       |  4:21 |
-| COMPLETED Rename domain header formatter to types header formatter       |         |       |  0:13 |
+| IMPLEMENTATION Implement tagger                                          |         |       |  6:38 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -241,6 +241,15 @@ SML type visitors, etc.
 **** COMPLETED Split tags for files for each file type                 :task:
      CLOSED: [2013-10-05 Sat 15:43]
      CLOCK: [2013-10-05 Sat 14:27]--[2013-10-05 Sat 15:42] =>  1:15
+
+**** COMPLETED Add tagging from config as way of keeping backwards compatibility :task:
+     CLOSED: [2013-10-06 Sun 01:41]
+     CLOCK: [2013-10-06 Sun 00:11]--[2013-10-06 Sun 01:41] =>  1:30
+
+**** IMPLEMENTATION Add tagging for types                              :task:
+     CLOCK: [2013-10-06 Sun 00:02]--[2013-10-06 Sun 00:10] =>  0:08
+     CLOCK: [2013-10-05 Sat 21:10]--[2013-10-05 Sat 21:20] =>  0:10
+     CLOCK: [2013-10-05 Sat 20:27]--[2013-10-05 Sat 20:56] =>  0:29
 
 *** Create an SML level concept for facets                            :story:
 

@@ -26,6 +26,8 @@
 #endif
 
 #include <set>
+#include "dogen/config/types/cpp_settings.hpp"
+
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type.hpp"
@@ -44,22 +46,53 @@ public:
     tagger(const tagger&) = default;
     tagger(tagger&&) = default;
 
-public:
-    tagger(const std::set<config::cpp_facet_types>& enabled_facets);
-
 private:
-    bool is_facet_enabled(const config::cpp_facet_types ft) const;
+    /**
+     * @brief Tag the model with all the options chosen in the
+     * application settings.
+     *
+     * This ensures backwards compatibility until we remove these
+     * options from the configuration model.
+     */
+    void from_settings(const config::cpp_settings& s, model& m) const;
 
-    std::string
-    filename_for_qname(const qname& qn, const config::cpp_facet_types ft) const;
+    /**
+     * @brief Returns true if the facet is enabled in the settings,
+     * false otherwise.
+     */
+    bool is_facet_enabled(
+        const std::set<config::cpp_facet_types> enabled_facets,
+        const config::cpp_facet_types facet) const;
 
+    /**
+     * @brief Returns the file name for the given qname and facet.
+     */
+    std::string filename_for_qname(const model& m,
+        const bool split_project,
+        const bool is_header, const qname& qn,
+        const std::string& facet_directory,
+        const std::string& facet_postfix,
+        const std::string& additional_postfix,
+        const std::string& extension) const;
+
+    /**
+     * @brief Adds meta-data to the type supplied.
+     */
     void tag_type(type& t) const;
 
 public:
+    /**
+     * @brief Adds meta-data to the model supplied.
+     */
     void tag(model& m) const;
 
-private:
-    const std::set<config::cpp_facet_types> enabled_facets_;
+    /**
+     * @brief Adds meta-data to the model supplied.
+     *
+     * @deprecated This method is only made available for backwards
+     * compatibility.
+     */
+    void tag(const config::cpp_settings& s, model& m) const;
 };
 
 } }
