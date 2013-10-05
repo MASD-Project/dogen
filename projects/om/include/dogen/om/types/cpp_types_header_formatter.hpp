@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_CPP_DOMAIN_HEADER_FORMATTER_HPP
-#define DOGEN_OM_TYPES_CPP_DOMAIN_HEADER_FORMATTER_HPP
+#ifndef DOGEN_OM_TYPES_CPP_TYPES_HEADER_FORMATTER_HPP
+#define DOGEN_OM_TYPES_CPP_TYPES_HEADER_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,18 +39,18 @@ namespace dogen {
 namespace om {
 
 /**
- * @brief Formats SML types carrying domain objects into a C++
+ * @brief Formats SML types carrying types objects into a C++
  * representation.
  */
-class cpp_domain_header_formatter : public type_formatter_interface,
+class cpp_types_header_formatter : public type_formatter_interface,
                                     private sml::type_visitor {
 public:
-    cpp_domain_header_formatter(const cpp_domain_header_formatter&) = default;
-    cpp_domain_header_formatter(cpp_domain_header_formatter&&) = default;
+    cpp_types_header_formatter(const cpp_types_header_formatter&) = default;
+    cpp_types_header_formatter(cpp_types_header_formatter&&) = default;
 
 public:
-    cpp_domain_header_formatter();
-    virtual ~cpp_domain_header_formatter() noexcept { }
+    cpp_types_header_formatter();
+    virtual ~cpp_types_header_formatter() noexcept { }
 
 private:
     /**

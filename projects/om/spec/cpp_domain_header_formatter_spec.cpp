@@ -35,14 +35,14 @@
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/om/types/cpp_domain_header_formatter.hpp"
+#include "dogen/om/types/cpp_types_header_formatter.hpp"
 
 using dogen::sml::test::mock_model_factory;
 
 namespace {
 
 const std::string test_module("om");
-const std::string test_suite("cpp_domain_header_formatter_spec");
+const std::string test_suite("cpp_types_header_formatter_spec");
 const std::string empty_marker;
 const dogen::om::licence empty_licence = dogen::om::licence();
 const dogen::om::modeline empty_modeline = dogen::om::modeline();
@@ -216,10 +216,10 @@ typedef dogen::sml::test::mock_model_factory::object_types object_types;
 typedef dogen::sml::test::mock_model_factory::property_types property_types;
 typedef dogen::sml::test::mock_model_factory factory;
 
-BOOST_AUTO_TEST_SUITE(cpp_domain_header_formatter)
+BOOST_AUTO_TEST_SUITE(cpp_types_header_formatter)
 
-BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("enumeration_with_two_enumerators_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("enumeration_with_two_enumerators_produces_expected_types_header");
 
     const auto ot(object_types::enumeration);
     const auto m(factory::build_single_type_model(0, ot));
@@ -227,7 +227,7 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
     const auto e(m.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
@@ -240,15 +240,15 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_domain_h
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
-BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("object_with_no_properties_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("object_with_no_properties_produces_expected_types_header");
 
     const auto m(factory::build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
     const auto& o(find_object(m, 0));
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
@@ -260,8 +260,8 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_domain_header) 
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
-BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("parent_object_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("parent_object_produces_expected_types_header");
 
     const auto m(mock_model_factory::object_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -271,7 +271,7 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
@@ -280,8 +280,8 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
-BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("leaf_child_object_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("leaf_child_object_produces_expected_types_header");
 
     const auto m(mock_model_factory::object_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
@@ -291,7 +291,7 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -301,8 +301,8 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
-BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("non_leaf_child_object_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("non_leaf_child_object_produces_expected_types_header");
 
     const auto m(mock_model_factory::
         object_with_third_degree_parent_in_same_model());
@@ -313,7 +313,7 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -323,8 +323,8 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_domain_header) {
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
-BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("generating_explicitly_defaulted_functions_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("generating_explicitly_defaulted_functions_produces_expected_types_header");
 
     auto m(factory::build_single_type_model());
     BOOST_CHECK(m.objects().size() == 1);
@@ -337,7 +337,7 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -348,8 +348,8 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
-BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("generating_manual_default_constructor_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("generating_manual_default_constructor_produces_expected_types_header");
 
     auto m(factory::build_single_type_model());
     BOOST_CHECK(m.objects().size() == 1);
@@ -366,7 +366,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_dom
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -377,8 +377,8 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_dom
     BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
 }
 
-BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_domain_header) {
-    SETUP_TEST_LOG_SOURCE("generating_manual_move_constructor_produces_expected_domain_header");
+BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("generating_manual_move_constructor_produces_expected_types_header");
 
     auto m(factory::build_single_type_model());
     BOOST_CHECK(m.objects().size() == 1);
@@ -395,7 +395,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_domain
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     std::ostringstream s;
-    dogen::om::cpp_domain_header_formatter f;
+    dogen::om::cpp_types_header_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);

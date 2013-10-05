@@ -5575,7 +5575,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_domain_header_formatter#</dia:string>
+        <dia:string>#cpp_types_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-03 Thu 08:25]
+Clock summary at [2013-10-05 Sat 18:18]
 
 | Headline                                                                 | Time    |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                             | *29:07* |       |       |
+| *Total time*                                                             | *30:57* |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                          |         | 29:07 |       |
+| Development Stories Implemented                                          |         | 30:57 |       |
 | IMPLEMENTATION Release notes and backlog grooming                        |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
@@ -27,7 +27,8 @@ Clock summary at [2013-10-03 Thu 08:25]
 | COMPLETED Replace static factories for system models with json hydration |         |       |  1:41 |
 | IMPLEMENTATION Implement the property cache in SML                       |         |       |  1:14 |
 | IMPLEMENTATION Create a complete domain formatter in OM                  |         |       | 10:42 |
-| IMPLEMENTATION Implement tagger                                          |         |       |  2:44 |
+| IMPLEMENTATION Implement tagger                                          |         |       |  4:21 |
+| COMPLETED Rename domain header formatter to types header formatter       |         |       |  0:13 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -159,6 +160,22 @@ that generates SML models.
     CLOCK: [2013-10-01 Tue 18:20]--[2013-10-01 Tue 18:30] =>  0:10
     CLOCK: [2013-10-01 Tue 18:01]--[2013-10-01 Tue 18:10] =>  0:09
 
+*** COMPLETED Rename domain header formatter to types header formatter :spike:
+    CLOSED: [2013-10-05 Sat 18:18]
+    CLOCK: [2013-10-05 Sat 18:05]--[2013-10-05 Sat 18:18] =>  0:13
+
+The name should reflect the facet name.
+
+**** Propagatable parameters                                          :story:
+
+Some implementation specific parameters should be propagated along the
+composition graph (e.g. boost serialisation status disabled). We could
+spot these parameters whilst building the model and do the propagation
+there and then.
+
+We need to create language specific classes to propagate parameters,
+assign proper defaults to them, etc.
+
 *** IMPLEMENTATION Implement the property cache in SML                :story:
     CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08
     CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
@@ -224,20 +241,6 @@ SML type visitors, etc.
 **** COMPLETED Split tags for files for each file type                 :task:
      CLOSED: [2013-10-05 Sat 15:43]
      CLOCK: [2013-10-05 Sat 14:27]--[2013-10-05 Sat 15:42] =>  1:15
-
-*** Rename domain header formatter to types header formatter          :spike:
-
-The name should reflect the facet name.
-
-**** Propagatable parameters                                          :story:
-
-Some implementation specific parameters should be propagated along the
-composition graph (e.g. boost serialisation status disabled). We could
-spot these parameters whilst building the model and do the propagation
-there and then.
-
-We need to create language specific classes to propagate parameters,
-assign proper defaults to them, etc.
 
 *** Create an SML level concept for facets                            :story:
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_CPP_DOMAIN_HEADER_FORMATTER_FWD_HPP
-#define DOGEN_OM_TYPES_CPP_DOMAIN_HEADER_FORMATTER_FWD_HPP
+#ifndef DOGEN_OM_TYPES_CPP_TYPES_HEADER_FORMATTER_FWD_HPP
+#define DOGEN_OM_TYPES_CPP_TYPES_HEADER_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace om {
 
-class cpp_domain_header_formatter;
+class cpp_types_header_formatter;
 
 } }
 
