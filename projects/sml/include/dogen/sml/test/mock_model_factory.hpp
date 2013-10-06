@@ -83,6 +83,10 @@ public:
      */
     static qname build_qname(
         const unsigned int model_n = 0, const unsigned int simple_n = 0);
+    /**
+     * @brief Builds a model with no types, concepts or modules.
+     */
+    static model build_empty_model(const unsigned int n = 0);
 
     /**
      * @brief Builds a model with a name derived from n, containing a
