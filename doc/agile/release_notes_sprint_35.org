@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-06 Sun 12:24]
+Clock summary at [2013-10-06 Sun 13:18]
 
 | Headline                                                                 | Time    |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                             | *33:33* |       |       |
+| *Total time*                                                             | *34:24* |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                          |         | 33:33 |       |
+| Development Stories Implemented                                          |         | 34:24 |       |
 | IMPLEMENTATION Release notes and backlog grooming                        |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
@@ -28,7 +28,7 @@ Clock summary at [2013-10-06 Sun 12:24]
 | COMPLETED Rename domain header formatter to types header formatter       |         |       |  0:13 |
 | IMPLEMENTATION Implement the property cache in SML                       |         |       |  1:14 |
 | IMPLEMENTATION Create a complete domain formatter in OM                  |         |       | 10:42 |
-| IMPLEMENTATION Implement tagger                                          |         |       |  6:57 |
+| IMPLEMENTATION Implement tagger                                          |         |       |  7:48 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -247,6 +247,7 @@ SML type visitors, etc.
      CLOCK: [2013-10-06 Sun 00:11]--[2013-10-06 Sun 01:41] =>  1:30
 
 **** IMPLEMENTATION Add tests around model tagging                     :task:
+     CLOCK: [2013-10-06 Sun 12:25]--[2013-10-06 Sun 13:16] =>  0:51
      CLOCK: [2013-10-06 Sun 12:23]--[2013-10-06 Sun 12:24] =>  0:01
      CLOCK: [2013-10-06 Sun 12:05]--[2013-10-06 Sun 12:23] =>  0:18
 

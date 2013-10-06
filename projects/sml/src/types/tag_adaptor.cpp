@@ -41,11 +41,8 @@ bool tag_adaptor::has_key(const std::string& key) const {
 }
 
 bool tag_adaptor::is_true(const std::string& key) const {
-    const auto i(simple_tags_.find(key));
-    if (i != simple_tags_.end())
-        return i->second == tags::bool_true;
-
-    return false;
+    const auto value(get(key));
+    return value == tags::bool_true;
 }
 
 bool tag_adaptor::is_false(const std::string& key) const {
@@ -58,6 +55,11 @@ std::string tag_adaptor::get(const std::string& key) const {
         return i->second;
 
     return empty;
+}
+
+bool tag_adaptor::is_supported(const std::string& key) const {
+    const auto value(get(key));
+    return value == tags::status_supported;
 }
 
 std::list<std::pair<std::string,std::string> > tag_adaptor::odb_pragma() const {

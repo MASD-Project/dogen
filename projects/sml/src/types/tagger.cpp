@@ -246,7 +246,7 @@ void tagger::tag(model& m) const {
     router.route_if_key_not_found(tags::cpp::types::status, ss);
 
     auto adaptor(make_tag_adaptor(m));
-    if (adaptor.is_true(tags::cpp::types::status)) {
+    if (adaptor.is_supported(tags::cpp::types::status)) {
         router.route_if_key_not_found(tags::cpp::types::directory_name,
             types_directory);
 
@@ -259,10 +259,13 @@ void tagger::tag(model& m) const {
             router.route_if_key_not_found(
                 tags::cpp::types::header_file::generate, tags::bool_true);
 
+            // must massage the model name in order to generate the
+            // correct file name for the model.
+            qname qn(m.name());
+            qn.simple_name(m.name().model_name());
             const auto fn(filename_for_qname(m,
                     adaptor.is_true(tags::split_project),
-                    is_header_file,
-                    m.name(),
+                    is_header_file, qn,
                     adaptor.get(tags::cpp::types::directory_name),
                     adaptor.get(tags::cpp::types::postfix),
                     empty_postfix,

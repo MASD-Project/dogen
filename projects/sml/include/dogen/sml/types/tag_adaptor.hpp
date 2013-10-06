@@ -66,6 +66,12 @@ public:
      */
     std::string get(const std::string& key) const;
 
+    /**
+     * @brief Returns true if the key exists and its value is set to
+     * supported.
+     */
+    bool is_supported(const std::string& key) const;
+
 public:
     /**
      * @brief Returns the odb pragmas.
