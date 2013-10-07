@@ -39,11 +39,10 @@ namespace dogen {
 namespace om {
 
 /**
- * @brief Formats SML types carrying types objects into a C++
- * representation.
+ * @brief Formats SML types into their C++ representation.
  */
 class cpp_types_header_formatter : public type_formatter_interface,
-                                    private sml::type_visitor {
+                                   private sml::type_visitor {
 public:
     cpp_types_header_formatter(const cpp_types_header_formatter&) = default;
     cpp_types_header_formatter(cpp_types_header_formatter&&) = default;
