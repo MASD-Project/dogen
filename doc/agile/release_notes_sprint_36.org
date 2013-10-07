@@ -10,23 +10,32 @@ This file contains all stories that were closed during sprint 36.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-07 Mon 18:08]
+Clock summary at [2013-10-07 Mon 18:51]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:03* |      |      |
+| *Total time*                                      | *0:43* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:03 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:03 |
+| Development Stories Implemented                   |        | 0:43 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:20 |
+| IMPLEMENTATION Add tests around model tagging     |        |      | 0:23 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-10-07 Mon 18:08]--[2013-10-07 Mon 18:25] =>  0:17
     CLOCK: [2013-10-07 Mon 18:05]--[2013-10-07 Mon 18:08] =>  0:03
 
+*** IMPLEMENTATION Add tests around model tagging                     :story:
+
+**** COMPLETED adding all facets                                       :task:
+     CLOSED: [2013-10-07 Mon 18:46]
+    CLOCK: [2013-10-07 Mon 18:26]--[2013-10-07 Mon 18:44] =>  0:18
+
+**** IMPLEMENTATION adding a few facets                                :task:
+     CLOCK: [2013-10-07 Mon 18:46]--[2013-10-07 Mon 18:51] =>  0:05
+
 *** Implement the property cache in SML                               :story:
 *** Add tests for all permutations of the domain formatter            :story:
-*** Add tests around model tagging                                    :story:
 *** Add tagging for types                                             :story:
 *** Add tagging for propagatable parameters                           :story:
 

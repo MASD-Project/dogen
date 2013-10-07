@@ -53,15 +53,21 @@ private:
      *
      * This ensures backwards compatibility until we remove these
      * options from the configuration model.
+     *
+     * @deprecated Needed whilst settings contain options that should
+     * really be in the meta-data.
      */
     void from_settings(const config::cpp_settings& s, model& m) const;
 
     /**
      * @brief Returns true if the facet is enabled in the settings,
      * false otherwise.
+     *
+     * @deprecated Needed whilst settings contain options that should
+     * really be in the meta-data.
      */
     bool is_facet_enabled(
-        const std::set<config::cpp_facet_types> enabled_facets,
+        const std::set<config::cpp_facet_types>& enabled_facets,
         const config::cpp_facet_types facet) const;
 
     /**

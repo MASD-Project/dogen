@@ -172,7 +172,7 @@ from_settings(const config::cpp_settings& s, model& m) const {
 }
 
 bool tagger::is_facet_enabled(
-    const std::set<config::cpp_facet_types> enabled_facets,
+    const std::set<config::cpp_facet_types>& enabled_facets,
     const config::cpp_facet_types facet) const {
     const auto i(enabled_facets.find(facet));
     return i != enabled_facets.end();

@@ -23,6 +23,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/tags.hpp"
@@ -42,6 +43,7 @@
 #include "dogen/sml/types/tagger.hpp"
 
 using dogen::sml::test::mock_model_factory;
+using dogen::config::test::mock_settings_factory;
 using dogen::sml::tag_error;
 
 namespace {
@@ -53,6 +55,13 @@ const std::string default_cpp_forward_declaration_postfix("_fwd");
 const std::string default_cpp_implementation_file_extension(".cpp");
 const std::string default_cpp_header_file_extension(".hpp");
 const std::string default_cpp_types_directory("types");
+
+bool has(const std::unordered_map<std::string, std::string>& simple_tags,
+    const std::string& key) {
+
+    const auto i(simple_tags.find(key));
+    return i != simple_tags.end();
+}
 
 std::string get(const std::unordered_map<std::string, std::string>& simple_tags,
     const std::string& key) {
@@ -118,6 +127,55 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_without_any_configuration_options_resul
         default_cpp_implementation_file_extension);
     BOOST_CHECK(get(st, tags::cpp::header_file_extension) ==
         default_cpp_header_file_extension);
+}
+
+BOOST_AUTO_TEST_CASE(tagging_empty_model_with_all_facets_enabled_results_in_expected_tags) {
+    SETUP_TEST_LOG_SOURCE("tagging_empty_model_with_all_facets_enabled_results_in_expected_tags");
+
+    auto m(mock_model_factory::build_empty_model());
+    const auto s(mock_settings_factory::build_cpp_settings());
+    dogen::sml::tagger t;
+    t.tag(s, m);
+    BOOST_LOG_SEV(lg, debug) << "m: " << m;
+
+    BOOST_CHECK(m.complex_tags().empty());
+    BOOST_CHECK(m.simple_tags().size() == 26);
+
+    const auto& st(m.simple_tags());
+    using dogen::sml::tags;
+    BOOST_CHECK(is_supported(st, tags::cpp::types::status));
+    BOOST_CHECK(is_supported(st, tags::cpp::hash::standard::status));
+    BOOST_CHECK(is_supported(st, tags::cpp::serialization::boost::status));
+    BOOST_CHECK(is_supported(st, tags::cpp::io::status));
+    BOOST_CHECK(is_supported(st, tags::cpp::test_data::status));
+    BOOST_CHECK(is_supported(st, tags::cpp::odb::status));
+}
+
+BOOST_AUTO_TEST_CASE(tagging_empty_model_with_a_few_facets_enabled_results_in_expected_tags) {
+    SETUP_TEST_LOG_SOURCE("tagging_empty_model_with_a_few_facets_enabled_results_in_expected_tags");
+
+    auto m(mock_model_factory::build_empty_model());
+    auto s(mock_settings_factory::build_cpp_settings());
+    s.enabled_facets().clear();
+    s.enabled_facets().insert(dogen::config::cpp_facet_types::types);
+    s.enabled_facets().insert(dogen::config::cpp_facet_types::odb);
+    s.enabled_facets().insert(dogen::config::cpp_facet_types::test_data);
+
+    dogen::sml::tagger t;
+    t.tag(s, m);
+    BOOST_LOG_SEV(lg, debug) << "m: " << m;
+
+    BOOST_CHECK(m.complex_tags().empty());
+    BOOST_CHECK(m.simple_tags().size() == 18);
+
+    const auto& st(m.simple_tags());
+    using dogen::sml::tags;
+    BOOST_CHECK(is_supported(st, tags::cpp::types::status));
+    BOOST_CHECK(!has(st, tags::cpp::hash::standard::status));
+    BOOST_CHECK(!has(st, tags::cpp::serialization::boost::status));
+    BOOST_CHECK(!has(st, tags::cpp::io::status));
+    BOOST_CHECK(is_supported(st, tags::cpp::test_data::status));
+    BOOST_CHECK(is_supported(st, tags::cpp::odb::status));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
