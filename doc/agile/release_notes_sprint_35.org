@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-06 Sun 13:18]
+Clock summary at [2013-10-07 Mon 18:02]
 
 | Headline                                                                 | Time    |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                             | *34:24* |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                                          |         | 34:24 |       |
-| IMPLEMENTATION Release notes and backlog grooming                        |         |       |  0:39 |
+| COMPLETED Release notes and backlog grooming                             |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
 | COMPLETED Rename implementation specific parameters                      |         |       |  0:50 |
@@ -26,12 +26,13 @@ Clock summary at [2013-10-06 Sun 13:18]
 | COMPLETED Create an hydrator from JSON into SML                          |         |       |  3:53 |
 | COMPLETED Replace static factories for system models with json hydration |         |       |  1:41 |
 | COMPLETED Rename domain header formatter to types header formatter       |         |       |  0:13 |
-| IMPLEMENTATION Implement the property cache in SML                       |         |       |  1:14 |
-| IMPLEMENTATION Create a complete domain formatter in OM                  |         |       | 10:42 |
-| IMPLEMENTATION Implement tagger                                          |         |       |  7:48 |
+| COMPLETED Create a complete domain formatter in OM                       |         |       | 10:42 |
+| COMPLETED Implement model tagger                                         |         |       |  7:48 |
+| CANCELLED Implement the property cache in SML                            |         |       |  1:14 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-10-07 Mon 18:00]
     CLOCK: [2013-09-30 Mon 17:58]--[2013-09-30 Mon 18:25] =>  0:22
     CLOCK: [2013-09-23 Mon 07:50]--[2013-09-23 Mon 08:02] =>  0:12
 
@@ -176,12 +177,8 @@ there and then.
 We need to create language specific classes to propagate parameters,
 assign proper defaults to them, etc.
 
-*** IMPLEMENTATION Implement the property cache in SML                :story:
-    CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08
-    CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
-    CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
-
-*** IMPLEMENTATION Create a complete domain formatter in OM           :story:
+*** COMPLETED Create a complete domain formatter in OM                :story:
+    CLOSED: [2013-10-07 Mon 18:01]
     CLOCK: [2013-09-26 Thu 22:08]--[2013-09-26 Thu 22:25] =>  0:17
     CLOCK: [2013-09-26 Thu 08:25]--[2013-09-26 Thu 08:33] =>  0:08
     CLOCK: [2013-09-26 Thu 08:06]--[2013-09-26 Thu 08:18] =>  0:12
@@ -220,11 +217,13 @@ SML type visitors, etc.
      CLOCK: [2013-09-29 Sun 01:41]--[2013-09-29 Sun 01:50] =>  0:09
      CLOCK: [2013-09-29 Sun 00:10]--[2013-09-29 Sun 01:40] =>  1:30
 
-**** IMPLEMENTATION Add tests for all permutations of the domain formatter :task:
+**** CANCELLED Add tests for all permutations of the domain formatter  :task:
+     CLOSED: [2013-10-07 Mon 18:01]
      CLOCK: [2013-09-28 Sat 23:16]--[2013-09-28 Sat 23:37] =>  0:21
      CLOCK: [2013-09-28 Sat 22:53]--[2013-09-28 Sat 23:16] =>  0:23
 
-*** IMPLEMENTATION Implement tagger                                   :story:
+*** COMPLETED Implement model tagger                                  :story:
+    CLOSED: [2013-10-07 Mon 18:02]
     CLOCK: [2013-10-05 Sat 11:16]--[2013-10-05 Sat 11:38] =>  0:22
     CLOCK: [2013-10-03 Thu 07:22]--[2013-10-03 Thu 07:29] =>  0:07
     CLOCK: [2013-10-03 Thu 07:17]--[2013-10-03 Thu 07:21] =>  0:04
@@ -246,35 +245,22 @@ SML type visitors, etc.
      CLOSED: [2013-10-06 Sun 01:41]
      CLOCK: [2013-10-06 Sun 00:11]--[2013-10-06 Sun 01:41] =>  1:30
 
-**** IMPLEMENTATION Add tests around model tagging                     :task:
+**** CANCELLED Add tests around model tagging                          :task:
+     CLOSED: [2013-10-07 Mon 18:02]
      CLOCK: [2013-10-06 Sun 12:25]--[2013-10-06 Sun 13:16] =>  0:51
      CLOCK: [2013-10-06 Sun 12:23]--[2013-10-06 Sun 12:24] =>  0:01
      CLOCK: [2013-10-06 Sun 12:05]--[2013-10-06 Sun 12:23] =>  0:18
 
-**** IMPLEMENTATION Add tagging for types                              :task:
+**** CANCELLED Add tagging for types                                   :task:
+     CLOSED: [2013-10-07 Mon 18:02]
      CLOCK: [2013-10-06 Sun 00:02]--[2013-10-06 Sun 00:10] =>  0:08
      CLOCK: [2013-10-05 Sat 21:10]--[2013-10-05 Sat 21:20] =>  0:10
      CLOCK: [2013-10-05 Sat 20:27]--[2013-10-05 Sat 20:56] =>  0:29
 
-*** Create an SML level concept for facets                            :story:
-
-In reality, "facets" are not a C++ thing; they are language
-neutral. They are, however, expressed differently in different
-languages. For example:
-
-- types: same on all languages
-- debug_printing: overloaded operator<< in C++, toString() in Java,
-  ToString() in C#, etc.
-- serialisation: slightly less obvious, but effectively the most
-  "native" serialisation available for the given programming
-  language. For C++ this is boost serialisation.
-- hashing: language specific support for hashing, in C++ either std
-  hash or boost hash, in Java/C# overloading of hash functions.
-- test_data: some facilities for test data generation
-- relational: bindings for relational databases. ODB in C++.
-
-We can introduce these concepts at the SML level, probably at the
-=model= and =abstract_object= level; we can then do further
-translation at the language level, as required.
+*** CANCELLED Implement the property cache in SML                     :story:
+    CLOSED: [2013-10-07 Mon 18:02]
+    CLOCK: [2013-09-25 Wed 08:09]--[2013-09-25 Wed 08:17] =>  0:08
+    CLOCK: [2013-09-25 Wed 07:47]--[2013-09-25 Wed 08:09] =>  0:22
+    CLOCK: [2013-09-24 Tue 23:40]--[2013-09-25 Wed 00:24] =>  0:44
 
 ** Deprecated Development Stories
