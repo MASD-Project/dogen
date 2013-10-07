@@ -666,7 +666,7 @@ representation of the primitive type.#</dia:string>
         <dia:point val="-98,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3350000000000009"/>
+        <dia:real val="8.3349999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -1514,7 +1514,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.1000000000000005"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1888,7 +1888,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="3,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.684999999999999"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -2577,7 +2577,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="-32,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0925000000000002"/>
+        <dia:real val="7.0924999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2900,7 +2900,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="51,121"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.6224999999999996"/>
+        <dia:real val="6.6225000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -5028,7 +5028,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-71,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.065000000000001"/>
+        <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -9664,7 +9664,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="90,64"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.754999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -9948,7 +9948,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="158,64"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.135000000000002"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -11100,7 +11100,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="125,64"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.295000000000002"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -11396,7 +11396,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="112,106"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.7800000000000002"/>
+        <dia:real val="5.7799999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11916,7 +11916,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-69,-12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.154999999999998"/>
+        <dia:real val="25.155000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -12225,7 +12225,7 @@ tag containers.#</dia:string>
         <dia:point val="-89,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.309999999999999"/>
+        <dia:real val="26.310000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -12421,7 +12421,7 @@ any entity which models the Taggable concept. Provides defaulting.#</dia:string>
         <dia:point val="-86,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.614999999999998"/>
+        <dia:real val="23.615000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -12720,7 +12720,7 @@ and values (where applicable) for tags.#</dia:string>
         <dia:point val="-34,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.689999999999998"/>
+        <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -13567,7 +13567,7 @@ based on association and generalisation relationships.#</dia:string>
         <dia:point val="38.82,-2.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.635,-3.15;39.57,14.6"/>
+        <dia:rectangle val="34.635,-3.15;39.57,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
