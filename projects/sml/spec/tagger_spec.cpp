@@ -24,6 +24,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/config/test/mock_settings_factory.hpp"
+#include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/tags.hpp"
@@ -60,7 +61,7 @@ bool has(const std::unordered_map<std::string, std::string>& simple_tags,
     const std::string& key) {
 
     const auto i(simple_tags.find(key));
-    return i != simple_tags.end();
+    return i != simple_tags.end() && !i->second.empty();
 }
 
 std::string get(const std::unordered_map<std::string, std::string>& simple_tags,
@@ -134,21 +135,29 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_all_facets_enabled_results_in_expe
 
     auto m(mock_model_factory::build_empty_model());
     const auto s(mock_settings_factory::build_cpp_settings());
+    BOOST_LOG_SEV(lg, debug) << "s: " << s;
+
     dogen::sml::tagger t;
     t.tag(s, m);
     BOOST_LOG_SEV(lg, debug) << "m: " << m;
 
     BOOST_CHECK(m.complex_tags().empty());
-    BOOST_CHECK(m.simple_tags().size() == 26);
+    BOOST_CHECK(m.simple_tags().size() == 31);
 
     const auto& st(m.simple_tags());
     using dogen::sml::tags;
     BOOST_CHECK(is_supported(st, tags::cpp::types::status));
+    BOOST_CHECK(has(st, tags::cpp::types::directory_name));
     BOOST_CHECK(is_supported(st, tags::cpp::hash::standard::status));
+    BOOST_CHECK(has(st, tags::cpp::hash::standard::directory_name));
     BOOST_CHECK(is_supported(st, tags::cpp::serialization::boost::status));
+    BOOST_CHECK(has(st, tags::cpp::serialization::boost::directory_name));
     BOOST_CHECK(is_supported(st, tags::cpp::io::status));
+    BOOST_CHECK(has(st, tags::cpp::io::directory_name));
     BOOST_CHECK(is_supported(st, tags::cpp::test_data::status));
+    BOOST_CHECK(has(st, tags::cpp::test_data::directory_name));
     BOOST_CHECK(is_supported(st, tags::cpp::odb::status));
+    BOOST_CHECK(has(st, tags::cpp::odb::directory_name));
 }
 
 BOOST_AUTO_TEST_CASE(tagging_empty_model_with_a_few_facets_enabled_results_in_expected_tags) {
@@ -166,16 +175,22 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_a_few_facets_enabled_results_in_ex
     BOOST_LOG_SEV(lg, debug) << "m: " << m;
 
     BOOST_CHECK(m.complex_tags().empty());
-    BOOST_CHECK(m.simple_tags().size() == 18);
+    BOOST_CHECK(m.simple_tags().size() == 20);
 
     const auto& st(m.simple_tags());
     using dogen::sml::tags;
     BOOST_CHECK(is_supported(st, tags::cpp::types::status));
+    BOOST_CHECK(has(st, tags::cpp::types::directory_name));
     BOOST_CHECK(!has(st, tags::cpp::hash::standard::status));
+    BOOST_CHECK(!has(st, tags::cpp::hash::standard::directory_name));
     BOOST_CHECK(!has(st, tags::cpp::serialization::boost::status));
+    BOOST_CHECK(!has(st, tags::cpp::serialization::boost::directory_name));
     BOOST_CHECK(!has(st, tags::cpp::io::status));
+    BOOST_CHECK(!has(st, tags::cpp::io::directory_name));
     BOOST_CHECK(is_supported(st, tags::cpp::test_data::status));
+    BOOST_CHECK(has(st, tags::cpp::test_data::directory_name));
     BOOST_CHECK(is_supported(st, tags::cpp::odb::status));
+    BOOST_CHECK(has(st, tags::cpp::odb::directory_name));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

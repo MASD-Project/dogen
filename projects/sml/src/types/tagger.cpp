@@ -102,7 +102,7 @@ from_settings(const config::cpp_settings& s, model& m) const {
             tags::bool_false : tags::bool_true);
 
         router.route_if_key_not_found(
-            tags::cpp::types::directory_name,
+            tags::cpp::hash::standard::directory_name,
             s.hash_facet_folder());
     }
 
@@ -120,7 +120,7 @@ from_settings(const config::cpp_settings& s, model& m) const {
             tags::bool_false : tags::bool_true);
 
         router.route_if_key_not_found(
-            tags::cpp::types::directory_name,
+            tags::cpp::io::directory_name,
             s.io_facet_folder());
     }
 
@@ -139,7 +139,7 @@ from_settings(const config::cpp_settings& s, model& m) const {
             tags::bool_false : tags::bool_true);
 
         router.route_if_key_not_found(
-            tags::cpp::types::directory_name,
+            tags::cpp::serialization::boost::directory_name,
             s.serialization_facet_folder());
     }
 
@@ -153,7 +153,7 @@ from_settings(const config::cpp_settings& s, model& m) const {
             tags::bool_false : tags::bool_true);
 
         router.route_if_key_not_found(
-            tags::cpp::types::directory_name,
+            tags::cpp::test_data::directory_name,
             s.test_data_facet_folder());
     }
 
@@ -166,7 +166,7 @@ from_settings(const config::cpp_settings& s, model& m) const {
             tags::bool_false : tags::bool_true);
 
         router.route_if_key_not_found(
-            tags::cpp::types::directory_name,
+            tags::cpp::odb::directory_name,
             s.odb_facet_folder());
     }
 }

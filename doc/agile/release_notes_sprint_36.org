@@ -26,12 +26,14 @@ Clock summary at [2013-10-07 Mon 18:51]
     CLOCK: [2013-10-07 Mon 18:05]--[2013-10-07 Mon 18:08] =>  0:03
 
 *** IMPLEMENTATION Add tests around model tagging                     :story:
+    CLOCK: [2013-10-08 Tue 21:42]--[2013-10-08 Tue 22:05] =>  0:23
 
 **** COMPLETED adding all facets                                       :task:
      CLOSED: [2013-10-07 Mon 18:46]
     CLOCK: [2013-10-07 Mon 18:26]--[2013-10-07 Mon 18:44] =>  0:18
 
-**** IMPLEMENTATION adding a few facets                                :task:
+**** COMPLETED adding a few facets                                     :task:
+     CLOSED: [2013-10-08 Tue 21:42]
      CLOCK: [2013-10-07 Mon 18:46]--[2013-10-07 Mon 18:51] =>  0:05
 
 *** Implement the property cache in SML                               :story:
