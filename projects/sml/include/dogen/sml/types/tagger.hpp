@@ -26,9 +26,10 @@
 #endif
 
 #include <set>
+#include <memory>
 #include "dogen/config/types/cpp_settings.hpp"
-
 #include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -39,12 +40,15 @@ namespace sml {
 /**
  * @brief Generate all meta data tags across the model.
  */
-class tagger {
+class tagger : private sml::type_visitor {
 public:
     tagger() = default;
     ~tagger() noexcept = default;
     tagger(const tagger&) = default;
     tagger(tagger&&) = default;
+
+private:
+    class context;
 
 private:
     /**
@@ -81,12 +85,39 @@ private:
         const std::string& additional_postfix,
         const std::string& extension) const;
 
+private:
+    using sml::type_visitor::visit;
+    void visit(sml::primitive& p) const override;
+    void visit(sml::enumeration& e) const override;
+    void visit(sml::service& s) const override;
+    void visit(sml::factory& f) const override;
+    void visit(sml::repository& r) const override;
+    void visit(sml::value_object& vo) const override;
+    void visit(sml::keyed_entity& ke) const override;
+    void visit(sml::entity& e) const override;
+
+public:
     /**
      * @brief Adds meta-data to the type supplied.
      */
-    void tag_type(type& t) const;
+    void operator()(type& t) const;
+
+    /**
+     * @brief Adds meta-data to the module supplied.
+     */
+    void operator()(module& m) const;
+
+    /**
+     * @brief Adds meta-data to the concept supplied.
+     */
+    void operator()(concept& c) const;
 
 public:
+    /**
+     * @brief Adds meta-data to the abstract object supplied.
+     */
+    void tag(abstract_object& o) const;
+
     /**
      * @brief Adds meta-data to the model supplied.
      */
@@ -99,6 +130,9 @@ public:
      * compatibility.
      */
     void tag(const config::cpp_settings& s, model& m) const;
+
+private:
+    mutable std::shared_ptr<context> context_;
 };
 
 } }

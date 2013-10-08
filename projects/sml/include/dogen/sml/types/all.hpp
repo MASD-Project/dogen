@@ -20,7 +20,7 @@
  */
 #include "dogen/sml/types/abstract_entity.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/all_types_traversal.hpp"
+#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/association_traversal.hpp"
 #include "dogen/sml/types/cache_error.hpp"
 #include "dogen/sml/types/concept.hpp"

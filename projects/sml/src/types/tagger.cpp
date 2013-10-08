@@ -19,9 +19,17 @@
  *
  */
 #include <sstream>
+#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/tag_adaptor.hpp"
 #include "dogen/sml/types/tag_router.hpp"
+#include "dogen/sml/types/entity.hpp"
+#include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/factory.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/repository.hpp"
+#include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/tagger.hpp"
 
 namespace {
@@ -51,6 +59,17 @@ const bool is_header_file(true);
 
 namespace dogen {
 namespace sml {
+
+class tagger::context {
+public:
+    context(sml::model& m) : model_(m) { }
+
+public:
+    sml::model& model() { return model_; }
+
+private:
+    sml::model& model_;
+};
 
 void tagger::
 from_settings(const config::cpp_settings& s, model& m) const {
@@ -220,10 +239,78 @@ filename_for_qname(const model& m, const bool split_project,
     return r.generic_string();
 }
 
-void tagger::tag_type(type& /*t*/) const {
+void tagger::visit(sml::primitive& /*p*/) const {
+}
+
+void tagger::visit(sml::enumeration& /*e*/) const {
+}
+
+void tagger::visit(sml::service& s) const {
+    tag(s);
+}
+
+void tagger::visit(sml::factory& f) const {
+    tag(f);
+}
+
+void tagger::visit(sml::repository& r) const {
+    tag(r);
+}
+
+void tagger::visit(sml::value_object& vo) const {
+    tag(vo);
+}
+
+void tagger::visit(sml::keyed_entity& ke) const {
+    tag(ke);
+}
+
+void tagger::visit(sml::entity& e) const {
+    tag(e);
+}
+
+void tagger::operator()(type& t) const {
+    t.accept(*this);
+}
+
+void tagger::operator()(module& m) const {
+    tag_router router(make_tag_router(m));
+
+    // only generate a types file for models when there is
+    // documentation for the model.
+    if (!m.documentation().empty()) {
+        router.route_if_key_not_found(
+            tags::cpp::types::header_file::generate, tags::bool_true);
+
+        // must massage the model name in order to generate the
+        // correct file name for the model.
+        qname qn(m.name());
+        qn.simple_name(m.name().model_name());
+
+        auto adaptor(make_tag_adaptor(context_->model()));
+        const auto fn(filename_for_qname(context_->model(),
+                adaptor.is_true(tags::split_project),
+                is_header_file, qn,
+                adaptor.get(tags::cpp::types::directory_name),
+                adaptor.get(tags::cpp::types::postfix),
+                empty_postfix,
+                adaptor.get(tags::cpp::header_file_extension)));
+
+        router.route_if_key_not_found(
+            tags::cpp::types::header_file::file_name, fn);
+    }
+}
+
+void tagger::operator()(concept& /*c*/) const {
+    // nothing to do for concepts
+}
+
+void tagger::tag(abstract_object& /*o*/) const {
 }
 
 void tagger::tag(model& m) const {
+    context_ = std::unique_ptr<context>(new context(m));
+
     tag_router router(make_tag_router(m));
     router.route_if_key_not_found(tags::generate_preamble, tags::bool_true);
 
@@ -275,6 +362,9 @@ void tagger::tag(model& m) const {
                 tags::cpp::types::header_file::file_name, fn);
         }
     }
+
+    all_model_items_traversal(m, *this);
+    context_ = std::unique_ptr<context>();
 }
 
 void tagger::tag(const config::cpp_settings& s, model& m) const {

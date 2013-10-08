@@ -9658,7 +9658,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="90,64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.95,63.25;117.91,68.45"/>
+        <dia:rectangle val="89.95,63.25;119.45,68.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="90,64"/>
@@ -9860,7 +9860,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
       <dia:attribute name="templates">
         <dia:composite type="umlformalparameter">
           <dia:attribute name="name">
-            <dia:string>#EventVisitor#</dia:string>
+            <dia:string>#TraversalVisitee#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -9942,7 +9942,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="158,64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="157.95,63.25;181.29,69.25"/>
+        <dia:rectangle val="157.95,63.25;182.83,69.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="158,64"/>
@@ -10144,7 +10144,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
       <dia:attribute name="templates">
         <dia:composite type="umlformalparameter">
           <dia:attribute name="name">
-            <dia:string>#EventVisitor#</dia:string>
+            <dia:string>#TraversalVisitee#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -10668,7 +10668,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="187,64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="186.95,63.25;204.515,68.45"/>
+        <dia:rectangle val="186.95,63.25;206.055,68.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="187,64"/>
@@ -10680,7 +10680,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#all_types_traversal#</dia:string>
+        <dia:string>#all_model_items_traversal#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -10853,7 +10853,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
       <dia:attribute name="templates">
         <dia:composite type="umlformalparameter">
           <dia:attribute name="name">
-            <dia:string>#EventVisitor#</dia:string>
+            <dia:string>#TraversalVisitee#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -10935,7 +10935,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="130,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.95,40.95;140.56,44.65"/>
+        <dia:rectangle val="129.95,40.25;145.205,44.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="130,41"/>
@@ -10947,7 +10947,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#EventVisitor#</dia:string>
+        <dia:string>#TraversalVisitor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#concept#</dia:string>
@@ -11066,7 +11066,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#t#</dia:string>
+                <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const type&amp;#</dia:string>
@@ -11085,9 +11085,18 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         </dia:composite>
       </dia:attribute>
       <dia:attribute name="template">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
-      <dia:attribute name="templates"/>
+      <dia:attribute name="templates">
+        <dia:composite type="umlformalparameter">
+          <dia:attribute name="name">
+            <dia:string>#TraversalVisitee#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O96">
       <dia:attribute name="obj_pos">

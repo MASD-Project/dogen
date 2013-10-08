@@ -18,52 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_ALL_TYPES_TRAVERSAL_HPP
-#define DOGEN_SML_TYPES_ALL_TYPES_TRAVERSAL_HPP
+#ifndef DOGEN_SML_TYPES_ALL_MODEL_ITEMS_TRAVERSAL_FWD_HPP
+#define DOGEN_SML_TYPES_ALL_MODEL_ITEMS_TRAVERSAL_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/model.hpp"
-
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Performs a traversal across all types in a domain model.
- */
-/**@{*/
-template<typename EventVisitor>
-void all_types_traversal(const model& m, const EventVisitor& ev) {
-    for (const auto& c : m.concepts())
-        ev(c);
-
-    for (const auto& p : m.primitives())
-        ev(p);
-
-    for (const auto& e : m.enumerations())
-        ev(e);
-
-    for (const auto& o : m.objects())
-        ev(o);
-}
-
-template<typename EventVisitor>
-void all_types_traversal(model& m, EventVisitor& ev) {
-    for (const auto& c : m.concepts())
-        ev(c);
-
-    for (const auto& p : m.primitives())
-        ev(p);
-
-    for (const auto& e : m.enumerations())
-        ev(e);
-
-    for (const auto& o : m.objects())
-        ev(o);
-}
-/**@}*/
+class all_model_items_traversal;
 
 } }
 
