@@ -10,17 +10,20 @@ This file contains all stories that were closed during sprint 36.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-10 Thu 20:51]
+Clock summary at [2013-10-11 Fri 00:17]
 
-| Headline                                             | Time   |      |      |
-|------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *4:41* |      |      |
-|------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 4:41 |      |
-| IMPLEMENTATION Release notes and backlog grooming    |        |      | 0:20 |
-| COMPLETED Add tests around model tagging             |        |      | 0:46 |
-| COMPLETED Add tagging for types                      |        |      | 2:48 |
-| IMPLEMENTATION Consider creating types for meta-data |        |      | 0:47 |
+| Headline                                                                  | Time   |      |      |
+|---------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                              | *5:22* |      |      |
+|---------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                           |        | 5:22 |      |
+| IMPLEMENTATION Release notes and backlog grooming                         |        |      | 0:20 |
+| COMPLETED Add tests around model tagging                                  |        |      | 0:46 |
+| COMPLETED Add tagging for types                                           |        |      | 2:48 |
+| COMPLETED Add tagging to SML workflow                                     |        |      | 0:20 |
+| IMPLEMENTATION Add tests for tagging of abstract objects                  |        |      | 0:14 |
+| IMPLEMENTATION Consider creating types for meta-data                      |        |      | 0:47 |
+| IMPLEMENTATION Remove speculative facet layers for hash and serialization |        |      | 0:07 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -64,7 +67,13 @@ Clock summary at [2013-10-10 Thu 20:51]
      CLOSED: [2013-10-10 Thu 20:50]
 **** COMPLETED Tag abstract objects                                    :task:
      CLOSED: [2013-10-10 Thu 20:50]
+*** COMPLETED Add tagging to SML workflow                             :story:
+    CLOSED: [2013-10-11 Fri 00:17]
+    CLOCK: [2013-10-10 Thu 23:57]--[2013-10-11 Fri 00:17] =>  0:20
+
 *** Add tests for tagging of modules, primitves and enumerations       :task:
+*** Implement the property cache in SML                               :story:
+*** Implement OM workflow                                             :story:
 *** IMPLEMENTATION Add tests for tagging of abstract objects           :task:
     CLOCK: [2013-10-10 Thu 23:34]--[2013-10-10 Thu 23:48] =>  0:14
 
@@ -157,7 +166,6 @@ the future we may want to add boost hash and other forms of
 serialization. However, in keeping with the (often violated) rule that
 we never add code without a use case, we need to remove this.
 
-*** Implement the property cache in SML                               :story:
 *** Add tests for all permutations of the domain formatter            :story:
 *** Add tagging for propagatable parameters                           :story:
 

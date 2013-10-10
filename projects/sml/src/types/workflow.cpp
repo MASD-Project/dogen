@@ -26,6 +26,7 @@
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
+#include "dogen/sml/types/tagger.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 namespace {
@@ -38,11 +39,8 @@ const std::string library_dir("library");
 namespace dogen {
 namespace sml {
 
-workflow::workflow() : add_system_models_(true) {}
-
-workflow::
-workflow(const bool add_system_models)
-    : add_system_models_(add_system_models) {}
+workflow::workflow(const bool add_system_models, const config::settings& s)
+    : add_system_models_(add_system_models), settings_(s) {}
 
 bool workflow::is_generatable(const type& t) const {
     const auto gt(t.generation_type());
@@ -70,8 +68,8 @@ bool workflow::has_generatable_types(const sml::model& m) const {
     return false;
 }
 
-std::list<model>
-workflow::augment_references_activity(const std::list<model>& references) {
+std::list<model> workflow::
+augment_references_activity(const std::list<model>& references) const {
     std::list<model> r(references);
     if (add_system_models_) {
         using namespace dogen::utility::filesystem;
@@ -87,7 +85,7 @@ workflow::augment_references_activity(const std::list<model>& references) {
 }
 
 model workflow::create_merged_model_activity(const model& target,
-    const std::list<model>& references) {
+    const std::list<model>& references) const {
 
     injector i;
     auto t(target);
@@ -103,16 +101,22 @@ model workflow::create_merged_model_activity(const model& target,
     return mg.merge();
 }
 
-void workflow::resolve_types_activity(model& merged_model) {
+void workflow::tag_model_activity(model& merged_model) const {
+    tagger t;
+    t.tag(settings_.cpp(), merged_model);
+}
+
+void workflow::resolve_types_activity(model& merged_model) const {
     resolver res(merged_model);
     res.resolve();
 }
 
 std::pair<bool, model> workflow::
-execute(const model& target, const std::list<model>& references) {
+execute(const model& target, const std::list<model>& references) const {
     const auto augment_references(augment_references_activity(references));
     auto r(create_merged_model_activity(target, augment_references));
     resolve_types_activity(r);
+    tag_model_activity(r);
     return std::pair<bool, model> { has_generatable_types(r), r };
 }
 

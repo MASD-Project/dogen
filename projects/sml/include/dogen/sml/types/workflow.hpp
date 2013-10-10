@@ -27,6 +27,7 @@
 
 #include <list>
 #include <utility>
+#include "dogen/config/types/settings.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -34,14 +35,14 @@ namespace sml {
 
 class workflow {
 public:
+    workflow() = delete;
     workflow(const workflow&) = default;
     ~workflow() = default;
     workflow(workflow&&) = default;
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow();
-    explicit workflow(const bool add_system_models);
+    workflow(const bool add_system_models, const config::settings& s);
 
 private:
     /**
@@ -56,18 +57,23 @@ private:
      * references passed in by user.
      */
     std::list<model> augment_references_activity(
-        const std::list<model>& references);
+        const std::list<model>& references) const;
 
     /**
      * @brief Create the merged model.
      */
     model create_merged_model_activity(const model& target,
-        const std::list<model>& references);
+        const std::list<model>& references) const;
 
     /**
      * @brief Resolve all types.
      */
-    void resolve_types_activity(model& merged_model);
+    void resolve_types_activity(model& merged_model) const;
+
+    /**
+     * @brief Add meta-data to merged model.
+     */
+    void tag_model_activity(model& merged_model) const;
 
 private:
     /**
@@ -78,10 +84,11 @@ private:
 
 public:
     std::pair<bool, model>
-    execute(const model& target, const std::list<model>& references);
+    execute(const model& target, const std::list<model>& references) const;
 
 private:
     const bool add_system_models_;
+    const config::settings settings_;
 };
 
 } }
