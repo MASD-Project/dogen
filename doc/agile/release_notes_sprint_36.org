@@ -65,7 +65,9 @@ Clock summary at [2013-10-10 Thu 20:51]
 **** COMPLETED Tag abstract objects                                    :task:
      CLOSED: [2013-10-10 Thu 20:50]
 *** Add tests for tagging of modules, primitves and enumerations       :task:
-*** Add tests for tagging of abstract objects                          :task:
+*** IMPLEMENTATION Add tests for tagging of abstract objects           :task:
+    CLOCK: [2013-10-10 Thu 23:34]--[2013-10-10 Thu 23:48] =>  0:14
+
 *** IMPLEMENTATION Consider creating types for meta-data              :spike:
     CLOCK: [2013-10-10 Thu 14:23]--[2013-10-10 Thu 14:40] =>  0:17
     CLOCK: [2013-10-10 Thu 10:56]--[2013-10-10 Thu 11:01] =>  0:05
@@ -146,7 +148,8 @@ more than one at the same time. One option is to consider these things
 as distinct facets - entirely unrelated at this level. For example we
 could have a standard_hash facet and a boost_hash facet.
 
-*** Remove speculative facet layers for hash and serialization        :spike:
+*** IMPLEMENTATION Remove speculative facet layers for hash and serialization :spike:
+    CLOCK: [2013-10-10 Thu 23:27]--[2013-10-10 Thu 23:34] =>  0:07
 
 For some unfathomable reason we decided to add a layer of indirection
 for both hash and serialization. This is for speculative reasons as in

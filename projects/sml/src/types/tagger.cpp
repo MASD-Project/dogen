@@ -106,6 +106,7 @@ from_settings(const config::cpp_settings& s, model& m) const {
 
     using config::cpp_facet_types;
     const auto& ss(tags::status_supported);
+    const auto& su(tags::status_unsupported);
 
     if (is_facet_enabled(s.enabled_facets(), cpp_facet_types::types)) {
         router.route_if_key_not_found(tags::cpp::types::status, ss);
@@ -123,7 +124,8 @@ from_settings(const config::cpp_settings& s, model& m) const {
         router.route_if_key_not_found(
             tags::cpp::types::directory_name,
             s.domain_facet_folder());
-    }
+    } else
+        router.route_if_key_not_found(tags::cpp::types::status, su);
 
     if (is_facet_enabled(s.enabled_facets(), cpp_facet_types::hash)) {
         router.route_if_key_not_found(tags::cpp::hash::standard::status, ss);
@@ -136,7 +138,8 @@ from_settings(const config::cpp_settings& s, model& m) const {
         router.route_if_key_not_found(
             tags::cpp::hash::standard::directory_name,
             s.hash_facet_folder());
-    }
+    } else
+        router.route_if_key_not_found(tags::cpp::hash::standard::status, su);
 
     if (is_facet_enabled(s.enabled_facets(), cpp_facet_types::io)) {
         router.route_if_key_not_found(tags::cpp::io::status, ss);
@@ -154,7 +157,8 @@ from_settings(const config::cpp_settings& s, model& m) const {
         router.route_if_key_not_found(
             tags::cpp::io::directory_name,
             s.io_facet_folder());
-    }
+    } else
+        router.route_if_key_not_found(tags::cpp::io::status, su);
 
     if (is_facet_enabled(s.enabled_facets(), cpp_facet_types::serialization)) {
         const auto& key(tags::cpp::serialization::boost::status);
@@ -173,7 +177,9 @@ from_settings(const config::cpp_settings& s, model& m) const {
         router.route_if_key_not_found(
             tags::cpp::serialization::boost::directory_name,
             s.serialization_facet_folder());
-    }
+    } else
+        router.route_if_key_not_found(tags::cpp::serialization::boost::status,
+            su);
 
     if (is_facet_enabled(s.enabled_facets(), cpp_facet_types::test_data)) {
         const auto& key(tags::cpp::test_data::status);
@@ -187,7 +193,8 @@ from_settings(const config::cpp_settings& s, model& m) const {
         router.route_if_key_not_found(
             tags::cpp::test_data::directory_name,
             s.test_data_facet_folder());
-    }
+    } else
+        router.route_if_key_not_found(tags::cpp::test_data::status, su);
 
     if (is_facet_enabled(s.enabled_facets(), cpp_facet_types::odb)) {
         router.route_if_key_not_found(tags::cpp::odb::status, ss);
@@ -200,7 +207,8 @@ from_settings(const config::cpp_settings& s, model& m) const {
         router.route_if_key_not_found(
             tags::cpp::odb::directory_name,
             s.odb_facet_folder());
-    }
+    } else
+        router.route_if_key_not_found(tags::cpp::odb::status, su);
 }
 
 bool tagger::is_facet_enabled(
@@ -656,6 +664,11 @@ void tagger::tag(model& m) const {
 
     const auto& ss(tags::status_supported);
     router.route_if_key_not_found(tags::cpp::types::status, ss);
+    router.route_if_key_not_found(tags::cpp::hash::standard::status, ss);
+    router.route_if_key_not_found(tags::cpp::serialization::boost::status, ss);
+    router.route_if_key_not_found(tags::cpp::io::status, ss);
+    router.route_if_key_not_found(tags::cpp::test_data::status, ss);
+    router.route_if_key_not_found(tags::cpp::odb::status, ss);
 
     auto adaptor(make_tag_adaptor(m));
     if (adaptor.is_supported(tags::cpp::types::status)) {
@@ -734,32 +747,6 @@ void tagger::tag(model& m) const {
 
         router.route_if_key_not_found(tags::cpp::serialization::boost::postfix,
             hash_postfix);
-
-        qname qn;
-        qn.simple_name(cpp_includer_file_name);
-        qn.model_name(m.name().model_name());
-        qn.external_module_path(m.name().external_module_path());
-        const auto includers_fn(filename_for_qname(adaptor, is_header_file, qn,
-                adaptor.get(tags::cpp::serialization::boost::directory_name),
-                adaptor.get(tags::cpp::serialization::boost::postfix),
-                empty_postfix));
-
-        router.route_if_key_not_found(
-            tags::cpp::serialization::boost::includers_file::file_name,
-            includers_fn);
-
-        router.route_if_key_not_found(
-            tags::cpp::serialization::boost::includers_file::is_system,
-            tags::bool_false);
-    }
-
-    if (adaptor.is_supported(tags::cpp::serialization::boost::status)) {
-        router.route_if_key_not_found(
-            tags::cpp::serialization::boost::directory_name,
-            serialization_directory);
-
-        router.route_if_key_not_found(tags::cpp::serialization::boost::postfix,
-            serialization_postfix);
 
         qname qn;
         qn.simple_name(cpp_includer_file_name);
