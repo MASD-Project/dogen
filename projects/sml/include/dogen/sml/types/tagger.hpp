@@ -30,9 +30,12 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
+#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/tag_router.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/type.hpp"
+#include "dogen/sml/types/tags.hpp"
 
 namespace dogen {
 namespace sml {
@@ -74,16 +77,26 @@ private:
         const std::set<config::cpp_facet_types>& enabled_facets,
         const config::cpp_facet_types facet) const;
 
+private:
+    /**
+     * @brief Returns a C++ qualified name for the SML qname.
+     */
+    std::string cpp_qualified_name(const sml::qname& qn) const;
+
     /**
      * @brief Returns the file name for the given qname and facet.
      */
-    std::string filename_for_qname(const model& m,
-        const bool split_project,
+    std::string filename_for_qname(const tag_adaptor& adaptor,
         const bool is_header, const qname& qn,
         const std::string& facet_directory,
         const std::string& facet_postfix,
-        const std::string& additional_postfix,
-        const std::string& extension) const;
+        const std::string& additional_postfix) const;
+
+    /**
+     * @brief Copies across all tags from the model into the taggable
+     * via the router.
+     */
+    void copy_model_tags(tag_router& router) const;
 
 private:
     using sml::type_visitor::visit;

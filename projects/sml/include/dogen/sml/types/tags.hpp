@@ -70,6 +70,7 @@ struct tags {
      * @brief Name of the top-level parent of the inheritance
      * hierarchy.
      */
+
     static const std::string original_parent_name;
 
     /**
@@ -82,13 +83,6 @@ struct tags {
      * @brief If true, the type cannot be inherited from.
      */
     static const std::string is_final;
-
-    /**
-     * @brief If true, the project will be split.
-     *
-     * @deprecated used only for backwards compatibility.
-     */
-    static const std::string split_project;
 
     /**
      * @brief Valid values for Boolean types.
@@ -107,6 +101,13 @@ struct tags {
      * @brief All parameters specific to the C++ language.
      */
     struct cpp {
+        /**
+         * @brief If true, the project will be split.
+         *
+         * @deprecated used only for backwards compatibility.
+         */
+        static const std::string split_project;
+
         /**
          * @brief Extension to use for header files, including the
          * leading dot.
@@ -384,6 +385,11 @@ struct tags {
                 static const std::string directory_name;
 
                 /**
+                 * @brief Postfix for all file names in the facet.
+                 */
+                static const std::string postfix;
+
+                /**
                  * @brief If set to true, an include file that includes
                  * all types in this facet will be generated.
                  */
@@ -505,6 +511,11 @@ struct tags {
                 static const std::string directory_name;
 
                 /**
+                 * @brief Postfix for all file names in the facet.
+                 */
+                static const std::string postfix;
+
+                /**
                  * @brief If true, serialization code will cater for
                  * boost XML serialization.
                  */
@@ -623,6 +634,11 @@ struct tags {
             static const std::string directory_name;
 
             /**
+             * @brief Postfix for all file names in the facet.
+             */
+            static const std::string postfix;
+
+            /**
              * @brief If true, IO operations will be in the class
              * itself rather than on a separate facet.
              */
@@ -739,6 +755,11 @@ struct tags {
             static const std::string directory_name;
 
             /**
+             * @brief Postfix for all file names in the facet.
+             */
+            static const std::string postfix;
+
+            /**
              * @brief Parameters associated with the @e test_data C++
              * header file.
              */
@@ -848,6 +869,11 @@ struct tags {
              * @brief Name of the folder to use for this facet.
              */
             static const std::string directory_name;
+
+            /**
+             * @brief Postfix for all file names in the facet.
+             */
+            static const std::string postfix;
 
             /**
              * @brief Parameters associated with the io C++ header file.

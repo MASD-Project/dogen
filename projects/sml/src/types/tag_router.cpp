@@ -28,7 +28,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("om_formatters.modeline_formatter"));
+auto lg(logger_factory("sml.tag_router"));
 const std::string duplicated_key(
     "Attempt to use a simple tag key which has already been used: ");
 

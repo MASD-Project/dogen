@@ -19,6 +19,9 @@
  *
  */
 #include <sstream>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/tag_error.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/tag_adaptor.hpp"
@@ -31,11 +34,19 @@
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/tagger.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
 
+auto lg(logger_factory("sml.tagger"));
+const std::string original_parent_not_found(
+    "Failed to find original parent for type: ");
+
 const std::string cpp_header_extension(".hpp");
 const std::string cpp_implementation_extension(".cpp");
+const std::string cpp_includer_file_name("all");
 
 const std::string empty_postfix;
 const std::string types_postfix;
@@ -52,6 +63,8 @@ const std::string hash_directory("hash");
 const std::string serialization_directory("serialization");
 const std::string test_data_directory("test_data");
 const std::string odb_directory("odb");
+
+const std::string scope_operator("::");
 
 const bool is_header_file(true);
 
@@ -75,7 +88,7 @@ void tagger::
 from_settings(const config::cpp_settings& s, model& m) const {
     tag_router router(make_tag_router(m));
 
-    router.route_if_key_not_found(tags::split_project,
+    router.route_if_key_not_found(tags::cpp::split_project,
         s.split_project() ? tags::bool_false : tags::bool_true);
 
     router.route_if_key_not_found(tags::cpp::header_file_extension,
@@ -197,21 +210,35 @@ bool tagger::is_facet_enabled(
     return i != enabled_facets.end();
 }
 
-std::string tagger::
-filename_for_qname(const model& m, const bool split_project,
-    const bool is_header, const qname& qn, const std::string& facet_directory,
-    const std::string& facet_postfix,
-    const std::string& additional_postfix,
-    const std::string& extension) const {
+std::string tagger::cpp_qualified_name(const sml::qname& qn) const {
+    std::ostringstream s;
+
+    if (!qn.model_name().empty())
+        s << qn.model_name() << scope_operator;
+
+    bool is_first(false);
+    for (const auto& p : qn.module_path()) {
+        if (is_first)
+            s << scope_operator;
+        s << p;
+    }
+
+    s << qn.simple_name();
+    return s.str();
+}
+
+std::string tagger::filename_for_qname(
+    const tag_adaptor& adaptor, const bool is_header, const qname& qn,
+    const std::string& facet_directory, const std::string& facet_postfix,
+    const std::string& additional_postfix) const {
 
     boost::filesystem::path r;
-
-    if (split_project) {
+    if (adaptor.is_true(tags::cpp::split_project)) {
         for(auto n : qn.external_module_path())
             r /= n;
     }
 
-    if (split_project)
+    if (adaptor.is_true(tags::cpp::split_project))
         r /= qn.model_name();
     else if (is_header) {
         for(auto n : qn.external_module_path())
@@ -219,7 +246,6 @@ filename_for_qname(const model& m, const bool split_project,
         r /= qn.model_name();
     }
 
-    auto adaptor(make_tag_adaptor(m));
     if (adaptor.is_true(tags::cpp::enable_facet_folders))
         r /= facet_directory;
 
@@ -232,17 +258,65 @@ filename_for_qname(const model& m, const bool split_project,
     if (adaptor.is_true(tags::cpp::enable_unique_file_names))
         stream << facet_postfix;
 
-    stream << extension;
+    if (is_header)
+        stream << adaptor.get(tags::cpp::header_file_extension);
+    else
+        stream << adaptor.get(tags::cpp::implementation_file_extension);
 
     r /= stream.str();
 
     return r.generic_string();
 }
 
-void tagger::visit(sml::primitive& /*p*/) const {
+void tagger::copy_model_tags(tag_router& router) const {
+    auto adaptor(make_tag_adaptor(context_->model()));
+    router.route_if_key_not_found(tags::generate_preamble,
+        adaptor.get(tags::generate_preamble));
+
+    router.route_if_key_not_found(tags::cpp::header_file_extension,
+        adaptor.get(tags::cpp::header_file_extension));
+
+        router.route_if_key_not_found(tags::cpp::implementation_file_extension,
+            adaptor.get(tags::cpp::implementation_file_extension));
+
+        router.route_if_key_not_found(tags::cpp::enable_facet_folders,
+            adaptor.get(tags::cpp::enable_facet_folders));
+
+        router.route_if_key_not_found(tags::cpp::enable_unique_file_names,
+            adaptor.get(tags::cpp::enable_unique_file_names));
+
+        router.route_if_key_not_found(tags::cpp::forward_declaration_postfix,
+            adaptor.get(tags::cpp::forward_declaration_postfix));
+
+        router.route_if_key_not_found(tags::cpp::types::status,
+            adaptor.get(tags::cpp::types::status));
+
+        router.route_if_key_not_found(tags::cpp::hash::standard::status,
+            adaptor.get(tags::cpp::hash::standard::status));
+
+        router.route_if_key_not_found(tags::cpp::serialization::boost::status,
+            adaptor.get(tags::cpp::serialization::boost::status));
+
+        router.route_if_key_not_found(tags::cpp::io::status,
+            adaptor.get(tags::cpp::io::status));
+
+        router.route_if_key_not_found(tags::cpp::test_data::status,
+            adaptor.get(tags::cpp::test_data::status));
+
+        router.route_if_key_not_found(tags::cpp::odb::status,
+            adaptor.get(tags::cpp::odb::status));
+    }
+
+void tagger::visit(sml::primitive& p) const {
+    tag_router router(make_tag_router(p));
+    router.route_if_key_not_found(tags::cpp::types::is_simple_type,
+        tags::bool_true);
 }
 
-void tagger::visit(sml::enumeration& /*e*/) const {
+void tagger::visit(sml::enumeration& e) const {
+    tag_router router(make_tag_router(e));
+    router.route_if_key_not_found(tags::cpp::types::is_simple_type,
+        tags::bool_true);
 }
 
 void tagger::visit(sml::service& s) const {
@@ -270,11 +344,200 @@ void tagger::visit(sml::entity& e) const {
 }
 
 void tagger::operator()(type& t) const {
+    tag_router router(make_tag_router(t));
+    copy_model_tags(router);
+
+    auto adaptor(make_tag_adaptor(t));
+    router.route_if_key_not_found(tags::cpp::types::qualified_name,
+        cpp_qualified_name(t.name()));
+
+    if (adaptor.is_supported(tags::cpp::types::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::types::header_file::generate, tags::bool_true);
+
+        const auto header_fn(filename_for_qname(adaptor, is_header_file,
+                t.name(), adaptor.get(tags::cpp::types::directory_name),
+                adaptor.get(tags::cpp::types::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::types::header_file::file_name, header_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::types::header_file::is_system, tags::bool_false);
+
+        const auto impl_fn(filename_for_qname(adaptor, !is_header_file,
+                t.name(), adaptor.get(tags::cpp::types::directory_name),
+                adaptor.get(tags::cpp::types::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::types::implementation_file::file_name, impl_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::types::implementation_file::is_system, tags::bool_false);
+
+        const auto fwd_fn(filename_for_qname(adaptor, is_header_file,
+                t.name(), adaptor.get(tags::cpp::types::directory_name),
+                adaptor.get(tags::cpp::types::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::types::forward_declarations_file::file_name, fwd_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::types::forward_declarations_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::hash::standard::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::hash::standard::header_file::generate, tags::bool_true);
+
+        const auto header_fn(filename_for_qname(adaptor, is_header_file,
+                t.name(),
+                adaptor.get(tags::cpp::hash::standard::directory_name),
+                adaptor.get(tags::cpp::hash::standard::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::hash::standard::header_file::file_name, header_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::hash::standard::header_file::is_system,
+            tags::bool_false);
+
+        const auto impl_fn(filename_for_qname(adaptor, !is_header_file,
+                t.name(),
+                adaptor.get(tags::cpp::hash::standard::directory_name),
+                adaptor.get(tags::cpp::hash::standard::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::hash::standard::implementation_file::file_name, impl_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::hash::standard::implementation_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::serialization::boost::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::header_file::generate,
+            tags::bool_true);
+
+        const auto header_fn(filename_for_qname(adaptor, is_header_file,
+                t.name(),
+                adaptor.get(tags::cpp::serialization::boost::directory_name),
+                adaptor.get(tags::cpp::serialization::boost::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::header_file::file_name, header_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::header_file::is_system,
+            tags::bool_false);
+
+        const auto impl_fn(filename_for_qname(adaptor, !is_header_file,
+                t.name(),
+                adaptor.get(tags::cpp::serialization::boost::directory_name),
+                adaptor.get(tags::cpp::serialization::boost::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::implementation_file::file_name,
+            impl_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::implementation_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::io::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::io::header_file::generate, tags::bool_true);
+
+        const auto header_fn(filename_for_qname(adaptor, is_header_file,
+                t.name(), adaptor.get(tags::cpp::io::directory_name),
+                adaptor.get(tags::cpp::io::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(tags::cpp::io::header_file::file_name,
+            header_fn);
+
+        router.route_if_key_not_found(tags::cpp::io::header_file::is_system,
+            tags::bool_false);
+
+        const auto impl_fn(filename_for_qname(adaptor, !is_header_file,
+                t.name(), adaptor.get(tags::cpp::io::directory_name),
+                adaptor.get(tags::cpp::io::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::io::implementation_file::file_name,
+            impl_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::io::implementation_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::test_data::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::test_data::header_file::generate, tags::bool_true);
+
+        const auto header_fn(filename_for_qname(adaptor, is_header_file,
+                t.name(), adaptor.get(tags::cpp::test_data::directory_name),
+                adaptor.get(tags::cpp::test_data::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::test_data::header_file::file_name,
+            header_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::test_data::header_file::is_system,
+            tags::bool_false);
+
+        const auto impl_fn(filename_for_qname(adaptor, !is_header_file,
+                t.name(), adaptor.get(tags::cpp::test_data::directory_name),
+                adaptor.get(tags::cpp::test_data::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::test_data::implementation_file::file_name,
+            impl_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::test_data::implementation_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::odb::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::odb::header_file::generate, tags::bool_true);
+
+        const auto header_fn(filename_for_qname(adaptor, is_header_file,
+                t.name(), adaptor.get(tags::cpp::odb::directory_name),
+                adaptor.get(tags::cpp::odb::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::odb::header_file::file_name,
+            header_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::odb::header_file::is_system,
+            tags::bool_false);
+    }
+
     t.accept(*this);
 }
 
 void tagger::operator()(module& m) const {
     tag_router router(make_tag_router(m));
+    copy_model_tags(router);
 
     // only generate a types file for models when there is
     // documentation for the model.
@@ -287,17 +550,17 @@ void tagger::operator()(module& m) const {
         qname qn(m.name());
         qn.simple_name(m.name().model_name());
 
-        auto adaptor(make_tag_adaptor(context_->model()));
-        const auto fn(filename_for_qname(context_->model(),
-                adaptor.is_true(tags::split_project),
-                is_header_file, qn,
+        auto adaptor(make_tag_adaptor(m));
+        const auto fn(filename_for_qname(adaptor, is_header_file, qn,
                 adaptor.get(tags::cpp::types::directory_name),
                 adaptor.get(tags::cpp::types::postfix),
-                empty_postfix,
-                adaptor.get(tags::cpp::header_file_extension)));
+                empty_postfix));
 
         router.route_if_key_not_found(
             tags::cpp::types::header_file::file_name, fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::types::header_file::is_system, tags::bool_false);
     }
 }
 
@@ -305,7 +568,69 @@ void tagger::operator()(concept& /*c*/) const {
     // nothing to do for concepts
 }
 
-void tagger::tag(abstract_object& /*o*/) const {
+void tagger::tag(abstract_object& o) const {
+    tag_router router(make_tag_router(o));
+    router.route_if_key_not_found(tags::cpp::types::is_simple_type,
+        tags::bool_false);
+
+    if (o.original_parent_name()) {
+        const auto opn(*o.original_parent_name());
+        router.route_if_key_not_found(tags::original_parent_name,
+            opn.simple_name());
+
+        const auto i(context_->model().objects().find(opn));
+        if (i == context_->model().objects().end()) {
+            BOOST_LOG_SEV(lg, error) << original_parent_not_found << opn;
+            BOOST_THROW_EXCEPTION(tag_error(original_parent_not_found +
+                    opn.simple_name()));
+        }
+
+        router.route_if_key_not_found(tags::is_original_parent_visitable,
+            i->second->is_visitable() ? tags::bool_true : tags::bool_false);
+
+        router.route_if_key_not_found(tags::cpp::types::generate_accept,
+            i->second->is_visitable() ? tags::bool_true : tags::bool_false);
+
+        router.route_if_key_not_found(
+            tags::cpp::types::qualified_original_parent_name,
+            cpp_qualified_name(opn));
+    }
+
+    router.route_if_key_not_found(tags::cpp::types::generate_accept,
+        o.is_visitable() ? tags::bool_true : tags::bool_false);
+
+    if (!o.is_parent())
+        router.route_if_key_not_found(tags::is_final, tags::bool_true);
+
+    router.route_if_key_not_found(
+        tags::cpp::types::generate_defaulted_functions, tags::bool_true);
+
+    router.route_if_key_not_found(
+        tags::cpp::types::generate_explicit_default_constructor,
+        tags::bool_false);
+
+    router.route_if_key_not_found(
+        tags::cpp::types::generate_explicit_move_constructor, tags::bool_false);
+
+    router.route_if_key_not_found(
+        tags::cpp::types::generate_explicit_assignment_operator,
+        tags::bool_false);
+
+    router.route_if_key_not_found(
+        tags::cpp::types::generate_complete_constructor,
+        tags::bool_true);
+
+    router.route_if_key_not_found(tags::cpp::types::generate_equality,
+        tags::bool_true);
+
+    router.route_if_key_not_found(tags::cpp::types::generate_friends,
+        tags::bool_true);
+
+    router.route_if_key_not_found(tags::cpp::types::generate_to_stream,
+        tags::bool_true);
+
+    router.route_if_key_not_found(tags::cpp::types::generate_swap,
+        tags::bool_true);
 }
 
 void tagger::tag(model& m) const {
@@ -350,17 +675,178 @@ void tagger::tag(model& m) const {
             // correct file name for the model.
             qname qn(m.name());
             qn.simple_name(m.name().model_name());
-            const auto fn(filename_for_qname(m,
-                    adaptor.is_true(tags::split_project),
-                    is_header_file, qn,
+            const auto fn(filename_for_qname(adaptor, is_header_file, qn,
                     adaptor.get(tags::cpp::types::directory_name),
                     adaptor.get(tags::cpp::types::postfix),
-                    empty_postfix,
-                    adaptor.get(tags::cpp::header_file_extension)));
+                    empty_postfix));
 
             router.route_if_key_not_found(
                 tags::cpp::types::header_file::file_name, fn);
+
+            router.route_if_key_not_found(
+                tags::cpp::types::header_file::is_system, tags::bool_false);
         }
+
+        qname qn;
+        qn.simple_name(cpp_includer_file_name);
+        qn.model_name(m.name().model_name());
+        qn.external_module_path(m.name().external_module_path());
+        const auto includers_fn(filename_for_qname(adaptor, is_header_file,
+                qn, adaptor.get(tags::cpp::types::directory_name),
+                adaptor.get(tags::cpp::types::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::types::includers_file::file_name, includers_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::types::includers_file::is_system, tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::hash::standard::status)) {
+        router.route_if_key_not_found(tags::cpp::hash::standard::directory_name,
+            hash_directory);
+
+        router.route_if_key_not_found(tags::cpp::hash::standard::postfix,
+            hash_postfix);
+
+        qname qn;
+        qn.simple_name(cpp_includer_file_name);
+        qn.model_name(m.name().model_name());
+        qn.external_module_path(m.name().external_module_path());
+        const auto includers_fn(filename_for_qname(adaptor, is_header_file,
+                qn, adaptor.get(tags::cpp::hash::standard::directory_name),
+                adaptor.get(tags::cpp::hash::standard::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::hash::standard::includers_file::file_name, includers_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::hash::standard::includers_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::serialization::boost::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::directory_name,
+            hash_directory);
+
+        router.route_if_key_not_found(tags::cpp::serialization::boost::postfix,
+            hash_postfix);
+
+        qname qn;
+        qn.simple_name(cpp_includer_file_name);
+        qn.model_name(m.name().model_name());
+        qn.external_module_path(m.name().external_module_path());
+        const auto includers_fn(filename_for_qname(adaptor, is_header_file, qn,
+                adaptor.get(tags::cpp::serialization::boost::directory_name),
+                adaptor.get(tags::cpp::serialization::boost::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::includers_file::file_name,
+            includers_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::includers_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::serialization::boost::status)) {
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::directory_name,
+            serialization_directory);
+
+        router.route_if_key_not_found(tags::cpp::serialization::boost::postfix,
+            serialization_postfix);
+
+        qname qn;
+        qn.simple_name(cpp_includer_file_name);
+        qn.model_name(m.name().model_name());
+        qn.external_module_path(m.name().external_module_path());
+        const auto includers_fn(filename_for_qname(adaptor, is_header_file, qn,
+                adaptor.get(tags::cpp::serialization::boost::directory_name),
+                adaptor.get(tags::cpp::serialization::boost::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::includers_file::file_name,
+            includers_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::serialization::boost::includers_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::io::status)) {
+        router.route_if_key_not_found(tags::cpp::io::directory_name,
+            serialization_directory);
+
+        router.route_if_key_not_found(tags::cpp::io::postfix,
+            serialization_postfix);
+
+        qname qn;
+        qn.simple_name(cpp_includer_file_name);
+        qn.model_name(m.name().model_name());
+        qn.external_module_path(m.name().external_module_path());
+        const auto includers_fn(filename_for_qname(adaptor, is_header_file,
+                qn, adaptor.get(tags::cpp::io::directory_name),
+                adaptor.get(tags::cpp::io::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(tags::cpp::io::includers_file::file_name,
+            includers_fn);
+
+        router.route_if_key_not_found(tags::cpp::io::includers_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::test_data::status)) {
+        router.route_if_key_not_found(tags::cpp::test_data::directory_name,
+            test_data_directory);
+
+        router.route_if_key_not_found(tags::cpp::test_data::postfix,
+            test_data_postfix);
+
+        qname qn;
+        qn.simple_name(cpp_includer_file_name);
+        qn.model_name(m.name().model_name());
+        qn.external_module_path(m.name().external_module_path());
+        const auto includers_fn(filename_for_qname(adaptor, is_header_file,
+                qn, adaptor.get(tags::cpp::test_data::directory_name),
+                adaptor.get(tags::cpp::test_data::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(
+            tags::cpp::test_data::includers_file::file_name,
+            includers_fn);
+
+        router.route_if_key_not_found(
+            tags::cpp::test_data::includers_file::is_system,
+            tags::bool_false);
+    }
+
+    if (adaptor.is_supported(tags::cpp::odb::status)) {
+        router.route_if_key_not_found(tags::cpp::odb::directory_name,
+            odb_directory);
+
+        router.route_if_key_not_found(tags::cpp::odb::postfix, odb_postfix);
+
+        qname qn;
+        qn.simple_name(cpp_includer_file_name);
+        qn.model_name(m.name().model_name());
+        qn.external_module_path(m.name().external_module_path());
+        const auto includers_fn(filename_for_qname(adaptor, is_header_file,
+                qn, adaptor.get(tags::cpp::odb::directory_name),
+                adaptor.get(tags::cpp::odb::postfix),
+                empty_postfix));
+
+        router.route_if_key_not_found(tags::cpp::odb::includers_file::file_name,
+            includers_fn);
+
+        router.route_if_key_not_found(tags::cpp::odb::includers_file::is_system,
+            tags::bool_false);
     }
 
     all_model_items_traversal(m, *this);
