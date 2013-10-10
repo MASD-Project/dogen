@@ -146,6 +146,14 @@ more than one at the same time. One option is to consider these things
 as distinct facets - entirely unrelated at this level. For example we
 could have a standard_hash facet and a boost_hash facet.
 
+*** Remove speculative facet layers for hash and serialization        :spike:
+
+For some unfathomable reason we decided to add a layer of indirection
+for both hash and serialization. This is for speculative reasons as in
+the future we may want to add boost hash and other forms of
+serialization. However, in keeping with the (often violated) rule that
+we never add code without a use case, we need to remove this.
+
 *** Implement the property cache in SML                               :story:
 *** Add tests for all permutations of the domain formatter            :story:
 *** Add tagging for propagatable parameters                           :story:
