@@ -24,6 +24,7 @@ namespace dogen {
 namespace sml {
 
 const std::string tags::odb_pragma("ODB_PRAGMA");
+const std::string tags::copyright_holder("COPYRIGHT");
 const std::string tags::comment("COMMENT");
 const std::string tags::identity_attribute("IDENTITY_ATTRIBUTE");
 const std::string tags::generate_preamble("generate_preamble");

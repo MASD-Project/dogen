@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline_group.hpp"
 
 namespace dogen {
@@ -53,19 +54,24 @@ private:
      */
     void hydrate_modelines();
 
+    /**
+     * @brief Hydrates all the licences available in the library.
+     */
+    void hydrate_licences(const sml::model& m);
+
 private:
     /**
      * @brief Loads all external data such as modelines, licences, etc.
      */
-    void load_data_activity();
+    void load_data_activity(const sml::model& m);
 
 public:
-    std::map<boost::filesystem::path, std::string>
-    execute(const sml::model& m) const;
+    std::map<boost::filesystem::path, std::string> execute(const sml::model& m);
 
 private:
     const boost::filesystem::path data_files_directory_;
     std::unordered_map<std::string, modeline_group> modeline_groups_;
+    std::unordered_map<std::string, licence> licences_;
 };
 
 } }

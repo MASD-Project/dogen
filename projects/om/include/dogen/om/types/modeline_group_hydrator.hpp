@@ -28,13 +28,15 @@
 
 #include <string>
 #include <istream>
-#include <boost/filesystem/path.hpp>
 #include "dogen/om/types/modeline_field.hpp"
 #include "dogen/om/types/modeline_group.hpp"
 
 namespace dogen {
 namespace om {
 
+/**
+ * @brief Hydrates a modeline group in a stream.
+ */
 class modeline_group_hydrator {
 public:
     typedef modeline_group value_type;
@@ -87,8 +89,7 @@ private:
 
 public:
     /**
-     * @brief Hydrate all the modeline groups found in the
-     * directories.
+     * @brief Hydrate all the modeline groups found in the stream.
      */
     value_type hydrate(std::istream& s) const;
 };

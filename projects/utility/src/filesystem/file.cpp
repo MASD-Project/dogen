@@ -37,20 +37,25 @@ namespace dogen {
 namespace utility {
 namespace filesystem {
 
-std::string read_file_content(boost::filesystem::path path) {
+std::string read_file_content(std::istream& s) {
+    s.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    std::string r(
+        (std::istreambuf_iterator<char>(s)),
+        std::istreambuf_iterator<char>());
+    return r;
+}
+
+std::string read_file_content(const boost::filesystem::path& path) {
     if (!boost::filesystem::exists(path)) {
         BOOST_THROW_EXCEPTION(file_not_found(path.string()));
     }
 
-    boost::filesystem::ifstream stream(path);
-    stream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-    std::string content(
-        (std::istreambuf_iterator<char>(stream)),
-        std::istreambuf_iterator<char>());
-    return content;
+    boost::filesystem::ifstream s(path);
+    return read_file_content(s);
 }
 
-void write_file_content(boost::filesystem::path path, std::string content) {
+void write_file_content(const boost::filesystem::path& path,
+    const std::string& content) {
     boost::filesystem::ofstream stream(path);
     stream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     stream << content;

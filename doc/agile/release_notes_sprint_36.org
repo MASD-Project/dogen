@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 36.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-15 Tue 19:08]
+Clock summary at [2013-10-15 Tue 20:44]
 
 | Headline                                                                  | Time   |      |      |
 |---------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                              | *6:52* |      |      |
+| *Total time*                                                              | *8:22* |      |      |
 |---------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                           |        | 6:52 |      |
+| Development Stories Implemented                                           |        | 8:22 |      |
 | IMPLEMENTATION Release notes and backlog grooming                         |        |      | 0:20 |
 | COMPLETED Add tests around model tagging                                  |        |      | 0:46 |
 | COMPLETED Add tagging for types                                           |        |      | 2:48 |
 | COMPLETED Add tagging to SML workflow                                     |        |      | 0:20 |
-| IMPLEMENTATION Implement OM workflow                                      |        |      | 1:30 |
+| IMPLEMENTATION Implement OM workflow                                      |        |      | 3:00 |
 | IMPLEMENTATION Add tests for tagging of abstract objects                  |        |      | 0:14 |
 | IMPLEMENTATION Consider creating types for meta-data                      |        |      | 0:47 |
 | IMPLEMENTATION Remove speculative facet layers for hash and serialization |        |      | 0:07 |
@@ -78,6 +78,14 @@ Clock summary at [2013-10-15 Tue 19:08]
     CLOCK: [2013-10-15 Tue 17:58]--[2013-10-15 Tue 19:08] =>  1:10
     CLOCK: [2013-10-11 Fri 00:31]--[2013-10-11 Fri 00:37] =>  0:06
     CLOCK: [2013-10-11 Fri 00:17]--[2013-10-11 Fri 00:31] =>  0:14
+
+**** COMPLETED Implement licence hydrator and plug it into workflow    :task:
+     CLOSED: [2013-10-15 Tue 20:44]
+     CLOCK: [2013-10-15 Tue 20:18]--[2013-10-15 Tue 20:44] =>  0:26
+     CLOCK: [2013-10-15 Tue 19:43]--[2013-10-15 Tue 20:18] =>  0:35
+     CLOCK: [2013-10-15 Tue 19:30]--[2013-10-15 Tue 19:43] =>  0:13
+     CLOCK: [2013-10-15 Tue 19:15]--[2013-10-15 Tue 19:30] =>  0:15
+     CLOCK: [2013-10-15 Tue 19:14]--[2013-10-15 Tue 19:15] =>  0:01
 
 *** IMPLEMENTATION Add tests for tagging of abstract objects           :task:
     CLOCK: [2013-10-10 Thu 23:34]--[2013-10-10 Thu 23:48] =>  0:14

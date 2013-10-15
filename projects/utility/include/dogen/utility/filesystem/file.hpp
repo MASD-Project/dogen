@@ -36,12 +36,18 @@ namespace filesystem {
 /**
  * @brief Returns the contents of the file.
  */
-std::string read_file_content(boost::filesystem::path path);
+std::string read_file_content(std::istream& s);
+
+/**
+ * @brief Returns the contents of the file.
+ */
+std::string read_file_content(const boost::filesystem::path& path);
 
 /**
  * @brief Writes the string to a file located at path.
  */
-void write_file_content(boost::filesystem::path path, std::string content);
+void write_file_content(const boost::filesystem::path& path,
+    const std::string& content);
 
 /**
  * @brief Returns all files available in directory, recursively.

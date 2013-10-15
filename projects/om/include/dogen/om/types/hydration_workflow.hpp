@@ -39,19 +39,43 @@ namespace om {
  * @brief Hydrates all files found in the input directories.
  */
 template<typename Hydrator>
-std::unordered_map<std::string, typename Hydrator::value_type>
-hydration_workflow(const std::list<boost::filesystem::path>& dirs) {
-    std::unordered_map<std::string, typename Hydrator::value_type> r;
+class hydration_workflow {
+public:
+    hydration_workflow() = default;
+    hydration_workflow(const hydration_workflow&) = default;
+    hydration_workflow(hydration_workflow&&) = default;
+    ~hydration_workflow() = default;
 
-    const auto files(dogen::utility::filesystem::find_files(dirs));
-    Hydrator h;
-    for (const auto& f : files) {
-        boost::filesystem::ifstream s(f);
-        r.insert(std::make_pair(f.filename().generic_string(), h.hydrate(s)));
+private:
+    /**
+     * @brief Hydrate the file given by path p.
+     */
+    std::pair<std::string, typename Hydrator::value_type>
+    hydrate(const boost::filesystem::path& p) {
+        boost::filesystem::ifstream s(p);
+        const auto value(hydrator_.hydrate(s));
+        return std::make_pair(p.filename().generic_string(), value);
     }
 
-    return r;
-}
+public:
+    hydration_workflow(const Hydrator& h) : hydrator_(h) { }
+
+    /**
+     * @brief Hydrates all files found on all the directories
+     * supplied.
+     */
+    std::unordered_map<std::string, typename Hydrator::value_type>
+    hydrate(const std::list<boost::filesystem::path>& dirs) {
+        std::unordered_map<std::string, typename Hydrator::value_type> r;
+        const auto files(dogen::utility::filesystem::find_files(dirs));
+        for (const auto& f : files)
+            r.insert(hydrate(f));
+        return r;
+    }
+
+private:
+    Hydrator hydrator_;
+};
 
 } }
 

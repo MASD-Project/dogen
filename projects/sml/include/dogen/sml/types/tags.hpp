@@ -44,6 +44,14 @@ struct tags {
     static const std::string odb_pragma;
 
     /**
+     * @brief Key used to denote copyright holders.
+     *
+     * It is expected to be repeated in a model; order is kept as
+     * provided by user.
+     */
+    static const std::string copyright_holder;
+
+    /**
      * @brief Comment provided by user when dia does not allow for it.
      *
      * For meta-types where comments are available in Dia (e.g. class,
