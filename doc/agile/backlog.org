@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Convert all files in library into JSON                            :story:
+
+We started off by using the INI format, but then subsequently found it
+too inexpressive to be able to carry SML representations and started
+using JSON. However, modeline groups, etc are still in INI format.
+
 *** Create an SML level concept for facets                            :story:
 
 In reality, "facets" are not a C++ thing; they are language
