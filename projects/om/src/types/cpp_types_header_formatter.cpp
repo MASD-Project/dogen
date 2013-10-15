@@ -42,7 +42,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("om_formatters.modeline_formatter"));
+auto lg(logger_factory("om.cpp_types_header_formatter"));
 
 const std::string empty;
 const std::string missing_stream_ptr("Stream pointer is null");

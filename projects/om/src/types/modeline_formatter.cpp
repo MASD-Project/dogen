@@ -29,7 +29,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("om_formatters.modeline_formatter"));
+auto lg(logger_factory("om.modeline_formatter"));
 
 const std::string vim_marker("vim: set");
 const std::string vim_field_separator("=");
