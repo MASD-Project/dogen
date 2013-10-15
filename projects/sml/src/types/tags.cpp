@@ -40,6 +40,13 @@ const std::string tags::status_unsupported("unsupported");
 const std::string tags::status_supported("supported");
 const std::string tags::status_handcrafted("handcrafted");
 
+const std::string tags::code_generation_marker::add_date_time(
+    "code_generation_marker.add_date_time");
+const std::string tags::code_generation_marker::add_warning(
+    "code_generation_marker.add_warning");
+const std::string tags::code_generation_marker::message(
+    "code_generation_marker.message");
+
 const std::string tags::cpp::split_project("split_project");
 const std::string tags::cpp::header_file_extension("cpp.header_file_extension");
 const std::string tags::cpp::implementation_file_extension(

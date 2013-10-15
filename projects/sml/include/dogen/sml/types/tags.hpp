@@ -106,6 +106,27 @@ struct tags {
     static const std::string status_handcrafted;
 
     /**
+     * @brief Tags related to the code generation marker.
+     */
+    struct code_generation_marker {
+        /**
+         * @brief If true, add the generation date and time to the marker.
+         */
+        static const std::string add_date_time;
+
+        /**
+         * @brief If true, adds a warning not to modify
+         * code-generated files.
+         */
+        static const std::string add_warning;
+
+        /**
+         * @brief Message to place on all code-generated files.
+         */
+        static const std::string message;
+    };
+
+    /**
      * @brief All parameters specific to the C++ language.
      */
     struct cpp {

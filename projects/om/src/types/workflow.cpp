@@ -23,11 +23,14 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/sml/types/tags.hpp"
+#include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/om/io/modeline_group_io.hpp"
 #include "dogen/om/types/hydration_workflow.hpp"
 #include "dogen/om/types/modeline_group_hydrator.hpp"
 #include "dogen/om/io/licence_io.hpp"
 #include "dogen/om/types/licence_hydrator.hpp"
+#include "dogen/om/types/code_generation_marker_factory.hpp"
+#include "dogen/sml/types/tag_adaptor.hpp"
 #include "dogen/om/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -78,9 +81,26 @@ void workflow::hydrate_licences(const sml::model& m) {
     BOOST_LOG_SEV(lg, debug) << "contents: " << licences_;
 }
 
+void workflow::create_marker(const sml::model& m) {
+    auto adaptor(sml::make_tag_adaptor(m));
+
+    const bool add_date_time(
+        adaptor.is_true(sml::tags::code_generation_marker::add_date_time));
+
+    const bool add_warning(
+        adaptor.is_true(sml::tags::code_generation_marker::add_warning));
+
+    const std::string message(
+        adaptor.get(sml::tags::code_generation_marker::message));
+
+    code_generation_marker_factory f(add_date_time, add_warning, message);
+    code_generation_marker_ = f.build();
+}
+
 void workflow::load_data_activity(const sml::model& m) {
     hydrate_modelines();
     hydrate_licences(m);
+    create_marker(m);
 }
 
 std::map<boost::filesystem::path, std::string>

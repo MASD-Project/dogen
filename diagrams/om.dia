@@ -1186,13 +1186,13 @@ A Copyright holder is a pair of name and email address.#</dia:string>
         <dia:point val="-101,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-101.05,82.95;-78.89,87.45"/>
+        <dia:rectangle val="-101.05,82.95;-82.355,87.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-101,83"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.059999999999999"/>
+        <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -1315,23 +1315,6 @@ A Copyright holder is a pair of name and email address.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="parameters">
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#add_box#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#bool#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
                 <dia:string>#add_date_time#</dia:string>
@@ -7081,7 +7064,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-69,70.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-90.02,69.45;-68.25,83.8"/>
+        <dia:rectangle val="-91.7525,69.45;-68.25,83.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7089,8 +7072,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-69,70.2"/>
         <dia:point val="-69,76.95"/>
-        <dia:point val="-89.97,76.95"/>
-        <dia:point val="-89.97,83"/>
+        <dia:point val="-91.7025,76.95"/>
+        <dia:point val="-91.7025,83"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

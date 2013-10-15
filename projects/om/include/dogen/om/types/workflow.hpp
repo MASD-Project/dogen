@@ -59,6 +59,11 @@ private:
      */
     void hydrate_licences(const sml::model& m);
 
+    /**
+     * @brief Creates the code generation marker.
+     */
+    void create_marker(const sml::model& m);
+
 private:
     /**
      * @brief Loads all external data such as modelines, licences, etc.
@@ -72,6 +77,7 @@ private:
     const boost::filesystem::path data_files_directory_;
     std::unordered_map<std::string, modeline_group> modeline_groups_;
     std::unordered_map<std::string, licence> licences_;
+    std::string code_generation_marker_;
 };
 
 } }

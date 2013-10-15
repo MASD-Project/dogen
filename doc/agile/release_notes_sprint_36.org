@@ -87,6 +87,12 @@ Clock summary at [2013-10-15 Tue 20:44]
      CLOCK: [2013-10-15 Tue 19:15]--[2013-10-15 Tue 19:30] =>  0:15
      CLOCK: [2013-10-15 Tue 19:14]--[2013-10-15 Tue 19:15] =>  0:01
 
+**** COMPLETED Implement code generation marker factory                :task:
+     CLOSED: [2013-10-16 Wed 00:58]
+     CLOCK: [2013-10-16 Wed 00:35]--[2013-10-16 Wed 00:58] =>  0:23
+     CLOCK: [2013-10-15 Tue 20:55]--[2013-10-15 Tue 21:10] =>  0:15
+     CLOCK: [2013-10-15 Tue 20:44]--[2013-10-15 Tue 20:55] =>  0:11
+
 *** IMPLEMENTATION Add tests for tagging of abstract objects           :task:
     CLOCK: [2013-10-10 Thu 23:34]--[2013-10-10 Thu 23:48] =>  0:14
 
