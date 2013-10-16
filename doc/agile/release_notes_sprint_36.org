@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 36.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-16 Wed 14:08]
+Clock summary at [2013-10-16 Wed 18:29]
 
 | Headline                                                                  | Time    |       |      |
 |---------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                              | *10:55* |       |      |
+| *Total time*                                                              | *11:10* |       |      |
 |---------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                           |         | 10:55 |      |
+| Development Stories Implemented                                           |         | 11:10 |      |
 | IMPLEMENTATION Release notes and backlog grooming                         |         |       | 0:44 |
 | COMPLETED Add tests around model tagging                                  |         |       | 0:46 |
 | COMPLETED Add tagging for types                                           |         |       | 2:48 |
 | COMPLETED Add tagging to SML workflow                                     |         |       | 0:20 |
-| IMPLEMENTATION Implement OM workflow                                      |         |       | 5:09 |
+| IMPLEMENTATION Implement OM workflow                                      |         |       | 5:24 |
 | IMPLEMENTATION Add tests for tagging of abstract objects                  |         |       | 0:14 |
 | IMPLEMENTATION Consider creating types for meta-data                      |         |       | 0:47 |
 | IMPLEMENTATION Remove speculative facet layers for hash and serialization |         |       | 0:07 |
@@ -96,6 +96,7 @@ Clock summary at [2013-10-16 Wed 14:08]
      CLOCK: [2013-10-15 Tue 20:44]--[2013-10-15 Tue 20:55] =>  0:11
 
 **** IMPLEMENTATION Add types header formatter to workflow             :task:
+     CLOCK: [2013-10-16 Wed 14:14]--[2013-10-16 Wed 14:29] =>  0:15
      CLOCK: [2013-10-16 Wed 13:30]--[2013-10-16 Wed 14:08] =>  0:38
      CLOCK: [2013-10-16 Wed 13:20]--[2013-10-16 Wed 13:30] =>  0:10
      CLOCK: [2013-10-16 Wed 12:56]--[2013-10-16 Wed 13:01] =>  0:05

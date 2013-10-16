@@ -3606,19 +3606,19 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-46.555,65"/>
+        <dia:point val="-33.2425,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.305,52.15;-33.8,65.8"/>
+        <dia:rectangle val="-33.9925,52.15;-29.8,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-46.555,65"/>
-        <dia:point val="-46.555,58"/>
-        <dia:point val="-34,58"/>
-        <dia:point val="-34,52.2"/>
+        <dia:point val="-33.2425,65"/>
+        <dia:point val="-33.2425,58"/>
+        <dia:point val="-30,58"/>
+        <dia:point val="-30,52.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3635,25 +3635,25 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O25" connection="2"/>
+        <dia:connection handle="0" to="O28" connection="1"/>
         <dia:connection handle="1" to="O42" connection="5"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="-50,84"/>
+        <dia:point val="-41,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.05,83.95;-35.975,87.65"/>
+        <dia:rectangle val="-41.05,64.95;-25.435,70.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-50,84"/>
+        <dia:point val="-41,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.975"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#file#</dia:string>
@@ -3745,6 +3745,29 @@ For example, one may choose to have a set of modelines for @e emacs , or for
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#relative_path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Relative path to the file.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#full_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -3754,7 +3777,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Full path to the file, indicating the location in the filesystem where it will be written.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3777,7 +3800,33 @@ For example, one may choose to have a set of modelines for @e emacs , or for
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
+            <dia:string>#Contents of the file.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#overwrite#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Determines when to write the file.
+
+If true, the file will always be written to the filesystem; if false, the file will
+only be written to the filesystem if it does not exist.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5211,13 +5260,13 @@ These are expected to use quotes and be on the user path.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O38">
       <dia:attribute name="obj_pos">
-        <dia:point val="-26,65"/>
+        <dia:point val="-14,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.05,64.95;-8.1775,68.65"/>
+        <dia:rectangle val="-14.05,64.95;3.8225,68.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-26,65"/>
+        <dia:point val="-14,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.772500000000001"/>
@@ -5533,7 +5582,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-46.555,70.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.305,69.45;-42.8125,84.8"/>
+        <dia:rectangle val="-47.305,69.45;-33.0425,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5541,8 +5590,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-46.555,70.2"/>
         <dia:point val="-46.555,78"/>
-        <dia:point val="-43.0125,78"/>
-        <dia:point val="-43.0125,84"/>
+        <dia:point val="-33.2425,78"/>
+        <dia:point val="-33.2425,70.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5560,21 +5609,21 @@ These are expected to use quotes and be on the user path.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O25" connection="7"/>
-        <dia:connection handle="1" to="O28" connection="1"/>
+        <dia:connection handle="1" to="O28" connection="6"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="-34,47"/>
+        <dia:point val="-30,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.05,46.95;-5.73,52.25"/>
+        <dia:rectangle val="-30.05,46.95;0.58,52.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-34,47"/>
+        <dia:point val="-30,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -5676,7 +5725,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>##</dia:string>
+            <dia:string>#file#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5809,19 +5858,19 @@ These are expected to use quotes and be on the user path.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="-19.89,52.2"/>
+        <dia:point val="-14.735,52.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.74,52.15;-17.0637,65.05"/>
+        <dia:rectangle val="-15.585,52.15;-5.06375,65.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-19.89,52.2"/>
-        <dia:point val="-19.89,58"/>
-        <dia:point val="-17.1137,58"/>
-        <dia:point val="-17.1137,65"/>
+        <dia:point val="-14.735,52.2"/>
+        <dia:point val="-14.735,58"/>
+        <dia:point val="-5.11375,58"/>
+        <dia:point val="-5.11375,65"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6060,7 +6109,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-35.93,34.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-36.68,33.65;-19.69,47.8"/>
+        <dia:rectangle val="-36.68,33.65;-14.535,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6068,8 +6117,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-35.93,34.4"/>
         <dia:point val="-35.93,41"/>
-        <dia:point val="-19.89,41"/>
-        <dia:point val="-19.89,47"/>
+        <dia:point val="-14.735,41"/>
+        <dia:point val="-14.735,47"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
