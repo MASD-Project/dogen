@@ -8,6 +8,24 @@
 
 Stories that we intend to look at, at some point.
 
+*** Improve the integration of dogen with dia                         :story:
+
+It would be great if the model generation in dia was slightly more
+interactive:
+
+- dia could have a button to run/configure an external tool, where the
+  setup for dogen would be kept
+- pushing an execute button would code generate
+- pushing a validate button would validate the current diagram, taking
+  into account declared references. references to types that are not
+  resolved could make the class or function go red.
+
+The idea is to do the least intrusive changes in dia that would
+provide us with this support. In order to access dogen, instead of
+running the executable and parsing the command line output, it would
+make more sense to create a C interface that supports these specific
+use cases (and nothing else).
+
 *** Add support for qualified class names in dia                      :story:
 
 It has become apparent that creating large packages in dia and placing
