@@ -35,14 +35,14 @@
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/om/types/cpp_types_header_formatter.hpp"
+#include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
 
 using dogen::sml::test::mock_model_factory;
 
 namespace {
 
 const std::string test_module("om");
-const std::string test_suite("cpp_types_header_formatter_spec");
+const std::string test_suite("cpp_types_main_header_file_formatter_spec");
 const std::string empty_marker;
 const dogen::om::licence empty_licence = dogen::om::licence();
 const dogen::om::modeline empty_modeline = dogen::om::modeline();
@@ -216,7 +216,7 @@ typedef dogen::sml::test::mock_model_factory::object_types object_types;
 typedef dogen::sml::test::mock_model_factory::property_types property_types;
 typedef dogen::sml::test::mock_model_factory factory;
 
-BOOST_AUTO_TEST_SUITE(cpp_types_header_formatter)
+BOOST_AUTO_TEST_SUITE(cpp_types_main_header_file_formatter)
 
 BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_header) {
     SETUP_TEST_LOG_SOURCE("enumeration_with_two_enumerators_produces_expected_types_header");
@@ -227,7 +227,7 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_he
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
     const auto e(m.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
@@ -248,7 +248,7 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
     BOOST_REQUIRE(m.objects().size() == 1);
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
     const auto& o(find_object(m, 0));
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
@@ -271,7 +271,7 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
     const auto r(s.str());
@@ -291,7 +291,7 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -313,7 +313,7 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -337,7 +337,7 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -366,7 +366,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_typ
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);
@@ -395,7 +395,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     std::ostringstream s;
-    dogen::om::cpp_types_header_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
     f.format(s, o, empty_licence, empty_modeline, empty_marker, c);

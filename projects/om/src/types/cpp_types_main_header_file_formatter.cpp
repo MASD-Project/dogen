@@ -36,13 +36,13 @@
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/om/types/formatting_error.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
-#include "dogen/om/types/cpp_types_header_formatter.hpp"
+#include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("om.cpp_types_header_formatter"));
+auto lg(logger_factory("om.cpp_types_main_header_file_formatter"));
 
 const std::string empty;
 const std::string missing_stream_ptr("Stream pointer is null");
@@ -58,7 +58,67 @@ const std::string scope_operator("::");
 namespace dogen {
 namespace om {
 
-cpp_types_header_formatter::cpp_types_header_formatter()
+/**
+ * @brief Provides a context in which formatting operations occur.
+ *
+ * All parameters passed in to the context must have a lifetime
+ * greater than (or equal to) the context itself as it keeps
+ * references to them.
+ */
+class cpp_types_main_header_file_formatter::context {
+public:
+    context() = delete;
+    context(const context&) = delete;
+    context(context&&) = delete;
+    context& operator=(const context&) = delete;
+    ~context() noexcept = default;
+
+public:
+    context(std::ostream& s, const sml::property_cache_interface& pc,
+        cpp_formatters::indenter& ind, cpp_formatters::utility& u)
+        : stream_(s), property_cache_(pc), indenter_(ind), utility_(u),
+          first_line_is_blank_(false) { }
+
+public:
+    /**
+     * @brief Stream to which the formatted output will be sent.
+     */
+    std::ostream& stream() { return stream_; }
+
+    /**
+     * @brief Cache that provides access to properties in SML objects.
+     */
+    const sml::property_cache_interface& property_cache() const {
+        return property_cache_;
+    }
+
+    /**
+     * @brief Indentation facilities.
+     */
+    cpp_formatters::indenter& indenter() { return indenter_; }
+
+    /**
+     * @brief Formatting utility methods.
+     */
+    cpp_formatters::utility& utility() { return utility_; }
+
+    /**
+     * @brief If true, add a blank line at the start.
+     */
+    /**@{*/
+    bool first_line_is_blank() const { return first_line_is_blank_; }
+    void first_line_is_blank(bool value) { first_line_is_blank_ = value; }
+    /**@}*/
+
+private:
+    std::ostream& stream_;
+    const sml::property_cache_interface& property_cache_;
+    cpp_formatters::indenter& indenter_;
+    cpp_formatters::utility& utility_;
+    bool first_line_is_blank_;
+};
+
+cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter()
     : doxygen_next_(
           !start_on_first_line,
           use_documentation_tool_markup,
@@ -72,7 +132,7 @@ cpp_types_header_formatter::cpp_types_header_formatter()
           comment_styles::cpp_style,
           !last_line_is_blank) { }
 
-std::list<std::string> cpp_types_header_formatter::
+std::list<std::string> cpp_types_main_header_file_formatter::
 namespaces(const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
@@ -85,7 +145,7 @@ namespaces(const sml::qname& qn) const {
     return r;
 }
 
-std::string cpp_types_header_formatter::
+std::string cpp_types_main_header_file_formatter::
 cpp_qualified_name(const sml::qname& qn) const {
     std::ostringstream s;
 
@@ -103,7 +163,7 @@ cpp_qualified_name(const sml::qname& qn) const {
     return s.str();
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::enumeration& e) const {
     if (context_ == nullptr) {
         BOOST_LOG_SEV(lg, error) << missing_stream_ptr;
@@ -144,7 +204,7 @@ visit(const dogen::sml::enumeration& e) const {
     context_->stream() << context_->indenter() << "};" << std::endl;
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 open_class(const sml::abstract_object& o) const {
     if (!o.documentation().empty())
         doxygen_next_.format(context_->stream(), o.documentation());
@@ -165,11 +225,11 @@ open_class(const sml::abstract_object& o) const {
     context_->first_line_is_blank(false);
 }
 
-void cpp_types_header_formatter::close_class() const {
+void cpp_types_main_header_file_formatter::close_class() const {
     context_->stream() << context_->indenter() << "};" << std::endl;
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 explicitly_defaulted_functions(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     using types = sml::tags::cpp::types;
@@ -216,7 +276,7 @@ explicitly_defaulted_functions(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 default_constructor(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     using types = sml::tags::cpp::types;
@@ -232,7 +292,7 @@ default_constructor(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 complete_constructor(const sml::abstract_object& o) const {
     {
         auto adaptor(sml::make_tag_adaptor(o));
@@ -289,7 +349,7 @@ complete_constructor(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 move_constructor(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     using types = sml::tags::cpp::types;
@@ -310,7 +370,7 @@ move_constructor(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 destructor(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     using types = sml::tags::cpp::types;
@@ -340,7 +400,7 @@ destructor(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 friends(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     using types = sml::tags::cpp::types;
@@ -369,7 +429,7 @@ friends(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::simple_type_getter_and_setter(
+void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
     const std::string& owner_name, const sml::property& p) const {
     const auto doc(p.documentation());
     if (!doc.empty())
@@ -403,7 +463,7 @@ void cpp_types_header_formatter::simple_type_getter_and_setter(
         doxygen_next_.format_doxygen_end_block(context_->stream(), doc);
 }
 
-void cpp_types_header_formatter::compound_type_getter_and_setter(
+void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
     const std::string& owner_name, const sml::property& p) const {
     const auto doc(p.documentation());
 
@@ -456,7 +516,7 @@ void cpp_types_header_formatter::compound_type_getter_and_setter(
         doxygen_next_.format_doxygen_end_block(context_->stream(), doc);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 getters_and_setters(const sml::abstract_object& o) const {
     if (o.properties().empty())
         return;
@@ -480,7 +540,7 @@ getters_and_setters(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 member_variables(const sml::abstract_object& o) const {
     if (o.properties().empty())
         return;
@@ -501,7 +561,7 @@ member_variables(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 equality(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     if (adaptor.is_false(sml::tags::cpp::types::generate_equality))
@@ -559,7 +619,7 @@ equality(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 to_stream(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     if (adaptor.is_false(sml::tags::cpp::types::generate_to_stream))
@@ -583,7 +643,7 @@ to_stream(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 swap(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     if (adaptor.is_false(sml::tags::cpp::types::generate_swap))
@@ -609,7 +669,7 @@ swap(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 assignment(const sml::abstract_object& o) const {
     // assignment is only available in leaf classes - MEC++-33
     const auto props(context_->property_cache().get_all_properties(o));
@@ -626,7 +686,7 @@ assignment(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visitor_method(const sml::abstract_object& o) const {
     auto adaptor(sml::make_tag_adaptor(o));
     if (adaptor.is_false(sml::tags::cpp::types::generate_accept))
@@ -702,7 +762,7 @@ visitor_method(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_header_formatter::format(const sml::abstract_object& o) const {
+void cpp_types_main_header_file_formatter::format(const sml::abstract_object& o) const {
     open_class(o);
     {
         cpp_formatters::positive_indenter_scope s(context_->indenter());
@@ -723,37 +783,37 @@ void cpp_types_header_formatter::format(const sml::abstract_object& o) const {
     close_class();
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::service& s) const {
     format(s);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::factory& f) const {
     format(f);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::repository& r) const {
     format(r);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::value_object& vo) const {
     format(vo);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::keyed_entity& ke) const {
     format(ke);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::entity& e) const {
     format(e);
 }
 
-void cpp_types_header_formatter::
+void cpp_types_main_header_file_formatter::
 format(std::ostream& s, const sml::type& t, const licence& l,
     const modeline& m, const std::string& marker,
     const sml::property_cache_interface& c) const {

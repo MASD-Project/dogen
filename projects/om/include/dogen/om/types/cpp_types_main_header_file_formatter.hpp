@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_CPP_TYPES_HEADER_FORMATTER_HPP
-#define DOGEN_OM_TYPES_CPP_TYPES_HEADER_FORMATTER_HPP
+#ifndef DOGEN_OM_TYPES_CPP_TYPES_MAIN_HEADER_FILE_FORMATTER_HPP
+#define DOGEN_OM_TYPES_CPP_TYPES_MAIN_HEADER_FILE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,6 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
-#include "dogen/om/types/context.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 
@@ -41,15 +40,20 @@ namespace om {
 /**
  * @brief Formats SML types into their C++ representation.
  */
-class cpp_types_header_formatter : public type_formatter_interface,
-                                   private sml::type_visitor {
+class cpp_types_main_header_file_formatter : public type_formatter_interface,
+                                             private sml::type_visitor {
 public:
-    cpp_types_header_formatter(const cpp_types_header_formatter&) = default;
-    cpp_types_header_formatter(cpp_types_header_formatter&&) = default;
+    cpp_types_main_header_file_formatter(
+        const cpp_types_main_header_file_formatter&) = default;
+    cpp_types_main_header_file_formatter(
+        cpp_types_main_header_file_formatter&&) = default;
+
+private:
+    class context;
 
 public:
-    cpp_types_header_formatter();
-    virtual ~cpp_types_header_formatter() noexcept { }
+    cpp_types_main_header_file_formatter();
+    virtual ~cpp_types_main_header_file_formatter() noexcept { }
 
 private:
     /**
@@ -149,7 +153,7 @@ public:
         const sml::property_cache_interface& c) const override;
 
 private:
-    mutable std::unique_ptr<context> context_;
+    mutable std::shared_ptr<context> context_;
     comment_formatter doxygen_next_;
     comment_formatter doxygen_previous_;
 };
