@@ -49,7 +49,7 @@ namespace om {
 workflow::workflow(const boost::filesystem::path& data_files_directory)
     : data_files_directory_(data_files_directory) { }
 
-void workflow::hydrate_modelines() {
+void workflow::hydrate_modelines_activity() {
     const std::list<boost::filesystem::path> d = {
         data_files_directory_ / modeline_groups_dir
     };
@@ -62,7 +62,7 @@ void workflow::hydrate_modelines() {
     BOOST_LOG_SEV(lg, debug) << "contents: " << modeline_groups_;
 }
 
-void workflow::hydrate_licences(const sml::model& m) {
+void workflow::hydrate_licences_activity(const sml::model& m) {
     const std::list<boost::filesystem::path> d = {
         data_files_directory_ / licence_dir
     };
@@ -81,7 +81,7 @@ void workflow::hydrate_licences(const sml::model& m) {
     BOOST_LOG_SEV(lg, debug) << "contents: " << licences_;
 }
 
-void workflow::create_marker(const sml::model& m) {
+void workflow::create_marker_activity(const sml::model& m) {
     auto adaptor(sml::make_tag_adaptor(m));
 
     const bool add_date_time(
@@ -97,16 +97,22 @@ void workflow::create_marker(const sml::model& m) {
     code_generation_marker_ = f.build();
 }
 
-void workflow::load_data_activity(const sml::model& m) {
-    hydrate_modelines();
-    hydrate_licences(m);
-    create_marker(m);
+void workflow::load_data_subworkflow(const sml::model& m) {
+    hydrate_modelines_activity();
+    hydrate_licences_activity(m);
+    create_marker_activity(m);
+}
+
+std::map<boost::filesystem::path, std::string> workflow::
+cpp_subworkflow(const sml::model& /*m*/) {
+    std::map<boost::filesystem::path, std::string> r;
+    return r;
 }
 
 std::map<boost::filesystem::path, std::string>
 workflow::execute(const sml::model& m) {
-    load_data_activity(m);
-    std::map<boost::filesystem::path, std::string> r;
+    load_data_subworkflow(m);
+    const auto r(cpp_subworkflow(m));
     return r;
 }
 

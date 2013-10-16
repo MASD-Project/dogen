@@ -52,23 +52,29 @@ private:
     /**
      * @brief Hydrates all the modelines available in the library.
      */
-    void hydrate_modelines();
+    void hydrate_modelines_activity();
 
     /**
      * @brief Hydrates all the licences available in the library.
      */
-    void hydrate_licences(const sml::model& m);
+    void hydrate_licences_activity(const sml::model& m);
 
     /**
      * @brief Creates the code generation marker.
      */
-    void create_marker(const sml::model& m);
+    void create_marker_activity(const sml::model& m);
 
 private:
     /**
      * @brief Loads all external data such as modelines, licences, etc.
      */
-    void load_data_activity(const sml::model& m);
+    void load_data_subworkflow(const sml::model& m);
+
+    /**
+     * @brief Execute the C++ subworkflow.
+     */
+    std::map<boost::filesystem::path, std::string>
+    cpp_subworkflow(const sml::model& m);
 
 public:
     std::map<boost::filesystem::path, std::string> execute(const sml::model& m);
