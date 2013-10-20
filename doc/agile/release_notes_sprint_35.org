@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 35.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-07 Mon 18:02]
+Clock summary at [2013-10-20 Sun 08:22]
 
 | Headline                                                                 | Time    |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                             | *34:24* |       |       |
+| *Total time*                                                             | *36:54* |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                          |         | 34:24 |       |
+| Development Stories Implemented                                          |         | 36:54 |       |
 | COMPLETED Release notes and backlog grooming                             |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
@@ -27,7 +27,7 @@ Clock summary at [2013-10-07 Mon 18:02]
 | COMPLETED Replace static factories for system models with json hydration |         |       |  1:41 |
 | COMPLETED Rename domain header formatter to types header formatter       |         |       |  0:13 |
 | COMPLETED Create a complete domain formatter in OM                       |         |       | 10:42 |
-| COMPLETED Implement model tagger                                         |         |       |  7:48 |
+| COMPLETED Implement model tagger                                         |         |       | 10:18 |
 | CANCELLED Implement the property cache in SML                            |         |       |  1:14 |
 #+end:
 
@@ -225,6 +225,8 @@ SML type visitors, etc.
 *** COMPLETED Implement model tagger                                  :story:
     CLOSED: [2013-10-07 Mon 18:02]
     CLOCK: [2013-10-05 Sat 11:16]--[2013-10-05 Sat 11:38] =>  0:22
+    CLOCK: [2013-10-03 Thu 17:40]--[2013-10-03 Thu 17:51] =>  0:11
+    CLOCK: [2013-10-03 Thu 17:31]--[2013-10-03 Thu 17:38] =>  0:20
     CLOCK: [2013-10-03 Thu 07:22]--[2013-10-03 Thu 07:29] =>  0:07
     CLOCK: [2013-10-03 Thu 07:17]--[2013-10-03 Thu 07:21] =>  0:04
     CLOCK: [2013-10-03 Thu 07:00]--[2013-10-03 Thu 07:13] =>  0:13
@@ -236,6 +238,10 @@ SML type visitors, etc.
     CLOCK: [2013-09-29 Sun 18:23]--[2013-09-29 Sun 18:43] =>  0:20
     CLOCK: [2013-09-29 Sun 01:50]--[2013-09-29 Sun 02:08] =>  0:18
     CLOCK: [2013-09-29 Sun 00:01]--[2013-09-29 Sun 00:10] =>  0:09
+    CLOCK: [2013-09-28 Sat 15:34]--[2013-09-28 Sat 17:07] =>  1:33
+    CLOCK: [2013-09-28 Sat 15:02]--[2013-09-28 Sat 15:34] =>  0:32
+    CLOCK: [2013-09-28 Sat 14:59]--[2013-09-28 Sat 15:02] =>  0:03
+    CLOCK: [2013-09-28 Sat 11:02]--[2013-09-28 Sat 11:06] =>  0:04
 
 **** COMPLETED Split tags for files for each file type                 :task:
      CLOSED: [2013-10-05 Sat 15:43]
