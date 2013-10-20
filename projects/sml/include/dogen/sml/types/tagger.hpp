@@ -46,9 +46,11 @@ namespace sml {
 class tagger : private sml::type_visitor {
 public:
     tagger() = default;
-    ~tagger() noexcept = default;
     tagger(const tagger&) = default;
     tagger(tagger&&) = default;
+
+public:
+    virtual ~tagger() noexcept { }
 
 private:
     class context;
