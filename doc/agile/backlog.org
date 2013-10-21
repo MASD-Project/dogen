@@ -8,6 +8,217 @@
 
 Stories that we intend to look at, at some point.
 
+*** Remove speculative facet layers for hash and serialization        :story:
+
+For some unfathomable reason we decided to add a layer of indirection
+for both hash and serialization. This is for speculative reasons as in
+the future we may want to add boost hash and other forms of
+serialization. However, in keeping with the (often violated) rule that
+we never add code without a use case, we need to remove this.
+
+*** Implement meta-data support as a =ptree=                          :story:
+
+We started off by creating tags as key-value-pairs because this
+reflected the nature of the inputs coming in from SML. It was also
+handy for a JSON format. However, the infrastructure that is growing
+around tags (e.g. adaptor, router) seems to imply that a flat
+structure is not quite the right way of modeling this; adaptor and
+router are just a way of solving the impedance mismatch. Perhaps a
+better approach is to create an object model around meta-data.
+
+The main issues with the current approach are:
+
+- very verbose: the whole nonsense around tagger, adaptor and router
+  makes it really cumbersome to write code that gets and sets. Having
+  said that, in order for defaulting to work we would need a way of
+  checking if something was already set before setting it. We would
+  need something akin to =std::optional= or =boost::optional= for
+  this.
+- the aspects in a section are hard-coded. At present we have the main
+  header file, the implementation file, the forward declarations and
+  the includer; in the future we could have more (boost parameter,
+  boost concept, etc). Its annoying to have to add new blocks to tags
+  every time we need to add an aspect. This would be solved if we had
+  a container for aspects with some aspect enumeration. The
+  enumeration would have to have a language prefix
+  (e.g. =cpp_aspects=).
+- on the same vein, the facets themselves are hard-coded. Like the
+  aspects, we expect these to expand overtime and we want to make it
+  as easy as possible to do so. At present we need to add more facet
+  blocks into tags and then do a whole load of population in
+  tagger. This would be solved if we have a container for facets with
+  some enumeration associated. The enumerators would have to have a
+  language prefix (e.g. =cpp_types=, =cpp_hash_standard=, etc.)
+
+Of course the key issue with an object model is that the data would
+still be inputted as key-value-pairs in the dia diagram or the JSON
+file. This means we still would need to solve this impedance mismatch,
+probably via tags (e.g. the graph of the object model is encoded in
+the key names as it is at present).
+
+The other thing that may be useful is to think of the meta-data as a
+tree, with the following levels:
+
+- *language-agnostic*: or root; applies to everything in this
+  model. e.g. =comment=, =identity_attribute=, etc.
+- *language-specific*: applies to a specific language like C++. All
+  the stuff in tags under =cpp=.
+- *facet-specific*: applies to just a facet in a language,
+  e.g. =types= in =cpp=.
+- *aspect-specific*: all the file names, etc for the given aspect.
+
+With this we can now handle all facets in the same way (even
+regardless of language), as well as all aspects in the same way. We
+could have methods that take the facet/aspect node and do stuff
+without needing to know which facet/aspect they're processing (of
+course the nodes of the tree would still have an enumeration so
+identification is still possible).
+
+We could use boost property tree as a way of managing the tree. It
+supports paths - e.g. the tags - out of the box. It would also support
+the complex/simple tags; complex tags would be like a container in
+JSON, where the ordering is guaranteed by the order of nodes in a
+given level. Finally it also supports boost serialisation. We just
+need to find a way to JSON serialise it as per the IO stream
+requirements, which could just be a case of using JSON support in
+property tree.
+
+When considering the tree approach, we should also take into account
+the "facet with multiple implementations scenario". This is for cases
+such as hashing or serialisation where there may be more than one way
+of providing an implementation for a facet - and we may need to use
+more than one at the same time. One option is to consider these things
+as distinct facets - entirely unrelated at this level. For example we
+could have a standard_hash facet and a boost_hash facet.
+
+*** Add tests for tagging of modules, primitves and enumerations      :story:
+*** Implement the property cache in SML                               :story:
+*** Add tests for all permutations of the domain formatter            :story:
+*** Add tagging for propagatable parameters                           :story:
+
+Some implementation specific parameters should be propagated along the
+composition graph (e.g. boost serialisation status disabled). We could
+spot these parameters whilst building the model and do the propagation
+there and then.
+
+We need to create language specific classes to propagate parameters,
+assign proper defaults to them, etc.
+
+*** Parameter to disable cpp file                                     :story:
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
+
+*** Add getter and setter prefixes
+
+External users may have getter and setter prefix conventions such as
+=set_prop= or =SetProp=. It would be nice if we could pass in a
+getter/setting prefix and then dogen would append them when converting
+the diagram, e.g. =--getter-prefix=set_=.
+
+We should check what ODB has done for this and implement the same
+pattern.
+
+*** Fix spelling of =rountrip_type=
+
+Should be =roundtrip_type=.
+
+*** "Data driven" includer
+
+We should simply go through all the types in the SML model and for
+each type and each facet create the corresponding inclusion
+path. locator can be used to generate standard paths, and a model
+specific mapping is required for other models such as std.
+
+Include then takes the relationships extracted by extractor, the
+mappings generated by this mapper and simply appends to the inclusion
+list the file names. it also appends the implementation specific
+headers.
+
+This story is very closely related to [[*Loading%20external%20models%20from%20file][profiles]].
+
+*** Formatters should cache qname formatting
+
+We seem to re-format the same qname lots of times. We should just use
+a =std::ostringstream= to format once and reuse the resulting
+string. Probably worth doing this change after the performance tests
+are in.
+
+*** Refactor Licence formatter
+
+- year is hard-coded to 2012: At present the licence formatter has an
+  hard-coded year of 2012. It should really be a parameter passed in.
+- we should really only have one formatter that understands different
+  commenting syntaxes (e.g. cmake comments, c++ comments).
+- we should support multiple licences.
+
+*** Add a code generation marker
+
+Now that we've started to mix-and-match hand-crafted code with
+code-generated code, we should really have an easy way to distinguish
+which files are which. A simple comment at the top for files generated
+by dogen (with the corresponding dogen version) would suffice. This
+could be done in a similar fashion to the licence formatter. It should
+either be after the licence or at the very top and take on the
+responsibilities of emacs/vi headers.
+
+We should also add a model level version which will be stamped on the
+marker.
+
+In addition, we should also stamp the dogen version too. However, this
+will make all our tests break every time there is a new commit so
+perhaps we need to have this switched off by default.
+
+*** Split floating point stream settings from double                  :story:
+
+We had a problem where the output of floating point numbers was being
+truncated due to scientific notation being used. A quick fix was to
+just update the properties of all streams which use either doubles,
+floats or _bools_ with precision etc settings. The real fix is to
+distinguish between the two such that we only enable =bool= related
+settings when dealing with bools and floating point settings when
+dealing with =double= or =float=.
+
+*** Split is floating point like from int like in view model          :story:
+
+At present we only have a single test data generator helper method for
+any numeric type: =is_int_like=. This works ok, but it means we are not
+generating useful test data for doubles, e.g: =1.0= instead of a
+slightly more useful =1.2345= or some such number.
+
+We need a =is_floating_point_like= method to be able to distinguish
+between them, and then the associated changes in the generators to
+create floating point numbers.
+
+*** Stereotypes to disable facets
+
+At present we do not generate files for all facets in a service other
+than types. However, the correct fix is to have stereotypes to disable/enable
+facets:
+
+- =nonhashable=, =hashable=: hashing support
+- =nontestable=, =testable=: test data support
+- =nonserializable=, =serializable=: serialisation support
+- =nonimplementable=, =implementable=: service does not have a CPP file
+- =nonstreamable=, =streamable=: IO support
+
+These stereotypes can then be combined:
+
+: service,nonimplementable,serializable
+
+Results in a service for which there will only be a header file and
+serialization support.
+
+By default services would have all aspects other than domain disabled,
+entities and values would have all aspects enabled.
+
+*** System models set meta-type to invalid
+
+Something is not quite right on the resolution logic
+
 *** Improve the integration of dogen with dia                         :story:
 
 It would be great if the model generation in dia was slightly more
