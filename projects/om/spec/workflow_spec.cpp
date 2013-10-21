@@ -23,9 +23,10 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/io/map_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
+#include "dogen/om/io/file_io.hpp"
 #include "dogen/om/types/workflow.hpp"
 
 using dogen::sml::test::mock_model_factory;

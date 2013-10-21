@@ -19,6 +19,7 @@
  *
  */
 #include <boost/algorithm/string.hpp>
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/om/io/file_io.hpp"
 
@@ -34,10 +35,18 @@ namespace dogen {
 namespace om {
 
 std::ostream& operator<<(std::ostream& s, const file& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::om::file\"" << ", "
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
       << "\"full_path\": " << "\"" << v.full_path().generic_string() << "\"" << ", "
-      << "\"contents\": " << "\"" << tidy_up_string(v.contents()) << "\""
+      << "\"contents\": " << "\"" << tidy_up_string(v.contents()) << "\"" << ", "
+      << "\"overwrite\": " << v.overwrite()
       << " }";
     return(s);
 }

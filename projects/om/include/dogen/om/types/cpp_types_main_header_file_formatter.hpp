@@ -66,6 +66,11 @@ private:
      */
     std::string cpp_qualified_name(const sml::qname& qn) const;
 
+    /**
+     * @brief Throws if context is null.
+     */
+    void ensure_non_null_context() const;
+
 private:
     /**
      * @brief Formats open class statements for the object.
@@ -148,7 +153,7 @@ private:
     void visit(const sml::entity& e) const override;
 
 public:
-    void format(std::ostream& s, const sml::type& t, const licence& l,
+    file format(const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
         const sml::property_cache_interface& c) const override;
 

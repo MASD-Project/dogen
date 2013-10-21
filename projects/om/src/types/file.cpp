@@ -23,31 +23,60 @@
 namespace dogen {
 namespace om {
 
+file::file()
+    : overwrite_(static_cast<bool>(0)) { }
+
 file::file(file&& rhs)
-    : full_path_(std::move(rhs.full_path_)),
-      contents_(std::move(rhs.contents_)) { }
+    : relative_path_(std::move(rhs.relative_path_)),
+      full_path_(std::move(rhs.full_path_)),
+      contents_(std::move(rhs.contents_)),
+      overwrite_(std::move(rhs.overwrite_)) { }
 
 file::file(
+    const boost::filesystem::path& relative_path,
     const boost::filesystem::path& full_path,
-    const std::string& contents)
-    : full_path_(full_path),
-      contents_(contents) { }
+    const std::string& contents,
+    const bool overwrite)
+    : relative_path_(relative_path),
+      full_path_(full_path),
+      contents_(contents),
+      overwrite_(overwrite) { }
 
 void file::swap(file& other) noexcept {
     using std::swap;
+    swap(relative_path_, other.relative_path_);
     swap(full_path_, other.full_path_);
     swap(contents_, other.contents_);
+    swap(overwrite_, other.overwrite_);
 }
 
 bool file::operator==(const file& rhs) const {
-    return full_path_ == rhs.full_path_ &&
-        contents_ == rhs.contents_;
+    return relative_path_ == rhs.relative_path_ &&
+        full_path_ == rhs.full_path_ &&
+        contents_ == rhs.contents_ &&
+        overwrite_ == rhs.overwrite_;
 }
 
 file& file::operator=(file other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const boost::filesystem::path& file::relative_path() const {
+    return relative_path_;
+}
+
+boost::filesystem::path& file::relative_path() {
+    return relative_path_;
+}
+
+void file::relative_path(const boost::filesystem::path& v) {
+    relative_path_ = v;
+}
+
+void file::relative_path(const boost::filesystem::path&& v) {
+    relative_path_ = std::move(v);
 }
 
 const boost::filesystem::path& file::full_path() const {
@@ -80,6 +109,14 @@ void file::contents(const std::string& v) {
 
 void file::contents(const std::string&& v) {
     contents_ = std::move(v);
+}
+
+bool file::overwrite() const {
+    return overwrite_;
+}
+
+void file::overwrite(const bool v) {
+    overwrite_ = v;
 }
 
 } }

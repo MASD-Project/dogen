@@ -38,17 +38,21 @@ namespace om {
  */
 class file final {
 public:
-    file() = default;
     file(const file&) = default;
     ~file() = default;
+
+public:
+    file();
 
 public:
     file(file&& rhs);
 
 public:
     file(
+        const boost::filesystem::path& relative_path,
         const boost::filesystem::path& full_path,
-        const std::string& contents);
+        const std::string& contents,
+        const bool overwrite);
 
 private:
     template<typename Archive>
@@ -58,15 +62,46 @@ private:
     friend void boost::serialization::load(Archive& ar, file& v, unsigned int version);
 
 public:
+    /**
+     * @brief Relative path to the file.
+     */
+    /**@{*/
+    const boost::filesystem::path& relative_path() const;
+    boost::filesystem::path& relative_path();
+    void relative_path(const boost::filesystem::path& v);
+    void relative_path(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
+     * @brief Full path to the file, indicating the location in the filesystem where it will be written.
+     */
+    /**@{*/
     const boost::filesystem::path& full_path() const;
     boost::filesystem::path& full_path();
     void full_path(const boost::filesystem::path& v);
     void full_path(const boost::filesystem::path&& v);
+    /**@}*/
 
+    /**
+     * @brief Contents of the file.
+     */
+    /**@{*/
     const std::string& contents() const;
     std::string& contents();
     void contents(const std::string& v);
     void contents(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Determines when to write the file.
+     *
+     * If true, the file will always be written to the filesystem; if false, the file will
+     * only be written to the filesystem if it does not exist.
+     */
+    /**@{*/
+    bool overwrite() const;
+    void overwrite(const bool v);
+    /**@}*/
 
 public:
     bool operator==(const file& rhs) const;
@@ -79,8 +114,10 @@ public:
     file& operator=(file other);
 
 private:
+    boost::filesystem::path relative_path_;
     boost::filesystem::path full_path_;
     std::string contents_;
+    bool overwrite_;
 };
 
 } }

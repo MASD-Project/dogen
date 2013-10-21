@@ -45,7 +45,7 @@ namespace {
 auto lg(logger_factory("om.cpp_types_main_header_file_formatter"));
 
 const std::string empty;
-const std::string missing_stream_ptr("Stream pointer is null");
+const std::string missing_context_ptr("Context pointer is null");
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
@@ -77,7 +77,7 @@ public:
     context(std::ostream& s, const sml::property_cache_interface& pc,
         cpp_formatters::indenter& ind, cpp_formatters::utility& u)
         : stream_(s), property_cache_(pc), indenter_(ind), utility_(u),
-          first_line_is_blank_(false) { }
+          first_line_is_blank_(false), overwrite_(false) { }
 
 public:
     /**
@@ -110,12 +110,21 @@ public:
     void first_line_is_blank(bool value) { first_line_is_blank_ = value; }
     /**@}*/
 
+    /**
+     * @brief If true, file will be overwritten regardless.
+     */
+    /**@{*/
+    bool overwrite() const { return overwrite_; }
+    void overwrite(bool value) { overwrite_ = value; }
+    /**@}*/
+
 private:
     std::ostream& stream_;
     const sml::property_cache_interface& property_cache_;
     cpp_formatters::indenter& indenter_;
     cpp_formatters::utility& utility_;
     bool first_line_is_blank_;
+    bool overwrite_;
 };
 
 cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter()
@@ -163,14 +172,20 @@ cpp_qualified_name(const sml::qname& qn) const {
     return s.str();
 }
 
+void cpp_types_main_header_file_formatter::ensure_non_null_context() const {
+    if (context_ != nullptr)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << missing_context_ptr;
+    BOOST_THROW_EXCEPTION(formatting_error(missing_context_ptr));
+}
+
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::enumeration& e) const {
-    if (context_ == nullptr) {
-        BOOST_LOG_SEV(lg, error) << missing_stream_ptr;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_stream_ptr));
-    }
+    ensure_non_null_context();
 
     BOOST_LOG_SEV(lg, debug) << "Formatting enumeration: " << e.name();
+    context_->overwrite(true);
     doxygen_next_.format(context_->stream(), e.documentation());
     context_->stream() << context_->indenter() << "enum class "
                       << e.name().simple_name() << " : unsigned int ";
@@ -762,7 +777,8 @@ visitor_method(const sml::abstract_object& o) const {
     context_->first_line_is_blank(true);
 }
 
-void cpp_types_main_header_file_formatter::format(const sml::abstract_object& o) const {
+void cpp_types_main_header_file_formatter::
+format(const sml::abstract_object& o) const {
     open_class(o);
     {
         cpp_formatters::positive_indenter_scope s(context_->indenter());
@@ -785,46 +801,59 @@ void cpp_types_main_header_file_formatter::format(const sml::abstract_object& o)
 
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::service& s) const {
+    ensure_non_null_context();
+    context_->overwrite(false);
     format(s);
 }
 
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::factory& f) const {
+    ensure_non_null_context();
+    context_->overwrite(false);
     format(f);
 }
 
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::repository& r) const {
+    ensure_non_null_context();
+    context_->overwrite(false);
     format(r);
 }
 
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::value_object& vo) const {
+    ensure_non_null_context();
+    context_->overwrite(true);
     format(vo);
 }
 
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::keyed_entity& ke) const {
+    ensure_non_null_context();
+    context_->overwrite(true);
     format(ke);
 }
 
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::entity& e) const {
+    ensure_non_null_context();
+    context_->overwrite(true);
     format(e);
 }
 
-void cpp_types_main_header_file_formatter::
-format(std::ostream& s, const sml::type& t, const licence& l,
-    const modeline& m, const std::string& marker,
-    const sml::property_cache_interface& c) const {
+file cpp_types_main_header_file_formatter::
+format(const sml::type& t, const licence& l, const modeline& m,
+    const std::string& marker, const sml::property_cache_interface& c) const {
 
+    std::ostringstream s;
     cpp_formatters::indenter ind;
     cpp_formatters::utility u(s, ind);
     context_ = std::unique_ptr<context>(new context(s, c, ind, u));
 
     const cpp_includes i = cpp_includes();
-    const boost::filesystem::path relative_file_path;
     auto adaptor(sml::make_tag_adaptor(t));
+    const boost::filesystem::path relative_file_path(adaptor.get(
+            sml::tags::cpp::types::header_file::file_name));
     const bool gp(adaptor.is_true(sml::tags::generate_preamble));
     cpp_file_boilerplate_formatter f(gp);
     {
@@ -837,7 +866,14 @@ format(std::ostream& s, const sml::type& t, const licence& l,
     }
     context_->utility().blank_line();
     f.format_end(s, m, relative_file_path);
+
+    file r;
+    r.contents(s.str());
+    r.overwrite(context_->overwrite());
+    r.relative_path(relative_file_path);
     context_ = std::unique_ptr<context>();
+
+    return r;
 }
 
 } }

@@ -28,9 +28,11 @@
 #include <iosfwd>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/type.hpp"
+#include "dogen/sml/types/property_cache_interface.hpp"
+#include "dogen/om/types/file.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
+#include "dogen/om/types/file.hpp"
 
 namespace dogen {
 namespace om {
@@ -51,7 +53,7 @@ public:
      * @brief Format the type according to some grammar into the
      * stream.
      */
-    virtual void format(std::ostream& s, const sml::type& t, const licence& l,
+    virtual file format(const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
         const sml::property_cache_interface& pc) const = 0;
 };

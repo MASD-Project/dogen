@@ -10,20 +10,34 @@ This file contains all stories that were closed during sprint 37.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-21 Mon 07:59]
+Clock summary at [2013-10-21 Mon 20:45]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:06* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:06 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:06 |
+| Headline                                              | Time   |      |      |
+|-------------------------------------------------------+--------+------+------|
+| *Total time*                                          | *1:21* |      |      |
+|-------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                       |        | 1:21 |      |
+| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:06 |
+| IMPLEMENTATION Add types header formatter to workflow |        |      | 1:15 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-10-21 Mon 07:53]--[2013-10-21 Mon 07:59] =>  0:06
 
-*** Add types header formatter to workflow                            :story:
+*** IMPLEMENTATION Add types header formatter to workflow             :story:
+    CLOCK: [2013-10-21 Mon 08:32]--[2013-10-21 Mon 08:40] =>  0:08
+    CLOCK: [2013-10-21 Mon 08:14]--[2013-10-21 Mon 08:17] =>  0:03
+    CLOCK: [2013-10-21 Mon 07:59]--[2013-10-21 Mon 08:14] =>  0:15
+
+**** COMPLETED Change type formatter interface
+     CLOSED: [2013-10-21 Mon 20:44]
+     CLOCK: [2013-10-21 Mon 19:45]--[2013-10-21 Mon 20:00] =>  0:15
+     CLOCK: [2013-10-21 Mon 18:20]--[2013-10-21 Mon 18:53] =>  0:33
+     CLOCK: [2013-10-21 Mon 18:19]--[2013-10-21 Mon 18:20] =>  0:01
+
+- no stream
+- returns a file
+
 *** Add tests for tagging of abstract objects                         :story:
 
 ** Deprecated Development Stories

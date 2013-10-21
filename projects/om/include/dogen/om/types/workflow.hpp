@@ -25,13 +25,15 @@
 #pragma once
 #endif
 
-#include <map>
+#include <list>
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/property_cache.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline_group.hpp"
+#include "dogen/om/types/file.hpp"
 
 namespace dogen {
 namespace om {
@@ -64,23 +66,24 @@ private:
      */
     void create_marker_activity(const sml::model& m);
 
+    /**
+     * @brief Loads all external data such as modelines, licences, etc
+     * and sets up any required data structures.
+     */
+    void setup_reference_data_subworkflow(const sml::model& m);
+
 private:
     /**
-     * @brief Loads all external data such as modelines, licences, etc.
+     * @brief Execute the entire C++ sub-workflow.
      */
-    void load_data_subworkflow(const sml::model& m);
-
-    /**
-     * @brief Execute the C++ subworkflow.
-     */
-    std::map<boost::filesystem::path, std::string>
-    cpp_subworkflow(const sml::model& m);
+    std::list<file> cpp_subworkflow(const sml::model& m);
 
 public:
-    std::map<boost::filesystem::path, std::string> execute(const sml::model& m);
+    std::list<file> execute(const sml::model& m);
 
 private:
     const boost::filesystem::path data_files_directory_;
+    sml::property_cache property_cache_;
     std::unordered_map<std::string, modeline_group> modeline_groups_;
     std::unordered_map<std::string, licence> licences_;
     std::string code_generation_marker_;

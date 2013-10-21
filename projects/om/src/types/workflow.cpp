@@ -97,21 +97,20 @@ void workflow::create_marker_activity(const sml::model& m) {
     code_generation_marker_ = f.build();
 }
 
-void workflow::load_data_subworkflow(const sml::model& m) {
+void workflow::setup_reference_data_subworkflow(const sml::model& m) {
     hydrate_modelines_activity();
     hydrate_licences_activity(m);
     create_marker_activity(m);
+    property_cache_.populate(m);
 }
 
-std::map<boost::filesystem::path, std::string> workflow::
-cpp_subworkflow(const sml::model& /*m*/) {
-    std::map<boost::filesystem::path, std::string> r;
+std::list<file> workflow::cpp_subworkflow(const sml::model& /*m*/) {
+    std::list<file> r;
     return r;
 }
 
-std::map<boost::filesystem::path, std::string>
-workflow::execute(const sml::model& m) {
-    load_data_subworkflow(m);
+std::list<file> workflow::execute(const sml::model& m) {
+    setup_reference_data_subworkflow(m);
     const auto r(cpp_subworkflow(m));
     return r;
 }
