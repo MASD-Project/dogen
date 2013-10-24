@@ -21,11 +21,15 @@
 #include <istream>
 #include <sstream>
 #include <boost/test/unit_test.hpp>
+#include "dogen/sml/types/tag_router.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/io/model_io.hpp"
 #include "dogen/om/io/file_io.hpp"
 #include "dogen/om/types/workflow.hpp"
 
@@ -35,6 +39,10 @@ namespace {
 
 const std::string test_module("om");
 const std::string test_suite("workflow_spec");
+
+const std::string licence_name("gpl_v2");
+const std::string modeline_group_name("emacs");
+const std::string marker("SAMPLE_MARKER");
 
 }
 
@@ -50,9 +58,51 @@ BOOST_AUTO_TEST_CASE(empty_mock_model_results_in_expected_files) {
     dogen::om::workflow w(data_files_directory());
 
     auto m(mock_model_factory::build_empty_model());
+    auto r1(dogen::sml::make_tag_router(m));
+    r1.route(dogen::sml::tags::licence_name, licence_name);
+    r1.route(dogen::sml::tags::modeline_group_name, modeline_group_name);
+    r1.route(dogen::sml::tags::code_generation_marker, marker);
+
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
     const auto r(w.execute(m));
 
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
+    // BOOST_CHECK(!r.empty());
+
+    // for (const auto& pair : r) {
+    //     BOOST_CHECK(!pair.first.empty());
+    //     BOOST_CHECK(!pair.second.empty());
+    // }
+}
+
+BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
+    SETUP_TEST_LOG_SOURCE("single_type_results_in_expected_files");
+
+    using namespace dogen::utility::filesystem;
+    dogen::om::workflow w(data_files_directory());
+    auto m(mock_model_factory::build_single_type_model());
+
+    auto router(dogen::sml::make_tag_router(m));
+    router.route(dogen::sml::tags::licence_name, licence_name);
+    router.route(dogen::sml::tags::modeline_group_name, modeline_group_name);
+    router.route(dogen::sml::tags::code_generation_marker, marker);
+    BOOST_CHECK(m.objects().size() == 1);
+
+    auto r2(dogen::sml::make_tag_router(*(m.objects().begin()->second)));
+    r2.route(dogen::sml::tags::licence_name, licence_name);
+    r2.route(dogen::sml::tags::modeline_group_name, modeline_group_name);
+    r2.route(dogen::sml::tags::code_generation_marker, marker);
+
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    const auto r(w.execute(m));
+
+    BOOST_LOG_SEV(lg, debug) << "result: " << r;
+
+    BOOST_REQUIRE(r.size() == 1);
+    BOOST_LOG_SEV(lg, debug) << "file: " << r.front().contents();
+
     // BOOST_CHECK(!r.empty());
 
     // for (const auto& pair : r) {

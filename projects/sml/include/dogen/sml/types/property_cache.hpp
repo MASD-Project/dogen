@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
 
 namespace dogen {
@@ -33,8 +34,8 @@ namespace sml {
 
 class property_cache : public property_cache_interface {
 public:
-    property_cache(const property_cache&) = default;
-    property_cache(property_cache&&) = default;
+    property_cache(const property_cache&) = delete;
+    property_cache(property_cache&&) = delete;
     property_cache& operator=(const property_cache&) = default;
 
 public:

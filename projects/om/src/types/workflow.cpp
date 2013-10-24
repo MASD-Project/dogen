@@ -19,10 +19,14 @@
  *
  */
 #include <list>
+#include "dogen/sml/types/type.hpp"
+#include "dogen/sml/types/tag_adaptor.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/all_types_traversal.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/om/io/modeline_group_io.hpp"
 #include "dogen/om/types/hydration_workflow.hpp"
@@ -30,7 +34,13 @@
 #include "dogen/om/io/licence_io.hpp"
 #include "dogen/om/types/licence_hydrator.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/property_cache.hpp"
+#include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/om/types/licence.hpp"
+#include "dogen/om/types/modeline_group.hpp"
+#include "dogen/om/types/workflow_error.hpp"
+#include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
 #include "dogen/om/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -38,16 +48,69 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("om.workflow"));
+const std::string missing_context_ptr("Context pointer is null");
 const std::string modeline_groups_dir("modeline_groups");
 const std::string licence_dir("licences");
-
+const std::string missing_licence("Licence not found: ");
+const std::string missing_modeline_group("Modeline group not found: ");
+const std::string missing_modeline("Modeline not found: ");
+const std::string cpp_modeline_name("c++");
 }
 
 namespace dogen {
 namespace om {
 
+class workflow::context {
+public:
+    sml::property_cache& property_cache() {
+        return property_cache_;
+    }
+
+    const std::unordered_map<std::string, modeline_group>& modeline_groups() {
+        return modeline_groups_;
+    }
+
+    void modeline_groups(
+        const std::unordered_map<std::string, modeline_group>& v) {
+        modeline_groups_ = v;
+    }
+
+    const std::unordered_map<std::string, licence>& licences() const {
+        return licences_;
+    }
+
+    void licences(const std::unordered_map<std::string, licence>& v) {
+        licences_ = v;
+    }
+
+    std::string code_generation_marker() {
+        return code_generation_marker_;
+    }
+
+    void code_generation_marker(const std::string& v) {
+        code_generation_marker_ = v;
+    }
+
+    std::list<file>& files() { return files_; }
+
+private:
+    sml::property_cache property_cache_;
+    std::unordered_map<std::string, modeline_group> modeline_groups_;
+    std::unordered_map<std::string, licence> licences_;
+    std::string code_generation_marker_;
+    std::list<file> files_;
+};
+
 workflow::workflow(const boost::filesystem::path& data_files_directory)
     : data_files_directory_(data_files_directory) { }
+
+void workflow::ensure_non_null_context() const {
+    if (context_ != nullptr)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << missing_context_ptr;
+    BOOST_THROW_EXCEPTION(workflow_error(missing_context_ptr));
+}
 
 void workflow::hydrate_modelines_activity() {
     const std::list<boost::filesystem::path> d = {
@@ -55,11 +118,11 @@ void workflow::hydrate_modelines_activity() {
     };
 
     hydration_workflow<modeline_group_hydrator> hw;
-    modeline_groups_ = hw.hydrate(d);
+    context_->modeline_groups(hw.hydrate(d));
 
     BOOST_LOG_SEV(lg, info) << "Loaded modeline groups. Found:  "
-                            << modeline_groups_.size();
-    BOOST_LOG_SEV(lg, debug) << "contents: " << modeline_groups_;
+                            << context_->modeline_groups().size();
+    BOOST_LOG_SEV(lg, debug) << "contents: " << context_->modeline_groups();
 }
 
 void workflow::hydrate_licences_activity(const sml::model& m) {
@@ -74,11 +137,11 @@ void workflow::hydrate_licences_activity(const sml::model& m) {
 
     licence_hydrator lh(copyright_holders);
     hydration_workflow<licence_hydrator> hw(lh);
-    licences_ = hw.hydrate(d);
+    context_->licences(hw.hydrate(d));
 
     BOOST_LOG_SEV(lg, info) << "Loaded licences. Found:  "
-                            << licences_.size();
-    BOOST_LOG_SEV(lg, debug) << "contents: " << licences_;
+                            << context_->licences().size();
+    BOOST_LOG_SEV(lg, debug) << "contents: " << context_->licences();
 }
 
 void workflow::create_marker_activity(const sml::model& m) {
@@ -94,24 +157,69 @@ void workflow::create_marker_activity(const sml::model& m) {
         adaptor.get(sml::tags::code_generation_marker::message));
 
     code_generation_marker_factory f(add_date_time, add_warning, message);
-    code_generation_marker_ = f.build();
+    context_->code_generation_marker(f.build());
 }
 
 void workflow::setup_reference_data_subworkflow(const sml::model& m) {
+    ensure_non_null_context();
+
     hydrate_modelines_activity();
     hydrate_licences_activity(m);
     create_marker_activity(m);
-    property_cache_.populate(m);
+    context_->property_cache().populate(m);
 }
 
-std::list<file> workflow::cpp_subworkflow(const sml::model& /*m*/) {
-    std::list<file> r;
-    return r;
+void workflow::operator()(const sml::type& t) const {
+    ensure_non_null_context();
+    auto adaptor(sml::make_tag_adaptor(t));
+
+    const auto licence_name(adaptor.get(sml::tags::licence_name));
+    const auto i(context_->licences().find(licence_name));
+    if (i == context_->licences().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_licence << licence_name;
+        BOOST_THROW_EXCEPTION(workflow_error(missing_licence + licence_name));
+    }
+    const auto licence(i->second);
+
+    const auto modeline_group_name(adaptor.get(sml::tags::modeline_group_name));
+    const auto j(context_->modeline_groups().find(modeline_group_name));
+    if (j == context_->modeline_groups().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_modeline_group
+                                 << modeline_group_name;
+        BOOST_THROW_EXCEPTION(
+            workflow_error(missing_modeline_group + modeline_group_name));
+    }
+
+    const auto modeline_group(j->second);
+    const auto k(modeline_group.modelines().find(cpp_modeline_name));
+    if (k == modeline_group.modelines().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_modeline << cpp_modeline_name;
+        BOOST_THROW_EXCEPTION(
+            workflow_error(missing_modeline + cpp_modeline_name));
+    }
+    const auto modeline(k->second);
+    const auto cgm(adaptor.get(sml::tags::code_generation_marker));
+
+    cpp_types_main_header_file_formatter f;
+    const auto& pc(context_->property_cache());
+    const auto file(f.format(t, licence, modeline, cgm, pc));
+    context_->files().push_back(file);
+}
+
+void workflow::operator()(const sml::module& /*m*/) const {
+    ensure_non_null_context();
+}
+
+void workflow::operator()(const sml::concept& /*c*/) const {
+    // do nothing
 }
 
 std::list<file> workflow::execute(const sml::model& m) {
+    context_ = std::shared_ptr<context>(new context());
     setup_reference_data_subworkflow(m);
-    const auto r(cpp_subworkflow(m));
+    sml::all_model_items_traversal(m, *this);
+    const auto r(context_->files());
+    context_ = std::shared_ptr<context>();
     return r;
 }
 

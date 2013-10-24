@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_ALL_MODEL_ITEMS_TRAVERSAL_HPP
-#define DOGEN_SML_TYPES_ALL_MODEL_ITEMS_TRAVERSAL_HPP
+#ifndef DOGEN_SML_TYPES_ALL_TYPES_TRAVERSAL_HPP
+#define DOGEN_SML_TYPES_ALL_TYPES_TRAVERSAL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -40,13 +40,7 @@ namespace sml {
  */
 /**@{*/
 template<typename TraversalVisitor> inline
-void all_model_items_traversal(const model& m, const TraversalVisitor& v) {
-    for (const auto& pair : m.modules())
-        v(pair.second);
-
-    for (const auto& pair : m.concepts())
-        v(pair.second);
-
+void all_types_traversal(const model& m, const TraversalVisitor& v) {
     for (const auto& pair : m.primitives())
         v(pair.second);
 
@@ -58,13 +52,7 @@ void all_model_items_traversal(const model& m, const TraversalVisitor& v) {
 }
 
 template<typename TraversalVisitor> inline
-void all_model_items_traversal(model& m, TraversalVisitor& v) {
-    for (auto& pair : m.modules())
-        v(pair.second);
-
-    for (auto& pair : m.concepts())
-        v(pair.second);
-
+void all_types_traversal(model& m, TraversalVisitor& v) {
     for (auto& pair : m.primitives())
         v(pair.second);
 

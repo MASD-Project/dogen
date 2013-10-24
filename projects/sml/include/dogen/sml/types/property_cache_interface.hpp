@@ -41,7 +41,7 @@ public:
     property_cache_interface() = default;
     property_cache_interface(const property_cache_interface&) = delete;
     property_cache_interface(property_cache_interface&&) = delete;
-    property_cache_interface& operator=(const property_cache_interface&) = delete;
+    property_cache_interface& operator=(const property_cache_interface&) = default;
 
 public:
     virtual ~property_cache_interface() noexcept;

@@ -27,12 +27,10 @@
 
 #include <list>
 #include <string>
+#include <memory>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/property_cache.hpp"
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline_group.hpp"
 #include "dogen/om/types/file.hpp"
 
 namespace dogen {
@@ -49,6 +47,14 @@ public:
 
 public:
     explicit workflow(const boost::filesystem::path& data_files_directory);
+
+private:
+    class context;
+
+    /**
+     * @brief Throws if context is null.
+     */
+    void ensure_non_null_context() const;
 
 private:
     /**
@@ -72,21 +78,28 @@ private:
      */
     void setup_reference_data_subworkflow(const sml::model& m);
 
-private:
+public:
     /**
-     * @brief Execute the entire C++ sub-workflow.
+     * @brief Process types.
      */
-    std::list<file> cpp_subworkflow(const sml::model& m);
+    void operator()(const sml::type& t) const;
+
+    /**
+     * @brief Process modules.
+     */
+    void operator()(const sml::module& m) const;
+
+    /**
+     * @brief Process concepts.
+     */
+    void operator()(const sml::concept& c) const;
 
 public:
     std::list<file> execute(const sml::model& m);
 
 private:
     const boost::filesystem::path data_files_directory_;
-    sml::property_cache property_cache_;
-    std::unordered_map<std::string, modeline_group> modeline_groups_;
-    std::unordered_map<std::string, licence> licences_;
-    std::string code_generation_marker_;
+    mutable std::shared_ptr<context> context_;
 };
 
 } }

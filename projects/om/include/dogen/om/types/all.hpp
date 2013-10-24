@@ -48,3 +48,4 @@
 #include "dogen/om/types/modeline_locations.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 #include "dogen/om/types/workflow.hpp"
+#include "dogen/om/types/workflow_error.hpp"

@@ -52,6 +52,25 @@ struct tags {
     static const std::string copyright_holder;
 
     /**
+     * @brief Name of the legal licence to use.
+     *
+     * Must match licences available in library.
+     */
+    static const std::string licence_name;
+
+    /**
+     * @brief Text to indicate that the file was code generated.
+     */
+    static const std::string code_generation_marker;
+
+    /**
+     * @brief Name of the modeline group to use.
+     *
+     * Must match licences available in library.
+     */
+    static const std::string modeline_group_name;
+
+    /**
      * @brief Comment provided by user when dia does not allow for it.
      *
      * For meta-types where comments are available in Dia (e.g. class,

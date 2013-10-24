@@ -10,21 +10,24 @@ This file contains all stories that were closed during sprint 37.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-21 Mon 20:45]
+Clock summary at [2013-10-24 Thu 20:29]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *1:21* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 1:21 |      |
-| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:06 |
-| IMPLEMENTATION Add types header formatter to workflow |        |      | 1:15 |
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *2:34* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 2:34 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:06 |
+| COMPLETED Add types header formatter to workflow  |        |      | 2:28 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-10-21 Mon 07:53]--[2013-10-21 Mon 07:59] =>  0:06
 
-*** IMPLEMENTATION Add types header formatter to workflow             :story:
+*** COMPLETED Add types header formatter to workflow                  :story:
+    CLOSED: [2013-10-24 Thu 20:28]
+    CLOCK: [2013-10-24 Thu 08:22]--[2013-10-24 Thu 08:33] =>  0:11
+    CLOCK: [2013-10-24 Thu 07:51]--[2013-10-24 Thu 08:17] =>  0:26
     CLOCK: [2013-10-21 Mon 08:32]--[2013-10-21 Mon 08:40] =>  0:08
     CLOCK: [2013-10-21 Mon 08:14]--[2013-10-21 Mon 08:17] =>  0:03
     CLOCK: [2013-10-21 Mon 07:59]--[2013-10-21 Mon 08:14] =>  0:15
@@ -37,6 +40,10 @@ Clock summary at [2013-10-21 Mon 20:45]
 
 - no stream
 - returns a file
+
+**** IMPLEMENTATION add all types traversal and hook it up to workflow
+     CLOCK: [2013-10-24 Thu 18:14]--[2013-10-24 Thu 18:46] =>  0:32
+     CLOCK: [2013-10-24 Thu 18:10]--[2013-10-24 Thu 18:14] =>  0:04
 
 *** Add tests for tagging of abstract objects                         :story:
 

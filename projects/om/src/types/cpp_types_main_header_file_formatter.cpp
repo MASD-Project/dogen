@@ -848,7 +848,7 @@ format(const sml::type& t, const licence& l, const modeline& m,
     std::ostringstream s;
     cpp_formatters::indenter ind;
     cpp_formatters::utility u(s, ind);
-    context_ = std::unique_ptr<context>(new context(s, c, ind, u));
+    context_ = std::shared_ptr<context>(new context(s, c, ind, u));
 
     const cpp_includes i = cpp_includes();
     auto adaptor(sml::make_tag_adaptor(t));
@@ -871,7 +871,7 @@ format(const sml::type& t, const licence& l, const modeline& m,
     r.contents(s.str());
     r.overwrite(context_->overwrite());
     r.relative_path(relative_file_path);
-    context_ = std::unique_ptr<context>();
+    context_ = std::shared_ptr<context>();
 
     return r;
 }

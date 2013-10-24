@@ -33,8 +33,8 @@
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/tagger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/tagger.hpp"
 
 using namespace dogen::utility::log;
 
@@ -280,6 +280,15 @@ void tagger::copy_model_tags(tag_router& router) const {
     auto adaptor(make_tag_adaptor(context_->model()));
     router.route_if_key_not_found(tags::generate_preamble,
         adaptor.get(tags::generate_preamble));
+
+    router.route_if_key_not_found(dogen::sml::tags::licence_name,
+        adaptor.get(dogen::sml::tags::licence_name));
+
+    router.route_if_key_not_found(dogen::sml::tags::modeline_group_name,
+        adaptor.get(dogen::sml::tags::modeline_group_name));
+
+    router.route_if_key_not_found(dogen::sml::tags::code_generation_marker,
+        adaptor.get(dogen::sml::tags::code_generation_marker));
 
     router.route_if_key_not_found(tags::cpp::header_file_extension,
         adaptor.get(tags::cpp::header_file_extension));
