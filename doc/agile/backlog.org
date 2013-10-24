@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Forward declaration is not always correct for services            :story:
+
+In cases where we used a service as a way of declaring a stand alone
+function (such as the traversals in SML), the forward declarations do
+not match the header file at all. In this cases we should use
+=nongeneratable= rather than =service= stereotypes, and perhaps when
+that happens we should switch off forward declarations?
+
 *** Remove speculative facet layers for hash and serialization        :story:
 
 For some unfathomable reason we decided to add a layer of indirection
