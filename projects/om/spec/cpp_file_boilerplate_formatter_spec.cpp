@@ -143,6 +143,7 @@ const std::string guards_with_top_modeline(R"(/* -*- a_field: a_value -*-
 #pragma once
 #endif
 
+
 #endif
 )");
 
@@ -166,6 +167,7 @@ const std::string guards_with_bottom_modeline(R"(/*
  * a_field: a_value
  * End:
  */
+
 #endif
 )");
 
@@ -189,6 +191,7 @@ const std::string includes_with_top_modeline(R"(/* -*- a_field: a_value -*-
 #include <unix/system_inc_2>
 #include "user_inc_1"
 #include "user_inc_2"
+
 #endif
 )");
 
@@ -203,6 +206,7 @@ const std::string disabled_preamble(R"(#ifndef A_PATH_HPP
 #include <unix/system_inc_2>
 #include "user_inc_1"
 #include "user_inc_2"
+
 #endif
 )");
 

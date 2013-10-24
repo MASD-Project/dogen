@@ -127,7 +127,6 @@ void cpp_file_boilerplate_formatter::format_guards_end(std::ostream& s,
     f.format_end(s, relative_file_path);
 }
 
-
 void cpp_file_boilerplate_formatter::
 format_includes(std::ostream& s, const cpp_includes& i) const {
     cpp_include_formatter f;

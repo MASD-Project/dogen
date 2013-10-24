@@ -852,15 +852,15 @@ format(const sml::type& t, const licence& l, const modeline& m,
 
     const cpp_includes i = cpp_includes();
     auto adaptor(sml::make_tag_adaptor(t));
-    const boost::filesystem::path relative_file_path(adaptor.get(
-            sml::tags::cpp::types::header_file::file_name));
+    const auto& fn(sml::tags::cpp::types::header_file::file_name);
+    const boost::filesystem::path relative_file_path(adaptor.get(fn));
     const bool gp(adaptor.is_true(sml::tags::generate_preamble));
     cpp_file_boilerplate_formatter f(gp);
+    f.format_begin(s, l, m, marker, i, relative_file_path);
     {
         const auto ns(namespaces(t.name()));
         cpp_formatters::namespace_helper nsh(context_->stream(), ns);
         context_->utility().blank_line();
-        f.format_begin(s, l, m, marker, i, relative_file_path);
         t.accept(*this);
         context_->utility().blank_line();
     }

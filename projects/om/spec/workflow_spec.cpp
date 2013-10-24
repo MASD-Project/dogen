@@ -43,6 +43,8 @@ const std::string test_suite("workflow_spec");
 const std::string licence_name("gpl_v2");
 const std::string modeline_group_name("emacs");
 const std::string marker("SAMPLE_MARKER");
+const std::string copyright_holders(
+    "Copyright (C) 2012 Person <name@company.co.uk>");
 
 }
 
@@ -83,16 +85,20 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
     dogen::om::workflow w(data_files_directory());
     auto m(mock_model_factory::build_single_type_model());
 
-    auto router(dogen::sml::make_tag_router(m));
-    router.route(dogen::sml::tags::licence_name, licence_name);
-    router.route(dogen::sml::tags::modeline_group_name, modeline_group_name);
-    router.route(dogen::sml::tags::code_generation_marker, marker);
+    auto r1(dogen::sml::make_tag_router(m));
+    r1.route(dogen::sml::tags::licence_name, licence_name);
+    r1.route(dogen::sml::tags::modeline_group_name, modeline_group_name);
+    r1.route(dogen::sml::tags::code_generation_marker, marker);
+    r1.route(dogen::sml::tags::generate_preamble, dogen::sml::tags::bool_true);
+
     BOOST_CHECK(m.objects().size() == 1);
 
     auto r2(dogen::sml::make_tag_router(*(m.objects().begin()->second)));
+    r2.route(dogen::sml::tags::cpp::types::header_file::file_name, "a/b/c");
     r2.route(dogen::sml::tags::licence_name, licence_name);
+    r2.route(dogen::sml::tags::copyright_holder, copyright_holders);
     r2.route(dogen::sml::tags::modeline_group_name, modeline_group_name);
-    r2.route(dogen::sml::tags::code_generation_marker, marker);
+    r2.route(dogen::sml::tags::generate_preamble, dogen::sml::tags::bool_true);
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 

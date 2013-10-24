@@ -120,7 +120,7 @@ void workflow::hydrate_modelines_activity() {
     hydration_workflow<modeline_group_hydrator> hw;
     context_->modeline_groups(hw.hydrate(d));
 
-    BOOST_LOG_SEV(lg, info) << "Loaded modeline groups. Found:  "
+    BOOST_LOG_SEV(lg, info) << "Loaded modeline groups. Found: "
                             << context_->modeline_groups().size();
     BOOST_LOG_SEV(lg, debug) << "contents: " << context_->modeline_groups();
 }
@@ -139,7 +139,7 @@ void workflow::hydrate_licences_activity(const sml::model& m) {
     hydration_workflow<licence_hydrator> hw(lh);
     context_->licences(hw.hydrate(d));
 
-    BOOST_LOG_SEV(lg, info) << "Loaded licences. Found:  "
+    BOOST_LOG_SEV(lg, info) << "Loaded licences. Found: "
                             << context_->licences().size();
     BOOST_LOG_SEV(lg, debug) << "contents: " << context_->licences();
 }
@@ -179,7 +179,11 @@ void workflow::operator()(const sml::type& t) const {
         BOOST_LOG_SEV(lg, error) << missing_licence << licence_name;
         BOOST_THROW_EXCEPTION(workflow_error(missing_licence + licence_name));
     }
-    const auto licence(i->second);
+    auto licence(i->second);
+    if (adaptor.has_key(sml::tags::copyright_holder)) {
+        const auto copyright_holder(adaptor.get(sml::tags::copyright_holder));
+        licence.copyright_holders().push_back(copyright_holder);
+    }
 
     const auto modeline_group_name(adaptor.get(sml::tags::modeline_group_name));
     const auto j(context_->modeline_groups().find(modeline_group_name));

@@ -76,7 +76,7 @@ format_end(std::ostream& s, const boost::filesystem::path& p) {
     if (p.empty())
         return;
 
-    s << endif << std::endl;
+    s << std::endl << endif << std::endl;
 }
 
 } }
