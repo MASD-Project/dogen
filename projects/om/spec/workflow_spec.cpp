@@ -46,6 +46,47 @@ const std::string marker("SAMPLE_MARKER");
 const std::string copyright_holders(
     "Copyright (C) 2012 Person <name@company.co.uk>");
 
+const std::string type_with_no_properties(
+    R"(/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Person <name@company.co.uk>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ *
+ */
+#ifndef A_B_C
+#define A_B_C
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace some_model_0 {
+
+/**
+ * @brief Some documentation
+ */
+class some_type_0 final {
+};
+
+}
+
+#endif
+)");
+
 }
 
 using namespace dogen::om;
@@ -57,7 +98,8 @@ BOOST_AUTO_TEST_CASE(empty_mock_model_results_in_expected_files) {
     SETUP_TEST_LOG_SOURCE("empty_mock_results_in_expected_files");
 
     using namespace dogen::utility::filesystem;
-    dogen::om::workflow w(data_files_directory());
+    const std::list<boost::filesystem::path> d = { data_files_directory() };
+    dogen::om::workflow w(d);
 
     auto m(mock_model_factory::build_empty_model());
     auto r1(dogen::sml::make_tag_router(m));
@@ -82,7 +124,8 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
     SETUP_TEST_LOG_SOURCE("single_type_results_in_expected_files");
 
     using namespace dogen::utility::filesystem;
-    dogen::om::workflow w(data_files_directory());
+    const std::list<boost::filesystem::path> d = { data_files_directory() };
+    dogen::om::workflow w(d);
     auto m(mock_model_factory::build_single_type_model());
 
     auto r1(dogen::sml::make_tag_router(m));
@@ -107,14 +150,12 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
 
     BOOST_REQUIRE(r.size() == 1);
-    BOOST_LOG_SEV(lg, debug) << "file: " << r.front().contents();
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << type_with_no_properties
+                             << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.front().contents()
+                             << "<end>";
 
-    // BOOST_CHECK(!r.empty());
-
-    // for (const auto& pair : r) {
-    //     BOOST_CHECK(!pair.first.empty());
-    //     BOOST_CHECK(!pair.second.empty());
-    // }
+    BOOST_CHECK(type_with_no_properties == r.front().contents());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -46,7 +46,8 @@ public:
     ~workflow() = default;
 
 public:
-    explicit workflow(const boost::filesystem::path& data_files_directory);
+    explicit
+    workflow(const std::list<boost::filesystem::path>& data_files_directories);
 
 private:
     class context;
@@ -57,6 +58,13 @@ private:
     void ensure_non_null_context() const;
 
 private:
+    /**
+     * @brief Creates the actual list of directories used by hydrators
+     * to load data.
+     */
+    std::list<boost::filesystem::path>
+    create_directories(const std::string for_whom) const;
+
     /**
      * @brief Hydrates all the modelines available in the library.
      */
@@ -98,7 +106,7 @@ public:
     std::list<file> execute(const sml::model& m);
 
 private:
-    const boost::filesystem::path data_files_directory_;
+    const std::list<boost::filesystem::path> data_files_directories_;
     mutable std::shared_ptr<context> context_;
 };
 

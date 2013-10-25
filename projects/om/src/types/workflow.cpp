@@ -101,8 +101,9 @@ private:
     std::list<file> files_;
 };
 
-workflow::workflow(const boost::filesystem::path& data_files_directory)
-    : data_files_directory_(data_files_directory) { }
+workflow::
+workflow(const std::list<boost::filesystem::path>& data_files_directories)
+    : data_files_directories_(data_files_directories) { }
 
 void workflow::ensure_non_null_context() const {
     if (context_ != nullptr)
@@ -112,13 +113,18 @@ void workflow::ensure_non_null_context() const {
     BOOST_THROW_EXCEPTION(workflow_error(missing_context_ptr));
 }
 
-void workflow::hydrate_modelines_activity() {
-    const std::list<boost::filesystem::path> d = {
-        data_files_directory_ / modeline_groups_dir
-    };
+std::list<boost::filesystem::path>
+workflow::create_directories(const std::string for_whom) const {
+    std::list<boost::filesystem::path> r;
+    for (const auto& d : data_files_directories_)
+        r.push_back(d / for_whom);
+    return r;
+}
 
+void workflow::hydrate_modelines_activity() {
+    const auto dirs(create_directories(modeline_groups_dir));
     hydration_workflow<modeline_group_hydrator> hw;
-    context_->modeline_groups(hw.hydrate(d));
+    context_->modeline_groups(hw.hydrate(dirs));
 
     BOOST_LOG_SEV(lg, info) << "Loaded modeline groups. Found: "
                             << context_->modeline_groups().size();
@@ -126,18 +132,15 @@ void workflow::hydrate_modelines_activity() {
 }
 
 void workflow::hydrate_licences_activity(const sml::model& m) {
-    const std::list<boost::filesystem::path> d = {
-        data_files_directory_ / licence_dir
-    };
-
     std::list<std::string> copyright_holders;
     const auto i(m.complex_tags().find(sml::tags::copyright_holder));
     if (i != m.complex_tags().end())
         copyright_holders = i->second;
 
     licence_hydrator lh(copyright_holders);
+    const auto dirs(create_directories(licence_dir));
     hydration_workflow<licence_hydrator> hw(lh);
-    context_->licences(hw.hydrate(d));
+    context_->licences(hw.hydrate(dirs));
 
     BOOST_LOG_SEV(lg, info) << "Loaded licences. Found: "
                             << context_->licences().size();
