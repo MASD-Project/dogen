@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders. Instead, this story will be handled when we move
+over to using =boost::property_tree::ptree=.
+
 *** Forward declaration is not always correct for services            :story:
 
 In cases where we used a service as a way of declaring a stand alone
