@@ -129,7 +129,8 @@ private:
      * @brief Handles all dependencies to types in the boost
      * libraries.
      */
-    void append_boost_dependencies(const cpp::content_descriptor& cd,
+    void append_boost_dependencies(const relationships& rel,
+        const cpp::content_descriptor& cd,
         inclusion_lists& il) const;
 
     /**

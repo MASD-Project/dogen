@@ -112,7 +112,6 @@ append_implementation_dependencies(const relationships& rel,
     const bool is_header(cd.file_type() == file_types::header);
     const bool is_types(cd.facet_type() == cpp_facet_types::types);
     const bool is_io(cd.facet_type() == cpp_facet_types::io);
-
     const bool domain_with_io(is_types &&
         (settings_.use_integrated_io() || rel.is_parent() || rel.is_child()));
 
@@ -196,7 +195,7 @@ append_implementation_dependencies(const relationships& rel,
         il.system().push_back(boost_.include(boost_types::serialization_pair));
 }
 
-void includer::append_boost_dependencies(
+void includer::append_boost_dependencies(const relationships& rel,
     const cpp::content_descriptor& cd, inclusion_lists& il) const {
 
     const auto sn(cd.name().simple_name());
@@ -268,7 +267,8 @@ void includer::append_boost_dependencies(
         il.system().push_back(std_.include(std_types::sstream));
 
     const bool is_io(cd.facet_type() == cpp_facet_types::io);
-    const bool domain_with_io(is_types && (settings_.use_integrated_io()));
+    const bool domain_with_io(is_types &&
+        (settings_.use_integrated_io() || rel.is_parent() || rel.is_child()));
     const bool io_without_iio(is_io && !settings_.use_integrated_io());
 
     /*
@@ -490,7 +490,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
             append_std_dependencies(cd2, il);
             continue;
         } else if (n.model_name() == boost_.model()) {
-            append_boost_dependencies(cd2, il);
+            append_boost_dependencies(rel, cd2, il);
             continue;
         } else if (n.model_name() == hardware_model ||
             n.model_name().empty())
