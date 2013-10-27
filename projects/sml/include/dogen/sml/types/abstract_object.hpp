@@ -27,10 +27,10 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include <iosfwd>
 #include <list>
 #include <string>
-#include <unordered_map>
 #include "dogen/sml/serialization/abstract_object_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/operation.hpp"
@@ -60,8 +60,7 @@ public:
 public:
     abstract_object(
         const std::string& documentation,
-        const std::unordered_map<std::string, std::string>& simple_tags,
-        const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+        const boost::property_tree::ptree& tags,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,

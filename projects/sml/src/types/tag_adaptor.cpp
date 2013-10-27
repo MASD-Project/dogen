@@ -31,13 +31,11 @@ namespace dogen {
 namespace sml {
 
 tag_adaptor::
-tag_adaptor(const std::unordered_map<std::string, std::string>& simple_tags,
-    const std::unordered_map<std::string, std::list<std::string> >&
-    complex_tags) : simple_tags_(simple_tags), complex_tags_(complex_tags) { }
+tag_adaptor(const boost::property_tree::ptree& tags) : tags_(tags) { }
 
 bool tag_adaptor::has_key(const std::string& key) const {
-    const auto i(simple_tags_.find(key));
-    return i != simple_tags_.end();
+    const auto node(tags_.get_optional<std::string>(key));
+    return node;
 }
 
 bool tag_adaptor::is_true(const std::string& key) const {
@@ -50,9 +48,9 @@ bool tag_adaptor::is_false(const std::string& key) const {
 }
 
 std::string tag_adaptor::get(const std::string& key) const {
-    const auto i(simple_tags_.find(key));
-    if (i != simple_tags_.end())
-        return i->second;
+    const auto v(tags_.get_optional<std::string>(key));
+    if (v)
+        return *v;
 
     return empty;
 }
@@ -65,11 +63,14 @@ bool tag_adaptor::is_supported(const std::string& key) const {
 std::list<std::pair<std::string,std::string> > tag_adaptor::odb_pragma() const {
     std::list<std::pair<std::string, std::string> > r;
 
-    const auto i(complex_tags_.find(tags::odb_pragma));
-    if (i != complex_tags_.end()) {
-        for (const auto& value : i->second)
-            r.push_back(std::make_pair(tags::odb_pragma, value));
-    }
+    using boost::property_tree::ptree;
+    ptree::const_assoc_iterator i(tags_.find(tags::odb_pragma));
+    if (i == tags_.not_found())
+        return r;
+
+    for (const auto& value : i->second)
+        r.push_back(std::make_pair(tags::odb_pragma, value.second.data()));
+
     return r;
 }
 

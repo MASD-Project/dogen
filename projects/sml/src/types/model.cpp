@@ -37,10 +37,23 @@ model::model()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)),
       origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
 
+model::model(model&& rhs)
+    : documentation_(std::move(rhs.documentation_)),
+      tags_(std::move(rhs.tags_)),
+      name_(std::move(rhs.name_)),
+      generation_type_(std::move(rhs.generation_type_)),
+      origin_type_(std::move(rhs.origin_type_)),
+      references_(std::move(rhs.references_)),
+      leaves_(std::move(rhs.leaves_)),
+      modules_(std::move(rhs.modules_)),
+      concepts_(std::move(rhs.concepts_)),
+      primitives_(std::move(rhs.primitives_)),
+      enumerations_(std::move(rhs.enumerations_)),
+      objects_(std::move(rhs.objects_)) { }
+
 model::model(
     const std::string& documentation,
-    const std::unordered_map<std::string, std::string>& simple_tags,
-    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+    const boost::property_tree::ptree& tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -52,8 +65,7 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects)
     : documentation_(documentation),
-      simple_tags_(simple_tags),
-      complex_tags_(complex_tags),
+      tags_(tags),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -68,8 +80,7 @@ model::model(
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(simple_tags_, other.simple_tags_);
-    swap(complex_tags_, other.complex_tags_);
+    swap(tags_, other.tags_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -84,8 +95,7 @@ void model::swap(model& other) noexcept {
 
 bool model::operator==(const model& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        simple_tags_ == rhs.simple_tags_ &&
-        complex_tags_ == rhs.complex_tags_ &&
+        tags_ == rhs.tags_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -120,36 +130,20 @@ void model::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& model::simple_tags() const {
-    return simple_tags_;
+const boost::property_tree::ptree& model::tags() const {
+    return tags_;
 }
 
-std::unordered_map<std::string, std::string>& model::simple_tags() {
-    return simple_tags_;
+boost::property_tree::ptree& model::tags() {
+    return tags_;
 }
 
-void model::simple_tags(const std::unordered_map<std::string, std::string>& v) {
-    simple_tags_ = v;
+void model::tags(const boost::property_tree::ptree& v) {
+    tags_ = v;
 }
 
-void model::simple_tags(const std::unordered_map<std::string, std::string>&& v) {
-    simple_tags_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::list<std::string> >& model::complex_tags() const {
-    return complex_tags_;
-}
-
-std::unordered_map<std::string, std::list<std::string> >& model::complex_tags() {
-    return complex_tags_;
-}
-
-void model::complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v) {
-    complex_tags_ = v;
-}
-
-void model::complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v) {
-    complex_tags_ = std::move(v);
+void model::tags(const boost::property_tree::ptree&& v) {
+    tags_ = std::move(v);
 }
 
 const dogen::sml::qname& model::name() const {

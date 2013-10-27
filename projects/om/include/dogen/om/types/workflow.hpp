@@ -177,7 +177,7 @@ private:
     /**
      * @brief Hydrates all the licences available in the library.
      */
-    void hydrate_licences_activity(const sml::model& m);
+    void hydrate_licences_activity();
 
     /**
      * @brief Creates the code generation marker.

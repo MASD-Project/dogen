@@ -27,18 +27,25 @@ property::property()
     : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)) { }
 
+property::property(property&& rhs)
+    : documentation_(std::move(rhs.documentation_)),
+      tags_(std::move(rhs.tags_)),
+      name_(std::move(rhs.name_)),
+      type_(std::move(rhs.type_)),
+      default_value_(std::move(rhs.default_value_)),
+      is_immutable_(std::move(rhs.is_immutable_)),
+      is_fluent_(std::move(rhs.is_fluent_)) { }
+
 property::property(
     const std::string& documentation,
-    const std::unordered_map<std::string, std::string>& simple_tags,
-    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+    const boost::property_tree::ptree& tags,
     const std::string& name,
     const dogen::sml::nested_qname& type,
     const std::string& default_value,
     const bool is_immutable,
     const bool is_fluent)
     : documentation_(documentation),
-      simple_tags_(simple_tags),
-      complex_tags_(complex_tags),
+      tags_(tags),
       name_(name),
       type_(type),
       default_value_(default_value),
@@ -48,8 +55,7 @@ property::property(
 void property::swap(property& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(simple_tags_, other.simple_tags_);
-    swap(complex_tags_, other.complex_tags_);
+    swap(tags_, other.tags_);
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(default_value_, other.default_value_);
@@ -59,8 +65,7 @@ void property::swap(property& other) noexcept {
 
 bool property::operator==(const property& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        simple_tags_ == rhs.simple_tags_ &&
-        complex_tags_ == rhs.complex_tags_ &&
+        tags_ == rhs.tags_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
         default_value_ == rhs.default_value_ &&
@@ -90,36 +95,20 @@ void property::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& property::simple_tags() const {
-    return simple_tags_;
+const boost::property_tree::ptree& property::tags() const {
+    return tags_;
 }
 
-std::unordered_map<std::string, std::string>& property::simple_tags() {
-    return simple_tags_;
+boost::property_tree::ptree& property::tags() {
+    return tags_;
 }
 
-void property::simple_tags(const std::unordered_map<std::string, std::string>& v) {
-    simple_tags_ = v;
+void property::tags(const boost::property_tree::ptree& v) {
+    tags_ = v;
 }
 
-void property::simple_tags(const std::unordered_map<std::string, std::string>&& v) {
-    simple_tags_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::list<std::string> >& property::complex_tags() const {
-    return complex_tags_;
-}
-
-std::unordered_map<std::string, std::list<std::string> >& property::complex_tags() {
-    return complex_tags_;
-}
-
-void property::complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v) {
-    complex_tags_ = v;
-}
-
-void property::complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v) {
-    complex_tags_ = std::move(v);
+void property::tags(const boost::property_tree::ptree&& v) {
+    tags_ = std::move(v);
 }
 
 const std::string& property::name() const {

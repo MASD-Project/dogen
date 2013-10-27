@@ -26,6 +26,8 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree_serialization.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
@@ -43,7 +45,6 @@
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

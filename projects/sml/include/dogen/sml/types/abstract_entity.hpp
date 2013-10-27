@@ -73,8 +73,7 @@ public:
 public:
     abstract_entity(
         const std::string& documentation,
-        const std::unordered_map<std::string, std::string>& simple_tags,
-        const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+        const boost::property_tree::ptree& tags,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,

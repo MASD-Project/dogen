@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"

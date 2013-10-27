@@ -95,8 +95,8 @@ void workflow::transformation_activity(const processed_object& o) {
 void workflow::graph_to_context_activity(const graph_type& g) {
     transformer_ = std::unique_ptr<transformer>(new transformer(context_));
 
-    using namespace std::placeholders;
-    const auto f(std::bind(&workflow::transformation_activity, this, _1));
+    const auto f(std::bind(&workflow::transformation_activity, this,
+            std::placeholders::_1));
     visitor v(f);
     boost::depth_first_search(g, boost::visitor(v));
 }

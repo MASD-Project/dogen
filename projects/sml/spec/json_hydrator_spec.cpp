@@ -219,19 +219,18 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().module_path().empty());
     BOOST_CHECK(m.name().external_module_path().empty());
     BOOST_CHECK(m.documentation() == documentation);
-    BOOST_CHECK(m.complex_tags().size() == 1);
+    BOOST_CHECK(m.tags().size() == 2);
 
     {
-        const auto i(m.complex_tags().find(dogen::sml::tags::odb_pragma));
-        BOOST_REQUIRE(i != m.complex_tags().end());
-        BOOST_CHECK(i->second.size() != 0);
-        BOOST_CHECK(i->second.front() == odb_pragma_value);
+        auto i(m.tags().find(dogen::sml::tags::odb_pragma));
+        BOOST_REQUIRE(i != m.tags().not_found());
+        BOOST_REQUIRE(i->second.size() == 0);
+        BOOST_CHECK(i->second.data() == odb_pragma_value);
 
-        BOOST_CHECK(m.simple_tags().size() == 1);
-        const auto j(m.simple_tags().find(model_key));
-        BOOST_REQUIRE(j != m.simple_tags().end());
-        BOOST_CHECK(j->first == model_key);
-        BOOST_CHECK(j->second == model_value);
+        i = m.tags().find(model_key);
+        BOOST_REQUIRE(i != m.tags().not_found());
+        BOOST_REQUIRE(i->second.size() == 0);
+        BOOST_CHECK(i->second.data() == model_value);
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -248,16 +247,15 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
 
     {
         const auto& o(*pair.second);
-        const auto i(o.complex_tags().find(dogen::sml::tags::odb_pragma));
-        BOOST_REQUIRE(i != o.complex_tags().end());
-        BOOST_CHECK(i->second.size() != 0);
-        BOOST_CHECK(i->second.front() == odb_pragma_value);
+        auto i(o.tags().find(dogen::sml::tags::odb_pragma));
+        BOOST_REQUIRE(i != m.tags().not_found());
+        BOOST_REQUIRE(i->second.size() == 0);
+        BOOST_CHECK(i->second.data() == odb_pragma_value);
 
-        BOOST_CHECK(o.simple_tags().size() == 1);
-        const auto j(o.simple_tags().find(type_key));
-        BOOST_REQUIRE(j != o.simple_tags().end());
-        BOOST_CHECK(j->first == type_key);
-        BOOST_CHECK(j->second == type_value);
+        i = o.tags().find(type_key);
+        BOOST_REQUIRE(i != m.tags().not_found());
+        BOOST_REQUIRE(i->second.size() == 0);
+        BOOST_CHECK(i->second.data() == type_value);
     }
 }
 

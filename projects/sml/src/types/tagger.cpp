@@ -278,6 +278,10 @@ std::string tagger::filename_for_qname(
 
 void tagger::copy_model_tags(tag_router& router) const {
     auto adaptor(make_tag_adaptor(context_->model()));
+
+    router.route_if_key_not_found(tags::copyright_holder,
+        adaptor.get(tags::copyright_holder));
+
     router.route_if_key_not_found(tags::generate_preamble,
         adaptor.get(tags::generate_preamble));
 

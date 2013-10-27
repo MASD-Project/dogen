@@ -89,12 +89,8 @@ void workflow::hydrate_modelines_activity() {
     BOOST_LOG_SEV(lg, debug) << "contents: " << context_->modeline_groups();
 }
 
-void workflow::hydrate_licences_activity(const sml::model& m) {
+void workflow::hydrate_licences_activity() {
     std::list<std::string> copyright_holders;
-    const auto i(m.complex_tags().find(sml::tags::copyright_holder));
-    if (i != m.complex_tags().end())
-        copyright_holders = i->second;
-
     licence_hydrator lh(copyright_holders);
     const auto dirs(create_directories(licence_dir));
     hydration_workflow<licence_hydrator> hw(lh);
@@ -125,7 +121,7 @@ void workflow::setup_reference_data_subworkflow(const sml::model& m) {
     ensure_non_null_context();
 
     hydrate_modelines_activity();
-    hydrate_licences_activity(m);
+    hydrate_licences_activity();
     create_marker_activity(m);
     context_->property_cache().populate(m);
 }
@@ -166,8 +162,7 @@ void workflow::model_file_subworkflow(const sml::model& model) {
     module.name().simple_name(model.name().model_name());
     module.name().external_module_path(model.name().external_module_path());
     module.documentation(model.documentation());
-    module.complex_tags(model.complex_tags());
-    module.simple_tags(model.simple_tags());
+    module.tags(model.tags());
     operator()(module);
 }
 

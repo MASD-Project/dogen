@@ -3,19 +3,14 @@
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<simple_tags class_id="9" tracking_level="0" version="0">
+	<tags class_id="9" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-	</simple_tags>
-	<complex_tags class_id="10" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</complex_tags>
-	<name class_id="11" tracking_level="0" version="0">
+		<data></data>
+	</tags>
+	<name class_id="10" tracking_level="0" version="0">
 		<model_name>enumeration</model_name>
-		<external_module_path class_id="12" tracking_level="0" version="0">
+		<external_module_path class_id="11" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
 		</external_module_path>
@@ -27,21 +22,21 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<references class_id="13" tracking_level="0" version="0">
+	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="14" tracking_level="0" version="0">
+	<leaves class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="15" tracking_level="0" version="0">
+	<modules class_id="14" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="16" tracking_level="0" version="0">
+		<item class_id="15" tracking_level="0" version="0">
 			<first>
 				<model_name>enumeration</model_name>
 				<external_module_path>
@@ -54,18 +49,13 @@
 				</module_path>
 				<simple_name>pkg1</simple_name>
 			</first>
-			<second class_id="17" tracking_level="0" version="0">
+			<second class_id="16" tracking_level="0" version="0">
 				<documentation></documentation>
-				<simple_tags>
+				<tags>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-				</simple_tags>
-				<complex_tags>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</complex_tags>
+					<data></data>
+				</tags>
 				<name>
 					<model_name>enumeration</model_name>
 					<external_module_path>
@@ -80,28 +70,28 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
-				<members class_id="18" tracking_level="0" version="0">
+				<members class_id="17" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="19" tracking_level="0" version="0">
+	<concepts class_id="18" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="20" tracking_level="0" version="0">
+	<primitives class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="21" tracking_level="0" version="0">
+	<enumerations class_id="20" tracking_level="0" version="0">
 		<count>3</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="22" tracking_level="0" version="0">
+		<item class_id="21" tracking_level="0" version="0">
 			<first>
 				<model_name>enumeration</model_name>
 				<external_module_path>
@@ -116,18 +106,13 @@
 				<simple_name>shape_types</simple_name>
 			</first>
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
-				<type class_id="23" tracking_level="0" version="0">
+				<type class_id="22" tracking_level="0" version="0">
 					<documentation></documentation>
-					<simple_tags>
+					<tags>
 						<count>0</count>
-						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
-					</simple_tags>
-					<complex_tags>
-						<count>0</count>
-						<bucket_count>11</bucket_count>
-						<item_version>0</item_version>
-					</complex_tags>
+						<data></data>
+					</tags>
 					<name>
 						<model_name>enumeration</model_name>
 						<external_module_path>
@@ -156,10 +141,10 @@
 					</module_path>
 					<simple_name>unsigned int</simple_name>
 				</underlying_type>
-				<enumerators class_id="24" tracking_level="0" version="0">
+				<enumerators class_id="23" tracking_level="0" version="0">
 					<count>5</count>
 					<item_version>0</item_version>
-					<item class_id="25" tracking_level="0" version="0">
+					<item class_id="24" tracking_level="0" version="0">
 						<documentation>Represents an uninitialised enum</documentation>
 						<name>invalid</name>
 						<value>0</value>
@@ -206,16 +191,11 @@
 			<second object_id="_1">
 				<type>
 					<documentation></documentation>
-					<simple_tags>
+					<tags>
 						<count>0</count>
-						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
-					</simple_tags>
-					<complex_tags>
-						<count>0</count>
-						<bucket_count>11</bucket_count>
-						<item_version>0</item_version>
-					</complex_tags>
+						<data></data>
+					</tags>
 					<name>
 						<model_name>enumeration</model_name>
 						<external_module_path>
@@ -296,16 +276,11 @@
 
 this is a long comment
 </documentation>
-					<simple_tags>
+					<tags>
 						<count>0</count>
-						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
-					</simple_tags>
-					<complex_tags>
-						<count>0</count>
-						<bucket_count>11</bucket_count>
-						<item_version>0</item_version>
-					</complex_tags>
+						<data></data>
+					</tags>
 					<name>
 						<model_name>enumeration</model_name>
 						<external_module_path>
@@ -360,11 +335,11 @@ this is a long comment
 			</second>
 		</item>
 	</enumerations>
-	<objects class_id="26" tracking_level="0" version="0">
+	<objects class_id="25" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="27" tracking_level="0" version="0">
+		<item class_id="26" tracking_level="0" version="0">
 			<first>
 				<model_name>enumeration</model_name>
 				<external_module_path>
@@ -377,21 +352,16 @@ this is a long comment
 				</module_path>
 				<simple_name>a_class</simple_name>
 			</first>
-			<second class_id="28" tracking_level="0" version="1">
+			<second class_id="27" tracking_level="0" version="1">
 				<px class_id="7" tracking_level="1" version="0" object_id="_3">
-					<abstract_object class_id="29" tracking_level="0" version="0">
+					<abstract_object class_id="28" tracking_level="0" version="0">
 						<type>
 							<documentation></documentation>
-							<simple_tags>
+							<tags>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
 								<item_version>0</item_version>
-							</simple_tags>
-							<complex_tags>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</complex_tags>
+								<data></data>
+							</tags>
 							<name>
 								<model_name>enumeration</model_name>
 								<external_module_path>
@@ -407,23 +377,18 @@ this is a long comment
 							<generation_type>1</generation_type>
 							<origin_type>1</origin_type>
 						</type>
-						<properties class_id="30" tracking_level="0" version="0">
+						<properties class_id="29" tracking_level="0" version="0">
 							<count>3</count>
 							<item_version>0</item_version>
-							<item class_id="31" tracking_level="0" version="0">
+							<item class_id="30" tracking_level="0" version="0">
 								<documentation></documentation>
-								<simple_tags>
+								<tags>
 									<count>0</count>
-									<bucket_count>11</bucket_count>
 									<item_version>0</item_version>
-								</simple_tags>
-								<complex_tags>
-									<count>0</count>
-									<bucket_count>11</bucket_count>
-									<item_version>0</item_version>
-								</complex_tags>
+									<data></data>
+								</tags>
 								<name>colour_type</name>
-								<type class_id="32" tracking_level="0" version="0">
+								<type class_id="31" tracking_level="0" version="0">
 									<type>
 										<model_name></model_name>
 										<external_module_path>
@@ -436,7 +401,7 @@ this is a long comment
 										</module_path>
 										<simple_name>colour_types</simple_name>
 									</type>
-									<children class_id="33" tracking_level="0" version="0">
+									<children class_id="32" tracking_level="0" version="0">
 										<count>0</count>
 										<item_version>0</item_version>
 									</children>
@@ -448,16 +413,11 @@ this is a long comment
 							</item>
 							<item>
 								<documentation></documentation>
-								<simple_tags>
+								<tags>
 									<count>0</count>
-									<bucket_count>11</bucket_count>
 									<item_version>0</item_version>
-								</simple_tags>
-								<complex_tags>
-									<count>0</count>
-									<bucket_count>11</bucket_count>
-									<item_version>0</item_version>
-								</complex_tags>
+									<data></data>
+								</tags>
 								<name>book_type</name>
 								<type>
 									<type>
@@ -484,16 +444,11 @@ this is a long comment
 							</item>
 							<item>
 								<documentation></documentation>
-								<simple_tags>
+								<tags>
 									<count>0</count>
-									<bucket_count>11</bucket_count>
 									<item_version>0</item_version>
-								</simple_tags>
-								<complex_tags>
-									<count>0</count>
-									<bucket_count>11</bucket_count>
-									<item_version>0</item_version>
-								</complex_tags>
+									<data></data>
+								</tags>
 								<name>shape_type</name>
 								<type>
 									<type>
@@ -520,11 +475,11 @@ this is a long comment
 								<is_fluent>0</is_fluent>
 							</item>
 						</properties>
-						<operations class_id="34" tracking_level="0" version="0">
+						<operations class_id="33" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</operations>
-						<parent_name class_id="35" tracking_level="0" version="0">
+						<parent_name class_id="34" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</parent_name>
 						<original_parent_name>

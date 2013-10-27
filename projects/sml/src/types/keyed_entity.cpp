@@ -49,8 +49,7 @@ keyed_entity::keyed_entity(keyed_entity&& rhs)
 
 keyed_entity::keyed_entity(
     const std::string& documentation,
-    const std::unordered_map<std::string, std::string>& simple_tags,
-    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+    const boost::property_tree::ptree& tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -72,8 +71,7 @@ keyed_entity::keyed_entity(
     const dogen::sml::qname& unversioned_key,
     const boost::optional<dogen::sml::qname>& versioned_key)
     : dogen::sml::abstract_entity(documentation,
-      simple_tags,
-      complex_tags,
+      tags,
       name,
       generation_type,
       origin_type,

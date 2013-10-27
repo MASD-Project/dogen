@@ -26,8 +26,7 @@
 #endif
 
 #include <list>
-#include <string>
-#include <unordered_map>
+#include <boost/property_tree/ptree.hpp>
 
 namespace dogen {
 namespace sml {
@@ -40,9 +39,7 @@ public:
     tag_adaptor(tag_adaptor&&) = default;
 
 public:
-    tag_adaptor(const std::unordered_map<std::string, std::string>& simple_tags,
-        const std::unordered_map<std::string, std::list<std::string> >&
-        complex_tags);
+    tag_adaptor(const boost::property_tree::ptree& tags);
 
 public:
     /**
@@ -82,14 +79,12 @@ public:
     std::list<std::pair<std::string,std::string> > odb_pragma() const;
 
 private:
-    const std::unordered_map<std::string, std::string>& simple_tags_;
-    const std::unordered_map<std::string, std::list<std::string> >&
-    complex_tags_;
+    const boost::property_tree::ptree& tags_;
 };
 
 template<typename Taggable>
 inline tag_adaptor make_tag_adaptor(const Taggable& t) {
-    return tag_adaptor(t.simple_tags(), t.complex_tags());
+    return tag_adaptor(t.tags());
 }
 
 } }

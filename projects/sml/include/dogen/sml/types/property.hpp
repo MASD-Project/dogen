@@ -26,9 +26,8 @@
 #endif
 
 #include <algorithm>
-#include <list>
+#include <boost/property_tree/ptree.hpp>
 #include <string>
-#include <unordered_map>
 #include "dogen/sml/serialization/property_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 
@@ -41,17 +40,18 @@ namespace sml {
 class property final {
 public:
     property(const property&) = default;
-    property(property&&) = default;
     ~property() = default;
 
 public:
     property();
 
 public:
+    property(property&& rhs);
+
+public:
     property(
         const std::string& documentation,
-        const std::unordered_map<std::string, std::string>& simple_tags,
-        const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+        const boost::property_tree::ptree& tags,
         const std::string& name,
         const dogen::sml::nested_qname& type,
         const std::string& default_value,
@@ -86,22 +86,10 @@ public:
      * Tags are in the format key-value pair.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::string>& simple_tags() const;
-    std::unordered_map<std::string, std::string>& simple_tags();
-    void simple_tags(const std::unordered_map<std::string, std::string>& v);
-    void simple_tags(const std::unordered_map<std::string, std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief Tags associated with the object, opaque to SML.
-     *
-     * Tags are in the format key, value 1, ... value n. Order of defintion is respected.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<std::string> >& complex_tags() const;
-    std::unordered_map<std::string, std::list<std::string> >& complex_tags();
-    void complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v);
-    void complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v);
+    const boost::property_tree::ptree& tags() const;
+    boost::property_tree::ptree& tags();
+    void tags(const boost::property_tree::ptree& v);
+    void tags(const boost::property_tree::ptree&& v);
     /**@}*/
 
     /**
@@ -167,8 +155,7 @@ public:
 
 private:
     std::string documentation_;
-    std::unordered_map<std::string, std::string> simple_tags_;
-    std::unordered_map<std::string, std::list<std::string> > complex_tags_;
+    boost::property_tree::ptree tags_;
     std::string name_;
     dogen::sml::nested_qname type_;
     std::string default_value_;

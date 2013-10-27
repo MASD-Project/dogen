@@ -37,31 +37,29 @@ const std::string duplicated_key(
 namespace dogen {
 namespace sml {
 
-tag_router::
-tag_router(std::unordered_map<std::string, std::string>& simple_tags,
-    std::unordered_map<std::string, std::list<std::string> >& complex_tags)
-    : simple_tags_(simple_tags), complex_tags_(complex_tags) { }
+tag_router::tag_router(boost::property_tree::ptree& tags)
+    : tags_(tags) { }
 
 bool tag_router::is_complex(const std::string& key) const {
     return key == tags::odb_pragma;
 }
 
 bool tag_router::has_key(const std::string& key) const {
-    const auto i(simple_tags_.find(key));
-    return i != simple_tags_.end();
+    const auto node(tags_.get_optional<std::string>(key));
+    return node;
 }
 
 void tag_router::route(const std::string& key, const std::string& value) {
     if (is_complex(key)) {
-        complex_tags_[key].push_back(value);
+        tags_.add(key, value);
         return;
     }
 
-    const auto result(simple_tags_.insert(std::make_pair(key, value)));
-    if (!result.second) {
+    if (has_key(key)) {
         BOOST_LOG_SEV(lg, error) << duplicated_key << key;
         BOOST_THROW_EXCEPTION(tag_error(duplicated_key + key));
     }
+    tags_.put(key, value);
 }
 
 void tag_router::
@@ -91,7 +89,7 @@ route_if_key_not_found(const std::string& key, const std::string& value) {
     if (has_key(key))
         return false;
 
-    simple_tags_.insert(std::make_pair(key, value));
+    route(key, value);
     return true;
 }
 

@@ -26,8 +26,7 @@
 #endif
 
 #include <list>
-#include <string>
-#include <unordered_map>
+#include <boost/property_tree/ptree.hpp>
 
 namespace dogen {
 namespace sml {
@@ -44,8 +43,7 @@ public:
     tag_router(tag_router&&) = default;
 
 public:
-    tag_router(std::unordered_map<std::string, std::string>& simple_tags,
-        std::unordered_map<std::string, std::list<std::string> >& complex_tags);
+    tag_router(boost::property_tree::ptree& tags);
 
 private:
     /**
@@ -92,13 +90,12 @@ public:
         const std::string& value);
 
 private:
-    std::unordered_map<std::string, std::string>& simple_tags_;
-    std::unordered_map<std::string, std::list<std::string> >& complex_tags_;
+    boost::property_tree::ptree& tags_;
 };
 
 template<typename Taggable>
 inline tag_router make_tag_router(Taggable& t) {
-    return tag_router(t.simple_tags(), t.complex_tags());
+    return tag_router(t.tags());
 }
 
 } }

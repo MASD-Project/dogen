@@ -26,6 +26,8 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree_serialization.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
@@ -33,7 +35,6 @@
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
 #include "dogen/sml/serialization/parameter_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -48,8 +49,7 @@ void save(Archive& ar,
     const dogen::sml::operation& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("simple_tags", v.simple_tags_);
-    ar << make_nvp("complex_tags", v.complex_tags_);
+    ar << make_nvp("tags", v.tags_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parameters", v.parameters_);
     ar << make_nvp("type", v.type_);
@@ -60,8 +60,7 @@ void load(Archive& ar,
     dogen::sml::operation& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("simple_tags", v.simple_tags_);
-    ar >> make_nvp("complex_tags", v.complex_tags_);
+    ar >> make_nvp("tags", v.tags_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parameters", v.parameters_);
     ar >> make_nvp("type", v.type_);

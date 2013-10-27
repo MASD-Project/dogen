@@ -27,9 +27,9 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include <list>
 #include <string>
-#include <unordered_map>
 #include "dogen/sml/serialization/operation_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/parameter.hpp"
@@ -52,8 +52,7 @@ public:
 public:
     operation(
         const std::string& documentation,
-        const std::unordered_map<std::string, std::string>& simple_tags,
-        const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+        const boost::property_tree::ptree& tags,
         const std::string& name,
         const std::list<dogen::sml::parameter>& parameters,
         const boost::optional<dogen::sml::nested_qname>& type);
@@ -86,22 +85,10 @@ public:
      * Tags are in the format key-value pair.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::string>& simple_tags() const;
-    std::unordered_map<std::string, std::string>& simple_tags();
-    void simple_tags(const std::unordered_map<std::string, std::string>& v);
-    void simple_tags(const std::unordered_map<std::string, std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief Tags associated with the object, opaque to SML.
-     *
-     * Tags are in the format key, value 1, ... value n. Order of defintion is respected.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<std::string> >& complex_tags() const;
-    std::unordered_map<std::string, std::list<std::string> >& complex_tags();
-    void complex_tags(const std::unordered_map<std::string, std::list<std::string> >& v);
-    void complex_tags(const std::unordered_map<std::string, std::list<std::string> >&& v);
+    const boost::property_tree::ptree& tags() const;
+    boost::property_tree::ptree& tags();
+    void tags(const boost::property_tree::ptree& v);
+    void tags(const boost::property_tree::ptree&& v);
     /**@}*/
 
     /**
@@ -146,8 +133,7 @@ public:
 
 private:
     std::string documentation_;
-    std::unordered_map<std::string, std::string> simple_tags_;
-    std::unordered_map<std::string, std::list<std::string> > complex_tags_;
+    boost::property_tree::ptree tags_;
     std::string name_;
     std::list<dogen::sml::parameter> parameters_;
     boost::optional<dogen::sml::nested_qname> type_;

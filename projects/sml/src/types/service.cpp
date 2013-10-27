@@ -31,8 +31,7 @@ service::service()
 
 service::service(
     const std::string& documentation,
-    const std::unordered_map<std::string, std::string>& simple_tags,
-    const std::unordered_map<std::string, std::list<std::string> >& complex_tags,
+    const boost::property_tree::ptree& tags,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -51,8 +50,7 @@ service::service(
     const std::list<dogen::sml::qname>& modeled_concepts,
     const dogen::sml::service_types& type)
     : dogen::sml::abstract_object(documentation,
-      simple_tags,
-      complex_tags,
+      tags,
       name,
       generation_type,
       origin_type,

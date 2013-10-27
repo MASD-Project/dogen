@@ -32,29 +32,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::ptree& v) {
     std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
+    for (const auto& node : v) {
+        combine(seed, node.first);
+        combine(seed, node.second.data());
+        combine(seed, hash_boost_property_tree_ptree(node.second));
     }
-    return seed;
-}
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const std::unordered_map<std::string, std::list<std::string> >& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_list_std_string(i.second));
-    }
     return seed;
 }
 
@@ -75,8 +60,7 @@ std::size_t module_hasher::hash(const module&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.simple_tags()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.complex_tags()));
+    combine(seed, hash_boost_property_tree_ptree(v.tags()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
