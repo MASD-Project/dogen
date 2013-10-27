@@ -26,7 +26,7 @@ namespace boost {
 namespace property_tree {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::property_tree::ptree& v) {
-    write_json(s, v);
+    boost::property_tree::write_json(s, v);
     return s;
 }
 
