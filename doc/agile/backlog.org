@@ -8,6 +8,29 @@
 
 Stories that we intend to look at, at some point.
 
+*** Includer generation should be done from meta-data                 :story:
+    CLOCK: [2013-10-27 Sun 20:40]--[2013-10-27 Sun 20:58] =>  0:18
+
+It would be nice if we could determine which includer files to create
+by looking at the meta-data. For this we need a notion of an inclusion
+group, defined at the model level:
+
+- =cpp.types.includers.general=
+- =cpp.types.includers.value_objects=
+- ...
+
+Under each of these one would configure the aspect:
+
+- =cpp.types.includers.general.generate=: =true=
+- =cpp.types.includers.general.file_name=: =a/b/c=
+- =cpp.types.includers.general.is_system=: =false=
+
+Then, each type, module etc would declare its membership (as a list):
+
+- =cpp.includers.member=: =cpp.types.includers.general=
+- =cpp.includers.member=: =cpp.types.includers.value_objects=
+- ...
+
 *** Copyright holders is scalar when it should be an array            :story:
 
 At present its only possible to specify a single copyright holder. It
