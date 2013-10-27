@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 37.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-27 Sun 17:48]
+Clock summary at [2013-10-27 Sun 17:53]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *8:42* |      |      |
+| *Total time*                                                             | *8:45* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                          |        | 8:42 |      |
+| Development Stories Implemented                                          |        | 8:45 |      |
 | IMPLEMENTATION Release notes and backlog grooming                        |        |      | 0:06 |
 | COMPLETED Add types header formatter to workflow                         |        |      | 4:14 |
+| COMPLETED Add support for =boost::property_tree::ptree=                  |        |      | 1:43 |
 | IMPLEMENTATION Add module support to types header formatter              |        |      | 2:12 |
 | IMPLEMENTATION Add tests for properties and compiler generated functions |        |      | 0:30 |
-| IMPLEMENTATION Add support for =boost::property_tree::ptree=             |        |      | 1:40 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -51,6 +51,11 @@ Clock summary at [2013-10-27 Sun 17:48]
      CLOCK: [2013-10-24 Thu 18:14]--[2013-10-24 Thu 18:46] =>  0:32
      CLOCK: [2013-10-24 Thu 18:10]--[2013-10-24 Thu 18:14] =>  0:04
 
+*** COMPLETED Add support for =boost::property_tree::ptree=           :story:
+    CLOSED: [2013-10-27 Sun 17:53]
+    CLOCK: [2013-10-27 Sun 17:50]--[2013-10-27 Sun 17:53] =>  0:03
+    CLOCK: [2013-10-27 Sun 16:07]--[2013-10-27 Sun 17:47] =>  1:40
+
 *** IMPLEMENTATION Add module support to types header formatter       :story:
 **** Add test for module in model
 **** COMPLETED Generic module support                                  :task:
@@ -64,9 +69,6 @@ Clock summary at [2013-10-27 Sun 17:48]
 *** IMPLEMENTATION Add tests for properties and compiler generated functions :story:
     CLOCK: [2013-10-25 Fri 08:27]--[2013-10-25 Fri 08:35] =>  0:08
     CLOCK: [2013-10-25 Fri 07:56]--[2013-10-25 Fri 08:18] =>  0:22
-
-*** IMPLEMENTATION Add support for =boost::property_tree::ptree=      :story:
-    CLOCK: [2013-10-27 Sun 16:07]--[2013-10-27 Sun 17:47] =>  1:40
 
 *** Add tests for tagging of abstract objects                         :story:
 
