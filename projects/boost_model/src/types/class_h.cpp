@@ -18,27 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/test_data/boost_types_td.hpp"
+#include "dogen/boost_model/types/class_h.hpp"
 
 namespace dogen {
-namespace sml_to_cpp {
+namespace boost_model {
 
-boost_types_generator::boost_types_generator() : position_(0) { }
-void boost_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<boost_types>(position % 43);
+class_h::class_h(class_h&& rhs)
+    : prop_0_(std::move(rhs.prop_0_)) { }
+
+class_h::class_h(const boost::property_tree::ptree& prop_0)
+    : prop_0_(prop_0) { }
+
+void class_h::swap(class_h& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
 }
 
-boost_types_generator::result_type
-boost_types_generator::create(const unsigned int  position) {
-    result_type r;
-    boost_types_generator::populate(position, r);
-    return r;
+bool class_h::operator==(const class_h& rhs) const {
+    return prop_0_ == rhs.prop_0_;
 }
 
-boost_types_generator::result_type
-boost_types_generator::operator()() {
-    return create(position_++);
+class_h& class_h::operator=(class_h other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const boost::property_tree::ptree& class_h::prop_0() const {
+    return prop_0_;
+}
+
+boost::property_tree::ptree& class_h::prop_0() {
+    return prop_0_;
+}
+
+void class_h::prop_0(const boost::property_tree::ptree& v) {
+    prop_0_ = v;
+}
+
+void class_h::prop_0(const boost::property_tree::ptree&& v) {
+    prop_0_ = std::move(v);
 }
 
 } }

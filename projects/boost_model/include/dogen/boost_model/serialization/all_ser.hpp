@@ -26,5 +26,6 @@
 #include "dogen/boost_model/serialization/class_e_ser.hpp"
 #include "dogen/boost_model/serialization/class_f_ser.hpp"
 #include "dogen/boost_model/serialization/class_g_ser.hpp"
+#include "dogen/boost_model/serialization/class_h_ser.hpp"
 #include "dogen/boost_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/boost_model/serialization/registrar_ser.hpp"

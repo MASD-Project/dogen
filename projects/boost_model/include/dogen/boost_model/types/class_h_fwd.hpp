@@ -18,13 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/hash/class_a_hash.hpp"
-#include "dogen/boost_model/hash/class_b_hash.hpp"
-#include "dogen/boost_model/hash/class_base_hash.hpp"
-#include "dogen/boost_model/hash/class_d_hash.hpp"
-#include "dogen/boost_model/hash/class_derived_hash.hpp"
-#include "dogen/boost_model/hash/class_e_hash.hpp"
-#include "dogen/boost_model/hash/class_f_hash.hpp"
-#include "dogen/boost_model/hash/class_g_hash.hpp"
-#include "dogen/boost_model/hash/class_h_hash.hpp"
-#include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
+#ifndef DOGEN_BOOST_MODEL_TYPES_CLASS_H_FWD_HPP
+#define DOGEN_BOOST_MODEL_TYPES_CLASS_H_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace boost_model {
+
+class class_h;
+
+} }
+
+#endif

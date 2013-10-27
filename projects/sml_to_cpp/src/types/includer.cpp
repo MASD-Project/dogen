@@ -320,6 +320,22 @@ void includer::append_boost_dependencies(
         il.system().push_back(
             boost_.include(boost_types::serialization_time_duration));
     }
+
+    /*
+     * boost::property_tree::ptree
+     */
+    const bool is_ptree(sn == boost_.type(boost_types::ptree));
+    if (is_header && is_types && is_ptree)
+        il.system().push_back(boost_.include(boost_types::ptree));
+
+    if (is_ptree && is_implementation && io_enabled_ &&
+        (domain_with_io || io_without_iio))
+        il.system().push_back(boost_.include(boost_types::io_ptree));
+
+    if (is_implementation && is_serialization && is_ptree) {
+        il.system().push_back(boost_.include(boost_types::io_ptree));
+        il.system().push_back(boost_.include(boost_types::serialization_ptree));
+    }
 }
 
 void includer::append_std_dependencies(const cpp::content_descriptor& cd,

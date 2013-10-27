@@ -38,7 +38,8 @@ nested_type_info::nested_type_info()
       is_date_(static_cast<bool>(0)),
       is_ptime_(static_cast<bool>(0)),
       is_time_duration_(static_cast<bool>(0)),
-      is_pair_(static_cast<bool>(0)) { }
+      is_pair_(static_cast<bool>(0)),
+      is_ptree_(static_cast<bool>(0)) { }
 
 nested_type_info::nested_type_info(
     const std::string& name,
@@ -62,7 +63,8 @@ nested_type_info::nested_type_info(
     const bool is_date,
     const bool is_ptime,
     const bool is_time_duration,
-    const bool is_pair)
+    const bool is_pair,
+    const bool is_ptree)
     : name_(name),
       documentation_(documentation),
       identifiable_name_(identifiable_name),
@@ -84,7 +86,8 @@ nested_type_info::nested_type_info(
       is_date_(is_date),
       is_ptime_(is_ptime),
       is_time_duration_(is_time_duration),
-      is_pair_(is_pair) { }
+      is_pair_(is_pair),
+      is_ptree_(is_ptree) { }
 
 void nested_type_info::swap(nested_type_info& other) noexcept {
     using std::swap;
@@ -110,6 +113,7 @@ void nested_type_info::swap(nested_type_info& other) noexcept {
     swap(is_ptime_, other.is_ptime_);
     swap(is_time_duration_, other.is_time_duration_);
     swap(is_pair_, other.is_pair_);
+    swap(is_ptree_, other.is_ptree_);
 }
 
 bool nested_type_info::operator==(const nested_type_info& rhs) const {
@@ -134,7 +138,8 @@ bool nested_type_info::operator==(const nested_type_info& rhs) const {
         is_date_ == rhs.is_date_ &&
         is_ptime_ == rhs.is_ptime_ &&
         is_time_duration_ == rhs.is_time_duration_ &&
-        is_pair_ == rhs.is_pair_;
+        is_pair_ == rhs.is_pair_ &&
+        is_ptree_ == rhs.is_ptree_;
 }
 
 nested_type_info& nested_type_info::operator=(nested_type_info other) {
@@ -373,6 +378,14 @@ bool nested_type_info::is_pair() const {
 
 void nested_type_info::is_pair(const bool v) {
     is_pair_ = v;
+}
+
+bool nested_type_info::is_ptree() const {
+    return is_ptree_;
+}
+
+void nested_type_info::is_ptree(const bool v) {
+    is_ptree_ = v;
 }
 
 } }

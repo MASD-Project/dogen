@@ -18,13 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/hash/class_a_hash.hpp"
-#include "dogen/boost_model/hash/class_b_hash.hpp"
-#include "dogen/boost_model/hash/class_base_hash.hpp"
-#include "dogen/boost_model/hash/class_d_hash.hpp"
-#include "dogen/boost_model/hash/class_derived_hash.hpp"
-#include "dogen/boost_model/hash/class_e_hash.hpp"
-#include "dogen/boost_model/hash/class_f_hash.hpp"
-#include "dogen/boost_model/hash/class_g_hash.hpp"
-#include "dogen/boost_model/hash/class_h_hash.hpp"
-#include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
+#ifndef DOGEN_BOOST_MODEL_SERIALIZATION_CLASS_H_FWD_SER_HPP
+#define DOGEN_BOOST_MODEL_SERIALIZATION_CLASS_H_FWD_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/boost_model/types/class_h_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::boost_model::class_h& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::boost_model::class_h& v, unsigned int version);
+
+} }
+
+#endif

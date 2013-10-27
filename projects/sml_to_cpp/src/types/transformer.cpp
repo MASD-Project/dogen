@@ -75,6 +75,7 @@ const std::string filesystem_path_type("boost::filesystem::path");
 const std::string gregorian_date_type("boost::gregorian::date");
 const std::string ptime_type("boost::posix_time::ptime");
 const std::string time_duration_type("boost::posix_time::time_duration");
+const std::string ptree_type("boost::property_tree::ptree");
 const std::string pair_type("std::pair");
 const std::string registrar_name("registrar");
 
@@ -129,6 +130,10 @@ bool is_time_duration(const std::string& type_name) {
     return type_name == time_duration_type;
 }
 
+bool is_ptree(const std::string& type_name) {
+    return type_name == ptree_type;
+}
+
 bool is_variant_like(const std::string& type_name) {
     return type_name == variant_type;
 }
@@ -165,7 +170,8 @@ bool requires_manual_move_constructor(const std::string type_name) {
         type_name == "optional" ||
         type_name == "path" ||
         type_name == "variant" ||
-        type_name == "time_duration";
+        type_name == "time_duration" ||
+        type_name == "ptree";
 }
 
 std::string to_identifiable_name(const std::string n) {
@@ -263,6 +269,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
     nti.is_date(is_gregorian_date(nti.name()));
     nti.is_ptime(is_ptime(nti.name()));
     nti.is_time_duration(is_time_duration(nti.name()));
+    nti.is_ptree(is_ptree(nti.name()));
 
     const auto k(model_.objects().find(qn));
     if (k != model_.objects().end()) {

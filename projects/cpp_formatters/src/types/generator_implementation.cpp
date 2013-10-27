@@ -377,6 +377,32 @@ time_duration_helper(const cpp::nested_type_info& nti) {
     utility_.blank_line();
 }
 
+void generator_implementation::ptree_helper(const cpp::nested_type_info& nti) {
+    const auto type_name(nti.identifiable_name());
+    const auto identifiable_type_name(nti.complete_identifiable_name());
+
+    stream_ << indenter_ << nti.name() << std::endl
+            << "create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "using boost::property_tree::ptree;"
+                << std::endl
+                << indenter_ << "ptree c;" << std::endl
+                << indenter_ << "c.put(" << utility_.quote("key_2")
+                << ", position);" << std::endl
+                << indenter_ << "ptree r;" << std::endl
+                << indenter_ << "r.push_back(ptree::value_type("
+                << utility_.quote("key_1")
+                << ", c));" << std::endl
+                << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
 void generator_implementation::
 variant_helper(const cpp::nested_type_info& nti) {
     const auto container_identifiable_type_name(
@@ -589,6 +615,8 @@ recursive_helper_method_creator(const std::string& owner_name,
         ptime_helper(nti);
     else if (nti.is_time_duration())
         time_duration_helper(nti);
+    else if (nti.is_ptree())
+        ptree_helper(nti);
     else {
         if (nti.name() == string_type) {
             string_helper();

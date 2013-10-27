@@ -69,7 +69,8 @@ public:
         const bool is_date,
         const bool is_ptime,
         const bool is_time_duration,
-        const bool is_pair);
+        const bool is_pair,
+        const bool is_ptree);
 
 private:
     template<typename Archive>
@@ -277,6 +278,14 @@ public:
     void is_pair(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, the type is boost::property_tree::ptree.
+     */
+    /**@{*/
+    bool is_ptree() const;
+    void is_ptree(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const nested_type_info& rhs) const;
     bool operator!=(const nested_type_info& rhs) const {
@@ -310,6 +319,7 @@ private:
     bool is_ptime_;
     bool is_time_duration_;
     bool is_pair_;
+    bool is_ptree_;
 };
 
 } }

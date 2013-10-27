@@ -18,26 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/test_data/boost_types_td.hpp"
+#include "dogen/boost_model/test_data/class_h_td.hpp"
 
-namespace dogen {
-namespace sml_to_cpp {
+namespace {
 
-boost_types_generator::boost_types_generator() : position_(0) { }
-void boost_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<boost_types>(position % 43);
-}
-
-boost_types_generator::result_type
-boost_types_generator::create(const unsigned int  position) {
-    result_type r;
-    boost_types_generator::populate(position, r);
+boost::property_tree::ptree
+create_boost_property_tree_ptree(const unsigned int position) {
+    using boost::property_tree::ptree;
+    ptree c;
+    c.put("key_2", position);
+    ptree r;
+    r.push_back(ptree::value_type("key_1", c));
     return r;
 }
 
-boost_types_generator::result_type
-boost_types_generator::operator()() {
+}
+
+namespace dogen {
+namespace boost_model {
+
+class_h_generator::class_h_generator() : position_(0) { }
+
+void class_h_generator::
+populate(const unsigned int position, result_type& v) {
+    v.prop_0(create_boost_property_tree_ptree(position + 0));
+}
+
+class_h_generator::result_type
+class_h_generator::create(const unsigned int position) {
+    class_h r;
+    class_h_generator::populate(position, r);
+    return r;
+}
+class_h_generator::result_type*
+class_h_generator::create_ptr(const unsigned int position) {
+    class_h* p = new class_h();
+    class_h_generator::populate(position, *p);
+    return p;
+}
+
+class_h_generator::result_type
+class_h_generator::operator()() {
     return create(position_++);
 }
 

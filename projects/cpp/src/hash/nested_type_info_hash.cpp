@@ -75,6 +75,7 @@ std::size_t nested_type_info_hasher::hash(const nested_type_info&v) {
     combine(seed, v.is_ptime());
     combine(seed, v.is_time_duration());
     combine(seed, v.is_pair());
+    combine(seed, v.is_ptree());
 
     return seed;
 }

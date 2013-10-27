@@ -65,6 +65,7 @@ private:
     void date_helper(const cpp::nested_type_info& nti);
     void ptime_helper(const cpp::nested_type_info& nti);
     void time_duration_helper(const cpp::nested_type_info& nti);
+    void ptree_helper(const cpp::nested_type_info& nti);
 
     void composite_domain_type_helper(const std::string& identifiable_type_name,
         const std::string& type_name, bool as_pointer);

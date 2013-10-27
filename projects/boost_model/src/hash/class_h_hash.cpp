@@ -18,13 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/hash/class_a_hash.hpp"
-#include "dogen/boost_model/hash/class_b_hash.hpp"
-#include "dogen/boost_model/hash/class_base_hash.hpp"
-#include "dogen/boost_model/hash/class_d_hash.hpp"
-#include "dogen/boost_model/hash/class_derived_hash.hpp"
-#include "dogen/boost_model/hash/class_e_hash.hpp"
-#include "dogen/boost_model/hash/class_f_hash.hpp"
-#include "dogen/boost_model/hash/class_g_hash.hpp"
 #include "dogen/boost_model/hash/class_h_hash.hpp"
-#include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::ptree& v) {
+    std::size_t seed(0);
+    for (const auto& node : v) {
+        combine(seed, node.first);
+        combine(seed, node.second.data());
+        combine(seed, hash_boost_property_tree_ptree(node.second));
+    }
+
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace boost_model {
+
+std::size_t class_h_hasher::hash(const class_h&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_boost_property_tree_ptree(v.prop_0()));
+    return seed;
+}
+
+} }

@@ -85,6 +85,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_ptime(create_bool(position + 19));
     v.is_time_duration(create_bool(position + 20));
     v.is_pair(create_bool(position + 21));
+    v.is_ptree(create_bool(position + 22));
 }
 
 nested_type_info_generator::result_type

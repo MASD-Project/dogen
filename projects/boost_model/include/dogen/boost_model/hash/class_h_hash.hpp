@@ -18,13 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/hash/class_a_hash.hpp"
-#include "dogen/boost_model/hash/class_b_hash.hpp"
-#include "dogen/boost_model/hash/class_base_hash.hpp"
-#include "dogen/boost_model/hash/class_d_hash.hpp"
-#include "dogen/boost_model/hash/class_derived_hash.hpp"
-#include "dogen/boost_model/hash/class_e_hash.hpp"
-#include "dogen/boost_model/hash/class_f_hash.hpp"
-#include "dogen/boost_model/hash/class_g_hash.hpp"
-#include "dogen/boost_model/hash/class_h_hash.hpp"
-#include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
+#ifndef DOGEN_BOOST_MODEL_HASH_CLASS_H_HASH_HPP
+#define DOGEN_BOOST_MODEL_HASH_CLASS_H_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/boost_model/types/class_h.hpp"
+
+namespace dogen {
+namespace boost_model {
+
+struct class_h_hasher {
+public:
+    static std::size_t hash(const class_h& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::boost_model::class_h> {
+public:
+    size_t operator()(const dogen::boost_model::class_h& v) const {
+        return dogen::boost_model::class_h_hasher::hash(v);
+    }
+};
+
+}
+#endif

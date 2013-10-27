@@ -92,7 +92,8 @@ std::ostream& operator<<(std::ostream& s, const nested_type_info& v) {
       << "\"is_date\": " << v.is_date() << ", "
       << "\"is_ptime\": " << v.is_ptime() << ", "
       << "\"is_time_duration\": " << v.is_time_duration() << ", "
-      << "\"is_pair\": " << v.is_pair()
+      << "\"is_pair\": " << v.is_pair() << ", "
+      << "\"is_ptree\": " << v.is_ptree()
       << " }";
     return(s);
 }

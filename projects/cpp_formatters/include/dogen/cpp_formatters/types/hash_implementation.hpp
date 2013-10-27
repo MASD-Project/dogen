@@ -65,6 +65,7 @@ private:
     void date_helper(const cpp::nested_type_info& nti);
     void ptime_helper(const cpp::nested_type_info& nti);
     void time_duration_helper(const cpp::nested_type_info& nti);
+    void ptree_helper(const cpp::nested_type_info& nti);
     void recursive_helper_method_creator(const cpp::nested_type_info& nti,
         std::unordered_set<std::string>& types_done);
     void create_helper_methods(const cpp::class_info& ci);

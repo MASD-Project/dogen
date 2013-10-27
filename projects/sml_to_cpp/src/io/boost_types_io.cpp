@@ -150,6 +150,15 @@ std::ostream& operator<<(std::ostream& s, const boost_types& v) {
     case boost_types::serialization_pair:
         attr = "\"serialization_pair\"";
         break;
+    case boost_types::ptree:
+        attr = "\"ptree\"";
+        break;
+    case boost_types::serialization_ptree:
+        attr = "\"serialization_ptree\"";
+        break;
+    case boost_types::io_ptree:
+        attr = "\"io_ptree\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for boost_types");
     }

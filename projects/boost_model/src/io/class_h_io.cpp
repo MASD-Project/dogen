@@ -18,13 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/hash/class_a_hash.hpp"
-#include "dogen/boost_model/hash/class_b_hash.hpp"
-#include "dogen/boost_model/hash/class_base_hash.hpp"
-#include "dogen/boost_model/hash/class_d_hash.hpp"
-#include "dogen/boost_model/hash/class_derived_hash.hpp"
-#include "dogen/boost_model/hash/class_e_hash.hpp"
-#include "dogen/boost_model/hash/class_f_hash.hpp"
-#include "dogen/boost_model/hash/class_g_hash.hpp"
-#include "dogen/boost_model/hash/class_h_hash.hpp"
-#include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
+#include <boost/property_tree/json_parser.hpp>
+#include <ostream>
+#include "dogen/boost_model/io/class_h_io.hpp"
+
+namespace boost {
+namespace property_tree {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::property_tree::ptree& v) {
+    write_json(s, v);
+    return s;
+}
+
+} }
+
+namespace dogen {
+namespace boost_model {
+
+std::ostream& operator<<(std::ostream& s, const class_h& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::boost_model::class_h\"" << ", "
+      << "\"prop_0\": " << v.prop_0()
+      << " }";
+    return(s);
+}
+
+} }

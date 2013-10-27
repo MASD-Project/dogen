@@ -38,6 +38,7 @@ const std::string filesystem_path_type("path");
 const std::string gregorian_date_type("date");
 const std::string ptime_type("ptime");
 const std::string time_duration_type("time_duration");
+const std::string ptree_type("ptree");
 
 const std::string optional_include("boost/optional.hpp");
 const std::string variant_include("boost/variant.hpp");
@@ -82,14 +83,18 @@ const std::string ptime_include(
     "boost/date_time/posix_time/posix_time_types.hpp");
 const std::string time_duration_include(
     "boost/date_time/posix_time/posix_time_types.hpp");
+const std::string ptree_include("boost/property_tree/ptree.hpp");
 const std::string serialization_gregorian_date_include(
     "boost/date_time/gregorian/greg_serialize.hpp");
 const std::string serialization_ptime_include(
     "boost/date_time/posix_time/time_serialize.hpp");
 const std::string serialization_time_duration_include(
     "boost/date_time/posix_time/time_serialize.hpp");
+const std::string serialization_ptree_include(
+    "boost/property_tree/ptree_serialization.hpp");
 const std::string io_date_include("boost/date_time/gregorian/gregorian.hpp");
 const std::string io_time_include("boost/date_time/posix_time/posix_time.hpp");
+const std::string io_ptree_include("boost/property_tree/json_parser.hpp");
 const std::string serialization_pair_include("boost/serialization/utility.hpp");
 
 const std::string error_message("Invalid or unexpected boost type");
@@ -111,6 +116,7 @@ std::string boost_model_helper::type(const boost_types t) const {
     case boost_types::filesystem_path: return filesystem_path_type;
     case boost_types::gregorian_date: return gregorian_date_type;
     case boost_types::ptime: return ptime_type;
+    case boost_types::ptree: return ptree_type;
     case boost_types::time_duration: return time_duration_type;
     default: break;
     }
@@ -167,13 +173,16 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::gregorian_date: return gregorian_date_include;
     case boost_types::ptime: return ptime_include;
     case boost_types::time_duration: return time_duration_include;
+    case boost_types::ptree: return ptree_include;
     case boost_types::serialization_gregorian_date:
         return serialization_gregorian_date_include;
     case boost_types::serialization_ptime: return serialization_ptime_include;
     case boost_types::serialization_time_duration:
         return serialization_time_duration_include;
+    case boost_types::serialization_ptree: return serialization_ptree_include;
     case boost_types::io_gregorian_date: return io_date_include;
     case boost_types::io_time: return io_time_include;
+    case boost_types::io_ptree: return io_ptree_include;
     case boost_types::serialization_pair: return serialization_pair_include;
     default: break;
     }

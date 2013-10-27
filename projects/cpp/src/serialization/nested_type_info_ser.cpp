@@ -65,6 +65,7 @@ void save(Archive& ar,
     ar << make_nvp("is_ptime", v.is_ptime_);
     ar << make_nvp("is_time_duration", v.is_time_duration_);
     ar << make_nvp("is_pair", v.is_pair_);
+    ar << make_nvp("is_ptree", v.is_ptree_);
 }
 
 template<typename Archive>
@@ -93,6 +94,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_ptime", v.is_ptime_);
     ar >> make_nvp("is_time_duration", v.is_time_duration_);
     ar >> make_nvp("is_pair", v.is_pair_);
+    ar >> make_nvp("is_ptree", v.is_ptree_);
 }
 
 } }

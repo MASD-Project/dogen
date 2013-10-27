@@ -58,6 +58,7 @@ const std::string invalid_smart_pointer(
 const std::string invalid_variant("Variants should have at least one type");
 const std::string invalid_pair_type(
     "Pair types have exactly two type arguments");
+const std::string invalid_ptree("Ptree's should have no type arguments");
 
 std::string parent_tag(const unsigned int number) {
     std::ostringstream s;
@@ -568,6 +569,33 @@ variant_helper(const cpp::nested_type_info& nti) {
     utility_.blank_line(2);
 }
 
+void inserter_implementation::ptree_helper(const cpp::nested_type_info& nti) {
+    const auto children(nti.children());
+    if (!children.empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_ptree;
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_ptree));
+    }
+
+    {
+        namespace_helper ns_helper(stream_, nti.namespaces());
+
+        utility_.blank_line();
+        stream_ << indenter_ << "inline std::ostream& operator<<"
+                << "(std::ostream& s, const "
+                << nti.complete_name() << "& v) ";
+
+        utility_.open_scope();
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "write_json(s, v);" << std::endl
+                    << indenter_ << "return s;" << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
 void inserter_implementation::tidy_up_string_method() {
     utility_.blank_line();
     stream_ << indenter_ << "inline std::string tidy_up_string"
@@ -615,6 +643,8 @@ recursive_helper_method_creator(const cpp::nested_type_info& nti,
         pair_helper(nti);
     else if (nti.is_variant_like())
         variant_helper(nti);
+    else if (nti.is_ptree())
+        ptree_helper(nti);
     else if (nti.is_string_like() && !nti.is_char_like())
         tidy_up_string_method();
 

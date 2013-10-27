@@ -75,7 +75,8 @@ bool hash_implementation::is_hashable(const cpp::nested_type_info& nti) {
         !nti.is_date() &&
         !nti.is_ptime() &&
         !nti.is_time_duration() &&
-        !nti.is_filesystem_path();
+        !nti.is_filesystem_path() &&
+        !nti.is_ptree();
 }
 
 void hash_implementation::combine_function(const cpp::class_info& ci) {
@@ -495,6 +496,40 @@ time_duration_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
+void hash_implementation::ptree_helper(const cpp::nested_type_info& nti) {
+    const std::string identifiable_type_name(
+        nti.complete_identifiable_name());
+    const std::string type_name(nti.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_" << identifiable_type_name
+            << "(const " << type_name << "& v) ";
+
+    utility_.open_scope();
+    {
+        positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        stream_ << indenter_
+                << "for (const auto& node : v) ";
+
+        utility_.open_scope();
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "combine(seed, node.first);" << std::endl
+                    << indenter_ << "combine(seed, node.second.data());"
+                    << std::endl
+                    << indenter_ << "combine(seed, hash_"
+                    << identifiable_type_name << "(node.second));" << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
+        stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
 void hash_implementation::
 recursive_helper_method_creator(const cpp::nested_type_info& nti,
     std::unordered_set<std::string>& types_done) {
@@ -525,6 +560,8 @@ recursive_helper_method_creator(const cpp::nested_type_info& nti,
         ptime_helper(nti);
     else if (nti.is_time_duration())
         time_duration_helper(nti);
+    else if (nti.is_ptree())
+        ptree_helper(nti);
     else if (nti.is_filesystem_path())
         path_helper(nti);
 

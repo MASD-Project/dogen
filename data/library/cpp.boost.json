@@ -157,6 +157,21 @@
                 "cpp.io.header.file_name" : "boost/date_time/posix_time/posix_time.hpp",
                 "cpp.io.header.is_system" : true
             }
+        },
+        {
+            "meta_type" : "value_object",
+            "simple_name" : "ptree",
+            "module_path" : [
+                "property_tree"
+            ],
+            "tags" : {
+                "cpp.domain.header.file_name" : "boost/property_tree/ptree.hpp",
+                "cpp.domain.header.is_system" : true,
+                "cpp.serialization.boost.header.file_name" : "boost/property_tree/ptree_serialization.hpp",
+                "cpp.serialization.boost.header.is_system" : true,
+                "cpp.io.header.file_name" : "boost/property_tree/json_parser.hpp",
+                "cpp.io.header.is_system" : true
+            }
         }
     ]
 }
