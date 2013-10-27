@@ -33,6 +33,7 @@
 #include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
+#include "dogen/om/types/module_formatter_interface.hpp"
 
 namespace dogen {
 namespace om {
@@ -41,6 +42,7 @@ namespace om {
  * @brief Formats SML types into their C++ representation.
  */
 class cpp_types_main_header_file_formatter : public type_formatter_interface,
+                                             public module_formatter_interface,
                                              private sml::type_visitor {
 public:
     cpp_types_main_header_file_formatter(
@@ -153,6 +155,9 @@ private:
     void visit(const sml::entity& e) const override;
 
 public:
+    file format(const sml::module& module, const licence& l,
+        const modeline& modeline, const std::string& marker) const override;
+
     file format(const sml::type& t, const licence& l,
         const modeline& m, const std::string& marker,
         const sml::property_cache_interface& c) const override;

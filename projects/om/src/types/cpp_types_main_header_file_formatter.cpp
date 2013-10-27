@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
+#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/tags.hpp"
@@ -839,6 +840,52 @@ visit(const dogen::sml::entity& e) const {
     ensure_non_null_context();
     context_->overwrite(true);
     format(e);
+}
+
+file cpp_types_main_header_file_formatter::
+format(const sml::module& module, const licence& l, const modeline& modeline,
+    const std::string& marker) const {
+
+    std::ostringstream s;
+    cpp_formatters::indenter ind;
+    cpp_formatters::utility u(s, ind);
+
+    const cpp_includes i = cpp_includes();
+    auto adaptor(sml::make_tag_adaptor(module));
+    const auto& fn(sml::tags::cpp::types::header_file::file_name);
+    const boost::filesystem::path relative_file_path(adaptor.get(fn));
+    const bool gp(adaptor.is_true(sml::tags::generate_preamble));
+
+    cpp_file_boilerplate_formatter f(gp);
+    f.format_begin(s, l, modeline, marker, i, relative_file_path);
+    const auto ns(namespaces(module.name()));
+
+    if (!ns.empty()) {
+
+        cpp_formatters::namespace_helper nsh(s, ns);
+        u.blank_line();
+
+        cpp_formatters::namespace_formatter nsf(s);
+        doxygen_next_.format(s, module.documentation());
+        nsf.format_start(module.name().simple_name());
+        nsf.format_end();
+
+        s << " ";
+    } else {
+        cpp_formatters::namespace_formatter nsf(s);
+        doxygen_next_.format(s, module.documentation());
+        nsf.format_start(module.name().simple_name());
+        nsf.format_end();
+    }
+    u.blank_line();
+    f.format_end(s, modeline, relative_file_path);
+
+    file r;
+    r.contents(s.str());
+    r.overwrite(false);
+    r.relative_path(relative_file_path);
+
+    return r;
 }
 
 file cpp_types_main_header_file_formatter::

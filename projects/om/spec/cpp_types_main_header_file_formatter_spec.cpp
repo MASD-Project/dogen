@@ -32,6 +32,7 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -150,6 +151,15 @@ public:
 }
 )");
 
+const std::string module_in_named_model(R"(namespace some_model_0 {
+
+/**
+ * @brief Some documentation
+ */
+namespace some_module_0 {
+} }
+)");
+
 /*
   FIXME: remvoed for now
   public:
@@ -234,9 +244,10 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_he
 
     const auto r(f.format(e, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == enumeration_two_enumerators);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << enumeration_two_enumerators
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
+                             << enumeration_two_enumerators
                              << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r.contents() << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
@@ -253,8 +264,9 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
 
     const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == object_no_properties);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << object_no_properties << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r.contents() << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << object_no_properties
+                             << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
@@ -271,8 +283,8 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
     mock_property_cache c;
     const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == parent_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << parent_object << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << parent_object << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
@@ -289,8 +301,9 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
     mock_property_cache c;
     const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == leaf_child_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << leaf_child_object << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << leaf_child_object
+                             << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
@@ -309,9 +322,9 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
 
     const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == non_leaf_child_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << non_leaf_child_object
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << non_leaf_child_object
                              << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r.contents() << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected_types_header) {
@@ -331,9 +344,9 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     mock_property_cache c;
     const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == all_explicitly_defaulted_functions);
-    BOOST_LOG_SEV(lg, debug) << "expected: "
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                              << all_explicitly_defaulted_functions << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r.contents() << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_types_header) {
@@ -358,9 +371,9 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_typ
 
     const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == manual_default_constructor);
-    BOOST_LOG_SEV(lg, debug) << "expected: "
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                              << manual_default_constructor << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r.contents() << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_header) {
@@ -385,9 +398,29 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_
 
     const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
     BOOST_CHECK(r.contents() == manual_move_constructor);
-    BOOST_LOG_SEV(lg, debug) << "expected: "
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                              << manual_move_constructor << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r.contents() << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+}
+
+BOOST_AUTO_TEST_CASE(module_with_comments_produces_expected_types_header) {
+    SETUP_TEST_LOG_SOURCE("module_with_comments_produces_expected_types_header");
+
+    const auto m(factory::build_single_type_model_in_module(0,
+            dogen::sml::test::mock_model_factory::object_types::value_object,
+            1));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.modules().size() == 1);
+
+    dogen::om::cpp_types_main_header_file_formatter f;
+    const auto& module(m.modules().begin()->second);
+    BOOST_LOG_SEV(lg, debug) << "module: " << module;
+
+    const auto r(f.format(module, empty_licence, empty_modeline, empty_marker));
+    BOOST_CHECK(r.contents() == module_in_named_model);
+    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << module_in_named_model
+                             << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <end>" << r.contents() << "<end>";
 }
 
 BOOST_AUTO_TEST_SUITE_END()

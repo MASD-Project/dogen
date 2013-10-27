@@ -20,11 +20,9 @@
  */
 #include <list>
 #include "dogen/sml/types/type.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
-#include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/tag_adaptor.hpp"
 #include "dogen/sml/types/all_types_traversal.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
@@ -34,11 +32,9 @@
 #include "dogen/om/io/licence_io.hpp"
 #include "dogen/om/types/licence_hydrator.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
-#include "dogen/sml/types/property_cache.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline_group.hpp"
+
 #include "dogen/om/types/workflow_error.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
 #include "dogen/om/types/workflow.hpp"
@@ -51,55 +47,11 @@ auto lg(logger_factory("om.workflow"));
 const std::string missing_context_ptr("Context pointer is null");
 const std::string modeline_groups_dir("modeline_groups");
 const std::string licence_dir("licences");
-const std::string missing_licence("Licence not found: ");
-const std::string missing_modeline_group("Modeline group not found: ");
-const std::string missing_modeline("Modeline not found: ");
-const std::string cpp_modeline_name("c++");
+
 }
 
 namespace dogen {
 namespace om {
-
-class workflow::context {
-public:
-    sml::property_cache& property_cache() {
-        return property_cache_;
-    }
-
-    const std::unordered_map<std::string, modeline_group>& modeline_groups() {
-        return modeline_groups_;
-    }
-
-    void modeline_groups(
-        const std::unordered_map<std::string, modeline_group>& v) {
-        modeline_groups_ = v;
-    }
-
-    const std::unordered_map<std::string, licence>& licences() const {
-        return licences_;
-    }
-
-    void licences(const std::unordered_map<std::string, licence>& v) {
-        licences_ = v;
-    }
-
-    std::string code_generation_marker() {
-        return code_generation_marker_;
-    }
-
-    void code_generation_marker(const std::string& v) {
-        code_generation_marker_ = v;
-    }
-
-    std::list<file>& files() { return files_; }
-
-private:
-    sml::property_cache property_cache_;
-    std::unordered_map<std::string, modeline_group> modeline_groups_;
-    std::unordered_map<std::string, licence> licences_;
-    std::string code_generation_marker_;
-    std::list<file> files_;
-};
 
 workflow::
 workflow(const std::list<boost::filesystem::path>& data_files_directories)
@@ -111,6 +63,12 @@ void workflow::ensure_non_null_context() const {
 
     BOOST_LOG_SEV(lg, error) << missing_context_ptr;
     BOOST_THROW_EXCEPTION(workflow_error(missing_context_ptr));
+}
+
+void workflow::
+throw_missing_item(const std::string& msg, const std::string& n) const {
+    BOOST_LOG_SEV(lg, error) << msg << n;
+    BOOST_THROW_EXCEPTION(workflow_error(msg + n));
 }
 
 std::list<boost::filesystem::path>
@@ -174,59 +132,52 @@ void workflow::setup_reference_data_subworkflow(const sml::model& m) {
 
 void workflow::operator()(const sml::type& t) const {
     ensure_non_null_context();
-    auto adaptor(sml::make_tag_adaptor(t));
-
-    const auto licence_name(adaptor.get(sml::tags::licence_name));
-    const auto i(context_->licences().find(licence_name));
-    if (i == context_->licences().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_licence << licence_name;
-        BOOST_THROW_EXCEPTION(workflow_error(missing_licence + licence_name));
-    }
-    auto licence(i->second);
-    if (adaptor.has_key(sml::tags::copyright_holder)) {
-        const auto copyright_holder(adaptor.get(sml::tags::copyright_holder));
-        licence.copyright_holders().push_back(copyright_holder);
-    }
-
-    const auto modeline_group_name(adaptor.get(sml::tags::modeline_group_name));
-    const auto j(context_->modeline_groups().find(modeline_group_name));
-    if (j == context_->modeline_groups().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_modeline_group
-                                 << modeline_group_name;
-        BOOST_THROW_EXCEPTION(
-            workflow_error(missing_modeline_group + modeline_group_name));
-    }
-
-    const auto modeline_group(j->second);
-    const auto k(modeline_group.modelines().find(cpp_modeline_name));
-    if (k == modeline_group.modelines().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_modeline << cpp_modeline_name;
-        BOOST_THROW_EXCEPTION(
-            workflow_error(missing_modeline + cpp_modeline_name));
-    }
-    const auto modeline(k->second);
-    const auto cgm(adaptor.get(sml::tags::code_generation_marker));
+    auto licence(extract_licence(t));
+    const auto modeline(extract_modeline(t));
+    const auto marker(extract_marker(t));
 
     cpp_types_main_header_file_formatter f;
     const auto& pc(context_->property_cache());
-    const auto file(f.format(t, licence, modeline, cgm, pc));
+    const auto file(f.format(t, licence, modeline, marker, pc));
     context_->files().push_back(file);
 }
 
-void workflow::operator()(const sml::module& /*m*/) const {
+void workflow::operator()(const sml::module& m) const {
     ensure_non_null_context();
+
+    auto licence(extract_licence(m));
+    const auto modeline(extract_modeline(m));
+    const auto marker(extract_marker(m));
+
+    cpp_types_main_header_file_formatter f;
+    const auto file(f.format(m, licence, modeline, marker));
+    context_->files().push_back(file);
 }
 
 void workflow::operator()(const sml::concept& /*c*/) const {
     // do nothing
 }
 
+void workflow::model_file_subworkflow(const sml::model& model) {
+    if (model.documentation().empty())
+        return;
+
+    sml::module module;
+    module.name().simple_name(model.name().model_name());
+    module.name().external_module_path(model.name().external_module_path());
+    module.documentation(model.documentation());
+    module.complex_tags(model.complex_tags());
+    module.simple_tags(model.simple_tags());
+    operator()(module);
+}
+
 std::list<file> workflow::execute(const sml::model& m) {
-    context_ = std::shared_ptr<context>(new context());
+    context_ = std::unique_ptr<context>(new context());
     setup_reference_data_subworkflow(m);
     sml::all_model_items_traversal(m, *this);
+    model_file_subworkflow(m);
     const auto r(context_->files());
-    context_ = std::shared_ptr<context>();
+    context_ = std::unique_ptr<context>();
     return r;
 }
 

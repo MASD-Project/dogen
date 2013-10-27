@@ -10,16 +10,17 @@ This file contains all stories that were closed during sprint 37.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-25 Fri 08:18]
+Clock summary at [2013-10-27 Sun 11:34]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *4:42* |      |      |
+| *Total time*                                                             | *7:02* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                          |        | 4:42 |      |
+| Development Stories Implemented                                          |        | 7:02 |      |
 | IMPLEMENTATION Release notes and backlog grooming                        |        |      | 0:06 |
 | COMPLETED Add types header formatter to workflow                         |        |      | 4:14 |
-| IMPLEMENTATION Add tests for properties and compiler generated functions |        |      | 0:22 |
+| IMPLEMENTATION Add module support to types header formatter              |        |      | 2:12 |
+| IMPLEMENTATION Add tests for properties and compiler generated functions |        |      | 0:30 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -48,6 +49,16 @@ Clock summary at [2013-10-25 Fri 08:18]
      CLOCK: [2013-10-24 Thu 22:40]--[2013-10-25 Fri 00:19] =>  1:39
      CLOCK: [2013-10-24 Thu 18:14]--[2013-10-24 Thu 18:46] =>  0:32
      CLOCK: [2013-10-24 Thu 18:10]--[2013-10-24 Thu 18:14] =>  0:04
+
+*** IMPLEMENTATION Add module support to types header formatter       :story:
+**** Add test for module in model
+**** COMPLETED Generic module support                                  :task:
+     CLOSED: [2013-10-27 Sun 11:33]
+     CLOCK: [2013-10-27 Sun 09:39]--[2013-10-27 Sun 11:32] =>  1:53
+
+**** COMPLETED Support model as a module                               :task:
+     CLOSED: [2013-10-27 Sun 11:33]
+     CLOCK: [2013-10-27 Sun 09:20]--[2013-10-27 Sun 09:39] =>  0:19
 
 *** IMPLEMENTATION Add tests for properties and compiler generated functions :story:
     CLOCK: [2013-10-25 Fri 08:27]--[2013-10-25 Fri 08:35] =>  0:08

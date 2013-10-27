@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_TYPE_FORMATTER_INTERFACE_HPP
-#define DOGEN_OM_TYPES_TYPE_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_OM_TYPES_MODULE_FORMATTER_INTERFACE_HPP
+#define DOGEN_OM_TYPES_MODULE_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,8 +27,7 @@
 
 #include <iosfwd>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/type.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
+#include "dogen/sml/types/module.hpp"
 #include "dogen/om/types/file.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline.hpp"
@@ -40,23 +39,22 @@ namespace om {
  * @brief Formatter that is responsible for the formtatting of a
  * single type.
  */
-class type_formatter_interface {
+class module_formatter_interface {
 public:
-    type_formatter_interface() = default;
-    type_formatter_interface(const type_formatter_interface&) = default;
-    type_formatter_interface(type_formatter_interface&&) = default;
+    module_formatter_interface() = default;
+    module_formatter_interface(const module_formatter_interface&) = default;
+    module_formatter_interface(module_formatter_interface&&) = default;
 
 public:
-    virtual ~type_formatter_interface() noexcept { }
+    virtual ~module_formatter_interface() noexcept { }
 
 public:
     /**
      * @brief Format the type according to some grammar into the
      * stream.
      */
-    virtual file format(const sml::type& t, const licence& l,
-        const modeline& m, const std::string& marker,
-        const sml::property_cache_interface& pc) const = 0;
+    virtual file format(const sml::module& module, const licence& l,
+        const modeline& modeline, const std::string& marker) const = 0;
 };
 
 } }
