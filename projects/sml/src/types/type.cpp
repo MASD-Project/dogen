@@ -53,19 +53,19 @@ type::type()
 
 type::type(type&& rhs)
     : documentation_(std::move(rhs.documentation_)),
-      tags_(std::move(rhs.tags_)),
+      meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)) { }
 
 type::type(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type)
     : documentation_(documentation),
-      tags_(tags),
+      meta_data_(meta_data),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type) { }
@@ -74,7 +74,7 @@ void type::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::type\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-      << "\"tags\": " << tags_ << ", "
+      << "\"meta_data\": " << meta_data_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_
@@ -84,7 +84,7 @@ void type::to_stream(std::ostream& s) const {
 void type::swap(type& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(tags_, other.tags_);
+    swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -92,7 +92,7 @@ void type::swap(type& other) noexcept {
 
 bool type::compare(const type& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        tags_ == rhs.tags_ &&
+        meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_;
@@ -114,20 +114,20 @@ void type::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const boost::property_tree::ptree& type::tags() const {
-    return tags_;
+const boost::property_tree::ptree& type::meta_data() const {
+    return meta_data_;
 }
 
-boost::property_tree::ptree& type::tags() {
-    return tags_;
+boost::property_tree::ptree& type::meta_data() {
+    return meta_data_;
 }
 
-void type::tags(const boost::property_tree::ptree& v) {
-    tags_ = v;
+void type::meta_data(const boost::property_tree::ptree& v) {
+    meta_data_ = v;
 }
 
-void type::tags(const boost::property_tree::ptree&& v) {
-    tags_ = std::move(v);
+void type::meta_data(const boost::property_tree::ptree&& v) {
+    meta_data_ = std::move(v);
 }
 
 const dogen::sml::qname& type::name() const {

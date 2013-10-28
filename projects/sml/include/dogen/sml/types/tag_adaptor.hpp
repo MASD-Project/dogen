@@ -39,7 +39,7 @@ public:
     tag_adaptor(tag_adaptor&&) = default;
 
 public:
-    tag_adaptor(const boost::property_tree::ptree& tags);
+    tag_adaptor(const boost::property_tree::ptree& meta_data);
 
 public:
     /**
@@ -79,12 +79,12 @@ public:
     std::list<std::pair<std::string,std::string> > odb_pragma() const;
 
 private:
-    const boost::property_tree::ptree& tags_;
+    const boost::property_tree::ptree& meta_data_;
 };
 
 template<typename Taggable>
 inline tag_adaptor make_tag_adaptor(const Taggable& t) {
-    return tag_adaptor(t.tags());
+    return tag_adaptor(t.meta_data());
 }
 
 } }

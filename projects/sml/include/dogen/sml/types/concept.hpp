@@ -57,7 +57,7 @@ public:
     concept(
         const std::list<dogen::sml::property>& properties,
         const std::string& documentation,
-        const boost::property_tree::ptree& tags,
+        const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
@@ -99,15 +99,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Tags associated with the object, opaque to SML.
-     *
-     * Tags are in the format key-value pair.
+     * @brief Meta-data associated with the object, opaque to SML.
      */
     /**@{*/
-    const boost::property_tree::ptree& tags() const;
-    boost::property_tree::ptree& tags();
-    void tags(const boost::property_tree::ptree& v);
-    void tags(const boost::property_tree::ptree&& v);
+    const boost::property_tree::ptree& meta_data() const;
+    boost::property_tree::ptree& meta_data();
+    void meta_data(const boost::property_tree::ptree& v);
+    void meta_data(const boost::property_tree::ptree&& v);
     /**@}*/
 
     /**
@@ -170,7 +168,7 @@ public:
 private:
     std::list<dogen::sml::property> properties_;
     std::string documentation_;
-    boost::property_tree::ptree tags_;
+    boost::property_tree::ptree meta_data_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;

@@ -29,7 +29,7 @@ module::module()
 
 module::module(module&& rhs)
     : documentation_(std::move(rhs.documentation_)),
-      tags_(std::move(rhs.tags_)),
+      meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
@@ -37,13 +37,13 @@ module::module(module&& rhs)
 
 module::module(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::qname>& members)
     : documentation_(documentation),
-      tags_(tags),
+      meta_data_(meta_data),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -52,7 +52,7 @@ module::module(
 void module::swap(module& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(tags_, other.tags_);
+    swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -61,7 +61,7 @@ void module::swap(module& other) noexcept {
 
 bool module::operator==(const module& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        tags_ == rhs.tags_ &&
+        meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -90,20 +90,20 @@ void module::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const boost::property_tree::ptree& module::tags() const {
-    return tags_;
+const boost::property_tree::ptree& module::meta_data() const {
+    return meta_data_;
 }
 
-boost::property_tree::ptree& module::tags() {
-    return tags_;
+boost::property_tree::ptree& module::meta_data() {
+    return meta_data_;
 }
 
-void module::tags(const boost::property_tree::ptree& v) {
-    tags_ = v;
+void module::meta_data(const boost::property_tree::ptree& v) {
+    meta_data_ = v;
 }
 
-void module::tags(const boost::property_tree::ptree&& v) {
-    tags_ = std::move(v);
+void module::meta_data(const boost::property_tree::ptree&& v) {
+    meta_data_ = std::move(v);
 }
 
 const dogen::sml::qname& module::name() const {

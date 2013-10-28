@@ -65,7 +65,7 @@ std::ostream& operator<<(std::ostream& s, const module& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::module\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"tags\": " << v.tags() << ", "
+      << "\"meta_data\": " << v.meta_data() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "

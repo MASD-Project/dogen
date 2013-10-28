@@ -3,11 +3,11 @@
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<tags class_id="9" tracking_level="0" version="0">
+	<meta_data class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 		<data></data>
-	</tags>
+	</meta_data>
 	<name class_id="10" tracking_level="0" version="0">
 		<model_name>all_primitives</model_name>
 		<external_module_path class_id="11" tracking_level="0" version="0">
@@ -75,11 +75,11 @@
 						<abstract_object class_id="22" tracking_level="0" version="0">
 							<type class_id="23" tracking_level="0" version="0">
 								<documentation></documentation>
-								<tags>
+								<meta_data>
 									<count>0</count>
 									<item_version>0</item_version>
 									<data></data>
-								</tags>
+								</meta_data>
 								<name>
 									<model_name>all_primitives</model_name>
 									<external_module_path>
@@ -100,11 +100,11 @@
 								<item_version>0</item_version>
 								<item class_id="25" tracking_level="0" version="0">
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>bool_property</name>
 									<type class_id="26" tracking_level="0" version="0">
 										<type>
@@ -131,11 +131,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>char_property</name>
 									<type>
 										<type>
@@ -162,11 +162,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>uchar_property</name>
 									<type>
 										<type>
@@ -193,11 +193,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>int_property</name>
 									<type>
 										<type>
@@ -224,11 +224,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>uint_property</name>
 									<type>
 										<type>
@@ -255,11 +255,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>long_property</name>
 									<type>
 										<type>
@@ -286,11 +286,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>ulong_property</name>
 									<type>
 										<type>
@@ -317,11 +317,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>long_long_property</name>
 									<type>
 										<type>
@@ -348,11 +348,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>ulong_long_property</name>
 									<type>
 										<type>
@@ -379,11 +379,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>short_property</name>
 									<type>
 										<type>
@@ -410,11 +410,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>ushort_property</name>
 									<type>
 										<type>
@@ -441,11 +441,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>double_property</name>
 									<type>
 										<type>
@@ -472,11 +472,11 @@
 								</item>
 								<item>
 									<documentation></documentation>
-									<tags>
+									<meta_data>
 										<count>0</count>
 										<item_version>0</item_version>
 										<data></data>
-									</tags>
+									</meta_data>
 									<name>float_property</name>
 									<type>
 										<type>

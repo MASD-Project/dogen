@@ -162,7 +162,7 @@ void workflow::model_file_subworkflow(const sml::model& model) {
     module.name().simple_name(model.name().model_name());
     module.name().external_module_path(model.name().external_module_path());
     module.documentation(model.documentation());
-    module.tags(model.tags());
+    module.meta_data(model.meta_data());
     operator()(module);
 }
 

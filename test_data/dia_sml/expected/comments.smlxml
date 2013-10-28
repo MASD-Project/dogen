@@ -6,7 +6,7 @@
 
 This comment will be applied to the model namespace itself.
 </documentation>
-	<tags class_id="9" tracking_level="0" version="0">
+	<meta_data class_id="9" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
 		<item class_id="10" tracking_level="0" version="0">
@@ -18,7 +18,7 @@ This comment will be applied to the model namespace itself.
 			</second>
 		</item>
 		<data></data>
-	</tags>
+	</meta_data>
 	<name class_id="11" tracking_level="0" version="0">
 		<model_name>comments</model_name>
 		<external_module_path class_id="12" tracking_level="0" version="0">
@@ -64,7 +64,7 @@ This comment will be applied to the model namespace itself.
 			<second class_id="17" tracking_level="0" version="0">
 				<documentation>package2
 </documentation>
-				<tags>
+				<meta_data>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -76,7 +76,7 @@ This comment will be applied to the model namespace itself.
 						</second>
 					</item>
 					<data></data>
-				</tags>
+				</meta_data>
 				<name>
 					<model_name>comments</model_name>
 					<external_module_path>
@@ -114,7 +114,7 @@ This comment will be applied to the model namespace itself.
 			<second>
 				<documentation>package
 </documentation>
-				<tags>
+				<meta_data>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -126,7 +126,7 @@ This comment will be applied to the model namespace itself.
 						</second>
 					</item>
 					<data></data>
-				</tags>
+				</meta_data>
 				<name>
 					<model_name>comments</model_name>
 					<external_module_path>
@@ -189,7 +189,7 @@ This comment will be applied to the model namespace itself.
 second line
 third line with &quot;quote&quot;
 </documentation>
-							<tags>
+							<meta_data>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
@@ -201,7 +201,7 @@ third line with &quot;quote&quot;
 									</second>
 								</item>
 								<data></data>
-							</tags>
+							</meta_data>
 							<name>
 								<model_name>comments</model_name>
 								<external_module_path>
@@ -270,11 +270,11 @@ third line with &quot;quote&quot;
 						<type>
 							<documentation>this is the brief comment
 </documentation>
-							<tags>
+							<meta_data>
 								<count>0</count>
 								<item_version>0</item_version>
 								<data></data>
-							</tags>
+							</meta_data>
 							<name>
 								<model_name>comments</model_name>
 								<external_module_path>
@@ -296,11 +296,11 @@ third line with &quot;quote&quot;
 							<item class_id="30" tracking_level="0" version="0">
 								<documentation>another brief comment
 </documentation>
-								<tags>
+								<meta_data>
 									<count>0</count>
 									<item_version>0</item_version>
 									<data></data>
-								</tags>
+								</meta_data>
 								<name>prop_0</name>
 								<type class_id="31" tracking_level="0" version="0">
 									<type>
@@ -330,11 +330,11 @@ third line with &quot;quote&quot;
 
 a second line
 </documentation>
-								<tags>
+								<meta_data>
 									<count>0</count>
 									<item_version>0</item_version>
 									<data></data>
-								</tags>
+								</meta_data>
 								<name>prop_1</name>
 								<type>
 									<type>
@@ -361,11 +361,11 @@ a second line
 							</item>
 							<item>
 								<documentation></documentation>
-								<tags>
+								<meta_data>
 									<count>0</count>
 									<item_version>0</item_version>
 									<data></data>
-								</tags>
+								</meta_data>
 								<name>prop_2</name>
 								<type>
 									<type>

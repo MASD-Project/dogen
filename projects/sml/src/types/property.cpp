@@ -29,7 +29,7 @@ property::property()
 
 property::property(property&& rhs)
     : documentation_(std::move(rhs.documentation_)),
-      tags_(std::move(rhs.tags_)),
+      meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       type_(std::move(rhs.type_)),
       default_value_(std::move(rhs.default_value_)),
@@ -38,14 +38,14 @@ property::property(property&& rhs)
 
 property::property(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const std::string& name,
     const dogen::sml::nested_qname& type,
     const std::string& default_value,
     const bool is_immutable,
     const bool is_fluent)
     : documentation_(documentation),
-      tags_(tags),
+      meta_data_(meta_data),
       name_(name),
       type_(type),
       default_value_(default_value),
@@ -55,7 +55,7 @@ property::property(
 void property::swap(property& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(tags_, other.tags_);
+    swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(default_value_, other.default_value_);
@@ -65,7 +65,7 @@ void property::swap(property& other) noexcept {
 
 bool property::operator==(const property& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        tags_ == rhs.tags_ &&
+        meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
         default_value_ == rhs.default_value_ &&
@@ -95,20 +95,20 @@ void property::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const boost::property_tree::ptree& property::tags() const {
-    return tags_;
+const boost::property_tree::ptree& property::meta_data() const {
+    return meta_data_;
 }
 
-boost::property_tree::ptree& property::tags() {
-    return tags_;
+boost::property_tree::ptree& property::meta_data() {
+    return meta_data_;
 }
 
-void property::tags(const boost::property_tree::ptree& v) {
-    tags_ = v;
+void property::meta_data(const boost::property_tree::ptree& v) {
+    meta_data_ = v;
 }
 
-void property::tags(const boost::property_tree::ptree&& v) {
-    tags_ = std::move(v);
+void property::meta_data(const boost::property_tree::ptree&& v) {
+    meta_data_ = std::move(v);
 }
 
 const std::string& property::name() const {

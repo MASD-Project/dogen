@@ -50,7 +50,7 @@ std::size_t property_hasher::hash(const property&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_boost_property_tree_ptree(v.tags()));
+    combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.name());
     combine(seed, v.type());
     combine(seed, v.default_value());

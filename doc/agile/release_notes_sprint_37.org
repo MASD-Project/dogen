@@ -10,21 +10,21 @@ This file contains all stories that were closed during sprint 37.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-28 Mon 00:06]
+Clock summary at [2013-10-28 Mon 00:33]
 
-| Headline                                                                 | Time    |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *12:41* |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                          |         | 12:41 |      |
-| IMPLEMENTATION Release notes and backlog grooming                        |         |       | 0:06 |
-| COMPLETED Add types header formatter to workflow                         |         |       | 4:14 |
-| COMPLETED Add support for =boost::property_tree::ptree=                  |         |       | 1:43 |
-| COMPLETED Implement meta-data support as a =ptree=                       |         |       | 2:36 |
-| COMPLETED ODB pragma generation was broken with =ptree= change           |         |       | 1:14 |
-| Simplify usage of router and adaptor by using native =ptree= API         |         |       | 0:06 |
-| IMPLEMENTATION Add module support to types header formatter              |         |       | 2:12 |
-| IMPLEMENTATION Add tests for properties and compiler generated functions |         |       | 0:30 |
+| Headline                                                                        | Time    |       |      |
+|---------------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                    | *13:08* |       |      |
+|---------------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                                 |         | 13:08 |      |
+| IMPLEMENTATION Release notes and backlog grooming                               |         |       | 0:06 |
+| COMPLETED Add types header formatter to workflow                                |         |       | 4:14 |
+| COMPLETED Add support for =boost::property_tree::ptree=                         |         |       | 1:43 |
+| COMPLETED Implement meta-data support as a =ptree=                              |         |       | 2:36 |
+| COMPLETED ODB pragma generation was broken with =ptree= change                  |         |       | 1:14 |
+| IMPLEMENTATION Simplify usage of router and adaptor by using native =ptree= API |         |       | 0:33 |
+| IMPLEMENTATION Add module support to types header formatter                     |         |       | 2:12 |
+| IMPLEMENTATION Add tests for properties and compiler generated functions        |         |       | 0:30 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -142,12 +142,22 @@ could have a standard_hash facet and a boost_hash facet.
     CLOSED: [2013-10-28 Mon 00:06]
     CLOCK: [2013-10-27 Sun 22:52]--[2013-10-28 Mon 00:06] =>  1:14
 
-*** Simplify usage of router and adaptor by using native =ptree= API  :story:
+*** IMPLEMENTATION Simplify usage of router and adaptor by using native =ptree= API :story:
     CLOCK: [2013-10-27 Sun 20:33]--[2013-10-27 Sun 20:39] =>  0:06
 
 In some cases its easier to just use the =ptree= API directly rather
 than the nonsense of adaptor and router. We need to figure out how to
 best rewrite existing code in terms of =ptree=.
+
+**** COMPLETED Rename tags to meta-data                                :task:
+     CLOSED: [2013-10-28 Mon 00:33]
+     CLOCK: [2013-10-28 Mon 00:08]--[2013-10-28 Mon 00:33] =>  0:25
+     CLOCK: [2013-10-27 Sun 22:50]--[2013-10-27 Sun 22:52] =>  0:02
+
+**** Rename router to =ptree_writer=                                   :task:
+**** Rename adaptor to =ptree_reader=                                  :task:
+**** Remove =make_tag_xyz= methods                                     :task:
+**** Make template methods in workflow use meta-data directly          :task:
 
 *** IMPLEMENTATION Add module support to types header formatter       :story:
 **** Add test for module in model

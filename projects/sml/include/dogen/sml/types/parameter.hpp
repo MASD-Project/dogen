@@ -49,7 +49,7 @@ public:
 public:
     parameter(
         const std::string& documentation,
-        const boost::property_tree::ptree& tags,
+        const boost::property_tree::ptree& meta_data,
         const std::string& name,
         const dogen::sml::nested_qname& type);
 
@@ -76,15 +76,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Tags associated with the object, opaque to SML.
-     *
-     * Tags are in the format key-value pair.
+     * @brief Meta-data associated with the object, opaque to SML.
      */
     /**@{*/
-    const boost::property_tree::ptree& tags() const;
-    boost::property_tree::ptree& tags();
-    void tags(const boost::property_tree::ptree& v);
-    void tags(const boost::property_tree::ptree&& v);
+    const boost::property_tree::ptree& meta_data() const;
+    boost::property_tree::ptree& meta_data();
+    void meta_data(const boost::property_tree::ptree& v);
+    void meta_data(const boost::property_tree::ptree&& v);
     /**@}*/
 
     /**
@@ -119,7 +117,7 @@ public:
 
 private:
     std::string documentation_;
-    boost::property_tree::ptree tags_;
+    boost::property_tree::ptree meta_data_;
     std::string name_;
     dogen::sml::nested_qname type_;
 };

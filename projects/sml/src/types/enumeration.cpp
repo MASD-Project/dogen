@@ -43,14 +43,14 @@ namespace sml {
 
 enumeration::enumeration(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
     const dogen::sml::qname& underlying_type,
     const std::vector<dogen::sml::enumerator>& enumerators)
     : dogen::sml::type(documentation,
-      tags,
+      meta_data,
       name,
       generation_type,
       origin_type),

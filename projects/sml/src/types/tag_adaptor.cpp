@@ -31,10 +31,11 @@ namespace dogen {
 namespace sml {
 
 tag_adaptor::
-tag_adaptor(const boost::property_tree::ptree& tags) : tags_(tags) { }
+tag_adaptor(const boost::property_tree::ptree& meta_data)
+    : meta_data_(meta_data) { }
 
 bool tag_adaptor::has_key(const std::string& key) const {
-    const auto node(tags_.get_optional<std::string>(key));
+    const auto node(meta_data_.get_optional<std::string>(key));
     return node;
 }
 
@@ -48,7 +49,7 @@ bool tag_adaptor::is_false(const std::string& key) const {
 }
 
 std::string tag_adaptor::get(const std::string& key) const {
-    const auto v(tags_.get_optional<std::string>(key));
+    const auto v(meta_data_.get_optional<std::string>(key));
     if (v)
         return *v;
 
@@ -64,7 +65,7 @@ std::list<std::pair<std::string,std::string> > tag_adaptor::odb_pragma() const {
     std::list<std::pair<std::string, std::string> > r;
 
     using boost::property_tree::ptree;
-    const auto child(tags_.get_child_optional(tags::odb_pragma));
+    const auto child(meta_data_.get_child_optional(tags::odb_pragma));
     if (!child)
         return r;
 

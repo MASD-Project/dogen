@@ -46,7 +46,7 @@ abstract_entity::abstract_entity()
 
 abstract_entity::abstract_entity(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -66,7 +66,7 @@ abstract_entity::abstract_entity(
     const bool is_aggregate_root,
     const std::list<dogen::sml::property>& identity)
     : dogen::sml::abstract_object(documentation,
-      tags,
+      meta_data,
       name,
       generation_type,
       origin_type,

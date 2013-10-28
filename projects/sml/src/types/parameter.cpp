@@ -25,31 +25,31 @@ namespace sml {
 
 parameter::parameter(parameter&& rhs)
     : documentation_(std::move(rhs.documentation_)),
-      tags_(std::move(rhs.tags_)),
+      meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       type_(std::move(rhs.type_)) { }
 
 parameter::parameter(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const std::string& name,
     const dogen::sml::nested_qname& type)
     : documentation_(documentation),
-      tags_(tags),
+      meta_data_(meta_data),
       name_(name),
       type_(type) { }
 
 void parameter::swap(parameter& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(tags_, other.tags_);
+    swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(type_, other.type_);
 }
 
 bool parameter::operator==(const parameter& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        tags_ == rhs.tags_ &&
+        meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_;
 }
@@ -76,20 +76,20 @@ void parameter::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const boost::property_tree::ptree& parameter::tags() const {
-    return tags_;
+const boost::property_tree::ptree& parameter::meta_data() const {
+    return meta_data_;
 }
 
-boost::property_tree::ptree& parameter::tags() {
-    return tags_;
+boost::property_tree::ptree& parameter::meta_data() {
+    return meta_data_;
 }
 
-void parameter::tags(const boost::property_tree::ptree& v) {
-    tags_ = v;
+void parameter::meta_data(const boost::property_tree::ptree& v) {
+    meta_data_ = v;
 }
 
-void parameter::tags(const boost::property_tree::ptree&& v) {
-    tags_ = std::move(v);
+void parameter::meta_data(const boost::property_tree::ptree&& v) {
+    meta_data_ = std::move(v);
 }
 
 const std::string& parameter::name() const {

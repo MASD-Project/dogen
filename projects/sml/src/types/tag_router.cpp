@@ -38,28 +38,28 @@ const std::string duplicated_key(
 namespace dogen {
 namespace sml {
 
-tag_router::tag_router(boost::property_tree::ptree& tags)
-    : tags_(tags) { }
+tag_router::tag_router(boost::property_tree::ptree& meta_data)
+    : meta_data_(meta_data) { }
 
 bool tag_router::is_complex(const std::string& key) const {
     return key == tags::odb_pragma;
 }
 
 bool tag_router::has_key(const std::string& key) const {
-    const auto node(tags_.get_optional<std::string>(key));
+    const auto node(meta_data_.get_optional<std::string>(key));
     return node;
 }
 
 void tag_router::route(const std::string& key, const std::string& value) {
     using boost::property_tree::ptree;
     if (is_complex(key)) {
-        const auto node(tags_.get_child_optional(key));
+        const auto node(meta_data_.get_child_optional(key));
         unsigned int i(0);
         if (node)
             i = node->size();
 
         const std::string nk(key + "." + boost::lexical_cast<std::string>(i));
-        tags_.put_child(nk, ptree(value));
+        meta_data_.put_child(nk, ptree(value));
         return;
     }
 
@@ -67,7 +67,7 @@ void tag_router::route(const std::string& key, const std::string& value) {
         BOOST_LOG_SEV(lg, error) << duplicated_key << key;
         BOOST_THROW_EXCEPTION(tag_error(duplicated_key + key));
     }
-    tags_.put(key, value);
+    meta_data_.put(key, value);
 }
 
 void tag_router::

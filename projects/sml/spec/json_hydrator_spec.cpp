@@ -219,16 +219,17 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().module_path().empty());
     BOOST_CHECK(m.name().external_module_path().empty());
     BOOST_CHECK(m.documentation() == documentation);
-    BOOST_CHECK(m.tags().size() == 2);
+    BOOST_CHECK(m.meta_data().size() == 2);
 
     {
-        auto i(m.tags().find(dogen::sml::tags::odb_pragma));
-        BOOST_REQUIRE(i != m.tags().not_found());
-        BOOST_REQUIRE(i->second.size() == 0);
-        BOOST_CHECK(i->second.data() == odb_pragma_value);
+        auto i(m.meta_data().find(dogen::sml::tags::odb_pragma));
+        BOOST_REQUIRE(i != m.meta_data().not_found());
+        BOOST_REQUIRE(i->second.size() == 1);
+        const auto j(i->second.begin());
+        BOOST_CHECK(j->second.data() == odb_pragma_value);
 
-        i = m.tags().find(model_key);
-        BOOST_REQUIRE(i != m.tags().not_found());
+        i = m.meta_data().find(model_key);
+        BOOST_REQUIRE(i != m.meta_data().not_found());
         BOOST_REQUIRE(i->second.size() == 0);
         BOOST_CHECK(i->second.data() == model_value);
     }
@@ -247,13 +248,14 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
 
     {
         const auto& o(*pair.second);
-        auto i(o.tags().find(dogen::sml::tags::odb_pragma));
-        BOOST_REQUIRE(i != m.tags().not_found());
-        BOOST_REQUIRE(i->second.size() == 0);
-        BOOST_CHECK(i->second.data() == odb_pragma_value);
+        auto i(o.meta_data().find(dogen::sml::tags::odb_pragma));
+        BOOST_REQUIRE(i != m.meta_data().not_found());
+        BOOST_REQUIRE(i->second.size() == 1);
+        const auto j(i->second.begin());
+        BOOST_CHECK(j->second.data() == odb_pragma_value);
 
-        i = o.tags().find(type_key);
-        BOOST_REQUIRE(i != m.tags().not_found());
+        i = o.meta_data().find(type_key);
+        BOOST_REQUIRE(i != m.meta_data().not_found());
         BOOST_REQUIRE(i->second.size() == 0);
         BOOST_CHECK(i->second.data() == type_value);
     }

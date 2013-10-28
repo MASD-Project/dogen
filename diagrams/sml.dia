@@ -5019,16 +5019,16 @@ for Java, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="-69,50"/>
+        <dia:point val="-66,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-69.05,49.95;-55.36,53.65"/>
+        <dia:rectangle val="-66.05,49.95;-50.435,53.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-69,50"/>
+        <dia:point val="-66,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -5040,7 +5040,7 @@ for Java, etc.#</dia:string>
         <dia:string>#concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Ability to have tags attached.#</dia:string>
+        <dia:string>#Ability to have meta-data associated.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5123,7 +5123,7 @@ for Java, etc.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#tags#</dia:string>
+            <dia:string>#meta_data#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::property_tree::ptree#</dia:string>
@@ -5132,9 +5132,7 @@ for Java, etc.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Tags associated with the object, opaque to SML.
-
-Tags are in the format key-value pair.#</dia:string>
+            <dia:string>#Meta-data associated with the object, opaque to SML.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5330,17 +5328,17 @@ Tags are in the format key-value pair.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O45">
       <dia:attribute name="obj_pos">
-        <dia:point val="-62.205,53.6"/>
+        <dia:point val="-58.2425,53.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-63.055,53.55;-60.695,70.05"/>
+        <dia:rectangle val="-60.795,53.55;-57.3925,70.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-62.205,53.6"/>
-        <dia:point val="-62.205,60"/>
+        <dia:point val="-58.2425,53.6"/>
+        <dia:point val="-58.2425,60"/>
         <dia:point val="-60.745,60"/>
         <dia:point val="-60.745,70"/>
       </dia:attribute>

@@ -79,7 +79,7 @@ std::size_t concept_hasher::hash(const concept&v) {
 
     combine(seed, hash_std_list_dogen_sml_property(v.properties()));
     combine(seed, v.documentation());
-    combine(seed, hash_boost_property_tree_ptree(v.tags()));
+    combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());

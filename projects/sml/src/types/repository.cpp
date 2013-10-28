@@ -27,7 +27,7 @@ namespace sml {
 
 repository::repository(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -45,7 +45,7 @@ repository::repository(
     const bool is_fluent,
     const std::list<dogen::sml::qname>& modeled_concepts)
     : dogen::sml::abstract_object(documentation,
-      tags,
+      meta_data,
       name,
       generation_type,
       origin_type,

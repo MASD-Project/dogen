@@ -79,7 +79,7 @@ std::ostream& operator<<(std::ostream& s, const operation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::operation\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"tags\": " << v.tags() << ", "
+      << "\"meta_data\": " << v.meta_data() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"parameters\": " << v.parameters() << ", "
       << "\"type\": " << v.type()

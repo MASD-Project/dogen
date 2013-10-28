@@ -160,7 +160,7 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.tags(create_boost_property_tree_ptree(position + 1));
+    v.meta_data(create_boost_property_tree_ptree(position + 1));
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));

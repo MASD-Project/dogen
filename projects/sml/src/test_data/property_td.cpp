@@ -59,7 +59,7 @@ property_generator::property_generator() : position_(0) { }
 void property_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.tags(create_boost_property_tree_ptree(position + 1));
+    v.meta_data(create_boost_property_tree_ptree(position + 1));
     v.name(create_std_string(position + 2));
     v.type(create_dogen_sml_nested_qname(position + 3));
     v.default_value(create_std_string(position + 4));

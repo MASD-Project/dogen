@@ -43,7 +43,7 @@ public:
     tag_router(tag_router&&) = default;
 
 public:
-    tag_router(boost::property_tree::ptree& tags);
+    tag_router(boost::property_tree::ptree& meta_data);
 
 private:
     /**
@@ -53,7 +53,7 @@ private:
     bool is_complex(const std::string& key) const;
 
     /**
-     * @brief Returns true if the key exists in the simple tags
+     * @brief Returns true if the key exists in the simple meta_data
      * container.
      */
     bool has_key(const std::string& key) const;
@@ -81,7 +81,7 @@ public:
         const std::list<std::pair<std::string, std::string> >& kvps);
 
     /**
-     * @brief Routes only if @e key is not in the simple tags
+     * @brief Routes only if @e key is not in the simple meta_data
      * container.
      *
      * @return true if routing was done, false otherwise.
@@ -90,12 +90,12 @@ public:
         const std::string& value);
 
 private:
-    boost::property_tree::ptree& tags_;
+    boost::property_tree::ptree& meta_data_;
 };
 
 template<typename Taggable>
 inline tag_router make_tag_router(Taggable& t) {
-    return tag_router(t.tags());
+    return tag_router(t.meta_data());
 }
 
 } }

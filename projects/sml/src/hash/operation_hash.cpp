@@ -69,7 +69,7 @@ std::size_t operation_hasher::hash(const operation&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_boost_property_tree_ptree(v.tags()));
+    combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.name());
     combine(seed, hash_std_list_dogen_sml_parameter(v.parameters()));
     combine(seed, hash_boost_optional_dogen_sml_nested_qname(v.type()));

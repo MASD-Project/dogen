@@ -104,7 +104,7 @@ void concept_generator::
 populate(const unsigned int position, result_type& v) {
     v.properties(create_std_list_dogen_sml_property(position + 0));
     v.documentation(create_std_string(position + 1));
-    v.tags(create_boost_property_tree_ptree(position + 2));
+    v.meta_data(create_boost_property_tree_ptree(position + 2));
     v.name(create_dogen_sml_qname(position + 3));
     v.generation_type(create_dogen_sml_generation_types(position + 4));
     v.origin_type(create_dogen_sml_origin_types(position + 5));

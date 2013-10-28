@@ -31,7 +31,7 @@ value_object::value_object()
 
 value_object::value_object(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -50,7 +50,7 @@ value_object::value_object(
     const std::list<dogen::sml::qname>& modeled_concepts,
     const dogen::sml::value_object_types& type)
     : dogen::sml::abstract_object(documentation,
-      tags,
+      meta_data,
       name,
       generation_type,
       origin_type,

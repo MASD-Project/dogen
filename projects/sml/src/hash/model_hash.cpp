@@ -125,7 +125,7 @@ std::size_t model_hasher::hash(const model&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_boost_property_tree_ptree(v.tags()));
+    combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());

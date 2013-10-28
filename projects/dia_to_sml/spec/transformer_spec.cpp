@@ -1053,7 +1053,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(!c.model().documentation().empty());
-    BOOST_CHECK(c.model().tags().size() == 1);
+    BOOST_CHECK(c.model().meta_data().size() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
@@ -1068,7 +1068,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().tags().empty());
+    BOOST_CHECK(c.model().meta_data().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
@@ -1083,7 +1083,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().tags().empty());
+    BOOST_CHECK(c.model().meta_data().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
@@ -1099,13 +1099,13 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().tags().empty());
+    BOOST_CHECK(c.model().meta_data().empty());
 
     BOOST_REQUIRE(c.model().modules().size() == 1);
 
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(!p.tags().empty());
+    BOOST_CHECK(!p.meta_data().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
@@ -1121,12 +1121,12 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().tags().empty());
+    BOOST_CHECK(c.model().meta_data().empty());
     BOOST_REQUIRE(c.model().modules().size() == 1);
 
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(p.documentation().empty());
-    BOOST_CHECK(p.tags().empty());
+    BOOST_CHECK(p.meta_data().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
@@ -1142,12 +1142,12 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().tags().empty());
+    BOOST_CHECK(c.model().meta_data().empty());
     BOOST_REQUIRE(c.model().modules().size() == 1);
 
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(p.documentation().empty());
-    BOOST_CHECK(p.tags().empty());
+    BOOST_CHECK(p.meta_data().empty());
 }
 
 BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {

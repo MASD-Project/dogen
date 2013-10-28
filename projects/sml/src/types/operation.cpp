@@ -25,19 +25,19 @@ namespace sml {
 
 operation::operation(operation&& rhs)
     : documentation_(std::move(rhs.documentation_)),
-      tags_(std::move(rhs.tags_)),
+      meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       parameters_(std::move(rhs.parameters_)),
       type_(std::move(rhs.type_)) { }
 
 operation::operation(
     const std::string& documentation,
-    const boost::property_tree::ptree& tags,
+    const boost::property_tree::ptree& meta_data,
     const std::string& name,
     const std::list<dogen::sml::parameter>& parameters,
     const boost::optional<dogen::sml::nested_qname>& type)
     : documentation_(documentation),
-      tags_(tags),
+      meta_data_(meta_data),
       name_(name),
       parameters_(parameters),
       type_(type) { }
@@ -45,7 +45,7 @@ operation::operation(
 void operation::swap(operation& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(tags_, other.tags_);
+    swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(parameters_, other.parameters_);
     swap(type_, other.type_);
@@ -53,7 +53,7 @@ void operation::swap(operation& other) noexcept {
 
 bool operation::operator==(const operation& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        tags_ == rhs.tags_ &&
+        meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         parameters_ == rhs.parameters_ &&
         type_ == rhs.type_;
@@ -81,20 +81,20 @@ void operation::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const boost::property_tree::ptree& operation::tags() const {
-    return tags_;
+const boost::property_tree::ptree& operation::meta_data() const {
+    return meta_data_;
 }
 
-boost::property_tree::ptree& operation::tags() {
-    return tags_;
+boost::property_tree::ptree& operation::meta_data() {
+    return meta_data_;
 }
 
-void operation::tags(const boost::property_tree::ptree& v) {
-    tags_ = v;
+void operation::meta_data(const boost::property_tree::ptree& v) {
+    meta_data_ = v;
 }
 
-void operation::tags(const boost::property_tree::ptree&& v) {
-    tags_ = std::move(v);
+void operation::meta_data(const boost::property_tree::ptree&& v) {
+    meta_data_ = std::move(v);
 }
 
 const std::string& operation::name() const {
