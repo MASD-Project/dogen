@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/tag_error.hpp"
 #include "dogen/sml/types/tags.hpp"
@@ -50,8 +51,15 @@ bool tag_router::has_key(const std::string& key) const {
 }
 
 void tag_router::route(const std::string& key, const std::string& value) {
+    using boost::property_tree::ptree;
     if (is_complex(key)) {
-        tags_.add(key, value);
+        const auto node(tags_.get_child_optional(key));
+        unsigned int i(0);
+        if (node)
+            i = node->size();
+
+        const std::string nk(key + "." + boost::lexical_cast<std::string>(i));
+        tags_.put_child(nk, ptree(value));
         return;
     }
 

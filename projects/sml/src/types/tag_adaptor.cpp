@@ -64,12 +64,12 @@ std::list<std::pair<std::string,std::string> > tag_adaptor::odb_pragma() const {
     std::list<std::pair<std::string, std::string> > r;
 
     using boost::property_tree::ptree;
-    ptree::const_assoc_iterator i(tags_.find(tags::odb_pragma));
-    if (i == tags_.not_found())
+    const auto child(tags_.get_child_optional(tags::odb_pragma));
+    if (!child)
         return r;
 
-    for (const auto& value : i->second)
-        r.push_back(std::make_pair(tags::odb_pragma, value.second.data()));
+    for (auto i(child->begin()); i != child->end(); ++i)
+        r.push_back(std::make_pair(tags::odb_pragma, i->second.data()));
 
     return r;
 }
