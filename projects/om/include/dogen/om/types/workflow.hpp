@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/property_cache.hpp"
 #include "dogen/om/types/file.hpp"
 #include "dogen/om/types/licence.hpp"
@@ -55,41 +55,7 @@ public:
     workflow(const std::list<boost::filesystem::path>& data_files_directories);
 
 private:
-    class context {
-    public:
-        sml::property_cache& property_cache() { return property_cache_; }
-
-        const std::unordered_map<std::string, modeline_group>&
-        modeline_groups() { return modeline_groups_; }
-
-        void modeline_groups(
-            const std::unordered_map<std::string, modeline_group>& v) {
-            modeline_groups_ = v;
-        }
-
-        const std::unordered_map<std::string, licence>& licences() const {
-            return licences_;
-        }
-
-        void licences(const std::unordered_map<std::string, licence>& v) {
-            licences_ = v;
-        }
-
-        std::string code_generation_marker() { return code_generation_marker_; }
-
-        void code_generation_marker(const std::string& v) {
-            code_generation_marker_ = v;
-        }
-
-        std::list<file>& files() { return files_; }
-
-    private:
-        sml::property_cache property_cache_;
-        std::unordered_map<std::string, modeline_group> modeline_groups_;
-        std::unordered_map<std::string, licence> licences_;
-        std::string code_generation_marker_;
-        std::list<file> files_;
-    };
+    class context;
 
     /**
      * @brief Throws if context is null.
@@ -97,69 +63,28 @@ private:
     void ensure_non_null_context() const;
 
 private:
-    /**
+    /*
      * @brief Throws an exception due to a missing item.
-     *
-     * Required because the template functions do not have access to
-     * the logger.
      */
     void throw_missing_item(const std::string& msg, const std::string& n) const;
 
     /**
      * @brief Extracts a licence using meta-data in the Taggable.
      */
-    template<typename Taggable>
-    licence extract_licence(const Taggable& t) const {
-        ensure_non_null_context();
-        auto adaptor(sml::make_tag_adaptor(t));
-
-        const auto licence_name(adaptor.get(sml::tags::licence_name));
-        const auto i(context_->licences().find(licence_name));
-        if (i == context_->licences().end())
-            throw_missing_item("Licence not found: ", licence_name);
-
-        auto licence(i->second);
-        if (adaptor.has_key(sml::tags::copyright_holder)) {
-            const auto copyright_holder(adaptor.get(sml::tags::copyright_holder));
-            licence.copyright_holders().push_back(copyright_holder);
-        }
-        return licence;
-    }
+    licence extract_licence(const boost::property_tree::ptree& meta_data) const;
 
     /**
      * @brief Extracts a modeline using meta-data in the Taggable.
      */
-    template<typename Taggable>
-    modeline extract_modeline(const Taggable& t) const {
-        ensure_non_null_context();
-        auto adaptor(sml::make_tag_adaptor(t));
-
-        const auto name(adaptor.get(sml::tags::modeline_group_name));
-        const auto i(context_->modeline_groups().find(name));
-        if (i == context_->modeline_groups().end())
-            throw_missing_item("Modeline group not found: ", name);
-
-        const auto modeline_group(i->second);
-        const auto j(modeline_group.modelines().find("c++"));
-        if (j == modeline_group.modelines().end())
-            throw_missing_item("Modeline not found: ", name);
-
-        return j->second;
-    }
+    modeline extract_modeline(
+        const boost::property_tree::ptree& meta_data) const;
 
     /**
      * @brief Extracts a code generation marker using meta-data in the
      * Taggable.
      */
-    template<typename Taggable>
-    std::string extract_marker(const Taggable& t) const {
-        auto adaptor(sml::make_tag_adaptor(t));
-
-        if (adaptor.has_key(sml::tags::code_generation_marker))
-            return adaptor.get(sml::tags::code_generation_marker);
-
-        return context_->code_generation_marker();
-    }
+    std::string extract_marker(
+        const boost::property_tree::ptree& meta_data) const;
 
 private:
     /**
@@ -223,7 +148,7 @@ public:
 
 private:
     const std::list<boost::filesystem::path> data_files_directories_;
-    mutable std::unique_ptr<context> context_;
+    mutable std::shared_ptr<context> context_;
 };
 
 } }

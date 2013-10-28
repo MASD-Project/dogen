@@ -27,7 +27,7 @@
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/factory.hpp"
@@ -247,9 +247,9 @@ void cpp_types_main_header_file_formatter::close_class() const {
 
 void cpp_types_main_header_file_formatter::
 explicitly_defaulted_functions(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
+    sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
-    if (adaptor.is_false(types::generate_defaulted_functions))
+    if (reader.is_false(types::generate_defaulted_functions))
         return;
 
     if (context_->first_line_is_blank())
@@ -258,7 +258,7 @@ explicitly_defaulted_functions(const sml::abstract_object& o) const {
     context_->utility().public_access_specifier();
 
     const auto& sn(o.name().simple_name());
-    if (adaptor.is_false(types::generate_explicit_default_constructor)) {
+    if (reader.is_false(types::generate_explicit_default_constructor)) {
         context_->stream() << context_->indenter() << sn << "() = default;"
                           << std::endl;
     }
@@ -266,7 +266,7 @@ explicitly_defaulted_functions(const sml::abstract_object& o) const {
     context_->stream() << context_->indenter() << sn << "(const " << sn
                       << "&) = default;" << std::endl;
 
-    if (adaptor.is_false(types::generate_explicit_move_constructor)) {
+    if (reader.is_false(types::generate_explicit_move_constructor)) {
         context_->stream() << context_->indenter() << sn << "(" << sn
                           << "&&) = default;" << std::endl;
     }
@@ -294,9 +294,9 @@ explicitly_defaulted_functions(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 default_constructor(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
+    sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
-    if (adaptor.is_false(types::generate_explicit_default_constructor))
+    if (reader.is_false(types::generate_explicit_default_constructor))
         return;
 
     if (context_->first_line_is_blank())
@@ -311,9 +311,9 @@ default_constructor(const sml::abstract_object& o) const {
 void cpp_types_main_header_file_formatter::
 complete_constructor(const sml::abstract_object& o) const {
     {
-        auto adaptor(sml::make_tag_adaptor(o));
+        sml::meta_data_reader reader(o.meta_data());
         using types = sml::tags::cpp::types;
-        if (adaptor.is_false(types::generate_complete_constructor))
+        if (reader.is_false(types::generate_complete_constructor))
             return;
     }
 
@@ -328,13 +328,13 @@ complete_constructor(const sml::abstract_object& o) const {
     const auto sn(o.name().simple_name());
     if (props.size() == 1) {
         const auto p(*props.begin());
-        auto adaptor(sml::make_tag_adaptor(p));
+        sml::meta_data_reader reader(p.meta_data());
         using types = sml::tags::cpp::types;
         context_->stream() << context_->indenter() << "explicit "
                           << sn << "(const "
-                          << adaptor.get(types::complete_name);
+                          << reader.get(types::complete_name);
 
-        if (adaptor.is_true(types::is_simple_type))
+        if (reader.is_true(types::is_simple_type))
             context_->stream() << "&";
 
         context_->stream() << " " << p.name() << ");" << std::endl;
@@ -349,12 +349,12 @@ complete_constructor(const sml::abstract_object& o) const {
         for (const auto p : props) {
             context_->stream() << (is_first ? "" : ",") << std::endl;
 
-            auto adaptor(sml::make_tag_adaptor(p));
+            sml::meta_data_reader reader(p.meta_data());
             using types = sml::tags::cpp::types;
             context_->stream() << context_->indenter() << "const "
-                              << adaptor.get(types::complete_name);
+                              << reader.get(types::complete_name);
 
-            if (adaptor.is_true(types::is_simple_type))
+            if (reader.is_true(types::is_simple_type))
                 context_->stream() << "&";
 
             context_->stream() << " " << p.name();
@@ -367,9 +367,9 @@ complete_constructor(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 move_constructor(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
+    sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
-    if (adaptor.is_false(types::generate_explicit_move_constructor))
+    if (reader.is_false(types::generate_explicit_move_constructor))
         return;
 
     const auto& props(context_->property_cache().get_all_properties(o));
@@ -388,9 +388,9 @@ move_constructor(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 destructor(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
+    sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
-    if (adaptor.is_false(types::generate_explicit_destructor))
+    if (reader.is_false(types::generate_explicit_destructor))
         return;
 
     if (context_->first_line_is_blank())
@@ -418,9 +418,9 @@ destructor(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 friends(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
+    sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
-    if (adaptor.is_false(types::generate_friends))
+    if (reader.is_false(types::generate_friends))
         return;
 
     if (context_->first_line_is_blank())
@@ -454,9 +454,9 @@ void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
     if (!p.is_immutable())
         doxygen_next_.format_doxygen_start_block(context_->stream(), doc);
 
-    auto adaptor(sml::make_tag_adaptor(p));
+    sml::meta_data_reader reader(p.meta_data());
     using types = sml::tags::cpp::types;
-    const auto cn(adaptor.get(types::complete_name));
+    const auto cn(reader.get(types::complete_name));
     context_->stream() << context_->indenter()
                       << cn << " " << p.name() << "() const;" << std::endl;
 
@@ -469,7 +469,7 @@ void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
 
         context_->stream() << p.name() << "(const " << cn;
 
-        if (adaptor.is_true(types::is_simple_type))
+        if (reader.is_true(types::is_simple_type))
             context_->stream() << "&";
 
         context_->stream() << " v);" << std::endl;
@@ -490,9 +490,9 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
         doxygen_next_.format_doxygen_start_block(context_->stream(), doc);
 
     // const getter
-    auto adaptor(sml::make_tag_adaptor(p));
+    sml::meta_data_reader reader(p.meta_data());
     using types = sml::tags::cpp::types;
-    const auto cn(adaptor.get(types::complete_name));
+    const auto cn(reader.get(types::complete_name));
     context_->stream() << context_->indenter() << "const " << cn
                       << "& " << p.name() << "() const;" << std::endl;
 
@@ -509,7 +509,7 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
             context_->stream() << "void ";
         context_->stream() << p.name() << "(const " << cn;
 
-        if (adaptor.is_true(types::is_simple_type))
+        if (reader.is_true(types::is_simple_type))
             context_->stream() << "&";
 
         context_->stream() << " v);" << std::endl;
@@ -522,7 +522,7 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
             context_->stream() << "void ";
         context_->stream() << p.name() << "(const " << cn;
 
-        if (adaptor.is_true(types::is_simple_type))
+        if (reader.is_true(types::is_simple_type))
             context_->stream() << "&&";
 
         context_->stream() << " v);" << std::endl;
@@ -546,8 +546,8 @@ getters_and_setters(const sml::abstract_object& o) const {
         if (!is_first)
             context_->utility().blank_line();
 
-        auto adaptor(sml::make_tag_adaptor(p));
-        if (adaptor.is_true(sml::tags::cpp::types::is_simple_type))
+        sml::meta_data_reader reader(p.meta_data());
+        if (reader.is_true(sml::tags::cpp::types::is_simple_type))
             simple_type_getter_and_setter(o.name().simple_name(), p);
         else
             compound_type_getter_and_setter(o.name().simple_name(), p);
@@ -566,9 +566,9 @@ member_variables(const sml::abstract_object& o) const {
 
     context_->utility().public_access_specifier();
     for (const auto p : o.properties()) {
-        auto adaptor(sml::make_tag_adaptor(p));
+        sml::meta_data_reader reader(p.meta_data());
         context_->stream() << context_->indenter()
-                          << adaptor.get(sml::tags::cpp::types::complete_name)
+                          << reader.get(sml::tags::cpp::types::complete_name)
                           << " "
                           << context_->utility().as_member_variable(p.name())
                           << ";"
@@ -579,8 +579,8 @@ member_variables(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 equality(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
-    if (adaptor.is_false(sml::tags::cpp::types::generate_equality))
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_false(sml::tags::cpp::types::generate_equality))
         return;
 
     if (context_->first_line_is_blank())
@@ -622,13 +622,13 @@ equality(const sml::abstract_object& o) const {
     } else if (o.is_parent()) {
         context_->stream() << context_->indenter()
                           << "virtual bool equals(const "
-                          << adaptor.get(types::qualified_original_parent_name)
+                          << reader.get(types::qualified_original_parent_name)
                           <<  "& other) const = 0;"
                           << std::endl;
     } else {
         context_->stream() << context_->indenter()
                           << "bool equals(const "
-                          << adaptor.get(types::qualified_original_parent_name)
+                          << reader.get(types::qualified_original_parent_name)
                           <<  "& other) const override;"
                           << std::endl;
     }
@@ -637,8 +637,8 @@ equality(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 to_stream(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
-    if (adaptor.is_false(sml::tags::cpp::types::generate_to_stream))
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_false(sml::tags::cpp::types::generate_to_stream))
         return;
 
     if (context_->first_line_is_blank())
@@ -661,8 +661,8 @@ to_stream(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 swap(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
-    if (adaptor.is_false(sml::tags::cpp::types::generate_swap))
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_false(sml::tags::cpp::types::generate_swap))
         return;
 
     const auto props(context_->property_cache().get_all_properties(o));
@@ -704,8 +704,8 @@ assignment(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 visitor_method(const sml::abstract_object& o) const {
-    auto adaptor(sml::make_tag_adaptor(o));
-    if (adaptor.is_false(sml::tags::cpp::types::generate_accept))
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_false(sml::tags::cpp::types::generate_accept))
         return;
 
     if (context_->first_line_is_blank())
@@ -714,7 +714,7 @@ visitor_method(const sml::abstract_object& o) const {
     context_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
     using types = sml::tags::cpp::types;
-    const auto opn(adaptor.get(types::qualified_original_parent_name));
+    const auto opn(reader.get(types::qualified_original_parent_name));
 
     if (o.is_visitable()) {
         context_->stream() << context_->indenter()
@@ -851,10 +851,10 @@ format(const sml::module& module, const licence& l, const modeline& modeline,
     cpp_formatters::utility u(s, ind);
 
     const cpp_includes i = cpp_includes();
-    auto adaptor(sml::make_tag_adaptor(module));
+    sml::meta_data_reader reader(module.meta_data());
     const auto& fn(sml::tags::cpp::types::header_file::file_name);
-    const boost::filesystem::path relative_file_path(adaptor.get(fn));
-    const bool gp(adaptor.is_true(sml::tags::generate_preamble));
+    const boost::filesystem::path relative_file_path(reader.get(fn));
+    const bool gp(reader.is_true(sml::tags::generate_preamble));
 
     cpp_file_boilerplate_formatter f(gp);
     f.format_begin(s, l, modeline, marker, i, relative_file_path);
@@ -898,10 +898,10 @@ format(const sml::type& t, const licence& l, const modeline& m,
     context_ = std::shared_ptr<context>(new context(s, c, ind, u));
 
     const cpp_includes i = cpp_includes();
-    auto adaptor(sml::make_tag_adaptor(t));
+    sml::meta_data_reader reader(t.meta_data());
     const auto& fn(sml::tags::cpp::types::header_file::file_name);
-    const boost::filesystem::path relative_file_path(adaptor.get(fn));
-    const bool gp(adaptor.is_true(sml::tags::generate_preamble));
+    const boost::filesystem::path relative_file_path(reader.get(fn));
+    const bool gp(reader.is_true(sml::tags::generate_preamble));
     cpp_file_boilerplate_formatter f(gp);
     f.format_begin(s, l, m, marker, i, relative_file_path);
     {

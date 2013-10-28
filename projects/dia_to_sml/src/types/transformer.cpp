@@ -35,7 +35,7 @@
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
@@ -191,8 +191,8 @@ sml::property transformer::to_property(const processed_property& p) const {
 
     const auto pair(comments_parser_->parse(p.comment()));
     r.documentation(pair.first);
-    auto router(make_tag_router(r));
-    router.route(pair.second);
+    sml::meta_data_writer writer(r.meta_data());
+    writer.add(pair.second);
 
     return r;
 }
@@ -332,8 +332,8 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
     ae.is_aggregate_root(p.is_aggregate_root());
 
     for (const auto& p : ae.properties()) {
-        auto adaptor(make_tag_adaptor(p));
-        if (adaptor.has_key(sml::tags::identity_attribute))
+        sml::meta_data_reader reader(p.meta_data());
+        if (reader.has_key(sml::tags::identity_attribute))
             ae.identity().push_back(p);
     }
 }
@@ -453,9 +453,9 @@ void transformer::from_note(const processed_object& o) {
     sml::model& model(context_.model());
     using sml::tags;
     if (o.child_node_id().empty()) {
-        auto router(make_tag_router(model));
-        const bool routed(router.route_if_marker_found(tags::comment, kvps));
-        if (routed)
+        sml::meta_data_writer writer(model.meta_data());
+        const bool added(writer.add_if_marker_found(tags::comment, kvps));
+        if (added)
             model.documentation(documentation);
         return;
     }
@@ -476,9 +476,9 @@ void transformer::from_note(const processed_object& o) {
     }
 
     sml::module& module(j->second);
-    auto router(make_tag_router(module));
-    const bool routed(router.route_if_marker_found(tags::comment, kvps));
-    if (routed)
+    sml::meta_data_writer writer(module.meta_data());
+    const bool added(writer.add_if_marker_found(tags::comment, kvps));
+    if (added)
         module.documentation(documentation);
 }
 

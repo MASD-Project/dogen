@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_TAG_ROUTER_FWD_HPP
-#define DOGEN_SML_TYPES_TAG_ROUTER_FWD_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
+#define DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-class tag_router;
+class meta_data_writer;
 
 } }
 

@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/all_types_traversal.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/om/io/modeline_group_io.hpp"
@@ -34,7 +34,6 @@
 #include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
-
 #include "dogen/om/types/workflow_error.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
 #include "dogen/om/types/workflow.hpp"
@@ -53,6 +52,42 @@ const std::string licence_dir("licences");
 namespace dogen {
 namespace om {
 
+class workflow::context {
+public:
+    sml::property_cache& property_cache() { return property_cache_; }
+
+    const std::unordered_map<std::string, modeline_group>&
+    modeline_groups() { return modeline_groups_; }
+
+    void modeline_groups(
+        const std::unordered_map<std::string, modeline_group>& v) {
+        modeline_groups_ = v;
+    }
+
+    const std::unordered_map<std::string, licence>& licences() const {
+        return licences_;
+    }
+
+    void licences(const std::unordered_map<std::string, licence>& v) {
+        licences_ = v;
+    }
+
+    std::string code_generation_marker() { return code_generation_marker_; }
+
+    void code_generation_marker(const std::string& v) {
+        code_generation_marker_ = v;
+    }
+
+    std::list<file>& files() { return files_; }
+
+private:
+    sml::property_cache property_cache_;
+    std::unordered_map<std::string, modeline_group> modeline_groups_;
+    std::unordered_map<std::string, licence> licences_;
+    std::string code_generation_marker_;
+    std::list<file> files_;
+};
+
 workflow::
 workflow(const std::list<boost::filesystem::path>& data_files_directories)
     : data_files_directories_(data_files_directories) { }
@@ -69,6 +104,53 @@ void workflow::
 throw_missing_item(const std::string& msg, const std::string& n) const {
     BOOST_LOG_SEV(lg, error) << msg << n;
     BOOST_THROW_EXCEPTION(workflow_error(msg + n));
+}
+
+licence  workflow::
+extract_licence(const boost::property_tree::ptree& meta_data) const {
+    ensure_non_null_context();
+    sml::meta_data_reader reader(meta_data);
+
+    const auto licence_name(reader.get(sml::tags::licence_name));
+    const auto i(context_->licences().find(licence_name));
+    if (i == context_->licences().end())
+        throw_missing_item("Licence not found: ", licence_name);
+
+    auto licence(i->second);
+    if (reader.has_key(sml::tags::copyright_holder)) {
+        const auto copyright_holder(reader.get(sml::tags::copyright_holder));
+        licence.copyright_holders().push_back(copyright_holder);
+    }
+    return licence;
+}
+
+modeline workflow::
+extract_modeline(const boost::property_tree::ptree& meta_data) const {
+    ensure_non_null_context();
+    sml::meta_data_reader reader(meta_data);
+
+    const auto name(reader.get(sml::tags::modeline_group_name));
+    const auto i(context_->modeline_groups().find(name));
+    if (i == context_->modeline_groups().end())
+        throw_missing_item("Modeline group not found: ", name);
+
+    const auto modeline_group(i->second);
+    const auto j(modeline_group.modelines().find("c++"));
+    if (j == modeline_group.modelines().end())
+        throw_missing_item("Modeline not found: ", name);
+
+    return j->second;
+}
+
+std::string workflow::
+extract_marker(const boost::property_tree::ptree& meta_data) const {
+    ensure_non_null_context();
+    sml::meta_data_reader reader(meta_data);
+
+    if (reader.has_key(sml::tags::code_generation_marker))
+        return reader.get(sml::tags::code_generation_marker);
+
+    return context_->code_generation_marker();
 }
 
 std::list<boost::filesystem::path>
@@ -102,16 +184,16 @@ void workflow::hydrate_licences_activity() {
 }
 
 void workflow::create_marker_activity(const sml::model& m) {
-    auto adaptor(sml::make_tag_adaptor(m));
+    sml::meta_data_reader reader(m.meta_data());
 
     const bool add_date_time(
-        adaptor.is_true(sml::tags::code_generation_marker::add_date_time));
+        reader.is_true(sml::tags::code_generation_marker::add_date_time));
 
     const bool add_warning(
-        adaptor.is_true(sml::tags::code_generation_marker::add_warning));
+        reader.is_true(sml::tags::code_generation_marker::add_warning));
 
     const std::string message(
-        adaptor.get(sml::tags::code_generation_marker::message));
+        reader.get(sml::tags::code_generation_marker::message));
 
     code_generation_marker_factory f(add_date_time, add_warning, message);
     context_->code_generation_marker(f.build());
@@ -128,9 +210,9 @@ void workflow::setup_reference_data_subworkflow(const sml::model& m) {
 
 void workflow::operator()(const sml::type& t) const {
     ensure_non_null_context();
-    auto licence(extract_licence(t));
-    const auto modeline(extract_modeline(t));
-    const auto marker(extract_marker(t));
+    auto licence(extract_licence(t.meta_data()));
+    const auto modeline(extract_modeline(t.meta_data()));
+    const auto marker(extract_marker(t.meta_data()));
 
     cpp_types_main_header_file_formatter f;
     const auto& pc(context_->property_cache());
@@ -141,9 +223,9 @@ void workflow::operator()(const sml::type& t) const {
 void workflow::operator()(const sml::module& m) const {
     ensure_non_null_context();
 
-    auto licence(extract_licence(m));
-    const auto modeline(extract_modeline(m));
-    const auto marker(extract_marker(m));
+    auto licence(extract_licence(m.meta_data()));
+    const auto modeline(extract_modeline(m.meta_data()));
+    const auto marker(extract_marker(m.meta_data()));
 
     cpp_types_main_header_file_formatter f;
     const auto file(f.format(m, licence, modeline, marker));

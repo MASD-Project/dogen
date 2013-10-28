@@ -22,7 +22,7 @@
 #include <sstream>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/test/unit_test.hpp>
-#include "dogen/sml/types/tag_router.hpp"
+#include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -160,14 +160,14 @@ std::string filename_for_qname(const dogen::sml::qname& qn) {
 
 template<typename Taggable>
 void add_test_tags(Taggable& t) {
-    auto router(dogen::sml::make_tag_router(t));
-    router.route(dogen::sml::tags::cpp::types::header_file::file_name,
+    dogen::sml::meta_data_writer writer(t.meta_data());
+    writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
         filename_for_qname(t.name()));
-    router.route(dogen::sml::tags::licence_name, licence_name);
-    router.route(dogen::sml::tags::copyright_holder, copyright_holders);
-    router.route(dogen::sml::tags::modeline_group_name, modeline_group_name);
-    router.route(dogen::sml::tags::code_generation_marker, marker);
-    router.route(dogen::sml::tags::generate_preamble,
+    writer.add(dogen::sml::tags::licence_name, licence_name);
+    writer.add(dogen::sml::tags::copyright_holder, copyright_holders);
+    writer.add(dogen::sml::tags::modeline_group_name, modeline_group_name);
+    writer.add(dogen::sml::tags::code_generation_marker, marker);
+    writer.add(dogen::sml::tags::generate_preamble,
         dogen::sml::tags::bool_true);
 }
 

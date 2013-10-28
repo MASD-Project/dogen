@@ -21,15 +21,15 @@
 #include <boost/throw_exception.hpp>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/tag_error.hpp"
+#include "dogen/sml/types/meta_data_error.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/tag_router.hpp"
+#include "dogen/sml/types/meta_data_writer.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("sml.tag_router"));
+auto lg(logger_factory("sml.meta_data_writer"));
 const std::string duplicated_key(
     "Attempt to use a simple tag key which has already been used: ");
 
@@ -38,21 +38,21 @@ const std::string duplicated_key(
 namespace dogen {
 namespace sml {
 
-tag_router::tag_router(boost::property_tree::ptree& meta_data)
+meta_data_writer::meta_data_writer(boost::property_tree::ptree& meta_data)
     : meta_data_(meta_data) { }
 
-bool tag_router::is_complex(const std::string& key) const {
+bool meta_data_writer::is_container(const std::string& key) const {
     return key == tags::odb_pragma;
 }
 
-bool tag_router::has_key(const std::string& key) const {
+bool meta_data_writer::has_key(const std::string& key) const {
     const auto node(meta_data_.get_optional<std::string>(key));
     return node;
 }
 
-void tag_router::route(const std::string& key, const std::string& value) {
+void meta_data_writer::add(const std::string& key, const std::string& value) {
     using boost::property_tree::ptree;
-    if (is_complex(key)) {
+    if (is_container(key)) {
         const auto node(meta_data_.get_child_optional(key));
         unsigned int i(0);
         if (node)
@@ -65,18 +65,18 @@ void tag_router::route(const std::string& key, const std::string& value) {
 
     if (has_key(key)) {
         BOOST_LOG_SEV(lg, error) << duplicated_key << key;
-        BOOST_THROW_EXCEPTION(tag_error(duplicated_key + key));
+        BOOST_THROW_EXCEPTION(meta_data_error(duplicated_key + key));
     }
     meta_data_.put(key, value);
 }
 
-void tag_router::
-route(const std::list<std::pair<std::string, std::string> >& kvps) {
+void meta_data_writer::
+add(const std::list<std::pair<std::string, std::string> >& kvps) {
     for (const auto& pair : kvps)
-        route(pair.first, pair.second);
+        add(pair.first, pair.second);
 }
 
-bool tag_router::route_if_marker_found(const std::string& key,
+bool meta_data_writer::add_if_marker_found(const std::string& key,
     const std::list<std::pair<std::string, std::string> >& kvps) {
     bool has_marker(false);
     for (const auto& kvp : kvps) {
@@ -88,16 +88,16 @@ bool tag_router::route_if_marker_found(const std::string& key,
     if (!has_marker)
         return false;
 
-    route(kvps);
+    add(kvps);
     return true;
 }
 
-bool tag_router::
-route_if_key_not_found(const std::string& key, const std::string& value) {
+bool meta_data_writer::
+add_if_key_not_found(const std::string& key, const std::string& value) {
     if (has_key(key))
         return false;
 
-    route(key, value);
+    add(key, value);
     return true;
 }
 

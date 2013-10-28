@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/object.hpp"
-#include "dogen/sml/types/tag_router.hpp"
+#include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/abstract_entity.hpp"
@@ -136,8 +136,8 @@ private:
 
         const auto pair(comments_parser_->parse(o.comment()));
         e.documentation(pair.first);
-        auto router(make_tag_router(e));
-        router.route(pair.second);
+        sml::meta_data_writer writer(e.meta_data());
+        writer.add(pair.second);
     }
 
     /**

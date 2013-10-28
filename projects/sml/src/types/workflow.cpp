@@ -26,7 +26,7 @@
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
-#include "dogen/sml/types/tagger.hpp"
+#include "dogen/sml/types/meta_data_tagger.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 namespace {
@@ -102,7 +102,7 @@ model workflow::create_merged_model_activity(const model& target,
 }
 
 void workflow::tag_model_activity(model& merged_model) const {
-    tagger t;
+    meta_data_tagger t;
     t.tag(settings_.cpp(), merged_model);
 }
 

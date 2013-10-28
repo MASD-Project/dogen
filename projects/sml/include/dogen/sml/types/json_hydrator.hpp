@@ -29,7 +29,6 @@
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/tag_router.hpp"
 
 namespace dogen {
 namespace sml {
@@ -68,19 +67,8 @@ private:
      * @brief Reads all meta-data tags from the property tree, and
      * tags the Taggable type with them.
      */
-    template<typename Taggable>
-    void read_tags(const boost::property_tree::ptree& pt, Taggable& t) const {
-        const auto i(pt.find("tags"));
-        if (i == pt.not_found())
-            return;
-
-        auto router(make_tag_router(t));
-        for (auto j(i->second.begin()); j != i->second.end(); ++j) {
-            const auto field_name(j->first);
-            const auto field_value(j->second.get_value<std::string>());
-            router.route(field_name, field_value);
-        }
-    }
+    void read_tags(const boost::property_tree::ptree& source,
+        boost::property_tree::ptree& destination) const;
 
     /**
      * @brief Reads an SML type from the property tree.

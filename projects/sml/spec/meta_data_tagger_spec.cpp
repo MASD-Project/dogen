@@ -29,7 +29,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/tag_error.hpp"
+#include "dogen/sml/types/meta_data_error.hpp"
 #include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/value_object.hpp"
@@ -41,16 +41,16 @@
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
-#include "dogen/sml/types/tagger.hpp"
+#include "dogen/sml/types/meta_data_tagger.hpp"
 
 using dogen::sml::test::mock_model_factory;
 using dogen::config::test::mock_settings_factory;
-using dogen::sml::tag_error;
+using dogen::sml::meta_data_error;
 
 namespace {
 
 const std::string test_module("sml");
-const std::string test_suite("tagger_spec");
+const std::string test_suite("meta_data_tagger_spec");
 
 const std::string default_cpp_forward_declaration_postfix("_fwd");
 const std::string default_cpp_implementation_file_extension(".cpp");
@@ -66,7 +66,7 @@ std::string
 get(const boost::property_tree::ptree& tags, const std::string& key) {
     const auto node(tags.get_optional<std::string>(key));
     if (!node)
-        BOOST_THROW_EXCEPTION(tag_error("could not find key: " + key));
+        BOOST_THROW_EXCEPTION(meta_data_error("could not find key: " + key));
 
     return node->data();
 }
@@ -87,13 +87,13 @@ is_supported(const boost::property_tree::ptree& tags, const std::string& key) {
 using dogen::utility::test::contains_checker;
 using dogen::utility::test::asserter;
 
-BOOST_AUTO_TEST_SUITE(tagger)
+BOOST_AUTO_TEST_SUITE(meta_data_tagger)
 
 BOOST_AUTO_TEST_CASE(tagging_empty_model_without_any_configuration_options_results_in_expected_tags) {
     SETUP_TEST_LOG_SOURCE("tagging_empty_model_without_any_configuration_options_results_in_expected_tags");
 
     auto m(mock_model_factory::build_empty_model());
-    dogen::sml::tagger t;
+    dogen::sml::meta_data_tagger t;
     t.tag(m);
     BOOST_LOG_SEV(lg, debug) << "m: " << m;
 
@@ -130,7 +130,7 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_all_facets_enabled_results_in_expe
     const auto s(mock_settings_factory::build_cpp_settings());
     BOOST_LOG_SEV(lg, debug) << "s: " << s;
 
-    dogen::sml::tagger t;
+    dogen::sml::meta_data_tagger t;
     t.tag(s, m);
     BOOST_LOG_SEV(lg, debug) << "m: " << m;
 
@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_a_few_facets_enabled_results_in_ex
     s.enabled_facets().insert(dogen::config::cpp_facet_types::odb);
     s.enabled_facets().insert(dogen::config::cpp_facet_types::test_data);
 
-    dogen::sml::tagger t;
+    dogen::sml::meta_data_tagger t;
     t.tag(s, m);
     BOOST_LOG_SEV(lg, debug) << "m: " << m;
 
@@ -189,7 +189,7 @@ BOOST_AUTO_TEST_CASE(tagging_single_type_model_with_all_facets_enabled_results_i
     auto m(mock_model_factory::build_single_type_model());
     auto s(mock_settings_factory::build_cpp_settings());
 
-    dogen::sml::tagger t;
+    dogen::sml::meta_data_tagger t;
     t.tag(s, m);
     BOOST_LOG_SEV(lg, debug) << "m: " << m;
 

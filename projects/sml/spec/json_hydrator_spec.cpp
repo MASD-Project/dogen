@@ -83,7 +83,7 @@ const std::string tagged_model(R"({
     "model_name" : "a_model",
     "documentation" : "a_doc",
     "origin" : "system",
-    "tags" : {
+    "meta_data" : {
             "model_key" : "model_value",
             "ODB_PRAGMA" : "odb_pragma_value"
     },
@@ -92,7 +92,7 @@ const std::string tagged_model(R"({
             "meta_type" : "value_object",
             "simple_name" : "a_type",
             "documentation" : "a_doc",
-            "tags" : {
+            "meta_data" : {
                     "type_key" : true,
                     "ODB_PRAGMA" : "odb_pragma_value"
             }

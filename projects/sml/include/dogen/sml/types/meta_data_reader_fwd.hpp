@@ -18,36 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_TAG_ERROR_HPP
-#define DOGEN_SML_TYPES_TAG_ERROR_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
+#define DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
 namespace sml {
 
-/**
- * @brief An error has occurred while peforming an operation related to tagging.
- */
-class tag_error : public virtual std::exception, public virtual boost::exception {
-public:
-    tag_error() = default;
-    ~tag_error() noexcept = default;
-
-public:
-    tag_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+class meta_data_reader;
 
 } }
 

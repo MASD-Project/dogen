@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_TAGGER_HPP
-#define DOGEN_SML_TYPES_TAGGER_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_TAGGER_HPP
+#define DOGEN_SML_TYPES_META_DATA_TAGGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,8 +30,8 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
-#include "dogen/sml/types/tag_router.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
+#include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/type.hpp"
@@ -43,14 +43,14 @@ namespace sml {
 /**
  * @brief Generate all meta data tags across the model.
  */
-class tagger : private sml::type_visitor {
+class meta_data_tagger : private sml::type_visitor {
 public:
-    tagger() = default;
-    tagger(const tagger&) = default;
-    tagger(tagger&&) = default;
+    meta_data_tagger() = default;
+    meta_data_tagger(const meta_data_tagger&) = default;
+    meta_data_tagger(meta_data_tagger&&) = default;
 
 public:
-    virtual ~tagger() noexcept { }
+    virtual ~meta_data_tagger() noexcept { }
 
 private:
     class context;
@@ -88,7 +88,7 @@ private:
     /**
      * @brief Returns the file name for the given qname and facet.
      */
-    std::string filename_for_qname(const tag_adaptor& adaptor,
+    std::string filename_for_qname(const meta_data_reader& reader,
         const bool is_header, const qname& qn,
         const std::string& facet_directory,
         const std::string& facet_postfix,
@@ -96,9 +96,9 @@ private:
 
     /**
      * @brief Copies across all tags from the model into the taggable
-     * via the router.
+     * using the writer.
      */
-    void copy_model_tags(tag_router& router) const;
+    void copy_model_tags(meta_data_writer& writer) const;
 
 private:
     using sml::type_visitor::visit;

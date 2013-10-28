@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/tag_adaptor.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/value_object_types_io.hpp"
@@ -348,8 +348,8 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
 
     nti.complete_name(complete_name);
     pi.type(nti);
-    auto adaptor(sml::make_tag_adaptor(p));
-    pi.opaque_parameters(adaptor.odb_pragma());
+    sml::meta_data_reader reader(p.meta_data());
+    pi.opaque_parameters(reader.odb_pragma());
 
     return std::make_tuple(pi,
         has_primitive_properties,
@@ -411,8 +411,8 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
     r.generation_type(ao.generation_type());
     r.class_type(cpp::class_types::user_defined);
 
-    auto adaptor(sml::make_tag_adaptor(ao));
-    r.opaque_parameters(adaptor.odb_pragma());
+    sml::meta_data_reader reader(ao.meta_data());
+    r.opaque_parameters(reader.odb_pragma());
 
     const auto pn(ao.parent_name());
     if (pn) {

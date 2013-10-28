@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_TAG_ADAPTOR_HPP
-#define DOGEN_SML_TYPES_TAG_ADAPTOR_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_READER_HPP
+#define DOGEN_SML_TYPES_META_DATA_READER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,15 +31,15 @@
 namespace dogen {
 namespace sml {
 
-class tag_adaptor {
+class meta_data_reader {
 public:
-    tag_adaptor() = delete;
-    ~tag_adaptor() noexcept = default;
-    tag_adaptor(const tag_adaptor&) = default;
-    tag_adaptor(tag_adaptor&&) = default;
+    meta_data_reader() = delete;
+    ~meta_data_reader() noexcept = default;
+    meta_data_reader(const meta_data_reader&) = default;
+    meta_data_reader(meta_data_reader&&) = default;
 
 public:
-    tag_adaptor(const boost::property_tree::ptree& meta_data);
+    meta_data_reader(const boost::property_tree::ptree& meta_data);
 
 public:
     /**
@@ -81,11 +81,6 @@ public:
 private:
     const boost::property_tree::ptree& meta_data_;
 };
-
-template<typename Taggable>
-inline tag_adaptor make_tag_adaptor(const Taggable& t) {
-    return tag_adaptor(t.meta_data());
-}
 
 } }
 

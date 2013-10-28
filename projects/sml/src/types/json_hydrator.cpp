@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/tag_router.hpp"
+#include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
@@ -50,6 +50,7 @@ const std::string meta_type_primitive_value("primitive");
 
 const std::string simple_name_key("simple_name");
 const std::string module_path_key("module_path");
+const std::string meta_data_key("meta_data");
 
 const std::string value_object_type_key("value_object_type");
 const std::string value_object_type_smart_pointer_value("smart_pointer");
@@ -106,6 +107,20 @@ void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
     }
 }
 
+void json_hydrator::read_tags(const boost::property_tree::ptree& source,
+    boost::property_tree::ptree& destination) const {
+    const auto i(source.find(meta_data_key));
+    if (i == source.not_found())
+        return;
+
+    meta_data_writer writer(destination);
+    for (auto j(i->second.begin()); j != i->second.end(); ++j) {
+        const auto field_name(j->first);
+        const auto field_value(j->second.get_value<std::string>());
+        writer.add(field_name, field_value);
+    }
+}
+
 void json_hydrator::
 read_type(const boost::property_tree::ptree& pt, model& m) const {
     qname qn;
@@ -123,7 +138,7 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
             t.origin_type(m.origin_type());
             if (documentation)
                 t.documentation(*documentation);
-            read_tags<type>(pt, t);
+            read_tags(pt, t.meta_data());
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
@@ -167,7 +182,7 @@ model json_hydrator::read_stream(std::istream& s) const {
     ptree pt;
     read_json(s, pt);
 
-    read_tags(pt, r);
+    read_tags(pt, r.meta_data());
     r.name().model_name(pt.get<std::string>(model_name_key));
     read_module_path(pt, r, r.name());
 

@@ -28,7 +28,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/tag_router.hpp"
+#include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -334,8 +334,8 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     BOOST_CHECK(m.objects().size() == 1);
     auto& o(find_object(m, 0));
     o.documentation().clear();
-    auto router(dogen::sml::make_tag_router(o));
-    router.route(
+    dogen::sml::meta_data_writer writer(o.meta_data());
+    writer.add(
         dogen::sml::tags::cpp::types::generate_defaulted_functions,
         dogen::sml::tags::bool_true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -356,11 +356,11 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_typ
     BOOST_CHECK(m.objects().size() == 1);
     auto& o(find_object(m, 0));
     o.documentation().clear();
-    auto router(dogen::sml::make_tag_router(o));
-    router.route(
+    dogen::sml::meta_data_writer writer(o.meta_data());
+    writer.add(
         dogen::sml::tags::cpp::types::generate_defaulted_functions,
         dogen::sml::tags::bool_true);
-    router.route(
+    writer.add(
         dogen::sml::tags::cpp::types::generate_explicit_default_constructor,
         dogen::sml::tags::bool_true);
 
@@ -383,11 +383,11 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_
     BOOST_CHECK(m.objects().size() == 1);
     auto& o(find_object(m, 0));
     o.documentation().clear();
-    auto router(dogen::sml::make_tag_router(o));
-    router.route(
+    dogen::sml::meta_data_writer writer(o.meta_data());
+    writer.add(
         dogen::sml::tags::cpp::types::generate_defaulted_functions,
         dogen::sml::tags::bool_true);
-    router.route(
+    writer.add(
         dogen::sml::tags::cpp::types::generate_explicit_move_constructor,
         dogen::sml::tags::bool_true);
 
