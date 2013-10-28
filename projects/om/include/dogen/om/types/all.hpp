@@ -18,13 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/types/cmake_add_library.hpp"
-#include "dogen/om/types/cmake_feature.hpp"
-#include "dogen/om/types/cmake_install.hpp"
-#include "dogen/om/types/cmake_set_target_properties.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/comment_styles.hpp"
+#include "dogen/om/types/concept_formatter_interface.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 #include "dogen/om/types/cpp_header_guard_formatter.hpp"
 #include "dogen/om/types/cpp_include_formatter.hpp"
@@ -33,6 +30,7 @@
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
 #include "dogen/om/types/editors.hpp"
 #include "dogen/om/types/file.hpp"
+#include "dogen/om/types/file_formatter_interface.hpp"
 #include "dogen/om/types/formatter_factory.hpp"
 #include "dogen/om/types/formatting_error.hpp"
 #include "dogen/om/types/hydration_error.hpp"

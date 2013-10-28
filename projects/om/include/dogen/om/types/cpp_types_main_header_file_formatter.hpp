@@ -155,6 +155,8 @@ private:
     void visit(const sml::entity& e) const override;
 
 public:
+    const std::string& meta_data_path() const override;
+
     file format(const sml::module& module, const licence& l,
         const modeline& modeline, const std::string& marker) const override;
 

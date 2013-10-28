@@ -18,10 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/serialization/cmake_add_library_ser.hpp"
-#include "dogen/om/serialization/cmake_feature_ser.hpp"
-#include "dogen/om/serialization/cmake_install_ser.hpp"
-#include "dogen/om/serialization/cmake_set_target_properties_ser.hpp"
 #include "dogen/om/serialization/comment_styles_ser.hpp"
 #include "dogen/om/serialization/cpp_includes_ser.hpp"
 #include "dogen/om/serialization/editors_ser.hpp"

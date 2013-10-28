@@ -18,36 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_SERIALIZATION_CMAKE_INSTALL_SER_HPP
-#define DOGEN_OM_SERIALIZATION_CMAKE_INSTALL_SER_HPP
+#ifndef DOGEN_OM_TYPES_FILE_FORMATTER_INTERFACE_HPP
+#define DOGEN_OM_TYPES_FILE_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/om/types/cmake_install.hpp"
+#include <string>
 
-namespace boost {
+namespace dogen {
+namespace om {
 
-template<>struct
-is_virtual_base_of<
-    dogen::om::cmake_feature,
-    dogen::om::cmake_install
-> : public mpl::true_ {};
+/**
+ * @brief Base formatter for all file formatters.
+ *
+ * The only reason we need it is because of the meta data path.
+ */
+class file_formatter_interface {
+public:
+    file_formatter_interface() = default;
+    file_formatter_interface(const file_formatter_interface&) = default;
+    file_formatter_interface(file_formatter_interface&&) = default;
 
-}
+public:
+    virtual ~file_formatter_interface() noexcept { }
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::om::cmake_install)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::om::cmake_install& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::om::cmake_install& v, unsigned int version);
+public:
+    /**
+     * @brief Path to the meta data for this formatter.
+     */
+    virtual const std::string& meta_data_path() const = 0;
+};
 
 } }
 

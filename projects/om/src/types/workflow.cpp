@@ -36,6 +36,7 @@
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/om/types/workflow_error.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
+#include "dogen/om/types/formatter_factory.hpp"
 #include "dogen/om/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -90,7 +91,10 @@ private:
 
 workflow::
 workflow(const std::list<boost::filesystem::path>& data_files_directories)
-    : data_files_directories_(data_files_directories) { }
+    : data_files_directories_(data_files_directories),
+      type_formatters_(formatter_factory::build_type_formatters()),
+      module_formatters_(formatter_factory::build_module_formatters()),
+      concept_formatters_(formatter_factory::build_concept_formatters()) { }
 
 void workflow::ensure_non_null_context() const {
     if (context_ != nullptr)
@@ -210,30 +214,64 @@ void workflow::setup_reference_data_subworkflow(const sml::model& m) {
 
 void workflow::operator()(const sml::type& t) const {
     ensure_non_null_context();
-    auto licence(extract_licence(t.meta_data()));
-    const auto modeline(extract_modeline(t.meta_data()));
-    const auto marker(extract_marker(t.meta_data()));
-
-    cpp_types_main_header_file_formatter f;
+    const auto& md(t.meta_data());
+    auto licence(extract_licence(md));
+    const auto modeline(extract_modeline(md));
+    const auto marker(extract_marker(md));
     const auto& pc(context_->property_cache());
-    const auto file(f.format(t, licence, modeline, marker, pc));
-    context_->files().push_back(file);
+
+    sml::meta_data_reader reader(md);
+    for (const auto f : type_formatters_) {
+        const auto status(reader.get(f->meta_data_path()));
+
+        if (status == sml::tags::status_unsupported)
+            continue;
+
+        auto file(f->format(t, licence, modeline, marker, pc));
+        file.overwrite(status == sml::tags::status_handcrafted);
+        context_->files().push_back(file);
+    }
 }
 
 void workflow::operator()(const sml::module& m) const {
     ensure_non_null_context();
+    const auto& md(m.meta_data());
+    auto licence(extract_licence(md));
+    const auto modeline(extract_modeline(md));
+    const auto marker(extract_marker(md));
 
-    auto licence(extract_licence(m.meta_data()));
-    const auto modeline(extract_modeline(m.meta_data()));
-    const auto marker(extract_marker(m.meta_data()));
+    sml::meta_data_reader reader(md);
+    for (const auto f : module_formatters_) {
+        const auto status(reader.get(f->meta_data_path()));
 
-    cpp_types_main_header_file_formatter f;
-    const auto file(f.format(m, licence, modeline, marker));
-    context_->files().push_back(file);
+        if (status == sml::tags::status_unsupported)
+            continue;
+
+        auto file(f->format(m, licence, modeline, marker));
+        file.overwrite(status == sml::tags::status_handcrafted);
+        context_->files().push_back(file);
+    }
 }
 
-void workflow::operator()(const sml::concept& /*c*/) const {
-    // do nothing
+void workflow::operator()(const sml::concept& c) const {
+    ensure_non_null_context();
+    const auto& md(c.meta_data());
+    auto licence(extract_licence(md));
+    const auto modeline(extract_modeline(md));
+    const auto marker(extract_marker(md));
+    const auto& pc(context_->property_cache());
+
+    sml::meta_data_reader reader(md);
+    for (const auto f : concept_formatters_) {
+        const auto status(reader.get(f->meta_data_path()));
+
+        if (status == sml::tags::status_unsupported)
+            continue;
+
+        auto file(f->format(c, licence, modeline, marker, pc));
+        file.overwrite(status == sml::tags::status_handcrafted);
+        context_->files().push_back(file);
+    }
 }
 
 void workflow::model_file_subworkflow(const sml::model& model) {

@@ -18,10 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/cmake_add_library_hash.hpp"
-#include "dogen/om/hash/cmake_feature_hash.hpp"
-#include "dogen/om/hash/cmake_install_hash.hpp"
-#include "dogen/om/hash/cmake_set_target_properties_hash.hpp"
 #include "dogen/om/hash/comment_styles_hash.hpp"
 #include "dogen/om/hash/cpp_includes_hash.hpp"
 #include "dogen/om/hash/editors_hash.hpp"

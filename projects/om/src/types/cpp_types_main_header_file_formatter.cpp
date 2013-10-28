@@ -842,6 +842,11 @@ visit(const dogen::sml::entity& e) const {
     format(e);
 }
 
+const std::string&
+cpp_types_main_header_file_formatter::meta_data_path() const {
+    return sml::tags::cpp::types::header_file::generate;
+}
+
 file cpp_types_main_header_file_formatter::
 format(const sml::module& module, const licence& l, const modeline& modeline,
     const std::string& marker) const {

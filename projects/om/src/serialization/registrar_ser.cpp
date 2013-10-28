@@ -26,9 +26,6 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include "dogen/om/serialization/cmake_add_library_ser.hpp"
-#include "dogen/om/serialization/cmake_install_ser.hpp"
-#include "dogen/om/serialization/cmake_set_target_properties_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
@@ -38,23 +35,20 @@ namespace dogen {
 namespace om {
 
 template<typename Archive>
-void register_types(Archive& ar) {
-    ar.template register_type<dogen::om::cmake_add_library>();
-    ar.template register_type<dogen::om::cmake_install>();
-    ar.template register_type<dogen::om::cmake_set_target_properties>();
+void register_types(Archive&) {
 }
 
-template void register_types(boost::archive::polymorphic_oarchive& ar);
-template void register_types(boost::archive::polymorphic_iarchive& ar);
+template void register_types(boost::archive::polymorphic_oarchive&);
+template void register_types(boost::archive::polymorphic_iarchive&);
 
-template void register_types(boost::archive::text_oarchive& ar);
-template void register_types(boost::archive::text_iarchive& ar);
+template void register_types(boost::archive::text_oarchive&);
+template void register_types(boost::archive::text_iarchive&);
 
-template void register_types(boost::archive::binary_oarchive& ar);
-template void register_types(boost::archive::binary_iarchive& ar);
+template void register_types(boost::archive::binary_oarchive&);
+template void register_types(boost::archive::binary_iarchive&);
 
-template void register_types(boost::archive::xml_oarchive& ar);
-template void register_types(boost::archive::xml_iarchive& ar);
+template void register_types(boost::archive::xml_oarchive&);
+template void register_types(boost::archive::xml_iarchive&);
 
 #ifdef __linux__
 template void register_types(eos::portable_oarchive& ar);

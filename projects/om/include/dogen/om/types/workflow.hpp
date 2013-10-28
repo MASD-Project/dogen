@@ -29,6 +29,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -37,6 +38,9 @@
 #include "dogen/om/types/file.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline_group.hpp"
+#include "dogen/om/types/type_formatter_interface.hpp"
+#include "dogen/om/types/module_formatter_interface.hpp"
+#include "dogen/om/types/concept_formatter_interface.hpp"
 
 namespace dogen {
 namespace om {
@@ -148,6 +152,12 @@ public:
 
 private:
     const std::list<boost::filesystem::path> data_files_directories_;
+    const std::list<boost::shared_ptr<type_formatter_interface> >
+    type_formatters_;
+    const std::list<boost::shared_ptr<module_formatter_interface> >
+    module_formatters_;
+    const std::list<boost::shared_ptr<concept_formatter_interface> >
+    concept_formatters_;
     mutable std::shared_ptr<context> context_;
 };
 

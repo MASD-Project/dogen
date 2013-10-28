@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_HASH_CMAKE_ADD_LIBRARY_HASH_HPP
-#define DOGEN_OM_HASH_CMAKE_ADD_LIBRARY_HASH_HPP
+#ifndef DOGEN_OM_TYPES_FILE_FORMATTER_INTERFACE_FWD_HPP
+#define DOGEN_OM_TYPES_FILE_FORMATTER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/om/types/cmake_add_library.hpp"
-
 namespace dogen {
 namespace om {
 
-struct cmake_add_library_hasher {
-public:
-    static std::size_t hash(const cmake_add_library& v);
-};
+class file_formatter_interface;
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::om::cmake_add_library> {
-public:
-    size_t operator()(const dogen::om::cmake_add_library& v) const {
-        return dogen::om::cmake_add_library_hasher::hash(v);
-    }
-};
-
-}
 #endif

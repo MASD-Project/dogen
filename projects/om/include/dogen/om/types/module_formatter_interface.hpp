@@ -31,15 +31,16 @@
 #include "dogen/om/types/file.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline.hpp"
+#include "dogen/om/types/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace om {
 
 /**
  * @brief Formatter that is responsible for the formtatting of a
- * single type.
+ * single module.
  */
-class module_formatter_interface {
+class module_formatter_interface : public virtual file_formatter_interface {
 public:
     module_formatter_interface() = default;
     module_formatter_interface(const module_formatter_interface&) = default;
