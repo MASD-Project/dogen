@@ -8,6 +8,32 @@
 
 Stories that we intend to look at, at some point.
 
+*** Models should have an associated language                         :story:
+    CLOCK: [2013-10-30 Wed 08:07]--[2013-10-30 Wed 08:15] =>  0:08
+
+Certain models (e.g. system / library models) can only be used in a
+give language; for example =boost= and =std= only make sense in C++. A
+.Net library model would only make sense in .Net, etc. These are
+Language Specific Models (LSM). Once a model depends on a LSM it
+itself becomes an LSM and it should not be able to then make use of
+models of other languages nor should one be able to request a code
+generation for other languages.
+
+However, one day we will have a system model which is a Language
+Agnostic Model (LAM). The system model will provide a base set of
+functionality across languages such as containers, and for each type
+it will have mappings to language specific types. The mapping is
+declared as meta-data in the appropriate section
+(i.e. =tags::cpp::mapped_type= or something of that ilk). If a model
+depends only on LAMs, it is itself a LAM and can be used to generate
+code on any supported language (presumably a supported language is
+defined to be that for which we have both mappings and a code
+generation backend).
+
+A first step for this would be to have a language enumeration in SML
+which is a property of the model, and one entry of which is "language
+agnostic".
+
 *** Includer generation should be done from meta-data                 :story:
     CLOCK: [2013-10-27 Sun 20:40]--[2013-10-27 Sun 20:58] =>  0:18
 
