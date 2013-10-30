@@ -8,6 +8,27 @@
 
 Stories that we intend to look at, at some point.
 
+*** Caching qname lookups                                             :story:
+    CLOCK: [2013-10-30 Wed 18:02]--[2013-10-30 Wed 18:03] =>  0:01
+    CLOCK: [2013-10-30 Wed 08:38]--[2013-10-30 Wed 08:43] =>  0:05
+
+Once the model has been merged and resolved, all qnames in the model
+all known to resolve to a valid type, model or module. This means we
+could cache in the qname itself a pointer to the object the qname
+resolves into. There are two problems with this approach:
+
+- we do not have a base class that covers types, models and
+  module. one could be created (=modeling_entity=?) with an associated
+  visitor. but then:
+- formatters are not designed to think at the =modeling_entity= level;
+  a formatter that does types may not necessarily be able to do
+  modules or models. Thus we would need to convert from a
+  =modeling_entity= to a type, model or module before we get to the
+  formatter.
+
+However one imagines that a great number of lookups would be avoided
+if this was possible.
+
 *** Models should have an associated language                         :story:
     CLOCK: [2013-10-30 Wed 08:07]--[2013-10-30 Wed 08:15] =>  0:08
 
