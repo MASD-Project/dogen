@@ -132,7 +132,7 @@ service. This would stop us from having to create noddy translation
 units with dummy functions just to avoid having to define exclusion
 regexes.
 
-*** Add getter and setter prefixes
+*** Add getter and setter prefixes                                    :story:
 
 External users may have getter and setter prefix conventions such as
 =set_prop= or =SetProp=. It would be nice if we could pass in a
@@ -142,11 +142,11 @@ the diagram, e.g. =--getter-prefix=set_=.
 We should check what ODB has done for this and implement the same
 pattern.
 
-*** Fix spelling of =rountrip_type=
+*** Fix spelling of =rountrip_type=                                   :story:
 
 Should be =roundtrip_type=.
 
-*** "Data driven" includer
+*** "Data driven" includer                                            :story:
 
 We should simply go through all the types in the SML model and for
 each type and each facet create the corresponding inclusion
@@ -160,14 +160,14 @@ headers.
 
 This story is very closely related to [[*Loading%20external%20models%20from%20file][profiles]].
 
-*** Formatters should cache qname formatting
+*** Formatters should cache qname formatting                          :story:
 
 We seem to re-format the same qname lots of times. We should just use
 a =std::ostringstream= to format once and reuse the resulting
 string. Probably worth doing this change after the performance tests
 are in.
 
-*** Refactor Licence formatter
+*** Refactor Licence formatter                                        :story:
 
 - year is hard-coded to 2012: At present the licence formatter has an
   hard-coded year of 2012. It should really be a parameter passed in.
@@ -175,7 +175,7 @@ are in.
   commenting syntaxes (e.g. cmake comments, c++ comments).
 - we should support multiple licences.
 
-*** Add a code generation marker
+*** Add a code generation marker                                      :story:
 
 Now that we've started to mix-and-match hand-crafted code with
 code-generated code, we should really have an easy way to distinguish
@@ -213,7 +213,7 @@ We need a =is_floating_point_like= method to be able to distinguish
 between them, and then the associated changes in the generators to
 create floating point numbers.
 
-*** Stereotypes to disable facets
+*** Stereotypes to disable facets                                     :story:
 
 At present we do not generate files for all facets in a service other
 than types. However, the correct fix is to have stereotypes to disable/enable
@@ -235,7 +235,7 @@ serialization support.
 By default services would have all aspects other than domain disabled,
 entities and values would have all aspects enabled.
 
-*** System models set meta-type to invalid
+*** System models set meta-type to invalid                            :story:
 
 Something is not quite right on the resolution logic
 
@@ -518,7 +518,7 @@ create an unversioned key. We should only generate the versioned
 key. However, it does make life easier. Wait for real world use cases
 to decide.
 
-*** Detect invalid child nodes
+*** Detect invalid child nodes                                        :story:
 
 When copying a set of classes from a diagram, where these classes
 where contained in a package, dia seems to copy across the =childnode=
@@ -530,7 +530,7 @@ elements which can have children, and if not issue good error
 messages - perhaps even talking about the possible cause for the
 error.
 
-*** Refactor Dia to SML transformer
+*** Refactor Dia to SML transformer                                   :story:
 
 - remove all properties from context which are used only internally in
   the transformer.
@@ -541,7 +541,7 @@ error.
   the model by the workflow, contained in a transformation result.
 - this does mean a lot of concatenation at the workflow level though.
 
-*** Add tests for SML workflow
+*** Add tests for SML workflow                                        :story:
 
 We don't seem to have any. A few come to mind:
 
@@ -568,7 +568,7 @@ Previous understanding:
 
 We should just follow the composite pattern in the naming.
 
-*** Injection framework
+*** Injection framework                                               :story:
 
 We need a more generic way of handling system types injection into
 models. This is because there is a number of things that can be
@@ -589,7 +589,7 @@ So we need to:
   passed in.
 - in the IoC spirit, we should probably create a =injector_interface=.
 
-*** Register types for multiple models is misbehaving
+*** Register types for multiple models is misbehaving                 :story:
 
 It seems that somehow we're clobbering the type registration of one
 model with another in register types. This is probably because we are
@@ -602,13 +602,13 @@ One solution for this problem would be to create serialisers which
 hide the machinery of serialisation internally; one should be able to
 just pass in a stream in and get a type out.
 
-*** Comments seem to be trimmed
+*** Comments seem to be trimmed                                       :story:
 
 For some reason we seem to be munching any blank lines at the end of
 comments. We should only remove the lines with the well known dogen
 marker, all other lines should be left untouched.
 
-*** Type resolution in referenced models
+*** Type resolution in referenced models                              :story:
 
 We did a hack a while ago whereby if a type is of a referenced model,
 we don't bother resolving it. As an optimisation this is probably
@@ -627,7 +627,7 @@ due to this are like so:
 : 2013-06-29 23:10:34.831294 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/sml/src/types/resolver.cpp(202): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname&) const
 : Dynamic exception type: boost::exception_detail::clone_impl<dogen::sml::resolution_error>
 
-*** Visitor adaptor for usage in ranges
+*** Visitor adaptor for usage in ranges                               :story:
 
 It would be great if we automatically generated an adaptor to visitors
 which could be plugged into a range. Internally the adaptor would
@@ -635,14 +635,14 @@ perform the accept on its =operator()=. We could also have an adaptor
 for a =std::pair= which would be templatised on the first member of
 the pair. Or should one just use a keys or values range iterator.
 
-*** Visitor with =std::function= for each =visit= method
+*** Visitor with =std::function= for each =visit= method              :story:
 
 It would be nice if the code generator created a visitor which has as
 its properties a set of =std::function= which match the signature of
 the visit functions; then the visit functions would just check that
 the functions have been assigned and call them. If not, throw.
 
-*** Improve logging of disconnected inheritance objects
+*** Improve logging of disconnected inheritance objects               :story:
 
 At present the error message for an inheritance object in dia which
 has less than two connections is less than helpful:
@@ -656,7 +656,7 @@ has less than two connections is less than helpful:
 We should really try to detail which object ID failed, as well as
 details of the connected object if possible, etc.
 
-*** Check concept properties for identity              :story:
+*** Check concept properties for identity                             :story:
     CLOCK: [2013-06-24 Mon 22:33]--[2013-06-24 Mon 22:36] =>  0:03
 
 When we added concepts we didn't had a link to the processing of
@@ -665,13 +665,13 @@ a concept it is not processed and added to the keys.
 
 Update injector to follow concepts.
 
-*** Sort model dependencies
+*** Sort model dependencies                                           :story:
 
 It seems the order of registration of models has moved with recent
 builds of dogen (1418). Investigate if we sort the dependencies and if
 not, sort them.
 
-*** Use pimpl for a few "one-shot" services
+*** Use pimpl for a few "one-shot" services                           :story:
 
 We have quite a few services where it would be great to have
 transactional semantics. For example, when building a graph in
@@ -730,13 +730,13 @@ transformation code:
 - sml to c++
 - potentially merger
 
-*** Test data generator with immutability looks wrong
+*** Test data generator with immutability looks wrong                 :story:
 
 We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
 for this.
 
-*** Make EOS support optional
+*** Make EOS support optional                                         :story:
 
 With the release of boost 1.54 We can almost compile dogen with a
 vanilla boost. once we make ODB optional, the only blocker would be
@@ -744,7 +744,7 @@ EOS. We should make it optional too. This is not so easy because it
 would break the tests as the output is expected to contain EOS
 stuff. Perhaps we should consider removing it altogether?
 
-*** Add support for boost concept
+*** Add support for boost concept                                     :story:
 
 Now dogen supports concepts, the natural thing to do is to express
 them in C++ code. This could easily be done using boost concept, or
@@ -752,7 +752,7 @@ the C++-14 concepts light.
 
 See [[http://www.boost.org/doc/libs/1_53_0/libs/concept_check/creating_concepts.htm][Creating Concepts]].
 
-*** Add support for boost and/or std tuple
+*** Add support for boost and/or std tuple                            :story:
     CLOCK: [2013-06-04 Tue 18:30]--[2013-06-04 Tue 18:32] =>  0:02
     CLOCK: [2013-06-04 Tue 18:18]--[2013-06-04 Tue 18:27] =>  0:09
 
@@ -770,13 +770,13 @@ rather than
 Using =std::tuple= would mean we'd have to create our own serialisers
 for it most likely.
 
-*** Make ODB support optional
+*** Make ODB support optional                                         :story:
 
 We should be able to build dogen without ODB. It would still generate
 all the ODB headers etc, but the database test model would not be
 compiled. This would be useful to reduce the number of dependencies.
 
-*** Add support for posix_time_zone
+*** Add support for posix_time_zone                                   :story:
 
 At present we need to use std::string to convey time zone
 information. We should be able to use the time zones available in
@@ -791,17 +791,17 @@ as an input, create some SML from it and then generate code which
 would do the boiler plate setup of the UI. With a bit more work one
 could potentially even generate the bindings for a presentation model.
 
-*** Consider renaming formatters
+*** Consider renaming formatters                                      :story:
 
 These are not really formatters; not sure what the right name should
 be though; templates?
 
-*** Add support for object cloning
+*** Add support for object cloning                                    :story:
 
 We should have a clone method which copy constructs all non-pointer
 types, and then creates new objects for pointer types.
 
-*** Remote method invocation
+*** Remote method invocation                                          :story:
     CLOCK: [2013-05-24 Fri 07:46]--[2013-05-24 Fri 08:13] =>  0:27
 
 See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]],
@@ -848,21 +848,21 @@ Now we just need a way of creating some generic interfaces that take a
 wire client and a wire service and plug the framer and the dispatcher
 into it.
 
-*** Inserter for enumerations shouldn't throw
+*** Inserter for enumerations shouldn't throw                         :story:
 
 We only use the inserter for debug dumping and it could happen that we
 are about to write the message for an exception when we decide to
 throw. Instead we should just print unexpected/invalid value and cast
 it to a numeric value in brackets.
 
-*** Generate state diagrams
+*** Generate state diagrams                                           :story:
 
 There is nothing stopping us from reading the UML State Chart objects
 in Dia and generating an FSM off of it, using one (or both) of boost's
 state machines. We could make the state machine contain inheritable
 methods which could be overridden by the user manually.
 
-*** Generate service skeleton
+*** Generate service skeleton                                         :story:
 
 Since we already have all of the boiler plate code for services such
 as licence, header guards, etc - we could just create a service
@@ -872,7 +872,7 @@ declarations.
 In addition to the class definition, it should also define all of the
 automatic constructors, and add a private section at the bottom.
 
-*** Add versioning support
+*** Add versioning support                                            :story:
     CLOCK: [2013-05-13 Mon 08:28]--[2013-05-13 Mon 08:37] =>  0:09
 
 New understanding:
@@ -959,7 +959,7 @@ separate folders. This would allow the creation of "conversion" apps
 which take types for one version and transform them into the next
 version.
 
-*** Add support for boost parameter
+*** Add support for boost parameter                                   :story:
 
 It would be nice to have boost parameter support. [[http://www.boost.org/doc/libs/1_53_0/libs/parameter/doc/html/index.html#named-function-parameters][Documentation here]].
 
@@ -969,7 +969,7 @@ parameters. However since it seems one has to add a lot of boiler
 plate code, perhaps its better to have a create function on a separate
 header which internally calls the appropriate setters.
 
-*** Build shared objects instead of dynamic libraries
+*** Build shared objects instead of dynamic libraries                 :story:
 
 With the increase in tests build speeds have started to suffer,
 especially on low hardware. One potential way to mitigate this is to
@@ -984,7 +984,7 @@ build so that users are not forced to always build static / shared
 libraries. We should make sure one of the tests is using a static
 library to make sure this scenario doesn't get borked.
 
-*** Add comments to test model sanitizer
+*** Add comments to test model sanitizer                              :story:
 
 We should explain why we decided to create a test model sanitizer
 instead of just adding specs to the test models themselves. The
@@ -993,7 +993,7 @@ rebaselining logic; we would either have to ignore specs on the diff
 or find a way to copy them after code generation. Both options are a
 bit of a hack. So instead we created a model with all the specs.
 
-*** Consider renaming dependencies to references in model
+*** Consider renaming dependencies to references in model             :story:
 
 Dependencies is a map of reference; why not call it references?
 
@@ -1033,12 +1033,12 @@ old understanding:
   interfaces for these classes and provide mocks for the tests. This
   would make the tests considerably smaller.
 
-*** Refactor node according to composite pattern in dia to sml
+*** Refactor node according to composite pattern in dia to sml        :story:
 
 This is not required if we decide to [[*Add%20composite%20stereotype][implement]] the composite
 pattern. We should just follow the composite pattern.
 
-*** Create a validator in SML
+*** Create a validator in SML                                         :story:
 
 We need a class responsible for checking the consistency of the SML
 model. There are several things we need to check for non-merged
@@ -1102,7 +1102,7 @@ Validator should provide contextual validation error messages:
 : in pod 'my_pod' (Dia ID: O0)
 : property 'my_property' has empty name.
 
-*** Add composite stereotype
+*** Add composite stereotype                                          :story:
 
 It would be nice if one could just mark a pod as =composite= and dogen
 automatically created the composite structure. As we only support
@@ -1124,7 +1124,7 @@ instead have something like "pointer only" dependencies or some such
 SML level concept and then interpret this dependency as a forward
 declaration at the C++ level.
 
-*** Add support for bitsets
+*** Add support for bitsets                                           :story:
 
 We are using a lot of boolean variables to define properties at the
 pod level, relationships, etc. In reality, these all could be
@@ -1158,19 +1158,19 @@ Links:
 - [[http://www.java2s.com/Tutorial/Cpp/0360__bitset/Usebitsetwithenumtogether.htm][Use bitset with enum together]]
 - [[http://stackoverflow.com/questions/9857239/c11-and-17-5-2-1-3-bitmask-types][C++11 and {17.5.2.1.3} Bitmask Types]]
 
-*** Vistor is only supported at the base class level
+*** Vistor is only supported at the base class level                  :story:
 
 Due to implementation constraints, we only support visitable at the
 base class level. Add an exception if users attempt to use visitable
 stereotype in a class that has parents.
 
-*** Create an interface for the text reader
+*** Create an interface for the text reader                           :story:
 
 In order to do performance testing of the dia model we should create
 an interface for text reader and implement it as a mock. This will
 avoid the overhead of reading stuff from the hard drive.
 
-*** Add string table support
+*** Add string table support                                          :story:
 
 We need a way of creating "tables" of strings such as for example for
 listing all the valid values for dia field names, etc. We could
@@ -1182,7 +1182,7 @@ We should also add a validate method which checks to see if a string
 is a valid value according to the string table. We could have a case
 insensitive validate too.
 
-*** Tidy-up test models
+*** Tidy-up test models                                               :story:
 
 We have a lot of fine grained test models for historic reasons. A lot
 of these could be collapsed into a smaller number of models, focused
@@ -1307,7 +1307,7 @@ If a pod itself is marked as comparable, then it is equivalent to mark
 all properties as comparable using their relative position as the
 comparison order.
 
-*** Private and public includes
+*** Private and public includes                                       :story:
 
 NOTE: We should use the terms =internal= and =external= to avoid
 confusion with C++ scopes. This follows Microsoft terminology for C#
@@ -1344,7 +1344,7 @@ should improve build times.
   =workflow= will be private; this means we need some kind of factory
   to generate =workflow_interface=.
 
-*** Refactor boost and std helpers and enums
+*** Refactor boost and std helpers and enums                          :story:
 
 We shouldn't really have std and boost enums. These are just a repeat
 of the SML models. We should have a find pod by name in a model which
@@ -1359,7 +1359,7 @@ code. This could be done with a config file using boost property
 tree. However, one would need some kind of way of mapping types into
 primitives, sequence containers etc - some kind of "concepts".
 
-*** Type framing
+*** Type framing                                                      :story:
 
 In places such as a cache or a socket, it may be useful to create a
 basic "frame" around serialised types. The minimum requirements for a
@@ -1370,20 +1370,20 @@ frame would be the payload - i.e. the serialised object.
 In order for this to work we probably need the concept of a "model
 group"; the type frame would be done for a group of models.
 
-*** Model and type enums
+*** Model and type enums                                              :story:
 
 It may be useful to create enumerations for models, types and
 properties within pods. This would in the future form the basis of
 reflection. One could use implementation specific properties to set
 the model ID and pod IDs.
 
-*** Add pimpl support
+*** Add pimpl support                                                 :story:
 
 It may be useful to mark classes as pimpl and generate a private
 implementation. On the public header we could forward declare all
 types.
 
-*** Add C++-03 mode
+*** Add C++-03 mode                                                   :story:
 
 It shouldn't be too hard to generate C++-03 code in addition to
 C++-11. We could follow the gcc/odb convention and have a =-std=
@@ -1391,7 +1391,7 @@ option for this. The only problem would be testing - at present the
 language settings comes from PFH scripts, not cmake, and we'd have to
 make sure the compiler is not in C++-11 mode when compiling 03.
 
-*** Use dogen models to test dogen
+*** Use dogen models to test dogen                                    :story:
 
 We should really use the dogen models in the dogen unit tests. The
 rationale is as follows:
@@ -1407,25 +1407,25 @@ mean that some tests will fail until a feature is finished (or that
 the developer will have to continuously rebase the dogen models), but
 the advantages are important.
 
-*** Add a property for the model name as meta-data
+*** Add a property for the model name as meta-data                    :story:
 
 It would be nice to be able to generate a model with a name other than
 the diagram file. We should have a command line option for this that
 overrides the default diagram name.
 
-*** Add camel case option
+*** Add camel case option                                             :story:
 
 It would be nice to have a command line option that switches names
 from underscores into camel case. The default convention would be that
 diagrams are always with underscores and then you can convert them at
 generation time. There should be a regex for this conversion.
 
-*** Warn if value or entity has methods
+*** Warn if value or entity has methods                               :story:
 
 We should issue a warning if a user defines methods in value or entity
 pods as its most likely by mistake.
 
-*** Add diff support
+*** Add diff support                                                  :story:
 
 New understanding: just create a new facet call diff and make these
 classes generate a simple textual representation of differences,
@@ -1458,7 +1458,7 @@ reflection class and field.
 Diff support is injected into the model just like keys. It also
 requires that reflection support gets injected too.
 
-*** Container details in JSON dump
+*** Container details in JSON dump                                    :story:
 
 It would be nice to have the container type and size in the JSON
 output.
@@ -1486,7 +1486,7 @@ However, we still haven't solved the following cases:
 
 As these are not so common they have been left for later.
 
-*** Manual typedef generation
+*** Manual typedef generation                                         :story:
 
 We should be able to create a stereotype of =typedef group=. This is a
 pod type with lots of attributes. The code generator will take the
@@ -1596,7 +1596,7 @@ scattered around different places. They should all live under test
 data and be part of a test data set. The test data set should probably
 be the spec name.
 
-*** Add test to check if we are writing when file contents haven't changed
+*** Add test to check if we are writing when file contents haven't changed :story:
 
 We broke the code that detected changes and did not notice because we
 don't have any changes around it. A simple test would be to generate
@@ -1604,7 +1604,7 @@ code for a test model, read the timestamp of a file (or even all
 files), then regenerate the model and compare the timestamps. If there
 are changes, the test would fail.
 
-*** Add support for =std::function= in services
+*** Add support for =std::function= in services                       :story:
 
 At present its not possible to declare an attribute of type
 =std::function= anywhere in a diagram. It won't really be possible to
@@ -1633,7 +1633,7 @@ This should be sufficient for services. At present we have a hack that
 allows functions without any template arguments, e.g. =std::function=,
 in services.
 
-*** Add support for references to types
+*** Add support for references to types                               :story:
 
 At present its not possible to create a type that has a reference to
 another type. This should be a case of updating the parser to cope
@@ -1648,19 +1648,19 @@ setter that takes the type by =&&=. The question then is should we
 also move on the getter? Sometimes it may not be a copyable type
 (e.g. asio's =socket=).
 
-*** Add support for default values
+*** Add support for default values                                    :story:
 
 It would be nice to be able to add a default value in dia and have it
 set on the default constructor, if the type is a primitive or a =std::string=.
 
-*** Add support for interfaces
+*** Add support for interfaces                                        :story:
 
 This is a very blue-skies story. When dogen starts supporting service
 types it would be useful to generate a service interface from
 dogen. In order to do this we'd have to parse the method definitions
 in dia and use those to construct an abstract base class.
 
-*** shared pointer to vector fails to build
+*** shared pointer to vector fails to build                           :story:
 
 If one has a property with type
 =boost::shared_ptr<std::vector<std::string>>=, we get the following
@@ -1687,13 +1687,13 @@ vectors:
 :    return r;
 :}
 
-*** Strange logging behaviour in tests
+*** Strange logging behaviour in tests                                :story:
 
 As reported by JS for some reason if a test has a null pointer
 de-reference, the next test will log to both files. This means the
 logger is not being switched off properly in the presence of exceptions.
 
-*** Mix-and-match of manual projects
+*** Mix-and-match of manual projects                                  :story:
 
 With the ignore by regex feature its now possible to mix and match
 projects. However, dogen generates a makefile which does not include
@@ -1702,7 +1702,7 @@ src cmakefile that looks for other cmakefiles and adds them
 automatically in its =add_subdirectory=. This could be done by the
 CMake backend when that exists.
 
-*** Use error codes in exceptions
+*** Use error codes in exceptions                                     :story:
 
 Avoid breaking tests every time the exception text changes by creating
 a error code property in kitanda exceptions.
@@ -1722,7 +1722,7 @@ machinery of creating an exception with the right code, message etc?
 it could also be responsible for appending more content to an existing
 exception so that we'd have the tags all in one place.
 
-*** Generation of cache code
+*** Generation of cache code                                          :story:
 
 New understanding for this story:
 
@@ -1779,7 +1779,7 @@ Sample flow:
 - we need to re-read the coherence docs to clarify the roles of
   front/back cache, local/remote cache and near cache.
 
-*** Unordered map of user type in package fails
+*** Unordered map of user type in package fails                       :story:
 
 We seem to have a strange bug whereby creating a
 =std::unordered_map<E1,E2>= fails sanity checks if E1 is in a
@@ -1821,7 +1821,7 @@ been captured in the backlog.
   such as C++, SQL etc which would trigger different types of
   cmakefiles to come up.
 
-*** Adding new engine spec tests is hard
+*** Adding new engine spec tests is hard                              :story:
 
 In order to test models at the engine level one needs to first
 generate the dia input. This can be done as follows:
@@ -1832,7 +1832,7 @@ generate the dia input. This can be done as follows:
 From the bin directory. We need to make these steps a bit more
 obvious. Why do we even need this?
 
-*** Naming of saved SML/Dia files is incorrect
+*** Naming of saved SML/Dia files is incorrect                        :story:
 
 For some random reason when we use dogen to save SML/Dia files the
 names look like this:
@@ -1847,7 +1847,7 @@ but our tests expect:
 
 This must be part of a refactoring that wasn't completed properly.
 
-*** Consider renaming specs to tests
+*** Consider renaming specs to tests                                  :story:
 
 We started using the terminology specs to mean specifications because
 our unit tests follow the ideas outlined by Kevlin Henney. However, we
@@ -1862,7 +1862,7 @@ confusing every other developer. This would require:
 - we should also use =_tests= on the test suite name so we can do
   =using XYZ= without name clashes.
 
-*** Support for components and groups
+*** Support for components and groups                                 :story:
 
 We recently added support for creating multiple packages from a single
 source tree. We need generated models to have a new top-level cmake file:
@@ -1880,7 +1880,7 @@ And the =src= cmake file:
 
 : install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
 
-*** Option to diff generated code
+*** Option to diff generated code                                     :story:
 
 It would be useful to have an option that would do everything except
 writing the files to disk; instead, it would diff them with the
@@ -1888,12 +1888,12 @@ existing files and report if there are any differences. This would be
 useful to make sure the source code matches the latest version of the
 diagram.
 
-*** Option to validate diagram
+*** Option to validate diagram                                        :story:
 
 It would be nice if one could just check if a dia diagram is valid for
 code generation, e.g. =--validate= or something along those lines.
 
-*** Shared pointers to primitive types
+*** Shared pointers to primitive types                                :story:
 
 At present we do not support shared pointers to primitive types. This
 is because they require special handling in serialisation. See:
@@ -1913,14 +1913,14 @@ if there is a shared pointer to primitive; if there is, put in:
 :     ar & static_cast<int &>(ti);
 : }
 
-*** Full constructor parameter comments
+*** Full constructor parameter comments                               :story:
 
 We could use the comments in properties to populate the comments for
 the full constructor for each parameter. This would require taking the
 first line of the documentation of each property and then stitching
 them together for the full constructor.
 
-*** Serialisation support for C++-11 specific containers
+*** Serialisation support for C++-11 specific containers              :story:
 
 We can't add =std::array= or =std::forward_list= because there is no
 serialisation support in boost 1.49. A mail was sent to the list to
@@ -1932,7 +1932,7 @@ However, it should be pretty trivial to generate serialisation code by
 hand at least for =std::array= or to use a solution similar to
 =std::unordered_map=.
 
-*** Support for ordered containers
+*** Support for ordered containers                                    :story:
 
 In order to provide support for ordered containers such as maps and
 sets we need to define =operator<=. However, it makes no sense to code
@@ -1951,19 +1951,19 @@ assumption. The alternatives are:
 
 Either approach requires [[Ignore%20files%20and%20folders%20based%20on%20regex][Ignore files and folders based on regex]].
 
-*** Rename =inserter_implementation=
+*** Rename =inserter_implementation=                                  :story:
 
 We used =inserter_implementation= to provide all sorts of utility
 methods for IO. This class should really be named IO utility or
 something of the sort.
 
-*** Cross model referencing tests
+*** Cross model referencing tests                                     :story:
 
 At present we do not have any tests were a pod in one model makes use
 of types defined in another model. This works fine but we should
 really have tests at the dogen level.
 
-*** Cross package referencing tests
+*** Cross package referencing tests                                   :story:
 
 Scenarios:
 
@@ -1982,69 +1982,69 @@ Scenarios:
 - object in package in package refers to object in package in package:
   pkg1::pkg2::A => pkg3::pkg4::B.
 
-*** Empty directories should be deleted
+*** Empty directories should be deleted                               :story:
 
 When housekeeper finishes deleting all extra files, it should check
 all of the processed directories to see if they are empty. If they
 are, it should delete the directory.
 
-*** Header only models shall not generate projects
+*** Header only models shall not generate projects                    :story:
 
 A project with just exceptions does not need a make file, and fails to
 compile if a makefile is generated. We need a way to not generate a
 makefile if there are no implementation files generated.
 
-*** Empty features should not show up
+*** Empty features should not show up                                 :story:
 
 If there are no files for a feature, we should not generate includers
 and folders for that feature.
 
-*** Add support for configurable enumerations types
+*** Add support for configurable enumerations types                   :story:
 
 At present our enumerations always use unsigned int as the underlying
 type. It should be possible to override that from dia.
 
-*** Add test for disabling XML
+*** Add test for disabling XML                                        :story:
 
 At present we are not testing model generation with XML disabled.
 
-*** IO header could depend on domain forward decl
+*** IO header could depend on domain forward decl                     :story:
 
 At present we are depending on the domain header but it seems we could
 depend only on the forward declarations.
 
-*** Format doubles, floats and bools properly
+*** Format doubles, floats and bools properly                         :story:
 
 At present we are using IO state savers but not actually setting the
 formatting on the stream depending on the primitive type.
 
-*** Add support for protected attributes
+*** Add support for protected attributes                              :story:
 
 We need to distinguish between public and protected attributes when in
 the presence of inheritance. If not, issue a warning.
 
-*** Add tests for invalid types
+*** Add tests for invalid types                                       :story:
 
 - type name is blank (or variable name)
 - type name does not exist on any model
 
-*** Add tests for disconnected connections
+*** Add tests for disconnected connections                            :story:
 
 We should throw if a diagram has a disconnected inheritance or
 composition relationship.
 
-*** Add tests for duplicate identifiers in Dia
+*** Add tests for duplicate identifiers in Dia                        :story:
 
 Detect if a diagram defines the same class or package multiple
 times. Should throw an exception.
 
-*** Test model sanity checks fail for enable facet serialisation
+*** Test model sanity checks fail for enable facet serialisation      :story:
 
 For some reason we are unable to compile the serialisation test for
 the test model which focuses only on the serialisation facet. Test is
 ignored for the moment.
 
-*** Handle unnamed models properly
+*** Handle unnamed models properly                                    :story:
 
 The option disable model name was meant to allow the generation of
 flat models, without any folders or namespaces for the model
@@ -2182,7 +2182,7 @@ the private ones to public before we do this.
 
 We should also issue a warning.
 
-*** Sanity check packages automatically
+*** Sanity check packages automatically                               :story:
 
 This work is also covered by tasks in the PFH backlog so update
 accordingly. This task only refers to the dogen specific parts of the
@@ -2209,14 +2209,14 @@ extension of the file. From a cursory look, all the usages we have of
 assert object can be replaced by assert file. If that's the case we
 can also remove this function.
 
-*** Exception classes should allow inheritance
+*** Exception classes should allow inheritance                        :story:
 
 We need to have a form of inheriting from a base exception for a given
 model. We also need to be able to inherit from other exceptions in a
 model. At present exceptions are not pods so the dependency graph
 support is not there.
 
-*** Investigate GDB visualisers for generated models
+*** Investigate GDB visualisers for generated models                  :story:
 
 It would be great if the code generator created GDB visualisers for
 the types in a generated models such that one could inspect values of
@@ -2226,7 +2226,7 @@ STL containers with types of that model.
 - [[https://github.com/ruediger/Boost-Pretty-Printer][Boost pretty printer]]
 - [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
 
-*** Generator usage in template tests needs to be cleaned
+*** Generator usage in template tests needs to be cleaned             :story:
 
 At present some template tests in =utility/test= ask for a
 generator, other for instances. We should only have one way of doing
@@ -2234,30 +2234,30 @@ this. We should probably always ask for generators as this means less
 boiler plate code in tests. It does mean a fixed dependency on
 generators.
 
-*** Replace old style for iterations in IO
+*** Replace old style for iterations in IO                            :story:
 
 At present we are still doing C++-03 iterations in the STL IO files
 such as =vector_io=, =list_io=, etc. We should be using the new =for=
 syntax for C++-11.
 
-*** Add an includer for all includers
+*** Add an includer for all includers                                 :story:
 
 It would be nice to totally include a model. For that we need an
 includer that includes all other includers. This should be as easy as
 keeping track of the different includers for each facet in the map
 inside of the includer service.
 
-*** Add new equivalence operator to domain types
+*** Add new equivalence operator to domain types                      :story:
 
 We should have an operator that compares the state of two objects
 ignoring the version.
 
-*** Property types are always fully qualified
+*** Property types are always fully qualified                         :story:
 
 When we code generate non-primitive properties we always fully qualify
 them even if they are on the same namespace as the containing type.
 
-*** Support "cross-facet interference"
+*** Support "cross-facet interference"                                :story:
 
 In a few cases its useful to disable bits of a facet when another
 facet is switched off because those bits do not belong to the main
@@ -2278,14 +2278,14 @@ was to add yet another flag: =disable_io= which is disabled when the
 IO facet is not present and passed on to the relevant formatters. This
 needs to be replaced by a more general approach.
 
-*** Add run spec targets for each test
+*** Add run spec targets for each test                                :story:
 
 We could piggy back on the ctest functionality and add a target for
 each test so one could =make enable_facet_domain= and =make
 run_enable_facet_domain=. The targets need to be prefixed with module
 name and test suite.
 
-*** Clean up WinSock definition in CMakeLists
+*** Clean up WinSock definition in CMakeLists                         :story:
 
 We did a crude implementation of finding WinSock just to get windows
 to build. There should be a FindWinSock somewhere. If not create one.
@@ -2293,7 +2293,7 @@ to build. There should be a FindWinSock somewhere. If not create one.
 Do we need this anymore? we probably need it for linking the database
 model, but we should check - maybe ODB has some magic around this.
 
-*** Refactor engine's =persister=
+*** Refactor engine's =persister=                                     :story:
 
 - add documentation
 - we put the decision on whether to persist on not based on settings
@@ -2306,7 +2306,7 @@ model, but we should check - maybe ODB has some magic around this.
   outputs in XML; it should respect the archive type requested by the
   user.
 
-*** Add unit test benchmarking
+*** Add unit test benchmarking                                        :story:
 
 New understanding:
 
