@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Support for file level comments via meta-data                     :story:
+
+We could easily have a tag for file level comments and transport that
+all the way to the output. The only problem is that it would be a one
+liner only so it may not be that useful.
+
+Multi-line support could be simulated by concatenating multiple
+entries - cumbersome but workable...
+
 *** Caching qname lookups                                             :story:
     CLOCK: [2013-10-30 Wed 18:02]--[2013-10-30 Wed 18:03] =>  0:01
     CLOCK: [2013-10-30 Wed 08:38]--[2013-10-30 Wed 08:43] =>  0:05
