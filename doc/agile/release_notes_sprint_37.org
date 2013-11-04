@@ -211,8 +211,6 @@ how to best rewrite existing code in terms of =ptree=.
   although it only has SML types. This is because this class is only
   useful for outputting stuff.
 
-**** Create the =om::meta_data= class and update code to use it        :task:
-
 *** COMPLETED Add module support to types header formatter            :story:
     CLOSED: [2013-11-04 Mon 07:42]
 **** COMPLETED Generic module support                                  :task:

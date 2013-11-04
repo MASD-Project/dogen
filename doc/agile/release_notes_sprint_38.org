@@ -1,0 +1,51 @@
+#+title: Release Notes for Sprint 38
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 38.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-11-04 Mon 07:50]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-11-04 Mon 07:47]--[2013-11-04 Mon 07:51] =>  0:04
+
+*** Implement auxiliar data structures required for formatting        :story:
+
+- create an enumeration for all relationship types: parent, child,
+  association, association_via_pointer, leaf
+- create a model index, made up of: leafs for entire model,
+  relationships by qname, leaves by qname, properties by qname (all
+  properties, local properties, inherited properties). make this a
+  property of the model.
+- create an indexer that populates the index. add indexer to SML
+  workflow.
+- create a class to aggregate the licence, modeline and
+  marker. namestorming: authorship, about, origination,
+  file_meta_data, file_details. Final name: =meta_data=. In the
+  context of OM this is makes sense because the purpose of OM is to
+  produce files, and this aggregate contains the meta data required to
+  produce them. File meta data would confuse inputs with outputs.
+- create a class to aggregate type information: type itself, indexed
+  properties, relationships: =type_details=. this should be in OM
+  although it only has SML types. This is because this class is only
+  useful for outputting stuff.
+
+**** Create the =om::meta_data= class and update code to use it        :task:
+
+*** Add include file support to main type formatter                   :story:
+*** Add tests for properties and compiler generated functions         :story:
+*** Add tests for module in model                                     :story:
+*** Add tests for tagging of abstract objects                         :story:
+
+** Deprecated Development Stories

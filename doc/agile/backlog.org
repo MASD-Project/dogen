@@ -8,8 +8,6 @@
 
 Stories that we intend to look at, at some point.
 
-*** Add tests for module in model                                     :story:
-*** Add tests for tagging of abstract objects                         :story:
 *** Support for file level comments via meta-data                     :story:
 
 We could easily have a tag for file level comments and transport that
