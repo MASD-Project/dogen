@@ -157,11 +157,9 @@ private:
 public:
     const std::string& meta_data_path() const override;
 
-    file format(const sml::module& module, const licence& l,
-        const modeline& modeline, const std::string& marker) const override;
+    file format(const sml::module& module, const annotation& a) const override;
 
-    file format(const sml::type& t, const licence& l,
-        const modeline& m, const std::string& marker,
+    file format(const sml::type& t, const annotation& a,
         const sml::property_cache_interface& c) const override;
 
 private:

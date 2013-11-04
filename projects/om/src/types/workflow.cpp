@@ -215,9 +215,10 @@ void workflow::setup_reference_data_subworkflow(const sml::model& m) {
 void workflow::operator()(const sml::type& t) const {
     ensure_non_null_context();
     const auto& md(t.meta_data());
-    auto licence(extract_licence(md));
+    const auto licence(extract_licence(md));
     const auto modeline(extract_modeline(md));
     const auto marker(extract_marker(md));
+    const annotation a(modeline, licence, marker);
     const auto& pc(context_->property_cache());
 
     sml::meta_data_reader reader(md);
@@ -227,7 +228,7 @@ void workflow::operator()(const sml::type& t) const {
         if (status == sml::tags::status_unsupported)
             continue;
 
-        auto file(f->format(t, licence, modeline, marker, pc));
+        auto file(f->format(t, a, pc));
         file.overwrite(status == sml::tags::status_handcrafted);
         context_->files().push_back(file);
     }
@@ -239,6 +240,7 @@ void workflow::operator()(const sml::module& m) const {
     auto licence(extract_licence(md));
     const auto modeline(extract_modeline(md));
     const auto marker(extract_marker(md));
+    const annotation a(modeline, licence, marker);
 
     sml::meta_data_reader reader(md);
     for (const auto f : module_formatters_) {
@@ -247,7 +249,7 @@ void workflow::operator()(const sml::module& m) const {
         if (status == sml::tags::status_unsupported)
             continue;
 
-        auto file(f->format(m, licence, modeline, marker));
+        auto file(f->format(m, a));
         file.overwrite(status == sml::tags::status_handcrafted);
         context_->files().push_back(file);
     }
@@ -259,6 +261,7 @@ void workflow::operator()(const sml::concept& c) const {
     auto licence(extract_licence(md));
     const auto modeline(extract_modeline(md));
     const auto marker(extract_marker(md));
+    const annotation a(modeline, licence, marker);
     const auto& pc(context_->property_cache());
 
     sml::meta_data_reader reader(md);
@@ -268,7 +271,7 @@ void workflow::operator()(const sml::concept& c) const {
         if (status == sml::tags::status_unsupported)
             continue;
 
-        auto file(f->format(c, licence, modeline, marker, pc));
+        auto file(f->format(c, a, pc));
         file.overwrite(status == sml::tags::status_handcrafted);
         context_->files().push_back(file);
     }

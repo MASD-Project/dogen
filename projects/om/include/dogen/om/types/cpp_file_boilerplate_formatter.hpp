@@ -29,8 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline.hpp"
+#include "dogen/om/types/annotation.hpp"
 #include "dogen/om/types/cpp_includes.hpp"
 
 namespace dogen {
@@ -76,8 +75,7 @@ private:
      * The preamble is made up of the modeline, any potential code
      * generation marker and the licence.
      */
-    void format_preamble(std::ostream& s, const licence& l, const modeline& m,
-        const std::string& marker) const;
+    void format_preamble(std::ostream& s, const annotation& a) const;
 
     /**
      * @brief Formats the file's postamble.
@@ -107,14 +105,14 @@ public:
     /**
      * @brief Formats the initial section of boilerplate.
      */
-    void format_begin(std::ostream& s, const licence& l, const modeline& m,
-        const std::string& marker, const cpp_includes& i,
+    void format_begin(
+        std::ostream& s, const annotation& a, const cpp_includes& i,
         const boost::filesystem::path& relative_file_path) const;
 
     /**
      * @brief Formats the end of the boilerplate.
      */
-    void format_end(std::ostream& s, const modeline& m,
+    void format_end(std::ostream& s, const annotation& a,
         const boost::filesystem::path& relative_file_path) const;
 
 private:

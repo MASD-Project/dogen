@@ -48,6 +48,8 @@ const std::string test_suite("cpp_types_main_header_file_formatter_spec");
 const std::string empty_marker;
 const dogen::om::licence empty_licence = dogen::om::licence();
 const dogen::om::modeline empty_modeline = dogen::om::modeline();
+const dogen::om::annotation empty_annotation(
+    empty_modeline, empty_licence, empty_marker);
 const boost::filesystem::path empty_path;
 const boost::filesystem::path non_empty_path("a/file.hpp");
 
@@ -242,7 +244,7 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_he
     const auto e(m.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
-    const auto r(f.format(e, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(e, empty_annotation, c));
     BOOST_CHECK(r.contents() == enumeration_two_enumerators);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                              << enumeration_two_enumerators
@@ -262,7 +264,7 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
     const auto& o(find_object(m, 0));
     BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
-    const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(o, empty_annotation, c));
     BOOST_CHECK(r.contents() == object_no_properties);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>" << object_no_properties
                              << "<end>";
@@ -281,7 +283,7 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
 
     dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
-    const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(o, empty_annotation, c));
     BOOST_CHECK(r.contents() == parent_object);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>" << parent_object << "<end>";
     BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r << "<end>";
@@ -299,7 +301,7 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
 
     dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
-    const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(o, empty_annotation, c));
     BOOST_CHECK(r.contents() == leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>" << leaf_child_object
                              << "<end>";
@@ -320,7 +322,7 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
     dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
-    const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(o, empty_annotation, c));
     BOOST_CHECK(r.contents() == non_leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>" << non_leaf_child_object
                              << "<end>";
@@ -342,7 +344,7 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
 
     dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
-    const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(o, empty_annotation, c));
     BOOST_CHECK(r.contents() == all_explicitly_defaulted_functions);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                              << all_explicitly_defaulted_functions << "<end>";
@@ -369,7 +371,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_typ
     dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
-    const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(o, empty_annotation, c));
     BOOST_CHECK(r.contents() == manual_default_constructor);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                              << manual_default_constructor << "<end>";
@@ -396,7 +398,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_
     dogen::om::cpp_types_main_header_file_formatter f;
     mock_property_cache c;
 
-    const auto r(f.format(o, empty_licence, empty_modeline, empty_marker, c));
+    const auto r(f.format(o, empty_annotation, c));
     BOOST_CHECK(r.contents() == manual_move_constructor);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                              << manual_move_constructor << "<end>";
@@ -416,7 +418,7 @@ BOOST_AUTO_TEST_CASE(module_with_comments_produces_expected_types_header) {
     const auto& module(m.modules().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "module: " << module;
 
-    const auto r(f.format(module, empty_licence, empty_modeline, empty_marker));
+    const auto r(f.format(module, empty_annotation));
     BOOST_CHECK(r.contents() == module_in_named_model);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>" << module_in_named_model
                              << "<end>";

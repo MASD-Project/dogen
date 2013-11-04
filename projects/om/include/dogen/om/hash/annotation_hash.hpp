@@ -18,44 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_CONCEPT_FORMATTER_INTERFACE_HPP
-#define DOGEN_OM_TYPES_CONCEPT_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_OM_HASH_ANNOTATION_HASH_HPP
+#define DOGEN_OM_HASH_ANNOTATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
-#include "dogen/om/types/file.hpp"
+#include <functional>
 #include "dogen/om/types/annotation.hpp"
-#include "dogen/om/types/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace om {
 
-/**
- * @brief Formatter that is responsible for the formtatting of a
- * single concept.
- */
-class concept_formatter_interface : public virtual file_formatter_interface {
+struct annotation_hasher {
 public:
-    concept_formatter_interface() = default;
-    concept_formatter_interface(const concept_formatter_interface&) = default;
-    concept_formatter_interface(concept_formatter_interface&&) = default;
-
-public:
-    virtual ~concept_formatter_interface() noexcept { }
-
-public:
-    /**
-     * @brief Format the concept according to some grammar into the
-     * stream.
-     */
-    virtual file format(const sml::concept& c, const annotation& a,
-        const sml::property_cache_interface& pc) const = 0;
+    static std::size_t hash(const annotation& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::om::annotation> {
+public:
+    size_t operator()(const dogen::om::annotation& v) const {
+        return dogen::om::annotation_hasher::hash(v);
+    }
+};
+
+}
 #endif

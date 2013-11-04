@@ -848,8 +848,7 @@ cpp_types_main_header_file_formatter::meta_data_path() const {
 }
 
 file cpp_types_main_header_file_formatter::
-format(const sml::module& module, const licence& l, const modeline& modeline,
-    const std::string& marker) const {
+format(const sml::module& module, const annotation& a) const {
 
     std::ostringstream s;
     cpp_formatters::indenter ind;
@@ -862,7 +861,7 @@ format(const sml::module& module, const licence& l, const modeline& modeline,
     const bool gp(reader.is_true(sml::tags::generate_preamble));
 
     cpp_file_boilerplate_formatter f(gp);
-    f.format_begin(s, l, modeline, marker, i, relative_file_path);
+    f.format_begin(s, a, i, relative_file_path);
     const auto ns(namespaces(module.name()));
 
     if (!ns.empty()) {
@@ -883,7 +882,7 @@ format(const sml::module& module, const licence& l, const modeline& modeline,
         nsf.format_end();
     }
     u.blank_line();
-    f.format_end(s, modeline, relative_file_path);
+    f.format_end(s, a, relative_file_path);
 
     file r;
     r.contents(s.str());
@@ -894,8 +893,8 @@ format(const sml::module& module, const licence& l, const modeline& modeline,
 }
 
 file cpp_types_main_header_file_formatter::
-format(const sml::type& t, const licence& l, const modeline& m,
-    const std::string& marker, const sml::property_cache_interface& c) const {
+format(const sml::type& t, const annotation& a,
+    const sml::property_cache_interface& c) const {
 
     std::ostringstream s;
     cpp_formatters::indenter ind;
@@ -908,7 +907,7 @@ format(const sml::type& t, const licence& l, const modeline& m,
     const boost::filesystem::path relative_file_path(reader.get(fn));
     const bool gp(reader.is_true(sml::tags::generate_preamble));
     cpp_file_boilerplate_formatter f(gp);
-    f.format_begin(s, l, m, marker, i, relative_file_path);
+    f.format_begin(s, a, i, relative_file_path);
     {
         const auto ns(namespaces(t.name()));
         cpp_formatters::namespace_helper nsh(context_->stream(), ns);
@@ -917,7 +916,7 @@ format(const sml::type& t, const licence& l, const modeline& m,
         context_->utility().blank_line();
     }
     context_->utility().blank_line();
-    f.format_end(s, m, relative_file_path);
+    f.format_end(s, a, relative_file_path);
 
     file r;
     r.contents(s.str());

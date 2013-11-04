@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/om/io/annotation_io.hpp"
 #include "dogen/om/io/comment_styles_io.hpp"
 #include "dogen/om/io/cpp_includes_io.hpp"
 #include "dogen/om/io/editors_io.hpp"

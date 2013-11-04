@@ -29,8 +29,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/om/types/file.hpp"
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline.hpp"
+#include "dogen/om/types/annotation.hpp"
 #include "dogen/om/types/file_formatter_interface.hpp"
 
 namespace dogen {
@@ -54,8 +53,7 @@ public:
      * @brief Format the type according to some grammar into the
      * stream.
      */
-    virtual file format(const sml::module& module, const licence& l,
-        const modeline& modeline, const std::string& marker) const = 0;
+    virtual file format(const sml::module& m, const annotation& a) const = 0;
 };
 
 } }

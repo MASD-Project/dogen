@@ -74,24 +74,23 @@ add_licence(std::list<std::string>& content, const licence& l) const {
 }
 
 void cpp_file_boilerplate_formatter::
-format_preamble(std::ostream& s, const licence& l, const modeline& m,
-    const std::string& marker) const {
+format_preamble(std::ostream& s, const annotation& a) const {
 
     if (!generate_preamble_)
         return;
 
-    const bool is_modeline_top(m.location() == modeline_locations::top);
+    const bool is_top(a.modeline().location() == modeline_locations::top);
     std::list<std::string> content;
-    if (is_modeline_top)
-        add_modeline(content, m);
+    if (is_top)
+        add_modeline(content, a.modeline());
 
-    add_marker(content, marker);
-    add_licence(content, l);
+    add_marker(content, a.code_generation_marker());
+    add_licence(content, a.licence());
 
     if (content.empty())
         return;
 
-    if (is_modeline_top && content.size() == 1) {
+    if (is_top && content.size() == 1) {
         comment_formatter cf(
             start_on_first_line,
             !use_documentation_tool_markup,
@@ -102,7 +101,7 @@ format_preamble(std::ostream& s, const licence& l, const modeline& m,
         cf.format(s, content, !line_between_blocks);
     } else {
         comment_formatter cf(
-            is_modeline_top ? start_on_first_line : !start_on_first_line,
+            is_top ? start_on_first_line : !start_on_first_line,
             !use_documentation_tool_markup,
             !documenting_previous_identifier,
             comment_styles::c_style,
@@ -134,11 +133,10 @@ format_includes(std::ostream& s, const cpp_includes& i) const {
 }
 
 void cpp_file_boilerplate_formatter::
-format_begin(std::ostream& s, const licence& l, const modeline& m,
-    const std::string& marker, const cpp_includes& i,
+format_begin(std::ostream& s, const annotation& a, const cpp_includes& i,
     const boost::filesystem::path& relative_file_path) const {
 
-    format_preamble(s, l, m, marker);
+    format_preamble(s, a);
     format_guards_begin(s, relative_file_path);
     format_includes(s, i);
 }
@@ -161,9 +159,9 @@ format_postamble(std::ostream& s, const modeline& m) const {
 }
 
 void cpp_file_boilerplate_formatter::
-format_end(std::ostream& s, const modeline& m,
+format_end(std::ostream& s, const annotation& a,
     const boost::filesystem::path& relative_file_path) const {
-    format_postamble(s, m);
+    format_postamble(s, a.modeline());
     format_guards_end(s, relative_file_path);
 }
 

@@ -18,42 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_CONCEPT_FORMATTER_INTERFACE_HPP
-#define DOGEN_OM_TYPES_CONCEPT_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_OM_TEST_DATA_ANNOTATION_TD_HPP
+#define DOGEN_OM_TEST_DATA_ANNOTATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
-#include "dogen/om/types/file.hpp"
 #include "dogen/om/types/annotation.hpp"
-#include "dogen/om/types/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace om {
 
-/**
- * @brief Formatter that is responsible for the formtatting of a
- * single concept.
- */
-class concept_formatter_interface : public virtual file_formatter_interface {
+class annotation_generator {
 public:
-    concept_formatter_interface() = default;
-    concept_formatter_interface(const concept_formatter_interface&) = default;
-    concept_formatter_interface(concept_formatter_interface&&) = default;
+    annotation_generator();
 
 public:
-    virtual ~concept_formatter_interface() noexcept { }
+    typedef dogen::om::annotation result_type;
 
 public:
-    /**
-     * @brief Format the concept according to some grammar into the
-     * stream.
-     */
-    virtual file format(const sml::concept& c, const annotation& a,
-        const sml::property_cache_interface& pc) const = 0;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }

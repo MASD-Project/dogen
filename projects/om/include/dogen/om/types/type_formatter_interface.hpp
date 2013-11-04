@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/om/types/file.hpp"
-#include "dogen/om/types/licence.hpp"
-#include "dogen/om/types/modeline.hpp"
+#include "dogen/om/types/annotation.hpp"
 #include "dogen/om/types/file_formatter_interface.hpp"
 
 namespace dogen {
@@ -55,8 +52,7 @@ public:
      * @brief Format the type according to some grammar into the
      * stream.
      */
-    virtual file format(const sml::type& t, const licence& l,
-        const modeline& m, const std::string& marker,
+    virtual file format(const sml::type& t, const annotation& a,
         const sml::property_cache_interface& pc) const = 0;
 };
 

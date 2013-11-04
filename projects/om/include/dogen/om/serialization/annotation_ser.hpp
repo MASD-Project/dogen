@@ -18,13 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/test_data/annotation_td.hpp"
-#include "dogen/om/test_data/comment_styles_td.hpp"
-#include "dogen/om/test_data/cpp_includes_td.hpp"
-#include "dogen/om/test_data/editors_td.hpp"
-#include "dogen/om/test_data/file_td.hpp"
-#include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/modeline_field_td.hpp"
-#include "dogen/om/test_data/modeline_group_td.hpp"
-#include "dogen/om/test_data/modeline_locations_td.hpp"
-#include "dogen/om/test_data/modeline_td.hpp"
+#ifndef DOGEN_OM_SERIALIZATION_ANNOTATION_SER_HPP
+#define DOGEN_OM_SERIALIZATION_ANNOTATION_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/om/types/annotation.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::om::annotation)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::om::annotation& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::om::annotation& v, unsigned int version);
+
+} }
+
+#endif

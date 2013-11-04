@@ -265,11 +265,12 @@ BOOST_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
 
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == modeline_top);
     BOOST_LOG_SEV(lg, debug) << "expected: " << modeline_top;
@@ -283,11 +284,12 @@ BOOST_AUTO_TEST_CASE(top_modeline_and_multiline_licence_is_formatted_correctly) 
 
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence(true/*multiline licence*/));
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == multiline_licence);
     BOOST_LOG_SEV(lg, debug) << "expected: " << multiline_licence;
@@ -301,11 +303,12 @@ BOOST_AUTO_TEST_CASE(bottom_modeline_is_formatted_correctly) {
 
     const auto m(mock_modeline(dogen::om::modeline_locations::bottom));
     const auto l(mock_licence());
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == modeline_bottom);
     BOOST_LOG_SEV(lg, debug) << "expected: " << modeline_bottom;
@@ -319,11 +322,12 @@ BOOST_AUTO_TEST_CASE(no_marker_is_formatted_correctly) {
 
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
+    const annotation a(m, l, empty_marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, empty_marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == no_marker);
     BOOST_LOG_SEV(lg, debug) << "expected: " << no_marker;
@@ -336,11 +340,12 @@ BOOST_AUTO_TEST_CASE(no_licence_is_formatted_correctly) {
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
+    const annotation a(m, empty_licence, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, empty_licence, m, marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == no_licence);
     BOOST_LOG_SEV(lg, debug) << "expected: " << no_licence;
@@ -355,11 +360,12 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     dogen::om::licence l;
     l.copyright_holders().push_back("a_holder");
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == licence_no_text);
     BOOST_LOG_SEV(lg, debug) << "expected: " << licence_no_text;
@@ -374,11 +380,12 @@ BOOST_AUTO_TEST_CASE(licence_with_text_but_no_holders_is_formatted_correctly) {
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     dogen::om::licence l;
     l.text("licence text");
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == licence_no_holders);
     BOOST_LOG_SEV(lg, debug) << "expected: " << licence_no_holders;
@@ -393,8 +400,10 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_marker_is_formatted_correctly) {
     const modeline m;
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, empty_licence, m, marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    const annotation a(m, empty_licence, marker);
+
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == just_marker);
     BOOST_LOG_SEV(lg, debug) << "expected: " << just_marker;
@@ -407,10 +416,12 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_modeline_at_the_top_is_formatted_correct
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
+    const annotation a(m, empty_licence, empty_marker);
+
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, empty_licence, m, empty_marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == just_modeline_top);
     BOOST_LOG_SEV(lg, debug) << "expected: " << just_modeline_top;
@@ -423,10 +434,12 @@ BOOST_AUTO_TEST_CASE(postamble_with_just_modeline_at_the_bottom_is_formatted_cor
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_modeline(dogen::om::modeline_locations::bottom));
+    const annotation a(m, empty_licence, empty_marker);
+
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, empty_licence, m, empty_marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r == just_modeline_bottom);
     BOOST_LOG_SEV(lg, debug) << "expected: " << just_modeline_bottom;
@@ -439,10 +452,11 @@ BOOST_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const modeline m;
+    const annotation a(m, empty_licence, empty_marker);
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, empty_licence, m, empty_marker, empty_includes, empty_path);
-    f.format_end(s, m, empty_path);
+    f.format_begin(s, a, empty_includes, empty_path);
+    f.format_end(s, a, empty_path);
     const auto r(s.str());
     BOOST_CHECK(r.empty());
     BOOST_LOG_SEV(lg, debug) << "expected: <empty>";
@@ -456,11 +470,12 @@ BOOST_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
 
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, empty_includes, a_path);
-    f.format_end(s, m, a_path);
+    f.format_begin(s, a, empty_includes, a_path);
+    f.format_end(s, a, a_path);
     const auto r(s.str());
     BOOST_CHECK(r == guards_with_top_modeline);
     BOOST_LOG_SEV(lg, debug) << "expected: " << guards_with_top_modeline;
@@ -474,11 +489,12 @@ BOOST_AUTO_TEST_CASE(header_guards_with_bottom_modeline_are_formatted_correctly)
 
     const auto m(mock_modeline(dogen::om::modeline_locations::bottom));
     const auto l(mock_licence());
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, empty_includes, a_path);
-    f.format_end(s, m, a_path);
+    f.format_begin(s, a, empty_includes, a_path);
+    f.format_end(s, a, a_path);
     const auto r(s.str());
     BOOST_CHECK(r == guards_with_bottom_modeline);
     BOOST_LOG_SEV(lg, debug) << "expected: " << guards_with_bottom_modeline;
@@ -493,11 +509,12 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     const dogen::om::cpp_includes i(mock_includes());
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f;
-    f.format_begin(s, l, m, marker, i, a_path);
-    f.format_end(s, m, a_path);
+    f.format_begin(s, a, i, a_path);
+    f.format_end(s, a, a_path);
     const auto r(s.str());
     BOOST_CHECK(r == includes_with_top_modeline);
     BOOST_LOG_SEV(lg, debug) << "expected: " << includes_with_top_modeline;
@@ -512,11 +529,12 @@ BOOST_AUTO_TEST_CASE(disabled_preamble_is_formatted_correctly) {
     const dogen::om::cpp_includes i(mock_includes());
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
+    const annotation a(m, l, marker);
 
     std::ostringstream s;
     dogen::om::cpp_file_boilerplate_formatter f(!generate_premable);
-    f.format_begin(s, l, m, marker, i, a_path);
-    f.format_end(s, m, a_path);
+    f.format_begin(s, a, i, a_path);
+    f.format_end(s, a, a_path);
     const auto r(s.str());
     BOOST_CHECK(r == disabled_preamble);
     BOOST_LOG_SEV(lg, debug) << "expected: " << disabled_preamble;

@@ -10,18 +10,25 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-04 Mon 07:50]
+Clock summary at [2013-11-04 Mon 21:42]
 
-| Headline     | Time   |
-|--------------+--------|
-| *Total time* | *0:00* |
+| Headline                                                                  | Time   |      |      |
+|---------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                              | *1:11* |      |      |
+|---------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                           |        | 1:11 |      |
+| IMPLEMENTATION Release notes and backlog grooming                         |        |      | 0:04 |
+| IMPLEMENTATION Implement auxiliar data structures required for formatting |        |      | 1:07 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-11-04 Mon 07:47]--[2013-11-04 Mon 07:51] =>  0:04
 
-*** Implement auxiliar data structures required for formatting        :story:
+*** IMPLEMENTATION Implement auxiliar data structures required for formatting :story:
+    CLOCK: [2013-11-04 Mon 07:53]--[2013-11-04 Mon 07:54] =>  0:01
 
+- create a class to aggregate the licence, modeline and
+  marker.
 - create an enumeration for all relationship types: parent, child,
   association, association_via_pointer, leaf
 - create a model index, made up of: leafs for entire model,
@@ -30,18 +37,32 @@ Clock summary at [2013-11-04 Mon 07:50]
   property of the model.
 - create an indexer that populates the index. add indexer to SML
   workflow.
-- create a class to aggregate the licence, modeline and
-  marker. namestorming: authorship, about, origination,
-  file_meta_data, file_details. Final name: =meta_data=. In the
-  context of OM this is makes sense because the purpose of OM is to
-  produce files, and this aggregate contains the meta data required to
-  produce them. File meta data would confuse inputs with outputs.
 - create a class to aggregate type information: type itself, indexed
   properties, relationships: =type_details=. this should be in OM
   although it only has SML types. This is because this class is only
   useful for outputting stuff.
 
-**** Create the =om::meta_data= class and update code to use it        :task:
+**** COMPLETED Create the =om::annotation= class and update code to use it :task:
+     CLOSED: [2013-11-04 Mon 21:41]
+     CLOCK: [2013-11-04 Mon 21:35]--[2013-11-04 Mon 21:37] =>  0:02
+     CLOCK: [2013-11-04 Mon 21:00]--[2013-11-04 Mon 21:35] =>  0:35
+     CLOCK: [2013-11-04 Mon 08:24]--[2013-11-04 Mon 08:32] =>  0:08
+     CLOCK: [2013-11-04 Mon 07:54]--[2013-11-04 Mon 08:15] =>  0:21
+
+namestorming: authorship, about, origination, file_meta_data,
+file_details.
+
+Suggested name: =meta_data=. In the context of OM this is makes sense
+because the purpose of OM is to produce files, and this aggregate
+contains the meta data required to produce them. File meta data would
+confuse inputs with outputs.
+
+We can't use =meta_data= because we already have a meta-data path in
+the file formatter and that refers to SML meta-data, so its very
+confusing.
+
+Instead we'll use =annotation=. Implies meta-data still, but avoids
+confusion with the SML kind.
 
 *** Add include file support to main type formatter                   :story:
 *** Add tests for properties and compiler generated functions         :story:

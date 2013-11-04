@@ -18,13 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/test_data/annotation_td.hpp"
-#include "dogen/om/test_data/comment_styles_td.hpp"
-#include "dogen/om/test_data/cpp_includes_td.hpp"
-#include "dogen/om/test_data/editors_td.hpp"
-#include "dogen/om/test_data/file_td.hpp"
-#include "dogen/om/test_data/licence_td.hpp"
-#include "dogen/om/test_data/modeline_field_td.hpp"
-#include "dogen/om/test_data/modeline_group_td.hpp"
-#include "dogen/om/test_data/modeline_locations_td.hpp"
-#include "dogen/om/test_data/modeline_td.hpp"
+#include "dogen/om/hash/annotation_hash.hpp"
+#include "dogen/om/hash/licence_hash.hpp"
+#include "dogen/om/hash/modeline_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace om {
+
+std::size_t annotation_hasher::hash(const annotation&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.modeline());
+    combine(seed, v.licence());
+    combine(seed, v.code_generation_marker());
+
+    return seed;
+}
+
+} }
