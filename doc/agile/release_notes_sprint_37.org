@@ -10,27 +10,29 @@ This file contains all stories that were closed during sprint 37.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-01 Fri 08:21]
+Clock summary at [2013-11-04 Mon 07:43]
 
-| Headline                                                                 | Time    |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *18:06* |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                          |         | 18:06 |      |
-| IMPLEMENTATION Release notes and backlog grooming                        |         |       | 0:06 |
-| COMPLETED Add types header formatter to workflow                         |         |       | 4:14 |
-| COMPLETED Add support for =boost::property_tree::ptree=                  |         |       | 1:43 |
-| COMPLETED Implement meta-data support as a =ptree=                       |         |       | 2:36 |
-| COMPLETED ODB pragma generation was broken with =ptree= change           |         |       | 1:14 |
-| COMPLETED Refactor tags, router, adaptor, etc                            |         |       | 1:57 |
-| COMPLETED Implement formatter factory and plug it into workflow          |         |       | 0:39 |
-| IMPLEMENTATION Refactor auxiliar data structures required for formatting |         |       | 1:24 |
-| IMPLEMENTATION Add include file support to main type formatter           |         |       | 1:31 |
-| IMPLEMENTATION Add module support to types header formatter              |         |       | 2:12 |
-| IMPLEMENTATION Add tests for properties and compiler generated functions |         |       | 0:30 |
+| Headline                                                            | Time    |       |      |
+|---------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                        | *18:15* |       |      |
+|---------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                     |         | 18:15 |      |
+| COMPLETED Release notes and backlog grooming                        |         |       | 0:07 |
+| COMPLETED Add types header formatter to workflow                    |         |       | 4:14 |
+| COMPLETED Add support for =boost::property_tree::ptree=             |         |       | 1:43 |
+| COMPLETED Implement meta-data support as a =ptree=                  |         |       | 2:36 |
+| COMPLETED ODB pragma generation was broken with =ptree= change      |         |       | 1:14 |
+| COMPLETED Refactor tags, router, adaptor, etc                       |         |       | 1:57 |
+| COMPLETED Implement formatter factory and plug it into workflow     |         |       | 0:39 |
+| COMPLETED Design auxiliar data structures required for formatting   |         |       | 1:32 |
+| COMPLETED Add module support to types header formatter              |         |       | 2:12 |
+| CANCELLED Add include file support to main type formatter           |         |       | 1:31 |
+| CANCELLED Add tests for properties and compiler generated functions |         |       | 0:30 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-11-04 Mon 07:43]
+    CLOCK: [2013-11-04 Mon 07:41]--[2013-11-04 Mon 07:42] =>  0:01
     CLOCK: [2013-10-21 Mon 07:53]--[2013-10-21 Mon 07:59] =>  0:06
 
 *** COMPLETED Add types header formatter to workflow                  :story:
@@ -179,7 +181,8 @@ how to best rewrite existing code in terms of =ptree=.
     CLOSED: [2013-10-28 Mon 19:15]
     CLOCK: [2013-10-28 Mon 18:35]--[2013-10-28 Mon 19:14] =>  0:39
 
-*** IMPLEMENTATION Refactor auxiliar data structures required for formatting :story:
+*** COMPLETED Design auxiliar data structures required for formatting :story:
+    CLOSED: [2013-11-04 Mon 07:41]
     CLOCK: [2013-11-01 Fri 08:30]--[2013-11-01 Fri 08:38] =>  0:08
     CLOCK: [2013-11-01 Fri 07:49]--[2013-11-01 Fri 08:21] =>  0:32
     CLOCK: [2013-10-31 Thu 08:31]--[2013-10-31 Thu 08:38] =>  0:07
@@ -210,12 +213,8 @@ how to best rewrite existing code in terms of =ptree=.
 
 **** Create the =om::meta_data= class and update code to use it        :task:
 
-*** IMPLEMENTATION Add include file support to main type formatter    :story:
-    CLOCK: [2013-10-28 Mon 21:05]--[2013-10-28 Mon 21:40] =>  0:35
-    CLOCK: [2013-10-28 Mon 20:09]--[2013-10-28 Mon 21:05] =>  0:56
-
-*** IMPLEMENTATION Add module support to types header formatter       :story:
-**** Add test for module in model
+*** COMPLETED Add module support to types header formatter            :story:
+    CLOSED: [2013-11-04 Mon 07:42]
 **** COMPLETED Generic module support                                  :task:
      CLOSED: [2013-10-27 Sun 11:33]
      CLOCK: [2013-10-27 Sun 09:39]--[2013-10-27 Sun 11:32] =>  1:53
@@ -224,10 +223,14 @@ how to best rewrite existing code in terms of =ptree=.
      CLOSED: [2013-10-27 Sun 11:33]
      CLOCK: [2013-10-27 Sun 09:20]--[2013-10-27 Sun 09:39] =>  0:19
 
-*** IMPLEMENTATION Add tests for properties and compiler generated functions :story:
+*** CANCELLED Add include file support to main type formatter         :story:
+    CLOSED: [2013-11-04 Mon 07:41]
+    CLOCK: [2013-10-28 Mon 21:05]--[2013-10-28 Mon 21:40] =>  0:35
+    CLOCK: [2013-10-28 Mon 20:09]--[2013-10-28 Mon 21:05] =>  0:56
+
+*** CANCELLED Add tests for properties and compiler generated functions :story:
+    CLOSED: [2013-11-04 Mon 07:42]
     CLOCK: [2013-10-25 Fri 08:27]--[2013-10-25 Fri 08:35] =>  0:08
     CLOCK: [2013-10-25 Fri 07:56]--[2013-10-25 Fri 08:18] =>  0:22
-
-*** Add tests for tagging of abstract objects                         :story:
 
 ** Deprecated Development Stories
