@@ -63,11 +63,8 @@ graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
     for (const auto& l : diagram.layers()) {
         for (const auto& o : l.objects()) {
             const auto po(p.process(o));
-
-            if (!g.is_relevant(po))
-                continue;
-
-            g.add(po);
+            if (g.is_relevant(po))
+                g.add(po);
         }
     }
 
