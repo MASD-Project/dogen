@@ -1258,6 +1258,28 @@ These models test dia features and must be kept isolated:
 
 At present we are only testing packages in comments.
 
+**** Folder structure
+
+We should take this opportunity to reorganise the test model folders,
+perhaps with a structure similar to this (in projects):
+
+: test_models
+:     |----> cpp_03                 [language, variant]
+:              |----> enumeration   [model with tests]
+:               ...
+:     |----> cpp_11
+:              |----> enumeration
+:               ...
+:     |----> csharp
+:      ...
+
+All the tests in sanitizer would then be moved into each individual
+model. This would allow compiling the tests on C++ 03 and C++ 11. We
+would also have to move this flag from the generic C++ section to each
+individual library/binary makefile.
+
+See [[*Add%20C%2B%2B-03%20mode][C++ 03 support]].
+
 *** Enumeration string conversion could be configurable               :story:
 
 It should be possible to pass in one or more string values as implementation
