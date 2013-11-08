@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Replace Boolean attributes with flags in abstract object          :story:
+
+We have a number of Boolean attributes in abstract object which could
+easily be replaced by a single int and a flag enumeration. We would
+also need a set of utility methods to access the values.
+
+This story has a dependency on [[*Add%20support%20for%20bitsets][bitset support]].
+
 *** Support for file level comments via meta-data                     :story:
 
 We could easily have a tag for file level comments and transport that
@@ -1111,7 +1119,7 @@ this (node, nested qname, etc).
 
 This would be part of the injection framework.
 
-*** Move extractor from C++ model into SML                             :story:
+*** Move extractor from C++ model into SML                            :story:
 
 Extractor and relationships should be moved into SML. The C++ specific
 bits are the parts where we directly name types such as
@@ -1126,10 +1134,9 @@ declaration at the C++ level.
 
 *** Add support for bitsets                                           :story:
 
-We are using a lot of boolean variables to define properties at the
-pod level, relationships, etc. In reality, these all could be
-implemented with  =std::bitset=, plus an enumeration. One possible
-implementation is:
+We are using a lot of boolean variables in SML. In reality, these all
+could be implemented with =std::bitset=, plus an enumeration. One
+possible implementation is:
 
 - add =std::bitset= to std model.
 - create a new stereotype of bitset.
