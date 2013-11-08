@@ -31,7 +31,7 @@ create_dogen_std_model_pkg1_class_c(const unsigned int position) {
 
 std::list<dogen::std_model::pkg1::class_c> create_std_list_dogen_std_model_pkg1_class_c(unsigned int position) {
     std::list<dogen::std_model::pkg1::class_c> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_std_model_pkg1_class_c(position + i));
     }
     return r;

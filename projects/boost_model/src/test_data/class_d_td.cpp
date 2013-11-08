@@ -61,7 +61,7 @@ create_boost_optional_dogen_boost_model_pkg1_class_c(unsigned int position) {
 
 std::vector<dogen::boost_model::class_a> create_std_vector_dogen_boost_model_class_a(unsigned int position) {
     std::vector<dogen::boost_model::class_a> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_boost_model_class_a(position + i));
     }
     return r;

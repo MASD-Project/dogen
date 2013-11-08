@@ -39,7 +39,7 @@ create_boost_shared_ptr_dogen_boost_model_class_a(unsigned int position) {
 
 std::vector<boost::shared_ptr<dogen::boost_model::class_a> > create_std_vector_boost_shared_ptr_dogen_boost_model_class_a_(unsigned int position) {
     std::vector<boost::shared_ptr<dogen::boost_model::class_a> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_boost_model_class_a(position + i));
     }
     return r;
@@ -51,7 +51,7 @@ int create_int(const unsigned int position) {
 
 std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> > create_std_unordered_map_int_boost_shared_ptr_dogen_boost_model_class_a_(unsigned int position) {
     std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_int(position + i), create_boost_shared_ptr_dogen_boost_model_class_a(position + i)));
     }
     return r;
@@ -83,7 +83,7 @@ create_boost_shared_ptr_dogen_boost_model_class_base(unsigned int position) {
 
 std::vector<boost::shared_ptr<dogen::boost_model::class_base> > create_std_vector_boost_shared_ptr_dogen_boost_model_class_base_(unsigned int position) {
     std::vector<boost::shared_ptr<dogen::boost_model::class_base> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_boost_model_class_base(position + i));
     }
     return r;

@@ -33,7 +33,7 @@ std::string create_std_string(const unsigned int position) {
 
 std::list<std::string> create_std_list_std_string(unsigned int position) {
     std::list<std::string> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_string(position + i));
     }
     return r;
@@ -46,7 +46,7 @@ create_dogen_std_model_class_a(const unsigned int position) {
 
 std::list<dogen::std_model::class_a> create_std_list_dogen_std_model_class_a(unsigned int position) {
     std::list<dogen::std_model::class_a> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_std_model_class_a(position + i));
     }
     return r;
@@ -59,7 +59,7 @@ create_dogen_std_model_pkg1_class_c(const unsigned int position) {
 
 std::list<dogen::std_model::pkg1::class_c> create_std_list_dogen_std_model_pkg1_class_c(unsigned int position) {
     std::list<dogen::std_model::pkg1::class_c> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_std_model_pkg1_class_c(position + i));
     }
     return r;
@@ -71,7 +71,7 @@ unsigned int create_unsigned_int(const unsigned int position) {
 
 std::list<unsigned int> create_std_list_unsigned_int(unsigned int position) {
     std::list<unsigned int> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_unsigned_int(position + i));
     }
     return r;
@@ -79,7 +79,7 @@ std::list<unsigned int> create_std_list_unsigned_int(unsigned int position) {
 
 std::list<std::list<unsigned int> > create_std_list_std_list_unsigned_int_(unsigned int position) {
     std::list<std::list<unsigned int> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_list_unsigned_int(position + i));
     }
     return r;

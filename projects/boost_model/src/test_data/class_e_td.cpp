@@ -66,7 +66,7 @@ create_boost_variant_int_dogen_boost_model_class_derived_double(unsigned int pos
 
 std::vector<boost::variant<int, dogen::boost_model::class_derived, double> > create_std_vector_boost_variant_int_dogen_boost_model_class_derived_double_(unsigned int position) {
     std::vector<boost::variant<int, dogen::boost_model::class_derived, double> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_variant_int_dogen_boost_model_class_derived_double(position + i));
     }
     return r;

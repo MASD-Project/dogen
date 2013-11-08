@@ -38,7 +38,7 @@ create_dogen_std_model_pkg1_class_c(const unsigned int position) {
 
 std::vector<dogen::std_model::pkg1::class_c> create_std_vector_dogen_std_model_pkg1_class_c(unsigned int position) {
     std::vector<dogen::std_model::pkg1::class_c> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_std_model_pkg1_class_c(position + i));
     }
     return r;
@@ -46,7 +46,7 @@ std::vector<dogen::std_model::pkg1::class_c> create_std_vector_dogen_std_model_p
 
 std::unordered_map<dogen::std_model::class_a, std::vector<dogen::std_model::pkg1::class_c> > create_std_unordered_map_dogen_std_model_class_a_std_vector_dogen_std_model_pkg1_class_c_(unsigned int position) {
     std::unordered_map<dogen::std_model::class_a, std::vector<dogen::std_model::pkg1::class_c> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_std_model_class_a(position + i), create_std_vector_dogen_std_model_pkg1_class_c(position + i)));
     }
     return r;
@@ -54,7 +54,7 @@ std::unordered_map<dogen::std_model::class_a, std::vector<dogen::std_model::pkg1
 
 std::list<dogen::std_model::class_a> create_std_list_dogen_std_model_class_a(unsigned int position) {
     std::list<dogen::std_model::class_a> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_std_model_class_a(position + i));
     }
     return r;
@@ -62,7 +62,7 @@ std::list<dogen::std_model::class_a> create_std_list_dogen_std_model_class_a(uns
 
 std::unordered_map<dogen::std_model::pkg1::class_c, std::list<dogen::std_model::class_a> > create_std_unordered_map_dogen_std_model_pkg1_class_c_std_list_dogen_std_model_class_a_(unsigned int position) {
     std::unordered_map<dogen::std_model::pkg1::class_c, std::list<dogen::std_model::class_a> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_std_model_pkg1_class_c(position + i), create_std_list_dogen_std_model_class_a(position + i)));
     }
     return r;
@@ -75,7 +75,7 @@ create_dogen_std_model_class_a_unversioned_key(const unsigned int position) {
 
 std::unordered_map<dogen::std_model::class_a_unversioned_key, dogen::std_model::class_a> create_std_unordered_map_dogen_std_model_class_a_unversioned_key_dogen_std_model_class_a(unsigned int position) {
     std::unordered_map<dogen::std_model::class_a_unversioned_key, dogen::std_model::class_a> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_std_model_class_a_unversioned_key(position + i), create_dogen_std_model_class_a(position + i)));
     }
     return r;
@@ -88,7 +88,7 @@ create_dogen_std_model_class_a_versioned_key(const unsigned int position) {
 
 std::unordered_map<dogen::std_model::class_a_versioned_key, dogen::std_model::class_a> create_std_unordered_map_dogen_std_model_class_a_versioned_key_dogen_std_model_class_a(unsigned int position) {
     std::unordered_map<dogen::std_model::class_a_versioned_key, dogen::std_model::class_a> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_std_model_class_a_versioned_key(position + i), create_dogen_std_model_class_a(position + i)));
     }
     return r;

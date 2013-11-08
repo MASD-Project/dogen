@@ -59,7 +59,7 @@ create_std_pair_std_string_int(unsigned int position) {
 
 std::vector<std::pair<std::string, int> > create_std_vector_std_pair_std_string_int_(unsigned int position) {
     std::vector<std::pair<std::string, int> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_pair_std_string_int(position + i));
     }
     return r;

@@ -50,7 +50,7 @@ create_boost_posix_time_time_duration(const unsigned int position) {
 
 std::list<boost::gregorian::date> create_std_list_boost_gregorian_date(unsigned int position) {
     std::list<boost::gregorian::date> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_gregorian_date(position + i));
     }
     return r;
@@ -58,7 +58,7 @@ std::list<boost::gregorian::date> create_std_list_boost_gregorian_date(unsigned 
 
 std::list<boost::posix_time::ptime> create_std_list_boost_posix_time_ptime(unsigned int position) {
     std::list<boost::posix_time::ptime> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_posix_time_ptime(position + i));
     }
     return r;
@@ -66,7 +66,7 @@ std::list<boost::posix_time::ptime> create_std_list_boost_posix_time_ptime(unsig
 
 std::list<boost::posix_time::time_duration> create_std_list_boost_posix_time_time_duration(unsigned int position) {
     std::list<boost::posix_time::time_duration> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_posix_time_time_duration(position + i));
     }
     return r;

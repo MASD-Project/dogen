@@ -570,7 +570,7 @@ void generator_implementation::
 recursive_helper_method_creator(const std::string& owner_name,
     const cpp::nested_type_info& nti,
     std::unordered_set<std::string>& types_done, bool as_pointer) {
-    const unsigned int quantity(10);
+    const unsigned int quantity(4);
 
     std::string type_name(nti.complete_identifiable_name());
     if (as_pointer)
