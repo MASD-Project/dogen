@@ -7,6 +7,13 @@
 ** Development Stories
 
 Stories that we intend to look at, at some point.
+
+*** Disable =invalid= value in enumerations                           :story:
+
+At present all enumerations must have an invalid value. One can
+conceive cases where that is not a useful thing. We should have a
+meta-data flag that disables it.
+
 *** Bitmask enumeration                                               :story:
 
 We should have a meta-data flag that generates enumerators with values
