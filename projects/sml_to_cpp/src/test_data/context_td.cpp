@@ -42,7 +42,7 @@ create_dogen_cpp_class_info(const unsigned int position) {
 
 std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_class_info(position + i)));
     }
     return r;
@@ -55,7 +55,7 @@ create_dogen_sml_to_cpp_relationships(const unsigned int position) {
 
 std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships> create_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_to_cpp_relationships(position + i)));
     }
     return r;
@@ -68,7 +68,7 @@ create_dogen_cpp_exception_info(const unsigned int position) {
 
 std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_exception_info(position + i)));
     }
     return r;
@@ -81,7 +81,7 @@ create_dogen_cpp_enum_info(const unsigned int position) {
 
 std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_enum_info(position + i)));
     }
     return r;
@@ -94,7 +94,7 @@ create_dogen_cpp_registrar_info(const unsigned int position) {
 
 std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_registrar_info(position + i)));
     }
     return r;
@@ -107,7 +107,7 @@ create_dogen_cpp_namespace_info(const unsigned int position) {
 
 std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_namespace_info(position + i)));
     }
     return r;
@@ -120,7 +120,7 @@ create_dogen_cpp_visitor_info(const unsigned int position) {
 
 std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_visitor_info(position + i)));
     }
     return r;

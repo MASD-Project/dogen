@@ -44,7 +44,7 @@ create_boost_shared_ptr_dogen_dia_attribute(unsigned int position) {
 
 std::vector<boost::shared_ptr<dogen::dia::attribute> > create_std_vector_boost_shared_ptr_dogen_dia_attribute_(unsigned int position) {
     std::vector<boost::shared_ptr<dogen::dia::attribute> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_dia_attribute(position + i));
     }
     return r;

@@ -43,7 +43,7 @@ create_dogen_dia_connection(const unsigned int position) {
 
 std::vector<dogen::dia::connection> create_std_vector_dogen_dia_connection(unsigned int position) {
     std::vector<dogen::dia::connection> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_dia_connection(position + i));
     }
     return r;
@@ -68,7 +68,7 @@ create_dogen_dia_attribute(const unsigned int position) {
 
 std::vector<dogen::dia::attribute> create_std_vector_dogen_dia_attribute(unsigned int position) {
     std::vector<dogen::dia::attribute> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_dia_attribute(position + i));
     }
     return r;

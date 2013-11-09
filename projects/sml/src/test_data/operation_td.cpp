@@ -48,7 +48,7 @@ create_dogen_sml_parameter(const unsigned int position) {
 
 std::list<dogen::sml::parameter> create_std_list_dogen_sml_parameter(unsigned int position) {
     std::list<dogen::sml::parameter> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_sml_parameter(position + i));
     }
     return r;

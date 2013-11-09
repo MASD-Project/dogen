@@ -37,7 +37,7 @@ create_dogen_om_modeline(const unsigned int position) {
 
 std::unordered_map<std::string, dogen::om::modeline> create_std_unordered_map_std_string_dogen_om_modeline(unsigned int position) {
     std::unordered_map<std::string, dogen::om::modeline> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_dogen_om_modeline(position + i)));
     }
     return r;

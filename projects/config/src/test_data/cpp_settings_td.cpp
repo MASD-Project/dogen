@@ -42,7 +42,7 @@ create_dogen_config_cpp_facet_types(const unsigned int position) {
 
 std::set<dogen::config::cpp_facet_types> create_std_set_dogen_config_cpp_facet_types(unsigned int position) {
     std::set<dogen::config::cpp_facet_types> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(create_dogen_config_cpp_facet_types(position + i));
     }
     return r;

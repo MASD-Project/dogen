@@ -58,7 +58,7 @@ create_dogen_dia_to_sml_processed_property(const unsigned int position) {
 
 std::list<dogen::dia_to_sml::processed_property> create_std_list_dogen_dia_to_sml_processed_property(unsigned int position) {
     std::list<dogen::dia_to_sml::processed_property> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_dia_to_sml_processed_property(position + i));
     }
     return r;

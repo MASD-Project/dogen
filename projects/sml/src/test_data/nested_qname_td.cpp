@@ -35,7 +35,7 @@ create_dogen_sml_nested_qname(const unsigned int) {
 
 std::list<dogen::sml::nested_qname> create_std_list_dogen_sml_nested_qname(unsigned int position) {
     std::list<dogen::sml::nested_qname> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_sml_nested_qname(position + i));
     }
     return r;

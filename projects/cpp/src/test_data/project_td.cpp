@@ -32,7 +32,7 @@ create_dogen_cpp_source_file(const unsigned int position) {
 
 std::list<dogen::cpp::source_file> create_std_list_dogen_cpp_source_file(unsigned int position) {
     std::list<dogen::cpp::source_file> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_cpp_source_file(position + i));
     }
     return r;

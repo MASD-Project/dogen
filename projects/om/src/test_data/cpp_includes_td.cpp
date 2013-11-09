@@ -32,7 +32,7 @@ create_boost_filesystem_path(const unsigned int position) {
 
 std::list<boost::filesystem::path> create_std_list_boost_filesystem_path(unsigned int position) {
     std::list<boost::filesystem::path> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_filesystem_path(position + i));
     }
     return r;

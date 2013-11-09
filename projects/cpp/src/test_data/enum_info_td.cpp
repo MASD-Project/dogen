@@ -33,7 +33,7 @@ std::string create_std_string(const unsigned int position) {
 
 std::list<std::string> create_std_list_std_string(unsigned int position) {
     std::list<std::string> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_string(position + i));
     }
     return r;
@@ -46,7 +46,7 @@ create_dogen_cpp_enumerator_info(const unsigned int position) {
 
 std::list<dogen::cpp::enumerator_info> create_std_list_dogen_cpp_enumerator_info(unsigned int position) {
     std::list<dogen::cpp::enumerator_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_cpp_enumerator_info(position + i));
     }
     return r;

@@ -44,7 +44,7 @@ create_dogen_config_reference(const unsigned int position) {
 
 std::vector<dogen::config::reference> create_std_vector_dogen_config_reference(unsigned int position) {
     std::vector<dogen::config::reference> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_config_reference(position + i));
     }
     return r;

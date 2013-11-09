@@ -30,7 +30,7 @@ create_dogen_dia_attribute(const unsigned int position) {
 
 std::vector<dogen::dia::attribute> create_std_vector_dogen_dia_attribute(unsigned int position) {
     std::vector<dogen::dia::attribute> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_dia_attribute(position + i));
     }
     return r;

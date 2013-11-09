@@ -37,7 +37,7 @@ std::string create_std_string(const unsigned int position) {
 
 std::list<std::string> create_std_list_std_string(unsigned int position) {
     std::list<std::string> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_string(position + i));
     }
     return r;
@@ -45,7 +45,7 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 
 std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string_(unsigned int position) {
     std::unordered_map<std::string, std::list<std::string> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_string(position + i)));
     }
     return r;
@@ -53,7 +53,7 @@ std::unordered_map<std::string, std::list<std::string> > create_std_unordered_ma
 
 std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
     std::unordered_set<std::string> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(create_std_string(position + i));
     }
     return r;
@@ -66,7 +66,7 @@ create_dogen_sml_qname(const unsigned int position) {
 
 std::unordered_map<std::string, dogen::sml::qname> create_std_unordered_map_std_string_dogen_sml_qname(unsigned int position) {
     std::unordered_map<std::string, dogen::sml::qname> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_dogen_sml_qname(position + i)));
     }
     return r;
@@ -74,7 +74,7 @@ std::unordered_map<std::string, dogen::sml::qname> create_std_unordered_map_std_
 
 std::unordered_map<dogen::sml::qname, dogen::sml::qname> create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(unsigned int position) {
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_qname(position + i)));
     }
     return r;
@@ -82,7 +82,7 @@ std::unordered_map<dogen::sml::qname, dogen::sml::qname> create_std_unordered_ma
 
 std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
     std::list<dogen::sml::qname> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_sml_qname(position + i));
     }
     return r;
@@ -90,7 +90,7 @@ std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int positi
 
 std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(unsigned int position) {
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_std_list_dogen_sml_qname(position + i)));
     }
     return r;

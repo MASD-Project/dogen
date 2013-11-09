@@ -41,7 +41,7 @@ create_dogen_dia_object(const unsigned int position) {
 
 std::vector<dogen::dia::object> create_std_vector_dogen_dia_object(unsigned int position) {
     std::vector<dogen::dia::object> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_dia_object(position + i));
     }
     return r;

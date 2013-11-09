@@ -42,7 +42,7 @@ create_dogen_om_modeline_field(const unsigned int position) {
 
 std::list<dogen::om::modeline_field> create_std_list_dogen_om_modeline_field(unsigned int position) {
     std::list<dogen::om::modeline_field> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_om_modeline_field(position + i));
     }
     return r;

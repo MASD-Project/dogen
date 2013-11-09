@@ -42,7 +42,7 @@ create_dogen_sml_property(const unsigned int position) {
 
 std::list<dogen::sml::property> create_std_list_dogen_sml_property(unsigned int position) {
     std::list<dogen::sml::property> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_sml_property(position + i));
     }
     return r;
@@ -55,7 +55,7 @@ create_dogen_sml_operation(const unsigned int position) {
 
 std::list<dogen::sml::operation> create_std_list_dogen_sml_operation(unsigned int position) {
     std::list<dogen::sml::operation> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_sml_operation(position + i));
     }
     return r;
@@ -75,7 +75,7 @@ create_boost_optional_dogen_sml_qname(unsigned int position) {
 
 std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
     std::list<dogen::sml::qname> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_sml_qname(position + i));
     }
     return r;

@@ -42,7 +42,7 @@ create_dogen_sml_qname(const unsigned int position) {
 
 std::list<boost::shared_ptr<dogen::dia_to_sml::node> > create_std_list_boost_shared_ptr_dogen_dia_to_sml_node_(unsigned int position) {
     std::list<boost::shared_ptr<dogen::dia_to_sml::node> > r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_dia_to_sml_node(position + i));
     }
     return r;

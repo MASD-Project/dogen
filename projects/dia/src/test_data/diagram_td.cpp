@@ -36,7 +36,7 @@ create_dogen_dia_layer(const unsigned int position) {
 
 std::vector<dogen::dia::layer> create_std_vector_dogen_dia_layer(unsigned int position) {
     std::vector<dogen::dia::layer> r;
-    for (unsigned int i(0); i < 10; ++i) {
+    for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_dia_layer(position + i));
     }
     return r;
