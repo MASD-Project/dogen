@@ -1,0 +1,4207 @@
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index 508745e..c6dcc9c 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -65,13 +65,13 @@
+   <dia:layer name="Background" visible="true" active="true">
+     <dia:object type="UML - Class" version="0" id="O0">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-21,70"/>
++        <dia:point val="-20,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-21.05,69.95;-10.055,76.85"/>
++        <dia:rectangle val="-20.05,71.95;-9.055,78.85"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-21,70"/>
++        <dia:point val="-20,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.895"/>
+@@ -296,13 +296,13 @@ representation of the primitive type.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O1">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="85.872,29.5203"/>
++        <dia:point val="104,30"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="85.822,29.4703;92.8595,32.5703"/>
++        <dia:rectangle val="103.95,29.95;110.987,33.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="85.872,29.5203"/>
++        <dia:point val="104,30"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="6.9375"/>
+@@ -622,18 +622,18 @@ representation of the primitive type.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-10.105,70"/>
++        <dia:point val="-9.105,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-10.855,54.35;5.995,70.8"/>
++        <dia:rectangle val="-9.855,54.35;5.995,72.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-10.105,70"/>
+-        <dia:point val="-10.105,60"/>
+-        <dia:point val="5.795,60"/>
++        <dia:point val="-9.105,72"/>
++        <dia:point val="-9.105,62"/>
++        <dia:point val="5.795,62"/>
+         <dia:point val="5.795,54.4"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -666,7 +666,7 @@ representation of the primitive type.#</dia:string>
+         <dia:point val="-98,36"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="8.3349999999999991"/>
++        <dia:real val="8.3350000000000009"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -837,13 +837,13 @@ representation of the primitive type.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O5">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="47,30"/>
++        <dia:point val="62,30"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.95,29.95;75.27,41.45"/>
++        <dia:rectangle val="61.95,29.95;90.27,41.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="47,30"/>
++        <dia:point val="62,30"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="28.219999999999999"/>
+@@ -1347,7 +1347,7 @@ representation of the primitive type.#</dia:string>
+         <dia:point val="49.45,50"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,40.65;61.86,50.8"/>
++        <dia:rectangle val="49.4,40.65;76.86,50.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -1355,8 +1355,8 @@ representation of the primitive type.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="49.45,50"/>
+         <dia:point val="49.45,46"/>
+-        <dia:point val="61.11,46"/>
+-        <dia:point val="61.11,41.4"/>
++        <dia:point val="76.11,46"/>
++        <dia:point val="76.11,41.4"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -1465,17 +1465,17 @@ and all of the supported types within those models.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Message" version="0" id="O9">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="78.385,45"/>
++        <dia:point val="93.385,45"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="74.8866,41.0983;78.4556,45.0706"/>
++        <dia:rectangle val="89.8866,41.0983;93.4556,45.0706"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="conn_endpoints">
+-        <dia:point val="78.385,45"/>
+-        <dia:point val="75.22,41.4"/>
++        <dia:point val="93.385,45"/>
++        <dia:point val="90.22,41.4"/>
+       </dia:attribute>
+       <dia:attribute name="text_colour">
+         <dia:color val="#000000"/>
+@@ -1490,7 +1490,7 @@ and all of the supported types within those models.#</dia:string>
+         <dia:enum val="0"/>
+       </dia:attribute>
+       <dia:attribute name="text_pos">
+-        <dia:point val="76.8025,43.6999"/>
++        <dia:point val="91.8025,43.6999"/>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O10" connection="1"/>
+@@ -1499,22 +1499,22 @@ and all of the supported types within those models.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Note" version="0" id="O10">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="66,45"/>
++        <dia:point val="81,45"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="65.95,44.95;90.82,49.15"/>
++        <dia:rectangle val="80.95,44.95;105.82,49.15"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="66,45"/>
++        <dia:point val="81,45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="24.77"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.0999999999999996"/>
++        <dia:real val="4.1000000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000000000001"/>
+@@ -1540,7 +1540,7 @@ all types in the combined model.#</dia:string>
+             <dia:real val="0.80000000000000004"/>
+           </dia:attribute>
+           <dia:attribute name="pos">
+-            <dia:point val="66.35,46.245"/>
++            <dia:point val="81.35,46.245"/>
+           </dia:attribute>
+           <dia:attribute name="color">
+             <dia:color val="#000000"/>
+@@ -1589,19 +1589,19 @@ all types in the combined model.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="75.22,30"/>
++        <dia:point val="90.22,30"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="74.47,23.7234;89.5408,30.8"/>
++        <dia:rectangle val="89.47,25.25;107.669,30.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="75.22,30"/>
+-        <dia:point val="75.22,24.4734"/>
+-        <dia:point val="89.3408,24.4734"/>
+-        <dia:point val="89.3408,29.5203"/>
++        <dia:point val="90.22,30"/>
++        <dia:point val="90.22,26"/>
++        <dia:point val="107.469,26"/>
++        <dia:point val="107.469,30"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -1888,7 +1888,7 @@ all types in the combined model.#</dia:string>
+         <dia:point val="3,13"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="31.685000000000002"/>
++        <dia:real val="31.684999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="7.5999999999999996"/>
+@@ -2285,7 +2285,7 @@ all types in the combined model.#</dia:string>
+         <dia:point val="34.685,20.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="33.935,19.85;61.31,30.7498"/>
++        <dia:rectangle val="33.935,19.85;76.31,30.7498"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -2293,8 +2293,8 @@ all types in the combined model.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="34.685,20.6"/>
+         <dia:point val="34.685,26"/>
+-        <dia:point val="61.11,26"/>
+-        <dia:point val="61.11,29.9498"/>
++        <dia:point val="76.11,26"/>
++        <dia:point val="76.11,29.9498"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -2577,7 +2577,7 @@ All of these steps are encompassed in the SML @ref workflow.
+         <dia:point val="-32,-6"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.0924999999999994"/>
++        <dia:real val="7.0925000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -2900,7 +2900,7 @@ All of these steps are encompassed in the SML @ref workflow.
+         <dia:point val="51,121"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="6.6225000000000005"/>
++        <dia:real val="6.6224999999999996"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -3071,13 +3071,13 @@ All of these steps are encompassed in the SML @ref workflow.
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O23">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="0,70"/>
++        <dia:point val="0,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-0.05,69.95;10.56,73.65"/>
++        <dia:rectangle val="-0.05,71.95;10.56,75.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="0,70"/>
++        <dia:point val="0,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.51"/>
+@@ -3527,17 +3527,17 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O26">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,94.6"/>
++        <dia:point val="53.9175,95.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.205,94.55;59.7625,106.05"/>
++        <dia:rectangle val="46.205,95.15;54.7675,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,94.6"/>
+-        <dia:point val="58.9125,101"/>
++        <dia:point val="53.9175,95.2"/>
++        <dia:point val="53.9175,101"/>
+         <dia:point val="46.255,101"/>
+         <dia:point val="46.255,106"/>
+       </dia:attribute>
+@@ -3749,17 +3749,17 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O29">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,94.6"/>
++        <dia:point val="53.9175,95.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.0625,94.55;61.225,106.05"/>
++        <dia:rectangle val="53.0675,95.15;61.225,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,94.6"/>
+-        <dia:point val="58.9125,101"/>
++        <dia:point val="53.9175,95.2"/>
++        <dia:point val="53.9175,101"/>
+         <dia:point val="61.175,101"/>
+         <dia:point val="61.175,106"/>
+       </dia:attribute>
+@@ -3905,17 +3905,17 @@ underlying storage (for example, a relational database).#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O31">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,94.6"/>
++        <dia:point val="53.9175,95.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.0625,94.55;72.63,106.05"/>
++        <dia:rectangle val="53.0675,95.15;72.63,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,94.6"/>
+-        <dia:point val="58.9125,101"/>
++        <dia:point val="53.9175,95.2"/>
++        <dia:point val="53.9175,101"/>
+         <dia:point val="72.58,101"/>
+         <dia:point val="72.58,106"/>
+       </dia:attribute>
+@@ -3946,13 +3946,13 @@ underlying storage (for example, a relational database).#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O32">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="47,70"/>
++        <dia:point val="47,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.95,69.95;57.56,73.65"/>
++        <dia:rectangle val="46.95,71.95;57.56,75.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="47,70"/>
++        <dia:point val="47,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.51"/>
+@@ -5290,7 +5290,7 @@ for Java, etc.#</dia:string>
+         <dia:point val="-15.5525,53.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-60.795,53.55;-14.7025,69.9998"/>
++        <dia:rectangle val="-70.795,53.55;-14.7025,71.9999"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5298,8 +5298,8 @@ for Java, etc.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-15.5525,53.6"/>
+         <dia:point val="-15.5525,60"/>
+-        <dia:point val="-60.745,60"/>
+-        <dia:point val="-60.745,69.9498"/>
++        <dia:point val="-70.745,60"/>
++        <dia:point val="-70.745,71.9499"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -5331,7 +5331,7 @@ for Java, etc.#</dia:string>
+         <dia:point val="-58.2425,53.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-60.795,53.55;-57.3925,70.05"/>
++        <dia:rectangle val="-70.795,53.55;-57.3925,72.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5339,8 +5339,8 @@ for Java, etc.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-58.2425,53.6"/>
+         <dia:point val="-58.2425,60"/>
+-        <dia:point val="-60.745,60"/>
+-        <dia:point val="-60.745,70"/>
++        <dia:point val="-70.745,60"/>
++        <dia:point val="-70.745,72"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -5372,7 +5372,7 @@ for Java, etc.#</dia:string>
+         <dia:point val="-36.44,53.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-60.795,53.55;-35.59,70.05"/>
++        <dia:rectangle val="-70.795,53.55;-35.59,72.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5380,8 +5380,8 @@ for Java, etc.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-36.44,53.6"/>
+         <dia:point val="-36.44,60"/>
+-        <dia:point val="-60.745,60"/>
+-        <dia:point val="-60.745,70"/>
++        <dia:point val="-70.745,60"/>
++        <dia:point val="-70.745,72"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -5410,13 +5410,13 @@ for Java, etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O47">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-66,70"/>
++        <dia:point val="-76,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-66.05,69.95;-55.44,73.65"/>
++        <dia:rectangle val="-76.05,71.95;-65.44,75.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-66,70"/>
++        <dia:point val="-76,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="10.51"/>
+@@ -5547,7 +5547,7 @@ for Java, etc.#</dia:string>
+         <dia:point val="-85.205,53.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-86.055,53.55;-60.695,70.05"/>
++        <dia:rectangle val="-86.055,53.55;-70.695,72.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5555,8 +5555,8 @@ for Java, etc.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-85.205,53.6"/>
+         <dia:point val="-85.205,60"/>
+-        <dia:point val="-60.745,60"/>
+-        <dia:point val="-60.745,70"/>
++        <dia:point val="-70.745,60"/>
++        <dia:point val="-70.745,72"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -5585,19 +5585,19 @@ for Java, etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O49">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-47,70"/>
++        <dia:point val="-56,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-47.05,69.95;-34.13,73.65"/>
++        <dia:rectangle val="-56.05,71.95;-29.27,77.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-47,70"/>
++        <dia:point val="-56,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="12.82"/>
++        <dia:real val="26.68"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="3.6000000000000001"/>
++        <dia:real val="5.2000000000000011"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#Stateful#</dia:string>
+@@ -5689,7 +5689,7 @@ for Java, etc.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#properties#</dia:string>
++            <dia:string>#all_properties#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>#std::list&lt;property&gt;#</dia:string>
+@@ -5698,9 +5698,62 @@ for Java, etc.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#State of this entity.
++            <dia:string>#All the properties associated with this type.
++
++This is a union of the following sets:
+ 
+-Does not include inherited attributes.#</dia:string>
++@li the set of all properies obtained via inheritance relationships;
++@li the set of all properies obtained via modeling of concepts, including any refinements;
++@li the set of all properies directly associated with the type (local).
++
++The first and third sets are cached in this object. The second isn't as we do
++not have a need for it.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#local_properties#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;property&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#The set of all properies directly associated with the type.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#inherited_properties#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::unordered_map&lt;qname,std::list&lt;property&gt;&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string># The set of all properies obtained via inheritance, by parent name.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -5831,18 +5884,18 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O51">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-40.59,73.6"/>
++        <dia:point val="-42.66,77.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-66.6825,73.55;-39.74,87.05"/>
++        <dia:rectangle val="-66.6825,77.15;-41.81,87.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-40.59,73.6"/>
+-        <dia:point val="-40.59,81"/>
+-        <dia:point val="-66.6325,81"/>
++        <dia:point val="-42.66,77.2"/>
++        <dia:point val="-42.66,83"/>
++        <dia:point val="-66.6325,83"/>
+         <dia:point val="-66.6325,87"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -5872,18 +5925,18 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O52">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-60.745,73.6"/>
++        <dia:point val="-70.745,75.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-66.6825,73.55;-59.895,87.05"/>
++        <dia:rectangle val="-71.595,75.55;-66.5825,87.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-60.745,73.6"/>
+-        <dia:point val="-60.745,81"/>
+-        <dia:point val="-66.6325,81"/>
++        <dia:point val="-70.745,75.6"/>
++        <dia:point val="-70.745,83"/>
++        <dia:point val="-66.6325,83"/>
+         <dia:point val="-66.6325,87"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -5952,16 +6005,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="22,58.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="5.205,57.65;22.75,70.7502"/>
++        <dia:rectangle val="5.205,57.65;22.75,72.7528"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="22,58.4"/>
+-        <dia:point val="22,65"/>
+-        <dia:point val="5.255,65"/>
+-        <dia:point val="5.255,69.9502"/>
++        <dia:point val="22,66"/>
++        <dia:point val="5.255,66"/>
++        <dia:point val="5.255,71.9528"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6023,16 +6076,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="49.45,58.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="48.7,57.65;52.455,70.8"/>
++        <dia:rectangle val="48.7,57.65;52.455,72.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="49.45,58.4"/>
+-        <dia:point val="49.45,65"/>
+-        <dia:point val="52.255,65"/>
+-        <dia:point val="52.255,70"/>
++        <dia:point val="49.45,66"/>
++        <dia:point val="52.255,66"/>
++        <dia:point val="52.255,72"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6055,13 +6108,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O55">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="33,83"/>
++        <dia:point val="30,86"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="32.95,82.95;37.6225,86.05"/>
++        <dia:rectangle val="29.95,85.95;34.6225,89.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="33,83"/>
++        <dia:point val="30,86"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="4.5724999999999998"/>
+@@ -6165,13 +6218,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O56">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="26,70"/>
++        <dia:point val="26,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="25.95,69.95;35.02,73.05"/>
++        <dia:rectangle val="25.95,71.95;35.02,75.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="26,70"/>
++        <dia:point val="26,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="8.9700000000000006"/>
+@@ -6275,19 +6328,19 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O57">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="30.485,73"/>
++        <dia:point val="30.485,75"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="29.635,72.95;35.3363,83.05"/>
++        <dia:rectangle val="29.635,74.95;32.3363,86.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="30.485,73"/>
+-        <dia:point val="30.485,78"/>
+-        <dia:point val="35.2863,78"/>
+-        <dia:point val="35.2863,83"/>
++        <dia:point val="30.485,75"/>
++        <dia:point val="30.485,81"/>
++        <dia:point val="32.2863,81"/>
++        <dia:point val="32.2863,86"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6355,16 +6408,16 @@ Does not include inherited attributes.#</dia:string>
+         <dia:point val="35.725,58.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="30.435,57.65;36.475,70.8"/>
++        <dia:rectangle val="30.435,57.65;36.475,72.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="35.725,58.4"/>
+-        <dia:point val="35.725,65"/>
+-        <dia:point val="30.485,65"/>
+-        <dia:point val="30.485,70"/>
++        <dia:point val="35.725,66"/>
++        <dia:point val="30.485,66"/>
++        <dia:point val="30.485,72"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6387,13 +6440,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O59">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="7,83"/>
++        <dia:point val="4,86"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="6.95,82.95;21.795,87.45"/>
++        <dia:rectangle val="3.95,85.95;18.795,90.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="7,83"/>
++        <dia:point val="4,86"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="14.744999999999999"/>
+@@ -6544,13 +6597,13 @@ Does not include inherited attributes.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O60">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="3,96"/>
++        <dia:point val="0,100"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="2.95,95.95;10.865,100.45"/>
++        <dia:rectangle val="-0.05,99.95;7.865,104.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="3,96"/>
++        <dia:point val="0,100"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="7.8150000000000004"/>
+@@ -6741,19 +6794,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="14.3725,87.4"/>
++        <dia:point val="11.3725,90.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="6.8575,86.65;15.1225,96.8"/>
++        <dia:rectangle val="3.8575,89.65;12.1225,100.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="14.3725,87.4"/>
+-        <dia:point val="14.3725,92"/>
+-        <dia:point val="6.9075,92"/>
+-        <dia:point val="6.9075,96"/>
++        <dia:point val="11.3725,90.4"/>
++        <dia:point val="11.3725,96"/>
++        <dia:point val="3.9075,96"/>
++        <dia:point val="3.9075,100"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6776,19 +6829,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O62">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="30.485,73"/>
++        <dia:point val="30.485,75"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="14.3225,72.95;31.335,83.05"/>
++        <dia:rectangle val="11.3225,74.95;31.335,86.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="30.485,73"/>
+-        <dia:point val="30.485,78"/>
+-        <dia:point val="14.3725,78"/>
+-        <dia:point val="14.3725,83"/>
++        <dia:point val="30.485,75"/>
++        <dia:point val="30.485,81"/>
++        <dia:point val="11.3725,81"/>
++        <dia:point val="11.3725,86"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6817,19 +6870,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O63">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="30.485,73"/>
++        <dia:point val="30.485,75"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="29.635,72.95;58.9625,83.05"/>
++        <dia:rectangle val="29.635,74.95;53.9675,86.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="30.485,73"/>
+-        <dia:point val="30.485,78"/>
+-        <dia:point val="58.9125,78"/>
+-        <dia:point val="58.9125,83"/>
++        <dia:point val="30.485,75"/>
++        <dia:point val="30.485,81"/>
++        <dia:point val="53.9175,81"/>
++        <dia:point val="53.9175,86"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6858,19 +6911,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O64">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="50,83"/>
++        <dia:point val="40,86"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.95,82.95;67.875,94.65"/>
++        <dia:rectangle val="39.95,85.95;67.885,95.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="50,83"/>
++        <dia:point val="40,86"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="17.824999999999999"/>
++        <dia:real val="27.835000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="11.6"/>
++        <dia:real val="9.2000000000000011"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#abstract_object#</dia:string>
+@@ -6962,40 +7015,17 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#parent_name#</dia:string>
++            <dia:string>#relationships#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;relationship_types,std::list&lt;qname&gt;&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#Qualified name for the object's parent, if it it has one.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#original_parent_name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Qualified name for the root of the inheritance hierarchy, if the object is part of one.#</dia:string>
+-          </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+           </dia:attribute>
+@@ -7008,16 +7038,16 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#leaves#</dia:string>
++            <dia:string>#number_of_type_arguments#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::list&lt;qname&gt;#</dia:string>
++            <dia:string>#unsigned int#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#All concrete types which are indirectly or directly derived from this type.#</dia:string>
++            <dia:string>#How many type arguments does this type have#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -7054,29 +7084,6 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#number_of_type_arguments#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#unsigned int#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#How many type arguments does this type have#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#is_visitable#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -7195,29 +7202,6 @@ or other comparable model types.#</dia:string>
+             <dia:boolean val="false"/>
+           </dia:attribute>
+         </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#modeled_concepts#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::list&lt;qname&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#List of concepts modeled by this object.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+       </dia:attribute>
+       <dia:attribute name="operations"/>
+       <dia:attribute name="template">
+@@ -7708,17 +7692,17 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O68">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,94.6"/>
++        <dia:point val="53.9175,95.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="28.205,94.55;59.7625,106.05"/>
++        <dia:rectangle val="28.205,95.15;54.7675,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,94.6"/>
+-        <dia:point val="58.9125,101"/>
++        <dia:point val="53.9175,95.2"/>
++        <dia:point val="53.9175,101"/>
+         <dia:point val="28.255,101"/>
+         <dia:point val="28.255,106"/>
+       </dia:attribute>
+@@ -7749,17 +7733,17 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O69">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.9125,94.6"/>
++        <dia:point val="53.9175,95.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.0625,94.55;89.075,106"/>
++        <dia:rectangle val="53.0675,95.15;89.075,106"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.9125,94.6"/>
+-        <dia:point val="58.9125,101"/>
++        <dia:point val="53.9175,95.2"/>
++        <dia:point val="53.9175,101"/>
+         <dia:point val="89.025,101"/>
+         <dia:point val="89.025,105.95"/>
+       </dia:attribute>
+@@ -8182,19 +8166,19 @@ key and the @e unversioned key. The first will contain the version property.#</d
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-34.18,70"/>
++        <dia:point val="-42.66,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-34.93,64.25;-20.8,70.8"/>
++        <dia:rectangle val="-43.41,66.25;-19.8,72.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-34.18,70"/>
+-        <dia:point val="-34.18,65"/>
+-        <dia:point val="-21,65"/>
+-        <dia:point val="-21,70"/>
++        <dia:point val="-42.66,72"/>
++        <dia:point val="-42.66,67"/>
++        <dia:point val="-20,67"/>
++        <dia:point val="-20,72"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -8211,7 +8195,7 @@ key and the @e unversioned key. The first will contain the version property.#</d
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O49" connection="2"/>
++        <dia:connection handle="0" to="O49" connection="1"/>
+         <dia:connection handle="1" to="O0" connection="0"/>
+       </dia:connections>
+     </dia:object>
+@@ -8717,13 +8701,13 @@ came from.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O77">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-99,70"/>
++        <dia:point val="-108,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-99.05,69.95;-85.745,73.65"/>
++        <dia:rectangle val="-108.05,71.95;-94.745,75.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-99,70"/>
++        <dia:point val="-108,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="13.205"/>
+@@ -8851,18 +8835,18 @@ came from.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O78">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-92.3975,73.6"/>
++        <dia:point val="-101.397,75.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-93.2475,73.55;-66.5825,87.05"/>
++        <dia:rectangle val="-102.248,75.55;-66.5825,87.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-92.3975,73.6"/>
+-        <dia:point val="-92.3975,81"/>
+-        <dia:point val="-66.6325,81"/>
++        <dia:point val="-101.397,75.6"/>
++        <dia:point val="-101.397,83"/>
++        <dia:point val="-66.6325,83"/>
+         <dia:point val="-66.6325,87"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -8892,13 +8876,13 @@ came from.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O79">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-112,50"/>
++        <dia:point val="-113,50"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-112.05,49.95;-97.59,55.25"/>
++        <dia:rectangle val="-113.05,49.95;-98.59,55.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-112,50"/>
++        <dia:point val="-113,50"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="14.359999999999999"/>
+@@ -9108,19 +9092,19 @@ came from.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-92.3975,70"/>
++        <dia:point val="-101.397,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-104.87,55.15;-91.6475,70.8"/>
++        <dia:rectangle val="-105.87,55.15;-100.647,72.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-92.3975,70"/>
+-        <dia:point val="-92.3975,60"/>
+-        <dia:point val="-104.82,60"/>
+-        <dia:point val="-104.82,55.2"/>
++        <dia:point val="-101.397,72"/>
++        <dia:point val="-101.397,63"/>
++        <dia:point val="-105.82,63"/>
++        <dia:point val="-105.82,55.2"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -9143,13 +9127,13 @@ came from.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O81">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-81,70"/>
++        <dia:point val="-89,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-81.05,69.95;-74.675,75.25"/>
++        <dia:rectangle val="-89.05,71.95;-82.675,77.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-81,70"/>
++        <dia:point val="-89,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="6.2750000000000004"/>
+@@ -9365,19 +9349,19 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-66,70"/>
++        <dia:point val="-76,72"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-77.9125,64.25;-65.25,70.8"/>
++        <dia:rectangle val="-85.9125,66.25;-75.25,72.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-66,70"/>
+-        <dia:point val="-66,65"/>
+-        <dia:point val="-77.8625,65"/>
+-        <dia:point val="-77.8625,70"/>
++        <dia:point val="-76,72"/>
++        <dia:point val="-76,67"/>
++        <dia:point val="-85.8625,67"/>
++        <dia:point val="-85.8625,72"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -9593,17 +9577,17 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-104.82,50"/>
++        <dia:point val="-105.82,50"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-112.795,40.35;-104.07,50.8"/>
++        <dia:rectangle val="-112.795,40.35;-105.07,50.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-104.82,50"/>
+-        <dia:point val="-104.82,45"/>
++        <dia:point val="-105.82,50"/>
++        <dia:point val="-105.82,45"/>
+         <dia:point val="-112.745,45"/>
+         <dia:point val="-112.745,40.4"/>
+       </dia:attribute>
+@@ -9628,16 +9612,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O85">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="90,64"/>
++        <dia:point val="93,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="89.95,63.25;119.45,68.45"/>
++        <dia:rectangle val="92.95,63.25;122.45,68.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="90,64"/>
++        <dia:point val="93,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="24.755000000000003"/>
++        <dia:real val="24.754999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="4.4000000000000004"/>
+@@ -9879,17 +9863,17 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="102.377,64"/>
++        <dia:point val="105.377,64"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.4,51.95;103.127,64.8"/>
++        <dia:rectangle val="49.4,51.95;106.127,64.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="102.377,64"/>
+-        <dia:point val="102.377,52.7"/>
++        <dia:point val="105.377,64"/>
++        <dia:point val="105.377,52.7"/>
+         <dia:point val="49.45,52.7"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -9921,7 +9905,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="158,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.134999999999998"/>
++        <dia:real val="20.135000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000002"/>
+@@ -10461,17 +10445,17 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="102.377,68.4"/>
++        <dia:point val="105.377,68.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="101.627,67.65;122.2,82.8"/>
++        <dia:rectangle val="104.627,67.65;122.2,82.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="102.377,68.4"/>
+-        <dia:point val="102.377,76.05"/>
++        <dia:point val="105.377,68.4"/>
++        <dia:point val="105.377,76.05"/>
+         <dia:point val="122,76.05"/>
+         <dia:point val="122,82"/>
+       </dia:attribute>
+@@ -10613,8 +10597,8 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="49.45,57.5"/>
+-        <dia:point val="75,57.5"/>
+-        <dia:point val="75,84.7"/>
++        <dia:point val="82,57.5"/>
++        <dia:point val="82,84.7"/>
+         <dia:point val="122,84.7"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -11082,7 +11066,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="125,64"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="26.294999999999998"/>
++        <dia:real val="26.295000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="6"/>
+@@ -11369,16 +11353,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O98">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="112,106"/>
++        <dia:point val="113,102"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="111.95,105.95;117.83,109.05"/>
++        <dia:rectangle val="112.95,101.95;118.83,105.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="112,106"/>
++        <dia:point val="113,102"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="5.7799999999999994"/>
++        <dia:real val="5.7800000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -11518,16 +11502,16 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="135.34,87.8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="114.84,87.05;136.09,106.75"/>
++        <dia:rectangle val="115.84,87.05;136.09,102.75"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="135.34,87.8"/>
+-        <dia:point val="135.34,101"/>
+-        <dia:point val="114.89,101"/>
+-        <dia:point val="114.89,105.95"/>
++        <dia:point val="135.34,96"/>
++        <dia:point val="115.89,96"/>
++        <dia:point val="115.89,101.95"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -12401,7 +12385,7 @@ boost::property_tree::ptreee#</dia:string>
+         <dia:point val="-86,21"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="23.615000000000002"/>
++        <dia:real val="23.614999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -12700,7 +12684,7 @@ and values (where applicable) for tags.#</dia:string>
+         <dia:point val="-34,22"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="22.075000000000003"/>
++        <dia:real val="22.074999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -12783,7 +12767,7 @@ based on association and generalisation relationships.#</dia:string>
+         <dia:point val="-47,14"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.9099999999999993"/>
++        <dia:real val="7.9100000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -13896,5 +13880,371 @@ boost::property_tree::ptreee#</dia:string>
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O123">
++      <dia:attribute name="obj_pos">
++        <dia:point val="69,63"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="68.95,62.95;77.8675,72.25"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="69,63"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="8.8175000000000008"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="9.2000000000000011"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#relationship_types#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#enumeration#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Ways in which a type can be related to another for indexing purposes.#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes">
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#original_parents#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Types at the root of the inheritance hierarchy.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#parents#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Types that are direct parents of this type.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#regular_associations#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Types that are involved in aggregation or composition relationships.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#pointer_associations#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Types that are involved in aggregation or composition relationships via a pointer.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#leaves#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Types that are at the bottom of the inheritance tree.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#visitor#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Type that provides visitation services for this type.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#key#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Types that are used in the identity function of this type. #</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#modeled_concepts#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Concepts modeled by this type.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++      </dia:attribute>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O124">
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="67.835,86"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="67.085,72.15;73.6088,87.6"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="67.835,86"/>
++        <dia:point val="67.835,78"/>
++        <dia:point val="73.4087,78"/>
++        <dia:point val="73.4087,72.2"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O64" connection="2"/>
++        <dia:connection handle="1" to="O123" connection="6"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/doc/agile/release_notes_sprint_38.org b/doc/agile/release_notes_sprint_38.org
+index 341cf30..276bad1 100644
+--- a/doc/agile/release_notes_sprint_38.org
++++ b/doc/agile/release_notes_sprint_38.org
+@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 38.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2013-11-04 Mon 21:42]
++Clock summary at [2013-11-08 Fri 11:17]
+ 
+ | Headline                                                                  | Time   |      |      |
+ |---------------------------------------------------------------------------+--------+------+------|
+-| *Total time*                                                              | *1:11* |      |      |
++| *Total time*                                                              | *3:56* |      |      |
+ |---------------------------------------------------------------------------+--------+------+------|
+-| Development Stories Implemented                                           |        | 1:11 |      |
++| Development Stories Implemented                                           |        | 3:56 |      |
+ | IMPLEMENTATION Release notes and backlog grooming                         |        |      | 0:04 |
+-| IMPLEMENTATION Implement auxiliar data structures required for formatting |        |      | 1:07 |
++| IMPLEMENTATION Implement auxiliar data structures required for formatting |        |      | 3:52 |
+ #+end:
+ 
+ *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+@@ -27,14 +27,6 @@ Clock summary at [2013-11-04 Mon 21:42]
+ *** IMPLEMENTATION Implement auxiliar data structures required for formatting :story:
+     CLOCK: [2013-11-04 Mon 07:53]--[2013-11-04 Mon 07:54] =>  0:01
+ 
+-- create a class to aggregate the licence, modeline and
+-  marker.
+-- create an enumeration for all relationship types: parent, child,
+-  association, association_via_pointer, leaf
+-- create a model index, made up of: leafs for entire model,
+-  relationships by qname, leaves by qname, properties by qname (all
+-  properties, local properties, inherited properties). make this a
+-  property of the model.
+ - create an indexer that populates the index. add indexer to SML
+   workflow.
+ - create a class to aggregate type information: type itself, indexed
+@@ -49,6 +41,9 @@ Clock summary at [2013-11-04 Mon 21:42]
+      CLOCK: [2013-11-04 Mon 08:24]--[2013-11-04 Mon 08:32] =>  0:08
+      CLOCK: [2013-11-04 Mon 07:54]--[2013-11-04 Mon 08:15] =>  0:21
+ 
++create a class to aggregate the licence, modeline and
++marker.
++
+ namestorming: authorship, about, origination, file_meta_data,
+ file_details.
+ 
+@@ -64,6 +59,59 @@ confusing.
+ Instead we'll use =annotation=. Implies meta-data still, but avoids
+ confusion with the SML kind.
+ 
++**** IMPLEMENTATION Create indexing data structures                    :task:
++     CLOCK: [2013-11-08 Fri 07:49]--[2013-11-08 Fri 08:20] =>  0:31
++     CLOCK: [2013-11-07 Thu 18:00]--[2013-11-07 Thu 18:10] =>  0:10
++     CLOCK: [2013-11-07 Thu 08:23]--[2013-11-07 Thu 08:33] =>  0:10
++     CLOCK: [2013-11-07 Thu 07:47]--[2013-11-07 Thu 08:18] =>  0:31
++     CLOCK: [2013-11-06 Wed 08:24]--[2013-11-06 Wed 08:29] =>  0:05
++     CLOCK: [2013-11-06 Wed 07:46]--[2013-11-06 Wed 08:17] =>  0:31
++     CLOCK: [2013-11-05 Tue 08:26]--[2013-11-05 Tue 08:35] =>  0:09
++     CLOCK: [2013-11-05 Tue 07:48]--[2013-11-05 Tue 08:20] =>  0:32
++     CLOCK: [2013-11-05 Tue 07:38]--[2013-11-05 Tue 07:44] =>  0:06
++
++New understanding:
++
++Its better to piggy-back on existing machinery. So:
++
++- leave model as is, with a leaves container. model cannot have any
++  other type of relationship so this is in keeping with making invalid
++  states unrepresentable.
++- change Stateful to contain properties by property type or property
++  set.
++- create a relationships container in abstract object and replace
++  existing relationships with it.
++- Create an indexer to add additional data to containers. 
++
++Old understanding:
++
++The objective of this exercise is to create a data structure that can
++store all the data associated with a type needed for formatting. 
++
++- create an enumeration for all possible relationship types. name:
++  =relationship_types=. values: original_parent, parent,
++  regular_association, pointer_association, leaf, visitor, key.
++- create an enumeration for the property sets. name:
++  =property_sets=. values: all, inherited, self
++
++- create a class called =index= with two properties: =relationships=
++  and =properties=:
++
++: relationships: std::unordered_map<relationship_types,std::list<qname>>
++: properties: std::unordered_map<property_types,std::list<property>>
++
++- create a concept called =Indexable= with a property of type =index=.
++  the concept is modeled by =model= and =abstract_object=.
++
++- create a class called =indexer=, responsible for taking in a merged
++  model and populating the index property of all things
++  Indexable. Move code from =extrator= and =transformer= (leaf
++  processing) into =indexer=.
++
++- delete property cache interface etc and make user of index.
++
++- delete extractor, etc and make user of index.
++
+ *** Add include file support to main type formatter                   :story:
+ *** Add tests for properties and compiler generated functions         :story:
+ *** Add tests for module in model                                     :story:
+diff --git a/projects/sml/include/dogen/sml/hash/all_hash.hpp b/projects/sml/include/dogen/sml/hash/all_hash.hpp
+index edfe07e..d95f5e4 100644
+--- a/projects/sml/include/dogen/sml/hash/all_hash.hpp
++++ b/projects/sml/include/dogen/sml/hash/all_hash.hpp
+@@ -36,6 +36,7 @@
+ #include "dogen/sml/hash/primitive_hash.hpp"
+ #include "dogen/sml/hash/property_hash.hpp"
+ #include "dogen/sml/hash/qname_hash.hpp"
++#include "dogen/sml/hash/relationship_types_hash.hpp"
+ #include "dogen/sml/hash/repository_hash.hpp"
+ #include "dogen/sml/hash/service_hash.hpp"
+ #include "dogen/sml/hash/service_types_hash.hpp"
+diff --git a/projects/sml/include/dogen/sml/hash/relationship_types_hash.hpp b/projects/sml/include/dogen/sml/hash/relationship_types_hash.hpp
+new file mode 100644
+index 0000000..ce7ac48
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/hash/relationship_types_hash.hpp
+@@ -0,0 +1,43 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_HASH_RELATIONSHIP_TYPES_HASH_HPP
++#define DOGEN_SML_HASH_RELATIONSHIP_TYPES_HASH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <functional>
++#include "dogen/sml/types/relationship_types.hpp"
++
++namespace std {
++
++template<>
++struct hash<dogen::sml::relationship_types> {
++public:
++    size_t operator()(const dogen::sml::relationship_types& v) const {
++        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
++    }
++};
++
++}
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/io/all_io.hpp b/projects/sml/include/dogen/sml/io/all_io.hpp
+index 1b13bbb..21ec32f 100644
+--- a/projects/sml/include/dogen/sml/io/all_io.hpp
++++ b/projects/sml/include/dogen/sml/io/all_io.hpp
+@@ -36,6 +36,7 @@
+ #include "dogen/sml/io/primitive_io.hpp"
+ #include "dogen/sml/io/property_io.hpp"
+ #include "dogen/sml/io/qname_io.hpp"
++#include "dogen/sml/io/relationship_types_io.hpp"
+ #include "dogen/sml/io/repository_io.hpp"
+ #include "dogen/sml/io/service_io.hpp"
+ #include "dogen/sml/io/service_types_io.hpp"
+diff --git a/projects/sml/include/dogen/sml/io/relationship_types_io.hpp b/projects/sml/include/dogen/sml/io/relationship_types_io.hpp
+new file mode 100644
+index 0000000..fb66ed3
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/io/relationship_types_io.hpp
+@@ -0,0 +1,38 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_IO_RELATIONSHIP_TYPES_IO_HPP
++#define DOGEN_SML_IO_RELATIONSHIP_TYPES_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/sml/types/relationship_types.hpp"
++
++namespace dogen {
++namespace sml {
++
++std::ostream& operator<<(std::ostream& s, const relationship_types& v);
++
++} }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/serialization/all_ser.hpp b/projects/sml/include/dogen/sml/serialization/all_ser.hpp
+index 8569b2c..bd75559 100644
+--- a/projects/sml/include/dogen/sml/serialization/all_ser.hpp
++++ b/projects/sml/include/dogen/sml/serialization/all_ser.hpp
+@@ -37,6 +37,7 @@
+ #include "dogen/sml/serialization/property_ser.hpp"
+ #include "dogen/sml/serialization/qname_ser.hpp"
+ #include "dogen/sml/serialization/registrar_ser.hpp"
++#include "dogen/sml/serialization/relationship_types_ser.hpp"
+ #include "dogen/sml/serialization/repository_ser.hpp"
+ #include "dogen/sml/serialization/service_ser.hpp"
+ #include "dogen/sml/serialization/service_types_ser.hpp"
+diff --git a/projects/sml/include/dogen/sml/serialization/relationship_types_ser.hpp b/projects/sml/include/dogen/sml/serialization/relationship_types_ser.hpp
+new file mode 100644
+index 0000000..db7e0fb
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/serialization/relationship_types_ser.hpp
+@@ -0,0 +1,37 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_SERIALIZATION_RELATIONSHIP_TYPES_SER_HPP
++#define DOGEN_SML_SERIALIZATION_RELATIONSHIP_TYPES_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/nvp.hpp>
++#include "dogen/sml/types/relationship_types.hpp"
++
++template<class Archive>
++void serialize(Archive& ar, dogen::sml::relationship_types& v, unsigned int /*version*/){
++    using boost::serialization::make_nvp;
++    ar & make_nvp("relationship_types", v);
++}
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/test_data/all_td.hpp b/projects/sml/include/dogen/sml/test_data/all_td.hpp
+index 08ad3ff..73743bc 100644
+--- a/projects/sml/include/dogen/sml/test_data/all_td.hpp
++++ b/projects/sml/include/dogen/sml/test_data/all_td.hpp
+@@ -36,6 +36,7 @@
+ #include "dogen/sml/test_data/primitive_td.hpp"
+ #include "dogen/sml/test_data/property_td.hpp"
+ #include "dogen/sml/test_data/qname_td.hpp"
++#include "dogen/sml/test_data/relationship_types_td.hpp"
+ #include "dogen/sml/test_data/repository_td.hpp"
+ #include "dogen/sml/test_data/service_td.hpp"
+ #include "dogen/sml/test_data/service_types_td.hpp"
+diff --git a/projects/sml/include/dogen/sml/test_data/relationship_types_td.hpp b/projects/sml/include/dogen/sml/test_data/relationship_types_td.hpp
+new file mode 100644
+index 0000000..f3033f0
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/test_data/relationship_types_td.hpp
+@@ -0,0 +1,51 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TEST_DATA_RELATIONSHIP_TYPES_TD_HPP
++#define DOGEN_SML_TEST_DATA_RELATIONSHIP_TYPES_TD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/sml/types/relationship_types.hpp"
++
++namespace dogen {
++namespace sml {
++
++class relationship_types_generator {
++public:
++    relationship_types_generator();
++
++public:
++    typedef dogen::sml::relationship_types result_type;
++
++public:
++    static void populate(const unsigned int position, result_type& v);
++    static result_type create(const unsigned int position);
++    result_type operator()();
++
++private:
++    unsigned int position_;
++};
++
++} }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/abstract_entity.hpp b/projects/sml/include/dogen/sml/types/abstract_entity.hpp
+index 56112a7..b6abc22 100644
+--- a/projects/sml/include/dogen/sml/types/abstract_entity.hpp
++++ b/projects/sml/include/dogen/sml/types/abstract_entity.hpp
+@@ -77,19 +77,18 @@ public:
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+         const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts,
+         const bool is_aggregate_root,
+         const std::list<dogen::sml::property>& identity);
+ 
+diff --git a/projects/sml/include/dogen/sml/types/abstract_object.hpp b/projects/sml/include/dogen/sml/types/abstract_object.hpp
+index 31207cf..313f525 100644
+--- a/projects/sml/include/dogen/sml/types/abstract_object.hpp
++++ b/projects/sml/include/dogen/sml/types/abstract_object.hpp
+@@ -26,17 +26,20 @@
+ #endif
+ 
+ #include <algorithm>
+-#include <boost/optional.hpp>
+ #include <boost/property_tree/ptree.hpp>
+ #include <iosfwd>
+ #include <list>
+ #include <string>
++#include <unordered_map>
++#include "dogen/sml/hash/qname_hash.hpp"
++#include "dogen/sml/hash/relationship_types_hash.hpp"
+ #include "dogen/sml/serialization/abstract_object_fwd_ser.hpp"
+ #include "dogen/sml/types/generation_types.hpp"
+ #include "dogen/sml/types/operation.hpp"
+ #include "dogen/sml/types/origin_types.hpp"
+ #include "dogen/sml/types/property.hpp"
+ #include "dogen/sml/types/qname.hpp"
++#include "dogen/sml/types/relationship_types.hpp"
+ #include "dogen/sml/types/type.hpp"
+ 
+ namespace dogen {
+@@ -48,6 +51,7 @@ namespace sml {
+ class abstract_object : public dogen::sml::type {
+ public:
+     abstract_object(const abstract_object&) = default;
++    abstract_object(abstract_object&&) = default;
+ 
+ public:
+     abstract_object();
+@@ -55,28 +59,24 @@ public:
+     virtual ~abstract_object() noexcept = 0;
+ 
+ public:
+-    abstract_object(abstract_object&& rhs);
+-
+-public:
+     abstract_object(
+         const std::string& documentation,
+         const boost::property_tree::ptree& meta_data,
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+-        const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts);
++        const bool is_fluent);
+ 
+ private:
+     template<typename Archive>
+@@ -90,55 +90,65 @@ public:
+ 
+ public:
+     /**
+-     * @brief State of this entity.
++     * @brief All the properties associated with this type.
++     *
++     * This is a union of the following sets:
+      *
+-     * Does not include inherited attributes.
++     * @li the set of all properies obtained via inheritance relationships;
++     * @li the set of all properies obtained via modeling of concepts, including any refinements;
++     * @li the set of all properies directly associated with the type (local).
++     *
++     * The first and third sets are cached in this object. The second isn't as we do
++     * not have a need for it.
+      */
+     /**@{*/
+-    const std::list<dogen::sml::property>& properties() const;
+-    std::list<dogen::sml::property>& properties();
+-    void properties(const std::list<dogen::sml::property>& v);
+-    void properties(const std::list<dogen::sml::property>&& v);
++    const std::list<dogen::sml::property>& all_properties() const;
++    std::list<dogen::sml::property>& all_properties();
++    void all_properties(const std::list<dogen::sml::property>& v);
++    void all_properties(const std::list<dogen::sml::property>&& v);
+     /**@}*/
+ 
+     /**
+-     * @brief Operations (methods) that can be executed.
++     * @brief The set of all properies directly associated with the type.
+      */
+     /**@{*/
+-    const std::list<dogen::sml::operation>& operations() const;
+-    std::list<dogen::sml::operation>& operations();
+-    void operations(const std::list<dogen::sml::operation>& v);
+-    void operations(const std::list<dogen::sml::operation>&& v);
++    const std::list<dogen::sml::property>& local_properties() const;
++    std::list<dogen::sml::property>& local_properties();
++    void local_properties(const std::list<dogen::sml::property>& v);
++    void local_properties(const std::list<dogen::sml::property>&& v);
+     /**@}*/
+ 
+     /**
+-     * @brief Qualified name for the object's parent, if it it has one.
++     * @brief The set of all properies obtained via inheritance, by parent name.
+      */
+     /**@{*/
+-    const boost::optional<dogen::sml::qname>& parent_name() const;
+-    boost::optional<dogen::sml::qname>& parent_name();
+-    void parent_name(const boost::optional<dogen::sml::qname>& v);
+-    void parent_name(const boost::optional<dogen::sml::qname>&& v);
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties() const;
++    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties();
++    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v);
++    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v);
+     /**@}*/
+ 
+     /**
+-     * @brief Qualified name for the root of the inheritance hierarchy, if the object is part of one.
++     * @brief Operations (methods) that can be executed.
+      */
+     /**@{*/
+-    const boost::optional<dogen::sml::qname>& original_parent_name() const;
+-    boost::optional<dogen::sml::qname>& original_parent_name();
+-    void original_parent_name(const boost::optional<dogen::sml::qname>& v);
+-    void original_parent_name(const boost::optional<dogen::sml::qname>&& v);
++    const std::list<dogen::sml::operation>& operations() const;
++    std::list<dogen::sml::operation>& operations();
++    void operations(const std::list<dogen::sml::operation>& v);
++    void operations(const std::list<dogen::sml::operation>&& v);
+     /**@}*/
+ 
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships() const;
++    std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships();
++    void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v);
++    void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >&& v);
++
+     /**
+-     * @brief All concrete types which are indirectly or directly derived from this type.
++     * @brief How many type arguments does this type have
+      */
+     /**@{*/
+-    const std::list<dogen::sml::qname>& leaves() const;
+-    std::list<dogen::sml::qname>& leaves();
+-    void leaves(const std::list<dogen::sml::qname>& v);
+-    void leaves(const std::list<dogen::sml::qname>&& v);
++    unsigned int number_of_type_arguments() const;
++    void number_of_type_arguments(const unsigned int v);
+     /**@}*/
+ 
+     /**
+@@ -150,14 +160,6 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief How many type arguments does this type have
+-     */
+-    /**@{*/
+-    unsigned int number_of_type_arguments() const;
+-    void number_of_type_arguments(const unsigned int v);
+-    /**@}*/
+-
+-    /**
+      * @brief If true, a visitor is to be generated for this type and its descendants.
+      *
+      * Only applicable if is_parent is true.
+@@ -202,16 +204,6 @@ public:
+     void is_fluent(const bool v);
+     /**@}*/
+ 
+-    /**
+-     * @brief List of concepts modeled by this object.
+-     */
+-    /**@{*/
+-    const std::list<dogen::sml::qname>& modeled_concepts() const;
+-    std::list<dogen::sml::qname>& modeled_concepts();
+-    void modeled_concepts(const std::list<dogen::sml::qname>& v);
+-    void modeled_concepts(const std::list<dogen::sml::qname>&& v);
+-    /**@}*/
+-
+ protected:
+     bool compare(const abstract_object& rhs) const;
+ public:
+@@ -221,19 +213,18 @@ protected:
+     void swap(abstract_object& other) noexcept;
+ 
+ private:
+-    std::list<dogen::sml::property> properties_;
++    std::list<dogen::sml::property> all_properties_;
++    std::list<dogen::sml::property> local_properties_;
++    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
+     std::list<dogen::sml::operation> operations_;
+-    boost::optional<dogen::sml::qname> parent_name_;
+-    boost::optional<dogen::sml::qname> original_parent_name_;
+-    std::list<dogen::sml::qname> leaves_;
+-    bool is_parent_;
++    std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
+     unsigned int number_of_type_arguments_;
++    bool is_parent_;
+     bool is_visitable_;
+     bool is_immutable_;
+     bool is_versioned_;
+     bool is_comparable_;
+     bool is_fluent_;
+-    std::list<dogen::sml::qname> modeled_concepts_;
+ };
+ 
+ inline abstract_object::~abstract_object() noexcept { }
+diff --git a/projects/sml/include/dogen/sml/types/all.hpp b/projects/sml/include/dogen/sml/types/all.hpp
+index cebe765..82e0c32 100644
+--- a/projects/sml/include/dogen/sml/types/all.hpp
++++ b/projects/sml/include/dogen/sml/types/all.hpp
+@@ -53,6 +53,7 @@
+ #include "dogen/sml/types/property_cache.hpp"
+ #include "dogen/sml/types/property_cache_interface.hpp"
+ #include "dogen/sml/types/qname.hpp"
++#include "dogen/sml/types/relationship_types.hpp"
+ #include "dogen/sml/types/repository.hpp"
+ #include "dogen/sml/types/resolution_error.hpp"
+ #include "dogen/sml/types/resolver.hpp"
+diff --git a/projects/sml/include/dogen/sml/types/concept.hpp b/projects/sml/include/dogen/sml/types/concept.hpp
+index 1350850..ad046ca 100644
+--- a/projects/sml/include/dogen/sml/types/concept.hpp
++++ b/projects/sml/include/dogen/sml/types/concept.hpp
+@@ -29,6 +29,8 @@
+ #include <boost/property_tree/ptree.hpp>
+ #include <list>
+ #include <string>
++#include <unordered_map>
++#include "dogen/sml/hash/qname_hash.hpp"
+ #include "dogen/sml/serialization/concept_fwd_ser.hpp"
+ #include "dogen/sml/types/generation_types.hpp"
+ #include "dogen/sml/types/operation.hpp"
+@@ -55,7 +57,9 @@ public:
+ 
+ public:
+     concept(
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::string& documentation,
+         const boost::property_tree::ptree& meta_data,
+         const dogen::sml::qname& name,
+@@ -73,15 +77,42 @@ private:
+ 
+ public:
+     /**
+-     * @brief State of this entity.
++     * @brief All the properties associated with this type.
+      *
+-     * Does not include inherited attributes.
++     * This is a union of the following sets:
++     *
++     * @li the set of all properies obtained via inheritance relationships;
++     * @li the set of all properies obtained via modeling of concepts, including any refinements;
++     * @li the set of all properies directly associated with the type (local).
++     *
++     * The first and third sets are cached in this object. The second isn't as we do
++     * not have a need for it.
++     */
++    /**@{*/
++    const std::list<dogen::sml::property>& all_properties() const;
++    std::list<dogen::sml::property>& all_properties();
++    void all_properties(const std::list<dogen::sml::property>& v);
++    void all_properties(const std::list<dogen::sml::property>&& v);
++    /**@}*/
++
++    /**
++     * @brief The set of all properies directly associated with the type.
++     */
++    /**@{*/
++    const std::list<dogen::sml::property>& local_properties() const;
++    std::list<dogen::sml::property>& local_properties();
++    void local_properties(const std::list<dogen::sml::property>& v);
++    void local_properties(const std::list<dogen::sml::property>&& v);
++    /**@}*/
++
++    /**
++     * @brief The set of all properies obtained via inheritance, by parent name.
+      */
+     /**@{*/
+-    const std::list<dogen::sml::property>& properties() const;
+-    std::list<dogen::sml::property>& properties();
+-    void properties(const std::list<dogen::sml::property>& v);
+-    void properties(const std::list<dogen::sml::property>&& v);
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties() const;
++    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties();
++    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v);
++    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v);
+     /**@}*/
+ 
+     /**
+@@ -166,7 +197,9 @@ public:
+     concept& operator=(concept other);
+ 
+ private:
+-    std::list<dogen::sml::property> properties_;
++    std::list<dogen::sml::property> all_properties_;
++    std::list<dogen::sml::property> local_properties_;
++    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
+     std::string documentation_;
+     boost::property_tree::ptree meta_data_;
+     dogen::sml::qname name_;
+diff --git a/projects/sml/include/dogen/sml/types/entity.hpp b/projects/sml/include/dogen/sml/types/entity.hpp
+index 7766931..39e22b0 100644
+--- a/projects/sml/include/dogen/sml/types/entity.hpp
++++ b/projects/sml/include/dogen/sml/types/entity.hpp
+@@ -51,19 +51,18 @@ public:
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+         const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts,
+         const bool is_aggregate_root,
+         const std::list<dogen::sml::property>& identity);
+ 
+diff --git a/projects/sml/include/dogen/sml/types/factory.hpp b/projects/sml/include/dogen/sml/types/factory.hpp
+index 0e99416..ba6b9f9 100644
+--- a/projects/sml/include/dogen/sml/types/factory.hpp
++++ b/projects/sml/include/dogen/sml/types/factory.hpp
+@@ -51,19 +51,18 @@ public:
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+-        const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts);
++        const bool is_fluent);
+ 
+ private:
+     template<typename Archive>
+diff --git a/projects/sml/include/dogen/sml/types/keyed_entity.hpp b/projects/sml/include/dogen/sml/types/keyed_entity.hpp
+index 3dc29d1..3eb220c 100644
+--- a/projects/sml/include/dogen/sml/types/keyed_entity.hpp
++++ b/projects/sml/include/dogen/sml/types/keyed_entity.hpp
+@@ -62,19 +62,18 @@ public:
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+         const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts,
+         const bool is_aggregate_root,
+         const std::list<dogen::sml::property>& identity,
+         const dogen::sml::qname& unversioned_key,
+diff --git a/projects/sml/include/dogen/sml/types/relationship_types.hpp b/projects/sml/include/dogen/sml/types/relationship_types.hpp
+new file mode 100644
+index 0000000..fedb1b1
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/relationship_types.hpp
+@@ -0,0 +1,48 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_RELATIONSHIP_TYPES_HPP
++#define DOGEN_SML_TYPES_RELATIONSHIP_TYPES_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++
++/**
++ * @brief Ways in which a type can be related to another for indexing purposes.
++ */
++enum class relationship_types : unsigned int {
++    invalid = 0, ///< Represents an uninitialised enum
++    original_parents = 1, ///< Types at the root of the inheritance hierarchy.
++    parents = 2, ///< Types that are direct parents of this type.
++    regular_associations = 3, ///< Types that are involved in aggregation or composition relationships.
++    pointer_associations = 4, ///< Types that are involved in aggregation or composition relationships via a pointer.
++    leaves = 5, ///< Types that are at the bottom of the inheritance tree.
++    visitor = 6, ///< Type that provides visitation services for this type.
++    key = 7, ///< Types that are used in the identity function of this type.
++    modeled_concepts = 8 ///< Concepts modeled by this type.
++};
++
++} }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/relationship_types_fwd.hpp b/projects/sml/include/dogen/sml/types/relationship_types_fwd.hpp
+new file mode 100644
+index 0000000..199c756
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/relationship_types_fwd.hpp
+@@ -0,0 +1,34 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_RELATIONSHIP_TYPES_FWD_HPP
++#define DOGEN_SML_TYPES_RELATIONSHIP_TYPES_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++
++enum class relationship_types : unsigned int;
++} }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/repository.hpp b/projects/sml/include/dogen/sml/types/repository.hpp
+index 4725c32..bf39294 100644
+--- a/projects/sml/include/dogen/sml/types/repository.hpp
++++ b/projects/sml/include/dogen/sml/types/repository.hpp
+@@ -56,19 +56,18 @@ public:
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+-        const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts);
++        const bool is_fluent);
+ 
+ private:
+     template<typename Archive>
+diff --git a/projects/sml/include/dogen/sml/types/service.hpp b/projects/sml/include/dogen/sml/types/service.hpp
+index 89ad8b9..49af7b1 100644
+--- a/projects/sml/include/dogen/sml/types/service.hpp
++++ b/projects/sml/include/dogen/sml/types/service.hpp
+@@ -58,19 +58,18 @@ public:
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+         const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts,
+         const dogen::sml::service_types& type);
+ 
+ private:
+diff --git a/projects/sml/include/dogen/sml/types/value_object.hpp b/projects/sml/include/dogen/sml/types/value_object.hpp
+index a623ec1..d8cc26c 100644
+--- a/projects/sml/include/dogen/sml/types/value_object.hpp
++++ b/projects/sml/include/dogen/sml/types/value_object.hpp
+@@ -58,19 +58,18 @@ public:
+         const dogen::sml::qname& name,
+         const dogen::sml::generation_types& generation_type,
+         const dogen::sml::origin_types& origin_type,
+-        const std::list<dogen::sml::property>& properties,
++        const std::list<dogen::sml::property>& all_properties,
++        const std::list<dogen::sml::property>& local_properties,
++        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+-        const std::list<dogen::sml::qname>& leaves,
+-        const bool is_parent,
++        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const unsigned int number_of_type_arguments,
++        const bool is_parent,
+         const bool is_visitable,
+         const bool is_immutable,
+         const bool is_versioned,
+         const bool is_comparable,
+         const bool is_fluent,
+-        const std::list<dogen::sml::qname>& modeled_concepts,
+         const dogen::sml::value_object_types& type);
+ 
+ private:
+diff --git a/projects/sml/src/hash/abstract_object_hash.cpp b/projects/sml/src/hash/abstract_object_hash.cpp
+index ed30ef4..9d3178b 100644
+--- a/projects/sml/src/hash/abstract_object_hash.cpp
++++ b/projects/sml/src/hash/abstract_object_hash.cpp
+@@ -24,6 +24,7 @@
+ #include "dogen/sml/hash/origin_types_hash.hpp"
+ #include "dogen/sml/hash/property_hash.hpp"
+ #include "dogen/sml/hash/qname_hash.hpp"
++#include "dogen/sml/hash/relationship_types_hash.hpp"
+ #include "dogen/sml/hash/type_hash.hpp"
+ 
+ namespace {
+@@ -43,21 +44,20 @@ inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml::operation>& v){
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+-        combine(seed, i);
++        combine(seed, i.first);
++        combine(seed, hash_std_list_dogen_sml_property(i.second));
+     }
+     return seed;
+ }
+ 
+-inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
++inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml::operation>& v){
+     std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+-    combine(seed, *v);
++    for (const auto i : v) {
++        combine(seed, i);
++    }
+     return seed;
+ }
+ 
+@@ -69,6 +69,15 @@ inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qna
+     return seed;
+ }
+ 
++inline std::size_t hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v){
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i.first);
++        combine(seed, hash_std_list_dogen_sml_qname(i.second));
++    }
++    return seed;
++}
++
+ }
+ 
+ namespace dogen {
+@@ -79,19 +88,18 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
+ 
+     combine(seed, dynamic_cast<const dogen::sml::type&>(v));
+ 
+-    combine(seed, hash_std_list_dogen_sml_property(v.properties()));
++    combine(seed, hash_std_list_dogen_sml_property(v.all_properties()));
++    combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
+     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
+-    combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_name()));
+-    combine(seed, hash_boost_optional_dogen_sml_qname(v.original_parent_name()));
+-    combine(seed, hash_std_list_dogen_sml_qname(v.leaves()));
+-    combine(seed, v.is_parent());
++    combine(seed, hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(v.relationships()));
+     combine(seed, v.number_of_type_arguments());
++    combine(seed, v.is_parent());
+     combine(seed, v.is_visitable());
+     combine(seed, v.is_immutable());
+     combine(seed, v.is_versioned());
+     combine(seed, v.is_comparable());
+     combine(seed, v.is_fluent());
+-    combine(seed, hash_std_list_dogen_sml_qname(v.modeled_concepts()));
+ 
+     return seed;
+ }
+diff --git a/projects/sml/src/hash/concept_hash.cpp b/projects/sml/src/hash/concept_hash.cpp
+index a02faca..d946d07 100644
+--- a/projects/sml/src/hash/concept_hash.cpp
++++ b/projects/sml/src/hash/concept_hash.cpp
+@@ -42,6 +42,15 @@ inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::
+     return seed;
+ }
+ 
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v){
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i.first);
++        combine(seed, hash_std_list_dogen_sml_property(i.second));
++    }
++    return seed;
++}
++
+ inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::ptree& v) {
+     std::size_t seed(0);
+     for (const auto& node : v) {
+@@ -77,7 +86,9 @@ namespace sml {
+ std::size_t concept_hasher::hash(const concept&v) {
+     std::size_t seed(0);
+ 
+-    combine(seed, hash_std_list_dogen_sml_property(v.properties()));
++    combine(seed, hash_std_list_dogen_sml_property(v.all_properties()));
++    combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
+     combine(seed, v.documentation());
+     combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
+     combine(seed, v.name());
+diff --git a/projects/sml/src/io/abstract_object_io.cpp b/projects/sml/src/io/abstract_object_io.cpp
+index 28f398d..a253da6 100644
+--- a/projects/sml/src/io/abstract_object_io.cpp
++++ b/projects/sml/src/io/abstract_object_io.cpp
+@@ -28,6 +28,7 @@
+ #include "dogen/sml/io/origin_types_io.hpp"
+ #include "dogen/sml/io/property_io.hpp"
+ #include "dogen/sml/io/qname_io.hpp"
++#include "dogen/sml/io/relationship_types_io.hpp"
+ #include "dogen/sml/io/type_io.hpp"
+ 
+ namespace dogen {
+diff --git a/projects/sml/src/io/concept_io.cpp b/projects/sml/src/io/concept_io.cpp
+index b170793..39fee5e 100644
+--- a/projects/sml/src/io/concept_io.cpp
++++ b/projects/sml/src/io/concept_io.cpp
+@@ -42,6 +42,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::pro
+ 
+ }
+ 
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v) {
++    s << "[";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << i->first;
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << i->second;
++        s << " } ]";
++    }
++    s << " ] ";
++    return s;
++}
++
++}
++
+ 
+ inline std::string tidy_up_string(std::string s) {
+     boost::replace_all(s, "\r\n", "<new_line>");
+@@ -94,7 +112,9 @@ namespace sml {
+ std::ostream& operator<<(std::ostream& s, const concept& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::sml::concept\"" << ", "
+-      << "\"properties\": " << v.properties() << ", "
++      << "\"all_properties\": " << v.all_properties() << ", "
++      << "\"local_properties\": " << v.local_properties() << ", "
++      << "\"inherited_properties\": " << v.inherited_properties() << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+       << "\"meta_data\": " << v.meta_data() << ", "
+       << "\"name\": " << v.name() << ", "
+diff --git a/projects/sml/src/io/relationship_types_io.cpp b/projects/sml/src/io/relationship_types_io.cpp
+new file mode 100644
+index 0000000..1a1039e
+--- /dev/null
++++ b/projects/sml/src/io/relationship_types_io.cpp
+@@ -0,0 +1,67 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include <stdexcept>
++#include "dogen/sml/io/relationship_types_io.hpp"
++
++namespace dogen {
++namespace sml {
++
++std::ostream& operator<<(std::ostream& s, const relationship_types& v) {
++    s << "{ " << "\"__type__\": " << "\"relationship_types\", " << "\"value\": ";
++
++    std::string attr;
++    switch (v) {
++    case relationship_types::invalid:
++        attr = "\"invalid\"";
++        break;
++    case relationship_types::original_parents:
++        attr = "\"original_parents\"";
++        break;
++    case relationship_types::parents:
++        attr = "\"parents\"";
++        break;
++    case relationship_types::regular_associations:
++        attr = "\"regular_associations\"";
++        break;
++    case relationship_types::pointer_associations:
++        attr = "\"pointer_associations\"";
++        break;
++    case relationship_types::leaves:
++        attr = "\"leaves\"";
++        break;
++    case relationship_types::visitor:
++        attr = "\"visitor\"";
++        break;
++    case relationship_types::key:
++        attr = "\"key\"";
++        break;
++    case relationship_types::modeled_concepts:
++        attr = "\"modeled_concepts\"";
++        break;
++    default:
++        throw std::invalid_argument("Invalid value for relationship_types");
++    }
++    s << attr << " }";
++    return s;
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/sml/src/serialization/abstract_object_ser.cpp b/projects/sml/src/serialization/abstract_object_ser.cpp
+index dbf615e..f80bf58 100644
+--- a/projects/sml/src/serialization/abstract_object_ser.cpp
++++ b/projects/sml/src/serialization/abstract_object_ser.cpp
+@@ -30,7 +30,6 @@
+ #include <boost/property_tree/ptree_serialization.hpp>
+ #include <boost/serialization/list.hpp>
+ #include <boost/serialization/nvp.hpp>
+-#include <boost/serialization/optional.hpp>
+ #include <boost/serialization/string.hpp>
+ #include "dogen/sml/serialization/abstract_object_ser.hpp"
+ #include "dogen/sml/serialization/entity_ser.hpp"
+@@ -41,10 +40,12 @@
+ #include "dogen/sml/serialization/origin_types_ser.hpp"
+ #include "dogen/sml/serialization/property_ser.hpp"
+ #include "dogen/sml/serialization/qname_ser.hpp"
++#include "dogen/sml/serialization/relationship_types_ser.hpp"
+ #include "dogen/sml/serialization/repository_ser.hpp"
+ #include "dogen/sml/serialization/service_ser.hpp"
+ #include "dogen/sml/serialization/type_ser.hpp"
+ #include "dogen/sml/serialization/value_object_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -64,19 +65,18 @@ void save(Archive& ar,
+     const unsigned int /*version*/) {
+     ar << make_nvp("type", base_object<dogen::sml::type>(v));
+ 
+-    ar << make_nvp("properties", v.properties_);
++    ar << make_nvp("all_properties", v.all_properties_);
++    ar << make_nvp("local_properties", v.local_properties_);
++    ar << make_nvp("inherited_properties", v.inherited_properties_);
+     ar << make_nvp("operations", v.operations_);
+-    ar << make_nvp("parent_name", v.parent_name_);
+-    ar << make_nvp("original_parent_name", v.original_parent_name_);
+-    ar << make_nvp("leaves", v.leaves_);
+-    ar << make_nvp("is_parent", v.is_parent_);
++    ar << make_nvp("relationships", v.relationships_);
+     ar << make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
++    ar << make_nvp("is_parent", v.is_parent_);
+     ar << make_nvp("is_visitable", v.is_visitable_);
+     ar << make_nvp("is_immutable", v.is_immutable_);
+     ar << make_nvp("is_versioned", v.is_versioned_);
+     ar << make_nvp("is_comparable", v.is_comparable_);
+     ar << make_nvp("is_fluent", v.is_fluent_);
+-    ar << make_nvp("modeled_concepts", v.modeled_concepts_);
+ }
+ 
+ template<typename Archive>
+@@ -85,19 +85,18 @@ void load(Archive& ar,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("type", base_object<dogen::sml::type>(v));
+ 
+-    ar >> make_nvp("properties", v.properties_);
++    ar >> make_nvp("all_properties", v.all_properties_);
++    ar >> make_nvp("local_properties", v.local_properties_);
++    ar >> make_nvp("inherited_properties", v.inherited_properties_);
+     ar >> make_nvp("operations", v.operations_);
+-    ar >> make_nvp("parent_name", v.parent_name_);
+-    ar >> make_nvp("original_parent_name", v.original_parent_name_);
+-    ar >> make_nvp("leaves", v.leaves_);
+-    ar >> make_nvp("is_parent", v.is_parent_);
++    ar >> make_nvp("relationships", v.relationships_);
+     ar >> make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
++    ar >> make_nvp("is_parent", v.is_parent_);
+     ar >> make_nvp("is_visitable", v.is_visitable_);
+     ar >> make_nvp("is_immutable", v.is_immutable_);
+     ar >> make_nvp("is_versioned", v.is_versioned_);
+     ar >> make_nvp("is_comparable", v.is_comparable_);
+     ar >> make_nvp("is_fluent", v.is_fluent_);
+-    ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
+ }
+ 
+ } }
+diff --git a/projects/sml/src/serialization/concept_ser.cpp b/projects/sml/src/serialization/concept_ser.cpp
+index 2ff2ec1..8966384 100644
+--- a/projects/sml/src/serialization/concept_ser.cpp
++++ b/projects/sml/src/serialization/concept_ser.cpp
+@@ -37,6 +37,7 @@
+ #include "dogen/sml/serialization/origin_types_ser.hpp"
+ #include "dogen/sml/serialization/property_ser.hpp"
+ #include "dogen/sml/serialization/qname_ser.hpp"
++#include "dogen/utility/serialization/unordered_map.hpp"
+ 
+ #ifdef __linux__
+ #include "eos/portable_iarchive.hpp"
+@@ -50,7 +51,9 @@ template<typename Archive>
+ void save(Archive& ar,
+     const dogen::sml::concept& v,
+     const unsigned int /*version*/) {
+-    ar << make_nvp("properties", v.properties_);
++    ar << make_nvp("all_properties", v.all_properties_);
++    ar << make_nvp("local_properties", v.local_properties_);
++    ar << make_nvp("inherited_properties", v.inherited_properties_);
+     ar << make_nvp("documentation", v.documentation_);
+     ar << make_nvp("meta_data", v.meta_data_);
+     ar << make_nvp("name", v.name_);
+@@ -64,7 +67,9 @@ template<typename Archive>
+ void load(Archive& ar,
+     dogen::sml::concept& v,
+     const unsigned int /*version*/) {
+-    ar >> make_nvp("properties", v.properties_);
++    ar >> make_nvp("all_properties", v.all_properties_);
++    ar >> make_nvp("local_properties", v.local_properties_);
++    ar >> make_nvp("inherited_properties", v.inherited_properties_);
+     ar >> make_nvp("documentation", v.documentation_);
+     ar >> make_nvp("meta_data", v.meta_data_);
+     ar >> make_nvp("name", v.name_);
+diff --git a/projects/sml/src/test_data/abstract_object_td.cpp b/projects/sml/src/test_data/abstract_object_td.cpp
+index 4fc1647..00a8a85 100644
+--- a/projects/sml/src/test_data/abstract_object_td.cpp
++++ b/projects/sml/src/test_data/abstract_object_td.cpp
+@@ -28,6 +28,7 @@
+ #include "dogen/sml/test_data/origin_types_td.hpp"
+ #include "dogen/sml/test_data/property_td.hpp"
+ #include "dogen/sml/test_data/qname_td.hpp"
++#include "dogen/sml/test_data/relationship_types_td.hpp"
+ #include "dogen/sml/test_data/repository_td.hpp"
+ #include "dogen/sml/test_data/service_td.hpp"
+ #include "dogen/sml/test_data/type_td.hpp"
+@@ -48,6 +49,19 @@ std::list<dogen::sml::property> create_std_list_dogen_sml_property(unsigned int
+     return r;
+ }
+ 
++dogen::sml::qname
++create_dogen_sml_qname(const unsigned int position) {
++    return dogen::sml::qname_generator::create(position);
++}
++
++std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > r;
++    for (unsigned int i(0); i < 10; ++i) {
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_std_list_dogen_sml_property(position + i)));
++    }
++    return r;
++}
++
+ dogen::sml::operation
+ create_dogen_sml_operation(const unsigned int position) {
+     return dogen::sml::operation_generator::create(position);
+@@ -61,16 +75,9 @@ std::list<dogen::sml::operation> create_std_list_dogen_sml_operation(unsigned in
+     return r;
+ }
+ 
+-dogen::sml::qname
+-create_dogen_sml_qname(const unsigned int position) {
+-    return dogen::sml::qname_generator::create(position);
+-}
+-
+-boost::optional<dogen::sml::qname>
+-create_boost_optional_dogen_sml_qname(unsigned int position) {
+-    boost::optional<dogen::sml::qname> r(
+-        create_dogen_sml_qname(position));
+-    return r;
++dogen::sml::relationship_types
++create_dogen_sml_relationship_types(const unsigned int position) {
++    return dogen::sml::relationship_types_generator::create(position);
+ }
+ 
+ std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
+@@ -81,14 +88,22 @@ std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int positi
+     return r;
+ }
+ 
+-bool create_bool(const unsigned int position) {
+-    return (position % 2) == 0;
++std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(unsigned int position) {
++    std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > r;
++    for (unsigned int i(0); i < 10; ++i) {
++        r.insert(std::make_pair(create_dogen_sml_relationship_types(position + i), create_std_list_dogen_sml_qname(position + i)));
++    }
++    return r;
+ }
+ 
+ unsigned int create_unsigned_int(const unsigned int position) {
+     return static_cast<unsigned int>(position);
+ }
+ 
++bool create_bool(const unsigned int position) {
++    return (position % 2) == 0;
++}
++
+ }
+ 
+ namespace dogen {
+@@ -98,19 +113,18 @@ namespace sml {
+ void abstract_object_generator::
+ populate(const unsigned int position, result_type& v) {
+     dogen::sml::type_generator::populate(position, v);
+-    v.properties(create_std_list_dogen_sml_property(position + 0));
+-    v.operations(create_std_list_dogen_sml_operation(position + 1));
+-    v.parent_name(create_boost_optional_dogen_sml_qname(position + 2));
+-    v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 3));
+-    v.leaves(create_std_list_dogen_sml_qname(position + 4));
+-    v.is_parent(create_bool(position + 5));
+-    v.number_of_type_arguments(create_unsigned_int(position + 6));
++    v.all_properties(create_std_list_dogen_sml_property(position + 0));
++    v.local_properties(create_std_list_dogen_sml_property(position + 1));
++    v.inherited_properties(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(position + 2));
++    v.operations(create_std_list_dogen_sml_operation(position + 3));
++    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 4));
++    v.number_of_type_arguments(create_unsigned_int(position + 5));
++    v.is_parent(create_bool(position + 6));
+     v.is_visitable(create_bool(position + 7));
+     v.is_immutable(create_bool(position + 8));
+     v.is_versioned(create_bool(position + 9));
+     v.is_comparable(create_bool(position + 10));
+     v.is_fluent(create_bool(position + 11));
+-    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 12));
+ }
+ 
+ abstract_object_generator::result_type*
+diff --git a/projects/sml/src/test_data/concept_td.cpp b/projects/sml/src/test_data/concept_td.cpp
+index e62813e..9a4b246 100644
+--- a/projects/sml/src/test_data/concept_td.cpp
++++ b/projects/sml/src/test_data/concept_td.cpp
+@@ -41,6 +41,19 @@ std::list<dogen::sml::property> create_std_list_dogen_sml_property(unsigned int
+     return r;
+ }
+ 
++dogen::sml::qname
++create_dogen_sml_qname(const unsigned int position) {
++    return dogen::sml::qname_generator::create(position);
++}
++
++std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > r;
++    for (unsigned int i(0); i < 10; ++i) {
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_std_list_dogen_sml_property(position + i)));
++    }
++    return r;
++}
++
+ std::string create_std_string(const unsigned int position) {
+     std::ostringstream s;
+     s << "a_string_" << position;
+@@ -57,11 +70,6 @@ create_boost_property_tree_ptree(const unsigned int position) {
+     return r;
+ }
+ 
+-dogen::sml::qname
+-create_dogen_sml_qname(const unsigned int position) {
+-    return dogen::sml::qname_generator::create(position);
+-}
+-
+ dogen::sml::generation_types
+ create_dogen_sml_generation_types(const unsigned int position) {
+     return dogen::sml::generation_types_generator::create(position);
+@@ -102,14 +110,16 @@ concept_generator::concept_generator() : position_(0) { }
+ 
+ void concept_generator::
+ populate(const unsigned int position, result_type& v) {
+-    v.properties(create_std_list_dogen_sml_property(position + 0));
+-    v.documentation(create_std_string(position + 1));
+-    v.meta_data(create_boost_property_tree_ptree(position + 2));
+-    v.name(create_dogen_sml_qname(position + 3));
+-    v.generation_type(create_dogen_sml_generation_types(position + 4));
+-    v.origin_type(create_dogen_sml_origin_types(position + 5));
+-    v.operations(create_std_list_dogen_sml_operation(position + 6));
+-    v.refines(create_std_list_dogen_sml_qname(position + 7));
++    v.all_properties(create_std_list_dogen_sml_property(position + 0));
++    v.local_properties(create_std_list_dogen_sml_property(position + 1));
++    v.inherited_properties(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(position + 2));
++    v.documentation(create_std_string(position + 3));
++    v.meta_data(create_boost_property_tree_ptree(position + 4));
++    v.name(create_dogen_sml_qname(position + 5));
++    v.generation_type(create_dogen_sml_generation_types(position + 6));
++    v.origin_type(create_dogen_sml_origin_types(position + 7));
++    v.operations(create_std_list_dogen_sml_operation(position + 8));
++    v.refines(create_std_list_dogen_sml_qname(position + 9));
+ }
+ 
+ concept_generator::result_type
+diff --git a/projects/sml/src/test_data/relationship_types_td.cpp b/projects/sml/src/test_data/relationship_types_td.cpp
+new file mode 100644
+index 0000000..1c5aeeb
+--- /dev/null
++++ b/projects/sml/src/test_data/relationship_types_td.cpp
+@@ -0,0 +1,44 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/sml/test_data/relationship_types_td.hpp"
++
++namespace dogen {
++namespace sml {
++
++relationship_types_generator::relationship_types_generator() : position_(0) { }
++void relationship_types_generator::
++populate(const unsigned int position, result_type& v) {
++    v = static_cast<relationship_types>(position % 9);
++}
++
++relationship_types_generator::result_type
++relationship_types_generator::create(const unsigned int  position) {
++    result_type r;
++    relationship_types_generator::populate(position, r);
++    return r;
++}
++
++relationship_types_generator::result_type
++relationship_types_generator::operator()() {
++    return create(position_++);
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/sml/src/types/abstract_entity.cpp b/projects/sml/src/types/abstract_entity.cpp
+index 3a8a71f..c7af1eb 100644
+--- a/projects/sml/src/types/abstract_entity.cpp
++++ b/projects/sml/src/types/abstract_entity.cpp
+@@ -50,19 +50,18 @@ abstract_entity::abstract_entity(
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+     const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts,
+     const bool is_aggregate_root,
+     const std::list<dogen::sml::property>& identity)
+     : dogen::sml::abstract_object(documentation,
+@@ -70,19 +69,18 @@ abstract_entity::abstract_entity(
+       name,
+       generation_type,
+       origin_type,
+-      properties,
++      all_properties,
++      local_properties,
++      inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+-      leaves,
+-      is_parent,
++      relationships,
+       number_of_type_arguments,
++      is_parent,
+       is_visitable,
+       is_immutable,
+       is_versioned,
+       is_comparable,
+-      is_fluent,
+-      modeled_concepts),
++      is_fluent),
+       is_aggregate_root_(is_aggregate_root),
+       identity_(identity) { }
+ 
+diff --git a/projects/sml/src/types/abstract_object.cpp b/projects/sml/src/types/abstract_object.cpp
+index 5c22ed9..e813843 100644
+--- a/projects/sml/src/types/abstract_object.cpp
++++ b/projects/sml/src/types/abstract_object.cpp
+@@ -27,6 +27,7 @@
+ #include "dogen/sml/io/origin_types_io.hpp"
+ #include "dogen/sml/io/property_io.hpp"
+ #include "dogen/sml/io/qname_io.hpp"
++#include "dogen/sml/io/relationship_types_io.hpp"
+ #include "dogen/sml/io/type_io.hpp"
+ #include "dogen/sml/types/abstract_object.hpp"
+ 
+@@ -46,28 +47,31 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::pro
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::operation>& v) {
+-    s << "[ ";
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v) {
++    s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+-        s << *i;
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << i->first;
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << i->second;
++        s << " } ]";
+     }
+-    s << "] ";
++    s << " ] ";
+     return s;
+ }
+ 
+ }
+ 
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
++namespace std {
+ 
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<empty>\"";
+-    s << " }";
++inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::operation>& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << *i;
++    }
++    s << "] ";
+     return s;
+ }
+ 
+@@ -87,72 +91,71 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qna
+ 
+ }
+ 
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v) {
++    s << "[";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << i->first;
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << i->second;
++        s << " } ]";
++    }
++    s << " ] ";
++    return s;
++}
++
++}
++
+ namespace dogen {
+ namespace sml {
+ 
+ abstract_object::abstract_object()
+-    : is_parent_(static_cast<bool>(0)),
+-      number_of_type_arguments_(static_cast<unsigned int>(0)),
++    : number_of_type_arguments_(static_cast<unsigned int>(0)),
++      is_parent_(static_cast<bool>(0)),
+       is_visitable_(static_cast<bool>(0)),
+       is_immutable_(static_cast<bool>(0)),
+       is_versioned_(static_cast<bool>(0)),
+       is_comparable_(static_cast<bool>(0)),
+       is_fluent_(static_cast<bool>(0)) { }
+ 
+-abstract_object::abstract_object(abstract_object&& rhs)
+-    : dogen::sml::type(
+-        std::forward<dogen::sml::type>(rhs)),
+-      properties_(std::move(rhs.properties_)),
+-      operations_(std::move(rhs.operations_)),
+-      parent_name_(std::move(rhs.parent_name_)),
+-      original_parent_name_(std::move(rhs.original_parent_name_)),
+-      leaves_(std::move(rhs.leaves_)),
+-      is_parent_(std::move(rhs.is_parent_)),
+-      number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)),
+-      is_visitable_(std::move(rhs.is_visitable_)),
+-      is_immutable_(std::move(rhs.is_immutable_)),
+-      is_versioned_(std::move(rhs.is_versioned_)),
+-      is_comparable_(std::move(rhs.is_comparable_)),
+-      is_fluent_(std::move(rhs.is_fluent_)),
+-      modeled_concepts_(std::move(rhs.modeled_concepts_)) { }
+-
+ abstract_object::abstract_object(
+     const std::string& documentation,
+     const boost::property_tree::ptree& meta_data,
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+-    const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts)
++    const bool is_fluent)
+     : dogen::sml::type(documentation,
+       meta_data,
+       name,
+       generation_type,
+       origin_type),
+-      properties_(properties),
++      all_properties_(all_properties),
++      local_properties_(local_properties),
++      inherited_properties_(inherited_properties),
+       operations_(operations),
+-      parent_name_(parent_name),
+-      original_parent_name_(original_parent_name),
+-      leaves_(leaves),
+-      is_parent_(is_parent),
++      relationships_(relationships),
+       number_of_type_arguments_(number_of_type_arguments),
++      is_parent_(is_parent),
+       is_visitable_(is_visitable),
+       is_immutable_(is_immutable),
+       is_versioned_(is_versioned),
+       is_comparable_(is_comparable),
+-      is_fluent_(is_fluent),
+-      modeled_concepts_(modeled_concepts) { }
++      is_fluent_(is_fluent) { }
+ 
+ void abstract_object::to_stream(std::ostream& s) const {
+     boost::io::ios_flags_saver ifs(s);
+@@ -166,19 +169,18 @@ void abstract_object::to_stream(std::ostream& s) const {
+       << "\"__parent_0__\": ";
+     type::to_stream(s);
+     s << ", "
+-      << "\"properties\": " << properties_ << ", "
++      << "\"all_properties\": " << all_properties_ << ", "
++      << "\"local_properties\": " << local_properties_ << ", "
++      << "\"inherited_properties\": " << inherited_properties_ << ", "
+       << "\"operations\": " << operations_ << ", "
+-      << "\"parent_name\": " << parent_name_ << ", "
+-      << "\"original_parent_name\": " << original_parent_name_ << ", "
+-      << "\"leaves\": " << leaves_ << ", "
+-      << "\"is_parent\": " << is_parent_ << ", "
++      << "\"relationships\": " << relationships_ << ", "
+       << "\"number_of_type_arguments\": " << number_of_type_arguments_ << ", "
++      << "\"is_parent\": " << is_parent_ << ", "
+       << "\"is_visitable\": " << is_visitable_ << ", "
+       << "\"is_immutable\": " << is_immutable_ << ", "
+       << "\"is_versioned\": " << is_versioned_ << ", "
+       << "\"is_comparable\": " << is_comparable_ << ", "
+-      << "\"is_fluent\": " << is_fluent_ << ", "
+-      << "\"modeled_concepts\": " << modeled_concepts_
++      << "\"is_fluent\": " << is_fluent_
+       << " }";
+ }
+ 
+@@ -186,124 +188,114 @@ void abstract_object::swap(abstract_object& other) noexcept {
+     type::swap(other);
+ 
+     using std::swap;
+-    swap(properties_, other.properties_);
++    swap(all_properties_, other.all_properties_);
++    swap(local_properties_, other.local_properties_);
++    swap(inherited_properties_, other.inherited_properties_);
+     swap(operations_, other.operations_);
+-    swap(parent_name_, other.parent_name_);
+-    swap(original_parent_name_, other.original_parent_name_);
+-    swap(leaves_, other.leaves_);
+-    swap(is_parent_, other.is_parent_);
++    swap(relationships_, other.relationships_);
+     swap(number_of_type_arguments_, other.number_of_type_arguments_);
++    swap(is_parent_, other.is_parent_);
+     swap(is_visitable_, other.is_visitable_);
+     swap(is_immutable_, other.is_immutable_);
+     swap(is_versioned_, other.is_versioned_);
+     swap(is_comparable_, other.is_comparable_);
+     swap(is_fluent_, other.is_fluent_);
+-    swap(modeled_concepts_, other.modeled_concepts_);
+ }
+ 
+ bool abstract_object::compare(const abstract_object& rhs) const {
+     return type::compare(rhs) &&
+-        properties_ == rhs.properties_ &&
++        all_properties_ == rhs.all_properties_ &&
++        local_properties_ == rhs.local_properties_ &&
++        inherited_properties_ == rhs.inherited_properties_ &&
+         operations_ == rhs.operations_ &&
+-        parent_name_ == rhs.parent_name_ &&
+-        original_parent_name_ == rhs.original_parent_name_ &&
+-        leaves_ == rhs.leaves_ &&
+-        is_parent_ == rhs.is_parent_ &&
++        relationships_ == rhs.relationships_ &&
+         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
++        is_parent_ == rhs.is_parent_ &&
+         is_visitable_ == rhs.is_visitable_ &&
+         is_immutable_ == rhs.is_immutable_ &&
+         is_versioned_ == rhs.is_versioned_ &&
+         is_comparable_ == rhs.is_comparable_ &&
+-        is_fluent_ == rhs.is_fluent_ &&
+-        modeled_concepts_ == rhs.modeled_concepts_;
+-}
+-
+-const std::list<dogen::sml::property>& abstract_object::properties() const {
+-    return properties_;
+-}
+-
+-std::list<dogen::sml::property>& abstract_object::properties() {
+-    return properties_;
++        is_fluent_ == rhs.is_fluent_;
+ }
+ 
+-void abstract_object::properties(const std::list<dogen::sml::property>& v) {
+-    properties_ = v;
++const std::list<dogen::sml::property>& abstract_object::all_properties() const {
++    return all_properties_;
+ }
+ 
+-void abstract_object::properties(const std::list<dogen::sml::property>&& v) {
+-    properties_ = std::move(v);
++std::list<dogen::sml::property>& abstract_object::all_properties() {
++    return all_properties_;
+ }
+ 
+-const std::list<dogen::sml::operation>& abstract_object::operations() const {
+-    return operations_;
++void abstract_object::all_properties(const std::list<dogen::sml::property>& v) {
++    all_properties_ = v;
+ }
+ 
+-std::list<dogen::sml::operation>& abstract_object::operations() {
+-    return operations_;
++void abstract_object::all_properties(const std::list<dogen::sml::property>&& v) {
++    all_properties_ = std::move(v);
+ }
+ 
+-void abstract_object::operations(const std::list<dogen::sml::operation>& v) {
+-    operations_ = v;
++const std::list<dogen::sml::property>& abstract_object::local_properties() const {
++    return local_properties_;
+ }
+ 
+-void abstract_object::operations(const std::list<dogen::sml::operation>&& v) {
+-    operations_ = std::move(v);
++std::list<dogen::sml::property>& abstract_object::local_properties() {
++    return local_properties_;
+ }
+ 
+-const boost::optional<dogen::sml::qname>& abstract_object::parent_name() const {
+-    return parent_name_;
++void abstract_object::local_properties(const std::list<dogen::sml::property>& v) {
++    local_properties_ = v;
+ }
+ 
+-boost::optional<dogen::sml::qname>& abstract_object::parent_name() {
+-    return parent_name_;
++void abstract_object::local_properties(const std::list<dogen::sml::property>&& v) {
++    local_properties_ = std::move(v);
+ }
+ 
+-void abstract_object::parent_name(const boost::optional<dogen::sml::qname>& v) {
+-    parent_name_ = v;
++const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& abstract_object::inherited_properties() const {
++    return inherited_properties_;
+ }
+ 
+-void abstract_object::parent_name(const boost::optional<dogen::sml::qname>&& v) {
+-    parent_name_ = std::move(v);
++std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& abstract_object::inherited_properties() {
++    return inherited_properties_;
+ }
+ 
+-const boost::optional<dogen::sml::qname>& abstract_object::original_parent_name() const {
+-    return original_parent_name_;
++void abstract_object::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v) {
++    inherited_properties_ = v;
+ }
+ 
+-boost::optional<dogen::sml::qname>& abstract_object::original_parent_name() {
+-    return original_parent_name_;
++void abstract_object::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v) {
++    inherited_properties_ = std::move(v);
+ }
+ 
+-void abstract_object::original_parent_name(const boost::optional<dogen::sml::qname>& v) {
+-    original_parent_name_ = v;
++const std::list<dogen::sml::operation>& abstract_object::operations() const {
++    return operations_;
+ }
+ 
+-void abstract_object::original_parent_name(const boost::optional<dogen::sml::qname>&& v) {
+-    original_parent_name_ = std::move(v);
++std::list<dogen::sml::operation>& abstract_object::operations() {
++    return operations_;
+ }
+ 
+-const std::list<dogen::sml::qname>& abstract_object::leaves() const {
+-    return leaves_;
++void abstract_object::operations(const std::list<dogen::sml::operation>& v) {
++    operations_ = v;
+ }
+ 
+-std::list<dogen::sml::qname>& abstract_object::leaves() {
+-    return leaves_;
++void abstract_object::operations(const std::list<dogen::sml::operation>&& v) {
++    operations_ = std::move(v);
+ }
+ 
+-void abstract_object::leaves(const std::list<dogen::sml::qname>& v) {
+-    leaves_ = v;
++const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& abstract_object::relationships() const {
++    return relationships_;
+ }
+ 
+-void abstract_object::leaves(const std::list<dogen::sml::qname>&& v) {
+-    leaves_ = std::move(v);
++std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& abstract_object::relationships() {
++    return relationships_;
+ }
+ 
+-bool abstract_object::is_parent() const {
+-    return is_parent_;
++void abstract_object::relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v) {
++    relationships_ = v;
+ }
+ 
+-void abstract_object::is_parent(const bool v) {
+-    is_parent_ = v;
++void abstract_object::relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >&& v) {
++    relationships_ = std::move(v);
+ }
+ 
+ unsigned int abstract_object::number_of_type_arguments() const {
+@@ -314,6 +306,14 @@ void abstract_object::number_of_type_arguments(const unsigned int v) {
+     number_of_type_arguments_ = v;
+ }
+ 
++bool abstract_object::is_parent() const {
++    return is_parent_;
++}
++
++void abstract_object::is_parent(const bool v) {
++    is_parent_ = v;
++}
++
+ bool abstract_object::is_visitable() const {
+     return is_visitable_;
+ }
+@@ -354,20 +354,4 @@ void abstract_object::is_fluent(const bool v) {
+     is_fluent_ = v;
+ }
+ 
+-const std::list<dogen::sml::qname>& abstract_object::modeled_concepts() const {
+-    return modeled_concepts_;
+-}
+-
+-std::list<dogen::sml::qname>& abstract_object::modeled_concepts() {
+-    return modeled_concepts_;
+-}
+-
+-void abstract_object::modeled_concepts(const std::list<dogen::sml::qname>& v) {
+-    modeled_concepts_ = v;
+-}
+-
+-void abstract_object::modeled_concepts(const std::list<dogen::sml::qname>&& v) {
+-    modeled_concepts_ = std::move(v);
+-}
+-
+ } }
+\ No newline at end of file
+diff --git a/projects/sml/src/types/concept.cpp b/projects/sml/src/types/concept.cpp
+index 37504e0..a70fadc 100644
+--- a/projects/sml/src/types/concept.cpp
++++ b/projects/sml/src/types/concept.cpp
+@@ -28,7 +28,9 @@ concept::concept()
+       origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
+ 
+ concept::concept(concept&& rhs)
+-    : properties_(std::move(rhs.properties_)),
++    : all_properties_(std::move(rhs.all_properties_)),
++      local_properties_(std::move(rhs.local_properties_)),
++      inherited_properties_(std::move(rhs.inherited_properties_)),
+       documentation_(std::move(rhs.documentation_)),
+       meta_data_(std::move(rhs.meta_data_)),
+       name_(std::move(rhs.name_)),
+@@ -38,7 +40,9 @@ concept::concept(concept&& rhs)
+       refines_(std::move(rhs.refines_)) { }
+ 
+ concept::concept(
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::string& documentation,
+     const boost::property_tree::ptree& meta_data,
+     const dogen::sml::qname& name,
+@@ -46,7 +50,9 @@ concept::concept(
+     const dogen::sml::origin_types& origin_type,
+     const std::list<dogen::sml::operation>& operations,
+     const std::list<dogen::sml::qname>& refines)
+-    : properties_(properties),
++    : all_properties_(all_properties),
++      local_properties_(local_properties),
++      inherited_properties_(inherited_properties),
+       documentation_(documentation),
+       meta_data_(meta_data),
+       name_(name),
+@@ -57,7 +63,9 @@ concept::concept(
+ 
+ void concept::swap(concept& other) noexcept {
+     using std::swap;
+-    swap(properties_, other.properties_);
++    swap(all_properties_, other.all_properties_);
++    swap(local_properties_, other.local_properties_);
++    swap(inherited_properties_, other.inherited_properties_);
+     swap(documentation_, other.documentation_);
+     swap(meta_data_, other.meta_data_);
+     swap(name_, other.name_);
+@@ -68,7 +76,9 @@ void concept::swap(concept& other) noexcept {
+ }
+ 
+ bool concept::operator==(const concept& rhs) const {
+-    return properties_ == rhs.properties_ &&
++    return all_properties_ == rhs.all_properties_ &&
++        local_properties_ == rhs.local_properties_ &&
++        inherited_properties_ == rhs.inherited_properties_ &&
+         documentation_ == rhs.documentation_ &&
+         meta_data_ == rhs.meta_data_ &&
+         name_ == rhs.name_ &&
+@@ -84,20 +94,52 @@ concept& concept::operator=(concept other) {
+     return *this;
+ }
+ 
+-const std::list<dogen::sml::property>& concept::properties() const {
+-    return properties_;
++const std::list<dogen::sml::property>& concept::all_properties() const {
++    return all_properties_;
+ }
+ 
+-std::list<dogen::sml::property>& concept::properties() {
+-    return properties_;
++std::list<dogen::sml::property>& concept::all_properties() {
++    return all_properties_;
+ }
+ 
+-void concept::properties(const std::list<dogen::sml::property>& v) {
+-    properties_ = v;
++void concept::all_properties(const std::list<dogen::sml::property>& v) {
++    all_properties_ = v;
+ }
+ 
+-void concept::properties(const std::list<dogen::sml::property>&& v) {
+-    properties_ = std::move(v);
++void concept::all_properties(const std::list<dogen::sml::property>&& v) {
++    all_properties_ = std::move(v);
++}
++
++const std::list<dogen::sml::property>& concept::local_properties() const {
++    return local_properties_;
++}
++
++std::list<dogen::sml::property>& concept::local_properties() {
++    return local_properties_;
++}
++
++void concept::local_properties(const std::list<dogen::sml::property>& v) {
++    local_properties_ = v;
++}
++
++void concept::local_properties(const std::list<dogen::sml::property>&& v) {
++    local_properties_ = std::move(v);
++}
++
++const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& concept::inherited_properties() const {
++    return inherited_properties_;
++}
++
++std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& concept::inherited_properties() {
++    return inherited_properties_;
++}
++
++void concept::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v) {
++    inherited_properties_ = v;
++}
++
++void concept::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v) {
++    inherited_properties_ = std::move(v);
+ }
+ 
+ const std::string& concept::documentation() const {
+diff --git a/projects/sml/src/types/entity.cpp b/projects/sml/src/types/entity.cpp
+index 74ca0f4..00c8060 100644
+--- a/projects/sml/src/types/entity.cpp
++++ b/projects/sml/src/types/entity.cpp
+@@ -31,19 +31,18 @@ entity::entity(
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+     const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts,
+     const bool is_aggregate_root,
+     const std::list<dogen::sml::property>& identity)
+     : dogen::sml::abstract_entity(documentation,
+@@ -51,19 +50,18 @@ entity::entity(
+       name,
+       generation_type,
+       origin_type,
+-      properties,
++      all_properties,
++      local_properties,
++      inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+-      leaves,
+-      is_parent,
++      relationships,
+       number_of_type_arguments,
++      is_parent,
+       is_visitable,
+       is_immutable,
+       is_versioned,
+       is_comparable,
+       is_fluent,
+-      modeled_concepts,
+       is_aggregate_root,
+       identity) { }
+ 
+diff --git a/projects/sml/src/types/factory.cpp b/projects/sml/src/types/factory.cpp
+index ac938c5..767a3e6 100644
+--- a/projects/sml/src/types/factory.cpp
++++ b/projects/sml/src/types/factory.cpp
+@@ -31,37 +31,35 @@ factory::factory(
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+-    const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts)
++    const bool is_fluent)
+     : dogen::sml::abstract_object(documentation,
+       meta_data,
+       name,
+       generation_type,
+       origin_type,
+-      properties,
++      all_properties,
++      local_properties,
++      inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+-      leaves,
+-      is_parent,
++      relationships,
+       number_of_type_arguments,
++      is_parent,
+       is_visitable,
+       is_immutable,
+       is_versioned,
+       is_comparable,
+-      is_fluent,
+-      modeled_concepts) { }
++      is_fluent) { }
+ 
+ void factory::to_stream(std::ostream& s) const {
+     s << " { "
+diff --git a/projects/sml/src/types/keyed_entity.cpp b/projects/sml/src/types/keyed_entity.cpp
+index 7be5453..4e1438a 100644
+--- a/projects/sml/src/types/keyed_entity.cpp
++++ b/projects/sml/src/types/keyed_entity.cpp
+@@ -53,19 +53,18 @@ keyed_entity::keyed_entity(
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+     const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts,
+     const bool is_aggregate_root,
+     const std::list<dogen::sml::property>& identity,
+     const dogen::sml::qname& unversioned_key,
+@@ -75,19 +74,18 @@ keyed_entity::keyed_entity(
+       name,
+       generation_type,
+       origin_type,
+-      properties,
++      all_properties,
++      local_properties,
++      inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+-      leaves,
+-      is_parent,
++      relationships,
+       number_of_type_arguments,
++      is_parent,
+       is_visitable,
+       is_immutable,
+       is_versioned,
+       is_comparable,
+       is_fluent,
+-      modeled_concepts,
+       is_aggregate_root,
+       identity),
+       unversioned_key_(unversioned_key),
+diff --git a/projects/sml/src/types/merger.cpp b/projects/sml/src/types/merger.cpp
+index b7b9359..6b0aa71 100644
+--- a/projects/sml/src/types/merger.cpp
++++ b/projects/sml/src/types/merger.cpp
+@@ -25,7 +25,6 @@
+ #include "dogen/sml/types/merging_error.hpp"
+ #include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/sml/io/nested_qname_io.hpp"
+-#include "dogen/sml/io/property_io.hpp"
+ #include "dogen/sml/io/model_io.hpp"
+ #include "dogen/sml/types/merger.hpp"
+ 
+diff --git a/projects/sml/src/types/property_cache.cpp b/projects/sml/src/types/property_cache.cpp
+index 8c15f54..03d25b6 100644
+--- a/projects/sml/src/types/property_cache.cpp
++++ b/projects/sml/src/types/property_cache.cpp
+@@ -41,7 +41,9 @@ void property_cache::populate(const model& m) {
+     is_populated_ = true;
+     for (const auto& pair : m.objects()) {
+         const auto& o(*pair.second);
+-        local_properties_.insert(std::make_pair(o.name(), o.properties()));
++        const auto i(o.properties().find(property_sets::local));
++        if (i != o.properties().end())
++            local_properties_.insert(std::make_pair(o.name(), i->second));
+     }
+ }
+ 
+@@ -79,11 +81,9 @@ property_cache::get_inehrited_properties(const abstract_object& o) const {
+     ensure_populated();
+     std::unordered_map<qname, std::list<property> > r;
+ 
+-    if (o.parent_name()) {
+-        const auto i(inherited_properties_.find(*o.parent_name()));
+-        if (i != inherited_properties_.end())
+-            r.insert(std::make_pair(*o.parent_name(), i->second));
+-    }
++    const auto i(o.properties().find(property_sets::inherited));
++    if (i != o.properties().end())
++        r.insert(std::make_pair(*o.parent_name(), i->second));
+     return r;
+ }
+ 
+diff --git a/projects/sml/src/types/repository.cpp b/projects/sml/src/types/repository.cpp
+index 0c0b90b..76b9a69 100644
+--- a/projects/sml/src/types/repository.cpp
++++ b/projects/sml/src/types/repository.cpp
+@@ -31,37 +31,35 @@ repository::repository(
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+-    const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts)
++    const bool is_fluent)
+     : dogen::sml::abstract_object(documentation,
+       meta_data,
+       name,
+       generation_type,
+       origin_type,
+-      properties,
++      all_properties,
++      local_properties,
++      inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+-      leaves,
+-      is_parent,
++      relationships,
+       number_of_type_arguments,
++      is_parent,
+       is_visitable,
+       is_immutable,
+       is_versioned,
+       is_comparable,
+-      is_fluent,
+-      modeled_concepts) { }
++      is_fluent) { }
+ 
+ void repository::to_stream(std::ostream& s) const {
+     s << " { "
+diff --git a/projects/sml/src/types/service.cpp b/projects/sml/src/types/service.cpp
+index 37e7cca..0b40a98 100644
+--- a/projects/sml/src/types/service.cpp
++++ b/projects/sml/src/types/service.cpp
+@@ -35,38 +35,36 @@ service::service(
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+     const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts,
+     const dogen::sml::service_types& type)
+     : dogen::sml::abstract_object(documentation,
+       meta_data,
+       name,
+       generation_type,
+       origin_type,
+-      properties,
++      all_properties,
++      local_properties,
++      inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+-      leaves,
+-      is_parent,
++      relationships,
+       number_of_type_arguments,
++      is_parent,
+       is_visitable,
+       is_immutable,
+       is_versioned,
+       is_comparable,
+-      is_fluent,
+-      modeled_concepts),
++      is_fluent),
+       type_(type) { }
+ 
+ void service::to_stream(std::ostream& s) const {
+diff --git a/projects/sml/src/types/value_object.cpp b/projects/sml/src/types/value_object.cpp
+index 9562372..a95cb66 100644
+--- a/projects/sml/src/types/value_object.cpp
++++ b/projects/sml/src/types/value_object.cpp
+@@ -35,38 +35,36 @@ value_object::value_object(
+     const dogen::sml::qname& name,
+     const dogen::sml::generation_types& generation_type,
+     const dogen::sml::origin_types& origin_type,
+-    const std::list<dogen::sml::property>& properties,
++    const std::list<dogen::sml::property>& all_properties,
++    const std::list<dogen::sml::property>& local_properties,
++    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+-    const std::list<dogen::sml::qname>& leaves,
+-    const bool is_parent,
++    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const unsigned int number_of_type_arguments,
++    const bool is_parent,
+     const bool is_visitable,
+     const bool is_immutable,
+     const bool is_versioned,
+     const bool is_comparable,
+     const bool is_fluent,
+-    const std::list<dogen::sml::qname>& modeled_concepts,
+     const dogen::sml::value_object_types& type)
+     : dogen::sml::abstract_object(documentation,
+       meta_data,
+       name,
+       generation_type,
+       origin_type,
+-      properties,
++      all_properties,
++      local_properties,
++      inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+-      leaves,
+-      is_parent,
++      relationships,
+       number_of_type_arguments,
++      is_parent,
+       is_visitable,
+       is_immutable,
+       is_versioned,
+       is_comparable,
+-      is_fluent,
+-      modeled_concepts),
++      is_fluent),
+       type_(type) { }
+ 
+ void value_object::to_stream(std::ostream& s) const {
