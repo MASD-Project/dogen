@@ -7,6 +7,11 @@
 ** Development Stories
 
 Stories that we intend to look at, at some point.
+*** Bitmask enumeration                                               :story:
+
+We should have a meta-data flag that generates enumerators with values
+that are powers of two. These can then be used for flags, as per the
+[[*Add%20support%20for%20bitsets][bitset story]].
 
 *** Replace Boolean attributes with flags in abstract object          :story:
 
