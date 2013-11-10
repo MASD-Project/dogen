@@ -8,6 +8,19 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create a visitor interface with multiple implementations          :story:
+
+We decided to use a base class for visitor; it would have been better
+to create an interface, with multiple implementations:
+
+- negative visitor: any unimplemented methods throw
+- default visitor: all methods do nothing
+- [[*Visitor%20with%20%3Dstd::function%3D%20for%20each%20%3Dvisit%3D%20method][std::function visitor]]
+- ...
+
+Users can then inherit from these visitors where appropriate
+(e.g. negative and default visitors).
+
 *** Disable =invalid= value in enumerations                           :story:
 
 At present all enumerations must have an invalid value. One can
