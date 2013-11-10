@@ -1119,6 +1119,8 @@ models:
   inherit from exception or enumeration or vice-versa. Add tests for
   this.
 - Its not possible to be immutable and fluent.
+- it is not possible to be immutable and be in an inheritance
+  relationship. FIXME: why is that?
 - user models cannot have stereotype of primitive.
 - We don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
 types]]) so we should throw if a user attempts to use them.
