@@ -10,16 +10,17 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-13 Wed 18:55]
+Clock summary at [2013-11-13 Wed 19:27]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *12:49* |       |       |
+| *Total time*                                                          | *13:13* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 12:49 |       |
+| Development Stories Implemented                                       |         | 13:13 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:30 |
 | COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
 | COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
+| IMPLEMENTATION Fix broken OM formatter tests                          |         |       |  0:24 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -130,6 +131,16 @@ Older understanding:
   properties, relationships: =type_details=. this should be in OM
   although it only has SML types. This is because this class is only
   useful for outputting stuff.
+
+*** COMPLETED Fix broken OM formatter tests                           :spike:
+    CLOSED: [2013-11-13 Wed 20:30]
+    CLOCK: [2013-11-13 Wed 19:09]--[2013-11-13 Wed 19:27] =>  0:18
+    CLOCK: [2013-11-13 Wed 18:56]--[2013-11-13 Wed 19:02] =>  0:15
+
+- port across the changes to the SML mock factory - without these the
+  formatters won't work.
+- ensure transformer updates the new key properties such as
+  =is_child=, etc.
 
 *** IMPLEMENTATION Create an indexer class and plug it to SML workflow :story:
 

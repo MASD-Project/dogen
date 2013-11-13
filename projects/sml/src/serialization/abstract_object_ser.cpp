@@ -83,6 +83,7 @@ void save(Archive& ar,
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
     ar << make_nvp("is_child", v.is_child_);
     ar << make_nvp("relationships", v.relationships_);
+    ar << make_nvp("is_inheritance_root", v.is_inheritance_root_);
 }
 
 template<typename Archive>
@@ -108,6 +109,7 @@ void load(Archive& ar,
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
     ar >> make_nvp("is_child", v.is_child_);
     ar >> make_nvp("relationships", v.relationships_);
+    ar >> make_nvp("is_inheritance_root", v.is_inheritance_root_);
 }
 
 } }

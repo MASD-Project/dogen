@@ -135,7 +135,8 @@ abstract_object::abstract_object()
       is_versioned_(static_cast<bool>(0)),
       is_comparable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
-      is_child_(static_cast<bool>(0)) { }
+      is_child_(static_cast<bool>(0)),
+      is_inheritance_root_(static_cast<bool>(0)) { }
 
 abstract_object::abstract_object(abstract_object&& rhs)
     : dogen::sml::type(
@@ -156,7 +157,8 @@ abstract_object::abstract_object(abstract_object&& rhs)
       is_fluent_(std::move(rhs.is_fluent_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
       is_child_(std::move(rhs.is_child_)),
-      relationships_(std::move(rhs.relationships_)) { }
+      relationships_(std::move(rhs.relationships_)),
+      is_inheritance_root_(std::move(rhs.is_inheritance_root_)) { }
 
 abstract_object::abstract_object(
     const std::string& documentation,
@@ -180,7 +182,8 @@ abstract_object::abstract_object(
     const bool is_fluent,
     const std::list<dogen::sml::qname>& modeled_concepts,
     const bool is_child,
-    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships)
+    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+    const bool is_inheritance_root)
     : dogen::sml::type(documentation,
       meta_data,
       name,
@@ -202,7 +205,8 @@ abstract_object::abstract_object(
       is_fluent_(is_fluent),
       modeled_concepts_(modeled_concepts),
       is_child_(is_child),
-      relationships_(relationships) { }
+      relationships_(relationships),
+      is_inheritance_root_(is_inheritance_root) { }
 
 void abstract_object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -232,7 +236,8 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"is_child\": " << is_child_ << ", "
-      << "\"relationships\": " << relationships_
+      << "\"relationships\": " << relationships_ << ", "
+      << "\"is_inheritance_root\": " << is_inheritance_root_
       << " }";
 }
 
@@ -257,6 +262,7 @@ void abstract_object::swap(abstract_object& other) noexcept {
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(is_child_, other.is_child_);
     swap(relationships_, other.relationships_);
+    swap(is_inheritance_root_, other.is_inheritance_root_);
 }
 
 bool abstract_object::compare(const abstract_object& rhs) const {
@@ -277,7 +283,8 @@ bool abstract_object::compare(const abstract_object& rhs) const {
         is_fluent_ == rhs.is_fluent_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
         is_child_ == rhs.is_child_ &&
-        relationships_ == rhs.relationships_;
+        relationships_ == rhs.relationships_ &&
+        is_inheritance_root_ == rhs.is_inheritance_root_;
 }
 
 const std::list<dogen::sml::property>& abstract_object::all_properties() const {
@@ -486,6 +493,14 @@ void abstract_object::relationships(const std::unordered_map<dogen::sml::relatio
 
 void abstract_object::relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >&& v) {
     relationships_ = std::move(v);
+}
+
+bool abstract_object::is_inheritance_root() const {
+    return is_inheritance_root_;
+}
+
+void abstract_object::is_inheritance_root(const bool v) {
+    is_inheritance_root_ = v;
 }
 
 } }

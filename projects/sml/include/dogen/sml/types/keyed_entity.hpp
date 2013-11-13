@@ -79,6 +79,7 @@ public:
         const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_child,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+        const bool is_inheritance_root,
         const bool is_aggregate_root,
         const std::list<dogen::sml::property>& identity,
         const dogen::sml::qname& unversioned_key,

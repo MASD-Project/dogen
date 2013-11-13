@@ -115,6 +115,7 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
     combine(seed, hash_std_list_dogen_sml_qname(v.modeled_concepts()));
     combine(seed, v.is_child());
     combine(seed, hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(v.relationships()));
+    combine(seed, v.is_inheritance_root());
 
     return seed;
 }

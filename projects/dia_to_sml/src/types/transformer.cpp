@@ -264,6 +264,9 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
                                  << ao.name().simple_name() << " as "
                                  << j->second.simple_name();
         ao.parent_name(j->second);
+        ao.is_child(true);
+        using sml::relationship_types;
+        ao.relationships()[relationship_types::parents].push_back(j->second);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
                                  << ao.name().simple_name();
@@ -274,6 +277,7 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
     context_.id_to_qname().insert(std::make_pair(o.id(), ao.name()));
 
     if (!ao.parent_name()) {
+        ao.is_inheritance_root(ao.is_parent());
         context_.original_parent().insert(
             std::make_pair(ao.name(), ao.name()));
     } else {

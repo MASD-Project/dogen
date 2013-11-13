@@ -52,6 +52,7 @@ value_object::value_object(
     const std::list<dogen::sml::qname>& modeled_concepts,
     const bool is_child,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+    const bool is_inheritance_root,
     const dogen::sml::value_object_types& type)
     : dogen::sml::abstract_object(documentation,
       meta_data,
@@ -74,7 +75,8 @@ value_object::value_object(
       is_fluent,
       modeled_concepts,
       is_child,
-      relationships),
+      relationships,
+      is_inheritance_root),
       type_(type) { }
 
 void value_object::to_stream(std::ostream& s) const {

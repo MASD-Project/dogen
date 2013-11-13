@@ -272,11 +272,11 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
 
     dogen::om::cpp_types_main_header_file_formatter f;
     const auto r(f.format(o, empty_annotation));
-    // BOOST_CHECK(r.contents() == leaf_child_object);
+    BOOST_CHECK(r.contents() == leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                             << r.contents()
+                             << leaf_child_object
                              << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r << "<end>";
+    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
 }
 
 BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
 
     dogen::om::cpp_types_main_header_file_formatter f;
     const auto r(f.format(o, empty_annotation));
-    // BOOST_CHECK(r.contents() == non_leaf_child_object);
+    BOOST_CHECK(r.contents() == non_leaf_child_object);
     BOOST_LOG_SEV(lg, debug) << "expected: <start>" << non_leaf_child_object
                              << "<end>";
     BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";

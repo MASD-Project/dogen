@@ -3441,16 +3441,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.205,96.15;64.7675,106.05"/>
+        <dia:rectangle val="46.205,96.95;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="46.255,101"/>
         <dia:point val="46.255,106"/>
@@ -3663,16 +3663,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.125,96.15;64.7675,106.05"/>
+        <dia:rectangle val="61.125,96.95;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="61.175,101"/>
         <dia:point val="61.175,106"/>
@@ -3819,16 +3819,16 @@ underlying storage (for example, a relational database).#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0675,96.15;72.63,106.05"/>
+        <dia:rectangle val="63.0675,96.95;72.63,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="72.58,101"/>
         <dia:point val="72.58,106"/>
@@ -6639,7 +6639,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="50,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,82.95;77.885,96.25"/>
+        <dia:rectangle val="49.95,82.95;77.885,97.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,83"/>
@@ -6648,7 +6648,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000001"/>
+        <dia:real val="14.000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#abstract_object#</dia:string>
@@ -7031,6 +7031,29 @@ or other comparable model types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_inheritance_root#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#True if this object is at the root of an inheritance graph.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7532,16 +7555,16 @@ object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O65">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.205,96.15;64.7675,106.05"/>
+        <dia:rectangle val="28.205,96.95;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="28.255,101"/>
         <dia:point val="28.255,106"/>
@@ -7573,16 +7596,16 @@ object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O66">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0675,96.15;89.075,106"/>
+        <dia:rectangle val="63.0675,96.95;89.075,106"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,96.2"/>
+        <dia:point val="63.9175,97"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="89.025,101"/>
         <dia:point val="89.025,105.95"/>

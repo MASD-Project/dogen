@@ -84,7 +84,8 @@ public:
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_child,
-        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships);
+        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+        const bool is_inheritance_root);
 
 private:
     template<typename Archive>
@@ -260,6 +261,14 @@ public:
     void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v);
     void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >&& v);
 
+    /**
+     * @brief True if this object is at the root of an inheritance graph.
+     */
+    /**@{*/
+    bool is_inheritance_root() const;
+    void is_inheritance_root(const bool v);
+    /**@}*/
+
 protected:
     bool compare(const abstract_object& rhs) const;
 public:
@@ -286,6 +295,7 @@ private:
     std::list<dogen::sml::qname> modeled_concepts_;
     bool is_child_;
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
+    bool is_inheritance_root_;
 };
 
 inline abstract_object::~abstract_object() noexcept { }

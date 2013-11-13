@@ -278,6 +278,43 @@ mock_exception(const unsigned int i, const dogen::sml::qname& model_qname,
     return r;
 }
 
+void add_relationship(dogen::sml::abstract_object& target,
+    const dogen::sml::type& relative, const dogen::sml::relationship_types rt) {
+    using dogen::sml::relationship_types;
+    target.relationships()[rt].push_back(relative.name());
+}
+
+const bool add_leaf(true);
+
+void parent_to_child(dogen::sml::abstract_object& parent,
+    dogen::sml::abstract_object& child,
+    dogen::sml::abstract_object& original_parent,
+    const bool add_leaf_relationship = true) {
+    using dogen::sml::relationship_types;
+    add_relationship(child, parent, relationship_types::parents);
+    add_relationship(child, original_parent,
+        relationship_types::original_parents);
+
+    original_parent.is_inheritance_root(true);
+    if (add_leaf_relationship)
+        add_relationship(parent, child, relationship_types::leaves);
+
+    parent.is_parent(true);
+    child.is_child(true);
+}
+
+void parent_to_child(dogen::sml::abstract_object& parent,
+    dogen::sml::abstract_object& child,
+    const bool add_leaf_relationship = true) {
+    parent_to_child(parent, child, parent, add_leaf_relationship);
+}
+
+void insert_object(dogen::sml::model& m,
+    boost::shared_ptr<dogen::sml::abstract_object> o) {
+    m.objects().insert(std::make_pair(o->name(), o));
+}
+
+
 }
 
 namespace dogen {
@@ -347,7 +384,7 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
     case object_types::value_object:
         for (unsigned int i(0); i < type_n; ++i) {
             const auto o(mock_value_object(i, r.name(), mod_n));
-            r.objects().insert(std::make_pair(o->name(), o));
+            insert_object(r, o);
         }
         break;
     case object_types::enumeration:
@@ -359,7 +396,7 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
     case object_types::exception:
         for (unsigned int i(0); i < type_n; ++i) {
             const auto e(mock_exception(i, r.name(), mod_n));
-            r.objects().insert(std::make_pair(e->name(), e));
+            insert_object(r, e);
         }
         break;
     default:
@@ -396,14 +433,14 @@ object_with_property(const object_types ot, const property_types pt) {
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
     }
+    o0->all_properties().push_back(p);
     o0->local_properties().push_back(p);
 
     model r(build_empty_model(0));
-
-    r.objects().insert(std::make_pair(o0->name(), o0));
+    insert_object(r, o0);
     if (pt == property_types::value_object ||
         pt == property_types::boost_shared_ptr)
-        r.objects().insert(std::make_pair(o1->name(), o1));
+        insert_object(r, o1);
 
     if (pt == property_types::unsigned_int ||
         pt == property_types::boolean) {
@@ -418,7 +455,7 @@ object_with_property(const object_types ot, const property_types pt) {
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
         o2->type(dogen::sml::value_object_types::smart_pointer);
-        r.objects().insert(std::make_pair(o2->name(), o2));
+        insert_object(r, o2);
     } else if (pt == property_types::std_pair) {
 
         sml::primitive b;
@@ -432,7 +469,7 @@ object_with_property(const object_types ot, const property_types pt) {
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
         o2->type(sml::value_object_types::plain);
-        r.objects().insert(std::make_pair(o2->name(), o2));
+        insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
         sml::primitive b;
         b.name().simple_name(boolean);
@@ -449,7 +486,7 @@ object_with_property(const object_types ot, const property_types pt) {
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
         o2->type(sml::value_object_types::plain);
-        r.objects().insert(std::make_pair(o2->name(), o2));
+        insert_object(r, o2);
     } else if (pt == property_types::std_string) {
         dogen::sml::qname qn;
         qn.simple_name("string");
@@ -458,7 +495,7 @@ object_with_property(const object_types ot, const property_types pt) {
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
         o2->type(sml::value_object_types::plain);
-        r.objects().insert(std::make_pair(o2->name(), o2));
+        insert_object(r, o2);
     }
 
     return r;
@@ -472,6 +509,7 @@ mock_model_factory::object_with_property_type_in_different_model() {
     property p;
     p.name(property_name(0));
     p.type(mock_qname(*o1));
+    o0->all_properties().push_back(p);
     o0->local_properties().push_back(p);
 
     qname m0_qn;
@@ -479,14 +517,14 @@ mock_model_factory::object_with_property_type_in_different_model() {
 
     model m0;
     m0.name(m0_qn);
-    m0.objects().insert(std::make_pair(o0->name(), o0));
+    insert_object(m0, o0);
 
     qname m1_qn;
     m1_qn.model_name(model_name(1));
 
     model m1;
     m1.name(m1_qn);
-    m1.objects().insert(std::make_pair(o1->name(), o1));
+    insert_object(m1, o1);
 
     return std::array<model, 2> {{ m0, m1 }};
 }
@@ -498,13 +536,14 @@ model mock_model_factory::object_with_missing_property_type() {
     property p;
     p.name(property_name(0));
     p.type(mock_qname(*o1));
+    o0->all_properties().push_back(p);
     o0->local_properties().push_back(p);
 
     qname mn_qn;
     mn_qn.model_name(model_name(0));
 
     model r(build_empty_model(0));
-    r.objects().insert(std::make_pair(o0->name(), o0));
+    insert_object(r, o0);
 
     return r;
 }
@@ -519,6 +558,7 @@ object_with_parent_in_the_same_model(bool add_property) {
         property p;
         p.name(property_name(0));
         p.type(mock_nested_qname(property_types::unsigned_int));
+        o0->all_properties().push_back(p);
         o0->local_properties().push_back(p);
 
         sml::primitive ui;
@@ -531,17 +571,18 @@ object_with_parent_in_the_same_model(bool add_property) {
         property p;
         p.name(property_name(1));
         p.type(mock_nested_qname(property_types::unsigned_int));
+        o1->all_properties().push_back(p);
         o1->local_properties().push_back(p);
     }
+
+    parent_to_child(*o1, *o0);
+    insert_object(r, o0);
+    insert_object(r, o1);
 
     o0->parent_name(o1->name());
     o0->original_parent_name(o1->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
-
-    r.objects().insert(std::make_pair(o0->name(), o0));
-    r.objects().insert(std::make_pair(o1->name(), o1));
-
     return r;
 }
 
@@ -553,9 +594,9 @@ model mock_model_factory::object_with_missing_child_in_the_same_model() {
     o0->original_parent_name(o1->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
-
+    parent_to_child(*o1, *o0);
     model r(build_empty_model(0));
-    r.objects().insert(std::make_pair(o1->name(), o1));
+    insert_object(r, o1);
 
     return r;
 }
@@ -564,16 +605,18 @@ std::array<model, 2> mock_model_factory::
 object_with_parent_in_different_models() {
     auto o0(mock_value_object(0));
     auto o1(mock_value_object(1));
+    parent_to_child(*o1, *o0);
+
     o0->original_parent_name(o1->name());
     o0->parent_name(o1->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
 
     model m0(build_empty_model(0));
-    m0.objects().insert(std::make_pair(o0->name(), o0));
+    insert_object(m0, o0);
 
     model m1(build_empty_model(1));
-    m1.objects().insert(std::make_pair(o1->name(), o1));
+    insert_object(m1, o1);
     m1.name(mock_model_qname(1));
     m1.origin_type(origin_types::user);
 
@@ -586,6 +629,10 @@ model mock_model_factory::object_with_three_children_in_same_model() {
     auto o1(mock_value_object(1, mn));
     auto o2(mock_value_object(2, mn));
     auto o3(mock_value_object(3, mn));
+
+    parent_to_child(*o3, *o0);
+    parent_to_child(*o3, *o1);
+    parent_to_child(*o3, *o2);
 
     o0->parent_name(o3->name());
     o0->original_parent_name(o3->name());
@@ -602,13 +649,12 @@ model mock_model_factory::object_with_three_children_in_same_model() {
     o3->leaves().push_back(o2->name());
 
     model r(build_empty_model(0));
-    r.objects().insert(std::make_pair(o0->name(), o0));
-    r.objects().insert(std::make_pair(o1->name(), o1));
-    r.objects().insert(std::make_pair(o2->name(), o2));
-    r.objects().insert(std::make_pair(o3->name(), o3));
+    insert_object(r, o0);
+    insert_object(r, o1);
+    insert_object(r, o2);
+    insert_object(r, o3);
     r.name(mn);
     return r;
-
 }
 
 model mock_model_factory::
@@ -622,6 +668,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         property p;
         p.name(property_name(0));
         p.type(mock_nested_qname(property_types::unsigned_int));
+        o0->all_properties().push_back(p);
         o0->local_properties().push_back(p);
 
         sml::primitive ui;
@@ -634,6 +681,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         property p;
         p.name(property_name(1));
         p.type(mock_nested_qname(property_types::unsigned_int));
+        o1->all_properties().push_back(p);
         o1->local_properties().push_back(p);
     }
 
@@ -642,6 +690,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         property p;
         p.name(property_name(2));
         p.type(mock_nested_qname(property_types::unsigned_int));
+        o2->all_properties().push_back(p);
         o2->local_properties().push_back(p);
     }
 
@@ -652,6 +701,11 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         p.type(mock_nested_qname(property_types::unsigned_int));
         o3->local_properties().push_back(p);
     }
+
+    parent_to_child(*o1, *o0, *o3, !add_leaf);
+    parent_to_child(*o2, *o1, *o3, !add_leaf);
+    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    add_relationship(*o3, *o0, relationship_types::leaves);
 
     o0->parent_name(o1->name());
     o0->original_parent_name(o3->name());
@@ -669,10 +723,10 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
     o3->leaves().push_back(o0->name());
     o3->is_parent(true);
 
-    r.objects().insert(std::make_pair(o0->name(), o0));
-    r.objects().insert(std::make_pair(o1->name(), o1));
-    r.objects().insert(std::make_pair(o2->name(), o2));
-    r.objects().insert(std::make_pair(o3->name(), o3));
+    insert_object(r, o0);
+    insert_object(r, o1);
+    insert_object(r, o2);
+    insert_object(r, o3);
 
     return r;
 }
@@ -683,6 +737,11 @@ model mock_model_factory::object_with_third_degree_parent_missing() {
     auto o1(mock_value_object(1, mn));
     auto o2(mock_value_object(2, mn));
     auto o3(mock_value_object(3, mn));
+
+    parent_to_child(*o1, *o0, *o3, !add_leaf);
+    parent_to_child(*o2, *o1, *o3, !add_leaf);
+    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    add_relationship(*o3, *o0, relationship_types::leaves);
 
     o0->parent_name(o1->name());
     o0->original_parent_name(o3->name());
@@ -701,9 +760,9 @@ model mock_model_factory::object_with_third_degree_parent_missing() {
     o3->leaves().push_back(o0->name());
 
     model r(build_empty_model(0));
-    r.objects().insert(std::make_pair(o0->name(), o0));
-    r.objects().insert(std::make_pair(o1->name(), o1));
-    r.objects().insert(std::make_pair(o2->name(), o2));
+    insert_object(r, o0);
+    insert_object(r, o1);
+    insert_object(r, o2);
     r.name(mn);
     return r;
 }
@@ -715,6 +774,11 @@ mock_model_factory::object_with_third_degree_parent_in_different_models() {
     auto o2(mock_value_object(2));
     auto o3(mock_value_object(3));
 
+    parent_to_child(*o1, *o0, *o3, !add_leaf);
+    parent_to_child(*o2, *o1, *o3, !add_leaf);
+    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    add_relationship(*o3, *o0, relationship_types::leaves);
+
     o0->parent_name(o1->name());
     o0->original_parent_name(o3->name());
 
@@ -732,16 +796,16 @@ mock_model_factory::object_with_third_degree_parent_in_different_models() {
     o3->leaves().push_back(o0->name());
 
     model m0(build_empty_model(0));
-    m0.objects().insert(std::make_pair(o0->name(), o0));
+    insert_object(m0, o0);
 
     model m1(build_empty_model(1));
-    m1.objects().insert(std::make_pair(o1->name(), o1));
+    insert_object(m1, o1);
 
     model m2(build_empty_model(2));
-    m2.objects().insert(std::make_pair(o2->name(), o2));
+    insert_object(m2, o2);
 
     model m3(build_empty_model(3));
-    m3.objects().insert(std::make_pair(o3->name(), o3));
+    insert_object(m3, o3);
 
     return std::array<model, 4>{{ m0, m1, m2, m3 }};
 }
@@ -753,6 +817,11 @@ object_with_missing_third_degree_parent_in_different_models() {
     auto o2(mock_value_object(2));
     auto o3(mock_value_object(3));
 
+    parent_to_child(*o1, *o0, *o3, !add_leaf);
+    parent_to_child(*o2, *o1, *o3, !add_leaf);
+    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    add_relationship(*o3, *o0, relationship_types::leaves);
+
     o0->parent_name(o1->name());
     o0->original_parent_name(o3->name());
 
@@ -770,13 +839,13 @@ object_with_missing_third_degree_parent_in_different_models() {
     o3->leaves().push_back(o0->name());
 
     model m0(build_empty_model(0));
-    m0.objects().insert(std::make_pair(o0->name(), o0));
+    insert_object(m0, o0);
 
     model m1(build_empty_model(1));
-    m1.objects().insert(std::make_pair(o1->name(), o1));
+    insert_object(m1, o1);
 
     model m2(build_empty_model(2));
-    m2.objects().insert(std::make_pair(o2->name(), o2));
+    insert_object(m2, o2);
 
     return std::array<model, 4>{{ m0, m1, m2 }};
 }
