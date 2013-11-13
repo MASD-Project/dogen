@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-04 Mon 21:42]
+Clock summary at [2013-11-13 Wed 07:56]
 
-| Headline                                                                  | Time   |      |      |
-|---------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                              | *1:11* |      |      |
-|---------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                           |        | 1:11 |      |
-| IMPLEMENTATION Release notes and backlog grooming                         |        |      | 0:04 |
-| IMPLEMENTATION Implement auxiliar data structures required for formatting |        |      | 1:07 |
+| Headline                                                                  | Time    |       |       |
+|---------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                              | *10:32* |       |       |
+|---------------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                           |         | 10:32 |       |
+| IMPLEMENTATION Release notes and backlog grooming                         |         |       |  0:04 |
+| IMPLEMENTATION Implement auxiliar data structures required for formatting |         |       | 10:28 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -27,14 +27,6 @@ Clock summary at [2013-11-04 Mon 21:42]
 *** IMPLEMENTATION Implement auxiliar data structures required for formatting :story:
     CLOCK: [2013-11-04 Mon 07:53]--[2013-11-04 Mon 07:54] =>  0:01
 
-- create a class to aggregate the licence, modeline and
-  marker.
-- create an enumeration for all relationship types: parent, child,
-  association, association_via_pointer, leaf
-- create a model index, made up of: leafs for entire model,
-  relationships by qname, leaves by qname, properties by qname (all
-  properties, local properties, inherited properties). make this a
-  property of the model.
 - create an indexer that populates the index. add indexer to SML
   workflow.
 - create a class to aggregate type information: type itself, indexed
@@ -48,6 +40,9 @@ Clock summary at [2013-11-04 Mon 21:42]
      CLOCK: [2013-11-04 Mon 21:00]--[2013-11-04 Mon 21:35] =>  0:35
      CLOCK: [2013-11-04 Mon 08:24]--[2013-11-04 Mon 08:32] =>  0:08
      CLOCK: [2013-11-04 Mon 07:54]--[2013-11-04 Mon 08:15] =>  0:21
+
+create a class to aggregate the licence, modeline and
+marker.
 
 namestorming: authorship, about, origination, file_meta_data,
 file_details.
@@ -63,6 +58,67 @@ confusing.
 
 Instead we'll use =annotation=. Implies meta-data still, but avoids
 confusion with the SML kind.
+
+**** IMPLEMENTATION Create indexing data structures                    :task:
+     CLOCK: [2013-11-12 Tue 18:20]--[2013-11-12 Tue 19:09] =>  0:49
+     CLOCK: [2013-11-12 Tue 07:54]--[2013-11-12 Tue 08:39] =>  0:45
+     CLOCK: [2013-11-11 Mon 22:35]--[2013-11-11 Mon 23:37] =>  1:02
+     CLOCK: [2013-11-11 Mon 18:06]--[2013-11-11 Mon 18:53] =>  0:47
+     CLOCK: [2013-11-11 Mon 08:22]--[2013-11-11 Mon 09:12] =>  0:50
+     CLOCK: [2013-11-09 Sat 22:43]--[2013-11-10 Sun 01:05] =>  2:22
+     CLOCK: [2013-11-09 Sat 22:07]--[2013-11-09 Sat 22:08] =>  0:01
+     CLOCK: [2013-11-08 Fri 07:49]--[2013-11-08 Fri 08:20] =>  0:31
+     CLOCK: [2013-11-07 Thu 18:00]--[2013-11-07 Thu 18:10] =>  0:10
+     CLOCK: [2013-11-07 Thu 08:23]--[2013-11-07 Thu 08:33] =>  0:10
+     CLOCK: [2013-11-07 Thu 07:47]--[2013-11-07 Thu 08:18] =>  0:31
+     CLOCK: [2013-11-06 Wed 08:24]--[2013-11-06 Wed 08:29] =>  0:05
+     CLOCK: [2013-11-06 Wed 07:46]--[2013-11-06 Wed 08:17] =>  0:31
+     CLOCK: [2013-11-05 Tue 08:26]--[2013-11-05 Tue 08:35] =>  0:09
+     CLOCK: [2013-11-05 Tue 07:48]--[2013-11-05 Tue 08:20] =>  0:32
+     CLOCK: [2013-11-05 Tue 07:38]--[2013-11-05 Tue 07:44] =>  0:06
+
+New understanding:
+
+Its better to piggy-back on existing machinery. So:
+
+- leave model as is, with a leaves container. model cannot have any
+  other type of relationship so this is in keeping with making invalid
+  states unrepresentable.
+- change Stateful to contain properties by property type or property
+  set. No point in using an enumeration for the sets because the
+  inherited properties need the parent's qname.
+- create a relationships container in abstract object and replace
+  existing relationships with it.
+- Create an indexer to add additional data to containers.
+
+Old understanding:
+
+The objective of this exercise is to create a data structure that can
+store all the data associated with a type needed for formatting.
+
+- create an enumeration for all possible relationship types. name:
+  =relationship_types=. values: original_parent, parent,
+  regular_association, pointer_association, leaf, visitor, key.
+- create an enumeration for the property sets. name:
+  =property_sets=. values: all, inherited, self
+
+- create a class called =index= with two properties: =relationships=
+  and =properties=:
+
+: relationships: std::unordered_map<relationship_types,std::list<qname>>
+: properties: std::unordered_map<property_types,std::list<property>>
+
+- create a concept called =Indexable= with a property of type =index=.
+  the concept is modeled by =model= and =abstract_object=.
+
+- create a class called =indexer=, responsible for taking in a merged
+  model and populating the index property of all things
+  Indexable. Move code from =extrator= and =transformer= (leaf
+  processing) into =indexer=.
+
+- delete property cache interface etc and make user of index.
+
+- delete extractor, etc and make user of index.
 
 *** Add include file support to main type formatter                   :story:
 *** Add tests for properties and compiler generated functions         :story:
