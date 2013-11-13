@@ -27,6 +27,7 @@
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/relationship_types_io.hpp"
 #include "dogen/sml/io/type_io.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 
@@ -39,6 +40,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::pro
         s << *i;
     }
     s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -87,6 +106,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qna
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace sml {
 
@@ -97,12 +134,15 @@ abstract_object::abstract_object()
       is_immutable_(static_cast<bool>(0)),
       is_versioned_(static_cast<bool>(0)),
       is_comparable_(static_cast<bool>(0)),
-      is_fluent_(static_cast<bool>(0)) { }
+      is_fluent_(static_cast<bool>(0)),
+      is_child_(static_cast<bool>(0)) { }
 
 abstract_object::abstract_object(abstract_object&& rhs)
     : dogen::sml::type(
         std::forward<dogen::sml::type>(rhs)),
-      properties_(std::move(rhs.properties_)),
+      all_properties_(std::move(rhs.all_properties_)),
+      local_properties_(std::move(rhs.local_properties_)),
+      inherited_properties_(std::move(rhs.inherited_properties_)),
       operations_(std::move(rhs.operations_)),
       parent_name_(std::move(rhs.parent_name_)),
       original_parent_name_(std::move(rhs.original_parent_name_)),
@@ -114,7 +154,9 @@ abstract_object::abstract_object(abstract_object&& rhs)
       is_versioned_(std::move(rhs.is_versioned_)),
       is_comparable_(std::move(rhs.is_comparable_)),
       is_fluent_(std::move(rhs.is_fluent_)),
-      modeled_concepts_(std::move(rhs.modeled_concepts_)) { }
+      modeled_concepts_(std::move(rhs.modeled_concepts_)),
+      is_child_(std::move(rhs.is_child_)),
+      relationships_(std::move(rhs.relationships_)) { }
 
 abstract_object::abstract_object(
     const std::string& documentation,
@@ -122,7 +164,9 @@ abstract_object::abstract_object(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const std::list<dogen::sml::property>& properties,
+    const std::list<dogen::sml::property>& all_properties,
+    const std::list<dogen::sml::property>& local_properties,
+    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
     const std::list<dogen::sml::operation>& operations,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -134,13 +178,17 @@ abstract_object::abstract_object(
     const bool is_versioned,
     const bool is_comparable,
     const bool is_fluent,
-    const std::list<dogen::sml::qname>& modeled_concepts)
+    const std::list<dogen::sml::qname>& modeled_concepts,
+    const bool is_child,
+    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships)
     : dogen::sml::type(documentation,
       meta_data,
       name,
       generation_type,
       origin_type),
-      properties_(properties),
+      all_properties_(all_properties),
+      local_properties_(local_properties),
+      inherited_properties_(inherited_properties),
       operations_(operations),
       parent_name_(parent_name),
       original_parent_name_(original_parent_name),
@@ -152,7 +200,9 @@ abstract_object::abstract_object(
       is_versioned_(is_versioned),
       is_comparable_(is_comparable),
       is_fluent_(is_fluent),
-      modeled_concepts_(modeled_concepts) { }
+      modeled_concepts_(modeled_concepts),
+      is_child_(is_child),
+      relationships_(relationships) { }
 
 void abstract_object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -166,7 +216,9 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     type::to_stream(s);
     s << ", "
-      << "\"properties\": " << properties_ << ", "
+      << "\"all_properties\": " << all_properties_ << ", "
+      << "\"local_properties\": " << local_properties_ << ", "
+      << "\"inherited_properties\": " << inherited_properties_ << ", "
       << "\"operations\": " << operations_ << ", "
       << "\"parent_name\": " << parent_name_ << ", "
       << "\"original_parent_name\": " << original_parent_name_ << ", "
@@ -178,7 +230,9 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"is_versioned\": " << is_versioned_ << ", "
       << "\"is_comparable\": " << is_comparable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
-      << "\"modeled_concepts\": " << modeled_concepts_
+      << "\"modeled_concepts\": " << modeled_concepts_ << ", "
+      << "\"is_child\": " << is_child_ << ", "
+      << "\"relationships\": " << relationships_
       << " }";
 }
 
@@ -186,7 +240,9 @@ void abstract_object::swap(abstract_object& other) noexcept {
     type::swap(other);
 
     using std::swap;
-    swap(properties_, other.properties_);
+    swap(all_properties_, other.all_properties_);
+    swap(local_properties_, other.local_properties_);
+    swap(inherited_properties_, other.inherited_properties_);
     swap(operations_, other.operations_);
     swap(parent_name_, other.parent_name_);
     swap(original_parent_name_, other.original_parent_name_);
@@ -199,11 +255,15 @@ void abstract_object::swap(abstract_object& other) noexcept {
     swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
     swap(modeled_concepts_, other.modeled_concepts_);
+    swap(is_child_, other.is_child_);
+    swap(relationships_, other.relationships_);
 }
 
 bool abstract_object::compare(const abstract_object& rhs) const {
     return type::compare(rhs) &&
-        properties_ == rhs.properties_ &&
+        all_properties_ == rhs.all_properties_ &&
+        local_properties_ == rhs.local_properties_ &&
+        inherited_properties_ == rhs.inherited_properties_ &&
         operations_ == rhs.operations_ &&
         parent_name_ == rhs.parent_name_ &&
         original_parent_name_ == rhs.original_parent_name_ &&
@@ -215,23 +275,57 @@ bool abstract_object::compare(const abstract_object& rhs) const {
         is_versioned_ == rhs.is_versioned_ &&
         is_comparable_ == rhs.is_comparable_ &&
         is_fluent_ == rhs.is_fluent_ &&
-        modeled_concepts_ == rhs.modeled_concepts_;
+        modeled_concepts_ == rhs.modeled_concepts_ &&
+        is_child_ == rhs.is_child_ &&
+        relationships_ == rhs.relationships_;
 }
 
-const std::list<dogen::sml::property>& abstract_object::properties() const {
-    return properties_;
+const std::list<dogen::sml::property>& abstract_object::all_properties() const {
+    return all_properties_;
 }
 
-std::list<dogen::sml::property>& abstract_object::properties() {
-    return properties_;
+std::list<dogen::sml::property>& abstract_object::all_properties() {
+    return all_properties_;
 }
 
-void abstract_object::properties(const std::list<dogen::sml::property>& v) {
-    properties_ = v;
+void abstract_object::all_properties(const std::list<dogen::sml::property>& v) {
+    all_properties_ = v;
 }
 
-void abstract_object::properties(const std::list<dogen::sml::property>&& v) {
-    properties_ = std::move(v);
+void abstract_object::all_properties(const std::list<dogen::sml::property>&& v) {
+    all_properties_ = std::move(v);
+}
+
+const std::list<dogen::sml::property>& abstract_object::local_properties() const {
+    return local_properties_;
+}
+
+std::list<dogen::sml::property>& abstract_object::local_properties() {
+    return local_properties_;
+}
+
+void abstract_object::local_properties(const std::list<dogen::sml::property>& v) {
+    local_properties_ = v;
+}
+
+void abstract_object::local_properties(const std::list<dogen::sml::property>&& v) {
+    local_properties_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& abstract_object::inherited_properties() const {
+    return inherited_properties_;
+}
+
+std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& abstract_object::inherited_properties() {
+    return inherited_properties_;
+}
+
+void abstract_object::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v) {
+    inherited_properties_ = v;
+}
+
+void abstract_object::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v) {
+    inherited_properties_ = std::move(v);
 }
 
 const std::list<dogen::sml::operation>& abstract_object::operations() const {
@@ -368,6 +462,30 @@ void abstract_object::modeled_concepts(const std::list<dogen::sml::qname>& v) {
 
 void abstract_object::modeled_concepts(const std::list<dogen::sml::qname>&& v) {
     modeled_concepts_ = std::move(v);
+}
+
+bool abstract_object::is_child() const {
+    return is_child_;
+}
+
+void abstract_object::is_child(const bool v) {
+    is_child_ = v;
+}
+
+const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& abstract_object::relationships() const {
+    return relationships_;
+}
+
+std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& abstract_object::relationships() {
+    return relationships_;
+}
+
+void abstract_object::relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v) {
+    relationships_ = v;
+}
+
+void abstract_object::relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >&& v) {
+    relationships_ = std::move(v);
 }
 
 } }

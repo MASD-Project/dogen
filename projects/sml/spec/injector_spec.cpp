@@ -111,7 +111,7 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
         if (is_type_zero(qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             const auto& o(dynamic_cast<dogen::sml::entity&>(*pair.second));
-            BOOST_REQUIRE(o.properties().size() == 1);
+            BOOST_REQUIRE(o.local_properties().size() == 1);
             BOOST_REQUIRE(!o.identity().empty());
         }
     }
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
             auto& o(dynamic_cast<keyed_entity&>(*pair.second));
-            BOOST_REQUIRE(o.properties().size() == 1);
+            BOOST_REQUIRE(o.local_properties().size() == 1);
             BOOST_REQUIRE(!o.is_versioned());
             o.identity().clear();
         }
@@ -159,7 +159,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
         if (is_type_zero(qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
-            BOOST_REQUIRE(ae.properties().size() == 1);
+            BOOST_REQUIRE(ae.local_properties().size() == 1);
             BOOST_REQUIRE(!ae.is_versioned());
             BOOST_REQUIRE(ae.identity().size() == 1);
         }
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
         if (is_type_zero(qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
-            BOOST_REQUIRE(ae.properties().size() == 1);
+            BOOST_REQUIRE(ae.local_properties().size() == 1);
             BOOST_REQUIRE(!ae.is_versioned());
             BOOST_REQUIRE(ae.identity().size() == 1);
             ae.is_versioned(true);
@@ -264,7 +264,7 @@ BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
     auto m(mock_model_factory::build_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& ob(*m.objects().begin()->second);
-    BOOST_REQUIRE(ob.properties().empty());
+    BOOST_REQUIRE(ob.local_properties().empty());
     ob.is_versioned(true);
     BOOST_LOG_SEV(lg, debug) << "before: " << ob;
 
@@ -274,9 +274,9 @@ BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& oa(*m.objects().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "object after: " << oa;
-    BOOST_REQUIRE(oa.properties().size() == 1);
-    BOOST_CHECK(oa.properties().front().name() == version_name);
-    BOOST_CHECK(!oa.properties().front().documentation().empty());
+    BOOST_REQUIRE(oa.local_properties().size() == 1);
+    BOOST_CHECK(oa.local_properties().front().name() == version_name);
+    BOOST_CHECK(!oa.local_properties().front().documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {

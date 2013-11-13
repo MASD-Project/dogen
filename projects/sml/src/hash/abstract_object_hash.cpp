@@ -24,6 +24,7 @@
 #include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/hash/relationship_types_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
 
 namespace {
@@ -39,6 +40,15 @@ inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_list_dogen_sml_property(i.second));
     }
     return seed;
 }
@@ -69,6 +79,15 @@ inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qna
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_list_dogen_sml_qname(i.second));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -79,7 +98,9 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
 
     combine(seed, dynamic_cast<const dogen::sml::type&>(v));
 
-    combine(seed, hash_std_list_dogen_sml_property(v.properties()));
+    combine(seed, hash_std_list_dogen_sml_property(v.all_properties()));
+    combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
     combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_name()));
     combine(seed, hash_boost_optional_dogen_sml_qname(v.original_parent_name()));
@@ -92,6 +113,8 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
     combine(seed, v.is_comparable());
     combine(seed, v.is_fluent());
     combine(seed, hash_std_list_dogen_sml_qname(v.modeled_concepts()));
+    combine(seed, v.is_child());
+    combine(seed, hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(v.relationships()));
 
     return seed;
 }

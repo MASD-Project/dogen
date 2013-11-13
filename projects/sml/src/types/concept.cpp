@@ -28,7 +28,9 @@ concept::concept()
       origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
 
 concept::concept(concept&& rhs)
-    : properties_(std::move(rhs.properties_)),
+    : all_properties_(std::move(rhs.all_properties_)),
+      local_properties_(std::move(rhs.local_properties_)),
+      inherited_properties_(std::move(rhs.inherited_properties_)),
       documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
@@ -38,7 +40,9 @@ concept::concept(concept&& rhs)
       refines_(std::move(rhs.refines_)) { }
 
 concept::concept(
-    const std::list<dogen::sml::property>& properties,
+    const std::list<dogen::sml::property>& all_properties,
+    const std::list<dogen::sml::property>& local_properties,
+    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
@@ -46,7 +50,9 @@ concept::concept(
     const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::operation>& operations,
     const std::list<dogen::sml::qname>& refines)
-    : properties_(properties),
+    : all_properties_(all_properties),
+      local_properties_(local_properties),
+      inherited_properties_(inherited_properties),
       documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
@@ -57,7 +63,9 @@ concept::concept(
 
 void concept::swap(concept& other) noexcept {
     using std::swap;
-    swap(properties_, other.properties_);
+    swap(all_properties_, other.all_properties_);
+    swap(local_properties_, other.local_properties_);
+    swap(inherited_properties_, other.inherited_properties_);
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
@@ -68,7 +76,9 @@ void concept::swap(concept& other) noexcept {
 }
 
 bool concept::operator==(const concept& rhs) const {
-    return properties_ == rhs.properties_ &&
+    return all_properties_ == rhs.all_properties_ &&
+        local_properties_ == rhs.local_properties_ &&
+        inherited_properties_ == rhs.inherited_properties_ &&
         documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
@@ -84,20 +94,52 @@ concept& concept::operator=(concept other) {
     return *this;
 }
 
-const std::list<dogen::sml::property>& concept::properties() const {
-    return properties_;
+const std::list<dogen::sml::property>& concept::all_properties() const {
+    return all_properties_;
 }
 
-std::list<dogen::sml::property>& concept::properties() {
-    return properties_;
+std::list<dogen::sml::property>& concept::all_properties() {
+    return all_properties_;
 }
 
-void concept::properties(const std::list<dogen::sml::property>& v) {
-    properties_ = v;
+void concept::all_properties(const std::list<dogen::sml::property>& v) {
+    all_properties_ = v;
 }
 
-void concept::properties(const std::list<dogen::sml::property>&& v) {
-    properties_ = std::move(v);
+void concept::all_properties(const std::list<dogen::sml::property>&& v) {
+    all_properties_ = std::move(v);
+}
+
+const std::list<dogen::sml::property>& concept::local_properties() const {
+    return local_properties_;
+}
+
+std::list<dogen::sml::property>& concept::local_properties() {
+    return local_properties_;
+}
+
+void concept::local_properties(const std::list<dogen::sml::property>& v) {
+    local_properties_ = v;
+}
+
+void concept::local_properties(const std::list<dogen::sml::property>&& v) {
+    local_properties_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& concept::inherited_properties() const {
+    return inherited_properties_;
+}
+
+std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& concept::inherited_properties() {
+    return inherited_properties_;
+}
+
+void concept::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v) {
+    inherited_properties_ = v;
+}
+
+void concept::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v) {
+    inherited_properties_ = std::move(v);
 }
 
 const std::string& concept::documentation() const {

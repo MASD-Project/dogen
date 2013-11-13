@@ -31,12 +31,16 @@
 #include <iosfwd>
 #include <list>
 #include <string>
+#include <unordered_map>
+#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/hash/relationship_types_hash.hpp"
 #include "dogen/sml/serialization/abstract_object_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/operation.hpp"
 #include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/relationship_types.hpp"
 #include "dogen/sml/types/type.hpp"
 
 namespace dogen {
@@ -64,7 +68,9 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
-        const std::list<dogen::sml::property>& properties,
+        const std::list<dogen::sml::property>& all_properties,
+        const std::list<dogen::sml::property>& local_properties,
+        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::list<dogen::sml::operation>& operations,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -76,7 +82,9 @@ public:
         const bool is_versioned,
         const bool is_comparable,
         const bool is_fluent,
-        const std::list<dogen::sml::qname>& modeled_concepts);
+        const std::list<dogen::sml::qname>& modeled_concepts,
+        const bool is_child,
+        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships);
 
 private:
     template<typename Archive>
@@ -90,15 +98,42 @@ public:
 
 public:
     /**
-     * @brief State of this entity.
+     * @brief All the properties associated with this type.
      *
-     * Does not include inherited attributes.
+     * This is a union of the following sets:
+     *
+     * @li the set of all properies obtained via inheritance relationships;
+     * @li the set of all properies obtained via modeling of concepts, including any refinements;
+     * @li the set of all properies directly associated with the type (local).
+     *
+     * The first and third sets are cached in this object. The second isn't as we do
+     * not have a need for it.
      */
     /**@{*/
-    const std::list<dogen::sml::property>& properties() const;
-    std::list<dogen::sml::property>& properties();
-    void properties(const std::list<dogen::sml::property>& v);
-    void properties(const std::list<dogen::sml::property>&& v);
+    const std::list<dogen::sml::property>& all_properties() const;
+    std::list<dogen::sml::property>& all_properties();
+    void all_properties(const std::list<dogen::sml::property>& v);
+    void all_properties(const std::list<dogen::sml::property>&& v);
+    /**@}*/
+
+    /**
+     * @brief The set of all properies directly associated with the type.
+     */
+    /**@{*/
+    const std::list<dogen::sml::property>& local_properties() const;
+    std::list<dogen::sml::property>& local_properties();
+    void local_properties(const std::list<dogen::sml::property>& v);
+    void local_properties(const std::list<dogen::sml::property>&& v);
+    /**@}*/
+
+    /**
+     * @brief The set of all properies obtained via inheritance, by parent name.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties() const;
+    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties();
+    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v);
+    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v);
     /**@}*/
 
     /**
@@ -212,6 +247,19 @@ public:
     void modeled_concepts(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the type has at least one parent.
+     */
+    /**@{*/
+    bool is_child() const;
+    void is_child(const bool v);
+    /**@}*/
+
+    const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships() const;
+    std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships();
+    void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v);
+    void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >&& v);
+
 protected:
     bool compare(const abstract_object& rhs) const;
 public:
@@ -221,7 +269,9 @@ protected:
     void swap(abstract_object& other) noexcept;
 
 private:
-    std::list<dogen::sml::property> properties_;
+    std::list<dogen::sml::property> all_properties_;
+    std::list<dogen::sml::property> local_properties_;
+    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
     std::list<dogen::sml::operation> operations_;
     boost::optional<dogen::sml::qname> parent_name_;
     boost::optional<dogen::sml::qname> original_parent_name_;
@@ -234,6 +284,8 @@ private:
     bool is_comparable_;
     bool is_fluent_;
     std::list<dogen::sml::qname> modeled_concepts_;
+    bool is_child_;
+    std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
 };
 
 inline abstract_object::~abstract_object() noexcept { }

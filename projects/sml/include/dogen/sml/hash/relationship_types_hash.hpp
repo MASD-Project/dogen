@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_PROPERTY_CACHE_FWD_HPP
-#define DOGEN_SML_TYPES_PROPERTY_CACHE_FWD_HPP
+#ifndef DOGEN_SML_HASH_RELATIONSHIP_TYPES_HASH_HPP
+#define DOGEN_SML_HASH_RELATIONSHIP_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml {
+#include <functional>
+#include "dogen/sml/types/relationship_types.hpp"
 
-class property_cache;
+namespace std {
 
-} }
+template<>
+struct hash<dogen::sml::relationship_types> {
+public:
+    size_t operator()(const dogen::sml::relationship_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
 
 #endif

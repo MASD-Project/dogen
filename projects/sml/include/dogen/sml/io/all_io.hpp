@@ -36,6 +36,7 @@
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/relationship_types_io.hpp"
 #include "dogen/sml/io/repository_io.hpp"
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/service_types_io.hpp"

@@ -41,6 +41,19 @@ std::list<dogen::sml::property> create_std_list_dogen_sml_property(unsigned int 
     return r;
 }
 
+dogen::sml::qname
+create_dogen_sml_qname(const unsigned int position) {
+    return dogen::sml::qname_generator::create(position);
+}
+
+std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_std_list_dogen_sml_property(position + i)));
+    }
+    return r;
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -55,11 +68,6 @@ create_boost_property_tree_ptree(const unsigned int position) {
     ptree r;
     r.push_back(ptree::value_type("key_1", c));
     return r;
-}
-
-dogen::sml::qname
-create_dogen_sml_qname(const unsigned int position) {
-    return dogen::sml::qname_generator::create(position);
 }
 
 dogen::sml::generation_types
@@ -102,14 +110,16 @@ concept_generator::concept_generator() : position_(0) { }
 
 void concept_generator::
 populate(const unsigned int position, result_type& v) {
-    v.properties(create_std_list_dogen_sml_property(position + 0));
-    v.documentation(create_std_string(position + 1));
-    v.meta_data(create_boost_property_tree_ptree(position + 2));
-    v.name(create_dogen_sml_qname(position + 3));
-    v.generation_type(create_dogen_sml_generation_types(position + 4));
-    v.origin_type(create_dogen_sml_origin_types(position + 5));
-    v.operations(create_std_list_dogen_sml_operation(position + 6));
-    v.refines(create_std_list_dogen_sml_qname(position + 7));
+    v.all_properties(create_std_list_dogen_sml_property(position + 0));
+    v.local_properties(create_std_list_dogen_sml_property(position + 1));
+    v.inherited_properties(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(position + 2));
+    v.documentation(create_std_string(position + 3));
+    v.meta_data(create_boost_property_tree_ptree(position + 4));
+    v.name(create_dogen_sml_qname(position + 5));
+    v.generation_type(create_dogen_sml_generation_types(position + 6));
+    v.origin_type(create_dogen_sml_origin_types(position + 7));
+    v.operations(create_std_list_dogen_sml_operation(position + 8));
+    v.refines(create_std_list_dogen_sml_qname(position + 9));
 }
 
 concept_generator::result_type

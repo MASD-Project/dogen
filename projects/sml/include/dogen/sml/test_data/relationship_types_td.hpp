@@ -18,20 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_CACHE_ERROR_FWD_HPP
-#define DOGEN_SML_TYPES_CACHE_ERROR_FWD_HPP
+#ifndef DOGEN_SML_TEST_DATA_RELATIONSHIP_TYPES_TD_HPP
+#define DOGEN_SML_TEST_DATA_RELATIONSHIP_TYPES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
+#include "dogen/sml/types/relationship_types.hpp"
 
 namespace dogen {
 namespace sml {
 
-class cache_error;
+class relationship_types_generator {
+public:
+    relationship_types_generator();
+
+public:
+    typedef dogen::sml::relationship_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
 
 } }
 

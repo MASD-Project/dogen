@@ -29,6 +29,8 @@
 #include <boost/property_tree/ptree.hpp>
 #include <list>
 #include <string>
+#include <unordered_map>
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/concept_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/operation.hpp"
@@ -55,7 +57,9 @@ public:
 
 public:
     concept(
-        const std::list<dogen::sml::property>& properties,
+        const std::list<dogen::sml::property>& all_properties,
+        const std::list<dogen::sml::property>& local_properties,
+        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
@@ -73,15 +77,42 @@ private:
 
 public:
     /**
-     * @brief State of this entity.
+     * @brief All the properties associated with this type.
      *
-     * Does not include inherited attributes.
+     * This is a union of the following sets:
+     *
+     * @li the set of all properies obtained via inheritance relationships;
+     * @li the set of all properies obtained via modeling of concepts, including any refinements;
+     * @li the set of all properies directly associated with the type (local).
+     *
+     * The first and third sets are cached in this object. The second isn't as we do
+     * not have a need for it.
      */
     /**@{*/
-    const std::list<dogen::sml::property>& properties() const;
-    std::list<dogen::sml::property>& properties();
-    void properties(const std::list<dogen::sml::property>& v);
-    void properties(const std::list<dogen::sml::property>&& v);
+    const std::list<dogen::sml::property>& all_properties() const;
+    std::list<dogen::sml::property>& all_properties();
+    void all_properties(const std::list<dogen::sml::property>& v);
+    void all_properties(const std::list<dogen::sml::property>&& v);
+    /**@}*/
+
+    /**
+     * @brief The set of all properies directly associated with the type.
+     */
+    /**@{*/
+    const std::list<dogen::sml::property>& local_properties() const;
+    std::list<dogen::sml::property>& local_properties();
+    void local_properties(const std::list<dogen::sml::property>& v);
+    void local_properties(const std::list<dogen::sml::property>&& v);
+    /**@}*/
+
+    /**
+     * @brief The set of all properies obtained via inheritance, by parent name.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties() const;
+    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties();
+    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v);
+    void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v);
     /**@}*/
 
     /**
@@ -166,7 +197,9 @@ public:
     concept& operator=(concept other);
 
 private:
-    std::list<dogen::sml::property> properties_;
+    std::list<dogen::sml::property> all_properties_;
+    std::list<dogen::sml::property> local_properties_;
+    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
     std::string documentation_;
     boost::property_tree::ptree meta_data_;
     dogen::sml::qname name_;

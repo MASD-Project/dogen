@@ -377,7 +377,11 @@ this is a long comment
 							<generation_type>1</generation_type>
 							<origin_type>1</origin_type>
 						</type>
-						<properties class_id="29" tracking_level="0" version="0">
+						<all_properties class_id="29" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</all_properties>
+						<local_properties>
 							<count>3</count>
 							<item_version>0</item_version>
 							<item class_id="30" tracking_level="0" version="0">
@@ -474,12 +478,17 @@ this is a long comment
 								<is_immutable>0</is_immutable>
 								<is_fluent>0</is_fluent>
 							</item>
-						</properties>
-						<operations class_id="33" tracking_level="0" version="0">
+						</local_properties>
+						<inherited_properties class_id="33" tracking_level="0" version="0">
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</inherited_properties>
+						<operations class_id="34" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</operations>
-						<parent_name class_id="34" tracking_level="0" version="0">
+						<parent_name class_id="35" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</parent_name>
 						<original_parent_name>
@@ -500,6 +509,12 @@ this is a long comment
 							<count>0</count>
 							<item_version>0</item_version>
 						</modeled_concepts>
+						<is_child>0</is_child>
+						<relationships class_id="36" tracking_level="0" version="0">
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</relationships>
 					</abstract_object>
 					<type>1</type>
 				</px>

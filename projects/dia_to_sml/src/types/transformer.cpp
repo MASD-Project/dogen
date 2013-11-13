@@ -230,7 +230,7 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
 
     for (const auto& p : o.properties()) {
         const auto property(to_property(p));
-        ao.properties().push_back(property);
+        ao.local_properties().push_back(property);
         update_model_references(property.type());
     }
 
@@ -331,7 +331,7 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
     update_abstract_object(ae, o, p);
     ae.is_aggregate_root(p.is_aggregate_root());
 
-    for (const auto& p : ae.properties()) {
+    for (const auto& p : ae.local_properties()) {
         sml::meta_data_reader reader(p.meta_data());
         if (reader.has_key(sml::tags::identity_attribute))
             ae.identity().push_back(p);
@@ -490,7 +490,7 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
         auto property(to_property(prop));
         property.type(to_nested_qname(prop.type()));
         update_model_references(property.type());
-        c.properties().push_back(property);
+        c.local_properties().push_back(property);
     }
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));

@@ -263,7 +263,7 @@ void resolver::resolve_concepts() {
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        resolve_properties(c.name(), c.properties());
+        resolve_properties(c.name(), c.local_properties());
         validate_refinements(c);
     }
 }
@@ -279,7 +279,7 @@ void resolver::resolve_objects() {
             continue;
 
         validate_inheritance_graph(o);
-        resolve_properties(o.name(), o.properties());
+        resolve_properties(o.name(), o.local_properties());
         resolve_operations(o.name(), o.operations());
 
         if (o.modeled_concepts().empty())

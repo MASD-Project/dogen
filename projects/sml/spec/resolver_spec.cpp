@@ -97,9 +97,10 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
 
     for (const auto& pair : m.objects()) {
         auto& o(*pair.second);
-        BOOST_CHECK(o.properties().size() == 1 || o.properties().empty());
-        if (o.properties().size() == 1)
-            o.properties().begin()->type().type().model_name("");
+        BOOST_CHECK(o.local_properties().size() == 1 ||
+            o.local_properties().empty());
+        if (o.local_properties().size() == 1)
+            o.local_properties().begin()->type().type().model_name("");
     }
     const auto original(m);
     BOOST_LOG_SEV(lg, debug) << "original: " << original;
@@ -120,8 +121,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             found = true;
 
             const auto& o(*pair.second);
-            BOOST_CHECK(o.properties().size() == 1);
-            const auto& prop(o.properties().front());
+            BOOST_CHECK(o.local_properties().size() == 1);
+            const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
             BOOST_CHECK(is_type_one(prop.type().type()));
             BOOST_CHECK(is_model_zero(prop.type().type()));
@@ -154,8 +155,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
             found = true;
 
             const auto& o(*pair.second);
-            BOOST_CHECK(o.properties().size() == 1);
-            const auto& prop(o.properties().front());
+            BOOST_CHECK(o.local_properties().size() == 1);
+            const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
 
             BOOST_CHECK(is_type_one(prop.type().type()));

@@ -37,6 +37,7 @@
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -50,7 +51,9 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::concept& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("all_properties", v.all_properties_);
+    ar << make_nvp("local_properties", v.local_properties_);
+    ar << make_nvp("inherited_properties", v.inherited_properties_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("meta_data", v.meta_data_);
     ar << make_nvp("name", v.name_);
@@ -64,7 +67,9 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::sml::concept& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("all_properties", v.all_properties_);
+    ar >> make_nvp("local_properties", v.local_properties_);
+    ar >> make_nvp("inherited_properties", v.inherited_properties_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("meta_data", v.meta_data_);
     ar >> make_nvp("name", v.name_);

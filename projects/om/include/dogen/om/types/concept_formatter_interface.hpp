@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/om/types/file.hpp"
 #include "dogen/om/types/annotation.hpp"
 #include "dogen/om/types/file_formatter_interface.hpp"
@@ -52,8 +51,7 @@ public:
      * @brief Format the concept according to some grammar into the
      * stream.
      */
-    virtual file format(const sml::concept& c, const annotation& a,
-        const sml::property_cache_interface& pc) const = 0;
+    virtual file format(const sml::concept& c, const annotation& a) const = 0;
 };
 
 } }

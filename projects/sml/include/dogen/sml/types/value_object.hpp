@@ -58,7 +58,9 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
-        const std::list<dogen::sml::property>& properties,
+        const std::list<dogen::sml::property>& all_properties,
+        const std::list<dogen::sml::property>& local_properties,
+        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::list<dogen::sml::operation>& operations,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -71,6 +73,8 @@ public:
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
+        const bool is_child,
+        const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const dogen::sml::value_object_types& type);
 
 private:

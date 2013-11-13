@@ -30,7 +30,6 @@
 #include <ostream>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/sml/types/property_cache_interface.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 #include "dogen/om/types/module_formatter_interface.hpp"
@@ -159,8 +158,7 @@ public:
 
     file format(const sml::module& module, const annotation& a) const override;
 
-    file format(const sml::type& t, const annotation& a,
-        const sml::property_cache_interface& c) const override;
+    file format(const sml::type& t, const annotation& a) const override;
 
 private:
     mutable std::shared_ptr<context> context_;

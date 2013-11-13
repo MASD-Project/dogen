@@ -36,6 +36,7 @@
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/sml/test_data/relationship_types_td.hpp"
 #include "dogen/sml/test_data/repository_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/service_types_td.hpp"

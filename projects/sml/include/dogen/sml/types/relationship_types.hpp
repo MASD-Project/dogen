@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_GENERALISATION_TRAVERSAL_FWD_HPP
-#define DOGEN_SML_TYPES_GENERALISATION_TRAVERSAL_FWD_HPP
+#ifndef DOGEN_SML_TYPES_RELATIONSHIP_TYPES_HPP
+#define DOGEN_SML_TYPES_RELATIONSHIP_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,20 @@
 namespace dogen {
 namespace sml {
 
-class generalisation_traversal;
+/**
+ * @brief Ways in which a type can be related to another for indexing purposes.
+ */
+enum class relationship_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    original_parents = 1, ///< Types at the root of the inheritance hierarchy.
+    parents = 2, ///< Types that are direct parents of this type.
+    regular_associations = 3, ///< Types that are involved in aggregation or composition relationships.
+    pointer_associations = 4, ///< Types that are involved in aggregation or composition relationships via a pointer.
+    leaves = 5, ///< Types that are at the bottom of the inheritance tree.
+    visitor = 6, ///< Type that provides visitation services for this type.
+    key = 7, ///< Types that are used in the identity function of this type.
+    modeled_concepts = 8 ///< Concepts modeled by this type.
+};
 
 } }
 

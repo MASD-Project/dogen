@@ -47,6 +47,9 @@ auto lg(logger_factory("om.cpp_types_main_header_file_formatter"));
 
 const std::string empty;
 const std::string missing_context_ptr("Context pointer is null");
+const std::string parent_not_found("Type is a child but parent not found");
+const std::string multiple_inheritance_found(
+    "Multiple inheritance is not supported");
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
@@ -75,9 +78,8 @@ public:
     ~context() noexcept = default;
 
 public:
-    context(std::ostream& s, const sml::property_cache_interface& pc,
-        cpp_formatters::indenter& ind, cpp_formatters::utility& u)
-        : stream_(s), property_cache_(pc), indenter_(ind), utility_(u),
+    context(std::ostream& s, cpp_formatters::indenter& ind,
+        cpp_formatters::utility& u) : stream_(s), indenter_(ind), utility_(u),
           first_line_is_blank_(false), overwrite_(false) { }
 
 public:
@@ -85,13 +87,6 @@ public:
      * @brief Stream to which the formatted output will be sent.
      */
     std::ostream& stream() { return stream_; }
-
-    /**
-     * @brief Cache that provides access to properties in SML objects.
-     */
-    const sml::property_cache_interface& property_cache() const {
-        return property_cache_;
-    }
 
     /**
      * @brief Indentation facilities.
@@ -121,7 +116,6 @@ public:
 
 private:
     std::ostream& stream_;
-    const sml::property_cache_interface& property_cache_;
     cpp_formatters::indenter& indenter_;
     cpp_formatters::utility& utility_;
     bool first_line_is_blank_;
@@ -231,11 +225,22 @@ open_class(const sml::abstract_object& o) const {
     if (!o.is_parent())
         context_->stream() << " final";
 
-    if (o.parent_name()) {
-        context_->stream() << " :";
+    if (o.is_child()) {
+        const auto i(o.relationships().find(sml::relationship_types::parents));
+        if (i == o.relationships().end() || i->second.empty()) {
+            BOOST_LOG_SEV(lg, error) << parent_not_found;
+            BOOST_THROW_EXCEPTION(formatting_error(parent_not_found));
+        }
 
+        if (i->second.size() > 1) {
+            BOOST_LOG_SEV(lg, error) << multiple_inheritance_found;
+            BOOST_THROW_EXCEPTION(formatting_error(multiple_inheritance_found));
+        }
+
+        const std::string parent_simple_name(i->second.front().simple_name());
+        context_->stream() << " :";
         context_->stream() << " public ";
-        context_->stream() << o.parent_name()->simple_name();
+        context_->stream() << parent_simple_name;
     }
     context_->stream() << " {" << std::endl;
     context_->first_line_is_blank(false);
@@ -271,7 +276,7 @@ explicitly_defaulted_functions(const sml::abstract_object& o) const {
                           << "&&) = default;" << std::endl;
     }
 
-    if (!o.is_parent() && !o.parent_name()) {
+    if (!o.is_parent() && !o.is_child()) {
         context_->stream() << context_->indenter() << "~" << sn
                           << "() = default;" << std::endl;
     }
@@ -281,7 +286,7 @@ explicitly_defaulted_functions(const sml::abstract_object& o) const {
                           << "& operator=(const " << sn << "&) = delete;"
                           << std::endl;
     } else {
-        const auto p(context_->property_cache().get_all_properties(o));
+        const auto p(o.all_properties());
         if (p.empty()) {
             context_->stream() << context_->indenter() << sn
                               << "& operator=(const " << sn
@@ -317,7 +322,7 @@ complete_constructor(const sml::abstract_object& o) const {
             return;
     }
 
-    const auto& props(context_->property_cache().get_all_properties(o));
+    const auto& props(o.all_properties());
     if (props.empty())
         return;
 
@@ -372,7 +377,7 @@ move_constructor(const sml::abstract_object& o) const {
     if (reader.is_false(types::generate_explicit_move_constructor))
         return;
 
-    const auto& props(context_->property_cache().get_all_properties(o));
+    const auto& props(o.all_properties());
     if (props.empty())
         return;
 
@@ -409,7 +414,7 @@ destructor(const sml::abstract_object& o) const {
          */
         context_->stream() << context_->indenter() << "virtual ~" << sn
                           << "() noexcept = 0;" << std::endl;
-    } else if (o.parent_name()) {
+    } else if (o.is_parent()) {
         context_->stream() << context_->indenter() << "virtual ~" << sn
                           << "() noexcept { }" << std::endl;
     }
@@ -534,7 +539,7 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
 
 void cpp_types_main_header_file_formatter::
 getters_and_setters(const sml::abstract_object& o) const {
-    if (o.properties().empty())
+    if (o.local_properties().empty())
         return;
 
     if (context_->first_line_is_blank())
@@ -542,7 +547,7 @@ getters_and_setters(const sml::abstract_object& o) const {
 
     context_->utility().public_access_specifier();
     bool is_first(true);
-    for (const auto p : o.properties()) {
+    for (const auto p : o.local_properties()) {
         if (!is_first)
             context_->utility().blank_line();
 
@@ -558,14 +563,14 @@ getters_and_setters(const sml::abstract_object& o) const {
 
 void cpp_types_main_header_file_formatter::
 member_variables(const sml::abstract_object& o) const {
-    if (o.properties().empty())
+    if (o.local_properties().empty())
         return;
 
     if (context_->first_line_is_blank())
         context_->utility().blank_line();
 
     context_->utility().public_access_specifier();
-    for (const auto p : o.properties()) {
+    for (const auto p : o.local_properties()) {
         sml::meta_data_reader reader(p.meta_data());
         context_->stream() << context_->indenter()
                           << reader.get(sml::tags::cpp::types::complete_name)
@@ -608,13 +613,13 @@ equality(const sml::abstract_object& o) const {
         context_->utility().close_scope();
     }
 
-    if (!o.is_parent() && !o.parent_name())
+    if (!o.is_parent() && !o.is_child())
         return;
 
     context_->utility().blank_line();
     context_->utility().public_access_specifier();
     using types = sml::tags::cpp::types;
-    if (o.is_parent() && !o.parent_name()) {
+    if (o.is_parent() && !o.is_child()) {
         context_->stream() << context_->indenter()
                           << "virtual bool equals(const " << sn
                           <<  "& other) const = 0;"
@@ -665,7 +670,7 @@ swap(const sml::abstract_object& o) const {
     if (reader.is_false(sml::tags::cpp::types::generate_swap))
         return;
 
-    const auto props(context_->property_cache().get_all_properties(o));
+    const auto props(o.all_properties());
     if ((props.empty() && !o.is_parent()) || o.is_immutable())
         return;
 
@@ -688,7 +693,7 @@ swap(const sml::abstract_object& o) const {
 void cpp_types_main_header_file_formatter::
 assignment(const sml::abstract_object& o) const {
     // assignment is only available in leaf classes - MEC++-33
-    const auto props(context_->property_cache().get_all_properties(o));
+    const auto props(o.all_properties());
     if (props.empty() || o.is_parent() || o.is_immutable())
         return;
 
@@ -893,13 +898,12 @@ format(const sml::module& module, const annotation& a) const {
 }
 
 file cpp_types_main_header_file_formatter::
-format(const sml::type& t, const annotation& a,
-    const sml::property_cache_interface& c) const {
+format(const sml::type& t, const annotation& a) const {
 
     std::ostringstream s;
     cpp_formatters::indenter ind;
     cpp_formatters::utility u(s, ind);
-    context_ = std::shared_ptr<context>(new context(s, c, ind, u));
+    context_ = std::shared_ptr<context>(new context(s, ind, u));
 
     const cpp_includes i = cpp_includes();
     sml::meta_data_reader reader(t.meta_data());

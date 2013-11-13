@@ -41,10 +41,12 @@
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/sml/serialization/relationship_types_ser.hpp"
 #include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -64,7 +66,9 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("type", base_object<dogen::sml::type>(v));
 
-    ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("all_properties", v.all_properties_);
+    ar << make_nvp("local_properties", v.local_properties_);
+    ar << make_nvp("inherited_properties", v.inherited_properties_);
     ar << make_nvp("operations", v.operations_);
     ar << make_nvp("parent_name", v.parent_name_);
     ar << make_nvp("original_parent_name", v.original_parent_name_);
@@ -77,6 +81,8 @@ void save(Archive& ar,
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
+    ar << make_nvp("is_child", v.is_child_);
+    ar << make_nvp("relationships", v.relationships_);
 }
 
 template<typename Archive>
@@ -85,7 +91,9 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("type", base_object<dogen::sml::type>(v));
 
-    ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("all_properties", v.all_properties_);
+    ar >> make_nvp("local_properties", v.local_properties_);
+    ar >> make_nvp("inherited_properties", v.inherited_properties_);
     ar >> make_nvp("operations", v.operations_);
     ar >> make_nvp("parent_name", v.parent_name_);
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
@@ -98,6 +106,8 @@ void load(Archive& ar,
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
+    ar >> make_nvp("is_child", v.is_child_);
+    ar >> make_nvp("relationships", v.relationships_);
 }
 
 } }

@@ -42,6 +42,15 @@ inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_list_dogen_sml_property(i.second));
+    }
+    return seed;
+}
+
 inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::ptree& v) {
     std::size_t seed(0);
     for (const auto& node : v) {
@@ -77,7 +86,9 @@ namespace sml {
 std::size_t concept_hasher::hash(const concept&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_sml_property(v.properties()));
+    combine(seed, hash_std_list_dogen_sml_property(v.all_properties()));
+    combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
     combine(seed, v.documentation());
     combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.name());

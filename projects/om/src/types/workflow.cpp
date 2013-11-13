@@ -55,8 +55,6 @@ namespace om {
 
 class workflow::context {
 public:
-    sml::property_cache& property_cache() { return property_cache_; }
-
     const std::unordered_map<std::string, modeline_group>&
     modeline_groups() { return modeline_groups_; }
 
@@ -82,7 +80,6 @@ public:
     std::list<file>& files() { return files_; }
 
 private:
-    sml::property_cache property_cache_;
     std::unordered_map<std::string, modeline_group> modeline_groups_;
     std::unordered_map<std::string, licence> licences_;
     std::string code_generation_marker_;
@@ -209,7 +206,6 @@ void workflow::setup_reference_data_subworkflow(const sml::model& m) {
     hydrate_modelines_activity();
     hydrate_licences_activity();
     create_marker_activity(m);
-    context_->property_cache().populate(m);
 }
 
 void workflow::operator()(const sml::type& t) const {
@@ -219,7 +215,6 @@ void workflow::operator()(const sml::type& t) const {
     const auto modeline(extract_modeline(md));
     const auto marker(extract_marker(md));
     const annotation a(modeline, licence, marker);
-    const auto& pc(context_->property_cache());
 
     sml::meta_data_reader reader(md);
     for (const auto f : type_formatters_) {
@@ -228,7 +223,7 @@ void workflow::operator()(const sml::type& t) const {
         if (status == sml::tags::status_unsupported)
             continue;
 
-        auto file(f->format(t, a, pc));
+        auto file(f->format(t, a));
         file.overwrite(status == sml::tags::status_handcrafted);
         context_->files().push_back(file);
     }
@@ -262,7 +257,6 @@ void workflow::operator()(const sml::concept& c) const {
     const auto modeline(extract_modeline(md));
     const auto marker(extract_marker(md));
     const annotation a(modeline, licence, marker);
-    const auto& pc(context_->property_cache());
 
     sml::meta_data_reader reader(md);
     for (const auto f : concept_formatters_) {
@@ -271,7 +265,7 @@ void workflow::operator()(const sml::concept& c) const {
         if (status == sml::tags::status_unsupported)
             continue;
 
-        auto file(f->format(c, a, pc));
+        auto file(f->format(c, a));
         file.overwrite(status == sml::tags::status_handcrafted);
         context_->files().push_back(file);
     }

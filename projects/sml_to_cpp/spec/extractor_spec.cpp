@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_unsigned_int_property_has_e
     const auto m(mock_model_factory::object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->properties().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second->local_properties().size() == 1);
 
     dogen::sml_to_cpp::extractor x(m);
     const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boolean_property_has_expect
     const auto m(mock_model_factory::object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->properties().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second->local_properties().size() == 1);
 
     dogen::sml_to_cpp::extractor x(m);
     const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
@@ -206,7 +206,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
     for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
-            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
 
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
@@ -258,7 +258,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_
     for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
-            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
             BOOST_REQUIRE(r.names().size() == 2);
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expect
     for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
-            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -326,7 +326,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_exp
     for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
-            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -361,7 +361,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_h
     for (const auto& pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
-            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
 
             found = true;
             const auto r(x.extract_dependency_graph(*pair.second));

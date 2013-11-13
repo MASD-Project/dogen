@@ -119,7 +119,7 @@ boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
     const auto doc(versioned ? versioned_key_doc : unversioned_key_doc);
     r->documentation(doc + qn.simple_name());
 
-    r->properties(properties);
+    r->local_properties(properties);
 
     if (versioned)
         inject_version(*r);
@@ -240,7 +240,7 @@ void injector::inject_version(abstract_object& p) const {
     v.type(nqn);
     v.documentation(versioned_property_doc);
 
-    p.properties().push_back(v);
+    p.local_properties().push_back(v);
 }
 
 void injector::inject_version(model& m) const {

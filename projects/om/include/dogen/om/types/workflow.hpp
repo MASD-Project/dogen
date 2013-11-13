@@ -34,7 +34,6 @@
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
-#include "dogen/sml/types/property_cache.hpp"
 #include "dogen/om/types/file.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline_group.hpp"

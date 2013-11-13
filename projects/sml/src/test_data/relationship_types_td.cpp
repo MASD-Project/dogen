@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_ASSOCIATION_TRAVERSAL_FWD_HPP
-#define DOGEN_SML_TYPES_ASSOCIATION_TRAVERSAL_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/sml/test_data/relationship_types_td.hpp"
 
 namespace dogen {
 namespace sml {
 
-class association_traversal;
+relationship_types_generator::relationship_types_generator() : position_(0) { }
+void relationship_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<relationship_types>(position % 9);
+}
+
+relationship_types_generator::result_type
+relationship_types_generator::create(const unsigned int  position) {
+    result_type r;
+    relationship_types_generator::populate(position, r);
+    return r;
+}
+
+relationship_types_generator::result_type
+relationship_types_generator::operator()() {
+    return create(position_++);
+}
 
 } }
-
-#endif

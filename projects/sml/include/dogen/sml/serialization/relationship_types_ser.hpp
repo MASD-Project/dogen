@@ -18,11 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/property_cache_interface.hpp"
+#ifndef DOGEN_SML_SERIALIZATION_RELATIONSHIP_TYPES_SER_HPP
+#define DOGEN_SML_SERIALIZATION_RELATIONSHIP_TYPES_SER_HPP
 
-namespace dogen {
-namespace sml {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-property_cache_interface::~property_cache_interface() noexcept { }
+#include <boost/serialization/nvp.hpp>
+#include "dogen/sml/types/relationship_types.hpp"
 
-} }
+template<class Archive>
+void serialize(Archive& ar, dogen::sml::relationship_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("relationship_types", v);
+}
+
+#endif

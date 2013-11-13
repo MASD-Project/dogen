@@ -396,7 +396,7 @@ object_with_property(const object_types ot, const property_types pt) {
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
     }
-    o0->properties().push_back(p);
+    o0->local_properties().push_back(p);
 
     model r(build_empty_model(0));
 
@@ -472,7 +472,7 @@ mock_model_factory::object_with_property_type_in_different_model() {
     property p;
     p.name(property_name(0));
     p.type(mock_qname(*o1));
-    o0->properties().push_back(p);
+    o0->local_properties().push_back(p);
 
     qname m0_qn;
     m0_qn.model_name(model_name(0));
@@ -498,7 +498,7 @@ model mock_model_factory::object_with_missing_property_type() {
     property p;
     p.name(property_name(0));
     p.type(mock_qname(*o1));
-    o0->properties().push_back(p);
+    o0->local_properties().push_back(p);
 
     qname mn_qn;
     mn_qn.model_name(model_name(0));
@@ -519,7 +519,7 @@ object_with_parent_in_the_same_model(bool add_property) {
         property p;
         p.name(property_name(0));
         p.type(mock_nested_qname(property_types::unsigned_int));
-        o0->properties().push_back(p);
+        o0->local_properties().push_back(p);
 
         sml::primitive ui;
         ui.name(p.type().type());
@@ -531,7 +531,7 @@ object_with_parent_in_the_same_model(bool add_property) {
         property p;
         p.name(property_name(1));
         p.type(mock_nested_qname(property_types::unsigned_int));
-        o1->properties().push_back(p);
+        o1->local_properties().push_back(p);
     }
 
     o0->parent_name(o1->name());
@@ -622,7 +622,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         property p;
         p.name(property_name(0));
         p.type(mock_nested_qname(property_types::unsigned_int));
-        o0->properties().push_back(p);
+        o0->local_properties().push_back(p);
 
         sml::primitive ui;
         ui.name(p.type().type());
@@ -634,7 +634,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         property p;
         p.name(property_name(1));
         p.type(mock_nested_qname(property_types::unsigned_int));
-        o1->properties().push_back(p);
+        o1->local_properties().push_back(p);
     }
 
     auto o2(mock_value_object(2, mn));
@@ -642,7 +642,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         property p;
         p.name(property_name(2));
         p.type(mock_nested_qname(property_types::unsigned_int));
-        o2->properties().push_back(p);
+        o2->local_properties().push_back(p);
     }
 
     auto o3(mock_value_object(3, mn));
@@ -650,7 +650,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
         property p;
         p.name(property_name(3));
         p.type(mock_nested_qname(property_types::unsigned_int));
-        o3->properties().push_back(p);
+        o3->local_properties().push_back(p);
     }
 
     o0->parent_name(o1->name());

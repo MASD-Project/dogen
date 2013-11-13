@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
     const auto vo(dynamic_cast<const dogen::sml::value_object&>(obj));
     BOOST_CHECK(vo.name().model_name() == model_name);
     BOOST_CHECK(!vo.name().simple_name().empty());
-    BOOST_CHECK(vo.properties().empty());
+    BOOST_CHECK(vo.local_properties().empty());
     BOOST_CHECK(!vo.documentation().empty());
 }
 
@@ -345,7 +345,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
     const auto& obj(*c.model().objects().begin()->second);
     BOOST_CHECK(obj.name().model_name() == model_name);
     BOOST_CHECK(!obj.name().simple_name().empty());
-    BOOST_CHECK(obj.properties().empty());
+    BOOST_CHECK(obj.local_properties().empty());
 
     const auto vo(dynamic_cast<const dogen::sml::value_object&>(obj));
     BOOST_REQUIRE(obj.name().module_path().size() == 1);
@@ -642,7 +642,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) 
     const auto& obj(*c.model().objects().begin()->second);
     BOOST_CHECK(obj.name().model_name() == model_name);
     BOOST_CHECK(!obj.name().simple_name().empty());
-    BOOST_CHECK(obj.properties().empty());
+    BOOST_CHECK(obj.local_properties().empty());
     const auto vo(dynamic_cast<const dogen::sml::value_object&>(obj));
     BOOST_REQUIRE(obj.name().module_path().size() == 2);
     BOOST_CHECK(obj.name().module_path().front() == first);
@@ -1234,10 +1234,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_property_transforms_into_value_object_wi
 
     BOOST_CHECK(is_type_zero(vo.name()));
     BOOST_CHECK(!vo.documentation().empty());
-    BOOST_REQUIRE(vo.properties().size() == 1);
-    BOOST_CHECK(is_type_zero(vo.properties().front().name()));
-    BOOST_CHECK(!vo.properties().front().type().type().simple_name().empty());
-    BOOST_CHECK(!vo.properties().front().documentation().empty());
+    BOOST_REQUIRE(vo.local_properties().size() == 1);
+    BOOST_CHECK(is_type_zero(vo.local_properties().front().name()));
+    BOOST_CHECK(!vo.local_properties().front().type().type().simple_name().empty());
+    BOOST_CHECK(!vo.local_properties().front().documentation().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
