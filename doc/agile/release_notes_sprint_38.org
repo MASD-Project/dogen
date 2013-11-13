@@ -10,36 +10,28 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-13 Wed 11:19]
+Clock summary at [2013-11-13 Wed 18:55]
 
-| Headline                                                                  | Time    |       |       |
-|---------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                              | *12:14* |       |       |
-|---------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                           |         | 12:14 |       |
-| IMPLEMENTATION Release notes and backlog grooming                         |         |       |  0:04 |
-| IMPLEMENTATION Implement auxiliar data structures required for formatting |         |       | 12:10 |
+| Headline                                                              | Time    |       |       |
+|-----------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                          | *12:49* |       |       |
+|-----------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                       |         | 12:49 |       |
+| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:30 |
+| COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
+| COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-11-13 Wed 18:24]--[2013-11-13 Wed 18:50] =>  0:26
     CLOCK: [2013-11-04 Mon 07:47]--[2013-11-04 Mon 07:51] =>  0:04
 
-*** IMPLEMENTATION Implement auxiliar data structures required for formatting :story:
-    CLOCK: [2013-11-04 Mon 07:53]--[2013-11-04 Mon 07:54] =>  0:01
-
-- create an indexer that populates the index. add indexer to SML
-  workflow.
-- create a class to aggregate type information: type itself, indexed
-  properties, relationships: =type_details=. this should be in OM
-  although it only has SML types. This is because this class is only
-  useful for outputting stuff.
-
-**** COMPLETED Create the =om::annotation= class and update code to use it :task:
-     CLOSED: [2013-11-04 Mon 21:41]
-     CLOCK: [2013-11-04 Mon 21:35]--[2013-11-04 Mon 21:37] =>  0:02
-     CLOCK: [2013-11-04 Mon 21:00]--[2013-11-04 Mon 21:35] =>  0:35
-     CLOCK: [2013-11-04 Mon 08:24]--[2013-11-04 Mon 08:32] =>  0:08
-     CLOCK: [2013-11-04 Mon 07:54]--[2013-11-04 Mon 08:15] =>  0:21
+*** COMPLETED Create the =om::annotation= class and update code to use it :story:
+    CLOSED: [2013-11-04 Mon 21:41]
+    CLOCK: [2013-11-04 Mon 21:35]--[2013-11-04 Mon 21:37] =>  0:02
+    CLOCK: [2013-11-04 Mon 21:00]--[2013-11-04 Mon 21:35] =>  0:35
+    CLOCK: [2013-11-04 Mon 08:24]--[2013-11-04 Mon 08:32] =>  0:08
+    CLOCK: [2013-11-04 Mon 07:54]--[2013-11-04 Mon 08:15] =>  0:21
 
 create a class to aggregate the licence, modeline and
 marker.
@@ -59,25 +51,33 @@ confusing.
 Instead we'll use =annotation=. Implies meta-data still, but avoids
 confusion with the SML kind.
 
-**** IMPLEMENTATION Create indexing data structures                    :task:
-     CLOCK: [2013-11-13 Wed 07:52]--[2013-11-13 Wed 08:40] =>  0:48
-     CLOCK: [2013-11-13 Wed 06:30]--[2013-11-13 Wed 07:24] =>  0:54
-     CLOCK: [2013-11-12 Tue 18:20]--[2013-11-12 Tue 19:09] =>  0:49
-     CLOCK: [2013-11-12 Tue 07:54]--[2013-11-12 Tue 08:39] =>  0:45
-     CLOCK: [2013-11-11 Mon 22:35]--[2013-11-11 Mon 23:37] =>  1:02
-     CLOCK: [2013-11-11 Mon 18:06]--[2013-11-11 Mon 18:53] =>  0:47
-     CLOCK: [2013-11-11 Mon 08:22]--[2013-11-11 Mon 09:12] =>  0:50
-     CLOCK: [2013-11-09 Sat 22:43]--[2013-11-10 Sun 01:05] =>  2:22
-     CLOCK: [2013-11-09 Sat 22:07]--[2013-11-09 Sat 22:08] =>  0:01
-     CLOCK: [2013-11-08 Fri 07:49]--[2013-11-08 Fri 08:20] =>  0:31
-     CLOCK: [2013-11-07 Thu 18:00]--[2013-11-07 Thu 18:10] =>  0:10
-     CLOCK: [2013-11-07 Thu 08:23]--[2013-11-07 Thu 08:33] =>  0:10
-     CLOCK: [2013-11-07 Thu 07:47]--[2013-11-07 Thu 08:18] =>  0:31
-     CLOCK: [2013-11-06 Wed 08:24]--[2013-11-06 Wed 08:29] =>  0:05
-     CLOCK: [2013-11-06 Wed 07:46]--[2013-11-06 Wed 08:17] =>  0:31
-     CLOCK: [2013-11-05 Tue 08:26]--[2013-11-05 Tue 08:35] =>  0:09
-     CLOCK: [2013-11-05 Tue 07:48]--[2013-11-05 Tue 08:20] =>  0:32
-     CLOCK: [2013-11-05 Tue 07:38]--[2013-11-05 Tue 07:44] =>  0:06
+*** COMPLETED Implement auxiliar data structures required for formatting :story:
+    CLOSED: [2013-11-13 Wed 18:25]
+    CLOCK: [2013-11-04 Mon 07:53]--[2013-11-04 Mon 07:54] =>  0:01
+    CLOCK: [2013-11-13 Wed 18:15]--[2013-11-13 Wed 18:24] =>  0:09
+    CLOCK: [2013-11-13 Wed 07:52]--[2013-11-13 Wed 08:40] =>  0:48
+    CLOCK: [2013-11-13 Wed 06:30]--[2013-11-13 Wed 07:24] =>  0:54
+    CLOCK: [2013-11-12 Tue 18:20]--[2013-11-12 Tue 19:09] =>  0:49
+    CLOCK: [2013-11-12 Tue 07:54]--[2013-11-12 Tue 08:39] =>  0:45
+    CLOCK: [2013-11-11 Mon 22:35]--[2013-11-11 Mon 23:37] =>  1:02
+    CLOCK: [2013-11-11 Mon 18:06]--[2013-11-11 Mon 18:53] =>  0:47
+    CLOCK: [2013-11-11 Mon 08:22]--[2013-11-11 Mon 09:12] =>  0:50
+    CLOCK: [2013-11-09 Sat 22:43]--[2013-11-10 Sun 01:05] =>  2:22
+    CLOCK: [2013-11-09 Sat 22:07]--[2013-11-09 Sat 22:08] =>  0:01
+    CLOCK: [2013-11-08 Fri 07:49]--[2013-11-08 Fri 08:20] =>  0:31
+    CLOCK: [2013-11-07 Thu 18:00]--[2013-11-07 Thu 18:10] =>  0:10
+    CLOCK: [2013-11-07 Thu 08:23]--[2013-11-07 Thu 08:33] =>  0:10
+    CLOCK: [2013-11-07 Thu 07:47]--[2013-11-07 Thu 08:18] =>  0:31
+    CLOCK: [2013-11-06 Wed 08:24]--[2013-11-06 Wed 08:29] =>  0:05
+    CLOCK: [2013-11-06 Wed 07:46]--[2013-11-06 Wed 08:17] =>  0:31
+    CLOCK: [2013-11-05 Tue 08:26]--[2013-11-05 Tue 08:35] =>  0:09
+    CLOCK: [2013-11-05 Tue 07:48]--[2013-11-05 Tue 08:20] =>  0:32
+    CLOCK: [2013-11-05 Tue 07:38]--[2013-11-05 Tue 07:44] =>  0:06
+
+Note: this story is becoming a bit of an epic, providing insufficient
+granularity of time spent. Due to this it has been closed (still
+incomplete), and the remaining work will be carried out in stories at
+the right level of complexity.
 
 New understanding:
 
@@ -122,7 +122,60 @@ store all the data associated with a type needed for formatting.
 
 - delete extractor, etc and make user of index.
 
+Older understanding:
+
+- create an indexer that populates the index. add indexer to SML
+  workflow.
+- create a class to aggregate type information: type itself, indexed
+  properties, relationships: =type_details=. this should be in OM
+  although it only has SML types. This is because this class is only
+  useful for outputting stuff.
+
+*** IMPLEMENTATION Create an indexer class and plug it to SML workflow :story:
+
+Create a class called =indexer=, responsible for taking in a merged
+model and populating the index property of all things Indexable. Move
+code from =extrator= and =transformer= (leaf processing) into
+=indexer=.
+
+**** Plug indexer into workflow                                        :task:
+**** Update transformer to populate basic relationships                :task:
+**** Implement indexing of associations, keys and visitor              :task:
+**** Add unit tests for the indexing of modeled concepts               :task:
+**** Add unit tests for the indexing of properties                     :task:
+**** Add unit tests for the indexing of relationships                  :task:
+
+*** Replace existing structures with indexing ones                    :story:
+
+Make use of the indexing information in legacy C++ formatters as a way
+to validate that it is correct.
+
+**** Create a helper class to handle relationships                     :task:
+
+- =find_relationship=: gets a specific relationship container, returns
+  empty if it does not exist.
+- =find_relationship_strict=: gets a specific relationship container,
+  throws if it does not exist.
+
+**** Replace original parent/parent functionality with relationships   :task:
+
+- delete leaves, original parent, parent attributes and use
+  relationships instead.
+
+**** Replace the concepts expansion code with relationships            :task:
+**** Replace C++ property handling code with relationships             :task:
+**** Replace association, keys and visitor with relationships          :task:
+
 *** Add include file support to main type formatter                   :story:
+
+Inclusion support needs to be moved to the formatters. SML provides
+all the required information at the model level in terms of type
+dependencies, but only the formatter itself knows what includes it
+needs because these are related to the implementation. Even
+determining which facets of a type one should include is formatter
+dependent. We need to distribute the logic of the includer into each
+formatter.
+
 *** Add tests for properties and compiler generated functions         :story:
 *** Add tests for module in model                                     :story:
 *** Add tests for tagging of abstract objects                         :story:
