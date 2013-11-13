@@ -68,7 +68,7 @@ namespace sml {
  * This is required as part of the current (very sub-optimal)
  * implementation of concept processing.
  */
-bool operator<(const qname& lhs, const qname& rhs) {
+inline bool operator<(const qname& lhs, const qname& rhs) {
     return
         lhs.model_name() < rhs.model_name() ||
         (lhs.model_name() == rhs.model_name() &&

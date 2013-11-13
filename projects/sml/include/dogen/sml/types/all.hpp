@@ -29,6 +29,8 @@
 #include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
+#include "dogen/sml/types/indexer.hpp"
+#include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/types/injection_error.hpp"
 #include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
