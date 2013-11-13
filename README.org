@@ -5,6 +5,8 @@ Motto 1: Le mieux est l'ennemi du bien. -- Voltaire
 Motto 2: First write the code generator; don't worry about the code, it
 will write itself.
 
+Motto 3: Malembe, Malembe. -- Angolan proverb.
+
 ** What is Dogen
 
 *Dogen* is a code generator designed to target domain models, inspired
