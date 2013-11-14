@@ -47,8 +47,8 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(indexer)
 
-BOOST_AUTO_TEST_CASE(model_that_doesnt_require_any_indexing_is_untouched_by_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_that_doesnt_require_any_indexing_is_untouched_by_indexer");
+BOOST_AUTO_TEST_CASE(model_that_does_not_require_any_indexing_is_untouched_by_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_that_does_not_require_any_indexing_is_untouched_by_indexer");
 
     auto a(mock_model_factory::build_empty_model());
     BOOST_REQUIRE(a.objects().empty());
