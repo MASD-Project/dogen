@@ -112,6 +112,12 @@ public:
         const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0);
 
+    /**
+     * @brief Builds a model with a concept, and a type that models
+     * it.
+     */
+    static model build_flat_concepts_model(const unsigned int n = 0);
+
 public:
     /**
      * @brief Scenario: object with single property of a type existent in

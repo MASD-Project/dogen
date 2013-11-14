@@ -74,13 +74,13 @@ std::string module_name(unsigned int i) {
     return stream.str();
 }
 
-dogen::sml::nested_qname mock_qname(const dogen::sml::abstract_object& o) {
-    dogen::sml::qname qn;
-    qn.simple_name(o.name().simple_name());
-    qn.model_name(o.name().model_name());
+dogen::sml::nested_qname mock_nested_qname(const dogen::sml::qname& qn) {
+    dogen::sml::qname pqn;
+    pqn.simple_name(qn.simple_name());
+    pqn.model_name(qn.model_name());
 
     dogen::sml::nested_qname r;
-    r.type(qn);
+    r.type(pqn);
     return r;
 }
 
@@ -91,7 +91,7 @@ dogen::sml::qname mock_model_qname(unsigned int i) {
 }
 
 dogen::sml::nested_qname
-mock_qname_shared_ptr(const dogen::sml::type& o) {
+mock_nested_qname_shared_ptr(const dogen::sml::qname& qn) {
     dogen::sml::qname e;
     e.simple_name("shared_ptr");
     e.model_name("boost");
@@ -100,7 +100,7 @@ mock_qname_shared_ptr(const dogen::sml::type& o) {
     r.type(e);
 
     dogen::sml::nested_qname c;
-    c.type(o.name());
+    c.type(qn);
 
     r.children(std::list<dogen::sml::nested_qname> { c });
 
@@ -195,6 +195,25 @@ void populate_simple_model_properties(dogen::sml::model& m, const unsigned int n
     m.generation_type(dogen::sml::generation_types::full_generation);
 }
 
+dogen::sml::property mock_property(const unsigned int n = 0,
+    const dogen::sml::test::mock_model_factory::property_types pt =
+    dogen::sml::test::mock_model_factory::property_types::unsigned_int,
+    boost::optional<dogen::sml::qname> qn =
+    boost::optional<dogen::sml::qname>()) {
+    dogen::sml::property r;
+    r.name(property_name(n));
+
+    using property_types = dogen::sml::test::mock_model_factory::property_types;
+    if (pt == property_types::value_object)
+        r.type(mock_nested_qname(*qn));
+    else if (pt == property_types::boost_shared_ptr)
+        r.type(mock_nested_qname_shared_ptr(*qn));
+    else
+        r.type(mock_nested_qname(pt));
+
+    return r;
+}
+
 boost::shared_ptr<dogen::sml::abstract_object>
 mock_value_object(const unsigned int i, const dogen::sml::qname& model_qname,
     const unsigned int module_n = 0) {
@@ -203,6 +222,22 @@ mock_value_object(const unsigned int i, const dogen::sml::qname& model_qname,
     auto r(boost::make_shared<value_object>());
     populate_object(*r, i, model_qname, module_n);
     r->type(dogen::sml::value_object_types::plain);
+    return r;
+}
+
+dogen::sml::concept
+mock_concept(const unsigned int i, const dogen::sml::qname& model_qname) {
+
+    dogen::sml::concept r;
+
+    dogen::sml::qname qn;
+    qn.model_name(model_qname.model_name());
+    qn.simple_name(simple_name(i));
+
+    r.name(qn);
+    r.documentation(documentation);
+    r.origin_type(dogen::sml::origin_types::user);
+
     return r;
 }
 
@@ -278,8 +313,10 @@ mock_exception(const unsigned int i, const dogen::sml::qname& model_qname,
     return r;
 }
 
+template<typename Nameable>
 void add_relationship(dogen::sml::abstract_object& target,
-    const dogen::sml::type& relative, const dogen::sml::relationship_types rt) {
+    const Nameable& relative,
+    const dogen::sml::relationship_types rt) {
     using dogen::sml::relationship_types;
     target.relationships()[rt].push_back(relative.name());
 }
@@ -309,11 +346,16 @@ void parent_to_child(dogen::sml::abstract_object& parent,
     parent_to_child(parent, child, parent, add_leaf_relationship);
 }
 
+template<typename Nameable>
+void insert_nameable(std::unordered_map<dogen::sml::qname, Nameable>& map,
+    const Nameable& n) {
+    map.insert(std::make_pair(n.name(), n));
+}
+
 void insert_object(dogen::sml::model& m,
     boost::shared_ptr<dogen::sml::abstract_object> o) {
     m.objects().insert(std::make_pair(o->name(), o));
 }
-
 
 }
 
@@ -375,7 +417,7 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
         module p;
         p.name(qn);
         p.documentation(documentation);
-        r.modules().insert(std::make_pair(p.name(), p));
+        insert_nameable(r.modules(), p);
 
         pp.push_back(module_name(i));
     }
@@ -390,7 +432,7 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
     case object_types::enumeration:
         for (unsigned int i(0); i < type_n; ++i) {
             const auto e(mock_enumeration(i, r.name(), mod_n));
-            r.enumerations().insert(std::make_pair(e.name(), e));
+            insert_nameable(r.enumerations(), e);
         }
         break;
     case object_types::exception:
@@ -407,6 +449,21 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
     return r;
 }
 
+model mock_model_factory::build_flat_concepts_model(const unsigned int n) {
+    model r(build_empty_model(n));
+    concept c(mock_concept(0, r.name()));
+    c.local_properties().push_back(mock_property());
+    insert_nameable(r.concepts(), c);
+
+    auto o(mock_value_object(0, r.name()));
+    o->modeled_concepts().push_back(c.name());
+    using dogen::sml::relationship_types;
+    add_relationship(*o, c, relationship_types::modeled_concepts);
+    insert_object(r, o);
+
+    return r;
+}
+
 model mock_model_factory::
 object_with_property(const object_types ot, const property_types pt) {
     using namespace dogen::sml;
@@ -414,15 +471,7 @@ object_with_property(const object_types ot, const property_types pt) {
     const auto mn(mock_model_qname(0));
     auto o1(mock_value_object(1, mn));
 
-    property p;
-    p.name(property_name(0));
-
-    if (pt == property_types::value_object)
-        p.type(mock_qname(*o1));
-    else if (pt == property_types::boost_shared_ptr)
-        p.type(mock_qname_shared_ptr(*o1));
-    else
-        p.type(mock_nested_qname(pt));
+    property p(mock_property(0, pt, o1->name()));
 
     boost::shared_ptr<abstract_object> o0;
     if (ot == object_types::value_object)
@@ -446,7 +495,7 @@ object_with_property(const object_types ot, const property_types pt) {
         pt == property_types::boolean) {
         sml::primitive ui;
         ui.name(p.type().type());
-        r.primitives().insert(std::make_pair(ui.name(), ui));
+        insert_nameable(r.primitives(), ui);
     } else if (pt == property_types::boost_shared_ptr) {
         dogen::sml::qname qn;
         qn.simple_name("shared_ptr");
@@ -506,9 +555,8 @@ mock_model_factory::object_with_property_type_in_different_model() {
     auto o0(mock_value_object(0));
     auto o1(mock_value_object(1));
 
-    property p;
-    p.name(property_name(0));
-    p.type(mock_qname(*o1));
+    using property_types = dogen::sml::test::mock_model_factory::property_types;
+    property p(mock_property(0, property_types::value_object, o1->name()));
     o0->all_properties().push_back(p);
     o0->local_properties().push_back(p);
 
@@ -533,9 +581,10 @@ model mock_model_factory::object_with_missing_property_type() {
     auto o0(mock_value_object(0));
     auto o1(mock_value_object(1));
 
-    property p;
-    p.name(property_name(0));
-    p.type(mock_qname(*o1));
+    using property_types = dogen::sml::test::mock_model_factory::property_types;
+    property p(mock_property(0, property_types::value_object, o1->name()));
+
+    o0->all_properties().push_back(p);
     o0->all_properties().push_back(p);
     o0->local_properties().push_back(p);
 
@@ -554,10 +603,9 @@ object_with_parent_in_the_same_model(bool add_property) {
 
     model r(build_empty_model(0));
     auto o0(mock_value_object(0, mn));
+    using property_types = dogen::sml::test::mock_model_factory::property_types;
     if (add_property) {
-        property p;
-        p.name(property_name(0));
-        p.type(mock_nested_qname(property_types::unsigned_int));
+        property p(mock_property());
         o0->all_properties().push_back(p);
         o0->local_properties().push_back(p);
 
@@ -568,9 +616,7 @@ object_with_parent_in_the_same_model(bool add_property) {
 
     auto o1(mock_value_object(1, mn));
     if (add_property) {
-        property p;
-        p.name(property_name(1));
-        p.type(mock_nested_qname(property_types::unsigned_int));
+        property p(mock_property(1));
         o1->all_properties().push_back(p);
         o1->local_properties().push_back(p);
     }
@@ -665,9 +711,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
 
     auto o0(mock_value_object(0, mn));
     if (add_property) {
-        property p;
-        p.name(property_name(0));
-        p.type(mock_nested_qname(property_types::unsigned_int));
+        property p(mock_property());
         o0->all_properties().push_back(p);
         o0->local_properties().push_back(p);
 
@@ -678,27 +722,21 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
 
     auto o1(mock_value_object(1, mn));
     if (add_property) {
-        property p;
-        p.name(property_name(1));
-        p.type(mock_nested_qname(property_types::unsigned_int));
+        property p(mock_property(1));
         o1->all_properties().push_back(p);
         o1->local_properties().push_back(p);
     }
 
     auto o2(mock_value_object(2, mn));
     if (add_property) {
-        property p;
-        p.name(property_name(2));
-        p.type(mock_nested_qname(property_types::unsigned_int));
+        property p(mock_property(1));
         o2->all_properties().push_back(p);
         o2->local_properties().push_back(p);
     }
 
     auto o3(mock_value_object(3, mn));
     if (add_property) {
-        property p;
-        p.name(property_name(3));
-        p.type(mock_nested_qname(property_types::unsigned_int));
+        property p(mock_property(3));
         o3->local_properties().push_back(p);
     }
 

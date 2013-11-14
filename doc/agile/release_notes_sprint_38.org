@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-13 Wed 19:27]
+Clock summary at [2013-11-14 Thu 07:01]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *13:13* |       |       |
+| *Total time*                                                          | *14:19* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 13:13 |       |
+| Development Stories Implemented                                       |         | 14:19 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:30 |
 | COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
 | COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
-| IMPLEMENTATION Fix broken OM formatter tests                          |         |       |  0:24 |
+| COMPLETED Fix broken OM formatter tests                               |         |       |  0:24 |
+| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  1:06 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -149,13 +150,21 @@ model and populating the index property of all things Indexable. Move
 code from =extrator= and =transformer= (leaf processing) into
 =indexer=.
 
-**** Plug indexer into workflow                                        :task:
-**** Update transformer to populate basic relationships                :task:
-**** Implement indexing of associations, keys and visitor              :task:
-**** Add unit tests for the indexing of modeled concepts               :task:
+**** COMPLETED Refactor SML mock factory                              :spike:
+     CLOSED: [2013-11-14 Thu 07:01]
+     CLOCK: [2013-11-14 Thu 06:53]--[2013-11-14 Thu 07:01] =>  0:08
+     CLOCK: [2013-11-14 Thu 05:52]--[2013-11-14 Thu 06:50] =>  0:58
+
+- tidy up property generation, insertion into containers etc.
+- add support for mock models with concepts
+
+**** IMPLEMENTATION Add unit tests for the indexing of modeled concepts :task:
 **** Add unit tests for the indexing of properties                     :task:
 **** Add unit tests for the indexing of relationships                  :task:
 
+**** Plug indexer into workflow                                        :task:
+**** Update transformer to populate basic relationships                :task:
+**** Implement indexing of associations, keys and visitor              :task:
 *** Replace existing structures with indexing ones                    :story:
 
 Make use of the indexing information in legacy C++ formatters as a way
