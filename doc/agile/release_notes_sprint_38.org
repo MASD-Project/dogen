@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-14 Thu 07:01]
+Clock summary at [2013-11-14 Thu 07:17]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *14:19* |       |       |
+| *Total time*                                                          | *14:35* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 14:19 |       |
+| Development Stories Implemented                                       |         | 14:35 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:30 |
 | COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
 | COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
 | COMPLETED Fix broken OM formatter tests                               |         |       |  0:24 |
-| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  1:06 |
+| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  1:22 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -151,7 +151,8 @@ code from =extrator= and =transformer= (leaf processing) into
 =indexer=.
 
 **** COMPLETED Refactor SML mock factory                              :spike:
-     CLOSED: [2013-11-14 Thu 07:01]
+     CLOSED: [2013-11-14 Thu 07:17]
+     CLOCK: [2013-11-14 Thu 07:01]--[2013-11-14 Thu 07:17] =>  0:16
      CLOCK: [2013-11-14 Thu 06:53]--[2013-11-14 Thu 07:01] =>  0:08
      CLOCK: [2013-11-14 Thu 05:52]--[2013-11-14 Thu 06:50] =>  0:58
 

@@ -453,6 +453,7 @@ model mock_model_factory::build_flat_concepts_model(const unsigned int n) {
     model r(build_empty_model(n));
     concept c(mock_concept(0, r.name()));
     c.local_properties().push_back(mock_property());
+    c.all_properties().push_back(mock_property());
     insert_nameable(r.concepts(), c);
 
     auto o(mock_value_object(0, r.name()));
@@ -461,6 +462,107 @@ model mock_model_factory::build_flat_concepts_model(const unsigned int n) {
     add_relationship(*o, c, relationship_types::modeled_concepts);
     insert_object(r, o);
 
+    return r;
+}
+
+model mock_model_factory::
+build_first_degree_concepts_model(const unsigned int n) {
+    model r(build_empty_model(n));
+    concept c0(mock_concept(0, r.name()));
+    c0.local_properties().push_back(mock_property());
+    c0.all_properties().push_back(mock_property());
+    insert_nameable(r.concepts(), c0);
+
+    concept c1(mock_concept(1, r.name()));
+    c1.local_properties().push_back(mock_property(1));
+    c1.all_properties().push_back(mock_property(1));
+    c1.refines().push_back(c0.name());
+    insert_nameable(r.concepts(), c1);
+
+    using dogen::sml::relationship_types;
+    const auto mc(relationship_types::modeled_concepts);
+
+    auto o0(mock_value_object(0, r.name()));
+    o0->modeled_concepts().push_back(c0.name());
+    add_relationship(*o0, c0, mc);
+    insert_object(r, o0);
+
+    auto o1(mock_value_object(0, r.name()));
+    o1->modeled_concepts().push_back(c1.name());
+    add_relationship(*o1, c1, mc);
+    insert_object(r, o1);
+
+    return r;
+}
+
+model mock_model_factory::
+build_second_degree_concepts_model(const unsigned int n) {
+    model r(build_empty_model(n));
+    concept c0(mock_concept(0, r.name()));
+    c0.local_properties().push_back(mock_property());
+    c0.all_properties().push_back(mock_property());
+    insert_nameable(r.concepts(), c0);
+
+    concept c1(mock_concept(1, r.name()));
+    c1.local_properties().push_back(mock_property(1));
+    c1.all_properties().push_back(mock_property(1));
+    c1.refines().push_back(c0.name());
+    insert_nameable(r.concepts(), c1);
+
+    concept c2(mock_concept(1, r.name()));
+    c2.local_properties().push_back(mock_property(2));
+    c2.all_properties().push_back(mock_property(2));
+    c2.refines().push_back(c1.name());
+    insert_nameable(r.concepts(), c2);
+
+    using dogen::sml::relationship_types;
+    const auto mc(relationship_types::modeled_concepts);
+
+    auto o0(mock_value_object(0, r.name()));
+    o0->modeled_concepts().push_back(c1.name());
+    add_relationship(*o0, c1, mc);
+    insert_object(r, o0);
+
+    auto o1(mock_value_object(1, r.name()));
+    o1->modeled_concepts().push_back(c0.name());
+    add_relationship(*o1, c0, mc);
+    insert_object(r, o1);
+
+    auto o2(mock_value_object(2, r.name()));
+    o2->modeled_concepts().push_back(c2.name());
+    add_relationship(*o2, c2, mc);
+    insert_object(r, o2);
+
+    return r;
+}
+
+model mock_model_factory::build_multiple_inheritance_concepts_model(
+    const unsigned int n) {
+    model r(build_empty_model(n));
+    concept c0(mock_concept(0, r.name()));
+    c0.local_properties().push_back(mock_property());
+    c0.all_properties().push_back(mock_property());
+    insert_nameable(r.concepts(), c0);
+
+    concept c1(mock_concept(1, r.name()));
+    c1.local_properties().push_back(mock_property(1));
+    c1.all_properties().push_back(mock_property(1));
+    insert_nameable(r.concepts(), c1);
+
+    concept c2(mock_concept(1, r.name()));
+    c2.local_properties().push_back(mock_property(2));
+    c2.all_properties().push_back(mock_property(2));
+    c2.refines().push_back(c0.name());
+    c2.refines().push_back(c1.name());
+    insert_nameable(r.concepts(), c2);
+
+    using dogen::sml::relationship_types;
+    const auto mc(relationship_types::modeled_concepts);
+
+    auto o0(mock_value_object(0, r.name()));
+    o0->modeled_concepts().push_back(c2.name());
+    add_relationship(*o0, c2, mc);
+    insert_object(r, o0);
     return r;
 }
 

@@ -118,6 +118,24 @@ public:
      */
     static model build_flat_concepts_model(const unsigned int n = 0);
 
+    /**
+     * @brief Builds a model with a concept that refines another
+     * concept, and two types that model each concept.
+     */
+    static model build_first_degree_concepts_model(const unsigned int n = 0);
+
+    /**
+     * @brief Same as first degree but with 2 levels of inheritance.
+     */
+    static model build_second_degree_concepts_model(const unsigned int n = 0);
+
+    /**
+     * @brief Builds a model with two base concepts and a concept that
+     * refines both; and a type that models the latter.
+     */
+    static model build_multiple_inheritance_concepts_model(
+        const unsigned int n = 0);
+
 public:
     /**
      * @brief Scenario: object with single property of a type existent in
