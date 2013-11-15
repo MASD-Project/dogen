@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <ostream>
+#include <sstream>
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"
 #include "dogen/sml/io/parameter_io.hpp"
@@ -37,7 +38,14 @@ namespace boost {
 namespace property_tree {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::property_tree::ptree& v) {
-    boost::property_tree::write_json(s, v);
+    std::ostringstream ss;
+    boost::property_tree::write_json(ss, v);
+
+    std::string content(ss.str());
+    boost::replace_all(content, "\r\n", "");
+    boost::replace_all(content, "\n", "");
+
+    s << content;
     return s;
 }
 

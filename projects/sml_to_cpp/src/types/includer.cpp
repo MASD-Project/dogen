@@ -329,8 +329,11 @@ void includer::append_boost_dependencies(const relationships& rel,
         il.system().push_back(boost_.include(boost_types::ptree));
 
     if (is_ptree && is_implementation && io_enabled_ &&
-        (domain_with_io || io_without_iio))
+        (domain_with_io || io_without_iio)) {
         il.system().push_back(boost_.include(boost_types::io_ptree));
+        il.system().push_back(std_.include(std_types::sstream));
+        il.system().push_back(boost_.include(boost_types::string_algorithm));
+    }
 
     if (is_implementation && is_serialization && is_ptree) {
         il.system().push_back(boost_.include(boost_types::io_ptree));

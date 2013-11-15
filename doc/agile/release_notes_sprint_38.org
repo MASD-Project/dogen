@@ -10,21 +10,23 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-14 Thu 09:10]
+Clock summary at [2013-11-15 Fri 09:19]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *15:29* |       |       |
+| *Total time*                                                          | *16:17* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 15:29 |       |
-| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:30 |
+| Development Stories Implemented                                       |         | 16:17 |       |
+| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:33 |
 | COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
 | COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
 | COMPLETED Fix broken OM formatter tests                               |         |       |  0:24 |
-| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  2:16 |
+| COMPLETED Remove new lines from output of property tree               |         |       |  0:37 |
+| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  2:24 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-11-15 Fri 08:37]--[2013-11-15 Fri 08:40] =>  0:03
     CLOCK: [2013-11-13 Wed 18:24]--[2013-11-13 Wed 18:50] =>  0:26
     CLOCK: [2013-11-04 Mon 07:47]--[2013-11-04 Mon 07:51] =>  0:04
 
@@ -143,11 +145,27 @@ Older understanding:
 - ensure transformer updates the new key properties such as
   =is_child=, etc.
 
-*** IMPLEMENTATION Remove new lines from output of property tree      :spike:
+*** COMPLETED Remove new lines from output of property tree           :spike:
+    CLOSED: [2013-11-15 Fri 09:19]
+    CLOCK: [2013-11-15 Fri 08:00]--[2013-11-15 Fri 08:37] =>  0:37
 
 For some annoying reason property tree attempts to format the JSON
 output and this breaks the workflow around prettify json. We need to
 manually remove these new lines.
+
+In addition, it seems that empty property trees produce invalid JSON:
+
+: { "__type__": "dogen::sml::model", "documentation": "Some documentation",
+: "meta_data": {{}
+: }
+: , "name":  { "__type__": "dogen::sml::qname", "model_name"
+: ...
+
+So the streaming is currently borked.
+
+Could not find any evidence at all of these double brackets. However,
+an empty model does fail to validate, most likely due to line breaks
+as our JSON parser is very dumb. Added code to remove line breaks.
 
 *** IMPLEMENTATION Create an indexer class and plug it to SML workflow :story:
 

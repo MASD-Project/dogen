@@ -587,8 +587,18 @@ void inserter_implementation::ptree_helper(const cpp::nested_type_info& nti) {
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "boost::property_tree::write_json(s, v);"
+            stream_ << indenter_ << "std::ostringstream ss;" << std::endl
+                    << indenter_ << "boost::property_tree::write_json(ss, v);"
+                    << std::endl << std::endl
+                    << indenter_ << "std::string content(ss.str());"
                     << std::endl
+                    << indenter_
+                    << "boost::replace_all(content, \"\\r\\n\", \"\");"
+                    << std::endl
+                    << indenter_
+                    << "boost::replace_all(content, \"\\n\", \"\");"
+                    << std::endl << std::endl
+                    << indenter_ << "s << content;" << std::endl
                     << indenter_ << "return s;" << std::endl;
         }
         utility_.close_scope();
