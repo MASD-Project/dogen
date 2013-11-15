@@ -8,7 +8,35 @@
 
 Stories that we intend to look at, at some point.
 
-*** Create a visitor interface with multiple implementations          :story:
+
+*** Add tests for empty objects                                       :story:
+
+This was mainly in the context of IO but could be useful for other
+facets. Example:
+
+: class empty_model_generator {
+: public:
+:     typedef dogen::sml::model result_type;
+:
+: public:
+:     result_type operator()() {
+:         dogen::sml::model r;
+:         return r;
+:     }
+: };
+: ...
+: BOOST_AUTO_TEST_CASE(validate_io_for_empty_objects) {
+:     SETUP_TEST_LOG("validate_io_for_empty_objects");
+:
+:     /* ensure we generate valid JSON for empty model. test was added
+:      * because empty property trees were not correct, but its valid on
+:      * its own right as we always use populated objects when testing
+:      * JSON.
+:      */
+:     // test_io<empty_model_generator>();
+: }
+
+*** Create a visitor interface with multiple implementations          :story
 
 We decided to use a base class for visitor; it would have been better
 to create an interface, with multiple implementations:
