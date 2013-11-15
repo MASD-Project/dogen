@@ -125,9 +125,10 @@ void indexer::expand_concept_hierarchy(const model& m, const qname& qn,
 }
 
 void indexer::populate_all_properties(abstract_object& o, const model& m) {
-    // FIXME; why is this compiling?
-    // o.all_properties().insert(o.all_properties().end(),
-    //     o.inherited_properties().begin(), o.inherited_properties().end());
+    for (const auto& pair : o.inherited_properties()) {
+        o.all_properties().insert(o.all_properties().end(),
+            pair.second.begin(), pair.second.end());
+    }
 
     o.all_properties().insert(o.all_properties().end(),
         o.local_properties().begin(), o.local_properties().end());
@@ -277,9 +278,12 @@ void indexer::index_modeled_concepts(model& m) {
         // FIXME: can we not just push the result of the set difference?
         auto tmp(i->second);
         i->second.clear();
+        o.modeled_concepts().clear();
         for (const auto& qn : tmp) {
-            if (result.find(qn) != result.end())
+            if (result.find(qn) != result.end()) {
                 i->second.push_back(qn);
+                o.modeled_concepts().push_back(qn);
+            }
         }
     }
 }

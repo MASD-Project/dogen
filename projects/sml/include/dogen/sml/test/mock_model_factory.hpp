@@ -77,6 +77,11 @@ public:
      */
     static std::string module_name(const unsigned int n = 0);
 
+    /**
+     * @brief Returns the property name derived from n.
+     */
+    static std::string property_name(const unsigned int n = 0);
+
 public:
     /**
      * @brief Returns a qname derived from the input parameters
@@ -116,7 +121,7 @@ public:
      * @brief Builds a model with a concept, and a type that models
      * it.
      */
-    static model build_flat_concepts_model(const unsigned int n = 0);
+    static model build_single_concept_model(const unsigned int n = 0);
 
     /**
      * @brief Builds a model with a concept that refines another
@@ -134,6 +139,14 @@ public:
      * refines both; and a type that models the latter.
      */
     static model build_multiple_inheritance_concepts_model(
+        const unsigned int n = 0);
+
+    /**
+     * @brief Builds a model with a base concept, two concepts that
+     * refine it, and a concept that refines both of these. Finally a
+     * type last concept.
+     */
+    static model build_diamond_inheritance_concepts_model(
         const unsigned int n = 0);
 
 public:

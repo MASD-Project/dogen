@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-14 Thu 07:17]
+Clock summary at [2013-11-14 Thu 09:10]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *14:35* |       |       |
+| *Total time*                                                          | *15:29* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 14:35 |       |
+| Development Stories Implemented                                       |         | 15:29 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:30 |
 | COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
 | COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
 | COMPLETED Fix broken OM formatter tests                               |         |       |  0:24 |
-| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  1:22 |
+| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  2:16 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -143,6 +143,12 @@ Older understanding:
 - ensure transformer updates the new key properties such as
   =is_child=, etc.
 
+*** IMPLEMENTATION Remove new lines from output of property tree      :spike:
+
+For some annoying reason property tree attempts to format the JSON
+output and this breaks the workflow around prettify json. We need to
+manually remove these new lines.
+
 *** IMPLEMENTATION Create an indexer class and plug it to SML workflow :story:
 
 Create a class called =indexer=, responsible for taking in a merged
@@ -160,6 +166,9 @@ code from =extrator= and =transformer= (leaf processing) into
 - add support for mock models with concepts
 
 **** IMPLEMENTATION Add unit tests for the indexing of modeled concepts :task:
+     CLOCK: [2013-11-15 Fri 07:52]--[2013-11-15 Fri 08:00] =>  0:08
+     CLOCK: [2013-11-14 Thu 07:56]--[2013-11-14 Thu 08:50] =>  0:54
+
 **** Add unit tests for the indexing of properties                     :task:
 **** Add unit tests for the indexing of relationships                  :task:
 
