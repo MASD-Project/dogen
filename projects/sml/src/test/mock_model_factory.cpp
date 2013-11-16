@@ -357,6 +357,18 @@ void insert_object(dogen::sml::model& m,
     m.objects().insert(std::make_pair(o->name(), o));
 }
 
+template<typename Stateful>
+void add_property(Stateful& s, const unsigned int n = 0,
+    const dogen::sml::test::mock_model_factory::property_types pt =
+    dogen::sml::test::mock_model_factory::property_types::unsigned_int,
+    boost::optional<dogen::sml::qname> qn =
+    boost::optional<dogen::sml::qname>()) {
+
+    auto p(mock_property(n, pt, qn));
+    s.all_properties().push_back(p);
+    s.local_properties().push_back(p);
+}
+
 }
 
 namespace dogen {
@@ -456,8 +468,7 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
 model mock_model_factory::build_single_concept_model(const unsigned int n) {
     model r(build_empty_model(n));
     concept c(mock_concept(0, r.name()));
-    c.local_properties().push_back(mock_property());
-    c.all_properties().push_back(mock_property());
+    add_property(c);
     insert_nameable(r.concepts(), c);
 
     auto o(mock_value_object(0, r.name()));
@@ -473,13 +484,11 @@ model mock_model_factory::
 build_first_degree_concepts_model(const unsigned int n) {
     model r(build_empty_model(n));
     concept c0(mock_concept(0, r.name()));
-    c0.local_properties().push_back(mock_property());
-    c0.all_properties().push_back(mock_property());
+    add_property(c0);
     insert_nameable(r.concepts(), c0);
 
     concept c1(mock_concept(1, r.name()));
-    c1.local_properties().push_back(mock_property(1));
-    c1.all_properties().push_back(mock_property(1));
+    add_property(c1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
@@ -503,19 +512,16 @@ model mock_model_factory::
 build_second_degree_concepts_model(const unsigned int n) {
     model r(build_empty_model(n));
     concept c0(mock_concept(0, r.name()));
-    c0.local_properties().push_back(mock_property());
-    c0.all_properties().push_back(mock_property());
+    add_property(c0);
     insert_nameable(r.concepts(), c0);
 
     concept c1(mock_concept(1, r.name()));
-    c1.local_properties().push_back(mock_property(1));
-    c1.all_properties().push_back(mock_property(1));
+    add_property(c1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
     concept c2(mock_concept(1, r.name()));
-    c2.local_properties().push_back(mock_property(2));
-    c2.all_properties().push_back(mock_property(2));
+    add_property(c2);
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
@@ -544,18 +550,16 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
     const unsigned int n) {
     model r(build_empty_model(n));
     concept c0(mock_concept(0, r.name()));
-    c0.local_properties().push_back(mock_property());
-    c0.all_properties().push_back(mock_property());
+    add_property(c0);
+    add_property(c0);
     insert_nameable(r.concepts(), c0);
 
     concept c1(mock_concept(1, r.name()));
-    c1.local_properties().push_back(mock_property(1));
-    c1.all_properties().push_back(mock_property(1));
+    add_property(c1, 1);
     insert_nameable(r.concepts(), c1);
 
     concept c2(mock_concept(1, r.name()));
-    c2.local_properties().push_back(mock_property(2));
-    c2.all_properties().push_back(mock_property(2));
+    add_property(c2, 2);
     c2.refines().push_back(c0.name());
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
@@ -574,25 +578,21 @@ model mock_model_factory::
 build_diamond_inheritance_concepts_model(const unsigned int n) {
     model r(build_empty_model(n));
     concept c0(mock_concept(0, r.name()));
-    c0.local_properties().push_back(mock_property());
-    c0.all_properties().push_back(mock_property());
+    add_property(c0);
     insert_nameable(r.concepts(), c0);
 
     concept c1(mock_concept(1, r.name()));
-    c1.local_properties().push_back(mock_property(1));
-    c1.all_properties().push_back(mock_property(1));
+    add_property(c1, 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
     concept c2(mock_concept(1, r.name()));
-    c2.local_properties().push_back(mock_property(2));
-    c2.all_properties().push_back(mock_property(2));
+    add_property(c2, 2);
     c2.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c2);
 
     concept c3(mock_concept(1, r.name()));
-    c3.local_properties().push_back(mock_property(2));
-    c3.all_properties().push_back(mock_property(2));
+    add_property(c3, 3);
     c3.refines().push_back(c1.name());
     c3.refines().push_back(c2.name());
     insert_nameable(r.concepts(), c3);
@@ -699,9 +699,7 @@ mock_model_factory::object_with_property_type_in_different_model() {
     auto o1(mock_value_object(1));
 
     using property_types = dogen::sml::test::mock_model_factory::property_types;
-    property p(mock_property(0, property_types::value_object, o1->name()));
-    o0->all_properties().push_back(p);
-    o0->local_properties().push_back(p);
+    add_property(*o0, 0, property_types::value_object, o1->name());
 
     qname m0_qn;
     m0_qn.model_name(model_name(0));
@@ -725,11 +723,7 @@ model mock_model_factory::object_with_missing_property_type() {
     auto o1(mock_value_object(1));
 
     using property_types = dogen::sml::test::mock_model_factory::property_types;
-    property p(mock_property(0, property_types::value_object, o1->name()));
-
-    o0->all_properties().push_back(p);
-    o0->all_properties().push_back(p);
-    o0->local_properties().push_back(p);
+    add_property(*o0, 0, property_types::value_object, o1->name());
 
     qname mn_qn;
     mn_qn.model_name(model_name(0));
@@ -741,28 +735,22 @@ model mock_model_factory::object_with_missing_property_type() {
 }
 
 model mock_model_factory::
-object_with_parent_in_the_same_model(bool add_property) {
+object_with_parent_in_the_same_model(const bool has_property) {
     const auto mn(mock_model_qname(0));
 
     model r(build_empty_model(0));
     auto o0(mock_value_object(0, mn));
     using property_types = dogen::sml::test::mock_model_factory::property_types;
-    if (add_property) {
-        property p(mock_property());
-        o0->all_properties().push_back(p);
-        o0->local_properties().push_back(p);
-
+    if (has_property) {
+        add_property(*o0);
         sml::primitive ui;
-        ui.name(p.type().type());
+        ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
     auto o1(mock_value_object(1, mn));
-    if (add_property) {
-        property p(mock_property(1));
-        o1->all_properties().push_back(p);
-        o1->local_properties().push_back(p);
-    }
+    if (has_property)
+        add_property(*o1, 1);
 
     parent_to_child(*o1, *o0);
     insert_object(r, o0);
@@ -847,41 +835,31 @@ model mock_model_factory::object_with_three_children_in_same_model() {
 }
 
 model mock_model_factory::
-object_with_third_degree_parent_in_same_model(bool add_property) {
+object_with_third_degree_parent_in_same_model(const bool has_property) {
     const auto mn(mock_model_qname(0));
 
     model r(build_empty_model(0));
 
     auto o0(mock_value_object(0, mn));
-    if (add_property) {
-        property p(mock_property());
-        o0->all_properties().push_back(p);
-        o0->local_properties().push_back(p);
+    if (has_property) {
+        add_property(*o0);
 
         sml::primitive ui;
-        ui.name(p.type().type());
+        ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
     auto o1(mock_value_object(1, mn));
-    if (add_property) {
-        property p(mock_property(1));
-        o1->all_properties().push_back(p);
-        o1->local_properties().push_back(p);
-    }
+    if (has_property)
+        add_property(*o1, 1);
 
     auto o2(mock_value_object(2, mn));
-    if (add_property) {
-        property p(mock_property(1));
-        o2->all_properties().push_back(p);
-        o2->local_properties().push_back(p);
-    }
+    if (has_property)
+        add_property(*o2, 1);
 
     auto o3(mock_value_object(3, mn));
-    if (add_property) {
-        property p(mock_property(3));
-        o3->local_properties().push_back(p);
-    }
+    if (has_property)
+        add_property(*o3, 3);
 
     parent_to_child(*o1, *o0, *o3, !add_leaf);
     parent_to_child(*o2, *o1, *o3, !add_leaf);

@@ -174,7 +174,7 @@ public:
      * @brief Scenario: object with parent in current model.
      */
     static model
-    object_with_parent_in_the_same_model(bool add_property = false);
+    object_with_parent_in_the_same_model(const bool has_property = false);
 
     /**
      * @brief Scenario: object with missing parent in current model.
@@ -197,7 +197,7 @@ public:
      * in current model.
      */
     static model object_with_third_degree_parent_in_same_model(
-        bool add_property = false);
+        const bool has_property = false);
 
     /**
      * @brief Scenario: object with three levels deep in inheritance tree
