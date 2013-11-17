@@ -119,6 +119,19 @@ private:
      */
     void index_inheritance(model& m);
 
+    /**
+     * @brief Indexes information related to refinement relationships
+     * for a given concept.
+     */
+    void index_refinements(concept& c, model& m,
+        std::unordered_set<sml::qname>& processed_qnames);
+
+    /**
+     * @brief Indexes information related to refinement relationships
+     * across all concepts the model.
+     */
+    void index_refinements(model& m);
+
 private:
     void index(abstract_object& o);
 

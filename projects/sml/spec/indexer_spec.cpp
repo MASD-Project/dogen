@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     BOOST_CHECK(c.local_properties().size() == 1);
-    // BOOST_CHECK(c.local_properties() == c.all_properties());
+    BOOST_CHECK(c.local_properties() == c.all_properties());
     BOOST_CHECK(i->second.size() == 1);
 
     BOOST_CHECK(o.local_properties().size() == 1);

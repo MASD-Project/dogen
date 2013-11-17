@@ -291,7 +291,41 @@ void indexer::index_modeled_concepts(model& m) {
 void indexer::index(abstract_object& /*o*/) {
 }
 
+
+void indexer::index_refinements(concept& c, model& m,
+    std::unordered_set<sml::qname>& processed_qnames) {
+    c.all_properties().insert(c.all_properties().end(),
+        c.local_properties().begin(), c.local_properties().end());
+
+    for (auto& qn : c.refines()) {
+        auto i(m.concepts().find(qn));
+        if (i == m.concepts().end()) {
+            const auto& sn(qn.simple_name());
+            BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+            BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
+        }
+
+        auto& parent(i->second);
+        if (processed_qnames.find(qn) == processed_qnames.end())
+            index_refinements(parent, m, processed_qnames);
+
+        c.inherited_properties().insert(std::make_pair(parent.name(),
+                parent.local_properties()));
+
+        c.all_properties().insert(c.all_properties().end(),
+            parent.local_properties().begin(), parent.local_properties().end());
+    }
+    processed_qnames.insert(c.name());
+}
+
+void indexer::index_refinements(model& m) {
+    std::unordered_set<sml::qname> processed_qnames;
+    for (auto& pair : m.concepts())
+        index_refinements(pair.second, m, processed_qnames);
+}
+
 void indexer::index(model& m) {
+    index_refinements(m);
     index_modeled_concepts(m);
     index_inheritance(m);
 }
