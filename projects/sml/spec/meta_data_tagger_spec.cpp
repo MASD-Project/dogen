@@ -43,7 +43,6 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/meta_data_tagger.hpp"
 
-using dogen::sml::test::mock_model_factory;
 using dogen::config::test::mock_settings_factory;
 using dogen::sml::meta_data_error;
 
@@ -51,6 +50,9 @@ namespace {
 
 const std::string test_module("sml");
 const std::string test_suite("meta_data_tagger_spec");
+
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory model_factory(false/*tagged*/);
 
 const std::string default_cpp_forward_declaration_postfix("_fwd");
 const std::string default_cpp_implementation_file_extension(".cpp");
@@ -92,7 +94,7 @@ BOOST_AUTO_TEST_SUITE(meta_data_tagger)
 BOOST_AUTO_TEST_CASE(tagging_empty_model_without_any_configuration_options_results_in_expected_tags) {
     SETUP_TEST_LOG_SOURCE("tagging_empty_model_without_any_configuration_options_results_in_expected_tags");
 
-    auto m(mock_model_factory::build_empty_model());
+    auto m(model_factory.build_empty_model());
     dogen::sml::meta_data_tagger t;
     t.tag(m);
     BOOST_LOG_SEV(lg, debug) << "m: " << m;
@@ -126,7 +128,7 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_without_any_configuration_options_resul
 BOOST_AUTO_TEST_CASE(tagging_empty_model_with_all_facets_enabled_results_in_expected_tags) {
     SETUP_TEST_LOG_SOURCE("tagging_empty_model_with_all_facets_enabled_results_in_expected_tags");
 
-    auto m(mock_model_factory::build_empty_model());
+    auto m(model_factory.build_empty_model());
     const auto s(mock_settings_factory::build_cpp_settings());
     BOOST_LOG_SEV(lg, debug) << "s: " << s;
 
@@ -154,7 +156,7 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_all_facets_enabled_results_in_expe
 BOOST_AUTO_TEST_CASE(tagging_empty_model_with_a_few_facets_enabled_results_in_expected_tags) {
     SETUP_TEST_LOG_SOURCE("tagging_empty_model_with_a_few_facets_enabled_results_in_expected_tags");
 
-    auto m(mock_model_factory::build_empty_model());
+    auto m(model_factory.build_empty_model());
     auto s(mock_settings_factory::build_cpp_settings());
     s.enabled_facets().clear();
     s.enabled_facets().insert(dogen::config::cpp_facet_types::types);
@@ -186,7 +188,7 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_a_few_facets_enabled_results_in_ex
 BOOST_AUTO_TEST_CASE(tagging_single_type_model_with_all_facets_enabled_results_in_expected_tags) {
     SETUP_TEST_LOG_SOURCE("tagging_single_type_model_with_all_facets_enabled_results_in_expected_tags");
 
-    auto m(mock_model_factory::build_single_type_model());
+    auto m(model_factory.build_single_type_model());
     auto s(mock_settings_factory::build_cpp_settings());
 
     dogen::sml::meta_data_tagger t;

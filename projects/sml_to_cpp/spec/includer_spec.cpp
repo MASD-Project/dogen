@@ -40,6 +40,9 @@ namespace  {
 const std::string test_suite("includer_spec");
 const std::string test_module("sml_to_cpp");
 
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory model_factory;
+
 const std::string types("types");
 const std::string hash("hash");
 const std::string test_data("test_data");
@@ -83,7 +86,7 @@ dogen::config::cpp_settings mock_settings() {
 }
 
 std::string object_name() {
-    return dogen::sml::test::mock_model_factory::simple_name(0);
+    return model_factory.simple_name(0);
 }
 
 dogen::sml_to_cpp::includer default_includer(const dogen::sml::model& m) {
@@ -110,7 +113,7 @@ std::vector<std::list<std::string> >
 includes_for_one_object_model(cpp_facet_types ft,
     const includer_factory& factory) {
     using dogen::sml::test::mock_model_factory;
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(model_factory.build_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     const auto& p(*m.objects().begin()->second);
 

@@ -31,12 +31,13 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
-using dogen::sml::test::mock_model_factory;
-
 namespace {
 
 const std::string test_module("sml");
 const std::string test_suite("merger_spec");
+
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory factory;
 
 const std::string invalid_simple_name("INVALID");
 const std::string invalid_model_name("INVALID");
@@ -60,11 +61,11 @@ BOOST_AUTO_TEST_SUITE(merger)
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
 
-    auto target(mock_model_factory::build_single_type_model(0));
+    auto target(factory.build_single_type_model(0));
     const unsigned int n(5);
     for (unsigned int i(1); i < n; ++i) {
         dogen::sml::qname qn;
-        qn.model_name(mock_model_factory::model_name(i));
+        qn.model_name(factory.model_name(i));
         const auto ot(dogen::sml::origin_types::unknown);
         target.references().insert(std::make_pair(qn, ot));
     }
@@ -73,7 +74,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     mg.add_target(target);
 
     for (unsigned int i(1); i < n; ++i) {
-        auto m(mock_model_factory::build_single_type_model(i));
+        auto m(factory.build_single_type_model(i));
         m.name().external_module_path().push_back(some_path);
         mg.add(m);
     }
@@ -113,8 +114,8 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
         BOOST_LOG_SEV(lg, debug) << "object name: " << *object_i;
         BOOST_LOG_SEV(lg, debug) << "model name: " << *model_i;
 
-        const auto expected_model_name(mock_model_factory::model_name(i));
-        const auto expected_object_name(mock_model_factory::simple_name(0));
+        const auto expected_model_name(factory.model_name(i));
+        const auto expected_object_name(factory.simple_name(0));
         BOOST_LOG_SEV(lg, debug) << "expected object name: "
                                  << expected_object_name;
         BOOST_LOG_SEV(lg, debug) << "expected model name: "
@@ -143,7 +144,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
-    auto m(mock_model_factory::build_single_type_model());
+    auto m(factory.build_single_type_model());
     m.name().model_name(invalid_model_name);
 
     dogen::sml::merger mg;
@@ -156,7 +157,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
 
-    auto m(mock_model_factory::build_multi_type_model(0, 2));
+    auto m(factory.build_multi_type_model(0, 2));
     m.objects().begin()->second->name().simple_name(invalid_simple_name);
 
     dogen::sml::merger mg;
@@ -169,7 +170,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
     SETUP_TEST_LOG("not_adding_a_target_throws");
 
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(factory.build_single_type_model());
     dogen::sml::merger mg;
     mg.add(m);
 
@@ -179,8 +180,8 @@ BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
 
 BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
     SETUP_TEST_LOG("adding_more_than_one_target_throws");
-    const auto m0(mock_model_factory::build_single_type_model(0));
-    const auto m1(mock_model_factory::build_single_type_model(1));
+    const auto m0(factory.build_single_type_model(0));
+    const auto m1(factory.build_single_type_model(1));
 
     dogen::sml::merger mg;
     mg.add_target(m0);
@@ -191,7 +192,7 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
 
 BOOST_AUTO_TEST_CASE(merging_more_than_once_throws) {
     SETUP_TEST_LOG("merging_more_than_once_throws");
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(factory.build_single_type_model());
     dogen::sml::merger mg;
     mg.add_target(m);
     mg.merge();

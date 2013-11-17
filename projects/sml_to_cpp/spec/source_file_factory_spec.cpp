@@ -34,7 +34,6 @@
 #include "dogen/sml_to_cpp/types/source_file_factory.hpp"
 
 using dogen::config::cpp_facet_types;
-using dogen::sml::test::mock_model_factory;
 using dogen::config::test::mock_settings_factory;
 using dogen::config::cpp_facet_types;
 using dogen::cpp::file_types;
@@ -45,6 +44,10 @@ namespace {
 
 const std::string test_module("sml_to_cpp");
 const std::string test_suite("source_file_factory_spec");
+
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory model_factory;
+
 const std::string src_dir("__source_directory__");
 const std::string inc_dir("__include_directory__");
 
@@ -73,8 +76,8 @@ mock_descriptor_for_includer(const dogen::config::cpp_facet_types ft) {
     std::list<dogen::cpp::content_descriptor> r;
 
     dogen::sml::qname qn;
-    qn.simple_name(mock_model_factory::simple_name());
-    qn.model_name(mock_model_factory::model_name());
+    qn.simple_name(model_factory.simple_name());
+    qn.model_name(model_factory.model_name());
 
     dogen::cpp::content_descriptor cd;
     cd.name(qn);
@@ -91,8 +94,8 @@ std::list<dogen::cpp::content_descriptor> mock_descriptor_for_registrar() {
     std::list<dogen::cpp::content_descriptor> r;
 
     dogen::sml::qname qn;
-    qn.simple_name(mock_model_factory::simple_name());
-    qn.model_name(mock_model_factory::model_name());
+    qn.simple_name(model_factory.simple_name());
+    qn.model_name(model_factory.model_name());
 
     dogen::cpp::content_descriptor cd;
     cd.name(qn);
@@ -117,7 +120,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_enumeration_produces_expected_resu
     SETUP_TEST_LOG_SOURCE("creating_source_file_for_enumeration_produces_expected_results");
 
     const auto ot(object_types::enumeration);
-    const auto m(mock_model_factory::build_single_type_model(0, ot));
+    const auto m(model_factory.build_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
@@ -160,7 +163,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_result
     SETUP_TEST_LOG_SOURCE("creating_source_file_for_exception_produces_expected_results");
 
     const auto ot(object_types::exception);
-    const auto m(mock_model_factory::build_single_type_model(0, ot));
+    const auto m(model_factory.build_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -203,8 +206,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_module_produces_expected_results) 
     SETUP_TEST_LOG_SOURCE("creating_source_file_for_module_produces_expected_results");
 
     const auto ot(object_types::exception);
-    const auto m(
-        mock_model_factory::build_single_type_model_in_module(0, ot, 1));
+    const auto m(model_factory.build_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.modules().size() == 1);
 
@@ -246,7 +248,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_module_produces_expected_results) 
 BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) {
     SETUP_TEST_LOG_SOURCE("creating_source_file_for_object_produces_expected_results");
 
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -289,7 +291,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) 
 BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_results) {
     SETUP_TEST_LOG_SOURCE("creating_non_empty_includer_source_file_produces_expected_results");
 
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -299,8 +301,8 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
     dogen::sml_to_cpp::source_file_factory f(l);
 
     const auto ft(dogen::config::cpp_facet_types::types);
-    i.register_header(ft, mock_model_factory::simple_name(0));
-    i.register_header(ft, mock_model_factory::simple_name(1));
+    i.register_header(ft, model_factory.simple_name(0));
+    i.register_header(ft, model_factory.simple_name(1));
     const auto md(mock_descriptor_for_includer(ft));
 
     std::list<dogen::cpp::source_file> includer_infos;
@@ -327,9 +329,9 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
 
     bool found_0(false), found_1(false);
     for (const auto& ui : fi.user_includes()) {
-        if (ui == mock_model_factory::simple_name(0))
+        if (ui == model_factory.simple_name(0))
             found_0 = true;
-        else if (ui == mock_model_factory::simple_name(1))
+        else if (ui == model_factory.simple_name(1))
             found_1 = true;
     }
     BOOST_CHECK(found_0);
@@ -339,7 +341,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
 BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_results) {
     SETUP_TEST_LOG_SOURCE("creating_empty_includer_source_file_produces_expected_results");
 
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -349,8 +351,8 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
     dogen::sml_to_cpp::source_file_factory f(l);
 
     const auto ft1(dogen::config::cpp_facet_types::types);
-    i.register_header(ft1, mock_model_factory::simple_name(0));
-    i.register_header(ft1, mock_model_factory::simple_name(1));
+    i.register_header(ft1, model_factory.simple_name(0));
+    i.register_header(ft1, model_factory.simple_name(1));
 
     const auto ft2(dogen::config::cpp_facet_types::serialization);
     const auto md(mock_descriptor_for_includer(ft2));
@@ -381,7 +383,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
 BOOST_AUTO_TEST_CASE(creating_source_file_for_registrar_produces_expected_results) {
     SETUP_TEST_LOG_SOURCE("creating_source_file_for_registrar_produces_expected_results");
 
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));

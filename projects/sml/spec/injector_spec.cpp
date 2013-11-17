@@ -38,47 +38,16 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/injector.hpp"
 
-using dogen::sml::test::mock_model_factory;
-
 namespace {
+
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory factory;
 
 const std::string test_module("sml");
 const std::string test_suite("injector_spec");
 const std::string version_name("version");
-const std::string visitor_postfix("_visitor");
-const std::string versioned_postfix("_versioned");
-const std::string unversioned_postfix("_unversioned");
 const std::string missing_identity("Identity must have at least");
 const std::string no_leaves("Type marked as visitable but has no leaves");
-
-bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::simple_name(0) == qn.simple_name();
-}
-
-bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::simple_name(1) == qn.simple_name();
-}
-
-bool is_type_zero_unversioned(const dogen::sml::qname& qn) {
-    const auto s(qn.simple_name());
-    return
-        boost::contains(s, mock_model_factory::simple_name(0)) &&
-        boost::contains(s, unversioned_postfix);
-}
-
-bool is_type_zero_versioned(const dogen::sml::qname& qn) {
-    const auto s(qn.simple_name());
-    return
-        boost::contains(s, mock_model_factory::simple_name(0)) &&
-        boost::contains(s, versioned_postfix);
-}
-
-bool is_type_one_visitor(const dogen::sml::qname& qn) {
-    const auto s(qn.simple_name());
-    return
-        boost::contains(s, mock_model_factory::simple_name(1)) &&
-        boost::contains(s, visitor_postfix);
-}
 
 }
 
@@ -91,7 +60,7 @@ BOOST_AUTO_TEST_SUITE(injector)
 BOOST_AUTO_TEST_CASE(model_that_doesnt_require_any_new_types_is_untouched_by_injector) {
     SETUP_TEST_LOG_SOURCE("model_that_doesnt_require_any_new_types_is_untouched_by_injector");
 
-    auto a(mock_model_factory::build_single_type_model());
+    auto a(factory.build_single_type_model());
     BOOST_REQUIRE(a.objects().size() == 1);
 
     const auto e(a);
@@ -104,11 +73,11 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
     SETUP_TEST_LOG_SOURCE("entity_object_does_not_result_in_injected_keys");
 
     const auto ot(mock_model_factory::object_types::entity);
-    auto a(mock_model_factory::object_with_property(ot));
+    auto a(factory.object_with_property(ot));
     BOOST_REQUIRE(a.objects().size() == 2);
     for (const auto& pair : a.objects()) {
         const auto& qn(pair.first);
-        if (is_type_zero(qn)) {
+        if (factory.is_type_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             const auto& o(dynamic_cast<dogen::sml::entity&>(*pair.second));
             BOOST_REQUIRE(o.local_properties().size() == 1);
@@ -126,13 +95,13 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws
     SETUP_TEST_LOG_SOURCE("unversioned_keyed_object_with_no_identity_attributes_throws");
 
     const auto ot(mock_model_factory::object_types::keyed_entity);
-    auto m(mock_model_factory::object_with_property(ot));
+    auto m(factory.object_with_property(ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (is_type_zero(qn)) {
+        if (factory.is_type_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
             auto& o(dynamic_cast<keyed_entity&>(*pair.second));
@@ -152,11 +121,11 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
     SETUP_TEST_LOG_SOURCE("unversioned_keyed_object_has_unversioned_key_injected");
 
     const auto ot(mock_model_factory::object_types::keyed_entity);
-    auto m(mock_model_factory::object_with_property(ot));
+    auto m(factory.object_with_property(ot));
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (is_type_zero(qn)) {
+        if (factory.is_type_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
             BOOST_REQUIRE(ae.local_properties().size() == 1);
@@ -173,7 +142,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
     dogen::sml::qname ukqn;
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (is_type_zero(qn)) {
+        if (factory.is_type_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
@@ -182,8 +151,8 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
             BOOST_CHECK(!ae.versioned_key());
             ukqn = ae.unversioned_key();
 
-            BOOST_CHECK(is_type_zero_unversioned(ukqn));
-            BOOST_CHECK(!is_type_zero_versioned(ukqn));
+            BOOST_CHECK(factory.is_type_n_unversioned(0, ukqn));
+            BOOST_CHECK(!factory.is_type_n_versioned(0, ukqn));
             BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: " << ukqn;
         }
     }
@@ -201,11 +170,11 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
     SETUP_TEST_LOG_SOURCE("versioned_keyed_object_has_both_keys_injected");
 
     const auto ot(mock_model_factory::object_types::keyed_entity);
-    auto m(mock_model_factory::object_with_property(ot));
+    auto m(factory.object_with_property(ot));
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (is_type_zero(qn)) {
+        if (factory.is_type_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
             BOOST_REQUIRE(ae.local_properties().size() == 1);
@@ -223,7 +192,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
     dogen::sml::qname ukqn, vkqn;
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (is_type_zero(qn)) {
+        if (factory.is_type_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
@@ -232,12 +201,12 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
 
             BOOST_CHECK(ae.versioned_key());
             vkqn = *ae.versioned_key();
-            BOOST_CHECK(!is_type_zero_unversioned(vkqn));
-            BOOST_CHECK(is_type_zero_versioned(vkqn));
+            BOOST_CHECK(!factory.is_type_n_unversioned(0, vkqn));
+            BOOST_CHECK(factory.is_type_n_versioned(0, vkqn));
 
             ukqn = ae.unversioned_key();
-            BOOST_CHECK(is_type_zero_unversioned(ukqn));
-            BOOST_CHECK(!is_type_zero_versioned(ukqn));
+            BOOST_CHECK(factory.is_type_n_unversioned(0, ukqn));
+            BOOST_CHECK(!factory.is_type_n_versioned(0, ukqn));
             BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: " << ukqn;
         }
     }
@@ -261,7 +230,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
 BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
     SETUP_TEST_LOG_SOURCE("versioned_object_has_version_propery_injected");
 
-    auto m(mock_model_factory::build_single_type_model());
+    auto m(factory.build_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& ob(*m.objects().begin()->second);
     BOOST_REQUIRE(ob.local_properties().empty());
@@ -282,7 +251,7 @@ BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
 BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     SETUP_TEST_LOG_SOURCE("visitable_object_with_no_leaves_throws");
 
-    auto m(mock_model_factory::build_single_type_model());
+    auto m(factory.build_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& ob(*m.objects().begin()->second);
     ob.is_visitable(true);
@@ -296,11 +265,11 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
 BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     SETUP_TEST_LOG_SOURCE("visitable_object_has_visitor_injected");
 
-    auto m(mock_model_factory::object_with_parent_in_the_same_model());
+    auto m(factory.object_with_parent_in_the_same_model());
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (is_type_one(qn)) {
+        if (factory.is_type_n(1, qn)) {
             auto& ao(*pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             ao.is_visitable(true);
@@ -316,11 +285,11 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     bool type_one(false), visitor(false);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (is_type_one(qn)) {
+        if (factory.is_type_n(1, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             type_one = true;
             BOOST_REQUIRE(!pair.second->is_versioned());
-        } else if (is_type_one_visitor(qn)) {
+        } else if (factory.is_type_n_visitor(1, qn)) {
             visitor = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
 
@@ -340,7 +309,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             BOOST_CHECK(!op.name().empty());
             BOOST_CHECK(!op.documentation().empty());
             BOOST_REQUIRE(op.parameters().size() == 1);
-            BOOST_CHECK(is_type_zero(op.parameters().front().type().type()));
+            BOOST_CHECK(factory.is_type_n(0,
+                    op.parameters().front().type().type()));
         }
     }
 

@@ -38,7 +38,6 @@
 #include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/model.hpp"
-
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
@@ -56,7 +55,6 @@
 #include "dogen/sml/io/factory_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
-
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"

@@ -10,18 +10,19 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-15 Fri 09:19]
+Clock summary at [2013-11-17 Sun 01:40]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *16:17* |       |       |
+| *Total time*                                                          | *18:55* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 16:17 |       |
+| Development Stories Implemented                                       |         | 18:55 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:33 |
 | COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
 | COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
 | COMPLETED Fix broken OM formatter tests                               |         |       |  0:24 |
 | COMPLETED Remove new lines from output of property tree               |         |       |  0:37 |
+| COMPLETED Make mock model factory aware of stages in SML pipeline     |         |       |  2:38 |
 | IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  2:24 |
 #+end:
 
@@ -166,6 +167,17 @@ So the streaming is currently borked.
 Could not find any evidence at all of these double brackets. However,
 an empty model does fail to validate, most likely due to line breaks
 as our JSON parser is very dumb. Added code to remove line breaks.
+
+*** COMPLETED Make mock model factory aware of stages in SML pipeline :spike:
+    CLOSED: [2013-11-17 Sun 01:39]
+    CLOCK: [2013-11-17 Sun 00:40]--[2013-11-17 Sun 01:39] =>  0:59
+    CLOCK: [2013-11-17 Sun 00:30]--[2013-11-17 Sun 00:40] =>  0:10
+    CLOCK: [2013-11-16 Sat 23:38]--[2013-11-17 Sun 00:00] =>  1:02
+    CLOCK: [2013-11-16 Sat 22:31]--[2013-11-16 Sat 23:38] =>  1:07
+
+- add utility methods for properties
+- handle different stages in the SML pipeline: we can no longer make
+  it a static factory.
 
 *** IMPLEMENTATION Create an indexer class and plug it to SML workflow :story:
 

@@ -33,44 +33,13 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/indexer.hpp"
 
-using dogen::sml::test::mock_model_factory;
-
 namespace {
 
 const std::string test_module("sml");
 const std::string test_suite("indexer_spec");
 
-// bool is_property_zero(const dogen::sml::property& p) {
-//     return mock_model_factory::property_name(0) == p.name();
-// }
-
-// bool is_property_one(const dogen::sml::property& p) {
-//     return mock_model_factory::property_name(1) == p.name();
-// }
-
-// bool is_property_two(const dogen::sml::property& p) {
-//     return mock_model_factory::property_name(2) == p.name();
-// }
-
-// bool is_property_three(const dogen::sml::property& p) {
-//     return mock_model_factory::property_name(3) == p.name();
-// }
-
-// bool is_qname_zero(const dogen::sml::qname& qn) {
-//     return mock_model_factory::simple_name(0) == qn.simple_name();
-// }
-
-// bool is_qname_one(const dogen::sml::qname& qn) {
-//     return mock_model_factory::simple_name(1) == qn.simple_name();
-// }
-
-// bool is_qname_two(const dogen::sml::qname& qn) {
-//     return mock_model_factory::simple_name(2) == qn.simple_name();
-// }
-
-// bool is_qname_three(const dogen::sml::qname& qn) {
-//     return mock_model_factory::simple_name(3) == qn.simple_name();
-// }
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory factory(true/*tagged*/, false/*indexed*/);
 
 }
 
@@ -83,7 +52,7 @@ BOOST_AUTO_TEST_SUITE(indexer)
 BOOST_AUTO_TEST_CASE(model_that_does_not_require_any_indexing_is_untouched_by_indexer) {
     SETUP_TEST_LOG_SOURCE("model_that_does_not_require_any_indexing_is_untouched_by_indexer");
 
-    auto a(mock_model_factory::build_empty_model());
+    auto a(factory.build_empty_model());
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
 
@@ -96,37 +65,38 @@ BOOST_AUTO_TEST_CASE(model_that_does_not_require_any_indexing_is_untouched_by_in
 BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_single_concept_results_in_expected_indices");
 
-    // auto m(mock_model_factory::build_single_concept_model());
-    // BOOST_LOG_SEV(lg, debug) << "actual: " << m;
-    // BOOST_REQUIRE(m.objects().size() == 1);
-    // const auto& o(*m.objects().begin()->second);
-    // BOOST_REQUIRE(o.local_properties().size() == 1);
-    // BOOST_REQUIRE(o.local_properties() == o.all_properties());
+    auto m(factory.build_single_concept_model());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_REQUIRE(m.objects().size() == 1);
+    const auto& o(*m.objects().begin()->second);
+    BOOST_REQUIRE(o.local_properties().size() == 1);
+    BOOST_REQUIRE(o.all_properties().empty());
 
-    // using dogen::sml::relationship_types;
-    // const auto rt(relationship_types::modeled_concepts);
-    // const auto i(o.relationships().find(rt));
-    // BOOST_REQUIRE(i != o.relationships().end());
-    // BOOST_REQUIRE(i->second.size() == 1);
+    using dogen::sml::relationship_types;
+    const auto rt(relationship_types::modeled_concepts);
+    const auto i(o.relationships().find(rt));
+    BOOST_REQUIRE(i != o.relationships().end());
+    BOOST_REQUIRE(i->second.size() == 1);
 
-    // BOOST_REQUIRE(m.concepts().size() == 1);
-    // const auto& c(m.concepts().begin()->second);
-    // BOOST_REQUIRE(c.local_properties().size() == 1);
-    // BOOST_REQUIRE(c.local_properties() == c.all_properties());
+    BOOST_REQUIRE(m.concepts().size() == 1);
+    const auto& c(m.concepts().begin()->second);
+    BOOST_REQUIRE(c.local_properties().size() == 1);
+    BOOST_REQUIRE(c.all_properties().empty());
 
-    // dogen::sml::indexer ind;
-    // ind.index(m);
+    dogen::sml::indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-    // BOOST_CHECK(c.local_properties().size() == 1);
+    BOOST_CHECK(c.local_properties().size() == 1);
     // BOOST_CHECK(c.local_properties() == c.all_properties());
-    // BOOST_CHECK(i->second.size() == 1);
+    BOOST_CHECK(i->second.size() == 1);
 
-    // BOOST_CHECK(o.local_properties().size() == 1);
-    // BOOST_CHECK(o.all_properties().size() == 2);
-    // for (const auto& p : o.all_properties()) {
-    //     BOOST_CHECK(p == *o.local_properties().begin() ||
-    //         p == *c.local_properties().begin());
-    // }
+    BOOST_CHECK(o.local_properties().size() == 1);
+    BOOST_CHECK(o.all_properties().size() == 2);
+    for (const auto& p : o.all_properties()) {
+        BOOST_CHECK(p == *o.local_properties().begin() ||
+            p == *c.local_properties().begin());
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

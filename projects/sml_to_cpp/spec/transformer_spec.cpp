@@ -37,41 +37,15 @@ namespace {
 const std::string empty;
 const std::string test_module("cpp");
 const std::string test_suite("transformer_spec");
-const std::string external_module("ext_module");
 
+const mock_model_factory factory;
+
+const std::string external_module("ext_module");
 const std::string no_parent_info("Type has a parent ");
 const std::string unexpected_parent_info("Type does not have a parent");
 
 bool ends_with_type_zero(const std::string& n) {
-    return boost::ends_with(n, mock_model_factory::simple_name(0));
-}
-
-bool is_type_zero(const std::string& n) {
-    return mock_model_factory::simple_name(0) == n;
-}
-
-bool is_type_one(const std::string& n) {
-    return mock_model_factory::simple_name(1) == n;
-}
-
-bool is_type_two(const std::string& n) {
-    return mock_model_factory::simple_name(2) == n;
-}
-
-bool is_type_three(const std::string& n) {
-    return mock_model_factory::simple_name(3) == n;
-}
-
-bool is_module_zero(const std::string& n) {
-    return mock_model_factory::module_name(0) == n;
-}
-
-bool is_module_one(const std::string& n) {
-    return mock_model_factory::module_name(1) == n;
-}
-
-bool is_model_zero(const std::string& n) {
-    return mock_model_factory::model_name(0) == n;
+    return boost::ends_with(n, factory.simple_name(0));
 }
 
 bool check_name(const std::string& n) {
@@ -90,7 +64,6 @@ bool check_scoped_name(const std::string& n) {
 using dogen::utility::test::contains_checker;
 typedef dogen::sml::test::mock_model_factory::object_types object_types;
 typedef dogen::sml::test::mock_model_factory::property_types property_types;
-typedef dogen::sml::test::mock_model_factory factory;
 
 BOOST_AUTO_TEST_SUITE(transformer)
 
@@ -98,7 +71,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    const auto m(factory::build_single_type_model(0, ot));
+    const auto m(factory.build_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
@@ -111,20 +84,20 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enum_info) {
     const auto e(c.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(factory.is_type_n(0, e.name()));
     BOOST_CHECK(!e.documentation().empty());
     BOOST_REQUIRE(e.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(e.namespaces().front()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().front()));
     BOOST_REQUIRE(e.enumerators().size() == 2);
-    BOOST_CHECK(is_type_zero(e.enumerators().front().name()));
-    BOOST_CHECK(is_type_one(e.enumerators().back().name()));
+    BOOST_CHECK(factory.is_type_n(0, e.enumerators().front().name()));
+    BOOST_CHECK(factory.is_type_n(1, e.enumerators().back().name()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_enumeration_in_one_module_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_one_module_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    const auto m(factory::build_single_type_model_in_module(0, ot, 1));
+    const auto m(factory.build_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
@@ -135,22 +108,22 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_one_module_results_in_expected_
     const auto e(c.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(factory.is_type_n(0, e.name()));
     BOOST_CHECK(!e.documentation().empty());
     BOOST_REQUIRE(e.namespaces().size() == 2);
-    BOOST_CHECK(is_model_zero(e.namespaces().front()));
-    BOOST_CHECK(is_module_zero(e.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().front()));
+    BOOST_CHECK(factory.is_module_n(0, e.namespaces().back()));
 
     BOOST_REQUIRE(e.enumerators().size() == 2);
-    BOOST_CHECK(is_type_zero(e.enumerators().front().name()));
-    BOOST_CHECK(is_type_one(e.enumerators().back().name()));
+    BOOST_CHECK(factory.is_type_n(0, e.enumerators().front().name()));
+    BOOST_CHECK(factory.is_type_n(1, e.enumerators().back().name()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_enumeration_in_multiple_modules_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_multiple_modules_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    const auto m(factory::build_single_type_model_in_module(0, ot, 2));
+    const auto m(factory.build_single_type_model_in_module(0, ot, 2));
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
@@ -162,22 +135,22 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_multiple_modules_results_in_exp
     const auto e(c.enumerations().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(factory.is_type_n(0, e.name()));
     BOOST_CHECK(!e.documentation().empty());
     BOOST_REQUIRE(e.namespaces().size() == 3);
-    BOOST_CHECK(is_model_zero(e.namespaces().front()));
-    BOOST_CHECK(is_module_one(e.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().front()));
+    BOOST_CHECK(factory.is_module_n(1, e.namespaces().back()));
 
     BOOST_REQUIRE(e.enumerators().size() == 2);
-    BOOST_CHECK(is_type_zero(e.enumerators().front().name()));
-    BOOST_CHECK(is_type_one(e.enumerators().back().name()));
+    BOOST_CHECK(factory.is_type_n(0, e.enumerators().front().name()));
+    BOOST_CHECK(factory.is_type_n(1, e.enumerators().back().name()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_module_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_external_module_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    auto m(factory::build_single_type_model_in_module(0, ot));
+    auto m(factory.build_single_type_model_in_module(0, ot));
     BOOST_REQUIRE(m.enumerations().size() == 1);
     auto& enumeration(m.enumerations().begin()->second);
     enumeration.name().external_module_path().push_back(external_module);
@@ -192,14 +165,14 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_module_results_in_expe
 
     BOOST_REQUIRE(e.namespaces().size() == 2);
     BOOST_CHECK(e.namespaces().front() == external_module);
-    BOOST_CHECK(is_model_zero(e.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory::build_single_type_model(0, ot));
+    const auto m(factory.build_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -210,17 +183,17 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) 
     const auto e(c.exceptions().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(factory.is_type_n(0, e.name()));
     BOOST_CHECK(!e.documentation().empty());
     BOOST_REQUIRE(e.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(e.namespaces().front()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().front()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_exception_in_one_module_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_one_module_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory::build_single_type_model_in_module(0, ot, 1));
+    const auto m(factory.build_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -231,18 +204,18 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_one_module_results_in_expected_ex
     const auto e(c.exceptions().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(factory.is_type_n(0, e.name()));
     BOOST_CHECK(!e.documentation().empty());
     BOOST_REQUIRE(e.namespaces().size() == 2);
-    BOOST_CHECK(is_model_zero(e.namespaces().front()));
-    BOOST_CHECK(is_module_zero(e.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().front()));
+    BOOST_CHECK(factory.is_module_n(0, e.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_exception_in_multiple_modules_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_multiple_modules_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory::build_single_type_model_in_module(0, ot, 2));
+    const auto m(factory.build_single_type_model_in_module(0, ot, 2));
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -253,18 +226,18 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_multiple_modules_results_in_expec
     const auto e(c.exceptions().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(factory.is_type_n(0, e.name()));
     BOOST_CHECK(!e.documentation().empty());
     BOOST_REQUIRE(e.namespaces().size() == 3);
-    BOOST_CHECK(is_model_zero(e.namespaces().front()));
-    BOOST_CHECK(is_module_one(e.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().front()));
+    BOOST_CHECK(factory.is_module_n(1, e.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_exception_in_external_module_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_external_module_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    auto m(factory::build_single_type_model_in_module(0, ot));
+    auto m(factory.build_single_type_model_in_module(0, ot));
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& exception(*m.objects().begin()->second);
     exception.name().external_module_path().push_back(external_module);
@@ -279,14 +252,14 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_external_module_results_in_expect
 
     BOOST_REQUIRE(e.namespaces().size() == 2);
     BOOST_CHECK(e.namespaces().front() == external_module);
-    BOOST_CHECK(is_model_zero(e.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, e.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_module_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_module_results_in_expected_namespace_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory::build_single_type_model_in_module(0, ot, 1));
+    const auto m(factory.build_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.modules().size() == 1);
 
@@ -298,24 +271,25 @@ BOOST_AUTO_TEST_CASE(transforming_module_results_in_expected_namespace_info) {
     BOOST_LOG_SEV(lg, debug) << "namespace: " << n;
     BOOST_CHECK(!n.documentation().empty());
     BOOST_REQUIRE(n.namespaces().size() == 2);
-    BOOST_CHECK(is_model_zero(n.namespaces().front()));
-    BOOST_CHECK(is_module_zero(n.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, n.namespaces().front()));
+    BOOST_CHECK(factory.is_module_n(0, n.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_module_in_module_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_module_in_module_results_in_expected_namespace_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory::build_single_type_model_in_module(0, ot, 2));
+    const auto m(factory.build_single_type_model_in_module(0, ot, 2));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.modules().size() == 2);
 
     auto i(m.modules().begin());
-    if (!is_module_one(i->first.simple_name()) && i != m.modules().end())
+    if (!factory.is_module_n(1, i->first.simple_name())
+        && i != m.modules().end())
         ++i;
 
     BOOST_REQUIRE(i != m.modules().end());
-    BOOST_REQUIRE(is_module_one(i->first.simple_name()));
+    BOOST_REQUIRE(factory.is_module_n(1, i->first.simple_name()));
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
@@ -328,20 +302,20 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_module_results_in_expected_namespace
     BOOST_CHECK(!n.documentation().empty());
     BOOST_REQUIRE(n.namespaces().size() == 3);
     auto j(n.namespaces().begin());
-    BOOST_CHECK(is_model_zero(*j));
+    BOOST_CHECK(factory.is_model_n(0, *j));
 
     ++j;
-    BOOST_CHECK(is_module_zero(*j));
+    BOOST_CHECK(factory.is_module_n(0, *j));
 
     ++j;
-    BOOST_CHECK(is_module_one(*j));
+    BOOST_CHECK(factory.is_module_n(1, *j));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_model_results_in_expected_namespace_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory::build_single_type_model_in_module(0, ot));
+    const auto m(factory.build_single_type_model_in_module(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;
@@ -354,14 +328,14 @@ BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_namespace_info) {
 
     BOOST_CHECK(!n.documentation().empty());
     BOOST_REQUIRE(n.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(n.namespaces().front()));
+    BOOST_CHECK(factory.is_model_n(0, n.namespaces().front()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_module_in_external_module_results_in_expected_namespace_info");
 
     const auto ot(object_types::value_object);
-    auto m(factory::build_single_type_model_in_module(0, ot, 1));
+    auto m(factory.build_single_type_model_in_module(0, ot, 1));
     m.name().external_module_path().push_back(external_module);
     BOOST_REQUIRE(m.modules().size() == 1);
     auto module(m.modules().begin()->second);
@@ -383,10 +357,10 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_
     BOOST_CHECK(*j == external_module);
 
     ++j;
-    BOOST_CHECK(is_model_zero(*j));
+    BOOST_CHECK(factory.is_model_n(0, *j));
 
     ++j;
-    BOOST_CHECK(is_module_zero(*j));
+    BOOST_CHECK(factory.is_module_n(0, *j));
 
     c.namespaces().clear();
     t.model_to_namespace_info();
@@ -396,13 +370,13 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_
 
     BOOST_REQUIRE(n1.namespaces().size() == 2);
     BOOST_CHECK(n1.namespaces().front() == external_module);
-    BOOST_CHECK(is_model_zero(n1.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, n1.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_object_results_in_expected_class_info");
 
-    auto m(factory::build_single_type_model_in_module());
+    auto m(factory.build_single_type_model_in_module());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;
@@ -412,10 +386,10 @@ BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
     BOOST_REQUIRE(c.classes().size() == 1);
     const auto ci(c.classes().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "class: " << ci;
-    BOOST_CHECK(is_type_zero(ci.name()));
+    BOOST_CHECK(factory.is_type_n(0, ci.name()));
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(ci.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
 
     BOOST_CHECK(ci.properties().empty());
     BOOST_CHECK(ci.all_properties().empty());
@@ -438,11 +412,11 @@ BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
 BOOST_AUTO_TEST_CASE(transforming_object_with_property_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_object_with_property_results_in_expected_class_info");
 
-    auto m(factory::object_with_property());
+    auto m(factory.object_with_property());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     auto i(m.objects().begin());
-    if (!is_type_zero(i->first.simple_name()) && i != m.objects().end())
+    if (!factory.is_type_n(0, i->first.simple_name()) && i != m.objects().end())
         ++i;
 
     BOOST_REQUIRE(i != m.objects().end());
@@ -475,10 +449,10 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_property_results_in_expected_class
     BOOST_CHECK(!type.is_smart_pointer());
     BOOST_CHECK(type.children().empty());
 
-    BOOST_CHECK(is_type_zero(ci.name()));
+    BOOST_CHECK(factory.is_type_n(0, ci.name()));
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(ci.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
     BOOST_CHECK(!ci.has_primitive_properties());
     BOOST_CHECK(!ci.requires_stream_manipulators());
     BOOST_CHECK(!ci.requires_manual_move_constructor());
@@ -500,11 +474,11 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_bool_property_results_in_expected_
 
     auto ot(object_types::value_object);
     auto pt(property_types::boolean);
-    auto m(factory::object_with_property(ot, pt));
+    auto m(factory.object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     auto i(m.objects().begin());
-    if (!is_type_zero(i->first.simple_name()) && i != m.objects().end())
+    if (!factory.is_type_n(0, i->first.simple_name()) && i != m.objects().end())
         ++i;
 
     BOOST_REQUIRE(i != m.objects().end());
@@ -541,10 +515,10 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_bool_property_results_in_expected_
     BOOST_CHECK(!type.is_smart_pointer());
     BOOST_CHECK(type.children().empty());
 
-    BOOST_CHECK(is_type_zero(ci.name()));
+    BOOST_CHECK(factory.is_type_n(0, ci.name()));
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(ci.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
     BOOST_CHECK(ci.has_primitive_properties());
     BOOST_CHECK(ci.requires_stream_manipulators());
     BOOST_CHECK(!ci.requires_manual_move_constructor());
@@ -565,12 +539,12 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
     SETUP_TEST_LOG_SOURCE("transforming_object_unsigned_int_with_property_results_in_expected_class_info");
 
     auto ot(object_types::value_object);
-    auto pt(factory::property_types::unsigned_int);
-    auto m(factory::object_with_property(ot, pt));
+    auto pt(property_types::unsigned_int);
+    auto m(factory.object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     auto i(m.objects().begin());
-    if (!is_type_zero(i->first.simple_name()) && i != m.objects().end())
+    if (!factory.is_type_n(0, i->first.simple_name()) && i != m.objects().end())
         ++i;
 
     BOOST_REQUIRE(i != m.objects().end());
@@ -606,10 +580,10 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
     BOOST_CHECK(!type.is_smart_pointer());
     BOOST_CHECK(type.children().empty());
 
-    BOOST_CHECK(is_type_zero(ci.name()));
+    BOOST_CHECK(factory.is_type_n(0, ci.name()));
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(ci.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
     BOOST_CHECK(ci.has_primitive_properties());
     BOOST_CHECK(!ci.requires_stream_manipulators());
     BOOST_CHECK(!ci.requires_manual_move_constructor());
@@ -630,12 +604,12 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
     SETUP_TEST_LOG_SOURCE("transforming_object_boost_variant_with_property_results_in_expected_class_info");
 
     auto ot(object_types::value_object);
-    auto pt(factory::property_types::boost_variant);
-    auto m(factory::object_with_property(ot, pt));
+    auto pt(property_types::boost_variant);
+    auto m(factory.object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     auto i(m.objects().begin());
-    if (!is_type_zero(i->first.simple_name()) && i != m.objects().end())
+    if (!factory.is_type_n(0, i->first.simple_name()) && i != m.objects().end())
         ++i;
 
     BOOST_REQUIRE(i != m.objects().end());
@@ -673,10 +647,10 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
     BOOST_CHECK(!type.is_smart_pointer());
     BOOST_CHECK(type.children().size() == 2);
 
-    BOOST_CHECK(is_type_zero(ci.name()));
+    BOOST_CHECK(factory.is_type_n(0, ci.name()));
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(ci.namespaces().back()));
+    BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
     BOOST_CHECK(!ci.has_primitive_properties());
     BOOST_CHECK(ci.requires_stream_manipulators()); // FIXME: not sure
     BOOST_CHECK(ci.requires_manual_move_constructor());
@@ -696,14 +670,14 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
 BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_object_with_parent_results_in_expected_class_info");
 
-    auto m(factory::object_with_parent_in_the_same_model(true));
+    auto m(factory.object_with_parent_in_the_same_model(true));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
     bool found_one(false);
     for (const auto& pair : m.objects()) {
-        if (is_type_one(pair.first.simple_name())) {
+        if (factory.is_type_n(1, pair.first.simple_name())) {
             found_one = true;
             t.from_type(*pair.second);
 
@@ -713,7 +687,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
             const auto c1(i->second);
             BOOST_LOG_SEV(lg, debug) << "class 1: " << c1;
 
-            BOOST_CHECK(is_type_one(c1.name()));
+            BOOST_CHECK(factory.is_type_n(1, c1.name()));
             BOOST_CHECK(c1.all_properties().size() == 1);
             BOOST_CHECK(c1.properties().size() == 1);
             BOOST_CHECK(c1.parents().empty());
@@ -728,7 +702,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
 
     bool found_zero(false);
     for (const auto& pair : m.objects()) {
-        if (is_type_zero(pair.first.simple_name())) {
+        if (factory.is_type_n(0, pair.first.simple_name())) {
             found_zero = true;
             t.from_type(*pair.second);
 
@@ -738,13 +712,13 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
             const auto c0(i->second);
             BOOST_LOG_SEV(lg, debug) << "class 0: " << c0;
 
-            BOOST_CHECK(is_type_zero(c0.name()));
+            BOOST_CHECK(factory.is_type_n(0, c0.name()));
             BOOST_CHECK(c0.all_properties().size() == 2);
             BOOST_CHECK(c0.properties().size() == 1);
             BOOST_CHECK(c0.parents().size() == 1);
             BOOST_CHECK(!c0.is_parent());
-            BOOST_CHECK(is_type_one(c0.parents().front().name()));
-            BOOST_CHECK(is_type_one(c0.original_parent_name()));
+            BOOST_CHECK(factory.is_type_n(1, c0.parents().front().name()));
+            BOOST_CHECK(factory.is_type_n(1, c0.original_parent_name()));
             BOOST_CHECK(!c0.original_parent_name_qualified().empty());
             BOOST_CHECK(c0.leaves().empty());
             BOOST_CHECK(!c0.is_original_parent_visitable());
@@ -756,7 +730,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
 BOOST_AUTO_TEST_CASE(not_supplying_parent_class_info_for_type_with_parent_throws) {
     SETUP_TEST_LOG_SOURCE("not_supplying_parent_class_info_for_type_with_parent_throws");
 
-    auto m(factory::object_with_parent_in_the_same_model(true));
+    auto m(factory.object_with_parent_in_the_same_model(true));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
 
@@ -764,7 +738,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_parent_class_info_for_type_with_parent_throws
     dogen::sml_to_cpp::transformer t(m, c);
     bool found_zero(false);
     for (const auto& pair : m.objects()) {
-        if (is_type_zero(pair.first.simple_name())) {
+        if (factory.is_type_n(0, pair.first.simple_name())) {
             found_zero = true;
             using dogen::sml_to_cpp::transformation_error;
             contains_checker<transformation_error> cc(no_parent_info);
@@ -778,15 +752,14 @@ BOOST_AUTO_TEST_CASE(not_supplying_parent_class_info_for_type_with_parent_throws
 BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_third_degree_object_results_in_expected_class_info");
 
-    auto m(factory::
-        object_with_third_degree_parent_in_same_model(true));
+    auto m(factory.object_with_third_degree_parent_in_same_model(true));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
     bool found_three(false);
     for (const auto& pair : m.objects()) {
-        if (is_type_three(pair.first.simple_name())) {
+        if (factory.is_type_n(3, pair.first.simple_name())) {
             found_three = true;
             t.from_type(*pair.second);
         }
@@ -795,7 +768,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
 
     bool found_two(false);
     for (const auto& pair : m.objects()) {
-        if (is_type_two(pair.first.simple_name())) {
+        if (factory.is_type_n(2, pair.first.simple_name())) {
             found_two = true;
             t.from_type(*pair.second);
         }
@@ -804,7 +777,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
 
     bool found_one(false);
     for (const auto& pair : m.objects()) {
-        if (is_type_one(pair.first.simple_name())) {
+        if (factory.is_type_n(1, pair.first.simple_name())) {
             found_one = true;
             t.from_type(*pair.second);
         }
@@ -813,7 +786,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
 
     bool found_zero(false);
     for (const auto& pair : m.objects()) {
-        if (is_type_zero(pair.first.simple_name())) {
+        if (factory.is_type_n(0, pair.first.simple_name())) {
             found_zero = true;
             t.from_type(*pair.second);
         }
@@ -823,9 +796,9 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
     BOOST_REQUIRE(c.classes().size() == 4);
     for (const auto& pair : c.classes()) {
         const auto& ci(pair.second);
-        if (is_type_three(ci.name())) {
+        if (factory.is_type_n(3, ci.name())) {
             BOOST_LOG_SEV(lg, debug) << "class 3: " << ci;
-            BOOST_CHECK(is_type_three(ci.name()));
+            BOOST_CHECK(factory.is_type_n(3, ci.name()));
             BOOST_CHECK(ci.all_properties().size() == 1);
             BOOST_CHECK(ci.properties().size() == 1);
             BOOST_CHECK(ci.parents().empty());
@@ -834,38 +807,38 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
             BOOST_CHECK(ci.original_parent_name_qualified().empty());
             BOOST_REQUIRE(ci.leaves().size() == 1);
             BOOST_CHECK(ends_with_type_zero(ci.leaves().front()));
-        } else if (is_type_two(ci.name())) {
+        } else if (factory.is_type_n(2, ci.name())) {
             BOOST_LOG_SEV(lg, debug) << "class 2: " << ci;
             BOOST_CHECK(ci.all_properties().size() == 2);
             BOOST_CHECK(ci.properties().size() == 1);
             BOOST_CHECK(!ci.parents().empty());
             BOOST_CHECK(ci.is_parent());
-            BOOST_CHECK(is_type_three(ci.original_parent_name()));
+            BOOST_CHECK(factory.is_type_n(3, ci.original_parent_name()));
             BOOST_CHECK(!ci.original_parent_name_qualified().empty());
             BOOST_REQUIRE(ci.leaves().size() == 1);
             BOOST_CHECK(ends_with_type_zero(ci.leaves().front()));
-        } else if (is_type_one(ci.name())) {
+        } else if (factory.is_type_n(1, ci.name())) {
             found_one = true;
             BOOST_LOG_SEV(lg, debug) << "class 1: " << ci;
-            BOOST_CHECK(is_type_one(ci.name()));
+            BOOST_CHECK(factory.is_type_n(1, ci.name()));
             BOOST_CHECK(ci.all_properties().size() == 3);
             BOOST_CHECK(ci.properties().size() == 1);
             BOOST_REQUIRE(ci.parents().size() == 1);
             BOOST_CHECK(ci.is_parent());
-            BOOST_CHECK(is_type_two(ci.parents().front().name()));
-            BOOST_CHECK(is_type_three(ci.original_parent_name()));
+            BOOST_CHECK(factory.is_type_n(2, ci.parents().front().name()));
+            BOOST_CHECK(factory.is_type_n(3, ci.original_parent_name()));
             BOOST_CHECK(!ci.original_parent_name_qualified().empty());
             BOOST_REQUIRE(ci.leaves().size() == 1);
             BOOST_CHECK(ends_with_type_zero(ci.leaves().front()));
-        } else if (is_type_zero(ci.name())) {
+        } else if (factory.is_type_n(0, ci.name())) {
             BOOST_LOG_SEV(lg, debug) << "class 0: " << ci;
-            BOOST_CHECK(is_type_zero(ci.name()));
+            BOOST_CHECK(factory.is_type_n(0, ci.name()));
             BOOST_CHECK(ci.all_properties().size() == 4);
             BOOST_CHECK(ci.properties().size() == 1);
             BOOST_REQUIRE(ci.parents().size() == 1);
             BOOST_CHECK(!ci.is_parent());
-            BOOST_CHECK(is_type_one(ci.parents().front().name()));
-            BOOST_CHECK(is_type_three(ci.original_parent_name()));
+            BOOST_CHECK(factory.is_type_n(1, ci.parents().front().name()));
+            BOOST_CHECK(factory.is_type_n(3, ci.original_parent_name()));
             BOOST_CHECK(!ci.original_parent_name_qualified().empty());
             BOOST_CHECK(ci.leaves().empty());
         }

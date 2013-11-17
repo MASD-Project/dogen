@@ -34,19 +34,13 @@
 #include "dogen/om/io/file_io.hpp"
 #include "dogen/om/types/workflow.hpp"
 
-using dogen::sml::test::mock_model_factory;
-
 namespace {
 
 const std::string test_module("om");
 const std::string test_suite("workflow_spec");
-const std::string header_extension(".hpp");
 
-const std::string licence_name("gpl_v2");
-const std::string modeline_group_name("emacs");
-const std::string marker("SAMPLE_MARKER");
-const std::string copyright_holders(
-    "Copyright (C) 2012 Person <name@company.co.uk>");
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory factory;
 
 const std::string type_with_no_properties(
     R"(/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -129,48 +123,6 @@ namespace some_model_0 {
 #endif
 )");
 
-bool is_file_for_qname(const boost::filesystem::path& p,
-    const dogen::sml::qname& qn) {
-    std::string fn;
-
-    if (qn.simple_name().empty())
-        fn = qn.model_name();
-    else
-        fn = qn.simple_name();
-
-    fn += header_extension;
-    return boost::algorithm::ends_with(p.generic_string(), fn);
-}
-
-std::string filename_for_qname(const dogen::sml::qname& qn) {
-    boost::filesystem::path r;
-    for (const auto& p : qn.external_module_path())
-        r /= p;
-
-    r /= qn.model_name();
-
-    if (qn.simple_name().empty())
-        r /= qn.model_name();
-    else
-        r /= qn.simple_name();
-
-    r.replace_extension(header_extension);
-    return r.generic_string();
-}
-
-template<typename Taggable>
-void add_test_tags(Taggable& t) {
-    dogen::sml::meta_data_writer writer(t.meta_data());
-    writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
-        filename_for_qname(t.name()));
-    writer.add(dogen::sml::tags::licence_name, licence_name);
-    writer.add(dogen::sml::tags::copyright_holder, copyright_holders);
-    writer.add(dogen::sml::tags::modeline_group_name, modeline_group_name);
-    writer.add(dogen::sml::tags::code_generation_marker, marker);
-    writer.add(dogen::sml::tags::generate_preamble,
-        dogen::sml::tags::bool_true);
-}
-
 }
 
 using namespace dogen::om;
@@ -185,15 +137,14 @@ BOOST_AUTO_TEST_CASE(empty_mock_model_results_in_expected_files) {
     const std::list<boost::filesystem::path> d = { data_files_directory() };
     dogen::om::workflow w(d);
 
-    auto m(mock_model_factory::build_empty_model());
-    add_test_tags(m);
+    auto m(factory.build_empty_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     const auto r(w.execute(m));
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
 
     BOOST_REQUIRE(r.size() == 1);
-    BOOST_CHECK(is_file_for_qname(r.front().relative_path(), m.name()));
+    BOOST_CHECK(factory.is_file_for_qname(r.front().relative_path(), m.name()));
 
     BOOST_LOG_SEV(lg, debug) << "expected: <start>" << model_with_comments
                              << "<end>";
@@ -208,12 +159,10 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
     using namespace dogen::utility::filesystem;
     const std::list<boost::filesystem::path> d = { data_files_directory() };
     dogen::om::workflow w(d);
-    auto m(mock_model_factory::build_single_type_model());
-    add_test_tags(m);
+    auto m(factory.build_single_type_model());
 
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& o(*(m.objects().begin()->second));
-    add_test_tags(o);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     const auto r(w.execute(m));
@@ -222,7 +171,7 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
 
     bool found_model(false), found_type(false);
     for (const auto& f : r) {
-        if (is_file_for_qname(f.relative_path(), m.name())) {
+        if (factory.is_file_for_qname(f.relative_path(), m.name())) {
             found_model = true;
             BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                                      << model_with_comments
@@ -231,7 +180,7 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
                                      << f.contents()
                                      << "<end>";
             BOOST_CHECK(model_with_comments == f.contents());
-        } else if (is_file_for_qname(f.relative_path(), o.name())) {
+        } else if (factory.is_file_for_qname(f.relative_path(), o.name())) {
             found_type = true;
             BOOST_LOG_SEV(lg, debug) << "expected: <start>"
                                      << type_with_no_properties

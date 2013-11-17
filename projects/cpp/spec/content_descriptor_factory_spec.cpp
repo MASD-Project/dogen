@@ -39,6 +39,9 @@ namespace {
 const std::string test_module("cpp");
 const std::string test_suite("content_descriptor_factory_spec");
 
+using dogen::sml::test::mock_model_factory;
+const mock_model_factory model_factory;
+
 }
 
 using dogen::sml::test::mock_model_factory;
@@ -50,7 +53,7 @@ BOOST_AUTO_TEST_SUITE(content_descriptor_factory)
 BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_all_facets_enabled_produces_expected_results) {
     SETUP_TEST_LOG_SOURCE("creating_content_descriptor_with_all_facets_enabled_produces_expected_results");
 
-    const auto qn(mock_model_factory::build_qname());
+    const auto qn(model_factory.build_qname());
     BOOST_LOG_SEV(lg, debug) << "qname: " << qn;
 
     const auto ft(mock_settings_factory::build_facets());
@@ -69,7 +72,7 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_all_facets_enabled_produce
 BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_some_facets_enabled_produces_expected_results) {
     SETUP_TEST_LOG_SOURCE("creating_content_descriptor_with_some_facets_enabled_produces_expected_results");
 
-    const auto qn(mock_model_factory::build_qname());
+    const auto qn(model_factory.build_qname());
     BOOST_LOG_SEV(lg, debug) << "qname: " << qn;
 
     const auto ft(mock_settings_factory::build_facets(false));
@@ -88,7 +91,7 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_some_facets_enabled_produc
 BOOST_AUTO_TEST_CASE(creating_content_descriptor_from_model_produces_expected_results) {
     SETUP_TEST_LOG_SOURCE("creating_content_descriptor_from_model_produces_expected_results");
 
-    const auto m(mock_model_factory::build_single_type_model());
+    const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     const auto ft(mock_settings_factory::build_facets());
