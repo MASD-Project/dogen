@@ -196,6 +196,7 @@ code from =extrator= and =transformer= (leaf processing) into
 - add support for mock models with concepts
 
 **** IMPLEMENTATION Add unit tests for the indexing of modeled concepts :task:
+     CLOCK: [2013-11-17 Sun 22:42]--[2013-11-17 Sun 23:05] =>  0:23
      CLOCK: [2013-11-17 Sun 22:39]--[2013-11-17 Sun 22:42] =>  0:03
      CLOCK: [2013-11-17 Sun 22:00]--[2013-11-17 Sun 22:39] =>  0:39
      CLOCK: [2013-11-15 Fri 07:52]--[2013-11-15 Fri 08:00] =>  0:08

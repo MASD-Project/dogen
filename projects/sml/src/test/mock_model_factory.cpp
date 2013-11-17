@@ -757,8 +757,10 @@ object_with_property(const object_types ot, const property_types pt) const {
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
     }
-    o0->all_properties().push_back(p);
+
     o0->local_properties().push_back(p);
+    if (indexed_)
+        o0->all_properties().push_back(p);
 
     model r(build_empty_model(0));
     insert_object(r, o0);
