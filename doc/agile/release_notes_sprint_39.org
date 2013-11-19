@@ -1,0 +1,71 @@
+#+title: Release Notes for Sprint 39
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 39.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-11-19 Tue 08:03]
+
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:06* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:06 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:06 |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-11-19 Tue 07:56]--[2013-11-19 Tue 08:02] =>  0:06
+
+*** IMPLEMENTATION Finish indexer class and plug it to SML workflow   :story:
+
+Create a class called =indexer=, responsible for taking in a merged
+model and populating the index property of all things Indexable. Move
+code from =extrator= and =transformer= (leaf processing) into
+=indexer=.
+
+**** IMPLEMENTATION Finish adding unit tests for  modeled concepts     :task:
+**** Add unit tests for the indexing of properties                     :task:
+**** Add unit tests for the indexing of relationships                  :task:
+
+**** Plug indexer into workflow                                        :task:
+**** Update transformer to populate basic relationships                :task:
+**** Implement indexing of associations, keys and visitor              :task:
+*** Replace existing structures with indexing ones                    :story:
+
+Make use of the indexing information in legacy C++ formatters as a way
+to validate that it is correct.
+
+**** Create a helper class to handle relationships                     :task:
+
+- =find_relationship=: gets a specific relationship container, returns
+  empty if it does not exist.
+- =find_relationship_strict=: gets a specific relationship container,
+  throws if it does not exist.
+
+**** Replace original parent/parent functionality with relationships   :task:
+
+- delete leaves, original parent, parent attributes and use
+  relationships instead.
+
+**** Replace the concepts expansion code with relationships            :task:
+**** Replace C++ property handling code with relationships             :task:
+**** Replace association, keys and visitor with relationships          :task:
+
+*** Add include file support to main type formatter                   :story:
+
+Inclusion support needs to be moved to the formatters. SML provides
+all the required information at the model level in terms of type
+dependencies, but only the formatter itself knows what includes it
+needs because these are related to the implementation. Even
+determining which facets of a type one should include is formatter
+dependent. We need to distribute the logic of the includer into each
+formatter.
+
+** Deprecated Development Stories

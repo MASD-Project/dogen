@@ -8,8 +8,21 @@
 
 Stories that we intend to look at, at some point.
 
+*** OM: Add tests for properties and compiler generated functions     :story:
 
-*** Add tests for empty objects                                       :story:
+We need to ensure the generation of properties and compiler generated
+functions works correct in types formatter.
+
+*** OM: Add tests for module in model                                 :story:
+
+We need to ensure we handle namespaces correctly in types formatter.
+
+*** OM: Add tests for tagging of abstract objects                     :story:
+
+We should explore the different meta data tags that affect the types
+formatter in the unit tests.
+
+*** Sanitizer: Add tests for empty objects                            :story:
 
 This was mainly in the context of IO but could be useful for other
 facets. Example:
