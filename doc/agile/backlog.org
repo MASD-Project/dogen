@@ -8,6 +8,23 @@
 
 Stories that we intend to look at, at some point.
 
+*** Self-contained build files                                        :story:
+
+It would be nice to be able to generate a complete application from a
+given model, or a library. At present there is an expectation that the
+user will slot in the generated CMake files into a larger, more
+comprehensive CMake build. All we need is:
+
+- some kind of binary type: e.g. executable or library. we should have
+  this anyway. meta data at the model level could be used to convey
+  this.
+- if executable, we should automatically ignore a main.cpp in the
+  source directory.
+- generate a stand-alone CMake template.
+
+The idea is that with this the user could immediately generate a
+binary without any further configuration required.
+
 *** OM: Add tests for properties and compiler generated functions     :story:
 
 We need to ensure the generation of properties and compiler generated
