@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 39.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-19 Tue 08:40]
+Clock summary at [2013-11-19 Tue 18:24]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *0:40* |      |      |
+| *Total time*                                                    | *1:22* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                 |        | 0:40 |      |
+| Development Stories Implemented                                 |        | 1:22 |      |
 | IMPLEMENTATION Release notes and backlog grooming               |        |      | 0:06 |
-| IMPLEMENTATION Finish indexer class and plug it to SML workflow |        |      | 0:34 |
+| IMPLEMENTATION Finish indexer class and plug it to SML workflow |        |      | 1:16 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -32,6 +32,7 @@ code from =extrator= and =transformer= (leaf processing) into
 =indexer=.
 
 **** IMPLEMENTATION Finish adding unit tests for  modeled concepts     :task:
+     CLOCK: [2013-11-19 Tue 17:42]--[2013-11-19 Tue 18:24] =>  0:42
      CLOCK: [2013-11-19 Tue 08:06]--[2013-11-19 Tue 08:40] =>  0:34
 
 **** Add unit tests for the indexing of properties                     :task:

@@ -632,7 +632,7 @@ build_first_degree_concepts_model(const unsigned int n) const {
     add_relationship(*o0, c0, mc);
     insert_object(r, o0);
 
-    auto o1(build_value_object(0, r.name()));
+    auto o1(build_value_object(1, r.name()));
     add_property(*o1, indexed_, 2);
     o1->modeled_concepts().push_back(c1.name());
     add_relationship(*o1, c1, mc);

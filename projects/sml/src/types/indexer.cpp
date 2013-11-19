@@ -294,6 +294,9 @@ void indexer::index(abstract_object& /*o*/) {
 
 void indexer::index_refinements(concept& c, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
+    if (processed_qnames.find(c.name()) != processed_qnames.end())
+        return;
+
     c.all_properties().insert(c.all_properties().end(),
         c.local_properties().begin(), c.local_properties().end());
 
@@ -306,8 +309,7 @@ void indexer::index_refinements(concept& c, model& m,
         }
 
         auto& parent(i->second);
-        if (processed_qnames.find(qn) == processed_qnames.end())
-            index_refinements(parent, m, processed_qnames);
+        index_refinements(parent, m, processed_qnames);
 
         c.inherited_properties().insert(std::make_pair(parent.name(),
                 parent.local_properties()));
