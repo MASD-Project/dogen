@@ -10,23 +10,26 @@ This file contains all stories that were closed during sprint 38.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-17 Sun 22:42]
+Clock summary at [2013-11-19 Tue 07:50]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *19:37* |       |       |
+| *Total time*                                                          | *20:02* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 19:37 |       |
-| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:33 |
+| Development Stories Implemented                                       |         | 20:02 |       |
+| COMPLETED Release notes and backlog grooming                          |         |       |  0:35 |
 | COMPLETED Create the =om::annotation= class and update code to use it |         |       |  1:06 |
 | COMPLETED Implement auxiliar data structures required for formatting  |         |       | 11:13 |
 | COMPLETED Fix broken OM formatter tests                               |         |       |  0:24 |
 | COMPLETED Remove new lines from output of property tree               |         |       |  0:37 |
 | COMPLETED Make mock model factory aware of stages in SML pipeline     |         |       |  2:38 |
-| IMPLEMENTATION Create an indexer class and plug it to SML workflow    |         |       |  3:06 |
+| COMPLETED Refactor SML mock factory                                   |         |       |  1:22 |
+| COMPLETED Initial implementation of indexer                           |         |       |  2:07 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-11-19 Tue 07:50]
+    CLOCK: [2013-11-19 Tue 07:48]--[2013-11-19 Tue 07:50] =>  0:02
     CLOCK: [2013-11-15 Fri 08:37]--[2013-11-15 Fri 08:40] =>  0:03
     CLOCK: [2013-11-13 Wed 18:24]--[2013-11-13 Wed 18:50] =>  0:26
     CLOCK: [2013-11-04 Mon 07:47]--[2013-11-04 Mon 07:51] =>  0:04
@@ -179,14 +182,7 @@ as our JSON parser is very dumb. Added code to remove line breaks.
 - handle different stages in the SML pipeline: we can no longer make
   it a static factory.
 
-*** IMPLEMENTATION Create an indexer class and plug it to SML workflow :story:
-
-Create a class called =indexer=, responsible for taking in a merged
-model and populating the index property of all things Indexable. Move
-code from =extrator= and =transformer= (leaf processing) into
-=indexer=.
-
-**** COMPLETED Refactor SML mock factory                              :spike:
+*** COMPLETED Refactor SML mock factory                               :spike:
      CLOSED: [2013-11-14 Thu 07:17]
      CLOCK: [2013-11-14 Thu 07:01]--[2013-11-14 Thu 07:17] =>  0:16
      CLOCK: [2013-11-14 Thu 06:53]--[2013-11-14 Thu 07:01] =>  0:08
@@ -195,52 +191,21 @@ code from =extrator= and =transformer= (leaf processing) into
 - tidy up property generation, insertion into containers etc.
 - add support for mock models with concepts
 
-**** IMPLEMENTATION Add unit tests for the indexing of modeled concepts :task:
+*** COMPLETED Initial implementation of indexer                       :story:
+    CLOSED: [2013-11-19 Tue 07:49]
+
+Create a class called =indexer=, responsible for taking in a merged
+model and populating the index property of all things Indexable. Move
+code from =extrator= and =transformer= (leaf processing) into
+=indexer=.
+
+**** COMPLETED Start adding unit tests for the indexing of modeled concepts :task:
+     CLOSED: [2013-11-19 Tue 07:50]
      CLOCK: [2013-11-17 Sun 22:42]--[2013-11-17 Sun 23:05] =>  0:23
      CLOCK: [2013-11-17 Sun 22:39]--[2013-11-17 Sun 22:42] =>  0:03
      CLOCK: [2013-11-17 Sun 22:00]--[2013-11-17 Sun 22:39] =>  0:39
      CLOCK: [2013-11-15 Fri 07:52]--[2013-11-15 Fri 08:00] =>  0:08
      CLOCK: [2013-11-14 Thu 07:56]--[2013-11-14 Thu 08:50] =>  0:54
 
-**** Add unit tests for the indexing of properties                     :task:
-**** Add unit tests for the indexing of relationships                  :task:
-
-**** Plug indexer into workflow                                        :task:
-**** Update transformer to populate basic relationships                :task:
-**** Implement indexing of associations, keys and visitor              :task:
-*** Replace existing structures with indexing ones                    :story:
-
-Make use of the indexing information in legacy C++ formatters as a way
-to validate that it is correct.
-
-**** Create a helper class to handle relationships                     :task:
-
-- =find_relationship=: gets a specific relationship container, returns
-  empty if it does not exist.
-- =find_relationship_strict=: gets a specific relationship container,
-  throws if it does not exist.
-
-**** Replace original parent/parent functionality with relationships   :task:
-
-- delete leaves, original parent, parent attributes and use
-  relationships instead.
-
-**** Replace the concepts expansion code with relationships            :task:
-**** Replace C++ property handling code with relationships             :task:
-**** Replace association, keys and visitor with relationships          :task:
-
-*** Add include file support to main type formatter                   :story:
-
-Inclusion support needs to be moved to the formatters. SML provides
-all the required information at the model level in terms of type
-dependencies, but only the formatter itself knows what includes it
-needs because these are related to the implementation. Even
-determining which facets of a type one should include is formatter
-dependent. We need to distribute the logic of the includer into each
-formatter.
-
-*** Add tests for properties and compiler generated functions         :story:
-*** Add tests for module in model                                     :story:
-*** Add tests for tagging of abstract objects                         :story:
 
 ** Deprecated Development Stories
