@@ -351,12 +351,12 @@ is_model_n(const unsigned int n, const std::string& s) const {
 }
 
 bool mock_model_factory::
-is_type_n(const unsigned int n, const dogen::sml::qname& qn) const {
-    return is_type_n(n, qn.simple_name());
+is_simple_name_n(const unsigned int n, const dogen::sml::qname& qn) const {
+    return is_simple_name_n(n, qn.simple_name());
 }
 
 bool mock_model_factory::
-is_type_n(const unsigned int n, const std::string& s) const {
+is_simple_name_n(const unsigned int n, const std::string& s) const {
     return simple_name(n) == s;
 }
 
@@ -365,21 +365,21 @@ is_module_n(const unsigned int n, const std::string& s) const {
     return module_name(n) == s;
 }
 
-bool mock_model_factory::is_type_n_unversioned(const unsigned int n,
+bool mock_model_factory::is_simple_name_n_unversioned(const unsigned int n,
     const dogen::sml::qname& qn) const {
     return
         boost::contains(qn.simple_name(), simple_name(n)) &&
         boost::contains(qn.simple_name(), unversioned_postfix);
 }
 
-bool mock_model_factory::is_type_n_versioned(const unsigned int n,
+bool mock_model_factory::is_simple_name_n_versioned(const unsigned int n,
     const dogen::sml::qname& qn) const {
     return
         boost::contains(qn.simple_name(), simple_name(n)) &&
         boost::contains(qn.simple_name(), versioned_postfix);
 }
 
-bool mock_model_factory::is_type_n_visitor(const unsigned int n,
+bool mock_model_factory::is_simple_name_n_visitor(const unsigned int n,
     const dogen::sml::qname& qn) const {
     return
         boost::contains(qn.simple_name(), simple_name(n)) &&
@@ -620,7 +620,7 @@ build_first_degree_concepts_model(const unsigned int n) const {
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
-    add_property(c1, indexed_);
+    add_property(c1, indexed_, 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
@@ -633,6 +633,7 @@ build_first_degree_concepts_model(const unsigned int n) const {
     insert_object(r, o0);
 
     auto o1(build_value_object(0, r.name()));
+    add_property(*o1, indexed_, 2);
     o1->modeled_concepts().push_back(c1.name());
     add_relationship(*o1, c1, mc);
     insert_object(r, o1);
@@ -648,12 +649,12 @@ build_second_degree_concepts_model(const unsigned int n) const {
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
-    add_property(c1, indexed_);
+    add_property(c1, indexed_, 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
     concept c2(build_concept(1, r.name()));
-    add_property(c2, indexed_);
+    add_property(c2, indexed_, 2);
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
@@ -672,6 +673,7 @@ build_second_degree_concepts_model(const unsigned int n) const {
 
     auto o2(build_value_object(2, r.name()));
     o2->modeled_concepts().push_back(c2.name());
+    add_property(*o2, indexed_, 3);
     add_relationship(*o2, c2, mc);
     insert_object(r, o2);
 

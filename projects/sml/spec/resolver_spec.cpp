@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
     bool found(false);
     for (const auto pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_type_n(0, qn)) {
+        if (factory.is_simple_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             BOOST_CHECK(o.local_properties().size() == 1);
             const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
-            BOOST_CHECK(factory.is_type_n(1, prop.type().type()));
+            BOOST_CHECK(factory.is_simple_name_n(1, prop.type().type()));
             BOOST_CHECK(factory.is_model_n(0, prop.type().type()));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
     bool found(false);
     for (const auto pair : combined.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_type_n(0, qn)) {
+        if (factory.is_simple_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
             const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
 
-            BOOST_CHECK(factory.is_type_n(1, prop.type().type()));
+            BOOST_CHECK(factory.is_simple_name_n(1, prop.type().type()));
             BOOST_CHECK(factory.is_model_n(1, prop.type().type()));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     bool found(false);
     for (const auto pair : combined.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_type_n(0, qn)) {
+        if (factory.is_simple_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
@@ -176,7 +176,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
             const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_n(1, *pn));
+            BOOST_CHECK(factory.is_simple_name_n(1, *pn));
             BOOST_CHECK(factory.is_model_n(0, *pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
@@ -200,7 +200,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     bool found(false);
     for (const auto pair : combined.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_type_n(0, qn)) {
+        if (factory.is_simple_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
             const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_n(1, *pn));
+            BOOST_CHECK(factory.is_simple_name_n(1, *pn));
             BOOST_CHECK(factory.is_model_n(1, *pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
@@ -233,7 +233,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
     bool found_two(false);
     for (const auto pair : combined.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_type_n(0, qn)) {
+        if (factory.is_simple_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_one = true;
 
@@ -241,10 +241,10 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_n(1, *pn));
+            BOOST_CHECK(factory.is_simple_name_n(1, *pn));
             BOOST_CHECK(factory.is_model_n(0, *pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
-        } else if (factory.is_type_n(1, qn)) {
+        } else if (factory.is_simple_name_n(1, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_two = true;
 
@@ -252,7 +252,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_n(2, *pn));
+            BOOST_CHECK(factory.is_simple_name_n(2, *pn));
             BOOST_CHECK(factory.is_model_n(0, *pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
@@ -293,7 +293,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     bool found(false);
     for (const auto pair : combined.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_type_n(0, qn)) {
+        if (factory.is_simple_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
             const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_n(1, *pn));
+            BOOST_CHECK(factory.is_simple_name_n(1, *pn));
             BOOST_CHECK(factory.is_model_n(1, *pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }

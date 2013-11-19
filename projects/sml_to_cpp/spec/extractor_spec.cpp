@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
 
     std::array<bool, 2> found({{ false, false }});
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
             found[0] = true;
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(1, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(1, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
             BOOST_CHECK(r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(1, pair.first)) {
+        } else if (factory.is_simple_name_n(1, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(0, *r.leaves().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(0, *r.leaves().begin()));
             BOOST_CHECK(!r.has_std_string());
             BOOST_CHECK(!r.has_variant());
             BOOST_CHECK(r.is_parent());
@@ -191,7 +191,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
     dogen::sml_to_cpp::extractor x(m);
     bool found(false);
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
             BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_CHECK(factory.is_type_n(1, *r.names().begin()));
+            BOOST_CHECK(factory.is_simple_name_n(1, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -243,7 +243,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
             BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
@@ -277,7 +277,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expect
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
             BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
@@ -311,7 +311,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_exp
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
             BOOST_REQUIRE(pair.second->local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(*pair.second));
@@ -346,7 +346,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_h
     bool found(false);
     dogen::sml_to_cpp::extractor x(m);
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
             BOOST_REQUIRE(pair.second->local_properties().size() == 1);
 
@@ -382,7 +382,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_has_one_name_in
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
     BOOST_CHECK(r.names().size() == 1);
-    BOOST_REQUIRE(factory.is_type_n(0, *r.names().begin()));
+    BOOST_REQUIRE(factory.is_simple_name_n(0, *r.names().begin()));
 
     BOOST_CHECK(r.forward_decls().empty());
     BOOST_CHECK(r.keys().empty());
@@ -405,7 +405,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
     dogen::sml_to_cpp::extractor x(m);
     std::array<bool, 2> found({{ false, false }});
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
             found[0] = true;
@@ -413,7 +413,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(0, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(0, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -423,7 +423,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(1, pair.first)) {
+        } else if (factory.is_simple_name_n(1, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
@@ -431,7 +431,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_CHECK(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(1, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(1, *r.names().begin()));
 
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
@@ -458,7 +458,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
 
     std::array<bool, 2> found({{ false, false }});
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
             found[0] = true;
@@ -466,7 +466,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(0, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(0, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -476,7 +476,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(1, pair.first)) {
+        } else if (factory.is_simple_name_n(1, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
@@ -486,8 +486,8 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
             BOOST_CHECK(r.names().size() == 2);
             bool found_0(false), found_1(false);
             for (const auto& n : r.names()) {
-                found_0 = found_0 || factory.is_type_n(0, n);
-                found_1 = found_1 || factory.is_type_n(1, n);
+                found_0 = found_0 || factory.is_simple_name_n(0, n);
+                found_1 = found_1 || factory.is_simple_name_n(1, n);
             }
             BOOST_REQUIRE(found_0 && found_1);
 
@@ -531,7 +531,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
 
     std::array<bool, 4> found({{ false, false, false, false }});
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[0] = true;
@@ -539,7 +539,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(0, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(0, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -549,7 +549,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(1, pair.first)) {
+        } else if (factory.is_simple_name_n(1, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
@@ -559,8 +559,8 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_REQUIRE(r.names().size() == 2);
             bool found_0(false), found_1(false);
             for (const auto& n : r.names()) {
-                found_0 = found_0 || factory.is_type_n(0, n);
-                found_1 = found_1 || factory.is_type_n(1, n);
+                found_0 = found_0 || factory.is_simple_name_n(0, n);
+                found_1 = found_1 || factory.is_simple_name_n(1, n);
             }
             BOOST_REQUIRE(found_0 && found_1);
 
@@ -573,7 +573,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(2, pair.first)) {
+        } else if (factory.is_simple_name_n(2, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[2] = true;
@@ -583,9 +583,9 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_REQUIRE(r.names().size() == 3);
             bool found_0(false), found_1(false), found_2(false);
             for (const auto& n : r.names()) {
-                found_0 = found_0 || factory.is_type_n(0, n);
-                found_1 = found_1 || factory.is_type_n(1, n);
-                found_2 = found_2 || factory.is_type_n(2, n);
+                found_0 = found_0 || factory.is_simple_name_n(0, n);
+                found_1 = found_1 || factory.is_simple_name_n(1, n);
+                found_2 = found_2 || factory.is_simple_name_n(2, n);
             }
             BOOST_REQUIRE(found_0 && found_1 && found_2);
 
@@ -598,7 +598,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(3, pair.first)) {
+        } else if (factory.is_simple_name_n(3, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[3] = true;
@@ -608,10 +608,10 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_REQUIRE(r.names().size() == 4);
             bool found_0(false), found_1(false), found_2(false), found_3(false);
             for (const auto& n : r.names()) {
-                found_0 = found_0 || factory.is_type_n(0, n);
-                found_1 = found_1 || factory.is_type_n(1, n);
-                found_2 = found_2 || factory.is_type_n(2, n);
-                found_3 = found_3 || factory.is_type_n(3, n);
+                found_0 = found_0 || factory.is_simple_name_n(0, n);
+                found_1 = found_1 || factory.is_simple_name_n(1, n);
+                found_2 = found_2 || factory.is_simple_name_n(2, n);
+                found_3 = found_3 || factory.is_simple_name_n(3, n);
             }
             BOOST_REQUIRE(found_0 && found_1 && found_2 && found_3);
 
@@ -640,7 +640,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
 
     std::array<bool, 4> found({{ false, false, false, false }});
     for (const auto& pair : m.objects()) {
-        if (factory.is_type_n(0, pair.first)) {
+        if (factory.is_simple_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[0] = true;
@@ -648,7 +648,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(0, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(0, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -658,7 +658,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(1, pair.first)) {
+        } else if (factory.is_simple_name_n(1, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
@@ -666,7 +666,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(1, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(1, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -676,7 +676,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(2, pair.first)) {
+        } else if (factory.is_simple_name_n(2, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[2] = true;
@@ -684,7 +684,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
-            BOOST_REQUIRE(factory.is_type_n(2, *r.names().begin()));
+            BOOST_REQUIRE(factory.is_simple_name_n(2, *r.names().begin()));
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
             BOOST_CHECK(r.leaves().empty());
@@ -694,7 +694,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_CHECK(!r.is_child());
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
-        } else if (factory.is_type_n(3, pair.first)) {
+        } else if (factory.is_simple_name_n(3, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[3] = true;
@@ -704,10 +704,10 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_REQUIRE(r.names().size() == 4);
             bool found_0(false), found_1(false), found_2(false), found_3(false);
             for (const auto& n : r.names()) {
-                found_0 = found_0 || factory.is_type_n(0, n);
-                found_1 = found_1 || factory.is_type_n(1, n);
-                found_2 = found_2 || factory.is_type_n(2, n);
-                found_3 = found_3 || factory.is_type_n(3, n);
+                found_0 = found_0 || factory.is_simple_name_n(0, n);
+                found_1 = found_1 || factory.is_simple_name_n(1, n);
+                found_2 = found_2 || factory.is_simple_name_n(2, n);
+                found_3 = found_3 || factory.is_simple_name_n(3, n);
             }
             BOOST_REQUIRE(found_0 && found_1 && found_2 && found_3);
 
