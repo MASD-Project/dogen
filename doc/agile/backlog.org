@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Generate Visual Studio solutions                                  :story:
+
+At present we rely on CMake as the C++ meta-build system. There is
+nothing stopping us from supporting more native build systems such as
+Visual Studio. Consider adding direct support for Visual Studio.
+
 *** Self-contained build files                                        :story:
 
 It would be nice to be able to generate a complete application from a
