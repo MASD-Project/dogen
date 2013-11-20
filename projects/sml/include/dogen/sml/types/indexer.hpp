@@ -96,17 +96,9 @@ private:
     void remove_duplicates(std::list<qname>& names) const;
 
     /**
-     * @brief Given a concept, adds all the properties associated with
-     * that concept.
-     */
-    void properties_for_concept(const sml::qname& qn,
-        std::list<sml::property>& properties,
-        std::unordered_set<sml::qname>& processed_qnames, const model& m) const;
-
-    /**
      * @brief Populates the all properties container.
      */
-    void populate_all_properties(abstract_object& o, const model& m);
+    void populate_all_properties(abstract_object& o, model& m);
 
 private:
     /**

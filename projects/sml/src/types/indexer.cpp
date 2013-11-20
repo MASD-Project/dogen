@@ -23,6 +23,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/lexical_cast.hpp>
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
@@ -98,37 +99,24 @@ concept& indexer::find_concept(const qname& qn, model& m) {
 
 void indexer::remove_duplicates(std::list<qname>& names) const {
     std::unordered_set<sml::qname> processed;
+
+    BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
+                             << names.size();
+
     for (auto i(names.begin()); i != names.end(); ++i) {
         if (processed.find(*i) != processed.end()) {
-            names.erase(i); // FIXME: check
+            names.erase(i); // iterator is ok after erase
             continue;
         }
         processed.insert(*i);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
+                             << names.size();
+
 }
 
-void indexer::properties_for_concept(const sml::qname& qn,
-    std::list<sml::property>& properties,
-    std::unordered_set<sml::qname>& processed_qnames,
-    const model& m) const {
-
-    if (processed_qnames.find(qn) != processed_qnames.end())
-        return;
-
-    processed_qnames.insert(qn);
-    const auto i(m.concepts().find(qn));
-    if (i == m.concepts().end()) {
-        const auto& sn(qn.simple_name());
-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
-    }
-
-    const auto& concept(i->second);
-    const auto& cp(concept.local_properties());
-    properties.insert(properties.end(), cp.begin(), cp.end());
-}
-
-void indexer::populate_all_properties(abstract_object& o, const model& m) {
+void indexer::populate_all_properties(abstract_object& o, model& m) {
     for (const auto& pair : o.inherited_properties()) {
         o.all_properties().insert(o.all_properties().end(),
             pair.second.begin(), pair.second.end());
@@ -139,33 +127,25 @@ void indexer::populate_all_properties(abstract_object& o, const model& m) {
 
     const auto rt(relationship_types::modeled_concepts);
     const auto i(o.relationships().find(rt));
-    if (i == o.relationships().end())
+    if (i == o.relationships().end() || i->second.empty())
         return;
 
     std::unordered_set<sml::qname> processed_qnames;
-    for (const auto& qn : i->second)
-        properties_for_concept(qn, o.all_properties(), processed_qnames, m);
+    for (const auto& qn : i->second) {
+        const auto& c(find_concept(qn, m));
+        o.all_properties().insert(o.all_properties().end(),
+            c.all_properties().begin(), c.all_properties().end());
+    }
 }
 
 void indexer::
 index_object(abstract_object& parent, abstract_object& leaf, model& m) {
-    const bool is_root(!parent.is_child());
+    const auto mc(relationship_types::modeled_concepts);
+    const auto i(parent.relationships().find(mc));
+    std::list<qname> expanded_modeled_concepts;
 
-    if (is_root) {
-        auto& op(leaf.relationships()[relationship_types::original_parents]);
-        op.push_back(parent.name());
-
-        auto& l(parent.relationships()[relationship_types::leaves]);
-        l.push_back(leaf.name());
-
-        populate_all_properties(parent, m);
-
-        const auto rt(relationship_types::modeled_concepts);
-        const auto i(parent.relationships().find(rt));
-        if (i == parent.relationships().end() || i->second.empty())
-            return;
-
-        std::list<qname> expanded_modeled_concepts;
+    // FIXME: what if we do not have any concepts but our parents do?
+    if (i != parent.relationships().end() && !i->second.empty()) {
         for (const auto& qn : i->second) {
             const auto& c(find_concept(qn, m));
 
@@ -173,23 +153,44 @@ index_object(abstract_object& parent, abstract_object& leaf, model& m) {
             expanded_modeled_concepts.push_back(c.name());
 
             // add concepts our parent models
-            expanded_modeled_concepts.insert(expanded_modeled_concepts.begin(),
+            BOOST_LOG_SEV(lg, debug) << "here: " << c.refines();
+
+            expanded_modeled_concepts.insert(expanded_modeled_concepts.end(),
                 c.refines().begin(), c.refines().end());
         }
-        remove_duplicates(expanded_modeled_concepts);
-        i->second = expanded_modeled_concepts;
-        return;
     }
 
-    const auto rt(relationship_types::parents);
-    for (const auto& qn : find_relationships(rt, parent)) {
-        auto& grand_parent(find_object(qn, m));
-        index_object(grand_parent, leaf, m);
-        parent.inherited_properties().insert(
-            std::make_pair(grand_parent.name(), grand_parent.all_properties()));
+    const bool is_root(!parent.is_child());
+    if (is_root) {
+        auto& op(leaf.relationships()[relationship_types::original_parents]);
+        op.push_back(parent.name());
+
+        auto& l(parent.relationships()[relationship_types::leaves]);
+        l.push_back(leaf.name());
+    } else {
+        const auto rt(relationship_types::parents);
+        for (const auto& qn : find_relationships(rt, parent)) {
+            auto& grand_parent(find_object(qn, m));
+            index_object(grand_parent, leaf, m);
+
+            parent.inherited_properties().insert(
+                std::make_pair(grand_parent.name(),
+                    grand_parent.all_properties()));
+
+            const auto i(grand_parent.relationships().find(mc));
+            if (i == grand_parent.relationships().end() || i->second.empty())
+                continue;
+
+            // add concepts our grand parent models
+            expanded_modeled_concepts.insert(expanded_modeled_concepts.end(),
+                i->second.begin(), i->second.end());
+        }
     }
 
     populate_all_properties(parent, m);
+
+    remove_duplicates(expanded_modeled_concepts);
+    i->second = expanded_modeled_concepts;
 }
 
 void indexer::index_objects(model& m) {
@@ -204,6 +205,28 @@ void indexer::index_objects(model& m) {
 
         const bool in_inheritance_relationship(o.is_parent() || o.is_child());
         if (!in_inheritance_relationship) {
+            const auto mc(relationship_types::modeled_concepts);
+            const auto i(o.relationships().find(mc));
+
+            std::list<qname> expanded_modeled_concepts;
+            if (i != o.relationships().end() && !i->second.empty()) {
+                for (const auto& qn : i->second) {
+                    const auto& c(find_concept(qn, m));
+
+                    // add concepts we model directly
+                    expanded_modeled_concepts.push_back(c.name());
+
+                    // add concepts our parent models
+                    BOOST_LOG_SEV(lg, debug) << "here: " << c.refines();
+
+                    expanded_modeled_concepts.insert(
+                        expanded_modeled_concepts.end(),
+                        c.refines().begin(), c.refines().end());
+                }
+
+                remove_duplicates(expanded_modeled_concepts);
+                i->second = expanded_modeled_concepts;
+            }
             populate_all_properties(o, m);
             continue;
         }
