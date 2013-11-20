@@ -188,9 +188,9 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
 
         BOOST_REQUIRE(c.local_properties().size() == 1);
         BOOST_REQUIRE(c.all_properties().empty());
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, qn)) {
             BOOST_REQUIRE(c.refines().empty());
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, qn)) {
             BOOST_REQUIRE(c.refines().size() == 1);
         } else
             BOOST_FAIL("Unexpected concept: " << qn);
@@ -204,11 +204,11 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         const auto& qn(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, qn)) {
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.inherited_properties().empty());
             BOOST_CHECK(c.local_properties() == c.all_properties());
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, qn)) {
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.inherited_properties().size() == 1);
             BOOST_CHECK(c.all_properties().size() == 2);

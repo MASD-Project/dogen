@@ -42,6 +42,7 @@ static logger lg(logger_factory("sml.mock_model_factory"));
 
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
+const std::string concept_name_prefix("some_concept_");
 const std::string property_name_prefix("some_property_");
 const std::string module_name_prefix("some_module_");
 const std::string visitor_postfix("_visitor");
@@ -63,6 +64,12 @@ const std::string header_extension(".hpp");
 
 const std::string invalid_property_type("Unknown property type.");
 const std::string invalid_object_type("Invalid or unsupported object type.");
+
+std::string concept_name(unsigned int i) {
+    std::ostringstream stream;
+    stream << concept_name_prefix << i;
+    return stream.str();
+}
 
 std::string type_name(unsigned int i) {
     std::ostringstream stream;
@@ -328,6 +335,10 @@ std::string mock_model_factory::model_name(const unsigned int n) const {
     return ::model_name(n);
 }
 
+std::string mock_model_factory::concept_name(const unsigned int n) const {
+    return ::concept_name(n);
+}
+
 std::string mock_model_factory::type_name(const unsigned int n) const {
     return ::type_name(n);
 }
@@ -341,7 +352,7 @@ std::string mock_model_factory::property_name(const unsigned int n) const {
 }
 
 bool mock_model_factory::
-is_model_n(const unsigned int n, const dogen::sml::qname& qn) const {
+is_model_n(const unsigned int n, const qname& qn) const {
     return is_model_n(n, qn.model_name());
 }
 
@@ -351,8 +362,13 @@ is_model_n(const unsigned int n, const std::string& s) const {
 }
 
 bool mock_model_factory::
-is_type_name_n(const unsigned int n, const dogen::sml::qname& qn) const {
+is_type_name_n(const unsigned int n, const qname& qn) const {
     return is_type_name_n(n, qn.simple_name());
+}
+
+bool mock_model_factory::
+is_concept_name_n(const unsigned int n, const qname& qn) const {
+    return concept_name(n) == qn.simple_name();
 }
 
 bool mock_model_factory::
@@ -366,28 +382,28 @@ is_module_n(const unsigned int n, const std::string& s) const {
 }
 
 bool mock_model_factory::is_type_name_n_unversioned(const unsigned int n,
-    const dogen::sml::qname& qn) const {
+    const qname& qn) const {
     return
         boost::contains(qn.simple_name(), type_name(n)) &&
         boost::contains(qn.simple_name(), unversioned_postfix);
 }
 
 bool mock_model_factory::is_type_name_n_versioned(const unsigned int n,
-    const dogen::sml::qname& qn) const {
+    const qname& qn) const {
     return
         boost::contains(qn.simple_name(), type_name(n)) &&
         boost::contains(qn.simple_name(), versioned_postfix);
 }
 
 bool mock_model_factory::is_type_name_n_visitor(const unsigned int n,
-    const dogen::sml::qname& qn) const {
+    const qname& qn) const {
     return
         boost::contains(qn.simple_name(), type_name(n)) &&
         boost::contains(qn.simple_name(), visitor_postfix);
 }
 
 bool mock_model_factory::is_file_for_qname(const boost::filesystem::path& p,
-    const dogen::sml::qname& qn) const {
+    const qname& qn) const {
     std::string fn;
 
     if (qn.simple_name().empty())
@@ -399,14 +415,13 @@ bool mock_model_factory::is_file_for_qname(const boost::filesystem::path& p,
     return boost::algorithm::ends_with(p.generic_string(), fn);
 }
 
-boost::shared_ptr<dogen::sml::abstract_object> mock_model_factory::
-build_value_object(const unsigned int i, const dogen::sml::qname& model_qname,
+boost::shared_ptr<abstract_object> mock_model_factory::
+build_value_object(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
-    using dogen::sml::value_object;
     auto r(boost::make_shared<value_object>());
     populate_object(*r, i, model_qname, module_n);
-    r->type(dogen::sml::value_object_types::plain);
+    r->type(value_object_types::plain);
 
     if (tagged_)
         add_test_tags(*r);
@@ -414,23 +429,22 @@ build_value_object(const unsigned int i, const dogen::sml::qname& model_qname,
     return r;
 }
 
-boost::shared_ptr<dogen::sml::abstract_object> mock_model_factory::
+boost::shared_ptr<abstract_object> mock_model_factory::
 build_value_object(unsigned int i, const unsigned int module_n) const {
     return build_value_object(i, mock_model_qname(i), module_n);
 }
 
-dogen::sml::concept mock_model_factory::build_concept(
-    const unsigned int i, const dogen::sml::qname& model_qname) const {
+concept mock_model_factory::build_concept(const unsigned int i,
+    const qname& model_qname) const {
 
-    dogen::sml::concept r;
-
-    dogen::sml::qname qn;
+    qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(type_name(i));
+    qn.simple_name(concept_name(i));
 
+    concept r;
     r.name(qn);
     r.documentation(documentation);
-    r.origin_type(dogen::sml::origin_types::user);
+    r.origin_type(origin_types::user);
 
     if (tagged_)
         add_test_tags(r);
@@ -438,9 +452,9 @@ dogen::sml::concept mock_model_factory::build_concept(
     return r;
 }
 
-boost::shared_ptr<dogen::sml::abstract_object> mock_model_factory::
-build_entity(const dogen::sml::property& prop, const bool keyed,
-    const unsigned int i, const dogen::sml::qname& model_qname,
+boost::shared_ptr<abstract_object> mock_model_factory::
+build_entity(const property& prop, const bool keyed,
+    const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
     using namespace dogen::sml;
@@ -459,27 +473,27 @@ build_entity(const dogen::sml::property& prop, const bool keyed,
     return r;
 }
 
-dogen::sml::enumeration mock_model_factory::
-build_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
+enumeration mock_model_factory::
+build_enumeration(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
-    dogen::sml::qname qn;
+    qname qn;
     qn.model_name(model_qname.model_name());
     qn.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
 
-    dogen::sml::enumeration r;
+    enumeration r;
     r.name(qn);
-    r.generation_type(dogen::sml::generation_types::full_generation);
+    r.generation_type(generation_types::full_generation);
     r.documentation(documentation);
 
-    dogen::sml::qname uqn;
+    qname uqn;
     uqn.simple_name(unsigned_int);
     r.underlying_type(uqn);
 
-    const auto lambda([&](const unsigned int n) -> dogen::sml::enumerator {
-            dogen::sml::enumerator r;
+    const auto lambda([&](const unsigned int n) -> enumerator {
+            enumerator r;
             r.name(type_name(n));
             r.value(boost::lexical_cast<std::string>(n));
             return r;
@@ -494,22 +508,21 @@ build_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
     return r;
 }
 
-boost::shared_ptr<dogen::sml::abstract_object> mock_model_factory::
-build_exception(const unsigned int i, const dogen::sml::qname& model_qname,
+boost::shared_ptr<abstract_object> mock_model_factory::
+build_exception(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
-    dogen::sml::qname qn;
+    qname qn;
     qn.model_name(model_qname.model_name());
     qn.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
 
-    using dogen::sml::value_object;
     boost::shared_ptr<value_object> r(new value_object());
     r->name(qn);
-    r->generation_type(dogen::sml::generation_types::full_generation);
+    r->generation_type(generation_types::full_generation);
     r->documentation(documentation);
-    r->type(dogen::sml::value_object_types::exception);
+    r->type(value_object_types::exception);
 
     if (tagged_)
         add_test_tags(*r);
@@ -520,7 +533,7 @@ build_exception(const unsigned int i, const dogen::sml::qname& model_qname,
 qname mock_model_factory::build_qname(const unsigned int model_n,
     const unsigned int simple_n) const {
 
-    dogen::sml::qname r;
+    qname r;
     r.model_name(model_name(model_n));
     r.simple_name(type_name(simple_n));
     return r;
@@ -605,7 +618,6 @@ build_single_concept_model(const unsigned int n) const {
     auto o(build_value_object(0, r.name()));
     add_property(*o, indexed_, 1);
     o->modeled_concepts().push_back(c.name());
-    using dogen::sml::relationship_types;
     add_relationship(*o, c, relationship_types::modeled_concepts);
     insert_object(r, o);
 
@@ -624,7 +636,6 @@ build_first_degree_concepts_model(const unsigned int n) const {
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    using dogen::sml::relationship_types;
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
@@ -658,7 +669,6 @@ build_second_degree_concepts_model(const unsigned int n) const {
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
-    using dogen::sml::relationship_types;
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
@@ -698,7 +708,6 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
-    using dogen::sml::relationship_types;
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
@@ -731,7 +740,6 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
     c3.refines().push_back(c2.name());
     insert_nameable(r.concepts(), c3);
 
-    using dogen::sml::relationship_types;
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
@@ -772,57 +780,57 @@ object_with_property(const object_types ot, const property_types pt) const {
 
     if (pt == property_types::unsigned_int ||
         pt == property_types::boolean) {
-        sml::primitive ui;
+        primitive ui;
         ui.name(p.type().type());
         insert_nameable(r.primitives(), ui);
     } else if (pt == property_types::boost_shared_ptr) {
-        dogen::sml::qname qn;
+        qname qn;
         qn.simple_name("shared_ptr");
         qn.model_name("boost");
 
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
-        o2->type(dogen::sml::value_object_types::smart_pointer);
+        o2->type(value_object_types::smart_pointer);
         insert_object(r, o2);
     } else if (pt == property_types::std_pair) {
 
-        sml::primitive b;
+        primitive b;
         b.name().simple_name(boolean);
         r.primitives().insert(std::make_pair(b.name(), b));
 
-        dogen::sml::qname qn;
+        qname qn;
         qn.simple_name("pair");
         qn.model_name("std");
 
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
-        o2->type(sml::value_object_types::plain);
+        o2->type(value_object_types::plain);
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
-        sml::primitive b;
+        primitive b;
         b.name().simple_name(boolean);
         r.primitives().insert(std::make_pair(b.name(), b));
 
-        sml::primitive ui;
+        primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
 
-        dogen::sml::qname qn;
+        qname qn;
         qn.simple_name("variant");
         qn.model_name("boost");
 
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
-        o2->type(sml::value_object_types::plain);
+        o2->type(value_object_types::plain);
         insert_object(r, o2);
     } else if (pt == property_types::std_string) {
-        dogen::sml::qname qn;
+        qname qn;
         qn.simple_name("string");
         qn.model_name("std");
 
         boost::shared_ptr<value_object> o2(new value_object());
         o2->name(qn);
-        o2->type(sml::value_object_types::plain);
+        o2->type(value_object_types::plain);
         insert_object(r, o2);
     }
 
@@ -834,7 +842,6 @@ mock_model_factory::object_with_property_type_in_different_model() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
 
-    using property_types = dogen::sml::test::mock_model_factory::property_types;
     add_property(*o0, indexed_, 0, property_types::value_object, o1->name());
 
     qname m0_qn;
@@ -858,7 +865,6 @@ model mock_model_factory::object_with_missing_property_type() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
 
-    using property_types = dogen::sml::test::mock_model_factory::property_types;
     add_property(*o0, indexed_, 0, property_types::value_object, o1->name());
 
     qname mn_qn;
@@ -876,10 +882,9 @@ object_with_parent_in_the_same_model(const bool has_property) const {
 
     model r(build_empty_model(0));
     auto o0(build_value_object(0, mn));
-    using property_types = dogen::sml::test::mock_model_factory::property_types;
     if (has_property) {
         add_property(*o0, indexed_);
-        sml::primitive ui;
+        primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
@@ -980,7 +985,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
     if (has_property) {
         add_property(*o0, indexed_);
 
-        sml::primitive ui;
+        primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }

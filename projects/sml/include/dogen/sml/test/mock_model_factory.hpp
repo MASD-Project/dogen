@@ -88,6 +88,11 @@ public:
     std::string type_name(const unsigned int n = 0) const;
 
     /**
+     * @brief Returns the concept name derived from n.
+     */
+    std::string concept_name(const unsigned int n = 0) const;
+
+    /**
      * @brief Returns the module name derived from n.
      */
     std::string module_name(const unsigned int n = 0) const;
@@ -103,7 +108,7 @@ public:
      * naming convention for model @e n.
      */
     /**@{*/
-    bool is_model_n(const unsigned int n, const dogen::sml::qname& qn) const;
+    bool is_model_n(const unsigned int n, const qname& qn) const;
     bool is_model_n(const unsigned int n, const std::string& s) const;
     /**@}*/
 
@@ -112,9 +117,15 @@ public:
      * naming convention for type @e n.
      */
     /**@{*/
-    bool is_type_name_n(const unsigned int n, const dogen::sml::qname& qn) const;
+    bool is_type_name_n(const unsigned int n, const qname& qn) const;
     bool is_type_name_n(const unsigned int n, const std::string& qn) const;
     /**@}*/
+
+    /**
+     * @brief Returns true if the qname matches the mock model factory
+     * naming convention for module @e n.
+     */
+    bool is_concept_name_n(const unsigned int n, const qname& qn) const;
 
     /**
      * @brief Returns true if the qname matches the mock model factory
@@ -128,23 +139,21 @@ public:
      * for unversioned keys.
      */
     bool is_type_name_n_unversioned(const unsigned int n,
-        const dogen::sml::qname& qn) const;
+        const qname& qn) const;
 
     /**
      * @brief Returns true if the qname matches the mock model factory
      * naming convention for type @e n, and the SML naming convention
      * for versioned keys.
      */
-    bool is_type_name_n_versioned(const unsigned int n,
-        const dogen::sml::qname& qn) const;
+    bool is_type_name_n_versioned(const unsigned int n, const qname& qn) const;
 
     /**
      * @brief Returns true if the qname matches the mock model factory
      * naming convention for type @e n, and the SML naming convention
      * for visitors.
      */
-    bool is_type_name_n_visitor(const unsigned int n,
-        const dogen::sml::qname& qn) const;
+    bool is_type_name_n_visitor(const unsigned int n, const qname& qn) const;
 
 
     /**
@@ -152,49 +161,47 @@ public:
      * file name for the given qname.
      */
     bool is_file_for_qname(const boost::filesystem::path& p,
-        const dogen::sml::qname& qn) const;
+        const qname& qn) const;
 
 private:
     /**
      * @brief Create a value object.
      */
-    boost::shared_ptr<dogen::sml::abstract_object>
-    build_value_object(const unsigned int i, const dogen::sml::qname& model_qn,
+    boost::shared_ptr<abstract_object>
+    build_value_object(const unsigned int i, const qname& model_qn,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with a model name based on @e i.
      */
-    boost::shared_ptr<dogen::sml::abstract_object>
+    boost::shared_ptr<abstract_object>
     build_value_object(unsigned int i, const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a concept.
      */
-    dogen::sml::concept
-    build_concept(const unsigned int i, const dogen::sml::qname& model_qname)
-        const;
+    concept build_concept(const unsigned int i, const qname& model_qname) const;
 
     /**
      * @brief Create an entity.
      */
-    boost::shared_ptr<dogen::sml::abstract_object>
-    build_entity(const dogen::sml::property& prop, const bool keyed,
-        const unsigned int i, const dogen::sml::qname& model_qname,
+    boost::shared_ptr<abstract_object>
+    build_entity(const property& prop, const bool keyed,
+        const unsigned int i, const qname& model_qname,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an enumeration.
      */
-    dogen::sml::enumeration build_enumeration(const unsigned int i,
-        const dogen::sml::qname& model_qname,
+    enumeration build_enumeration(const unsigned int i,
+        const qname& model_qname,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an exception.
      */
-    boost::shared_ptr<dogen::sml::abstract_object>
-    build_exception(const unsigned int i, const dogen::sml::qname& model_qname,
+    boost::shared_ptr<abstract_object>
+    build_exception(const unsigned int i, const qname& model_qname,
         const unsigned int module_n = 0) const;
 
 public:

@@ -25,7 +25,9 @@ Clock summary at [2013-11-20 Wed 19:31]
     CLOCK: [2013-11-19 Tue 21:38]--[2013-11-19 Tue 21:49] =>  0:11
     CLOCK: [2013-11-19 Tue 07:56]--[2013-11-19 Tue 08:02] =>  0:06
 
-*** IMPLEMENTATION Distinguish between concept names and type names   :spike:
+*** COMPLETED Distinguish between concept names and type names        :spike:
+    CLOSED: [2013-11-20 Wed 22:38]
+    CLOCK: [2013-11-20 Wed 21:58]--[2013-11-20 Wed 22:15] =>  0:17
     CLOCK: [2013-11-20 Wed 21:52]--[2013-11-20 Wed 21:58] =>  0:06
     CLOCK: [2013-11-20 Wed 21:40]--[2013-11-20 Wed 21:49] =>  0:09
 
