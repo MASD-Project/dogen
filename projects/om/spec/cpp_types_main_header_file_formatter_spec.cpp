@@ -175,7 +175,7 @@ const dogen::sml::abstract_object&
 find_object(const dogen::sml::model& m, const unsigned int n) {
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.simple_name(n) == qn.simple_name())
+        if (factory.type_name(n) == qn.simple_name())
             return *pair.second;
     }
 
@@ -188,7 +188,7 @@ dogen::sml::abstract_object&
 find_object(dogen::sml::model& m, const unsigned int n) {
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.simple_name(n) == qn.simple_name())
+        if (factory.type_name(n) == qn.simple_name())
             return *pair.second;
     }
 

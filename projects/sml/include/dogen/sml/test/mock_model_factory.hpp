@@ -85,7 +85,7 @@ public:
     /**
      * @brief Returns the type name derived from n.
      */
-    std::string simple_name(const unsigned int n = 0) const;
+    std::string type_name(const unsigned int n = 0) const;
 
     /**
      * @brief Returns the module name derived from n.
@@ -112,8 +112,8 @@ public:
      * naming convention for type @e n.
      */
     /**@{*/
-    bool is_simple_name_n(const unsigned int n, const dogen::sml::qname& qn) const;
-    bool is_simple_name_n(const unsigned int n, const std::string& qn) const;
+    bool is_type_name_n(const unsigned int n, const dogen::sml::qname& qn) const;
+    bool is_type_name_n(const unsigned int n, const std::string& qn) const;
     /**@}*/
 
     /**
@@ -127,7 +127,7 @@ public:
      * naming convention for type @e n, and the SML naming convention
      * for unversioned keys.
      */
-    bool is_simple_name_n_unversioned(const unsigned int n,
+    bool is_type_name_n_unversioned(const unsigned int n,
         const dogen::sml::qname& qn) const;
 
     /**
@@ -135,7 +135,7 @@ public:
      * naming convention for type @e n, and the SML naming convention
      * for versioned keys.
      */
-    bool is_simple_name_n_versioned(const unsigned int n,
+    bool is_type_name_n_versioned(const unsigned int n,
         const dogen::sml::qname& qn) const;
 
     /**
@@ -143,7 +143,7 @@ public:
      * naming convention for type @e n, and the SML naming convention
      * for visitors.
      */
-    bool is_simple_name_n_visitor(const unsigned int n,
+    bool is_type_name_n_visitor(const unsigned int n,
         const dogen::sml::qname& qn) const;
 
 

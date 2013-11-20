@@ -86,7 +86,7 @@ dogen::config::cpp_settings mock_settings() {
 }
 
 std::string object_name() {
-    return model_factory.simple_name(0);
+    return model_factory.type_name(0);
 }
 
 dogen::sml_to_cpp::includer default_includer(const dogen::sml::model& m) {

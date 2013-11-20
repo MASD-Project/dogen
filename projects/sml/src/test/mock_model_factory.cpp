@@ -41,7 +41,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("sml.mock_model_factory"));
 
 const std::string model_name_prefix("some_model_");
-const std::string simple_name_prefix("some_type_");
+const std::string type_name_prefix("some_type_");
 const std::string property_name_prefix("some_property_");
 const std::string module_name_prefix("some_module_");
 const std::string visitor_postfix("_visitor");
@@ -64,9 +64,9 @@ const std::string header_extension(".hpp");
 const std::string invalid_property_type("Unknown property type.");
 const std::string invalid_object_type("Invalid or unsupported object type.");
 
-std::string simple_name(unsigned int i) {
+std::string type_name(unsigned int i) {
     std::ostringstream stream;
-    stream << simple_name_prefix << i;
+    stream << type_name_prefix << i;
     return stream.str();
 }
 
@@ -191,7 +191,7 @@ void populate_object(dogen::sml::abstract_object& o, const unsigned int i,
 
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(simple_name(i));
+    qn.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -328,8 +328,8 @@ std::string mock_model_factory::model_name(const unsigned int n) const {
     return ::model_name(n);
 }
 
-std::string mock_model_factory::simple_name(const unsigned int n) const {
-    return ::simple_name(n);
+std::string mock_model_factory::type_name(const unsigned int n) const {
+    return ::type_name(n);
 }
 
 std::string mock_model_factory::module_name(const unsigned int n) const {
@@ -351,13 +351,13 @@ is_model_n(const unsigned int n, const std::string& s) const {
 }
 
 bool mock_model_factory::
-is_simple_name_n(const unsigned int n, const dogen::sml::qname& qn) const {
-    return is_simple_name_n(n, qn.simple_name());
+is_type_name_n(const unsigned int n, const dogen::sml::qname& qn) const {
+    return is_type_name_n(n, qn.simple_name());
 }
 
 bool mock_model_factory::
-is_simple_name_n(const unsigned int n, const std::string& s) const {
-    return simple_name(n) == s;
+is_type_name_n(const unsigned int n, const std::string& s) const {
+    return type_name(n) == s;
 }
 
 bool mock_model_factory::
@@ -365,24 +365,24 @@ is_module_n(const unsigned int n, const std::string& s) const {
     return module_name(n) == s;
 }
 
-bool mock_model_factory::is_simple_name_n_unversioned(const unsigned int n,
+bool mock_model_factory::is_type_name_n_unversioned(const unsigned int n,
     const dogen::sml::qname& qn) const {
     return
-        boost::contains(qn.simple_name(), simple_name(n)) &&
+        boost::contains(qn.simple_name(), type_name(n)) &&
         boost::contains(qn.simple_name(), unversioned_postfix);
 }
 
-bool mock_model_factory::is_simple_name_n_versioned(const unsigned int n,
+bool mock_model_factory::is_type_name_n_versioned(const unsigned int n,
     const dogen::sml::qname& qn) const {
     return
-        boost::contains(qn.simple_name(), simple_name(n)) &&
+        boost::contains(qn.simple_name(), type_name(n)) &&
         boost::contains(qn.simple_name(), versioned_postfix);
 }
 
-bool mock_model_factory::is_simple_name_n_visitor(const unsigned int n,
+bool mock_model_factory::is_type_name_n_visitor(const unsigned int n,
     const dogen::sml::qname& qn) const {
     return
-        boost::contains(qn.simple_name(), simple_name(n)) &&
+        boost::contains(qn.simple_name(), type_name(n)) &&
         boost::contains(qn.simple_name(), visitor_postfix);
 }
 
@@ -426,7 +426,7 @@ dogen::sml::concept mock_model_factory::build_concept(
 
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(simple_name(i));
+    qn.simple_name(type_name(i));
 
     r.name(qn);
     r.documentation(documentation);
@@ -464,7 +464,7 @@ build_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
     const unsigned int module_n) const {
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(simple_name(i));
+    qn.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -480,7 +480,7 @@ build_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
 
     const auto lambda([&](const unsigned int n) -> dogen::sml::enumerator {
             dogen::sml::enumerator r;
-            r.name(simple_name(n));
+            r.name(type_name(n));
             r.value(boost::lexical_cast<std::string>(n));
             return r;
         });
@@ -499,7 +499,7 @@ build_exception(const unsigned int i, const dogen::sml::qname& model_qname,
     const unsigned int module_n) const {
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(simple_name(i));
+    qn.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -522,7 +522,7 @@ qname mock_model_factory::build_qname(const unsigned int model_n,
 
     dogen::sml::qname r;
     r.model_name(model_name(model_n));
-    r.simple_name(simple_name(simple_n));
+    r.simple_name(type_name(simple_n));
     return r;
 }
 

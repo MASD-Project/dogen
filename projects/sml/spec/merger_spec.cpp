@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
         BOOST_LOG_SEV(lg, debug) << "model name: " << *model_i;
 
         const auto expected_model_name(factory.model_name(i));
-        const auto expected_object_name(factory.simple_name(0));
+        const auto expected_object_name(factory.type_name(0));
         BOOST_LOG_SEV(lg, debug) << "expected object name: "
                                  << expected_object_name;
         BOOST_LOG_SEV(lg, debug) << "expected model name: "

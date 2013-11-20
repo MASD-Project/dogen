@@ -76,7 +76,7 @@ mock_descriptor_for_includer(const dogen::config::cpp_facet_types ft) {
     std::list<dogen::cpp::content_descriptor> r;
 
     dogen::sml::qname qn;
-    qn.simple_name(model_factory.simple_name());
+    qn.simple_name(model_factory.type_name());
     qn.model_name(model_factory.model_name());
 
     dogen::cpp::content_descriptor cd;
@@ -94,7 +94,7 @@ std::list<dogen::cpp::content_descriptor> mock_descriptor_for_registrar() {
     std::list<dogen::cpp::content_descriptor> r;
 
     dogen::sml::qname qn;
-    qn.simple_name(model_factory.simple_name());
+    qn.simple_name(model_factory.type_name());
     qn.model_name(model_factory.model_name());
 
     dogen::cpp::content_descriptor cd;
@@ -301,8 +301,8 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
     dogen::sml_to_cpp::source_file_factory f(l);
 
     const auto ft(dogen::config::cpp_facet_types::types);
-    i.register_header(ft, model_factory.simple_name(0));
-    i.register_header(ft, model_factory.simple_name(1));
+    i.register_header(ft, model_factory.type_name(0));
+    i.register_header(ft, model_factory.type_name(1));
     const auto md(mock_descriptor_for_includer(ft));
 
     std::list<dogen::cpp::source_file> includer_infos;
@@ -329,9 +329,9 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
 
     bool found_0(false), found_1(false);
     for (const auto& ui : fi.user_includes()) {
-        if (ui == model_factory.simple_name(0))
+        if (ui == model_factory.type_name(0))
             found_0 = true;
-        else if (ui == model_factory.simple_name(1))
+        else if (ui == model_factory.type_name(1))
             found_1 = true;
     }
     BOOST_CHECK(found_0);
@@ -351,8 +351,8 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
     dogen::sml_to_cpp::source_file_factory f(l);
 
     const auto ft1(dogen::config::cpp_facet_types::types);
-    i.register_header(ft1, model_factory.simple_name(0));
-    i.register_header(ft1, model_factory.simple_name(1));
+    i.register_header(ft1, model_factory.type_name(0));
+    i.register_header(ft1, model_factory.type_name(1));
 
     const auto ft2(dogen::config::cpp_facet_types::serialization);
     const auto md(mock_descriptor_for_includer(ft2));

@@ -25,6 +25,14 @@ Clock summary at [2013-11-20 Wed 19:31]
     CLOCK: [2013-11-19 Tue 21:38]--[2013-11-19 Tue 21:49] =>  0:11
     CLOCK: [2013-11-19 Tue 07:56]--[2013-11-19 Tue 08:02] =>  0:06
 
+*** IMPLEMENTATION Distinguish between concept names and type names   :spike:
+    CLOCK: [2013-11-20 Wed 21:52]--[2013-11-20 Wed 21:58] =>  0:06
+    CLOCK: [2013-11-20 Wed 21:40]--[2013-11-20 Wed 21:49] =>  0:09
+
+In mock factory we are using the same name for types and concepts,
+leading to a great confusion with the same name being used for
+both. create a separate naming scheme for concepts.
+
 *** IMPLEMENTATION Finish indexer class and plug it to SML workflow   :story:
 
 Create a class called =indexer=, responsible for taking in a merged

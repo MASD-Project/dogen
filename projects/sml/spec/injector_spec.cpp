@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
     BOOST_REQUIRE(a.objects().size() == 2);
     for (const auto& pair : a.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             const auto& o(dynamic_cast<dogen::sml::entity&>(*pair.second));
             BOOST_REQUIRE(o.local_properties().size() == 1);
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
             auto& o(dynamic_cast<keyed_entity&>(*pair.second));
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
             BOOST_REQUIRE(ae.local_properties().size() == 1);
@@ -142,7 +142,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
     dogen::sml::qname ukqn;
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
@@ -151,8 +151,8 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
             BOOST_CHECK(!ae.versioned_key());
             ukqn = ae.unversioned_key();
 
-            BOOST_CHECK(factory.is_simple_name_n_unversioned(0, ukqn));
-            BOOST_CHECK(!factory.is_simple_name_n_versioned(0, ukqn));
+            BOOST_CHECK(factory.is_type_name_n_unversioned(0, ukqn));
+            BOOST_CHECK(!factory.is_type_name_n_versioned(0, ukqn));
             BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: " << ukqn;
         }
     }
@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
             BOOST_REQUIRE(ae.local_properties().size() == 1);
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
     dogen::sml::qname ukqn, vkqn;
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
@@ -201,12 +201,12 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
 
             BOOST_CHECK(ae.versioned_key());
             vkqn = *ae.versioned_key();
-            BOOST_CHECK(!factory.is_simple_name_n_unversioned(0, vkqn));
-            BOOST_CHECK(factory.is_simple_name_n_versioned(0, vkqn));
+            BOOST_CHECK(!factory.is_type_name_n_unversioned(0, vkqn));
+            BOOST_CHECK(factory.is_type_name_n_versioned(0, vkqn));
 
             ukqn = ae.unversioned_key();
-            BOOST_CHECK(factory.is_simple_name_n_unversioned(0, ukqn));
-            BOOST_CHECK(!factory.is_simple_name_n_versioned(0, ukqn));
+            BOOST_CHECK(factory.is_type_name_n_unversioned(0, ukqn));
+            BOOST_CHECK(!factory.is_type_name_n_versioned(0, ukqn));
             BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: " << ukqn;
         }
     }
@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(1, qn)) {
+        if (factory.is_type_name_n(1, qn)) {
             auto& ao(*pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             ao.is_visitable(true);
@@ -285,11 +285,11 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     bool type_one(false), visitor(false);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        if (factory.is_simple_name_n(1, qn)) {
+        if (factory.is_type_name_n(1, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             type_one = true;
             BOOST_REQUIRE(!pair.second->is_versioned());
-        } else if (factory.is_simple_name_n_visitor(1, qn)) {
+        } else if (factory.is_type_name_n_visitor(1, qn)) {
             visitor = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
 
@@ -309,7 +309,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             BOOST_CHECK(!op.name().empty());
             BOOST_CHECK(!op.documentation().empty());
             BOOST_REQUIRE(op.parameters().size() == 1);
-            BOOST_CHECK(factory.is_simple_name_n(0,
+            BOOST_CHECK(factory.is_type_name_n(0,
                     op.parameters().front().type().type()));
         }
     }
