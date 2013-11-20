@@ -10,18 +10,19 @@ This file contains all stories that were closed during sprint 39.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-19 Tue 18:24]
+Clock summary at [2013-11-20 Wed 19:31]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *1:22* |      |      |
+| *Total time*                                                    | *4:20* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                 |        | 1:22 |      |
-| IMPLEMENTATION Release notes and backlog grooming               |        |      | 0:06 |
-| IMPLEMENTATION Finish indexer class and plug it to SML workflow |        |      | 1:16 |
+| Development Stories Implemented                                 |        | 4:20 |      |
+| IMPLEMENTATION Release notes and backlog grooming               |        |      | 0:17 |
+| IMPLEMENTATION Finish indexer class and plug it to SML workflow |        |      | 4:03 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-11-19 Tue 21:38]--[2013-11-19 Tue 21:49] =>  0:11
     CLOCK: [2013-11-19 Tue 07:56]--[2013-11-19 Tue 08:02] =>  0:06
 
 *** IMPLEMENTATION Finish indexer class and plug it to SML workflow   :story:
@@ -31,7 +32,14 @@ model and populating the index property of all things Indexable. Move
 code from =extrator= and =transformer= (leaf processing) into
 =indexer=.
 
-**** IMPLEMENTATION Finish adding unit tests for  modeled concepts     :task:
+**** IMPLEMENTATION Add indexing support for concepts properly
+     CLOCK: [2013-11-20 Wed 18:10]--[2013-11-20 Wed 18:56] =>  0:46
+     CLOCK: [2013-11-20 Wed 07:53]--[2013-11-20 Wed 08:41] =>  0:48
+     CLOCK: [2013-11-19 Tue 21:50]--[2013-11-19 Tue 23:03] =>  1:13
+
+We missed refinement expansion.
+
+**** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
      CLOCK: [2013-11-19 Tue 17:42]--[2013-11-19 Tue 18:24] =>  0:42
      CLOCK: [2013-11-19 Tue 08:06]--[2013-11-19 Tue 08:40] =>  0:34
 

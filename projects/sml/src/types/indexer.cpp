@@ -21,6 +21,7 @@
 #include <set>
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -85,6 +86,27 @@ find_relationships(const relationship_types rt, abstract_object& o) {
     return i->second;
 }
 
+concept& indexer::find_concept(const qname& qn, model& m) {
+    auto i(m.concepts().find(qn));
+    if (i == m.concepts().end()) {
+        const auto& sn(qn.simple_name());
+        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
+    }
+    return i->second;
+}
+
+void indexer::remove_duplicates(std::list<qname>& names) const {
+    std::unordered_set<sml::qname> processed;
+    for (auto i(names.begin()); i != names.end(); ++i) {
+        if (processed.find(*i) != processed.end()) {
+            names.erase(i); // FIXME: check
+            continue;
+        }
+        processed.insert(*i);
+    }
+}
+
 void indexer::properties_for_concept(const sml::qname& qn,
     std::list<sml::property>& properties,
     std::unordered_set<sml::qname>& processed_qnames,
@@ -104,24 +126,6 @@ void indexer::properties_for_concept(const sml::qname& qn,
     const auto& concept(i->second);
     const auto& cp(concept.local_properties());
     properties.insert(properties.end(), cp.begin(), cp.end());
-}
-
-void indexer::expand_concept_hierarchy(const model& m, const qname& qn,
-    std::list<qname>& concepts) const {
-    const auto i(m.concepts().find(qn));
-    if (i == m.concepts().end()) {
-        std::ostringstream s;
-        s << orphan_concept << ". concept: "
-          << qn.simple_name() << " could not be found.";
-
-        BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(indexing_error(s.str()));
-    }
-
-    for (const auto& c : i->second.refines())
-        expand_concept_hierarchy(m, c, concepts);
-
-    concepts.push_back(qn);
 }
 
 void indexer::populate_all_properties(abstract_object& o, const model& m) {
@@ -144,7 +148,7 @@ void indexer::populate_all_properties(abstract_object& o, const model& m) {
 }
 
 void indexer::
-index_inheritance(abstract_object& parent, abstract_object& leaf, model& m) {
+index_object(abstract_object& parent, abstract_object& leaf, model& m) {
     const bool is_root(!parent.is_child());
 
     if (is_root) {
@@ -156,13 +160,31 @@ index_inheritance(abstract_object& parent, abstract_object& leaf, model& m) {
 
         populate_all_properties(parent, m);
 
+        const auto rt(relationship_types::modeled_concepts);
+        const auto i(parent.relationships().find(rt));
+        if (i == parent.relationships().end() || i->second.empty())
+            return;
+
+        std::list<qname> expanded_modeled_concepts;
+        for (const auto& qn : i->second) {
+            const auto& c(find_concept(qn, m));
+
+            // add concepts we model directly
+            expanded_modeled_concepts.push_back(c.name());
+
+            // add concepts our parent models
+            expanded_modeled_concepts.insert(expanded_modeled_concepts.begin(),
+                c.refines().begin(), c.refines().end());
+        }
+        remove_duplicates(expanded_modeled_concepts);
+        i->second = expanded_modeled_concepts;
         return;
     }
 
-    const auto parents(find_relationships(relationship_types::parents, parent));
-    for (auto& qn : parents) {
+    const auto rt(relationship_types::parents);
+    for (const auto& qn : find_relationships(rt, parent)) {
         auto& grand_parent(find_object(qn, m));
-        index_inheritance(grand_parent, leaf, m);
+        index_object(grand_parent, leaf, m);
         parent.inherited_properties().insert(
             std::make_pair(grand_parent.name(), grand_parent.all_properties()));
     }
@@ -170,7 +192,7 @@ index_inheritance(abstract_object& parent, abstract_object& leaf, model& m) {
     populate_all_properties(parent, m);
 }
 
-void indexer::index_inheritance(model& m) {
+void indexer::index_objects(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing inheritance. Objects: "
                              << m.objects().size();
 
@@ -190,109 +212,15 @@ void indexer::index_inheritance(model& m) {
         if (!is_leaf)
             continue;
 
-        const auto parents(find_relationships(relationship_types::parents, o));
-        for (auto& qn : parents) {
+        const auto rt(relationship_types::parents);
+        for (const auto& qn : find_relationships(rt, o)) {
             auto& parent(find_object(qn, m));
-            index_inheritance(parent, o, m);
+            index_object(parent, o, m);
         }
     }
 }
 
-void indexer::index_modeled_concepts(model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing modeled concepts. Objects: "
-                             << m.objects().size();
-
-    for (auto& pair : m.objects()) {
-        auto& o(*pair.second);
-
-        if (o.generation_type() == generation_types::no_generation)
-            continue;
-
-        BOOST_LOG_SEV(lg, debug) << "Indexing concepts for type " << o.name();
-        const auto rt(relationship_types::modeled_concepts);
-        const auto i(o.relationships().find(rt));
-        if (i == o.relationships().end() || i->second.empty())
-            continue;
-
-        /*
-         * first pass to expand concepts. we basically want to find
-         * out the complete set of concepts this type models, taking
-         * into account all the refinement relationships they may have
-         * with other concepts.
-         */
-        std::list<qname> expanded_modeled_concepts;
-        for (const auto& qn : i->second)
-            expand_concept_hierarchy(m, qn, expanded_modeled_concepts);
-
-        i->second.clear();
-        for (const auto& qn : expanded_modeled_concepts)
-            i->second.push_back(qn);
-    }
-
-    /*
-     * second pass to expand concepts. we now look at all of the
-     * inheritance relationships and remove any concepts which have
-     * already been modeled by the type's parent.
-     */
-    for (auto& pair : m.objects()) {
-        auto& o(*pair.second);
-
-        const auto rt(relationship_types::modeled_concepts);
-        const auto i(o.relationships().find(rt));
-        if (i == o.relationships().end() || i->second.empty())
-            continue;
-
-        BOOST_LOG_SEV(lg, debug) << "Resolving concepts for type: " << o.name();
-        std::set<qname> mc;
-        for (const auto& qn : i->second)
-            mc.insert(qn);
-
-        std::set<qname> pmc;
-        const auto j(o.relationships().find(relationship_types::parents));
-        if (j == o.relationships().end() || j->second.empty())
-            continue;
-
-        for (const auto& pqn : j->second) {
-            const auto k(m.objects().find(pqn));
-            if (k == m.objects().end()) {
-                std::ostringstream s;
-                s << orphan_object << ": " << o.name().simple_name()
-                  << ". parent: " << pqn.simple_name();
-
-                BOOST_LOG_SEV(lg, error) << s.str();
-                BOOST_THROW_EXCEPTION(indexing_error(s.str()));
-            }
-
-            const auto m(o.relationships().find(rt));
-            if (m == o.relationships().end())
-                continue;
-
-            for (const auto& qn : m->second)
-                pmc.insert(qn);
-        }
-
-        std::set<qname> result;
-        std::set_difference(mc.begin(), mc.end(), pmc.begin(), pmc.end(),
-            std::inserter(result, result.end()));
-
-        // FIXME: can we not just push the result of the set difference?
-        auto tmp(i->second);
-        i->second.clear();
-        o.modeled_concepts().clear();
-        for (const auto& qn : tmp) {
-            if (result.find(qn) != result.end()) {
-                i->second.push_back(qn);
-                o.modeled_concepts().push_back(qn);
-            }
-        }
-    }
-}
-
-void indexer::index(abstract_object& /*o*/) {
-}
-
-
-void indexer::index_refinements(concept& c, model& m,
+void indexer::index_concept(concept& c, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
     if (processed_qnames.find(c.name()) != processed_qnames.end())
         return;
@@ -300,36 +228,51 @@ void indexer::index_refinements(concept& c, model& m,
     c.all_properties().insert(c.all_properties().end(),
         c.local_properties().begin(), c.local_properties().end());
 
-    for (auto& qn : c.refines()) {
-        auto i(m.concepts().find(qn));
-        if (i == m.concepts().end()) {
-            const auto& sn(qn.simple_name());
-            BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-            BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
-        }
-
-        auto& parent(i->second);
-        index_refinements(parent, m, processed_qnames);
-
-        c.inherited_properties().insert(std::make_pair(parent.name(),
-                parent.local_properties()));
-
-        c.all_properties().insert(c.all_properties().end(),
-            parent.local_properties().begin(), parent.local_properties().end());
+    if (c.refines().empty()) {
+        processed_qnames.insert(c.name());
+        return;
     }
+
+    std::list<qname> expanded_refines;
+    for (auto& qn : c.refines()) {
+        auto& parent(find_concept(qn, m));
+        index_concept(parent, m, processed_qnames);
+
+        // add concepts we refine directly
+        expanded_refines.push_back(qn);
+
+        // add concepts our parents refine
+        expanded_refines.insert(expanded_refines.end(),
+            parent.refines().begin(), parent.refines().end());
+
+        // collect our parent's properties
+        c.inherited_properties().insert(std::make_pair(parent.name(),
+                parent.all_properties()));
+        c.all_properties().insert(c.all_properties().end(),
+            parent.all_properties().begin(), parent.all_properties().end());
+    }
+
+    remove_duplicates(expanded_refines);
+    c.refines(expanded_refines);
     processed_qnames.insert(c.name());
 }
 
-void indexer::index_refinements(model& m) {
+void indexer::index_concepts(model& m) {
     std::unordered_set<sml::qname> processed_qnames;
-    for (auto& pair : m.concepts())
-        index_refinements(pair.second, m, processed_qnames);
+
+    for (auto& pair : m.concepts()) {
+        auto& c(pair.second);
+
+        if (c.generation_type() == generation_types::no_generation)
+            continue;
+
+        index_concept(c, m, processed_qnames);
+    }
 }
 
 void indexer::index(model& m) {
-    index_refinements(m);
-    index_modeled_concepts(m);
-    index_inheritance(m);
+    index_concepts(m);
+    index_objects(m);
 }
 
 } }

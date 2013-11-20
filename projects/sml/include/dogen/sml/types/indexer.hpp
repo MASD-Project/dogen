@@ -39,9 +39,18 @@ namespace sml {
  * model.
  *
  * The indexer expects to receive a partial model such as ones coming
- * straight out of Dia to SML transformation.
+ * straight out of Dia to SML transformation. Its job is to take the
+ * existing data and to expand it, duplicating information across the
+ * model to make it easier to access without requiring any additional
+ * look-ups.
  *
- * The indexer as the following responsibilities:
+ * The indexer is responsible for the following concrete tasks:
+ *
+ * @li expand the refined concepts in all concepts which refine other
+ * concepts.
+ *
+ * @li expand the modeled concepts in all types which model concepts,
+ * taking into account refinements.
  *
  * @li populate the original parents of all children involved in
  * inheritance relationships;
@@ -49,11 +58,9 @@ namespace sml {
  * @li populate the leaves of all parents in inheritance
  * relationships;
  *
- * @li expand the modeled concepts in all types which model concepts,
- * taking into account refinements.
- *
  * @li populate the inherited properties and all properties containers
  * of all types.
+ *
  */
 class indexer {
 public:
@@ -67,7 +74,7 @@ public:
 
 private:
     /**
-     * @brief Find the object with the given qname, or throws.
+     * @brief Returns the object with the given qname, or throws.
      */
     abstract_object& find_object(const qname& qn, model& m);
 
@@ -77,7 +84,17 @@ private:
     std::list<qname>& find_relationships(const relationship_types rt,
         abstract_object& o);
 
-private:
+    /**
+     * @brief Returns the concept with the given qname, or throws.
+     */
+    concept& find_concept(const qname& qn, model& m);
+
+    /**
+     * @brief Removes duplicate qnames, preserving the original order
+     * of elements in the list.
+     */
+    void remove_duplicates(std::list<qname>& names) const;
+
     /**
      * @brief Given a concept, adds all the properties associated with
      * that concept.
@@ -87,53 +104,49 @@ private:
         std::unordered_set<sml::qname>& processed_qnames, const model& m) const;
 
     /**
-     * @brief Given an initial qname and a list of concepts, it
-     * expands it to take into account all the refinement
-     * relationships these may be part of.
-     */
-    void expand_concept_hierarchy(const model& m, const qname& qn,
-        std::list<qname>& concepts) const;
-
-    /**
      * @brief Populates the all properties container.
      */
     void populate_all_properties(abstract_object& o, const model& m);
 
 private:
     /**
-     * @brief Populates the modeled concepts relationship of every
-     * type involved in modeling concepts.
+     * @brief Indexes a specific object.
+     *
+     * This amounts to:
+     *
+     * @li Indexing relationships with other objects in the model.
+     *
+     * @li Updating all of the computed property containers such as
+     * all properties and inherited properties for a given abstract
+     * objects.
      */
-    void index_modeled_concepts(model& m);
-
-    /**
-     * @brief Indexes inheritance information for the leaf and all of
-     * its parents.
-     */
-    void index_inheritance(abstract_object& parent, abstract_object& leaf,
+    void index_object(abstract_object& parent, abstract_object& leaf,
         model& m);
 
     /**
-     * @brief Indexes information related to inheritance relationships
-     * across all objects in the model.
+     * @brief Indexes all objects in the model.
      */
-    void index_inheritance(model& m);
+    void index_objects(model& m);
 
     /**
-     * @brief Indexes information related to refinement relationships
-     * for a given concept.
+     * @brief Populates index information in a concept.
+     *
+     * This amounts to:
+     *
+     * @li Expanding the refined list of concepts taking into account
+     * the concept inheritance graph, and finding the final distinct
+     * list of concepts one is refining;
+     *
+     * @li Updating all of the computed property containers such as
+     * all properties and inherited properties for a given concept.
      */
-    void index_refinements(concept& c, model& m,
+    void index_concept(concept& c, model& m,
         std::unordered_set<sml::qname>& processed_qnames);
 
     /**
-     * @brief Indexes information related to refinement relationships
-     * across all concepts the model.
+     * @brief Indexes all concepts in the model.
      */
-    void index_refinements(model& m);
-
-private:
-    void index(abstract_object& o);
+    void index_concepts(model& m);
 
 public:
     /**
