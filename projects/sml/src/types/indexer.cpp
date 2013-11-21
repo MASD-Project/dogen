@@ -27,7 +27,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
 #include "dogen/sml/types/indexer.hpp"
 
@@ -130,11 +129,10 @@ void indexer::populate_all_properties(abstract_object& o, model& m) {
     if (i == o.relationships().end() || i->second.empty())
         return;
 
-    std::unordered_set<sml::qname> processed_qnames;
     for (const auto& qn : i->second) {
         const auto& c(find_concept(qn, m));
-        o.all_properties().insert(o.all_properties().end(),
-            c.all_properties().begin(), c.all_properties().end());
+        o.local_properties().insert(o.local_properties().end(),
+            c.local_properties().begin(), c.local_properties().end());
     }
 }
 
@@ -142,25 +140,25 @@ void indexer::
 index_object(abstract_object& parent, abstract_object& leaf, model& m) {
     const auto mc(relationship_types::modeled_concepts);
     const auto i(parent.relationships().find(mc));
-    std::list<qname> expanded_modeled_concepts;
+    const bool has_concepts(i != parent.relationships().end() &&
+        !i->second.empty());
 
-    // FIXME: what if we do not have any concepts but our parents do?
-    if (i != parent.relationships().end() && !i->second.empty()) {
+    std::set<qname> our_concepts;
+    if (has_concepts) {
+        // perform concept expansion
         for (const auto& qn : i->second) {
             const auto& c(find_concept(qn, m));
 
             // add concepts we model directly
-            expanded_modeled_concepts.push_back(c.name());
+            our_concepts.insert(c.name());
 
-            // add concepts our parent models
-            BOOST_LOG_SEV(lg, debug) << "here: " << c.refines();
-
-            expanded_modeled_concepts.insert(expanded_modeled_concepts.end(),
-                c.refines().begin(), c.refines().end());
+            // add concepts refined by our concept
+            our_concepts.insert(c.refines().begin(), c.refines().end());
         }
     }
 
     const bool is_root(!parent.is_child());
+    std::set<qname> their_concepts;
     if (is_root) {
         auto& op(leaf.relationships()[relationship_types::original_parents]);
         op.push_back(parent.name());
@@ -169,6 +167,7 @@ index_object(abstract_object& parent, abstract_object& leaf, model& m) {
         l.push_back(leaf.name());
     } else {
         const auto rt(relationship_types::parents);
+        std::set<qname> gp_modeled_concepts;
         for (const auto& qn : find_relationships(rt, parent)) {
             auto& grand_parent(find_object(qn, m));
             index_object(grand_parent, leaf, m);
@@ -181,16 +180,30 @@ index_object(abstract_object& parent, abstract_object& leaf, model& m) {
             if (i == grand_parent.relationships().end() || i->second.empty())
                 continue;
 
-            // add concepts our grand parent models
-            expanded_modeled_concepts.insert(expanded_modeled_concepts.end(),
-                i->second.begin(), i->second.end());
+            if (has_concepts) {
+                // add all concepts modeled by our grand parent
+                their_concepts.insert(i->second.begin(), i->second.end());
+            }
         }
     }
 
     populate_all_properties(parent, m);
 
-    remove_duplicates(expanded_modeled_concepts);
-    i->second = expanded_modeled_concepts;
+    /* we want to only model concepts which have not yet been modeled
+     * by any of our grand parents.
+     */
+    std::set<qname> result;
+    std::set_difference(our_concepts.begin(), our_concepts.end(),
+        their_concepts.begin(), their_concepts.end(),
+        std::inserter(result, result.end()));
+
+    // preserve qname order.
+    auto tmp(i->second);
+    i->second.clear();
+    for (const auto& qn : tmp) {
+        if (result.find(qn) != result.end())
+            i->second.push_back(qn);
+    }
 }
 
 void indexer::index_objects(model& m) {
@@ -217,8 +230,6 @@ void indexer::index_objects(model& m) {
                     expanded_modeled_concepts.push_back(c.name());
 
                     // add concepts our parent models
-                    BOOST_LOG_SEV(lg, debug) << "here: " << c.refines();
-
                     expanded_modeled_concepts.insert(
                         expanded_modeled_concepts.end(),
                         c.refines().begin(), c.refines().end());

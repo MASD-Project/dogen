@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 39.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-20 Wed 23:50]
+Clock summary at [2013-11-21 Thu 18:53]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *6:03* |      |      |
+| *Total time*                                                    | *7:21* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                 |        | 6:03 |      |
+| Development Stories Implemented                                 |        | 7:21 |      |
 | IMPLEMENTATION Release notes and backlog grooming               |        |      | 0:17 |
 | COMPLETED Distinguish between concept names and type names      |        |      | 0:32 |
-| IMPLEMENTATION Finish indexer class and plug it to SML workflow |        |      | 5:14 |
+| IMPLEMENTATION Finish indexer class and plug it to SML workflow |        |      | 6:32 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -44,12 +44,22 @@ code from =extrator= and =transformer= (leaf processing) into
 =indexer=.
 
 **** IMPLEMENTATION Add indexing support for concepts properly
+     CLOCK: [2013-11-21 Thu 18:17]--[2013-11-21 Thu 18:50] =>  0:33
+     CLOCK: [2013-11-21 Thu 07:56]--[2013-11-21 Thu 08:41] =>  0:45
      CLOCK: [2013-11-20 Wed 22:39]--[2013-11-20 Wed 23:50] =>  1:11
      CLOCK: [2013-11-20 Wed 18:10]--[2013-11-20 Wed 18:56] =>  0:46
      CLOCK: [2013-11-20 Wed 07:53]--[2013-11-20 Wed 08:41] =>  0:48
      CLOCK: [2013-11-19 Tue 21:50]--[2013-11-19 Tue 23:03] =>  1:13
 
 We missed refinement expansion.
+
+This is actually pretty complicated. Some things to make our life
+easier:
+
+- add =is_parent= and =is_child= to concepts to make recursion easier
+- consider splitting concept processing from inheritance
+  processing. this may not make sense because the structure of the
+  processing is probably identical, but we need a thought experiment.
 
 **** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
      CLOCK: [2013-11-19 Tue 17:42]--[2013-11-19 Tue 18:24] =>  0:42
