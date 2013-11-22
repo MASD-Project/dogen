@@ -8,6 +8,22 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add export macros support                                         :story:
+
+We should add export macros for shared objects/DLLs:
+
+:#ifdef ExportDeclaration
+:    #undef ExportDeclaration
+:#endif
+:
+:#ifdef
+:    #define ExportMacro __declspec(dllexport)
+:#else
+:    #define ExportMacro __declspec(dllimport)
+:#endif
+
+There is also a GCC equivalent explained [[http://pic.dhe.ibm.com/infocenter/tpfhelp/current/index.jsp?topic%3D%252Fcom.ibm.ztpf-ztpfdf.doc_put.cur%252Fgtpl2%252Fexport.html][here]].
+
 *** Generate Visual Studio solutions                                  :story:
 
 At present we rely on CMake as the C++ meta-build system. There is
