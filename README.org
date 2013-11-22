@@ -154,3 +154,5 @@ papers we have read (or intend to read) on the subject, etc.
     Embracing the Change
   - [[http://www.inf.u-szeged.hu/~ferenc/research/ferencr_schema.ppt.pdf][Towards a Standard Schema for C/C++]]
   - [[http://www.inf.u-szeged.hu/~ferenc/research/ferencr_columbus_schema_cpp.pdf][Data Exchange with the Columbus Schema for C++]]
+- [[http://www.cpgf.org/][CPGF]]: An open source C++ library for reflection, script binding,
+  serialisation and callbacks.
