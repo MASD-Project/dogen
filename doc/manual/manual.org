@@ -1,7 +1,7 @@
 #+title: Domain Driven Development with Dogen
 #+options: author:nil
 
-Copyright (c) 2013 Marco Craveiro
+Copyright (c) 2012, 2013 Marco Craveiro
 
 Permission is granted to copy, distribute and/or modify this document under the
 terms of the GNU Free Documentation License, version 1.3; with no Invariant
@@ -9,7 +9,7 @@ Sections, no Front-Cover Texts and no Back-Cover Texts.
 
 Revision *DRAFT*, May 2013
 
-This revision of the manual describes Dogen *TRUNK* and is available
+This revision of the manual describes Dogen *master* and is available
 in the following formats: HTML and PDF.
 
 #+toc: headlines 2
@@ -53,23 +53,23 @@ the two.
 
 *** Code generation
 
-The creation of programs that generate programs is probably as old as
-computer science itself. These ideas were even incorporated in some
-languages such as LISP, where there was a blurring of the lines
-between hand crafted source code and machine generated source
-code. Sadly, these progressive thoughts faded into the foreground as
-the C family of languages took front stage.
+The concept of programs that generate programs is probably as old as
+computer science itself: it certainly was a common feature in the days
+of machine code and assembler code programming. These ideas were
+incorporated in early languages such as LISP, where there was a
+blurring of the lines between hand crafted source code and machine
+generated source code. Sadly, these progressive thoughts faded into
+the foreground as the C family of languages took front stage.
 
 It's not as if code generation disappeared - it just went into
-hiding. At present, there are many widely used tools in the Open
-Source ecosystem that generate code:
-
-FIXME: add links
+hiding. In fact, there are many widely used tools in the Open Source
+ecosystem that generate code: FIXME: add links
 
 - Google Protocol Buffers
 - ODB
 - eXSD tool
 - COM IDL compiler
+- ...
 
 These tools are designed to do a specific task and to do it well,
 hiding as much as possible of the code generation details from the end
@@ -81,18 +81,18 @@ with them: how to read and write them from raw storage (in the case of
 Protocol Buffers), how to read and write them from the database (ODB),
 and so on.
 
-In one form or another - explicitly or implicitly - all code
-generators have at their core a set of data structures that represent
-the entities to generate. These data structures are known as the
-/meta-model/. Meta-models are a class of models that focus on
-describing models themselves. They allow code to introspect and to
-think about code; to reflect. Code generation in this sense can simply
-be thought of as the translation of one such representation into a
-text file, following the rules laid out by the grammar of a
-programming language. The more complete the meta-model, the more
-expressive the generated code can be - and vice-versa. In this light,
-special purpose code generators tend to have very focused meta-models,
-designed specifically for the task at hand.
+All code generators have an internal set of data structures that
+represent the entities to generate - explicitly or implicitly. These
+data structures are known as the /meta-model/. Meta-models are a class
+of models that focus on describing models themselves. They allow code
+to introspect and to think about code; to reflect. In this form, code
+generation is simply the translation of one such representation into
+another - a text file - following the rules laid out by the grammar of
+a programming language. The more complete the meta-model, the more
+expressive the generated code can be - and vice-versa. It is in this
+light that we call certain classes of code generators /special
+purpose/ because they have meta-models that are very focused, designed
+only for the task at hand.
 
 However, meta-models are useful in a more general form when designing
 software applications. One of the most common meta-models in existence
