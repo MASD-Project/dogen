@@ -10,23 +10,26 @@ This file contains all stories that were closed during sprint 39.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-21 Thu 18:53]
+Clock summary at [2013-11-25 Mon 19:06]
 
-| Headline                                                        | Time   |      |      |
-|-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *7:21* |      |      |
-|-----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                 |        | 7:21 |      |
-| IMPLEMENTATION Release notes and backlog grooming               |        |      | 0:17 |
-| COMPLETED Distinguish between concept names and type names      |        |      | 0:32 |
-| IMPLEMENTATION Finish indexer class and plug it to SML workflow |        |      | 6:32 |
+| Headline                                                         | Time   |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                     | *9:34* |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                  |        | 9:34 |      |
+| IMPLEMENTATION Release notes and backlog grooming                |        |      | 0:29 |
+| COMPLETED Mock: distinguish between concept names and type names |        |      | 0:32 |
+| IMPLEMENTATION Split indexer into concepts and inheritance       |        |      | 7:03 |
+| IMPLEMENTATION Update manual                                     |        |      | 0:14 |
+| Finish implementation of =concept_indexer= and add tests         |        |      | 1:16 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-11-25 Mon 08:21]--[2013-11-25 Mon 08:33] =>  0:12
     CLOCK: [2013-11-19 Tue 21:38]--[2013-11-19 Tue 21:49] =>  0:11
     CLOCK: [2013-11-19 Tue 07:56]--[2013-11-19 Tue 08:02] =>  0:06
 
-*** COMPLETED Distinguish between concept names and type names        :spike:
+*** COMPLETED Mock: distinguish between concept names and type names  :spike:
     CLOSED: [2013-11-20 Wed 22:38]
     CLOCK: [2013-11-20 Wed 21:58]--[2013-11-20 Wed 22:15] =>  0:17
     CLOCK: [2013-11-20 Wed 21:52]--[2013-11-20 Wed 21:58] =>  0:06
@@ -36,14 +39,30 @@ In mock factory we are using the same name for types and concepts,
 leading to a great confusion with the same name being used for
 both. create a separate naming scheme for concepts.
 
-*** IMPLEMENTATION Finish indexer class and plug it to SML workflow   :story:
+*** CANCELLED Finish indexer class and plug it to SML workflow        :story:
+    CLOSED: [2013-11-25 Mon 08:26]
 
-Create a class called =indexer=, responsible for taking in a merged
-model and populating the index property of all things Indexable. Move
-code from =extrator= and =transformer= (leaf processing) into
-=indexer=.
+- we missed refinement expansion.
+- this is actually pretty complicated. This story was becoming a
+  massive epic so it was refactored in lots of right-sized stories.
 
-**** IMPLEMENTATION Add indexing support for concepts properly
+**** CANCELLED Add indexing support for concepts properly
+     CLOSED: [2013-11-25 Mon 08:26]
+
+*** IMPLEMENTATION Split indexer into concepts and inheritance        :story:
+
+In the past we created the =indexer=, responsible for taking in a
+merged model and populating the index property of all things
+indexable. However, the indexer is too complicated and needs to be
+split into two classes: =concept_indexer= and =inheritance_indexer=.
+
+Move code from =extrator= and =transformer= (leaf processing) into
+=indexer= into appropriate places.
+
+**** COMPLETED Design the new set of classes                           :task:
+     CLOSED: [2013-11-25 Mon 08:21]
+     CLOCK: [2013-11-25 Mon 07:53]--[2013-11-25 Mon 08:20] =>  0:27
+     CLOCK: [2013-11-22 Fri 07:53]--[2013-11-22 Fri 08:37] =>  0:44
      CLOCK: [2013-11-21 Thu 18:17]--[2013-11-21 Thu 18:50] =>  0:33
      CLOCK: [2013-11-21 Thu 07:56]--[2013-11-21 Thu 08:41] =>  0:45
      CLOCK: [2013-11-20 Wed 22:39]--[2013-11-20 Wed 23:50] =>  1:11
@@ -51,15 +70,47 @@ code from =extrator= and =transformer= (leaf processing) into
      CLOCK: [2013-11-20 Wed 07:53]--[2013-11-20 Wed 08:41] =>  0:48
      CLOCK: [2013-11-19 Tue 21:50]--[2013-11-19 Tue 23:03] =>  1:13
 
-We missed refinement expansion.
+Rationale for split:
 
-This is actually pretty complicated. Some things to make our life
-easier:
+- we need to split concept processing from inheritance
+  processing. these are two completely separate things and trying to
+  merge them into a single class for performance reasons just makes
+  the code complicated for no reason - i.e. we don't yet have numbers
+  to prove performance is an issue at this point.
+- we originally chose the name =indexer= because we are populating
+  additional data structures which exist only to avoid look-ups across
+  the object graph; these can be thought of as indices. as such it
+  makes sense to have a =concept_indexer= and a
+  =inheritance_indexer=.
+- other aspects of the process which could influential the naming were
+  the expansion/reduction that is performed in the concepts data
+  structures. we also tried to use a single word for these classes
+  such as =mediator= (the guy that deals with relationships),
+  =geneologist= (the guy that deals with inheritance),
+  =conceptualiser= (the guy that deals with concepts), etc. having
+  exhausted all of these, we settled on a two word name as it conveys
+  the most meaning.
+- we also considered somehow merging =concept= with
+  =abstract_object=. In practical terms this would be a win as
+  concepts have almost all the same machinery as =abstract_objects=;
+  the problem is the object graph would no longer provide a key
+  insight into the domain - namely that concepts are  not objects have
+  nothing to do with objects. so we decided against it.
+
+**** IMPLEMENTATION Rename classes and unit tests                      :task:
+     CLOCK: [2013-11-25 Mon 17:54]--[2013-11-25 Mon 18:23] =>  0:29
+     CLOCK: [2013-11-25 Mon 08:33]--[2013-11-25 Mon 08:40] =>  0:07
+
+**** Add properties to concept                                         :task:
 
 - add =is_parent= and =is_child= to concepts to make recursion easier
-- consider splitting concept processing from inheritance
-  processing. this may not make sense because the structure of the
-  processing is probably identical, but we need a thought experiment.
+
+*** IMPLEMENTATION Update manual                                      :story:
+    CLOCK: [2013-11-25 Mon 18:24]--[2013-11-25 Mon 18:38] =>  0:14
+
+Use compilation downtime to update the manual.
+
+*** Finish implementation of =concept_indexer= and add tests          :story:
 
 **** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
      CLOCK: [2013-11-19 Tue 17:42]--[2013-11-19 Tue 18:24] =>  0:42
@@ -68,9 +119,11 @@ easier:
 **** Add unit tests for the indexing of properties                     :task:
 **** Add unit tests for the indexing of relationships                  :task:
 
-**** Plug indexer into workflow                                        :task:
+**** Plug into workflow                                                :task:
+*** Finish implementation of =inheritance_indexer= and add tests      :story:
 **** Update transformer to populate basic relationships                :task:
 **** Implement indexing of associations, keys and visitor              :task:
+**** Plug into workflow                                                :task:
 *** Replace existing structures with indexing ones                    :story:
 
 Make use of the indexing information in legacy C++ formatters as a way

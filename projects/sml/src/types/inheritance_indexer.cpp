@@ -28,16 +28,14 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/types/indexer.hpp"
+#include "dogen/sml/types/inheritance_indexer.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("sml.indexer"));
+auto lg(logger_factory("sml.inheritance_indexer"));
 
-const std::string orphan_object("Object's parent could not be located: ");
-const std::string orphan_concept("Refined concept could not be located: ");
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
 const std::string object_not_found("Object not found in model: ");
@@ -63,7 +61,7 @@ inline bool operator<(const qname& lhs, const qname& rhs) {
                     (lhs.simple_name() < rhs.simple_name()))));
 }
 
-abstract_object& indexer::find_object(const qname& qn, model& m) {
+abstract_object& inheritance_indexer::find_object(const qname& qn, model& m) {
     auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
@@ -73,7 +71,7 @@ abstract_object& indexer::find_object(const qname& qn, model& m) {
     return *(i->second);
 }
 
-std::list<qname>& indexer::
+std::list<qname>& inheritance_indexer::
 find_relationships(const relationship_types rt, abstract_object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -86,7 +84,7 @@ find_relationships(const relationship_types rt, abstract_object& o) {
     return i->second;
 }
 
-concept& indexer::find_concept(const qname& qn, model& m) {
+concept& inheritance_indexer::find_concept(const qname& qn, model& m) {
     auto i(m.concepts().find(qn));
     if (i == m.concepts().end()) {
         const auto& sn(qn.simple_name());
@@ -96,26 +94,8 @@ concept& indexer::find_concept(const qname& qn, model& m) {
     return i->second;
 }
 
-void indexer::remove_duplicates(std::list<qname>& names) const {
-    std::unordered_set<sml::qname> processed;
-
-    BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
-                             << names.size();
-
-    for (auto i(names.begin()); i != names.end(); ++i) {
-        if (processed.find(*i) != processed.end()) {
-            names.erase(i); // iterator is ok after erase
-            continue;
-        }
-        processed.insert(*i);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
-                             << names.size();
-
-}
-
-void indexer::populate_all_properties(abstract_object& o, model& m) {
+void inheritance_indexer::
+populate_all_properties(abstract_object& o, model& m) {
     for (const auto& pair : o.inherited_properties()) {
         o.all_properties().insert(o.all_properties().end(),
             pair.second.begin(), pair.second.end());
@@ -136,7 +116,7 @@ void indexer::populate_all_properties(abstract_object& o, model& m) {
     }
 }
 
-void indexer::
+void inheritance_indexer::
 index_object(abstract_object& parent, abstract_object& leaf, model& m) {
     const auto mc(relationship_types::modeled_concepts);
     const auto i(parent.relationships().find(mc));
@@ -206,7 +186,7 @@ index_object(abstract_object& parent, abstract_object& leaf, model& m) {
     }
 }
 
-void indexer::index_objects(model& m) {
+void inheritance_indexer::index_objects(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing inheritance. Objects: "
                              << m.objects().size();
 
@@ -235,7 +215,6 @@ void indexer::index_objects(model& m) {
                         c.refines().begin(), c.refines().end());
                 }
 
-                remove_duplicates(expanded_modeled_concepts);
                 i->second = expanded_modeled_concepts;
             }
             populate_all_properties(o, m);
@@ -254,7 +233,7 @@ void indexer::index_objects(model& m) {
     }
 }
 
-void indexer::index_concept(concept& c, model& m,
+void inheritance_indexer::index_concept(concept& c, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
     if (processed_qnames.find(c.name()) != processed_qnames.end())
         return;
@@ -286,12 +265,11 @@ void indexer::index_concept(concept& c, model& m,
             parent.all_properties().begin(), parent.all_properties().end());
     }
 
-    remove_duplicates(expanded_refines);
     c.refines(expanded_refines);
     processed_qnames.insert(c.name());
 }
 
-void indexer::index_concepts(model& m) {
+void inheritance_indexer::index_concepts(model& m) {
     std::unordered_set<sml::qname> processed_qnames;
 
     for (auto& pair : m.concepts()) {
@@ -304,7 +282,7 @@ void indexer::index_concepts(model& m) {
     }
 }
 
-void indexer::index(model& m) {
+void inheritance_indexer::index(model& m) {
     index_concepts(m);
     index_objects(m);
 }

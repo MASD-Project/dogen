@@ -66,7 +66,9 @@ public:
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
         const std::list<dogen::sml::operation>& operations,
-        const std::list<dogen::sml::qname>& refines);
+        const std::list<dogen::sml::qname>& refines,
+        const bool is_parent,
+        const bool is_child);
 
 private:
     template<typename Archive>
@@ -186,6 +188,22 @@ public:
     void refines(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
+    /**
+     * @brief True if this concept is the parent of one or more concepts, false otherwise.
+     */
+    /**@{*/
+    bool is_parent() const;
+    void is_parent(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the concept has at least one parent.
+     */
+    /**@{*/
+    bool is_child() const;
+    void is_child(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const concept& rhs) const;
     bool operator!=(const concept& rhs) const {
@@ -207,6 +225,8 @@ private:
     dogen::sml::origin_types origin_type_;
     std::list<dogen::sml::operation> operations_;
     std::list<dogen::sml::qname> refines_;
+    bool is_parent_;
+    bool is_child_;
 };
 
 } }

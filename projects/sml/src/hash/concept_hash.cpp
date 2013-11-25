@@ -96,6 +96,8 @@ std::size_t concept_hasher::hash(const concept&v) {
     combine(seed, v.origin_type());
     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
     combine(seed, hash_std_list_dogen_sml_qname(v.refines()));
+    combine(seed, v.is_parent());
+    combine(seed, v.is_child());
 
     return seed;
 }

@@ -101,6 +101,10 @@ std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int positi
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -120,6 +124,8 @@ populate(const unsigned int position, result_type& v) {
     v.origin_type(create_dogen_sml_origin_types(position + 7));
     v.operations(create_std_list_dogen_sml_operation(position + 8));
     v.refines(create_std_list_dogen_sml_qname(position + 9));
+    v.is_parent(create_bool(position + 10));
+    v.is_child(create_bool(position + 11));
 }
 
 concept_generator::result_type

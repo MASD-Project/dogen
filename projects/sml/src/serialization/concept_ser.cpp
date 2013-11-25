@@ -61,6 +61,8 @@ void save(Archive& ar,
     ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("operations", v.operations_);
     ar << make_nvp("refines", v.refines_);
+    ar << make_nvp("is_parent", v.is_parent_);
+    ar << make_nvp("is_child", v.is_child_);
 }
 
 template<typename Archive>
@@ -77,6 +79,8 @@ void load(Archive& ar,
     ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("operations", v.operations_);
     ar >> make_nvp("refines", v.refines_);
+    ar >> make_nvp("is_parent", v.is_parent_);
+    ar >> make_nvp("is_child", v.is_child_);
 }
 
 } }

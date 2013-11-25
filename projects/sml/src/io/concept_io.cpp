@@ -19,6 +19,7 @@
  *
  */
 #include <boost/algorithm/string.hpp>
+#include <boost/io/ios_state.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include <sstream>
@@ -118,6 +119,12 @@ namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const concept& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::concept\"" << ", "
       << "\"all_properties\": " << v.all_properties() << ", "
@@ -129,7 +136,9 @@ std::ostream& operator<<(std::ostream& s, const concept& v) {
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
       << "\"operations\": " << v.operations() << ", "
-      << "\"refines\": " << v.refines()
+      << "\"refines\": " << v.refines() << ", "
+      << "\"is_parent\": " << v.is_parent() << ", "
+      << "\"is_child\": " << v.is_child()
       << " }";
     return(s);
 }

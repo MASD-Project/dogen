@@ -25,7 +25,9 @@ namespace sml {
 
 concept::concept()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)),
-      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
+      origin_type_(static_cast<dogen::sml::origin_types>(0)),
+      is_parent_(static_cast<bool>(0)),
+      is_child_(static_cast<bool>(0)) { }
 
 concept::concept(concept&& rhs)
     : all_properties_(std::move(rhs.all_properties_)),
@@ -37,7 +39,9 @@ concept::concept(concept&& rhs)
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
       operations_(std::move(rhs.operations_)),
-      refines_(std::move(rhs.refines_)) { }
+      refines_(std::move(rhs.refines_)),
+      is_parent_(std::move(rhs.is_parent_)),
+      is_child_(std::move(rhs.is_child_)) { }
 
 concept::concept(
     const std::list<dogen::sml::property>& all_properties,
@@ -49,7 +53,9 @@ concept::concept(
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::operation>& operations,
-    const std::list<dogen::sml::qname>& refines)
+    const std::list<dogen::sml::qname>& refines,
+    const bool is_parent,
+    const bool is_child)
     : all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
@@ -59,7 +65,9 @@ concept::concept(
       generation_type_(generation_type),
       origin_type_(origin_type),
       operations_(operations),
-      refines_(refines) { }
+      refines_(refines),
+      is_parent_(is_parent),
+      is_child_(is_child) { }
 
 void concept::swap(concept& other) noexcept {
     using std::swap;
@@ -73,6 +81,8 @@ void concept::swap(concept& other) noexcept {
     swap(origin_type_, other.origin_type_);
     swap(operations_, other.operations_);
     swap(refines_, other.refines_);
+    swap(is_parent_, other.is_parent_);
+    swap(is_child_, other.is_child_);
 }
 
 bool concept::operator==(const concept& rhs) const {
@@ -85,7 +95,9 @@ bool concept::operator==(const concept& rhs) const {
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
         operations_ == rhs.operations_ &&
-        refines_ == rhs.refines_;
+        refines_ == rhs.refines_ &&
+        is_parent_ == rhs.is_parent_ &&
+        is_child_ == rhs.is_child_;
 }
 
 concept& concept::operator=(concept other) {
@@ -236,6 +248,22 @@ void concept::refines(const std::list<dogen::sml::qname>& v) {
 
 void concept::refines(const std::list<dogen::sml::qname>&& v) {
     refines_ = std::move(v);
+}
+
+bool concept::is_parent() const {
+    return is_parent_;
+}
+
+void concept::is_parent(const bool v) {
+    is_parent_ = v;
+}
+
+bool concept::is_child() const {
+    return is_child_;
+}
+
+void concept::is_child(const bool v) {
+    is_child_ = v;
 }
 
 } }

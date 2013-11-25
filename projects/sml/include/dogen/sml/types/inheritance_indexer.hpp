@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_INDEXER_HPP
-#define DOGEN_SML_TYPES_INDEXER_HPP
+#ifndef DOGEN_SML_TYPES_INHERITANCE_INDEXER_HPP
+#define DOGEN_SML_TYPES_INHERITANCE_INDEXER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,22 +35,17 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Populates all of the indexing data structures across the
- * model.
+ * @brief Information indexer that specialises in expanding
+ * relationships across the model - other than refinement and
+ * inheritance relationships.
  *
- * The indexer expects to receive a partial model such as ones coming
+ * The inheritance_indexer expects to receive a partial model such as ones coming
  * straight out of Dia to SML transformation. Its job is to take the
  * existing data and to expand it, duplicating information across the
  * model to make it easier to access without requiring any additional
  * look-ups.
  *
- * The indexer is responsible for the following concrete tasks:
- *
- * @li expand the refined concepts in all concepts which refine other
- * concepts.
- *
- * @li expand the modeled concepts in all types which model concepts,
- * taking into account refinements.
+ * The inheritance_indexer is responsible for the following concrete tasks:
  *
  * @li populate the original parents of all children involved in
  * inheritance relationships;
@@ -62,15 +57,15 @@ namespace sml {
  * of all types.
  *
  */
-class indexer {
+class inheritance_indexer {
 public:
-    indexer() = default;
-    indexer(const indexer&) = default;
-    indexer(indexer&&) = default;
-    indexer& operator=(const indexer&) = default;
+    inheritance_indexer() = default;
+    inheritance_indexer(const inheritance_indexer&) = default;
+    inheritance_indexer(inheritance_indexer&&) = default;
+    inheritance_indexer& operator=(const inheritance_indexer&) = default;
 
 public:
-    virtual ~indexer() noexcept { }
+    virtual ~inheritance_indexer() noexcept { }
 
 private:
     /**
@@ -90,12 +85,6 @@ private:
     concept& find_concept(const qname& qn, model& m);
 
     /**
-     * @brief Removes duplicate qnames, preserving the original order
-     * of elements in the list.
-     */
-    void remove_duplicates(std::list<qname>& names) const;
-
-    /**
      * @brief Populates the all properties container.
      */
     void populate_all_properties(abstract_object& o, model& m);
@@ -103,14 +92,6 @@ private:
 private:
     /**
      * @brief Indexes a specific object.
-     *
-     * This amounts to:
-     *
-     * @li Indexing relationships with other objects in the model.
-     *
-     * @li Updating all of the computed property containers such as
-     * all properties and inherited properties for a given abstract
-     * objects.
      */
     void index_object(abstract_object& parent, abstract_object& leaf,
         model& m);
@@ -122,15 +103,6 @@ private:
 
     /**
      * @brief Populates index information in a concept.
-     *
-     * This amounts to:
-     *
-     * @li Expanding the refined list of concepts taking into account
-     * the concept inheritance graph, and finding the final distinct
-     * list of concepts one is refining;
-     *
-     * @li Updating all of the computed property containers such as
-     * all properties and inherited properties for a given concept.
      */
     void index_concept(concept& c, model& m,
         std::unordered_set<sml::qname>& processed_qnames);
