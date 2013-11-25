@@ -91,8 +91,8 @@ private:
     /**
      * @brief Indexes a specific object.
      */
-    void index_object(abstract_object& parent, abstract_object& leaf,
-        model& m);
+    void index_object(abstract_object& o, model& m,
+        std::unordered_set<sml::qname>& processed_qnames);
 
     /**
      * @brief Indexes all objects in the model.
