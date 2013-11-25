@@ -49,9 +49,20 @@ Dogen is the union of two core ideas:
 - Domain Driven Design
 
 We'll introduce each in turn, and then explain why we decided to marry
-the two.
+the two. But before we get into the details, a word on models in
+general.
 
-*** Code generation
+*** Models
+
+FIXME: do we need a section on what models are?
+
+Programming is a refined art of abstraction. In general, the
+programmer's job is to create a set of abstractions that represent
+entities in some problem domain or other; and to get those entities to
+cooperate successfully in producing work that is defined as useful by
+someone. These entities put together form a model.
+
+*** Code generation and meta-models
 
 The concept of programs that generate programs is probably as old as
 computer science itself: it certainly was a common feature in the days
@@ -86,23 +97,28 @@ represent the entities to generate - explicitly or implicitly. These
 data structures are known as the /meta-model/. Meta-models are a class
 of models that focus on describing models themselves. They allow code
 to introspect and to think about code; to reflect. In this form, code
-generation is simply the translation of one such representation into
-another - a text file - following the rules laid out by the grammar of
-a programming language. The more complete the meta-model, the more
-expressive the generated code can be - and vice-versa. It is in this
-light that we call certain classes of code generators /special
-purpose/ because they have meta-models that are very focused, designed
-only for the task at hand.
+generation is simply the transformation of a model, described in one
+such representation, into another representation - source code -
+following the rules laid out by the grammar of a programming
+language. The more complete the meta-model, the more expressive the
+generated code can be - and vice-versa. It is in this light that we
+call certain classes of code generators /special purpose/, because
+they have meta-models that are very focused, designed only for the
+task at hand.
 
-However, meta-models are useful in a more general form when designing
-software applications. One of the most common meta-models in existence
-is UML. UML is used widely in the industry and there are many tools
-that can be used to generate source code from UML diagrams. UML is
-simultaneously ubiquitous - that is, available everywhere - and
-complete - that is, as a meta-model it defines a extensive list of
-concepts for pretty much any aspect of programming. At present there
-are a few Open Source tools that can generate source code from a UML
-diagram:
+However, meta-models can be useful in a more general form when
+designing software applications. One of the most common meta-models in
+existence is UML. UML is used widely in the industry and there are
+many tools that can be used to generate source code from UML
+diagrams. UML is simultaneously ubiquitous - that is, available
+everywhere - and complete - that is, as a meta-model it defines a
+extensive list of concepts for pretty much any aspect of
+programming. Thus it is common for tools to take a UML representation
+and use it to generate source code.
+
+
+ At present there are a few Open Source tools that can
+generate source code from a UML diagram:
 
 FIXME: add links
 
@@ -163,9 +179,6 @@ of representations: UML diagrams, specification documents, oral
 conversations and, most importantly, source code.
 
 *** Adding the two together
-
-
-
 ** Hello World Example
 
 * PART II - ADVANCED CONCEPTS
