@@ -672,13 +672,13 @@ build_second_degree_concepts_model(const unsigned int n) const {
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
-    o0->modeled_concepts().push_back(c1.name());
-    add_relationship(*o0, c1, mc);
+    o0->modeled_concepts().push_back(c0.name());
+    add_relationship(*o0, c0, mc);
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
-    o1->modeled_concepts().push_back(c0.name());
-    add_relationship(*o1, c0, mc);
+    o1->modeled_concepts().push_back(c1.name());
+    add_relationship(*o1, c1, mc);
     insert_object(r, o1);
 
     auto o2(build_value_object(2, r.name()));

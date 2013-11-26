@@ -212,4 +212,91 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     }
 }
 
+BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_expected_indices) {
+    // SETUP_TEST_LOG_SOURCE("model_with_two_levels_of_concept_inheritance_results_in_expected_indices");
+
+    // using dogen::sml::relationship_types;
+    // const auto mc(relationship_types::modeled_concepts);
+    // const auto par(relationship_types::parents);
+
+    // auto m(factory.build_second_degree_concepts_model());
+    // BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    // BOOST_REQUIRE(m.objects().size() == 3);
+    // for (const auto& pair : m.objects()) {
+    //     const auto& qn(pair.first);
+    //     const auto& o(*pair.second);
+
+    //     auto i(o.relationships().find(mc));
+    //     BOOST_REQUIRE(i != o.relationships().end());
+    //     if (factory.is_type_name_n(0, qn)) {
+    //         BOOST_REQUIRE(i->second.size() == 1);
+    //         BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
+    //     } else if (factory.is_type_name_n(1, qn)) {
+    //         BOOST_REQUIRE(i->second.size() == 1);
+    //         BOOST_REQUIRE(factory.is_concept_name_n(1, i->second.front()));
+    //     } else if (factory.is_type_name_n(2, qn)) {
+    //         BOOST_REQUIRE(i->second.size() == 1);
+    //         BOOST_REQUIRE(factory.is_concept_name_n(2, i->second.front()));
+    //     } else
+    //         BOOST_FAIL("Unexpected object: " << qn);
+
+    //     i = o.relationships().find(par);
+    //     BOOST_REQUIRE(i == o.relationships().end());
+    // }
+
+    // BOOST_REQUIRE(m.concepts().size() == 3);
+    // for (const auto& pair : m.concepts()) {
+    //     const auto& qn(pair.first);
+    //     const auto& c(pair.second);
+
+    //     if (factory.is_concept_name_n(0, qn)) {
+    //         BOOST_REQUIRE(c.refines().size() == 1);
+    //         BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
+    //     } else if (factory.is_concept_name_n(1, qn)) {
+    //         BOOST_REQUIRE(c.refines().size() == 1);
+    //         BOOST_REQUIRE(factory.is_concept_name_n(1, c.refines().front()));
+    //     } else if (factory.is_concept_name_n(2, qn)) {
+    //         BOOST_REQUIRE(c.refines().size() == 1);
+    //         BOOST_REQUIRE(factory.is_concept_name_n(1, c.refines().front()));
+    //     } else
+    //         BOOST_FAIL("Unexpected concept: " << qn);
+    // }
+
+    // dogen::sml::concept_indexer ind;
+    // ind.index(m);
+    // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+
+    // for (const auto& pair : m.concepts()) {
+    //     const auto& qn(pair.first);
+    //     const auto& c(pair.second);
+
+    //     if (factory.is_concept_name_n(0, qn)) {
+    //         BOOST_CHECK(c.refines().empty());
+    //     } else if (factory.is_concept_name_n(1, qn)) {
+    //         BOOST_CHECK(c.refines().size() == 1);
+    //     } else if (factory.is_concept_name_n(2, qn)) {
+    //         BOOST_CHECK(c.refines().size() == 3);
+    //     } else
+    //         BOOST_FAIL("Unexpected concept: " << qn);
+    // }
+
+    // BOOST_REQUIRE(m.objects().size() == 3);
+    // for (const auto& pair : m.objects()) {
+    //     const auto& qn(pair.first);
+    //     const auto& o(*pair.second);
+
+    //     const auto i(o.relationships().find(mc));
+    //     BOOST_REQUIRE(i != o.relationships().end());
+
+    //     if (factory.is_type_name_n(0, qn))
+    //         BOOST_CHECK(i->second.size() == 1);
+    //     else if (factory.is_type_name_n(1, qn)) {
+    //         BOOST_CHECK(i->second.size() == 2);
+    //     } else if (factory.is_type_name_n(2, qn)) {
+    //             BOOST_CHECK(i->second.size() == 3);
+    //     } else
+    //         BOOST_FAIL("Unexpected object: " << qn);
+    // }
+}
+
 BOOST_AUTO_TEST_SUITE_END()
