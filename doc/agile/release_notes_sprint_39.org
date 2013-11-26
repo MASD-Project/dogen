@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 39.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-26 Tue 08:19]
+Clock summary at [2013-11-26 Tue 08:40]
 
-| Headline                                                         | Time    |       |      |
-|------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *11:07* |       |      |
-|------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 11:07 |      |
-| IMPLEMENTATION Release notes and backlog grooming                |         |       | 0:31 |
-| IMPLEMENTATION Update manual                                     |         |       | 0:14 |
-| COMPLETED Mock: distinguish between concept names and type names |         |       | 0:32 |
-| COMPLETED Split indexer into concepts and inheritance            |         |       | 8:03 |
-| Finish implementation of =concept_indexer= and add tests         |         |       | 1:47 |
+| Headline                                                                | Time    |       |      |
+|-------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                            | *11:27* |       |      |
+|-------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                         |         | 11:27 |      |
+| IMPLEMENTATION Release notes and backlog grooming                       |         |       | 0:31 |
+| IMPLEMENTATION Update manual                                            |         |       | 0:14 |
+| COMPLETED Mock: distinguish between concept names and type names        |         |       | 0:32 |
+| COMPLETED Split indexer into concepts and inheritance                   |         |       | 8:03 |
+| IMPLEMENTATION Finish implementation of =concept_indexer= and add tests |         |       | 2:07 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -118,6 +118,8 @@ Rationale for split:
      CLOCK: [2013-11-26 Tue 07:22]--[2013-11-26 Tue 07:28] =>  0:06
 
 **** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
+     CLOCK: [2013-11-26 Tue 08:21]--[2013-11-26 Tue 08:40] =>  0:19
+     CLOCK: [2013-11-26 Tue 08:20]--[2013-11-26 Tue 08:21] =>  0:01
      CLOCK: [2013-11-19 Tue 17:42]--[2013-11-19 Tue 18:24] =>  0:42
      CLOCK: [2013-11-19 Tue 08:06]--[2013-11-19 Tue 08:40] =>  0:34
 

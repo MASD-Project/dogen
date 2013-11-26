@@ -125,12 +125,17 @@ void concept_indexer::index_object(abstract_object& o, model& m,
         return;
     }
 
-    std::set<qname> our_concepts;
-    for (const auto& qn : i->second) {
-        const auto& c(find_concept(qn, m));
-        our_concepts.insert(c.name());
-        our_concepts.insert(c.refines().begin(), c.refines().end());
+    std::list<qname> expanded_refines;
+    for (auto& qn : i->second) {
+        auto& c(find_concept(qn, m));
+        expanded_refines.push_back(qn);
+        expanded_refines.insert(expanded_refines.end(),
+            c.refines().begin(), c.refines().end());
     }
+    remove_duplicates(expanded_refines);
+
+    std::set<qname> our_concepts;
+    our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
 
     std::set<qname> their_concepts;
     for (const auto& qn : find_relationships(relationship_types::parents, o)) {
@@ -157,9 +162,8 @@ void concept_indexer::index_object(abstract_object& o, model& m,
      * difference. we do this instead of just using the set difference
      * directly to preserve order.
      */
-    auto tmp(i->second);
     i->second.clear();
-    for (const auto& qn : tmp) {
+    for (const auto& qn : expanded_refines) {
         if (result.find(qn) != result.end())
             i->second.push_back(qn);
     }
