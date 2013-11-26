@@ -10,21 +10,22 @@ This file contains all stories that were closed during sprint 39.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-25 Mon 23:25]
+Clock summary at [2013-11-26 Tue 08:19]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *10:34* |       |      |
+| *Total time*                                                     | *11:07* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 10:34 |      |
-| IMPLEMENTATION Release notes and backlog grooming                |         |       | 0:29 |
+| Development Stories Implemented                                  |         | 11:07 |      |
+| IMPLEMENTATION Release notes and backlog grooming                |         |       | 0:31 |
+| IMPLEMENTATION Update manual                                     |         |       | 0:14 |
 | COMPLETED Mock: distinguish between concept names and type names |         |       | 0:32 |
 | COMPLETED Split indexer into concepts and inheritance            |         |       | 8:03 |
-| IMPLEMENTATION Update manual                                     |         |       | 0:14 |
-| Finish implementation of =concept_indexer= and add tests         |         |       | 1:16 |
+| Finish implementation of =concept_indexer= and add tests         |         |       | 1:47 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-11-26 Tue 07:20]--[2013-11-26 Tue 07:22] =>  0:02
     CLOCK: [2013-11-25 Mon 08:21]--[2013-11-25 Mon 08:33] =>  0:12
     CLOCK: [2013-11-19 Tue 21:38]--[2013-11-19 Tue 21:49] =>  0:11
     CLOCK: [2013-11-19 Tue 07:56]--[2013-11-19 Tue 08:02] =>  0:06
@@ -109,7 +110,12 @@ Rationale for split:
      CLOCK: [2013-11-25 Mon 17:54]--[2013-11-25 Mon 18:23] =>  0:29
      CLOCK: [2013-11-25 Mon 08:33]--[2013-11-25 Mon 08:40] =>  0:07
 
-*** Finish implementation of =concept_indexer= and add tests          :story:
+*** IMPLEMENTATION Finish implementation of =concept_indexer= and add tests :story:
+
+**** COMPLETED Improve documentation                                   :task:
+     CLOSED: [2013-11-26 Tue 08:19]
+     CLOCK: [2013-11-26 Tue 07:54]--[2013-11-26 Tue 08:19] =>  0:25
+     CLOCK: [2013-11-26 Tue 07:22]--[2013-11-26 Tue 07:28] =>  0:06
 
 **** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
      CLOCK: [2013-11-19 Tue 17:42]--[2013-11-19 Tue 18:24] =>  0:42

@@ -35,23 +35,61 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Information indexer that specialises in expanding
+ * @brief Information indexer that specialises in indexing
  * concept-related relationships across the model.
  *
- * The concept_indexer expects to receive a partial model such as ones
- * coming straight out of Dia to SML transformation. Its job is to
- * take the existing data and to expand it, duplicating information
- * across the model to make it easier to access without requiring any
- * additional look-ups.
+ * @section sml_concept_indexer_0 Model requirements
  *
- * The concept indexer is responsible for the following concrete
- * tasks:
+ * The concept indexer expects to receive a partial model such as ones
+ * coming straight out of Dia to SML transformation.
  *
- * @li expand the refined concepts in all concepts which refine other
+ * @section sml_concept_indexer_1 First stage: indexing concepts
+ *
+ * The concept indexer only touches two types of model elements:
+ * concepts and abstract objects. This is because these are the only
+ * two elements involved in relationships that involve concepts.
+ *
+ * The concept indexer starts by processing all concepts. Each concept
+ * goes through two steps: @e expansion and @e reduction. Expansion is
+ * defined as adding to each refined concept the set of all concepts
+ * implied by the refinement graph of that concept: that is, the
+ * concept itself, the concepts that the concept refines (lets call it
+ * @e parents), the concepts that the parents refine and so on.
+ *
+ * Once the expansion is complete, reduction takes place: that is, all
+ * duplicate concepts are removed. The final result is known as the @e
+ * reduced @e concept @e set.
+ *
+ * Note that we use the word @e set here in the mathematical sense, as
+ * implementation-wise we use lists manage these relationships. This
+ * is because we aim to preserve order where possible; this is to
+ * avoid having the code generation move (potentially dramatically)
+ * every time any alteration is done to the concept hierarchy.
+ *
+ * @section sml_concept_indexer_2 Second stage: indexing objects
+ *
+ * The concept indexer is also responsible for updating the modeled
+ * concepts in abstract objects. Thus only objects that are part of
+ * such relationships are affected. For example a child which does not
+ * model any concepts is not affected, even if its parent does model
  * concepts.
  *
- * @li expand the modeled concepts in all types which model concepts,
- * taking into account refinements.
+ * Note that object indexing must be done after the concept indexing
+ * described above as it depends on it.
+ *
+ * For objects which do not have parents, the operation is simple: for
+ * a given object o, we just need to compute its reduced concept set
+ * implied by its modeled concepts.
+ *
+ * For objects with parents things are slightly more complicated. We
+ * must first compute the reduced concept set implied by all its
+ * parents; this includes @e all modeled concepts found in the
+ * entirety of the inheritance graph of a given object. Lets call that
+ * set P. We then take the set of all concepts modeled by the object
+ * directly (say R). The final set of modeled concepts for the object
+ * is given by the set difference between R and S; that is, we remove
+ * all concepts in R which are part of S - leaving those that only
+ * exist in R but not in S.
  *
  */
 class concept_indexer {
