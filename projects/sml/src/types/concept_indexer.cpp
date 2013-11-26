@@ -115,13 +115,17 @@ void concept_indexer::remove_duplicates(std::list<qname>& names) const {
 
 void concept_indexer::index_object(abstract_object& o, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().simple_name();
 
-    if (processed_qnames.find(o.name()) != processed_qnames.end())
+    if (processed_qnames.find(o.name()) != processed_qnames.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Already processed.";
         return;
+    }
 
     const auto i(o.relationships().find(relationship_types::modeled_concepts));
-    if (i == o.relationships().end() || !i->second.empty() || !o.is_child()) {
+    if (i == o.relationships().end() || i->second.empty()) {
         processed_qnames.insert(o.name());
+        BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
         return;
     }
 
@@ -133,6 +137,12 @@ void concept_indexer::index_object(abstract_object& o, model& m,
             c.refines().begin(), c.refines().end());
     }
     remove_duplicates(expanded_refines);
+
+    if (!o.is_child()) {
+        i->second = expanded_refines;
+        BOOST_LOG_SEV(lg, debug) << "Object has no parents, using reduced set.";
+        return;
+    }
 
     std::set<qname> our_concepts;
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
@@ -162,6 +172,7 @@ void concept_indexer::index_object(abstract_object& o, model& m,
      * difference. we do this instead of just using the set difference
      * directly to preserve order.
      */
+    BOOST_LOG_SEV(lg, debug) << "Object has parents, computing set difference.";
     i->second.clear();
     for (const auto& qn : expanded_refines) {
         if (result.find(qn) != result.end())
@@ -170,8 +181,7 @@ void concept_indexer::index_object(abstract_object& o, model& m,
 }
 
 void concept_indexer::index_objects(model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing objects: "
-                             << m.objects().size();
+    BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
     std::unordered_set<sml::qname> processed_qnames;
     for (auto& pair : m.objects()) {
@@ -186,10 +196,14 @@ void concept_indexer::index_objects(model& m) {
 
 void concept_indexer::index_concept(concept& c, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
-    if (processed_qnames.find(c.name()) != processed_qnames.end())
+    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().simple_name();
+    if (processed_qnames.find(c.name()) != processed_qnames.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Already processed.";
         return;
+    }
 
     if (c.refines().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Concept refines no concepts.";
         processed_qnames.insert(c.name());
         return;
     }
@@ -205,14 +219,14 @@ void concept_indexer::index_concept(concept& c, model& m,
             parent.refines().begin(), parent.refines().end());
     }
 
+    BOOST_LOG_SEV(lg, debug) << "Computing reduced set for concept.";
     remove_duplicates(expanded_refines);
     c.refines(expanded_refines);
     processed_qnames.insert(c.name());
 }
 
 void concept_indexer::index_concepts(model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concepts: "
-                             << m.concepts().size();
+    BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
 
     std::unordered_set<sml::qname> processed_qnames;
     for (auto& pair : m.concepts()) {

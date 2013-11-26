@@ -206,7 +206,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         if (factory.is_type_name_n(0, qn))
             BOOST_CHECK(i->second.size() == 1);
         else if (factory.is_type_name_n(1, qn)) {
-            // BOOST_CHECK(i->second.size() == 2);
+            BOOST_CHECK(i->second.size() == 2);
         } else
             BOOST_FAIL("Unexpected object: " << qn);
     }
