@@ -730,12 +730,12 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    concept c2(build_concept(1, r.name()));
+    concept c2(build_concept(2, r.name()));
     add_property(c2, 2);
     c2.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c2);
 
-    concept c3(build_concept(1, r.name()));
+    concept c3(build_concept(3, r.name()));
     add_property(c3, 3);
     c3.refines().push_back(c1.name());
     c3.refines().push_back(c2.name());
