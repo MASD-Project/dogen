@@ -209,7 +209,8 @@ void populate_object(dogen::sml::abstract_object& o, const unsigned int i,
     o.origin_type(dogen::sml::origin_types::user);
 }
 
-void populate_simple_model_properties(dogen::sml::model& m, const unsigned int n) {
+void populate_simple_model_properties(dogen::sml::model& m,
+    const unsigned int n) {
     m.name(mock_model_qname(n));
     m.documentation(documentation);
     m.origin_type(dogen::sml::origin_types::user);
@@ -664,7 +665,7 @@ build_second_degree_concepts_model(const unsigned int n) const {
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    concept c2(build_concept(1, r.name()));
+    concept c2(build_concept(2, r.name()));
     add_property(c2, indexed_, 2);
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);

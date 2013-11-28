@@ -118,6 +118,7 @@ Rationale for split:
      CLOCK: [2013-11-26 Tue 07:22]--[2013-11-26 Tue 07:28] =>  0:06
 
 **** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
+     CLOCK: [2013-11-28 Thu 07:52]--[2013-11-28 Thu 08:24] =>  0:32
      CLOCK: [2013-11-26 Tue 18:21]--[2013-11-26 Tue 18:36] =>  0:15
      CLOCK: [2013-11-26 Tue 17:53]--[2013-11-26 Tue 18:20] =>  0:27
      CLOCK: [2013-11-26 Tue 08:21]--[2013-11-26 Tue 08:40] =>  0:19
@@ -127,7 +128,6 @@ Rationale for split:
 
 **** Add unit tests for the indexing of properties                     :task:
 **** Add unit tests for the indexing of relationships                  :task:
-
 **** Plug into workflow                                                :task:
 *** Finish implementation of =inheritance_indexer= and add tests      :story:
 **** Update transformer to populate basic relationships                :task:
