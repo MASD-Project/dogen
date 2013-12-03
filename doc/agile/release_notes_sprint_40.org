@@ -27,9 +27,11 @@ Clock summary at [2013-12-03 Tue 08:06]
 
 Use compilation downtime to update the manual.
 
-*** Add more tests to =concept_indexer=                               :story:
+*** IMPLEMENTATION Add more tests to =concept_indexer=                :story:
 
-**** Finish adding unit tests for modeled concepts                     :task:
+**** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
+     CLOCK: [2013-12-03 Tue 08:06]--[2013-12-03 Tue 08:48] =>  0:42
+
 **** Add unit tests for the indexing of properties                     :task:
 **** Add unit tests for the indexing of relationships                  :task:
 *** Plug =concept_indexer= into workflow                              :story:

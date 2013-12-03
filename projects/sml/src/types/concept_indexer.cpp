@@ -100,12 +100,16 @@ void concept_indexer::remove_duplicates(std::list<qname>& names) const {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size();
 
-    for (auto i(names.begin()); i != names.end(); ++i) {
-        if (processed.find(*i) != processed.end()) {
-            names.erase(i); // iterator is ok after erase
+    auto i(names.begin());
+    while (i != names.end()) {
+        const auto qn(*i);
+        if (processed.find(qn) != processed.end()) {
+            const auto j(i++);
+            names.erase(j);
             continue;
         }
-        processed.insert(*i);
+        ++i;
+        processed.insert(qn);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
