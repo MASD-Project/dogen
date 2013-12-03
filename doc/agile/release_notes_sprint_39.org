@@ -10,27 +10,30 @@ This file contains all stories that were closed during sprint 39.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-26 Tue 18:37]
+Clock summary at [2013-12-03 Tue 08:01]
 
-| Headline                                                                | Time    |       |      |
-|-------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                            | *12:09* |       |      |
-|-------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                         |         | 12:09 |      |
-| IMPLEMENTATION Release notes and backlog grooming                       |         |       | 0:31 |
-| IMPLEMENTATION Update manual                                            |         |       | 0:14 |
-| COMPLETED Mock: distinguish between concept names and type names        |         |       | 0:32 |
-| COMPLETED Split indexer into concepts and inheritance                   |         |       | 8:03 |
-| IMPLEMENTATION Finish implementation of =concept_indexer= and add tests |         |       | 2:49 |
+| Headline                                                           | Time    |       |      |
+|--------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                       | *13:02* |       |      |
+|--------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                    |         | 13:02 |      |
+| COMPLETED Release notes and backlog grooming                       |         |       | 0:36 |
+| COMPLETED Update manual                                            |         |       | 0:14 |
+| COMPLETED Mock: distinguish between concept names and type names   |         |       | 0:32 |
+| COMPLETED Split indexer into concepts and inheritance              |         |       | 8:03 |
+| COMPLETED Finish implementation of =concept_indexer= and add tests |         |       | 3:37 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-12-03 Tue 07:59]
+    CLOCK: [2013-12-03 Tue 07:56]--[2013-12-03 Tue 08:01] =>  0:05
     CLOCK: [2013-11-26 Tue 07:20]--[2013-11-26 Tue 07:22] =>  0:02
     CLOCK: [2013-11-25 Mon 08:21]--[2013-11-25 Mon 08:33] =>  0:12
     CLOCK: [2013-11-19 Tue 21:38]--[2013-11-19 Tue 21:49] =>  0:11
     CLOCK: [2013-11-19 Tue 07:56]--[2013-11-19 Tue 08:02] =>  0:06
 
-*** IMPLEMENTATION Update manual                                      :story:
+*** COMPLETED Update manual                                           :story:
+    CLOSED: [2013-12-03 Tue 08:00]
     CLOCK: [2013-11-25 Mon 18:24]--[2013-11-25 Mon 18:38] =>  0:14
 
 Use compilation downtime to update the manual.
@@ -110,15 +113,17 @@ Rationale for split:
      CLOCK: [2013-11-25 Mon 17:54]--[2013-11-25 Mon 18:23] =>  0:29
      CLOCK: [2013-11-25 Mon 08:33]--[2013-11-25 Mon 08:40] =>  0:07
 
-*** IMPLEMENTATION Finish implementation of =concept_indexer= and add tests :story:
+*** COMPLETED Finish implementation of =concept_indexer= and add tests :story:
+    CLOSED: [2013-12-03 Tue 08:00]
 
 **** COMPLETED Improve documentation                                   :task:
      CLOSED: [2013-11-26 Tue 08:19]
      CLOCK: [2013-11-26 Tue 07:54]--[2013-11-26 Tue 08:19] =>  0:25
      CLOCK: [2013-11-26 Tue 07:22]--[2013-11-26 Tue 07:28] =>  0:06
 
-**** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
-     CLOCK: [2013-11-28 Thu 08:24]
+**** COMPLETED Finish adding unit tests for modeled concepts           :task:
+     CLOSED: [2013-12-03 Tue 08:00]
+     CLOCK: [2013-11-28 Thu 08:24]--[2013-11-28 Thu 08:40] =>  0:16
      CLOCK: [2013-11-28 Thu 07:52]--[2013-11-28 Thu 08:24] =>  0:32
      CLOCK: [2013-11-26 Tue 18:21]--[2013-11-26 Tue 18:36] =>  0:15
      CLOCK: [2013-11-26 Tue 17:53]--[2013-11-26 Tue 18:20] =>  0:27
@@ -127,48 +132,17 @@ Rationale for split:
      CLOCK: [2013-11-19 Tue 17:42]--[2013-11-19 Tue 18:24] =>  0:42
      CLOCK: [2013-11-19 Tue 08:06]--[2013-11-19 Tue 08:40] =>  0:34
 
-**** Add unit tests for the indexing of properties                     :task:
-**** Add unit tests for the indexing of relationships                  :task:
-**** Plug into workflow                                                :task:
-*** Finish implementation of =inheritance_indexer= and add tests      :story:
-**** Update transformer to populate basic relationships                :task:
-**** Implement indexing of associations, keys and visitor              :task:
-**** Plug into workflow                                                :task:
-*** IMPLEMENTATION Add properties to concept                          :story:
+**** CANCELLED Add unit tests for the indexing of properties           :task:
+     CLOSED: [2013-12-03 Tue 08:00]
+**** CANCELLED Add unit tests for the indexing of relationships        :task:
+     CLOSED: [2013-12-03 Tue 08:00]
+**** CANCELLED Plug into workflow                                      :task:
+     CLOSED: [2013-12-03 Tue 08:00]
+*** COMPLETED Add properties to concept                               :story:
+    CLOSED: [2013-12-03 Tue 08:00]
 
 - add =is_parent= and =is_child= to concepts to make recursion easier
 - review usage of these properties in =abstract_object= - are they
   useful or not?
-
-*** Replace existing structures with indexing ones                    :story:
-
-Make use of the indexing information in legacy C++ formatters as a way
-to validate that it is correct.
-
-**** Create a helper class to handle relationships                     :task:
-
-- =find_relationship=: gets a specific relationship container, returns
-  empty if it does not exist.
-- =find_relationship_strict=: gets a specific relationship container,
-  throws if it does not exist.
-
-**** Replace original parent/parent functionality with relationships   :task:
-
-- delete leaves, original parent, parent attributes and use
-  relationships instead.
-
-**** Replace the concepts expansion code with relationships            :task:
-**** Replace C++ property handling code with relationships             :task:
-**** Replace association, keys and visitor with relationships          :task:
-
-*** Add include file support to main type formatter                   :story:
-
-Inclusion support needs to be moved to the formatters. SML provides
-all the required information at the model level in terms of type
-dependencies, but only the formatter itself knows what includes it
-needs because these are related to the implementation. Even
-determining which facets of a type one should include is formatter
-dependent. We need to distribute the logic of the includer into each
-formatter.
 
 ** Deprecated Development Stories
