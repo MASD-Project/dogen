@@ -240,6 +240,7 @@ public:
         const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0) const;
 
+public:
     /**
      * @brief Builds a model with a concept, and a type that models
      * it.
@@ -259,7 +260,7 @@ public:
 
     /**
      * @brief Builds a model with two base concepts and a concept that
-     * refines both const;
+     * refines both.
      */
     model build_multiple_inheritance_concepts_model(
         const unsigned int n = 0) const;
@@ -270,6 +271,20 @@ public:
      * type last concept.
      */
     model build_diamond_inheritance_concepts_model(
+        const unsigned int n = 0) const;
+
+    /**
+     * @brief Builds a model with a child object with a parent that
+     * models a concept.
+     */
+    model build_object_with_parent_that_models_concept(
+        const unsigned int n = 0) const;
+
+    /**
+     * @brief Builds a model with a child object with a parent that
+     * models a concept that refines a concept.
+     */
+    model build_object_with_parent_that_models_a_refined_concept(
         const unsigned int n = 0) const;
 
 public:

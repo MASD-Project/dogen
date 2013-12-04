@@ -458,7 +458,6 @@ build_entity(const property& prop, const bool keyed,
     const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
-    using namespace dogen::sml;
     boost::shared_ptr<abstract_entity> r;
     if (keyed)
         r = boost::shared_ptr<abstract_entity>(new keyed_entity());
@@ -750,10 +749,33 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
     return r;
 }
 
+model mock_model_factory::build_object_with_parent_that_models_concept(
+    const unsigned int n) const {
+    model r(build_empty_model(n));
+    concept c0(build_concept(0, r.name()));
+    add_property(c0, indexed_);
+    insert_nameable(r.concepts(), c0);
+
+    auto o0(build_value_object(0, r.name()));
+    o0->modeled_concepts().push_back(c0.name());
+
+    const auto mc(relationship_types::modeled_concepts);
+    add_relationship(*o0, c0, mc);
+    insert_object(r, o0);
+
+    auto o1(build_value_object(1, r.name()));
+    parent_to_child(*o0, *o1);
+    o1->original_parent_name(o0->name());
+    o1->parent_name(o0->name());
+    o0->is_parent(true);
+    o0->leaves().push_back(o1->name());
+    insert_object(r, o1);
+
+    return r;
+}
+
 model mock_model_factory::
 object_with_property(const object_types ot, const property_types pt) const {
-    using namespace dogen::sml;
-
     const auto mn(mock_model_qname(0));
     auto o1(build_value_object(1, mn));
 

@@ -10,14 +10,15 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-03 Tue 08:06]
+Clock summary at [2013-12-04 Wed 08:12]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:05* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:05 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:05 |
+| Headline                                           | Time   |      |      |
+|----------------------------------------------------+--------+------+------|
+| *Total time*                                       | *1:31* |      |      |
+|----------------------------------------------------+--------+------+------|
+| Development Stories Implemented                    |        | 1:31 |      |
+| IMPLEMENTATION Release notes and backlog grooming  |        |      | 0:05 |
+| IMPLEMENTATION Add more tests to =concept_indexer= |        |      | 1:26 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -30,6 +31,8 @@ Use compilation downtime to update the manual.
 *** IMPLEMENTATION Add more tests to =concept_indexer=                :story:
 
 **** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
+     CLOCK: [2013-12-04 Wed 07:48]--[2013-12-04 Wed 08:12] =>  0:24
+     CLOCK: [2013-12-03 Tue 21:09]--[2013-12-03 Tue 21:29] =>  0:20
      CLOCK: [2013-12-03 Tue 08:06]--[2013-12-03 Tue 08:48] =>  0:42
 
 **** Add unit tests for the indexing of properties                     :task:
