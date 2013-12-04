@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Validate mock factory on its own tests                            :story:
+
+At present we have a lot of code that ensures that the output of mock
+factory actually corresponds to expectations. However, this validation
+is in the tests that use the mock factory, resulting in duplication
+and possibly missing coverage. We should really just have a mock
+factory test with this validation.
+
 *** Add export macros support                                         :story:
 
 We should add export macros for shared objects/DLLs:
