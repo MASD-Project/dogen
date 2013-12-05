@@ -458,7 +458,8 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
     for (const auto& qn : ao.modeled_concepts())
         properties_for_concept(qn, props, processed_qnames);
 
-    props.insert(props.end(), ao.local_properties().begin(), ao.local_properties().end());
+    props.insert(props.end(), ao.local_properties().begin(),
+        ao.local_properties().end());
 
     for (const auto& prop : props) {
         const auto tuple(to_property_info(

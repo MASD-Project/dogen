@@ -148,7 +148,9 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     std::unordered_set<sml::qname> processed_qnames;
     for (const auto& qn : ao.modeled_concepts())
         properties_for_concept(qn, props, processed_qnames);
-    props.insert(props.end(), ao.local_properties().begin(), ao.local_properties().end());
+
+    props.insert(props.end(), ao.local_properties().begin(),
+        ao.local_properties().end());
 
     for (const auto& prop : props) {
         const auto nqn(prop.type());
