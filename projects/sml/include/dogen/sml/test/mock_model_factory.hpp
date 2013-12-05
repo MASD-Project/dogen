@@ -287,6 +287,26 @@ public:
     model build_object_with_parent_that_models_a_refined_concept(
         const unsigned int n = 0) const;
 
+    /**
+     * @brief Builds a model with a concept that refines a
+     * non-existing concept.
+     */
+    model build_concept_that_refines_missing_concept(
+        const unsigned int n = 0) const;
+
+    /**
+     * @brief Builds a model with a concept that refines a
+     * non-existing concept.
+     */
+    model build_object_that_models_missing_concept(
+        const unsigned int n = 0) const;
+
+    /**
+     * @brief object that models concept with missing parent.
+     */
+    model build_object_that_models_concept_with_missing_parent(
+        const unsigned int n = 0) const;
+
 public:
     /**
      * @brief Scenario: object with single property of a type existent in
@@ -317,7 +337,7 @@ public:
     /**
      * @brief Scenario: object with missing parent in current model.
      */
-    model object_with_missing_child_in_the_same_model() const;
+    model object_with_missing_parent_in_the_same_model() const;
 
     /**
      * @brief Scenario: object with a parent in a second model.

@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-04 Wed 18:49]
+Clock summary at [2013-12-05 Thu 18:10]
 
-| Headline                                           | Time   |      |      |
-|----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *2:13* |      |      |
-|----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 2:13 |      |
-| IMPLEMENTATION Release notes and backlog grooming  |        |      | 0:05 |
-| IMPLEMENTATION Add more tests to =concept_indexer= |        |      | 2:08 |
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *3:27* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 3:27 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:05 |
+| COMPLETED Add more tests to =concept_indexer=     |        |      | 3:22 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -28,17 +28,20 @@ Clock summary at [2013-12-04 Wed 18:49]
 
 Use compilation downtime to update the manual.
 
-*** IMPLEMENTATION Add more tests to =concept_indexer=                :story:
-
-**** IMPLEMENTATION Finish adding unit tests for modeled concepts      :task:
+*** COMPLETED Add more tests to =concept_indexer=                     :story:
+    CLOSED: [2013-12-05 Thu 08:44]
+**** COMPLETED Finish adding unit tests for modeled concepts           :task:
+     CLOSED: [2013-12-05 Thu 08:06]
+     CLOCK: [2013-12-05 Thu 17:44]--[2013-12-05 Thu 18:10] =>  0:26
+     CLOCK: [2013-12-05 Thu 07:56]--[2013-12-05 Thu 08:06] =>  0:10
      CLOCK: [2013-12-04 Wed 18:07]--[2013-12-04 Wed 18:49] =>  0:42
      CLOCK: [2013-12-04 Wed 07:48]--[2013-12-04 Wed 08:12] =>  0:24
      CLOCK: [2013-12-03 Tue 21:09]--[2013-12-03 Tue 21:29] =>  0:20
      CLOCK: [2013-12-03 Tue 08:06]--[2013-12-03 Tue 08:48] =>  0:42
 
-**** Add unit tests for the indexing of properties                     :task:
-**** Add unit tests for the indexing of relationships                  :task:
-**** Add negative unit tests                                           :task:
+**** COMPLETED Add negative unit tests                                 :task:
+     CLOSED: [2013-12-05 Thu 08:44]
+     CLOCK: [2013-12-05 Thu 08:06]--[2013-12-05 Thu 08:44] =>  0:38
 
 - concept that refines non-existing concept
 - object that models non-existing concept
@@ -53,6 +56,9 @@ Use compilation downtime to update the manual.
 **** Update transformer to populate basic relationships                :task:
 **** Implement indexing of associations, keys and visitor              :task:
 **** Plug into workflow                                                :task:
+**** Add unit tests for the indexing of properties                     :task:
+**** Add unit tests for the indexing of relationships                  :task:
+
 *** Replace existing structures with indexing ones                    :story:
 
 Make use of the indexing information in legacy C++ formatters as a way

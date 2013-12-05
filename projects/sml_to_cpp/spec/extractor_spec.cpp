@@ -508,7 +508,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
 BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_missing_parent_throws) {
     SETUP_TEST_LOG_SOURCE("inheritance_graph_of_object_with_missing_parent_throws");
 
-    const auto m(factory.object_with_missing_child_in_the_same_model());
+    const auto m(factory.object_with_missing_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 1);
 

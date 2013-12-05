@@ -695,7 +695,6 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
     add_property(c0, indexed_);
-    add_property(c0, indexed_);
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
@@ -800,6 +799,54 @@ build_object_with_parent_that_models_a_refined_concept(
     o1->parent_name(o0->name());
     o0->is_parent(true);
     o0->leaves().push_back(o1->name());
+    insert_object(r, o1);
+
+    return r;
+}
+
+model mock_model_factory::
+build_concept_that_refines_missing_concept(const unsigned int n) const {
+    model r(build_empty_model(n));
+    concept c0(build_concept(0, r.name()));
+    concept c1(build_concept(1, r.name()));
+    c1.refines().push_back(c0.name());
+    insert_nameable(r.concepts(), c1);
+    return r;
+}
+
+model mock_model_factory::
+build_object_that_models_missing_concept(const unsigned int n) const {
+    model r(build_empty_model(n));
+    concept c0(build_concept(0, r.name()));
+    add_property(c0, indexed_);
+
+    auto o0(build_value_object(0, r.name()));
+    o0->modeled_concepts().push_back(c0.name());
+
+    const auto mc(relationship_types::modeled_concepts);
+    add_relationship(*o0, c0, mc);
+    insert_object(r, o0);
+    return r;
+}
+
+model mock_model_factory::build_object_that_models_concept_with_missing_parent(
+    const unsigned int n) const {
+    model r(build_empty_model(n));
+    concept c0(build_concept(0, r.name()));
+    add_property(c0, indexed_);
+    insert_nameable(r.concepts(), c0);
+
+    auto o0(build_value_object(0, r.name()));
+    auto o1(build_value_object(1, r.name()));
+    parent_to_child(*o0, *o1);
+    o1->original_parent_name(o0->name());
+    o1->parent_name(o0->name());
+    o0->is_parent(true);
+    o0->leaves().push_back(o1->name());
+
+    o1->modeled_concepts().push_back(c0.name());
+    const auto mc(relationship_types::modeled_concepts);
+    add_relationship(*o1, c0, mc);
     insert_object(r, o1);
 
     return r;
@@ -958,7 +1005,7 @@ object_with_parent_in_the_same_model(const bool has_property) const {
     return r;
 }
 
-model mock_model_factory::object_with_missing_child_in_the_same_model() const {
+model mock_model_factory::object_with_missing_parent_in_the_same_model() const {
     const auto mn(mock_model_qname(0));
     auto o0(build_value_object(0, mn));
     auto o1(build_value_object(1, mn));
@@ -968,7 +1015,7 @@ model mock_model_factory::object_with_missing_child_in_the_same_model() const {
     o1->leaves().push_back(o0->name());
     parent_to_child(*o1, *o0);
     model r(build_empty_model(0));
-    insert_object(r, o1);
+    insert_object(r, o0);
 
     return r;
 }
