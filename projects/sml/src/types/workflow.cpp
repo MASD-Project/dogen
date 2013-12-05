@@ -27,6 +27,7 @@
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/meta_data_tagger.hpp"
+#include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 namespace {
@@ -121,6 +122,11 @@ void workflow::resolve_types_activity(model& merged_model) const {
     res.resolve();
 }
 
+void workflow::index_concepts_activity(model& merged_model) const {
+    concept_indexer ci;
+    ci.index(merged_model);
+}
+
 std::pair<bool, model> workflow::
 execute(model target, std::list<model> user_models) const {
     const auto library_models(load_library_models_activity());
@@ -128,6 +134,7 @@ execute(model target, std::list<model> user_models) const {
     auto r(create_merged_model_activity(target, library_models, user_models));
     resolve_types_activity(r);
     tag_model_activity(r);
+    // index_concepts_activity(r);
     return std::pair<bool, model> { has_generatable_types(r), r };
 }
 

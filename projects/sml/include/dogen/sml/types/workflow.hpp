@@ -80,6 +80,11 @@ private:
      */
     void tag_model_activity(model& merged_model) const;
 
+    /**
+     * @brief Index all concepts in model.
+     */
+    void index_concepts_activity(model& merged_model) const;
+
 private:
     /**
      * @brief Returns true if there are any types that require code
