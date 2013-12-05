@@ -8,7 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
-*** Validate mock factory on its own tests                            :story:
+*** Refactor SML mock factory method names                            :story:
+
+We have a zoo of naming conventions, some starting with =build_=, some
+starting with =object_= etc.
+
+*** Validate SML mock factory on its own tests                        :story:
 
 At present we have a lot of code that ensures that the output of mock
 factory actually corresponds to expectations. However, this validation
