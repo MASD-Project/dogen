@@ -42,7 +42,7 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow(const bool add_system_models, const config::settings& s);
+    workflow(const bool load_library_models, const config::settings& s);
 
 private:
     /**
@@ -53,17 +53,22 @@ private:
 
 private:
     /**
-     * @brief Add any additional models to the original list of
-     * references passed in by user.
+     * @brief Loads all models available in the system library.
      */
-    std::list<model> augment_references_activity(
-        const std::list<model>& references) const;
+    std::list<model> load_library_models_activity() const;
+
+    /**
+     * @brief Injects system types into model.
+     */
+    void inject_system_types_activity(model& target,
+        std::list<model>& user_models) const;
 
     /**
      * @brief Create the merged model.
      */
     model create_merged_model_activity(const model& target,
-        const std::list<model>& references) const;
+        const std::list<model>& library_models,
+        const std::list<model>& user_models) const;
 
     /**
      * @brief Resolve all types.
@@ -84,10 +89,10 @@ private:
 
 public:
     std::pair<bool, model>
-    execute(const model& target, const std::list<model>& references) const;
+    execute(model target, std::list<model> user_models) const;
 
 private:
-    const bool add_system_models_;
+    const bool load_library_models_;
     const config::settings settings_;
 };
 

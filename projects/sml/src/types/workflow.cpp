@@ -39,8 +39,8 @@ const std::string library_dir("library");
 namespace dogen {
 namespace sml {
 
-workflow::workflow(const bool add_system_models, const config::settings& s)
-    : add_system_models_(add_system_models), settings_(s) {}
+workflow::workflow(const bool load_library_models, const config::settings& s)
+    : load_library_models_(load_library_models), settings_(s) { }
 
 bool workflow::is_generatable(const type& t) const {
     const auto gt(t.generation_type());
@@ -68,36 +68,46 @@ bool workflow::has_generatable_types(const sml::model& m) const {
     return false;
 }
 
-std::list<model> workflow::
-augment_references_activity(const std::list<model>& references) const {
-    std::list<model> r(references);
-    if (add_system_models_) {
-        using namespace dogen::utility::filesystem;
-        const auto dir(data_files_directory() / library_dir);
-        const auto files(find_files(dir));
-        dogen::sml::json_hydrator h;
-        for (const auto& f : files) {
-            boost::filesystem::ifstream s(f);
-            r.push_back(h.hydrate(s));
-        }
+std::list<model> workflow::load_library_models_activity() const {
+    std::list<model> r;
+
+    if (!load_library_models_)
+        return r;
+
+    using namespace dogen::utility::filesystem;
+    const auto dir(data_files_directory() / library_dir);
+    const auto files(find_files(dir));
+    dogen::sml::json_hydrator h;
+    for (const auto& f : files) {
+        boost::filesystem::ifstream s(f);
+        r.push_back(h.hydrate(s));
     }
     return r;
 }
 
-model workflow::create_merged_model_activity(const model& target,
-    const std::list<model>& references) const {
+void workflow::inject_system_types_activity(model& target,
+    std::list<model>& user_models) const {
 
     injector i;
-    auto t(target);
-    i.inject(t);
+    i.inject(target);
+
+    for (auto& m : user_models)
+        i.inject(m);
+}
+
+model workflow::create_merged_model_activity(const model& target,
+    const std::list<model>& library_models,
+    const std::list<model>& user_models) const {
 
     merger mg;
-    mg.add_target(t);
+    mg.add_target(target);
 
-    for (auto r : references) {
-        i.inject(r);
-        mg.add(r);
-    }
+    for (const auto& m : library_models)
+        mg.add(m);
+
+    for (const auto& m : user_models)
+        mg.add(m);
+
     return mg.merge();
 }
 
@@ -112,9 +122,10 @@ void workflow::resolve_types_activity(model& merged_model) const {
 }
 
 std::pair<bool, model> workflow::
-execute(const model& target, const std::list<model>& references) const {
-    const auto augment_references(augment_references_activity(references));
-    auto r(create_merged_model_activity(target, augment_references));
+execute(model target, std::list<model> user_models) const {
+    const auto library_models(load_library_models_activity());
+    inject_system_types_activity(target, user_models);
+    auto r(create_merged_model_activity(target, library_models, user_models));
     resolve_types_activity(r);
     tag_model_activity(r);
     return std::pair<bool, model> { has_generatable_types(r), r };
