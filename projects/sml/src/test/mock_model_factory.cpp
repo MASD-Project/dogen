@@ -1015,7 +1015,7 @@ model mock_model_factory::object_with_missing_parent_in_the_same_model() const {
     o1->leaves().push_back(o0->name());
     parent_to_child(*o1, *o0);
     model r(build_empty_model(0));
-    insert_object(r, o0);
+    insert_object(r, o1);
 
     return r;
 }
