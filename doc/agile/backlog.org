@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Clean up SML resolver tests by extending mock factory             :story:
+
+Now that the mock factory has the concept of "stages" of processing,
+we need to create a "stage" for merged but unresolved models and
+remove the merger from the resolver tests.
+
 *** Split library model loading from SML workflow                     :story:
 
 We should really create a library model loader, with tests, instead of
