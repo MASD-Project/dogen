@@ -26,18 +26,18 @@ namespace dogen {
 namespace stereotypes {
 
 further_refined::further_refined()
-    : prop_1_(static_cast<int>(0)),
-      prop_3_(static_cast<int>(0)) { }
+    : prop_3_(static_cast<int>(0)),
+      prop_1_(static_cast<int>(0)) { }
 
 further_refined::further_refined(
-    const int prop_0,
     const int prop_2,
-    const int prop_1,
-    const int prop_3)
-    : dogen::stereotypes::base_with_concept(prop_0,
-      prop_2),
-      prop_1_(prop_1),
-      prop_3_(prop_3) { }
+    const int prop_0,
+    const int prop_3,
+    const int prop_1)
+    : dogen::stereotypes::base_with_concept(prop_2,
+      prop_0),
+      prop_3_(prop_3),
+      prop_1_(prop_1) { }
 
 void further_refined::to_stream(std::ostream& s) const {
     s << " { "
@@ -45,8 +45,8 @@ void further_refined::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     base_with_concept::to_stream(s);
     s << ", "
-      << "\"prop_1\": " << prop_1_ << ", "
-      << "\"prop_3\": " << prop_3_
+      << "\"prop_3\": " << prop_3_ << ", "
+      << "\"prop_1\": " << prop_1_
       << " }";
 }
 
@@ -54,8 +54,8 @@ void further_refined::swap(further_refined& other) noexcept {
     base_with_concept::swap(other);
 
     using std::swap;
-    swap(prop_1_, other.prop_1_);
     swap(prop_3_, other.prop_3_);
+    swap(prop_1_, other.prop_1_);
 }
 
 bool further_refined::equals(const dogen::stereotypes::base_with_concept& other) const {
@@ -66,8 +66,8 @@ bool further_refined::equals(const dogen::stereotypes::base_with_concept& other)
 
 bool further_refined::operator==(const further_refined& rhs) const {
     return base_with_concept::compare(rhs) &&
-        prop_1_ == rhs.prop_1_ &&
-        prop_3_ == rhs.prop_3_;
+        prop_3_ == rhs.prop_3_ &&
+        prop_1_ == rhs.prop_1_;
 }
 
 further_refined& further_refined::operator=(further_refined other) {
@@ -76,20 +76,20 @@ further_refined& further_refined::operator=(further_refined other) {
     return *this;
 }
 
-int further_refined::prop_1() const {
-    return prop_1_;
-}
-
-void further_refined::prop_1(const int v) {
-    prop_1_ = v;
-}
-
 int further_refined::prop_3() const {
     return prop_3_;
 }
 
 void further_refined::prop_3(const int v) {
     prop_3_ = v;
+}
+
+int further_refined::prop_1() const {
+    return prop_1_;
+}
+
+void further_refined::prop_1(const int v) {
+    prop_1_ = v;
 }
 
 } }

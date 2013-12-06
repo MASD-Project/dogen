@@ -37,8 +37,8 @@ further_refined_generator::further_refined_generator() : position_(0) { }
 void further_refined_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::stereotypes::base_with_concept_generator::populate(position, v);
-    v.prop_1(create_int(position + 0));
-    v.prop_3(create_int(position + 1));
+    v.prop_3(create_int(position + 0));
+    v.prop_1(create_int(position + 1));
 }
 
 further_refined_generator::result_type

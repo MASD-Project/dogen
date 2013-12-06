@@ -41,8 +41,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stereotypes::multi_concept_model& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_2", v.prop_2_);
     ar << make_nvp("prop_10", v.prop_10_);
 }
@@ -51,8 +51,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::stereotypes::multi_concept_model& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_2", v.prop_2_);
     ar >> make_nvp("prop_10", v.prop_10_);
 }

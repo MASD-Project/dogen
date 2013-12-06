@@ -37,8 +37,8 @@ namespace stereotypes {
 std::size_t refinement_concept_model_hasher::hash(const refinement_concept_model&v) {
     std::size_t seed(0);
 
-    combine(seed, v.prop_0());
     combine(seed, v.prop_1());
+    combine(seed, v.prop_0());
 
     return seed;
 }

@@ -45,8 +45,8 @@ public:
 
 public:
     second_refinement_concept_model(
-        const int prop_0,
         const int prop_2,
+        const int prop_0,
         const int prop_10);
 
 private:
@@ -58,19 +58,19 @@ private:
 
 public:
     /**
-     * @brief Base concept property
-     */
-    /**@{*/
-    int prop_0() const;
-    void prop_0(const int v);
-    /**@}*/
-
-    /**
      * @brief Second refinement property
      */
     /**@{*/
     int prop_2() const;
     void prop_2(const int v);
+    /**@}*/
+
+    /**
+     * @brief Base concept property
+     */
+    /**@{*/
+    int prop_0() const;
+    void prop_0(const int v);
     /**@}*/
 
     /**
@@ -92,8 +92,8 @@ public:
     second_refinement_concept_model& operator=(second_refinement_concept_model other);
 
 private:
-    int prop_0_;
     int prop_2_;
+    int prop_0_;
     int prop_10_;
 };
 

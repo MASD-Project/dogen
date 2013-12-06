@@ -37,8 +37,8 @@ namespace stereotypes {
 std::size_t base_with_concept_hasher::hash(const base_with_concept&v) {
     std::size_t seed(0);
 
-    combine(seed, v.prop_0());
     combine(seed, v.prop_2());
+    combine(seed, v.prop_0());
 
     return seed;
 }

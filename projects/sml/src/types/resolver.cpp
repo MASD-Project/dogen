@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <set>
 #include <sstream>
 #include <memory>
 #include <functional>
@@ -62,41 +61,7 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Add comparable support for qnames.
- *
- * This is required as part of the current (very sub-optimal)
- * implementation of concept processing.
- */
-inline bool operator<(const qname& lhs, const qname& rhs) {
-    return
-        lhs.model_name() < rhs.model_name() ||
-        (lhs.model_name() == rhs.model_name() &&
-            (lhs.external_module_path() < rhs.external_module_path() ||
-                (lhs.external_module_path() == rhs.external_module_path() &&
-                    (lhs.simple_name() < rhs.simple_name()))));
-}
-
 resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
-
-void resolver::
-expand_concept_hierarchy(const qname& qn, std::list<qname>& concepts) const {
-
-    const auto i(model_.concepts().find(qn));
-    if (i == model_.concepts().end()) {
-        std::ostringstream stream;
-        stream << orphan_concept << ". concept: "
-               << qn.simple_name() << " could not be found.";
-
-        BOOST_LOG_SEV(lg, error) << stream.str();
-        BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
-    }
-
-    for (const auto& c : i->second.refines())
-        expand_concept_hierarchy(c, concepts);
-
-    concepts.push_back(qn);
-}
 
 void resolver::validate_inheritance_graph(const abstract_object& ao) const {
     auto parent(ao.parent_name());
@@ -281,75 +246,6 @@ void resolver::resolve_objects() {
         validate_inheritance_graph(o);
         resolve_properties(o.name(), o.local_properties());
         resolve_operations(o.name(), o.operations());
-
-        const auto moco(relationship_types::modeled_concepts);
-        const auto i(o.relationships().find(moco));
-        if (i == o.relationships().end() || i->second.empty()) {
-            BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
-            continue;
-        }
-
-        /*
-         * first pass to expand concepts. we basically want to find
-         * out the complete set of concepts this type models, taking
-         * into account all the refinement relationships they may have
-         * with other concepts.
-         */
-        std::list<qname> expanded_modeled_concepts;
-        for (const auto& qn : i->second)
-            expand_concept_hierarchy(qn, expanded_modeled_concepts);
-
-        i->second.clear();
-        for (const auto& qn : expanded_modeled_concepts)
-            i->second.push_back(qn);
-    }
-
-    /*
-     * second pass to expand concepts. we now look at all of the
-     * inheritance relationships and remove any concepts which have
-     * already been modeled by the type's parent.
-     */
-    for (auto& pair : model_.objects()) {
-        auto& o(*pair.second);
-
-        const auto moco(relationship_types::modeled_concepts);
-        const auto i(o.relationships().find(moco));
-        if (i == o.relationships().end() || i->second.empty()) {
-            BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
-            continue;
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Resolving concepts for type: " << o.name();
-        std::set<qname> mc;
-        for (const auto& qn : i->second)
-            mc.insert(qn);
-
-        std::set<qname> pmc;
-        auto parent(o.parent_name());
-        while (parent) {
-            qname pqn(*parent);
-            const auto j(model_.objects().find(pqn));
-            const auto k(j->second->relationships().find(moco));
-            if (k == j->second->relationships().end() || k->second.empty()) {
-                BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
-                continue;
-            }
-
-            for (const auto& qn : k->second)
-                pmc.insert(qn);
-            parent = j->second->parent_name();
-        }
-
-        std::set<qname> result;
-        std::set_difference(mc.begin(), mc.end(), pmc.begin(), pmc.end(),
-            std::inserter(result, result.end()));
-
-        auto tmp(i->second);
-        i->second.clear();
-        for (const auto& qn : tmp) {
-            if (result.find(qn) != result.end())
-                i->second.push_back(qn);
-        }
     }
 }
 

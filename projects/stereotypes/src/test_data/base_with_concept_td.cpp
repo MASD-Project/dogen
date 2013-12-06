@@ -35,8 +35,8 @@ namespace stereotypes {
 
 void base_with_concept_generator::
 populate(const unsigned int position, result_type& v) {
-    v.prop_0(create_int(position + 0));
-    v.prop_2(create_int(position + 1));
+    v.prop_2(create_int(position + 0));
+    v.prop_0(create_int(position + 1));
 }
 
 base_with_concept_generator::result_type*

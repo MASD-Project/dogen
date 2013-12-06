@@ -25,40 +25,32 @@ namespace dogen {
 namespace stereotypes {
 
 base_with_concept::base_with_concept()
-    : prop_0_(static_cast<int>(0)),
-      prop_2_(static_cast<int>(0)) { }
+    : prop_2_(static_cast<int>(0)),
+      prop_0_(static_cast<int>(0)) { }
 
 base_with_concept::base_with_concept(
-    const int prop_0,
-    const int prop_2)
-    : prop_0_(prop_0),
-      prop_2_(prop_2) { }
+    const int prop_2,
+    const int prop_0)
+    : prop_2_(prop_2),
+      prop_0_(prop_0) { }
 
 void base_with_concept::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::stereotypes::base_with_concept\"" << ", "
-      << "\"prop_0\": " << prop_0_ << ", "
-      << "\"prop_2\": " << prop_2_
+      << "\"prop_2\": " << prop_2_ << ", "
+      << "\"prop_0\": " << prop_0_
       << " }";
 }
 
 void base_with_concept::swap(base_with_concept& other) noexcept {
     using std::swap;
-    swap(prop_0_, other.prop_0_);
     swap(prop_2_, other.prop_2_);
+    swap(prop_0_, other.prop_0_);
 }
 
 bool base_with_concept::compare(const base_with_concept& rhs) const {
-    return prop_0_ == rhs.prop_0_ &&
-        prop_2_ == rhs.prop_2_;
-}
-
-int base_with_concept::prop_0() const {
-    return prop_0_;
-}
-
-void base_with_concept::prop_0(const int v) {
-    prop_0_ = v;
+    return prop_2_ == rhs.prop_2_ &&
+        prop_0_ == rhs.prop_0_;
 }
 
 int base_with_concept::prop_2() const {
@@ -67,6 +59,14 @@ int base_with_concept::prop_2() const {
 
 void base_with_concept::prop_2(const int v) {
     prop_2_ = v;
+}
+
+int base_with_concept::prop_0() const {
+    return prop_0_;
+}
+
+void base_with_concept::prop_0(const int v) {
+    prop_0_ = v;
 }
 
 } }

@@ -40,8 +40,8 @@ std::size_t further_refined_hasher::hash(const further_refined&v) {
 
     combine(seed, dynamic_cast<const dogen::stereotypes::base_with_concept&>(v));
 
-    combine(seed, v.prop_1());
     combine(seed, v.prop_3());
+    combine(seed, v.prop_1());
 
     return seed;
 }

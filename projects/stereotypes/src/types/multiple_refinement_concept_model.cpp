@@ -24,38 +24,38 @@ namespace dogen {
 namespace stereotypes {
 
 multiple_refinement_concept_model::multiple_refinement_concept_model()
-    : prop_0_(static_cast<int>(0)),
+    : prop_3_(static_cast<int>(0)),
       prop_1_(static_cast<int>(0)),
+      prop_0_(static_cast<int>(0)),
       prop_2_(static_cast<int>(0)),
-      prop_3_(static_cast<int>(0)),
       prop_10_(static_cast<int>(0)) { }
 
 multiple_refinement_concept_model::multiple_refinement_concept_model(
-    const int prop_0,
-    const int prop_1,
-    const int prop_2,
     const int prop_3,
+    const int prop_1,
+    const int prop_0,
+    const int prop_2,
     const int prop_10)
-    : prop_0_(prop_0),
+    : prop_3_(prop_3),
       prop_1_(prop_1),
+      prop_0_(prop_0),
       prop_2_(prop_2),
-      prop_3_(prop_3),
       prop_10_(prop_10) { }
 
 void multiple_refinement_concept_model::swap(multiple_refinement_concept_model& other) noexcept {
     using std::swap;
-    swap(prop_0_, other.prop_0_);
-    swap(prop_1_, other.prop_1_);
-    swap(prop_2_, other.prop_2_);
     swap(prop_3_, other.prop_3_);
+    swap(prop_1_, other.prop_1_);
+    swap(prop_0_, other.prop_0_);
+    swap(prop_2_, other.prop_2_);
     swap(prop_10_, other.prop_10_);
 }
 
 bool multiple_refinement_concept_model::operator==(const multiple_refinement_concept_model& rhs) const {
-    return prop_0_ == rhs.prop_0_ &&
+    return prop_3_ == rhs.prop_3_ &&
         prop_1_ == rhs.prop_1_ &&
+        prop_0_ == rhs.prop_0_ &&
         prop_2_ == rhs.prop_2_ &&
-        prop_3_ == rhs.prop_3_ &&
         prop_10_ == rhs.prop_10_;
 }
 
@@ -65,12 +65,12 @@ multiple_refinement_concept_model& multiple_refinement_concept_model::operator=(
     return *this;
 }
 
-int multiple_refinement_concept_model::prop_0() const {
-    return prop_0_;
+int multiple_refinement_concept_model::prop_3() const {
+    return prop_3_;
 }
 
-void multiple_refinement_concept_model::prop_0(const int v) {
-    prop_0_ = v;
+void multiple_refinement_concept_model::prop_3(const int v) {
+    prop_3_ = v;
 }
 
 int multiple_refinement_concept_model::prop_1() const {
@@ -81,20 +81,20 @@ void multiple_refinement_concept_model::prop_1(const int v) {
     prop_1_ = v;
 }
 
+int multiple_refinement_concept_model::prop_0() const {
+    return prop_0_;
+}
+
+void multiple_refinement_concept_model::prop_0(const int v) {
+    prop_0_ = v;
+}
+
 int multiple_refinement_concept_model::prop_2() const {
     return prop_2_;
 }
 
 void multiple_refinement_concept_model::prop_2(const int v) {
     prop_2_ = v;
-}
-
-int multiple_refinement_concept_model::prop_3() const {
-    return prop_3_;
-}
-
-void multiple_refinement_concept_model::prop_3(const int v) {
-    prop_3_ = v;
 }
 
 int multiple_refinement_concept_model::prop_10() const {

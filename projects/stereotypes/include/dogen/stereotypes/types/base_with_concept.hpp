@@ -47,8 +47,8 @@ public:
 
 public:
     base_with_concept(
-        const int prop_0,
-        const int prop_2);
+        const int prop_2,
+        const int prop_0);
 
 private:
     template<typename Archive>
@@ -62,19 +62,19 @@ public:
 
 public:
     /**
-     * @brief Base concept property
-     */
-    /**@{*/
-    int prop_0() const;
-    void prop_0(const int v);
-    /**@}*/
-
-    /**
      * @brief Second refinement property
      */
     /**@{*/
     int prop_2() const;
     void prop_2(const int v);
+    /**@}*/
+
+    /**
+     * @brief Base concept property
+     */
+    /**@{*/
+    int prop_0() const;
+    void prop_0(const int v);
     /**@}*/
 
 protected:
@@ -86,8 +86,8 @@ protected:
     void swap(base_with_concept& other) noexcept;
 
 private:
-    int prop_0_;
     int prop_2_;
+    int prop_0_;
 };
 
 inline base_with_concept::~base_with_concept() noexcept { }

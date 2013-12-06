@@ -45,8 +45,8 @@ public:
 
 public:
     multi_concept_model(
-        const int prop_0,
         const int prop_1,
+        const int prop_0,
         const int prop_2,
         const int prop_10);
 
@@ -59,19 +59,19 @@ private:
 
 public:
     /**
-     * @brief Base concept property
-     */
-    /**@{*/
-    int prop_0() const;
-    void prop_0(const int v);
-    /**@}*/
-
-    /**
      * @brief First refinement property
      */
     /**@{*/
     int prop_1() const;
     void prop_1(const int v);
+    /**@}*/
+
+    /**
+     * @brief Base concept property
+     */
+    /**@{*/
+    int prop_0() const;
+    void prop_0(const int v);
     /**@}*/
 
     /**
@@ -101,8 +101,8 @@ public:
     multi_concept_model& operator=(multi_concept_model other);
 
 private:
-    int prop_0_;
     int prop_1_;
+    int prop_0_;
     int prop_2_;
     int prop_10_;
 };

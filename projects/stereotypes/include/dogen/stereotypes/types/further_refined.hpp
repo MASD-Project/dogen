@@ -49,10 +49,10 @@ public:
 
 public:
     further_refined(
-        const int prop_0,
         const int prop_2,
-        const int prop_1,
-        const int prop_3);
+        const int prop_0,
+        const int prop_3,
+        const int prop_1);
 
 private:
     template<typename Archive>
@@ -66,19 +66,19 @@ public:
 
 public:
     /**
-     * @brief First refinement property
-     */
-    /**@{*/
-    int prop_1() const;
-    void prop_1(const int v);
-    /**@}*/
-
-    /**
      * @brief Multiple refinements property.
      */
     /**@{*/
     int prop_3() const;
     void prop_3(const int v);
+    /**@}*/
+
+    /**
+     * @brief First refinement property
+     */
+    /**@{*/
+    int prop_1() const;
+    void prop_1(const int v);
     /**@}*/
 
 public:
@@ -95,8 +95,8 @@ public:
     further_refined& operator=(further_refined other);
 
 private:
-    int prop_1_;
     int prop_3_;
+    int prop_1_;
 };
 
 } }

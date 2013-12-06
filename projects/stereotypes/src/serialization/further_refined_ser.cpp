@@ -48,8 +48,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("base_with_concept", base_object<dogen::stereotypes::base_with_concept>(v));
 
-    ar << make_nvp("prop_1", v.prop_1_);
     ar << make_nvp("prop_3", v.prop_3_);
+    ar << make_nvp("prop_1", v.prop_1_);
 }
 
 template<typename Archive>
@@ -58,8 +58,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("base_with_concept", base_object<dogen::stereotypes::base_with_concept>(v));
 
-    ar >> make_nvp("prop_1", v.prop_1_);
     ar >> make_nvp("prop_3", v.prop_3_);
+    ar >> make_nvp("prop_1", v.prop_1_);
 }
 
 } }

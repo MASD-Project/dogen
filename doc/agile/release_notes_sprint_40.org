@@ -84,7 +84,8 @@ cleaned up.
 
 - deal with the fallout
 
-**** Remove resolver concept indexing                                  :task:
+**** IMPLEMENTATION Remove resolver concept indexing                   :task:
+     CLOCK: [2013-12-06 Fri 19:50]--[2013-12-06 Fri 20:08] =>  0:18
 
 - activate new activity
 

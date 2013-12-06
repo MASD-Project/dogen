@@ -46,16 +46,16 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stereotypes::base_with_concept& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_2", v.prop_2_);
+    ar << make_nvp("prop_0", v.prop_0_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::stereotypes::base_with_concept& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_2", v.prop_2_);
+    ar >> make_nvp("prop_0", v.prop_0_);
 }
 
 } }
