@@ -42,18 +42,18 @@ namespace dogen {
 namespace sml {
 
 enumeration::enumeration(
+    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
     const dogen::sml::qname& underlying_type,
     const std::vector<dogen::sml::enumerator>& enumerators)
-    : dogen::sml::type(documentation,
+    : dogen::sml::type(origin_type,
+      documentation,
       meta_data,
       name,
-      generation_type,
-      origin_type),
+      generation_type),
       underlying_type_(underlying_type),
       enumerators_(enumerators) { }
 

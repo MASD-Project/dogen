@@ -89,11 +89,11 @@ std::size_t concept_hasher::hash(const concept&v) {
     combine(seed, hash_std_list_dogen_sml_property(v.all_properties()));
     combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
+    combine(seed, v.origin_type());
     combine(seed, v.documentation());
     combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
-    combine(seed, v.origin_type());
     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
     combine(seed, hash_std_list_dogen_sml_qname(v.refines()));
     combine(seed, v.is_parent());

@@ -51,11 +51,11 @@ public:
 
 public:
     repository(
+        const dogen::sml::origin_types& origin_type,
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
-        const dogen::sml::origin_types& origin_type,
         const std::list<dogen::sml::property>& all_properties,
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,

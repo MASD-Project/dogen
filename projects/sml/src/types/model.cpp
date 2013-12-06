@@ -34,15 +34,15 @@ namespace dogen {
 namespace sml {
 
 model::model()
-    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
-      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
+    : origin_type_(static_cast<dogen::sml::origin_types>(0)),
+      generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
 
 model::model(model&& rhs)
-    : documentation_(std::move(rhs.documentation_)),
+    : origin_type_(std::move(rhs.origin_type_)),
+      documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
-      origin_type_(std::move(rhs.origin_type_)),
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
       modules_(std::move(rhs.modules_)),
@@ -52,11 +52,11 @@ model::model(model&& rhs)
       objects_(std::move(rhs.objects_)) { }
 
 model::model(
+    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
     const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& references,
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
@@ -64,11 +64,11 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects)
-    : documentation_(documentation),
+    : origin_type_(origin_type),
+      documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
       generation_type_(generation_type),
-      origin_type_(origin_type),
       references_(references),
       leaves_(leaves),
       modules_(modules),
@@ -79,11 +79,11 @@ model::model(
 
 void model::swap(model& other) noexcept {
     using std::swap;
+    swap(origin_type_, other.origin_type_);
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
-    swap(origin_type_, other.origin_type_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
@@ -94,11 +94,11 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return documentation_ == rhs.documentation_ &&
+    return origin_type_ == rhs.origin_type_ &&
+        documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
-        origin_type_ == rhs.origin_type_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
@@ -112,6 +112,14 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+dogen::sml::origin_types model::origin_type() const {
+    return origin_type_;
+}
+
+void model::origin_type(const dogen::sml::origin_types& v) {
+    origin_type_ = v;
 }
 
 const std::string& model::documentation() const {
@@ -168,14 +176,6 @@ dogen::sml::generation_types model::generation_type() const {
 
 void model::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
-}
-
-dogen::sml::origin_types model::origin_type() const {
-    return origin_type_;
-}
-
-void model::origin_type(const dogen::sml::origin_types& v) {
-    origin_type_ = v;
 }
 
 const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& model::references() const {

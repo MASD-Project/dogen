@@ -161,11 +161,11 @@ abstract_object::abstract_object(abstract_object&& rhs)
       is_inheritance_root_(std::move(rhs.is_inheritance_root_)) { }
 
 abstract_object::abstract_object(
+    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::property>& all_properties,
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
@@ -183,11 +183,11 @@ abstract_object::abstract_object(
     const bool is_child,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root)
-    : dogen::sml::type(documentation,
+    : dogen::sml::type(origin_type,
+      documentation,
       meta_data,
       name,
-      generation_type,
-      origin_type),
+      generation_type),
       all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),

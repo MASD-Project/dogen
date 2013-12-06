@@ -26,11 +26,11 @@ namespace dogen {
 namespace sml {
 
 factory::factory(
+    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::property>& all_properties,
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
@@ -48,11 +48,11 @@ factory::factory(
     const bool is_child,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root)
-    : dogen::sml::abstract_object(documentation,
+    : dogen::sml::abstract_object(origin_type,
+      documentation,
       meta_data,
       name,
       generation_type,
-      origin_type,
       all_properties,
       local_properties,
       inherited_properties,

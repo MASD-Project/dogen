@@ -24,8 +24,8 @@ namespace dogen {
 namespace sml {
 
 concept::concept()
-    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
-      origin_type_(static_cast<dogen::sml::origin_types>(0)),
+    : origin_type_(static_cast<dogen::sml::origin_types>(0)),
+      generation_type_(static_cast<dogen::sml::generation_types>(0)),
       is_parent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)) { }
 
@@ -33,11 +33,11 @@ concept::concept(concept&& rhs)
     : all_properties_(std::move(rhs.all_properties_)),
       local_properties_(std::move(rhs.local_properties_)),
       inherited_properties_(std::move(rhs.inherited_properties_)),
+      origin_type_(std::move(rhs.origin_type_)),
       documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
-      origin_type_(std::move(rhs.origin_type_)),
       operations_(std::move(rhs.operations_)),
       refines_(std::move(rhs.refines_)),
       is_parent_(std::move(rhs.is_parent_)),
@@ -47,11 +47,11 @@ concept::concept(
     const std::list<dogen::sml::property>& all_properties,
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::operation>& operations,
     const std::list<dogen::sml::qname>& refines,
     const bool is_parent,
@@ -59,11 +59,11 @@ concept::concept(
     : all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
+      origin_type_(origin_type),
       documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
       generation_type_(generation_type),
-      origin_type_(origin_type),
       operations_(operations),
       refines_(refines),
       is_parent_(is_parent),
@@ -74,11 +74,11 @@ void concept::swap(concept& other) noexcept {
     swap(all_properties_, other.all_properties_);
     swap(local_properties_, other.local_properties_);
     swap(inherited_properties_, other.inherited_properties_);
+    swap(origin_type_, other.origin_type_);
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
-    swap(origin_type_, other.origin_type_);
     swap(operations_, other.operations_);
     swap(refines_, other.refines_);
     swap(is_parent_, other.is_parent_);
@@ -89,11 +89,11 @@ bool concept::operator==(const concept& rhs) const {
     return all_properties_ == rhs.all_properties_ &&
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&
+        origin_type_ == rhs.origin_type_ &&
         documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
-        origin_type_ == rhs.origin_type_ &&
         operations_ == rhs.operations_ &&
         refines_ == rhs.refines_ &&
         is_parent_ == rhs.is_parent_ &&
@@ -154,6 +154,14 @@ void concept::inherited_properties(const std::unordered_map<dogen::sml::qname, s
     inherited_properties_ = std::move(v);
 }
 
+dogen::sml::origin_types concept::origin_type() const {
+    return origin_type_;
+}
+
+void concept::origin_type(const dogen::sml::origin_types& v) {
+    origin_type_ = v;
+}
+
 const std::string& concept::documentation() const {
     return documentation_;
 }
@@ -208,14 +216,6 @@ dogen::sml::generation_types concept::generation_type() const {
 
 void concept::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
-}
-
-dogen::sml::origin_types concept::origin_type() const {
-    return origin_type_;
-}
-
-void concept::origin_type(const dogen::sml::origin_types& v) {
-    origin_type_ = v;
 }
 
 const std::list<dogen::sml::operation>& concept::operations() const {

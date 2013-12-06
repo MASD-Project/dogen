@@ -60,11 +60,11 @@ public:
         const std::list<dogen::sml::property>& all_properties,
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+        const dogen::sml::origin_types& origin_type,
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
-        const dogen::sml::origin_types& origin_type,
         const std::list<dogen::sml::operation>& operations,
         const std::list<dogen::sml::qname>& refines,
         const bool is_parent,
@@ -118,6 +118,14 @@ public:
     /**@}*/
 
     /**
+     * @brief How was this model element originated.
+     */
+    /**@{*/
+    dogen::sml::origin_types origin_type() const;
+    void origin_type(const dogen::sml::origin_types& v);
+    /**@}*/
+
+    /**
      * @brief Code comments.
      *
      * These are expected to follow the grammar of the comment processing tools
@@ -158,14 +166,6 @@ public:
     /**@{*/
     dogen::sml::generation_types generation_type() const;
     void generation_type(const dogen::sml::generation_types& v);
-    /**@}*/
-
-    /**
-     * @brief How was this model element originated.
-     */
-    /**@{*/
-    dogen::sml::origin_types origin_type() const;
-    void origin_type(const dogen::sml::origin_types& v);
     /**@}*/
 
     /**
@@ -218,11 +218,11 @@ private:
     std::list<dogen::sml::property> all_properties_;
     std::list<dogen::sml::property> local_properties_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
+    dogen::sml::origin_types origin_type_;
     std::string documentation_;
     boost::property_tree::ptree meta_data_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
-    dogen::sml::origin_types origin_type_;
     std::list<dogen::sml::operation> operations_;
     std::list<dogen::sml::qname> refines_;
     bool is_parent_;

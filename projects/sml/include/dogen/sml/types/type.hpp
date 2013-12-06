@@ -55,11 +55,11 @@ public:
 
 public:
     type(
+        const dogen::sml::origin_types& origin_type,
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
-        const dogen::sml::generation_types& generation_type,
-        const dogen::sml::origin_types& origin_type);
+        const dogen::sml::generation_types& generation_type);
 
 private:
     template<typename Archive>
@@ -78,6 +78,14 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
+    /**
+     * @brief How was this model element originated.
+     */
+    /**@{*/
+    dogen::sml::origin_types origin_type() const;
+    void origin_type(const dogen::sml::origin_types& v);
+    /**@}*/
+
     /**
      * @brief Code comments.
      *
@@ -121,14 +129,6 @@ public:
     void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
-    /**
-     * @brief How was this model element originated.
-     */
-    /**@{*/
-    dogen::sml::origin_types origin_type() const;
-    void origin_type(const dogen::sml::origin_types& v);
-    /**@}*/
-
 protected:
     bool compare(const type& rhs) const;
 public:
@@ -138,11 +138,11 @@ protected:
     void swap(type& other) noexcept;
 
 private:
+    dogen::sml::origin_types origin_type_;
     std::string documentation_;
     boost::property_tree::ptree meta_data_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
-    dogen::sml::origin_types origin_type_;
 };
 
 inline type::~type() noexcept { }

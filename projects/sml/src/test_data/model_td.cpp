@@ -31,6 +31,11 @@
 
 namespace {
 
+dogen::sml::origin_types
+create_dogen_sml_origin_types(const unsigned int position) {
+    return dogen::sml::origin_types_generator::create(position);
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -55,11 +60,6 @@ create_dogen_sml_qname(const unsigned int position) {
 dogen::sml::generation_types
 create_dogen_sml_generation_types(const unsigned int position) {
     return dogen::sml::generation_types_generator::create(position);
-}
-
-dogen::sml::origin_types
-create_dogen_sml_origin_types(const unsigned int position) {
-    return dogen::sml::origin_types_generator::create(position);
 }
 
 std::unordered_map<dogen::sml::qname, dogen::sml::origin_types> create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(unsigned int position) {
@@ -159,11 +159,11 @@ model_generator::model_generator() : position_(0) { }
 
 void model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.documentation(create_std_string(position + 0));
-    v.meta_data(create_boost_property_tree_ptree(position + 1));
-    v.name(create_dogen_sml_qname(position + 2));
-    v.generation_type(create_dogen_sml_generation_types(position + 3));
-    v.origin_type(create_dogen_sml_origin_types(position + 4));
+    v.origin_type(create_dogen_sml_origin_types(position + 0));
+    v.documentation(create_std_string(position + 1));
+    v.meta_data(create_boost_property_tree_ptree(position + 2));
+    v.name(create_dogen_sml_qname(position + 3));
+    v.generation_type(create_dogen_sml_generation_types(position + 4));
     v.references(create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(position + 5));
     v.leaves(create_std_unordered_set_dogen_sml_qname(position + 6));
     v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 7));
