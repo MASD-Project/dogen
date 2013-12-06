@@ -65,7 +65,6 @@ public:
         const bool is_versioned,
         const bool is_comparable,
         const bool is_fluent,
-        const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_child,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const bool is_inheritance_root);

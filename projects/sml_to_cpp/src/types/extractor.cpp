@@ -146,8 +146,15 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
 
     std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
-    for (const auto& qn : ao.modeled_concepts())
-        properties_for_concept(qn, props, processed_qnames);
+
+    const auto moco(sml::relationship_types::modeled_concepts);
+    const auto i(ao.relationships().find(moco));
+    if (i == ao.relationships().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
+    else {
+        for (const auto& qn : i->second)
+            properties_for_concept(qn, props, processed_qnames);
+    }
 
     props.insert(props.end(), ao.local_properties().begin(),
         ao.local_properties().end());

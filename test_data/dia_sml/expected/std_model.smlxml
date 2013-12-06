@@ -376,10 +376,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships class_id="34" tracking_level="0" version="0">
 							<count>0</count>
@@ -541,10 +537,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>1</is_child>
 						<relationships>
 							<count>1</count>
@@ -710,10 +702,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -1114,10 +1102,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -1410,10 +1394,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -1818,10 +1798,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -2226,10 +2202,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -2497,10 +2469,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -2833,10 +2801,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -3022,10 +2986,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -3430,10 +3390,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -3744,10 +3700,6 @@
 						<is_versioned>0</is_versioned>
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
-						<modeled_concepts>
-							<count>0</count>
-							<item_version>0</item_version>
-						</modeled_concepts>
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
@@ -3904,10 +3856,6 @@
 							<is_versioned>1</is_versioned>
 							<is_comparable>0</is_comparable>
 							<is_fluent>0</is_fluent>
-							<modeled_concepts>
-								<count>0</count>
-								<item_version>0</item_version>
-							</modeled_concepts>
 							<is_child>0</is_child>
 							<relationships>
 								<count>0</count>

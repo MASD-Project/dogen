@@ -282,8 +282,12 @@ void resolver::resolve_objects() {
         resolve_properties(o.name(), o.local_properties());
         resolve_operations(o.name(), o.operations());
 
-        if (o.modeled_concepts().empty())
+        const auto moco(relationship_types::modeled_concepts);
+        const auto i(o.relationships().find(moco));
+        if (i == o.relationships().end() || i->second.empty()) {
+            BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
             continue;
+        }
 
         /*
          * first pass to expand concepts. we basically want to find
@@ -292,12 +296,12 @@ void resolver::resolve_objects() {
          * with other concepts.
          */
         std::list<qname> expanded_modeled_concepts;
-        for (const auto& qn : o.modeled_concepts())
+        for (const auto& qn : i->second)
             expand_concept_hierarchy(qn, expanded_modeled_concepts);
 
-        o.modeled_concepts().clear();
+        i->second.clear();
         for (const auto& qn : expanded_modeled_concepts)
-            o.modeled_concepts().push_back(qn);
+            i->second.push_back(qn);
     }
 
     /*
@@ -308,33 +312,43 @@ void resolver::resolve_objects() {
     for (auto& pair : model_.objects()) {
         auto& o(*pair.second);
 
-        if (o.modeled_concepts().empty())
+        const auto moco(relationship_types::modeled_concepts);
+        const auto i(o.relationships().find(moco));
+        if (i == o.relationships().end() || i->second.empty()) {
+            BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
             continue;
+        }
 
         BOOST_LOG_SEV(lg, debug) << "Resolving concepts for type: " << o.name();
         std::set<qname> mc;
-        for (const auto& qn : o.modeled_concepts())
+        for (const auto& qn : i->second)
             mc.insert(qn);
 
         std::set<qname> pmc;
         auto parent(o.parent_name());
         while (parent) {
             qname pqn(*parent);
-            const auto i(model_.objects().find(pqn));
-            for (const auto& qn : i->second->modeled_concepts())
+            const auto j(model_.objects().find(pqn));
+            const auto k(j->second->relationships().find(moco));
+            if (k == j->second->relationships().end() || k->second.empty()) {
+                BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
+                continue;
+            }
+
+            for (const auto& qn : k->second)
                 pmc.insert(qn);
-            parent = i->second->parent_name();
+            parent = j->second->parent_name();
         }
 
         std::set<qname> result;
         std::set_difference(mc.begin(), mc.end(), pmc.begin(), pmc.end(),
             std::inserter(result, result.end()));
 
-        auto tmp(o.modeled_concepts());
-        o.modeled_concepts().clear();
+        auto tmp(i->second);
+        i->second.clear();
         for (const auto& qn : tmp) {
             if (result.find(qn) != result.end())
-                o.modeled_concepts().push_back(qn);
+                i->second.push_back(qn);
         }
     }
 }

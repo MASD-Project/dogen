@@ -10,22 +10,25 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-05 Thu 23:59]
+Clock summary at [2013-12-06 Fri 12:39]
 
 | Headline                                            | Time   |      |      |
 |-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *4:48* |      |      |
+| *Total time*                                        | *5:42* |      |      |
 |-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 4:48 |      |
+| Development Stories Implemented                     |        | 5:42 |      |
 | IMPLEMENTATION Release notes and backlog grooming   |        |      | 0:05 |
+| IMPLEMENTATION Update manual                        |        |      | 0:19 |
 | COMPLETED Add more tests to =concept_indexer=       |        |      | 3:22 |
-| IMPLEMENTATION Plug =concept_indexer= into workflow |        |      | 1:21 |
+| IMPLEMENTATION Plug =concept_indexer= into workflow |        |      | 1:56 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-12-03 Tue 08:01]--[2013-12-03 Tue 08:06] =>  0:05
 
-*** Update manual                                                     :story:
+*** IMPLEMENTATION Update manual                                      :story:
+    CLOCK: [2013-12-06 Fri 08:25]--[2013-12-06 Fri 08:39] =>  0:14
+    CLOCK: [2013-12-06 Fri 08:20]--[2013-12-06 Fri 08:25] =>  0:05
 
 Use compilation downtime to update the manual.
 
@@ -48,21 +51,6 @@ Use compilation downtime to update the manual.
 - object that models non-existing concept
 - object with non-existing parent
 
-*** IMPLEMENTATION Plug =concept_indexer= into workflow               :story:
-**** COMPLETED Minor refactor to workflow                              :task:
-     CLOSED: [2013-12-05 Thu 23:26]
-     CLOCK: [2013-12-05 Thu 23:20]--[2013-12-05 Thu 23:25] =>  0:05
-     CLOCK: [2013-12-05 Thu 23:01]--[2013-12-05 Thu 23:20] =>  0:19
-     CLOCK: [2013-12-05 Thu 18:12]--[2013-12-05 Thu 18:35] =>  0:23
-
-- tidy-up method names
-- avoid mixed activities
-
-**** IMPLEMENTATION Add concept indexing activity                      :task:
-     CLOCK: [2013-12-05 Thu 23:25]--[2013-12-05 Thu 23:59] =>  0:34
-
-- remove resolver concept indexing
-
 *** COMPLETED Concept resolution is not particularly clean            :story:
     CLOSED: [2013-12-05 Thu 23:42]
 
@@ -73,6 +61,32 @@ from a concept perspective (e.g. refinement) and the type-related
 inheritance (e.g. if our parent already models a concept we do not
 have to model it too). However, the code is very hacky and needs to be
 cleaned up.
+
+*** IMPLEMENTATION Plug =concept_indexer= into workflow               :story:
+**** COMPLETED Minor refactor to workflow                              :task:
+     CLOSED: [2013-12-05 Thu 23:26]
+     CLOCK: [2013-12-05 Thu 23:20]--[2013-12-05 Thu 23:25] =>  0:05
+     CLOCK: [2013-12-05 Thu 23:01]--[2013-12-05 Thu 23:20] =>  0:19
+     CLOCK: [2013-12-05 Thu 18:12]--[2013-12-05 Thu 18:35] =>  0:23
+
+- tidy-up method names
+- avoid mixed activities
+
+**** COMPLETED Add concept indexing activity                           :task:
+     CLOSED: [2013-12-06 Fri 07:49]
+     CLOCK: [2013-12-05 Thu 23:25]--[2013-12-05 Thu 23:59] =>  0:34
+
+**** COMPLETED Remove =modeled_concepts= from abstract object          :task:
+     CLOSED: [2013-12-06 Fri 12:39]
+     CLOCK: [2013-12-06 Fri 08:39]--[2013-12-06 Fri 08:41] =>  0:02
+     CLOCK: [2013-12-06 Fri 07:55]--[2013-12-06 Fri 08:20] =>  0:25
+     CLOCK: [2013-12-06 Fri 07:43]--[2013-12-06 Fri 07:51] =>  0:08
+
+- deal with the fallout
+
+**** Remove resolver concept indexing                                  :task:
+
+- activate new activity
 
 *** Populate new concept properties in dia to sml transformer         :story:
 

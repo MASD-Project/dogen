@@ -666,7 +666,7 @@ representation of the primitive type.#</dia:string>
         <dia:point val="-98,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3349999999999991"/>
+        <dia:real val="8.3350000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -1428,7 +1428,7 @@ representation of the primitive type.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1802,7 +1802,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="3,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="31.684999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -2491,7 +2491,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="-34,-3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0924999999999994"/>
+        <dia:real val="7.0925000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2814,7 +2814,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="51,121"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.6225000000000005"/>
+        <dia:real val="6.6224999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -3441,16 +3441,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.205,96.95;64.7675,106.05"/>
+        <dia:rectangle val="46.205,96.15;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="46.255,101"/>
         <dia:point val="46.255,106"/>
@@ -3663,16 +3663,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.125,96.95;64.7675,106.05"/>
+        <dia:rectangle val="61.125,96.15;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="61.175,101"/>
         <dia:point val="61.175,106"/>
@@ -3819,16 +3819,16 @@ underlying storage (for example, a relational database).#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0675,96.95;72.63,106.05"/>
+        <dia:rectangle val="63.0675,96.15;72.63,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="72.58,101"/>
         <dia:point val="72.58,106"/>
@@ -6685,7 +6685,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="50,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,82.95;77.885,97.05"/>
+        <dia:rectangle val="49.95,82.95;77.885,96.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,83"/>
@@ -6694,7 +6694,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.000000000000002"/>
+        <dia:real val="13.200000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#abstract_object#</dia:string>
@@ -7008,29 +7008,6 @@ or other comparable model types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, generate fluent setters.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#modeled_concepts#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;qname&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of concepts modeled by this object.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7601,16 +7578,16 @@ object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O65">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.205,96.95;64.7675,106.05"/>
+        <dia:rectangle val="28.205,96.15;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="28.255,101"/>
         <dia:point val="28.255,106"/>
@@ -7642,16 +7619,16 @@ object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O66">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0675,96.95;89.075,106"/>
+        <dia:rectangle val="63.0675,96.15;89.075,106"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,97"/>
+        <dia:point val="63.9175,96.2"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="89.025,101"/>
         <dia:point val="89.025,105.95"/>
@@ -10639,7 +10616,7 @@ boost::property_tree::ptreee#</dia:string>
         <dia:point val="-87,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.615000000000002"/>
+        <dia:real val="23.614999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -10938,7 +10915,7 @@ and values (where applicable) for tags.#</dia:string>
         <dia:point val="-34,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.075000000000003"/>
+        <dia:real val="22.074999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -11021,7 +10998,7 @@ based on association and generalisation relationships.#</dia:string>
         <dia:point val="-47,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.9099999999999993"/>
+        <dia:real val="7.9100000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -12263,7 +12240,7 @@ not have a need for it.#</dia:string>
         <dia:point val="88,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.817499999999999"/>
+        <dia:real val="8.8175000000000008"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.2000000000000011"/>
@@ -13101,7 +13078,7 @@ not have a need for it.#</dia:string>
         <dia:point val="52,-12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.925000000000001"/>
+        <dia:real val="25.924999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>

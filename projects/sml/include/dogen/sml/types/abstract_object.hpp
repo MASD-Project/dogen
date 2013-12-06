@@ -82,7 +82,6 @@ public:
         const bool is_versioned,
         const bool is_comparable,
         const bool is_fluent,
-        const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_child,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const bool is_inheritance_root);
@@ -239,16 +238,6 @@ public:
     /**@}*/
 
     /**
-     * @brief List of concepts modeled by this object.
-     */
-    /**@{*/
-    const std::list<dogen::sml::qname>& modeled_concepts() const;
-    std::list<dogen::sml::qname>& modeled_concepts();
-    void modeled_concepts(const std::list<dogen::sml::qname>& v);
-    void modeled_concepts(const std::list<dogen::sml::qname>&& v);
-    /**@}*/
-
-    /**
      * @brief If true, the type has at least one parent.
      */
     /**@{*/
@@ -292,7 +281,6 @@ private:
     bool is_versioned_;
     bool is_comparable_;
     bool is_fluent_;
-    std::list<dogen::sml::qname> modeled_concepts_;
     bool is_child_;
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
     bool is_inheritance_root_;

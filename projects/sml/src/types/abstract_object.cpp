@@ -156,7 +156,6 @@ abstract_object::abstract_object(abstract_object&& rhs)
       is_versioned_(std::move(rhs.is_versioned_)),
       is_comparable_(std::move(rhs.is_comparable_)),
       is_fluent_(std::move(rhs.is_fluent_)),
-      modeled_concepts_(std::move(rhs.modeled_concepts_)),
       is_child_(std::move(rhs.is_child_)),
       relationships_(std::move(rhs.relationships_)),
       is_inheritance_root_(std::move(rhs.is_inheritance_root_)) { }
@@ -181,7 +180,6 @@ abstract_object::abstract_object(
     const bool is_versioned,
     const bool is_comparable,
     const bool is_fluent,
-    const std::list<dogen::sml::qname>& modeled_concepts,
     const bool is_child,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root)
@@ -204,7 +202,6 @@ abstract_object::abstract_object(
       is_versioned_(is_versioned),
       is_comparable_(is_comparable),
       is_fluent_(is_fluent),
-      modeled_concepts_(modeled_concepts),
       is_child_(is_child),
       relationships_(relationships),
       is_inheritance_root_(is_inheritance_root) { }
@@ -235,7 +232,6 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"is_versioned\": " << is_versioned_ << ", "
       << "\"is_comparable\": " << is_comparable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
-      << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"is_child\": " << is_child_ << ", "
       << "\"relationships\": " << relationships_ << ", "
       << "\"is_inheritance_root\": " << is_inheritance_root_
@@ -260,7 +256,6 @@ void abstract_object::swap(abstract_object& other) noexcept {
     swap(is_versioned_, other.is_versioned_);
     swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
-    swap(modeled_concepts_, other.modeled_concepts_);
     swap(is_child_, other.is_child_);
     swap(relationships_, other.relationships_);
     swap(is_inheritance_root_, other.is_inheritance_root_);
@@ -282,7 +277,6 @@ bool abstract_object::compare(const abstract_object& rhs) const {
         is_versioned_ == rhs.is_versioned_ &&
         is_comparable_ == rhs.is_comparable_ &&
         is_fluent_ == rhs.is_fluent_ &&
-        modeled_concepts_ == rhs.modeled_concepts_ &&
         is_child_ == rhs.is_child_ &&
         relationships_ == rhs.relationships_ &&
         is_inheritance_root_ == rhs.is_inheritance_root_;
@@ -454,22 +448,6 @@ bool abstract_object::is_fluent() const {
 
 void abstract_object::is_fluent(const bool v) {
     is_fluent_ = v;
-}
-
-const std::list<dogen::sml::qname>& abstract_object::modeled_concepts() const {
-    return modeled_concepts_;
-}
-
-std::list<dogen::sml::qname>& abstract_object::modeled_concepts() {
-    return modeled_concepts_;
-}
-
-void abstract_object::modeled_concepts(const std::list<dogen::sml::qname>& v) {
-    modeled_concepts_ = v;
-}
-
-void abstract_object::modeled_concepts(const std::list<dogen::sml::qname>&& v) {
-    modeled_concepts_ = std::move(v);
 }
 
 bool abstract_object::is_child() const {

@@ -225,7 +225,8 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
 
     for (const auto us : p.unknown_stereotypes()) {
         const auto qn(to_qname(us));
-        ao.modeled_concepts().push_back(qn);
+        using sml::relationship_types;
+        ao.relationships()[relationship_types::modeled_concepts].push_back(qn);
     }
 
     for (const auto& p : o.properties()) {
@@ -498,7 +499,8 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
     }
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));
-    if (i != context_.child_id_to_parent_ids().end()) {
+    c.is_child(i != context_.child_id_to_parent_ids().end());
+    if (c.is_child()) {
         if (i->second.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_parent_container << o.id();
             BOOST_THROW_EXCEPTION(
@@ -520,6 +522,10 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
             c.refines().push_back(j->second);
         }
     }
+
+    const auto j(context_.parent_ids().find(o.id()));
+    c.is_parent(j != context_.parent_ids().end());
+
     context_.model().concepts().insert(std::make_pair(c.name(), c));
 }
 

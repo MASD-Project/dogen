@@ -134,10 +134,9 @@ populate(const unsigned int position, result_type& v) {
     v.is_versioned(create_bool(position + 11));
     v.is_comparable(create_bool(position + 12));
     v.is_fluent(create_bool(position + 13));
-    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 14));
-    v.is_child(create_bool(position + 15));
-    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 16));
-    v.is_inheritance_root(create_bool(position + 17));
+    v.is_child(create_bool(position + 14));
+    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 15));
+    v.is_inheritance_root(create_bool(position + 16));
 }
 
 abstract_object_generator::result_type*
