@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-05 Thu 23:26]
+Clock summary at [2013-12-05 Thu 23:59]
 
 | Headline                                            | Time   |      |      |
 |-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *4:14* |      |      |
+| *Total time*                                        | *4:48* |      |      |
 |-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 4:14 |      |
+| Development Stories Implemented                     |        | 4:48 |      |
 | IMPLEMENTATION Release notes and backlog grooming   |        |      | 0:05 |
 | COMPLETED Add more tests to =concept_indexer=       |        |      | 3:22 |
-| IMPLEMENTATION Plug =concept_indexer= into workflow |        |      | 0:47 |
+| IMPLEMENTATION Plug =concept_indexer= into workflow |        |      | 1:21 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -57,6 +57,22 @@ Use compilation downtime to update the manual.
 
 - tidy-up method names
 - avoid mixed activities
+
+**** IMPLEMENTATION Add concept indexing activity                      :task:
+     CLOCK: [2013-12-05 Thu 23:25]--[2013-12-05 Thu 23:59] =>  0:34
+
+- remove resolver concept indexing
+
+*** COMPLETED Concept resolution is not particularly clean            :story:
+    CLOSED: [2013-12-05 Thu 23:42]
+
+At present resolver is tasked with converting the hierarchy of
+concepts into a container with a set of =qnames= that represent the
+concepts the type models. It takes into account both the inheritance
+from a concept perspective (e.g. refinement) and the type-related
+inheritance (e.g. if our parent already models a concept we do not
+have to model it too). However, the code is very hacky and needs to be
+cleaned up.
 
 *** Populate new concept properties in dia to sml transformer         :story:
 
