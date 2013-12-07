@@ -55,10 +55,12 @@ We have build agents for the following Operative Systems:
 - Windows: 32-bit using MinGW. 64-bit using Ming64 should work but we
   do not have a build agent to prove it.
 
-Installable packages generated off of CI are available at github
-[[https://github.com/kitanda/dogen/downloads][here]]. They are named after our build agents, but the key thing is to
-make sure the Operative System and bitness (e.g. 64-bit or 32-bit)
-matches your setup.
+Installable packages generated off of CI used to be available at
+github [[https://github.com/kitanda/dogen/downloads][here]], but since they decommissioned the downloads section, we
+found no place to upload them to. The generated packages are named
+after our build agents, and the key thing is to make sure the
+Operative System and bitness (e.g. 64-bit or 32-bit) matches your
+setup. We are trying to find a new location to upload the packages to.
 
 ** Building from Source
 
