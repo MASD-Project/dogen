@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-07 Sat 19:02]
+Clock summary at [2013-12-07 Sat 20:09]
 
 | Headline                                                 | Time   |      |      |
 |----------------------------------------------------------+--------+------+------|
-| *Total time*                                             | *6:21* |      |      |
+| *Total time*                                             | *7:27* |      |      |
 |----------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                          |        | 6:21 |      |
+| Development Stories Implemented                          |        | 7:27 |      |
 | IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:12 |
 | IMPLEMENTATION Update manual                             |        |      | 0:19 |
 | COMPLETED Add more tests to =concept_indexer=            |        |      | 3:22 |
 | COMPLETED Plug =concept_indexer= into workflow           |        |      | 2:14 |
-| IMPLEMENTATION Create a =property_indexer= and add tests |        |      | 0:14 |
+| IMPLEMENTATION Create a =property_indexer= and add tests |        |      | 1:20 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -99,10 +99,12 @@ cleaned up.
 - populate =is_parent= and =is_child=
 
 *** IMPLEMENTATION Create a =property_indexer= and add tests          :story:
-**** IMPLEMENTATION Implement indexing of properties
+**** COMPLETED Implement indexing of properties
+     CLOSED: [2013-12-07 Sat 20:09]
+     CLOCK: [2013-12-07 Sat 19:03]--[2013-12-07 Sat 20:09] =>  1:06
      CLOCK: [2013-12-07 Sat 18:48]--[2013-12-07 Sat 19:02] =>  0:14
 
-**** Add unit tests                                                    :task:
+**** IMPLEMENTATION Add unit tests                                     :task:
 **** Plug into workflow                                                :task:
 **** Replace C++ property handling code with relationships             :task:
 *** Create a =relationship_indexer= and add tests                     :story:
