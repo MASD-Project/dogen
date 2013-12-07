@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_INHERITANCE_INDEXER_HPP
-#define DOGEN_SML_TYPES_INHERITANCE_INDEXER_HPP
+#ifndef DOGEN_SML_TYPES_RELATIONSHIP_INDEXER_HPP
+#define DOGEN_SML_TYPES_RELATIONSHIP_INDEXER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,13 +39,13 @@ namespace sml {
  * relationships across the model - other than refinement and
  * inheritance relationships.
  *
- * The inheritance_indexer expects to receive a partial model such as ones coming
+ * The relationship_indexer expects to receive a partial model such as ones coming
  * straight out of Dia to SML transformation. Its job is to take the
  * existing data and to expand it, duplicating information across the
  * model to make it easier to access without requiring any additional
  * look-ups.
  *
- * The inheritance_indexer is responsible for the following concrete tasks:
+ * The relationship_indexer is responsible for the following concrete tasks:
  *
  * @li populate the original parents of all children involved in
  * inheritance relationships;
@@ -57,15 +57,15 @@ namespace sml {
  * of all types.
  *
  */
-class inheritance_indexer {
+class relationship_indexer {
 public:
-    inheritance_indexer() = default;
-    inheritance_indexer(const inheritance_indexer&) = default;
-    inheritance_indexer(inheritance_indexer&&) = default;
-    inheritance_indexer& operator=(const inheritance_indexer&) = default;
+    relationship_indexer() = default;
+    relationship_indexer(const relationship_indexer&) = default;
+    relationship_indexer(relationship_indexer&&) = default;
+    relationship_indexer& operator=(const relationship_indexer&) = default;
 
 public:
-    virtual ~inheritance_indexer() noexcept { }
+    virtual ~relationship_indexer() noexcept { }
 
 private:
     /**

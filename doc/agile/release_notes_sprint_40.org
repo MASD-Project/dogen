@@ -10,20 +10,22 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-06 Fri 12:39]
+Clock summary at [2013-12-07 Sat 19:02]
 
-| Headline                                            | Time   |      |      |
-|-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *5:42* |      |      |
-|-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 5:42 |      |
-| IMPLEMENTATION Release notes and backlog grooming   |        |      | 0:05 |
-| IMPLEMENTATION Update manual                        |        |      | 0:19 |
-| COMPLETED Add more tests to =concept_indexer=       |        |      | 3:22 |
-| IMPLEMENTATION Plug =concept_indexer= into workflow |        |      | 1:56 |
+| Headline                                                 | Time   |      |      |
+|----------------------------------------------------------+--------+------+------|
+| *Total time*                                             | *6:21* |      |      |
+|----------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                          |        | 6:21 |      |
+| IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:12 |
+| IMPLEMENTATION Update manual                             |        |      | 0:19 |
+| COMPLETED Add more tests to =concept_indexer=            |        |      | 3:22 |
+| COMPLETED Plug =concept_indexer= into workflow           |        |      | 2:14 |
+| IMPLEMENTATION Create a =property_indexer= and add tests |        |      | 0:14 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-07 Sat 18:40]--[2013-12-07 Sat 18:47] =>  0:07
     CLOCK: [2013-12-03 Tue 08:01]--[2013-12-03 Tue 08:06] =>  0:05
 
 *** IMPLEMENTATION Update manual                                      :story:
@@ -62,7 +64,8 @@ inheritance (e.g. if our parent already models a concept we do not
 have to model it too). However, the code is very hacky and needs to be
 cleaned up.
 
-*** IMPLEMENTATION Plug =concept_indexer= into workflow               :story:
+*** COMPLETED Plug =concept_indexer= into workflow                    :story:
+    CLOSED: [2013-12-07 Sat 18:42]
 **** COMPLETED Minor refactor to workflow                              :task:
      CLOSED: [2013-12-05 Thu 23:26]
      CLOCK: [2013-12-05 Thu 23:20]--[2013-12-05 Thu 23:25] =>  0:05
@@ -84,43 +87,35 @@ cleaned up.
 
 - deal with the fallout
 
-**** IMPLEMENTATION Remove resolver concept indexing                   :task:
+**** COMPLETED Remove resolver concept indexing                        :task:
+     CLOSED: [2013-12-07 Sat 18:42]
      CLOCK: [2013-12-06 Fri 19:50]--[2013-12-06 Fri 20:08] =>  0:18
 
 - activate new activity
 
-*** Populate new concept properties in dia to sml transformer         :story:
+*** COMPLETED Populate new concept properties in dia to sml transformer :story:
+    CLOSED: [2013-12-07 Sat 18:42]
 
 - populate =is_parent= and =is_child=
 
-*** Finish implementation of =inheritance_indexer= and add tests      :story:
-**** Update transformer to populate basic relationships                :task:
-**** Implement indexing of associations, keys and visitor              :task:
+*** IMPLEMENTATION Create a =property_indexer= and add tests          :story:
+**** IMPLEMENTATION Implement indexing of properties
+     CLOCK: [2013-12-07 Sat 18:48]--[2013-12-07 Sat 19:02] =>  0:14
+
+**** Add unit tests                                                    :task:
 **** Plug into workflow                                                :task:
-**** Add unit tests for the indexing of properties                     :task:
-**** Add unit tests for the indexing of relationships                  :task:
+**** Replace C++ property handling code with relationships             :task:
+*** Create a =relationship_indexer= and add tests                     :story:
+**** Implement indexing of associations, keys and visitor              :task:
+**** Add unit tests                                                    :task:
 
-*** Replace existing structures with indexing ones                    :story:
-
-Make use of the indexing information in legacy C++ formatters as a way
-to validate that it is correct.
-
-**** Create a helper class to handle relationships                     :task:
-
-- =find_relationship=: gets a specific relationship container, returns
-  empty if it does not exist.
-- =find_relationship_strict=: gets a specific relationship container,
-  throws if it does not exist.
-
+**** Plug into workflow                                                :task:
 **** Replace original parent/parent functionality with relationships   :task:
 
 - delete leaves, original parent, parent attributes and use
   relationships instead.
 
-**** Replace the concepts expansion code with relationships            :task:
-**** Replace C++ property handling code with relationships             :task:
 **** Replace association, keys and visitor with relationships          :task:
-
 *** Add include file support to main type formatter                   :story:
 
 Inclusion support needs to be moved to the formatters. SML provides
