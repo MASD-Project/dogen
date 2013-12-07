@@ -2,6 +2,7 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
+	<origin_type>1</origin_type>
 	<documentation>This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
@@ -32,20 +33,19 @@ This comment will be applied to the model namespace itself.
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<origin_type>1</origin_type>
 	<references class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
 	<leaves class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="15" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="16" tracking_level="0" version="0">
 			<first>
@@ -62,6 +62,7 @@ This comment will be applied to the model namespace itself.
 				<simple_name>package2</simple_name>
 			</first>
 			<second class_id="17" tracking_level="0" version="0">
+				<origin_type>1</origin_type>
 				<documentation>package2
 </documentation>
 				<meta_data>
@@ -91,7 +92,6 @@ This comment will be applied to the model namespace itself.
 					<simple_name>package2</simple_name>
 				</name>
 				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
 				<members class_id="18" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -112,6 +112,7 @@ This comment will be applied to the model namespace itself.
 				<simple_name>package</simple_name>
 			</first>
 			<second>
+				<origin_type>1</origin_type>
 				<documentation>package
 </documentation>
 				<meta_data>
@@ -140,7 +141,6 @@ This comment will be applied to the model namespace itself.
 					<simple_name>package</simple_name>
 				</name>
 				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -150,22 +150,22 @@ This comment will be applied to the model namespace itself.
 	</modules>
 	<concepts class_id="19" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="20" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="21" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<objects class_id="22" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="23" tracking_level="0" version="0">
 			<first>
@@ -184,6 +184,7 @@ This comment will be applied to the model namespace itself.
 				<px class_id="7" tracking_level="1" version="0" object_id="_0">
 					<abstract_object class_id="25" tracking_level="0" version="0">
 						<type class_id="26" tracking_level="0" version="0">
+							<origin_type>1</origin_type>
 							<documentation>first line
 
 second line
@@ -215,7 +216,6 @@ third line with &quot;quote&quot;
 								<simple_name>multi_line</simple_name>
 							</name>
 							<generation_type>1</generation_type>
-							<origin_type>1</origin_type>
 						</type>
 						<all_properties class_id="27" tracking_level="0" version="0">
 							<count>0</count>
@@ -227,7 +227,7 @@ third line with &quot;quote&quot;
 						</local_properties>
 						<inherited_properties class_id="28" tracking_level="0" version="0">
 							<count>0</count>
-							<bucket_count>23</bucket_count>
+							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</inherited_properties>
 						<operations class_id="29" tracking_level="0" version="0">
@@ -254,7 +254,7 @@ third line with &quot;quote&quot;
 						<is_child>0</is_child>
 						<relationships class_id="31" tracking_level="0" version="0">
 							<count>0</count>
-							<bucket_count>23</bucket_count>
+							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
@@ -280,6 +280,7 @@ third line with &quot;quote&quot;
 				<px class_id_reference="7" object_id="_1">
 					<abstract_object>
 						<type>
+							<origin_type>1</origin_type>
 							<documentation>this is the brief comment
 </documentation>
 							<meta_data>
@@ -300,7 +301,6 @@ third line with &quot;quote&quot;
 								<simple_name>one_line</simple_name>
 							</name>
 							<generation_type>1</generation_type>
-							<origin_type>1</origin_type>
 						</type>
 						<all_properties>
 							<count>0</count>
@@ -409,7 +409,7 @@ a second line
 						</local_properties>
 						<inherited_properties>
 							<count>0</count>
-							<bucket_count>23</bucket_count>
+							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</inherited_properties>
 						<operations>
@@ -436,7 +436,7 @@ a second line
 						<is_child>0</is_child>
 						<relationships>
 							<count>0</count>
-							<bucket_count>23</bucket_count>
+							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>

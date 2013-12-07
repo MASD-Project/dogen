@@ -2,6 +2,7 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
+	<origin_type>1</origin_type>
 	<documentation></documentation>
 	<meta_data class_id="9" tracking_level="0" version="0">
 		<count>0</count>
@@ -21,20 +22,19 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<origin_type>1</origin_type>
 	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
 	<leaves class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="14" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="15" tracking_level="0" version="0">
 			<first>
@@ -50,6 +50,7 @@
 				<simple_name>pkg1</simple_name>
 			</first>
 			<second class_id="16" tracking_level="0" version="0">
+				<origin_type>1</origin_type>
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -69,7 +70,6 @@
 					<simple_name>pkg1</simple_name>
 				</name>
 				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
 				<members class_id="17" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -79,17 +79,17 @@
 	</modules>
 	<concepts class_id="18" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="19" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="20" tracking_level="0" version="0">
 		<count>3</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="21" tracking_level="0" version="0">
 			<first>
@@ -107,6 +107,7 @@
 			</first>
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
 				<type class_id="22" tracking_level="0" version="0">
+					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -127,7 +128,6 @@
 						<simple_name>shape_types</simple_name>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
 				</type>
 				<underlying_type>
 					<model_name></model_name>
@@ -190,6 +190,7 @@
 			</first>
 			<second object_id="_1">
 				<type>
+					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -209,7 +210,6 @@
 						<simple_name>colour_types</simple_name>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
 				</type>
 				<underlying_type>
 					<model_name></model_name>
@@ -272,6 +272,7 @@
 			</first>
 			<second object_id="_2">
 				<type>
+					<origin_type>1</origin_type>
 					<documentation>this is a brief comment
 
 this is a long comment
@@ -294,7 +295,6 @@ this is a long comment
 						<simple_name>book_types</simple_name>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
 				</type>
 				<underlying_type>
 					<model_name></model_name>
@@ -337,7 +337,7 @@ this is a long comment
 	</enumerations>
 	<objects class_id="25" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="26" tracking_level="0" version="0">
 			<first>
@@ -356,6 +356,7 @@ this is a long comment
 				<px class_id="7" tracking_level="1" version="0" object_id="_3">
 					<abstract_object class_id="28" tracking_level="0" version="0">
 						<type>
+							<origin_type>1</origin_type>
 							<documentation></documentation>
 							<meta_data>
 								<count>0</count>
@@ -375,7 +376,6 @@ this is a long comment
 								<simple_name>a_class</simple_name>
 							</name>
 							<generation_type>1</generation_type>
-							<origin_type>1</origin_type>
 						</type>
 						<all_properties class_id="29" tracking_level="0" version="0">
 							<count>0</count>
@@ -481,7 +481,7 @@ this is a long comment
 						</local_properties>
 						<inherited_properties class_id="33" tracking_level="0" version="0">
 							<count>0</count>
-							<bucket_count>23</bucket_count>
+							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</inherited_properties>
 						<operations class_id="34" tracking_level="0" version="0">
@@ -508,7 +508,7 @@ this is a long comment
 						<is_child>0</is_child>
 						<relationships class_id="36" tracking_level="0" version="0">
 							<count>0</count>
-							<bucket_count>23</bucket_count>
+							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>

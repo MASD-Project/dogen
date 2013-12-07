@@ -2,6 +2,7 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="8" tracking_level="0" version="0">
+	<origin_type>1</origin_type>
 	<documentation></documentation>
 	<meta_data class_id="9" tracking_level="0" version="0">
 		<count>0</count>
@@ -21,40 +22,39 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<origin_type>1</origin_type>
 	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
 	<leaves class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</modules>
 	<concepts class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="16" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<objects class_id="18" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="19" tracking_level="0" version="0">
 			<first>
@@ -74,6 +74,7 @@
 					<abstract_entity class_id="21" tracking_level="0" version="0">
 						<abstract_object class_id="22" tracking_level="0" version="0">
 							<type class_id="23" tracking_level="0" version="0">
+								<origin_type>1</origin_type>
 								<documentation></documentation>
 								<meta_data>
 									<count>0</count>
@@ -93,7 +94,6 @@
 									<simple_name>a_class</simple_name>
 								</name>
 								<generation_type>1</generation_type>
-								<origin_type>1</origin_type>
 							</type>
 							<all_properties class_id="24" tracking_level="0" version="0">
 								<count>0</count>
@@ -508,7 +508,7 @@
 							</local_properties>
 							<inherited_properties class_id="28" tracking_level="0" version="0">
 								<count>0</count>
-								<bucket_count>23</bucket_count>
+								<bucket_count>11</bucket_count>
 								<item_version>0</item_version>
 							</inherited_properties>
 							<operations class_id="29" tracking_level="0" version="0">
@@ -535,7 +535,7 @@
 							<is_child>0</is_child>
 							<relationships class_id="32" tracking_level="0" version="0">
 								<count>0</count>
-								<bucket_count>23</bucket_count>
+								<bucket_count>11</bucket_count>
 								<item_version>0</item_version>
 							</relationships>
 							<is_inheritance_root>0</is_inheritance_root>
