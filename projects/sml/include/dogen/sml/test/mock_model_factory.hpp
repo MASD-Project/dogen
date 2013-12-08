@@ -74,7 +74,10 @@ public:
      * @brief Initialises a new mock factory at a given stage in the
      * SML pipeline, as given by the flags supplied.
      */
-    mock_model_factory(const bool tagged = true, const bool indexed = true);
+    mock_model_factory(const bool tagged = true,
+        const bool merged = true,
+        const bool concepts_indexed = true,
+        const bool properties_indexed = true);
 
 public:
     /**
@@ -380,7 +383,9 @@ public:
 
 private:
     const bool tagged_;
-    const bool indexed_;
+    const bool merged_;
+    const bool concepts_indexed_;
+    const bool properties_indexed_;
 };
 
 } } }

@@ -42,7 +42,18 @@ const std::string test_module("sml");
 const std::string test_suite("resolver_spec");
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory factory;
+
+/*
+ * FIXME: we need to update the mock factory to generate merged
+ * models. for now as a quick hack, we just  used the merger.
+ *
+ * FIXME: all properties have model name set and need to be manually
+ * unset.
+ *
+ * Flag was added but does nothing yet.
+ */
+const mock_model_factory factory(false/*tagged*/, true/*merged*/,
+    false/*concepts_indexed*/, false/*properties_indexed*/);
 
 const std::string incorrect_model("Object does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
@@ -57,13 +68,6 @@ const std::string incorrect_meta_type("Object has incorrect meta_type");
 using dogen::utility::test::contains_checker;
 using dogen::sml::resolution_error;
 
-/*
- * FIXME: we need to update the mock factory to generate merged
- * models. for now as a quick hack, we just  used the merger.
- *
- * FIXME: all properties have model name set and need to be manually
- * unset.
- */
 BOOST_AUTO_TEST_SUITE(resolver)
 
 BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_successfully) {

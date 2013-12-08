@@ -49,7 +49,8 @@ using dogen::sml::test::mock_model_factory;
  * However, strictly speaking, tagging happens before indexing so it
  * would be more truthful to use a tagged model in the tests.
  */
-const mock_model_factory factory(false/*tagged*/, false/*indexed*/);
+const mock_model_factory factory(false/*tagged*/, false/*merged*/,
+    false/*concepts_indexed*/, false/*properties_indexed*/);
 
 }
 

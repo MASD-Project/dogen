@@ -96,7 +96,7 @@ void property_indexer::index_object(abstract_object& o, model& m,
         for (const auto& qn : i->second) {
             auto& c(find_concept(qn, m));
             o.all_properties().insert(o.all_properties().end(),
-                c.all_properties().begin(), c.all_properties().end());
+                c.local_properties().begin(), c.local_properties().end());
         }
     }
 
@@ -141,8 +141,13 @@ void property_indexer::index_concept(concept& c, model& m,
 
     for (const auto& qn : c.refines()) {
         auto& parent(find_concept(qn, m));
+        index_concept(parent, m, processed_qnames);
+
         c.inherited_properties().insert(
-            std::make_pair(parent.name(), parent.all_properties()));
+            std::make_pair(parent.name(), parent.local_properties()));
+
+        c.all_properties().insert(c.all_properties().end(),
+            parent.local_properties().begin(), parent.local_properties().end());
     }
     processed_qnames.insert(c.name());
 }

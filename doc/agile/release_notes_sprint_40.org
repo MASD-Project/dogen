@@ -105,6 +105,12 @@ cleaned up.
      CLOCK: [2013-12-07 Sat 18:48]--[2013-12-07 Sat 19:02] =>  0:14
 
 **** IMPLEMENTATION Add unit tests                                     :task:
+     CLOCK: [2013-12-07 Sat 20:09]--[2013-12-07 Sat 21:23] =>  1:14
+
+- blocker: we require the model to have been indexed at the concept level in
+  order to test the property indexer, so we need to update the mock
+  factory.
+
 **** Plug into workflow                                                :task:
 **** Replace C++ property handling code with relationships             :task:
 *** Create a =relationship_indexer= and add tests                     :story:
