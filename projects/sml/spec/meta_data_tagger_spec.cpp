@@ -52,7 +52,9 @@ const std::string test_module("sml");
 const std::string test_suite("meta_data_tagger_spec");
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory model_factory(false/*tagged*/);
+const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
+    false/*merged*/, false/*concepts_indexed*/, false/*properties_indexed*/);
+const mock_model_factory model_factory(flags);
 
 const std::string default_cpp_forward_declaration_postfix("_fwd");
 const std::string default_cpp_implementation_file_extension(".cpp");

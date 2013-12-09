@@ -44,8 +44,9 @@ using dogen::sml::test::mock_model_factory;
  * @brief We require the concepts to have been indexed or else we
  * won't work.
  */
-const mock_model_factory factory(false/*tagged*/, false/*merged*/,
-    true/*concepts_indexed*/, false/*properties_indexed*/);
+const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
+    false/*merged*/, true/*concepts_indexed*/, false/*properties_indexed*/);
+const mock_model_factory factory(flags);
 
 }
 

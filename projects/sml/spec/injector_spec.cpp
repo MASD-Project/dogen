@@ -41,7 +41,8 @@
 namespace {
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory factory;
+const mock_model_factory::flags flags;
+const mock_model_factory factory(flags);
 
 const std::string test_module("sml");
 const std::string test_suite("injector_spec");

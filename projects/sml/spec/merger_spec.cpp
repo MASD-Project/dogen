@@ -37,7 +37,8 @@ const std::string test_module("sml");
 const std::string test_suite("merger_spec");
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory factory;
+const mock_model_factory::flags flags;
+const mock_model_factory factory(flags);
 
 const std::string invalid_simple_name("INVALID");
 const std::string invalid_model_name("INVALID");

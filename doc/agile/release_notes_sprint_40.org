@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-07 Sat 20:09]
+Clock summary at [2013-12-09 Mon 08:49]
 
 | Headline                                                 | Time   |      |      |
 |----------------------------------------------------------+--------+------+------|
-| *Total time*                                             | *7:27* |      |      |
+| *Total time*                                             | *9:31* |      |      |
 |----------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                          |        | 7:27 |      |
+| Development Stories Implemented                          |        | 9:31 |      |
 | IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:12 |
 | IMPLEMENTATION Update manual                             |        |      | 0:19 |
 | COMPLETED Add more tests to =concept_indexer=            |        |      | 3:22 |
 | COMPLETED Plug =concept_indexer= into workflow           |        |      | 2:14 |
-| IMPLEMENTATION Create a =property_indexer= and add tests |        |      | 1:20 |
+| IMPLEMENTATION Create a =property_indexer= and add tests |        |      | 3:24 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -103,6 +103,13 @@ cleaned up.
      CLOSED: [2013-12-07 Sat 20:09]
      CLOCK: [2013-12-07 Sat 19:03]--[2013-12-07 Sat 20:09] =>  1:06
      CLOCK: [2013-12-07 Sat 18:48]--[2013-12-07 Sat 19:02] =>  0:14
+
+**** COMPLETED Create a flags class in mock factory                   :spike:
+     CLOSED: [2013-12-09 Mon 08:44]
+     CLOCK: [2013-12-09 Mon 07:59]--[2013-12-09 Mon 08:49] =>  0:50
+
+- fixes borked clang build and makes the use of flags in factory a bit
+  more sensible.
 
 **** IMPLEMENTATION Add unit tests                                     :task:
      CLOCK: [2013-12-07 Sat 20:09]--[2013-12-07 Sat 21:23] =>  1:14

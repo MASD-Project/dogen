@@ -71,13 +71,76 @@ public:
 
 public:
     /**
+     * @brief Configuration flags for the mock factory.
+     */
+    class flags {
+    public:
+        flags(const bool tagged = false,
+            const bool merged = false,
+            const bool resolved = false,
+            const bool concepts_indexed = false,
+            const bool properties_indexed = false);
+
+    public:
+        /**
+         * @brief If true, add meta-data tags to the model.
+         */
+        /**@{*/
+        bool tagged() const;
+        void tagged(const bool v);
+        /**@}*/
+
+        /**
+         * @brief For methods that return more than one model, if
+         * true, merges all of them into a single merged model.
+         */
+        /**@{*/
+        bool merged() const;
+        void merged(const bool v);
+        /**@}*/
+
+        /**
+         * @brief For methods that return more than one model, when
+         * false, leaves properties unresolved for all models other
+         * than the target model.
+         */
+        /**@{*/
+        bool resolved() const;
+        void resolved(const bool v);
+        /**@}*/
+
+        /**
+         * @brief If true, returns a model as if concept indexing was
+         * already performed.
+         */
+        /**@{*/
+        bool concepts_indexed() const;
+        void concepts_indexed(const bool v);
+        /**@}*/
+
+        /**
+         * @brief If true, returns a model as if property indexing was
+         * already performed.
+         */
+        /**@{*/
+        bool properties_indexed() const;
+        void properties_indexed(const bool v);
+        /**@}*/
+
+    private:
+        bool tagged_;
+        bool merged_;
+        bool resolved_;
+        bool concepts_indexed_;
+        bool properties_indexed_;
+    };
+
+public:
+    /**
      * @brief Initialises a new mock factory at a given stage in the
      * SML pipeline, as given by the flags supplied.
      */
-    mock_model_factory(const bool tagged = true,
-        const bool merged = true,
-        const bool concepts_indexed = true,
-        const bool properties_indexed = true);
+    explicit mock_model_factory(const flags& f);
 
 public:
     /**
@@ -382,10 +445,7 @@ public:
     object_with_missing_third_degree_parent_in_different_models() const;
 
 private:
-    const bool tagged_;
-    const bool merged_;
-    const bool concepts_indexed_;
-    const bool properties_indexed_;
+    const flags flags_;
 };
 
 } } }

@@ -330,11 +330,37 @@ namespace dogen {
 namespace sml {
 namespace test {
 
-mock_model_factory::mock_model_factory(const bool tagged,
-    const bool merged, const bool concepts_indexed,
-    const bool properties_indexed)
-    : tagged_(tagged), merged_(merged), concepts_indexed_(concepts_indexed),
-      properties_indexed_(properties_indexed) { }
+mock_model_factory::flags::flags(const bool tagged,
+    const bool merged, const bool resolved,
+    const bool concepts_indexed, const bool properties_indexed) :
+    tagged_(tagged), merged_(merged), resolved_(resolved),
+    concepts_indexed_(concepts_indexed),
+    properties_indexed_(properties_indexed) { }
+
+bool mock_model_factory::flags::tagged() const { return tagged_; }
+void mock_model_factory::flags::tagged(const bool v) { tagged_ = v; }
+
+bool mock_model_factory::flags::merged() const { return merged_; }
+void mock_model_factory::flags::merged(const bool v) { merged_ = v; }
+
+bool mock_model_factory::flags::resolved() const { return resolved_; }
+void mock_model_factory::flags::resolved(const bool v) { resolved_ = v; }
+
+bool mock_model_factory::flags::concepts_indexed() const {
+    return(concepts_indexed_);
+}
+void mock_model_factory::flags::concepts_indexed(const bool v) {
+    concepts_indexed_ = v;
+}
+
+bool mock_model_factory::flags::properties_indexed() const {
+    return(properties_indexed_);
+}
+void mock_model_factory::flags::properties_indexed(const bool v) {
+    properties_indexed_ = v;
+}
+
+mock_model_factory::mock_model_factory(const flags& f) : flags_(f) { }
 
 std::string mock_model_factory::model_name(const unsigned int n) const {
     return ::model_name(n);
@@ -428,7 +454,7 @@ build_value_object(const unsigned int i, const qname& model_qname,
     populate_object(*r, i, model_qname, module_n);
     r->type(value_object_types::plain);
 
-    if (tagged_)
+    if (flags_.tagged())
         add_test_tags(*r);
 
     return r;
@@ -451,7 +477,7 @@ concept mock_model_factory::build_concept(const unsigned int i,
     r.documentation(documentation);
     r.origin_type(origin_types::user);
 
-    if (tagged_)
+    if (flags_.tagged())
         add_test_tags(r);
 
     return r;
@@ -471,7 +497,7 @@ build_entity(const property& prop, const bool keyed,
     populate_object(*r, i, model_qname, module_n);
     r->identity().push_back(prop);
 
-    if (tagged_)
+    if (flags_.tagged())
         add_test_tags(*r);
 
     return r;
@@ -506,7 +532,7 @@ build_enumeration(const unsigned int i, const qname& model_qname,
     r.enumerators().push_back(lambda(0));
     r.enumerators().push_back(lambda(1));
 
-    if (tagged_)
+    if (flags_.tagged())
         add_test_tags(r);
 
     return r;
@@ -528,7 +554,7 @@ build_exception(const unsigned int i, const qname& model_qname,
     r->documentation(documentation);
     r->type(value_object_types::exception);
 
-    if (tagged_)
+    if (flags_.tagged())
         add_test_tags(*r);
 
     return r;
@@ -547,7 +573,7 @@ model mock_model_factory::build_empty_model(const unsigned int n) const {
     model r;
     populate_simple_model_properties(r, n);
 
-    if (tagged_)
+    if (flags_.tagged())
         add_test_tags(r);
 
     return r;
@@ -616,11 +642,11 @@ model mock_model_factory::
 build_single_concept_model(const unsigned int n) const {
     model r(build_empty_model(n));
     concept c(build_concept(0, r.name()));
-    add_property(c, properties_indexed_);
+    add_property(c, flags_.properties_indexed());
     insert_nameable(r.concepts(), c);
 
     auto o(build_value_object(0, r.name()));
-    add_property(*o, properties_indexed_, 1);
+    add_property(*o, flags_.properties_indexed(), 1);
     add_relationship(*o, c, relationship_types::modeled_concepts);
     insert_object(r, o);
 
@@ -631,11 +657,11 @@ model mock_model_factory::
 build_first_degree_concepts_model(const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
-    add_property(c1, properties_indexed_, 1);
+    add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
@@ -646,7 +672,7 @@ build_first_degree_concepts_model(const unsigned int n) const {
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
-    add_property(*o1, properties_indexed_, 2);
+    add_property(*o1, flags_.properties_indexed(), 2);
     add_relationship(*o1, c1, mc);
     insert_object(r, o1);
 
@@ -657,16 +683,16 @@ model mock_model_factory::
 build_second_degree_concepts_model(const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
-    add_property(c1, properties_indexed_, 1);
+    add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
     concept c2(build_concept(2, r.name()));
-    add_property(c2, properties_indexed_, 2);
+    add_property(c2, flags_.properties_indexed(), 2);
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
@@ -681,7 +707,7 @@ build_second_degree_concepts_model(const unsigned int n) const {
     insert_object(r, o1);
 
     auto o2(build_value_object(2, r.name()));
-    add_property(*o2, properties_indexed_, 3);
+    add_property(*o2, flags_.properties_indexed(), 3);
     add_relationship(*o2, c2, mc);
     insert_object(r, o2);
 
@@ -692,7 +718,7 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
     const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
@@ -717,7 +743,7 @@ model mock_model_factory::
 build_diamond_inheritance_concepts_model(const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
@@ -748,7 +774,7 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
     const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
     auto o0(build_value_object(0, r.name()));
@@ -772,7 +798,7 @@ build_object_with_parent_that_models_a_refined_concept(
     const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
@@ -811,7 +837,7 @@ model mock_model_factory::
 build_object_that_models_missing_concept(const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
 
     auto o0(build_value_object(0, r.name()));
 
@@ -825,7 +851,7 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
     const unsigned int n) const {
     model r(build_empty_model(n));
     concept c0(build_concept(0, r.name()));
-    add_property(c0, properties_indexed_);
+    add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
     auto o0(build_value_object(0, r.name()));
@@ -861,7 +887,7 @@ object_with_property(const object_types ot, const property_types pt) const {
     }
 
     o0->local_properties().push_back(p);
-    if (properties_indexed_)
+    if (flags_.properties_indexed())
         o0->all_properties().push_back(p);
 
     model r(build_empty_model(0));
@@ -934,7 +960,7 @@ mock_model_factory::object_with_property_type_in_different_model() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
 
-    add_property(*o0, properties_indexed_,
+    add_property(*o0, flags_.properties_indexed(),
         0, property_types::value_object, o1->name());
 
     qname m0_qn;
@@ -958,7 +984,7 @@ model mock_model_factory::object_with_missing_property_type() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
 
-    add_property(*o0, properties_indexed_, 0,
+    add_property(*o0, flags_.properties_indexed(), 0,
         property_types::value_object, o1->name());
 
     qname mn_qn;
@@ -977,7 +1003,7 @@ object_with_parent_in_the_same_model(const bool has_property) const {
     model r(build_empty_model(0));
     auto o0(build_value_object(0, mn));
     if (has_property) {
-        add_property(*o0, properties_indexed_);
+        add_property(*o0, flags_.properties_indexed());
         primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
@@ -1077,7 +1103,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
 
     auto o0(build_value_object(0, mn));
     if (has_property) {
-        add_property(*o0, properties_indexed_);
+        add_property(*o0, flags_.properties_indexed());
 
         primitive ui;
         ui.name().simple_name(unsigned_int);
@@ -1086,15 +1112,15 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
 
     auto o1(build_value_object(1, mn));
     if (has_property)
-        add_property(*o1, properties_indexed_, 1);
+        add_property(*o1, flags_.properties_indexed(), 1);
 
     auto o2(build_value_object(2, mn));
     if (has_property)
-        add_property(*o2, properties_indexed_, 1);
+        add_property(*o2, flags_.properties_indexed(), 1);
 
     auto o3(build_value_object(3, mn));
     if (has_property)
-        add_property(*o3, properties_indexed_, 3);
+        add_property(*o3, flags_.properties_indexed(), 3);
 
     parent_to_child(*o1, *o0, *o3, !add_leaf);
     parent_to_child(*o2, *o1, *o3, !add_leaf);

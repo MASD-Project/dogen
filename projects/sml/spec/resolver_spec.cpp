@@ -52,8 +52,10 @@ using dogen::sml::test::mock_model_factory;
  *
  * Flag was added but does nothing yet.
  */
-const mock_model_factory factory(false/*tagged*/, true/*merged*/,
-    false/*concepts_indexed*/, false/*properties_indexed*/);
+const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
+    true/*merged*/, false/*concepts_indexed*/, false/*properties_indexed*/);
+
+const mock_model_factory factory(flags);
 
 const std::string incorrect_model("Object does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
