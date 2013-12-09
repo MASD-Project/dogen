@@ -40,7 +40,9 @@ const std::string test_module("om");
 const std::string test_suite("workflow_spec");
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory factory;
+const mock_model_factory::flags flags(true/*tagged*/, false/*resolved*/,
+    false/*merged*/, false/*concepts_indexed*/, false/*properties_indexed*/);
+const mock_model_factory factory(flags);
 
 const std::string type_with_no_properties(
     R"(/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-

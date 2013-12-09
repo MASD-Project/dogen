@@ -46,7 +46,8 @@ const std::string test_module("sml_to_cpp");
 const std::string test_suite("source_file_factory_spec");
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory model_factory;
+const mock_model_factory::flags flags;
+const mock_model_factory model_factory(flags);
 
 const std::string src_dir("__source_directory__");
 const std::string inc_dir("__include_directory__");

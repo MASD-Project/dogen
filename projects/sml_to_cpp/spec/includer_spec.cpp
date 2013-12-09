@@ -41,7 +41,8 @@ const std::string test_suite("includer_spec");
 const std::string test_module("sml_to_cpp");
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory model_factory;
+const mock_model_factory::flags flags;
+const mock_model_factory model_factory(flags);
 
 const std::string types("types");
 const std::string hash("hash");

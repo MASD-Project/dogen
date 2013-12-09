@@ -40,7 +40,8 @@ const std::string test_module("cpp");
 const std::string test_suite("content_descriptor_factory_spec");
 
 using dogen::sml::test::mock_model_factory;
-const mock_model_factory model_factory;
+const mock_model_factory::flags flags;
+const mock_model_factory model_factory(flags);
 
 }
 

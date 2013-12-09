@@ -38,7 +38,8 @@ const std::string empty;
 const std::string test_module("cpp");
 const std::string test_suite("transformer_spec");
 
-const mock_model_factory factory;
+const mock_model_factory::flags flags;
+const mock_model_factory factory(flags);
 
 const std::string external_module("ext_module");
 const std::string no_parent_info("Type has a parent ");

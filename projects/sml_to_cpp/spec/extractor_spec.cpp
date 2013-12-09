@@ -39,7 +39,9 @@ const std::string empty;
 const std::string test_module("sml_to_cpp");
 const std::string test_suite("extractor_spec");
 
-const mock_model_factory factory;
+
+const mock_model_factory::flags flags;
+const mock_model_factory factory(flags);
 
 const std::string object_not_found("Could not find QName in object container");
 

@@ -106,6 +106,7 @@ cleaned up.
 
 **** COMPLETED Create a flags class in mock factory                   :spike:
      CLOSED: [2013-12-09 Mon 08:44]
+     CLOCK: [2013-12-09 Mon 17:43]--[2013-12-09 Mon 17:48] =>  0:05
      CLOCK: [2013-12-09 Mon 07:59]--[2013-12-09 Mon 08:49] =>  0:50
 
 - fixes borked clang build and makes the use of flags in factory a bit
