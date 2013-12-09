@@ -673,6 +673,10 @@ build_first_degree_concepts_model(const unsigned int n) const {
 
     auto o1(build_value_object(1, r.name()));
     add_property(*o1, flags_.properties_indexed(), 2);
+
+    if (flags_.concepts_indexed())
+        add_relationship(*o1, c0, mc);
+
     add_relationship(*o1, c1, mc);
     insert_object(r, o1);
 
@@ -693,6 +697,10 @@ build_second_degree_concepts_model(const unsigned int n) const {
 
     concept c2(build_concept(2, r.name()));
     add_property(c2, flags_.properties_indexed(), 2);
+
+    if (flags_.concepts_indexed())
+        c2.refines().push_back(c0.name());
+
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
@@ -703,11 +711,18 @@ build_second_degree_concepts_model(const unsigned int n) const {
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
+    if (flags_.concepts_indexed())
+        add_relationship(*o1, c0, mc);
+
     add_relationship(*o1, c1, mc);
     insert_object(r, o1);
 
     auto o2(build_value_object(2, r.name()));
     add_property(*o2, flags_.properties_indexed(), 3);
+    if (flags_.concepts_indexed()) {
+        add_relationship(*o2, c0, mc);
+        add_relationship(*o2, c1, mc);
+    }
     add_relationship(*o2, c2, mc);
     insert_object(r, o2);
 
@@ -722,11 +737,11 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
-    add_property(c1, 1);
+    add_property(c1, flags_.properties_indexed(), 1);
     insert_nameable(r.concepts(), c1);
 
     concept c2(build_concept(1, r.name()));
-    add_property(c2, 2);
+    add_property(c2, flags_.properties_indexed(), 2);
     c2.refines().push_back(c0.name());
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
@@ -747,17 +762,20 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
-    add_property(c1, 1);
+    add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
     concept c2(build_concept(2, r.name()));
-    add_property(c2, 2);
+    add_property(c2, flags_.properties_indexed(), 2);
     c2.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c2);
 
     concept c3(build_concept(3, r.name()));
-    add_property(c3, 3);
+    add_property(c3, flags_.properties_indexed(), 3);
+    if (flags_.concepts_indexed())
+        c2.refines().push_back(c0.name());
+
     c3.refines().push_back(c1.name());
     c3.refines().push_back(c2.name());
     insert_nameable(r.concepts(), c3);
@@ -765,6 +783,11 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
+    if (flags_.concepts_indexed()) {
+        add_relationship(*o0, c0, mc);
+        add_relationship(*o0, c1, mc);
+        add_relationship(*o0, c2, mc);
+    }
     add_relationship(*o0, c3, mc);
     insert_object(r, o0);
     return r;
@@ -802,7 +825,7 @@ build_object_with_parent_that_models_a_refined_concept(
     insert_nameable(r.concepts(), c0);
 
     concept c1(build_concept(1, r.name()));
-    add_property(c1, 1);
+    add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
@@ -1011,7 +1034,7 @@ object_with_parent_in_the_same_model(const bool has_property) const {
 
     auto o1(build_value_object(1, mn));
     if (has_property)
-        add_property(*o1, 1);
+        add_property(*o1, flags_.properties_indexed(), 1);
 
     parent_to_child(*o1, *o0);
     insert_object(r, o0);

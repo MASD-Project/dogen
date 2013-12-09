@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-09 Mon 08:49]
+Clock summary at [2013-12-09 Mon 19:06]
 
-| Headline                                                 | Time   |      |      |
-|----------------------------------------------------------+--------+------+------|
-| *Total time*                                             | *9:31* |      |      |
-|----------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                          |        | 9:31 |      |
-| IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:12 |
-| IMPLEMENTATION Update manual                             |        |      | 0:19 |
-| COMPLETED Add more tests to =concept_indexer=            |        |      | 3:22 |
-| COMPLETED Plug =concept_indexer= into workflow           |        |      | 2:14 |
-| IMPLEMENTATION Create a =property_indexer= and add tests |        |      | 3:24 |
+| Headline                                                 | Time    |       |      |
+|----------------------------------------------------------+---------+-------+------|
+| *Total time*                                             | *10:18* |       |      |
+|----------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                          |         | 10:18 |      |
+| IMPLEMENTATION Release notes and backlog grooming        |         |       | 0:12 |
+| IMPLEMENTATION Update manual                             |         |       | 0:19 |
+| COMPLETED Add more tests to =concept_indexer=            |         |       | 3:22 |
+| COMPLETED Plug =concept_indexer= into workflow           |         |       | 2:14 |
+| IMPLEMENTATION Create a =property_indexer= and add tests |         |       | 4:11 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -111,6 +111,9 @@ cleaned up.
 
 - fixes borked clang build and makes the use of flags in factory a bit
   more sensible.
+
+**** IMPLEMENTATION Add support for concept indexing in mock factory  :spike:
+     CLOCK: [2013-12-09 Mon 18:00]--[2013-12-09 Mon 18:42] =>  0:42
 
 **** IMPLEMENTATION Add unit tests                                     :task:
      CLOCK: [2013-12-07 Sat 20:09]--[2013-12-07 Sat 21:23] =>  1:14

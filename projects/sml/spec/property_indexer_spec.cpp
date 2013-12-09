@@ -128,113 +128,116 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     }
 }
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_one_level_of_concept_inheritance_results_in_expected_indices) {
-//     SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
 
-//     auto m(factory.build_first_degree_concepts_model());
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    auto m(factory.build_first_degree_concepts_model());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-//     dogen::sml::property_indexer ind;
-//     ind.index(m);
-//     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::sml::property_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-//     for (const auto& pair : m.concepts()) {
-//         const auto& qn(pair.first);
-//         const auto& c(pair.second);
+    for (const auto& pair : m.concepts()) {
+        const auto& qn(pair.first);
+        const auto& c(pair.second);
 
-//         if (factory.is_concept_name_n(0, qn)) {
-//             BOOST_CHECK(c.inherited_properties().empty());
-//             BOOST_CHECK(c.all_properties().size() == 1);
-//             BOOST_CHECK(c.all_properties() == c.local_properties());
-//             BOOST_CHECK(c.refines().empty());
-//         } else if (factory.is_concept_name_n(1, qn)) {
-//             BOOST_CHECK(c.refines().size() == 1);
-//             BOOST_REQUIRE(c.inherited_properties().size() == 1);
-//             const auto props(c.inherited_properties().begin()->second);
-//             BOOST_REQUIRE(props.size() == 1);
+        if (factory.is_concept_name_n(0, qn)) {
+            BOOST_CHECK(c.inherited_properties().empty());
+            BOOST_CHECK(c.all_properties().size() == 1);
+            BOOST_CHECK(c.all_properties() == c.local_properties());
+            BOOST_CHECK(c.refines().empty());
+        } else if (factory.is_concept_name_n(1, qn)) {
+            BOOST_CHECK(c.refines().size() == 1);
+            BOOST_REQUIRE(c.inherited_properties().size() == 1);
+            const auto props(c.inherited_properties().begin()->second);
+            BOOST_REQUIRE(props.size() == 1);
 
-//             BOOST_CHECK(c.all_properties().size() == 2);
-//             BOOST_CHECK(c.local_properties().size() == 1);
-//         } else
-//             BOOST_FAIL("Unexpected concept: " << qn);
-//     }
+            BOOST_CHECK(c.all_properties().size() == 2);
+            BOOST_CHECK(c.local_properties().size() == 1);
+        } else
+            BOOST_FAIL("Unexpected concept: " << qn);
+    }
 
-//     BOOST_REQUIRE(m.objects().size() == 2);
-//     for (const auto& pair : m.objects()) {
-//         const auto& qn(pair.first);
-//         const auto& o(*pair.second);
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(*pair.second);
 
-//         if (factory.is_type_name_n(0, qn)) {
-//             BOOST_CHECK(o.inherited_properties().empty());
-//             BOOST_CHECK(o.all_properties().size() == 1);
-//             BOOST_CHECK(o.local_properties().empty());
-//         } else if (factory.is_type_name_n(1, qn)) {
-//             BOOST_CHECK(o.inherited_properties().empty());
-//             BOOST_CHECK(o.all_properties().size() == 3);
-//             BOOST_CHECK(o.local_properties().size() == 1);
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
-// }
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_CHECK(o.inherited_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 1);
+            BOOST_CHECK(o.local_properties().empty());
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_CHECK(o.inherited_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 3);
+            BOOST_CHECK(o.local_properties().size() == 1);
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
+}
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_two_levels_of_concept_inheritance_results_in_expected_indices) {
-//     SETUP_TEST_LOG_SOURCE("model_with_two_levels_of_concept_inheritance_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_two_levels_of_concept_inheritance_results_in_expected_indices");
 
-//     auto m(factory.build_second_degree_concepts_model());
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    auto m(factory.build_second_degree_concepts_model());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-//     dogen::sml::property_indexer ind;
-//     ind.index(m);
-//     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::sml::property_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-//     BOOST_REQUIRE(m.concepts().size() == 3);
-//     for (const auto& pair : m.concepts()) {
-//         const auto& qn(pair.first);
-//         const auto& c(pair.second);
+    BOOST_REQUIRE(m.concepts().size() == 3);
+    for (const auto& pair : m.concepts()) {
+        const auto& qn(pair.first);
+        const auto& c(pair.second);
 
-//         if (factory.is_concept_name_n(0, qn)) {
-//             BOOST_CHECK(c.inherited_properties().empty());
-//             BOOST_CHECK(c.all_properties().size() == 1);
-//             BOOST_CHECK(c.all_properties() == c.local_properties());
-//             BOOST_CHECK(c.refines().empty());
-//         } else if (factory.is_concept_name_n(1, qn)) {
-//             BOOST_CHECK(c.inherited_properties().size() == 1);
-//             BOOST_CHECK(c.local_properties().size() == 1);
-//             BOOST_CHECK(c.all_properties().size() == 2);
-//             BOOST_CHECK(c.refines().size() == 1);
-//         } else if (factory.is_concept_name_n(2, qn)) {
-//             BOOST_REQUIRE(c.inherited_properties().size() == 1);
-//             const auto props(c.inherited_properties().begin()->second);
-//             BOOST_REQUIRE(props.size() == 2);
+        if (factory.is_concept_name_n(0, qn)) {
+            BOOST_CHECK(c.inherited_properties().empty());
+            BOOST_CHECK(c.all_properties().size() == 1);
+            BOOST_CHECK(c.all_properties() == c.local_properties());
+            BOOST_CHECK(c.refines().empty());
+        } else if (factory.is_concept_name_n(1, qn)) {
+            BOOST_REQUIRE(c.inherited_properties().size() == 1);
+            const auto props(c.inherited_properties().begin()->second);
+            BOOST_REQUIRE(props.size() == 1);
 
-//             BOOST_CHECK(c.local_properties().size() == 1);
-//             BOOST_CHECK(c.all_properties().size() == 3);
-//             BOOST_CHECK(c.refines().size() == 1);
-//         } else
-//             BOOST_FAIL("Unexpected concept: " << qn);
-//     }
+            BOOST_CHECK(c.local_properties().size() == 1);
+            BOOST_CHECK(c.all_properties().size() == 2);
+            BOOST_CHECK(c.refines().size() == 1);
+        } else if (factory.is_concept_name_n(2, qn)) {
+            BOOST_REQUIRE(c.inherited_properties().size() == 2);
+            for (const auto& pair : c.inherited_properties())
+                BOOST_REQUIRE(pair.second.size() == 1);
 
-//     BOOST_REQUIRE(m.objects().size() == 3);
-//     for (const auto& pair : m.objects()) {
-//         const auto& qn(pair.first);
-//         const auto& o(*pair.second);
+            BOOST_CHECK(c.local_properties().size() == 1);
+            BOOST_CHECK(c.all_properties().size() == 3);
+            BOOST_CHECK(c.refines().size() == 2);
+        } else
+            BOOST_FAIL("Unexpected concept: " << qn);
+    }
 
-//         if (factory.is_type_name_n(0, qn)) {
-//             BOOST_CHECK(o.inherited_properties().empty());
-//             BOOST_CHECK(o.local_properties().empty());
-//             BOOST_CHECK(o.all_properties().size() == 1);
-//         } else if (factory.is_type_name_n(1, qn)) {
-//             BOOST_REQUIRE(o.inherited_properties().empty());
-//             BOOST_CHECK(o.local_properties().empty());
-//             BOOST_CHECK(o.all_properties().size() == 2);
-//         } else if (factory.is_type_name_n(2, qn)) {
-//             BOOST_REQUIRE(o.inherited_properties().empty());
-//             BOOST_CHECK(o.local_properties().size() == 1);
-//             BOOST_CHECK(o.all_properties().size() == 4);
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
-// }
+    BOOST_REQUIRE(m.objects().size() == 3);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(*pair.second);
+
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_CHECK(o.inherited_properties().empty());
+            BOOST_CHECK(o.local_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 1);
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_REQUIRE(o.inherited_properties().empty());
+            BOOST_CHECK(o.local_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 2);
+        } else if (factory.is_type_name_n(2, qn)) {
+            BOOST_REQUIRE(o.inherited_properties().empty());
+            BOOST_CHECK(o.local_properties().size() == 1);
+            BOOST_CHECK(o.all_properties().size() == 4);
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
+}
 
 // BOOST_AUTO_TEST_CASE_IGNORE(model_with_diamond_concept_inheritance_results_in_expected_indices) {
 //     SETUP_TEST_LOG_SOURCE("model_with_diamond_concept_inheritance_results_in_expected_indices");
@@ -255,31 +258,36 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
 //             BOOST_CHECK(c.local_properties().size() == 1);
 //             BOOST_CHECK(c.all_properties() == c.local_properties());
 //         } else if (factory.is_concept_name_n(1, qn)) {
-//             BOOST_CHECK(c.inherited_properties().size() == 1);
+//             BOOST_REQUIRE(c.inherited_properties().size() == 1);
+//             for (const auto& pair : c.inherited_properties())
+//                 BOOST_REQUIRE(pair.second.size() == 1);
+
 //             BOOST_CHECK(c.local_properties().size() == 1);
 //             BOOST_CHECK(c.all_properties().size() == 2);
 //         } else if (factory.is_concept_name_n(2, qn)) {
-//             BOOST_CHECK(c.inherited_properties().size() == 1);
+//             BOOST_REQUIRE(c.inherited_properties().size() == 1);
+//             for (const auto& pair : c.inherited_properties())
+//                 BOOST_REQUIRE(pair.second.size() == 1);
+
 //             BOOST_CHECK(c.local_properties().size() == 1);
 //             BOOST_CHECK(c.all_properties().size() == 2);
 //         } else if (factory.is_concept_name_n(3, qn)) {
-//             BOOST_CHECK(c.inherited_properties().size() == 2);
+//             BOOST_REQUIRE(c.inherited_properties().size() == 2);
+//             for (const auto& pair : c.inherited_properties())
+//                 BOOST_REQUIRE(pair.second.size() == 1);
+
 //             BOOST_CHECK(c.local_properties().size() == 1);
-//             BOOST_CHECK(c.all_properties().size() == 3);
+//             BOOST_CHECK(c.all_properties().size() == 4);
 //         } else
 //             BOOST_FAIL("Unexpected concept: " << qn);
 //     }
 
 //     BOOST_REQUIRE(m.objects().size() == 1);
 //     {
-//         const auto& qn(m.objects().begin()->first);
 //         const auto& o(*(m.objects().begin()->second));
-
-//         const auto i(o.relationships().find(mc));
-//         BOOST_REQUIRE(i != o.relationships().end());
-
-//         BOOST_CHECK(factory.is_type_name_n(0, qn));
-//         BOOST_CHECK(i->second.size() == 4);
+//         BOOST_REQUIRE(o.inherited_properties().empty());
+//         BOOST_CHECK(o.local_properties().empty());
+//         BOOST_CHECK(o.all_properties().size() == 4);
 //     }
 // }
 
