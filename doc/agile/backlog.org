@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Canned tests rely on copy constructors rather than cloning        :story:
+
+If an object has pointers, the canned tests will not perform a deep
+copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
+canned tests.
+
 *** Clean up SML resolver tests by extending mock factory             :story:
 
 Now that the mock factory has the concept of "stages" of processing,
