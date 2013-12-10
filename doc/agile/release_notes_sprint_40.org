@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-09 Mon 19:06]
+Clock summary at [2013-12-10 Tue 00:24]
 
 | Headline                                                 | Time    |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| *Total time*                                             | *10:18* |       |      |
+| *Total time*                                             | *10:58* |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                          |         | 10:18 |      |
+| Development Stories Implemented                          |         | 10:58 |      |
 | IMPLEMENTATION Release notes and backlog grooming        |         |       | 0:12 |
 | IMPLEMENTATION Update manual                             |         |       | 0:19 |
 | COMPLETED Add more tests to =concept_indexer=            |         |       | 3:22 |
 | COMPLETED Plug =concept_indexer= into workflow           |         |       | 2:14 |
-| IMPLEMENTATION Create a =property_indexer= and add tests |         |       | 4:11 |
+| IMPLEMENTATION Create a =property_indexer= and add tests |         |       | 4:51 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -113,6 +113,7 @@ cleaned up.
   more sensible.
 
 **** IMPLEMENTATION Add support for concept indexing in mock factory  :spike:
+     CLOCK: [2013-12-09 Mon 23:42]--[2013-12-10 Tue 00:22] =>  0:40
      CLOCK: [2013-12-09 Mon 18:00]--[2013-12-09 Mon 18:42] =>  0:42
 
 **** IMPLEMENTATION Add unit tests                                     :task:

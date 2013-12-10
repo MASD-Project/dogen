@@ -65,31 +65,31 @@ const std::string header_extension(".hpp");
 const std::string invalid_property_type("Unknown property type.");
 const std::string invalid_object_type("Invalid or unsupported object type.");
 
-std::string concept_name(unsigned int i) {
+std::string concept_name(const unsigned int i) {
     std::ostringstream stream;
     stream << concept_name_prefix << i;
     return stream.str();
 }
 
-std::string type_name(unsigned int i) {
+std::string type_name(const unsigned int i) {
     std::ostringstream stream;
     stream << type_name_prefix << i;
     return stream.str();
 }
 
-std::string model_name(unsigned int i) {
+std::string model_name(const unsigned int i) {
     std::ostringstream stream;
     stream << model_name_prefix << i;
     return stream.str();
 }
 
-std::string property_name(unsigned int i) {
+std::string property_name(const unsigned int i) {
     std::ostringstream stream;
     stream << property_name_prefix << i;
     return stream.str();
 }
 
-std::string module_name(unsigned int i) {
+std::string module_name(const unsigned int i) {
     std::ostringstream stream;
     stream << module_name_prefix << i;
     return stream.str();
@@ -774,7 +774,7 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
     concept c3(build_concept(3, r.name()));
     add_property(c3, flags_.properties_indexed(), 3);
     if (flags_.concepts_indexed())
-        c2.refines().push_back(c0.name());
+        c3.refines().push_back(c0.name());
 
     c3.refines().push_back(c1.name());
     c3.refines().push_back(c2.name());
