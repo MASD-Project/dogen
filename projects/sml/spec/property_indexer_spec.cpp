@@ -151,7 +151,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     BOOST_REQUIRE(m.concepts().size() == 1);
     const auto& c(m.concepts().begin()->second);
     BOOST_CHECK(c.local_properties().size() == 1);
-    BOOST_REQUIRE(c.inherited_properties().empty());
+    BOOST_CHECK(c.inherited_properties().empty());
     BOOST_CHECK(c.local_properties() == c.all_properties());
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -247,9 +247,9 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else if (factory.is_concept_name_n(2, qn)) {
-            BOOST_REQUIRE(c.inherited_properties().size() == 2);
+            BOOST_CHECK(c.inherited_properties().size() == 2);
             for (const auto& pair : c.inherited_properties())
-                BOOST_REQUIRE(pair.second.size() == 1);
+                BOOST_CHECK(pair.second.size() == 1);
 
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties().size() == 3);
@@ -302,25 +302,25 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties() == c.local_properties());
         } else if (factory.is_concept_name_n(1, qn)) {
-            BOOST_REQUIRE(c.inherited_properties().size() == 1);
+            BOOST_CHECK(c.inherited_properties().size() == 1);
             for (const auto& pair : c.inherited_properties())
-                BOOST_REQUIRE(pair.second.size() == 1);
+                BOOST_CHECK(pair.second.size() == 1);
 
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else if (factory.is_concept_name_n(2, qn)) {
-            BOOST_REQUIRE(c.inherited_properties().size() == 1);
+            BOOST_CHECK(c.inherited_properties().size() == 1);
             for (const auto& pair : c.inherited_properties())
-                BOOST_REQUIRE(pair.second.size() == 1);
+                BOOST_CHECK(pair.second.size() == 1);
 
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else if (factory.is_concept_name_n(3, qn)) {
-            BOOST_REQUIRE(c.inherited_properties().size() == 3);
+            BOOST_CHECK(c.inherited_properties().size() == 3);
             for (const auto& pair : c.inherited_properties())
-                BOOST_REQUIRE(pair.second.size() == 1);
+                BOOST_CHECK(pair.second.size() == 1);
 
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties().size() == 4);
@@ -332,7 +332,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     BOOST_REQUIRE(m.objects().size() == 1);
     {
         const auto& o(*(m.objects().begin()->second));
-        BOOST_REQUIRE(o.inherited_properties().empty());
+        BOOST_CHECK(o.inherited_properties().empty());
         BOOST_CHECK(o.local_properties().empty());
         BOOST_CHECK(o.all_properties().size() == 4);
         BOOST_CHECK(!has_duplicate_property_names(o, lg));
@@ -374,20 +374,51 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
 BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_concepts_but_has_properties_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_but_has_properties_results_in_expected_indices");
 
-    auto a(factory.object_with_third_degree_parent_in_same_model(
+    auto m(factory.object_with_third_degree_parent_in_same_model(
             true/*has_property*/));
-    const auto e(factory.object_with_third_degree_parent_in_same_model(
-            true/*has_property*/));
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
-
-    BOOST_REQUIRE(a.objects().size() == 4);
-    BOOST_REQUIRE(a.concepts().empty());
+    BOOST_REQUIRE(m.objects().size() == 4);
+    BOOST_REQUIRE(m.concepts().empty());
 
     dogen::sml::property_indexer ind;
-    ind.index(a);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
-    // BOOST_CHECK(asserter::assert_object(e, a));
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    BOOST_REQUIRE(m.objects().size() == 4);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(*pair.second);
+
+        if (factory.is_type_name_n(3, qn)) {
+            BOOST_CHECK(o.inherited_properties().empty());
+            BOOST_CHECK(o.local_properties().size() == 1);
+            BOOST_CHECK(o.all_properties() == o.local_properties());
+        } else if (factory.is_type_name_n(2, qn)) {
+            BOOST_CHECK(o.inherited_properties().size() == 1);
+            for (const auto& pair : o.inherited_properties())
+                BOOST_CHECK(pair.second.size() == 1);
+
+            BOOST_CHECK(o.local_properties().size() == 1);
+            BOOST_CHECK(o.all_properties().size() == 2);
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_CHECK(o.inherited_properties().size() == 1);
+            for (const auto& pair : o.inherited_properties())
+                BOOST_CHECK(pair.second.size() == 2);
+
+            BOOST_CHECK(o.local_properties().size() == 1);
+            BOOST_CHECK(o.all_properties().size() == 3);
+            BOOST_CHECK(!has_duplicate_property_names(o, lg));
+        } else if (factory.is_type_name_n(0, qn)) {
+            BOOST_CHECK(o.inherited_properties().size() == 1);
+            for (const auto& pair : o.inherited_properties())
+                BOOST_CHECK(pair.second.size() == 3);
+
+            BOOST_CHECK(o.local_properties().size() == 1);
+            BOOST_CHECK(o.all_properties().size() == 4);
+            BOOST_CHECK(!has_duplicate_property_names(o, lg));
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
 }
 
 // BOOST_AUTO_TEST_CASE_IGNORE(model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer) {

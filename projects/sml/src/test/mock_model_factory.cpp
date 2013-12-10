@@ -1139,7 +1139,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
 
     auto o2(build_value_object(2, mn));
     if (has_property)
-        add_property(*o2, flags_.properties_indexed(), 1);
+        add_property(*o2, flags_.properties_indexed(), 2);
 
     auto o3(build_value_object(3, mn));
     if (has_property)

@@ -109,6 +109,9 @@ void property_indexer::index_object(abstract_object& o, model& m,
             if (!parent.all_properties().empty())
                 o.inherited_properties().insert(
                     std::make_pair(parent.name(), parent.all_properties()));
+
+            o.all_properties().insert(o.all_properties().end(),
+                parent.all_properties().begin(), parent.all_properties().end());
         }
     }
 

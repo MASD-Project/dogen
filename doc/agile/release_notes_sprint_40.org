@@ -123,6 +123,8 @@ cleaned up.
   factory.
 
 **** IMPLEMENTATION Add unit tests                                     :task:
+     CLOCK: [2013-12-10 Tue 17:24]--[2013-12-10 Tue 18:01] =>  0:37
+     CLOCK: [2013-12-10 Tue 17:15]--[2013-12-10 Tue 17:22] =>  0:07
      CLOCK: [2013-12-10 Tue 07:57]--[2013-12-10 Tue 08:29] =>  0:32
      CLOCK: [2013-12-07 Sat 20:09]--[2013-12-07 Sat 21:23] =>  1:14
 
