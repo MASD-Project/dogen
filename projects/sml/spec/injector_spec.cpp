@@ -62,9 +62,9 @@ BOOST_AUTO_TEST_CASE(model_that_doesnt_require_any_new_types_is_untouched_by_inj
     SETUP_TEST_LOG_SOURCE("model_that_doesnt_require_any_new_types_is_untouched_by_injector");
 
     auto a(factory.build_single_type_model());
+    const auto e(factory.build_single_type_model());
     BOOST_REQUIRE(a.objects().size() == 1);
 
-    const auto e(a);
     dogen::sml::injector i;
     i.inject(a);
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -75,6 +75,7 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
 
     const auto ot(mock_model_factory::object_types::entity);
     auto a(factory.object_with_property(ot));
+    const auto e(factory.object_with_property(ot));
     BOOST_REQUIRE(a.objects().size() == 2);
     for (const auto& pair : a.objects()) {
         const auto& qn(pair.first);
@@ -86,7 +87,6 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
         }
     }
 
-    const auto e(a);
     dogen::sml::injector i;
     i.inject(a);
     BOOST_CHECK(asserter::assert_object(e, a));
