@@ -112,19 +112,37 @@ cleaned up.
 - fixes borked clang build and makes the use of flags in factory a bit
   more sensible.
 
-**** IMPLEMENTATION Add support for concept indexing in mock factory  :spike:
+**** COMPLETED Add support for concept indexing in mock factory       :spike:
+     CLOSED: [2013-12-10 Tue 07:57]
      CLOCK: [2013-12-09 Mon 23:42]--[2013-12-10 Tue 00:22] =>  0:40
      CLOCK: [2013-12-09 Mon 18:00]--[2013-12-09 Mon 18:42] =>  0:42
-
-**** IMPLEMENTATION Add unit tests                                     :task:
-     CLOCK: [2013-12-07 Sat 20:09]--[2013-12-07 Sat 21:23] =>  1:14
 
 - blocker: we require the model to have been indexed at the concept level in
   order to test the property indexer, so we need to update the mock
   factory.
 
+**** IMPLEMENTATION Add unit tests                                     :task:
+     CLOCK: [2013-12-10 Tue 07:57]--[2013-12-10 Tue 08:29] =>  0:32
+     CLOCK: [2013-12-07 Sat 20:09]--[2013-12-07 Sat 21:23] =>  1:14
+
 **** Plug into workflow                                                :task:
 **** Replace C++ property handling code with relationships             :task:
+*** IMPLEMENTATION Checking that a model hasn't changed by copying it is wrong :spike:
+    CLOCK: [2013-12-10 Tue 08:31]--[2013-12-10 Tue 08:39] =>  0:08
+
+In the past we used to rely on making a copy of a model prior to doing
+a transformation (named "expected" or e) and then checking that the
+"actual" result of the transformation was equal/not equal to
+"expected". We used to rely on the copy constructor for this because
+there were no pointers in the model. With the introduction of shared
+pointers, this logic became faulty because now expected and actual
+have some pointers that point to the same locations in memory. We do
+not yet support cloning, so there is no easy solution for this. We
+need to review all the code that does this and on a case-by-case basis
+figure out how to generate "expected".
+
+We could also consider implementing cloning, if this proves too hard.
+
 *** Create a =relationship_indexer= and add tests                     :story:
 **** Implement indexing of associations, keys and visitor              :task:
 **** Add unit tests                                                    :task:

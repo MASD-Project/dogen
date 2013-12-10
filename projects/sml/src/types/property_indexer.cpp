@@ -105,8 +105,10 @@ void property_indexer::index_object(abstract_object& o, model& m,
         for (const auto& qn : i->second) {
             auto& parent(find_object(qn, m));
             index_object(parent, m, processed_qnames);
-            o.inherited_properties().insert(
-                std::make_pair(parent.name(), parent.all_properties()));
+
+            if (!parent.all_properties().empty())
+                o.inherited_properties().insert(
+                    std::make_pair(parent.name(), parent.all_properties()));
         }
     }
 

@@ -99,9 +99,9 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_property_indexer) {
     SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_property_indexer");
 
     auto a(factory.build_empty_model());
+    const auto e(factory.build_empty_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
-    const auto e(a);
     dogen::sml::property_indexer i;
     i.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -112,9 +112,9 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_pr
     SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_property_indexer");
 
     auto a(factory.build_single_type_model());
+    const auto e(factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
-    const auto e(a);
     dogen::sml::property_indexer ind;
     ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -339,37 +339,56 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     }
 }
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_single_parent_that_does_not_model_concepts_is_untouched_by_property_indexer) {
-//     SETUP_TEST_LOG_SOURCE("model_with_single_parent_that_does_not_model_concepts_is_untouched_by_property_indexer");
+BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_untouched_by_property_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_parent_that_does_not_model_concepts_is_untouched_by_property_indexer");
 
-//     auto a(factory.object_with_parent_in_the_same_model());
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    auto a(factory.object_with_parent_in_the_same_model());
+    const auto e(factory.object_with_parent_in_the_same_model());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
-//     BOOST_REQUIRE(a.objects().size() == 2);
-//     BOOST_REQUIRE(a.concepts().empty());
+    BOOST_REQUIRE(a.objects().size() == 2);
+    BOOST_REQUIRE(a.concepts().empty());
 
-//     const auto e(a);
-//     dogen::sml::property_indexer ind;
-//     ind.index(a);
-//     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
-//     BOOST_CHECK(asserter::assert_object(e, a));
-// }
+    dogen::sml::property_indexer ind;
+    ind.index(a);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    BOOST_CHECK(asserter::assert_object(e, a));
+}
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_third_degree_inheritance_that_does_not_model_concepts_is_untouched_by_property_indexer) {
-//     SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_is_untouched_by_property_indexer");
+BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_concepts_and_has_no_properties_is_untouched_by_property_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_and_has_no_properties_is_untouched_by_property_indexer");
 
-//     auto a(factory.object_with_third_degree_parent_in_same_model());
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    auto a(factory.object_with_third_degree_parent_in_same_model());
+    const auto e(factory.object_with_third_degree_parent_in_same_model());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
-//     BOOST_REQUIRE(a.objects().size() == 4);
-//     BOOST_REQUIRE(a.concepts().empty());
+    BOOST_REQUIRE(a.objects().size() == 4);
+    BOOST_REQUIRE(a.concepts().empty());
 
-//     const auto e(a);
-//     dogen::sml::property_indexer ind;
-//     ind.index(a);
-//     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
-//     BOOST_CHECK(asserter::assert_object(e, a));
-// }
+    dogen::sml::property_indexer ind;
+    ind.index(a);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    BOOST_CHECK(asserter::assert_object(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_concepts_but_has_properties_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_but_has_properties_results_in_expected_indices");
+
+    auto a(factory.object_with_third_degree_parent_in_same_model(
+            true/*has_property*/));
+    const auto e(factory.object_with_third_degree_parent_in_same_model(
+            true/*has_property*/));
+
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+
+    BOOST_REQUIRE(a.objects().size() == 4);
+    BOOST_REQUIRE(a.concepts().empty());
+
+    dogen::sml::property_indexer ind;
+    ind.index(a);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    // BOOST_CHECK(asserter::assert_object(e, a));
+}
 
 // BOOST_AUTO_TEST_CASE_IGNORE(model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer) {
 //     SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer");
