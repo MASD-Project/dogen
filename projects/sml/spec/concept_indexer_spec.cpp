@@ -68,10 +68,10 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_indexer) {
     SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_concept_indexer");
 
     auto a(factory.build_empty_model());
+    const auto e(factory.build_empty_model());
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
-    const auto e(a);
     dogen::sml::concept_indexer i;
     i.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -82,10 +82,10 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_co
     SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_concept_indexer");
 
     auto a(factory.build_single_type_model());
+    const auto e(factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
-    const auto e(a);
     dogen::sml::concept_indexer ind;
     ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -97,6 +97,8 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_is_untouched_by_concept_index
 
     const auto pt(property_types::unsigned_int);
     auto a(factory.object_with_property(object_types::value_object, pt));
+    const auto e(factory.object_with_property(object_types::value_object, pt));
+
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     BOOST_REQUIRE(a.concepts().empty());
@@ -110,7 +112,6 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_is_untouched_by_concept_index
     BOOST_REQUIRE(o.all_properties().empty());
     BOOST_REQUIRE(o.relationships().empty());
 
-    const auto e(a);
     dogen::sml::concept_indexer ind;
     ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -121,6 +122,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_indexer) 
     SETUP_TEST_LOG_SOURCE("model_with_single_concept_is_untouched_by_concept_indexer");
 
     auto a(factory.build_single_concept_model());
+    const auto e(factory.build_single_concept_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
@@ -135,7 +137,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_indexer) 
     const auto& c(a.concepts().begin()->second);
     BOOST_REQUIRE(c.refines().empty());
 
-    const auto e(a);
     dogen::sml::concept_indexer ind;
     ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -404,12 +405,12 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_un
     SETUP_TEST_LOG_SOURCE("model_with_single_parent_that_does_not_model_concepts_is_untouched_by_concept_indexer");
 
     auto a(factory.object_with_parent_in_the_same_model());
+    const auto e(factory.object_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 2);
     BOOST_REQUIRE(a.concepts().empty());
 
-    const auto e(a);
     dogen::sml::concept_indexer ind;
     ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -420,12 +421,12 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_is_untouched_by_concept_indexer");
 
     auto a(factory.object_with_third_degree_parent_in_same_model());
+    const auto e(factory.object_with_third_degree_parent_in_same_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 4);
     BOOST_REQUIRE(a.concepts().empty());
 
-    const auto e(a);
     dogen::sml::concept_indexer ind;
     ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
@@ -436,6 +437,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
     SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_concept_indexer");
 
     auto a(factory.build_object_with_parent_that_models_concept());
+    const auto e(factory.build_object_with_parent_that_models_concept());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     BOOST_REQUIRE(a.concepts().size() == 1);
@@ -474,7 +476,6 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_FAIL("Unexpected object: " << qn);
     }
 
-    const auto e(a);
     dogen::sml::concept_indexer ind;
     ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
