@@ -421,143 +421,103 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     }
 }
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer) {
-//     SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer");
+BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer");
 
-//     auto a(factory.build_object_with_parent_that_models_concept());
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    auto m(factory.build_object_with_parent_that_models_concept());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-//     BOOST_REQUIRE(a.concepts().size() == 1);
-//     for (const auto& pair : a.concepts()) {
-//         const auto& qn(pair.first);
-//         const auto& c(pair.second);
+    dogen::sml::property_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-//         if (factory.is_concept_name_n(0, qn))
-//             BOOST_REQUIRE(c.refines().empty());
-//         else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
+    BOOST_CHECK(m.concepts().size() == 1);
+    for (const auto& pair : m.concepts()) {
+        const auto& qn(pair.first);
+        const auto& c(pair.second);
 
-//     using dogen::sml::relationship_types;
-//     const auto mc(relationship_types::modeled_concepts);
-//     const auto par(relationship_types::parents);
+        if (factory.is_concept_name_n(0, qn)) {
+            BOOST_CHECK(c.inherited_properties().empty());
+            BOOST_CHECK(c.local_properties().size() == 1);
+            BOOST_CHECK(c.all_properties() == c.local_properties());
+        } else
+            BOOST_FAIL("Unexpected concept: " << qn);
+    }
 
-//     BOOST_REQUIRE(a.objects().size() == 2);
-//     for (const auto& pair : a.objects()) {
-//         const auto& qn(pair.first);
-//         const auto& o(*pair.second);
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(*pair.second);
 
-//         auto i(o.relationships().find(mc));
-//         if (factory.is_type_name_n(0, qn)) {
-//             BOOST_REQUIRE(i != o.relationships().end());
-//             BOOST_REQUIRE(i->second.size() == 1);
-//             BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
-//         } else if (factory.is_type_name_n(1, qn)) {
-//             BOOST_REQUIRE(i == o.relationships().end());
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_CHECK(o.inherited_properties().empty());
+            BOOST_CHECK(o.local_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 1);
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_CHECK(o.inherited_properties().size() == 1);
+            for (const auto& pair : o.inherited_properties())
+                BOOST_CHECK(pair.second.size() == 1);
 
-//             i = o.relationships().find(par);
-//             BOOST_REQUIRE(i != o.relationships().end());
-//             BOOST_REQUIRE(i->second.size() == 1);
-//             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
+            BOOST_CHECK(o.local_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 1);
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
+}
 
-//     const auto e(a);
-//     dogen::sml::property_indexer ind;
-//     ind.index(a);
-//     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
-//     BOOST_CHECK(asserter::assert_object(e, a));
-// }
+BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices");
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices) {
-//     SETUP_TEST_LOG_SOURCE("model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices");
+    auto m(factory.build_object_with_parent_that_models_a_refined_concept());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-//     auto m(factory.build_object_with_parent_that_models_a_refined_concept());
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    dogen::sml::property_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-//     BOOST_REQUIRE(m.concepts().size() == 2);
-//     for (const auto& pair : m.concepts()) {
-//         const auto& qn(pair.first);
-//         const auto& c(pair.second);
+    BOOST_CHECK(m.concepts().size() == 2);
+    for (const auto& pair : m.concepts()) {
+        const auto& qn(pair.first);
+        const auto& c(pair.second);
 
-//         if (factory.is_concept_name_n(0, qn))
-//             BOOST_REQUIRE(c.refines().empty());
-//         else if (factory.is_concept_name_n(1, qn)) {
-//             BOOST_REQUIRE(c.refines().size() == 1);
-//             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
+        if (factory.is_concept_name_n(0, qn)) {
+            BOOST_CHECK(c.inherited_properties().empty());
+            BOOST_CHECK(c.local_properties().size() == 1);
+            BOOST_CHECK(c.all_properties() == c.local_properties());
+        } else if (factory.is_concept_name_n(1, qn)) {
+            BOOST_CHECK(c.inherited_properties().size() == 1);
+            for (const auto& pair : c.inherited_properties())
+                BOOST_CHECK(pair.second.size() == 1);
 
-//     using dogen::sml::relationship_types;
-//     const auto mc(relationship_types::modeled_concepts);
-//     const auto par(relationship_types::parents);
+            BOOST_CHECK(c.local_properties().size() == 1);
+            BOOST_CHECK(c.all_properties().size() == 2);
+            BOOST_CHECK(!has_duplicate_property_names(c, lg));
+        } else
+            BOOST_FAIL("Unexpected concept: " << qn);
+    }
 
-//     BOOST_REQUIRE(m.objects().size() == 2);
-//     for (const auto& pair : m.objects()) {
-//         const auto& qn(pair.first);
-//         const auto& o(*pair.second);
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(*pair.second);
 
-//         auto i(o.relationships().find(mc));
-//         if (factory.is_type_name_n(0, qn)) {
-//             BOOST_REQUIRE(i != o.relationships().end());
-//             BOOST_REQUIRE(i->second.size() == 1);
-//             BOOST_REQUIRE(factory.is_concept_name_n(1, i->second.front()));
-//         } else if (factory.is_type_name_n(1, qn)) {
-//             BOOST_REQUIRE(i == o.relationships().end());
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_CHECK(o.inherited_properties().empty());
+            BOOST_CHECK(o.local_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 2);
+            // BOOST_CHECK(!has_duplicate_property_names(o, lg));
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_CHECK(o.inherited_properties().size() == 1);
+            for (const auto& pair : o.inherited_properties())
+                BOOST_CHECK(pair.second.size() == 2);
 
-//             i = o.relationships().find(par);
-//             BOOST_REQUIRE(i != o.relationships().end());
-//             BOOST_REQUIRE(i->second.size() == 1);
-//             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
-
-//     dogen::sml::property_indexer ind;
-//     ind.index(m);
-//     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
-
-//     BOOST_CHECK(m.concepts().size() == 2);
-//     for (const auto& pair : m.concepts()) {
-//         const auto& qn(pair.first);
-//         const auto& c(pair.second);
-
-//         if (factory.is_concept_name_n(0, qn)) {
-//             BOOST_CHECK(c.refines().empty());
-//         } else if (factory.is_concept_name_n(1, qn)) {
-//             BOOST_CHECK(c.refines().size() == 1);
-//             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-//         } else
-//             BOOST_FAIL("Unexpected concept: " << qn);
-//     }
-
-//     BOOST_REQUIRE(m.objects().size() == 2);
-//     for (const auto& pair : m.objects()) {
-//         const auto& qn(pair.first);
-//         const auto& o(*pair.second);
-
-//         auto i(o.relationships().find(mc));
-//         if (factory.is_type_name_n(0, qn)) {
-//             BOOST_REQUIRE(i->second.size() == 2);
-//             BOOST_REQUIRE(
-//                 factory.is_concept_name_n(0, i->second.front()) ||
-//                 factory.is_concept_name_n(1, i->second.front()));
-//             BOOST_REQUIRE(
-//                 factory.is_concept_name_n(0, i->second.back()) ||
-//                 factory.is_concept_name_n(1, i->second.back()));
-//         } else if (factory.is_type_name_n(1, qn)) {
-//             BOOST_REQUIRE(i == o.relationships().end());
-
-//             i = o.relationships().find(par);
-//             BOOST_REQUIRE(i != o.relationships().end());
-//             BOOST_REQUIRE(i->second.size() == 1);
-//             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
-// }
+            BOOST_CHECK(o.local_properties().empty());
+            BOOST_CHECK(o.all_properties().size() == 2);
+            // BOOST_CHECK(!has_duplicate_property_names(o, lg));
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
+}
 
 // BOOST_AUTO_TEST_CASE_IGNORE(model_with_concept_that_refines_missing_concept_throws) {
 //     SETUP_TEST_LOG_SOURCE("model_with_concept_that_refines_missing_concept_throws");

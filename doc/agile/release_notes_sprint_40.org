@@ -10,22 +10,24 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-10 Tue 09:09]
+Clock summary at [2013-12-11 Wed 08:41]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *11:43* |       |      |
+| *Total time*                                                               | *13:21* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                            |         | 11:43 |      |
-| IMPLEMENTATION Release notes and backlog grooming                          |         |       | 0:12 |
+| Development Stories Implemented                                            |         | 13:21 |      |
+| IMPLEMENTATION Release notes and backlog grooming                          |         |       | 0:32 |
 | IMPLEMENTATION Update manual                                               |         |       | 0:19 |
 | COMPLETED Add more tests to =concept_indexer=                              |         |       | 3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                             |         |       | 2:14 |
-| IMPLEMENTATION Create a =property_indexer= and add tests                   |         |       | 5:23 |
+| IMPLEMENTATION Create a =property_indexer= and add tests                   |         |       | 6:41 |
 | IMPLEMENTATION Checking that a model hasn't changed by copying it is wrong |         |       | 0:13 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-11 Wed 07:53]--[2013-12-11 Wed 08:06] =>  0:13
+    CLOCK: [2013-12-11 Wed 07:19]--[2013-12-11 Wed 07:26] =>  0:07
     CLOCK: [2013-12-07 Sat 18:40]--[2013-12-07 Sat 18:47] =>  0:07
     CLOCK: [2013-12-03 Tue 08:01]--[2013-12-03 Tue 08:06] =>  0:05
 
@@ -123,6 +125,8 @@ cleaned up.
   factory.
 
 **** IMPLEMENTATION Add unit tests                                     :task:
+     CLOCK: [2013-12-11 Wed 08:18]--[2013-12-11 Wed 08:41] =>  0:23
+     CLOCK: [2013-12-11 Wed 08:07]--[2013-12-11 Wed 08:18] =>  0:11
      CLOCK: [2013-12-10 Tue 17:24]--[2013-12-10 Tue 18:01] =>  0:37
      CLOCK: [2013-12-10 Tue 17:15]--[2013-12-10 Tue 17:22] =>  0:07
      CLOCK: [2013-12-10 Tue 07:57]--[2013-12-10 Tue 08:29] =>  0:32

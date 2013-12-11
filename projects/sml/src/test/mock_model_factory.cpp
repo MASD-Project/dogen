@@ -803,6 +803,7 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
     auto o0(build_value_object(0, r.name()));
     const auto mc(relationship_types::modeled_concepts);
     add_relationship(*o0, c0, mc);
+
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
@@ -833,6 +834,9 @@ build_object_with_parent_that_models_a_refined_concept(
 
     const auto mc(relationship_types::modeled_concepts);
     add_relationship(*o0, c1, mc);
+    if (flags_.concepts_indexed())
+        add_relationship(*o0, c1, mc);
+
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
