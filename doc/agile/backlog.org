@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Types that share one file                                         :story:
+
+At present we force all types etc to have their own file. However, in
+cases it may be useful to have multiple types sharing the same
+file. For instance, one may want to have all enumerations in one file,
+or all exceptions, etc.
+
+We could easily implement this using meta-data.
+
 *** Canned tests rely on copy constructors rather than cloning        :story:
 
 If an object has pointers, the canned tests will not perform a deep
