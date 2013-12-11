@@ -85,6 +85,11 @@ private:
      */
     void index_concepts_activity(model& merged_model) const;
 
+    /**
+     * @brief Index all properties in model.
+     */
+    void index_properties_activity(model& merged_model) const;
+
 private:
     /**
      * @brief Returns true if there are any types that require code

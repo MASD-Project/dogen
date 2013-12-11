@@ -28,6 +28,7 @@
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/meta_data_tagger.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
+#include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 namespace {
@@ -123,8 +124,13 @@ void workflow::resolve_types_activity(model& merged_model) const {
 }
 
 void workflow::index_concepts_activity(model& merged_model) const {
-    concept_indexer ci;
-    ci.index(merged_model);
+    concept_indexer indexer;
+    indexer.index(merged_model);
+}
+
+void workflow::index_properties_activity(model& merged_model) const {
+    property_indexer indexer;
+    indexer.index(merged_model);
 }
 
 std::pair<bool, model> workflow::
