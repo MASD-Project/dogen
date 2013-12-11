@@ -835,7 +835,7 @@ build_object_with_parent_that_models_a_refined_concept(
     const auto mc(relationship_types::modeled_concepts);
     add_relationship(*o0, c1, mc);
     if (flags_.concepts_indexed())
-        add_relationship(*o0, c1, mc);
+        add_relationship(*o0, c0, mc);
 
     insert_object(r, o0);
 

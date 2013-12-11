@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-11 Wed 08:41]
+Clock summary at [2013-12-11 Wed 18:28]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *13:21* |       |      |
+| *Total time*                                                               | *13:53* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                            |         | 13:21 |      |
+| Development Stories Implemented                                            |         | 13:53 |      |
 | IMPLEMENTATION Release notes and backlog grooming                          |         |       | 0:32 |
 | IMPLEMENTATION Update manual                                               |         |       | 0:19 |
 | COMPLETED Add more tests to =concept_indexer=                              |         |       | 3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                             |         |       | 2:14 |
-| IMPLEMENTATION Create a =property_indexer= and add tests                   |         |       | 6:41 |
+| IMPLEMENTATION Create a =property_indexer= and add tests                   |         |       | 7:13 |
 | IMPLEMENTATION Checking that a model hasn't changed by copying it is wrong |         |       | 0:13 |
 #+end:
 
@@ -124,7 +124,10 @@ cleaned up.
   order to test the property indexer, so we need to update the mock
   factory.
 
-**** IMPLEMENTATION Add unit tests                                     :task:
+**** COMPLETED Add unit tests                                          :task:
+     CLOSED: [2013-12-11 Wed 18:28]
+     CLOCK: [2013-12-11 Wed 18:16]--[2013-12-11 Wed 18:28] =>  0:12
+     CLOCK: [2013-12-11 Wed 17:56]--[2013-12-11 Wed 18:16] =>  0:20
      CLOCK: [2013-12-11 Wed 08:18]--[2013-12-11 Wed 08:41] =>  0:23
      CLOCK: [2013-12-11 Wed 08:07]--[2013-12-11 Wed 08:18] =>  0:11
      CLOCK: [2013-12-10 Tue 17:24]--[2013-12-10 Tue 18:01] =>  0:37

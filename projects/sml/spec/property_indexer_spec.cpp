@@ -39,6 +39,9 @@ namespace {
 const std::string test_module("sml");
 const std::string test_suite("property_indexer_spec");
 
+const std::string concept_not_found("Concept not found");
+const std::string object_not_found("Object not found in model");
+
 using dogen::sml::test::mock_model_factory;
 
 /**
@@ -505,7 +508,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_CHECK(o.inherited_properties().empty());
             BOOST_CHECK(o.local_properties().empty());
             BOOST_CHECK(o.all_properties().size() == 2);
-            // BOOST_CHECK(!has_duplicate_property_names(o, lg));
+            BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else if (factory.is_type_name_n(1, qn)) {
             BOOST_CHECK(o.inherited_properties().size() == 1);
             for (const auto& pair : o.inherited_properties())
@@ -513,110 +516,46 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
             BOOST_CHECK(o.local_properties().empty());
             BOOST_CHECK(o.all_properties().size() == 2);
-            // BOOST_CHECK(!has_duplicate_property_names(o, lg));
+            BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
             BOOST_FAIL("Unexpected object: " << qn);
     }
 }
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_concept_that_refines_missing_concept_throws) {
-//     SETUP_TEST_LOG_SOURCE("model_with_concept_that_refines_missing_concept_throws");
+BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
+    SETUP_TEST_LOG_SOURCE("model_with_concept_that_refines_missing_concept_throws");
 
-//     auto m(factory.build_concept_that_refines_missing_concept());
-//     BOOST_REQUIRE(m.objects().empty());
-//     BOOST_REQUIRE(m.concepts().size() == 1);
-//     {
-//         const auto& qn(m.concepts().begin()->first);
-//         const auto& c(m.concepts().begin()->second);
+    auto m(factory.build_concept_that_refines_missing_concept());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-//         if (factory.is_concept_name_n(1, qn)) {
-//             BOOST_REQUIRE(c.refines().size() == 1);
-//             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
+    dogen::sml::property_indexer i;
+    using dogen::sml::indexing_error;
+    contains_checker<indexing_error> c(concept_not_found);
+    BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
+}
 
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_that_models_missing_concept_throws");
 
-//     dogen::sml::property_indexer i;
-//     using dogen::sml::indexing_error;
-//     contains_checker<indexing_error> c(concept_not_found);
-//     BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
-// }
+    auto m(factory.build_object_that_models_missing_concept());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_object_that_models_missing_concept_throws) {
-//     SETUP_TEST_LOG_SOURCE("model_with_object_that_models_missing_concept_throws");
+    dogen::sml::property_indexer i;
+    using dogen::sml::indexing_error;
+    contains_checker<indexing_error> c(concept_not_found);
+    BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
+}
 
-//     auto m(factory.build_object_that_models_missing_concept());
-//     BOOST_REQUIRE(m.concepts().empty());
-//     BOOST_REQUIRE(m.objects().size() == 1);
-//     {
-//         const auto& qn(m.objects().begin()->first);
-//         if (!factory.is_type_name_n(0, qn))
-//             BOOST_FAIL("Unexpected object: " << qn);
+BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
+    SETUP_TEST_LOG_SOURCE("build_object_that_models_concept_with_missing_parent");
 
-//         const auto& o(*m.objects().begin()->second);
-//         using dogen::sml::relationship_types;
-//         const auto mc(relationship_types::modeled_concepts);
-//         auto i(o.relationships().find(mc));
+    auto m(factory.build_object_that_models_concept_with_missing_parent());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-//         BOOST_REQUIRE(i != o.relationships().end());
-//         BOOST_REQUIRE(i->second.size() == 1);
-//         BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
-//     }
-
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
-
-//     dogen::sml::property_indexer i;
-//     using dogen::sml::indexing_error;
-//     contains_checker<indexing_error> c(concept_not_found);
-//     BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
-// }
-
-// BOOST_AUTO_TEST_CASE_IGNORE(model_with_object_with_missing_parent_throws) {
-//     SETUP_TEST_LOG_SOURCE("build_object_that_models_concept_with_missing_parent");
-
-//     auto m(factory.build_object_that_models_concept_with_missing_parent());
-//     BOOST_REQUIRE(m.concepts().size() == 1);
-//     {
-//         const auto& qn(m.concepts().begin()->first);
-//         const auto& c(m.concepts().begin()->second);
-
-//         if (factory.is_concept_name_n(0, qn))
-//             BOOST_REQUIRE(c.refines().empty());
-//         else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
-
-//     BOOST_REQUIRE(m.objects().size() == 1);
-//     {
-//         const auto& qn(m.objects().begin()->first);
-//         const auto& o(*m.objects().begin()->second);
-
-//         using dogen::sml::relationship_types;
-//         const auto mc(relationship_types::modeled_concepts);
-
-//         auto i(o.relationships().find(mc));
-//         if (factory.is_type_name_n(1, qn)) {
-//             BOOST_REQUIRE(i != o.relationships().end());
-//             BOOST_REQUIRE(i->second.size() == 1);
-//             BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
-
-//             const auto par(relationship_types::parents);
-//             i = o.relationships().find(par);
-//             BOOST_REQUIRE(i != o.relationships().end());
-//             BOOST_REQUIRE(i->second.size() == 1);
-//             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
-//         } else
-//             BOOST_FAIL("Unexpected object: " << qn);
-//     }
-
-//     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
-
-//     dogen::sml::property_indexer i;
-//     using dogen::sml::indexing_error;
-//     contains_checker<indexing_error> c(object_not_found);
-//     BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
-// }
+    dogen::sml::property_indexer i;
+    using dogen::sml::indexing_error;
+    contains_checker<indexing_error> c(object_not_found);
+    BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
