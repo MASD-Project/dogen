@@ -8,6 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider using a graph in SML for indexing                        :story:
+
+To keep things simple we created a number of specialised indexers,
+each performing a complete loop, recursion, etc over the merged
+model. A better way of doing things would be to do a DAG of the model
+that includes both concepts and objects and then DFS it; at each
+vertex we could plug in a set of indexers, each acting on the
+vertex. We could also have dependencies between the indexers (for
+example concept indexing must take place before property indexing and
+so on).
+
 *** Consider renaming SML                                             :story:
 
 Originally we intended to rename SML - the Simplified Modeling
