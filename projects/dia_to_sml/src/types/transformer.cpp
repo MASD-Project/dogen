@@ -294,6 +294,9 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
         ao.original_parent_name(k->second);
         context_.original_parent().insert(
             std::make_pair(ao.name(), k->second));
+        using sml::relationship_types;
+        ao.relationships()[relationship_types::original_parents].push_back(
+            k->second);
     }
 
     using sml::generation_types;

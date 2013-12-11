@@ -96,6 +96,9 @@ const std::string concept_not_found("Concept not found in concept container: ");
 const std::string parent_class_info_not_found(
     "Type has a parent but no parent class info found: ");
 
+const std::string too_many_parents(
+    "Type has more than one parent but multiple inheritance not supported: ");
+
 bool is_char_like(const std::string& type_name) {
     return
         type_name == char_type || type_name == uchar_type ||
@@ -394,17 +397,24 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
     sml::meta_data_reader reader(ao.meta_data());
     r.opaque_parameters(reader.odb_pragma());
 
-    const auto pn(ao.parent_name());
-    if (pn) {
-        const auto i(context_.classes().find(*ao.parent_name()));
-        if (i == context_.classes().end()) {
-            const auto& sn(ao.parent_name()->simple_name());
+    auto i(ao.relationships().find(sml::relationship_types::parents));
+    if (i != ao.relationships().end() && !i->second.empty()) {
+        if (i->second.size() > 1) {
+            const auto& sn(ao.name().simple_name());
+            BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
+            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
+        }
+
+        const auto pn(i->second.front());
+        const auto j(context_.classes().find(pn));
+        if (j == context_.classes().end()) {
+            const auto& sn(pn.simple_name());
             BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
             BOOST_THROW_EXCEPTION(transformation_error(
                     parent_class_info_not_found + sn));
         }
 
-        const auto pci(i->second);
+        const auto pci(j->second);
         cpp::parent_info pi;
         pi.name(pci.name());
         pi.properties(pci.all_properties());
@@ -413,17 +423,24 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
         r.all_properties(pci.all_properties());
     }
 
-    const auto opn(ao.original_parent_name());
-    if (opn) {
-        const auto i(context_.classes().find(*opn));
-        if (i == context_.classes().end()) {
-            const auto& sn(ao.parent_name()->simple_name());
+    i = ao.relationships().find(sml::relationship_types::original_parents);
+    if (i != ao.relationships().end() && !i->second.empty()) {
+        if (i->second.size() > 1) {
+            const auto& sn(ao.name().simple_name());
+            BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
+            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
+        }
+
+        const auto opn(i->second.front());
+        const auto j(context_.classes().find(opn));
+        if (j == context_.classes().end()) {
+            const auto& sn(opn.simple_name());
             BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
             BOOST_THROW_EXCEPTION(transformation_error(
                     parent_class_info_not_found + sn));
         }
 
-        const auto opci(i->second);
+        const auto opci(j->second);
         std::list<std::string> ns(opci.namespaces());
         ns.push_back(opci.name());
 

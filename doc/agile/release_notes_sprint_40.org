@@ -101,6 +101,24 @@ cleaned up.
 
 - populate =is_parent= and =is_child=
 
+*** COMPLETED Checking that a model hasn't changed by copying it is wrong :spike:
+    CLOSED: [2013-12-11 Wed 20:22]
+    CLOCK: [2013-12-10 Tue 08:40]--[2013-12-10 Tue 08:45] =>  0:05
+    CLOCK: [2013-12-10 Tue 08:31]--[2013-12-10 Tue 08:39] =>  0:08
+
+In the past we used to rely on making a copy of a model prior to doing
+a transformation (named "expected" or e) and then checking that the
+"actual" result of the transformation was equal/not equal to
+"expected". We used to rely on the copy constructor for this because
+there were no pointers in the model. With the introduction of shared
+pointers, this logic became faulty because now expected and actual
+have some pointers that point to the same locations in memory. We do
+not yet support cloning, so there is no easy solution for this. We
+need to review all the code that does this and on a case-by-case basis
+figure out how to generate "expected".
+
+We could also consider implementing cloning, if this proves too hard.
+
 *** IMPLEMENTATION Create a =property_indexer= and add tests          :story:
 **** COMPLETED Implement indexing of properties
      CLOSED: [2013-12-07 Sat 20:09]
@@ -146,27 +164,10 @@ cleaned up.
 We should have added them to local properties.
 
 **** IMPLEMENTATION Replace C++ property handling code                 :task:
+     CLOCK: [2013-12-11 Wed 23:32]--[2013-12-11 Wed 23:53] =>  0:21
      CLOCK: [2013-12-11 Wed 20:00]--[2013-12-11 Wed 20:12] =>  0:12
      CLOCK: [2013-12-11 Wed 19:12]--[2013-12-11 Wed 19:20] =>  0:08
      CLOCK: [2013-12-11 Wed 18:41]--[2013-12-11 Wed 18:52] =>  0:11
-
-*** COMPLETED Checking that a model hasn't changed by copying it is wrong :spike:
-    CLOSED: [2013-12-11 Wed 20:22]
-    CLOCK: [2013-12-10 Tue 08:40]--[2013-12-10 Tue 08:45] =>  0:05
-    CLOCK: [2013-12-10 Tue 08:31]--[2013-12-10 Tue 08:39] =>  0:08
-
-In the past we used to rely on making a copy of a model prior to doing
-a transformation (named "expected" or e) and then checking that the
-"actual" result of the transformation was equal/not equal to
-"expected". We used to rely on the copy constructor for this because
-there were no pointers in the model. With the introduction of shared
-pointers, this logic became faulty because now expected and actual
-have some pointers that point to the same locations in memory. We do
-not yet support cloning, so there is no easy solution for this. We
-need to review all the code that does this and on a case-by-case basis
-figure out how to generate "expected".
-
-We could also consider implementing cloning, if this proves too hard.
 
 *** Create a =relationship_indexer= and add tests                     :story:
 **** Implement indexing of associations, keys and visitor              :task:
