@@ -8,6 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider renaming SML                                             :story:
+
+Originally we intended to rename SML - the Simplified Modeling
+Language - to DDL - the Domain Driven Language. This was because we
+had envisioned that SML was a model of the ideas in Domain Driven
+Design, and not at all a cut down version of UML as the name seems to
+imply. However, its becoming increasingly clear that, whilst we use a
+lot of the Domain Driven Design ideas, we are also morphing them
+considerably. Perhaps a more apt name would be SDML - the Simplified
+Domain Modeling Language?
+
 *** Add POF serialisation support                                     :story:
 
 If coherence has open source C++ libraries, we should add support for
