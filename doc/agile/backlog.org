@@ -34,6 +34,9 @@ remove the merger from the resolver tests.
 We should really create a library model loader, with tests, instead of
 doing all the work directly in the SML workflow.
 
+We can then start thinking about adding features such as loading only
+libraries the merged model depends on, etc.
+
 *** Refactor SML mock factory method names                            :story:
 
 We have a zoo of naming conventions, some starting with =build_=, some
