@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-11 Wed 18:41]
+Clock summary at [2013-12-11 Wed 20:23]
 
-| Headline                                                                   | Time    |       |      |
-|----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *14:05* |       |      |
-|----------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                            |         | 14:05 |      |
-| IMPLEMENTATION Release notes and backlog grooming                          |         |       | 0:32 |
-| IMPLEMENTATION Update manual                                               |         |       | 0:19 |
-| COMPLETED Add more tests to =concept_indexer=                              |         |       | 3:22 |
-| COMPLETED Plug =concept_indexer= into workflow                             |         |       | 2:14 |
-| IMPLEMENTATION Create a =property_indexer= and add tests                   |         |       | 7:25 |
-| IMPLEMENTATION Checking that a model hasn't changed by copying it is wrong |         |       | 0:13 |
+| Headline                                                              | Time    |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                          | *14:56* |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                       |         | 14:56 |      |
+| IMPLEMENTATION Release notes and backlog grooming                     |         |       | 0:32 |
+| IMPLEMENTATION Update manual                                          |         |       | 0:19 |
+| COMPLETED Add more tests to =concept_indexer=                         |         |       | 3:22 |
+| COMPLETED Plug =concept_indexer= into workflow                        |         |       | 2:14 |
+| IMPLEMENTATION Create a =property_indexer= and add tests              |         |       | 8:16 |
+| COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       | 0:13 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -139,8 +139,19 @@ cleaned up.
      CLOSED: [2013-12-11 Wed 18:40]
      CLOCK: [2013-12-11 Wed 18:28]--[2013-12-11 Wed 18:40] =>  0:12
 
-**** Replace C++ property handling code with relationships             :task:
-*** IMPLEMENTATION Checking that a model hasn't changed by copying it is wrong :spike:
+**** COMPLETED Concept properties were incorrectly added to all properties :spike:
+     CLOSED: [2013-12-11 Wed 19:12]
+     CLOCK: [2013-12-11 Wed 18:52]--[2013-12-11 Wed 19:12] =>  0:20
+
+We should have added them to local properties.
+
+**** IMPLEMENTATION Replace C++ property handling code                 :task:
+     CLOCK: [2013-12-11 Wed 20:00]--[2013-12-11 Wed 20:12] =>  0:12
+     CLOCK: [2013-12-11 Wed 19:12]--[2013-12-11 Wed 19:20] =>  0:08
+     CLOCK: [2013-12-11 Wed 18:41]--[2013-12-11 Wed 18:52] =>  0:11
+
+*** COMPLETED Checking that a model hasn't changed by copying it is wrong :spike:
+    CLOSED: [2013-12-11 Wed 20:22]
     CLOCK: [2013-12-10 Tue 08:40]--[2013-12-10 Tue 08:45] =>  0:05
     CLOCK: [2013-12-10 Tue 08:31]--[2013-12-10 Tue 08:39] =>  0:08
 

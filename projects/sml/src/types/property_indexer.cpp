@@ -88,17 +88,21 @@ void property_indexer::index_object(abstract_object& o, model& m,
         return;
     }
 
-    o.all_properties().insert(o.all_properties().end(),
-        o.local_properties().begin(), o.local_properties().end());
-
+    std::list<property> concept_properties;
     auto i(o.relationships().find(relationship_types::modeled_concepts));
     if (i != o.relationships().end()) {
         for (const auto& qn : i->second) {
             auto& c(find_concept(qn, m));
-            o.all_properties().insert(o.all_properties().end(),
+            concept_properties.insert(concept_properties.end(),
                 c.local_properties().begin(), c.local_properties().end());
         }
     }
+
+    o.local_properties().insert(o.local_properties().begin(),
+        concept_properties.begin(), concept_properties.end());
+
+    o.all_properties().insert(o.all_properties().end(),
+        o.local_properties().begin(), o.local_properties().end());
 
     i = o.relationships().find(relationship_types::parents);
     if (i != o.relationships().end()) {

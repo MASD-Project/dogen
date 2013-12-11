@@ -194,26 +194,6 @@ namespace sml_to_cpp {
 transformer::transformer(const sml::model& m, context& c)
     : model_(m), context_(c) { }
 
-void transformer::properties_for_concept(const sml::qname& qn,
-    std::list<sml::property>& properties,
-    std::unordered_set<sml::qname>& processed_qnames) const {
-
-    if (processed_qnames.find(qn) != processed_qnames.end())
-        return;
-
-    processed_qnames.insert(qn);
-    const auto i(model_.concepts().find(qn));
-    if (i == model_.concepts().end()) {
-        const auto& sn(qn.simple_name());
-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + sn));
-    }
-
-    const auto& concept(i->second);
-    const auto& cp(concept.local_properties());
-    properties.insert(properties.end(), cp.begin(), cp.end());
-}
-
 std::string transformer::to_qualified_name(const sml::qname& qn) const {
     std::list<std::string> l(to_namespace_list(qn));
     l.push_back(qn.simple_name());
@@ -454,16 +434,6 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
     }
 
     std::list<sml::property> props;
-    std::unordered_set<sml::qname> processed_qnames;
-    const auto moco(sml::relationship_types::modeled_concepts);
-    const auto i(ao.relationships().find(moco));
-    if (i == ao.relationships().end() || i->second.empty())
-        BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
-    else {
-        for (const auto& qn : i->second)
-            properties_for_concept(qn, props, processed_qnames);
-    }
-
     props.insert(props.end(), ao.local_properties().begin(),
         ao.local_properties().end());
 

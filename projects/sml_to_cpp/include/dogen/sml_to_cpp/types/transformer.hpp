@@ -70,15 +70,6 @@ public:
 
 private:
     /**
-     * @brief Collects all the properties associated with a concept,
-     * and any otheer concepts it may refine.
-     */
-    void properties_for_concept(const sml::qname& qn,
-        std::list<sml::property>& properties,
-        std::unordered_set<sml::qname>& processed_qnames) const;
-
-private:
-    /**
      * @brief Converts an SML qname into a C++ qualified name.
      */
     std::string to_qualified_name(const sml::qname& qn) const;
