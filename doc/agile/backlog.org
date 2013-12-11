@@ -8,6 +8,11 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add POF serialisation support                                     :story:
+
+If coherence has open source C++ libraries, we should add support for
+serialisation to and from POF.
+
 *** Types that share one file                                         :story:
 
 At present we force all types etc to have their own file. However, in
