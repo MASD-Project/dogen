@@ -78,21 +78,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::ope
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
@@ -139,27 +124,6 @@ abstract_object::abstract_object()
       is_child_(static_cast<bool>(0)),
       is_inheritance_root_(static_cast<bool>(0)) { }
 
-abstract_object::abstract_object(abstract_object&& rhs)
-    : dogen::sml::type(
-        std::forward<dogen::sml::type>(rhs)),
-      all_properties_(std::move(rhs.all_properties_)),
-      local_properties_(std::move(rhs.local_properties_)),
-      inherited_properties_(std::move(rhs.inherited_properties_)),
-      operations_(std::move(rhs.operations_)),
-      parent_name_(std::move(rhs.parent_name_)),
-      original_parent_name_(std::move(rhs.original_parent_name_)),
-      leaves_(std::move(rhs.leaves_)),
-      is_parent_(std::move(rhs.is_parent_)),
-      number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)),
-      is_visitable_(std::move(rhs.is_visitable_)),
-      is_immutable_(std::move(rhs.is_immutable_)),
-      is_versioned_(std::move(rhs.is_versioned_)),
-      is_comparable_(std::move(rhs.is_comparable_)),
-      is_fluent_(std::move(rhs.is_fluent_)),
-      is_child_(std::move(rhs.is_child_)),
-      relationships_(std::move(rhs.relationships_)),
-      is_inheritance_root_(std::move(rhs.is_inheritance_root_)) { }
-
 abstract_object::abstract_object(
     const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
@@ -170,8 +134,6 @@ abstract_object::abstract_object(
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
     const std::list<dogen::sml::operation>& operations,
-    const boost::optional<dogen::sml::qname>& parent_name,
-    const boost::optional<dogen::sml::qname>& original_parent_name,
     const std::list<dogen::sml::qname>& leaves,
     const bool is_parent,
     const unsigned int number_of_type_arguments,
@@ -192,8 +154,6 @@ abstract_object::abstract_object(
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
       operations_(operations),
-      parent_name_(parent_name),
-      original_parent_name_(original_parent_name),
       leaves_(leaves),
       is_parent_(is_parent),
       number_of_type_arguments_(number_of_type_arguments),
@@ -222,8 +182,6 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"local_properties\": " << local_properties_ << ", "
       << "\"inherited_properties\": " << inherited_properties_ << ", "
       << "\"operations\": " << operations_ << ", "
-      << "\"parent_name\": " << parent_name_ << ", "
-      << "\"original_parent_name\": " << original_parent_name_ << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"number_of_type_arguments\": " << number_of_type_arguments_ << ", "
@@ -246,8 +204,6 @@ void abstract_object::swap(abstract_object& other) noexcept {
     swap(local_properties_, other.local_properties_);
     swap(inherited_properties_, other.inherited_properties_);
     swap(operations_, other.operations_);
-    swap(parent_name_, other.parent_name_);
-    swap(original_parent_name_, other.original_parent_name_);
     swap(leaves_, other.leaves_);
     swap(is_parent_, other.is_parent_);
     swap(number_of_type_arguments_, other.number_of_type_arguments_);
@@ -267,8 +223,6 @@ bool abstract_object::compare(const abstract_object& rhs) const {
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&
         operations_ == rhs.operations_ &&
-        parent_name_ == rhs.parent_name_ &&
-        original_parent_name_ == rhs.original_parent_name_ &&
         leaves_ == rhs.leaves_ &&
         is_parent_ == rhs.is_parent_ &&
         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
@@ -344,38 +298,6 @@ void abstract_object::operations(const std::list<dogen::sml::operation>& v) {
 
 void abstract_object::operations(const std::list<dogen::sml::operation>&& v) {
     operations_ = std::move(v);
-}
-
-const boost::optional<dogen::sml::qname>& abstract_object::parent_name() const {
-    return parent_name_;
-}
-
-boost::optional<dogen::sml::qname>& abstract_object::parent_name() {
-    return parent_name_;
-}
-
-void abstract_object::parent_name(const boost::optional<dogen::sml::qname>& v) {
-    parent_name_ = v;
-}
-
-void abstract_object::parent_name(const boost::optional<dogen::sml::qname>&& v) {
-    parent_name_ = std::move(v);
-}
-
-const boost::optional<dogen::sml::qname>& abstract_object::original_parent_name() const {
-    return original_parent_name_;
-}
-
-boost::optional<dogen::sml::qname>& abstract_object::original_parent_name() {
-    return original_parent_name_;
-}
-
-void abstract_object::original_parent_name(const boost::optional<dogen::sml::qname>& v) {
-    original_parent_name_ = v;
-}
-
-void abstract_object::original_parent_name(const boost::optional<dogen::sml::qname>&& v) {
-    original_parent_name_ = std::move(v);
 }
 
 const std::list<dogen::sml::qname>& abstract_object::leaves() const {

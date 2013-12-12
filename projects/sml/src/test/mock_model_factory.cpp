@@ -808,8 +808,6 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
 
     auto o1(build_value_object(1, r.name()));
     parent_to_child(*o0, *o1);
-    o1->original_parent_name(o0->name());
-    o1->parent_name(o0->name());
     o0->is_parent(true);
     o0->leaves().push_back(o1->name());
     insert_object(r, o1);
@@ -841,8 +839,6 @@ build_object_with_parent_that_models_a_refined_concept(
 
     auto o1(build_value_object(1, r.name()));
     parent_to_child(*o0, *o1);
-    o1->original_parent_name(o0->name());
-    o1->parent_name(o0->name());
     o0->is_parent(true);
     o0->leaves().push_back(o1->name());
     insert_object(r, o1);
@@ -884,8 +880,6 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
     auto o0(build_value_object(0, r.name()));
     auto o1(build_value_object(1, r.name()));
     parent_to_child(*o0, *o1);
-    o1->original_parent_name(o0->name());
-    o1->parent_name(o0->name());
     o0->is_parent(true);
     o0->leaves().push_back(o1->name());
 
@@ -1044,8 +1038,6 @@ object_with_parent_in_the_same_model(const bool has_property) const {
     insert_object(r, o0);
     insert_object(r, o1);
 
-    o0->parent_name(o1->name());
-    o0->original_parent_name(o1->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
     return r;
@@ -1055,8 +1047,6 @@ model mock_model_factory::object_with_missing_parent_in_the_same_model() const {
     const auto mn(mock_model_qname(0));
     auto o0(build_value_object(0, mn));
     auto o1(build_value_object(1, mn));
-    o0->parent_name(o1->name());
-    o0->original_parent_name(o1->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
     parent_to_child(*o1, *o0);
@@ -1072,8 +1062,6 @@ object_with_parent_in_different_models() const {
     auto o1(build_value_object(1));
     parent_to_child(*o1, *o0);
 
-    o0->original_parent_name(o1->name());
-    o0->parent_name(o1->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
 
@@ -1098,15 +1086,6 @@ model mock_model_factory::object_with_three_children_in_same_model() const {
     parent_to_child(*o3, *o0);
     parent_to_child(*o3, *o1);
     parent_to_child(*o3, *o2);
-
-    o0->parent_name(o3->name());
-    o0->original_parent_name(o3->name());
-
-    o1->parent_name(o3->name());
-    o1->original_parent_name(o3->name());
-
-    o2->parent_name(o3->name());
-    o2->original_parent_name(o3->name());
 
     o3->is_parent(true);
     o3->leaves().push_back(o0->name());
@@ -1154,16 +1133,9 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
     parent_to_child(*o3, *o2, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
-    o0->parent_name(o1->name());
-    o0->original_parent_name(o3->name());
-
-    o1->parent_name(o2->name());
-    o1->original_parent_name(o3->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
 
-    o2->parent_name(o3->name());
-    o2->original_parent_name(o3->name());
     o2->is_parent(true);
     o2->leaves().push_back(o0->name());
 
@@ -1190,16 +1162,9 @@ model mock_model_factory::object_with_third_degree_parent_missing() const {
     parent_to_child(*o3, *o2, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
-    o0->parent_name(o1->name());
-    o0->original_parent_name(o3->name());
-
-    o1->parent_name(o2->name());
-    o1->original_parent_name(o3->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
 
-    o2->parent_name(o3->name());
-    o2->original_parent_name(o3->name());
     o2->is_parent(true);
     o2->leaves().push_back(o0->name());
 
@@ -1226,16 +1191,9 @@ object_with_third_degree_parent_in_different_models() const {
     parent_to_child(*o3, *o2, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
-    o0->parent_name(o1->name());
-    o0->original_parent_name(o3->name());
-
-    o1->parent_name(o2->name());
-    o1->original_parent_name(o3->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
 
-    o2->parent_name(o3->name());
-    o2->original_parent_name(o3->name());
     o2->is_parent(true);
     o2->leaves().push_back(o0->name());
 
@@ -1269,16 +1227,9 @@ object_with_missing_third_degree_parent_in_different_models() const {
     parent_to_child(*o3, *o2, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
-    o0->parent_name(o1->name());
-    o0->original_parent_name(o3->name());
-
-    o1->parent_name(o2->name());
-    o1->original_parent_name(o3->name());
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
 
-    o2->parent_name(o3->name());
-    o2->original_parent_name(o3->name());
     o2->is_parent(true);
     o2->leaves().push_back(o0->name());
 

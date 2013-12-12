@@ -294,7 +294,6 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
                                  << ao.name().simple_name() << " as "
                                  << j->second.simple_name();
-        ao.parent_name(j->second);
         ao.is_child(true);
         using sml::relationship_types;
         ao.relationships()[relationship_types::parents].push_back(j->second);
@@ -334,7 +333,6 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
                     transformation_error(original_parent_not_found +
                         ao.name().simple_name()));
             }
-            ao.original_parent_name(j->second);
             context_.original_parent().insert(
                 std::make_pair(ao.name(), j->second));
             using sml::relationship_types;

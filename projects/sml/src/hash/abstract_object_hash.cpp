@@ -61,16 +61,6 @@ inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml:
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -102,8 +92,6 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
     combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
-    combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_name()));
-    combine(seed, hash_boost_optional_dogen_sml_qname(v.original_parent_name()));
     combine(seed, hash_std_list_dogen_sml_qname(v.leaves()));
     combine(seed, v.is_parent());
     combine(seed, v.number_of_type_arguments());

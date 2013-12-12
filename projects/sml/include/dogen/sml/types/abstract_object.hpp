@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <boost/optional.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <iosfwd>
 #include <list>
@@ -52,14 +51,12 @@ namespace sml {
 class abstract_object : public dogen::sml::type {
 public:
     abstract_object(const abstract_object&) = default;
+    abstract_object(abstract_object&&) = default;
 
 public:
     abstract_object();
 
     virtual ~abstract_object() noexcept = 0;
-
-public:
-    abstract_object(abstract_object&& rhs);
 
 public:
     abstract_object(
@@ -72,8 +69,6 @@ public:
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::list<dogen::sml::operation>& operations,
-        const boost::optional<dogen::sml::qname>& parent_name,
-        const boost::optional<dogen::sml::qname>& original_parent_name,
         const std::list<dogen::sml::qname>& leaves,
         const bool is_parent,
         const unsigned int number_of_type_arguments,
@@ -144,26 +139,6 @@ public:
     std::list<dogen::sml::operation>& operations();
     void operations(const std::list<dogen::sml::operation>& v);
     void operations(const std::list<dogen::sml::operation>&& v);
-    /**@}*/
-
-    /**
-     * @brief Qualified name for the object's parent, if it it has one.
-     */
-    /**@{*/
-    const boost::optional<dogen::sml::qname>& parent_name() const;
-    boost::optional<dogen::sml::qname>& parent_name();
-    void parent_name(const boost::optional<dogen::sml::qname>& v);
-    void parent_name(const boost::optional<dogen::sml::qname>&& v);
-    /**@}*/
-
-    /**
-     * @brief Qualified name for the root of the inheritance hierarchy, if the object is part of one.
-     */
-    /**@{*/
-    const boost::optional<dogen::sml::qname>& original_parent_name() const;
-    boost::optional<dogen::sml::qname>& original_parent_name();
-    void original_parent_name(const boost::optional<dogen::sml::qname>& v);
-    void original_parent_name(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
     /**
@@ -271,8 +246,6 @@ private:
     std::list<dogen::sml::property> local_properties_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
     std::list<dogen::sml::operation> operations_;
-    boost::optional<dogen::sml::qname> parent_name_;
-    boost::optional<dogen::sml::qname> original_parent_name_;
     std::list<dogen::sml::qname> leaves_;
     bool is_parent_;
     unsigned int number_of_type_arguments_;

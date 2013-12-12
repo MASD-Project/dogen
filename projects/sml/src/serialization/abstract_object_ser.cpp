@@ -30,7 +30,6 @@
 #include <boost/property_tree/ptree_serialization.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/entity_ser.hpp"
@@ -70,8 +69,6 @@ void save(Archive& ar,
     ar << make_nvp("local_properties", v.local_properties_);
     ar << make_nvp("inherited_properties", v.inherited_properties_);
     ar << make_nvp("operations", v.operations_);
-    ar << make_nvp("parent_name", v.parent_name_);
-    ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("is_parent", v.is_parent_);
     ar << make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
@@ -95,8 +92,6 @@ void load(Archive& ar,
     ar >> make_nvp("local_properties", v.local_properties_);
     ar >> make_nvp("inherited_properties", v.inherited_properties_);
     ar >> make_nvp("operations", v.operations_);
-    ar >> make_nvp("parent_name", v.parent_name_);
-    ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("is_parent", v.is_parent_);
     ar >> make_nvp("number_of_type_arguments", v.number_of_type_arguments_);

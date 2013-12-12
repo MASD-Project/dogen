@@ -137,8 +137,14 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
 
     relationships r;
 
-    if (ao.parent_name())
-        r.names().insert(*ao.parent_name());
+    using dogen::sml::relationship_types;
+    auto i(ao.relationships().find(relationship_types::parents));
+    if (i == ao.relationships().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object has no parents.";
+    else {
+        for (const auto& parent : i->second)
+            r.names().insert(parent);
+    }
 
     r.is_parent(ao.is_parent());
     r.is_child(ao.is_child());
@@ -147,8 +153,7 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
 
-    const auto moco(sml::relationship_types::modeled_concepts);
-    const auto i(ao.relationships().find(moco));
+    i = ao.relationships().find(relationship_types::modeled_concepts);
     if (i == ao.relationships().end() || i->second.empty())
         BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
     else {
@@ -224,12 +229,16 @@ relationships extractor::extract_inheritance_graph(const sml::qname& qn) const {
             BOOST_LOG_SEV(lg, debug) << "adding " << lao.name();
             r.names().insert(lao.name());
 
-            if (!lao.parent_name())
+            using sml::relationship_types;
+            const auto k(lao.relationships().find(relationship_types::parents));
+            if (k == lao.relationships().end() || k->second.empty())
                 lambda(lao.name(), type_does_not_have_a_parent);
 
-            i = model_.objects().find(*lao.parent_name());
-            if (i == model_.objects().end())
-                lambda(*lao.parent_name(), qname_could_not_be_found);
+            for (const auto& parent : k->second) {
+                i = model_.objects().find(parent);
+                if (i == model_.objects().end())
+                    lambda(parent, qname_could_not_be_found);
+            }
         } while (i->second->name() != qn);
     }
 

@@ -142,13 +142,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</operations>
-						<parent_name class_id="29" tracking_level="0" version="0">
-							<initialized>0</initialized>
-						</parent_name>
-						<original_parent_name>
-							<initialized>0</initialized>
-						</original_parent_name>
-						<leaves class_id="30" tracking_level="0" version="0">
+						<leaves class_id="29" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</leaves>
@@ -160,7 +154,7 @@
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
 						<is_child>0</is_child>
-						<relationships class_id="31" tracking_level="0" version="0">
+						<relationships class_id="30" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>

@@ -75,13 +75,6 @@ std::list<dogen::sml::operation> create_std_list_dogen_sml_operation(unsigned in
     return r;
 }
 
-boost::optional<dogen::sml::qname>
-create_boost_optional_dogen_sml_qname(unsigned int position) {
-    boost::optional<dogen::sml::qname> r(
-        create_dogen_sml_qname(position));
-    return r;
-}
-
 std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
     std::list<dogen::sml::qname> r;
     for (unsigned int i(0); i < 4; ++i) {
@@ -124,19 +117,17 @@ populate(const unsigned int position, result_type& v) {
     v.local_properties(create_std_list_dogen_sml_property(position + 1));
     v.inherited_properties(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(position + 2));
     v.operations(create_std_list_dogen_sml_operation(position + 3));
-    v.parent_name(create_boost_optional_dogen_sml_qname(position + 4));
-    v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 5));
-    v.leaves(create_std_list_dogen_sml_qname(position + 6));
-    v.is_parent(create_bool(position + 7));
-    v.number_of_type_arguments(create_unsigned_int(position + 8));
-    v.is_visitable(create_bool(position + 9));
-    v.is_immutable(create_bool(position + 10));
-    v.is_versioned(create_bool(position + 11));
-    v.is_comparable(create_bool(position + 12));
-    v.is_fluent(create_bool(position + 13));
-    v.is_child(create_bool(position + 14));
-    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 15));
-    v.is_inheritance_root(create_bool(position + 16));
+    v.leaves(create_std_list_dogen_sml_qname(position + 4));
+    v.is_parent(create_bool(position + 5));
+    v.number_of_type_arguments(create_unsigned_int(position + 6));
+    v.is_visitable(create_bool(position + 7));
+    v.is_immutable(create_bool(position + 8));
+    v.is_versioned(create_bool(position + 9));
+    v.is_comparable(create_bool(position + 10));
+    v.is_fluent(create_bool(position + 11));
+    v.is_child(create_bool(position + 12));
+    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 13));
+    v.is_inheritance_root(create_bool(position + 14));
 }
 
 abstract_object_generator::result_type*

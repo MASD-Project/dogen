@@ -96,31 +96,39 @@ void workflow::transform_abstract_object(const sml::abstract_object& ao) {
     if (ao.generation_type() == sml::generation_types::no_generation)
         return;
 
-    const auto lambda([&](const boost::optional<sml::qname>& oqn) {
-            if (!oqn)
+    const auto lambda([&](const std::list<sml::qname>& oqn) {
+            if (oqn.empty())
                 return;
 
-            const auto& qn(*oqn);
-            const auto i(context_.classes().find(qn));
-            if (i != context_.classes().end())
-                return;
+            for (const auto& qn : oqn) {
+                const auto i(context_.classes().find(qn));
+                if (i != context_.classes().end())
+                    return;
 
-            const auto j(model_.objects().find(qn));
-            if (j == model_.objects().end()) {
-                BOOST_LOG_SEV(lg, error) << missing_object << qn;
-                BOOST_THROW_EXCEPTION(workflow_failure(missing_object +
-                        boost::lexical_cast<std::string>(qn)));
+                const auto j(model_.objects().find(qn));
+                if (j == model_.objects().end()) {
+                    BOOST_LOG_SEV(lg, error) << missing_object << qn;
+                    BOOST_THROW_EXCEPTION(workflow_failure(missing_object +
+                            boost::lexical_cast<std::string>(qn)));
+                }
+
+                const auto& ao(*j->second);
+                using sml::generation_types;
+                if (ao.generation_type() == generation_types::no_generation)
+                    return;
+
+                transform_abstract_object(ao);
             }
-
-            const auto& ao(*j->second);
-            if (ao.generation_type() == sml::generation_types::no_generation)
-                return;
-
-            transform_abstract_object(ao);
         });
 
-    lambda(ao.parent_name());
-    lambda(ao.original_parent_name());
+    using sml::relationship_types;
+    auto i(ao.relationships().find(relationship_types::parents));
+    if (i != ao.relationships().end())
+        lambda(i->second);
+
+    i = ao.relationships().find(relationship_types::original_parents);
+    if (i != ao.relationships().end())
+        lambda(i->second);
 
     transformer_.from_type(ao);
     const auto rel(extractor_.extract_dependency_graph(ao));
