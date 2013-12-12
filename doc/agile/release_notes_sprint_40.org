@@ -165,6 +165,7 @@ We should have added them to local properties.
 
 **** Refactor =properties_for_concept= in extractor                   :spike:
 **** IMPLEMENTATION Remove all usages of =parent_name= and =original_parent_name= :spike:
+     CLOCK: [2013-12-12 Thu 21:50]--[2013-12-12 Thu 22:52] =>  1:02
      CLOCK: [2013-12-12 Thu 17:40]--[2013-12-12 Thu 18:17] =>  0:37
      CLOCK: [2013-12-12 Thu 07:53]--[2013-12-12 Thu 08:30] =>  0:37
 

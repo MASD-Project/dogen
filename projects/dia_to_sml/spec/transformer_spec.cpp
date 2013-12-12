@@ -40,6 +40,7 @@
 using namespace dogen::dia_to_sml;
 using dogen::utility::test::asserter;
 using dogen::dia_to_sml::test::mock_processed_object_factory;
+using dogen::sml::relationship_types;
 
 namespace  {
 
@@ -98,6 +99,41 @@ dogen::dia_to_sml::context mock_context() {
     dogen::dia_to_sml::context r;
     r.model().name(mock_model_name(model_name));
     return r;
+}
+
+bool has_no_parent(const dogen::sml::abstract_object& o) {
+    using dogen::sml::relationship_types;
+    const auto i(o.relationships().find(relationship_types::parents));
+    if (i == o.relationships().end() || i->second.empty())
+        return true;
+
+    return false;
+}
+
+bool has_relationship(const relationship_types rt,
+    const dogen::sml::abstract_object& o) {
+    const auto i(o.relationships().find(rt));
+    return i != o.relationships().end() && !i->second.empty();
+}
+
+bool has_one_parent(const dogen::sml::abstract_object& o) {
+    using dogen::sml::relationship_types;
+    const auto i(o.relationships().find(relationship_types::parents));
+    if (i == o.relationships().end() || i->second.empty() ||
+        i->second.size() > 1)
+        return false;
+
+    return true;
+}
+
+dogen::sml::qname get_parent_name(const dogen::sml::abstract_object& o) {
+    using dogen::sml::relationship_types;
+    const auto i(o.relationships().find(relationship_types::parents));
+    if (i == o.relationships().end() || i->second.empty() ||
+        i->second.size() > 1)
+        BOOST_FAIL("Object has got one parent");
+
+    return i->second.front();
 }
 
 }
@@ -1203,11 +1239,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
         const auto& qn(pair.first);
         const auto& o(*pair.second);
         if (is_type_one(qn)) {
-            BOOST_CHECK(!o.parent_name());
-            BOOST_CHECK(!o.original_parent_name());
+            BOOST_CHECK(!has_relationship(relationship_types::parents, o));
+            BOOST_CHECK(!has_relationship(relationship_types::original_parents,
+                    o));
         } else if (is_type_two(qn)) {
-            BOOST_REQUIRE(o.parent_name());
-            BOOST_REQUIRE(is_type_one(*o.parent_name()));
+            BOOST_REQUIRE(has_one_parent(o));
+            BOOST_CHECK(is_type_one(get_parent_name(o)));
         } else {
             BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << qn;
             BOOST_FAIL("Unexpected type name");

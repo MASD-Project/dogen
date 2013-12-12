@@ -214,6 +214,36 @@ sml::enumerator transformer::to_enumerator(const processed_property& p,
     return r;
 }
 
+void transformer::
+add_leaf(const sml::qname& leaf, const sml::abstract_object& ao) {
+    using sml::generation_types;
+
+    if (!ao.is_child())
+        return;
+
+    using sml::relationship_types;
+    const auto i(ao.relationships().find(relationship_types::parents));
+    if (i == ao.relationships().end() || i->second.empty()) {
+        BOOST_LOG_SEV(lg, error) << "Object is child but has no parents "
+                                 << ao.name().simple_name();
+
+        BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
+                ao.name().simple_name()));
+    }
+
+    for (const auto& parent : i->second) {
+        auto k(context_.model().objects().find(parent));
+        if (k == context_.model().objects().end()) {
+            BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
+                                     << parent.simple_name();
+            BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
+                    parent.simple_name()));
+        }
+        add_leaf(leaf, *k->second);
+        context_.leaves()[parent].push_back(leaf);
+    }
+}
+
 void transformer::update_abstract_object(sml::abstract_object& ao,
     const processed_object& o, const profile& p) {
 
@@ -277,54 +307,49 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
     ao.is_parent(j != context_.parent_ids().end());
     context_.id_to_qname().insert(std::make_pair(o.id(), ao.name()));
 
-    if (!ao.parent_name()) {
+    if (!ao.is_child()) {
         ao.is_inheritance_root(ao.is_parent());
         context_.original_parent().insert(
             std::make_pair(ao.name(), ao.name()));
     } else {
-        const auto k(context_.original_parent().find(*ao.parent_name()));
-        if (k == context_.original_parent().end()) {
-            BOOST_LOG_SEV(lg, error) << "Could not find the original parent of "
+        using sml::relationship_types;
+        const auto k(ao.relationships().find(relationship_types::parents));
+        if (k == ao.relationships().end() && k->second.empty()) {
+            BOOST_LOG_SEV(lg, error) << "Object is child but has no parents "
                                      << ao.name().simple_name();
 
             BOOST_THROW_EXCEPTION(
-                transformation_error(original_parent_not_found +
+                transformation_error(parent_not_found +
                     ao.name().simple_name()));
         }
-        ao.original_parent_name(k->second);
-        context_.original_parent().insert(
-            std::make_pair(ao.name(), k->second));
-        using sml::relationship_types;
-        ao.relationships()[relationship_types::original_parents].push_back(
-            k->second);
-    }
 
-    using sml::generation_types;
-    // FIXME: massive hack
-    const bool is_service(dynamic_cast<sml::service*>(&ao) != 0);
-    if (!ao.is_parent() && ao.parent_name() && !is_service) {
-        auto parent(ao.parent_name());
-        while (parent) {
-            auto k(context_.leaves().find(*parent));
-            if (k == context_.leaves().end()) {
-                const std::list<sml::qname> l { ao.name() };
-                context_.leaves().insert(std::make_pair(*parent, l));
-            } else
-                k->second.push_back(ao.name());
+        for (const auto& parent_name : k->second) {
+            const auto j(context_.original_parent().find(parent_name));
+            if (j == context_.original_parent().end()) {
+                BOOST_LOG_SEV(lg, error)
+                    << "Could not find the original parent of "
+                    << ao.name().simple_name();
 
-            auto j(context_.model().objects().find(*parent));
-            if (j == context_.model().objects().end()) {
-                BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
-                                         << parent->simple_name();
-                BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
-                        parent->simple_name()));
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(original_parent_not_found +
+                        ao.name().simple_name()));
             }
-            parent = j->second->parent_name();
+            ao.original_parent_name(j->second);
+            context_.original_parent().insert(
+                std::make_pair(ao.name(), j->second));
+            using sml::relationship_types;
+            ao.relationships()[relationship_types::original_parents].push_back(
+                j->second);
         }
     }
 
+    // FIXME: massive hack. must not add leafs for services.
+    const bool is_service(dynamic_cast<sml::service*>(&ao) != 0);
+    if (!ao.is_parent() && ao.is_child() && !is_service)
+        add_leaf(ao.name(), ao);
+
     ao.is_immutable(p.is_immutable());
-    if ((ao.is_parent() || ao.parent_name()) && p.is_immutable())  {
+    if ((ao.is_parent() || ao.is_child()) && p.is_immutable())  {
         BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
                                  << ao.name().simple_name();
 
