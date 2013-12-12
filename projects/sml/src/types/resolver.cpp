@@ -64,11 +64,13 @@ namespace sml {
 resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
 
 void resolver::validate_inheritance_graph(const abstract_object& ao) const {
-    auto parent(ao.parent_name());
-    while (parent) {
-        qname pqn(*parent);
-        const auto i(model_.objects().find(pqn));
-        if (i == model_.objects().end()) {
+    auto i(ao.relationships().find(relationship_types::parents));
+    if (i == ao.relationships().end())
+        return;
+
+    for (const auto& pqn : i->second) {
+        const auto j(model_.objects().find(pqn));
+        if (j == model_.objects().end()) {
             std::ostringstream s;
             s << orphan_object << ": " << ao.name().simple_name()
               << ". parent: " << pqn.simple_name();
@@ -76,7 +78,22 @@ void resolver::validate_inheritance_graph(const abstract_object& ao) const {
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
         }
-        parent = i->second->parent_name();
+    }
+
+    i = ao.relationships().find(relationship_types::original_parents);
+    if (i == ao.relationships().end())
+        return;
+
+    for (const auto& pqn : i->second) {
+        const auto j(model_.objects().find(pqn));
+        if (j == model_.objects().end()) {
+            std::ostringstream s;
+            s << orphan_object << ": " << ao.name().simple_name()
+              << ". original parent: " << pqn.simple_name();
+
+            BOOST_LOG_SEV(lg, error) << s.str();
+            BOOST_THROW_EXCEPTION(resolution_error(s.str()));
+        }
     }
 }
 

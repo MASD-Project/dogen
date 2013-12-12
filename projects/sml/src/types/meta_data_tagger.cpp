@@ -41,6 +41,8 @@ namespace {
 auto lg(logger_factory("sml.meta_data_tagger"));
 const std::string original_parent_not_found(
     "Failed to find original parent for type: ");
+const std::string too_many_original_parents(
+    "Type has too many original parents, expected one: ");
 
 const std::string cpp_header_extension(".hpp");
 const std::string cpp_implementation_extension(".cpp");
@@ -592,8 +594,16 @@ void meta_data_tagger::tag(abstract_object& o) const {
     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
         tags::bool_false);
 
-    if (o.original_parent_name()) {
-        const auto opn(*o.original_parent_name());
+    const auto i(o.relationships().find(relationship_types::original_parents));
+    if (i != o.relationships().end() && !i->second.empty()) {
+        if (i->second.size() > 1) {
+            const auto sn(o.name().simple_name());
+            BOOST_LOG_SEV(lg, error) << too_many_original_parents << sn;
+            BOOST_THROW_EXCEPTION(meta_data_error(too_many_original_parents +
+                    sn));
+        }
+
+        const auto& opn(i->second.front());
         writer.add_if_key_not_found(tags::original_parent_name,
             opn.simple_name());
 

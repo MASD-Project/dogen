@@ -65,6 +65,26 @@ const std::string undefined_type("Object has property with undefined type");
 const std::string missing_parent("Object's parent could not be located");
 const std::string incorrect_meta_type("Object has incorrect meta_type");
 
+bool has_one_parent(const dogen::sml::abstract_object& o) {
+    using dogen::sml::relationship_types;
+    const auto i(o.relationships().find(relationship_types::parents));
+    if (i == o.relationships().end() || i->second.empty() ||
+        i->second.size() > 1)
+        return false;
+
+    return true;
+}
+
+dogen::sml::qname get_parent_name(const dogen::sml::abstract_object& o) {
+    using dogen::sml::relationship_types;
+    const auto i(o.relationships().find(relationship_types::parents));
+    if (i == o.relationships().end() || i->second.empty() ||
+        i->second.size() > 1)
+        BOOST_FAIL("Object has got one parent");
+
+    return i->second.front();
+}
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -179,11 +199,11 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
             found = true;
 
             const auto& o(*pair.second);
-            const auto pn(o.parent_name());
-            BOOST_REQUIRE(pn);
-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
-            BOOST_CHECK(factory.is_model_n(0, *pn));
+            BOOST_REQUIRE(has_one_parent(o));
+            const auto pn(get_parent_name(o));
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
+            BOOST_CHECK(factory.is_type_name_n(1, pn));
+            BOOST_CHECK(factory.is_model_n(0, pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
     }
@@ -211,11 +231,11 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
             found = true;
 
             const auto& o(*pair.second);
-            const auto pn(o.parent_name());
-            BOOST_REQUIRE(pn);
-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
-            BOOST_CHECK(factory.is_model_n(1, *pn));
+            BOOST_REQUIRE(has_one_parent(o));
+            const auto pn(get_parent_name(o));
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
+            BOOST_CHECK(factory.is_type_name_n(1, pn));
+            BOOST_CHECK(factory.is_model_n(1, pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
     }
@@ -244,22 +264,22 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             found_one = true;
 
             const auto& o(*pair.second);
-            const auto pn(o.parent_name());
-            BOOST_REQUIRE(pn);
-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
-            BOOST_CHECK(factory.is_model_n(0, *pn));
+            BOOST_REQUIRE(has_one_parent(o));
+            const auto pn(get_parent_name(o));
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
+            BOOST_CHECK(factory.is_type_name_n(1, pn));
+            BOOST_CHECK(factory.is_model_n(0, pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         } else if (factory.is_type_name_n(1, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_two = true;
 
             const auto& o(*pair.second);
-            const auto pn(o.parent_name());
-            BOOST_REQUIRE(pn);
-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_name_n(2, *pn));
-            BOOST_CHECK(factory.is_model_n(0, *pn));
+            BOOST_REQUIRE(has_one_parent(o));
+            const auto pn(get_parent_name(o));
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
+            BOOST_CHECK(factory.is_type_name_n(2, pn));
+            BOOST_CHECK(factory.is_model_n(0, pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
     }
@@ -304,11 +324,11 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
             found = true;
 
             const auto& o(*pair.second);
-            const auto pn(o.parent_name());
-            BOOST_REQUIRE(pn);
-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
-            BOOST_CHECK(factory.is_model_n(1, *pn));
+            BOOST_REQUIRE(has_one_parent(o));
+            const auto pn(get_parent_name(o));
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
+            BOOST_CHECK(factory.is_type_name_n(1, pn));
+            BOOST_CHECK(factory.is_model_n(1, pn));
             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
         }
     }

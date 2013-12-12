@@ -141,7 +141,7 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
         r.names().insert(*ao.parent_name());
 
     r.is_parent(ao.is_parent());
-    r.is_child(ao.parent_name());
+    r.is_child(ao.is_child());
     r.leaves().insert(ao.leaves().begin(), ao.leaves().end());
 
     std::list<sml::property> props;

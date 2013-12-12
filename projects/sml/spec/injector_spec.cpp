@@ -38,6 +38,8 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/injector.hpp"
 
+using dogen::sml::relationship_types;
+
 namespace {
 
 using dogen::sml::test::mock_model_factory;
@@ -49,6 +51,12 @@ const std::string test_suite("injector_spec");
 const std::string version_name("version");
 const std::string missing_identity("Identity must have at least");
 const std::string no_leaves("Type marked as visitable but has no leaves");
+
+bool has_relationship(const relationship_types rt,
+    const dogen::sml::abstract_object& o) {
+    const auto i(o.relationships().find(rt));
+    return i != o.relationships().end() && !i->second.empty();
+}
 
 }
 
@@ -299,10 +307,10 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             BOOST_CHECK(!s.is_versioned());
             BOOST_CHECK(!s.is_visitable());
             BOOST_CHECK(!s.is_immutable());
-            BOOST_CHECK(!s.parent_name());
-            BOOST_CHECK(!s.original_parent_name());
+            !has_relationship(relationship_types::parents, s);
+            !has_relationship(relationship_types::original_parents, s);
+            !has_relationship(relationship_types::modeled_concepts, s);
             BOOST_CHECK(s.leaves().empty());
-            // FIXMEL BOOST_CHECK(s.modeled_concepts().empty());
             BOOST_CHECK(s.number_of_type_arguments() == 0);
 
             BOOST_REQUIRE(s.operations().size() == 1);
