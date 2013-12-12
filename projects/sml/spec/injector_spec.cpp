@@ -307,9 +307,11 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             BOOST_CHECK(!s.is_versioned());
             BOOST_CHECK(!s.is_visitable());
             BOOST_CHECK(!s.is_immutable());
-            !has_relationship(relationship_types::parents, s);
-            !has_relationship(relationship_types::original_parents, s);
-            !has_relationship(relationship_types::modeled_concepts, s);
+            BOOST_CHECK(!has_relationship(relationship_types::parents, s));
+            BOOST_CHECK(
+                !has_relationship(relationship_types::original_parents, s));
+            BOOST_CHECK(
+                !has_relationship(relationship_types::modeled_concepts, s));
             BOOST_CHECK(s.leaves().empty());
             BOOST_CHECK(s.number_of_type_arguments() == 0);
 
