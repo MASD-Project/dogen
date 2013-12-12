@@ -1,0 +1,2968 @@
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index 88d6e98..265eb80 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -3441,16 +3441,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O24">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.205,96.15;64.7675,106.05"/>
++        <dia:rectangle val="46.205,94.55;64.7675,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+         <dia:point val="63.9175,101"/>
+         <dia:point val="46.255,101"/>
+         <dia:point val="46.255,106"/>
+@@ -3663,16 +3663,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O27">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="61.125,96.15;64.7675,106.05"/>
++        <dia:rectangle val="61.125,94.55;64.7675,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+         <dia:point val="63.9175,101"/>
+         <dia:point val="61.175,101"/>
+         <dia:point val="61.175,106"/>
+@@ -3819,16 +3819,16 @@ underlying storage (for example, a relational database).#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O29">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="63.0675,96.15;72.63,106.05"/>
++        <dia:rectangle val="63.0675,94.55;72.63,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+         <dia:point val="63.9175,101"/>
+         <dia:point val="72.58,101"/>
+         <dia:point val="72.58,106"/>
+@@ -6685,7 +6685,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         <dia:point val="50,83"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.95,82.95;77.885,96.25"/>
++        <dia:rectangle val="49.95,82.95;77.885,94.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="50,83"/>
+@@ -6694,7 +6694,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         <dia:real val="27.835000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="13.200000000000001"/>
++        <dia:real val="11.6"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#abstract_object#</dia:string>
+@@ -6786,52 +6786,6 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#parent_name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Qualified name for the object's parent, if it it has one.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#original_parent_name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Qualified name for the root of the inheritance hierarchy, if the object is part of one.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#leaves#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -7578,16 +7532,16 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O65">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="28.205,96.15;64.7675,106.05"/>
++        <dia:rectangle val="28.205,94.55;64.7675,106.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+         <dia:point val="63.9175,101"/>
+         <dia:point val="28.255,101"/>
+         <dia:point val="28.255,106"/>
+@@ -7619,16 +7573,16 @@ object.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O66">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="63.0675,96.15;89.075,106"/>
++        <dia:rectangle val="63.0675,94.55;89.075,106"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="63.9175,96.2"/>
++        <dia:point val="63.9175,94.6"/>
+         <dia:point val="63.9175,101"/>
+         <dia:point val="89.025,101"/>
+         <dia:point val="89.025,105.95"/>
+@@ -12565,7 +12519,7 @@ not have a need for it.#</dia:string>
+         <dia:point val="77.835,83"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="69.3588,71.15;78.585,83.8"/>
++        <dia:rectangle val="69.3587,71.15;78.585,83.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -14061,7 +14015,7 @@ performing concept expansion.#</dia:string>
+         <dia:point val="-4.8775,30"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-4.9275,19.85;3.75,31.6"/>
++        <dia:rectangle val="-4.9275,19.85;3.75,30.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+diff --git a/doc/agile/release_notes_sprint_40.org b/doc/agile/release_notes_sprint_40.org
+index c686436..899d7c2 100644
+--- a/doc/agile/release_notes_sprint_40.org
++++ b/doc/agile/release_notes_sprint_40.org
+@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 40.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2013-12-11 Wed 20:23]
++Clock summary at [2013-12-12 Thu 00:40]
+ 
+ | Headline                                                              | Time    |       |      |
+ |-----------------------------------------------------------------------+---------+-------+------|
+-| *Total time*                                                          | *14:56* |       |      |
++| *Total time*                                                          | *16:04* |       |      |
+ |-----------------------------------------------------------------------+---------+-------+------|
+-| Development Stories Implemented                                       |         | 14:56 |      |
++| Development Stories Implemented                                       |         | 16:04 |      |
+ | IMPLEMENTATION Release notes and backlog grooming                     |         |       | 0:32 |
+ | IMPLEMENTATION Update manual                                          |         |       | 0:19 |
+ | COMPLETED Add more tests to =concept_indexer=                         |         |       | 3:22 |
+ | COMPLETED Plug =concept_indexer= into workflow                        |         |       | 2:14 |
+-| IMPLEMENTATION Create a =property_indexer= and add tests              |         |       | 8:16 |
+ | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       | 0:13 |
++| IMPLEMENTATION Create a =property_indexer= and add tests              |         |       | 9:24 |
+ #+end:
+ 
+ *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+@@ -164,6 +164,7 @@ We could also consider implementing cloning, if this proves too hard.
+ We should have added them to local properties.
+ 
+ **** IMPLEMENTATION Replace C++ property handling code                 :task:
++     CLOCK: [2013-12-11 Wed 23:53]--[2013-12-12 Thu 00:40] =>  0:47
+      CLOCK: [2013-12-11 Wed 23:32]--[2013-12-11 Wed 23:53] =>  0:21
+      CLOCK: [2013-12-11 Wed 20:00]--[2013-12-11 Wed 20:12] =>  0:12
+      CLOCK: [2013-12-11 Wed 19:12]--[2013-12-11 Wed 19:20] =>  0:08
+diff --git a/projects/dia_to_sml/spec/transformer_spec.cpp b/projects/dia_to_sml/spec/transformer_spec.cpp
+index f2e6bdd..e288a1d 100644
+--- a/projects/dia_to_sml/spec/transformer_spec.cpp
++++ b/projects/dia_to_sml/spec/transformer_spec.cpp
+@@ -40,6 +40,7 @@
+ using namespace dogen::dia_to_sml;
+ using dogen::utility::test::asserter;
+ using dogen::dia_to_sml::test::mock_processed_object_factory;
++using dogen::sml::relationship_types;
+ 
+ namespace  {
+ 
+@@ -100,6 +101,41 @@ dogen::dia_to_sml::context mock_context() {
+     return r;
+ }
+ 
++bool has_no_parent(const dogen::sml::abstract_object& o) {
++    using dogen::sml::relationship_types;
++    const auto i(o.relationships().find(relationship_types::parents));
++    if (i == o.relationships().end() || i->second.empty())
++        return true;
++
++    return false;
++}
++
++bool has_relationship(const relationship_types rt,
++    const dogen::sml::abstract_object& o) {
++    const auto i(o.relationships().find(rt));
++    return i != o.relationships().end() && !i->second.empty();
++}
++
++bool has_one_parent(const dogen::sml::abstract_object& o) {
++    using dogen::sml::relationship_types;
++    const auto i(o.relationships().find(relationship_types::parents));
++    if (i == o.relationships().end() || i->second.empty() ||
++        i->second.size() > 1)
++        return false;
++
++    return true;
++}
++
++dogen::sml::qname get_parent_name(const dogen::sml::abstract_object& o) {
++    using dogen::sml::relationship_types;
++    const auto i(o.relationships().find(relationship_types::parents));
++    if (i == o.relationships().end() || i->second.empty() ||
++        i->second.size() > 1)
++        BOOST_FAIL("Object has got one parent");
++
++    return i->second.front();
++}
++
+ }
+ 
+ using dogen::utility::test::contains_checker;
+@@ -1203,11 +1239,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
+         const auto& qn(pair.first);
+         const auto& o(*pair.second);
+         if (is_type_one(qn)) {
+-            BOOST_CHECK(!o.parent_name());
+-            BOOST_CHECK(!o.original_parent_name());
++            BOOST_CHECK(!has_relationship(relationship_types::parents, o));
++            BOOST_CHECK(!has_relationship(relationship_types::original_parents,
++                    o));
+         } else if (is_type_two(qn)) {
+-            BOOST_REQUIRE(o.parent_name());
+-            BOOST_REQUIRE(is_type_one(*o.parent_name()));
++            BOOST_REQUIRE(has_one_parent(o));
++            BOOST_CHECK(is_type_one(get_parent_name(o)));
+         } else {
+             BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << qn;
+             BOOST_FAIL("Unexpected type name");
+diff --git a/projects/dia_to_sml/src/types/transformer.cpp b/projects/dia_to_sml/src/types/transformer.cpp
+index bc8ed67..4f740f8 100644
+--- a/projects/dia_to_sml/src/types/transformer.cpp
++++ b/projects/dia_to_sml/src/types/transformer.cpp
+@@ -264,7 +264,6 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
+         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
+                                  << ao.name().simple_name() << " as "
+                                  << j->second.simple_name();
+-        ao.parent_name(j->second);
+         ao.is_child(true);
+         using sml::relationship_types;
+         ao.relationships()[relationship_types::parents].push_back(j->second);
+@@ -277,54 +276,76 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
+     ao.is_parent(j != context_.parent_ids().end());
+     context_.id_to_qname().insert(std::make_pair(o.id(), ao.name()));
+ 
+-    if (!ao.parent_name()) {
++    if (!ao.is_child()) {
+         ao.is_inheritance_root(ao.is_parent());
+         context_.original_parent().insert(
+             std::make_pair(ao.name(), ao.name()));
+     } else {
+-        const auto k(context_.original_parent().find(*ao.parent_name()));
+-        if (k == context_.original_parent().end()) {
+-            BOOST_LOG_SEV(lg, error) << "Could not find the original parent of "
++        using sml::relationship_types;
++        const auto k(ao.relationships().find(relationship_types::parents));
++        if (k == ao.relationships().end() && k->second.empty()) {
++            BOOST_LOG_SEV(lg, error) << "Object is child but has no parents "
+                                      << ao.name().simple_name();
+ 
+             BOOST_THROW_EXCEPTION(
+-                transformation_error(original_parent_not_found +
++                transformation_error(parent_not_found +
+                     ao.name().simple_name()));
+         }
+-        ao.original_parent_name(k->second);
+-        context_.original_parent().insert(
+-            std::make_pair(ao.name(), k->second));
+-        using sml::relationship_types;
+-        ao.relationships()[relationship_types::original_parents].push_back(
+-            k->second);
++
++        for (const auto& parent_name : k->second) {
++            const auto j(context_.original_parent().find(parent_name));
++            if (j == context_.original_parent().end()) {
++                BOOST_LOG_SEV(lg, error)
++                    << "Could not find the original parent of "
++                    << ao.name().simple_name();
++
++                BOOST_THROW_EXCEPTION(
++                    transformation_error(original_parent_not_found +
++                        ao.name().simple_name()));
++            }
++            context_.original_parent().insert(
++                std::make_pair(ao.name(), j->second));
++            using sml::relationship_types;
++            ao.relationships()[relationship_types::original_parents].push_back(
++                j->second);
++        }
+     }
+ 
+     using sml::generation_types;
+     // FIXME: massive hack
+     const bool is_service(dynamic_cast<sml::service*>(&ao) != 0);
+-    if (!ao.is_parent() && ao.parent_name() && !is_service) {
+-        auto parent(ao.parent_name());
+-        while (parent) {
+-            auto k(context_.leaves().find(*parent));
+-            if (k == context_.leaves().end()) {
++    if (!ao.is_parent() && ao.is_child() && !is_service) {
++        using sml::relationship_types;
++        const auto k(ao.relationships().find(relationship_types::parents));
++        if (k == ao.relationships().end() && k->second.empty()) {
++            BOOST_LOG_SEV(lg, error) << "Object is child but has no parents "
++                                     << ao.name().simple_name();
++
++            BOOST_THROW_EXCEPTION(
++                transformation_error(parent_not_found +
++                    ao.name().simple_name()));
++        }
++
++        for (const auto& parent : k->second) {
++            auto j(context_.leaves().find(parent));
++            if (j == context_.leaves().end()) {
+                 const std::list<sml::qname> l { ao.name() };
+-                context_.leaves().insert(std::make_pair(*parent, l));
++                context_.leaves().insert(std::make_pair(parent, l));
+             } else
+-                k->second.push_back(ao.name());
++                j->second.push_back(ao.name());
+ 
+-            auto j(context_.model().objects().find(*parent));
+-            if (j == context_.model().objects().end()) {
++            auto m(context_.model().objects().find(parent));
++            if (m == context_.model().objects().end()) {
+                 BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
+-                                         << parent->simple_name();
++                                         << parent.simple_name();
+                 BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
+-                        parent->simple_name()));
++                        parent.simple_name()));
+             }
+-            parent = j->second->parent_name();
+         }
+     }
+ 
+     ao.is_immutable(p.is_immutable());
+-    if ((ao.is_parent() || ao.parent_name()) && p.is_immutable())  {
++    if ((ao.is_parent() || ao.is_child()) && p.is_immutable())  {
+         BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
+                                  << ao.name().simple_name();
+ 
+diff --git a/projects/sml/include/dogen/sml/types/abstract_entity.hpp b/projects/sml/include/dogen/sml/types/abstract_entity.hpp
+index 445a3d6..303b0bf 100644
+--- a/projects/sml/include/dogen/sml/types/abstract_entity.hpp
++++ b/projects/sml/include/dogen/sml/types/abstract_entity.hpp
+@@ -81,8 +81,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+diff --git a/projects/sml/include/dogen/sml/types/abstract_object.hpp b/projects/sml/include/dogen/sml/types/abstract_object.hpp
+index 5e2528f..4f330f5 100644
+--- a/projects/sml/include/dogen/sml/types/abstract_object.hpp
++++ b/projects/sml/include/dogen/sml/types/abstract_object.hpp
+@@ -26,7 +26,6 @@
+ #endif
+ 
+ #include <algorithm>
+-#include <boost/optional.hpp>
+ #include <boost/property_tree/ptree.hpp>
+ #include <iosfwd>
+ #include <list>
+@@ -52,6 +51,7 @@ namespace sml {
+ class abstract_object : public dogen::sml::type {
+ public:
+     abstract_object(const abstract_object&) = default;
++    abstract_object(abstract_object&&) = default;
+ 
+ public:
+     abstract_object();
+@@ -59,9 +59,6 @@ public:
+     virtual ~abstract_object() noexcept = 0;
+ 
+ public:
+-    abstract_object(abstract_object&& rhs);
+-
+-public:
+     abstract_object(
+         const dogen::sml::origin_types& origin_type,
+         const std::string& documentation,
+@@ -72,8 +69,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+@@ -147,26 +142,6 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief Qualified name for the object's parent, if it it has one.
+-     */
+-    /**@{*/
+-    const boost::optional<dogen::sml::qname>& parent_name() const;
+-    boost::optional<dogen::sml::qname>& parent_name();
+-    void parent_name(const boost::optional<dogen::sml::qname>& v);
+-    void parent_name(const boost::optional<dogen::sml::qname>&& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief Qualified name for the root of the inheritance hierarchy, if the object is part of one.
+-     */
+-    /**@{*/
+-    const boost::optional<dogen::sml::qname>& original_parent_name() const;
+-    boost::optional<dogen::sml::qname>& original_parent_name();
+-    void original_parent_name(const boost::optional<dogen::sml::qname>& v);
+-    void original_parent_name(const boost::optional<dogen::sml::qname>&& v);
+-    /**@}*/
+-
+-    /**
+      * @brief All concrete types which are indirectly or directly derived from this type.
+      */
+     /**@{*/
+@@ -271,8 +246,6 @@ private:
+     std::list<dogen::sml::property> local_properties_;
+     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
+     std::list<dogen::sml::operation> operations_;
+-    boost::optional<dogen::sml::qname> parent_name_;
+-    boost::optional<dogen::sml::qname> original_parent_name_;
+     std::list<dogen::sml::qname> leaves_;
+     bool is_parent_;
+     unsigned int number_of_type_arguments_;
+diff --git a/projects/sml/include/dogen/sml/types/entity.hpp b/projects/sml/include/dogen/sml/types/entity.hpp
+index bd32d09..0b662da 100644
+--- a/projects/sml/include/dogen/sml/types/entity.hpp
++++ b/projects/sml/include/dogen/sml/types/entity.hpp
+@@ -55,8 +55,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+diff --git a/projects/sml/include/dogen/sml/types/factory.hpp b/projects/sml/include/dogen/sml/types/factory.hpp
+index 22891a1..e1ffb08 100644
+--- a/projects/sml/include/dogen/sml/types/factory.hpp
++++ b/projects/sml/include/dogen/sml/types/factory.hpp
+@@ -55,8 +55,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+diff --git a/projects/sml/include/dogen/sml/types/keyed_entity.hpp b/projects/sml/include/dogen/sml/types/keyed_entity.hpp
+index 4271d1a..98c7fe4 100644
+--- a/projects/sml/include/dogen/sml/types/keyed_entity.hpp
++++ b/projects/sml/include/dogen/sml/types/keyed_entity.hpp
+@@ -66,8 +66,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+diff --git a/projects/sml/include/dogen/sml/types/repository.hpp b/projects/sml/include/dogen/sml/types/repository.hpp
+index 97776f9..5e7020a 100644
+--- a/projects/sml/include/dogen/sml/types/repository.hpp
++++ b/projects/sml/include/dogen/sml/types/repository.hpp
+@@ -60,8 +60,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+diff --git a/projects/sml/include/dogen/sml/types/service.hpp b/projects/sml/include/dogen/sml/types/service.hpp
+index a0420f1..7404cdb 100644
+--- a/projects/sml/include/dogen/sml/types/service.hpp
++++ b/projects/sml/include/dogen/sml/types/service.hpp
+@@ -62,8 +62,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+diff --git a/projects/sml/include/dogen/sml/types/value_object.hpp b/projects/sml/include/dogen/sml/types/value_object.hpp
+index 9202782..8ab3fcd 100644
+--- a/projects/sml/include/dogen/sml/types/value_object.hpp
++++ b/projects/sml/include/dogen/sml/types/value_object.hpp
+@@ -62,8 +62,6 @@ public:
+         const std::list<dogen::sml::property>& local_properties,
+         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+         const std::list<dogen::sml::operation>& operations,
+-        const boost::optional<dogen::sml::qname>& parent_name,
+-        const boost::optional<dogen::sml::qname>& original_parent_name,
+         const std::list<dogen::sml::qname>& leaves,
+         const bool is_parent,
+         const unsigned int number_of_type_arguments,
+diff --git a/projects/sml/spec/injector_spec.cpp b/projects/sml/spec/injector_spec.cpp
+index 5eff45c..8577fa2 100644
+--- a/projects/sml/spec/injector_spec.cpp
++++ b/projects/sml/spec/injector_spec.cpp
+@@ -38,6 +38,8 @@
+ #include "dogen/sml/test/mock_model_factory.hpp"
+ #include "dogen/sml/types/injector.hpp"
+ 
++using dogen::sml::relationship_types;
++
+ namespace {
+ 
+ using dogen::sml::test::mock_model_factory;
+@@ -50,6 +52,12 @@ const std::string version_name("version");
+ const std::string missing_identity("Identity must have at least");
+ const std::string no_leaves("Type marked as visitable but has no leaves");
+ 
++bool has_relationship(const relationship_types rt,
++    const dogen::sml::abstract_object& o) {
++    const auto i(o.relationships().find(rt));
++    return i != o.relationships().end() && !i->second.empty();
++}
++
+ }
+ 
+ using dogen::utility::test::contains_checker;
+@@ -299,10 +307,10 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
+             BOOST_CHECK(!s.is_versioned());
+             BOOST_CHECK(!s.is_visitable());
+             BOOST_CHECK(!s.is_immutable());
+-            BOOST_CHECK(!s.parent_name());
+-            BOOST_CHECK(!s.original_parent_name());
++            !has_relationship(relationship_types::parents, s);
++            !has_relationship(relationship_types::original_parents, s);
++            !has_relationship(relationship_types::modeled_concepts, s);
+             BOOST_CHECK(s.leaves().empty());
+-            // FIXMEL BOOST_CHECK(s.modeled_concepts().empty());
+             BOOST_CHECK(s.number_of_type_arguments() == 0);
+ 
+             BOOST_REQUIRE(s.operations().size() == 1);
+diff --git a/projects/sml/spec/resolver_spec.cpp b/projects/sml/spec/resolver_spec.cpp
+index 3dd7ce3..5ca7102 100644
+--- a/projects/sml/spec/resolver_spec.cpp
++++ b/projects/sml/spec/resolver_spec.cpp
+@@ -65,6 +65,26 @@ const std::string undefined_type("Object has property with undefined type");
+ const std::string missing_parent("Object's parent could not be located");
+ const std::string incorrect_meta_type("Object has incorrect meta_type");
+ 
++bool has_one_parent(const dogen::sml::abstract_object& o) {
++    using dogen::sml::relationship_types;
++    const auto i(o.relationships().find(relationship_types::parents));
++    if (i == o.relationships().end() || i->second.empty() ||
++        i->second.size() > 1)
++        return false;
++
++    return true;
++}
++
++dogen::sml::qname get_parent_name(const dogen::sml::abstract_object& o) {
++    using dogen::sml::relationship_types;
++    const auto i(o.relationships().find(relationship_types::parents));
++    if (i == o.relationships().end() || i->second.empty() ||
++        i->second.size() > 1)
++        BOOST_FAIL("Object has got one parent");
++
++    return i->second.front();
++}
++
+ }
+ 
+ using dogen::utility::test::contains_checker;
+@@ -179,11 +199,11 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
+             found = true;
+ 
+             const auto& o(*pair.second);
+-            const auto pn(o.parent_name());
+-            BOOST_REQUIRE(pn);
+-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
+-            BOOST_CHECK(factory.is_model_n(0, *pn));
++            BOOST_REQUIRE(has_one_parent(o));
++            const auto pn(get_parent_name(o));
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
++            BOOST_CHECK(factory.is_type_name_n(1, pn));
++            BOOST_CHECK(factory.is_model_n(0, pn));
+             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+         }
+     }
+@@ -211,11 +231,11 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
+             found = true;
+ 
+             const auto& o(*pair.second);
+-            const auto pn(o.parent_name());
+-            BOOST_REQUIRE(pn);
+-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
+-            BOOST_CHECK(factory.is_model_n(1, *pn));
++            BOOST_REQUIRE(has_one_parent(o));
++            const auto pn(get_parent_name(o));
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
++            BOOST_CHECK(factory.is_type_name_n(1, pn));
++            BOOST_CHECK(factory.is_model_n(1, pn));
+             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+         }
+     }
+@@ -244,22 +264,22 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
+             found_one = true;
+ 
+             const auto& o(*pair.second);
+-            const auto pn(o.parent_name());
+-            BOOST_REQUIRE(pn);
+-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
+-            BOOST_CHECK(factory.is_model_n(0, *pn));
++            BOOST_REQUIRE(has_one_parent(o));
++            const auto pn(get_parent_name(o));
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
++            BOOST_CHECK(factory.is_type_name_n(1, pn));
++            BOOST_CHECK(factory.is_model_n(0, pn));
+             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+         } else if (factory.is_type_name_n(1, qn)) {
+             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+             found_two = true;
+ 
+             const auto& o(*pair.second);
+-            const auto pn(o.parent_name());
+-            BOOST_REQUIRE(pn);
+-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+-            BOOST_CHECK(factory.is_type_name_n(2, *pn));
+-            BOOST_CHECK(factory.is_model_n(0, *pn));
++            BOOST_REQUIRE(has_one_parent(o));
++            const auto pn(get_parent_name(o));
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
++            BOOST_CHECK(factory.is_type_name_n(2, pn));
++            BOOST_CHECK(factory.is_model_n(0, pn));
+             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+         }
+     }
+@@ -304,11 +324,11 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
+             found = true;
+ 
+             const auto& o(*pair.second);
+-            const auto pn(o.parent_name());
+-            BOOST_REQUIRE(pn);
+-            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+-            BOOST_CHECK(factory.is_type_name_n(1, *pn));
+-            BOOST_CHECK(factory.is_model_n(1, *pn));
++            BOOST_REQUIRE(has_one_parent(o));
++            const auto pn(get_parent_name(o));
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
++            BOOST_CHECK(factory.is_type_name_n(1, pn));
++            BOOST_CHECK(factory.is_model_n(1, pn));
+             const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+         }
+     }
+diff --git a/projects/sml/src/hash/abstract_object_hash.cpp b/projects/sml/src/hash/abstract_object_hash.cpp
+index 4246dff..562b5fa 100644
+--- a/projects/sml/src/hash/abstract_object_hash.cpp
++++ b/projects/sml/src/hash/abstract_object_hash.cpp
+@@ -61,16 +61,6 @@ inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml:
+     return seed;
+ }
+ 
+-inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
+-    std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+-    combine(seed, *v);
+-    return seed;
+-}
+-
+ inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+@@ -102,8 +92,6 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
+     combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
+     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
+     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
+-    combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_name()));
+-    combine(seed, hash_boost_optional_dogen_sml_qname(v.original_parent_name()));
+     combine(seed, hash_std_list_dogen_sml_qname(v.leaves()));
+     combine(seed, v.is_parent());
+     combine(seed, v.number_of_type_arguments());
+diff --git a/projects/sml/src/serialization/abstract_object_ser.cpp b/projects/sml/src/serialization/abstract_object_ser.cpp
+index 602eafb..4b1991f 100644
+--- a/projects/sml/src/serialization/abstract_object_ser.cpp
++++ b/projects/sml/src/serialization/abstract_object_ser.cpp
+@@ -30,7 +30,6 @@
+ #include <boost/property_tree/ptree_serialization.hpp>
+ #include <boost/serialization/list.hpp>
+ #include <boost/serialization/nvp.hpp>
+-#include <boost/serialization/optional.hpp>
+ #include <boost/serialization/string.hpp>
+ #include "dogen/sml/serialization/abstract_object_ser.hpp"
+ #include "dogen/sml/serialization/entity_ser.hpp"
+@@ -70,8 +69,6 @@ void save(Archive& ar,
+     ar << make_nvp("local_properties", v.local_properties_);
+     ar << make_nvp("inherited_properties", v.inherited_properties_);
+     ar << make_nvp("operations", v.operations_);
+-    ar << make_nvp("parent_name", v.parent_name_);
+-    ar << make_nvp("original_parent_name", v.original_parent_name_);
+     ar << make_nvp("leaves", v.leaves_);
+     ar << make_nvp("is_parent", v.is_parent_);
+     ar << make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
+@@ -95,8 +92,6 @@ void load(Archive& ar,
+     ar >> make_nvp("local_properties", v.local_properties_);
+     ar >> make_nvp("inherited_properties", v.inherited_properties_);
+     ar >> make_nvp("operations", v.operations_);
+-    ar >> make_nvp("parent_name", v.parent_name_);
+-    ar >> make_nvp("original_parent_name", v.original_parent_name_);
+     ar >> make_nvp("leaves", v.leaves_);
+     ar >> make_nvp("is_parent", v.is_parent_);
+     ar >> make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
+diff --git a/projects/sml/src/test/mock_model_factory.cpp b/projects/sml/src/test/mock_model_factory.cpp
+index ab8abb2..f191837 100644
+--- a/projects/sml/src/test/mock_model_factory.cpp
++++ b/projects/sml/src/test/mock_model_factory.cpp
+@@ -808,8 +808,6 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
+ 
+     auto o1(build_value_object(1, r.name()));
+     parent_to_child(*o0, *o1);
+-    o1->original_parent_name(o0->name());
+-    o1->parent_name(o0->name());
+     o0->is_parent(true);
+     o0->leaves().push_back(o1->name());
+     insert_object(r, o1);
+@@ -841,8 +839,6 @@ build_object_with_parent_that_models_a_refined_concept(
+ 
+     auto o1(build_value_object(1, r.name()));
+     parent_to_child(*o0, *o1);
+-    o1->original_parent_name(o0->name());
+-    o1->parent_name(o0->name());
+     o0->is_parent(true);
+     o0->leaves().push_back(o1->name());
+     insert_object(r, o1);
+@@ -884,8 +880,6 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
+     auto o0(build_value_object(0, r.name()));
+     auto o1(build_value_object(1, r.name()));
+     parent_to_child(*o0, *o1);
+-    o1->original_parent_name(o0->name());
+-    o1->parent_name(o0->name());
+     o0->is_parent(true);
+     o0->leaves().push_back(o1->name());
+ 
+@@ -1044,8 +1038,6 @@ object_with_parent_in_the_same_model(const bool has_property) const {
+     insert_object(r, o0);
+     insert_object(r, o1);
+ 
+-    o0->parent_name(o1->name());
+-    o0->original_parent_name(o1->name());
+     o1->is_parent(true);
+     o1->leaves().push_back(o0->name());
+     return r;
+@@ -1055,8 +1047,6 @@ model mock_model_factory::object_with_missing_parent_in_the_same_model() const {
+     const auto mn(mock_model_qname(0));
+     auto o0(build_value_object(0, mn));
+     auto o1(build_value_object(1, mn));
+-    o0->parent_name(o1->name());
+-    o0->original_parent_name(o1->name());
+     o1->is_parent(true);
+     o1->leaves().push_back(o0->name());
+     parent_to_child(*o1, *o0);
+@@ -1072,8 +1062,6 @@ object_with_parent_in_different_models() const {
+     auto o1(build_value_object(1));
+     parent_to_child(*o1, *o0);
+ 
+-    o0->original_parent_name(o1->name());
+-    o0->parent_name(o1->name());
+     o1->is_parent(true);
+     o1->leaves().push_back(o0->name());
+ 
+@@ -1099,15 +1087,6 @@ model mock_model_factory::object_with_three_children_in_same_model() const {
+     parent_to_child(*o3, *o1);
+     parent_to_child(*o3, *o2);
+ 
+-    o0->parent_name(o3->name());
+-    o0->original_parent_name(o3->name());
+-
+-    o1->parent_name(o3->name());
+-    o1->original_parent_name(o3->name());
+-
+-    o2->parent_name(o3->name());
+-    o2->original_parent_name(o3->name());
+-
+     o3->is_parent(true);
+     o3->leaves().push_back(o0->name());
+     o3->leaves().push_back(o1->name());
+@@ -1154,16 +1133,9 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
+     parent_to_child(*o3, *o2, *o3, !add_leaf);
+     add_relationship(*o3, *o0, relationship_types::leaves);
+ 
+-    o0->parent_name(o1->name());
+-    o0->original_parent_name(o3->name());
+-
+-    o1->parent_name(o2->name());
+-    o1->original_parent_name(o3->name());
+     o1->is_parent(true);
+     o1->leaves().push_back(o0->name());
+ 
+-    o2->parent_name(o3->name());
+-    o2->original_parent_name(o3->name());
+     o2->is_parent(true);
+     o2->leaves().push_back(o0->name());
+ 
+@@ -1190,16 +1162,9 @@ model mock_model_factory::object_with_third_degree_parent_missing() const {
+     parent_to_child(*o3, *o2, *o3, !add_leaf);
+     add_relationship(*o3, *o0, relationship_types::leaves);
+ 
+-    o0->parent_name(o1->name());
+-    o0->original_parent_name(o3->name());
+-
+-    o1->parent_name(o2->name());
+-    o1->original_parent_name(o3->name());
+     o1->is_parent(true);
+     o1->leaves().push_back(o0->name());
+ 
+-    o2->parent_name(o3->name());
+-    o2->original_parent_name(o3->name());
+     o2->is_parent(true);
+     o2->leaves().push_back(o0->name());
+ 
+@@ -1226,16 +1191,9 @@ object_with_third_degree_parent_in_different_models() const {
+     parent_to_child(*o3, *o2, *o3, !add_leaf);
+     add_relationship(*o3, *o0, relationship_types::leaves);
+ 
+-    o0->parent_name(o1->name());
+-    o0->original_parent_name(o3->name());
+-
+-    o1->parent_name(o2->name());
+-    o1->original_parent_name(o3->name());
+     o1->is_parent(true);
+     o1->leaves().push_back(o0->name());
+ 
+-    o2->parent_name(o3->name());
+-    o2->original_parent_name(o3->name());
+     o2->is_parent(true);
+     o2->leaves().push_back(o0->name());
+ 
+@@ -1269,16 +1227,9 @@ object_with_missing_third_degree_parent_in_different_models() const {
+     parent_to_child(*o3, *o2, *o3, !add_leaf);
+     add_relationship(*o3, *o0, relationship_types::leaves);
+ 
+-    o0->parent_name(o1->name());
+-    o0->original_parent_name(o3->name());
+-
+-    o1->parent_name(o2->name());
+-    o1->original_parent_name(o3->name());
+     o1->is_parent(true);
+     o1->leaves().push_back(o0->name());
+ 
+-    o2->parent_name(o3->name());
+-    o2->original_parent_name(o3->name());
+     o2->is_parent(true);
+     o2->leaves().push_back(o0->name());
+ 
+diff --git a/projects/sml/src/test_data/abstract_object_td.cpp b/projects/sml/src/test_data/abstract_object_td.cpp
+index 77a2530..893653a 100644
+--- a/projects/sml/src/test_data/abstract_object_td.cpp
++++ b/projects/sml/src/test_data/abstract_object_td.cpp
+@@ -75,13 +75,6 @@ std::list<dogen::sml::operation> create_std_list_dogen_sml_operation(unsigned in
+     return r;
+ }
+ 
+-boost::optional<dogen::sml::qname>
+-create_boost_optional_dogen_sml_qname(unsigned int position) {
+-    boost::optional<dogen::sml::qname> r(
+-        create_dogen_sml_qname(position));
+-    return r;
+-}
+-
+ std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
+     std::list<dogen::sml::qname> r;
+     for (unsigned int i(0); i < 4; ++i) {
+@@ -124,19 +117,17 @@ populate(const unsigned int position, result_type& v) {
+     v.local_properties(create_std_list_dogen_sml_property(position + 1));
+     v.inherited_properties(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(position + 2));
+     v.operations(create_std_list_dogen_sml_operation(position + 3));
+-    v.parent_name(create_boost_optional_dogen_sml_qname(position + 4));
+-    v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 5));
+-    v.leaves(create_std_list_dogen_sml_qname(position + 6));
+-    v.is_parent(create_bool(position + 7));
+-    v.number_of_type_arguments(create_unsigned_int(position + 8));
+-    v.is_visitable(create_bool(position + 9));
+-    v.is_immutable(create_bool(position + 10));
+-    v.is_versioned(create_bool(position + 11));
+-    v.is_comparable(create_bool(position + 12));
+-    v.is_fluent(create_bool(position + 13));
+-    v.is_child(create_bool(position + 14));
+-    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 15));
+-    v.is_inheritance_root(create_bool(position + 16));
++    v.leaves(create_std_list_dogen_sml_qname(position + 4));
++    v.is_parent(create_bool(position + 5));
++    v.number_of_type_arguments(create_unsigned_int(position + 6));
++    v.is_visitable(create_bool(position + 7));
++    v.is_immutable(create_bool(position + 8));
++    v.is_versioned(create_bool(position + 9));
++    v.is_comparable(create_bool(position + 10));
++    v.is_fluent(create_bool(position + 11));
++    v.is_child(create_bool(position + 12));
++    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 13));
++    v.is_inheritance_root(create_bool(position + 14));
+ }
+ 
+ abstract_object_generator::result_type*
+diff --git a/projects/sml/src/types/abstract_entity.cpp b/projects/sml/src/types/abstract_entity.cpp
+index 387d2c4..92bc740 100644
+--- a/projects/sml/src/types/abstract_entity.cpp
++++ b/projects/sml/src/types/abstract_entity.cpp
+@@ -54,8 +54,6 @@ abstract_entity::abstract_entity(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -78,8 +76,6 @@ abstract_entity::abstract_entity(
+       local_properties,
+       inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+       leaves,
+       is_parent,
+       number_of_type_arguments,
+diff --git a/projects/sml/src/types/abstract_object.cpp b/projects/sml/src/types/abstract_object.cpp
+index e451b69..9b64ea1 100644
+--- a/projects/sml/src/types/abstract_object.cpp
++++ b/projects/sml/src/types/abstract_object.cpp
+@@ -78,21 +78,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::ope
+ 
+ }
+ 
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+-
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<empty>\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+ namespace std {
+ 
+ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
+@@ -139,27 +124,6 @@ abstract_object::abstract_object()
+       is_child_(static_cast<bool>(0)),
+       is_inheritance_root_(static_cast<bool>(0)) { }
+ 
+-abstract_object::abstract_object(abstract_object&& rhs)
+-    : dogen::sml::type(
+-        std::forward<dogen::sml::type>(rhs)),
+-      all_properties_(std::move(rhs.all_properties_)),
+-      local_properties_(std::move(rhs.local_properties_)),
+-      inherited_properties_(std::move(rhs.inherited_properties_)),
+-      operations_(std::move(rhs.operations_)),
+-      parent_name_(std::move(rhs.parent_name_)),
+-      original_parent_name_(std::move(rhs.original_parent_name_)),
+-      leaves_(std::move(rhs.leaves_)),
+-      is_parent_(std::move(rhs.is_parent_)),
+-      number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)),
+-      is_visitable_(std::move(rhs.is_visitable_)),
+-      is_immutable_(std::move(rhs.is_immutable_)),
+-      is_versioned_(std::move(rhs.is_versioned_)),
+-      is_comparable_(std::move(rhs.is_comparable_)),
+-      is_fluent_(std::move(rhs.is_fluent_)),
+-      is_child_(std::move(rhs.is_child_)),
+-      relationships_(std::move(rhs.relationships_)),
+-      is_inheritance_root_(std::move(rhs.is_inheritance_root_)) { }
+-
+ abstract_object::abstract_object(
+     const dogen::sml::origin_types& origin_type,
+     const std::string& documentation,
+@@ -170,8 +134,6 @@ abstract_object::abstract_object(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -192,8 +154,6 @@ abstract_object::abstract_object(
+       local_properties_(local_properties),
+       inherited_properties_(inherited_properties),
+       operations_(operations),
+-      parent_name_(parent_name),
+-      original_parent_name_(original_parent_name),
+       leaves_(leaves),
+       is_parent_(is_parent),
+       number_of_type_arguments_(number_of_type_arguments),
+@@ -222,8 +182,6 @@ void abstract_object::to_stream(std::ostream& s) const {
+       << "\"local_properties\": " << local_properties_ << ", "
+       << "\"inherited_properties\": " << inherited_properties_ << ", "
+       << "\"operations\": " << operations_ << ", "
+-      << "\"parent_name\": " << parent_name_ << ", "
+-      << "\"original_parent_name\": " << original_parent_name_ << ", "
+       << "\"leaves\": " << leaves_ << ", "
+       << "\"is_parent\": " << is_parent_ << ", "
+       << "\"number_of_type_arguments\": " << number_of_type_arguments_ << ", "
+@@ -246,8 +204,6 @@ void abstract_object::swap(abstract_object& other) noexcept {
+     swap(local_properties_, other.local_properties_);
+     swap(inherited_properties_, other.inherited_properties_);
+     swap(operations_, other.operations_);
+-    swap(parent_name_, other.parent_name_);
+-    swap(original_parent_name_, other.original_parent_name_);
+     swap(leaves_, other.leaves_);
+     swap(is_parent_, other.is_parent_);
+     swap(number_of_type_arguments_, other.number_of_type_arguments_);
+@@ -267,8 +223,6 @@ bool abstract_object::compare(const abstract_object& rhs) const {
+         local_properties_ == rhs.local_properties_ &&
+         inherited_properties_ == rhs.inherited_properties_ &&
+         operations_ == rhs.operations_ &&
+-        parent_name_ == rhs.parent_name_ &&
+-        original_parent_name_ == rhs.original_parent_name_ &&
+         leaves_ == rhs.leaves_ &&
+         is_parent_ == rhs.is_parent_ &&
+         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
+@@ -346,38 +300,6 @@ void abstract_object::operations(const std::list<dogen::sml::operation>&& v) {
+     operations_ = std::move(v);
+ }
+ 
+-const boost::optional<dogen::sml::qname>& abstract_object::parent_name() const {
+-    return parent_name_;
+-}
+-
+-boost::optional<dogen::sml::qname>& abstract_object::parent_name() {
+-    return parent_name_;
+-}
+-
+-void abstract_object::parent_name(const boost::optional<dogen::sml::qname>& v) {
+-    parent_name_ = v;
+-}
+-
+-void abstract_object::parent_name(const boost::optional<dogen::sml::qname>&& v) {
+-    parent_name_ = std::move(v);
+-}
+-
+-const boost::optional<dogen::sml::qname>& abstract_object::original_parent_name() const {
+-    return original_parent_name_;
+-}
+-
+-boost::optional<dogen::sml::qname>& abstract_object::original_parent_name() {
+-    return original_parent_name_;
+-}
+-
+-void abstract_object::original_parent_name(const boost::optional<dogen::sml::qname>& v) {
+-    original_parent_name_ = v;
+-}
+-
+-void abstract_object::original_parent_name(const boost::optional<dogen::sml::qname>&& v) {
+-    original_parent_name_ = std::move(v);
+-}
+-
+ const std::list<dogen::sml::qname>& abstract_object::leaves() const {
+     return leaves_;
+ }
+diff --git a/projects/sml/src/types/entity.cpp b/projects/sml/src/types/entity.cpp
+index 541db02..98a1e88 100644
+--- a/projects/sml/src/types/entity.cpp
++++ b/projects/sml/src/types/entity.cpp
+@@ -35,8 +35,6 @@ entity::entity(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -59,8 +57,6 @@ entity::entity(
+       local_properties,
+       inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+       leaves,
+       is_parent,
+       number_of_type_arguments,
+diff --git a/projects/sml/src/types/factory.cpp b/projects/sml/src/types/factory.cpp
+index fb5eb87..6a5491e 100644
+--- a/projects/sml/src/types/factory.cpp
++++ b/projects/sml/src/types/factory.cpp
+@@ -35,8 +35,6 @@ factory::factory(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -57,8 +55,6 @@ factory::factory(
+       local_properties,
+       inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+       leaves,
+       is_parent,
+       number_of_type_arguments,
+diff --git a/projects/sml/src/types/keyed_entity.cpp b/projects/sml/src/types/keyed_entity.cpp
+index ee048a3..dd5e893 100644
+--- a/projects/sml/src/types/keyed_entity.cpp
++++ b/projects/sml/src/types/keyed_entity.cpp
+@@ -57,8 +57,6 @@ keyed_entity::keyed_entity(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -83,8 +81,6 @@ keyed_entity::keyed_entity(
+       local_properties,
+       inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+       leaves,
+       is_parent,
+       number_of_type_arguments,
+diff --git a/projects/sml/src/types/meta_data_tagger.cpp b/projects/sml/src/types/meta_data_tagger.cpp
+index 286bd47..1c3a36b 100644
+--- a/projects/sml/src/types/meta_data_tagger.cpp
++++ b/projects/sml/src/types/meta_data_tagger.cpp
+@@ -41,6 +41,8 @@ namespace {
+ auto lg(logger_factory("sml.meta_data_tagger"));
+ const std::string original_parent_not_found(
+     "Failed to find original parent for type: ");
++const std::string too_many_original_parents(
++    "Type has too many original parents, expected one: ");
+ 
+ const std::string cpp_header_extension(".hpp");
+ const std::string cpp_implementation_extension(".cpp");
+@@ -592,8 +594,16 @@ void meta_data_tagger::tag(abstract_object& o) const {
+     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
+         tags::bool_false);
+ 
+-    if (o.original_parent_name()) {
+-        const auto opn(*o.original_parent_name());
++    const auto i(o.relationships().find(relationship_types::original_parents));
++    if (i != o.relationships().end() && !i->second.empty()) {
++        if (i->second.size() > 1) {
++            const auto sn(o.name().simple_name());
++            BOOST_LOG_SEV(lg, error) << too_many_original_parents << sn;
++            BOOST_THROW_EXCEPTION(meta_data_error(too_many_original_parents +
++                    sn));
++        }
++
++        const auto& opn(i->second.front());
+         writer.add_if_key_not_found(tags::original_parent_name,
+             opn.simple_name());
+ 
+diff --git a/projects/sml/src/types/repository.cpp b/projects/sml/src/types/repository.cpp
+index 45f1c4a..44a9806 100644
+--- a/projects/sml/src/types/repository.cpp
++++ b/projects/sml/src/types/repository.cpp
+@@ -35,8 +35,6 @@ repository::repository(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -57,8 +55,6 @@ repository::repository(
+       local_properties,
+       inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+       leaves,
+       is_parent,
+       number_of_type_arguments,
+diff --git a/projects/sml/src/types/resolver.cpp b/projects/sml/src/types/resolver.cpp
+index 896ff75..ec626db 100644
+--- a/projects/sml/src/types/resolver.cpp
++++ b/projects/sml/src/types/resolver.cpp
+@@ -64,11 +64,13 @@ namespace sml {
+ resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
+ 
+ void resolver::validate_inheritance_graph(const abstract_object& ao) const {
+-    auto parent(ao.parent_name());
+-    while (parent) {
+-        qname pqn(*parent);
+-        const auto i(model_.objects().find(pqn));
+-        if (i == model_.objects().end()) {
++    auto i(ao.relationships().find(relationship_types::parents));
++    if (i == ao.relationships().end())
++        return;
++
++    for (const auto& pqn : i->second) {
++        const auto j(model_.objects().find(pqn));
++        if (j == model_.objects().end()) {
+             std::ostringstream s;
+             s << orphan_object << ": " << ao.name().simple_name()
+               << ". parent: " << pqn.simple_name();
+@@ -76,7 +78,22 @@ void resolver::validate_inheritance_graph(const abstract_object& ao) const {
+             BOOST_LOG_SEV(lg, error) << s.str();
+             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
+         }
+-        parent = i->second->parent_name();
++    }
++
++    i = ao.relationships().find(relationship_types::original_parents);
++    if (i == ao.relationships().end())
++        return;
++
++    for (const auto& pqn : i->second) {
++        const auto j(model_.objects().find(pqn));
++        if (j == model_.objects().end()) {
++            std::ostringstream s;
++            s << orphan_object << ": " << ao.name().simple_name()
++              << ". original parent: " << pqn.simple_name();
++
++            BOOST_LOG_SEV(lg, error) << s.str();
++            BOOST_THROW_EXCEPTION(resolution_error(s.str()));
++        }
+     }
+ }
+ 
+diff --git a/projects/sml/src/types/service.cpp b/projects/sml/src/types/service.cpp
+index 15f9b03..065e71c 100644
+--- a/projects/sml/src/types/service.cpp
++++ b/projects/sml/src/types/service.cpp
+@@ -39,8 +39,6 @@ service::service(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -62,8 +60,6 @@ service::service(
+       local_properties,
+       inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+       leaves,
+       is_parent,
+       number_of_type_arguments,
+diff --git a/projects/sml/src/types/value_object.cpp b/projects/sml/src/types/value_object.cpp
+index c6d11cb..11cc170 100644
+--- a/projects/sml/src/types/value_object.cpp
++++ b/projects/sml/src/types/value_object.cpp
+@@ -39,8 +39,6 @@ value_object::value_object(
+     const std::list<dogen::sml::property>& local_properties,
+     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
+     const std::list<dogen::sml::operation>& operations,
+-    const boost::optional<dogen::sml::qname>& parent_name,
+-    const boost::optional<dogen::sml::qname>& original_parent_name,
+     const std::list<dogen::sml::qname>& leaves,
+     const bool is_parent,
+     const unsigned int number_of_type_arguments,
+@@ -62,8 +60,6 @@ value_object::value_object(
+       local_properties,
+       inherited_properties,
+       operations,
+-      parent_name,
+-      original_parent_name,
+       leaves,
+       is_parent,
+       number_of_type_arguments,
+diff --git a/projects/sml_to_cpp/src/types/extractor.cpp b/projects/sml_to_cpp/src/types/extractor.cpp
+index 7e80ab0..4dfb627 100644
+--- a/projects/sml_to_cpp/src/types/extractor.cpp
++++ b/projects/sml_to_cpp/src/types/extractor.cpp
+@@ -141,7 +141,7 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
+         r.names().insert(*ao.parent_name());
+ 
+     r.is_parent(ao.is_parent());
+-    r.is_child(ao.parent_name());
++    r.is_child(ao.is_child());
+     r.leaves().insert(ao.leaves().begin(), ao.leaves().end());
+ 
+     std::list<sml::property> props;
+diff --git a/test_data/dia_sml/expected/all_primitives.smlxml b/test_data/dia_sml/expected/all_primitives.smlxml
+index bd8c919..0facefb 100644
+--- a/test_data/dia_sml/expected/all_primitives.smlxml
++++ b/test_data/dia_sml/expected/all_primitives.smlxml
+@@ -515,13 +515,7 @@
+ 								<count>0</count>
+ 								<item_version>0</item_version>
+ 							</operations>
+-							<parent_name class_id="30" tracking_level="0" version="0">
+-								<initialized>0</initialized>
+-							</parent_name>
+-							<original_parent_name>
+-								<initialized>0</initialized>
+-							</original_parent_name>
+-							<leaves class_id="31" tracking_level="0" version="0">
++							<leaves class_id="30" tracking_level="0" version="0">
+ 								<count>0</count>
+ 								<item_version>0</item_version>
+ 							</leaves>
+@@ -533,7 +527,7 @@
+ 							<is_comparable>0</is_comparable>
+ 							<is_fluent>0</is_fluent>
+ 							<is_child>0</is_child>
+-							<relationships class_id="32" tracking_level="0" version="0">
++							<relationships class_id="31" tracking_level="0" version="0">
+ 								<count>0</count>
+ 								<bucket_count>11</bucket_count>
+ 								<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/boost_model.smlxml b/test_data/dia_sml/expected/boost_model.smlxml
+index 0409465..9469fe3 100644
+--- a/test_data/dia_sml/expected/boost_model.smlxml
++++ b/test_data/dia_sml/expected/boost_model.smlxml
+@@ -602,12 +602,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="33" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -620,7 +614,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="34" tracking_level="0" version="0">
++						<relationships class_id="33" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -717,12 +711,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1050,12 +1038,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1166,12 +1148,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1281,12 +1257,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>1</count>
+ 							<item_version>0</item_version>
+@@ -1408,38 +1378,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>boost_model</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>class_base</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>boost_model</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>class_base</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1456,7 +1394,7 @@
+ 							<count>2</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+-							<item class_id="35" tracking_level="0" version="0">
++							<item class_id="34" tracking_level="0" version="0">
+ 								<first>1</first>
+ 								<second>
+ 									<count>1</count>
+@@ -1776,12 +1714,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1943,12 +1875,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2127,12 +2053,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2294,12 +2214,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2642,12 +2556,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/class_in_a_package.smlxml b/test_data/dia_sml/expected/class_in_a_package.smlxml
+index a5fd575..ca04aaa 100644
+--- a/test_data/dia_sml/expected/class_in_a_package.smlxml
++++ b/test_data/dia_sml/expected/class_in_a_package.smlxml
+@@ -216,12 +216,6 @@
+ 								<count>0</count>
+ 								<item_version>0</item_version>
+ 							</operations>
+-							<parent_name class_id="33" tracking_level="0" version="0">
+-								<initialized>0</initialized>
+-							</parent_name>
+-							<original_parent_name>
+-								<initialized>0</initialized>
+-							</original_parent_name>
+ 							<leaves>
+ 								<count>0</count>
+ 								<item_version>0</item_version>
+@@ -234,7 +228,7 @@
+ 							<is_comparable>0</is_comparable>
+ 							<is_fluent>0</is_fluent>
+ 							<is_child>0</is_child>
+-							<relationships class_id="34" tracking_level="0" version="0">
++							<relationships class_id="33" tracking_level="0" version="0">
+ 								<count>0</count>
+ 								<bucket_count>11</bucket_count>
+ 								<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/class_without_attributes.smlxml b/test_data/dia_sml/expected/class_without_attributes.smlxml
+index ca36f83..ae65f47 100644
+--- a/test_data/dia_sml/expected/class_without_attributes.smlxml
++++ b/test_data/dia_sml/expected/class_without_attributes.smlxml
+@@ -153,12 +153,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="29" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -171,7 +165,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="30" tracking_level="0" version="0">
++						<relationships class_id="29" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/class_without_package.smlxml b/test_data/dia_sml/expected/class_without_package.smlxml
+index eda595d..fbdce1b 100644
+--- a/test_data/dia_sml/expected/class_without_package.smlxml
++++ b/test_data/dia_sml/expected/class_without_package.smlxml
+@@ -142,13 +142,7 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="29" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+-						<leaves class_id="30" tracking_level="0" version="0">
++						<leaves class_id="29" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</leaves>
+@@ -160,7 +154,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="31" tracking_level="0" version="0">
++						<relationships class_id="30" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/classes_inout_package.smlxml b/test_data/dia_sml/expected/classes_inout_package.smlxml
+index f4ae423..8d83e28 100644
+--- a/test_data/dia_sml/expected/classes_inout_package.smlxml
++++ b/test_data/dia_sml/expected/classes_inout_package.smlxml
+@@ -182,12 +182,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="32" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -200,7 +194,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="33" tracking_level="0" version="0">
++						<relationships class_id="32" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -299,12 +293,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/classes_without_package.smlxml b/test_data/dia_sml/expected/classes_without_package.smlxml
+index 42fdc86..d660c0c 100644
+--- a/test_data/dia_sml/expected/classes_without_package.smlxml
++++ b/test_data/dia_sml/expected/classes_without_package.smlxml
+@@ -142,13 +142,7 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="29" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+-						<leaves class_id="30" tracking_level="0" version="0">
++						<leaves class_id="29" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</leaves>
+@@ -160,7 +154,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="31" tracking_level="0" version="0">
++						<relationships class_id="30" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -257,12 +251,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -372,12 +360,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -487,12 +469,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -602,12 +578,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/comments.smlxml b/test_data/dia_sml/expected/comments.smlxml
+index e4decfa..5cb91f8 100644
+--- a/test_data/dia_sml/expected/comments.smlxml
++++ b/test_data/dia_sml/expected/comments.smlxml
+@@ -234,12 +234,6 @@ third line with &quot;quote&quot;
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="30" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -252,7 +246,7 @@ third line with &quot;quote&quot;
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="31" tracking_level="0" version="0">
++						<relationships class_id="30" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -309,7 +303,7 @@ third line with &quot;quote&quot;
+ 						<local_properties>
+ 							<count>3</count>
+ 							<item_version>0</item_version>
+-							<item class_id="32" tracking_level="0" version="0">
++							<item class_id="31" tracking_level="0" version="0">
+ 								<documentation>another brief comment
+ </documentation>
+ 								<meta_data>
+@@ -318,7 +312,7 @@ third line with &quot;quote&quot;
+ 									<data></data>
+ 								</meta_data>
+ 								<name>prop_0</name>
+-								<type class_id="33" tracking_level="0" version="0">
++								<type class_id="32" tracking_level="0" version="0">
+ 									<type>
+ 										<model_name></model_name>
+ 										<external_module_path>
+@@ -331,7 +325,7 @@ third line with &quot;quote&quot;
+ 										</module_path>
+ 										<simple_name>int</simple_name>
+ 									</type>
+-									<children class_id="34" tracking_level="0" version="0">
++									<children class_id="33" tracking_level="0" version="0">
+ 										<count>0</count>
+ 										<item_version>0</item_version>
+ 									</children>
+@@ -416,12 +410,6 @@ a second line
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/enumeration.smlxml b/test_data/dia_sml/expected/enumeration.smlxml
+index a0e3d26..a9d6591 100644
+--- a/test_data/dia_sml/expected/enumeration.smlxml
++++ b/test_data/dia_sml/expected/enumeration.smlxml
+@@ -488,12 +488,6 @@ this is a long comment
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="35" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -506,7 +500,7 @@ this is a long comment
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="36" tracking_level="0" version="0">
++						<relationships class_id="35" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/exception.smlxml b/test_data/dia_sml/expected/exception.smlxml
+index 2c81b3d..2edf53d 100644
+--- a/test_data/dia_sml/expected/exception.smlxml
++++ b/test_data/dia_sml/expected/exception.smlxml
+@@ -182,12 +182,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="32" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -200,7 +194,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="33" tracking_level="0" version="0">
++						<relationships class_id="32" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -268,12 +262,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -353,12 +341,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/std_model.smlxml b/test_data/dia_sml/expected/std_model.smlxml
+index 093c749..9dfb7a1 100644
+--- a/test_data/dia_sml/expected/std_model.smlxml
++++ b/test_data/dia_sml/expected/std_model.smlxml
+@@ -359,12 +359,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="33" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -377,7 +371,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="34" tracking_level="0" version="0">
++						<relationships class_id="33" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -691,12 +685,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1095,12 +1083,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1495,12 +1477,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1629,12 +1605,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>1</count>
+ 							<item_version>0</item_version>
+@@ -1685,7 +1655,7 @@
+ 			</first>
+ 			<second>
+ 				<px class_id="3" tracking_level="1" version="0" object_id="_5">
+-					<abstract_entity class_id="35" tracking_level="0" version="0">
++					<abstract_entity class_id="34" tracking_level="0" version="0">
+ 						<abstract_object>
+ 							<type>
+ 								<origin_type>1</origin_type>
+@@ -1721,7 +1691,7 @@
+ 									<meta_data>
+ 										<count>1</count>
+ 										<item_version>0</item_version>
+-										<item class_id="36" tracking_level="0" version="0">
++										<item class_id="35" tracking_level="0" version="0">
+ 											<first>IDENTITY_ATTRIBUTE</first>
+ 											<second>
+ 												<count>0</count>
+@@ -1797,12 +1767,6 @@
+ 								<count>0</count>
+ 								<item_version>0</item_version>
+ 							</operations>
+-							<parent_name>
+-								<initialized>0</initialized>
+-							</parent_name>
+-							<original_parent_name>
+-								<initialized>0</initialized>
+-							</original_parent_name>
+ 							<leaves>
+ 								<count>0</count>
+ 								<item_version>0</item_version>
+@@ -1879,7 +1843,7 @@
+ 						</module_path>
+ 						<simple_name></simple_name>
+ 					</unversioned_key>
+-					<versioned_key>
++					<versioned_key class_id="36" tracking_level="0" version="0">
+ 						<initialized>0</initialized>
+ 					</versioned_key>
+ 				</px>
+@@ -2123,12 +2087,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2415,12 +2373,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2725,12 +2677,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -3129,12 +3075,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -3314,12 +3254,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -3718,12 +3652,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -3853,38 +3781,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>std_model</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>base</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>std_model</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>base</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/trivial_inheritance.smlxml b/test_data/dia_sml/expected/trivial_inheritance.smlxml
+index ae93222..6ed9ce3 100644
+--- a/test_data/dia_sml/expected/trivial_inheritance.smlxml
++++ b/test_data/dia_sml/expected/trivial_inheritance.smlxml
+@@ -192,7 +192,7 @@ in the context of inheritance.
+ 				<count>0</count>
+ 				<item_version>0</item_version>
+ 			</module_path>
+-			<simple_name>descendant3</simple_name>
++			<simple_name>child_with_members</simple_name>
+ 		</item>
+ 		<item>
+ 			<model_name>trivial_inheritance</model_name>
+@@ -204,7 +204,7 @@ in the context of inheritance.
+ 				<count>0</count>
+ 				<item_version>0</item_version>
+ 			</module_path>
+-			<simple_name>child_with_members</simple_name>
++			<simple_name>descendant3</simple_name>
+ 		</item>
+ 	</leaves>
+ 	<modules class_id="16" tracking_level="0" version="0">
+@@ -479,12 +479,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="34" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>1</count>
+ 							<item_version>0</item_version>
+@@ -510,7 +504,7 @@ in the context of inheritance.
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="35" tracking_level="0" version="0">
++						<relationships class_id="34" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -577,38 +571,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>move_ctor_base</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>move_ctor_base</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -625,7 +587,7 @@ in the context of inheritance.
+ 							<count>2</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+-							<item class_id="36" tracking_level="0" version="0">
++							<item class_id="35" tracking_level="0" version="0">
+ 								<first>1</first>
+ 								<second>
+ 									<count>1</count>
+@@ -758,38 +720,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_outside</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_outside</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -937,38 +867,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_with_members</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_with_members</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>2</count>
+ 							<item_version>0</item_version>
+@@ -1140,38 +1038,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_without_members</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_without_members</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1321,12 +1187,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>1</count>
+ 							<item_version>0</item_version>
+@@ -1418,38 +1278,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_with_members</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_with_members</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1566,38 +1394,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_without_members</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_without_members</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1745,38 +1541,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>third_child_with_members</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_with_members</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -1926,40 +1690,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>1</count>
+-									<item_version>0</item_version>
+-									<item>pkg1</item>
+-								</module_path>
+-								<simple_name>parent</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>1</count>
+-									<item_version>0</item_version>
+-									<item>pkg1</item>
+-								</module_path>
+-								<simple_name>parent</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2109,14 +1839,8 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+-							<count>3</count>
++							<count>1</count>
+ 							<item_version>0</item_version>
+ 							<item>
+ 								<model_name>trivial_inheritance</model_name>
+@@ -2130,30 +1854,6 @@ in the context of inheritance.
+ 								</module_path>
+ 								<simple_name>second_child_without_members</simple_name>
+ 							</item>
+-							<item>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>child_of_a_child1</simple_name>
+-							</item>
+-							<item>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>child_of_a_child2</simple_name>
+-							</item>
+ 						</leaves>
+ 						<is_parent>1</is_parent>
+ 						<number_of_type_arguments>0</number_of_type_arguments>
+@@ -2229,38 +1929,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>third_child_with_members</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>parent_with_members</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2408,38 +2076,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>base</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>base</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2590,38 +2226,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>move_ctor_base</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>move_ctor_base</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2769,12 +2373,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>1</count>
+ 							<item_version>0</item_version>
+@@ -2866,12 +2464,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -2950,12 +2542,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -3034,14 +2620,8 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+-							<count>2</count>
++							<count>1</count>
+ 							<item_version>0</item_version>
+ 							<item>
+ 								<model_name>trivial_inheritance</model_name>
+@@ -3055,18 +2635,6 @@ in the context of inheritance.
+ 								</module_path>
+ 								<simple_name>descendant2</simple_name>
+ 							</item>
+-							<item>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>descendant3</simple_name>
+-							</item>
+ 						</leaves>
+ 						<is_parent>1</is_parent>
+ 						<number_of_type_arguments>0</number_of_type_arguments>
+@@ -3142,12 +2710,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>2</count>
+ 							<item_version>0</item_version>
+@@ -3250,38 +2812,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>base</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>base</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>1</count>
+ 							<item_version>0</item_version>
+@@ -3441,38 +2971,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>descendant1</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</module_path>
+-								<simple_name>base</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -3622,40 +3120,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>1</count>
+-									<item_version>0</item_version>
+-									<item>pkg2</item>
+-								</module_path>
+-								<simple_name>parent</simple_name>
+-							</value>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>1</initialized>
+-							<item_version>0</item_version>
+-							<value>
+-								<model_name>trivial_inheritance</model_name>
+-								<external_module_path>
+-									<count>0</count>
+-									<item_version>0</item_version>
+-								</external_module_path>
+-								<module_path>
+-									<count>1</count>
+-									<item_version>0</item_version>
+-									<item>pkg2</item>
+-								</module_path>
+-								<simple_name>parent</simple_name>
+-							</value>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -3808,12 +3272,6 @@ in the context of inheritance.
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>2</count>
+ 							<item_version>0</item_version>
+diff --git a/test_data/dia_sml/expected/two_layers_with_objects.smlxml b/test_data/dia_sml/expected/two_layers_with_objects.smlxml
+index 3aec03e..52b2ec4 100644
+--- a/test_data/dia_sml/expected/two_layers_with_objects.smlxml
++++ b/test_data/dia_sml/expected/two_layers_with_objects.smlxml
+@@ -224,12 +224,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name class_id="32" tracking_level="0" version="0">
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+@@ -242,7 +236,7 @@
+ 						<is_comparable>0</is_comparable>
+ 						<is_fluent>0</is_fluent>
+ 						<is_child>0</is_child>
+-						<relationships class_id="33" tracking_level="0" version="0">
++						<relationships class_id="32" tracking_level="0" version="0">
+ 							<count>0</count>
+ 							<bucket_count>11</bucket_count>
+ 							<item_version>0</item_version>
+@@ -341,12 +335,6 @@
+ 							<count>0</count>
+ 							<item_version>0</item_version>
+ 						</operations>
+-						<parent_name>
+-							<initialized>0</initialized>
+-						</parent_name>
+-						<original_parent_name>
+-							<initialized>0</initialized>
+-						</original_parent_name>
+ 						<leaves>
+ 							<count>0</count>
+ 							<item_version>0</item_version>
