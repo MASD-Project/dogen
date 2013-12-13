@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-13 Fri 00:01]
+Clock summary at [2013-12-13 Fri 00:17]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *19:23* |       |       |
+| *Total time*                                                          | *19:40* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 19:23 |       |
+| Development Stories Implemented                                       |         | 19:40 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:32 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
 | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
-| IMPLEMENTATION Create a =property_indexer= and add tests              |         |       | 12:43 |
+| COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:00 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -119,7 +119,8 @@ figure out how to generate "expected".
 
 We could also consider implementing cloning, if this proves too hard.
 
-*** IMPLEMENTATION Create a =property_indexer= and add tests          :story:
+*** COMPLETED Create a =property_indexer= and add tests               :story:
+    CLOSED: [2013-12-13 Fri 00:17]
 **** COMPLETED Implement indexing of properties
      CLOSED: [2013-12-07 Sat 20:09]
      CLOCK: [2013-12-07 Sat 19:03]--[2013-12-07 Sat 20:09] =>  1:06
@@ -180,7 +181,10 @@ We should have added them to local properties.
      CLOCK: [2013-12-11 Wed 19:12]--[2013-12-11 Wed 19:20] =>  0:08
      CLOCK: [2013-12-11 Wed 18:41]--[2013-12-11 Wed 18:52] =>  0:11
 
-**** Refactor =properties_for_concept= in extractor                   :spike:
+**** COMPLETED Refactor =properties_for_concept= in extractor         :spike:
+     CLOSED: [2013-12-13 Fri 00:17]
+     CLOCK: [2013-12-13 Fri 00:00]--[2013-12-13 Fri 00:17] =>  0:17
+
 *** Create a =relationship_indexer= and add tests                     :story:
 **** Implement indexing of associations, keys and visitor              :task:
 **** Add unit tests                                                    :task:
