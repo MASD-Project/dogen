@@ -10,22 +10,23 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-13 Fri 07:25]
+Clock summary at [2013-12-13 Fri 08:40]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *19:52* |       |       |
+| *Total time*                                                          | *20:34* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 19:52 |       |
-| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:44 |
+| Development Stories Implemented                                       |         | 20:34 |       |
+| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:55 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
 | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
-| COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:00 |
+| COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:31 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-13 Fri 08:38]--[2013-12-13 Fri 08:40] =>  0:02
     CLOCK: [2013-12-13 Fri 07:58]--[2013-12-13 Fri 08:07] =>  0:09
     CLOCK: [2013-12-13 Fri 07:13]--[2013-12-13 Fri 07:25] =>  0:12
     CLOCK: [2013-12-11 Wed 07:53]--[2013-12-11 Wed 08:06] =>  0:13
@@ -186,6 +187,10 @@ We should have added them to local properties.
 **** COMPLETED Refactor =properties_for_concept= in extractor         :spike:
      CLOSED: [2013-12-13 Fri 00:17]
      CLOCK: [2013-12-13 Fri 00:00]--[2013-12-13 Fri 00:17] =>  0:17
+
+**** COMPLETED Document the property indexer                           :task:
+     CLOSED: [2013-12-13 Fri 08:38]
+     CLOCK: [2013-12-13 Fri 08:07]--[2013-12-13 Fri 08:38] =>  0:31
 
 *** COMPLETED Implement the property cache in SML                     :story:
     CLOSED: [2013-12-13 Fri 07:17]
