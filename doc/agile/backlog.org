@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add include file support to main type formatter                   :story:
+
+Inclusion support needs to be moved to the formatters. SML provides
+all the required information at the model level in terms of type
+dependencies, but only the formatter itself knows what includes it
+needs because these are related to the implementation. Even
+determining which facets of a type one should include is formatter
+dependent. We need to distribute the logic of the includer into each
+formatter.
+
 *** Consider using a graph in SML for indexing                        :story:
 
 To keep things simple we created a number of specialised indexers,

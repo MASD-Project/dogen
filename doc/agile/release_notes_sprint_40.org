@@ -26,6 +26,7 @@ Clock summary at [2013-12-13 Fri 07:25]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-13 Fri 07:58]--[2013-12-13 Fri 08:07] =>  0:09
     CLOCK: [2013-12-13 Fri 07:13]--[2013-12-13 Fri 07:25] =>  0:12
     CLOCK: [2013-12-11 Wed 07:53]--[2013-12-11 Wed 08:06] =>  0:13
     CLOCK: [2013-12-11 Wed 07:19]--[2013-12-11 Wed 07:26] =>  0:07
@@ -201,26 +202,12 @@ that the parent exists since we know all objects get checked
 anyway. this results in a lot of double-checks for no reason.
 
 *** Create a =relationship_indexer= and add tests                     :story:
-**** Implement indexing of associations, keys and visitor              :task:
-**** Add unit tests                                                    :task:
-
+**** Create the class skeleton with tests                              :task:
 **** Plug into workflow                                                :task:
-**** Replace original parent/parent functionality with relationships   :task:
-
-- delete leaves, original parent, parent attributes and use
-  relationships instead.
-
-**** Replace association, keys and visitor with relationships          :task:
-*** Add include file support to main type formatter                   :story:
-
-Inclusion support needs to be moved to the formatters. SML provides
-all the required information at the model level in terms of type
-dependencies, but only the formatter itself knows what includes it
-needs because these are related to the implementation. Even
-determining which facets of a type one should include is formatter
-dependent. We need to distribute the logic of the includer into each
-formatter.
-
+**** Add indexing of associations                                      :task:
+**** Add indexing of leaves                                            :task:
+**** Add indexing of keys                                              :task:
+**** Add indexing of  and visitor                                      :task:
 ** Deprecated Development Stories
 *** CANCELLED Add content to the introduction in manual               :story:
     CLOSED: [2013-12-13 Fri 07:22]
