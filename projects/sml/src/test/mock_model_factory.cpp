@@ -261,7 +261,8 @@ void add_relationship(dogen::sml::abstract_object& target,
 
 const bool add_leaf(true);
 
-void parent_to_child(dogen::sml::abstract_object& parent,
+void parent_to_child(const bool properties_indexed,
+    dogen::sml::abstract_object& parent,
     dogen::sml::abstract_object& child,
     dogen::sml::abstract_object& original_parent,
     const bool add_leaf_relationship = true) {
@@ -276,12 +277,22 @@ void parent_to_child(dogen::sml::abstract_object& parent,
 
     parent.is_parent(true);
     child.is_child(true);
+
+    if (properties_indexed && !parent.all_properties().empty()) {
+        child.inherited_properties().insert(std::make_pair(
+                parent.name(), parent.all_properties()));
+
+        child.all_properties().insert(child.all_properties().end(),
+            parent.all_properties().begin(), parent.all_properties().end());
+    }
 }
 
-void parent_to_child(dogen::sml::abstract_object& parent,
+void parent_to_child(const bool properties_indexed,
+    dogen::sml::abstract_object& parent,
     dogen::sml::abstract_object& child,
     const bool add_leaf_relationship = true) {
-    parent_to_child(parent, child, parent, add_leaf_relationship);
+    parent_to_child(properties_indexed, parent, child, parent,
+        add_leaf_relationship);
 }
 
 template<typename Nameable>
@@ -807,7 +818,7 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
-    parent_to_child(*o0, *o1);
+    parent_to_child(flags_.properties_indexed(), *o0, *o1);
     o0->is_parent(true);
     o0->leaves().push_back(o1->name());
     insert_object(r, o1);
@@ -838,7 +849,7 @@ build_object_with_parent_that_models_a_refined_concept(
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
-    parent_to_child(*o0, *o1);
+    parent_to_child(flags_.properties_indexed(), *o0, *o1);
     o0->is_parent(true);
     o0->leaves().push_back(o1->name());
     insert_object(r, o1);
@@ -879,7 +890,7 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
 
     auto o0(build_value_object(0, r.name()));
     auto o1(build_value_object(1, r.name()));
-    parent_to_child(*o0, *o1);
+    parent_to_child(flags_.properties_indexed(), *o0, *o1);
     o0->is_parent(true);
     o0->leaves().push_back(o1->name());
 
@@ -1034,7 +1045,7 @@ object_with_parent_in_the_same_model(const bool has_property) const {
     if (has_property)
         add_property(*o1, flags_.properties_indexed(), 1);
 
-    parent_to_child(*o1, *o0);
+    parent_to_child(flags_.properties_indexed(), *o1, *o0);
     insert_object(r, o0);
     insert_object(r, o1);
 
@@ -1049,7 +1060,7 @@ model mock_model_factory::object_with_missing_parent_in_the_same_model() const {
     auto o1(build_value_object(1, mn));
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
-    parent_to_child(*o1, *o0);
+    parent_to_child(flags_.properties_indexed(), *o1, *o0);
     model r(build_empty_model(0));
     insert_object(r, o1);
 
@@ -1060,7 +1071,7 @@ std::array<model, 2> mock_model_factory::
 object_with_parent_in_different_models() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
-    parent_to_child(*o1, *o0);
+    parent_to_child(flags_.properties_indexed(), *o1, *o0);
 
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
@@ -1083,9 +1094,9 @@ model mock_model_factory::object_with_three_children_in_same_model() const {
     auto o2(build_value_object(2, mn));
     auto o3(build_value_object(3, mn));
 
-    parent_to_child(*o3, *o0);
-    parent_to_child(*o3, *o1);
-    parent_to_child(*o3, *o2);
+    parent_to_child(flags_.properties_indexed(), *o3, *o0);
+    parent_to_child(flags_.properties_indexed(), *o3, *o1);
+    parent_to_child(flags_.properties_indexed(), *o3, *o2);
 
     o3->is_parent(true);
     o3->leaves().push_back(o0->name());
@@ -1107,6 +1118,20 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
 
     model r(build_empty_model(0));
 
+    auto o3(build_value_object(3, mn));
+    if (has_property)
+        add_property(*o3, flags_.properties_indexed(), 3);
+
+    auto o2(build_value_object(2, mn));
+    if (has_property)
+        add_property(*o2, flags_.properties_indexed(), 2);
+    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
+
+    auto o1(build_value_object(1, mn));
+    if (has_property)
+        add_property(*o1, flags_.properties_indexed(), 1);
+    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
+
     auto o0(build_value_object(0, mn));
     if (has_property) {
         add_property(*o0, flags_.properties_indexed());
@@ -1115,22 +1140,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
-
-    auto o1(build_value_object(1, mn));
-    if (has_property)
-        add_property(*o1, flags_.properties_indexed(), 1);
-
-    auto o2(build_value_object(2, mn));
-    if (has_property)
-        add_property(*o2, flags_.properties_indexed(), 2);
-
-    auto o3(build_value_object(3, mn));
-    if (has_property)
-        add_property(*o3, flags_.properties_indexed(), 3);
-
-    parent_to_child(*o1, *o0, *o3, !add_leaf);
-    parent_to_child(*o2, *o1, *o3, !add_leaf);
-    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
     o1->is_parent(true);
@@ -1157,9 +1167,9 @@ model mock_model_factory::object_with_third_degree_parent_missing() const {
     auto o2(build_value_object(2, mn));
     auto o3(build_value_object(3, mn));
 
-    parent_to_child(*o1, *o0, *o3, !add_leaf);
-    parent_to_child(*o2, *o1, *o3, !add_leaf);
-    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
     o1->is_parent(true);
@@ -1186,9 +1196,9 @@ object_with_third_degree_parent_in_different_models() const {
     auto o2(build_value_object(2));
     auto o3(build_value_object(3));
 
-    parent_to_child(*o1, *o0, *o3, !add_leaf);
-    parent_to_child(*o2, *o1, *o3, !add_leaf);
-    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
     o1->is_parent(true);
@@ -1222,9 +1232,9 @@ object_with_missing_third_degree_parent_in_different_models() const {
     auto o2(build_value_object(2));
     auto o3(build_value_object(3));
 
-    parent_to_child(*o1, *o0, *o3, !add_leaf);
-    parent_to_child(*o2, *o1, *o3, !add_leaf);
-    parent_to_child(*o3, *o2, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
     o1->is_parent(true);

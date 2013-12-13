@@ -35,10 +35,11 @@ using dogen::sml::test::mock_model_factory;
 namespace {
 
 const std::string empty;
-const std::string test_module("cpp");
+const std::string test_module("sml_to_cpp");
 const std::string test_suite("transformer_spec");
 
-const mock_model_factory::flags flags;
+const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
+    false/*merged*/, true/*concepts_indexed*/, true/*properties_indexed*/);
 const mock_model_factory factory(flags);
 
 const std::string external_module("ext_module");

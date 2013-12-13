@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-12 Thu 23:21]
+Clock summary at [2013-12-13 Fri 00:01]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *18:47* |       |       |
+| *Total time*                                                          | *19:23* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 18:47 |       |
+| Development Stories Implemented                                       |         | 19:23 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:32 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
 | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
-| IMPLEMENTATION Create a =property_indexer= and add tests              |         |       | 12:07 |
+| IMPLEMENTATION Create a =property_indexer= and add tests              |         |       | 12:43 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -170,14 +170,17 @@ We should have added them to local properties.
      CLOCK: [2013-12-12 Thu 17:40]--[2013-12-12 Thu 18:17] =>  0:37
      CLOCK: [2013-12-12 Thu 07:53]--[2013-12-12 Thu 08:30] =>  0:37
 
-**** Refactor =properties_for_concept= in extractor                   :spike:
-**** IMPLEMENTATION Replace C++ property handling code                 :task:
+**** COMPLETED Replace C++ property handling code                      :task:
+     CLOSED: [2013-12-13 Fri 00:01]
+     CLOCK: [2013-12-12 Thu 23:30]--[2013-12-13 Fri 00:01] =>  0:31
+     CLOCK: [2013-12-12 Thu 23:25]--[2013-12-12 Thu 23:30] =>  0:05
      CLOCK: [2013-12-11 Wed 23:53]--[2013-12-12 Thu 00:40] =>  0:47
      CLOCK: [2013-12-11 Wed 23:32]--[2013-12-11 Wed 23:53] =>  0:21
      CLOCK: [2013-12-11 Wed 20:00]--[2013-12-11 Wed 20:12] =>  0:12
      CLOCK: [2013-12-11 Wed 19:12]--[2013-12-11 Wed 19:20] =>  0:08
      CLOCK: [2013-12-11 Wed 18:41]--[2013-12-11 Wed 18:52] =>  0:11
 
+**** Refactor =properties_for_concept= in extractor                   :spike:
 *** Create a =relationship_indexer= and add tests                     :story:
 **** Implement indexing of associations, keys and visitor              :task:
 **** Add unit tests                                                    :task:

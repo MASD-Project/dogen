@@ -101,9 +101,6 @@ void property_indexer::index_object(abstract_object& o, model& m,
     o.local_properties().insert(o.local_properties().begin(),
         concept_properties.begin(), concept_properties.end());
 
-    o.all_properties().insert(o.all_properties().end(),
-        o.local_properties().begin(), o.local_properties().end());
-
     i = o.relationships().find(relationship_types::parents);
     if (i != o.relationships().end()) {
         for (const auto& qn : i->second) {
@@ -118,6 +115,9 @@ void property_indexer::index_object(abstract_object& o, model& m,
                 parent.all_properties().begin(), parent.all_properties().end());
         }
     }
+
+    o.all_properties().insert(o.all_properties().end(),
+        o.local_properties().begin(), o.local_properties().end());
 
     processed_qnames.insert(o.name());
 }

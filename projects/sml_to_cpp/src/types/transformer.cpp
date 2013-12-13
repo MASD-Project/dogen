@@ -420,7 +420,6 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
         pi.properties(pci.all_properties());
         pi.namespaces(pci.namespaces());
         r.parents().push_back(pi);
-        r.all_properties(pci.all_properties());
     }
 
     i = ao.relationships().find(sml::relationship_types::original_parents);
@@ -450,16 +449,17 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
         r.is_original_parent_visitable(opci.is_visitable());
     }
 
-    std::list<sml::property> props;
-    props.insert(props.end(), ao.local_properties().begin(),
-        ao.local_properties().end());
+    for (const auto& prop : ao.all_properties()) {
+        const auto tuple(to_property_info(
+                prop, ao.is_immutable(), ao.is_fluent()));
+        r.all_properties().push_back(std::get<0>(tuple));
+    }
 
-    for (const auto& prop : props) {
+    for (const auto& prop : ao.local_properties()) {
         const auto tuple(to_property_info(
                 prop, ao.is_immutable(), ao.is_fluent()));
 
         r.properties().push_back(std::get<0>(tuple));
-        r.all_properties().push_back(std::get<0>(tuple));
 
         if (std::get<1>(tuple))
             r.has_primitive_properties(true);
