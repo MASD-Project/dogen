@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Operations need to behave more like properties                    :story:
+
+When we did the expansion and indexing work for properties, we omitted
+operations altogether. This is fine for now, as we only have a
+half-baked support for them anyway, but will need to be revisited as
+we start to use it in anger. In particular:
+
+- we need sets of operations: local, inherited, all
+- we need an operations indexer
+
 *** Add include file support to main type formatter                   :story:
 
 Inclusion support needs to be moved to the formatters. SML provides
