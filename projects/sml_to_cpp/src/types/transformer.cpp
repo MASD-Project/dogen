@@ -477,6 +477,12 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
     for (const auto l : ao.leaves())
         r.leaves().push_back(to_qualified_name(l));
 
+    // i = ao.relationships().find(sml::relationship_types::leaves);
+    // if (i != ao.relationships().end()) {
+    //     for (const auto l : i->second)
+    //         r.leaves().push_back(to_qualified_name(l));
+    // }
+
     return r;
 }
 

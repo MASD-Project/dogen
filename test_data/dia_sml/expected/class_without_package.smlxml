@@ -24,37 +24,37 @@
 	<generation_type>0</generation_type>
 	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</references>
 	<leaves class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</modules>
 	<concepts class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="16" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<objects class_id="18" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="19" tracking_level="0" version="0">
 			<first>
@@ -135,7 +135,7 @@
 						</local_properties>
 						<inherited_properties class_id="27" tracking_level="0" version="0">
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>23</bucket_count>
 							<item_version>0</item_version>
 						</inherited_properties>
 						<operations class_id="28" tracking_level="0" version="0">
@@ -156,7 +156,7 @@
 						<is_child>0</is_child>
 						<relationships class_id="30" tracking_level="0" version="0">
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>23</bucket_count>
 							<item_version>0</item_version>
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
