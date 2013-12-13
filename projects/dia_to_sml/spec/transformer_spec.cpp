@@ -101,15 +101,6 @@ dogen::dia_to_sml::context mock_context() {
     return r;
 }
 
-bool has_no_parent(const dogen::sml::abstract_object& o) {
-    using dogen::sml::relationship_types;
-    const auto i(o.relationships().find(relationship_types::parents));
-    if (i == o.relationships().end() || i->second.empty())
-        return true;
-
-    return false;
-}
-
 bool has_relationship(const relationship_types rt,
     const dogen::sml::abstract_object& o) {
     const auto i(o.relationships().find(rt));
