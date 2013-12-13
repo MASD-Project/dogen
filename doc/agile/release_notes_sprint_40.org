@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-13 Fri 00:17]
+Clock summary at [2013-12-13 Fri 07:25]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *19:40* |       |       |
+| *Total time*                                                          | *19:52* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 19:40 |       |
-| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:32 |
+| Development Stories Implemented                                       |         | 19:52 |       |
+| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:44 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
@@ -26,6 +26,7 @@ Clock summary at [2013-12-13 Fri 00:17]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-13 Fri 07:13]--[2013-12-13 Fri 07:25] =>  0:12
     CLOCK: [2013-12-11 Wed 07:53]--[2013-12-11 Wed 08:06] =>  0:13
     CLOCK: [2013-12-11 Wed 07:19]--[2013-12-11 Wed 07:26] =>  0:07
     CLOCK: [2013-12-07 Sat 18:40]--[2013-12-07 Sat 18:47] =>  0:07
@@ -185,6 +186,20 @@ We should have added them to local properties.
      CLOSED: [2013-12-13 Fri 00:17]
      CLOCK: [2013-12-13 Fri 00:00]--[2013-12-13 Fri 00:17] =>  0:17
 
+*** COMPLETED Implement the property cache in SML                     :story:
+    CLOSED: [2013-12-13 Fri 07:17]
+
+
+Indexers and the indexed fields now take on the role of the property
+cache.
+
+*** COMPLETED Validate inheritance graph does a lot of double-checks  :story:
+    CLOSED: [2013-12-13 Fri 07:21]
+
+In method =validate_inheritance_graph=, we should really just check
+that the parent exists since we know all objects get checked
+anyway. this results in a lot of double-checks for no reason.
+
 *** Create a =relationship_indexer= and add tests                     :story:
 **** Implement indexing of associations, keys and visitor              :task:
 **** Add unit tests                                                    :task:
@@ -207,3 +222,22 @@ dependent. We need to distribute the logic of the includer into each
 formatter.
 
 ** Deprecated Development Stories
+*** CANCELLED Add content to the introduction in manual               :story:
+    CLOSED: [2013-12-13 Fri 07:22]
+
+New understanding: This story was too generic and we already have the
+rolling add content to manual.
+
+*** CANCELLED Remove generation types in SML                          :story:
+    CLOSED: [2013-12-13 Fri 07:24]
+
+New understanding: There will no longer be any language specific models, so
+generation types has to stay in SML.
+
+Old understanding: SML knows not of code generation so we shouldn't
+have a generation type in it. What we should have instead is a way of
+identifying a type as belonging to the target model or not. In a way,
+its qname already does that.
+
+Partial generation is actually a c++ model decision based on how much
+features it supports.

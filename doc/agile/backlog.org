@@ -54,7 +54,9 @@ canned tests.
 
 Now that the mock factory has the concept of "stages" of processing,
 we need to create a "stage" for merged but unresolved models and
-remove the merger from the resolver tests.
+remove the merger from the resolver tests. The flag for this has been
+added, we just need to go through the different scenarios and add
+handling code for them.
 
 *** Split library model loading from SML workflow                     :story:
 
@@ -81,15 +83,15 @@ factory test with this validation.
 
 We should add export macros for shared objects/DLLs:
 
-:#ifdef ExportDeclaration
+: #ifdef ExportDeclaration
 :    #undef ExportDeclaration
-:#endif
+: #endif
 :
-:#ifdef
+: #ifdef
 :    #define ExportMacro __declspec(dllexport)
-:#else
+: #else
 :    #define ExportMacro __declspec(dllimport)
-:#endif
+: #endif
 
 There is also a GCC equivalent explained [[http://pic.dhe.ibm.com/infocenter/tpfhelp/current/index.jsp?topic%3D%252Fcom.ibm.ztpf-ztpfdf.doc_put.cur%252Fgtpl2%252Fexport.html][here]].
 
@@ -157,7 +159,7 @@ facets. Example:
 :     // test_io<empty_model_generator>();
 : }
 
-*** Create a visitor interface with multiple implementations          :story
+*** Create a visitor interface with multiple implementations          :story:
 
 We decided to use a base class for visitor; it would have been better
 to create an interface, with multiple implementations:
@@ -294,8 +296,16 @@ serialization. However, in keeping with the (often violated) rule that
 we never add code without a use case, we need to remove this.
 
 *** Add tests for tagging of modules, primitves and enumerations      :story:
-*** Implement the property cache in SML                               :story:
+
+We've tested abstract objects et al quite a lot but forgotten the
+other aspects of the model.
+
 *** Add tests for all permutations of the domain formatter            :story:
+
+_All_ may be too strong a word as there quite a few. We need good
+coverage around the combinations one can do within the domain
+formatter.
+
 *** Add tagging for propagatable parameters                           :story:
 
 Some implementation specific parameters should be propagated along the
@@ -417,7 +427,7 @@ serialization support.
 By default services would have all aspects other than domain disabled,
 entities and values would have all aspects enabled.
 
-*** System models set meta-type to invalid                            :story:
+*** System models set meta-type to =invalid=                          :story:
 
 Something is not quite right on the resolution logic
 
@@ -565,12 +575,6 @@ inclusions:
 Perhaps we could have a second type of includer that only has value
 objects, etc.
 
-*** Validate inheritance graph does a lot of double-checks            :story:
-
-In method =validate_inheritance_graph=, we should really just check
-that the parent exists since we know all objects get checked
-anyway. this results in a lot of double-checks for no reason.
-
 *** Do not copy models in merger                                      :story:
 
 At present we are adding the partial models into the merger by copying
@@ -678,7 +682,6 @@ concept.
 Injector creates objects for these just like it does with keys; the
 C++ transformer intercepts them and generates the correct view models.
 
-*** Add content to the introduction in manual                         :story:
 *** Use explicit casting for versioned to unversioned conversions     :story:
 
 Continuing from previous iteration, see description in Sprint 26.
@@ -870,16 +873,6 @@ not ideal. There are two options:
 
 As per MEC 33. We should probably do the same for the move and copy
 constructors.
-
-*** Remove generation types in SML                                    :story:
-
-SML knows not of code generation so we shouldn't have a generation
-type in it. What we should have instead is a way of identifying a type
-as belonging to the target model or not. In a way, its qname already
-does that.
-
-Partial generation is actually a c++ model decision based on how much
-features it supports.
 
 *** SML models could have a model classification                      :story:
 
