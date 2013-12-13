@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Dia to SML workflow should post-process model by leaves           :story:
+
+At present in =dia_to_sml::workflow::post_process_model_activity= we
+are post-processing by going through every single object; in reality
+we only need to go through the leaves.
+
 *** Operations need to behave more like properties                    :story:
 
 When we did the expansion and indexing work for properties, we omitted
