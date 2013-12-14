@@ -186,15 +186,13 @@ private:
     void to_service(const processed_object& o, const profile& p);
 
     /**
-     * @brief Converts Dia a object containing a UML class with a
-     * stereotype of factory to a SML service.
+     * @brief Converts Dia a object containing a UML class to
+     * an SML object.
      *
      * @param o the Dia UML class containing an enumeration.
      * @param p profile of the object.
-     *
-     * @pre profile must have the factory flag set.
      */
-    void to_factory(const processed_object& o, const profile& p);
+    void to_object(const processed_object& po, const profile& p);
 
     /**
      * @brief Converts Dia a object containing a UML class with a

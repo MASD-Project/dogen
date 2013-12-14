@@ -32,7 +32,7 @@
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/io/service_types_io.hpp"
-#include "dogen/sml/types/factory.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml_to_cpp/types/transformation_error.hpp"
@@ -524,8 +524,8 @@ void transformer::visit(const dogen::sml::service& s) {
     BOOST_LOG_SEV(lg, debug) << "Transformed service: " << s.name();
 }
 
-void transformer::visit(const dogen::sml::factory& f) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming service: " << f.name();
+void transformer::visit(const dogen::sml::object& f) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming object: " << f.name();
 
     auto ci(to_class_info(f));
     ci.class_type(cpp::class_types::service); // FIXME: mega-hack

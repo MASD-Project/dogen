@@ -26,7 +26,6 @@
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
-#include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/indexing_error.hpp"

@@ -34,7 +34,7 @@
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/repository.hpp"
-#include "dogen/sml/types/factory.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
@@ -50,7 +50,7 @@
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/repository_io.hpp"
-#include "dogen/sml/io/factory_io.hpp"
+#include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
@@ -66,7 +66,7 @@
 #include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/repository_td.hpp"
-#include "dogen/sml/test_data/factory_td.hpp"
+#include "dogen/sml/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
@@ -82,7 +82,7 @@
 #include "dogen/sml/hash/service_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
 #include "dogen/sml/hash/repository_hash.hpp"
-#include "dogen/sml/hash/factory_hash.hpp"
+#include "dogen/sml/hash/object_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<service_generator>();
     test_hashing<module_generator>();
     test_hashing<repository_generator>();
-    test_hashing<factory_generator>();
+    test_hashing<object_generator>();
     test_hashing<concept_generator>();
     test_hashing<model_generator>();
 }

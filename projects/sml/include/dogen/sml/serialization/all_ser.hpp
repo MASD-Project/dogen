@@ -23,7 +23,6 @@
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"
-#include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"

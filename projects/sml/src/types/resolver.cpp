@@ -29,7 +29,6 @@
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/type_visitor.hpp"

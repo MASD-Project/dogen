@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-14 Sat 23:30]
+Clock summary at [2013-12-14 Sat 23:58]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *25:53* |       |       |
+| *Total time*                                                          | *26:20* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 25:53 |       |
+| Development Stories Implemented                                       |         | 26:20 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
@@ -27,7 +27,7 @@ Clock summary at [2013-12-14 Sat 23:30]
 | COMPLETED Use relationship container for leaves                       |         |       |  1:06 |
 | COMPLETED Use relationship container for keys                         |         |       |  0:52 |
 | COMPLETED Collapse all entity classes into just entity                |         |       |  1:29 |
-| IMPLEMENTATION Create object class and remove factory and repository  |         |       |  0:08 |
+| IMPLEMENTATION Create object class and remove factory and repository  |         |       |  0:35 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
 
@@ -297,7 +297,10 @@ to get rid of.
      CLOSED: [2013-12-14 Sat 23:30]
      CLOCK: [2013-12-14 Sat 23:22]--[2013-12-14 Sat 23:30] =>  0:08
 
-**** Remove factory                                                    :task:
+**** COMPLETED Remove factory                                          :task:
+     CLOSED: [2013-12-14 Sat 23:58]
+     CLOCK: [2013-12-14 Sat 23:31]--[2013-12-14 Sat 23:58] =>  0:27
+
 **** Remove repository                                                 :task:
 
 *** Use relationship container for visitors                           :story:
