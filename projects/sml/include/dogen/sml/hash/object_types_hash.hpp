@@ -18,22 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/sml/io/abstract_object_io.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#ifndef DOGEN_SML_HASH_OBJECT_TYPES_HASH_HPP
+#define DOGEN_SML_HASH_OBJECT_TYPES_HASH_HPP
 
-namespace dogen {
-namespace sml {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const abstract_object& v) {
-    v.to_stream(s);
-    return(s);
+#include <functional>
+#include "dogen/sml/types/object_types.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::sml::object_types> {
+public:
+    size_t operator()(const dogen::sml::object_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
 }
 
-} }
+#endif

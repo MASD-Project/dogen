@@ -32,6 +32,7 @@
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/keyed_entity_ser.hpp"
+#include "dogen/sml/serialization/object_types_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
@@ -74,6 +75,7 @@ void save(Archive& ar,
     ar << make_nvp("is_child", v.is_child_);
     ar << make_nvp("relationships", v.relationships_);
     ar << make_nvp("is_inheritance_root", v.is_inheritance_root_);
+    ar << make_nvp("object_type", v.object_type_);
 }
 
 template<typename Archive>
@@ -96,6 +98,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_child", v.is_child_);
     ar >> make_nvp("relationships", v.relationships_);
     ar >> make_nvp("is_inheritance_root", v.is_inheritance_root_);
+    ar >> make_nvp("object_type", v.object_type_);
 }
 
 } }

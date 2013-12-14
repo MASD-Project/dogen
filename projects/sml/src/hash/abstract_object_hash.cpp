@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/hash/abstract_object_hash.hpp"
+#include "dogen/sml/hash/object_types_hash.hpp"
 #include "dogen/sml/hash/operation_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -100,6 +101,7 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
     combine(seed, v.is_child());
     combine(seed, hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(v.relationships()));
     combine(seed, v.is_inheritance_root());
+    combine(seed, v.object_type());
 
     return seed;
 }

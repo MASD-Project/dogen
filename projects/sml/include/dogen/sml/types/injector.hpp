@@ -87,7 +87,7 @@ private:
      * @brief Create a visitor for the object.
      */
     boost::shared_ptr<abstract_object>
-    create_key_extractor(const keyed_entity& ke) const;
+    create_key_extractor(const entity& ke) const;
 
     /**
      * @brief Injects versioned and unversioned keys for keyed

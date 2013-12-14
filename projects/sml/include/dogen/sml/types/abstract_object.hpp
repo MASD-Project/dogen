@@ -32,6 +32,7 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
 #include "dogen/sml/serialization/abstract_object_fwd_ser.hpp"
+#include "dogen/sml/types/object_types.hpp"
 #include "dogen/sml/types/operation.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -74,7 +75,8 @@ public:
         const bool is_fluent,
         const bool is_child,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
-        const bool is_inheritance_root);
+        const bool is_inheritance_root,
+        const dogen::sml::object_types& object_type);
 
 private:
     template<typename Archive>
@@ -218,6 +220,14 @@ public:
     void is_inheritance_root(const bool v);
     /**@}*/
 
+    /**
+     * @brief What kind of object is this.
+     */
+    /**@{*/
+    dogen::sml::object_types object_type() const;
+    void object_type(const dogen::sml::object_types& v);
+    /**@}*/
+
 protected:
     bool compare(const abstract_object& rhs) const;
 public:
@@ -241,6 +251,7 @@ private:
     bool is_child_;
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
     bool is_inheritance_root_;
+    dogen::sml::object_types object_type_;
 };
 
 inline abstract_object::~abstract_object() noexcept { }

@@ -367,6 +367,11 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
         if (reader.has_key(sml::tags::identity_attribute))
             ae.identity().push_back(p);
     }
+
+    if (p.is_entity())
+        ae.object_type(sml::object_types::entity);
+    else if (p.is_keyed_entity())
+        ae.object_type(sml::object_types::keyed_entity);
 }
 
 void transformer::to_keyed_entity(const processed_object& o, const profile& p) {

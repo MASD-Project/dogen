@@ -72,6 +72,7 @@ public:
         const bool is_child,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const bool is_inheritance_root,
+        const dogen::sml::object_types& object_type,
         const dogen::sml::service_types& type);
 
 private:

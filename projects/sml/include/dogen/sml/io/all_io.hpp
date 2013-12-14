@@ -30,6 +30,7 @@
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
+#include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/parameter_io.hpp"

@@ -49,6 +49,7 @@ service::service(
     const bool is_child,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root,
+    const dogen::sml::object_types& object_type,
     const dogen::sml::service_types& type)
     : dogen::sml::abstract_object(origin_type,
       documentation,
@@ -68,7 +69,8 @@ service::service(
       is_fluent,
       is_child,
       relationships,
-      is_inheritance_root),
+      is_inheritance_root,
+      object_type),
       type_(type) { }
 
 void service::to_stream(std::ostream& s) const {

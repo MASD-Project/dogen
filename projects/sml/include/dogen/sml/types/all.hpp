@@ -44,6 +44,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
+#include "dogen/sml/types/object_types.hpp"
 #include "dogen/sml/types/operation.hpp"
 #include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/parameter.hpp"

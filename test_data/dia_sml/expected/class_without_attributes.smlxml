@@ -167,6 +167,7 @@
 							<item_version>0</item_version>
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
+						<object_type>0</object_type>
 					</abstract_object>
 					<type>1</type>
 				</px>

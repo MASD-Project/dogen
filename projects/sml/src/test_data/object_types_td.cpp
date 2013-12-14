@@ -18,22 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/sml/io/abstract_object_io.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#include "dogen/sml/test_data/object_types_td.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const abstract_object& v) {
-    v.to_stream(s);
-    return(s);
+object_types_generator::object_types_generator() : position_(0) { }
+void object_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<object_types>(position % 3);
+}
+
+object_types_generator::result_type
+object_types_generator::create(const unsigned int  position) {
+    result_type r;
+    object_types_generator::populate(position, r);
+    return r;
+}
+
+object_types_generator::result_type
+object_types_generator::operator()() {
+    return create(position_++);
 }
 
 } }

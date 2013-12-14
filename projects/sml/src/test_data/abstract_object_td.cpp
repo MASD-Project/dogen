@@ -22,6 +22,7 @@
 #include "dogen/sml/test_data/entity_td.hpp"
 #include "dogen/sml/test_data/factory_td.hpp"
 #include "dogen/sml/test_data/keyed_entity_td.hpp"
+#include "dogen/sml/test_data/object_types_td.hpp"
 #include "dogen/sml/test_data/operation_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
@@ -101,6 +102,11 @@ std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> 
     return r;
 }
 
+dogen::sml::object_types
+create_dogen_sml_object_types(const unsigned int position) {
+    return dogen::sml::object_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -124,6 +130,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_child(create_bool(position + 11));
     v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 12));
     v.is_inheritance_root(create_bool(position + 13));
+    v.object_type(create_dogen_sml_object_types(position + 14));
 }
 
 abstract_object_generator::result_type*

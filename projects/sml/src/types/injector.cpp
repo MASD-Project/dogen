@@ -21,13 +21,12 @@
 #include <memory>
 #include <functional>
 #include <boost/make_shared.hpp>
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/entity.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
@@ -143,7 +142,7 @@ create_unversioned_key(const qname& qn, const generation_types gt,
 }
 
 boost::shared_ptr<abstract_object>
-injector::create_key_extractor(const keyed_entity& ke) const {
+injector::create_key_extractor(const entity& ke) const {
     auto r(boost::make_shared<service>());
     qname qn;
     qn.simple_name(ke.name().simple_name() + "_" + key_extractor_name);
@@ -189,6 +188,9 @@ void injector::inject_keys(model& m) const {
 
     std::list<boost::shared_ptr<abstract_object> > objects;
     const auto lambda([&](keyed_entity& ke) {
+            if (ke.object_type() != object_types::keyed_entity)
+                return;
+
             if (ke.identity().empty()) {
                 BOOST_LOG_SEV(lg, error) << empty_identity << ke.name();
 

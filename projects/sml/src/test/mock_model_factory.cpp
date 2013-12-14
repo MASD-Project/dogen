@@ -500,10 +500,13 @@ build_entity(const property& prop, const bool keyed,
     const unsigned int module_n) const {
 
     boost::shared_ptr<abstract_entity> r;
-    if (keyed)
+    if (keyed) {
         r = boost::shared_ptr<abstract_entity>(new keyed_entity());
-    else
+        r->object_type(dogen::sml::object_types::keyed_entity);
+    } else {
         r = boost::shared_ptr<abstract_entity>(new entity());
+        r->object_type(dogen::sml::object_types::entity);
+    }
 
     populate_object(*r, i, model_qname, module_n);
     r->identity().push_back(prop);

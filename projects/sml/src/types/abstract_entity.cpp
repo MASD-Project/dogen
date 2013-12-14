@@ -64,6 +64,7 @@ abstract_entity::abstract_entity(
     const bool is_child,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root,
+    const dogen::sml::object_types& object_type,
     const bool is_aggregate_root,
     const std::list<dogen::sml::property>& identity)
     : dogen::sml::abstract_object(origin_type,
@@ -84,7 +85,8 @@ abstract_entity::abstract_entity(
       is_fluent,
       is_child,
       relationships,
-      is_inheritance_root),
+      is_inheritance_root,
+      object_type),
       is_aggregate_root_(is_aggregate_root),
       identity_(identity) { }
 

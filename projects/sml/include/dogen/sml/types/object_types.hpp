@@ -18,22 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/sml/io/abstract_object_io.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#ifndef DOGEN_SML_TYPES_OBJECT_TYPES_HPP
+#define DOGEN_SML_TYPES_OBJECT_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const abstract_object& v) {
-    v.to_stream(s);
-    return(s);
-}
+/**
+ * @brief Types of objects.
+ *
+ * In the future, it will replace all other enumerations such as value_object_types,
+ * etc.
+ */
+enum class object_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    entity = 1, ///< Object is an entity.
+    keyed_entity = 2 ///< Object is an entity with associated key or keys.
+};
 
 } }
+
+#endif
