@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-14 Sat 19:18]
+Clock summary at [2013-12-14 Sat 19:24]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *22:56* |       |       |
+| *Total time*                                                          | *23:02* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 22:56 |       |
+| Development Stories Implemented                                       |         | 23:02 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
 | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
 | COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:31 |
-| IMPLEMENTATION Inclusion is broken with extractor changes             |         |       |  1:21 |
+| COMPLETED Inclusion is broken with extractor changes                  |         |       |  1:27 |
 | IMPLEMENTATION Use relationship container for leaves                  |         |       |  0:44 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
@@ -210,7 +210,8 @@ In method =validate_inheritance_graph=, we should really just check
 that the parent exists since we know all objects get checked
 anyway. this results in a lot of double-checks for no reason.
 
-*** IMPLEMENTATION Inclusion is broken with extractor changes         :spike:
+*** COMPLETED Inclusion is broken with extractor changes              :spike:
+    CLOSED: [2013-12-14 Sat 19:24]
 
 When codegening with latest, a number of includes are missing from
 SML. After bisection, the problem was detected with commit 0157e96.
@@ -221,7 +222,9 @@ SML. After bisection, the problem was detected with commit 0157e96.
 
 Revert extractor back to commit c83bf2d and ship fix.
 
-**** IMPLEMENTATION Re-aply changes and try to fix borked code
+**** COMPLETED Re-aply changes and try to fix borked code
+     CLOSED: [2013-12-14 Sat 19:24]
+     CLOCK: [2013-12-14 Sat 19:18]--[2013-12-14 Sat 19:24] =>  0:06
      CLOCK: [2013-12-14 Sat 19:01]--[2013-12-14 Sat 19:18] =>  0:17
      CLOCK: [2013-12-14 Sat 18:43]--[2013-12-14 Sat 19:01] =>  0:18
      CLOCK: [2013-12-14 Sat 18:25]--[2013-12-14 Sat 18:43] =>  0:18
