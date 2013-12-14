@@ -8,6 +8,18 @@
 
 Stories that we intend to look at, at some point.
 
+*** Use lowercase for all meta-data keys                              :story:
+
+We have a number of legacy meta-data keys which are in uppercase and
+need to be in lowercase. They may also need to be renamed to follow
+the "namespacing" structure. Example:
+
+: #DOGEN IDENTITY_ATTRIBUTE=true
+
+This should really be:
+
+: #DOGEN identity_attribute=true
+
 *** Dia to SML workflow should post-process model by leaves           :story:
 
 At present in =dia_to_sml::workflow::post_process_model_activity= we
