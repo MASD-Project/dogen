@@ -82,18 +82,18 @@ populate(const unsigned int position, result_type& v) {
 type_generator::result_type*
 type_generator::create_ptr(const unsigned int position) {
     if ((position % 6) == 0)
-        return dogen::sml::factory_generator::create_ptr(position);
+        return dogen::sml::service_generator::create_ptr(position);
     if ((position % 6) == 1)
-        return dogen::sml::repository_generator::create_ptr(position);
+        return dogen::sml::factory_generator::create_ptr(position);
     if ((position % 6) == 2)
-        return dogen::sml::primitive_generator::create_ptr(position);
+        return dogen::sml::repository_generator::create_ptr(position);
     if ((position % 6) == 3)
-        return dogen::sml::enumeration_generator::create_ptr(position);
+        return dogen::sml::primitive_generator::create_ptr(position);
     if ((position % 6) == 4)
-        return dogen::sml::value_object_generator::create_ptr(position);
+        return dogen::sml::enumeration_generator::create_ptr(position);
     if ((position % 6) == 5)
-        return dogen::sml::entity_generator::create_ptr(position);
-    return dogen::sml::service_generator::create_ptr(position);
+        return dogen::sml::value_object_generator::create_ptr(position);
+    return dogen::sml::entity_generator::create_ptr(position);
 }
 
 

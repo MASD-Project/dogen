@@ -26,9 +26,11 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/sml/serialization/abstract_entity_ser.hpp"
+#include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/entity_ser.hpp"
+#include "dogen/sml/serialization/property_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -46,14 +48,20 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::entity& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("abstract_entity", base_object<dogen::sml::abstract_entity>(v));
+    ar << make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
+
+    ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
+    ar << make_nvp("identity", v.identity_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::sml::entity& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("abstract_entity", base_object<dogen::sml::abstract_entity>(v));
+    ar >> make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
+
+    ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
+    ar >> make_nvp("identity", v.identity_);
 }
 
 } }

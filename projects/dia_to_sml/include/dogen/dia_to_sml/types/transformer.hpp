@@ -31,7 +31,6 @@
 #include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/abstract_entity.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
@@ -150,13 +149,6 @@ private:
      * object and the profile.
      */
     void update_abstract_object(sml::abstract_object& ao,
-        const processed_object& o, const profile& p);
-
-    /**
-     * @brief Update the SML abstract entity using the processed
-     * object and the profile.
-     */
-    void update_abstract_entity(sml::abstract_entity& ae,
         const processed_object& o, const profile& p);
 
 private:

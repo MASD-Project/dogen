@@ -142,7 +142,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
         const auto& qn(pair.first);
         if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
+            auto& ae(dynamic_cast<dogen::sml::entity&>(*pair.second));
             BOOST_REQUIRE(ae.local_properties().size() == 1);
             BOOST_REQUIRE(!ae.is_versioned());
             BOOST_REQUIRE(ae.identity().size() == 1);
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
         const auto& qn(pair.first);
         if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
+            auto& ae(dynamic_cast<dogen::sml::entity&>(*pair.second));
             BOOST_REQUIRE(ae.local_properties().size() == 1);
             BOOST_REQUIRE(!ae.is_versioned());
             BOOST_REQUIRE(ae.identity().size() == 1);

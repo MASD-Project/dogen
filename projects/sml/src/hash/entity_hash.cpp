@@ -18,8 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/abstract_entity_hash.hpp"
+#include "dogen/sml/hash/abstract_object_hash.hpp"
 #include "dogen/sml/hash/entity_hash.hpp"
+#include "dogen/sml/hash/property_hash.hpp"
 
 namespace {
 
@@ -30,6 +31,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::property>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -38,7 +47,11 @@ namespace sml {
 std::size_t entity_hasher::hash(const entity&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::sml::abstract_entity&>(v));
+    combine(seed, dynamic_cast<const dogen::sml::abstract_object&>(v));
+
+    combine(seed, v.is_aggregate_root());
+    combine(seed, hash_std_list_dogen_sml_property(v.identity()));
+
     return seed;
 }
 

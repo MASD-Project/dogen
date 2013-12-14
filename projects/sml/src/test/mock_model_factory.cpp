@@ -498,7 +498,7 @@ build_entity(const property& prop, const bool keyed,
     const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
-    auto r(boost::shared_ptr<abstract_entity>(new entity()));
+    auto r(boost::shared_ptr<entity>(new entity()));
     if (keyed)
         r->object_type(dogen::sml::object_types::keyed_entity);
     else

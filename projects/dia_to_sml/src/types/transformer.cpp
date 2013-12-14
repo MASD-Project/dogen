@@ -356,28 +356,23 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
     }
 }
 
-void transformer::update_abstract_entity(sml::abstract_entity& ae,
-    const processed_object& o, const profile& p) {
-    update_abstract_object(ae, o, p);
-    ae.is_aggregate_root(p.is_aggregate_root());
-
-    for (const auto& p : ae.local_properties()) {
-        sml::meta_data_reader reader(p.meta_data());
-        if (reader.has_key(sml::tags::identity_attribute))
-            ae.identity().push_back(p);
-    }
-
-    if (p.is_entity())
-        ae.object_type(sml::object_types::entity);
-    else if (p.is_keyed_entity())
-        ae.object_type(sml::object_types::keyed_entity);
-}
-
 void transformer::to_entity(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
 
     auto e(boost::make_shared<sml::entity>());
-    update_abstract_entity(*e, o, p);
+    update_abstract_object(*e, o, p);
+    e->is_aggregate_root(p.is_aggregate_root());
+
+    for (const auto& p : e->local_properties()) {
+        sml::meta_data_reader reader(p.meta_data());
+        if (reader.has_key(sml::tags::identity_attribute))
+            e->identity().push_back(p);
+    }
+
+    if (p.is_entity())
+        e->object_type(sml::object_types::entity);
+    else if (p.is_keyed_entity())
+        e->object_type(sml::object_types::keyed_entity);
     context_.model().objects().insert(std::make_pair(e->name(), e));
 }
 

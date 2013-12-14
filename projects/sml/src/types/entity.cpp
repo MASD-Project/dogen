@@ -18,12 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/sml/io/abstract_entity_io.hpp"
+#include "dogen/sml/io/abstract_object_io.hpp"
+#include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/types/entity.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
+
+entity::entity()
+    : is_aggregate_root_(static_cast<bool>(0)) { }
 
 entity::entity(
     const dogen::sml::origin_types& origin_type,
@@ -48,7 +67,7 @@ entity::entity(
     const dogen::sml::object_types& object_type,
     const bool is_aggregate_root,
     const std::list<dogen::sml::property>& identity)
-    : dogen::sml::abstract_entity(origin_type,
+    : dogen::sml::abstract_object(origin_type,
       documentation,
       meta_data,
       name,
@@ -67,21 +86,33 @@ entity::entity(
       is_child,
       relationships,
       is_inheritance_root,
-      object_type,
-      is_aggregate_root,
-      identity) { }
+      object_type),
+      is_aggregate_root_(is_aggregate_root),
+      identity_(identity) { }
 
 void entity::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::entity\"" << ", "
       << "\"__parent_0__\": ";
-    abstract_entity::to_stream(s);
-    s << " }";
+    abstract_object::to_stream(s);
+    s << ", "
+      << "\"is_aggregate_root\": " << is_aggregate_root_ << ", "
+      << "\"identity\": " << identity_
+      << " }";
 }
 
 void entity::swap(entity& other) noexcept {
-    abstract_entity::swap(other);
+    abstract_object::swap(other);
 
+    using std::swap;
+    swap(is_aggregate_root_, other.is_aggregate_root_);
+    swap(identity_, other.identity_);
 }
 
 bool entity::equals(const dogen::sml::type& other) const {
@@ -91,13 +122,39 @@ bool entity::equals(const dogen::sml::type& other) const {
 }
 
 bool entity::operator==(const entity& rhs) const {
-    return abstract_entity::compare(rhs);
+    return abstract_object::compare(rhs) &&
+        is_aggregate_root_ == rhs.is_aggregate_root_ &&
+        identity_ == rhs.identity_;
 }
 
 entity& entity::operator=(entity other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool entity::is_aggregate_root() const {
+    return is_aggregate_root_;
+}
+
+void entity::is_aggregate_root(const bool v) {
+    is_aggregate_root_ = v;
+}
+
+const std::list<dogen::sml::property>& entity::identity() const {
+    return identity_;
+}
+
+std::list<dogen::sml::property>& entity::identity() {
+    return identity_;
+}
+
+void entity::identity(const std::list<dogen::sml::property>& v) {
+    identity_ = v;
+}
+
+void entity::identity(const std::list<dogen::sml::property>&& v) {
+    identity_ = std::move(v);
 }
 
 } }

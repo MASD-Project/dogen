@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-14 Sat 23:06]
+Clock summary at [2013-12-14 Sat 23:20]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *25:33* |       |       |
+| *Total time*                                                          | *25:45* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 25:33 |       |
+| Development Stories Implemented                                       |         | 25:45 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
@@ -26,7 +26,7 @@ Clock summary at [2013-12-14 Sat 23:06]
 | COMPLETED Inclusion is broken with extractor changes                  |         |       |  1:27 |
 | COMPLETED Use relationship container for leaves                       |         |       |  1:06 |
 | COMPLETED Use relationship container for keys                         |         |       |  0:52 |
-| IMPLEMENTATION Collapse all entity classes into just entity           |         |       |  1:17 |
+| COMPLETED Collapse all entity classes into just entity                |         |       |  1:29 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
 
@@ -268,7 +268,8 @@ property.
      CLOSED: [2013-12-14 Sat 21:30]
      CLOCK: [2013-12-14 Sat 21:19]--[2013-12-14 Sat 21:30] =>  0:11
 
-*** IMPLEMENTATION Collapse all entity classes into just entity       :story:
+*** COMPLETED Collapse all entity classes into just entity            :story:
+    CLOSED: [2013-12-14 Sat 23:20]
 
 With the refactoring of the keys we no longer need separate entity
 classes, so remove them.
@@ -279,6 +280,10 @@ classes, so remove them.
      CLOCK: [2013-12-14 Sat 22:03]--[2013-12-14 Sat 22:30] =>  0:42
      CLOCK: [2013-12-14 Sat 21:46]--[2013-12-14 Sat 22:03] =>  0:17
      CLOCK: [2013-12-14 Sat 21:31]--[2013-12-14 Sat 21:44] =>  0:13
+
+**** COMPLETED Remove =abstract_entity=                                :task:
+     CLOSED: [2013-12-14 Sat 23:20]
+     CLOCK: [2013-12-14 Sat 23:07]--[2013-12-14 Sat 23:19] =>  0:12
 
 *** Use relationship container for visitors                           :story:
 

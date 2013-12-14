@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/abstract_entity_td.hpp"
 #include "dogen/sml/test_data/abstract_object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"

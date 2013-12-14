@@ -42,6 +42,16 @@ public:
 
 public:
     /**
+     * @brief Accept visits for type dogen::sml::entity
+     */
+    /**@{*/
+    virtual void visit(const dogen::sml::entity&) const { }
+    virtual void visit(const dogen::sml::entity&) { }
+    virtual void visit(dogen::sml::entity&) const { }
+    virtual void visit(dogen::sml::entity&) { }
+    /**@}*/
+
+    /**
      * @brief Accept visits for type dogen::sml::service
      */
     /**@{*/
@@ -99,16 +109,6 @@ public:
     virtual void visit(const dogen::sml::value_object&) { }
     virtual void visit(dogen::sml::value_object&) const { }
     virtual void visit(dogen::sml::value_object&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::sml::entity
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::entity&) const { }
-    virtual void visit(const dogen::sml::entity&) { }
-    virtual void visit(dogen::sml::entity&) const { }
-    virtual void visit(dogen::sml::entity&) { }
     /**@}*/
 };
 

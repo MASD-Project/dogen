@@ -27,20 +27,46 @@
 
 #include <algorithm>
 #include <iosfwd>
+#include <list>
 #include "dogen/sml/serialization/entity_fwd_ser.hpp"
-#include "dogen/sml/types/abstract_entity.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/property.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Concrete (instantiable) representation of an entity.
+ * @brief Represents a type in the domain which has identity.
+ *
+ * Identity here is understood in a stronger sense than just the basic
+ * OOP guarantee of identity - say, by providing a unique memory address
+ * for an object. We mean identity in a @b domain sense, such that it
+ * could be preserved regardless of the object life-time in memory
+ * (e.g. it could be persisted in a database or to file).
+ *
+ * Identity emerges by deep domain analysis and is then expressed in the
+ * model by manually defining of a set of properties which uniquely
+ * identify an entity. These properties form part of the state of the
+ * entity. The identity function (or operation) can be understood as a
+ * conceptual device that maps the entity's identity to the entity.
+ *
+ * As with any typed element, entities can be versioned or unversioned,
+ * depending on the requirements of the underlying typed element.
+ *
+ * @note Identity properties can only be supplied once when in an
+ * inheritance tree. This means that an identity can be obtained by
+ * either refining a concept that provides an identity, or by inheriting
+ * from a parent which provides an identity but not both; and when this
+ * occurs the type can no longer provide an identity itself. Across an
+ * inheritance graph, the identity operation can only be defined once.
  */
-class entity final : public dogen::sml::abstract_entity {
+class entity final : public dogen::sml::abstract_object {
 public:
-    entity() = default;
     entity(const entity&) = default;
     entity(entity&&) = default;
+
+public:
+    entity();
 
     virtual ~entity() noexcept { }
 
@@ -97,6 +123,28 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief If true, this type is a root of an aggregate.
+     */
+    /**@{*/
+    bool is_aggregate_root() const;
+    void is_aggregate_root(const bool v);
+    /**@}*/
+
+    /**
+     * @brief List of properties that make up the identity operation.
+     *
+     * @note These properties are copied from the original source such as
+     * a concept, parent or the main properties container.
+     */
+    /**@{*/
+    const std::list<dogen::sml::property>& identity() const;
+    std::list<dogen::sml::property>& identity();
+    void identity(const std::list<dogen::sml::property>& v);
+    void identity(const std::list<dogen::sml::property>&& v);
+    /**@}*/
+
+public:
     bool operator==(const entity& rhs) const;
     bool operator!=(const entity& rhs) const {
         return !this->operator==(rhs);
@@ -109,6 +157,9 @@ public:
     void swap(entity& other) noexcept;
     entity& operator=(entity other);
 
+private:
+    bool is_aggregate_root_;
+    std::list<dogen::sml::property> identity_;
 };
 
 } }

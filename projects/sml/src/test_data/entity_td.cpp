@@ -18,10 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/abstract_entity_td.hpp"
+#include "dogen/sml/test_data/abstract_object_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"
+#include "dogen/sml/test_data/property_td.hpp"
 
+namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
+dogen::sml::property
+create_dogen_sml_property(const unsigned int position) {
+    return dogen::sml::property_generator::create(position);
+}
+
+std::list<dogen::sml::property> create_std_list_dogen_sml_property(unsigned int position) {
+    std::list<dogen::sml::property> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_sml_property(position + i));
+    }
+    return r;
+}
+
+}
 
 namespace dogen {
 namespace sml {
@@ -30,7 +50,9 @@ entity_generator::entity_generator() : position_(0) { }
 
 void entity_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::sml::abstract_entity_generator::populate(position, v);
+    dogen::sml::abstract_object_generator::populate(position, v);
+    v.is_aggregate_root(create_bool(position + 0));
+    v.identity(create_std_list_dogen_sml_property(position + 1));
 }
 
 entity_generator::result_type
