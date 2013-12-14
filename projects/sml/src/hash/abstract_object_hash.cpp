@@ -90,7 +90,6 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
     combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
-    combine(seed, hash_std_list_dogen_sml_qname(v.leaves()));
     combine(seed, v.is_parent());
     combine(seed, v.number_of_type_arguments());
     combine(seed, v.is_visitable());

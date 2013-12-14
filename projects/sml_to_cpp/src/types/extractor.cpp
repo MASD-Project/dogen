@@ -139,7 +139,7 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     relationships r;
 
     using dogen::sml::relationship_types;
-    const auto i(ao.relationships().find(relationship_types::parents));
+    auto i(ao.relationships().find(relationship_types::parents));
     if (i == ao.relationships().end() || i->second.empty())
         BOOST_LOG_SEV(lg, debug) << "Object has no parents.";
     else {
@@ -149,7 +149,10 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
 
     r.is_parent(ao.is_parent());
     r.is_child(ao.is_child());
-    r.leaves().insert(ao.leaves().begin(), ao.leaves().end());
+
+    i = ao.relationships().find(relationship_types::leaves);
+    if (i != ao.relationships().end() && !i->second.empty())
+        r.leaves().insert(i->second.begin(), i->second.end());
 
     std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
@@ -210,31 +213,34 @@ relationships extractor::extract_inheritance_graph(const sml::qname& qn) const {
         });
 
     const auto& ao(*i->second);
-    if (ao.leaves().empty())
+
+    using dogen::sml::relationship_types;
+    const auto j(ao.relationships().find(relationship_types::leaves));
+    if (j != ao.relationships().end() && !j->second.empty()) {
+        for (const auto& l : j->second) {
+            i = model_.objects().find(l);
+            if (i == model_.objects().end())
+                lambda(l, qname_could_not_be_found);
+
+            do {
+                const auto& lao(*i->second);
+                BOOST_LOG_SEV(lg, debug) << "adding " << lao.name();
+                r.names().insert(lao.name());
+
+                const auto parents(sml::relationship_types::parents);
+                const auto k(lao.relationships().find(parents));
+                if (k == lao.relationships().end() || k->second.empty())
+                    lambda(lao.name(), type_does_not_have_a_parent);
+
+                for (const auto& parent : k->second) {
+                    i = model_.objects().find(parent);
+                    if (i == model_.objects().end())
+                        lambda(parent, qname_could_not_be_found);
+                }
+            } while (i->second->name() != qn);
+        }
+    } else
         BOOST_LOG_SEV(lg, debug) << "type has no leaves.";
-
-    for (const auto& l : ao.leaves()) {
-        i = model_.objects().find(l);
-        if (i == model_.objects().end())
-            lambda(l, qname_could_not_be_found);
-
-        do {
-            const auto& lao(*i->second);
-            BOOST_LOG_SEV(lg, debug) << "adding " << lao.name();
-            r.names().insert(lao.name());
-
-            using sml::relationship_types;
-            const auto k(lao.relationships().find(relationship_types::parents));
-            if (k == lao.relationships().end() || k->second.empty())
-                lambda(lao.name(), type_does_not_have_a_parent);
-
-            for (const auto& parent : k->second) {
-                i = model_.objects().find(parent);
-                if (i == model_.objects().end())
-                    lambda(parent, qname_could_not_be_found);
-            }
-        } while (i->second->name() != qn);
-    }
 
     BOOST_LOG_SEV(lg, debug) << "Done extracting inheritance graph for "
                              << qn.simple_name();

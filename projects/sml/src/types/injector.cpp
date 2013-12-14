@@ -273,19 +273,22 @@ injector::create_visitor(const abstract_object& ao) const {
     r->type(service_types::visitor);
     r->documentation(visitor_doc + ao.name().simple_name());
 
-    for (const auto& l : ao.leaves()) {
-        parameter p;
-        p.name(visitor_argument_name);
+    const auto i(ao.relationships().find(relationship_types::leaves));
+    if (i != ao.relationships().end()) {
+        for (const auto& l : i->second) {
+            parameter p;
+            p.name(visitor_argument_name);
 
-        nested_qname nqn;
-        nqn.type(l);
-        p.type(nqn);
+            nested_qname nqn;
+            nqn.type(l);
+            p.type(nqn);
 
-        operation op;
-        op.name("visit");
-        op.parameters().push_back(p);
-        op.documentation(visit_operation_doc + l.simple_name());
-        r->operations().push_back(op);
+            operation op;
+            op.name("visit");
+            op.parameters().push_back(p);
+            op.documentation(visit_operation_doc + l.simple_name());
+            r->operations().push_back(op);
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: " << qn.simple_name();
@@ -318,7 +321,11 @@ void injector::inject_visitors(model& m) const {
         if (!ao.is_visitable())
             continue;
 
-        if (ao.leaves().empty()) {
+        const auto i(ao.relationships().find(relationship_types::leaves));
+        const bool has_leaves(i != ao.relationships().end() &&
+            !i->second.empty());
+
+        if (!has_leaves) {
             BOOST_LOG_SEV(lg, error) << zero_leaves << ao.name();
             BOOST_THROW_EXCEPTION(injection_error(zero_leaves +
                     boost::lexical_cast<std::string>(ao.name())));

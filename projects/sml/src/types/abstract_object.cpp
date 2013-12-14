@@ -129,7 +129,6 @@ abstract_object::abstract_object(
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
     const std::list<dogen::sml::operation>& operations,
-    const std::list<dogen::sml::qname>& leaves,
     const bool is_parent,
     const unsigned int number_of_type_arguments,
     const bool is_visitable,
@@ -149,7 +148,6 @@ abstract_object::abstract_object(
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
       operations_(operations),
-      leaves_(leaves),
       is_parent_(is_parent),
       number_of_type_arguments_(number_of_type_arguments),
       is_visitable_(is_visitable),
@@ -177,7 +175,6 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"local_properties\": " << local_properties_ << ", "
       << "\"inherited_properties\": " << inherited_properties_ << ", "
       << "\"operations\": " << operations_ << ", "
-      << "\"leaves\": " << leaves_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"number_of_type_arguments\": " << number_of_type_arguments_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
@@ -199,7 +196,6 @@ void abstract_object::swap(abstract_object& other) noexcept {
     swap(local_properties_, other.local_properties_);
     swap(inherited_properties_, other.inherited_properties_);
     swap(operations_, other.operations_);
-    swap(leaves_, other.leaves_);
     swap(is_parent_, other.is_parent_);
     swap(number_of_type_arguments_, other.number_of_type_arguments_);
     swap(is_visitable_, other.is_visitable_);
@@ -218,7 +214,6 @@ bool abstract_object::compare(const abstract_object& rhs) const {
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&
         operations_ == rhs.operations_ &&
-        leaves_ == rhs.leaves_ &&
         is_parent_ == rhs.is_parent_ &&
         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
         is_visitable_ == rhs.is_visitable_ &&
@@ -293,22 +288,6 @@ void abstract_object::operations(const std::list<dogen::sml::operation>& v) {
 
 void abstract_object::operations(const std::list<dogen::sml::operation>&& v) {
     operations_ = std::move(v);
-}
-
-const std::list<dogen::sml::qname>& abstract_object::leaves() const {
-    return leaves_;
-}
-
-std::list<dogen::sml::qname>& abstract_object::leaves() {
-    return leaves_;
-}
-
-void abstract_object::leaves(const std::list<dogen::sml::qname>& v) {
-    leaves_ = v;
-}
-
-void abstract_object::leaves(const std::list<dogen::sml::qname>&& v) {
-    leaves_ = std::move(v);
 }
 
 bool abstract_object::is_parent() const {

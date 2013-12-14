@@ -81,7 +81,6 @@ public:
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::list<dogen::sml::operation>& operations,
-        const std::list<dogen::sml::qname>& leaves,
         const bool is_parent,
         const unsigned int number_of_type_arguments,
         const bool is_visitable,

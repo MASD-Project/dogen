@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-14 Sat 19:24]
+Clock summary at [2013-12-14 Sat 20:31]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *23:02* |       |       |
+| *Total time*                                                          | *23:24* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 23:02 |       |
+| Development Stories Implemented                                       |         | 23:24 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
@@ -24,7 +24,7 @@ Clock summary at [2013-12-14 Sat 19:24]
 | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
 | COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:31 |
 | COMPLETED Inclusion is broken with extractor changes                  |         |       |  1:27 |
-| IMPLEMENTATION Use relationship container for leaves                  |         |       |  0:44 |
+| COMPLETED Use relationship container for leaves                       |         |       |  1:06 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
 
@@ -238,7 +238,8 @@ first place.
 We need to regenerate SML with these changes and make sure we have a
 working code generator.
 
-*** IMPLEMENTATION Use relationship container for leaves              :story:
+*** COMPLETED Use relationship container for leaves                   :story:
+    CLOSED: [2013-12-14 Sat 20:31]
 
 Update transformer to use relationship container rather than leaves
 property.
@@ -251,7 +252,9 @@ property.
      CLOSED: [2013-12-14 Sat 17:49]
      CLOCK: [2013-12-14 Sat 17:27]--[2013-12-14 Sat 17:49] =>  0:22
 
-**** Remove leaves from abstract object and fix the fallout            :task:
+**** COMPLETED Remove leaves from abstract object and fix the fallout  :task:
+     CLOSED: [2013-12-14 Sat 20:31]
+     CLOCK: [2013-12-14 Sat 20:09]--[2013-12-14 Sat 20:31] =>  0:22
 
 *** Use relationship container for keys                               :story:
 

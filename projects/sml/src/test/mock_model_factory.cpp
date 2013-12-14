@@ -820,7 +820,6 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
     auto o1(build_value_object(1, r.name()));
     parent_to_child(flags_.properties_indexed(), *o0, *o1);
     o0->is_parent(true);
-    o0->leaves().push_back(o1->name());
     insert_object(r, o1);
 
     return r;
@@ -851,7 +850,6 @@ build_object_with_parent_that_models_a_refined_concept(
     auto o1(build_value_object(1, r.name()));
     parent_to_child(flags_.properties_indexed(), *o0, *o1);
     o0->is_parent(true);
-    o0->leaves().push_back(o1->name());
     insert_object(r, o1);
 
     return r;
@@ -892,7 +890,6 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
     auto o1(build_value_object(1, r.name()));
     parent_to_child(flags_.properties_indexed(), *o0, *o1);
     o0->is_parent(true);
-    o0->leaves().push_back(o1->name());
 
     const auto mc(relationship_types::modeled_concepts);
     add_relationship(*o1, c0, mc);
@@ -1050,7 +1047,6 @@ object_with_parent_in_the_same_model(const bool has_property) const {
     insert_object(r, o1);
 
     o1->is_parent(true);
-    o1->leaves().push_back(o0->name());
     return r;
 }
 
@@ -1059,7 +1055,6 @@ model mock_model_factory::object_with_missing_parent_in_the_same_model() const {
     auto o0(build_value_object(0, mn));
     auto o1(build_value_object(1, mn));
     o1->is_parent(true);
-    o1->leaves().push_back(o0->name());
     parent_to_child(flags_.properties_indexed(), *o1, *o0);
     model r(build_empty_model(0));
     insert_object(r, o1);
@@ -1074,7 +1069,6 @@ object_with_parent_in_different_models() const {
     parent_to_child(flags_.properties_indexed(), *o1, *o0);
 
     o1->is_parent(true);
-    o1->leaves().push_back(o0->name());
 
     model m0(build_empty_model(0));
     insert_object(m0, o0);
@@ -1099,9 +1093,6 @@ model mock_model_factory::object_with_three_children_in_same_model() const {
     parent_to_child(flags_.properties_indexed(), *o3, *o2);
 
     o3->is_parent(true);
-    o3->leaves().push_back(o0->name());
-    o3->leaves().push_back(o1->name());
-    o3->leaves().push_back(o2->name());
 
     model r(build_empty_model(0));
     insert_object(r, o0);
@@ -1143,14 +1134,11 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
     parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
 
     o1->is_parent(true);
-    o1->leaves().push_back(o0->name());
     add_relationship(*o1, *o0, relationship_types::leaves);
 
     o2->is_parent(true);
-    o2->leaves().push_back(o0->name());
     add_relationship(*o2, *o0, relationship_types::leaves);
 
-    o3->leaves().push_back(o0->name());
     o3->is_parent(true);
     add_relationship(*o3, *o0, relationship_types::leaves);
 
@@ -1174,15 +1162,12 @@ model mock_model_factory::object_with_third_degree_parent_missing() const {
     parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
 
     o1->is_parent(true);
-    o1->leaves().push_back(o0->name());
     add_relationship(*o1, *o0, relationship_types::leaves);
 
     o2->is_parent(true);
-    o2->leaves().push_back(o0->name());
     add_relationship(*o2, *o0, relationship_types::leaves);
 
     o3->is_parent(true);
-    o3->leaves().push_back(o0->name());
     add_relationship(*o3, *o0, relationship_types::leaves);
 
     model r(build_empty_model(0));
@@ -1205,15 +1190,12 @@ object_with_third_degree_parent_in_different_models() const {
     parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
 
     o1->is_parent(true);
-    o1->leaves().push_back(o0->name());
     add_relationship(*o1, *o0, relationship_types::leaves);
 
     o2->is_parent(true);
-    o2->leaves().push_back(o0->name());
     add_relationship(*o2, *o0, relationship_types::leaves);
 
     o3->is_parent(true);
-    o3->leaves().push_back(o0->name());
     add_relationship(*o3, *o0, relationship_types::leaves);
 
     model m0(build_empty_model(0));
@@ -1243,15 +1225,12 @@ object_with_missing_third_degree_parent_in_different_models() const {
     parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
 
     o1->is_parent(true);
-    o1->leaves().push_back(o0->name());
     add_relationship(*o1, *o0, relationship_types::leaves);
 
     o2->is_parent(true);
-    o2->leaves().push_back(o0->name());
     add_relationship(*o2, *o0, relationship_types::leaves);
 
     o3->is_parent(true);
-    o3->leaves().push_back(o0->name());
     add_relationship(*o3, *o0, relationship_types::leaves);
 
     model m0(build_empty_model(0));

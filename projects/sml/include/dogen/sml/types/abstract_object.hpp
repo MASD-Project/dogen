@@ -65,7 +65,6 @@ public:
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::list<dogen::sml::operation>& operations,
-        const std::list<dogen::sml::qname>& leaves,
         const bool is_parent,
         const unsigned int number_of_type_arguments,
         const bool is_visitable,
@@ -135,16 +134,6 @@ public:
     std::list<dogen::sml::operation>& operations();
     void operations(const std::list<dogen::sml::operation>& v);
     void operations(const std::list<dogen::sml::operation>&& v);
-    /**@}*/
-
-    /**
-     * @brief All concrete types which are indirectly or directly derived from this type.
-     */
-    /**@{*/
-    const std::list<dogen::sml::qname>& leaves() const;
-    std::list<dogen::sml::qname>& leaves();
-    void leaves(const std::list<dogen::sml::qname>& v);
-    void leaves(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
     /**
@@ -242,7 +231,6 @@ private:
     std::list<dogen::sml::property> local_properties_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
     std::list<dogen::sml::operation> operations_;
-    std::list<dogen::sml::qname> leaves_;
     bool is_parent_;
     unsigned int number_of_type_arguments_;
     bool is_visitable_;

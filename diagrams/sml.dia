@@ -3441,16 +3441,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.205,94.55;64.7675,106.05"/>
+        <dia:rectangle val="46.205,93.75;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="46.255,101"/>
         <dia:point val="46.255,106"/>
@@ -3663,16 +3663,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.125,94.55;64.7675,106.05"/>
+        <dia:rectangle val="61.125,93.75;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="61.175,101"/>
         <dia:point val="61.175,106"/>
@@ -3819,16 +3819,16 @@ underlying storage (for example, a relational database).#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0675,94.55;72.63,106.05"/>
+        <dia:rectangle val="63.0675,93.75;72.63,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="72.58,101"/>
         <dia:point val="72.58,106"/>
@@ -6685,7 +6685,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="50,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,82.95;77.885,94.65"/>
+        <dia:rectangle val="49.95,82.95;77.885,93.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,83"/>
@@ -6694,7 +6694,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.6"/>
+        <dia:real val="10.799999999999999"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#abstract_object#</dia:string>
@@ -6784,29 +6784,6 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#leaves#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;qname&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All concrete types which are indirectly or directly derived from this type.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#is_parent#</dia:string>
@@ -7532,16 +7509,16 @@ object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O65">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.205,94.55;64.7675,106.05"/>
+        <dia:rectangle val="28.205,93.75;64.7675,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="28.255,101"/>
         <dia:point val="28.255,106"/>
@@ -7573,16 +7550,16 @@ object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O66">
       <dia:attribute name="obj_pos">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0675,94.55;89.075,106"/>
+        <dia:rectangle val="63.0675,93.75;89.075,106"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.9175,94.6"/>
+        <dia:point val="63.9175,93.8"/>
         <dia:point val="63.9175,101"/>
         <dia:point val="89.025,101"/>
         <dia:point val="89.025,105.95"/>
