@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/object_types_td.hpp"
+#ifndef DOGEN_SML_HASH_OBJECT_HASH_HPP
+#define DOGEN_SML_HASH_OBJECT_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/sml/types/object.hpp"
 
 namespace dogen {
 namespace sml {
 
-object_types_generator::object_types_generator() : position_(0) { }
-void object_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<object_types>(position % 5);
-}
-
-object_types_generator::result_type
-object_types_generator::create(const unsigned int  position) {
-    result_type r;
-    object_types_generator::populate(position, r);
-    return r;
-}
-
-object_types_generator::result_type
-object_types_generator::operator()() {
-    return create(position_++);
-}
+struct object_hasher {
+public:
+    static std::size_t hash(const object& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::sml::object> {
+public:
+    size_t operator()(const dogen::sml::object& v) const {
+        return dogen::sml::object_hasher::hash(v);
+    }
+};
+
+}
+#endif

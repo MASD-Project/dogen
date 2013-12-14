@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
-<entity class_id="7" tracking_level="0" version="0">
+<entity class_id="8" tracking_level="0" version="0">
 	<origin_type>1</origin_type>
 	<documentation></documentation>
-	<meta_data class_id="8" tracking_level="0" version="0">
+	<meta_data class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 		<data></data>
 	</meta_data>
-	<name class_id="9" tracking_level="0" version="0">
+	<name class_id="10" tracking_level="0" version="0">
 		<model_name>std_model</model_name>
-		<external_module_path class_id="10" tracking_level="0" version="0">
+		<external_module_path class_id="11" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
 		</external_module_path>
@@ -22,11 +22,11 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<references class_id="11" tracking_level="0" version="0">
+	<references class_id="12" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="12" tracking_level="0" version="0">
+		<item class_id="13" tracking_level="0" version="0">
 			<first>
 				<model_name>std</model_name>
 				<external_module_path>
@@ -42,7 +42,7 @@
 			<second>3</second>
 		</item>
 	</references>
-	<leaves class_id="13" tracking_level="0" version="0">
+	<leaves class_id="14" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
@@ -59,11 +59,11 @@
 			<simple_name>derived</simple_name>
 		</item>
 	</leaves>
-	<modules class_id="14" tracking_level="0" version="0">
+	<modules class_id="15" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="15" tracking_level="0" version="0">
+		<item class_id="16" tracking_level="0" version="0">
 			<first>
 				<model_name>std_model</model_name>
 				<external_module_path>
@@ -76,7 +76,7 @@
 				</module_path>
 				<simple_name>pkg1</simple_name>
 			</first>
-			<second class_id="16" tracking_level="0" version="0">
+			<second class_id="17" tracking_level="0" version="0">
 				<origin_type>1</origin_type>
 				<documentation></documentation>
 				<meta_data>
@@ -97,33 +97,33 @@
 					<simple_name>pkg1</simple_name>
 				</name>
 				<generation_type>1</generation_type>
-				<members class_id="17" tracking_level="0" version="0">
+				<members class_id="18" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="18" tracking_level="0" version="0">
+	<concepts class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="19" tracking_level="0" version="0">
+	<primitives class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="20" tracking_level="0" version="0">
+	<enumerations class_id="21" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="21" tracking_level="0" version="0">
+	<objects class_id="22" tracking_level="0" version="0">
 		<count>13</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="22" tracking_level="0" version="0">
+		<item class_id="23" tracking_level="0" version="0">
 			<first>
 				<model_name>std_model</model_name>
 				<external_module_path>
@@ -136,10 +136,10 @@
 				</module_path>
 				<simple_name>some_service</simple_name>
 			</first>
-			<second class_id="23" tracking_level="0" version="1">
-				<px class_id="5" tracking_level="1" version="0" object_id="_0">
-					<abstract_object class_id="24" tracking_level="0" version="0">
-						<type class_id="25" tracking_level="0" version="0">
+			<second class_id="24" tracking_level="0" version="1">
+				<px class_id="6" tracking_level="1" version="0" object_id="_0">
+					<abstract_object class_id="25" tracking_level="0" version="0">
+						<type class_id="26" tracking_level="0" version="0">
 							<origin_type>1</origin_type>
 							<documentation></documentation>
 							<meta_data>
@@ -161,14 +161,14 @@
 							</name>
 							<generation_type>2</generation_type>
 						</type>
-						<all_properties class_id="26" tracking_level="0" version="0">
+						<all_properties class_id="27" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</all_properties>
 						<local_properties>
 							<count>4</count>
 							<item_version>0</item_version>
-							<item class_id="27" tracking_level="0" version="0">
+							<item class_id="28" tracking_level="0" version="0">
 								<documentation></documentation>
 								<meta_data>
 									<count>0</count>
@@ -176,7 +176,7 @@
 									<data></data>
 								</meta_data>
 								<name>prop_0</name>
-								<type class_id="28" tracking_level="0" version="0">
+								<type class_id="29" tracking_level="0" version="0">
 									<type>
 										<model_name>std</model_name>
 										<external_module_path>
@@ -189,7 +189,7 @@
 										</module_path>
 										<simple_name>shared_ptr</simple_name>
 									</type>
-									<children class_id="29" tracking_level="0" version="0">
+									<children class_id="30" tracking_level="0" version="0">
 										<count>1</count>
 										<item_version>0</item_version>
 										<item>
@@ -350,12 +350,12 @@
 								<is_fluent>0</is_fluent>
 							</item>
 						</local_properties>
-						<inherited_properties class_id="30" tracking_level="0" version="0">
+						<inherited_properties class_id="31" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</inherited_properties>
-						<operations class_id="31" tracking_level="0" version="0">
+						<operations class_id="32" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</operations>
@@ -367,7 +367,7 @@
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
 						<is_child>0</is_child>
-						<relationships class_id="32" tracking_level="0" version="0">
+						<relationships class_id="33" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
@@ -393,7 +393,7 @@
 				<simple_name>primitives</simple_name>
 			</first>
 			<second>
-				<px class_id="6" tracking_level="1" version="0" object_id="_1">
+				<px class_id="7" tracking_level="1" version="0" object_id="_1">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -716,7 +716,7 @@
 				<simple_name>class_b</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_2">
+				<px class_id_reference="7" object_id="_2">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -1111,7 +1111,7 @@
 				<simple_name>class_g</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_3">
+				<px class_id_reference="7" object_id="_3">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -1502,7 +1502,7 @@
 				<simple_name>base</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_4">
+				<px class_id_reference="7" object_id="_4">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -1605,7 +1605,7 @@
 							<count>1</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="33" tracking_level="0" version="0">
+							<item class_id="34" tracking_level="0" version="0">
 								<first>5</first>
 								<second>
 									<count>1</count>
@@ -1682,7 +1682,7 @@
 								<meta_data>
 									<count>1</count>
 									<item_version>0</item_version>
-									<item class_id="34" tracking_level="0" version="0">
+									<item class_id="35" tracking_level="0" version="0">
 										<first>IDENTITY_ATTRIBUTE</first>
 										<second>
 											<count>0</count>
@@ -1836,7 +1836,7 @@
 				<simple_name>class_c</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_6">
+				<px class_id_reference="7" object_id="_6">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -2093,7 +2093,7 @@
 				<simple_name>class_f</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_7">
+				<px class_id_reference="7" object_id="_7">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -2376,7 +2376,7 @@
 				<simple_name>class_j</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_8">
+				<px class_id_reference="7" object_id="_8">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -2677,7 +2677,7 @@
 				<simple_name>class_d</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_9">
+				<px class_id_reference="7" object_id="_9">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -3072,7 +3072,7 @@
 				<simple_name>class_h</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_10">
+				<px class_id_reference="7" object_id="_10">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -3248,7 +3248,7 @@
 				<simple_name>class_e</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_11">
+				<px class_id_reference="7" object_id="_11">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -3643,7 +3643,7 @@
 				<simple_name>derived</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="6" object_id="_12">
+				<px class_id_reference="7" object_id="_12">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>

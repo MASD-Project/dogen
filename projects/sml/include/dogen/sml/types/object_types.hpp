@@ -37,7 +37,9 @@ namespace sml {
 enum class object_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     entity = 1, ///< Object is an entity.
-    keyed_entity = 2 ///< Object is an entity with associated key or keys.
+    keyed_entity = 2, ///< Object is an entity with associated key or keys.
+    factory = 3, ///< Type whose responsibility is to create other types.
+    repository = 4 ///< Represents all objects of a certain type as a conceptual set.
 };
 
 } }

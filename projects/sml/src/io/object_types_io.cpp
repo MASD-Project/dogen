@@ -39,6 +39,12 @@ std::ostream& operator<<(std::ostream& s, const object_types& v) {
     case object_types::keyed_entity:
         attr = "\"keyed_entity\"";
         break;
+    case object_types::factory:
+        attr = "\"factory\"";
+        break;
+    case object_types::repository:
+        attr = "\"repository\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for object_types");
     }

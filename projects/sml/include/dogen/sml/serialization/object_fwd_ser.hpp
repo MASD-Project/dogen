@@ -18,27 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/object_types_td.hpp"
+#ifndef DOGEN_SML_SERIALIZATION_OBJECT_FWD_SER_HPP
+#define DOGEN_SML_SERIALIZATION_OBJECT_FWD_SER_HPP
 
-namespace dogen {
-namespace sml {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-object_types_generator::object_types_generator() : position_(0) { }
-void object_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<object_types>(position % 5);
-}
+#include "dogen/sml/types/object_fwd.hpp"
 
-object_types_generator::result_type
-object_types_generator::create(const unsigned int  position) {
-    result_type r;
-    object_types_generator::populate(position, r);
-    return r;
-}
+namespace boost {
+namespace serialization {
 
-object_types_generator::result_type
-object_types_generator::operator()() {
-    return create(position_++);
-}
+template<class Archive>
+void save(Archive& ar, const dogen::sml::object& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::sml::object& v, unsigned int version);
 
 } }
+
+#endif

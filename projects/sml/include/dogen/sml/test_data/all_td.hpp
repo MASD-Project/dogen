@@ -28,6 +28,7 @@
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
+#include "dogen/sml/test_data/object_td.hpp"
 #include "dogen/sml/test_data/object_types_td.hpp"
 #include "dogen/sml/test_data/operation_td.hpp"
 #include "dogen/sml/test_data/origin_types_td.hpp"
