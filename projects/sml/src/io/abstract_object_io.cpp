@@ -18,15 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <ostream>
-#include <sstream>
 #include "dogen/sml/io/abstract_object_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"

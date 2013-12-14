@@ -19,9 +19,7 @@
  *
  */
 #include "dogen/sml/hash/abstract_object_hash.hpp"
-#include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/operation_hash.hpp"
-#include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
