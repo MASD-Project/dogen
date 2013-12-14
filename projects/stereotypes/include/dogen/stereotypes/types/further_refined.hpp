@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include <string>
 #include "dogen/stereotypes/serialization/further_refined_fwd_ser.hpp"
 #include "dogen/stereotypes/types/base_with_concept.hpp"
 

@@ -109,26 +109,27 @@ void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
         recurse_nested_qnames(c, rel, is_pointer);
 }
 
-void extractor::properties_for_concept(const sml::qname& qn,
-    std::list<sml::property>& properties,
-    std::unordered_set<sml::qname>& processed_qnames) const {
+void extractor::properties_for_concept(const sml::abstract_object& ao,
+    std::list<sml::property>& properties) const {
 
-    if (processed_qnames.find(qn) != processed_qnames.end())
+    using sml::relationship_types;
+    const auto i(ao.relationships().find(relationship_types::modeled_concepts));
+    if (i == ao.relationships().end() || i->second.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
         return;
-
-    processed_qnames.insert(qn);
-    const auto i(model_.concepts().find(qn));
-    if (i == model_.concepts().end()) {
-        const auto sn(qn.simple_name());
-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-        BOOST_THROW_EXCEPTION(extraction_error(concept_not_found + sn));
     }
 
-    for (const auto& c : i->second.refines())
-        properties_for_concept(c, properties, processed_qnames);
+    for (const auto& qn : i->second) {
+        const auto j(model_.concepts().find(qn));
+        if (j == model_.concepts().end()) {
+            const auto sn(qn.simple_name());
+            BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+            BOOST_THROW_EXCEPTION(extraction_error(concept_not_found + sn));
+        }
 
-    const auto& props(i->second.local_properties());
-    properties.insert(properties.end(), props.begin(), props.end());
+        const auto& props(j->second.local_properties());
+        properties.insert(properties.end(), props.begin(), props.end());
+    }
 }
 
 relationships
@@ -138,7 +139,7 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     relationships r;
 
     using dogen::sml::relationship_types;
-    auto i(ao.relationships().find(relationship_types::parents));
+    const auto i(ao.relationships().find(relationship_types::parents));
     if (i == ao.relationships().end() || i->second.empty())
         BOOST_LOG_SEV(lg, debug) << "Object has no parents.";
     else {
@@ -153,14 +154,7 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
 
-    i = ao.relationships().find(relationship_types::modeled_concepts);
-    if (i == ao.relationships().end() || i->second.empty())
-        BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
-    else {
-        for (const auto& qn : i->second)
-            properties_for_concept(qn, props, processed_qnames);
-    }
-
+    properties_for_concept(ao, props);
     props.insert(props.end(), ao.local_properties().begin(),
         ao.local_properties().end());
 

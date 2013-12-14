@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/stereotypes/io/base_with_concept_io.hpp"
 #include "dogen/stereotypes/io/further_refined_io.hpp"
