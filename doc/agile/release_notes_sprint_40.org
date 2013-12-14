@@ -10,19 +10,20 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-14 Sat 17:49]
+Clock summary at [2013-12-14 Sat 18:18]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *21:35* |       |       |
+| *Total time*                                                          | *22:03* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 21:35 |       |
+| Development Stories Implemented                                       |         | 22:03 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
 | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
 | COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:31 |
+| IMPLEMENTATION Inclusion is broken with extractor changes             |         |       |  0:28 |
 | IMPLEMENTATION Use relationship container for leaves                  |         |       |  0:44 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
@@ -208,6 +209,21 @@ cache.
 In method =validate_inheritance_graph=, we should really just check
 that the parent exists since we know all objects get checked
 anyway. this results in a lot of double-checks for no reason.
+
+*** IMPLEMENTATION Inclusion is broken with extractor changes         :spike:
+
+When codegening with latest, a number of includes are missing from
+SML. After bisection, the problem was detected with commit 0157e96.
+
+**** COMPLETED Revert changes and push it                              :task:
+     CLOSED: [2013-12-14 Sat 18:17]
+     CLOCK: [2013-12-14 Sat 17:49]--[2013-12-14 Sat 18:17] =>  0:28
+
+Revert extractor back to commit c83bf2d and ship fix.
+
+**** Re-aply changes and try to fix borked code
+
+Try to figure out why changes are borked.
 
 *** IMPLEMENTATION Use relationship container for leaves              :story:
 
