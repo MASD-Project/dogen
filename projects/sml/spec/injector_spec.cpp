@@ -58,6 +58,13 @@ bool has_relationship(const relationship_types rt,
     return i != o.relationships().end() && !i->second.empty();
 }
 
+std::list<dogen::sml::qname> get_relationship(const relationship_types rt,
+    const dogen::sml::abstract_object& o) {
+    const auto i(o.relationships().find(rt));
+    BOOST_REQUIRE(i != o.relationships().end() && !i->second.empty());
+    return i->second;
+}
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -157,8 +164,16 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
             using dogen::sml::keyed_entity;
             const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
             BOOST_REQUIRE(!ae.is_versioned());
-            BOOST_CHECK(!ae.versioned_key());
-            ukqn = ae.unversioned_key();
+
+            BOOST_CHECK(!has_relationship(relationship_types::versioned_keys,
+                    ae));
+            BOOST_REQUIRE(has_relationship(relationship_types::unversioned_keys,
+                    ae));
+
+            const auto rels(
+                get_relationship(relationship_types::unversioned_keys, ae));
+            BOOST_REQUIRE(rels.size() == 1);
+            ukqn = rels.front();
 
             BOOST_CHECK(factory.is_type_name_n_unversioned(0, ukqn));
             BOOST_CHECK(!factory.is_type_name_n_versioned(0, ukqn));
@@ -208,12 +223,19 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
             const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
             BOOST_REQUIRE(ae.is_versioned());
 
-            BOOST_CHECK(ae.versioned_key());
-            vkqn = *ae.versioned_key();
+            BOOST_CHECK(has_relationship(relationship_types::versioned_keys,
+                    ae));
+            auto rels(
+                get_relationship(relationship_types::versioned_keys, ae));
+            BOOST_REQUIRE(rels.size() == 1);
+            vkqn = rels.front();
             BOOST_CHECK(!factory.is_type_name_n_unversioned(0, vkqn));
             BOOST_CHECK(factory.is_type_name_n_versioned(0, vkqn));
 
-            ukqn = ae.unversioned_key();
+            BOOST_REQUIRE(has_relationship(relationship_types::unversioned_keys,
+                    ae));
+            rels = get_relationship(relationship_types::unversioned_keys, ae);
+            ukqn = rels.front();
             BOOST_CHECK(factory.is_type_name_n_unversioned(0, ukqn));
             BOOST_CHECK(!factory.is_type_name_n_versioned(0, ukqn));
             BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: " << ukqn;

@@ -12162,19 +12162,19 @@ not have a need for it.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O107">
       <dia:attribute name="obj_pos">
-        <dia:point val="65,62"/>
+        <dia:point val="66,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.95,61.95;73.8675,71.25"/>
+        <dia:rectangle val="65.95,61.95;74.8675,72.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="65,62"/>
+        <dia:point val="66,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.817499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="10"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#relationship_types#</dia:string>
@@ -12404,7 +12404,7 @@ not have a need for it.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#key#</dia:string>
+            <dia:string>#unversioned_keys#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -12413,7 +12413,30 @@ not have a need for it.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Types that are used in the identity function of this type. #</dia:string>
+            <dia:string>#Types that are used in the unversioned identity function of this type. #</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#versioned_keys#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Types that are used in the versioned identity function of this type. #</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12496,7 +12519,7 @@ not have a need for it.#</dia:string>
         <dia:point val="77.835,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.3587,71.15;78.585,83.8"/>
+        <dia:rectangle val="70.3588,71.95;78.585,83.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12504,8 +12527,8 @@ not have a need for it.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="77.835,83"/>
         <dia:point val="77.835,78"/>
-        <dia:point val="69.4087,78"/>
-        <dia:point val="69.4087,71.2"/>
+        <dia:point val="70.4087,78"/>
+        <dia:point val="70.4087,72"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

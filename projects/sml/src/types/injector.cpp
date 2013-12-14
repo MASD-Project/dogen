@@ -195,10 +195,14 @@ void injector::inject_keys(model& m) const {
             const auto uvk(create_unversioned_key(qn, gt, ke.identity()));
             objects.push_back(uvk);
             ke.unversioned_key(uvk->name());
+            ke.relationships()[relationship_types::unversioned_keys].push_back(
+                uvk->name());
 
             if (ke.is_versioned()) {
                 auto vk(create_versioned_key(qn, gt, ke.identity()));
                 ke.versioned_key(vk->name());
+                ke.relationships()[relationship_types::versioned_keys]
+                    .push_back(vk->name());
                 objects.push_back(vk);
             }
 
