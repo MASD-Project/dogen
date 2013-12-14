@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/stereotypes/io/base_with_concept_io.hpp"
 #include "dogen/stereotypes/types/further_refined.hpp"
@@ -31,7 +32,7 @@ further_refined::further_refined()
 
 further_refined::further_refined(
     const int prop_2,
-    const int prop_0,
+    const std::string& prop_0,
     const int prop_3,
     const int prop_1)
     : dogen::stereotypes::base_with_concept(prop_2,

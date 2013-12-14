@@ -25,12 +25,11 @@ namespace stereotypes {
 
 second_refinement_concept_model::second_refinement_concept_model()
     : prop_2_(static_cast<int>(0)),
-      prop_0_(static_cast<int>(0)),
       prop_10_(static_cast<int>(0)) { }
 
 second_refinement_concept_model::second_refinement_concept_model(
     const int prop_2,
-    const int prop_0,
+    const std::string& prop_0,
     const int prop_10)
     : prop_2_(prop_2),
       prop_0_(prop_0),
@@ -63,12 +62,20 @@ void second_refinement_concept_model::prop_2(const int v) {
     prop_2_ = v;
 }
 
-int second_refinement_concept_model::prop_0() const {
+const std::string& second_refinement_concept_model::prop_0() const {
     return prop_0_;
 }
 
-void second_refinement_concept_model::prop_0(const int v) {
+std::string& second_refinement_concept_model::prop_0() {
+    return prop_0_;
+}
+
+void second_refinement_concept_model::prop_0(const std::string& v) {
     prop_0_ = v;
+}
+
+void second_refinement_concept_model::prop_0(const std::string&& v) {
+    prop_0_ = std::move(v);
 }
 
 int second_refinement_concept_model::prop_10() const {

@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <iosfwd>
+#include <string>
 #include "dogen/stereotypes/serialization/further_refined_fwd_ser.hpp"
 #include "dogen/stereotypes/types/base_with_concept.hpp"
 
@@ -50,7 +51,7 @@ public:
 public:
     further_refined(
         const int prop_2,
-        const int prop_0,
+        const std::string& prop_0,
         const int prop_3,
         const int prop_1);
 

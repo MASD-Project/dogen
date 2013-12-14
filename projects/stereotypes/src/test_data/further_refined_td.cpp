@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/stereotypes/test_data/base_with_concept_td.hpp"
 #include "dogen/stereotypes/test_data/further_refined_td.hpp"
 

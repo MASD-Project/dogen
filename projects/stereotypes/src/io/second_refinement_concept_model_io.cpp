@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/stereotypes/io/second_refinement_concept_model_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace stereotypes {
@@ -28,7 +37,7 @@ std::ostream& operator<<(std::ostream& s, const second_refinement_concept_model&
     s << " { "
       << "\"__type__\": " << "\"dogen::stereotypes::second_refinement_concept_model\"" << ", "
       << "\"prop_2\": " << v.prop_2() << ", "
-      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_0\": " << "\"" << tidy_up_string(v.prop_0()) << "\"" << ", "
       << "\"prop_10\": " << v.prop_10()
       << " }";
     return(s);

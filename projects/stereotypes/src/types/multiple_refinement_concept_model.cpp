@@ -26,14 +26,13 @@ namespace stereotypes {
 multiple_refinement_concept_model::multiple_refinement_concept_model()
     : prop_3_(static_cast<int>(0)),
       prop_1_(static_cast<int>(0)),
-      prop_0_(static_cast<int>(0)),
       prop_2_(static_cast<int>(0)),
       prop_10_(static_cast<int>(0)) { }
 
 multiple_refinement_concept_model::multiple_refinement_concept_model(
     const int prop_3,
     const int prop_1,
-    const int prop_0,
+    const std::string& prop_0,
     const int prop_2,
     const int prop_10)
     : prop_3_(prop_3),
@@ -81,12 +80,20 @@ void multiple_refinement_concept_model::prop_1(const int v) {
     prop_1_ = v;
 }
 
-int multiple_refinement_concept_model::prop_0() const {
+const std::string& multiple_refinement_concept_model::prop_0() const {
     return prop_0_;
 }
 
-void multiple_refinement_concept_model::prop_0(const int v) {
+std::string& multiple_refinement_concept_model::prop_0() {
+    return prop_0_;
+}
+
+void multiple_refinement_concept_model::prop_0(const std::string& v) {
     prop_0_ = v;
+}
+
+void multiple_refinement_concept_model::prop_0(const std::string&& v) {
+    prop_0_ = std::move(v);
 }
 
 int multiple_refinement_concept_model::prop_2() const {

@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <iosfwd>
+#include <string>
 #include "dogen/stereotypes/serialization/base_with_concept_fwd_ser.hpp"
 
 namespace dogen {
@@ -48,7 +49,7 @@ public:
 public:
     base_with_concept(
         const int prop_2,
-        const int prop_0);
+        const std::string& prop_0);
 
 private:
     template<typename Archive>
@@ -70,11 +71,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Base concept property
+     * @brief Ensure we're testing header files inclusion.
      */
     /**@{*/
-    int prop_0() const;
-    void prop_0(const int v);
+    const std::string& prop_0() const;
+    std::string& prop_0();
+    void prop_0(const std::string& v);
+    void prop_0(const std::string&& v);
     /**@}*/
 
 protected:
@@ -87,7 +90,7 @@ protected:
 
 private:
     int prop_2_;
-    int prop_0_;
+    std::string prop_0_;
 };
 
 inline base_with_concept::~base_with_concept() noexcept { }

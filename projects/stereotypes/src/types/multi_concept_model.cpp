@@ -25,13 +25,12 @@ namespace stereotypes {
 
 multi_concept_model::multi_concept_model()
     : prop_1_(static_cast<int>(0)),
-      prop_0_(static_cast<int>(0)),
       prop_2_(static_cast<int>(0)),
       prop_10_(static_cast<int>(0)) { }
 
 multi_concept_model::multi_concept_model(
     const int prop_1,
-    const int prop_0,
+    const std::string& prop_0,
     const int prop_2,
     const int prop_10)
     : prop_1_(prop_1),
@@ -68,12 +67,20 @@ void multi_concept_model::prop_1(const int v) {
     prop_1_ = v;
 }
 
-int multi_concept_model::prop_0() const {
+const std::string& multi_concept_model::prop_0() const {
     return prop_0_;
 }
 
-void multi_concept_model::prop_0(const int v) {
+std::string& multi_concept_model::prop_0() {
+    return prop_0_;
+}
+
+void multi_concept_model::prop_0(const std::string& v) {
     prop_0_ = v;
+}
+
+void multi_concept_model::prop_0(const std::string&& v) {
+    prop_0_ = std::move(v);
 }
 
 int multi_concept_model::prop_2() const {

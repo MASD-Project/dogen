@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/stereotypes/serialization/base_with_concept_ser.hpp"
 #include "dogen/stereotypes/serialization/further_refined_ser.hpp"
 

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/stereotypes/test_data/base_with_concept_td.hpp"
 #include "dogen/stereotypes/test_data/further_refined_td.hpp"
 
@@ -25,6 +26,12 @@ namespace {
 
 int create_int(const unsigned int position) {
     return position;
+}
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 }
@@ -36,7 +43,7 @@ namespace stereotypes {
 void base_with_concept_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_2(create_int(position + 0));
-    v.prop_0(create_int(position + 1));
+    v.prop_0(create_std_string(position + 1));
 }
 
 base_with_concept_generator::result_type*

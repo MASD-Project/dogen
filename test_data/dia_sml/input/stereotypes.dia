@@ -2212,13 +2212,13 @@ These are the main cases:
         <dia:point val="37.875,40.875"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.825,40.825;46.536,44.525"/>
+        <dia:rectangle val="37.825,40.825;46.535,44.525"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="37.875,40.875"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.6110156250000003"/>
+        <dia:real val="8.6099999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -3916,13 +3916,13 @@ These are the main cases:
         <dia:point val="107,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,28.95;113.955,32.65"/>
+        <dia:rectangle val="106.95,28.95;115.25,32.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9049999999999994"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -4020,13 +4020,13 @@ These are the main cases:
             <dia:string>#prop_0#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#int#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Base concept property#</dia:string>
+            <dia:string>#Ensure we're testing header files inclusion.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4315,17 +4315,17 @@ These are the main cases:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O32">
       <dia:attribute name="obj_pos">
-        <dia:point val="110.453,32.6"/>
+        <dia:point val="111.1,32.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.832,32.55;111.302,39.05"/>
+        <dia:rectangle val="101.832,32.55;111.95,39.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="110.453,32.6"/>
-        <dia:point val="110.453,36.2"/>
+        <dia:point val="111.1,32.6"/>
+        <dia:point val="111.1,36.2"/>
         <dia:point val="101.882,36.2"/>
         <dia:point val="101.882,39"/>
       </dia:attribute>
@@ -4356,17 +4356,17 @@ These are the main cases:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O33">
       <dia:attribute name="obj_pos">
-        <dia:point val="110.453,32.6"/>
+        <dia:point val="111.1,32.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.602,32.55;120.537,39.05"/>
+        <dia:rectangle val="110.25,32.55;120.537,39.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="110.453,32.6"/>
-        <dia:point val="110.453,36.2"/>
+        <dia:point val="111.1,32.6"/>
+        <dia:point val="111.1,36.2"/>
         <dia:point val="120.487,36.2"/>
         <dia:point val="120.487,39"/>
       </dia:attribute>

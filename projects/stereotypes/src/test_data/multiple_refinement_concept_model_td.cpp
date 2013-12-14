@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/stereotypes/test_data/multiple_refinement_concept_model_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
+}
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 }
@@ -37,7 +44,7 @@ void multiple_refinement_concept_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_3(create_int(position + 0));
     v.prop_1(create_int(position + 1));
-    v.prop_0(create_int(position + 2));
+    v.prop_0(create_std_string(position + 2));
     v.prop_2(create_int(position + 3));
     v.prop_10(create_int(position + 4));
 }

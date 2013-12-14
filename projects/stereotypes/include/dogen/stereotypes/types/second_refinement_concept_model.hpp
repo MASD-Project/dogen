@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <string>
 #include "dogen/stereotypes/serialization/second_refinement_concept_model_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +47,7 @@ public:
 public:
     second_refinement_concept_model(
         const int prop_2,
-        const int prop_0,
+        const std::string& prop_0,
         const int prop_10);
 
 private:
@@ -66,11 +67,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Base concept property
+     * @brief Ensure we're testing header files inclusion.
      */
     /**@{*/
-    int prop_0() const;
-    void prop_0(const int v);
+    const std::string& prop_0() const;
+    std::string& prop_0();
+    void prop_0(const std::string& v);
+    void prop_0(const std::string&& v);
     /**@}*/
 
     /**
@@ -93,7 +96,7 @@ public:
 
 private:
     int prop_2_;
-    int prop_0_;
+    std::string prop_0_;
     int prop_10_;
 };
 

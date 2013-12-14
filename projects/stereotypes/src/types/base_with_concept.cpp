@@ -18,19 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/stereotypes/types/base_with_concept.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace stereotypes {
 
 base_with_concept::base_with_concept()
-    : prop_2_(static_cast<int>(0)),
-      prop_0_(static_cast<int>(0)) { }
+    : prop_2_(static_cast<int>(0)) { }
 
 base_with_concept::base_with_concept(
     const int prop_2,
-    const int prop_0)
+    const std::string& prop_0)
     : prop_2_(prop_2),
       prop_0_(prop_0) { }
 
@@ -38,7 +46,7 @@ void base_with_concept::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::stereotypes::base_with_concept\"" << ", "
       << "\"prop_2\": " << prop_2_ << ", "
-      << "\"prop_0\": " << prop_0_
+      << "\"prop_0\": " << "\"" << tidy_up_string(prop_0_) << "\""
       << " }";
 }
 
@@ -61,12 +69,20 @@ void base_with_concept::prop_2(const int v) {
     prop_2_ = v;
 }
 
-int base_with_concept::prop_0() const {
+const std::string& base_with_concept::prop_0() const {
     return prop_0_;
 }
 
-void base_with_concept::prop_0(const int v) {
+std::string& base_with_concept::prop_0() {
+    return prop_0_;
+}
+
+void base_with_concept::prop_0(const std::string& v) {
     prop_0_ = v;
+}
+
+void base_with_concept::prop_0(const std::string&& v) {
+    prop_0_ = std::move(v);
 }
 
 } }
