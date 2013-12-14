@@ -21,7 +21,6 @@
 #include <memory>
 #include <functional>
 #include <boost/make_shared.hpp>
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/factory.hpp"
@@ -76,17 +75,17 @@ const std::string accept_operation_name("accept");
 const std::string accept_argument_name("v");
 const std::string accept_operation_doc("Acceptor for ");
 
-class keyed_entity_visitor : public dogen::sml::type_visitor {
+class entity_visitor : public dogen::sml::type_visitor {
 public:
-    typedef std::function<void(dogen::sml::keyed_entity&)> function_type;
+    typedef std::function<void(dogen::sml::entity&)> function_type;
 
 public:
-    explicit keyed_entity_visitor(const function_type& fn) : fn_(fn) {}
-    ~keyed_entity_visitor() noexcept { }
+    explicit entity_visitor(const function_type& fn) : fn_(fn) {}
+    ~entity_visitor() noexcept { }
 
 public:
     using type_visitor::visit;
-    virtual void visit(dogen::sml::keyed_entity& ke) override { fn_(ke); }
+    virtual void visit(dogen::sml::entity& ke) override { fn_(ke); }
 
 private:
     function_type fn_;
@@ -187,7 +186,7 @@ void injector::inject_keys(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
     std::list<boost::shared_ptr<abstract_object> > objects;
-    const auto lambda([&](keyed_entity& ke) {
+    const auto lambda([&](entity& ke) {
             if (ke.object_type() != object_types::keyed_entity)
                 return;
 
@@ -219,7 +218,7 @@ void injector::inject_keys(model& m) const {
             // objects.push_back(create_key_extractor(ke));
         });
 
-    keyed_entity_visitor v(lambda);
+    entity_visitor v(lambda);
     for (auto& pair : m.objects()) {
         BOOST_LOG_SEV(lg, debug) << "Visiting: " << pair.first;
         pair.second->accept(v);

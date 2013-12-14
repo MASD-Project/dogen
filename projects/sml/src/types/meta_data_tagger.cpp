@@ -27,7 +27,6 @@
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/factory.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
@@ -354,10 +353,6 @@ void meta_data_tagger::visit(sml::repository& r) const {
 
 void meta_data_tagger::visit(sml::value_object& vo) const {
     tag(vo);
-}
-
-void meta_data_tagger::visit(sml::keyed_entity& ke) const {
-    tag(ke);
 }
 
 void meta_data_tagger::visit(sml::entity& e) const {

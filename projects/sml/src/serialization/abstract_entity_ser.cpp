@@ -31,7 +31,6 @@
 #include "dogen/sml/serialization/abstract_entity_ser.hpp"
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/entity_ser.hpp"
-#include "dogen/sml/serialization/keyed_entity_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 
 #ifdef __linux__

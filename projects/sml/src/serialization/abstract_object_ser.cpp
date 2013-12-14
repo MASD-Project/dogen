@@ -31,7 +31,6 @@
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
-#include "dogen/sml/serialization/keyed_entity_ser.hpp"
 #include "dogen/sml/serialization/object_types_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"

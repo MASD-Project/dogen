@@ -21,7 +21,6 @@
 #include "dogen/sml/test_data/abstract_entity_td.hpp"
 #include "dogen/sml/test_data/abstract_object_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"
-#include "dogen/sml/test_data/keyed_entity_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 
 namespace {
@@ -58,9 +57,7 @@ populate(const unsigned int position, result_type& v) {
 
 abstract_entity_generator::result_type*
 abstract_entity_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
-        return dogen::sml::entity_generator::create_ptr(position);
-    return dogen::sml::keyed_entity_generator::create_ptr(position);
+    return dogen::sml::entity_generator::create_ptr(position);
 }
 
 

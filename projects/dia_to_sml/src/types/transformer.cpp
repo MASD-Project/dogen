@@ -25,7 +25,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/factory.hpp"
@@ -374,14 +373,6 @@ void transformer::update_abstract_entity(sml::abstract_entity& ae,
         ae.object_type(sml::object_types::keyed_entity);
 }
 
-void transformer::to_keyed_entity(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a keyed entity: " << o.id();
-
-    auto ke(boost::make_shared<sml::keyed_entity>());
-    update_abstract_entity(*ke, o, p);
-    context_.model().objects().insert(std::make_pair(ke->name(), ke));
-}
-
 void transformer::to_entity(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
 
@@ -580,10 +571,8 @@ void  transformer::dispatch(const processed_object& o, const profile& p) {
         to_concept(o, p);
     else if (p.is_exception())
         to_exception(o, p);
-    else if (p.is_entity())
+    else if (p.is_entity() || p.is_keyed_entity())
         to_entity(o, p);
-    else if (p.is_keyed_entity())
-        to_keyed_entity(o, p);
     else if (p.is_service())
         to_service(o, p);
     else if (p.is_factory())

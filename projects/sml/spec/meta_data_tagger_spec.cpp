@@ -30,7 +30,6 @@
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/meta_data_error.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/entity.hpp"

@@ -86,6 +86,7 @@ public:
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "reading expected: "
                                   << expected_path.string();
+
         const auto expected(xml_deserialize<Entity>(expected_path));
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "diff -u " << expected_path.string()

@@ -153,7 +153,6 @@ private:
     void visit(const dogen::sml::repository& r) override;
     void visit(const dogen::sml::enumeration& e) override;
     void visit(const dogen::sml::value_object& vo) override;
-    void visit(const dogen::sml::keyed_entity& ke) override;
     void visit(const dogen::sml::entity& e) override;
 
 public:

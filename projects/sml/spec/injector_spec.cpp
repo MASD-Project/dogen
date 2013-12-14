@@ -25,7 +25,6 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/injection_error.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/entity.hpp"
@@ -119,8 +118,8 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws
         const auto& qn(pair.first);
         if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            using dogen::sml::keyed_entity;
-            auto& o(dynamic_cast<keyed_entity&>(*pair.second));
+            using dogen::sml::entity;
+            auto& o(dynamic_cast<entity&>(*pair.second));
             BOOST_REQUIRE(o.local_properties().size() == 1);
             BOOST_REQUIRE(!o.is_versioned());
             o.identity().clear();
@@ -161,8 +160,8 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
         if (factory.is_type_name_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            using dogen::sml::keyed_entity;
-            const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
+            using dogen::sml::entity;
+            const auto& ae(dynamic_cast<const entity&>(*pair.second));
             BOOST_REQUIRE(!ae.is_versioned());
 
             BOOST_CHECK(!has_relationship(relationship_types::versioned_keys,
@@ -219,8 +218,8 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
         if (factory.is_type_name_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            using dogen::sml::keyed_entity;
-            const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
+            using dogen::sml::entity;
+            const auto& ae(dynamic_cast<const entity&>(*pair.second));
             BOOST_REQUIRE(ae.is_versioned());
 
             BOOST_CHECK(has_relationship(relationship_types::versioned_keys,

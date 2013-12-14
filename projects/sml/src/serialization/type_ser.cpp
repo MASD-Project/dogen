@@ -34,7 +34,6 @@
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/sml/serialization/keyed_entity_ser.hpp"
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"

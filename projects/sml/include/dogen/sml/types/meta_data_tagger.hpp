@@ -108,7 +108,6 @@ private:
     void visit(sml::factory& f) const override;
     void visit(sml::repository& r) const override;
     void visit(sml::value_object& vo) const override;
-    void visit(sml::keyed_entity& ke) const override;
     void visit(sml::entity& e) const override;
 
 public:

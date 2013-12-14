@@ -161,21 +161,10 @@ private:
 
 private:
     /**
-     * @brief Converts a processed object containing a UML class with
-     * a stereotype of keyed entity to an SML keyed entity.
-     *
-     * @param o the processed object containing a keyed entity.
-     * @param p profile of the object.
-     *
-     * @pre profile must have the keyed entity flag set.
-     */
-    void to_keyed_entity(const processed_object& o, const profile& p);
-
-    /**
      * @brief Converts a processed object containing a UML class with a
-     * stereotype of entity to an SML entity.
+     * stereotype of entity or keyed entity to an SML entity.
      *
-     * @param o the processed object containing an entity.
+     * @param o the processed object containing an entity or keyed entity.
      * @param p profile of the object.
      *
      * @pre profile must have the entity flag set.

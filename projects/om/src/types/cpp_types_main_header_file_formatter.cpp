@@ -31,7 +31,6 @@
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/factory.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
@@ -831,13 +830,6 @@ visit(const dogen::sml::value_object& vo) const {
     ensure_non_null_context();
     context_->overwrite(true);
     format(vo);
-}
-
-void cpp_types_main_header_file_formatter::
-visit(const dogen::sml::keyed_entity& ke) const {
-    ensure_non_null_context();
-    context_->overwrite(true);
-    format(ke);
 }
 
 void cpp_types_main_header_file_formatter::

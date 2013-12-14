@@ -27,7 +27,6 @@
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/repository.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
@@ -303,7 +302,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_transforms_into_expe
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
     const auto& ao(*c.model().objects().begin()->second);
-    const auto ke(dynamic_cast<const dogen::sml::keyed_entity&>(ao));
+    const auto ke(dynamic_cast<const dogen::sml::entity&>(ao));
+    BOOST_CHECK(ke.object_type() == dogen::sml::object_types::keyed_entity);
     BOOST_CHECK(ke.name().model_name() == model_name);
     BOOST_CHECK(is_type_zero(ke.name()));
     BOOST_CHECK(!ke.documentation().empty());
@@ -581,7 +581,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_package_transform
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(*c.model().objects().begin()->second);
-    const auto ke(dynamic_cast<const dogen::sml::keyed_entity&>(ao));
+    const auto ke(dynamic_cast<const dogen::sml::entity&>(ao));
+    BOOST_CHECK(ke.object_type() == dogen::sml::object_types::keyed_entity);
     BOOST_CHECK(ke.name().model_name() == model_name);
     BOOST_CHECK(!ke.name().simple_name().empty());
     BOOST_REQUIRE(ke.name().module_path().size() == 1);
@@ -1059,7 +1060,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_two_packages_tran
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(*c.model().objects().begin()->second);
-    const auto ke(dynamic_cast<const dogen::sml::keyed_entity&>(ao));
+    const auto ke(dynamic_cast<const dogen::sml::entity&>(ao));
+    BOOST_CHECK(ke.object_type() == dogen::sml::object_types::keyed_entity);
     BOOST_CHECK(ke.name().model_name() == model_name);
     BOOST_CHECK(!ke.name().simple_name().empty());
     BOOST_REQUIRE(ke.name().module_path().size() == 2);

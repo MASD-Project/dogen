@@ -34,7 +34,6 @@
 #include "dogen/sml/types/injection_error.hpp"
 #include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/meta_data_error.hpp"

@@ -30,7 +30,6 @@
 #include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
@@ -499,14 +498,11 @@ build_entity(const property& prop, const bool keyed,
     const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
-    boost::shared_ptr<abstract_entity> r;
-    if (keyed) {
-        r = boost::shared_ptr<abstract_entity>(new keyed_entity());
+    auto r(boost::shared_ptr<abstract_entity>(new entity()));
+    if (keyed)
         r->object_type(dogen::sml::object_types::keyed_entity);
-    } else {
-        r = boost::shared_ptr<abstract_entity>(new entity());
+    else
         r->object_type(dogen::sml::object_types::entity);
-    }
 
     populate_object(*r, i, model_qname, module_n);
     r->identity().push_back(prop);

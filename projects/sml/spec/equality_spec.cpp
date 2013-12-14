@@ -34,7 +34,6 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/entity.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/repository.hpp"
@@ -51,7 +50,6 @@
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/io/entity_io.hpp"
-#include "dogen/sml/io/keyed_entity_io.hpp"
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/repository_io.hpp"
@@ -68,7 +66,6 @@
 #include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"
-#include "dogen/sml/test_data/keyed_entity_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/repository_td.hpp"
@@ -103,7 +100,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<enumeration_generator>();
     test_equality<value_object_generator>();
     test_equality<entity_generator>();
-    test_equality<keyed_entity_generator>();
     test_equality<service_generator>();
     test_equality<module_generator>();
     test_equality<repository_generator>();

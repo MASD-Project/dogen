@@ -30,7 +30,6 @@
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/value_object_types_io.hpp"
 #include "dogen/sml/types/entity.hpp"
-#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/io/service_types_io.hpp"
 #include "dogen/sml/types/factory.hpp"
@@ -595,15 +594,6 @@ void transformer::visit(const dogen::sml::value_object& vo) {
     };
 
     BOOST_LOG_SEV(lg, debug) << "Transformed value object: " << vo.name();
-}
-
-void transformer::visit(const dogen::sml::keyed_entity& ke) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming keyed entity: " << ke.name();
-
-    auto ci(to_class_info(ke));
-    add_class(ke.name(), ci);
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed keyed entity: " << ke.name();
 }
 
 void transformer::visit(const dogen::sml::entity& e) {

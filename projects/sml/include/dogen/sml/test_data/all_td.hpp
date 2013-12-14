@@ -26,7 +26,6 @@
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/factory_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
-#include "dogen/sml/test_data/keyed_entity_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
