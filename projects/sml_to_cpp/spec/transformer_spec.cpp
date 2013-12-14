@@ -61,12 +61,12 @@ bool check_scoped_name(const std::string& n) {
     return boost::contains(n, "::");
 }
 
-std::list<dogen::sml::qname> get_leaves(const dogen::sml::abstract_object& o) {
-    using dogen::sml::relationship_types;
-    const auto i(o.relationships().find(relationship_types::leaves));
-    BOOST_REQUIRE(i != o.relationships().end());
-    return i->second;
-}
+// std::list<dogen::sml::qname> get_leaves(const dogen::sml::abstract_object& o) {
+//     using dogen::sml::relationship_types;
+//     const auto i(o.relationships().find(relationship_types::leaves));
+//     BOOST_REQUIRE(i != o.relationships().end());
+//     return i->second;
+// }
 
 }
 
