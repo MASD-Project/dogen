@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-13 Fri 18:42]
+Clock summary at [2013-12-14 Sat 17:49]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *21:13* |       |       |
+| *Total time*                                                          | *21:35* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 21:13 |       |
+| Development Stories Implemented                                       |         | 21:35 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
 | COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
 | COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:31 |
-| IMPLEMENTATION Use relationship container for leaves                  |         |       |  0:22 |
+| IMPLEMENTATION Use relationship container for leaves                  |         |       |  0:44 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
 
@@ -218,7 +218,10 @@ property.
      CLOSED: [2013-12-13 Fri 18:40]
      CLOCK: [2013-12-13 Fri 18:20]--[2013-12-13 Fri 18:42] =>  0:22
 
-**** Update SML to C++ transformer to use relationships instead of leaves :task:
+**** COMPLETED Update SML to C++ transformer to use relationships instead of leaves :task:
+     CLOSED: [2013-12-14 Sat 17:49]
+     CLOCK: [2013-12-14 Sat 17:27]--[2013-12-14 Sat 17:49] =>  0:22
+
 **** Remove leaves from abstract object and fix the fallout            :task:
 
 *** Use relationship container for keys                               :story:

@@ -61,6 +61,13 @@ bool check_scoped_name(const std::string& n) {
     return boost::contains(n, "::");
 }
 
+std::list<dogen::sml::qname> get_leaves(const dogen::sml::abstract_object& o) {
+    using dogen::sml::relationship_types;
+    const auto i(o.relationships().find(relationship_types::leaves));
+    BOOST_REQUIRE(i != o.relationships().end());
+    return i->second;
+}
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -378,7 +385,7 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_
 BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_object_results_in_expected_class_info");
 
-    auto m(factory.build_single_type_model_in_module());
+    const auto m(factory.build_single_type_model_in_module());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;
@@ -605,9 +612,9 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
 BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_object_boost_variant_with_property_results_in_expected_class_info");
 
-    auto ot(object_types::value_object);
-    auto pt(property_types::boost_variant);
-    auto m(factory.object_with_property(ot, pt));
+    const auto ot(object_types::value_object);
+    const auto pt(property_types::boost_variant);
+    const auto m(factory.object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     auto i(m.objects().begin());
@@ -672,7 +679,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
 BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_object_with_parent_results_in_expected_class_info");
 
-    auto m(factory.object_with_parent_in_the_same_model(true));
+    const auto m(factory.object_with_parent_in_the_same_model(true));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;
