@@ -20,32 +20,10 @@
  */
 #include <ostream>
 #include "dogen/sml/io/abstract_entity_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/keyed_entity.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace sml {
-
-keyed_entity::keyed_entity(keyed_entity&& rhs)
-    : dogen::sml::abstract_entity(
-        std::forward<dogen::sml::abstract_entity>(rhs)),
-      unversioned_key_(std::move(rhs.unversioned_key_)),
-      versioned_key_(std::move(rhs.versioned_key_)) { }
 
 keyed_entity::keyed_entity(
     const dogen::sml::origin_types& origin_type,
@@ -68,9 +46,7 @@ keyed_entity::keyed_entity(
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root,
     const bool is_aggregate_root,
-    const std::list<dogen::sml::property>& identity,
-    const dogen::sml::qname& unversioned_key,
-    const boost::optional<dogen::sml::qname>& versioned_key)
+    const std::list<dogen::sml::property>& identity)
     : dogen::sml::abstract_entity(origin_type,
       documentation,
       meta_data,
@@ -91,27 +67,19 @@ keyed_entity::keyed_entity(
       relationships,
       is_inheritance_root,
       is_aggregate_root,
-      identity),
-      unversioned_key_(unversioned_key),
-      versioned_key_(versioned_key) { }
+      identity) { }
 
 void keyed_entity::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::keyed_entity\"" << ", "
       << "\"__parent_0__\": ";
     abstract_entity::to_stream(s);
-    s << ", "
-      << "\"unversioned_key\": " << unversioned_key_ << ", "
-      << "\"versioned_key\": " << versioned_key_
-      << " }";
+    s << " }";
 }
 
 void keyed_entity::swap(keyed_entity& other) noexcept {
     abstract_entity::swap(other);
 
-    using std::swap;
-    swap(unversioned_key_, other.unversioned_key_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool keyed_entity::equals(const dogen::sml::type& other) const {
@@ -121,47 +89,13 @@ bool keyed_entity::equals(const dogen::sml::type& other) const {
 }
 
 bool keyed_entity::operator==(const keyed_entity& rhs) const {
-    return abstract_entity::compare(rhs) &&
-        unversioned_key_ == rhs.unversioned_key_ &&
-        versioned_key_ == rhs.versioned_key_;
+    return abstract_entity::compare(rhs);
 }
 
 keyed_entity& keyed_entity::operator=(keyed_entity other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::sml::qname& keyed_entity::unversioned_key() const {
-    return unversioned_key_;
-}
-
-dogen::sml::qname& keyed_entity::unversioned_key() {
-    return unversioned_key_;
-}
-
-void keyed_entity::unversioned_key(const dogen::sml::qname& v) {
-    unversioned_key_ = v;
-}
-
-void keyed_entity::unversioned_key(const dogen::sml::qname&& v) {
-    unversioned_key_ = std::move(v);
-}
-
-const boost::optional<dogen::sml::qname>& keyed_entity::versioned_key() const {
-    return versioned_key_;
-}
-
-boost::optional<dogen::sml::qname>& keyed_entity::versioned_key() {
-    return versioned_key_;
-}
-
-void keyed_entity::versioned_key(const boost::optional<dogen::sml::qname>& v) {
-    versioned_key_ = v;
-}
-
-void keyed_entity::versioned_key(const boost::optional<dogen::sml::qname>&& v) {
-    versioned_key_ = std::move(v);
 }
 
 } }

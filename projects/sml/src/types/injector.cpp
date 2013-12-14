@@ -70,6 +70,8 @@ const std::string empty_identity(
 const std::string duplicate_qname(
     "Attempt to add object with a name that already exists in model: ");
 const std::string zero_leaves("Type marked as visitable but has no leaves: ");
+const std::string unversioned_key_not_found(
+    "Object is an entity but has no unversioned key: ");
 
 const std::string accept_operation_name("accept");
 const std::string accept_argument_name("v");
@@ -162,7 +164,14 @@ injector::create_key_extractor(const keyed_entity& ke) const {
     p.name(extractor_argument_name);
 
     nested_qname nqn;
-    nqn.type(ke.unversioned_key());
+    const auto i(ke.relationships().find(relationship_types::unversioned_keys));
+    if (i == ke.relationships().end() || i->second.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << unversioned_key_not_found << ke.name();
+        BOOST_THROW_EXCEPTION(
+            injection_error(unversioned_key_not_found +
+                boost::lexical_cast<std::string>(ke.name())));
+    }
+    nqn.type(i->second.front());
     p.type(nqn);
 
     operation opuv;
@@ -171,7 +180,7 @@ injector::create_key_extractor(const keyed_entity& ke) const {
     opuv.documentation(key_extractor_doc + ke.name().simple_name());
     r->operations().push_back(opuv);
 
-    BOOST_LOG_SEV(lg, debug) << "Created visitor: " << qn.simple_name();
+    BOOST_LOG_SEV(lg, debug) << "Created extractor: " << qn.simple_name();
     return r;
 }
 
@@ -194,13 +203,11 @@ void injector::inject_keys(model& m) const {
             const auto qn(ke.name());
             const auto uvk(create_unversioned_key(qn, gt, ke.identity()));
             objects.push_back(uvk);
-            ke.unversioned_key(uvk->name());
             ke.relationships()[relationship_types::unversioned_keys].push_back(
                 uvk->name());
 
             if (ke.is_versioned()) {
                 auto vk(create_versioned_key(qn, gt, ke.identity()));
-                ke.versioned_key(vk->name());
                 ke.relationships()[relationship_types::versioned_keys]
                     .push_back(vk->name());
                 objects.push_back(vk);

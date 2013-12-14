@@ -27,10 +27,8 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/optional.hpp>
 #include "dogen/sml/serialization/abstract_entity_ser.hpp"
 #include "dogen/sml/serialization/keyed_entity_ser.hpp"
-#include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -49,9 +47,6 @@ void save(Archive& ar,
     const dogen::sml::keyed_entity& v,
     const unsigned int /*version*/) {
     ar << make_nvp("abstract_entity", base_object<dogen::sml::abstract_entity>(v));
-
-    ar << make_nvp("unversioned_key", v.unversioned_key_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
@@ -59,9 +54,6 @@ void load(Archive& ar,
     dogen::sml::keyed_entity& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("abstract_entity", base_object<dogen::sml::abstract_entity>(v));
-
-    ar >> make_nvp("unversioned_key", v.unversioned_key_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

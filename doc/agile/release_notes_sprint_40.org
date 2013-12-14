@@ -262,7 +262,10 @@ property.
      CLOSED: [2013-12-14 Sat 21:19]
      CLOCK: [2013-12-14 Sat 20:38]--[2013-12-14 Sat 21:19] =>  0:41
 
-**** Remove all usages of legacy versioned and unversioned properties  :task:
+**** COMPLETED Remove all usages of legacy versioned and unversioned properties :task:
+     CLOSED: [2013-12-14 Sat 21:30]
+     CLOCK: [2013-12-14 Sat 21:19]--[2013-12-14 Sat 21:30] =>  0:11
+
 **** Collapse all entity classes into just entity                      :task:
 
 - with this change we no longer need separate entity classes, so

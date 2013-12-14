@@ -7594,16 +7594,16 @@ object.#</dia:string>
         <dia:point val="73,121"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,120.95;88.18,125.45"/>
+        <dia:rectangle val="72.95,120.95;83.56,124.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,121"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.130000000000001"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#keyed_entity#</dia:string>
@@ -7699,54 +7699,7 @@ key and the @e unversioned key. The first will contain the version property.#</d
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#unversioned_key#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#qname#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Identity properties for the underlying entity.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#versioned_key#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If the type is a versioned keyed entity, its versioned key.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
+      <dia:attribute name="attributes"/>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -7758,7 +7711,7 @@ key and the @e unversioned key. The first will contain the version property.#</d
         <dia:point val="89.025,109.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.515,109.55;89.875,121"/>
+        <dia:rectangle val="78.205,109.55;89.875,121"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7766,8 +7719,8 @@ key and the @e unversioned key. The first will contain the version property.#</d
       <dia:attribute name="orth_points">
         <dia:point val="89.025,109.6"/>
         <dia:point val="89.025,116"/>
-        <dia:point val="80.565,116"/>
-        <dia:point val="80.565,120.95"/>
+        <dia:point val="78.255,116"/>
+        <dia:point val="78.255,120.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7791,7 +7744,7 @@ key and the @e unversioned key. The first will contain the version property.#</d
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O22" connection="6"/>
-        <dia:connection handle="1" to="O67" connection="12"/>
+        <dia:connection handle="1" to="O67" connection="8"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O69">

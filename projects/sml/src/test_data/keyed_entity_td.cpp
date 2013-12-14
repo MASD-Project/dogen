@@ -20,23 +20,8 @@
  */
 #include "dogen/sml/test_data/abstract_entity_td.hpp"
 #include "dogen/sml/test_data/keyed_entity_td.hpp"
-#include "dogen/sml/test_data/qname_td.hpp"
 
-namespace {
 
-dogen::sml::qname
-create_dogen_sml_qname(const unsigned int position) {
-    return dogen::sml::qname_generator::create(position);
-}
-
-boost::optional<dogen::sml::qname>
-create_boost_optional_dogen_sml_qname(unsigned int position) {
-    boost::optional<dogen::sml::qname> r(
-        create_dogen_sml_qname(position));
-    return r;
-}
-
-}
 
 namespace dogen {
 namespace sml {
@@ -46,8 +31,6 @@ keyed_entity_generator::keyed_entity_generator() : position_(0) { }
 void keyed_entity_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::sml::abstract_entity_generator::populate(position, v);
-    v.unversioned_key(create_dogen_sml_qname(position + 0));
-    v.versioned_key(create_boost_optional_dogen_sml_qname(position + 1));
 }
 
 keyed_entity_generator::result_type

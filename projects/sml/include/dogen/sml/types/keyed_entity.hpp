@@ -26,11 +26,9 @@
 #endif
 
 #include <algorithm>
-#include <boost/optional.hpp>
 #include <iosfwd>
 #include "dogen/sml/serialization/keyed_entity_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_entity.hpp"
-#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -49,11 +47,9 @@ class keyed_entity final : public dogen::sml::abstract_entity {
 public:
     keyed_entity() = default;
     keyed_entity(const keyed_entity&) = default;
+    keyed_entity(keyed_entity&&) = default;
 
     virtual ~keyed_entity() noexcept { }
-
-public:
-    keyed_entity(keyed_entity&& rhs);
 
 public:
     keyed_entity(
@@ -77,9 +73,7 @@ public:
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const bool is_inheritance_root,
         const bool is_aggregate_root,
-        const std::list<dogen::sml::property>& identity,
-        const dogen::sml::qname& unversioned_key,
-        const boost::optional<dogen::sml::qname>& versioned_key);
+        const std::list<dogen::sml::property>& identity);
 
 private:
     template<typename Archive>
@@ -109,27 +103,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief Identity properties for the underlying entity.
-     */
-    /**@{*/
-    const dogen::sml::qname& unversioned_key() const;
-    dogen::sml::qname& unversioned_key();
-    void unversioned_key(const dogen::sml::qname& v);
-    void unversioned_key(const dogen::sml::qname&& v);
-    /**@}*/
-
-    /**
-     * @brief If the type is a versioned keyed entity, its versioned key.
-     */
-    /**@{*/
-    const boost::optional<dogen::sml::qname>& versioned_key() const;
-    boost::optional<dogen::sml::qname>& versioned_key();
-    void versioned_key(const boost::optional<dogen::sml::qname>& v);
-    void versioned_key(const boost::optional<dogen::sml::qname>&& v);
-    /**@}*/
-
-public:
     bool operator==(const keyed_entity& rhs) const;
     bool operator!=(const keyed_entity& rhs) const {
         return !this->operator==(rhs);
@@ -142,9 +115,6 @@ public:
     void swap(keyed_entity& other) noexcept;
     keyed_entity& operator=(keyed_entity other);
 
-private:
-    dogen::sml::qname unversioned_key_;
-    boost::optional<dogen::sml::qname> versioned_key_;
 };
 
 } }

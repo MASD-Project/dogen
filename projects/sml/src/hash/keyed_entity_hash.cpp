@@ -20,7 +20,6 @@
  */
 #include "dogen/sml/hash/abstract_entity_hash.hpp"
 #include "dogen/sml/hash/keyed_entity_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
 
@@ -29,16 +28,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
 }
 
 }
@@ -50,10 +39,6 @@ std::size_t keyed_entity_hasher::hash(const keyed_entity&v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::sml::abstract_entity&>(v));
-
-    combine(seed, v.unversioned_key());
-    combine(seed, hash_boost_optional_dogen_sml_qname(v.versioned_key()));
-
     return seed;
 }
 

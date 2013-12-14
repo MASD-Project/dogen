@@ -1814,21 +1814,6 @@
 							</item>
 						</identity>
 					</abstract_entity>
-					<unversioned_key>
-						<model_name></model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name></simple_name>
-					</unversioned_key>
-					<versioned_key class_id="37" tracking_level="0" version="0">
-						<initialized>0</initialized>
-					</versioned_key>
 				</px>
 			</second>
 		</item>

@@ -21,7 +21,6 @@
 #include <ostream>
 #include "dogen/sml/io/abstract_entity_io.hpp"
 #include "dogen/sml/io/keyed_entity_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 
 namespace dogen {
 namespace sml {
