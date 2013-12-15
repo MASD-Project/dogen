@@ -383,8 +383,6 @@ void transformer::to_object(const processed_object& po, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a factory: " << po.id();
 
     auto o(boost::make_shared<sml::object>());
-    update_abstract_object(*o, po, p);
-
     if (p.is_factory())
         o->object_type(sml::object_types::factory);
     else if (p.is_repository())
@@ -392,6 +390,7 @@ void transformer::to_object(const processed_object& po, const profile& p) {
     else if (p.is_service())
         o->object_type(sml::object_types::user_defined_service);
 
+    update_abstract_object(*o, po, p);
     context_.model().objects().insert(std::make_pair(o->name(), o));
 }
 

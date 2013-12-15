@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-15 Sun 03:13]
+Clock summary at [2013-12-15 Sun 11:42]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *29:30* |       |       |
+| *Total time*                                                          | *29:51* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 29:30 |       |
+| Development Stories Implemented                                       |         | 29:51 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
@@ -31,6 +31,7 @@ Clock summary at [2013-12-15 Sun 03:13]
 | COMPLETED Remove entity and move all properties into abstract object  |         |       |  1:07 |
 | COMPLETED Remove services and replace it with object                  |         |       |  0:47 |
 | COMPLETED Remove value object and replace it with object              |         |       |  0:56 |
+| COMPLETED Services are now being added to registrar                   |         |       |  0:21 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
 
@@ -330,6 +331,13 @@ by getting rid of services.
 
 Continue the consolidation of all the descendants of abstract object
 by getting rid of value object.
+
+*** COMPLETED Services are now being added to registrar               :spike:
+    CLOSED: [2013-12-15 Sun 11:41]
+    CLOCK: [2013-12-15 Sun 11:20]--[2013-12-15 Sun 11:41] =>  0:21
+
+We broke leave processing with recent changes - ensure services don't
+end up in registrar.
 
 *** Use relationship container for visitors                           :story:
 
