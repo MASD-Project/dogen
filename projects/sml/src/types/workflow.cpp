@@ -23,6 +23,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/sml/types/injector.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"

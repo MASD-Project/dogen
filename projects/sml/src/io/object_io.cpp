@@ -18,9 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
+#include "dogen/sml/io/object_types_io.hpp"
+#include "dogen/sml/io/operation_io.hpp"
+#include "dogen/sml/io/property_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/relationship_types_io.hpp"
+#include "dogen/sml/io/type_io.hpp"
 
 namespace dogen {
 namespace sml {

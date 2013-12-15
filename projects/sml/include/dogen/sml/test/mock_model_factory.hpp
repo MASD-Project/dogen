@@ -233,14 +233,14 @@ private:
     /**
      * @brief Create a value object.
      */
-    boost::shared_ptr<abstract_object>
+    boost::shared_ptr<object>
     build_value_object(const unsigned int i, const qname& model_qn,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with a model name based on @e i.
      */
-    boost::shared_ptr<abstract_object>
+    boost::shared_ptr<object>
     build_value_object(unsigned int i, const unsigned int module_n = 0) const;
 
     /**
@@ -251,7 +251,7 @@ private:
     /**
      * @brief Create an entity.
      */
-    boost::shared_ptr<abstract_object>
+    boost::shared_ptr<object>
     build_entity(const property& prop, const bool keyed,
         const unsigned int i, const qname& model_qname,
         const unsigned int module_n = 0) const;
@@ -266,7 +266,7 @@ private:
     /**
      * @brief Create an exception.
      */
-    boost::shared_ptr<abstract_object>
+    boost::shared_ptr<object>
     build_exception(const unsigned int i, const qname& model_qname,
         const unsigned int module_n = 0) const;
 

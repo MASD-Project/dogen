@@ -25,6 +25,7 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
@@ -46,7 +47,7 @@ const std::string concept_not_found("Concept not found in concept container: ");
 namespace dogen {
 namespace sml {
 
-abstract_object& property_indexer::find_object(const qname& qn, model& m) {
+object& property_indexer::find_object(const qname& qn, model& m) {
     auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
@@ -57,7 +58,7 @@ abstract_object& property_indexer::find_object(const qname& qn, model& m) {
 }
 
 std::list<qname>& property_indexer::
-find_relationships(const relationship_types rt, abstract_object& o) {
+find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << relationship_not_found << o.name()
@@ -79,7 +80,7 @@ concept& property_indexer::find_concept(const qname& qn, model& m) {
     return i->second;
 }
 
-void property_indexer::index_object(abstract_object& o, model& m,
+void property_indexer::index_object(object& o, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().simple_name();
 

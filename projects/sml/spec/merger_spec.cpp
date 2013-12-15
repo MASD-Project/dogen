@@ -22,7 +22,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/merger.hpp"

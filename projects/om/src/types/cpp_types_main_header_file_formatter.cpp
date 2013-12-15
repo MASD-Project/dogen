@@ -210,7 +210,7 @@ visit(const dogen::sml::enumeration& e) const {
 }
 
 void cpp_types_main_header_file_formatter::
-open_class(const sml::abstract_object& o) const {
+open_class(const sml::object& o) const {
     if (!o.documentation().empty())
         doxygen_next_.format(context_->stream(), o.documentation());
 
@@ -246,7 +246,7 @@ void cpp_types_main_header_file_formatter::close_class() const {
 }
 
 void cpp_types_main_header_file_formatter::
-explicitly_defaulted_functions(const sml::abstract_object& o) const {
+explicitly_defaulted_functions(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_defaulted_functions))
@@ -293,7 +293,7 @@ explicitly_defaulted_functions(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-default_constructor(const sml::abstract_object& o) const {
+default_constructor(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_explicit_default_constructor))
@@ -309,7 +309,7 @@ default_constructor(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-complete_constructor(const sml::abstract_object& o) const {
+complete_constructor(const sml::object& o) const {
     {
         sml::meta_data_reader reader(o.meta_data());
         using types = sml::tags::cpp::types;
@@ -366,7 +366,7 @@ complete_constructor(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-move_constructor(const sml::abstract_object& o) const {
+move_constructor(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_explicit_move_constructor))
@@ -387,7 +387,7 @@ move_constructor(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-destructor(const sml::abstract_object& o) const {
+destructor(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_explicit_destructor))
@@ -417,7 +417,7 @@ destructor(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-friends(const sml::abstract_object& o) const {
+friends(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_friends))
@@ -533,7 +533,7 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
 }
 
 void cpp_types_main_header_file_formatter::
-getters_and_setters(const sml::abstract_object& o) const {
+getters_and_setters(const sml::object& o) const {
     if (o.local_properties().empty())
         return;
 
@@ -557,7 +557,7 @@ getters_and_setters(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-member_variables(const sml::abstract_object& o) const {
+member_variables(const sml::object& o) const {
     if (o.local_properties().empty())
         return;
 
@@ -578,7 +578,7 @@ member_variables(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-equality(const sml::abstract_object& o) const {
+equality(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (reader.is_false(sml::tags::cpp::types::generate_equality))
         return;
@@ -636,7 +636,7 @@ equality(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-to_stream(const sml::abstract_object& o) const {
+to_stream(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (reader.is_false(sml::tags::cpp::types::generate_to_stream))
         return;
@@ -660,7 +660,7 @@ to_stream(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-swap(const sml::abstract_object& o) const {
+swap(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (reader.is_false(sml::tags::cpp::types::generate_swap))
         return;
@@ -686,7 +686,7 @@ swap(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-assignment(const sml::abstract_object& o) const {
+assignment(const sml::object& o) const {
     // assignment is only available in leaf classes - MEC++-33
     const auto props(o.all_properties());
     if (props.empty() || o.is_parent() || o.is_immutable())
@@ -703,7 +703,7 @@ assignment(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-visitor_method(const sml::abstract_object& o) const {
+visitor_method(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (reader.is_false(sml::tags::cpp::types::generate_accept))
         return;
@@ -779,7 +779,7 @@ visitor_method(const sml::abstract_object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-format(const sml::abstract_object& o) const {
+format(const sml::object& o) const {
     open_class(o);
     {
         cpp_formatters::positive_indenter_scope s(context_->indenter());

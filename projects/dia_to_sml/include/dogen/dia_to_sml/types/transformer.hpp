@@ -30,7 +30,7 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
@@ -142,14 +142,14 @@ private:
     /**
      * @brief Populates the leaves container recursively.
      */
-    void add_leaf(const sml::qname& leaf, const sml::abstract_object& ao);
+    void add_leaf(const sml::qname& leaf, const sml::object& ao);
 
     /**
      * @brief Update the SML abstract object using the processed
      * object and the profile.
      */
-    void update_abstract_object(sml::abstract_object& ao,
-        const processed_object& o, const profile& p);
+    void update_object(sml::object& ao, const processed_object& o,
+        const profile& p);
 
 private:
     /**

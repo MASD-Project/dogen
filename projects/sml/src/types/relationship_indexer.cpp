@@ -25,6 +25,7 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
@@ -61,7 +62,7 @@ inline bool operator<(const qname& lhs, const qname& rhs) {
                     (lhs.simple_name() < rhs.simple_name()))));
 }
 
-abstract_object& relationship_indexer::find_object(const qname& qn, model& m) {
+object& relationship_indexer::find_object(const qname& qn, model& m) {
     auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
@@ -72,7 +73,7 @@ abstract_object& relationship_indexer::find_object(const qname& qn, model& m) {
 }
 
 std::list<qname>& relationship_indexer::
-find_relationships(const relationship_types rt, abstract_object& o) {
+find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << relationship_not_found << o.name()
@@ -95,7 +96,7 @@ concept& relationship_indexer::find_concept(const qname& qn, model& m) {
 }
 
 void relationship_indexer::
-populate_all_properties(abstract_object& o, model& m) {
+populate_all_properties(object& o, model& m) {
     for (const auto& pair : o.inherited_properties()) {
         o.all_properties().insert(o.all_properties().end(),
             pair.second.begin(), pair.second.end());
@@ -117,7 +118,7 @@ populate_all_properties(abstract_object& o, model& m) {
 }
 
 void relationship_indexer::
-index_object(abstract_object& parent, abstract_object& leaf, model& m) {
+index_object(object& parent, object& leaf, model& m) {
     const auto mc(relationship_types::modeled_concepts);
     const auto i(parent.relationships().find(mc));
     const bool has_concepts(i != parent.relationships().end() &&

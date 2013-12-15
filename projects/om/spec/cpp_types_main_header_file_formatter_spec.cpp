@@ -32,7 +32,7 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
-#include "dogen/sml/io/abstract_object_io.hpp"
+#include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
@@ -171,7 +171,7 @@ namespace some_module_0 {
 
 const std::string element_not_found("element not found: ");
 
-const dogen::sml::abstract_object&
+const dogen::sml::object&
 find_object(const dogen::sml::model& m, const unsigned int n) {
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
@@ -184,8 +184,7 @@ find_object(const dogen::sml::model& m, const unsigned int n) {
             boost::lexical_cast<std::string>(n)));
 }
 
-dogen::sml::abstract_object&
-find_object(dogen::sml::model& m, const unsigned int n) {
+dogen::sml::object& find_object(dogen::sml::model& m, const unsigned int n) {
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
         if (factory.type_name(n) == qn.simple_name())

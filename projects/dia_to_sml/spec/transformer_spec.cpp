@@ -96,12 +96,12 @@ dogen::dia_to_sml::context mock_context() {
 }
 
 bool has_relationship(const relationship_types rt,
-    const dogen::sml::abstract_object& o) {
+    const dogen::sml::object& o) {
     const auto i(o.relationships().find(rt));
     return i != o.relationships().end() && !i->second.empty();
 }
 
-bool has_one_parent(const dogen::sml::abstract_object& o) {
+bool has_one_parent(const dogen::sml::object& o) {
     using dogen::sml::relationship_types;
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty() ||
@@ -111,7 +111,7 @@ bool has_one_parent(const dogen::sml::abstract_object& o) {
     return true;
 }
 
-dogen::sml::qname get_parent_name(const dogen::sml::abstract_object& o) {
+dogen::sml::qname get_parent_name(const dogen::sml::object& o) {
     using dogen::sml::relationship_types;
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty() ||

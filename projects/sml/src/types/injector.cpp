@@ -76,7 +76,7 @@ const std::string accept_operation_doc("Acceptor for ");
 namespace dogen {
 namespace sml {
 
-boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
+boost::shared_ptr<object> injector::create_key(const qname& qn,
     const generation_types gt, const std::list<property>& properties,
     const bool versioned) const {
 
@@ -108,19 +108,19 @@ boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
     return r;
 }
 
-boost::shared_ptr<abstract_object> injector::
+boost::shared_ptr<object> injector::
 create_versioned_key(const qname& qn, const generation_types gt,
     const std::list<property>& properties) const {
     return create_key(qn, gt, properties, true);
 }
 
-boost::shared_ptr<abstract_object> injector::
+boost::shared_ptr<object> injector::
 create_unversioned_key(const qname& qn, const generation_types gt,
     const std::list<property>& properties) const {
     return create_key(qn, gt, properties, false);
 }
 
-boost::shared_ptr<abstract_object>
+boost::shared_ptr<object>
 injector::create_key_extractor(const object& ke) const {
     auto r(boost::make_shared<object>());
     qname qn;
@@ -165,7 +165,7 @@ injector::create_key_extractor(const object& ke) const {
 void injector::inject_keys(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
-    std::list<boost::shared_ptr<abstract_object> > objects;
+    std::list<boost::shared_ptr<object> > objects;
     for (auto& pair : m.objects()) {
         const auto qn(pair.first);
         auto& o(*pair.second);
@@ -213,7 +213,7 @@ void injector::inject_keys(model& m) const {
                              << objects.size();
 }
 
-void injector::inject_version(abstract_object& p) const {
+void injector::inject_version(object& p) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting version property to type: "
                              << p.name();
 
@@ -244,8 +244,7 @@ void injector::inject_version(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Done injecting version property on all types.";
 }
 
-boost::shared_ptr<abstract_object>
-injector::create_visitor(const abstract_object& ao) const {
+boost::shared_ptr<object> injector::create_visitor(const object& ao) const {
     auto r(boost::make_shared<object>());
     qname qn;
     qn.simple_name(ao.name().simple_name() + "_" + visitor_name);
@@ -283,8 +282,7 @@ injector::create_visitor(const abstract_object& ao) const {
     return r;
 }
 
-void injector::
-inject_accept(abstract_object& ao, const abstract_object& v) const {
+void injector::inject_accept(object& ao, const object& v) const {
     parameter p;
     p.name(accept_argument_name);
 
@@ -302,7 +300,7 @@ inject_accept(abstract_object& ao, const abstract_object& v) const {
 void injector::inject_visitors(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
 
-    std::list<boost::shared_ptr<abstract_object> > visitors;
+    std::list<boost::shared_ptr<object> > visitors;
     for (auto& pair : m.objects()) {
         auto& ao(*pair.second);
 

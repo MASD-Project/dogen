@@ -102,7 +102,7 @@ void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
         recurse_nested_qnames(c, rel, is_pointer);
 }
 
-void extractor::properties_for_concept(const sml::abstract_object& ao,
+void extractor::properties_for_concept(const sml::object& ao,
     std::list<sml::property>& properties) const {
 
     using sml::relationship_types;
@@ -126,7 +126,7 @@ void extractor::properties_for_concept(const sml::abstract_object& ao,
 }
 
 relationships
-extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
+extractor::extract_dependency_graph(const sml::object& ao) const {
     BOOST_LOG_SEV(lg, debug) << "Extracting dependency graph for " << ao.name();
 
     relationships r;

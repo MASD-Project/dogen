@@ -28,7 +28,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml_to_cpp/types/boost_model_helper.hpp"
 #include "dogen/sml_to_cpp/types/std_model_helper.hpp"
@@ -48,7 +48,7 @@ public:
 public:
     typedef const std::unordered_map<
     sml::qname,
-    boost::shared_ptr<sml::abstract_object>
+    boost::shared_ptr<sml::object>
     > object_map;
     typedef const std::unordered_map<sml::qname, sml::concept> concept_map;
 
@@ -60,7 +60,7 @@ private:
      * @brief Collects all the properties associated with the refined
      * concepts.
      */
-    void properties_for_concept(const sml::abstract_object& ao,
+    void properties_for_concept(const sml::object& ao,
         std::list<sml::property>& properties) const;
 
     /**
@@ -79,7 +79,7 @@ public:
      * object, as well as its parent, if any.
      */
     relationships
-    extract_dependency_graph(const sml::abstract_object& ao) const;
+    extract_dependency_graph(const sml::object& ao) const;
 
     /**
      * @brief Flattens the given qname into a object inheritance

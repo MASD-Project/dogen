@@ -22,7 +22,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
@@ -64,7 +64,7 @@ const std::string undefined_type("Object has property with undefined type");
 const std::string missing_parent("Object's parent could not be located");
 const std::string incorrect_meta_type("Object has incorrect meta_type");
 
-bool has_one_parent(const dogen::sml::abstract_object& o) {
+bool has_one_parent(const dogen::sml::object& o) {
     using dogen::sml::relationship_types;
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty() ||
@@ -74,7 +74,7 @@ bool has_one_parent(const dogen::sml::abstract_object& o) {
     return true;
 }
 
-dogen::sml::qname get_parent_name(const dogen::sml::abstract_object& o) {
+dogen::sml::qname get_parent_name(const dogen::sml::object& o) {
     using dogen::sml::relationship_types;
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty() ||

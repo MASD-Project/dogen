@@ -29,7 +29,7 @@
 #include "dogen/cpp/io/all_io.hpp"
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/sml_to_cpp/types/source_file_factory.hpp"
 

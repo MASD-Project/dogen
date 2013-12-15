@@ -33,7 +33,7 @@ namespace boost {
 
 template<>struct
 is_virtual_base_of<
-    dogen::sml::abstract_object,
+    dogen::sml::type,
     dogen::sml::object
 > : public mpl::true_ {};
 

@@ -126,7 +126,7 @@ public:
     /**
      * @brief Adds meta-data to the abstract object supplied.
      */
-    void tag(abstract_object& o) const;
+    void tag(object& o) const;
 
     /**
      * @brief Adds meta-data to the model supplied.

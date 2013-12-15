@@ -28,7 +28,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/om/io/file_io.hpp"

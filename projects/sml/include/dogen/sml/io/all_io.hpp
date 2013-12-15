@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"

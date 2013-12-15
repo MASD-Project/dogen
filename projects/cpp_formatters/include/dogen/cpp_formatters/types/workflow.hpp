@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/project.hpp"
 
 namespace dogen {

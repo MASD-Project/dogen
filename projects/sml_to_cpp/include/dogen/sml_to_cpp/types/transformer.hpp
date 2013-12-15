@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/sml/types/type.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -130,7 +130,7 @@ private:
      *
      * @param ao object to transform.
      */
-    cpp::class_info to_class_info(const sml::abstract_object& ao) const;
+    cpp::class_info to_class_info(const sml::object& ao) const;
 
     /**
      * @brief Transform a SML object representing a visitor into a

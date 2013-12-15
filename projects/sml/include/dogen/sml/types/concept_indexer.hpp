@@ -28,7 +28,6 @@
 #include <list>
 #include <unordered_set>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
 
 namespace dogen {
@@ -106,13 +105,13 @@ private:
     /**
      * @brief Returns the object with the given qname, or throws.
      */
-    abstract_object& find_object(const qname& qn, model& m);
+    object& find_object(const qname& qn, model& m);
 
     /**
      * @brief Finds the relationship container, or throws.
      */
-    std::list<qname>& find_relationships(const relationship_types rt,
-        abstract_object& o);
+    std::list<qname>&
+    find_relationships(const relationship_types rt, object& o);
 
     /**
      * @brief Returns the concept with the given qname, or throws.
@@ -129,7 +128,7 @@ private:
     /**
      * @brief Indexes a specific object.
      */
-    void index_object(abstract_object& o, model& m,
+    void index_object(object& o, model& m,
         std::unordered_set<sml::qname>& processed_qnames);
 
     /**

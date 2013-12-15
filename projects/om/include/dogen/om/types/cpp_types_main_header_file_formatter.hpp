@@ -76,7 +76,7 @@ private:
     /**
      * @brief Formats open class statements for the object.
      */
-    void open_class(const sml::abstract_object& o) const;
+    void open_class(const sml::object& o) const;
 
     /**
      * @brief Formats close class statements for the object.
@@ -87,17 +87,17 @@ private:
      * @brief Formats the constructors that are compiler generated via
      * the explicit default keyword.
      */
-    void explicitly_defaulted_functions(const sml::abstract_object& o) const;
+    void explicitly_defaulted_functions(const sml::object& o) const;
 
     /**
      * @brief Formats the default constructor.
      */
-    void default_constructor(const sml::abstract_object& o) const;
+    void default_constructor(const sml::object& o) const;
 
     /**
      * @brief Formats the move constructor.
      */
-    void move_constructor(const sml::abstract_object& o) const;
+    void move_constructor(const sml::object& o) const;
 
     /**
      * @brief Formats the complete constructor.
@@ -105,17 +105,17 @@ private:
      * A complete constructor is one that takes every member variable
      * as an input.
      */
-    void complete_constructor(const sml::abstract_object& o) const;
+    void complete_constructor(const sml::object& o) const;
 
     /**
      * @brief Formats the destructor.
      */
-    void destructor(const sml::abstract_object& o) const;
+    void destructor(const sml::object& o) const;
 
     /**
      * @brief Formats all the friend declarations.
      */
-    void friends(const sml::abstract_object& o) const;
+    void friends(const sml::object& o) const;
 
     /**
      * @brief Formats the getter and setter for a simple type.
@@ -133,15 +133,15 @@ private:
      * @brief Top-level method that expands all properties into
      * getters and setters.
      */
-    void getters_and_setters(const sml::abstract_object& o) const;
+    void getters_and_setters(const sml::object& o) const;
 
-    void member_variables(const sml::abstract_object& o) const;
-    void equality(const sml::abstract_object& o) const;
-    void to_stream(const sml::abstract_object& o) const;
-    void swap(const sml::abstract_object& o) const;
-    void assignment(const sml::abstract_object& o) const;
-    void visitor_method(const sml::abstract_object& o) const;
-    void format(const sml::abstract_object& o) const;
+    void member_variables(const sml::object& o) const;
+    void equality(const sml::object& o) const;
+    void to_stream(const sml::object& o) const;
+    void swap(const sml::object& o) const;
+    void assignment(const sml::object& o) const;
+    void visitor_method(const sml::object& o) const;
+    void format(const sml::object& o) const;
 
 private:
     using sml::type_visitor::visit;

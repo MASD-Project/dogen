@@ -10,29 +10,30 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-15 Sun 11:42]
+Clock summary at [2013-12-15 Sun 13:26]
 
-| Headline                                                              | Time    |       |       |
-|-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *29:51* |       |       |
-|-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 29:51 |       |
-| IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
-| IMPLEMENTATION Update manual                                          |         |       |  0:19 |
-| COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
-| COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
-| COMPLETED Checking that a model hasn't changed by copying it is wrong |         |       |  0:13 |
-| COMPLETED Create a =property_indexer= and add tests                   |         |       | 13:31 |
-| COMPLETED Inclusion is broken with extractor changes                  |         |       |  1:27 |
-| COMPLETED Use relationship container for leaves                       |         |       |  1:06 |
-| COMPLETED Use relationship container for keys                         |         |       |  0:52 |
-| COMPLETED Collapse all entity classes into just entity                |         |       |  1:29 |
-| COMPLETED Create object class and remove factory and repository       |         |       |  0:55 |
-| COMPLETED Remove entity and move all properties into abstract object  |         |       |  1:07 |
-| COMPLETED Remove services and replace it with object                  |         |       |  0:47 |
-| COMPLETED Remove value object and replace it with object              |         |       |  0:56 |
-| COMPLETED Services are now being added to registrar                   |         |       |  0:21 |
-| IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
+| Headline                                                                         | Time    |       |       |
+|----------------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                                     | *31:36* |       |       |
+|----------------------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                                  |         | 31:36 |       |
+| IMPLEMENTATION Release notes and backlog grooming                                |         |       |  0:57 |
+| IMPLEMENTATION Update manual                                                     |         |       |  0:19 |
+| COMPLETED Add more tests to =concept_indexer=                                    |         |       |  3:22 |
+| COMPLETED Plug =concept_indexer= into workflow                                   |         |       |  2:14 |
+| COMPLETED Checking that a model hasn't changed by copying it is wrong            |         |       |  0:13 |
+| COMPLETED Create a =property_indexer= and add tests                              |         |       | 13:31 |
+| COMPLETED Inclusion is broken with extractor changes                             |         |       |  1:27 |
+| COMPLETED Use relationship container for leaves                                  |         |       |  1:06 |
+| COMPLETED Use relationship container for keys                                    |         |       |  0:52 |
+| COMPLETED Collapse all entity classes into just entity                           |         |       |  1:29 |
+| COMPLETED Create object class and remove factory and repository                  |         |       |  0:55 |
+| COMPLETED Remove entity and move all properties into abstract object             |         |       |  1:07 |
+| COMPLETED Remove services and replace it with object                             |         |       |  0:47 |
+| COMPLETED Remove value object and replace it with object                         |         |       |  0:56 |
+| COMPLETED Services are now being added to registrar                              |         |       |  0:21 |
+| IMPLEMENTATION Remove abstract object use of shared pointer in objects container |         |       |  1:45 |
+| IMPLEMENTATION Create a =relationship_indexer= and add tests                     |         |       |  0:15 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -338,6 +339,13 @@ by getting rid of value object.
 
 We broke leave processing with recent changes - ensure services don't
 end up in registrar.
+
+*** IMPLEMENTATION Remove abstract object use of shared pointer in objects container
+**** COMPLETED Remove abstract object class
+     CLOSED: [2013-12-15 Sun 13:26]
+     CLOCK: [2013-12-15 Sun 11:41]--[2013-12-15 Sun 13:26] =>  1:45
+
+**** Remove shared pointer in objects container
 
 *** Use relationship container for visitors                           :story:
 

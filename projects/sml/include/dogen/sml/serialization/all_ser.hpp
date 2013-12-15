@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"

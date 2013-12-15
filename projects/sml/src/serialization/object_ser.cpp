@@ -26,9 +26,16 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
+#include "dogen/sml/serialization/object_types_ser.hpp"
+#include "dogen/sml/serialization/operation_ser.hpp"
+#include "dogen/sml/serialization/property_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/sml/serialization/relationship_types_ser.hpp"
+#include "dogen/sml/serialization/type_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -46,14 +53,50 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::object& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
+    ar << make_nvp("type", base_object<dogen::sml::type>(v));
+
+    ar << make_nvp("all_properties", v.all_properties_);
+    ar << make_nvp("local_properties", v.local_properties_);
+    ar << make_nvp("inherited_properties", v.inherited_properties_);
+    ar << make_nvp("operations", v.operations_);
+    ar << make_nvp("is_parent", v.is_parent_);
+    ar << make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
+    ar << make_nvp("is_visitable", v.is_visitable_);
+    ar << make_nvp("is_immutable", v.is_immutable_);
+    ar << make_nvp("is_versioned", v.is_versioned_);
+    ar << make_nvp("is_comparable", v.is_comparable_);
+    ar << make_nvp("is_fluent", v.is_fluent_);
+    ar << make_nvp("is_child", v.is_child_);
+    ar << make_nvp("relationships", v.relationships_);
+    ar << make_nvp("is_inheritance_root", v.is_inheritance_root_);
+    ar << make_nvp("object_type", v.object_type_);
+    ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
+    ar << make_nvp("identity", v.identity_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::sml::object& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
+    ar >> make_nvp("type", base_object<dogen::sml::type>(v));
+
+    ar >> make_nvp("all_properties", v.all_properties_);
+    ar >> make_nvp("local_properties", v.local_properties_);
+    ar >> make_nvp("inherited_properties", v.inherited_properties_);
+    ar >> make_nvp("operations", v.operations_);
+    ar >> make_nvp("is_parent", v.is_parent_);
+    ar >> make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
+    ar >> make_nvp("is_visitable", v.is_visitable_);
+    ar >> make_nvp("is_immutable", v.is_immutable_);
+    ar >> make_nvp("is_versioned", v.is_versioned_);
+    ar >> make_nvp("is_comparable", v.is_comparable_);
+    ar >> make_nvp("is_fluent", v.is_fluent_);
+    ar >> make_nvp("is_child", v.is_child_);
+    ar >> make_nvp("relationships", v.relationships_);
+    ar >> make_nvp("is_inheritance_root", v.is_inheritance_root_);
+    ar >> make_nvp("object_type", v.object_type_);
+    ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
+    ar >> make_nvp("identity", v.identity_);
 }
 
 } }

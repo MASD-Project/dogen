@@ -69,7 +69,7 @@ private:
 
     /**
      * @brief Returns true if the SML flags with type information
-     * describe a type which is a descendant of @ref abstract_object.
+     * describe a type which is a descendant of @ref object.
      *
      * @pre flags must have been validated for consistency.
      */
@@ -92,7 +92,7 @@ private:
      * @brief Returns the number of flags that are options on SML
      * objects.
      *
-     * By @e object we mean any descendent of @ref abstract_object.
+     * By @e object we mean any descendent of @ref object.
      */
     unsigned int count_sml_object_flags(const profile& p) const;
 

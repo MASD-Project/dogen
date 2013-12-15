@@ -31,12 +31,12 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
+#include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"

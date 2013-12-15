@@ -29,7 +29,6 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
 
 namespace dogen {
 namespace sml {
@@ -82,7 +81,7 @@ private:
      *
      * @note should really be moved to validator.
      */
-    void validate_inheritance_graph(const abstract_object& ao) const;
+    void validate_inheritance_graph(const object& ao) const;
 
     /**
      * @brief Ensures that all concepts refined by the current concept

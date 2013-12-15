@@ -27,7 +27,7 @@
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/sml_to_cpp/types/includer.hpp"

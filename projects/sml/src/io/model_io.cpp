@@ -22,12 +22,12 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include <sstream>
-#include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
+#include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -163,7 +163,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::sml::abstract_object>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::sml::object>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -179,7 +179,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

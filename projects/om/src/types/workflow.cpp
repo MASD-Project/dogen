@@ -33,6 +33,7 @@
 #include "dogen/om/types/licence_hydrator.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/om/types/workflow_error.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"

@@ -28,7 +28,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/meta_data_writer.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
@@ -191,7 +190,7 @@ dogen::sml::nested_qname mock_nested_qname(
     return r;
 }
 
-void populate_object(dogen::sml::abstract_object& o, const unsigned int i,
+void populate_object(dogen::sml::object& o, const unsigned int i,
     const dogen::sml::qname& model_qname, const unsigned int module_n) {
 
     dogen::sml::qname qn;
@@ -250,7 +249,7 @@ void add_property(Stateful& s, const bool properties_indexed,
 }
 
 template<typename Nameable>
-void add_relationship(dogen::sml::abstract_object& target,
+void add_relationship(dogen::sml::object& target,
     const Nameable& relative,
     const dogen::sml::relationship_types rt) {
     using dogen::sml::relationship_types;
@@ -260,9 +259,9 @@ void add_relationship(dogen::sml::abstract_object& target,
 const bool add_leaf(true);
 
 void parent_to_child(const bool properties_indexed,
-    dogen::sml::abstract_object& parent,
-    dogen::sml::abstract_object& child,
-    dogen::sml::abstract_object& original_parent,
+    dogen::sml::object& parent,
+    dogen::sml::object& child,
+    dogen::sml::object& original_parent,
     const bool add_leaf_relationship = true) {
     using dogen::sml::relationship_types;
     add_relationship(child, parent, relationship_types::parents);
@@ -286,8 +285,7 @@ void parent_to_child(const bool properties_indexed,
 }
 
 void parent_to_child(const bool properties_indexed,
-    dogen::sml::abstract_object& parent,
-    dogen::sml::abstract_object& child,
+    dogen::sml::object& parent, dogen::sml::object& child,
     const bool add_leaf_relationship = true) {
     parent_to_child(properties_indexed, parent, child, parent,
         add_leaf_relationship);
@@ -300,7 +298,7 @@ void insert_nameable(std::unordered_map<dogen::sml::qname, Nameable>& map,
 }
 
 void insert_object(dogen::sml::model& m,
-    boost::shared_ptr<dogen::sml::abstract_object> o) {
+    boost::shared_ptr<dogen::sml::object> o) {
     m.objects().insert(std::make_pair(o->name(), o));
 }
 
@@ -455,7 +453,7 @@ bool mock_model_factory::is_file_for_qname(const boost::filesystem::path& p,
     return boost::algorithm::ends_with(p.generic_string(), fn);
 }
 
-boost::shared_ptr<abstract_object> mock_model_factory::
+boost::shared_ptr<object> mock_model_factory::
 build_value_object(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
@@ -469,7 +467,7 @@ build_value_object(const unsigned int i, const qname& model_qname,
     return r;
 }
 
-boost::shared_ptr<abstract_object> mock_model_factory::
+boost::shared_ptr<object> mock_model_factory::
 build_value_object(unsigned int i, const unsigned int module_n) const {
     return build_value_object(i, mock_model_qname(i), module_n);
 }
@@ -492,7 +490,7 @@ concept mock_model_factory::build_concept(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<abstract_object> mock_model_factory::
+boost::shared_ptr<object> mock_model_factory::
 build_entity(const property& prop, const bool keyed,
     const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
@@ -547,7 +545,7 @@ build_enumeration(const unsigned int i, const qname& model_qname,
     return r;
 }
 
-boost::shared_ptr<abstract_object> mock_model_factory::
+boost::shared_ptr<object> mock_model_factory::
 build_exception(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
     qname qn;
@@ -903,7 +901,7 @@ object_with_property(const object_types ot, const property_types pt) const {
 
     property p(mock_property(0, pt, o1->name()));
 
-    boost::shared_ptr<abstract_object> o0;
+    boost::shared_ptr<object> o0;
     if (ot == object_types::value_object)
         o0 = build_value_object(0, mn);
     else if (ot == object_types::keyed_entity || ot == object_types::entity)

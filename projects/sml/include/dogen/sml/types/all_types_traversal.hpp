@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/concept.hpp"

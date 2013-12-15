@@ -26,13 +26,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/resolver.hpp"
 
 using namespace dogen::utility::log;
@@ -56,7 +56,7 @@ namespace sml {
 
 resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
 
-void resolver::validate_inheritance_graph(const abstract_object& ao) const {
+void resolver::validate_inheritance_graph(const object& ao) const {
     auto i(ao.relationships().find(relationship_types::parents));
     if (i == ao.relationships().end())
         return;

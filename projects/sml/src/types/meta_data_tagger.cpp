@@ -564,7 +564,7 @@ void meta_data_tagger::operator()(concept& /*c*/) const {
     // nothing to do for concepts
 }
 
-void meta_data_tagger::tag(abstract_object& o) const {
+void meta_data_tagger::tag(object& o) const {
     meta_data_writer writer(o.meta_data());
     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
         tags::bool_false);

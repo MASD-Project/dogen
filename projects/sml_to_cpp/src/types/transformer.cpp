@@ -369,8 +369,7 @@ transformer::to_exception_info(const sml::object& vo) const {
     return r;
 }
 
-cpp::class_info
-transformer::to_class_info(const sml::abstract_object& ao) const {
+cpp::class_info transformer::to_class_info(const sml::object& ao) const {
     cpp::class_info r;
     r.name(ao.name().simple_name());
     r.namespaces(to_namespace_list(ao.name()));

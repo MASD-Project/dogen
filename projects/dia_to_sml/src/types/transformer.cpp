@@ -206,8 +206,7 @@ sml::enumerator transformer::to_enumerator(const processed_property& p,
     return r;
 }
 
-void transformer::
-add_leaf(const sml::qname& leaf, const sml::abstract_object& ao) {
+void transformer::add_leaf(const sml::qname& leaf, const sml::object& ao) {
     using sml::generation_types;
 
     if (!ao.is_child())
@@ -236,8 +235,8 @@ add_leaf(const sml::qname& leaf, const sml::abstract_object& ao) {
     }
 }
 
-void transformer::update_abstract_object(sml::abstract_object& ao,
-    const processed_object& o, const profile& p) {
+void transformer::
+update_object(sml::object& ao, const processed_object& o, const profile& p) {
 
     update_element(ao, o, p);
 
@@ -354,7 +353,7 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
 
     auto e(boost::make_shared<sml::object>());
-    update_abstract_object(*e, o, p);
+    update_object(*e, o, p);
     e->is_aggregate_root(p.is_aggregate_root());
 
     for (const auto& p : e->local_properties()) {
@@ -374,7 +373,7 @@ void transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
     auto vo(boost::make_shared<sml::object>());
-    update_abstract_object(*vo, o, p);
+    update_object(*vo, o, p);
     vo->object_type(sml::object_types::exception);
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
@@ -390,7 +389,7 @@ void transformer::to_object(const processed_object& po, const profile& p) {
     else if (p.is_service())
         o->object_type(sml::object_types::user_defined_service);
 
-    update_abstract_object(*o, po, p);
+    update_object(*o, po, p);
     context_.model().objects().insert(std::make_pair(o->name(), o));
 }
 
@@ -398,7 +397,7 @@ void transformer::to_value_object(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a value object: " << o.id();
 
     auto vo(boost::make_shared<sml::object>());
-    update_abstract_object(*vo, o, p);
+    update_object(*vo, o, p);
     vo->object_type(sml::object_types::user_defined_value_object);
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }

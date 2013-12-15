@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -68,7 +67,7 @@ private:
      * @param versioned if true, create a versioned key. Otherwise,
      * creates an unversioned key.
      */
-    boost::shared_ptr<abstract_object> create_key(const qname& qn,
+    boost::shared_ptr<object> create_key(const qname& qn,
         const generation_types gt, const std::list<property>& properties,
         const bool versioned) const;
 
@@ -77,17 +76,16 @@ private:
      * clarity.
      */
     /**@{*/
-    boost::shared_ptr<abstract_object> create_versioned_key(const qname& qn,
+    boost::shared_ptr<object> create_versioned_key(const qname& qn,
         const generation_types gt, const std::list<property>& properties) const;
-    boost::shared_ptr<abstract_object> create_unversioned_key(const qname& qn,
+    boost::shared_ptr<object> create_unversioned_key(const qname& qn,
         const generation_types gt, const std::list<property>& properties) const;
     /**@}*/
 
     /**
      * @brief Create a visitor for the object.
      */
-    boost::shared_ptr<abstract_object>
-    create_key_extractor(const object& ke) const;
+    boost::shared_ptr<object> create_key_extractor(const object& ke) const;
 
     /**
      * @brief Injects versioned and unversioned keys for keyed
@@ -98,7 +96,7 @@ private:
     /**
      * @brief Injects the version property on the object passed in.
      */
-    void inject_version(abstract_object& p) const;
+    void inject_version(object& p) const;
 
     /**
      * @brief Injects the version property on any types marked as
@@ -109,13 +107,12 @@ private:
     /**
      * @brief Create a visitor for the object.
      */
-    boost::shared_ptr<abstract_object>
-    create_visitor(const abstract_object& ao) const;
+    boost::shared_ptr<object> create_visitor(const object& ao) const;
 
     /**
      * @brief Injects an accept operation for the given visitor.
      */
-    void inject_accept(abstract_object& ao, const abstract_object& v) const;
+    void inject_accept(object& ao, const object& v) const;
 
     /**
      * @brief Injects visitors for objects that require them.

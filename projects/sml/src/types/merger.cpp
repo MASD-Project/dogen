@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"

@@ -25,10 +25,10 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/injection_error.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/abstract_object_io.hpp"
+#include "dogen/sml/io/object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/injector.hpp"
@@ -49,13 +49,13 @@ const std::string missing_identity("Identity must have at least");
 const std::string no_leaves("Type marked as visitable but has no leaves");
 
 bool has_relationship(const relationship_types rt,
-    const dogen::sml::abstract_object& o) {
+    const dogen::sml::object& o) {
     const auto i(o.relationships().find(rt));
     return i != o.relationships().end() && !i->second.empty();
 }
 
 std::list<dogen::sml::qname> get_relationship(const relationship_types rt,
-    const dogen::sml::abstract_object& o) {
+    const dogen::sml::object& o) {
     const auto i(o.relationships().find(rt));
     BOOST_REQUIRE(i != o.relationships().end() && !i->second.empty());
     return i->second;

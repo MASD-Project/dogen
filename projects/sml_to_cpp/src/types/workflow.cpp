@@ -21,7 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/sml_to_cpp/types/workflow_failure.hpp"
@@ -92,7 +92,7 @@ void workflow::register_header(const cpp::source_file& fi) const {
         includer_.register_header(cd.facet_type(), fi.relative_path());
 }
 
-void workflow::transform_abstract_object(const sml::abstract_object& ao) {
+void workflow::transform_object(const sml::object& ao) {
     if (ao.generation_type() == sml::generation_types::no_generation)
         return;
 
@@ -117,7 +117,7 @@ void workflow::transform_abstract_object(const sml::abstract_object& ao) {
                 if (ao.generation_type() == generation_types::no_generation)
                     return;
 
-                transform_abstract_object(ao);
+                transform_object(ao);
             }
         });
 
@@ -161,7 +161,7 @@ void workflow::transformation_sub_workflow() {
     BOOST_LOG_SEV(lg, debug) << "Started transformation sub-workflow.";
 
     for (const auto& pair : model_.objects())
-        transform_abstract_object(*pair.second);
+        transform_object(*pair.second);
 
     if (!model_.documentation().empty())
         transformer_.model_to_namespace_info();

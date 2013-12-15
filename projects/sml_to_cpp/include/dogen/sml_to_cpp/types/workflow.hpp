@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
 #include "dogen/cpp/types/source_file.hpp"
@@ -72,7 +72,7 @@ private:
     /**
      * @brief Recursively generates C++ class objects.
      */
-    void transform_abstract_object(const sml::abstract_object& ao);
+    void transform_object(const sml::object& ao);
 
     /**
      * @brief Transforms the module into a C++ namespace.
