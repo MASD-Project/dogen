@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-15 Sun 16:13]
+Clock summary at [2013-12-15 Sun 17:55]
 
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *33:20* |       |       |
+| *Total time*                                                                | *34:18* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                             |         | 33:20 |       |
+| Development Stories Implemented                                             |         | 34:18 |       |
 | IMPLEMENTATION Release notes and backlog grooming                           |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                                |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                               |         |       |  3:22 |
@@ -33,6 +33,7 @@ Clock summary at [2013-12-15 Sun 16:13]
 | COMPLETED Remove value object and replace it with object                    |         |       |  0:56 |
 | COMPLETED Services are now being added to registrar                         |         |       |  0:21 |
 | COMPLETED Remove abstract object use of shared pointer in objects container |         |       |  3:29 |
+| IMPLEMENTATION Use relationship container for visitors                      |         |       |  0:58 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests                |         |       |  0:15 |
 #+end:
 
@@ -340,7 +341,7 @@ by getting rid of value object.
 We broke leave processing with recent changes - ensure services don't
 end up in registrar.
 
-*** COMPLETED Remove abstract object use of shared pointer in objects container
+*** COMPLETED Remove abstract object use of shared pointer in objects container :story:
     CLOSED: [2013-12-15 Sun 16:13]
 **** COMPLETED Remove abstract object class
      CLOSED: [2013-12-15 Sun 13:26]
@@ -352,7 +353,13 @@ end up in registrar.
      CLOCK: [2013-12-15 Sun 13:27]--[2013-12-15 Sun 13:28] =>  0:01
 
 *** IMPLEMENTATION Use relationship container for visitors            :story:
-    CLOCK: [2013-12-15 Sun 16:15]--[2013-12-15 Sun 16:26] =>  0:11
+
+We need to store the two-way relationships related to visitation.
+
+**** COMPLETED Rename enumerators for visitor relationships            :task:
+     CLOSED: [2013-12-15 Sun 17:53]
+     CLOCK: [2013-12-15 Sun 16:33]--[2013-12-15 Sun 17:20] =>  0:47
+     CLOCK: [2013-12-15 Sun 16:15]--[2013-12-15 Sun 16:26] =>  0:11
 
 Add visitors to relationship container.
 

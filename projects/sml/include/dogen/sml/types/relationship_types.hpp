@@ -38,10 +38,11 @@ enum class relationship_types : unsigned int {
     regular_associations = 3, ///< Types that are involved in aggregation or composition relationships.
     pointer_associations = 4, ///< Types that are involved in aggregation or composition relationships via a pointer.
     leaves = 5, ///< Types that are at the bottom of the inheritance tree.
-    visitor = 6, ///< Type that provides visitation services for this type.
-    unversioned_keys = 7, ///< Types that are used in the unversioned identity function of this type.
-    versioned_keys = 8, ///< Types that are used in the versioned identity function of this type.
-    modeled_concepts = 9 ///< Concepts modeled by this type.
+    visits = 6, ///< Types that are visited by this visitor.
+    visited_by = 7, ///< Types that visit current type.
+    unversioned_keys = 8, ///< Types that are used in the unversioned identity function of this type.
+    versioned_keys = 9, ///< Types that are used in the versioned identity function of this type.
+    modeled_concepts = 10 ///< Concepts modeled by this type.
 };
 
 } }

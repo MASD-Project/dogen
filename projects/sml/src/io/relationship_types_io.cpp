@@ -48,8 +48,11 @@ std::ostream& operator<<(std::ostream& s, const relationship_types& v) {
     case relationship_types::leaves:
         attr = "\"leaves\"";
         break;
-    case relationship_types::visitor:
-        attr = "\"visitor\"";
+    case relationship_types::visits:
+        attr = "\"visits\"";
+        break;
+    case relationship_types::visited_by:
+        attr = "\"visited_by\"";
         break;
     case relationship_types::unversioned_keys:
         attr = "\"unversioned_keys\"";
