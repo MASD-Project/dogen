@@ -54,6 +54,27 @@ std::ostream& operator<<(std::ostream& s, const object_types& v) {
     case object_types::key_extractor:
         attr = "\"key_extractor\"";
         break;
+    case object_types::user_defined_value_object:
+        attr = "\"user_defined_value_object\"";
+        break;
+    case object_types::unversioned_key:
+        attr = "\"unversioned_key\"";
+        break;
+    case object_types::versioned_key:
+        attr = "\"versioned_key\"";
+        break;
+    case object_types::exception:
+        attr = "\"exception\"";
+        break;
+    case object_types::smart_pointer:
+        attr = "\"smart_pointer\"";
+        break;
+    case object_types::associative_container:
+        attr = "\"associative_container\"";
+        break;
+    case object_types::sequence_container:
+        attr = "\"sequence_container\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for object_types");
     }

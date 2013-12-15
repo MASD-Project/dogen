@@ -22,8 +22,6 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/value_object_types.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml_to_cpp/types/extraction_error.hpp"
 #include "dogen/sml_to_cpp/types/extractor.hpp"
@@ -82,17 +80,12 @@ void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
                     boost::lexical_cast<std::string>(qn)));
         }
 
-        using sml::value_object;
-        const auto vo(boost::dynamic_pointer_cast<value_object>(k->second));
-
-        if (vo) {
-            const auto ac(sml::value_object_types::associative_container);
-            if (vo->type() == ac && nqn.children().size() >= 1)
-                rel.keys().insert(nqn.children().front().type());
-
-            const auto sp(sml::value_object_types::smart_pointer);
-            is_pointer = vo->type() == sp;
+        const auto ac(sml::object_types::associative_container);
+        if (k->second->object_type() == ac && nqn.children().size() >= 1) {
+            rel.keys().insert(nqn.children().front().type());
         }
+        const auto sp(sml::object_types::smart_pointer);
+        is_pointer = k->second->object_type() == sp;
     }
 
     const auto sn(qn.simple_name());

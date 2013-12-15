@@ -37,5 +37,3 @@
 #include "dogen/sml/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/relationship_types_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
-#include "dogen/sml/serialization/value_object_ser.hpp"
-#include "dogen/sml/serialization/value_object_types_ser.hpp"

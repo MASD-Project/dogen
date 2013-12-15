@@ -27,7 +27,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/io/qname_io.hpp"

@@ -23,7 +23,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
@@ -129,7 +128,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
             BOOST_CHECK(factory.is_type_name_n(1, prop.type().type()));
             BOOST_CHECK(factory.is_model_n(0, prop.type().type()));
-            const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+            BOOST_CHECK(o.object_type() ==
+                dogen::sml::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -164,7 +164,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
 
             BOOST_CHECK(factory.is_type_name_n(1, prop.type().type()));
             BOOST_CHECK(factory.is_model_n(1, prop.type().type()));
-            const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+            BOOST_CHECK(o.object_type() ==
+                dogen::sml::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -204,7 +205,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
-            const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+            BOOST_CHECK(o.object_type() ==
+                dogen::sml::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -236,7 +238,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
-            const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+            BOOST_CHECK(o.object_type() ==
+                dogen::sml::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -269,7 +272,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
-            const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+            BOOST_CHECK(o.object_type() ==
+                dogen::sml::object_types::user_defined_value_object);
         } else if (factory.is_type_name_n(1, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_two = true;
@@ -280,7 +284,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
             BOOST_CHECK(factory.is_type_name_n(2, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
-            const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+            BOOST_CHECK(o.object_type() ==
+                dogen::sml::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found_one);
@@ -329,7 +334,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
-            const auto vo(dynamic_cast<const dogen::sml::value_object&>(o));
+            BOOST_CHECK(o.object_type() ==
+                dogen::sml::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);

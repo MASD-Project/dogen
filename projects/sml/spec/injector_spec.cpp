@@ -26,10 +26,8 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/injection_error.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
@@ -185,8 +183,8 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
     BOOST_REQUIRE(type_zero);
     const auto j(m.objects().find(ukqn));
     BOOST_REQUIRE(j != m.objects().end());
-
-    const auto& uk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
+    const auto& uk(*(j->second));
+    BOOST_CHECK(uk.object_type() == object_types::unversioned_key);
     BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
     BOOST_REQUIRE(!uk.is_versioned());
 }
@@ -247,14 +245,16 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
     auto j(m.objects().find(ukqn));
     BOOST_REQUIRE(j != m.objects().end());
 
-    const auto& uk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
+    const auto& uk(*(j->second));
+    BOOST_CHECK(uk.object_type() == object_types::unversioned_key);
     BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
     BOOST_REQUIRE(!uk.is_versioned());
 
     j = m.objects().find(vkqn);
     BOOST_REQUIRE(j != m.objects().end());
 
-    const auto& vk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
+    const auto& vk(*(j->second));
+    BOOST_CHECK(vk.object_type() == object_types::versioned_key);
     BOOST_LOG_SEV(lg, debug) << "Found versioned key: " << vk;
     BOOST_REQUIRE(!vk.is_versioned());
 }

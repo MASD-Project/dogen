@@ -29,9 +29,6 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/io/value_object_types_io.hpp"
-#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml_to_cpp/types/transformation_error.hpp"
 #include "dogen/sml_to_cpp/types/transformer.hpp"
@@ -86,9 +83,6 @@ const std::string uint32_t_type("std::uint32_t");
 const std::string uint64_t_type("std::uint64_t");
 
 const std::string unsupported_object_type("Object type is not supported: ");
-const std::string unsupported_value_object_type(
-    "Value object type is not supported: ");
-
 const std::string concept_not_found("Concept not found in concept container: ");
 const std::string parent_class_info_not_found(
     "Type has a parent but no parent class info found: ");
@@ -253,15 +247,11 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
 
     const auto k(model_.objects().find(qn));
     if (k != model_.objects().end()) {
-        using boost::dynamic_pointer_cast;
-        const auto vo(dynamic_pointer_cast<const sml::value_object>(k->second));
-        if (vo) {
-            const auto pt(vo->type());
-            typedef sml::value_object_types vot;
-            nti.is_sequence_container(pt == vot::sequence_container);
-            nti.is_associative_container(pt == vot::associative_container);
-            nti.is_smart_pointer(pt == vot::smart_pointer);
-        }
+        const auto ot(k->second->object_type());
+        using sml::object_types;
+        nti.is_sequence_container(ot == object_types::sequence_container);
+        nti.is_associative_container(ot == object_types::associative_container);
+        nti.is_smart_pointer(ot == object_types::smart_pointer);
     }
 
     using dogen::cpp::nested_type_info;
@@ -366,7 +356,7 @@ transformer::to_enumeration_info(const sml::enumeration& e) const {
 }
 
 cpp::exception_info
-transformer::to_exception_info(const sml::value_object& vo) const {
+transformer::to_exception_info(const sml::object& vo) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << vo.name();
 
     cpp::exception_info r;
@@ -516,41 +506,6 @@ void transformer::visit(const dogen::sml::enumeration& e) {
     BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
 }
 
-void transformer::visit(const dogen::sml::value_object& vo) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming value object: " << vo.name();
-
-    switch(vo.type()) {
-    case sml::value_object_types::exception: {
-        const auto e(to_exception_info(vo));
-        context_.exceptions().insert(std::make_pair(vo.name(), e));
-        break;
-    }
-    case sml::value_object_types::plain: {
-        add_class(vo.name(), to_class_info(vo));
-        break;
-    }
-    case sml::value_object_types::versioned_key: {
-        auto ci(to_class_info(vo));
-        ci.class_type(cpp::class_types::versioned_key);
-        add_class(vo.name(), ci);
-        break;
-    }
-    case sml::value_object_types::unversioned_key: {
-        auto ci(to_class_info(vo));
-        ci.class_type(cpp::class_types::unversioned_key);
-        add_class(vo.name(), ci);
-        break;
-    }
-    default:
-        BOOST_LOG_SEV(lg, error) << unsupported_value_object_type << vo.type();
-        BOOST_THROW_EXCEPTION(transformation_error(
-                unsupported_value_object_type +
-                boost::lexical_cast<std::string>(vo.type())));
-    };
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed value object: " << vo.name();
-}
-
 void transformer::visit(const dogen::sml::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: " << o.name();
 
@@ -572,6 +527,28 @@ void transformer::visit(const dogen::sml::object& o) {
         ci.class_type(cpp::class_types::user_defined);
         add_class(o.name(), ci);
         break;
+
+    case sml::object_types::exception: {
+        const auto e(to_exception_info(o));
+        context_.exceptions().insert(std::make_pair(o.name(), e));
+        break;
+    }
+    case sml::object_types::user_defined_value_object: {
+        add_class(o.name(), to_class_info(o));
+        break;
+    }
+    case sml::object_types::versioned_key: {
+        auto ci(to_class_info(o));
+        ci.class_type(cpp::class_types::versioned_key);
+        add_class(o.name(), ci);
+        break;
+    }
+    case sml::object_types::unversioned_key: {
+        auto ci(to_class_info(o));
+        ci.class_type(cpp::class_types::unversioned_key);
+        add_class(o.name(), ci);
+        break;
+    }
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
                                  << " name: " << o.name();

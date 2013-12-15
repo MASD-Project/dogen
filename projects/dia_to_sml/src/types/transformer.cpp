@@ -25,10 +25,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/dia/types/composite.hpp"
@@ -376,9 +373,9 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
 void transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
-    auto vo(boost::make_shared<sml::value_object>());
+    auto vo(boost::make_shared<sml::object>());
     update_abstract_object(*vo, o, p);
-    vo->type(sml::value_object_types::exception);
+    vo->object_type(sml::object_types::exception);
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
 
@@ -401,9 +398,9 @@ void transformer::to_object(const processed_object& po, const profile& p) {
 void transformer::to_value_object(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a value object: " << o.id();
 
-    auto vo(boost::make_shared<sml::value_object>());
+    auto vo(boost::make_shared<sml::object>());
     update_abstract_object(*vo, o, p);
-    vo->type(sml::value_object_types::plain);
+    vo->object_type(sml::object_types::user_defined_value_object);
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
 

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
-<entity class_id="4" tracking_level="0" version="0">
+<entity class_id="3" tracking_level="0" version="0">
 	<origin_type>1</origin_type>
 	<documentation>This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
 </documentation>
-	<meta_data class_id="5" tracking_level="0" version="0">
+	<meta_data class_id="4" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
-		<item class_id="6" tracking_level="0" version="0">
+		<item class_id="5" tracking_level="0" version="0">
 			<first>COMMENT</first>
 			<second>
 				<count>0</count>
@@ -20,9 +20,9 @@ This comment will be applied to the model namespace itself.
 		</item>
 		<data></data>
 	</meta_data>
-	<name class_id="7" tracking_level="0" version="0">
+	<name class_id="6" tracking_level="0" version="0">
 		<model_name>comments</model_name>
-		<external_module_path class_id="8" tracking_level="0" version="0">
+		<external_module_path class_id="7" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
 		</external_module_path>
@@ -33,21 +33,21 @@ This comment will be applied to the model namespace itself.
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<references class_id="9" tracking_level="0" version="0">
+	<references class_id="8" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="10" tracking_level="0" version="0">
+	<leaves class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="11" tracking_level="0" version="0">
+	<modules class_id="10" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="12" tracking_level="0" version="0">
+		<item class_id="11" tracking_level="0" version="0">
 			<first>
 				<model_name>comments</model_name>
 				<external_module_path>
@@ -61,7 +61,7 @@ This comment will be applied to the model namespace itself.
 				</module_path>
 				<simple_name>package2</simple_name>
 			</first>
-			<second class_id="13" tracking_level="0" version="0">
+			<second class_id="12" tracking_level="0" version="0">
 				<origin_type>1</origin_type>
 				<documentation>package2
 </documentation>
@@ -92,7 +92,7 @@ This comment will be applied to the model namespace itself.
 					<simple_name>package2</simple_name>
 				</name>
 				<generation_type>1</generation_type>
-				<members class_id="14" tracking_level="0" version="0">
+				<members class_id="13" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -148,26 +148,26 @@ This comment will be applied to the model namespace itself.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="15" tracking_level="0" version="0">
+	<concepts class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="16" tracking_level="0" version="0">
+	<primitives class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="17" tracking_level="0" version="0">
+	<enumerations class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="18" tracking_level="0" version="0">
+	<objects class_id="17" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="19" tracking_level="0" version="0">
+		<item class_id="18" tracking_level="0" version="0">
 			<first>
 				<model_name>comments</model_name>
 				<external_module_path>
@@ -180,10 +180,10 @@ This comment will be applied to the model namespace itself.
 				</module_path>
 				<simple_name>multi_line</simple_name>
 			</first>
-			<second class_id="20" tracking_level="0" version="1">
-				<px class_id="3" tracking_level="1" version="0" object_id="_0">
-					<abstract_object class_id="21" tracking_level="0" version="0">
-						<type class_id="22" tracking_level="0" version="0">
+			<second class_id="19" tracking_level="0" version="1">
+				<px class_id="1" tracking_level="1" version="0" object_id="_0">
+					<abstract_object class_id="20" tracking_level="0" version="0">
+						<type class_id="21" tracking_level="0" version="0">
 							<origin_type>1</origin_type>
 							<documentation>first line
 
@@ -217,7 +217,7 @@ third line with &quot;quote&quot;
 							</name>
 							<generation_type>1</generation_type>
 						</type>
-						<all_properties class_id="23" tracking_level="0" version="0">
+						<all_properties class_id="22" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</all_properties>
@@ -225,12 +225,12 @@ third line with &quot;quote&quot;
 							<count>0</count>
 							<item_version>0</item_version>
 						</local_properties>
-						<inherited_properties class_id="24" tracking_level="0" version="0">
+						<inherited_properties class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</inherited_properties>
-						<operations class_id="25" tracking_level="0" version="0">
+						<operations class_id="24" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</operations>
@@ -242,20 +242,19 @@ third line with &quot;quote&quot;
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
 						<is_child>0</is_child>
-						<relationships class_id="26" tracking_level="0" version="0">
+						<relationships class_id="25" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
-						<object_type>0</object_type>
+						<object_type>8</object_type>
 						<is_aggregate_root>0</is_aggregate_root>
 						<identity>
 							<count>0</count>
 							<item_version>0</item_version>
 						</identity>
 					</abstract_object>
-					<type>1</type>
 				</px>
 			</second>
 		</item>
@@ -273,7 +272,7 @@ third line with &quot;quote&quot;
 				<simple_name>one_line</simple_name>
 			</first>
 			<second>
-				<px class_id_reference="3" object_id="_1">
+				<px class_id_reference="1" object_id="_1">
 					<abstract_object>
 						<type>
 							<origin_type>1</origin_type>
@@ -305,7 +304,7 @@ third line with &quot;quote&quot;
 						<local_properties>
 							<count>3</count>
 							<item_version>0</item_version>
-							<item class_id="27" tracking_level="0" version="0">
+							<item class_id="26" tracking_level="0" version="0">
 								<documentation>another brief comment
 </documentation>
 								<meta_data>
@@ -314,7 +313,7 @@ third line with &quot;quote&quot;
 									<data></data>
 								</meta_data>
 								<name>prop_0</name>
-								<type class_id="28" tracking_level="0" version="0">
+								<type class_id="27" tracking_level="0" version="0">
 									<type>
 										<model_name></model_name>
 										<external_module_path>
@@ -327,7 +326,7 @@ third line with &quot;quote&quot;
 										</module_path>
 										<simple_name>int</simple_name>
 									</type>
-									<children class_id="29" tracking_level="0" version="0">
+									<children class_id="28" tracking_level="0" version="0">
 										<count>0</count>
 										<item_version>0</item_version>
 									</children>
@@ -426,14 +425,13 @@ a second line
 							<item_version>0</item_version>
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
-						<object_type>0</object_type>
+						<object_type>8</object_type>
 						<is_aggregate_root>0</is_aggregate_root>
 						<identity>
 							<count>0</count>
 							<item_version>0</item_version>
 						</identity>
 					</abstract_object>
-					<type>1</type>
 				</px>
 			</second>
 		</item>

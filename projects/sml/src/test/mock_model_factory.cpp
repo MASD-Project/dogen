@@ -30,7 +30,6 @@
 #include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
@@ -460,9 +459,9 @@ boost::shared_ptr<abstract_object> mock_model_factory::
 build_value_object(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
-    auto r(boost::make_shared<value_object>());
+    auto r(boost::make_shared<object>());
     populate_object(*r, i, model_qname, module_n);
-    r->type(value_object_types::plain);
+    r->object_type(dogen::sml::object_types::user_defined_value_object);
 
     if (flags_.tagged())
         add_test_tags(*r);
@@ -558,11 +557,11 @@ build_exception(const unsigned int i, const qname& model_qname,
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
 
-    boost::shared_ptr<value_object> r(new value_object());
+    boost::shared_ptr<object> r(new object());
     r->name(qn);
     r->generation_type(generation_types::full_generation);
     r->documentation(documentation);
-    r->type(value_object_types::exception);
+    r->object_type(dogen::sml::object_types::exception);
 
     if (flags_.tagged())
         add_test_tags(*r);
@@ -934,9 +933,9 @@ object_with_property(const object_types ot, const property_types pt) const {
         qn.simple_name("shared_ptr");
         qn.model_name("boost");
 
-        boost::shared_ptr<value_object> o2(new value_object());
+        boost::shared_ptr<object> o2(new object());
         o2->name(qn);
-        o2->type(value_object_types::smart_pointer);
+        o2->object_type(dogen::sml::object_types::smart_pointer);
         insert_object(r, o2);
     } else if (pt == property_types::std_pair) {
 
@@ -948,9 +947,9 @@ object_with_property(const object_types ot, const property_types pt) const {
         qn.simple_name("pair");
         qn.model_name("std");
 
-        boost::shared_ptr<value_object> o2(new value_object());
+        boost::shared_ptr<object> o2(new object());
         o2->name(qn);
-        o2->type(value_object_types::plain);
+        o2->object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
         primitive b;
@@ -965,18 +964,18 @@ object_with_property(const object_types ot, const property_types pt) const {
         qn.simple_name("variant");
         qn.model_name("boost");
 
-        boost::shared_ptr<value_object> o2(new value_object());
+        boost::shared_ptr<object> o2(new object());
         o2->name(qn);
-        o2->type(value_object_types::plain);
+        o2->object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
     } else if (pt == property_types::std_string) {
         qname qn;
         qn.simple_name("string");
         qn.model_name("std");
 
-        boost::shared_ptr<value_object> o2(new value_object());
+        boost::shared_ptr<object> o2(new object());
         o2->name(qn);
-        o2->type(value_object_types::plain);
+        o2->object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
     }
 

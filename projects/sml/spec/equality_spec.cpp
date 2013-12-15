@@ -32,7 +32,6 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/concept.hpp"
@@ -45,7 +44,6 @@
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
@@ -58,7 +56,6 @@
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
-#include "dogen/sml/test_data/value_object_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
@@ -89,7 +86,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<primitive_generator>();
     test_equality<enumerator_generator>();
     test_equality<enumeration_generator>();
-    test_equality<value_object_generator>();
     test_equality<module_generator>();
     test_equality<object_generator>();
     test_equality<concept_generator>();

@@ -36,5 +36,3 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
-#include "dogen/sml/hash/value_object_hash.hpp"
-#include "dogen/sml/hash/value_object_types_hash.hpp"

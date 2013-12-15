@@ -57,6 +57,4 @@
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/value_object_types.hpp"
 #include "dogen/sml/types/workflow.hpp"

@@ -29,7 +29,6 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/concept.hpp"
@@ -42,7 +41,6 @@
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
@@ -55,7 +53,6 @@
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
-#include "dogen/sml/test_data/value_object_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
@@ -68,7 +65,6 @@
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
-#include "dogen/sml/hash/value_object_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
 #include "dogen/sml/hash/object_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
@@ -99,7 +95,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<primitive_generator>();
     test_hashing<enumerator_generator>();
     test_hashing<enumeration_generator>();
-    test_hashing<value_object_generator>();
     test_hashing<module_generator>();
     test_hashing<object_generator>();
     test_hashing<concept_generator>();

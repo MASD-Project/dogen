@@ -123,7 +123,7 @@ private:
      * @brief Transforms a SML value containing an exception into an
      * exception info.
      */
-    cpp::exception_info to_exception_info(const sml::value_object& vo) const;
+    cpp::exception_info to_exception_info(const sml::object& vo) const;
 
     /**
      * @brief Transform a SML object into a class info.
@@ -150,7 +150,6 @@ private:
     using type_visitor::visit;
     void visit(const dogen::sml::object& f) override;
     void visit(const dogen::sml::enumeration& e) override;
-    void visit(const dogen::sml::value_object& vo) override;
 
 public:
     /**

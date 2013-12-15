@@ -29,7 +29,6 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/concept.hpp"
@@ -42,7 +41,6 @@
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
@@ -55,7 +53,6 @@
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
-#include "dogen/sml/test_data/value_object_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
@@ -68,7 +65,6 @@
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
-#include "dogen/sml/serialization/value_object_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
@@ -103,7 +99,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<primitive_generator>();
     rountrip_type<enumerator_generator>();
     rountrip_type<enumeration_generator>();
-    rountrip_type<value_object_generator>();
     rountrip_type<module_generator>();
     rountrip_type<object_generator>();
     rountrip_type<concept_generator>();

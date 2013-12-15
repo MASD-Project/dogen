@@ -25,7 +25,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/primitive.hpp"
-#include "dogen/sml/types/value_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
 
@@ -143,23 +143,23 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
     if (meta_type_value == meta_type_value_object_value) {
-        auto vo(boost::make_shared<sml::value_object>());
+        auto vo(boost::make_shared<sml::object>());
         lambda(*vo);
 
         const auto vot(pt.get_optional<std::string>(value_object_type_key));
         if (vot) {
             if (*vot == value_object_type_smart_pointer_value) {
-                vo->type(value_object_types::smart_pointer);
+                vo->object_type(object_types::smart_pointer);
                 vo->number_of_type_arguments(1);
             } else if (*vot == value_object_type_associative_container_value) {
-                vo->type(value_object_types::associative_container);
+                vo->object_type(object_types::associative_container);
                 vo->number_of_type_arguments(2);
             } else if (*vot == value_object_type_sequence_container_value) {
-                vo->type(value_object_types::sequence_container);
+                vo->object_type(object_types::sequence_container);
                 vo->number_of_type_arguments(1);
             }
         } else
-            vo->type(value_object_types::plain);
+            vo->object_type(object_types::user_defined_value_object);
 
         m.objects().insert(std::make_pair(qn, vo));
     } else if (meta_type_value == meta_type_primitive_value) {

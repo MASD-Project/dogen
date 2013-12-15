@@ -26,7 +26,6 @@
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/meta_data_tagger.hpp"
 
@@ -334,10 +333,6 @@ void meta_data_tagger::visit(sml::enumeration& e) const {
     meta_data_writer writer(e.meta_data());
     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
         tags::bool_true);
-}
-
-void meta_data_tagger::visit(sml::value_object& vo) const {
-    tag(vo);
 }
 
 void meta_data_tagger::visit(sml::object& o) const {

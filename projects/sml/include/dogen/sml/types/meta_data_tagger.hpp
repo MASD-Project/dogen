@@ -104,7 +104,6 @@ private:
     using sml::type_visitor::visit;
     void visit(sml::primitive& p) const override;
     void visit(sml::enumeration& e) const override;
-    void visit(sml::value_object& vo) const override;
     void visit(sml::object& vo) const override;
 
 public:

@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-15 Sun 02:16]
+Clock summary at [2013-12-15 Sun 03:13]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *28:34* |       |       |
+| *Total time*                                                          | *29:30* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 28:34 |       |
+| Development Stories Implemented                                       |         | 29:30 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
@@ -30,6 +30,7 @@ Clock summary at [2013-12-15 Sun 02:16]
 | COMPLETED Create object class and remove factory and repository       |         |       |  0:55 |
 | COMPLETED Remove entity and move all properties into abstract object  |         |       |  1:07 |
 | COMPLETED Remove services and replace it with object                  |         |       |  0:47 |
+| COMPLETED Remove value object and replace it with object              |         |       |  0:56 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
 
@@ -322,6 +323,13 @@ by getting rid of entity.
 
 Continue the consolidation of all the descendants of abstract object
 by getting rid of services.
+
+*** COMPLETED Remove value object and replace it with object          :story:
+    CLOSED: [2013-12-15 Sun 03:13]
+    CLOCK: [2013-12-15 Sun 02:17]--[2013-12-15 Sun 03:13] =>  0:56
+
+Continue the consolidation of all the descendants of abstract object
+by getting rid of value object.
 
 *** Use relationship container for visitors                           :story:
 

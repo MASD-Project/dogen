@@ -22,7 +22,6 @@
 #include <functional>
 #include <boost/make_shared.hpp>
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
@@ -88,14 +87,14 @@ boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
     kqn.module_path(qn.module_path());
     kqn.external_module_path(qn.external_module_path());
 
-    auto r(boost::make_shared<value_object>());
+    auto r(boost::make_shared<object>());
     r->name(kqn);
     r->generation_type(gt);
     r->origin_type(origin_types::system);
 
-    const auto vk(value_object_types::versioned_key);
-    const auto uvk(value_object_types::unversioned_key);
-    r->type(versioned ? vk : uvk);
+    const auto vk(object_types::versioned_key);
+    const auto uvk(object_types::unversioned_key);
+    r->object_type(versioned ? vk : uvk);
 
     const auto doc(versioned ? versioned_key_doc : unversioned_key_doc);
     r->documentation(doc + qn.simple_name());

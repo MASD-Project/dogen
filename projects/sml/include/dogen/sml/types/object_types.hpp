@@ -42,7 +42,14 @@ enum class object_types : unsigned int {
     repository = 4, ///< Represents all objects of a certain type as a conceptual set.
     user_defined_service = 5, ///< The service has been defined by the user.
     visitor = 6, ///< The service is a system generated visitor.
-    key_extractor = 7 ///< The service is a system defined key extractor.
+    key_extractor = 7, ///< The service is a system defined key extractor.
+    user_defined_value_object = 8, ///< Regular value object with no distinguishing features.
+    unversioned_key = 9, ///< Value is an unversioned key.
+    versioned_key = 10, ///< Value is an versioned key.
+    exception = 11, ///< Value represents an exception type.
+    smart_pointer = 12, ///< Value is a smart pointer.
+    associative_container = 13, ///< Type is an associative container.
+    sequence_container = 14 ///< Type is a sequence container.
 };
 
 } }

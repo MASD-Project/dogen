@@ -26,8 +26,6 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/value_object_types.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -355,20 +353,16 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
         BOOST_CHECK(qn.external_module_path().empty());
         BOOST_CHECK(o.origin_type() == dogen::sml::origin_types::system);
 
-        const auto vo(dynamic_cast<const dogen::sml::value_object*>(&o));
-        if (!vo)
-            continue;
-
-        using dogen::sml::value_object_types;
-        const auto vat(vo->type());
-        BOOST_CHECK(vat != value_object_types::invalid);
-        if (vat == value_object_types::associative_container)
-            BOOST_CHECK(vo->number_of_type_arguments() == 2);
-        else if (vat == value_object_types::sequence_container ||
-            vat == value_object_types::smart_pointer)
-            BOOST_CHECK(vo->number_of_type_arguments() == 1);
+        using dogen::sml::object_types;
+        const auto ot(o.object_type());
+        BOOST_CHECK(ot != object_types::invalid);
+        if (ot == object_types::associative_container)
+            BOOST_CHECK(o.number_of_type_arguments() == 2);
+        else if (ot == object_types::sequence_container ||
+            ot == object_types::smart_pointer)
+            BOOST_CHECK(o.number_of_type_arguments() == 1);
         else
-            BOOST_CHECK(vo->number_of_type_arguments() == 0);
+            BOOST_CHECK(o.number_of_type_arguments() == 0);
     }
 
     const auto primitives(m.primitives());
@@ -408,20 +402,16 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
         BOOST_CHECK(qn.model_name() == cpp_boost_model_name);
         BOOST_CHECK(qn.external_module_path().empty());
 
-        const auto vo(dynamic_cast<const dogen::sml::value_object*>(&o));
-        if (!vo)
-            continue;
-
-        using dogen::sml::value_object_types;
-        const auto vat(vo->type());
-        BOOST_CHECK(vat != value_object_types::invalid);
-        if (vat == value_object_types::associative_container)
-            BOOST_CHECK(vo->number_of_type_arguments() == 2);
-        else if (vat == value_object_types::sequence_container ||
-            vat == value_object_types::smart_pointer)
-            BOOST_CHECK(vo->number_of_type_arguments() == 1);
+        using dogen::sml::object_types;
+        const auto ot(o.object_type());
+        BOOST_CHECK(ot != object_types::invalid);
+        if (ot == object_types::associative_container)
+            BOOST_CHECK(o.number_of_type_arguments() == 2);
+        else if (ot == object_types::sequence_container ||
+            ot == object_types::smart_pointer)
+            BOOST_CHECK(o.number_of_type_arguments() == 1);
         else
-            BOOST_CHECK(vo->number_of_type_arguments() == 0);
+            BOOST_CHECK(o.number_of_type_arguments() == 0);
 
         if (!qn.module_path().empty()) {
             bool module_found(false);
