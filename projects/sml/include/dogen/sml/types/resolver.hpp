@@ -35,6 +35,14 @@ namespace sml {
 
 /**
  * @brief Resolves type references within a model.
+ *
+ * Properties may come in from transformation missing information in
+ * their qnames - such as the model name, etc. The resolver fills in
+ * the missing gaps.
+ *
+ * The resolver is also responsible for making sure that all
+ * references to types (e.g. qnames) can be resolved to a type in the
+ * model.
  */
 class resolver {
 public:
