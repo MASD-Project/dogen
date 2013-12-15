@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 40.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-14 Sat 23:58]
+Clock summary at [2013-12-15 Sun 00:19]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *26:20* |       |       |
+| *Total time*                                                          | *26:40* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                       |         | 26:20 |       |
+| Development Stories Implemented                                       |         | 26:40 |       |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       |  0:57 |
 | IMPLEMENTATION Update manual                                          |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
@@ -27,7 +27,7 @@ Clock summary at [2013-12-14 Sat 23:58]
 | COMPLETED Use relationship container for leaves                       |         |       |  1:06 |
 | COMPLETED Use relationship container for keys                         |         |       |  0:52 |
 | COMPLETED Collapse all entity classes into just entity                |         |       |  1:29 |
-| IMPLEMENTATION Create object class and remove factory and repository  |         |       |  0:35 |
+| COMPLETED Create object class and remove factory and repository       |         |       |  0:55 |
 | IMPLEMENTATION Create a =relationship_indexer= and add tests          |         |       |  0:15 |
 #+end:
 
@@ -286,7 +286,8 @@ classes, so remove them.
      CLOSED: [2013-12-14 Sat 23:20]
      CLOCK: [2013-12-14 Sat 23:07]--[2013-12-14 Sat 23:19] =>  0:12
 
-*** IMPLEMENTATION Create object class and remove factory and repository :story:
+*** COMPLETED Create object class and remove factory and repository   :story:
+    CLOSED: [2013-12-15 Sun 00:19]
 
 As part of the collapsing all variations of abstract object into just
 object exercise, we need to create the =object= class and get rid of
@@ -301,7 +302,9 @@ to get rid of.
      CLOSED: [2013-12-14 Sat 23:58]
      CLOCK: [2013-12-14 Sat 23:31]--[2013-12-14 Sat 23:58] =>  0:27
 
-**** Remove repository                                                 :task:
+**** COMPLETED Remove repository                                       :task:
+     CLOSED: [2013-12-15 Sun 00:19]
+     CLOCK: [2013-12-14 Sat 23:59]--[2013-12-15 Sun 00:19] =>  0:20
 
 *** Use relationship container for visitors                           :story:
 

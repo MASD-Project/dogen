@@ -196,17 +196,6 @@ private:
 
     /**
      * @brief Converts Dia a object containing a UML class with a
-     * stereotype of repository to a SML service.
-     *
-     * @param o the Dia UML class containing an repository.
-     * @param p profile of the object.
-     *
-     * @pre profile must have the repository flag set.
-     */
-    void to_repository(const processed_object& o, const profile& p);
-
-    /**
-     * @brief Converts Dia a object containing a UML class with a
      * stereotype of value object to a SML service.
      *
      * @param o the Dia UML class containing a value object.

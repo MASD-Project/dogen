@@ -33,7 +33,6 @@
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -49,7 +48,6 @@
 #include "dogen/sml/io/entity_io.hpp"
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
-#include "dogen/sml/io/repository_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -65,7 +63,6 @@
 #include "dogen/sml/test_data/entity_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
-#include "dogen/sml/test_data/repository_td.hpp"
 #include "dogen/sml/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
@@ -81,7 +78,6 @@
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
-#include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
@@ -119,7 +115,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<entity_generator>();
     rountrip_type<service_generator>();
     rountrip_type<module_generator>();
-    rountrip_type<repository_generator>();
     rountrip_type<object_generator>();
     rountrip_type<concept_generator>();
     rountrip_type<model_generator>();

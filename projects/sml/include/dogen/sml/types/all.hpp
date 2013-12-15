@@ -52,7 +52,6 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/relationship_indexer.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
-#include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/service.hpp"

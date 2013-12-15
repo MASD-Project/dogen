@@ -27,7 +27,6 @@
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -402,16 +401,10 @@ void transformer::to_object(const processed_object& po, const profile& p) {
 
     if (p.is_factory())
         o->object_type(sml::object_types::factory);
+    else if (p.is_repository())
+        o->object_type(sml::object_types::repository);
 
     context_.model().objects().insert(std::make_pair(o->name(), o));
-}
-
-void transformer::to_repository(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a repostory: " << o.id();
-
-    auto r(boost::make_shared<sml::repository>());
-    update_abstract_object(*r, o, p);
-    context_.model().objects().insert(std::make_pair(r->name(), r));
 }
 
 void transformer::to_value_object(const processed_object& o, const profile& p) {
@@ -574,10 +567,8 @@ void  transformer::dispatch(const processed_object& o, const profile& p) {
         to_entity(o, p);
     else if (p.is_service())
         to_service(o, p);
-    else if (p.is_factory())
+    else if (p.is_factory() || p.is_repository())
         to_object(o, p);
-    else if (p.is_repository())
-        to_repository(o, p);
     else
         to_value_object(o, p);
 }

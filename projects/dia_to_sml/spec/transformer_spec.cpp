@@ -25,7 +25,6 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
@@ -280,10 +279,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_transforms_into_expect
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
     const auto& ao(*c.model().objects().begin()->second);
-    const auto r(dynamic_cast<const dogen::sml::repository&>(ao));
-    BOOST_CHECK(r.name().model_name() == model_name);
-    BOOST_CHECK(is_type_zero(r.name()));
-    BOOST_CHECK(!r.documentation().empty());
+    BOOST_CHECK(ao.object_type() == dogen::sml::object_types::repository);
+    BOOST_CHECK(ao.name().model_name() == model_name);
+    BOOST_CHECK(is_type_zero(ao.name()));
+    BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_transforms_into_expected_keyed_entity) {
@@ -520,12 +519,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_package_transforms_
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(*c.model().objects().begin()->second);
-    const auto r(dynamic_cast<const dogen::sml::repository&>(ao));
-    BOOST_CHECK(r.name().model_name() == model_name);
-    BOOST_CHECK(!r.name().simple_name().empty());
-    BOOST_REQUIRE(r.name().module_path().size() == 1);
-    BOOST_CHECK(r.name().module_path().front() == pkg.name().simple_name());
-    BOOST_CHECK(!r.documentation().empty());
+    BOOST_CHECK(ao.object_type() == dogen::sml::object_types::repository);
+    BOOST_CHECK(ao.name().model_name() == model_name);
+    BOOST_CHECK(!ao.name().simple_name().empty());
+    BOOST_REQUIRE(ao.name().module_path().size() == 1);
+    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_package_transforms_into_expected_entity) {
@@ -947,13 +946,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_two_packages_transf
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(*c.model().objects().begin()->second);
-    const auto r(dynamic_cast<const dogen::sml::repository&>(ao));
-    BOOST_CHECK(r.name().model_name() == model_name);
-    BOOST_CHECK(!r.name().simple_name().empty());
-    BOOST_REQUIRE(r.name().module_path().size() == 2);
-    BOOST_CHECK(r.name().module_path().front() == first);
-    BOOST_CHECK(r.name().module_path().back() == second);
-    BOOST_CHECK(!r.documentation().empty());
+    BOOST_CHECK(ao.object_type() == dogen::sml::object_types::repository);
+    BOOST_CHECK(ao.name().model_name() == model_name);
+    BOOST_CHECK(!ao.name().simple_name().empty());
+    BOOST_REQUIRE(ao.name().module_path().size() == 2);
+    BOOST_CHECK(ao.name().module_path().front() == first);
+    BOOST_CHECK(ao.name().module_path().back() == second);
+    BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_two_packages_transforms_into_expected_entity) {

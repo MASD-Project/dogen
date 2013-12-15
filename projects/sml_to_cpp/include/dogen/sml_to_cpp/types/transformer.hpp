@@ -150,7 +150,6 @@ private:
     using type_visitor::visit;
     void visit(const dogen::sml::service& s) override;
     void visit(const dogen::sml::object& f) override;
-    void visit(const dogen::sml::repository& r) override;
     void visit(const dogen::sml::enumeration& e) override;
     void visit(const dogen::sml::value_object& vo) override;
     void visit(const dogen::sml::entity& e) override;

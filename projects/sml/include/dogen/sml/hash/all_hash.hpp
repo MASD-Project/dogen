@@ -36,7 +36,6 @@
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
-#include "dogen/sml/hash/repository_hash.hpp"
 #include "dogen/sml/hash/service_hash.hpp"
 #include "dogen/sml/hash/service_types_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"

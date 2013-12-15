@@ -26,7 +26,6 @@
 #include "dogen/sml/test_data/origin_types_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
-#include "dogen/sml/test_data/repository_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/type_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
@@ -81,17 +80,15 @@ populate(const unsigned int position, result_type& v) {
 
 type_generator::result_type*
 type_generator::create_ptr(const unsigned int position) {
-    if ((position % 6) == 0)
+    if ((position % 5) == 0)
         return dogen::sml::service_generator::create_ptr(position);
-    if ((position % 6) == 1)
-        return dogen::sml::repository_generator::create_ptr(position);
-    if ((position % 6) == 2)
+    if ((position % 5) == 1)
         return dogen::sml::primitive_generator::create_ptr(position);
-    if ((position % 6) == 3)
+    if ((position % 5) == 2)
         return dogen::sml::enumeration_generator::create_ptr(position);
-    if ((position % 6) == 4)
+    if ((position % 5) == 3)
         return dogen::sml::value_object_generator::create_ptr(position);
-    if ((position % 6) == 5)
+    if ((position % 5) == 4)
         return dogen::sml::object_generator::create_ptr(position);
     return dogen::sml::entity_generator::create_ptr(position);
 }

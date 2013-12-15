@@ -23,7 +23,6 @@
 #include <boost/make_shared.hpp>
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include <boost/lexical_cast.hpp>

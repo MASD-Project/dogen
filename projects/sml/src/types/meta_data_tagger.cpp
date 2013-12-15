@@ -26,7 +26,6 @@
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -340,10 +339,6 @@ void meta_data_tagger::visit(sml::enumeration& e) const {
 
 void meta_data_tagger::visit(sml::service& s) const {
     tag(s);
-}
-
-void meta_data_tagger::visit(sml::repository& r) const {
-    tag(r);
 }
 
 void meta_data_tagger::visit(sml::value_object& vo) const {
