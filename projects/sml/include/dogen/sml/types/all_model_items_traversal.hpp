@@ -53,7 +53,7 @@ void all_model_items_traversal(const model& m, const TraversalVisitor& v) {
         v(pair.second);
 
     for (const auto& pair : m.objects())
-        v(*pair.second);
+        v(pair.second);
 }
 
 template<typename TraversalVisitor> inline
@@ -71,7 +71,7 @@ void all_model_items_traversal(model& m, TraversalVisitor& v) {
         v(pair.second);
 
     for (auto& pair : m.objects())
-        v(*pair.second);
+        v(pair.second);
 }
 /**@}*/
 

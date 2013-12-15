@@ -29,7 +29,6 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree_serialization.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"

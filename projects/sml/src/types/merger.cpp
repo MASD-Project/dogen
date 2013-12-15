@@ -174,7 +174,7 @@ void merger::merge_model(const model& m) {
     }
 
     for (const auto& o : m.objects()) {
-        check_qname(mn, o.first, o.second->name());
+        check_qname(mn, o.first, o.second.name());
         merged_model_.objects().insert(o);
     }
 }

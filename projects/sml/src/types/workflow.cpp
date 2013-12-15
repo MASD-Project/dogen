@@ -54,7 +54,7 @@ bool workflow::is_generatable(const type& t) const {
 
 bool workflow::has_generatable_types(const sml::model& m) const {
     for (const auto pair : m.objects()) {
-        if (is_generatable(*pair.second))
+        if (is_generatable(pair.second))
             return true;
     }
 

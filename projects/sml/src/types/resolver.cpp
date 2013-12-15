@@ -247,7 +247,7 @@ void resolver::resolve_objects() {
     BOOST_LOG_SEV(lg, debug) << "Objects found: " << model_.objects().size();
 
     for (auto& pair : model_.objects()) {
-        auto& o(*pair.second);
+        auto& o(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Resolving type " << o.name();
 
         if (o.generation_type() == generation_types::no_generation)

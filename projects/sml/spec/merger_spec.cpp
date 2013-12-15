@@ -159,7 +159,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
 
     auto m(factory.build_multi_type_model(0, 2));
-    m.objects().begin()->second->name().simple_name(invalid_simple_name);
+    m.objects().begin()->second.name().simple_name(invalid_simple_name);
 
     dogen::sml::merger mg;
     mg.add_target(m);

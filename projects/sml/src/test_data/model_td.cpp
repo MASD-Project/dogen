@@ -130,22 +130,15 @@ std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> create_std_unorde
     return r;
 }
 
-dogen::sml::object*
-create_dogen_sml_object_ptr(const unsigned int position) {
-    return dogen::sml::object_generator::create_ptr(position);
+dogen::sml::object
+create_dogen_sml_object(const unsigned int position) {
+    return dogen::sml::object_generator::create(position);
 }
 
-boost::shared_ptr<dogen::sml::object>
-create_boost_shared_ptr_dogen_sml_object(unsigned int position) {
-    boost::shared_ptr<dogen::sml::object> r(
-        create_dogen_sml_object_ptr(position));
-    return r;
-}
-
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_sml_object_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> > r;
+std::unordered_map<dogen::sml::qname, dogen::sml::object> create_std_unordered_map_dogen_sml_qname_dogen_sml_object(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::object> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_sml_object(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_object(position + i)));
     }
     return r;
 }
@@ -170,7 +163,7 @@ populate(const unsigned int position, result_type& v) {
     v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 8));
     v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 9));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 10));
-    v.objects(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_sml_object_(position + 11));
+    v.objects(create_std_unordered_map_dogen_sml_qname_dogen_sml_object(position + 11));
 }
 
 model_generator::result_type

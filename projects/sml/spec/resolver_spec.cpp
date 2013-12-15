@@ -97,8 +97,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
     BOOST_CHECK(m.objects().size() == 2);
     BOOST_CHECK(m.primitives().empty());
 
-    for (const auto& pair : m.objects()) {
-        auto& o(*pair.second);
+    for (auto& pair : m.objects()) {
+        auto& o(pair.second);
         BOOST_CHECK(o.local_properties().size() == 1 ||
             o.local_properties().empty());
         if (o.local_properties().size() == 1)
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_CHECK(o.local_properties().size() == 1);
             const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
@@ -157,7 +157,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_CHECK(o.local_properties().size() == 1);
             const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
@@ -266,7 +266,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_one = true;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
@@ -278,7 +278,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_two = true;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;
@@ -328,7 +328,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn;

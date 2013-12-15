@@ -69,7 +69,7 @@ object& concept_indexer::find_object(const qname& qn, model& m) {
         BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
                 boost::lexical_cast<std::string>(qn)));
     }
-    return *(i->second);
+    return i->second;
 }
 
 std::list<qname>& concept_indexer::
@@ -190,7 +190,7 @@ void concept_indexer::index_objects(model& m) {
 
     std::unordered_set<sml::qname> processed_qnames;
     for (auto& pair : m.objects()) {
-        auto& o(*pair.second);
+        auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;

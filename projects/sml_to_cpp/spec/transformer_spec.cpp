@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) 
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*m.objects().begin()->second);
+    t.from_type(m.objects().begin()->second);
     BOOST_REQUIRE(c.exceptions().size() == 1);
     const auto e(c.exceptions().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
@@ -201,7 +201,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_one_module_results_in_expected_ex
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*m.objects().begin()->second);
+    t.from_type(m.objects().begin()->second);
     BOOST_REQUIRE(c.exceptions().size() == 1);
     const auto e(c.exceptions().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
@@ -222,7 +222,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_multiple_modules_results_in_expec
     dogen::sml_to_cpp::transformer t(m, c);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
-    t.from_type(*m.objects().begin()->second);
+    t.from_type(m.objects().begin()->second);
     BOOST_REQUIRE(c.exceptions().size() == 1);
 
     const auto e(c.exceptions().begin()->second);
@@ -241,13 +241,13 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_external_module_results_in_expect
     const auto ot(object_types::exception);
     auto m(factory.build_single_type_model_in_module(0, ot));
     BOOST_REQUIRE(m.objects().size() == 1);
-    auto& exception(*m.objects().begin()->second);
+    auto& exception(m.objects().begin()->second);
     exception.name().external_module_path().push_back(external_module);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*m.objects().begin()->second);
+    t.from_type(m.objects().begin()->second);
     BOOST_REQUIRE(c.exceptions().size() == 1);
     const auto e(c.exceptions().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
@@ -383,7 +383,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*m.objects().begin()->second);
+    t.from_type(m.objects().begin()->second);
 
     BOOST_REQUIRE(c.classes().size() == 1);
     const auto ci(c.classes().begin()->second);
@@ -425,7 +425,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_property_results_in_expected_class
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*i->second);
+    t.from_type(i->second);
 
     BOOST_REQUIRE(c.classes().size() == 1);
     const auto ci(c.classes().begin()->second);
@@ -487,7 +487,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_bool_property_results_in_expected_
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*i->second);
+    t.from_type(i->second);
 
     BOOST_REQUIRE(c.classes().size() == 1);
     const auto ci(c.classes().begin()->second);
@@ -553,7 +553,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*i->second);
+    t.from_type(i->second);
 
     BOOST_REQUIRE(c.classes().size() == 1);
     const auto ci(c.classes().begin()->second);
@@ -618,7 +618,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.from_type(*i->second);
+    t.from_type(i->second);
 
     BOOST_REQUIRE(c.classes().size() == 1);
     const auto ci(c.classes().begin()->second);
@@ -681,7 +681,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(1, pair.first.simple_name())) {
             found_one = true;
-            t.from_type(*pair.second);
+            t.from_type(pair.second);
 
             BOOST_REQUIRE(c.classes().size() == 1);
             const auto i(c.classes().find(pair.first));
@@ -706,7 +706,7 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first.simple_name())) {
             found_zero = true;
-            t.from_type(*pair.second);
+            t.from_type(pair.second);
 
             BOOST_REQUIRE(c.classes().size() == 2);
             const auto i(c.classes().find(pair.first));
@@ -744,7 +744,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_parent_class_info_for_type_with_parent_throws
             found_zero = true;
             using dogen::sml_to_cpp::transformation_error;
             contains_checker<transformation_error> cc(no_parent_info);
-            const auto& ao(*pair.second);
+            const auto& ao(pair.second);
             BOOST_CHECK_EXCEPTION(t.from_type(ao), transformation_error, cc);
         }
     }
@@ -763,7 +763,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(3, pair.first.simple_name())) {
             found_three = true;
-            t.from_type(*pair.second);
+            t.from_type(pair.second);
         }
     }
     BOOST_CHECK(found_three);
@@ -772,7 +772,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(2, pair.first.simple_name())) {
             found_two = true;
-            t.from_type(*pair.second);
+            t.from_type(pair.second);
         }
     }
     BOOST_CHECK(found_two);
@@ -781,7 +781,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(1, pair.first.simple_name())) {
             found_one = true;
-            t.from_type(*pair.second);
+            t.from_type(pair.second);
         }
     }
     BOOST_CHECK(found_one);
@@ -790,7 +790,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first.simple_name())) {
             found_zero = true;
-            t.from_type(*pair.second);
+            t.from_type(pair.second);
         }
     }
     BOOST_CHECK(found_zero);

@@ -109,7 +109,7 @@ void workflow::post_process_model_activity() {
         // itself; then add each leaf type to the model's leaf
         // container.
         using sml::relationship_types;
-        pair.second->relationships()[relationship_types::leaves] = i->second;
+        pair.second.relationships()[relationship_types::leaves] = i->second;
         for (const auto& j : i->second)
             context_.model().leaves().insert(j);
     }

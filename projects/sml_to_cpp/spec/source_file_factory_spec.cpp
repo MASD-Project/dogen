@@ -171,7 +171,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_result
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::source_file_factory f(l);
-    const auto& ex(*m.objects().begin()->second);
+    const auto& ex(m.objects().begin()->second);
     const auto md(mock_descriptors(ex.name()));
     const auto ei((dogen::cpp::exception_info()));
     const auto il((dogen::sml_to_cpp::inclusion_lists()));
@@ -256,7 +256,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::source_file_factory f(l);
-    const auto& p(*m.objects().begin()->second);
+    const auto& p(m.objects().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ci((dogen::cpp::class_info()));
     const auto il((dogen::sml_to_cpp::inclusion_lists()));

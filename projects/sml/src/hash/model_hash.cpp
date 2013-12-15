@@ -101,17 +101,11 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_sml_object(const boost::shared_ptr<dogen::sml::object>& v){
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_sml_object_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_object(const std::unordered_map<dogen::sml::qname, dogen::sml::object>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_sml_object(i.second));
+        combine(seed, i.second);
     }
     return seed;
 }
@@ -135,7 +129,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(v.concepts()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(v.primitives()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_sml_object_(v.objects()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_object(v.objects()));
 
     return seed;
 }

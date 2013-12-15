@@ -81,11 +81,11 @@ void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
         }
 
         const auto ac(sml::object_types::associative_container);
-        if (k->second->object_type() == ac && nqn.children().size() >= 1) {
+        if (k->second.object_type() == ac && nqn.children().size() >= 1) {
             rel.keys().insert(nqn.children().front().type());
         }
         const auto sp(sml::object_types::smart_pointer);
-        is_pointer = k->second->object_type() == sp;
+        is_pointer = k->second.object_type() == sp;
     }
 
     const auto sn(qn.simple_name());
@@ -205,7 +205,7 @@ relationships extractor::extract_inheritance_graph(const sml::qname& qn) const {
                     boost::lexical_cast<std::string>(qn)));
         });
 
-    const auto& ao(*i->second);
+    const auto& ao(i->second);
 
     using dogen::sml::relationship_types;
     const auto j(ao.relationships().find(relationship_types::leaves));
@@ -216,7 +216,7 @@ relationships extractor::extract_inheritance_graph(const sml::qname& qn) const {
                 lambda(l, qname_could_not_be_found);
 
             do {
-                const auto& lao(*i->second);
+                const auto& lao(i->second);
                 BOOST_LOG_SEV(lg, debug) << "adding " << lao.name();
                 r.names().insert(lao.name());
 
@@ -230,7 +230,7 @@ relationships extractor::extract_inheritance_graph(const sml::qname& qn) const {
                     if (i == model_.objects().end())
                         lambda(parent, qname_could_not_be_found);
                 }
-            } while (i->second->name() != qn);
+            } while (i->second.name() != qn);
         }
     } else
         BOOST_LOG_SEV(lg, debug) << "type has no leaves.";

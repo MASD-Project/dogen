@@ -230,7 +230,7 @@ void transformer::add_leaf(const sml::qname& leaf, const sml::object& ao) {
             BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
                     parent.simple_name()));
         }
-        add_leaf(leaf, *k->second);
+        add_leaf(leaf, k->second);
         context_.leaves()[parent].push_back(leaf);
     }
 }
@@ -352,54 +352,54 @@ update_object(sml::object& ao, const processed_object& o, const profile& p) {
 void transformer::to_entity(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
 
-    auto e(boost::make_shared<sml::object>());
-    update_object(*e, o, p);
-    e->is_aggregate_root(p.is_aggregate_root());
+    sml::object e;
+    update_object(e, o, p);
+    e.is_aggregate_root(p.is_aggregate_root());
 
-    for (const auto& p : e->local_properties()) {
+    for (const auto& p : e.local_properties()) {
         sml::meta_data_reader reader(p.meta_data());
         if (reader.has_key(sml::tags::identity_attribute))
-            e->identity().push_back(p);
+            e.identity().push_back(p);
     }
 
     if (p.is_entity())
-        e->object_type(sml::object_types::entity);
+        e.object_type(sml::object_types::entity);
     else if (p.is_keyed_entity())
-        e->object_type(sml::object_types::keyed_entity);
-    context_.model().objects().insert(std::make_pair(e->name(), e));
+        e.object_type(sml::object_types::keyed_entity);
+    context_.model().objects().insert(std::make_pair(e.name(), e));
 }
 
 void transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
-    auto vo(boost::make_shared<sml::object>());
-    update_object(*vo, o, p);
-    vo->object_type(sml::object_types::exception);
-    context_.model().objects().insert(std::make_pair(vo->name(), vo));
+    sml::object vo;
+    update_object(vo, o, p);
+    vo.object_type(sml::object_types::exception);
+    context_.model().objects().insert(std::make_pair(vo.name(), vo));
 }
 
 void transformer::to_object(const processed_object& po, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a factory: " << po.id();
 
-    auto o(boost::make_shared<sml::object>());
+    sml::object o;
     if (p.is_factory())
-        o->object_type(sml::object_types::factory);
+        o.object_type(sml::object_types::factory);
     else if (p.is_repository())
-        o->object_type(sml::object_types::repository);
+        o.object_type(sml::object_types::repository);
     else if (p.is_service())
-        o->object_type(sml::object_types::user_defined_service);
+        o.object_type(sml::object_types::user_defined_service);
 
-    update_object(*o, po, p);
-    context_.model().objects().insert(std::make_pair(o->name(), o));
+    update_object(o, po, p);
+    context_.model().objects().insert(std::make_pair(o.name(), o));
 }
 
 void transformer::to_value_object(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a value object: " << o.id();
 
-    auto vo(boost::make_shared<sml::object>());
-    update_object(*vo, o, p);
-    vo->object_type(sml::object_types::user_defined_value_object);
-    context_.model().objects().insert(std::make_pair(vo->name(), vo));
+    sml::object vo;
+    update_object(vo, o, p);
+    vo.object_type(sml::object_types::user_defined_value_object);
+    context_.model().objects().insert(std::make_pair(vo.name(), vo));
 }
 
 void transformer::to_enumeration(const processed_object& o, const profile& p) {

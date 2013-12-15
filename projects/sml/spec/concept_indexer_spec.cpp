@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_is_untouched_by_concept_index
     BOOST_REQUIRE(a.primitives().size() == 1);
 
     BOOST_REQUIRE(a.objects().size() == 1);
-    const auto& o(*a.objects().begin()->second);
+    const auto& o(a.objects().begin()->second);
     BOOST_REQUIRE(o.local_properties().size() == 1);
     BOOST_REQUIRE(o.inherited_properties().empty());
     BOOST_REQUIRE(o.all_properties().empty());
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_indexer) 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
-    const auto& o(*a.objects().begin()->second);
+    const auto& o(a.objects().begin()->second);
     using dogen::sml::relationship_types;
     const auto rt(relationship_types::modeled_concepts);
     const auto i(o.relationships().find(rt));
@@ -155,7 +155,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
 
         const auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
@@ -231,7 +231,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
@@ -289,7 +289,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
 
         const auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
@@ -317,7 +317,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     BOOST_REQUIRE(m.objects().size() == 1);
     {
         const auto& qn(m.objects().begin()->first);
-        const auto& o(*(m.objects().begin()->second));
+        const auto& o(m.objects().begin()->second);
 
         if (factory.is_type_name_n(0, qn)) {
 
@@ -391,7 +391,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     BOOST_REQUIRE(m.objects().size() == 1);
     {
         const auto& qn(m.objects().begin()->first);
-        const auto& o(*(m.objects().begin()->second));
+        const auto& o(m.objects().begin()->second);
 
         const auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
@@ -458,7 +458,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
     BOOST_REQUIRE(a.objects().size() == 2);
     for (const auto& pair : a.objects()) {
         const auto& qn(pair.first);
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
         if (factory.is_type_name_n(0, qn)) {
@@ -509,7 +509,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
         if (factory.is_type_name_n(0, qn)) {
@@ -548,7 +548,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
         if (factory.is_type_name_n(0, qn)) {
@@ -607,7 +607,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
         if (!factory.is_type_name_n(0, qn))
             BOOST_FAIL("Unexpected object: " << qn);
 
-        const auto& o(*m.objects().begin()->second);
+        const auto& o(m.objects().begin()->second);
         using dogen::sml::relationship_types;
         const auto mc(relationship_types::modeled_concepts);
         auto i(o.relationships().find(mc));
@@ -643,7 +643,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
     BOOST_REQUIRE(m.objects().size() == 1);
     {
         const auto& qn(m.objects().begin()->first);
-        const auto& o(*m.objects().begin()->second);
+        const auto& o(m.objects().begin()->second);
 
         using dogen::sml::relationship_types;
         const auto mc(relationship_types::modeled_concepts);

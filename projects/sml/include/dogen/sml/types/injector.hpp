@@ -67,25 +67,24 @@ private:
      * @param versioned if true, create a versioned key. Otherwise,
      * creates an unversioned key.
      */
-    boost::shared_ptr<object> create_key(const qname& qn,
-        const generation_types gt, const std::list<property>& properties,
-        const bool versioned) const;
+    object create_key(const qname& qn, const generation_types gt,
+        const std::list<property>& properties, const bool versioned) const;
 
     /**
      * @brief Helper functions for create key just for the sake of
      * clarity.
      */
     /**@{*/
-    boost::shared_ptr<object> create_versioned_key(const qname& qn,
-        const generation_types gt, const std::list<property>& properties) const;
-    boost::shared_ptr<object> create_unversioned_key(const qname& qn,
-        const generation_types gt, const std::list<property>& properties) const;
+    object create_versioned_key(const qname& qn, const generation_types gt,
+        const std::list<property>& properties) const;
+    object create_unversioned_key(const qname& qn, const generation_types gt,
+        const std::list<property>& properties) const;
     /**@}*/
 
     /**
      * @brief Create a visitor for the object.
      */
-    boost::shared_ptr<object> create_key_extractor(const object& ke) const;
+    object create_key_extractor(const object& ke) const;
 
     /**
      * @brief Injects versioned and unversioned keys for keyed
@@ -107,7 +106,7 @@ private:
     /**
      * @brief Create a visitor for the object.
      */
-    boost::shared_ptr<object> create_visitor(const object& ao) const;
+    object create_visitor(const object& ao) const;
 
     /**
      * @brief Injects an accept operation for the given visitor.

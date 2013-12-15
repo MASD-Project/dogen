@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
         if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::entity);
             BOOST_CHECK(o.local_properties().size() == 1);
             BOOST_CHECK(!o.identity().empty());
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws
         const auto& qn(pair.first);
         if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            auto& o(*pair.second);
+            auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::keyed_entity);
             BOOST_CHECK(o.local_properties().size() == 1);
             BOOST_CHECK(!o.is_versioned());
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
         const auto& qn(pair.first);
         if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            auto& o(*pair.second);
+            auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::keyed_entity);
             BOOST_REQUIRE(o.local_properties().size() == 1);
             BOOST_REQUIRE(!o.is_versioned());
@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
         if (factory.is_type_name_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::keyed_entity);
             BOOST_REQUIRE(!o.is_versioned());
 
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
     BOOST_REQUIRE(type_zero);
     const auto j(m.objects().find(ukqn));
     BOOST_REQUIRE(j != m.objects().end());
-    const auto& uk(*(j->second));
+    const auto& uk(j->second);
     BOOST_CHECK(uk.object_type() == object_types::unversioned_key);
     BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
     BOOST_REQUIRE(!uk.is_versioned());
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
         const auto& qn(pair.first);
         if (factory.is_type_name_n(0, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            auto& o(*pair.second);
+            auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::keyed_entity);
             BOOST_REQUIRE(o.local_properties().size() == 1);
             BOOST_REQUIRE(!o.is_versioned());
@@ -219,7 +219,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
         if (factory.is_type_name_n(0, qn)) {
             type_zero = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
-            auto& o(*pair.second);
+            auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::keyed_entity);
             BOOST_CHECK(o.is_versioned());
 
@@ -245,7 +245,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
     auto j(m.objects().find(ukqn));
     BOOST_REQUIRE(j != m.objects().end());
 
-    const auto& uk(*(j->second));
+    const auto& uk(j->second);
     BOOST_CHECK(uk.object_type() == object_types::unversioned_key);
     BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
     BOOST_REQUIRE(!uk.is_versioned());
@@ -253,7 +253,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
     j = m.objects().find(vkqn);
     BOOST_REQUIRE(j != m.objects().end());
 
-    const auto& vk(*(j->second));
+    const auto& vk(j->second);
     BOOST_CHECK(vk.object_type() == object_types::versioned_key);
     BOOST_LOG_SEV(lg, debug) << "Found versioned key: " << vk;
     BOOST_REQUIRE(!vk.is_versioned());
@@ -264,7 +264,7 @@ BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
 
     auto m(factory.build_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
-    auto& ob(*m.objects().begin()->second);
+    auto& ob(m.objects().begin()->second);
     BOOST_REQUIRE(ob.local_properties().empty());
     ob.is_versioned(true);
     BOOST_LOG_SEV(lg, debug) << "before: " << ob;
@@ -273,7 +273,7 @@ BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
     i.inject(m);
 
     BOOST_REQUIRE(m.objects().size() == 1);
-    auto& oa(*m.objects().begin()->second);
+    auto& oa(m.objects().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "object after: " << oa;
     BOOST_REQUIRE(oa.local_properties().size() == 1);
     BOOST_CHECK(oa.local_properties().front().name() == version_name);
@@ -285,7 +285,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
 
     auto m(factory.build_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
-    auto& ob(*m.objects().begin()->second);
+    auto& ob(m.objects().begin()->second);
     ob.is_visitable(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -302,7 +302,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
         if (factory.is_type_name_n(1, qn)) {
-            auto& ao(*pair.second);
+            auto& ao(pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             ao.is_visitable(true);
         }
@@ -320,12 +320,12 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
         if (factory.is_type_name_n(1, qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             type_one = true;
-            BOOST_REQUIRE(!pair.second->is_versioned());
+            BOOST_REQUIRE(!pair.second.is_versioned());
         } else if (factory.is_type_name_n_visitor(1, qn)) {
             visitor = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
 
-            const auto& o(*pair.second);
+            const auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::visitor);
             BOOST_CHECK(!o.is_versioned());
             BOOST_CHECK(!o.is_visitable());

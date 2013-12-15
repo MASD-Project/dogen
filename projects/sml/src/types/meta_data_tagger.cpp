@@ -590,10 +590,10 @@ void meta_data_tagger::tag(object& o) const {
         }
 
         writer.add_if_key_not_found(tags::is_original_parent_visitable,
-            i->second->is_visitable() ? tags::bool_true : tags::bool_false);
+            i->second.is_visitable() ? tags::bool_true : tags::bool_false);
 
         writer.add_if_key_not_found(tags::cpp::types::generate_accept,
-            i->second->is_visitable() ? tags::bool_true : tags::bool_false);
+            i->second.is_visitable() ? tags::bool_true : tags::bool_false);
 
         writer.add_if_key_not_found(
             tags::cpp::types::qualified_original_parent_name,

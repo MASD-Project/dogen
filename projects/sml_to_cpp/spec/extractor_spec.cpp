@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_no_properties_and_no_inheri
     BOOST_CHECK(m.objects().size() == 1);
 
     dogen::sml_to_cpp::extractor x(m);
-    const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
+    const auto r(x.extract_dependency_graph(m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
     BOOST_CHECK(r.names().empty());
@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
             found[0] = true;
-            const auto r(x.extract_dependency_graph(*pair.second));
+            const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
-            const auto r(x.extract_dependency_graph(*pair.second));
+            const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().empty());
@@ -134,10 +134,10 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_unsigned_int_property_has_e
     const auto m(factory.object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->local_properties().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second.local_properties().size() == 1);
 
     dogen::sml_to_cpp::extractor x(m);
-    const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
+    const auto r(x.extract_dependency_graph(m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
     BOOST_REQUIRE(r.names().size() == 1);
@@ -162,10 +162,10 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boolean_property_has_expect
     const auto m(factory.object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->local_properties().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second.local_properties().size() == 1);
 
     dogen::sml_to_cpp::extractor x(m);
-    const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
+    const auto r(x.extract_dependency_graph(m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
     BOOST_REQUIRE(r.names().size() == 1);
@@ -195,8 +195,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
-            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
-            const auto r(x.extract_dependency_graph(*pair.second));
+            BOOST_REQUIRE(pair.second.local_properties().size() == 1);
+            const auto r(x.extract_dependency_graph(pair.second));
 
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_missing_object_property_thr
     BOOST_REQUIRE(m.objects().size() == 1);
 
     dogen::sml_to_cpp::extractor x(m);
-    const auto& p(*m.objects().begin()->second);
+    const auto& p(m.objects().begin()->second);
 
     using dogen::sml_to_cpp::extraction_error;
     contains_checker<extraction_error> c(object_not_found);
@@ -247,8 +247,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
-            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
-            const auto r(x.extract_dependency_graph(*pair.second));
+            BOOST_REQUIRE(pair.second.local_properties().size() == 1);
+            const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
             BOOST_REQUIRE(r.names().size() == 2);
             BOOST_CHECK(r.forward_decls().empty());
@@ -281,8 +281,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expect
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
-            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
-            const auto r(x.extract_dependency_graph(*pair.second));
+            BOOST_REQUIRE(pair.second.local_properties().size() == 1);
+            const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 3);
@@ -315,8 +315,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_exp
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
-            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
-            const auto r(x.extract_dependency_graph(*pair.second));
+            BOOST_REQUIRE(pair.second.local_properties().size() == 1);
+            const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -350,10 +350,10 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_h
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
-            BOOST_REQUIRE(pair.second->local_properties().size() == 1);
+            BOOST_REQUIRE(pair.second.local_properties().size() == 1);
 
             found = true;
-            const auto r(x.extract_dependency_graph(*pair.second));
+            const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -380,7 +380,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_has_one_name_in
 
     dogen::sml_to_cpp::extractor x(m);
     const auto r(
-        x.extract_inheritance_graph(m.objects().begin()->second->name()));
+        x.extract_inheritance_graph(m.objects().begin()->second.name()));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
     BOOST_CHECK(r.names().size() == 1);
@@ -411,7 +411,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
             found[0] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -429,7 +429,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_CHECK(r.names().size() == 1);
@@ -464,7 +464,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
 
             found[0] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -482,7 +482,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_CHECK(r.names().size() == 2);
@@ -516,7 +516,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_missing_parent_throws) {
 
     dogen::sml_to_cpp::extractor x(m);
 
-    const auto qn(m.objects().begin()->second->name());
+    const auto qn(m.objects().begin()->second.name());
     using dogen::sml_to_cpp::extraction_error;
     contains_checker<extraction_error> c(object_not_found);
     BOOST_CHECK_EXCEPTION(x.extract_inheritance_graph(qn), extraction_error, c);
@@ -537,7 +537,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[0] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -555,7 +555,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 2);
@@ -579,7 +579,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[2] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 3);
@@ -604,7 +604,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[3] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 4);
@@ -646,7 +646,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[0] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -664,7 +664,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[1] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -682,7 +682,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[2] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 1);
@@ -700,7 +700,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
             BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
 
             found[3] = true;
-            const auto r(x.extract_inheritance_graph(pair.second->name()));
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().size() == 4);

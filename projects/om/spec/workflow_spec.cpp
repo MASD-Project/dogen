@@ -164,7 +164,7 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
     auto m(factory.build_single_type_model());
 
     BOOST_REQUIRE(m.objects().size() == 1);
-    auto& o(*(m.objects().begin()->second));
+    auto& o(m.objects().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     const auto r(w.execute(m));

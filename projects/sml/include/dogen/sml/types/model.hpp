@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <boost/property_tree/ptree.hpp>
-#include <boost/shared_ptr.hpp>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -37,7 +36,7 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/object_fwd.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -94,7 +93,7 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& objects);
+        const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects);
 
 private:
     template<typename Archive>
@@ -221,10 +220,10 @@ public:
      * @brief All objects contained in this model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& objects() const;
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& objects();
-    void objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& v);
-    void objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >&& v);
+    const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects();
+    void objects(const std::unordered_map<dogen::sml::qname, dogen::sml::object>& v);
+    void objects(const std::unordered_map<dogen::sml::qname, dogen::sml::object>&& v);
     /**@}*/
 
 public:
@@ -249,7 +248,7 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::sml::concept> concepts_;
     std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> > objects_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::object> objects_;
 };
 
 } }

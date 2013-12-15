@@ -116,7 +116,7 @@ includes_for_one_object_model(cpp_facet_types ft,
     using dogen::sml::test::mock_model_factory;
     const auto m(model_factory.build_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
-    const auto& p(*m.objects().begin()->second);
+    const auto& p(m.objects().begin()->second);
 
     auto im(factory(m));
     std::vector<std::list<std::string> > r;

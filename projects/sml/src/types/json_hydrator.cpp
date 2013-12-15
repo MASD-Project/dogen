@@ -143,23 +143,23 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
     if (meta_type_value == meta_type_value_object_value) {
-        auto vo(boost::make_shared<sml::object>());
-        lambda(*vo);
+        object vo;
+        lambda(vo);
 
         const auto vot(pt.get_optional<std::string>(value_object_type_key));
         if (vot) {
             if (*vot == value_object_type_smart_pointer_value) {
-                vo->object_type(object_types::smart_pointer);
-                vo->number_of_type_arguments(1);
+                vo.object_type(object_types::smart_pointer);
+                vo.number_of_type_arguments(1);
             } else if (*vot == value_object_type_associative_container_value) {
-                vo->object_type(object_types::associative_container);
-                vo->number_of_type_arguments(2);
+                vo.object_type(object_types::associative_container);
+                vo.number_of_type_arguments(2);
             } else if (*vot == value_object_type_sequence_container_value) {
-                vo->object_type(object_types::sequence_container);
-                vo->number_of_type_arguments(1);
+                vo.object_type(object_types::sequence_container);
+                vo.number_of_type_arguments(1);
             }
         } else
-            vo->object_type(object_types::user_defined_value_object);
+            vo.object_type(object_types::user_defined_value_object);
 
         m.objects().insert(std::make_pair(qn, vo));
     } else if (meta_type_value == meta_type_primitive_value) {

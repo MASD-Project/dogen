@@ -112,7 +112,7 @@ void workflow::transform_object(const sml::object& ao) {
                             boost::lexical_cast<std::string>(qn)));
                 }
 
-                const auto& ao(*j->second);
+                const auto& ao(j->second);
                 using sml::generation_types;
                 if (ao.generation_type() == generation_types::no_generation)
                     return;
@@ -161,7 +161,7 @@ void workflow::transformation_sub_workflow() {
     BOOST_LOG_SEV(lg, debug) << "Started transformation sub-workflow.";
 
     for (const auto& pair : model_.objects())
-        transform_object(*pair.second);
+        transform_object(pair.second);
 
     if (!model_.documentation().empty())
         transformer_.model_to_namespace_info();

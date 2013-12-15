@@ -247,7 +247,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
 
     const auto k(model_.objects().find(qn));
     if (k != model_.objects().end()) {
-        const auto ot(k->second->object_type());
+        const auto ot(k->second.object_type());
         using sml::object_types;
         nti.is_sequence_container(ot == object_types::sequence_container);
         nti.is_associative_container(ot == object_types::associative_container);

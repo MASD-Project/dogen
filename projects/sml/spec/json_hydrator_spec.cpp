@@ -197,14 +197,14 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(m.objects().size() == 1);
     const auto& pair(*m.objects().begin());
-    const auto& qn(pair.second->name());
+    const auto& qn(pair.second.name());
 
     BOOST_CHECK(pair.first == qn);
     BOOST_CHECK(qn.simple_name() == type_name);
     BOOST_CHECK(qn.model_name() == m.name().model_name());
     BOOST_CHECK(qn.module_path().empty());
     BOOST_CHECK(qn.external_module_path().empty());
-    BOOST_CHECK(pair.second->documentation() == documentation);
+    BOOST_CHECK(pair.second.documentation() == documentation);
 }
 
 BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
@@ -235,17 +235,17 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.objects().size() == 1);
 
     const auto& pair(*m.objects().begin());
-    const auto& qn(pair.second->name());
+    const auto& qn(pair.second.name());
 
     BOOST_CHECK(pair.first == qn);
     BOOST_CHECK(qn.simple_name() == type_name);
     BOOST_CHECK(qn.model_name() == m.name().model_name());
     BOOST_CHECK(qn.module_path().empty());
     BOOST_CHECK(qn.external_module_path().empty());
-    BOOST_CHECK(pair.second->documentation() == documentation);
+    BOOST_CHECK(pair.second.documentation() == documentation);
 
     {
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
         auto i(o.meta_data().find(dogen::sml::tags::odb_pragma));
         BOOST_REQUIRE(i != m.meta_data().not_found());
         BOOST_REQUIRE(i->second.size() == 1);
@@ -267,8 +267,8 @@ BOOST_AUTO_TEST_CASE(no_documentation_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(m.documentation().empty());
     BOOST_REQUIRE(m.objects().size() == 1);
-    const auto& pair(*m.objects().begin());
-    BOOST_CHECK(pair.second->documentation().empty());
+    const auto& pair(m.objects().begin());
+    BOOST_CHECK(pair->second.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(no_name_model_throws) {
@@ -319,7 +319,7 @@ BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(m.objects().size() == 1);
     const auto& pair(*m.objects().begin());
-    const auto& qn(pair.second->name());
+    const auto& qn(pair.second.name());
 
     BOOST_CHECK(pair.first == qn);
     {
@@ -347,7 +347,7 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
     for (const auto& pair : objects) {
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
         const auto qn(o.name());
         BOOST_CHECK(qn.model_name() == cpp_std_model_name);
         BOOST_CHECK(qn.external_module_path().empty());
@@ -397,7 +397,7 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
     for (const auto& pair : objects) {
-        const auto& o(*pair.second);
+        const auto& o(pair.second);
         const auto qn(o.name());
         BOOST_CHECK(qn.model_name() == cpp_boost_model_name);
         BOOST_CHECK(qn.external_module_path().empty());

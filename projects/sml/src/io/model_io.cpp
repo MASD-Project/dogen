@@ -161,25 +161,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::sml::object>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s<< " }";
-    return s;
-}
-
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::object>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

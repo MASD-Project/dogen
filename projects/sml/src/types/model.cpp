@@ -19,16 +19,6 @@
  *
  */
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/object.hpp"
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::sml::object>& lhs,
-const boost::shared_ptr<dogen::sml::object>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
 
 namespace dogen {
 namespace sml {
@@ -63,7 +53,7 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& objects)
+    const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects)
     : origin_type_(origin_type),
       documentation_(documentation),
       meta_data_(meta_data),
@@ -274,19 +264,19 @@ void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml:
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& model::objects() const {
+const std::unordered_map<dogen::sml::qname, dogen::sml::object>& model::objects() const {
     return objects_;
 }
 
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& model::objects() {
+std::unordered_map<dogen::sml::qname, dogen::sml::object>& model::objects() {
     return objects_;
 }
 
-void model::objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >& v) {
+void model::objects(const std::unordered_map<dogen::sml::qname, dogen::sml::object>& v) {
     objects_ = v;
 }
 
-void model::objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::object> >&& v) {
+void model::objects(const std::unordered_map<dogen::sml::qname, dogen::sml::object>&& v) {
     objects_ = std::move(v);
 }
 

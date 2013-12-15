@@ -176,7 +176,7 @@ find_object(const dogen::sml::model& m, const unsigned int n) {
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
         if (factory.type_name(n) == qn.simple_name())
-            return *pair.second;
+            return pair.second;
     }
 
     BOOST_THROW_EXCEPTION(
@@ -185,10 +185,10 @@ find_object(const dogen::sml::model& m, const unsigned int n) {
 }
 
 dogen::sml::object& find_object(dogen::sml::model& m, const unsigned int n) {
-    for (const auto& pair : m.objects()) {
+    for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
         if (factory.type_name(n) == qn.simple_name())
-            return *pair.second;
+            return pair.second;
     }
 
     BOOST_THROW_EXCEPTION(

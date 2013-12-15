@@ -297,9 +297,8 @@ void insert_nameable(std::unordered_map<dogen::sml::qname, Nameable>& map,
     map.insert(std::make_pair(n.name(), n));
 }
 
-void insert_object(dogen::sml::model& m,
-    boost::shared_ptr<dogen::sml::object> o) {
-    m.objects().insert(std::make_pair(o->name(), o));
+void insert_object(dogen::sml::model& m, const dogen::sml::object& o) {
+    m.objects().insert(std::make_pair(o.name(), o));
 }
 
 std::string filename_for_qname(const dogen::sml::qname& qn) {
@@ -453,22 +452,21 @@ bool mock_model_factory::is_file_for_qname(const boost::filesystem::path& p,
     return boost::algorithm::ends_with(p.generic_string(), fn);
 }
 
-boost::shared_ptr<object> mock_model_factory::
-build_value_object(const unsigned int i, const qname& model_qname,
-    const unsigned int module_n) const {
+object mock_model_factory::build_value_object(const unsigned int i,
+    const qname& model_qname, const unsigned int module_n) const {
 
-    auto r(boost::make_shared<object>());
-    populate_object(*r, i, model_qname, module_n);
-    r->object_type(dogen::sml::object_types::user_defined_value_object);
+    object r;
+    populate_object(r, i, model_qname, module_n);
+    r.object_type(dogen::sml::object_types::user_defined_value_object);
 
     if (flags_.tagged())
-        add_test_tags(*r);
+        add_test_tags(r);
 
     return r;
 }
 
-boost::shared_ptr<object> mock_model_factory::
-build_value_object(unsigned int i, const unsigned int module_n) const {
+object mock_model_factory::build_value_object(unsigned int i,
+    const unsigned int module_n) const {
     return build_value_object(i, mock_model_qname(i), module_n);
 }
 
@@ -490,22 +488,21 @@ concept mock_model_factory::build_concept(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<object> mock_model_factory::
-build_entity(const property& prop, const bool keyed,
+object mock_model_factory::build_entity(const property& prop, const bool keyed,
     const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
-    auto r(boost::shared_ptr<object>(new object()));
+    object r;
     if (keyed)
-        r->object_type(dogen::sml::object_types::keyed_entity);
+        r.object_type(dogen::sml::object_types::keyed_entity);
     else
-        r->object_type(dogen::sml::object_types::entity);
+        r.object_type(dogen::sml::object_types::entity);
 
-    populate_object(*r, i, model_qname, module_n);
-    r->identity().push_back(prop);
+    populate_object(r, i, model_qname, module_n);
+    r.identity().push_back(prop);
 
     if (flags_.tagged())
-        add_test_tags(*r);
+        add_test_tags(r);
 
     return r;
 }
@@ -545,9 +542,8 @@ build_enumeration(const unsigned int i, const qname& model_qname,
     return r;
 }
 
-boost::shared_ptr<object> mock_model_factory::
-build_exception(const unsigned int i, const qname& model_qname,
-    const unsigned int module_n) const {
+object mock_model_factory::build_exception(const unsigned int i,
+    const qname& model_qname, const unsigned int module_n) const {
     qname qn;
     qn.model_name(model_qname.model_name());
     qn.simple_name(type_name(i));
@@ -555,14 +551,14 @@ build_exception(const unsigned int i, const qname& model_qname,
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
 
-    boost::shared_ptr<object> r(new object());
-    r->name(qn);
-    r->generation_type(generation_types::full_generation);
-    r->documentation(documentation);
-    r->object_type(dogen::sml::object_types::exception);
+    object r;
+    r.name(qn);
+    r.generation_type(generation_types::full_generation);
+    r.documentation(documentation);
+    r.object_type(dogen::sml::object_types::exception);
 
     if (flags_.tagged())
-        add_test_tags(*r);
+        add_test_tags(r);
 
     return r;
 }
@@ -653,8 +649,8 @@ build_single_concept_model(const unsigned int n) const {
     insert_nameable(r.concepts(), c);
 
     auto o(build_value_object(0, r.name()));
-    add_property(*o, flags_.properties_indexed(), 1);
-    add_relationship(*o, c, relationship_types::modeled_concepts);
+    add_property(o, flags_.properties_indexed(), 1);
+    add_relationship(o, c, relationship_types::modeled_concepts);
     insert_object(r, o);
 
     return r;
@@ -675,16 +671,16 @@ build_first_degree_concepts_model(const unsigned int n) const {
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
-    add_relationship(*o0, c0, mc);
+    add_relationship(o0, c0, mc);
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
-    add_property(*o1, flags_.properties_indexed(), 2);
+    add_property(o1, flags_.properties_indexed(), 2);
 
     if (flags_.concepts_indexed())
-        add_relationship(*o1, c0, mc);
+        add_relationship(o1, c0, mc);
 
-    add_relationship(*o1, c1, mc);
+    add_relationship(o1, c1, mc);
     insert_object(r, o1);
 
     return r;
@@ -714,23 +710,23 @@ build_second_degree_concepts_model(const unsigned int n) const {
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
-    add_relationship(*o0, c0, mc);
+    add_relationship(o0, c0, mc);
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
     if (flags_.concepts_indexed())
-        add_relationship(*o1, c0, mc);
+        add_relationship(o1, c0, mc);
 
-    add_relationship(*o1, c1, mc);
+    add_relationship(o1, c1, mc);
     insert_object(r, o1);
 
     auto o2(build_value_object(2, r.name()));
-    add_property(*o2, flags_.properties_indexed(), 3);
+    add_property(o2, flags_.properties_indexed(), 3);
     if (flags_.concepts_indexed()) {
-        add_relationship(*o2, c0, mc);
-        add_relationship(*o2, c1, mc);
+        add_relationship(o2, c0, mc);
+        add_relationship(o2, c1, mc);
     }
-    add_relationship(*o2, c2, mc);
+    add_relationship(o2, c2, mc);
     insert_object(r, o2);
 
     return r;
@@ -756,7 +752,7 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
     const auto mc(relationship_types::modeled_concepts);
 
     auto o0(build_value_object(0, r.name()));
-    add_relationship(*o0, c2, mc);
+    add_relationship(o0, c2, mc);
     insert_object(r, o0);
     return r;
 }
@@ -791,11 +787,11 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
 
     auto o0(build_value_object(0, r.name()));
     if (flags_.concepts_indexed()) {
-        add_relationship(*o0, c0, mc);
-        add_relationship(*o0, c1, mc);
-        add_relationship(*o0, c2, mc);
+        add_relationship(o0, c0, mc);
+        add_relationship(o0, c1, mc);
+        add_relationship(o0, c2, mc);
     }
-    add_relationship(*o0, c3, mc);
+    add_relationship(o0, c3, mc);
     insert_object(r, o0);
     return r;
 }
@@ -809,13 +805,13 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
 
     auto o0(build_value_object(0, r.name()));
     const auto mc(relationship_types::modeled_concepts);
-    add_relationship(*o0, c0, mc);
+    add_relationship(o0, c0, mc);
 
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
-    parent_to_child(flags_.properties_indexed(), *o0, *o1);
-    o0->is_parent(true);
+    parent_to_child(flags_.properties_indexed(), o0, o1);
+    o0.is_parent(true);
     insert_object(r, o1);
 
     return r;
@@ -837,15 +833,15 @@ build_object_with_parent_that_models_a_refined_concept(
     auto o0(build_value_object(0, r.name()));
 
     const auto mc(relationship_types::modeled_concepts);
-    add_relationship(*o0, c1, mc);
+    add_relationship(o0, c1, mc);
     if (flags_.concepts_indexed())
-        add_relationship(*o0, c0, mc);
+        add_relationship(o0, c0, mc);
 
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
-    parent_to_child(flags_.properties_indexed(), *o0, *o1);
-    o0->is_parent(true);
+    parent_to_child(flags_.properties_indexed(), o0, o1);
+    o0.is_parent(true);
     insert_object(r, o1);
 
     return r;
@@ -870,7 +866,7 @@ build_object_that_models_missing_concept(const unsigned int n) const {
     auto o0(build_value_object(0, r.name()));
 
     const auto mc(relationship_types::modeled_concepts);
-    add_relationship(*o0, c0, mc);
+    add_relationship(o0, c0, mc);
     insert_object(r, o0);
     return r;
 }
@@ -884,11 +880,11 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
 
     auto o0(build_value_object(0, r.name()));
     auto o1(build_value_object(1, r.name()));
-    parent_to_child(flags_.properties_indexed(), *o0, *o1);
-    o0->is_parent(true);
+    parent_to_child(flags_.properties_indexed(), o0, o1);
+    o0.is_parent(true);
 
     const auto mc(relationship_types::modeled_concepts);
-    add_relationship(*o1, c0, mc);
+    add_relationship(o1, c0, mc);
     insert_object(r, o1);
 
     return r;
@@ -899,9 +895,9 @@ object_with_property(const object_types ot, const property_types pt) const {
     const auto mn(mock_model_qname(0));
     auto o1(build_value_object(1, mn));
 
-    property p(mock_property(0, pt, o1->name()));
+    property p(mock_property(0, pt, o1.name()));
 
-    boost::shared_ptr<object> o0;
+    object o0;
     if (ot == object_types::value_object)
         o0 = build_value_object(0, mn);
     else if (ot == object_types::keyed_entity || ot == object_types::entity)
@@ -911,9 +907,9 @@ object_with_property(const object_types ot, const property_types pt) const {
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
     }
 
-    o0->local_properties().push_back(p);
+    o0.local_properties().push_back(p);
     if (flags_.properties_indexed())
-        o0->all_properties().push_back(p);
+        o0.all_properties().push_back(p);
 
     model r(build_empty_model(0));
     insert_object(r, o0);
@@ -931,9 +927,9 @@ object_with_property(const object_types ot, const property_types pt) const {
         qn.simple_name("shared_ptr");
         qn.model_name("boost");
 
-        boost::shared_ptr<object> o2(new object());
-        o2->name(qn);
-        o2->object_type(dogen::sml::object_types::smart_pointer);
+        object o2;
+        o2.name(qn);
+        o2.object_type(dogen::sml::object_types::smart_pointer);
         insert_object(r, o2);
     } else if (pt == property_types::std_pair) {
 
@@ -945,9 +941,9 @@ object_with_property(const object_types ot, const property_types pt) const {
         qn.simple_name("pair");
         qn.model_name("std");
 
-        boost::shared_ptr<object> o2(new object());
-        o2->name(qn);
-        o2->object_type(dogen::sml::object_types::user_defined_value_object);
+        object o2;
+        o2.name(qn);
+        o2.object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
         primitive b;
@@ -962,18 +958,18 @@ object_with_property(const object_types ot, const property_types pt) const {
         qn.simple_name("variant");
         qn.model_name("boost");
 
-        boost::shared_ptr<object> o2(new object());
-        o2->name(qn);
-        o2->object_type(dogen::sml::object_types::user_defined_value_object);
+        object o2;
+        o2.name(qn);
+        o2.object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
     } else if (pt == property_types::std_string) {
         qname qn;
         qn.simple_name("string");
         qn.model_name("std");
 
-        boost::shared_ptr<object> o2(new object());
-        o2->name(qn);
-        o2->object_type(dogen::sml::object_types::user_defined_value_object);
+        object o2;
+        o2.name(qn);
+        o2.object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
     }
 
@@ -985,8 +981,8 @@ mock_model_factory::object_with_property_type_in_different_model() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
 
-    add_property(*o0, flags_.properties_indexed(),
-        0, property_types::value_object, o1->name());
+    add_property(o0, flags_.properties_indexed(),
+        0, property_types::value_object, o1.name());
 
     qname m0_qn;
     m0_qn.model_name(model_name(0));
@@ -1009,8 +1005,8 @@ model mock_model_factory::object_with_missing_property_type() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
 
-    add_property(*o0, flags_.properties_indexed(), 0,
-        property_types::value_object, o1->name());
+    add_property(o0, flags_.properties_indexed(), 0,
+        property_types::value_object, o1.name());
 
     qname mn_qn;
     mn_qn.model_name(model_name(0));
@@ -1028,7 +1024,7 @@ object_with_parent_in_the_same_model(const bool has_property) const {
     model r(build_empty_model(0));
     auto o0(build_value_object(0, mn));
     if (has_property) {
-        add_property(*o0, flags_.properties_indexed());
+        add_property(o0, flags_.properties_indexed());
         primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
@@ -1036,13 +1032,13 @@ object_with_parent_in_the_same_model(const bool has_property) const {
 
     auto o1(build_value_object(1, mn));
     if (has_property)
-        add_property(*o1, flags_.properties_indexed(), 1);
+        add_property(o1, flags_.properties_indexed(), 1);
 
-    parent_to_child(flags_.properties_indexed(), *o1, *o0);
+    parent_to_child(flags_.properties_indexed(), o1, o0);
     insert_object(r, o0);
     insert_object(r, o1);
 
-    o1->is_parent(true);
+    o1.is_parent(true);
     return r;
 }
 
@@ -1050,8 +1046,8 @@ model mock_model_factory::object_with_missing_parent_in_the_same_model() const {
     const auto mn(mock_model_qname(0));
     auto o0(build_value_object(0, mn));
     auto o1(build_value_object(1, mn));
-    o1->is_parent(true);
-    parent_to_child(flags_.properties_indexed(), *o1, *o0);
+    o1.is_parent(true);
+    parent_to_child(flags_.properties_indexed(), o1, o0);
     model r(build_empty_model(0));
     insert_object(r, o1);
 
@@ -1062,9 +1058,9 @@ std::array<model, 2> mock_model_factory::
 object_with_parent_in_different_models() const {
     auto o0(build_value_object(0));
     auto o1(build_value_object(1));
-    parent_to_child(flags_.properties_indexed(), *o1, *o0);
+    parent_to_child(flags_.properties_indexed(), o1, o0);
 
-    o1->is_parent(true);
+    o1.is_parent(true);
 
     model m0(build_empty_model(0));
     insert_object(m0, o0);
@@ -1084,11 +1080,11 @@ model mock_model_factory::object_with_three_children_in_same_model() const {
     auto o2(build_value_object(2, mn));
     auto o3(build_value_object(3, mn));
 
-    parent_to_child(flags_.properties_indexed(), *o3, *o0);
-    parent_to_child(flags_.properties_indexed(), *o3, *o1);
-    parent_to_child(flags_.properties_indexed(), *o3, *o2);
+    parent_to_child(flags_.properties_indexed(), o3, o0);
+    parent_to_child(flags_.properties_indexed(), o3, o1);
+    parent_to_child(flags_.properties_indexed(), o3, o2);
 
-    o3->is_parent(true);
+    o3.is_parent(true);
 
     model r(build_empty_model(0));
     insert_object(r, o0);
@@ -1107,36 +1103,36 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
 
     auto o3(build_value_object(3, mn));
     if (has_property)
-        add_property(*o3, flags_.properties_indexed(), 3);
+        add_property(o3, flags_.properties_indexed(), 3);
 
     auto o2(build_value_object(2, mn));
     if (has_property)
-        add_property(*o2, flags_.properties_indexed(), 2);
-    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
+        add_property(o2, flags_.properties_indexed(), 2);
+    parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
     auto o1(build_value_object(1, mn));
     if (has_property)
-        add_property(*o1, flags_.properties_indexed(), 1);
-    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
+        add_property(o1, flags_.properties_indexed(), 1);
+    parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
 
     auto o0(build_value_object(0, mn));
     if (has_property) {
-        add_property(*o0, flags_.properties_indexed());
+        add_property(o0, flags_.properties_indexed());
 
         primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
-    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
 
-    o1->is_parent(true);
-    add_relationship(*o1, *o0, relationship_types::leaves);
+    o1.is_parent(true);
+    add_relationship(o1, o0, relationship_types::leaves);
 
-    o2->is_parent(true);
-    add_relationship(*o2, *o0, relationship_types::leaves);
+    o2.is_parent(true);
+    add_relationship(o2, o0, relationship_types::leaves);
 
-    o3->is_parent(true);
-    add_relationship(*o3, *o0, relationship_types::leaves);
+    o3.is_parent(true);
+    add_relationship(o3, o0, relationship_types::leaves);
 
     insert_object(r, o0);
     insert_object(r, o1);
@@ -1153,18 +1149,18 @@ model mock_model_factory::object_with_third_degree_parent_missing() const {
     auto o2(build_value_object(2, mn));
     auto o3(build_value_object(3, mn));
 
-    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
-    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
-    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
-    o1->is_parent(true);
-    add_relationship(*o1, *o0, relationship_types::leaves);
+    o1.is_parent(true);
+    add_relationship(o1, o0, relationship_types::leaves);
 
-    o2->is_parent(true);
-    add_relationship(*o2, *o0, relationship_types::leaves);
+    o2.is_parent(true);
+    add_relationship(o2, o0, relationship_types::leaves);
 
-    o3->is_parent(true);
-    add_relationship(*o3, *o0, relationship_types::leaves);
+    o3.is_parent(true);
+    add_relationship(o3, o0, relationship_types::leaves);
 
     model r(build_empty_model(0));
     insert_object(r, o0);
@@ -1181,18 +1177,18 @@ object_with_third_degree_parent_in_different_models() const {
     auto o2(build_value_object(2));
     auto o3(build_value_object(3));
 
-    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
-    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
-    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
-    o1->is_parent(true);
-    add_relationship(*o1, *o0, relationship_types::leaves);
+    o1.is_parent(true);
+    add_relationship(o1, o0, relationship_types::leaves);
 
-    o2->is_parent(true);
-    add_relationship(*o2, *o0, relationship_types::leaves);
+    o2.is_parent(true);
+    add_relationship(o2, o0, relationship_types::leaves);
 
-    o3->is_parent(true);
-    add_relationship(*o3, *o0, relationship_types::leaves);
+    o3.is_parent(true);
+    add_relationship(o3, o0, relationship_types::leaves);
 
     model m0(build_empty_model(0));
     insert_object(m0, o0);
@@ -1216,18 +1212,18 @@ object_with_missing_third_degree_parent_in_different_models() const {
     auto o2(build_value_object(2));
     auto o3(build_value_object(3));
 
-    parent_to_child(flags_.properties_indexed(), *o1, *o0, *o3, !add_leaf);
-    parent_to_child(flags_.properties_indexed(), *o2, *o1, *o3, !add_leaf);
-    parent_to_child(flags_.properties_indexed(), *o3, *o2, *o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
+    parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
-    o1->is_parent(true);
-    add_relationship(*o1, *o0, relationship_types::leaves);
+    o1.is_parent(true);
+    add_relationship(o1, o0, relationship_types::leaves);
 
-    o2->is_parent(true);
-    add_relationship(*o2, *o0, relationship_types::leaves);
+    o2.is_parent(true);
+    add_relationship(o2, o0, relationship_types::leaves);
 
-    o3->is_parent(true);
-    add_relationship(*o3, *o0, relationship_types::leaves);
+    o3.is_parent(true);
+    add_relationship(o3, o0, relationship_types::leaves);
 
     model m0(build_empty_model(0));
     insert_object(m0, o0);

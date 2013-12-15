@@ -20,7 +20,6 @@
  */
 #include <memory>
 #include <functional>
-#include <boost/make_shared.hpp>
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include <boost/lexical_cast.hpp>
@@ -76,9 +75,8 @@ const std::string accept_operation_doc("Acceptor for ");
 namespace dogen {
 namespace sml {
 
-boost::shared_ptr<object> injector::create_key(const qname& qn,
-    const generation_types gt, const std::list<property>& properties,
-    const bool versioned) const {
+object injector::create_key(const qname& qn, const generation_types gt,
+    const std::list<property>& properties, const bool versioned) const {
 
     qname kqn;
     kqn.simple_name(qn.simple_name() + "_" +
@@ -87,42 +85,38 @@ boost::shared_ptr<object> injector::create_key(const qname& qn,
     kqn.module_path(qn.module_path());
     kqn.external_module_path(qn.external_module_path());
 
-    auto r(boost::make_shared<object>());
-    r->name(kqn);
-    r->generation_type(gt);
-    r->origin_type(origin_types::system);
+    object r;
+    r.name(kqn);
+    r.generation_type(gt);
+    r.origin_type(origin_types::system);
 
     const auto vk(object_types::versioned_key);
     const auto uvk(object_types::unversioned_key);
-    r->object_type(versioned ? vk : uvk);
+    r.object_type(versioned ? vk : uvk);
 
     const auto doc(versioned ? versioned_key_doc : unversioned_key_doc);
-    r->documentation(doc + qn.simple_name());
-
-    r->local_properties(properties);
+    r.documentation(doc + qn.simple_name());
+    r.local_properties(properties);
 
     if (versioned)
-        inject_version(*r);
+        inject_version(r);
 
     BOOST_LOG_SEV(lg, debug) << "Created key: " << kqn.simple_name();
     return r;
 }
 
-boost::shared_ptr<object> injector::
-create_versioned_key(const qname& qn, const generation_types gt,
-    const std::list<property>& properties) const {
+object injector::create_versioned_key(const qname& qn,
+    const generation_types gt, const std::list<property>& properties) const {
     return create_key(qn, gt, properties, true);
 }
 
-boost::shared_ptr<object> injector::
-create_unversioned_key(const qname& qn, const generation_types gt,
-    const std::list<property>& properties) const {
+object injector::create_unversioned_key(const qname& qn,
+    const generation_types gt, const std::list<property>& properties) const {
     return create_key(qn, gt, properties, false);
 }
 
-boost::shared_ptr<object>
-injector::create_key_extractor(const object& ke) const {
-    auto r(boost::make_shared<object>());
+object injector::create_key_extractor(const object& ke) const {
+    object r;
     qname qn;
     qn.simple_name(ke.name().simple_name() + "_" + key_extractor_name);
     qn.model_name(ke.name().model_name());
@@ -131,11 +125,11 @@ injector::create_key_extractor(const object& ke) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating extractor: " << qn.simple_name();
 
-    r->name(qn);
-    r->generation_type(ke.generation_type());
-    r->origin_type(origin_types::system);
-    r->object_type(object_types::key_extractor);
-    r->documentation(visitor_doc + ke.name().simple_name());
+    r.name(qn);
+    r.generation_type(ke.generation_type());
+    r.origin_type(origin_types::system);
+    r.object_type(object_types::key_extractor);
+    r.documentation(visitor_doc + ke.name().simple_name());
 
     // FIXME: create these methods with correct names
     parameter p;
@@ -156,7 +150,7 @@ injector::create_key_extractor(const object& ke) const {
     opuv.name(unversioned_name);
     opuv.parameters().push_back(p);
     opuv.documentation(key_extractor_doc + ke.name().simple_name());
-    r->operations().push_back(opuv);
+    r.operations().push_back(opuv);
 
     BOOST_LOG_SEV(lg, debug) << "Created extractor: " << qn.simple_name();
     return r;
@@ -165,10 +159,10 @@ injector::create_key_extractor(const object& ke) const {
 void injector::inject_keys(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
-    std::list<boost::shared_ptr<object> > objects;
+    std::list<object> objects;
     for (auto& pair : m.objects()) {
         const auto qn(pair.first);
-        auto& o(*pair.second);
+        auto& o(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Visiting: " << qn;
         if (o.object_type() != object_types::keyed_entity)
@@ -187,12 +181,12 @@ void injector::inject_keys(model& m) const {
         const auto uvk(create_unversioned_key(qn, gt, o.identity()));
         objects.push_back(uvk);
         o.relationships()[relationship_types::unversioned_keys].push_back(
-            uvk->name());
+            uvk.name());
 
         if (o.is_versioned()) {
             auto vk(create_versioned_key(qn, gt, o.identity()));
             o.relationships()[relationship_types::versioned_keys].push_back(
-                vk->name());
+                vk.name());
             objects.push_back(vk);
         }
 
@@ -201,11 +195,11 @@ void injector::inject_keys(model& m) const {
     }
 
     for (const auto& o : objects) {
-        const auto i(m.objects().insert(std::make_pair(o->name(), o)));
+        const auto i(m.objects().insert(std::make_pair(o.name(), o)));
         if (!i.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << o->name();
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << o.name();
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
-                    boost::lexical_cast<std::string>(o->name())));
+                    boost::lexical_cast<std::string>(o.name())));
         }
     }
 
@@ -235,7 +229,7 @@ void injector::inject_version(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting version property on all types.";
 
     for (auto& pair : m.objects()) {
-        auto& ao(*pair.second);
+        auto& ao(pair.second);
 
         if (ao.is_versioned())
             inject_version(ao);
@@ -244,8 +238,8 @@ void injector::inject_version(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Done injecting version property on all types.";
 }
 
-boost::shared_ptr<object> injector::create_visitor(const object& ao) const {
-    auto r(boost::make_shared<object>());
+object injector::create_visitor(const object& ao) const {
+    object r;
     qname qn;
     qn.simple_name(ao.name().simple_name() + "_" + visitor_name);
     qn.model_name(ao.name().model_name());
@@ -254,11 +248,11 @@ boost::shared_ptr<object> injector::create_visitor(const object& ao) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << qn.simple_name();
 
-    r->name(qn);
-    r->generation_type(ao.generation_type());
-    r->origin_type(origin_types::system);
-    r->object_type(object_types::visitor);
-    r->documentation(visitor_doc + ao.name().simple_name());
+    r.name(qn);
+    r.generation_type(ao.generation_type());
+    r.origin_type(origin_types::system);
+    r.object_type(object_types::visitor);
+    r.documentation(visitor_doc + ao.name().simple_name());
 
     const auto i(ao.relationships().find(relationship_types::leaves));
     if (i != ao.relationships().end()) {
@@ -274,7 +268,7 @@ boost::shared_ptr<object> injector::create_visitor(const object& ao) const {
             op.name("visit");
             op.parameters().push_back(p);
             op.documentation(visit_operation_doc + l.simple_name());
-            r->operations().push_back(op);
+            r.operations().push_back(op);
         }
     }
 
@@ -300,9 +294,9 @@ void injector::inject_accept(object& ao, const object& v) const {
 void injector::inject_visitors(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
 
-    std::list<boost::shared_ptr<object> > visitors;
+    std::list<object> visitors;
     for (auto& pair : m.objects()) {
-        auto& ao(*pair.second);
+        auto& ao(pair.second);
 
         if (!ao.is_visitable())
             continue;
@@ -319,19 +313,19 @@ void injector::inject_visitors(model& m) const {
 
         const auto v(create_visitor(ao));
         visitors.push_back(v);
-        inject_accept(ao, *v);
+        inject_accept(ao, v);
     }
 
     for (const auto v : visitors) {
         BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
-                                 << v->name().simple_name();
+                                 << v.name().simple_name();
 
-        const auto i(m.objects().insert(std::make_pair(v->name(), v)));
+        const auto i(m.objects().insert(std::make_pair(v.name(), v)));
 
         if (!i.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << v->name();
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << v.name();
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
-                    boost::lexical_cast<std::string>(v->name())));
+                    boost::lexical_cast<std::string>(v.name())));
         }
     }
 
