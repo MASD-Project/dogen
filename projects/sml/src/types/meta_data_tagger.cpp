@@ -24,9 +24,9 @@
 #include "dogen/sml/types/meta_data_error.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/meta_data_tagger.hpp"
@@ -345,8 +345,8 @@ void meta_data_tagger::visit(sml::value_object& vo) const {
     tag(vo);
 }
 
-void meta_data_tagger::visit(sml::entity& e) const {
-    tag(e);
+void meta_data_tagger::visit(sml::object& o) const {
+    tag(o);
 }
 
 void meta_data_tagger::operator()(type& t) const {

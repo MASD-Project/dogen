@@ -29,7 +29,6 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
-#include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/object_types_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"

@@ -30,7 +30,6 @@
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -45,7 +44,6 @@
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
-#include "dogen/sml/io/entity_io.hpp"
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
@@ -60,7 +58,6 @@
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
-#include "dogen/sml/test_data/entity_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/object_td.hpp"
@@ -92,7 +89,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<enumerator_generator>();
     test_move_assignment_copy<enumeration_generator>();
     test_move_assignment_copy<value_object_generator>();
-    test_move_assignment_copy<entity_generator>();
     test_move_assignment_copy<service_generator>();
     test_move_assignment_copy<module_generator>();
     test_move_assignment_copy<object_generator>();

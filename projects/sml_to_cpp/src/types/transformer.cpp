@@ -27,9 +27,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/value_object_types_io.hpp"
-#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/io/service_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -523,16 +523,6 @@ void transformer::visit(const dogen::sml::service& s) {
     BOOST_LOG_SEV(lg, debug) << "Transformed service: " << s.name();
 }
 
-void transformer::visit(const dogen::sml::object& f) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming object: " << f.name();
-
-    auto ci(to_class_info(f));
-    ci.class_type(cpp::class_types::service); // FIXME: mega-hack
-    add_class(f.name(), ci);
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed service: " << f.name();
-}
-
 void transformer::visit(const dogen::sml::enumeration& e) {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
@@ -585,13 +575,16 @@ void transformer::visit(const dogen::sml::value_object& vo) {
     BOOST_LOG_SEV(lg, debug) << "Transformed value object: " << vo.name();
 }
 
-void transformer::visit(const dogen::sml::entity& e) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming entity: " << e.name();
+void transformer::visit(const dogen::sml::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming object: " << o.name();
 
-    auto ci(to_class_info(e));
-    add_class(e.name(), ci);
+    auto ci(to_class_info(o));
+    if (o.object_type() == sml::object_types::factory)
+        ci.class_type(cpp::class_types::service); // FIXME: mega-hack
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed entity: " << e.name();
+    add_class(o.name(), ci);
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed object: " << o.name();
 }
 
 void transformer::from_type(const sml::type& t) {

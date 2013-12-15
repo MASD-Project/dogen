@@ -21,9 +21,9 @@
 #include <memory>
 #include <functional>
 #include <boost/make_shared.hpp>
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
@@ -72,22 +72,6 @@ const std::string unversioned_key_not_found(
 const std::string accept_operation_name("accept");
 const std::string accept_argument_name("v");
 const std::string accept_operation_doc("Acceptor for ");
-
-class entity_visitor : public dogen::sml::type_visitor {
-public:
-    typedef std::function<void(dogen::sml::entity&)> function_type;
-
-public:
-    explicit entity_visitor(const function_type& fn) : fn_(fn) {}
-    ~entity_visitor() noexcept { }
-
-public:
-    using type_visitor::visit;
-    virtual void visit(dogen::sml::entity& ke) override { fn_(ke); }
-
-private:
-    function_type fn_;
-};
 
 }
 
@@ -139,7 +123,7 @@ create_unversioned_key(const qname& qn, const generation_types gt,
 }
 
 boost::shared_ptr<abstract_object>
-injector::create_key_extractor(const entity& ke) const {
+injector::create_key_extractor(const object& ke) const {
     auto r(boost::make_shared<service>());
     qname qn;
     qn.simple_name(ke.name().simple_name() + "_" + key_extractor_name);
@@ -184,42 +168,38 @@ void injector::inject_keys(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
     std::list<boost::shared_ptr<abstract_object> > objects;
-    const auto lambda([&](entity& ke) {
-            if (ke.object_type() != object_types::keyed_entity)
-                return;
-
-            if (ke.identity().empty()) {
-                BOOST_LOG_SEV(lg, error) << empty_identity << ke.name();
-
-                BOOST_THROW_EXCEPTION(
-                    injection_error(empty_identity +
-                        boost::lexical_cast<std::string>(ke.name())));
-            }
-            BOOST_LOG_SEV(lg, debug) << "Attributes in identity operation: "
-                                     << ke.identity().size();
-
-            const auto gt(ke.generation_type());
-            const auto qn(ke.name());
-            const auto uvk(create_unversioned_key(qn, gt, ke.identity()));
-            objects.push_back(uvk);
-            ke.relationships()[relationship_types::unversioned_keys].push_back(
-                uvk->name());
-
-            if (ke.is_versioned()) {
-                auto vk(create_versioned_key(qn, gt, ke.identity()));
-                ke.relationships()[relationship_types::versioned_keys]
-                    .push_back(vk->name());
-                objects.push_back(vk);
-            }
-
-            // FIXME
-            // objects.push_back(create_key_extractor(ke));
-        });
-
-    entity_visitor v(lambda);
     for (auto& pair : m.objects()) {
-        BOOST_LOG_SEV(lg, debug) << "Visiting: " << pair.first;
-        pair.second->accept(v);
+        const auto qn(pair.first);
+        auto& o(*pair.second);
+
+        BOOST_LOG_SEV(lg, debug) << "Visiting: " << qn;
+        if (o.object_type() != object_types::keyed_entity)
+            continue;
+
+        if (o.identity().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_identity << qn;
+
+            BOOST_THROW_EXCEPTION(injection_error(empty_identity +
+                    boost::lexical_cast<std::string>(qn)));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Attributes in identity operation: "
+                                 << o.identity().size();
+
+        const auto gt(o.generation_type());
+        const auto uvk(create_unversioned_key(qn, gt, o.identity()));
+        objects.push_back(uvk);
+        o.relationships()[relationship_types::unversioned_keys].push_back(
+            uvk->name());
+
+        if (o.is_versioned()) {
+            auto vk(create_versioned_key(qn, gt, o.identity()));
+            o.relationships()[relationship_types::versioned_keys].push_back(
+                vk->name());
+            objects.push_back(vk);
+        }
+
+        // FIXME
+        // objects.push_back(create_key_extractor(ke));
     }
 
     for (const auto& o : objects) {

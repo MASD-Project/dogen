@@ -25,7 +25,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
@@ -358,7 +357,7 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
 void transformer::to_entity(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
 
-    auto e(boost::make_shared<sml::entity>());
+    auto e(boost::make_shared<sml::object>());
     update_abstract_object(*e, o, p);
     e->is_aggregate_root(p.is_aggregate_root());
 

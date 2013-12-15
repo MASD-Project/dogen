@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
-<entity class_id="6" tracking_level="0" version="0">
+<entity class_id="5" tracking_level="0" version="0">
 	<origin_type>1</origin_type>
 	<documentation></documentation>
-	<meta_data class_id="7" tracking_level="0" version="0">
+	<meta_data class_id="6" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 		<data></data>
 	</meta_data>
-	<name class_id="8" tracking_level="0" version="0">
+	<name class_id="7" tracking_level="0" version="0">
 		<model_name>class_without_package</model_name>
-		<external_module_path class_id="9" tracking_level="0" version="0">
+		<external_module_path class_id="8" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
 		</external_module_path>
@@ -22,41 +22,41 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<references class_id="10" tracking_level="0" version="0">
+	<references class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="11" tracking_level="0" version="0">
+	<leaves class_id="10" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="12" tracking_level="0" version="0">
+	<modules class_id="11" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</modules>
-	<concepts class_id="13" tracking_level="0" version="0">
+	<concepts class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="14" tracking_level="0" version="0">
+	<primitives class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="15" tracking_level="0" version="0">
+	<enumerations class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="16" tracking_level="0" version="0">
+	<objects class_id="15" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="17" tracking_level="0" version="0">
+		<item class_id="16" tracking_level="0" version="0">
 			<first>
 				<model_name>class_without_package</model_name>
 				<external_module_path>
@@ -69,10 +69,10 @@
 				</module_path>
 				<simple_name>class_1</simple_name>
 			</first>
-			<second class_id="18" tracking_level="0" version="1">
-				<px class_id="5" tracking_level="1" version="0" object_id="_0">
-					<abstract_object class_id="19" tracking_level="0" version="0">
-						<type class_id="20" tracking_level="0" version="0">
+			<second class_id="17" tracking_level="0" version="1">
+				<px class_id="4" tracking_level="1" version="0" object_id="_0">
+					<abstract_object class_id="18" tracking_level="0" version="0">
+						<type class_id="19" tracking_level="0" version="0">
 							<origin_type>1</origin_type>
 							<documentation></documentation>
 							<meta_data>
@@ -94,14 +94,14 @@
 							</name>
 							<generation_type>1</generation_type>
 						</type>
-						<all_properties class_id="21" tracking_level="0" version="0">
+						<all_properties class_id="20" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</all_properties>
 						<local_properties>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item class_id="22" tracking_level="0" version="0">
+							<item class_id="21" tracking_level="0" version="0">
 								<documentation></documentation>
 								<meta_data>
 									<count>0</count>
@@ -109,7 +109,7 @@
 									<data></data>
 								</meta_data>
 								<name>an_attribute</name>
-								<type class_id="23" tracking_level="0" version="0">
+								<type class_id="22" tracking_level="0" version="0">
 									<type>
 										<model_name></model_name>
 										<external_module_path>
@@ -122,7 +122,7 @@
 										</module_path>
 										<simple_name>int</simple_name>
 									</type>
-									<children class_id="24" tracking_level="0" version="0">
+									<children class_id="23" tracking_level="0" version="0">
 										<count>0</count>
 										<item_version>0</item_version>
 									</children>
@@ -133,12 +133,12 @@
 								<is_fluent>0</is_fluent>
 							</item>
 						</local_properties>
-						<inherited_properties class_id="25" tracking_level="0" version="0">
+						<inherited_properties class_id="24" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>
 						</inherited_properties>
-						<operations class_id="26" tracking_level="0" version="0">
+						<operations class_id="25" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</operations>
@@ -150,7 +150,7 @@
 						<is_comparable>0</is_comparable>
 						<is_fluent>0</is_fluent>
 						<is_child>0</is_child>
-						<relationships class_id="27" tracking_level="0" version="0">
+						<relationships class_id="26" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>11</bucket_count>
 							<item_version>0</item_version>

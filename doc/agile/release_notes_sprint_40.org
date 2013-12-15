@@ -307,7 +307,9 @@ to get rid of.
      CLOSED: [2013-12-15 Sun 00:19]
      CLOCK: [2013-12-14 Sat 23:59]--[2013-12-15 Sun 00:19] =>  0:20
 
-*** IMPLEMENTATION Remove entity and move all properties into abstract object :story:
+*** COMPLETED Remove entity and move all properties into abstract object :story:
+    CLOSED: [2013-12-15 Sun 01:27]
+    CLOCK: [2013-12-15 Sun 00:33]--[2013-12-15 Sun 01:27] =>  0:54
     CLOCK: [2013-12-15 Sun 00:20]--[2013-12-15 Sun 00:33] =>  0:13
 
 Continue the consolidation of all the descendants of abstract object

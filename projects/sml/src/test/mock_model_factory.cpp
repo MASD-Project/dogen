@@ -29,8 +29,8 @@
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
@@ -498,7 +498,7 @@ build_entity(const property& prop, const bool keyed,
     const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
-    auto r(boost::shared_ptr<entity>(new entity()));
+    auto r(boost::shared_ptr<object>(new object()));
     if (keyed)
         r->object_type(dogen::sml::object_types::keyed_entity);
     else

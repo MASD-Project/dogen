@@ -23,7 +23,6 @@
 #include "dogen/sml/types/all_types_traversal.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
-#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/generation_types.hpp"

@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/sml/types/entity_fwd.hpp"
 #include "dogen/sml/types/enumeration_fwd.hpp"
 #include "dogen/sml/types/object_fwd.hpp"
 #include "dogen/sml/types/primitive_fwd.hpp"
@@ -40,16 +39,6 @@ public:
     virtual ~type_visitor() noexcept = 0;
 
 public:
-    /**
-     * @brief Accept visits for type dogen::sml::entity
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::entity&) const { }
-    virtual void visit(const dogen::sml::entity&) { }
-    virtual void visit(dogen::sml::entity&) const { }
-    virtual void visit(dogen::sml::entity&) { }
-    /**@}*/
-
     /**
      * @brief Accept visits for type dogen::sml::service
      */

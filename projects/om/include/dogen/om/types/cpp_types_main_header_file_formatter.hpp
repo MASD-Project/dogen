@@ -149,7 +149,6 @@ private:
     void visit(const sml::service& s) const override;
     void visit(const sml::object& f) const override;
     void visit(const sml::value_object& vo) const override;
-    void visit(const sml::entity& e) const override;
 
 public:
     const std::string& meta_data_path() const override;
