@@ -119,7 +119,8 @@ abstract_object::abstract_object()
       is_fluent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)),
       is_inheritance_root_(static_cast<bool>(0)),
-      object_type_(static_cast<dogen::sml::object_types>(0)) { }
+      object_type_(static_cast<dogen::sml::object_types>(0)),
+      is_aggregate_root_(static_cast<bool>(0)) { }
 
 abstract_object::abstract_object(
     const dogen::sml::origin_types& origin_type,
@@ -141,7 +142,9 @@ abstract_object::abstract_object(
     const bool is_child,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root,
-    const dogen::sml::object_types& object_type)
+    const dogen::sml::object_types& object_type,
+    const bool is_aggregate_root,
+    const std::list<dogen::sml::property>& identity)
     : dogen::sml::type(origin_type,
       documentation,
       meta_data,
@@ -161,7 +164,9 @@ abstract_object::abstract_object(
       is_child_(is_child),
       relationships_(relationships),
       is_inheritance_root_(is_inheritance_root),
-      object_type_(object_type) { }
+      object_type_(object_type),
+      is_aggregate_root_(is_aggregate_root),
+      identity_(identity) { }
 
 void abstract_object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -189,7 +194,9 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"is_child\": " << is_child_ << ", "
       << "\"relationships\": " << relationships_ << ", "
       << "\"is_inheritance_root\": " << is_inheritance_root_ << ", "
-      << "\"object_type\": " << object_type_
+      << "\"object_type\": " << object_type_ << ", "
+      << "\"is_aggregate_root\": " << is_aggregate_root_ << ", "
+      << "\"identity\": " << identity_
       << " }";
 }
 
@@ -212,6 +219,8 @@ void abstract_object::swap(abstract_object& other) noexcept {
     swap(relationships_, other.relationships_);
     swap(is_inheritance_root_, other.is_inheritance_root_);
     swap(object_type_, other.object_type_);
+    swap(is_aggregate_root_, other.is_aggregate_root_);
+    swap(identity_, other.identity_);
 }
 
 bool abstract_object::compare(const abstract_object& rhs) const {
@@ -230,7 +239,9 @@ bool abstract_object::compare(const abstract_object& rhs) const {
         is_child_ == rhs.is_child_ &&
         relationships_ == rhs.relationships_ &&
         is_inheritance_root_ == rhs.is_inheritance_root_ &&
-        object_type_ == rhs.object_type_;
+        object_type_ == rhs.object_type_ &&
+        is_aggregate_root_ == rhs.is_aggregate_root_ &&
+        identity_ == rhs.identity_;
 }
 
 const std::list<dogen::sml::property>& abstract_object::all_properties() const {
@@ -391,6 +402,30 @@ dogen::sml::object_types abstract_object::object_type() const {
 
 void abstract_object::object_type(const dogen::sml::object_types& v) {
     object_type_ = v;
+}
+
+bool abstract_object::is_aggregate_root() const {
+    return is_aggregate_root_;
+}
+
+void abstract_object::is_aggregate_root(const bool v) {
+    is_aggregate_root_ = v;
+}
+
+const std::list<dogen::sml::property>& abstract_object::identity() const {
+    return identity_;
+}
+
+std::list<dogen::sml::property>& abstract_object::identity() {
+    return identity_;
+}
+
+void abstract_object::identity(const std::list<dogen::sml::property>& v) {
+    identity_ = v;
+}
+
+void abstract_object::identity(const std::list<dogen::sml::property>&& v) {
+    identity_ = std::move(v);
 }
 
 } }

@@ -27,10 +27,8 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include <list>
 #include "dogen/sml/serialization/entity_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
-#include "dogen/sml/types/property.hpp"
 
 namespace dogen {
 namespace sml {
@@ -62,11 +60,9 @@ namespace sml {
  */
 class entity final : public dogen::sml::abstract_object {
 public:
+    entity() = default;
     entity(const entity&) = default;
     entity(entity&&) = default;
-
-public:
-    entity();
 
     virtual ~entity() noexcept { }
 
@@ -123,28 +119,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief If true, this type is a root of an aggregate.
-     */
-    /**@{*/
-    bool is_aggregate_root() const;
-    void is_aggregate_root(const bool v);
-    /**@}*/
-
-    /**
-     * @brief List of properties that make up the identity operation.
-     *
-     * @note These properties are copied from the original source such as
-     * a concept, parent or the main properties container.
-     */
-    /**@{*/
-    const std::list<dogen::sml::property>& identity() const;
-    std::list<dogen::sml::property>& identity();
-    void identity(const std::list<dogen::sml::property>& v);
-    void identity(const std::list<dogen::sml::property>&& v);
-    /**@}*/
-
-public:
     bool operator==(const entity& rhs) const;
     bool operator!=(const entity& rhs) const {
         return !this->operator==(rhs);
@@ -157,9 +131,6 @@ public:
     void swap(entity& other) noexcept;
     entity& operator=(entity other);
 
-private:
-    bool is_aggregate_root_;
-    std::list<dogen::sml::property> identity_;
 };
 
 } }

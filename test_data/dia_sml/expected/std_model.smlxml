@@ -374,6 +374,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -697,6 +702,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -1092,6 +1102,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -1483,6 +1498,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -1627,6 +1647,11 @@
 						</relationships>
 						<is_inheritance_root>1</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -1773,51 +1798,51 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>2</object_type>
-					</abstract_object>
-					<is_aggregate_root>0</is_aggregate_root>
-					<identity>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<documentation></documentation>
-							<meta_data>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<first>IDENTITY_ATTRIBUTE</first>
-									<second>
-										<count>0</count>
-										<item_version>0</item_version>
-										<data>true</data>
-									</second>
-								</item>
-								<data></data>
-							</meta_data>
-							<name>prop0</name>
-							<type>
-								<type>
-									<model_name>std</model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</module_path>
-									<simple_name>string</simple_name>
-								</type>
-								<children>
-									<count>0</count>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<documentation></documentation>
+								<meta_data>
+									<count>1</count>
 									<item_version>0</item_version>
-								</children>
-								<is_pointer>0</is_pointer>
-							</type>
-							<default_value></default_value>
-							<is_immutable>0</is_immutable>
-							<is_fluent>0</is_fluent>
-						</item>
-					</identity>
+									<item>
+										<first>IDENTITY_ATTRIBUTE</first>
+										<second>
+											<count>0</count>
+											<item_version>0</item_version>
+											<data>true</data>
+										</second>
+									</item>
+									<data></data>
+								</meta_data>
+								<name>prop0</name>
+								<type>
+									<type>
+										<model_name>std</model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>string</simple_name>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</type>
+								<default_value></default_value>
+								<is_immutable>0</is_immutable>
+								<is_fluent>0</is_fluent>
+							</item>
+						</identity>
+					</abstract_object>
 				</px>
 			</second>
 		</item>
@@ -2074,6 +2099,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -2357,6 +2387,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -2658,6 +2693,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -3053,6 +3093,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -3229,6 +3274,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -3624,6 +3674,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>
@@ -3788,6 +3843,11 @@
 						</relationships>
 						<is_inheritance_root>0</is_inheritance_root>
 						<object_type>0</object_type>
+						<is_aggregate_root>0</is_aggregate_root>
+						<identity>
+							<count>0</count>
+							<item_version>0</item_version>
+						</identity>
 					</abstract_object>
 					<type>1</type>
 				</px>

@@ -129,6 +129,8 @@ populate(const unsigned int position, result_type& v) {
     v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 12));
     v.is_inheritance_root(create_bool(position + 13));
     v.object_type(create_dogen_sml_object_types(position + 14));
+    v.is_aggregate_root(create_bool(position + 15));
+    v.identity(create_std_list_dogen_sml_property(position + 16));
 }
 
 abstract_object_generator::result_type*

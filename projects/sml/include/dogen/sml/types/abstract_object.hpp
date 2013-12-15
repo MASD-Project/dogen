@@ -76,7 +76,9 @@ public:
         const bool is_child,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const bool is_inheritance_root,
-        const dogen::sml::object_types& object_type);
+        const dogen::sml::object_types& object_type,
+        const bool is_aggregate_root,
+        const std::list<dogen::sml::property>& identity);
 
 private:
     template<typename Archive>
@@ -228,6 +230,26 @@ public:
     void object_type(const dogen::sml::object_types& v);
     /**@}*/
 
+    /**
+     * @brief If true, this type is a root of an aggregate.
+     */
+    /**@{*/
+    bool is_aggregate_root() const;
+    void is_aggregate_root(const bool v);
+    /**@}*/
+
+    /**
+     * @brief List of properties that make up the identity operation.
+     *
+     * @note temporarily moved here until we have property types.
+     */
+    /**@{*/
+    const std::list<dogen::sml::property>& identity() const;
+    std::list<dogen::sml::property>& identity();
+    void identity(const std::list<dogen::sml::property>& v);
+    void identity(const std::list<dogen::sml::property>&& v);
+    /**@}*/
+
 protected:
     bool compare(const abstract_object& rhs) const;
 public:
@@ -252,6 +274,8 @@ private:
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
     bool is_inheritance_root_;
     dogen::sml::object_types object_type_;
+    bool is_aggregate_root_;
+    std::list<dogen::sml::property> identity_;
 };
 
 inline abstract_object::~abstract_object() noexcept { }
