@@ -29,7 +29,6 @@
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
-#include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -44,7 +43,6 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::sml::enumeration>();
     ar.template register_type<dogen::sml::object>();
     ar.template register_type<dogen::sml::primitive>();
-    ar.template register_type<dogen::sml::service>();
     ar.template register_type<dogen::sml::value_object>();
 }
 

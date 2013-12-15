@@ -35,7 +35,6 @@
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
-#include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"

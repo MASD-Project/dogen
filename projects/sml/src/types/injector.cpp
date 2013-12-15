@@ -23,7 +23,6 @@
 #include <boost/make_shared.hpp>
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
@@ -124,7 +123,7 @@ create_unversioned_key(const qname& qn, const generation_types gt,
 
 boost::shared_ptr<abstract_object>
 injector::create_key_extractor(const object& ke) const {
-    auto r(boost::make_shared<service>());
+    auto r(boost::make_shared<object>());
     qname qn;
     qn.simple_name(ke.name().simple_name() + "_" + key_extractor_name);
     qn.model_name(ke.name().model_name());
@@ -136,7 +135,7 @@ injector::create_key_extractor(const object& ke) const {
     r->name(qn);
     r->generation_type(ke.generation_type());
     r->origin_type(origin_types::system);
-    r->type(service_types::key_extractor);
+    r->object_type(object_types::key_extractor);
     r->documentation(visitor_doc + ke.name().simple_name());
 
     // FIXME: create these methods with correct names
@@ -248,7 +247,7 @@ void injector::inject_version(model& m) const {
 
 boost::shared_ptr<abstract_object>
 injector::create_visitor(const abstract_object& ao) const {
-    auto r(boost::make_shared<service>());
+    auto r(boost::make_shared<object>());
     qname qn;
     qn.simple_name(ao.name().simple_name() + "_" + visitor_name);
     qn.model_name(ao.name().model_name());
@@ -260,7 +259,7 @@ injector::create_visitor(const abstract_object& ao) const {
     r->name(qn);
     r->generation_type(ao.generation_type());
     r->origin_type(origin_types::system);
-    r->type(service_types::visitor);
+    r->object_type(object_types::visitor);
     r->documentation(visitor_doc + ao.name().simple_name());
 
     const auto i(ao.relationships().find(relationship_types::leaves));

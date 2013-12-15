@@ -25,9 +25,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
@@ -339,7 +337,8 @@ void transformer::update_abstract_object(sml::abstract_object& ao,
     }
 
     // FIXME: massive hack. must not add leafs for services.
-    const bool is_service(dynamic_cast<sml::service*>(&ao) != 0);
+    const bool is_service(ao.object_type() ==
+        sml::object_types::user_defined_service);
     if (!ao.is_parent() && ao.is_child() && !is_service)
         add_leaf(ao.name(), ao);
 
@@ -383,15 +382,6 @@ void transformer::to_exception(const processed_object& o, const profile& p) {
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
 
-void transformer::to_service(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a service: " << o.id();
-
-    auto s(boost::make_shared<sml::service>());
-    update_abstract_object(*s, o, p);
-    s->type(sml::service_types::user_defined);
-    context_.model().objects().insert(std::make_pair(s->name(), s));
-}
-
 void transformer::to_object(const processed_object& po, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a factory: " << po.id();
 
@@ -402,6 +392,8 @@ void transformer::to_object(const processed_object& po, const profile& p) {
         o->object_type(sml::object_types::factory);
     else if (p.is_repository())
         o->object_type(sml::object_types::repository);
+    else if (p.is_service())
+        o->object_type(sml::object_types::user_defined_service);
 
     context_.model().objects().insert(std::make_pair(o->name(), o));
 }
@@ -564,9 +556,7 @@ void  transformer::dispatch(const processed_object& o, const profile& p) {
         to_exception(o, p);
     else if (p.is_entity() || p.is_keyed_entity())
         to_entity(o, p);
-    else if (p.is_service())
-        to_service(o, p);
-    else if (p.is_factory() || p.is_repository())
+    else if (p.is_factory() || p.is_repository() || p.is_service())
         to_object(o, p);
     else
         to_value_object(o, p);

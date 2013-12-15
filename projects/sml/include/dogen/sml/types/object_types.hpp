@@ -39,7 +39,10 @@ enum class object_types : unsigned int {
     entity = 1, ///< Object is an entity.
     keyed_entity = 2, ///< Object is an entity with associated key or keys.
     factory = 3, ///< Type whose responsibility is to create other types.
-    repository = 4 ///< Represents all objects of a certain type as a conceptual set.
+    repository = 4, ///< Represents all objects of a certain type as a conceptual set.
+    user_defined_service = 5, ///< The service has been defined by the user.
+    visitor = 6, ///< The service is a system generated visitor.
+    key_extractor = 7 ///< The service is a system defined key extractor.
 };
 
 } }

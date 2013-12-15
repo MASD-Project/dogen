@@ -27,11 +27,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/io/value_object_types_io.hpp"
-#include "dogen/sml/types/service.hpp"
-#include "dogen/sml/io/service_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml_to_cpp/types/transformation_error.hpp"
@@ -86,7 +85,7 @@ const std::string uint16_t_type("std::uint16_t");
 const std::string uint32_t_type("std::uint32_t");
 const std::string uint64_t_type("std::uint64_t");
 
-const std::string unsupported_service_type("Service type is not supported: ");
+const std::string unsupported_object_type("Object type is not supported: ");
 const std::string unsupported_value_object_type(
     "Value object type is not supported: ");
 
@@ -481,14 +480,14 @@ transformer::to_class_info(const sml::abstract_object& ao) const {
     return r;
 }
 
-cpp::visitor_info transformer::to_visitor(const sml::service& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << s.name();
+cpp::visitor_info transformer::to_visitor(const sml::object& v) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << v.name();
 
     cpp::visitor_info r;
-    r.name(s.name().simple_name());
-    r.namespaces(to_namespace_list(s.name()));
+    r.name(v.name().simple_name());
+    r.namespaces(to_namespace_list(v.name()));
 
-    for (const auto op : s.operations()) {
+    for (const auto op : v.operations()) {
         for (const auto p : op.parameters())
             r.types().push_back(to_qualified_name(p.type().type()));
     }
@@ -498,29 +497,6 @@ cpp::visitor_info transformer::to_visitor(const sml::service& s) const {
 
 void transformer::add_class(const sml::qname& qn, const cpp::class_info& ci) {
     context_.classes().insert(std::make_pair(qn, ci));
-}
-
-void transformer::visit(const dogen::sml::service& s) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming service: " << s.name();
-
-    switch(s.type()) {
-    case sml::service_types::user_defined: {
-        auto ci(to_class_info(s));
-        ci.class_type(cpp::class_types::service); // FIXME: mega-hack
-        add_class(s.name(), ci);
-        break;
-    }
-    case sml::service_types::visitor:
-        context_.visitors().insert(std::make_pair(s.name(), to_visitor(s)));
-        break;
-    default:
-        BOOST_LOG_SEV(lg, error) << unsupported_service_type << s.type()
-                                 << " service: " << s.name();
-        BOOST_THROW_EXCEPTION(transformation_error(unsupported_service_type +
-                boost::lexical_cast<std::string>(s.type())));
-    };
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed service: " << s.name();
 }
 
 void transformer::visit(const dogen::sml::enumeration& e) {
@@ -579,10 +555,29 @@ void transformer::visit(const dogen::sml::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: " << o.name();
 
     auto ci(to_class_info(o));
-    if (o.object_type() == sml::object_types::factory)
+    switch(o.object_type()) {
+    case sml::object_types::factory:
         ci.class_type(cpp::class_types::service); // FIXME: mega-hack
-
-    add_class(o.name(), ci);
+        add_class(o.name(), ci);
+        break;
+    case sml::object_types::user_defined_service:
+        ci.class_type(cpp::class_types::service);
+        add_class(o.name(), ci);
+        break;
+    case sml::object_types::visitor:
+        context_.visitors().insert(std::make_pair(o.name(), to_visitor(o)));
+        break;
+    case sml::object_types::entity:
+    case sml::object_types::keyed_entity:
+        ci.class_type(cpp::class_types::user_defined);
+        add_class(o.name(), ci);
+        break;
+    default:
+        BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
+                                 << " name: " << o.name();
+        BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +
+                boost::lexical_cast<std::string>(o.object_type())));
+    };
 
     BOOST_LOG_SEV(lg, debug) << "Transformed object: " << o.name();
 }

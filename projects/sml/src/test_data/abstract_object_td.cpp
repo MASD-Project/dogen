@@ -25,7 +25,6 @@
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/relationship_types_td.hpp"
-#include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/type_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
 
@@ -134,11 +133,9 @@ populate(const unsigned int position, result_type& v) {
 
 abstract_object_generator::result_type*
 abstract_object_generator::create_ptr(const unsigned int position) {
-    if ((position % 2) == 0)
-        return dogen::sml::value_object_generator::create_ptr(position);
-    if ((position % 2) == 1)
+    if ((position % 1) == 0)
         return dogen::sml::object_generator::create_ptr(position);
-    return dogen::sml::service_generator::create_ptr(position);
+    return dogen::sml::value_object_generator::create_ptr(position);
 }
 
 

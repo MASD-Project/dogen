@@ -146,7 +146,6 @@ private:
 private:
     using sml::type_visitor::visit;
     void visit(const sml::enumeration& e) const override;
-    void visit(const sml::service& s) const override;
     void visit(const sml::object& f) const override;
     void visit(const sml::value_object& vo) const override;
 

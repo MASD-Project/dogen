@@ -30,7 +30,6 @@
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
-#include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
@@ -326,22 +325,22 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             visitor = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
 
-            using dogen::sml::service;
-            const auto& s(dynamic_cast<const service&>(*pair.second));
-            BOOST_CHECK(!s.is_versioned());
-            BOOST_CHECK(!s.is_visitable());
-            BOOST_CHECK(!s.is_immutable());
-            BOOST_CHECK(!has_relationship(relationship_types::parents, s));
+            const auto& o(*pair.second);
+            BOOST_CHECK(o.object_type() == object_types::visitor);
+            BOOST_CHECK(!o.is_versioned());
+            BOOST_CHECK(!o.is_visitable());
+            BOOST_CHECK(!o.is_immutable());
+            BOOST_CHECK(!has_relationship(relationship_types::parents, o));
             BOOST_CHECK(
-                !has_relationship(relationship_types::original_parents, s));
+                !has_relationship(relationship_types::original_parents, o));
             BOOST_CHECK(
-                !has_relationship(relationship_types::modeled_concepts, s));
+                !has_relationship(relationship_types::modeled_concepts, o));
             BOOST_CHECK(
-                !has_relationship(relationship_types::leaves, s));
-            BOOST_CHECK(s.number_of_type_arguments() == 0);
+                !has_relationship(relationship_types::leaves, o));
+            BOOST_CHECK(o.number_of_type_arguments() == 0);
 
-            BOOST_REQUIRE(s.operations().size() == 1);
-            const auto op(s.operations().front());
+            BOOST_REQUIRE(o.operations().size() == 1);
+            const auto op(o.operations().front());
             BOOST_CHECK(!op.name().empty());
             BOOST_CHECK(!op.documentation().empty());
             BOOST_REQUIRE(op.parameters().size() == 1);

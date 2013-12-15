@@ -24,7 +24,6 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/value_object.hpp"
-#include "dogen/sml/types/service.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
@@ -236,10 +235,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
     const auto& ao(*c.model().objects().begin()->second);
-    const auto s(dynamic_cast<const dogen::sml::service&>(ao));
-    BOOST_CHECK(s.name().model_name() == model_name);
-    BOOST_CHECK(is_type_zero(s.name()));
-    BOOST_CHECK(!s.documentation().empty());
+    BOOST_CHECK(ao.object_type() ==
+        dogen::sml::object_types::user_defined_service);
+    BOOST_CHECK(ao.name().model_name() == model_name);
+    BOOST_CHECK(is_type_zero(ao.name()));
+    BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_transforms_into_expected_factory) {
@@ -457,12 +457,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(*c.model().objects().begin()->second);
-    const auto s(dynamic_cast<const dogen::sml::service&>(ao));
-    BOOST_CHECK(s.name().model_name() == model_name);
-    BOOST_CHECK(!s.name().simple_name().empty());
-    BOOST_REQUIRE(s.name().module_path().size() == 1);
-    BOOST_CHECK(s.name().module_path().front() == pkg.name().simple_name());
-    BOOST_CHECK(!s.documentation().empty());
+    BOOST_CHECK(ao.object_type() ==
+        dogen::sml::object_types::user_defined_service);
+    BOOST_CHECK(ao.name().model_name() == model_name);
+    BOOST_CHECK(!ao.name().simple_name().empty());
+    BOOST_REQUIRE(ao.name().module_path().size() == 1);
+    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_package_transforms_into_expected_factory) {
@@ -831,13 +832,14 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transform
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(*c.model().objects().begin()->second);
-    const auto s(dynamic_cast<const dogen::sml::service&>(ao));
-    BOOST_CHECK(s.name().model_name() == model_name);
-    BOOST_CHECK(!s.name().simple_name().empty());
-    BOOST_REQUIRE(s.name().module_path().size() == 2);
-    BOOST_CHECK(s.name().module_path().front() == first);
-    BOOST_CHECK(s.name().module_path().back() == second);
-    BOOST_CHECK(!s.documentation().empty());
+    BOOST_CHECK(ao.object_type() ==
+        dogen::sml::object_types::user_defined_service);
+    BOOST_CHECK(ao.name().model_name() == model_name);
+    BOOST_CHECK(!ao.name().simple_name().empty());
+    BOOST_REQUIRE(ao.name().module_path().size() == 2);
+    BOOST_CHECK(ao.name().module_path().front() == first);
+    BOOST_CHECK(ao.name().module_path().back() == second);
+    BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_two_packages_transforms_into_expected_factory) {

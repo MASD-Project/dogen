@@ -45,6 +45,15 @@ std::ostream& operator<<(std::ostream& s, const object_types& v) {
     case object_types::repository:
         attr = "\"repository\"";
         break;
+    case object_types::user_defined_service:
+        attr = "\"user_defined_service\"";
+        break;
+    case object_types::visitor:
+        attr = "\"visitor\"";
+        break;
+    case object_types::key_extractor:
+        attr = "\"key_extractor\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for object_types");
     }

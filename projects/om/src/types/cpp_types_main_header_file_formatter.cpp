@@ -30,7 +30,6 @@
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/om/types/formatting_error.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
@@ -800,13 +799,6 @@ format(const sml::abstract_object& o) const {
         member_variables(o);
     }
     close_class();
-}
-
-void cpp_types_main_header_file_formatter::
-visit(const dogen::sml::service& s) const {
-    ensure_non_null_context();
-    context_->overwrite(false);
-    format(s);
 }
 
 void cpp_types_main_header_file_formatter::

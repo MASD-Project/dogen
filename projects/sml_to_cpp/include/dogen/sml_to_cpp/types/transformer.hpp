@@ -138,7 +138,7 @@ private:
      *
      * @pre value object must have a visitor type.
      */
-    cpp::visitor_info to_visitor(const sml::service& s) const;
+    cpp::visitor_info to_visitor(const sml::object& v) const;
 
 private:
     /**
@@ -148,7 +148,6 @@ private:
 
 private:
     using type_visitor::visit;
-    void visit(const dogen::sml::service& s) override;
     void visit(const dogen::sml::object& f) override;
     void visit(const dogen::sml::enumeration& e) override;
     void visit(const dogen::sml::value_object& vo) override;

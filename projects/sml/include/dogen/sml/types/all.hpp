@@ -53,8 +53,6 @@
 #include "dogen/sml/types/relationship_types.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/types/resolver.hpp"
-#include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/service_types.hpp"
 #include "dogen/sml/types/sml.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/type.hpp"

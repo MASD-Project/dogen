@@ -28,7 +28,6 @@
 #include "dogen/sml/types/enumeration_fwd.hpp"
 #include "dogen/sml/types/object_fwd.hpp"
 #include "dogen/sml/types/primitive_fwd.hpp"
-#include "dogen/sml/types/service_fwd.hpp"
 #include "dogen/sml/types/value_object_fwd.hpp"
 
 namespace dogen {
@@ -39,16 +38,6 @@ public:
     virtual ~type_visitor() noexcept = 0;
 
 public:
-    /**
-     * @brief Accept visits for type dogen::sml::service
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::service&) const { }
-    virtual void visit(const dogen::sml::service&) { }
-    virtual void visit(dogen::sml::service&) const { }
-    virtual void visit(dogen::sml::service&) { }
-    /**@}*/
-
     /**
      * @brief Accept visits for type dogen::sml::primitive
      */
