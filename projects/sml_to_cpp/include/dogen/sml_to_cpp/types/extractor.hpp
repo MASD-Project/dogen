@@ -81,15 +81,6 @@ public:
     relationships
     extract_dependency_graph(const sml::object& ao) const;
 
-    /**
-     * @brief Flattens the given qname into a object inheritance
-     * graph, with the qname as the root.
-     *
-     * The qnames include all descendants of the originally supplied
-     * type.
-     */
-    relationships extract_inheritance_graph(const sml::qname& qn) const;
-
 private:
     const sml::model& model_;
     const boost_model_helper boost_;
