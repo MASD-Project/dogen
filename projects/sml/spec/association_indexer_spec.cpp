@@ -31,12 +31,12 @@
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
-#include "dogen/sml/types/relationship_indexer.hpp"
+#include "dogen/sml/types/association_indexer.hpp"
 
 namespace {
 
 const std::string test_module("sml");
-const std::string test_suite("relationship_indexer_spec");
+const std::string test_suite("association_indexer_spec");
 
 using dogen::sml::test::mock_model_factory;
 
@@ -58,31 +58,31 @@ using dogen::utility::test::asserter;
 using object_types = dogen::sml::test::mock_model_factory::object_types;
 using property_types = dogen::sml::test::mock_model_factory::property_types;
 
-BOOST_AUTO_TEST_SUITE(relationship_indexer)
+BOOST_AUTO_TEST_SUITE(association_indexer)
 
-BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_relationship_indexer) {
-    // SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_relationship_indexer");
+BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_association_indexer) {
+    // SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_association_indexer");
 
     // auto a(factory.build_empty_model());
     // BOOST_REQUIRE(a.objects().empty());
     // BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     // const auto e(a);
-    // dogen::sml::relationship_indexer i;
+    // dogen::sml::association_indexer i;
     // i.index(a);
     // BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
     // BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_relationship_indexer) {
-    // SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_relationship_indexer");
+BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_association_indexer) {
+    // SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_association_indexer");
 
     // auto a(factory.build_single_type_model());
     // BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
     // BOOST_REQUIRE(a.objects().size() == 1);
 
     // const auto e(a);
-    // dogen::sml::relationship_indexer ind;
+    // dogen::sml::association_indexer ind;
     // ind.index(a);
     // BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
     // BOOST_CHECK(asserter::assert_object(e, a));
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) 
     // BOOST_REQUIRE(o.all_properties().empty());
     // BOOST_REQUIRE(o.relationships().empty());
 
-    // dogen::sml::relationship_indexer ind;
+    // dogen::sml::association_indexer ind;
     // ind.index(m);
     // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     // BOOST_REQUIRE(c.inherited_properties().empty());
     // BOOST_REQUIRE(c.all_properties().empty());
 
-    // dogen::sml::relationship_indexer ind;
+    // dogen::sml::association_indexer ind;
     // ind.index(m);
     // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
@@ -198,7 +198,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     //         BOOST_FAIL("Unexpected concept: " << qn);
     // }
 
-    // dogen::sml::relationship_indexer ind;
+    // dogen::sml::association_indexer ind;
     // ind.index(m);
     // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 

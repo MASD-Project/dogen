@@ -20,6 +20,7 @@
  */
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/all_types_traversal.hpp"
+#include "dogen/sml/types/association_indexer.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/enumeration.hpp"
@@ -48,7 +49,6 @@
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/relationship_indexer.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/types/resolver.hpp"

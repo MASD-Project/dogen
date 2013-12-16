@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_RELATIONSHIP_INDEXER_FWD_HPP
-#define DOGEN_SML_TYPES_RELATIONSHIP_INDEXER_FWD_HPP
+#ifndef DOGEN_SML_TYPES_ASSOCIATION_INDEXER_FWD_HPP
+#define DOGEN_SML_TYPES_ASSOCIATION_INDEXER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-class relationship_indexer;
+class association_indexer;
 
 } }
 

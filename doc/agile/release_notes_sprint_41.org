@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-16 Mon 18:29]
+Clock summary at [2013-12-16 Mon 18:46]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *1:32* |      |      |
+| *Total time*                                                 | *1:47* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 1:32 |      |
+| Development Stories Implemented                              |        | 1:47 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:04 |
 | COMPLETED Use relationship container for visitors            |        |      | 1:13 |
-| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 0:15 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 0:30 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -39,9 +39,10 @@ We need to store the two-way relationships related to visitation.
 
 *** IMPLEMENTATION Create an =association_indexer= and add tests      :story:
 **** IMPLEMENTATION Create the class skeleton with tests               :task:
+     CLOCK: [2013-12-16 Mon 18:30]--[2013-12-16 Mon 18:45] =>  0:15
      CLOCK: [2013-12-13 Fri 18:07]--[2013-12-13 Fri 18:17] =>  0:10
      CLOCK: [2013-12-13 Fri 08:43]--[2013-12-13 Fri 08:48] =>  0:05
 
 **** Plug into workflow                                                :task:
-**** Add indexing of associations                                      :task:
+**** Start using indexed associations                                  :task:
 ** Deprecated Development Stories

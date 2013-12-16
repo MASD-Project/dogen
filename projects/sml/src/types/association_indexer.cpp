@@ -29,13 +29,13 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/types/relationship_indexer.hpp"
+#include "dogen/sml/types/association_indexer.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("sml.relationship_indexer"));
+auto lg(logger_factory("sml.association_indexer"));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -62,7 +62,7 @@ inline bool operator<(const qname& lhs, const qname& rhs) {
                     (lhs.simple_name() < rhs.simple_name()))));
 }
 
-object& relationship_indexer::find_object(const qname& qn, model& m) {
+object& association_indexer::find_object(const qname& qn, model& m) {
     auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
@@ -72,7 +72,7 @@ object& relationship_indexer::find_object(const qname& qn, model& m) {
     return i->second;
 }
 
-std::list<qname>& relationship_indexer::
+std::list<qname>& association_indexer::
 find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -85,7 +85,7 @@ find_relationships(const relationship_types rt, object& o) {
     return i->second;
 }
 
-concept& relationship_indexer::find_concept(const qname& qn, model& m) {
+concept& association_indexer::find_concept(const qname& qn, model& m) {
     auto i(m.concepts().find(qn));
     if (i == m.concepts().end()) {
         const auto& sn(qn.simple_name());
@@ -95,7 +95,7 @@ concept& relationship_indexer::find_concept(const qname& qn, model& m) {
     return i->second;
 }
 
-void relationship_indexer::
+void association_indexer::
 populate_all_properties(object& o, model& m) {
     for (const auto& pair : o.inherited_properties()) {
         o.all_properties().insert(o.all_properties().end(),
@@ -117,7 +117,7 @@ populate_all_properties(object& o, model& m) {
     }
 }
 
-void relationship_indexer::
+void association_indexer::
 index_object(object& parent, object& leaf, model& m) {
     const auto mc(relationship_types::modeled_concepts);
     const auto i(parent.relationships().find(mc));
@@ -187,7 +187,7 @@ index_object(object& parent, object& leaf, model& m) {
     }
 }
 
-void relationship_indexer::index_objects(model& m) {
+void association_indexer::index_objects(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing inheritance. Objects: "
                              << m.objects().size();
 
@@ -234,7 +234,7 @@ void relationship_indexer::index_objects(model& m) {
     }
 }
 
-void relationship_indexer::index_concept(concept& c, model& m,
+void association_indexer::index_concept(concept& c, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
     if (processed_qnames.find(c.name()) != processed_qnames.end())
         return;
@@ -270,7 +270,7 @@ void relationship_indexer::index_concept(concept& c, model& m,
     processed_qnames.insert(c.name());
 }
 
-void relationship_indexer::index_concepts(model& m) {
+void association_indexer::index_concepts(model& m) {
     std::unordered_set<sml::qname> processed_qnames;
 
     for (auto& pair : m.concepts()) {
@@ -283,7 +283,7 @@ void relationship_indexer::index_concepts(model& m) {
     }
 }
 
-void relationship_indexer::index(model& m) {
+void association_indexer::index(model& m) {
     index_concepts(m);
     index_objects(m);
 }

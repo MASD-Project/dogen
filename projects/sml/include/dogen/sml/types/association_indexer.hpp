@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_RELATIONSHIP_INDEXER_HPP
-#define DOGEN_SML_TYPES_RELATIONSHIP_INDEXER_HPP
+#ifndef DOGEN_SML_TYPES_ASSOCIATION_INDEXER_HPP
+#define DOGEN_SML_TYPES_ASSOCIATION_INDEXER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,13 +38,13 @@ namespace sml {
  * relationships across the model - other than refinement and
  * inheritance relationships.
  *
- * The relationship_indexer expects to receive a partial model such as ones coming
+ * The association_indexer expects to receive a partial model such as ones coming
  * straight out of Dia to SML transformation. Its job is to take the
  * existing data and to expand it, duplicating information across the
  * model to make it easier to access without requiring any additional
  * look-ups.
  *
- * The relationship_indexer is responsible for the following concrete tasks:
+ * The association_indexer is responsible for the following concrete tasks:
  *
  * @li populate the original parents of all children involved in
  * inheritance relationships;
@@ -56,15 +56,15 @@ namespace sml {
  * of all types.
  *
  */
-class relationship_indexer {
+class association_indexer {
 public:
-    relationship_indexer() = default;
-    relationship_indexer(const relationship_indexer&) = default;
-    relationship_indexer(relationship_indexer&&) = default;
-    relationship_indexer& operator=(const relationship_indexer&) = default;
+    association_indexer() = default;
+    association_indexer(const association_indexer&) = default;
+    association_indexer(association_indexer&&) = default;
+    association_indexer& operator=(const association_indexer&) = default;
 
 public:
-    virtual ~relationship_indexer() noexcept { }
+    virtual ~association_indexer() noexcept { }
 
 private:
     /**

@@ -11120,19 +11120,19 @@ not have a need for it.#</dia:string>
         <dia:point val="48,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,-3.05;57.785,0.65"/>
+        <dia:rectangle val="47.95,-3.05;57.47,0.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,-3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.7349999999999994"/>
+        <dia:real val="9.4199999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#relationship_indexer#</dia:string>
+        <dia:string>#association_indexer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -11279,7 +11279,7 @@ not have a need for it.#</dia:string>
         <dia:point val="52,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,-12.05;77.975,-8.65"/>
+        <dia:rectangle val="51.95,-12.05;74.51,-9.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11288,10 +11288,10 @@ not have a need for it.#</dia:string>
         <dia:point val="52,-12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.924999999999997"/>
+        <dia:real val="22.459999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.3000000000000003"/>
+        <dia:real val="2.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -11305,9 +11305,8 @@ not have a need for it.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Popualtes all the data structures representing relatinships
-which have not yet been populated, uch as properties, operations,
-etc - with the exception of concept related relationships.#</dia:string>
+            <dia:string>#Popualtes the relationship container with information
+about associations the object or concept is involved in.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -11329,17 +11328,17 @@ etc - with the exception of concept related relationships.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O96">
       <dia:attribute name="obj_pos">
-        <dia:point val="64.9625,-8.7"/>
+        <dia:point val="63.23,-9.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.448,-8.77022;65.0327,-2.65496"/>
+        <dia:rectangle val="57.0885,-9.5706;63.3006,-2.69615"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="64.9625,-8.7"/>
-        <dia:point val="57.735,-3"/>
+        <dia:point val="63.23,-9.5"/>
+        <dia:point val="57.42,-3"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -11354,7 +11353,7 @@ etc - with the exception of concept related relationships.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="61.3488,-5.3501"/>
+        <dia:point val="60.3251,-5.7501"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O95" connection="6"/>
@@ -11402,7 +11401,7 @@ etc - with the exception of concept related relationships.#</dia:string>
         <dia:point val="34.685,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.935,0.55;53.0675,13.8"/>
+        <dia:rectangle val="33.935,0.55;52.91,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11410,8 +11409,8 @@ etc - with the exception of concept related relationships.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="34.685,13"/>
         <dia:point val="34.685,8"/>
-        <dia:point val="52.8675,8"/>
-        <dia:point val="52.8675,0.6"/>
+        <dia:point val="52.71,8"/>
+        <dia:point val="52.71,0.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
