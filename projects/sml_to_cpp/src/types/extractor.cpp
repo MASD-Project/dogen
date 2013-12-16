@@ -140,6 +140,25 @@ extractor::extract_dependency_graph(const sml::object& ao) const {
             r.names().insert(parent);
     }
 
+    i = ao.relationships().find(relationship_types::visited_by);
+    if (i == ao.relationships().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object has no vistors.";
+    else {
+        // FIXME: ignore visitation relationship for non-root
+        // objects.
+        if (ao.is_parent() && !ao.is_child())
+            for (const auto& visitors : i->second)
+                r.names().insert(visitors);
+    }
+
+    i = ao.relationships().find(relationship_types::visits);
+    if (i == ao.relationships().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object does not visit.";
+    else {
+        for (const auto& visitees : i->second)
+            r.names().insert(visitees);
+    }
+
     r.is_parent(ao.is_parent());
     r.is_child(ao.is_child());
 

@@ -339,13 +339,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
                 !has_relationship(relationship_types::leaves, o));
             BOOST_CHECK(o.number_of_type_arguments() == 0);
 
-            BOOST_REQUIRE(o.operations().size() == 1);
-            const auto op(o.operations().front());
-            BOOST_CHECK(!op.name().empty());
-            BOOST_CHECK(!op.documentation().empty());
-            BOOST_REQUIRE(op.parameters().size() == 1);
-            BOOST_CHECK(factory.is_type_name_n(0,
-                    op.parameters().front().type().type()));
+            BOOST_REQUIRE(o.operations().empty());
         }
     }
 

@@ -10,15 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-16 Mon 07:59]
+Clock summary at [2013-12-16 Mon 18:29]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *0:19* |      |      |
+| *Total time*                                                 | *1:32* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 0:19 |      |
+| Development Stories Implemented                              |        | 1:32 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:04 |
-| IMPLEMENTATION Create a =relationship_indexer= and add tests |        |      | 0:15 |
+| COMPLETED Use relationship container for visitors            |        |      | 1:13 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 0:15 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -28,11 +29,15 @@ Clock summary at [2013-12-16 Mon 07:59]
 
 Use compilation downtime to update the manual.
 
-*** Use relationship container for visitors                           :story:
+*** COMPLETED Use relationship container for visitors                 :story:
+    CLOSED: [2013-12-16 Mon 18:29]
+    CLOCK: [2013-12-16 Mon 18:10]--[2013-12-16 Mon 18:29] =>  0:19
+    CLOCK: [2013-12-16 Mon 17:50]--[2013-12-16 Mon 18:03] =>  0:13
+    CLOCK: [2013-12-16 Mon 07:59]--[2013-12-16 Mon 08:40] =>  0:41
 
 We need to store the two-way relationships related to visitation.
 
-*** IMPLEMENTATION Create a =relationship_indexer= and add tests      :story:
+*** IMPLEMENTATION Create an =association_indexer= and add tests      :story:
 **** IMPLEMENTATION Create the class skeleton with tests               :task:
      CLOCK: [2013-12-13 Fri 18:07]--[2013-12-13 Fri 18:17] =>  0:10
      CLOCK: [2013-12-13 Fri 08:43]--[2013-12-13 Fri 08:48] =>  0:05

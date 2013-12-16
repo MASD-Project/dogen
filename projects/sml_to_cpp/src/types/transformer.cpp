@@ -90,6 +90,8 @@ const std::string parent_class_info_not_found(
 const std::string too_many_parents(
     "Type has more than one parent but multiple inheritance not supported: ");
 
+const std::string no_visitees("Visitor is not visiting any types: ");
+
 bool is_char_like(const std::string& type_name) {
     return
         type_name == char_type || type_name == uchar_type ||
@@ -476,10 +478,15 @@ cpp::visitor_info transformer::to_visitor(const sml::object& v) const {
     r.name(v.name().simple_name());
     r.namespaces(to_namespace_list(v.name()));
 
-    for (const auto op : v.operations()) {
-        for (const auto p : op.parameters())
-            r.types().push_back(to_qualified_name(p.type().type()));
+    auto i(v.relationships().find(sml::relationship_types::visits));
+    if (i == v.relationships().end() || i->second.empty()) {
+        const auto& sn(v.name().simple_name());
+        BOOST_LOG_SEV(lg, error) << no_visitees << sn;
+        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + sn));
     }
+
+    for (const auto qn : i->second)
+        r.types().push_back(to_qualified_name(qn));
 
     return r;
 }

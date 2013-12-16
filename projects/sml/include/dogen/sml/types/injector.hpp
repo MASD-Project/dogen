@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <memory>
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -58,6 +59,17 @@ public:
     injector& operator=(const injector&) = default;
 
 private:
+    class context;
+
+private:
+    /**
+     * @brief Inserts object into model's object container.
+     *
+     * @return True if the object did not exist in container, false
+     * otherwise.
+     */
+    bool insert(const object& o);
+
     /**
      * @brief Creates a key for the given entity.
      *
@@ -90,7 +102,7 @@ private:
      * @brief Injects versioned and unversioned keys for keyed
      * entities, and the associated key extractor.
      */
-    void inject_keys(model& m) const;
+    void inject_keys();
 
     /**
      * @brief Injects the version property on the object passed in.
@@ -101,22 +113,30 @@ private:
      * @brief Injects the version property on any types marked as
      * versioned.
      */
-    void inject_version(model& m) const;
+    void inject_version();
 
     /**
-     * @brief Create a visitor for the object.
+     * @brief Create a visitor for the object o.
+     *
+     * @param o visitable object
+     * @param leaves cached leaves to avoid look-up.
+     *
+     * @pre leaves must not be empty.
      */
-    object create_visitor(const object& ao) const;
+    object create_visitor(const object& o,
+        const std::list<qname>& leaves) const;
 
     /**
-     * @brief Injects an accept operation for the given visitor.
+     * @brief Injects an accept operation for the given visitor, to
+     * the supplied object and all its leaves.
      */
-    void inject_accept(object& ao, const object& v) const;
+    void inject_visited_by(object& root, const std::list<qname>& leaves,
+        const qname& visitor) const;
 
     /**
      * @brief Injects visitors for objects that require them.
      */
-    void inject_visitors(model& m) const;
+    void inject_visitors();
 
 public:
 
@@ -125,7 +145,10 @@ public:
      *
      * @param m SML model to operate on.
      */
-    void inject(model& m) const;
+    void inject(model& m);
+
+private:
+    mutable std::shared_ptr<context> context_;
 };
 
 } }

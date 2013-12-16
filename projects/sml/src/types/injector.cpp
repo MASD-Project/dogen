@@ -65,15 +65,30 @@ const std::string duplicate_qname(
 const std::string zero_leaves("Type marked as visitable but has no leaves: ");
 const std::string unversioned_key_not_found(
     "Object is an entity but has no unversioned key: ");
-
-const std::string accept_operation_name("accept");
-const std::string accept_argument_name("v");
-const std::string accept_operation_doc("Acceptor for ");
+const std::string leaf_not_found("Could not find leaf object: ");
 
 }
 
 namespace dogen {
 namespace sml {
+
+class injector::context {
+public:
+    context(sml::model& m) : model_(m) { }
+
+public:
+    sml::model& model() { return model_; }
+
+private:
+    sml::model& model_;
+};
+
+bool injector::insert(const object& o) {
+    const auto i(context_->model().objects().insert(
+            std::make_pair(o.name(), o)));
+
+    return i.second;
+}
 
 object injector::create_key(const qname& qn, const generation_types gt,
     const std::list<property>& properties, const bool versioned) const {
@@ -156,11 +171,11 @@ object injector::create_key_extractor(const object& ke) const {
     return r;
 }
 
-void injector::inject_keys(model& m) const {
+void injector::inject_keys() {
     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
     std::list<object> objects;
-    for (auto& pair : m.objects()) {
+    for (auto& pair : context_->model().objects()) {
         const auto qn(pair.first);
         auto& o(pair.second);
 
@@ -195,8 +210,7 @@ void injector::inject_keys(model& m) const {
     }
 
     for (const auto& o : objects) {
-        const auto i(m.objects().insert(std::make_pair(o.name(), o)));
-        if (!i.second) {
+        if (!insert(o)) {
             BOOST_LOG_SEV(lg, error) << duplicate_qname << o.name();
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
                     boost::lexical_cast<std::string>(o.name())));
@@ -225,104 +239,91 @@ void injector::inject_version(object& p) const {
     p.local_properties().push_back(v);
 }
 
-void injector::inject_version(model& m) const {
+void injector::inject_version() {
     BOOST_LOG_SEV(lg, debug) << "Injecting version property on all types.";
 
-    for (auto& pair : m.objects()) {
-        auto& ao(pair.second);
+    for (auto& pair : context_->model().objects()) {
+        auto& o(pair.second);
 
-        if (ao.is_versioned())
-            inject_version(ao);
+        if (o.is_versioned())
+            inject_version(o);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting version property on all types.";
 }
 
-object injector::create_visitor(const object& ao) const {
+object injector::
+create_visitor(const object& o, const std::list<qname>& leaves) const {
     object r;
     qname qn;
-    qn.simple_name(ao.name().simple_name() + "_" + visitor_name);
-    qn.model_name(ao.name().model_name());
-    qn.module_path(ao.name().module_path());
-    qn.external_module_path(ao.name().external_module_path());
+    qn.simple_name(o.name().simple_name() + "_" + visitor_name);
+    qn.model_name(o.name().model_name());
+    qn.module_path(o.name().module_path());
+    qn.external_module_path(o.name().external_module_path());
 
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << qn.simple_name();
 
     r.name(qn);
-    r.generation_type(ao.generation_type());
+    r.generation_type(o.generation_type());
     r.origin_type(origin_types::system);
     r.object_type(object_types::visitor);
-    r.documentation(visitor_doc + ao.name().simple_name());
+    r.documentation(visitor_doc + o.name().simple_name());
 
-    const auto i(ao.relationships().find(relationship_types::leaves));
-    if (i != ao.relationships().end()) {
-        for (const auto& l : i->second) {
-            parameter p;
-            p.name(visitor_argument_name);
-
-            nested_qname nqn;
-            nqn.type(l);
-            p.type(nqn);
-
-            operation op;
-            op.name("visit");
-            op.parameters().push_back(p);
-            op.documentation(visit_operation_doc + l.simple_name());
-            r.operations().push_back(op);
-        }
-    }
+    for (const auto& l : leaves)
+        r.relationships()[relationship_types::visits].push_back(l);
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: " << qn.simple_name();
     return r;
 }
 
-void injector::inject_accept(object& ao, const object& v) const {
-    parameter p;
-    p.name(accept_argument_name);
+void injector::inject_visited_by(object& root, const std::list<qname>& leaves,
+    const qname& visitor) const {
 
-    nested_qname nqn;
-    nqn.type(v.name());
-    p.type(nqn);
+    root.relationships()[relationship_types::visited_by].push_back(visitor);
 
-    operation op;
-    op.name(accept_operation_name);
-    op.parameters().push_back(p);
-    op.documentation(accept_operation_doc + v.name().simple_name());
-    ao.operations().push_back(op);
+    for (const auto& l : leaves) {
+        auto i(context_->model().objects().find(l));
+        if (i == context_->model().objects().end()) {
+            const auto& sn(l.simple_name());
+            BOOST_LOG_SEV(lg, error) << leaf_not_found << sn;
+            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + sn));
+        }
+
+        auto& leaf(i->second);
+        leaf.relationships()[relationship_types::visited_by].push_back(visitor);
+    }
 }
 
-void injector::inject_visitors(model& m) const {
+void injector::inject_visitors() {
     BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
 
     std::list<object> visitors;
-    for (auto& pair : m.objects()) {
-        auto& ao(pair.second);
+    for (auto& pair : context_->model().objects()) {
+        auto& o(pair.second);
 
-        if (!ao.is_visitable())
+        if (!o.is_visitable())
             continue;
 
-        const auto i(ao.relationships().find(relationship_types::leaves));
-        const bool has_leaves(i != ao.relationships().end() &&
+        const auto i(o.relationships().find(relationship_types::leaves));
+        const bool has_leaves(i != o.relationships().end() &&
             !i->second.empty());
 
         if (!has_leaves) {
-            BOOST_LOG_SEV(lg, error) << zero_leaves << ao.name();
+            BOOST_LOG_SEV(lg, error) << zero_leaves << o.name();
             BOOST_THROW_EXCEPTION(injection_error(zero_leaves +
-                    boost::lexical_cast<std::string>(ao.name())));
+                    boost::lexical_cast<std::string>(o.name())));
         }
 
-        const auto v(create_visitor(ao));
+        const auto v(create_visitor(o, i->second));
         visitors.push_back(v);
-        inject_accept(ao, v);
+        inject_visited_by(o, i->second, v.name());
     }
 
     for (const auto v : visitors) {
         BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
                                  << v.name().simple_name();
 
-        const auto i(m.objects().insert(std::make_pair(v.name(), v)));
-
-        if (!i.second) {
+        if (!insert(v)) {
             BOOST_LOG_SEV(lg, error) << duplicate_qname << v.name();
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
                     boost::lexical_cast<std::string>(v.name())));
@@ -332,10 +333,12 @@ void injector::inject_visitors(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
 }
 
-void injector::inject(model& m) const {
-    inject_version(m);
-    inject_keys(m);
-    inject_visitors(m);
+void injector::inject(model& m) {
+    context_ = std::unique_ptr<context>(new context(m));
+    inject_version();
+    inject_keys();
+    inject_visitors();
+    context_ = std::unique_ptr<context>();
 }
 
 } }
