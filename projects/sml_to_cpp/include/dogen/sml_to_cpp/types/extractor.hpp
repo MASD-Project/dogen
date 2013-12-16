@@ -57,13 +57,6 @@ public:
 
 private:
     /**
-     * @brief Collects all the properties associated with the refined
-     * concepts.
-     */
-    void properties_for_concept(const sml::object& ao,
-        std::list<sml::property>& properties) const;
-
-    /**
      * @brief Iterates through the nested qname recursively, picking
      * up dependencies as it goes along.
      */

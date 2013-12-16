@@ -37,7 +37,6 @@ const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");
 
-const std::string concept_not_found("Concept not found in concept container: ");
 const std::string qname_could_not_be_found(
     "Could not find QName in object container: ");
 const std::string type_does_not_have_a_parent(
@@ -102,29 +101,6 @@ void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
         recurse_nested_qnames(c, rel, is_pointer);
 }
 
-void extractor::properties_for_concept(const sml::object& ao,
-    std::list<sml::property>& properties) const {
-
-    using sml::relationship_types;
-    const auto i(ao.relationships().find(relationship_types::modeled_concepts));
-    if (i == ao.relationships().end() || i->second.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
-        return;
-    }
-
-    for (const auto& qn : i->second) {
-        const auto j(model_.concepts().find(qn));
-        if (j == model_.concepts().end()) {
-            const auto sn(qn.simple_name());
-            BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-            BOOST_THROW_EXCEPTION(extraction_error(concept_not_found + sn));
-        }
-
-        const auto& props(j->second.local_properties());
-        properties.insert(properties.end(), props.begin(), props.end());
-    }
-}
-
 relationships
 extractor::extract_dependency_graph(const sml::object& ao) const {
     BOOST_LOG_SEV(lg, debug) << "Extracting dependency graph for " << ao.name();
@@ -166,14 +142,7 @@ extractor::extract_dependency_graph(const sml::object& ao) const {
     if (i != ao.relationships().end() && !i->second.empty())
         r.leaves().insert(i->second.begin(), i->second.end());
 
-    std::list<sml::property> props;
-    std::unordered_set<sml::qname> processed_qnames;
-
-    properties_for_concept(ao, props);
-    props.insert(props.end(), ao.local_properties().begin(),
-        ao.local_properties().end());
-
-    for (const auto& prop : props) {
+    for (const auto& prop : ao.local_properties()) {
         const auto nqn(prop.type());
         bool is_pointer(nqn.is_pointer());
         recurse_nested_qnames(nqn, r, is_pointer);
