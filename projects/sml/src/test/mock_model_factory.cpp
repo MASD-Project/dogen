@@ -258,6 +258,19 @@ void add_relationship(dogen::sml::object& target,
 
 const bool add_leaf(true);
 
+void model_concept(const bool properties_indexed,
+    dogen::sml::object& o, const dogen::sml::concept& c) {
+
+    using dogen::sml::relationship_types;
+    add_relationship(o, c, relationship_types::modeled_concepts);
+    if (properties_indexed) {
+        for (const auto& p : c.all_properties()) {
+            o.local_properties().push_back(p);
+            o.all_properties().push_back(p);
+        }
+    }
+}
+
 void parent_to_child(const bool properties_indexed,
     dogen::sml::object& parent,
     dogen::sml::object& child,
@@ -655,7 +668,7 @@ build_single_concept_model(const unsigned int n) const {
 
     auto o(build_value_object(0, r.name()));
     add_property(o, flags_.properties_indexed(), 1);
-    add_relationship(o, c, relationship_types::modeled_concepts);
+    model_concept(flags_.properties_indexed(), o, c);
     insert_object(r, o);
 
     return r;
@@ -677,19 +690,17 @@ build_first_degree_concepts_model(const unsigned int n) const {
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    const auto mc(relationship_types::modeled_concepts);
-
     auto o0(build_value_object(0, r.name()));
-    add_relationship(o0, c0, mc);
+    model_concept(flags_.properties_indexed(), o0, c0);
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
     add_property(o1, flags_.properties_indexed(), 2);
 
     if (flags_.concepts_indexed())
-        add_relationship(o1, c0, mc);
+        model_concept(flags_.properties_indexed(), o1, c0);
 
-    add_relationship(o1, c1, mc);
+    model_concept(flags_.properties_indexed(), o1, c1);
     insert_object(r, o1);
 
     return r;
@@ -720,26 +731,24 @@ build_second_degree_concepts_model(const unsigned int n) const {
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
-    const auto mc(relationship_types::modeled_concepts);
-
     auto o0(build_value_object(0, r.name()));
-    add_relationship(o0, c0, mc);
+    model_concept(flags_.properties_indexed(), o0, c0);
     insert_object(r, o0);
 
     auto o1(build_value_object(1, r.name()));
     if (flags_.concepts_indexed())
-        add_relationship(o1, c0, mc);
+        model_concept(flags_.properties_indexed(), o1, c0);
 
-    add_relationship(o1, c1, mc);
+    model_concept(flags_.properties_indexed(), o1, c1);
     insert_object(r, o1);
 
     auto o2(build_value_object(2, r.name()));
     add_property(o2, flags_.properties_indexed(), 3);
     if (flags_.concepts_indexed()) {
-        add_relationship(o2, c0, mc);
-        add_relationship(o2, c1, mc);
+        model_concept(flags_.properties_indexed(), o2, c0);
+        model_concept(flags_.properties_indexed(), o2, c1);
     }
-    add_relationship(o2, c2, mc);
+    model_concept(flags_.properties_indexed(), o2, c2);
     insert_object(r, o2);
 
     return r;
@@ -766,10 +775,8 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
-    const auto mc(relationship_types::modeled_concepts);
-
     auto o0(build_value_object(0, r.name()));
-    add_relationship(o0, c2, mc);
+    model_concept(flags_.properties_indexed(), o0, c2);
     insert_object(r, o0);
     return r;
 }
@@ -804,15 +811,13 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
     c3.refines().push_back(c2.name());
     insert_nameable(r.concepts(), c3);
 
-    const auto mc(relationship_types::modeled_concepts);
-
     auto o0(build_value_object(0, r.name()));
     if (flags_.concepts_indexed()) {
-        add_relationship(o0, c0, mc);
-        add_relationship(o0, c1, mc);
-        add_relationship(o0, c2, mc);
+        model_concept(flags_.properties_indexed(), o0, c0);
+        model_concept(flags_.properties_indexed(), o0, c1);
+        model_concept(flags_.properties_indexed(), o0, c2);
     }
-    add_relationship(o0, c3, mc);
+    model_concept(flags_.properties_indexed(), o0, c3);
     insert_object(r, o0);
     return r;
 }
@@ -829,8 +834,7 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
     insert_nameable(r.concepts(), c0);
 
     auto o0(build_value_object(0, r.name()));
-    const auto mc(relationship_types::modeled_concepts);
-    add_relationship(o0, c0, mc);
+    model_concept(flags_.properties_indexed(), o0, c0);
 
     insert_object(r, o0);
 
@@ -861,10 +865,9 @@ build_object_with_parent_that_models_a_refined_concept(
 
     auto o0(build_value_object(0, r.name()));
 
-    const auto mc(relationship_types::modeled_concepts);
-    add_relationship(o0, c1, mc);
+    model_concept(flags_.properties_indexed(), o0, c1);
     if (flags_.concepts_indexed())
-        add_relationship(o0, c0, mc);
+        model_concept(flags_.properties_indexed(), o0, c0);
 
     insert_object(r, o0);
 
@@ -898,8 +901,7 @@ build_object_that_models_missing_concept(const unsigned int n) const {
 
     auto o0(build_value_object(0, r.name()));
 
-    const auto mc(relationship_types::modeled_concepts);
-    add_relationship(o0, c0, mc);
+    model_concept(flags_.properties_indexed(), o0, c0);
     insert_object(r, o0);
     return r;
 }
@@ -920,8 +922,7 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
     parent_to_child(flags_.properties_indexed(), o0, o1);
     o0.is_parent(true);
 
-    const auto mc(relationship_types::modeled_concepts);
-    add_relationship(o1, c0, mc);
+    model_concept(flags_.properties_indexed(), o1, c0);
     insert_object(r, o1);
 
     return r;

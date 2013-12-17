@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-17 Tue 11:44]
+Clock summary at [2013-12-17 Tue 19:57]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *3:30* |      |      |
+| *Total time*                                                 | *4:02* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 3:30 |      |
+| Development Stories Implemented                              |        | 4:02 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:04 |
 | COMPLETED Use relationship container for visitors            |        |      | 1:13 |
-| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 2:13 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 2:45 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -69,7 +69,19 @@ models that have objects with properties; in a lot of cases, we add
 the property without also adding the types the property requires. This
 is a problem for the association indexer.
 
+**** COMPLETED Mock models do not perform property expansion correctly :spike:
+     CLOSED: [2013-12-17 Tue 19:52]
+     CLOCK: [2013-12-17 Tue 19:40]--[2013-12-17 Tue 19:57] =>  0:17
+     CLOCK: [2013-12-17 Tue 12:03]--[2013-12-17 Tue 12:07] =>  0:04
+     CLOCK: [2013-12-17 Tue 11:55]--[2013-12-17 Tue 12:03] =>  0:08
+
+When the property indexing flag is set, one expects all objects that
+model concepts to have the properties copied across to the local
+properties container. However, we only add the relationship without
+copying.
+
 **** IMPLEMENTATION Implement class and add unit tests                 :task:
+     CLOCK: [2013-12-17 Tue 11:44]--[2013-12-17 Tue 11:47] =>  0:03
      CLOCK: [2013-12-17 Tue 10:49]--[2013-12-17 Tue 10:52] =>  0:03
      CLOCK: [2013-12-16 Mon 23:35]--[2013-12-17 Tue 00:10] =>  0:35
 
