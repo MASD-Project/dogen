@@ -644,6 +644,11 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
 model mock_model_factory::
 build_single_concept_model(const unsigned int n) const {
     model r(build_empty_model(n));
+
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c(build_concept(0, r.name()));
     add_property(c, flags_.properties_indexed());
     insert_nameable(r.concepts(), c);
@@ -659,6 +664,10 @@ build_single_concept_model(const unsigned int n) const {
 model mock_model_factory::
 build_first_degree_concepts_model(const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
@@ -689,6 +698,10 @@ build_first_degree_concepts_model(const unsigned int n) const {
 model mock_model_factory::
 build_second_degree_concepts_model(const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
@@ -735,6 +748,10 @@ build_second_degree_concepts_model(const unsigned int n) const {
 model mock_model_factory::build_multiple_inheritance_concepts_model(
     const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
@@ -760,6 +777,10 @@ model mock_model_factory::build_multiple_inheritance_concepts_model(
 model mock_model_factory::
 build_diamond_inheritance_concepts_model(const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
@@ -799,6 +820,10 @@ build_diamond_inheritance_concepts_model(const unsigned int n) const {
 model mock_model_factory::build_object_with_parent_that_models_concept(
     const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
@@ -821,6 +846,10 @@ model mock_model_factory::
 build_object_with_parent_that_models_a_refined_concept(
     const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
@@ -860,6 +889,10 @@ build_concept_that_refines_missing_concept(const unsigned int n) const {
 model mock_model_factory::
 build_object_that_models_missing_concept(const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
 
@@ -874,6 +907,10 @@ build_object_that_models_missing_concept(const unsigned int n) const {
 model mock_model_factory::build_object_that_models_concept_with_missing_parent(
     const unsigned int n) const {
     model r(build_empty_model(n));
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    r.primitives().insert(std::make_pair(ui.name(), ui));
+
     concept c0(build_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
@@ -1022,13 +1059,15 @@ object_with_parent_in_the_same_model(const bool has_property) const {
     const auto mn(mock_model_qname(0));
 
     model r(build_empty_model(0));
-    auto o0(build_value_object(0, mn));
     if (has_property) {
-        add_property(o0, flags_.properties_indexed());
         primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
+
+    auto o0(build_value_object(0, mn));
+    if (has_property)
+        add_property(o0, flags_.properties_indexed());
 
     auto o1(build_value_object(1, mn));
     if (has_property)
@@ -1100,6 +1139,11 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
     const auto mn(mock_model_qname(0));
 
     model r(build_empty_model(0));
+    if (has_property) {
+        primitive ui;
+        ui.name().simple_name(unsigned_int);
+        r.primitives().insert(std::make_pair(ui.name(), ui));
+    }
 
     auto o3(build_value_object(3, mn));
     if (has_property)
@@ -1116,13 +1160,9 @@ object_with_third_degree_parent_in_same_model(const bool has_property) const {
     parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
 
     auto o0(build_value_object(0, mn));
-    if (has_property) {
+    if (has_property)
         add_property(o0, flags_.properties_indexed());
 
-        primitive ui;
-        ui.name().simple_name(unsigned_int);
-        r.primitives().insert(std::make_pair(ui.name(), ui));
-    }
     parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
 
     o1.is_parent(true);
