@@ -1316,19 +1316,6 @@ this (node, nested qname, etc).
 
 This would be part of the injection framework.
 
-*** Move extractor from C++ model into SML                            :story:
-
-Extractor and relationships should be moved into SML. The C++ specific
-bits are the parts where we directly name types such as
-=has_std_string=, etc. These should be generalised, such that the user
-could pass in a list of types to the extractor and then we'd return
-them with a bool for whether we seen them or not.
-
-We should also remove the references to =forward_decls= directly and
-instead have something like "pointer only" dependencies or some such
-SML level concept and then interpret this dependency as a forward
-declaration at the C++ level.
-
 *** Add support for bitsets                                           :story:
 
 We are using a lot of boolean variables in SML. In reality, these all

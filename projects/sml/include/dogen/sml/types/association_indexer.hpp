@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <memory>
 #include <unordered_set>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
@@ -34,27 +35,29 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Information indexer that specialises in expanding
- * relationships across the model - other than refinement and
- * inheritance relationships.
+ * @brief Information indexer that specialises in indexing
+ * associations for objects.
  *
- * The association_indexer expects to receive a partial model such as ones coming
- * straight out of Dia to SML transformation. Its job is to take the
- * existing data and to expand it, duplicating information across the
- * model to make it easier to access without requiring any additional
- * look-ups.
+ * @section sml_association_indexer_0 Model requirements
  *
- * The association_indexer is responsible for the following concrete tasks:
+ * The association indexer expects to receive a partial model such as
+ * ones coming straight out of Dia to SML transformation. The indexing
+ * of properties is expected to have taken place.
  *
- * @li populate the original parents of all children involved in
- * inheritance relationships;
+ * @section sml_property_indexer_1 Indexing Process
  *
- * @li populate the leaves of all parents in inheritance
- * relationships;
+ * The indexer goes through all properties in objects and, for every
+ * nested qualified name, unpacks all the associations implied by
+ * their presence.
  *
- * @li populate the inherited properties and all properties containers
- * of all types.
+ * Associations are of two types: @e regular or @e pointer. This
+ distinction is required due to the usage of the association at code
+ generation time.
  *
+ * A @e regular association means a full type definition is required
+ * to be available due to the association. A @e pointer definition
+ * means that the type is used via pointer and as such a forward
+ * declaration may suffice.
  */
 class association_indexer {
 public:
@@ -62,59 +65,32 @@ public:
     association_indexer(const association_indexer&) = default;
     association_indexer(association_indexer&&) = default;
     association_indexer& operator=(const association_indexer&) = default;
+    ~association_indexer() noexcept = default;
 
-public:
-    virtual ~association_indexer() noexcept { }
+private:
+    class context;
 
 private:
     /**
-     * @brief Returns the object with the given qname, or throws.
+     * @brief Iterates through the nested qname recursively, picking
+     * up associations as it goes along.
      */
-    object& find_object(const qname& qn, model& m);
+    void recurse_nested_qnames(object& o, const nested_qname& nqn,
+        bool& is_pointer) const;
 
-    /**
-     * @brief Finds the relationship container, or throws.
-     */
-    std::list<qname>& find_relationships(const relationship_types rt,
-        object& o);
-
-    /**
-     * @brief Returns the concept with the given qname, or throws.
-     */
-    concept& find_concept(const qname& qn, model& m);
-
-    /**
-     * @brief Populates the all properties container.
-     */
-    void populate_all_properties(object& o, model& m);
-
-private:
     /**
      * @brief Indexes a specific object.
      */
-    void index_object(object& parent, object& leaf, model& m);
-
-    /**
-     * @brief Indexes all objects in the model.
-     */
-    void index_objects(model& m);
-
-    /**
-     * @brief Populates index information in a concept.
-     */
-    void index_concept(concept& c, model& m,
-        std::unordered_set<sml::qname>& processed_qnames);
-
-    /**
-     * @brief Indexes all concepts in the model.
-     */
-    void index_concepts(model& m);
+    void index_object(object& o);
 
 public:
     /**
-     * @brief Indexes the supplied model.
+     * @brief Indexes all objects in the model.
      */
     void index(model& m);
+
+private:
+    mutable std::shared_ptr<context> context_;
 };
 
 } }

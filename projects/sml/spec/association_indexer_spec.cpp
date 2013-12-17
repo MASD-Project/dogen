@@ -47,7 +47,7 @@ using dogen::sml::test::mock_model_factory;
  * would be more truthful to use a tagged model in the tests.
  */
 const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
-    false/*merged*/, false/*concepts_indexed*/, false/*properties_indexed*/);
+    false/*merged*/, true/*concepts_indexed*/, true/*properties_indexed*/);
 const mock_model_factory factory(flags);
 
 }
@@ -61,181 +61,106 @@ using property_types = dogen::sml::test::mock_model_factory::property_types;
 BOOST_AUTO_TEST_SUITE(association_indexer)
 
 BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_association_indexer) {
-    // SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_association_indexer");
+    SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_association_indexer");
 
-    // auto a(factory.build_empty_model());
-    // BOOST_REQUIRE(a.objects().empty());
-    // BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    auto a(factory.build_empty_model());
+    const auto e(factory.build_empty_model());
+    BOOST_REQUIRE(a.objects().empty());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
-    // const auto e(a);
-    // dogen::sml::association_indexer i;
-    // i.index(a);
-    // BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
-    // BOOST_CHECK(asserter::assert_object(e, a));
+    dogen::sml::association_indexer i;
+    i.index(a);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    BOOST_CHECK(asserter::assert_object(e, a));
 }
 
 BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_association_indexer) {
-    // SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_association_indexer");
+    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_association_indexer");
 
-    // auto a(factory.build_single_type_model());
-    // BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
-    // BOOST_REQUIRE(a.objects().size() == 1);
+    auto a(factory.build_single_type_model());
+    const auto e(factory.build_single_type_model());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    BOOST_REQUIRE(a.objects().size() == 1);
 
-    // const auto e(a);
-    // dogen::sml::association_indexer ind;
-    // ind.index(a);
-    // BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
-    // BOOST_CHECK(asserter::assert_object(e, a));
+    dogen::sml::association_indexer ind;
+    ind.index(a);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    BOOST_CHECK(asserter::assert_object(e, a));
 }
 
 BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) {
-    // SETUP_TEST_LOG_SOURCE("model_with_type_with_property_results_in_expected_indices");
+    SETUP_TEST_LOG_SOURCE("model_with_type_with_property_results_in_expected_indices");
 
-    // auto m(factory.object_with_property(object_types::value_object,
-    //         property_types::unsigned_int));
-    // BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    auto m(factory.object_with_property(object_types::value_object,
+            property_types::unsigned_int));
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-    // BOOST_REQUIRE(m.concepts().empty());
-    // BOOST_REQUIRE(m.enumerations().empty());
-    // BOOST_REQUIRE(m.primitives().size() == 1);
+    dogen::sml::association_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-    // BOOST_REQUIRE(m.objects().size() == 1);
-    // const auto& o(*m.objects().begin()->second);
-    // BOOST_REQUIRE(o.local_properties().size() == 1);
-    // BOOST_REQUIRE(o.inherited_properties().empty());
-    // BOOST_REQUIRE(o.all_properties().empty());
-    // BOOST_REQUIRE(o.relationships().empty());
+    BOOST_REQUIRE(m.objects().size() == 1);
 
-    // dogen::sml::association_indexer ind;
-    // ind.index(m);
-    // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    const auto& o(m.objects().begin()->second);
+    using dogen::sml::relationship_types;
+    const auto ra(relationship_types::regular_associations);
+    auto i(o.relationships().find(ra));
+    BOOST_REQUIRE(i != o.relationships().end());
+    BOOST_REQUIRE(i->second.size() == 1);
 
-    // BOOST_CHECK(m.concepts().empty());
-    // BOOST_CHECK(m.enumerations().empty());
-    // BOOST_CHECK(m.primitives().size() == 1);
-
-    // BOOST_CHECK(o.local_properties() == o.all_properties());
-    // BOOST_CHECK(o.inherited_properties().empty());
-    // BOOST_CHECK(o.relationships().empty());
+    const auto pa(relationship_types::pointer_associations);
+    i = o.relationships().find(pa);
+    BOOST_REQUIRE(i == o.relationships().end());
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
-    // SETUP_TEST_LOG_SOURCE("model_with_single_concept_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_concept_is_untouched_by_association_indexer");
 
-    // auto m(factory.build_single_concept_model());
-    // BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
-    // BOOST_REQUIRE(m.objects().size() == 1);
-    // const auto& o(*m.objects().begin()->second);
-    // BOOST_REQUIRE(o.local_properties().size() == 1);
-    // BOOST_REQUIRE(o.all_properties().empty());
+    auto a(factory.build_empty_model());
+    const auto e(factory.build_empty_model());
+    BOOST_REQUIRE(a.objects().empty());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
-    // using dogen::sml::relationship_types;
-    // const auto rt(relationship_types::modeled_concepts);
-    // const auto i(o.relationships().find(rt));
-    // BOOST_REQUIRE(i != o.relationships().end());
-    // BOOST_REQUIRE(i->second.size() == 1);
-
-    // BOOST_REQUIRE(m.concepts().size() == 1);
-    // const auto& c(m.concepts().begin()->second);
-    // BOOST_REQUIRE(c.local_properties().size() == 1);
-    // BOOST_REQUIRE(c.inherited_properties().empty());
-    // BOOST_REQUIRE(c.all_properties().empty());
-
-    // dogen::sml::association_indexer ind;
-    // ind.index(m);
-    // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
-
-    // BOOST_CHECK(c.local_properties().size() == 1);
-    // BOOST_REQUIRE(c.inherited_properties().empty());
-    // BOOST_CHECK(c.local_properties() == c.all_properties());
-    // BOOST_CHECK(i->second.size() == 1);
-
-    // // BOOST_CHECK(o.local_properties().size() == 1);
-    // BOOST_CHECK(o.inherited_properties().empty());
-    // // BOOST_CHECK(o.all_properties().size() == 2);
-    // for (const auto& p : o.all_properties()) {
-    //     BOOST_CHECK(p == *o.local_properties().begin() ||
-    //         p == *c.local_properties().begin());
-    // }
+    dogen::sml::association_indexer i;
+    i.index(a);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    BOOST_CHECK(asserter::assert_object(e, a));
 }
 
 BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expected_indices) {
-    // SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
+    SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
 
     // auto m(factory.build_first_degree_concepts_model());
     // BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
-    // BOOST_REQUIRE(m.objects().size() == 2);
-    // for (const auto& pair : m.objects()) {
-    //     const auto& qn(pair.first);
-    //     const auto& o(*pair.second);
-
-    //     if (factory.is_type_name_n(0, qn)) {
-    //         BOOST_REQUIRE(o.local_properties().empty());
-    //         BOOST_REQUIRE(o.inherited_properties().empty());
-    //         BOOST_REQUIRE(o.all_properties().empty());
-    //         BOOST_REQUIRE(o.modeled_concepts().size() == 1);
-    //     } else if (factory.is_type_name_n(1, qn)) {
-    //         BOOST_REQUIRE(o.local_properties().size() == 1);
-    //         BOOST_REQUIRE(o.inherited_properties().empty());
-    //         BOOST_REQUIRE(o.all_properties().empty());
-    //         BOOST_REQUIRE(o.modeled_concepts().size() == 1);
-    //     } else
-    //         BOOST_FAIL("Unexpected object: " << qn);
-    // }
-
-    // BOOST_REQUIRE(m.concepts().size() == 2);
-    // for (const auto& pair : m.concepts()) {
-    //     const auto& qn(pair.first);
-    //     const auto& c(pair.second);
-
-    //     BOOST_REQUIRE(c.local_properties().size() == 1);
-    //     BOOST_REQUIRE(c.all_properties().empty());
-    //     if (factory.is_concept_name_n(0, qn)) {
-    //         BOOST_REQUIRE(c.refines().empty());
-    //     } else if (factory.is_concept_name_n(1, qn)) {
-    //         BOOST_REQUIRE(c.refines().size() == 1);
-    //     } else
-    //         BOOST_FAIL("Unexpected concept: " << qn);
-    // }
 
     // dogen::sml::association_indexer ind;
     // ind.index(m);
     // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-    // for (const auto& pair : m.concepts()) {
-    //     const auto& qn(pair.first);
-    //     const auto& c(pair.second);
-
-    //     if (factory.is_concept_name_n(0, qn)) {
-    //         BOOST_CHECK(c.local_properties().size() == 1);
-    //         BOOST_CHECK(c.inherited_properties().empty());
-    //         BOOST_CHECK(c.local_properties() == c.all_properties());
-    //     } else if (factory.is_concept_name_n(1, qn)) {
-    //         BOOST_CHECK(c.local_properties().size() == 1);
-    //         BOOST_CHECK(c.inherited_properties().size() == 1);
-    //         BOOST_CHECK(c.all_properties().size() == 2);
-    //     } else
-    //         BOOST_FAIL("Unexpected concept: " << qn);
-    // }
+    // using dogen::sml::relationship_types;
+    // const auto ra(relationship_types::regular_associations);
+    // const auto pa(relationship_types::pointer_associations);
 
     // BOOST_REQUIRE(m.objects().size() == 2);
     // for (const auto& pair : m.objects()) {
     //     const auto& qn(pair.first);
-    //     const auto& o(*pair.second);
+    //     const auto& o(pair.second);
 
+    //     auto i(o.relationships().find(ra));
     //     if (factory.is_type_name_n(0, qn)) {
-    //         // BOOST_CHECK(o.local_properties().empty());
-    //         BOOST_CHECK(o.inherited_properties().empty());
-    //         // BOOST_CHECK(o.all_properties().size() == 1);
-    //         BOOST_CHECK(o.modeled_concepts().size() == 1);
+    //         BOOST_REQUIRE(i != o.relationships().end());
+    //         BOOST_REQUIRE(i->second.size() == 1);
+
+    //         i = o.relationships().find(pa);
+    //         BOOST_REQUIRE(i == o.relationships().end());
     //     } else if (factory.is_type_name_n(1, qn)) {
-    //         // BOOST_CHECK(o.local_properties().size() == 1);
-    //         BOOST_CHECK(o.inherited_properties().empty());
-    //         // BOOST_CHECK(o.all_properties().size() == 3);
-    //         // BOOST_CHECK(o.modeled_concepts().size() == 2);
+    //         BOOST_REQUIRE(i != o.relationships().end());
+    //         BOOST_REQUIRE(i->second.size() == 1);
+
+    //         i = o.relationships().find(pa);
+    //         BOOST_REQUIRE(i == o.relationships().end());
     //     } else
     //         BOOST_FAIL("Unexpected object: " << qn);
     // }
 }
-
 BOOST_AUTO_TEST_SUITE_END()

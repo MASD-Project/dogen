@@ -37,255 +37,97 @@ namespace {
 
 auto lg(logger_factory("sml.association_indexer"));
 
-const std::string relationship_not_found(
-    "Could not find relationship in object. Details: ");
-const std::string object_not_found("Object not found in model: ");
-const std::string concept_not_found("Concept not found in concept container: ");
+const std::string object_not_found("Object not found in object container: ");
 
 }
 
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Add comparable support for qnames.
- *
- * This is required as part of the current (very sub-optimal)
- * implementation of concept processing.
- */
-inline bool operator<(const qname& lhs, const qname& rhs) {
-    return
-        lhs.model_name() < rhs.model_name() ||
-        (lhs.model_name() == rhs.model_name() &&
-            (lhs.external_module_path() < rhs.external_module_path() ||
-                (lhs.external_module_path() == rhs.external_module_path() &&
-                    (lhs.simple_name() < rhs.simple_name()))));
-}
+class association_indexer::context {
+public:
+    context(sml::model& m) : model_(m) { }
 
-object& association_indexer::find_object(const qname& qn, model& m) {
-    auto i(m.objects().find(qn));
-    if (i == m.objects().end()) {
+public:
+    sml::model& model() { return model_; }
+
+private:
+    sml::model& model_;
+};
+
+void association_indexer::recurse_nested_qnames(object& o,
+    const nested_qname& nqn, bool& is_pointer) const {
+    const auto qn(nqn.type());
+    auto& rels(o.relationships());
+    if (is_pointer)
+        rels[relationship_types::pointer_associations].push_back(qn);
+    else
+        rels[relationship_types::regular_associations].push_back(qn);
+
+    const auto i(context_->model().primitives().find(qn));
+    if (i != context_->model().primitives().end()) {
+        is_pointer = false;
+        return;
+    }
+
+    const auto j(context_->model().enumerations().find(qn));
+    if (j != context_->model().enumerations().end()) {
+        is_pointer = false;
+        return;
+    }
+
+    const auto k(context_->model().objects().find(qn));
+    if (k == context_->model().objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
         BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
                 boost::lexical_cast<std::string>(qn)));
     }
-    return i->second;
+
+    const auto sp(sml::object_types::smart_pointer);
+    is_pointer = k->second.object_type() == sp;
+
+    for (const auto c : nqn.children())
+        recurse_nested_qnames(o, c, is_pointer);
+
 }
 
-std::list<qname>& association_indexer::
-find_relationships(const relationship_types rt, object& o) {
-    auto i(o.relationships().find(rt));
-    if (i == o.relationships().end() || i->second.empty()) {
-        BOOST_LOG_SEV(lg, error) << relationship_not_found << o.name()
-                                 << " relationship: " << rt;
+void association_indexer::index_object(object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().simple_name();
 
-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found +
-                boost::lexical_cast<std::string>(o.name())));
-    }
-    return i->second;
-}
-
-concept& association_indexer::find_concept(const qname& qn, model& m) {
-    auto i(m.concepts().find(qn));
-    if (i == m.concepts().end()) {
-        const auto& sn(qn.simple_name());
-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
-    }
-    return i->second;
-}
-
-void association_indexer::
-populate_all_properties(object& o, model& m) {
-    for (const auto& pair : o.inherited_properties()) {
-        o.all_properties().insert(o.all_properties().end(),
-            pair.second.begin(), pair.second.end());
+    for (const auto& p : o.local_properties()) {
+        const auto nqn(p.type());
+        bool is_pointer(nqn.is_pointer());
+        recurse_nested_qnames(o, nqn, is_pointer);
     }
 
-    o.all_properties().insert(o.all_properties().end(),
-        o.local_properties().begin(), o.local_properties().end());
-
-    const auto rt(relationship_types::modeled_concepts);
-    const auto i(o.relationships().find(rt));
-    if (i == o.relationships().end() || i->second.empty())
-        return;
-
-    for (const auto& qn : i->second) {
-        const auto& c(find_concept(qn, m));
-        o.local_properties().insert(o.local_properties().end(),
-            c.local_properties().begin(), c.local_properties().end());
-    }
-}
-
-void association_indexer::
-index_object(object& parent, object& leaf, model& m) {
-    const auto mc(relationship_types::modeled_concepts);
-    const auto i(parent.relationships().find(mc));
-    const bool has_concepts(i != parent.relationships().end() &&
-        !i->second.empty());
-
-    std::set<qname> our_concepts;
-    if (has_concepts) {
-        // perform concept expansion
-        for (const auto& qn : i->second) {
-            const auto& c(find_concept(qn, m));
-
-            // add concepts we model directly
-            our_concepts.insert(c.name());
-
-            // add concepts refined by our concept
-            our_concepts.insert(c.refines().begin(), c.refines().end());
+    for (const auto& op : o.operations()) {
+        for (const auto& p : op.parameters()) {
+            bool is_pointer(p.type().is_pointer());
+            recurse_nested_qnames(o, p.type(), is_pointer);
         }
-    }
 
-    const bool is_root(!parent.is_child());
-    std::set<qname> their_concepts;
-    if (is_root) {
-        auto& op(leaf.relationships()[relationship_types::original_parents]);
-        op.push_back(parent.name());
+        if (!op.type())
+            continue;
 
-        auto& l(parent.relationships()[relationship_types::leaves]);
-        l.push_back(leaf.name());
-    } else {
-        const auto rt(relationship_types::parents);
-        std::set<qname> gp_modeled_concepts;
-        for (const auto& qn : find_relationships(rt, parent)) {
-            auto& grand_parent(find_object(qn, m));
-            index_object(grand_parent, leaf, m);
-
-            parent.inherited_properties().insert(
-                std::make_pair(grand_parent.name(),
-                    grand_parent.all_properties()));
-
-            const auto i(grand_parent.relationships().find(mc));
-            if (i == grand_parent.relationships().end() || i->second.empty())
-                continue;
-
-            if (has_concepts) {
-                // add all concepts modeled by our grand parent
-                their_concepts.insert(i->second.begin(), i->second.end());
-            }
-        }
-    }
-
-    populate_all_properties(parent, m);
-
-    /* we want to only model concepts which have not yet been modeled
-     * by any of our grand parents.
-     */
-    std::set<qname> result;
-    std::set_difference(our_concepts.begin(), our_concepts.end(),
-        their_concepts.begin(), their_concepts.end(),
-        std::inserter(result, result.end()));
-
-    // preserve qname order.
-    auto tmp(i->second);
-    i->second.clear();
-    for (const auto& qn : tmp) {
-        if (result.find(qn) != result.end())
-            i->second.push_back(qn);
+        const auto nqn(*op.type());
+        bool is_pointer(nqn.is_pointer());
+        recurse_nested_qnames(o, nqn, is_pointer);
     }
 }
 
-void association_indexer::index_objects(model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing inheritance. Objects: "
-                             << m.objects().size();
+void association_indexer::index(model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
+    context_ = std::unique_ptr<context>(new context(m));
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        const bool in_inheritance_relationship(o.is_parent() || o.is_child());
-        if (!in_inheritance_relationship) {
-            const auto mc(relationship_types::modeled_concepts);
-            const auto i(o.relationships().find(mc));
-
-            std::list<qname> expanded_modeled_concepts;
-            if (i != o.relationships().end() && !i->second.empty()) {
-                for (const auto& qn : i->second) {
-                    const auto& c(find_concept(qn, m));
-
-                    // add concepts we model directly
-                    expanded_modeled_concepts.push_back(c.name());
-
-                    // add concepts our parent models
-                    expanded_modeled_concepts.insert(
-                        expanded_modeled_concepts.end(),
-                        c.refines().begin(), c.refines().end());
-                }
-
-                i->second = expanded_modeled_concepts;
-            }
-            populate_all_properties(o, m);
-            continue;
-        }
-
-        const bool is_leaf(o.is_parent() && !o.is_child());
-        if (!is_leaf)
-            continue;
-
-        const auto rt(relationship_types::parents);
-        for (const auto& qn : find_relationships(rt, o)) {
-            auto& parent(find_object(qn, m));
-            index_object(parent, o, m);
-        }
+        index_object(o);
     }
-}
-
-void association_indexer::index_concept(concept& c, model& m,
-    std::unordered_set<sml::qname>& processed_qnames) {
-    if (processed_qnames.find(c.name()) != processed_qnames.end())
-        return;
-
-    c.all_properties().insert(c.all_properties().end(),
-        c.local_properties().begin(), c.local_properties().end());
-
-    if (c.refines().empty()) {
-        processed_qnames.insert(c.name());
-        return;
-    }
-
-    std::list<qname> expanded_refines;
-    for (auto& qn : c.refines()) {
-        auto& parent(find_concept(qn, m));
-        index_concept(parent, m, processed_qnames);
-
-        // add concepts we refine directly
-        expanded_refines.push_back(qn);
-
-        // add concepts our parents refine
-        expanded_refines.insert(expanded_refines.end(),
-            parent.refines().begin(), parent.refines().end());
-
-        // collect our parent's properties
-        c.inherited_properties().insert(std::make_pair(parent.name(),
-                parent.all_properties()));
-        c.all_properties().insert(c.all_properties().end(),
-            parent.all_properties().begin(), parent.all_properties().end());
-    }
-
-    c.refines(expanded_refines);
-    processed_qnames.insert(c.name());
-}
-
-void association_indexer::index_concepts(model& m) {
-    std::unordered_set<sml::qname> processed_qnames;
-
-    for (auto& pair : m.concepts()) {
-        auto& c(pair.second);
-
-        if (c.generation_type() == generation_types::no_generation)
-            continue;
-
-        index_concept(c, m, processed_qnames);
-    }
-}
-
-void association_indexer::index(model& m) {
-    index_concepts(m);
-    index_objects(m);
+    context_ = std::unique_ptr<context>();
 }
 
 } }

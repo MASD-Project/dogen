@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-16 Mon 18:46]
+Clock summary at [2013-12-17 Tue 00:11]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *1:47* |      |      |
+| *Total time*                                                 | *2:56* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 1:47 |      |
+| Development Stories Implemented                              |        | 2:56 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:04 |
 | COMPLETED Use relationship container for visitors            |        |      | 1:13 |
-| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 0:30 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 1:39 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -38,11 +38,48 @@ Use compilation downtime to update the manual.
 We need to store the two-way relationships related to visitation.
 
 *** IMPLEMENTATION Create an =association_indexer= and add tests      :story:
-**** IMPLEMENTATION Create the class skeleton with tests               :task:
+**** COMPLETED Remove unnecessary extractor methods                   :spike:
+     CLOSED: [2013-12-16 Mon 23:35]
+     CLOCK: [2013-12-16 Mon 23:28]--[2013-12-16 Mon 23:35] =>  0:07
+
+We forgot to remove some methods in extractor that are no longer
+necessary:
+
+- properties for concept: we have done concept and property expansion
+  now, so all we need to do is to look at local properties.
+- extract inheritance graph: no one is using this functionality.
+
+Get rid of these methods to avoid confusing the analysis for
+association indexer.
+
+**** COMPLETED Create the class skeleton with tests                    :task:
+     CLOSED: [2013-12-17 Tue 00:10]
+     CLOCK: [2013-12-16 Mon 23:01]--[2013-12-16 Mon 23:28] =>  0:27
      CLOCK: [2013-12-16 Mon 18:30]--[2013-12-16 Mon 18:45] =>  0:15
      CLOCK: [2013-12-13 Fri 18:07]--[2013-12-13 Fri 18:17] =>  0:10
      CLOCK: [2013-12-13 Fri 08:43]--[2013-12-13 Fri 08:48] =>  0:05
 
+**** IMPLEMENTATION Implement class and add unit tests                 :task:
+     CLOCK: [2013-12-16 Mon 23:35]--[2013-12-17 Tue 00:10] =>  0:35
+
 **** Plug into workflow                                                :task:
 **** Start using indexed associations                                  :task:
 ** Deprecated Development Stories
+*** CANCELLED Move extractor from C++ model into SML                  :story:
+    CLOSED: [2013-12-16 Mon 23:37]
+
+New understanding: this will largely be achieved through the
+implementation of the association indexer. We will still have an
+extractor in SML to C++ but it will be a simple aggregator of
+relationships and will only live until we move over to =om=.
+
+Old Understanding: Extractor and relationships should be moved into
+SML. The C++ specific bits are the parts where we directly name types
+such as =has_std_string=, etc. These should be generalised, such that
+the user could pass in a list of types to the extractor and then we'd
+return them with a bool for whether we seen them or not.
+
+We should also remove the references to =forward_decls= directly and
+instead have something like "pointer only" dependencies or some such
+SML level concept and then interpret this dependency as a forward
+declaration at the C++ level.
