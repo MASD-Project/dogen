@@ -8,6 +8,36 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create the notion of toggle-able features                         :story:
+
+Often we want to disable some of the "abilities" of dogen. We
+arbitrarily call one such "ability" a _feature_. There are several
+reasons one may want to disable a feature:
+
+- we may not want to run tests for it; for instance, the machine where
+  we're compiling on doesn't have some supporting libraries (EOS, ODB,
+  etc). However, we still want the final binary to be able to produce
+  code with those features in.
+- we may not want dogen to generate code for a feature; for instance,
+  because its not required by the end-user for a specific use case.
+
+For the second case we need some command-line options that disable
+features. For the first case we want some compile time macros that
+disable tests according to the values of some macros; in addition, we
+must also automatically ensure these features are turned off for all
+other tests too. For example, if we disable EOS not only must we not
+compile and run the EOS tests, but we must also make sure the existing
+tests that have code where the EOS feature is expressed are also
+"fixed" not to take into account EOS. We do not know how to do this.
+
+This is a very big problem because it means that in order to compile
+dogen and run all tests you need to have the super-set of all
+libraries required by all features. For instance we cannot disable
+serialisation altogether just because EOS has been disabled. In cases
+where the feature maps directly to a facet, we still have a problem -
+whilst the code in git will contain the output of all features, the
+local code will only have a subset of those, and the diffs will fail.
+
 *** Use lowercase for all meta-data keys                              :story:
 
 We have a number of legacy meta-data keys which are in uppercase and
