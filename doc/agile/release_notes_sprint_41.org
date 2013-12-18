@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-17 Tue 19:57]
+Clock summary at [2013-12-18 Wed 08:42]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *4:02* |      |      |
+| *Total time*                                                 | *4:49* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 4:02 |      |
-| IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:04 |
+| Development Stories Implemented                              |        | 4:49 |      |
+| IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:19 |
 | COMPLETED Use relationship container for visitors            |        |      | 1:13 |
-| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 2:45 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 3:17 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -82,11 +82,21 @@ properties container. However, we only add the relationship without
 copying.
 
 **** IMPLEMENTATION Implement class and add unit tests                 :task:
+     CLOCK: [2013-12-18 Wed 08:28]--[2013-12-18 Wed 08:42] =>  0:14
      CLOCK: [2013-12-18 Wed 08:11]--[2013-12-18 Wed 08:28] =>  0:17
      CLOCK: [2013-12-18 Wed 07:55]--[2013-12-18 Wed 07:56] =>  0:01
      CLOCK: [2013-12-17 Tue 11:44]--[2013-12-17 Tue 11:47] =>  0:03
      CLOCK: [2013-12-17 Tue 10:49]--[2013-12-17 Tue 10:52] =>  0:03
      CLOCK: [2013-12-16 Mon 23:35]--[2013-12-17 Tue 00:10] =>  0:35
+
+Missing tests:
+
+- object with multiple properties of different types, no duplicates
+- object with multiple properties of different types, duplicates
+- object with operation with single parameter
+- object with operation with multiple parameters
+- object with operation with return type
+- object with different types of nested qualified names
 
 **** Plug into workflow                                                :task:
 **** Start using indexed associations                                  :task:

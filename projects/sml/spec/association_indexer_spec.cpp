@@ -127,8 +127,8 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_index
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_more_than_one_property_of_the_same_type_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_more_than_one_property_of_the_same_type_results_in_expected_indices");
 
     auto m(factory.build_first_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
@@ -163,4 +163,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_FAIL("Unexpected object: " << qn);
     }
 }
+
+
+
 BOOST_AUTO_TEST_SUITE_END()
