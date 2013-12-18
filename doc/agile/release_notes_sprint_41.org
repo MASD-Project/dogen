@@ -23,6 +23,7 @@ Clock summary at [2013-12-17 Tue 19:57]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-18 Wed 07:56]--[2013-12-18 Wed 08:11] =>  0:15
     CLOCK: [2013-12-16 Mon 07:55]--[2013-12-16 Mon 07:59] =>  0:04
 
 *** Update manual                                                     :story:
@@ -81,6 +82,8 @@ properties container. However, we only add the relationship without
 copying.
 
 **** IMPLEMENTATION Implement class and add unit tests                 :task:
+     CLOCK: [2013-12-18 Wed 08:11]--[2013-12-18 Wed 08:28] =>  0:17
+     CLOCK: [2013-12-18 Wed 07:55]--[2013-12-18 Wed 07:56] =>  0:01
      CLOCK: [2013-12-17 Tue 11:44]--[2013-12-17 Tue 11:47] =>  0:03
      CLOCK: [2013-12-17 Tue 10:49]--[2013-12-17 Tue 10:52] =>  0:03
      CLOCK: [2013-12-16 Mon 23:35]--[2013-12-17 Tue 00:10] =>  0:35

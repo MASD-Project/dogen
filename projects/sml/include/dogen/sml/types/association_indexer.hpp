@@ -29,6 +29,8 @@
 #include <memory>
 #include <unordered_set>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
 
 namespace dogen {
@@ -71,6 +73,12 @@ private:
     class context;
 
 private:
+    /**
+     * @brief Removes duplicate qnames, preserving the original order
+     * of elements in the list.
+     */
+    void remove_duplicates(std::list<qname>& names) const;
+
     /**
      * @brief Iterates through the nested qname recursively, picking
      * up associations as it goes along.

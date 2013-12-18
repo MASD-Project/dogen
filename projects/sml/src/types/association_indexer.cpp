@@ -55,6 +55,28 @@ private:
     sml::model& model_;
 };
 
+void association_indexer::remove_duplicates(std::list<qname>& names) const {
+    std::unordered_set<sml::qname> processed;
+
+    BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
+                             << names.size();
+
+    auto i(names.begin());
+    while (i != names.end()) {
+        const auto qn(*i);
+        if (processed.find(qn) != processed.end()) {
+            const auto j(i++);
+            names.erase(j);
+            continue;
+        }
+        ++i;
+        processed.insert(qn);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
+                             << names.size();
+}
+
 void association_indexer::recurse_nested_qnames(object& o,
     const nested_qname& nqn, bool& is_pointer) const {
     const auto qn(nqn.type());
@@ -113,6 +135,14 @@ void association_indexer::index_object(object& o) {
         bool is_pointer(nqn.is_pointer());
         recurse_nested_qnames(o, nqn, is_pointer);
     }
+
+    auto i(o.relationships().find(relationship_types::pointer_associations));
+    if (i != o.relationships().end())
+        remove_duplicates(i->second);
+
+    i = o.relationships().find(relationship_types::regular_associations);
+    if (i != o.relationships().end())
+        remove_duplicates(i->second);
 }
 
 void association_indexer::index(model& m) {

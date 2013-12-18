@@ -115,7 +115,6 @@ void concept_indexer::remove_duplicates(std::list<qname>& names) const {
 
     BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
                              << names.size();
-
 }
 
 void concept_indexer::index_object(object& o, model& m,

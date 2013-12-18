@@ -130,37 +130,37 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_index
 BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
 
-    // auto m(factory.build_first_degree_concepts_model());
-    // BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    auto m(factory.build_first_degree_concepts_model());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
-    // dogen::sml::association_indexer ind;
-    // ind.index(m);
-    // BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::sml::association_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-    // using dogen::sml::relationship_types;
-    // const auto ra(relationship_types::regular_associations);
-    // const auto pa(relationship_types::pointer_associations);
+    using dogen::sml::relationship_types;
+    const auto ra(relationship_types::regular_associations);
+    const auto pa(relationship_types::pointer_associations);
 
-    // BOOST_REQUIRE(m.objects().size() == 2);
-    // for (const auto& pair : m.objects()) {
-    //     const auto& qn(pair.first);
-    //     const auto& o(pair.second);
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(pair.second);
 
-    //     auto i(o.relationships().find(ra));
-    //     if (factory.is_type_name_n(0, qn)) {
-    //         BOOST_REQUIRE(i != o.relationships().end());
-    //         BOOST_REQUIRE(i->second.size() == 1);
+        auto i(o.relationships().find(ra));
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_REQUIRE(i->second.size() == 1);
 
-    //         i = o.relationships().find(pa);
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //     } else if (factory.is_type_name_n(1, qn)) {
-    //         BOOST_REQUIRE(i != o.relationships().end());
-    //         BOOST_REQUIRE(i->second.size() == 1);
+            i = o.relationships().find(pa);
+            BOOST_REQUIRE(i == o.relationships().end());
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_REQUIRE(i->second.size() == 1);
 
-    //         i = o.relationships().find(pa);
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //     } else
-    //         BOOST_FAIL("Unexpected object: " << qn);
-    // }
+            i = o.relationships().find(pa);
+            BOOST_REQUIRE(i == o.relationships().end());
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
 }
 BOOST_AUTO_TEST_SUITE_END()
