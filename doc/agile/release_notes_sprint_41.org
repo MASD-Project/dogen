@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-18 Wed 08:42]
+Clock summary at [2013-12-19 Thu 18:38]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *4:49* |      |      |
+| *Total time*                                                 | *5:35* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 4:49 |      |
+| Development Stories Implemented                              |        | 5:35 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:19 |
 | COMPLETED Use relationship container for visitors            |        |      | 1:13 |
-| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 3:17 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 4:03 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -82,6 +82,7 @@ properties container. However, we only add the relationship without
 copying.
 
 **** IMPLEMENTATION Implement class and add unit tests                 :task:
+     CLOCK: [2013-12-19 Thu 17:52]--[2013-12-19 Thu 18:38] =>  0:46
      CLOCK: [2013-12-18 Wed 08:28]--[2013-12-18 Wed 08:42] =>  0:14
      CLOCK: [2013-12-18 Wed 08:11]--[2013-12-18 Wed 08:28] =>  0:17
      CLOCK: [2013-12-18 Wed 07:55]--[2013-12-18 Wed 07:56] =>  0:01

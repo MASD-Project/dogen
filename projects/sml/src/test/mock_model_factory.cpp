@@ -1278,4 +1278,85 @@ object_with_missing_third_degree_parent_in_different_models() const {
     return std::array<model, 4>{{ m0, m1, m2 }};
 }
 
+model mock_model_factory::object_with_group_of_properties_of_different_types(
+    const bool repeat_group) const {
+    model r(build_empty_model(0));
+    const auto mn(r.name());
+
+    auto o0(build_value_object(0, mn));
+    const auto lambda([&](const property& p) {
+            o0.local_properties().push_back(p);
+            if (flags_.properties_indexed())
+                o0.all_properties().push_back(p);
+        });
+
+    auto o1(build_value_object(1, mn));
+    auto p0(mock_property(0, property_types::value_object, o1.name()));
+    lambda(p0);
+    insert_object(r, o1);
+
+    auto p1(mock_property(1));
+    lambda(p1);
+    primitive ui;
+    ui.name(p1.type().type());
+    insert_nameable(r.primitives(), ui);
+
+    auto p2(mock_property(2, property_types::boost_shared_ptr, o1.name()));
+    lambda(p2);
+    qname qn;
+    qn.simple_name("shared_ptr");
+    qn.model_name("boost");
+
+    object o2;
+    o2.name(qn);
+    o2.object_type(dogen::sml::object_types::smart_pointer);
+    insert_object(r, o2);
+
+    primitive b;
+    b.name().simple_name(boolean);
+    r.primitives().insert(std::make_pair(b.name(), b));
+
+    qn.simple_name("pair");
+    qn.model_name("std");
+
+    object o3;
+    o3.name(qn);
+    o3.object_type(dogen::sml::object_types::user_defined_value_object);
+    insert_object(r, o3);
+    auto p3(mock_property(3, property_types::value_object, o3.name()));
+    lambda(p3);
+
+    if (repeat_group) {
+        auto p4(mock_property(4, property_types::value_object, o1.name()));
+        lambda(p4);
+
+        auto p5(mock_property(5));
+        lambda(p5);
+
+        auto p6(mock_property(6, property_types::boost_shared_ptr, o1.name()));
+        lambda(p6);
+
+        auto p7(mock_property(7, property_types::value_object, o3.name()));
+        lambda(p7);
+    }
+
+    return r;
+}
+
+model mock_model_factory::object_with_operation_with_single_parameter() const {
+    model r;
+    return r;
+}
+
+model mock_model_factory::
+object_with_operation_with_multiple_parameters() const {
+    model r;
+    return r;
+}
+
+model mock_model_factory::object_with_operation_with_return_type() const {
+    model r;
+    return r;
+}
+
 } } }

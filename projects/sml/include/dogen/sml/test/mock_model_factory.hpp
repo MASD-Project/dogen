@@ -441,6 +441,35 @@ public:
     std::array<model, 4>
     object_with_missing_third_degree_parent_in_different_models() const;
 
+public:
+    /**
+     * @brief Returns a model with a single object that contains one
+     * or two instances of a group of properties of different types.
+     *
+     * @param repeat_group if true, adds two instances of the group,
+     * otherwise just one.
+     */
+    model object_with_group_of_properties_of_different_types(
+        const bool repeat_group = false) const;
+
+    /**
+     * @brief Returns a model with a single object that contains one
+     * operation with a single parameter.
+     */
+    model object_with_operation_with_single_parameter() const;
+
+    /**
+     * @brief Returns a model with a single object that contains one
+     * operation with a several parameters.
+     */
+    model object_with_operation_with_multiple_parameters() const;
+
+    /**
+     * @brief Returns a model with a single object that contains one
+     * operation with a return type.
+     */
+    model object_with_operation_with_return_type() const;
+
 private:
     const flags flags_;
 };
