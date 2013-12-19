@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-19 Thu 23:43]
+Clock summary at [2013-12-19 Thu 23:54]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *6:27* |      |      |
+| *Total time*                                                 | *6:37* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 6:27 |      |
+| Development Stories Implemented                              |        | 6:37 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:19 |
 | COMPLETED Use relationship container for visitors            |        |      | 1:13 |
-| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 4:55 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 5:05 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -101,7 +101,14 @@ Missing tests:
 - object with operation with return type
 - object with different types of nested qualified names
 
-**** Plug into workflow                                                :task:
+**** COMPLETED Plug into workflow                                      :task:
+     CLOSED: [2013-12-19 Thu 23:53]
+     CLOCK: [2013-12-19 Thu 23:43]--[2013-12-19 Thu 23:53] =>  0:10
+
+Unexpectedly, nothing to rebaseline. this is because engine specs
+compare the code generator output rather than the contents of the SML
+model and relationships are not yet expressed in code.
+
 **** Start using indexed associations                                  :task:
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:

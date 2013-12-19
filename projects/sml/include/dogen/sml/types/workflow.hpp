@@ -90,6 +90,11 @@ private:
      */
     void index_properties_activity(model& merged_model) const;
 
+    /**
+     * @brief Index all associations of all objects in model.
+     */
+    void index_associations_activity(model& merged_model) const;
+
 private:
     /**
      * @brief Returns true if there are any types that require code

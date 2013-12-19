@@ -30,6 +30,7 @@
 #include "dogen/sml/types/meta_data_tagger.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
+#include "dogen/sml/types/association_indexer.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 namespace {
@@ -134,6 +135,11 @@ void workflow::index_properties_activity(model& merged_model) const {
     indexer.index(merged_model);
 }
 
+void workflow::index_associations_activity(model& merged_model) const {
+    association_indexer indexer;
+    indexer.index(merged_model);
+}
+
 std::pair<bool, model> workflow::
 execute(model target, std::list<model> user_models) const {
     const auto library_models(load_library_models_activity());
@@ -143,6 +149,7 @@ execute(model target, std::list<model> user_models) const {
     tag_model_activity(r);
     index_concepts_activity(r);
     index_properties_activity(r);
+    index_associations_activity(r);
     return std::pair<bool, model> { has_generatable_types(r), r };
 }
 
