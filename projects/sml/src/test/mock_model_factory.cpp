@@ -41,6 +41,8 @@ const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
 const std::string concept_name_prefix("some_concept_");
 const std::string property_name_prefix("some_property_");
+const std::string operation_name_prefix("some_operation_");
+const std::string parameter_name_prefix("some_parameter_");
 const std::string module_name_prefix("some_module_");
 const std::string visitor_postfix("_visitor");
 const std::string versioned_postfix("_versioned");
@@ -83,6 +85,18 @@ std::string model_name(const unsigned int i) {
 std::string property_name(const unsigned int i) {
     std::ostringstream stream;
     stream << property_name_prefix << i;
+    return stream.str();
+}
+
+std::string operation_name(const unsigned int i) {
+    std::ostringstream stream;
+    stream << operation_name_prefix << i;
+    return stream.str();
+}
+
+std::string parameter_name(const unsigned int i) {
+    std::ostringstream stream;
+    stream << parameter_name_prefix << i;
     return stream.str();
 }
 
@@ -1339,23 +1353,89 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
         auto p7(mock_property(7, property_types::value_object, o3.name()));
         lambda(p7);
     }
-
+    insert_object(r, o0);
     return r;
 }
 
 model mock_model_factory::object_with_operation_with_single_parameter() const {
-    model r;
+    model r(build_empty_model(0));
+    const auto mn(r.name());
+
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    insert_nameable(r.primitives(), ui);
+
+    auto o0(build_value_object(0, mn));
+    parameter p;
+    nested_qname nqn(mock_nested_qname(ui.name()));
+    p.type(nqn);
+    p.name(parameter_name(0));
+
+    operation op;
+    op.name(operation_name(0));
+    op.parameters().push_back(p);
+
+    o0.operations().push_back(op);
+    insert_object(r, o0);
     return r;
 }
 
 model mock_model_factory::
 object_with_operation_with_multiple_parameters() const {
-    model r;
+    model r(build_empty_model(0));
+    const auto mn(r.name());
+
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    insert_nameable(r.primitives(), ui);
+
+    auto o0(build_value_object(0, mn));
+
+    parameter p0;
+    p0.type(mock_nested_qname(ui.name()));
+    p0.name(parameter_name(0));
+
+    parameter p1;
+    p1.type(mock_nested_qname_shared_ptr(ui.name()));
+    p1.name(parameter_name(0));
+
+    operation op;
+    op.name(operation_name(0));
+    op.parameters().push_back(p0);
+    op.parameters().push_back(p1);
+
+    o0.operations().push_back(op);
+    insert_object(r, o0);
+
+    qname qn;
+    qn.simple_name("shared_ptr");
+    qn.model_name("boost");
+
+    object o1;
+    o1.name(qn);
+    o1.object_type(dogen::sml::object_types::smart_pointer);
+    insert_object(r, o1);
+
     return r;
 }
 
 model mock_model_factory::object_with_operation_with_return_type() const {
-    model r;
+    model r(build_empty_model(0));
+    const auto mn(r.name());
+
+    primitive ui;
+    ui.name().simple_name(unsigned_int);
+    insert_nameable(r.primitives(), ui);
+
+    auto o0(build_value_object(0, mn));
+
+    operation op;
+    op.name(operation_name(0));
+    op.type(mock_nested_qname(ui.name()));
+
+    o0.operations().push_back(op);
+    insert_object(r, o0);
+
     return r;
 }
 

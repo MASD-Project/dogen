@@ -106,11 +106,11 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) 
     const auto ra(relationship_types::regular_associations);
     auto i(o.relationships().find(ra));
     BOOST_REQUIRE(i != o.relationships().end());
-    BOOST_REQUIRE(i->second.size() == 1);
+    BOOST_CHECK(i->second.size() == 1);
 
     const auto pa(relationship_types::pointer_associations);
     i = o.relationships().find(pa);
-    BOOST_REQUIRE(i == o.relationships().end());
+    BOOST_CHECK(i == o.relationships().end());
 }
 
 BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_indexer) {
@@ -149,16 +149,16 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, qn)) {
             BOOST_REQUIRE(i != o.relationships().end());
-            BOOST_REQUIRE(i->second.size() == 1);
+            BOOST_CHECK(i->second.size() == 1);
 
             i = o.relationships().find(pa);
-            BOOST_REQUIRE(i == o.relationships().end());
+            BOOST_CHECK(i == o.relationships().end());
         } else if (factory.is_type_name_n(1, qn)) {
             BOOST_REQUIRE(i != o.relationships().end());
-            BOOST_REQUIRE(i->second.size() == 1);
+            BOOST_CHECK(i->second.size() == 1);
 
             i = o.relationships().find(pa);
-            BOOST_REQUIRE(i == o.relationships().end());
+            BOOST_CHECK(i == o.relationships().end());
         } else
             BOOST_FAIL("Unexpected object: " << qn);
     }
@@ -174,37 +174,177 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
-    // using dogen::sml::relationship_types;
-    // const auto ra(relationship_types::regular_associations);
-    // const auto pa(relationship_types::pointer_associations);
+    using dogen::sml::relationship_types;
+    const auto ra(relationship_types::regular_associations);
+    const auto pa(relationship_types::pointer_associations);
 
-    // BOOST_REQUIRE(m.objects().size() == 4);
-    // for (const auto& pair : m.objects()) {
-    //     const auto& qn(pair.first);
-    //     const auto& o(pair.second);
+    BOOST_REQUIRE(m.objects().size() == 4);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(pair.second);
 
-    //     auto i(o.relationships().find(ra));
-    //     if (factory.is_type_name_n(0, qn)) {
-    //         BOOST_REQUIRE(i != o.relationships().end());
-    //         BOOST_REQUIRE(i->second.size() == 4);
+        auto i(o.relationships().find(ra));
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 4);
 
-    //         i = o.relationships().find(pa);
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //     } else if (factory.is_type_name_n(1, qn)) {
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //         i = o.relationships().find(pa);
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //     } else if (factory.is_type_name_n(2, qn)) {
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //         i = o.relationships().find(pa);
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //     } else if (factory.is_type_name_n(3, qn)) {
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //         i = o.relationships().find(pa);
-    //         BOOST_REQUIRE(i == o.relationships().end());
-    //     } else
-    //         BOOST_FAIL("Unexpected object: " << qn);
-    // }
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 1);
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_CHECK(i == o.relationships().end());
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i == o.relationships().end());
+        } else if (factory.is_type_name_n(2, qn)) {
+            BOOST_CHECK(i == o.relationships().end());
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i == o.relationships().end());
+        } else if (factory.is_type_name_n(3, qn)) {
+            BOOST_CHECK(i == o.relationships().end());
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i == o.relationships().end());
+        }
+        // ignore boost shared ptr, pair, etc
+    }
+}
+
+BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_types_that_are_repeated_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_properties_of_different_types_that_are_repeated_results_in_expected_indices");
+
+    auto m(factory.object_with_group_of_properties_of_different_types(
+            true/*repeat_group*/));
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+
+    dogen::sml::association_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+
+    using dogen::sml::relationship_types;
+    const auto ra(relationship_types::regular_associations);
+    const auto pa(relationship_types::pointer_associations);
+
+    BOOST_REQUIRE(m.objects().size() == 4);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(pair.second);
+
+        auto i(o.relationships().find(ra));
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 4);
+
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 1);
+        } else if (factory.is_type_name_n(1, qn)) {
+            BOOST_CHECK(i == o.relationships().end());
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i == o.relationships().end());
+        } else if (factory.is_type_name_n(2, qn)) {
+            BOOST_CHECK(i == o.relationships().end());
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i == o.relationships().end());
+        } else if (factory.is_type_name_n(3, qn)) {
+            BOOST_CHECK(i == o.relationships().end());
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i == o.relationships().end());
+        }
+        // ignore boost shared ptr, pair, etc
+    }
+}
+
+BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_single_parameter_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_operation_with_single_parameter_results_in_expected_indices");
+
+    auto m(factory.object_with_operation_with_single_parameter());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+
+    dogen::sml::association_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+
+    using dogen::sml::relationship_types;
+    const auto ra(relationship_types::regular_associations);
+    const auto pa(relationship_types::pointer_associations);
+
+    BOOST_REQUIRE(m.objects().size() == 1);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(pair.second);
+
+        auto i(o.relationships().find(ra));
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 1);
+
+            i = o.relationships().find(pa);
+            BOOST_CHECK(i == o.relationships().end());
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_multiple_parameters_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_operation_with_multiple_parameters_results_in_expected_indices");
+
+    auto m(factory.object_with_operation_with_multiple_parameters());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+
+    dogen::sml::association_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+
+    using dogen::sml::relationship_types;
+    const auto ra(relationship_types::regular_associations);
+    const auto pa(relationship_types::pointer_associations);
+
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(pair.second);
+
+        auto i(o.relationships().find(ra));
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 2);
+
+            i = o.relationships().find(pa);
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 1);
+        }
+        // ignore boost shared ptr
+    }
+}
+
+BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_return_type_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_operation_with_return_type_results_in_expected_indices");
+
+    auto m(factory.object_with_operation_with_return_type());
+    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+
+    dogen::sml::association_indexer ind;
+    ind.index(m);
+    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+
+    using dogen::sml::relationship_types;
+    const auto ra(relationship_types::regular_associations);
+    const auto pa(relationship_types::pointer_associations);
+
+    BOOST_REQUIRE(m.objects().size() == 1);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        const auto& o(pair.second);
+
+        auto i(o.relationships().find(ra));
+        if (factory.is_type_name_n(0, qn)) {
+            BOOST_REQUIRE(i != o.relationships().end());
+            BOOST_CHECK(i->second.size() == 1);
+
+            i = o.relationships().find(pa);
+            BOOST_REQUIRE(i == o.relationships().end());
+        } else
+            BOOST_FAIL("Unexpected object: " << qn);
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()
