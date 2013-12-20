@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-19 Thu 23:54]
+Clock summary at [2013-12-20 Fri 08:24]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *6:37* |      |      |
+| *Total time*                                                 | *7:23* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 6:37 |      |
+| Development Stories Implemented                              |        | 7:23 |      |
 | IMPLEMENTATION Release notes and backlog grooming            |        |      | 0:19 |
 | COMPLETED Use relationship container for visitors            |        |      | 1:13 |
-| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 5:05 |
+| IMPLEMENTATION Create an =association_indexer= and add tests |        |      | 5:51 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -108,6 +108,12 @@ Missing tests:
 Unexpectedly, nothing to rebaseline. this is because engine specs
 compare the code generator output rather than the contents of the SML
 model and relationships are not yet expressed in code.
+
+**** IMPLEMENTATION Copy across applicable extractor tests            :spike:
+     CLOCK: [2013-12-20 Fri 07:38]--[2013-12-20 Fri 08:24] =>  0:46
+
+We appear to have forgotten to copy the extractor tests that make
+sense for the association indexer.
 
 **** Start using indexed associations                                  :task:
 ** Deprecated Development Stories

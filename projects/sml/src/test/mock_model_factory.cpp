@@ -1333,9 +1333,7 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
     qn.simple_name("pair");
     qn.model_name("std");
 
-    object o3;
-    o3.name(qn);
-    o3.object_type(dogen::sml::object_types::user_defined_value_object);
+    auto o3(build_value_object(3, mn));
     insert_object(r, o3);
     auto p3(mock_property(3, property_types::value_object, o3.name()));
     lambda(p3);
