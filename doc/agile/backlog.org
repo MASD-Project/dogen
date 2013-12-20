@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** It should be possible to add non-licensed files to om             :story:
+
+At present it seems we throw when somebody attempts to add a model to
+om that has no licence tag. We should just not add a license.
+
+The problem is in =om::workflow::extract_licence=.
+
 *** Use clang to generate system models                               :story:
 
 We should be able to create a clang based utility that given a set of
