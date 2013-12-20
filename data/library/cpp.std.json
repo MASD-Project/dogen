@@ -161,9 +161,9 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "set",
-            "value_object_type" : "associative_container",
+            "value_object_type" : "ordered_container",
             "meta_data" : {
-                "cpp.type.family" : "associative_container",
+                "cpp.type.family" : "ordered_container",
                 "cpp.domain.header.file_name" : "set",
                 "cpp.domain.header.is_system" : true,
                 "cpp.serialization.boost.header.file_name" : "boost/serialization/set.hpp",
@@ -173,9 +173,9 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "multiset",
-            "value_object_type" : "associative_container",
+            "value_object_type" : "ordered_container",
             "meta_data" : {
-                "cpp.type.family" : "associative_container",
+                "cpp.type.family" : "ordered_container",
                 "cpp.domain.header.file_name" : "multiset",
                 "cpp.domain.header.is_system" : true,
                 "cpp.serialization.boost.header.file_name" : "boost/serialization/multiset.hpp",
@@ -185,9 +185,9 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "unordered_set",
-            "value_object_type" : "associative_container",
+            "value_object_type" : "hash_container",
             "meta_data" : {
-                "cpp.type.family" : "associative_container",
+                "cpp.type.family" : "hash_container",
                 "cpp.domain.header.file_name" : "unordered_set",
                 "cpp.domain.header.is_system" : true
             }
@@ -195,9 +195,9 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "map",
-            "value_object_type" : "associative_container",
+            "value_object_type" : "ordered_container",
             "meta_data" : {
-                "cpp.type.family" : "associative_container",
+                "cpp.type.family" : "ordered_container",
                 "cpp.domain.header.file_name" : "map",
                 "cpp.serialization.boost.header.file_name" : "boost/serialization/map.hpp",
                 "cpp.serialization.boost.header.is_system" : true
@@ -206,9 +206,9 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "multimap",
-            "value_object_type" : "associative_container",
+            "value_object_type" : "ordered_container",
             "meta_data" : {
-                "cpp.type.family" : "associative_container",
+                "cpp.type.family" : "ordered_container",
                 "cpp.domain.header.file_name" : "multimap",
                 "cpp.domain.header.is_system" : true,
                 "cpp.serialization.boost.header.file_name" : "boost/serialization/multimap.hpp",
@@ -218,9 +218,9 @@
         {
             "meta_type" : "value_object",
             "simple_name" : "unordered_map",
-            "value_object_type" : "associative_container",
+            "value_object_type" : "hash_container",
             "meta_data" : {
-                "cpp.type.family" : "associative_container",
+                "cpp.type.family" : "hash_container",
                 "cpp.domain.header.file_name" : "unordered_map",
                 "cpp.domain.header.is_system" : true
             }

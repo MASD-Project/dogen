@@ -365,10 +365,12 @@ namespace test {
 
 mock_model_factory::flags::flags(const bool tagged,
     const bool merged, const bool resolved,
-    const bool concepts_indexed, const bool properties_indexed) :
+    const bool concepts_indexed, const bool properties_indexed,
+    const bool associations_indexed) :
     tagged_(tagged), merged_(merged), resolved_(resolved),
     concepts_indexed_(concepts_indexed),
-    properties_indexed_(properties_indexed) { }
+    properties_indexed_(properties_indexed),
+    associations_indexed_(associations_indexed) { }
 
 bool mock_model_factory::flags::tagged() const { return tagged_; }
 void mock_model_factory::flags::tagged(const bool v) { tagged_ = v; }
@@ -380,17 +382,24 @@ bool mock_model_factory::flags::resolved() const { return resolved_; }
 void mock_model_factory::flags::resolved(const bool v) { resolved_ = v; }
 
 bool mock_model_factory::flags::concepts_indexed() const {
-    return(concepts_indexed_);
+    return concepts_indexed_;
 }
 void mock_model_factory::flags::concepts_indexed(const bool v) {
     concepts_indexed_ = v;
 }
 
 bool mock_model_factory::flags::properties_indexed() const {
-    return(properties_indexed_);
+    return properties_indexed_;
 }
 void mock_model_factory::flags::properties_indexed(const bool v) {
     properties_indexed_ = v;
+}
+
+bool mock_model_factory::flags::associations_indexed() const {
+    return associations_indexed_;
+}
+void mock_model_factory::flags::associations_indexed(const bool v) {
+    associations_indexed_ = v;
 }
 
 mock_model_factory::mock_model_factory(const flags& f) : flags_(f) { }
@@ -964,16 +973,25 @@ object_with_property(const object_types ot, const property_types pt) const {
         o0.all_properties().push_back(p);
 
     model r(build_empty_model(0));
-    insert_object(r, o0);
+    const auto ra(relationship_types::regular_associations);
+    const auto pa(relationship_types::pointer_associations);
     if (pt == property_types::value_object ||
-        pt == property_types::boost_shared_ptr)
+        pt == property_types::boost_shared_ptr) {
         insert_object(r, o1);
+
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(o1.name());
+    }
 
     if (pt == property_types::unsigned_int ||
         pt == property_types::boolean) {
         primitive ui;
         ui.name(p.type().type());
         insert_nameable(r.primitives(), ui);
+
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(ui.name());
+
     } else if (pt == property_types::boost_shared_ptr) {
         qname qn;
         qn.simple_name("shared_ptr");
@@ -983,11 +1001,17 @@ object_with_property(const object_types ot, const property_types pt) const {
         o2.name(qn);
         o2.object_type(dogen::sml::object_types::smart_pointer);
         insert_object(r, o2);
-    } else if (pt == property_types::std_pair) {
 
+        if (flags_.associations_indexed())
+            o0.relationships()[pa].push_back(o2.name());
+
+    } else if (pt == property_types::std_pair) {
         primitive b;
         b.name().simple_name(boolean);
         r.primitives().insert(std::make_pair(b.name(), b));
+
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(b.name());
 
         qname qn;
         qn.simple_name("pair");
@@ -996,15 +1020,25 @@ object_with_property(const object_types ot, const property_types pt) const {
         object o2;
         o2.name(qn);
         o2.object_type(dogen::sml::object_types::user_defined_value_object);
+
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(o2.name());
+
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
         primitive b;
         b.name().simple_name(boolean);
         r.primitives().insert(std::make_pair(b.name(), b));
 
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(b.name());
+
         primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
+
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(ui.name());
 
         qname qn;
         qn.simple_name("variant");
@@ -1014,6 +1048,10 @@ object_with_property(const object_types ot, const property_types pt) const {
         o2.name(qn);
         o2.object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
+
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(o2.name());
+
     } else if (pt == property_types::std_string) {
         qname qn;
         qn.simple_name("string");
@@ -1023,8 +1061,11 @@ object_with_property(const object_types ot, const property_types pt) const {
         o2.name(qn);
         o2.object_type(dogen::sml::object_types::user_defined_value_object);
         insert_object(r, o2);
-    }
 
+        if (flags_.associations_indexed())
+            o0.relationships()[ra].push_back(o2.name());
+    }
+    insert_object(r, o0);
     return r;
 }
 
@@ -1059,6 +1100,10 @@ model mock_model_factory::object_with_missing_property_type() const {
 
     add_property(o0, flags_.properties_indexed(), 0,
         property_types::value_object, o1.name());
+
+    const auto ra(relationship_types::regular_associations);
+    if (flags_.associations_indexed())
+        o0.relationships()[ra].push_back(o1.name());
 
     qname mn_qn;
     mn_qn.model_name(model_name(0));

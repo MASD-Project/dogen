@@ -39,8 +39,9 @@ const std::string empty;
 const std::string test_module("sml_to_cpp");
 const std::string test_suite("extractor_spec");
 
-
-const mock_model_factory::flags flags;
+const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
+    false/*merged*/, false/*concepts_indexed*/, false/*properties_indexed*/,
+    true/*associations_indexed*/);
 const mock_model_factory factory(flags);
 
 const std::string object_not_found("Could not find QName in object container");
@@ -216,21 +217,6 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
         }
     }
     BOOST_CHECK(found);
-}
-
-BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_missing_object_property_throws) {
-    SETUP_TEST_LOG_SOURCE("dependency_graph_of_object_with_missing_object_property_throws");
-
-    const auto m(factory.object_with_missing_property_type());
-    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 1);
-
-    dogen::sml_to_cpp::extractor x(m);
-    const auto& p(m.objects().begin()->second);
-
-    using dogen::sml_to_cpp::extraction_error;
-    contains_checker<extraction_error> c(object_not_found);
-    BOOST_CHECK_EXCEPTION(x.extract_dependency_graph(p), extraction_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_names_in_relationships) {

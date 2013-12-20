@@ -79,7 +79,8 @@ public:
             const bool merged = false,
             const bool resolved = false,
             const bool concepts_indexed = false,
-            const bool properties_indexed = false);
+            const bool properties_indexed = false,
+            const bool associations_indexed = false);
 
     public:
         /**
@@ -127,12 +128,22 @@ public:
         void properties_indexed(const bool v);
         /**@}*/
 
+        /**
+         * @brief If true, returns a model as if association indexing
+         * was already performed.
+         */
+        /**@{*/
+        bool associations_indexed() const;
+        void associations_indexed(const bool v);
+        /**@}*/
+
     private:
         bool tagged_;
         bool merged_;
         bool resolved_;
         bool concepts_indexed_;
         bool properties_indexed_;
+        bool associations_indexed_;
     };
 
 public:

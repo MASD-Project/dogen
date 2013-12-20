@@ -108,9 +108,15 @@ void association_indexer::recurse_nested_qnames(object& o,
     const auto sp(sml::object_types::smart_pointer);
     is_pointer = k->second.object_type() == sp;
 
-    for (const auto c : nqn.children())
-        recurse_nested_qnames(o, c, is_pointer);
+    bool is_first(true);
+    for (const auto c : nqn.children()) {
+        const auto hc(sml::object_types::hash_container);
+        if (is_first && k->second.object_type() == hc)
+            rels[relationship_types::hash_container_keys].push_back(c.type());
 
+        recurse_nested_qnames(o, c, is_pointer);
+        is_first = false;
+    }
 }
 
 void association_indexer::index_object(object& o) {

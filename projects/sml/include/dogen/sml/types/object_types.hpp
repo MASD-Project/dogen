@@ -48,8 +48,9 @@ enum class object_types : unsigned int {
     versioned_key = 10, ///< Value is an versioned key.
     exception = 11, ///< Value represents an exception type.
     smart_pointer = 12, ///< Value is a smart pointer.
-    associative_container = 13, ///< Type is an associative container.
-    sequence_container = 14 ///< Type is a sequence container.
+    hash_container = 13, ///< Type is a hash-based container.
+    sequence_container = 14, ///< Type is a sequence container.
+    ordered_container = 15 ///< Type is a ordered container.
 };
 
 } }

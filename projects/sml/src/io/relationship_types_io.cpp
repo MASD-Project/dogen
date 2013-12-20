@@ -63,6 +63,9 @@ std::ostream& operator<<(std::ostream& s, const relationship_types& v) {
     case relationship_types::modeled_concepts:
         attr = "\"modeled_concepts\"";
         break;
+    case relationship_types::hash_container_keys:
+        attr = "\"hash_container_keys\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for relationship_types");
     }

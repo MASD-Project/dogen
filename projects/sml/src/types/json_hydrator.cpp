@@ -54,8 +54,9 @@ const std::string meta_data_key("meta_data");
 
 const std::string value_object_type_key("value_object_type");
 const std::string value_object_type_smart_pointer_value("smart_pointer");
-const std::string value_object_type_associative_container_value(
-    "associative_container");
+const std::string value_object_type_ordered_container_value(
+    "ordered_container");
+const std::string value_object_type_hash_container_value("hash_container");
 const std::string value_object_type_sequence_container_value(
     "sequence_container");
 
@@ -148,11 +149,15 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
 
         const auto vot(pt.get_optional<std::string>(value_object_type_key));
         if (vot) {
+            // FIXME: we should read the number of type arguments from file
             if (*vot == value_object_type_smart_pointer_value) {
                 vo.object_type(object_types::smart_pointer);
                 vo.number_of_type_arguments(1);
-            } else if (*vot == value_object_type_associative_container_value) {
-                vo.object_type(object_types::associative_container);
+            } else if (*vot == value_object_type_ordered_container_value) {
+                vo.object_type(object_types::ordered_container);
+                vo.number_of_type_arguments(2);
+            } else if (*vot == value_object_type_hash_container_value) {
+                vo.object_type(object_types::hash_container);
                 vo.number_of_type_arguments(2);
             } else if (*vot == value_object_type_sequence_container_value) {
                 vo.object_type(object_types::sequence_container);

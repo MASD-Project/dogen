@@ -252,7 +252,8 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
         const auto ot(k->second.object_type());
         using sml::object_types;
         nti.is_sequence_container(ot == object_types::sequence_container);
-        nti.is_associative_container(ot == object_types::associative_container);
+        nti.is_associative_container(ot == object_types::ordered_container ||
+            ot == object_types::hash_container);
         nti.is_smart_pointer(ot == object_types::smart_pointer);
     }
 

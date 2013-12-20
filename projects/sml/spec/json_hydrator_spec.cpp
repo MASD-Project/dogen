@@ -356,7 +356,9 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
         using dogen::sml::object_types;
         const auto ot(o.object_type());
         BOOST_CHECK(ot != object_types::invalid);
-        if (ot == object_types::associative_container)
+        if (ot == object_types::ordered_container)
+            BOOST_CHECK(o.number_of_type_arguments() == 2);
+        else if (ot == object_types::hash_container)
             BOOST_CHECK(o.number_of_type_arguments() == 2);
         else if (ot == object_types::sequence_container ||
             ot == object_types::smart_pointer)
@@ -405,7 +407,9 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
         using dogen::sml::object_types;
         const auto ot(o.object_type());
         BOOST_CHECK(ot != object_types::invalid);
-        if (ot == object_types::associative_container)
+        if (ot == object_types::ordered_container)
+            BOOST_CHECK(o.number_of_type_arguments() == 2);
+        if (ot == object_types::hash_container)
             BOOST_CHECK(o.number_of_type_arguments() == 2);
         else if (ot == object_types::sequence_container ||
             ot == object_types::smart_pointer)

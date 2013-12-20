@@ -46,22 +46,7 @@ public:
     extractor& operator=(const extractor&) = delete;
 
 public:
-    typedef const std::unordered_map<
-    sml::qname,
-    boost::shared_ptr<sml::object>
-    > object_map;
-    typedef const std::unordered_map<sml::qname, sml::concept> concept_map;
-
-public:
     explicit extractor(const sml::model& m) : model_(m), boost_(), std_() { }
-
-private:
-    /**
-     * @brief Iterates through the nested qname recursively, picking
-     * up dependencies as it goes along.
-     */
-    void recurse_nested_qnames(const sml::nested_qname& nqn,
-        relationships& rel, bool& is_pointer) const;
 
 public:
     /**
@@ -71,8 +56,7 @@ public:
      * The qnames include all types used by the properties of the
      * object, as well as its parent, if any.
      */
-    relationships
-    extract_dependency_graph(const sml::object& ao) const;
+    relationships extract_dependency_graph(const sml::object& ao) const;
 
 private:
     const sml::model& model_;

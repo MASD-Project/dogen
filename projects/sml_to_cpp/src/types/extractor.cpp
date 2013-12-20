@@ -47,62 +47,7 @@ const std::string type_does_not_have_a_parent(
 namespace dogen {
 namespace sml_to_cpp {
 
-void extractor::recurse_nested_qnames(const sml::nested_qname& nqn,
-    relationships& rel, bool& is_pointer) const {
-
-    const auto qn(nqn.type());
-    if (is_pointer)
-        rel.forward_decls().insert(qn);
-    else
-        rel.names().insert(qn);
-
-    bool found(false);
-    const auto i(model_.primitives().find(qn));
-    if (i != model_.primitives().end()) {
-        found = true;
-        is_pointer = false;
-    }
-
-    if (!found) {
-        const auto j(model_.enumerations().find(qn));
-        if (j != model_.enumerations().end()) {
-            is_pointer = false;
-            found = true;
-        }
-    }
-
-    if (!found) {
-        const auto k(model_.objects().find(qn));
-        if (k == model_.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << qn;
-            BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
-                    boost::lexical_cast<std::string>(qn)));
-        }
-
-        const auto ac(sml::object_types::associative_container);
-        if (k->second.object_type() == ac && nqn.children().size() >= 1) {
-            rel.keys().insert(nqn.children().front().type());
-        }
-        const auto sp(sml::object_types::smart_pointer);
-        is_pointer = k->second.object_type() == sp;
-    }
-
-    const auto sn(qn.simple_name());
-    if (sn == bool_type || sn == double_type || sn == float_type)
-        rel.requires_stream_manipulators(true);
-    else if (sn == std_.type(std_types::string))
-        rel.has_std_string(true);
-    else if (sn == boost_.type(boost_types::variant))
-        rel.has_variant(true);
-    else if (sn == std_.type(std_types::pair))
-        rel.has_std_pair(true);
-
-    for (const auto c : nqn.children())
-        recurse_nested_qnames(c, rel, is_pointer);
-}
-
-relationships
-extractor::extract_dependency_graph(const sml::object& ao) const {
+relationships extractor::extract_dependency_graph(const sml::object& ao) const {
     BOOST_LOG_SEV(lg, debug) << "Extracting dependency graph for " << ao.name();
 
     relationships r;
@@ -142,24 +87,50 @@ extractor::extract_dependency_graph(const sml::object& ao) const {
     if (i != ao.relationships().end() && !i->second.empty())
         r.leaves().insert(i->second.begin(), i->second.end());
 
-    for (const auto& prop : ao.local_properties()) {
-        const auto nqn(prop.type());
-        bool is_pointer(nqn.is_pointer());
-        recurse_nested_qnames(nqn, r, is_pointer);
+    i = ao.relationships().find(relationship_types::hash_container_keys);
+    if (i == ao.relationships().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object has no hash container keys.";
+    else {
+        for (const auto& vk : i->second)
+            r.keys().insert(vk);
     }
 
-    for (const auto& op : ao.operations()) {
-        for (const auto& p : op.parameters()) {
-            bool is_pointer(p.type().is_pointer());
-            recurse_nested_qnames(p.type(), r, is_pointer);
+    i = ao.relationships().find(relationship_types::regular_associations);
+    if (i == ao.relationships().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object has no regular associations.";
+    else {
+        for (const auto& qn : i->second) {
+            r.names().insert(qn);
+
+            const auto sn(qn.simple_name());
+            if (sn == bool_type || sn == double_type || sn == float_type)
+                r.requires_stream_manipulators(true);
+            else if (sn == std_.type(std_types::string))
+                r.has_std_string(true);
+            else if (sn == boost_.type(boost_types::variant))
+                r.has_variant(true);
+            else if (sn == std_.type(std_types::pair))
+                r.has_std_pair(true);
         }
+    }
 
-        if (!op.type())
-            continue;
+    i = ao.relationships().find(relationship_types::pointer_associations);
+    if (i == ao.relationships().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object has no pointer associations.";
+    else {
+        for (const auto& qn : i->second) {
+            r.forward_decls().insert(qn);
 
-        const auto nqn(*op.type());
-        bool is_pointer(nqn.is_pointer());
-        recurse_nested_qnames(nqn, r, is_pointer);
+            const auto sn(qn.simple_name());
+            if (sn == bool_type || sn == double_type || sn == float_type)
+                r.requires_stream_manipulators(true);
+            else if (sn == std_.type(std_types::string))
+                r.has_std_string(true);
+            else if (sn == boost_.type(boost_types::variant))
+                r.has_variant(true);
+            else if (sn == std_.type(std_types::pair))
+                r.has_std_pair(true);
+        }
     }
 
     for (const auto& n : r.names()) {
