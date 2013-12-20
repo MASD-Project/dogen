@@ -38,6 +38,15 @@ where the feature maps directly to a facet, we still have a problem -
 whilst the code in git will contain the output of all features, the
 local code will only have a subset of those, and the diffs will fail.
 
+One possible solution is to have test models for each feature: boost
+serialisation test model, eos test model, etc. These would be disabled
+if the features are not turned on. We need to go through the existing
+tests during the clean up and make sure each feature is tested on a
+different model.
+
+It would also be nice if we could use the same model for all features
+and just override the model name to reflect the feature in question.
+
 *** Use lowercase for all meta-data keys                              :story:
 
 We have a number of legacy meta-data keys which are in uppercase and
