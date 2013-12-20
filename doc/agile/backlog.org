@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Use clang to generate system models                               :story:
+
+We should be able to create a clang based utility that given a set of
+libraries returns a basic JSON model for dogen for them, with as much
+filled in as possible such as include directories, etc. This would
+save us a lot of time instead of manually adding these.
+
 *** Create the notion of toggle-able features                         :story:
 
 Often we want to disable some of the "abilities" of dogen. We
