@@ -29,7 +29,6 @@
 #include <boost/filesystem/path.hpp>
 #include <set>
 #include <string>
-#include "dogen/config/hash/cpp_facet_types_hash.hpp"
 #include "dogen/config/serialization/cpp_settings_fwd_ser.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 
