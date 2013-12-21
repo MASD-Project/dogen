@@ -26,6 +26,7 @@ add_library(engine STATIC ${engine_files})
 target_link_libraries(engine
     sml
     dia
+    om
     cpp
     cpp_formatters
     sml_to_cpp

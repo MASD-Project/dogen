@@ -10,16 +10,17 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-20 Fri 22:48]
+Clock summary at [2013-12-21 Sat 00:22]
 
-| Headline                                                | Time   |      |      |
-|---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *9:52* |      |      |
-|---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 9:52 |      |
-| IMPLEMENTATION Release notes and backlog grooming       |        |      | 0:19 |
-| COMPLETED Use relationship container for visitors       |        |      | 1:13 |
-| COMPLETED Create an =association_indexer= and add tests |        |      | 8:20 |
+| Headline                                                | Time    |       |      |
+|---------------------------------------------------------+---------+-------+------|
+| *Total time*                                            | *10:48* |       |      |
+|---------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                         |         | 10:48 |      |
+| IMPLEMENTATION Release notes and backlog grooming       |         |       | 0:19 |
+| COMPLETED Use relationship container for visitors       |         |       | 1:13 |
+| COMPLETED Create an =association_indexer= and add tests |         |       | 8:20 |
+| IMPLEMENTATION Add om's workflow to engine              |         |       | 0:56 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -122,6 +123,20 @@ sense for the association indexer.
      CLOSED: [2013-12-20 Fri 22:48]
      CLOCK: [2013-12-20 Fri 22:12]--[2013-12-20 Fri 22:47] =>  0:35
      CLOCK: [2013-12-20 Fri 20:58]--[2013-12-20 Fri 22:12] =>  1:14
+
+*** IMPLEMENTATION Add om's workflow to engine                        :story:
+
+We need to find a way to add the available formatters in om into the
+engine workflow, replacing the legacy c++ formatters. With this we can
+replace one formatter at a time.
+
+**** COMPLETED Create an om back-end in engine                         :task:
+     CLOSED: [2013-12-20 Fri 23:50]
+     CLOCK: [2013-12-20 Fri 23:30]--[2013-12-20 Fri 23:50] =>  0:20
+     CLOCK: [2013-12-20 Fri 23:26]--[2013-12-20 Fri 23:30] =>  0:04
+
+**** IMPLEMENTATION Integrate om back-end with workflow                :task:
+     CLOCK: [2013-12-20 Fri 23:50]--[2013-12-21 Sat 00:22] =>  0:32
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:

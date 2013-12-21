@@ -18,34 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/engine/types/backends/cpp_backend.hpp"
-#include "dogen/engine/types/backends/om_backend.hpp"
-#include "dogen/engine/types/backends/factory.hpp"
+#ifndef DOGEN_ENGINE_TYPES_BACKENDS_OM_BACKEND_FWD_HPP
+#define DOGEN_ENGINE_TYPES_BACKENDS_OM_BACKEND_FWD_HPP
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("engine.backends.factory"));
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace engine {
 namespace backends {
 
-void factory::log_cpp_backend_disabled() const {
-    using namespace dogen::utility::log;
-    BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
-}
-
-factory::result_type factory::create() const {
-    result_type r;
-
-    if (settings_.cpp().disable_backend())
-        log_cpp_backend_disabled();
-    else {
-        r.push_back(cpp_backend::create(model_, settings_.cpp()));
-        // r.push_back(om_backend::create(model_));
-    }
-
-    return r;
-}
+class om_backend;
 
 } } }
+
+#endif

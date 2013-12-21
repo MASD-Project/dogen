@@ -18,33 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/engine/types/backends/cpp_backend.hpp"
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/filesystem/path.hpp"
 #include "dogen/engine/types/backends/om_backend.hpp"
-#include "dogen/engine/types/backends/factory.hpp"
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("engine.backends.factory"));
+using dogen::utility::filesystem::data_files_directory;
 
 namespace dogen {
 namespace engine {
 namespace backends {
 
-void factory::log_cpp_backend_disabled() const {
-    using namespace dogen::utility::log;
-    BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
+om_backend::om_backend(const sml::model& model) :
+    model_(model),
+    workflow_(std::list<boost::filesystem::path>{data_files_directory()}) { }
+
+backend::ptr om_backend::
+create(const sml::model& model) {
+    return backend::ptr(new om_backend(model));
 }
 
-factory::result_type factory::create() const {
-    result_type r;
+backend::value_type om_backend::generate() {
+    const auto files(workflow_.execute(model_));
 
-    if (settings_.cpp().disable_backend())
-        log_cpp_backend_disabled();
-    else {
-        r.push_back(cpp_backend::create(model_, settings_.cpp()));
-        // r.push_back(om_backend::create(model_));
-    }
+    backend::value_type r;
+    for (const auto& f : files)
+        r.insert(std::make_pair(f.full_path(), f.contents()));
 
+    return r;
+}
+
+std::vector<boost::filesystem::path> om_backend::managed_directories() const {
+    std::vector<boost::filesystem::path> r;
     return r;
 }
 
