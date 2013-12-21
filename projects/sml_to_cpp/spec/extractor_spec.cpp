@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_no_properties_and_no_inheri
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 1);
 
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     const auto r(x.extract_dependency_graph(m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(!m.objects().empty());
 
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
 
     std::array<bool, 2> found({{ false, false }});
     for (const auto& pair : m.objects()) {
@@ -137,7 +137,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_unsigned_int_property_has_e
     BOOST_REQUIRE(m.objects().size() == 1);
     BOOST_REQUIRE(m.objects().begin()->second.local_properties().size() == 1);
 
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     const auto r(x.extract_dependency_graph(m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -165,7 +165,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boolean_property_has_expect
     BOOST_REQUIRE(m.objects().size() == 1);
     BOOST_REQUIRE(m.objects().begin()->second.local_properties().size() == 1);
 
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     const auto r(x.extract_dependency_graph(m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -191,7 +191,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
 
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     bool found(false);
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
@@ -229,7 +229,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_
     BOOST_REQUIRE(m.objects().size() == 2);
 
     bool found(false);
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
@@ -263,7 +263,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expect
     BOOST_REQUIRE(m.primitives().size() == 2);
 
     bool found(false);
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
@@ -297,7 +297,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_exp
     BOOST_REQUIRE(m.objects().size() == 2);
 
     bool found(false);
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
@@ -332,7 +332,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_h
     BOOST_REQUIRE(m.objects().size() == 3);
 
     bool found(false);
-    dogen::sml_to_cpp::extractor x(m);
+    dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;

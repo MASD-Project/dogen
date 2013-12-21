@@ -32,20 +32,16 @@ namespace {
 
 auto lg(logger_factory("sml_to_cpp.extractor"));
 
-const std::string empty;
 const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");
-
-const std::string qname_could_not_be_found(
-    "Could not find QName in object container: ");
-const std::string type_does_not_have_a_parent(
-    "Type in inheritance graph does not have a parent: ");
 
 }
 
 namespace dogen {
 namespace sml_to_cpp {
+
+extractor::extractor() : boost_(), std_() { }
 
 relationships extractor::extract_dependency_graph(const sml::object& ao) const {
     BOOST_LOG_SEV(lg, debug) << "Extracting dependency graph for " << ao.name();

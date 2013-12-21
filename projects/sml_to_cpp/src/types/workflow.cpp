@@ -61,7 +61,7 @@ workflow(const sml::model& model, const config::cpp_settings& settings) :
     source_file_factory_(locator_),
     transformer_(model_, context_),
     descriptor_factory_(settings_.enabled_facets()),
-    extractor_(model_) {
+    extractor_() {
 
     validate_settings();
 }

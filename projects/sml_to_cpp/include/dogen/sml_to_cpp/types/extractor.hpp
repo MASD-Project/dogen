@@ -39,14 +39,13 @@ namespace sml_to_cpp {
 
 class extractor {
 public:
-    extractor() = delete;
     extractor(const extractor&) = default;
     ~extractor() = default;
     extractor(extractor&&) = default;
     extractor& operator=(const extractor&) = delete;
 
 public:
-    explicit extractor(const sml::model& m) : model_(m), boost_(), std_() { }
+    extractor();
 
 public:
     /**
@@ -59,7 +58,6 @@ public:
     relationships extract_dependency_graph(const sml::object& ao) const;
 
 private:
-    const sml::model& model_;
     const boost_model_helper boost_;
     const std_model_helper std_;
 };
