@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include <boost/log/core/core.hpp>
 #include "dogen/utility/log/severity_level.hpp"
 
 namespace dogen {
@@ -51,12 +50,13 @@ private:
     /**
      * @brief Creates a boost log file backend.
      */
-    void create_file_backend(std::string file_name, severity_level severity);
+    void create_file_backend(const std::string& file_name,
+        const severity_level severity);
 
     /**
      * @brief Creates a boost log console backend.
      */
-    void create_console_backend(severity_level severity);
+    void create_console_backend(const severity_level severity);
 
 public:
     /**
@@ -64,9 +64,9 @@ public:
      *
      * Must be done in a thread-safe context.
      */
-    void initialise(std::string file_name,
-        severity_level severity = severity_level::debug,
-        bool log_to_console = false);
+    void initialise(const std::string& file_name,
+        const severity_level severity = severity_level::debug,
+        const bool log_to_console = false);
 
     /**
      * @brief Shutdown logging for the entire application.
@@ -74,9 +74,6 @@ public:
      * Should be done in a thread-safe context.
      */
     void shutdown();
-
-private:
-    static std::list<boost::shared_ptr<boost::log::core::sink_type> > sinks_;
 };
 
 } } }

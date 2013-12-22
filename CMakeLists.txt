@@ -54,7 +54,8 @@ find_package(Threads REQUIRED)
 set(BOOST_ROOT "$ENV{PFH_LOCATION}")
 set(Boost_NO_SYSTEM_PATHS "ON")
 
-find_package(Boost 1.49 REQUIRED COMPONENTS
+add_definitions(-DBOOST_ALL_DYN_LINK)
+find_package(Boost 1.54 REQUIRED COMPONENTS
     system
     chrono
     serialization

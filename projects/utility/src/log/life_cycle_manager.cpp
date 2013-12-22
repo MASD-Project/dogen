@@ -18,13 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include <boost/log/sinks.hpp>
 #include <boost/log/common.hpp>
-#include <boost/log/filters.hpp>
-#include <boost/log/formatters.hpp>
-#include <boost/log/utility/init/common_attributes.hpp>
-#include <boost/log/sinks/sync_frontend.hpp>
-#include <boost/log/sinks/text_ostream_backend.hpp>
-#include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/log/attributes.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/sources/logger.hpp>
+#include <boost/log/support/date_time.hpp>
+#include <boost/utility/empty_deleter.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
 
@@ -37,87 +39,77 @@ const std::string time_stamp_attr("TimeStamp");
 const std::string record_format("%1% [%2%] [%3%] %4%");
 const std::string time_stamp_format("%Y-%m-%d %H:%M:%S.%f");
 
-template<typename Backend>
-void setup_formatter(boost::shared_ptr<Backend> backend) {
-    using namespace boost::log;
-    using dogen::utility::log::severity_level;
-
-    backend->set_formatter(
-        formatters::format(record_format)
-        % formatters::date_time(time_stamp_attr,
-            keywords::format = time_stamp_format, std::nothrow)
-        % formatters::attr<severity_level>(severity_attr, std::nothrow)
-        % formatters::attr<std::string>(channel_attr, std::nothrow)
-        % formatters::message());
-}
-
-template<typename Backend>
-void add_backend(boost::shared_ptr<Backend> backend,
-    dogen::utility::log::severity_level severity,
-    std::list<boost::shared_ptr<boost::log::core::sink_type> >& sinks) {
-    using namespace boost::log;
-    typedef sinks::synchronous_sink<Backend> sink_type;
-    boost::shared_ptr<sink_type> sink(new sink_type(backend));
-
-    using dogen::utility::log::severity_level;
-    sink->set_filter(filters::attr<severity_level>(severity_attr,
-            std::nothrow) >= severity);
-
-    boost::shared_ptr<core> core(core::get());
-    core->add_sink(sink);
-    sinks.push_back(sink);
-}
-
 }
 
 namespace dogen {
 namespace utility {
 namespace log {
 
-std::list<boost::shared_ptr<boost::log::core::sink_type> >
-life_cycle_manager::sinks_;
-
-void life_cycle_manager::
-create_file_backend(std::string file_name, severity_level severity) {
+void life_cycle_manager::create_file_backend(
+    const std::string& file_name, const severity_level severity) {
     using namespace boost::log;
-    boost::shared_ptr<sinks::text_file_backend> backend(
-        boost::make_shared<sinks::text_file_backend>(
+
+    auto backend(boost::make_shared<sinks::text_file_backend>(
             keywords::file_name = file_name + postfix,
             keywords::rotation_size = 5 * 1024 * 1024,
             keywords::time_based_rotation =
-            sinks::file::rotation_at_time_point(12, 0, 0)
-            )
-        );
+            sinks::file::rotation_at_time_point(12, 0, 0)));
+    backend->auto_flush(true);
 
-    setup_formatter<sinks::text_file_backend>(backend);
-    add_backend(backend, severity, sinks_);
+    typedef sinks::synchronous_sink<sinks::text_file_backend> sink_type;
+    auto sink(boost::make_shared<sink_type>(backend));
+
+    sink->set_filter(
+        expressions::attr<severity_level>(severity_attr) >= severity);
+
+    sink->set_formatter(expressions::format(record_format)
+        % expressions::format_date_time<boost::posix_time::ptime>(
+            time_stamp_attr, time_stamp_format)
+        % expressions::attr<severity_level>(severity_attr)
+        % expressions::attr<std::string>(channel_attr)
+        % expressions::smessage);
+
+    core::get()->add_sink(sink);
 }
 
-void life_cycle_manager::create_console_backend(severity_level severity) {
+void life_cycle_manager::create_console_backend(const severity_level severity) {
     using namespace boost::log;
-    boost::shared_ptr<sinks::text_ostream_backend>
-        backend(boost::make_shared<sinks::text_ostream_backend>());
-    backend->add_stream(boost::shared_ptr<std::ostream>(&std::clog,
-            empty_deleter()));
 
-    setup_formatter<sinks::text_ostream_backend>(backend);
-    add_backend(backend, severity, sinks_);
+    boost::shared_ptr<std::ostream> s(&std::clog, boost::empty_deleter());
+    auto backend(boost::make_shared<sinks::text_ostream_backend>());
+    backend->add_stream(s);
+
+    typedef sinks::synchronous_sink<sinks::text_ostream_backend> sink_type;
+    auto sink(boost::make_shared<sink_type>(backend));
+
+    sink->set_filter(
+        expressions::attr<severity_level>(severity_attr) >= severity);
+
+    sink->set_formatter(expressions::format(record_format)
+        % expressions::format_date_time<boost::posix_time::ptime>(
+            time_stamp_attr, time_stamp_format)
+        % expressions::attr<severity_level>(severity_attr)
+        % expressions::attr<std::string>(channel_attr)
+        % expressions::smessage);
+
+    core::get()->add_sink(sink);
 }
 
-void life_cycle_manager::initialise(std::string file_name,
-    severity_level severity, bool log_to_console) {
+void life_cycle_manager::initialise(const std::string& file_name,
+    const severity_level severity, const bool log_to_console) {
     if (log_to_console)
         create_console_backend(severity);
 
     create_file_backend(file_name, severity);
-    boost::log::add_common_attributes();
+
+    boost::log::core::get()->add_global_attribute(time_stamp_attr,
+        boost::log::attributes::local_clock());
 }
 
 void life_cycle_manager::shutdown() {
     using namespace boost::log;
     boost::shared_ptr<core> core(core::get());
-    for (auto s : sinks_)
-        core->remove_sink(s);
+    core->remove_all_sinks();
 }
 
 } } }

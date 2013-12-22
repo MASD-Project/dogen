@@ -10,18 +10,19 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-21 Sat 11:36]
+Clock summary at [2013-12-22 Sun 14:24]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *11:04* |       |      |
+| *Total time*                                            | *18:36* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                         |         | 11:04 |      |
+| Development Stories Implemented                         |         | 18:36 |      |
 | IMPLEMENTATION Release notes and backlog grooming       |         |       | 0:19 |
 | COMPLETED Use relationship container for visitors       |         |       | 1:13 |
 | COMPLETED Create an =association_indexer= and add tests |         |       | 8:20 |
 | COMPLETED Remove model from extractor                   |         |       | 0:16 |
 | IMPLEMENTATION Add om's workflow to engine              |         |       | 0:56 |
+| IMPLEMENTATION Compile code without PFH                 |         |       | 7:32 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -142,6 +143,48 @@ replace one formatter at a time.
 
 **** IMPLEMENTATION Integrate om back-end with workflow                :task:
      CLOCK: [2013-12-20 Fri 23:50]--[2013-12-21 Sat 00:22] =>  0:32
+
+*** IMPLEMENTATION Compile code without PFH                           :story:
+
+Now that boost and the compilers being distributed have all the
+features we need, we no longer require PFH. We should get rid of it,
+as it will allow users to build dogen more easily.
+
+**** COMPLETED Port code to boost 1.54                                 :task:
+     CLOSED: [2013-12-22 Sun 02:48]
+     CLOCK: [2013-12-22 Sun 00:30]--[2013-12-22 Sun 02:46] =>  2:16
+     CLOCK: [2013-12-21 Sat 16:49]--[2013-12-21 Sat 18:33] =>  1:44
+
+Mainly deal with move from boost log v1 to v2.
+
+**** COMPLETED Deal with other compilation errors                      :task:
+     CLOSED: [2013-12-22 Sun 03:05]
+     CLOCK: [2013-12-22 Sun 02:48]--[2013-12-22 Sun 03:04] =>  0:16
+     CLOCK: [2013-12-22 Sun 02:46]--[2013-12-22 Sun 02:48] =>  0:02
+
+- class_e in boost model cannot have int and double
+- we need a way to disable ODB and EOS. this includes header
+  validation.
+- we need a way to pick-up local installs of ODB and EOS. this must
+  also work so that if there is a boost installed there it would take
+  precedence over system install, but system install would be found if
+  no other boost is available.
+- we need to upgrade turbo to boost 1.54 or even 1.55. ideally we want
+  to pick-up any boost after boost log has been added.
+- investigate error:
+
+: cp: cannot stat ‘/usr/lib/x86_64-linux-gnu/libpthread.so.1.54.0’: No such file or directory
+
+**** IMPLEMENTATION Upgrade turbo to boost 1.55                        :task:
+     CLOCK: [2013-12-22 Sun 14:07]--[2013-12-22 Sun 14:24] =>  0:17
+     CLOCK: [2013-12-22 Sun 13:47]--[2013-12-22 Sun 14:07] =>  0:20
+     CLOCK: [2013-12-22 Sun 13:18]--[2013-12-22 Sun 13:47] =>  0:29
+     CLOCK: [2013-12-22 Sun 12:27]--[2013-12-22 Sun 13:18] =>  0:51
+     CLOCK: [2013-12-22 Sun 11:10]--[2013-12-22 Sun 12:27] =>  1:17
+
+The least disruptive way of doing this change is to upgrade boost in
+turbo, get all of the PFHs up-to-date and the build green across the
+board, and then start removing any PFH specific things from dogen.
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:

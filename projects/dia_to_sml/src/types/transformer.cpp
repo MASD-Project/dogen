@@ -192,8 +192,6 @@ sml::property transformer::to_property(const processed_property& p) const {
 sml::enumerator transformer::to_enumerator(const processed_property& p,
     const unsigned int position) const {
     sml::enumerator r;
-    typedef boost::shared_ptr<dia::attribute> attribute_ptr;
-
     r.name(p.name());
     const auto pair(comments_parser_->parse(p.comment()));
     r.value(boost::lexical_cast<std::string>(position));

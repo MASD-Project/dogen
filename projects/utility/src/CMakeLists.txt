@@ -23,6 +23,10 @@ file(GLOB_RECURSE utility_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(utility STATIC ${utility_files})
+target_link_libraries(utility
+    ${Boost_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT})
+
 set_target_properties(utility
     PROPERTIES OUTPUT_NAME dogen_utility)
 set_target_properties(utility
