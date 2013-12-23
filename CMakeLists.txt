@@ -70,6 +70,14 @@ find_package(Boost 1.54 REQUIRED COMPONENTS
 
 find_package(LibXml2)
 
+# odb
+find_package(ODB)
+if(ODB_FOUND)
+    message(STATUS "Found odb...")
+else()
+    message(FATAL_ERROR "odb not found.")
+endif()
+
 # profiling
 if(WITH_PROFILING)
     if(WITH_DEBUG)

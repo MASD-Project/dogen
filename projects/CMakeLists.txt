@@ -120,10 +120,13 @@ set(header_validation_files "")
 
 set(ignore_file false)
 set(file_counter "0")
+
 foreach(hpp_file ${all_hpp_files})
-    # if (hpp_file MATCHES "REGEX_TO_IGNORE")
-    #     set(ignore_file true)
-    # endif()
+    if(NOT ODB_FOUND)
+        if (hpp_file MATCHES "database")
+            set(ignore_file true)
+        endif()
+    endif()
 
     if(NOT ignore_file)
         set(input_filename ${CMAKE_SOURCE_DIR}/${header_validation_template})
@@ -191,7 +194,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/enumeration/include
     ${CMAKE_SOURCE_DIR}/projects/exception/include
     ${CMAKE_SOURCE_DIR}/projects/stereotypes/include
-    ${CMAKE_SOURCE_DIR}/projects/database/include
     ${CMAKE_SOURCE_DIR}/projects/dia_to_sml/include
     )
 
@@ -243,10 +245,18 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
+
+#
+# feature specific projects
+#
+if(ODB_FOUND)
+    message(STATUS "Adding ODB feature test project")
+    include_directories(${CMAKE_SOURCE_DIR}/projects/database/include)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
+endif()
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

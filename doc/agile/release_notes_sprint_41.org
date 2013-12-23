@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-23 Mon 19:10]
+Clock summary at [2013-12-23 Mon 19:51]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *22:50* |       |       |
+| *Total time*                                                       | *23:15* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 22:50 |       |
+| Development Stories Implemented                                    |         | 23:15 |       |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:43 |
 | COMPLETED Use relationship container for visitors                  |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests            |         |       |  8:20 |
 | COMPLETED Remove model from extractor                              |         |       |  0:16 |
 | IMPLEMENTATION Add om's workflow to engine                         |         |       |  0:56 |
-| IMPLEMENTATION Compile code without PFH                            |         |       | 11:03 |
+| IMPLEMENTATION Compile code without PFH                            |         |       | 11:28 |
 | IMPLEMENTATION Reduce the number of valgrind errors back to normal |         |       |  0:19 |
 #+end:
 
@@ -216,6 +216,13 @@ board, and then start removing any PFH specific things from dogen.
 
 If PFH is not found we should use system directories for boost.
 
+**** IMPLEMENTATION Create features for ODB and EOS                    :task:
+     CLOCK: [2013-12-23 Mon 19:17]--[2013-12-23 Mon 19:42] =>  0:25
+
+- detect ODB's presence and enable it/disable it accordingly
+- detect EOS presence and enable it/disable it accordingly
+- create a find EOS cmake script
+
 **** IMPLEMENTATION Split EOS from main serialisation test             :task:
 
 We need a model just for EOS. We also need a command line switch to
@@ -227,16 +234,11 @@ enable it (switched off by default).
       CLOCK: [2013-12-23 Mon 15:19]--[2013-12-23 Mon 15:22] =>  0:03
       CLOCK: [2013-12-23 Mon 15:14]--[2013-12-23 Mon 15:19] =>  0:05
 
-***** IMPLEMENTATION Regenerate all models without EOS
+***** COMPLETED Regenerate all models without EOS
+      CLOSED: [2013-12-23 Mon 19:12]
       CLOCK: [2013-12-23 Mon 18:25]--[2013-12-23 Mon 18:54] =>  0:29
 
 ***** Create a model to test EOS that only kicks in on linux
-**** Create features for ODB and EOS                                   :task:
-
-- detect ODB's presence and enable it/disable it accordingly
-- detect EOS presence and enable it/disable it accordingly
-- create a find EOS cmake script
-
 **** Update read me with compilation instructions                      :task:
 
 Packages to install:

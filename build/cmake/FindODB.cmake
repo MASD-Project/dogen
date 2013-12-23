@@ -85,15 +85,15 @@ PATHS
 /opt/lib
 )
 
-FIND_LIBRARY(ODB_MYSQL_LIBRARY odb-mysql
-PATHS
-/usr/lib/
-/usr/lib64/
-/usr/local/lib/
-/usr/local/lib64/
-/opt/odb/lib
-/opt/lib
-)
+# FIND_LIBRARY(ODB_MYSQL_LIBRARY odb-mysql
+# PATHS
+# /usr/lib/
+# /usr/lib64/
+# /usr/local/lib/
+# /usr/local/lib64/
+# /opt/odb/lib
+# /opt/lib
+# )
 
 FIND_LIBRARY(ODB_PGSQL_LIBRARY odb-pgsql
 PATHS
@@ -120,7 +120,7 @@ PATHS
 # all listed variables are TRUE
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(ODB  DEFAULT_MSG
-    ODB_CORE_LIBRARY ODB_MYSQL_LIBRARY ODB_PGSQL_LIBRARY ODB_BOOST_LIBRARY
+    ODB_CORE_LIBRARY ODB_PGSQL_LIBRARY ODB_BOOST_LIBRARY # ODB_MYSQL_LIBRARY 
     ODB_INCLUDE_DIR ODB_COMPILER)
 #
 IF(ODB_FOUND)
@@ -128,7 +128,7 @@ IF(ODB_FOUND)
     MESSAGE(STATUS "Found ODB Compiler (ODB_COMPILER = ${ODB_COMPILER})")
     MESSAGE(STATUS "Found ODB Include folder (ODB_INCLUDE_DIR = ${ODB_INCLUDE_DIR})")
     MESSAGE(STATUS "Found ODB Core Libraries (ODB_LIBRARIES = ${ODB_LIBRARIES})")
-    MESSAGE(STATUS "Found ODB MySQL Library (ODB_MYSQL_LIBRARY = ${ODB_MYSQL_LIBRARY})")
+    # MESSAGE(STATUS "Found ODB MySQL Library (ODB_MYSQL_LIBRARY = ${ODB_MYSQL_LIBRARY})")
     MESSAGE(STATUS "Found ODB PostgreSQL Library (ODB_PGSQL_LIBRARY = ${ODB_PGSQL_LIBRARY})")
 ENDIF()
 #
