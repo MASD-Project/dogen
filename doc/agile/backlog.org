@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Use xtime-like stopwatch in selected places to log timings        :story:
+
+We should log the time it takes for certain operations in dogen so
+that users can figure out if we are becoming slower (or faster) at
+doing them and report regressions.
+
+Boost used to provide a nifty little utility class called xtime. It
+appears to have been deprecated by [[http://www.boost.org/doc/libs/1_55_0/doc/html/chrono/users_guide.html#chrono.users_guide.examples.duration.xtime_conversions][chrono]].
+
 *** It should be possible to add non-licensed files to om             :story:
 
 At present it seems we throw when somebody attempts to add a model to
