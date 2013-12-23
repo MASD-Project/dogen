@@ -108,7 +108,8 @@ factory::result_type factory::create_main_formatter(std::ostream& s,
                 settings_.disable_xml_serialization());
         else
             return serialization_implementation::create(s,
-                settings_.disable_xml_serialization());
+                settings_.disable_xml_serialization(),
+                settings_.disable_eos_serialization());
         break;
     case cpp_facet_types::test_data:
         if (cd.file_type() == file_types::header)
@@ -139,7 +140,8 @@ factory::result_type factory::create_registrar_formatter(
 
     case file_types::implementation:
         return registrar_implementation::create(s,
-            settings_.disable_xml_serialization());
+            settings_.disable_xml_serialization(),
+            settings_.disable_eos_serialization());
         break;
 
     default: {

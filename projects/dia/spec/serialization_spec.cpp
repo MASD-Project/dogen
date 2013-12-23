@@ -47,23 +47,23 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    rountrip_type<attribute_generator>();
-    rountrip_type<boolean_generator>();
-    rountrip_type<child_node_generator>();
-    rountrip_type<color_generator>();
-    rountrip_type<composite_generator>();
-    rountrip_type<connection_generator>();
-    rountrip_type<diagram_data_generator>();
-    rountrip_type<diagram_generator>();
-    rountrip_type<enumeration_generator>();
-    rountrip_type<font_generator>();
-    rountrip_type<integer_generator>();
-    rountrip_type<layer_generator>();
-    rountrip_type<object_generator>();
-    rountrip_type<point_generator>();
-    rountrip_type<real_generator>();
-    rountrip_type<rectangle_generator>();
-    rountrip_type<string_generator>();
+    roundtrip_type<attribute_generator>();
+    roundtrip_type<boolean_generator>();
+    roundtrip_type<child_node_generator>();
+    roundtrip_type<color_generator>();
+    roundtrip_type<composite_generator>();
+    roundtrip_type<connection_generator>();
+    roundtrip_type<diagram_data_generator>();
+    roundtrip_type<diagram_generator>();
+    roundtrip_type<enumeration_generator>();
+    roundtrip_type<font_generator>();
+    roundtrip_type<integer_generator>();
+    roundtrip_type<layer_generator>();
+    roundtrip_type<object_generator>();
+    roundtrip_type<point_generator>();
+    roundtrip_type<real_generator>();
+    roundtrip_type<rectangle_generator>();
+    roundtrip_type<string_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

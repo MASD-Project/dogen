@@ -65,7 +65,7 @@ void test_move_assignment_copy() {
 }
 
 template<typename Sequence>
-void rountrip_type() {
+void roundtrip_type() {
     Sequence sequence;
     sequence(); // throw the first one away
     utility::test::serialization_tester<typename Sequence::result_type>::

@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<class_1_generator>();
+    roundtrip_type<class_1_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {

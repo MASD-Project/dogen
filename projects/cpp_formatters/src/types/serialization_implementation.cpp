@@ -51,16 +51,19 @@ namespace cpp_formatters {
 
 serialization_implementation::
 serialization_implementation(std::ostream& stream,
-    const bool disable_xml_serialization) :
+    const bool disable_xml_serialization,
+    const bool disable_eos_serialization) :
     stream_(stream),
     utility_(stream_, indenter_),
-    disable_xml_serialization_(disable_xml_serialization) { }
+    disable_xml_serialization_(disable_xml_serialization),
+    disable_eos_serialization_(disable_eos_serialization) { }
 
-file_formatter::shared_ptr
-serialization_implementation::create(std::ostream& stream,
-    const bool disable_xml_serialization) {
+file_formatter::shared_ptr serialization_implementation::
+create(std::ostream& stream, const bool disable_xml_serialization,
+    const bool disable_eos_serialization) {
     return file_formatter::shared_ptr(
-        new serialization_implementation(stream, disable_xml_serialization));
+        new serialization_implementation(stream, disable_xml_serialization,
+            disable_eos_serialization));
 }
 
 void serialization_implementation::save_function(const cpp::class_info& ci) {
@@ -244,16 +247,18 @@ template_instantiations(const cpp::class_info& ci) {
         utility_.blank_line();
     }
 
-    stream_ << "#ifdef __linux__" << std::endl
-            << indenter_ << "template void save(eos::portable_oarchive& ar, "
-            << "const ";
-    qname.format(ci);
-    stream_ << "& v, unsigned int version);" << std::endl;
-    stream_ << indenter_ << "template void load(eos::portable_iarchive& ar, ";
-    qname.format(ci);
-    stream_ << "& v, unsigned int version);" << std::endl
-            << "#endif" << std::endl;
-    utility_.blank_line();
+    if (!disable_eos_serialization_) {
+        stream_ << indenter_ << "template void save(eos::portable_oarchive& "
+                << " ar, const ";
+        qname.format(ci);
+        stream_ << "& v, unsigned int version);" << std::endl;
+        stream_ << indenter_ << "template void load(eos::portable_iarchive& ar"
+                << ", ";
+        qname.format(ci);
+        stream_ << "& v, unsigned int version);" << std::endl
+                << std::endl;
+        utility_.blank_line();
+    }
 }
 
 void serialization_implementation::format_class(const cpp::source_file& f) {
@@ -309,12 +314,6 @@ void serialization_implementation::format(const cpp::source_file& f) {
 
     includes includes(stream_);
     includes.format(f);
-
-    // FIXME: massive hack for EOS workaround
-    stream_ << "#ifdef __linux__" << std::endl
-            << "#include \"eos/portable_iarchive.hpp\"" << std::endl
-            << "#include \"eos/portable_oarchive.hpp\"" << std::endl
-            << "#endif" << std::endl;
     utility_.blank_line();
 
     using cpp::content_types;

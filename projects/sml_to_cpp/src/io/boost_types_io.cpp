@@ -159,6 +159,12 @@ std::ostream& operator<<(std::ostream& s, const boost_types& v) {
     case boost_types::io_ptree:
         attr = "\"io_ptree\"";
         break;
+    case boost_types::eos_oarchive:
+        attr = "\"eos_oarchive\"";
+        break;
+    case boost_types::eos_iarchive:
+        attr = "\"eos_iarchive\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for boost_types");
     }

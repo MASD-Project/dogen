@@ -79,7 +79,8 @@ std::ostream& operator<<(std::ostream& s, const cpp_settings& v) {
       << "\"test_data_facet_folder\": " << "\"" << tidy_up_string(v.test_data_facet_folder()) << "\"" << ", "
       << "\"odb_facet_folder\": " << "\"" << tidy_up_string(v.odb_facet_folder()) << "\"" << ", "
       << "\"disable_xml_serialization\": " << v.disable_xml_serialization() << ", "
-      << "\"use_integrated_io\": " << v.use_integrated_io()
+      << "\"use_integrated_io\": " << v.use_integrated_io() << ", "
+      << "\"disable_eos_serialization\": " << v.disable_eos_serialization()
       << " }";
     return(s);
 }

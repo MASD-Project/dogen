@@ -30,10 +30,6 @@
 #include "dogen/trivial_inheritance/serialization/child_of_a_child1_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/third_child_with_members_ser.hpp"
 
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
 
 BOOST_CLASS_TRACKING(
     dogen::trivial_inheritance::child_of_a_child1,
@@ -72,10 +68,5 @@ template void load(archive::binary_iarchive& ar, dogen::trivial_inheritance::chi
 
 template void save(archive::xml_oarchive& ar, const dogen::trivial_inheritance::child_of_a_child1& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::trivial_inheritance::child_of_a_child1& v, unsigned int version);
-
-#ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::trivial_inheritance::child_of_a_child1& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::trivial_inheritance::child_of_a_child1& v, unsigned int version);
-#endif
 
 } }

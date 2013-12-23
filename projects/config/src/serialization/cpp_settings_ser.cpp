@@ -67,6 +67,7 @@ void save(Archive& ar,
     ar << make_nvp("odb_facet_folder", v.odb_facet_folder_);
     ar << make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
     ar << make_nvp("use_integrated_io", v.use_integrated_io_);
+    ar << make_nvp("disable_eos_serialization", v.disable_eos_serialization_);
 }
 
 template<typename Archive>
@@ -101,6 +102,7 @@ void load(Archive& ar,
     ar >> make_nvp("odb_facet_folder", v.odb_facet_folder_);
     ar >> make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
     ar >> make_nvp("use_integrated_io", v.use_integrated_io_);
+    ar >> make_nvp("disable_eos_serialization", v.disable_eos_serialization_);
 }
 
 } }

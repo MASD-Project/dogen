@@ -45,12 +45,14 @@ public:
 
 public:
     registrar_implementation(std::ostream& stream,
-        const bool disable_xml_serialization);
+        const bool disable_xml_serialization,
+        const bool disable_eos_serialization);
     virtual ~registrar_implementation() noexcept {}
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,
-        const bool disable_xml_serialization);
+        const bool disable_xml_serialization,
+        const bool disable_eos_serialization);
 
 public:
     virtual void format(const cpp::source_file& f) override;
@@ -60,6 +62,7 @@ private:
     indenter indenter_;
     utility utility_;
     const bool disable_xml_serialization_;
+    const bool disable_eos_serialization_;
 };
 
 } }

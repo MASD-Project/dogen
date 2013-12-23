@@ -30,10 +30,6 @@
 #include "dogen/boost_model/serialization/class_base_ser.hpp"
 #include "dogen/boost_model/serialization/class_derived_ser.hpp"
 
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
 
 BOOST_CLASS_TRACKING(
     dogen::boost_model::class_derived,
@@ -76,10 +72,5 @@ template void load(archive::binary_iarchive& ar, dogen::boost_model::class_deriv
 
 template void save(archive::xml_oarchive& ar, const dogen::boost_model::class_derived& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::boost_model::class_derived& v, unsigned int version);
-
-#ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::boost_model::class_derived& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::boost_model::class_derived& v, unsigned int version);
-#endif
 
 } }

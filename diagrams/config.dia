@@ -178,7 +178,7 @@
         <dia:point val="-27.8712,-17.0187"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-27.9212,-17.0687;-10.7662,2.6313"/>
+        <dia:rectangle val="-27.9212,-17.0687;-10.7662,3.4313"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-27.8712,-17.0187"/>
@@ -187,7 +187,7 @@
         <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="19.600000000000005"/>
+        <dia:real val="20.400000000000006"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_settings#</dia:string>
@@ -805,6 +805,29 @@ This has the effect of disabling support for boost XML archives.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#disable_eos_serialization#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, EOS portable serialisation will not be generated.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -823,7 +846,7 @@ This has the effect of disabling support for boost XML archives.#</dia:string>
         <dia:point val="-16.0146,12.0779"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.7025000000000006"/>
+        <dia:real val="7.7024999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.6000000000000005"/>
@@ -1100,16 +1123,16 @@ interested in.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-19.3437,2.5813"/>
+        <dia:point val="-19.3437,3.3813"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.0937,1.8313;-11.9633,12.8779"/>
+        <dia:rectangle val="-20.0937,2.6313;-11.9633,12.8779"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-19.3437,2.5813"/>
+        <dia:point val="-19.3437,3.3813"/>
         <dia:point val="-19.3437,8.02018"/>
         <dia:point val="-12.1633,8.02018"/>
         <dia:point val="-12.1633,12.0779"/>
@@ -1371,7 +1394,7 @@ interested in.#</dia:string>
         <dia:point val="-6.20458,-16.8854"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="16.670000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -2034,7 +2057,7 @@ writing to output.#</dia:string>
         <dia:point val="-4.33792,-31.7687"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="16.670000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2852,7 +2875,7 @@ writing to output.#</dia:string>
         <dia:point val="-16.5571,-43.8521"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.3071,-48.7187;6.82875,-43.0521"/>
+        <dia:rectangle val="-17.3071,-48.7687;6.82875,-43.0521"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

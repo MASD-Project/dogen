@@ -51,6 +51,8 @@ const std::string is_virtual_base_of_include(
     "boost/type_traits/is_virtual_base_of.hpp");
 const std::string xml_oarchive_include("boost/archive/xml_oarchive.hpp");
 const std::string xml_iarchive_include("boost/archive/xml_iarchive.hpp");
+const std::string eos_oarchive_include("boost/archive/eos_oarchive.hpp");
+const std::string eos_iarchive_include("boost/archive/eos_iarchive.hpp");
 const std::string text_oarchive_include("boost/archive/text_oarchive.hpp");
 const std::string text_iarchive_include("boost/archive/text_iarchive.hpp");
 const std::string binary_oarchive_include("boost/archive/binary_oarchive.hpp");
@@ -132,26 +134,16 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::format: return format_include;
     case boost_types::nvp: return nvp_include;
     case boost_types::split_free: return split_free_include;
-    case boost_types::assume_abstract:
-        return assume_abstract_include;
-    case boost_types::is_virtual_base_of:
-        return is_virtual_base_of_include;
-    case boost_types::xml_oarchive:
-        return xml_oarchive_include;
-    case boost_types::xml_iarchive:
-        return xml_iarchive_include;
-    case boost_types::text_oarchive:
-        return text_oarchive_include;
-    case boost_types::text_iarchive:
-        return text_iarchive_include;
-    case boost_types::binary_oarchive:
-        return binary_oarchive_include;
-    case boost_types::binary_iarchive:
-        return binary_iarchive_include;
-    case boost_types::polymorphic_iarchive:
-        return poly_iarchive_include;
-    case boost_types::polymorphic_oarchive:
-        return poly_oarchive_include;
+    case boost_types::assume_abstract: return assume_abstract_include;
+    case boost_types::is_virtual_base_of: return is_virtual_base_of_include;
+    case boost_types::xml_oarchive: return xml_oarchive_include;
+    case boost_types::xml_iarchive: return xml_iarchive_include;
+    case boost_types::text_oarchive: return text_oarchive_include;
+    case boost_types::text_iarchive: return text_iarchive_include;
+    case boost_types::binary_oarchive: return binary_oarchive_include;
+    case boost_types::binary_iarchive: return binary_iarchive_include;
+    case boost_types::polymorphic_iarchive: return poly_iarchive_include;
+    case boost_types::polymorphic_oarchive: return poly_oarchive_include;
     case boost_types::serialization_export: return export_include;
     case boost_types::string: return string_include;
     case boost_types::vector: return vector_include;
@@ -184,6 +176,8 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::io_time: return io_time_include;
     case boost_types::io_ptree: return io_ptree_include;
     case boost_types::serialization_pair: return serialization_pair_include;
+    case boost_types::eos_oarchive: return eos_oarchive_include;
+    case boost_types::eos_iarchive: return eos_iarchive_include;
     default: break;
     }
 

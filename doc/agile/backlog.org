@@ -438,10 +438,6 @@ the diagram, e.g. =--getter-prefix=set_=.
 We should check what ODB has done for this and implement the same
 pattern.
 
-*** Fix spelling of =rountrip_type=                                   :story:
-
-Should be =roundtrip_type=.
-
 *** "Data driven" includer                                            :story:
 
 We should simply go through all the types in the SML model and for
@@ -1005,14 +1001,6 @@ We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
 for this.
 
-*** Make EOS support optional                                         :story:
-
-With the release of boost 1.54 We can almost compile dogen with a
-vanilla boost. once we make ODB optional, the only blocker would be
-EOS. We should make it optional too. This is not so easy because it
-would break the tests as the output is expected to contain EOS
-stuff. Perhaps we should consider removing it altogether?
-
 *** Add support for boost concept                                     :story:
 
 Now dogen supports concepts, the natural thing to do is to express
@@ -1323,7 +1311,8 @@ models:
 - the qname of all keys in pods, etc must be part of the current
   model.
 - the qnames of all types as keys are consistent with the values.
-- type_name is non-empty
+- type_name is non-empty; cannot be blank or a variable name
+- type name must not exist on any model
 - parent names and original parent names must exist in current model.
 - leaves exist in current model.
 - entity must have at least one key attribute.
@@ -2301,11 +2290,6 @@ formatting on the stream depending on the primitive type.
 
 We need to distinguish between public and protected attributes when in
 the presence of inheritance. If not, issue a warning.
-
-*** Add tests for invalid types                                       :story:
-
-- type name is blank (or variable name)
-- type name does not exist on any model
 
 *** Add tests for disconnected connections                            :story:
 

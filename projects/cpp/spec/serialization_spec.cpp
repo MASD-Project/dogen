@@ -47,21 +47,21 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    rountrip_type<aspect_types_generator>();
-    rountrip_type<file_types_generator>();
-    rountrip_type<class_info_generator>();
-    rountrip_type<cmakelists_info_generator>();
-    rountrip_type<enum_info_generator>();
-    rountrip_type<enumerator_info_generator>();
-    rountrip_type<exception_info_generator>();
-    rountrip_type<source_file_generator>();
-    rountrip_type<namespace_info_generator>();
-    rountrip_type<nested_type_info_generator>();
-    rountrip_type<odb_options_info_generator>();
-    rountrip_type<parent_info_generator>();
-    rountrip_type<property_info_generator>();
-    rountrip_type<registrar_info_generator>();
-    rountrip_type<visitor_info_generator>();
+    roundtrip_type<aspect_types_generator>();
+    roundtrip_type<file_types_generator>();
+    roundtrip_type<class_info_generator>();
+    roundtrip_type<cmakelists_info_generator>();
+    roundtrip_type<enum_info_generator>();
+    roundtrip_type<enumerator_info_generator>();
+    roundtrip_type<exception_info_generator>();
+    roundtrip_type<source_file_generator>();
+    roundtrip_type<namespace_info_generator>();
+    roundtrip_type<nested_type_info_generator>();
+    roundtrip_type<odb_options_info_generator>();
+    roundtrip_type<parent_info_generator>();
+    roundtrip_type<property_info_generator>();
+    roundtrip_type<registrar_info_generator>();
+    roundtrip_type<visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

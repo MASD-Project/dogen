@@ -75,14 +75,14 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    rountrip_type<licence_generator>();
-    rountrip_type<modeline_generator>();
-    rountrip_type<modeline_group_generator>();
-    rountrip_type<cpp_includes_generator>();
-    rountrip_type<editors_generator>();
-    rountrip_type<modeline_locations_generator>();
-    rountrip_type<modeline_field_generator>();
-    rountrip_type<comment_styles_generator>();
+    roundtrip_type<licence_generator>();
+    roundtrip_type<modeline_generator>();
+    roundtrip_type<modeline_group_generator>();
+    roundtrip_type<cpp_includes_generator>();
+    roundtrip_type<editors_generator>();
+    roundtrip_type<modeline_locations_generator>();
+    roundtrip_type<modeline_field_generator>();
+    roundtrip_type<comment_styles_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

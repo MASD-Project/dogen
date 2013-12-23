@@ -46,16 +46,19 @@ const std::string expected_registrar_info(
 namespace dogen {
 namespace cpp_formatters {
 
-registrar_implementation::
-registrar_implementation(std::ostream& stream,
-    const bool disable_xml_serialization) :
+registrar_implementation::registrar_implementation(std::ostream& stream,
+    const bool disable_xml_serialization,
+    const bool disable_eos_serialization) :
     stream_(stream), utility_(stream_, indenter_),
-    disable_xml_serialization_(disable_xml_serialization) { }
+    disable_xml_serialization_(disable_xml_serialization),
+    disable_eos_serialization_(disable_eos_serialization) { }
 
 file_formatter::shared_ptr registrar_implementation::
-create(std::ostream& stream, const bool disable_xml_serialization) {
+create(std::ostream& stream, const bool disable_xml_serialization,
+    const bool disable_eos_serialization) {
     return file_formatter::shared_ptr(
-        new registrar_implementation(stream, disable_xml_serialization));
+        new registrar_implementation(stream, disable_xml_serialization,
+            disable_eos_serialization));
 }
 
 void registrar_implementation::format(const cpp::source_file& f) {
@@ -71,12 +74,6 @@ void registrar_implementation::format(const cpp::source_file& f) {
     const bool blank_line(false);
     includes includes(stream_, blank_line);
     includes.format(f);
-
-    // FIXME: massive hack for EOS workaround
-    stream_ << "#ifdef __linux__" << std::endl
-            << "#include \"eos/portable_iarchive.hpp\"" << std::endl
-            << "#include \"eos/portable_oarchive.hpp\"" << std::endl
-            << "#endif" << std::endl;
     utility_.blank_line();
 
     {
@@ -137,12 +134,12 @@ void registrar_implementation::format(const cpp::source_file& f) {
             utility_.blank_line();
         }
 
-        stream_ << "#ifdef __linux__" << std::endl
-                << indenter_ << "template void register_types("
-                << "eos::portable_oarchive& ar);" << std::endl;
-        stream_ << indenter_ << "template void register_types("
-                << "eos::portable_iarchive& ar);" << std::endl
-                << "#endif" << std::endl;
+        if (!disable_eos_serialization_) {
+            stream_ << indenter_ << "template void register_types("
+                    << "eos::portable_oarchive& ar);" << std::endl;
+            stream_ << indenter_ << "template void register_types("
+                    << "eos::portable_iarchive& ar);" << std::endl;
+        }
         utility_.blank_line();
     }
 }

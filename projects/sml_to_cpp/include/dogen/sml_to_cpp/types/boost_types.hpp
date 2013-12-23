@@ -74,7 +74,9 @@ enum class boost_types : unsigned int {
     serialization_pair = 39, ///< Serialisation support for std::pair
     ptree = 40,
     serialization_ptree = 41,
-    io_ptree = 42
+    io_ptree = 42,
+    eos_oarchive = 43, ///< EOS output archive
+    eos_iarchive = 44 ///< EOS input archive
 };
 
 } }

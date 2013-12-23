@@ -52,10 +52,10 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<book_types_generator>();
-    rountrip_type<colour_types_generator>();
-    rountrip_type<pkg1::shape_types_generator>();
-    rountrip_type<a_class_generator>();
+    roundtrip_type<book_types_generator>();
+    roundtrip_type<colour_types_generator>();
+    roundtrip_type<pkg1::shape_types_generator>();
+    roundtrip_type<a_class_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {

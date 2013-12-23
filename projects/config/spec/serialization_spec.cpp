@@ -47,14 +47,14 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    rountrip_type<archive_types_generator>();
-    rountrip_type<cpp_facet_types_generator>();
-    rountrip_type<cpp_settings_generator>();
-    rountrip_type<modeling_settings_generator>();
-    rountrip_type<output_settings_generator>();
-    rountrip_type<reference_generator>();
-    rountrip_type<settings_generator>();
-    rountrip_type<troubleshooting_settings_generator>();
+    roundtrip_type<archive_types_generator>();
+    roundtrip_type<cpp_facet_types_generator>();
+    roundtrip_type<cpp_settings_generator>();
+    roundtrip_type<modeling_settings_generator>();
+    roundtrip_type<output_settings_generator>();
+    roundtrip_type<reference_generator>();
+    roundtrip_type<settings_generator>();
+    roundtrip_type<troubleshooting_settings_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

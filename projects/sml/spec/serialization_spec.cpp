@@ -91,18 +91,18 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    rountrip_type<generation_types_generator>();
-    rountrip_type<nested_qname_generator>();
-    rountrip_type<property_generator>();
-    rountrip_type<operation_generator>();
-    rountrip_type<qname_generator>();
-    rountrip_type<primitive_generator>();
-    rountrip_type<enumerator_generator>();
-    rountrip_type<enumeration_generator>();
-    rountrip_type<module_generator>();
-    rountrip_type<object_generator>();
-    rountrip_type<concept_generator>();
-    rountrip_type<model_generator>();
+    roundtrip_type<generation_types_generator>();
+    roundtrip_type<nested_qname_generator>();
+    roundtrip_type<property_generator>();
+    roundtrip_type<operation_generator>();
+    roundtrip_type<qname_generator>();
+    roundtrip_type<primitive_generator>();
+    roundtrip_type<enumerator_generator>();
+    roundtrip_type<enumeration_generator>();
+    roundtrip_type<module_generator>();
+    roundtrip_type<object_generator>();
+    roundtrip_type<concept_generator>();
+    roundtrip_type<model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -161,6 +161,10 @@ append_implementation_dependencies(const relationships& rel,
             il.system().push_back(boost_.include(boost_types::xml_oarchive));
             il.system().push_back(boost_.include(boost_types::xml_iarchive));
         }
+        if (!settings_.disable_eos_serialization()) {
+            il.system().push_back(boost_.include(boost_types::eos_oarchive));
+            il.system().push_back(boost_.include(boost_types::eos_iarchive));
+        }
         il.system().push_back(boost_.include(boost_types::text_oarchive));
         il.system().push_back(boost_.include(boost_types::text_iarchive));
         il.system().push_back(boost_.include(boost_types::binary_oarchive));
@@ -776,6 +780,10 @@ includer::includes_for_registrar(const cpp::content_descriptor& cd) const {
     if (!settings_.disable_xml_serialization()) {
         r.system().push_back(boost_.include(boost_types::xml_oarchive));
         r.system().push_back(boost_.include(boost_types::xml_iarchive));
+    }
+    if (!settings_.disable_eos_serialization()) {
+        r.system().push_back(boost_.include(boost_types::eos_oarchive));
+        r.system().push_back(boost_.include(boost_types::eos_iarchive));
     }
     r.system().push_back(boost_.include(boost_types::text_oarchive));
     r.system().push_back(boost_.include(boost_types::text_iarchive));

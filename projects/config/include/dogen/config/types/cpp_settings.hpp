@@ -72,7 +72,8 @@ public:
         const std::string& test_data_facet_folder,
         const std::string& odb_facet_folder,
         const bool disable_xml_serialization,
-        const bool use_integrated_io);
+        const bool use_integrated_io,
+        const bool disable_eos_serialization);
 
 private:
     template<typename Archive>
@@ -296,6 +297,14 @@ public:
     void use_integrated_io(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, EOS portable serialisation will not be generated.
+     */
+    /**@{*/
+    bool disable_eos_serialization() const;
+    void disable_eos_serialization(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const cpp_settings& rhs) const;
     bool operator!=(const cpp_settings& rhs) const {
@@ -329,6 +338,7 @@ private:
     std::string odb_facet_folder_;
     bool disable_xml_serialization_;
     bool use_integrated_io_;
+    bool disable_eos_serialization_;
 };
 
 } }

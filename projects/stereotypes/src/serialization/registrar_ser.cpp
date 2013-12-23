@@ -27,10 +27,6 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include "dogen/stereotypes/serialization/further_refined_ser.hpp"
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
 
 namespace dogen {
 namespace stereotypes {
@@ -52,9 +48,5 @@ template void register_types(boost::archive::binary_iarchive& ar);
 template void register_types(boost::archive::xml_oarchive& ar);
 template void register_types(boost::archive::xml_iarchive& ar);
 
-#ifdef __linux__
-template void register_types(eos::portable_oarchive& ar);
-template void register_types(eos::portable_iarchive& ar);
-#endif
 
 } }

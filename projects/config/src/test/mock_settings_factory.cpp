@@ -115,6 +115,7 @@ cpp_settings mock_settings_factory::build_cpp_settings(
     r.serialization_facet_folder(serialization_facet_folder);
     r.test_data_facet_folder(test_data_facet_folder);
     r.odb_facet_folder(odb_facet_folder);
+    r.disable_eos_serialization(true);
     return r;
 }
 

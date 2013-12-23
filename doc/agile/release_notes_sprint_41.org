@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-23 Mon 14:45]
+Clock summary at [2013-12-23 Mon 18:16]
 
-| Headline                                                | Time    |       |      |
-|---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *19:38* |       |      |
-|---------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                         |         | 19:38 |      |
-| IMPLEMENTATION Release notes and backlog grooming       |         |       | 0:43 |
-| COMPLETED Use relationship container for visitors       |         |       | 1:13 |
-| COMPLETED Create an =association_indexer= and add tests |         |       | 8:20 |
-| COMPLETED Remove model from extractor                   |         |       | 0:16 |
-| IMPLEMENTATION Add om's workflow to engine              |         |       | 0:56 |
-| IMPLEMENTATION Compile code without PFH                 |         |       | 8:10 |
+| Headline                                                | Time    |       |       |
+|---------------------------------------------------------+---------+-------+-------|
+| *Total time*                                            | *22:02* |       |       |
+|---------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                         |         | 22:02 |       |
+| IMPLEMENTATION Release notes and backlog grooming       |         |       |  0:43 |
+| COMPLETED Use relationship container for visitors       |         |       |  1:13 |
+| COMPLETED Create an =association_indexer= and add tests |         |       |  8:20 |
+| COMPLETED Remove model from extractor                   |         |       |  0:16 |
+| IMPLEMENTATION Add om's workflow to engine              |         |       |  0:56 |
+| IMPLEMENTATION Compile code without PFH                 |         |       | 10:34 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -133,6 +133,17 @@ sense for the association indexer.
     CLOSED: [2013-12-21 Sat 11:36]
     CLOCK: [2013-12-21 Sat 11:20]--[2013-12-21 Sat 11:36] =>  0:16
 
+*** COMPLETED Make EOS support optional                               :story:
+    CLOSED: [2013-12-23 Mon 17:22]
+
+With the release of boost 1.54 We can almost compile dogen with a
+vanilla boost. once we make ODB optional, the only blocker would be
+EOS. We should make it optional too. This is not so easy because it
+would break the tests as the output is expected to contain EOS
+stuff. Perhaps we should consider removing it altogether?
+
+Fixed as part of the PFH work.
+
 *** IMPLEMENTATION Add om's workflow to engine                        :story:
 
 We need to find a way to add the available formatters in om into the
@@ -198,15 +209,25 @@ board, and then start removing any PFH specific things from dogen.
       CLOCK: [2013-12-22 Sun 18:54]--[2013-12-22 Sun 18:57] =>  0:03
       CLOCK: [2013-12-22 Sun 17:35]--[2013-12-22 Sun 18:10] =>  0:35
 
-**** IMPLEMENTATION Detect PFH and disable system headers              :task:
+**** COMPLETED Detect PFH and disable system headers                   :task:
+     CLOSED: [2013-12-23 Mon 15:11]
+     CLOCK: [2013-12-23 Mon 14:46]--[2013-12-23 Mon 15:11] =>  0:25
 
 If PFH is not found we should use system directories for boost.
 
-**** Split EOS from main serialisation test                            :task:
+**** IMPLEMENTATION Split EOS from main serialisation test             :task:
 
 We need a model just for EOS. We also need a command line switch to
 enable it (switched off by default).
 
+***** COMPLETED Create a new config option for EOS and default it to false
+      CLOSED: [2013-12-23 Mon 18:15]
+      CLOCK: [2013-12-23 Mon 16:16]--[2013-12-23 Mon 18:07] =>  1:51
+      CLOCK: [2013-12-23 Mon 15:19]--[2013-12-23 Mon 15:22] =>  0:03
+      CLOCK: [2013-12-23 Mon 15:14]--[2013-12-23 Mon 15:19] =>  0:05
+
+***** Regenerate all models without EOS
+***** Create a model to test EOS that only kicks in on linux
 **** Create features for ODB and EOS                                   :task:
 
 - detect ODB's presence and enable it/disable it accordingly
@@ -219,6 +240,12 @@ Packages to install:
 
 : apt-get install libboost1.54-all-dev
 : apt-get install cmake
+
+**** Check packaging code for PFH dependencies                         :task:
+
+We are manually copying a lot of shared objects from PFH when creating
+packages, this should be replaced with appropriate dependencies (at
+least for Debian packages).
 
 *** Reduce the number of valgrind errors back to normal               :spike:
 
@@ -251,6 +278,27 @@ one primitive type and see if it compiles with G++ 4.8.
 
 As part of the attempt to get the code to build without the PFH, we
 need to ensure that we compile with the latest stable clang.
+
+*** Fix cp error on cmake without PFH                                 :spike:
+
+: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
+
+*** Fix doxygen's main page documentation                             :story:
+
+Our main page documentation its awful at the moment - really old and
+meaningless. We should either remove it altogether or replace it with
+something meaningful.
+
+*** Fix the read me story around binary packages                      :story:
+
+We need to tell the truth more clearly around binary packages -
+reading the read me its entirely unclear if they are available or not,
+or where to get them from.
+
+*** COMPLETED Fix spelling of =rountrip_type=                         :story:
+    CLOSED: [2013-12-23 Mon 18:07]
+
+Should be =roundtrip_type=.
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:

@@ -54,11 +54,11 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<class_1_generator>();
-    rountrip_type<class_2_generator>();
-    rountrip_type<class_3_generator>();
-    rountrip_type<class_4_generator>();
-    rountrip_type<class_5_generator>();
+    roundtrip_type<class_1_generator>();
+    roundtrip_type<class_2_generator>();
+    roundtrip_type<class_3_generator>();
+    roundtrip_type<class_4_generator>();
+    roundtrip_type<class_5_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {

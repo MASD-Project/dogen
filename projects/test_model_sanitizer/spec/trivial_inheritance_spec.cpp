@@ -113,15 +113,15 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<child_with_members_generator>();
-    rountrip_type<second_child_without_members_generator>();
-    rountrip_type<child_of_a_child1_generator>();
-    rountrip_type<child_of_a_child2_generator>();
-    rountrip_type<pkg1::child_generator>();
-    rountrip_type<pkg3::child_generator>();
-    rountrip_type<pkg4::child_generator>();
-    rountrip_type<move_ctor_descendant_generator>();
-    rountrip_type<move_ctor_empty_descendant_generator>();
+    roundtrip_type<child_with_members_generator>();
+    roundtrip_type<second_child_without_members_generator>();
+    roundtrip_type<child_of_a_child1_generator>();
+    roundtrip_type<child_of_a_child2_generator>();
+    roundtrip_type<pkg1::child_generator>();
+    roundtrip_type<pkg3::child_generator>();
+    roundtrip_type<pkg4::child_generator>();
+    roundtrip_type<move_ctor_descendant_generator>();
+    roundtrip_type<move_ctor_empty_descendant_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {

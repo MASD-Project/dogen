@@ -33,10 +33,6 @@
 #include "dogen/std_model/serialization/class_e_ser.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
 
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
 
 namespace boost {
 namespace serialization {
@@ -81,10 +77,5 @@ template void load(archive::binary_iarchive& ar, dogen::std_model::class_e& v, u
 
 template void save(archive::xml_oarchive& ar, const dogen::std_model::class_e& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::std_model::class_e& v, unsigned int version);
-
-#ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::std_model::class_e& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::std_model::class_e& v, unsigned int version);
-#endif
 
 } }

@@ -57,15 +57,15 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<class_a_generator>();
-    rountrip_type<class_b_generator>();
-    rountrip_type<class_d_generator>();
-    rountrip_type<class_e_generator>();
-    rountrip_type<class_f_generator>();
-    rountrip_type<class_g_generator>();
-    rountrip_type<class_h_generator>();
-    rountrip_type<class_j_generator>();
-    rountrip_type<primitives_generator>();
+    roundtrip_type<class_a_generator>();
+    roundtrip_type<class_b_generator>();
+    roundtrip_type<class_d_generator>();
+    roundtrip_type<class_e_generator>();
+    roundtrip_type<class_f_generator>();
+    roundtrip_type<class_g_generator>();
+    roundtrip_type<class_h_generator>();
+    roundtrip_type<class_j_generator>();
+    roundtrip_type<primitives_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {

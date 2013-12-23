@@ -33,7 +33,8 @@ cpp_settings::cpp_settings()
       disable_facet_folders_(static_cast<bool>(0)),
       disable_unique_file_names_(static_cast<bool>(0)),
       disable_xml_serialization_(static_cast<bool>(0)),
-      use_integrated_io_(static_cast<bool>(0)) { }
+      use_integrated_io_(static_cast<bool>(0)),
+      disable_eos_serialization_(static_cast<bool>(0)) { }
 
 cpp_settings::cpp_settings(cpp_settings&& rhs)
     : verbose_(std::move(rhs.verbose_)),
@@ -57,7 +58,8 @@ cpp_settings::cpp_settings(cpp_settings&& rhs)
       test_data_facet_folder_(std::move(rhs.test_data_facet_folder_)),
       odb_facet_folder_(std::move(rhs.odb_facet_folder_)),
       disable_xml_serialization_(std::move(rhs.disable_xml_serialization_)),
-      use_integrated_io_(std::move(rhs.use_integrated_io_)) { }
+      use_integrated_io_(std::move(rhs.use_integrated_io_)),
+      disable_eos_serialization_(std::move(rhs.disable_eos_serialization_)) { }
 
 cpp_settings::cpp_settings(
     const bool verbose,
@@ -81,7 +83,8 @@ cpp_settings::cpp_settings(
     const std::string& test_data_facet_folder,
     const std::string& odb_facet_folder,
     const bool disable_xml_serialization,
-    const bool use_integrated_io)
+    const bool use_integrated_io,
+    const bool disable_eos_serialization)
     : verbose_(verbose),
       split_project_(split_project),
       project_directory_(project_directory),
@@ -103,7 +106,8 @@ cpp_settings::cpp_settings(
       test_data_facet_folder_(test_data_facet_folder),
       odb_facet_folder_(odb_facet_folder),
       disable_xml_serialization_(disable_xml_serialization),
-      use_integrated_io_(use_integrated_io) { }
+      use_integrated_io_(use_integrated_io),
+      disable_eos_serialization_(disable_eos_serialization) { }
 
 void cpp_settings::swap(cpp_settings& other) noexcept {
     using std::swap;
@@ -129,6 +133,7 @@ void cpp_settings::swap(cpp_settings& other) noexcept {
     swap(odb_facet_folder_, other.odb_facet_folder_);
     swap(disable_xml_serialization_, other.disable_xml_serialization_);
     swap(use_integrated_io_, other.use_integrated_io_);
+    swap(disable_eos_serialization_, other.disable_eos_serialization_);
 }
 
 bool cpp_settings::operator==(const cpp_settings& rhs) const {
@@ -153,7 +158,8 @@ bool cpp_settings::operator==(const cpp_settings& rhs) const {
         test_data_facet_folder_ == rhs.test_data_facet_folder_ &&
         odb_facet_folder_ == rhs.odb_facet_folder_ &&
         disable_xml_serialization_ == rhs.disable_xml_serialization_ &&
-        use_integrated_io_ == rhs.use_integrated_io_;
+        use_integrated_io_ == rhs.use_integrated_io_ &&
+        disable_eos_serialization_ == rhs.disable_eos_serialization_;
 }
 
 cpp_settings& cpp_settings::operator=(cpp_settings other) {
@@ -432,6 +438,14 @@ bool cpp_settings::use_integrated_io() const {
 
 void cpp_settings::use_integrated_io(const bool v) {
     use_integrated_io_ = v;
+}
+
+bool cpp_settings::disable_eos_serialization() const {
+    return disable_eos_serialization_;
+}
+
+void cpp_settings::disable_eos_serialization(const bool v) {
+    disable_eos_serialization_ = v;
 }
 
 } }
