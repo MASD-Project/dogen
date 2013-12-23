@@ -271,6 +271,8 @@ program_options_parser::cpp_options_factory() const {
             "Name for the ODB facet folder.")
         ("cpp-disable-xml-serialization", "Do not add NVP macros to boost"
             " serialization code. This is used to support boost XML archives.")
+        ("cpp-disable-eos-serialization", "Do not add EOS serialisation support"
+            " to boost serialization code.")
         ("cpp-use-integrated-io", "Add inserters directly to domain facet "
             "rather than using IO facet.")
         ("cpp-disable-versioning",

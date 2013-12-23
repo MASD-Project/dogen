@@ -36,10 +36,6 @@
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
 
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
 
 BOOST_CLASS_TRACKING(
     dogen::cpp::entity,
@@ -78,10 +74,5 @@ template void load(archive::binary_iarchive& ar, dogen::cpp::entity& v, unsigned
 
 template void save(archive::xml_oarchive& ar, const dogen::cpp::entity& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::cpp::entity& v, unsigned int version);
-
-#ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::cpp::entity& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::cpp::entity& v, unsigned int version);
-#endif
 
 } }

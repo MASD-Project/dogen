@@ -46,6 +46,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
     --cpp-disable-cmakelists
+    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
@@ -69,6 +70,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
+    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
@@ -91,6 +93,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
+    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
@@ -115,6 +118,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
+    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/spec/.*
     --verbose
     --delete-extra-files
@@ -137,6 +141,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
     --cpp-enable-facet odb
+    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*sql
@@ -164,6 +169,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
+    --cpp-disable-eos-serialization
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
@@ -190,6 +196,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
     --cpp-disable-cmakelists
+    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
@@ -217,6 +224,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
     --cpp-disable-cmakelists
+    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
@@ -244,6 +252,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
+    --cpp-disable-eos-serialization
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
@@ -271,6 +280,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
+    --cpp-disable-eos-serialization
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*

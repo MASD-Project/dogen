@@ -33,10 +33,6 @@
 #include "dogen/om/serialization/modeline_locations_ser.hpp"
 #include "dogen/om/serialization/modeline_ser.hpp"
 
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
 
 namespace boost {
 namespace serialization {
@@ -75,10 +71,5 @@ template void load(archive::binary_iarchive& ar, dogen::om::modeline& v, unsigne
 
 template void save(archive::xml_oarchive& ar, const dogen::om::modeline& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::om::modeline& v, unsigned int version);
-
-#ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::om::modeline& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::om::modeline& v, unsigned int version);
-#endif
 
 } }

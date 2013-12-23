@@ -64,7 +64,8 @@ operator<<(std::basic_ostream<CharT, TraitsT>& stream, severity_level level) {
     case severity_level::fatal: stream << "FATAL"; break;
     default:
         using dogen::utility::exception::invalid_enum_value;
-        BOOST_THROW_EXCEPTION(invalid_enum_value("Invalid or unexpected severity level"));
+        BOOST_THROW_EXCEPTION(
+            invalid_enum_value("Invalid or unexpected severity level"));
         break;
     }
     return stream;
