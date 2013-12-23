@@ -51,8 +51,10 @@ option(WITH_PROFILING "Build the project with profiling support" off)
 find_package(Threads REQUIRED)
 
 # boost
-set(BOOST_ROOT "$ENV{PFH_LOCATION}")
-set(Boost_NO_SYSTEM_PATHS "ON")
+if (DEFINED ENV{PFH_LOCATION})
+    set(BOOST_ROOT "$ENV{PFH_LOCATION}")
+    set(Boost_NO_SYSTEM_PATHS "ON")
+endif()
 
 add_definitions(-DBOOST_ALL_DYN_LINK)
 find_package(Boost 1.54 REQUIRED COMPONENTS
@@ -139,21 +141,6 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(STRIP ${GIT_COMMIT_COUNT} GIT_COMMIT_COUNT)
 
-# ssh
-find_program(ssh_executable ssh)
-if(ssh_executable)
-    message(STATUS "Found ssh (${ssh_executable})...")
-else()
-    message(FATAL_ERROR "Could not find a valid ssh installation.")
-endif()
-
-find_program(scp_executable scp)
-if(scp_executable)
-    message(STATUS "Found scp (${scp_executable})...")
-else()
-    message(FATAL_ERROR "Could not find a valid ssh installation.")
-endif()
-
 #
 # useful vars
 #
@@ -234,6 +221,8 @@ if(DOXYGEN_FOUND)
         DESTINATION share/doc/${DOGEN_VERSION}/
         COMPONENT documentation
         )
+else()
+    message(STATUS "Not generating API documentation.")
 endif()
 
 #
