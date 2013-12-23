@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-22 Sun 18:57]
+Clock summary at [2013-12-23 Mon 14:45]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *19:14* |       |      |
+| *Total time*                                            | *19:38* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                         |         | 19:14 |      |
-| IMPLEMENTATION Release notes and backlog grooming       |         |       | 0:19 |
+| Development Stories Implemented                         |         | 19:38 |      |
+| IMPLEMENTATION Release notes and backlog grooming       |         |       | 0:43 |
 | COMPLETED Use relationship container for visitors       |         |       | 1:13 |
 | COMPLETED Create an =association_indexer= and add tests |         |       | 8:20 |
 | COMPLETED Remove model from extractor                   |         |       | 0:16 |
@@ -26,6 +26,9 @@ Clock summary at [2013-12-22 Sun 18:57]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-23 Mon 14:40]--[2013-12-23 Mon 14:45] =>  0:05
+    CLOCK: [2013-12-23 Mon 14:32]--[2013-12-23 Mon 14:40] =>  0:08
+    CLOCK: [2013-12-23 Mon 14:21]--[2013-12-23 Mon 14:32] =>  0:11
     CLOCK: [2013-12-18 Wed 07:56]--[2013-12-18 Wed 08:11] =>  0:15
     CLOCK: [2013-12-16 Mon 07:55]--[2013-12-16 Mon 07:59] =>  0:04
 
@@ -175,7 +178,8 @@ Mainly deal with move from boost log v1 to v2.
 
 : cp: cannot stat ‘/usr/lib/x86_64-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
-**** IMPLEMENTATION Upgrade turbo to boost 1.55                        :task:
+**** COMPLETED Upgrade turbo to boost 1.55                             :task:
+     CLOSED: [2013-12-23 Mon 14:29]
 
 The least disruptive way of doing this change is to upgrade boost in
 turbo, get all of the PFHs up-to-date and the build green across the
@@ -189,9 +193,64 @@ board, and then start removing any PFH specific things from dogen.
       CLOCK: [2013-12-22 Sun 12:27]--[2013-12-22 Sun 13:18] =>  0:51
       CLOCK: [2013-12-22 Sun 11:10]--[2013-12-22 Sun 12:27] =>  1:17
 
-***** IMPLEMENTATION Upgrade Windows
+***** COMPLETED Upgrade Windows
+      CLOSED: [2013-12-23 Mon 14:29]
       CLOCK: [2013-12-22 Sun 18:54]--[2013-12-22 Sun 18:57] =>  0:03
       CLOCK: [2013-12-22 Sun 17:35]--[2013-12-22 Sun 18:10] =>  0:35
+
+**** IMPLEMENTATION Detect PFH and disable system headers              :task:
+
+If PFH is not found we should use system directories for boost.
+
+**** Split EOS from main serialisation test                            :task:
+
+We need a model just for EOS. We also need a command line switch to
+enable it (switched off by default).
+
+**** Create features for ODB and EOS                                   :task:
+
+- detect ODB's presence and enable it/disable it accordingly
+- detect EOS presence and enable it/disable it accordingly
+- create a find EOS cmake script
+
+**** Update read me with compilation instructions                      :task:
+
+Packages to install:
+
+: apt-get install libboost1.54-all-dev
+: apt-get install cmake
+
+*** Reduce the number of valgrind errors back to normal               :spike:
+
+With the move to boost log v2 the valgrind numbers increased
+astronomically. This appears to be linked to the boost log v2 change,
+as there were a number of ignores we had setup for log v1.
+
+*** Fix broken Windows build                                          :spike:
+
+We do not seem to be detecting the location of boost correctly.
+
+*** Fix broken clang 3.2 32-bit build                                 :spike:
+
+We are having some really puzzling link errors:
+
+: ../source/projects/sml/src/types/object.cpp:(.text+0x7d): undefined reference to `std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned int) const'
+
+This is probably related to the fact that in ubuntu clang uses the
+standard library from g++ 4.8. We are probably mixing and matching 4.7
+and 4.8 (as boost in PFH is 4.7).
+
+*** Compile code with g++ 4.8                                         :story:
+
+When we compile with stable gcc we get errors in the boost model. They
+appear to be related to using variants with multiple primitive types
+such as int and double. We should try to change the model to use only
+one primitive type and see if it compiles with G++ 4.8.
+
+*** Compile code with clang 3.3                                       :story:
+
+As part of the attempt to get the code to build without the PFH, we
+need to ensure that we compile with the latest stable clang.
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:
