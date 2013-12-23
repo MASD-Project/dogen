@@ -25,7 +25,11 @@
 #include <boost/log/expressions.hpp>
 #include <boost/log/sources/logger.hpp>
 #include <boost/log/support/date_time.hpp>
+#if BOOST_VERSION >= 105500
 #include <boost/utility/empty_deleter.hpp>
+#else
+#include  <boost/log/utility/empty_deleter.hpp>
+#endif
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
@@ -73,9 +77,10 @@ void life_cycle_manager::create_file_backend(
 }
 
 void life_cycle_manager::create_console_backend(const severity_level severity) {
+    using namespace boost; // to handle empty deleter moving namespaces
     using namespace boost::log;
 
-    boost::shared_ptr<std::ostream> s(&std::clog, boost::empty_deleter());
+    boost::shared_ptr<std::ostream> s(&std::clog, empty_deleter());
     auto backend(boost::make_shared<sinks::text_ostream_backend>());
     backend->add_stream(s);
 
