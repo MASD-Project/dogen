@@ -91,7 +91,8 @@ endif()
 
 # enable RTTI
 # -fvisibility=hidden
-set(other_flags "-frtti -fvisibility-inlines-hidden -fvisibility=default")
+set(other_flags "-std=c++11 -frtti -fvisibility-inlines-hidden")
+set(other_flags "${other_flags} -fvisibility=default")
 
 # set the flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${optimisation_flags}")
