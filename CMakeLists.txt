@@ -78,6 +78,14 @@ else()
     message(STATUS "odb not found.")
 endif()
 
+# eos
+find_package(EOS)
+if(EOS_FOUND)
+    message(STATUS "Found eos...")
+else()
+    message(STATUS "eos not found.")
+endif()
+
 # profiling
 if(WITH_PROFILING)
     if(WITH_DEBUG)
