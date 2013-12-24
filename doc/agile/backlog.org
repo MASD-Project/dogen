@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for units                                             :story:
+
+With user defined literals in C++11, defining one's own numeric types
+became more convenient. We should look into adding support for this in
+dogen.
+
+See [[http://www.codeproject.com/Articles/447922/Application-of-Cplusplus11-User-Defined-Literals-t][Application of C++11 User-Defined Literals to Handling Scientific
+Quantities, Number Representation and String Manipulation]]
+
 *** Use xtime-like stopwatch in selected places to log timings        :story:
 
 We should log the time it takes for certain operations in dogen so
