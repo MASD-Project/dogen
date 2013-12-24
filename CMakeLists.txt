@@ -75,7 +75,7 @@ find_package(ODB)
 if(ODB_FOUND)
     message(STATUS "Found odb...")
 else()
-    message(FATAL_ERROR "odb not found.")
+    message(STATUS "odb not found.")
 endif()
 
 # profiling
