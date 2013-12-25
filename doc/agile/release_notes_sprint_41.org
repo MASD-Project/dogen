@@ -277,13 +277,13 @@ as there were a number of ignores we had setup for log v1.
     CLOCK: [2013-12-24 Tue 10:43]--[2013-12-24 Tue 11:12] =>  0:29
     CLOCK: [2013-12-24 Tue 09:14]--[2013-12-24 Tue 10:43] =>  1:29
 
-New understanding: the problem appears to be with boost 1.55;
+New understanding: the problem appears to be with boost 1.54;
 compiling with g++-4.7 revealed the same errors. The root cause of the
 problem appears to be some changes in boost 1.54 as described [[http://lists.boost.org/boost-users/2013/08/79650.php][here]]. It
-seems like the easiest thing is to require boost 1.55, but the problem
-is a lot of distributions are shipping with 1.54 and there are no debs
-for 1.55 so we can't even tell if the changes to build without PFH
-have worked.
+seems like the easiest thing is to require boost 1.55, but
+unfortunately a lot of distributions are currently shipping with 1.54;
+in addition, there are no debs for 1.55 yet so we can't even tell if
+the changes to build without PFH have worked.
 
 Previous understanding: When we compile with stable gcc we get errors
 in the boost model. They appear to be related to using variants with
