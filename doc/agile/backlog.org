@@ -1533,6 +1533,12 @@ model. This would allow compiling the tests on C++ 03 and C++ 11. We
 would also have to move this flag from the generic C++ section to each
 individual library/binary makefile.
 
+Note: actually, this cannot be done. The reason why we created the
+sanitizer in the first place was because the diffs wouldn't work if
+the specs were placed in the test models (e.g. the generated code
+would not contain the specs and thus be different). We will probably
+need a 03 sanitizer, an 11 sanitizer, etc.
+
 See [[*Add%20C%2B%2B-03%20mode][C++ 03 support]].
 
 *** Enumeration string conversion could be configurable               :story:
