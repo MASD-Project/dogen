@@ -19,10 +19,30 @@
 #
 set(main_name "test_model_sanitizer")
 set(spec_name "${main_name}_spec")
+set(candindate_spec_files "")
 set(spec_files "")
-file(GLOB_RECURSE spec_files RELATIVE
+file(GLOB_RECURSE candindate_spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+foreach(candindate_spec_file ${candindate_spec_files})
+    if(NOT ODB_FOUND)
+        if (hpp_file MATCHES "database")
+            set(ignore_file true)
+        endif()
+    endif()
+
+    if(NOT EOS_FOUND)
+        if (hpp_file MATCHES "eos")
+            set(ignore_file true)
+        endif()
+    endif()
+
+    if(NOT ignore_file)
+        set(spec_files ${spec_files} ${candindate_spec_file})
+    endif()
+    set(ignore_file false)
+endforeach()
 
 # we need to add these manually as the point of this test model
 # is not to generate a make file.
@@ -61,6 +81,10 @@ target_link_libraries(${spec_name}
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     )
+
+if(EOS_FOUND)
+    target_link_libraries(${spec_name} eos_serialization)
+endif()
 
 set(${spec_name}_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 

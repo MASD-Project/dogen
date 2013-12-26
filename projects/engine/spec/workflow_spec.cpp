@@ -519,6 +519,28 @@ BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
+BOOST_AUTO_TEST_CASE(eos_serialization_model_generates_expected_code) {
+    SETUP_TEST_LOG("eos_serialisation_model_generates_expected_code");
+    const auto t(dia_sml::input_enable_eos_serialization_dia());
+
+    using dogen::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+            auto s(default_mock_settings(tds));
+            auto cs(s.cpp());
+            using dogen::config::cpp_facet_types;
+            std::set<cpp_facet_types> f = {
+                cpp_facet_types::types,
+                cpp_facet_types::serialization
+            };
+            cs.enabled_facets(f);
+            cs.disable_eos_serialization(false);
+            s.cpp(cs);
+            return s;
+        });
+
+    BOOST_CHECK(check_code_generation(t, lambda));
+}
+
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     const auto t(dia_sml::input_package_without_name_dia());

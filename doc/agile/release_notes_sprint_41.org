@@ -10,21 +10,22 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-24 Tue 21:40]
+Clock summary at [2013-12-26 Thu 22:43]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *27:48* |       |       |
+| *Total time*                                                       | *29:56* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 27:48 |       |
+| Development Stories Implemented                                    |         | 29:56 |       |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:43 |
 | COMPLETED Use relationship container for visitors                  |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests            |         |       |  8:20 |
 | COMPLETED Remove model from extractor                              |         |       |  0:16 |
+| COMPLETED Fix boost variant errors with boost 1.54                 |         |       |  4:19 |
+| COMPLETED Fix doxygen's main page documentation                    |         |       |  1:03 |
+| COMPLETED Compile code without PFH                                 |         |       | 12:47 |
 | IMPLEMENTATION Add om's workflow to engine                         |         |       |  0:56 |
-| IMPLEMENTATION Compile code without PFH                            |         |       | 11:42 |
 | IMPLEMENTATION Reduce the number of valgrind errors back to normal |         |       |  0:19 |
-| IMPLEMENTATION Fix boost variant errors with boost 1.54            |         |       |  4:19 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -151,21 +152,38 @@ Fixed as part of the PFH work.
 
 Should be =roundtrip_type=.
 
-*** IMPLEMENTATION Add om's workflow to engine                        :story:
+*** COMPLETED Fix boost variant errors with boost 1.54                :story:
+    CLOSED: [2013-12-25 Wed 11:59]
+    CLOCK: [2013-12-24 Tue 11:12]--[2013-12-24 Tue 13:33] =>  2:21
+    CLOCK: [2013-12-24 Tue 10:43]--[2013-12-24 Tue 11:12] =>  0:29
+    CLOCK: [2013-12-24 Tue 09:14]--[2013-12-24 Tue 10:43] =>  1:29
 
-We need to find a way to add the available formatters in om into the
-engine workflow, replacing the legacy c++ formatters. With this we can
-replace one formatter at a time.
+New understanding: the problem appears to be with boost 1.55;
+compiling with g++-4.7 revealed the same errors. The root cause of the
+problem appears to be some changes in boost 1.54 as described [[http://lists.boost.org/boost-users/2013/08/79650.php][here]]. It
+seems like the easiest thing is to require boost 1.55, but the problem
+is a lot of distributions are shipping with 1.54 and there are no debs
+for 1.55 so we can't even tell if the changes to build without PFH
+have worked.
 
-**** COMPLETED Create an om back-end in engine                         :task:
-     CLOSED: [2013-12-20 Fri 23:50]
-     CLOCK: [2013-12-20 Fri 23:30]--[2013-12-20 Fri 23:50] =>  0:20
-     CLOCK: [2013-12-20 Fri 23:26]--[2013-12-20 Fri 23:30] =>  0:04
+Previous understanding: When we compile with stable gcc we get errors
+in the boost model. They appear to be related to using variants with
+multiple primitive types such as int and double. We should try to
+change the model to use only one primitive type and see if it compiles
+with G++ 4.8.
 
-**** IMPLEMENTATION Integrate om back-end with workflow                :task:
-     CLOCK: [2013-12-20 Fri 23:50]--[2013-12-21 Sat 00:22] =>  0:32
+*** COMPLETED Fix doxygen's main page documentation                   :story:
+    CLOSED: [2013-12-26 Thu 22:29]
+    CLOCK: [2013-12-26 Thu 22:05]--[2013-12-26 Thu 22:29] =>  0:24
+    CLOCK: [2013-12-26 Thu 21:49]--[2013-12-26 Thu 22:04] =>  0:15
+    CLOCK: [2013-12-25 Wed 12:32]--[2013-12-25 Wed 12:56] =>  0:24
 
-*** IMPLEMENTATION Compile code without PFH                           :story:
+Our main page documentation its awful at the moment - really old and
+meaningless. We should either remove it altogether or replace it with
+something meaningful.
+
+*** COMPLETED Compile code without PFH                                :story:
+    CLOSED: [2013-12-26 Thu 22:42]
 
 Now that boost and the compilers being distributed have all the
 features we need, we no longer require PFH. We should get rid of it,
@@ -231,7 +249,8 @@ If PFH is not found we should use system directories for boost.
 - detect EOS presence and enable it/disable it accordingly
 - create a find EOS cmake script
 
-**** IMPLEMENTATION Split EOS from main serialisation test             :task:
+**** COMPLETED Split EOS from main serialisation test                  :task:
+     CLOSED: [2013-12-26 Thu 22:41]
 
 We need a model just for EOS. We also need a command line switch to
 enable it (switched off by default).
@@ -246,15 +265,38 @@ enable it (switched off by default).
       CLOSED: [2013-12-23 Mon 19:12]
       CLOCK: [2013-12-23 Mon 18:25]--[2013-12-23 Mon 18:54] =>  0:29
 
-***** Create a model to test EOS that only kicks in on linux
-**** Update read me with compilation instructions                      :task:
+***** COMPLETED Create a model to test EOS
+      CLOSED: [2013-12-26 Thu 22:41]
+      CLOCK: [2013-12-26 Thu 22:29]--[2013-12-26 Thu 22:41] =>  0:12
+      CLOCK: [2013-12-26 Thu 22:04]--[2013-12-26 Thu 22:05] =>  0:01
+      CLOCK: [2013-12-26 Thu 21:26]--[2013-12-26 Thu 21:49] =>  0:23
+      CLOCK: [2013-12-25 Wed 12:01]--[2013-12-25 Wed 12:30] =>  0:29
+
+- actually we should enable it across the board and see if we are
+  still failing on non-linux platforms.
+
+*** IMPLEMENTATION Add om's workflow to engine                        :story:
+
+We need to find a way to add the available formatters in om into the
+engine workflow, replacing the legacy c++ formatters. With this we can
+replace one formatter at a time.
+
+**** COMPLETED Create an om back-end in engine                         :task:
+     CLOSED: [2013-12-20 Fri 23:50]
+     CLOCK: [2013-12-20 Fri 23:30]--[2013-12-20 Fri 23:50] =>  0:20
+     CLOCK: [2013-12-20 Fri 23:26]--[2013-12-20 Fri 23:30] =>  0:04
+
+**** IMPLEMENTATION Integrate om back-end with workflow                :task:
+     CLOCK: [2013-12-20 Fri 23:50]--[2013-12-21 Sat 00:22] =>  0:32
+
+*** Update read me with compilation instructions                       :story:
 
 Packages to install:
 
 : apt-get install libboost1.54-all-dev
 : apt-get install cmake
 
-**** Check packaging code for PFH dependencies                         :task:
+*** Check packaging code for PFH dependencies                          :task:
 
 We are manually copying a lot of shared objects from PFH when creating
 packages, this should be replaced with appropriate dependencies (at
@@ -267,29 +309,9 @@ With the move to boost log v2 the valgrind numbers increased
 astronomically. This appears to be linked to the boost log v2 change,
 as there were a number of ignores we had setup for log v1.
 
-
 With the move to boost log v2 the valgrind numbers increased
 astronomically. This appears to be linked to the boost log v2 change,
 as there were a number of ignores we had setup for log v1.
-
-*** IMPLEMENTATION Fix boost variant errors with boost 1.54           :story:
-    CLOCK: [2013-12-24 Tue 11:12]--[2013-12-24 Tue 13:33] =>  2:21
-    CLOCK: [2013-12-24 Tue 10:43]--[2013-12-24 Tue 11:12] =>  0:29
-    CLOCK: [2013-12-24 Tue 09:14]--[2013-12-24 Tue 10:43] =>  1:29
-
-New understanding: the problem appears to be with boost 1.54;
-compiling with g++-4.7 revealed the same errors. The root cause of the
-problem appears to be some changes in boost 1.54 as described [[http://lists.boost.org/boost-users/2013/08/79650.php][here]]. It
-seems like the easiest thing is to require boost 1.55, but
-unfortunately a lot of distributions are currently shipping with 1.54;
-in addition, there are no debs for 1.55 yet so we can't even tell if
-the changes to build without PFH have worked.
-
-Previous understanding: When we compile with stable gcc we get errors
-in the boost model. They appear to be related to using variants with
-multiple primitive types such as int and double. We should try to
-change the model to use only one primitive type and see if it compiles
-with G++ 4.8.
 
 *** Fix broken Windows build                                          :spike:
 
@@ -313,12 +335,6 @@ need to ensure that we compile with the latest stable clang.
 *** Fix cp error on cmake without PFH                                 :spike:
 
 : cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
-
-*** Fix doxygen's main page documentation                             :story:
-
-Our main page documentation its awful at the moment - really old and
-meaningless. We should either remove it altogether or replace it with
-something meaningful.
 
 *** Fix the read me story around binary packages                      :story:
 

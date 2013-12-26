@@ -68,6 +68,7 @@ path input_enable_facet_io_dia("dia_sml/input/enable_facet_io.dia");
 path input_enable_facet_serialization_dia(
     "dia_sml/input/enable_facet_serialization.dia"
     );
+path input_enable_eos_serialization_dia("dia_sml/input/eos_serialization.dia");
 path input_rename_facet_folder_dia("dia_sml/input/rename_facet_folder.dia");
 path input_use_integrated_io_dia("dia_sml/input/use_integrated_io.dia");
 path input_all_primitives_dia("dia_sml/input/all_primitives.dia");
@@ -385,6 +386,10 @@ path dia_sml::input_enable_facet_io_dia() {
 
 path dia_sml::input_enable_facet_serialization_dia() {
     return validating_resolver::resolve(::input_enable_facet_serialization_dia);
+}
+
+path dia_sml::input_enable_eos_serialization_dia() {
+    return validating_resolver::resolve(::input_enable_eos_serialization_dia);
 }
 
 path dia_sml::input_rename_facet_folder_dia() {

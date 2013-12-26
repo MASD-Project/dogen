@@ -189,6 +189,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/enable_facet_hash/include
     ${CMAKE_SOURCE_DIR}/projects/enable_facet_io/include
     ${CMAKE_SOURCE_DIR}/projects/enable_facet_serialization/include
+    ${CMAKE_SOURCE_DIR}/projects/eos_serialization/include
     ${CMAKE_SOURCE_DIR}/projects/two_layers_with_objects/include
     ${CMAKE_SOURCE_DIR}/projects/dmp/include
     ${CMAKE_SOURCE_DIR}/projects/split_project/dir/inc
@@ -240,6 +241,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_domain)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/eos_serialization)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dmp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)

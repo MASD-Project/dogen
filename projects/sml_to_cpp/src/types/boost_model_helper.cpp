@@ -51,8 +51,8 @@ const std::string is_virtual_base_of_include(
     "boost/type_traits/is_virtual_base_of.hpp");
 const std::string xml_oarchive_include("boost/archive/xml_oarchive.hpp");
 const std::string xml_iarchive_include("boost/archive/xml_iarchive.hpp");
-const std::string eos_oarchive_include("boost/archive/eos_oarchive.hpp");
-const std::string eos_iarchive_include("boost/archive/eos_iarchive.hpp");
+const std::string eos_oarchive_include("eos/portable_oarchive.hpp");
+const std::string eos_iarchive_include("eos/portable_iarchive.hpp");
 const std::string text_oarchive_include("boost/archive/text_oarchive.hpp");
 const std::string text_iarchive_include("boost/archive/text_iarchive.hpp");
 const std::string binary_oarchive_include("boost/archive/binary_oarchive.hpp");

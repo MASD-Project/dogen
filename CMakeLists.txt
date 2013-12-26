@@ -56,8 +56,11 @@ if (DEFINED ENV{PFH_LOCATION})
     set(Boost_NO_SYSTEM_PATHS "ON")
 endif()
 
+# note: we should be able to compile with boost 1.54, but due to some
+# strange behaviour with boost::variant, we can't. see this email for
+# details: http://lists.boost.org/boost-users/2013/08/79650.php
 add_definitions(-DBOOST_ALL_DYN_LINK)
-find_package(Boost 1.54 REQUIRED COMPONENTS
+find_package(Boost 1.55 REQUIRED COMPONENTS
     system
     chrono
     serialization
