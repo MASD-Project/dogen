@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-26 Thu 22:43]
+Clock summary at [2013-12-26 Thu 22:47]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *29:56* |       |       |
+| *Total time*                                                       | *30:07* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 29:56 |       |
-| IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:43 |
+| Development Stories Implemented                                    |         | 30:07 |       |
+| IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:54 |
 | COMPLETED Use relationship container for visitors                  |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests            |         |       |  8:20 |
 | COMPLETED Remove model from extractor                              |         |       |  0:16 |
@@ -29,6 +29,7 @@ Clock summary at [2013-12-26 Thu 22:43]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-26 Thu 22:35]--[2013-12-26 Thu 22:46] =>  0:11
     CLOCK: [2013-12-23 Mon 14:40]--[2013-12-23 Mon 14:45] =>  0:05
     CLOCK: [2013-12-23 Mon 14:32]--[2013-12-23 Mon 14:40] =>  0:08
     CLOCK: [2013-12-23 Mon 14:21]--[2013-12-23 Mon 14:32] =>  0:11
@@ -289,19 +290,6 @@ replace one formatter at a time.
 **** IMPLEMENTATION Integrate om back-end with workflow                :task:
      CLOCK: [2013-12-20 Fri 23:50]--[2013-12-21 Sat 00:22] =>  0:32
 
-*** Update read me with compilation instructions                       :story:
-
-Packages to install:
-
-: apt-get install libboost1.54-all-dev
-: apt-get install cmake
-
-*** Check packaging code for PFH dependencies                          :task:
-
-We are manually copying a lot of shared objects from PFH when creating
-packages, this should be replaced with appropriate dependencies (at
-least for Debian packages).
-
 *** IMPLEMENTATION Reduce the number of valgrind errors back to normal :spike:
     CLOCK: [2013-12-23 Mon 18:50]--[2013-12-23 Mon 19:09] =>  0:19
 
@@ -312,6 +300,12 @@ as there were a number of ignores we had setup for log v1.
 With the move to boost log v2 the valgrind numbers increased
 astronomically. This appears to be linked to the boost log v2 change,
 as there were a number of ignores we had setup for log v1.
+
+*** Check packaging code for PFH dependencies                          :task:
+
+We are manually copying a lot of shared objects from PFH when creating
+packages, this should be replaced with appropriate dependencies (at
+least for Debian packages).
 
 *** Fix broken Windows build                                          :spike:
 
@@ -336,11 +330,24 @@ need to ensure that we compile with the latest stable clang.
 
 : cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
-*** Fix the read me story around binary packages                      :story:
+*** Update read me file                                               :story:
+
+The read me is lying on a couple of things, we need to make sure it
+reflects the current state of the world.
+
+**** Fix the read me story around binary packages                     :task:
 
 We need to tell the truth more clearly around binary packages -
 reading the read me its entirely unclear if they are available or not,
 or where to get them from.
+
+**** Update read me with compilation instructions                     :task:
+
+Packages to install:
+
+: apt-get install libboost1.54-all-dev
+: apt-get install cmake
+
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:
