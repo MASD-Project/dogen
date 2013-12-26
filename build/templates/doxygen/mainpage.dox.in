@@ -1,33 +1,73 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 
 /**
- *
  * @mainpage About
  *
  * @b Dogen is the Domain Generator.
  *
- * Dogen is a code generator that creates object models for domain
- * driven programming.
+ * Dogen is a code generator that creates object models for Domain
+ * Driven programming.
  *
- * The key concept in Dogen is that of a @e domain @e type. Its
- * basically a POD in C++ terminology or a POJO in java terms: a data
- * object without any complex behaviour. The objective of Dogen is to
- * generate representations of the different @e facets of the domain
- * type according to the rules of some @e grammar, where:
+ * @section main_page_0 Background
  *
- * @li @e Facet: different "aspects" of the domain type we're
- * interested in. For example, hashing, serialisation, etc. These are
- * in effect the trivial behaviours that can be associated with a
- * domain type. @see facet_types.
+ * Dogen is largely the result of exploring a simple question: what
+ * portion of the objects required to model a problem domain are
+ * generatable by a program - such that the generated code is as good
+ * as or even better than code crafted by humans.
  *
- * @li @e Grammar: The code generation must be expressed using some @e
- * grammar; that is, it must obey to a set of rules defined
- * somewhere. Typical grammars are programming languages such as C++
- * or SQL, but they can also be more esoteric such as a Dia diagram;
- * it uses the Dia XML grammar.
+ * The question stems from decades of looking at object models and
+ * their limitations. One of the main problems one often finds in
+ * production C++ code is a lack of a large number of useful
+ * "facilities" that all objects on all domain models should have; for
+ * instance, a simple way of dumping current state to a stream, like
+ * @e toString in Java. Developers tend to add these facilities on a
+ * haphazard sort of way, because it is laborious and not particularly
+ * exciting functionality to work on; by the time the domain model has
+ * matured, its too late to find time for these sort of fundamental
+ * activities.
  *
- * @li @e Representation: A physical expression of a domain
- * type, made by intersecting a facet and a grammar.
+ * We further observed that a large portion of the objects required to
+ * model a problem domain have fairly straightforward behaviour; in
+ * many cases they are but glorified structs with a few trivial
+ * behaviours bolted on such as serialisation and hashing; a lot of
+ * programmer time is taken on generating getters, setters and trivial
+ * serialisation code. This is also code that is easy to get sloppy
+ * with, because its so repetitive.
+ *
+ * Dogen aims to code generate all such code - and @e only such code;
+ * anything which is deemed non-trivial is expected to be done by
+ * humans. For everything else, we aim to add support in Dogen.
+ *
+ * @section main_page_1 Basic Concepts
+ *
+ * Domain modeling is the activity of finding a set of domain types
+ * that describe the domain via their properties and their
+ * relationships. We store the domain model internally as SML - a @e
+ * meta-model largely based on Domain Driven Design. A meta-model is
+ * simply a model whose sole purpose is to describe other models. SML
+ * is designed to capture all the details of the domain model that are
+ * required for code generation. SML is not designed for anything
+ * else, so it is very terse and not a particularly obvious model.
+ *
+ * We then need to express the meta-model as code. That is, we need to
+ * generate a @e representation of the different "parts" the domain
+ * type, according to the rules of some well-known @e grammar: that
+ * is, it must obey to a set of rules defined somewhere. Typical
+ * grammars are programming languages such as C++ or SQL, but they can
+ * also be more esoteric such as a Dia diagram; it uses the Dia XML
+ * grammar.
+ *
+ * A @e representation in this context is understood to be a physical
+ * expression of a domain type - e.g. as zeroes and ones stored in a
+ * file somewhere.
+ *
+ * Representations have two related concepts: facets and
+ * aspects. These are best explained by way of an example. The most
+ * fundamental facet is the @e types facet. This is the class
+ * definition itself. A facet is made up of @e aspects - for example
+ * in C++ there is a header file and an implementation file. However,
+ * an aspect need not map directly to a file - its perfectly possible
+ * to have more than one aspect in a file.
  *
  * @e commit: ${CURRENT_GIT_COMMIT}
  *
