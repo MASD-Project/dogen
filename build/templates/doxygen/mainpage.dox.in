@@ -13,7 +13,7 @@
  * Dogen is largely the result of exploring a simple question: what
  * portion of the objects required to model a problem domain are
  * generatable by a program - such that the generated code is as good
- * as or even better than code crafted by humans.
+ * as or even better than code crafted by humans?
  *
  * The question stems from decades of looking at object models and
  * their limitations. One of the main problems one often finds in

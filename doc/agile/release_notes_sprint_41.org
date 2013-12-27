@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-26 Thu 22:47]
+Clock summary at [2013-12-27 Fri 23:44]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *30:07* |       |       |
+| *Total time*                                                       | *30:52* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 30:07 |       |
+| Development Stories Implemented                                    |         | 30:52 |       |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:54 |
 | COMPLETED Use relationship container for visitors                  |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests            |         |       |  8:20 |
@@ -24,6 +24,7 @@ Clock summary at [2013-12-26 Thu 22:47]
 | COMPLETED Fix boost variant errors with boost 1.54                 |         |       |  4:19 |
 | COMPLETED Fix doxygen's main page documentation                    |         |       |  1:03 |
 | COMPLETED Compile code without PFH                                 |         |       | 12:47 |
+| COMPLETED CDash is not reporting builds                            |         |       |  0:45 |
 | IMPLEMENTATION Add om's workflow to engine                         |         |       |  0:56 |
 | IMPLEMENTATION Reduce the number of valgrind errors back to normal |         |       |  0:19 |
 #+end:
@@ -276,6 +277,17 @@ enable it (switched off by default).
 - actually we should enable it across the board and see if we are
   still failing on non-linux platforms.
 
+*** COMPLETED CDash is not reporting builds                           :spike:
+    CLOSED: [2013-12-27 Fri 23:43]
+    CLOCK: [2013-12-27 Fri 22:57]--[2013-12-27 Fri 23:42] =>  0:45
+
+For some reason we didn't get any builds at all on CDash. It appears
+this is related to disk space issues. Investigate and resolve this
+issue so that we can get nightlies on tonight's run.
+
+- perform a [[http://public.kitware.com/Bug/view.php?id%3D13428][CDash cleanup]]
+- delete unnecessary files
+
 *** IMPLEMENTATION Add om's workflow to engine                        :story:
 
 We need to find a way to add the available formatters in om into the
@@ -347,7 +359,6 @@ Packages to install:
 
 : apt-get install libboost1.54-all-dev
 : apt-get install cmake
-
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:
