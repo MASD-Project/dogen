@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-28 Sat 11:51]
+Clock summary at [2013-12-28 Sat 13:12]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *31:48* |       |       |
+| *Total time*                                                  | *32:35* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 31:48 |       |
+| Development Stories Implemented                               |         | 32:35 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:54 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -26,6 +26,7 @@ Clock summary at [2013-12-28 Sat 11:51]
 | COMPLETED Compile code without PFH                            |         |       | 12:47 |
 | COMPLETED CDash is not reporting builds                       |         |       |  0:45 |
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:30 |
+| COMPLETED Update read me file                                 |         |       |  0:47 |
 | IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  0:45 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  0:56 |
 #+end:
@@ -302,6 +303,28 @@ With the move to boost log v2 the valgrind numbers increased
 astronomically. This appears to be linked to the boost log v2 change,
 as there were a number of ignores we had setup for log v1.
 
+*** COMPLETED Update read me file                                     :story:
+    CLOSED: [2013-12-28 Sat 13:11]
+    CLOCK: [2013-12-28 Sat 12:24]--[2013-12-28 Sat 13:11] =>  0:47
+
+The read me is lying on a couple of things, we need to make sure it
+reflects the current state of the world.
+
+**** COMPLETED Fix the read me story around binary packages            :task:
+     CLOSED: [2013-12-28 Sat 13:11]
+
+We need to tell the truth more clearly around binary packages -
+reading the read me its entirely unclear if they are available or not,
+or where to get them from.
+
+**** COMPLETED Update read me with compilation instructions            :task:
+     CLOSED: [2013-12-28 Sat 13:11]
+
+Packages to install:
+
+: apt-get install libboost1.54-all-dev
+: apt-get install cmake
+
 *** IMPLEMENTATION Fix broken builds due to a variety of errors       :spike:
     CLOCK: [2013-12-28 Sat 11:00]--[2013-12-28 Sat 11:27] =>  0:27
     CLOCK: [2013-12-28 Sat 09:12]--[2013-12-28 Sat 09:30] =>  0:18
@@ -365,23 +388,14 @@ need to ensure that we compile with the latest stable clang.
 
 : cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
-*** Update read me file                                               :story:
+*** Start using PGPASSWORD for database model                         :spike:
 
-The read me is lying on a couple of things, we need to make sure it
-reflects the current state of the world.
+As explained in read me:
 
-**** Fix the read me story around binary packages                     :task:
+- setup the environment variable =PGPASSWORD= to match the password
+  you have chosen for this user (see [[http://www.postgresql.org/docs/9.1/static/libpq-envars.html][Environment Variables]]).
 
-We need to tell the truth more clearly around binary packages -
-reading the read me its entirely unclear if they are available or not,
-or where to get them from.
-
-**** Update read me with compilation instructions                     :task:
-
-Packages to install:
-
-: apt-get install libboost1.54-all-dev
-: apt-get install cmake
+We need to change the code to match this.
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:
