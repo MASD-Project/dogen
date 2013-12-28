@@ -31,6 +31,26 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_optional_dogen_om_modeline(const boost::optional<dogen::om::modeline>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_dogen_om_licence(const boost::optional<dogen::om::licence>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -39,8 +59,8 @@ namespace om {
 std::size_t annotation_hasher::hash(const annotation&v) {
     std::size_t seed(0);
 
-    combine(seed, v.modeline());
-    combine(seed, v.licence());
+    combine(seed, hash_boost_optional_dogen_om_modeline(v.modeline()));
+    combine(seed, hash_boost_optional_dogen_om_licence(v.licence()));
     combine(seed, v.code_generation_marker());
 
     return seed;

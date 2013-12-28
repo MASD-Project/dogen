@@ -79,18 +79,25 @@ format_preamble(std::ostream& s, const annotation& a) const {
     if (!generate_preamble_)
         return;
 
-    const bool is_top(a.modeline().location() == modeline_locations::top);
+    bool is_top(false);
+    bool has_modeline(a.modeline() != nullptr);
     std::list<std::string> content;
-    if (is_top)
-        add_modeline(content, a.modeline());
+    if (has_modeline) {
+        is_top = a.modeline()->location() == modeline_locations::top;
+
+        if (is_top)
+            add_modeline(content, *a.modeline());
+    }
 
     add_marker(content, a.code_generation_marker());
-    add_licence(content, a.licence());
+    if (a.licence()) {
+        add_licence(content, *a.licence());
+    }
 
     if (content.empty())
         return;
 
-    if (is_top && content.size() == 1) {
+    if (has_modeline && is_top && content.size() == 1) {
         comment_formatter cf(
             start_on_first_line,
             !use_documentation_tool_markup,
@@ -142,7 +149,11 @@ format_begin(std::ostream& s, const annotation& a, const cpp_includes& i,
 }
 
 void cpp_file_boilerplate_formatter::
-format_postamble(std::ostream& s, const modeline& m) const {
+format_postamble(std::ostream& s, const annotation& a) const {
+    if (!a.modeline())
+        return;
+
+    const auto m(*a.modeline());
     if (m.location() == modeline_locations::bottom) {
         std::list<std::string> content;
         add_modeline(content, m);
@@ -161,7 +172,7 @@ format_postamble(std::ostream& s, const modeline& m) const {
 void cpp_file_boilerplate_formatter::
 format_end(std::ostream& s, const annotation& a,
     const boost::filesystem::path& relative_file_path) const {
-    format_postamble(s, a.modeline());
+    format_postamble(s, a);
     format_guards_end(s, relative_file_path);
 }
 

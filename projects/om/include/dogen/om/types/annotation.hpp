@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <string>
 #include "dogen/om/serialization/annotation_fwd_ser.hpp"
 #include "dogen/om/types/licence.hpp"
@@ -41,13 +42,15 @@ class annotation final {
 public:
     annotation() = default;
     annotation(const annotation&) = default;
-    annotation(annotation&&) = default;
     ~annotation() = default;
 
 public:
+    annotation(annotation&& rhs);
+
+public:
     annotation(
-        const dogen::om::modeline& modeline,
-        const dogen::om::licence& licence,
+        const boost::optional<dogen::om::modeline>& modeline,
+        const boost::optional<dogen::om::licence>& licence,
         const std::string& code_generation_marker);
 
 private:
@@ -59,23 +62,23 @@ private:
 
 public:
     /**
-     * @brief Modeline to use in this file.
+     * @brief Modeline to use in this file, if any.
      */
     /**@{*/
-    const dogen::om::modeline& modeline() const;
-    dogen::om::modeline& modeline();
-    void modeline(const dogen::om::modeline& v);
-    void modeline(const dogen::om::modeline&& v);
+    const boost::optional<dogen::om::modeline>& modeline() const;
+    boost::optional<dogen::om::modeline>& modeline();
+    void modeline(const boost::optional<dogen::om::modeline>& v);
+    void modeline(const boost::optional<dogen::om::modeline>&& v);
     /**@}*/
 
     /**
-     * @brief Licence to use in this file.
+     * @brief Licence to use in this file, if any.
      */
     /**@{*/
-    const dogen::om::licence& licence() const;
-    dogen::om::licence& licence();
-    void licence(const dogen::om::licence& v);
-    void licence(const dogen::om::licence&& v);
+    const boost::optional<dogen::om::licence>& licence() const;
+    boost::optional<dogen::om::licence>& licence();
+    void licence(const boost::optional<dogen::om::licence>& v);
+    void licence(const boost::optional<dogen::om::licence>&& v);
     /**@}*/
 
     /**
@@ -99,8 +102,8 @@ public:
     annotation& operator=(annotation other);
 
 private:
-    dogen::om::modeline modeline_;
-    dogen::om::licence licence_;
+    boost::optional<dogen::om::modeline> modeline_;
+    boost::optional<dogen::om::licence> licence_;
     std::string code_generation_marker_;
 };
 

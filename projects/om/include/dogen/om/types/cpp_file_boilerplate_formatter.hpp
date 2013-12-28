@@ -82,7 +82,7 @@ private:
      *
      * The postamble is composed of a bottom modeline, if any.
      */
-    void format_postamble(std::ostream& s, const modeline& m) const;
+    void format_postamble(std::ostream& s, const annotation& a) const;
 
     /**
      * @brief Formats the starting part of the header guards.

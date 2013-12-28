@@ -26,7 +26,6 @@ namespace sml {
 const std::string tags::odb_pragma("ODB_PRAGMA");
 const std::string tags::copyright_holder("COPYRIGHT");
 const std::string tags::licence_name("LICENCE");
-const std::string tags::code_generation_marker("CODE_GENERATION_MARKER");
 const std::string tags::modeline_group_name("MODELINE_GROUP");
 
 const std::string tags::comment("COMMENT");

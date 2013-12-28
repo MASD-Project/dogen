@@ -352,7 +352,7 @@ void add_test_tags(Taggable& t) {
     writer.add(dogen::sml::tags::licence_name, licence_name);
     writer.add(dogen::sml::tags::copyright_holder, copyright_holders);
     writer.add(dogen::sml::tags::modeline_group_name, modeline_group_name);
-    writer.add(dogen::sml::tags::code_generation_marker, marker);
+    writer.add(dogen::sml::tags::code_generation_marker::message, marker);
     writer.add(dogen::sml::tags::generate_preamble,
         dogen::sml::tags::bool_true);
 }

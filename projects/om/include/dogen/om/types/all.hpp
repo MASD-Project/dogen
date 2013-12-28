@@ -19,6 +19,8 @@
  *
  */
 #include "dogen/om/types/annotation.hpp"
+#include "dogen/om/types/annotation_factory.hpp"
+#include "dogen/om/types/building_error.hpp"
 #include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/comment_styles.hpp"

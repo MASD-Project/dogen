@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/om/serialization/annotation_ser.hpp"
 #include "dogen/om/serialization/licence_ser.hpp"

@@ -34,6 +34,7 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("sml.meta_data_tagger"));
+const std::string empty;
 const std::string original_parent_not_found(
     "Failed to find original parent for type: ");
 const std::string too_many_original_parents(
@@ -286,8 +287,17 @@ void meta_data_tagger::copy_model_tags(meta_data_writer& writer) const {
     writer.add_if_key_not_found(dogen::sml::tags::modeline_group_name,
         reader.get(dogen::sml::tags::modeline_group_name));
 
-    writer.add_if_key_not_found(dogen::sml::tags::code_generation_marker,
-        reader.get(dogen::sml::tags::code_generation_marker));
+    writer.add_if_key_not_found(
+        dogen::sml::tags::code_generation_marker::message,
+        reader.get(dogen::sml::tags::code_generation_marker::message));
+
+    writer.add_if_key_not_found(
+        dogen::sml::tags::code_generation_marker::add_warning,
+        reader.get(dogen::sml::tags::code_generation_marker::add_warning));
+
+    writer.add_if_key_not_found(
+        dogen::sml::tags::code_generation_marker::add_date_time,
+        reader.get(dogen::sml::tags::code_generation_marker::add_date_time));
 
     writer.add_if_key_not_found(tags::cpp::header_file_extension,
         reader.get(tags::cpp::header_file_extension));
@@ -641,6 +651,18 @@ void meta_data_tagger::tag(model& m) const {
     context_ = std::unique_ptr<context>(new context(m));
 
     meta_data_writer writer(m.meta_data());
+
+    writer.add_if_key_not_found(
+        dogen::sml::tags::code_generation_marker::message, empty);
+
+    writer.add_if_key_not_found(
+        dogen::sml::tags::code_generation_marker::add_warning,
+        tags::bool_false);
+
+    writer.add_if_key_not_found(
+        dogen::sml::tags::code_generation_marker::add_date_time,
+        tags::bool_false);
+
     writer.add_if_key_not_found(tags::generate_preamble, tags::bool_true);
 
     writer.add_if_key_not_found(tags::cpp::header_file_extension,

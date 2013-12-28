@@ -30,9 +30,23 @@ create_dogen_om_modeline(const unsigned int position) {
     return dogen::om::modeline_generator::create(position);
 }
 
+boost::optional<dogen::om::modeline>
+create_boost_optional_dogen_om_modeline(unsigned int position) {
+    boost::optional<dogen::om::modeline> r(
+        create_dogen_om_modeline(position));
+    return r;
+}
+
 dogen::om::licence
 create_dogen_om_licence(const unsigned int position) {
     return dogen::om::licence_generator::create(position);
+}
+
+boost::optional<dogen::om::licence>
+create_boost_optional_dogen_om_licence(unsigned int position) {
+    boost::optional<dogen::om::licence> r(
+        create_dogen_om_licence(position));
+    return r;
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -50,8 +64,8 @@ annotation_generator::annotation_generator() : position_(0) { }
 
 void annotation_generator::
 populate(const unsigned int position, result_type& v) {
-    v.modeline(create_dogen_om_modeline(position + 0));
-    v.licence(create_dogen_om_licence(position + 1));
+    v.modeline(create_boost_optional_dogen_om_modeline(position + 0));
+    v.licence(create_boost_optional_dogen_om_licence(position + 1));
     v.code_generation_marker(create_std_string(position + 2));
 }
 

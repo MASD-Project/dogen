@@ -59,11 +59,6 @@ struct tags {
     static const std::string licence_name;
 
     /**
-     * @brief Text to indicate that the file was code generated.
-     */
-    static const std::string code_generation_marker;
-
-    /**
      * @brief Name of the modeline group to use.
      *
      * Must match licences available in library.

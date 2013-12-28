@@ -23,9 +23,14 @@
 namespace dogen {
 namespace om {
 
+annotation::annotation(annotation&& rhs)
+    : modeline_(std::move(rhs.modeline_)),
+      licence_(std::move(rhs.licence_)),
+      code_generation_marker_(std::move(rhs.code_generation_marker_)) { }
+
 annotation::annotation(
-    const dogen::om::modeline& modeline,
-    const dogen::om::licence& licence,
+    const boost::optional<dogen::om::modeline>& modeline,
+    const boost::optional<dogen::om::licence>& licence,
     const std::string& code_generation_marker)
     : modeline_(modeline),
       licence_(licence),
@@ -50,35 +55,35 @@ annotation& annotation::operator=(annotation other) {
     return *this;
 }
 
-const dogen::om::modeline& annotation::modeline() const {
+const boost::optional<dogen::om::modeline>& annotation::modeline() const {
     return modeline_;
 }
 
-dogen::om::modeline& annotation::modeline() {
+boost::optional<dogen::om::modeline>& annotation::modeline() {
     return modeline_;
 }
 
-void annotation::modeline(const dogen::om::modeline& v) {
+void annotation::modeline(const boost::optional<dogen::om::modeline>& v) {
     modeline_ = v;
 }
 
-void annotation::modeline(const dogen::om::modeline&& v) {
+void annotation::modeline(const boost::optional<dogen::om::modeline>&& v) {
     modeline_ = std::move(v);
 }
 
-const dogen::om::licence& annotation::licence() const {
+const boost::optional<dogen::om::licence>& annotation::licence() const {
     return licence_;
 }
 
-dogen::om::licence& annotation::licence() {
+boost::optional<dogen::om::licence>& annotation::licence() {
     return licence_;
 }
 
-void annotation::licence(const dogen::om::licence& v) {
+void annotation::licence(const boost::optional<dogen::om::licence>& v) {
     licence_ = v;
 }
 
-void annotation::licence(const dogen::om::licence&& v) {
+void annotation::licence(const boost::optional<dogen::om::licence>&& v) {
     licence_ = std::move(v);
 }
 

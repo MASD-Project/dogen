@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-28 Sat 15:45]
+Clock summary at [2013-12-28 Sat 19:58]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *33:49* |       |       |
+| *Total time*                                                  | *36:37* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 33:49 |       |
-| IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:54 |
+| Development Stories Implemented                               |         | 36:37 |       |
+| IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:59 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
 | COMPLETED Remove model from extractor                         |         |       |  0:16 |
@@ -27,12 +27,13 @@ Clock summary at [2013-12-28 Sat 15:45]
 | COMPLETED CDash is not reporting builds                       |         |       |  0:45 |
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
 | COMPLETED Update read me file                                 |         |       |  0:51 |
+| COMPLETED Start using PGPASSWORD for database model           |         |       |  0:28 |
 | IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  1:31 |
-| IMPLEMENTATION Add om's workflow to engine                    |         |       |  0:56 |
-| IMPLEMENTATION Start using PGPASSWORD for database model      |         |       |  0:11 |
+| IMPLEMENTATION Add om's workflow to engine                    |         |       |  3:22 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-28 Sat 15:57]--[2013-12-28 Sat 16:02] =>  0:05
     CLOCK: [2013-12-26 Thu 22:35]--[2013-12-26 Thu 22:46] =>  0:11
     CLOCK: [2013-12-23 Mon 14:40]--[2013-12-23 Mon 14:45] =>  0:05
     CLOCK: [2013-12-23 Mon 14:32]--[2013-12-23 Mon 14:40] =>  0:08
@@ -393,26 +394,25 @@ replace one formatter at a time.
 **** IMPLEMENTATION Integrate om back-end with workflow                :task:
      CLOCK: [2013-12-20 Fri 23:50]--[2013-12-21 Sat 00:22] =>  0:32
 
+**** IMPLEMENTATION Handle models without meta-data such as licence, etc :task:
+     CLOCK: [2013-12-28 Sat 18:15]--[2013-12-28 Sat 19:58] =>  1:43
+     CLOCK: [2013-12-28 Sat 16:42]--[2013-12-28 Sat 16:50] =>  0:08
+     CLOCK: [2013-12-28 Sat 16:06]--[2013-12-28 Sat 16:41] =>  0:35
+
+At present the om workflow assumes all models have licences, etc. This
+is not a valid assumption. We should generate code in the absence of
+this meta-data.
+
+**** Add required meta-data to test models                             :task:
+
+In order for om to match the C++ model we need to make sure we are
+passing in the correct meta-data such as licences, etc.
+
 *** Check packaging code for PFH dependencies                          :task:
 
 We are manually copying a lot of shared objects from PFH when creating
 packages, this should be replaced with appropriate dependencies (at
 least for Debian packages).
-
-*** Fix broken clang 3.2 32-bit build                                 :spike:
-
-We are having some really puzzling link errors:
-
-: ../source/projects/sml/src/types/object.cpp:(.text+0x7d): undefined reference to `std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned int) const'
-
-This is probably related to the fact that in ubuntu clang uses the
-standard library from g++ 4.8. We are probably mixing and matching 4.7
-and 4.8 (as boost in PFH is 4.7).
-
-*** Compile code with clang 3.3                                       :story:
-
-As part of the attempt to get the code to build without the PFH, we
-need to ensure that we compile with the latest stable clang.
 
 *** Fix cp error on cmake without PFH                                 :spike:
 
@@ -437,3 +437,27 @@ We should also remove the references to =forward_decls= directly and
 instead have something like "pointer only" dependencies or some such
 SML level concept and then interpret this dependency as a forward
 declaration at the C++ level.
+*** CANCELLED Fix broken clang 3.2 32-bit build                       :spike:
+    CLOSED: [2013-12-28 Sat 15:59]
+
+Note: this story cannot be fixed until boost 1.55 is released for
+Debian. We are not adding it back to backlog because it will be
+naturally implemented when we stop using PFH.
+
+We are having some really puzzling link errors:
+
+: ../source/projects/sml/src/types/object.cpp:(.text+0x7d): undefined reference to `std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned int) const'
+
+This is probably related to the fact that in ubuntu clang uses the
+standard library from g++ 4.8. We are probably mixing and matching 4.7
+and 4.8 (as boost in PFH is 4.7).
+
+*** CANCELLED Compile code with clang 3.3                             :story:
+    CLOSED: [2013-12-28 Sat 16:00]
+
+Note: this story cannot be implemented until boost 1.55 is released
+for Debian. We are not adding it back to backlog because it will be
+naturally implemented when we stop using PFH.
+
+As part of the attempt to get the code to build without the PFH, we
+need to ensure that we compile with the latest stable clang.
