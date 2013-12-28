@@ -17,10 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-
-# path info
-set(DOGEN_INSTALL_DATA_DIRECTORY "${CMAKE_INSTALL_PREFIX}/${data_directory}")
-
 set(version_template "${CMAKE_CURRENT_SOURCE_DIR}/cpp/version.hpp.in")
 configure_file(${version_template} ${stage_inc_dir}/dogen/config/version.hpp)
 message(STATUS "Transformed version.hpp.")
