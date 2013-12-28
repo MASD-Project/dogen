@@ -91,7 +91,12 @@ endif()
 
 # enable RTTI
 # -fvisibility=hidden
-set(other_flags "-std=c++11 -frtti -fvisibility-inlines-hidden")
+if (WIN32)
+    set(other_flags "-std=gnu++11")
+else()
+    set(other_flags "-std=c++11")
+endif()
+set(other_flags "${other_flags} -frtti -fvisibility-inlines-hidden")
 set(other_flags "${other_flags} -fvisibility=default")
 
 # set the flags
