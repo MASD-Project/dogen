@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-28 Sat 23:23]
+Clock summary at [2013-12-28 Sat 23:26]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *38:06* |       |       |
+| *Total time*                                                  | *38:08* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 38:06 |       |
+| Development Stories Implemented                               |         | 38:08 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:59 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -28,7 +28,7 @@ Clock summary at [2013-12-28 Sat 23:23]
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
 | COMPLETED Update read me file                                 |         |       |  0:51 |
 | COMPLETED Start using PGPASSWORD for database model           |         |       |  0:28 |
-| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:00 |
+| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:02 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  3:22 |
 #+end:
 
@@ -356,6 +356,7 @@ We need to change the code to match this.
 - spec file is not named according to the specs or model. Renamed it.
 
 **** Windows
+     CLOCK: [2013-12-28 Sat 23:24]--[2013-12-28 Sat 23:26] =>  0:02
      CLOCK: [2013-12-28 Sat 21:51]--[2013-12-28 Sat 23:20] =>  1:29
      CLOCK: [2013-12-28 Sat 15:00]--[2013-12-28 Sat 15:40] =>  0:40
 
@@ -391,6 +392,8 @@ We need to change the code to match this.
 - the makefiles do not handle EOS missing very gracefully either:
 
 : Files/test_model_sanitizer_spec.dir/objects.a(eos_serialization_spec.cpp.obj):eos_serialization_spec.cpp:(.text+0x166): undefined reference to `dogen::eos_serialization::first_class::public_attribute() const'
+
+  this appears to be a typo in makefile.
 
 *** IMPLEMENTATION Add om's workflow to engine                        :story:
 

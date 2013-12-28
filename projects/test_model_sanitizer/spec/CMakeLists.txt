@@ -25,15 +25,16 @@ file(GLOB_RECURSE candindate_spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
+set(ignore_file false)
 foreach(candindate_spec_file ${candindate_spec_files})
     if(NOT ODB_FOUND)
-        if (hpp_file MATCHES "database")
+        if (candindate_spec_file MATCHES "database")
             set(ignore_file true)
         endif()
     endif()
 
     if(NOT EOS_FOUND)
-        if (hpp_file MATCHES "eos")
+        if (candindate_spec_file MATCHES "eos")
             set(ignore_file true)
         endif()
     endif()
