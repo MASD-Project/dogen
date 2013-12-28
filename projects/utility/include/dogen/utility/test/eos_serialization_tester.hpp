@@ -27,6 +27,7 @@
 
 #include <sstream>
 #include <boost/test/unit_test.hpp>
+#define NO_EXPLICIT_TEMPLATE_INSTANTIATION
 #include <eos/portable_iarchive.hpp>
 #include <eos/portable_oarchive.hpp>
 #include "dogen/utility/io/jsonify_io.hpp"
