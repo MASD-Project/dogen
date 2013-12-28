@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-28 Sat 14:11]
+Clock summary at [2013-12-28 Sat 15:45]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *32:58* |       |       |
+| *Total time*                                                  | *33:49* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 32:58 |       |
+| Development Stories Implemented                               |         | 33:49 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:54 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -27,8 +27,9 @@ Clock summary at [2013-12-28 Sat 14:11]
 | COMPLETED CDash is not reporting builds                       |         |       |  0:45 |
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
 | COMPLETED Update read me file                                 |         |       |  0:51 |
-| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  0:51 |
+| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  1:31 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  0:56 |
+| IMPLEMENTATION Start using PGPASSWORD for database model      |         |       |  0:11 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -327,6 +328,18 @@ Packages to install:
 : apt-get install libboost1.54-all-dev
 : apt-get install cmake
 
+*** COMPLETED Start using PGPASSWORD for database model               :spike:
+    CLOSED: [2013-12-28 Sat 15:58]
+    CLOCK: [2013-12-28 Sat 15:40]--[2013-12-28 Sat 15:57] =>  0:17
+    CLOCK: [2013-12-28 Sat 14:55]--[2013-12-28 Sat 15:06] =>  0:11
+
+As explained in read me:
+
+- setup the environment variable =PGPASSWORD= to match the password
+  you have chosen for this user (see [[http://www.postgresql.org/docs/9.1/static/libpq-envars.html][Environment Variables]]).
+
+We need to change the code to match this.
+
 *** IMPLEMENTATION Fix broken builds due to a variety of errors       :spike:
     CLOCK: [2013-12-28 Sat 13:35]--[2013-12-28 Sat 13:41] =>  0:06
     CLOCK: [2013-12-28 Sat 11:00]--[2013-12-28 Sat 11:27] =>  0:27
@@ -342,6 +355,7 @@ Packages to install:
 - spec file is not named according to the specs or model. Renamed it.
 
 **** Windows
+     CLOCK: [2013-12-28 Sat 15:00]--[2013-12-28 Sat 15:40] =>  0:40
 
 - we do not seem to be detecting the location of boost
   correctly. Added boost includes to system path.
@@ -351,6 +365,19 @@ Packages to install:
 : e:/usr/local/pfh/include/boost-1_55/boost/log/detail/snprintf.hpp:45:9: error: '::swprintf' has not been declared
 
   followed [[https://groups.google.com/forum/#!topic/boost-list/ngTvtjdO2ng][this article]], and disabled wide char.
+
+- boost build failed to build context, followed instructions [[https://svn.boost.org/trac/boost/ticket/7262][here]] to
+  install =ml.exe= and fixed problem.
+
+- problems with linkage of boost log:
+
+: CMakeFiles/dia_spec.dir/objects.a(equality_spec.cpp.obj):equality_spec.cpp:(.text$_ZN5boost3log9v2_mt_nt56record5resetEv[__ZN5boost3log9v2_mt_nt56record5resetEv]+0x11): undefined reference to `_imp___ZN5boost3log9v2_mt_nt511record_view11public_data7destroyEPKS3_'
+
+  this is not a versioning issue as described [[http://stackoverflow.com/questions/17844085/boost-log-with-cmake-causing-undefined-reference-error/17868918#17868918][here]], since the ABI
+  version information is the same on both methods (see [[http://www.boost.org/doc/libs/1_55_0/libs/log/doc/html/log/rationale/namespace_mangling.html][boost log
+  docs]]). However, when investigating this noticed that we are using
+  static boost on Windows for some reason, so now doing a complete
+  build and moving to DLLs first.
 
 *** IMPLEMENTATION Add om's workflow to engine                        :story:
 
@@ -390,15 +417,6 @@ need to ensure that we compile with the latest stable clang.
 *** Fix cp error on cmake without PFH                                 :spike:
 
 : cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
-
-*** Start using PGPASSWORD for database model                         :spike:
-
-As explained in read me:
-
-- setup the environment variable =PGPASSWORD= to match the password
-  you have chosen for this user (see [[http://www.postgresql.org/docs/9.1/static/libpq-envars.html][Environment Variables]]).
-
-We need to change the code to match this.
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:

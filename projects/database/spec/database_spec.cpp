@@ -46,7 +46,7 @@ const std::string test_suite("database_spec");
 const std::string test_module("database");
 
 odb::database* create_db() {
-    return new odb::pgsql::database ("build", "build", "musseque","localhost");
+    return new odb::pgsql::database ("build", "", "musseque","localhost");
 }
 
 template<typename T>
