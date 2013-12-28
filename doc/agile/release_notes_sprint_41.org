@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-28 Sat 14:03]
+Clock summary at [2013-12-28 Sat 14:11]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *32:54* |       |       |
+| *Total time*                                                  | *32:58* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 32:54 |       |
+| Development Stories Implemented                               |         | 32:58 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:54 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -26,7 +26,7 @@ Clock summary at [2013-12-28 Sat 14:03]
 | COMPLETED Compile code without PFH                            |         |       | 12:47 |
 | COMPLETED CDash is not reporting builds                       |         |       |  0:45 |
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
-| COMPLETED Update read me file                                 |         |       |  0:47 |
+| COMPLETED Update read me file                                 |         |       |  0:51 |
 | IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  0:51 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  0:56 |
 #+end:
@@ -306,6 +306,7 @@ as there were a number of ignores we had setup for log v1.
 
 *** COMPLETED Update read me file                                     :story:
     CLOSED: [2013-12-28 Sat 13:11]
+    CLOCK: [2013-12-28 Sat 14:07]--[2013-12-28 Sat 14:11] =>  0:04
     CLOCK: [2013-12-28 Sat 12:24]--[2013-12-28 Sat 13:11] =>  0:47
 
 The read me is lying on a couple of things, we need to make sure it

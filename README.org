@@ -30,7 +30,7 @@ terribly well.
 
 We developed our own domain generator because we could not find one
 that fitted our requirements - open source or otherwise. You can see
-the results of our research [[*Related%20Work][below]].
+the results of our research [[https://github.com/kitanda/dogen#related-work][below]].
 
 Note that Dogen is specifically tailored for our needs and as such it
 is not a general purpose domain generator. We are, however, wiling to
@@ -73,7 +73,7 @@ to find a new location to upload the packages to.
 
 We officially support Linux, Mac OS X and Win32 since we have build
 agents for these platforms. However, any platform that meets the
-dependencies [[*Dependencies][below]] should be able to build Dogen.
+dependencies [[https://github.com/kitanda/dogen#dependencies][below]] should be able to build Dogen.
 
 *** Dependencies
 
@@ -105,7 +105,7 @@ CMake generator (the =-G= parameter above). At present the Ninja
 generator is known not to work. No other generator has been used by
 the Dogen team.
 
-Once the build has completed successfully, you should [[*Running%20Unit%20Tests][run the unit
+Once the build has completed successfully, you should [[https://github.com/kitanda/dogen#running-unit-tests][run the unit
 tests]] to make sure your system is fully supported.
 
 *** Running Unit Tests
@@ -128,7 +128,7 @@ Finally, run:
 : make run_all_specs
 
 If there are no failures, you are good to go. If there are failures,
-please [[*Submitting%20bug%20reports][see below]].
+please [[https://github.com/kitanda/dogen#submitting-bug-reports][see below]].
 
 *** Submitting bug reports
 
