@@ -75,7 +75,7 @@
 }
 
 {
-   Boost Log 64-bit
+   Boost Log 1
    Memcheck:Leak
    ...
    fun:_ZN5boost3log11v2_mt_posix7sources3aux18get_severity_levelEv
@@ -85,12 +85,29 @@
 }
 
 {
-   Boost Log 32-bit
+   Boost Log 2
    Memcheck:Leak
    ...
    fun:_ZN5boost3log11v2_mt_posix7sources3aux18get_severity_levelEv
    fun:_ZN5boost3log11v2_mt_posix7sources21basic_severity_loggerINS2_20basic_channel_loggerINS2_12basic_loggerIcNS2_23severity_channel_loggerIN5dogen7utility3log14severity_levelESsEENS2_19single_thread_modelEEESsEESA_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS1_8keywords3tag8severityEKSA_EEEENS1_6recordERKT_
    ...
+}
+
+{
+   Boost Log 3
+   Memcheck:Leak
+   ...
+   fun:_ZN5boost3log11v2_mt_posix7sources21basic_severity_loggerINS2_20basic_channel_loggerINS2_12basic_loggerIcNS2_23severity_channel_loggerIN5dogen7utility3log14severity_levelESsEENS2_19single_thread_modelEEESsEESA_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS1_8keywords3tag8severityEKSA_EEEENS1_6recordERKT_
+   fun:_ZN5boost3log11v2_mt_posix7sources22basic_composite_loggerIcNS2_23severity_channel_loggerIN5dogen7utility3log14severity_levelESsEENS2_19single_thread_modelENS2_8featuresIINS2_8severityIS8_EENS2_7channelISsEEEEEE11open_recordINS_9parameter3aux15tagged_argumentINS1_8keywords3tag8severityEKS8_EEEENS1_6recordERKT_
+   ...
+}
+
+{
+   Boost thread
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost6detail12shared_countC1INS0_16thread_data_baseEEEPT_
+   obj:/usr/local/pfh/lib/libboost_thread.so.1.55.0
 }
 
 {
