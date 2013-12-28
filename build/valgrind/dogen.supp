@@ -92,3 +92,34 @@
    fun:_ZN5boost3log11v2_mt_posix7sources21basic_severity_loggerINS2_20basic_channel_loggerINS2_12basic_loggerIcNS2_23severity_channel_loggerIN5dogen7utility3log14severity_levelESsEENS2_19single_thread_modelEEESsEESA_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS1_8keywords3tag8severityEKSA_EEEENS1_6recordERKT_
    ...
 }
+
+{
+   odb 64-bit 1
+   Memcheck:Leak
+   ...
+   fun:PQconnectPoll
+   ...
+   fun:PQconnectdb
+   fun:_ZN3odb5pgsql10connectionC1ERNS0_8databaseE
+   fun:_ZN3odb5pgsql23connection_pool_factory17pooled_connectionC1ERNS0_8databaseE
+   fun:_ZN3odb5pgsql23connection_pool_factory6createEv
+   fun:_ZN3odb5pgsql23connection_pool_factory7connectEv
+   fun:_ZN3odb5pgsql8database11connection_Ev
+   fun:_ZN3odb5pgsql8database10connectionEv
+   ...
+}
+
+{
+   odb 64-bit 2
+   Memcheck:Leak
+   ...
+   fun:inflate
+   fun:PQgetResult
+   ...
+   fun:_ZN3odb5pgsql10connection7executeEPKcm
+   fun:_ZN3odb8database7executeEPKcm
+   fun:_ZN3odb8database7executeEPKc
+   fun:_ZN3odb6access18object_traits_implIN5dogen8database13primary_key_2ELNS_11database_idE2EE13create_schemaERNS_8databaseEtb
+   fun:_ZN3odb14schema_catalog13create_schemaERNS_8databaseERKSs
+   ...
+}
