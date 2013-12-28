@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add =try_get_key= to reader                                       :story:
+
+At present we are doing a lot of =has_key= calls followed by =get=
+using the meta-data reader in SML. We should have a single call that
+does both, returning perhaps a pair of bool, value.
+
 *** Add support for units                                             :story:
 
 With user defined literals in C++11, defining one's own numeric types
