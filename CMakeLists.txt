@@ -72,10 +72,14 @@ find_package(Boost 1.55 REQUIRED COMPONENTS
     )
 
 if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
+    include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 endif()
 
+# libxml
 find_package(LibXml2)
+if(LibXml2_FOUND)
+    include_directories(SYSTEM ${LIBXML2_INCLUDE_DIR})
+endif()
 
 # odb
 find_package(ODB)
@@ -200,14 +204,6 @@ else()
     message(STATUS "Building WITHOUT debug symbols...")
 endif()
 message(STATUS "Product version: ${DOGEN_VERSION}")
-
-# system includes
-include_directories(SYSTEM
-    ${LIBXML2_INCLUDE_DIR}
-    # for sigc++config.h multiarch
-    /usr/lib/i386-linux-gnu/sigc++-2.0/include
-    /usr/lib/x86_64-linux-gnu/sigc++-2.0/include
-    )
 
 #
 # doxygen
