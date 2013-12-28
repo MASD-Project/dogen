@@ -76,8 +76,8 @@ if(Boost_FOUND)
 endif()
 
 # libxml
-find_package(LibXml2)
-if(LibXml2_FOUND)
+find_package(LibXml2 REQUIRED)
+if(LIBXML2_FOUND)
     include_directories(SYSTEM ${LIBXML2_INCLUDE_DIR})
 endif()
 
