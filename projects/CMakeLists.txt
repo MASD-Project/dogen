@@ -61,11 +61,8 @@ endif()
 # issue all the warnings demanded by strict iso c and iso c++
 set(warning_flags "${warning_flags} -pedantic")
 
-# treat warnings as errors. disable for windows at the moment as we
-# are trying to get the build to work again.
-if(NOT WIN32)
-    set(warning_flags "${warning_flags} -Werror")
-endif()
+# treat warnings as errors
+set(warning_flags "${warning_flags} -Werror")
 
 # definition shadows another
 # FIXME: causes too many problems.
