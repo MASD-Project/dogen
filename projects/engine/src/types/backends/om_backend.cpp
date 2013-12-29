@@ -42,7 +42,7 @@ backend::value_type om_backend::generate() {
 
     backend::value_type r;
     for (const auto& f : files)
-        r.insert(std::make_pair(f.full_path(), f.contents()));
+        r.insert(std::make_pair(f.relative_path(), f.contents()));
 
     return r;
 }

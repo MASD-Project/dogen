@@ -553,27 +553,31 @@ void meta_data_tagger::operator()(module& m) const {
 
     // only generate a types file for models when there is
     // documentation for the model.
-    if (!m.documentation().empty()) {
+    if (m.documentation().empty()) {
         writer.add_if_key_not_found(
-            tags::cpp::types::header_file::generate, tags::bool_true);
-
-        // must massage the model name in order to generate the
-        // correct file name for the model.
-        qname qn(m.name());
-        qn.simple_name(m.name().model_name());
-
-        meta_data_reader reader(m.meta_data());
-        const auto fn(filename_for_qname(reader, is_header_file, qn,
-                reader.get(tags::cpp::types::directory_name),
-                reader.get(tags::cpp::types::postfix),
-                empty_postfix));
-
-        writer.add_if_key_not_found(
-            tags::cpp::types::header_file::file_name, fn);
-
-        writer.add_if_key_not_found(
-            tags::cpp::types::header_file::is_system, tags::bool_false);
+            tags::cpp::types::header_file::generate, tags::bool_false);
+        return;
     }
+
+    writer.add_if_key_not_found(
+        tags::cpp::types::header_file::generate, tags::bool_true);
+
+    // must massage the model name in order to generate the
+    // correct file name for the model.
+    qname qn(m.name());
+    qn.simple_name(m.name().model_name());
+
+    meta_data_reader reader(m.meta_data());
+    const auto fn(filename_for_qname(reader, is_header_file, qn,
+            reader.get(tags::cpp::types::directory_name),
+            reader.get(tags::cpp::types::postfix),
+            empty_postfix));
+
+    writer.add_if_key_not_found(
+        tags::cpp::types::header_file::file_name, fn);
+
+    writer.add_if_key_not_found(
+        tags::cpp::types::header_file::is_system, tags::bool_false);
 }
 
 void meta_data_tagger::operator()(concept& /*c*/) const {

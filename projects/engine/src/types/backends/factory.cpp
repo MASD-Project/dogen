@@ -36,15 +36,14 @@ void factory::log_cpp_backend_disabled() const {
 }
 
 factory::result_type factory::create() const {
-    result_type r;
-
-    if (settings_.cpp().disable_backend())
+    if (settings_.cpp().disable_backend()) {
         log_cpp_backend_disabled();
-    else {
-        r.push_back(cpp_backend::create(model_, settings_.cpp()));
-        // r.push_back(om_backend::create(model_));
+        return result_type();
     }
 
+    result_type r;
+    r.push_back(cpp_backend::create(model_, settings_.cpp()));
+    // r.push_back(om_backend::create(model_));
     return r;
 }
 

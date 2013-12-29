@@ -78,12 +78,17 @@ void workflow::ensure_non_null_context() const {
 
 void workflow::operator()(const sml::type& t) const {
     ensure_non_null_context();
+
+    if (t.generation_type() == sml::generation_types::no_generation)
+        return;
+
     const auto annotation(context_->factory().build(t.meta_data()));
     sml::meta_data_reader reader(t.meta_data());
     for (const auto f : type_formatters_) {
         const auto status(reader.get(f->meta_data_path()));
 
-        if (status == sml::tags::status_unsupported)
+        if (status == sml::tags::status_unsupported ||
+            status == sml::tags::bool_false)
             continue;
 
         auto file(f->format(t, annotation));
@@ -94,12 +99,17 @@ void workflow::operator()(const sml::type& t) const {
 
 void workflow::operator()(const sml::module& m) const {
     ensure_non_null_context();
+
+    if (m.generation_type() == sml::generation_types::no_generation)
+        return;
+
     const auto annotation(context_->factory().build(m.meta_data()));
     sml::meta_data_reader reader(m.meta_data());
     for (const auto f : module_formatters_) {
         const auto status(reader.get(f->meta_data_path()));
 
-        if (status == sml::tags::status_unsupported)
+        if (status == sml::tags::status_unsupported ||
+            status == sml::tags::bool_false)
             continue;
 
         auto file(f->format(m, annotation));
@@ -110,12 +120,17 @@ void workflow::operator()(const sml::module& m) const {
 
 void workflow::operator()(const sml::concept& c) const {
     ensure_non_null_context();
+
+    if (c.generation_type() == sml::generation_types::no_generation)
+        return;
+
     const auto annotation(context_->factory().build(c.meta_data()));
     sml::meta_data_reader reader(c.meta_data());
     for (const auto f : concept_formatters_) {
         const auto status(reader.get(f->meta_data_path()));
 
-        if (status == sml::tags::status_unsupported)
+        if (status == sml::tags::status_unsupported ||
+            status == sml::tags::bool_false)
             continue;
 
         auto file(f->format(c, annotation));
