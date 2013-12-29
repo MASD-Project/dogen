@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 10:40]
+Clock summary at [2013-12-29 Sun 10:52]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *39:06* |       |       |
+| *Total time*                                                  | *39:18* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 39:06 |       |
+| Development Stories Implemented                               |         | 39:18 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  1:17 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -27,7 +27,7 @@ Clock summary at [2013-12-29 Sun 10:40]
 | COMPLETED CDash is not reporting builds                       |         |       |  0:45 |
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
 | COMPLETED Update read me file                                 |         |       |  0:51 |
-| COMPLETED Start using PGPASSWORD for database model           |         |       |  0:28 |
+| COMPLETED Start using PGPASSWORD for database model           |         |       |  0:40 |
 | IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:12 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  3:52 |
 #+end:
@@ -351,6 +351,7 @@ apt-get instructions.
 
 *** COMPLETED Start using PGPASSWORD for database model               :spike:
     CLOSED: [2013-12-28 Sat 15:58]
+    CLOCK: [2013-12-29 Sun 10:40]--[2013-12-29 Sun 10:52] =>  0:12
     CLOCK: [2013-12-28 Sat 15:40]--[2013-12-28 Sat 15:57] =>  0:17
     CLOCK: [2013-12-28 Sat 14:55]--[2013-12-28 Sat 15:06] =>  0:11
 
@@ -360,6 +361,10 @@ As explained in read me:
   you have chosen for this user (see [[http://www.postgresql.org/docs/9.1/static/libpq-envars.html][Environment Variables]]).
 
 We need to change the code to match this.
+
+=PGPASSWORD= failed miserably, for reasons not yet
+understood. However, according to the docs the right way is
+=.pgpass=.
 
 *** IMPLEMENTATION Fix broken builds due to a variety of errors       :spike:
     CLOCK: [2013-12-28 Sat 13:35]--[2013-12-28 Sat 13:41] =>  0:06
