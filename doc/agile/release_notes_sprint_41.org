@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 22:47]
+Clock summary at [2013-12-29 Sun 23:05]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *44:25* |       |       |
+| *Total time*                                                  | *44:36* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 44:25 |       |
-| IMPLEMENTATION Release notes and backlog grooming             |         |       |  1:27 |
+| Development Stories Implemented                               |         | 44:36 |       |
+| COMPLETED Release notes and backlog grooming                  |         |       |  1:27 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
 | COMPLETED Remove model from extractor                         |         |       |  0:16 |
@@ -29,10 +29,11 @@ Clock summary at [2013-12-29 Sun 22:47]
 | COMPLETED Update read me file                                 |         |       |  0:51 |
 | COMPLETED Start using PGPASSWORD for database model           |         |       |  0:40 |
 | COMPLETED Fix broken builds due to a variety of errors        |         |       |  3:39 |
-| IMPLEMENTATION Add om's workflow to engine                    |         |       |  8:22 |
+| COMPLETED Add om's workflow to engine                         |         |       |  8:33 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-12-29 Sun 23:05]
     CLOCK: [2013-12-29 Sun 21:33]--[2013-12-29 Sun 21:43] =>  0:10
     CLOCK: [2013-12-29 Sun 10:22]--[2013-12-29 Sun 10:40] =>  0:18
     CLOCK: [2013-12-28 Sat 15:57]--[2013-12-28 Sat 16:02] =>  0:05
@@ -44,10 +45,6 @@ Clock summary at [2013-12-29 Sun 22:47]
     CLOCK: [2013-12-16 Mon 07:55]--[2013-12-16 Mon 07:59] =>  0:04
 
 Updates to release notes and backlog.
-
-*** Update manual                                                     :story:
-
-Use compilation downtime to update the manual.
 
 *** COMPLETED Use relationship container for visitors                 :story:
     CLOSED: [2013-12-16 Mon 18:29]
@@ -444,7 +441,8 @@ clean build as soon as possible.
 
 - couldn't get to the bottom of it, so disabling EOS on windows.
 
-*** IMPLEMENTATION Add om's workflow to engine                        :story:
+*** COMPLETED Add om's workflow to engine                             :story:
+    CLOSED: [2013-12-29 Sun 23:04]
 
 We need to find a way to add the available formatters in om into the
 engine workflow, replacing the legacy c++ formatters. With this we can
@@ -468,7 +466,9 @@ At present the om workflow assumes all models have licences, etc. This
 is not a valid assumption. We should generate code in the absence of
 this meta-data.
 
-**** IMPLEMENTATION Integrate om back-end with workflow                :task:
+**** COMPLETED Start integrating =om= back-end with workflow           :task:
+     CLOSED: [2013-12-29 Sun 23:04]
+     CLOCK: [2013-12-29 Sun 22:53]--[2013-12-29 Sun 23:04] =>  0:04
      CLOCK: [2013-12-29 Sun 21:45]--[2013-12-29 Sun 22:47] =>  1:02
      CLOCK: [2013-12-29 Sun 16:36]--[2013-12-29 Sun 18:36] =>  2:00
      CLOCK: [2013-12-29 Sun 11:48]--[2013-12-29 Sun 13:16] =>  1:28
@@ -550,6 +550,27 @@ to be recursive. We can leave it for later, as its not a showstopper
 for the move to =om=. =overwrite= is dependent on
 =generation_types::partial_generation=.
 
+Notes on directories:
+
+- we need to find a way to get the project directories - such as
+  include directory and source directory, etc - to the om.
+- The natural thing to do is of course to add these to the
+  meta-data. Alas, unlike every other property up til now, these
+  directories are likely to cause havoc to our cross-platform
+  setup. This is because we will end up with spurious differences
+  between Windows, OSX and Linux due to the directory layout.
+- Option two was to create a class in SML (say =project_directories=)
+  but then the C++ concepts like include and source would leak into
+  SML, which we avoided via the meta-data. We would also have to have
+  a =project_directories_factory= which is not part of the SML
+  workflow and must be invoked after the workflow, thus making it
+  annoyingly inconvenient.
+- The last option looked at was to move this code into om itself. This
+  can be done, it will just require passing the settings into om, and
+  then the directories into the formatter factory. It will require
+  some logic that should really be in SML. Having said that it seems
+  like the least bad option.
+
 **** Add required meta-data to test models                             :task:
 
 In order for om to match the C++ model we need to make sure we are
@@ -598,3 +619,11 @@ naturally implemented when we stop using PFH.
 
 As part of the attempt to get the code to build without the PFH, we
 need to ensure that we compile with the latest stable clang.
+
+*** CANCELLED Update manual                                           :story:
+    CLOSED: [2013-12-29 Sun 23:05]
+
+Use compilation downtime to update the manual.
+
+We never got round to doing this during this iteration as there were a
+number of compilation fixes that used the downtime.
