@@ -163,7 +163,7 @@ endforeach()
 #
 # platform specific
 #
-if (WIN32)
+if(WIN32)
     set(CPACK_GENERATOR "NSIS")
     set(CPACK_SOURCE_GENERATOR "ZIP")
     set(CPACK_PACKAGE_EXECUTABLES "dogen_driver" "Dogen - domain generator")
@@ -186,7 +186,7 @@ if (WIN32)
     set(CPACK_NSIS_CONTACT "info@kitanda.co.uk")
     set(CPACK_NSIS_MODIFY_PATH ON)
 
-elseif (APPLE)
+elseif(APPLE)
     set(CPACK_SOURCE_GENERATOR "TGZ")
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in ${stage_dir}/tmp_pkg/macosx/Info.plist)
@@ -209,7 +209,7 @@ elseif (APPLE)
     set(CPACK_COMPONENT_HEADERS_INSTALL_TYPES Developer Full)
     set(CPACK_COMPONENT_APPLICATIONS_INSTALL_TYPES Full)
 
-elseif (UNIX)
+elseif(UNIX)
     set(CPACK_STRIP_FILES "")
     set(CPACK_SOURCE_STRIP_FILES "")
 

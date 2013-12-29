@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 10:52]
+Clock summary at [2013-12-29 Sun 11:59]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *39:18* |       |       |
+| *Total time*                                                  | *39:26* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 39:18 |       |
+| Development Stories Implemented                               |         | 39:26 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  1:17 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -28,7 +28,7 @@ Clock summary at [2013-12-29 Sun 10:52]
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
 | COMPLETED Update read me file                                 |         |       |  0:51 |
 | COMPLETED Start using PGPASSWORD for database model           |         |       |  0:40 |
-| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:12 |
+| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:20 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  3:52 |
 #+end:
 
@@ -384,6 +384,7 @@ clean build as soon as possible.
 - spec file is not named according to the specs or model. Renamed it.
 
 **** Windows
+     CLOCK: [2013-12-29 Sun 11:50]--[2013-12-29 Sun 11:58] =>  0:08
      CLOCK: [2013-12-29 Sun 09:52]--[2013-12-29 Sun 10:02] =>  0:10
      CLOCK: [2013-12-28 Sat 23:24]--[2013-12-28 Sat 23:26] =>  0:02
      CLOCK: [2013-12-28 Sat 21:51]--[2013-12-28 Sat 23:20] =>  1:29
