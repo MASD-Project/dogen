@@ -146,10 +146,10 @@ execute(model target, std::list<model> user_models) const {
     inject_system_types_activity(target, user_models);
     auto r(create_merged_model_activity(target, library_models, user_models));
     resolve_types_activity(r);
-    tag_model_activity(r);
     index_concepts_activity(r);
     index_properties_activity(r);
     index_associations_activity(r);
+    tag_model_activity(r);
     return std::pair<bool, model> { has_generatable_types(r), r };
 }
 
