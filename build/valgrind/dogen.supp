@@ -111,7 +111,7 @@
 }
 
 {
-   odb 64-bit 1
+   odb 1
    Memcheck:Leak
    ...
    fun:PQconnectPoll
@@ -127,7 +127,7 @@
 }
 
 {
-   odb 64-bit 2
+   odb 2
    Memcheck:Leak
    ...
    fun:inflate
@@ -138,5 +138,21 @@
    fun:_ZN3odb8database7executeEPKc
    fun:_ZN3odb6access18object_traits_implIN5dogen8database13primary_key_2ELNS_11database_idE2EE13create_schemaERNS_8databaseEtb
    fun:_ZN3odb14schema_catalog13create_schemaERNS_8databaseERKSs
+   ...
+}
+
+{
+   odb 3
+   Memcheck:Cond
+   ...
+   fun:PQconnectPoll
+   ...
+   fun:PQconnectdb
+   fun:_ZN3odb5pgsql10connectionC1ERNS0_8databaseE
+   fun:_ZN3odb5pgsql23connection_pool_factory17pooled_connectionC1ERNS0_8databaseE
+   fun:_ZN3odb5pgsql23connection_pool_factory6createEv
+   fun:_ZN3odb5pgsql23connection_pool_factory7connectEv
+   fun:_ZN3odb5pgsql8database11connection_Ev
+   fun:_ZN3odb5pgsql8database10connectionEv
    ...
 }
