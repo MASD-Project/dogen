@@ -209,7 +209,23 @@ include_directories(
     )
 
 #
-# add all projects
+# feature specific projects
+#
+if(ODB_FOUND)
+    message(STATUS "Adding ODB feature test project")
+    include_directories(${CMAKE_SOURCE_DIR}/projects/database/include)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
+endif()
+
+if(EOS_FOUND)
+    message(STATUS "Adding EOS feature test project")
+    include_directories(${CMAKE_SOURCE_DIR}/projects/eos_serialization/include)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/eos_serialization)
+endif()
+
+#
+# add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/spec)
@@ -258,22 +274,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
-
-#
-# feature specific projects
-#
-if(ODB_FOUND)
-    message(STATUS "Adding ODB feature test project")
-    include_directories(${CMAKE_SOURCE_DIR}/projects/database/include)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
-endif()
-
-if(EOS_FOUND)
-    message(STATUS "Adding EOS feature test project")
-    include_directories(${CMAKE_SOURCE_DIR}/projects/eos_serialization/include)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/eos_serialization)
-endif()
 
 # global targets for codegen
 add_custom_target(rebase_codegen)
