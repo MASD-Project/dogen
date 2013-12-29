@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 00:04]
+Clock summary at [2013-12-29 Sun 10:02]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *38:38* |       |       |
+| *Total time*                                                  | *38:48* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 38:38 |       |
+| Development Stories Implemented                               |         | 38:48 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:59 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -28,7 +28,7 @@ Clock summary at [2013-12-29 Sun 00:04]
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
 | COMPLETED Update read me file                                 |         |       |  0:51 |
 | COMPLETED Start using PGPASSWORD for database model           |         |       |  0:28 |
-| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:02 |
+| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:12 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  3:52 |
 #+end:
 
@@ -356,6 +356,7 @@ We need to change the code to match this.
 - spec file is not named according to the specs or model. Renamed it.
 
 **** Windows
+     CLOCK: [2013-12-29 Sun 09:52]--[2013-12-29 Sun 10:02] =>  0:10
      CLOCK: [2013-12-28 Sat 23:24]--[2013-12-28 Sat 23:26] =>  0:02
      CLOCK: [2013-12-28 Sat 21:51]--[2013-12-28 Sat 23:20] =>  1:29
      CLOCK: [2013-12-28 Sat 15:00]--[2013-12-28 Sat 15:40] =>  0:40
@@ -394,6 +395,14 @@ We need to change the code to match this.
 : Files/test_model_sanitizer_spec.dir/objects.a(eos_serialization_spec.cpp.obj):eos_serialization_spec.cpp:(.text+0x166): undefined reference to `dogen::eos_serialization::first_class::public_attribute() const'
 
   this appears to be a typo in makefile.
+
+- linking is failing due to dll import errors:
+
+: e:/usr/local/pfh/include/boost-1_55/boost/archive/impl/basic_binary_iarchive.ipp:36:1: error: function 'void boost::archive::basic_binary_iarchive<Archive>::load_override(boost::archive::class_name_type&, int)' definition is marked dllimport
+
+  this seems related to [[http://code.woboq.org/userspace/boost/boost/archive/detail/decl.hpp.html][this error]]. It may also be remated to adding
+  PFH to =CMAKE_INCLUDE_PATH=. Trying =include_directories(SYSTEM...=
+  instead.
 
 *** IMPLEMENTATION Add om's workflow to engine                        :story:
 

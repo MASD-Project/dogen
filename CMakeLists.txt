@@ -54,7 +54,7 @@ find_package(Threads REQUIRED)
 if (DEFINED ENV{PFH_LOCATION})
     set(BOOST_ROOT "$ENV{PFH_LOCATION}")
     set(Boost_NO_SYSTEM_PATHS "ON")
-    list(APPEND CMAKE_INCLUDE_PATH $ENV{PFH_LOCATION}/include)
+    include_directories(SYSTEM $ENV{PFH_LOCATION}/include)
 endif()
 
 # note: we should be able to compile with boost 1.54, but due to some
