@@ -269,7 +269,7 @@ if(ODB_FOUND)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
 endif()
 
-if(NOT EOS_FOUND)
+if(EOS_FOUND)
     message(STATUS "Adding EOS feature test project")
     include_directories(${CMAKE_SOURCE_DIR}/projects/eos_serialization/include)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/eos_serialization)
