@@ -8,6 +8,36 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add tests for =annotation_factory=                                :story:
+
+We added this class without any tests initially because we wanted to
+first prove =om= worked. Once this is achieved we need to revisit this
+class and add tests.
+
+- missing licence
+- missing modeline
+- empty marker
+- different marker for two objects
+- consider moving generate preamble into annotation
+
+*** Add tests for main header file formatter with optionality         :story:
+
+We should add a couple of tests that exercise the annotation
+factory. As it will have its own tests, we just need to make sure it
+works in general. For example, pass in an empty annotation.
+
+*** Check packaging code for PFH dependencies                         :story:
+
+We are manually copying a lot of shared objects from PFH when creating
+packages, this should be replaced with appropriate dependencies (at
+least for Debian packages).
+
+*** Fix cp error on cmake without PFH                                 :story:
+
+We are getting strange errors in cmake:
+
+: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
+
 *** Add =try_get_key= to reader                                       :story:
 
 At present we are doing a lot of =has_key= calls followed by =get=

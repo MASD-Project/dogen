@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 19:19]
+Clock summary at [2013-12-29 Sun 21:44]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *43:13* |       |       |
+| *Total time*                                                  | *43:23* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 43:13 |       |
-| IMPLEMENTATION Release notes and backlog grooming             |         |       |  1:17 |
+| Development Stories Implemented                               |         | 43:23 |       |
+| IMPLEMENTATION Release notes and backlog grooming             |         |       |  1:27 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
 | COMPLETED Remove model from extractor                         |         |       |  0:16 |
@@ -28,11 +28,12 @@ Clock summary at [2013-12-29 Sun 19:19]
 | COMPLETED Reduce the number of valgrind errors back to normal |         |       |  0:43 |
 | COMPLETED Update read me file                                 |         |       |  0:51 |
 | COMPLETED Start using PGPASSWORD for database model           |         |       |  0:40 |
-| IMPLEMENTATION Fix broken builds due to a variety of errors   |         |       |  3:39 |
+| COMPLETED Fix broken builds due to a variety of errors        |         |       |  3:39 |
 | IMPLEMENTATION Add om's workflow to engine                    |         |       |  7:20 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-29 Sun 21:33]--[2013-12-29 Sun 21:43] =>  0:10
     CLOCK: [2013-12-29 Sun 10:22]--[2013-12-29 Sun 10:40] =>  0:18
     CLOCK: [2013-12-28 Sat 15:57]--[2013-12-28 Sat 16:02] =>  0:05
     CLOCK: [2013-12-26 Thu 22:35]--[2013-12-26 Thu 22:46] =>  0:11
@@ -366,7 +367,8 @@ We need to change the code to match this.
 understood. However, according to the docs the right way is
 =.pgpass=.
 
-*** IMPLEMENTATION Fix broken builds due to a variety of errors       :spike:
+*** COMPLETED Fix broken builds due to a variety of errors            :spike:
+    CLOSED: [2013-12-29 Sun 21:41]
     CLOCK: [2013-12-28 Sat 13:35]--[2013-12-28 Sat 13:41] =>  0:06
     CLOCK: [2013-12-28 Sat 11:00]--[2013-12-28 Sat 11:27] =>  0:27
     CLOCK: [2013-12-28 Sat 09:12]--[2013-12-28 Sat 09:30] =>  0:18
@@ -374,7 +376,8 @@ understood. However, according to the docs the right way is
 We have *a lot* of CDash errors at the moment. We need to get to a
 clean build as soon as possible.
 
-**** IMPLEMENTATION OSX                                                :task:
+**** COMPLETED OSX                                                     :task:
+     CLOSED: [2013-12-29 Sun 21:41]
 
 - seems like a EOS linking error. According to comments, we should use
   =NO_EXPLICIT_TEMPLATE_INSTANTIATION=.
@@ -387,7 +390,8 @@ clean build as soon as possible.
 
 - spec file is not named according to the specs or model. Renamed it.
 
-**** IMPLEMENTATION Windows
+**** COMPLETED Windows
+     CLOSED: [2013-12-29 Sun 21:41]
      CLOCK: [2013-12-29 Sun 19:00]--[2013-12-29 Sun 19:19] =>  0:19
      CLOCK: [2013-12-29 Sun 11:50]--[2013-12-29 Sun 11:58] =>  0:08
      CLOCK: [2013-12-29 Sun 09:52]--[2013-12-29 Sun 10:02] =>  0:10
@@ -549,36 +553,6 @@ for the move to =om=. =overwrite= is dependent on
 
 In order for om to match the C++ model we need to make sure we are
 passing in the correct meta-data such as licences, etc.
-
-*** Add tests for =annotation_factory=                                :spike:
-
-We added this class without any tests initially because we wanted to
-first prove =om= worked. Once this is achieved we need to revisit this
-class and add tests.
-
-- missing licence
-- missing modeline
-- empty marker
-- different marker for two objects
-- consider moving generate preamble into annotation
-
-*** Add tests for main header file formatter with optionality         :spike:
-
-We should add a couple of tests that exercise the annotation
-factory. As it will have its own tests, we just need to make sure it
-works in general. For example, pass in an empty annotation.
-
-*** Check packaging code for PFH dependencies                          :task:
-
-We are manually copying a lot of shared objects from PFH when creating
-packages, this should be replaced with appropriate dependencies (at
-least for Debian packages).
-
-*** Fix cp error on cmake without PFH                                 :spike:
-
-We are getting strange errors in cmake:
-
-: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:
