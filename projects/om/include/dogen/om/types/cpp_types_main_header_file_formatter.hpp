@@ -149,7 +149,7 @@ private:
     void visit(const sml::object& f) const override;
 
 public:
-    const std::string& meta_data_path() const override;
+    bool generate(const boost::property_tree::ptree& meta_data) const override;
 
     file format(const sml::module& module, const annotation& a) const override;
 

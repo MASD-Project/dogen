@@ -117,7 +117,6 @@ struct tags {
      */
     static const std::string status_unsupported;
     static const std::string status_supported;
-    static const std::string status_handcrafted;
 
     /**
      * @brief Tags related to the code generation marker.
@@ -193,8 +192,14 @@ struct tags {
          */
         struct types {
             /**
-             * @brief If set to disabled, the @e types facet will not
-             * be generated for this type or model.
+             * @brief If set to false, the @e types facet will not
+             * be generated for this type.
+             */
+            static const std::string enabled;
+
+            /**
+             * @brief If set to unsupported, the @e types facet cannot
+             * be generated for this type.
              */
             static const std::string status;
 
@@ -320,6 +325,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -342,6 +353,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
 
                 /**
                  * @brief Relative file name for the file.
@@ -368,6 +385,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -389,6 +412,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
 
                 /**
                  * @brief Relative file name for the file.
@@ -417,7 +446,13 @@ struct tags {
              */
             struct standard {
                 /**
-                 * @brief If set to disabled, the @e hash facet will not
+                 * @brief If set to false, the @e hash facet will not
+                 * be generated for this type.
+                 */
+                static const std::string enabled;
+
+                /**
+                 * @brief If set to unsupported, the @e hash facet cannot
                  * be generated for this type.
                  */
                 static const std::string status;
@@ -433,12 +468,6 @@ struct tags {
                 static const std::string postfix;
 
                 /**
-                 * @brief If set to true, an include file that includes
-                 * all types in this facet will be generated.
-                 */
-                static const std::string generate_includers;
-
-                /**
                  * @brief Parameters associated with the hash header file.
                  */
                 struct header_file {
@@ -447,6 +476,12 @@ struct tags {
                      * for this entity.
                      */
                     static const std::string generate;
+
+                    /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
 
                     /**
                      * @brief Relative file name for the file.
@@ -473,6 +508,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
+
+                    /**
                      * @brief Relative file name for the file.
                      */
                     static const std::string file_name;
@@ -495,6 +536,12 @@ struct tags {
                      * for this entity.
                      */
                     static const std::string generate;
+
+                    /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
 
                     /**
                      * @brief Relative file name for the file.
@@ -520,6 +567,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
+
+                    /**
                      * @brief Relative file name for the file.
                      */
                     static const std::string file_name;
@@ -543,8 +596,14 @@ struct tags {
              */
             struct boost {
                 /**
-                 * @brief If set to disabled, the serialization facet
+                 * @brief If set to false, the @e serialization facet
                  * will not be generated for this type.
+                 */
+                static const std::string enabled;
+
+                /**
+                 * @brief If set to unsupported, the @e serialization
+                 * facet cannot be generated for this type.
                  */
                 static const std::string status;
 
@@ -576,6 +635,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
+
+                    /**
                      * @brief Relative file name for the file.
                      */
                     static const std::string file_name;
@@ -598,6 +663,12 @@ struct tags {
                      * for this entity.
                      */
                     static const std::string generate;
+
+                    /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
 
                     /**
                      * @brief Relative file name for the file.
@@ -624,6 +695,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
+
+                    /**
                      * @brief Relative file name for the file.
                      */
                     static const std::string file_name;
@@ -647,6 +724,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief Determines if existing files should be
+                     * overwritten or not.
+                     */
+                    static const std::string overwrite;
+
+                    /**
                      * @brief Relative file name for the file.
                      */
                     static const std::string file_name;
@@ -666,8 +749,14 @@ struct tags {
          */
         struct io {
             /**
-             * @brief If set to disabled, the serialization facet
-             * will not be generated for this type.
+             * @brief If set to false, the @e io facet will not be
+             * generated for this type.
+             */
+            static const std::string enabled;
+
+            /**
+             * @brief If set to unsupported, the @e io facet cannot be
+             * generated for this type.
              */
             static const std::string status;
 
@@ -698,6 +787,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -720,6 +815,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
 
                 /**
                  * @brief Relative file name for the file.
@@ -746,6 +847,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -769,6 +876,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -787,8 +900,14 @@ struct tags {
          */
         struct test_data {
             /**
-             * @brief If set to disabled, the @e test_data facet
-             * will not be generated for this type.
+             * @brief If set to false, the @e test_data facet will not
+             * be generated for this type.
+             */
+            static const std::string enabled;
+
+            /**
+             * @brief If set to unsupported, the @e test_data facet
+             * cannot be generated for this type.
              */
             static const std::string status;
 
@@ -814,6 +933,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -836,6 +961,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
 
                 /**
                  * @brief Relative file name for the file.
@@ -862,6 +993,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -885,6 +1022,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -903,8 +1046,14 @@ struct tags {
          */
         struct odb {
             /**
-             * @brief If set to disabled, the @e odb facet will not be
-             * generated for this type.
+             * @brief If set to false, the @e odb facet will not
+             * be generated for this type.
+             */
+            static const std::string enabled;
+
+            /**
+             * @brief If set to unsupported, the @e odb facet
+             * cannot be generated for this type.
              */
             static const std::string status;
 
@@ -929,6 +1078,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
+
+                /**
                  * @brief Relative file name for the file.
                  */
                 static const std::string file_name;
@@ -950,6 +1105,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief Determines if existing files should be
+                 * overwritten or not.
+                 */
+                static const std::string overwrite;
 
                 /**
                  * @brief Relative file name for the file.

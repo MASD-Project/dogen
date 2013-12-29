@@ -6751,13 +6751,13 @@ came from.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O56">
       <dia:attribute name="obj_pos">
-        <dia:point val="-94,70"/>
+        <dia:point val="-95,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-94.05,69.95;-80.745,73.65"/>
+        <dia:rectangle val="-95.05,69.95;-81.745,73.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-94,70"/>
+        <dia:point val="-95,70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.205"/>
@@ -6885,17 +6885,17 @@ came from.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O57">
       <dia:attribute name="obj_pos">
-        <dia:point val="-87.3975,73.6"/>
+        <dia:point val="-88.3975,73.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-88.2475,73.55;-66.5825,87.05"/>
+        <dia:rectangle val="-89.2475,73.55;-66.5825,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-87.3975,73.6"/>
-        <dia:point val="-87.3975,81"/>
+        <dia:point val="-88.3975,73.6"/>
+        <dia:point val="-88.3975,81"/>
         <dia:point val="-66.6325,81"/>
         <dia:point val="-66.6325,87"/>
       </dia:attribute>
@@ -7142,17 +7142,17 @@ came from.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-87.3975,70"/>
+        <dia:point val="-88.3975,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-93.87,55.15;-86.6475,70.8"/>
+        <dia:rectangle val="-93.87,55.15;-87.6475,70.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-87.3975,70"/>
-        <dia:point val="-87.3975,60"/>
+        <dia:point val="-88.3975,70"/>
+        <dia:point val="-88.3975,60"/>
         <dia:point val="-93.82,60"/>
         <dia:point val="-93.82,55.2"/>
       </dia:attribute>

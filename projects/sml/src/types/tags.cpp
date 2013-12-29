@@ -41,7 +41,6 @@ const std::string tags::bool_false("false");
 
 const std::string tags::status_unsupported("unsupported");
 const std::string tags::status_supported("supported");
-const std::string tags::status_handcrafted("handcrafted");
 
 const std::string tags::code_generation_marker::add_date_time(
     "code_generation_marker.add_date_time");
@@ -64,6 +63,7 @@ const std::string tags::cpp::forward_declaration_postfix(
 /*
  * cpp::types
  */
+const std::string tags::cpp::types::enabled("cpp.types.enabled");
 const std::string tags::cpp::types::status("cpp.types.status");
 const std::string tags::cpp::types::directory_name("cpp.types.directory_name");
 const std::string tags::cpp::types::postfix("cpp.types.postfix");
@@ -98,6 +98,8 @@ const std::string tags::cpp::types::generate_accept(
 
 const std::string tags::cpp::types::header_file::generate(
     "cpp.types.header_file.generate");
+const std::string tags::cpp::types::header_file::overwrite(
+    "cpp.types.header_file.overwrite");
 const std::string tags::cpp::types::header_file::file_name(
     "cpp.types.header_file.file_name");
 const std::string tags::cpp::types::header_file::is_system(
@@ -105,6 +107,8 @@ const std::string tags::cpp::types::header_file::is_system(
 
 const std::string tags::cpp::types::implementation_file::generate(
     "cpp.types.implementation_file.generate");
+const std::string tags::cpp::types::implementation_file::overwrite(
+    "cpp.types.implementation_file.overwrite");
 const std::string tags::cpp::types::implementation_file::file_name(
     "cpp.types.implementation_file.file_name");
 const std::string tags::cpp::types::implementation_file::is_system(
@@ -112,6 +116,8 @@ const std::string tags::cpp::types::implementation_file::is_system(
 
 const std::string tags::cpp::types::forward_declarations_file::generate(
     "cpp.types.forward_declarations_file.generate");
+const std::string tags::cpp::types::forward_declarations_file::overwrite(
+    "cpp.types.forward_declarations_file.overwrite");
 const std::string tags::cpp::types::forward_declarations_file::file_name(
     "cpp.types.forward_declarations_file.file_name");
 const std::string tags::cpp::types::forward_declarations_file::is_system(
@@ -119,6 +125,8 @@ const std::string tags::cpp::types::forward_declarations_file::is_system(
 
 const std::string tags::cpp::types::includers_file::generate(
     "cpp.types.includers_file.generate");
+const std::string tags::cpp::types::includers_file::overwrite(
+    "cpp.types.includers_file.overwrite");
 const std::string tags::cpp::types::includers_file::file_name(
     "cpp.types.includers_file.file_name");
 const std::string tags::cpp::types::includers_file::is_system(
@@ -127,8 +135,9 @@ const std::string tags::cpp::types::includers_file::is_system(
 /*
  * cpp::hash::standard
  */
-const std::string tags::cpp::hash::standard::status(
-    "cpp.hash.standard.status");
+const std::string tags::cpp::hash::standard::enabled(
+    "cpp.hash.standard.enabled");
+const std::string tags::cpp::hash::standard::status("cpp.hash.standard.status");
 const std::string tags::cpp::hash::standard::directory_name(
     "cpp.hash.standard.directory_name");
 const std::string tags::cpp::hash::standard::postfix(
@@ -136,6 +145,8 @@ const std::string tags::cpp::hash::standard::postfix(
 
 const std::string tags::cpp::hash::standard::header_file::generate(
     "cpp.types.header_file.generate");
+const std::string tags::cpp::hash::standard::header_file::overwrite(
+    "cpp.types.header_file.overwrite");
 const std::string tags::cpp::hash::standard::header_file::file_name(
     "cpp.types.header_file.file_name");
 const std::string tags::cpp::hash::standard::header_file::is_system(
@@ -143,20 +154,26 @@ const std::string tags::cpp::hash::standard::header_file::is_system(
 
 const std::string tags::cpp::hash::standard::implementation_file::generate(
     "cpp.hash.standard.implementation_file.generate");
+const std::string tags::cpp::hash::standard::implementation_file::overwrite(
+    "cpp.hash.standard.implementation_file.overwrite");
 const std::string tags::cpp::hash::standard::implementation_file::file_name(
     "cpp.hash.standard.implementation_file.file_name");
 const std::string tags::cpp::hash::standard::implementation_file::is_system(
     "cpp.hash.standard.implementation_file.is_system");
 
-const std::string tags::cpp::hash::standard::forward_declarations_file::generate(
-    "cpp.hash.standard.forward_declarations_file.generate");
-const std::string tags::cpp::hash::standard::forward_declarations_file::file_name(
-    "cpp.hash.standard.forward_declarations_file.file_name");
-const std::string tags::cpp::hash::standard::forward_declarations_file::is_system(
-    "cpp.hash.standard.forward_declarations_file.is_system");
+const std::string tags::cpp::hash::standard::forward_declarations_file::
+generate("cpp.hash.standard.forward_declarations_file.generate");
+const std::string tags::cpp::hash::standard::forward_declarations_file::
+overwrite("cpp.hash.standard.forward_declarations_file.overwrite");
+const std::string tags::cpp::hash::standard::forward_declarations_file::
+file_name("cpp.hash.standard.forward_declarations_file.file_name");
+const std::string tags::cpp::hash::standard::forward_declarations_file::
+is_system("cpp.hash.standard.forward_declarations_file.is_system");
 
 const std::string tags::cpp::hash::standard::includers_file::generate(
     "cpp.hash.standard.includers_file.generate");
+const std::string tags::cpp::hash::standard::includers_file::overwrite(
+    "cpp.hash.standard.includers_file.overwrite");
 const std::string tags::cpp::hash::standard::includers_file::file_name(
     "cpp.hash.standard.includers_file.file_name");
 const std::string tags::cpp::hash::standard::includers_file::is_system(
@@ -165,6 +182,8 @@ const std::string tags::cpp::hash::standard::includers_file::is_system(
 /*
  * cpp::serialization
  */
+const std::string tags::cpp::serialization::boost::enabled(
+    "cpp.serialization.boost.enabled");
 const std::string tags::cpp::serialization::boost::status(
     "cpp.serialization.boost.status");
 const std::string tags::cpp::serialization::boost::directory_name(
@@ -176,6 +195,8 @@ const std::string tags::cpp::serialization::boost::enable_xml_serialization(
     "cpp.serialization.boost.enable_xml_serialization");
 const std::string tags::cpp::serialization::boost::header_file::generate(
     "cpp.serialization.boost.header_file.generate");
+const std::string tags::cpp::serialization::boost::header_file::overwrite(
+    "cpp.serialization.boost.header_file.overwrite");
 const std::string tags::cpp::serialization::boost::header_file::file_name(
     "cpp.serialization.boost.header_file.file_name");
 const std::string tags::cpp::serialization::boost::header_file::is_system(
@@ -184,6 +205,8 @@ const std::string tags::cpp::serialization::boost::header_file::is_system(
 const std::string tags::cpp::serialization::boost::implementation_file::
 generate("cpp.serialization.boost.implementation_file.generate");
 const std::string tags::cpp::serialization::boost::implementation_file::
+overwrite("cpp.serialization.boost.implementation_file.overwrite");
+const std::string tags::cpp::serialization::boost::implementation_file::
 file_name("cpp.serialization.boost.implementation_file.file_name");
 const std::string tags::cpp::serialization::boost::implementation_file::
 is_system("cpp.serialization.boost.implementation_file.is_system");
@@ -191,12 +214,16 @@ is_system("cpp.serialization.boost.implementation_file.is_system");
 const std::string tags::cpp::serialization::boost::forward_declarations_file::
 generate("cpp.serialization.boost.forward_declarations_file.generate");
 const std::string tags::cpp::serialization::boost::forward_declarations_file::
+overwrite("cpp.serialization.boost.forward_declarations_file.overwrite");
+const std::string tags::cpp::serialization::boost::forward_declarations_file::
 file_name("cpp.serialization.boost.forward_declarations_file.file_name");
 const std::string tags::cpp::serialization::boost::forward_declarations_file::
 is_system("cpp.serialization.boost.forward_declarations_file.is_system");
 
 const std::string tags::cpp::serialization::boost::includers_file::generate(
     "cpp.serialization.boost.includers_file.generate");
+const std::string tags::cpp::serialization::boost::includers_file::overwrite(
+    "cpp.serialization.boost.includers_file.overwrite");
 const std::string tags::cpp::serialization::boost::includers_file::file_name(
     "cpp.serialization.boost.includers_file.file_name");
 const std::string tags::cpp::serialization::boost::includers_file::is_system(
@@ -205,6 +232,7 @@ const std::string tags::cpp::serialization::boost::includers_file::is_system(
 /*
  * cpp::io
  */
+const std::string tags::cpp::io::enabled("cpp.io.enabled");
 const std::string tags::cpp::io::status("cpp.io.status");
 const std::string tags::cpp::io::directory_name("cpp.io.directory_name");
 const std::string tags::cpp::io::postfix("cpp.io.postfix");
@@ -214,6 +242,8 @@ const std::string tags::cpp::io::enable_integrated_io(
 
 const std::string tags::cpp::io::header_file::generate(
     "cpp.io.header_file.generate");
+const std::string tags::cpp::io::header_file::overwrite(
+    "cpp.io.header_file.overwrite");
 const std::string tags::cpp::io::header_file::file_name(
     "cpp.io.header_file.file_name");
 const std::string tags::cpp::io::header_file::is_system(
@@ -221,6 +251,8 @@ const std::string tags::cpp::io::header_file::is_system(
 
 const std::string tags::cpp::io::implementation_file::generate(
     "cpp.io.implementation_file.generate");
+const std::string tags::cpp::io::implementation_file::overwrite(
+    "cpp.io.implementation_file.overwrite");
 const std::string tags::cpp::io::implementation_file::file_name(
     "cpp.io.implementation_file.file_name");
 const std::string tags::cpp::io::implementation_file::is_system(
@@ -228,6 +260,8 @@ const std::string tags::cpp::io::implementation_file::is_system(
 
 const std::string tags::cpp::io::forward_declarations_file::generate(
     "cpp.io.forward_declarations_file.generate");
+const std::string tags::cpp::io::forward_declarations_file::overwrite(
+    "cpp.io.forward_declarations_file.overwrite");
 const std::string tags::cpp::io::forward_declarations_file::file_name(
     "cpp.io.forward_declarations_file.file_name");
 const std::string tags::cpp::io::forward_declarations_file::is_system(
@@ -235,6 +269,8 @@ const std::string tags::cpp::io::forward_declarations_file::is_system(
 
 const std::string tags::cpp::io::includers_file::generate(
     "cpp.io.includers_file.generate");
+const std::string tags::cpp::io::includers_file::overwrite(
+    "cpp.io.includers_file.overwrite");
 const std::string tags::cpp::io::includers_file::file_name(
     "cpp.io.includers_file.file_name");
 const std::string tags::cpp::io::includers_file::is_system(
@@ -243,6 +279,7 @@ const std::string tags::cpp::io::includers_file::is_system(
 /*
  * cpp::test_data
  */
+const std::string tags::cpp::test_data::enabled("cpp.test_data.enabled");
 const std::string tags::cpp::test_data::status("cpp.test_data.status");
 const std::string tags::cpp::test_data::directory_name(
     "cpp.test_data.directory_name");
@@ -250,6 +287,8 @@ const std::string tags::cpp::test_data::postfix("cpp.test_data.postfix");
 
 const std::string tags::cpp::test_data::header_file::generate(
     "cpp.test_data.header_file.generate");
+const std::string tags::cpp::test_data::header_file::overwrite(
+    "cpp.test_data.header_file.overwrite");
 const std::string tags::cpp::test_data::header_file::file_name(
     "cpp.test_data.header_file.file_name");
 const std::string tags::cpp::test_data::header_file::is_system(
@@ -257,6 +296,8 @@ const std::string tags::cpp::test_data::header_file::is_system(
 
 const std::string tags::cpp::test_data::implementation_file::generate(
     "cpp.test_data.implementation_file.generate");
+const std::string tags::cpp::test_data::implementation_file::overwrite(
+    "cpp.test_data.implementation_file.overwrite");
 const std::string tags::cpp::test_data::implementation_file::file_name(
     "cpp.test_data.implementation_file.file_name");
 const std::string tags::cpp::test_data::implementation_file::is_system(
@@ -264,6 +305,8 @@ const std::string tags::cpp::test_data::implementation_file::is_system(
 
 const std::string tags::cpp::test_data::forward_declarations_file::generate(
     "cpp.test_data.forward_declarations_file.generate");
+const std::string tags::cpp::test_data::forward_declarations_file::overwrite(
+    "cpp.test_data.forward_declarations_file.overwrite");
 const std::string tags::cpp::test_data::forward_declarations_file::file_name(
     "cpp.test_data.forward_declarations_file.file_name");
 const std::string tags::cpp::test_data::forward_declarations_file::is_system(
@@ -271,6 +314,8 @@ const std::string tags::cpp::test_data::forward_declarations_file::is_system(
 
 const std::string tags::cpp::test_data::includers_file::generate(
     "cpp.test_data.includers_file.generate");
+const std::string tags::cpp::test_data::includers_file::overwrite(
+    "cpp.test_data.includers_file.overwrite");
 const std::string tags::cpp::test_data::includers_file::file_name(
     "cpp.test_data.includers_file.file_name");
 const std::string tags::cpp::test_data::includers_file::is_system(
@@ -279,12 +324,15 @@ const std::string tags::cpp::test_data::includers_file::is_system(
 /*
  * cpp::odb
  */
+const std::string tags::cpp::odb::enabled("cpp.odb.enabled");
 const std::string tags::cpp::odb::status("cpp.odb.status");
 const std::string tags::cpp::odb::directory_name("cpp.odb.directory_name");
 const std::string tags::cpp::odb::postfix("cpp.odb.postfix");
 
 const std::string tags::cpp::odb::header_file::generate(
     "cpp.odb.header_file.generate");
+const std::string tags::cpp::odb::header_file::overwrite(
+    "cpp.odb.header_file.overwrite");
 const std::string tags::cpp::odb::header_file::file_name(
     "cpp.odb.header_file.file_name");
 const std::string tags::cpp::odb::header_file::is_system(
@@ -292,6 +340,8 @@ const std::string tags::cpp::odb::header_file::is_system(
 
 const std::string tags::cpp::odb::includers_file::generate(
     "cpp.odb.includers_file.generate");
+const std::string tags::cpp::odb::includers_file::overwrite(
+    "cpp.odb.includers_file.overwrite");
 const std::string tags::cpp::odb::includers_file::file_name(
     "cpp.odb.includers_file.file_name");
 const std::string tags::cpp::odb::includers_file::is_system(

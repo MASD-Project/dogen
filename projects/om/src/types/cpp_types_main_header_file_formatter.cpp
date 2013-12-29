@@ -75,7 +75,7 @@ public:
 public:
     context(std::ostream& s, cpp_formatters::indenter& ind,
         cpp_formatters::utility& u) : stream_(s), indenter_(ind), utility_(u),
-          first_line_is_blank_(false), overwrite_(false) { }
+          first_line_is_blank_(false) { }
 
 public:
     /**
@@ -101,20 +101,11 @@ public:
     void first_line_is_blank(bool value) { first_line_is_blank_ = value; }
     /**@}*/
 
-    /**
-     * @brief If true, file will be overwritten regardless.
-     */
-    /**@{*/
-    bool overwrite() const { return overwrite_; }
-    void overwrite(bool value) { overwrite_ = value; }
-    /**@}*/
-
 private:
     std::ostream& stream_;
     cpp_formatters::indenter& indenter_;
     cpp_formatters::utility& utility_;
     bool first_line_is_blank_;
-    bool overwrite_;
 };
 
 cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter()
@@ -175,7 +166,6 @@ visit(const dogen::sml::enumeration& e) const {
     ensure_non_null_context();
 
     BOOST_LOG_SEV(lg, debug) << "Formatting enumeration: " << e.name();
-    context_->overwrite(true);
     doxygen_next_.format(context_->stream(), e.documentation());
     context_->stream() << context_->indenter() << "enum class "
                       << e.name().simple_name() << " : unsigned int ";
@@ -803,13 +793,14 @@ format(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::object& f) const {
     ensure_non_null_context();
-    context_->overwrite(false);
     format(f);
 }
 
-const std::string&
-cpp_types_main_header_file_formatter::meta_data_path() const {
-    return sml::tags::cpp::types::header_file::generate;
+bool cpp_types_main_header_file_formatter::
+generate(const boost::property_tree::ptree& meta_data) const {
+    sml::meta_data_reader reader(meta_data);
+    const auto& gen(sml::tags::cpp::types::header_file::generate);
+    return reader.is_true(gen);
 }
 
 file cpp_types_main_header_file_formatter::
@@ -851,8 +842,8 @@ format(const sml::module& module, const annotation& a) const {
 
     file r;
     r.contents(s.str());
-    r.overwrite(false);
     r.relative_path(relative_file_path);
+    r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
 
     return r;
 }
@@ -884,10 +875,10 @@ format(const sml::type& t, const annotation& a) const {
 
     file r;
     r.contents(s.str());
-    r.overwrite(context_->overwrite());
     r.relative_path(relative_file_path);
-    context_ = std::shared_ptr<context>();
+    r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
 
+    context_ = std::shared_ptr<context>();
     return r;
 }
 

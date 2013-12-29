@@ -75,12 +75,6 @@ bool is_true(const boost::property_tree::ptree& tags, const std::string& key) {
     return value == dogen::sml::tags::bool_true;
 }
 
-bool
-is_supported(const boost::property_tree::ptree& tags, const std::string& key) {
-    const auto value(get(tags, key));
-    return value == dogen::sml::tags::status_supported;
-}
-
 }
 
 using dogen::utility::test::contains_checker;
@@ -98,7 +92,7 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_without_any_configuration_options_resul
 
     BOOST_CHECK(!m.meta_data().empty());
     using dogen::sml::tags;
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::types::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::types::enabled));
 
     boost::filesystem::path fn;
     fn /= m.name().model_name();
@@ -135,18 +129,18 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_all_facets_enabled_results_in_expe
 
     BOOST_CHECK(!m.meta_data().empty());
     using dogen::sml::tags;
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::types::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::types::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::types::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::hash::standard::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::hash::standard::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::hash::standard::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(),
-            tags::cpp::serialization::boost::status));
+    BOOST_CHECK(is_true(m.meta_data(),
+            tags::cpp::serialization::boost::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::serialization::boost::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::io::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::io::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::io::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::test_data::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::test_data::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::test_data::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::odb::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::odb::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::odb::directory_name));
 }
 
@@ -166,19 +160,19 @@ BOOST_AUTO_TEST_CASE(tagging_empty_model_with_a_few_facets_enabled_results_in_ex
 
     BOOST_CHECK(!m.meta_data().empty());
     using dogen::sml::tags;
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::types::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::types::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::types::directory_name));
-    BOOST_CHECK(!is_supported(m.meta_data(), tags::cpp::hash::standard::status));
+    BOOST_CHECK(!is_true(m.meta_data(), tags::cpp::hash::standard::enabled));
     BOOST_CHECK(!has(m.meta_data(), tags::cpp::hash::standard::directory_name));
-    BOOST_CHECK(!is_supported(m.meta_data(),
-            tags::cpp::serialization::boost::status));
+    BOOST_CHECK(!is_true(m.meta_data(),
+            tags::cpp::serialization::boost::enabled));
     BOOST_CHECK(!has(m.meta_data(),
             tags::cpp::serialization::boost::directory_name));
-    BOOST_CHECK(!is_supported(m.meta_data(), tags::cpp::io::status));
+    BOOST_CHECK(!is_true(m.meta_data(), tags::cpp::io::enabled));
     BOOST_CHECK(!has(m.meta_data(), tags::cpp::io::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::test_data::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::test_data::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::test_data::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::odb::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::odb::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::odb::directory_name));
 }
 
@@ -194,18 +188,19 @@ BOOST_AUTO_TEST_CASE(tagging_single_type_model_with_all_facets_enabled_results_i
 
     BOOST_CHECK(!m.meta_data().empty());
     using dogen::sml::tags;
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::types::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::types::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::types::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::hash::standard::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::hash::standard::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::hash::standard::directory_name));
-    BOOST_CHECK(is_supported(
-            m.meta_data(), tags::cpp::serialization::boost::status));
-    BOOST_CHECK(has(m.meta_data(), tags::cpp::serialization::boost::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::io::status));
+    BOOST_CHECK(is_true(m.meta_data(),
+            tags::cpp::serialization::boost::enabled));
+    BOOST_CHECK(has(m.meta_data(),
+            tags::cpp::serialization::boost::directory_name));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::io::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::io::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::test_data::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::test_data::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::test_data::directory_name));
-    BOOST_CHECK(is_supported(m.meta_data(), tags::cpp::odb::status));
+    BOOST_CHECK(is_true(m.meta_data(), tags::cpp::odb::enabled));
     BOOST_CHECK(has(m.meta_data(), tags::cpp::odb::directory_name));
 }
 

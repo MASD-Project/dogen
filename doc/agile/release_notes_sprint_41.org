@@ -374,16 +374,20 @@ understood. However, according to the docs the right way is
 We have *a lot* of CDash errors at the moment. We need to get to a
 clean build as soon as possible.
 
-**** OSX                                                               :task:
+**** IMPLEMENTATION OSX                                                :task:
 
 - seems like a EOS linking error. According to comments, we should use
   =NO_EXPLICIT_TEMPLATE_INSTANTIATION=.
 
-**** Linux                                                             :task:
+- didn't fix it; couldn't get to the bottom of it, so disabling EOS on
+  OSX.
+
+**** COMPLETED Linux                                                   :task:
+     CLOSED: [2013-12-29 Sun 16:33]
 
 - spec file is not named according to the specs or model. Renamed it.
 
-**** Windows
+**** IMPLEMENTATION Windows
      CLOCK: [2013-12-29 Sun 11:50]--[2013-12-29 Sun 11:58] =>  0:08
      CLOCK: [2013-12-29 Sun 09:52]--[2013-12-29 Sun 10:02] =>  0:10
      CLOCK: [2013-12-28 Sat 23:24]--[2013-12-28 Sat 23:26] =>  0:02
@@ -433,6 +437,8 @@ clean build as soon as possible.
   PFH to =CMAKE_INCLUDE_PATH=. Trying =include_directories(SYSTEM...=
   instead.
 
+- couldn't get to the bottom of it, so disabling EOS on windows.
+
 *** IMPLEMENTATION Add om's workflow to engine                        :story:
 
 We need to find a way to add the available formatters in om into the
@@ -458,6 +464,7 @@ is not a valid assumption. We should generate code in the absence of
 this meta-data.
 
 **** IMPLEMENTATION Integrate om back-end with workflow                :task:
+     CLOCK: [2013-12-29 Sun 16:36]--[2013-12-29 Sun 18:36] =>  2:00
      CLOCK: [2013-12-29 Sun 11:48]--[2013-12-29 Sun 13:16] =>  1:28
      CLOCK: [2013-12-28 Sat 23:46]--[2013-12-29 Sun 00:03] =>  0:17
      CLOCK: [2013-12-20 Fri 23:50]--[2013-12-21 Sat 00:22] =>  0:32
@@ -525,6 +532,17 @@ So, the right way of modeling all of this is:
   we should disable the facet. This means we need some kind of
   recursion in tagger (until we have a DAG). This means we can only
   tag after properties have been expanded.
+
+The actual implementation is even simpler. We just need to ensure all
+the meta data has been populated to answer two questions:
+
+- =generate=: true or false
+- =overwrite=: true or false
+
+=status= has to be handled prior to determining =generate=, and it has
+to be recursive. We can leave it for later, as its not a showstopper
+for the move to =om=. =overwrite= is dependent on
+=generation_types::partial_generation=.
 
 **** Add required meta-data to test models                             :task:
 
