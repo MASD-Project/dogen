@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 10:02]
+Clock summary at [2013-12-29 Sun 10:40]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *38:48* |       |       |
+| *Total time*                                                  | *39:06* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 38:48 |       |
-| IMPLEMENTATION Release notes and backlog grooming             |         |       |  0:59 |
+| Development Stories Implemented                               |         | 39:06 |       |
+| IMPLEMENTATION Release notes and backlog grooming             |         |       |  1:17 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
 | COMPLETED Remove model from extractor                         |         |       |  0:16 |
@@ -33,6 +33,7 @@ Clock summary at [2013-12-29 Sun 10:02]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-29 Sun 10:22]--[2013-12-29 Sun 10:40] =>  0:18
     CLOCK: [2013-12-28 Sat 15:57]--[2013-12-28 Sat 16:02] =>  0:05
     CLOCK: [2013-12-26 Thu 22:35]--[2013-12-26 Thu 22:46] =>  0:11
     CLOCK: [2013-12-23 Mon 14:40]--[2013-12-23 Mon 14:45] =>  0:05
@@ -40,6 +41,8 @@ Clock summary at [2013-12-29 Sun 10:02]
     CLOCK: [2013-12-23 Mon 14:21]--[2013-12-23 Mon 14:32] =>  0:11
     CLOCK: [2013-12-18 Wed 07:56]--[2013-12-18 Wed 08:11] =>  0:15
     CLOCK: [2013-12-16 Mon 07:55]--[2013-12-16 Mon 07:59] =>  0:04
+
+Updates to release notes and backlog.
 
 *** Update manual                                                     :story:
 
@@ -55,6 +58,9 @@ We need to store the two-way relationships related to visitation.
 
 *** COMPLETED Create an =association_indexer= and add tests           :story:
     CLOSED: [2013-12-20 Fri 22:48]
+
+We need an indexer that specialises in associations.
+
 **** COMPLETED Remove unnecessary extractor methods                   :spike:
      CLOSED: [2013-12-16 Mon 23:35]
      CLOCK: [2013-12-16 Mon 23:28]--[2013-12-16 Mon 23:35] =>  0:07
@@ -75,6 +81,8 @@ association indexer.
      CLOCK: [2013-12-16 Mon 18:30]--[2013-12-16 Mon 18:45] =>  0:15
      CLOCK: [2013-12-13 Fri 18:07]--[2013-12-13 Fri 18:17] =>  0:10
      CLOCK: [2013-12-13 Fri 08:43]--[2013-12-13 Fri 08:48] =>  0:05
+
+Add the association indexer class and associated test.
 
 **** COMPLETED Mock models with properties have missing types         :spike:
      CLOSED: [2013-12-17 Tue 11:43]
@@ -138,9 +146,14 @@ sense for the association indexer.
      CLOCK: [2013-12-20 Fri 22:12]--[2013-12-20 Fri 22:47] =>  0:35
      CLOCK: [2013-12-20 Fri 20:58]--[2013-12-20 Fri 22:12] =>  1:14
 
+Update extractor to use new indexed data.
+
 *** COMPLETED Remove model from extractor                             :spike:
     CLOSED: [2013-12-21 Sat 11:36]
     CLOCK: [2013-12-21 Sat 11:20]--[2013-12-21 Sat 11:36] =>  0:16
+
+We do not need a model in extractor any more now that all required
+information is already indexed.
 
 *** COMPLETED Make EOS support optional                               :story:
     CLOSED: [2013-12-23 Mon 17:22]
@@ -207,9 +220,10 @@ Mainly deal with move from boost log v1 to v2.
      CLOCK: [2013-12-22 Sun 02:48]--[2013-12-22 Sun 03:04] =>  0:16
      CLOCK: [2013-12-22 Sun 02:46]--[2013-12-22 Sun 02:48] =>  0:02
 
-- class_e in boost model cannot have int and double
+- class_e in boost model cannot have int and double (apparently
+  variant can't cope with this).
 - we need a way to disable ODB and EOS. this includes header
-  validation.
+  validation. See other stories on this.
 - we need a way to pick-up local installs of ODB and EOS. this must
   also work so that if there is a boost installed there it would take
   precedence over system install, but system install would be found if
@@ -220,6 +234,8 @@ Mainly deal with move from boost log v1 to v2.
 
 : cp: cannot stat ‘/usr/lib/x86_64-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
+  story raised for this.
+
 **** COMPLETED Upgrade turbo to boost 1.55                             :task:
      CLOSED: [2013-12-23 Mon 14:29]
 
@@ -227,7 +243,7 @@ The least disruptive way of doing this change is to upgrade boost in
 turbo, get all of the PFHs up-to-date and the build green across the
 board, and then start removing any PFH specific things from dogen.
 
-***** COMPLETED Upgrade OSX and Linux except liebnitz
+***** COMPLETED Upgrade OSX and Linux
       CLOSED: [2013-12-22 Sun 18:41]
       CLOCK: [2013-12-22 Sun 14:07]--[2013-12-22 Sun 14:24] =>  0:17
       CLOCK: [2013-12-22 Sun 13:47]--[2013-12-22 Sun 14:07] =>  0:20
@@ -329,6 +345,10 @@ Packages to install:
 : apt-get install libboost1.54-all-dev
 : apt-get install cmake
 
+Actually, this is no longer possible as we cannot compile with boost
+1.54. We need to wait for 1.55 packages to be available to add the
+apt-get instructions.
+
 *** COMPLETED Start using PGPASSWORD for database model               :spike:
     CLOSED: [2013-12-28 Sat 15:58]
     CLOCK: [2013-12-28 Sat 15:40]--[2013-12-28 Sat 15:57] =>  0:17
@@ -345,6 +365,9 @@ We need to change the code to match this.
     CLOCK: [2013-12-28 Sat 13:35]--[2013-12-28 Sat 13:41] =>  0:06
     CLOCK: [2013-12-28 Sat 11:00]--[2013-12-28 Sat 11:27] =>  0:27
     CLOCK: [2013-12-28 Sat 09:12]--[2013-12-28 Sat 09:30] =>  0:18
+
+We have *a lot* of CDash errors at the moment. We need to get to a
+clean build as soon as possible.
 
 **** OSX                                                               :task:
 
@@ -415,6 +438,8 @@ replace one formatter at a time.
      CLOCK: [2013-12-20 Fri 23:30]--[2013-12-20 Fri 23:50] =>  0:20
      CLOCK: [2013-12-20 Fri 23:26]--[2013-12-20 Fri 23:30] =>  0:04
 
+We need to wrap the =om= workflow in an engine backend.
+
 **** COMPLETED Handle models without meta-data such as licence, etc    :task:
      CLOSED: [2013-12-28 Sat 23:43]
      CLOCK: [2013-12-28 Sat 23:30]--[2013-12-28 Sat 23:43] =>  0:13
@@ -440,13 +465,22 @@ In order for om to match the C++ model we need to make sure we are
 passing in the correct meta-data such as licences, etc.
 
 *** Add tests for =annotation_factory=                                :spike:
-*** Add tests for main header file formatter with optionality         :spike:
+
+We added this class without any tests initially because we wanted to
+first prove =om= worked. Once this is achieved we need to revisit this
+class and add tests.
 
 - missing licence
 - missing modeline
 - empty marker
 - different marker for two objects
 - consider moving generate preamble into annotation
+
+*** Add tests for main header file formatter with optionality         :spike:
+
+We should add a couple of tests that exercise the annotation
+factory. As it will have its own tests, we just need to make sure it
+works in general. For example, pass in an empty annotation.
 
 *** Check packaging code for PFH dependencies                          :task:
 
@@ -455,6 +489,8 @@ packages, this should be replaced with appropriate dependencies (at
 least for Debian packages).
 
 *** Fix cp error on cmake without PFH                                 :spike:
+
+We are getting strange errors in cmake:
 
 : cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
