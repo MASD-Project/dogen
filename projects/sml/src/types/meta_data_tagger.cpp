@@ -281,15 +281,21 @@ void meta_data_tagger::copy_model_tags(meta_data_writer& writer) const {
     writer.add_if_key_not_found(tags::generate_preamble,
         reader.get(tags::generate_preamble));
 
-    writer.add_if_key_not_found(dogen::sml::tags::licence_name,
-        reader.get(dogen::sml::tags::licence_name));
+    if (reader.has_key(dogen::sml::tags::licence_name)) {
+        writer.add_if_key_not_found(dogen::sml::tags::licence_name,
+            reader.get(dogen::sml::tags::licence_name));
+    }
 
-    writer.add_if_key_not_found(dogen::sml::tags::modeline_group_name,
-        reader.get(dogen::sml::tags::modeline_group_name));
+    if (reader.has_key(dogen::sml::tags::modeline_group_name)) {
+        writer.add_if_key_not_found(dogen::sml::tags::modeline_group_name,
+            reader.get(dogen::sml::tags::modeline_group_name));
+    }
 
-    writer.add_if_key_not_found(
-        dogen::sml::tags::code_generation_marker::message,
-        reader.get(dogen::sml::tags::code_generation_marker::message));
+    if (reader.has_key(dogen::sml::tags::code_generation_marker::message)) {
+        writer.add_if_key_not_found(
+            dogen::sml::tags::code_generation_marker::message,
+            reader.get(dogen::sml::tags::code_generation_marker::message));
+    }
 
     writer.add_if_key_not_found(
         dogen::sml::tags::code_generation_marker::add_warning,

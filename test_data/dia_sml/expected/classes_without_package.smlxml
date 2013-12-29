@@ -67,7 +67,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</module_path>
-				<simple_name>class_5</simple_name>
+				<simple_name>class_4</simple_name>
 			</first>
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
 				<type class_id="15" tracking_level="0" version="0">
@@ -88,7 +88,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</module_path>
-						<simple_name>class_5</simple_name>
+						<simple_name>class_4</simple_name>
 					</name>
 					<generation_type>1</generation_type>
 				</type>
@@ -173,7 +173,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</module_path>
-				<simple_name>class_4</simple_name>
+				<simple_name>class_5</simple_name>
 			</first>
 			<second object_id="_1">
 				<type>
@@ -194,7 +194,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</module_path>
-						<simple_name>class_4</simple_name>
+						<simple_name>class_5</simple_name>
 					</name>
 					<generation_type>1</generation_type>
 				</type>
