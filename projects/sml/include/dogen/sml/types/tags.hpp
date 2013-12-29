@@ -151,6 +151,18 @@ struct tags {
         static const std::string split_project;
 
         /**
+         * @brief Name of the directory in which to place the
+         * implementation files.
+         */
+        static const std::string source_directory;
+
+        /**
+         * @brief Name of the directory in which to place the header
+         * files.
+         */
+        static const std::string include_directory;
+
+        /**
          * @brief Extension to use for header files, including the
          * leading dot.
          *

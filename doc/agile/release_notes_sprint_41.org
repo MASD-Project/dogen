@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 21:44]
+Clock summary at [2013-12-29 Sun 22:47]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                  | *43:23* |       |       |
+| *Total time*                                                  | *44:25* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                               |         | 43:23 |       |
+| Development Stories Implemented                               |         | 44:25 |       |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       |  1:27 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
@@ -29,7 +29,7 @@ Clock summary at [2013-12-29 Sun 21:44]
 | COMPLETED Update read me file                                 |         |       |  0:51 |
 | COMPLETED Start using PGPASSWORD for database model           |         |       |  0:40 |
 | COMPLETED Fix broken builds due to a variety of errors        |         |       |  3:39 |
-| IMPLEMENTATION Add om's workflow to engine                    |         |       |  7:20 |
+| IMPLEMENTATION Add om's workflow to engine                    |         |       |  8:22 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -469,6 +469,7 @@ is not a valid assumption. We should generate code in the absence of
 this meta-data.
 
 **** IMPLEMENTATION Integrate om back-end with workflow                :task:
+     CLOCK: [2013-12-29 Sun 21:45]--[2013-12-29 Sun 22:47] =>  1:02
      CLOCK: [2013-12-29 Sun 16:36]--[2013-12-29 Sun 18:36] =>  2:00
      CLOCK: [2013-12-29 Sun 11:48]--[2013-12-29 Sun 13:16] =>  1:28
      CLOCK: [2013-12-28 Sat 23:46]--[2013-12-29 Sun 00:03] =>  0:17

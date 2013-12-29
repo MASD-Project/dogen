@@ -53,6 +53,8 @@ const std::string serialization_postfix("_ser");
 const std::string test_data_postfix("_td");
 const std::string odb_postfix("_pragmas");
 
+const std::string source_directory("src");
+const std::string include_directory("include");
 const std::string types_directory("types");
 const std::string io_directory("io");
 const std::string hash_directory("hash");
@@ -921,6 +923,10 @@ void meta_data_tagger::tag(model& m) const {
     context_ = std::unique_ptr<context>(new context(m));
 
     meta_data_writer writer(m.meta_data());
+
+    writer.add_if_key_not_found(tags::cpp::source_directory, source_directory);
+    writer.add_if_key_not_found(tags::cpp::include_directory,
+        include_directory);
 
     writer.add_if_key_not_found(
         dogen::sml::tags::code_generation_marker::message, empty);
