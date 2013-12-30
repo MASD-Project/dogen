@@ -8,6 +8,63 @@
 
 Stories that we intend to look at, at some point.
 
+*** Clean up meta-data tagger by improving =ptree= API                :story:
+
+At present we have a lot of ugly copy and paste code in
+=meta_data_tagger=. This was done so we could collect all of the use
+cases for the API. This story captures what we think would be a good
+API to cater for all the use cases.
+
+- we need a way of locating a top-level node in the tree. At present
+  we only have paths to specific nodes where there are values, but its
+  not possible to get a top-level node such as say a
+  =header_file=. This would allow for more generic code that handles
+  top-level nodes with similar shapes. We could replace all of the
+  file handling code with one generic function for example.
+- =meta_data_writer= and =meta_data_reader= are very strange
+  concepts. We need to search the net for patterns on how to populate
+  =ptree=, there must be a more generic solution for this. We should
+  also look at the STL algorithms for ideas - perhaps we can replace a
+  lot of this functionality with existing algorithms such as =copy_if=
+  or create new ones along the same lines as the STL.
+- We have spotted the following algorithms:
+  - add if a key does not exist: used for defaulting; the user may
+    have already supplied a value, in which case we do not want to
+    override it.
+  - copy if a key does not exist: used when we want to take a source
+    =ptree= and copy across a set of values to a target =ptree=; for
+    instance, when we want to copy a set of values from the model to
+    all objects. Needs a variation that does nothing if the key does
+    not exist in the source - at present we do a lot of has key to
+    solve this.
+  - has key: returns true if a key exists. May not be required - see
+    get key below.
+  - get key: returns a value, optionally castable to a type other than
+    string. We often do has key followed by get key, so a try get key
+    would be a useful variation - returning perhaps a pair of bool,
+    value.
+  - is true: and other checks such as is false, is supported
+    etc. Basically helpers to check if a key exists and if its value
+    matches some predefined value.
+- More fundamentally: is =ptree= actually being overused? That is,
+  should we not just model all of this data as first-class citizens in
+  SML using the type system? The reason why we chose =ptree= is
+  because the data supplied by the front-end (e.g. dia or JSON) will
+  always come in key-value-pairs and adding a tree like structure to
+  those KVPs makes them more intelligible to the end user. Thus it
+  follows that =ptree= is a good way of bringing all of that data in
+  from the front-end into the middle-end (e.g. SML). But perhaps once
+  the data hits SML we should then type it; we could create data
+  structures that model the shape of the tags tree and read all of the
+  =ptree= data into those. Once that is done we can then start
+  "tagging" - e.g. we operate on those data structures rather than on
+  the =ptree= for defaulting, copying stuff across, etc. Life would be
+  much easier because now we have the type-system on our side (copy
+  constructors, containers, etc). Taggables would then have perhaps
+  =raw_meta_data= for the =ptree= and =meta_data= for the new
+  classes. We could place all of them in a =meta_data= namespace to
+  avoid polluting SML too much.
+
 *** Create a new command line parameter for data files directories    :story:
 
 Users should be able to provide directories for their own JSON
@@ -25,12 +82,6 @@ least for Debian packages).
 We are getting strange errors in cmake:
 
 : cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
-
-*** Add =try_get_key= to reader                                       :story:
-
-At present we are doing a lot of =has_key= calls followed by =get=
-using the meta-data reader in SML. We should have a single call that
-does both, returning perhaps a pair of bool, value.
 
 *** Add support for units                                             :story:
 
