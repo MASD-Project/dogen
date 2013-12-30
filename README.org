@@ -183,3 +183,5 @@ and papers on the subject we have read, or intend to read.
   - [[http://www.inf.u-szeged.hu/~ferenc/research/ferencr_columbus_schema_cpp.pdf][Data Exchange with the Columbus Schema for C++]]
 - [[http://www.cpgf.org/][CPGF]]: An open source C++ library for reflection, script binding,
   serialisation and callbacks.
+- [[http://www.artima.com/articles/dci_vision.html][DCI]]: The DCI Architecture: A New Vision of Object-Oriented
+  Programming. Some fundamental insights on the nature of OO.
