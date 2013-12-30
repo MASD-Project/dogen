@@ -25,11 +25,7 @@
 #include <boost/log/expressions.hpp>
 #include <boost/log/sources/logger.hpp>
 #include <boost/log/support/date_time.hpp>
-#if BOOST_VERSION >= 105500
 #include <boost/utility/empty_deleter.hpp>
-#else
-#include  <boost/log/utility/empty_deleter.hpp>
-#endif
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
