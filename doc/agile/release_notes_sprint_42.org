@@ -10,19 +10,20 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 19:03]
+Clock summary at [2013-12-30 Mon 19:39]
 
-| Headline                                                    | Time   |      |      |
-|-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *6:45* |      |      |
-|-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 6:45 |      |
-| IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:30 |
-| COMPLETED Investigate availability of boost 1.55 for debian |        |      | 0:18 |
-| COMPLETED Add more valgrind suppressions                    |        |      | 0:06 |
-| COMPLETED Add absolute path support to =om=                 |        |      | 2:40 |
-| COMPLETED Add plumbing to engine to toggle =om= on or off   |        |      | 1:53 |
-| Includer generation should be done from meta-data           |        |      | 0:18 |
+| Headline                                                      | Time   |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| *Total time*                                                  | *7:20* |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                               |        | 7:20 |      |
+| IMPLEMENTATION Release notes and backlog grooming             |        |      | 1:30 |
+| COMPLETED Investigate availability of boost 1.55 for debian   |        |      | 0:18 |
+| COMPLETED Add more valgrind suppressions                      |        |      | 0:06 |
+| COMPLETED Add absolute path support to =om=                   |        |      | 2:40 |
+| COMPLETED Add plumbing to engine to toggle =om= on or off     |        |      | 1:53 |
+| COMPLETED Ensure OM header files are at the expected location |        |      | 0:35 |
+| Includer generation should be done from meta-data             |        |      | 0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -75,6 +76,13 @@ quickly. To do so:
 - create a flag in workflow to enable/disable OM. default it to false.
 - pass it to backend factory.
 - update a test to have the flag set to true.
+
+*** COMPLETED Ensure OM header files are at the expected location     :spike:
+    CLOSED: [2013-12-30 Mon 19:38]
+    CLOCK: [2013-12-30 Mon 19:03]--[2013-12-30 Mon 19:38] =>  0:35
+
+We seem to be creating om files in an incorrect directory. We need to
+fix this before we can start looking at the diffs.
 
 *** Add required meta-data to test models                             :story:
 

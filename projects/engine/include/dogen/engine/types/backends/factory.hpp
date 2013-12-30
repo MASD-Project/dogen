@@ -45,7 +45,7 @@ public:
     typedef std::vector<backend::ptr> result_type;
 
 public:
-    factory(sml::model model, config::settings settings,
+    factory(const sml::model& model, const config::settings& settings,
         const bool enable_om = false);
 
 private:
@@ -55,8 +55,8 @@ public:
     result_type create() const;
 
 private:
-    const config::settings settings_;
-    const sml::model model_;
+    const config::settings& settings_;
+    const sml::model& model_;
     const bool enable_om_;
 };
 

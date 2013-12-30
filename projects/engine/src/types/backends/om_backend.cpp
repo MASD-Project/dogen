@@ -54,7 +54,9 @@ backend::value_type om_backend::generate() {
     boost::filesystem::path cpp_include_directory;
     std::list<boost::filesystem::path> data_files_directories;
 
-    const auto mn(model_.name().simple_name());
+    const auto mn(model_.name().model_name());
+    BOOST_LOG_SEV(lg, debug) << "Model name: " << mn;
+
     const auto& cpp(settings_.cpp());
     if (settings_.cpp().split_project()) {
         cpp_source_directory = cpp.source_directory();
@@ -67,11 +69,14 @@ backend::value_type om_backend::generate() {
         sml::meta_data_reader reader(model_.meta_data());
         const auto src_dir(reader.get(sml::tags::cpp::source_directory));
 
-        const auto pd(settings_.cpp().project_directory());
-        cpp_source_directory = pd / mn / src_dir;
+        cpp_source_directory = settings_.cpp().project_directory();
+        cpp_source_directory /= mn;
+        cpp_source_directory /= src_dir;
 
         const auto inc_dir(reader.get(sml::tags::cpp::include_directory));
-        cpp_include_directory = pd / mn / inc_dir;
+        cpp_include_directory = settings_.cpp().project_directory();
+        cpp_include_directory /= mn;
+        cpp_include_directory /= inc_dir;
         managed_directories_.push_back(cpp.project_directory() / mn);
     }
 

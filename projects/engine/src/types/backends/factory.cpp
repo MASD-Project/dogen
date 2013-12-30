@@ -31,7 +31,8 @@ namespace engine {
 namespace backends {
 
 factory::
-factory(sml::model model, config::settings settings, const bool enable_om)
+factory(const sml::model& model, const config::settings& settings,
+    const bool enable_om)
     : settings_(settings), model_(model), enable_om_(enable_om) { }
 
 void factory::log_cpp_backend_disabled() const {
