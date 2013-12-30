@@ -28,6 +28,7 @@
 #include <list>
 #include <memory>
 #include <ostream>
+#include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
@@ -53,7 +54,8 @@ private:
     class context;
 
 public:
-    cpp_types_main_header_file_formatter();
+    explicit cpp_types_main_header_file_formatter(
+        const boost::filesystem::path& include_directory);
     virtual ~cpp_types_main_header_file_formatter() noexcept { }
 
 private:
@@ -156,6 +158,7 @@ public:
     file format(const sml::type& t, const annotation& a) const override;
 
 private:
+    const boost::filesystem::path include_directory_;
     mutable std::shared_ptr<context> context_;
     comment_formatter doxygen_next_;
     comment_formatter doxygen_previous_;

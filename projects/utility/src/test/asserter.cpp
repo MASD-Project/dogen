@@ -43,6 +43,7 @@ using boost::filesystem::path;
 namespace {
 
 const std::string empty;
+const std::string empty_marker("<empty_string>");
 const std::string contains("assert contains");
 const std::string starts_with("assert starts with");
 const std::string directory("assert directory");
@@ -103,6 +104,18 @@ bool asserter::handle_assert(const bool result, const std::string assertion) {
         BOOST_LOG_SEV(lg_, debug) << assertion << " succeeded.";
     return result;
 }
+
+void asserter::
+log_strings(const std::string& expected, const std::string& actual) {
+    using namespace dogen::utility::log;
+    BOOST_LOG_SEV(lg_, debug) << "expected: <start>"
+                              << (expected.empty() ? empty_marker : expected)
+                              << "<end>";
+    BOOST_LOG_SEV(lg_, debug) << "actual: <start>"
+                              << (actual.empty() ? empty_marker : actual)
+                              << "<end>";
+}
+
 
 bool asserter::assert_file(boost::filesystem::path expected_path,
     boost::filesystem::path actual_path, file_asserter& fa) {
@@ -166,22 +179,26 @@ bool asserter::assert_directory(boost::filesystem::path expected_path,
     return assert_directory(expected_path, actual_path, v);
 }
 
+bool asserter::assert_equals_marker(const std::string& expected,
+    const std::string& actual) {
+    log_strings(expected, actual);
+    return handle_assert(expected == actual, "assert equals");
+}
+
 bool asserter::
 assert_starts_with(const std::string expected, const std::string actual) {
-    using namespace dogen::utility::log;
-    BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
-    BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
+    log_strings(expected, actual);
+    if (actual.empty() && !expected.empty())
+        return handle_assert(false, contains);
+
     return handle_assert(boost::starts_with(actual, expected), starts_with);
 }
 
 bool asserter::
 assert_contains(const std::string expected, const std::string actual) {
-    using namespace dogen::utility::log;
-    BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
-    BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
-
+    log_strings(expected, actual);
     if (actual.empty() && !expected.empty())
-        return false;
+        return handle_assert(false, contains);
 
     return handle_assert(boost::contains(actual, expected), contains);
 }

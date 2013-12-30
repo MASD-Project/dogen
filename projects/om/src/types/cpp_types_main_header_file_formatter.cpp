@@ -108,8 +108,10 @@ private:
     bool first_line_is_blank_;
 };
 
-cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter()
-    : doxygen_next_(
+cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter(
+    const boost::filesystem::path& include_directory)
+    : include_directory_(include_directory),
+      doxygen_next_(
           !start_on_first_line,
           use_documentation_tool_markup,
           !documenting_previous_identifier,
@@ -815,8 +817,10 @@ format(const sml::module& module, const annotation& a) const {
     const auto& fn(sml::tags::cpp::types::header_file::file_name);
     const boost::filesystem::path relative_file_path(reader.get(fn));
     const bool gp(reader.is_true(sml::tags::generate_preamble));
+    const bool hg(reader.is_true(
+            sml::tags::cpp::types::header_file::generate_header_guards));
 
-    cpp_file_boilerplate_formatter f(gp);
+    cpp_file_boilerplate_formatter f(gp, hg);
     f.format_begin(s, a, i, relative_file_path);
     const auto ns(namespaces(module.name()));
 
@@ -843,6 +847,7 @@ format(const sml::module& module, const annotation& a) const {
     file r;
     r.contents(s.str());
     r.relative_path(relative_file_path);
+    r.absolute_path(include_directory_ / relative_file_path);
     r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
 
     return r;
@@ -861,7 +866,10 @@ format(const sml::type& t, const annotation& a) const {
     const auto& fn(sml::tags::cpp::types::header_file::file_name);
     const boost::filesystem::path relative_file_path(reader.get(fn));
     const bool gp(reader.is_true(sml::tags::generate_preamble));
-    cpp_file_boilerplate_formatter f(gp);
+    const bool hg(reader.is_true(
+            sml::tags::cpp::types::header_file::generate_header_guards));
+
+    cpp_file_boilerplate_formatter f(gp, hg);
     f.format_begin(s, a, i, relative_file_path);
     {
         const auto ns(namespaces(t.name()));
@@ -876,6 +884,7 @@ format(const sml::type& t, const annotation& a) const {
     file r;
     r.contents(s.str());
     r.relative_path(relative_file_path);
+    r.absolute_path(include_directory_ / relative_file_path);
     r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
 
     context_ = std::shared_ptr<context>();

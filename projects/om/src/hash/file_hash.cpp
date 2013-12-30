@@ -44,7 +44,7 @@ std::size_t file_hasher::hash(const file&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.relative_path()));
-    combine(seed, hash_boost_filesystem_path(v.full_path()));
+    combine(seed, hash_boost_filesystem_path(v.absolute_path()));
     combine(seed, v.contents());
     combine(seed, v.overwrite());
 

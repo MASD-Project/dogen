@@ -38,6 +38,9 @@ namespace {
 
 const std::string test_module("om");
 const std::string test_suite("workflow_spec");
+const std::string prj_dir("__project_directory__");
+const std::string src_dir("__source_directory__");
+const std::string inc_dir("__include_directory__");
 
 using dogen::sml::test::mock_model_factory;
 const mock_model_factory::flags flags(true/*tagged*/, false/*resolved*/,
@@ -137,7 +140,7 @@ BOOST_AUTO_TEST_CASE(empty_mock_model_results_in_expected_files) {
 
     using namespace dogen::utility::filesystem;
     const std::list<boost::filesystem::path> d = { data_files_directory() };
-    dogen::om::workflow w(d);
+    dogen::om::workflow w(prj_dir, src_dir, inc_dir, d);
 
     auto m(factory.build_empty_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -160,7 +163,7 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
 
     using namespace dogen::utility::filesystem;
     const std::list<boost::filesystem::path> d = { data_files_directory() };
-    dogen::om::workflow w(d);
+    dogen::om::workflow w(prj_dir, src_dir, inc_dir, d);
     auto m(factory.build_single_type_model());
 
     BOOST_REQUIRE(m.objects().size() == 1);

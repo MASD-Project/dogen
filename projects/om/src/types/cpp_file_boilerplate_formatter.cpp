@@ -39,9 +39,10 @@ const bool documenting_previous_identifier(true);
 namespace dogen {
 namespace om {
 
-cpp_file_boilerplate_formatter::
-cpp_file_boilerplate_formatter(const bool generate_preamble)
-    : generate_preamble_(generate_preamble) { }
+cpp_file_boilerplate_formatter::cpp_file_boilerplate_formatter(
+    const bool generate_preamble, const bool generate_header_guards)
+    : generate_preamble_(generate_preamble),
+      generate_header_guards_(generate_header_guards) { }
 
 void cpp_file_boilerplate_formatter::
 add_modeline(std::list<std::string>& content, const modeline& m) const {
@@ -120,6 +121,9 @@ format_preamble(std::ostream& s, const annotation& a) const {
 
 void cpp_file_boilerplate_formatter::format_guards_begin(std::ostream& s,
     const boost::filesystem::path& relative_file_path) const {
+    if (!generate_header_guards_)
+        return;
+
     cpp_header_guard_formatter f;
     f.format_begin(s, relative_file_path);
 
@@ -129,6 +133,9 @@ void cpp_file_boilerplate_formatter::format_guards_begin(std::ostream& s,
 
 void cpp_file_boilerplate_formatter::format_guards_end(std::ostream& s,
     const boost::filesystem::path& relative_file_path) const {
+    if (!generate_header_guards_)
+        return;
+
     cpp_header_guard_formatter f;
     f.format_end(s, relative_file_path);
 }

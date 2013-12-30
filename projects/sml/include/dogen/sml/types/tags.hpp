@@ -337,6 +337,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
+
+                /**
                  * @brief Determines if existing files should be
                  * overwritten or not.
                  */
@@ -397,6 +403,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
+
+                /**
                  * @brief Determines if existing files should be
                  * overwritten or not.
                  */
@@ -424,6 +436,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
 
                 /**
                  * @brief Determines if existing files should be
@@ -490,6 +508,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief If set to true, the file will contain header
+                     * guards.
+                     */
+                    static const std::string generate_header_guards;
+
+                    /**
                      * @brief Determines if existing files should be
                      * overwritten or not.
                      */
@@ -550,6 +574,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief If set to true, the file will contain header
+                     * guards.
+                     */
+                    static const std::string generate_header_guards;
+
+                    /**
                      * @brief Determines if existing files should be
                      * overwritten or not.
                      */
@@ -577,6 +607,12 @@ struct tags {
                      * for this entity.
                      */
                     static const std::string generate;
+
+                    /**
+                     * @brief If set to true, the file will contain header
+                     * guards.
+                     */
+                    static const std::string generate_header_guards;
 
                     /**
                      * @brief Determines if existing files should be
@@ -647,6 +683,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief If set to true, the file will contain header
+                     * guards.
+                     */
+                    static const std::string generate_header_guards;
+
+                    /**
                      * @brief Determines if existing files should be
                      * overwritten or not.
                      */
@@ -707,6 +749,12 @@ struct tags {
                     static const std::string generate;
 
                     /**
+                     * @brief If set to true, the file will contain header
+                     * guards.
+                     */
+                    static const std::string generate_header_guards;
+
+                    /**
                      * @brief Determines if existing files should be
                      * overwritten or not.
                      */
@@ -734,6 +782,12 @@ struct tags {
                      * for this entity.
                      */
                     static const std::string generate;
+
+                    /**
+                     * @brief If set to true, the file will contain header
+                     * guards.
+                     */
+                    static const std::string generate_header_guards;
 
                     /**
                      * @brief Determines if existing files should be
@@ -799,6 +853,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
+
+                /**
                  * @brief Determines if existing files should be
                  * overwritten or not.
                  */
@@ -859,6 +919,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
+
+                /**
                  * @brief Determines if existing files should be
                  * overwritten or not.
                  */
@@ -886,6 +952,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
 
                 /**
                  * @brief Determines if existing files should be
@@ -945,6 +1017,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
+
+                /**
                  * @brief Determines if existing files should be
                  * overwritten or not.
                  */
@@ -1005,6 +1083,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
+
+                /**
                  * @brief Determines if existing files should be
                  * overwritten or not.
                  */
@@ -1032,6 +1116,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
 
                 /**
                  * @brief Determines if existing files should be
@@ -1090,6 +1180,12 @@ struct tags {
                 static const std::string generate;
 
                 /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
+
+                /**
                  * @brief Determines if existing files should be
                  * overwritten or not.
                  */
@@ -1117,6 +1213,12 @@ struct tags {
                  * for this entity.
                  */
                 static const std::string generate;
+
+                /**
+                 * @brief If set to true, the file will contain header
+                 * guards.
+                 */
+                static const std::string generate_header_guards;
 
                 /**
                  * @brief Determines if existing files should be

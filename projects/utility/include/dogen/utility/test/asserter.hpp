@@ -50,7 +50,16 @@ public:
     static dogen::utility::log::logger logger() { return lg_; }
 
 private:
+    /**
+     * @brief Logs according to the result of the assert.
+     */
     static bool handle_assert(const bool result, const std::string assertion);
+
+    /**
+     * @brief Logs strings with markers.
+     */
+    static void log_strings(const std::string& expected,
+        const std::string& actual);
 
 public:
     /**
@@ -162,6 +171,15 @@ public:
         BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
         return handle_assert(expected == actual, "assert equals");
     }
+
+    /**
+     * @brief Like assert_equals but provides a start and end marker.
+     *
+     * Only available for strings as the markers result in non-compliant
+     * JSON.
+     */
+    static bool assert_equals_marker(const std::string& expected,
+        const std::string& actual);
 
     /**
      * @brief Returns true if the actual string starts with the

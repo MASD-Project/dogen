@@ -21,6 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/test/unit_test.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -42,8 +44,14 @@ namespace {
 
 const std::string test_module("om");
 const std::string test_suite("cpp_types_main_header_file_formatter_spec");
+const std::string inc_dir("__include_directory__");
+const std::string file_name("__file_name__");
 
 using dogen::sml::test::mock_model_factory;
+/**
+ * Model must not be tagged - we will enable required tags manually on
+ * each test.
+ */
 const mock_model_factory factory(false/*tagged*/);
 
 const std::string empty_marker;
@@ -200,6 +208,7 @@ dogen::sml::object& find_object(dogen::sml::model& m, const unsigned int n) {
 
 using namespace dogen::om;
 using namespace dogen::utility::test;
+using dogen::utility::test::asserter;
 typedef dogen::sml::test::mock_model_factory::object_types object_types;
 typedef dogen::sml::test::mock_model_factory::property_types property_types;
 
@@ -209,20 +218,26 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_he
     SETUP_TEST_LOG_SOURCE("enumeration_with_two_enumerators_produces_expected_types_header");
 
     const auto ot(object_types::enumeration);
-    const auto m(factory.build_single_type_model(0, ot));
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    auto m(factory.build_single_type_model(0, ot));
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
-    dogen::om::cpp_types_main_header_file_formatter f;
-    const auto e(m.enumerations().begin()->second);
-    BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
+    auto e(m.enumerations().begin()->second);
+    dogen::sml::meta_data_writer writer(e.meta_data());
+    writer.add(dogen::sml::tags::cpp::types::header_file::file_name, file_name);
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
 
     const auto r(f.format(e, empty_annotation));
-    BOOST_CHECK(r.contents() == enumeration_two_enumerators);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                             << enumeration_two_enumerators
-                             << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+    const auto rp(r.relative_path().generic_string());
+    BOOST_CHECK(asserter::assert_contains(file_name, rp));
+
+    const auto ap(r.absolute_path().generic_string());
+    BOOST_CHECK(asserter::assert_contains(file_name, ap));
+    BOOST_CHECK(asserter::assert_starts_with(inc_dir, ap));
+
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(enumeration_two_enumerators, c));
 }
 
 BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
@@ -232,15 +247,12 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    dogen::om::cpp_types_main_header_file_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto& o(find_object(m, 0));
-    BOOST_LOG_SEV(lg, debug) << "object: " << o;
 
     const auto r(f.format(o, empty_annotation));
-    BOOST_CHECK(r.contents() == object_no_properties);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << object_no_properties
-                             << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(object_no_properties, c));
 }
 
 BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
@@ -251,32 +263,24 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
     BOOST_CHECK(m.objects().size() == 2);
 
     const auto& o(find_object(m, 1));
-    BOOST_LOG_SEV(lg, debug) << "object: " << o;
-
-    dogen::om::cpp_types_main_header_file_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto r(f.format(o, empty_annotation));
-    BOOST_CHECK(r.contents() == parent_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << parent_object << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r << "<end>";
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(parent_object, c));
 }
 
 BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
     SETUP_TEST_LOG_SOURCE("leaf_child_object_produces_expected_types_header");
 
     const auto m(factory.object_with_parent_in_the_same_model());
-    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
     const auto& o(find_object(m, 0));
-    BOOST_LOG_SEV(lg, debug) << "object: " << o;
-
-    dogen::om::cpp_types_main_header_file_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto r(f.format(o, empty_annotation));
-    BOOST_CHECK(r.contents() == leaf_child_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                             << leaf_child_object
-                             << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(leaf_child_object, c));
 }
 
 BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
@@ -287,14 +291,10 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
     BOOST_CHECK(m.objects().size() == 4);
 
     const auto& o(find_object(m, 1));
-    BOOST_LOG_SEV(lg, debug) << "object: " << o;
-
-    dogen::om::cpp_types_main_header_file_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto r(f.format(o, empty_annotation));
-    BOOST_CHECK(r.contents() == non_leaf_child_object);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << non_leaf_child_object
-                             << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(non_leaf_child_object, c));
 }
 
 BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected_types_header) {
@@ -305,17 +305,25 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
     auto& o(find_object(m, 0));
     o.documentation().clear();
     dogen::sml::meta_data_writer writer(o.meta_data());
+    writer.add(dogen::sml::tags::cpp::types::header_file::file_name, file_name);
     writer.add(
         dogen::sml::tags::cpp::types::generate_defaulted_functions,
         dogen::sml::tags::bool_true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto r(f.format(o, empty_annotation));
-    BOOST_CHECK(r.contents() == all_explicitly_defaulted_functions);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                             << all_explicitly_defaulted_functions << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+
+    const auto rp(r.relative_path().generic_string());
+    BOOST_CHECK(asserter::assert_equals_marker(file_name, rp));
+
+    const auto ap(r.absolute_path().generic_string());
+    BOOST_CHECK(asserter::assert_contains(file_name, ap));
+    BOOST_CHECK(asserter::assert_starts_with(inc_dir, ap));
+
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(
+            all_explicitly_defaulted_functions, c));
 }
 
 BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_types_header) {
@@ -335,12 +343,10 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_typ
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto r(f.format(o, empty_annotation));
-    BOOST_CHECK(r.contents() == manual_default_constructor);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                             << manual_default_constructor << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(manual_default_constructor, c));
 }
 
 BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_header) {
@@ -360,31 +366,35 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f;
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto r(f.format(o, empty_annotation));
-    BOOST_CHECK(r.contents() == manual_move_constructor);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                             << manual_move_constructor << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.contents() << "<end>";
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(manual_move_constructor, c));
 }
 
 BOOST_AUTO_TEST_CASE(module_with_comments_produces_expected_types_header) {
     SETUP_TEST_LOG_SOURCE("module_with_comments_produces_expected_types_header");
 
-    const auto m(factory.build_single_type_model_in_module(0,
+    auto m(factory.build_single_type_model_in_module(0,
             object_types::value_object, 1));
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.modules().size() == 1);
 
-    dogen::om::cpp_types_main_header_file_formatter f;
-    const auto& module(m.modules().begin()->second);
-    BOOST_LOG_SEV(lg, debug) << "module: " << module;
+    auto& module(m.modules().begin()->second);
+    dogen::sml::meta_data_writer writer(module.meta_data());
+    writer.add(dogen::sml::tags::cpp::types::header_file::file_name, file_name);
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
+    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
     const auto r(f.format(module, empty_annotation));
-    BOOST_CHECK(r.contents() == module_in_named_model);
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << module_in_named_model
-                             << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <end>" << r.contents() << "<end>";
+    const auto rp(r.relative_path().generic_string());
+    BOOST_CHECK(asserter::assert_contains(file_name, rp));
+
+    const auto ap(r.absolute_path().generic_string());
+    BOOST_CHECK(asserter::assert_contains(file_name, ap));
+    BOOST_CHECK(asserter::assert_starts_with(inc_dir, ap));
+
+    const auto& c(r.contents());
+    BOOST_CHECK(asserter::assert_equals_marker(module_in_named_model, c));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -23,14 +23,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/all_types_traversal.hpp"
-#include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/om/types/formatter_factory.hpp"
+#include "dogen/om/types/code_generation_marker_factory.hpp"
 #include "dogen/om/types/workflow_error.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
-#include "dogen/om/types/formatter_factory.hpp"
-#include "dogen/om/types/annotation_factory.hpp"
 #include "dogen/om/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -49,24 +48,26 @@ namespace om {
 
 class workflow::context {
 public:
-    context(const std::list<boost::filesystem::path>& data_files_directories)
-        : factory_(data_files_directories) { }
-
-public:
-    annotation_factory& factory() { return factory_; }
     std::list<file>& files() { return files_; }
 
 private:
-    annotation_factory factory_;
     std::list<file> files_;
 };
 
-workflow::
-workflow(const std::list<boost::filesystem::path>& data_files_directories)
-    : data_files_directories_(data_files_directories),
-      type_formatters_(formatter_factory::build_type_formatters()),
-      module_formatters_(formatter_factory::build_module_formatters()),
-      concept_formatters_(formatter_factory::build_concept_formatters()) { }
+workflow::workflow(const boost::filesystem::path& project_directory,
+    const boost::filesystem::path& cpp_source_directory,
+    const boost::filesystem::path& cpp_include_directory,
+    const std::list<boost::filesystem::path>& data_files_directories)
+    : annotation_factory_(data_files_directories) {
+
+    annotation_factory_.load_reference_data();
+    formatter_factory ff(project_directory, cpp_source_directory,
+        cpp_include_directory);
+
+    type_formatters_ = ff.build_type_formatters();
+    module_formatters_ = ff.build_module_formatters();
+    concept_formatters_ = ff.build_concept_formatters();
+}
 
 void workflow::ensure_non_null_context() const {
     if (context_ != nullptr)
@@ -78,7 +79,8 @@ void workflow::ensure_non_null_context() const {
 
 void workflow::operator()(const sml::type& t) const {
     ensure_non_null_context();
-    const auto annotation(context_->factory().build(t.meta_data()));
+
+    const auto annotation(annotation_factory_.build(t.meta_data()));
     sml::meta_data_reader reader(t.meta_data());
     for (const auto f : type_formatters_) {
         if (!f->generate(t.meta_data()))
@@ -91,7 +93,7 @@ void workflow::operator()(const sml::type& t) const {
 void workflow::operator()(const sml::module& m) const {
     ensure_non_null_context();
 
-    const auto annotation(context_->factory().build(m.meta_data()));
+    const auto annotation(annotation_factory_.build(m.meta_data()));
     sml::meta_data_reader reader(m.meta_data());
     for (const auto f : module_formatters_) {
         if (!f->generate(m.meta_data()))
@@ -104,7 +106,7 @@ void workflow::operator()(const sml::module& m) const {
 void workflow::operator()(const sml::concept& c) const {
     ensure_non_null_context();
 
-    const auto annotation(context_->factory().build(c.meta_data()));
+    const auto annotation(annotation_factory_.build(c.meta_data()));
     sml::meta_data_reader reader(c.meta_data());
     for (const auto f : concept_formatters_) {
         if (!f->generate(c.meta_data()))
@@ -127,8 +129,7 @@ void workflow::model_file_subworkflow(const sml::model& model) {
 }
 
 std::list<file> workflow::execute(const sml::model& m) {
-    context_ = std::unique_ptr<context>(new context(data_files_directories_));
-    context_->factory().load_reference_data();
+    context_ = std::unique_ptr<context>(new context);
     sml::all_model_items_traversal(m, *this);
     model_file_subworkflow(m);
     const auto r(context_->files());

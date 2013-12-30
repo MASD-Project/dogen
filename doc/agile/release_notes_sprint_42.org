@@ -10,16 +10,17 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 13:54]
+Clock summary at [2013-12-30 Mon 16:37]
 
 | Headline                                                    | Time   |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *2:12* |      |      |
+| *Total time*                                                | *4:52* |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 2:12 |      |
+| Development Stories Implemented                             |        | 4:52 |      |
 | IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian |        |      | 0:18 |
 | COMPLETED Add more valgrind suppressions                    |        |      | 0:06 |
+| COMPLETED Add absolute path support to =om=                 |        |      | 2:40 |
 | Includer generation should be done from meta-data           |        |      | 0:18 |
 #+end:
 
@@ -51,13 +52,15 @@ to the [[http://packages.qa.debian.org/b/boost-defaults.html][package feed]].
     CLOSED: [2013-12-30 Mon 13:54]
     CLOCK: [2013-12-30 Mon 13:48]--[2013-12-30 Mon 13:54] =>  0:06
 
-*** IMPLEMENTATION Add absolute path support to =om=                  :story:
+*** COMPLETED Add absolute path support to =om=                       :story:
+    CLOSED: [2013-12-30 Mon 16:37]
+    CLOCK: [2013-12-30 Mon 13:56]--[2013-12-30 Mon 16:36] =>  2:40
 
-- Transport settings all the way through to the OM workflow
-- Use settings to compute the key paths: project directory, source
-  directory, include directory
-- Supply key paths to the formatter factory
-- Supply required paths to the applicable formatters
+- use settings to compute the key paths in engine workflow: project
+  directory, source directory, include directory
+- supply key paths to the OM workflow and formatter factory
+- supply required paths to the applicable formatters
+- make header guards configurable
 
 *** Add required meta-data to test models                             :story:
 

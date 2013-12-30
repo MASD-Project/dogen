@@ -31,7 +31,7 @@
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/om/types/workflow.hpp"
+#include "dogen/config/types/settings.hpp"
 #include "dogen/engine/types/backends/backend.hpp"
 
 namespace dogen {
@@ -46,19 +46,20 @@ public:
     om_backend& operator=(const om_backend&) = default;
 
 public:
-    om_backend(const sml::model& model);
+    om_backend(const config::settings& settings, const sml::model& model);
     virtual ~om_backend() noexcept {}
 
 public:
-    static backend::ptr create(const sml::model& model);
+    static backend::ptr
+    create(const config::settings& settings, const sml::model& model);
 
 public:
     backend::value_type generate() override;
     std::vector<boost::filesystem::path> managed_directories() const override;
 
 private:
+    const config::settings& settings_;
     const sml::model& model_;
-    om::workflow workflow_;
 };
 
 } } }

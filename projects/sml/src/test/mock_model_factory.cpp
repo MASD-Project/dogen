@@ -349,6 +349,8 @@ void add_test_tags(Taggable& t) {
     dogen::sml::meta_data_writer writer(t.meta_data());
     writer.add(dogen::sml::tags::cpp::types::header_file::generate,
         dogen::sml::tags::bool_true);
+    writer.add(dogen::sml::tags::cpp::types::header_file::
+        generate_header_guards, dogen::sml::tags::bool_true);
     writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
         filename_for_qname(t.name()));
     writer.add(dogen::sml::tags::licence_name, licence_name);

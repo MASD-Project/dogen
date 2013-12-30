@@ -40,7 +40,7 @@ void save(Archive& ar,
     const dogen::om::file& v,
     const unsigned int /*version*/) {
     ar << make_nvp("relative_path", v.relative_path_.generic_string());
-    ar << make_nvp("full_path", v.full_path_.generic_string());
+    ar << make_nvp("absolute_path", v.absolute_path_.generic_string());
     ar << make_nvp("contents", v.contents_);
     ar << make_nvp("overwrite", v.overwrite_);
 }
@@ -52,9 +52,9 @@ void load(Archive& ar,
     std::string relative_path_tmp;
     ar >> make_nvp("relative_path", relative_path_tmp);
     v.relative_path_ = relative_path_tmp;
-    std::string full_path_tmp;
-    ar >> make_nvp("full_path", full_path_tmp);
-    v.full_path_ = full_path_tmp;
+    std::string absolute_path_tmp;
+    ar >> make_nvp("absolute_path", absolute_path_tmp);
+    v.absolute_path_ = absolute_path_tmp;
     ar >> make_nvp("contents", v.contents_);
     ar >> make_nvp("overwrite", v.overwrite_);
 }

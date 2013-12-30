@@ -49,8 +49,16 @@ public:
         cpp_file_boilerplate_formatter&& rhs) = default;
 
 public:
-    explicit cpp_file_boilerplate_formatter(
-        const bool generate_preamble = true);
+    /**
+     * @brief Initialise boiler plate formatter.
+     *
+     * @param generate_preamble if true, the preamble will be
+     * generated.
+     * @param generate_header_guards if true, header guards will be
+     * generated.
+     */
+    cpp_file_boilerplate_formatter(const bool generate_preamble = true,
+        const bool generate_header_guards = true);
 
 private:
     /**
@@ -117,6 +125,7 @@ public:
 
 private:
     const bool generate_preamble_;
+    const bool generate_header_guards_;
 };
 
 } }

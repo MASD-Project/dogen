@@ -37,9 +37,11 @@
 #include "dogen/om/types/file.hpp"
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline_group.hpp"
+#include "dogen/om/types/annotation_factory.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 #include "dogen/om/types/module_formatter_interface.hpp"
 #include "dogen/om/types/concept_formatter_interface.hpp"
+
 
 namespace dogen {
 namespace om {
@@ -54,8 +56,21 @@ public:
     ~workflow() = default;
 
 public:
-    explicit
-    workflow(const std::list<boost::filesystem::path>& data_files_directories);
+    /**
+     * @brief Initialise workflow.
+     *
+     * @param project_directory Top-level directory for the project
+     * @param cpp_source_directory Directory under which the C++
+     * source files will be placed.
+     * @param cpp_include_directory Directory under which the include
+     * files will be placed.
+     * @param data_files_directories Additional directories to search
+     * for data files.
+     */
+    workflow(const boost::filesystem::path& project_directory,
+        const boost::filesystem::path& cpp_source_directory,
+        const boost::filesystem::path& cpp_include_directory,
+        const std::list<boost::filesystem::path>& data_files_directories);
 
 private:
     class context;
@@ -97,14 +112,14 @@ public:
     std::list<file> execute(const sml::model& m);
 
 private:
-    const std::list<boost::filesystem::path> data_files_directories_;
-    const std::list<boost::shared_ptr<type_formatter_interface> >
+    std::list<boost::shared_ptr<type_formatter_interface> >
     type_formatters_;
-    const std::list<boost::shared_ptr<module_formatter_interface> >
+    std::list<boost::shared_ptr<module_formatter_interface> >
     module_formatters_;
-    const std::list<boost::shared_ptr<concept_formatter_interface> >
+    std::list<boost::shared_ptr<concept_formatter_interface> >
     concept_formatters_;
-    mutable std::shared_ptr<context> context_;
+    annotation_factory annotation_factory_;
+    std::shared_ptr<context> context_;
 };
 
 } }

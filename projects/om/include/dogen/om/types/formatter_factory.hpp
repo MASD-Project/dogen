@@ -27,6 +27,7 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/om/types/type_formatter_interface.hpp"
 #include "dogen/om/types/module_formatter_interface.hpp"
 #include "dogen/om/types/concept_formatter_interface.hpp"
@@ -38,28 +39,47 @@ class formatter_factory {
 public:
     formatter_factory() = delete;
     formatter_factory(const formatter_factory&) = delete;
-    ~formatter_factory() = delete;
+    ~formatter_factory() = default;
     formatter_factory(formatter_factory&&) = delete;
     formatter_factory& operator=(const formatter_factory&) = delete;
 
 public:
     /**
+     * @brief Initialise factory.
+     *
+     * @param project_directory Top-level directory for the project
+     * @param cpp_source_directory Directory under which the C++
+     * source files will be placed.
+     * @param cpp_include_directory Directory under which the include
+     * files will be placed.
+     */
+    formatter_factory(const boost::filesystem::path& project_directory,
+        const boost::filesystem::path& cpp_source_directory,
+        const boost::filesystem::path& cpp_include_directory);
+
+public:
+    /**
      * @brief Returns instances of all the available type formatters.
      */
-    static std::list<boost::shared_ptr<type_formatter_interface> >
-    build_type_formatters();
+    std::list<boost::shared_ptr<type_formatter_interface> >
+    build_type_formatters() const;
 
     /**
      * @brief Returns instances of all the available module formatters.
      */
-    static std::list<boost::shared_ptr<module_formatter_interface> >
-    build_module_formatters();
+    std::list<boost::shared_ptr<module_formatter_interface> >
+    build_module_formatters() const;
 
     /**
      * @brief Returns instances of all the available concept formatters.
      */
-    static std::list<boost::shared_ptr<concept_formatter_interface> >
-    build_concept_formatters();
+    std::list<boost::shared_ptr<concept_formatter_interface> >
+    build_concept_formatters() const;
+
+private:
+    const boost::filesystem::path project_directory_;
+    const boost::filesystem::path cpp_source_directory_;
+    const boost::filesystem::path cpp_include_directory_;
 };
 
 } }

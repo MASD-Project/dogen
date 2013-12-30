@@ -3145,7 +3145,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#full_path#</dia:string>
+            <dia:string>#absolute_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -3154,7 +3154,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Full path to the file, indicating the location in the filesystem where it will be written.#</dia:string>
+            <dia:string>#Absolute path to the file, indicating the location in the filesystem where it will be written.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

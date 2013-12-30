@@ -43,7 +43,7 @@ factory::result_type factory::create() const {
 
     result_type r;
     r.push_back(cpp_backend::create(model_, settings_.cpp()));
-    // r.push_back(om_backend::create(model_));
+    // r.push_back(om_backend::create(settings_, model_));
     return r;
 }
 

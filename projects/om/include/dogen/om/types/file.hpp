@@ -50,7 +50,7 @@ public:
 public:
     file(
         const boost::filesystem::path& relative_path,
-        const boost::filesystem::path& full_path,
+        const boost::filesystem::path& absolute_path,
         const std::string& contents,
         const bool overwrite);
 
@@ -73,13 +73,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Full path to the file, indicating the location in the filesystem where it will be written.
+     * @brief Absolute path to the file, indicating the location in the filesystem where it will be written.
      */
     /**@{*/
-    const boost::filesystem::path& full_path() const;
-    boost::filesystem::path& full_path();
-    void full_path(const boost::filesystem::path& v);
-    void full_path(const boost::filesystem::path&& v);
+    const boost::filesystem::path& absolute_path() const;
+    boost::filesystem::path& absolute_path();
+    void absolute_path(const boost::filesystem::path& v);
+    void absolute_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -115,7 +115,7 @@ public:
 
 private:
     boost::filesystem::path relative_path_;
-    boost::filesystem::path full_path_;
+    boost::filesystem::path absolute_path_;
     std::string contents_;
     bool overwrite_;
 };

@@ -18,27 +18,66 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/filesystem/path.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
+#include "dogen/sml/types/tags.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
+#include "dogen/om/types/workflow.hpp"
 #include "dogen/engine/types/backends/om_backend.hpp"
 
 using dogen::utility::filesystem::data_files_directory;
+using namespace dogen::utility::log;
 
+namespace {
+
+auto lg(logger_factory("engine.backends.om_backend"));
+
+}
 namespace dogen {
 namespace engine {
 namespace backends {
 
-om_backend::om_backend(const sml::model& model) :
-    model_(model),
-    workflow_(std::list<boost::filesystem::path>{data_files_directory()}) { }
+om_backend::
+om_backend(const config::settings& settings, const sml::model& model)
+    : settings_(settings), model_(model) { }
 
 backend::ptr om_backend::
-create(const sml::model& model) {
-    return backend::ptr(new om_backend(model));
+create(const config::settings& settings, const sml::model& model) {
+    return backend::ptr(new om_backend(settings, model));
 }
 
 backend::value_type om_backend::generate() {
-    const auto files(workflow_.execute(model_));
+    boost::filesystem::path project_directory;
+    boost::filesystem::path cpp_source_directory;
+    boost::filesystem::path cpp_include_directory;
+    std::list<boost::filesystem::path> data_files_directories;
+
+
+    if (settings_.cpp().split_project()) {
+        cpp_source_directory = settings_.cpp().source_directory();
+        cpp_include_directory = settings_.cpp().include_directory();
+    } else {
+        sml::meta_data_reader reader(model_.meta_data());
+        const auto src_dir(reader.get(sml::tags::cpp::source_directory));
+
+        const auto mn(model_.name().simple_name());
+        const auto pd(settings_.cpp().project_directory());
+        cpp_source_directory = pd / mn / src_dir;
+
+        const auto inc_dir(reader.get(sml::tags::cpp::include_directory));
+        cpp_include_directory = pd / mn / inc_dir;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Directories used: source_directory_: "
+                             << cpp_source_directory << " include_directory: "
+                             << cpp_include_directory;
+
+    om::workflow wk(project_directory, cpp_source_directory,
+        cpp_include_directory, data_files_directories);
+
+    const auto files(wk.execute(model_));
 
     backend::value_type r;
     for (const auto& f : files)

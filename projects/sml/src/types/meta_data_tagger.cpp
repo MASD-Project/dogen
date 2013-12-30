@@ -390,17 +390,24 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::types::header_file::generate, tags::bool_true);
             writer.add_if_key_not_found(
+                tags::cpp::types::header_file::generate_header_guards,
+                tags::bool_true);
+
+            writer.add_if_key_not_found(
                 tags::cpp::types::header_file::overwrite, tags::bool_true);
         } else if (t.generation_type() == gt::partial_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::types::header_file::generate, tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::types::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::types::header_file::overwrite, tags::bool_false);
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::types::header_file::generate, tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::types::header_file::overwrite, tags::bool_false);
         }
 
         const auto impl_fn(filename_for_qname(reader, !is_header_file,
@@ -432,9 +439,6 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::types::implementation_file::generate,
                 tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::types::implementation_file::overwrite,
-                tags::bool_false);
         }
 
         const auto fwd_fn(filename_for_qname(reader, is_header_file,
@@ -453,6 +457,11 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::types::forward_declarations_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::types::forward_declarations_file::
+                generate_header_guards, tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::types::forward_declarations_file::overwrite,
                 tags::bool_true);
@@ -460,15 +469,17 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::types::forward_declarations_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::types::forward_declarations_file::
+                generate_header_guards, tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::types::forward_declarations_file::overwrite,
                 tags::bool_true);
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::types::forward_declarations_file::generate,
-                tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::types::forward_declarations_file::overwrite,
                 tags::bool_false);
         }
     }
@@ -491,6 +502,11 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::hash::standard::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::header_file::overwrite,
                 tags::bool_true);
@@ -498,15 +514,17 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::hash::standard::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::header_file::overwrite,
                 tags::bool_false);
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::header_file::generate,
-                tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::hash::standard::header_file::overwrite,
                 tags::bool_false);
         }
 
@@ -527,6 +545,7 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::implementation_file::generate,
                 tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::implementation_file::overwrite,
                 tags::bool_true);
@@ -540,9 +559,6 @@ void meta_data_tagger::operator()(type& t) const {
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::implementation_file::generate,
-                tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::hash::standard::implementation_file::overwrite,
                 tags::bool_false);
         }
     }
@@ -565,6 +581,11 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::header_file::
+                generate_header_guards, tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::header_file::overwrite,
                 tags::bool_true);
@@ -572,15 +593,17 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::header_file::
+                generate_header_guards, tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::header_file::overwrite,
                 tags::bool_false);
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::header_file::generate,
-                tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::serialization::boost::header_file::overwrite,
                 tags::bool_false);
         }
 
@@ -602,6 +625,7 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::implementation_file::generate,
                 tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::implementation_file::overwrite,
                 tags::bool_true);
@@ -638,6 +662,11 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::io::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::io::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::io::header_file::overwrite,
                 tags::bool_true);
@@ -645,15 +674,17 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::io::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::io::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::io::header_file::overwrite,
                 tags::bool_false);
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::io::header_file::generate,
-                tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::io::header_file::overwrite,
                 tags::bool_false);
         }
 
@@ -712,6 +743,11 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::test_data::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::test_data::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::test_data::header_file::overwrite,
                 tags::bool_true);
@@ -719,15 +755,17 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::test_data::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::test_data::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::test_data::header_file::overwrite,
                 tags::bool_false);
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::test_data::header_file::generate,
-                tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::test_data::header_file::overwrite,
                 tags::bool_false);
         }
 
@@ -786,6 +824,11 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::odb::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::odb::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::odb::header_file::overwrite,
                 tags::bool_true);
@@ -793,15 +836,17 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::odb::header_file::generate,
                 tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::odb::header_file::generate_header_guards,
+                tags::bool_true);
+
             writer.add_if_key_not_found(
                 tags::cpp::odb::header_file::overwrite,
                 tags::bool_false);
         } else if (t.generation_type() == gt::no_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::odb::header_file::generate,
-                tags::bool_false);
-            writer.add_if_key_not_found(
-                tags::cpp::odb::header_file::overwrite,
                 tags::bool_false);
         }
     }
@@ -818,11 +863,15 @@ void meta_data_tagger::operator()(module& m) const {
     if (m.documentation().empty()) {
         writer.add_if_key_not_found(
             tags::cpp::types::header_file::generate, tags::bool_false);
+
         return;
     }
 
     writer.add_if_key_not_found(
         tags::cpp::types::header_file::generate, tags::bool_true);
+
+    writer.add_if_key_not_found(
+        tags::cpp::types::header_file::generate_header_guards, tags::bool_true);
 
     // must massage the model name in order to generate the
     // correct file name for the model.

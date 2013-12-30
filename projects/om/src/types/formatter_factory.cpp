@@ -18,30 +18,57 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
 #include "dogen/om/types/formatter_factory.hpp"
+
+using namespace dogen::utility::log;
+
+namespace {
+
+auto lg(logger_factory("om.formatter_factory"));
+
+}
 
 namespace dogen {
 namespace om {
 
+formatter_factory::
+formatter_factory(const boost::filesystem::path& project_directory,
+    const boost::filesystem::path& cpp_source_directory,
+    const boost::filesystem::path& cpp_include_directory)
+    : project_directory_(project_directory),
+      cpp_source_directory_(cpp_source_directory),
+      cpp_include_directory_(cpp_include_directory) {
+
+    BOOST_LOG_SEV(lg, error) << "Factory setup. Project directory: "
+                             << project_directory << " C++ source directory: "
+                             << cpp_source_directory
+                             << " C++ include directory: "
+                             << cpp_include_directory;
+}
+
 std::list<boost::shared_ptr<type_formatter_interface> >
-formatter_factory::build_type_formatters() {
-    std::list<boost::shared_ptr<type_formatter_interface> > r;
-    using tfi = boost::shared_ptr<type_formatter_interface>;
-    r.push_back(tfi(new cpp_types_main_header_file_formatter));
+formatter_factory::build_type_formatters() const {
+    using namespace boost;
+    std::list<shared_ptr<type_formatter_interface> > r;
+    r.push_back(make_shared<cpp_types_main_header_file_formatter>(
+            cpp_include_directory_));
     return r;
 }
 
 std::list<boost::shared_ptr<module_formatter_interface> >
-formatter_factory::build_module_formatters() {
-    std::list<boost::shared_ptr<module_formatter_interface> > r;
-    using mfi = boost::shared_ptr<module_formatter_interface>;
-    r.push_back(mfi(new cpp_types_main_header_file_formatter));
+formatter_factory::build_module_formatters() const {
+    using namespace boost;
+    std::list<shared_ptr<module_formatter_interface> > r;
+    r.push_back(make_shared<cpp_types_main_header_file_formatter>(
+            cpp_include_directory_));
     return r;
 }
 
 std::list<boost::shared_ptr<concept_formatter_interface> >
-formatter_factory::build_concept_formatters() {
+formatter_factory::build_concept_formatters() const {
     std::list<boost::shared_ptr<concept_formatter_interface> > r;
     return r;
 }
