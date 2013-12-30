@@ -796,7 +796,7 @@ model name in the references) but it seems that this is just another
 hack to solve a more fundamental problem. The sort of errors one gets
 due to this are like so:
 
-: 2013-06-29 23:10:34.831009 [ERROR] [sml.resolver] Pod has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "type_name": "qname", "meta_type": { "__type__": "meta_types", "value": "invalid" } }
+: 2013-06-29 23:10:34.831009 [ERROR] [sml.resolver] Object has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "type_name": "qname", "meta_type": { "__type__": "meta_types", "value": "invalid" } }
 : 2013-06-29 23:10:34.831294 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/sml/src/types/resolver.cpp(202): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname&) const
 : Dynamic exception type: boost::exception_detail::clone_impl<dogen::sml::resolution_error>
 
@@ -1026,7 +1026,7 @@ automatic constructors, and add a private section at the bottom.
 
 New understanding:
 
-- Add versioning support by adding versions at the pod level and at
+- Add versioning support by adding versions at the object level and at
   the property level. Properties with 0 version will have no special
   handling. Properties with non-zero version (V) will have the
   following code added in serialisation:
@@ -1037,10 +1037,10 @@ New understanding:
 - If a number of consecutive properties all share the same version,
   dogen will group them under the same version if. There will be no
   other special grouping or otherwise changing of order of properties.
-- The pod version will be max(version) of all properties for that
+- The object version will be max(version) of all properties for that
   class, excluding inherited properties.
-- The pod version will be stamped using boost serialisation class
-  version macro, unless the pod version is zero.
+- The object version will be stamped using boost serialisation class
+  version macro, unless the object version is zero.
 - Dogen will make no validation or otherwise dictate the management of
   version numbers; its up to the users to ensure they make sensible
   backwards compatibility decisions such as adding only new properties
@@ -1200,7 +1200,7 @@ models:
   names.
 - type names, model names, etc must not contain spaces or other
   invalid characters. We should use a identifier parser for this.
-- the qname of all keys in pods, etc must be part of the current
+- the qname of all keys in objects, etc must be part of the current
   model.
 - the qnames of all types as keys are consistent with the values.
 - type_name is non-empty; cannot be blank or a variable name
@@ -1216,25 +1216,25 @@ models:
 - enumeration must have at least one enumerator
 - enumerator name must not be empty
 - enumerator name must be unique
-- external package path of the model matches all pods, etc in current
+- external package path of the model matches all objects, etc in current
   model.
 - model name is non-empty.
 - documentation does not have non-printable characters.
-- number of type arguments is consistent with pod type.
-- pod marked as is comparable must follow the [[*Add%20is%20comparable%20to%20SML][comparison rules]].
-- pod marked as is parent must have at least one child.
+- number of type arguments is consistent with objects type.
+- objects marked as is comparable must follow the [[*Add%20is%20comparable%20to%20SML][comparison rules]].
+- objects marked as is parent must have at least one child.
 - property can only have a default value if primitive
 - property default value must be castable to primitive type.
 - property must have non-empty name.
-- is versioned pod must have a property called version.
+- is versioned objects must have a property called version.
 - string table cannot have duplicate entries.
 - Issue error when a property is a value of an abstract class: SML
   should fail to merge if the user attempts to create a property of a
   base class. It should allow pointers to the base class though.
-- Test relationships between pods and other meta types: We should
-  validate that pods are only related to other pods - e.g. they cannot
-  inherit from exception or enumeration or vice-versa. Add tests for
-  this.
+- Test relationships between objects and other meta types: We should
+  validate that objects are only related to other objects - e.g. they
+  cannot inherit from exception or enumeration or vice-versa. Add
+  tests for this.
 - Its not possible to be immutable and fluent.
 - it is not possible to be immutable and be in an inheritance
   relationship. FIXME: why is that?
@@ -1251,12 +1251,12 @@ Validator should provide contextual validation error messages:
 
 : error 1: properties must have a non-null name
 : in model 'my_model' (Dia ID: O0)
-: in pod 'my_pod' (Dia ID: O0)
+: in object 'my_object (Dia ID: O0)
 : property 'my_property' has empty name.
 
 *** Add composite stereotype                                          :story:
 
-It would be nice if one could just mark a pod as =composite= and dogen
+It would be nice if one could just mark a object as =composite= and dogen
 automatically created the composite structure. As we only support
 boost shared pointer that's what we'd use. We have a few use cases for
 this (node, nested qname, etc).
@@ -1392,7 +1392,7 @@ These models test dia features and must be kept isolated:
 - compressed
 - two_layers_with_objects
 
-**** Add pods, enumerations and exceptions to comments model
+**** Add objects, enumerations and exceptions to comments model
 
 At present we are only testing packages in comments.
 
@@ -1442,7 +1442,7 @@ dumping.
 *** Add is comparable to SML                                          :story:
      CLOCK: [2013-05-10 Fri 07:48]--[2013-05-10 Fri 08:09] =>  0:21
 
-A pod can have a stereotype of comparable. If so, then at least one
+A object can have a stereotype of comparable. If so, then at least one
 property must be marked as comparable. Properties are marked as
 comparable if they have an implementation specific parameter called
 =comparison_order=. =comparison_order= is a sequence starting at 0 and
@@ -1454,9 +1454,9 @@ must be:
 
 - primitive;
 - =std::string=;
-- a pod marked as comparable.
+- a object marked as comparable.
 
-Some facts about comparable pods:
+Some facts about comparable objects:
 
 - they generate =operator<= as a global operator in the type
   header file.
@@ -1469,7 +1469,7 @@ Relation to keys:
 - comparable versioned keys always compare the version after all other
   comparable properties.
 
-If a pod itself is marked as comparable, then it is equivalent to mark
+If an object itself is marked as comparable, then it is equivalent to mark
 all properties as comparable using their relative position as the
 comparison order.
 
@@ -1493,7 +1493,7 @@ should improve build times.
   types manually - instead we just need to mark the exceptions.
 - add two new stereotypes: =public= and =private=.
 - add enum to sml: =visibility_type= (check with .Net for
-  names). Valid values are =public=, =private=. Pods, enumerations,
+  names). Valid values are =public=, =private=. Objects, enumerations,
   etc will have this enum.
 - locator will now respect this value when producing an absolute file
   path. If public files go under =include/public=, if private files go
@@ -1513,7 +1513,7 @@ should improve build times.
 *** Refactor boost and std helpers and enums                          :story:
 
 We shouldn't really have std and boost enums. These are just a repeat
-of the SML models. We should have a find pod by name in a model which
+of the SML models. We should have a find object by name in a model which
 returns the appropriate qname given a type name. Then the helpers bind
 to those qnames; given a qname, they return the include information,
 etc. In the current implementation, the enums are basically a
@@ -1539,9 +1539,9 @@ group"; the type frame would be done for a group of models.
 *** Model and type enums                                              :story:
 
 It may be useful to create enumerations for models, types and
-properties within pods. This would in the future form the basis of
+properties within objects. This would in the future form the basis of
 reflection. One could use implementation specific properties to set
-the model ID and pod IDs.
+the model ID and objects IDs.
 
 *** Add pimpl support                                                 :story:
 
@@ -1589,15 +1589,15 @@ generation time. There should be a regex for this conversion.
 *** Warn if value or entity has methods                               :story:
 
 We should issue a warning if a user defines methods in value or entity
-pods as its most likely by mistake.
+objects as its most likely by mistake.
 
 *** Add diff support                                                  :story:
 
 New understanding: just create a new facet call diff and make these
 classes generate a simple textual representation of differences,
-inspired in =diff=. Where the pod is an entity provide its ID. In
+inspired in =diff=. Where the object is an entity provide its ID. In
 general just provide some "path" to the difference,
-e.g. model/pod/member variable/etc.
+e.g. model/object/member variable/etc.
 
 Old understanding:
 
@@ -1654,10 +1654,17 @@ As these are not so common they have been left for later.
 
 *** Manual typedef generation                                         :story:
 
-We should be able to create a stereotype of =typedef group=. This is a
-pod type with lots of attributes. The code generator will take the
-name and type of each attribute and generate a file with the name of
-the group and all the typedefs inside.
+- We should be able to create a stereotype of =typedef group=. This is
+  a object type with lots of attributes. The code generator will take
+  the name and type of each attribute and generate a file with the
+  name of the group and all the typedefs inside.
+- We should be able to create a forward declarations like header that
+  defines typedefs for =shared_ptr= etc at the users choosing. This
+  could be implemented as a tag. We could create a =memory_fwd= header
+  to avoid cluttering the main =fwd= file for the type. We will need
+  another type of relationship to model this, as well as another type
+  of file in tags; the file would then have several Boolean flags one
+  can tick such as =std_shared_ptr=, =boost_shared_ptr= and so on.
 
 *** Automatic typedef generation                                      :story:
 
@@ -1913,7 +1920,7 @@ Some thought on adding caching to dogen:
   determine additional caches to create. the attributes must be called
   key and value. the key entity must be versioned, value doesn't have
   to.
-- for each versioned type, we create the following "shadow" pods: get,
+- for each versioned type, we create the following "shadow" objects: get,
   put, erase. each has versioned and unversioned. these objects are in
   the namespace cache::type_namespaces,
   e.g. =cache::credit_risk::model_configuration::versioned_get= or
@@ -2109,7 +2116,7 @@ something of the sort.
 
 *** Cross model referencing tests                                     :story:
 
-At present we do not have any tests were a pod in one model makes use
+At present we do not have any tests were a object in one model makes use
 of types defined in another model. This works fine but we should
 really have tests at the dogen level.
 
@@ -2358,7 +2365,7 @@ can also remove this function.
 
 We need to have a form of inheriting from a base exception for a given
 model. We also need to be able to inherit from other exceptions in a
-model. At present exceptions are not pods so the dependency graph
+model. At present exceptions are not objects so the dependency graph
 support is not there.
 
 *** Investigate GDB visualisers for generated models                  :story:
@@ -2544,7 +2551,7 @@ At present we have a bit of a hack to support templates. However, all
 that is required to allow users to create their own template types is:
 
 - parse dia information for type arguments
-- change pod to have type arguments
+- change object to have type arguments
 - change merger to allow variables of the type of the type argument
 - change view model to propagate type arguments
 - change formatter to create template class if type arguments are
