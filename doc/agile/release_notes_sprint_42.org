@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 16:37]
+Clock summary at [2013-12-30 Mon 19:03]
 
 | Headline                                                    | Time   |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *4:52* |      |      |
+| *Total time*                                                | *6:45* |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 4:52 |      |
+| Development Stories Implemented                             |        | 6:45 |      |
 | IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian |        |      | 0:18 |
 | COMPLETED Add more valgrind suppressions                    |        |      | 0:06 |
 | COMPLETED Add absolute path support to =om=                 |        |      | 2:40 |
+| COMPLETED Add plumbing to engine to toggle =om= on or off   |        |      | 1:53 |
 | Includer generation should be done from meta-data           |        |      | 0:18 |
 #+end:
 
@@ -61,6 +62,19 @@ to the [[http://packages.qa.debian.org/b/boost-defaults.html][package feed]].
 - supply key paths to the OM workflow and formatter factory
 - supply required paths to the applicable formatters
 - make header guards configurable
+
+*** COMPLETED Add plumbing to engine to toggle =om= on or off         :story:
+    CLOSED: [2013-12-30 Mon 19:03]
+    CLOCK: [2013-12-30 Mon 18:28]--[2013-12-30 Mon 19:03] =>  0:35
+    CLOCK: [2013-12-30 Mon 17:10]--[2013-12-30 Mon 18:28] =>  1:18
+
+We need a way to create models with =om= files superimposed on top of
+=cpp_formatter= files; this would allow us to work through the diffs
+quickly. To do so:
+
+- create a flag in workflow to enable/disable OM. default it to false.
+- pass it to backend factory.
+- update a test to have the flag set to true.
 
 *** Add required meta-data to test models                             :story:
 

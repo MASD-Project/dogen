@@ -104,19 +104,21 @@ dogen::config::settings empty_tds_mock_settings() {
 
 template<typename SettingsFactoryFunction>
 bool check_code_generation(boost::filesystem::path target,
-    SettingsFactoryFunction sff) {
+    SettingsFactoryFunction sff, const bool enable_om = false) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(target);
 
     dogen::engine::workflow w(sff(tds));
+    w.enable_om(enable_om);
     w.execute();
 
     using dogen::utility::test::asserter;
     return asserter::assert_directory(tds.expected(), tds.actual());
 }
 
-bool check_code_generation(boost::filesystem::path target) {
-    return check_code_generation(target, default_mock_settings);
+bool check_code_generation(boost::filesystem::path target,
+    const bool enable_om = false) {
+    return check_code_generation(target, default_mock_settings, enable_om);
 }
 
 }
@@ -390,6 +392,8 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
     BOOST_CHECK(check_code_generation(dia_sml::input_class_in_a_package_dia()));
+    // BOOST_CHECK(check_code_generation(
+    //         dia_sml::input_class_in_a_package_dia(), true/*enable_om*/));
 }
 
 BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code) {

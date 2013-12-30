@@ -347,6 +347,56 @@ void meta_data_tagger::copy_model_tags(meta_data_writer& writer) const {
 
     writer.add_if_key_not_found(tags::cpp::odb::enabled,
         reader.get(tags::cpp::odb::enabled));
+
+
+    if (reader.is_true(tags::cpp::types::enabled)) {
+        writer.add_if_key_not_found(tags::cpp::types::directory_name,
+            reader.get(tags::cpp::types::directory_name));
+
+        writer.add_if_key_not_found(tags::cpp::types::postfix,
+            reader.get(tags::cpp::types::postfix));
+    }
+
+    if (reader.is_true(tags::cpp::hash::standard::enabled)) {
+        writer.add_if_key_not_found(tags::cpp::hash::standard::directory_name,
+            reader.get(tags::cpp::hash::standard::directory_name));
+
+        writer.add_if_key_not_found(tags::cpp::hash::standard::postfix,
+            reader.get(tags::cpp::hash::standard::postfix));
+    }
+
+    if (reader.is_true(tags::cpp::serialization::boost::enabled)) {
+        writer.add_if_key_not_found(
+            tags::cpp::serialization::boost::directory_name,
+            reader.get(tags::cpp::serialization::boost::directory_name));
+
+        writer.add_if_key_not_found(tags::cpp::serialization::boost::postfix,
+            reader.get(tags::cpp::serialization::boost::postfix));
+    }
+
+    if (reader.is_true(tags::cpp::io::enabled)) {
+        writer.add_if_key_not_found(tags::cpp::io::directory_name,
+            reader.get(tags::cpp::io::directory_name));
+
+        writer.add_if_key_not_found(tags::cpp::io::postfix,
+            reader.get(tags::cpp::io::postfix));
+    }
+
+    if (reader.is_true(tags::cpp::test_data::enabled)) {
+        writer.add_if_key_not_found(tags::cpp::test_data::directory_name,
+            reader.get(tags::cpp::test_data::directory_name));
+
+        writer.add_if_key_not_found(tags::cpp::test_data::postfix,
+            reader.get(tags::cpp::test_data::postfix));
+    }
+
+    if (reader.is_true(tags::cpp::odb::enabled)) {
+        writer.add_if_key_not_found(tags::cpp::odb::directory_name,
+            reader.get(tags::cpp::odb::directory_name));
+
+        writer.add_if_key_not_found(tags::cpp::odb::postfix,
+            reader.get(tags::cpp::odb::postfix));
+    }
 }
 
 void meta_data_tagger::visit(sml::primitive& p) const {

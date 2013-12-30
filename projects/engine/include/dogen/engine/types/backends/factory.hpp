@@ -45,8 +45,8 @@ public:
     typedef std::vector<backend::ptr> result_type;
 
 public:
-    factory(sml::model model, config::settings settings)
-        : settings_(settings), model_(model) { }
+    factory(sml::model model, config::settings settings,
+        const bool enable_om = false);
 
 private:
     void log_cpp_backend_disabled() const;
@@ -57,6 +57,7 @@ public:
 private:
     const config::settings settings_;
     const sml::model model_;
+    const bool enable_om_;
 };
 
 } } }

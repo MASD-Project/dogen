@@ -26,8 +26,9 @@
 #endif
 
 #include <map>
-#include <utility>
 #include <string>
+#include <vector>
+#include <utility>
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
@@ -60,6 +61,7 @@ public:
 private:
     const config::settings& settings_;
     const sml::model& model_;
+    std::vector<boost::filesystem::path> managed_directories_;
 };
 
 } } }

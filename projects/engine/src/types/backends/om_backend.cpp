@@ -54,20 +54,25 @@ backend::value_type om_backend::generate() {
     boost::filesystem::path cpp_include_directory;
     std::list<boost::filesystem::path> data_files_directories;
 
-
+    const auto mn(model_.name().simple_name());
+    const auto& cpp(settings_.cpp());
     if (settings_.cpp().split_project()) {
-        cpp_source_directory = settings_.cpp().source_directory();
-        cpp_include_directory = settings_.cpp().include_directory();
+        cpp_source_directory = cpp.source_directory();
+        cpp_include_directory = cpp.include_directory();
+
+        managed_directories_.reserve(2);
+        managed_directories_.push_back(cpp_source_directory / mn);
+        managed_directories_.push_back(cpp_include_directory / mn);
     } else {
         sml::meta_data_reader reader(model_.meta_data());
         const auto src_dir(reader.get(sml::tags::cpp::source_directory));
 
-        const auto mn(model_.name().simple_name());
         const auto pd(settings_.cpp().project_directory());
         cpp_source_directory = pd / mn / src_dir;
 
         const auto inc_dir(reader.get(sml::tags::cpp::include_directory));
         cpp_include_directory = pd / mn / inc_dir;
+        managed_directories_.push_back(cpp.project_directory() / mn);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Directories used: source_directory_: "
@@ -81,13 +86,19 @@ backend::value_type om_backend::generate() {
 
     backend::value_type r;
     for (const auto& f : files)
-        r.insert(std::make_pair(f.relative_path(), f.contents()));
+        r.insert(std::make_pair(f.absolute_path(), f.contents()));
 
     return r;
 }
 
 std::vector<boost::filesystem::path> om_backend::managed_directories() const {
     std::vector<boost::filesystem::path> r;
+
+    const auto mn(model_.name().simple_name());
+    if (settings_.cpp().split_project()) {
+        r.reserve(2);
+    } else {
+    }
     return r;
 }
 

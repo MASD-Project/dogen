@@ -30,6 +30,10 @@ namespace dogen {
 namespace engine {
 namespace backends {
 
+factory::
+factory(sml::model model, config::settings settings, const bool enable_om)
+    : settings_(settings), model_(model), enable_om_(enable_om) { }
+
 void factory::log_cpp_backend_disabled() const {
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
@@ -43,7 +47,10 @@ factory::result_type factory::create() const {
 
     result_type r;
     r.push_back(cpp_backend::create(model_, settings_.cpp()));
-    // r.push_back(om_backend::create(settings_, model_));
+
+    if (enable_om_)
+        r.push_back(om_backend::create(settings_, model_));
+
     return r;
 }
 
