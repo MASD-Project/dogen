@@ -10,20 +10,21 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 19:39]
+Clock summary at [2013-12-30 Mon 19:46]
 
-| Headline                                                      | Time   |      |      |
-|---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *7:20* |      |      |
-|---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 7:20 |      |
-| IMPLEMENTATION Release notes and backlog grooming             |        |      | 1:30 |
-| COMPLETED Investigate availability of boost 1.55 for debian   |        |      | 0:18 |
-| COMPLETED Add more valgrind suppressions                      |        |      | 0:06 |
-| COMPLETED Add absolute path support to =om=                   |        |      | 2:40 |
-| COMPLETED Add plumbing to engine to toggle =om= on or off     |        |      | 1:53 |
-| COMPLETED Ensure OM header files are at the expected location |        |      | 0:35 |
-| Includer generation should be done from meta-data             |        |      | 0:18 |
+| Headline                                                                     | Time   |      |      |
+|------------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                                 | *7:28* |      |      |
+|------------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                              |        | 7:28 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 1:30 |
+| COMPLETED Investigate availability of boost 1.55 for debian                  |        |      | 0:18 |
+| COMPLETED Add more valgrind suppressions                                     |        |      | 0:06 |
+| COMPLETED Add absolute path support to =om=                                  |        |      | 2:40 |
+| COMPLETED Add plumbing to engine to toggle =om= on or off                    |        |      | 1:53 |
+| COMPLETED Ensure OM header files are at the expected location                |        |      | 0:35 |
+| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |        |      | 0:08 |
+| Includer generation should be done from meta-data                            |        |      | 0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -84,6 +85,33 @@ quickly. To do so:
 We seem to be creating om files in an incorrect directory. We need to
 fix this before we can start looking at the diffs.
 
+*** IMPLEMENTATION Fix differences in code generation between =om= and C++ model :story:
+    CLOCK: [2013-12-30 Mon 19:38]--[2013-12-30 Mon 19:46] =>  0:08
+
+The following problems have been detected by the diff:
+
+- missing licence: need to add appropriate meta data
+- missing includes: covered by this [[*Add%20include%20file%20support%20to%20main%20type%20formatter][story]].
+- default constructor is compiler generated even thought we have an
+  int
+- type of the variables is blank
+- =to_stream= has unexpectedly been added
+- =operator== has unexpectedly been added
+- member variables are public
+- no =std::swap=
+
+This story is concerned with sorting out all of these differences.
+
+*** Add include file support to main type formatter                   :story:
+
+Inclusion support needs to be moved to the formatters. SML provides
+all the required information at the model level in terms of type
+dependencies, but only the formatter itself knows what includes it
+needs because these are related to the implementation. Even
+determining which facets of a type one should include is formatter
+dependent. We need to distribute the logic of the includer into each
+formatter.
+
 *** Add required meta-data to test models                             :story:
 
 In order for om to match the C++ model we need to make sure we are
@@ -118,16 +146,6 @@ the "namespacing" structure. Example:
 This should really be:
 
 : #DOGEN identity_attribute=true
-
-*** Add include file support to main type formatter                   :story:
-
-Inclusion support needs to be moved to the formatters. SML provides
-all the required information at the model level in terms of type
-dependencies, but only the formatter itself knows what includes it
-needs because these are related to the implementation. Even
-determining which facets of a type one should include is formatter
-dependent. We need to distribute the logic of the includer into each
-formatter.
 
 *** Remove speculative facet layers for hash and serialization        :story:
 
