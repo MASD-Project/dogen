@@ -10,7 +10,7 @@ This file contains all stories that were closed during sprint 41.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-29 Sun 23:05]
+Clock summary at [2013-12-30 Mon 11:05]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
@@ -163,6 +163,13 @@ would break the tests as the output is expected to contain EOS
 stuff. Perhaps we should consider removing it altogether?
 
 Fixed as part of the PFH work.
+
+*** COMPLETED Make ODB support optional                               :story:
+    CLOSED: [2013-12-30 Mon 10:53]
+
+We should be able to build dogen without ODB. It would still generate
+all the ODB headers etc, but the database test model would not be
+compiled. This would be useful to reduce the number of dependencies.
 
 *** COMPLETED Fix spelling of =rountrip_type=                         :story:
     CLOSED: [2013-12-23 Mon 18:07]
@@ -571,10 +578,59 @@ Notes on directories:
   some logic that should really be in SML. Having said that it seems
   like the least bad option.
 
-**** Add required meta-data to test models                             :task:
+**** CANCELLED Add required meta-data to test models                   :task:
+     CLOSED: [2013-12-30 Mon 10:04]
 
 In order for om to match the C++ model we need to make sure we are
 passing in the correct meta-data such as licences, etc.
+
+*** COMPLETED It should be possible to add non-licensed files to om   :story:
+    CLOSED: [2013-12-30 Mon 10:03]
+
+At present it seems we throw when somebody attempts to add a model to
+om that has no licence tag. We should just not add a license.
+
+The problem is in =om::workflow::extract_licence=.
+
+*** COMPLETED Create the notion of toggle-able features               :story:
+    CLOSED: [2013-12-30 Mon 10:29]
+
+Often we want to disable some of the "abilities" of dogen. We
+arbitrarily call one such "ability" a _feature_. There are several
+reasons one may want to disable a feature:
+
+- we may not want to run tests for it; for instance, the machine where
+  we're compiling on doesn't have some supporting libraries (EOS, ODB,
+  etc). However, we still want the final binary to be able to produce
+  code with those features in.
+- we may not want dogen to generate code for a feature; for instance,
+  because its not required by the end-user for a specific use case.
+
+For the second case we need some command-line options that disable
+features. For the first case we want some compile time macros that
+disable tests according to the values of some macros; in addition, we
+must also automatically ensure these features are turned off for all
+other tests too. For example, if we disable EOS not only must we not
+compile and run the EOS tests, but we must also make sure the existing
+tests that have code where the EOS feature is expressed are also
+"fixed" not to take into account EOS. We do not know how to do this.
+
+This is a very big problem because it means that in order to compile
+dogen and run all tests you need to have the super-set of all
+libraries required by all features. For instance we cannot disable
+serialisation altogether just because EOS has been disabled. In cases
+where the feature maps directly to a facet, we still have a problem -
+whilst the code in git will contain the output of all features, the
+local code will only have a subset of those, and the diffs will fail.
+
+One possible solution is to have test models for each feature: boost
+serialisation test model, eos test model, etc. These would be disabled
+if the features are not turned on. We need to go through the existing
+tests during the clean up and make sure each feature is tested on a
+different model.
+
+It would also be nice if we could use the same model for all features
+and just override the model name to reflect the feature in question.
 
 ** Deprecated Development Stories
 *** CANCELLED Move extractor from C++ model into SML                  :story:
