@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create a new command line parameter for data files directories    :story:
+
+Users should be able to provide directories for their own JSON
+models. We just need to add a new parameter to driver and transport it
+all the way to OM's workflow.
+
 *** Check packaging code for PFH dependencies                         :story:
 
 We are manually copying a lot of shared objects from PFH when creating
