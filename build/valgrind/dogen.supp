@@ -156,3 +156,19 @@
    fun:_ZN3odb5pgsql8database10connectionEv
    ...
 }
+
+{
+   odb 4
+   Memcheck:Value8
+   ...
+   fun:PQconnectPoll
+   ...
+   fun:PQconnectdb
+   fun:_ZN3odb5pgsql10connectionC1ERNS0_8databaseE
+   fun:_ZN3odb5pgsql23connection_pool_factory17pooled_connectionC1ERNS0_8databaseE
+   fun:_ZN3odb5pgsql23connection_pool_factory6createEv
+   fun:_ZN3odb5pgsql23connection_pool_factory7connectEv
+   fun:_ZN3odb5pgsql8database11connection_Ev
+   fun:_ZN3odb5pgsql8database10connectionEv
+   ...
+}

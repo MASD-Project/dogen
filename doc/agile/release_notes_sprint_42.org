@@ -10,15 +10,16 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 13:01]
+Clock summary at [2013-12-30 Mon 13:54]
 
 | Headline                                                    | Time   |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *2:06* |      |      |
+| *Total time*                                                | *2:12* |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 2:06 |      |
+| Development Stories Implemented                             |        | 2:12 |      |
 | IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian |        |      | 0:18 |
+| COMPLETED Add more valgrind suppressions                    |        |      | 0:06 |
 | Includer generation should be done from meta-data           |        |      | 0:18 |
 #+end:
 
@@ -45,6 +46,10 @@ number of compilation fixes that used the downtime.
 We need to retest the PFH changes when boost 1.55 becomes available in
 debian. Checked the [[https://wiki.debian.org/Teams/DebianBoostTeam][team page]] - there is no open bug yet. Subscribed
 to the [[http://packages.qa.debian.org/b/boost-defaults.html][package feed]].
+
+*** COMPLETED Add more valgrind suppressions                           :task:
+    CLOSED: [2013-12-30 Mon 13:54]
+    CLOCK: [2013-12-30 Mon 13:48]--[2013-12-30 Mon 13:54] =>  0:06
 
 *** IMPLEMENTATION Add absolute path support to =om=                  :story:
 
@@ -208,7 +213,6 @@ serialization support.
 
 By default services would have all aspects other than domain disabled,
 entities and values would have all aspects enabled.
-
 
 *** CANCELLED Create an SML level concept for facets                  :story:
     CLOSED: [2013-12-30 Mon 10:42]
