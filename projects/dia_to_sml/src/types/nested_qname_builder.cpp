@@ -40,7 +40,9 @@ nested_qname_builder::nested_qname_builder(
     const std::list<std::string>& external_module_path,
     const std::string& model_name)
     : modules_(modules), external_module_path_(external_module_path),
-      model_name_(model_name), root_(new node), current_(root_) {
+      model_name_(model_name), root_(new node) {
+
+    current_ = root_; // try to fix valgrind warnings
 
     BOOST_LOG_SEV(lg, debug) << "Initialised with settings:"
                              << " modules: " << modules
