@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Improve OM's code generation marker                               :story:
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
 *** Clean up meta-data tagger by improving =ptree= API                :story:
 
 At present we have a lot of ugly copy and paste code in
@@ -1048,7 +1057,7 @@ New understanding:
 - The model version is a human level concept and has no direct
   relation to class versioning. It will be implemented as an
   implementation specific parameter in the Dia model and as a string
-  in the SML model class. See [[*Add%20a%20code%20generation%20marker][Add a code generation marker]].
+  in the SML model class. See [[*Improve%20OM's%20code%20generation%20marker][this story]].
 - Model version will be used for the following:
   - stamped on doxygen documentation for the model namespace;
   - stamped on DLLs, etc.
@@ -1065,7 +1074,7 @@ support.
 
 Before we can do this, we need a way of stamping a model version into
 models. This can easily be done via implementation specific
-parameters. See [[*Add%20a%20code%20generation%20marker][Add a code generation marker]].
+parameters. See [[*Improve%20OM's%20code%20generation%20marker][this story]].
 
 We then need to create some kind of strategy for version number
 management:
