@@ -10,18 +10,20 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 11:05]
+Clock summary at [2013-12-30 Mon 12:30]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *1:13* |      |      |
+| *Total time*                                      | *1:48* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 1:13 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:55 |
+| Development Stories Implemented                   |        | 1:48 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 1:30 |
 | Includer generation should be done from meta-data |        |      | 0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-12-30 Mon 11:59]--[2013-12-30 Mon 12:29] =>  0:30
+    CLOCK: [2013-12-30 Mon 11:53]--[2013-12-30 Mon 11:58] =>  0:05
     CLOCK: [2013-12-30 Mon 10:29]--[2013-12-30 Mon 11:05] =>  0:36
     CLOCK: [2013-12-30 Mon 10:00]--[2013-12-30 Mon 10:10] =>  0:10
     CLOCK: [2013-12-30 Mon 09:50]--[2013-12-30 Mon 09:59] =>  0:09
@@ -34,6 +36,14 @@ Use compilation downtime to update the manual.
 
 We never got round to doing this during this iteration as there were a
 number of compilation fixes that used the downtime.
+
+*** IMPLEMENTATION Add absolute path support to =om=                  :story:
+
+- Transport settings all the way through to the OM workflow
+- Use settings to compute the key paths: project directory, source
+  directory, include directory
+- Supply key paths to the formatter factory
+- Supply required paths to the applicable formatters
 
 *** Add required meta-data to test models                             :story:
 
