@@ -326,7 +326,7 @@ complete_constructor(const sml::object& o) const {
                           << sn << "(const "
                           << reader.get(types::complete_name);
 
-        if (reader.is_true(types::is_simple_type))
+        if (!reader.is_true(types::is_simple_type))
             context_->stream() << "&";
 
         context_->stream() << " " << p.name() << ");" << std::endl;
@@ -346,7 +346,7 @@ complete_constructor(const sml::object& o) const {
             context_->stream() << context_->indenter() << "const "
                               << reader.get(types::complete_name);
 
-            if (reader.is_true(types::is_simple_type))
+            if (!reader.is_true(types::is_simple_type))
                 context_->stream() << "&";
 
             context_->stream() << " " << p.name();
@@ -461,7 +461,7 @@ void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
 
         context_->stream() << p.name() << "(const " << cn;
 
-        if (reader.is_true(types::is_simple_type))
+        if (!reader.is_true(types::is_simple_type))
             context_->stream() << "&";
 
         context_->stream() << " v);" << std::endl;
@@ -501,7 +501,7 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
             context_->stream() << "void ";
         context_->stream() << p.name() << "(const " << cn;
 
-        if (reader.is_true(types::is_simple_type))
+        if (!reader.is_true(types::is_simple_type))
             context_->stream() << "&";
 
         context_->stream() << " v);" << std::endl;
@@ -514,7 +514,7 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
             context_->stream() << "void ";
         context_->stream() << p.name() << "(const " << cn;
 
-        if (reader.is_true(types::is_simple_type))
+        if (!reader.is_true(types::is_simple_type))
             context_->stream() << "&&";
 
         context_->stream() << " v);" << std::endl;
@@ -556,7 +556,7 @@ member_variables(const sml::object& o) const {
     if (context_->first_line_is_blank())
         context_->utility().blank_line();
 
-    context_->utility().public_access_specifier();
+    context_->utility().private_access_specifier();
     for (const auto p : o.local_properties()) {
         sml::meta_data_reader reader(p.meta_data());
         context_->stream() << context_->indenter()

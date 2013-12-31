@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/meta_data_error.hpp"
+#include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/enumeration.hpp"
@@ -61,8 +62,6 @@ const std::string hash_directory("hash");
 const std::string serialization_directory("serialization");
 const std::string test_data_directory("test_data");
 const std::string odb_directory("odb");
-
-const std::string scope_operator("::");
 
 const bool is_header_file(true);
 
@@ -224,64 +223,6 @@ bool meta_data_tagger::is_facet_enabled(
     return i != enabled_facets.end();
 }
 
-std::string meta_data_tagger::cpp_qualified_name(const sml::qname& qn) const {
-    std::ostringstream s;
-
-    if (!qn.model_name().empty())
-        s << qn.model_name() << scope_operator;
-
-    bool is_first(false);
-    for (const auto& p : qn.module_path()) {
-        if (is_first)
-            s << scope_operator;
-        s << p;
-    }
-
-    s << qn.simple_name();
-    return s.str();
-}
-
-std::string meta_data_tagger::filename_for_qname(
-    const meta_data_reader& reader, const bool is_header, const qname& qn,
-    const std::string& facet_directory, const std::string& facet_postfix,
-    const std::string& additional_postfix) const {
-
-    boost::filesystem::path r;
-    if (reader.is_true(tags::cpp::split_project)) {
-        for(auto n : qn.external_module_path())
-            r /= n;
-    }
-
-    if (reader.is_true(tags::cpp::split_project))
-        r /= qn.model_name();
-    else if (is_header) {
-        for(auto n : qn.external_module_path())
-            r /= n;
-        r /= qn.model_name();
-    }
-
-    if (reader.is_true(tags::cpp::enable_facet_folders))
-        r /= facet_directory;
-
-    for(auto n : qn.module_path())
-        r /= n;
-
-    std::ostringstream stream;
-    stream << qn.simple_name() << additional_postfix;
-
-    if (reader.is_true(tags::cpp::enable_unique_file_names))
-        stream << facet_postfix;
-
-    if (is_header)
-        stream << reader.get(tags::cpp::header_file_extension);
-    else
-        stream << reader.get(tags::cpp::implementation_file_extension);
-
-    r /= stream.str();
-
-    return r.generic_string();
-}
-
 void meta_data_tagger::copy_model_tags(meta_data_writer& writer) const {
     meta_data_reader reader(context_->model().meta_data());
 
@@ -423,12 +364,14 @@ void meta_data_tagger::operator()(type& t) const {
 
     meta_data_reader reader(t.meta_data());
     writer.add_if_key_not_found(tags::cpp::types::qualified_name,
-        cpp_qualified_name(t.name()));
+        builder_.cpp_qualified_name(t.name()));
 
     using gt = generation_types;
     if (reader.is_true(tags::cpp::types::enabled)) {
-        const auto header_fn(filename_for_qname(reader, is_header_file,
-                t.name(), reader.get(tags::cpp::types::directory_name),
+        const auto header_fn(builder_.cpp_filename_for_qname(
+                t.meta_data(),
+                is_header_file, t.name(),
+                reader.get(tags::cpp::types::directory_name),
                 reader.get(tags::cpp::types::postfix),
                 empty_postfix));
 
@@ -462,8 +405,9 @@ void meta_data_tagger::operator()(type& t) const {
                 tags::cpp::types::header_file::generate, tags::bool_false);
         }
 
-        const auto impl_fn(filename_for_qname(reader, !is_header_file,
-                t.name(), reader.get(tags::cpp::types::directory_name),
+        const auto impl_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                !is_header_file, t.name(),
+                reader.get(tags::cpp::types::directory_name),
                 reader.get(tags::cpp::types::postfix),
                 empty_postfix));
 
@@ -493,8 +437,9 @@ void meta_data_tagger::operator()(type& t) const {
                 tags::bool_false);
         }
 
-        const auto fwd_fn(filename_for_qname(reader, is_header_file,
-                t.name(), reader.get(tags::cpp::types::directory_name),
+        const auto fwd_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                is_header_file, t.name(),
+                reader.get(tags::cpp::types::directory_name),
                 reader.get(tags::cpp::types::postfix),
                 empty_postfix));
 
@@ -537,8 +482,8 @@ void meta_data_tagger::operator()(type& t) const {
     }
 
     if (reader.is_true(tags::cpp::hash::standard::enabled)) {
-        const auto header_fn(filename_for_qname(reader, is_header_file,
-                t.name(),
+        const auto header_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                is_header_file, t.name(),
                 reader.get(tags::cpp::hash::standard::directory_name),
                 reader.get(tags::cpp::hash::standard::postfix),
                 empty_postfix));
@@ -550,7 +495,7 @@ void meta_data_tagger::operator()(type& t) const {
             tags::cpp::hash::standard::header_file::is_system,
             tags::bool_false);
 
-                if (t.generation_type() == gt::full_generation) {
+        if (t.generation_type() == gt::full_generation) {
             writer.add_if_key_not_found(
                 tags::cpp::hash::standard::header_file::generate,
                 tags::bool_true);
@@ -580,8 +525,8 @@ void meta_data_tagger::operator()(type& t) const {
                 tags::bool_false);
         }
 
-        const auto impl_fn(filename_for_qname(reader, !is_header_file,
-                t.name(),
+        const auto impl_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                !is_header_file, t.name(),
                 reader.get(tags::cpp::hash::standard::directory_name),
                 reader.get(tags::cpp::hash::standard::postfix),
                 empty_postfix));
@@ -616,8 +561,8 @@ void meta_data_tagger::operator()(type& t) const {
     }
 
     if (reader.is_true(tags::cpp::serialization::boost::enabled)) {
-        const auto header_fn(filename_for_qname(reader, is_header_file,
-                t.name(),
+        const auto header_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                is_header_file, t.name(),
                 reader.get(tags::cpp::serialization::boost::directory_name),
                 reader.get(tags::cpp::serialization::boost::postfix),
                 empty_postfix));
@@ -659,8 +604,8 @@ void meta_data_tagger::operator()(type& t) const {
                 tags::bool_false);
         }
 
-        const auto impl_fn(filename_for_qname(reader, !is_header_file,
-                t.name(),
+        const auto impl_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                !is_header_file, t.name(),
                 reader.get(tags::cpp::serialization::boost::directory_name),
                 reader.get(tags::cpp::serialization::boost::postfix),
                 empty_postfix));
@@ -699,8 +644,9 @@ void meta_data_tagger::operator()(type& t) const {
     }
 
     if (reader.is_true(tags::cpp::io::enabled)) {
-        const auto header_fn(filename_for_qname(reader, is_header_file,
-                t.name(), reader.get(tags::cpp::io::directory_name),
+        const auto header_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                is_header_file, t.name(),
+                reader.get(tags::cpp::io::directory_name),
                 reader.get(tags::cpp::io::postfix),
                 empty_postfix));
 
@@ -740,8 +686,9 @@ void meta_data_tagger::operator()(type& t) const {
                 tags::bool_false);
         }
 
-        const auto impl_fn(filename_for_qname(reader, !is_header_file,
-                t.name(), reader.get(tags::cpp::io::directory_name),
+        const auto impl_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                !is_header_file, t.name(),
+                reader.get(tags::cpp::io::directory_name),
                 reader.get(tags::cpp::io::postfix),
                 empty_postfix));
 
@@ -778,8 +725,9 @@ void meta_data_tagger::operator()(type& t) const {
     }
 
     if (reader.is_true(tags::cpp::test_data::enabled)) {
-        const auto header_fn(filename_for_qname(reader, is_header_file,
-                t.name(), reader.get(tags::cpp::test_data::directory_name),
+        const auto header_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                is_header_file, t.name(),
+                reader.get(tags::cpp::test_data::directory_name),
                 reader.get(tags::cpp::test_data::postfix),
                 empty_postfix));
 
@@ -821,7 +769,8 @@ void meta_data_tagger::operator()(type& t) const {
                 tags::bool_false);
         }
 
-        const auto impl_fn(filename_for_qname(reader, !is_header_file,
+        const auto impl_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                !is_header_file,
                 t.name(), reader.get(tags::cpp::test_data::directory_name),
                 reader.get(tags::cpp::test_data::postfix),
                 empty_postfix));
@@ -859,8 +808,9 @@ void meta_data_tagger::operator()(type& t) const {
     }
 
     if (reader.is_true(tags::cpp::odb::enabled)) {
-        const auto header_fn(filename_for_qname(reader, is_header_file,
-                t.name(), reader.get(tags::cpp::odb::directory_name),
+        const auto header_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                is_header_file, t.name(),
+                reader.get(tags::cpp::odb::directory_name),
                 reader.get(tags::cpp::odb::postfix),
                 empty_postfix));
 
@@ -931,8 +881,8 @@ void meta_data_tagger::operator()(module& m) const {
     qn.simple_name(m.name().model_name());
 
     meta_data_reader reader(m.meta_data());
-    const auto fn(filename_for_qname(reader, is_header_file, qn,
-            reader.get(tags::cpp::types::directory_name),
+    const auto fn(builder_.cpp_filename_for_qname(m.meta_data(), is_header_file,
+            qn, reader.get(tags::cpp::types::directory_name),
             reader.get(tags::cpp::types::postfix),
             empty_postfix));
 
@@ -947,10 +897,37 @@ void meta_data_tagger::operator()(concept& /*c*/) const {
     // nothing to do for concepts
 }
 
+void meta_data_tagger::tag(property& p) const {
+    meta_data_writer w(p.meta_data());
+    std::string cn;
+    builder_.cpp_complete_name(p.type(), cn);
+    w.add_if_key_not_found(tags::cpp::types::complete_name, cn);
+
+    const auto i(context_->model().primitives().find(p.type().type()));
+    const bool is_primitive(i != context_->model().primitives().end());
+    const auto j(context_->model().enumerations().find(p.type().type()));
+    const bool is_enumeration(j != context_->model().enumerations().end());
+    const bool is_simple_type(is_primitive || is_enumeration);
+
+    w.add_if_key_not_found(tags::cpp::types::is_simple_type,
+        is_simple_type ? tags::bool_true : tags::bool_false);
+}
+
 void meta_data_tagger::tag(object& o) const {
     meta_data_writer writer(o.meta_data());
     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
         tags::bool_false);
+
+    for (auto& p : o.all_properties())
+        tag(p);
+
+    for (auto& p : o.local_properties())
+        tag(p);
+
+    for (auto& pair : o.inherited_properties()) {
+        for (auto& p : pair.second)
+            tag(p);
+    }
 
     const auto i(o.relationships().find(relationship_types::original_parents));
     if (i != o.relationships().end() && !i->second.empty()) {
@@ -980,7 +957,7 @@ void meta_data_tagger::tag(object& o) const {
 
         writer.add_if_key_not_found(
             tags::cpp::types::qualified_original_parent_name,
-            cpp_qualified_name(opn));
+            builder_.cpp_qualified_name(opn));
     }
 
     writer.add_if_key_not_found(tags::cpp::types::generate_accept,
@@ -1087,7 +1064,8 @@ void meta_data_tagger::tag(model& m) const {
             // correct file name for the model.
             qname qn(m.name());
             qn.simple_name(m.name().model_name());
-            const auto fn(filename_for_qname(reader, is_header_file, qn,
+            const auto fn(builder_.cpp_filename_for_qname(m.meta_data(),
+                    is_header_file, qn,
                     reader.get(tags::cpp::types::directory_name),
                     reader.get(tags::cpp::types::postfix),
                     empty_postfix));
@@ -1103,8 +1081,9 @@ void meta_data_tagger::tag(model& m) const {
         qn.simple_name(cpp_includer_file_name);
         qn.model_name(m.name().model_name());
         qn.external_module_path(m.name().external_module_path());
-        const auto includers_fn(filename_for_qname(reader, is_header_file,
-                qn, reader.get(tags::cpp::types::directory_name),
+        const auto includers_fn(builder_.cpp_filename_for_qname(m.meta_data(),
+                is_header_file, qn,
+                reader.get(tags::cpp::types::directory_name),
                 reader.get(tags::cpp::types::postfix),
                 empty_postfix));
 
@@ -1126,8 +1105,9 @@ void meta_data_tagger::tag(model& m) const {
         qn.simple_name(cpp_includer_file_name);
         qn.model_name(m.name().model_name());
         qn.external_module_path(m.name().external_module_path());
-        const auto includers_fn(filename_for_qname(reader, is_header_file,
-                qn, reader.get(tags::cpp::hash::standard::directory_name),
+        const auto includers_fn(builder_.cpp_filename_for_qname(m.meta_data(),
+                is_header_file, qn,
+                reader.get(tags::cpp::hash::standard::directory_name),
                 reader.get(tags::cpp::hash::standard::postfix),
                 empty_postfix));
 
@@ -1151,7 +1131,8 @@ void meta_data_tagger::tag(model& m) const {
         qn.simple_name(cpp_includer_file_name);
         qn.model_name(m.name().model_name());
         qn.external_module_path(m.name().external_module_path());
-        const auto includers_fn(filename_for_qname(reader, is_header_file, qn,
+        const auto includers_fn(builder_.cpp_filename_for_qname(m.meta_data(),
+                is_header_file, qn,
                 reader.get(tags::cpp::serialization::boost::directory_name),
                 reader.get(tags::cpp::serialization::boost::postfix),
                 empty_postfix));
@@ -1176,8 +1157,8 @@ void meta_data_tagger::tag(model& m) const {
         qn.simple_name(cpp_includer_file_name);
         qn.model_name(m.name().model_name());
         qn.external_module_path(m.name().external_module_path());
-        const auto includers_fn(filename_for_qname(reader, is_header_file,
-                qn, reader.get(tags::cpp::io::directory_name),
+        const auto includers_fn(builder_.cpp_filename_for_qname(m.meta_data(),
+                is_header_file, qn, reader.get(tags::cpp::io::directory_name),
                 reader.get(tags::cpp::io::postfix),
                 empty_postfix));
 
@@ -1199,8 +1180,9 @@ void meta_data_tagger::tag(model& m) const {
         qn.simple_name(cpp_includer_file_name);
         qn.model_name(m.name().model_name());
         qn.external_module_path(m.name().external_module_path());
-        const auto includers_fn(filename_for_qname(reader, is_header_file,
-                qn, reader.get(tags::cpp::test_data::directory_name),
+        const auto includers_fn(builder_.cpp_filename_for_qname(m.meta_data(),
+                is_header_file, qn,
+                reader.get(tags::cpp::test_data::directory_name),
                 reader.get(tags::cpp::test_data::postfix),
                 empty_postfix));
 
@@ -1223,8 +1205,8 @@ void meta_data_tagger::tag(model& m) const {
         qn.simple_name(cpp_includer_file_name);
         qn.model_name(m.name().model_name());
         qn.external_module_path(m.name().external_module_path());
-        const auto includers_fn(filename_for_qname(reader, is_header_file,
-                qn, reader.get(tags::cpp::odb::directory_name),
+        const auto includers_fn(builder_.cpp_filename_for_qname(m.meta_data(),
+                is_header_file, qn, reader.get(tags::cpp::odb::directory_name),
                 reader.get(tags::cpp::odb::postfix),
                 empty_postfix));
 

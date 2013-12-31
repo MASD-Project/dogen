@@ -10,21 +10,21 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-31 Tue 13:29]
+Clock summary at [2013-12-31 Tue 15:41]
 
-| Headline                                                                     | Time   |      |      |
-|------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *8:33* |      |      |
-|------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 8:33 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 1:30 |
-| COMPLETED Investigate availability of boost 1.55 for debian                  |        |      | 0:18 |
-| COMPLETED Add more valgrind suppressions                                     |        |      | 0:06 |
-| COMPLETED Add absolute path support to =om=                                  |        |      | 2:40 |
-| COMPLETED Add plumbing to engine to toggle =om= on or off                    |        |      | 1:53 |
-| COMPLETED Ensure OM header files are at the expected location                |        |      | 0:35 |
-| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |        |      | 1:13 |
-| Includer generation should be done from meta-data                            |        |      | 0:18 |
+| Headline                                                                     | Time    |       |      |
+|------------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                 | *10:44* |       |      |
+|------------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                              |         | 10:44 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:30 |
+| COMPLETED Investigate availability of boost 1.55 for debian                  |         |       | 0:18 |
+| COMPLETED Add more valgrind suppressions                                     |         |       | 0:06 |
+| COMPLETED Add absolute path support to =om=                                  |         |       | 2:40 |
+| COMPLETED Add plumbing to engine to toggle =om= on or off                    |         |       | 1:53 |
+| COMPLETED Ensure OM header files are at the expected location                |         |       | 0:35 |
+| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |         |       | 3:24 |
+| Includer generation should be done from meta-data                            |         |       | 0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -93,10 +93,8 @@ The following problems have been detected by the diff:
 - missing includes: covered by this [[*Add%20include%20file%20support%20to%20main%20type%20formatter][story]].
 - default constructor is compiler generated even thought we have an
   int
-- type of the variables is blank
 - =to_stream= has unexpectedly been added
 - =operator== has unexpectedly been added
-- member variables are public
 - no =std::swap=
 
 This story is concerned with sorting out all of these differences.
@@ -106,6 +104,25 @@ This story is concerned with sorting out all of these differences.
      CLOCK: [2013-12-31 Tue 12:24]--[2013-12-31 Tue 13:29] =>  1:05
 
 Licence not coming out, need to add appropriate meta data.
+
+**** COMPLETED Type of the variables is blank                          :task:
+     CLOSED: [2013-12-31 Tue 15:41]
+     CLOCK: [2013-12-31 Tue 13:53]--[2013-12-31 Tue 15:41] =>  1:48
+     CLOCK: [2013-12-31 Tue 13:30]--[2013-12-31 Tue 13:53] =>  0:23
+
+Problems:
+
+- instead of =int= we're getting nothing at all.
+- member variables are public
+
+We were missing the entire story of tagging properties with required
+meta-data.
+
+*** Add tests for =flat_name_builder=                                 :story:
+
+We refactored tagger code related to flattening names into this class
+but added no tests. We need good coverage, hopefully available from
+C++ formatters.
 
 *** Add include file support to main type formatter                   :story:
 

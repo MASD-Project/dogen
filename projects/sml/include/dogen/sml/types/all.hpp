@@ -25,6 +25,7 @@
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
+#include "dogen/sml/types/flat_name_builder.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/indexing_error.hpp"

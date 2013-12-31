@@ -30,8 +30,8 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/meta_data_writer.hpp"
+#include "dogen/sml/types/flat_name_builder.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/type.hpp"
@@ -81,20 +81,6 @@ private:
 
 private:
     /**
-     * @brief Returns a C++ qualified name for the SML qname.
-     */
-    std::string cpp_qualified_name(const sml::qname& qn) const;
-
-    /**
-     * @brief Returns the file name for the given qname and facet.
-     */
-    std::string filename_for_qname(const meta_data_reader& reader,
-        const bool is_header, const qname& qn,
-        const std::string& facet_directory,
-        const std::string& facet_postfix,
-        const std::string& additional_postfix) const;
-
-    /**
      * @brief Copies across all tags from the model into the taggable
      * using the writer.
      */
@@ -124,7 +110,12 @@ public:
 
 public:
     /**
-     * @brief Adds meta-data to the abstract object supplied.
+     * @brief Adds meta-data to the property supplied.
+     */
+    void tag(property& p) const;
+
+    /**
+     * @brief Adds meta-data to the object supplied.
      */
     void tag(object& o) const;
 
@@ -143,6 +134,7 @@ public:
 
 private:
     mutable std::shared_ptr<context> context_;
+    flat_name_builder builder_;
 };
 
 } }
