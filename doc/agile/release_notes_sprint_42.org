@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-31 Tue 16:28]
+Clock summary at [2013-12-31 Tue 16:52]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *11:18* |       |      |
+| *Total time*                                                                 | *11:34* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 11:18 |      |
+| Development Stories Implemented                                              |         | 11:34 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian                  |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                     |         |       | 0:06 |
 | COMPLETED Add absolute path support to =om=                                  |         |       | 2:40 |
 | COMPLETED Add plumbing to engine to toggle =om= on or off                    |         |       | 1:53 |
 | COMPLETED Ensure OM header files are at the expected location                |         |       | 0:35 |
-| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |         |       | 3:58 |
+| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |         |       | 4:14 |
 | Includer generation should be done from meta-data                            |         |       | 0:18 |
 #+end:
 
@@ -88,14 +88,10 @@ fix this before we can start looking at the diffs.
 *** IMPLEMENTATION Fix differences in code generation between =om= and C++ model :story:
     CLOCK: [2013-12-30 Mon 19:38]--[2013-12-30 Mon 19:46] =>  0:08
 
-The following problems have been detected by the diff:
+Problems have been detected by the diff, and attached to this story as
+tasks. One item won't be handled by this story:
 
-- missing includes: covered by this [[*Add%20include%20file%20support%20to%20main%20type%20formatter][story]].
-- =to_stream= has unexpectedly been added
-- =operator== has unexpectedly been added
-- no =std::swap=
-
-This story is concerned with sorting out all of these differences.
+-  missing includes: already covered by this [[*Add%20include%20file%20support%20to%20main%20type%20formatter][story]].
 
 **** COMPLETED Missing licence                                         :task:
      CLOSED: [2013-12-31 Tue 13:21]
@@ -123,11 +119,17 @@ meta-data.
 It should have been manually generated as we have an int member
 variable.
 
-*** Add tests for =flat_name_builder=                                 :story:
+**** COMPLETED =to_stream= and - =operator== have been added           :task:
+     CLOSED: [2013-12-31 Tue 16:38]
+     CLOCK: [2013-12-31 Tue 16:34]--[2013-12-31 Tue 16:50] =>  0:07
 
-We refactored tagger code related to flattening names into this class
-but added no tests. We need good coverage, hopefully available from
-C++ formatters.
+Should only be added in inheritance scenarios.
+
+Partially fixes the swap issue, but more work still required.
+
+**** IMPLEMENTATION No external =std::swap=                            :task:
+
+The swap function is not being generated.
 
 *** Add include file support to main type formatter                   :story:
 
@@ -143,6 +145,12 @@ formatter.
 
 In order for om to match the C++ model we need to make sure we are
 passing in the correct meta-data such as licences, etc.
+
+*** Add tests for =flat_name_builder=                                 :story:
+
+We refactored tagger code related to flattening names into this class
+but added no tests. We need good coverage, hopefully available from
+C++ formatters.
 
 *** Add tests for =annotation_factory=                                :story:
 
