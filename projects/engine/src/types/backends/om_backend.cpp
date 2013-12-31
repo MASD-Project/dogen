@@ -49,10 +49,14 @@ create(const config::settings& settings, const sml::model& model) {
 }
 
 backend::value_type om_backend::generate() {
+    using namespace dogen::utility::filesystem;
+    std::list<boost::filesystem::path> data_files_directories {
+        data_files_directory()
+    };
+
     boost::filesystem::path project_directory;
     boost::filesystem::path cpp_source_directory;
     boost::filesystem::path cpp_include_directory;
-    std::list<boost::filesystem::path> data_files_directories;
 
     const auto mn(model_.name().model_name());
     BOOST_LOG_SEV(lg, debug) << "Model name: " << mn;
@@ -97,14 +101,7 @@ backend::value_type om_backend::generate() {
 }
 
 std::vector<boost::filesystem::path> om_backend::managed_directories() const {
-    std::vector<boost::filesystem::path> r;
-
-    const auto mn(model_.name().simple_name());
-    if (settings_.cpp().split_project()) {
-        r.reserve(2);
-    } else {
-    }
-    return r;
+    return managed_directories_;
 }
 
 } } }

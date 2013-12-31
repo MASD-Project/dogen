@@ -91,9 +91,8 @@ format_preamble(std::ostream& s, const annotation& a) const {
     }
 
     add_marker(content, a.code_generation_marker());
-    if (a.licence()) {
+    if (a.licence())
         add_licence(content, *a.licence());
-    }
 
     if (content.empty())
         return;

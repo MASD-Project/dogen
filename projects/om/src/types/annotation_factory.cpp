@@ -36,7 +36,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("om.workflow"));
+auto lg(logger_factory("om.annotation_factory"));
 const std::string missing_context_ptr("Context pointer is null");
 const std::string modeline_groups_dir("modeline_groups");
 const std::string licence_dir("licences");
@@ -123,6 +123,11 @@ void annotation_factory::hydrate_modelines() {
     hydration_workflow<modeline_group_hydrator> hw;
     modeline_groups_ = hw.hydrate(dirs);
 
+    if (modeline_groups_.empty()) {
+        BOOST_LOG_SEV(lg, warn) << "Did not find any modeline groups.";
+        return;
+    }
+
     BOOST_LOG_SEV(lg, info) << "Loaded modeline groups. Found: "
                             << modeline_groups_.size();
     BOOST_LOG_SEV(lg, debug) << "contents: " << modeline_groups_;
@@ -135,8 +140,12 @@ void annotation_factory::hydrate_licences() {
     hydration_workflow<licence_hydrator> hw(lh);
     licences_ = hw.hydrate(dirs);
 
-    BOOST_LOG_SEV(lg, info) << "Loaded licences. Found: "
-                            << licences_.size();
+    if (licences_.empty()) {
+        BOOST_LOG_SEV(lg, warn) << "Did not find any licences.";
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, info) << "Loaded licences. Found: " << licences_.size();
     BOOST_LOG_SEV(lg, debug) << "contents: " << licences_;
 }
 

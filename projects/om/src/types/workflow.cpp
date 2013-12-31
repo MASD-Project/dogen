@@ -21,6 +21,7 @@
 #include <list>
 #include "dogen/sml/types/type.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/all_types_traversal.hpp"
 #include "dogen/sml/types/tags.hpp"
@@ -59,6 +60,12 @@ workflow::workflow(const boost::filesystem::path& project_directory,
     const boost::filesystem::path& cpp_include_directory,
     const std::list<boost::filesystem::path>& data_files_directories)
     : annotation_factory_(data_files_directories) {
+
+    if (data_files_directories.empty())
+        BOOST_LOG_SEV(lg, warn) << "No data files directory provided.";
+    else
+        BOOST_LOG_SEV(lg, warn) << "Data directories:"
+                                << data_files_directories;
 
     annotation_factory_.load_reference_data();
     formatter_factory ff(project_directory, cpp_source_directory,

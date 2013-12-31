@@ -22,6 +22,7 @@
 #include <sstream>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/sml/types/meta_data_writer.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -56,18 +57,18 @@ const std::string type_with_no_properties(
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or (at
- * your option) any later version.
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
- * USA
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef SOME_MODEL_0_SOME_TYPE_0_HPP
@@ -98,18 +99,18 @@ const std::string model_with_comments(R"(/* -*- mode: c++; tab-width: 4; indent-
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or (at
- * your option) any later version.
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
- * USA
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef SOME_MODEL_0_SOME_MODEL_0_HPP
@@ -132,6 +133,7 @@ namespace some_model_0 {
 
 using namespace dogen::om;
 using namespace dogen::utility::test;
+using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(workflow)
 
@@ -151,11 +153,8 @@ BOOST_AUTO_TEST_CASE(empty_mock_model_results_in_expected_files) {
     BOOST_REQUIRE(r.size() == 1);
     BOOST_CHECK(factory.is_file_for_qname(r.front().relative_path(), m.name()));
 
-    BOOST_LOG_SEV(lg, debug) << "expected: <start>" << model_with_comments
-                             << "<end>";
-    BOOST_LOG_SEV(lg, debug) << "actual: <start>" << r.front().contents()
-                             << "<end>";
-    BOOST_CHECK(model_with_comments == r.front().contents());
+    const auto& c(r.front().contents());
+    BOOST_CHECK(asserter::assert_equals_marker(model_with_comments, c));
 }
 
 BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
@@ -178,22 +177,13 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
     for (const auto& f : r) {
         if (factory.is_file_for_qname(f.relative_path(), m.name())) {
             found_model = true;
-            BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                                     << model_with_comments
-                                     << "<end>";
-            BOOST_LOG_SEV(lg, debug) << "actual: <start>"
-                                     << f.contents()
-                                     << "<end>";
-            BOOST_CHECK(model_with_comments == f.contents());
+            const auto& c(f.contents());
+            BOOST_CHECK(asserter::assert_equals_marker(model_with_comments, c));
         } else if (factory.is_file_for_qname(f.relative_path(), o.name())) {
             found_type = true;
-            BOOST_LOG_SEV(lg, debug) << "expected: <start>"
-                                     << type_with_no_properties
-                                     << "<end>";
-            BOOST_LOG_SEV(lg, debug) << "actual: <start>"
-                                     << f.contents()
-                                     << "<end>";
-            BOOST_CHECK(type_with_no_properties == f.contents());
+            const auto& c(f.contents());
+            BOOST_CHECK(
+                asserter::assert_equals_marker(type_with_no_properties, c));
         }
         else
             BOOST_FAIL("Unexpected file: " << f.relative_path());

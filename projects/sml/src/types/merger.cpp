@@ -133,6 +133,7 @@ void merger::add_target(const model& target) {
     merged_model_.leaves(target.leaves());
     merged_model_.modules(target.modules());
     merged_model_.references(target.references());
+    merged_model_.meta_data(target.meta_data());
 
     add(target);
     BOOST_LOG_SEV(lg, debug) << "added target model: "

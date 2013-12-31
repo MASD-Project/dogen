@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 19:46]
+Clock summary at [2013-12-31 Tue 13:29]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *7:28* |      |      |
+| *Total time*                                                                 | *8:33* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 7:28 |      |
+| Development Stories Implemented                                              |        | 8:33 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian                  |        |      | 0:18 |
 | COMPLETED Add more valgrind suppressions                                     |        |      | 0:06 |
 | COMPLETED Add absolute path support to =om=                                  |        |      | 2:40 |
 | COMPLETED Add plumbing to engine to toggle =om= on or off                    |        |      | 1:53 |
 | COMPLETED Ensure OM header files are at the expected location                |        |      | 0:35 |
-| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |        |      | 0:08 |
+| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |        |      | 1:13 |
 | Includer generation should be done from meta-data                            |        |      | 0:18 |
 #+end:
 
@@ -90,7 +90,6 @@ fix this before we can start looking at the diffs.
 
 The following problems have been detected by the diff:
 
-- missing licence: need to add appropriate meta data
 - missing includes: covered by this [[*Add%20include%20file%20support%20to%20main%20type%20formatter][story]].
 - default constructor is compiler generated even thought we have an
   int
@@ -101,6 +100,12 @@ The following problems have been detected by the diff:
 - no =std::swap=
 
 This story is concerned with sorting out all of these differences.
+
+**** COMPLETED missing licence                                         :task:
+     CLOSED: [2013-12-31 Tue 13:21]
+     CLOCK: [2013-12-31 Tue 12:24]--[2013-12-31 Tue 13:29] =>  1:05
+
+Licence not coming out, need to add appropriate meta data.
 
 *** Add include file support to main type formatter                   :story:
 
