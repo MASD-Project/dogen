@@ -86,6 +86,12 @@ private:
      */
     void copy_model_tags(meta_data_writer& writer) const;
 
+    /**
+     * @brief Returns true if an explicit move constructor is
+     * required, false otherwise.
+     */
+    bool generate_explicit_move_constructor(const nested_qname& nqn) const;
+
 private:
     using sml::type_visitor::visit;
     void visit(sml::primitive& p) const override;

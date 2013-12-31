@@ -342,6 +342,21 @@ void meta_data_tagger::copy_model_tags(meta_data_writer& writer) const {
     }
 }
 
+bool meta_data_tagger::
+generate_explicit_move_constructor(const nested_qname& nqn) const {
+    const auto type_name(nqn.type().simple_name());
+    if (type_name == "optional" || type_name == "path" ||
+        type_name == "variant" || type_name == "time_duration" ||
+        type_name == "ptree")
+        return true;
+
+    for (const auto c : nqn.children()) {
+        if (generate_explicit_move_constructor(c))
+            return true;
+    }
+    return false;
+}
+
 void meta_data_tagger::visit(sml::primitive& p) const {
     meta_data_writer writer(p.meta_data());
     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
@@ -918,10 +933,31 @@ void meta_data_tagger::tag(object& o) const {
     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
         tags::bool_false);
 
-    for (auto& p : o.all_properties())
-        tag(p);
+    bool generate_explicit_move_constructor(false);
+    bool generate_explicit_default_constructor(false);
+    for (auto& p : o.local_properties()) {
+        if (!generate_explicit_move_constructor)
+            generate_explicit_move_constructor =
+                this->generate_explicit_move_constructor(p.type());
 
-    for (auto& p : o.local_properties())
+        tag(p);
+        meta_data_reader reader(p.meta_data());
+        if (!generate_explicit_default_constructor)
+            generate_explicit_default_constructor =
+                reader.is_true(tags::cpp::types::is_simple_type);
+    }
+
+    writer.add_if_key_not_found(
+        tags::cpp::types::generate_explicit_move_constructor,
+        generate_explicit_move_constructor ?
+        tags::bool_true : tags::bool_false);
+
+    writer.add_if_key_not_found(
+        tags::cpp::types::generate_explicit_default_constructor,
+        generate_explicit_default_constructor ?
+        tags::bool_true : tags::bool_false);
+
+    for (auto& p : o.all_properties())
         tag(p);
 
     for (auto& pair : o.inherited_properties()) {
