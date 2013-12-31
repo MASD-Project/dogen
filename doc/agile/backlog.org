@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Use consistently the American spelling for license                :story:
+
+We have a mix of American and British spelling of license (e.g. data
+file folder is called licence. For details on the subject see [[http://www.future-perfect.co.uk/grammar-tip/is-it-license-or-licence/][this
+article]].
+
+We are going to take the easy approach as we did for serialisation and
+make all the code artefacts American. Documentation etc is not that
+important.
+
 *** Improve OM's code generation marker                               :story:
 
 Things the marker can/should have:
