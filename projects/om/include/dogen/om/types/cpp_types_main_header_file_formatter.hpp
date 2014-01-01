@@ -51,7 +51,7 @@ public:
         cpp_types_main_header_file_formatter&&) = default;
 
 private:
-    class context;
+    class helper;
 
 public:
     explicit cpp_types_main_header_file_formatter(
@@ -65,14 +65,25 @@ private:
     std::list<std::string> namespaces(const sml::qname& qn) const;
 
     /**
-     * @brief Returns a C++ qualified name for the SML qname.
+     * @brief Throws if helper is null.
      */
-    std::string cpp_qualified_name(const sml::qname& qn) const;
+    void ensure_non_null_helper() const;
+
+private:
+    /**
+     * @brief Formats the out-of-class equality operator.
+     */
+    void external_equality(const sml::object& o) const;
 
     /**
-     * @brief Throws if context is null.
+     * @brief Formats out-of-class swap method.
      */
-    void ensure_non_null_context() const;
+    void external_swap(const sml::object& o) const;
+
+    /**
+     * @brief Formats out-class inserter operator.
+     */
+    void external_inserter(const sml::object& o) const;
 
 private:
     /**
@@ -137,13 +148,46 @@ private:
      */
     void getters_and_setters(const sml::object& o) const;
 
+    /**
+     * @brief Formats member variables.
+     */
     void member_variables(const sml::object& o) const;
-    void equality(const sml::object& o) const;
+
+    /**
+     * @brief Formats the in-class equality operator.
+     */
+    void internal_equality(const sml::object& o) const;
+
+    /**
+     * @brief Formats the to stream method.
+     */
     void to_stream(const sml::object& o) const;
-    void swap(const sml::object& o) const;
-    void assignment(const sml::object& o) const;
+
+    /**
+     * @brief Formats in-class swap method.
+     */
+    void internal_swap(const sml::object& o) const;
+
+    /**
+     * @brief Formats the in-class assignment operator.
+     */
+    void internal_assignment(const sml::object& o) const;
+
+    /**
+     * @brief Formats the visitor pattern related methods.
+     */
     void visitor_method(const sml::object& o) const;
+
+    /**
+     * @brief Entry point for object formatting.
+     */
     void format(const sml::object& o) const;
+
+private:
+    /**
+     * @brief Uses the current state of the helper to create a file.
+     */
+    file make_file(const boost::property_tree::ptree& meta_data) const;
 
 private:
     using sml::type_visitor::visit;
@@ -159,7 +203,7 @@ public:
 
 private:
     const boost::filesystem::path include_directory_;
-    mutable std::shared_ptr<context> context_;
+    mutable std::shared_ptr<helper> helper_;
     comment_formatter doxygen_next_;
     comment_formatter doxygen_previous_;
 };

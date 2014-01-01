@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-31 Tue 16:52]
+Clock summary at [2014-01-01 Wed 13:07]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *11:34* |       |      |
+| *Total time*                                                                 | *12:46* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 11:34 |      |
+| Development Stories Implemented                                              |         | 12:46 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian                  |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                     |         |       | 0:06 |
 | COMPLETED Add absolute path support to =om=                                  |         |       | 2:40 |
 | COMPLETED Add plumbing to engine to toggle =om= on or off                    |         |       | 1:53 |
 | COMPLETED Ensure OM header files are at the expected location                |         |       | 0:35 |
-| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |         |       | 4:14 |
+| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |         |       | 5:26 |
 | Includer generation should be done from meta-data                            |         |       | 0:18 |
 #+end:
 
@@ -128,6 +128,8 @@ Should only be added in inheritance scenarios.
 Partially fixes the swap issue, but more work still required.
 
 **** IMPLEMENTATION No external =std::swap=                            :task:
+     CLOCK: [2014-01-01 Wed 11:59]--[2014-01-01 Wed 13:07] =>  1:08
+     CLOCK: [2014-01-01 Wed 10:29]--[2014-01-01 Wed 10:33] =>  0:04
 
 The swap function is not being generated.
 
