@@ -167,9 +167,9 @@ private:
 void cpp_types_main_header_file_formatter::helper::
 visit(const sml::object& o) {
     sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_true(sml::tags::cpp::serialization::boost::enabled)) {
-        const auto fn(reader.get(
-                sml::tags::cpp::serialization::boost::header_file::file_name));
+    using bs = sml::tags::cpp::serialization::boost;
+    if (reader.is_true(bs::enabled)) {
+        const auto fn(reader.get(bs::forward_declarations_file::file_name));
         includes_.user().push_back(fn);
     }
 }

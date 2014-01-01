@@ -460,7 +460,7 @@ void meta_data_tagger::operator()(type& t) const {
                 is_header_file, t.name(),
                 reader.get(tags::cpp::types::directory_name),
                 reader.get(tags::cpp::types::postfix),
-                empty_postfix));
+                reader.get(tags::cpp::forward_declaration_postfix)));
 
         writer.add_if_key_not_found(
             tags::cpp::types::forward_declarations_file::file_name, fwd_fn);
@@ -659,6 +659,50 @@ void meta_data_tagger::operator()(type& t) const {
             writer.add_if_key_not_found(
                 tags::cpp::serialization::boost::implementation_file::overwrite,
                 tags::bool_false);
+        }
+
+        const auto fwd_fn(builder_.cpp_filename_for_qname(t.meta_data(),
+                is_header_file, t.name(),
+                reader.get(tags::cpp::serialization::boost::directory_name),
+                reader.get(tags::cpp::serialization::boost::postfix),
+                reader.get(tags::cpp::forward_declaration_postfix)));
+
+        writer.add_if_key_not_found(
+            tags::cpp::serialization::boost::forward_declarations_file::
+            file_name, fwd_fn);
+
+        writer.add_if_key_not_found(
+            tags::cpp::serialization::boost::forward_declarations_file::
+            is_system, tags::bool_false);
+
+        if (t.generation_type() == gt::full_generation) {
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::forward_declarations_file::
+                generate, tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::forward_declarations_file::
+                generate_header_guards, tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::forward_declarations_file::
+                overwrite, tags::bool_true);
+        } else if (t.generation_type() == gt::partial_generation) {
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::forward_declarations_file::
+                generate, tags::bool_true);
+
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::forward_declarations_file::
+                generate_header_guards, tags::bool_false);
+
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::forward_declarations_file::
+                overwrite, tags::bool_true);
+        } else if (t.generation_type() == gt::no_generation) {
+            writer.add_if_key_not_found(
+                tags::cpp::serialization::boost::forward_declarations_file::
+                generate, tags::bool_false);
         }
     }
 

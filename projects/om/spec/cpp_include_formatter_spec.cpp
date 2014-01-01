@@ -24,10 +24,12 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/om/types/cpp_include_formatter.hpp"
 
 namespace {
 
+const std::string empty;
 const std::string test_module("om");
 const std::string test_suite("cpp_include_formatter_spec");
 const dogen::om::cpp_includes empty_includes = dogen::om::cpp_includes();
@@ -42,6 +44,7 @@ const std::string with_includes(R"(#include <win32/system_inc_1>
 
 using namespace dogen::om;
 using namespace dogen::utility::test;
+using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(cpp_include_formatter)
 
@@ -58,10 +61,7 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
     std::ostringstream s;
     dogen::om::cpp_include_formatter f;
     f.format(s, i);
-    const auto r(s.str());
-    BOOST_CHECK(r == with_includes);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << with_includes;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -72,10 +72,7 @@ BOOST_AUTO_TEST_CASE(empty_includes_produces_no_preprocessor_includes) {
     std::ostringstream s;
     dogen::om::cpp_include_formatter f;
     f.format(s, empty_includes);
-    const auto r(s.str());
-    BOOST_CHECK(r.empty());
-    BOOST_LOG_SEV(lg, debug) << "expected: <empty>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(empty, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
