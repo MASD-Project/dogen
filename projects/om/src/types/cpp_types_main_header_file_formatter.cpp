@@ -82,9 +82,9 @@ private:
 public:
     ~helper() noexcept { }
 
-    helper(const sml::model& m, const boost::property_tree::ptree& meta_data,
+    helper(const sml::model& /*m*/, const boost::property_tree::ptree& meta_data,
         const annotation& a)
-        : model_(m), utility_(stream_, indenter_), first_line_is_blank_(false),
+        : /*model_(m),*/ utility_(stream_, indenter_), first_line_is_blank_(false),
           boilerplate_(is_true(meta_data, sml::tags::generate_preamble),
               is_true(meta_data,
                   sml::tags::cpp::types::header_file::generate_header_guards)),
@@ -153,7 +153,7 @@ public:
     }
 
 private:
-    const sml::model& model_;
+    /*const sml::model& model_;*/
     std::ostringstream stream_;
     cpp_formatters::indenter indenter_;
     cpp_formatters::utility utility_;
