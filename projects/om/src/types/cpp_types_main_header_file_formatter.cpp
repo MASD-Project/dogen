@@ -192,50 +192,25 @@ void cpp_types_main_header_file_formatter::ensure_non_null_helper() const {
     BOOST_THROW_EXCEPTION(formatting_error(missing_helper_ptr));
 }
 
-void cpp_types_main_header_file_formatter::
-visit(const dogen::sml::enumeration& e) const {
+file cpp_types_main_header_file_formatter::
+make_file(const boost::property_tree::ptree& meta_data) const {
     ensure_non_null_helper();
-
-    BOOST_LOG_SEV(lg, debug) << "Formatting enumeration: " << e.name();
-    doxygen_next_.format(helper_->stream(), e.documentation());
-    helper_->stream() << helper_->indenter() << "enum class "
-                      << e.name().simple_name() << " : unsigned int ";
-
-    helper_->utility().open_scope();
-    {
-        cpp_formatters::positive_indenter_scope pis(helper_->indenter());
-        bool is_first(true);
-        std::ostringstream assignment;
-        std::ostringstream comment;
-        for (const auto& enumerator : e.enumerators()) {
-            if (!is_first) {
-                const auto c(comment.str());
-                helper_->stream() << assignment.str() << ",";
-                if (!c.empty())
-                    helper_->stream() << " " << c;
-                assignment.str(empty);
-                comment.str(empty);
-            }
-            assignment << helper_->indenter() << enumerator.name() << " = "
-                       << enumerator.value();
-            doxygen_previous_.format(comment, e.documentation());
-            is_first = false;
-        }
-
-        helper_->stream() << assignment.str();
-        const auto c(comment.str());
-        if (!c.empty())
-            helper_->stream() << " " << c;
-    }
-    helper_->stream() << helper_->indenter() << "};" << std::endl;
+    file r;
+    sml::meta_data_reader reader(meta_data);
+    r.contents(helper_->stream().str());
+    r.relative_path(helper_->relative_file_path());
+    r.absolute_path(include_directory_ / helper_->relative_file_path());
+    r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
+    return r;
 }
 
 void cpp_types_main_header_file_formatter::
 external_equality(const sml::object& o) const {
-    if (!o.is_parent())
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_false(sml::tags::cpp::types::generate_equality) ||
+        !o.is_parent())
         return;
 
-    sml::meta_data_reader reader(o.meta_data());
     const auto n(reader.get(sml::tags::cpp::types::qualified_name));
     helper_->stream() << helper_->indenter()
                       << "inline bool operator==(const "
@@ -256,6 +231,7 @@ external_swap(const sml::object& o) const {
     if (o.all_properties().empty() || o.is_parent() || o.is_immutable())
         return;
 
+    helper_->utility().blank_line();
     const auto std_ns(std::list<std::string> { "std" });
     cpp_formatters::namespace_helper ns(helper_->stream(), std_ns);
     helper_->utility().blank_line();
@@ -287,7 +263,7 @@ void cpp_types_main_header_file_formatter::
 external_inserter(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (!reader.is_true(sml::tags::cpp::io::enabled) ||
-        reader.is_true(sml::tags::cpp::io::enable_integrated_io))
+        !reader.is_true(sml::tags::cpp::io::enable_integrated_io))
         return;
 
     helper_->stream() << helper_->indenter()
@@ -781,10 +757,11 @@ internal_assignment(const sml::object& o) const {
         return;
 
     const auto sn(o.name().simple_name());
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
+    // FIXME: hack just to get zero diffs with legacy
+    // if (helper_->first_line_is_blank())
+    //     helper_->utility().blank_line();
 
-    helper_->utility().public_access_specifier();
+    // helper_->utility().public_access_specifier();
     helper_->stream() << helper_->indenter() << sn << "& operator=("
                       << sn << " other);" << std::endl;
     helper_->first_line_is_blank(true);
@@ -867,34 +844,81 @@ visitor_method(const sml::object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
-format(const sml::object& o) const {
-    open_class(o);
-    {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
-        explicitly_defaulted_functions(o);
-        default_constructor(o);
-        destructor(o);
-        move_constructor(o);
-        complete_constructor(o);
-        friends(o);
-        visitor_method(o);
-        to_stream(o);
-        getters_and_setters(o);
-        internal_equality(o);
-        internal_swap(o);
-        internal_assignment(o);
-        member_variables(o);
-    }
-    close_class();
+visit(const dogen::sml::enumeration& e) const {
+    ensure_non_null_helper();
 
-    // external_equality(o);
-    // external_inserter(o);
+    BOOST_LOG_SEV(lg, debug) << "Formatting enumeration: " << e.name();
+    {
+        const auto ns(namespaces(e.name()));
+        cpp_formatters::namespace_helper nsh(helper_->stream(), ns);
+        helper_->utility().blank_line();
+
+        doxygen_next_.format(helper_->stream(), e.documentation());
+        helper_->stream() << helper_->indenter() << "enum class "
+                         << e.name().simple_name() << " : unsigned int ";
+
+        helper_->utility().open_scope();
+        {
+            cpp_formatters::positive_indenter_scope pis(helper_->indenter());
+            bool is_first(true);
+            std::ostringstream assignment;
+            std::ostringstream comment;
+            for (const auto& enumerator : e.enumerators()) {
+                if (!is_first) {
+                    const auto c(comment.str());
+                    helper_->stream() << assignment.str() << ",";
+                    if (!c.empty())
+                        helper_->stream() << " " << c;
+                    assignment.str(empty);
+                    comment.str(empty);
+                }
+                assignment << helper_->indenter() << enumerator.name() << " = "
+                           << enumerator.value();
+                doxygen_previous_.format(comment, e.documentation());
+                is_first = false;
+            }
+
+            helper_->stream() << assignment.str();
+            const auto c(comment.str());
+            if (!c.empty())
+                helper_->stream() << " " << c;
+        }
+        helper_->stream() << helper_->indenter() << "};" << std::endl;
+        helper_->utility().blank_line();
+    }
 }
 
 void cpp_types_main_header_file_formatter::
-visit(const dogen::sml::object& f) const {
+visit(const dogen::sml::object& o) const {
     ensure_non_null_helper();
-    format(f);
+    {
+        const auto ns(namespaces(o.name()));
+        cpp_formatters::namespace_helper nsh(helper_->stream(), ns);
+        helper_->utility().blank_line();
+        open_class(o);
+        {
+            cpp_formatters::positive_indenter_scope s(helper_->indenter());
+            explicitly_defaulted_functions(o);
+            default_constructor(o);
+            destructor(o);
+            move_constructor(o);
+            complete_constructor(o);
+            friends(o);
+            visitor_method(o);
+            to_stream(o);
+            getters_and_setters(o);
+            internal_equality(o);
+            internal_swap(o);
+            internal_assignment(o);
+            member_variables(o);
+        }
+        close_class();
+        helper_->utility().blank_line();
+        external_equality(o);
+        external_inserter(o);
+    }
+    helper_->utility().blank_line();
+    external_swap(o);
 }
 
 bool cpp_types_main_header_file_formatter::
@@ -902,18 +926,6 @@ generate(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data_reader reader(meta_data);
     const auto& gen(sml::tags::cpp::types::header_file::generate);
     return reader.is_true(gen);
-}
-
-file cpp_types_main_header_file_formatter::
-make_file(const boost::property_tree::ptree& meta_data) const {
-    ensure_non_null_helper();
-    file r;
-    sml::meta_data_reader reader(meta_data);
-    r.contents(helper_->stream().str());
-    r.relative_path(helper_->relative_file_path());
-    r.absolute_path(include_directory_ / helper_->relative_file_path());
-    r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
-    return r;
 }
 
 file cpp_types_main_header_file_formatter::
@@ -953,13 +965,7 @@ format(const sml::type& t, const annotation& a) const {
     const cpp_includes i = cpp_includes();
     helper_ = std::make_shared<helper>(t.meta_data(), i, a);
     helper_->format_begin();
-    {
-        const auto ns(namespaces(t.name()));
-        cpp_formatters::namespace_helper nsh(helper_->stream(), ns);
-        helper_->utility().blank_line();
-        t.accept(*this);
-        helper_->utility().blank_line();
-    }
+    t.accept(*this);
     helper_->utility().blank_line();
     helper_->format_end();
 

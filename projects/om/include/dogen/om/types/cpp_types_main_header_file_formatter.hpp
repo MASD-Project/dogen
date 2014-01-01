@@ -69,6 +69,11 @@ private:
      */
     void ensure_non_null_helper() const;
 
+    /**
+     * @brief Uses the current state of the helper to create a file.
+     */
+    file make_file(const boost::property_tree::ptree& meta_data) const;
+
 private:
     /**
      * @brief Formats the out-of-class equality operator.
@@ -178,21 +183,10 @@ private:
      */
     void visitor_method(const sml::object& o) const;
 
-    /**
-     * @brief Entry point for object formatting.
-     */
-    void format(const sml::object& o) const;
-
-private:
-    /**
-     * @brief Uses the current state of the helper to create a file.
-     */
-    file make_file(const boost::property_tree::ptree& meta_data) const;
-
 private:
     using sml::type_visitor::visit;
     void visit(const sml::enumeration& e) const override;
-    void visit(const sml::object& f) const override;
+    void visit(const sml::object& o) const override;
 
 public:
     bool generate(const boost::property_tree::ptree& meta_data) const override;

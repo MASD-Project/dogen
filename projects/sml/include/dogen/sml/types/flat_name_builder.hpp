@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/sml/types/nested_qname.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
@@ -44,6 +46,14 @@ public:
     flat_name_builder(flat_name_builder&&) = default;
     ~flat_name_builder() noexcept = default;
 
+private:
+    /**
+     * @brief Flattens all the SML namespace information stored in qname
+     * into a list of strings with C++ namespaces.
+     */
+    std::list<std::string>
+    to_namespace_list(const model& m, const sml::qname& qn) const;
+
 public:
     /**
      * @brief Returns the file name for the given qualified name and facet.
@@ -57,13 +67,13 @@ public:
     /**
      * @brief Flat representation of the qualified name.
      */
-    std::string cpp_qualified_name(const sml::qname& qn) const;
+    std::string cpp_qualified_name(const model& m, const sml::qname& qn) const;
 
     /**
      * @brief Returns a complete name representation of the nested
      * qualified name.
      */
-    void cpp_complete_name(const nested_qname& nqn,
+    void cpp_complete_name(const model& m, const nested_qname& nqn,
         std::string& complete_name) const;
 };
 

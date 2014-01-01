@@ -19,6 +19,7 @@
  *
  */
 #include <boost/filesystem/path.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/flat_name_builder.hpp"
@@ -75,26 +76,34 @@ cpp_filename_for_qname(const boost::property_tree::ptree& meta_data,
     return r.generic_string();
 }
 
-std::string flat_name_builder::cpp_qualified_name(const sml::qname& qn) const {
-    std::ostringstream s;
+std::list<std::string> flat_name_builder::
+to_namespace_list(const model& m, const sml::qname& qn) const {
+    std::list<std::string> r(qn.external_module_path());
 
     if (!qn.model_name().empty())
-        s << qn.model_name() << scope_operator;
+        r.push_back(qn.model_name());
 
-    bool is_first(false);
-    for (const auto& p : qn.module_path()) {
-        if (is_first)
-            s << scope_operator;
-        s << p;
-    }
+    const auto mp(qn.module_path());
+    r.insert(r.end(), mp.begin(), mp.end());
 
-    s << qn.simple_name();
-    return s.str();
+    const auto i(m.modules().find(qn));
+    if (i != m.modules().end())
+        r.push_back(qn.simple_name());
+
+    return r;
+}
+
+std::string flat_name_builder::
+cpp_qualified_name(const model& m, const sml::qname& qn) const {
+    std::list<std::string> l(to_namespace_list(m, qn));
+    l.push_back(qn.simple_name());
+    return boost::algorithm::join(l, scope_operator);
 }
 
 void flat_name_builder::
-cpp_complete_name(const nested_qname& nqn, std::string& complete_name) const {
-    const auto qualified_name(cpp_qualified_name(nqn.type()));
+cpp_complete_name(const model& m, const nested_qname& nqn,
+    std::string& complete_name) const {
+    const auto qualified_name(cpp_qualified_name(m, nqn.type()));
     const auto& children(nqn.children());
     complete_name += qualified_name;
 
@@ -112,7 +121,7 @@ cpp_complete_name(const nested_qname& nqn, std::string& complete_name) const {
         if (!is_first)
             complete_name += ", ";
 
-        cpp_complete_name(c, complete_name);
+        cpp_complete_name(m, c, complete_name);
         is_first = false;
     }
     lambda('>');

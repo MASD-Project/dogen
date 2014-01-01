@@ -323,6 +323,10 @@ void meta_data_tagger::copy_model_tags(meta_data_writer& writer) const {
 
         writer.add_if_key_not_found(tags::cpp::io::postfix,
             reader.get(tags::cpp::io::postfix));
+
+        writer.add_if_key_not_found(
+            tags::cpp::io::enable_integrated_io,
+            reader.get(tags::cpp::io::enable_integrated_io));
     }
 
     if (reader.is_true(tags::cpp::test_data::enabled)) {
@@ -379,7 +383,7 @@ void meta_data_tagger::operator()(type& t) const {
 
     meta_data_reader reader(t.meta_data());
     writer.add_if_key_not_found(tags::cpp::types::qualified_name,
-        builder_.cpp_qualified_name(t.name()));
+        builder_.cpp_qualified_name(context_->model(), t.name()));
 
     using gt = generation_types;
     if (reader.is_true(tags::cpp::types::enabled)) {
@@ -915,7 +919,7 @@ void meta_data_tagger::operator()(concept& /*c*/) const {
 void meta_data_tagger::tag(property& p) const {
     meta_data_writer w(p.meta_data());
     std::string cn;
-    builder_.cpp_complete_name(p.type(), cn);
+    builder_.cpp_complete_name(context_->model(), p.type(), cn);
     w.add_if_key_not_found(tags::cpp::types::complete_name, cn);
 
     const auto i(context_->model().primitives().find(p.type().type()));
@@ -993,7 +997,7 @@ void meta_data_tagger::tag(object& o) const {
 
         writer.add_if_key_not_found(
             tags::cpp::types::qualified_original_parent_name,
-            builder_.cpp_qualified_name(opn));
+            builder_.cpp_qualified_name(context_->model(), opn));
     }
 
     writer.add_if_key_not_found(tags::cpp::types::generate_accept,

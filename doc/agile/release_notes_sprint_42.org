@@ -10,21 +10,21 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-01 Wed 13:07]
+Clock summary at [2014-01-01 Wed 14:00]
 
-| Headline                                                                     | Time    |       |      |
-|------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *12:46* |       |      |
-|------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 12:46 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:30 |
-| COMPLETED Investigate availability of boost 1.55 for debian                  |         |       | 0:18 |
-| COMPLETED Add more valgrind suppressions                                     |         |       | 0:06 |
-| COMPLETED Add absolute path support to =om=                                  |         |       | 2:40 |
-| COMPLETED Add plumbing to engine to toggle =om= on or off                    |         |       | 1:53 |
-| COMPLETED Ensure OM header files are at the expected location                |         |       | 0:35 |
-| IMPLEMENTATION Fix differences in code generation between =om= and C++ model |         |       | 5:26 |
-| Includer generation should be done from meta-data                            |         |       | 0:18 |
+| Headline                                                                | Time    |       |      |
+|-------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                            | *13:37* |       |      |
+|-------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                         |         | 13:37 |      |
+| IMPLEMENTATION Release notes and backlog grooming                       |         |       | 1:30 |
+| COMPLETED Investigate availability of boost 1.55 for debian             |         |       | 0:18 |
+| COMPLETED Add more valgrind suppressions                                |         |       | 0:06 |
+| COMPLETED Add absolute path support to =om=                             |         |       | 2:40 |
+| COMPLETED Add plumbing to engine to toggle =om= on or off               |         |       | 1:53 |
+| COMPLETED Ensure OM header files are at the expected location           |         |       | 0:35 |
+| COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:17 |
+| Includer generation should be done from meta-data                       |         |       | 0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -85,7 +85,8 @@ quickly. To do so:
 We seem to be creating om files in an incorrect directory. We need to
 fix this before we can start looking at the diffs.
 
-*** IMPLEMENTATION Fix differences in code generation between =om= and C++ model :story:
+*** COMPLETED Fix differences in code generation between =om= and C++ model :story:
+    CLOSED: [2014-01-01 Wed 14:00]
     CLOCK: [2013-12-30 Mon 19:38]--[2013-12-30 Mon 19:46] =>  0:08
 
 Problems have been detected by the diff, and attached to this story as
@@ -127,7 +128,9 @@ Should only be added in inheritance scenarios.
 
 Partially fixes the swap issue, but more work still required.
 
-**** IMPLEMENTATION No external =std::swap=                            :task:
+**** COMPLETED No external =std::swap=                                 :task:
+     CLOSED: [2014-01-01 Wed 14:00]
+     CLOCK: [2014-01-01 Wed 13:09]--[2014-01-01 Wed 14:00] =>  0:51
      CLOCK: [2014-01-01 Wed 11:59]--[2014-01-01 Wed 13:07] =>  1:08
      CLOCK: [2014-01-01 Wed 10:29]--[2014-01-01 Wed 10:33] =>  0:04
 
