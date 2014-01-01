@@ -65,7 +65,7 @@ namespace om {
  * greater than (or equal to) the helper itself as it keeps
  * references to them.
  */
-class cpp_types_main_header_file_formatter::helper {
+class cpp_types_main_header_file_formatter::helper : private sml::type_visitor {
 public:
     helper() = delete;
     helper(const helper&) = delete;
@@ -82,10 +82,9 @@ private:
 public:
     ~helper() noexcept { }
 
-    helper(const boost::property_tree::ptree& meta_data,
-        const cpp_includes& ci, const annotation& a)
-        : utility_(stream_, indenter_), first_line_is_blank_(false),
-          includes_(ci),
+    helper(const sml::model& m, const boost::property_tree::ptree& meta_data,
+        const annotation& a)
+        : model_(m), utility_(stream_, indenter_), first_line_is_blank_(false),
           boilerplate_(is_true(meta_data, sml::tags::generate_preamble),
               is_true(meta_data,
                   sml::tags::cpp::types::header_file::generate_header_guards)),
@@ -96,6 +95,10 @@ public:
         const auto& fn(types::header_file::file_name);
         relative_file_path_ = reader.get(fn);
     }
+
+private:
+    using sml::type_visitor::visit;
+    void visit(const sml::object& o) override;
 
 public:
     /**
@@ -128,6 +131,11 @@ public:
 
 public:
     /**
+     * @brief Computes the include files for this header file.
+     */
+    void compute_includes(const sml::type& t) { t.accept(*this); }
+
+    /**
      * @brief Uses the boilerplate formatter to format the start of
      * the boilerplate.
      */
@@ -145,19 +153,30 @@ public:
     }
 
 private:
+    const sml::model& model_;
     std::ostringstream stream_;
     cpp_formatters::indenter indenter_;
     cpp_formatters::utility utility_;
     bool first_line_is_blank_;
-    const cpp_includes includes_;
+    cpp_includes includes_;
     cpp_file_boilerplate_formatter boilerplate_;
     const annotation annotation_;
     boost::filesystem::path relative_file_path_;
 };
 
+void cpp_types_main_header_file_formatter::helper::
+visit(const sml::object& o) {
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_true(sml::tags::cpp::serialization::boost::enabled)) {
+        const auto fn(reader.get(
+                sml::tags::cpp::serialization::boost::header_file::file_name));
+        includes_.user().push_back(fn);
+    }
+}
+
 cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter(
-    const boost::filesystem::path& include_directory)
-    : include_directory_(include_directory),
+    const sml::model& model, const boost::filesystem::path& include_directory)
+    : model_(model), include_directory_(include_directory),
       doxygen_next_(
           !start_on_first_line,
           use_documentation_tool_markup,
@@ -193,7 +212,7 @@ void cpp_types_main_header_file_formatter::ensure_non_null_helper() const {
 }
 
 file cpp_types_main_header_file_formatter::
-make_file(const boost::property_tree::ptree& meta_data) const {
+build_file(const boost::property_tree::ptree& meta_data) const {
     ensure_non_null_helper();
     file r;
     sml::meta_data_reader reader(meta_data);
@@ -931,8 +950,7 @@ generate(const boost::property_tree::ptree& meta_data) const {
 
 file cpp_types_main_header_file_formatter::
 format(const sml::module& module, const annotation& a) const {
-    const cpp_includes i = cpp_includes();
-    helper_ = std::make_shared<helper>(module.meta_data(), i, a);
+    helper_ = std::make_shared<helper>(model_, module.meta_data(), a);
     helper_->format_begin();
     const auto ns(namespaces(module.name()));
 
@@ -956,21 +974,21 @@ format(const sml::module& module, const annotation& a) const {
     helper_->utility().blank_line();
     helper_->format_end();
 
-    const file r(make_file(module.meta_data()));
+    const file r(build_file(module.meta_data()));
     helper_ = std::shared_ptr<helper>();
     return r;
 }
 
 file cpp_types_main_header_file_formatter::
 format(const sml::type& t, const annotation& a) const {
-    const cpp_includes i = cpp_includes();
-    helper_ = std::make_shared<helper>(t.meta_data(), i, a);
+    helper_ = std::make_shared<helper>(model_, t.meta_data(), a);
+    helper_->compute_includes(t);
     helper_->format_begin();
     t.accept(*this);
     helper_->utility().blank_line();
     helper_->format_end();
 
-    const file r(make_file(t.meta_data()));
+    const file r(build_file(t.meta_data()));
     helper_ = std::shared_ptr<helper>();
     return r;
 }

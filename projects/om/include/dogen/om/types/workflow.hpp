@@ -38,10 +38,6 @@
 #include "dogen/om/types/licence.hpp"
 #include "dogen/om/types/modeline_group.hpp"
 #include "dogen/om/types/annotation_factory.hpp"
-#include "dogen/om/types/type_formatter_interface.hpp"
-#include "dogen/om/types/module_formatter_interface.hpp"
-#include "dogen/om/types/concept_formatter_interface.hpp"
-
 
 namespace dogen {
 namespace om {
@@ -112,12 +108,9 @@ public:
     std::list<file> execute(const sml::model& m);
 
 private:
-    std::list<boost::shared_ptr<type_formatter_interface> >
-    type_formatters_;
-    std::list<boost::shared_ptr<module_formatter_interface> >
-    module_formatters_;
-    std::list<boost::shared_ptr<concept_formatter_interface> >
-    concept_formatters_;
+    const boost::filesystem::path project_directory_;
+    const boost::filesystem::path cpp_source_directory_;
+    const boost::filesystem::path cpp_include_directory_;
     annotation_factory annotation_factory_;
     std::shared_ptr<context> context_;
 };

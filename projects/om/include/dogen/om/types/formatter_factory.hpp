@@ -28,6 +28,7 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen/sml/types/model.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 #include "dogen/om/types/module_formatter_interface.hpp"
 #include "dogen/om/types/concept_formatter_interface.hpp"
@@ -53,7 +54,8 @@ public:
      * @param cpp_include_directory Directory under which the include
      * files will be placed.
      */
-    formatter_factory(const boost::filesystem::path& project_directory,
+    formatter_factory(const sml::model& model,
+        const boost::filesystem::path& project_directory,
         const boost::filesystem::path& cpp_source_directory,
         const boost::filesystem::path& cpp_include_directory);
 
@@ -77,6 +79,7 @@ public:
     build_concept_formatters() const;
 
 private:
+    const sml::model& model_;
     const boost::filesystem::path project_directory_;
     const boost::filesystem::path cpp_source_directory_;
     const boost::filesystem::path cpp_include_directory_;

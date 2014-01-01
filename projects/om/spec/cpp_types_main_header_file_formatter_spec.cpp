@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_he
     writer.add(dogen::sml::tags::cpp::types::header_file::file_name, file_name);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
 
     const auto r(f.format(e, empty_annotation));
     const auto rp(r.relative_path().generic_string());
@@ -247,7 +247,7 @@ BOOST_AUTO_TEST_CASE(object_with_no_properties_produces_expected_types_header) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto& o(find_object(m, 0));
 
     const auto r(f.format(o, empty_annotation));
@@ -263,7 +263,7 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
     BOOST_CHECK(m.objects().size() == 2);
 
     const auto& o(find_object(m, 1));
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto r(f.format(o, empty_annotation));
     const auto& c(r.contents());
     BOOST_CHECK(asserter::assert_equals_marker(parent_object, c));
@@ -277,7 +277,7 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
     BOOST_CHECK(m.objects().size() == 2);
 
     const auto& o(find_object(m, 0));
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto r(f.format(o, empty_annotation));
     const auto& c(r.contents());
     BOOST_CHECK(asserter::assert_equals_marker(leaf_child_object, c));
@@ -291,7 +291,7 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
     BOOST_CHECK(m.objects().size() == 4);
 
     const auto& o(find_object(m, 1));
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto r(f.format(o, empty_annotation));
     const auto& c(r.contents());
     BOOST_CHECK(asserter::assert_equals_marker(non_leaf_child_object, c));
@@ -311,7 +311,7 @@ BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected
         dogen::sml::tags::bool_true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto r(f.format(o, empty_annotation));
 
     const auto rp(r.relative_path().generic_string());
@@ -343,7 +343,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_default_constructor_produces_expected_typ
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto r(f.format(o, empty_annotation));
     const auto& c(r.contents());
     BOOST_CHECK(asserter::assert_equals_marker(manual_default_constructor, c));
@@ -366,7 +366,7 @@ BOOST_AUTO_TEST_CASE(generating_manual_move_constructor_produces_expected_types_
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto r(f.format(o, empty_annotation));
     const auto& c(r.contents());
     BOOST_CHECK(asserter::assert_equals_marker(manual_move_constructor, c));
@@ -384,7 +384,7 @@ BOOST_AUTO_TEST_CASE(module_with_comments_produces_expected_types_header) {
     writer.add(dogen::sml::tags::cpp::types::header_file::file_name, file_name);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::om::cpp_types_main_header_file_formatter f(inc_dir);
+    dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
     const auto r(f.format(module, empty_annotation));
     const auto rp(r.relative_path().generic_string());
     BOOST_CHECK(asserter::assert_contains(file_name, rp));

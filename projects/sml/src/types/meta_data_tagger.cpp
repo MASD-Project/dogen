@@ -1169,10 +1169,10 @@ void meta_data_tagger::tag(model& m) const {
     if (reader.is_true(tags::cpp::serialization::boost::enabled)) {
         writer.add_if_key_not_found(
             tags::cpp::serialization::boost::directory_name,
-            hash_directory);
+            serialization_directory);
 
         writer.add_if_key_not_found(tags::cpp::serialization::boost::postfix,
-            hash_postfix);
+            serialization_postfix);
 
         qname qn;
         qn.simple_name(cpp_includer_file_name);

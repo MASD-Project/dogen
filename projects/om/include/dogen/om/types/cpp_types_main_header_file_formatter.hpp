@@ -29,8 +29,10 @@
 #include <memory>
 #include <ostream>
 #include <boost/filesystem/path.hpp>
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
+#include "dogen/om/types/cpp_includes.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
 #include "dogen/om/types/module_formatter_interface.hpp"
@@ -54,7 +56,8 @@ private:
     class helper;
 
 public:
-    explicit cpp_types_main_header_file_formatter(
+    cpp_types_main_header_file_formatter(
+        const sml::model& model,
         const boost::filesystem::path& include_directory);
     virtual ~cpp_types_main_header_file_formatter() noexcept { }
 
@@ -72,7 +75,7 @@ private:
     /**
      * @brief Uses the current state of the helper to create a file.
      */
-    file make_file(const boost::property_tree::ptree& meta_data) const;
+    file build_file(const boost::property_tree::ptree& meta_data) const;
 
 private:
     /**
@@ -196,6 +199,7 @@ public:
     file format(const sml::type& t, const annotation& a) const override;
 
 private:
+    const sml::model model_;
     const boost::filesystem::path include_directory_;
     mutable std::shared_ptr<helper> helper_;
     comment_formatter doxygen_next_;

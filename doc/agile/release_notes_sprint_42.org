@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-01 Wed 14:30]
+Clock summary at [2014-01-01 Wed 15:46]
 
 | Headline                                                                | Time    |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                            | *14:05* |       |      |
+| *Total time*                                                            | *15:13* |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                         |         | 14:05 |      |
+| Development Stories Implemented                                         |         | 15:13 |      |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       | 0:06 |
@@ -24,6 +24,7 @@ Clock summary at [2014-01-01 Wed 14:30]
 | COMPLETED Add plumbing to engine to toggle =om= on or off               |         |       | 1:53 |
 | COMPLETED Ensure OM header files are at the expected location           |         |       | 0:35 |
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:45 |
+| IMPLEMENTATION Add include file support to main type formatter          |         |       | 1:08 |
 | Includer generation should be done from meta-data                       |         |       | 0:18 |
 #+end:
 
@@ -144,7 +145,7 @@ The swap function is not being generated.
 - first get the build green
 - then fix the diff properly
 
-*** Add include file support to main type formatter                   :story:
+*** IMPLEMENTATION Add include file support to main type formatter    :story:
 
 Inclusion support needs to be moved to the formatters. SML provides
 all the required information at the model level in terms of type
@@ -153,6 +154,20 @@ needs because these are related to the implementation. Even
 determining which facets of a type one should include is formatter
 dependent. We need to distribute the logic of the includer into each
 formatter.
+
+**** COMPLETED Add initial inclusion processing support                :task:
+     CLOSED: [2014-01-01 Wed 15:44]
+     CLOCK: [2014-01-01 Wed 14:59]--[2014-01-01 Wed 15:43] =>  0:44
+     CLOCK: [2014-01-01 Wed 14:35]--[2014-01-01 Wed 14:59] =>  0:24
+
+Drill through all the layers to ensure the C++ inclusion class is
+populated when we format the file.
+
+**** Fix modeling errors in terms of forward declaration files         :task:
+
+We need to be able to support forward declaration files at the facet
+level; we incorrectly modeled this as if there was only one forward
+declaration file for all the facets.
 
 *** Add required meta-data to test models                             :story:
 

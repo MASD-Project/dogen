@@ -35,10 +35,11 @@ namespace dogen {
 namespace om {
 
 formatter_factory::
-formatter_factory(const boost::filesystem::path& project_directory,
+formatter_factory(const sml::model& model,
+    const boost::filesystem::path& project_directory,
     const boost::filesystem::path& cpp_source_directory,
     const boost::filesystem::path& cpp_include_directory)
-    : project_directory_(project_directory),
+    : model_(model), project_directory_(project_directory),
       cpp_source_directory_(cpp_source_directory),
       cpp_include_directory_(cpp_include_directory) {
 
@@ -54,7 +55,7 @@ formatter_factory::build_type_formatters() const {
     using namespace boost;
     std::list<shared_ptr<type_formatter_interface> > r;
     r.push_back(make_shared<cpp_types_main_header_file_formatter>(
-            cpp_include_directory_));
+            model_, cpp_include_directory_));
     return r;
 }
 
@@ -63,7 +64,7 @@ formatter_factory::build_module_formatters() const {
     using namespace boost;
     std::list<shared_ptr<module_formatter_interface> > r;
     r.push_back(make_shared<cpp_types_main_header_file_formatter>(
-            cpp_include_directory_));
+            model_, cpp_include_directory_));
     return r;
 }
 
