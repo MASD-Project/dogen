@@ -917,7 +917,6 @@ visit(const dogen::sml::object& o) const {
         external_equality(o);
         external_inserter(o);
     }
-    helper_->utility().blank_line();
     external_swap(o);
 }
 
