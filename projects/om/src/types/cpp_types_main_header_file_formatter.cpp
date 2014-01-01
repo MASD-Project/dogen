@@ -231,7 +231,9 @@ external_swap(const sml::object& o) const {
     if (o.all_properties().empty() || o.is_parent() || o.is_immutable())
         return;
 
-    helper_->utility().blank_line();
+    // there is a presumption here that swap is the very first
+    // function after the user namespaces have been closed.
+    helper_->utility().blank_line(2);
     const auto std_ns(std::list<std::string> { "std" });
     cpp_formatters::namespace_helper ns(helper_->stream(), std_ns);
     helper_->utility().blank_line();

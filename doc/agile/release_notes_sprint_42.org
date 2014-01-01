@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-01 Wed 14:21]
+Clock summary at [2014-01-01 Wed 14:30]
 
 | Headline                                                                | Time    |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                            | *13:57* |       |      |
+| *Total time*                                                            | *14:05* |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                         |         | 13:57 |      |
+| Development Stories Implemented                                         |         | 14:05 |      |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       | 0:06 |
 | COMPLETED Add absolute path support to =om=                             |         |       | 2:40 |
 | COMPLETED Add plumbing to engine to toggle =om= on or off               |         |       | 1:53 |
 | COMPLETED Ensure OM header files are at the expected location           |         |       | 0:35 |
-| COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:37 |
+| COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:45 |
 | Includer generation should be done from meta-data                       |         |       | 0:18 |
 #+end:
 
@@ -87,7 +87,6 @@ fix this before we can start looking at the diffs.
 
 *** COMPLETED Fix differences in code generation between =om= and C++ model :story:
     CLOSED: [2014-01-01 Wed 14:00]
-    CLOCK: [2014-01-01 Wed 14:01]--[2014-01-01 Wed 14:21] =>  0:20
     CLOCK: [2013-12-30 Mon 19:38]--[2013-12-30 Mon 19:46] =>  0:08
 
 Problems have been detected by the diff, and attached to this story as
@@ -136,6 +135,14 @@ Partially fixes the swap issue, but more work still required.
      CLOCK: [2014-01-01 Wed 10:29]--[2014-01-01 Wed 10:33] =>  0:04
 
 The swap function is not being generated.
+
+**** COMPLETED Broke the build whilst fixing a diff in std namespace  :spike:
+     CLOSED: [2014-01-01 Wed 14:30]
+     CLOCK: [2014-01-01 Wed 14:21]--[2014-01-01 Wed 14:29] =>  0:08
+     CLOCK: [2014-01-01 Wed 14:01]--[2014-01-01 Wed 14:21] =>  0:20
+
+- first get the build green
+- then fix the diff properly
 
 *** Add include file support to main type formatter                   :story:
 
