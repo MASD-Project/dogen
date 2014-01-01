@@ -202,3 +202,34 @@
    fun:_ZN12_GLOBAL__N_117create_db_fixtureC1Ev
    ...
 }
+
+{
+   odb 7
+   Memcheck:Cond
+   ...
+   fun:PQgetResult
+   ...
+   fun:_ZN3odb5pgsql10connection7executeEPKcm
+   fun:_ZN3odb8database7executeEPKcm
+   fun:_ZN3odb8database7executeEPKc
+   fun:_ZN3odb6access18object_traits_implIN5dogen8database11primary_keyELNS_11database_idE2EE13create_schemaERNS_8databaseEtb
+   fun:_ZN3odb14schema_catalog13create_schemaERNS_8databaseERKSs
+   fun:_ZN12_GLOBAL__N_117create_db_fixtureC1Ev
+   ...
+}
+
+{
+   odb 8
+   Memcheck:Value8
+   ...
+   fun:PQgetResult
+   ...
+   fun:_ZN3odb5pgsql16select_statement7executeEv
+   fun:_ZN3odb6access18object_traits_implIN5dogen8database7no_keysELNS_11database_idE2EE5queryERNS_8databaseERKNS_5pgsql10query_baseE
+   fun:_ZN3odb8database6query_IN5dogen8database7no_keysELNS_11database_idE5ELNS_10class_kindE0EE4callINS_5queryIS4_NS_5pgsql10query_baseEEEEENS_6resultIS4_EERS0_RKT_
+   fun:_ZN3odb8database5queryIN5dogen8database7no_keysEEENS_6resultIT_EERKNS_5queryIS6_NS_14query_selectorIS6_LNS_11database_idE5EE9base_typeEEEb
+   fun:_ZN3odb8database5queryIN5dogen8database7no_keysEEENS_6resultIT_EEb
+   fun:_ZN8database61inserting_no_keys_instances_results_in_expected_rows_in_table11test_methodEv
+   fun:_ZN8databaseL69inserting_no_keys_instances_results_in_expected_rows_in_table_invokerEv
+   ...
+}
