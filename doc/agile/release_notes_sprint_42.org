@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-01 Wed 15:46]
+Clock summary at [2014-01-01 Wed 17:48]
 
 | Headline                                                                | Time    |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                            | *15:13* |       |      |
+| *Total time*                                                            | *16:05* |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                         |         | 15:13 |      |
+| Development Stories Implemented                                         |         | 16:05 |      |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       | 0:06 |
@@ -24,7 +24,7 @@ Clock summary at [2014-01-01 Wed 15:46]
 | COMPLETED Add plumbing to engine to toggle =om= on or off               |         |       | 1:53 |
 | COMPLETED Ensure OM header files are at the expected location           |         |       | 0:35 |
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:45 |
-| IMPLEMENTATION Add include file support to main type formatter          |         |       | 1:08 |
+| IMPLEMENTATION Add include file support to main type formatter          |         |       | 2:00 |
 | Includer generation should be done from meta-data                       |         |       | 0:18 |
 #+end:
 
@@ -163,11 +163,41 @@ formatter.
 Drill through all the layers to ensure the C++ inclusion class is
 populated when we format the file.
 
-**** Fix modeling errors in terms of forward declaration files         :task:
+**** COMPLETED Fix modeling errors in terms of forward declaration files :task:
+     CLOSED: [2014-01-01 Wed 17:33]
+     CLOCK: [2014-01-01 Wed 16:50]--[2014-01-01 Wed 16:55] =>  0:05
 
 We need to be able to support forward declaration files at the facet
 level; we incorrectly modeled this as if there was only one forward
 declaration file for all the facets.
+
+Actually, this was modeled correctly, we were just looking at the
+wrong place.
+
+**** IMPLEMENTATION Solve the new lines issue in formatters            :task:
+     CLOCK: [2014-01-01 Wed 17:34]--[2014-01-01 Wed 17:42] =>  0:08
+     CLOCK: [2014-01-01 Wed 16:55]--[2014-01-01 Wed 17:34] =>  0:39
+
+We did a number of hacks to get the newlines to work correctly but in
+reality all of these approaches are really bad. The problem is that
+its not possible to know, when formatting one block, if there is a
+need for a whitespace after or before it; only someone that has
+visibility of both the current block, the previous and the one after
+can make that decision. The best way of doing this is to create a
+list of blocks and then use that to decide where to put in the new
+lines.
+
+Result of white-boarding session:
+
+- we need a class that acts as an interface in between the streaming
+  and discretises the stream into "blocks". perhaps
+  =stream_discretizer=? we could of course create a =discrete_stream=
+  which is a specialised =ostream=.
+- blocks are a logical construct, determined by the formatters
+  themselves; they need to decide when a block starts and ends.
+- this discretiser class then has an =assemble= method that can be
+  called at the end to construct a string from all the blocks, adding
+  new lines as required.
 
 *** Add required meta-data to test models                             :story:
 
