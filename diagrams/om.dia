@@ -263,7 +263,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="31,-27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="16.670000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -5682,7 +5682,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="62,1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="24.754999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -6627,7 +6627,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-47,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.2775000000000007"/>
+        <dia:real val="7.2774999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8088,7 +8088,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="10.445,-23.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.05,-24.15;11.195,-10.4"/>
+        <dia:rectangle val="-0.05,-24.15;11.195,-11.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8340,7 +8340,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="7.18,-7.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-35.46,-8.65;7.93,-3.2"/>
+        <dia:rectangle val="-35.46,-8.65;7.93,-3.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8375,19 +8375,19 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="67,-27"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,-27.05;71.785,-23.95"/>
+        <dia:rectangle val="66.95,-27.05;73.05,-23.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="67,-27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7350000000000003"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#ostream#</dia:string>
+        <dia:string>#indent_filter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -8482,19 +8482,19 @@ These are expected to use quotes and be on the user path.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O70">
       <dia:attribute name="obj_pos">
-        <dia:point val="59,-34"/>
+        <dia:point val="56,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,-34.05;81.51,-31.45"/>
+        <dia:rectangle val="55.95,-33.05;80.435,-30.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="59,-34"/>
+        <dia:point val="56,-33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.460000000000001"/>
+        <dia:real val="24.384999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -8511,7 +8511,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Augmented ostream that provides OM with all the services
+            <dia:string>#Boost iostreams filter that provides OM with all the services
 required to format code: indentation and dividers.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -8521,7 +8521,7 @@ required to format code: indentation and dividers.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="59.35,-32.755"/>
+            <dia:point val="56.35,-31.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -8534,17 +8534,17 @@ required to format code: indentation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O71">
       <dia:attribute name="obj_pos">
-        <dia:point val="70.23,-31.5"/>
+        <dia:point val="68.1925,-30.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.9652,-31.5585;70.2885,-26.8756"/>
+        <dia:rectangle val="68.1251,-30.5674;70.3783,-26.772"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="70.23,-31.5"/>
-        <dia:point val="69.3675,-27"/>
+        <dia:point val="68.1925,-30.5"/>
+        <dia:point val="70,-27"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -8559,7 +8559,7 @@ required to format code: indentation and dividers.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="69.7988,-28.7501"/>
+        <dia:point val="69.0963,-28.2501"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O70" connection="6"/>

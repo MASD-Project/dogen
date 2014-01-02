@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-02 Thu 13:32]
+Clock summary at [2014-01-02 Thu 20:00]
 
 | Headline                                                                | Time    |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                            | *18:00* |       |      |
+| *Total time*                                                            | *20:50* |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                         |         | 18:00 |      |
+| Development Stories Implemented                                         |         | 20:50 |      |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       | 0:06 |
@@ -25,7 +25,7 @@ Clock summary at [2014-01-02 Thu 13:32]
 | COMPLETED Ensure OM header files are at the expected location           |         |       | 0:35 |
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:45 |
 | IMPLEMENTATION Add include file support to main type formatter          |         |       | 1:13 |
-| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 2:42 |
+| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 5:32 |
 | Includer generation should be done from meta-data                       |         |       | 0:18 |
 #+end:
 
@@ -245,7 +245,8 @@ provide it with an interface that suits our needs:
   before it, content after it, etc.
 - We won't be able to add a lot of the utility stuff into the stream.
 
-**** Add classes modeling stream and blocks                            :task:
+**** IMPLEMENTATION Add classes modeling stream and blocks             :task:
+     CLOCK: [2014-01-02 Thu 16:09]--[2014-01-02 Thu 18:59] =>  2:50
 
 Create the classes as per analysis.
 

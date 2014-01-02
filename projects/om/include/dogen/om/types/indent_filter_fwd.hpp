@@ -18,28 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OM_TYPES_OSTREAM_HPP
-#define DOGEN_OM_TYPES_OSTREAM_HPP
+#ifndef DOGEN_OM_TYPES_INDENT_FILTER_FWD_HPP
+#define DOGEN_OM_TYPES_INDENT_FILTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <ios>
-#include <boost/iostreams/filtering_stream.hpp>
-#include <boost/iostreams/concepts.hpp>
-#include <boost/iostreams/operations.hpp>
-
-/**
- * @brief Output stream ostream that provides an interface with all the
- * primitives required by OM.
- */
 namespace dogen {
 namespace om {
 
-class ostream {
-
-};
+class indent_filter;
 
 } }
 
