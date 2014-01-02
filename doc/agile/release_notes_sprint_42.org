@@ -232,6 +232,10 @@ Read up on the following:
 - [[http://www.boost.org/doc/libs/1_55_0/libs/iostreams/doc/index.html][Boost IOStreams library]]
 - [[http://comments.gmane.org/gmane.comp.lib.boost.devel/171399][Manipulators for ostreaming_streams]]
 
+To check out Larry Evans code:
+
+: svn co http://svn.boost.org/svn/boost/sandbox-branches/cppljevans
+
 The end conclusion is we need to define our own =ostream= class and
 provide it with an interface that suits our needs:
 
