@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-01 Wed 18:20]
+Clock summary at [2014-01-02 Thu 13:32]
 
 | Headline                                                                | Time    |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                            | *16:32* |       |      |
+| *Total time*                                                            | *18:00* |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                         |         | 16:32 |      |
+| Development Stories Implemented                                         |         | 18:00 |      |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       | 0:06 |
@@ -25,7 +25,7 @@ Clock summary at [2014-01-01 Wed 18:20]
 | COMPLETED Ensure OM header files are at the expected location           |         |       | 0:35 |
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:45 |
 | IMPLEMENTATION Add include file support to main type formatter          |         |       | 1:13 |
-| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 1:14 |
+| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 2:42 |
 | Includer generation should be done from meta-data                       |         |       | 0:18 |
 #+end:
 
@@ -188,6 +188,8 @@ list of blocks and then use that to decide where to put in the new
 lines.
 
 **** ANALYSIS Analysis of the problem                                  :task:
+     CLOCK: [2014-01-02 Thu 12:18]--[2014-01-02 Thu 13:28] =>  1:10
+     CLOCK: [2014-01-02 Thu 12:00]--[2014-01-02 Thu 12:18] =>  0:18
      CLOCK: [2014-01-01 Wed 17:53]--[2014-01-01 Wed 18:20] =>  0:24
      CLOCK: [2014-01-01 Wed 17:34]--[2014-01-01 Wed 17:42] =>  0:08
      CLOCK: [2014-01-01 Wed 16:55]--[2014-01-01 Wed 17:34] =>  0:39
@@ -224,6 +226,20 @@ of the members of utility and re-implement them as
 manipulators. Internally, the device would be doing the chunking. At
 the end it would provide access to the internal data structure so that
 an assembler could create a single contiguous stream from the chunks.
+
+Read up on the following:
+
+- [[http://www.boost.org/doc/libs/1_55_0/libs/iostreams/doc/index.html][Boost IOStreams library]]
+- [[http://comments.gmane.org/gmane.comp.lib.boost.devel/171399][Manipulators for ostreaming_streams]]
+
+The end conclusion is we need to define our own =ostream= class and
+provide it with an interface that suits our needs:
+
+- indent in, indent out: ideally via the ++ and -- operators
+- divisor: some way of stating that there is a split in the stream;
+  the split is then interpreted depending on whether there is content
+  before it, content after it, etc.
+- We won't be able to add a lot of the utility stuff into the stream.
 
 **** Add classes modeling stream and blocks                            :task:
 
