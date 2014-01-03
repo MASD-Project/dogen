@@ -86,7 +86,7 @@ public:
     helper(const sml::model& /*m*/,
         const boost::property_tree::ptree& meta_data,
         const annotation& a)
-        : /*model_(m),*/ utility_(stream_), first_line_is_blank_(false),
+        : /*model_(m),*/ utility_(stream_),
           boilerplate_(is_true(meta_data, sml::tags::generate_preamble),
               is_true(meta_data,
                   sml::tags::cpp::types::header_file::generate_header_guards)),
@@ -126,14 +126,6 @@ public:
      */
     boost::filesystem::path relative_file_path() { return relative_file_path_; }
 
-    /**
-     * @brief If true, add a blank line at the start.
-     */
-    /**@{*/
-    bool first_line_is_blank() const { return first_line_is_blank_; }
-    void first_line_is_blank(bool value) { first_line_is_blank_ = value; }
-    /**@}*/
-
 public:
     /**
      * @brief Computes the include files for this header file.
@@ -161,7 +153,6 @@ private:
     /*const sml::model& model_;*/
     boost::iostreams::filtering_ostream stream_;
     om::utility utility_;
-    bool first_line_is_blank_;
     cpp_includes includes_;
     cpp_file_boilerplate_formatter boilerplate_;
     const annotation annotation_;
@@ -317,7 +308,6 @@ open_class(const sml::object& o) const {
         helper_->stream() << parent_simple_name;
     }
     helper_->stream() << " {" << std::endl;
-    helper_->first_line_is_blank(false);
 }
 
 void cpp_types_main_header_file_formatter::close_class() const {
@@ -330,9 +320,6 @@ explicitly_defaulted_functions(const sml::object& o) const {
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_defaulted_functions))
         return;
-
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
 
     helper_->utility().public_access_specifier();
 
@@ -359,7 +346,7 @@ explicitly_defaulted_functions(const sml::object& o) const {
                              << std::endl;
         }
     }
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -369,12 +356,9 @@ default_constructor(const sml::object& o) const {
     if (reader.is_false(types::generate_explicit_default_constructor))
         return;
 
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
-
     helper_->utility().public_access_specifier();
     helper_->stream() << o.name().simple_name() << "();" << std::endl;
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -390,9 +374,6 @@ complete_constructor(const sml::object& o) const {
     if (props.empty())
         return;
 
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
-
     helper_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
     if (props.size() == 1) {
@@ -406,7 +387,7 @@ complete_constructor(const sml::object& o) const {
             helper_->stream() << "&";
 
         helper_->stream() << " " << p.name() << ");" << std::endl;
-        helper_->first_line_is_blank(true);
+        helper_->utility().managed_blank_line();
         return;
     }
 
@@ -429,7 +410,7 @@ complete_constructor(const sml::object& o) const {
         }
         helper_->stream() << ");" << std::endl;
     }
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -443,13 +424,10 @@ move_constructor(const sml::object& o) const {
     if (props.empty())
         return;
 
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
-
     helper_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
     helper_->stream() << sn << "(" << sn << "&& rhs);" << std::endl;
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -458,9 +436,6 @@ destructor(const sml::object& o) const {
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_explicit_destructor))
         return;
-
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
 
     helper_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
@@ -479,7 +454,7 @@ destructor(const sml::object& o) const {
         helper_->stream() << "virtual ~" << sn
                          << "() noexcept { }" << std::endl;
     }
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -488,9 +463,6 @@ friends(const sml::object& o) const {
     using types = sml::tags::cpp::types;
     if (reader.is_false(types::generate_friends))
         return;
-
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
 
     helper_->utility().private_access_specifier();
     const auto sn(o.name().simple_name());
@@ -504,7 +476,8 @@ friends(const sml::object& o) const {
                      << "friend void boost::serialization::load(Archive& ar"
                      << ", " << sn << "& v, unsigned int version);"
                      << std::endl;
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
+
 }
 
 void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
@@ -594,9 +567,6 @@ getters_and_setters(const sml::object& o) const {
     if (o.local_properties().empty())
         return;
 
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
-
     helper_->utility().public_access_specifier();
     bool is_first(true);
     for (const auto p : o.local_properties()) {
@@ -610,16 +580,14 @@ getters_and_setters(const sml::object& o) const {
             compound_type_getter_and_setter(o.name().simple_name(), p);
         is_first = false;
     }
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
+
 }
 
 void cpp_types_main_header_file_formatter::
 member_variables(const sml::object& o) const {
     if (o.local_properties().empty())
         return;
-
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
 
     helper_->utility().private_access_specifier();
     for (const auto p : o.local_properties()) {
@@ -630,7 +598,8 @@ member_variables(const sml::object& o) const {
                          << ";"
                          << std::endl;
     }
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
+
 }
 
 void cpp_types_main_header_file_formatter::
@@ -638,9 +607,6 @@ internal_equality(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (reader.is_false(sml::tags::cpp::types::generate_equality))
         return;
-
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
 
     const auto sn(o.name().simple_name());
     if (o.is_parent()) {
@@ -684,7 +650,8 @@ internal_equality(const sml::object& o) const {
                          <<  "& other) const override;"
                          << std::endl;
     }
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
+
 }
 
 void cpp_types_main_header_file_formatter::
@@ -692,9 +659,6 @@ to_stream(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (reader.is_false(sml::tags::cpp::types::generate_to_stream))
         return;
-
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
 
     helper_->utility().public_access_specifier();
     if (o.is_parent()) {
@@ -706,7 +670,8 @@ to_stream(const sml::object& o) const {
                          << "const override;"
                          << std::endl;
     }
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
+
 }
 
 void cpp_types_main_header_file_formatter::
@@ -719,9 +684,6 @@ internal_swap(const sml::object& o) const {
     if ((props.empty() && !o.is_parent()) || o.is_immutable())
         return;
 
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
-
     // swap is only public in leaf classes - MEC++-33
     if (o.is_parent())
         helper_->utility().protected_access_specifier();
@@ -731,7 +693,8 @@ internal_swap(const sml::object& o) const {
     const auto sn(o.name().simple_name());
     helper_->stream() << "void swap(" << sn << "& other) noexcept;"
                      << std::endl;
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
+
 }
 
 void cpp_types_main_header_file_formatter::
@@ -743,12 +706,9 @@ internal_assignment(const sml::object& o) const {
 
     const auto sn(o.name().simple_name());
     // FIXME: hack just to get zero diffs with legacy
-    // if (helper_->first_line_is_blank())
-    //     helper_->utility().blank_line();
-
     // helper_->utility().public_access_specifier();
     helper_->stream() << sn << "& operator=(" << sn << " other);" << std::endl;
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -756,9 +716,6 @@ visitor_method(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     if (reader.is_false(sml::tags::cpp::types::generate_accept))
         return;
-
-    if (helper_->first_line_is_blank())
-        helper_->utility().blank_line();
 
     helper_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
@@ -815,7 +772,7 @@ visitor_method(const sml::object& o) const {
         helper_->stream() << "v.visit(*this);" << std::endl;
     }
     helper_->stream() << "}" << std::endl;
-    helper_->first_line_is_blank(true);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::

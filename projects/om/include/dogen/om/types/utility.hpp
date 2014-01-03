@@ -88,6 +88,13 @@ public:
         const unsigned int how_many = 1);
 
     /**
+     * @brief Adds a single, managed blank line.
+     *
+     * Equivalent to calling blank_line(true, 1);
+     */
+    void managed_blank_line();
+
+    /**
      * @brief Formats the input as a member variable.
      */
     std::string as_member_variable(const std::string& property_name) const;

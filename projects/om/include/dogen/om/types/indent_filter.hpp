@@ -76,6 +76,13 @@ template <typename IndexType> bool xdent<IndexType>::initialized_;
  * stream.
  */
 class indent_filter : public boost::iostreams::output_filter {
+private:
+    void reset_blank_lines_management() {
+        manage_blank_lines_ = false;
+        found_cr_ = false;
+        found_lf_ = false;
+    }
+
 public:
     template<typename Sink>
     bool put(Sink& dest, int c) {
@@ -91,7 +98,6 @@ public:
                 return true;
             }
 
-            manage_blank_lines_ = false;
             if (found_cr_) {
                 found_cr_ = false;
                 boost::iostreams::put(dest, cr);
@@ -101,6 +107,7 @@ public:
                 found_lf_ = false;
                 boost::iostreams::put(dest, lf);
             }
+            reset_blank_lines_management();
         }
 
         if (c == lf) {
@@ -132,9 +139,13 @@ public:
     /**
      * @brief Decrease indentation level by one.
      */
-    void decrement_indentation_level() {
-        if (indentation_level_ > 0)
+    void decrement_indentation_level(const bool reset = true) {
+        if (indentation_level_ > 0) {
             --indentation_level_;
+
+            if (reset)
+                reset_blank_lines_management();
+        }
     }
 
 public:
@@ -169,7 +180,10 @@ public:
     /**
      * @brief Try to suppress trailing blank lines.
      */
-    void manage_blank_lines() { manage_blank_lines_ = true; }
+    void manage_blank_lines() {
+        reset_blank_lines_management();
+        manage_blank_lines_ = true;
+    }
 
 private:
     explicit indent_filter(const unsigned int indentation_size)
@@ -256,10 +270,11 @@ public:
         : stream_(s), started_at_zero_(false) {
 
         indent_filter* filter((indent_filter*)s.pword(xdent<int>()()));
-        if (filter)
+        if (filter) {
             started_at_zero_ = filter->indentation_level() == 0;
-
-        stream_ << indent_out;
+            const auto do_not_reset_management(false);
+            filter->decrement_indentation_level(do_not_reset_management);
+        }
     }
 
     ~basic_negative_indenter_scope() {

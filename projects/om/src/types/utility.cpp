@@ -100,6 +100,10 @@ blank_line(const bool is_managed, const unsigned int how_many) {
         stream_ << std::endl;
 }
 
+void utility::managed_blank_line() {
+    blank_line(true);
+}
+
 std::string utility::
 as_member_variable(const std::string& property_name) const {
     return property_name + member_variable_postfix;
