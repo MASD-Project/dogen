@@ -233,3 +233,18 @@
    fun:_ZN8databaseL69inserting_no_keys_instances_results_in_expected_rows_in_table_invokerEv
    ...
 }
+
+{
+   odb 9
+   Memcheck:Value8
+   ...
+   fun:PQgetResult
+   ...
+   fun:_ZN3odb5pgsql10connection7executeEPKcm
+   fun:_ZN3odb8database7executeEPKcm
+   fun:_ZN3odb8database7executeEPKc
+   fun:_ZN3odb6access18object_traits_implIN5dogen8database11primary_keyELNS_11database_idE2EE13create_schemaERNS_8databaseEtb
+   fun:_ZN3odb14schema_catalog13create_schemaERNS_8databaseERKSs
+   fun:_ZN12_GLOBAL__N_117create_db_fixtureC1Ev
+   ...
+}
