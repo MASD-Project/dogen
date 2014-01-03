@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -31,6 +32,7 @@ namespace {
 const std::string test_module("om");
 const std::string test_suite("cpp_file_boilerplate_formatter_spec");
 const std::string marker("this is a marker");
+const std::string empty;
 const std::string empty_marker;
 const dogen::om::licence empty_licence = dogen::om::licence();
 const dogen::om::cpp_includes empty_includes = dogen::om::cpp_includes();
@@ -256,13 +258,13 @@ dogen::om::cpp_includes mock_includes() {
 
 using namespace dogen::om;
 using namespace dogen::utility::test;
+using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(cpp_file_boilerplate_formatter)
 
 BOOST_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("top_modeline_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
     const auto m(mock_modeline(dogen::om::modeline_locations::top));
     const auto l(mock_licence());
     const annotation a(m, l, marker);
@@ -272,9 +274,7 @@ BOOST_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == modeline_top);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << modeline_top;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -291,9 +291,7 @@ BOOST_AUTO_TEST_CASE(top_modeline_and_multiline_licence_is_formatted_correctly) 
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == multiline_licence);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << multiline_licence;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(multiline_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -310,9 +308,7 @@ BOOST_AUTO_TEST_CASE(bottom_modeline_is_formatted_correctly) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == modeline_bottom);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << modeline_bottom;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -329,9 +325,7 @@ BOOST_AUTO_TEST_CASE(no_marker_is_formatted_correctly) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == no_marker);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << no_marker;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(no_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -347,9 +341,7 @@ BOOST_AUTO_TEST_CASE(no_licence_is_formatted_correctly) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == no_licence);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << no_licence;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(no_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -367,9 +359,7 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == licence_no_text);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << licence_no_text;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(licence_no_text, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -387,9 +377,7 @@ BOOST_AUTO_TEST_CASE(licence_with_text_but_no_holders_is_formatted_correctly) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == licence_no_holders);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << licence_no_holders;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(licence_no_holders, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -405,9 +393,7 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_marker_is_formatted_correctly) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == just_marker);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << just_marker;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(just_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -423,9 +409,7 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_modeline_at_the_top_is_formatted_correct
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == just_modeline_top);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << just_modeline_top;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(just_modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -441,9 +425,7 @@ BOOST_AUTO_TEST_CASE(postamble_with_just_modeline_at_the_bottom_is_formatted_cor
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == just_modeline_bottom);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << just_modeline_bottom;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(just_modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -458,9 +440,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
     f.format_begin(s, a, empty_includes, empty_path);
     f.format_end(s, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r.empty());
-    BOOST_LOG_SEV(lg, debug) << "expected: <empty>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(empty, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -478,8 +458,7 @@ BOOST_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
     f.format_end(s, a, a_path);
     const auto r(s.str());
     BOOST_CHECK(r == guards_with_top_modeline);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << guards_with_top_modeline;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(guards_with_top_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -496,9 +475,7 @@ BOOST_AUTO_TEST_CASE(header_guards_with_bottom_modeline_are_formatted_correctly)
     f.format_begin(s, a, empty_includes, a_path);
     f.format_end(s, a, a_path);
     const auto r(s.str());
-    BOOST_CHECK(r == guards_with_bottom_modeline);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << guards_with_bottom_modeline;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(guards_with_bottom_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -516,9 +493,7 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     f.format_begin(s, a, i, a_path);
     f.format_end(s, a, a_path);
     const auto r(s.str());
-    BOOST_CHECK(r == includes_with_top_modeline);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << includes_with_top_modeline;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(includes_with_top_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -536,9 +511,7 @@ BOOST_AUTO_TEST_CASE(disabled_preamble_is_formatted_correctly) {
     f.format_begin(s, a, i, a_path);
     f.format_end(s, a, a_path);
     const auto r(s.str());
-    BOOST_CHECK(r == disabled_preamble);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << disabled_preamble;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(disabled_preamble, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 

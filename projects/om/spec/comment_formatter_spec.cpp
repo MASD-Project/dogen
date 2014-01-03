@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/om/types/comment_formatter.hpp"
@@ -130,6 +131,7 @@ std::string format(const dogen::om::comment_formatter& f, const Content& c) {
 }
 
 using namespace dogen::utility::test;
+using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(comment_formatter)
 
@@ -138,9 +140,7 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_c_style_comment_produces_expecte
 
     dogen::om::comment_formatter f;
     const auto r(format(f, empty));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl << c_style_empty;
-    BOOST_CHECK(r == c_style_empty);
+    BOOST_CHECK(asserter::assert_equals_marker(c_style_empty, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_doxygen_c_style_comment_produces_expected_output) {
@@ -154,10 +154,7 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_doxygen_c_style_comment_produces
         !last_line_is_blank);
 
     const auto r(format(f, empty));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl
-                             << doxygen_c_style_empty;
-    BOOST_CHECK(r == doxygen_c_style_empty);
+    BOOST_CHECK(asserter::assert_equals_marker(doxygen_c_style_empty, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_output) {
@@ -172,9 +169,7 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_out
 
     std::list<std::string> content { modeline, licence };
     const auto r(format(f, content, line_between_blocks));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl << licence_c_style;
-    BOOST_CHECK(r == licence_c_style);
+    BOOST_CHECK(asserter::assert_equals_marker(licence_c_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_licence_as_shell_style_comment_produces_expected_output) {
@@ -189,9 +184,7 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_shell_style_comment_produces_expected
 
     std::list<std::string> content { modeline, licence };
     const auto r(format(f, content, line_between_blocks));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl << licence_shell_style;
-    BOOST_CHECK(r == licence_shell_style);
+    BOOST_CHECK(asserter::assert_equals_marker(licence_shell_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_modeline_as_shell_style_comment_produces_expected_output) {
@@ -205,10 +198,7 @@ BOOST_AUTO_TEST_CASE(formatting_modeline_as_shell_style_comment_produces_expecte
         !last_line_is_blank);
 
     const auto r(format(f, modeline));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl
-                             << modeline_shell_style;
-    BOOST_CHECK(r == modeline_shell_style);
+    BOOST_CHECK(asserter::assert_equals_marker(modeline_shell_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_c_style_comment_produces_expected_output) {
@@ -222,10 +212,7 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_c_style_comment_produces_exp
         !last_line_is_blank);
 
     const auto r(format(f, doxygen_brief));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl
-                             << function_doxygen;
-    BOOST_CHECK(r == function_doxygen);
+    BOOST_CHECK(asserter::assert_equals_marker(function_doxygen, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_expected_output) {
@@ -239,10 +226,7 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_e
         last_line_is_blank);
 
     const auto r(format(f, doxgen_multi_line));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl
-                             << multi_line_doxygen_c_style;
-    BOOST_CHECK(r == multi_line_doxygen_c_style);
+    BOOST_CHECK(asserter::assert_equals_marker(multi_line_doxygen_c_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_cpp_style_comment_produces_expected_output) {
@@ -256,10 +240,7 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_cpp_style_comment_produces_e
         !last_line_is_blank);
 
     const auto r(format(f, enumeration));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl
-                             << enumeration_doxygen;
-    BOOST_CHECK(r == enumeration_doxygen);
+    BOOST_CHECK(asserter::assert_equals_marker(enumeration_doxygen, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_shell_style_comment_produces_expected_output) {
@@ -273,10 +254,7 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_shell_style_comment_produces_
         !last_line_is_blank);
 
     const auto r(format(f, multi_line_text));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << std::endl << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << std::endl
-                             << multi_line_text_shell_style;
-    BOOST_CHECK(r == multi_line_text_shell_style);
+    BOOST_CHECK(asserter::assert_equals_marker(multi_line_text_shell_style, r));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

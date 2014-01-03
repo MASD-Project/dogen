@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/om/types/modeline.hpp"
@@ -104,6 +105,7 @@ format(const dogen::om::modeline_formatter& f, const dogen::om::modeline& m) {
 }
 
 using namespace dogen::utility::test;
+using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(modeline_formatter)
 
@@ -114,9 +116,7 @@ BOOST_AUTO_TEST_CASE(emacs_top_modeline_results_in_expected_modeline) {
     const auto m(mock_emacs_modeline(dogen::om::modeline_locations::top));
     dogen::om::modeline_formatter f;
     const auto r(format(f, m));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << emacs_top_modeline;
-    BOOST_CHECK(r == emacs_top_modeline);
+    BOOST_CHECK(asserter::assert_equals_marker(emacs_top_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -127,9 +127,7 @@ BOOST_AUTO_TEST_CASE(emacs_bottom_modeline_results_in_expected_modeline) {
     const auto m(mock_emacs_modeline(dogen::om::modeline_locations::bottom));
     dogen::om::modeline_formatter f;
     const auto r(format(f, m));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << emacs_bottom_modeline;
-    BOOST_CHECK(r == emacs_bottom_modeline);
+    BOOST_CHECK(asserter::assert_equals_marker(emacs_bottom_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -140,16 +138,11 @@ BOOST_AUTO_TEST_CASE(vim_top_modeline_results_in_expected_modeline) {
     const auto m0(mock_vim_modeline(dogen::om::modeline_locations::top));
     dogen::om::modeline_formatter f;
     const auto r0(format(f, m0));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r0;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << vim_modeline;
-    BOOST_CHECK(r0 == vim_modeline);
+    BOOST_CHECK(asserter::assert_equals_marker(vim_modeline, r0));
 
     const auto m1(mock_vim_modeline(dogen::om::modeline_locations::bottom));
     const auto r1(format(f, m1));
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r1;
-    BOOST_LOG_SEV(lg, debug) << "expected: " << vim_modeline;
-    BOOST_CHECK(r1 == vim_modeline);
-
+    BOOST_CHECK(asserter::assert_equals_marker(vim_modeline, r1));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 

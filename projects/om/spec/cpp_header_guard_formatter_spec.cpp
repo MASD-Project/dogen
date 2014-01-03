@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -30,6 +31,7 @@ namespace {
 
 const std::string test_module("om");
 const std::string test_suite("cpp_header_guard_formatter_spec");
+const std::string empty;
 const boost::filesystem::path empty_path;
 const boost::filesystem::path non_empty_path("a/file.hpp");
 
@@ -47,6 +49,7 @@ const std::string with_guard(R"(#ifndef A_FILE_HPP
 
 using namespace dogen::om;
 using namespace dogen::utility::test;
+using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(cpp_header_guard_formatter)
 
@@ -59,9 +62,7 @@ BOOST_AUTO_TEST_CASE(non_empty_path_produces_expected_header_guards) {
     f.format_begin(s, non_empty_path);
     f.format_end(s, non_empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r == with_guard);
-    BOOST_LOG_SEV(lg, debug) << "expected: " << with_guard;
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(with_guard, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
@@ -74,9 +75,7 @@ BOOST_AUTO_TEST_CASE(empty_path_produces_no_header_guards) {
     f.format_begin(s, empty_path);
     f.format_end(s, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(r.empty());
-    BOOST_LOG_SEV(lg, debug) << "expected: <empty>";
-    BOOST_LOG_SEV(lg, debug) << "actual: " << r;
+    BOOST_CHECK(asserter::assert_equals_marker(empty, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
