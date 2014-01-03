@@ -8,6 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider creating an iostreams filter for comments                :story:
+
+Seems logic to follow the filtering idea and add a doxygen (or
+generic) commenting filter; one inserts into the stream and it
+automatically inserts all the comment markers such as =/**=, =@brief=
+and so on. Basically takes on the work of =comment_formatter=. This
+would mean we would no longer need the =contents= vector, and we could
+stream directly to the stream, after pushing the comments formatter on
+to it. However, it would probably mean we need to cast the stream to a
+=filtering_ostream= in order to do the push.
+
 *** Use consistently the American spelling for license                :story:
 
 We have a mix of American and British spelling of license (e.g. data
