@@ -18,14 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/io/annotation_io.hpp"
-#include "dogen/om/io/comment_styles_io.hpp"
-#include "dogen/om/io/cpp_includes_io.hpp"
-#include "dogen/om/io/editors_io.hpp"
-#include "dogen/om/io/file_io.hpp"
-#include "dogen/om/io/licence_io.hpp"
-#include "dogen/om/io/modeline_field_io.hpp"
-#include "dogen/om/io/modeline_group_io.hpp"
-#include "dogen/om/io/modeline_io.hpp"
-#include "dogen/om/io/modeline_locations_io.hpp"
+#include <ostream>
+#include <stdexcept>
 #include "dogen/om/io/padding_types_io.hpp"
+
+namespace dogen {
+namespace om {
+
+std::ostream& operator<<(std::ostream& s, const padding_types& v) {
+    s << "{ " << "\"__type__\": " << "\"padding_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case padding_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case padding_types::none:
+        attr = "\"none\"";
+        break;
+    case padding_types::before:
+        attr = "\"before\"";
+        break;
+    case padding_types::after:
+        attr = "\"after\"";
+        break;
+    case padding_types::before_and_after:
+        attr = "\"before_and_after\"";
+        break;
+    case padding_types::new_line:
+        attr = "\"new_line\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for padding_types");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} }

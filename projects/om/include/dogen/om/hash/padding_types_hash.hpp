@@ -18,14 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/annotation_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/cpp_includes_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/padding_types_hash.hpp"
+#ifndef DOGEN_OM_HASH_PADDING_TYPES_HASH_HPP
+#define DOGEN_OM_HASH_PADDING_TYPES_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/om/types/padding_types.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::om::padding_types> {
+public:
+    size_t operator()(const dogen::om::padding_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
+
+#endif

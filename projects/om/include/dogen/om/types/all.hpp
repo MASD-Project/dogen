@@ -49,6 +49,8 @@
 #include "dogen/om/types/modeline_group_hydrator.hpp"
 #include "dogen/om/types/modeline_locations.hpp"
 #include "dogen/om/types/module_formatter_interface.hpp"
+#include "dogen/om/types/padding_types.hpp"
 #include "dogen/om/types/type_formatter_interface.hpp"
+#include "dogen/om/types/utility.hpp"
 #include "dogen/om/types/workflow.hpp"
 #include "dogen/om/types/workflow_error.hpp"

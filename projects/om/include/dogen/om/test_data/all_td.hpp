@@ -28,3 +28,4 @@
 #include "dogen/om/test_data/modeline_group_td.hpp"
 #include "dogen/om/test_data/modeline_locations_td.hpp"
 #include "dogen/om/test_data/modeline_td.hpp"
+#include "dogen/om/test_data/padding_types_td.hpp"

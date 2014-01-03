@@ -28,4 +28,5 @@
 #include "dogen/om/serialization/modeline_group_ser.hpp"
 #include "dogen/om/serialization/modeline_locations_ser.hpp"
 #include "dogen/om/serialization/modeline_ser.hpp"
+#include "dogen/om/serialization/padding_types_ser.hpp"
 #include "dogen/om/serialization/registrar_ser.hpp"

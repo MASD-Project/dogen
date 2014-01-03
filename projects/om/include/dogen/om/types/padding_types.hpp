@@ -18,14 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/annotation_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/cpp_includes_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/padding_types_hash.hpp"
+#ifndef DOGEN_OM_TYPES_PADDING_TYPES_HPP
+#define DOGEN_OM_TYPES_PADDING_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace om {
+
+/**
+ * @brief What kind of padding to use in the utility class when returning keywords.
+ *
+ * Padding in this context is understood as the addition of spaces.
+ */
+enum class padding_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    none = 1, ///< No spaces are to be added.
+    before = 2, ///< A space is to be added before the identifier.
+    after = 3, ///< A space is to be added after the identifier.
+    before_and_after = 4, ///< A space is to be added before and after the identifier.
+    new_line = 5 ///< A new line is to be added after the identifier.
+};
+
+} }
+
+#endif

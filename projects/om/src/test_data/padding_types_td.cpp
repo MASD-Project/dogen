@@ -18,14 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/annotation_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/cpp_includes_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/padding_types_hash.hpp"
+#include "dogen/om/test_data/padding_types_td.hpp"
+
+namespace dogen {
+namespace om {
+
+padding_types_generator::padding_types_generator() : position_(0) { }
+void padding_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<padding_types>(position % 6);
+}
+
+padding_types_generator::result_type
+padding_types_generator::create(const unsigned int  position) {
+    result_type r;
+    padding_types_generator::populate(position, r);
+    return r;
+}
+
+padding_types_generator::result_type
+padding_types_generator::operator()() {
+    return create(position_++);
+}
+
+} }

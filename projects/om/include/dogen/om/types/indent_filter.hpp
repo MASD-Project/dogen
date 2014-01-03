@@ -283,13 +283,17 @@ typedef basic_negative_indenter_scope<char> negative_indenter_scope;
  */
 /**@{*/
 template<class char_type, class traits_type>
-inline void operator++(std::basic_ostream<char_type, traits_type>& s) {
+inline std::basic_ostream<char_type, traits_type>&
+operator++(std::basic_ostream<char_type, traits_type>& s) {
     s << dogen::om::indent_in;
+    return s;
 }
 
 template<class char_type, class traits_type>
-inline void operator--(std::basic_ostream<char_type, traits_type>& s) {
+inline std::basic_ostream<char_type, traits_type>&
+operator--(std::basic_ostream<char_type, traits_type>& s) {
     s << dogen::om::indent_out;
+    return s;
 }
 /**@}*/
 

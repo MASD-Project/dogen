@@ -21,7 +21,6 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
@@ -30,6 +29,8 @@
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/object.hpp"
+#include "dogen/om/types/utility.hpp"
+#include "dogen/om/types/indent_filter.hpp"
 #include "dogen/om/types/formatting_error.hpp"
 #include "dogen/om/types/cpp_file_boilerplate_formatter.hpp"
 #include "dogen/om/types/cpp_types_main_header_file_formatter.hpp"
@@ -82,9 +83,10 @@ private:
 public:
     ~helper() noexcept { }
 
-    helper(const sml::model& /*m*/, const boost::property_tree::ptree& meta_data,
+    helper(const sml::model& /*m*/,
+        const boost::property_tree::ptree& meta_data,
         const annotation& a)
-        : /*model_(m),*/ utility_(stream_, indenter_), first_line_is_blank_(false),
+        : /*model_(m),*/ utility_(stream_), first_line_is_blank_(false),
           boilerplate_(is_true(meta_data, sml::tags::generate_preamble),
               is_true(meta_data,
                   sml::tags::cpp::types::header_file::generate_header_guards)),
@@ -94,6 +96,9 @@ public:
         using types = sml::tags::cpp::types;
         const auto& fn(types::header_file::file_name);
         relative_file_path_ = reader.get(fn);
+
+        dogen::om::indent_filter::push(stream_, 4);
+        stream_.push(string_stream_);
     }
 
 private:
@@ -104,17 +109,17 @@ public:
     /**
      * @brief Stream to which the formatted output will be sent.
      */
-    std::ostringstream& stream() { return stream_; }
+    std::ostream& stream() { return stream_; }
 
     /**
-     * @brief Indentation facilities.
+     * @brief Returns the contents of the stream.
      */
-    cpp_formatters::indenter& indenter() { return indenter_; }
+    std::string contents() const { return string_stream_.str(); }
 
     /**
      * @brief Formatting utility methods.
      */
-    cpp_formatters::utility& utility() { return utility_; }
+    om::utility& utility() { return utility_; }
 
     /**
      * @brief Relative path of the element being formatted.
@@ -154,14 +159,14 @@ public:
 
 private:
     /*const sml::model& model_;*/
-    std::ostringstream stream_;
-    cpp_formatters::indenter indenter_;
-    cpp_formatters::utility utility_;
+    boost::iostreams::filtering_ostream stream_;
+    om::utility utility_;
     bool first_line_is_blank_;
     cpp_includes includes_;
     cpp_file_boilerplate_formatter boilerplate_;
     const annotation annotation_;
     boost::filesystem::path relative_file_path_;
+    std::ostringstream string_stream_;
 };
 
 void cpp_types_main_header_file_formatter::helper::
@@ -216,7 +221,7 @@ build_file(const boost::property_tree::ptree& meta_data) const {
     ensure_non_null_helper();
     file r;
     sml::meta_data_reader reader(meta_data);
-    r.contents(helper_->stream().str());
+    r.contents(helper_->contents());
     r.relative_path(helper_->relative_file_path());
     r.absolute_path(include_directory_ / helper_->relative_file_path());
     r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
@@ -230,18 +235,16 @@ external_equality(const sml::object& o) const {
         !o.is_parent())
         return;
 
+    const auto nl(padding_types::new_line);
     const auto n(reader.get(sml::tags::cpp::types::qualified_name));
-    helper_->stream() << helper_->indenter()
-                      << "inline bool operator==(const "
-                      << n << "& lhs, const " << n << "& rhs) ";
-    helper_->utility().open_scope();
+    helper_->stream() << "inline bool operator==(const "
+                     << n << "& lhs, const " << n << "& rhs) ";
+    helper_->utility().open_scope(nl);
     {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
-        helper_->stream() << helper_->indenter()
-                          << "return lhs.equals(rhs);" << std::endl;
+        positive_indenter_scope s(helper_->stream());
+        helper_->stream() << "return lhs.equals(rhs);" << std::endl;
     }
-    helper_->utility().close_scope();
-    helper_->utility().blank_line();
+    helper_->utility().close_scope(nl);
 }
 
 void cpp_types_main_header_file_formatter::
@@ -257,27 +260,20 @@ external_swap(const sml::object& o) const {
     cpp_formatters::namespace_helper ns(helper_->stream(), std_ns);
     helper_->utility().blank_line();
 
-    helper_->stream() << helper_->indenter() << "template<>" << std::endl
-                      << helper_->indenter() << "inline void swap("
-                      << std::endl;
-
+    const auto nl(padding_types::new_line);
+    helper_->stream() << "template<>" << std::endl
+                     << "inline void swap(" << std::endl;
     {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
-        helper_->stream() << helper_->indenter();
-
+        positive_indenter_scope s(helper_->stream());
         sml::meta_data_reader reader(o.meta_data());
         const auto n(reader.get(sml::tags::cpp::types::qualified_name));
-        helper_->stream() << n << "& lhs," << std::endl;
+        helper_->stream() << n << "& lhs," << std::endl
+                         << n << "& rhs) ";
 
-        helper_->stream() << helper_->indenter();
-        helper_->stream() << n << "& rhs) ";
-
-        helper_->utility().open_scope();
-        helper_->stream() << helper_->indenter() << "lhs.swap(rhs);"
-                          << std::endl;
+        helper_->utility().open_scope(nl);
+        helper_->stream() << "lhs.swap(rhs);" << std::endl;
     }
-    helper_->utility().close_scope();
-    helper_->utility().blank_line();
+    helper_->utility().close_scope(nl);
 }
 
 void cpp_types_main_header_file_formatter::
@@ -287,8 +283,7 @@ external_inserter(const sml::object& o) const {
         !reader.is_true(sml::tags::cpp::io::enable_integrated_io))
         return;
 
-    helper_->stream() << helper_->indenter()
-                      << "std::ostream& operator<<(std::ostream& s, "
+    helper_->stream() << "std::ostream& operator<<(std::ostream& s, "
                       << "const " << o.name().simple_name() << "& v);"
                       << std::endl;
     helper_->utility().blank_line();
@@ -299,8 +294,7 @@ open_class(const sml::object& o) const {
     if (!o.documentation().empty())
         doxygen_next_.format(helper_->stream(), o.documentation());
 
-    helper_->stream() << helper_->indenter() << "class "
-                      << o.name().simple_name();
+    helper_->stream() << "class " << o.name().simple_name();
 
     if (!o.is_parent())
         helper_->stream() << " final";
@@ -327,7 +321,7 @@ open_class(const sml::object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::close_class() const {
-    helper_->stream() << helper_->indenter() << "};" << std::endl;
+    helper_->stream() << "};" << std::endl;
 }
 
 void cpp_types_main_header_file_formatter::
@@ -343,35 +337,26 @@ explicitly_defaulted_functions(const sml::object& o) const {
     helper_->utility().public_access_specifier();
 
     const auto& sn(o.name().simple_name());
-    if (reader.is_false(types::generate_explicit_default_constructor)) {
-        helper_->stream() << helper_->indenter() << sn << "() = default;"
-                          << std::endl;
-    }
+    if (reader.is_false(types::generate_explicit_default_constructor))
+        helper_->stream() << sn << "() = default;" << std::endl;
 
-    helper_->stream() << helper_->indenter() << sn << "(const " << sn
-                      << "&) = default;" << std::endl;
+    helper_->stream() << sn << "(const " << sn << "&) = default;" << std::endl;
 
-    if (reader.is_false(types::generate_explicit_move_constructor)) {
-        helper_->stream() << helper_->indenter() << sn << "(" << sn
-                          << "&&) = default;" << std::endl;
-    }
+    if (reader.is_false(types::generate_explicit_move_constructor))
+        helper_->stream() << sn << "(" << sn << "&&) = default;" << std::endl;
 
-    if (!o.is_parent() && !o.is_child()) {
-        helper_->stream() << helper_->indenter() << "~" << sn
-                          << "() = default;" << std::endl;
-    }
+    if (!o.is_parent() && !o.is_child())
+        helper_->stream() << "~" << sn << "() = default;" << std::endl;
 
     if (o.is_immutable()) {
-        helper_->stream() << helper_->indenter() << sn
-                          << "& operator=(const " << sn << "&) = delete;"
-                          << std::endl;
+        helper_->stream() << sn << "& operator=(const " << sn << "&) = delete;"
+                         << std::endl;
     } else {
         const auto p(o.all_properties());
         if (p.empty()) {
-            helper_->stream() << helper_->indenter() << sn
-                              << "& operator=(const " << sn
-                              << "&) = default;"
-                              << std::endl;
+            helper_->stream() << sn << "& operator=(const "
+                             << sn << "&) = default;"
+                             << std::endl;
         }
     }
     helper_->first_line_is_blank(true);
@@ -388,8 +373,7 @@ default_constructor(const sml::object& o) const {
         helper_->utility().blank_line();
 
     helper_->utility().public_access_specifier();
-    helper_->stream() << helper_->indenter()
-                      << o.name().simple_name() << "();" << std::endl;
+    helper_->stream() << o.name().simple_name() << "();" << std::endl;
     helper_->first_line_is_blank(true);
 }
 
@@ -415,9 +399,8 @@ complete_constructor(const sml::object& o) const {
         const auto p(*props.begin());
         sml::meta_data_reader reader(p.meta_data());
         using types = sml::tags::cpp::types;
-        helper_->stream() << helper_->indenter() << "explicit "
-                          << sn << "(const "
-                          << reader.get(types::complete_name);
+        helper_->stream() << "explicit " << sn << "(const "
+                         << reader.get(types::complete_name);
 
         if (!reader.is_true(types::is_simple_type))
             helper_->stream() << "&";
@@ -427,17 +410,16 @@ complete_constructor(const sml::object& o) const {
         return;
     }
 
-    helper_->stream() << helper_->indenter() << sn << "(";
+    helper_->stream() << sn << "(";
     {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
+        positive_indenter_scope s(helper_->stream());
         bool is_first(true);
         for (const auto p : props) {
             helper_->stream() << (is_first ? "" : ",") << std::endl;
 
             sml::meta_data_reader reader(p.meta_data());
             using types = sml::tags::cpp::types;
-            helper_->stream() << helper_->indenter() << "const "
-                              << reader.get(types::complete_name);
+            helper_->stream() << "const " << reader.get(types::complete_name);
 
             if (!reader.is_true(types::is_simple_type))
                 helper_->stream() << "&";
@@ -466,8 +448,7 @@ move_constructor(const sml::object& o) const {
 
     helper_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
-    helper_->stream() << helper_->indenter() << sn << "(" << sn
-                      << "&& rhs);" << std::endl;
+    helper_->stream() << sn << "(" << sn << "&& rhs);" << std::endl;
     helper_->first_line_is_blank(true);
 }
 
@@ -492,11 +473,11 @@ destructor(const sml::object& o) const {
          * incidentally, this also fixes some strange clang errors:
          * undefined reference to `vtable.
          */
-        helper_->stream() << helper_->indenter() << "virtual ~" << sn
-                          << "() noexcept = 0;" << std::endl;
+        helper_->stream() << "virtual ~" << sn
+                         << "() noexcept = 0;" << std::endl;
     } else if (o.is_parent()) {
-        helper_->stream() << helper_->indenter() << "virtual ~" << sn
-                          << "() noexcept { }" << std::endl;
+        helper_->stream() << "virtual ~" << sn
+                         << "() noexcept { }" << std::endl;
     }
     helper_->first_line_is_blank(true);
 }
@@ -513,20 +494,16 @@ friends(const sml::object& o) const {
 
     helper_->utility().private_access_specifier();
     const auto sn(o.name().simple_name());
-    helper_->stream() << helper_->indenter()
-                      << "template<typename Archive>" << std::endl
-                      << helper_->indenter()
-                      << "friend void boost::serialization::save(Archive& ar"
-                      << ", const " << sn << "& v, unsigned int version);"
-                      << std::endl;
+    helper_->stream() << "template<typename Archive>" << std::endl
+                     << "friend void boost::serialization::save(Archive& ar"
+                     << ", const " << sn << "& v, unsigned int version);"
+                     << std::endl;
     helper_->utility().blank_line();
 
-    helper_->stream() << helper_->indenter() << "template<typename Archive>"
-                      << std::endl
-                      << helper_->indenter()
-                      << "friend void boost::serialization::load(Archive& ar"
-                      << ", " << sn << "& v, unsigned int version);"
-                      << std::endl;
+    helper_->stream() << "template<typename Archive>" << std::endl
+                     << "friend void boost::serialization::load(Archive& ar"
+                     << ", " << sn << "& v, unsigned int version);"
+                     << std::endl;
     helper_->first_line_is_blank(true);
 }
 
@@ -542,11 +519,9 @@ void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
     sml::meta_data_reader reader(p.meta_data());
     using types = sml::tags::cpp::types;
     const auto cn(reader.get(types::complete_name));
-    helper_->stream() << helper_->indenter()
-                      << cn << " " << p.name() << "() const;" << std::endl;
+    helper_->stream() << cn << " " << p.name() << "() const;" << std::endl;
 
     if (!p.is_immutable()) {
-        helper_->stream() << helper_->indenter();
         if (p.is_fluent())
             helper_->stream() << owner_name << "& ";
         else
@@ -578,16 +553,14 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
     sml::meta_data_reader reader(p.meta_data());
     using types = sml::tags::cpp::types;
     const auto cn(reader.get(types::complete_name));
-    helper_->stream() << helper_->indenter() << "const " << cn
-                      << "& " << p.name() << "() const;" << std::endl;
+    helper_->stream() << "const " << cn << "& " << p.name() << "() const;"
+                     << std::endl;
 
     if (!p.is_immutable()) {
         // Popsicle immutability
-        helper_->stream() << helper_->indenter() << "" << cn
-                          << "& " << p.name() << "();" << std::endl;
+        helper_->stream() << "" << cn << "& " << p.name() << "();" << std::endl;
 
         // traditional setter
-        helper_->stream() << helper_->indenter();
         if (p.is_fluent())
             helper_->stream() << owner_name << "& ";
         else
@@ -600,7 +573,6 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
         helper_->stream() << " v);" << std::endl;
 
         // move setter
-        helper_->stream() << helper_->indenter();
         if (p.is_fluent())
             helper_->stream() << owner_name << "& ";
         else
@@ -652,12 +624,11 @@ member_variables(const sml::object& o) const {
     helper_->utility().private_access_specifier();
     for (const auto p : o.local_properties()) {
         sml::meta_data_reader reader(p.meta_data());
-        helper_->stream() << helper_->indenter()
-                          << reader.get(sml::tags::cpp::types::complete_name)
-                          << " "
-                          << helper_->utility().as_member_variable(p.name())
-                          << ";"
-                          << std::endl;
+        helper_->stream() << reader.get(sml::tags::cpp::types::complete_name)
+                         << " "
+                         << helper_->utility().as_member_variable(p.name())
+                         << ";"
+                         << std::endl;
     }
     helper_->first_line_is_blank(true);
 }
@@ -675,22 +646,21 @@ internal_equality(const sml::object& o) const {
     if (o.is_parent()) {
         // equality is only public in leaf classes - MEC++-33
         helper_->utility().protected_access_specifier();
-        helper_->stream() << helper_->indenter() << "bool compare(const "
-                          << sn << "& rhs) const;" << std::endl;
+        helper_->stream() << "bool compare(const " << sn << "& rhs) const;"
+                         << std::endl;
     } else {
         helper_->utility().public_access_specifier();
-        helper_->stream() << helper_->indenter() << "bool operator==(const "
-                          << sn <<  "& rhs) const;" << std::endl;
-        helper_->stream() << helper_->indenter() << "bool operator!=(const "
-                          << sn << "& rhs) const ";
+        helper_->stream() << "bool operator==(const " << sn
+                         << "& rhs) const;" << std::endl;
+        helper_->stream() << "bool operator!=(const " << sn << "& rhs) const ";
         helper_->utility().open_scope();
         {
-            cpp_formatters::positive_indenter_scope s(helper_->indenter());
-            helper_->stream() << helper_->indenter()
-                              << "return !this->operator==(rhs);"
-                              << std::endl;
+            positive_indenter_scope s(helper_->stream());
+            helper_->stream() << "return !this->operator==(rhs);" << std::endl;
         }
-        helper_->utility().close_scope();
+
+        const auto nl(padding_types::new_line);
+        helper_->utility().close_scope(nl);
     }
 
     if (!o.is_parent() && !o.is_child())
@@ -700,22 +670,19 @@ internal_equality(const sml::object& o) const {
     helper_->utility().public_access_specifier();
     using types = sml::tags::cpp::types;
     if (o.is_parent() && !o.is_child()) {
-        helper_->stream() << helper_->indenter()
-                          << "virtual bool equals(const " << sn
-                          <<  "& other) const = 0;"
-                          << std::endl;
+        helper_->stream() << "virtual bool equals(const " << sn
+                         <<  "& other) const = 0;"
+                         << std::endl;
     } else if (o.is_parent()) {
-        helper_->stream() << helper_->indenter()
-                          << "virtual bool equals(const "
-                          << reader.get(types::qualified_original_parent_name)
-                          <<  "& other) const = 0;"
-                          << std::endl;
+        helper_->stream() << "virtual bool equals(const "
+                         << reader.get(types::qualified_original_parent_name)
+                         <<  "& other) const = 0;"
+                         << std::endl;
     } else {
-        helper_->stream() << helper_->indenter()
-                          << "bool equals(const "
-                          << reader.get(types::qualified_original_parent_name)
-                          <<  "& other) const override;"
-                          << std::endl;
+        helper_->stream() << "bool equals(const "
+                         << reader.get(types::qualified_original_parent_name)
+                         <<  "& other) const override;"
+                         << std::endl;
     }
     helper_->first_line_is_blank(true);
 }
@@ -731,15 +698,13 @@ to_stream(const sml::object& o) const {
 
     helper_->utility().public_access_specifier();
     if (o.is_parent()) {
-        helper_->stream() << helper_->indenter()
-                          << "virtual void to_stream("
-                          << "std::ostream& s) const;"
-                          << std::endl;
+        helper_->stream() << "virtual void to_stream("
+                         << "std::ostream& s) const;"
+                         << std::endl;
     } else {
-        helper_->stream() << helper_->indenter()
-                          << "void to_stream(std::ostream& s) "
-                          << "const override;"
-                          << std::endl;
+        helper_->stream() << "void to_stream(std::ostream& s) "
+                         << "const override;"
+                         << std::endl;
     }
     helper_->first_line_is_blank(true);
 }
@@ -764,9 +729,8 @@ internal_swap(const sml::object& o) const {
         helper_->utility().public_access_specifier();
 
     const auto sn(o.name().simple_name());
-    helper_->stream() << helper_->indenter() << "void swap("
-                      << sn << "& other) noexcept;"
-                      << std::endl;
+    helper_->stream() << "void swap(" << sn << "& other) noexcept;"
+                     << std::endl;
     helper_->first_line_is_blank(true);
 }
 
@@ -783,8 +747,7 @@ internal_assignment(const sml::object& o) const {
     //     helper_->utility().blank_line();
 
     // helper_->utility().public_access_specifier();
-    helper_->stream() << helper_->indenter() << sn << "& operator=("
-                      << sn << " other);" << std::endl;
+    helper_->stream() << sn << "& operator=(" << sn << " other);" << std::endl;
     helper_->first_line_is_blank(true);
 }
 
@@ -803,64 +766,55 @@ visitor_method(const sml::object& o) const {
     const auto opn(reader.get(types::qualified_original_parent_name));
 
     if (o.is_visitable()) {
-        helper_->stream() << helper_->indenter()
-                          << "virtual void accept(const " << sn
-                          << "_visitor& v) const = 0;" << std::endl;
-        helper_->stream() << helper_->indenter() << "virtual void accept("
-                          << sn << "_visitor& v) const = 0;" << std::endl;
-        helper_->stream() << helper_->indenter()
-                          << "virtual void accept(const " << sn
-                          << "_visitor& v) = 0;" << std::endl;
-        helper_->stream() << helper_->indenter() << "virtual void accept("
-                          << sn << "_visitor& v) = 0;" << std::endl;
+        helper_->stream() << "virtual void accept(const " << sn
+                         << "_visitor& v) const = 0;" << std::endl;
+        helper_->stream() << "virtual void accept("
+                         << sn << "_visitor& v) const = 0;" << std::endl;
+        helper_->stream() << "virtual void accept(const " << sn
+                         << "_visitor& v) = 0;" << std::endl;
+        helper_->stream() << "virtual void accept("
+                         << sn << "_visitor& v) = 0;" << std::endl;
         helper_->utility().blank_line();
         return;
     }
 
     helper_->utility().public_access_specifier();
-    helper_->stream() << helper_->indenter()
-                      << "virtual void accept(const "
-                      << opn << "_visitor& v) const override {"
-                      << std::endl;
+    helper_->stream() << "virtual void accept(const "
+                     << opn << "_visitor& v) const override {"
+                     << std::endl;
 
     {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
-        helper_->stream() << helper_->indenter() << "v.visit(*this);"
-                          << std::endl;
+        positive_indenter_scope s(helper_->stream());
+        helper_->stream() << "v.visit(*this);" << std::endl;
     }
-    helper_->stream() << helper_->indenter() << "}" << std::endl;
+    helper_->stream() << "}" << std::endl;
     helper_->utility().blank_line();
-    helper_->stream() << helper_->indenter() << "virtual void accept("
-                      << opn << "_visitor& v) const override {"
-                      << std::endl;
+    helper_->stream() << "virtual void accept("  << opn
+                     << "_visitor& v) const override {" << std::endl;
 
     {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
-        helper_->stream() << helper_->indenter() << "v.visit(*this);"
-                          << std::endl;
+        positive_indenter_scope s(helper_->stream());
+        helper_->stream() << "v.visit(*this);" << std::endl;
     }
-    helper_->stream() << helper_->indenter() << "}" << std::endl;
+    helper_->stream() << "}" << std::endl;
     helper_->utility().blank_line();
-    helper_->stream() << helper_->indenter()
-                      << "virtual void accept(const "
-                      << opn << "_visitor& v) override {" << std::endl;
+    helper_->stream() << "virtual void accept(const "
+                     << opn << "_visitor& v) override {" << std::endl;
 
     {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
-        helper_->stream() << helper_->indenter() << "v.visit(*this);"
-                          << std::endl;
+        positive_indenter_scope s(helper_->stream());
+        helper_->stream() << "v.visit(*this);" << std::endl;
     }
-    helper_->stream() << helper_->indenter() << "}" << std::endl;
+    helper_->stream() << "}" << std::endl;
     helper_->utility().blank_line();
-    helper_->stream() << helper_->indenter() << "virtual void accept("
-                      << opn << "_visitor& v) override {" << std::endl;
+    helper_->stream() << "virtual void accept(" << opn
+                     << "_visitor& v) override {" << std::endl;
 
     {
-        cpp_formatters::positive_indenter_scope s(helper_->indenter());
-        helper_->stream() << helper_->indenter() << "v.visit(*this);"
-                          << std::endl;
+        positive_indenter_scope s(helper_->stream());
+        helper_->stream() << "v.visit(*this);" << std::endl;
     }
-    helper_->stream() << helper_->indenter() << "}" << std::endl;
+    helper_->stream() << "}" << std::endl;
     helper_->first_line_is_blank(true);
 }
 
@@ -875,12 +829,13 @@ visit(const dogen::sml::enumeration& e) const {
         helper_->utility().blank_line();
 
         doxygen_next_.format(helper_->stream(), e.documentation());
-        helper_->stream() << helper_->indenter() << "enum class "
-                         << e.name().simple_name() << " : unsigned int ";
+        helper_->stream() << "enum class " << e.name().simple_name()
+                         << " : unsigned int ";
 
-        helper_->utility().open_scope();
+        const auto nl(padding_types::new_line);
+        helper_->utility().open_scope(nl);
         {
-            cpp_formatters::positive_indenter_scope pis(helper_->indenter());
+            positive_indenter_scope pis(helper_->stream());
             bool is_first(true);
             std::ostringstream assignment;
             std::ostringstream comment;
@@ -893,8 +848,7 @@ visit(const dogen::sml::enumeration& e) const {
                     assignment.str(empty);
                     comment.str(empty);
                 }
-                assignment << helper_->indenter() << enumerator.name() << " = "
-                           << enumerator.value();
+                assignment << enumerator.name() << " = " << enumerator.value();
                 doxygen_previous_.format(comment, e.documentation());
                 is_first = false;
             }
@@ -904,7 +858,7 @@ visit(const dogen::sml::enumeration& e) const {
             if (!c.empty())
                 helper_->stream() << " " << c;
         }
-        helper_->stream() << helper_->indenter() << "};" << std::endl;
+        helper_->stream() << "};" << std::endl;
         helper_->utility().blank_line();
     }
 }
@@ -918,7 +872,7 @@ visit(const dogen::sml::object& o) const {
         helper_->utility().blank_line();
         open_class(o);
         {
-            cpp_formatters::positive_indenter_scope s(helper_->indenter());
+            positive_indenter_scope s(helper_->stream());
             explicitly_defaulted_functions(o);
             default_constructor(o);
             destructor(o);

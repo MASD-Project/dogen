@@ -18,14 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/om/hash/annotation_hash.hpp"
-#include "dogen/om/hash/comment_styles_hash.hpp"
-#include "dogen/om/hash/cpp_includes_hash.hpp"
-#include "dogen/om/hash/editors_hash.hpp"
-#include "dogen/om/hash/file_hash.hpp"
-#include "dogen/om/hash/licence_hash.hpp"
-#include "dogen/om/hash/modeline_field_hash.hpp"
-#include "dogen/om/hash/modeline_group_hash.hpp"
-#include "dogen/om/hash/modeline_hash.hpp"
-#include "dogen/om/hash/modeline_locations_hash.hpp"
-#include "dogen/om/hash/padding_types_hash.hpp"
+#ifndef DOGEN_OM_SERIALIZATION_PADDING_TYPES_SER_HPP
+#define DOGEN_OM_SERIALIZATION_PADDING_TYPES_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "dogen/om/types/padding_types.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::om::padding_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("padding_types", v);
+}
+
+#endif
