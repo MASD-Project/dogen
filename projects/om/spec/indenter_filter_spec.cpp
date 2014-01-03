@@ -28,12 +28,24 @@ namespace {
 
 const std::string test_module("om");
 const std::string test_suite("indent_filter_spec");
+
+const std::string empty;
 const std::string input("this is a sample");
 
 const std::string expected(const unsigned int indentation_level,
-    const unsigned int indentation_size) {
+    const unsigned int indentation_size, const bool without_new_line = false) {
     const unsigned int total_spaces(indentation_level * indentation_size);
-    return std::string(total_spaces, ' ') + input;
+    std::ostringstream s;
+
+    if (indentation_level > 0)
+        s << std::string(total_spaces, ' ');
+
+    s << input;
+
+    if (!without_new_line)
+        s << std::endl;
+
+    return s.str();
 }
 
 }
@@ -43,8 +55,20 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(indenter_filter)
 
-BOOST_AUTO_TEST_CASE(default_indenter_does_not_indent) {
-    SETUP_TEST_LOG_SOURCE("default_indenter_does_not_indent");
+BOOST_AUTO_TEST_CASE(default_indentation_level_does_not_indent) {
+    SETUP_TEST_LOG_SOURCE("default_indentation_level_does_not_indent");
+
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+}
+
+BOOST_AUTO_TEST_CASE(default_indentation_level_without_new_line_does_not_indent) {
+    SETUP_TEST_LOG_SOURCE("default_indentation_level_without_new_line_does_not_indent");
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
@@ -63,10 +87,10 @@ BOOST_AUTO_TEST_CASE(incrementing_once_increases_indentation_level_by_one) {
     dogen::om::indent_filter::push(fo, 4);
     fo.push(s);
     ++fo;
-    fo << input;
+    fo << input << std::endl;
     fo.flush();
     BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
-    s.str("");
+    s.str(empty);
 }
 
 BOOST_AUTO_TEST_CASE(incrementing_twice_times_increases_indentation_level_by_two) {
@@ -77,10 +101,10 @@ BOOST_AUTO_TEST_CASE(incrementing_twice_times_increases_indentation_level_by_two
     dogen::om::indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo;
-    fo << input;
+    fo << input << std::endl;
     fo.flush();
     BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
-    s.str("");
+    s.str(empty);
 }
 
 BOOST_AUTO_TEST_CASE(incrementing_three_times_increases_indentation_level_by_three) {
@@ -91,10 +115,10 @@ BOOST_AUTO_TEST_CASE(incrementing_three_times_increases_indentation_level_by_thr
     dogen::om::indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo; ++fo;
-    fo << input;
+    fo << input << std::endl;
     fo.flush();
     BOOST_CHECK(asserter::assert_equals_marker(expected(3, 4), s.str()));
-    s.str("");
+    s.str(empty);
 }
 
 BOOST_AUTO_TEST_CASE(decrementing_once_increases_indentation_level_by_one) {
@@ -104,37 +128,37 @@ BOOST_AUTO_TEST_CASE(decrementing_once_increases_indentation_level_by_one) {
     boost::iostreams::filtering_ostream fo;
     dogen::om::indent_filter::push(fo, 4);
     fo.push(s);
-    ++fo;
-    fo << input;
+    ++fo; ++fo; ++fo;
+    fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
-    s.str("");
+    BOOST_CHECK(asserter::assert_equals_marker(expected(3, 4), s.str()));
+    s.str(empty);
 
     --fo;
-    fo << input;
+    fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(input, s.str()));
-    s.str("");
+    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    s.str(empty);
 }
 
-BOOST_AUTO_TEST_CASE(decrementing_twice_times_increases_indentation_level_by_two) {
-    SETUP_TEST_LOG_SOURCE("decrementing_twice_times_increases_indentation_level_by_two");
+BOOST_AUTO_TEST_CASE(decrementing_twice_increases_indentation_level_by_two) {
+    SETUP_TEST_LOG_SOURCE("decrementing_twice_increases_indentation_level_by_two");
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
     dogen::om::indent_filter::push(fo, 4);
     fo.push(s);
-    ++fo; ++fo;
-    fo << input;
+    ++fo; ++fo; ++fo; ++fo;
+    fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
-    s.str("");
+    BOOST_CHECK(asserter::assert_equals_marker(expected(4, 4), s.str()));
+    s.str(empty);
 
     --fo; --fo;
-    fo << input;
+    fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(input, s.str()));
-    s.str("");
+    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    s.str(empty);
 }
 
 BOOST_AUTO_TEST_CASE(decrementing_three_times_increases_indentation_level_by_three) {
@@ -144,106 +168,126 @@ BOOST_AUTO_TEST_CASE(decrementing_three_times_increases_indentation_level_by_thr
     boost::iostreams::filtering_ostream fo;
     dogen::om::indent_filter::push(fo, 4);
     fo.push(s);
-    ++fo; ++fo; ++fo;
-    fo << input;
+    ++fo; ++fo; ++fo; ++fo; ++fo; ++fo;
+    fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(3, 4), s.str()));
-    s.str("");
+    BOOST_CHECK(asserter::assert_equals_marker(expected(6, 4), s.str()));
+    s.str(empty);
 
     --fo; --fo; --fo;
-    fo << input;
+    fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(input, s.str()));
-    s.str("");
+    BOOST_CHECK(asserter::assert_equals_marker(expected(3, 4), s.str()));
+    s.str(empty);
 }
 
-// BOOST_AUTO_TEST_IGNORE_CASE(unindenting_at_zero_indentation_level_does_nothing) {
-//     SETUP_TEST_LOG("unindenting_at_zero_indentation_level_does_nothing");
-//     dogen::cpp_formatters::indenter i;
+BOOST_AUTO_TEST_CASE(unindenting_at_zero_indentation_level_does_nothing) {
+    SETUP_TEST_LOG("unindenting_at_zero_indentation_level_does_nothing");
 
-//     std::ostringstream stream;
-//     stream << (--i);
-//     BOOST_CHECK(stream.str().empty());
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    --fo;
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    s.str(empty);
+}
 
-//     stream << (++i);
-//     BOOST_CHECK(!stream.str().empty());
-// }
+BOOST_AUTO_TEST_CASE(positive_indenter_scope_correctly_increases_and_decreases_indentation_level) {
+    SETUP_TEST_LOG("positive_indenter_scope_correctly_increases_and_decreases_indentation_level");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    s.str(empty);
+    {
+        dogen::om::positive_indenter_scope pis(fo);
+        fo << input << std::endl;
+        fo.flush();
+        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        s.str(empty);
+        {
+            dogen::om::positive_indenter_scope pis(fo);
+            fo << input << std::endl;
+            fo.flush();
+            BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4),
+                    s.str()));
+            s.str(empty);
+        }
+        fo << input << std::endl;
+        fo.flush();
+        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        s.str(empty);
+    }
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    s.str(empty);
+}
 
-// BOOST_AUTO_TEST_IGNORE_CASE(positive_indenter_scope_correctly_increases_and_decreases_indentation_level) {
-//     SETUP_TEST_LOG("positive_indenter_scope_correctly_increases_and_decreases_indentation_level");
-//     dogen::cpp_formatters::indenter i;
+BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_decreases_and_increases_indentation_level) {
+    SETUP_TEST_LOG_SOURCE("negative_indenter_scope_correctly_decreases_and_increases_indentation_level");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    ++fo; ++fo;
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    s.str(empty);
 
-//     std::ostringstream stream;
-//     stream << i;
-//     BOOST_CHECK(stream.str().empty());
-//     {
-//         dogen::cpp_formatters::positive_indenter_scope s(i);
-//         stream << i;
-//         BOOST_CHECK(!stream.str().empty());
-//         unsigned int one_indent_size(stream.str().length());
-//         {
-//             dogen::cpp_formatters::positive_indenter_scope s(i);
-//             stream.str(empty);
-//             stream << i;
-//             BOOST_CHECK(stream.str().length() == 2 * one_indent_size);
-//         }
-//         stream.str(empty);
-//         stream << i;
-//         BOOST_CHECK(stream.str().length() == one_indent_size);
-//     }
-//     stream.str(empty);
-//     stream << i;
-//     BOOST_CHECK(stream.str().empty());
-// }
+    {
+        dogen::om::negative_indenter_scope pis(fo);
+        fo << input << std::endl;
+        fo.flush();
+        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        s.str(empty);
+        {
+            dogen::om::negative_indenter_scope pis(fo);
+            fo << input << std::endl;
+            fo.flush();
+            BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4),
+                    s.str()));
+            s.str(empty);
+        }
+        fo << input << std::endl;
+        fo.flush();
+        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        s.str(empty);
+    }
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    s.str(empty);
+}
 
-// BOOST_AUTO_TEST_IGNORE_CASE(negative_indenter_scope_correctly_decreases_and_increases_indentation_level) {
-//     SETUP_TEST_LOG_SOURCE("negative_indenter_scope_correctly_decreases_and_increases_indentation_level");
-//     dogen::cpp_formatters::indenter i;
-
-//     std::ostringstream stream;
-//     stream << i;
-//     BOOST_CHECK(stream.str().empty());
-
-//     stream << (++i);
-//     BOOST_CHECK(!stream.str().empty());
-//     unsigned int one_indent_size(stream.str().length());
-//     ++i;
-//     {
-//         dogen::cpp_formatters::negative_indenter_scope s(i);
-//         stream.str(empty);
-//         stream << i;
-//         BOOST_CHECK(stream.str().length() == one_indent_size);
-//         {
-//             dogen::cpp_formatters::negative_indenter_scope s(i);
-//             stream.str(empty);
-//             stream << i;
-//             BOOST_CHECK(stream.str().empty());
-//         }
-//         stream.str(empty);
-//         stream << i;
-//         BOOST_CHECK(stream.str().length() == one_indent_size);
-//     }
-//     stream.str(empty);
-//     stream << i;
-//     BOOST_CHECK(stream.str().length() == 2 * one_indent_size);
-// }
-
-// BOOST_AUTO_TEST_IGNORE_CASE(negative_indenter_scope_correctly_handles_zero_indentation_level) {
-//     SETUP_TEST_LOG("negative_indenter_scope_correctly_handles_zero_indentation_level");
-//     dogen::cpp_formatters::indenter i;
-
-//     std::ostringstream stream;
-//     stream << i;
-//     BOOST_CHECK(stream.str().empty());
-//     {
-//         dogen::cpp_formatters::negative_indenter_scope s(i);
-//         stream.str(empty);
-//         stream << i;
-//         BOOST_CHECK(stream.str().empty());
-//     }
-//     stream.str(empty);
-//     stream << i;
-//     BOOST_CHECK(stream.str().empty());
-// }
+BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_handles_zero_indentation_level) {
+    SETUP_TEST_LOG("negative_indenter_scope_correctly_handles_zero_indentation_level");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    s.str(empty);
+    {
+        dogen::om::negative_indenter_scope pis(fo);
+        fo << input << std::endl;
+        fo.flush();
+        BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+        s.str(empty);
+    }
+    fo << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    s.str(empty);
+}
 
 BOOST_AUTO_TEST_SUITE_END()

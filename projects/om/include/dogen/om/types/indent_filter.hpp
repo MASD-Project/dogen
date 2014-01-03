@@ -51,7 +51,7 @@ namespace om {
  * implementation. The expression xdent<int>()() will always get the
  * same unique index
  */
-template <typename T>
+template <typename IndexType>
 struct xdent {
     int operator()() {
         if (!initialized_) {
@@ -61,12 +61,12 @@ struct xdent {
         return index_;
     }
 private:
-    static T index_;
+    static IndexType index_;
     static bool initialized_;
 };
 
-template <typename T> T xdent<T>::index_;
-template <typename T> bool xdent<T>::initialized_;
+template <typename IndexType> IndexType xdent<IndexType>::index_;
+template <typename IndexType> bool xdent<IndexType>::initialized_;
 
 /**
  * @brief The indent filter.
@@ -136,6 +136,12 @@ public:
             stream_->pword(xdent<int>()()) = 0;
     }
 
+public:
+    /**
+     * @brief Returns the current level of indentation.
+     */
+    unsigned int indentation_level() const { return indentation_level_; }
+
 private:
     explicit indent_filter(const unsigned int indentation_size)
     : indentation_level_(0), at_line_start_(true),
@@ -156,9 +162,9 @@ private:
  * correct cast from void* to indent_filter*.
  */
 /**@{*/
-template<class char_type, class traits_type>
-inline std::basic_ostream<char_type, traits_type>&
-indent_in(std::basic_ostream<char_type, traits_type>& s) {
+template<class CharType, class TraitsType = std::char_traits<CharType> >
+inline std::basic_ostream<CharType, TraitsType>&
+indent_in(std::basic_ostream<CharType, TraitsType>& s) {
     indent_filter* filter((indent_filter*)s.pword(xdent<int>()()));
     if (filter) {
         s.flush();
@@ -167,9 +173,9 @@ indent_in(std::basic_ostream<char_type, traits_type>& s) {
     return s;
 }
 
-template<class char_type, class traits_type>
-inline std::basic_ostream<char_type, traits_type>&
-indent_out(std::basic_ostream<char_type, traits_type>& s) {
+template<class CharType, class TraitsType = std::char_traits<CharType> >
+inline std::basic_ostream<CharType, TraitsType>&
+indent_out(std::basic_ostream<CharType, TraitsType>& s) {
     indent_filter* filter((indent_filter*)s.pword(xdent<int>()()));
     if (filter) {
         s.flush();
@@ -178,6 +184,52 @@ indent_out(std::basic_ostream<char_type, traits_type>& s) {
     return s;
 }
 /**@}*/
+
+/**
+ * @brief Utility class that indents on construction and outdents on
+ * destruction.
+ */
+template<class CharType, class TraitsType = std::char_traits<CharType> >
+class basic_positive_indenter_scope {
+public:
+    basic_positive_indenter_scope(std::basic_ostream<CharType, TraitsType>& s)
+        : stream_(s) { stream_ << indent_in; }
+    ~basic_positive_indenter_scope() { stream_ << indent_out; }
+
+private:
+    std::basic_ostream<CharType, TraitsType>& stream_;
+};
+
+typedef basic_positive_indenter_scope<char> positive_indenter_scope;
+
+/**
+ * @brief Utility class that outdents on construction and indents on
+ * destruction.
+ */
+template<class CharType, class TraitsType = std::char_traits<CharType> >
+class basic_negative_indenter_scope {
+public:
+    basic_negative_indenter_scope(std::basic_ostream<CharType, TraitsType>& s)
+        : stream_(s), started_at_zero_(false) {
+
+        indent_filter* filter((indent_filter*)s.pword(xdent<int>()()));
+        if (filter)
+            started_at_zero_ = filter->indentation_level() == 0;
+
+        stream_ << indent_out;
+    }
+
+    ~basic_negative_indenter_scope() {
+        if (!started_at_zero_)
+            stream_ << indent_in;
+    }
+
+private:
+    std::basic_ostream<CharType, TraitsType>& stream_;
+    bool started_at_zero_;
+};
+
+typedef basic_negative_indenter_scope<char> negative_indenter_scope;
 
 } }
 
