@@ -261,6 +261,20 @@ Create the classes as per analysis.
 
 Switch plain =ostringstreams= to the new indent filter in =om=.
 
+*** IMPLEMENTATION Investigate why clang is not producing code coverage :story:
+    CLOCK: [2014-01-03 Fri 13:01]--[2014-01-03 Fri 13:14] =>  0:13
+
+We are not producing any code coverage numbers for clang. In the past
+this was thought to be due to incompatibilities in the GCov
+format. However, this post seems to imply its just a matter of setting
+the correct flags:
+
+[[http://clang-developers.42468.n3.nabble.com/Code-coverage-on-clang-td4033066.html][Code coverage on clang]]
+
+Do a quick investigation as to what flags we are using on clang.
+
+- added flags to Clang compilation, will check Nightly tomorrow.\
+
 *** Add required meta-data to test models                             :story:
 
 In order for om to match the C++ model we need to make sure we are
