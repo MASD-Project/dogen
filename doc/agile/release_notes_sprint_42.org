@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-03 Fri 00:21]
+Clock summary at [2014-01-03 Fri 01:31]
 
 | Headline                                                                | Time    |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                            | *21:59* |       |      |
+| *Total time*                                                            | *23:08* |       |      |
 |-------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                         |         | 21:59 |      |
+| Development Stories Implemented                                         |         | 23:08 |      |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       | 1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       | 0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       | 0:06 |
@@ -25,7 +25,7 @@ Clock summary at [2014-01-03 Fri 00:21]
 | COMPLETED Ensure OM header files are at the expected location           |         |       | 0:35 |
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       | 6:45 |
 | IMPLEMENTATION Add include file support to main type formatter          |         |       | 1:13 |
-| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 6:41 |
+| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 7:50 |
 | Includer generation should be done from meta-data                       |         |       | 0:18 |
 #+end:
 
@@ -187,7 +187,8 @@ can make that decision. The best way of doing this is to create a
 list of blocks and then use that to decide where to put in the new
 lines.
 
-**** ANALYSIS Analysis of the problem                                  :task:
+**** COMPLETED Analysis of the problem                                 :task:
+     CLOSED: [2014-01-03 Fri 01:30]
      CLOCK: [2014-01-02 Thu 12:18]--[2014-01-02 Thu 13:28] =>  1:10
      CLOCK: [2014-01-02 Thu 12:00]--[2014-01-02 Thu 12:18] =>  0:18
      CLOCK: [2014-01-01 Wed 17:53]--[2014-01-01 Wed 18:20] =>  0:24
@@ -245,12 +246,17 @@ provide it with an interface that suits our needs:
   before it, content after it, etc.
 - We won't be able to add a lot of the utility stuff into the stream.
 
-**** IMPLEMENTATION Add classes modeling stream and blocks             :task:
+**** COMPLETED Add classes modeling stream and blocks                  :task:
+     CLOSED: [2014-01-03 Fri 01:30]
+     CLOCK: [2014-01-03 Fri 01:10]--[2014-01-03 Fri 01:30] =>  0:20
+     CLOCK: [2014-01-03 Fri 00:21]--[2014-01-03 Fri 01:10] =>  0:49
      CLOCK: [2014-01-02 Thu 23:23]--[2014-01-03 Fri 00:21] =>  0:58
      CLOCK: [2014-01-02 Thu 23:11]--[2014-01-02 Thu 23:22] =>  0:11
      CLOCK: [2014-01-02 Thu 16:09]--[2014-01-02 Thu 18:59] =>  2:50
 
 Create the classes as per analysis.
+
+**** Replace existing =om= code with new ostream filter                :task:
 
 *** Add required meta-data to test models                             :story:
 

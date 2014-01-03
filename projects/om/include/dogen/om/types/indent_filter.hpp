@@ -79,7 +79,31 @@ class indent_filter : public boost::iostreams::output_filter {
 public:
     template<typename Sink>
     bool put(Sink& dest, int c) {
-        if (c == '\n') {
+        const char cr(0x0D);
+        const char lf(0x0A);
+
+        if (manage_blank_lines_) {
+            if (c == cr) {
+                found_cr_ = true;
+                return true;
+            } else if (c == lf) {
+                found_lf_ = true;
+                return true;
+            }
+
+            manage_blank_lines_ = false;
+            if (found_cr_) {
+                found_cr_ = false;
+                boost::iostreams::put(dest, cr);
+            }
+
+            if (found_lf_) {
+                found_lf_ = false;
+                boost::iostreams::put(dest, lf);
+            }
+        }
+
+        if (c == lf) {
             at_line_start_ = true;
             return boost::iostreams::put(dest, c);
         }
@@ -142,16 +166,25 @@ public:
      */
     unsigned int indentation_level() const { return indentation_level_; }
 
+    /**
+     * @brief Try to suppress trailing blank lines.
+     */
+    void manage_blank_lines() { manage_blank_lines_ = true; }
+
 private:
     explicit indent_filter(const unsigned int indentation_size)
     : indentation_level_(0), at_line_start_(true),
-      indentation_size_(indentation_size), stream_(0) { }
+      indentation_size_(indentation_size), stream_(0),
+      manage_blank_lines_(false), found_cr_(false), found_lf_(false) { }
 
 private:
     unsigned int indentation_level_;
     bool at_line_start_;
     const unsigned int indentation_size_;
     std::ostream* stream_;
+    bool manage_blank_lines_;
+    bool found_cr_;
+    bool found_lf_;
 };
 
 /**
@@ -184,6 +217,16 @@ indent_out(std::basic_ostream<CharType, TraitsType>& s) {
     return s;
 }
 /**@}*/
+
+template<class CharType, class TraitsType = std::char_traits<CharType> >
+inline std::basic_ostream<CharType, TraitsType>&
+manage_blank_lines(std::basic_ostream<CharType, TraitsType>& s) {
+    indent_filter* filter((indent_filter*)s.pword(xdent<int>()()));
+    if (filter)
+        filter->manage_blank_lines();
+    return s;
+}
+
 
 /**
  * @brief Utility class that indents on construction and outdents on
@@ -238,6 +281,7 @@ typedef basic_negative_indenter_scope<char> negative_indenter_scope;
  *
  * This idea was copied from Larry Evans's code.
  */
+/**@{*/
 template<class char_type, class traits_type>
 inline void operator++(std::basic_ostream<char_type, traits_type>& s) {
     s << dogen::om::indent_in;
@@ -247,5 +291,6 @@ template<class char_type, class traits_type>
 inline void operator--(std::basic_ostream<char_type, traits_type>& s) {
     s << dogen::om::indent_out;
 }
+/**@}*/
 
 #endif

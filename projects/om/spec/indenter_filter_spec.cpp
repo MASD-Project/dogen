@@ -31,6 +31,32 @@ const std::string test_suite("indent_filter_spec");
 
 const std::string empty;
 const std::string input("this is a sample");
+const std::string other_input("yet another text");
+const std::string without_blank_lines(R"(this is a sample
+)");
+const std::string with_one_leading_blank_line(R"(
+this is a sample
+)");
+
+const std::string with_one_trailing_blank_line(R"(this is a sample
+
+)");
+const std::string with_two_trailing_blank_lines(R"(this is a sample
+
+
+)");
+
+const std::string blank_line_in_between_content(R"(this is a sample
+
+yet another text
+)");
+
+const std::string blank_lines_in_between_content(R"(this is a sample
+
+
+
+yet another text
+)");
 
 const std::string expected(const unsigned int indentation_level,
     const unsigned int indentation_size, const bool without_new_line = false) {
@@ -243,13 +269,13 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_decreases_and_increases_i
     s.str(empty);
 
     {
-        dogen::om::negative_indenter_scope pis(fo);
+        dogen::om::negative_indenter_scope nis(fo);
         fo << input << std::endl;
         fo.flush();
         BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
         s.str(empty);
         {
-            dogen::om::negative_indenter_scope pis(fo);
+            dogen::om::negative_indenter_scope nis(fo);
             fo << input << std::endl;
             fo.flush();
             BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4),
@@ -278,7 +304,7 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_handles_zero_indentation_
     BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
     s.str(empty);
     {
-        dogen::om::negative_indenter_scope pis(fo);
+        dogen::om::negative_indenter_scope nis(fo);
         fo << input << std::endl;
         fo.flush();
         BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
@@ -287,6 +313,103 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_handles_zero_indentation_
     fo << input << std::endl;
     fo.flush();
     BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    s.str(empty);
+}
+
+BOOST_AUTO_TEST_CASE(single_trailing_blank_line_is_suppressed_when_managing_blank_lines) {
+    SETUP_TEST_LOG("single_trailing_blank_line_is_suppressed_when_managing_blank_lines");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << input << std::endl << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(
+            with_one_trailing_blank_line, s.str()));
+    s.str(empty);
+
+    fo << input << std::endl;
+    fo << dogen::om::manage_blank_lines << std::endl;
+    BOOST_CHECK(asserter::assert_equals_marker(without_blank_lines, s.str()));
+    s.str(empty);
+}
+
+BOOST_AUTO_TEST_CASE(multiple_trailing_blank_lines_are_suppressed_when_managing_blank_lines) {
+    SETUP_TEST_LOG("multiple_trailing_blank_lines_are_suppressed_when_managing_blank_lines");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << input << std::endl << std::endl << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(
+            with_two_trailing_blank_lines, s.str()));
+    s.str(empty);
+
+    fo << input << std::endl;
+    fo << dogen::om::manage_blank_lines << std::endl << std::endl;
+    BOOST_CHECK(asserter::assert_equals_marker(without_blank_lines, s.str()));
+    s.str(empty);
+}
+
+BOOST_AUTO_TEST_CASE(one_blank_line_in_between_content_is_printed_out_when_managing_blank_lines) {
+    SETUP_TEST_LOG("one_blank_line_in_between_content_is_printed_out_when_managing_blank_lines");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << input << std::endl << std::endl << other_input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(
+            blank_line_in_between_content, s.str()));
+    s.str(empty);
+
+    fo << input << std::endl;
+    fo << dogen::om::manage_blank_lines << std::endl;
+    fo << other_input << std::endl;
+    BOOST_CHECK(asserter::assert_equals_marker(blank_line_in_between_content,
+            s.str()));
+    s.str(empty);
+}
+
+BOOST_AUTO_TEST_CASE(multiple_blank_lines_in_between_content_results_in_a_single_blank_line_out_when_managing_blank_lines) {
+    SETUP_TEST_LOG("multiple_blank_lines_in_between_content_results_in_a_single_blank_line_out_when_managing_blank_lines");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << input << std::endl << std::endl << std::endl << std::endl
+       << other_input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(
+            blank_lines_in_between_content, s.str()));
+    s.str(empty);
+
+    fo << input << std::endl;
+    fo << dogen::om::manage_blank_lines << std::endl << std::endl
+       << std::endl << std::endl;
+    fo << other_input << std::endl;
+    BOOST_CHECK(asserter::assert_equals_marker(blank_line_in_between_content,
+            s.str()));
+    s.str(empty);
+}
+
+BOOST_AUTO_TEST_CASE(single_leading_blank_line_is_not_suppressed_when_managing_blank_lines) {
+    SETUP_TEST_LOG("single_leading_blank_line_is_not_suppressed_when_managing_blank_lines");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+    fo << std::endl << input << std::endl;
+    fo.flush();
+    BOOST_CHECK(asserter::assert_equals_marker(
+            with_one_leading_blank_line, s.str()));
+    s.str(empty);
+
+    fo << std::endl << input << std::endl;
+    fo << dogen::om::manage_blank_lines << std::endl << std::endl;
+    BOOST_CHECK(asserter::assert_equals_marker(
+            with_one_leading_blank_line, s.str()));
     s.str(empty);
 }
 
