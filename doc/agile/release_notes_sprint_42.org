@@ -10,7 +10,7 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-03 Fri 18:50]
+Clock summary at [2014-01-04 Sat 11:24]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
@@ -24,9 +24,9 @@ Clock summary at [2014-01-03 Fri 18:50]
 | COMPLETED Add plumbing to engine to toggle =om= on or off               |         |       |  1:53 |
 | COMPLETED Ensure OM header files are at the expected location           |         |       |  0:35 |
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       |  6:45 |
+| COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | IMPLEMENTATION Add include file support to main type formatter          |         |       |  1:13 |
 | IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 12:02 |
-| IMPLEMENTATION Investigate why clang is not producing code coverage     |         |       |  0:13 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -146,6 +146,24 @@ The swap function is not being generated.
 
 - first get the build green
 - then fix the diff properly
+
+*** COMPLETED Investigate why clang is not producing code coverage    :story:
+    CLOSED: [2014-01-04 Sat 11:20]
+    CLOCK: [2014-01-03 Fri 13:01]--[2014-01-03 Fri 13:14] =>  0:13
+
+We are not producing any code coverage numbers for clang. In the past
+this was thought to be due to incompatibilities in the GCov
+format. However, this post seems to imply its just a matter of setting
+the correct flags:
+
+[[http://clang-developers.42468.n3.nabble.com/Code-coverage-on-clang-td4033066.html][Code coverage on clang]]
+
+Do a quick investigation as to what flags we are using on clang.
+
+- added flags to Clang compilation, will check Nightly tomorrow.
+
+Actually, these flags are only available for recent clangs. We need to
+comment it out for now and revisit it later.
 
 *** IMPLEMENTATION Add include file support to main type formatter    :story:
 
@@ -270,21 +288,6 @@ Actually, managed blank lines is far too simplistic to work with all
 the permutations we have in real life. We need to go back to the
 drawing board and design a state machine that takes into account all
 known states; state transitions are triggered by the manipulators.
-
-
-*** IMPLEMENTATION Investigate why clang is not producing code coverage :story:
-    CLOCK: [2014-01-03 Fri 13:01]--[2014-01-03 Fri 13:14] =>  0:13
-
-We are not producing any code coverage numbers for clang. In the past
-this was thought to be due to incompatibilities in the GCov
-format. However, this post seems to imply its just a matter of setting
-the correct flags:
-
-[[http://clang-developers.42468.n3.nabble.com/Code-coverage-on-clang-td4033066.html][Code coverage on clang]]
-
-Do a quick investigation as to what flags we are using on clang.
-
-- added flags to Clang compilation, will check Nightly tomorrow.\
 
 *** Add required meta-data to test models                             :story:
 

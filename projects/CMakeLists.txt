@@ -88,15 +88,16 @@ if(WITH_PROFILING)
     # enable code profiling options
     set(profiling_flags "-fprofile-arcs -ftest-coverage")
 
-    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-        set(profiling_flags "${profiling_flags} -Xclang -coverage-cfg-checksum")
-        set(profiling_flags
-            "${profiling_flags} -Xclang -coverage-no-function-names-in-data")
-
-        # 407 for gcc 4.7 compatibility of the gcov format.
-        set(profiling_flags
-            "${profiling_flags} -Xclang -coverage-version='407*'")
-    endif()
+    # FIXME: we need to enable this when we move to clang 3.4
+    # if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    #     set(profiling_flags "${profiling_flags} -Xclang -coverage-cfg-checksum")
+    #     set(profiling_flags
+    #         "${profiling_flags} -Xclang -coverage-no-function-names-in-data")
+    #
+    #     # 407 for gcc 4.7 compatibility of the gcov format.
+    #     set(profiling_flags
+    #         "${profiling_flags} -Xclang -coverage-version='407*'")
+    # endif()
 endif()
 
 # enable RTTI

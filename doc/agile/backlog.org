@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** When on clang 3.4 enable code coverage flags                      :story:
+
+We implemented the flags as per this post:
+
+[[http://clang-developers.42468.n3.nabble.com/Code-coverage-on-clang-td4033066.html][Code coverage on clang]]
+
+However we need to wait for a version of clang that supports them.
+Code is commented out in =projects/CMakeLists.txt=.
+
 *** Consider creating an iostreams filter for comments                :story:
 
 Seems logic to follow the filtering idea and add a doxygen (or
