@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-04 Sat 22:41]
+Clock summary at [2014-01-04 Sat 23:05]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *29:50* |       |       |
+| *Total time*                                                            | *30:11* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 29:50 |       |
+| Development Stories Implemented                                         |         | 30:11 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -27,7 +27,7 @@ Clock summary at [2014-01-04 Sat 22:41]
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  0:19 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  0:40 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -345,6 +345,21 @@ The following models were updated without requiring any changes:
 - =class_without_name=
 - =empty_model=
 - =empty_package=
+
+**** COMPLETED Models that require just adding minor meta-data         :task:
+     CLOSED: [2014-01-04 Sat 23:05]
+     CLOCK: [2014-01-04 Sat 22:58]--[2014-01-04 Sat 23:05] =>  0:07
+     CLOCK: [2014-01-04 Sat 22:44]--[2014-01-04 Sat 22:58] =>  0:14
+
+We need to set meta-data such as licence, etc for these models.
+
+- =two_layers_with_objects=
+- =compressed=
+- =classes_inout_package=
+- =class_without_package=
+- =stand_alone_class=
+- =classes_in_a_package=
+- =classes_without_package=
 
 *** Add tests for =flat_name_builder=                                 :story:
 

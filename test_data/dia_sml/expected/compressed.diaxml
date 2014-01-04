@@ -322,7 +322,7 @@
 			<visible>1</visible>
 			<active>1</active>
 			<objects class_id="17" tracking_level="0" version="0">
-				<count>2</count>
+				<count>3</count>
 				<item_version>0</item_version>
 				<item class_id="18" tracking_level="0" version="0">
 					<type>UML - LargePackage</type>
@@ -1243,6 +1243,261 @@
 							<values>
 								<count>0</count>
 								<item_version>0</item_version>
+							</values>
+						</item>
+					</attributes>
+				</item>
+				<item>
+					<type>UML - Note</type>
+					<version>0</version>
+					<id>O2</id>
+					<connections>
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
+					<child_node>
+						<initialized>0</initialized>
+					</child_node>
+					<attributes>
+						<count>10</count>
+						<item_version>0</item_version>
+						<item object_id="_91">
+							<name>obj_pos</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>5</which>
+									<value>
+										<value>-33.7843,-46.3625</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_92">
+							<name>obj_bb</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>8</which>
+									<value>
+										<value>-33.8343,-46.4125;-8.19433,-42.2125</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_93">
+							<name>meta</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>9</which>
+									<value object_id="_94">
+										<type>dict</type>
+										<value>
+											<count>0</count>
+											<item_version>1</item_version>
+										</value>
+										<inner_composite>
+											<px class_id="-1"></px>
+										</inner_composite>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_95">
+							<name>elem_corner</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>5</which>
+									<value>
+										<value>-33.7843,-46.3625</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_96">
+							<name>elem_width</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>1</which>
+									<value>
+										<value>25.540000000000003</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_97">
+							<name>elem_height</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>1</which>
+									<value>
+										<value>4.0999999999999996</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_98">
+							<name>line_width</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>1</which>
+									<value>
+										<value>0.10000000000000001</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_99">
+							<name>line_colour</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>0</which>
+									<value>
+										<value>#000000</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_100">
+							<name>fill_colour</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>0</which>
+									<value>
+										<value>#ffffff</value>
+									</value>
+								</item>
+							</values>
+						</item>
+						<item object_id="_101">
+							<name>text</name>
+							<values>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<which>9</which>
+									<value object_id="_102">
+										<type>text</type>
+										<value>
+											<count>6</count>
+											<item_version>1</item_version>
+											<item>
+												<px class_id_reference="3" object_id="_103">
+													<name>string</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>6</which>
+															<value>
+																<value>##DOGEN COMMENT=true
+#DOGEN LICENCE=gpl_v2
+#DOGEN MODELINE_GROUP=emacs
+#DOGEN COPYRIGHT=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_104">
+													<name>font</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>3</which>
+															<value>
+																<family>monospace</family>
+																<style>0</style>
+																<name>Courier</name>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_105">
+													<name>height</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>1</which>
+															<value>
+																<value>0.80000000000000004</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_106">
+													<name>pos</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>-33.4343,-45.1175</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_107">
+													<name>color</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>0</which>
+															<value>
+																<value>#000000</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_108">
+													<name>alignment</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>7</which>
+															<value>
+																<value>0</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+										</value>
+										<inner_composite>
+											<px class_id="-1"></px>
+										</inner_composite>
+									</value>
+								</item>
 							</values>
 						</item>
 					</attributes>

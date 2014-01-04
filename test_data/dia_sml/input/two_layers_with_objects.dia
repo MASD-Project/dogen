@@ -236,9 +236,63 @@
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
+    <dia:object type="UML - Note" version="0" id="O2">
+      <dia:attribute name="obj_pos">
+        <dia:point val="8,0"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="7.95,-0.05;33.59,4.15"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="8,0"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="25.540000000000003"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="4.0999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#ffffff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>##DOGEN COMMENT=true
+#DOGEN LICENCE=gpl_v2
+#DOGEN MODELINE_GROUP=emacs
+#DOGEN COPYRIGHT=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="8.35,1.245"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+    </dia:object>
   </dia:layer>
   <dia:layer name="New layer 1" visible="true">
-    <dia:object type="UML - LargePackage" version="0" id="O2">
+    <dia:object type="UML - LargePackage" version="0" id="O3">
       <dia:attribute name="obj_pos">
         <dia:point val="45.5625,10.625"/>
       </dia:attribute>
@@ -276,7 +330,7 @@
         <dia:string>#Package_2#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O3">
+    <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
         <dia:point val="53.9375,19.3125"/>
       </dia:attribute>
@@ -409,7 +463,7 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O2"/>
+      <dia:childnode parent="O3"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

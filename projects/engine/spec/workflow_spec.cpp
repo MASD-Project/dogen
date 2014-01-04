@@ -432,7 +432,7 @@ BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code) {
 BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_inout_package_model_generates_expected_code");
     const auto t(dia_sml::input_classes_inout_package_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code) {
@@ -444,37 +444,37 @@ BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code) {
 BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_package_model_generates_expected_code");
     const auto t(dia_sml::input_class_without_package_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code) {
     SETUP_TEST_LOG("stand_alone_class_model_generates_expected_code");
     const auto t(dia_sml::input_stand_alone_class_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(classes_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_in_a_package_model_generates_expected_code");
     const auto t(dia_sml::input_classes_in_a_package_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_without_package_model_generates_expected_code");
     const auto t(dia_sml::input_classes_without_package_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code");
     const auto t(dia_sml::input_compressed_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code");
     const auto t(dia_sml::input_two_layers_with_objects_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code) {
