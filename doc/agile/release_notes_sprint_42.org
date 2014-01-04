@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-04 Sat 22:10]
+Clock summary at [2014-01-04 Sat 22:23]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *29:19* |       |       |
+| *Total time*                                                            | *29:32* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 29:19 |       |
-| IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:35 |
+| Development Stories Implemented                                         |         | 29:32 |       |
+| IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
 | COMPLETED Add absolute path support to =om=                             |         |       |  2:40 |
@@ -26,11 +26,14 @@ Clock summary at [2014-01-04 Sat 22:10]
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       |  6:45 |
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
-| IMPLEMENTATION Add include file support to main type formatter          |         |       |  1:14 |
+| COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  0:01 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-04 Sat 22:17]--[2014-01-04 Sat 22:23] =>  0:06
+    CLOCK: [2014-01-04 Sat 22:10]--[2014-01-04 Sat 22:17] =>  0:07
     CLOCK: [2014-01-04 Sat 22:05]--[2014-01-04 Sat 22:10] =>  0:05
     CLOCK: [2013-12-30 Mon 11:59]--[2013-12-30 Mon 12:29] =>  0:30
     CLOCK: [2013-12-30 Mon 11:53]--[2013-12-30 Mon 11:58] =>  0:05
@@ -44,9 +47,6 @@ Updates to release notes and backlog.
 
 Use compilation downtime to update the manual.
 
-We never got round to doing this during this iteration as there were a
-number of compilation fixes that used the downtime.
-
 *** COMPLETED Investigate availability of boost 1.55 for debian        :task:
     CLOSED: [2013-12-30 Mon 12:59]
     CLOCK: [2013-12-30 Mon 12:31]--[2013-12-30 Mon 12:49] =>  0:18
@@ -59,9 +59,16 @@ to the [[http://packages.qa.debian.org/b/boost-defaults.html][package feed]].
     CLOSED: [2013-12-30 Mon 13:54]
     CLOCK: [2013-12-30 Mon 13:48]--[2013-12-30 Mon 13:54] =>  0:06
 
+After the move to boost 1.55, we increased dramatically the number of
+valgrind's errors. It looks like the vast majority of it is just boost
+log, and postgres. Update all of the suppressions.
+
 *** COMPLETED Add absolute path support to =om=                       :story:
     CLOSED: [2013-12-30 Mon 16:37]
     CLOCK: [2013-12-30 Mon 13:56]--[2013-12-30 Mon 16:36] =>  2:40
+
+We have no way of generating full paths from within =om=. To do so we
+need the following changes:
 
 - use settings to compute the key paths in engine workflow: project
   directory, source directory, include directory
@@ -86,8 +93,8 @@ quickly. To do so:
     CLOSED: [2013-12-30 Mon 19:38]
     CLOCK: [2013-12-30 Mon 19:03]--[2013-12-30 Mon 19:38] =>  0:35
 
-We seem to be creating om files in an incorrect directory. We need to
-fix this before we can start looking at the diffs.
+We seem to be creating =om= files in an incorrect directory. We need
+to fix this before we can start looking at the diffs.
 
 *** COMPLETED Fix differences in code generation between =om= and C++ model :story:
     CLOSED: [2014-01-01 Wed 14:00]
@@ -235,7 +242,25 @@ provide it with an interface that suits our needs:
 - divisor: some way of stating that there is a split in the stream;
   the split is then interpreted depending on whether there is content
   before it, content after it, etc.
-- We won't be able to add a lot of the utility stuff into the stream.
+- we won't be able to add a lot of the utility stuff into the stream.
+
+Actually, managed blank lines is far too simplistic to work with all
+the permutations we have in real life. We need to go back to the
+drawing board and design a state machine that takes into account all
+known states; state transitions are triggered by the manipulators.
+
+After doing a state machine, it seems that we have all cases covered
+after all. The only problem is the terminology we chose is terrible,
+but the state machine concepts are all modeled in there somewhere.
+
+#+caption: State machine for stream
+[[https://raw.github.com/kitanda/dogen/master/doc/misc/indenting_stream_state_diagram.jpeg]]
+
+Also, we should consider hard-coding the new line characters as per
+this post:
+
+[[http://stackoverflow.com/questions/6864759/determining-the-newline-character-for-the-environment-a-c-program-is-being-com][- Determining the Newline character for the environment a C++ program
+is being compiled on]]
 
 **** COMPLETED Add classes modeling stream and blocks                  :task:
      CLOSED: [2014-01-03 Fri 01:30]
@@ -260,25 +285,8 @@ Create the classes as per analysis.
 
 Switch plain =ostringstreams= to the new indent filter in =om=.
 
-Actually, managed blank lines is far too simplistic to work with all
-the permutations we have in real life. We need to go back to the
-drawing board and design a state machine that takes into account all
-known states; state transitions are triggered by the manipulators.
-
-After doing a state machine, it seems that we have all cases covered
-after all. The only problem is the terminology we chose is terrible,
-but the state machine concepts are all modeled in there somewhere.
-
-#+caption: State machine for stream
-[[https://raw.github.com/kitanda/dogen/master/doc/misc/indenting_stream_state_diagram.jpeg]]
-
-Also, we should consider hard-coding the new line characters as per
-this post:
-
-[[http://stackoverflow.com/questions/6864759/determining-the-newline-character-for-the-environment-a-c-program-is-being-com][- Determining the Newline character for the environment a C++ program
-is being compiled on]]
-
-*** IMPLEMENTATION Add include file support to main type formatter    :story:
+*** COMPLETED Add include file support to main type formatter         :story:
+    CLOSED: [2014-01-04 Sat 22:23]
 
 Inclusion support needs to be moved to the formatters. SML provides
 all the required information at the model level in terms of type
@@ -313,7 +321,7 @@ wrong place.
 This will be hard-coded as it is the simplest and cleanest way of
 doing it.
 
-**** IMPLEMENTATION Update all tests to use =om= formatter             :task:
+*** IMPLEMENTATION Update all tests to use =om= formatter              :task:
      CLOCK: [2014-01-04 Sat 22:07]--[2014-01-04 Sat 22:08] =>  0:01
 
 Go through every single engine test, enable =om= formatting and fix
