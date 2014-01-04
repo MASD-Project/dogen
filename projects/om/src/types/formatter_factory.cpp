@@ -43,7 +43,7 @@ formatter_factory(const sml::model& model,
       cpp_source_directory_(cpp_source_directory),
       cpp_include_directory_(cpp_include_directory) {
 
-    BOOST_LOG_SEV(lg, error) << "Factory setup. Project directory: "
+    BOOST_LOG_SEV(lg, debug) << "Factory setup. Project directory: "
                              << project_directory << " C++ source directory: "
                              << cpp_source_directory
                              << " C++ include directory: "

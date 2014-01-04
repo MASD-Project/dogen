@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-04 Sat 21:14]
+Clock summary at [2014-01-04 Sat 22:10]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *28:47* |       |       |
+| *Total time*                                                            | *29:19* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 28:47 |       |
-| IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:30 |
+| Development Stories Implemented                                         |         | 29:19 |       |
+| IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:35 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
 | COMPLETED Add absolute path support to =om=                             |         |       |  2:40 |
@@ -25,12 +25,13 @@ Clock summary at [2014-01-04 Sat 21:14]
 | COMPLETED Ensure OM header files are at the expected location           |         |       |  0:35 |
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       |  6:45 |
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
-| IMPLEMENTATION Add include file support to main type formatter          |         |       |  1:13 |
-| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 13:16 |
+| COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
+| IMPLEMENTATION Add include file support to main type formatter          |         |       |  1:14 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-04 Sat 22:05]--[2014-01-04 Sat 22:10] =>  0:05
     CLOCK: [2013-12-30 Mon 11:59]--[2013-12-30 Mon 12:29] =>  0:30
     CLOCK: [2013-12-30 Mon 11:53]--[2013-12-30 Mon 11:58] =>  0:05
     CLOCK: [2013-12-30 Mon 10:29]--[2013-12-30 Mon 11:05] =>  0:36
@@ -165,37 +166,8 @@ Do a quick investigation as to what flags we are using on clang.
 Actually, these flags are only available for recent clangs. We need to
 comment it out for now and revisit it later.
 
-*** IMPLEMENTATION Add include file support to main type formatter    :story:
-
-Inclusion support needs to be moved to the formatters. SML provides
-all the required information at the model level in terms of type
-dependencies, but only the formatter itself knows what includes it
-needs because these are related to the implementation. Even
-determining which facets of a type one should include is formatter
-dependent. We need to distribute the logic of the includer into each
-formatter.
-
-**** COMPLETED Add initial inclusion processing support                :task:
-     CLOSED: [2014-01-01 Wed 15:44]
-     CLOCK: [2014-01-01 Wed 14:59]--[2014-01-01 Wed 15:43] =>  0:44
-     CLOCK: [2014-01-01 Wed 14:35]--[2014-01-01 Wed 14:59] =>  0:24
-
-Drill through all the layers to ensure the C++ inclusion class is
-populated when we format the file.
-
-**** COMPLETED Fix modeling errors in terms of forward declaration files :task:
-     CLOSED: [2014-01-01 Wed 17:33]
-     CLOCK: [2014-01-01 Wed 16:50]--[2014-01-01 Wed 16:55] =>  0:05
-
-We need to be able to support forward declaration files at the facet
-level; we incorrectly modeled this as if there was only one forward
-declaration file for all the facets.
-
-Actually, this was modeled correctly, we were just looking at the
-wrong place.
-
-**** Add includes for standard library types                           :task:
-*** IMPLEMENTATION Solve the new lines issue in formatters            :spike:
+*** COMPLETED Solve the new lines issue in formatters                 :spike:
+    CLOSED: [2014-01-04 Sat 22:05]
 
 We did a number of hacks to get the newlines to work correctly but in
 reality all of these approaches are really bad. The problem is that
@@ -275,7 +247,9 @@ provide it with an interface that suits our needs:
 
 Create the classes as per analysis.
 
-**** IMPLEMENTATION Replace existing =om= code with new ostream filter :task:
+**** COMPLETED Replace existing =om= code with new ostream filter      :task:
+     CLOSED: [2014-01-04 Sat 22:05]
+     CLOCK: [2014-01-04 Sat 21:39]--[2014-01-04 Sat 22:05] =>  0:26
      CLOCK: [2014-01-04 Sat 20:02]--[2014-01-04 Sat 21:14] =>  1:12
      CLOCK: [2014-01-04 Sat 12:50]--[2014-01-04 Sat 12:52] =>  0:02
      CLOCK: [2014-01-03 Fri 17:58]--[2014-01-03 Fri 18:46] =>  0:48
@@ -295,13 +269,55 @@ After doing a state machine, it seems that we have all cases covered
 after all. The only problem is the terminology we chose is terrible,
 but the state machine concepts are all modeled in there somewhere.
 
+#+caption: State machine for stream
+[[https://raw.github.com/kitanda/dogen/master/doc/misc/indenting_stream_state_diagram.jpeg]]
+
 Also, we should consider hard-coding the new line characters as per
 this post:
 
 [[http://stackoverflow.com/questions/6864759/determining-the-newline-character-for-the-environment-a-c-program-is-being-com][- Determining the Newline character for the environment a C++ program
 is being compiled on]]
 
-*** Add required meta-data to test models                             :story:
+*** IMPLEMENTATION Add include file support to main type formatter    :story:
+
+Inclusion support needs to be moved to the formatters. SML provides
+all the required information at the model level in terms of type
+dependencies, but only the formatter itself knows what includes it
+needs because these are related to the implementation. Even
+determining which facets of a type one should include is formatter
+dependent. We need to distribute the logic of the includer into each
+formatter.
+
+**** COMPLETED Add initial inclusion processing support                :task:
+     CLOSED: [2014-01-01 Wed 15:44]
+     CLOCK: [2014-01-01 Wed 14:59]--[2014-01-01 Wed 15:43] =>  0:44
+     CLOCK: [2014-01-01 Wed 14:35]--[2014-01-01 Wed 14:59] =>  0:24
+
+Drill through all the layers to ensure the C++ inclusion class is
+populated when we format the file.
+
+**** COMPLETED Fix modeling errors in terms of forward declaration files :task:
+     CLOSED: [2014-01-01 Wed 17:33]
+     CLOCK: [2014-01-01 Wed 16:50]--[2014-01-01 Wed 16:55] =>  0:05
+
+We need to be able to support forward declaration files at the facet
+level; we incorrectly modeled this as if there was only one forward
+declaration file for all the facets.
+
+Actually, this was modeled correctly, we were just looking at the
+wrong place.
+
+**** COMPLETED Add includes for standard library types                 :task:
+     CLOSED: [2014-01-04 Sat 22:05]
+
+This will be hard-coded as it is the simplest and cleanest way of
+doing it.
+
+**** IMPLEMENTATION Update all tests to use =om= formatter             :task:
+     CLOCK: [2014-01-04 Sat 22:07]--[2014-01-04 Sat 22:08] =>  0:01
+
+Go through every single engine test, enable =om= formatting and fix
+all the issues until the test goes green.
 
 In order for om to match the C++ model we need to make sure we are
 passing in the correct meta-data such as licences, etc.

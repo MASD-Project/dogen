@@ -391,9 +391,8 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
-    BOOST_CHECK(check_code_generation(dia_sml::input_class_in_a_package_dia()));
-    // BOOST_CHECK(check_code_generation(
-    //         dia_sml::input_class_in_a_package_dia(), true/*enable_om*/));
+    BOOST_CHECK(check_code_generation(
+            dia_sml::input_class_in_a_package_dia(), true/*enable_om*/));
 }
 
 BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code) {

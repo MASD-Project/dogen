@@ -51,7 +51,9 @@ const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
 const bool line_between_blocks(true);
 const bool documenting_previous_identifier(true);
+
 const std::string scope_operator("::");
+const std::string algorithm_include("algorithm");
 
 }
 
@@ -169,6 +171,12 @@ visit(const sml::object& o) {
         const auto fn(reader.get(bs::forward_declarations_file::file_name));
         includes_.user().push_back(fn);
     }
+
+    if (o.all_properties().empty())
+        return;
+
+    // hard-coded includes
+    includes_.system().push_back(algorithm_include);
 }
 
 cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter(
@@ -267,6 +275,8 @@ external_swap(const sml::object& o) const {
         helper_->utility().close_scope(nl);
         helper_->utility().blank_line();
     }
+    helper_->utility().blank_line();
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
