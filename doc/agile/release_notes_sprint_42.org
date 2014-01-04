@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-04 Sat 22:23]
+Clock summary at [2014-01-04 Sat 22:41]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *29:32* |       |       |
+| *Total time*                                                            | *29:50* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 29:32 |       |
+| Development Stories Implemented                                         |         | 29:50 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -27,7 +27,7 @@ Clock summary at [2014-01-04 Sat 22:23]
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  0:01 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  0:19 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -322,13 +322,29 @@ This will be hard-coded as it is the simplest and cleanest way of
 doing it.
 
 *** IMPLEMENTATION Update all tests to use =om= formatter              :task:
-     CLOCK: [2014-01-04 Sat 22:07]--[2014-01-04 Sat 22:08] =>  0:01
+    CLOCK: [2014-01-04 Sat 22:07]--[2014-01-04 Sat 22:08] =>  0:01
 
 Go through every single engine test, enable =om= formatting and fix
 all the issues until the test goes green.
 
 In order for om to match the C++ model we need to make sure we are
 passing in the correct meta-data such as licences, etc.
+
+**** COMPLETED Model =class_in_a_package=                              :task:
+     CLOSED: [2014-01-04 Sat 22:25]
+
+Basic model with int properties.
+
+**** COMPLETED Models that do not exercise =om=                        :task:
+     CLOSED: [2014-01-04 Sat 22:37]
+     CLOCK: [2014-01-04 Sat 22:23]--[2014-01-04 Sat 22:41] =>  0:18
+
+The following models were updated without requiring any changes:
+
+- =two_empty_layers=
+- =class_without_name=
+- =empty_model=
+- =empty_package=
 
 *** Add tests for =flat_name_builder=                                 :story:
 

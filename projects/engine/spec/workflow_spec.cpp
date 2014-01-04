@@ -61,6 +61,8 @@ const std::string io_facet_and_integrated_io_error(
     "Integrated IO cannot be used with the IO facet");
 const std::string dia_invalid_name("Dia object name is empty");
 
+const bool enable_om(true);
+
 std::vector<dogen::utility::test::file_asserter::shared_ptr>
 file_asserters() {
     using dogen::utility::test::file_asserter;
@@ -391,14 +393,14 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
-    BOOST_CHECK(check_code_generation(
-            dia_sml::input_class_in_a_package_dia(), true/*enable_om*/));
+    const auto t(dia_sml::input_class_in_a_package_dia());
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code) {
     SETUP_TEST_LOG("two_empty_layers_model_does_not_generate_code");
     const auto t(dia_sml::input_two_empty_layers_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
@@ -410,6 +412,7 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
 
     auto s(default_mock_settings(tds));
     dogen::engine::workflow w(s);
+    w.enable_om(enable_om);
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(w.execute(), std::exception, c);
 }
@@ -417,13 +420,13 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
 BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     SETUP_TEST_LOG("empty_model_generates_expected_code");
     const auto t(dia_sml::input_empty_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code) {
     SETUP_TEST_LOG("empty_package_model_does_not_generate_code");
     const auto t(dia_sml::input_empty_package_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
