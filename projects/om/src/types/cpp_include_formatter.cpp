@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/om/types/indent_filter.hpp"
 #include <boost/filesystem/path.hpp>
 #include "dogen/om/types/cpp_include_formatter.hpp"
 
@@ -49,6 +50,9 @@ format(std::ostream& s, const cpp_includes& i) const {
         s << include << open_user << inc.generic_string()
           << close_user << std::endl;
     }
+
+    if (!i.system().empty() || !i.user().empty())
+        s << manage_blank_lines << std::endl;
 }
 
 } }

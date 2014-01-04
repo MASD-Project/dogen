@@ -139,6 +139,7 @@ public:
     void format_begin() {
         boilerplate_.format_begin(stream_, annotation_, includes_,
             relative_file_path_);
+        utility_.managed_blank_line();
     }
 
     /**
@@ -236,6 +237,7 @@ external_equality(const sml::object& o) const {
         helper_->stream() << "return lhs.equals(rhs);" << std::endl;
     }
     helper_->utility().close_scope(nl);
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -244,27 +246,27 @@ external_swap(const sml::object& o) const {
     if (o.all_properties().empty() || o.is_parent() || o.is_immutable())
         return;
 
-    // there is a presumption here that swap is the very first
-    // function after the user namespaces have been closed.
-    helper_->utility().blank_line(2);
-    const auto std_ns(std::list<std::string> { "std" });
-    cpp_formatters::namespace_helper ns(helper_->stream(), std_ns);
-    helper_->utility().blank_line();
-
-    const auto nl(padding_types::new_line);
-    helper_->stream() << "template<>" << std::endl
-                     << "inline void swap(" << std::endl;
     {
-        positive_indenter_scope s(helper_->stream());
-        sml::meta_data_reader reader(o.meta_data());
-        const auto n(reader.get(sml::tags::cpp::types::qualified_name));
-        helper_->stream() << n << "& lhs," << std::endl
-                         << n << "& rhs) ";
+        const auto std_ns(std::list<std::string> { "std" });
+        cpp_formatters::namespace_helper ns(helper_->stream(), std_ns);
+        helper_->utility().blank_line();
 
-        helper_->utility().open_scope(nl);
-        helper_->stream() << "lhs.swap(rhs);" << std::endl;
+        const auto nl(padding_types::new_line);
+        helper_->stream() << "template<>" << std::endl
+                         << "inline void swap(" << std::endl;
+        {
+            positive_indenter_scope s(helper_->stream());
+            sml::meta_data_reader reader(o.meta_data());
+            const auto n(reader.get(sml::tags::cpp::types::qualified_name));
+            helper_->stream() << n << "& lhs," << std::endl
+                             << n << "& rhs) ";
+
+            helper_->utility().open_scope(nl);
+            helper_->stream() << "lhs.swap(rhs);" << std::endl;
+        }
+        helper_->utility().close_scope(nl);
+        helper_->utility().blank_line();
     }
-    helper_->utility().close_scope(nl);
 }
 
 void cpp_types_main_header_file_formatter::
@@ -277,7 +279,7 @@ external_inserter(const sml::object& o) const {
     helper_->stream() << "std::ostream& operator<<(std::ostream& s, "
                       << "const " << o.name().simple_name() << "& v);"
                       << std::endl;
-    helper_->utility().blank_line();
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -599,7 +601,6 @@ member_variables(const sml::object& o) const {
                          << std::endl;
     }
     helper_->utility().managed_blank_line();
-
 }
 
 void cpp_types_main_header_file_formatter::
@@ -619,14 +620,15 @@ internal_equality(const sml::object& o) const {
         helper_->stream() << "bool operator==(const " << sn
                          << "& rhs) const;" << std::endl;
         helper_->stream() << "bool operator!=(const " << sn << "& rhs) const ";
-        helper_->utility().open_scope();
+
+        helper_->utility().open_scope(padding_types::new_line);
         {
             positive_indenter_scope s(helper_->stream());
             helper_->stream() << "return !this->operator==(rhs);" << std::endl;
         }
-
         const auto nl(padding_types::new_line);
         helper_->utility().close_scope(nl);
+        helper_->utility().managed_blank_line();
     }
 
     if (!o.is_parent() && !o.is_child())
@@ -693,8 +695,9 @@ internal_swap(const sml::object& o) const {
     const auto sn(o.name().simple_name());
     helper_->stream() << "void swap(" << sn << "& other) noexcept;"
                      << std::endl;
-    helper_->utility().managed_blank_line();
 
+    // FIXME: hack just to get zero diffs with legacy
+    // helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -818,6 +821,8 @@ visit(const dogen::sml::enumeration& e) const {
         helper_->stream() << "};" << std::endl;
         helper_->utility().blank_line();
     }
+    helper_->utility().blank_line();
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -849,6 +854,8 @@ visit(const dogen::sml::object& o) const {
         external_equality(o);
         external_inserter(o);
     }
+    helper_->utility().blank_line();
+    helper_->utility().managed_blank_line();
     external_swap(o);
 }
 
@@ -883,6 +890,7 @@ format(const sml::module& module, const annotation& a) const {
         nsf.format_end();
     }
     helper_->utility().blank_line();
+    helper_->utility().managed_blank_line();
     helper_->format_end();
 
     const file r(build_file(module.meta_data()));
@@ -896,7 +904,6 @@ format(const sml::type& t, const annotation& a) const {
     helper_->compute_includes(t);
     helper_->format_begin();
     t.accept(*this);
-    helper_->utility().blank_line();
     helper_->format_end();
 
     const file r(build_file(t.meta_data()));

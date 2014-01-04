@@ -76,7 +76,6 @@ add_licence(std::list<std::string>& content, const licence& l) const {
 
 void cpp_file_boilerplate_formatter::
 format_preamble(std::ostream& s, const annotation& a) const {
-
     if (!generate_preamble_)
         return;
 

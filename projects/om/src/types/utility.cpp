@@ -57,22 +57,25 @@ void utility::handle_padding_after(const padding_types padding) {
         stream_ << std::endl;
 }
 
-void utility::public_access_specifier(const padding_types padding) {
-    negative_indenter_scope s(stream_);
+void utility::public_access_specifier(const padding_types padding,
+    const bool reset_management) {
+    negative_indenter_scope s(stream_, reset_management);
     handle_padding_before(padding);
     stream_ << ::public_access_specifier;
     handle_padding_after(padding);
 }
 
-void utility::protected_access_specifier(const padding_types padding) {
-    negative_indenter_scope s(stream_);
+void utility::protected_access_specifier(const padding_types padding,
+    const bool reset_management) {
+    negative_indenter_scope s(stream_, reset_management);
     handle_padding_before(padding);
     stream_ << ::protected_access_specifier;
     handle_padding_after(padding);
 }
 
-void utility::private_access_specifier(const padding_types padding) {
-    negative_indenter_scope s(stream_);
+void utility::private_access_specifier(const padding_types padding,
+    const bool reset_management) {
+    negative_indenter_scope s(stream_, reset_management);
     handle_padding_before(padding);
     stream_ << ::private_access_specifier;
     handle_padding_after(padding);

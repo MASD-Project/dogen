@@ -21,6 +21,7 @@
 #include <ostream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/om/types/indent_filter.hpp"
 #include "dogen/om/types/cpp_header_guard_formatter.hpp"
 
 namespace {
@@ -68,7 +69,8 @@ format_begin(std::ostream& s, const boost::filesystem::path& p) {
     s << std::endl << std::endl
       << msvc_line_1 << std::endl
       << msvc_line_2 << std::endl
-      << msvc_line_3 << std::endl;
+      << msvc_line_3 << std::endl
+      << manage_blank_lines << std::endl;
 }
 
 void cpp_header_guard_formatter::
@@ -76,7 +78,7 @@ format_end(std::ostream& s, const boost::filesystem::path& p) {
     if (p.empty())
         return;
 
-    s << std::endl << endif << std::endl;
+    s << endif << std::endl;
 }
 
 } }

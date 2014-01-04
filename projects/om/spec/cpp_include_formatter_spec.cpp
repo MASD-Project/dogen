@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include "dogen/om/types/indent_filter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -53,14 +54,21 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     dogen::om::cpp_includes i;
-    i.system().push_back("win32/system_inc_1"); // FIXME
+    // FIXME: not using windows formatting for now, problems with
+    // FIXME: boost path.
+    // i.system().push_back("win32\\system_inc_1");
+    i.system().push_back("win32/system_inc_1");
     i.system().push_back("unix/system_inc_2");
     i.user().push_back("user_inc_1");
     i.user().push_back("user_inc_2");
 
     std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+
     dogen::om::cpp_include_formatter f;
-    f.format(s, i);
+    f.format(fo, i);
     BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -70,8 +78,12 @@ BOOST_AUTO_TEST_CASE(empty_includes_produces_no_preprocessor_includes) {
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+
     dogen::om::cpp_include_formatter f;
-    f.format(s, empty_includes);
+    f.format(fo, empty_includes);
     BOOST_CHECK(asserter::assert_equals_marker(empty, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }

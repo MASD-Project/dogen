@@ -60,11 +60,14 @@ public:
      */
     /**@{*/
     void public_access_specifier(
-        const padding_types padding = padding_types::new_line);
+        const padding_types padding = padding_types::new_line,
+        const bool reset_management = false);
     void protected_access_specifier(
-        const padding_types padding = padding_types::new_line);
+        const padding_types padding = padding_types::new_line,
+        const bool reset_management = false);
     void private_access_specifier(
-        const padding_types padding = padding_types::new_line);
+        const padding_types padding = padding_types::new_line,
+        const bool reset_management = false);
     /**@}*/
 
     /**

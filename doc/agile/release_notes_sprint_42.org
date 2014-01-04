@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-04 Sat 11:24]
+Clock summary at [2014-01-04 Sat 21:14]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *27:33* |       |       |
+| *Total time*                                                            | *28:47* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 27:33 |       |
+| Development Stories Implemented                                         |         | 28:47 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:30 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -26,7 +26,7 @@ Clock summary at [2014-01-04 Sat 11:24]
 | COMPLETED Fix differences in code generation between =om= and C++ model |         |       |  6:45 |
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | IMPLEMENTATION Add include file support to main type formatter          |         |       |  1:13 |
-| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 12:02 |
+| IMPLEMENTATION Solve the new lines issue in formatters                  |         |       | 13:16 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -276,6 +276,8 @@ provide it with an interface that suits our needs:
 Create the classes as per analysis.
 
 **** IMPLEMENTATION Replace existing =om= code with new ostream filter :task:
+     CLOCK: [2014-01-04 Sat 20:02]--[2014-01-04 Sat 21:14] =>  1:12
+     CLOCK: [2014-01-04 Sat 12:50]--[2014-01-04 Sat 12:52] =>  0:02
      CLOCK: [2014-01-03 Fri 17:58]--[2014-01-03 Fri 18:46] =>  0:48
      CLOCK: [2014-01-03 Fri 17:06]--[2014-01-03 Fri 17:58] =>  0:52
      CLOCK: [2014-01-03 Fri 16:16]--[2014-01-03 Fri 17:05] =>  0:49
@@ -288,6 +290,16 @@ Actually, managed blank lines is far too simplistic to work with all
 the permutations we have in real life. We need to go back to the
 drawing board and design a state machine that takes into account all
 known states; state transitions are triggered by the manipulators.
+
+After doing a state machine, it seems that we have all cases covered
+after all. The only problem is the terminology we chose is terrible,
+but the state machine concepts are all modeled in there somewhere.
+
+Also, we should consider hard-coding the new line characters as per
+this post:
+
+[[http://stackoverflow.com/questions/6864759/determining-the-newline-character-for-the-environment-a-c-program-is-being-com][- Determining the Newline character for the environment a C++ program
+is being compiled on]]
 
 *** Add required meta-data to test models                             :story:
 

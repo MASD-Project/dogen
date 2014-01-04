@@ -98,17 +98,20 @@ public:
                 return true;
             }
 
-            if (found_cr_) {
-                found_cr_ = false;
-                boost::iostreams::put(dest, cr);
-            }
+            if (!is_first_character_) {
+                if (found_cr_) {
+                    found_cr_ = false;
+                    boost::iostreams::put(dest, cr);
+                }
 
-            if (found_lf_) {
-                found_lf_ = false;
-                boost::iostreams::put(dest, lf);
+                if (found_lf_) {
+                    found_lf_ = false;
+                    boost::iostreams::put(dest, lf);
+                }
             }
             reset_blank_lines_management();
         }
+        is_first_character_ = false;
 
         if (c == lf) {
             at_line_start_ = true;
@@ -139,11 +142,11 @@ public:
     /**
      * @brief Decrease indentation level by one.
      */
-    void decrement_indentation_level(const bool reset = true) {
+    void decrement_indentation_level(const bool reset_management = true) {
         if (indentation_level_ > 0) {
             --indentation_level_;
 
-            if (reset)
+            if (reset_management)
                 reset_blank_lines_management();
         }
     }
@@ -187,13 +190,14 @@ public:
 
 private:
     explicit indent_filter(const unsigned int indentation_size)
-    : indentation_level_(0), at_line_start_(true),
+    : indentation_level_(0), at_line_start_(true), is_first_character_(true),
       indentation_size_(indentation_size), stream_(0),
       manage_blank_lines_(false), found_cr_(false), found_lf_(false) { }
 
 private:
     unsigned int indentation_level_;
     bool at_line_start_;
+    bool is_first_character_;
     const unsigned int indentation_size_;
     std::ostream* stream_;
     bool manage_blank_lines_;
@@ -266,14 +270,14 @@ typedef basic_positive_indenter_scope<char> positive_indenter_scope;
 template<class CharType, class TraitsType = std::char_traits<CharType> >
 class basic_negative_indenter_scope {
 public:
-    basic_negative_indenter_scope(std::basic_ostream<CharType, TraitsType>& s)
+    basic_negative_indenter_scope(std::basic_ostream<CharType, TraitsType>& s,
+        const bool reset_management = false)
         : stream_(s), started_at_zero_(false) {
 
         indent_filter* filter((indent_filter*)s.pword(xdent<int>()()));
         if (filter) {
             started_at_zero_ = filter->indentation_level() == 0;
-            const auto do_not_reset_management(false);
-            filter->decrement_indentation_level(do_not_reset_management);
+            filter->decrement_indentation_level(reset_management);
         }
     }
 

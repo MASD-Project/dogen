@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include "dogen/om/types/indent_filter.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -58,9 +59,13 @@ BOOST_AUTO_TEST_CASE(non_empty_path_produces_expected_header_guards) {
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+
     dogen::om::cpp_header_guard_formatter f;
-    f.format_begin(s, non_empty_path);
-    f.format_end(s, non_empty_path);
+    f.format_begin(fo, non_empty_path);
+    f.format_end(fo, non_empty_path);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(with_guard, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -71,6 +76,10 @@ BOOST_AUTO_TEST_CASE(empty_path_produces_no_header_guards) {
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::om::indent_filter::push(fo, 4);
+    fo.push(s);
+
     dogen::om::cpp_header_guard_formatter f;
     f.format_begin(s, empty_path);
     f.format_end(s, empty_path);
