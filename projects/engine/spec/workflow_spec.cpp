@@ -438,7 +438,7 @@ BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
 BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_attributes_model_generates_expected_code");
     const auto t(dia_sml::input_class_without_attributes_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code) {

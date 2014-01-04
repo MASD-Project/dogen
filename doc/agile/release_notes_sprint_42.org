@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-04 Sat 23:05]
+Clock summary at [2014-01-04 Sat 23:24]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *30:11* |       |       |
+| *Total time*                                                            | *30:28* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 30:11 |       |
+| Development Stories Implemented                                         |         | 30:28 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -27,7 +27,7 @@ Clock summary at [2014-01-04 Sat 23:05]
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  0:40 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  0:57 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -360,6 +360,15 @@ We need to set meta-data such as licence, etc for these models.
 - =stand_alone_class=
 - =classes_in_a_package=
 - =classes_without_package=
+
+**** COMPLETED Model =class_without_attributes=                        :task:
+     CLOSED: [2014-01-04 Sat 23:14]
+     CLOCK: [2014-01-04 Sat 23:07]--[2014-01-04 Sat 23:24] =>  0:17
+
+Empty class. Caused formatting differences.
+
+Formatting differences are actually features, not bugs, so rebaselined
+model.
 
 *** Add tests for =flat_name_builder=                                 :story:
 
