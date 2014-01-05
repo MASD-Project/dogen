@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Indent stream can be made a bit less inefficient                  :story:
+
+Out first attempt at creating a stream with indentation support was a
+bit naive: we are intercepting every character and then deciding if we
+need to change any states in the state machine. Its probably wiser to
+just use manipulators to perform the state transitions and leave the
+=put= undisturbed. We can leave this until we have a good way of
+getting metrics out of the system.
+
 *** When on clang 3.4 enable code coverage flags                      :story:
 
 We implemented the flags as per this post:
