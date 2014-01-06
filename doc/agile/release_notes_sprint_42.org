@@ -394,6 +394,11 @@ All aspects related to inheritance. A lot of non-obvious diffs.
 
 We need to add includes via relationships to types formatter.
 
+**** IMPLEMENTATION Model =trivial_association=                        :task:
+     CLOCK: [2014-01-06 Mon 23:54]--[2014-01-06 Mon 23:56] =>  0:02
+
+Simple association, should be easy to get it to pass.
+
 *** Add tests for =flat_name_builder=                                 :story:
 
 We refactored tagger code related to flattening names into this class

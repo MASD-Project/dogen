@@ -202,7 +202,7 @@
         <dia:point val="28.8688,11.4688"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.8188,11.4187;35.5787,14.3188"/>
+        <dia:rectangle val="28.8188,11.4188;35.5788,14.3188"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="28.8688,11.4688"/>
@@ -482,7 +482,7 @@
         <dia:point val="20.56,14.175"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.445,13.425;21.31,26.4125"/>
+        <dia:rectangle val="11.445,13.425;21.31,25.6125"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -663,15 +663,15 @@
         <dia:point val="32.1988,14.2688"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.4488,13.5188;37.8063,26.7875"/>
+        <dia:rectangle val="31.4488,13.5188;37.8063,25.9875"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="32.1988,14.2688"/>
-        <dia:point val="32.1988,20.0781"/>
-        <dia:point val="37.6063,20.0781"/>
+        <dia:point val="32.1988,20.0782"/>
+        <dia:point val="37.6063,20.0782"/>
         <dia:point val="37.6063,25.1875"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -692,6 +692,60 @@
         <dia:connection handle="0" to="O1" connection="6"/>
         <dia:connection handle="1" to="O4" connection="1"/>
       </dia:connections>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O6">
+      <dia:attribute name="obj_pos">
+        <dia:point val="11.9833,2.05833"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="11.9333,2.00833;37.5733,6.20833"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="11.9833,2.05833"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="25.540000000000003"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="4.0999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#ffffff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>##DOGEN COMMENT=true
+#DOGEN LICENCE=gpl_v2
+#DOGEN MODELINE_GROUP=emacs
+#DOGEN COPYRIGHT=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="12.3333,3.30333"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
     </dia:object>
   </dia:layer>
 </dia:diagram>
