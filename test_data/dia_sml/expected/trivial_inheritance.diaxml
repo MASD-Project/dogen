@@ -889,7 +889,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>11.129999999999999</value>
+										<value>11.130000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -3720,7 +3720,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.0299999999999994</value>
+										<value>8.0300000000000011</value>
 									</value>
 								</item>
 							</values>
@@ -4224,7 +4224,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.5849999999999991</value>
+										<value>8.5850000000000009</value>
 									</value>
 								</item>
 							</values>
@@ -4869,13 +4869,13 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>36.1112,23.3531</value>
+										<value>36.1112,23.3532</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>33.14,23.3531</value>
+										<value>33.14,23.3532</value>
 									</value>
 								</item>
 								<item>
@@ -5415,7 +5415,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.5849999999999991</value>
+										<value>8.5850000000000009</value>
 									</value>
 								</item>
 							</values>
@@ -8659,7 +8659,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.2700000000000005</value>
+										<value>7.2699999999999996</value>
 									</value>
 								</item>
 							</values>
@@ -10279,7 +10279,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>9.6275000000000013</value>
+										<value>9.6274999999999995</value>
 									</value>
 								</item>
 							</values>
@@ -15100,7 +15100,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-17.276,-19.625;7.594,-13.825</value>
+										<value>-17.276,-19.625;8.364,-11.425</value>
 									</value>
 								</item>
 							</values>
@@ -15146,7 +15146,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>24.77</value>
+										<value>25.539999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -15159,7 +15159,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>5.7000000000000002</value>
+										<value>8.0999999999999996</value>
 									</value>
 								</item>
 							</values>
@@ -15229,7 +15229,10 @@
 It includes the visitable stereotype since it only makes sense
 in the context of inheritance.
 
-#DOGEN COMMENT=true#</value>
+#DOGEN COMMENT=true
+#DOGEN LICENCE=gpl_v2
+#DOGEN MODELINE_GROUP=emacs
+#DOGEN COPYRIGHT=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</value>
 															</value>
 														</item>
 													</values>
@@ -16627,7 +16630,7 @@ in the context of inheritance.
 								<item>
 									<which>1</which>
 									<value>
-										<value>14.044999999999998</value>
+										<value>14.045</value>
 									</value>
 								</item>
 							</values>
