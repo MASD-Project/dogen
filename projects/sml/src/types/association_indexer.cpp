@@ -21,7 +21,6 @@
 #include <set>
 #include <list>
 #include <unordered_map>
-#include <unordered_set>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -55,11 +54,11 @@ private:
     sml::model& model_;
 };
 
-void association_indexer::remove_duplicates(std::list<qname>& names) const {
-    std::unordered_set<sml::qname> processed;
-
+void association_indexer::remove_duplicates(std::list<qname>& names,
+    std::unordered_set<sml::qname> processed) const {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
-                             << names.size();
+                             << names.size() << ". Processed starts with size: "
+                             << processed.size();
 
     auto i(names.begin());
     while (i != names.end()) {
@@ -142,13 +141,20 @@ void association_indexer::index_object(object& o) {
         recurse_nested_qnames(o, nqn, is_pointer);
     }
 
-    auto i(o.relationships().find(relationship_types::weak_associations));
-    if (i != o.relationships().end())
+    auto i(o.relationships().find(relationship_types::regular_associations));
+    std::unordered_set<sml::qname> regular_associations;
+    if (i != o.relationships().end()) {
         remove_duplicates(i->second);
+        for (const auto qn : i->second)
+            regular_associations.insert(qn);
+    }
 
-    i = o.relationships().find(relationship_types::regular_associations);
-    if (i != o.relationships().end())
-        remove_duplicates(i->second);
+    i = o.relationships().find(relationship_types::weak_associations);
+    if (i != o.relationships().end()) {
+        // ensure we remove any items which are simultaneously regular and
+        // weak associations.
+        remove_duplicates(i->second, regular_associations);
+    }
 }
 
 void association_indexer::index(model& m) {

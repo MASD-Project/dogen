@@ -956,6 +956,73 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
 }
 
 model mock_model_factory::
+object_with_both_regular_and_weak_associations() const {
+    model r(build_empty_model(0));
+    const auto mn(mock_model_qname(0));
+    auto o1(build_value_object(1, mn));
+    insert_object(r, o1);
+
+    object o0(build_value_object(0, mn));
+    property p0(mock_property(0, property_types::value_object, o1.name()));
+    o0.local_properties().push_back(p0);
+    if (flags_.properties_indexed())
+        o0.all_properties().push_back(p0);
+
+    const auto ra(relationship_types::regular_associations);
+    if (flags_.associations_indexed())
+        o0.relationships()[ra].push_back(o1.name());
+
+    qname qn;
+    qn.simple_name("shared_ptr");
+    qn.model_name("boost");
+
+    object o2;
+    o2.name(qn);
+    o2.object_type(dogen::sml::object_types::smart_pointer);
+    insert_object(r, o2);
+
+    property p1(mock_property(1, property_types::boost_shared_ptr, o1.name()));
+    o0.local_properties().push_back(p1);
+    if (flags_.properties_indexed())
+        o0.all_properties().push_back(p1);
+
+    const auto wa(relationship_types::weak_associations);
+    if (flags_.associations_indexed())
+        o0.relationships()[wa].push_back(o1.name());
+
+    object o3(build_value_object(3, mn));
+    insert_object(r, o3);
+
+    property p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
+    o0.local_properties().push_back(p2);
+    if (flags_.properties_indexed())
+        o0.all_properties().push_back(p2);
+
+    if (flags_.associations_indexed())
+        o0.relationships()[wa].push_back(o3.name());
+
+    qn.simple_name("string");
+    qn.model_name("std");
+
+    object o4;
+    o4.name(qn);
+    o4.object_type(dogen::sml::object_types::user_defined_value_object);
+    insert_object(r, o4);
+
+    property p3(mock_property(3, property_types::value_object, o4.name()));
+    o0.local_properties().push_back(p3);
+
+    if (flags_.properties_indexed())
+        o0.all_properties().push_back(p3);
+
+    if (flags_.associations_indexed())
+        o0.relationships()[ra].push_back(o4.name());
+
+    insert_object(r, o0);
+    return r;
+}
+
+model mock_model_factory::
 object_with_property(const object_types ot, const property_types pt) const {
     const auto mn(mock_model_qname(0));
     auto o1(build_value_object(1, mn));
@@ -978,7 +1045,7 @@ object_with_property(const object_types ot, const property_types pt) const {
 
     model r(build_empty_model(0));
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::weak_associations);
+    const auto wa(relationship_types::weak_associations);
     if (pt == property_types::value_object ||
         pt == property_types::boost_shared_ptr) {
         insert_object(r, o1);
@@ -1007,7 +1074,7 @@ object_with_property(const object_types ot, const property_types pt) const {
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
-            o0.relationships()[pa].push_back(o2.name());
+            o0.relationships()[wa].push_back(o2.name());
 
     } else if (pt == property_types::std_pair) {
         primitive b;
@@ -1364,8 +1431,11 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
     ui.name(p1.type().type());
     insert_nameable(r.primitives(), ui);
 
-    auto p2(mock_property(2, property_types::boost_shared_ptr, o1.name()));
+    auto o3(build_value_object(3, mn));
+    insert_object(r, o3);
+    auto p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
     lambda(p2);
+
     qname qn;
     qn.simple_name("shared_ptr");
     qn.model_name("boost");
@@ -1375,16 +1445,9 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
     o2.object_type(dogen::sml::object_types::smart_pointer);
     insert_object(r, o2);
 
-    primitive b;
-    b.name().simple_name(boolean);
-    r.primitives().insert(std::make_pair(b.name(), b));
-
-    qn.simple_name("pair");
-    qn.model_name("std");
-
-    auto o3(build_value_object(3, mn));
-    insert_object(r, o3);
-    auto p3(mock_property(3, property_types::value_object, o3.name()));
+    auto o4(build_value_object(4, mn));
+    insert_object(r, o4);
+    auto p3(mock_property(3, property_types::value_object, o4.name()));
     lambda(p3);
 
     if (repeat_group) {
@@ -1394,10 +1457,10 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
         auto p5(mock_property(5));
         lambda(p5);
 
-        auto p6(mock_property(6, property_types::boost_shared_ptr, o1.name()));
+        auto p6(mock_property(6, property_types::boost_shared_ptr, o3.name()));
         lambda(p6);
 
-        auto p7(mock_property(7, property_types::value_object, o3.name()));
+        auto p7(mock_property(7, property_types::value_object, o4.name()));
         lambda(p7);
     }
     insert_object(r, o0);
@@ -1442,9 +1505,13 @@ object_with_operation_with_multiple_parameters() const {
     p0.type(mock_nested_qname(ui.name()));
     p0.name(parameter_name(0));
 
+    primitive b;
+    b.name().simple_name(boolean);
+    insert_nameable(r.primitives(), b);
+
     parameter p1;
-    p1.type(mock_nested_qname_shared_ptr(ui.name()));
-    p1.name(parameter_name(0));
+    p1.type(mock_nested_qname_shared_ptr(b.name()));
+    p1.name(parameter_name(1));
 
     operation op;
     op.name(operation_name(0));

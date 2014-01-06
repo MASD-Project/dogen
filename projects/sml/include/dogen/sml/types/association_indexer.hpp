@@ -76,8 +76,14 @@ private:
     /**
      * @brief Removes duplicate qnames, preserving the original order
      * of elements in the list.
+     *
+     * @param names list of names to process
+     * @param processed list of names that have already been processed
+     * somewhere else, if any.
      */
-    void remove_duplicates(std::list<qname>& names) const;
+    void remove_duplicates(std::list<qname>& names,
+        std::unordered_set<sml::qname> processed =
+        std::unordered_set<sml::qname>()) const;
 
     /**
      * @brief Iterates through the nested qname recursively, picking

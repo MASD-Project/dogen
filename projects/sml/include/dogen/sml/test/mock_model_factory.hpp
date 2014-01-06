@@ -383,6 +383,12 @@ public:
 
 public:
     /**
+     * @brief Scenario: object that exercises both weak and regular
+     * associations.
+     */
+    model object_with_both_regular_and_weak_associations() const;
+
+    /**
      * @brief Scenario: object with single property of a type existent in
      * current model.
      */
