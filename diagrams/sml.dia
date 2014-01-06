@@ -666,7 +666,7 @@ representation of the primitive type.#</dia:string>
         <dia:point val="-86,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3349999999999991"/>
+        <dia:real val="8.3350000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -1428,7 +1428,7 @@ representation of the primitive type.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1802,7 +1802,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="3,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="31.684999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -2491,7 +2491,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="-34,-3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0924999999999994"/>
+        <dia:real val="7.0925000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8780,7 +8780,7 @@ boost::property_tree::ptreee#</dia:string>
         <dia:point val="-87,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.615000000000002"/>
+        <dia:real val="23.614999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -9079,7 +9079,7 @@ and values (where applicable) for tags.#</dia:string>
         <dia:point val="-49,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.075000000000003"/>
+        <dia:real val="22.074999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -9162,7 +9162,7 @@ based on association and generalisation relationships.#</dia:string>
         <dia:point val="-57,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.9099999999999993"/>
+        <dia:real val="7.9100000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -10404,7 +10404,7 @@ not have a need for it.#</dia:string>
         <dia:point val="33,109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.817499999999999"/>
+        <dia:real val="8.8175000000000008"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.6"/>
@@ -10446,7 +10446,7 @@ not have a need for it.#</dia:string>
         <dia:int val="17"/>
       </dia:attribute>
       <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -10568,7 +10568,7 @@ not have a need for it.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#pointer_associations#</dia:string>
+            <dia:string>#weak_associations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -11311,7 +11311,7 @@ not have a need for it.#</dia:string>
         <dia:point val="52,-12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.460000000000001"/>
+        <dia:real val="22.459999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -12864,7 +12864,7 @@ etc.#</dia:string>
         <dia:point val="-24,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5025000000000013"/>
+        <dia:real val="8.5024999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -13004,7 +13004,7 @@ etc.#</dia:string>
         <dia:point val="-24.105,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.855,17.25;-15.2975,31.6"/>
+        <dia:rectangle val="-24.855,17.25;-15.2975,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13075,7 +13075,7 @@ etc.#</dia:string>
         <dia:point val="-24.105,15.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.155,15.65;3.75,18.5"/>
+        <dia:rectangle val="-24.155,14.95;3.75,17.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13119,7 +13119,7 @@ etc.#</dia:string>
         <dia:point val="-15,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.225000000000001"/>
+        <dia:real val="18.224999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
@@ -13233,7 +13233,7 @@ of a language.#</dia:string>
         <dia:point val="-24,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.1375,25.95;-23.25,37.6"/>
+        <dia:rectangle val="-37.1375,25.25;-23.25,36.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13304,7 +13304,7 @@ of a language.#</dia:string>
         <dia:point val="-19.7488,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.4988,32.25;0.79,51.6"/>
+        <dia:rectangle val="-20.4988,32.25;0.79,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

@@ -82,7 +82,7 @@ void association_indexer::recurse_nested_qnames(object& o,
     const auto qn(nqn.type());
     auto& rels(o.relationships());
     if (is_pointer)
-        rels[relationship_types::pointer_associations].push_back(qn);
+        rels[relationship_types::weak_associations].push_back(qn);
     else
         rels[relationship_types::regular_associations].push_back(qn);
 
@@ -142,7 +142,7 @@ void association_indexer::index_object(object& o) {
         recurse_nested_qnames(o, nqn, is_pointer);
     }
 
-    auto i(o.relationships().find(relationship_types::pointer_associations));
+    auto i(o.relationships().find(relationship_types::weak_associations));
     if (i != o.relationships().end())
         remove_duplicates(i->second);
 

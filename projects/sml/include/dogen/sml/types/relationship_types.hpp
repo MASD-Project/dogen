@@ -36,7 +36,7 @@ enum class relationship_types : unsigned int {
     original_parents = 1, ///< Types at the root of the inheritance hierarchy.
     parents = 2, ///< Types that are direct parents of this type.
     regular_associations = 3, ///< Types that are involved in aggregation or composition relationships.
-    pointer_associations = 4, ///< Types that are involved in aggregation or composition relationships via a pointer.
+    weak_associations = 4, ///< Types that are involved in aggregation or composition relationships via a pointer.
     leaves = 5, ///< Types that are at the bottom of the inheritance tree.
     visits = 6, ///< Types that are visited by this visitor.
     visited_by = 7, ///< Types that visit current type.

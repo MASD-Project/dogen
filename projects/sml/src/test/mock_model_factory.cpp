@@ -978,7 +978,7 @@ object_with_property(const object_types ot, const property_types pt) const {
 
     model r(build_empty_model(0));
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
     if (pt == property_types::value_object ||
         pt == property_types::boost_shared_ptr) {
         insert_object(r, o1);

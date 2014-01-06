@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) 
     BOOST_REQUIRE(i != o.relationships().end());
     BOOST_CHECK(i->second.size() == 1);
 
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
     i = o.relationships().find(pa);
     BOOST_CHECK(i == o.relationships().end());
 }
@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
 
     using dogen::sml::relationship_types;
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
@@ -177,7 +177,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
 
     using dogen::sml::relationship_types;
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
 
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 4);
@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
 
     using dogen::sml::relationship_types;
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
 
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 4);
@@ -274,7 +274,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_single_parameter_resu
 
     using dogen::sml::relationship_types;
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
 
     BOOST_REQUIRE(m.objects().size() == 1);
     for (const auto& pair : m.objects()) {
@@ -305,7 +305,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_multiple_parameters_r
 
     using dogen::sml::relationship_types;
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
 
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -340,7 +340,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_return_type_results_i
 
     using dogen::sml::relationship_types;
     const auto ra(relationship_types::regular_associations);
-    const auto pa(relationship_types::pointer_associations);
+    const auto pa(relationship_types::weak_associations);
 
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -383,7 +383,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
 
         using dogen::sml::relationship_types;
         const auto ra(relationship_types::regular_associations);
-        const auto pa(relationship_types::pointer_associations);
+        const auto pa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, qn)) {
@@ -419,7 +419,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
 
         using dogen::sml::relationship_types;
         const auto ra(relationship_types::regular_associations);
-        const auto pa(relationship_types::pointer_associations);
+        const auto pa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, qn)) {
@@ -452,7 +452,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
 
         using dogen::sml::relationship_types;
         const auto ra(relationship_types::regular_associations);
-        const auto pa(relationship_types::pointer_associations);
+        const auto pa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, qn)) {
@@ -505,7 +505,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) 
 
         using dogen::sml::relationship_types;
         const auto ra(relationship_types::regular_associations);
-        const auto pa(relationship_types::pointer_associations);
+        const auto pa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, qn)) {
@@ -550,7 +550,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
 
             using dogen::sml::relationship_types;
             const auto ra(relationship_types::regular_associations);
-            const auto pa(relationship_types::pointer_associations);
+            const auto pa(relationship_types::weak_associations);
 
             auto i(o.relationships().find(ra));
             BOOST_REQUIRE(i != o.relationships().end());
@@ -596,7 +596,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
 
         using dogen::sml::relationship_types;
         const auto ra(relationship_types::regular_associations);
-        const auto pa(relationship_types::pointer_associations);
+        const auto pa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, qn)) {
@@ -637,7 +637,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
 
             using dogen::sml::relationship_types;
             const auto ra(relationship_types::regular_associations);
-            const auto pa(relationship_types::pointer_associations);
+            const auto pa(relationship_types::weak_associations);
 
             auto i(o.relationships().find(ra));
             BOOST_REQUIRE(i != o.relationships().end());

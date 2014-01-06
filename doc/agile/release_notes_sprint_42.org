@@ -371,9 +371,17 @@ Formatting differences are actually features, not bugs, so rebaselined
 model.
 
 **** IMPLEMENTATION Model =trivial_inheritance=                        :task:
+     CLOCK: [2014-01-06 Mon 17:53]--[2014-01-06 Mon 18:41] =>  0:48
      CLOCK: [2014-01-06 Mon 07:48]--[2014-01-06 Mon 08:19] =>  0:31
 
 All aspects related to inheritance. A lot of non-obvious diffs.
+
+- rename =pointer_associations= to =weak_associations= to make it less
+  connected to C++; in addition, we need to remove associations where
+  there is both a regular association and a pointer/weak association
+  so this makes us lie less about the intent - e.g. weak associations
+  disappear in the presence of a regular association against the same
+  type.
 
 *** Add tests for =flat_name_builder=                                 :story:
 

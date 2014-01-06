@@ -110,7 +110,7 @@ relationships extractor::extract_dependency_graph(const sml::object& ao) const {
         }
     }
 
-    i = ao.relationships().find(relationship_types::pointer_associations);
+    i = ao.relationships().find(relationship_types::weak_associations);
     if (i == ao.relationships().end() || i->second.empty())
         BOOST_LOG_SEV(lg, debug) << "Object has no pointer associations.";
     else {

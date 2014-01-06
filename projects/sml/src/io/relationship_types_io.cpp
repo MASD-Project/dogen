@@ -42,8 +42,8 @@ std::ostream& operator<<(std::ostream& s, const relationship_types& v) {
     case relationship_types::regular_associations:
         attr = "\"regular_associations\"";
         break;
-    case relationship_types::pointer_associations:
-        attr = "\"pointer_associations\"";
+    case relationship_types::weak_associations:
+        attr = "\"weak_associations\"";
         break;
     case relationship_types::leaves:
         attr = "\"leaves\"";
