@@ -54,6 +54,7 @@ const bool documenting_previous_identifier(true);
 
 const std::string scope_operator("::");
 const std::string algorithm_include("algorithm");
+const std::string iosfwd_include("iosfwd");
 
 }
 
@@ -85,10 +86,9 @@ private:
 public:
     ~helper() noexcept { }
 
-    helper(const sml::model& /*m*/,
-        const boost::property_tree::ptree& meta_data,
+    helper(const sml::model& m, const boost::property_tree::ptree& meta_data,
         const annotation& a)
-        : /*model_(m),*/ utility_(stream_),
+        : model_(m), utility_(stream_),
           boilerplate_(is_true(meta_data, sml::tags::generate_preamble),
               is_true(meta_data,
                   sml::tags::cpp::types::header_file::generate_header_guards)),
@@ -102,6 +102,13 @@ public:
         dogen::om::indent_filter::push(stream_, 4);
         stream_.push(string_stream_);
     }
+
+private:
+    /**
+     * @brief Processes all includes for relationships of type rt.
+     */
+    void includes_for_relationship(const sml::object& o,
+        const sml::relationship_types rt);
 
 private:
     using sml::type_visitor::visit;
@@ -153,7 +160,7 @@ public:
     }
 
 private:
-    /*const sml::model& model_;*/
+    const sml::model& model_;
     boost::iostreams::filtering_ostream stream_;
     om::utility utility_;
     cpp_includes includes_;
@@ -162,6 +169,37 @@ private:
     boost::filesystem::path relative_file_path_;
     std::ostringstream string_stream_;
 };
+
+void cpp_types_main_header_file_formatter::helper::
+includes_for_relationship(const sml::object& o,
+    const sml::relationship_types rt) {
+
+    auto i(o.relationships().find(rt));
+    if (i == o.relationships().end())
+        return;
+
+    for (const auto& qn : i->second) {
+        const auto j(model_.objects().find(qn));
+        if (j == model_.objects().end())
+            continue; // not an object
+
+        sml::meta_data_reader reader(j->second.meta_data());
+        using types = sml::tags::cpp::types;
+        const auto fn_key(
+            rt == sml::relationship_types::weak_associations ?
+            types::forward_declarations_file::file_name :
+            types::header_file::file_name);
+        const auto fn(reader.get(fn_key));
+
+        const auto fn_system_key(types::header_file::is_system);
+        const auto is_system(reader.is_true(fn_system_key));
+
+        if (is_system)
+            includes_.system().push_back(fn);
+        else
+            includes_.user().push_back(fn);
+    }
+}
 
 void cpp_types_main_header_file_formatter::helper::
 visit(const sml::object& o) {
@@ -175,8 +213,16 @@ visit(const sml::object& o) {
     if (o.all_properties().empty())
         return;
 
+    // associations
+    using sml::relationship_types;
+    includes_for_relationship(o, relationship_types::regular_associations);
+    includes_for_relationship(o, relationship_types::weak_associations);
+    includes_for_relationship(o, relationship_types::visited_by);
+    includes_for_relationship(o, relationship_types::parents);
+
     // hard-coded includes
     includes_.system().push_back(algorithm_include);
+    includes_.system().push_back(iosfwd_include);
 }
 
 cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter(

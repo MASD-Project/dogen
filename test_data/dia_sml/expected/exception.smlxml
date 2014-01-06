@@ -24,17 +24,17 @@
 	<generation_type>0</generation_type>
 	<references class_id="7" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
 	<leaves class_id="8" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="9" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="10" tracking_level="0" version="0">
 			<first>
@@ -79,22 +79,22 @@
 	</modules>
 	<concepts class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<objects class_id="16" tracking_level="0" version="0">
 		<count>3</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="17" tracking_level="0" version="0">
 			<first>
@@ -173,7 +173,7 @@
 				</local_properties>
 				<inherited_properties class_id="23" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>23</bucket_count>
+					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<operations class_id="24" tracking_level="0" version="0">
@@ -190,7 +190,7 @@
 				<is_child>0</is_child>
 				<relationships class_id="25" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>23</bucket_count>
+					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<is_inheritance_root>0</is_inheritance_root>
@@ -250,7 +250,7 @@
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>23</bucket_count>
+					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<operations>
@@ -267,7 +267,7 @@
 				<is_child>0</is_child>
 				<relationships>
 					<count>0</count>
-					<bucket_count>23</bucket_count>
+					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<is_inheritance_root>0</is_inheritance_root>
@@ -326,7 +326,7 @@
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>23</bucket_count>
+					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<operations>
@@ -343,7 +343,7 @@
 				<is_child>0</is_child>
 				<relationships>
 					<count>0</count>
-					<bucket_count>23</bucket_count>
+					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<is_inheritance_root>0</is_inheritance_root>

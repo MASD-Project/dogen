@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-06 Mon 22:45]
+Clock summary at [2014-01-06 Mon 23:53]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *33:30* |       |       |
+| *Total time*                                                            | *34:33* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 33:30 |       |
+| Development Stories Implemented                                         |         | 34:33 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -27,7 +27,7 @@ Clock summary at [2014-01-06 Mon 22:45]
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  3:59 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  5:02 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -387,6 +387,12 @@ All aspects related to inheritance. A lot of non-obvious diffs.
   pointer/weak association so this makes us lie less about the
   intent - e.g. weak associations disappear in the presence of a
   regular association against the same type. Add tests.
+
+***** COMPLETED Add support for relationships in include processing
+      CLOSED: [2014-01-06 Mon 23:27]
+      CLOCK: [2014-01-06 Mon 22:50]--[2014-01-06 Mon 23:53] =>  1:03
+
+We need to add includes via relationships to types formatter.
 
 *** Add tests for =flat_name_builder=                                 :story:
 
