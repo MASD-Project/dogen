@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-07 Tue 07:20]
+Clock summary at [2014-01-07 Tue 08:06]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *34:45* |       |       |
+| *Total time*                                                            | *34:56* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 34:45 |       |
+| Development Stories Implemented                                         |         | 34:56 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -27,6 +27,7 @@ Clock summary at [2014-01-07 Tue 07:20]
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
+| COMPLETED Design a cleaner meta-data API                                |         |       |  0:11 |
 | IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  5:14 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
@@ -321,6 +322,92 @@ wrong place.
 This will be hard-coded as it is the simplest and cleanest way of
 doing it.
 
+*** COMPLETED Design a cleaner meta-data API                          :story:
+    CLOSED: [2014-01-07 Tue 08:04]
+    CLOCK: [2014-01-07 Tue 07:53]--[2014-01-07 Tue 08:04] =>  0:11
+
+New understanding:
+
+- use =ptree= internally in dia to sml transformer and JSON
+  hydrator. Populate =ptree= with values read from the input. There is
+  no direct connection between the owner of the =ptree= and the
+  =ptree= population.
+- create classes in SML to model the meta-data as defined by the
+  hierarchical structure in tags. Lets call this the meta-data object
+  model.
+- create a SML transformer that takes in a =ptree= and returns the
+  appropriate meta-data object model.
+- dia to sml transformer and JSON transformer use the SML meta-data
+  transformer to convert the =ptree= into meta-data and populate the
+  taggable with it.
+- delete the meta-data reader and writer.
+- update meta-data tagger and all other classes that use =ptree= to
+  use the new meta-data object model.
+- tags remains public; although we only use it internally in meta-data
+  transformer, we are still making it a public API (e.g. users need to
+  know what tags are available in Dia/JSON). We need a better way to
+  do this.
+
+Old understanding:
+
+At present we have a lot of ugly copy and paste code in
+=meta_data_tagger=. This was done so we could collect all of the use
+cases for the API. This story captures what we think would be a good
+API to cater for all the use cases.
+
+- we need a way of locating a top-level node in the tree. At present
+  we only have paths to specific nodes where there are values, but its
+  not possible to get a top-level node such as say a
+  =header_file=. This would allow for more generic code that handles
+  top-level nodes with similar shapes. We could replace all of the
+  file handling code with one generic function for example.
+- =meta_data_writer= and =meta_data_reader= are very strange
+  concepts. We need to search the net for patterns on how to populate
+  =ptree=, there must be a more generic solution for this. We should
+  also look at the STL algorithms for ideas - perhaps we can replace a
+  lot of this functionality with existing algorithms such as =copy_if=
+  or create new ones along the same lines as the STL.
+- We have spotted the following algorithms:
+  - add if a key does not exist: used for defaulting; the user may
+    have already supplied a value, in which case we do not want to
+    override it.
+  - copy if a key does not exist: used when we want to take a source
+    =ptree= and copy across a set of values to a target =ptree=; for
+    instance, when we want to copy a set of values from the model to
+    all objects. Needs a variation that does nothing if the key does
+    not exist in the source - at present we do a lot of has key to
+    solve this.
+  - has key: returns true if a key exists. May not be required - see
+    get key below.
+  - get key: returns a value, optionally castable to a type other than
+    string. We often do has key followed by get key, so a try get key
+    would be a useful variation - returning perhaps a pair of bool,
+    value.
+  - is true: and other checks such as is false, is supported
+    etc. Basically helpers to check if a key exists and if its value
+    matches some predefined value.
+- More fundamentally: is =ptree= actually being overused? That is,
+  should we not just model all of this data as first-class citizens in
+  SML using the type system? The reason why we chose =ptree= is
+  because the data supplied by the front-end (e.g. dia or JSON) will
+  always come in key-value-pairs and adding a tree like structure to
+  those KVPs makes them more intelligible to the end user. Thus it
+  follows that =ptree= is a good way of bringing all of that data in
+  from the front-end into the middle-end (e.g. SML). But perhaps once
+  the data hits SML we should then type it; we could create data
+  structures that model the shape of the tags tree and read all of the
+  =ptree= data into those. Once that is done we can then start
+  "tagging" - e.g. we operate on those data structures rather than on
+  the =ptree= for defaulting, copying stuff across, etc. Life would be
+  much easier because now we have the type-system on our side (copy
+  constructors, containers, etc). Taggables would then have perhaps
+  =raw_meta_data= for the =ptree= and =meta_data= for the new
+  classes. We could place all of them in a =meta_data= namespace to
+  avoid polluting SML too much. This also means that we would recover
+  a lot of lost performance - instead of the multiple reads we do all
+  over the place, we'd be using first-class domain objects with
+  getters.
+
 *** IMPLEMENTATION Update all tests to use =om= formatter              :task:
     CLOCK: [2014-01-04 Sat 22:07]--[2014-01-04 Sat 22:08] =>  0:01
 
@@ -401,66 +488,6 @@ We need to add includes via relationships to types formatter.
      CLOCK: [2014-01-06 Mon 23:54]--[2014-01-06 Mon 23:56] =>  0:02
 
 Simple association, should be easy to get it to pass.
-
-*** IMPLEMENTATION Design a cleaner meta-data API                     :story:
-
-At present we have a lot of ugly copy and paste code in
-=meta_data_tagger=. This was done so we could collect all of the use
-cases for the API. This story captures what we think would be a good
-API to cater for all the use cases.
-
-- we need a way of locating a top-level node in the tree. At present
-  we only have paths to specific nodes where there are values, but its
-  not possible to get a top-level node such as say a
-  =header_file=. This would allow for more generic code that handles
-  top-level nodes with similar shapes. We could replace all of the
-  file handling code with one generic function for example.
-- =meta_data_writer= and =meta_data_reader= are very strange
-  concepts. We need to search the net for patterns on how to populate
-  =ptree=, there must be a more generic solution for this. We should
-  also look at the STL algorithms for ideas - perhaps we can replace a
-  lot of this functionality with existing algorithms such as =copy_if=
-  or create new ones along the same lines as the STL.
-- We have spotted the following algorithms:
-  - add if a key does not exist: used for defaulting; the user may
-    have already supplied a value, in which case we do not want to
-    override it.
-  - copy if a key does not exist: used when we want to take a source
-    =ptree= and copy across a set of values to a target =ptree=; for
-    instance, when we want to copy a set of values from the model to
-    all objects. Needs a variation that does nothing if the key does
-    not exist in the source - at present we do a lot of has key to
-    solve this.
-  - has key: returns true if a key exists. May not be required - see
-    get key below.
-  - get key: returns a value, optionally castable to a type other than
-    string. We often do has key followed by get key, so a try get key
-    would be a useful variation - returning perhaps a pair of bool,
-    value.
-  - is true: and other checks such as is false, is supported
-    etc. Basically helpers to check if a key exists and if its value
-    matches some predefined value.
-- More fundamentally: is =ptree= actually being overused? That is,
-  should we not just model all of this data as first-class citizens in
-  SML using the type system? The reason why we chose =ptree= is
-  because the data supplied by the front-end (e.g. dia or JSON) will
-  always come in key-value-pairs and adding a tree like structure to
-  those KVPs makes them more intelligible to the end user. Thus it
-  follows that =ptree= is a good way of bringing all of that data in
-  from the front-end into the middle-end (e.g. SML). But perhaps once
-  the data hits SML we should then type it; we could create data
-  structures that model the shape of the tags tree and read all of the
-  =ptree= data into those. Once that is done we can then start
-  "tagging" - e.g. we operate on those data structures rather than on
-  the =ptree= for defaulting, copying stuff across, etc. Life would be
-  much easier because now we have the type-system on our side (copy
-  constructors, containers, etc). Taggables would then have perhaps
-  =raw_meta_data= for the =ptree= and =meta_data= for the new
-  classes. We could place all of them in a =meta_data= namespace to
-  avoid polluting SML too much. This also means that we would recover
-  a lot of lost performance - instead of the multiple reads we do all
-  over the place, we'd be using first-class domain objects with
-  getters.
 
 *** Add tests for =flat_name_builder=                                 :story:
 
