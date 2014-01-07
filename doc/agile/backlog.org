@@ -8,6 +8,31 @@
 
 Stories that we intend to look at, at some point.
 
+*** Refactor meta-data in SML                                         :story:
+
+- use =ptree= internally in dia to sml transformer and JSON
+  hydrator. Populate =ptree= with values read from the input. There is
+  no direct connection between the owner of the =ptree= and the
+  =ptree= population.
+- create classes in SML to model the meta-data as defined by the
+  hierarchical structure in tags. Lets call this the meta-data object
+  model.
+- create a SML transformer that takes in a =ptree= and returns the
+  appropriate meta-data object model.
+- dia to sml transformer and JSON transformer use the SML meta-data
+  transformer to convert the =ptree= into meta-data and populate the
+  taggable with it.
+- delete the meta-data reader and writer.
+- update meta-data tagger and all other classes that use =ptree= to
+  use the new meta-data object model.
+- tags remains public; although we only use it internally in meta-data
+  transformer, we are still making it a public API (e.g. users need to
+  know what tags are available in Dia/JSON). We need a better way to
+  do this.
+
+For details of the analysis see "Design a cleaner meta-data API" in
+sprint 42.
+
 *** Indent stream can be made a bit less inefficient                  :story:
 
 Out first attempt at creating a stream with indentation support was a
