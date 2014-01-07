@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/classes_without_package/serialization/class_5_fwd_ser.hpp"
 
 namespace dogen {

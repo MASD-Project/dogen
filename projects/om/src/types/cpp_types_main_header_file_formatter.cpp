@@ -221,8 +221,14 @@ visit(const sml::object& o) {
     includes_for_relationship(o, relationship_types::parents);
 
     // hard-coded includes
+
+    // algorithm: for the swap function.
     includes_.system().push_back(algorithm_include);
-    includes_.system().push_back(iosfwd_include);
+
+    // iosfwd: for the inserter operator
+    using io = sml::tags::cpp::io;
+    if (reader.is_true(io::enable_integrated_io))
+        includes_.system().push_back(iosfwd_include);
 }
 
 cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter(
