@@ -486,7 +486,7 @@ BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code) {
 BOOST_AUTO_TEST_CASE(trivial_association_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_association_model_generates_expected_code");
     const auto t(dia_sml::input_trivial_association_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t, enable_om));
 }
 
 BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
