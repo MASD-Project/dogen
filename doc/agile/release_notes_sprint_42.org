@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-07 Tue 08:13]
+Clock summary at [2014-01-07 Tue 08:45]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *35:02* |       |       |
+| *Total time*                                                            | *35:11* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 35:02 |       |
+| Development Stories Implemented                                         |         | 35:11 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -28,7 +28,7 @@ Clock summary at [2014-01-07 Tue 08:13]
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
 | COMPLETED Design a cleaner meta-data API                                |         |       |  0:11 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  5:20 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  5:29 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -491,6 +491,15 @@ We need to add includes via relationships to types formatter.
 ***** COMPLETED Fix incorrect inclusion of =iosfwd= without checking io status
       CLOSED: [2014-01-07 Tue 07:20]
       CLOCK: [2014-01-07 Tue 07:10]--[2014-01-07 Tue 07:20] =>  0:10
+
+***** IMPLEMENTATION Investigate the need for includes of =iosfwd= and =algorithm=
+      CLOCK: [2014-01-07 Tue 08:35]--[2014-01-07 Tue 08:44] =>  0:09
+
+At present we seem to always be including these two headers if
+inheritance is present. Is this required?
+
+:-    if (o.all_properties().empty())
+:+    if (o.all_properties().empty() && !o.is_parent() && !o.is_child())
 
 *** Add tests for =flat_name_builder=                                 :story:
 
