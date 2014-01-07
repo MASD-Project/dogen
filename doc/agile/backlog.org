@@ -9,6 +9,7 @@
 Stories that we intend to look at, at some point.
 
 *** Refactor meta-data in SML                                         :story:
+    CLOCK: [2014-01-06 Mon 08:13]--[2014-01-06 Mon 08:35] =>  0:22
 
 - use =ptree= internally in dia to sml transformer and JSON
   hydrator. Populate =ptree= with values read from the input. There is
@@ -18,17 +19,23 @@ Stories that we intend to look at, at some point.
   hierarchical structure in tags. Lets call this the meta-data object
   model.
 - create a SML transformer that takes in a =ptree= and returns the
-  appropriate meta-data object model.
+  appropriate meta-data object model. Name: =meta_data_transformer=,
+  =meta_data_factory=? Actually a factory makes more sense, we could
+  have a simple build method that takes in a =ptree= and returns the
+  meta-data.
 - dia to sml transformer and JSON transformer use the SML meta-data
   transformer to convert the =ptree= into meta-data and populate the
   taggable with it.
 - delete the meta-data reader and writer.
 - update meta-data tagger and all other classes that use =ptree= to
-  use the new meta-data object model.
+  use the new meta-data object model. Tagger needs to be renamed:
+  =meta_data_expander=, =meta_data_updator=?
 - tags remains public; although we only use it internally in meta-data
   transformer, we are still making it a public API (e.g. users need to
   know what tags are available in Dia/JSON). We need a better way to
   do this.
+- create a new package: =meta_data=. Create a top-level class to
+  contain all of the meta-data. We need a good name for it.
 
 For details of the analysis see "Design a cleaner meta-data API" in
 sprint 42.
