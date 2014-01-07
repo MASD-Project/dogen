@@ -26,7 +26,9 @@
 #endif
 
 #include <array>
+#include <functional>
 #include <boost/optional.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 
@@ -75,7 +77,7 @@ public:
      */
     class flags {
     public:
-        flags(const bool tagged = false,
+        explicit flags(const bool tagged = false,
             const bool merged = false,
             const bool resolved = false,
             const bool concepts_indexed = false,
@@ -147,11 +149,17 @@ public:
     };
 
 public:
+    typedef std::function<void(
+        boost::property_tree::ptree& meta_data,
+        const dogen::sml::qname& qn)> tagging_function_type;
+
+public:
     /**
      * @brief Initialises a new mock factory at a given stage in the
      * SML pipeline, as given by the flags supplied.
      */
-    explicit mock_model_factory(const flags& f);
+    explicit mock_model_factory(const flags& f,
+         tagging_function_type tf = tagging_function_type());
 
 public:
     /**
@@ -178,6 +186,31 @@ public:
      * @brief Returns the property name derived from n.
      */
     std::string property_name(const unsigned int n = 0) const;
+
+    /**
+     * @brief Returns the types header file name for the given
+     * qualified name.
+     */
+    std::string types_header_filename(const qname& qn) const;
+
+    /**
+     * @brief Returns the types forward declaration file name for the given
+     * qualified name.
+     */
+    std::string types_forward_declaration_filename(const qname& qn) const;
+
+    /**
+     * @brief Returns the boost serialization header file name for the
+     * given qualified name.
+     */
+    std::string boost_serialization_header_filename(const qname& qn) const;
+
+    /**
+     * @brief Returns the boost serialization forward declaration file
+     * name for the given qualified name.
+     */
+    std::string boost_serialization_forward_declaration_filename(
+        const qname& qn) const;
 
 public:
     /**
@@ -231,14 +264,6 @@ public:
      * for visitors.
      */
     bool is_type_name_n_visitor(const unsigned int n, const qname& qn) const;
-
-
-    /**
-     * @brief Returns true if the file name matches the expected
-     * file name for the given qname.
-     */
-    bool is_file_for_qname(const boost::filesystem::path& p,
-        const qname& qn) const;
 
 private:
     /**
@@ -489,6 +514,7 @@ public:
 
 private:
     const flags flags_;
+    tagging_function_type tagging_function_;
 };
 
 } } }

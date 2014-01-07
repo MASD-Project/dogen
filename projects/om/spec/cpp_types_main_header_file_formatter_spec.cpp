@@ -47,12 +47,19 @@ const std::string test_suite("cpp_types_main_header_file_formatter_spec");
 const std::string inc_dir("__include_directory__");
 const std::string file_name("__file_name__");
 
+void add_test_tags(boost::property_tree::ptree& meta_data,
+    const dogen::sml::qname&) {
+    dogen::sml::meta_data_writer writer(meta_data);
+
+    writer.add(dogen::sml::tags::cpp::types::header_file::generate,
+        dogen::sml::tags::bool_true);
+    writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
+        file_name);
+}
+
 using dogen::sml::test::mock_model_factory;
-/**
- * Model must not be tagged - we will enable required tags manually on
- * each test.
- */
-const mock_model_factory factory(false/*tagged*/);
+const mock_model_factory::flags flags(true/*tagged*/);
+const mock_model_factory factory(flags, add_test_tags);
 
 const std::string empty_marker;
 const dogen::om::licence empty_licence = dogen::om::licence();
@@ -97,7 +104,9 @@ class some_type_1 {
 }
 )");
 
-const std::string leaf_child_object(R"(namespace some_model_0 {
+const std::string leaf_child_object(R"(#include "some_type_1"
+
+namespace some_model_0 {
 
 /**
  * @brief Some documentation
@@ -108,7 +117,9 @@ class some_type_0 final : public some_type_1 {
 }
 )");
 
-const std::string non_leaf_child_object(R"(namespace some_model_0 {
+const std::string non_leaf_child_object(R"(#include "some_type_2"
+
+namespace some_model_0 {
 
 /**
  * @brief Some documentation
@@ -222,8 +233,6 @@ BOOST_AUTO_TEST_CASE(enumeration_with_two_enumerators_produces_expected_types_he
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
     auto e(m.enumerations().begin()->second);
-    dogen::sml::meta_data_writer writer(e.meta_data());
-    writer.add(dogen::sml::tags::cpp::types::header_file::file_name, file_name);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);
@@ -272,7 +281,14 @@ BOOST_AUTO_TEST_CASE(parent_object_produces_expected_types_header) {
 BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
     SETUP_TEST_LOG_SOURCE("leaf_child_object_produces_expected_types_header");
 
-    const auto m(factory.object_with_parent_in_the_same_model());
+    auto lambda([](boost::property_tree::ptree& meta_data,
+            const dogen::sml::qname& qn) {
+            dogen::sml::meta_data_writer writer(meta_data);
+            writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
+                qn.simple_name());
+        });
+    dogen::sml::test::mock_model_factory mf(flags, lambda);
+    const auto m(mf.object_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
@@ -286,7 +302,14 @@ BOOST_AUTO_TEST_CASE(leaf_child_object_produces_expected_types_header) {
 BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
     SETUP_TEST_LOG_SOURCE("non_leaf_child_object_produces_expected_types_header");
 
-    const auto m(factory.object_with_third_degree_parent_in_same_model());
+    auto lambda([](boost::property_tree::ptree& meta_data,
+            const dogen::sml::qname& qn) {
+            dogen::sml::meta_data_writer writer(meta_data);
+            writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
+                qn.simple_name());
+        });
+    dogen::sml::test::mock_model_factory mf(flags, lambda);
+    const auto m(mf.object_with_third_degree_parent_in_same_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.objects().size() == 4);
 
@@ -300,15 +323,22 @@ BOOST_AUTO_TEST_CASE(non_leaf_child_object_produces_expected_types_header) {
 BOOST_AUTO_TEST_CASE(generating_explicitly_defaulted_functions_produces_expected_types_header) {
     SETUP_TEST_LOG_SOURCE("generating_explicitly_defaulted_functions_produces_expected_types_header");
 
-    auto m(factory.build_single_type_model());
+    auto lambda([](boost::property_tree::ptree& meta_data,
+            const dogen::sml::qname&) {
+            dogen::sml::meta_data_writer writer(meta_data);
+            writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
+                file_name);
+            writer.add(
+                dogen::sml::tags::cpp::types::generate_defaulted_functions,
+                dogen::sml::tags::bool_true);
+        });
+
+    dogen::sml::test::mock_model_factory mf(flags, lambda);
+    auto m(mf.build_single_type_model());
     BOOST_CHECK(m.objects().size() == 1);
     auto& o(find_object(m, 0));
     o.documentation().clear();
-    dogen::sml::meta_data_writer writer(o.meta_data());
-    writer.add(dogen::sml::tags::cpp::types::header_file::file_name, file_name);
-    writer.add(
-        dogen::sml::tags::cpp::types::generate_defaulted_functions,
-        dogen::sml::tags::bool_true);
+
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::om::cpp_types_main_header_file_formatter f(m, inc_dir);

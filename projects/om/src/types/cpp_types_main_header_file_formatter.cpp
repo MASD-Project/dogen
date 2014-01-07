@@ -210,9 +210,6 @@ visit(const sml::object& o) {
         includes_.user().push_back(fn);
     }
 
-    if (o.all_properties().empty())
-        return;
-
     // associations
     using sml::relationship_types;
     includes_for_relationship(o, relationship_types::regular_associations);
@@ -221,11 +218,10 @@ visit(const sml::object& o) {
     includes_for_relationship(o, relationship_types::parents);
 
     // hard-coded includes
+    using types = sml::tags::cpp::types;
+    if (reader.is_true(types::generate_external_swap))
+        includes_.system().push_back(algorithm_include);
 
-    // algorithm: for the swap function.
-    includes_.system().push_back(algorithm_include);
-
-    // iosfwd: for the inserter operator
     using io = sml::tags::cpp::io;
     if (reader.is_true(io::enable_integrated_io))
         includes_.system().push_back(iosfwd_include);
@@ -302,8 +298,8 @@ external_equality(const sml::object& o) const {
 
 void cpp_types_main_header_file_formatter::
 external_swap(const sml::object& o) const {
-    // swap overload is only available in leaf classes - MEC++-33
-    if (o.all_properties().empty() || o.is_parent() || o.is_immutable())
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_false(sml::tags::cpp::types::generate_external_swap))
         return;
 
     {
@@ -316,7 +312,6 @@ external_swap(const sml::object& o) const {
                          << "inline void swap(" << std::endl;
         {
             positive_indenter_scope s(helper_->stream());
-            sml::meta_data_reader reader(o.meta_data());
             const auto n(reader.get(sml::tags::cpp::types::qualified_name));
             helper_->stream() << n << "& lhs," << std::endl
                              << n << "& rhs) ";
@@ -741,11 +736,7 @@ to_stream(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 internal_swap(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_swap))
-        return;
-
-    const auto props(o.all_properties());
-    if ((props.empty() && !o.is_parent()) || o.is_immutable())
+    if (reader.is_false(sml::tags::cpp::types::generate_internal_swap))
         return;
 
     // swap is only public in leaf classes - MEC++-33

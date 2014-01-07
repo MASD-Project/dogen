@@ -1060,15 +1060,23 @@ void meta_data_tagger::tag(object& o) const {
     writer.add_if_key_not_found(
         tags::cpp::types::generate_explicit_move_constructor, tags::bool_false);
 
-    if (!o.all_properties().empty() && !o.is_parent() && !o.is_immutable()) {
-        writer.add_if_key_not_found(tags::cpp::types::generate_swap,
+    if (!o.is_immutable() && (!o.all_properties().empty() || o.is_parent())) {
+        writer.add_if_key_not_found(
+            tags::cpp::types::generate_internal_swap,
             tags::bool_true);
 
-        if (o.is_child()) {
-            // assignment is only available in leaf classes - MEC++-33
+        if (!o.is_parent()) {
+            // swap overload is only available in leaf classes - MEC++-33
             writer.add_if_key_not_found(
-                tags::cpp::types::generate_explicit_assignment_operator,
-                tags::bool_false);
+                tags::cpp::types::generate_external_swap,
+                tags::bool_true);
+
+            if (o.is_child()) {
+                // assignment is only available in leaf classes - MEC++-33
+                writer.add_if_key_not_found(
+                    tags::cpp::types::generate_explicit_assignment_operator,
+                    tags::bool_false);
+            }
         }
     }
 

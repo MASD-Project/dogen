@@ -71,8 +71,8 @@ const std::string type_with_no_properties(
  * MA 02110-1301, USA.
  *
  */
-#ifndef SOME_MODEL_0_SOME_TYPE_0_HPP
-#define SOME_MODEL_0_SOME_TYPE_0_HPP
+#ifndef TYPES_SOME_TYPE_0
+#define TYPES_SOME_TYPE_0
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -113,8 +113,8 @@ const std::string model_with_comments(R"(/* -*- mode: c++; tab-width: 4; indent-
  * MA 02110-1301, USA.
  *
  */
-#ifndef SOME_MODEL_0_SOME_MODEL_0_HPP
-#define SOME_MODEL_0_SOME_MODEL_0_HPP
+#ifndef TYPES_SOME_MODEL_0
+#define TYPES_SOME_MODEL_0
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -151,7 +151,9 @@ BOOST_AUTO_TEST_CASE(empty_mock_model_results_in_expected_files) {
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
 
     BOOST_REQUIRE(r.size() == 1);
-    BOOST_CHECK(factory.is_file_for_qname(r.front().relative_path(), m.name()));
+    const auto rp(r.front().relative_path().generic_string());
+    BOOST_CHECK(asserter::assert_equals(rp,
+            factory.types_header_filename(m.name())));
 
     const auto& c(r.front().contents());
     BOOST_CHECK(asserter::assert_equals_marker(model_with_comments, c));
@@ -175,11 +177,12 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_expected_files) {
 
     bool found_model(false), found_type(false);
     for (const auto& f : r) {
-        if (factory.is_file_for_qname(f.relative_path(), m.name())) {
+        const auto rp(f.relative_path().generic_string());
+        if (factory.types_header_filename(m.name()) == rp) {
             found_model = true;
             const auto& c(f.contents());
             BOOST_CHECK(asserter::assert_equals_marker(model_with_comments, c));
-        } else if (factory.is_file_for_qname(f.relative_path(), o.name())) {
+        } else if (factory.types_header_filename(o.name()) == rp) {
             found_type = true;
             const auto& c(f.contents());
             BOOST_CHECK(

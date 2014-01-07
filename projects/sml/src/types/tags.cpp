@@ -90,7 +90,10 @@ const std::string tags::cpp::types::generate_complete_constructor(
     "cpp.types.generate_complete_constructor");
 const std::string tags::cpp::types::generate_equality(
     "cpp.types.generate_equality");
-const std::string tags::cpp::types::generate_swap("cpp.types.generate_swap");
+const std::string tags::cpp::types::generate_internal_swap(
+    "cpp.types.generate_internal_swap");
+const std::string tags::cpp::types::generate_external_swap(
+    "cpp.types.generate_external_swap");
 const std::string tags::cpp::types::generate_friends(
     "cpp.types.generate_friends");
 const std::string tags::cpp::types::generate_to_stream(

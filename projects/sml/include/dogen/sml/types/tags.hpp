@@ -321,10 +321,16 @@ struct tags {
             static const std::string generate_accept;
 
             /**
-             * @brief If set to true, swap function will be
+             * @brief If set to true, external swap function will be
              * generated.
              */
-            static const std::string generate_swap;
+            static const std::string generate_external_swap;
+
+            /**
+             * @brief If set to true, internal swap function will be
+             * generated.
+             */
+            static const std::string generate_internal_swap;
 
             /**
              * @brief Parameters associated with the types header file.
