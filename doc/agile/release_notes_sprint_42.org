@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-08 Wed 09:06]
+Clock summary at [2014-01-08 Wed 18:19]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *38:39* |       |       |
+| *Total time*                                                            | *38:55* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 38:39 |       |
+| Development Stories Implemented                                         |         | 38:55 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -27,7 +27,7 @@ Clock summary at [2014-01-08 Wed 09:06]
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
-| ANALYSIS Design a cleaner meta-data API                                 |         |       |  0:23 |
+| ANALYSIS Design a cleaner meta-data API                                 |         |       |  0:39 |
 | IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  8:45 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
@@ -323,6 +323,7 @@ This will be hard-coded as it is the simplest and cleanest way of
 doing it.
 
 *** ANALYSIS Design a cleaner meta-data API                           :story:
+    CLOCK: [2014-01-08 Wed 18:01]--[2014-01-08 Wed 18:17] =>  0:16
     CLOCK: [2014-01-07 Tue 23:50]--[2014-01-08 Wed 00:02] =>  0:12
     CLOCK: [2014-01-07 Tue 07:53]--[2014-01-07 Tue 08:04] =>  0:11
 
@@ -333,17 +334,32 @@ SML is not the right thing at all. This is because SML is still
 (fairly) language neutral. The right place has to be the output
 model. It just seems like we are trying to create a set of classes
 that have some common properties with SML (most, really), and an
-additional set of properties which are formatter specific. This
-vaguely resembles the decorator pattern. We have tried in the past to
-create an entire output model, totally divorced from SML, and found
-out that it had far too much in common with SML to justify its
-existence. At the same time, creating a set of classes to augment SML
-in OM without adding properties directly to SML seems a bit strange -
-we will end up having to pass the OM class plus the SML class on every
-method. This requires a bit more thinking.
+additional set of properties which are language specific. We have
+tried in the past to create an entire output model, totally divorced
+from SML, and found out that it had far too much in common with SML to
+justify its existence. At the same time, creating a set of classes to
+augment SML in OM without adding properties directly to SML seems a
+bit strange - we will end up having to pass the OM class plus the SML
+class on every method.
+
+There are a few clear cut statements that can be made here:
+
+- the missing data structures are language specific; that is, we will
+  need separate ones for each programming language we target such as
+  C++, C#, etc.
+- the formatters of a given programming language will require the SML
+  types plus the missing data structures in order to create a
+  representation. This is not just formatter configuration, its more
+  like the language-specific information that SML does not carry.-
+- There is a large degree of nesting in these data structures. For
+  instance, properties inside of objects have their own C++ specific
+  data, and even types within a property. Wrapping this is non-trivial
+  - without duplicating a lot of SML data.
+- We already tried making a C++ specific model only to find out that
+  more than 70% of that model was a copy of SML with slight
+  variations.
 
 Old understanding:
-
 
 - use =ptree= internally in dia to sml transformer and JSON
   hydrator. Populate =ptree= with values read from the input. There is
