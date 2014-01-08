@@ -94,6 +94,8 @@ const std::string tags::cpp::types::generate_internal_swap(
     "cpp.types.generate_internal_swap");
 const std::string tags::cpp::types::generate_external_swap(
     "cpp.types.generate_external_swap");
+const std::string tags::cpp::types::generate_external_inserter(
+    "cpp.types.generate_external_inserter");
 const std::string tags::cpp::types::generate_friends(
     "cpp.types.generate_friends");
 const std::string tags::cpp::types::generate_to_stream(

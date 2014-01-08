@@ -222,8 +222,8 @@ visit(const sml::object& o) {
     if (reader.is_true(types::generate_external_swap))
         includes_.system().push_back(algorithm_include);
 
-    using io = sml::tags::cpp::io;
-    if (reader.is_true(io::enable_integrated_io))
+    if (reader.is_true(types::generate_to_stream) ||
+        reader.is_true(types::generate_external_inserter))
         includes_.system().push_back(iosfwd_include);
 }
 
@@ -329,8 +329,7 @@ external_swap(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 external_inserter(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (!reader.is_true(sml::tags::cpp::io::enabled) ||
-        !reader.is_true(sml::tags::cpp::io::enable_integrated_io))
+    if (!reader.is_true(sml::tags::cpp::types::generate_external_inserter))
         return;
 
     helper_->stream() << "std::ostream& operator<<(std::ostream& s, "

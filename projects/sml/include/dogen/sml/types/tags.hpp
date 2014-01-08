@@ -333,6 +333,12 @@ struct tags {
             static const std::string generate_internal_swap;
 
             /**
+             * @brief If set to true, an external inserter operator
+             * will be generated.
+             */
+            static const std::string generate_external_inserter;
+
+            /**
              * @brief Parameters associated with the types header file.
              */
             struct header_file {

@@ -978,6 +978,8 @@ void meta_data_tagger::tag(property& p) const {
 
 void meta_data_tagger::tag(object& o) const {
     meta_data_writer writer(o.meta_data());
+    meta_data_reader reader(o.meta_data());
+
     writer.add_if_key_not_found(tags::cpp::types::is_simple_type,
         tags::bool_false);
 
@@ -1060,23 +1062,38 @@ void meta_data_tagger::tag(object& o) const {
     writer.add_if_key_not_found(
         tags::cpp::types::generate_explicit_move_constructor, tags::bool_false);
 
+    /**
+     * Types which are not immutable, have no properties or are not
+     * parents in an inheritance relationship do not require swap
+     * support or explicit assignment operators.
+     */
     if (!o.is_immutable() && (!o.all_properties().empty() || o.is_parent())) {
+
+        /**
+         * All types which require swap support must have an internal
+         * swap method since the external swap method uses it. In
+         * addition, parents must supply it so that their children can
+         * use it to swap the parent's state.
+         */
         writer.add_if_key_not_found(
             tags::cpp::types::generate_internal_swap,
             tags::bool_true);
 
+        /**
+         * Classes that are parents in an inheritance relationship
+         * should not overload the standard swap function. This is
+         * because they are abstract classes (MEC++-33). For the same
+         * reason, they should not have their own assignment
+         * operators.
+         */
         if (!o.is_parent()) {
-            // swap overload is only available in leaf classes - MEC++-33
             writer.add_if_key_not_found(
                 tags::cpp::types::generate_external_swap,
                 tags::bool_true);
 
-            if (o.is_child()) {
-                // assignment is only available in leaf classes - MEC++-33
-                writer.add_if_key_not_found(
-                    tags::cpp::types::generate_explicit_assignment_operator,
-                    tags::bool_false);
-            }
+            writer.add_if_key_not_found(
+                tags::cpp::types::generate_explicit_assignment_operator,
+                tags::bool_false);
         }
     }
 
@@ -1090,9 +1107,27 @@ void meta_data_tagger::tag(object& o) const {
     writer.add_if_key_not_found(tags::cpp::types::generate_friends,
         tags::bool_true);
 
-    if (o.is_parent() || o.is_child()) {
-        writer.add_if_key_not_found(tags::cpp::types::generate_to_stream,
-            tags::bool_true);
+    if (reader.is_true(tags::cpp::io::enabled)) {
+        /**
+         * Types which are involved in an inheritance relationship must
+         * have an internal to stream method to allow for delegation
+         * between parents and children.
+         */
+        if (o.is_parent() || o.is_child()) {
+            writer.add_if_key_not_found(
+                tags::cpp::types::generate_to_stream,
+                tags::bool_true);
+        }
+
+        /**
+         * If integrated IO is enabled we need to generate an
+         * external inserter with the class.
+         */
+        if (reader.is_true(tags::cpp::io::enable_integrated_io)) {
+            writer.add_if_key_not_found(
+                tags::cpp::types::generate_external_inserter,
+                tags::bool_true);
+        }
     }
 }
 
