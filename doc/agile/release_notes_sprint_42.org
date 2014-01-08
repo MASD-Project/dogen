@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-07 Tue 23:43]
+Clock summary at [2014-01-08 Wed 00:02]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *37:51* |       |       |
+| *Total time*                                                            | *38:03* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 37:51 |       |
+| Development Stories Implemented                                         |         | 38:03 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -27,7 +27,7 @@ Clock summary at [2014-01-07 Tue 23:43]
 | COMPLETED Investigate why clang is not producing code coverage          |         |       |  0:13 |
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
-| COMPLETED Design a cleaner meta-data API                                |         |       |  0:11 |
+| ANALYSIS Design a cleaner meta-data API                                 |         |       |  0:23 |
 | IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  8:09 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
@@ -322,11 +322,28 @@ wrong place.
 This will be hard-coded as it is the simplest and cleanest way of
 doing it.
 
-*** COMPLETED Design a cleaner meta-data API                          :story:
-    CLOSED: [2014-01-07 Tue 08:04]
+*** ANALYSIS Design a cleaner meta-data API                           :story:
+    CLOCK: [2014-01-07 Tue 23:50]--[2014-01-08 Wed 00:02] =>  0:12
     CLOCK: [2014-01-07 Tue 07:53]--[2014-01-07 Tue 08:04] =>  0:11
 
-New understanding:
+Latest understanding:
+
+Actually, after some thinking, it seems like adding these classes to
+SML is not the right thing at all. This is because SML is still
+(fairly) language neutral. The right place has to be the output
+model. It just seems like we are trying to create a set of classes
+that have some common properties with SML (most, really), and an
+additional set of properties which are formatter specific. This
+vaguely resembles the decorator pattern. We have tried in the past to
+create an entire output model, totally divorced from SML, and found
+out that it had far too much in common with SML to justify its
+existence. At the same time, creating a set of classes to augment SML
+in OM without adding properties directly to SML seems a bit strange -
+we will end up having to pass the OM class plus the SML class on every
+method. This requires a bit more thinking.
+
+Old understanding:
+
 
 - use =ptree= internally in dia to sml transformer and JSON
   hydrator. Populate =ptree= with values read from the input. There is
@@ -336,19 +353,25 @@ New understanding:
   hierarchical structure in tags. Lets call this the meta-data object
   model.
 - create a SML transformer that takes in a =ptree= and returns the
-  appropriate meta-data object model.
+  appropriate meta-data object model. Name: =meta_data_transformer=,
+  =meta_data_factory=? Actually a factory makes more sense, we could
+  have a simple build method that takes in a =ptree= and returns the
+  meta-data.
 - dia to sml transformer and JSON transformer use the SML meta-data
   transformer to convert the =ptree= into meta-data and populate the
   taggable with it.
 - delete the meta-data reader and writer.
 - update meta-data tagger and all other classes that use =ptree= to
-  use the new meta-data object model.
+  use the new meta-data object model. Tagger needs to be renamed:
+  =meta_data_expander=, =meta_data_updator=?
 - tags remains public; although we only use it internally in meta-data
   transformer, we are still making it a public API (e.g. users need to
   know what tags are available in Dia/JSON). We need a better way to
   do this.
+- create a new package: =meta_data=. Create a top-level class to
+  contain all of the meta-data. We need a good name for it.
 
-Old understanding:
+Older understanding:
 
 At present we have a lot of ugly copy and paste code in
 =meta_data_tagger=. This was done so we could collect all of the use
