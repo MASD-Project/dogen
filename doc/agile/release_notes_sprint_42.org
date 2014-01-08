@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-08 Wed 18:19]
+Clock summary at [2014-01-08 Wed 19:23]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *38:55* |       |       |
+| *Total time*                                                            | *39:23* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 38:55 |       |
+| Development Stories Implemented                                         |         | 39:23 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -28,7 +28,7 @@ Clock summary at [2014-01-08 Wed 18:19]
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
 | ANALYSIS Design a cleaner meta-data API                                 |         |       |  0:39 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  8:45 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       |  9:13 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -531,7 +531,8 @@ We need to add includes via relationships to types formatter.
       CLOSED: [2014-01-07 Tue 07:20]
       CLOCK: [2014-01-07 Tue 07:10]--[2014-01-07 Tue 07:20] =>  0:10
 
-***** IMPLEMENTATION Investigate the need for includes of =iosfwd= and =algorithm=
+***** COMPLETED Investigate the need for includes of =iosfwd= and =algorithm=
+      CLOSED: [2014-01-08 Wed 18:20]
       CLOCK: [2014-01-08 Wed 08:01]--[2014-01-08 Wed 08:37] =>  0:36
       CLOCK: [2014-01-07 Tue 21:50]--[2014-01-07 Tue 23:50] =>  2:00
       CLOCK: [2014-01-07 Tue 17:52]--[2014-01-07 Tue 18:32] =>  0:40
@@ -545,6 +546,12 @@ external, and only add includes if external swap is required.
 
 Also, it seems we are always including =algorithm= but we only need it
 when swap is enabled. This will be fixed in OM and rebaselined.
+
+***** COMPLETED Generate pure virtual destructors                      :task:
+      CLOSED: [2014-01-08 Wed 19:23]
+      CLOCK: [2014-01-08 Wed 18:17]--[2014-01-08 Wed 18:45] =>  0:28
+
+We need to respect the destructor generation set in C++ formatters.
 
 *** Add tests for =flat_name_builder=                                 :story:
 

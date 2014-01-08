@@ -286,6 +286,12 @@ struct tags {
             static const std::string generate_explicit_destructor;
 
             /**
+             * @brief If set to true, the destructor will be
+             * a pure virtual function.
+             */
+            static const std::string destructor_is_pure_virtual;
+
+            /**
              * @brief If set to true, an assignment operator will be
              * generated.
              */

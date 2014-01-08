@@ -84,6 +84,8 @@ const std::string tags::cpp::types::generate_explicit_move_constructor(
     "cpp.types.generate_explicit_move_constructor");
 const std::string tags::cpp::types::generate_explicit_destructor(
     "cpp.types.generate_explicit_destructor_constructor");
+const std::string tags::cpp::types::destructor_is_pure_virtual(
+    "cpp.types.destructor_is_pure_virtual");
 const std::string tags::cpp::types::generate_explicit_assignment_operator(
     "cpp.types.generate_explicit_assignment_operator");
 const std::string tags::cpp::types::generate_complete_constructor(

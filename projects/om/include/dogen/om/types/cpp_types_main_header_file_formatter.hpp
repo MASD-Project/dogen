@@ -79,22 +79,6 @@ private:
 
 private:
     /**
-     * @brief Formats the out-of-class equality operator.
-     */
-    void external_equality(const sml::object& o) const;
-
-    /**
-     * @brief Formats out-of-class swap method.
-     */
-    void external_swap(const sml::object& o) const;
-
-    /**
-     * @brief Formats out-class inserter operator.
-     */
-    void external_inserter(const sml::object& o) const;
-
-private:
-    /**
      * @brief Formats open class statements for the object.
      */
     void open_class(const sml::object& o) const;
@@ -185,6 +169,27 @@ private:
      * @brief Formats the visitor pattern related methods.
      */
     void visitor_method(const sml::object& o) const;
+
+private:
+    /**
+     * @brief Formats the out-of-class equality operator.
+     */
+    void external_equality(const sml::object& o) const;
+
+    /**
+     * @brief Formats out-of-class swap method.
+     */
+    void external_swap(const sml::object& o) const;
+
+    /**
+     * @brief Formats out-class inserter operator.
+     */
+    void external_inserter(const sml::object& o) const;
+
+    /**
+     * @brief Formats a destructor implementation.
+     */
+    void destructor_implementation(const sml::object& o) const;
 
 private:
     using sml::type_visitor::visit;

@@ -277,68 +277,6 @@ build_file(const boost::property_tree::ptree& meta_data) const {
 }
 
 void cpp_types_main_header_file_formatter::
-external_equality(const sml::object& o) const {
-    sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_equality) ||
-        !o.is_parent())
-        return;
-
-    const auto nl(padding_types::new_line);
-    const auto n(reader.get(sml::tags::cpp::types::qualified_name));
-    helper_->stream() << "inline bool operator==(const "
-                     << n << "& lhs, const " << n << "& rhs) ";
-    helper_->utility().open_scope(nl);
-    {
-        positive_indenter_scope s(helper_->stream());
-        helper_->stream() << "return lhs.equals(rhs);" << std::endl;
-    }
-    helper_->utility().close_scope(nl);
-    helper_->utility().managed_blank_line();
-}
-
-void cpp_types_main_header_file_formatter::
-external_swap(const sml::object& o) const {
-    sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_external_swap))
-        return;
-
-    {
-        const auto std_ns(std::list<std::string> { "std" });
-        cpp_formatters::namespace_helper ns(helper_->stream(), std_ns);
-        helper_->utility().blank_line();
-
-        const auto nl(padding_types::new_line);
-        helper_->stream() << "template<>" << std::endl
-                         << "inline void swap(" << std::endl;
-        {
-            positive_indenter_scope s(helper_->stream());
-            const auto n(reader.get(sml::tags::cpp::types::qualified_name));
-            helper_->stream() << n << "& lhs," << std::endl
-                             << n << "& rhs) ";
-
-            helper_->utility().open_scope(nl);
-            helper_->stream() << "lhs.swap(rhs);" << std::endl;
-        }
-        helper_->utility().close_scope(nl);
-        helper_->utility().blank_line();
-    }
-    helper_->utility().blank_line();
-    helper_->utility().managed_blank_line();
-}
-
-void cpp_types_main_header_file_formatter::
-external_inserter(const sml::object& o) const {
-    sml::meta_data_reader reader(o.meta_data());
-    if (!reader.is_true(sml::tags::cpp::types::generate_external_inserter))
-        return;
-
-    helper_->stream() << "std::ostream& operator<<(std::ostream& s, "
-                      << "const " << o.name().simple_name() << "& v);"
-                      << std::endl;
-    helper_->utility().managed_blank_line();
-}
-
-void cpp_types_main_header_file_formatter::
 open_class(const sml::object& o) const {
     if (!o.documentation().empty())
         doxygen_next_.format(helper_->stream(), o.documentation());
@@ -492,23 +430,15 @@ void cpp_types_main_header_file_formatter::
 destructor(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
-    if (reader.is_false(types::generate_explicit_destructor))
+    if (!reader.is_true(types::generate_explicit_destructor))
         return;
 
     helper_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
-    if (o.is_parent()) {
-        /*
-         * according to MEC++, item 33, base classes should always be
-         * abstract. this avoids all sorts of tricky problems with
-         * assignment and swap.
-         *
-         * incidentally, this also fixes some strange clang errors:
-         * undefined reference to `vtable.
-         */
+    if (reader.is_true(types::destructor_is_pure_virtual)) {
         helper_->stream() << "virtual ~" << sn
                          << "() noexcept = 0;" << std::endl;
-    } else if (o.is_parent()) {
+    } else {
         helper_->stream() << "virtual ~" << sn
                          << "() noexcept { }" << std::endl;
     }
@@ -831,6 +761,83 @@ visitor_method(const sml::object& o) const {
 }
 
 void cpp_types_main_header_file_formatter::
+external_equality(const sml::object& o) const {
+    sml::meta_data_reader reader(o.meta_data());
+    if (!reader.is_true(sml::tags::cpp::types::generate_equality) ||
+        !o.is_parent())
+        return;
+
+    const auto nl(padding_types::new_line);
+    const auto sn(o.name().simple_name());
+    helper_->stream() << "inline bool operator==(const "
+                     << sn << "& lhs, const " << sn << "& rhs) ";
+    helper_->utility().open_scope(nl);
+    {
+        positive_indenter_scope s(helper_->stream());
+        helper_->stream() << "return lhs.equals(rhs);" << std::endl;
+    }
+    helper_->utility().close_scope(nl);
+    helper_->utility().managed_blank_line();
+}
+
+void cpp_types_main_header_file_formatter::
+external_swap(const sml::object& o) const {
+    sml::meta_data_reader reader(o.meta_data());
+    if (reader.is_false(sml::tags::cpp::types::generate_external_swap))
+        return;
+
+    {
+        const auto std_ns(std::list<std::string> { "std" });
+        cpp_formatters::namespace_helper ns(helper_->stream(), std_ns);
+        helper_->utility().blank_line();
+
+        const auto nl(padding_types::new_line);
+        helper_->stream() << "template<>" << std::endl
+                         << "inline void swap(" << std::endl;
+        {
+            positive_indenter_scope s(helper_->stream());
+            const auto n(reader.get(sml::tags::cpp::types::qualified_name));
+            helper_->stream() << n << "& lhs," << std::endl
+                             << n << "& rhs) ";
+
+            helper_->utility().open_scope(nl);
+            helper_->stream() << "lhs.swap(rhs);" << std::endl;
+        }
+        helper_->utility().close_scope(nl);
+        helper_->utility().blank_line();
+    }
+    helper_->utility().blank_line();
+    helper_->utility().managed_blank_line();
+}
+
+void cpp_types_main_header_file_formatter::
+external_inserter(const sml::object& o) const {
+    sml::meta_data_reader reader(o.meta_data());
+    if (!reader.is_true(sml::tags::cpp::types::generate_external_inserter))
+        return;
+
+    helper_->stream() << "std::ostream& operator<<(std::ostream& s, "
+                      << "const " << o.name().simple_name() << "& v);"
+                      << std::endl;
+    helper_->utility().managed_blank_line();
+}
+
+void cpp_types_main_header_file_formatter::
+destructor_implementation(const sml::object& o) const {
+    sml::meta_data_reader reader(o.meta_data());
+    using types = sml::tags::cpp::types;
+    if (!reader.is_true(types::generate_explicit_destructor))
+        return;
+
+    if (reader.is_true(sml::tags::cpp::types::destructor_is_pure_virtual)) {
+        const auto sn(o.name().simple_name());
+        helper_->stream() << "inline " << sn << "::~"<< sn << "() noexcept { }"
+                         << std::endl;
+        helper_->utility().managed_blank_line();
+    }
+}
+
+void cpp_types_main_header_file_formatter::
 visit(const dogen::sml::enumeration& e) const {
     ensure_non_null_helper();
 
@@ -903,8 +910,9 @@ visit(const dogen::sml::object& o) const {
         }
         close_class();
         helper_->utility().blank_line();
-        external_equality(o);
+        destructor_implementation(o);
         external_inserter(o);
+        external_equality(o);
     }
     helper_->utility().blank_line();
     helper_->utility().managed_blank_line();

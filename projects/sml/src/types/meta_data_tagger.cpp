@@ -1063,6 +1063,28 @@ void meta_data_tagger::tag(object& o) const {
         tags::cpp::types::generate_explicit_move_constructor, tags::bool_false);
 
     /**
+     * Types which are part of an inheritance relationship require
+     * manually generated destructors.
+     */
+    if (o.is_parent() || o.is_child()) {
+        writer.add_if_key_not_found(
+            tags::cpp::types::generate_explicit_destructor, tags::bool_true);
+
+        /*
+         * according to MEC++, item 33, base classes should always be
+         * abstract. this avoids all sorts of tricky problems with
+         * assignment and swap.
+         *
+         * incidentally, this also fixes some strange clang errors:
+         * undefined reference to `vtable.
+         */
+        if (o.is_parent()) {
+            writer.add_if_key_not_found(
+                tags::cpp::types::destructor_is_pure_virtual, tags::bool_true);
+        }
+    }
+
+    /**
      * Types which are not immutable, have no properties or are not
      * parents in an inheritance relationship do not require swap
      * support or explicit assignment operators.
