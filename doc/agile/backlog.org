@@ -8,6 +8,24 @@
 
 Stories that we intend to look at, at some point.
 
+*** Make test data generator more configurable                        :story:
+
+One thing that would be useful is to have a way to attach lambdas to
+test data generator. Let =a= be a class with a property =prop= of type
+string. It would be nice to be able to do:
+
+: a_generator g;
+: g.prop([]{const unsigned int seed} {
+:     std::ostringstream s;
+:     s << "my property " << seed * 10;
+:     return s.str();
+: } );
+
+And so on, for all member variables. The generators would have some
+default behaviour, but it could be overridden at any point by the
+user. With this, test data generator would be a great starting point
+as a way of generating random data to test systems.
+
 *** Indent stream can be made a bit less inefficient                  :story:
 
 Out first attempt at creating a stream with indentation support was a
