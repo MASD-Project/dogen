@@ -8,6 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Crazy ideas for facets                                            :story:
+
+We keep on having random idea for facets, most of them which are blue
+skies. This story aggregates them to avoid having lots of entries in
+the backlog.
+
+- automatic generation of C interfaces: once we have proper C support,
+  it should be doable to have a C++ facet that automatically exposes a
+  C interface.
+- even more crazy/interesting is to generate COM/CORBA interfaces.
+
 *** Add a utility that converts a dia model into JSON                 :story:
 
 It would be great if one could take a dia model and convert it into a
