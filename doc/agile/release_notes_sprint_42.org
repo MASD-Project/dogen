@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-09 Thu 00:01]
+Clock summary at [2014-01-09 Thu 08:44]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *40:48* |       |       |
+| *Total time*                                                            | *41:40* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 40:48 |       |
+| Development Stories Implemented                                         |         | 41:40 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -29,6 +29,7 @@ Clock summary at [2014-01-09 Thu 00:01]
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
 | COMPLETED Design a cleaner meta-data API                                |         |       |  0:49 |
 | IMPLEMENTATION Update all tests to use =om= formatter                   |         |       | 10:28 |
+| IMPLEMENTATION Create a blog post on dogen's development methodology    |         |       |  0:52 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
 
@@ -568,6 +569,11 @@ from regular objects, etc.
 
 We need to add a "enable legacy behaviour" flag to remove spurious
 diffs.
+
+*** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
+    CLOCK: [2014-01-09 Thu 07:51]--[2014-01-09 Thu 08:43] =>  0:52
+
+We should do a write up of how we develop dogen.
 
 *** Add tests for =flat_name_builder=                                 :story:
 

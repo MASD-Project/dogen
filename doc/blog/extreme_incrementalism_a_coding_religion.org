@@ -1,0 +1,60 @@
+#+title: Nerd Food: Extreme Incrementalism: A Coding Religion
+
+A lot of interesting lessons have been learned during the development
+of Dogen; however, one in particular stands out. I even gave it a
+name: /Extreme Incrementalism/ or EI for short. As you can see, the
+name fits well with the spirit of "overreaching naming conventions",
+typically used for development methodologies.
+
+But I digress. So what is EI? Well, first a bit of context. When
+developing Dogen, I had two conflicting requirements: very little
+development resources and very "ambitious" ideas that required lots of
+development time. The development resource was, well, just me. With a
+family and a full time job there isn't a lot of spare cycles left. In
+fact, after some analysis I realised that whilst there is was a lot of
+"dead-time" in my average week, it was mostly "low-quality" time: lots
+of discontinued segments of varying and unpredictable lengths: ten
+minutes here, twenty minutes there, the odd hour. Even commuting
+wasn't entirely helpful due to having to change trains. Added together
+in a naive way it seemed like there was a lot of time, but as every
+programmer knows, six blocks of ten minutes do not equate to one solid
+hour, two solid hours are worth several times the one hour and so on
+up to some upper limit that varies from programmer to programmer. Its
+a very strange arithmetic, but it makes sense to us all somehow.
+
+Nevertheless, one has to play the game with the dealt cards, so I
+flipped the problem the other way around: what kind of development
+environment would be required such that one can be productive under
+such conditions? The answer was multi-part.
+
+* DVCS is at the core
+
+One never quite knows where one will be coding from, and whether
+internet access is available or not, so its important to have a
+self-contained environment. After all, when you have ten minutes to
+code, the last thing you need is to waste precious time faffing with
+dodgy 3G connections. This is were Distributed Version Control (DVCS)
+comes in to save the day: every repository contains history,
+branching, etc - all you need to code. This was my baseline use case
+for DVCS, but in the end I found out many, many more advantages to it,
+such as the collaborative flows. Since most of it is covered
+elsewhere, I won't bore you with it.
+
+In addition to the traditional use of version control, I decided to
+put *everything* related to the project in DVCS. By that I mean that
+the documentation, bug reports, agile process - basically
+/everything/ - is in the same place, and that place is git. In the
+beginning I thought losing the GitHub infrastructure such as Wiki and
+Issues would really painful, but having everything in one versioned
+controlled place proved to be a major win over time:
+
+- searching is never further than a couple of greps away;
+- updates by other people come in as commits and can be easily
+  reviewed as part of the normal push/pull process;
+- changes can be diffed, etc.
+
+I'll cover the tools used to maintain these documents on the next
+section.
+
+The second and very important lesson related to version control was
+commit early and commit often.
