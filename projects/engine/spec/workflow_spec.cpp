@@ -62,6 +62,7 @@ const std::string io_facet_and_integrated_io_error(
 const std::string dia_invalid_name("Dia object name is empty");
 
 const bool enable_om(true);
+const bool legacy_mode(true);
 
 std::vector<dogen::utility::test::file_asserter::shared_ptr>
 file_asserters() {
@@ -106,12 +107,14 @@ dogen::config::settings empty_tds_mock_settings() {
 
 template<typename SettingsFactoryFunction>
 bool check_code_generation(boost::filesystem::path target,
-    SettingsFactoryFunction sff, const bool enable_om = false) {
+    SettingsFactoryFunction sff, const bool enable_om = false,
+    const bool legacy_mode = false) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(target);
 
     dogen::engine::workflow w(sff(tds));
     w.enable_om(enable_om);
+    w.legacy_mode(legacy_mode);
     w.execute();
 
     using dogen::utility::test::asserter;
@@ -119,8 +122,9 @@ bool check_code_generation(boost::filesystem::path target,
 }
 
 bool check_code_generation(boost::filesystem::path target,
-    const bool enable_om = false) {
-    return check_code_generation(target, default_mock_settings, enable_om);
+    const bool enable_om = false, const bool legacy_mode = false) {
+    return check_code_generation(target, default_mock_settings, enable_om,
+        legacy_mode);
 }
 
 }
@@ -480,7 +484,7 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code) {
 BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_inheritance_model_generates_expected_code");
     const auto t(dia_sml::input_trivial_inheritance_dia());
-    BOOST_CHECK(check_code_generation(t));
+    BOOST_CHECK(check_code_generation(t/*, enable_om, legacy_mode*/));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_association_model_generates_expected_code) {

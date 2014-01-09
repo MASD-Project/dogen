@@ -53,11 +53,14 @@ public:
      * source files will be placed.
      * @param cpp_include_directory Directory under which the include
      * files will be placed.
+     * @param legacy_mode Put formatters in legacy mode to minimise
+     * differences with legacy formatters.
      */
     formatter_factory(const sml::model& model,
         const boost::filesystem::path& project_directory,
         const boost::filesystem::path& cpp_source_directory,
-        const boost::filesystem::path& cpp_include_directory);
+        const boost::filesystem::path& cpp_include_directory,
+        const bool legacy_mode);
 
 public:
     /**
@@ -83,6 +86,7 @@ private:
     const boost::filesystem::path project_directory_;
     const boost::filesystem::path cpp_source_directory_;
     const boost::filesystem::path cpp_include_directory_;
+    const bool legacy_mode_;
 };
 
 } }

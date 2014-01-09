@@ -32,8 +32,9 @@ namespace backends {
 
 factory::
 factory(const sml::model& model, const config::settings& settings,
-    const bool enable_om)
-    : settings_(settings), model_(model), enable_om_(enable_om) { }
+    const bool enable_om, const bool legacy_mode)
+    : settings_(settings), model_(model), enable_om_(enable_om),
+      legacy_mode_(legacy_mode) { }
 
 void factory::log_cpp_backend_disabled() const {
     using namespace dogen::utility::log;
@@ -50,7 +51,7 @@ factory::result_type factory::create() const {
     r.push_back(cpp_backend::create(model_, settings_.cpp()));
 
     if (enable_om_)
-        r.push_back(om_backend::create(settings_, model_));
+        r.push_back(om_backend::create(settings_, model_, legacy_mode_));
 
     return r;
 }

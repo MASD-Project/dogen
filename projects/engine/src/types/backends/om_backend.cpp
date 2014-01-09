@@ -40,12 +40,14 @@ namespace engine {
 namespace backends {
 
 om_backend::
-om_backend(const config::settings& settings, const sml::model& model)
-    : settings_(settings), model_(model) { }
+om_backend(const config::settings& settings, const sml::model& model,
+    const bool legacy_mode)
+    : settings_(settings), model_(model), legacy_mode_(legacy_mode) { }
 
 backend::ptr om_backend::
-create(const config::settings& settings, const sml::model& model) {
-    return backend::ptr(new om_backend(settings, model));
+create(const config::settings& settings, const sml::model& model,
+    const bool legacy_mode) {
+    return backend::ptr(new om_backend(settings, model, legacy_mode));
 }
 
 backend::value_type om_backend::generate() {
@@ -89,7 +91,7 @@ backend::value_type om_backend::generate() {
                              << cpp_include_directory;
 
     om::workflow wk(project_directory, cpp_source_directory,
-        cpp_include_directory, data_files_directories);
+        cpp_include_directory, data_files_directories, legacy_mode_);
 
     const auto files(wk.execute(model_));
 

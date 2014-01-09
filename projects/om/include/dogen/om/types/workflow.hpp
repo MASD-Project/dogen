@@ -62,11 +62,14 @@ public:
      * files will be placed.
      * @param data_files_directories Additional directories to search
      * for data files.
+     * @param legacy_mode Put formatters in legacy mode to minimise
+     * differences with legacy formatters.
      */
     workflow(const boost::filesystem::path& project_directory,
         const boost::filesystem::path& cpp_source_directory,
         const boost::filesystem::path& cpp_include_directory,
-        const std::list<boost::filesystem::path>& data_files_directories);
+        const std::list<boost::filesystem::path>& data_files_directories,
+        const bool legacy_mode = false);
 
 private:
     class context;
@@ -113,6 +116,7 @@ private:
     const boost::filesystem::path cpp_include_directory_;
     annotation_factory annotation_factory_;
     std::shared_ptr<context> context_;
+    const bool legacy_mode_;
 };
 
 } }

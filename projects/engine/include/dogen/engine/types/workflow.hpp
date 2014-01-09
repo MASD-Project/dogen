@@ -116,6 +116,11 @@ public:
      */
     void enable_om(const bool v);
 
+    /**
+     * @brief If true, sets up OM in legacy mode.
+     */
+    void legacy_mode(const bool v);
+
 public:
     /**
      * @brief Perform the entire code generation workflow.
@@ -127,6 +132,7 @@ private:
     const config::settings settings_;
     const output_fn output_;
     bool enable_om_;
+    bool legacy_mode_;
 };
 
 } }

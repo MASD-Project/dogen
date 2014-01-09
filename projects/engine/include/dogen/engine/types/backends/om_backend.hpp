@@ -47,12 +47,14 @@ public:
     om_backend& operator=(const om_backend&) = default;
 
 public:
-    om_backend(const config::settings& settings, const sml::model& model);
+    om_backend(const config::settings& settings, const sml::model& model,
+        const bool legacy_mode);
     virtual ~om_backend() noexcept {}
 
 public:
     static backend::ptr
-    create(const config::settings& settings, const sml::model& model);
+    create(const config::settings& settings, const sml::model& model,
+        const bool legacy_mode);
 
 public:
     backend::value_type generate() override;
@@ -62,6 +64,7 @@ private:
     const config::settings& settings_;
     const sml::model& model_;
     std::vector<boost::filesystem::path> managed_directories_;
+    const bool legacy_mode_;
 };
 
 } } }

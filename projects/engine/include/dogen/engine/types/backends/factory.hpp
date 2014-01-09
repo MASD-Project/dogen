@@ -46,7 +46,7 @@ public:
 
 public:
     factory(const sml::model& model, const config::settings& settings,
-        const bool enable_om = false);
+        const bool enable_om = false, const bool legacy_mode = false);
 
 private:
     void log_cpp_backend_disabled() const;
@@ -58,6 +58,7 @@ private:
     const config::settings& settings_;
     const sml::model& model_;
     const bool enable_om_;
+    const bool legacy_mode_;
 };
 
 } } }

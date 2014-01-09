@@ -64,7 +64,8 @@ namespace dogen {
 namespace engine {
 
 workflow::workflow(const config::settings& s)
-    : verbose_(s.troubleshooting().verbose()), settings_(s), enable_om_(false) {
+    : verbose_(s.troubleshooting().verbose()), settings_(s), enable_om_(false),
+      legacy_mode_(false) {
 
     if (settings_.output().output_to_stdout()) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
@@ -77,7 +78,7 @@ workflow::workflow(const config::settings& s)
 workflow::
 workflow(const config::settings& s, const output_fn& o)
     : verbose_(s.troubleshooting().verbose()), settings_(s), output_(o),
-      enable_om_(false) {
+      enable_om_(false), legacy_mode_(false) {
 
     if (!settings_.output().output_to_stdout() || !output_) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
@@ -114,7 +115,7 @@ void workflow::output(const outputters::outputter::value_type& o) const {
 
 void workflow::generate(const sml::model& m) const {
     try {
-        backends::factory f(m, settings_, enable_om_);
+        backends::factory f(m, settings_, enable_om_, legacy_mode_);
         const auto backends(f.create());
         if (backends.empty())
             return;
@@ -208,6 +209,10 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
 
 void workflow::enable_om(const bool v) {
     enable_om_= v;
+}
+
+void workflow::legacy_mode(const bool v) {
+    legacy_mode_= v;
 }
 
 void workflow::execute() const {

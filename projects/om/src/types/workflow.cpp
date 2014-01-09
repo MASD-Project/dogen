@@ -89,11 +89,13 @@ private:
 workflow::workflow(const boost::filesystem::path& project_directory,
     const boost::filesystem::path& cpp_source_directory,
     const boost::filesystem::path& cpp_include_directory,
-    const std::list<boost::filesystem::path>& data_files_directories)
+    const std::list<boost::filesystem::path>& data_files_directories,
+    const bool legacy_mode)
     : project_directory_(project_directory),
       cpp_source_directory_(cpp_source_directory),
       cpp_include_directory_(cpp_include_directory),
-      annotation_factory_(data_files_directories) {
+      annotation_factory_(data_files_directories),
+      legacy_mode_(legacy_mode) {
 
     BOOST_LOG_SEV(lg, debug) << "Project directory:" << project_directory_
                              << " C++ source directory: "
@@ -173,7 +175,7 @@ std::list<file> workflow::execute(const sml::model& m) {
     context_ = std::unique_ptr<context>(new context);
 
     formatter_factory ff(m, project_directory_, cpp_source_directory_,
-        cpp_include_directory_);
+        cpp_include_directory_, legacy_mode_);
 
     context_->type_formatters(ff.build_type_formatters());
     context_->module_formatters(ff.build_module_formatters());

@@ -38,16 +38,19 @@ formatter_factory::
 formatter_factory(const sml::model& model,
     const boost::filesystem::path& project_directory,
     const boost::filesystem::path& cpp_source_directory,
-    const boost::filesystem::path& cpp_include_directory)
+    const boost::filesystem::path& cpp_include_directory,
+    const bool legacy_mode)
     : model_(model), project_directory_(project_directory),
       cpp_source_directory_(cpp_source_directory),
-      cpp_include_directory_(cpp_include_directory) {
+      cpp_include_directory_(cpp_include_directory),
+      legacy_mode_(legacy_mode) {
 
     BOOST_LOG_SEV(lg, debug) << "Factory setup. Project directory: "
                              << project_directory << " C++ source directory: "
                              << cpp_source_directory
                              << " C++ include directory: "
-                             << cpp_include_directory;
+                             << cpp_include_directory
+                             << " Legacy mode: " << legacy_mode_;
 }
 
 std::list<boost::shared_ptr<type_formatter_interface> >
@@ -55,7 +58,7 @@ formatter_factory::build_type_formatters() const {
     using namespace boost;
     std::list<shared_ptr<type_formatter_interface> > r;
     r.push_back(make_shared<cpp_types_main_header_file_formatter>(
-            model_, cpp_include_directory_));
+            model_, cpp_include_directory_, legacy_mode_));
     return r;
 }
 
