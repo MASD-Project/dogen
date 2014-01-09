@@ -8,6 +8,18 @@
 
 Stories that we intend to look at, at some point.
 
+*** Investigate the possibility of creating a mock facet              :story:
+
+This is straight out of left-field, but may actually be a good
+idea. One annoying thing with mocking frameworks such as =turtle= is
+the amount of macros. However, =dogen= already has all the required
+information needed to create an expectation based mock - the
+meta-model. We could mimic the =turtle= API with a mock facet that is
+made up of real C++ objects. When a class is marked as an interface,
+we could automatically generate its mock in a mock facet.
+
+This will require proper operations support.
+
 *** Make test data generator more configurable                        :story:
 
 One thing that would be useful is to have a way to attach lambdas to
