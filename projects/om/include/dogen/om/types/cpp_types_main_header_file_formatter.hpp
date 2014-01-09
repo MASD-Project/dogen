@@ -56,9 +56,19 @@ private:
     class helper;
 
 public:
+    /**
+     * @brief Initialise types formatter.
+     *
+     * @param model underlying model
+     * @param include_directory directory in which the header files
+     * will be placed.
+     * @param legacy_mode if true, formatter output will match legacy
+     * formatters.
+     */
     cpp_types_main_header_file_formatter(
         const sml::model& model,
-        const boost::filesystem::path& include_directory);
+        const boost::filesystem::path& include_directory,
+        const bool legacy_mode = false);
     virtual ~cpp_types_main_header_file_formatter() noexcept { }
 
 private:
@@ -192,6 +202,13 @@ private:
     void destructor_implementation(const sml::object& o) const;
 
 private:
+    /**
+     * @brief Formats non-specialised objects such as entities, value
+     * objects, etc.
+     */
+    void format_non_specialised_object(const sml::object& o) const;
+
+private:
     using sml::type_visitor::visit;
     void visit(const sml::enumeration& e) const override;
     void visit(const sml::object& o) const override;
@@ -209,6 +226,7 @@ private:
     mutable std::shared_ptr<helper> helper_;
     comment_formatter doxygen_next_;
     comment_formatter doxygen_previous_;
+    const bool legacy_mode_;
 };
 
 } }

@@ -104,6 +104,8 @@ const std::string tags::cpp::types::generate_to_stream(
     "cpp.types.generate_to_stream");
 const std::string tags::cpp::types::generate_accept(
     "cpp.types.generate_accept");
+const std::string tags::cpp::types::accept_is_pure_virtual(
+    "cpp.types.accept_is_pure_virtual");
 
 const std::string tags::cpp::types::header_file::generate(
     "cpp.types.header_file.generate");

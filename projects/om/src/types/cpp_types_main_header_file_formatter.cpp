@@ -87,12 +87,12 @@ public:
     ~helper() noexcept { }
 
     helper(const sml::model& m, const boost::property_tree::ptree& meta_data,
-        const annotation& a)
+        const annotation& a, const bool legacy_mode)
         : model_(m), utility_(stream_),
           boilerplate_(is_true(meta_data, sml::tags::generate_preamble),
               is_true(meta_data,
                   sml::tags::cpp::types::header_file::generate_header_guards)),
-          annotation_(a) {
+          annotation_(a), legacy_mode_(legacy_mode) {
 
         sml::meta_data_reader reader(meta_data);
         using types = sml::tags::cpp::types;
@@ -168,6 +168,7 @@ private:
     const annotation annotation_;
     boost::filesystem::path relative_file_path_;
     std::ostringstream string_stream_;
+    const bool legacy_mode_;
 };
 
 void cpp_types_main_header_file_formatter::helper::
@@ -219,8 +220,13 @@ visit(const sml::object& o) {
 
     // hard-coded includes
     using types = sml::tags::cpp::types;
-    if (reader.is_true(types::generate_external_swap))
+
+    if (legacy_mode_)
         includes_.system().push_back(algorithm_include);
+    else {
+        if (reader.is_true(types::generate_external_swap))
+            includes_.system().push_back(algorithm_include);
+    }
 
     if (reader.is_true(types::generate_to_stream) ||
         reader.is_true(types::generate_external_inserter))
@@ -228,7 +234,8 @@ visit(const sml::object& o) {
 }
 
 cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter(
-    const sml::model& model, const boost::filesystem::path& include_directory)
+    const sml::model& model, const boost::filesystem::path& include_directory,
+    const bool legacy_mode)
     : model_(model), include_directory_(include_directory),
       doxygen_next_(
           !start_on_first_line,
@@ -241,7 +248,8 @@ cpp_types_main_header_file_formatter::cpp_types_main_header_file_formatter(
           use_documentation_tool_markup,
           documenting_previous_identifier,
           comment_styles::cpp_style,
-          !last_line_is_blank) { }
+          !last_line_is_blank),
+      legacy_mode_(legacy_mode) { }
 
 std::list<std::string> cpp_types_main_header_file_formatter::
 namespaces(const sml::qname& qn) const {
@@ -301,7 +309,19 @@ open_class(const sml::object& o) const {
         const std::string parent_simple_name(i->second.front().simple_name());
         helper_->stream() << " :";
         helper_->stream() << " public ";
-        helper_->stream() << parent_simple_name;
+
+        if (!legacy_mode_)
+            helper_->stream() << parent_simple_name;
+
+        const auto j(model_.objects().find(i->second.front()));
+        if (j == model_.objects().end()) {
+            BOOST_LOG_SEV(lg, error) << parent_not_found;
+            BOOST_THROW_EXCEPTION(formatting_error(parent_not_found));
+        }
+        sml::meta_data_reader reader(j->second.meta_data());
+        const auto pqn(reader.get(
+                sml::tags::cpp::types::qualified_name));
+        helper_->stream() << pqn;
     }
     helper_->stream() << " {" << std::endl;
 }
@@ -433,7 +453,9 @@ destructor(const sml::object& o) const {
     if (!reader.is_true(types::generate_explicit_destructor))
         return;
 
-    helper_->utility().public_access_specifier();
+    if (!legacy_mode_)
+        helper_->utility().public_access_specifier();
+
     const auto sn(o.name().simple_name());
     if (reader.is_true(types::destructor_is_pure_virtual)) {
         helper_->stream() << "virtual ~" << sn
@@ -577,6 +599,9 @@ member_variables(const sml::object& o) const {
     if (o.local_properties().empty())
         return;
 
+    if (legacy_mode_)
+        helper_->utility().blank_line();
+
     helper_->utility().private_access_specifier();
     for (const auto p : o.local_properties()) {
         sml::meta_data_reader reader(p.meta_data());
@@ -592,7 +617,7 @@ member_variables(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 internal_equality(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_equality))
+    if (!reader.is_true(sml::tags::cpp::types::generate_equality))
         return;
 
     const auto sn(o.name().simple_name());
@@ -620,7 +645,9 @@ internal_equality(const sml::object& o) const {
     if (!o.is_parent() && !o.is_child())
         return;
 
-    helper_->utility().blank_line();
+    if (!legacy_mode_)
+        helper_->utility().blank_line();
+
     helper_->utility().public_access_specifier();
     using types = sml::tags::cpp::types;
     if (o.is_parent() && !o.is_child()) {
@@ -645,7 +672,7 @@ internal_equality(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 to_stream(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_to_stream))
+    if (!reader.is_true(sml::tags::cpp::types::generate_to_stream))
         return;
 
     helper_->utility().public_access_specifier();
@@ -665,7 +692,7 @@ to_stream(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 internal_swap(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_internal_swap))
+    if (!reader.is_true(sml::tags::cpp::types::generate_internal_swap))
         return;
 
     // swap is only public in leaf classes - MEC++-33
@@ -678,8 +705,8 @@ internal_swap(const sml::object& o) const {
     helper_->stream() << "void swap(" << sn << "& other) noexcept;"
                      << std::endl;
 
-    // FIXME: hack just to get zero diffs with legacy
-    // helper_->utility().managed_blank_line();
+    if (legacy_mode_)
+        helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -690,8 +717,10 @@ internal_assignment(const sml::object& o) const {
         return;
 
     const auto sn(o.name().simple_name());
-    // FIXME: hack just to get zero diffs with legacy
-    // helper_->utility().public_access_specifier();
+
+    if (legacy_mode_)
+        helper_->utility().public_access_specifier();
+
     helper_->stream() << sn << "& operator=(" << sn << " other);" << std::endl;
     helper_->utility().managed_blank_line();
 }
@@ -699,7 +728,7 @@ internal_assignment(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 visitor_method(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_accept))
+    if (!reader.is_true(sml::tags::cpp::types::generate_accept))
         return;
 
     helper_->utility().public_access_specifier();
@@ -707,7 +736,7 @@ visitor_method(const sml::object& o) const {
     using types = sml::tags::cpp::types;
     const auto opn(reader.get(types::qualified_original_parent_name));
 
-    if (o.is_visitable()) {
+    if (reader.is_true(sml::tags::cpp::types::accept_is_pure_virtual)) {
         helper_->stream() << "virtual void accept(const " << sn
                          << "_visitor& v) const = 0;" << std::endl;
         helper_->stream() << "virtual void accept("
@@ -884,8 +913,9 @@ visit(const dogen::sml::enumeration& e) const {
     helper_->utility().managed_blank_line();
 }
 
+
 void cpp_types_main_header_file_formatter::
-visit(const dogen::sml::object& o) const {
+format_non_specialised_object(const sml::object& o) const {
     ensure_non_null_helper();
     {
         const auto ns(namespaces(o.name()));
@@ -908,6 +938,12 @@ visit(const dogen::sml::object& o) const {
             internal_assignment(o);
             member_variables(o);
         }
+
+        if (legacy_mode_) {
+            if (o.local_properties().empty())
+                helper_->utility().blank_line();
+        }
+
         close_class();
         helper_->utility().blank_line();
         destructor_implementation(o);
@@ -919,6 +955,21 @@ visit(const dogen::sml::object& o) const {
     external_swap(o);
 }
 
+void cpp_types_main_header_file_formatter::
+visit(const dogen::sml::object& o) const {
+    using sml::object_types;
+    switch(o.object_type()) {
+    case object_types::entity:
+    case object_types::keyed_entity:
+    case object_types::user_defined_value_object:
+        format_non_specialised_object(o);
+        break;
+
+    default:
+        return;
+    }
+}
+
 bool cpp_types_main_header_file_formatter::
 generate(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data_reader reader(meta_data);
@@ -928,7 +979,8 @@ generate(const boost::property_tree::ptree& meta_data) const {
 
 file cpp_types_main_header_file_formatter::
 format(const sml::module& module, const annotation& a) const {
-    helper_ = std::make_shared<helper>(model_, module.meta_data(), a);
+    const auto md(module.meta_data());
+    helper_ = std::make_shared<helper>(model_, md, a, legacy_mode_);
     helper_->format_begin();
     const auto ns(namespaces(module.name()));
 
@@ -960,7 +1012,7 @@ format(const sml::module& module, const annotation& a) const {
 
 file cpp_types_main_header_file_formatter::
 format(const sml::type& t, const annotation& a) const {
-    helper_ = std::make_shared<helper>(model_, t.meta_data(), a);
+    helper_ = std::make_shared<helper>(model_, t.meta_data(), a, legacy_mode_);
     helper_->compute_includes(t);
     helper_->format_begin();
     t.accept(*this);

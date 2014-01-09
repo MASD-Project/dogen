@@ -1038,16 +1038,39 @@ void meta_data_tagger::tag(object& o) const {
         writer.add_if_key_not_found(tags::is_original_parent_visitable,
             i->second.is_visitable() ? tags::bool_true : tags::bool_false);
 
-        writer.add_if_key_not_found(tags::cpp::types::generate_accept,
-            i->second.is_visitable() ? tags::bool_true : tags::bool_false);
+        /*
+         * If your original parent is visitable and you are a leaf,
+         * you must generate a concrete accept method.
+         */
+        if (i->second.is_visitable() && !o.is_parent()) {
+            writer.add_if_key_not_found(tags::cpp::types::generate_accept,
+                tags::bool_true);
+        }
 
         writer.add_if_key_not_found(
             tags::cpp::types::qualified_original_parent_name,
             builder_.cpp_qualified_name(context_->model(), opn));
     }
 
-    writer.add_if_key_not_found(tags::cpp::types::generate_accept,
-        o.is_visitable() ? tags::bool_true : tags::bool_false);
+    /*
+     * If your are visitable, you must generate an accept method.
+     */
+    if (o.is_visitable()) {
+        writer.add_if_key_not_found(tags::cpp::types::generate_accept,
+            tags::bool_true);
+
+        /*
+         * If you are not a leaf, the accept method must be
+         * virtual. Since is visitable is only set for the base class
+         * of a hierarchy, you should always be a parent, really. But
+         * we check, just in case.
+         */
+        if (o.is_parent()) {
+            writer.add_if_key_not_found(
+                tags::cpp::types::accept_is_pure_virtual,
+                tags::bool_true);
+        }
+    }
 
     if (!o.is_parent())
         writer.add_if_key_not_found(tags::is_final, tags::bool_true);
@@ -1062,7 +1085,7 @@ void meta_data_tagger::tag(object& o) const {
     writer.add_if_key_not_found(
         tags::cpp::types::generate_explicit_move_constructor, tags::bool_false);
 
-    /**
+    /*
      * Types which are part of an inheritance relationship require
      * manually generated destructors.
      */
@@ -1084,14 +1107,14 @@ void meta_data_tagger::tag(object& o) const {
         }
     }
 
-    /**
+    /*
      * Types which are not immutable, have no properties or are not
      * parents in an inheritance relationship do not require swap
      * support or explicit assignment operators.
      */
     if (!o.is_immutable() && (!o.all_properties().empty() || o.is_parent())) {
 
-        /**
+        /*
          * All types which require swap support must have an internal
          * swap method since the external swap method uses it. In
          * addition, parents must supply it so that their children can
@@ -1101,7 +1124,7 @@ void meta_data_tagger::tag(object& o) const {
             tags::cpp::types::generate_internal_swap,
             tags::bool_true);
 
-        /**
+        /*
          * Classes that are parents in an inheritance relationship
          * should not overload the standard swap function. This is
          * because they are abstract classes (MEC++-33). For the same
@@ -1130,7 +1153,7 @@ void meta_data_tagger::tag(object& o) const {
         tags::bool_true);
 
     if (reader.is_true(tags::cpp::io::enabled)) {
-        /**
+        /*
          * Types which are involved in an inheritance relationship must
          * have an internal to stream method to allow for delegation
          * between parents and children.
@@ -1141,7 +1164,7 @@ void meta_data_tagger::tag(object& o) const {
                 tags::bool_true);
         }
 
-        /**
+        /*
          * If integrated IO is enabled we need to generate an
          * external inserter with the class.
          */

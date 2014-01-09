@@ -327,6 +327,12 @@ struct tags {
             static const std::string generate_accept;
 
             /**
+             * @brief If set to true, the accept method will be pure
+             * virtual.
+             */
+            static const std::string accept_is_pure_virtual;
+
+            /**
              * @brief If set to true, external swap function will be
              * generated.
              */
