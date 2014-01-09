@@ -8,6 +8,37 @@
 
 Stories that we intend to look at, at some point.
 
+*** Investigate support for automatic diagram updates                 :story:
+
+For classes that are manually generated, it would be really nice if we
+could update the properties of the class in the diagram from the
+source code. This would work as follows:
+
+- user creates a class =x= and marks it as non-generatable; executes
+  dogen.
+- dogen creates the initial file and adds as much boilerplate as
+  possible. For instance if the user manually added properties or
+  operations to the class, dogen generates skeletons for these.
+- once the file exists, dogen will no longer touch it (see also the
+  merging code generation story, for a different take on this).
+- the user runs a second tool (=diup=? the Diagram Updator) which uses
+  clang internally; it reads the diagram and looks for all of the
+  non-generatable classes; for each of these, it updates the dia class
+  with the properties found in the source file. Everything else is
+  left untouched.
+
+This feature would be extremely powerful when in presence of many
+other features such as mocking, remote method invocation, etc - the
+user would have no effort at all in generating the
+code. Implementation-wise we'd have to:
+
+- create an XML writer;
+- add write support for the dia model and ensure we generate valid dia
+  models;
+- integrate clang libraries with dogen;
+- create =diup= - or perhaps we should just have an "update diagram"
+  mode in dogen?
+
 *** Investigate the possibility of creating a mock facet              :story:
 
 This is straight out of left-field, but may actually be a good
