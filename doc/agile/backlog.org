@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add a utility that converts a dia model into JSON                 :story:
+
+It would be great if one could take a dia model and convert it into a
+JSON representation. This would allow users to take models that are
+not particularly useful in UML and convert them into JSON.
+
 *** Investigate support for automatic diagram updates                 :story:
 
 For classes that are manually generated, it would be really nice if we
