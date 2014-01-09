@@ -705,7 +705,7 @@ internal_swap(const sml::object& o) const {
     helper_->stream() << "void swap(" << sn << "& other) noexcept;"
                      << std::endl;
 
-    if (legacy_mode_)
+    if (!legacy_mode_)
         helper_->utility().managed_blank_line();
 }
 
@@ -718,7 +718,7 @@ internal_assignment(const sml::object& o) const {
 
     const auto sn(o.name().simple_name());
 
-    if (legacy_mode_)
+    if (!legacy_mode_)
         helper_->utility().public_access_specifier();
 
     helper_->stream() << sn << "& operator=(" << sn << " other);" << std::endl;
