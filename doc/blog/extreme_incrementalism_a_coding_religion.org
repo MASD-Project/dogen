@@ -1,60 +1,104 @@
 #+title: Nerd Food: Extreme Incrementalism: A Coding Religion
+#+options: date:nil toc:nil author:nil num:nil title:nil
 
 A lot of interesting lessons have been learned during the development
-of Dogen; however, one in particular stands out. I even gave it a
-name: /Extreme Incrementalism/ or EI for short. As you can see, the
-name fits well with the spirit of "overreaching naming conventions",
-typically used for development methodologies.
+of Dogen and I'm rather afraid many more are still in store. As it is
+typical with the agile process, I'm constantly reviewing what went
+right and what went wrong. I thought I'd put pen to paper with some of
+these, on the vain hope of them being of general interest.
 
-But I digress. So what is EI? Well, first a bit of context. When
-developing Dogen, I had two conflicting requirements: very little
-development resources and very "ambitious" ideas that required lots of
-development time. The development resource was, well, just me. With a
-family and a full time job there isn't a lot of spare cycles left. In
-fact, after some analysis I realised that whilst there is was a lot of
-"dead-time" in my average week, it was mostly "low-quality" time: lots
-of discontinued segments of varying and unpredictable lengths: ten
-minutes here, twenty minutes there, the odd hour. Even commuting
-wasn't entirely helpful due to having to change trains. Added together
-in a naive way it seemed like there was a lot of time, but as every
-programmer knows, six blocks of ten minutes do not equate to one solid
-hour, two solid hours are worth several times the one hour and so on
-up to some upper limit that varies from programmer to programmer. Its
-a very strange arithmetic, but it makes sense to us all somehow.
+One of the major wins in terms of development process was to think
+incrementally. Of course, agile already gives you a mental framework
+for that and we had a perfectly functioning agile process during our
+start-up days - the time of the inception of Dogen. However, with the
+tearing down of the start-up and the return to gainful employment,
+agile soon revealed itself to be far too coarse grained.
 
-Nevertheless, one has to play the game with the dealt cards, so I
-flipped the problem the other way around: what kind of development
-environment would be required such that one can be productive under
-such conditions? The answer was multi-part.
+When I decided to continue developing Dogen on my spare time, I had
+two conflicting requirements: very little development resources and
+very "ambitious" ideas that required lots of development time. The
+development resource was, well, just me. With a family and a full time
+job there isn't a lot of spare cycles left. In fact, after some
+analysis I realised that whilst there is was a lot of "dead-time" in
+the average week, it was mostly "low-quality grade time", with lots of
+discontinued segments of varying and unpredictable lengths: ten
+minutes here, twenty minutes there, the odd hour. Summed together in a
+naive way it seemed like a lot, but - as every programmer knows - six
+blocks of ten minutes do not equate to one solid hour.
+
+Nevertheless, one has to play the game with the cards that were dealt.
+Soon I realised that the correct question to ask was: "what kind of
+development environment would be required such that one can be
+productive given these conditions?"
+
+As it turns out, the answer is multi-part - just like MIME.
 
 * DVCS is at the core
 
-One never quite knows where one will be coding from, and whether
-internet access is available or not, so its important to have a
-self-contained environment. After all, when you have ten minutes to
-code, the last thing you need is to waste precious time faffing with
-dodgy 3G connections. This is were Distributed Version Control (DVCS)
-comes in to save the day: every repository contains history,
-branching, etc - all you need to code. This was my baseline use case
-for DVCS, but in the end I found out many, many more advantages to it,
-such as the collaborative flows. Since most of it is covered
-elsewhere, I won't bore you with it.
+We had already started to use git during the start-up days, and it had
+proved to be a major win at the time. After all, one never quite knows
+where one will be coding from, and whether internet access is
+available or not, so its important to have a self-contained
+environment. In the end we found out it brought _many_ more
+advantages, such as collaborative flows, great managed web interfaces
+([[http://www.github.com][GitHub]] and, to some extent, [[http://www.bitbucket.com][BitBucket]]), raw speed on low-powered
+machines and so on. Since most of it is covered elsewhere, I won't
+bore you with it.
 
-In addition to the traditional use of version control, I decided to
-put *everything* related to the project in DVCS. By that I mean that
-the documentation, bug reports, agile process - basically
-/everything/ - is in the same place, and that place is git. In the
-beginning I thought losing the GitHub infrastructure such as Wiki and
-Issues would really painful, but having everything in one versioned
-controlled place proved to be a major win over time:
+However, one decision that turned out to be a major win, wasn't very
+obvious at the time. We decided to put *everything* related to the
+project in DVCS. By that I mean we placed documentation, bug reports,
+agile process - basically /everything/ to do with the project - in the
+same place; in git. In the beginning it seemed a bit silly not to use
+the GitHub infrastructure such as Wiki and Issues. On hindsight,
+having everything in one versioned controlled place proved to be a
+major win:
 
-- searching is never further than a couple of greps away;
+- searching is never further than a couple of greps away, and its not
+  sensitive to connectivity;
 - updates by other people come in as commits and can be easily
   reviewed as part of the normal push/pull process;
-- changes can be diffed, etc.
+- changes can be diffed;
+- history can be checked using the familiar version control interface,
+  which is available wherever you go.
 
-I'll cover the tools used to maintain these documents on the next
-section.
+This has proved to be a boon, given the time constraints.
 
-The second and very important lesson related to version control was
-commit early and commit often.
+The second and very important lesson learned was to commit early and
+commit often. Its rather obvious in hindsight, really. After all, if
+you have very small blocks of time to do work, you want to make sure
+you don't break anything; last thing you need is to spend a week
+debugging a tricky problem, with no idea of where you're going or how
+far you still have to travel. So its important to make your commits
+/very small/ and /very focused/ such that a bisection would almost
+immediately reveal a problem - or at least provide you with an obvious
+rollback strategy. This has proved itself to be invaluable, far too
+many times to count. The gist of this approach it is to split changes
+in an almost OCD sort of way, to the point that anyone can look at the
+commit comment and the commit diff and make a judgement as to whether
+the change was correct or not. To be fair, its not quite always that
+straightforward, but that has been the overall aim.
+
+* Continuously Integrated
+
+The proof is in the pudding, as they say, and with code CI ends up
+being the proof. As we found out, its not a very reliable proof, but
+nevertheless its the best proof there is. One of the major wins from
+the start up days was to setup CI and to give it as wide a coverage as
+possible given the resource constraints. Many a problem was spotted
+this way and the code has benefited hugely from this.
+
+We also tried to package the code into installable packages, and to
+test those packages best we could. The packaging idea was a good one -
+after all, most users will probably rely on those - but providing
+packages turned out to be harder than first thought. This is because
+GitHub decommissioned their downloads section.
+
+
+
+
+
+I even gave it a name: /Extreme Incrementalism/ or EI for
+short. As you can see, the name fits well with the spirit of
+"overreaching naming conventions", typically used for development
+methodologies. Opportunistic coding.
