@@ -8,6 +8,19 @@
 
 Stories that we intend to look at, at some point.
 
+*** Investigate the integration of =boost::log= with throw exception  :story:
+
+At present we write a lot of code like this:
+
+: BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+: BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
+:     boost::lexical_cast<std::string>(qn)));
+
+This is to ensure we log the fact that an exception occurred to make
+debugging problems easier. However, it leads to a lot of duplicated
+code. We need to figure out a way of simplifying this, most likely
+through a macro.
+
 *** Investigate integration of =boost::log= with =boost::test=        :story:
 
 At present whenever there is a test failure, we get a compiler-style
