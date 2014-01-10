@@ -8,6 +8,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Investigate integration of =boost::log= with =boost::test=        :story:
+
+At present whenever there is a test failure, we get a compiler-style
+error in the console, which is great for emacs integration - its easy
+to go to the source code that generated the failure. However, we do
+not write it to the log file of the test. Its very difficult to
+understand the log file without the context of the =boost::test=
+failures. Due to this we end up manually logging before doing boost
+test assertions - a lot of duplicated effort. What would be ideal is
+if =boost::test= logged to _both_ the console and to our log
+file. There is a file output for boost log, but its not configurable
+enough to accept a =boost::log= stream. We should send an email to
+mailing list asking for help.
+
 *** Split research work from readme into its own document             :story:
 
 Our landing page in GitHub is becoming a bit too big. We should look
