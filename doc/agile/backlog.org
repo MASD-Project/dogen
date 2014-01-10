@@ -8,7 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
-*** Crazy ideas for facets                                            :story:
+*** Feature models should always be tested by engine                  :story:
+
+We recently implemented features into dogen; these work off of CMake
+detection, where by if a library is not detected, all tests associated
+with it are not built and executed. However, we should still try to
+codegen these models to make sure that a change we did elsewhere did
+not introduce bugs in features we're not interested in. We need to
+check that engine has tests for both EOS and ODB that get executed
+regardless of these features being on or off.
+
+*** Long term ideas for facets                                        :story:
 
 We keep on having random idea for facets, most of them which are blue
 skies. This story aggregates them to avoid having lots of entries in
