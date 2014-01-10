@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Split research work from readme into its own document             :story:
+
+Our landing page in GitHub is becoming a bit too big. We should look
+into the content to make sure we only have essential information there
+for new users. For the rest we should move the content into doc and
+use HTTP links. A quick win is to move Related Work out of the readme.
+
 *** Feature models should always be tested by engine                  :story:
 
 We recently implemented features into dogen; these work off of CMake
