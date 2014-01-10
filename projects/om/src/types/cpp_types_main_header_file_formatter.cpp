@@ -493,11 +493,14 @@ friends(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
     const std::string& owner_name, const sml::property& p) const {
     const auto doc(p.documentation());
-    if (!doc.empty())
+    if (!doc.empty()) {
         doxygen_next_.format(helper_->stream(), doc);
 
-    if (!p.is_immutable())
-        doxygen_next_.format_doxygen_start_block(helper_->stream(), doc);
+        if (!p.is_immutable()) {
+            doxygen_next_.format_doxygen_start_block(helper_->stream(), doc);
+            helper_->stream() << std::endl;
+        }
+    }
 
     sml::meta_data_reader reader(p.meta_data());
     using types = sml::tags::cpp::types;
@@ -518,19 +521,24 @@ void cpp_types_main_header_file_formatter::simple_type_getter_and_setter(
         helper_->stream() << " v);" << std::endl;
     }
 
-    if (!p.is_immutable())
+    if (!doc.empty() && !p.is_immutable()) {
         doxygen_next_.format_doxygen_end_block(helper_->stream(), doc);
+        helper_->stream() << std::endl;
+    }
 }
 
 void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
     const std::string& owner_name, const sml::property& p) const {
     const auto doc(p.documentation());
 
-    if (!doc.empty())
+    if (!doc.empty()) {
         doxygen_next_.format(helper_->stream(), doc);
 
-    if (!p.is_immutable())
-        doxygen_next_.format_doxygen_start_block(helper_->stream(), doc);
+        if (!p.is_immutable()) {
+            doxygen_next_.format_doxygen_start_block(helper_->stream(), doc);
+            helper_->stream() << std::endl;
+        }
+    }
 
     // const getter
     sml::meta_data_reader reader(p.meta_data());
@@ -568,8 +576,10 @@ void cpp_types_main_header_file_formatter::compound_type_getter_and_setter(
         helper_->stream() << " v);" << std::endl;
     }
 
-    if (!p.is_immutable())
+    if (!doc.empty() && !p.is_immutable()) {
         doxygen_next_.format_doxygen_end_block(helper_->stream(), doc);
+        helper_->stream() << std::endl;
+    }
 }
 
 void cpp_types_main_header_file_formatter::
@@ -728,15 +738,15 @@ internal_assignment(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 visitor_method(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (!reader.is_true(sml::tags::cpp::types::generate_accept))
+    using types = sml::tags::cpp::types;
+    if (!reader.is_true(types::generate_accept))
         return;
 
     helper_->utility().public_access_specifier();
     const auto sn(o.name().simple_name());
-    using types = sml::tags::cpp::types;
     const auto opn(reader.get(types::qualified_original_parent_name));
 
-    if (reader.is_true(sml::tags::cpp::types::accept_is_pure_virtual)) {
+    if (reader.is_true(types::accept_is_pure_virtual)) {
         helper_->stream() << "virtual void accept(const " << sn
                          << "_visitor& v) const = 0;" << std::endl;
         helper_->stream() << "virtual void accept("
@@ -792,8 +802,8 @@ visitor_method(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 external_equality(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (!reader.is_true(sml::tags::cpp::types::generate_equality) ||
-        !o.is_parent())
+    using types = sml::tags::cpp::types;
+    if (!reader.is_true(types::generate_equality) || !o.is_parent())
         return;
 
     const auto nl(padding_types::new_line);
@@ -812,8 +822,13 @@ external_equality(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 external_swap(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (reader.is_false(sml::tags::cpp::types::generate_external_swap))
+    using types = sml::tags::cpp::types;
+    if (!reader.is_true(types::generate_external_swap)) {
+        if (legacy_mode_)
+            helper_->utility().blank_line(2);
+
         return;
+    }
 
     {
         const auto std_ns(std::list<std::string> { "std" });
@@ -825,7 +840,7 @@ external_swap(const sml::object& o) const {
                          << "inline void swap(" << std::endl;
         {
             positive_indenter_scope s(helper_->stream());
-            const auto n(reader.get(sml::tags::cpp::types::qualified_name));
+            const auto n(reader.get(types::qualified_name));
             helper_->stream() << n << "& lhs," << std::endl
                              << n << "& rhs) ";
 
@@ -835,6 +850,7 @@ external_swap(const sml::object& o) const {
         helper_->utility().close_scope(nl);
         helper_->utility().blank_line();
     }
+
     helper_->utility().blank_line();
     helper_->utility().managed_blank_line();
 }
@@ -842,7 +858,8 @@ external_swap(const sml::object& o) const {
 void cpp_types_main_header_file_formatter::
 external_inserter(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
-    if (!reader.is_true(sml::tags::cpp::types::generate_external_inserter))
+    using types = sml::tags::cpp::types;
+    if (!reader.is_true(types::generate_external_inserter))
         return;
 
     helper_->stream() << "std::ostream& operator<<(std::ostream& s, "
@@ -855,15 +872,14 @@ void cpp_types_main_header_file_formatter::
 destructor_implementation(const sml::object& o) const {
     sml::meta_data_reader reader(o.meta_data());
     using types = sml::tags::cpp::types;
-    if (!reader.is_true(types::generate_explicit_destructor))
+    if (!reader.is_true(types::generate_explicit_destructor) ||
+        !reader.is_true(types::destructor_is_pure_virtual))
         return;
 
-    if (reader.is_true(sml::tags::cpp::types::destructor_is_pure_virtual)) {
-        const auto sn(o.name().simple_name());
-        helper_->stream() << "inline " << sn << "::~"<< sn << "() noexcept { }"
-                         << std::endl;
-        helper_->utility().managed_blank_line();
-    }
+    const auto sn(o.name().simple_name());
+    helper_->stream() << "inline " << sn << "::~"<< sn << "() noexcept { }"
+                     << std::endl;
+    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::

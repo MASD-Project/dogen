@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-09 Thu 23:11]
+Clock summary at [2014-01-10 Fri 00:05]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *43:05* |       |       |
+| *Total time*                                                            | *43:59* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 43:05 |       |
+| Development Stories Implemented                                         |         | 43:59 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  1:48 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -28,7 +28,7 @@ Clock summary at [2014-01-09 Thu 23:11]
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
 | COMPLETED Design a cleaner meta-data API                                |         |       |  0:49 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       | 11:53 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       | 12:47 |
 | IMPLEMENTATION Create a blog post on dogen's development methodology    |         |       |  0:52 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
@@ -561,6 +561,7 @@ when swap is enabled. This will be fixed in OM and rebaselined.
 We need to respect the destructor generation set in C++ formatters.
 
 ***** IMPLEMENTATION Cope with multiple object types in formatter      :task:
+      CLOCK: [2014-01-09 Thu 23:11]--[2014-01-10 Fri 00:05] =>  0:54
       CLOCK: [2014-01-09 Thu 22:56]--[2014-01-09 Thu 23:11] =>  0:15
       CLOCK: [2014-01-09 Thu 22:28]--[2014-01-09 Thu 22:56] =>  0:28
       CLOCK: [2014-01-09 Thu 18:08]--[2014-01-09 Thu 18:50] =>  0:42
