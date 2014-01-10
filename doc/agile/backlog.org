@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for CPPCheck                                          :story:
+
+Seems like CPPCheck has a different take on dynamic analysis when
+compared to Valgrind. We should look into how hard it is to integrate
+it with CTest.
+
+Links:
+
+- [[http://cmake.3232098.n2.nabble.com/Static-code-analysis-with-CDash-td6079787.html][CMake and CPPCheck]]
+
 *** Code generation as a service                                      :story:
 
 One way of testing new functionality added to dogen is to try to
