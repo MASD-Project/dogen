@@ -8,6 +8,52 @@
 
 Stories that we intend to look at, at some point.
 
+*** Code generation as a service                                      :story:
+
+One way of testing new functionality added to dogen is to try to
+exercise it as part of the code generation itself. We have been doing
+this with the bootstrapping, but there were limitations on
+functionality such as ODB and EOS where we couldn't see any obvious
+use for it in code generation. However, there is one way of exercising
+this and a lot more of these sort of features: to create a Web-based code
+generation service, along the lines of Web Sequence Diagrams or
+YUML. We could create a simple bootstrap based website that forwards
+requests to a set of end-points, all done within the dogen project.
+
+We'd create a casablanca REST layer with a simple interface, with
+functionality such:
+
+- create workspace: returns a UUID and creates some kind of internal
+  storage area.
+- upload target: uploads a Dia or JSON model to be used as the code
+  generation target.
+- upload reference: uploads a Dia or JSON model to be used as a
+  reference.
+- set options: which facets to generate, which languages, etc.
+- codegen: runs the code generation and returns a tarball with
+  generated files and the log file; or returns a set of code
+  generation errors.
+- we could integrate with google drive to load the files from there.
+
+As a further layer we could create an ASIO service that is queried by
+the casablanca REST. This would exercise all of the messaging
+infrastructure. Internally it would create the engine and run code
+generation. It could also exercise ODB by writing session information
+to a database and keeping track of the historical usage of the
+service, log files etc.
+
+This stack would allow us to continuously exercise pretty much every
+feature we need out of dogen. As an added bonus, when we get to the UI
+we could also exercise that (Wt, GTK).
+
+Finally, this would also allow us to play with Docker, and place each
+service in their own container, create load balancing etc.
+
+Links:
+
+- [[http://codeplanet.io/principles-good-restful-api-design/][REST API Design]]
+- [[http://www.drdobbs.com/tools/json-and-the-microsoft-c-rest-sdk/240164821][Using Microsoft REST SDK]]
+
 *** Investigate the integration of =boost::log= with throw exception  :story:
 
 At present we write a lot of code like this:
@@ -103,10 +149,10 @@ code. Implementation-wise we'd have to:
 *** Investigate the possibility of creating a mock facet              :story:
 
 This is straight out of left-field, but may actually be a good
-idea. One annoying thing with mocking frameworks such as =turtle= is
+idea. One annoying thing with mocking frameworks such as [[http://turtle.sourceforge.net/index.html][turtle]] is
 the amount of macros. However, =dogen= already has all the required
 information needed to create an expectation based mock - the
-meta-model. We could mimic the =turtle= API with a mock facet that is
+meta-model. We could mimic the turtle API with a mock facet that is
 made up of real C++ objects. When a class is marked as an interface,
 we could automatically generate its mock in a mock facet.
 
@@ -129,6 +175,8 @@ And so on, for all member variables. The generators would have some
 default behaviour, but it could be overridden at any point by the
 user. With this, test data generator would be a great starting point
 as a way of generating random data to test systems.
+
+See also [[http://www.json-generator.com/][JSON generator]].
 
 *** Indent stream can be made a bit less inefficient                  :story:
 
