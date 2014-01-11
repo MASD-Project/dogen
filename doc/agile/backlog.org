@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for Address Sanitizer                                 :story:
+
+This seems like another interest dynamic analysis tool:
+
+[[https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction][Address Sanitizer]]
+
 *** Add support for CPPCheck                                          :story:
 
 Seems like CPPCheck has a different take on dynamic analysis when
