@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Fix Ninja build                                                   :story:
+
+When compiling with [[http://martine.github.io/ninja/][Ninja]], we get a strange compilation error in
+header validation. This is because there are too many object files
+in the archiver command line. We need to look at the CMake source to
+try to understand why this happens, as it appears someone has already
+did a fix for large command lines.
+
+For notes on how to use Ninja from CMake see [[http://www.kitware.com/blog/home/post/434][this]] article.
+
 *** Add support for Address Sanitizer                                 :story:
 
 This seems like another interest dynamic analysis tool:
