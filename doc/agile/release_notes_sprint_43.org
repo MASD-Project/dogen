@@ -1,0 +1,62 @@
+#+title: Release Notes for Sprint 43
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 43.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-01-12 Sun 18:54]
+
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:20* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:20 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:20 |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-12 Sun 18:23]--[2014-01-12 Sun 18:43] =>  0:20
+
+Updates to release notes and backlog.
+
+*** Create a blog post on dogen's development methodology             :story:
+
+We should do a write up of how we develop dogen.
+
+*** Rename =om= to formatters                                         :story:
+
+This model will contain all the language neutral formatting code.
+
+*** Move all C++ specific code from =formatters= into =cpp_formatters= :story:
+
+Make =cpp_formatters= depend on =formatters= and move across C++ code:
+
+- boilerplate formatter
+- include formatter
+- header guard formatter
+
+*** Make use of the indenting stream in =cpp_formatters=              :story:
+
+Replace indenter with the new indenting stream.
+
+*** Make use of the boilerplate formatter in =cpp_formatters=         :story:
+
+Update all file formatters to use the boilerplate formatter.
+
+Consider creating a simple workflow in =formatters= that gets used by
+the cpp_formatters workflow (or passed in). The job of this workflow
+is to setup infrastructure common to all formatters such as loading
+licences, modelines, etc.
+
+*** Update =cpp= model with properties from tags                      :story:
+
+Read properties from the meta-data and represent them inside of the
+=cpp= model.
+
+** Deprecated Development Stories
