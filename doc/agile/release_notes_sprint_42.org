@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 42.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-10 Fri 19:26]
+Clock summary at [2014-01-12 Sun 12:48]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *45:37* |       |       |
+| *Total time*                                                            | *46:55* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                         |         | 45:37 |       |
+| Development Stories Implemented                                         |         | 46:55 |       |
 | IMPLEMENTATION Release notes and backlog grooming                       |         |       |  2:11 |
 | COMPLETED Investigate availability of boost 1.55 for debian             |         |       |  0:18 |
 | COMPLETED Add more valgrind suppressions                                |         |       |  0:06 |
@@ -28,7 +28,7 @@ Clock summary at [2014-01-10 Fri 19:26]
 | COMPLETED Solve the new lines issue in formatters                       |         |       | 13:42 |
 | COMPLETED Add include file support to main type formatter               |         |       |  1:13 |
 | COMPLETED Design a cleaner meta-data API                                |         |       |  0:49 |
-| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       | 13:13 |
+| IMPLEMENTATION Update all tests to use =om= formatter                   |         |       | 14:31 |
 | IMPLEMENTATION Create a blog post on dogen's development methodology    |         |       |  1:41 |
 | Includer generation should be done from meta-data                       |         |       |  0:18 |
 #+end:
@@ -556,13 +556,14 @@ external, and only add includes if external swap is required.
 Also, it seems we are always including =algorithm= but we only need it
 when swap is enabled. This will be fixed in OM and rebaselined.
 
-***** COMPLETED Generate pure virtual destructors                      :task:
+***** COMPLETED Generate pure virtual destructors
       CLOSED: [2014-01-08 Wed 19:23]
       CLOCK: [2014-01-08 Wed 18:17]--[2014-01-08 Wed 18:45] =>  0:28
 
 We need to respect the destructor generation set in C++ formatters.
 
-***** IMPLEMENTATION Cope with multiple object types in formatter      :task:
+***** IMPLEMENTATION Cope with multiple object types in formatter
+      CLOCK: [2014-01-12 Sun 11:30]--[2014-01-12 Sun 12:48] =>  1:18
       CLOCK: [2014-01-10 Fri 08:07]--[2014-01-10 Fri 08:20] =>  0:28
       CLOCK: [2014-01-10 Fri 07:08]--[2014-01-10 Fri 07:21] =>  0:13
       CLOCK: [2014-01-09 Thu 23:11]--[2014-01-10 Fri 00:05] =>  0:54

@@ -277,10 +277,14 @@ build_file(const boost::property_tree::ptree& meta_data) const {
     ensure_non_null_helper();
     file r;
     sml::meta_data_reader reader(meta_data);
-    r.contents(helper_->contents());
+    r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
+
+    if (!legacy_mode_ || r.overwrite())
+        r.contents(helper_->contents());
+
     r.relative_path(helper_->relative_file_path());
     r.absolute_path(include_directory_ / helper_->relative_file_path());
-    r.overwrite(reader.is_true(sml::tags::cpp::types::header_file::overwrite));
+
     return r;
 }
 
@@ -743,60 +747,63 @@ visitor_method(const sml::object& o) const {
         return;
 
     helper_->utility().public_access_specifier();
-    const auto sn(o.name().simple_name());
-    const auto opn(reader.get(types::qualified_original_parent_name));
-
-    if (reader.is_true(types::accept_is_pure_virtual)) {
-        helper_->stream() << "virtual void accept(const " << sn
-                         << "_visitor& v) const = 0;" << std::endl;
-        helper_->stream() << "virtual void accept("
-                         << sn << "_visitor& v) const = 0;" << std::endl;
-        helper_->stream() << "virtual void accept(const " << sn
-                         << "_visitor& v) = 0;" << std::endl;
-        helper_->stream() << "virtual void accept("
-                         << sn << "_visitor& v) = 0;" << std::endl;
-        helper_->utility().blank_line();
+    const auto i(o.relationships().find(sml::relationship_types::visited_by));
+    if (i == o.relationships().end())
         return;
-    }
 
-    helper_->utility().public_access_specifier();
-    helper_->stream() << "virtual void accept(const "
-                     << opn << "_visitor& v) const override {"
-                     << std::endl;
+    for (const auto v : i->second) {
+        const auto sn(v.simple_name());
 
-    {
-        positive_indenter_scope s(helper_->stream());
-        helper_->stream() << "v.visit(*this);" << std::endl;
-    }
-    helper_->stream() << "}" << std::endl;
-    helper_->utility().blank_line();
-    helper_->stream() << "virtual void accept("  << opn
-                     << "_visitor& v) const override {" << std::endl;
+        if (reader.is_true(types::accept_is_pure_virtual)) {
+            helper_->stream() << "virtual void accept(const " << sn
+                             << "& v) const = 0;" << std::endl;
+            helper_->stream() << "virtual void accept("
+                             << sn << "& v) const = 0;" << std::endl;
+            helper_->stream() << "virtual void accept(const " << sn
+                             << "& v) = 0;" << std::endl;
+            helper_->stream() << "virtual void accept("
+                             << sn << "& v) = 0;" << std::endl;
+            helper_->utility().blank_line();
+            continue;
+        }
 
-    {
-        positive_indenter_scope s(helper_->stream());
-        helper_->stream() << "v.visit(*this);" << std::endl;
-    }
-    helper_->stream() << "}" << std::endl;
-    helper_->utility().blank_line();
-    helper_->stream() << "virtual void accept(const "
-                     << opn << "_visitor& v) override {" << std::endl;
+        helper_->stream() << "virtual void accept(const " << sn
+                         << "& v) const override {" << std::endl;
 
-    {
-        positive_indenter_scope s(helper_->stream());
-        helper_->stream() << "v.visit(*this);" << std::endl;
-    }
-    helper_->stream() << "}" << std::endl;
-    helper_->utility().blank_line();
-    helper_->stream() << "virtual void accept(" << opn
-                     << "_visitor& v) override {" << std::endl;
+        {
+            positive_indenter_scope s(helper_->stream());
+            helper_->stream() << "v.visit(*this);" << std::endl;
+        }
+        helper_->stream() << "}" << std::endl;
+        helper_->utility().blank_line();
+        helper_->stream() << "virtual void accept("  << sn
+                         << "& v) const override {" << std::endl;
 
-    {
-        positive_indenter_scope s(helper_->stream());
-        helper_->stream() << "v.visit(*this);" << std::endl;
+        {
+            positive_indenter_scope s(helper_->stream());
+            helper_->stream() << "v.visit(*this);" << std::endl;
+        }
+        helper_->stream() << "}" << std::endl;
+        helper_->utility().blank_line();
+        helper_->stream() << "virtual void accept(const " << sn
+                         << "& v) override {" << std::endl;
+
+        {
+            positive_indenter_scope s(helper_->stream());
+            helper_->stream() << "v.visit(*this);" << std::endl;
+        }
+        helper_->stream() << "}" << std::endl;
+
+        helper_->utility().blank_line();
+        helper_->stream() << "virtual void accept(" << sn
+                         << "& v) override {" << std::endl;
+        {
+            positive_indenter_scope s(helper_->stream());
+            helper_->stream() << "v.visit(*this);" << std::endl;
+        }
+        helper_->stream() << "}" << std::endl;
+        helper_->utility().managed_blank_line();
     }
-    helper_->stream() << "}" << std::endl;
-    helper_->utility().managed_blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
@@ -816,7 +823,11 @@ external_equality(const sml::object& o) const {
         helper_->stream() << "return lhs.equals(rhs);" << std::endl;
     }
     helper_->utility().close_scope(nl);
-    helper_->utility().managed_blank_line();
+
+    if (!legacy_mode_)
+        helper_->utility().managed_blank_line();
+    else
+        helper_->utility().blank_line();
 }
 
 void cpp_types_main_header_file_formatter::
