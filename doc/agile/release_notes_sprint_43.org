@@ -31,15 +31,16 @@ that proved a few important points:
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-13 Mon 22:26]
+Clock summary at [2014-01-13 Mon 22:44]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *2:58* |      |      |
+| *Total time*                                                                 | *3:17* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 2:58 |      |
+| Development Stories Implemented                                              |        | 3:17 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:42 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
+| COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
 | IMPLEMENTATION Rename =om= to formatters and remove unnecessary classes      |        |      | 1:06 |
 #+end:
 
@@ -60,6 +61,15 @@ Make =cpp_formatters= depend on =formatters= and move across C++ code:
 - include formatter
 - header guard formatter
 
+*** COMPLETED Remove the =legacy_mode= flags and =om= wiring          :story:
+    CLOSED: [2014-01-13 Mon 22:44]
+    CLOCK: [2014-01-13 Mon 22:25]--[2014-01-13 Mon 22:44] =>  0:19
+
+These were added to put =om= in compatibility mode. They will not be
+required because we will introduce =om= features one at a time. This
+does mean we need to undo all of the =om= wiring too, and rebaseline
+all of the tests that had been rebaselined to work with =om=.
+
 *** Create a blog post on dogen's development methodology             :story:
 
 We should do a write up of how we develop dogen.
@@ -79,12 +89,6 @@ code. Get it to compile and all tests to pass.
 **** Delete the =om= model
 
 Remove the model, the CMake infrastructure, etc.
-
-*** Remove the =legacy_mode= flags and =om= wiring                    :story:
-
-These were added to put =om= in compatibility mode. They will not be
-required because we will introduce =om= features one at a
-time. Rebaselining will be easy if required.
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 

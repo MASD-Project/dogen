@@ -63,8 +63,6 @@ public:
 
 public:
     void swap(class_b& other) noexcept;
-
-public:
     class_b& operator=(class_b other);
 
 private:

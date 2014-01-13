@@ -45,8 +45,7 @@ public:
     typedef std::vector<backend::ptr> result_type;
 
 public:
-    factory(const sml::model& model, const config::settings& settings,
-        const bool enable_om = false, const bool legacy_mode = false);
+    factory(const sml::model& model, const config::settings& settings);
 
 private:
     void log_cpp_backend_disabled() const;
@@ -57,8 +56,6 @@ public:
 private:
     const config::settings& settings_;
     const sml::model& model_;
-    const bool enable_om_;
-    const bool legacy_mode_;
 };
 
 } } }

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <algorithm>
 #include "dogen/trivial_association/serialization/class_c_fwd_ser.hpp"
 
 namespace dogen {
@@ -50,6 +51,7 @@ public:
     bool operator!=(const class_c& rhs) const {
         return !this->operator==(rhs);
     }
+
 };
 
 } }

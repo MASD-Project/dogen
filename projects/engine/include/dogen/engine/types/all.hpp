@@ -21,7 +21,6 @@
 #include "dogen/engine/types/backends/backend.hpp"
 #include "dogen/engine/types/backends/cpp_backend.hpp"
 #include "dogen/engine/types/backends/factory.hpp"
-#include "dogen/engine/types/backends/om_backend.hpp"
 #include "dogen/engine/types/engine.hpp"
 #include "dogen/engine/types/generation_failure.hpp"
 #include "dogen/engine/types/housekeeper.hpp"

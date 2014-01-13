@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <algorithm>
 #include "dogen/class_without_attributes/serialization/package_1/class_1_fwd_ser.hpp"
 
 namespace dogen {
@@ -51,6 +52,7 @@ public:
     bool operator!=(const class_1& rhs) const {
         return !this->operator==(rhs);
     }
+
 };
 
 } } }

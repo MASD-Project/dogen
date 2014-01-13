@@ -20,7 +20,6 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/engine/types/backends/cpp_backend.hpp"
-#include "dogen/engine/types/backends/om_backend.hpp"
 #include "dogen/engine/types/backends/factory.hpp"
 
 static dogen::utility::log::logger
@@ -30,11 +29,8 @@ namespace dogen {
 namespace engine {
 namespace backends {
 
-factory::
-factory(const sml::model& model, const config::settings& settings,
-    const bool enable_om, const bool legacy_mode)
-    : settings_(settings), model_(model), enable_om_(enable_om),
-      legacy_mode_(legacy_mode) { }
+factory::factory(const sml::model& model, const config::settings& settings)
+    : settings_(settings), model_(model) { }
 
 void factory::log_cpp_backend_disabled() const {
     using namespace dogen::utility::log;
@@ -49,10 +45,6 @@ factory::result_type factory::create() const {
 
     result_type r;
     r.push_back(cpp_backend::create(model_, settings_.cpp()));
-
-    if (enable_om_)
-        r.push_back(om_backend::create(settings_, model_, legacy_mode_));
-
     return r;
 }
 
