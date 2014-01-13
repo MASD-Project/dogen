@@ -62,6 +62,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<property_info_generator>();
     roundtrip_type<registrar_info_generator>();
     roundtrip_type<visitor_info_generator>();
+    roundtrip_type<cpp_includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

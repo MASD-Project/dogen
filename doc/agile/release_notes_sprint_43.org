@@ -31,14 +31,16 @@ that proved a few important points:
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-13 Mon 07:24]
+Clock summary at [2014-01-13 Mon 22:26]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:34* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:34 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:34 |
+| Headline                                                                     | Time   |      |      |
+|------------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                                 | *2:58* |      |      |
+|------------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                              |        | 2:58 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:42 |
+| COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
+| IMPLEMENTATION Rename =om= to formatters and remove unnecessary classes      |        |      | 1:06 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -47,6 +49,16 @@ Clock summary at [2014-01-13 Mon 07:24]
     CLOCK: [2014-01-12 Sun 18:23]--[2014-01-12 Sun 18:43] =>  0:20
 
 Updates to release notes and backlog.
+
+*** COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= :story:
+    CLOSED: [2014-01-13 Mon 22:25]
+    CLOCK: [2014-01-13 Mon 21:15]--[2014-01-13 Mon 22:25] =>  1:10
+
+Make =cpp_formatters= depend on =formatters= and move across C++ code:
+
+- boilerplate formatter
+- include formatter
+- header guard formatter
 
 *** Create a blog post on dogen's development methodology             :story:
 
@@ -68,19 +80,11 @@ code. Get it to compile and all tests to pass.
 
 Remove the model, the CMake infrastructure, etc.
 
-*** Remove the =legacy_mode= flags                                    :story:
+*** Remove the =legacy_mode= flags and =om= wiring                    :story:
 
 These were added to put =om= in compatibility mode. They will not be
 required because we will introduce =om= features one at a
 time. Rebaselining will be easy if required.
-
-*** Move all C++ specific code from =formatters= into =cpp_formatters= :story:
-
-Make =cpp_formatters= depend on =formatters= and move across C++ code:
-
-- boilerplate formatter
-- include formatter
-- header guard formatter
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 
@@ -99,5 +103,10 @@ licences, modelines, etc.
 
 Read properties from the meta-data and represent them inside of the
 =cpp= model.
+
+*** Update comments in C++ model                                      :story:
+
+We have a very large blurb in this model that is rather old, and
+reflects a legacy understanding of the role of the C++ model.
 
 ** Deprecated Development Stories

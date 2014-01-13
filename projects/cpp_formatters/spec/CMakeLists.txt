@@ -27,15 +27,9 @@ set(binary_name "dogen_cpp_formatters_spec")
 set_target_properties(cpp_formatters_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(cpp_formatters_spec
-    cpp
     cpp_formatters
     utility
-    dia
-    sml
-    config
-    ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
-    ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
 set(cpp_formatters_spec_cmd ${stage_bin_dir}/${binary_name}

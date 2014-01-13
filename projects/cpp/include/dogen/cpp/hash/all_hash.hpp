@@ -24,6 +24,7 @@
 #include "dogen/cpp/hash/cmakelists_info_hash.hpp"
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/content_types_hash.hpp"
+#include "dogen/cpp/hash/cpp_includes_hash.hpp"
 #include "dogen/cpp/hash/entity_hash.hpp"
 #include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/enumerator_info_hash.hpp"

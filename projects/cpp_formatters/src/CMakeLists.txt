@@ -25,6 +25,7 @@ file(GLOB_RECURSE all_files RELATIVE
 add_library(cpp_formatters STATIC ${all_files})
 target_link_libraries(cpp_formatters
     cpp
+    formatters
     sml_to_cpp # FIXME: hack
     utility
     ${Boost_LIBRARIES})

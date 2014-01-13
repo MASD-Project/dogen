@@ -56,6 +56,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<property_info_generator>();
     test_equality<registrar_info_generator>();
     test_equality<visitor_info_generator>();
+    test_equality<cpp_includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

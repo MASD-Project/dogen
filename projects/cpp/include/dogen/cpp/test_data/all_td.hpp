@@ -24,6 +24,7 @@
 #include "dogen/cpp/test_data/cmakelists_info_td.hpp"
 #include "dogen/cpp/test_data/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/content_types_td.hpp"
+#include "dogen/cpp/test_data/cpp_includes_td.hpp"
 #include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/enumerator_info_td.hpp"
