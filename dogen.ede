@@ -51,6 +51,7 @@
    "/projects/cppim/include"
    "/projects/dia_to_sml/include"
    "/projects/eos_serialization/include"
+   "/projects/formatters/include"
    )
  :system-include-path
  '("/usr/local/pfh/include"

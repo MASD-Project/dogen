@@ -266,14 +266,14 @@ if(use_latest_driver)
 endif()
 add_dependencies(codegen codegen_${target})
 
-set(target om)
+set(target formatters)
 add_custom_target(codegen_${target}
-    COMMENT "Generating the Output Model" VERBATIM
+    COMMENT "Generating the Formatters Model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen # FIXME: hack
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen # FIXME: to be removed
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen # FIXME: to be removed
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
