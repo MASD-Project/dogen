@@ -272,8 +272,6 @@ add_custom_target(codegen_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen # FIXME: to be removed
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen # FIXME: to be removed
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io

@@ -28,21 +28,29 @@ that proved a few important points:
   been converted to the type system. The code in tagger will be moved
   to the =sml_to_cpp= model over time.
 
+We need to try to get all the benefits from =om= whilst maintaining
+the current C++ model infrastructure.
+
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-13 Mon 22:44]
+Clock summary at [2014-01-13 Mon 23:09]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *3:17* |      |      |
+| *Total time*                                                                 | *3:42* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 3:17 |      |
+| Development Stories Implemented                                              |        | 3:42 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:42 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
-| IMPLEMENTATION Rename =om= to formatters and remove unnecessary classes      |        |      | 1:06 |
+| COMPLETED Create the new =formatters= model and copy required code           |        |      | 1:06 |
+| COMPLETED Delete the =om= model                                              |        |      | 0:25 |
 #+end:
+
+*** Create a blog post on dogen's development methodology             :story:
+
+We should do a write up of how we develop dogen.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2014-01-13 Mon 07:54]--[2014-01-13 Mon 08:02] =>  0:08
@@ -70,23 +78,19 @@ required because we will introduce =om= features one at a time. This
 does mean we need to undo all of the =om= wiring too, and rebaseline
 all of the tests that had been rebaselined to work with =om=.
 
-*** Create a blog post on dogen's development methodology             :story:
-
-We should do a write up of how we develop dogen.
-
-*** IMPLEMENTATION Rename =om= to formatters and remove unnecessary classes :story:
-
-This model will contain all the language neutral formatting code.
-
-**** COMPLETED Create the new =formatters= model with only the required code :task:
-     CLOSED: [2014-01-13 Mon 18:23]
-     CLOCK: [2014-01-13 Mon 17:53]--[2014-01-13 Mon 18:22] =>  0:29
-     CLOCK: [2014-01-13 Mon 08:02]--[2014-01-13 Mon 08:39] =>  0:37
+*** COMPLETED Create the new =formatters= model and copy required code :story:
+    CLOSED: [2014-01-13 Mon 18:23]
+    CLOCK: [2014-01-13 Mon 17:53]--[2014-01-13 Mon 18:22] =>  0:29
+    CLOCK: [2014-01-13 Mon 08:02]--[2014-01-13 Mon 08:39] =>  0:37
 
 Copy =om= into a new model and remove all of the C++ specific
 code. Get it to compile and all tests to pass.
 
-**** Delete the =om= model
+This model will contain all the language neutral formatting code.
+
+*** COMPLETED Delete the =om= model
+    CLOSED: [2014-01-13 Mon 23:09]
+     CLOCK: [2014-01-13 Mon 22:44]--[2014-01-13 Mon 23:09] =>  0:25
 
 Remove the model, the CMake infrastructure, etc.
 
@@ -112,5 +116,11 @@ Read properties from the meta-data and represent them inside of the
 
 We have a very large blurb in this model that is rather old, and
 reflects a legacy understanding of the role of the C++ model.
+
+*** Add comments in =formatters= model                                :story:
+
+We haven't got any documentation at all in the new formatters
+morel. We need a small blurb about the language neutral formatting
+support the model is supposed to provide.
 
 ** Deprecated Development Stories

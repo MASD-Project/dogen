@@ -47,7 +47,6 @@
    "/projects/cpp/include"
    "/projects/cpp_formatters/include"
    "/projects/sml_to_cpp/include"
-   "/projects/om/include"
    "/projects/cppim/include"
    "/projects/dia_to_sml/include"
    "/projects/eos_serialization/include"
