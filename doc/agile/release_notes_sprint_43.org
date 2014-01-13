@@ -7,20 +7,42 @@
 
 This file contains all stories that were closed during sprint 43.
 
+The *Mission Statement* for this sprint is to integrate =om= with
+=cpp_formatters=. After much debating it was decided that the current
+structure is the best way forward. =om= was a proof-of-concept (POC)
+that proved a few important points:
+
+- it is possible to drive a formatter off of the meta-data. However,
+  we also concluded that the meta-data is very weakly typed and very
+  verbose. So we will use the meta-data to transport language specific
+  parameters all the way to the language specific models and then
+  transform them into the type system.
+- includes are better handled with the following split: a) all the
+  "object" specific includes are in the meta-data and can be derived
+  by querying the appropriate tags b) all the formatter specific
+  includes should be added by the formatter itself so that the
+  implementation that requires them is very close by.
+- we should have a language-agnostic model for formatters that
+  provides the basic formatting primitives.
+- Expansion of the meta-data is much better performed after it has
+  been converted to the type system. The code in tagger will be moved
+  to the =sml_to_cpp= model over time.
+
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-12 Sun 18:54]
+Clock summary at [2014-01-13 Mon 07:24]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:20* |      |      |
+| *Total time*                                      | *0:34* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:20 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:20 |
+| Development Stories Implemented                   |        | 0:34 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:34 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-13 Mon 07:09]--[2014-01-13 Mon 07:23] =>  0:14
     CLOCK: [2014-01-12 Sun 18:23]--[2014-01-12 Sun 18:43] =>  0:20
 
 Updates to release notes and backlog.
