@@ -34,18 +34,20 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-13 Mon 23:09]
+Clock summary at [2014-01-14 Tue 08:41]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *3:42* |      |      |
+| *Total time*                                                                 | *4:44* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 3:42 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:42 |
+| Development Stories Implemented                                              |        | 4:44 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:46 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
 | COMPLETED Create the new =formatters= model and copy required code           |        |      | 1:06 |
 | COMPLETED Delete the =om= model                                              |        |      | 0:25 |
+| COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |        |      | 0:43 |
+| IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
 #+end:
 
 *** Create a blog post on dogen's development methodology             :story:
@@ -53,6 +55,7 @@ Clock summary at [2014-01-13 Mon 23:09]
 We should do a write up of how we develop dogen.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-14 Tue 07:54]--[2014-01-14 Tue 07:58] =>  0:04
     CLOCK: [2014-01-13 Mon 07:54]--[2014-01-13 Mon 08:02] =>  0:08
     CLOCK: [2014-01-13 Mon 07:09]--[2014-01-13 Mon 07:23] =>  0:14
     CLOCK: [2014-01-12 Sun 18:23]--[2014-01-12 Sun 18:43] =>  0:20
@@ -90,9 +93,64 @@ This model will contain all the language neutral formatting code.
 
 *** COMPLETED Delete the =om= model
     CLOSED: [2014-01-13 Mon 23:09]
-     CLOCK: [2014-01-13 Mon 22:44]--[2014-01-13 Mon 23:09] =>  0:25
+    CLOCK: [2014-01-13 Mon 22:44]--[2014-01-13 Mon 23:09] =>  0:25
 
 Remove the model, the CMake infrastructure, etc.
+
+*** COMPLETED Design a transformation pipeline in =sml_to_cpp=        :story:
+    CLOSED: [2014-01-14 Tue 08:34]
+    CLOCK: [2014-01-14 Tue 07:58]--[2014-01-14 Tue 08:41] =>  0:43
+
+With the lessons we have learned with =om= we should be able to clean
+up the C++ models to a large degree. The biggest problem we have at
+present was the notion that transformation was a one-shot
+activity. This is the root cause of all crazy the helper
+infrastructure such as =content_types=, =content_descriptors=,
+etc. The truth is, transformation is a n-step process and the pipeline
+needs access to SML types (as well as other stuff) for the duration of
+the *whole* transformation.
+
+A few observations:
+
+- a =source_file= must contain all the information required to format
+  it.
+- there is a one-to-one mapping between =file_formatter= and
+  =source_file=. Thus there is a need to identify uniquely each source
+  file: =source_file_types=. Examples: =types_main_header=,
+  =includer=, =forward_declaration=, etc.
+- a source file is created out of transformation with the following
+  inputs: configuration, SML model, SML type, concept or module and
+  the corresponding concept at the C++ model level (say =class_info=,
+  etc). With all of these inputs, a process similar to tagging can now
+  take place inside the =source_file_transformer=.
+- =source_file= needs to own =formatters= properties such as
+  =annotation=.
+- we need entity transformers to be more focused:
+  =concept_transformer=, =type_transformer=, =module_transformer=,
+  etc. We need tests for these.
+- =workflow= orchestrates the transformation, plugging the
+  "individual" transformer's output into the
+  =source_file_transformer=.
+- a =source_file= will contain a visitable =entity=. The
+  =file_formatter= will visit the entity and collaborate with finer
+  grained formatters as required (e.g. a =types_class_header=
+  formatter, etc.). The main types header will be responsible for all
+  the header files for the following types: class, visitor, exception,
+  enumeration, etc. It will not be responsible for forward
+  declarations as that is a different type of file.
+
+*** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
+    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
+
+One way of solving the ninja problems may be to stop creating a static
+library for header validation. We did it simply because it was easier
+but there is no real reason for it. We may be able to save a bit on
+archiving, and as an added bonus, it may fix the issues we're having
+with ninja.
+
+Links:
+
+- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 
