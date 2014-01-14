@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<property_info_generator>();
     test_hashing<registrar_info_generator>();
     test_hashing<visitor_info_generator>();
-    test_hashing<cpp_includes_generator>();
+    test_hashing<includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -30,7 +30,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/annotation.hpp"
-#include "dogen/cpp/types/cpp_includes.hpp"
+#include "dogen/cpp/types/includes.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
@@ -111,14 +111,14 @@ private:
     /**
      * @brief Formats the preprocessor includes.
      */
-    void format_includes(std::ostream& s, const cpp::cpp_includes& i) const;
+    void format_includes(std::ostream& s, const cpp::includes& i) const;
 
 public:
     /**
      * @brief Formats the initial section of boilerplate.
      */
     void format_begin(std::ostream& s, const formatters::annotation& a,
-        const cpp::cpp_includes& i,
+        const cpp::includes& i,
         const boost::filesystem::path& relative_file_path) const;
 
     /**

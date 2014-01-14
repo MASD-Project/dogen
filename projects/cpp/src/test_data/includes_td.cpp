@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/cpp_includes_td.hpp"
+#include "dogen/cpp/test_data/includes_td.hpp"
 
 namespace {
 
@@ -43,29 +43,29 @@ std::list<boost::filesystem::path> create_std_list_boost_filesystem_path(unsigne
 namespace dogen {
 namespace cpp {
 
-cpp_includes_generator::cpp_includes_generator() : position_(0) { }
+includes_generator::includes_generator() : position_(0) { }
 
-void cpp_includes_generator::
+void includes_generator::
 populate(const unsigned int position, result_type& v) {
     v.system(create_std_list_boost_filesystem_path(position + 0));
     v.user(create_std_list_boost_filesystem_path(position + 1));
 }
 
-cpp_includes_generator::result_type
-cpp_includes_generator::create(const unsigned int position) {
-    cpp_includes r;
-    cpp_includes_generator::populate(position, r);
+includes_generator::result_type
+includes_generator::create(const unsigned int position) {
+    includes r;
+    includes_generator::populate(position, r);
     return r;
 }
-cpp_includes_generator::result_type*
-cpp_includes_generator::create_ptr(const unsigned int position) {
-    cpp_includes* p = new cpp_includes();
-    cpp_includes_generator::populate(position, *p);
+includes_generator::result_type*
+includes_generator::create_ptr(const unsigned int position) {
+    includes* p = new includes();
+    includes_generator::populate(position, *p);
     return p;
 }
 
-cpp_includes_generator::result_type
-cpp_includes_generator::operator()() {
+includes_generator::result_type
+includes_generator::operator()() {
     return create(position_++);
 }
 

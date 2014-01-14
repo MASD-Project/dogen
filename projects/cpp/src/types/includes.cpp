@@ -18,63 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/cpp_includes.hpp"
+#include "dogen/cpp/types/includes.hpp"
 
 namespace dogen {
 namespace cpp {
 
-cpp_includes::cpp_includes(
+includes::includes(
     const std::list<boost::filesystem::path>& system,
     const std::list<boost::filesystem::path>& user)
     : system_(system),
       user_(user) { }
 
-void cpp_includes::swap(cpp_includes& other) noexcept {
+void includes::swap(includes& other) noexcept {
     using std::swap;
     swap(system_, other.system_);
     swap(user_, other.user_);
 }
 
-bool cpp_includes::operator==(const cpp_includes& rhs) const {
+bool includes::operator==(const includes& rhs) const {
     return system_ == rhs.system_ &&
         user_ == rhs.user_;
 }
 
-cpp_includes& cpp_includes::operator=(cpp_includes other) {
+includes& includes::operator=(includes other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<boost::filesystem::path>& cpp_includes::system() const {
+const std::list<boost::filesystem::path>& includes::system() const {
     return system_;
 }
 
-std::list<boost::filesystem::path>& cpp_includes::system() {
+std::list<boost::filesystem::path>& includes::system() {
     return system_;
 }
 
-void cpp_includes::system(const std::list<boost::filesystem::path>& v) {
+void includes::system(const std::list<boost::filesystem::path>& v) {
     system_ = v;
 }
 
-void cpp_includes::system(const std::list<boost::filesystem::path>&& v) {
+void includes::system(const std::list<boost::filesystem::path>&& v) {
     system_ = std::move(v);
 }
 
-const std::list<boost::filesystem::path>& cpp_includes::user() const {
+const std::list<boost::filesystem::path>& includes::user() const {
     return user_;
 }
 
-std::list<boost::filesystem::path>& cpp_includes::user() {
+std::list<boost::filesystem::path>& includes::user() {
     return user_;
 }
 
-void cpp_includes::user(const std::list<boost::filesystem::path>& v) {
+void includes::user(const std::list<boost::filesystem::path>& v) {
     user_ = v;
 }
 
-void cpp_includes::user(const std::list<boost::filesystem::path>&& v) {
+void includes::user(const std::list<boost::filesystem::path>&& v) {
     user_ = std::move(v);
 }
 

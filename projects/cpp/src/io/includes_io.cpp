@@ -18,18 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_CPP_INCLUDES_FWD_HPP
-#define DOGEN_CPP_TYPES_CPP_INCLUDES_FWD_HPP
+#include <ostream>
+#include "dogen/cpp/io/includes_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
-class cpp_includes;
+std::ostream& operator<<(std::ostream& s, const includes& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::includes\"" << ", "
+      << "\"system\": " << v.system() << ", "
+      << "\"user\": " << v.user()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

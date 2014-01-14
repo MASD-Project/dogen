@@ -18,35 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_CPP_INCLUDES_HASH_HPP
-#define DOGEN_CPP_HASH_CPP_INCLUDES_HASH_HPP
+#include "dogen/cpp/hash/includes_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <functional>
-#include "dogen/cpp/types/cpp_includes.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::filesystem::path>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_boost_filesystem_path(i));
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
-struct cpp_includes_hasher {
-public:
-    static std::size_t hash(const cpp_includes& v);
-};
+std::size_t includes_hasher::hash(const includes&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_list_boost_filesystem_path(v.system()));
+    combine(seed, hash_std_list_boost_filesystem_path(v.user()));
+
+    return seed;
+}
 
 } }
-
-namespace std {
-
-template<>
-struct hash<dogen::cpp::cpp_includes> {
-public:
-    size_t operator()(const dogen::cpp::cpp_includes& v) const {
-        return dogen::cpp::cpp_includes_hasher::hash(v);
-    }
-};
-
-}
-#endif

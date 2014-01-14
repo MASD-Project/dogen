@@ -34,13 +34,13 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-14 Tue 08:41]
+Clock summary at [2014-01-14 Tue 22:27]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *4:44* |      |      |
+| *Total time*                                                                 | *5:03* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 4:44 |      |
+| Development Stories Implemented                                              |        | 5:03 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:46 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
@@ -48,6 +48,7 @@ Clock summary at [2014-01-14 Tue 08:41]
 | COMPLETED Delete the =om= model                                              |        |      | 0:25 |
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |        |      | 0:43 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
+| IMPLEMENTATION Make use of =cpp_includes= in =source_file=                   |        |      | 0:19 |
 #+end:
 
 *** Create a blog post on dogen's development methodology             :story:
@@ -151,6 +152,11 @@ with ninja.
 Links:
 
 - [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
+
+*** IMPLEMENTATION Make use of =cpp_includes= in =source_file=        :story:
+    CLOCK: [2014-01-14 Tue 19:51]--[2014-01-14 Tue 20:10] =>  0:19
+
+Replace the includes container in source file with the =om= class.
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 

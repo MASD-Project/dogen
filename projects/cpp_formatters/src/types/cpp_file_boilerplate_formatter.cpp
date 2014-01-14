@@ -143,14 +143,14 @@ void cpp_file_boilerplate_formatter::format_guards_end(std::ostream& s,
 }
 
 void cpp_file_boilerplate_formatter::
-format_includes(std::ostream& s, const cpp::cpp_includes& i) const {
+format_includes(std::ostream& s, const cpp::includes& i) const {
     cpp_include_formatter f;
     f.format(s, i);
 }
 
 void cpp_file_boilerplate_formatter::
 format_begin(std::ostream& s, const formatters::annotation& a,
-    const cpp::cpp_includes& i,
+    const cpp::includes& i,
     const boost::filesystem::path& relative_file_path) const {
 
     format_preamble(s, a);

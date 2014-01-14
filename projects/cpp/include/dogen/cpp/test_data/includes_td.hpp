@@ -18,33 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/cpp/io/cpp_includes_io.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_INCLUDES_TD_HPP
+#define DOGEN_CPP_TEST_DATA_INCLUDES_TD_HPP
 
-namespace std {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#include "dogen/cpp/types/includes.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const cpp_includes& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::cpp_includes\"" << ", "
-      << "\"system\": " << v.system() << ", "
-      << "\"user\": " << v.user()
-      << " }";
-    return(s);
-}
+class includes_generator {
+public:
+    includes_generator();
+
+public:
+    typedef dogen::cpp::includes result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

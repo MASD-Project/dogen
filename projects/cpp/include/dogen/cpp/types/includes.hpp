@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_CPP_INCLUDES_HPP
-#define DOGEN_CPP_TYPES_CPP_INCLUDES_HPP
+#ifndef DOGEN_CPP_TYPES_INCLUDES_HPP
+#define DOGEN_CPP_TYPES_INCLUDES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include <list>
-#include "dogen/cpp/serialization/cpp_includes_fwd_ser.hpp"
+#include "dogen/cpp/serialization/includes_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,24 +36,24 @@ namespace cpp {
 /**
  * @brief User and system include files.
  */
-class cpp_includes final {
+class includes final {
 public:
-    cpp_includes() = default;
-    cpp_includes(const cpp_includes&) = default;
-    cpp_includes(cpp_includes&&) = default;
-    ~cpp_includes() = default;
+    includes() = default;
+    includes(const includes&) = default;
+    includes(includes&&) = default;
+    ~includes() = default;
 
 public:
-    cpp_includes(
+    includes(
         const std::list<boost::filesystem::path>& system,
         const std::list<boost::filesystem::path>& user);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const cpp_includes& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const includes& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, cpp_includes& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, includes& v, unsigned int version);
 
 public:
     /**
@@ -81,14 +81,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const cpp_includes& rhs) const;
-    bool operator!=(const cpp_includes& rhs) const {
+    bool operator==(const includes& rhs) const;
+    bool operator!=(const includes& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(cpp_includes& other) noexcept;
-    cpp_includes& operator=(cpp_includes other);
+    void swap(includes& other) noexcept;
+    includes& operator=(includes other);
 
 private:
     std::list<boost::filesystem::path> system_;
@@ -101,8 +101,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::cpp_includes& lhs,
-    dogen::cpp::cpp_includes& rhs) {
+    dogen::cpp::includes& lhs,
+    dogen::cpp::includes& rhs) {
     lhs.swap(rhs);
 }
 

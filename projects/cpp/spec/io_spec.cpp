@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<property_info_generator>();
     test_io<registrar_info_generator>();
     test_io<visitor_info_generator>();
-    test_io<cpp_includes_generator>();
+    test_io<includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

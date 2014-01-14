@@ -36,7 +36,7 @@ const std::string marker("this is a marker");
 const std::string empty;
 const std::string empty_marker;
 const dogen::formatters::licence empty_licence = dogen::formatters::licence();
-const dogen::cpp::cpp_includes empty_includes = dogen::cpp::cpp_includes();
+const dogen::cpp::includes empty_includes = dogen::cpp::includes();
 const boost::filesystem::path empty_path;
 const boost::filesystem::path a_path("a/path.hpp");
 const bool generate_premable(true);
@@ -244,8 +244,8 @@ dogen::formatters::licence mock_licence(const bool multiline = false) {
     return r;
 }
 
-dogen::cpp::cpp_includes mock_includes() {
-    dogen::cpp::cpp_includes r;
+dogen::cpp::includes mock_includes() {
+    dogen::cpp::includes r;
     // FIXME: bug in generic_string so not testing win32 paths atm
     r.system().push_back("win32/system_inc_1");
     r.system().push_back("unix/system_inc_2");

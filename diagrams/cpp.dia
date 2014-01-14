@@ -562,7 +562,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="-27,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.545000000000002"/>
+        <dia:real val="30.544999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="28.900000000000002"/>
@@ -4585,7 +4585,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="112,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.620000000000001"/>
+        <dia:real val="12.619999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5253,7 +5253,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="92,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.5850000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15.600000000000003"/>
@@ -6794,7 +6794,7 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_includes#</dia:string>
+        <dia:string>#includes#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

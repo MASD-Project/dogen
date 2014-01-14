@@ -18,33 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_TYPES_CPP_INCLUDE_FORMATTER_HPP
-#define DOGEN_CPP_FORMATTERS_TYPES_CPP_INCLUDE_FORMATTER_HPP
+#ifndef DOGEN_CPP_HASH_INCLUDES_HASH_HPP
+#define DOGEN_CPP_HASH_INCLUDES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
+#include <functional>
 #include "dogen/cpp/types/includes.hpp"
 
 namespace dogen {
-namespace cpp_formatters {
+namespace cpp {
 
-/**
- * @brief Generates preprocessor include statements.
- */
-class cpp_include_formatter {
+struct includes_hasher {
 public:
-    cpp_include_formatter() = default;
-    cpp_include_formatter(const cpp_include_formatter&) = default;
-    cpp_include_formatter& operator=(const cpp_include_formatter&) = delete;
-    cpp_include_formatter(cpp_include_formatter&& rhs) = default;
-
-public:
-    void format(std::ostream& s, const cpp::includes& i) const;
+    static std::size_t hash(const includes& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::cpp::includes> {
+public:
+    size_t operator()(const dogen::cpp::includes& v) const {
+        return dogen::cpp::includes_hasher::hash(v);
+    }
+};
+
+}
 #endif

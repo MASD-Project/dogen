@@ -28,7 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/cpp/serialization/cpp_includes_ser.hpp"
+#include "dogen/cpp/serialization/includes_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
 
@@ -37,7 +37,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::cpp::cpp_includes& v,
+    const dogen::cpp::includes& v,
     const unsigned int /*version*/) {
     ar << make_nvp("system", v.system_);
     ar << make_nvp("user", v.user_);
@@ -45,7 +45,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::cpp::cpp_includes& v,
+    dogen::cpp::includes& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("system", v.system_);
     ar >> make_nvp("user", v.user_);
@@ -56,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::cpp_includes& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::cpp::cpp_includes& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::includes& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::cpp::includes& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::cpp::cpp_includes& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::cpp::cpp_includes& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::cpp::includes& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::cpp::includes& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::cpp::cpp_includes& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::cpp::cpp_includes& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::cpp::includes& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::cpp::includes& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::cpp::cpp_includes& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::cpp::cpp_includes& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::cpp::includes& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::cpp::includes& v, unsigned int version);
 
 } }
