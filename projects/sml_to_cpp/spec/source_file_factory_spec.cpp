@@ -131,11 +131,12 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_enumeration_produces_expected_resu
     const auto ei((dogen::cpp::enum_info()));
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
-    const auto il((dogen::sml_to_cpp::inclusion_lists()));
+    const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> infos;
     for (const auto& cd : md)
-        infos.push_back(f.create(ei, cd, il));
+        infos.push_back(f.create(ei, cd, inc));
+
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<cpp_facet_types> found_facets;
@@ -174,11 +175,11 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_result
     const auto& ex(m.objects().begin()->second);
     const auto md(mock_descriptors(ex.name()));
     const auto ei((dogen::cpp::exception_info()));
-    const auto il((dogen::sml_to_cpp::inclusion_lists()));
+    const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> infos;
     for (const auto& cd : md)
-        infos.push_back(f.create(ei, cd, il));
+        infos.push_back(f.create(ei, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<cpp_facet_types> found_facets;
@@ -259,11 +260,11 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) 
     const auto& p(m.objects().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ci((dogen::cpp::class_info()));
-    const auto il((dogen::sml_to_cpp::inclusion_lists()));
+    const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> infos;
     for (const auto& cd : md)
-        infos.push_back(f.create(ci, cd, il));
+        infos.push_back(f.create(ci, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;
@@ -329,7 +330,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
 
     bool found_0(false), found_1(false);
-    for (const auto& ui : fi.user_includes()) {
+    for (const auto& ui : fi.includes().user()) {
         if (ui == model_factory.type_name(0))
             found_0 = true;
         else if (ui == model_factory.type_name(1))
@@ -357,11 +358,11 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
 
     const auto ft2(dogen::config::cpp_facet_types::serialization);
     const auto md(mock_descriptor_for_includer(ft2));
-    const auto il((dogen::sml_to_cpp::inclusion_lists()));
+    const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> includer_infos;
     for (const auto& cd : md)
-        includer_infos.push_back(f.create_includer(cd, il));
+        includer_infos.push_back(f.create_includer(cd, inc));
     BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
 
     BOOST_REQUIRE(includer_infos.size() == 1);
@@ -378,7 +379,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
     BOOST_CHECK(!fi.visitor_info());
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
-    BOOST_CHECK(fi.user_includes().empty());
+    BOOST_CHECK(fi.includes().user().empty());
 }
 
 BOOST_AUTO_TEST_CASE(creating_source_file_for_registrar_produces_expected_results) {
@@ -394,11 +395,11 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_registrar_produces_expected_result
 
     const auto md(mock_descriptor_for_registrar());
     const auto ri((dogen::cpp::registrar_info()));
-    const auto il((dogen::sml_to_cpp::inclusion_lists()));
+    const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> infos;
     for (const auto& cd : md)
-        infos.push_back(f.create_registrar(ri, cd, il));
+        infos.push_back(f.create_registrar(ri, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     BOOST_REQUIRE(infos.size() == 1);

@@ -61,14 +61,22 @@ void includes::format(std::list<std::string> v, bool is_system) {
 }
 
 void includes::format(const cpp::source_file& f) {
-    const auto sys(f.system_includes());
-    const auto usr(f.user_includes());
+    const auto inc(f.includes());
 
-    if (sys.empty() && usr.empty())
+    if (inc.system().empty() && inc.user().empty())
         return;
 
-    format(f.system_includes(), is_system);
-    format(f.user_includes(), is_user);
+    std::list<std::string> system;
+    for (const auto i : inc.system())
+        system.push_back(i.generic_string());
+
+    format(system, is_system);
+
+    std::list<std::string> user;
+    for (const auto i : inc.user())
+        user.push_back(i.generic_string());
+
+    format(user, is_user);
 
     if (blank_line_)
         utility_.blank_line();

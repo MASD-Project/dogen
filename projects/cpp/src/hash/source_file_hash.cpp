@@ -22,6 +22,7 @@
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/exception_info_hash.hpp"
+#include "dogen/cpp/hash/includes_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
 #include "dogen/cpp/hash/source_file_hash.hpp"
@@ -76,14 +77,6 @@ inline std::size_t hash_boost_optional_dogen_cpp_registrar_info(const boost::opt
     return seed;
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
     std::size_t seed(0);
     combine(seed, v.generic_string());
@@ -125,12 +118,11 @@ std::size_t source_file_hasher::hash(const source_file&v) {
     combine(seed, hash_boost_optional_dogen_cpp_exception_info(v.exception_info()));
     combine(seed, hash_boost_optional_dogen_cpp_registrar_info(v.registrar_info()));
     combine(seed, v.header_guard());
-    combine(seed, hash_std_list_std_string(v.system_includes()));
-    combine(seed, hash_std_list_std_string(v.user_includes()));
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, hash_boost_optional_dogen_cpp_namespace_info(v.namespace_info()));
     combine(seed, hash_boost_optional_dogen_cpp_visitor_info(v.visitor_info()));
     combine(seed, hash_boost_filesystem_path(v.relative_path()));
+    combine(seed, v.includes());
 
     return seed;
 }

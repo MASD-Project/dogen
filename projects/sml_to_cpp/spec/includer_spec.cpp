@@ -110,7 +110,7 @@ typedef std::function<
     (const dogen::sml::model&)
     > includer_factory;
 
-std::vector<std::list<std::string> >
+std::vector<std::list<boost::filesystem::path> >
 includes_for_one_object_model(cpp_facet_types ft,
     const includer_factory& factory) {
     using dogen::sml::test::mock_model_factory;
@@ -119,7 +119,7 @@ includes_for_one_object_model(cpp_facet_types ft,
     const auto& p(m.objects().begin()->second);
 
     auto im(factory(m));
-    std::vector<std::list<std::string> > r;
+    std::vector<std::list<boost::filesystem::path> > r;
     r.reserve(4);
 
     const auto main(dogen::cpp::aspect_types::main);
@@ -163,19 +163,20 @@ BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_gene
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(boost::ends_with(hu.front(), fwd_serialization_postfix));
+    BOOST_CHECK(boost::ends_with(hu.front().generic_string(),
+            fwd_serialization_postfix));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;
     BOOST_REQUIRE(hs.size() == 1);
-    BOOST_CHECK(boost::ends_with(hs.front(), algorithm));
+    BOOST_CHECK(boost::ends_with(hs.front().generic_string(), algorithm));
 
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
-        boost::contains(iu.front(), types));
+    BOOST_CHECK(boost::contains(iu.front().generic_string(), object_name()) &&
+        boost::contains(iu.front().generic_string(), types));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -193,25 +194,27 @@ BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_gene
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(object_name(), hu.front()));
-    BOOST_CHECK(asserter::assert_contains(types, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(object_name(),
+            hu.front().generic_string()));
+    BOOST_CHECK(asserter::assert_contains(types, hu.front().generic_string()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
     BOOST_REQUIRE(hs.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(iosfwd, hs.front()));
+    BOOST_CHECK(asserter::assert_contains(iosfwd, hs.front().generic_string()));
 
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
-        boost::contains(iu.front(), io));
+    BOOST_CHECK(boost::contains(iu.front().generic_string(), object_name()) &&
+        boost::contains(iu.front().generic_string(), io));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
     BOOST_REQUIRE(is.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(ostream, is.front()));
+    BOOST_CHECK(asserter::assert_contains(ostream,
+            is.front().generic_string()));
 }
 
 BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_generates_expected_serialisation_includes) {
@@ -225,21 +228,26 @@ BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_gene
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(object_name(), hu.front()));
-    BOOST_CHECK(asserter::assert_contains(types, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(object_name(),
+            hu.front().generic_string()));
+    BOOST_CHECK(asserter::assert_contains(types, hu.front().generic_string()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
     BOOST_REQUIRE(hs.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(boost_split_free, hs.front()));
+    BOOST_CHECK(asserter::assert_contains(boost_split_free,
+            hs.front().generic_string()));
 
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
 
-    BOOST_CHECK(boost::ends_with(iu.front(), serialization_postfix));
-    BOOST_CHECK(asserter::assert_contains(object_name(), iu.front()));
-    BOOST_CHECK(asserter::assert_contains(serialization, iu.front()));
+    BOOST_CHECK(boost::ends_with(iu.front().generic_string(),
+            serialization_postfix));
+    BOOST_CHECK(asserter::assert_contains(object_name(),
+            iu.front().generic_string()));
+    BOOST_CHECK(asserter::assert_contains(serialization,
+            iu.front().generic_string()));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -257,20 +265,21 @@ BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_gene
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(boost::contains(hu.front(), object_name()) &&
-        boost::contains(hu.front(), types));
+    BOOST_CHECK(boost::contains(hu.front().generic_string(), object_name()) &&
+        boost::contains(hu.front().generic_string(), types));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
     BOOST_REQUIRE(hs.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(hs.front(), functional));
+    BOOST_CHECK(asserter::assert_contains(hs.front().generic_string(),
+            functional));
 
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
-        boost::contains(iu.front(), hash));
+    BOOST_CHECK(boost::contains(iu.front().generic_string(), object_name()) &&
+        boost::contains(iu.front().generic_string(), hash));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -288,8 +297,8 @@ BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_gene
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(boost::contains(hu.front(), object_name()) &&
-        boost::contains(hu.front(), types));
+    BOOST_CHECK(boost::contains(hu.front().generic_string(), object_name()) &&
+        boost::contains(hu.front().generic_string(), types));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
@@ -299,8 +308,8 @@ BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_gene
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
-        boost::contains(iu.front(), test_data));
+    BOOST_CHECK(boost::contains(iu.front().generic_string(), object_name()) &&
+        boost::contains(iu.front().generic_string(), test_data));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -325,7 +334,7 @@ BOOST_AUTO_TEST_CASE(processing_one_object_model_with_no_keys_configuration_gene
 
         BOOST_CHECK(!all.empty());
         for (const auto s : all)
-            BOOST_CHECK(!boost::contains(s, versioned_key));
+            BOOST_CHECK(!boost::contains(s.generic_string(), versioned_key));
     }
 }
 

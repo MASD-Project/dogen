@@ -26,7 +26,6 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
@@ -34,6 +33,7 @@
 #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/includes_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/source_file_ser.hpp"
@@ -55,12 +55,11 @@ void save(Archive& ar,
     ar << make_nvp("exception_info", v.exception_info_);
     ar << make_nvp("registrar_info", v.registrar_info_);
     ar << make_nvp("header_guard", v.header_guard_);
-    ar << make_nvp("system_includes", v.system_includes_);
-    ar << make_nvp("user_includes", v.user_includes_);
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("namespace_info", v.namespace_info_);
     ar << make_nvp("visitor_info", v.visitor_info_);
     ar << make_nvp("relative_path", v.relative_path_.generic_string());
+    ar << make_nvp("includes", v.includes_);
 }
 
 template<typename Archive>
@@ -74,8 +73,6 @@ void load(Archive& ar,
     ar >> make_nvp("exception_info", v.exception_info_);
     ar >> make_nvp("registrar_info", v.registrar_info_);
     ar >> make_nvp("header_guard", v.header_guard_);
-    ar >> make_nvp("system_includes", v.system_includes_);
-    ar >> make_nvp("user_includes", v.user_includes_);
     std::string file_path_tmp;
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
@@ -84,6 +81,7 @@ void load(Archive& ar,
     std::string relative_path_tmp;
     ar >> make_nvp("relative_path", relative_path_tmp);
     v.relative_path_ = relative_path_tmp;
+    ar >> make_nvp("includes", v.includes_);
 }
 
 } }

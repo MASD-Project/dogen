@@ -20,7 +20,6 @@
  */
 #include "dogen/sml_to_cpp/serialization/boost_types_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/context_ser.hpp"
-#include "dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/registrar_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/relationships_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/std_types_ser.hpp"

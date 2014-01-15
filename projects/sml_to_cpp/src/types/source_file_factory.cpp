@@ -73,20 +73,18 @@ create(const cpp::content_descriptor& cd) const {
 }
 
 cpp::source_file source_file_factory::create(const cpp::enum_info& ei,
-    const cpp::content_descriptor& cd, const inclusion_lists& il) const {
+    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
     r.enum_info(ei);
-    r.system_includes(il.system());
-    r.user_includes(il.user());
+    r.includes(inc);
     return r;
 }
 
 cpp::source_file source_file_factory::create(const cpp::exception_info& ei,
-    const cpp::content_descriptor& cd, const inclusion_lists& il) const {
+    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
     r.exception_info(ei);
-    r.system_includes(il.system());
-    r.user_includes(il.user());
+    r.includes(inc);
     return r;
 }
 
@@ -98,41 +96,36 @@ create(const cpp::namespace_info& ni, const cpp::content_descriptor& cd) const {
 }
 
 cpp::source_file source_file_factory::create(const cpp::class_info& ci,
-    const cpp::content_descriptor& cd, const inclusion_lists& il) const {
+    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
     r.class_info(ci);
-    r.system_includes(il.system());
-    r.user_includes(il.user());
+    r.includes(inc);
     return r;
 }
 
-cpp::source_file source_file_factory::
-create_includer(const cpp::content_descriptor& cd,
-    const inclusion_lists& il) const {
+cpp::source_file source_file_factory::create_includer(
+    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
     r.descriptor().content_type(cpp::content_types::includer);
-    r.system_includes(il.system());
-    r.user_includes(il.user());
+    r.includes(inc);
     return r;
 }
 
 cpp::source_file source_file_factory::
 create_registrar(const cpp::registrar_info& ri,
-    const cpp::content_descriptor& cd, const inclusion_lists& il) const {
+    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
     r.registrar_info(ri);
-    r.system_includes(il.system());
-    r.user_includes(il.user());
+    r.includes(inc);
     return r;
 }
 
 cpp::source_file source_file_factory::
 create_visitor(const cpp::visitor_info& vi, const cpp::content_descriptor& cd,
-    const inclusion_lists& il) const {
+    const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
     r.visitor_info(vi);
-    r.system_includes(il.system());
-    r.user_includes(il.user());
+    r.includes(inc);
     return r;
 }
 

@@ -34,7 +34,17 @@ namespace dogen {
 namespace cpp {
 
 /**
- * @brief User and system include files.
+ * @brief Captures include dependencies.
+ *
+ * The include dependencies we concern ourselves with are all files
+ * required in order to successfully compile the current file. We make
+ * the traditional distinction with regards to type of inclusion:
+ *
+ * @li @e System includes are those which are in the system include path and
+ * are expected to be included using angle brackets;
+ *
+ *  @li @e User includes are those which are in the user include path
+ *  and are expected to be included using double-quotes.
  */
 class includes final {
 public:

@@ -37,11 +37,11 @@
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
+#include "dogen/cpp/types/includes.hpp"
 #include "dogen/sml_to_cpp/types/boost_model_helper.hpp"
 #include "dogen/sml_to_cpp/types/std_model_helper.hpp"
 #include "dogen/sml_to_cpp/types/relationships.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
-#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
 
 namespace dogen {
 namespace sml_to_cpp {
@@ -104,13 +104,13 @@ public:
 
 private:
     /**
-     * @brief Remove duplicates from inclusion lists
+     * @brief Remove duplicates from includes.
      */
-    void remove_duplicates(inclusion_lists& il) const;
+    void remove_duplicates(cpp::includes& inc) const;
 
     /**
-     * @brief Appends to the inclusion lists all dependencies related
-     * to the formatter implementation.
+     * @brief Appends all dependencies related to the formatter
+     * implementation to the includes.
      *
      * The objective of this method is to pick up all header files
      * which are required due to the current source code
@@ -123,43 +123,42 @@ private:
      * kept in one place.
      */
     void append_implementation_dependencies(const relationships& rel,
-        const cpp::content_descriptor& cd, inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, cpp::includes& inc) const;
 
     /**
      * @brief Handles all dependencies to types in the boost
      * libraries.
      */
     void append_boost_dependencies(const relationships& rel,
-        const cpp::content_descriptor& cd,
-        inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, cpp::includes& inc) const;
 
     /**
      * @brief Handles all dependencies to types in the standard
      * library.
      */
     void append_std_dependencies(const cpp::content_descriptor& cd,
-        inclusion_lists& il) const;
+        cpp::includes& inc) const;
 
     /**
-     * @brief Appends to the inclusion lists dependencies brought
-     * about by all the relationships of the type with other types.
+     * @brief Appends to the includes dependencies brought about by
+     * all the relationships of the type with other types.
      *
      * In this sense, by relationship we mean either
      * specialisation/generalisation or association - e.g. the parent
      * of the type and all types of all properties it may have.
      */
     void append_relationship_dependencies(const relationships& rel,
-        const cpp::content_descriptor& cd, inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, cpp::includes& inc) const;
 
     /**
-     * @brief Appends to the inclusion lists dependencies related to
-     * the type itself.
+     * @brief Appends to the includes dependencies related to the type
+     * itself.
      *
      * For instance, this is the case of the implementation file
      * including the header file.
      */
     void append_self_dependencies(const cpp::content_descriptor& cd,
-        inclusion_lists& il) const;
+        cpp::includes& inc) const;
 
 public:
     /**
@@ -172,42 +171,42 @@ public:
      * This method must be called after all objects have been
      * processed, as the list is built up from previous calls.
      *
-     * @param ft Facet for which we want the inclusion lists.
+     * @param ft Facet for which we are computing the includes.
      */
-    inclusion_lists
+    cpp::includes
     includes_for_includer_files(const cpp::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the given object.
      */
-    inclusion_lists includes_for_object(const cpp::content_descriptor& cd,
+    cpp::includes includes_for_object(const cpp::content_descriptor& cd,
         const relationships& rel) const;
 
     /**
      * @brief Returns all the includes required for the given
      * enumeration.
      */
-    inclusion_lists
+    cpp::includes
     includes_for_enumeration(const cpp::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the given
      * exception.
      */
-    inclusion_lists
+    cpp::includes
     includes_for_exception(const cpp::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the serialisation
      * registrar.
      */
-    inclusion_lists
+    cpp::includes
     includes_for_registrar(const cpp::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes for a visitor based on qname.
      */
-    inclusion_lists includes_for_visitor(const cpp::content_descriptor& cd,
+    cpp::includes includes_for_visitor(const cpp::content_descriptor& cd,
         const relationships& rel) const;
 
 private:
@@ -217,7 +216,7 @@ private:
     const bool io_enabled_;
     const bool serialization_enabled_;
     const bool hash_enabled_;
-    std::map<config::cpp_facet_types, std::list<std::string> >
+    std::map<config::cpp_facet_types, std::list<boost::filesystem::path> >
     headers_for_facet_;
     const boost_model_helper boost_;
     const std_model_helper std_;

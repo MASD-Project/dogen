@@ -218,8 +218,8 @@ workflow::generate_source_files_for_classes_activity() const {
         };
 
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
-            const auto il(includer_.includes_for_object(cd, rel));
-            auto fi(source_file_factory_.create(ci, cd, il));
+            const auto inc(includer_.includes_for_object(cd, rel));
+            auto fi(source_file_factory_.create(ci, cd, inc));
 
             // we want to make sure we do not actually generate code
             // for partial generation, so override the output of the
@@ -270,8 +270,8 @@ std::list<cpp::source_file> workflow::generate_registrars_activity() const {
         const auto ri(pair.second);
 
         for (const auto& cd : descriptor_factory_.create_registrar(qn)) {
-            const auto il(includer_.includes_for_registrar(cd));
-            const auto fi(source_file_factory_.create_registrar(ri, cd, il));
+            const auto inc(includer_.includes_for_registrar(cd));
+            const auto fi(source_file_factory_.create_registrar(ri, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -289,8 +289,8 @@ std::list<cpp::source_file> workflow::generate_includers_activity() const {
 
     std::list<cpp::source_file> r;
     for (const auto& cd : descriptor_factory_.create_includer(qn)) {
-        const auto il(includer_.includes_for_includer_files(cd));
-        r.push_back(source_file_factory_.create_includer(cd, il));
+        const auto inc(includer_.includes_for_includer_files(cd));
+        r.push_back(source_file_factory_.create_includer(cd, inc));
     }
     return r;
 }
@@ -309,8 +309,8 @@ std::list<cpp::source_file> workflow::generate_visitors_activity() const {
         const auto& rel(i->second);
         const auto vi(pair.second);
         for (const auto& cd : descriptor_factory_.create_visitor(qn)) {
-            const auto il(includer_.includes_for_visitor(cd, rel));
-            const auto fi(source_file_factory_.create_visitor(vi, cd, il));
+            const auto inc(includer_.includes_for_visitor(cd, rel));
+            const auto fi(source_file_factory_.create_visitor(vi, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -328,8 +328,8 @@ std::list<cpp::source_file> workflow::generate_enums_activity() const {
 
         const auto ct(cpp::content_types::enumeration);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
-            const auto il(includer_.includes_for_enumeration(cd));
-            const auto fi(source_file_factory_.create(ei, cd, il));
+            const auto inc(includer_.includes_for_enumeration(cd));
+            const auto fi(source_file_factory_.create(ei, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -347,8 +347,8 @@ std::list<cpp::source_file> workflow::generate_exceptions_activity() const {
 
         const auto ct(cpp::content_types::exception);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
-            const auto il(includer_.includes_for_exception(cd));
-            const auto fi(source_file_factory_.create(ei, cd, il));
+            const auto inc(includer_.includes_for_exception(cd));
+            const auto fi(source_file_factory_.create(ei, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)

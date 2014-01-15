@@ -34,8 +34,8 @@
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/cpp/types/source_file.hpp"
+#include "dogen/cpp/types/includes.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
-#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
 
 namespace dogen {
 namespace sml_to_cpp {
@@ -72,13 +72,13 @@ public:
      * @brief Manufacture the file info for the given enum info.
      */
     cpp::source_file create(const cpp::enum_info& ei,
-        const cpp::content_descriptor& cd, const inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given exception.
      */
     cpp::source_file create(const cpp::exception_info& ei,
-        const cpp::content_descriptor& cd, const inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given namespace.
@@ -90,25 +90,25 @@ public:
      * @brief Manufacture all the file infos for the given class.
      */
     cpp::source_file create(const cpp::class_info& ci,
-        const cpp::content_descriptor& cd, const inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture file info for includer.
      */
     cpp::source_file create_includer(const cpp::content_descriptor& cd,
-        const inclusion_lists& il) const;
+        const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture file info for registrar.
      */
     cpp::source_file create_registrar(const cpp::registrar_info& ri,
-        const cpp::content_descriptor& cd, const inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture file info for visitor.
      */
     cpp::source_file create_visitor(const cpp::visitor_info& vi,
-        const cpp::content_descriptor& cd, const inclusion_lists& il) const;
+        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
 private:
     const locator& locator_;

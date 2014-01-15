@@ -34,13 +34,13 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-14 Tue 22:27]
+Clock summary at [2014-01-15 Wed 19:36]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *5:03* |      |      |
+| *Total time*                                                                 | *6:34* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 5:03 |      |
+| Development Stories Implemented                                              |        | 6:34 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:46 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
@@ -48,7 +48,7 @@ Clock summary at [2014-01-14 Tue 22:27]
 | COMPLETED Delete the =om= model                                              |        |      | 0:25 |
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |        |      | 0:43 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
-| IMPLEMENTATION Make use of =cpp_includes= in =source_file=                   |        |      | 0:19 |
+| IMPLEMENTATION Make use of =cpp_includes= in =source_file=                   |        |      | 1:50 |
 #+end:
 
 *** Create a blog post on dogen's development methodology             :story:
@@ -154,6 +154,9 @@ Links:
 - [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
 
 *** IMPLEMENTATION Make use of =cpp_includes= in =source_file=        :story:
+    CLOCK: [2014-01-15 Wed 18:18]--[2014-01-15 Wed 19:10] =>  0:52
+    CLOCK: [2014-01-15 Wed 18:13]--[2014-01-15 Wed 18:16] =>  0:03
+    CLOCK: [2014-01-15 Wed 07:59]--[2014-01-15 Wed 08:35] =>  0:36
     CLOCK: [2014-01-14 Tue 19:51]--[2014-01-14 Tue 20:10] =>  0:19
 
 Replace the includes container in source file with the =om= class.

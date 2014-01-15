@@ -1919,7 +1919,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="50,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,46.95;69.03,59.45"/>
+        <dia:rectangle val="49.95,46.95;69.03,58.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,47"/>
@@ -1928,7 +1928,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.4"/>
+        <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#source_file#</dia:string>
@@ -2158,52 +2158,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#system_includes#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of files to include using angle brackets.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#user_includes#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of files to include using quotes.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#file_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -2283,6 +2237,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Relative path to file.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#includes#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#includes#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6509,16 +6486,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="59.49,59.4"/>
+        <dia:point val="59.49,58.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.74,58.65;70.6475,72.8"/>
+        <dia:rectangle val="58.74,57.85;70.6475,72.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="59.49,59.4"/>
+        <dia:point val="59.49,58.6"/>
         <dia:point val="59.49,66"/>
         <dia:point val="70.4475,66"/>
         <dia:point val="70.4475,72"/>
@@ -6779,13 +6756,13 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
-        <dia:point val="54,27"/>
+        <dia:point val="56,27"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.95,26.95;71.105,30.65"/>
+        <dia:rectangle val="55.95,26.95;73.105,30.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="54,27"/>
+        <dia:point val="56,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -6800,7 +6777,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#User and system include files.#</dia:string>
+        <dia:string>#Captures include dependencies.
+
+The include dependencies we concern ourselves with are all files
+required in order to successfully compile the current file. We make
+the traditional distinction with regards to type of inclusion:
+
+@li @e System includes are those which are in the system include path and
+are expected to be included using angle brackets;
+
+ @li @e User includes are those which are in the user include path
+ and are expected to be included using double-quotes.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6979,7 +6966,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="59.49,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.74,30.55;62.7275,47.8"/>
+        <dia:rectangle val="58.74,30.55;64.7275,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6987,8 +6974,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="59.49,47"/>
         <dia:point val="59.49,40"/>
-        <dia:point val="62.5275,40"/>
-        <dia:point val="62.5275,30.6"/>
+        <dia:point val="64.5275,40"/>
+        <dia:point val="64.5275,30.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

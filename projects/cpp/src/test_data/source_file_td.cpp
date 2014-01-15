@@ -23,6 +23,7 @@
 #include "dogen/cpp/test_data/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
+#include "dogen/cpp/test_data/includes_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/source_file_td.hpp"
@@ -89,14 +90,6 @@ create_boost_optional_dogen_cpp_registrar_info(unsigned int position) {
     return r;
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
-}
-
 boost::filesystem::path
 create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
@@ -128,6 +121,11 @@ create_boost_optional_dogen_cpp_visitor_info(unsigned int position) {
     return r;
 }
 
+dogen::cpp::includes
+create_dogen_cpp_includes(const unsigned int position) {
+    return dogen::cpp::includes_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -144,12 +142,11 @@ populate(const unsigned int position, result_type& v) {
     v.exception_info(create_boost_optional_dogen_cpp_exception_info(position + 4));
     v.registrar_info(create_boost_optional_dogen_cpp_registrar_info(position + 5));
     v.header_guard(create_std_string(position + 6));
-    v.system_includes(create_std_list_std_string(position + 7));
-    v.user_includes(create_std_list_std_string(position + 8));
-    v.file_path(create_boost_filesystem_path(position + 9));
-    v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 10));
-    v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 11));
-    v.relative_path(create_boost_filesystem_path(position + 12));
+    v.file_path(create_boost_filesystem_path(position + 7));
+    v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 8));
+    v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 9));
+    v.relative_path(create_boost_filesystem_path(position + 10));
+    v.includes(create_dogen_cpp_includes(position + 11));
 }
 
 source_file_generator::result_type

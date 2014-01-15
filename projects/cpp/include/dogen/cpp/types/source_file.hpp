@@ -28,13 +28,13 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include <boost/optional.hpp>
-#include <list>
 #include <string>
 #include "dogen/cpp/serialization/source_file_fwd_ser.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/includes.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
@@ -63,12 +63,11 @@ public:
         const boost::optional<dogen::cpp::exception_info>& exception_info,
         const boost::optional<dogen::cpp::registrar_info>& registrar_info,
         const std::string& header_guard,
-        const std::list<std::string>& system_includes,
-        const std::list<std::string>& user_includes,
         const boost::filesystem::path& file_path,
         const boost::optional<dogen::cpp::namespace_info>& namespace_info,
         const boost::optional<dogen::cpp::visitor_info>& visitor_info,
-        const boost::filesystem::path& relative_path);
+        const boost::filesystem::path& relative_path,
+        const dogen::cpp::includes& includes);
 
 private:
     template<typename Archive>
@@ -153,26 +152,6 @@ public:
     /**@}*/
 
     /**
-     * @brief List of files to include using angle brackets.
-     */
-    /**@{*/
-    const std::list<std::string>& system_includes() const;
-    std::list<std::string>& system_includes();
-    void system_includes(const std::list<std::string>& v);
-    void system_includes(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief List of files to include using quotes.
-     */
-    /**@{*/
-    const std::list<std::string>& user_includes() const;
-    std::list<std::string>& user_includes();
-    void user_includes(const std::list<std::string>& v);
-    void user_includes(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief Path to the file.
      */
     /**@{*/
@@ -212,6 +191,11 @@ public:
     void relative_path(const boost::filesystem::path&& v);
     /**@}*/
 
+    const dogen::cpp::includes& includes() const;
+    dogen::cpp::includes& includes();
+    void includes(const dogen::cpp::includes& v);
+    void includes(const dogen::cpp::includes&& v);
+
 public:
     bool operator==(const source_file& rhs) const;
     bool operator!=(const source_file& rhs) const {
@@ -230,12 +214,11 @@ private:
     boost::optional<dogen::cpp::exception_info> exception_info_;
     boost::optional<dogen::cpp::registrar_info> registrar_info_;
     std::string header_guard_;
-    std::list<std::string> system_includes_;
-    std::list<std::string> user_includes_;
     boost::filesystem::path file_path_;
     boost::optional<dogen::cpp::namespace_info> namespace_info_;
     boost::optional<dogen::cpp::visitor_info> visitor_info_;
     boost::filesystem::path relative_path_;
+    dogen::cpp::includes includes_;
 };
 
 } }

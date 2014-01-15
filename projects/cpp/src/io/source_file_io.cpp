@@ -24,6 +24,7 @@
 #include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/io/enum_info_io.hpp"
 #include "dogen/cpp/io/exception_info_io.hpp"
+#include "dogen/cpp/io/includes_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
 #include "dogen/cpp/io/source_file_io.hpp"
@@ -97,20 +98,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::namespace_info>& v) {
@@ -154,12 +141,11 @@ std::ostream& operator<<(std::ostream& s, const source_file& v) {
       << "\"exception_info\": " << v.exception_info() << ", "
       << "\"registrar_info\": " << v.registrar_info() << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"system_includes\": " << v.system_includes() << ", "
-      << "\"user_includes\": " << v.user_includes() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"namespace_info\": " << v.namespace_info() << ", "
       << "\"visitor_info\": " << v.visitor_info() << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
+      << "\"includes\": " << v.includes()
       << " }";
     return(s);
 }
