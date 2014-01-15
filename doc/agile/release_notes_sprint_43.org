@@ -34,21 +34,22 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-15 Wed 19:36]
+Clock summary at [2014-01-15 Wed 23:15]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *6:34* |      |      |
+| *Total time*                                                                 | *6:50* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 6:34 |      |
+| Development Stories Implemented                                              |        | 6:50 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:46 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
 | COMPLETED Create the new =formatters= model and copy required code           |        |      | 1:06 |
 | COMPLETED Delete the =om= model                                              |        |      | 0:25 |
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |        |      | 0:43 |
+| COMPLETED Make use of =cpp_includes= in =source_file=                        |        |      | 1:50 |
+| COMPLETED Rename the boilerplate class and associated classes                |        |      | 0:16 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
-| IMPLEMENTATION Make use of =cpp_includes= in =source_file=                   |        |      | 1:50 |
 #+end:
 
 *** Create a blog post on dogen's development methodology             :story:
@@ -140,6 +141,26 @@ A few observations:
   enumeration, etc. It will not be responsible for forward
   declarations as that is a different type of file.
 
+*** COMPLETED Make use of =cpp_includes= in =source_file=             :story:
+    CLOSED: [2014-01-15 Wed 23:04]
+    CLOCK: [2014-01-15 Wed 18:18]--[2014-01-15 Wed 19:10] =>  0:52
+    CLOCK: [2014-01-15 Wed 18:13]--[2014-01-15 Wed 18:16] =>  0:03
+    CLOCK: [2014-01-15 Wed 07:59]--[2014-01-15 Wed 08:35] =>  0:36
+    CLOCK: [2014-01-14 Tue 19:51]--[2014-01-14 Tue 20:10] =>  0:19
+
+Replace the includes container in source file with the =om= class.
+
+*** COMPLETED Rename the boilerplate class and associated classes     :story:
+    CLOSED: [2014-01-15 Wed 23:15]
+    CLOCK: [2014-01-15 Wed 22:58]--[2014-01-15 Wed 23:14] =>  0:16
+
+Remove the C++ prefix etc in the classes we copied across into the C++
+formatters model.
+
+- We decided to keep the postfix =_formatters= as it makes the names
+  clearer, if somewhat longer. So =cpp_formatter::include_formatter=
+  rather than =cpp_formatter::includes=.
+
 *** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
     CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
 
@@ -152,14 +173,6 @@ with ninja.
 Links:
 
 - [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
-
-*** IMPLEMENTATION Make use of =cpp_includes= in =source_file=        :story:
-    CLOCK: [2014-01-15 Wed 18:18]--[2014-01-15 Wed 19:10] =>  0:52
-    CLOCK: [2014-01-15 Wed 18:13]--[2014-01-15 Wed 18:16] =>  0:03
-    CLOCK: [2014-01-15 Wed 07:59]--[2014-01-15 Wed 08:35] =>  0:36
-    CLOCK: [2014-01-14 Tue 19:51]--[2014-01-14 Tue 20:10] =>  0:19
-
-Replace the includes container in source file with the =om= class.
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 

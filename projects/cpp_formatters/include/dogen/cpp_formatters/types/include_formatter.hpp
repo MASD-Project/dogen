@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_TYPES_CPP_INCLUDE_FORMATTER_HPP
-#define DOGEN_CPP_FORMATTERS_TYPES_CPP_INCLUDE_FORMATTER_HPP
+#ifndef DOGEN_CPP_FORMATTERS_TYPES_INCLUDE_FORMATTER_HPP
+#define DOGEN_CPP_FORMATTERS_TYPES_INCLUDE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,12 +34,12 @@ namespace cpp_formatters {
 /**
  * @brief Generates preprocessor include statements.
  */
-class cpp_include_formatter {
+class include_formatter {
 public:
-    cpp_include_formatter() = default;
-    cpp_include_formatter(const cpp_include_formatter&) = default;
-    cpp_include_formatter& operator=(const cpp_include_formatter&) = delete;
-    cpp_include_formatter(cpp_include_formatter&& rhs) = default;
+    include_formatter() = default;
+    include_formatter(const include_formatter&) = default;
+    include_formatter& operator=(const include_formatter&) = delete;
+    include_formatter(include_formatter&& rhs) = default;
 
 public:
     void format(std::ostream& s, const cpp::includes& i) const;

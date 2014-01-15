@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_TYPES_CPP_FILE_BOILERPLATE_FORMATTER_HPP
-#define DOGEN_CPP_FORMATTERS_TYPES_CPP_FILE_BOILERPLATE_FORMATTER_HPP
+#ifndef DOGEN_CPP_FORMATTERS_TYPES_BOILERPLATE_FORMATTER_HPP
+#define DOGEN_CPP_FORMATTERS_TYPES_BOILERPLATE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,14 +39,11 @@ namespace cpp_formatters {
  * @brief Formats all of the boilerplate content in a C++ file such as
  * licence, modeline, includes, etc.
  */
-class cpp_file_boilerplate_formatter {
+class boilerplate_formatter {
 public:
-    cpp_file_boilerplate_formatter(
-        const cpp_file_boilerplate_formatter&) = default;
-    cpp_file_boilerplate_formatter& operator=(
-        const cpp_file_boilerplate_formatter&) = delete;
-    cpp_file_boilerplate_formatter(
-        cpp_file_boilerplate_formatter&& rhs) = default;
+    boilerplate_formatter(const boilerplate_formatter&) = default;
+    boilerplate_formatter& operator=(const boilerplate_formatter&) = delete;
+    boilerplate_formatter(boilerplate_formatter&& rhs) = default;
 
 public:
     /**
@@ -57,7 +54,7 @@ public:
      * @param generate_header_guards if true, header guards will be
      * generated.
      */
-    cpp_file_boilerplate_formatter(const bool generate_preamble = true,
+    boilerplate_formatter(const bool generate_preamble = true,
         const bool generate_header_guards = true);
 
 private:

@@ -22,7 +22,7 @@
 #include <sstream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/cpp_formatters/types/cpp_header_guard_formatter.hpp"
+#include "dogen/cpp_formatters/types/header_guard_formatter.hpp"
 
 namespace {
 
@@ -43,7 +43,7 @@ const std::string separator("_");
 namespace dogen {
 namespace cpp_formatters {
 
-std::string cpp_header_guard_formatter::
+std::string header_guard_formatter::
 to_header_guard_name(const boost::filesystem::path& p) const {
     bool is_first(true);
     std::ostringstream stream;
@@ -57,7 +57,7 @@ to_header_guard_name(const boost::filesystem::path& p) const {
     return stream.str();
 }
 
-void cpp_header_guard_formatter::
+void header_guard_formatter::
 format_begin(std::ostream& s, const boost::filesystem::path& p) {
     if (p.empty())
         return;
@@ -73,7 +73,7 @@ format_begin(std::ostream& s, const boost::filesystem::path& p) {
       << formatters::manage_blank_lines << std::endl;
 }
 
-void cpp_header_guard_formatter::
+void header_guard_formatter::
 format_end(std::ostream& s, const boost::filesystem::path& p) {
     if (p.empty())
         return;

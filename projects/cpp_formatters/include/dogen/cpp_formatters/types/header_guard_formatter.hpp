@@ -36,13 +36,13 @@ namespace cpp_formatters {
  * @brief Generates C++ header guards.
  */
 
-class cpp_header_guard_formatter {
+class header_guard_formatter {
 public:
-    cpp_header_guard_formatter() = default;
-    cpp_header_guard_formatter(const cpp_header_guard_formatter&) = default;
-    cpp_header_guard_formatter& operator=(
-        const cpp_header_guard_formatter&) = delete;
-    cpp_header_guard_formatter(cpp_header_guard_formatter&& rhs) = default;
+    header_guard_formatter() = default;
+    header_guard_formatter(const header_guard_formatter&) = default;
+    header_guard_formatter& operator=(
+        const header_guard_formatter&) = delete;
+    header_guard_formatter(header_guard_formatter&& rhs) = default;
 
 private:
     /**

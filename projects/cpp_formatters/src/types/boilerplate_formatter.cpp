@@ -22,9 +22,9 @@
 #include <ostream>
 #include "dogen/formatters/types/modeline_formatter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
-#include "dogen/cpp_formatters/types/cpp_header_guard_formatter.hpp"
-#include "dogen/cpp_formatters/types/cpp_include_formatter.hpp"
-#include "dogen/cpp_formatters/types/cpp_file_boilerplate_formatter.hpp"
+#include "dogen/cpp_formatters/types/header_guard_formatter.hpp"
+#include "dogen/cpp_formatters/types/include_formatter.hpp"
+#include "dogen/cpp_formatters/types/boilerplate_formatter.hpp"
 
 namespace {
 
@@ -39,12 +39,12 @@ const bool documenting_previous_identifier(true);
 namespace dogen {
 namespace cpp_formatters {
 
-cpp_file_boilerplate_formatter::cpp_file_boilerplate_formatter(
+boilerplate_formatter::boilerplate_formatter(
     const bool generate_preamble, const bool generate_header_guards)
     : generate_preamble_(generate_preamble),
       generate_header_guards_(generate_header_guards) { }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 add_modeline(std::list<std::string>& content,
     const formatters::modeline& m) const {
     std::ostringstream s;
@@ -53,7 +53,7 @@ add_modeline(std::list<std::string>& content,
     content.push_back(s.str());
 }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 add_marker(std::list<std::string>& content,
     const std::string& marker) const {
     if (marker.empty())
@@ -62,7 +62,7 @@ add_marker(std::list<std::string>& content,
     content.push_back(marker);
 }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 add_licence(std::list<std::string>& content,
     const formatters::licence& l) const {
     std::ostringstream s;
@@ -77,7 +77,7 @@ add_licence(std::list<std::string>& content,
         content.push_back(l.text());
 }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 format_preamble(std::ostream& s, const formatters::annotation& a) const {
     if (!generate_preamble_)
         return;
@@ -121,34 +121,34 @@ format_preamble(std::ostream& s, const formatters::annotation& a) const {
     }
 }
 
-void cpp_file_boilerplate_formatter::format_guards_begin(std::ostream& s,
+void boilerplate_formatter::format_guards_begin(std::ostream& s,
     const boost::filesystem::path& relative_file_path) const {
     if (!generate_header_guards_)
         return;
 
-    cpp_header_guard_formatter f;
+    header_guard_formatter f;
     f.format_begin(s, relative_file_path);
 
     if (!relative_file_path.empty())
         s << std::endl;
 }
 
-void cpp_file_boilerplate_formatter::format_guards_end(std::ostream& s,
+void boilerplate_formatter::format_guards_end(std::ostream& s,
     const boost::filesystem::path& relative_file_path) const {
     if (!generate_header_guards_)
         return;
 
-    cpp_header_guard_formatter f;
+    header_guard_formatter f;
     f.format_end(s, relative_file_path);
 }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 format_includes(std::ostream& s, const cpp::includes& i) const {
-    cpp_include_formatter f;
+    include_formatter f;
     f.format(s, i);
 }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 format_begin(std::ostream& s, const formatters::annotation& a,
     const cpp::includes& i,
     const boost::filesystem::path& relative_file_path) const {
@@ -158,7 +158,7 @@ format_begin(std::ostream& s, const formatters::annotation& a,
     format_includes(s, i);
 }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 format_postamble(std::ostream& s, const formatters::annotation& a) const {
     if (!a.modeline())
         return;
@@ -179,7 +179,7 @@ format_postamble(std::ostream& s, const formatters::annotation& a) const {
     }
 }
 
-void cpp_file_boilerplate_formatter::
+void boilerplate_formatter::
 format_end(std::ostream& s, const formatters::annotation& a,
     const boost::filesystem::path& relative_file_path) const {
     format_postamble(s, a);

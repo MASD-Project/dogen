@@ -18,41 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/filesystem/path.hpp>
-#include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/cpp_formatters/types/cpp_include_formatter.hpp"
+#ifndef DOGEN_CPP_FORMATTERS_TYPES_HEADER_GUARD_FORMATTER_FWD_HPP
+#define DOGEN_CPP_FORMATTERS_TYPES_HEADER_GUARD_FORMATTER_FWD_HPP
 
-namespace {
-
-const bool is_system(true);
-const bool is_user(false);
-
-const std::string include("#include ");
-const std::string open_system("<");
-const std::string close_system(">");
-const std::string open_user("\"");
-const std::string close_user("\"");
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp_formatters {
 
-void cpp_include_formatter::
-format(std::ostream& s, const cpp::includes& i) const {
-    for (const auto& inc : i.system()) {
-        s << include << open_system << inc.generic_string()
-          << close_system << std::endl;
-    }
-
-    for (const auto& inc : i.user()) {
-        s << include << open_user << inc.generic_string()
-          << close_user << std::endl;
-    }
-
-    if (!i.system().empty() || !i.user().empty())
-        s << formatters::manage_blank_lines << std::endl;
-}
+class header_guard_formatter;
 
 } }
+
+#endif

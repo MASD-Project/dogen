@@ -6577,19 +6577,19 @@ to the grammar of the C++-11 programming language.
         <dia:point val="94.5593,-14.2958"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.5093,-14.3458;128.219,-8.24583"/>
+        <dia:rectangle val="94.5093,-14.3458;119.749,-7.4458"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="94.5593,-14.2958"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.609999999999999"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_file_boilerplate_formatter#</dia:string>
+        <dia:string>#boilerplate_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -6728,7 +6728,7 @@ to the grammar of the C++-11 programming language.
                 <dia:string>#l#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const licence&amp;#</dia:string>
+                <dia:string>#const formatters::licence&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6745,7 +6745,7 @@ to the grammar of the C++-11 programming language.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const modeline&amp;#</dia:string>
+                <dia:string>#const formatters::modeline&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6779,7 +6779,7 @@ to the grammar of the C++-11 programming language.
                 <dia:string>#i#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const cpp_includes&amp;#</dia:string>
+                <dia:string>#const cpp::includes&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6886,19 +6886,19 @@ to the grammar of the C++-11 programming language.
         <dia:point val="82,-29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.95,-29.05;100.645,-25.35"/>
+        <dia:rectangle val="81.95,-29.05;101.03,-25.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="82,-29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.594999999999999"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_include_formatter#</dia:string>
+        <dia:string>#include_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -7037,7 +7037,7 @@ to the grammar of the C++-11 programming language.
                 <dia:string>#il#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const cpp_includes&amp;#</dia:string>
+                <dia:string>#const cpp::includes&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7095,17 +7095,17 @@ to the grammar of the C++-11 programming language.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="91.2975,-25.4"/>
+        <dia:point val="91.49,-25.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.2475,-25.45;95.3093,-13.4958"/>
+        <dia:rectangle val="91.44,-25.45;95.3093,-13.4958"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="91.2975,-25.4"/>
-        <dia:point val="91.2975,-20"/>
+        <dia:point val="91.49,-25.4"/>
+        <dia:point val="91.49,-20"/>
         <dia:point val="94.5593,-20"/>
         <dia:point val="94.5593,-14.2958"/>
       </dia:attribute>
@@ -7130,13 +7130,13 @@ to the grammar of the C++-11 programming language.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O80">
       <dia:attribute name="obj_pos">
-        <dia:point val="121,-29"/>
+        <dia:point val="117,-29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="120.95,-29.05;145.805,-24.55"/>
+        <dia:rectangle val="116.95,-29.05;141.805,-24.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="121,-29"/>
+        <dia:point val="117,-29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -7145,7 +7145,7 @@ to the grammar of the C++-11 programming language.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_header_guard_formatter#</dia:string>
+        <dia:string>#header_guard_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -7407,19 +7407,19 @@ to the grammar of the C++-11 programming language.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="128.169,-14.2958"/>
+        <dia:point val="119.699,-14.2958"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="127.419,-24.65;133.577,-13.4958"/>
+        <dia:rectangle val="118.949,-24.65;129.577,-13.4958"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="128.169,-14.2958"/>
-        <dia:point val="128.169,-20"/>
-        <dia:point val="133.377,-20"/>
-        <dia:point val="133.377,-24.6"/>
+        <dia:point val="119.699,-14.2958"/>
+        <dia:point val="119.699,-20"/>
+        <dia:point val="129.377,-20"/>
+        <dia:point val="129.377,-24.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
