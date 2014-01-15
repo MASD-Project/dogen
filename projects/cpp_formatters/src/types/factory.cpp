@@ -28,7 +28,7 @@
 #include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp_formatters/types/production_failure.hpp"
 #include "dogen/cpp_formatters/types/facet_includer.hpp"
-#include "dogen/cpp_formatters/types/domain_header.hpp"
+#include "dogen/cpp_formatters/types/types_main_header_file_formatter.hpp"
 #include "dogen/cpp_formatters/types/domain_implementation.hpp"
 #include "dogen/cpp_formatters/types/facet_includer.hpp"
 #include "dogen/cpp_formatters/types/hash_header.hpp"
@@ -80,7 +80,7 @@ factory::result_type factory::create_main_formatter(std::ostream& s,
     switch (cd.facet_type()) {
     case cpp_facet_types::types:
         if (cd.file_type() == file_types::header)
-            return domain_header::create(s,
+            return types_main_header_file_formatter::create(s,
                 settings_.disable_complete_constructor(),
                 settings_.use_integrated_io(),
                 disable_io_, disable_serialization_);

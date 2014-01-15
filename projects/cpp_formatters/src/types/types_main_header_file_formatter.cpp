@@ -32,13 +32,13 @@
 #include "dogen/cpp_formatters/types/enum_declaration.hpp"
 #include "dogen/cpp_formatters/types/exception_declaration.hpp"
 #include "dogen/cpp_formatters/types/class_declaration.hpp"
-#include "dogen/cpp_formatters/types/domain_header.hpp"
+#include "dogen/cpp_formatters/types/types_main_header_file_formatter.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp_formatters.domain_header"));
+auto lg(logger_factory("cpp_formatters.types_main_header_file_formatter"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
@@ -53,8 +53,9 @@ const std::string missing_exception_info("Exception info is empty");
 namespace dogen {
 namespace cpp_formatters {
 
-domain_header::
-domain_header(std::ostream& stream, const bool disable_complete_constructor,
+types_main_header_file_formatter::
+types_main_header_file_formatter(std::ostream& stream,
+    const bool disable_complete_constructor,
     const bool use_integrated_io, const bool disable_io,
     const bool disable_serialization) :
     stream_(stream),
@@ -63,16 +64,16 @@ domain_header(std::ostream& stream, const bool disable_complete_constructor,
     use_integrated_io_(use_integrated_io),
     disable_io_(disable_io), disable_serialization_(disable_serialization) { }
 
-file_formatter::shared_ptr domain_header::
+file_formatter::shared_ptr types_main_header_file_formatter::
 create(std::ostream& stream, const bool disable_complete_constructor,
     const bool use_integrated_io, const bool disable_io,
     const bool disable_serialization) {
-    return file_formatter::shared_ptr(new domain_header(stream,
+    return file_formatter::shared_ptr(new types_main_header_file_formatter(stream,
             disable_complete_constructor, use_integrated_io, disable_io,
             disable_serialization));
 }
 
-void domain_header::
+void types_main_header_file_formatter::
 equality_operator(const cpp::class_info& ci) {
     if (!ci.is_parent())
         return;
@@ -88,7 +89,7 @@ equality_operator(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void domain_header::
+void types_main_header_file_formatter::
 inserter_operator(const cpp::class_info& ci) {
     if (!use_integrated_io_ || disable_io_)
         return;
@@ -98,7 +99,7 @@ inserter_operator(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void domain_header::
+void types_main_header_file_formatter::
 swap_method(const cpp::class_info& ci) {
     // swap overload is only available in leaf classes - MEC++-33
     if (ci.all_properties().empty() || ci.is_parent() || ci.is_immutable())
@@ -128,7 +129,8 @@ swap_method(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void domain_header::class_declaration(const cpp::content_descriptor& cd,
+void types_main_header_file_formatter::
+class_declaration(const cpp::content_descriptor& cd,
     const cpp::class_info& ci) {
     using dogen::utility::exception::invalid_enum_value;
     using cpp::content_types;
@@ -147,7 +149,7 @@ void domain_header::class_declaration(const cpp::content_descriptor& cd,
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_category_type));
 }
 
-void domain_header::
+void types_main_header_file_formatter::
 format_main(const cpp::content_descriptor& cd, const cpp::class_info& ci) {
 
     {
@@ -171,7 +173,7 @@ format_main(const cpp::content_descriptor& cd, const cpp::class_info& ci) {
         utility_.blank_line(2);
 }
 
-void domain_header::format_class(const cpp::source_file& f) {
+void types_main_header_file_formatter::format_class(const cpp::source_file& f) {
     boost::optional<cpp::class_info> o(f.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -188,7 +190,8 @@ void domain_header::format_class(const cpp::source_file& f) {
     }
 }
 
-void domain_header::format_enumeration(const cpp::source_file& f) {
+void types_main_header_file_formatter::
+format_enumeration(const cpp::source_file& f) {
     const auto o(f.enum_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -204,7 +207,8 @@ void domain_header::format_enumeration(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void domain_header::format_exception(const cpp::source_file& f) {
+void types_main_header_file_formatter::
+format_exception(const cpp::source_file& f) {
     const auto o(f.exception_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -220,7 +224,7 @@ void domain_header::format_exception(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void domain_header::format(const cpp::source_file& f) {
+void types_main_header_file_formatter::format(const cpp::source_file& f) {
     licence licence(stream_);
     licence.format();
 

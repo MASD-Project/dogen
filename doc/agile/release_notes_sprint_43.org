@@ -34,13 +34,13 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-15 Wed 23:43]
+Clock summary at [2014-01-15 Wed 23:49]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *7:19* |      |      |
+| *Total time*                                                                 | *7:24* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 7:19 |      |
+| Development Stories Implemented                                              |        | 7:24 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:52 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
@@ -50,7 +50,7 @@ Clock summary at [2014-01-15 Wed 23:43]
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |        |      | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |        |      | 0:16 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 0:23 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 0:28 |
 #+end:
 
 *** Create a blog post on dogen's development methodology             :story:
@@ -187,9 +187,16 @@ Make the main types header formatters look like the =om= types formatter.
 
 We don't really need two separate class declarations. Merge them into one.
 
-**** Rename formatter into =types_main_header_formatter=               :task:
+**** COMPLETED Rename formatter into =types_main_header_file_formatter= :task:
+     CLOSED: [2014-01-15 Wed 23:49]
+     CLOCK: [2014-01-15 Wed 23:44]--[2014-01-15 Wed 23:49] =>  0:05
 
 The =om= naming convention was slightly more meaningful, so bring it across.
+
+**** Copy across documentation from =om=
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
 
 **** Make use of boilerplate                                           :task:
 

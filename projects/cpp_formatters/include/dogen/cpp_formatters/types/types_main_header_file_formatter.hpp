@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_TYPES_DOMAIN_HEADER_HPP
-#define DOGEN_CPP_FORMATTERS_TYPES_DOMAIN_HEADER_HPP
+#ifndef DOGEN_CPP_FORMATTERS_TYPES_TYPES_MAIN_HEADER_FILE_FORMATTER_HPP
+#define DOGEN_CPP_FORMATTERS_TYPES_TYPES_MAIN_HEADER_FILE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,19 +37,23 @@
 namespace dogen {
 namespace cpp_formatters {
 
-class domain_header : public file_formatter {
+class types_main_header_file_formatter : public file_formatter {
 public:
-    domain_header() = delete;
-    domain_header(const domain_header&) = default;
-    domain_header(domain_header&&) = default;
-    domain_header& operator=(const domain_header&) = default;
+    types_main_header_file_formatter() = delete;
+    types_main_header_file_formatter(
+        const types_main_header_file_formatter&) = default;
+    types_main_header_file_formatter(
+        types_main_header_file_formatter&&) = default;
+    types_main_header_file_formatter& operator=(
+        const types_main_header_file_formatter&) = default;
 
 public:
-    domain_header(std::ostream& stream, const bool disable_complete_constructor,
+    types_main_header_file_formatter(std::ostream& stream,
+        const bool disable_complete_constructor,
         const bool use_integrated_io, const bool disable_io,
         const bool serialization_enabled);
 
-    virtual ~domain_header() noexcept {}
+    virtual ~types_main_header_file_formatter() noexcept {}
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,
