@@ -27,12 +27,11 @@
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
 #include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/domain_class_declaration.hpp"
-#include "dogen/cpp_formatters/types/key_class_declaration.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/enum_declaration.hpp"
 #include "dogen/cpp_formatters/types/exception_declaration.hpp"
+#include "dogen/cpp_formatters/types/class_declaration.hpp"
 #include "dogen/cpp_formatters/types/domain_header.hpp"
 
 using namespace dogen::utility::log;
@@ -135,16 +134,11 @@ void domain_header::class_declaration(const cpp::content_descriptor& cd,
     using cpp::content_types;
     const auto ct(cd.content_type());
     if (ct == content_types::versioned_key ||
-        ct == content_types::unversioned_key) {
-        key_class_declaration
-            f(stream_, disable_complete_constructor_, disable_io_,
-                disable_serialization_);
-        f.format(ci);
-        return;
-    } else if (ct == content_types::value_object) {
-        domain_class_declaration
-            f(stream_, disable_complete_constructor_, disable_io_,
-                disable_serialization_);
+        ct == content_types::unversioned_key ||
+        ct == content_types::value_object) {
+
+        cpp_formatters::class_declaration f(stream_, disable_serialization_,
+            disable_complete_constructor_, disable_io_);
         f.format(ci);
         return;
     }

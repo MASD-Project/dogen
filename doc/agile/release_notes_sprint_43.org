@@ -34,14 +34,14 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-15 Wed 23:15]
+Clock summary at [2014-01-15 Wed 23:43]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *6:50* |      |      |
+| *Total time*                                                                 | *7:19* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 6:50 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:46 |
+| Development Stories Implemented                                              |        | 7:19 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:52 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
 | COMPLETED Create the new =formatters= model and copy required code           |        |      | 1:06 |
@@ -50,6 +50,7 @@ Clock summary at [2014-01-15 Wed 23:15]
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |        |      | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |        |      | 0:16 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 0:23 |
 #+end:
 
 *** Create a blog post on dogen's development methodology             :story:
@@ -57,6 +58,7 @@ Clock summary at [2014-01-15 Wed 23:15]
 We should do a write up of how we develop dogen.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-15 Wed 23:14]--[2014-01-15 Wed 23:20] =>  0:06
     CLOCK: [2014-01-14 Tue 07:54]--[2014-01-14 Tue 07:58] =>  0:04
     CLOCK: [2014-01-13 Mon 07:54]--[2014-01-13 Mon 08:02] =>  0:08
     CLOCK: [2014-01-13 Mon 07:09]--[2014-01-13 Mon 07:23] =>  0:14
@@ -173,6 +175,35 @@ with ninja.
 Links:
 
 - [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
+
+*** IMPLEMENTATION Refactor types header into new style file formatter :story:
+
+Make the main types header formatters look like the =om= types formatter.
+
+**** COMPLETED Merge domain and key class declaration                  :task:
+     CLOSED: [2014-01-15 Wed 23:43]
+     CLOCK: [2014-01-15 Wed 23:42]--[2014-01-15 Wed 23:43] =>  0:01
+     CLOCK: [2014-01-15 Wed 23:20]--[2014-01-15 Wed 23:42] =>  0:22
+
+We don't really need two separate class declarations. Merge them into one.
+
+**** Rename formatter into =types_main_header_formatter=               :task:
+
+The =om= naming convention was slightly more meaningful, so bring it across.
+
+**** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 

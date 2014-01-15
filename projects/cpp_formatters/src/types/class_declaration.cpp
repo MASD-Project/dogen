@@ -28,9 +28,82 @@ namespace dogen {
 namespace cpp_formatters {
 
 class_declaration::
-class_declaration(std::ostream& stream, const bool disable_serialization)
+class_declaration(std::ostream& stream, const bool disable_serialization,
+    const bool disable_complete_constructor, const bool disable_io)
     : stream_(stream), utility_(stream_, indenter_),
-      disable_serialization_(disable_serialization) { }
+      disable_serialization_(disable_serialization),
+      disable_complete_constructor_(disable_complete_constructor),
+      disable_io_(disable_io) { }
+
+void class_declaration::
+hand_crafted_constructors(const cpp::class_info& ci) {
+    default_constructor(ci);
+    destructor(ci);
+
+    if (ci.class_type() != cpp::class_types::unversioned_key &&
+        ci.class_type() != cpp::class_types::versioned_key)
+        move_constructor(ci);
+
+    if (!disable_complete_constructor_)
+        complete_constructor(ci);
+}
+
+void class_declaration::visitor_method(const cpp::class_info& ci) {
+    if (ci.is_visitable()) {
+        utility_.public_access_specifier();
+        stream_ << indenter_ << "virtual void accept(const " << ci.name()
+                << "_visitor& v) const = 0;" << std::endl;
+        stream_ << indenter_ << "virtual void accept(" << ci.name()
+                << "_visitor& v) const = 0;" << std::endl;
+        stream_ << indenter_ << "virtual void accept(const " << ci.name()
+                << "_visitor& v) = 0;" << std::endl;
+        stream_ << indenter_ << "virtual void accept(" << ci.name()
+                << "_visitor& v) = 0;" << std::endl;
+        utility_.blank_line();
+    } else if (ci.is_original_parent_visitable() && !ci.is_parent()) {
+        utility_.public_access_specifier();
+        stream_ << indenter_ << "virtual void accept(const "
+                << ci.original_parent_name()
+                << "_visitor& v) const override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+        stream_ << indenter_ << "virtual void accept("
+                << ci.original_parent_name()
+                << "_visitor& v) const override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+        stream_ << indenter_ << "virtual void accept(const "
+                << ci.original_parent_name()
+                << "_visitor& v) override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+        stream_ << indenter_ << "virtual void accept("
+                << ci.original_parent_name()
+                << "_visitor& v) override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+    }
+}
 
 void class_declaration::open_class(const cpp::class_info& ci) {
     doxygen_comments dc(stream_, indenter_);
@@ -391,6 +464,43 @@ void class_declaration::swap_and_assignment(const cpp::class_info& ci) {
     }
 
     utility_.blank_line();
+}
+
+void class_declaration::format(const cpp::class_info& ci) {
+    if (ci.class_type() != cpp::class_types::unversioned_key &&
+        ci.class_type() != cpp::class_types::versioned_key) {
+
+        open_class(ci);
+        {
+            positive_indenter_scope s(indenter_);
+            compiler_generated_constuctors(ci);
+            hand_crafted_constructors(ci);
+            friends(ci);
+            visitor_method(ci);
+            if (!disable_io_)
+                to_stream(ci);
+            getters_and_setters(ci);
+            equality(ci);
+            swap_and_assignment(ci);
+            member_variables(ci);
+        }
+        close_class();
+    } else {
+        open_class(ci);
+        {
+            positive_indenter_scope s(indenter_);
+            compiler_generated_constuctors(ci);
+            hand_crafted_constructors(ci);
+            friends(ci);
+            if (!disable_io_)
+                to_stream(ci);
+            getters_and_setters(ci);
+            equality(ci);
+            swap_and_assignment(ci);
+            member_variables(ci);
+        }
+        close_class();
+    }
 }
 
 } }

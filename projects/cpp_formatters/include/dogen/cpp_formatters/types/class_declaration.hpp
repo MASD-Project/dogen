@@ -41,11 +41,13 @@ public:
     class_declaration(const class_declaration&) = default;
     class_declaration(class_declaration&&) = default;
     class_declaration& operator=(const class_declaration&) = default;
+    ~class_declaration() noexcept = default;
 
 public:
     class_declaration(std::ostream& stream,
-        const bool disable_serialization);
-    virtual ~class_declaration() noexcept {}
+        const bool disable_serialization,
+        const bool disable_complete_constructor,
+        const bool disable_io);
 
 private:
     void non_object_getters_and_setters(const std::string class_name,
@@ -53,9 +55,11 @@ private:
     void object_getters_and_setters(const std::string class_name,
         const cpp::property_info& pi);
 
-protected:
     void open_class(const cpp::class_info& ci);
     void close_class();
+
+    void hand_crafted_constructors(const cpp::class_info& ci);
+    void visitor_method(const cpp::class_info& ci);
     void compiler_generated_constuctors(const cpp::class_info& ci);
     void default_constructor(const cpp::class_info& ci);
     void move_constructor(const cpp::class_info& ci);
@@ -69,13 +73,15 @@ protected:
     void swap_and_assignment(const cpp::class_info& ci);
 
 public:
-    virtual void format(const cpp::class_info& ci) = 0;
+    void format(const cpp::class_info& ci);
 
 protected:
     std::ostream& stream_;
     indenter indenter_;
     utility utility_;
     const bool disable_serialization_;
+    const bool disable_complete_constructor_;
+    const bool disable_io_;
 };
 
 } }
