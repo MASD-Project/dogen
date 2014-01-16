@@ -1,0 +1,3514 @@
+diff --git a/diagrams/cpp.dia b/diagrams/cpp.dia
+index 3a8dcfa..3f51ab6 100644
+--- a/diagrams/cpp.dia
++++ b/diagrams/cpp.dia
+@@ -562,7 +562,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
+         <dia:point val="-27,27"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="30.544999999999998"/>
++        <dia:real val="30.545000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="28.900000000000002"/>
+@@ -1194,13 +1194,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O6">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="26,47"/>
++        <dia:point val="32,47"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="25.95,46.95;40.025,52.25"/>
++        <dia:rectangle val="31.95,46.95;46.025,52.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="26,47"/>
++        <dia:point val="32,47"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="13.975"/>
+@@ -1916,19 +1916,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O11">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="50,47"/>
++        <dia:point val="56,47"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.95,46.95;69.03,58.65"/>
++        <dia:rectangle val="55.95,46.95;71.565,54.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="50,47"/>
++        <dia:point val="56,47"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="18.98"/>
++        <dia:real val="15.515000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="11.6"/>
++        <dia:real val="7.6000000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#source_file#</dia:string>
+@@ -2020,85 +2020,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#descriptor#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#content_descriptor#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Description of the file's content.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#class_info#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;class_info&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#If non-empty, the file contains a class.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#enum_info#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;enum_info&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#If non-empty, the file contains an enum.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#exception_info#</dia:string>
++            <dia:string>#includes#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;exception_info&gt;#</dia:string>
++            <dia:string>#includes#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#If non-empty, the file contains an exception.#</dia:string>
++            <dia:string>#Headers included by this source file.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2112,16 +2043,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#registrar_info#</dia:string>
++            <dia:string>#descriptor#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;registrar_info&gt;#</dia:string>
++            <dia:string>#content_descriptor#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#If non-empty, the file contains a registrar.#</dia:string>
++            <dia:string>#Description of the file's content.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2181,52 +2112,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#namespace_info#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;namespace_info&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Namespaces in which to include the type.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#visitor_info#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;visitor_info&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#If non-empty, file includes a visitor.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#relative_path#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -2250,16 +2135,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#includes#</dia:string>
++            <dia:string>#entity#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#includes#</dia:string>
++            <dia:string>#boost::shared_ptr&lt;cpp::entity&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
++            <dia:string>#Entity contained in this file, if any.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -4562,7 +4447,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="112,47"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="12.619999999999999"/>
++        <dia:real val="12.620000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -4844,7 +4729,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="36.4525,32.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="32.9375,31.45;37.2025,47.8"/>
++        <dia:rectangle val="35.7025,31.45;39.1875,47.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -4852,8 +4737,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="36.4525,32.2"/>
+         <dia:point val="36.4525,40"/>
+-        <dia:point val="32.9875,40"/>
+-        <dia:point val="32.9875,47"/>
++        <dia:point val="38.9875,40"/>
++        <dia:point val="38.9875,47"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -4915,7 +4800,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="46.905,32.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.155,31.45;50.2,47.8"/>
++        <dia:rectangle val="46.155,31.45;56.2,47.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -4923,8 +4808,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="46.905,32.2"/>
+         <dia:point val="46.905,40"/>
+-        <dia:point val="50,40"/>
+-        <dia:point val="50,47"/>
++        <dia:point val="56,40"/>
++        <dia:point val="56,47"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -5230,7 +5115,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="92,47"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="8.5850000000000009"/>
++        <dia:real val="8.5849999999999991"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="15.600000000000003"/>
+@@ -6486,17 +6371,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="59.49,58.6"/>
++        <dia:point val="63.7575,54.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.74,57.85;70.6475,72.8"/>
++        <dia:rectangle val="63.0075,53.85;70.6475,72.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="59.49,58.6"/>
+-        <dia:point val="59.49,66"/>
++        <dia:point val="63.7575,54.6"/>
++        <dia:point val="63.7575,66"/>
+         <dia:point val="70.4475,66"/>
+         <dia:point val="70.4475,72"/>
+       </dia:attribute>
+@@ -6721,17 +6606,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="68.98,47"/>
++        <dia:point val="71.515,47"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="68.23,32.95;85.2,47.8"/>
++        <dia:rectangle val="70.765,32.95;85.2,47.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="68.98,47"/>
+-        <dia:point val="68.98,40"/>
++        <dia:point val="71.515,47"/>
++        <dia:point val="71.515,40"/>
+         <dia:point val="85,40"/>
+         <dia:point val="85,33"/>
+       </dia:attribute>
+@@ -6963,17 +6848,17 @@ These are expected to use quotes and be on the user path.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="59.49,47"/>
++        <dia:point val="63.7575,47"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.74,30.55;64.7275,47.8"/>
++        <dia:rectangle val="63.0075,30.55;64.7275,47.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="59.49,47"/>
+-        <dia:point val="59.49,40"/>
++        <dia:point val="63.7575,47"/>
++        <dia:point val="63.7575,40"/>
+         <dia:point val="64.5275,40"/>
+         <dia:point val="64.5275,30.6"/>
+       </dia:attribute>
+diff --git a/diagrams/sml_to_cpp.dia b/diagrams/sml_to_cpp.dia
+index c3fea9f..bf592de 100644
+--- a/diagrams/sml_to_cpp.dia
++++ b/diagrams/sml_to_cpp.dia
+@@ -679,16 +679,16 @@
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O7">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-1,12"/>
++        <dia:point val="-7,12"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-1.05,11.95;23.805,19.65"/>
++        <dia:rectangle val="-7.05,11.95;25.12,19.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-1,12"/>
++        <dia:point val="-7,12"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="24.754999999999999"/>
++        <dia:real val="32.07"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="7.5999999999999996"/>
+@@ -786,7 +786,7 @@
+             <dia:string>#classes#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;sml::qname,cpp::class_info&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::class_info&gt;&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -832,7 +832,7 @@
+             <dia:string>#exceptions#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;sml::qname,cpp::exception_info&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::exception_info&gt;&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -855,7 +855,7 @@
+             <dia:string>#enumerations#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;sml::qname,cpp::enum_info&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::enum_info&gt;&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -878,7 +878,7 @@
+             <dia:string>#registrars#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;sml::qname,cpp::registrar_info&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::registrar_info&gt;&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -901,7 +901,7 @@
+             <dia:string>#namespaces#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;sml::qname,cpp::namespace_info&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::namespace_info&gt;&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -924,7 +924,7 @@
+             <dia:string>#visitors#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;sml::qname,cpp::visitor_info&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::visitor_info&gt;&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -1391,7 +1391,7 @@
+         <dia:point val="48,32"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="23.705,19.55;48.75,32.8"/>
++        <dia:rectangle val="25.02,19.55;48.75,32.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -1399,8 +1399,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="48,32"/>
+         <dia:point val="48,27"/>
+-        <dia:point val="23.755,27"/>
+-        <dia:point val="23.755,19.6"/>
++        <dia:point val="25.07,27"/>
++        <dia:point val="25.07,19.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -1462,7 +1462,7 @@
+         <dia:point val="24,42"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-1.05,19.55;24.75,42.8"/>
++        <dia:rectangle val="-7.05,19.55;24.75,42.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -1470,8 +1470,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="24,42"/>
+         <dia:point val="24,32"/>
+-        <dia:point val="-1,32"/>
+-        <dia:point val="-1,19.6"/>
++        <dia:point val="-7,32"/>
++        <dia:point val="-7,19.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -2608,7 +2608,7 @@
+         <dia:point val="101,72"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="11.664999999999999"/>
++        <dia:real val="11.665000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="38.000000000000007"/>
+@@ -5069,7 +5069,239 @@
+         <dia:connection handle="1" to="O19" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O29">
++    <dia:object type="UML - Class" version="0" id="O29">
++      <dia:attribute name="obj_pos">
++        <dia:point val="37,-8"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="36.95,-8.05;49.485,-4.35"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="37,-8"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="12.434999999999999"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3.6000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#inclusion_lists#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Result of a request for includes.#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes">
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#system#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#System includes.
++
++These are expected to use angle brackets and be on the system path.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#user#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#User includes.
++
++These are expected to use quotes and be on the user path.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++      </dia:attribute>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O30">
++      <dia:attribute name="name">
++        <dia:string>#&lt; produces#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="58.3675,12"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="43.1675,-4.45;59.1175,12.8"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="58.3675,12"/>
++        <dia:point val="58.3675,0.8875"/>
++        <dia:point val="43.2175,0.8875"/>
++        <dia:point val="43.2175,-4.4"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O9" connection="1"/>
++        <dia:connection handle="1" to="O29" connection="6"/>
++      </dia:connections>
++    </dia:object>
++    <dia:object type="UML - Note" version="0" id="O31">
+       <dia:attribute name="obj_pos">
+         <dia:point val="20,2"/>
+       </dia:attribute>
+@@ -5122,7 +5354,7 @@ produces location based header guards.#</dia:string>
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Message" version="0" id="O30">
++    <dia:object type="UML - Message" version="0" id="O32">
+       <dia:attribute name="obj_pos">
+         <dia:point val="27.765,5.3"/>
+       </dia:attribute>
+@@ -5152,11 +5384,11 @@ produces location based header guards.#</dia:string>
+         <dia:point val="32.3829,9.1501"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O29" connection="6"/>
++        <dia:connection handle="0" to="O31" connection="6"/>
+         <dia:connection handle="1" to="O8" connection="0"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O31">
++    <dia:object type="UML - Note" version="0" id="O33">
+       <dia:attribute name="obj_pos">
+         <dia:point val="34,20"/>
+       </dia:attribute>
+@@ -5208,7 +5440,7 @@ for a given type.#</dia:string>
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Message" version="0" id="O32">
++    <dia:object type="UML - Message" version="0" id="O34">
+       <dia:attribute name="obj_pos">
+         <dia:point val="41.9575,20"/>
+       </dia:attribute>
+@@ -5238,11 +5470,11 @@ for a given type.#</dia:string>
+         <dia:point val="48.9792,18.0001"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O31" connection="1"/>
++        <dia:connection handle="0" to="O33" connection="1"/>
+         <dia:connection handle="1" to="O9" connection="5"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O33">
++    <dia:object type="UML - Note" version="0" id="O35">
+       <dia:attribute name="obj_pos">
+         <dia:point val="86,36"/>
+       </dia:attribute>
+@@ -5294,7 +5526,7 @@ of relationship information.#</dia:string>
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Message" version="0" id="O34">
++    <dia:object type="UML - Message" version="0" id="O36">
+       <dia:attribute name="obj_pos">
+         <dia:point val="91.84,36"/>
+       </dia:attribute>
+@@ -5324,11 +5556,11 @@ of relationship information.#</dia:string>
+         <dia:point val="86.7878,35.0501"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O33" connection="1"/>
++        <dia:connection handle="0" to="O35" connection="1"/>
+         <dia:connection handle="1" to="O19" connection="4"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O35">
++    <dia:object type="UML - Class" version="0" id="O37">
+       <dia:attribute name="obj_pos">
+         <dia:point val="73,-8"/>
+       </dia:attribute>
+@@ -5438,7 +5670,7 @@ of relationship information.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O36">
++    <dia:object type="UML - Note" version="0" id="O38">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-1,-8"/>
+       </dia:attribute>
+@@ -5452,7 +5684,7 @@ of relationship information.#</dia:string>
+         <dia:point val="-1,-8"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="23.614999999999998"/>
++        <dia:real val="23.615000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.7000000000000002"/>
+diff --git a/doc/agile/release_notes_sprint_43.org b/doc/agile/release_notes_sprint_43.org
+index eb9ed2b..6f70d23 100644
+--- a/doc/agile/release_notes_sprint_43.org
++++ b/doc/agile/release_notes_sprint_43.org
+@@ -68,6 +68,19 @@ We should do a write up of how we develop dogen.
+ 
+ Updates to release notes and backlog.
+ 
++*** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
++    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
++
++One way of solving the ninja problems may be to stop creating a static
++library for header validation. We did it simply because it was easier
++but there is no real reason for it. We may be able to save a bit on
++archiving, and as an added bonus, it may fix the issues we're having
++with ninja.
++
++Links:
++
++- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
++
+ *** COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= :story:
+     CLOSED: [2014-01-13 Mon 22:25]
+     CLOCK: [2014-01-13 Mon 21:15]--[2014-01-13 Mon 22:25] =>  1:10
+@@ -165,19 +178,6 @@ formatters model.
+   clearer, if somewhat longer. So =cpp_formatter::include_formatter=
+   rather than =cpp_formatter::includes=.
+ 
+-*** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
+-    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
+-
+-One way of solving the ninja problems may be to stop creating a static
+-library for header validation. We did it simply because it was easier
+-but there is no real reason for it. We may be able to save a bit on
+-archiving, and as an added bonus, it may fix the issues we're having
+-with ninja.
+-
+-Links:
+-
+-- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
+-
+ *** IMPLEMENTATION Refactor types header into new style file formatter :story:
+     CLOCK: [2014-01-16 Thu 09:16]--[2014-01-16 Thu 09:24] =>  0:08
+ 
+@@ -196,6 +196,14 @@ We don't really need two separate class declarations. Merge them into one.
+ 
+ The =om= naming convention was slightly more meaningful, so bring it across.
+ 
++**** IMPLEMENTATION Use a single entity shared pointer in =source_file= :task:
++     CLOCK: [2014-01-16 Thu 22:01]--[2014-01-16 Thu 22:38] =>  0:37
++
++Source file has lots of =boost::optional= members for entity types. A
++source file can only have a single one of these. Replace all of this
++with a single =boost::shared_ptr= to entity and use visitor in the
++formatters.
++
+ **** Use tags for class properties in transformer                      :task:
+ **** Copy across documentation from =om=
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/source_file.hpp b/projects/cpp/include/dogen/cpp/types/source_file.hpp
+index c4da382..cf22d7f 100644
+--- a/projects/cpp/include/dogen/cpp/types/source_file.hpp
++++ b/projects/cpp/include/dogen/cpp/types/source_file.hpp
+@@ -27,17 +27,12 @@
+ 
+ #include <algorithm>
+ #include <boost/filesystem/path.hpp>
+-#include <boost/optional.hpp>
++#include <boost/shared_ptr.hpp>
+ #include <string>
+ #include "dogen/cpp/serialization/source_file_fwd_ser.hpp"
+-#include "dogen/cpp/types/class_info.hpp"
+ #include "dogen/cpp/types/content_descriptor.hpp"
+-#include "dogen/cpp/types/enum_info.hpp"
+-#include "dogen/cpp/types/exception_info.hpp"
++#include "dogen/cpp/types/entity_fwd.hpp"
+ #include "dogen/cpp/types/includes.hpp"
+-#include "dogen/cpp/types/namespace_info.hpp"
+-#include "dogen/cpp/types/registrar_info.hpp"
+-#include "dogen/cpp/types/visitor_info.hpp"
+ 
+ namespace dogen {
+ namespace cpp {
+@@ -57,17 +52,12 @@ public:
+ public:
+     source_file(
+         const std::string& documentation,
++        const dogen::cpp::includes& includes,
+         const dogen::cpp::content_descriptor& descriptor,
+-        const boost::optional<dogen::cpp::class_info>& class_info,
+-        const boost::optional<dogen::cpp::enum_info>& enum_info,
+-        const boost::optional<dogen::cpp::exception_info>& exception_info,
+-        const boost::optional<dogen::cpp::registrar_info>& registrar_info,
+         const std::string& header_guard,
+         const boost::filesystem::path& file_path,
+-        const boost::optional<dogen::cpp::namespace_info>& namespace_info,
+-        const boost::optional<dogen::cpp::visitor_info>& visitor_info,
+         const boost::filesystem::path& relative_path,
+-        const dogen::cpp::includes& includes);
++        const boost::shared_ptr<dogen::cpp::entity>& entity);
+ 
+ private:
+     template<typename Archive>
+@@ -92,53 +82,23 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief Description of the file's content.
++     * @brief Headers included by this source file.
+      */
+     /**@{*/
+-    const dogen::cpp::content_descriptor& descriptor() const;
+-    dogen::cpp::content_descriptor& descriptor();
+-    void descriptor(const dogen::cpp::content_descriptor& v);
+-    void descriptor(const dogen::cpp::content_descriptor&& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief If non-empty, the file contains a class.
+-     */
+-    /**@{*/
+-    const boost::optional<dogen::cpp::class_info>& class_info() const;
+-    boost::optional<dogen::cpp::class_info>& class_info();
+-    void class_info(const boost::optional<dogen::cpp::class_info>& v);
+-    void class_info(const boost::optional<dogen::cpp::class_info>&& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief If non-empty, the file contains an enum.
+-     */
+-    /**@{*/
+-    const boost::optional<dogen::cpp::enum_info>& enum_info() const;
+-    boost::optional<dogen::cpp::enum_info>& enum_info();
+-    void enum_info(const boost::optional<dogen::cpp::enum_info>& v);
+-    void enum_info(const boost::optional<dogen::cpp::enum_info>&& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief If non-empty, the file contains an exception.
+-     */
+-    /**@{*/
+-    const boost::optional<dogen::cpp::exception_info>& exception_info() const;
+-    boost::optional<dogen::cpp::exception_info>& exception_info();
+-    void exception_info(const boost::optional<dogen::cpp::exception_info>& v);
+-    void exception_info(const boost::optional<dogen::cpp::exception_info>&& v);
++    const dogen::cpp::includes& includes() const;
++    dogen::cpp::includes& includes();
++    void includes(const dogen::cpp::includes& v);
++    void includes(const dogen::cpp::includes&& v);
+     /**@}*/
+ 
+     /**
+-     * @brief If non-empty, the file contains a registrar.
++     * @brief Description of the file's content.
+      */
+     /**@{*/
+-    const boost::optional<dogen::cpp::registrar_info>& registrar_info() const;
+-    boost::optional<dogen::cpp::registrar_info>& registrar_info();
+-    void registrar_info(const boost::optional<dogen::cpp::registrar_info>& v);
+-    void registrar_info(const boost::optional<dogen::cpp::registrar_info>&& v);
++    const dogen::cpp::content_descriptor& descriptor() const;
++    dogen::cpp::content_descriptor& descriptor();
++    void descriptor(const dogen::cpp::content_descriptor& v);
++    void descriptor(const dogen::cpp::content_descriptor&& v);
+     /**@}*/
+ 
+     /**
+@@ -162,26 +122,6 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief Namespaces in which to include the type.
+-     */
+-    /**@{*/
+-    const boost::optional<dogen::cpp::namespace_info>& namespace_info() const;
+-    boost::optional<dogen::cpp::namespace_info>& namespace_info();
+-    void namespace_info(const boost::optional<dogen::cpp::namespace_info>& v);
+-    void namespace_info(const boost::optional<dogen::cpp::namespace_info>&& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief If non-empty, file includes a visitor.
+-     */
+-    /**@{*/
+-    const boost::optional<dogen::cpp::visitor_info>& visitor_info() const;
+-    boost::optional<dogen::cpp::visitor_info>& visitor_info();
+-    void visitor_info(const boost::optional<dogen::cpp::visitor_info>& v);
+-    void visitor_info(const boost::optional<dogen::cpp::visitor_info>&& v);
+-    /**@}*/
+-
+-    /**
+      * @brief Relative path to file.
+      */
+     /**@{*/
+@@ -191,10 +131,15 @@ public:
+     void relative_path(const boost::filesystem::path&& v);
+     /**@}*/
+ 
+-    const dogen::cpp::includes& includes() const;
+-    dogen::cpp::includes& includes();
+-    void includes(const dogen::cpp::includes& v);
+-    void includes(const dogen::cpp::includes&& v);
++    /**
++     * @brief Entity contained in this file, if any.
++     */
++    /**@{*/
++    const boost::shared_ptr<dogen::cpp::entity>& entity() const;
++    boost::shared_ptr<dogen::cpp::entity>& entity();
++    void entity(const boost::shared_ptr<dogen::cpp::entity>& v);
++    void entity(const boost::shared_ptr<dogen::cpp::entity>&& v);
++    /**@}*/
+ 
+ public:
+     bool operator==(const source_file& rhs) const;
+@@ -208,17 +153,12 @@ public:
+ 
+ private:
+     std::string documentation_;
++    dogen::cpp::includes includes_;
+     dogen::cpp::content_descriptor descriptor_;
+-    boost::optional<dogen::cpp::class_info> class_info_;
+-    boost::optional<dogen::cpp::enum_info> enum_info_;
+-    boost::optional<dogen::cpp::exception_info> exception_info_;
+-    boost::optional<dogen::cpp::registrar_info> registrar_info_;
+     std::string header_guard_;
+     boost::filesystem::path file_path_;
+-    boost::optional<dogen::cpp::namespace_info> namespace_info_;
+-    boost::optional<dogen::cpp::visitor_info> visitor_info_;
+     boost::filesystem::path relative_path_;
+-    dogen::cpp::includes includes_;
++    boost::shared_ptr<dogen::cpp::entity> entity_;
+ };
+ 
+ } }
+diff --git a/projects/cpp/src/hash/source_file_hash.cpp b/projects/cpp/src/hash/source_file_hash.cpp
+index 14d5a0c..bd684de 100644
+--- a/projects/cpp/src/hash/source_file_hash.cpp
++++ b/projects/cpp/src/hash/source_file_hash.cpp
+@@ -18,15 +18,10 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#include "dogen/cpp/hash/class_info_hash.hpp"
+ #include "dogen/cpp/hash/content_descriptor_hash.hpp"
+-#include "dogen/cpp/hash/enum_info_hash.hpp"
+-#include "dogen/cpp/hash/exception_info_hash.hpp"
++#include "dogen/cpp/hash/entity_hash.hpp"
+ #include "dogen/cpp/hash/includes_hash.hpp"
+-#include "dogen/cpp/hash/namespace_info_hash.hpp"
+-#include "dogen/cpp/hash/registrar_info_hash.hpp"
+ #include "dogen/cpp/hash/source_file_hash.hpp"
+-#include "dogen/cpp/hash/visitor_info_hash.hpp"
+ 
+ namespace {
+ 
+@@ -37,68 +32,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_boost_optional_dogen_cpp_class_info(const boost::optional<dogen::cpp::class_info>& v){
+-    std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+-    combine(seed, *v);
+-    return seed;
+-}
+-
+-inline std::size_t hash_boost_optional_dogen_cpp_enum_info(const boost::optional<dogen::cpp::enum_info>& v){
+-    std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+-    combine(seed, *v);
+-    return seed;
+-}
+-
+-inline std::size_t hash_boost_optional_dogen_cpp_exception_info(const boost::optional<dogen::cpp::exception_info>& v){
+-    std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+-    combine(seed, *v);
+-    return seed;
+-}
+-
+-inline std::size_t hash_boost_optional_dogen_cpp_registrar_info(const boost::optional<dogen::cpp::registrar_info>& v){
+-    std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+-    combine(seed, *v);
+-    return seed;
+-}
+-
+ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+     std::size_t seed(0);
+     combine(seed, v.generic_string());
+     return seed;
+ }
+ 
+-inline std::size_t hash_boost_optional_dogen_cpp_namespace_info(const boost::optional<dogen::cpp::namespace_info>& v){
++inline std::size_t hash_boost_shared_ptr_dogen_cpp_entity(const boost::shared_ptr<dogen::cpp::entity>& v){
+     std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+-    combine(seed, *v);
+-    return seed;
+-}
+-
+-inline std::size_t hash_boost_optional_dogen_cpp_visitor_info(const boost::optional<dogen::cpp::visitor_info>& v){
+-    std::size_t seed(0);
+-
+-    if (!v)
+-        return seed;
+-
+     combine(seed, *v);
+     return seed;
+ }
+@@ -112,17 +53,12 @@ std::size_t source_file_hasher::hash(const source_file&v) {
+     std::size_t seed(0);
+ 
+     combine(seed, v.documentation());
++    combine(seed, v.includes());
+     combine(seed, v.descriptor());
+-    combine(seed, hash_boost_optional_dogen_cpp_class_info(v.class_info()));
+-    combine(seed, hash_boost_optional_dogen_cpp_enum_info(v.enum_info()));
+-    combine(seed, hash_boost_optional_dogen_cpp_exception_info(v.exception_info()));
+-    combine(seed, hash_boost_optional_dogen_cpp_registrar_info(v.registrar_info()));
+     combine(seed, v.header_guard());
+     combine(seed, hash_boost_filesystem_path(v.file_path()));
+-    combine(seed, hash_boost_optional_dogen_cpp_namespace_info(v.namespace_info()));
+-    combine(seed, hash_boost_optional_dogen_cpp_visitor_info(v.visitor_info()));
+     combine(seed, hash_boost_filesystem_path(v.relative_path()));
+-    combine(seed, v.includes());
++    combine(seed, hash_boost_shared_ptr_dogen_cpp_entity(v.entity()));
+ 
+     return seed;
+ }
+diff --git a/projects/cpp/src/io/source_file_io.cpp b/projects/cpp/src/io/source_file_io.cpp
+index cd086dc..c1f69ce 100644
+--- a/projects/cpp/src/io/source_file_io.cpp
++++ b/projects/cpp/src/io/source_file_io.cpp
+@@ -20,15 +20,10 @@
+  */
+ #include <boost/algorithm/string.hpp>
+ #include <ostream>
+-#include "dogen/cpp/io/class_info_io.hpp"
+ #include "dogen/cpp/io/content_descriptor_io.hpp"
+-#include "dogen/cpp/io/enum_info_io.hpp"
+-#include "dogen/cpp/io/exception_info_io.hpp"
++#include "dogen/cpp/io/entity_io.hpp"
+ #include "dogen/cpp/io/includes_io.hpp"
+-#include "dogen/cpp/io/namespace_info_io.hpp"
+-#include "dogen/cpp/io/registrar_info_io.hpp"
+ #include "dogen/cpp/io/source_file_io.hpp"
+-#include "dogen/cpp/io/visitor_info_io.hpp"
+ 
+ 
+ inline std::string tidy_up_string(std::string s) {
+@@ -40,89 +35,15 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace boost {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::class_info>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
++inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::entity>& v) {
++    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
++      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+ 
+     if (v)
+         s << "\"data\": " << *v;
+     else
+         s << "\"data\": ""\"<empty>\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::enum_info>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+-
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<empty>\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::exception_info>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+-
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<empty>\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::registrar_info>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+-
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<empty>\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::namespace_info>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+-
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<empty>\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::visitor_info>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+-
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<empty>\"";
+-    s << " }";
++    s<< " }";
+     return s;
+ }
+ 
+@@ -135,17 +56,12 @@ std::ostream& operator<<(std::ostream& s, const source_file& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::cpp::source_file\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
++      << "\"includes\": " << v.includes() << ", "
+       << "\"descriptor\": " << v.descriptor() << ", "
+-      << "\"class_info\": " << v.class_info() << ", "
+-      << "\"enum_info\": " << v.enum_info() << ", "
+-      << "\"exception_info\": " << v.exception_info() << ", "
+-      << "\"registrar_info\": " << v.registrar_info() << ", "
+       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
+       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
+-      << "\"namespace_info\": " << v.namespace_info() << ", "
+-      << "\"visitor_info\": " << v.visitor_info() << ", "
+       << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
+-      << "\"includes\": " << v.includes()
++      << "\"entity\": " << v.entity()
+       << " }";
+     return(s);
+ }
+diff --git a/projects/cpp/src/serialization/source_file_ser.cpp b/projects/cpp/src/serialization/source_file_ser.cpp
+index 5e28cb8..a9e4b1d 100644
+--- a/projects/cpp/src/serialization/source_file_ser.cpp
++++ b/projects/cpp/src/serialization/source_file_ser.cpp
+@@ -27,17 +27,12 @@
+ #include <boost/archive/xml_iarchive.hpp>
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/serialization/nvp.hpp>
+-#include <boost/serialization/optional.hpp>
++#include <boost/serialization/shared_ptr.hpp>
+ #include <boost/serialization/string.hpp>
+-#include "dogen/cpp/serialization/class_info_ser.hpp"
+ #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
+-#include "dogen/cpp/serialization/enum_info_ser.hpp"
+-#include "dogen/cpp/serialization/exception_info_ser.hpp"
++#include "dogen/cpp/serialization/entity_ser.hpp"
+ #include "dogen/cpp/serialization/includes_ser.hpp"
+-#include "dogen/cpp/serialization/namespace_info_ser.hpp"
+-#include "dogen/cpp/serialization/registrar_info_ser.hpp"
+ #include "dogen/cpp/serialization/source_file_ser.hpp"
+-#include "dogen/cpp/serialization/visitor_info_ser.hpp"
+ #include "dogen/utility/serialization/path.hpp"
+ 
+ 
+@@ -49,17 +44,12 @@ void save(Archive& ar,
+     const dogen::cpp::source_file& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("documentation", v.documentation_);
++    ar << make_nvp("includes", v.includes_);
+     ar << make_nvp("descriptor", v.descriptor_);
+-    ar << make_nvp("class_info", v.class_info_);
+-    ar << make_nvp("enum_info", v.enum_info_);
+-    ar << make_nvp("exception_info", v.exception_info_);
+-    ar << make_nvp("registrar_info", v.registrar_info_);
+     ar << make_nvp("header_guard", v.header_guard_);
+     ar << make_nvp("file_path", v.file_path_.generic_string());
+-    ar << make_nvp("namespace_info", v.namespace_info_);
+-    ar << make_nvp("visitor_info", v.visitor_info_);
+     ar << make_nvp("relative_path", v.relative_path_.generic_string());
+-    ar << make_nvp("includes", v.includes_);
++    ar << make_nvp("entity", v.entity_);
+ }
+ 
+ template<typename Archive>
+@@ -67,21 +57,16 @@ void load(Archive& ar,
+     dogen::cpp::source_file& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("documentation", v.documentation_);
++    ar >> make_nvp("includes", v.includes_);
+     ar >> make_nvp("descriptor", v.descriptor_);
+-    ar >> make_nvp("class_info", v.class_info_);
+-    ar >> make_nvp("enum_info", v.enum_info_);
+-    ar >> make_nvp("exception_info", v.exception_info_);
+-    ar >> make_nvp("registrar_info", v.registrar_info_);
+     ar >> make_nvp("header_guard", v.header_guard_);
+     std::string file_path_tmp;
+     ar >> make_nvp("file_path", file_path_tmp);
+     v.file_path_ = file_path_tmp;
+-    ar >> make_nvp("namespace_info", v.namespace_info_);
+-    ar >> make_nvp("visitor_info", v.visitor_info_);
+     std::string relative_path_tmp;
+     ar >> make_nvp("relative_path", relative_path_tmp);
+     v.relative_path_ = relative_path_tmp;
+-    ar >> make_nvp("includes", v.includes_);
++    ar >> make_nvp("entity", v.entity_);
+ }
+ 
+ } }
+diff --git a/projects/cpp/src/test_data/source_file_td.cpp b/projects/cpp/src/test_data/source_file_td.cpp
+index adc3d06..3fc0f40 100644
+--- a/projects/cpp/src/test_data/source_file_td.cpp
++++ b/projects/cpp/src/test_data/source_file_td.cpp
+@@ -19,15 +19,10 @@
+  *
+  */
+ #include <sstream>
+-#include "dogen/cpp/test_data/class_info_td.hpp"
+ #include "dogen/cpp/test_data/content_descriptor_td.hpp"
+-#include "dogen/cpp/test_data/enum_info_td.hpp"
+-#include "dogen/cpp/test_data/exception_info_td.hpp"
++#include "dogen/cpp/test_data/entity_td.hpp"
+ #include "dogen/cpp/test_data/includes_td.hpp"
+-#include "dogen/cpp/test_data/namespace_info_td.hpp"
+-#include "dogen/cpp/test_data/registrar_info_td.hpp"
+ #include "dogen/cpp/test_data/source_file_td.hpp"
+-#include "dogen/cpp/test_data/visitor_info_td.hpp"
+ 
+ namespace {
+ 
+@@ -37,59 +32,16 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
++dogen::cpp::includes
++create_dogen_cpp_includes(const unsigned int position) {
++    return dogen::cpp::includes_generator::create(position);
++}
++
+ dogen::cpp::content_descriptor
+ create_dogen_cpp_content_descriptor(const unsigned int position) {
+     return dogen::cpp::content_descriptor_generator::create(position);
+ }
+ 
+-dogen::cpp::class_info
+-create_dogen_cpp_class_info(const unsigned int position) {
+-    return dogen::cpp::class_info_generator::create(position);
+-}
+-
+-boost::optional<dogen::cpp::class_info>
+-create_boost_optional_dogen_cpp_class_info(unsigned int position) {
+-    boost::optional<dogen::cpp::class_info> r(
+-        create_dogen_cpp_class_info(position));
+-    return r;
+-}
+-
+-dogen::cpp::enum_info
+-create_dogen_cpp_enum_info(const unsigned int position) {
+-    return dogen::cpp::enum_info_generator::create(position);
+-}
+-
+-boost::optional<dogen::cpp::enum_info>
+-create_boost_optional_dogen_cpp_enum_info(unsigned int position) {
+-    boost::optional<dogen::cpp::enum_info> r(
+-        create_dogen_cpp_enum_info(position));
+-    return r;
+-}
+-
+-dogen::cpp::exception_info
+-create_dogen_cpp_exception_info(const unsigned int position) {
+-    return dogen::cpp::exception_info_generator::create(position);
+-}
+-
+-boost::optional<dogen::cpp::exception_info>
+-create_boost_optional_dogen_cpp_exception_info(unsigned int position) {
+-    boost::optional<dogen::cpp::exception_info> r(
+-        create_dogen_cpp_exception_info(position));
+-    return r;
+-}
+-
+-dogen::cpp::registrar_info
+-create_dogen_cpp_registrar_info(const unsigned int position) {
+-    return dogen::cpp::registrar_info_generator::create(position);
+-}
+-
+-boost::optional<dogen::cpp::registrar_info>
+-create_boost_optional_dogen_cpp_registrar_info(unsigned int position) {
+-    boost::optional<dogen::cpp::registrar_info> r(
+-        create_dogen_cpp_registrar_info(position));
+-    return r;
+-}
+-
+ boost::filesystem::path
+ create_boost_filesystem_path(const unsigned int position) {
+     std::ostringstream s;
+@@ -97,35 +49,18 @@ create_boost_filesystem_path(const unsigned int position) {
+     return boost::filesystem::path(s.str());
+ }
+ 
+-dogen::cpp::namespace_info
+-create_dogen_cpp_namespace_info(const unsigned int position) {
+-    return dogen::cpp::namespace_info_generator::create(position);
++dogen::cpp::entity*
++create_dogen_cpp_entity_ptr(const unsigned int position) {
++    return dogen::cpp::entity_generator::create_ptr(position);
+ }
+ 
+-boost::optional<dogen::cpp::namespace_info>
+-create_boost_optional_dogen_cpp_namespace_info(unsigned int position) {
+-    boost::optional<dogen::cpp::namespace_info> r(
+-        create_dogen_cpp_namespace_info(position));
++boost::shared_ptr<dogen::cpp::entity>
++create_boost_shared_ptr_dogen_cpp_entity(unsigned int position) {
++    boost::shared_ptr<dogen::cpp::entity> r(
++        create_dogen_cpp_entity_ptr(position));
+     return r;
+ }
+ 
+-dogen::cpp::visitor_info
+-create_dogen_cpp_visitor_info(const unsigned int position) {
+-    return dogen::cpp::visitor_info_generator::create(position);
+-}
+-
+-boost::optional<dogen::cpp::visitor_info>
+-create_boost_optional_dogen_cpp_visitor_info(unsigned int position) {
+-    boost::optional<dogen::cpp::visitor_info> r(
+-        create_dogen_cpp_visitor_info(position));
+-    return r;
+-}
+-
+-dogen::cpp::includes
+-create_dogen_cpp_includes(const unsigned int position) {
+-    return dogen::cpp::includes_generator::create(position);
+-}
+-
+ }
+ 
+ namespace dogen {
+@@ -136,17 +71,12 @@ source_file_generator::source_file_generator() : position_(0) { }
+ void source_file_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.descriptor(create_dogen_cpp_content_descriptor(position + 1));
+-    v.class_info(create_boost_optional_dogen_cpp_class_info(position + 2));
+-    v.enum_info(create_boost_optional_dogen_cpp_enum_info(position + 3));
+-    v.exception_info(create_boost_optional_dogen_cpp_exception_info(position + 4));
+-    v.registrar_info(create_boost_optional_dogen_cpp_registrar_info(position + 5));
+-    v.header_guard(create_std_string(position + 6));
+-    v.file_path(create_boost_filesystem_path(position + 7));
+-    v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 8));
+-    v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 9));
+-    v.relative_path(create_boost_filesystem_path(position + 10));
+-    v.includes(create_dogen_cpp_includes(position + 11));
++    v.includes(create_dogen_cpp_includes(position + 1));
++    v.descriptor(create_dogen_cpp_content_descriptor(position + 2));
++    v.header_guard(create_std_string(position + 3));
++    v.file_path(create_boost_filesystem_path(position + 4));
++    v.relative_path(create_boost_filesystem_path(position + 5));
++    v.entity(create_boost_shared_ptr_dogen_cpp_entity(position + 6));
+ }
+ 
+ source_file_generator::result_type
+diff --git a/projects/cpp/src/types/source_file.cpp b/projects/cpp/src/types/source_file.cpp
+index dae29b5..d079883 100644
+--- a/projects/cpp/src/types/source_file.cpp
++++ b/projects/cpp/src/types/source_file.cpp
+@@ -18,80 +18,65 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include "dogen/cpp/types/entity.hpp"
+ #include "dogen/cpp/types/source_file.hpp"
+ 
++namespace boost {
++
++inline bool operator==(const boost::shared_ptr<dogen::cpp::entity>& lhs,
++const boost::shared_ptr<dogen::cpp::entity>& rhs) {
++    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
++}
++
++}
++
+ namespace dogen {
+ namespace cpp {
+ 
+ source_file::source_file(source_file&& rhs)
+     : documentation_(std::move(rhs.documentation_)),
++      includes_(std::move(rhs.includes_)),
+       descriptor_(std::move(rhs.descriptor_)),
+-      class_info_(std::move(rhs.class_info_)),
+-      enum_info_(std::move(rhs.enum_info_)),
+-      exception_info_(std::move(rhs.exception_info_)),
+-      registrar_info_(std::move(rhs.registrar_info_)),
+       header_guard_(std::move(rhs.header_guard_)),
+       file_path_(std::move(rhs.file_path_)),
+-      namespace_info_(std::move(rhs.namespace_info_)),
+-      visitor_info_(std::move(rhs.visitor_info_)),
+       relative_path_(std::move(rhs.relative_path_)),
+-      includes_(std::move(rhs.includes_)) { }
++      entity_(std::move(rhs.entity_)) { }
+ 
+ source_file::source_file(
+     const std::string& documentation,
++    const dogen::cpp::includes& includes,
+     const dogen::cpp::content_descriptor& descriptor,
+-    const boost::optional<dogen::cpp::class_info>& class_info,
+-    const boost::optional<dogen::cpp::enum_info>& enum_info,
+-    const boost::optional<dogen::cpp::exception_info>& exception_info,
+-    const boost::optional<dogen::cpp::registrar_info>& registrar_info,
+     const std::string& header_guard,
+     const boost::filesystem::path& file_path,
+-    const boost::optional<dogen::cpp::namespace_info>& namespace_info,
+-    const boost::optional<dogen::cpp::visitor_info>& visitor_info,
+     const boost::filesystem::path& relative_path,
+-    const dogen::cpp::includes& includes)
++    const boost::shared_ptr<dogen::cpp::entity>& entity)
+     : documentation_(documentation),
++      includes_(includes),
+       descriptor_(descriptor),
+-      class_info_(class_info),
+-      enum_info_(enum_info),
+-      exception_info_(exception_info),
+-      registrar_info_(registrar_info),
+       header_guard_(header_guard),
+       file_path_(file_path),
+-      namespace_info_(namespace_info),
+-      visitor_info_(visitor_info),
+       relative_path_(relative_path),
+-      includes_(includes) { }
++      entity_(entity) { }
+ 
+ void source_file::swap(source_file& other) noexcept {
+     using std::swap;
+     swap(documentation_, other.documentation_);
++    swap(includes_, other.includes_);
+     swap(descriptor_, other.descriptor_);
+-    swap(class_info_, other.class_info_);
+-    swap(enum_info_, other.enum_info_);
+-    swap(exception_info_, other.exception_info_);
+-    swap(registrar_info_, other.registrar_info_);
+     swap(header_guard_, other.header_guard_);
+     swap(file_path_, other.file_path_);
+-    swap(namespace_info_, other.namespace_info_);
+-    swap(visitor_info_, other.visitor_info_);
+     swap(relative_path_, other.relative_path_);
+-    swap(includes_, other.includes_);
++    swap(entity_, other.entity_);
+ }
+ 
+ bool source_file::operator==(const source_file& rhs) const {
+     return documentation_ == rhs.documentation_ &&
++        includes_ == rhs.includes_ &&
+         descriptor_ == rhs.descriptor_ &&
+-        class_info_ == rhs.class_info_ &&
+-        enum_info_ == rhs.enum_info_ &&
+-        exception_info_ == rhs.exception_info_ &&
+-        registrar_info_ == rhs.registrar_info_ &&
+         header_guard_ == rhs.header_guard_ &&
+         file_path_ == rhs.file_path_ &&
+-        namespace_info_ == rhs.namespace_info_ &&
+-        visitor_info_ == rhs.visitor_info_ &&
+         relative_path_ == rhs.relative_path_ &&
+-        includes_ == rhs.includes_;
++        entity_ == rhs.entity_;
+ }
+ 
+ source_file& source_file::operator=(source_file other) {
+@@ -116,84 +101,36 @@ void source_file::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const dogen::cpp::content_descriptor& source_file::descriptor() const {
+-    return descriptor_;
+-}
+-
+-dogen::cpp::content_descriptor& source_file::descriptor() {
+-    return descriptor_;
+-}
+-
+-void source_file::descriptor(const dogen::cpp::content_descriptor& v) {
+-    descriptor_ = v;
+-}
+-
+-void source_file::descriptor(const dogen::cpp::content_descriptor&& v) {
+-    descriptor_ = std::move(v);
+-}
+-
+-const boost::optional<dogen::cpp::class_info>& source_file::class_info() const {
+-    return class_info_;
+-}
+-
+-boost::optional<dogen::cpp::class_info>& source_file::class_info() {
+-    return class_info_;
+-}
+-
+-void source_file::class_info(const boost::optional<dogen::cpp::class_info>& v) {
+-    class_info_ = v;
+-}
+-
+-void source_file::class_info(const boost::optional<dogen::cpp::class_info>&& v) {
+-    class_info_ = std::move(v);
+-}
+-
+-const boost::optional<dogen::cpp::enum_info>& source_file::enum_info() const {
+-    return enum_info_;
+-}
+-
+-boost::optional<dogen::cpp::enum_info>& source_file::enum_info() {
+-    return enum_info_;
+-}
+-
+-void source_file::enum_info(const boost::optional<dogen::cpp::enum_info>& v) {
+-    enum_info_ = v;
+-}
+-
+-void source_file::enum_info(const boost::optional<dogen::cpp::enum_info>&& v) {
+-    enum_info_ = std::move(v);
+-}
+-
+-const boost::optional<dogen::cpp::exception_info>& source_file::exception_info() const {
+-    return exception_info_;
++const dogen::cpp::includes& source_file::includes() const {
++    return includes_;
+ }
+ 
+-boost::optional<dogen::cpp::exception_info>& source_file::exception_info() {
+-    return exception_info_;
++dogen::cpp::includes& source_file::includes() {
++    return includes_;
+ }
+ 
+-void source_file::exception_info(const boost::optional<dogen::cpp::exception_info>& v) {
+-    exception_info_ = v;
++void source_file::includes(const dogen::cpp::includes& v) {
++    includes_ = v;
+ }
+ 
+-void source_file::exception_info(const boost::optional<dogen::cpp::exception_info>&& v) {
+-    exception_info_ = std::move(v);
++void source_file::includes(const dogen::cpp::includes&& v) {
++    includes_ = std::move(v);
+ }
+ 
+-const boost::optional<dogen::cpp::registrar_info>& source_file::registrar_info() const {
+-    return registrar_info_;
++const dogen::cpp::content_descriptor& source_file::descriptor() const {
++    return descriptor_;
+ }
+ 
+-boost::optional<dogen::cpp::registrar_info>& source_file::registrar_info() {
+-    return registrar_info_;
++dogen::cpp::content_descriptor& source_file::descriptor() {
++    return descriptor_;
+ }
+ 
+-void source_file::registrar_info(const boost::optional<dogen::cpp::registrar_info>& v) {
+-    registrar_info_ = v;
++void source_file::descriptor(const dogen::cpp::content_descriptor& v) {
++    descriptor_ = v;
+ }
+ 
+-void source_file::registrar_info(const boost::optional<dogen::cpp::registrar_info>&& v) {
+-    registrar_info_ = std::move(v);
++void source_file::descriptor(const dogen::cpp::content_descriptor&& v) {
++    descriptor_ = std::move(v);
+ }
+ 
+ const std::string& source_file::header_guard() const {
+@@ -228,38 +165,6 @@ void source_file::file_path(const boost::filesystem::path&& v) {
+     file_path_ = std::move(v);
+ }
+ 
+-const boost::optional<dogen::cpp::namespace_info>& source_file::namespace_info() const {
+-    return namespace_info_;
+-}
+-
+-boost::optional<dogen::cpp::namespace_info>& source_file::namespace_info() {
+-    return namespace_info_;
+-}
+-
+-void source_file::namespace_info(const boost::optional<dogen::cpp::namespace_info>& v) {
+-    namespace_info_ = v;
+-}
+-
+-void source_file::namespace_info(const boost::optional<dogen::cpp::namespace_info>&& v) {
+-    namespace_info_ = std::move(v);
+-}
+-
+-const boost::optional<dogen::cpp::visitor_info>& source_file::visitor_info() const {
+-    return visitor_info_;
+-}
+-
+-boost::optional<dogen::cpp::visitor_info>& source_file::visitor_info() {
+-    return visitor_info_;
+-}
+-
+-void source_file::visitor_info(const boost::optional<dogen::cpp::visitor_info>& v) {
+-    visitor_info_ = v;
+-}
+-
+-void source_file::visitor_info(const boost::optional<dogen::cpp::visitor_info>&& v) {
+-    visitor_info_ = std::move(v);
+-}
+-
+ const boost::filesystem::path& source_file::relative_path() const {
+     return relative_path_;
+ }
+@@ -276,20 +181,20 @@ void source_file::relative_path(const boost::filesystem::path&& v) {
+     relative_path_ = std::move(v);
+ }
+ 
+-const dogen::cpp::includes& source_file::includes() const {
+-    return includes_;
++const boost::shared_ptr<dogen::cpp::entity>& source_file::entity() const {
++    return entity_;
+ }
+ 
+-dogen::cpp::includes& source_file::includes() {
+-    return includes_;
++boost::shared_ptr<dogen::cpp::entity>& source_file::entity() {
++    return entity_;
+ }
+ 
+-void source_file::includes(const dogen::cpp::includes& v) {
+-    includes_ = v;
++void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>& v) {
++    entity_ = v;
+ }
+ 
+-void source_file::includes(const dogen::cpp::includes&& v) {
+-    includes_ = std::move(v);
++void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>&& v) {
++    entity_ = std::move(v);
+ }
+ 
+ } }
+\ No newline at end of file
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/hash/all_hash.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/hash/all_hash.hpp
+index 591cd31..4f4ab1d 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/hash/all_hash.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/hash/all_hash.hpp
+@@ -20,5 +20,6 @@
+  */
+ #include "dogen/sml_to_cpp/hash/boost_types_hash.hpp"
+ #include "dogen/sml_to_cpp/hash/context_hash.hpp"
++#include "dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp"
+ #include "dogen/sml_to_cpp/hash/relationships_hash.hpp"
+ #include "dogen/sml_to_cpp/hash/std_types_hash.hpp"
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp
+new file mode 100644
+index 0000000..fc834b2
+--- /dev/null
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp
+@@ -0,0 +1,52 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TO_CPP_HASH_INCLUSION_LISTS_HASH_HPP
++#define DOGEN_SML_TO_CPP_HASH_INCLUSION_LISTS_HASH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <functional>
++#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
++
++namespace dogen {
++namespace sml_to_cpp {
++
++struct inclusion_lists_hasher {
++public:
++    static std::size_t hash(const inclusion_lists& v);
++};
++
++} }
++
++namespace std {
++
++template<>
++struct hash<dogen::sml_to_cpp::inclusion_lists> {
++public:
++    size_t operator()(const dogen::sml_to_cpp::inclusion_lists& v) const {
++        return dogen::sml_to_cpp::inclusion_lists_hasher::hash(v);
++    }
++};
++
++}
++#endif
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/io/all_io.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/io/all_io.hpp
+index 9f3b522..87d35ad 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/io/all_io.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/io/all_io.hpp
+@@ -20,5 +20,6 @@
+  */
+ #include "dogen/sml_to_cpp/io/boost_types_io.hpp"
+ #include "dogen/sml_to_cpp/io/context_io.hpp"
++#include "dogen/sml_to_cpp/io/inclusion_lists_io.hpp"
+ #include "dogen/sml_to_cpp/io/relationships_io.hpp"
+ #include "dogen/sml_to_cpp/io/std_types_io.hpp"
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/io/inclusion_lists_io.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/io/inclusion_lists_io.hpp
+new file mode 100644
+index 0000000..0d4cd57
+--- /dev/null
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/io/inclusion_lists_io.hpp
+@@ -0,0 +1,40 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TO_CPP_IO_INCLUSION_LISTS_IO_HPP
++#define DOGEN_SML_TO_CPP_IO_INCLUSION_LISTS_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
++
++namespace dogen {
++namespace sml_to_cpp {
++
++std::ostream&
++operator<<(std::ostream& s,
++     const dogen::sml_to_cpp::inclusion_lists& v);
++
++} }
++
++#endif
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/all_ser.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/all_ser.hpp
+index 0dff2ad..66e60af 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/all_ser.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/all_ser.hpp
+@@ -20,6 +20,7 @@
+  */
+ #include "dogen/sml_to_cpp/serialization/boost_types_ser.hpp"
+ #include "dogen/sml_to_cpp/serialization/context_ser.hpp"
++#include "dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp"
+ #include "dogen/sml_to_cpp/serialization/registrar_ser.hpp"
+ #include "dogen/sml_to_cpp/serialization/relationships_ser.hpp"
+ #include "dogen/sml_to_cpp/serialization/std_types_ser.hpp"
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/inclusion_lists_fwd_ser.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/inclusion_lists_fwd_ser.hpp
+new file mode 100644
+index 0000000..106189a
+--- /dev/null
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/inclusion_lists_fwd_ser.hpp
+@@ -0,0 +1,41 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TO_CPP_SERIALIZATION_INCLUSION_LISTS_FWD_SER_HPP
++#define DOGEN_SML_TO_CPP_SERIALIZATION_INCLUSION_LISTS_FWD_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/sml_to_cpp/types/inclusion_lists_fwd.hpp"
++
++namespace boost {
++namespace serialization {
++
++template<class Archive>
++void save(Archive& ar, const dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++template<class Archive>
++void load(Archive& ar, dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp
+new file mode 100644
+index 0000000..8b01919
+--- /dev/null
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp
+@@ -0,0 +1,43 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TO_CPP_SERIALIZATION_INCLUSION_LISTS_SER_HPP
++#define DOGEN_SML_TO_CPP_SERIALIZATION_INCLUSION_LISTS_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/split_free.hpp>
++#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
++
++BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml_to_cpp::inclusion_lists)
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar, const dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++template<typename Archive>
++void load(Archive& ar, dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/test_data/all_td.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/test_data/all_td.hpp
+index 1441ca4..774b1b6 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/test_data/all_td.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/test_data/all_td.hpp
+@@ -20,5 +20,6 @@
+  */
+ #include "dogen/sml_to_cpp/test_data/boost_types_td.hpp"
+ #include "dogen/sml_to_cpp/test_data/context_td.hpp"
++#include "dogen/sml_to_cpp/test_data/inclusion_lists_td.hpp"
+ #include "dogen/sml_to_cpp/test_data/relationships_td.hpp"
+ #include "dogen/sml_to_cpp/test_data/std_types_td.hpp"
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/test_data/inclusion_lists_td.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/test_data/inclusion_lists_td.hpp
+new file mode 100644
+index 0000000..14d1c13
+--- /dev/null
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/test_data/inclusion_lists_td.hpp
+@@ -0,0 +1,53 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TO_CPP_TEST_DATA_INCLUSION_LISTS_TD_HPP
++#define DOGEN_SML_TO_CPP_TEST_DATA_INCLUSION_LISTS_TD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
++
++namespace dogen {
++namespace sml_to_cpp {
++
++class inclusion_lists_generator {
++public:
++    inclusion_lists_generator();
++
++public:
++    typedef dogen::sml_to_cpp::inclusion_lists result_type;
++
++public:
++    static void populate(const unsigned int position, result_type& v);
++    static result_type create(const unsigned int position);
++    result_type operator()();
++
++private:
++    unsigned int position_;
++public:
++    static result_type* create_ptr(const unsigned int position);
++};
++
++} }
++
++#endif
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/all.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/all.hpp
+index 4116efb..777e890 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/all.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/all.hpp
+@@ -24,6 +24,7 @@
+ #include "dogen/sml_to_cpp/types/extraction_error.hpp"
+ #include "dogen/sml_to_cpp/types/extractor.hpp"
+ #include "dogen/sml_to_cpp/types/includer.hpp"
++#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
+ #include "dogen/sml_to_cpp/types/locator.hpp"
+ #include "dogen/sml_to_cpp/types/relationships.hpp"
+ #include "dogen/sml_to_cpp/types/source_file_factory.hpp"
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/context.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/context.hpp
+index 5bc7ebe..fbd157c 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/context.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/context.hpp
+@@ -26,13 +26,14 @@
+ #endif
+ 
+ #include <algorithm>
++#include <boost/shared_ptr.hpp>
+ #include <unordered_map>
+-#include "dogen/cpp/types/class_info.hpp"
+-#include "dogen/cpp/types/enum_info.hpp"
+-#include "dogen/cpp/types/exception_info.hpp"
+-#include "dogen/cpp/types/namespace_info.hpp"
+-#include "dogen/cpp/types/registrar_info.hpp"
+-#include "dogen/cpp/types/visitor_info.hpp"
++#include "dogen/cpp/types/class_info_fwd.hpp"
++#include "dogen/cpp/types/enum_info_fwd.hpp"
++#include "dogen/cpp/types/exception_info_fwd.hpp"
++#include "dogen/cpp/types/namespace_info_fwd.hpp"
++#include "dogen/cpp/types/registrar_info_fwd.hpp"
++#include "dogen/cpp/types/visitor_info_fwd.hpp"
+ #include "dogen/sml/hash/qname_hash.hpp"
+ #include "dogen/sml/types/qname.hpp"
+ #include "dogen/sml_to_cpp/serialization/context_fwd_ser.hpp"
+@@ -53,13 +54,13 @@ public:
+ 
+ public:
+     context(
+-        const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes,
++        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& classes,
+         const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& relationships,
+-        const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
+-        const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
+-        const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
+-        const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
+-        const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors);
++        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& exceptions,
++        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& enumerations,
++        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& registrars,
++        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& namespaces,
++        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& visitors);
+ 
+ private:
+     template<typename Archive>
+@@ -73,10 +74,10 @@ public:
+      * @brief All the C++ classes, by qname.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes() const;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes();
+-    void classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v);
+-    void classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>&& v);
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& classes() const;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& classes();
++    void classes(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& v);
++    void classes(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >&& v);
+     /**@}*/
+ 
+     /**
+@@ -93,50 +94,50 @@ public:
+      * @brief All C++ exceptions.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions() const;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions();
+-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& v);
+-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>&& v);
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& exceptions() const;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& exceptions();
++    void exceptions(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& v);
++    void exceptions(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >&& v);
+     /**@}*/
+ 
+     /**
+      * @brief All C++ enumerations.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations() const;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations();
+-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& v);
+-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>&& v);
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& enumerations() const;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& enumerations();
++    void enumerations(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& v);
++    void enumerations(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >&& v);
+     /**@}*/
+ 
+     /**
+      * @brief The C++ registrar, if available.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars() const;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars();
+-    void registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v);
+-    void registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v);
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& registrars() const;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& registrars();
++    void registrars(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& v);
++    void registrars(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >&& v);
+     /**@}*/
+ 
+     /**
+      * @brief All C++ namespaces.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces() const;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces();
+-    void namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& v);
+-    void namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>&& v);
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& namespaces() const;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& namespaces();
++    void namespaces(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& v);
++    void namespaces(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >&& v);
+     /**@}*/
+ 
+     /**
+      * @brief All C++ visitors.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors() const;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors();
+-    void visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& v);
+-    void visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>&& v);
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& visitors() const;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& visitors();
++    void visitors(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& v);
++    void visitors(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >&& v);
+     /**@}*/
+ 
+ public:
+@@ -150,13 +151,13 @@ public:
+     context& operator=(context other);
+ 
+ private:
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> classes_;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> > classes_;
+     std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships> relationships_;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info> exceptions_;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info> enumerations_;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> registrars_;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info> namespaces_;
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> visitors_;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> > exceptions_;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> > enumerations_;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> > registrars_;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> > namespaces_;
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> > visitors_;
+ };
+ 
+ } }
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/inclusion_lists.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/inclusion_lists.hpp
+new file mode 100644
+index 0000000..b111c3f
+--- /dev/null
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/inclusion_lists.hpp
+@@ -0,0 +1,111 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TO_CPP_TYPES_INCLUSION_LISTS_HPP
++#define DOGEN_SML_TO_CPP_TYPES_INCLUSION_LISTS_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <algorithm>
++#include <list>
++#include <string>
++#include "dogen/sml_to_cpp/serialization/inclusion_lists_fwd_ser.hpp"
++
++namespace dogen {
++namespace sml_to_cpp {
++
++/**
++ * @brief Result of a request for includes.
++ */
++class inclusion_lists final {
++public:
++    inclusion_lists() = default;
++    inclusion_lists(const inclusion_lists&) = default;
++    inclusion_lists(inclusion_lists&&) = default;
++    ~inclusion_lists() = default;
++
++public:
++    inclusion_lists(
++        const std::list<std::string>& system,
++        const std::list<std::string>& user);
++
++private:
++    template<typename Archive>
++    friend void boost::serialization::save(Archive& ar, const inclusion_lists& v, unsigned int version);
++
++    template<typename Archive>
++    friend void boost::serialization::load(Archive& ar, inclusion_lists& v, unsigned int version);
++
++public:
++    /**
++     * @brief System includes.
++     *
++     * These are expected to use angle brackets and be on the system path.
++     */
++    /**@{*/
++    const std::list<std::string>& system() const;
++    std::list<std::string>& system();
++    void system(const std::list<std::string>& v);
++    void system(const std::list<std::string>&& v);
++    /**@}*/
++
++    /**
++     * @brief User includes.
++     *
++     * These are expected to use quotes and be on the user path.
++     */
++    /**@{*/
++    const std::list<std::string>& user() const;
++    std::list<std::string>& user();
++    void user(const std::list<std::string>& v);
++    void user(const std::list<std::string>&& v);
++    /**@}*/
++
++public:
++    bool operator==(const inclusion_lists& rhs) const;
++    bool operator!=(const inclusion_lists& rhs) const {
++        return !this->operator==(rhs);
++    }
++
++public:
++    void swap(inclusion_lists& other) noexcept;
++    inclusion_lists& operator=(inclusion_lists other);
++
++private:
++    std::list<std::string> system_;
++    std::list<std::string> user_;
++};
++
++} }
++
++namespace std {
++
++template<>
++inline void swap(
++    dogen::sml_to_cpp::inclusion_lists& lhs,
++    dogen::sml_to_cpp::inclusion_lists& rhs) {
++    lhs.swap(rhs);
++}
++
++}
++
++#endif
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/inclusion_lists_fwd.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/inclusion_lists_fwd.hpp
+new file mode 100644
+index 0000000..4781c99
+--- /dev/null
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/inclusion_lists_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TO_CPP_TYPES_INCLUSION_LISTS_FWD_HPP
++#define DOGEN_SML_TO_CPP_TYPES_INCLUSION_LISTS_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml_to_cpp {
++
++class inclusion_lists;
++
++} }
++
++#endif
+diff --git a/projects/sml_to_cpp/src/hash/context_hash.cpp b/projects/sml_to_cpp/src/hash/context_hash.cpp
+index 1c9d2f6..6592cc2 100644
+--- a/projects/sml_to_cpp/src/hash/context_hash.cpp
++++ b/projects/sml_to_cpp/src/hash/context_hash.cpp
+@@ -37,11 +37,17 @@ inline void combine(std::size_t& seed, const HashableType& value)
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v){
++inline std::size_t hash_boost_shared_ptr_dogen_cpp_class_info(const boost::shared_ptr<dogen::cpp::class_info>& v){
++    std::size_t seed(0);
++    combine(seed, *v);
++    return seed;
++}
++
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_class_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+-        combine(seed, i.second);
++        combine(seed, hash_boost_shared_ptr_dogen_cpp_class_info(i.second));
+     }
+     return seed;
+ }
+@@ -55,47 +61,77 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relat
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& v){
++inline std::size_t hash_boost_shared_ptr_dogen_cpp_exception_info(const boost::shared_ptr<dogen::cpp::exception_info>& v){
++    std::size_t seed(0);
++    combine(seed, *v);
++    return seed;
++}
++
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_exception_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+-        combine(seed, i.second);
++        combine(seed, hash_boost_shared_ptr_dogen_cpp_exception_info(i.second));
+     }
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& v){
++inline std::size_t hash_boost_shared_ptr_dogen_cpp_enum_info(const boost::shared_ptr<dogen::cpp::enum_info>& v){
++    std::size_t seed(0);
++    combine(seed, *v);
++    return seed;
++}
++
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_enum_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+-        combine(seed, i.second);
++        combine(seed, hash_boost_shared_ptr_dogen_cpp_enum_info(i.second));
+     }
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v){
++inline std::size_t hash_boost_shared_ptr_dogen_cpp_registrar_info(const boost::shared_ptr<dogen::cpp::registrar_info>& v){
++    std::size_t seed(0);
++    combine(seed, *v);
++    return seed;
++}
++
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_registrar_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+-        combine(seed, i.second);
++        combine(seed, hash_boost_shared_ptr_dogen_cpp_registrar_info(i.second));
+     }
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& v){
++inline std::size_t hash_boost_shared_ptr_dogen_cpp_namespace_info(const boost::shared_ptr<dogen::cpp::namespace_info>& v){
++    std::size_t seed(0);
++    combine(seed, *v);
++    return seed;
++}
++
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_namespace_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+-        combine(seed, i.second);
++        combine(seed, hash_boost_shared_ptr_dogen_cpp_namespace_info(i.second));
+     }
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& v){
++inline std::size_t hash_boost_shared_ptr_dogen_cpp_visitor_info(const boost::shared_ptr<dogen::cpp::visitor_info>& v){
++    std::size_t seed(0);
++    combine(seed, *v);
++    return seed;
++}
++
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_visitor_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+-        combine(seed, i.second);
++        combine(seed, hash_boost_shared_ptr_dogen_cpp_visitor_info(i.second));
+     }
+     return seed;
+ }
+@@ -108,13 +144,13 @@ namespace sml_to_cpp {
+ std::size_t context_hasher::hash(const context&v) {
+     std::size_t seed(0);
+ 
+-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(v.classes()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_class_info_(v.classes()));
+     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(v.relationships()));
+-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(v.exceptions()));
+-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(v.enumerations()));
+-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(v.registrars()));
+-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(v.namespaces()));
+-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(v.visitors()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_exception_info_(v.exceptions()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_enum_info_(v.enumerations()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_registrar_info_(v.registrars()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_namespace_info_(v.namespaces()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_visitor_info_(v.visitors()));
+ 
+     return seed;
+ }
+diff --git a/projects/sml_to_cpp/src/hash/inclusion_lists_hash.cpp b/projects/sml_to_cpp/src/hash/inclusion_lists_hash.cpp
+new file mode 100644
+index 0000000..9603c0f
+--- /dev/null
++++ b/projects/sml_to_cpp/src/hash/inclusion_lists_hash.cpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp"
++
++namespace {
++
++template <typename HashableType>
++inline void combine(std::size_t& seed, const HashableType& value)
++{
++    std::hash<HashableType> hasher;
++    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
++}
++
++inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i);
++    }
++    return seed;
++}
++
++}
++
++namespace dogen {
++namespace sml_to_cpp {
++
++std::size_t inclusion_lists_hasher::hash(const inclusion_lists&v) {
++    std::size_t seed(0);
++
++    combine(seed, hash_std_list_std_string(v.system()));
++    combine(seed, hash_std_list_std_string(v.user()));
++
++    return seed;
++}
++
++} }
+diff --git a/projects/sml_to_cpp/src/io/context_io.cpp b/projects/sml_to_cpp/src/io/context_io.cpp
+index f066446..f1949db 100644
+--- a/projects/sml_to_cpp/src/io/context_io.cpp
++++ b/projects/sml_to_cpp/src/io/context_io.cpp
+@@ -29,9 +29,25 @@
+ #include "dogen/sml_to_cpp/io/context_io.hpp"
+ #include "dogen/sml_to_cpp/io/relationships_io.hpp"
+ 
++namespace boost {
++
++inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::class_info>& v) {
++    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
++      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
++
++    if (v)
++        s << "\"data\": " << *v;
++    else
++        s << "\"data\": ""\"<empty>\"";
++    s<< " }";
++    return s;
++}
++
++}
++
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+@@ -65,9 +81,25 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ }
+ 
++namespace boost {
++
++inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::exception_info>& v) {
++    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
++      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
++
++    if (v)
++        s << "\"data\": " << *v;
++    else
++        s << "\"data\": ""\"<empty>\"";
++    s<< " }";
++    return s;
++}
++
++}
++
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+@@ -83,9 +115,25 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ }
+ 
++namespace boost {
++
++inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::enum_info>& v) {
++    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
++      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
++
++    if (v)
++        s << "\"data\": " << *v;
++    else
++        s << "\"data\": ""\"<empty>\"";
++    s<< " }";
++    return s;
++}
++
++}
++
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+@@ -101,9 +149,25 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ }
+ 
++namespace boost {
++
++inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::registrar_info>& v) {
++    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
++      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
++
++    if (v)
++        s << "\"data\": " << *v;
++    else
++        s << "\"data\": ""\"<empty>\"";
++    s<< " }";
++    return s;
++}
++
++}
++
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+@@ -119,9 +183,25 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ }
+ 
++namespace boost {
++
++inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::namespace_info>& v) {
++    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
++      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
++
++    if (v)
++        s << "\"data\": " << *v;
++    else
++        s << "\"data\": ""\"<empty>\"";
++    s<< " }";
++    return s;
++}
++
++}
++
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+@@ -137,9 +217,25 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ }
+ 
++namespace boost {
++
++inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::visitor_info>& v) {
++    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
++      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
++
++    if (v)
++        s << "\"data\": " << *v;
++    else
++        s << "\"data\": ""\"<empty>\"";
++    s<< " }";
++    return s;
++}
++
++}
++
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+diff --git a/projects/sml_to_cpp/src/io/inclusion_lists_io.cpp b/projects/sml_to_cpp/src/io/inclusion_lists_io.cpp
+new file mode 100644
+index 0000000..c22eb1f
+--- /dev/null
++++ b/projects/sml_to_cpp/src/io/inclusion_lists_io.cpp
+@@ -0,0 +1,59 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/algorithm/string.hpp>
++#include <ostream>
++#include "dogen/sml_to_cpp/io/inclusion_lists_io.hpp"
++
++
++inline std::string tidy_up_string(std::string s) {
++    boost::replace_all(s, "\r\n", "<new_line>");
++    boost::replace_all(s, "\n", "<new_line>");
++    boost::replace_all(s, "\"", "<quote>");
++    return s;
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << "\"" << tidy_up_string(*i) << "\"";
++    }
++    s << "] ";
++    return s;
++}
++
++}
++
++namespace dogen {
++namespace sml_to_cpp {
++
++std::ostream& operator<<(std::ostream& s, const inclusion_lists& v) {
++    s << " { "
++      << "\"__type__\": " << "\"dogen::sml_to_cpp::inclusion_lists\"" << ", "
++      << "\"system\": " << v.system() << ", "
++      << "\"user\": " << v.user()
++      << " }";
++    return(s);
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/sml_to_cpp/src/serialization/context_ser.cpp b/projects/sml_to_cpp/src/serialization/context_ser.cpp
+index 63409ae..c152d42 100644
+--- a/projects/sml_to_cpp/src/serialization/context_ser.cpp
++++ b/projects/sml_to_cpp/src/serialization/context_ser.cpp
+@@ -27,6 +27,7 @@
+ #include <boost/archive/xml_iarchive.hpp>
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/serialization/nvp.hpp>
++#include <boost/serialization/shared_ptr.hpp>
+ #include "dogen/cpp/serialization/class_info_ser.hpp"
+ #include "dogen/cpp/serialization/enum_info_ser.hpp"
+ #include "dogen/cpp/serialization/exception_info_ser.hpp"
+diff --git a/projects/sml_to_cpp/src/serialization/inclusion_lists_ser.cpp b/projects/sml_to_cpp/src/serialization/inclusion_lists_ser.cpp
+new file mode 100644
+index 0000000..661c1d8
+--- /dev/null
++++ b/projects/sml_to_cpp/src/serialization/inclusion_lists_ser.cpp
+@@ -0,0 +1,71 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/archive/binary_iarchive.hpp>
++#include <boost/archive/binary_oarchive.hpp>
++#include <boost/archive/polymorphic_iarchive.hpp>
++#include <boost/archive/polymorphic_oarchive.hpp>
++#include <boost/archive/text_iarchive.hpp>
++#include <boost/archive/text_oarchive.hpp>
++#include <boost/archive/xml_iarchive.hpp>
++#include <boost/archive/xml_oarchive.hpp>
++#include <boost/serialization/list.hpp>
++#include <boost/serialization/nvp.hpp>
++#include <boost/serialization/string.hpp>
++#include "dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp"
++
++
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar,
++    const dogen::sml_to_cpp::inclusion_lists& v,
++    const unsigned int /*version*/) {
++    ar << make_nvp("system", v.system_);
++    ar << make_nvp("user", v.user_);
++}
++
++template<typename Archive>
++void load(Archive& ar,
++    dogen::sml_to_cpp::inclusion_lists& v,
++    const unsigned int /*version*/) {
++    ar >> make_nvp("system", v.system_);
++    ar >> make_nvp("user", v.user_);
++}
++
++} }
++
++namespace boost {
++namespace serialization {
++
++template void save(archive::polymorphic_oarchive& ar, const dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++template void load(archive::polymorphic_iarchive& ar, dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++template void save(archive::text_oarchive& ar, const dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++template void load(archive::text_iarchive& ar, dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++template void save(archive::binary_oarchive& ar, const dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++template void load(archive::binary_iarchive& ar, dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++template void save(archive::xml_oarchive& ar, const dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++template void load(archive::xml_iarchive& ar, dogen::sml_to_cpp::inclusion_lists& v, unsigned int version);
++
++} }
+\ No newline at end of file
+diff --git a/projects/sml_to_cpp/src/test_data/context_td.cpp b/projects/sml_to_cpp/src/test_data/context_td.cpp
+index a3d7048..1656169 100644
+--- a/projects/sml_to_cpp/src/test_data/context_td.cpp
++++ b/projects/sml_to_cpp/src/test_data/context_td.cpp
+@@ -35,15 +35,22 @@ create_dogen_sml_qname(const unsigned int position) {
+     return dogen::sml::qname_generator::create(position);
+ }
+ 
+-dogen::cpp::class_info
+-create_dogen_cpp_class_info(const unsigned int position) {
+-    return dogen::cpp::class_info_generator::create(position);
++dogen::cpp::class_info*
++create_dogen_cpp_class_info_ptr(const unsigned int position) {
++    return dogen::cpp::class_info_generator::create_ptr(position);
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(unsigned int position) {
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> r;
++boost::shared_ptr<dogen::cpp::class_info>
++create_boost_shared_ptr_dogen_cpp_class_info(unsigned int position) {
++    boost::shared_ptr<dogen::cpp::class_info> r(
++        create_dogen_cpp_class_info_ptr(position));
++    return r;
++}
++
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_class_info_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> > r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_class_info(position + i)));
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_class_info(position + i)));
+     }
+     return r;
+ }
+@@ -61,67 +68,102 @@ std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships> create_s
+     return r;
+ }
+ 
+-dogen::cpp::exception_info
+-create_dogen_cpp_exception_info(const unsigned int position) {
+-    return dogen::cpp::exception_info_generator::create(position);
++dogen::cpp::exception_info*
++create_dogen_cpp_exception_info_ptr(const unsigned int position) {
++    return dogen::cpp::exception_info_generator::create_ptr(position);
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(unsigned int position) {
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info> r;
++boost::shared_ptr<dogen::cpp::exception_info>
++create_boost_shared_ptr_dogen_cpp_exception_info(unsigned int position) {
++    boost::shared_ptr<dogen::cpp::exception_info> r(
++        create_dogen_cpp_exception_info_ptr(position));
++    return r;
++}
++
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_exception_info_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> > r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_exception_info(position + i)));
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_exception_info(position + i)));
+     }
+     return r;
+ }
+ 
+-dogen::cpp::enum_info
+-create_dogen_cpp_enum_info(const unsigned int position) {
+-    return dogen::cpp::enum_info_generator::create(position);
++dogen::cpp::enum_info*
++create_dogen_cpp_enum_info_ptr(const unsigned int position) {
++    return dogen::cpp::enum_info_generator::create_ptr(position);
++}
++
++boost::shared_ptr<dogen::cpp::enum_info>
++create_boost_shared_ptr_dogen_cpp_enum_info(unsigned int position) {
++    boost::shared_ptr<dogen::cpp::enum_info> r(
++        create_dogen_cpp_enum_info_ptr(position));
++    return r;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(unsigned int position) {
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info> r;
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_enum_info_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> > r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_enum_info(position + i)));
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_enum_info(position + i)));
+     }
+     return r;
+ }
+ 
+-dogen::cpp::registrar_info
+-create_dogen_cpp_registrar_info(const unsigned int position) {
+-    return dogen::cpp::registrar_info_generator::create(position);
++dogen::cpp::registrar_info*
++create_dogen_cpp_registrar_info_ptr(const unsigned int position) {
++    return dogen::cpp::registrar_info_generator::create_ptr(position);
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(unsigned int position) {
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> r;
++boost::shared_ptr<dogen::cpp::registrar_info>
++create_boost_shared_ptr_dogen_cpp_registrar_info(unsigned int position) {
++    boost::shared_ptr<dogen::cpp::registrar_info> r(
++        create_dogen_cpp_registrar_info_ptr(position));
++    return r;
++}
++
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_registrar_info_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> > r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_registrar_info(position + i)));
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_registrar_info(position + i)));
+     }
+     return r;
+ }
+ 
+-dogen::cpp::namespace_info
+-create_dogen_cpp_namespace_info(const unsigned int position) {
+-    return dogen::cpp::namespace_info_generator::create(position);
++dogen::cpp::namespace_info*
++create_dogen_cpp_namespace_info_ptr(const unsigned int position) {
++    return dogen::cpp::namespace_info_generator::create_ptr(position);
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(unsigned int position) {
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info> r;
++boost::shared_ptr<dogen::cpp::namespace_info>
++create_boost_shared_ptr_dogen_cpp_namespace_info(unsigned int position) {
++    boost::shared_ptr<dogen::cpp::namespace_info> r(
++        create_dogen_cpp_namespace_info_ptr(position));
++    return r;
++}
++
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_namespace_info_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> > r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_namespace_info(position + i)));
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_namespace_info(position + i)));
+     }
+     return r;
+ }
+ 
+-dogen::cpp::visitor_info
+-create_dogen_cpp_visitor_info(const unsigned int position) {
+-    return dogen::cpp::visitor_info_generator::create(position);
++dogen::cpp::visitor_info*
++create_dogen_cpp_visitor_info_ptr(const unsigned int position) {
++    return dogen::cpp::visitor_info_generator::create_ptr(position);
++}
++
++boost::shared_ptr<dogen::cpp::visitor_info>
++create_boost_shared_ptr_dogen_cpp_visitor_info(unsigned int position) {
++    boost::shared_ptr<dogen::cpp::visitor_info> r(
++        create_dogen_cpp_visitor_info_ptr(position));
++    return r;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> create_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(unsigned int position) {
+-    std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> r;
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_visitor_info_(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> > r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_visitor_info(position + i)));
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_visitor_info(position + i)));
+     }
+     return r;
+ }
+@@ -135,13 +177,13 @@ context_generator::context_generator() : position_(0) { }
+ 
+ void context_generator::
+ populate(const unsigned int position, result_type& v) {
+-    v.classes(create_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(position + 0));
++    v.classes(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_class_info_(position + 0));
+     v.relationships(create_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(position + 1));
+-    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(position + 2));
+-    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(position + 3));
+-    v.registrars(create_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(position + 4));
+-    v.namespaces(create_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(position + 5));
+-    v.visitors(create_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(position + 6));
++    v.exceptions(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_exception_info_(position + 2));
++    v.enumerations(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_enum_info_(position + 3));
++    v.registrars(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_registrar_info_(position + 4));
++    v.namespaces(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_namespace_info_(position + 5));
++    v.visitors(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_visitor_info_(position + 6));
+ }
+ 
+ context_generator::result_type
+diff --git a/projects/sml_to_cpp/src/test_data/inclusion_lists_td.cpp b/projects/sml_to_cpp/src/test_data/inclusion_lists_td.cpp
+new file mode 100644
+index 0000000..c8fa08a
+--- /dev/null
++++ b/projects/sml_to_cpp/src/test_data/inclusion_lists_td.cpp
+@@ -0,0 +1,71 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include "dogen/sml_to_cpp/test_data/inclusion_lists_td.hpp"
++
++namespace {
++
++std::string create_std_string(const unsigned int position) {
++    std::ostringstream s;
++    s << "a_string_" << position;
++    return s.str();
++}
++
++std::list<std::string> create_std_list_std_string(unsigned int position) {
++    std::list<std::string> r;
++    for (unsigned int i(0); i < 4; ++i) {
++        r.push_back(create_std_string(position + i));
++    }
++    return r;
++}
++
++}
++
++namespace dogen {
++namespace sml_to_cpp {
++
++inclusion_lists_generator::inclusion_lists_generator() : position_(0) { }
++
++void inclusion_lists_generator::
++populate(const unsigned int position, result_type& v) {
++    v.system(create_std_list_std_string(position + 0));
++    v.user(create_std_list_std_string(position + 1));
++}
++
++inclusion_lists_generator::result_type
++inclusion_lists_generator::create(const unsigned int position) {
++    inclusion_lists r;
++    inclusion_lists_generator::populate(position, r);
++    return r;
++}
++inclusion_lists_generator::result_type*
++inclusion_lists_generator::create_ptr(const unsigned int position) {
++    inclusion_lists* p = new inclusion_lists();
++    inclusion_lists_generator::populate(position, *p);
++    return p;
++}
++
++inclusion_lists_generator::result_type
++inclusion_lists_generator::operator()() {
++    return create(position_++);
++}
++
++} }
+diff --git a/projects/sml_to_cpp/src/types/context.cpp b/projects/sml_to_cpp/src/types/context.cpp
+index e3041fc..c54ab89 100644
+--- a/projects/sml_to_cpp/src/types/context.cpp
++++ b/projects/sml_to_cpp/src/types/context.cpp
+@@ -18,19 +18,79 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include "dogen/cpp/types/class_info.hpp"
++#include "dogen/cpp/types/enum_info.hpp"
++#include "dogen/cpp/types/exception_info.hpp"
++#include "dogen/cpp/types/namespace_info.hpp"
++#include "dogen/cpp/types/registrar_info.hpp"
++#include "dogen/cpp/types/visitor_info.hpp"
+ #include "dogen/sml_to_cpp/types/context.hpp"
+ 
++namespace boost {
++
++inline bool operator==(const boost::shared_ptr<dogen::cpp::class_info>& lhs,
++const boost::shared_ptr<dogen::cpp::class_info>& rhs) {
++    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
++}
++
++}
++
++namespace boost {
++
++inline bool operator==(const boost::shared_ptr<dogen::cpp::exception_info>& lhs,
++const boost::shared_ptr<dogen::cpp::exception_info>& rhs) {
++    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
++}
++
++}
++
++namespace boost {
++
++inline bool operator==(const boost::shared_ptr<dogen::cpp::enum_info>& lhs,
++const boost::shared_ptr<dogen::cpp::enum_info>& rhs) {
++    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
++}
++
++}
++
++namespace boost {
++
++inline bool operator==(const boost::shared_ptr<dogen::cpp::registrar_info>& lhs,
++const boost::shared_ptr<dogen::cpp::registrar_info>& rhs) {
++    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
++}
++
++}
++
++namespace boost {
++
++inline bool operator==(const boost::shared_ptr<dogen::cpp::namespace_info>& lhs,
++const boost::shared_ptr<dogen::cpp::namespace_info>& rhs) {
++    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
++}
++
++}
++
++namespace boost {
++
++inline bool operator==(const boost::shared_ptr<dogen::cpp::visitor_info>& lhs,
++const boost::shared_ptr<dogen::cpp::visitor_info>& rhs) {
++    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
++}
++
++}
++
+ namespace dogen {
+ namespace sml_to_cpp {
+ 
+ context::context(
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes,
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& classes,
+     const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& relationships,
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
+-    const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors)
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& exceptions,
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& enumerations,
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& registrars,
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& namespaces,
++    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& visitors)
+     : classes_(classes),
+       relationships_(relationships),
+       exceptions_(exceptions),
+@@ -66,19 +126,19 @@ context& context::operator=(context other) {
+     return *this;
+ }
+ 
+-const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::classes() const {
++const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& context::classes() const {
+     return classes_;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::classes() {
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& context::classes() {
+     return classes_;
+ }
+ 
+-void context::classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v) {
++void context::classes(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& v) {
+     classes_ = v;
+ }
+ 
+-void context::classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>&& v) {
++void context::classes(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >&& v) {
+     classes_ = std::move(v);
+ }
+ 
+@@ -98,83 +158,83 @@ void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::s
+     relationships_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& context::exceptions() const {
++const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& context::exceptions() const {
+     return exceptions_;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& context::exceptions() {
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& context::exceptions() {
+     return exceptions_;
+ }
+ 
+-void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& v) {
++void context::exceptions(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& v) {
+     exceptions_ = v;
+ }
+ 
+-void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>&& v) {
++void context::exceptions(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >&& v) {
+     exceptions_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& context::enumerations() const {
++const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& context::enumerations() const {
+     return enumerations_;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& context::enumerations() {
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& context::enumerations() {
+     return enumerations_;
+ }
+ 
+-void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& v) {
++void context::enumerations(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& v) {
+     enumerations_ = v;
+ }
+ 
+-void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>&& v) {
++void context::enumerations(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >&& v) {
+     enumerations_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrars() const {
++const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& context::registrars() const {
+     return registrars_;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrars() {
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& context::registrars() {
+     return registrars_;
+ }
+ 
+-void context::registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v) {
++void context::registrars(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& v) {
+     registrars_ = v;
+ }
+ 
+-void context::registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v) {
++void context::registrars(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >&& v) {
+     registrars_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& context::namespaces() const {
++const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& context::namespaces() const {
+     return namespaces_;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& context::namespaces() {
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& context::namespaces() {
+     return namespaces_;
+ }
+ 
+-void context::namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& v) {
++void context::namespaces(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& v) {
+     namespaces_ = v;
+ }
+ 
+-void context::namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>&& v) {
++void context::namespaces(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >&& v) {
+     namespaces_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& context::visitors() const {
++const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& context::visitors() const {
+     return visitors_;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& context::visitors() {
++std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& context::visitors() {
+     return visitors_;
+ }
+ 
+-void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& v) {
++void context::visitors(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& v) {
+     visitors_ = v;
+ }
+ 
+-void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>&& v) {
++void context::visitors(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >&& v) {
+     visitors_ = std::move(v);
+ }
+ 
+diff --git a/projects/sml_to_cpp/src/types/inclusion_lists.cpp b/projects/sml_to_cpp/src/types/inclusion_lists.cpp
+new file mode 100644
+index 0000000..fb9c5c7
+--- /dev/null
++++ b/projects/sml_to_cpp/src/types/inclusion_lists.cpp
+@@ -0,0 +1,81 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
++
++namespace dogen {
++namespace sml_to_cpp {
++
++inclusion_lists::inclusion_lists(
++    const std::list<std::string>& system,
++    const std::list<std::string>& user)
++    : system_(system),
++      user_(user) { }
++
++void inclusion_lists::swap(inclusion_lists& other) noexcept {
++    using std::swap;
++    swap(system_, other.system_);
++    swap(user_, other.user_);
++}
++
++bool inclusion_lists::operator==(const inclusion_lists& rhs) const {
++    return system_ == rhs.system_ &&
++        user_ == rhs.user_;
++}
++
++inclusion_lists& inclusion_lists::operator=(inclusion_lists other) {
++    using std::swap;
++    swap(*this, other);
++    return *this;
++}
++
++const std::list<std::string>& inclusion_lists::system() const {
++    return system_;
++}
++
++std::list<std::string>& inclusion_lists::system() {
++    return system_;
++}
++
++void inclusion_lists::system(const std::list<std::string>& v) {
++    system_ = v;
++}
++
++void inclusion_lists::system(const std::list<std::string>&& v) {
++    system_ = std::move(v);
++}
++
++const std::list<std::string>& inclusion_lists::user() const {
++    return user_;
++}
++
++std::list<std::string>& inclusion_lists::user() {
++    return user_;
++}
++
++void inclusion_lists::user(const std::list<std::string>& v) {
++    user_ = v;
++}
++
++void inclusion_lists::user(const std::list<std::string>&& v) {
++    user_ = std::move(v);
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/sml_to_cpp/src/types/transformer.cpp b/projects/sml_to_cpp/src/types/transformer.cpp
+index 05bb21d..66cab1f 100644
+--- a/projects/sml_to_cpp/src/types/transformer.cpp
++++ b/projects/sml_to_cpp/src/types/transformer.cpp
+@@ -403,7 +403,7 @@ cpp::class_info transformer::to_class_info(const sml::object& ao) const {
+                     parent_class_info_not_found + sn));
+         }
+ 
+-        const auto pci(j->second);
++        const auto pci(*j->second);
+         cpp::parent_info pi;
+         pi.name(pci.name());
+         pi.properties(pci.all_properties());
