@@ -5,26 +5,26 @@ A lot of interesting lessons have been learned during the development
 of Dogen and I'm rather afraid many more are still in store. As it is
 typical with the agile process, I'm constantly reviewing what went
 right and what went wrong. I thought I'd put pen to paper with some of
-these, on the vain hope of them being of general interest.
+these, In the vain hope of them being of general interest.
 
 One of the major wins in terms of development process was to think
 incrementally. Of course, agile already gives you a mental framework
-for that and we had a perfectly functioning agile process during our
-start-up days - the time of the inception of Dogen. However, with the
-tearing down of the start-up and the return to gainful employment,
+for that, and we had a perfectly functioning agile process during our
+start up days - the time of the inception of Dogen. However, with the
+tearing down of the start up and the return to gainful employment,
 agile soon revealed itself to be far too coarse grained.
 
 When I decided to continue developing Dogen on my spare time, I had
 two conflicting requirements: very little development resources and
-very "ambitious" ideas that required lots of development time. The
-development resource was, well, just me. With a family and a full time
-job there isn't a lot of spare cycles left. In fact, after some
-analysis I realised that whilst there is was a lot of "dead-time" in
-the average week, it was mostly "low-quality grade time", with lots of
-discontinued segments of varying and unpredictable lengths: ten
-minutes here, twenty minutes there, the odd hour. Summed together in a
-naive way it seemed like a lot, but - as every programmer knows - six
-blocks of ten minutes do not equate to one solid hour.
+very ambitious ideas that required lots of work. The development
+resource was, well, just me. With a family and a full time job there
+isn't a lot of spare cycles left. In fact, after some analysis, I
+realised I was in a conundrum. Whilst there is was a lot of
+"dead-time" in the average week, it was mostly "low-quality grade
+time": lots of discontinued segments of varying and unpredictable
+lengths. Summed together in a naive way it seemed like a lot, but - as
+every programmer knows - six blocks of ten minutes do not one solid
+hour make.
 
 Nevertheless, one has to play the game with the cards that were dealt.
 Soon I realised that the correct question to ask was: "what kind of
@@ -37,32 +37,31 @@ As it turns out, the answer is multi-part - just like MIME.
 
 We had already started to use git during the start-up days, and it had
 proved to be a major win at the time. After all, one never quite knows
-where one will be coding from, and whether internet access is
-available or not, so its important to have a self-contained
-environment. In the end we found out it brought _many_ more
-advantages, such as collaborative flows, great managed web interfaces
-([[http://www.github.com][GitHub]] and, to some extent, [[http://www.bitbucket.com][BitBucket]]), raw speed on low-powered
-machines and so on. Since most of it is covered elsewhere, I won't
-bore you with it.
+where one will be coding from - and whether internet access is
+available or not - so its important to have a self-contained
+environment. In the end we found out it brought many, many more
+advantages such as great collaborative flows, good managed web
+interfaces/hosting providers ([[http://www.github.com][GitHub]] and, to some extent, [[http://www.bitbucket.com][BitBucket]]),
+amazing raw speed even on low-powered machines, and many other
+wins. Since most of it is covered elsewhere, I won't bore you with it.
 
-However, one decision that turned out to be a major win, wasn't very
-obvious at the time. We decided to put *everything* related to the
-project in DVCS. By that I mean we placed documentation, bug reports,
-agile process - basically /everything/ to do with the project - in the
-same place; in git. In the beginning it seemed a bit silly not to use
-the GitHub infrastructure such as Wiki and Issues. On hindsight,
-having everything in one versioned controlled place proved to be a
-major win:
+However, one decision that turned out to be a major win is still not
+the done thing. Ever the trailblazers, we decided to put everything
+related to the project in version control. And by "everything" I do
+mean *everything*: documentation, bug reports, agile process, blog
+posts, the whole lot. It did seem a bit silly not to use GitHub's Wiki
+and Issues at the time, but, on hindsight, having everything in one
+versioned controlled place proved to be a major win:
 
 - searching is never further than a couple of greps away, and its not
   sensitive to connectivity;
 - updates by other people come in as commits and can be easily
   reviewed as part of the normal push/pull process;
-- changes can be diffed;
+- changes can easily be diffed;
 - history can be checked using the familiar version control interface,
   which is available wherever you go.
 
-This has proved to be a boon, given the time constraints.
+When you have little time, these little advantages are life-savers.
 
 The second and very important lesson learned was to commit early and
 commit often. Its rather obvious in hindsight, really. After all, if
@@ -81,18 +80,19 @@ straightforward, but that has been the overall aim.
 
 * Continuously Integrated
 
-The proof is in the pudding, as they say, and with code CI ends up
-being the proof. As we found out, its not a very reliable proof, but
-nevertheless its the best proof there is. One of the major wins from
-the start up days was to setup CI and to give it as wide a coverage as
-possible given the resource constraints. Many a problem was spotted
-this way and the code has benefited hugely from this.
+After the commit comes the build, and the proof is in the pudding, as
+they say. When it comes to code, that largely means CI; granted, it
+may not be a very reliable proof, but nevertheless it is the best
+proof we've got. One of the major wins from the start up days was to
+setup CI, and to give it as wide a coverage as we could muster. We
+setup multiple build agents across compilers and platforms, added
+dynamic analysis, code coverage, packaging and basic sanity tests on
+those packages.
 
-We also tried to package the code into installable packages, and to
-test those packages best we could. The packaging idea was a good one -
-after all, most users will probably rely on those - but providing
-packages turned out to be harder than first thought. This is because
-GitHub decommissioned their downloads section.
+The packaging idea was a good one - after all, most users will
+probably rely on those - but providing packages turned out to be
+harder than first thought. This is because GitHub decommissioned their
+downloads section.
 
 
 

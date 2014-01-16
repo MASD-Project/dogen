@@ -34,13 +34,14 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-15 Wed 23:49]
+Clock summary at [2014-01-16 Thu 21:55]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *7:24* |      |      |
+| *Total time*                                                                 | *8:24* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 7:24 |      |
+| Development Stories Implemented                                              |        | 8:24 |      |
+| IMPLEMENTATION Create a blog post on dogen's development methodology         |        |      | 0:52 |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:52 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
@@ -50,10 +51,11 @@ Clock summary at [2014-01-15 Wed 23:49]
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |        |      | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |        |      | 0:16 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 0:28 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 0:36 |
 #+end:
 
-*** Create a blog post on dogen's development methodology             :story:
+*** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
+    CLOCK: [2014-01-16 Thu 18:49]--[2014-01-16 Thu 19:41] =>  0:52
 
 We should do a write up of how we develop dogen.
 
@@ -177,6 +179,7 @@ Links:
 - [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
 
 *** IMPLEMENTATION Refactor types header into new style file formatter :story:
+    CLOCK: [2014-01-16 Thu 09:16]--[2014-01-16 Thu 09:24] =>  0:08
 
 Make the main types header formatters look like the =om= types formatter.
 
@@ -193,6 +196,7 @@ We don't really need two separate class declarations. Merge them into one.
 
 The =om= naming convention was slightly more meaningful, so bring it across.
 
+**** Use tags for class properties in transformer                      :task:
 **** Copy across documentation from =om=
 
 We did a lot of doxygen comments that are readily applicable, copy
