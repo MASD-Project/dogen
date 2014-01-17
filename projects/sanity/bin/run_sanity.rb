@@ -19,18 +19,9 @@
 require_relative "lib/sanity.rb"
 
 def check_parameters argv
-  case argv[0]
-  when 'upload' || 'download' || 'install' || 'reset'
-    @command = argv[0].to_sym
-  else
-    raise RuntimeError, "bad command: #{argv}."
-  end
-end
-
-def create_client
-  token=`git config --global --get github.token`
-  raise RuntimeError, 'Token missing.' if token == nil
-  github = Github.new :oauth_token => token.chomp
+    if argv.size != 1
+        raise RuntimeError, "Usage: run."
+    end
 end
 
 check_parameters ARGV
