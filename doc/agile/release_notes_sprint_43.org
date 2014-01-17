@@ -34,24 +34,25 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-17 Fri 10:05]
+Clock summary at [2014-01-17 Fri 18:08]
 
-| Headline                                                                     | Time   |      |      |
-|------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *9:34* |      |      |
-|------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 9:34 |      |
-| IMPLEMENTATION Create a blog post on dogen's development methodology         |        |      | 0:52 |
-| IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:52 |
-| IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
-| COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
-| COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
-| COMPLETED Create the new =formatters= model and copy required code           |        |      | 1:06 |
-| COMPLETED Delete the =om= model                                              |        |      | 0:25 |
-| COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |        |      | 0:43 |
-| COMPLETED Make use of =cpp_includes= in =source_file=                        |        |      | 1:50 |
-| COMPLETED Rename the boilerplate class and associated classes                |        |      | 0:16 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 1:46 |
+| Headline                                                                     | Time    |       |      |
+|------------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                 | *10:12* |       |      |
+|------------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                              |         | 10:12 |      |
+| IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
+| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 0:52 |
+| IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
+| COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |         |       | 1:10 |
+| COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |         |       | 0:19 |
+| COMPLETED Create the new =formatters= model and copy required code           |         |       | 1:06 |
+| COMPLETED Delete the =om= model                                              |         |       | 0:25 |
+| COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |         |       | 0:43 |
+| COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
+| COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 1:46 |
+| IMPLEMENTATION Refactor sanity scripts                                       |         |       | 0:38 |
 #+end:
 
 *** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
@@ -224,6 +225,29 @@ Remove uses of old indenter.
 
 Not sure how applicable this would be, but we may be able to scavenge
 some tests.
+
+*** IMPLEMENTATION Refactor sanity scripts                            :story:
+    CLOCK: [2014-01-17 Fri 17:30]--[2014-01-17 Fri 17:45] =>  0:15
+
+Originally we designed sanity as a set of ruby scripts that were
+supposed to run post package installation to verify that the installed
+package met some minimum standards. However, it seems only logical
+that one should be able to run sanity on the build too:
+
+- it's a quick way to validate the sanity scripts;
+- it's a quick way to validate the dogen binary.
+
+In addition, we have learned a lot about ruby since this original
+attempt.
+
+Refactor the scripts to make the above use cases possible.
+
+**** IMPLEMENTATION Move scripts into projects and add basic ruby structure :task:
+     CLOCK: [2014-01-17 Fri 17:45]--[2014-01-17 Fri 18:08] =>  0:23
+
+This is a full blown project so it should be part of the projects
+directory. It should follow all the ruby conventions such as directory
+structure, gem files, etc.
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 
