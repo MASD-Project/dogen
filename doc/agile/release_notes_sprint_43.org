@@ -34,15 +34,16 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-16 Thu 21:55]
+Clock summary at [2014-01-17 Fri 10:05]
 
 | Headline                                                                     | Time   |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                 | *8:24* |      |      |
+| *Total time*                                                                 | *9:34* |      |      |
 |------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                              |        | 8:24 |      |
+| Development Stories Implemented                                              |        | 9:34 |      |
 | IMPLEMENTATION Create a blog post on dogen's development methodology         |        |      | 0:52 |
 | IMPLEMENTATION Release notes and backlog grooming                            |        |      | 0:52 |
+| IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |        |      | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |        |      | 0:19 |
 | COMPLETED Create the new =formatters= model and copy required code           |        |      | 1:06 |
@@ -50,8 +51,7 @@ Clock summary at [2014-01-16 Thu 21:55]
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |        |      | 0:43 |
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |        |      | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |        |      | 0:16 |
-| IMPLEMENTATION Consider Creating a phoney target for header validation       |        |      | 0:15 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 0:36 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |        |      | 1:46 |
 #+end:
 
 *** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
@@ -67,6 +67,19 @@ We should do a write up of how we develop dogen.
     CLOCK: [2014-01-12 Sun 18:23]--[2014-01-12 Sun 18:43] =>  0:20
 
 Updates to release notes and backlog.
+
+*** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
+    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
+
+One way of solving the ninja problems may be to stop creating a static
+library for header validation. We did it simply because it was easier
+but there is no real reason for it. We may be able to save a bit on
+archiving, and as an added bonus, it may fix the issues we're having
+with ninja.
+
+Links:
+
+- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
 
 *** COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= :story:
     CLOSED: [2014-01-13 Mon 22:25]
@@ -165,19 +178,6 @@ formatters model.
   clearer, if somewhat longer. So =cpp_formatter::include_formatter=
   rather than =cpp_formatter::includes=.
 
-*** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
-    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
-
-One way of solving the ninja problems may be to stop creating a static
-library for header validation. We did it simply because it was easier
-but there is no real reason for it. We may be able to save a bit on
-archiving, and as an added bonus, it may fix the issues we're having
-with ninja.
-
-Links:
-
-- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
-
 *** IMPLEMENTATION Refactor types header into new style file formatter :story:
     CLOCK: [2014-01-16 Thu 09:16]--[2014-01-16 Thu 09:24] =>  0:08
 
@@ -195,6 +195,15 @@ We don't really need two separate class declarations. Merge them into one.
      CLOCK: [2014-01-15 Wed 23:44]--[2014-01-15 Wed 23:49] =>  0:05
 
 The =om= naming convention was slightly more meaningful, so bring it across.
+
+**** IMPLEMENTATION Use a single entity shared pointer in =source_file= :task:
+     CLOCK: [2014-01-17 Fri 08:03]--[2014-01-17 Fri 08:36] =>  0:33
+     CLOCK: [2014-01-16 Thu 22:01]--[2014-01-16 Thu 22:38] =>  0:37
+
+Source file has lots of =boost::optional= members for entity types. A
+source file can only have a single one of these. Replace all of this
+with a single =boost::shared_ptr= to entity and use visitor in the
+formatters.
 
 **** Use tags for class properties in transformer                      :task:
 **** Copy across documentation from =om=
