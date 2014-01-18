@@ -37,7 +37,7 @@ repository in GitHub:
 
 There is also a mirror in BitBucket:
 
-- FIXME
+- https://bitbucket.org/marco_craveiro/dogen/overview
 
 * PART I - BASIC CONCEPTS
 
