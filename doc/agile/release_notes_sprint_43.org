@@ -55,11 +55,6 @@ Clock summary at [2014-01-18 Sat 23:18]
 | IMPLEMENTATION Refactor sanity scripts                                       |         |       | 1:39 |
 #+end:
 
-*** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
-    CLOCK: [2014-01-16 Thu 18:49]--[2014-01-16 Thu 19:41] =>  0:52
-
-We should do a write up of how we develop dogen.
-
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2014-01-15 Wed 23:14]--[2014-01-15 Wed 23:20] =>  0:06
     CLOCK: [2014-01-14 Tue 07:54]--[2014-01-14 Tue 07:58] =>  0:04
@@ -68,6 +63,16 @@ We should do a write up of how we develop dogen.
     CLOCK: [2014-01-12 Sun 18:23]--[2014-01-12 Sun 18:43] =>  0:20
 
 Updates to release notes and backlog.
+
+*** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
+    CLOCK: [2014-01-16 Thu 18:49]--[2014-01-16 Thu 19:41] =>  0:52
+
+We should do a write up of how we develop dogen.
+
+*** IMPLEMENTATION Update the manual                                  :story:
+    CLOCK: [2014-01-18 Sat 23:18]--[2014-01-18 Sat 23:30] =>  0:12
+
+Use build downtime to update the manual.
 
 *** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
     CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
