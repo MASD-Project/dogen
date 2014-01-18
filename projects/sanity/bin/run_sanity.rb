@@ -16,13 +16,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
-require_relative "lib/sanity.rb"
+require_relative "../lib/sanity.rb"
 
-def check_parameters argv
-    if argv.size != 1
-        raise RuntimeError, "Usage: run."
-    end
+def check_parameters(argv)
+    raise RuntimeError, "Usage: run_sanity.rb DOGEN_BINARY" if argv.size != 1
 end
 
-check_parameters ARGV
-@gh_client = create_client
+if __FILE__ == $0
+    check_parameters ARGV
+end

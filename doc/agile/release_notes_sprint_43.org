@@ -34,13 +34,13 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-17 Fri 18:08]
+Clock summary at [2014-01-18 Sat 22:45]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *10:12* |       |      |
+| *Total time*                                                                 | *10:47* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 10:12 |      |
+| Development Stories Implemented                                              |         | 10:47 |      |
 | IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 0:52 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
@@ -52,7 +52,7 @@ Clock summary at [2014-01-17 Fri 18:08]
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
 | IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 1:46 |
-| IMPLEMENTATION Refactor sanity scripts                                       |         |       | 0:38 |
+| IMPLEMENTATION Refactor sanity scripts                                       |         |       | 1:13 |
 #+end:
 
 *** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
@@ -243,6 +243,7 @@ attempt.
 Refactor the scripts to make the above use cases possible.
 
 **** IMPLEMENTATION Move scripts into projects and add basic ruby structure :task:
+     CLOCK: [2014-01-18 Sat 22:10]--[2014-01-18 Sat 22:45] =>  0:35
      CLOCK: [2014-01-17 Fri 17:45]--[2014-01-17 Fri 18:08] =>  0:23
 
 This is a full blown project so it should be part of the projects
