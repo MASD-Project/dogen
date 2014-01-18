@@ -34,13 +34,13 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-18 Sat 22:45]
+Clock summary at [2014-01-18 Sat 23:18]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *10:47* |       |      |
+| *Total time*                                                                 | *11:13* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 10:47 |      |
+| Development Stories Implemented                                              |         | 11:13 |      |
 | IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 0:52 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
@@ -52,7 +52,7 @@ Clock summary at [2014-01-18 Sat 22:45]
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
 | IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 1:46 |
-| IMPLEMENTATION Refactor sanity scripts                                       |         |       | 1:13 |
+| IMPLEMENTATION Refactor sanity scripts                                       |         |       | 1:39 |
 #+end:
 
 *** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
@@ -249,6 +249,26 @@ Refactor the scripts to make the above use cases possible.
 This is a full blown project so it should be part of the projects
 directory. It should follow all the ruby conventions such as directory
 structure, gem files, etc.
+
+**** IMPLEMENTATION Gather requirements for sanity                     :task:
+     CLOCK: [2014-01-18 Sat 22:52]--[2014-01-18 Sat 23:18] =>  0:26
+
+Random thoughts on what these scripts should do:
+
+- they should be a self-contained installable package.
+- the build machine should run the sanity tests after producing the
+  dogen executable.
+- sanity should be able to download and install a package from a local
+  or remote source. once installed it should then run the sanity
+  tests.
+- we should consider uploading files to Google drive using ruby. See
+  [[https://developers.google.com/drive/quickstart-ruby][this article]]. there must be a polling/notification API that one can
+  use to consume newly uploaded files. we could [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][create folders]] to
+  represent the different types of uploads: =tag_x.y.z=, =last=,
+  =previous=. maybe we should only have latest and tag as this would
+  require no complex logic: if tag create new folder, if latest,
+  delete then create.
+- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 
