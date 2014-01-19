@@ -2091,7 +2091,7 @@ This should be sufficient for services. At present we have a hack that
 allows functions without any template arguments, e.g. =std::function=,
 in services.
 
-*** Add support for references to types                               :story:
+*** Add support for references and pointers to types                  :story:
 
 At present its not possible to create a type that has a reference to
 another type. This should be a case of updating the parser to cope
@@ -2106,6 +2106,13 @@ setter that takes the type by =&&=. The question then is should we
 also move on the getter? Sometimes it may not be a copyable type
 (e.g. asio's =socket=).
 
+It seems we can't also cope with =const= or pointers. To be fair we
+only need const for shared pointer for now. On all cases we need to
+make the parser more clever:
+
+: boost::shared_ptr<const my_type>
+: std::string&
+
 *** Add support for default values                                    :story:
 
 It would be nice to be able to add a default value in dia and have it
@@ -2118,7 +2125,7 @@ types it would be useful to generate a service interface from
 dogen. In order to do this we'd have to parse the method definitions
 in dia and use those to construct an abstract base class.
 
-*** shared pointer to vector fails to build                           :story:
+*** Shared pointer to vector fails to build                           :story:
 
 If one has a property with type
 =boost::shared_ptr<std::vector<std::string>>=, we get the following
@@ -2845,6 +2852,7 @@ that is required to allow users to create their own template types is:
 However this would then mean that IO and serialisation would fail
 since they are implemented on the cpp. As there is no need for
 template types, this seems like an ok limitation.
+
 *** Shared pointers as keys in associative containers
 
 This is not supported; it would require generating the
