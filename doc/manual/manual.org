@@ -115,28 +115,28 @@ to pay in complexity for every ounce of flexibility, so its best to
 have simple code that does one thing and does it well.
 
 Nevertheless, meta-models can be useful in a more general form when
-designing software applications. One of the most common meta-models in
+designing software applications: they can allow one to reason about
+the structure of the code. One of the most common meta-models in
 existence is [[http://en.wikipedia.org/wiki/Unified_Modeling_Language][UML]]. UML is used widely in the industry and there are
 many tools that can be used to generate source code from UML
-diagrams. UML is simultaneously ubiquitous - that is, available
-everywhere - and complete - that is, as a meta-model it defines a
+diagrams. It is simultaneously ubiquitous - that is, available
+everywhere - and complete - that is, as a meta-model, it defines a
 extensive list of concepts for pretty much any aspect of
 programming. Thus it is common for tools to take a UML representation
-and use it to generate source code.
-
-At present there are a few Open Source tools that can generate source
-code from a UML diagram:
+and use it to generate source code; as examples of Open Source tools
+that can generate source code from a UML diagram see:
 
 - [[http://dia2code.sourceforge.net/][dia2code]]
 - [[http://umbrello.kde.org/][Umbrello]] (see [[http://docs.kde.org/development/en/kdesdk/umbrello/code-import-generation.html][this]] for code generation)
 
-In a sense one may think of these as general purpose code generators
-because they output code that is not tied up with a specific
-purpose. However, what has been lost is the addition of any behaviour
-associated with the code; it is rather difficult to /model/ behaviour,
-short of writing the code itself. So we prefer to think of these code
-generators as special-purpose: their aim in life is to generate a
-source code representation of a data model - e.g. sans behaviour.
+In a sense one, may think of these as /general purpose/ code
+generators because they output code that is not tied up to any
+specific purpose, other than to model the problem domain. Unlike the
+special purpose tools, the generated code is very much skeleton code,
+code that adds little in terms of behaviour. This is all as it should
+be: the more specific your intent is, the more the code generator can
+do for you and, conversely, the less specific your intent is, the less
+helpful the code generator can be.
 
 The astute reader would have already devised a simple solution to the
 behaviour conundrum: nothing stops us from modeling the signatures of
@@ -146,13 +146,12 @@ methods. Indeed there are code generators which permit such workflows;
 they are known as /merging code generators/. The merging aspect comes
 from the fact that the code generator must be able to distinguish
 between the hand-crafted code and the machine generated code in order
-to handle meta-model updates. Say you've renamed an attribute of a
-class in your UML diagram; the last thing you need is for all the
-hand-crafted methods to disappear or for
+to handle meta-model updates.
 
-the code generator does not delete all of
-the hand-crafted code, but at the same time, it does not leave
-remnants of code that was previously machine generated
+So these are three key themes for Dogen: special purpose code
+generation, general purpose code generation and merging code
+generation. But before we can proceed, we need to add one more actor
+to the scene.
 
 *** Domain Driven Design
 
@@ -171,10 +170,10 @@ the former while dealing with the latter.
 
 Many people have thought deeply about this dichotomy. Arguably, the
 most significant advance was made by Eric Evans with his seminal book
-"Domain-Driven Design: Tackling Complexity in the Heart of
-Software". Domain Driven Design (DDD) is a software engineering
-methodology that places great emphasis on understanding the /problem
-domain/, and coupled with Agile it provides a great platform for
+[[http://www.amazon.co.uk/Domain-driven-Design-Tackling-Complexity-Software/dp/0321125215][Domain-Driven Design]]: Tackling Complexity in the Heart of
+Software. Domain Driven Design (DDD) is a software engineering
+methodology that places great emphasis on understanding the problem
+domain and, coupled with Agile, it provides a great platform for
 iterative improvements both to the understanding and to its expression
 in code. DDD places great emphasis in defining a clear and concise
 domain model - a set of classes and relationships that model the
@@ -183,7 +182,66 @@ explains the difference between the conceptual domain model and myriad
 of representations: UML diagrams, specification documents, oral
 conversations and, most importantly, source code.
 
-*** Adding the two together
+*** Adding It All Together
+
+The key idea behind Dogen is that all of the aspects we described up
+til now are deeply interrelated. That is to say that we store deep
+knowledge about the domain in meta-models, which tend to be
+represented graphically - say in UML class diagrams; and we do so
+because these representations provide a quick and yet expressive way
+to communicate domain knowledge. But those very same documents are -
+or can be made - sufficiently complete to be used as a basis for the
+code generation of skeleton code by some general purpose code
+generation tool. Furthermore, there are a large number of services
+that are required of most domain models, and these can be thought of
+as special purpose extensions to such a general purpose tool; and,
+finally, that which cannot be code generated can be manually added and
+merged in.
+
+Lets return to the "basic services" required by all domain
+models. What do we mean exactly? Well, ODB and the like already hinted
+at some of the things one may wish to do with C++ objects - persist
+them in a database - but there are other even more fundamental
+requirements:
+
+- the ability to support getters and setters, hashing, comparisons,
+  assignment, move construction and many other fundamental behaviours;
+- the ability to dump the current state of the object to a C++ stream
+  in a format that is parsable by external tools (like say JSON);
+- the ability to generate [[http://stackoverflow.com/questions/5140475/how-to-write-native-c-debugger-visualizers-in-gdb-totalview-for-complicated-t][debugger visualisers]];
+- the ability to serialise and deserialise objects using a multitude
+  of technologies such as [[http://download.oracle.com/otn_hosted_doc/coherence/353CPP/index.html][POF]], [[http://www.boost.org/doc/libs/1_55_0/libs/serialization/doc/index.html][Boost Serialisation]], [[https://github.com/hjiang/jsonxx][JSON]], [[http://libxmlplusplus.sourceforge.net/][XML]] and many
+  others;
+- the ability to generate objects populated with random data for
+  testing;
+- ...
+
+And on and on. The more we looked, the more boilerplate code we
+found - code that could easily be generated for the vast majority of
+the cases. Of course, there are quite a few corner cases which are
+just too hard to automate but they can easily be manually coded.
+
+The picture that emerges from this [[http://en.wikipedia.org/wiki/Thought_experiment][gedankenexperiment]] is some kind of
+"cyborg" coding - a type of programming where any and all aspects that
+can be reduced to a set of rules inferable from the structure of the
+domain model, are implemented as extensions of the code
+generator. Dogen is an attempt to create such a tool. As we are C++
+developers we started off by trying to implement the vision as a C++
+tool; but the notions are general enough that they would apply to any
+programming language.
+
+** The Dogen Architecture
+
+Dogen's internal design is similar to that of a compiler: it has
+front-ends, a middle-end and back-ends. The front-ends allow for
+different sources of domain information to be plugged into the code
+generator such as Dia and JSON text files. The middle-end is a domain
+model we call SML - the Simplified Modeling Language - and can be
+thought of as a bridge between domain modeling and code
+generation. Finally, the back-ends are responsible for expressing SML
+as code according to the grammar of some programming language like
+C++.
+
 ** Hello World Example
 
 * PART II - ADVANCED CONCEPTS

@@ -34,15 +34,16 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-18 Sat 23:18]
+Clock summary at [2014-01-19 Sun 00:48]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *11:13* |       |      |
+| *Total time*                                                                 | *12:43* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 11:13 |      |
-| IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
+| Development Stories Implemented                                              |         | 12:43 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 0:52 |
+| IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
+| IMPLEMENTATION Update the manual                                             |         |       | 1:30 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |         |       | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |         |       | 0:19 |
@@ -70,6 +71,7 @@ Updates to release notes and backlog.
 We should do a write up of how we develop dogen.
 
 *** IMPLEMENTATION Update the manual                                  :story:
+    CLOCK: [2014-01-18 Sat 23:30]--[2014-01-19 Sun 00:48] =>  1:18
     CLOCK: [2014-01-18 Sat 23:18]--[2014-01-18 Sat 23:30] =>  0:12
 
 Use build downtime to update the manual.
