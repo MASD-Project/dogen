@@ -562,7 +562,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="-27,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.544999999999998"/>
+        <dia:real val="30.545000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="28.900000000000002"/>
@@ -1194,13 +1194,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="26,47"/>
+        <dia:point val="32,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,46.95;40.025,52.25"/>
+        <dia:rectangle val="31.95,46.95;46.025,52.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26,47"/>
+        <dia:point val="32,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -1916,19 +1916,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,47"/>
+        <dia:point val="56,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,46.95;69.03,58.65"/>
+        <dia:rectangle val="55.95,46.95;71.565,54.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,47"/>
+        <dia:point val="56,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.98"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.6"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#source_file#</dia:string>
@@ -2020,6 +2020,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#includes#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#includes#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Headers included by this source file.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#descriptor#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -2030,98 +2053,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Description of the file's content.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#class_info#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;class_info&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If non-empty, the file contains a class.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enum_info#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;enum_info&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If non-empty, the file contains an enum.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#exception_info#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;exception_info&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If non-empty, the file contains an exception.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#registrar_info#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;registrar_info&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If non-empty, the file contains a registrar.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2181,52 +2112,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#namespace_info#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;namespace_info&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Namespaces in which to include the type.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#visitor_info#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;visitor_info&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If non-empty, file includes a visitor.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#relative_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -2250,16 +2135,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#includes#</dia:string>
+            <dia:string>#entity#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#includes#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;cpp::entity&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Entity contained in this file, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4562,7 +4447,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="112,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.619999999999999"/>
+        <dia:real val="12.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4844,7 +4729,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="36.4525,32.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.9375,31.45;37.2025,47.8"/>
+        <dia:rectangle val="35.7025,31.45;39.1875,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4852,8 +4737,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="36.4525,32.2"/>
         <dia:point val="36.4525,40"/>
-        <dia:point val="32.9875,40"/>
-        <dia:point val="32.9875,47"/>
+        <dia:point val="38.9875,40"/>
+        <dia:point val="38.9875,47"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4915,7 +4800,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="46.905,32.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.155,31.45;50.2,47.8"/>
+        <dia:rectangle val="46.155,31.45;56.2,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4923,8 +4808,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="46.905,32.2"/>
         <dia:point val="46.905,40"/>
-        <dia:point val="50,40"/>
-        <dia:point val="50,47"/>
+        <dia:point val="56,40"/>
+        <dia:point val="56,47"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5230,7 +5115,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="92,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5850000000000009"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15.600000000000003"/>
@@ -6486,17 +6371,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="59.49,58.6"/>
+        <dia:point val="63.7575,54.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.74,57.85;70.6475,72.8"/>
+        <dia:rectangle val="63.0075,53.85;70.6475,72.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="59.49,58.6"/>
-        <dia:point val="59.49,66"/>
+        <dia:point val="63.7575,54.6"/>
+        <dia:point val="63.7575,66"/>
         <dia:point val="70.4475,66"/>
         <dia:point val="70.4475,72"/>
       </dia:attribute>
@@ -6721,17 +6606,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="68.98,47"/>
+        <dia:point val="71.515,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.23,32.95;85.2,47.8"/>
+        <dia:rectangle val="70.765,32.95;85.2,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="68.98,47"/>
-        <dia:point val="68.98,40"/>
+        <dia:point val="71.515,47"/>
+        <dia:point val="71.515,40"/>
         <dia:point val="85,40"/>
         <dia:point val="85,33"/>
       </dia:attribute>
@@ -6963,17 +6848,17 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="59.49,47"/>
+        <dia:point val="63.7575,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.74,30.55;64.7275,47.8"/>
+        <dia:rectangle val="63.0075,30.55;64.7275,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="59.49,47"/>
-        <dia:point val="59.49,40"/>
+        <dia:point val="63.7575,47"/>
+        <dia:point val="63.7575,40"/>
         <dia:point val="64.5275,40"/>
         <dia:point val="64.5275,30.6"/>
       </dia:attribute>

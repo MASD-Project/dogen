@@ -20,15 +20,10 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/class_info_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/enum_info_io.hpp"
-#include "dogen/cpp/io/exception_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/includes_io.hpp"
-#include "dogen/cpp/io/namespace_info_io.hpp"
-#include "dogen/cpp/io/registrar_info_io.hpp"
 #include "dogen/cpp/io/source_file_io.hpp"
-#include "dogen/cpp/io/visitor_info_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -40,89 +35,15 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::class_info>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::entity>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
     if (v)
         s << "\"data\": " << *v;
     else
         s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::enum_info>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::exception_info>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::registrar_info>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::namespace_info>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::visitor_info>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
+    s<< " }";
     return s;
 }
 
@@ -135,17 +56,12 @@ std::ostream& operator<<(std::ostream& s, const source_file& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::source_file\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"includes\": " << v.includes() << ", "
       << "\"descriptor\": " << v.descriptor() << ", "
-      << "\"class_info\": " << v.class_info() << ", "
-      << "\"enum_info\": " << v.enum_info() << ", "
-      << "\"exception_info\": " << v.exception_info() << ", "
-      << "\"registrar_info\": " << v.registrar_info() << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"namespace_info\": " << v.namespace_info() << ", "
-      << "\"visitor_info\": " << v.visitor_info() << ", "
       << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"includes\": " << v.includes()
+      << "\"entity\": " << v.entity()
       << " }";
     return(s);
 }

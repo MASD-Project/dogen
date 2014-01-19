@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
@@ -340,56 +341,57 @@ transformer::to_enumerator_info(const sml::enumerator& e) const {
     return r;
 }
 
-cpp::enum_info
+boost::shared_ptr<cpp::enum_info>
 transformer::to_enumeration_info(const sml::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
-    cpp::enum_info r;
-    r.name(e.name().simple_name());
-    r.namespaces(to_namespace_list(e.name()));
-    r.documentation(e.documentation());
-    r.type(e.underlying_type().simple_name());
+    auto r(boost::make_shared<cpp::enum_info>());
+    r->name(e.name().simple_name());
+    r->namespaces(to_namespace_list(e.name()));
+    r->documentation(e.documentation());
+    r->type(e.underlying_type().simple_name());
 
     for (const auto& en : e.enumerators())
-        r.enumerators().push_back(to_enumerator_info(en));
+        r->enumerators().push_back(to_enumerator_info(en));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
 
     return r;
 }
 
-cpp::exception_info
-transformer::to_exception_info(const sml::object& vo) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << vo.name();
+boost::shared_ptr<cpp::exception_info>
+transformer::to_exception_info(const sml::object& o) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << o.name();
 
-    cpp::exception_info r;
-    r.name(vo.name().simple_name());
-    r.namespaces(to_namespace_list(vo.name()));
-    r.documentation(vo.documentation());
+    auto r(boost::make_shared<cpp::exception_info>());
+    r->name(o.name().simple_name());
+    r->namespaces(to_namespace_list(o.name()));
+    r->documentation(o.documentation());
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << vo.name();
-
+    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << o.name();
     return r;
 }
 
-cpp::class_info transformer::to_class_info(const sml::object& ao) const {
-    cpp::class_info r;
-    r.name(ao.name().simple_name());
-    r.namespaces(to_namespace_list(ao.name()));
-    r.documentation(ao.documentation());
-    r.is_immutable(ao.is_immutable());
-    r.is_visitable(ao.is_visitable());
-    r.is_parent(ao.is_parent());
-    r.generation_type(ao.generation_type());
-    r.class_type(cpp::class_types::user_defined);
+boost::shared_ptr<cpp::class_info>
+transformer::to_class_info(const sml::object& o) const {
+    auto r(boost::make_shared<cpp::class_info>());
 
-    sml::meta_data_reader reader(ao.meta_data());
-    r.opaque_parameters(reader.odb_pragma());
+    r->name(o.name().simple_name());
+    r->namespaces(to_namespace_list(o.name()));
+    r->documentation(o.documentation());
+    r->is_immutable(o.is_immutable());
+    r->is_visitable(o.is_visitable());
+    r->is_parent(o.is_parent());
+    r->generation_type(o.generation_type());
+    r->class_type(cpp::class_types::user_defined);
 
-    auto i(ao.relationships().find(sml::relationship_types::parents));
-    if (i != ao.relationships().end() && !i->second.empty()) {
+    sml::meta_data_reader reader(o.meta_data());
+    r->opaque_parameters(reader.odb_pragma());
+
+    auto i(o.relationships().find(sml::relationship_types::parents));
+    if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
-            const auto& sn(ao.name().simple_name());
+            const auto& sn(o.name().simple_name());
             BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
             BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
         }
@@ -403,18 +405,18 @@ cpp::class_info transformer::to_class_info(const sml::object& ao) const {
                     parent_class_info_not_found + sn));
         }
 
-        const auto pci(j->second);
+        const auto pci(*j->second);
         cpp::parent_info pi;
         pi.name(pci.name());
         pi.properties(pci.all_properties());
         pi.namespaces(pci.namespaces());
-        r.parents().push_back(pi);
+        r->parents().push_back(pi);
     }
 
-    i = ao.relationships().find(sml::relationship_types::original_parents);
-    if (i != ao.relationships().end() && !i->second.empty()) {
+    i = o.relationships().find(sml::relationship_types::original_parents);
+    if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
-            const auto& sn(ao.name().simple_name());
+            const auto& sn(o.name().simple_name());
             BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
             BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
         }
@@ -429,87 +431,79 @@ cpp::class_info transformer::to_class_info(const sml::object& ao) const {
         }
 
         const auto opci(j->second);
-        std::list<std::string> ns(opci.namespaces());
-        ns.push_back(opci.name());
+        std::list<std::string> ns(opci->namespaces());
+        ns.push_back(opci->name());
 
         using boost::join;
-        r.original_parent_name_qualified(join(ns, namespace_separator));
-        r.original_parent_name(opci.name());
-        r.is_original_parent_visitable(opci.is_visitable());
+        r->original_parent_name_qualified(join(ns, namespace_separator));
+        r->original_parent_name(opci->name());
+        r->is_original_parent_visitable(opci->is_visitable());
     }
 
-    for (const auto& prop : ao.all_properties()) {
+    for (const auto& prop : o.all_properties()) {
         const auto tuple(to_property_info(
-                prop, ao.is_immutable(), ao.is_fluent()));
-        r.all_properties().push_back(std::get<0>(tuple));
+                prop, o.is_immutable(), o.is_fluent()));
+        r->all_properties().push_back(std::get<0>(tuple));
     }
 
-    for (const auto& prop : ao.local_properties()) {
+    for (const auto& prop : o.local_properties()) {
         const auto tuple(to_property_info(
-                prop, ao.is_immutable(), ao.is_fluent()));
+                prop, o.is_immutable(), o.is_fluent()));
 
-        r.properties().push_back(std::get<0>(tuple));
+        r->properties().push_back(std::get<0>(tuple));
 
         if (std::get<1>(tuple))
-            r.has_primitive_properties(true);
+            r->has_primitive_properties(true);
 
         if (std::get<2>(tuple))
-            r.requires_stream_manipulators(true);
+            r->requires_stream_manipulators(true);
 
         if (std::get<3>(tuple))
-            r.requires_manual_move_constructor(true);
+            r->requires_manual_move_constructor(true);
 
         if (std::get<4>(tuple))
-            r.requires_manual_default_constructor(true);
+            r->requires_manual_default_constructor(true);
     }
 
-    i = ao.relationships().find(sml::relationship_types::leaves);
-    if (i != ao.relationships().end()) {
+    i = o.relationships().find(sml::relationship_types::leaves);
+    if (i != o.relationships().end()) {
         for (const auto l : i->second)
-            r.leaves().push_back(to_qualified_name(l));
+            r->leaves().push_back(to_qualified_name(l));
     }
 
     return r;
 }
 
-cpp::visitor_info transformer::to_visitor(const sml::object& v) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << v.name();
+boost::shared_ptr<cpp::visitor_info>
+transformer::to_visitor(const sml::object& o) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << o.name();
 
-    cpp::visitor_info r;
-    r.name(v.name().simple_name());
-    r.namespaces(to_namespace_list(v.name()));
+    auto r(boost::make_shared<cpp::visitor_info>());
+    r->name(o.name().simple_name());
+    r->namespaces(to_namespace_list(o.name()));
 
-    auto i(v.relationships().find(sml::relationship_types::visits));
-    if (i == v.relationships().end() || i->second.empty()) {
-        const auto& sn(v.name().simple_name());
+    auto i(o.relationships().find(sml::relationship_types::visits));
+    if (i == o.relationships().end() || i->second.empty()) {
+        const auto& sn(o.name().simple_name());
         BOOST_LOG_SEV(lg, error) << no_visitees << sn;
         BOOST_THROW_EXCEPTION(transformation_error(no_visitees + sn));
     }
 
     for (const auto qn : i->second)
-        r.types().push_back(to_qualified_name(qn));
+        r->types().push_back(to_qualified_name(qn));
 
     return r;
 }
 
-void transformer::add_class(const sml::qname& qn, const cpp::class_info& ci) {
+void transformer::
+add_class(const sml::qname& qn, boost::shared_ptr<cpp::class_info> ci) {
     context_.classes().insert(std::make_pair(qn, ci));
 }
 
 void transformer::visit(const dogen::sml::enumeration& e) {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
-
-    cpp::enum_info ei;
-    ei.name(e.name().simple_name());
-    ei.namespaces(to_namespace_list(e.name()));
-    ei.documentation(e.documentation());
-    ei.type(e.underlying_type().simple_name());
-
-    for (const auto& en : e.enumerators())
-        ei.enumerators().push_back(to_enumerator_info(en));
-
+    auto ei(to_enumeration_info(e));
     context_.enumerations().insert(std::make_pair(e.name(), ei));
-
     BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
 }
 
@@ -519,11 +513,11 @@ void transformer::visit(const dogen::sml::object& o) {
     auto ci(to_class_info(o));
     switch(o.object_type()) {
     case sml::object_types::factory:
-        ci.class_type(cpp::class_types::service); // FIXME: mega-hack
+        ci->class_type(cpp::class_types::service); // FIXME: mega-hack
         add_class(o.name(), ci);
         break;
     case sml::object_types::user_defined_service:
-        ci.class_type(cpp::class_types::service);
+        ci->class_type(cpp::class_types::service);
         add_class(o.name(), ci);
         break;
     case sml::object_types::visitor:
@@ -531,7 +525,7 @@ void transformer::visit(const dogen::sml::object& o) {
         break;
     case sml::object_types::entity:
     case sml::object_types::keyed_entity:
-        ci.class_type(cpp::class_types::user_defined);
+        ci->class_type(cpp::class_types::user_defined);
         add_class(o.name(), ci);
         break;
 
@@ -546,13 +540,13 @@ void transformer::visit(const dogen::sml::object& o) {
     }
     case sml::object_types::versioned_key: {
         auto ci(to_class_info(o));
-        ci.class_type(cpp::class_types::versioned_key);
+        ci->class_type(cpp::class_types::versioned_key);
         add_class(o.name(), ci);
         break;
     }
     case sml::object_types::unversioned_key: {
         auto ci(to_class_info(o));
-        ci.class_type(cpp::class_types::unversioned_key);
+        ci->class_type(cpp::class_types::unversioned_key);
         add_class(o.name(), ci);
         break;
     }
@@ -573,10 +567,9 @@ void transformer::from_type(const sml::type& t) {
 void transformer::to_namespace_info(const sml::module& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming module: " << m.name();
 
-    cpp::namespace_info ni;
-    ni.documentation(m.documentation());
-    ni.namespaces(to_namespace_list(m.name()));
-
+    auto ni(boost::make_shared<cpp::namespace_info>());
+    ni->documentation(m.documentation());
+    ni->namespaces(to_namespace_list(m.name()));
     context_.namespaces().insert(std::make_pair(m.name(), ni));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
@@ -586,10 +579,9 @@ void transformer::model_to_namespace_info() {
     const std::string n(model_.name().simple_name());
     BOOST_LOG_SEV(lg, debug) << "Transforming model into namespace: " << n;
 
-    cpp::namespace_info ni;
-    ni.documentation(model_.documentation());
-    ni.namespaces(to_namespace_list(model_.name()));
-
+    auto ni(boost::make_shared<cpp::namespace_info>());
+    ni->documentation(model_.documentation());
+    ni->namespaces(to_namespace_list(model_.name()));
     context_.namespaces().insert(std::make_pair(model_.name(), ni));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
@@ -599,17 +591,17 @@ void transformer::model_to_registrar_info() {
     const std::string n(model_.name().simple_name());
     BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;
 
-    cpp::registrar_info ri;
-    ri.namespaces(to_namespace_list(model_.name()));
+    auto ri(boost::make_shared<cpp::registrar_info>());
+    ri->namespaces(to_namespace_list(model_.name()));
 
     for (const auto& pair : model_.references()) {
         if (pair.second != sml::origin_types::system)
-            ri.model_dependencies().push_back(pair.first.model_name());
+            ri->model_dependencies().push_back(pair.first.model_name());
     }
 
     for (const auto& l : model_.leaves())
-        ri.leaves().push_back(to_qualified_name(l));
-    ri.leaves().sort();
+        ri->leaves().push_back(to_qualified_name(l));
+    ri->leaves().sort();
 
     sml::qname qn;
     qn.simple_name(registrar_name);

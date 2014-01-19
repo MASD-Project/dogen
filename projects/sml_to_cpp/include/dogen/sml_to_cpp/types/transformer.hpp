@@ -65,9 +65,6 @@ public:
     transformer(const sml::model& m, context& c);
     virtual ~transformer() noexcept { }
 
-public:
-    typedef boost::optional<cpp::class_info> optional_class_info;
-
 private:
     /**
      * @brief Converts an SML qname into a C++ qualified name.
@@ -111,26 +108,30 @@ private:
     /**
      * @brief Transforms an SML property to an enumerator info.
      */
-    cpp::enumerator_info to_enumerator_info(const sml::enumerator& e) const;
+    cpp::enumerator_info
+    to_enumerator_info(const sml::enumerator& e) const;
 
     /**
      * @brief Transforms a SML value containing an enumeration into an
      * enumeration info.
      */
-    cpp::enum_info to_enumeration_info(const sml::enumeration& e) const;
+    boost::shared_ptr<cpp::enum_info>
+    to_enumeration_info(const sml::enumeration& e) const;
 
     /**
      * @brief Transforms a SML value containing an exception into an
      * exception info.
      */
-    cpp::exception_info to_exception_info(const sml::object& vo) const;
+    boost::shared_ptr<cpp::exception_info>
+    to_exception_info(const sml::object& o) const;
 
     /**
      * @brief Transform a SML object into a class info.
      *
      * @param ao object to transform.
      */
-    cpp::class_info to_class_info(const sml::object& ao) const;
+    boost::shared_ptr<cpp::class_info>
+    to_class_info(const sml::object& o) const;
 
     /**
      * @brief Transform a SML object representing a visitor into a
@@ -138,13 +139,13 @@ private:
      *
      * @pre value object must have a visitor type.
      */
-    cpp::visitor_info to_visitor(const sml::object& v) const;
+    boost::shared_ptr<cpp::visitor_info> to_visitor(const sml::object& o) const;
 
 private:
     /**
      * @brief Adds the class info to the context.
      */
-    void add_class(const sml::qname& qn, const cpp::class_info& ci);
+    void add_class(const sml::qname& qn, boost::shared_ptr<cpp::class_info> ci);
 
 private:
     using type_visitor::visit;

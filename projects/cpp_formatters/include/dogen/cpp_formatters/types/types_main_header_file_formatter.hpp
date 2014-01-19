@@ -33,11 +33,13 @@
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
+#include "dogen/cpp/types/entity_visitor.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
 
-class types_main_header_file_formatter : public file_formatter {
+class types_main_header_file_formatter : public file_formatter,
+                                         private cpp::entity_visitor {
 public:
     types_main_header_file_formatter() = delete;
     types_main_header_file_formatter(
@@ -64,15 +66,12 @@ private:
     void inserter_operator(const cpp::class_info& ci);
     void equality_operator(const cpp::class_info& ci);
     void swap_method(const cpp::class_info& ci);
-    void class_declaration(const cpp::content_descriptor& cd,
-        const cpp::class_info& ci);
-    void format_main(const cpp::content_descriptor& cd,
-        const cpp::class_info& ci);
 
 private:
-    void format_class(const cpp::source_file& f);
-    void format_enumeration(const cpp::source_file& f);
-    void format_exception(const cpp::source_file& f);
+    using cpp::entity_visitor::visit;
+    virtual void visit(dogen::cpp::class_info& ci) override;
+    virtual void visit(dogen::cpp::enum_info& ei) override;
+    virtual void visit(dogen::cpp::exception_info& ei) override;
 
 public:
     virtual void format(const cpp::source_file& f) override;

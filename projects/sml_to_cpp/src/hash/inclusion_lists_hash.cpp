@@ -18,8 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/hash/boost_types_hash.hpp"
-#include "dogen/sml_to_cpp/hash/context_hash.hpp"
 #include "dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp"
-#include "dogen/sml_to_cpp/hash/relationships_hash.hpp"
-#include "dogen/sml_to_cpp/hash/std_types_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace sml_to_cpp {
+
+std::size_t inclusion_lists_hasher::hash(const inclusion_lists&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_list_std_string(v.system()));
+    combine(seed, hash_std_list_std_string(v.user()));
+
+    return seed;
+}
+
+} }

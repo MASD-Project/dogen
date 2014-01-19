@@ -118,7 +118,7 @@ void visitor::format(const cpp::source_file& f) {
     includes includes(stream_);
     includes.format(f);
 
-    const auto o(f.visitor_info());
+    auto o(boost::dynamic_pointer_cast<cpp::visitor_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_visitor_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_visitor_info));

@@ -19,7 +19,11 @@
  *
  */
 #include <ostream>
+#include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/inserter_implementation.hpp"
@@ -72,7 +76,7 @@ void io_implementation::io_helper_methods(const cpp::class_info& ci) {
 }
 
 void io_implementation::format_enumeration(const cpp::source_file& f) {
-    const auto o(f.enum_info());
+    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -136,7 +140,7 @@ void io_implementation::format_enumeration(const cpp::source_file& f) {
 }
 
 void io_implementation::format_class(const cpp::source_file& f) {
-    const auto o(f.class_info());
+    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));

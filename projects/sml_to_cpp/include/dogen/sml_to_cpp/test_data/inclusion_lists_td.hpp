@@ -18,8 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/hash/boost_types_hash.hpp"
-#include "dogen/sml_to_cpp/hash/context_hash.hpp"
-#include "dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp"
-#include "dogen/sml_to_cpp/hash/relationships_hash.hpp"
-#include "dogen/sml_to_cpp/hash/std_types_hash.hpp"
+#ifndef DOGEN_SML_TO_CPP_TEST_DATA_INCLUSION_LISTS_TD_HPP
+#define DOGEN_SML_TO_CPP_TEST_DATA_INCLUSION_LISTS_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
+
+namespace dogen {
+namespace sml_to_cpp {
+
+class inclusion_lists_generator {
+public:
+    inclusion_lists_generator();
+
+public:
+    typedef dogen::sml_to_cpp::inclusion_lists result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
+
+#endif

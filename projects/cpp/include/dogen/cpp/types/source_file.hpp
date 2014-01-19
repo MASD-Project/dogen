@@ -27,17 +27,12 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
 #include <string>
 #include "dogen/cpp/serialization/source_file_fwd_ser.hpp"
-#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/entity_fwd.hpp"
 #include "dogen/cpp/types/includes.hpp"
-#include "dogen/cpp/types/namespace_info.hpp"
-#include "dogen/cpp/types/registrar_info.hpp"
-#include "dogen/cpp/types/visitor_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -57,17 +52,12 @@ public:
 public:
     source_file(
         const std::string& documentation,
+        const dogen::cpp::includes& includes,
         const dogen::cpp::content_descriptor& descriptor,
-        const boost::optional<dogen::cpp::class_info>& class_info,
-        const boost::optional<dogen::cpp::enum_info>& enum_info,
-        const boost::optional<dogen::cpp::exception_info>& exception_info,
-        const boost::optional<dogen::cpp::registrar_info>& registrar_info,
         const std::string& header_guard,
         const boost::filesystem::path& file_path,
-        const boost::optional<dogen::cpp::namespace_info>& namespace_info,
-        const boost::optional<dogen::cpp::visitor_info>& visitor_info,
         const boost::filesystem::path& relative_path,
-        const dogen::cpp::includes& includes);
+        const boost::shared_ptr<dogen::cpp::entity>& entity);
 
 private:
     template<typename Archive>
@@ -92,6 +82,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Headers included by this source file.
+     */
+    /**@{*/
+    const dogen::cpp::includes& includes() const;
+    dogen::cpp::includes& includes();
+    void includes(const dogen::cpp::includes& v);
+    void includes(const dogen::cpp::includes&& v);
+    /**@}*/
+
+    /**
      * @brief Description of the file's content.
      */
     /**@{*/
@@ -99,46 +99,6 @@ public:
     dogen::cpp::content_descriptor& descriptor();
     void descriptor(const dogen::cpp::content_descriptor& v);
     void descriptor(const dogen::cpp::content_descriptor&& v);
-    /**@}*/
-
-    /**
-     * @brief If non-empty, the file contains a class.
-     */
-    /**@{*/
-    const boost::optional<dogen::cpp::class_info>& class_info() const;
-    boost::optional<dogen::cpp::class_info>& class_info();
-    void class_info(const boost::optional<dogen::cpp::class_info>& v);
-    void class_info(const boost::optional<dogen::cpp::class_info>&& v);
-    /**@}*/
-
-    /**
-     * @brief If non-empty, the file contains an enum.
-     */
-    /**@{*/
-    const boost::optional<dogen::cpp::enum_info>& enum_info() const;
-    boost::optional<dogen::cpp::enum_info>& enum_info();
-    void enum_info(const boost::optional<dogen::cpp::enum_info>& v);
-    void enum_info(const boost::optional<dogen::cpp::enum_info>&& v);
-    /**@}*/
-
-    /**
-     * @brief If non-empty, the file contains an exception.
-     */
-    /**@{*/
-    const boost::optional<dogen::cpp::exception_info>& exception_info() const;
-    boost::optional<dogen::cpp::exception_info>& exception_info();
-    void exception_info(const boost::optional<dogen::cpp::exception_info>& v);
-    void exception_info(const boost::optional<dogen::cpp::exception_info>&& v);
-    /**@}*/
-
-    /**
-     * @brief If non-empty, the file contains a registrar.
-     */
-    /**@{*/
-    const boost::optional<dogen::cpp::registrar_info>& registrar_info() const;
-    boost::optional<dogen::cpp::registrar_info>& registrar_info();
-    void registrar_info(const boost::optional<dogen::cpp::registrar_info>& v);
-    void registrar_info(const boost::optional<dogen::cpp::registrar_info>&& v);
     /**@}*/
 
     /**
@@ -162,26 +122,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Namespaces in which to include the type.
-     */
-    /**@{*/
-    const boost::optional<dogen::cpp::namespace_info>& namespace_info() const;
-    boost::optional<dogen::cpp::namespace_info>& namespace_info();
-    void namespace_info(const boost::optional<dogen::cpp::namespace_info>& v);
-    void namespace_info(const boost::optional<dogen::cpp::namespace_info>&& v);
-    /**@}*/
-
-    /**
-     * @brief If non-empty, file includes a visitor.
-     */
-    /**@{*/
-    const boost::optional<dogen::cpp::visitor_info>& visitor_info() const;
-    boost::optional<dogen::cpp::visitor_info>& visitor_info();
-    void visitor_info(const boost::optional<dogen::cpp::visitor_info>& v);
-    void visitor_info(const boost::optional<dogen::cpp::visitor_info>&& v);
-    /**@}*/
-
-    /**
      * @brief Relative path to file.
      */
     /**@{*/
@@ -191,10 +131,15 @@ public:
     void relative_path(const boost::filesystem::path&& v);
     /**@}*/
 
-    const dogen::cpp::includes& includes() const;
-    dogen::cpp::includes& includes();
-    void includes(const dogen::cpp::includes& v);
-    void includes(const dogen::cpp::includes&& v);
+    /**
+     * @brief Entity contained in this file, if any.
+     */
+    /**@{*/
+    const boost::shared_ptr<dogen::cpp::entity>& entity() const;
+    boost::shared_ptr<dogen::cpp::entity>& entity();
+    void entity(const boost::shared_ptr<dogen::cpp::entity>& v);
+    void entity(const boost::shared_ptr<dogen::cpp::entity>&& v);
+    /**@}*/
 
 public:
     bool operator==(const source_file& rhs) const;
@@ -208,17 +153,12 @@ public:
 
 private:
     std::string documentation_;
+    dogen::cpp::includes includes_;
     dogen::cpp::content_descriptor descriptor_;
-    boost::optional<dogen::cpp::class_info> class_info_;
-    boost::optional<dogen::cpp::enum_info> enum_info_;
-    boost::optional<dogen::cpp::exception_info> exception_info_;
-    boost::optional<dogen::cpp::registrar_info> registrar_info_;
     std::string header_guard_;
     boost::filesystem::path file_path_;
-    boost::optional<dogen::cpp::namespace_info> namespace_info_;
-    boost::optional<dogen::cpp::visitor_info> visitor_info_;
     boost::filesystem::path relative_path_;
-    dogen::cpp::includes includes_;
+    boost::shared_ptr<dogen::cpp::entity> entity_;
 };
 
 } }

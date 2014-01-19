@@ -19,8 +19,10 @@
  *
  */
 #include <ostream>
+#include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp_formatters/types/doxygen_comments.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
@@ -56,7 +58,7 @@ namespace_documentation::create(std::ostream& stream) {
 }
 
 void namespace_documentation::format_namespace(const cpp::source_file& f) {
-    auto o(f.namespace_info());
+    auto o(boost::dynamic_pointer_cast<cpp::namespace_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_namespace_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_namespace_info));

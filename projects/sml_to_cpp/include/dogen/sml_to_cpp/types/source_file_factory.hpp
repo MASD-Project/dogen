@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
@@ -71,25 +72,25 @@ public:
     /**
      * @brief Manufacture the file info for the given enum info.
      */
-    cpp::source_file create(const cpp::enum_info& ei,
+    cpp::source_file create(boost::shared_ptr<cpp::enum_info> ei,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given exception.
      */
-    cpp::source_file create(const cpp::exception_info& ei,
+    cpp::source_file create(boost::shared_ptr<cpp::exception_info> ei,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given namespace.
      */
-    cpp::source_file create(const cpp::namespace_info& ni,
+    cpp::source_file create(boost::shared_ptr<cpp::namespace_info> ni,
         const cpp::content_descriptor& cd) const;
 
     /**
      * @brief Manufacture all the file infos for the given class.
      */
-    cpp::source_file create(const cpp::class_info& ci,
+    cpp::source_file create(boost::shared_ptr<cpp::class_info> ci,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
@@ -101,13 +102,13 @@ public:
     /**
      * @brief Manufacture file info for registrar.
      */
-    cpp::source_file create_registrar(const cpp::registrar_info& ri,
+    cpp::source_file create_registrar(boost::shared_ptr<cpp::registrar_info> ri,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture file info for visitor.
      */
-    cpp::source_file create_visitor(const cpp::visitor_info& vi,
+    cpp::source_file create_visitor(boost::shared_ptr<cpp::visitor_info> vi,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
 private:

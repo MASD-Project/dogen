@@ -18,8 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/io/boost_types_io.hpp"
-#include "dogen/sml_to_cpp/io/context_io.hpp"
+#include <boost/algorithm/string.hpp>
+#include <ostream>
 #include "dogen/sml_to_cpp/io/inclusion_lists_io.hpp"
-#include "dogen/sml_to_cpp/io/relationships_io.hpp"
-#include "dogen/sml_to_cpp/io/std_types_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace sml_to_cpp {
+
+std::ostream& operator<<(std::ostream& s, const inclusion_lists& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::sml_to_cpp::inclusion_lists\"" << ", "
+      << "\"system\": " << v.system() << ", "
+      << "\"user\": " << v.user()
+      << " }";
+    return(s);
+}
+
+} }

@@ -18,8 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/hash/boost_types_hash.hpp"
-#include "dogen/sml_to_cpp/hash/context_hash.hpp"
-#include "dogen/sml_to_cpp/hash/inclusion_lists_hash.hpp"
-#include "dogen/sml_to_cpp/hash/relationships_hash.hpp"
-#include "dogen/sml_to_cpp/hash/std_types_hash.hpp"
+#ifndef DOGEN_SML_TO_CPP_IO_INCLUSION_LISTS_IO_HPP
+#define DOGEN_SML_TO_CPP_IO_INCLUSION_LISTS_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
+
+namespace dogen {
+namespace sml_to_cpp {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml_to_cpp::inclusion_lists& v);
+
+} }
+
+#endif

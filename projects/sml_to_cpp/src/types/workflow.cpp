@@ -197,7 +197,7 @@ workflow::generate_source_files_for_classes_activity() const {
 
         content_types ct;
         // FIXME: big hack
-        switch(ci.class_type()) {
+        switch(ci->class_type()) {
         case class_types::user_defined:
             ct = content_types::value_object;
             break;
@@ -212,9 +212,9 @@ workflow::generate_source_files_for_classes_activity() const {
             break;
         default:
             BOOST_LOG_SEV(lg, error) << unsupported_class_type
-                                     << ci.class_type();
+                                     << ci->class_type();
             BOOST_THROW_EXCEPTION(workflow_failure(unsupported_class_type +
-                    boost::lexical_cast<std::string>(ci.class_type())));
+                    boost::lexical_cast<std::string>(ci->class_type())));
         };
 
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
@@ -228,7 +228,7 @@ workflow::generate_source_files_for_classes_activity() const {
             using sml::generation_types;
             using cpp::aspect_types;
             if (cd.aspect_type() != aspect_types::forward_decls &&
-                ci.generation_type() == generation_types::partial_generation) {
+                ci->generation_type() == generation_types::partial_generation) {
                 fi.descriptor().aspect_type(aspect_types::null_aspect);
             }
             r.push_back(fi);

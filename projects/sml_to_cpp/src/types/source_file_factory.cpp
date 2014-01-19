@@ -72,33 +72,37 @@ create(const cpp::content_descriptor& cd) const {
     return r;
 }
 
-cpp::source_file source_file_factory::create(const cpp::enum_info& ei,
-    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
+cpp::source_file source_file_factory::
+create(boost::shared_ptr<cpp::enum_info> ei, const cpp::content_descriptor& cd,
+    const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
-    r.enum_info(ei);
-    r.includes(inc);
-    return r;
-}
-
-cpp::source_file source_file_factory::create(const cpp::exception_info& ei,
-    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
-    cpp::source_file r(create(cd));
-    r.exception_info(ei);
+    r.entity(ei);
     r.includes(inc);
     return r;
 }
 
 cpp::source_file source_file_factory::
-create(const cpp::namespace_info& ni, const cpp::content_descriptor& cd) const {
+create(boost::shared_ptr<cpp::exception_info> ei,
+    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
-    r.namespace_info(ni);
+    r.entity(ei);
+    r.includes(inc);
     return r;
 }
 
-cpp::source_file source_file_factory::create(const cpp::class_info& ci,
-    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
+cpp::source_file source_file_factory::
+create(boost::shared_ptr<cpp::namespace_info> ni,
+    const cpp::content_descriptor& cd) const {
     cpp::source_file r(create(cd));
-    r.class_info(ci);
+    r.entity(ni);
+    return r;
+}
+
+cpp::source_file source_file_factory::
+create(boost::shared_ptr<cpp::class_info> ci, const cpp::content_descriptor& cd,
+    const cpp::includes& inc) const {
+    cpp::source_file r(create(cd));
+    r.entity(ci);
     r.includes(inc);
     return r;
 }
@@ -112,19 +116,20 @@ cpp::source_file source_file_factory::create_includer(
 }
 
 cpp::source_file source_file_factory::
-create_registrar(const cpp::registrar_info& ri,
+create_registrar(boost::shared_ptr<cpp::registrar_info> ri,
     const cpp::content_descriptor& cd, const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
-    r.registrar_info(ri);
+    r.entity(ri);
     r.includes(inc);
     return r;
 }
 
 cpp::source_file source_file_factory::
-create_visitor(const cpp::visitor_info& vi, const cpp::content_descriptor& cd,
+create_visitor(boost::shared_ptr<cpp::visitor_info> vi,
+    const cpp::content_descriptor& cd,
     const cpp::includes& inc) const {
     cpp::source_file r(create(cd));
-    r.visitor_info(vi);
+    r.entity(vi);
     r.includes(inc);
     return r;
 }

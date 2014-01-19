@@ -27,17 +27,12 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/optional.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/cpp/serialization/class_info_ser.hpp"
 #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
-#include "dogen/cpp/serialization/enum_info_ser.hpp"
-#include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/entity_ser.hpp"
 #include "dogen/cpp/serialization/includes_ser.hpp"
-#include "dogen/cpp/serialization/namespace_info_ser.hpp"
-#include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/source_file_ser.hpp"
-#include "dogen/cpp/serialization/visitor_info_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
 
@@ -49,17 +44,12 @@ void save(Archive& ar,
     const dogen::cpp::source_file& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("includes", v.includes_);
     ar << make_nvp("descriptor", v.descriptor_);
-    ar << make_nvp("class_info", v.class_info_);
-    ar << make_nvp("enum_info", v.enum_info_);
-    ar << make_nvp("exception_info", v.exception_info_);
-    ar << make_nvp("registrar_info", v.registrar_info_);
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("file_path", v.file_path_.generic_string());
-    ar << make_nvp("namespace_info", v.namespace_info_);
-    ar << make_nvp("visitor_info", v.visitor_info_);
     ar << make_nvp("relative_path", v.relative_path_.generic_string());
-    ar << make_nvp("includes", v.includes_);
+    ar << make_nvp("entity", v.entity_);
 }
 
 template<typename Archive>
@@ -67,21 +57,16 @@ void load(Archive& ar,
     dogen::cpp::source_file& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("includes", v.includes_);
     ar >> make_nvp("descriptor", v.descriptor_);
-    ar >> make_nvp("class_info", v.class_info_);
-    ar >> make_nvp("enum_info", v.enum_info_);
-    ar >> make_nvp("exception_info", v.exception_info_);
-    ar >> make_nvp("registrar_info", v.registrar_info_);
     ar >> make_nvp("header_guard", v.header_guard_);
     std::string file_path_tmp;
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
-    ar >> make_nvp("namespace_info", v.namespace_info_);
-    ar >> make_nvp("visitor_info", v.visitor_info_);
     std::string relative_path_tmp;
     ar >> make_nvp("relative_path", relative_path_tmp);
     v.relative_path_ = relative_path_tmp;
-    ar >> make_nvp("includes", v.includes_);
+    ar >> make_nvp("entity", v.entity_);
 }
 
 } }

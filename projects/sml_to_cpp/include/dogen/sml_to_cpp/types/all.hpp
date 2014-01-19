@@ -24,6 +24,7 @@
 #include "dogen/sml_to_cpp/types/extraction_error.hpp"
 #include "dogen/sml_to_cpp/types/extractor.hpp"
 #include "dogen/sml_to_cpp/types/includer.hpp"
+#include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 #include "dogen/sml_to_cpp/types/relationships.hpp"
 #include "dogen/sml_to_cpp/types/source_file_factory.hpp"

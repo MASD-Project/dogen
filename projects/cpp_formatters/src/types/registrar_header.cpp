@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
@@ -54,7 +56,7 @@ create(std::ostream& stream) {
 }
 
 void registrar_header::format(const cpp::source_file& f) {
-    const auto o(f.registrar_info());
+    auto o(boost::dynamic_pointer_cast<cpp::registrar_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;
         BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));

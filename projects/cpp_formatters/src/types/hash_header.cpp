@@ -19,8 +19,12 @@
  *
  */
 #include <ostream>
+#include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/io/source_file_io.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
@@ -109,7 +113,7 @@ void hash_header::hash_class(const cpp::class_info& ci) {
 }
 
 void hash_header::format_enumeration(const cpp::source_file& f) {
-    const auto o(f.enum_info());
+    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -150,7 +154,7 @@ void hash_header::format_enumeration(const cpp::source_file& f) {
 }
 
 void hash_header::format_class(const cpp::source_file& f) {
-    const auto o(f.class_info());
+    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));

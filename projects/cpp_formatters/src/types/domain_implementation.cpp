@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/throw_exception.hpp>
+#include <boost/pointer_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
@@ -198,7 +199,7 @@ class_implementation(const cpp::content_descriptor& cd,
 }
 
 void domain_implementation::format_class(const cpp::source_file& f) {
-    auto o(f.class_info());
+    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));

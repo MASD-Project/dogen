@@ -19,9 +19,13 @@
  *
  */
 #include <ostream>
+#include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
@@ -100,7 +104,7 @@ format_domain_class(const cpp::class_info& ci) {
 }
 
 void forward_declarations_header::format_class(const cpp::source_file& f) {
-    boost::optional<cpp::class_info> o(f.class_info());
+    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
@@ -121,7 +125,7 @@ void forward_declarations_header::format_class(const cpp::source_file& f) {
 
 void forward_declarations_header::
 format_enumeration(const cpp::source_file& f) {
-    const auto o(f.enum_info());
+    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -140,7 +144,7 @@ format_enumeration(const cpp::source_file& f) {
 }
 
 void forward_declarations_header::format_exception(const cpp::source_file& f) {
-    const auto o(f.exception_info());
+    auto o(boost::dynamic_pointer_cast<cpp::exception_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_exception_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));

@@ -44,9 +44,7 @@ const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
 const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
-const std::string missing_class_info("Class info is empty");
-const std::string missing_enum_info("Enumeration info is empty");
-const std::string missing_exception_info("Exception info is empty");
+const std::string missing_entity("Entity is empty");
 
 }
 
@@ -129,33 +127,14 @@ swap_method(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void types_main_header_file_formatter::
-class_declaration(const cpp::content_descriptor& cd,
-    const cpp::class_info& ci) {
-    using dogen::utility::exception::invalid_enum_value;
-    using cpp::content_types;
-    const auto ct(cd.content_type());
-    if (ct == content_types::versioned_key ||
-        ct == content_types::unversioned_key ||
-        ct == content_types::value_object) {
+void types_main_header_file_formatter::visit(dogen::cpp::class_info& ci) {
+    {
+        namespace_helper ns(stream_, ci.namespaces());
+        utility_.blank_line();
 
         cpp_formatters::class_declaration f(stream_, disable_serialization_,
             disable_complete_constructor_, disable_io_);
         f.format(ci);
-        return;
-    }
-
-    BOOST_LOG_SEV(lg, error) << invalid_category_type;
-    BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_category_type));
-}
-
-void types_main_header_file_formatter::
-format_main(const cpp::content_descriptor& cd, const cpp::class_info& ci) {
-
-    {
-        namespace_helper ns(stream_, ci.namespaces());
-        utility_.blank_line();
-        class_declaration(cd, ci);
 
         if (ci.is_parent()) {
             stream_ << indenter_ << "inline " << ci.name() << "::~"<< ci.name()
@@ -173,32 +152,8 @@ format_main(const cpp::content_descriptor& cd, const cpp::class_info& ci) {
         utility_.blank_line(2);
 }
 
-void types_main_header_file_formatter::format_class(const cpp::source_file& f) {
-    boost::optional<cpp::class_info> o(f.class_info());
-    if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_info;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
-    }
-    const auto at(f.descriptor().aspect_type());
-    const cpp::class_info& ci(*o);
-    if (at == cpp::aspect_types::main)
-        format_main(f.descriptor(), ci);
-    else {
-        using dogen::utility::exception::invalid_enum_value;
-        BOOST_LOG_SEV(lg, error) << missing_class_info;
-        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
-    }
-}
-
-void types_main_header_file_formatter::
-format_enumeration(const cpp::source_file& f) {
-    const auto o(f.enum_info());
-    if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enum_info;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
-    }
+void types_main_header_file_formatter::visit(dogen::cpp::enum_info& ei) {
     {
-        const auto ei(*o);
         namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
         enum_declaration f(stream_);
@@ -208,14 +163,8 @@ format_enumeration(const cpp::source_file& f) {
 }
 
 void types_main_header_file_formatter::
-format_exception(const cpp::source_file& f) {
-    const auto o(f.exception_info());
-    if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enum_info;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
-    }
+visit(dogen::cpp::exception_info& ei) {
     {
-        const auto ei(*o);
         namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
         exception_declaration f(stream_);
@@ -235,17 +184,12 @@ void types_main_header_file_formatter::format(const cpp::source_file& f) {
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
-    if (f.descriptor().content_type() == content_types::unversioned_key ||
-        f.descriptor().content_type() == content_types::versioned_key ||
-        f.descriptor().content_type() == content_types::value_object ||
-        f.descriptor().content_type() == content_types::entity ||
-        f.descriptor().content_type() == content_types::keyed_entity)
-        format_class(f);
-    else if (f.descriptor().content_type() == content_types::enumeration)
-        format_enumeration(f);
-    else if (f.descriptor().content_type() == content_types::exception)
-        format_exception(f);
+    if (!f.entity()) {
+        BOOST_LOG_SEV(lg, error) << missing_entity;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_entity));
+    }
+
+    f.entity()->accept(*this);
 
     guards.format_end();
 }

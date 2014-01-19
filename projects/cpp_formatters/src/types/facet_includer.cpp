@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
@@ -46,7 +48,8 @@ create(std::ostream& stream) {
 }
 
 void facet_includer::format(const cpp::source_file& f) {
-    if (f.class_info())
+    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+    if (o)
         BOOST_THROW_EXCEPTION(formatting_error(unexpected_class_info));
 
     licence licence(stream_);

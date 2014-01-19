@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/io/list_io.hpp"
@@ -128,7 +129,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_enumeration_produces_expected_resu
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::source_file_factory f(l);
-    const auto ei((dogen::cpp::enum_info()));
+    const auto ei(boost::make_shared<dogen::cpp::enum_info>());
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
     const auto inc((dogen::cpp::includes()));
@@ -142,12 +143,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_enumeration_produces_expected_resu
     std::set<cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(fi.enum_info());
-        BOOST_CHECK(!fi.class_info());
-        BOOST_CHECK(!fi.exception_info());
-        BOOST_CHECK(!fi.namespace_info());
-        BOOST_CHECK(!fi.registrar_info());
-        BOOST_CHECK(!fi.visitor_info());
+        BOOST_CHECK(fi.entity());
         BOOST_CHECK(!fi.file_path().empty());
 
         if (fi.descriptor().file_type() == file_types::header)
@@ -174,7 +170,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_result
     dogen::sml_to_cpp::source_file_factory f(l);
     const auto& ex(m.objects().begin()->second);
     const auto md(mock_descriptors(ex.name()));
-    const auto ei((dogen::cpp::exception_info()));
+    const auto ei(boost::make_shared<dogen::cpp::exception_info>());
     const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> infos;
@@ -185,12 +181,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_result
     std::set<cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(!fi.enum_info());
-        BOOST_CHECK(!fi.class_info());
-        BOOST_CHECK(fi.exception_info());
-        BOOST_CHECK(!fi.namespace_info());
-        BOOST_CHECK(!fi.registrar_info());
-        BOOST_CHECK(!fi.visitor_info());
+        BOOST_CHECK(fi.entity());
         BOOST_CHECK(!fi.file_path().empty());
 
         if (fi.descriptor().file_type() == file_types::header)
@@ -217,7 +208,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_module_produces_expected_results) 
     dogen::sml_to_cpp::source_file_factory f(l);
     const auto p(m.modules().begin()->second);
     const auto md(mock_descriptors(p.name()));
-    const auto ni((dogen::cpp::namespace_info()));
+    const auto ni(boost::make_shared<dogen::cpp::namespace_info>());
 
     std::list<dogen::cpp::source_file> infos;
     for (const auto& cd : md)
@@ -227,12 +218,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_module_produces_expected_results) 
     std::set<dogen::config::cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(!fi.enum_info());
-        BOOST_CHECK(!fi.class_info());
-        BOOST_CHECK(!fi.exception_info());
-        BOOST_CHECK(fi.namespace_info());
-        BOOST_CHECK(!fi.registrar_info());
-        BOOST_CHECK(!fi.visitor_info());
+        BOOST_CHECK(fi.entity());
         BOOST_CHECK(!fi.file_path().empty());
 
         using dogen::cpp::file_types;
@@ -259,7 +245,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) 
     dogen::sml_to_cpp::source_file_factory f(l);
     const auto& p(m.objects().begin()->second);
     const auto md(mock_descriptors(p.name()));
-    const auto ci((dogen::cpp::class_info()));
+    const auto ci(boost::make_shared<dogen::cpp::class_info>());
     const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> infos;
@@ -270,12 +256,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) 
     std::set<dogen::config::cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(!fi.enum_info());
-        BOOST_CHECK(fi.class_info());
-        BOOST_CHECK(!fi.exception_info());
-        BOOST_CHECK(!fi.namespace_info());
-        BOOST_CHECK(!fi.registrar_info());
-        BOOST_CHECK(!fi.visitor_info());
+        BOOST_CHECK(fi.entity());
         BOOST_CHECK(!fi.file_path().empty());
 
         using dogen::cpp::file_types;
@@ -320,12 +301,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
     BOOST_CHECK(fi.descriptor().facet_type() == ft);
     BOOST_CHECK(fi.descriptor().aspect_type() == aspect_types::main);
     BOOST_CHECK(fi.descriptor().content_type() == content_types::includer);
-    BOOST_CHECK(!fi.enum_info());
-    BOOST_CHECK(!fi.class_info());
-    BOOST_CHECK(!fi.exception_info());
-    BOOST_CHECK(!fi.namespace_info());
-    BOOST_CHECK(!fi.registrar_info());
-    BOOST_CHECK(!fi.visitor_info());
+    BOOST_CHECK(!fi.entity());
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
 
@@ -371,12 +347,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
     BOOST_CHECK(fi.descriptor().facet_type() == ft2);
     BOOST_CHECK(fi.descriptor().aspect_type() == aspect_types::main);
     BOOST_CHECK(fi.descriptor().content_type() == content_types::includer);
-    BOOST_CHECK(!fi.enum_info());
-    BOOST_CHECK(!fi.class_info());
-    BOOST_CHECK(!fi.exception_info());
-    BOOST_CHECK(!fi.namespace_info());
-    BOOST_CHECK(!fi.registrar_info());
-    BOOST_CHECK(!fi.visitor_info());
+    BOOST_CHECK(!fi.entity());
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
     BOOST_CHECK(fi.includes().user().empty());
@@ -394,7 +365,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_registrar_produces_expected_result
     dogen::sml_to_cpp::source_file_factory f(l);
 
     const auto md(mock_descriptor_for_registrar());
-    const auto ri((dogen::cpp::registrar_info()));
+    const auto ri(boost::make_shared<dogen::cpp::registrar_info>());
     const auto inc((dogen::cpp::includes()));
 
     std::list<dogen::cpp::source_file> infos;
@@ -409,12 +380,7 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_registrar_produces_expected_result
     BOOST_CHECK(fi.descriptor().facet_type() == ft);
     BOOST_CHECK(fi.descriptor().aspect_type() == aspect_types::main);
     BOOST_CHECK(fi.descriptor().content_type() == content_types::registrar);
-    BOOST_CHECK(!fi.enum_info());
-    BOOST_CHECK(!fi.class_info());
-    BOOST_CHECK(!fi.exception_info());
-    BOOST_CHECK(!fi.namespace_info());
-    BOOST_CHECK(fi.registrar_info());
-    BOOST_CHECK(!fi.visitor_info());
+    BOOST_CHECK(fi.entity());
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
 }

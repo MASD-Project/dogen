@@ -18,80 +18,65 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/types/entity.hpp"
 #include "dogen/cpp/types/source_file.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::entity>& lhs,
+const boost::shared_ptr<dogen::cpp::entity>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
 source_file::source_file(source_file&& rhs)
     : documentation_(std::move(rhs.documentation_)),
+      includes_(std::move(rhs.includes_)),
       descriptor_(std::move(rhs.descriptor_)),
-      class_info_(std::move(rhs.class_info_)),
-      enum_info_(std::move(rhs.enum_info_)),
-      exception_info_(std::move(rhs.exception_info_)),
-      registrar_info_(std::move(rhs.registrar_info_)),
       header_guard_(std::move(rhs.header_guard_)),
       file_path_(std::move(rhs.file_path_)),
-      namespace_info_(std::move(rhs.namespace_info_)),
-      visitor_info_(std::move(rhs.visitor_info_)),
       relative_path_(std::move(rhs.relative_path_)),
-      includes_(std::move(rhs.includes_)) { }
+      entity_(std::move(rhs.entity_)) { }
 
 source_file::source_file(
     const std::string& documentation,
+    const dogen::cpp::includes& includes,
     const dogen::cpp::content_descriptor& descriptor,
-    const boost::optional<dogen::cpp::class_info>& class_info,
-    const boost::optional<dogen::cpp::enum_info>& enum_info,
-    const boost::optional<dogen::cpp::exception_info>& exception_info,
-    const boost::optional<dogen::cpp::registrar_info>& registrar_info,
     const std::string& header_guard,
     const boost::filesystem::path& file_path,
-    const boost::optional<dogen::cpp::namespace_info>& namespace_info,
-    const boost::optional<dogen::cpp::visitor_info>& visitor_info,
     const boost::filesystem::path& relative_path,
-    const dogen::cpp::includes& includes)
+    const boost::shared_ptr<dogen::cpp::entity>& entity)
     : documentation_(documentation),
+      includes_(includes),
       descriptor_(descriptor),
-      class_info_(class_info),
-      enum_info_(enum_info),
-      exception_info_(exception_info),
-      registrar_info_(registrar_info),
       header_guard_(header_guard),
       file_path_(file_path),
-      namespace_info_(namespace_info),
-      visitor_info_(visitor_info),
       relative_path_(relative_path),
-      includes_(includes) { }
+      entity_(entity) { }
 
 void source_file::swap(source_file& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
+    swap(includes_, other.includes_);
     swap(descriptor_, other.descriptor_);
-    swap(class_info_, other.class_info_);
-    swap(enum_info_, other.enum_info_);
-    swap(exception_info_, other.exception_info_);
-    swap(registrar_info_, other.registrar_info_);
     swap(header_guard_, other.header_guard_);
     swap(file_path_, other.file_path_);
-    swap(namespace_info_, other.namespace_info_);
-    swap(visitor_info_, other.visitor_info_);
     swap(relative_path_, other.relative_path_);
-    swap(includes_, other.includes_);
+    swap(entity_, other.entity_);
 }
 
 bool source_file::operator==(const source_file& rhs) const {
     return documentation_ == rhs.documentation_ &&
+        includes_ == rhs.includes_ &&
         descriptor_ == rhs.descriptor_ &&
-        class_info_ == rhs.class_info_ &&
-        enum_info_ == rhs.enum_info_ &&
-        exception_info_ == rhs.exception_info_ &&
-        registrar_info_ == rhs.registrar_info_ &&
         header_guard_ == rhs.header_guard_ &&
         file_path_ == rhs.file_path_ &&
-        namespace_info_ == rhs.namespace_info_ &&
-        visitor_info_ == rhs.visitor_info_ &&
         relative_path_ == rhs.relative_path_ &&
-        includes_ == rhs.includes_;
+        entity_ == rhs.entity_;
 }
 
 source_file& source_file::operator=(source_file other) {
@@ -116,6 +101,22 @@ void source_file::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
+const dogen::cpp::includes& source_file::includes() const {
+    return includes_;
+}
+
+dogen::cpp::includes& source_file::includes() {
+    return includes_;
+}
+
+void source_file::includes(const dogen::cpp::includes& v) {
+    includes_ = v;
+}
+
+void source_file::includes(const dogen::cpp::includes&& v) {
+    includes_ = std::move(v);
+}
+
 const dogen::cpp::content_descriptor& source_file::descriptor() const {
     return descriptor_;
 }
@@ -130,70 +131,6 @@ void source_file::descriptor(const dogen::cpp::content_descriptor& v) {
 
 void source_file::descriptor(const dogen::cpp::content_descriptor&& v) {
     descriptor_ = std::move(v);
-}
-
-const boost::optional<dogen::cpp::class_info>& source_file::class_info() const {
-    return class_info_;
-}
-
-boost::optional<dogen::cpp::class_info>& source_file::class_info() {
-    return class_info_;
-}
-
-void source_file::class_info(const boost::optional<dogen::cpp::class_info>& v) {
-    class_info_ = v;
-}
-
-void source_file::class_info(const boost::optional<dogen::cpp::class_info>&& v) {
-    class_info_ = std::move(v);
-}
-
-const boost::optional<dogen::cpp::enum_info>& source_file::enum_info() const {
-    return enum_info_;
-}
-
-boost::optional<dogen::cpp::enum_info>& source_file::enum_info() {
-    return enum_info_;
-}
-
-void source_file::enum_info(const boost::optional<dogen::cpp::enum_info>& v) {
-    enum_info_ = v;
-}
-
-void source_file::enum_info(const boost::optional<dogen::cpp::enum_info>&& v) {
-    enum_info_ = std::move(v);
-}
-
-const boost::optional<dogen::cpp::exception_info>& source_file::exception_info() const {
-    return exception_info_;
-}
-
-boost::optional<dogen::cpp::exception_info>& source_file::exception_info() {
-    return exception_info_;
-}
-
-void source_file::exception_info(const boost::optional<dogen::cpp::exception_info>& v) {
-    exception_info_ = v;
-}
-
-void source_file::exception_info(const boost::optional<dogen::cpp::exception_info>&& v) {
-    exception_info_ = std::move(v);
-}
-
-const boost::optional<dogen::cpp::registrar_info>& source_file::registrar_info() const {
-    return registrar_info_;
-}
-
-boost::optional<dogen::cpp::registrar_info>& source_file::registrar_info() {
-    return registrar_info_;
-}
-
-void source_file::registrar_info(const boost::optional<dogen::cpp::registrar_info>& v) {
-    registrar_info_ = v;
-}
-
-void source_file::registrar_info(const boost::optional<dogen::cpp::registrar_info>&& v) {
-    registrar_info_ = std::move(v);
 }
 
 const std::string& source_file::header_guard() const {
@@ -228,38 +165,6 @@ void source_file::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const boost::optional<dogen::cpp::namespace_info>& source_file::namespace_info() const {
-    return namespace_info_;
-}
-
-boost::optional<dogen::cpp::namespace_info>& source_file::namespace_info() {
-    return namespace_info_;
-}
-
-void source_file::namespace_info(const boost::optional<dogen::cpp::namespace_info>& v) {
-    namespace_info_ = v;
-}
-
-void source_file::namespace_info(const boost::optional<dogen::cpp::namespace_info>&& v) {
-    namespace_info_ = std::move(v);
-}
-
-const boost::optional<dogen::cpp::visitor_info>& source_file::visitor_info() const {
-    return visitor_info_;
-}
-
-boost::optional<dogen::cpp::visitor_info>& source_file::visitor_info() {
-    return visitor_info_;
-}
-
-void source_file::visitor_info(const boost::optional<dogen::cpp::visitor_info>& v) {
-    visitor_info_ = v;
-}
-
-void source_file::visitor_info(const boost::optional<dogen::cpp::visitor_info>&& v) {
-    visitor_info_ = std::move(v);
-}
-
 const boost::filesystem::path& source_file::relative_path() const {
     return relative_path_;
 }
@@ -276,20 +181,20 @@ void source_file::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
 }
 
-const dogen::cpp::includes& source_file::includes() const {
-    return includes_;
+const boost::shared_ptr<dogen::cpp::entity>& source_file::entity() const {
+    return entity_;
 }
 
-dogen::cpp::includes& source_file::includes() {
-    return includes_;
+boost::shared_ptr<dogen::cpp::entity>& source_file::entity() {
+    return entity_;
 }
 
-void source_file::includes(const dogen::cpp::includes& v) {
-    includes_ = v;
+void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>& v) {
+    entity_ = v;
 }
 
-void source_file::includes(const dogen::cpp::includes&& v) {
-    includes_ = std::move(v);
+void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>&& v) {
+    entity_ = std::move(v);
 }
 
 } }

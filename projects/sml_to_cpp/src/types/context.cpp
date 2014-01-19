@@ -18,19 +18,79 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/namespace_info.hpp"
+#include "dogen/cpp/types/registrar_info.hpp"
+#include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/sml_to_cpp/types/context.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::class_info>& lhs,
+const boost::shared_ptr<dogen::cpp::class_info>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::exception_info>& lhs,
+const boost::shared_ptr<dogen::cpp::exception_info>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::enum_info>& lhs,
+const boost::shared_ptr<dogen::cpp::enum_info>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::registrar_info>& lhs,
+const boost::shared_ptr<dogen::cpp::registrar_info>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::namespace_info>& lhs,
+const boost::shared_ptr<dogen::cpp::namespace_info>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::visitor_info>& lhs,
+const boost::shared_ptr<dogen::cpp::visitor_info>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen {
 namespace sml_to_cpp {
 
 context::context(
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes,
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& classes,
     const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& relationships,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors)
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& exceptions,
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& enumerations,
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& registrars,
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& namespaces,
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& visitors)
     : classes_(classes),
       relationships_(relationships),
       exceptions_(exceptions),
@@ -66,19 +126,19 @@ context& context::operator=(context other) {
     return *this;
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::classes() const {
+const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& context::classes() const {
     return classes_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::classes() {
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& context::classes() {
     return classes_;
 }
 
-void context::classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v) {
+void context::classes(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& v) {
     classes_ = v;
 }
 
-void context::classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>&& v) {
+void context::classes(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >&& v) {
     classes_ = std::move(v);
 }
 
@@ -98,83 +158,83 @@ void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::s
     relationships_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& context::exceptions() const {
+const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& context::exceptions() const {
     return exceptions_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& context::exceptions() {
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& context::exceptions() {
     return exceptions_;
 }
 
-void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& v) {
+void context::exceptions(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& v) {
     exceptions_ = v;
 }
 
-void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>&& v) {
+void context::exceptions(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >&& v) {
     exceptions_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& context::enumerations() const {
+const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& context::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& context::enumerations() {
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& context::enumerations() {
     return enumerations_;
 }
 
-void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& v) {
+void context::enumerations(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& v) {
     enumerations_ = v;
 }
 
-void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>&& v) {
+void context::enumerations(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrars() const {
+const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& context::registrars() const {
     return registrars_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrars() {
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& context::registrars() {
     return registrars_;
 }
 
-void context::registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v) {
+void context::registrars(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& v) {
     registrars_ = v;
 }
 
-void context::registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v) {
+void context::registrars(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >&& v) {
     registrars_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& context::namespaces() const {
+const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& context::namespaces() const {
     return namespaces_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& context::namespaces() {
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& context::namespaces() {
     return namespaces_;
 }
 
-void context::namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& v) {
+void context::namespaces(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& v) {
     namespaces_ = v;
 }
 
-void context::namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>&& v) {
+void context::namespaces(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >&& v) {
     namespaces_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& context::visitors() const {
+const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& context::visitors() const {
     return visitors_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& context::visitors() {
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& context::visitors() {
     return visitors_;
 }
 
-void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& v) {
+void context::visitors(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& v) {
     visitors_ = v;
 }
 
-void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>&& v) {
+void context::visitors(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >&& v) {
     visitors_ = std::move(v);
 }
 
