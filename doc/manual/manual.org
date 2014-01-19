@@ -39,7 +39,10 @@ There is also a mirror in BitBucket:
 
 - https://bitbucket.org/marco_craveiro/dogen/overview
 
-* PART I - BASIC CONCEPTS
+* PART I - THEORY
+
+In this part we describe the philosophical underpinnings behind Dogen,
+its internal architecture and the development model.
 
 ** Introduction
 
@@ -141,7 +144,7 @@ helpful the code generator can be.
 The astute reader would have already devised a simple solution to the
 behaviour conundrum: nothing stops us from modeling the signatures of
 methods in the meta-model - after all UML provides us with all the
-required machinery - and then hand-craft and implementation for these
+required machinery - and then hand-craft an implementation for these
 methods. Indeed there are code generators which permit such workflows;
 they are known as /merging code generators/. The merging aspect comes
 from the fact that the code generator must be able to distinguish
@@ -242,6 +245,12 @@ generation. Finally, the back-ends are responsible for expressing SML
 as code according to the grammar of some programming language like
 C++.
 
-** Hello World Example
 
-* PART II - ADVANCED CONCEPTS
+* PART II - PRACTICE
+
+In this part we describe how to use Dogen, from very simple use cases
+building up to more complex ones. We also explain how Dogen can be
+integrated with a build system and other practical aspects of its
+usage.
+
+** Hello World Example
