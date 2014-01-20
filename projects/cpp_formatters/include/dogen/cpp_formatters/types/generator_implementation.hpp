@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/source_file.hpp"
 #include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"

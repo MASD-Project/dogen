@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/source_file.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"

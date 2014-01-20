@@ -34,13 +34,13 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-19 Sun 23:00]
+Clock summary at [2014-01-20 Mon 07:18]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *13:43* |       |      |
+| *Total time*                                                                 | *13:51* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 13:43 |      |
+| Development Stories Implemented                                              |         | 13:51 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 0:52 |
 | IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
 | IMPLEMENTATION Update the manual                                             |         |       | 1:30 |
@@ -52,7 +52,7 @@ Clock summary at [2014-01-19 Sun 23:00]
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |         |       | 0:43 |
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 2:46 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 2:54 |
 | IMPLEMENTATION Refactor sanity scripts                                       |         |       | 1:39 |
 #+end:
 
@@ -206,6 +206,7 @@ The =om= naming convention was slightly more meaningful, so bring it across.
 
 **** COMPLETED Use a single entity shared pointer in =source_file=     :task:
      CLOSED: [2014-01-19 Sun 23:00]
+     CLOCK: [2014-01-20 Mon 07:10]--[2014-01-20 Mon 07:18] =>  0:08
      CLOCK: [2014-01-19 Sun 22:00]--[2014-01-19 Sun 23:00] =>  1:00
      CLOCK: [2014-01-17 Fri 08:03]--[2014-01-17 Fri 08:36] =>  0:33
      CLOCK: [2014-01-16 Thu 22:01]--[2014-01-16 Thu 22:38] =>  0:37
