@@ -38,6 +38,10 @@
 namespace dogen {
 namespace cpp_formatters {
 
+/**
+ * @brief Formats a source file into the main header file of the types
+ * aspect.
+ */
 class types_main_header_file_formatter : public file_formatter,
                                          private cpp::entity_visitor {
 public:

@@ -562,7 +562,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="-27,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.545000000000002"/>
+        <dia:real val="30.544999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="28.900000000000002"/>
@@ -1919,7 +1919,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="56,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.95,46.95;71.565,54.65"/>
+        <dia:rectangle val="55.95,46.95;71.565,55.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="56,47"/>
@@ -1928,7 +1928,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#source_file#</dia:string>
@@ -2145,6 +2145,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Entity contained in this file, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#annotation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#formatters::annotation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4447,7 +4470,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="112,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.620000000000001"/>
+        <dia:real val="12.619999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5115,7 +5138,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="92,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.5850000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15.600000000000003"/>
@@ -6371,16 +6394,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="63.7575,54.6"/>
+        <dia:point val="63.7575,55.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0075,53.85;70.6475,72.8"/>
+        <dia:rectangle val="63.0075,54.65;70.6475,72.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63.7575,54.6"/>
+        <dia:point val="63.7575,55.4"/>
         <dia:point val="63.7575,66"/>
         <dia:point val="70.4475,66"/>
         <dia:point val="70.4475,72"/>

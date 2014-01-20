@@ -22,6 +22,7 @@
 #include "dogen/cpp/hash/entity_hash.hpp"
 #include "dogen/cpp/hash/includes_hash.hpp"
 #include "dogen/cpp/hash/source_file_hash.hpp"
+#include "dogen/formatters/hash/annotation_hash.hpp"
 
 namespace {
 
@@ -59,6 +60,7 @@ std::size_t source_file_hasher::hash(const source_file&v) {
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, hash_boost_filesystem_path(v.relative_path()));
     combine(seed, hash_boost_shared_ptr_dogen_cpp_entity(v.entity()));
+    combine(seed, v.annotation());
 
     return seed;
 }

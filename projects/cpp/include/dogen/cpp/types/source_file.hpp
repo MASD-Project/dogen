@@ -33,6 +33,7 @@
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/entity_fwd.hpp"
 #include "dogen/cpp/types/includes.hpp"
+#include "dogen/formatters/types/annotation.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -57,7 +58,8 @@ public:
         const std::string& header_guard,
         const boost::filesystem::path& file_path,
         const boost::filesystem::path& relative_path,
-        const boost::shared_ptr<dogen::cpp::entity>& entity);
+        const boost::shared_ptr<dogen::cpp::entity>& entity,
+        const dogen::formatters::annotation& annotation);
 
 private:
     template<typename Archive>
@@ -141,6 +143,11 @@ public:
     void entity(const boost::shared_ptr<dogen::cpp::entity>&& v);
     /**@}*/
 
+    const dogen::formatters::annotation& annotation() const;
+    dogen::formatters::annotation& annotation();
+    void annotation(const dogen::formatters::annotation& v);
+    void annotation(const dogen::formatters::annotation&& v);
+
 public:
     bool operator==(const source_file& rhs) const;
     bool operator!=(const source_file& rhs) const {
@@ -159,6 +166,7 @@ private:
     boost::filesystem::path file_path_;
     boost::filesystem::path relative_path_;
     boost::shared_ptr<dogen::cpp::entity> entity_;
+    dogen::formatters::annotation annotation_;
 };
 
 } }

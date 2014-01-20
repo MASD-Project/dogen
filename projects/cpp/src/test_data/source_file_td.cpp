@@ -23,6 +23,7 @@
 #include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/includes_td.hpp"
 #include "dogen/cpp/test_data/source_file_td.hpp"
+#include "dogen/formatters/test_data/annotation_td.hpp"
 
 namespace {
 
@@ -61,6 +62,11 @@ create_boost_shared_ptr_dogen_cpp_entity(unsigned int position) {
     return r;
 }
 
+dogen::formatters::annotation
+create_dogen_formatters_annotation(const unsigned int position) {
+    return dogen::formatters::annotation_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -77,6 +83,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 4));
     v.relative_path(create_boost_filesystem_path(position + 5));
     v.entity(create_boost_shared_ptr_dogen_cpp_entity(position + 6));
+    v.annotation(create_dogen_formatters_annotation(position + 7));
 }
 
 source_file_generator::result_type

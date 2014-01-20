@@ -112,6 +112,7 @@ add_custom_target(codegen_${target}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
@@ -217,6 +218,7 @@ add_custom_target(codegen_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
