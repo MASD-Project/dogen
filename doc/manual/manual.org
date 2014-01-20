@@ -235,15 +235,56 @@ programming language.
 
 ** The Dogen Architecture
 
-Dogen's internal design is similar to that of a compiler: it has
-front-ends, a middle-end and back-ends. The front-ends allow for
-different sources of domain information to be plugged into the code
-generator such as Dia and JSON text files. The middle-end is a domain
-model we call SML - the Simplified Modeling Language - and can be
-thought of as a bridge between domain modeling and code
-generation. Finally, the back-ends are responsible for expressing SML
-as code according to the grammar of some programming language like
-C++.
+Almost all code in Dogen is implemented as Dogen domain models; that
+is, we use Dogen to generate the vast majority of Dogen itself, and we
+do so for several reasons:
+
+- dog-fooding: using your own tool frequently is a great way of making
+  sure the tool does what it is meant to do and does so in a workable,
+  pragmatic manner.
+- keeping our feet on the ground: if we have some crazy ideas and
+  break Dogen, we can no longer develop Dogen. Thus Dogen must always
+  be able to code-generate itself at all points in the development
+  cycle, which forces one to think "extremely" incrementally.
+- code faster and test our theoretical underpinnings: if our ideas
+  around code generation are correct, Dogen should significantly
+  speed-up development.
+
+Dogen is made up of a large number of domain models. These fall into
+two broad categories: /test models/ and /core models/. Test models are
+models we created specifically to test some aspect of code
+generation - such as say inheritance - and whose code is not used by
+the main binary. The core models are what really makes up the
+application and that is what is of interest for this chapter.
+
+The core models are hooked together in a fashion similar to that of
+the internals of a compiler, and so core models belong to one of three
+groups: the front-end, the middle-end and the back-end. The front-end
+group of models allows for different sources of domain information to
+be plugged into Dogen. The middle-end model - as there is only one -
+is where all the language neutral transformations take place; It can
+be thought of as a bridge between domain modeling and code
+generation. Finally, the back-end group of models are responsible for
+expressing SML as code according to the grammar of a programming
+language like C++.
+
+Lets look at each of these in more detail.
+
+*** The Front-end
+
+Dia, the diagram editing application is, at present, the only
+fully-formed front-end we support. We are able to parse the Dia XML
+and use it as an input for code generation. There are two models
+responsible for implementing this use case:
+
+- =dia=
+- =dia_to_sml=
+
+The =dia= model has a representation of the Dia XML types, and tries
+to do so as faithfully as possible. It was created to avoid having a
+direct dependency with Dia's code base. Since Dia XML changes very
+infrequently and since we use such a small part of Dia's
+functionality, this turned out to be a good decision.
 
 * PART II - PRACTICE
 
