@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Error in log files when reading in Dia model                      :story:
+
+For some reason the log file is full of errors like this:
+
+: 2014-01-20 18:28:31.219549 [ERROR] [dia_to_sml.processor] Did not find expected attribute value type: composite
+
+Presumably the errors are not fatal as code generation still
+works. Investigate the errors and tidy-up the log.
+
 *** Add tests for =flat_name_builder=                                 :story:
 
 We refactored tagger code related to flattening names into this class
