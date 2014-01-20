@@ -23,6 +23,10 @@ file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(cpp STATIC ${all_files})
+target_link_libraries(cpp
+    formatters
+    ${Boost_LIBRARIES})
+
 set_target_properties(cpp PROPERTIES
     OUTPUT_NAME dogen_cpp)
 
