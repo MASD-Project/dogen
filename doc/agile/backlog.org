@@ -116,6 +116,13 @@ This is not related to the version of CMake we're using in the PFH
 (2.8.8 instead of the debian unstable 2.8.12.1), as running with the
 later did not fix the problem.
 
+The correct solution for this appears to be to create targets that
+check syntax only rather than generate object files, link static
+libraries, etc. Google has made some changes to CMake to support
+targets such as syntax only. We need to investigate how to use them
+since this would most likely fix the Ninja build and would decrease
+compile times for header validation.
+
 *** Add support for Address Sanitizer                                 :story:
 
 This seems like another interest dynamic analysis tool:
