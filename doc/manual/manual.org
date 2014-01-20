@@ -272,10 +272,27 @@ Lets look at each of these in more detail.
 
 *** The Front-end
 
-Dia, the diagram editing application is, at present, the only
-fully-formed front-end we support. We are able to parse the Dia XML
-and use it as an input for code generation. There are two models
-responsible for implementing this use case:
+When we started developing Dogen, we chose Dia as our main input
+format. Dia is a simple yet very powerful tool for drawing structured
+diagrams that focuses almost exclusively on diagram editing, and
+leaves other use cases to external tools. To their credit, a number of
+tools have sprung up around Dia, in no small part due to the
+simplicity and stability of their XML file format. Some of these tools
+generate code from Dia XML, others convert code into diagrams; we
+aimed for Dogen to be another chain in that tooling ecosystem.
+
+At the same time, Dogen has been developed from the start with the
+intention to support multiple input formats. We knew that different
+people would have different needs and for some Dia would not be
+sufficient. So we imagined a pipeline that was made up with a pair of
+models: one to model closely the input model and a /transformation/
+model responsible for converting the input model into the middle-end
+
+Dogen. Furthermore, all of Dogen's own models have been created and
+are being maintained using this application, so it is very core to the
+code generation experience.
+
+There are two models responsible for implementing this use case:
 
 - =dia=
 - =dia_to_sml=

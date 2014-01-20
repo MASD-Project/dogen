@@ -34,16 +34,16 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-20 Mon 07:18]
+Clock summary at [2014-01-20 Mon 22:27]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *13:51* |       |      |
+| *Total time*                                                                 | *15:39* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 13:51 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 0:52 |
+| Development Stories Implemented                                              |         | 15:39 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:07 |
 | IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
-| IMPLEMENTATION Update the manual                                             |         |       | 1:30 |
+| IMPLEMENTATION Update the manual                                             |         |       | 2:30 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |         |       | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |         |       | 0:19 |
@@ -52,11 +52,12 @@ Clock summary at [2014-01-20 Mon 07:18]
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |         |       | 0:43 |
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 2:54 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 3:27 |
 | IMPLEMENTATION Refactor sanity scripts                                       |         |       | 1:39 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-20 Mon 17:56]--[2014-01-20 Mon 18:01] =>  0:05
     CLOCK: [2014-01-20 Mon 07:53]--[2014-01-20 Mon 08:03] =>  0:10
     CLOCK: [2014-01-15 Wed 23:14]--[2014-01-15 Wed 23:20] =>  0:06
     CLOCK: [2014-01-14 Tue 07:54]--[2014-01-14 Tue 07:58] =>  0:04
@@ -72,6 +73,8 @@ Updates to release notes and backlog.
 We should do a write up of how we develop dogen.
 
 *** IMPLEMENTATION Update the manual                                  :story:
+    CLOCK: [2014-01-20 Mon 22:02]--[2014-01-20 Mon 22:27] =>  0:25
+    CLOCK: [2014-01-20 Mon 18:36]--[2014-01-20 Mon 18:40] =>  0:04
     CLOCK: [2014-01-20 Mon 08:06]--[2014-01-20 Mon 08:37] =>  0:31
     CLOCK: [2014-01-18 Sat 23:30]--[2014-01-19 Sun 00:48] =>  1:18
     CLOCK: [2014-01-18 Sat 23:18]--[2014-01-18 Sat 23:30] =>  0:12
@@ -219,8 +222,14 @@ source file can only have a single one of these. Replace all of this
 with a single =boost::shared_ptr= to entity and use visitor in the
 formatters.
 
+**** IMPLEMENTATION Tidy-up =types_main_header_file_formatter=         :task:
+     CLOCK: [2014-01-20 Mon 18:09]--[2014-01-20 Mon 18:36] =>  0:27
+     CLOCK: [2014-01-20 Mon 18:06]--[2014-01-20 Mon 18:09] =>  0:03
+
+Clean up internal functions in file and add documentation.
+
 **** Use tags for class properties in transformer                      :task:
-**** Copy across documentation from =om=
+**** Copy across documentation from =om=                               :task:
 
 We did a lot of doxygen comments that are readily applicable, copy
 them across.
