@@ -2120,6 +2120,9 @@ make the parser more clever:
 : boost::shared_ptr<const my_type>
 : std::string&
 
+We should try to create tests for all the cases we consider important
+and mark them as ignore until we can find a spirit expert to help out.
+
 *** Add support for default values                                    :story:
 
 It would be nice to be able to add a default value in dia and have it
