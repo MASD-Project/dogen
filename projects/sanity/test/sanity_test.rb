@@ -16,9 +16,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
-#
-require_relative "sanity/version"
+require "test/unit"
+require_relative "../lib/sanity.rb"
 
-module Sanity
-
+class TestSanity < Test::Unit::TestCase
+    def test_simple
+        puts "skeleton test"
+        assert_equal(true, true)
+    end
 end
