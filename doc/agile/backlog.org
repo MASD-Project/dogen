@@ -22,7 +22,31 @@ be accepted in mainline Dogen:
   more general.
 
 However, we need to make sure we don't start cluttering the code base
-with these formatters.
+with these formatters. We will also have to start to worry about
+things like defining stable interfaces:
+
+- at which point do we decide that some code has bitrot and
+  deprecated, so will have to be removed?
+- what happens when a formatter moves from version 1 to version 2 of
+  some dependent library, must we create a version 1 and version 2
+  formatter or just update the existing one? what if it breaks code
+  for people using version 1 that do not wish to move to version 2?
+- do we mandate compilation tests for all formatters? This would mean
+  our build machine would be full of third-party libraries (some
+  potentially not available in Debian), and quite hard to
+  maintain. Alternatively we could mandate that if you have a
+  formatter you must setup a CTest agent with a compilation for that
+  formatter and publish the results of the build to dashboard; if your
+  build becomes consistently red we are allowed to remove the
+  formatter.
+- for the diff tests, is it acceptable if someone refactors the code?
+  Once "your" formatter is merged in it is now owned by the community
+  and it is entirely possible that someone will improve it/extend it,
+  etc. In order for this to work they need to be very sure they have
+  not broken the original use case.
+
+We probably just need to setup a very simple policy to start off with,
+but its best to keep track of these potential pitfalls.
 
 *** Error in log files when reading in Dia model                      :story:
 
