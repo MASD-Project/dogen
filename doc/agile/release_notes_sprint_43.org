@@ -34,14 +34,14 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-20 Mon 23:11]
+Clock summary at [2014-01-21 Tue 08:05]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *16:10* |       |      |
+| *Total time*                                                                 | *16:19* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 16:10 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:07 |
+| Development Stories Implemented                                              |         | 16:19 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:16 |
 | IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
 | IMPLEMENTATION Update the manual                                             |         |       | 2:30 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
@@ -57,6 +57,7 @@ Clock summary at [2014-01-20 Mon 23:11]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-01-21 Tue 07:56]--[2014-01-21 Tue 08:05] =>  0:09
     CLOCK: [2014-01-20 Mon 17:56]--[2014-01-20 Mon 18:01] =>  0:05
     CLOCK: [2014-01-20 Mon 07:53]--[2014-01-20 Mon 08:03] =>  0:10
     CLOCK: [2014-01-15 Wed 23:14]--[2014-01-15 Wed 23:20] =>  0:06
@@ -222,9 +223,24 @@ source file can only have a single one of these. Replace all of this
 with a single =boost::shared_ptr= to entity and use visitor in the
 formatters.
 
-**** IMPLEMENTATION Tidy-up =types_main_header_file_formatter=         :task:
+**** COMPLETED Add annotation to source file                           :task:
+     CLOSED: [2014-01-21 Tue 08:36]
      CLOCK: [2014-01-20 Mon 18:09]--[2014-01-20 Mon 18:36] =>  0:27
      CLOCK: [2014-01-20 Mon 18:06]--[2014-01-20 Mon 18:09] =>  0:03
+
+Add a dependency to the language neutral formatter model and an
+annotation property to source file in the C++ model.
+
+**** IMPLEMENTATION Remove the parents dependency in transformer       :task:
+     CLOCK: [2014-01-21 Tue 08:06]--[2014-01-21 Tue 08:35] =>  0:29
+
+At present the C++ to SML transformer requires both the parent and
+original parent to have been processed in order to process a type. In
+reality this is not required as all the information has already been
+made available by the tagger or the relationship container. We need to
+consume this data instead of relying on object look-ups.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
 
 Clean up internal functions in file and add documentation.
 

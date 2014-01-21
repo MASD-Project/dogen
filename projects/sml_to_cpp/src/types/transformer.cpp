@@ -389,28 +389,22 @@ transformer::to_class_info(const sml::object& o) const {
     r->opaque_parameters(reader.odb_pragma());
 
     auto i(o.relationships().find(sml::relationship_types::parents));
-    if (i != o.relationships().end() && !i->second.empty()) {
-        if (i->second.size() > 1) {
-            const auto& sn(o.name().simple_name());
-            BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
-            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
-        }
+    if (i != o.relationships().end()) {
+        for (const auto& qn : i->second) {
+            cpp::parent_info pi;
+            pi.name(qn.simple_name());
+            pi.namespaces(to_namespace_list(qn));
 
-        const auto pn(i->second.front());
-        const auto j(context_.classes().find(pn));
-        if (j == context_.classes().end()) {
-            const auto& sn(pn.simple_name());
-            BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
-            BOOST_THROW_EXCEPTION(transformation_error(
-                    parent_class_info_not_found + sn));
+            const auto j(o.inherited_properties().find(qn));
+            if (j != o.inherited_properties().end()) {
+                for (const auto& prop : j->second) {
+                    const auto tuple(to_property_info(
+                            prop, o.is_immutable(), o.is_fluent()));
+                    pi.properties().push_back(std::get<0>(tuple));
+                }
+            }
+            r->parents().push_back(pi);
         }
-
-        const auto pci(*j->second);
-        cpp::parent_info pi;
-        pi.name(pci.name());
-        pi.properties(pci.all_properties());
-        pi.namespaces(pci.namespaces());
-        r->parents().push_back(pi);
     }
 
     i = o.relationships().find(sml::relationship_types::original_parents);
