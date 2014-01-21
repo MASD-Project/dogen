@@ -8,6 +8,22 @@
 
 Stories that we intend to look at, at some point.
 
+*** Special purpose formatters                                        :story:
+
+In the future, when the creation of formatters is made easier, we may
+start designing formatters that are totally a application specific and
+may not have any particular use for any other application. They should
+be accepted in mainline Dogen:
+
+- to make sure we don't break this code;
+- to allow other people to copy and paste to generate their own
+  formatters;
+- because sometimes what one thinks is special purpose actually much
+  more general.
+
+However, we need to make sure we don't start cluttering the code base
+with these formatters.
+
 *** Error in log files when reading in Dia model                      :story:
 
 For some reason the log file is full of errors like this:
