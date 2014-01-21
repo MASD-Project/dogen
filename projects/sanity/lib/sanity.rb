@@ -21,4 +21,8 @@ require_relative "sanity/version"
 
 module Sanity
 
+    def upload_file
+        
+    end
+
 end
