@@ -8,6 +8,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Include groups                                                    :story:
+
+One of my personal preferences has always been to group includes by
+"library". Normally first come the C includes, then the standard
+library ones, then boost, then utilities and finally types of the same
+model. Each of these can be thought of as a group. Inside each group
+the file names are normally ordered by size, smallest first. It would
+be nice to have support for such a feature in Dogen.
+
+Formatters would then push their includes into the correct
+group. Group names could be the model name (=std=, etc).
+
+A bit of a nitpick but nice nonetheless.
+
 *** Naming of libraries and binaries                                  :story:
 
 It is a common problem with certain utilities where we end up with a
