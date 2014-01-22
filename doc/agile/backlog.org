@@ -8,6 +8,30 @@
 
 Stories that we intend to look at, at some point.
 
+*** Naming of libraries and binaries                                  :story:
+
+It is a common problem with certain utilities where we end up with a
+library which should be named after the binary. For example, we should
+really call the engine library "dogen" as all its missing is the
+command line interface. In addition to this, it seems we are going to
+have more than one binary in the code base. In order to solve this we
+should adopt a naming strategy for both libraries and binaries. One
+approach is to choose verbs from a "theme" such as "weaving" - a lot
+of these tools are doing things that look a bit like weaving - and
+then use the noun for the binary and the verb for the library. For
+example:
+
+- stitch - library that generates formatters
+- stitcher - command line tool for generating formatters
+- knit - library that code generates
+- knitter - command line tool for code generation
+- sew - tool to generate JSON / SML from Dia diagrams
+- tailor - command line tool to generate JSON / SML from Dia
+  diagrams
+
+All binaries are prefixed with dogen to avoid clashes,
+e.g. =dogen_knitter=.
+
 *** Code-generating formatters as text templates                      :story:
 
 In the past we have used T4 and generated text templates mixed with
