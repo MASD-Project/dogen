@@ -171,6 +171,27 @@ library to generate the files. The stitch invocation could also have
 "variables" used by the formatter template such as say the class name,
 etc.
 
+Use of the variables could be controlled by the same command as for
+inserting code, e.g.
+
+: <#@ some_variable #>
+
+One question is where the text templates and formatter templates
+should be stored. The data directory is a natural fit, but it does not
+make any sense to release the templates as users can't add their own.
+
+Another interesting idea is to generate a model that contains
+formatters, create a dynamic library and then have some kind of
+loading mechanism in Dogen. The interesting thing is that with static
+factories, dogen could make use of this without any code changes at
+all (e.g. loading the library into the process is sufficient to
+trigger registration, and then its up to the meta-data to decide
+whether to use the formatters or not). So a user could create a model
+with formatters, add its own text templates, compile and link it and
+then add it to Dogen and then make use of the new formatters. The
+usual constraints apply such as ABI (ensure one is using the same
+compiler as used to compile Dogen, flags, etc).
+
 *** Special purpose formatters                                        :story:
 
 In the future, when the creation of formatters is made easier, we may
