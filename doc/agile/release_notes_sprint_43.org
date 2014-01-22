@@ -34,13 +34,13 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-21 Tue 08:05]
+Clock summary at [2014-01-22 Wed 08:54]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *16:19* |       |      |
+| *Total time*                                                                 | *18:15* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 16:19 |      |
+| Development Stories Implemented                                              |         | 18:15 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:16 |
 | IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
 | IMPLEMENTATION Update the manual                                             |         |       | 2:30 |
@@ -52,7 +52,8 @@ Clock summary at [2014-01-21 Tue 08:05]
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |         |       | 0:43 |
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 3:27 |
+| IMPLEMENTATION Sync C++ model structure with SML                             |         |       | 1:27 |
+| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 3:56 |
 | IMPLEMENTATION Refactor sanity scripts                                       |         |       | 2:10 |
 #+end:
 
@@ -191,6 +192,24 @@ formatters model.
 - We decided to keep the postfix =_formatters= as it makes the names
   clearer, if somewhat longer. So =cpp_formatter::include_formatter=
   rather than =cpp_formatter::includes=.
+
+*** IMPLEMENTATION Sync C++ model structure with SML                  :story:
+     CLOCK: [2014-01-22 Wed 08:01]--[2014-01-22 Wed 08:54] =>  0:53
+     CLOCK: [2014-01-21 Tue 17:41]--[2014-01-21 Tue 18:15] =>  0:34
+
+Now that we made peace with the fact that the C++ will duplicate quite
+a bit of SML, we should try to remove arbitrary differences between
+these two models. For instance we should use the same relationship
+approach, the same concepts where applicable, etc.
+
+Things that need to change:
+
+- have =type= as a base class for all "top-level" "things" that go
+  into files: class, enum, exception, visitor, registrar.
+- have a =qname= equivalent
+- have property containers with the same names as SML
+- have relationship containers with the same name as SML and the same
+  relationship enum too.
 
 *** IMPLEMENTATION Refactor types header into new style file formatter :story:
     CLOCK: [2014-01-16 Thu 09:16]--[2014-01-16 Thu 09:24] =>  0:08
