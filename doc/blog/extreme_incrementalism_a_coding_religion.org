@@ -89,14 +89,101 @@ setup multiple build agents across compilers and platforms, added
 dynamic analysis, code coverage, packaging and basic sanity tests on
 those packages.
 
-The packaging idea was a good one - after all, most users will
-probably rely on those - but providing packages turned out to be
-harder than first thought. This is because GitHub decommissioned their
-downloads section.
+All of these have proven to be major steps in keeping the show on the
+road, and once setup, very trivial to maintain. We've had a couple of
+minor issues with CDash - and certainly our setup could do with some
+improvements - but on the main, it just chugs along.
 
+The packaging story was also a very good one - after all, most users
+will probably rely on those - but it turned out to be much harder than
+first thought. We spent quite a bit of time integrating with the
+GitHub API, uploading packages into their downloads section,
+downloading them from there, testing, and then renaming them for user
+consumption. And, while it lasted, it was very useful. Unfortunately
+it didn't last very long. GitHub decommissioned their downloads
+section. Since most of the upload and download code was GitHub
+specific, we could not readily move over to a different location. The
+lesson here was that this sort of functionality is extremely useful,
+and its worth dedicating time to it, but one should always have a plan
+B - and even a plan C.
 
+The end result is that, at the moment, we don't have any downloads
+available at all - not even a stale ones - nor do we have any sanity
+checks on packages we produce; they basically go to =/dev/null=. But
+the remaining aspects of CI are still in place, and we rely on it
+daily.
 
+* Loosely Coupled
 
+Another very useful lesson learned was to keep the /off-distro/
+dependencies as low as possible. We started off by requiring a C++
+compiler with good C++ 11 support, and a Boost library with a few
+off-tree libraries - mainly Boost.Log, really. This meant we had to
+have our own little "chroot" with all of these, and we had to build
+all of these by hand, sprinkled with plenty of helper scripts. It was
+workable when we had time, but this is really not the sort of thing
+you want to spend time maintaining if you are working on a project on
+your spare time.
+
+To be fair, we always intended to move to distro-supplied packages
+when they caught up, and as it happens that is soon to happen: both
+default GCC and Clang are more than good enough in Debian unstable,
+and Boost 1.55 should soon be hitting it too. This means we can start
+thinking of creating Debian packages for inclusion in Debian - rather
+than the stand-alone packages we've been doing up to now.
+
+Going back, it seems to me we took the right decisions as both C++ 11
+and Boost.Log have proven quite useful; but in the future I certainly
+will think twice when adding an off-distro library.
+
+* Slow Motion Agile
+
+During our start-up days, we had a "normal" agile process: daily
+stand-ups, bi-weekly iterations, pre-iteration planning,
+post-iteration reviews and all of that good stuff. It worked really
+well, and keep us honest. We used a very simple org-mode file to keep
+track of all the open stories, and at one point we even built a simple
+burn-down chart generator to allow us to measure velocity - all in the
+name of keeping everything in git.
+
+Granted, when you are working by yourself and on your spare time, a
+large chunk of agile makes no sense at all; after all, providing
+status updates to yourself may not be the most productive use of
+scarce time. But, surprisingly, quite a bit of it is vital. I've kept
+the bi-weekly iteration cycle, the iteration logs, the backlog and the
+time-tracking we had originally setup and found them *extremely*
+useful - quite possibly the thing that has kept me going for such an
+extended period of time, to be honest. After all, when you are working
+on an open source project its very easy to get lost in its
+open-ended-ness and end up giving up altogether, in particular if you
+are not getting (or expecting) any user feedback. Even Linus himself
+has said many times he would have given up the kernel if it wasn't for
+other people bringing him problems to keep him interested.
+
+Lacking Linus' ability to attract crowds of interested developers, I
+went for the next best thing: I made them up. Well, at least in
+metaphorical way, I guess, as this is what user stories are when you
+have to external users to drive them. As I am using the product in
+anger, I find it very easy to put myself in the head of a user and
+come up with requirements that drive development forward. These
+stories really help, because they transform the cloud of possibilities
+into concrete, simple, measurable deliverables that one can choose to
+deliver or not. Once you have a set of stories, you have no excuse to
+be lazy because you can visualise in your had just how much effort it
+would require you to implement a story - and hey, since nerds are
+terrible at estimating, its never that much effort at all. Of course,
+it's never quite that easy in the end; but once you've started, you
+get the feeling you have to at least finish the task at hand, and so
+on, one story at a time, one iteration at a time, until a body of work
+starts building up. Its slow, excruciatingly slow, but it's
+steady. Its like water working in geological time; when you look back
+5 iterations, you cannot help but be amazed on how much can be
+achieved in such a incremental way. And how much is still left.
+
+And then you get hooked into measurements. I now love measuring
+everything, from how long it takes me to complete a story, to where
+time goes in an iteration, to how many commits a day, to, well,
+everything that can easily be measured without adding any overhead.
 
 I even gave it a name: /Extreme Incrementalism/ or EI for
 short. As you can see, the name fits well with the spirit of
