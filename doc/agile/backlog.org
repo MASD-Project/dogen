@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add a CMake module for git                                        :story:
+
+We are finding git manually at the moment, which means we are probably
+not doing it right. It appears there is a CMake script for it:
+
+- [[%20http://gnuradio.org/redmine/projects/gnuradio/repository/revisions/accb9f2fe8fd8f6a1e114adac5b15304b0e0012d/entry/cmake/Modules/FindGit.cmake][FindGIT.cmake]]
+
 *** Add support for the =scan-build= static analyser                  :story:
 
 scan-build is a command line utility that enables a user to run the
