@@ -60,6 +60,8 @@ example:
 - sew - tool to generate JSON / SML from Dia diagrams
 - tailor - command line tool to generate JSON / SML from Dia
   diagrams
+- needle: the small library with support for boost and standard
+  library (hashing, test data, etc.)
 
 All binaries are prefixed with dogen to avoid clashes,
 e.g. =dogen_knitter=.
