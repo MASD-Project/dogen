@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for iwyu                                              :story:
+
+There is a clang based tool that checks if which includes are actually
+used by the translation unit. We should have a build for this that
+breaks whenever one includes something which is not required.
+
+- [[http://code.google.com/p/include-what-you-use/][iwyu project page]]
+- [[http://mpd.jinr.ru/svn/mpdroot/trunk/cmake/modules/FindIWYU.cmake][FindIWYU.cmake]]
+- [[https://github.com/christophgysin/addp/blob/master/cmake/iwyu.cmake][iwyu.cmake]]
+
 *** Improve error messages for unconnected objects                    :story:
 
 At present when a Dia object is not connected we get the following
