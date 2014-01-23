@@ -8,6 +8,24 @@
 
 Stories that we intend to look at, at some point.
 
+*** Improve error messages for unconnected objects                    :story:
+
+At present when a Dia object is not connected we get the following
+error message to std out:
+
+: Error: Expected 2 connections but found: 1. See the log file for details.
+
+The log file is a bit more verbose but still not particularly helpful:
+
+: 2014-01-23 08:25:28.115363 [ERROR] [dia_to_sml.processor] Expected 2 connections but found: 1
+: 2014-01-23 08:25:28.118718 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/dia_to_sml/src/types/processor.cpp(166): Throw in function dogen::dia_to_sml::processed_object dogen::dia_to_sml::processor::process(const dogen::dia::object&)
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml16processing_errorEEE
+: std::exception::what: Expected 2 connections but found: 1
+: [P12tag_workflow] = Code generation failure.
+
+We should try to at least name the object that has the one connection
+to make the user's life easier.
+
 *** Include groups                                                    :story:
 
 One of my personal preferences has always been to group includes by
@@ -470,13 +488,6 @@ if =boost::test= logged to _both_ the console and to our log
 file. There is a file output for boost log, but its not configurable
 enough to accept a =boost::log= stream. We should send an email to
 mailing list asking for help.
-
-*** Split research work from readme into its own document             :story:
-
-Our landing page in GitHub is becoming a bit too big. We should look
-into the content to make sure we only have essential information there
-for new users. For the rest we should move the content into doc and
-use HTTP links. A quick win is to move Related Work out of the readme.
 
 *** Feature models should always be tested by engine                  :story:
 
