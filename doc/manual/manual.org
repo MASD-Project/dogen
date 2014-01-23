@@ -354,3 +354,7 @@ and papers on the subject we have read, or intend to read.
   serialisation and callbacks.
 - [[http://www.artima.com/articles/dci_vision.html][DCI]]: The DCI Architecture: A New Vision of Object-Oriented
   Programming. Some fundamental insights on the nature of OO.
+- [[http://www.ischo.com/xrtti/index.html][xrtti]]: Extending C++ with a richer reflection.
+- [[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3883.html][Code checkers and generators]]: adding AngularJS-like capabilities to
+  C++.
+- [[http://stackoverflow.com/questions/355650/c-html-template-framework-templatizing-library-html-generator-library][Text Template libraries for C++]]: T4 like implementations for C++.
