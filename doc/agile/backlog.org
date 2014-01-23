@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for the =scan-build= static analyser                  :story:
+
+scan-build is a command line utility that enables a user to run the
+static analyzer over their codebase as part of performing a regular
+build.
+
+- [[%20http://clang-analyzer.llvm.org/scan-build.html][scan-build]] project page
+
 *** Add support for iwyu                                              :story:
 
 There is a clang based tool that checks if which includes are actually
