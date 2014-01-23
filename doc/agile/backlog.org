@@ -192,6 +192,32 @@ then add it to Dogen and then make use of the new formatters. The
 usual constraints apply such as ABI (ensure one is using the same
 compiler as used to compile Dogen, flags, etc).
 
+In reality stitch has two modes of operation, which we can think of as
+transformation types:
+
+- variable substitution: take a source file, take a dictionary and
+  replace variables with values from dictionary;
+- streamer generation: take a text template and create the output
+  streaming code that would generate it, potentially interspersed with
+  additional C++ processing logic.
+
+In a more general form, this is some kind of graph of transformations,
+where the streamer generation's output becomes a variable in the
+dictionary and the variable substitution transformation simply
+replaces this variable with all of the generated code. Conceptually,
+one can imagine there being other types of transformations, all of
+which result in setting a variable and ultimately there being the
+final variable substitution transformation. Of course, a command
+interface would probably not be suitable to represent this graph of
+transformations, so we will have to flatten it. However, internally
+the stitch library should be implemented like this. We may find other
+useful transformations in the future.
+
+The Dogen interface with the stitch library will also be flat, hard
+coded to these two types of transformations; this is just due to the
+structure of the meta-data tags, which are not very suitable to
+describe a structure like a graph.
+
 *** Special purpose formatters                                        :story:
 
 In the future, when the creation of formatters is made easier, we may
