@@ -34,15 +34,15 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-22 Wed 08:54]
+Clock summary at [2014-01-24 Fri 10:02]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *18:15* |       |      |
+| *Total time*                                                                 | *22:50* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 18:15 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:16 |
-| IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 0:52 |
+| Development Stories Implemented                                              |         | 22:50 |      |
+| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 3:01 |
+| IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 1:37 |
 | IMPLEMENTATION Update the manual                                             |         |       | 2:30 |
 | IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |         |       | 1:10 |
@@ -52,7 +52,7 @@ Clock summary at [2014-01-22 Wed 08:54]
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |         |       | 0:43 |
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
-| IMPLEMENTATION Sync C++ model structure with SML                             |         |       | 1:27 |
+| IMPLEMENTATION Sync C++ model structure with SML                             |         |       | 3:32 |
 | IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 3:56 |
 | IMPLEMENTATION Refactor sanity scripts                                       |         |       | 2:10 |
 #+end:
@@ -73,6 +73,7 @@ Clock summary at [2014-01-22 Wed 08:54]
 Updates to release notes and backlog.
 
 *** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
+    CLOCK: [2014-01-24 Fri 07:55]--[2014-01-24 Fri 08:40] =>  0:45
     CLOCK: [2014-01-16 Thu 18:49]--[2014-01-16 Thu 19:41] =>  0:52
 
 We should do a write up of how we develop dogen.
@@ -205,6 +206,7 @@ formatters model.
   rather than =cpp_formatter::includes=.
 
 *** IMPLEMENTATION Sync C++ model structure with SML                  :story:
+    CLOCK: [2014-01-22 Thu 21:35]--[2014-01-22 Thu 23:05] =>  1:30
     CLOCK: [2014-01-23 Thu 08:07]--[2014-01-23 Thu 08:42] =>  0:35
     CLOCK: [2014-01-22 Wed 08:01]--[2014-01-22 Wed 08:54] =>  0:53
     CLOCK: [2014-01-21 Tue 17:41]--[2014-01-21 Tue 18:15] =>  0:34
@@ -222,6 +224,11 @@ Things that need to change:
 - have property containers with the same names as SML
 - have relationship containers with the same name as SML and the same
   relationship enum too.
+
+Actually this is just too difficult because we can't see the woods for
+the trees. We need to isolate the changes: create a new set of
+top-level classes, one at a time, and update the formatters to use
+them. When all formatters have been updated, remove the old classes.
 
 *** IMPLEMENTATION Refactor types header into new style file formatter :story:
     CLOCK: [2014-01-16 Thu 09:16]--[2014-01-16 Thu 09:24] =>  0:08
