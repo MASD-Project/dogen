@@ -33,7 +33,6 @@
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
-#include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 
 namespace dogen {
@@ -42,7 +41,6 @@ namespace cpp {
 template<typename Archive>
 void register_types(Archive& ar) {
     sml::register_types(ar);
-    formatters::register_types(ar);
     config::register_types(ar);
 
     ar.template register_type<dogen::cpp::class_info>();

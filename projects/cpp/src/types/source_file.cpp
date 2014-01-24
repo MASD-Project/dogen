@@ -40,8 +40,7 @@ source_file::source_file(source_file&& rhs)
       header_guard_(std::move(rhs.header_guard_)),
       file_path_(std::move(rhs.file_path_)),
       relative_path_(std::move(rhs.relative_path_)),
-      entity_(std::move(rhs.entity_)),
-      annotation_(std::move(rhs.annotation_)) { }
+      entity_(std::move(rhs.entity_)) { }
 
 source_file::source_file(
     const std::string& documentation,
@@ -50,16 +49,14 @@ source_file::source_file(
     const std::string& header_guard,
     const boost::filesystem::path& file_path,
     const boost::filesystem::path& relative_path,
-    const boost::shared_ptr<dogen::cpp::entity>& entity,
-    const dogen::formatters::annotation& annotation)
+    const boost::shared_ptr<dogen::cpp::entity>& entity)
     : documentation_(documentation),
       includes_(includes),
       descriptor_(descriptor),
       header_guard_(header_guard),
       file_path_(file_path),
       relative_path_(relative_path),
-      entity_(entity),
-      annotation_(annotation) { }
+      entity_(entity) { }
 
 void source_file::swap(source_file& other) noexcept {
     using std::swap;
@@ -70,7 +67,6 @@ void source_file::swap(source_file& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(relative_path_, other.relative_path_);
     swap(entity_, other.entity_);
-    swap(annotation_, other.annotation_);
 }
 
 bool source_file::operator==(const source_file& rhs) const {
@@ -80,8 +76,7 @@ bool source_file::operator==(const source_file& rhs) const {
         header_guard_ == rhs.header_guard_ &&
         file_path_ == rhs.file_path_ &&
         relative_path_ == rhs.relative_path_ &&
-        entity_ == rhs.entity_ &&
-        annotation_ == rhs.annotation_;
+        entity_ == rhs.entity_;
 }
 
 source_file& source_file::operator=(source_file other) {
@@ -200,22 +195,6 @@ void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>& v) {
 
 void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>&& v) {
     entity_ = std::move(v);
-}
-
-const dogen::formatters::annotation& source_file::annotation() const {
-    return annotation_;
-}
-
-dogen::formatters::annotation& source_file::annotation() {
-    return annotation_;
-}
-
-void source_file::annotation(const dogen::formatters::annotation& v) {
-    annotation_ = v;
-}
-
-void source_file::annotation(const dogen::formatters::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 } }

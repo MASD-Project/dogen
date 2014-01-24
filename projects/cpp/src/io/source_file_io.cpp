@@ -24,7 +24,6 @@
 #include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/includes_io.hpp"
 #include "dogen/cpp/io/source_file_io.hpp"
-#include "dogen/formatters/io/annotation_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -62,8 +61,7 @@ std::ostream& operator<<(std::ostream& s, const source_file& v) {
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"entity\": " << v.entity() << ", "
-      << "\"annotation\": " << v.annotation()
+      << "\"entity\": " << v.entity()
       << " }";
     return(s);
 }

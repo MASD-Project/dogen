@@ -33,7 +33,6 @@
 #include "dogen/cpp/serialization/entity_ser.hpp"
 #include "dogen/cpp/serialization/includes_ser.hpp"
 #include "dogen/cpp/serialization/source_file_ser.hpp"
-#include "dogen/formatters/serialization/annotation_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
 
@@ -51,7 +50,6 @@ void save(Archive& ar,
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("relative_path", v.relative_path_.generic_string());
     ar << make_nvp("entity", v.entity_);
-    ar << make_nvp("annotation", v.annotation_);
 }
 
 template<typename Archive>
@@ -69,7 +67,6 @@ void load(Archive& ar,
     ar >> make_nvp("relative_path", relative_path_tmp);
     v.relative_path_ = relative_path_tmp;
     ar >> make_nvp("entity", v.entity_);
-    ar >> make_nvp("annotation", v.annotation_);
 }
 
 } }

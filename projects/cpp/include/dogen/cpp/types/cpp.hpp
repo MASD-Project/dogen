@@ -32,35 +32,49 @@ namespace dogen {
  *
  * @section cpp_0 Objective
  *
- * CPP aims to model the types available in the C++ type system as faithfuly
- * as possible. However, for historical reasons, there are a number of types
- * that do not follow this approach such as @e visitor, @e registrar, etc. Over
- * time these types will be reimplemented in terms of the basic building blocks
- * such as class, etc.
+ * CPP aims to model the types required by the formatters to generate C++ code.
+ * Note that it is @e not a model of the C++ language as a compiler etc would
+ * see it; it at a much higher level than an AST. In fact, one can think of CPP
+ * as an SML augmented with C++-specific information. Some of that information
+ * comes from bringing SML meta-data into the type system; the remaining is
+ * directly derived by the information available in SML.
  *
  * @section cpp_1 Info postfix
  *
- * The types in the C++ meta-model should not have any prefixes or post-fixes
- * since they naturally belong to the CPP model. However, because names like
- * @e class and @e namespace clash with keywords, and to maintain consistency -
- * perhaps foolishly - it was decided to use the postfix @e info on all types
- * which are part of the meta-model. Info was chosen very randomly, but it is
- * used by @e type_info, so that's at least one excuse.
+ * The types in the CPP model should not have any prefixes or post-fixes since
+ * they naturally belong to the model; e.g. @e cpp::class tells us everything we
+ * need to know. However, names like @e class and @e namespace clash with
+ * keywords,  so this is not a workable approach. Models such as ECore have
+ * dealt with this problem by choosing a random prefix (e.g. @e EClass, etc).
+ * We decided, somewhat arbitrarily, to use the postfix @e _info. It is used by
+ * @e type_info, representing meta-data in C++, so at least that's one excuse.
  *
- * @section cpp_2 Using Clang AST as a C++ meta model
+ * @section cpp_2 Other approaches
  *
- * If implemented properly, dogen should really just generate a C++ AST via
- * Clang and use the LLVM framework to perform the code generation. However,
- * it is non-trivial to create transformers able to make a valid AST for
- * all the use cases we have (say boost serialisation, etc). So we took the
- * easy way out which is to create what can be thought of as a high-level AST
- * model and hard-code all of the source in the @e cpp_transformers model.
+ * We have tried to make C++ a model of the C++ language at the AST level and
+ * the formatters nothing but a trivial dumper of the AST into file; in this
+ * world we'd be consuming Clang libraries and using their infrastructure.
+ * Whilst this approach was seductive in theorethical terms, it provided to be
+ * to cumbersome to work in practice. This is because the AST is so low-level
+ * that to describe a simple thing like a class would require large amounts
+ * of infrastructure (think of it like talking about cars at the atomic level).
  *
- * In the future we should consider a Clang based C++ backend. We will probably
- * not reuse any of the code in the various C++ models as its too far apart
- * from the Clang approach. On the plus side we can start working on it
- * side-by-side such that we have both backends and only switch to Clang when
- * it has 100% feature coverage.
+ * We also tried to use SML directly to format C++ code, augmented with
+ * high-level meta-data. Since the C++ model shares so many commonalities with
+ * SML it only seeemed logical to remove it from the picture altogether and
+ * add whatever was missing directly to SML. To avoid making SML language
+ * specific, we added the meta-data as a non-typed container. Whilst workable,
+ * this approach resulted in a lot of boilerplate code and little type safety.
+ *
+ * The final aproach considered was to make CPP types inherit from SML. This
+ * was also problematic: we do not support cross-model inheritance at present;
+ * but much more worryingly, the model would become a complex inheritance
+ * graph, with lots of double-dispatching, casting, abstract factories,
+ * decorator patterns and all of the complexity that inevitable comes with
+ * the heavy use of inheritance.
+ *
+ * This is why we settled on something which duplicates quite a bit of SML; it
+ * seems like the least bad approach.
  *
  */
 namespace cpp {
