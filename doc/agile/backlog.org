@@ -3075,7 +3075,7 @@ loops (say 1M times) doing things like reading dia diagrams etc. We
 could chose a few key things just to give us some metrics around
 performance.
 
-In fact, we could create a set of colossus models: models with really
+In fact, we could create a set of colossi models: models with really
 large number of classes (say 500), maybe 5 of these with
 references. We could then use the diagrams to test the individual
 workflows: dia, dia_to_sml, cpp and engine with no writing. We should
@@ -3093,6 +3093,8 @@ so that if performance is on, it ignores all tests other than
 performance and vice-versa. We'd also need a performance target that
 only builds the performance binary, and a =run_performance= target
 that executes it.
+
+Perhaps we could use a ruby script to generate the test models?
 
 Old understanding:
 
