@@ -199,12 +199,12 @@ carefully, until the code is in a good shape (as defined from the
 perspective of the maintainer).
 
 This debate made a big impression on me, because the core ideas apply
-to more than inherited code bases; it actually touches in a lot of the
-fundamental principles of development. Of course, Agile then came
-around and formalised a lot of ideas around this topic; but as with
-everything in coding, the ideas are easy to understand but very
-difficult to put in practice, and one only gets right after making a
-lot of mistakes.
+to a lot more than just inherited code bases; these are fundamental
+principles of development. Of course, Agile then came around and
+formalised a lot of the thinking around it. Nevertheless - as with
+everything in coding - the ideas may be easy to understand but
+extremely difficult to put in practice. One only gets it right after
+getting it wrong many a time.
 
 In truth, it is very easy to have big ideas when it comes to coding,
 but for every N big ideas - where N is very large - only a tiny
