@@ -8,6 +8,10 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add warning =-Wunused-private-field=                              :story:
+
+Seems like this warning is not part of =-Wall
+
 *** Add a CMake module for git                                        :story:
 
 We are finding git manually at the moment, which means we are probably
