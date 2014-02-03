@@ -28,9 +28,6 @@
 
 namespace {
 
-const bool is_system(true);
-const bool is_user(false);
-
 const std::string unexpected_class_info(
     "File view model should not contain a class view model");
 

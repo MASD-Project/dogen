@@ -25,9 +25,6 @@
 
 namespace {
 
-const bool is_system(true);
-const bool is_user(false);
-
 const std::string include("#include ");
 const std::string open_system("<");
 const std::string close_system(">");

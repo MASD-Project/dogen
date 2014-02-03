@@ -46,8 +46,6 @@ const std::string dia_string("string");
 const std::string enumeration_stereotype("#enumeration#");
 const std::string invalid_stereotype("Invalid stereotype: ");
 
-const bool add_comment_marker(true);
-
 dogen::dia::attribute
 create_string_attribute(const std::string& name, const std::string& value) {
     dogen::dia::attribute r;

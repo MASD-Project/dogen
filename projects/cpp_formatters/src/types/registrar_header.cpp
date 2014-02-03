@@ -35,9 +35,6 @@ namespace {
 
 auto lg(logger_factory("cpp_formatters.registrar_header"));
 
-const bool is_system(true);
-const bool is_user(false);
-
 const std::string expected_registrar_info(
     "File view model must contain a registrar view model");
 
