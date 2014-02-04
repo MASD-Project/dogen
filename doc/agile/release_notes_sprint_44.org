@@ -37,7 +37,8 @@ Use build downtime to update the manual.
 
 We should do a write up of how we develop dogen.
 
-*** Create a "waterfall" plan of the work ahead                       :story:
+*** IMPLEMENTATION Create a road map for the work ahead               :story:
+    CLOCK: [2014-02-04 Tue 08:27]--[2014-02-04 Tue 08:37] =>  0:10
 
 One interesting idea has occurred to me: why not combine agile with
 waterfall? Well, agile with Gantt to be precise. Whilst we know that
