@@ -34,17 +34,16 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-01-24 Fri 10:02]
+Clock summary at [2014-02-04 Tue 08:05]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *22:50* |       |      |
+| *Total time*                                                                 | *23:17* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 22:50 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 3:01 |
-| IMPLEMENTATION Create a blog post on dogen's development methodology         |         |       | 1:37 |
-| IMPLEMENTATION Update the manual                                             |         |       | 2:30 |
-| IMPLEMENTATION Consider Creating a phoney target for header validation       |         |       | 0:15 |
+| Development Stories Implemented                                              |         | 23:17 |      |
+| COMPLETED Release notes and backlog grooming                                 |         |       | 3:19 |
+| COMPLETED Start a blog post on dogen's development methodology               |         |       | 1:46 |
+| COMPLETED Update the manual                                                  |         |       | 2:30 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |         |       | 1:10 |
 | COMPLETED Remove the =legacy_mode= flags and =om= wiring                     |         |       | 0:19 |
 | COMPLETED Create the new =formatters= model and copy required code           |         |       | 1:06 |
@@ -52,12 +51,15 @@ Clock summary at [2014-01-24 Fri 10:02]
 | COMPLETED Design a transformation pipeline in =sml_to_cpp=                   |         |       | 0:43 |
 | COMPLETED Make use of =cpp_includes= in =source_file=                        |         |       | 1:50 |
 | COMPLETED Rename the boilerplate class and associated classes                |         |       | 0:16 |
-| IMPLEMENTATION Sync C++ model structure with SML                             |         |       | 3:32 |
-| IMPLEMENTATION Refactor types header into new style file formatter           |         |       | 3:56 |
-| IMPLEMENTATION Refactor sanity scripts                                       |         |       | 2:10 |
+| COMPLETED Start refactoring types header formatter                           |         |       | 3:56 |
+| COMPLETED Start Refactoring sanity scripts                                   |         |       | 2:10 |
+| CANCELLED Consider Creating a phoney target for header validation            |         |       | 0:15 |
+| CANCELLED Sync C++ model structure with SML                                  |         |       | 3:32 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2014-02-04 Tue 08:04]
+    CLOCK: [2014-02-04 Tue 07:55]--[2014-02-04 Tue 08:04] =>  0:09
     CLOCK: [2014-01-25 Sat 16:11]--[2014-01-25 Sat 16:20] =>  0:09
     CLOCK: [2014-01-23 Thu 18:09]--[2014-01-23 Thu 18:54] =>  0:45
     CLOCK: [2014-01-23 Thu 07:56]--[2014-01-23 Thu 08:07] =>  0:11
@@ -73,14 +75,16 @@ Clock summary at [2014-01-24 Fri 10:02]
 
 Updates to release notes and backlog.
 
-*** IMPLEMENTATION Create a blog post on dogen's development methodology :story:
+*** COMPLETED Start a blog post on dogen's development methodology    :story:
+    CLOSED: [2014-02-04 Tue 07:59]
     CLOCK: [2014-01-25 Sat 16:01]--[2014-01-25 Sat 16:10] =>  0:09
     CLOCK: [2014-01-24 Fri 07:55]--[2014-01-24 Fri 08:40] =>  0:45
     CLOCK: [2014-01-16 Thu 18:49]--[2014-01-16 Thu 19:41] =>  0:52
 
 We should do a write up of how we develop dogen.
 
-*** IMPLEMENTATION Update the manual                                  :story:
+*** COMPLETED Update the manual                                       :story:
+    CLOSED: [2014-02-04 Tue 07:59]
     CLOCK: [2014-01-20 Mon 22:02]--[2014-01-20 Mon 22:27] =>  0:25
     CLOCK: [2014-01-20 Mon 18:36]--[2014-01-20 Mon 18:40] =>  0:04
     CLOCK: [2014-01-20 Mon 08:06]--[2014-01-20 Mon 08:37] =>  0:31
@@ -88,19 +92,6 @@ We should do a write up of how we develop dogen.
     CLOCK: [2014-01-18 Sat 23:18]--[2014-01-18 Sat 23:30] =>  0:12
 
 Use build downtime to update the manual.
-
-*** IMPLEMENTATION Consider Creating a phoney target for header validation :story:
-    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
-
-One way of solving the ninja problems may be to stop creating a static
-library for header validation. We did it simply because it was easier
-but there is no real reason for it. We may be able to save a bit on
-archiving, and as an added bonus, it may fix the issues we're having
-with ninja.
-
-Links:
-
-- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
 
 *** COMPLETED Split research work from readme into its own document   :story:
     CLOSED: [2014-01-23 Thu 08:09]
@@ -207,32 +198,8 @@ formatters model.
   clearer, if somewhat longer. So =cpp_formatter::include_formatter=
   rather than =cpp_formatter::includes=.
 
-*** IMPLEMENTATION Sync C++ model structure with SML                  :story:
-    CLOCK: [2014-01-22 Thu 21:35]--[2014-01-22 Thu 23:05] =>  1:30
-    CLOCK: [2014-01-23 Thu 08:07]--[2014-01-23 Thu 08:42] =>  0:35
-    CLOCK: [2014-01-22 Wed 08:01]--[2014-01-22 Wed 08:54] =>  0:53
-    CLOCK: [2014-01-21 Tue 17:41]--[2014-01-21 Tue 18:15] =>  0:34
-
-Now that we made peace with the fact that the C++ will duplicate quite
-a bit of SML, we should try to remove arbitrary differences between
-these two models. For instance we should use the same relationship
-approach, the same concepts where applicable, etc.
-
-Things that need to change:
-
-- have =type= as a base class for all "top-level" "things" that go
-  into files: class, enum, exception, visitor, registrar.
-- have a =qname= equivalent
-- have property containers with the same names as SML
-- have relationship containers with the same name as SML and the same
-  relationship enum too.
-
-Actually this is just too difficult because we can't see the woods for
-the trees. We need to isolate the changes: create a new set of
-top-level classes, one at a time, and update the formatters to use
-them. When all formatters have been updated, remove the old classes.
-
-*** IMPLEMENTATION Refactor types header into new style file formatter :story:
+*** COMPLETED Start refactoring types header formatter                :story:
+    CLOSED: [2014-02-04 Tue 08:02]
     CLOCK: [2014-01-16 Thu 09:16]--[2014-01-16 Thu 09:24] =>  0:08
 
 Make the main types header formatters look like the =om= types formatter.
@@ -271,7 +238,8 @@ formatters.
 Add a dependency to the language neutral formatter model and an
 annotation property to source file in the C++ model.
 
-**** IMPLEMENTATION Remove the parents dependency in transformer       :task:
+**** CANCELLED Remove the parents dependency in transformer            :task:
+     CLOSED: [2014-02-04 Tue 08:02]
      CLOCK: [2014-01-21 Tue 08:06]--[2014-01-21 Tue 08:35] =>  0:29
 
 At present the C++ to SML transformer requires both the parent and
@@ -280,31 +248,8 @@ reality this is not required as all the information has already been
 made available by the tagger or the relationship container. We need to
 consume this data instead of relying on object look-ups.
 
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Use tags for class properties in transformer                      :task:
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of boilerplate                                           :task:
-
-Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some meta-data into C++ model.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
-
-*** IMPLEMENTATION Refactor sanity scripts                            :story:
+*** COMPLETED Start Refactoring sanity scripts                        :story:
+    CLOSED: [2014-02-04 Tue 08:03]
     CLOCK: [2014-01-17 Fri 17:30]--[2014-01-17 Fri 17:45] =>  0:15
 
 Originally we designed sanity as a set of ruby scripts that were
@@ -320,7 +265,8 @@ attempt.
 
 Refactor the scripts to make the above use cases possible.
 
-**** IMPLEMENTATION Move scripts into projects and add basic ruby structure :task:
+**** COMPLETED Move scripts into projects and add basic ruby structure :task:
+     CLOSED: [2014-02-04 Tue 08:03]
      CLOCK: [2014-01-20 Mon 22:40]--[2014-01-20 Mon 23:11] =>  0:31
      CLOCK: [2014-01-18 Sat 22:10]--[2014-01-18 Sat 22:45] =>  0:35
      CLOCK: [2014-01-17 Fri 17:45]--[2014-01-17 Fri 18:08] =>  0:23
@@ -329,7 +275,8 @@ This is a full blown project so it should be part of the projects
 directory. It should follow all the ruby conventions such as directory
 structure, gem files, etc.
 
-**** IMPLEMENTATION Gather requirements for sanity                     :task:
+**** COMPLETED Gather requirements for sanity                          :task:
+     CLOSED: [2014-02-04 Tue 08:03]
      CLOCK: [2014-01-18 Sat 22:52]--[2014-01-18 Sat 23:18] =>  0:26
 
 Random thoughts on what these scripts should do:
@@ -349,63 +296,48 @@ Random thoughts on what these scripts should do:
   delete then create.
 - Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
 
-*** Remove the source file concept and move useful properties to entity :story:
+*** CANCELLED Consider Creating a phoney target for header validation :story:
+    CLOSED: [2014-02-04 Tue 08:00]
+    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
 
-In reality, the whole notion of =source_file= is flawed. Formatters
-drive the existence of source files; only they know things such as:
+One way of solving the ninja problems may be to stop creating a static
+library for header validation. We did it simply because it was easier
+but there is no real reason for it. We may be able to save a bit on
+archiving, and as an added bonus, it may fix the issues we're having
+with ninja.
 
-- file name
-- header guards
-- formatter specific includes
+Links:
 
-The entity base class (soon to be renamed) should own the remaining
-state:
+- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
 
-- annotation
-- includes
+*** CANCELLED Sync C++ model structure with SML                       :story:
+    CLOSED: [2014-02-04 Tue 08:05]
+    CLOCK: [2014-01-22 Thu 21:35]--[2014-01-22 Thu 23:05] =>  1:30
+    CLOCK: [2014-01-23 Thu 08:07]--[2014-01-23 Thu 08:42] =>  0:35
+    CLOCK: [2014-01-22 Wed 08:01]--[2014-01-22 Wed 08:54] =>  0:53
+    CLOCK: [2014-01-21 Tue 17:41]--[2014-01-21 Tue 18:15] =>  0:34
 
-In addition it also needs a copy of the meta-data from SML.
+Cancellation rationale: we are not going to sync the class structure -
+instead we need a few top-level classes to provide information to the
+formatters.
 
-The formatter needs a few changes:
+Now that we made peace with the fact that the C++ will duplicate quite
+a bit of SML, we should try to remove arbitrary differences between
+these two models. For instance we should use the same relationship
+approach, the same concepts where applicable, etc.
 
-- a method to determine if it is enabled or not;
-- it must receive the paths to the include and source directories on
-  construction;
-- its format method should be based on a concrete entity.
+Things that need to change:
 
-Coupled with a static factory, this means we now do not need to know
-what formatters there are in the system; all we need is a container to
-store formatters according to the C++ type they format. They register
-themselves into that container (or at least some kind of static
-factory method).
+- have =type= as a base class for all "top-level" "things" that go
+  into files: class, enum, exception, visitor, registrar.
+- have a =qname= equivalent
+- have property containers with the same names as SML
+- have relationship containers with the same name as SML and the same
+  relationship enum too.
 
-*** Make use of the indenting stream in =cpp_formatters=              :story:
-
-Replace indenter with the new indenting stream.
-
-*** Make use of the boilerplate formatter in =cpp_formatters=         :story:
-
-Update all file formatters to use the boilerplate formatter.
-
-Consider creating a simple workflow in =formatters= that gets used by
-the cpp_formatters workflow (or passed in). The job of this workflow
-is to setup infrastructure common to all formatters such as loading
-licences, modelines, etc.
-
-*** Update =cpp= model with properties from tags                      :story:
-
-Read properties from the meta-data and represent them inside of the
-=cpp= model.
-
-*** Update comments in C++ model                                      :story:
-
-We have a very large blurb in this model that is rather old, and
-reflects a legacy understanding of the role of the C++ model.
-
-*** Add comments in =formatters= model                                :story:
-
-We haven't got any documentation at all in the new formatters
-morel. We need a small blurb about the language neutral formatting
-support the model is supposed to provide.
+Actually this is just too difficult because we can't see the woods for
+the trees. We need to isolate the changes: create a new set of
+top-level classes, one at a time, and update the formatters to use
+them. When all formatters have been updated, remove the old classes.
 
 ** Deprecated Development Stories

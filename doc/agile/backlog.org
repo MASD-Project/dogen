@@ -8,6 +8,78 @@
 
 Stories that we intend to look at, at some point.
 
+*** Remove the source file concept and move useful properties to entity :story:
+
+In reality, the whole notion of =source_file= is flawed. Formatters
+drive the existence of source files; only they know things such as:
+
+- file name
+- header guards
+- formatter specific includes
+
+The entity base class (soon to be renamed) should own the remaining
+state:
+
+- annotation
+- includes
+
+In addition it also needs a copy of the meta-data from SML.
+
+The formatter needs a few changes:
+
+- a method to determine if it is enabled or not;
+- it must receive the paths to the include and source directories on
+  construction;
+- its format method should be based on a concrete entity.
+
+Coupled with a static factory, this means we now do not need to know
+what formatters there are in the system; all we need is a container to
+store formatters according to the C++ type they format. They register
+themselves into that container (or at least some kind of static
+factory method).
+
+*** Make use of the indenting stream in =cpp_formatters=              :story:
+
+Replace indenter with the new indenting stream.
+
+*** Make use of the boilerplate formatter in =cpp_formatters=         :story:
+
+Update all file formatters to use the boilerplate formatter.
+
+Consider creating a simple workflow in =formatters= that gets used by
+the cpp_formatters workflow (or passed in). The job of this workflow
+is to setup infrastructure common to all formatters such as loading
+licences, modelines, etc.
+
+*** Update =cpp= model with properties from tags                      :story:
+
+Read properties from the meta-data and represent them inside of the
+=cpp= model.
+
+*** Update comments in C++ model                                      :story:
+
+We have a very large blurb in this model that is rather old, and
+reflects a legacy understanding of the role of the C++ model.
+
+*** Add comments in =formatters= model                                :story:
+
+We haven't got any documentation at all in the new formatters
+morel. We need a small blurb about the language neutral formatting
+support the model is supposed to provide.
+
+*** Consider Creating a phoney target for header validation           :story:
+    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
+
+One way of solving the ninja problems may be to stop creating a static
+library for header validation. We did it simply because it was easier
+but there is no real reason for it. We may be able to save a bit on
+archiving, and as an added bonus, it may fix the issues we're having
+with ninja.
+
+Links:
+
+- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
+
 *** Add warning =-Wunused-private-field=                              :story:
 
 Seems like this warning is not part of =-Wall
