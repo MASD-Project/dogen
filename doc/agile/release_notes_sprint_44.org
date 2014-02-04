@@ -51,6 +51,38 @@ The key point is, if we are to have something demoable by next FOSDEM
 we need some idea of what features are coming in when to ensure we
 have enough of the key stories done by next February.
 
+*** IMPLEMENTATION Create a new type to model the information passed in to formatters :story:
+    CLOCK: [2014-02-04 Tue 18:29]--[2014-02-04 Tue 18:38] =>  0:09
+
+In reality, the whole notion of =source_file= is flawed. Formatters
+drive the existence of source files; only they know things such as:
+
+- file name
+- header guards
+- formatter specific includes
+- includes
+
+A base class should own the remaining state:
+
+- annotation
+
+In addition it also needs a copy of the meta-data from SML which is
+common to all types. Then we need to sub-class it with the types just
+like we have at present: class, etc.
+
+The formatter needs a few changes:
+
+- a method to determine if it is enabled or not;
+- it must receive the paths to the include and source directories on
+  construction;
+- its format method should be based on a concrete entity.
+
+Coupled with a static factory, this means we now do not need to know
+what formatters there are in the system; all we need is a container to
+store formatters according to the C++ type they format. They register
+themselves into that container (or at least some kind of static
+factory method).
+
 *** Update the manual                                                 :story:
 
 Use build downtime to update the manual.
@@ -106,36 +138,6 @@ Drive (GDrive) location.
   =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
   and tag as this would require no complex logic: if tag create new
   folder, if latest, delete then create.
-
-*** Remove the source file concept and move useful properties to entity :story:
-
-In reality, the whole notion of =source_file= is flawed. Formatters
-drive the existence of source files; only they know things such as:
-
-- file name
-- header guards
-- formatter specific includes
-
-The entity base class (soon to be renamed) should own the remaining
-state:
-
-- annotation
-- includes
-
-In addition it also needs a copy of the meta-data from SML.
-
-The formatter needs a few changes:
-
-- a method to determine if it is enabled or not;
-- it must receive the paths to the include and source directories on
-  construction;
-- its format method should be based on a concrete entity.
-
-Coupled with a static factory, this means we now do not need to know
-what formatters there are in the system; all we need is a container to
-store formatters according to the C++ type they format. They register
-themselves into that container (or at least some kind of static
-factory method).
 
 *** Make use of the indenting stream in =cpp_formatters=              :story:
 
