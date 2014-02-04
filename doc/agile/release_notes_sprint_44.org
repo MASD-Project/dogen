@@ -17,11 +17,15 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-04 Tue 08:18]
+Clock summary at [2014-02-04 Tue 18:30]
 
-| Headline     | Time   |
-|--------------+--------|
-| *Total time* | *0:00* |
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:52* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:52 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:21 |
+| COMPLETED Create a road map for the work ahead    |        |      | 0:31 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -29,15 +33,9 @@ Clock summary at [2014-02-04 Tue 08:18]
 
 Updates to release notes and backlog.
 
-*** Update the manual                                                 :story:
-
-Use build downtime to update the manual.
-
-*** Finish the blog post on dogen's development methodology           :story:
-
-We should do a write up of how we develop dogen.
-
-*** IMPLEMENTATION Create a road map for the work ahead               :story:
+*** COMPLETED Create a road map for the work ahead                    :story:
+    CLOSED: [2014-02-04 Tue 18:29]
+    CLOCK: [2014-02-04 Tue 18:08]--[2014-02-04 Tue 18:29] =>  0:21
     CLOCK: [2014-02-04 Tue 08:27]--[2014-02-04 Tue 08:37] =>  0:10
 
 One interesting idea has occurred to me: why not combine agile with
@@ -52,6 +50,14 @@ of the world.
 The key point is, if we are to have something demoable by next FOSDEM
 we need some idea of what features are coming in when to ensure we
 have enough of the key stories done by next February.
+
+*** Update the manual                                                 :story:
+
+Use build downtime to update the manual.
+
+*** Finish the blog post on dogen's development methodology           :story:
+
+We should do a write up of how we develop dogen.
 
 *** Refactor types header into new style file formatter               :story:
 
