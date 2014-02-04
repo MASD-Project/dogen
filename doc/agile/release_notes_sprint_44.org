@@ -1,0 +1,162 @@
+#+title: Release Notes for Sprint 43
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 44.
+
+The *Mission Statement* for this sprint is to tidy-up the =cpp= model,
+and by implication, the =cpp_formatters= model. We want to end up with
+a small number of top-level classes providing what each formatter
+needs, and modeling much of the meta-data as first class types. We
+also want to make use of all the services provided by the =formatters=
+model.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-02-04 Tue 08:18]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-02-04 Tue 08:04]--[2014-02-04 Tue 08:25] =>  0:21
+
+Updates to release notes and backlog.
+
+*** Update the manual                                                 :story:
+
+Use build downtime to update the manual.
+
+*** Finish the blog post on dogen's development methodology           :story:
+
+We should do a write up of how we develop dogen.
+
+*** Create a "waterfall" plan of the work ahead                       :story:
+
+One interesting idea has occurred to me: why not combine agile with
+waterfall? Well, agile with Gantt to be precise. Whilst we know that
+agile deliberately avoids any kind of long term prediction, we also
+have a need to know how far we are from an "end-state" and what steps
+are still missing to get there. It is therefore useful to have a Gantt
+chart which is an extrapolation of the current state and is there just
+to give you a vague idea of the road ahead. It is the blue skies view
+of the world.
+
+The key point is, if we are to have something demoable by next FOSDEM
+we need some idea of what features are coming in when to ensure we
+have enough of the key stories done by next February.
+
+*** Refactor types header into new style file formatter               :story:
+
+Make the main types header formatters look like the =om= types formatter.
+
+**** Remove the parents dependency in transformer       :task:
+
+At present the C++ to SML transformer requires both the parent and
+original parent to have been processed in order to process a type. In
+reality this is not required as all the information has already been
+made available by the tagger or the relationship container. We need to
+consume this data instead of relying on object look-ups.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Use tags for class properties in transformer                      :task:
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** Add support to upload packages into GDrive                        :story:
+
+We need to upload the packages created by the build to a public Google
+Drive (GDrive) location.
+
+- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
+- See [[https://developers.google.com/drive/quickstart-ruby][this article]].
+- [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][Create folders]] to represent the different types of uploads:
+  =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
+  and tag as this would require no complex logic: if tag create new
+  folder, if latest, delete then create.
+
+*** Remove the source file concept and move useful properties to entity :story:
+
+In reality, the whole notion of =source_file= is flawed. Formatters
+drive the existence of source files; only they know things such as:
+
+- file name
+- header guards
+- formatter specific includes
+
+The entity base class (soon to be renamed) should own the remaining
+state:
+
+- annotation
+- includes
+
+In addition it also needs a copy of the meta-data from SML.
+
+The formatter needs a few changes:
+
+- a method to determine if it is enabled or not;
+- it must receive the paths to the include and source directories on
+  construction;
+- its format method should be based on a concrete entity.
+
+Coupled with a static factory, this means we now do not need to know
+what formatters there are in the system; all we need is a container to
+store formatters according to the C++ type they format. They register
+themselves into that container (or at least some kind of static
+factory method).
+
+*** Make use of the indenting stream in =cpp_formatters=              :story:
+
+Replace indenter with the new indenting stream.
+
+*** Make use of the boilerplate formatter in =cpp_formatters=         :story:
+
+Update all file formatters to use the boilerplate formatter.
+
+Consider creating a simple workflow in =formatters= that gets used by
+the cpp_formatters workflow (or passed in). The job of this workflow
+is to setup infrastructure common to all formatters such as loading
+licences, modelines, etc.
+
+*** Update =cpp= model with properties from tags                      :story:
+
+Read properties from the meta-data and represent them inside of the
+=cpp= model.
+
+*** Update comments in C++ model                                      :story:
+
+We have a very large blurb in this model that is rather old, and
+reflects a legacy understanding of the role of the C++ model.
+
+*** Add comments in =formatters= model                                :story:
+
+We haven't got any documentation at all in the new formatters
+morel. We need a small blurb about the language neutral formatting
+support the model is supposed to provide.
+
+** Deprecated Development Stories
