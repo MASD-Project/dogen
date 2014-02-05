@@ -83,6 +83,16 @@ store formatters according to the C++ type they format. They register
 themselves into that container (or at least some kind of static
 factory method).
 
+*** IMPLEMENTATION When on clang 3.4 enable code coverage flags       :story:
+    CLOCK: [2014-02-05 Wed 07:51]--[2014-02-05 Wed 08:14] =>  0:23
+
+We implemented the flags as per this post:
+
+[[http://clang-developers.42468.n3.nabble.com/Code-coverage-on-clang-td4033066.html][Code coverage on clang]]
+
+However we need to wait for a version of clang that supports them.
+Code is commented out in =projects/CMakeLists.txt=.
+
 *** Update the manual                                                 :story:
 
 Use build downtime to update the manual.
