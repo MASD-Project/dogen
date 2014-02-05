@@ -17,21 +17,26 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-04 Tue 18:30]
+Clock summary at [2014-02-05 Wed 08:42]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:52* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:52 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:21 |
-| COMPLETED Create a road map for the work ahead    |        |      | 0:31 |
+| Headline                                                                          | Time   |      |      |
+|-----------------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                                      | *1:56* |      |      |
+|-----------------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                                   |        | 1:56 |      |
+| COMPLETED Create a road map for the work ahead                                    |        |      | 0:31 |
+| IMPLEMENTATION Release notes and backlog grooming                                 |        |      | 0:47 |
+| IMPLEMENTATION Create a new type to model the information passed in to formatters |        |      | 0:15 |
+| IMPLEMENTATION When on clang 3.4 enable code coverage flags                       |        |      | 0:23 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
-    CLOCK: [2014-02-04 Tue 08:04]--[2014-02-04 Tue 08:25] =>  0:21
+*** Update the manual                                                 :story:
 
-Updates to release notes and backlog.
+Use build downtime to update the manual.
+
+*** Finish the blog post on dogen's development methodology           :story:
+
+We should do a write up of how we develop dogen.
 
 *** COMPLETED Create a road map for the work ahead                    :story:
     CLOSED: [2014-02-04 Tue 18:29]
@@ -51,7 +56,15 @@ The key point is, if we are to have something demoable by next FOSDEM
 we need some idea of what features are coming in when to ensure we
 have enough of the key stories done by next February.
 
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:42] =>  0:17
+    CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:34] =>  0:09
+    CLOCK: [2014-02-04 Tue 08:04]--[2014-02-04 Tue 08:25] =>  0:21
+
+Updates to release notes and backlog.
+
 *** IMPLEMENTATION Create a new type to model the information passed in to formatters :story:
+    CLOCK: [2014-02-05 Wed 08:17]--[2014-02-05 Wed 08:23] =>  0:06
     CLOCK: [2014-02-04 Tue 18:29]--[2014-02-04 Tue 18:38] =>  0:09
 
 In reality, the whole notion of =source_file= is flawed. Formatters
@@ -93,13 +106,28 @@ We implemented the flags as per this post:
 However we need to wait for a version of clang that supports them.
 Code is commented out in =projects/CMakeLists.txt=.
 
-*** Update the manual                                                 :story:
+*** Remove =content_descriptor=                                       :story:
 
-Use build downtime to update the manual.
+We need a way to drive the formatter generation from the formatter
+itself rather than from the transformation process. The first step to
+get there is to remove content descriptors.
 
-*** Finish the blog post on dogen's development methodology           :story:
+*** Update formatters to generate formatter-specific information      :story:
 
-We should do a write up of how we develop dogen.
+Formatters need to figure out the following by themselves:
+
+- file name
+- header guards
+- formatter specific includes
+- includes
+
+We need to update all formatters to do this. Finally we need to remove
+these properties from =source_file=.
+
+*** Add concept properties to entity                                  :story:
+
+We don't really need concepts in the C++ model - move these properties
+directly to entity. We should also add annotation to entity.
 
 *** Refactor types header into new style file formatter               :story:
 
