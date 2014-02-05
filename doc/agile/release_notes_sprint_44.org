@@ -17,17 +17,18 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-05 Wed 08:42]
+Clock summary at [2014-02-05 Wed 18:30]
 
 | Headline                                                                          | Time   |      |      |
 |-----------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                      | *1:56* |      |      |
+| *Total time*                                                                      | *2:29* |      |      |
 |-----------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                                   |        | 1:56 |      |
+| Development Stories Implemented                                                   |        | 2:29 |      |
 | COMPLETED Create a road map for the work ahead                                    |        |      | 0:31 |
-| IMPLEMENTATION Release notes and backlog grooming                                 |        |      | 0:47 |
+| IMPLEMENTATION Release notes and backlog grooming                                 |        |      | 0:50 |
 | IMPLEMENTATION Create a new type to model the information passed in to formatters |        |      | 0:15 |
 | IMPLEMENTATION When on clang 3.4 enable code coverage flags                       |        |      | 0:23 |
+| IMPLEMENTATION Add concept properties to entity                                   |        |      | 0:30 |
 #+end:
 
 *** Update the manual                                                 :story:
@@ -57,6 +58,7 @@ we need some idea of what features are coming in when to ensure we
 have enough of the key stories done by next February.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-02-05 Wed 17:55]--[2014-02-05 Wed 17:58] =>  0:03
     CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:42] =>  0:17
     CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:34] =>  0:09
     CLOCK: [2014-02-04 Tue 08:04]--[2014-02-04 Tue 08:25] =>  0:21
@@ -124,7 +126,17 @@ Formatters need to figure out the following by themselves:
 We need to update all formatters to do this. Finally we need to remove
 these properties from =source_file=.
 
-*** Add concept properties to entity                                  :story:
+*** IMPLEMENTATION Add concept properties to entity                   :story:
+    CLOCK: [2014-02-05 Wed 18:13]--[2014-02-05 Wed 18:30] =>  0:17
+    CLOCK: [2014-02-05 Wed 18:00]--[2014-02-05 Wed 18:13] =>  0:13
+
+*New understanding*:
+
+- refactor concepts a bit as we use them in enumerator as well.
+- create a concept for namespaces
+- add annotation
+
+*Old understanding*:
 
 We don't really need concepts in the C++ model - move these properties
 directly to entity. We should also add annotation to entity.

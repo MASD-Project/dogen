@@ -550,25 +550,25 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="13.9167,98"/>
+        <dia:point val="28,101"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.8667,97.95;39.4917,116.05"/>
+        <dia:rectangle val="27.95,100.95;53.575,117.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13.9167,98"/>
+        <dia:point val="28,101"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.000000000000004"/>
+        <dia:real val="16.400000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a C++ class.#</dia:string>
@@ -652,29 +652,6 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of all namespaces containing the class.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#properties#</dia:string>
@@ -1312,25 +1289,25 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="60.9167,98"/>
+        <dia:point val="72,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.8667,97.95;76.8667,103.25"/>
+        <dia:rectangle val="71.95,86.95;87.95,90.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="60.9167,98"/>
+        <dia:point val="72,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a C++ enum.#</dia:string>
@@ -1416,29 +1393,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Namespaces containing the type.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#enumerators#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -1492,13 +1446,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="77,114"/>
+        <dia:point val="68,101"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.95,113.95;87.56,117.65"/>
+        <dia:rectangle val="67.95,100.95;78.56,104.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="77,114"/>
+        <dia:point val="68,101"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -1662,19 +1616,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="68.8667,103.2"/>
+        <dia:point val="79.95,90.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.1167,102.45;82.455,114.8"/>
+        <dia:rectangle val="73.205,89.85;80.7,101.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="68.8667,103.2"/>
-        <dia:point val="68.8667,108"/>
-        <dia:point val="82.255,108"/>
-        <dia:point val="82.255,114"/>
+        <dia:point val="79.95,90.6"/>
+        <dia:point val="79.95,97"/>
+        <dia:point val="73.255,97"/>
+        <dia:point val="73.255,101"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1697,25 +1651,25 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O9">
       <dia:attribute name="obj_pos">
-        <dia:point val="86.9167,98"/>
+        <dia:point val="90,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.8667,97.95;100.942,101.65"/>
+        <dia:rectangle val="89.95,94.95;97.1175,97.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="86.9167,98"/>
+        <dia:point val="90,95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.975"/>
+        <dia:real val="7.0674999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="2.1999999999999997"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#exception_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a C++ exception.#</dia:string>
@@ -1798,31 +1752,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of namespaces, in order, to which the exception belongs to.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
+      <dia:attribute name="attributes"/>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -2098,7 +2028,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:string>#nested_type_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable, Documentable#</dia:string>
+        <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a declaration of a C++ type with nesting.#</dia:string>
@@ -3072,17 +3002,17 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="13.9167,116"/>
+        <dia:point val="28,117.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.1667,115.25;19.8792,128.75"/>
+        <dia:rectangle val="19.6292,116.65;28.75,128.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="13.9167,116"/>
-        <dia:point val="13.9167,122"/>
+        <dia:point val="28,117.4"/>
+        <dia:point val="28,122"/>
         <dia:point val="19.6792,122"/>
         <dia:point val="19.6792,127.95"/>
       </dia:attribute>
@@ -3252,7 +3182,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="99.9167,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.8667,86.95;117.022,91.45"/>
+        <dia:rectangle val="99.8667,86.95;117.022,90.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="99.9167,87"/>
@@ -3261,7 +3191,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#registrar_info#</dia:string>
@@ -3351,29 +3281,6 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Lists of namespaces the type belongs to.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#leaves#</dia:string>
@@ -3655,19 +3562,19 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="47.9167,87"/>
+        <dia:point val="26,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.8667,86.95;61.9417,89.85"/>
+        <dia:rectangle val="25.95,86.95;33.7825,89.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47.9167,87"/>
+        <dia:point val="26,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.975"/>
+        <dia:real val="7.7324999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.7999999999999998"/>
+        <dia:real val="2.1999999999999997"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#namespace_info#</dia:string>
@@ -3756,31 +3663,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of all namespaces. Last namespace is the target.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
+      <dia:attribute name="attributes"/>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -3789,25 +3672,25 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="74.9167,87"/>
+        <dia:point val="49,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.8667,86.95;88.9417,91.45"/>
+        <dia:rectangle val="48.95,86.95;61.1,89.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="74.9167,87"/>
+        <dia:point val="49,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.975"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visitor_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable,#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a C++ class modeling the visitor pattern.#</dia:string>
@@ -3903,29 +3786,6 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Types for which an accept method will be generated.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Namespaces to which the type belongs to.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4986,17 +4846,17 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="39.4417,116"/>
+        <dia:point val="53.525,117.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.6917,115.25;62.4467,128.8"/>
+        <dia:rectangle val="52.775,116.65;62.4467,128.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.4417,116"/>
-        <dia:point val="39.4417,122"/>
+        <dia:point val="53.525,117.4"/>
+        <dia:point val="53.525,122"/>
         <dia:point val="62.2467,122"/>
         <dia:point val="62.2467,128"/>
       </dia:attribute>
@@ -5774,13 +5634,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="96,72"/>
+        <dia:point val="40,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="95.95,71.95;106.945,75.65"/>
+        <dia:rectangle val="39.95,57.95;50.945,61.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="96,72"/>
+        <dia:point val="40,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.895"/>
@@ -5915,25 +5775,25 @@ for Java, etc.#</dia:string>
         <dia:point val="65,72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.95,71.95;75.945,75.05"/>
+        <dia:rectangle val="64.95,71.95;79.025,75.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="65,72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.895"/>
+        <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#entity#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#visitable, Documentable#</dia:string>
+        <dia:string>#visitable, Object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Anything which can be in a scope.
+        <dia:string>#Top-level entity in the model.
 
 
 Maps to the Member class in the Columbus schema, but in order to avoid
@@ -6023,7 +5883,31 @@ template, or namespace.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#annotation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#formatters::annotation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Generic information about this entity such as licence, etc.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -6032,13 +5916,13 @@ template, or namespace.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="84,72"/>
+        <dia:point val="15,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.95,71.95;91.48,75.65"/>
+        <dia:rectangle val="14.95,57.95;22.48,61.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="84,72"/>
+        <dia:point val="15,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.4299999999999997"/>
@@ -6168,19 +6052,19 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O37">
       <dia:attribute name="obj_pos">
-        <dia:point val="70.4475,75"/>
+        <dia:point val="71.9875,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.8542,74.95;71.2975,86.9996"/>
+        <dia:rectangle val="29.8163,75.55;72.8375,86.9999"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="70.4475,75"/>
-        <dia:point val="70.4475,82"/>
-        <dia:point val="54.9042,82"/>
-        <dia:point val="54.9042,86.9496"/>
+        <dia:point val="71.9875,75.6"/>
+        <dia:point val="71.9875,82"/>
+        <dia:point val="29.8663,82"/>
+        <dia:point val="29.8663,86.9499"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6204,24 +6088,24 @@ Must be valid according to the rules for C++ names.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O35" connection="6"/>
-        <dia:connection handle="1" to="O19" connection="10"/>
+        <dia:connection handle="1" to="O19" connection="8"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O38">
       <dia:attribute name="obj_pos">
-        <dia:point val="70.4475,75"/>
+        <dia:point val="71.9875,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.5975,74.95;81.9542,87.05"/>
+        <dia:rectangle val="54.975,75.55;72.8375,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="70.4475,75"/>
-        <dia:point val="70.4475,82"/>
-        <dia:point val="81.9042,82"/>
-        <dia:point val="81.9042,87"/>
+        <dia:point val="71.9875,75.6"/>
+        <dia:point val="71.9875,82"/>
+        <dia:point val="55.025,82"/>
+        <dia:point val="55.025,87"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6289,7 +6173,7 @@ Must be valid according to the rules for C++ names.#</dia:string>
         <dia:point val="63.7575,54.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.0075,53.85;70.6475,72.8"/>
+        <dia:rectangle val="63.0075,53.85;72.1875,72.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6297,8 +6181,8 @@ Must be valid according to the rules for C++ names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="63.7575,54.6"/>
         <dia:point val="63.7575,66"/>
-        <dia:point val="70.4475,66"/>
-        <dia:point val="70.4475,72"/>
+        <dia:point val="71.9875,66"/>
+        <dia:point val="71.9875,72"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6321,19 +6205,19 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="70.4475,75"/>
+        <dia:point val="71.9875,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.8167,74.95;71.2975,98.05"/>
+        <dia:rectangle val="71.1375,75.55;80,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="70.4475,75"/>
-        <dia:point val="70.4475,82"/>
-        <dia:point val="68.8667,82"/>
-        <dia:point val="68.8667,98"/>
+        <dia:point val="71.9875,75.6"/>
+        <dia:point val="71.9875,82"/>
+        <dia:point val="79.95,82"/>
+        <dia:point val="79.95,87"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6362,17 +6246,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="70.4475,75"/>
+        <dia:point val="71.9875,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.5975,74.95;108.494,87.05"/>
+        <dia:rectangle val="71.1375,75.55;108.494,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="70.4475,75"/>
-        <dia:point val="70.4475,82"/>
+        <dia:point val="71.9875,75.6"/>
+        <dia:point val="71.9875,82"/>
         <dia:point val="108.444,82"/>
         <dia:point val="108.444,87"/>
       </dia:attribute>
@@ -6403,19 +6287,19 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="70.4475,75"/>
+        <dia:point val="71.9875,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.5975,74.95;93.9542,98.05"/>
+        <dia:rectangle val="71.1375,75.55;93.5837,95.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="70.4475,75"/>
-        <dia:point val="70.4475,82"/>
-        <dia:point val="93.9042,82"/>
-        <dia:point val="93.9042,98"/>
+        <dia:point val="71.9875,75.6"/>
+        <dia:point val="71.9875,82"/>
+        <dia:point val="93.5337,82"/>
+        <dia:point val="93.5337,95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6444,19 +6328,19 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="70.4475,75"/>
+        <dia:point val="71.9875,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.6292,74.95;71.2975,97.9996"/>
+        <dia:rectangle val="40.7125,75.55;72.8375,101.001"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="70.4475,75"/>
-        <dia:point val="70.4475,82"/>
-        <dia:point val="26.6792,82"/>
-        <dia:point val="26.6792,97.9496"/>
+        <dia:point val="71.9875,75.6"/>
+        <dia:point val="71.9875,82"/>
+        <dia:point val="40.7625,82"/>
+        <dia:point val="40.7625,100.951"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6480,7 +6364,7 @@ Must be valid according to the rules for C++ names.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O35" connection="6"/>
-        <dia:connection handle="1" to="O4" connection="46"/>
+        <dia:connection handle="1" to="O4" connection="44"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O44">
@@ -6894,6 +6778,222 @@ seems like the least bad approach.
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Generalization" version="1" id="O48">
+      <dia:attribute name="obj_pos">
+        <dia:point val="18.715,61.6"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="17.865,61.55;25.05,72.05"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="18.715,61.6"/>
+        <dia:point val="18.715,67"/>
+        <dia:point val="25,67"/>
+        <dia:point val="25,72"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O36" connection="6"/>
+        <dia:connection handle="1" to="O50" connection="0"/>
+      </dia:connections>
+    </dia:object>
+    <dia:object type="UML - Generalization" version="1" id="O49">
+      <dia:attribute name="obj_pos">
+        <dia:point val="45.4475,61.6"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="38.925,61.55;46.2975,72.05"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="45.4475,61.6"/>
+        <dia:point val="45.4475,67"/>
+        <dia:point val="38.975,67"/>
+        <dia:point val="38.975,72"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O34" connection="6"/>
+        <dia:connection handle="1" to="O50" connection="2"/>
+      </dia:connections>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O50">
+      <dia:attribute name="obj_pos">
+        <dia:point val="25,72"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="24.95,71.95;39.025,75.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="25,72"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="13.975"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#Object#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#concept#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Represents a meta-object.#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#ffffff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#namespaces#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#List of all namespaces containing the type. Last namespace is the target.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>
