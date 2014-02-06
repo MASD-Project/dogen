@@ -8,6 +8,26 @@
 
 Stories that we intend to look at, at some point.
 
+*** Allow cross model inheritance                                     :story:
+
+At present we can only inherit within the same model. This is a
+limitation of how to express inheritance in a Dia diagram - either the
+parent is part of that diagram or it is not, and if it's not we have
+no way of connecting the generalisation relationship to it.
+
+Having said that, it would actually be quite simple to allow cross
+model inheritance by using meta-data:
+
+- create a tag that forces a type to behave like a parent, regardless
+  of whether there are any children or not;
+- create a tag that contains a qualified name of a parent, regardless
+  of whether it's in this model or not;
+- change the transformer to convert these tags into SML inheritance
+  relationships;
+
+There may be some fallout in places where we assume that the
+descendents are all in this model such as serialisation, visitors.
+
 *** Consider Creating a phoney target for header validation           :story:
     CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
 
