@@ -101,6 +101,7 @@ factory method).
 
 *** IMPLEMENTATION When on clang 3.4 enable code coverage flags       :story:
     CLOCK: [2014-02-05 Wed 07:51]--[2014-02-05 Wed 08:14] =>  0:23
+    CLOCK: [2014-02-04 Tue 22:00]--[2014-02-04 Tue 22:30] =>  0:30
 
 We implemented the flags as per this post:
 
