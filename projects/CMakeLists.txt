@@ -96,6 +96,11 @@ if(WITH_PROFILING)
         # 407 for gcc 4.7 compatibility of the gcov format.
         set(profiling_flags
             "${profiling_flags} -Xclang -coverage-version='407*'")
+
+        # profiling flags are not used during compilation so disable
+        # that warning. bit of a hack, for now.
+        set(profiling_flags
+            "${profiling_flags} -Wno-unused-arguments")
     endif()
 endif()
 
