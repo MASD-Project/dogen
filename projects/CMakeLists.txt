@@ -89,7 +89,9 @@ if(WITH_PROFILING)
     set(profiling_flags "-fprofile-arcs -ftest-coverage")
 
     if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+        set(profiling_flags "${profiling_flags} --coverage")
         set(profiling_flags "${profiling_flags} -Xclang -coverage-cfg-checksum")
+
         set(profiling_flags
             "${profiling_flags} -Xclang -coverage-no-function-names-in-data")
 
