@@ -27,8 +27,6 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include <list>
-#include <string>
 #include "dogen/cpp/serialization/exception_info_fwd_ser.hpp"
 #include "dogen/cpp/types/entity.hpp"
 
@@ -48,8 +46,8 @@ public:
 
 public:
     exception_info(
-        const std::string& documentation,
         const std::string& name,
+        const std::string& documentation,
         const std::list<std::string>& namespaces);
 
 private:
@@ -80,29 +78,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief Name of the entity.
-     *
-     * Must be valid according to the rules for C++ names.
-     */
-    /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief List of namespaces, in order, to which the exception belongs to.
-     */
-    /**@{*/
-    const std::list<std::string>& namespaces() const;
-    std::list<std::string>& namespaces();
-    void namespaces(const std::list<std::string>& v);
-    void namespaces(const std::list<std::string>&& v);
-    /**@}*/
-
-public:
     bool operator==(const exception_info& rhs) const;
     bool operator!=(const exception_info& rhs) const {
         return !this->operator==(rhs);
@@ -115,9 +90,6 @@ public:
     void swap(exception_info& other) noexcept;
     exception_info& operator=(exception_info other);
 
-private:
-    std::string name_;
-    std::list<std::string> namespaces_;
 };
 
 } }

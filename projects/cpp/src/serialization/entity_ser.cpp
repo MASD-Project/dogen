@@ -26,6 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/class_info_ser.hpp"
@@ -48,14 +49,18 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::entity& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("namespaces", v.namespaces_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::entity& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("namespaces", v.namespaces_);
 }
 
 } }

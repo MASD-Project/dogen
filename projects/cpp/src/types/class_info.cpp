@@ -28,28 +28,6 @@
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::property_info>& v) {
@@ -71,6 +49,28 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::par
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -122,8 +122,8 @@ class_info::class_info()
       generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
 
 class_info::class_info(
-    const std::string& documentation,
     const std::string& name,
+    const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::list<dogen::cpp::property_info>& properties,
     const std::list<dogen::cpp::property_info>& all_properties,
@@ -143,9 +143,9 @@ class_info::class_info(
     const bool is_original_parent_visitable,
     const dogen::cpp::class_types& class_type,
     const dogen::sml::generation_types& generation_type)
-    : dogen::cpp::entity(documentation),
-      name_(name),
-      namespaces_(namespaces),
+    : dogen::cpp::entity(name,
+      documentation,
+      namespaces),
       properties_(properties),
       all_properties_(all_properties),
       has_primitive_properties_(has_primitive_properties),
@@ -177,8 +177,6 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     entity::to_stream(s);
     s << ", "
-      << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
-      << "\"namespaces\": " << namespaces_ << ", "
       << "\"properties\": " << properties_ << ", "
       << "\"all_properties\": " << all_properties_ << ", "
       << "\"has_primitive_properties\": " << has_primitive_properties_ << ", "
@@ -204,8 +202,6 @@ void class_info::swap(class_info& other) noexcept {
     entity::swap(other);
 
     using std::swap;
-    swap(name_, other.name_);
-    swap(namespaces_, other.namespaces_);
     swap(properties_, other.properties_);
     swap(all_properties_, other.all_properties_);
     swap(has_primitive_properties_, other.has_primitive_properties_);
@@ -234,8 +230,6 @@ bool class_info::equals(const dogen::cpp::entity& other) const {
 
 bool class_info::operator==(const class_info& rhs) const {
     return entity::compare(rhs) &&
-        name_ == rhs.name_ &&
-        namespaces_ == rhs.namespaces_ &&
         properties_ == rhs.properties_ &&
         all_properties_ == rhs.all_properties_ &&
         has_primitive_properties_ == rhs.has_primitive_properties_ &&
@@ -260,38 +254,6 @@ class_info& class_info::operator=(class_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& class_info::name() const {
-    return name_;
-}
-
-std::string& class_info::name() {
-    return name_;
-}
-
-void class_info::name(const std::string& v) {
-    name_ = v;
-}
-
-void class_info::name(const std::string&& v) {
-    name_ = std::move(v);
-}
-
-const std::list<std::string>& class_info::namespaces() const {
-    return namespaces_;
-}
-
-std::list<std::string>& class_info::namespaces() {
-    return namespaces_;
-}
-
-void class_info::namespaces(const std::list<std::string>& v) {
-    namespaces_ = v;
-}
-
-void class_info::namespaces(const std::list<std::string>&& v) {
-    namespaces_ = std::move(v);
 }
 
 const std::list<dogen::cpp::property_info>& class_info::properties() const {

@@ -48,10 +48,10 @@ public:
 
 public:
     visitor_info(
-        const std::string& documentation,
         const std::string& name,
-        const std::list<std::string>& types,
-        const std::list<std::string>& namespaces);
+        const std::string& documentation,
+        const std::list<std::string>& namespaces,
+        const std::list<std::string>& types);
 
 private:
     template<typename Archive>
@@ -82,18 +82,6 @@ public:
 
 public:
     /**
-     * @brief Name of the entity.
-     *
-     * Must be valid according to the rules for C++ names.
-     */
-    /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Types for which an accept method will be generated.
      */
     /**@{*/
@@ -101,16 +89,6 @@ public:
     std::list<std::string>& types();
     void types(const std::list<std::string>& v);
     void types(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief Namespaces to which the type belongs to.
-     */
-    /**@{*/
-    const std::list<std::string>& namespaces() const;
-    std::list<std::string>& namespaces();
-    void namespaces(const std::list<std::string>& v);
-    void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
 public:
@@ -127,9 +105,7 @@ public:
     visitor_info& operator=(visitor_info other);
 
 private:
-    std::string name_;
     std::list<std::string> types_;
-    std::list<std::string> namespaces_;
 };
 
 } }

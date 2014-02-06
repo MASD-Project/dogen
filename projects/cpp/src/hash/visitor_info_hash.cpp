@@ -48,10 +48,7 @@ std::size_t visitor_info_hasher::hash(const visitor_info&v) {
 
     combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
 
-    combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.types()));
-    combine(seed, hash_std_list_std_string(v.namespaces()));
-
     return seed;
 }
 

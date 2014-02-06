@@ -49,14 +49,14 @@ namespace dogen {
 namespace cpp {
 
 visitor_info::visitor_info(
-    const std::string& documentation,
     const std::string& name,
-    const std::list<std::string>& types,
-    const std::list<std::string>& namespaces)
-    : dogen::cpp::entity(documentation),
-      name_(name),
-      types_(types),
-      namespaces_(namespaces) { }
+    const std::string& documentation,
+    const std::list<std::string>& namespaces,
+    const std::list<std::string>& types)
+    : dogen::cpp::entity(name,
+      documentation,
+      namespaces),
+      types_(types) { }
 
 void visitor_info::to_stream(std::ostream& s) const {
     s << " { "
@@ -64,9 +64,7 @@ void visitor_info::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     entity::to_stream(s);
     s << ", "
-      << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
-      << "\"types\": " << types_ << ", "
-      << "\"namespaces\": " << namespaces_
+      << "\"types\": " << types_
       << " }";
 }
 
@@ -74,9 +72,7 @@ void visitor_info::swap(visitor_info& other) noexcept {
     entity::swap(other);
 
     using std::swap;
-    swap(name_, other.name_);
     swap(types_, other.types_);
-    swap(namespaces_, other.namespaces_);
 }
 
 bool visitor_info::equals(const dogen::cpp::entity& other) const {
@@ -87,31 +83,13 @@ bool visitor_info::equals(const dogen::cpp::entity& other) const {
 
 bool visitor_info::operator==(const visitor_info& rhs) const {
     return entity::compare(rhs) &&
-        name_ == rhs.name_ &&
-        types_ == rhs.types_ &&
-        namespaces_ == rhs.namespaces_;
+        types_ == rhs.types_;
 }
 
 visitor_info& visitor_info::operator=(visitor_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& visitor_info::name() const {
-    return name_;
-}
-
-std::string& visitor_info::name() {
-    return name_;
-}
-
-void visitor_info::name(const std::string& v) {
-    name_ = v;
-}
-
-void visitor_info::name(const std::string&& v) {
-    name_ = std::move(v);
 }
 
 const std::list<std::string>& visitor_info::types() const {
@@ -128,22 +106,6 @@ void visitor_info::types(const std::list<std::string>& v) {
 
 void visitor_info::types(const std::list<std::string>&& v) {
     types_ = std::move(v);
-}
-
-const std::list<std::string>& visitor_info::namespaces() const {
-    return namespaces_;
-}
-
-std::list<std::string>& visitor_info::namespaces() {
-    return namespaces_;
-}
-
-void visitor_info::namespaces(const std::list<std::string>& v) {
-    namespaces_ = v;
-}
-
-void visitor_info::namespaces(const std::list<std::string>&& v) {
-    namespaces_ = std::move(v);
 }
 
 } }

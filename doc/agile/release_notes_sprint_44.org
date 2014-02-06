@@ -59,6 +59,7 @@ we need some idea of what features are coming in when to ensure we
 have enough of the key stories done by next February.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-02-06 Thu 22:53]
     CLOCK: [2014-02-05 Wed 17:55]--[2014-02-05 Wed 17:58] =>  0:03
     CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:42] =>  0:17
     CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:34] =>  0:09
@@ -110,24 +111,6 @@ We implemented the flags as per this post:
 However we need to wait for a version of clang that supports them.
 Code is commented out in =projects/CMakeLists.txt=.
 
-*** Remove =content_descriptor=                                       :story:
-
-We need a way to drive the formatter generation from the formatter
-itself rather than from the transformation process. The first step to
-get there is to remove content descriptors.
-
-*** Update formatters to generate formatter-specific information      :story:
-
-Formatters need to figure out the following by themselves:
-
-- file name
-- header guards
-- formatter specific includes
-- includes
-
-We need to update all formatters to do this. Finally we need to remove
-these properties from =source_file=.
-
 *** IMPLEMENTATION Add concept properties to entity                   :story:
     CLOCK: [2014-02-06 Thu 07:51]--[2014-02-06 Thu 08:44] =>  0:53
     CLOCK: [2014-02-05 Wed 18:13]--[2014-02-05 Wed 18:30] =>  0:17
@@ -145,7 +128,6 @@ We don't really need concepts in the C++ model - move these properties
 directly to entity. We should also add annotation to entity.
 
 *** IMPLEMENTATION Add file formatter support to formatters model     :story:
-    CLOCK: [2014-02-06 Thu 18:08]--[2014-02-06 Thu 18:46] =>  0:38
 
 What we really need is to capture the generic requirements of all
 formatters in the formatters model, and then implement the C++ types
@@ -158,6 +140,36 @@ and formatters in terms of this. These are:
 
 All of this can be implemented by adding a few types to the
 =formatters= model.
+
+**** COMPLETED Create skeleton design                                  :task:
+     CLOSED: [2014-02-06 Thu 22:52]
+     CLOCK: [2014-02-06 Thu 21:45]--[2014-02-06 Thu 22:51] =>  1:06
+     CLOCK: [2014-02-06 Thu 18:08]--[2014-02-06 Thu 18:46] =>  0:38
+
+Add main classes to diagram and make sure they hang together to provide a
+complete solution.
+
+**** Provide basic implementation of skeleton classes                  :task:
+
+Implement new classes and add tests.
+
+*** Update formatters to generate formatter-specific information      :story:
+
+Formatters need to figure out the following by themselves:
+
+- file name
+- header guards
+- formatter specific includes
+- includes
+
+We need to update all formatters to do this. Finally we need to remove
+these properties from =source_file=.
+
+*** Remove =content_descriptor=                                       :story:
+
+We need a way to drive the formatter generation from the formatter
+itself rather than from the transformation process. The first step to
+get there is to remove content descriptors.
 
 *** Refactor types header into new style file formatter               :story:
 

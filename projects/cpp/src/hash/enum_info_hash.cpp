@@ -31,14 +31,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_list_dogen_cpp_enumerator_info(const std::list<dogen::cpp::enumerator_info>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -57,8 +49,6 @@ std::size_t enum_info_hasher::hash(const enum_info&v) {
 
     combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
 
-    combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.namespaces()));
     combine(seed, hash_std_list_dogen_cpp_enumerator_info(v.enumerators()));
     combine(seed, v.type());
 

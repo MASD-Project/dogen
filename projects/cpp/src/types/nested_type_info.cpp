@@ -43,7 +43,6 @@ nested_type_info::nested_type_info()
 
 nested_type_info::nested_type_info(
     const std::string& name,
-    const std::string& documentation,
     const std::string& identifiable_name,
     const std::string& complete_name,
     const std::string& complete_identifiable_name,
@@ -66,7 +65,6 @@ nested_type_info::nested_type_info(
     const bool is_pair,
     const bool is_ptree)
     : name_(name),
-      documentation_(documentation),
       identifiable_name_(identifiable_name),
       complete_name_(complete_name),
       complete_identifiable_name_(complete_identifiable_name),
@@ -92,7 +90,6 @@ nested_type_info::nested_type_info(
 void nested_type_info::swap(nested_type_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(documentation_, other.documentation_);
     swap(identifiable_name_, other.identifiable_name_);
     swap(complete_name_, other.complete_name_);
     swap(complete_identifiable_name_, other.complete_identifiable_name_);
@@ -118,7 +115,6 @@ void nested_type_info::swap(nested_type_info& other) noexcept {
 
 bool nested_type_info::operator==(const nested_type_info& rhs) const {
     return name_ == rhs.name_ &&
-        documentation_ == rhs.documentation_ &&
         identifiable_name_ == rhs.identifiable_name_ &&
         complete_name_ == rhs.complete_name_ &&
         complete_identifiable_name_ == rhs.complete_identifiable_name_ &&
@@ -162,22 +158,6 @@ void nested_type_info::name(const std::string& v) {
 
 void nested_type_info::name(const std::string&& v) {
     name_ = std::move(v);
-}
-
-const std::string& nested_type_info::documentation() const {
-    return documentation_;
-}
-
-std::string& nested_type_info::documentation() {
-    return documentation_;
-}
-
-void nested_type_info::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void nested_type_info::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const std::string& nested_type_info::identifiable_name() const {

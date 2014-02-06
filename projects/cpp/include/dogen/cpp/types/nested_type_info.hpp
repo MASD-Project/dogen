@@ -49,7 +49,6 @@ public:
 public:
     nested_type_info(
         const std::string& name,
-        const std::string& documentation,
         const std::string& identifiable_name,
         const std::string& complete_name,
         const std::string& complete_identifiable_name,
@@ -90,20 +89,6 @@ public:
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
-     * for Java, etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
     /**@}*/
 
     /**
@@ -298,7 +283,6 @@ public:
 
 private:
     std::string name_;
-    std::string documentation_;
     std::string identifiable_name_;
     std::string complete_name_;
     std::string complete_identifiable_name_;

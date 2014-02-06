@@ -48,6 +48,7 @@ public:
 
 public:
     registrar_info(
+        const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
         const std::list<std::string>& leaves,
@@ -82,16 +83,6 @@ public:
 
 public:
     /**
-     * @brief Lists of namespaces the type belongs to.
-     */
-    /**@{*/
-    const std::list<std::string>& namespaces() const;
-    std::list<std::string>& namespaces();
-    void namespaces(const std::list<std::string>& v);
-    void namespaces(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief List of all concrete classes which are part of an inheritance tree.
      */
     /**@{*/
@@ -125,7 +116,6 @@ public:
     registrar_info& operator=(registrar_info other);
 
 private:
-    std::list<std::string> namespaces_;
     std::list<std::string> leaves_;
     std::list<std::string> model_dependencies_;
 };

@@ -27,8 +27,6 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include <list>
-#include <string>
 #include "dogen/cpp/serialization/namespace_info_fwd_ser.hpp"
 #include "dogen/cpp/types/entity.hpp"
 
@@ -48,6 +46,7 @@ public:
 
 public:
     namespace_info(
+        const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces);
 
@@ -79,17 +78,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief List of all namespaces. Last namespace is the target.
-     */
-    /**@{*/
-    const std::list<std::string>& namespaces() const;
-    std::list<std::string>& namespaces();
-    void namespaces(const std::list<std::string>& v);
-    void namespaces(const std::list<std::string>&& v);
-    /**@}*/
-
-public:
     bool operator==(const namespace_info& rhs) const;
     bool operator!=(const namespace_info& rhs) const {
         return !this->operator==(rhs);
@@ -102,8 +90,6 @@ public:
     void swap(namespace_info& other) noexcept;
     namespace_info& operator=(namespace_info other);
 
-private:
-    std::list<std::string> namespaces_;
 };
 
 } }

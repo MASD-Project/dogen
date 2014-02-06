@@ -21,6 +21,7 @@
 #include "dogen/formatters/hash/annotation_hash.hpp"
 #include "dogen/formatters/hash/comment_styles_hash.hpp"
 #include "dogen/formatters/hash/editors_hash.hpp"
+#include "dogen/formatters/hash/entity_hash.hpp"
 #include "dogen/formatters/hash/file_hash.hpp"
 #include "dogen/formatters/hash/licence_hash.hpp"
 #include "dogen/formatters/hash/modeline_field_hash.hpp"

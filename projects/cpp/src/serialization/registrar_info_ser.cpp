@@ -46,7 +46,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("entity", base_object<dogen::cpp::entity>(v));
 
-    ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("model_dependencies", v.model_dependencies_);
 }
@@ -57,7 +56,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("entity", base_object<dogen::cpp::entity>(v));
 
-    ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("model_dependencies", v.model_dependencies_);
 }

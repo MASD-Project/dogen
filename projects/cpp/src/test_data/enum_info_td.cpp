@@ -25,20 +25,6 @@
 
 namespace {
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
-}
-
 dogen::cpp::enumerator_info
 create_dogen_cpp_enumerator_info(const unsigned int position) {
     return dogen::cpp::enumerator_info_generator::create(position);
@@ -52,6 +38,12 @@ std::list<dogen::cpp::enumerator_info> create_std_list_dogen_cpp_enumerator_info
     return r;
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
 }
 
 namespace dogen {
@@ -62,10 +54,8 @@ enum_info_generator::enum_info_generator() : position_(0) { }
 void enum_info_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::entity_generator::populate(position, v);
-    v.name(create_std_string(position + 0));
-    v.namespaces(create_std_list_std_string(position + 1));
-    v.enumerators(create_std_list_dogen_cpp_enumerator_info(position + 2));
-    v.type(create_std_string(position + 3));
+    v.enumerators(create_std_list_dogen_cpp_enumerator_info(position + 0));
+    v.type(create_std_string(position + 1));
 }
 
 enum_info_generator::result_type

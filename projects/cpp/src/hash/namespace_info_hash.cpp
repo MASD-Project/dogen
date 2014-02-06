@@ -30,14 +30,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -47,8 +39,6 @@ std::size_t namespace_info_hasher::hash(const namespace_info&v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
-
-    combine(seed, hash_std_list_std_string(v.namespaces()));
     return seed;
 }
 

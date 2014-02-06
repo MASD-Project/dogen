@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <iosfwd>
+#include <list>
 #include <string>
 #include "dogen/cpp/serialization/entity_fwd_ser.hpp"
 #include "dogen/cpp/types/entity_visitor.hpp"
@@ -35,7 +36,7 @@ namespace dogen {
 namespace cpp {
 
 /**
- * @brief Anything which can be in a scope.
+ * @brief Top-level entity in the model.
  *
  *
  * Maps to the Member class in the Columbus schema, but in order to avoid
@@ -56,7 +57,10 @@ public:
     virtual ~entity() noexcept = 0;
 
 public:
-    explicit entity(const std::string& documentation);
+    entity(
+        const std::string& name,
+        const std::string& documentation,
+        const std::list<std::string>& namespaces);
 
 private:
     template<typename Archive>
@@ -76,6 +80,18 @@ public:
 
 public:
     /**
+     * @brief Name of the entity.
+     *
+     * Must be valid according to the rules for C++ names.
+     */
+    /**@{*/
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
+    /**@}*/
+
+    /**
      * @brief Code comments.
      *
      * These are expected to follow the grammar of the comment processing tools
@@ -89,6 +105,16 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief List of all namespaces containing the type. Last namespace is the target.
+     */
+    /**@{*/
+    const std::list<std::string>& namespaces() const;
+    std::list<std::string>& namespaces();
+    void namespaces(const std::list<std::string>& v);
+    void namespaces(const std::list<std::string>&& v);
+    /**@}*/
+
 protected:
     bool compare(const entity& rhs) const;
 public:
@@ -98,7 +124,9 @@ protected:
     void swap(entity& other) noexcept;
 
 private:
+    std::string name_;
     std::string documentation_;
+    std::list<std::string> namespaces_;
 };
 
 inline entity::~entity() noexcept { }

@@ -30,26 +30,67 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 
-entity::entity(const std::string& documentation)
-    : documentation_(documentation) { }
+entity::entity(
+    const std::string& name,
+    const std::string& documentation,
+    const std::list<std::string>& namespaces)
+    : name_(name),
+      documentation_(documentation),
+      namespaces_(namespaces) { }
 
 void entity::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::entity\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\""
+      << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
+      << "\"namespaces\": " << namespaces_
       << " }";
 }
 
 void entity::swap(entity& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
     swap(documentation_, other.documentation_);
+    swap(namespaces_, other.namespaces_);
 }
 
 bool entity::compare(const entity& rhs) const {
-    return documentation_ == rhs.documentation_;
+    return name_ == rhs.name_ &&
+        documentation_ == rhs.documentation_ &&
+        namespaces_ == rhs.namespaces_;
+}
+
+const std::string& entity::name() const {
+    return name_;
+}
+
+std::string& entity::name() {
+    return name_;
+}
+
+void entity::name(const std::string& v) {
+    name_ = v;
+}
+
+void entity::name(const std::string&& v) {
+    name_ = std::move(v);
 }
 
 const std::string& entity::documentation() const {
@@ -66,6 +107,22 @@ void entity::documentation(const std::string& v) {
 
 void entity::documentation(const std::string&& v) {
     documentation_ = std::move(v);
+}
+
+const std::list<std::string>& entity::namespaces() const {
+    return namespaces_;
+}
+
+std::list<std::string>& entity::namespaces() {
+    return namespaces_;
+}
+
+void entity::namespaces(const std::list<std::string>& v) {
+    namespaces_ = v;
+}
+
+void entity::namespaces(const std::list<std::string>&& v) {
+    namespaces_ = std::move(v);
 }
 
 } }

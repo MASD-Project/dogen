@@ -21,6 +21,7 @@
 #include "dogen/formatters/io/annotation_io.hpp"
 #include "dogen/formatters/io/comment_styles_io.hpp"
 #include "dogen/formatters/io/editors_io.hpp"
+#include "dogen/formatters/io/entity_io.hpp"
 #include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/io/licence_io.hpp"
 #include "dogen/formatters/io/modeline_field_io.hpp"

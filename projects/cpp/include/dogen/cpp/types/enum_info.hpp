@@ -49,8 +49,8 @@ public:
 
 public:
     enum_info(
-        const std::string& documentation,
         const std::string& name,
+        const std::string& documentation,
         const std::list<std::string>& namespaces,
         const std::list<dogen::cpp::enumerator_info>& enumerators,
         const std::string& type);
@@ -83,28 +83,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief Name of the entity.
-     *
-     * Must be valid according to the rules for C++ names.
-     */
-    /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Namespaces containing the type.
-     */
-    /**@{*/
-    const std::list<std::string>& namespaces() const;
-    std::list<std::string>& namespaces();
-    void namespaces(const std::list<std::string>& v);
-    void namespaces(const std::list<std::string>&& v);
-    /**@}*/
-
     /**
      * @brief Valid values for the enumeration.
      */
@@ -139,8 +117,6 @@ public:
     enum_info& operator=(enum_info other);
 
 private:
-    std::string name_;
-    std::list<std::string> namespaces_;
     std::list<dogen::cpp::enumerator_info> enumerators_;
     std::string type_;
 };

@@ -18,27 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 
-namespace {
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
-}
-
-}
 
 namespace dogen {
 namespace cpp {
@@ -48,7 +31,6 @@ namespace_info_generator::namespace_info_generator() : position_(0) { }
 void namespace_info_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::entity_generator::populate(position, v);
-    v.namespaces(create_std_list_std_string(position + 0));
 }
 
 namespace_info_generator::result_type

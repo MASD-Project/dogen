@@ -48,9 +48,8 @@ registrar_info_generator::registrar_info_generator() : position_(0) { }
 void registrar_info_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::entity_generator::populate(position, v);
-    v.namespaces(create_std_list_std_string(position + 0));
-    v.leaves(create_std_list_std_string(position + 1));
-    v.model_dependencies(create_std_list_std_string(position + 2));
+    v.leaves(create_std_list_std_string(position + 0));
+    v.model_dependencies(create_std_list_std_string(position + 1));
 }
 
 registrar_info_generator::result_type

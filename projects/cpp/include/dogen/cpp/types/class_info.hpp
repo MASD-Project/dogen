@@ -55,8 +55,8 @@ public:
 
 public:
     class_info(
-        const std::string& documentation,
         const std::string& name,
+        const std::string& documentation,
         const std::list<std::string>& namespaces,
         const std::list<dogen::cpp::property_info>& properties,
         const std::list<dogen::cpp::property_info>& all_properties,
@@ -105,28 +105,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief Name of the entity.
-     *
-     * Must be valid according to the rules for C++ names.
-     */
-    /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief List of all namespaces containing the class.
-     */
-    /**@{*/
-    const std::list<std::string>& namespaces() const;
-    std::list<std::string>& namespaces();
-    void namespaces(const std::list<std::string>& v);
-    void namespaces(const std::list<std::string>&& v);
-    /**@}*/
-
     /**
      * @brief Properties of the class itself (e.g. excludes inherited
      * properties).
@@ -304,8 +282,6 @@ public:
     class_info& operator=(class_info other);
 
 private:
-    std::string name_;
-    std::list<std::string> namespaces_;
     std::list<dogen::cpp::property_info> properties_;
     std::list<dogen::cpp::property_info> all_properties_;
     bool has_primitive_properties_;

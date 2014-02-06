@@ -48,7 +48,6 @@ std::size_t registrar_info_hasher::hash(const registrar_info&v) {
 
     combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
 
-    combine(seed, hash_std_list_std_string(v.namespaces()));
     combine(seed, hash_std_list_std_string(v.leaves()));
     combine(seed, hash_std_list_std_string(v.model_dependencies()));
 

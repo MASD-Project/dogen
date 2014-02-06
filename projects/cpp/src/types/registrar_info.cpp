@@ -49,12 +49,14 @@ namespace dogen {
 namespace cpp {
 
 registrar_info::registrar_info(
+    const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::list<std::string>& leaves,
     const std::list<std::string>& model_dependencies)
-    : dogen::cpp::entity(documentation),
-      namespaces_(namespaces),
+    : dogen::cpp::entity(name,
+      documentation,
+      namespaces),
       leaves_(leaves),
       model_dependencies_(model_dependencies) { }
 
@@ -64,7 +66,6 @@ void registrar_info::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     entity::to_stream(s);
     s << ", "
-      << "\"namespaces\": " << namespaces_ << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"model_dependencies\": " << model_dependencies_
       << " }";
@@ -74,7 +75,6 @@ void registrar_info::swap(registrar_info& other) noexcept {
     entity::swap(other);
 
     using std::swap;
-    swap(namespaces_, other.namespaces_);
     swap(leaves_, other.leaves_);
     swap(model_dependencies_, other.model_dependencies_);
 }
@@ -87,7 +87,6 @@ bool registrar_info::equals(const dogen::cpp::entity& other) const {
 
 bool registrar_info::operator==(const registrar_info& rhs) const {
     return entity::compare(rhs) &&
-        namespaces_ == rhs.namespaces_ &&
         leaves_ == rhs.leaves_ &&
         model_dependencies_ == rhs.model_dependencies_;
 }
@@ -96,22 +95,6 @@ registrar_info& registrar_info::operator=(registrar_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::list<std::string>& registrar_info::namespaces() const {
-    return namespaces_;
-}
-
-std::list<std::string>& registrar_info::namespaces() {
-    return namespaces_;
-}
-
-void registrar_info::namespaces(const std::list<std::string>& v) {
-    namespaces_ = v;
-}
-
-void registrar_info::namespaces(const std::list<std::string>&& v) {
-    namespaces_ = std::move(v);
 }
 
 const std::list<std::string>& registrar_info::leaves() const {

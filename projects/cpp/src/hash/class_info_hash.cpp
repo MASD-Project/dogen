@@ -34,14 +34,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_list_dogen_cpp_property_info(const std::list<dogen::cpp::property_info>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -51,6 +43,14 @@ inline std::size_t hash_std_list_dogen_cpp_property_info(const std::list<dogen::
 }
 
 inline std::size_t hash_std_list_dogen_cpp_parent_info(const std::list<dogen::cpp::parent_info>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -84,8 +84,6 @@ std::size_t class_info_hasher::hash(const class_info&v) {
 
     combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
 
-    combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.namespaces()));
     combine(seed, hash_std_list_dogen_cpp_property_info(v.properties()));
     combine(seed, hash_std_list_dogen_cpp_property_info(v.all_properties()));
     combine(seed, v.has_primitive_properties());

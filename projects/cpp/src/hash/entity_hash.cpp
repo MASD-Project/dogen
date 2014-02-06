@@ -29,6 +29,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -37,7 +45,10 @@ namespace cpp {
 std::size_t entity_hasher::hash(const entity&v) {
     std::size_t seed(0);
 
+    combine(seed, v.name());
     combine(seed, v.documentation());
+    combine(seed, hash_std_list_std_string(v.namespaces()));
+
     return seed;
 }
 

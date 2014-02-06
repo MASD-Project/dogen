@@ -18,57 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace cpp {
 
 namespace_info::namespace_info(
+    const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces)
-    : dogen::cpp::entity(documentation),
-      namespaces_(namespaces) { }
+    : dogen::cpp::entity(name,
+      documentation,
+      namespaces) { }
 
 void namespace_info::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::namespace_info\"" << ", "
       << "\"__parent_0__\": ";
     entity::to_stream(s);
-    s << ", "
-      << "\"namespaces\": " << namespaces_
-      << " }";
+    s << " }";
 }
 
 void namespace_info::swap(namespace_info& other) noexcept {
     entity::swap(other);
 
-    using std::swap;
-    swap(namespaces_, other.namespaces_);
 }
 
 bool namespace_info::equals(const dogen::cpp::entity& other) const {
@@ -78,30 +53,13 @@ bool namespace_info::equals(const dogen::cpp::entity& other) const {
 }
 
 bool namespace_info::operator==(const namespace_info& rhs) const {
-    return entity::compare(rhs) &&
-        namespaces_ == rhs.namespaces_;
+    return entity::compare(rhs);
 }
 
 namespace_info& namespace_info::operator=(namespace_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::list<std::string>& namespace_info::namespaces() const {
-    return namespaces_;
-}
-
-std::list<std::string>& namespace_info::namespaces() {
-    return namespaces_;
-}
-
-void namespace_info::namespaces(const std::list<std::string>& v) {
-    namespaces_ = v;
-}
-
-void namespace_info::namespaces(const std::list<std::string>&& v) {
-    namespaces_ = std::move(v);
 }
 
 } }
