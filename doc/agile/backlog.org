@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Include forward declaration in visitable types                    :story:
+
+There doesn't seem to be any good reason to include the full visitor
+header in visitable types - we should be able to get away with
+including only the forward declaration for the visitor.
+
 *** Allow cross model inheritance                                     :story:
 
 At present we can only inherit within the same model. This is a
