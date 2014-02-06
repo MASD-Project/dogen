@@ -17,18 +17,18 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-05 Wed 18:30]
+Clock summary at [2014-02-06 Thu 08:44]
 
 | Headline                                                                          | Time   |      |      |
 |-----------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                      | *2:29* |      |      |
+| *Total time*                                                                      | *3:22* |      |      |
 |-----------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                                   |        | 2:29 |      |
+| Development Stories Implemented                                                   |        | 3:22 |      |
 | COMPLETED Create a road map for the work ahead                                    |        |      | 0:31 |
 | IMPLEMENTATION Release notes and backlog grooming                                 |        |      | 0:50 |
 | IMPLEMENTATION Create a new type to model the information passed in to formatters |        |      | 0:15 |
 | IMPLEMENTATION When on clang 3.4 enable code coverage flags                       |        |      | 0:23 |
-| IMPLEMENTATION Add concept properties to entity                                   |        |      | 0:30 |
+| IMPLEMENTATION Add concept properties to entity                                   |        |      | 1:23 |
 #+end:
 
 *** Update the manual                                                 :story:
@@ -127,6 +127,7 @@ We need to update all formatters to do this. Finally we need to remove
 these properties from =source_file=.
 
 *** IMPLEMENTATION Add concept properties to entity                   :story:
+    CLOCK: [2014-02-06 Thu 07:51]--[2014-02-06 Thu 08:44] =>  0:53
     CLOCK: [2014-02-05 Wed 18:13]--[2014-02-05 Wed 18:30] =>  0:17
     CLOCK: [2014-02-05 Wed 18:00]--[2014-02-05 Wed 18:13] =>  0:13
 
