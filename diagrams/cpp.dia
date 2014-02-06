@@ -5775,7 +5775,7 @@ for Java, etc.#</dia:string>
         <dia:point val="65,72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.95,71.95;79.795,76.45"/>
+        <dia:rectangle val="64.95,71.95;79.795,75.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="65,72"/>
@@ -5784,7 +5784,7 @@ for Java, etc.#</dia:string>
         <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#entity#</dia:string>
@@ -5896,29 +5896,6 @@ template, or namespace.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#List of all namespaces containing the type. Last namespace is the target.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#annotation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#formatters::annotation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Generic information about this entity such as licence, etc.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6075,16 +6052,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O37">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.8163,76.35;73.2225,86.9999"/>
+        <dia:rectangle val="29.8163,75.55;73.2225,86.9999"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
         <dia:point val="72.3725,82"/>
         <dia:point val="29.8663,82"/>
         <dia:point val="29.8663,86.9499"/>
@@ -6116,16 +6093,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O38">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.975,76.35;73.2225,87.05"/>
+        <dia:rectangle val="54.975,75.55;73.2225,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
         <dia:point val="72.3725,82"/>
         <dia:point val="55.025,82"/>
         <dia:point val="55.025,87"/>
@@ -6228,16 +6205,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.5225,76.35;80,87.05"/>
+        <dia:rectangle val="71.5225,75.55;80,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
         <dia:point val="72.3725,82"/>
         <dia:point val="79.95,82"/>
         <dia:point val="79.95,87"/>
@@ -6269,16 +6246,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.5225,76.35;108.494,87.05"/>
+        <dia:rectangle val="71.5225,75.55;108.494,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
         <dia:point val="72.3725,82"/>
         <dia:point val="108.444,82"/>
         <dia:point val="108.444,87"/>
@@ -6310,16 +6287,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.5225,76.35;93.5837,95.05"/>
+        <dia:rectangle val="71.5225,75.55;93.5837,95.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
         <dia:point val="72.3725,82"/>
         <dia:point val="93.5337,82"/>
         <dia:point val="93.5337,95"/>
@@ -6351,16 +6328,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.7125,76.35;73.2225,101.001"/>
+        <dia:rectangle val="40.7125,75.55;73.2225,101.001"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="72.3725,76.4"/>
+        <dia:point val="72.3725,75.6"/>
         <dia:point val="72.3725,82"/>
         <dia:point val="40.7625,82"/>
         <dia:point val="40.7625,100.951"/>

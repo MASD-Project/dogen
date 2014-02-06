@@ -17,18 +17,19 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-06 Thu 08:44]
+Clock summary at [2014-02-06 Thu 18:46]
 
 | Headline                                                                          | Time   |      |      |
 |-----------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                      | *3:22* |      |      |
+| *Total time*                                                                      | *4:00* |      |      |
 |-----------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                                   |        | 3:22 |      |
+| Development Stories Implemented                                                   |        | 4:00 |      |
 | COMPLETED Create a road map for the work ahead                                    |        |      | 0:31 |
 | IMPLEMENTATION Release notes and backlog grooming                                 |        |      | 0:50 |
 | IMPLEMENTATION Create a new type to model the information passed in to formatters |        |      | 0:15 |
 | IMPLEMENTATION When on clang 3.4 enable code coverage flags                       |        |      | 0:23 |
 | IMPLEMENTATION Add concept properties to entity                                   |        |      | 1:23 |
+| IMPLEMENTATION Add file formatter support to formatters model                     |        |      | 0:38 |
 #+end:
 
 *** Update the manual                                                 :story:
@@ -141,6 +142,21 @@ these properties from =source_file=.
 
 We don't really need concepts in the C++ model - move these properties
 directly to entity. We should also add annotation to entity.
+
+*** IMPLEMENTATION Add file formatter support to formatters model     :story:
+    CLOCK: [2014-02-06 Thu 18:08]--[2014-02-06 Thu 18:46] =>  0:38
+
+What we really need is to capture the generic requirements of all
+formatters in the formatters model, and then implement the C++ types
+and formatters in terms of this. These are:
+
+- ability to register using a static function;
+- ability to format using only the view model type;
+- ability to add formatters (statically or on-the-fly) without
+  requiring code changes.
+
+All of this can be implemented by adding a few types to the
+=formatters= model.
 
 *** Refactor types header into new style file formatter               :story:
 
