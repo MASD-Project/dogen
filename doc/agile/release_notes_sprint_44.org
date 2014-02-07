@@ -1,4 +1,4 @@
-#+title: Release Notes for Sprint 43
+#+title: Release Notes for Sprint 44
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
@@ -17,26 +17,35 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-06 Thu 18:46]
+Clock summary at [2014-02-07 Fri 08:46]
 
-| Headline                                                                          | Time   |      |      |
-|-----------------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                      | *4:00* |      |      |
-|-----------------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                                   |        | 4:00 |      |
-| COMPLETED Create a road map for the work ahead                                    |        |      | 0:31 |
-| IMPLEMENTATION Release notes and backlog grooming                                 |        |      | 0:50 |
-| IMPLEMENTATION Create a new type to model the information passed in to formatters |        |      | 0:15 |
-| IMPLEMENTATION When on clang 3.4 enable code coverage flags                       |        |      | 0:23 |
-| IMPLEMENTATION Add concept properties to entity                                   |        |      | 1:23 |
-| IMPLEMENTATION Add file formatter support to formatters model                     |        |      | 0:38 |
+| Headline                                                         | Time   |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                     | *6:41* |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                  |        | 6:41 |      |
+| IMPLEMENTATION Release notes and backlog grooming                |        |      | 1:49 |
+| COMPLETED Create a road map for the work ahead                   |        |      | 0:31 |
+| COMPLETED Add common properties to C++ entity                    |        |      | 1:23 |
+| IMPLEMENTATION When on clang 3.4 enable code coverage flags      |        |      | 0:53 |
+| IMPLEMENTATION Design and implement the formatter model workflow |        |      | 2:05 |
 #+end:
 
-*** Update the manual                                                 :story:
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-02-07 Fri 07:52]--[2014-02-07 Fri 08:39] =>  0:47
+    CLOCK: [2014-02-06 Thu 22:53]--[2014-02-06 Thu 23:05] =>  0:12
+    CLOCK: [2014-02-05 Wed 17:55]--[2014-02-05 Wed 17:58] =>  0:03
+    CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:42] =>  0:17
+    CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:34] =>  0:09
+    CLOCK: [2014-02-04 Tue 08:04]--[2014-02-04 Tue 08:25] =>  0:21
+
+Updates to release notes and backlog.
+
+*** Update the manual                                                  :task:
 
 Use build downtime to update the manual.
 
-*** Finish the blog post on dogen's development methodology           :story:
+*** Finish the blog post on dogen's development methodology            :task:
 
 We should do a write up of how we develop dogen.
 
@@ -58,18 +67,62 @@ The key point is, if we are to have something demoable by next FOSDEM
 we need some idea of what features are coming in when to ensure we
 have enough of the key stories done by next February.
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
-    CLOCK: [2014-02-06 Thu 22:53]
-    CLOCK: [2014-02-05 Wed 17:55]--[2014-02-05 Wed 17:58] =>  0:03
-    CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:42] =>  0:17
-    CLOCK: [2014-02-05 Wed 08:25]--[2014-02-05 Wed 08:34] =>  0:09
-    CLOCK: [2014-02-04 Tue 08:04]--[2014-02-04 Tue 08:25] =>  0:21
+*** COMPLETED Add common properties to C++ entity                     :story:
+    CLOSED: [2014-02-07 Fri 08:19]
+    CLOCK: [2014-02-06 Thu 07:51]--[2014-02-06 Thu 08:44] =>  0:53
+    CLOCK: [2014-02-05 Wed 18:13]--[2014-02-05 Wed 18:30] =>  0:17
+    CLOCK: [2014-02-05 Wed 18:00]--[2014-02-05 Wed 18:13] =>  0:13
 
-Updates to release notes and backlog.
+*New understanding*:
 
-*** IMPLEMENTATION Create a new type to model the information passed in to formatters :story:
-    CLOCK: [2014-02-05 Wed 08:17]--[2014-02-05 Wed 08:23] =>  0:06
-    CLOCK: [2014-02-04 Tue 18:29]--[2014-02-04 Tue 18:38] =>  0:09
+- concepts are required as we use them in enumerator etc. They can be
+  refactored a bit though;
+- add namespaces to entity.
+
+*Old understanding*:
+
+We don't really need concepts in the C++ model - move these properties
+directly to entity. We should also add annotation to entity.
+
+*** IMPLEMENTATION When on clang 3.4 enable code coverage flags       :story:
+    CLOCK: [2014-02-05 Wed 07:51]--[2014-02-05 Wed 08:14] =>  0:23
+    CLOCK: [2014-02-04 Tue 22:00]--[2014-02-04 Tue 22:30] =>  0:30
+
+We implemented the flags as per this post:
+
+[[http://clang-developers.42468.n3.nabble.com/Code-coverage-on-clang-td4033066.html][Code coverage on clang]]
+
+However we need to wait for a version of clang that supports them.
+Code is commented out in =projects/CMakeLists.txt=.
+
+*** IMPLEMENTATION Design and implement the formatter model workflow  :story:
+
+We need to think about how to abstract the generic aspects of
+formatting and add them into the formatters model so that all other
+concrete models can make use of it.
+
+**** COMPLETED Design the new classes and their collaborations         :task:
+     CLOSED: [2014-02-07 Fri 08:03]
+     CLOCK: [2014-02-07 Fri 08:39]--[2014-02-07 Fri 08:45] =>  0:06
+     CLOCK: [2014-02-06 Thu 21:45]--[2014-02-06 Thu 22:51] =>  1:06
+     CLOCK: [2014-02-05 Wed 08:17]--[2014-02-05 Wed 08:23] =>  0:06
+     CLOCK: [2014-02-04 Tue 18:29]--[2014-02-04 Tue 18:38] =>  0:09
+
+- *formatters model*
+
+What we really need is to capture the generic requirements of all
+formatters in the formatters model, and then implement the C++ types
+and formatters in terms of this. These are:
+
+- ability to register using a static function;
+- ability to format using only the view model type;
+- ability to add formatters (statically or on-the-fly) without
+  requiring code changes.
+
+All of this can be implemented by adding a few types to the
+=formatters= model.
+
+- *C++ Model*
 
 In reality, the whole notion of =source_file= is flawed. Formatters
 drive the existence of source files; only they know things such as:
@@ -79,7 +132,7 @@ drive the existence of source files; only they know things such as:
 - formatter specific includes
 - includes
 
-A base class should own the remaining state:
+A base class should own the remaining state (in formatters):
 
 - annotation
 
@@ -100,82 +153,71 @@ store formatters according to the C++ type they format. They register
 themselves into that container (or at least some kind of static
 factory method).
 
-*** IMPLEMENTATION When on clang 3.4 enable code coverage flags       :story:
-    CLOCK: [2014-02-05 Wed 07:51]--[2014-02-05 Wed 08:14] =>  0:23
-    CLOCK: [2014-02-04 Tue 22:00]--[2014-02-04 Tue 22:30] =>  0:30
+- *Stitch*
 
-We implemented the flags as per this post:
+When time comes to re-implement all formatters in terms of stitch text
+templates, we will have to break down the formatters such that they
+are responsible for only one type (e.g. =class_info= or =enum_info=
+etc.). This is because the text template must be kept as simple as
+possible to be maintainable as we won't have any flymake support. The
+current refactoring means that we will have to have some casting at
+the top of the stitch template used to instantiate the text
+template: we need to cast a formatters entity into the concrete entity
+for the model we're instantiating the text template. This type has to
+be passed in to stitch.
 
-[[http://clang-developers.42468.n3.nabble.com/Code-coverage-on-clang-td4033066.html][Code coverage on clang]]
-
-However we need to wait for a version of clang that supports them.
-Code is commented out in =projects/CMakeLists.txt=.
-
-*** IMPLEMENTATION Add concept properties to entity                   :story:
-    CLOCK: [2014-02-06 Thu 07:51]--[2014-02-06 Thu 08:44] =>  0:53
-    CLOCK: [2014-02-05 Wed 18:13]--[2014-02-05 Wed 18:30] =>  0:17
-    CLOCK: [2014-02-05 Wed 18:00]--[2014-02-05 Wed 18:13] =>  0:13
-
-*New understanding*:
-
-- refactor concepts a bit as we use them in enumerator as well.
-- create a concept for namespaces
-- add annotation
-
-*Old understanding*:
-
-We don't really need concepts in the C++ model - move these properties
-directly to entity. We should also add annotation to entity.
-
-*** IMPLEMENTATION Add file formatter support to formatters model     :story:
-
-What we really need is to capture the generic requirements of all
-formatters in the formatters model, and then implement the C++ types
-and formatters in terms of this. These are:
-
-- ability to register using a static function;
-- ability to format using only the view model type;
-- ability to add formatters (statically or on-the-fly) without
-  requiring code changes.
-
-All of this can be implemented by adding a few types to the
-=formatters= model.
-
-**** COMPLETED Create skeleton design                                  :task:
+**** COMPLETED Create skeleton for classes                             :task:
      CLOSED: [2014-02-06 Thu 22:52]
-     CLOCK: [2014-02-06 Thu 21:45]--[2014-02-06 Thu 22:51] =>  1:06
      CLOCK: [2014-02-06 Thu 18:08]--[2014-02-06 Thu 18:46] =>  0:38
 
-Add main classes to diagram and make sure they hang together to provide a
-complete solution.
+Add main classes to diagram according to design above and make sure
+they hang together to provide a complete solution.
 
-**** Provide basic implementation of skeleton classes                  :task:
+**** Implement the workflow and add tests                              :task:
 
-Implement new classes and add tests.
+We need to code up the formatter's model workflow, and add tests to
+make sure the registration of file formatters and transformers
+actually does the right thing.
 
-*** Update formatters to generate formatter-specific information      :story:
+*** Change c++ model entity to inherit from formatter's entity        :story:
 
-Formatters need to figure out the following by themselves:
+We need to maintain the visitor structure intact, but at the same
+time, we need to make the C++ entity inherit from the base entity in
+the formatters model.
+
+*** Add all data required by types formatter constructor to C++ entity :story:
+
+We need to ensure the C++ entities contain all the data required by
+the formatters. We can start with the types formatter:
+
+- constructor parameters;
+- ...
+
+*** Add formatter workflow to the engine workflow                     :story:
+
+Even though we do not yet have anyone implementing these interfaces,
+we can already add the general workflow into the engine and make sure
+it doesn't break anything.
+
+*** Implement the file formatter interface in types formatter         :story:
+
+Move across this formatter to the new way of doing things.
+
+We need to cast the formatter entity to a C++ entity and dispatch it
+using the type visitor. We also need to add registration support.
+
+We also need to generate the following within the formatter:
 
 - file name
 - header guards
 - formatter specific includes
 - includes
 
-We need to update all formatters to do this. Finally we need to remove
-these properties from =source_file=.
-
-*** Remove =content_descriptor=                                       :story:
-
-We need a way to drive the formatter generation from the formatter
-itself rather than from the transformation process. The first step to
-get there is to remove content descriptors.
-
-*** Refactor types header into new style file formatter               :story:
+*** Refactor types header formatter                                   :story:
 
 Make the main types header formatters look like the =om= types formatter.
 
-**** Remove the parents dependency in transformer       :task:
+**** Remove the parents dependency in transformer                      :task:
 
 At present the C++ to SML transformer requires both the parent and
 original parent to have been processed in order to process a type. In
@@ -187,7 +229,6 @@ consume this data instead of relying on object look-ups.
 
 Clean up internal functions in file and add documentation.
 
-**** Use tags for class properties in transformer                      :task:
 **** Copy across documentation from =om=                               :task:
 
 We did a lot of doxygen comments that are readily applicable, copy
@@ -207,6 +248,17 @@ Remove uses of old indenter.
 Not sure how applicable this would be, but we may be able to scavenge
 some tests.
 
+*** Add comments in =formatters= model                                :story:
+
+We haven't got any documentation at all in the new formatters
+morel. We need a small blurb about the language neutral formatting
+support the model is supposed to provide.
+
+*** Update comments in C++ model                                      :story:
+
+We have a very large blurb in this model that is rather old, and
+reflects a legacy understanding of the role of the C++ model.
+
 *** Add support to upload packages into GDrive                        :story:
 
 We need to upload the packages created by the build to a public Google
@@ -219,11 +271,30 @@ Drive (GDrive) location.
   and tag as this would require no complex logic: if tag create new
   folder, if latest, delete then create.
 
+** Deprecated Development Stories
+
+
+
+*** Remove =content_descriptor=                                       :story:
+
+- *rationale*: this story is too generic to be useful, it will be
+  tackled on a formatter by formatter basis.
+
+We need a way to drive the formatter generation from the formatter
+itself rather than from the transformation process. The first step to
+get there is to remove content descriptors.
+
 *** Make use of the indenting stream in =cpp_formatters=              :story:
+
+- *rationale*: this story is too generic to be useful, it will be
+  tackled on a formatter by formatter basis.
 
 Replace indenter with the new indenting stream.
 
 *** Make use of the boilerplate formatter in =cpp_formatters=         :story:
+
+- *rationale*: this story is too generic to be useful, it will be
+  tackled on a formatter by formatter basis.
 
 Update all file formatters to use the boilerplate formatter.
 
@@ -234,18 +305,8 @@ licences, modelines, etc.
 
 *** Update =cpp= model with properties from tags                      :story:
 
+- *rationale*: this story is too generic to be useful, it will be
+  tackled on a formatter by formatter basis.
+
 Read properties from the meta-data and represent them inside of the
 =cpp= model.
-
-*** Update comments in C++ model                                      :story:
-
-We have a very large blurb in this model that is rather old, and
-reflects a legacy understanding of the role of the C++ model.
-
-*** Add comments in =formatters= model                                :story:
-
-We haven't got any documentation at all in the new formatters
-morel. We need a small blurb about the language neutral formatting
-support the model is supposed to provide.
-
-** Deprecated Development Stories
