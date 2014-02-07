@@ -89,9 +89,12 @@ if(WITH_PROFILING)
     set(profiling_flags "-fprofile-arcs -ftest-coverage")
 
     if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+        # FIXME: profiling flags appear not to be used during
+        # compilation so disable the warning. bit of a hack, for now.
+        set(profiling_flags "${profiling_flags} -Wno-unused-arguments")
+
         set(profiling_flags "${profiling_flags} --coverage")
         set(profiling_flags "${profiling_flags} -Xclang -coverage-cfg-checksum")
-
         set(profiling_flags
             "${profiling_flags} -Xclang -coverage-no-function-names-in-data")
 
@@ -99,10 +102,6 @@ if(WITH_PROFILING)
         set(profiling_flags
             "${profiling_flags} -Xclang -coverage-version='407*'")
 
-        # profiling flags are not used during compilation so disable
-        # that warning. bit of a hack, for now.
-        set(profiling_flags
-            "${profiling_flags} -Wno-unused-arguments")
     endif()
 endif()
 

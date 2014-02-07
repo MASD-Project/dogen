@@ -86,6 +86,7 @@ We don't really need concepts in the C++ model - move these properties
 directly to entity. We should also add annotation to entity.
 
 *** IMPLEMENTATION When on clang 3.4 enable code coverage flags       :story:
+    CLOCK: [2014-02-07 Fri 18:50]--[2014-02-07 Fri 18:51] =>  0:01
     CLOCK: [2014-02-05 Wed 07:51]--[2014-02-05 Wed 08:14] =>  0:23
     CLOCK: [2014-02-04 Tue 22:00]--[2014-02-04 Tue 22:30] =>  0:30
 
