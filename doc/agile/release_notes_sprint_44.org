@@ -17,18 +17,18 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-07 Fri 09:15]
+Clock summary at [2014-02-07 Fri 19:30]
 
 | Headline                                                         | Time   |      |      |
 |------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                     | *6:46* |      |      |
+| *Total time*                                                     | *7:25* |      |      |
 |------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                  |        | 6:46 |      |
+| Development Stories Implemented                                  |        | 7:25 |      |
 | IMPLEMENTATION Release notes and backlog grooming                |        |      | 1:54 |
 | COMPLETED Create a road map for the work ahead                   |        |      | 0:31 |
 | COMPLETED Add common properties to C++ entity                    |        |      | 1:23 |
-| IMPLEMENTATION When on clang 3.4 enable code coverage flags      |        |      | 0:53 |
-| IMPLEMENTATION Design and implement the formatter model workflow |        |      | 2:05 |
+| IMPLEMENTATION When on clang 3.4 enable code coverage flags      |        |      | 0:54 |
+| IMPLEMENTATION Design and implement the formatter model workflow |        |      | 2:43 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -175,7 +175,8 @@ be passed in to stitch.
 Add main classes to diagram according to design above and make sure
 they hang together to provide a complete solution.
 
-**** Implement the workflow and add tests                              :task:
+**** IMPLEMENTATION Implement the workflow and add tests               :task:
+     CLOCK: [2014-02-07 Fri 18:52]--[2014-02-07 Fri 19:30] =>  0:38
 
 We need to code up the formatter's model workflow, and add tests to
 make sure the registration of file formatters and transformers
@@ -187,7 +188,7 @@ We need to maintain the visitor structure intact, but at the same
 time, we need to make the C++ entity inherit from the base entity in
 the formatters model.
 
-*** Add all data required by types formatter constructor to C++ entity :story:
+*** Add all data required by types formatter to C++ entity            :story:
 
 We need to ensure the C++ entities contain all the data required by
 the formatters. We can start with the types formatter:

@@ -5793,17 +5793,7 @@ for Java, etc.#</dia:string>
         <dia:string>#visitable, Nameable, Documentable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Top-level entity in the model.
-
-
-Maps to the Member class in the Columbus schema, but in order to avoid
-confusion with member variables, etc we renamed it to element.
-
-§3.1.1:
-
-An entity is a value, object, subobject, base class subobject, array element,
-variable, function, instance of a function, enumerator, type, class member,
-template, or namespace.#</dia:string>
+        <dia:string>#Top-level entity in the model.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

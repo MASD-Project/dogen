@@ -263,7 +263,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="31,-27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="16.670000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -4958,7 +4958,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="56,-33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.385000000000002"/>
+        <dia:real val="24.384999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -5154,10 +5154,10 @@ required to format code: indentation and dividers.#</dia:string>
         <dia:point val="74,-20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.305000000000003"/>
+        <dia:real val="21.305"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="1.7000000000000002"/>
+        <dia:real val="1.7"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -5990,17 +5990,7 @@ Padding in this context is understood as the addition of spaces.#</dia:string>
         <dia:string>#nongeneratable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Entity which can be formatted.
-
-
-Maps to the Member class in the Columbus schema, but in order to avoid
-confusion with member variables, etc we renamed it to element.
-
-§3.1.1:
-
-An entity is a value, object, subobject, base class subobject, array element,
-variable, function, instance of a function, enumerator, type, class member,
-template, or namespace.#</dia:string>
+        <dia:string>#Entity which can be formatted.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -6715,7 +6705,7 @@ template, or namespace.#</dia:string>
         <dia:point val="-79,74"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="26.295000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -6872,7 +6862,7 @@ template, or namespace.#</dia:string>
         <dia:point val="-21,74"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="26.295000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7061,7 +7051,7 @@ template, or namespace.#</dia:string>
         <dia:point val="5.295,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.545,57.55;23.555,75.6"/>
+        <dia:rectangle val="4.545,57.55;23.555,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7132,7 +7122,7 @@ template, or namespace.#</dia:string>
         <dia:point val="-33.12,60.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.87,59.85;-20.8,75.6"/>
+        <dia:rectangle val="-33.87,59.85;-20.8,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7203,7 +7193,7 @@ template, or namespace.#</dia:string>
         <dia:point val="-48,60.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.9025,59.85;-47.25,75.6"/>
+        <dia:rectangle val="-65.9025,59.85;-47.25,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

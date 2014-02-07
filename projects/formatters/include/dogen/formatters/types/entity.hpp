@@ -34,16 +34,6 @@ namespace formatters {
 
 /**
  * @brief Entity which can be formatted.
- *
- *
- * Maps to the Member class in the Columbus schema, but in order to avoid
- * confusion with member variables, etc we renamed it to element.
- *
- * §3.1.1:
- *
- * An entity is a value, object, subobject, base class subobject, array element,
- * variable, function, instance of a function, enumerator, type, class member,
- * template, or namespace.
  */
 class entity final {
 public:
