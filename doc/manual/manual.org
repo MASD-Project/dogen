@@ -1,13 +1,13 @@
 #+title: Domain Driven Development with Dogen
 #+options: author:nil
 
-Copyright (c) 2012, 2013 Marco Craveiro
+Copyright (c) 2012, 2013, 2014 Marco Craveiro
 
 Permission is granted to copy, distribute and/or modify this document under the
 terms of the GNU Free Documentation License, version 1.3; with no Invariant
 Sections, no Front-Cover Texts and no Back-Cover Texts.
 
-Revision *DRAFT*, May 2013
+Revision *DRAFT*, May 2014
 
 This revision of the manual describes Dogen *master* and is available
 in the following formats: HTML and PDF.
@@ -27,6 +27,11 @@ the user creates a domain model using a UML tool and Dogen uses it to
 generate its source code representation. The generated code contains
 most of the services required from a typical C++ domain object such as
 serialisation, hashing, streaming and so on.
+
+If you are reading a printed copy of this manual, you can always
+access the latest version online:
+
+- https://github.com/kitanda/dogen/blob/master/doc/manual/manual.org
 
 ** More Information
 
