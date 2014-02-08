@@ -18,17 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/file_formatter_interface.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_REGISTRAR_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_REGISTRAR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace formatters {
 
-file_formatter_interface::~file_formatter_interface() noexcept { }
-
-void file_formatter_interface::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::file_formatter_interface\""
-      << " }";
-}
+class registrar;
 
 } }
+
+#endif

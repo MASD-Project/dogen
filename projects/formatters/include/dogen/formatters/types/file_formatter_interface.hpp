@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_FORMATTER_INTERFACE_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_FORMATTER_INTERFACE_FWD_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_FORMATTER_INTERFACE_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/file_fwd.hpp"
 #include "dogen/formatters/types/entity_fwd.hpp"
@@ -43,6 +44,13 @@ public:
 
 public:
     virtual ~file_formatter_interface() noexcept;
+
+public:
+    /**
+     * @brief Give some hints as to who this file formatter is and its
+     * current state.
+     */
+    virtual void to_stream(std::ostream& s) const;
 
 public:
     /**

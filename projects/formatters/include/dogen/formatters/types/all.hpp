@@ -41,6 +41,7 @@
 #include "dogen/formatters/types/modeline_group_hydrator.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
 #include "dogen/formatters/types/padding_types.hpp"
+#include "dogen/formatters/types/registrar.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/transformer_interface.hpp"
 #include "dogen/formatters/types/utility.hpp"

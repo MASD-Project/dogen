@@ -18,52 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_TRANSFORMER_INTERFACE_HPP
-#define DOGEN_FORMATTERS_TYPES_TRANSFORMER_INTERFACE_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_REGISTRAR_HPP
+#define DOGEN_FORMATTERS_TYPES_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <iosfwd>
 #include <boost/shared_ptr.hpp>
-#include "dogen/sml/types/model_fwd.hpp"
-#include "dogen/formatters/types/entity_fwd.hpp"
+#include "dogen/formatters/types/workflow.hpp"
 
 namespace dogen {
 namespace formatters {
 
 /**
- * @brief Base formatter for all SML model transformers.
+ * @brief Helper class to simplify the registration of transformer and
+ * formatters into the workflow.
  *
- * A transformer, in this context is responsible for converting an SML
- * model into formattable types.
+ * To use it, just declare an instance in an unnamed namespace in the
+ * translation unit of your formatter or transformer. Can also be done
+ * in other places, but remember that the workflow is not thread-safe.
  */
-class transformer_interface {
+template<typename RegistrableInterface>
+class registrar {
 public:
-    transformer_interface() = default;
-    transformer_interface(const transformer_interface&) = default;
-    transformer_interface(transformer_interface&&) = default;
-
-public:
-    virtual ~transformer_interface() noexcept;
-
-public:
-    typedef std::list<boost::shared_ptr<const entity> > entities_type;
+    registrar(const registrar&) = delete;
+    registrar(registrar&&) = delete;
+    ~registrar() noexcept = default;
 
 public:
     /**
-     * @brief Give some hints as to who this transformer is and its
-     * current state.
+     * @brief Registers the interface with the workflow.
      */
-    virtual void to_stream(std::ostream& s) const;
-
-public:
-    /**
-     * @brief Transforms the SML model into entities.
-     */
-    virtual entities_type transform(const sml::model& m) const = 0;
+    explicit registrar(boost::shared_ptr<RegistrableInterface> ri) {
+        workflow::register_interface(ri);
+    }
 };
 
 } }

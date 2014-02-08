@@ -23,6 +23,8 @@
 namespace dogen {
 namespace formatters {
 
+entity::~entity() noexcept { }
+
 entity::entity(const dogen::formatters::annotation& annotation)
     : annotation_(annotation) { }
 

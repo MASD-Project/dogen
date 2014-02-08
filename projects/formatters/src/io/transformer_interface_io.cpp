@@ -18,17 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/file_formatter_interface.hpp"
+#include <ostream>
+#include "dogen/formatters/types/transformer_interface.hpp"
+#include "dogen/formatters/io/transformer_interface_io.hpp"
 
 namespace dogen {
 namespace formatters {
 
-file_formatter_interface::~file_formatter_interface() noexcept { }
-
-void file_formatter_interface::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::file_formatter_interface\""
-      << " }";
+std::ostream& operator<<(std::ostream& s, const transformer_interface& v) {
+    v.to_stream(s);
+    return(s);
 }
 
 } }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_REPOSITORY_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_REPOSITORY_FWD_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_REPOSITORY_HPP
+#define DOGEN_FORMATTERS_TYPES_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,6 +33,9 @@
 namespace dogen {
 namespace formatters {
 
+/**
+ * @brief Repository of instances of formatters and transformers.
+ */
 class repository {
 public:
     repository() = default;
@@ -42,15 +45,35 @@ public:
 
 public:
     typedef std::list<boost::shared_ptr<file_formatter_interface> >
-    formatters_type;
+    file_formatters_type;
 
     typedef std::list<boost::shared_ptr<transformer_interface> >
     transformers_type;
 
 public:
+    /**
+     * @brief Collection of file formatters.
+     */
+    /**@{*/
+    const file_formatters_type& file_formatters() const;
+    file_formatters_type& file_formatters();
+    void file_formatters(const file_formatters_type& v);
+    void file_formatters(const file_formatters_type&& v);
+    /**@}*/
 
+    /**
+     * @brief Collection of transformers.
+     */
+    /**@{*/
+    const transformers_type& transformers() const;
+    transformers_type& transformers();
+    void transformers(const transformers_type& v);
+    void transformers(const transformers_type&& v);
+    /**@}*/
 
 private:
+    file_formatters_type file_formatters_;
+    transformers_type transformers_;
 };
 
 } }

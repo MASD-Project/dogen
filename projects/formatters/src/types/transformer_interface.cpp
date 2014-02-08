@@ -18,11 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen/formatters/types/transformer_interface.hpp"
 
 namespace dogen {
 namespace formatters {
 
 transformer_interface::~transformer_interface() noexcept { }
+
+void transformer_interface::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::formatters::transformer_interface\""
+      << " }";
+}
 
 } }

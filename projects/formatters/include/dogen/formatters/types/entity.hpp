@@ -35,15 +35,15 @@ namespace formatters {
 /**
  * @brief Entity which can be formatted.
  */
-class entity final {
+class entity {
 public:
     entity() = default;
     entity(const entity&) = default;
     entity(entity&&) = default;
-    ~entity() = default;
 
 public:
     explicit entity(const dogen::formatters::annotation& annotation);
+    virtual ~entity() noexcept;
 
 private:
     template<typename Archive>
