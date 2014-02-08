@@ -31,30 +31,20 @@
 #include <string>
 #include "dogen/cpp/serialization/entity_fwd_ser.hpp"
 #include "dogen/cpp/types/entity_visitor.hpp"
+#include "dogen/formatters/types/entity.hpp"
 
 namespace dogen {
 namespace cpp {
 
 /**
- * @brief Top-level entity in the model.
- *
- *
- * Maps to the Member class in the Columbus schema, but in order to avoid
- * confusion with member variables, etc we renamed it to element.
- *
- * §3.1.1:
- *
- * An entity is a value, object, subobject, base class subobject, array element,
- * variable, function, instance of a function, enumerator, type, class member,
- * template, or namespace.
+ * @brief Top-level formatable entity in the C++ model.
  */
-class entity {
+class entity : public formatters::entity {
 public:
     entity() = default;
     entity(const entity&) = default;
     entity(entity&&) = default;
-
-    virtual ~entity() noexcept = 0;
+    virtual ~entity() noexcept;
 
 public:
     entity(

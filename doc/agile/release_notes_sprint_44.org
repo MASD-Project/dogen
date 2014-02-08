@@ -17,19 +17,20 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-08 Sat 20:51]
+Clock summary at [2014-02-08 Sat 21:55]
 
-| Headline                                                    | Time    |       |      |
-|-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *12:32* |       |      |
-|-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 12:32 |      |
-| IMPLEMENTATION Release notes and backlog grooming           |         |       | 2:02 |
-| IMPLEMENTATION Updates to the manual and readme files       |         |       | 0:13 |
-| COMPLETED Create a road map for the work ahead              |         |       | 0:31 |
-| COMPLETED Add common properties to C++ entity               |         |       | 1:23 |
-| COMPLETED When on clang 3.4 enable code coverage flags      |         |       | 2:11 |
-| COMPLETED Design and implement the formatter model workflow |         |       | 6:12 |
+| Headline                                                             | Time    |       |      |
+|----------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                         | *12:50* |       |      |
+|----------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                      |         | 12:50 |      |
+| IMPLEMENTATION Release notes and backlog grooming                    |         |       | 2:02 |
+| IMPLEMENTATION Updates to the manual and readme files                |         |       | 0:13 |
+| COMPLETED Create a road map for the work ahead                       |         |       | 0:31 |
+| COMPLETED Add common properties to C++ entity                        |         |       | 1:23 |
+| COMPLETED When on clang 3.4 enable code coverage flags               |         |       | 2:11 |
+| COMPLETED Design and implement the formatter model workflow          |         |       | 6:12 |
+| COMPLETED Change c++ model entity to inherit from formatter's entity |         |       | 0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -194,7 +195,9 @@ We need to code up the formatter's model workflow, and add tests to
 make sure the registration of file formatters and transformers
 actually does the right thing.
 
-*** Change c++ model entity to inherit from formatter's entity        :story:
+*** COMPLETED Change c++ model entity to inherit from formatter's entity :story:
+    CLOSED: [2014-02-08 Sat 21:55]
+    CLOCK: [2014-02-08 Sat 21:37]--[2014-02-08 Sat 21:55] =>  0:18
 
 We need to maintain the visitor structure intact, but at the same
 time, we need to make the C++ entity inherit from the base entity in
