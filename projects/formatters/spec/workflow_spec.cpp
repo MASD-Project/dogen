@@ -38,7 +38,7 @@ const std::string empty;
 const std::string test_module("formatters");
 const std::string test_suite("workflow_spec");
 
-class entity : public dogen::formatters::entity { };
+class test_entity : public dogen::formatters::entity { };
 
 class test_file_formatter : public dogen::formatters::file_formatter_interface {
 public:
@@ -53,7 +53,7 @@ public:
 public:
     boost::optional<dogen::formatters::file>
     format(const dogen::formatters::entity& e) const {
-        const auto pe(dynamic_cast<const entity * const>(&e));
+        const auto pe(dynamic_cast<const test_entity* const>(&e));
         if (!pe)
             return boost::optional<dogen::formatters::file>();
 
@@ -61,6 +61,14 @@ public:
         return f;
     }
 };
+
+std::list<boost::shared_ptr<const dogen::formatters::entity> >
+mock_entities(const unsigned int how_many) {
+    std::list<boost::shared_ptr<const dogen::formatters::entity> > r;
+    for (unsigned int i(0); i < how_many; ++i)
+        r.push_back(boost::make_shared<test_entity>());
+    return r;
+}
 
 class test_transformer : public dogen::formatters::transformer_interface {
 public:
@@ -85,13 +93,8 @@ public:
     dogen::formatters::transformer_interface::entities_type
     transform(const dogen::sml::model&,
         const dogen::formatters::annotation_factory& f) const {
-
         found_reference_data_ = !f.empty();
-
-        dogen::formatters::transformer_interface::entities_type r;
-        for (unsigned int i(0); i < how_many_; ++i)
-            r.push_back(boost::make_shared<entity>());
-        return r;
+        return mock_entities(how_many_);
     }
 
 private:
@@ -192,6 +195,53 @@ BOOST_AUTO_TEST_CASE(executing_transformer_workflow_with_a_non_empty_repository_
 
     BOOST_CHECK(p->found_reference_data());
     BOOST_CHECK(files.size() == files_to_create);
+}
+
+BOOST_AUTO_TEST_CASE(executing_entity_workflow_with_an_empty_repository_produces_no_files) {
+    SETUP_TEST_LOG_SOURCE("executing_entity_workflow_with_an_empty_repository_produces_no_files");
+
+    unregister_interfaces();
+
+    using namespace dogen::utility::filesystem;
+    const std::list<boost::filesystem::path> d = { data_files_directory() };
+    dogen::formatters::workflow w(d);
+
+    BOOST_LOG_SEV(lg, debug) << "repository: " << w.repository();
+    BOOST_REQUIRE(w.repository().empty());
+
+    const auto entities(mock_entities(5));
+    auto files(w.execute(entities));
+    BOOST_LOG_SEV(lg, debug) << "files size: " << files.size();
+    BOOST_CHECK(files.empty());
+
+    const auto empty_entities(mock_entities(0));
+    files = w.execute(empty_entities);
+    BOOST_LOG_SEV(lg, debug) << "files size: " << files.size();
+    BOOST_CHECK(files.empty());
+}
+
+BOOST_AUTO_TEST_CASE(executing_entity_workflow_with_a_non_empty_repository_produces_expected_number_of_files) {
+    SETUP_TEST_LOG_SOURCE("executing_entity_workflow_with_a_non_empty_repository_produces_expected_number_of_files");
+
+    reregister_interfaces();
+
+    using namespace dogen::utility::filesystem;
+    const std::list<boost::filesystem::path> d = { data_files_directory() };
+    dogen::formatters::workflow w(d);
+
+    BOOST_LOG_SEV(lg, debug) << "repository: " << w.repository();
+    BOOST_REQUIRE(w.repository().file_formatters().size() == 1);
+
+    const unsigned int how_many(5);
+    const auto entities(mock_entities(how_many));
+    auto files(w.execute(entities));
+    BOOST_LOG_SEV(lg, debug) << "files: " << files;
+    BOOST_CHECK(files.size() == how_many);
+
+    const auto empty_entities(mock_entities(0));
+    files = w.execute(empty_entities);
+    BOOST_LOG_SEV(lg, debug) << "files size: " << files.size();
+    BOOST_CHECK(files.empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

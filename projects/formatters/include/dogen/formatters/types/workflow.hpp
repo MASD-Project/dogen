@@ -79,7 +79,7 @@ public:
     static void register_interface(transformer_type t);
 
 public:
-    typedef std::list<boost::shared_ptr<entity> > entities_type;
+    typedef std::list<boost::shared_ptr<const entity> > entities_type;
 
 public:
     /**

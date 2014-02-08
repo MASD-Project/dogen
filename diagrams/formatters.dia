@@ -4836,13 +4836,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O37">
       <dia:attribute name="obj_pos">
-        <dia:point val="67,-27"/>
+        <dia:point val="52,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,-27.05;73.05,-23.95"/>
+        <dia:rectangle val="51.95,0.95;58.05,4.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="67,-27"/>
+        <dia:point val="52,1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6"/>
@@ -4946,16 +4946,16 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O38">
       <dia:attribute name="obj_pos">
-        <dia:point val="56,-33"/>
+        <dia:point val="49,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.95,-33.05;80.435,-30.45"/>
+        <dia:rectangle val="48.95,-5.05;73.435,-2.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="56,-33"/>
+        <dia:point val="49,-5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.385000000000002"/>
@@ -4985,7 +4985,7 @@ required to format code: indentation and dividers.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="56.35,-31.755"/>
+            <dia:point val="49.35,-3.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4998,17 +4998,17 @@ required to format code: indentation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O39">
       <dia:attribute name="obj_pos">
-        <dia:point val="68.1925,-30.5"/>
+        <dia:point val="61.1925,-2.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.1251,-30.5674;70.3783,-26.772"/>
+        <dia:rectangle val="54.7597,-2.56813;61.2606,1.37283"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="68.1925,-30.5"/>
-        <dia:point val="70,-27"/>
+        <dia:point val="61.1925,-2.5"/>
+        <dia:point val="55,1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -5023,7 +5023,7 @@ required to format code: indentation and dividers.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="69.0963,-28.2501"/>
+        <dia:point val="58.0963,-0.2501"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O38" connection="6"/>
@@ -5032,13 +5032,13 @@ required to format code: indentation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="82,-27"/>
+        <dia:point val="26,21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.95,-27.05;86.785,-23.95"/>
+        <dia:rectangle val="25.95,20.95;30.785,24.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="82,-27"/>
+        <dia:point val="26,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="4.7350000000000003"/>
@@ -5142,16 +5142,16 @@ required to format code: indentation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="74,-20"/>
+        <dia:point val="21,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,-20.05;95.355,-18.25"/>
+        <dia:rectangle val="20.95,27.95;42.355,29.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="74,-20"/>
+        <dia:point val="21,28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.305000000000003"/>
@@ -5180,7 +5180,7 @@ required to format code: indentation and dividers.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="74.35,-18.755"/>
+            <dia:point val="21.35,29.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5193,17 +5193,17 @@ required to format code: indentation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="84.6525,-20"/>
+        <dia:point val="31.6525,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.965,-24.0783;84.77,-19.9466"/>
+        <dia:rectangle val="28.0266,23.7075;31.7229,28.0704"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="84.6525,-20"/>
-        <dia:point val="84.3675,-24"/>
+        <dia:point val="31.6525,28"/>
+        <dia:point val="28.3675,24"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -5218,7 +5218,7 @@ required to format code: indentation and dividers.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="84.5101,-21.5001"/>
+        <dia:point val="30.0101,26.4999"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O41" connection="1"/>
@@ -5227,13 +5227,13 @@ required to format code: indentation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="95,-44"/>
+        <dia:point val="40,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.95,-44.05;102.12,-37.15"/>
+        <dia:rectangle val="39.95,0.95;47.12,7.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="95,-44"/>
+        <dia:point val="40,1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.0700000000000003"/>
@@ -5491,19 +5491,19 @@ Padding in this context is understood as the addition of spaces.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="84.3675,-27"/>
+        <dia:point val="28.3675,21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.6175,-37.25;98.735,-26.2"/>
+        <dia:rectangle val="27.6175,7.75;43.735,21.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="84.3675,-27"/>
-        <dia:point val="84.3675,-32"/>
-        <dia:point val="98.535,-32"/>
-        <dia:point val="98.535,-37.2"/>
+        <dia:point val="28.3675,21"/>
+        <dia:point val="28.3675,15"/>
+        <dia:point val="43.535,15"/>
+        <dia:point val="43.535,7.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
