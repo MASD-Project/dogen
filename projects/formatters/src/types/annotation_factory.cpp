@@ -149,6 +149,10 @@ void annotation_factory::hydrate_licences() {
     BOOST_LOG_SEV(lg, debug) << "contents: " << licences_;
 }
 
+bool annotation_factory::empty() const {
+    return modeline_groups_.empty() && licences_.empty();
+}
+
 void annotation_factory::load_reference_data() {
     hydrate_modelines();
     hydrate_licences();

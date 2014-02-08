@@ -6856,13 +6856,13 @@ Padding in this context is understood as the addition of spaces.#</dia:string>
         <dia:point val="-21,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,73.95;5.345,77.65"/>
+        <dia:rectangle val="-21.05,73.95;16.125,77.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-21,74"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="37.075000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7002,6 +7002,23 @@ Padding in this context is understood as the addition of spaces.#</dia:string>
                 <dia:enum val="0"/>
               </dia:attribute>
             </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#f#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const annotation_factory&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
@@ -7048,17 +7065,17 @@ Padding in this context is understood as the addition of spaces.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="5.295,74"/>
+        <dia:point val="16.075,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.545,57.55;23.555,74.8"/>
+        <dia:rectangle val="15.325,57.55;23.555,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="5.295,74"/>
-        <dia:point val="5.295,69"/>
+        <dia:point val="16.075,74"/>
+        <dia:point val="16.075,69"/>
         <dia:point val="23.355,69"/>
         <dia:point val="23.355,57.6"/>
       </dia:attribute>

@@ -23,6 +23,15 @@
 namespace dogen {
 namespace formatters {
 
+void repository::clear() {
+    file_formatters_.clear();
+    transformers_.clear();
+}
+
+bool repository::empty() const {
+    return file_formatters_.empty() && transformers_.empty();
+}
+
 const repository::file_formatters_type& repository::file_formatters() const {
     return file_formatters_;
 }

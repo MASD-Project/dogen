@@ -18,12 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/test/logging.hpp"
 #include "dogen/formatters/types/file_formatter_interface.hpp"
 #include "dogen/formatters/types/transformer_interface.hpp"
 #include "dogen/formatters/types/workflow.hpp"
 
+using namespace dogen::utility::log;
+
+namespace {
+
+auto lg(logger_factory("formatters.workflow"));
+
+}
+
 namespace dogen {
 namespace formatters {
+
+workflow::workflow(const paths_type& data_files_directories)
+    : annotation_factory_(data_files_directories) {
+
+    if (data_files_directories.empty())
+        BOOST_LOG_SEV(lg, warn) << "No data files directory provided.";
+    else
+        BOOST_LOG_SEV(lg, debug) << "Data directories:"
+                                 << data_files_directories;
+
+    annotation_factory_.load_reference_data();
+}
 
 void workflow::register_interface(file_formatter_type ff) {
     repository().file_formatters().push_back(ff);
@@ -52,8 +74,14 @@ std::list<file> workflow::execute(const entities_type& entities) {
 
 std::list<file> workflow::execute(const sml::model& m) {
     std::list<file> r;
+
+    if (repository().transformers().empty()) {
+        BOOST_LOG_SEV(lg, warn) << "There are no SML transformers registered";
+        return r;
+    }
+
     for (const auto& t : repository().transformers()) {
-        const auto& entities(t->transform(m));
+        const auto& entities(t->transform(m, annotation_factory_));
         for (const auto& e : entities) {
             for (const auto& f : repository().file_formatters()) {
                 const auto of(f->format(*e));

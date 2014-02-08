@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
 #include "dogen/sml/types/model_fwd.hpp"
+#include "dogen/formatters/types/annotation_factory_fwd.hpp"
 #include "dogen/formatters/types/entity_fwd.hpp"
 
 namespace dogen {
@@ -63,7 +64,8 @@ public:
     /**
      * @brief Transforms the SML model into entities.
      */
-    virtual entities_type transform(const sml::model& m) const = 0;
+    virtual entities_type transform(const sml::model& m,
+        const annotation_factory& f) const = 0;
 };
 
 } }

@@ -26,8 +26,10 @@
 #endif
 
 #include <list>
+#include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/transformer_interface_fwd.hpp"
 #include "dogen/formatters/types/file_formatter_interface_fwd.hpp"
+#include "dogen/formatters/types/annotation_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/entity_fwd.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -56,6 +58,10 @@ public:
 public:
     typedef boost::shared_ptr<file_formatter_interface> file_formatter_type;
     typedef boost::shared_ptr<transformer_interface> transformer_type;
+    typedef std::list<boost::filesystem::path> paths_type;
+
+public:
+    explicit workflow(const paths_type& data_files_directories);
 
 public:
     /**
@@ -96,6 +102,9 @@ public:
      * @brief Execute the workflow.
      */
     std::list<file> execute(const sml::model& m);
+
+private:
+    annotation_factory annotation_factory_;
 };
 
 } }

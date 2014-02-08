@@ -108,6 +108,14 @@ private:
 
 public:
     /**
+     * @brief Returns true if there is any reference data at all in the
+     * factory.
+     *
+     * @note This method is mainly for tests.
+     */
+    bool empty() const;
+
+    /**
      * @brief Loads all of the required reference data from the file
      * system.
      */

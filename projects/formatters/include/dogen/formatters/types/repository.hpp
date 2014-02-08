@@ -52,6 +52,17 @@ public:
 
 public:
     /**
+     * @brief Clears all containers in the repository.
+     */
+    void clear();
+
+    /**
+     * @brief Returns true if all containers are empty.
+     */
+    bool empty() const;
+
+public:
+    /**
      * @brief Collection of file formatters.
      */
     /**@{*/
