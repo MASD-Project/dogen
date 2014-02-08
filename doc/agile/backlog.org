@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for unique log files                                  :story:
+
+At present all of the targets for code generation use the same log
+file, in the output directory. This is a problem if =-jN= where N > 1
+because we now have an unreadable log file. What we really need is
+some kind of command line parameter to name the log file, perhaps
+appending the target name; anything that would create unique,
+identifiable log file names.
+
 *** Remove references to PFH in makefiles                             :story:
 
 Seems like the correct way of finding libraries is to use
