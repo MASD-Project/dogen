@@ -2297,6 +2297,11 @@ As these are not so common they have been left for later.
   another type of relationship to model this, as well as another type
   of file in tags; the file would then have several Boolean flags one
   can tick such as =std_shared_ptr=, =boost_shared_ptr= and so on.
+- it should also be possible to add some meta-data to an attribute and
+  get it to generate a typedef, e.g. cpp.typedef = "xyz" would result
+  in the creation of typedef xyz using the type of the attribute;
+  getters, setters and property would then be declared with the
+  typedef.
 
 *** Automatic typedef generation                                      :story:
 
