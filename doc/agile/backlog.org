@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** IOable services                                                   :story:
+
+Even though we do not code generate services, it would be nice if we
+could still setup their IO infrastructure - something basic just
+outputting the type and taking inheritance into account. We end up
+doing a lot of this manually anyway.
+
+Also, if a service has a bunch of attributes that are IOable, we
+should set them up too.
+
 *** Add support for unique log files                                  :story:
 
 At present all of the targets for code generation use the same log
