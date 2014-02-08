@@ -91,7 +91,7 @@ if(WITH_PROFILING)
     if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
         # FIXME: profiling flags appear not to be used during
         # compilation so disable the warning. bit of a hack, for now.
-        set(profiling_flags "${profiling_flags} -Wno-unused-arguments")
+        set(profiling_flags "${profiling_flags} -Qunused-arguments")
 
         set(profiling_flags "${profiling_flags} --coverage")
         set(profiling_flags "${profiling_flags} -Xclang -coverage-cfg-checksum")
