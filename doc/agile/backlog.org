@@ -139,9 +139,15 @@ example:
   diagrams
 - needle: the small library with support for boost and standard
   library (hashing, test data, etc.)
+- patch: library with code to update a dia Diagram given a C++ code
+  base. Doesn't create new classes - only adds or removes methods in
+  existing classes.
+- patcher: tool that uses the patch library.
 
 All binaries are prefixed with dogen to avoid clashes,
 e.g. =dogen_knitter=.
+
+See the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][Wikipedia glossary of sewing terms]].
 
 *** Code-generating formatters as text templates                      :story:
 
