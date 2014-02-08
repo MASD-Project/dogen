@@ -32,7 +32,7 @@ terribly well.
 
 We developed our own domain generator because we could not find one
 that fitted our requirements - open source or otherwise. You can see
-the results of our research [[https://github.com/kitanda/dogen#related-work][below]].
+the results of our research [[https://github.com/kitanda/dogen/blob/master/doc/manual/manual.org#appendix-a---related-work][in the manual's appendix]].
 
 Note that Dogen is specifically tailored for our needs and as such it
 is not a general purpose domain generator. We are, however, wiling to
