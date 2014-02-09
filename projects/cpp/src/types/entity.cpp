@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/cpp/io/specialized_property_sheet_io.hpp"
 #include "dogen/cpp/types/entity.hpp"
 
 
@@ -44,23 +45,44 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 
 entity::entity(
     const std::string& name,
     const std::string& documentation,
-    const std::list<std::string>& namespaces)
+    const std::list<std::string>& namespaces,
+    const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets)
     : name_(name),
       documentation_(documentation),
-      namespaces_(namespaces) { }
+      namespaces_(namespaces),
+      specialized_property_sheets_(specialized_property_sheets) { }
 
 void entity::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::entity\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-      << "\"namespaces\": " << namespaces_
+      << "\"namespaces\": " << namespaces_ << ", "
+      << "\"specialized_property_sheets\": " << specialized_property_sheets_
       << " }";
 }
 
@@ -69,12 +91,14 @@ void entity::swap(entity& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(namespaces_, other.namespaces_);
+    swap(specialized_property_sheets_, other.specialized_property_sheets_);
 }
 
 bool entity::compare(const entity& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
-        namespaces_ == rhs.namespaces_;
+        namespaces_ == rhs.namespaces_ &&
+        specialized_property_sheets_ == rhs.specialized_property_sheets_;
 }
 
 const std::string& entity::name() const {
@@ -123,6 +147,22 @@ void entity::namespaces(const std::list<std::string>& v) {
 
 void entity::namespaces(const std::list<std::string>&& v) {
     namespaces_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& entity::specialized_property_sheets() const {
+    return specialized_property_sheets_;
+}
+
+std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& entity::specialized_property_sheets() {
+    return specialized_property_sheets_;
+}
+
+void entity::specialized_property_sheets(const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& v) {
+    specialized_property_sheets_ = v;
+}
+
+void entity::specialized_property_sheets(const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>&& v) {
+    specialized_property_sheets_ = std::move(v);
 }
 
 } }

@@ -5945,10 +5945,10 @@ for Java, etc.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#specialised_property_sheets#</dia:string>
+            <dia:string>#specialized_property_sheets#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,specialised_property_sheet&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,specialized_property_sheet&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

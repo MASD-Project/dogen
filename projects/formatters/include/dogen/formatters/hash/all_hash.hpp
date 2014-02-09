@@ -19,10 +19,12 @@
  *
  */
 #include "dogen/formatters/hash/annotation_hash.hpp"
+#include "dogen/formatters/hash/code_generation_marker_property_sheet_hash.hpp"
 #include "dogen/formatters/hash/comment_styles_hash.hpp"
 #include "dogen/formatters/hash/editors_hash.hpp"
 #include "dogen/formatters/hash/entity_hash.hpp"
 #include "dogen/formatters/hash/file_hash.hpp"
+#include "dogen/formatters/hash/general_property_sheet_hash.hpp"
 #include "dogen/formatters/hash/licence_hash.hpp"
 #include "dogen/formatters/hash/modeline_field_hash.hpp"
 #include "dogen/formatters/hash/modeline_group_hash.hpp"

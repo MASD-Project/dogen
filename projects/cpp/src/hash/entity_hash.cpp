@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/entity_hash.hpp"
+#include "dogen/cpp/hash/specialized_property_sheet_hash.hpp"
 
 namespace {
 
@@ -37,6 +38,15 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_specialized_property_sheet(const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -48,6 +58,7 @@ std::size_t entity_hasher::hash(const entity&v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_string(v.namespaces()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_specialized_property_sheet(v.specialized_property_sheets()));
 
     return seed;
 }

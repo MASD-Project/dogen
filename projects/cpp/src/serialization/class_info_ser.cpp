@@ -69,6 +69,8 @@ void save(Archive& ar,
     ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
     ar << make_nvp("class_type", v.class_type_);
     ar << make_nvp("generation_type", v.generation_type_);
+    ar << make_nvp("generate_complete_constructor", v.generate_complete_constructor_);
+    ar << make_nvp("enable_integrated_io", v.enable_integrated_io_);
 }
 
 template<typename Archive>
@@ -95,6 +97,8 @@ void load(Archive& ar,
     ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
     ar >> make_nvp("class_type", v.class_type_);
     ar >> make_nvp("generation_type", v.generation_type_);
+    ar >> make_nvp("generate_complete_constructor", v.generate_complete_constructor_);
+    ar >> make_nvp("enable_integrated_io", v.enable_integrated_io_);
 }
 
 } }

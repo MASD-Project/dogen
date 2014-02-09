@@ -17,13 +17,13 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-09 Sun 01:13]
+Clock summary at [2014-02-09 Sun 01:23]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *16:05* |       |      |
+| *Total time*                                                          | *16:16* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                       |         | 16:05 |      |
+| Development Stories Implemented                                       |         | 16:16 |      |
 | IMPLEMENTATION Release notes and backlog grooming                     |         |       | 2:02 |
 | IMPLEMENTATION Updates to the manual and readme files                 |         |       | 0:13 |
 | COMPLETED Create a road map for the work ahead                        |         |       | 0:31 |
@@ -32,7 +32,7 @@ Clock summary at [2014-02-09 Sun 01:13]
 | COMPLETED Design and implement the formatter model workflow           |         |       | 6:12 |
 | COMPLETED Change c++ model entity to inherit from formatter's entity  |         |       | 0:18 |
 | COMPLETED Create a list of tags and define their structure            |         |       | 1:01 |
-| IMPLEMENTATION Add all data required by types formatter to C++ entity |         |       | 2:14 |
+| IMPLEMENTATION Add all data required by types formatter to C++ entity |         |       | 2:25 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -268,6 +268,7 @@ Examples:
 : dogen.features.cpp.types.main_header.file_name some_type
 
 *** IMPLEMENTATION Add all data required by types formatter to C++ entity :story:
+    CLOCK: [2014-02-09 Sun 01:12]--[2014-02-09 Sun 01:23] =>  0:11
     CLOCK: [2014-02-09 Sun 00:14]--[2014-02-09 Sun 01:12] =>  0:58
     CLOCK: [2014-02-08 Sat 21:55]--[2014-02-08 Sat 23:11] =>  1:16
 

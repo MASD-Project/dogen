@@ -102,6 +102,8 @@ std::size_t class_info_hasher::hash(const class_info&v) {
     combine(seed, v.is_original_parent_visitable());
     combine(seed, v.class_type());
     combine(seed, v.generation_type());
+    combine(seed, v.generate_complete_constructor());
+    combine(seed, v.enable_integrated_io());
 
     return seed;
 }

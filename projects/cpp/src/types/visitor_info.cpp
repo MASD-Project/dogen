@@ -52,10 +52,12 @@ visitor_info::visitor_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
+    const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets,
     const std::list<std::string>& types)
     : dogen::cpp::entity(name,
       documentation,
-      namespaces),
+      namespaces,
+      specialized_property_sheets),
       types_(types) { }
 
 void visitor_info::to_stream(std::ostream& s) const {

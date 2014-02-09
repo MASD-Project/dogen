@@ -29,28 +29,32 @@
 #include <iosfwd>
 #include <list>
 #include <string>
+#include <unordered_map>
 #include "dogen/cpp/serialization/entity_fwd_ser.hpp"
 #include "dogen/cpp/types/entity_visitor.hpp"
+#include "dogen/cpp/types/specialized_property_sheet.hpp"
 #include "dogen/formatters/types/entity.hpp"
 
 namespace dogen {
 namespace cpp {
 
 /**
- * @brief Top-level formatable entity in the C++ model.
+ * @brief Top-level entity in the model.
  */
 class entity : public formatters::entity {
 public:
     entity() = default;
     entity(const entity&) = default;
     entity(entity&&) = default;
-    virtual ~entity() noexcept;
+
+    virtual ~entity() noexcept = 0;
 
 public:
     entity(
         const std::string& name,
         const std::string& documentation,
-        const std::list<std::string>& namespaces);
+        const std::list<std::string>& namespaces,
+        const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets);
 
 private:
     template<typename Archive>
@@ -105,6 +109,16 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief Specialised property sheets for this entity.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets() const;
+    std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets();
+    void specialized_property_sheets(const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& v);
+    void specialized_property_sheets(const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>&& v);
+    /**@}*/
+
 protected:
     bool compare(const entity& rhs) const;
 public:
@@ -117,6 +131,7 @@ private:
     std::string name_;
     std::string documentation_;
     std::list<std::string> namespaces_;
+    std::unordered_map<std::string, dogen::cpp::specialized_property_sheet> specialized_property_sheets_;
 };
 
 inline entity::~entity() noexcept { }

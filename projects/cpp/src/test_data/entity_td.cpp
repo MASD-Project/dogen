@@ -25,6 +25,7 @@
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
+#include "dogen/cpp/test_data/specialized_property_sheet_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
 
 namespace {
@@ -43,6 +44,19 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+dogen::cpp::specialized_property_sheet
+create_dogen_cpp_specialized_property_sheet(const unsigned int position) {
+    return dogen::cpp::specialized_property_sheet_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::cpp::specialized_property_sheet> create_std_unordered_map_std_string_dogen_cpp_specialized_property_sheet(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::specialized_property_sheet> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_specialized_property_sheet(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -54,6 +68,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.documentation(create_std_string(position + 1));
     v.namespaces(create_std_list_std_string(position + 2));
+    v.specialized_property_sheets(create_std_unordered_map_std_string_dogen_cpp_specialized_property_sheet(position + 3));
 }
 
 entity_generator::result_type*

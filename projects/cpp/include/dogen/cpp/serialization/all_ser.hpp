@@ -39,4 +39,5 @@
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_ser.hpp"
 #include "dogen/cpp/serialization/source_file_ser.hpp"
+#include "dogen/cpp/serialization/specialized_property_sheet_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"

@@ -35,7 +35,9 @@
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
+#include "dogen/cpp/serialization/specialized_property_sheet_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 
 BOOST_CLASS_TRACKING(
@@ -52,6 +54,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("namespaces", v.namespaces_);
+    ar << make_nvp("specialized_property_sheets", v.specialized_property_sheets_);
 }
 
 template<typename Archive>
@@ -61,6 +64,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("namespaces", v.namespaces_);
+    ar >> make_nvp("specialized_property_sheets", v.specialized_property_sheets_);
 }
 
 } }

@@ -119,12 +119,15 @@ class_info::class_info()
       is_immutable_(static_cast<bool>(0)),
       is_original_parent_visitable_(static_cast<bool>(0)),
       class_type_(static_cast<dogen::cpp::class_types>(0)),
-      generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+      generation_type_(static_cast<dogen::sml::generation_types>(0)),
+      generate_complete_constructor_(static_cast<bool>(0)),
+      enable_integrated_io_(static_cast<bool>(0)) { }
 
 class_info::class_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
+    const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets,
     const std::list<dogen::cpp::property_info>& properties,
     const std::list<dogen::cpp::property_info>& all_properties,
     const bool has_primitive_properties,
@@ -142,10 +145,13 @@ class_info::class_info(
     const bool is_immutable,
     const bool is_original_parent_visitable,
     const dogen::cpp::class_types& class_type,
-    const dogen::sml::generation_types& generation_type)
+    const dogen::sml::generation_types& generation_type,
+    const bool generate_complete_constructor,
+    const bool enable_integrated_io)
     : dogen::cpp::entity(name,
       documentation,
-      namespaces),
+      namespaces,
+      specialized_property_sheets),
       properties_(properties),
       all_properties_(all_properties),
       has_primitive_properties_(has_primitive_properties),
@@ -163,7 +169,9 @@ class_info::class_info(
       is_immutable_(is_immutable),
       is_original_parent_visitable_(is_original_parent_visitable),
       class_type_(class_type),
-      generation_type_(generation_type) { }
+      generation_type_(generation_type),
+      generate_complete_constructor_(generate_complete_constructor),
+      enable_integrated_io_(enable_integrated_io) { }
 
 void class_info::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -194,7 +202,9 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
       << "\"class_type\": " << class_type_ << ", "
-      << "\"generation_type\": " << generation_type_
+      << "\"generation_type\": " << generation_type_ << ", "
+      << "\"generate_complete_constructor\": " << generate_complete_constructor_ << ", "
+      << "\"enable_integrated_io\": " << enable_integrated_io_
       << " }";
 }
 
@@ -220,6 +230,8 @@ void class_info::swap(class_info& other) noexcept {
     swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
     swap(class_type_, other.class_type_);
     swap(generation_type_, other.generation_type_);
+    swap(generate_complete_constructor_, other.generate_complete_constructor_);
+    swap(enable_integrated_io_, other.enable_integrated_io_);
 }
 
 bool class_info::equals(const dogen::cpp::entity& other) const {
@@ -247,7 +259,9 @@ bool class_info::operator==(const class_info& rhs) const {
         is_immutable_ == rhs.is_immutable_ &&
         is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
         class_type_ == rhs.class_type_ &&
-        generation_type_ == rhs.generation_type_;
+        generation_type_ == rhs.generation_type_ &&
+        generate_complete_constructor_ == rhs.generate_complete_constructor_ &&
+        enable_integrated_io_ == rhs.enable_integrated_io_;
 }
 
 class_info& class_info::operator=(class_info other) {
@@ -454,6 +468,22 @@ dogen::sml::generation_types class_info::generation_type() const {
 
 void class_info::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
+}
+
+bool class_info::generate_complete_constructor() const {
+    return generate_complete_constructor_;
+}
+
+void class_info::generate_complete_constructor(const bool v) {
+    generate_complete_constructor_ = v;
+}
+
+bool class_info::enable_integrated_io() const {
+    return enable_integrated_io_;
+}
+
+void class_info::enable_integrated_io(const bool v) {
+    enable_integrated_io_ = v;
 }
 
 } }

@@ -58,6 +58,7 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
+        const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets,
         const std::list<dogen::cpp::property_info>& properties,
         const std::list<dogen::cpp::property_info>& all_properties,
         const bool has_primitive_properties,
@@ -75,7 +76,9 @@ public:
         const bool is_immutable,
         const bool is_original_parent_visitable,
         const dogen::cpp::class_types& class_type,
-        const dogen::sml::generation_types& generation_type);
+        const dogen::sml::generation_types& generation_type,
+        const bool generate_complete_constructor,
+        const bool enable_integrated_io);
 
 private:
     template<typename Archive>
@@ -268,6 +271,22 @@ public:
     void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
+    /**
+     * @brief If set to true, a complete constructor will be generated.
+     */
+    /**@{*/
+    bool generate_complete_constructor() const;
+    void generate_complete_constructor(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, IO operations will be in the class itself rather than on a separate facet.
+     */
+    /**@{*/
+    bool enable_integrated_io() const;
+    void enable_integrated_io(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const class_info& rhs) const;
     bool operator!=(const class_info& rhs) const {
@@ -300,6 +319,8 @@ private:
     bool is_original_parent_visitable_;
     dogen::cpp::class_types class_type_;
     dogen::sml::generation_types generation_type_;
+    bool generate_complete_constructor_;
+    bool enable_integrated_io_;
 };
 
 } }
