@@ -343,10 +343,13 @@ functionality, this turned out to be a good decision.
 **** Meta-data and tags
 
 In certain cases we had the need to pass certain information to SML
-for which there was no available equivalent. To solve this problem we
-created a set of special "instructions" that are interpreted by
-Dogen. These instructions are passed in to Dogen via UML Comments,
-with a special form:
+for which there was no available equivalent in Dia. In some cases
+these were just shortcomings of the application and could be solved by
+patching it; in some other cases, it just made no sense at all to
+convey this kind of information in Dia. To solve this problem in a
+general manner, we created a set of special "instructions" that are
+interpreted by Dogen. These instructions are passed in to Dogen via
+UML Comments, with a special form:
 
 : #DOGEN KEY=VALUE
 
