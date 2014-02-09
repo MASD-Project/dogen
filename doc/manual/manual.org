@@ -340,6 +340,39 @@ direct dependency with Dia's code base. Since Dia XML changes very
 infrequently and since we use such a small part of Dia's
 functionality, this turned out to be a good decision.
 
+**** Meta-data and tags
+
+In certain cases we had the need to pass certain information to SML
+for which there was no available equivalent. To solve this problem we
+created a set of special "instructions" that are interpreted by
+Dogen. These instructions are passed in to Dogen via UML Comments,
+with a special form:
+
+: #DOGEN KEY=VALUE
+
+All lines starting with the well-known prefix =#DOGEN= are considered
+special instructions. They must follow the key-value-pair form defined
+above.
+
+Initially this was done to fix a couple of minor problems with Dia,
+but this infrastructure has taken a life of its own, and its now used
+through Dogen. Each sub-system takes responsibility of its own keys -
+it defines them and validates to ensure the values for a key are
+valid. In the remainder of this manual you will find sections with a
+name similar to this one, where we will define the tags available for
+that component and their semantics.
+
+These keys within Dogen are known as /tags/ and they are part of the
+meta-data processing sub-system.
+
+Dia defines the following tags:
+
+- =dia.comment=: Comment provided by user when dia does not allow for
+  it.
+- =dia.identity_attribute=: Attribute that provides this entity its
+  identity.
+- =is_final=: If true, the type cannot be inherited from.
+
 *** The middle-end
 
 We store the domain model internally as SML - a /meta-model/ largely
