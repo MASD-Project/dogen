@@ -17,20 +17,22 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-08 Sat 21:55]
+Clock summary at [2014-02-09 Sun 01:13]
 
-| Headline                                                             | Time    |       |      |
-|----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                         | *12:50* |       |      |
-|----------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                      |         | 12:50 |      |
-| IMPLEMENTATION Release notes and backlog grooming                    |         |       | 2:02 |
-| IMPLEMENTATION Updates to the manual and readme files                |         |       | 0:13 |
-| COMPLETED Create a road map for the work ahead                       |         |       | 0:31 |
-| COMPLETED Add common properties to C++ entity                        |         |       | 1:23 |
-| COMPLETED When on clang 3.4 enable code coverage flags               |         |       | 2:11 |
-| COMPLETED Design and implement the formatter model workflow          |         |       | 6:12 |
-| COMPLETED Change c++ model entity to inherit from formatter's entity |         |       | 0:18 |
+| Headline                                                              | Time    |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                          | *16:05* |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                       |         | 16:05 |      |
+| IMPLEMENTATION Release notes and backlog grooming                     |         |       | 2:02 |
+| IMPLEMENTATION Updates to the manual and readme files                 |         |       | 0:13 |
+| COMPLETED Create a road map for the work ahead                        |         |       | 0:31 |
+| COMPLETED Add common properties to C++ entity                         |         |       | 1:23 |
+| COMPLETED When on clang 3.4 enable code coverage flags                |         |       | 2:11 |
+| COMPLETED Design and implement the formatter model workflow           |         |       | 6:12 |
+| COMPLETED Change c++ model entity to inherit from formatter's entity  |         |       | 0:18 |
+| COMPLETED Create a list of tags and define their structure            |         |       | 1:01 |
+| IMPLEMENTATION Add all data required by types formatter to C++ entity |         |       | 2:14 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -203,13 +205,88 @@ We need to maintain the visitor structure intact, but at the same
 time, we need to make the C++ entity inherit from the base entity in
 the formatters model.
 
-*** Add all data required by types formatter to C++ entity            :story:
+*** COMPLETED Create a list of tags and define their structure        :story:
+    CLOSED: [2014-02-09 Sun 01:12]
+    CLOCK: [2014-02-08 Sat 23:11]--[2014-02-09 Sun 00:12] =>  1:01
+
+The following are all valid tags:
+
+- /dogen.diagram.comment/: read by dia processor. Supplements the lack
+  of comments in some dia elements such as the model itself and
+  packages. Only valid in text boxes; only valid on one text box per
+  scope.
+- /dogen.modeling.is_final/: bool; makes the current class final or
+  not final.
+- /dogen.modeling.identity_attribute/: string; name of the attribute
+  to be used as a key for the entity. can be repeated to make up a
+  composite key.
+
+The following are applicable to any of the nodes in
+/features.FEATURE.FACET.FILE/; that is they can exist at each of these
+levels; the precedence is from the bottom to the top.
+
+- /generate_preamble/: bool
+- /copyright/: string; can be repeated for multiple holders.
+- /licence/: string; valid licence name.
+- /modeline_group/: string; valid modeline group name.
+- /code_generation_marker.add_date_time/: bool
+- /code_generation_marker.add_warning/: bool
+- /code_generation_marker.message/: string
+- /enabled/: bool
+
+Examples:
+
+: dogen.features.copyright Copyright (C) 2012 Foo Bar <foo.bar@example.com>
+: dogen.features.cpp.copyright Copyright (C) 2012 Foo Bar <foo.bar@example.com>
+
+The following are only applicable at the feature level, to any
+feature:
+
+- /directory_name/
+
+Examples:
+
+: dogen.features.cpp.enabled true
+
+The following are only applicable at the facet level, to any facet:
+
+- /directory_name/
+- /postfix/
+
+Examples:
+
+: dogen.features.cpp.std_hash.directory_name hash
+
+The following are only applicable at the file level, to any file:
+
+- /overwrite/
+- /file_name/
+- /extension/
+
+Examples:
+
+: dogen.features.cpp.types.main_header.file_name some_type
+
+*** IMPLEMENTATION Add all data required by types formatter to C++ entity :story:
+    CLOCK: [2014-02-09 Sun 00:14]--[2014-02-09 Sun 01:12] =>  0:58
+    CLOCK: [2014-02-08 Sat 21:55]--[2014-02-08 Sat 23:11] =>  1:16
 
 We need to ensure the C++ entities contain all the data required by
 the formatters. We can start with the types formatter:
 
 - constructor parameters;
 - ...
+
+How to resolve the meta-data situation:
+
+- create a step in SML that converts settings into tags
+- split tags into =core= and =features=. =core= is well defined: these
+  are switches that solve deficiencies in dia (comment, final) or limitations
+  of UML (inheritance across models). =features= is a top-level
+  container. =cpp= is a feature. all the properties at the =cpp= level
+  get intercepted in the C++ model (during transformation) and will be
+  expressed as types. The 
+- move tag processing
 
 *** Implement the file formatter interface in types formatter         :story:
 

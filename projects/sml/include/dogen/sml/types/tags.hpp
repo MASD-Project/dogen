@@ -92,7 +92,6 @@ struct tags {
      * @brief Name of the top-level parent of the inheritance
      * hierarchy.
      */
-
     static const std::string original_parent_name;
 
     /**
