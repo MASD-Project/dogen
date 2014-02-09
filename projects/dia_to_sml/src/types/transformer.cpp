@@ -26,10 +26,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/meta_data_reader.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
+#include "dogen/dia_to_sml/types/tags.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -356,7 +356,7 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
 
     for (const auto& p : e.local_properties()) {
         sml::meta_data_reader reader(p.meta_data());
-        if (reader.has_key(sml::tags::identity_attribute))
+        if (reader.has_key(tags::dia::identity_attribute))
             e.identity().push_back(p);
     }
 
@@ -454,10 +454,9 @@ void transformer::from_note(const processed_object& o) {
     const auto& documentation(pair.first);
     const auto& kvps(pair.second);
     sml::model& model(context_.model());
-    using sml::tags;
     if (o.child_node_id().empty()) {
         sml::meta_data_writer writer(model.meta_data());
-        const bool added(writer.add_if_marker_found(tags::comment, kvps));
+        const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
         if (added)
             model.documentation(documentation);
         return;
@@ -480,7 +479,7 @@ void transformer::from_note(const processed_object& o) {
 
     sml::module& module(j->second);
     sml::meta_data_writer writer(module.meta_data());
-    const bool added(writer.add_if_marker_found(tags::comment, kvps));
+    const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
     if (added)
         module.documentation(documentation);
 }

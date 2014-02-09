@@ -8,11 +8,19 @@
 		<count>4</count>
 		<item_version>0</item_version>
 		<item class_id="5" tracking_level="0" version="0">
-			<first>COMMENT</first>
+			<first>dia</first>
 			<second>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
-				<data>true</data>
+				<item>
+					<first>comment</first>
+					<second>
+						<count>0</count>
+						<item_version>0</item_version>
+						<data>true</data>
+					</second>
+				</item>
+				<data></data>
 			</second>
 		</item>
 		<item>

@@ -107,7 +107,7 @@ std::string mock_object_factory::to_oject_id(const unsigned int number) {
 
 object mock_object_factory::build_uml_note(const unsigned int number) {
     std::ostringstream ss;
-    ss << "#DOGEN COMMENT=true" << std::endl << std::endl
+    ss << "#DOGEN dia.comment=true" << std::endl << std::endl
        << "this is a comment." << std::endl;
 
     dogen::dia::string s(ss.str());

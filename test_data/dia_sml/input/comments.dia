@@ -482,7 +482,7 @@ it will be ignored.#</dia:string>
             <dia:string>#This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -572,7 +572,7 @@ This comment will be applied to the model namespace itself.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#package
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -664,7 +664,7 @@ This comment will be applied to the model namespace itself.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#package2
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

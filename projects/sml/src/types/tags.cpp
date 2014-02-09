@@ -28,13 +28,10 @@ const std::string tags::copyright_holder("COPYRIGHT");
 const std::string tags::licence_name("LICENCE");
 const std::string tags::modeline_group_name("MODELINE_GROUP");
 
-const std::string tags::comment("COMMENT");
-const std::string tags::identity_attribute("IDENTITY_ATTRIBUTE");
 const std::string tags::generate_preamble("generate_preamble");
 const std::string tags::original_parent_name("original_parent_name");
 const std::string tags::is_original_parent_visitable(
     "is_original_parent_visitable");
-const std::string tags::is_final("is_final");
 
 const std::string tags::bool_true("true");
 const std::string tags::bool_false("false");

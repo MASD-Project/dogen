@@ -2266,7 +2266,7 @@ it will be ignored.#</value>
 																<value>#This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
-#DOGEN COMMENT=true#</value>
+#DOGEN dia.comment=true#</value>
 															</value>
 														</item>
 													</values>
@@ -2702,7 +2702,7 @@ This comment will be applied to the model namespace itself.
 															<which>6</which>
 															<value>
 																<value>#package
-#DOGEN COMMENT=true#</value>
+#DOGEN dia.comment=true#</value>
 															</value>
 														</item>
 													</values>
@@ -3142,7 +3142,7 @@ This comment will be applied to the model namespace itself.
 															<which>6</which>
 															<value>
 																<value>#package2
-#DOGEN COMMENT=true#</value>
+#DOGEN dia.comment=true#</value>
 															</value>
 														</item>
 													</values>

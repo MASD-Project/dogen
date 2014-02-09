@@ -180,7 +180,7 @@
           <dia:attribute name="comment">
             <dia:string>#Identity attribute.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1116,7 +1116,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+            <dia:string>##DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1806,7 +1806,7 @@ These are the main cases:
 @li @e entity: pods marked as entity must have an identity
 @li @e keyed: entities marked as keyed will generate external keys.
 
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -1943,7 +1943,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#Identity property.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2102,7 +2102,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#First identity property.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2127,7 +2127,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#Second identity property.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2324,7 +2324,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#Identity property
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2459,7 +2459,7 @@ These are the main cases:
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+            <dia:string>##DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2595,7 +2595,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#Identity property.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2754,7 +2754,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#First identity property.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2779,7 +2779,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#Second identity property.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2938,7 +2938,7 @@ These are the main cases:
           <dia:attribute name="comment">
             <dia:string>#Identity property.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

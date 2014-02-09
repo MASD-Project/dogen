@@ -419,18 +419,6 @@ We should add a couple of tests that exercise the annotation
 factory. As it will have its own tests, we just need to make sure it
 works in general. For example, pass in an empty annotation.
 
-*** Use lowercase for all meta-data keys                              :story:
-
-We have a number of legacy meta-data keys which are in uppercase and
-need to be in lowercase. They may also need to be renamed to follow
-the "namespacing" structure. Example:
-
-: #DOGEN IDENTITY_ATTRIBUTE=true
-
-This should really be:
-
-: #DOGEN identity_attribute=true
-
 *** Remove speculative facet layers for hash and serialization        :story:
 
 For some unfathomable reason we decided to add a layer of indirection

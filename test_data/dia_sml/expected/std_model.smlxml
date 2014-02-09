@@ -1681,11 +1681,19 @@
 							<count>1</count>
 							<item_version>0</item_version>
 							<item class_id="28" tracking_level="0" version="0">
-								<first>IDENTITY_ATTRIBUTE</first>
+								<first>dia</first>
 								<second>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
-									<data>true</data>
+									<item>
+										<first>identity_attribute</first>
+										<second>
+											<count>0</count>
+											<item_version>0</item_version>
+											<data>true</data>
+										</second>
+									</item>
+									<data></data>
 								</second>
 							</item>
 							<data></data>
@@ -1781,11 +1789,19 @@
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>IDENTITY_ATTRIBUTE</first>
+								<first>dia</first>
 								<second>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
-									<data>true</data>
+									<item>
+										<first>identity_attribute</first>
+										<second>
+											<count>0</count>
+											<item_version>0</item_version>
+											<data>true</data>
+										</second>
+									</item>
+									<data></data>
 								</second>
 							</item>
 							<data></data>

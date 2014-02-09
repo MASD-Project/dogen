@@ -4914,7 +4914,7 @@ Orchestrates all the other workflows to
 produce a full code generation workflow across
 all the supported backends.
 
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

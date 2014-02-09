@@ -2460,7 +2460,7 @@ to ensure we do not have any missing dependencies. This is the job of the
 
 All of these steps are encompassed in the SML @ref workflow.
 
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3901,7 +3901,7 @@ all types in the merged model.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Fully qualified name.
 
-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+#DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

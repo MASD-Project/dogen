@@ -178,7 +178,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+            <dia:string>##DOGEN dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

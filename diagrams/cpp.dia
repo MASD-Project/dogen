@@ -6818,7 +6818,7 @@ the heavy use of inheritance.
 This is why we settled on something which duplicates quite a bit of SML; it
 seems like the least bad approach.
 
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

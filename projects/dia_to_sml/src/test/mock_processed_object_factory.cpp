@@ -109,7 +109,7 @@ processed_object mock_processed_object_factory::
 build_uml_note_with_marker(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
     std::ostringstream s;
-    s << "#DOGEN COMMENT=true" << std::endl << std::endl
+    s << "#DOGEN dia.comment=true" << std::endl << std::endl
       << doxygen_comment;
     r.text(s.str());
     return r;

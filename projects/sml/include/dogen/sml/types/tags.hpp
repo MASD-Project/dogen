@@ -66,21 +66,6 @@ struct tags {
     static const std::string modeline_group_name;
 
     /**
-     * @brief Comment provided by user when dia does not allow for it.
-     *
-     * For meta-types where comments are available in Dia (e.g. class,
-     * properties, etc), this parameter is ignored. For types where
-     * they are not (e.g. model, package), it will be used to populate
-     * the meta-type's documentation.
-     */
-    static const std::string comment;
-
-    /**
-     * @brief Attribute that provides this entity its identity.
-     */
-    static const std::string identity_attribute;
-
-    /**
      * @brief If set to true, the preamble will be generated.
      *
      * The preamble is made up of a modeline, copyright
@@ -99,11 +84,6 @@ struct tags {
      * visitable.
      */
     static const std::string is_original_parent_visitable;
-
-    /**
-     * @brief If true, the type cannot be inherited from.
-     */
-    static const std::string is_final;
 
     /**
      * @brief Valid values for Boolean types.

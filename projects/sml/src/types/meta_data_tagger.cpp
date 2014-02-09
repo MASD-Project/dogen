@@ -1072,9 +1072,6 @@ void meta_data_tagger::tag(object& o) const {
         }
     }
 
-    if (!o.is_parent())
-        writer.add_if_key_not_found(tags::is_final, tags::bool_true);
-
     writer.add_if_key_not_found(
         tags::cpp::types::generate_defaulted_functions, tags::bool_true);
 
