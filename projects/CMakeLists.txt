@@ -79,7 +79,7 @@ set(warning_flags "${warning_flags} -Wwrite-strings")
 
 # debug flags
 if(WITH_DEBUG)
-    set(optimisation_flags "-Og")
+    set(optimisation_flags "-g -O0")
 else()
     set(optimisation_flags "-O3")
 endif()
