@@ -17,13 +17,13 @@ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-09 Sun 19:28]
+Clock summary at [2014-02-11 Tue 19:59]
 
 | Headline                                                             | Time    |       |      |
 |----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                         | *17:37* |       |      |
+| *Total time*                                                         | *17:56* |       |      |
 |----------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                      |         | 17:37 |      |
+| Development Stories Implemented                                      |         | 17:56 |      |
 | IMPLEMENTATION Release notes and backlog grooming                    |         |       | 2:07 |
 | IMPLEMENTATION Updates to the manual and readme files                |         |       | 0:34 |
 | COMPLETED Create a road map for the work ahead                       |         |       | 0:31 |
@@ -33,6 +33,7 @@ Clock summary at [2014-02-09 Sun 19:28]
 | COMPLETED Change c++ model entity to inherit from formatter's entity |         |       | 0:18 |
 | COMPLETED Add all data required by types formatter to C++ entity     |         |       | 2:31 |
 | COMPLETED Create a list of tags and define their structure           |         |       | 1:01 |
+| IMPLEMENTATION Reduce nightly build times                            |         |       | 0:19 |
 | IMPLEMENTATION Clean up the tags according to the list defined       |         |       | 0:49 |
 #+end:
 
@@ -310,6 +311,14 @@ The following are only applicable at the file level, to any file:
 Examples:
 
 : dogen.features.cpp.types.main_header.file_name some_type
+
+*** IMPLEMENTATION Reduce nightly build times                         :spike:
+    CLOCK: [2014-02-11 Tue 19:40]--[2014-02-11 Tue 19:59] =>  0:19
+
+It seems that the reason why euler has been failing of late is the
+excessive time the nightly is taking to complete. It also seems we can
+enable parallel running of tests in CTest, which we are not doing at
+present. See [[http://www.cmake.org/pipermail/cmake-commits/2010-January/008269.html][this example]].
 
 *** IMPLEMENTATION Clean up the tags according to the list defined    :story:
     CLOCK: [2014-02-09 Sun 18:06]--[2014-02-09 Sun 18:15] =>  0:09
