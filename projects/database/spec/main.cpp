@@ -55,7 +55,8 @@ struct create_db_fixture {
         std::unique_ptr<odb::database> db(
             new odb::pgsql::database("build", "build", "musseque", "localhost"));
         odb::transaction t(db->begin());
-        odb::schema_catalog::create_schema(*db);
+        // FIXME: for now assume schema already exists
+        // odb::schema_catalog::create_schema(*db);
         t.commit();
     }
 };
