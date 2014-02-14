@@ -86,29 +86,35 @@ set(CPACK_ARCHIVE_COMPONENT_INSTALL TRUE)
 #
 # add the boost libraries from the PFH
 #
+set(boost_deps "")
 foreach(library ${Boost_LIBRARIES})
     if(NOT EXISTS "${stage_lib_dir}")
         file(MAKE_DIRECTORY "${stage_lib_dir}")
     endif()
 
     set(version "")
-    if (WIN32)
-    elseif (APPLE)
+    if (WIN32 OR APPLE)
+        execute_process(
+            COMMAND cp -L ${library}${version} ${stage_lib_dir}
+            RESULT_VARIABLE ret_var
+            OUTPUT_VARIABLE output_var)
+
+        set(library_name "")
+        get_filename_component(library_name ${library}${version} NAME)
+        install(FILES ${stage_lib_dir}/${library_name}
+            DESTINATION bin COMPONENT applications)
+
     elseif (UNIX)
-        set(version ".${Boost_MAJOR_VERSION}")
+        set(version "${Boost_MAJOR_VERSION}")
         set(version "${version}.${Boost_MINOR_VERSION}")
         set(version "${version}.${Boost_SUBMINOR_VERSION}")
+
+        if ("${boost_deps}" STREQUAL "")
+            set(boost_deps "libboost_${library} (>= ${version})")
+        else()
+            set(boost_deps "${boost_deps}, libboost_${library} (>= ${version})")
+        endif()
     endif()
-
-    execute_process(
-        COMMAND cp -L ${library}${version} ${stage_lib_dir}
-        RESULT_VARIABLE ret_var
-        OUTPUT_VARIABLE output_var)
-
-    set(library_name "")
-    get_filename_component(library_name ${library}${version} NAME)
-    install(FILES ${stage_lib_dir}/${library_name}
-        DESTINATION bin COMPONENT applications)
 endforeach()
 
 #
