@@ -87,32 +87,36 @@ set(CPACK_ARCHIVE_COMPONENT_INSTALL TRUE)
 # add the boost libraries from the PFH
 #
 set(boost_deps "")
-foreach(library ${Boost_LIBRARIES})
-    if(NOT EXISTS "${stage_lib_dir}")
-        file(MAKE_DIRECTORY "${stage_lib_dir}")
-    endif()
+if(NOT EXISTS "${stage_lib_dir}")
+    file(MAKE_DIRECTORY "${stage_lib_dir}")
+endif()
 
-    set(version "")
+foreach(library_path ${Boost_LIBRARIES})
     if (WIN32 OR APPLE)
         execute_process(
-            COMMAND cp -L ${library}${version} ${stage_lib_dir}
+            COMMAND cp -L ${library_path} ${stage_lib_dir}
             RESULT_VARIABLE ret_var
             OUTPUT_VARIABLE output_var)
 
         set(library_name "")
-        get_filename_component(library_name ${library}${version} NAME)
+        get_filename_component(library_name ${library_path} NAME)
         install(FILES ${stage_lib_dir}/${library_name}
             DESTINATION bin COMPONENT applications)
 
     elseif (UNIX)
-        set(version "${Boost_MAJOR_VERSION}")
-        set(version "${version}.${Boost_MINOR_VERSION}")
-        set(version "${version}.${Boost_SUBMINOR_VERSION}")
+        if (library_path MATCHES "boost")
+            set(version "${Boost_MAJOR_VERSION}")
+            set(version "${version}.${Boost_MINOR_VERSION}")
+            set(version "${version}.${Boost_SUBMINOR_VERSION}")
 
-        if ("${boost_deps}" STREQUAL "")
-            set(boost_deps "libboost_${library} (>= ${version})")
-        else()
-            set(boost_deps "${boost_deps}, libboost_${library} (>= ${version})")
+            get_filename_component(library_name ${library_path} NAME_WE)
+            string(REGEX REPLACE "_" "-" library_name "${library_name}")
+            set(library_name "${library_name}-dev")
+            if ("${boost_deps}" STREQUAL "")
+                set(boost_deps "${library_name} (>= ${version})")
+            else()
+                set(boost_deps "${boost_deps}, ${library_name} (>= ${version})")
+            endif()
         endif()
     endif()
 endforeach()

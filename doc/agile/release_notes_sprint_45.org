@@ -17,14 +17,15 @@ the =formatters= model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-18 Tue 08:05]
+Clock summary at [2014-02-18 Tue 08:42]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:04* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:04 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:04 |
+| Headline                                               | Time   |      |      |
+|--------------------------------------------------------+--------+------+------|
+| *Total time*                                           | *0:40* |      |      |
+|--------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                        |        | 0:40 |      |
+| IMPLEMENTATION Release notes and backlog grooming      |        |      | 0:21 |
+| IMPLEMENTATION Fix Debian packages to use system boost |        |      | 0:19 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -33,7 +34,8 @@ Clock summary at [2014-02-18 Tue 08:05]
 
 Updates to release notes and backlog.
 
-*** Fix Debian packages to use system boost                           :story:
+*** IMPLEMENTATION Fix Debian packages to use system boost            :story:
+    CLOCK: [2014-02-18 Tue 08:23]--[2014-02-18 Tue 08:42] =>  0:19
 
 We started this on the previous iteration but left the packages in an
 uninstallable state.
