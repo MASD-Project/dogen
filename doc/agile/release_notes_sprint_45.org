@@ -28,9 +28,49 @@ Clock summary at [2014-02-18 Tue 08:05]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-02-18 Tue 08:05]--[2014-02-18 Tue 08:22] =>  0:17
     CLOCK: [2014-02-18 Tue 08:01]--[2014-02-18 Tue 08:05] =>  0:04
 
 Updates to release notes and backlog.
+
+*** Fix Debian packages to use system boost                           :story:
+
+We started this on the previous iteration but left the packages in an
+uninstallable state.
+
+*** Integral: Linux builds should use Integral rather than pfh        :story:
+
+We started the PFH removal last iteration, but didn't complete it. We
+need to get all Linux builds working with Integral.
+
+*** Integral: test with rspec                                         :story:
+
+We started by using minitest for unit testing, but it seems rspec is
+more widely used.
+
+*** Integral: re-implement bash script in ruby                        :story:
+
+We started looking into this but didn't finish. We should just use
+ruby for all scripts. Investigate how hard it is to create a
+start/stop script in Ruby rather than bash.
+
+*** Fix issues with database tests                                    :story:
+
+Last sprint we solved the delays in nightlies by adding concurrency to
+the tests; however, that broke the database tests. We need to refactor
+the tests to allow them to run concurrently.
+
+**** Re-enable schema updates
+
+We are deleting the entire DB schema and re-applying it for every
+invocation of the tests. This does not work on a concurrent world. We
+commented it out for now, but we need a proper solution for this.
+
+**** Investigate errors in tests
+
+We seem to have traffic-lighters in the database tests when executing
+them concurrently. Somewhere they must be trampling on each others
+feet.
 
 *** Updates to the manual and readme files                             :task:
 
@@ -165,52 +205,3 @@ Drive (GDrive) location.
   folder, if latest, delete then create.
 
 ** Deprecated Development Stories
-*** Use lowercase for all meta-data keys                              :story:
-
-*Rationale*: Fixed with other tag related changes.
-
-We have a number of legacy meta-data keys which are in uppercase and
-need to be in lowercase. They may also need to be renamed to follow
-the "namespacing" structure. Example:
-
-: #DOGEN IDENTITY_ATTRIBUTE=true
-
-This should really be:
-
-: #DOGEN identity_attribute=true
-
-*** Remove =content_descriptor=                                       :story:
-
-*Rationale*: this story is too generic to be useful, it will be
-tackled on a formatter by formatter basis.
-
-We need a way to drive the formatter generation from the formatter
-itself rather than from the transformation process. The first step to
-get there is to remove content descriptors.
-
-*** Make use of the indenting stream in =cpp_formatters=              :story:
-
-*Rationale*: this story is too generic to be useful, it will be
-tackled on a formatter by formatter basis.
-
-Replace indenter with the new indenting stream.
-
-*** Make use of the boilerplate formatter in =cpp_formatters=         :story:
-
-*Rationale*: this story is too generic to be useful, it will be
-tackled on a formatter by formatter basis.
-
-Update all file formatters to use the boilerplate formatter.
-
-Consider creating a simple workflow in =formatters= that gets used by
-the cpp_formatters workflow (or passed in). The job of this workflow
-is to setup infrastructure common to all formatters such as loading
-licences, modelines, etc.
-
-*** Update =cpp= model with properties from tags                      :story:
-
-*Rationale*: this story is too generic to be useful, it will be
-tackled on a formatter by formatter basis.
-
-Read properties from the meta-data and represent them inside of the
-=cpp= model.
