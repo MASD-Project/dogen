@@ -1,0 +1,216 @@
+#+title: Release Notes for Sprint 45
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 45.
+
+The *Mission Statement* for this sprint remains the same: to tidy-up
+the =cpp= model, and by implication, the =cpp_formatters= model. We
+want to end up with a small number of top-level classes providing what
+each formatter needs, and modeling much of the meta-data as first
+class types. We also want to make use of all the services provided by
+the =formatters= model.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-02-18 Tue 08:05]
+
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:04* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:04 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:04 |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-02-18 Tue 08:01]--[2014-02-18 Tue 08:05] =>  0:04
+
+Updates to release notes and backlog.
+
+*** Updates to the manual and readme files                             :task:
+
+Use build downtime to update the manual and / or readme file.
+
+*** Clean up the tags according to the list defined                   :story:
+
+We have created a new tag structure in Sprint 44; implement it.
+
+**** IMPLEMENTATION Move dia tags into =dia_to_sml= model              :task:
+
+Each model will own its own tags. Move the tags used only by Dia to
+SML into this model. Update the manual with these tags.
+
+**** Remove C++ knowledge from SML tagger                              :task:
+
+We should just:
+
+- copy the features tags according to very simple heuristics;
+- for the moment, convert settings into tags. In the future, we will
+  deprecate all the formatter related settings - they must be done via
+  the tags.
+
+**** Implement a meta-data tranformer in SML to C++                   :story:
+
+We should do the appropriate defaulting when a tag is not found.
+
+*** Update meta-data processing                                       :story:
+
+The problem with the meta-data is that there is no single place where
+it is used; instead, we need it in different places. The best way is
+to distribute the responsibility of converting meta-data into the type
+system in the places that know about it:
+
+- in dia transformers (the comment)
+- in SML (is final, etc); copying across the feature graph into the
+  types with no knowledge of its contents;
+- in C++ transformer: transforming all of the meta-data it knows
+  of.
+
+Each model should define the tags that it knows of in a =tags= class.
+
+We also need to create a step in SML that converts settings into tags.
+
+*** Implement the file formatter interface in types formatter         :story:
+
+Move across this formatter to the new way of doing things.
+
+We need to cast the formatter entity to a C++ entity and dispatch it
+using the type visitor. We also need to add registration support.
+
+We also need to generate the following within the formatter:
+
+- file name
+- header guards
+- formatter specific includes
+- includes
+
+*** Add formatter workflow to the engine workflow                     :story:
+
+Even though we do not yet have anyone implementing these interfaces,
+we can already add the general workflow into the engine and make sure
+it doesn't break anything.
+
+*** Add tests for annotation factory                                  :story:
+
+Zero coverage on this one for some reason. Some simple tests come to
+mind:
+
+- empty data files directory results in empty factory;
+- valid data files directory results in non-empty factory;
+- invalid data files directory results in exception;
+- more than one data files directory results in expected load;
+- creating annotation for test model types works as expected.
+
+*** Refactor types header formatter                                   :story:
+
+Make the main types header formatters look like the =om= types formatter.
+
+**** Remove the parents dependency in transformer                      :task:
+
+At present the C++ to SML transformer requires both the parent and
+original parent to have been processed in order to process a type. In
+reality this is not required as all the information has already been
+made available by the tagger or the relationship container. We need to
+consume this data instead of relying on object look-ups.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** Add comments in =formatters= model                                :story:
+
+We haven't got any documentation at all in the new formatters
+morel. We need a small blurb about the language neutral formatting
+support the model is supposed to provide.
+
+*** Update comments in C++ model                                      :story:
+
+We have a very large blurb in this model that is rather old, and
+reflects a legacy understanding of the role of the C++ model.
+
+*** Add support to upload packages into GDrive                        :story:
+
+We need to upload the packages created by the build to a public Google
+Drive (GDrive) location.
+
+- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
+- See [[https://developers.google.com/drive/quickstart-ruby][this article]].
+- [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][Create folders]] to represent the different types of uploads:
+  =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
+  and tag as this would require no complex logic: if tag create new
+  folder, if latest, delete then create.
+
+** Deprecated Development Stories
+*** Use lowercase for all meta-data keys                              :story:
+
+*Rationale*: Fixed with other tag related changes.
+
+We have a number of legacy meta-data keys which are in uppercase and
+need to be in lowercase. They may also need to be renamed to follow
+the "namespacing" structure. Example:
+
+: #DOGEN IDENTITY_ATTRIBUTE=true
+
+This should really be:
+
+: #DOGEN identity_attribute=true
+
+*** Remove =content_descriptor=                                       :story:
+
+*Rationale*: this story is too generic to be useful, it will be
+tackled on a formatter by formatter basis.
+
+We need a way to drive the formatter generation from the formatter
+itself rather than from the transformation process. The first step to
+get there is to remove content descriptors.
+
+*** Make use of the indenting stream in =cpp_formatters=              :story:
+
+*Rationale*: this story is too generic to be useful, it will be
+tackled on a formatter by formatter basis.
+
+Replace indenter with the new indenting stream.
+
+*** Make use of the boilerplate formatter in =cpp_formatters=         :story:
+
+*Rationale*: this story is too generic to be useful, it will be
+tackled on a formatter by formatter basis.
+
+Update all file formatters to use the boilerplate formatter.
+
+Consider creating a simple workflow in =formatters= that gets used by
+the cpp_formatters workflow (or passed in). The job of this workflow
+is to setup infrastructure common to all formatters such as loading
+licences, modelines, etc.
+
+*** Update =cpp= model with properties from tags                      :story:
+
+*Rationale*: this story is too generic to be useful, it will be
+tackled on a formatter by formatter basis.
+
+Read properties from the meta-data and represent them inside of the
+=cpp= model.
