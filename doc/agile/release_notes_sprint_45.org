@@ -17,15 +17,15 @@ the =formatters= model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-18 Tue 08:42]
+Clock summary at [2014-02-19 Wed 09:53]
 
-| Headline                                               | Time   |      |      |
-|--------------------------------------------------------+--------+------+------|
-| *Total time*                                           | *0:40* |      |      |
-|--------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                        |        | 0:40 |      |
-| IMPLEMENTATION Release notes and backlog grooming      |        |      | 0:21 |
-| IMPLEMENTATION Fix Debian packages to use system boost |        |      | 0:19 |
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *1:33* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 1:33 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:21 |
+| COMPLETED Fix Debian packages to use system boost |        |      | 1:12 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -34,7 +34,10 @@ Clock summary at [2014-02-18 Tue 08:42]
 
 Updates to release notes and backlog.
 
-*** IMPLEMENTATION Fix Debian packages to use system boost            :story:
+*** COMPLETED Fix Debian packages to use system boost                 :story:
+    CLOSED: [2014-02-19 Wed 09:52]
+    CLOCK: [2014-02-19 Wed 07:52]--[2014-02-19 Wed 08:36] =>  0:44
+    CLOCK: [2014-02-18 Tue 18:16]--[2014-02-18 Tue 18:25] =>  0:09
     CLOCK: [2014-02-18 Tue 08:23]--[2014-02-18 Tue 08:42] =>  0:19
 
 We started this on the previous iteration but left the packages in an

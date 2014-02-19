@@ -111,7 +111,11 @@ foreach(library_path ${Boost_LIBRARIES})
 
             get_filename_component(library_name ${library_path} NAME_WE)
             string(REGEX REPLACE "_" "-" library_name "${library_name}")
-            set(library_name "${library_name}-dev")
+
+            # FIXME: boost 1.55 is not the default in unstable yet.
+            # set(library_name "${library_name}-dev")
+            set(library_name "${library_name}${Boost_MAJOR_VERSION}.")
+            set(library_name "${library_name}${Boost_MINOR_VERSION}-dev")
             if ("${boost_deps}" STREQUAL "")
                 set(boost_deps "${library_name} (>= ${version})")
             else()
@@ -275,6 +279,8 @@ elseif(UNIX)
         if (CMAKE_COMPILER_IS_CLANGXX)
             set(deps "${deps}, llvm-3.1-dev (>= 3.1.0)")
         endif()
+        set(deps "${deps}, ${boost_deps}")
+
         set(CPACK_DEBIAN_PACKAGE_DEPENDS ${deps})
         string(TOLOWER
             "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}_${CPACK_PACKAGE_ARCHITECTURE}" CPACK_PACKAGE_FILE_NAME)
