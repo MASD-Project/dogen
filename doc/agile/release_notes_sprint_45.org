@@ -17,18 +17,18 @@ the =formatters= model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-20 Thu 22:21]
+Clock summary at [2014-02-21 Fri 08:54]
 
 | Headline                                                  | Time   |      |      |
 |-----------------------------------------------------------+--------+------+------|
-| *Total time*                                              | *3:36* |      |      |
+| *Total time*                                              | *4:20* |      |      |
 |-----------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                           |        | 3:36 |      |
+| Development Stories Implemented                           |        | 4:20 |      |
 | IMPLEMENTATION Release notes and backlog grooming         |        |      | 0:21 |
 | COMPLETED Fix Debian packages to use system boost         |        |      | 1:12 |
+| COMPLETED Integral: test with rspec                       |        |      | 0:12 |
 | IMPLEMENTATION Clean up Lorenz development setup          |        |      | 0:33 |
-| IMPLEMENTATION Integral: re-implement bash script in ruby |        |      | 1:18 |
-| IMPLEMENTATION Integral: test with rspec                  |        |      | 0:12 |
+| IMPLEMENTATION Integral: re-implement bash script in ruby |        |      | 2:02 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -46,6 +46,13 @@ Updates to release notes and backlog.
 We started this on the previous iteration but left the packages in an
 uninstallable state.
 
+*** COMPLETED Integral: test with rspec                               :story:
+    CLOSED: [2014-02-21 Fri 07:56]
+    CLOCK: [2014-02-20 Thu 20:48]--[2014-02-20 Thu 21:00] =>  0:12
+
+We started by using minitest for unit testing, but it seems rspec is
+more widely used.
+
 *** IMPLEMENTATION Clean up Lorenz development setup                  :story:
     CLOCK: [2014-02-20 Thu 20:15]--[2014-02-20 Thu 20:48] =>  0:33
 
@@ -61,19 +68,17 @@ We don't seem to have a particularly good story around
 versioning. It's best to remove it for now until we really understand
 how it should work.
 
+In addition, we will be using Docker to test the packages, making
+versioning less of a necessity.
+
 *** IMPLEMENTATION Integral: re-implement bash script in ruby         :story:
+    CLOCK: [2014-02-21 Fri 07:56]--[2014-02-21 Fri 08:40] =>  0:44
     CLOCK: [2014-02-20 Thu 21:40]--[2014-02-20 Thu 22:19] =>  0:39
     CLOCK: [2014-02-20 Thu 21:01]--[2014-02-20 Thu 21:40] =>  0:39
 
 We started looking into this but didn't finish. We should just use
 ruby for all scripts. Investigate how hard it is to create a
 start/stop script in Ruby rather than bash.
-
-*** IMPLEMENTATION Integral: test with rspec                          :story:
-    CLOCK: [2014-02-20 Thu 20:48]--[2014-02-20 Thu 21:00] =>  0:12
-
-We started by using minitest for unit testing, but it seems rspec is
-more widely used.
 
 *** Integral: Linux builds should use Integral rather than pfh        :story:
 
