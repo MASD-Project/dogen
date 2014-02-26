@@ -17,18 +17,18 @@ the =formatters= model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-21 Fri 08:54]
+Clock summary at [2014-02-24 Mon 08:04]
 
 | Headline                                                  | Time   |      |      |
 |-----------------------------------------------------------+--------+------+------|
-| *Total time*                                              | *4:20* |      |      |
+| *Total time*                                              | *4:25* |      |      |
 |-----------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                           |        | 4:20 |      |
+| Development Stories Implemented                           |        | 4:25 |      |
 | IMPLEMENTATION Release notes and backlog grooming         |        |      | 0:21 |
 | COMPLETED Fix Debian packages to use system boost         |        |      | 1:12 |
 | COMPLETED Integral: test with rspec                       |        |      | 0:12 |
 | IMPLEMENTATION Clean up Lorenz development setup          |        |      | 0:33 |
-| IMPLEMENTATION Integral: re-implement bash script in ruby |        |      | 2:02 |
+| IMPLEMENTATION Integral: re-implement bash script in ruby |        |      | 2:07 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -58,6 +58,20 @@ more widely used.
 
 We need to move to the new ddc repos.
 
+*** IMPLEMENTATION Integral: re-implement bash script in ruby         :story:
+    CLOCK: [2014-02-26 Wed 07:55]--[2014-02-26 Wed 08:39] =>  0:44
+    CLOCK: [2014-02-25 Tue 07:52]--[2014-02-25 Tue 08:39] =>  0:47
+    CLOCK: [2014-02-24 Mon 07:58]--[2014-02-24 Mon 08:03] =>  0:05
+    CLOCK: [2014-02-21 Fri 07:56]--[2014-02-21 Fri 08:40] =>  0:44
+    CLOCK: [2014-02-20 Thu 21:40]--[2014-02-20 Thu 22:19] =>  0:39
+    CLOCK: [2014-02-20 Thu 21:01]--[2014-02-20 Thu 21:40] =>  0:39
+
+We started looking into this but didn't finish. We should just use
+ruby for all scripts. Investigate how hard it is to create a
+start/stop script in Ruby rather than bash.
+
+- RUBY_PLATFORM: identify the operative system.
+
 *** Re-enable flymake with new location                               :story:
 
 Flymake has stopped working after the move.
@@ -70,15 +84,6 @@ how it should work.
 
 In addition, we will be using Docker to test the packages, making
 versioning less of a necessity.
-
-*** IMPLEMENTATION Integral: re-implement bash script in ruby         :story:
-    CLOCK: [2014-02-21 Fri 07:56]--[2014-02-21 Fri 08:40] =>  0:44
-    CLOCK: [2014-02-20 Thu 21:40]--[2014-02-20 Thu 22:19] =>  0:39
-    CLOCK: [2014-02-20 Thu 21:01]--[2014-02-20 Thu 21:40] =>  0:39
-
-We started looking into this but didn't finish. We should just use
-ruby for all scripts. Investigate how hard it is to create a
-start/stop script in Ruby rather than bash.
 
 *** Integral: Linux builds should use Integral rather than pfh        :story:
 
