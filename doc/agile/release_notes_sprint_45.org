@@ -59,6 +59,7 @@ more widely used.
 We need to move to the new ddc repos.
 
 *** IMPLEMENTATION Integral: re-implement bash script in ruby         :story:
+    CLOCK: [2014-02-27 Thu 07:52]--[2014-02-27 Thu 08:38] =>  0:46
     CLOCK: [2014-02-26 Wed 07:55]--[2014-02-26 Wed 08:39] =>  0:44
     CLOCK: [2014-02-25 Tue 07:52]--[2014-02-25 Tue 08:39] =>  0:47
     CLOCK: [2014-02-24 Mon 07:58]--[2014-02-24 Mon 08:03] =>  0:05
