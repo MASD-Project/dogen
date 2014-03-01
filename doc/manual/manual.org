@@ -416,17 +416,33 @@ usage.
 
 * PART III - SPECIFICATIONS
 
-This part is made up of a set of specifications of different aspects
-of dogen, such as project structure, coding standards, and so on. The
+This part is made up of a set of specifications on different aspects
+of Dogen, such as project structure, coding standards, and so on. The
 objective is to create norms as we go along so that new developers
-understand the reasons behind historical decisions.
+understand the reasons behind historical decisions. These norms are
+not set in stone, of course. They are expected to change whenever the
+rationale behind them no longer applies, or if there are better
+options available - options that, for whatever reason, were not
+considered originally.
 
-In general, we follow the [[http://www.boost.org/development/requirements.html][Boost Library Requirements and Guidelines]]
-document.
+Its important to notice that these specifications will never be
+complete - in the sense that we will never cover all aspects of the
+development of Dogen. There will always be things that will remain
+unspecified. We shall try to at least cover those we consider more
+important. But the document is organic, and will be constantly
+evolving over time.
+
+The final reason behind the creation of these standards - and their
+inclusion in the main application manual - is that Dogen is a /code
+generator/; that is, we are making a large number of decisions about
+code that other people will use and in a very real sense, will be
+stuck with. Due to this we think there is a need to explain to users
+the reasons behind these choices.
 
 ** RFC 2119
 
-The definitions in RFC 2119 apply to the following sub-sections:
+The definitions in RFC 2119 apply to the text of this part. In
+particular:
 
 #+begin_quote
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -435,6 +451,9 @@ document are to be interpreted as described in RFC 2119.
 #+end_quote
 
 ** Project structure
+
+In this section we specify aspects related to project layout, file
+names and so on.
 
 *** File and directory names
 
@@ -565,6 +584,16 @@ output/win32-x86-clang-3_0-release
    are packaged they shall be removed from the repository.
 
 ** C++ coding standards
+
+In general, we follow the [[http://www.boost.org/development/requirements.html][Boost Library Requirements and Guidelines]]
+document. In a few rare cases we may make choices that contradict it;
+we shall try to explain the rationale best we can for those cases.
+
+These coding standards are not to be understood as classic coding
+standards such as [[http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml][Google's]]. We are just intending to capture the
+rationale of some of the choices we have made in the past so that it
+is not forgotten. Thus you may find the standards somewhat sparse, and
+silent in areas where other standards are very verbose.
 
 *** Physical Layout
 
@@ -1119,14 +1148,26 @@ object_types parse_object_type(std::string value);
 
 *** References
 
+This section lists books, sites and other material that we have read,
+perused or have been otherwise in contact with, and provide useful
+information with regards to C++ standards.
+
 **** Coding standards and guidelines
 
+- [[http://www.amazon.co.uk/Coding-Standards-Rules-Guidelines-Practices/dp/0321113586/ref%3Dsr_1_1?s%3Dbooks&ie%3DUTF8&qid%3D1393685150&sr%3D1-1&keywords%3DC%252B%252B%2BCoding%2BStandards%2B%253A%2BRules%252C%2BGuidelines%252C%2Band%2BBest%2BPractices][C++ Coding Standards : Rules, Guidelines, and Best Practices]]: The
+  book to read on coding standards, especially for C++. Legislate what
+  needs to be legislated and leaves alone what should be left alone.
+- [[http://www.boost.org/development/requirements.html][Boost coding standards]]: The standards and recommendations of the
+  boost project, on the whole useful.
+- [[http://www.amazon.co.uk/Large-Scale-C-Software-Design-APC/dp/0201633620][Large Scale Software Development With C++]]: This is a classic book
+  that discusses many aspects which are normally not considered such
+  as minimising compilation times, etc. Unfortunately it is dated on
+  some parts, making the read a bit more difficult. We need to do a
+  second parse of this book.
 - [[http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml][Google C++ Style Guide]]: Good in some bits, although very bad in
   others (for example, bans exceptions).
-- C++ Coding Standards : Rules, Guidelines, and Best Practices]]
 - [[https://github.com/holtgrewe/linty][Linty]]: Style Checking with Python & libclang. Requires v3.0.
 - [[http://www.parashift.com/c%2B%2B-faq-lite/][C++ FAQ]]: large resource on how to use the language
-- [[http://www.boost.org/development/requirements.html][Boost coding standards]]
 - [[http://www.doc.ic.ac.uk/lab/cplus/c%2B%2B.rules/][Programming in C++, Rules and Recommendations]]
 
 **** C++ Reference
