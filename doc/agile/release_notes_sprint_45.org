@@ -37,6 +37,12 @@ Clock summary at [2014-02-24 Mon 08:04]
 
 Updates to release notes and backlog.
 
+*** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-02-28 Fri 19:39]--[2014-02-28 Fri 19:51] =>  0:12
+    CLOCK: [2014-02-28 Fri 19:11]--[2014-02-28 Fri 19:24] =>  0:13
+
+Use build downtime to update the manual and / or readme file.
+
 *** COMPLETED Fix Debian packages to use system boost                 :story:
     CLOSED: [2014-02-19 Wed 09:52]
     CLOCK: [2014-02-19 Wed 07:52]--[2014-02-19 Wed 08:36] =>  0:44
@@ -108,10 +114,6 @@ commented it out for now, but we need a proper solution for this.
 We seem to have traffic-lighters in the database tests when executing
 them concurrently. Somewhere they must be trampling on each others
 feet.
-
-*** Updates to the manual and readme files                             :task:
-
-Use build downtime to update the manual and / or readme file.
 
 *** Clean up the tags according to the list defined                   :story:
 
