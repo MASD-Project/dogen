@@ -564,6 +564,630 @@ output/win32-x86-clang-3_0-release
    with the boost portable serialisation library. Once these projects
    are packaged they shall be removed from the repository.
 
+** C++ coding standards
+
+*** Physical Layout
+
+The physical layout deals with files, directories, binaries and any
+other artefacts that live in storage. We concern ourselves with only
+those physical artefacts that are part of or directly related to the
+C++ domain; the generic aspects of physical layout are dealt with in
+[[file:project_structure.org][project structure]].
+
+**** Files
+
+***** Extensions
+
+C++ source code can be stored in two types of files:
+
+- *header files*: in kitanda they always have the extension =hpp=;
+- *implementation files*: in kitanda they always have the extension
+  =cpp=.
+
+***** Names
+
+The general conventions for file naming are specified under [[file:project_structure.org][project
+structure]]. In terms of C++, files will be named according to the type
+of its contents:
+
+- files containing a /class/ shall be named after the class;
+- files containing nothing but /namespace/ shall be named after the
+  namespace (see below why this can happen);
+- files containing one or more free-functions shall be named according
+  to the /logical module/ that these functions constitute
+  (e.g. =utility= or =pricing=, etc).
+
+***** Makefiles
+
+Each top-level folder under =src= has a [[file:infrastructure/cmake.org][cmake]] makefile. In addition,
+each sub-folder of these top-level folders may or may not contain a
+makefile, depending on whether or not it houses a component.
+
+***** Folders
+
+All C++ source code lives under =code/cpp=. Kitanda's c++ source code
+is split into the usual src and include folders:
+
+- *src*: all implementation files and headers not expected to
+  be used by client code;
+- *include*: public headers.
+
+****** Include Folder
+
+All consumers of the API - including kitanda's own components - are
+expected to put the include folder in the compiler's include path,
+resulting in =#includes= of the form:
+
+#+begin_example
+#include "kitanda/kitanda.hpp"
+#+end_example
+
+There are three folders under include:
+
+- *boost*: endian related code required by eos;
+- *eos*: support for portable binary boost serialisation;
+- *kitanda*: kitanda's public API.
+
+As explained in [[file:project_structure.org][project structure]], as a general rule, the repository
+only contains code owned by kitanda; all the external dependencies
+must be installed by the user as a prerequisite for building
+kitanda. The exception to this rule is the eos library, as its source
+code is scattered all over the Internet and cannot be easily put
+together.
+
+The kitanda folder in include is the top-level container of the
+system's public API; each of its sub-folders represents a component
+(e.g.: org, comms, etc). Most components have a set of commonly
+recurring folders (folders with well-known folder names are in
+quotes):
+
+- *domain*: this houses the component's domain objects. Domain objects
+  are struct-like types, data-structures with very minimal
+  behaviour. @e domain is the default folder name, but its acceptable
+  to name it something else if there is a naturally fitting name
+  (e.g. protocol in the comms component).
+- *streaming*: streaming operators for domain types. We only define
+  the inserter operator, and it shall only be used logging or
+  debugging purposes.
+- *serialization*: boost serialisation support for the domain
+  types. Please note the American spelling,
+- *database*: database support for the domain types.
+- *hash*: boost hash support for the domain types.
+- *other folders*: any number of folders containing objects which act
+  on the domain types and contain org logic.
+
+Of course, not all components require all folders.
+
+****** Source Folder
+
+The src folder contains implementation code for kitanda's
+components. Applications are always directly below src
+(e.g. =src/luena=, =src/kuito=, etc.); libraries can be at the
+top-level - when a component is implemented as one single library -
+but they can also be sub-folders of the component. Its up to the
+component to determine the approach. The binaries themselves reflect
+the chosen structure:
+
+- =libkitanda_org.so= (=kitanda_org.dll= in windows): one single
+  library for the org component; or
+- =libkitanda_org_streaming.so= (or =kitanda_org_streaming.dll= in
+  windows): multiple libraries for each "sub-component" of the org
+  component.
+
+****** Specs
+
+All components in the system have a set of codified behaviours: the
+/component specification/. In addition, the system itself may have
+additional constraints, which live in the /system specification/. In a
+more general form: there are only two types of behaviour within the
+system, specified or unspecified. Specified behaviour is that which is
+covered by a spec; unspecified behaviour is that which is not.  With
+regards to specs, components may chose to implement it in one of two
+ways:
+
+- by creating a sub-folder called /spec/; or
+- by adding the spec classes directly to the main
+  component folder.
+
+The size of the spec should determine the approach.
+
+FIXME: link to kevin henney pappers
+http://skillsmatter.com/podcast/java-jee/kevlin-henney-rethinking-unit-testing-in-c-plus-plus
+
+*** Language
+**** Preamble
+
+All C++ files shall start with a descriptive text stating copyright
+information and a pointer to the file where the complete licence
+document can be located. This section is called the /preamble/. The
+contents of the preamble are as follows:
+
+#+begin_example
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#+end_example
+
+The preamble is available as the [[file:infrastructure/emacs.org][yas snippet]] =preamble=.
+
+**** Header guards
+
+All header files shall have header guards after the [[Preamble][preamble]]. The name
+of the guard shall be composed of the following structure:
+=NAMESPACE_FILENAME_EXTENSION=. Each of these fields has the following
+meaning:
+
+- *NAMESPACE*: List of namespaces contained on that file, in upper
+  case, separated by an underscore. Namespaces with multi-word names
+  also use underscores as separators. Example:
+  =NAMESPACE_ONE_NAMESPACE_TWO=;
+- *FILENAME*: Name of the file, in upper case, separated by
+  underscores when multi-word. Example: =THIS_IS_A_FILENAME=;
+- *EXTENSION*: Always set to =HPP=.
+
+The traditional header guard check is followed by the Microsoft one as
+it has been proved in the boost mailing list that #pragma once
+produces a speed boost.
+
+Example of a complete header guard:
+
+#+begin_example
+#ifndef KITANDA_KITANDA_HPP
+#define KITANDA_KITANDA_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+...
+
+#endif
+#+end_example
+
+Header guards can be generated in emacs via the [[file:infrastructure/emacs.org][yas snippet]] =once=.
+
+**** Tabs vs Spaces
+
+All C++ source code shall be indented with spaces as this ensures the
+same indentation regardless of editor. Tabs shall not be used.
+
+*Note*: This is enforced in emacs via the both whitespace mode and the
+settings in the [[Preamble][preamble]] of every file.
+
+The boost [[http://www.boost.org/development/requirements.html][Tabs rationale]] states:
+
+#+begin_quote
+Tabs are banned because of the practical problems caused by tabs in
+multi-developer projects like Boost, rather than any dislike in
+principle. See mailing list archives. Problems include maintenance of
+a single source file by programmers using tabs and programmers using
+spaces, and the difficulty of enforcing a consistent tab policy other
+than just "no tabs". Discussions concluded that Boost files should
+either all use tabs, or all use spaces, and thus the decision to stick
+with spaces.
+#+end_quote
+
+For a detailed analysis see [[http://www.jwz.org/doc/tabs-vs-spaces.html][Tabs versus Spaces: An Eternal Holy War]] by
+jwz.
+
+**** Column width
+
+Source code must not exceed 80 columns. Continuations on subsequent
+lines should be avoided - the line should read as a complete
+statement. /Rationale/: the human brain is used to scan one line at a
+time in rapid eye movements; making long lines or multi-line
+statements short-circuits this process.
+
+This also has the beneficial side-effect of making the code readable
+even on text-mode consoles at 80x25, and allowing the editing/viewing
+of two files on a high resolution monitor.
+
+*Note*: This is enforced in emacs via the whitespace mode.
+
+**** Function length
+
+Functions should not exceed a screen full, measured at around 25 lines
+of code. Functions become more and more difficult to understand as
+they become larger.
+
+**** Documentation
+
+We use [[http://www.stack.nl/~dimitri/doxygen/][doxygen]] in our literate programming model. Most identifiers
+should be documented, except in trivial cases. In particular:
+
+- *namespace documentation*: Every namespace generating folder must
+  have a namespace documentation header; this is a header file whose
+  name matches the namespace and contains documentation explaining its
+  purpose.
+
+**** General Identifier naming
+
+Identifier names in general follow the STL and boost conventions, with
+a few kitanda peculiarities:
+
+- *classes, structs, namespaces, functions and variables* are
+  lower-cased and separated by underscores when multi-word;
+  e.g. =this_is_a_class_name=. They should not be longer than four to
+  five words at the extreme - with the exception of specification
+  methods. These are always propositions and can be as long as
+  necessary - provided the entire line does not exceed the maximum
+  line size. FIXME point to specification section.
+- *member variables*, in addition to the above, shall be post-fixed
+  with an underscore, e.g. =member_variable_=. /Rationale/: underscore
+  prefixes are reserved by standard C++.
+- *concepts* are camel cased with a leading capital,
+  e.g. ThisIsAConcept.
+
+**** Indentation
+
+In general, all source code must be indented using the /Stroupstrup/
+style (FIXME add link to Wikipedia); there are a few kitanda
+modifications, as follows.
+
+*Namespaces* are not indented; the =namespace= keyword must always
+start at column zero. Namespace closing brackets must always close all
+the enclosing namespaces in a single line. Namespace closing brackets
+are never followed by comments such as the name of the namespace being
+closed. /Rationale/: all major editors tell you which namespace the
+bracket is closing so this just adds more maintenance work for no
+reason.
+
+#+begin_example
+namespace A {
+namespace B {
+
+} }
+#+end_example
+
+**** Literate programming
+
+Almost all identifiers should have some form of doxygen comments;
+however, we should try to avoid documenting too much directly in the
+source code. Instead, org articles should be used for detailed
+descriptions, specifications, etc.
+
+Rules for comments:
+
+1. The value of a comment is directly proportional to the distance
+   between the comment and the code. Good comments stay as close as
+   possible to the code they're referencing. As distance increases,
+   the odds of developers making an edit without seeing the comment
+   that goes with the code increases. The comment becomes misleading,
+   out of date, or worse, incorrect. Distant comments are unreliable
+   at best.
+
+2. Comments with complex formatting cannot be trusted. Complex
+   formatting is a pain to edit and a disincentive to maintenance. If
+   it is difficult to edit a comment, it's very likely a developer has
+   avoided or postponed synchronizing his work with the comments. I
+   view complex comments with extreme skepticism.
+
+3. Don't include redundant information in the comments. Why have a
+   Revision History section-- isn't that what we use source control
+   for? Besides the fact that this is totally redundant, the odds of a
+   developer remembering, after every single edit, to update that
+   comment section at the top of the procedure are.. very low.
+
+4. The best kind of comments are the ones you don't need. The only
+   "comments" guaranteed to be accurate 100% of the time-- and even
+   that is debatable-- is the body of the code itself. Endeavor to
+   write self-documenting code whenever possible. An occasional
+   comment to illuminate or clarify is fine, but if you frequently
+   write code full of "tricky parts" and reams of comments, maybe it's
+   time to refactor.
+
+5. [[http://www.codinghorror.com/blog/2006/12/code-tells-you-how-comments-tell-you-why.html][Code tells you how, comments tell you why]].
+
+Source of 1-4: [[http://www.codinghorror.com/blog/2004/11/when-good-comments-go-bad.html][When Good Comments Go Bad]]
+
+**** Operators
+
+- Always on the same namespace as the class.
+
+FIXME: clean this up.
+
+How to decide if operator should be global or in a class?
+
+My thoughts are this:
+
+- Do you have two classes A & B that you want to make comparable with operator==?
+- If it is just one, the choice is obvious to me: make it a member.
+- But for two different classes, there is a symmetry between A==B &
+  B==A, yet there isn't in the declaration of the fn.
+- You need both "bool A::operator==(B const &) const" & "bool
+  B::operator==(A const &) const". A solution is to have one as a
+  member, the other as a free fn, calling the member.
+- That means you have to have unsymmetric class declarations. Which is
+  simply a matter of taste.
+- If there are suitable getters already, then that is fine, one can
+  have two free operator== fns, one as "bool operator==(A const &, B
+  const &)" and the other for the commutative operation. Where you
+  place the decls and the definitions is up to you.
+- Probably best to distribute the decls across the two header files,
+  according to the first parameter, forward declare the second, and
+  place the definition in the equivalent, related source files.
+- This nicely maintains symmetry, allows you to make the declaration
+  of "bool operator==(A const &, B const &)" a friend of both classes,
+  as can the decl "bool operator==(B const &, A const &)" be made a
+  friend of both, avoid getters if they are ugly.
+
+On operator==:
+
+always check for =this= equality (e.g. self).
+
+**** Swap function
+
+- [[http://stackoverflow.com/questions/1998744/benefits-of-a-swap-function][why we should define it]].
+
+**** Referential transparency
+
+A function is referentially transparent when it is guaranteed to
+return the same value every time it is called with a given set of
+arguments. This is a great guarantee to be able to make about your
+functions as it reduces the number of things you need to keep in your
+head. Referentially transparent functions really can be thought of as
+black boxes: always deterministic and predictable. But a function that
+operates on mutable objects cannot be referentially transparent—it
+cannot make any guarantees that future calls involving that same
+object will result in the same value since that object could have a
+different value at any time.
+
+- [[http://technomancy.us/159][In which we plot an escape from the quagmire of equality]]
+
+**** Make invalid states unrepresentable
+
+In the functional world, programmers try to make it impossible to
+express invalid states, such that the type system itself stops
+programming errors. For example, say function =F= takes an enumeration
+of type =E= as its first argument and a second argument which is only
+valid for value =e= of the enumeration. Following the "make invalid
+states undefined" principle, the second argument of =F= should not be
+visible when the enumeration has values other than =e=.
+
+In a more static world, this probably means falling down to MPL to
+define the enum.
+
+**** Constructors and Destructors
+
+- [[http://www.developerfusion.com/article/133063/constructors-in-c11/][Constructors in C++11]]
+- [[http://www.codesynthesis.com/~boris/blog/2012/04/04/when-provide-empty-destructor/][When to provide an empty destructor]]
+
+1. The non-copyable idiom shall be implemented by deleting the
+   required constructors:
+
+#+begin_example
+struct non_copyable {
+   non_copyable & operator=(const non_copyable&) = delete;
+   non_copyable(const non_copyable&) = delete;
+};
+#+end_example
+
+2. The non-default constructible idiom shall be implemented by
+   deleting the default constructor:
+
+#+begin_example
+   NonCopyable() = delete;
+#+end_example
+
+3. All regular constructors with a single parameter shall be marked as
+   explicit. See [[http://www.parashift.com/c%2B%2B-faq-lite/ctors.html#faq-10.22][What is the purpose of the explicit keyword?]]
+
+4. Move constructors and copy constructors shall never be marked as
+   explicit. See [[http://stackoverflow.com/questions/6758717/explicit-move-constructor][Explicit move constructor?]]
+
+5. Abstract classes shall be enforced to be abstract via the pure
+   virtual destructor. See [[http://www-304.ibm.com/support/docview.wss?uid%3Dswg21165191][Creating a Pure Virtual Destructor for a
+   C++ Abstract Class]].
+
+#+begin_example
+struct abstract {
+   virtual ~abstract() noexcept = 0;
+};
+
+abstract::~abstract() { }
+#+end_example
+
+**** Enumerations
+
+#+begin_quote
+An enumeration is a user-defined type consisting of a set of named
+constants called enumerators. Enumerators have values.
+#+end_quote
+
+1. All enumerations shall be defined as C++-11 strong enumerations
+   with the correct underlying type.
+
+  - [[http://www.codeguru.com/cpp/cpp/article.php/c19083/C-2011-Stronglytyped-Enums.htm][C++ 2011: Strongly-typed Enums]]
+  - [[http://www.cprogramming.com/c%2B%2B11/c%2B%2B11-nullptr-strongly-typed-enum-class.html][Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint]]
+  - [[http://nic-gamedev.blogspot.co.uk/2012/04/c11-strongly-typed-enum.html][C++11: Strongly-typed enum]]
+  - [[http://www.nullptr.me/2012/01/04/enum-classes/#.T7aeNvHgYhY][C++11: enum classes]]
+
+2. The enumeration name shall always be plural.
+
+#+begin_example
+enum class node_types : unsigned int {
+...
+#+end_example
+
+   /Rationale/: This is a very difficult decision to make, mainly
+   because an enumeration identifier is actually doing two jobs: a)
+   the declaration of a domain of valid values - as such its the name
+   of the set containing those valid values, so it makes sense to be
+   plural (e.g. =player_types= is the set of valid =player_type=); b)
+   its also used as a type for variables that take a single value of
+   that domain, in which case it should be singular.
+
+   The declaration of the enum occurs only once, whilst its usage is
+   everywhere so at first sight it seems that the singular usage
+   should win. This is the approach taken by Microsoft for
+   C#. However, another /very/ typical use case is to declare getters
+   and setters for a value of a type of an enumeration. This is where
+   we reach the limits of C++ compiler intelligence because if we have
+   both an enumeration and a member variable declared with the same
+   name, the compiler thinks that we are hiding one of the names. Thus
+   we end up with all sorts of imaginative getter/setter names to get
+   around this problem. Due to this, the final decision is to use a
+   plural name for the enumeration so that the singular name can be
+   reserved for getters, setters and variables of that type.
+
+3. Doxygen documentation shall be used to document the enumeration
+   itself and all the enumerators.
+
+#+begin_example
+/**
+ * @brief A given set of XML data is modeled as a tree of
+ * nodes. This enumeration specifies the different node types.
+ */
+enum class node_types : unsigned int {
+    none = 0, ///< Read method has not yet been called
+...
+#+end_example
+
+4. Inserters shall be provided for each enumeration, dumping a textual
+   representation of a given instance of an enumeration. The textual
+   representation shall take the form =ENUMERATION::ENUMERATOR=, e.g.:
+   =node_types::none=.
+
+#+begin_example
+std::ostream& operator<<(std::ostream& stream, object_types value);
+#+end_example
+
+5. It is possible for a variable of an enumeration type to have a
+   value which is not part of the enumeration's domain. The exception
+   =invalid_enum_value= (in =kitanda::utility::exception::=) shall be
+   thrown at the point of detection.
+
+6. When a given value of an enumeration which is part of its domain is
+   not valid in a given context, the exception =invalid_enum_value=
+   shall be thrown.
+
+7. A function to convert from an instance of the underlying type to an
+   enumerator may be provided. The function name shall take the form
+   =to_ENUM_NAME=, where =ENUM_NAME= takes the singular form (e.g. for
+   =object_types= its =object_type=). The function shall have a single
+   parameter called =value=, of the same type as the underlying type
+   of the enumeration. The function shall be defined in the utility
+   namespace.
+
+#+begin_example
+object_types to_object_type(unsigned int value);
+#+end_example
+
+8. A function to convert a string representation of a value in the
+   enumeration's domain to an enumerator may be provided. The function
+   name shall take the form =parse_ENUM_NAME=, where =ENUM_NAME= takes
+   the singular form (e.g. for =object_types= its =object_type=). The
+   function shall have a have a single parameter of type =std::string=
+   named =value=.
+
+   The function shall be defined in the utility namespace. The format
+   of the input string is enumeration dependent and may not be related
+   to the streaming of the enumeration. /Rationale/: the prefix
+   =parse= is used to imply that the conversion is more elaborate than
+   the underlying type conversion. This is used by Microsoft for C#.
+
+#+begin_example
+object_types parse_object_type(std::string value);
+#+end_example
+
+9. A function to convert from an instance of the enumeration to the
+   underlying type shall not be provided. Users are expected to use
+   the =static_cast= operator.
+
+**** Classes
+
+1. Class names shall not use a prefix or post-fix to indicate their
+   "meta-type". For example =IInterface= or =base_class= are bad
+   names. /Rationale/: this is just a variation of Hungarian
+   notation. For a good explanation of why the =base= suffix is a bad
+   idea see Cwalina's [[http://blogs.msdn.com/b/kcwalina/archive/2005/12/16/basesuffix.aspx][blog post]].
+
+2. Virtual destructors must be implemented due to a problem with
+   clang - e.g. we cannot rely on using =default=. The canonical form
+   for the virtual destructor:
+
+#+begin_example
+    virtual ~CLASS_NAME() noexcept {}
+#+end_example
+
+  Note that there is no space between ={}=.
+
+*** References
+
+**** Coding standards and guidelines
+
+- [[http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml][Google C++ Style Guide]]: Good in some bits, although very bad in
+  others (for example, bans exceptions).
+- C++ Coding Standards : Rules, Guidelines, and Best Practices]]
+- [[https://github.com/holtgrewe/linty][Linty]]: Style Checking with Python & libclang. Requires v3.0.
+- [[http://www.parashift.com/c%2B%2B-faq-lite/][C++ FAQ]]: large resource on how to use the language
+- [[http://www.boost.org/development/requirements.html][Boost coding standards]]
+- [[http://www.doc.ic.ac.uk/lab/cplus/c%2B%2B.rules/][Programming in C++, Rules and Recommendations]]
+
+**** C++ Reference
+
+- [[http://en.cppreference.com/w/cpp][C++ Reference wiki]]
+
+**** C++-11
+
+- [[http://msdn.microsoft.com/en-us/library/hh279654%2528v%3Dvs.110%2529.aspx][Welcome Back to C++ (Modern C++)]]
+- [[http://herbsutter.com/elements-of-modern-c-style/][Elements of Modern C++ Style]]
+- [[http://www2.research.att.com/~bs/C%2B%2B0xFAQ.html][C++11 - the recently approved new ISO C++ standard]]
+
+**** Videos and Talks
+
+- [[http://vimeo.com/23975522][C++0x Lambda Functions]]
+
+**** Useful Libraries
+
+- [[http://boost-sandbox.sourceforge.net/libs/time_series/doc/html/time_series/user_s_guide.html#time_series.user_s_guide.series_containers][Boost Time Series]]: Library that didn't make it into boost but seems
+  like a very good foundation for all the time series code. See also
+  the [[http://lists.boost.org/boost-announce/2007/08/0142.php][list of problems with the library.]]
+- [[http://www.craighenderson.co.uk/mapreduce/][Boost.MapReduce]]: [[http://static.googleusercontent.com/external_content/untrusted_dlcp/research.google.com/en//archive/mapreduce-osdi04.pdf][Map reduce]] implementation for single process.
+- [[http://blog.quibb.org/cppbench/][CPP Bench]]: benchmarking in C++.
+- [[https://bitbucket.org/maghoff/jsonxx/wiki/Home][JSONXX]]: JSON library for C++.
+- [[http://calvados.di.unipi.it/dokuwiki/doku.php?id%3Dffnamespace:about%20][FastFlow]]: a skeletal multi-core programming framework
+- [[http://lwn.net/Articles/370307/#Comments][0MQ: A new approach to messaging]]
+- [[http://www.globus.org/toolkit/about.html][Globulus Toolkit]]: grid toolkit for C++
+- [[http://www.dre.vanderbilt.edu/~sutambe/files/LEESA/LEESA.pdf][LEESA]]: XML in C++
+- [[http://www.codesynthesis.com/products/xsde/][XSD/e]]: Light-weight XML in C++ 
+- [[https://github.com/consultomd/json_spirit][JSON Spirit]]
+- [[https://github.com/d5][Node.Native]]: C++ Node.js implementation
+- [[http://svn.boost.org/svn/boost/sandbox/monotonic/libs/monotonic/doc/html/index.html][Boost.Monotonic]]: Special purpose allocators. Discussed on mailing
+  list [[http://lists.boost.org/Archives/boost/2012/03/191798.php][here]].
+- [[http://code.google.com/p/ceres-solver/][Ceres Solver]]: Library for solving nonlinear least squares
+- [[http://code.google.com/p/dtl-cpp/][DTL]]: The diff template library.
+
+**** Other C++ articles
+
+- [[http://altdevblogaday.com/2011/11/09/a-low-level-curriculum-for-c-and-c/][A Low Level Curriculum for C and C++]]
+- [[http://altdevblogaday.com/2011/11/24/c-c-low-level-curriculum-part-2-data-types/][C / C++ Low Level Curriculum part 2: Data Types]]
+- [[http://altdevblogaday.com/2011/12/14/c-c-low-level-curriculum-part-3-the-stack/][C / C++ Low Level Curriculum Part 3: The Stack]]
+- [[http://smellegantcode.wordpress.com/tag/c11/][Linq in C++]] See also the fix [[http://boost.2283326.n4.nabble.com/range-cannot-use-lambda-predicate-in-adaptor-with-certain-algorithms-td3560157.html][here]].
+- [[http://confluence.jetbrains.net/display/TW/Cpp%2BUnit%2BTest%2BReporting][Changing the output of Boost.Test]]
+- [[http://software.intel.com/en-us/articles/extending-stl-for-games/][Extending STL for Games]]
+- [[http://en.wikibooks.org/wiki/Optimizing_C%252B%252B][Optimising C++]]: free ebook
+- [[http://google-opensource.blogspot.co.uk/2010/10/integrating-r-with-c-rcpp-rinside-and.html][Integrating R with C++: Rcpp, RInside, and RProtobuf]]
+- [[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2003/n1476.html][Iterator facade and adaptor]]
+- [[http://blog.rethinkdb.com/improving-a-large-c-project-with-coroutines][Improving a large C++ project with co-routines]]
+- [[http://www.ibm.com/developerworks/aix/library/au-ctools1_boost/%20][Get to know the Boost unit test framework]]
+- [[http://drdobbs.com/parallel/232400273][Welcome to the Parallel Jungle!]]
+- [[http://www.radmangames.com/programming/how-futures-aid-task-based-multithreading][How futures aid task based multi-threading]]
+- [[http://www.viva64.com/en/l/full/][Lessons on development of 64-bit C/C++ applications]]
+- [[http://boost-spirit.com/home/2010/05/11/a-framework-for-rad-spirit/][A framework for RAD]]: boost spirit
+- [[http://arma.sourceforge.net/][Armadillo: C++ linear algebra library]]
+- [[http://nerds-central.blogspot.co.uk/2012/05/c11-future-chaining-for-easy-highly.html][C++11: Future Chaining For Easy, Highly Threaded Execution]]
+- [[http://www.altdevblogaday.com/2012/04/26/functional-programming-in-c/][Functional Programming in C++]]
+
+**** Videos
+
+- [[http://www.corensic.com/Learn/Resources/ConcurrencyTutorialPartOne.aspx][C++ Concurrency Series]]: Part 1
+
 * APPENDIX
 
 ** Appendix A - Related Work
