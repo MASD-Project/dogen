@@ -450,12 +450,22 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in RFC 2119.
 #+end_quote
 
-** Project structure
+** File and Directory Specification
 
-In this section we specify aspects related to project layout, file
-names and so on.
+In this section we specify aspects related to the layout of Dogen in
+version control, folder structure, file names and so on. The words
+"folder" and "directory" are used interchangeably.
 
-*** File and directory names
+*** Content type
+
+1. All files added to the git repository should be in plain
+   text. /Rationale/: most of the tools we use produce textual
+   representations of their data files, and they should be preferred
+   whenever possible. /Exceptions/: Bitmap images and other content
+   type which has only binary representation is acceptable, but should
+   be used only as last resort.
+
+*** Naming
 
 1. All files and folders in must have lower-case names. /Rationale/:
    avoid as much as possible case-sensitive issues in platforms where
@@ -478,12 +488,14 @@ names and so on.
 
 5. Names must contain only lowercase ASCII letters (=a-z=), numbers
    (=0-9=), underscores (=_=), hyphens (=-=), and periods
-   (=.=). Spaces must not be used.
+   (=.=). Spaces must not be used. /Rationale/: Spaces and other
+   special characters cause cause obscure issues, both in Windows and
+   on UNIX. These problems are often very hard to root-cause.
 
 6. The first and last character of a file name must not be a period
    (=.=). /Rationale/: POSIX has special rules for names beginning
    with a period. Windows prohibits names ending in a period (source:
-   boost). /Exceptions:/ Control files such as =.gitignore=.
+   [[http://www.boost.org/development/requirements.html][boost]]). /Exceptions:/ Control files such as =.gitignore=.
 
 7. The first character of names must not be a hyphen =-=. /Rationale/:
    It would be too confusing or ambiguous in certain contexts (source:
@@ -493,54 +505,97 @@ names and so on.
    characters. /Rationale/: Long file names cause obscure issues.
 
 9. The total path length must not exceed 207 characters. /Rationale/:
-   Dictated by ISO 9660:1999 (source: boost). In addition, many
-   file systems don't really like paths longer than 255 characters, so
-   its best to keep well below this limit.
+   Dictated by ISO 9660:1999 (source: [[http://www.boost.org/development/requirements.html][boost]]). In addition, many file
+   systems don't really like paths longer than 255 characters, so its
+   best to keep well below this limit.
 
 10. Files have additional naming conventions that are dependent on the
     file type. See language specific policies for details.
 
 *** Root folder
 
-1. The top-level folder is known as the /root folder/; this is the
-   directory you create when you clone the project from git - i.e. it
-   contains the =.git= folder. The folder should be named dogen.
+1. The top-level Dogen folder is known as the /root folder/. The
+   remainder of this section deals with all the sub-folders of the
+   root folder, as well as its key files. /Notes/: The root folder is
+   the directory you create when you clone the project from git -
+   i.e. it contains the =.git= folder. The folder should be named
+   =dogen= (in lower-case).
 
-2. The =build= folder contains extensions to cmake (both third party
-   and our own), code templates and configuration file templates
-   (logging, etc.). /Rationale/: In general, =build= should contain
+2. The =build= folder contains all the scripts, configuration and
+   utilities required to perform a build and to package it for
+   end-user consumption. /Notes/: In general, =build= should contain
    either files used directly by the makefiles or files that get
-   copied over to the build's output directory for further processing.
+   copied over to the build's output directory for further
+   processing. Artefacts contained in the =build= directory are:
+   extensions to cmake (both third party and our own), packaging
+   scripts, ctest scripts for Continuous Integration, templates (code
+   templates, configuration file templates, etc) and configuration for
+   code-quality tools (valgrind, etc).
 
-3. The =projects= folder contains core source code for the project, in
-   any of the supported programming languages. The code directory is
-   named after each individual "project". /Rationale/: This directory
-   could have been called =src= for source code, but we reserved this
-   for the directory of the implementation files in C++.
+3. The =data= directory contains the data files used by Dogen at run
+   time; these are expected to be part of an installation.
 
-4. The =doc= folder contains manually crafted documentation such as
-   manuals, illustrative diagrams (not for code generation purposes),
-   project plans, screen-shots, etc. All documents should be saved as
-   plain text.
+4. The =diagrams= directory contains all of the Dogen diagrams used to
+   generate Dogen source code. /Notes/: At present it does not contain
+   the test models. There is no good reason for this; a story has been
+   added to the backlog to fix it.
 
-5. The =tools= folder houses scripts and other utilities.
+5. The =doc= folder contains manually crafted documentation. /Notes/:
+   The types of artefacts contained are manuals, illustrative diagrams
+   (not for code generation purposes), project plans, screen-shots,
+   etc.
+
+6. The =images= folder contains all the graphical artefacts required
+   by the project. /Notes/: Artefacts such as icons, logos etc should
+   be housed here.
+
+7. The =patches= directory contains ongoing work that is not yet ready
+   to be committed. /Notes/: We use this directory as a poor-man's
+   branch. The reason why is that we often use extremely short-lived
+   branches (e.g. less than 2 days) where the code is not yet ready to
+   be pushed, but we may require access to it from multiple
+   machines. It seems a bit heavy-weight to create and destroy remote
+   branches for this case, so instead we save work down as
+   patches. This directory has very short-lived files.
+
+8. The =projects= folder is a sub-folder of the root folder. It
+   contains the Dogen source code, in any of the supported programming
+   languages. The sub-folders of projects are named after each
+   individual project. /Rationale/: This directory could have been
+   called =src= for source code, but we reserved this for the
+   directory of the implementation files in C++. /Notes/ The word
+   "project" here is used in a rather vague sense, but it can be
+   understood to mean anything which generates a shared library,
+   static library or executable or any other such cohesive unit work -
+   say a set of ruby scripts around a given theme (sanity). We freely
+   mix projects which exist solely to test dogen with projects that
+   provide end-user functionality.
+
+9. The =sql= directory contains sql configuration files and other
+   bits and pieces. /Notes/: we should either deprecate this directory
+   or move it to projects.
+
+10. The =test_data= directory contains all the files required to run
+    the Dogen unit tests.
 
 *** Output folder
 
 1. The folder under which the build is performed is called the
-   /output/ folder. This is the location where all artefacts generated
-   by the build are placed, such as binaries, shared objects,
-   automatically generated documentation, instantiated templates,
-   etc.
+   /output/ folder. /Notes/: This is the location where all artefacts
+   generated by the build are placed, such as binaries, shared
+   objects, automatically generated documentation, instantiated
+   templates, etc.
 
-2. We have a policy of not permitting in-source builds, so the output
-   folder must not be the same folder as the root folder. This is
-   enforced by the CMake files.
+2. In-source builds are not permitted, so the output folder must not
+   be the same folder as the root folder. /Rationale/: In-source
+   builds mix the source code with build artefacts and can result in
+   very messy situations. /Notes/: This is enforced by the CMake
+   files.
 
 3. The output folder should be located at the same level as the root
-   folder. This is a convention; the directory can be located anywhere
-   else outside the root folder. The CMake files must still work in
-   this setup.
+   folder. /Notes/: This is a convention; the directory can be located
+   anywhere else outside the root folder. The CMake files must work
+   regardless of the location of the output directory.
 
 4. The /output/ folder should be name =output=. /Rationale/: it can be
    named anything you like and there must not be any dependencies on

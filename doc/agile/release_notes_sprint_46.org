@@ -16,22 +16,25 @@ agents with green builds, and the packages uploaded to GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-03 Mon 08:49]
+Clock summary at [2014-03-03 Mon 19:09]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:50* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:50 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:50 |
+| Headline                                              | Time   |      |      |
+|-------------------------------------------------------+--------+------+------|
+| *Total time*                                          | *1:36* |      |      |
+|-------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                       |        | 1:36 |      |
+| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:56 |
+| IMPLEMENTATION Updates to the manual and readme files |        |      | 0:40 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-03-03 Mon 17:51]--[2014-03-03 Mon 17:57] =>  0:06
     CLOCK: [2014-03-03 Mon 07:58]--[2014-03-03 Mon 08:48] =>  0:50
 
 Updates to release notes and backlog.
 
-*** Updates to the manual and readme files                             :task:
+*** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-03-03 Mon 17:57]--[2014-03-03 Mon 18:37] =>  0:40
 
 Use build downtime to update the manual and / or readme file.
 
