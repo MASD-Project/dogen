@@ -8,6 +8,25 @@
 
 Stories that we intend to look at, at some point.
 
+*** Move test model diagrams into main diagrams directory             :story:
+
+For some reason - lost in the mists of time - we decided to split the
+test model diagrams from the main models; the first is in the =diagrams=
+directory, the latter is in the rather non-obvious location of
+=test_data/dia_sml/input/=. All source code goes into =projects=
+though, so this seems like a spurious split. Also, the test data
+directory should really only have data that we generate as part of
+testing (e.g. where there is a pairing of expected and actual) and
+the test model diagrams are not of this kind - we never output dia
+diagrams, at least at present.
+
+The right thing to do is to move them into the =diagrams=
+directory. This is not an easy undertaking because:
+
+- there is hard-coding in the test model sets pointing to these
+- the CMake scripts rely on the location of the diagrams to copy them
+  across
+
 *** Clean up the tags according to the list defined                   :story:
 
 We have created a new tag structure in Sprint 44; implement it.
