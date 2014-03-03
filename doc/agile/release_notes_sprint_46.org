@@ -1,0 +1,145 @@
+#+title: Release Notes for Sprint 46
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 46.
+
+The *Mission Statement* for this sprint is to get the build
+environment back up and running across all the build agents. We
+started this process but didn't complete it and the build farm is now
+very messy. By the end of this sprint we intend to have all build
+agents with green builds, and the packages uploaded to GDrive.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-03-03 Mon 08:49]
+
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:50* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:50 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:50 |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-03-03 Mon 07:58]--[2014-03-03 Mon 08:48] =>  0:50
+
+Updates to release notes and backlog.
+
+*** Updates to the manual and readme files                             :task:
+
+Use build downtime to update the manual and / or readme file.
+
+*** Investigate a =systemd= approach for debian machines              :story:
+
+As we concluded earlier, integral is simply an attempt of making a
+ctest service in ruby. As it happens Linux already has an extensible service
+management infrastructure - systemd. We need to:
+
+- Investigate the current state of systemd on debian unstable
+- Figure out how hard it is to create a service based on our ctest
+  script. We will have to find out how to detect the number of CPUs,
+  the current user, etc from systemd, as these are parameters required
+  for the ctest script to run.
+
+The objective is to have the following setup:
+
+- two docker containers on 64-bit: clang and gcc
+- two virtual box VMs on 32-bit: clang and gcc; each with their own
+  docker container.
+
+On the back of this analysis story, we then need to raise stories for
+the actual work:
+
+- Create the =systemd= script
+- Install it across all the linux boxes
+
+The =systemd= scripts will be added to the integral project.
+
+*** Implement integral features for OSX and Windows                   :story:
+
+These operative systems do not have =systemd=. We should do a cursory
+investigation on =launchd= on OSX, but if it becomes too complicated,
+we should just add the missing features to integral (ported across
+from PFH).
+
+We should also consider moving across to Windows 7.
+
+*** Consider docker for the development setup                         :story:
+
+We have moved Lorenz to the new ddc repos and did a clang build on it;
+however, we do not have ODB and EOS support. We need to figure out the
+story around this - should we also be using docker and downloading a
+common docker image with these setup? We could then have docker images
+for 32-bit and 64-bit, shared with developers and build machine.
+
+*** Implement flymake from the EDE project                            :story:
+
+This move of directories highlighted the fragility of the current
+flymake hack: every time the top-level directory changes we need to
+update =cunene=. Ideally what we want is to have a top-level file -
+most ideally =dogen.ede= with some lisp code that would setup the
+dogen paths for flymake. Users would only need to load this up to use it.
+
+*** Remove versioning from packages                                   :story:
+
+We don't seem to have a particularly good story around versioning in
+packages. It's best to remove it for now until we really understand
+how it should work.
+
+In addition, we will be using Docker to test the packages, making
+versioning less of a necessity.
+
+*** Install packages into =/usr=                                      :story:
+
+As we will be using Docker to test the packages, we can now write
+files into =/usr/bin= without fear. Move from =/opt= into =/usr=.
+
+*** Fix issues with database tests                                    :story:
+
+Last sprint we solved the delays in nightlies by adding concurrency to
+the tests; however, that broke the database tests. We need to refactor
+the tests to allow them to run concurrently.
+
+**** Re-enable schema updates
+
+We are deleting the entire DB schema and re-applying it for every
+invocation of the tests. This does not work on a concurrent world. We
+commented it out for now, but we need a proper solution for this.
+
+**** Investigate errors in tests
+
+We seem to have traffic-lighters in the database tests when executing
+them concurrently. Somewhere they must be trampling on each others
+feet.
+
+*** Add support to upload packages into GDrive                        :story:
+
+We need to upload the packages created by the build to a public Google
+Drive (GDrive) location.
+
+- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
+- See [[https://developers.google.com/drive/quickstart-ruby][this article]].
+- [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][Create folders]] to represent the different types of uploads:
+  =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
+  and tag as this would require no complex logic: if tag create new
+  folder, if latest, delete then create.
+
+*** Enable package sanity tests for Linux                             :story:
+
+Now that we will be using docker, we could create a simple =systemd=
+ctest script that runs as root in a docker container:
+
+- it monitors the GDrive location for files that match a given regular
+  expression (e.g. we need to make sure we match the bitness and the
+  platform)
+- if it finds one, it installs it and runs sanity scripts.
+- it then uninstalls it and makes sure the docker image is identical
+  to how we started (however that is done in docker)
+
+** Deprecated Development Stories
