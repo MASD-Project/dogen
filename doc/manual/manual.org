@@ -571,10 +571,10 @@ version control, folder structure, file names and so on. The words
    Dogen. /Notes/ The word "project" here is used in a rather vague
    sense, but it can be understood to mean anything which generates a
    shared library, static library or executable or any other such
-   cohesive unit work - a component. For example, a set of ruby
-   scripts around a given theme (sanity) are a project. We freely mix
-   projects which exist solely to test dogen with projects that
-   provide end-user functionality.
+   cohesive unit work. For example, a set of ruby scripts around a
+   given theme (sanity) are a project. We freely mix projects which
+   exist solely to test dogen with projects that provide end-user
+   functionality.
 
 9. The =sql= directory contains sql configuration files and other
    bits and pieces. /Notes/: we should either deprecate this directory
@@ -647,7 +647,7 @@ output/win32-x86-clang-3_0-release
    with the boost portable serialisation library. Once these projects
    are packaged they shall be removed from the repository.
 
-** C++ Coding tandards
+** C++ Coding Standards
 
 In general, we follow the [[http://www.boost.org/development/requirements.html][Boost Library Requirements and Guidelines]]
 document. In a few rare cases we may make choices that contradict it,
@@ -667,107 +667,81 @@ The physical layout deals with files, directories, binaries and any
 other artefacts that live in storage. We concern ourselves with only
 those physical artefacts that are part of or directly related to the
 C++ domain; the generic aspects of physical layout are dealt with in
-[[file:project_structure.org][project structure]].
+[[File%20and%20Directory%20Standards][File and Directory Standards]].
 
-**** Files
+1. For the purposes of this document, a /project/ is understood to be
+   FIXME: look for the definition of solution and project in visual
+   studio. A component is some logical partitioning of the
+   project. Components manifest themselves as folders and namespaces
+   within the project.
 
-***** Extensions
+2. Header files must have the extension =hpp=. /Rationale/: this is as
+   used by boost.
 
-C++ source code can be stored in two types of files:
+3. Implementation files must have the extension =cpp=. /Rationale/:
+   this is as used by boost.
 
-- *header files*: in kitanda they always have the extension =hpp=;
-- *implementation files*: in kitanda they always have the extension
-  =cpp=.
-
-***** Names
-
-The general conventions for file naming are specified under [[file:project_structure.org][project
-structure]]. In terms of C++, files will be named according to the type
-of its contents:
+4. Files are named according to their content:
 
 - files containing a /class/ shall be named after the class;
 - files containing nothing but /namespace/ shall be named after the
-  namespace (see below why this can happen);
+  namespace, and should be used only to document the namespace;
 - files containing one or more free-functions shall be named according
-  to the /logical module/ that these functions constitute
+  to the logical module that these functions constitute
   (e.g. =utility= or =pricing=, etc).
 
-***** Makefiles
+5. Projects are composed of three top-level directories: =include=,
+   =src= and =spec=. =include= shall house all the header files. =src=
+   shall house all of the implementation files. =spec= contains all of
+   the unit tests for the project.
 
-Each top-level folder under =src= has a [[file:infrastructure/cmake.org][cmake]] makefile. In addition,
-each sub-folder of these top-level folders may or may not contain a
-makefile, depending on whether or not it houses a component.
+6. For the purposes of this document, a /component/ is some kind of
+   logical splitting of a project.
 
-***** Folders
+7. The =include= folder must have the following directory structure:
+   =dogen/PROJECT_NAME/COMPONENT_NAME=. The =src= directory must have
+   the following directory structure: =COMPONENT_NAME=. /Rationale/:
+   by placing the =dogen/PROJECT_NAME= folder in the include directory
+   we can lift it directly into a package installing the development
+   header files. This is not required for the implementation files as
+   they are private. /Examples/:
+   =utility/include/utility/exception/...= and
+   =utility/src/exception/...=.
 
-All C++ source code lives under =code/cpp=. Kitanda's c++ source code
-is split into the usual src and include folders:
+8. All consumers of the API - internal or external - must put the
+   =include= folders of each project in the compiler's include path,
+   resulting in includes of the form
+   =dogen/PROJECT_NAME/COMPONENT_NAME...=.
 
-- *src*: all implementation files and headers not expected to
-  be used by client code;
-- *include*: public headers.
+9. Projects have the following standard CMake files: the top-level
+   file includes files in =src= and =spec=; The CMake files in =src=
+   and =spec= are responsible for building these components.
 
-****** Include Folder
+10. The following are a set of well-defined components that must be
+    used only with this meaning. These are both the folder names and
+    the namespace names:
 
-All consumers of the API - including kitanda's own components - are
-expected to put the include folder in the compiler's include path,
-resulting in =#includes= of the form:
-
-#+begin_example
-#include "kitanda/kitanda.hpp"
-#+end_example
-
-There are three folders under include:
-
-- *boost*: endian related code required by eos;
-- *eos*: support for portable binary boost serialisation;
-- *kitanda*: kitanda's public API.
-
-As explained in [[file:project_structure.org][project structure]], as a general rule, the repository
-only contains code owned by kitanda; all the external dependencies
-must be installed by the user as a prerequisite for building
-kitanda. The exception to this rule is the eos library, as its source
-code is scattered all over the Internet and cannot be easily put
-together.
-
-The kitanda folder in include is the top-level container of the
-system's public API; each of its sub-folders represents a component
-(e.g.: org, comms, etc). Most components have a set of commonly
-recurring folders (folders with well-known folder names are in
-quotes):
-
-- *domain*: this houses the component's domain objects. Domain objects
-  are struct-like types, data-structures with very minimal
-  behaviour. @e domain is the default folder name, but its acceptable
-  to name it something else if there is a naturally fitting name
-  (e.g. protocol in the comms component).
-- *streaming*: streaming operators for domain types. We only define
-  the inserter operator, and it shall only be used logging or
-  debugging purposes.
-- *serialization*: boost serialisation support for the domain
-  types. Please note the American spelling,
-- *database*: database support for the domain types.
-- *hash*: boost hash support for the domain types.
-- *other folders*: any number of folders containing objects which act
-  on the domain types and contain org logic.
+    - *types*: houses the domain object definitions
+      themselves. /Exceptions/: it is acceptable to rename this
+      component where there is a more naturally fitting name.
+    - *io*: streaming operators for domain types.
+    - *serialization*: boost serialisation support for the domain
+      types. Please note the American spelling. /Rationale/: This in
+      keeping with the spelling in boost and avoids spurious
+      differences.
+    - *database*: database support for the domain types.
+    - *hash*: boost hash support for the domain types.
+    - *other folders*: any number of folders containing objects which
+      act on the domain types and contain org logic.
 
 Of course, not all components require all folders.
-
-****** Source Folder
-
-The src folder contains implementation code for kitanda's
-components. Applications are always directly below src
-(e.g. =src/luena=, =src/kuito=, etc.); libraries can be at the
-top-level - when a component is implemented as one single library -
-but they can also be sub-folders of the component. Its up to the
-component to determine the approach. The binaries themselves reflect
-the chosen structure:
 
 - =libkitanda_org.so= (=kitanda_org.dll= in windows): one single
   library for the org component; or
 - =libkitanda_org_streaming.so= (or =kitanda_org_streaming.dll= in
   windows): multiple libraries for each "sub-component" of the org
   component.
+
 
 ****** Specs
 
