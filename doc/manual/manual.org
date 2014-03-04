@@ -450,7 +450,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in RFC 2119.
 #+end_quote
 
-** File and Directory Specification
+** File and Directory Standards
 
 In this section we specify aspects related to the layout of Dogen in
 version control, folder structure, file names and so on. The words
@@ -458,16 +458,16 @@ version control, folder structure, file names and so on. The words
 
 *** Content type
 
-1. All files added to the git repository should be in plain
+1. All files added to the git repository must be in plain
    text. /Rationale/: most of the tools we use produce textual
    representations of their data files, and they should be preferred
    whenever possible. /Exceptions/: Bitmap images and other content
-   type which has only binary representation is acceptable, but should
+   type which has only binary representation is acceptable, but must
    be used only as last resort.
 
 *** Naming
 
-1. All files and folders in must have lower-case names. /Rationale/:
+1. All files and folders must have lower-case names. /Rationale/:
    avoid as much as possible case-sensitive issues in platforms where
    casing is not that well designed, such as Windows. /Exceptions:/
    Files or folders that follow well-known naming conventions take
@@ -476,15 +476,18 @@ version control, folder structure, file names and so on. The words
 
 2. The dot character =.= shall only be used to separate the file name
    from its extension (e.g. =file.txt=). /Rationale/: For some reason,
-   dots in the middle of the name seems to confuse cmake and force
+   dots in the middle of the name seem to confuse cmake and force
    rebuilding targets that are up-to-date.
 
 3. Multi-word file and directory names must make use of the underscore
-   character =_= to separate words (e.g.: =folder_name=).
+   character =_= to separate words (e.g.: =folder_name=). /Rationale/:
+   helps readability; since we can't use casing to separate words,
+   this is our only option.
 
 4. In cases where there is a need to distinguish between several
    multi-word components in a file name, the dash character =-= must
-   be used (e.g. =some_word-some_other_word.extension=).
+   be used (e.g. =some_word-some_other_word.extension=). /Rationale/:
+   helps readability.
 
 5. Names must contain only lowercase ASCII letters (=a-z=), numbers
    (=0-9=), underscores (=_=), hyphens (=-=), and periods
@@ -501,7 +504,7 @@ version control, folder structure, file names and so on. The words
    It would be too confusing or ambiguous in certain contexts (source:
    [[http://www.boost.org/development/requirements.html][boost]]).
 
-8. The maximum length of directory and file names is 31
+8. The maximum length of directory and file names must be 31
    characters. /Rationale/: Long file names cause obscure issues.
 
 9. The total path length must not exceed 207 characters. /Rationale/:
@@ -526,11 +529,11 @@ version control, folder structure, file names and so on. The words
    end-user consumption. /Notes/: In general, =build= should contain
    either files used directly by the makefiles or files that get
    copied over to the build's output directory for further
-   processing. Artefacts contained in the =build= directory are:
-   extensions to cmake (both third party and our own), packaging
-   scripts, ctest scripts for Continuous Integration, templates (code
-   templates, configuration file templates, etc) and configuration for
-   code-quality tools (valgrind, etc).
+   processing. Examples of artefacts contained in the =build=
+   directory: extensions to cmake (both third party and our own),
+   packaging scripts, ctest scripts for Continuous Integration,
+   templates (code templates, configuration file templates, etc) and
+   configuration for code-quality tools (valgrind, etc).
 
 3. The =data= directory contains the data files used by Dogen at run
    time; these are expected to be part of an installation.
@@ -551,24 +554,26 @@ version control, folder structure, file names and so on. The words
 
 7. The =patches= directory contains ongoing work that is not yet ready
    to be committed. /Notes/: We use this directory as a poor-man's
-   branch. The reason why is that we often use extremely short-lived
-   branches (e.g. less than 2 days) where the code is not yet ready to
-   be pushed, but we may require access to it from multiple
-   machines. It seems a bit heavy-weight to create and destroy remote
-   branches for this case, so instead we save work down as
-   patches. This directory has very short-lived files.
+   distributed branch. The reason why is that we often use extremely
+   short-lived branches (e.g. less than 2 days) where the code is not
+   yet ready to be pushed, but we may require access to it from
+   multiple machines. It seems a bit heavy-weight to create and
+   destroy remote branches for this case, so instead we save work down
+   as patches. This directory has very short-lived files, and is
+   expected to be empty most of the time.
 
-8. The =projects= folder is a sub-folder of the root folder. It
-   contains the Dogen source code, in any of the supported programming
-   languages. The sub-folders of projects are named after each
-   individual project. /Rationale/: This directory could have been
-   called =src= for source code, but we reserved this for the
-   directory of the implementation files in C++. /Notes/ The word
-   "project" here is used in a rather vague sense, but it can be
-   understood to mean anything which generates a shared library,
-   static library or executable or any other such cohesive unit work -
-   say a set of ruby scripts around a given theme (sanity). We freely
-   mix projects which exist solely to test dogen with projects that
+8. The =projects= folder contains the Dogen source code, in any of the
+   supported programming languages. It's sub-folders must be named
+   after each individual project. /Rationale/: This directory could
+   have been called =src= for source code, but we reserved this for
+   the directory of the implementation files in C++. We settled on
+   projects as it contains all of the projects that make up
+   Dogen. /Notes/ The word "project" here is used in a rather vague
+   sense, but it can be understood to mean anything which generates a
+   shared library, static library or executable or any other such
+   cohesive unit work - a component. For example, a set of ruby
+   scripts around a given theme (sanity) are a project. We freely mix
+   projects which exist solely to test dogen with projects that
    provide end-user functionality.
 
 9. The =sql= directory contains sql configuration files and other
@@ -576,7 +581,9 @@ version control, folder structure, file names and so on. The words
    or move it to projects.
 
 10. The =test_data= directory contains all the files required to run
-    the Dogen unit tests.
+    the Dogen unit tests. /Notes/: This directory should really only
+    contain the data portion of the expectations for the unit tests,
+    but also contains input files.
 
 *** Output folder
 
@@ -586,35 +593,36 @@ version control, folder structure, file names and so on. The words
    objects, automatically generated documentation, instantiated
    templates, etc.
 
-2. In-source builds are not permitted, so the output folder must not
-   be the same folder as the root folder. /Rationale/: In-source
-   builds mix the source code with build artefacts and can result in
-   very messy situations. /Notes/: This is enforced by the CMake
-   files.
+2. The output folder must not be the same folder as the root
+   folder. /Rationale/: In-source (or in-tree) builds are not
+   permitted, as they mix source code with build artefacts and can
+   result in very messy situations, e.g.: a) complex ignore files that
+   are never maintained properly b) when mistakes are made with ignore
+   files, the checking in of build artefacts c) the deletion or
+   modification of source control items by mistake and subsequent
+   check-in. /Notes/: CMake files do not allow in-source builds.
 
-3. The output folder should be located at the same level as the root
-   folder. /Notes/: This is a convention; the directory can be located
-   anywhere else outside the root folder. The CMake files must work
-   regardless of the location of the output directory.
+3. The output folder is recommended to be located under the same
+   parent directory as the root folder. /Notes/: The directory can be
+   located anywhere else, but this is a convenient location.
 
-4. The /output/ folder should be name =output=. /Rationale/: it can be
-   named anything you like and there must not be any dependencies on
-   the name of the output folder. However, to increase
-   interoperability with other developers its preferable to give it a
-   standard name.
+4. The /output/ folder is recommended to be named =output= but there
+   must be no dependencies on its name. /Rationale/: A well-known name
+   increases interoperability with other developers.
 
-5. Users can partition the output folder, creating directories for
-   each supported platform, compiler, debug and release, etc. This is
-   known as a /multi-target/ setup. /Rationale/ Keeping all the
-   targets within a single folder means its easy to start from scratch
-   by deleting the top-level folder.
-
-6. When using multi-target, the output folder's sub-folders should be
-   named after the [[http://wiki.debian.org/Multiarch/Tuples][GNU triplet]] - including the compiler
-   version. /Rationale/ These directories are setup manually because
-   target folders contain a full-blown cmake environment, independent
-   from the others. Its not possible to generate this multi-targeted
-   setup directly from the makefiles. Example multi-target folder
+5. Developers are recommended to partition the output folder by build
+   type, storing there all variations of Dogen builds. /Rationale/
+   Keeping all the builds within a single folder makes it easy to
+   start from scratch by deleting the top-level folder. Whilst
+   perfectly supported, multiple top-level output directories tend to
+   become messy very quickly. /Notes/: Developers should create
+   sub-directories for each supported platform, compiler, debug and
+   release, etc - as required for their particular setup. For complex
+   setups, one suggestion is to use [[http://wiki.debian.org/Multiarch/Tuples][GNU triplets]] - including the
+   compiler version. Unfortunately, these directories must be setup
+   manually because target folders contain a full-blown cmake
+   environment, independent from the others. Thus, it is not possible
+   to generate this setup directly from CMake. Example complex folder
    structure:
 
 #+begin_example
@@ -622,9 +630,10 @@ output/linux-amd64-gcc-4_6_1-debug
 output/win32-x86-clang-3_0-release
 #+end_example
 
-7. Within a target folder - whether on single or multi-target setups -
-   the key folder is =stage=; it contains all the binaries and
-   documentation ready for packaging.
+6. For each build, the sub-folder =stage= shall contain all the
+   binaries, documentation and other artefacts that will be
+   packaged. /Rationale/: "stage" was chosen as it implies some
+   intermediate phase before the final packaging.
 
 *** Third party content
 
@@ -638,17 +647,19 @@ output/win32-x86-clang-3_0-release
    with the boost portable serialisation library. Once these projects
    are packaged they shall be removed from the repository.
 
-** C++ coding standards
+** C++ Coding tandards
 
 In general, we follow the [[http://www.boost.org/development/requirements.html][Boost Library Requirements and Guidelines]]
-document. In a few rare cases we may make choices that contradict it;
-we shall try to explain the rationale best we can for those cases.
+document. In a few rare cases we may make choices that contradict it,
+but we shall try our best to explain the rationale behind the
+decisions.
 
-These coding standards are not to be understood as classic coding
-standards such as [[http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml][Google's]]. We are just intending to capture the
-rationale of some of the choices we have made in the past so that it
-is not forgotten. Thus you may find the standards somewhat sparse, and
-silent in areas where other standards are very verbose.
+These coding standards are not to be understood as "classic" coding
+standards such as [[http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml][Google's]]. Rather, we intend to capture common
+practice in our code base and explain the rationale behind it, so that
+it is justified and the justification is not forgotten. Thus you may
+find the standards somewhat sparse - silent in areas where other
+standards are very verbose and vice-versa.
 
 *** Physical Layout
 

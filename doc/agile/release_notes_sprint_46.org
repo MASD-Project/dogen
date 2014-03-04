@@ -16,15 +16,16 @@ agents with green builds, and the packages uploaded to GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-03 Mon 19:09]
+Clock summary at [2014-03-04 Tue 09:26]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *1:36* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 1:36 |      |
-| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:56 |
-| IMPLEMENTATION Updates to the manual and readme files |        |      | 0:40 |
+| Headline                                                            | Time   |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                        | *3:54* |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                     |        | 3:54 |      |
+| IMPLEMENTATION Release notes and backlog grooming                   |        |      | 0:56 |
+| IMPLEMENTATION Updates to the manual and readme files               |        |      | 1:28 |
+| IMPLEMENTATION Investigate a =systemd= approach for debian machines |        |      | 1:30 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -34,11 +35,13 @@ Clock summary at [2014-03-03 Mon 19:09]
 Updates to release notes and backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-03-04 Tue 07:55]--[2014-03-04 Tue 08:43] =>  0:48
     CLOCK: [2014-03-03 Mon 17:57]--[2014-03-03 Mon 18:37] =>  0:40
 
 Use build downtime to update the manual and / or readme file.
 
-*** Investigate a =systemd= approach for debian machines              :story:
+*** IMPLEMENTATION Investigate a =systemd= approach for debian machines :story:
+    CLOCK: [2014-03-03 Mon 22:50]--[2014-03-04 Tue 00:20] =>  1:30
 
 As we concluded earlier, integral is simply an attempt of making a
 ctest service in ruby. As it happens Linux already has an extensible service
@@ -63,6 +66,12 @@ the actual work:
 - Install it across all the linux boxes
 
 The =systemd= scripts will be added to the integral project.
+
+Initial notes:
+
+- both docker and systemd are available from the unstable packages:
+  docker.io and systemd. Installation was straightforward on lorenz,
+  but problematic on erdos - errors in obtaining the package index:
 
 *** Implement integral features for OSX and Windows                   :story:
 
