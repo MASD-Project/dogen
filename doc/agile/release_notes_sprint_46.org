@@ -29,6 +29,9 @@ Clock summary at [2014-03-04 Tue 21:46]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-03-05 Wed 08:04]--[2014-03-05 Wed 08:17] =>  0:13
+    CLOCK: [2014-03-05 Wed 08:02]--[2014-03-05 Wed 08:05] =>  0:03
+    CLOCK: [2014-03-05 Wed 08:04]--[2014-03-05 Wed 08:05] =>  0:01
     CLOCK: [2014-03-04 Tue 18:08]--[2014-03-04 Tue 18:17] =>  0:09
     CLOCK: [2014-03-03 Mon 17:51]--[2014-03-03 Mon 17:57] =>  0:06
     CLOCK: [2014-03-03 Mon 07:58]--[2014-03-03 Mon 08:48] =>  0:50
@@ -36,6 +39,7 @@ Clock summary at [2014-03-04 Tue 21:46]
 Updates to release notes and backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-03-05 Wed 08:17]--[2014-03-05 Wed 08:41] =>  0:24
     CLOCK: [2014-03-04 Tue 18:17]--[2014-03-04 Tue 18:55] =>  0:38
     CLOCK: [2014-03-04 Tue 07:55]--[2014-03-04 Tue 08:43] =>  0:48
     CLOCK: [2014-03-03 Mon 17:57]--[2014-03-03 Mon 18:37] =>  0:40
@@ -43,6 +47,8 @@ Updates to release notes and backlog.
 Use build downtime to update the manual and / or readme file.
 
 *** IMPLEMENTATION Investigate a =systemd= approach for debian machines :story:
+    CLOCK: [2014-03-05 Wed 07:52]--[2014-03-05 Wed 08:03] =>  0:11
+    CLOCK: [2014-03-04 Tue 21:46]--[2014-03-04 Tue 23:03] =>  1:17
     CLOCK: [2014-03-03 Mon 22:50]--[2014-03-04 Tue 00:20] =>  1:30
 
 As we concluded earlier, integral is simply an attempt of making a
@@ -89,11 +95,27 @@ Initial notes:
 - developers should use the exact same images as the build machine. In
   fact, we should have a shared repository of images - initially just
   32-bit and 64-bit - which we could pull. It may make sense to upload
-  these to Docker, so we can get them from wherever we go.
+  these to Docker, so we can get them from wherever we go. Account in
+  docker has been created.
 
 - sanity does not make a lot of sense for Linux; as we originally
   thought, we should be able to get away with a simple =systemd=
   "service script" that starts and stops ctest.
+
+- docker is very much like a chroot or a jail, except its taken to the
+  next level: the kernel is partitioned internally to isolate the
+  containers. Whilst chroots have some basic file system level
+  isolation and so on, their processes are still seen by the kernel as
+  regular (non-isolated) processes and they share all other
+  resources. With containers is different: the kernel creates isolated
+  areas for each container, each with their own pids, networks,
+  etc. Its sort of the logical conclusion of a chroot, if you take it
+  to its limit. Unlike a VM, there is no need to have a kernel and a
+  hyper-visor, nor is there any need to install a full blown
+  OS and run services on top of services. However, as far as I can
+  see, there is no file sharing between the container and the host
+  OS. This means one still has to bootstrap a minimal debian inside of
+  debian, as with a chroot.
 
 *** Implement integral features for OSX and Windows                   :story:
 

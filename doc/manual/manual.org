@@ -688,17 +688,15 @@ C++ domain; the generic aspects of physical layout are dealt with in
   namespace, and should be used only to document the namespace;
 - files containing one or more free-functions shall be named according
   to the logical module that these functions constitute
-  (e.g. =utility= or =pricing=, etc).
+  (e.g. =utility=, =pricing=, etc).
 
 5. Projects are composed of three top-level directories: =include=,
    =src= and =spec=. =include= shall house all the header files. =src=
    shall house all of the implementation files. =spec= contains all of
-   the unit tests for the project.
+   the unit tests for the project. See [[http://skillsmatter.com/podcast/java-jee/kevlin-henney-rethinking-unit-testing-in-c-plus-plus][Specifications]] for details on
+   the spec folder.
 
-6. For the purposes of this document, a /component/ is some kind of
-   logical splitting of a project.
-
-7. The =include= folder must have the following directory structure:
+6. The =include= folder must have the following directory structure:
    =dogen/PROJECT_NAME/COMPONENT_NAME=. The =src= directory must have
    the following directory structure: =COMPONENT_NAME=. /Rationale/:
    by placing the =dogen/PROJECT_NAME= folder in the include directory
@@ -708,47 +706,55 @@ C++ domain; the generic aspects of physical layout are dealt with in
    =utility/include/utility/exception/...= and
    =utility/src/exception/...=.
 
-8. All consumers of the API - internal or external - must put the
+7. All consumers of the API - internal or external - must put the
    =include= folders of each project in the compiler's include path,
    resulting in includes of the form
    =dogen/PROJECT_NAME/COMPONENT_NAME...=.
 
-9. Projects have the following standard CMake files: the top-level
+8. Projects have the following standard CMake files: the top-level
    file includes files in =src= and =spec=; The CMake files in =src=
    and =spec= are responsible for building these components.
 
-10. The following are a set of well-defined components that must be
-    used only with this meaning. These are both the folder names and
-    the namespace names:
+10. The following are a set of well-defined component names that must
+    be used only with this meaning. These are both the folder names
+    and the namespace names:
 
     - *types*: houses the domain object definitions
       themselves. /Exceptions/: it is acceptable to rename this
       component where there is a more naturally fitting name.
     - *io*: streaming operators for domain types.
     - *serialization*: boost serialisation support for the domain
-      types. Please note the American spelling. /Rationale/: This in
-      keeping with the spelling in boost and avoids spurious
+      types. /Rationale/: Please note the American spelling. This in
+      keeping with the spelling in boost and avoids spurious spelling
       differences.
-    - *database*: database support for the domain types.
-    - *hash*: boost hash support for the domain types.
-    - *other folders*: any number of folders containing objects which
-      act on the domain types and contain org logic.
+    - *odb*: database support for the domain types using ODB.
+    - *hash*: standard C++-11 hash support for the domain types.
+    - *test_data*: test data generators - produce pseudo-random
+      instances of domain types.
+    - *test*: support code needed by the unit tests such as mock
+      factories. /Notes/: we should really merge this with test_data
+      and find a good naming convention for the manual and code
+      generated test data generators.
 
-Of course, not all components require all folders.
+11. All binaries must have names of the form
+    =dogen_PROJECT_NAME=. Specs must, in addition, have the post-fix
+    =spec=. /Examples/: =libdogen_utility.a=, =libdogen_utility.so=,
+    =dogen_utility_spec=, =dogen_utility_spec.exe=, =dogen_knitter=,
+    etc. /Rationale/: this namespacing allows us to choose whatever
+    names we desire without fears of clashes.
 
-- =libkitanda_org.so= (=kitanda_org.dll= in windows): one single
-  library for the org component; or
-- =libkitanda_org_streaming.so= (or =kitanda_org_streaming.dll= in
-  windows): multiple libraries for each "sub-component" of the org
-  component.
+*** Specifications
 
+1. All components in the system have a set of codified behaviours: the
+   /component specification/.
 
-****** Specs
+2. In addition, the system itself may have additional constraints,
+   which live in the /system specification/.
 
-All components in the system have a set of codified behaviours: the
-/component specification/. In addition, the system itself may have
-additional constraints, which live in the /system specification/. In a
-more general form: there are only two types of behaviour within the
+3. 
+
+ In a more general form:
+   there are only two types of behaviour within the
 system, specified or unspecified. Specified behaviour is that which is
 covered by a spec; unspecified behaviour is that which is not.  With
 regards to specs, components may chose to implement it in one of two
@@ -760,8 +766,6 @@ ways:
 
 The size of the spec should determine the approach.
 
-FIXME: link to kevin henney pappers
-http://skillsmatter.com/podcast/java-jee/kevlin-henney-rethinking-unit-testing-in-c-plus-plus
 
 *** Language
 **** Preamble
@@ -1268,6 +1272,7 @@ information with regards to C++ standards.
 **** Videos
 
 - [[http://www.corensic.com/Learn/Resources/ConcurrencyTutorialPartOne.aspx][C++ Concurrency Series]]: Part 1
+- [[http://skillsmatter.com/podcast/java-jee/kevlin-henney-rethinking-unit-testing-in-c-plus-plus][Rethinking Unit Testing in C++]]
 
 * APPENDIX
 
