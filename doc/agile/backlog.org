@@ -8,6 +8,19 @@
 
 Stories that we intend to look at, at some point.
 
+*** Enable support for manual code at the facet level                 :story:
+
+It would be great if we could use the meta-data to enable and disable
+facets (there probably already is a story for this). But in addition
+to this, it would also be great if one could override the default name
+for an object in a facet; for instance: one could add an object called
+=serialization_manager=, disable all facets bar serialisation,
+disable the serialisation postfix of this file and disable code
+generation. This way one could add manual code to any of the facets,
+independently.
+
+At present we support this, but only for types as it is hard-coded.
+
 *** Move the mock factories into the test_data directory              :story:
 
 There is no good conceptual reason to split the mock factories from
