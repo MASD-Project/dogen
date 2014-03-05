@@ -8,6 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Move the mock factories into the test_data directory              :story:
+
+There is no good conceptual reason to split the mock factories from
+the test_data generators. However, we did it because we don't have a
+good way to give dogen visibility of the existence of these files: we
+could add regexes but then its not very maintainable and not visible
+from the project diagram.
+
+The correct solution for this may be to have some tags that state that
+an object only has representations in certain facets.
+
 *** Move test model diagrams into main diagrams directory             :story:
 
 For some reason - lost in the mists of time - we decided to split the
