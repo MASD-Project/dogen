@@ -531,7 +531,7 @@ overview of common use cases. Note that Dogen is a command line tool,
 and as such there is a presumption that the user has at least a
 rudimentary knowledge of the shell of his or her operative system.
 
-*** The Dogen Command Line Options
+*** First Steps
 
 Before we go into Dogen usage proper, we will start with a quick tour
 of the command line options available. Before we start we should make
@@ -555,8 +555,8 @@ If all goes well, you should see something along the lines of:
 
 The first line indicates the version of Dogen, the last digit of which
 is the number of commits done in master. To know how recent this
-version is, go to the [[https://github.com/DomainDrivenConsulting/dogen][project page]] in GitHub and look at the number of
-commits there.
+version is, go to the [[https://github.com/DomainDrivenConsulting/dogen][project page]] in GitHub and look up the number of
+commits there. Ideally you want the most recent version.
 
 Now we have confirmed Dogen is operational, lets have a look at all
 the available options. Run:
@@ -574,22 +574,101 @@ A text similar to the below will come up:
 :  --version             Output version information and exit.
 : ...
 
-Options are grouped as follows:
+We will cover all of these options in more detail later, but for now
+it suffices to say that command line options belong to option groups
+which attempt to aggregate related functionality. These are as
+follows:
 
 - *General options*: these are not directly related to operational
-  aspects, but provide information about the application.
+  aspects, but provide information about the application. We have
+  already seen both =help= and =version=, the most important of the
+  general options group.
 - *Modeling options*: these options are related to the input of data
   into Dogen, describing models and their relationships.
 - *Output options*: these options provide ways in which to configure
   the output coming out of Dogen.
+- *C++ backend options*: configuration specific to the C++ backend
 - *Troubleshooting options*: these provide ways in which to obtain
   diagnostics from Dogen when things go wrong, or just because you
   want to know more about the application's internals.
 
-We have already seen both =help= and =version=, the most important of the
-general options group. Lets look at the remaining groups in more detail.
+With this we can now perform our first code generation.
+
+*** Hello World in Dogen
+
+In order to generate some code you need only one command line option:
+=--target=. It is part of the modeling group, and specifies the file
+containing the model one wishes to code generate. The target file is a
+UML Dia diagram, crafted according to the rules stipulated by
+Dogen.
+
+There are a couple of preparatory steps required before we can start
+using Dogen. Place yourself in a new directory of your choosing, and
+copy across the Hello World model from our git tree into this
+directory:
+
+: mkdir dogen_examples
+: cd dogen_examples
+: wget FILE
+FIXME - path to dia file
+
+Now generate the model:
+
+: $ dogen_driver --target hello_world.dia
+
+Notice that the diagram's file name does not contain any spaces. This
+is important because it will be used as the name of the project, and
+the top-level namespace. 
+
+You should also see a directory called =log=
+where the log file is stored: =dogen.log=. By default Dogen is not
+particularly expressive, so there won't be much on the log file to
+look at.
+
+In addition to this, there should also be a directory called
+=hello_world=. To understand the meaning and the rationale of the
+directory structure you should read (FIXME add link) for details. For
+now we will just open 
+
+
+
+
 
 **** Modeling options:
+
+The most important modeling option of them all is =--target=. It
+specifies the file containing the model one wishes to code
+generate. The target file is normally a UML Dia diagram, crafted
+according to the rules stipulated by Dogen.
+
+: $ dogen_driver --target hello_world.dia
+
+In cases where a diagram references other diagrams, one should use
+=--reference= for each of these references.
+
+: $ dogen_driver --target hello_references.dia --reference hello_world.dia
+
+There can be as many =--reference= parameters as there are diagrams
+that target depends on; dogen will load them all, in the order
+specified by the command line.
+
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-enable-facet domain
+    --cpp-enable-facet io
+    --cpp-enable-facet hash
+    --cpp-enable-facet serialization
+    --cpp-enable-facet test_data
+    --cpp-disable-cmakelists
+    --cpp-disable-eos-serialization
+    --ignore-files-matching-regex .*/CMakeLists.txt
+    --ignore-files-matching-regex .*/test/.*
+    --ignore-files-matching-regex .*/spec/.*
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
+
+
 
   -p [ --external-module-path ] arg External modules containing the target
                                     model, delimited by '::'.
@@ -612,7 +691,8 @@ general options group. Lets look at the remaining groups in more detail.
   --output-to-stdout                 Output generated code to standard output.
                                     Disables output-to-file by default.
 
-C++ backend options:
+**** C++ backend options
+
   --cpp-disable-backend                 Do not generate C++ code.
   --cpp-disable-complete-constructor    Do not generate a constructor taking as
                                         arguments all member variables
@@ -669,6 +749,8 @@ C++ backend options:
 
 [marco@erdos bin]$
 
+
+
 **** Troubleshooting options
 
 These options are really meant to be used by advanced Dogen users, but
@@ -700,8 +782,6 @@ this can be achieved using =--save-dia-model= and
 dia models loaded, and the second saves their equivalent in SML. These
 files can be dumped into a directory of choice via =--debug-dir=. By
 default they come out in the current directory.
-
-*** Hello World Example
 
 * PART III - SPECIFICATIONS
 
