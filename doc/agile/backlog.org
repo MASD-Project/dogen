@@ -8,6 +8,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Sprint number is not being added to the version                   :story:
+
+The dogen version at present is:
+
+: $ ./dogen_driver --version
+: dogen v0.0.2233
+: Copyright (C) 2012 Kitanda.
+: License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+
+It should be v.0.46.2233 to reflect the tags.
+
+Also, we should probably consider removing the leading 0, as we do not
+have a good policy to manage it.
+
 *** Enable support for manual code at the facet level                 :story:
 
 It would be great if we could use the meta-data to enable and disable
