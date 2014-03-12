@@ -16,16 +16,16 @@ agents with green builds, and the packages uploaded to GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-04 Tue 21:46]
+Clock summary at [2014-03-12 Wed 09:16]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *4:41* |      |      |
+| *Total time*                                                        | *7:38* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 4:41 |      |
-| IMPLEMENTATION Release notes and backlog grooming                   |        |      | 1:05 |
-| IMPLEMENTATION Updates to the manual and readme files               |        |      | 2:06 |
-| IMPLEMENTATION Investigate a =systemd= approach for debian machines |        |      | 1:30 |
+| Development Stories Implemented                                     |        | 7:38 |      |
+| IMPLEMENTATION Release notes and backlog grooming                   |        |      | 1:22 |
+| IMPLEMENTATION Updates to the manual and readme files               |        |      | 3:18 |
+| IMPLEMENTATION Investigate a =systemd= approach for debian machines |        |      | 2:58 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -39,6 +39,7 @@ Clock summary at [2014-03-04 Tue 21:46]
 Updates to release notes and backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-03-12 Wed 07:52]--[2014-03-12 Wed 08:40] =>  0:48
     CLOCK: [2014-03-05 Wed 08:17]--[2014-03-05 Wed 08:41] =>  0:24
     CLOCK: [2014-03-04 Tue 18:17]--[2014-03-04 Tue 18:55] =>  0:38
     CLOCK: [2014-03-04 Tue 07:55]--[2014-03-04 Tue 08:43] =>  0:48
