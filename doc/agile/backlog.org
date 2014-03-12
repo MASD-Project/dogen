@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Diagrams used in manual should be in sanity and in docs           :story:
+
+Users should be able to follow the examples in the manual by using a
+set of diagrams supplied in the dogen package. However, to ensure
+these samples are actually working we need to test them as part of
+sanity. This means we need the same diagrams packaged twice.
+
 *** Sprint number is not being added to the version                   :story:
 
 The dogen version at present is:
