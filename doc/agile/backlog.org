@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Type with the same name as the project does not compile           :story:
+
+It seems that if we create a type with exactly the same name as the
+model, we get strange compilation errors:
+
+: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.4/stage/bin/dogen_examples/source/hello_world/include/hello_world/test_data/hello_world_td.hpp:37:13: error: ‘hello_world::hello_world::hello_world’ names the constructor, not the type
+:     typedef hello_world::hello_world result_type;
+             ^
+We should do a test case for this and fix the errors.
+
 *** Log start and finish of dogen with version                        :story:
 
 The log file of a non-verbose session of dogen provides no information
