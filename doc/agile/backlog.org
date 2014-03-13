@@ -8,10 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
-*** The command-line option for the types facet is =domain=           :story:
+*** The types facet should always be on                               :story:
 
-When we performed the rename of =domain= to =types= we left the
-command-line facet. We should rename it to =types= too.
+At present users are given the option to enable or disable the
+=domain= facet; this is not very wise because all facets depend on
+it. It must always be on. We should remove these options.
+
+In addition the facet is incorrectly named: when we performed the
+rename of =domain= to =types= we left the command-line facet. We
+should rename it to =types= too.
 
 *** Type with the same name as the project does not compile           :story:
 
