@@ -531,23 +531,31 @@ overview of common use cases. Note that Dogen is a command line tool,
 and as such there is a presumption that the user has at least a
 rudimentary knowledge of the shell of his or her operative system.
 
-*** First Steps
+*** Validating the Setup
 
-Before we go into Dogen usage proper, we will start with a quick tour
-of the command line options available. Before we start we should make
-sure Dogen is operational. Run:
+The first thing one should do is to make sure Dogen is operational. To
+do so, run:
 
 : $ dogen_driver --version
 
-If you are running it from the build directory and on UNIX, you may
-need to refer to the current directory:
+If you are running it from the build directory =stage/bin= and on
+UNIX, you may need to refer to the current directory:
 
 : $ ./dogen_driver --version
 
-If this is the case, henceforth you will have to add =./= to all of
-the following examples.
+Alternatively, you may find yourself in a sub-directory of the build
+directory; in that case you should use a relative path to the binary:
 
-If all goes well, you should see something along the lines of:
+: $ ../dogen_driver --version
+
+If you are in any of these cases, from now on you will have to add the
+required relative path to all of the following examples - e.g. =./=,
+=../=, etc. Note that you *should not* try to copy the binary around,
+as it must be setup properly in order to work; this is done by the
+build system for both binary packages and builds. You should always
+use relative paths if the binary is not on the path.
+
+If all is well, you should see something along the lines of:
 
 : dogen v0.0.2233
 : Copyright (C) 2012 Kitanda.
@@ -558,8 +566,8 @@ is the number of commits done in master. To know how recent this
 version is, go to the [[https://github.com/DomainDrivenConsulting/dogen][project page]] in GitHub and look up the number of
 commits there. Ideally you want the most recent version.
 
-Now we have confirmed Dogen is operational, lets have a look at all
-the available options. Run:
+Now that we have confirmed Dogen is operational, lets have a look at
+all the available options. Run:
 
 : $ dogen_driver --help
 
@@ -575,14 +583,228 @@ A text similar to the below will come up:
 : ...
 
 We will cover all of these options in more detail later, but for now
-it suffices to say that command line options belong to option groups
-which attempt to aggregate related functionality. These are as
-follows:
+it suffices to say that command line options belong to option groups,
+which attempt to aggregate related functionality. For instance,
+/General options/ are those that are not directly related to
+operational aspects, but provide information about the application. We
+have already seen both =help= and =version=, the most important of
+this group.
 
-- *General options*: these are not directly related to operational
-  aspects, but provide information about the application. We have
-  already seen both =help= and =version=, the most important of the
-  general options group.
+Now that we are up and running, lets do some code generation.
+
+*** Generating Hello World
+
+Before we can generate any code, we need a model. It also helps if we
+keep all files isolated so we know what Dogen has been up to. We will
+meet both of these conditions by placing ourselves in a new directory
+and copying across the "Hello World" model from the Dogen git
+repository:
+
+: mkdir dogen_examples
+: cd dogen_examples
+: mkdir source
+: cd source
+: wget FILE
+FIXME - path to dia file
+
+The source directory is created so we can separate our source code
+from the build files, as you'll see in a moment. All that is left is
+to code generate:
+
+: $ dogen_driver --target hello_world.dia
+
+We use the =--target= command line option to tell Dogen about the
+"Hello World" model. The target file must be a UML Dia diagram,
+crafted according to the rules stipulated by Dogen. Notice that the
+diagram's file name does not contain any spaces, camel case, and so
+on. This is important because it will be used as the name of the
+project and as the top-level namespace, so it must be valid as a C++
+identifier and it should follow the conventions of the other C++
+identifiers.
+
+After generation, your directory should look like so:
+
+: ls -l
+: total 24
+: drwxr-xr-x 4 marco marco 4096 Mar 13 07:56 hello_world
+: -rw-r--r-- 1 marco marco 7315 Mar 12 18:51 hello_world.dia
+: drwxr-xr-x 2 marco marco 4096 Mar 12 18:51 log
+
+The =log= directory is where the log file is stored; it is named
+=dogen.log=. By default Dogen is not particularly expressive, so there
+won't be much in the log file to look at. If you wish to increase the
+verbosity of the logging, you can do so using =--verbose=:
+
+: $ dogen_driver --target hello_world.dia --verbose
+
+This will give you a wealth of detail about how Dogen operates, but,
+to be fair, it is mainly of use to Dogen developers and advanced
+users; for instance, you are required to do this when you attach the
+log file to any bug report you submit. For the moment, we'll just
+ignore the log, but it will come in handy later on.
+
+The other directory of interest is =hello_world=. This is where the
+generated C++ code is stored. To understand the meaning and the
+rationale of the directory structure you should read sections [[*File%20and%20Directory%20Standards][File and
+Directory Standards]] and also [[*Physical%20Layout][Physical Layout]].
+
+For now we'll just have a quick peek at one of the generated files,
+the class =hello_world= itself:
+
+: $ grep -e class -B5 -A5  hello_world/include/hello_world/types/hello_world.hpp
+: namespace hello_world {
+: /**
+:  * @brief Welcome to Dogen!
+: *
+: * This is one of the simplest models you can generate, a single class with one
+: * property. You can see the use of comments at the class level and property
+: * level.
+: */
+: class hello_world final {
+: public:
+:    hello_world() = default;
+:    hello_world(const hello_world&) = default;
+:    hello_world(hello_world&&) = default;
+:    ~hello_world() = default;
+
+As you can see, a C++ 11 class was generated. At this point it is
+recommended you look at the =hello_world.dia= using Dia, and the
+generated sources using your preferred text editor.
+
+Unfortunately, we're not quite there just yet; We need to introduce a
+couple more concepts before we get into compilation proper. This is
+because it is possible you do not have a development environment set
+up with all of the third-party libraries and tools that are supported
+by Dogen by default, such as EOS, ODB and so on. So we will tell Dogen
+to generate only code which does not require such third party
+libraries. That can be accomplished as follows:
+
+: rm -rf hello_world
+: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain \
+:   --cpp-enable-facet io
+
+A couple of points of note. First we start off by deleting the entire
+output of code generation. This is actually not normally necessary, as
+we shall see, but a requirement for now as we are not using the more
+advanced features of Dogen.
+
+The second point is the two new command line options we added to the
+Dogen invocation. The command =--cpp-enable-facet= ensures that only
+the select /facets/ are on. A facet is just Dogen-speak for a
+logically distinct portion of code generation, which can be switched
+on or off independently of other such portions. In this particular
+case we asked for the core facet =domain= to be on - it makes no sense
+to code generate otherwise, really - and, in addition, for C++
+streaming support to be on too. All other facets are thus switched
+off, so there are no requirements for third-party libraries.
+
+*** Supporting Infrastructure
+
+Now that we have generated the code, we need two additional bits of
+infrastructure to compile: a CMake file and a main.
+
+Dogen models are designed to be integrated with an existing CMake
+build. Thus we need to generate a minimal =CMakeLists.txt= in order to
+make use of our new model. Something as simple as this would do:
+
+: cmake_minimum_required(VERSION 2.8 FATAL_ERROR) # 2.6 should work too
+: project(hello_world)
+: set(CMAKE_CXX_FLAGS "-std=c++11") # Dogen requires C++ 11 or greater
+: include_directories(${CMAKE_SOURCE_DIR}/hello_world/include)
+: add_subdirectory(${CMAKE_SOURCE_DIR}/hello_world)
+: add_executable(main main.cpp)
+: target_link_libraries(main hello_world)
+
+Take the above code and slap it on a =CMakeLists.txt= in your =source=
+directory; granted, you could get much fancier, but this suffices for
+the purposes of our "Hello World". The contents of the file shouldn't
+be that surprising, unless you are unfamiliar with CMake. If that is
+the case, I'm rather afraid that an introduction to CMake is outside
+of the scope of this manual. On the plus side, there are plenty of
+good articles on the subject.
+
+Finally, =main.cpp=. It is equally straightforward, a few lines over
+the traditional C++ "Hello World":
+
+: #include <iostream>
+: #include "hello_world/io/one_property_io.hpp"
+:
+: int main() {
+:     hello_world::one_property op;
+:     std::cout << "hello world! " << op << std::endl;
+:     return 0;
+: }
+
+We are making use of both the =domain= and the =io= facets we code
+generated above; the default constructed object simply gets streamed
+out into the console.
+
+At this point in time, your directory should look like this:
+
+: $ ls -l
+: total 24
+: -rw-r--r-- 1 marco marco  284 Mar 13 18:14 CMakeLists.txt
+: drwxr-xr-x 4 marco marco 4096 Mar 13 18:34 hello_world
+: -rw-r--r-- 1 marco marco 7316 Mar 13 18:19 hello_world.dia
+: drwxr-xr-x 2 marco marco 4096 Mar 13 18:20 log
+: -rw-r--r-- 1 marco marco  230 Mar 13 18:55 main.cpp
+
+It is time to compile.
+
+*** Compiling and Running
+
+The compilation steps are fairly simple. We need to create a folder to
+house the build paraphernalia, to avoid getting it all mixed with the
+source code. There we shall build and run our main. The following
+achieves that:
+
+: $ cd ..
+: $ mkdir output
+: $ cd output/
+: $ cmake ../source
+: <lots of cmake output>
+: $ make
+: <lots of make output>
+: $ ./main
+: hello world!  { "__type__": "hello_world::one_property", "property": "" }
+
+And with that, we have our simplest Dogen model in all of its glory
+and splendour.
+
+*** Version Control
+
+We strongly recommend you store all of the code generated by Dogen in
+version control. This may sound counter-intuitive at first. After all,
+you wouldn't want to store Protocol Buffers code in version control,
+or the output of an IDL compiler. However, the same logic doesn't
+/quite/ apply to Dogen. As you will see later, we strive to allow
+intermixing of manually crafted code with generated code, and we also
+want the generated code to look as if it was generated by humans;
+granted, some rather boring, robot-like humans, but still. Finally, we
+want you to distrust Dogen - every time you code generate, you should
+inspect the output and make sure if looks exactly the way you want it
+to look. The best way to do that is to validate diffs. At any rate,
+suspend disbelief for a second and believe that the rightful place of
+the code generated by Dogen is in version control.
+
+Git is our preferred DVCS, so we shall demonstrate how it can be used
+to "see" what Dogen is up to. To start off with, we need to initialise
+a repository in our source folder:
+
+: $ git init .
+: <git output>
+: $ echo log > .gitignore
+: $ git add -A
+: $ git commit -m "initial import"
+: <git output>
+
+Now that we have committed our changes, we can use =git diff= and =git
+status= to see the results of all Dogen commands.
+
+**** TBD
+
+
+
 - *Modeling options*: these options are related to the input of data
   into Dogen, describing models and their relationships.
 - *Output options*: these options provide ways in which to configure
@@ -591,47 +813,6 @@ follows:
 - *Troubleshooting options*: these provide ways in which to obtain
   diagnostics from Dogen when things go wrong, or just because you
   want to know more about the application's internals.
-
-With this we can now perform our first code generation.
-
-*** Hello World in Dogen
-
-In order to generate some code you need only one command line option:
-=--target=. It is part of the modeling group, and specifies the file
-containing the model one wishes to code generate. The target file is a
-UML Dia diagram, crafted according to the rules stipulated by
-Dogen.
-
-There are a couple of preparatory steps required before we can start
-using Dogen. Place yourself in a new directory of your choosing, and
-copy across the Hello World model from our git tree into this
-directory:
-
-: mkdir dogen_examples
-: cd dogen_examples
-: wget FILE
-FIXME - path to dia file
-
-Now generate the model:
-
-: $ dogen_driver --target hello_world.dia
-
-Notice that the diagram's file name does not contain any spaces. This
-is important because it will be used as the name of the project, and
-the top-level namespace. 
-
-You should also see a directory called =log=
-where the log file is stored: =dogen.log=. By default Dogen is not
-particularly expressive, so there won't be much on the log file to
-look at.
-
-In addition to this, there should also be a directory called
-=hello_world=. To understand the meaning and the rationale of the
-directory structure you should read (FIXME add link) for details. For
-now we will just open 
-
-
-
 
 
 **** Modeling options:
@@ -651,22 +832,6 @@ In cases where a diagram references other diagrams, one should use
 There can be as many =--reference= parameters as there are diagrams
 that target depends on; dogen will load them all, in the order
 specified by the command line.
-
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/spec/.*
-    --verbose
-    --delete-extra-files
-    --external-module-path dogen)
 
 
 
@@ -782,6 +947,24 @@ this can be achieved using =--save-dia-model= and
 dia models loaded, and the second saves their equivalent in SML. These
 files can be dumped into a directory of choice via =--debug-dir=. By
 default they come out in the current directory.
+
+
+** Frequently Asked Questions
+
+*Q*: When I tried running Dogen I get the following error message:
+
+: Error: File not found: Could not find data directory.
+: Base directory: /a/full/path. Locations searched: ./data ../data ../share/data
+: ../share/dogen-0.0.2233 ../share/dogen . See the log file for details.
+
+*A*: Your installation of Dogen is faulty. This could happen for
+example if you copy the Dogen binary from a build directory into
+another location without copying all the associated
+infrastructure. The correct way is to run the binary using a relative
+path to the build directory: =../../dogen_driver=.
+
+This error should not occur if you are using a binary package as the
+binary should be in the system path.
 
 * PART III - SPECIFICATIONS
 
@@ -1134,7 +1317,6 @@ ways:
   component folder.
 
 The size of the spec should determine the approach.
-
 
 *** Language
 **** Preamble
