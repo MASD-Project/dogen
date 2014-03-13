@@ -8,6 +8,11 @@
 
 Stories that we intend to look at, at some point.
 
+*** The command-line option for the types facet is =domain=           :story:
+
+When we performed the rename of =domain= to =types= we left the
+command-line facet. We should rename it to =types= too.
+
 *** Type with the same name as the project does not compile           :story:
 
 It seems that if we create a type with exactly the same name as the
