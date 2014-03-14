@@ -888,7 +888,6 @@ deterministic way of validating that.
 Just for good measure, we'll commit these changes:
 
 : $ git add -A
-: <git output>
 : $ git commit -m "add comment to property"
 
 Now we're ready to start working on the next set of changes. Two key
@@ -920,6 +919,11 @@ can easily be accomplished with CMake. In your top-level
 :     --cpp-enable-facet domain
 :     --cpp-enable-facet io)
 
+To avoid any confusion, we should check these changes in:
+
+: git add -A
+: git commit -m "add target for code generation"
+
 Now, in your output directory you can simply do:
 
 : $ cmake ../source # just in case, shouldn't be necessary
@@ -932,39 +936,151 @@ Now, in your output directory you can simply do:
 When you go back to your source directory, git status should show you
 the following:
 
-: $ git status
 : On branch master
-: Changes not staged for commit:
-:  (use "git add <file>..." to update what will be committed)
-:   (use "git checkout -- <file>..." to discard changes in working directory)
-:
-:  modified:   CMakeLists.txt
-:
-: no changes added to commit (use "git add" and/or "git commit -a")
+: nothing to commit, working directory clean
 
-So as expected no changes were done (other than the =CMakeLists.txt=
-change we did manually. But how do we know the code generator actually
-executed? This is where the log file comes in handy:
+As expected, no changes were done. But how do we know the code
+generator actually executed at all? This is where the log file comes
+in handy:
 
 : $ date
 : Fri 14 Mar 08:32:33 GMT 2014
-: $ tail -n 2 log/dogen.log
-: 2014-03-14 08:32:29.757751 [INFO] [cpp_formatters.workflow] C++ formatters workflow finished.
+: $ tail -n 1 log/dogen.log
 : 2014-03-14 08:32:29.763230 [INFO] [engine.workflow] Workflow finished.
 
 As you can see, the timestamp of the last thing Dogen wrote to the log
-is very close to now, so we know it executed a code generation. As
-there was nothing to change, nothing got changed.
+is very close to now, so we know it executed the code generation. But,
+as there was nothing to change, nothing got changed.
 
-The more advanced CMake and make users in general may, at this
+The more advanced CMake - and make users in general - may, at this
 juncture, be tempted to add a dependency between the diagram and code
 generation. In such a setup, if the Dia diagram has been modified, a
-code generation takes place whenever you build. We do not recommend
-such practice. When you are using large numbers of models, its common
-to have "work-in-progress" changes that are not yet ready for code
-generation.
+code generation would take place when you build. This sounds like a
+great idea in theory, but in practice it actually doesn't work that
+well. From experience, we do not recommend this approach. When you
+start using Dogen in anger, you will find yourself many a time with
+"work-in-progress" changes; you will be speculating with the design
+for quite a bit until it makes sense. At the same time, you or other
+team members may also be doing unrelated code changes. This will put
+in a bind: either you don't check-in the diagram changes, or your
+create a branch for them (which is not always a bad idea, to be fair)
+or you check them in and break everyone else's code.
 
-**** TBD
+The other reason why this is a bad idea is that if someone checked in
+a diagram but forgot to run the code generator, the build machine
+could break in mysterious ways. The code that is building is not the
+code that was checked in, and this can result in a lot of wasted time
+investigating such issues.
+
+In conclusion, we found that in practice its better to code generate
+and check in manually, as and when you are ready to do so.
+
+*** Deleting Extra Files
+
+In the previous sections we suggested deleting the code generation
+directory before code generation to ensure we're in a good state. We
+also mentioned that there is a better way of doing this. It is now
+time to cover this in more depth.
+
+Imagine this fairly common use case: you just added a brand new class
+to your model - =two_properties= say - and you code generated it. It
+all looks fine from git:
+
+: $ git status
+: On branch master
+: Changes not staged for commit:
+:   (use "git add <file>..." to update what will be committed)
+:   (use "git checkout -- <file>..." to discard changes in working directory)
+:
+:   modified:   hello_world.dia
+:   modified:   hello_world/include/hello_world/io/all_io.hpp
+:   modified:   hello_world/include/hello_world/types/all.hpp
+:
+: Untracked files:
+:   (use "git add <file>..." to include in what will be committed)
+:
+:   hello_world/include/hello_world/io/two_properties_io.hpp
+:   hello_world/include/hello_world/types/two_properties.hpp
+:   hello_world/include/hello_world/types/two_properties_fwd.hpp
+:   hello_world/src/io/two_properties_io.cpp
+:   hello_world/src/types/two_properties.cpp
+: no changes added to commit (use "git add" and/or "git commit -a")
+
+Alas, after much soul searching you decide that =two_properties= was a
+mistake: it doesn't reflect the domain you intend to model at all. So
+you remove it from the diagram. What is Dogen to do? Well, lets look
+at the git output after we removed the new class:
+
+: $ git status
+: On branch master
+: Untracked files:
+:   (use "git add <file>..." to include in what will be committed)
+:
+:   hello_world/include/hello_world/io/two_properties_io.hpp
+:   hello_world/include/hello_world/types/two_properties.hpp
+:   hello_world/include/hello_world/types/two_properties_fwd.hpp
+:   hello_world/src/io/two_properties_io.cpp
+:   hello_world/src/types/two_properties.cpp
+:
+: nothing added to commit but untracked files present (use "git add" to track)
+
+Dogen got rid of all the changes to the /existing/ files, but left the
+new files lying around! This is because Dogen now does not consider
+these files to be its responsibility at all; there is no matching
+class that "owns" them, so they are totally ignored. This may not be
+the ideal behaviour - after all you wanted to get rid of the class
+altogether. To do so You need to instruct Dogen to delete all files
+that it thinks are "unnecessary". This can be done via the
+=--delete-extra-files= option. We can add it to the top-level
+=CMakeLists.txt= like so:
+
+: $ git diff CMakeLists.txt
+: diff --git a/CMakeLists.txt b/CMakeLists.txt
+: index 0f6e9c3..2db53b8 100644
+: --- a/CMakeLists.txt
+: +++ b/CMakeLists.txt
+: @@ -12,4 +12,5 @@ add_custom_target(codegen_hello_world
+:      COMMAND ../../dogen_driver
+:      --target ${CMAKE_SOURCE_DIR}/hello_world.dia
+:      --cpp-enable-facet domain
+: -    --cpp-enable-facet io)
+: +    --cpp-enable-facet io
+: +    --delete-extra-files)
+
+As usual we'll commit this change:
+
+: $ git add -A
+: $ git commit -m "add delete extra files"
+: <git output>
+
+When we code generate again, the results are quite different:
+
+: $ cd ../output
+: $ make codegen_hello_world
+: -- Configuring done
+: -- Generating done
+: -- Build files have been written to: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.4/stage/bin/dogen_examples/output
+: [100%] Generating Hello World model
+: [100%] Built target codegen_hello_world
+: $ cd ../source/
+: $ git status
+: On branch master
+: nothing to commit, working directory clean
+
+Dogen has now deleted all the files we're no longer interested in.
+
+*** Ignoring Extra Files
+
+It is not always appropriate to delete all files that Dogen knows
+nothing of. Imagine a second use case: you decide to manually create a
+file with a stand alone function =my_function.cpp=. This file needs to
+be part of the model, but it cannot be code generated by Dogen.
+
+
+
+and ignoring 
+
+*** TBD
 
 
 
@@ -976,7 +1092,6 @@ generation.
 - *Troubleshooting options*: these provide ways in which to obtain
   diagnostics from Dogen when things go wrong, or just because you
   want to know more about the application's internals.
-
 
 **** Modeling options:
 
@@ -1076,7 +1191,6 @@ specified by the command line.
                                         for domain types.
 
 [marco@erdos bin]$
-
 
 
 **** Troubleshooting options
