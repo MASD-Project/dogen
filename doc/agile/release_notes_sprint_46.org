@@ -16,15 +16,15 @@ agents with green builds, and the packages uploaded to GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-13 Thu 19:51]
+Clock summary at [2014-03-14 Fri 08:36]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *10:56* |       |      |
+| *Total time*                                                        | *11:37* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                     |         | 10:56 |      |
+| Development Stories Implemented                                     |         | 11:37 |      |
 | IMPLEMENTATION Release notes and backlog grooming                   |         |       | 1:22 |
-| IMPLEMENTATION Updates to the manual and readme files               |         |       | 6:36 |
+| IMPLEMENTATION Updates to the manual and readme files               |         |       | 7:17 |
 | IMPLEMENTATION Investigate a =systemd= approach for debian machines |         |       | 2:58 |
 #+end:
 
@@ -39,6 +39,7 @@ Clock summary at [2014-03-13 Thu 19:51]
 Updates to release notes and backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-03-14 Fri 07:55]--[2014-03-14 Fri 08:36] =>  0:41
     CLOCK: [2014-03-13 Thu 18:50]--[2014-03-13 Thu 19:51] =>  1:01
     CLOCK: [2014-03-13 Thu 18:00]--[2014-03-13 Thu 18:43] =>  0:43
     CLOCK: [2014-03-13 Thu 07:54]--[2014-03-13 Thu 08:41] =>  0:47
