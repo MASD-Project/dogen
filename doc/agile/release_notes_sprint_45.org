@@ -17,19 +17,19 @@ the =formatters= model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-03 Mon 07:58]
+Clock summary at [2014-03-18 Tue 22:04]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *7:13* |      |      |
+| *Total time*                                         | *8:23* |      |      |
 |------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 7:13 |      |
+| Development Stories Implemented                      |        | 8:23 |      |
 | COMPLETED Release notes and backlog grooming         |        |      | 0:27 |
 | COMPLETED Updates to the manual and readme files     |        |      | 0:25 |
 | COMPLETED Fix Debian packages to use system boost    |        |      | 1:12 |
 | COMPLETED Integral: test with rspec                  |        |      | 0:12 |
 | COMPLETED Clean up Lorenz development setup          |        |      | 0:33 |
-| COMPLETED Integral: re-implement bash script in ruby |        |      | 4:24 |
+| COMPLETED Integral: re-implement bash script in ruby |        |      | 5:34 |
 #+end:
 
 *** COMPLETED Release notes and backlog grooming                       :task:
@@ -71,6 +71,7 @@ We need to move to the new ddc repos.
 
 *** COMPLETED Integral: re-implement bash script in ruby              :story:
     CLOSED: [2014-03-03 Mon 07:54]
+    CLOCK: [2014-03-01 Sat 23:26]--[2014-03-02 Sun 00:36] =>  1:10
     CLOCK: [2014-02-27 Thu 07:52]--[2014-02-27 Thu 08:38] =>  0:46
     CLOCK: [2014-02-26 Wed 07:55]--[2014-02-26 Wed 08:39] =>  0:44
     CLOCK: [2014-02-25 Tue 07:52]--[2014-02-25 Tue 08:39] =>  0:47
