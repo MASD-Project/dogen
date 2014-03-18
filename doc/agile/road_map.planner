@@ -20,87 +20,92 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="S46 - Fix the build environment" note="" work="288000" start="20140303T000000Z" end="20140314T170000Z" work-start="20140303T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="S46 - Fix the build environment - part 1" note="" work="288000" start="20140303T000000Z" end="20140314T170000Z" work-start="20140303T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20140303T000000Z"/>
     </task>
-    <task id="2" name="S47 - Finish cleaning up C++ model" note="" work="288000" start="20140314T170000Z" end="20140328T170000Z" work-start="20140317T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="2" name="S47 - Fix the build environment - part 2" note="" work="288000" start="20140314T170000Z" end="20140328T170000Z" work-start="20140317T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="1" type="FS"/>
       </predecessors>
     </task>
-    <task id="3" name="S48 - Create Stitch" note="" work="288000" start="20140328T170000Z" end="20140411T170000Z" work-start="20140331T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="3" name="S48 - Finish cleaning up C++ model" note="" work="288000" start="20140328T170000Z" end="20140411T170000Z" work-start="20140331T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="2" type="FS"/>
       </predecessors>
     </task>
-    <task id="4" name="S49 - Update all formatters to Stitch" note="" work="288000" start="20140411T170000Z" end="20140425T170000Z" work-start="20140414T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="4" name="S49 - Create Stitch" note="" work="288000" start="20140411T170000Z" end="20140425T170000Z" work-start="20140414T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="3" type="FS"/>
       </predecessors>
     </task>
-    <task id="5" name="S50 - Setup Sowing infrastructure" note="" work="288000" start="20140425T170000Z" end="20140509T170000Z" work-start="20140428T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="5" name="S50 - Update all formatters to Stitch" note="" work="288000" start="20140425T170000Z" end="20140509T170000Z" work-start="20140428T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="4" type="FS"/>
       </predecessors>
     </task>
-    <task id="6" name="S51 - Add full JSON support to SML" note="" work="288000" start="20140509T170000Z" end="20140523T170000Z" work-start="20140512T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="6" name="S51 - Setup Sowing infrastructure" note="" work="288000" start="20140509T170000Z" end="20140523T170000Z" work-start="20140512T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="5" type="FS"/>
       </predecessors>
     </task>
-    <task id="7" name="S52 - Add Clang formatting support" note="" work="288000" start="20140523T170000Z" end="20140606T170000Z" work-start="20140526T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="7" name="S52 - Add full JSON support to SML" note="" work="288000" start="20140523T170000Z" end="20140606T170000Z" work-start="20140526T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="6" type="FS"/>
       </predecessors>
     </task>
-    <task id="8" name="S53 - Add Clang code merging support" note="" work="288000" start="20140606T170000Z" end="20140620T170000Z" work-start="20140609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="8" name="S53 - Add Clang formatting support" note="" work="288000" start="20140606T170000Z" end="20140620T170000Z" work-start="20140609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="7" type="FS"/>
       </predecessors>
     </task>
-    <task id="9" name="S54 - Add versioning support" note="" work="288000" start="20140620T170000Z" end="20140704T170000Z" work-start="20140623T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="9" name="S54 - Add Clang code merging support" note="" work="288000" start="20140620T170000Z" end="20140704T170000Z" work-start="20140623T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="8" type="FS"/>
       </predecessors>
     </task>
-    <task id="10" name="S55 - Add diff support" note="" work="288000" start="20140704T170000Z" end="20140718T170000Z" work-start="20140707T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="10" name="S55 - Add versioning support" note="" work="288000" start="20140704T170000Z" end="20140718T170000Z" work-start="20140707T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="9" type="FS"/>
       </predecessors>
     </task>
-    <task id="11" name="S56 - Expand coverage of STL types" note="" work="288000" start="20140718T170000Z" end="20140801T170000Z" work-start="20140721T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="11" name="S56 - Add diff support" note="" work="288000" start="20140718T170000Z" end="20140801T170000Z" work-start="20140721T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="10" type="FS"/>
       </predecessors>
     </task>
-    <task id="12" name="S57 - Expand coverage of Boost types" note="" work="288000" start="20140801T170000Z" end="20140815T170000Z" work-start="20140804T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="12" name="S57 - Expand coverage of STL types" note="" work="288000" start="20140801T170000Z" end="20140815T170000Z" work-start="20140804T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="11" type="FS"/>
       </predecessors>
     </task>
-    <task id="13" name="S58 - Add support for C# or Java" note="" work="288000" start="20140815T170000Z" end="20140829T170000Z" work-start="20140818T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="13" name="S58 - Expand coverage of Boost types" note="" work="288000" start="20140815T170000Z" end="20140829T170000Z" work-start="20140818T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="12" type="FS"/>
       </predecessors>
     </task>
-    <task id="14" name="S59 - Create a basic Dogen service - part 1" note="" work="288000" start="20140829T170000Z" end="20140912T170000Z" work-start="20140901T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="14" name="S59 - Add support for C# or Java" note="" work="288000" start="20140829T170000Z" end="20140912T170000Z" work-start="20140901T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="13" type="FS"/>
       </predecessors>
     </task>
-    <task id="15" name="S60 - Create a basic Dogen service - part 2" note="" work="288000" start="20140912T170000Z" end="20140926T170000Z" work-start="20140915T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="15" name="S60 - Create a basic Dogen service - part 1" note="" work="288000" start="20140912T170000Z" end="20140926T170000Z" work-start="20140915T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="14" type="FS"/>
       </predecessors>
     </task>
-    <task id="16" name="S61 - Get the manual in a usable state - part 1" note="" work="288000" start="20140926T170000Z" end="20141010T170000Z" work-start="20140929T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="16" name="S61 - Create a basic Dogen service - part 2" note="" work="288000" start="20140926T170000Z" end="20141010T170000Z" work-start="20140929T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="15" type="FS"/>
       </predecessors>
     </task>
-    <task id="17" name="S62 - Get the manual in a usable state - part 2" note="" work="288000" start="20141010T170000Z" end="20141024T170000Z" work-start="20141013T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="17" name="S62 - Get the manual in a usable state - part 1" note="" work="288000" start="20141010T170000Z" end="20141024T170000Z" work-start="20141013T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="16" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="18" name="S63 - Get the manual in a usable state - part 2" note="" work="288000" start="20141024T170000Z" end="20141107T170000Z" work-start="20141027T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="17" type="FS"/>
       </predecessors>
     </task>
   </tasks>
@@ -109,8 +114,10 @@
     <resource id="1" name="Marco Craveiro" short-name="MC" type="1" units="0" email="" note="" std-rate="0"/>
   </resources>
   <allocations>
-    <allocation task-id="6" resource-id="1" units="100"/>
+    <allocation task-id="2" resource-id="1" units="100"/>
+    <allocation task-id="7" resource-id="1" units="100"/>
     <allocation task-id="1" resource-id="1" units="100"/>
+    <allocation task-id="18" resource-id="1" units="100"/>
     <allocation task-id="17" resource-id="1" units="100"/>
     <allocation task-id="16" resource-id="1" units="100"/>
     <allocation task-id="15" resource-id="1" units="100"/>
@@ -121,10 +128,9 @@
     <allocation task-id="10" resource-id="1" units="100"/>
     <allocation task-id="9" resource-id="1" units="100"/>
     <allocation task-id="8" resource-id="1" units="100"/>
-    <allocation task-id="7" resource-id="1" units="100"/>
+    <allocation task-id="6" resource-id="1" units="100"/>
     <allocation task-id="5" resource-id="1" units="100"/>
     <allocation task-id="4" resource-id="1" units="100"/>
     <allocation task-id="3" resource-id="1" units="100"/>
-    <allocation task-id="2" resource-id="1" units="100"/>
   </allocations>
 </project>
