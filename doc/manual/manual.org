@@ -962,8 +962,8 @@ as dumb as possible.
 
 *** Deleting Extra Files
 
-As you start adding and removing files from your diagram, you may find
-that Dogen starts leaving a lot of artefacts behind. You may even
+As you start adding and removing classes from your diagram, you may
+find that Dogen starts leaving a lot of artefacts behind. You may even
 conclude that the best way is to manually delete the code generation
 directory before code generation to ensure you're in a good state. In
 fact, there is a better way of handling this situation.
@@ -979,7 +979,6 @@ generated it. It all looks fine from git:
 :   (use "git checkout -- <file>..." to discard changes in working directory)
 : 
 :   modified:   hello_world.dia
-:   modified:   hello_world/include/hello_world/io/all_io.hpp
 :   modified:   hello_world/include/hello_world/types/all.hpp
 : 
 : Untracked files:
@@ -1040,7 +1039,7 @@ When we code generate again, the result is quite different:
 : $ make codegen_hello_world
 : -- Configuring done
 : -- Generating done
-: -- Build files have been written to: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.4/stage/bin/dogen_examples/output
+: -- Build files have been written to: YOUR_PATH/dogen_examples/output
 : [100%] Generating Hello World model
 : [100%] Built target codegen_hello_world
 : $ cd ../source/
@@ -1113,7 +1112,7 @@ sensible:
 : $ cmake ../source/ # should't really be necessary
 : -- Configuring done
 : -- Generating done
-: -- Build files have been written to: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.4/stage/bin/dogen_examples/output
+: -- Build files have been written to: YOUR_PATH/dogen_examples/output
 : $ make codegen_hello_world
 : [100%] Generating Hello World model
 : [100%] Built target codegen_hello_world
