@@ -16,16 +16,17 @@ GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-18 Tue 21:45]
+Clock summary at [2014-03-18 Tue 22:57]
 
 | Headline                                              | Time   |      |      |
 |-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *2:05* |      |      |
+| *Total time*                                          | *3:02* |      |      |
 |-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 2:05 |      |
+| Development Stories Implemented                       |        | 3:02 |      |
 | IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:20 |
 | IMPLEMENTATION Updates to the manual and readme files |        |      | 1:30 |
 | IMPLEMENTATION Complete the integral work for Linux   |        |      | 0:15 |
+| IMPLEMENTATION Fix issues with missing builds         |        |      | 0:57 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -50,6 +51,13 @@ integral and get it in a state good enough to be used in production.
 - it seems we have not pulled (or pushed) the latest integral work. We
   need to sync with lorenz before we proceed.
 
+*** IMPLEMENTATION Fix issues with missing builds                     :spike:
+    CLOCK: [2014-03-18 Tue 22:00]--[2014-03-18 Tue 22:57] =>  0:57
+
+
+We seem to have no builds for the last few days, probably due to the
+changes done while messing around with docker.
+
 *** Implement integral features for OSX and Windows                   :story:
 
 These operative systems do not have =systemd=. We should do a cursory
@@ -58,14 +66,6 @@ we should just add the missing features to integral (ported across
 from PFH).
 
 We should also consider moving across to Windows 7.
-
-*** Consider docker for the development setup                         :story:
-
-We have moved Lorenz to the new ddc repos and did a clang build on it;
-however, we do not have ODB and EOS support. We need to figure out the
-story around this - should we also be using docker and downloading a
-common docker image with these setup? We could then have docker images
-for 32-bit and 64-bit, shared with developers and build machine.
 
 *** Implement flymake from the EDE project                            :story:
 
