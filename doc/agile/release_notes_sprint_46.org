@@ -16,19 +16,20 @@ agents with green builds, and the packages uploaded to GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-14 Fri 19:08]
+Clock summary at [2014-03-18 Tue 08:03]
 
-| Headline                                                            | Time    |       |      |
-|---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *12:19* |       |      |
-|---------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                     |         | 12:19 |      |
-| IMPLEMENTATION Release notes and backlog grooming                   |         |       | 1:22 |
-| IMPLEMENTATION Updates to the manual and readme files               |         |       | 7:59 |
-| IMPLEMENTATION Investigate a =systemd= approach for debian machines |         |       | 2:58 |
+| Headline                                                       | Time    |       |      |
+|----------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                   | *14:59* |       |      |
+|----------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                |         | 14:59 |      |
+| COMPLETED Release notes and backlog grooming                   |         |       | 1:22 |
+| COMPLETED Updates to the manual and readme files               |         |       | 7:59 |
+| COMPLETED Investigate a =systemd= approach for debian machines |         |       | 5:38 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2014-03-18 Tue 08:02]
     CLOCK: [2014-03-05 Wed 08:04]--[2014-03-05 Wed 08:17] =>  0:13
     CLOCK: [2014-03-05 Wed 08:02]--[2014-03-05 Wed 08:05] =>  0:03
     CLOCK: [2014-03-05 Wed 08:04]--[2014-03-05 Wed 08:05] =>  0:01
@@ -38,7 +39,8 @@ Clock summary at [2014-03-14 Fri 19:08]
 
 Updates to release notes and backlog.
 
-*** IMPLEMENTATION Updates to the manual and readme files              :task:
+*** COMPLETED Updates to the manual and readme files                   :task:
+    CLOSED: [2014-03-18 Tue 08:02]
     CLOCK: [2014-03-14 Fri 18:26]--[2014-03-14 Fri 19:08] =>  0:42
     CLOCK: [2014-03-14 Fri 07:55]--[2014-03-14 Fri 08:36] =>  0:41
     CLOCK: [2014-03-13 Thu 18:50]--[2014-03-13 Thu 19:51] =>  1:01
@@ -53,7 +55,9 @@ Updates to release notes and backlog.
 
 Use build downtime to update the manual and / or readme file.
 
-*** IMPLEMENTATION Investigate a =systemd= approach for debian machines :story:
+*** COMPLETED Investigate a =systemd= approach for debian machines    :story:
+    CLOSED: [2014-03-18 Tue 08:02]
+    CLOCK: [2014-03-15 Sat 23:30]--[2014-03-16 Sun 02:10] =>  2:40
     CLOCK: [2014-03-05 Wed 07:52]--[2014-03-05 Wed 08:03] =>  0:11
     CLOCK: [2014-03-04 Tue 21:46]--[2014-03-04 Tue 23:03] =>  1:17
     CLOCK: [2014-03-03 Mon 22:50]--[2014-03-04 Tue 00:20] =>  1:30
@@ -124,85 +128,17 @@ Initial notes:
   OS. This means one still has to bootstrap a minimal debian inside of
   debian, as with a chroot.
 
-*** Implement integral features for OSX and Windows                   :story:
+*Final conclusion*:
 
-These operative systems do not have =systemd=. We should do a cursory
-investigation on =launchd= on OSX, but if it becomes too complicated,
-we should just add the missing features to integral (ported across
-from PFH).
-
-We should also consider moving across to Windows 7.
-
-*** Consider docker for the development setup                         :story:
-
-We have moved Lorenz to the new ddc repos and did a clang build on it;
-however, we do not have ODB and EOS support. We need to figure out the
-story around this - should we also be using docker and downloading a
-common docker image with these setup? We could then have docker images
-for 32-bit and 64-bit, shared with developers and build machine.
-
-*** Implement flymake from the EDE project                            :story:
-
-This move of directories highlighted the fragility of the current
-flymake hack: every time the top-level directory changes we need to
-update =cunene=. Ideally what we want is to have a top-level file -
-most ideally =dogen.ede= with some lisp code that would setup the
-dogen paths for flymake. Users would only need to load this up to use it.
-
-*** Remove versioning from packages                                   :story:
-
-We don't seem to have a particularly good story around versioning in
-packages. It's best to remove it for now until we really understand
-how it should work.
-
-In addition, we will be using Docker to test the packages, making
-versioning less of a necessity.
-
-*** Install packages into =/usr=                                      :story:
-
-As we will be using Docker to test the packages, we can now write
-files into =/usr/bin= without fear. Move from =/opt= into =/usr=.
-
-*** Fix issues with database tests                                    :story:
-
-Last sprint we solved the delays in nightlies by adding concurrency to
-the tests; however, that broke the database tests. We need to refactor
-the tests to allow them to run concurrently.
-
-**** Re-enable schema updates
-
-We are deleting the entire DB schema and re-applying it for every
-invocation of the tests. This does not work on a concurrent world. We
-commented it out for now, but we need a proper solution for this.
-
-**** Investigate errors in tests
-
-We seem to have traffic-lighters in the database tests when executing
-them concurrently. Somewhere they must be trampling on each others
-feet.
-
-*** Add support to upload packages into GDrive                        :story:
-
-We need to upload the packages created by the build to a public Google
-Drive (GDrive) location.
-
-- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
-- See [[https://developers.google.com/drive/quickstart-ruby][this article]].
-- [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][Create folders]] to represent the different types of uploads:
-  =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
-  and tag as this would require no complex logic: if tag create new
-  folder, if latest, delete then create.
-
-*** Enable package sanity tests for Linux                             :story:
-
-Now that we will be using docker, we could create a simple =systemd=
-ctest script that runs as root in a docker container:
-
-- it monitors the GDrive location for files that match a given regular
-  expression (e.g. we need to make sure we match the bitness and the
-  platform)
-- if it finds one, it installs it and runs sanity scripts.
-- it then uninstalls it and makes sure the docker image is identical
-  to how we started (however that is done in docker)
+- creating a container using debootstrap was easy, but even a trivial
+  container with just gcc on it is quite large (~350MB). As we already
+  have disk space issues in some of the files systems, its not
+  practical to setup these images at present. We need to rebuild the
+  boxes with large partitions for root, etc.
+- we could not get the containers to start. This could be a problem
+  with the version of lxc we have in testing at the moment.
+- we should wait until a) the containers become more mature b) the
+  boxes get rebuild. For now we should continue to get integral to
+  work without docker support.
 
 ** Deprecated Development Stories
