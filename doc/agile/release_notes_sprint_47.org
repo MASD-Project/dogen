@@ -16,14 +16,16 @@ GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-18 Tue 08:12]
+Clock summary at [2014-03-18 Tue 21:45]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:20* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:20 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:20 |
+| Headline                                              | Time   |      |      |
+|-------------------------------------------------------+--------+------+------|
+| *Total time*                                          | *2:05* |      |      |
+|-------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                       |        | 2:05 |      |
+| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:20 |
+| IMPLEMENTATION Updates to the manual and readme files |        |      | 1:30 |
+| IMPLEMENTATION Complete the integral work for Linux   |        |      | 0:15 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -32,9 +34,21 @@ Clock summary at [2014-03-18 Tue 08:12]
 
 Updates to release notes and backlog.
 
-*** Updates to the manual and readme files                             :task:
+*** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-03-18 Tue 21:03]--[2014-03-18 Tue 21:45] =>  0:42
+    CLOCK: [2014-03-18 Tue 18:24]--[2014-03-18 Tue 19:00] =>  0:36
+    CLOCK: [2014-03-18 Tue 08:28]--[2014-03-18 Tue 08:40] =>  0:12
 
 Use build downtime to update the manual and / or readme file.
+
+*** IMPLEMENTATION Complete the integral work for Linux               :story:
+    CLOCK: [2014-03-18 Tue 08:12]--[2014-03-18 Tue 08:27] =>  0:15
+
+Since we can't use docker, we need to figure out where we left
+integral and get it in a state good enough to be used in production.
+
+- it seems we have not pulled (or pushed) the latest integral work. We
+  need to sync with lorenz before we proceed.
 
 *** Implement integral features for OSX and Windows                   :story:
 

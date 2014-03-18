@@ -523,7 +523,7 @@ named =dogen.log=.
 
 Bugs can be submitted using [[https://github.com/kitanda/dogen/issues][github Issues]].
 
-** Using Dogen
+** Running Dogen
 
 Once you got access to Dogen, either by installing it or building it,
 the next logical step is to try to use it. This section provides an
@@ -575,8 +575,8 @@ A text similar to the below will come up:
 
 : Dogen - the domain generator.
 : Generates domain objects from a Dia diagram.
-:
-:
+: 
+: 
 : General options:
 :  -h [ --help ]         Display this help and exit.
 :  --version             Output version information and exit.
@@ -590,7 +590,8 @@ operational aspects, but provide information about the application. We
 have already seen both =help= and =version=, the most important of
 this group.
 
-Now that we are up and running, lets do some code generation.
+At this point we now know our Dogen setup is operational so lets make
+use of it.
 
 *** Generating Hello World
 
@@ -611,7 +612,7 @@ The source directory is created so we can separate our source code
 from the build files, as you'll see in a moment. All that is left is
 to code generate:
 
-: $ dogen_driver --target hello_world.dia
+: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain
 
 We use the =--target= command line option to tell Dogen about the
 "Hello World" model. The target file must be a UML Dia diagram,
@@ -621,6 +622,18 @@ on. This is important because it will be used as the name of the
 project and as the top-level namespace, so it must be valid as a C++
 identifier and it should follow the conventions of the other C++
 identifiers.
+
+The second point of note is the =--cpp-enable-facet= command line
+option. It ensures that only the select /facets/ are on. A facet is
+just Dogen-speak for a logically distinct portion of code generation,
+which can be switched on or off independently of other such
+portions. In this particular case we asked for the core facet =domain=
+to be on - it makes no sense to code generate otherwise, really. All
+other facets are thus switched off, so there are no requirements for
+third-party libraries. This is done because it is possible you do not
+have a development environment set up with all of the third-party
+libraries and tools that are supported by Dogen by default, such as
+EOS, ODB and so on.
 
 After generation, your directory should look like so:
 
@@ -635,7 +648,7 @@ The =log= directory is where the log file is stored; it is named
 won't be much in the log file to look at. If you wish to increase the
 verbosity of the logging, you can do so using =--verbose=:
 
-: $ dogen_driver --target hello_world.dia --verbose
+: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain --verbose
 
 This will give you a wealth of detail about how Dogen operates, but,
 to be fair, it is mainly of use to Dogen developers and advanced
@@ -655,11 +668,11 @@ the class =hello_world= itself:
 : namespace hello_world {
 : /**
 :  * @brief Welcome to Dogen!
-: *
-: * This is one of the simplest models you can generate, a single class with one
-: * property. You can see the use of comments at the class level and property
-: * level.
-: */
+:  *
+:  * This is one of the simplest models you can generate, a single class with one
+:  * property. You can see the use of comments at the class level and property
+:  * level.
+:  */
 : class hello_world final {
 : public:
 :    hello_world() = default;
@@ -671,41 +684,14 @@ As you can see, a C++ 11 class was generated. At this point it is
 recommended you look at the =hello_world.dia= using Dia, and the
 generated sources using your preferred text editor.
 
-Unfortunately, we're not quite there just yet; We need to introduce a
-couple more concepts before we get into compilation proper. This is
-because it is possible you do not have a development environment set
-up with all of the third-party libraries and tools that are supported
-by Dogen by default, such as EOS, ODB and so on. So we will tell Dogen
-to generate only code which does not require such third party
-libraries. That can be accomplished as follows:
-
-: rm -rf hello_world
-: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain \
-:   --cpp-enable-facet io
-
-A couple of points of note. First we start off by deleting the entire
-output of code generation. This is actually not normally necessary, as
-we shall see, but a requirement for now as we are not using the more
-advanced features of Dogen.
-
-The second point is the two new command line options we added to the
-Dogen invocation. The command =--cpp-enable-facet= ensures that only
-the select /facets/ are on. A facet is just Dogen-speak for a
-logically distinct portion of code generation, which can be switched
-on or off independently of other such portions. In this particular
-case we asked for the core facet =domain= to be on - it makes no sense
-to code generate otherwise, really - and, in addition, for C++
-streaming support to be on too. All other facets are thus switched
-off, so there are no requirements for third-party libraries.
-
 *** Supporting Infrastructure
 
-Now that we have generated the code, we need two additional bits of
-infrastructure to compile: a CMake file and a main.
+In order to compile the generated code, we need two additional bits of
+infrastructure: a CMake file and a main.
 
 Dogen models are designed to be integrated with an existing CMake
-build. Thus we need to generate a minimal =CMakeLists.txt= in order to
-make use of our new model. Something as simple as this would do:
+build, so we have to generate a minimal =CMakeLists.txt=. Something as
+simple as this would do:
 
 : cmake_minimum_required(VERSION 2.8 FATAL_ERROR) # 2.6 should work too
 : project(hello_world)
@@ -717,29 +703,30 @@ make use of our new model. Something as simple as this would do:
 
 Take the above code and slap it on a =CMakeLists.txt= in your =source=
 directory; granted, you could get much fancier, but this suffices for
-the purposes of our "Hello World". The contents of the file shouldn't
-be that surprising, unless you are unfamiliar with CMake. If that is
-the case, I'm rather afraid that an introduction to CMake is outside
-of the scope of this manual. On the plus side, there are plenty of
-good articles on the subject.
+the purposes of our minimalist example. The contents of the file
+shouldn't be that surprising, unless you are unfamiliar with CMake. If
+that is the case, I'm rather afraid that an introduction to CMake is
+outside of the scope of this manual. On the plus side, there are
+plenty of good articles on the subject.
 
-Finally, =main.cpp=. It is equally straightforward, a few lines over
-the traditional C++ "Hello World":
+We also need to create a basic =main.cpp= to make use of the genrate
+code. It is equally straightforward - a few lines over the traditional
+C++ "Hello World":
 
 : #include <iostream>
-: #include "hello_world/io/one_property_io.hpp"
-:
+: #include "hello_world/types/one_property.hpp"
+: 
 : int main() {
-:     hello_world::one_property op;
-:     std::cout << "hello world! " << op << std::endl;
+:     hello_world::one_property op("hello world!");
+:     std::cout << op.property() << std::endl;
 :     return 0;
 : }
 
-We are making use of both the =domain= and the =io= facets we code
-generated above; the default constructed object simply gets streamed
-out into the console.
+We are making use of the full constructor that the =domain= makes
+available; because the property is of type =std::string= we can stream
+it directly into the console.
 
-At this point in time, your directory should look like this:
+At this point in time, your directory should look roughly like this:
 
 : $ ls -l
 : total 24
@@ -756,7 +743,7 @@ It is time to compile.
 The compilation steps are fairly simple. We need to create a folder to
 house the build paraphernalia, to avoid getting it all mixed with the
 source code. There we shall build and run our main. The following
-achieves that:
+achieves that (assuming you are currently in =source=):
 
 : $ cd ..
 : $ mkdir output
@@ -766,32 +753,32 @@ achieves that:
 : $ make
 : <lots of make output>
 : $ ./main
-: hello world!  { "__type__": "hello_world::one_property", "property": "" }
+: hello world!
 
-And with that, we have our simplest Dogen model in all of its glory
-and splendour.
+And with that, we have built and instantiated our simple Dogen model.
 
 *** Version Controlling the Models
 
 We strongly recommend you store all of the code generated by Dogen in
-a version control system (VCS). This may sound counter-intuitive at
-first. After all, you wouldn't want to store Protocol Buffers code in
-version control, or the output of an IDL compiler. However, the same
-logic doesn't /quite/ apply to Dogen. As you will see later, we strive
-to allow intermixing of manually crafted code with generated code, and
-we also want the generated code to look as if it was generated by
-humans; granted, some rather boring, robot-like humans, but
-still. Finally, we want you to distrust Dogen - every time you code
-generate, you should inspect the output and make sure if looks exactly
-the way you want it to look. The best way to do that is to validate
-diffs. At any rate, if none of these arguments convince you, please
-suspend disbelief for a second and humour us in thinking that the
-rightful place of the code generated by Dogen is in version control.
+the version control system (VCS) of your choice. This may sound
+counter-intuitive at first. After all, you wouldn't want to store
+Protocol Buffers code in version control, or the output of an IDL
+compiler. However, the same logic doesn't /quite/ apply to Dogen. As
+you will see later, we strive to allow intermixing of manually crafted
+code with generated code, and we also want the generated code to look
+as if it was generated by humans; granted, some rather boring,
+robot-like humans, but still. Finally, we want you to actively
+distrust Dogen - every time you code generate, you should inspect the
+output and make sure it looks exactly the way you want it to look. The
+best way to do that is to validate diffs. At any rate, if none of
+these arguments convince you, please suspend disbelief for a second
+and humour us in thinking that the rightful place of the code
+generated by Dogen is in version control.
 
 Git is our preferred VCS - it is, in fact, a distributed VCS, so DVCS
 would be the right term, but it's distributed nature is not relevant
-for the current argument. But anyway, we shall use git to demonstrate
-how VCS in general can be used to /see/ what Dogen is up to. If
+for the current argument. Anyway, we shall use git to demonstrate how
+VCS in general can be used to /see/ what Dogen is up to. If
 =${VCS_OF_CHOICE}= is not git, feel free to do the equivalent commands
 in =${VCS_OF_CHOICE}= instead.
 
@@ -809,13 +796,10 @@ folder:
 :  create mode 100644 CMakeLists.txt
 :  create mode 100644 hello_world.dia
 :  create mode 100644 hello_world/CMakeLists.txt
-:  create mode 100644 hello_world/include/hello_world/io/all_io.hpp
-:  create mode 100644 hello_world/include/hello_world/io/one_property_io.hpp
 :  create mode 100644 hello_world/include/hello_world/types/all.hpp
 :  create mode 100644 hello_world/include/hello_world/types/one_property.hpp
 :  create mode 100644 hello_world/include/hello_world/types/one_property_fwd.hpp
 :  create mode 100644 hello_world/src/CMakeLists.txt
-:  create mode 100644 hello_world/src/io/one_property_io.cpp
 :  create mode 100644 hello_world/src/types/one_property.cpp
 :  create mode 100644 main.cpp
 
@@ -845,8 +829,7 @@ Because we chose to save the diagram in text format, its very easy to
 see what the changes are. We can now code generate, very much the same
 way as we did before:
 
-: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain \
-:   --cpp-enable-facet io
+: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain
 
 Other than the diagram file itself, one would expect to see exactly
 one modified file; and for that file to be =one_property.hpp=. And
@@ -857,10 +840,10 @@ this is what =git status= tells us:
 : Changes not staged for commit:
 :   (use "git add <file>..." to update what will be committed)
 :   (use "git checkout -- <file>..." to discard changes in working directory)
-:
+: 
 :  modified:   hello_world.dia
 :  modified:   hello_world/include/hello_world/types/one_property.hpp
-:
+: 
 : no changes added to commit (use "git add" and/or "git commit -a")
 
 But are these the expected changes? Again, =git diff= comes to the
@@ -916,10 +899,11 @@ can easily be accomplished with CMake. In your top-level
 :     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 :     COMMAND ../../dogen_driver
 :     --target ${CMAKE_SOURCE_DIR}/hello_world.dia
-:     --cpp-enable-facet domain
-:     --cpp-enable-facet io)
+:     --cpp-enable-facet domain)
 
-To avoid any confusion, we should check these changes in:
+We called the target =codegen_hello_world= but it can be named
+whatever you choose. To avoid any confusion, we should check these
+changes in:
 
 : git add -A
 : git commit -m "add target for code generation"
@@ -949,15 +933,15 @@ in handy:
 : 2014-03-14 08:32:29.763230 [INFO] [engine.workflow] Workflow finished.
 
 As you can see, the timestamp of the last thing Dogen wrote to the log
-is very close to now, so we know it executed the code generation. But,
-as there was nothing to change, nothing got changed.
+is very close to now, so we know it executed the code generation.  As
+there was nothing to change, nothing was changed.
 
 The more advanced CMake - and make users in general - may, at this
 juncture, be tempted to add a dependency between the diagram and code
 generation. In such a setup, if the Dia diagram has been modified, a
-code generation would take place when you build. This sounds like a
-great idea in theory, but in practice it actually doesn't work that
-well. From experience, we do not recommend this approach. When you
+code generation would take place when you build. From experience, we
+do not recommend this approach. This sounds like a great idea in
+theory, but in practice it actually doesn't work that well. When you
 start using Dogen in anger, you will find yourself many a time with
 "work-in-progress" changes; you will be speculating with the design
 for quite a bit until it makes sense. At the same time, you or other
@@ -970,39 +954,39 @@ The other reason why this is a bad idea is that if someone checked in
 a diagram but forgot to run the code generator, the build machine
 could break in mysterious ways. The code that is building is not the
 code that was checked in, and this can result in a lot of wasted time
-investigating such issues.
+investigating strange issues.
 
-In conclusion, we found that in practice its better to code generate
-and check in manually, as and when you are ready to do so.
+In conclusion, its better to code generate and check in manually, as
+and when you are ready to do so, and to make sure the build machine is
+as dumb as possible.
 
 *** Deleting Extra Files
 
-In the previous sections we suggested deleting the code generation
-directory before code generation to ensure we're in a good state. We
-also mentioned that there is a better way of doing this. It is now
-time to cover this in more depth.
+As you start adding and removing files from your diagram, you may find
+that Dogen starts leaving a lot of artefacts behind. You may even
+conclude that the best way is to manually delete the code generation
+directory before code generation to ensure you're in a good state. In
+fact, there is a better way of handling this situation.
 
-Imagine this fairly common use case: you just added a brand new class
-to your model - =two_properties= say - and you code generated it. It
-all looks fine from git:
+Let's imagine a fairly simple but common use case: you just added a
+brand new class to your model - =two_properties= say - and you code
+generated it. It all looks fine from git:
 
 : $ git status
 : On branch master
 : Changes not staged for commit:
 :   (use "git add <file>..." to update what will be committed)
 :   (use "git checkout -- <file>..." to discard changes in working directory)
-:
+: 
 :   modified:   hello_world.dia
 :   modified:   hello_world/include/hello_world/io/all_io.hpp
 :   modified:   hello_world/include/hello_world/types/all.hpp
-:
+: 
 : Untracked files:
 :   (use "git add <file>..." to include in what will be committed)
-:
-:   hello_world/include/hello_world/io/two_properties_io.hpp
+: 
 :   hello_world/include/hello_world/types/two_properties.hpp
 :   hello_world/include/hello_world/types/two_properties_fwd.hpp
-:   hello_world/src/io/two_properties_io.cpp
 :   hello_world/src/types/two_properties.cpp
 : no changes added to commit (use "git add" and/or "git commit -a")
 
@@ -1015,23 +999,21 @@ at the git output after we removed the new class:
 : On branch master
 : Untracked files:
 :   (use "git add <file>..." to include in what will be committed)
-:
-:   hello_world/include/hello_world/io/two_properties_io.hpp
+: 
 :   hello_world/include/hello_world/types/two_properties.hpp
 :   hello_world/include/hello_world/types/two_properties_fwd.hpp
-:   hello_world/src/io/two_properties_io.cpp
 :   hello_world/src/types/two_properties.cpp
-:
+: 
 : nothing added to commit but untracked files present (use "git add" to track)
 
 Dogen got rid of all the changes to the /existing/ files, but left the
-new files lying around! This is because Dogen now does not consider
-these files to be its responsibility at all; there is no matching
-class that "owns" them, so they are totally ignored. This may not be
-the ideal behaviour - after all you wanted to get rid of the class
-altogether. To do so You need to instruct Dogen to delete all files
-that it thinks are "unnecessary". This can be done via the
-=--delete-extra-files= option. We can add it to the top-level
+new files lying around! This is because Dogen does not consider these
+files to be its responsibility any longer; after all, there is no
+matching class that "owns" them in the diagram, so they are totally
+ignored. This may not be the ideal behaviour - after all you wanted to
+get rid of the class altogether. To do so you need to instruct Dogen
+to delete all files that it thinks are "unnecessary". This can be done
+via the =--delete-extra-files= option. We can add it to the top-level
 =CMakeLists.txt= like so:
 
 : $ git diff CMakeLists.txt
@@ -1042,9 +1024,8 @@ that it thinks are "unnecessary". This can be done via the
 : @@ -12,4 +12,5 @@ add_custom_target(codegen_hello_world
 :      COMMAND ../../dogen_driver
 :      --target ${CMAKE_SOURCE_DIR}/hello_world.dia
-:      --cpp-enable-facet domain
-: -    --cpp-enable-facet io)
-: +    --cpp-enable-facet io
+: -    --cpp-enable-facet domain)
+: +    --cpp-enable-facet domain
 : +    --delete-extra-files)
 
 As usual we'll commit this change:
@@ -1053,7 +1034,7 @@ As usual we'll commit this change:
 : $ git commit -m "add delete extra files"
 : <git output>
 
-When we code generate again, the results are quite different:
+When we code generate again, the result is quite different:
 
 : $ cd ../output
 : $ make codegen_hello_world
@@ -1071,18 +1052,99 @@ Dogen has now deleted all the files we're no longer interested in.
 
 *** Ignoring Extra Files
 
-It is not always appropriate to delete all files that Dogen knows
+It is not always appropriate to delete /all/ files that Dogen knows
 nothing of. Imagine a second use case: you decide to manually create a
 file with a stand alone function =my_function.cpp=. This file needs to
-be part of the model, but it cannot be code generated by Dogen.
+be part of the model, but it cannot be code generated by Dogen. If you
+attempt to use =delete-extra-files=, this file would be removed by
+Dogen as the following example shows. First we'll create the file and
+commit it:
 
+: echo "void my_function() { }" > hello_world/my_function.cpp
+: $ git add -A
+: $ git commit -m "add my function"
+: [master 9fbc00a] add my function
+: 1 file changed, 1 insertion(+)
+: create mode 100644 hello_world/my_function.cpp
 
+Then we'll code generate and check git:
 
-and ignoring 
+: $ make codegen_hello_world
+: [100%] Generating Hello World model
+: [100%] Built target codegen_hello_world
+: $ cd ../source/
+: $ git status
+: On branch master
+: Changes not staged for commit:
+:  (use "git add/rm <file>..." to update what will be committed)
+:  (use "git checkout -- <file>..." to discard changes in working directory)
+: 
+: deleted:    hello_world/my_function.cpp
+: 
+: no changes added to commit (use "git add" and/or "git commit -a")
 
-*** TBD
+Again you can see the usefulness of committing early and often:
+instead of losing all our work, all we need to do is to checkout the
+file to restore it:
 
+: git checkout hello_world/my_function.cpp
 
+Our file got deleted as it is an "extra" file as far as Dogen is
+concerned. The simplest way to avoid this is to use the command
+=--ignore-files-matching-regex=. We can add it to the CMake file like
+so:
+
+: $ git diff CMakeLists.txt
+: diff --git a/CMakeLists.txt b/CMakeLists.txt
+: index ae3c12c..518f99c 100644
+: --- a/CMakeLists.txt
+: +++ b/CMakeLists.txt
+: @@ -12,4 +12,5 @@ add_custom_target(codegen_hello_world
+:      COMMAND ../../dogen_driver
+:      --target ${CMAKE_SOURCE_DIR}/hello_world.dia
+:      --cpp-enable-facet domain
+: -    --delete-extra-files)
+: +    --delete-extra-files
+: +    --ignore-files-matching-regex .*/my_function.*)
+
+If we repeat the code generation steps again, the result is a bit more
+sensible:
+
+: $ cmake ../source/ # should't really be necessary
+: -- Configuring done
+: -- Generating done
+: -- Build files have been written to: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.4/stage/bin/dogen_examples/output
+: $ make codegen_hello_world
+: [100%] Generating Hello World model
+: [100%] Built target codegen_hello_world
+: $ cd ../source/
+: $ git status
+: On branch master
+: Changes not staged for commit:
+:   (use "git add <file>..." to update what will be committed)
+:   (use "git checkout -- <file>..." to discard changes in working directory)
+: 
+: modified:   CMakeLists.txt
+: 
+: no changes added to commit (use "git add" and/or "git commit -a")
+
+The file was not deleted this time round.
+
+This is not the only way to ignore files as we shall see, but its a
+quick way of doing so, and is particularly suitable for files which
+do not have a clear representation in the model. For example, this is
+a good solution for adding unit tests to a model:
+
+: --ignore-files-matching-regex .*/test/.*
+
+This would ignore all files in a directory called test. The regular
+expressions can be as complex as desired, as they internally use C++
+11's regular expression library.
+
+*** Referring to Other Models
+*** Advanced Command Line Options
+
+FIXME
 
 - *Modeling options*: these options are related to the input of data
   into Dogen, describing models and their relationships.
@@ -1134,7 +1196,50 @@ specified by the command line.
   --output-to-stdout                 Output generated code to standard output.
                                     Disables output-to-file by default.
 
-**** C++ backend options
+**** Troubleshooting options
+
+These options are really meant to be used by advanced Dogen users, but
+its good to know they exist because you may need to provide
+information generated by them in order to help troubleshoot problems
+with your model.
+
+Dogen generates a log file under =log/dogen.log= when operating. This
+directory is always generated in the current directory. You can
+control the verbosity of the log file with the =--verbose= option, but
+be warned that in verbose mode log files will grow dramatically in
+size. This mode is meant mainly for Dogen developers, but it is also
+an instructive way to learn about the application because it provides
+such a high-level of detail of its inner-working.
+
+Other useful options that can be used in conjunction with =--verbose=
+are =--stop-after-merging= and =--stop-after-formatting=. If there is
+a problem with a particular part of Dogen it may not make sense to run
+a complete code generation every time whilst investigating it, as it
+would just increase investigation time with no benefit. This is where
+these two options come in: they force Dogen to halt at different
+stages of its processing pipeline. On the first case, Dogen builds a
+combined model and validates all dependencies and then stops; on the
+second case, Dogen does everything except outputting files.
+
+It is also possible to dump some of the intermediate state into file:
+this can be achieved using =--save-dia-model= and
+=--save-sml-model=. The first saves a processed representation of the
+dia models loaded, and the second saves their equivalent in SML. These
+files can be dumped into a directory of choice via =--debug-dir=. By
+default they come out in the current directory.
+
+** The Many Facets of Dogen
+
+In this section we do a high-level inspection of all the services
+provided by Dogen via its facets.
+
+*** Types
+*** Streaming
+*** Hashing
+*** Serialisation
+*** Test Data
+*** ODB
+*** C++ backend options
 
   --cpp-disable-backend                 Do not generate C++ code.
   --cpp-disable-complete-constructor    Do not generate a constructor taking as
@@ -1192,40 +1297,17 @@ specified by the command line.
 
 [marco@erdos bin]$
 
+** Authoring Diagrams in Dia
 
-**** Troubleshooting options
-
-These options are really meant to be used by advanced Dogen users, but
-its good to know they exist because you may need to provide
-information generated by them in order to help troubleshoot problems
-with your model.
-
-Dogen generates a log file under =log/dogen.log= when operating. This
-directory is always generated in the current directory. You can
-control the verbosity of the log file with the =--verbose= option, but
-be warned that in verbose mode log files will grow dramatically in
-size. This mode is meant mainly for Dogen developers, but it is also
-an instructive way to learn about the application because it provides
-such a high-level of detail of its inner-working.
-
-Other useful options that can be used in conjunction with =--verbose=
-are =--stop-after-merging= and =--stop-after-formatting=. If there is
-a problem with a particular part of Dogen it may not make sense to run
-a complete code generation every time whilst investigating it, as it
-would just increase investigation time with no benefit. This is where
-these two options come in: they force Dogen to halt at different
-stages of its processing pipeline. On the first case, Dogen builds a
-combined model and validates all dependencies and then stops; on the
-second case, Dogen does everything except outputting files.
-
-It is also possible to dump some of the intermediate state into file:
-this can be achieved using =--save-dia-model= and
-=--save-sml-model=. The first saves a processed representation of the
-dia models loaded, and the second saves their equivalent in SML. These
-files can be dumped into a directory of choice via =--debug-dir=. By
-default they come out in the current directory.
-
-
+*** Properties
+*** Comments
+*** Packages
+*** Association
+*** Inheritance
+*** Enumerations
+*** System Models
+**** Standard C++ System Model
+**** Boost System Model
 ** Frequently Asked Questions
 
 *Q*: When I tried running Dogen I get the following error message:
