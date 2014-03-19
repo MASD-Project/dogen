@@ -531,6 +531,10 @@ overview of common use cases. Note that Dogen is a command line tool,
 and as such there is a presumption that the user has at least a
 rudimentary knowledge of the shell of his or her operative system.
 
+This section is dedicated to understanding the command line tool,
+rather than the code it generates or the diagrams it receives as an
+input; latter sections will deal with these topics exclusively.
+
 *** Validating the Setup
 
 The first thing one should do is to make sure Dogen is operational. To
@@ -650,11 +654,8 @@ verbosity of the logging, you can do so using =--verbose=:
 
 : $ dogen_driver --target hello_world.dia --cpp-enable-facet domain --verbose
 
-This will give you a wealth of detail about how Dogen operates, but,
-to be fair, it is mainly of use to Dogen developers and advanced
-users; for instance, you are required to do this when you attach the
-log file to any bug report you submit. For the moment, we'll just
-ignore the log, but it will come in handy later on.
+See the Advanced Command Line Options section for more details on
+=--verbose=.
 
 The other directory of interest is =hello_world=. This is where the
 generated C++ code is stored. To understand the meaning and the
@@ -1141,74 +1142,105 @@ expressions can be as complex as desired, as they internally use C++
 11's regular expression library.
 
 *** Referring to Other Models
+
+Soon in your modeling life you will outgrow a single model - e.g. a
+single Dia diagram. This could happen for many reasons: perhaps a
+model is becoming too crowded and there are so many classes it has
+lost its cohesiveness; or there is an obvious logical split between
+two sets of classes, and just does not make sense to keep them in the
+same model.
+
+As soon as there several models, its highly likely that relationships
+between models will emerge: model A will make use of model B and C,
+and so on. Dogen supports this use case via the command line option
+=--reference=. You can have as many instances of this option as there
+are dependencies for the target model you are building. For example,
+lets say create a second model which uses the class we defined in the
+"Hello World" model; to generate this model one would invoke Dogen as
+follows:
+
+: $ dogen_driver --target hello_references.dia --reference hello_world.dia \
+:   --cpp-enable-facet domain
+
+"Hello References" can now make use of all the types available in
+"Hello World", provided they are qualified with the source model:
+=hello_world::one_property= in this particular case.
+
+*** The External Module Path
+    
+It is possible to define modules inside a models to aggregate related
+sub-functionality. As we shall see later on, these are defined as UML
+packages in Dia and get translated into namespaces at the C++ code
+generation level. However, sometimes there are top-level modules for
+which a UML representation would be counterproductive. A common use
+case is when the models all belong to some umbrella project, which may
+have one or more top-level namespaces common to all models. For
+instance, in Dogen, all models are inside the =dogen= namespace; it
+really adds no value to create a UML package in every model under
+these circumstances.
+
+This is where the =--external-module-path= command line option comes
+in handy. This is a way to inject information directly into SML which
+is not obtained via the UML diagram. You can provide as many modules
+as required, separated by =::=. For example:
+
+: $ dogen_driver --target hello_references.dia --external-module-path a::b::c \
+:   --cpp-enable-facet domain
+
+All types in "Hello World" would now be encased inside of namespaces
+=a=, =b= and =c=. Note that the external module path does not affect
+references in diagrams: we should still refer to the types /without/
+it. However, the =--reference= parameter must then be augmented with
+it so that Dogen places the types in the correct modules:
+
+: $ dogen_driver --target hello_references.dia \
+: --reference hello_world.dia,a::b::c \
+:   --cpp-enable-facet domain
+
+Notice the comma followed by the external package path in the "Hello
+World" reference. It ensures that the code generated for "Hello
+References" makes use of the fully-qualified names when referring to
+"Hello World" types, even though in the diagram they are partially
+qualified - e.g. =hello_world::one_property=. Without this the
+generated code would not compile.
+
+*** Disabling the Model Module
+
+On very rare cases, it may be required that the types of the model are
+not placed inside of a namespace with the model name. We do not
+particularly like this use case, and are likely to make it obsolete
+unless we find good reasons not to do so, but it is available at
+present.
+
+The =--disable-model-module= command line option is used to trigger
+this functionality.
+
 *** Advanced Command Line Options
 
-FIXME
-
-- *Modeling options*: these options are related to the input of data
-  into Dogen, describing models and their relationships.
-- *Output options*: these options provide ways in which to configure
-  the output coming out of Dogen.
-- *C++ backend options*: configuration specific to the C++ backend
-- *Troubleshooting options*: these provide ways in which to obtain
-  diagnostics from Dogen when things go wrong, or just because you
-  want to know more about the application's internals.
-
-**** Modeling options:
-
-The most important modeling option of them all is =--target=. It
-specifies the file containing the model one wishes to code
-generate. The target file is normally a UML Dia diagram, crafted
-according to the rules stipulated by Dogen.
-
-: $ dogen_driver --target hello_world.dia
-
-In cases where a diagram references other diagrams, one should use
-=--reference= for each of these references.
-
-: $ dogen_driver --target hello_references.dia --reference hello_world.dia
-
-There can be as many =--reference= parameters as there are diagrams
-that target depends on; dogen will load them all, in the order
-specified by the command line.
-
-
-
-  -p [ --external-module-path ] arg External modules containing the target
-                                    model, delimited by '::'.
-  -t [ --target ] arg               Dia diagram to generate code for.
-  -r [ --reference ] arg            Dia diagrams that our target diagram
-                                    depends on.If required you can add the
-                                    module path: file,PP.
-  --disable-model-module            Do not generate a top-level module with the
-                                    model name.
-
-**** Output options:
-  -d [ --delete-extra-files ]       Delete any additional files found in
-                                    directories managed by Dogen.
-  --ignore-files-matching-regex arg Ignore files matching regex, if they are on
-                                    the deletion list
-  --force-write                     Always write to file even when there are no
-                                    differences
-  --output-to-file                  Create files. Disabled by default if
-                                    output-to-stdout is chosen.
-  --output-to-stdout                 Output generated code to standard output.
-                                    Disables output-to-file by default.
-
-**** Troubleshooting options
+There are a number of options that are backend specific and which we
+shall cover later, in a section dedicated to exploring the available
+facets for each backend. The remaining command line options tend to be
+useful for troubleshooting, and these are the ones we shall cover in
+this section.
 
 These options are really meant to be used by advanced Dogen users, but
 its good to know they exist because you may need to provide
 information generated by them in order to help troubleshoot problems
 with your model.
 
-Dogen generates a log file under =log/dogen.log= when operating. This
-directory is always generated in the current directory. You can
-control the verbosity of the log file with the =--verbose= option, but
-be warned that in verbose mode log files will grow dramatically in
-size. This mode is meant mainly for Dogen developers, but it is also
-an instructive way to learn about the application because it provides
-such a high-level of detail of its inner-working.
+As explained, Dogen generates a log file under =log/dogen.log= when
+operating. This directory is always generated in the current
+directory. You can control the verbosity of the log file with the
+=--verbose= option, but be warned that in verbose mode log files will
+grow dramatically in size. This mode is meant mainly for Dogen
+developers, but it is also an instructive way to learn about the
+application because it provides such a high-level of detail of its
+inner-working.
+
+You are required to do this when you attach the
+log file to any bug report you submit. For the moment, we'll just
+ignore the log, but it will come in handy later on.
+
 
 Other useful options that can be used in conjunction with =--verbose=
 are =--stop-after-merging= and =--stop-after-formatting=. If there is
@@ -1227,7 +1259,7 @@ dia models loaded, and the second saves their equivalent in SML. These
 files can be dumped into a directory of choice via =--debug-dir=. By
 default they come out in the current directory.
 
-** The Many Facets of Dogen
+** The C++ Facets
 
 In this section we do a high-level inspection of all the services
 provided by Dogen via its facets.
