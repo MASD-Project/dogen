@@ -385,25 +385,60 @@ all the details of the domain model that are required for code
 generation. SML is not designed for anything else, so it is very terse
 and not a particularly obvious model.
 
-*** The back-ends
+*** The backends
 
-We need to express the meta-model as code. That is, we need to
-generate a /representation/ of the different "parts" the domain type,
-according to the rules of some well-known /grammar/: that is, it must
-obey to a set of rules defined somewhere. Typical grammars are
-programming languages such as C++ or SQL, but they can also be more
-esoteric such as a Dia diagram; it uses the Dia XML grammar.
+The role of the backend is to express the meta-model as code. We can
+think of this as the transformation of one /representation/ of the
+domain model - the meta-model in memory - to another
+/representation/ - a set of files in the file system. Those files are
+expected to obey the rules of a well-known /grammar/.  Typical
+grammars are those of programming languages such as C++, C# or SQL.
 
-A /representation/ in this context is understood to be a physical
-expression of a domain type - e.g. as zeroes and ones stored in a file
-somewhere.
+A backend is thus the machinery required to perform this
+transformation, including the knowledge of the grammar it is
+targeting. In practice, a single backend tends to have more than one
+grammar: in addition to generating files in a given programming
+language, we must also generate the supporting infrastructure such as
+CMake files, etc.
 
-Representations have two related concepts: facets and aspects. These
-are best explained by way of an example. The most fundamental facet is
-the @e types facet. This is the class definition itself. A facet is
-made up of @e aspects - for example in C++ there is a header file and
-an implementation file. However, an aspect need not map directly to a
-file - its perfectly possible to have more than one aspect in a file.
+SML has a "functionally agnostic" view of domain types. That is to say
+that within SML there is no behaviour, just a pure representation of
+the data structures that we have deemed to be representative of the
+fundamental concepts of the problem domain. As part of the
+transformation process, the backend performs an expansion of these
+data structures, providing useful behaviours or "facilities". These
+facilities are aggregated in logical bundles called /facets/. They are
+specific to the backend in question, although there are commonalities
+between backends.
+
+Another slightly more intuitive way to look at this is as follows: a
+backend generates a variety of files, of different kinds. It is thus
+useful to group these files in a logical manner, so we can talk about
+them in aggregate. /Facets/ provide the first level of grouping.
+
+Facets have one or more corresponding folders in the file system,
+named after the facet. They are made up of files. These files can be
+logically grouped into /file sets/, according to their /kind/. Files
+of a given kind share a number of /aspects/.
+
+A concrete example should make these concepts clearer. Lets look at
+the /types/ facet in the C++ backend, the most fundamental of all C++
+facets.
+
+- *facet name*: =types=.
+- *facet purpose*: contains the definition of the domain types.
+- *facet folders*: =src/types= for the implementation and
+  =include/.../types= for the headers.
+- *file sets*: in the headers we have includers (an include file that
+  includes all files or groups of files for that facet), domain
+  headers (the class definitions themselves), and forward
+  declarations. In the implementation we have just one file set which
+  is the domain implementation.
+- *aspects*: both the includers and forward declaration have only one
+  aspect as they are rather trivial. The domain headers and
+  implementation have many aspects, most of which shared; for example:
+  complete constructor, properties (the member variable and associated
+  getters and setters), equality, etc.
 
 * PART II - PRACTICE
 
@@ -1278,12 +1313,17 @@ dia models loaded, and the second saves their equivalent in SML. These
 files can be dumped into a directory of choice via =--debug-dir=. By
 default they come out in the current directory.
 
-** The C++ Facets
+** The C++ Backend
 
-In this section we do a high-level inspection of all the services
-provided by Dogen via its facets.
+In this section we do an overview of the basic facilities provided by
+Dogen in the generated C++ code. In order to understand the
+terminology used here, you should read the section on backends in Part
+I. FIXME add link.
 
 *** Types
+
+
+
 *** Streaming
 *** Hashing
 *** Serialisation
