@@ -276,16 +276,16 @@ Almost all code in Dogen is implemented as Dogen domain models; that
 is, we use Dogen to generate the vast majority of Dogen itself, and we
 do so for several reasons:
 
-- dog-fooding: using your own tool frequently is a great way of making
+- *dog-fooding*: using your own tool frequently is a great way of making
   sure the tool does what it is meant to do and does so in a workable,
   pragmatic manner.
-- keeping our feet on the ground: if we have some crazy ideas and
+- *keeping our feet on the ground*: if we have some crazy ideas and
   break Dogen, we can no longer develop Dogen. Thus Dogen must always
   be able to code-generate itself at all points in the development
   cycle, which forces one to think "extremely" incrementally.
-- code faster and test our theoretical underpinnings: if our ideas
+- *code faster and test our theoretical underpinnings*: if our ideas
   around code generation are correct, Dogen should significantly
-  speed-up development.
+  speed-up development of Dogen.
 
 Dogen is made up of a large number of domain models. These fall into
 two broad categories: /test models/ and /core models/. Test models are
@@ -295,15 +295,14 @@ the main binary. The core models are what really makes up the
 application and that is what is of interest for this chapter.
 
 The core models are hooked together in a fashion similar to that of
-the internals of a compiler, and so core models belong to one of three
+the internals of a compiler, and so they belong to one of three
 groups: the front-end, the middle-end and the back-end. The front-end
 group of models allows for different sources of domain information to
 be plugged into Dogen. The middle-end model - as there is only one -
 is where all the language neutral transformations take place; It can
 be thought of as a bridge between domain modeling and code
 generation. Finally, the back-end group of models are responsible for
-expressing SML as code according to the grammar of a programming
-language like C++.
+expressing SML as code.
 
 Lets look at each of these in more detail.
 
@@ -312,24 +311,20 @@ Lets look at each of these in more detail.
 When we started developing Dogen, we chose Dia as our main input
 format. Dia is a simple yet very powerful tool for drawing structured
 diagrams that focuses almost exclusively on diagram editing, and
-leaves other use cases to external tools. To their credit, a number of
-tools have sprung up around Dia, in no small part due to the
-simplicity and stability of their XML file format. Some of these tools
-generate code from Dia XML, others convert code into diagrams; we
-aimed for Dogen to be another chain in that tooling ecosystem.
+leaves all other use cases to external tools. To their credit, a
+number of tools have sprung up around Dia and that is in no small part
+due to the simplicity and stability of their XML file format. We aimed
+for Dogen to be another chain in that tooling ecosystem.
 
 At the same time, Dogen has been developed from the start with the
 intention to support multiple input formats. We knew that different
-people would have different needs and for some Dia would not be
-sufficient. So we imagined a pipeline that was made up with a pair of
-models: one to model closely the input model and a /transformation/
-model responsible for converting the input model into the middle-end
-
-Dogen. Furthermore, all of Dogen's own models have been created and
-are being maintained using this application, so it is very core to the
-code generation experience.
-
-There are two models responsible for implementing this use case:
+people would have different modeling needs and for some Dia or even
+UML would not be the correct choice. So we imagined a pipeline that
+was made up with a pair of front-end models: one to model closely the
+input model and a /transformation/ model responsible for converting
+the input model into the middle-end. Each front-end would have one
+such pair, starting with Dia. In Dia's case we have the following
+models:
 
 - =dia=
 - =dia_to_sml=
@@ -389,17 +384,12 @@ and not a particularly obvious model.
 
 The role of the backend is to express the meta-model as code. We can
 think of this as the transformation of one /representation/ of the
-domain model - the meta-model in memory - to another
-/representation/ - a set of files in the file system. Those files are
-expected to obey the rules of a well-known /grammar/.  Typical
-grammars are those of programming languages such as C++, C# or SQL.
-
-A backend is thus the machinery required to perform this
-transformation, including the knowledge of the grammar it is
-targeting. In practice, a single backend tends to have more than one
-grammar: in addition to generating files in a given programming
-language, we must also generate the supporting infrastructure such as
-CMake files, etc.
+domain model - the SML meta-model in memory - to another
+/representation/ - a set of files in the file system. These files are
+expected to obey the rules of a well-known /grammar/. Typical grammars
+are those of programming languages such as C++, C# or SQL. In
+practice, a single backend has more than one grammar, as we must also
+generate the supporting infrastructure like CMake files and so on.
 
 SML has a "functionally agnostic" view of domain types. That is to say
 that within SML there is no behaviour, just a pure representation of
@@ -409,17 +399,18 @@ transformation process, the backend performs an expansion of these
 data structures, providing useful behaviours or "facilities". These
 facilities are aggregated in logical bundles called /facets/. They are
 specific to the backend in question, although there are commonalities
-between backends.
+between backends. A perhaps more intuitive way to look at this is as
+follows: a backend generates a variety of files, of different
+types. It is thus useful to group these files in a logical manner, so
+we can talk about them in aggregate. /Facets/ provide the first level
+of grouping.
 
-Another slightly more intuitive way to look at this is as follows: a
-backend generates a variety of files, of different kinds. It is thus
-useful to group these files in a logical manner, so we can talk about
-them in aggregate. /Facets/ provide the first level of grouping.
-
-Facets have one or more corresponding folders in the file system,
-named after the facet. They are made up of files. These files can be
-logically grouped into /file sets/, according to their /kind/. Files
-of a given kind share a number of /aspects/.
+Facets are housed in one or more folders in the file system, named
+after the facet. These are composed of files and folders, with the
+folders representing modules in the programming language in question -
+if such a concept exists. The files are logically grouped into /file
+sets/, according to their /kind/. Files of a given kind share a number
+of /aspects/.
 
 A concrete example should make these concepts clearer. Lets look at
 the /types/ facet in the C++ backend, the most fundamental of all C++
@@ -427,18 +418,25 @@ facets.
 
 - *facet name*: =types=.
 - *facet purpose*: contains the definition of the domain types.
-- *facet folders*: =src/types= for the implementation and
-  =include/.../types= for the headers.
-- *file sets*: in the headers we have includers (an include file that
-  includes all files or groups of files for that facet), domain
-  headers (the class definitions themselves), and forward
-  declarations. In the implementation we have just one file set which
-  is the domain implementation.
-- *aspects*: both the includers and forward declaration have only one
+- *facet folders*: =include/.../types= for the headers and =src/types=
+  for the implementation.
+- *file sets*: in the headers we have /includers/ (an include file
+  that includes all files or groups of files for that facet), /domain
+  headers/ (the class definitions themselves), and /forward
+  declarations/. In the implementation we have just one file set which
+  is the /domain implementation/.
+- *aspects*: both includers and forward declaration have only one
   aspect as they are rather trivial. The domain headers and
   implementation have many aspects, most of which shared; for example:
   complete constructor, properties (the member variable and associated
   getters and setters), equality, etc.
+
+Facets, file kinds and aspects are known collectively as
+/features/. The /feature graph/ is a logical device that defines the
+dependencies between all features, allowing us to switch parts of the
+code generation on and off, and ensuring that all dependent features
+are toggled accordingly. The feature graph is expressed as tags,
+allowing the user to interfere with the toggling process.
 
 * PART II - PRACTICE
 

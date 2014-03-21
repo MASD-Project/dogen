@@ -16,15 +16,15 @@ GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-20 Thu 21:46]
+Clock summary at [2014-03-21 Fri 08:40]
 
 | Headline                                              | Time   |      |      |
 |-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *5:33* |      |      |
+| *Total time*                                          | *6:17* |      |      |
 |-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 5:33 |      |
+| Development Stories Implemented                       |        | 6:17 |      |
 | IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:20 |
-| IMPLEMENTATION Updates to the manual and readme files |        |      | 4:01 |
+| IMPLEMENTATION Updates to the manual and readme files |        |      | 4:45 |
 | IMPLEMENTATION Complete the integral work for Linux   |        |      | 0:15 |
 | COMPLETED Fix issues with missing builds              |        |      | 0:57 |
 #+end:
@@ -36,6 +36,7 @@ Clock summary at [2014-03-20 Thu 21:46]
 Updates to release notes and backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-03-21 Fri 07:56]--[2014-03-21 Fri 08:40] =>  0:44
     CLOCK: [2014-03-20 Thu 17:32]--[2014-03-20 Thu 18:02] =>  0:30
     CLOCK: [2014-03-20 Thu 07:56]--[2014-03-20 Thu 08:37] =>  0:41
     CLOCK: [2014-03-19 Wed 18:09]--[2014-03-19 Wed 18:50] =>  0:41
