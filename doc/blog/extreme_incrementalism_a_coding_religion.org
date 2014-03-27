@@ -119,22 +119,22 @@ Another very useful lesson learned was to keep the /off-distro/
 dependencies as low as possible. We started off by requiring a C++
 compiler with good C++ 11 support, and a Boost library with a few
 off-tree libraries - mainly Boost.Log, really. This meant we had to
-have our own little "chroot" with all of these, and we had to build
-all of these by hand, sprinkled with plenty of helper scripts. It was
-workable when we had time, but this is really not the sort of thing
-you want to spend time maintaining if you are working on a project on
-your spare time.
+have our own little "chroot" with all of these (when we started there
+was no docker to speak of), and we had to build all of these by hand,
+sprinkled with plenty of helper scripts. It was workable when we had
+time, but this is really not the sort of thing you want to spend time
+maintaining if you are working on a project on your spare time.
 
 To be fair, we always intended to move to distro-supplied packages
 when they caught up, and as it happens that is soon to happen: both
 default GCC and Clang are more than good enough in Debian unstable,
-and Boost 1.55 should soon be hitting it too. This means we can start
-thinking of creating Debian packages for inclusion in Debian - rather
-than the stand-alone packages we've been doing up to now.
+and Boost 1.55 hs hit it too. This means we can start thinking of
+creating Debian packages for inclusion in Debian - rather than the
+stand-alone packages we've been doing up to now.
 
 Going back, it seems to me we took the right decisions as both C++ 11
 and Boost.Log have proven quite useful; but in the future I certainly
-will think twice when adding an off-distro library.
+will think twice when adding dependencies to off-distro libraries.
 
 * Slow Motion Agile
 
