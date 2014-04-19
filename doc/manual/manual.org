@@ -18,6 +18,13 @@ in the following formats: HTML and PDF.
 
 * Preface
 
+*Motto 1*: Le mieux est l'ennemi du bien. -- Voltaire
+
+*Motto 2*: First write the code generator; don't worry about the code,
+it will write itself.
+
+*Motto 3*: Malembe, Malembe. -- Angolan proverb
+
 ** About This Document
 
 This document is the official manual for Dogen. Dogen - the domain
@@ -44,14 +51,18 @@ There is also a mirror in BitBucket:
 
 - https://bitbucket.org/marco_craveiro/dogen/overview
 
+Continuous builds are available via CDash:
+
+- http://my.cdash.org/index.php?project=Dogen
+
 You can find details on the ongoing work in the Agile folder (look for
 the latest sprint):
 
 - https://github.com/kitanda/dogen/tree/master/doc/agile
 
-Continuous builds are available via CDash:
+The road map is available here (requires [[https://github.com/GNOME/planner][planner]]):
 
-- http://hedgr.co.uk/cdash/index.php?project=dogen
+- https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/agile/road_map.planner
 
 * PART I - THEORY
 
@@ -467,7 +478,7 @@ Dogen uses Continuous Integration (CI) and Trunk Development. We use
 CDash for CI. In practice, this means that it should always be safe
 (and preferable) to install the most recent packages available.
 
-You can monitor the build status [[http://hedgr.co.uk/cdash/index.php?project%3Ddogen][here]]. When the build is green, latest
+You can monitor the build status [[http://my.cdash.org/index.php?project%3DDogen][here]]. When the build is green, latest
 is always greatest; when the build is not green, it is our top
 priority to make it green again.
 
@@ -551,7 +562,7 @@ Finally, run:
 If there are no failures, you are good to go. If there are failures,
 you should report them to help improve Dogen.
 
-**** Submitting bug reports
+**** Submitting Bug Reports
 
 If you have a failure building Dogen or running its unit tests, please
 submit a bug report that includes:
@@ -565,6 +576,12 @@ well; it is located under the directory where you executed Dogen and
 named =dogen.log=.
 
 Bugs can be submitted using [[https://github.com/kitanda/dogen/issues][github Issues]].
+
+**** Submitting Patches
+
+Dogen is an open source project with very little barriers of
+entry. All we ask is for you to use your real name when submitting a
+patch and to use the pull request functionality in GitHub to do so.
 
 ** Running Dogen
 
@@ -2328,3 +2345,18 @@ and papers on the subject we have read, or intend to read.
 - [[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3883.html][Code checkers and generators]]: adding AngularJS-like capabilities to
   C++.
 - [[http://stackoverflow.com/questions/355650/c-html-template-framework-templatizing-library-html-generator-library][Text Template libraries for C++]]: T4 like implementations for C++.
+** Appendix B - FIXME Assorted Text
+
+The main objective of creating a domain generator is to avoid having
+to maintain manually a significant amount of trivial code; this not
+only speeds up the development process but it also improves code
+quality as programmers do not tend to perform repetitive tasks
+terribly well.
+
+We developed our own domain generator because we could not find one
+that fitted our requirements - open source or otherwise. You can see
+the results of our research [[https://github.com/kitanda/dogen/blob/master/doc/manual/manual.org#appendix-a---related-work][in the manual's appendix]].
+
+Note that Dogen is specifically tailored for our needs. We are,
+however, wiling to accept any patches for functionality not directly
+required by us.
