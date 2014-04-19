@@ -30,24 +30,6 @@ versioning less of a necessity.
 As we will be using Docker to test the packages, we can now write
 files into =/usr/bin= without fear. Move from =/opt= into =/usr=.
 
-*** Fix issues with database tests                                    :story:
-
-Last sprint we solved the delays in nightlies by adding concurrency to
-the tests; however, that broke the database tests. We need to refactor
-the tests to allow them to run concurrently.
-
-**** Re-enable schema updates
-
-We are deleting the entire DB schema and re-applying it for every
-invocation of the tests. This does not work on a concurrent world. We
-commented it out for now, but we need a proper solution for this.
-
-**** Investigate errors in tests
-
-We seem to have traffic-lighters in the database tests when executing
-them concurrently. Somewhere they must be trampling on each others
-feet.
-
 *** Add support to upload packages into GDrive                        :story:
 
 We need to upload the packages created by the build to a public Google
