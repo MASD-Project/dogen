@@ -1,7 +1,25 @@
 #!/bin/bash
-
+#
+# Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be  useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA 02110-1301, USA.
+#
 if [ "$#" -ne "3" ]; then
     echo "linux_gcc.sh MODEL PRODUCT BUILD_TYPE" >&2
+    echo "Example: ./linux_gcc.sh Continuous dogen code"
     exit 1
 fi
 
@@ -27,9 +45,8 @@ if [ "x${pid_to_kill}" != "x" ]; then
     fi
 fi
 
-build_dir="/home/ctest/build"
-ctest_script="/home/ctest/scripts/CTest.cmake"
-export CTEST_BUILD_DIR="${build_dir}"
+build_dir="/home/${USER}/build"
+ctest_script="/home/${USER}/scripts/CTest.cmake"
 
 if [ ! -d "${build_dir}" ]; then
     echo "build directory not found: ${build_dir}" >&2
@@ -71,19 +88,12 @@ if [ -f ${build_dir}/${log} ]; then
     mv ${build_dir}/${log} ${old_log}
 fi
 
-git_commit="`git rev-list -n 1 HEAD`"
-
 grep_result=0;
 ctest_result=0;
 while [ "${grep_result}" == "0" ];
 do
-    echo "`date +"%Y-%m-%d %H:%M:%S"` INFO Starting CTest " \
-        >> ${build_dir}/${log} 2 2>&1
-    echo "`date +"%Y-%m-%d %H:%M:%S"` INFO Scripts version: ${git_commit}" \
-        >> ${build_dir}/${log} 2 2>&1
     ctest --extra-verbose --script "${args}" \
-        --output-log "${build_dir}/ctest-${log}" \
-        >> ${build_dir}/${log} 2>&1
+        --output-log "${build_dir}/${log}" >> /dev/null
     ctest_result=$?
     tail -n1 ${build_dir}/${log} | grep "Failed to update files from git"
     grep_result=$?
