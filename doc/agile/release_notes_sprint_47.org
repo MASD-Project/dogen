@@ -16,21 +16,22 @@ GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-27 Thu 08:22]
+Clock summary at [2014-04-22 Tue 07:56]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *7:53* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 7:53 |      |
-| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:50 |
-| IMPLEMENTATION Updates to the manual and readme files |        |      | 5:51 |
-| IMPLEMENTATION Complete the integral work for Linux   |        |      | 0:15 |
-| COMPLETED Fix issues with missing builds              |        |      | 0:57 |
+| Headline                                         | Time   |      |      |
+|--------------------------------------------------+--------+------+------|
+| *Total time*                                     | *8:11* |      |      |
+|--------------------------------------------------+--------+------+------|
+| Development Stories Implemented                  |        | 8:11 |      |
+| COMPLETED Release notes and backlog grooming     |        |      | 1:08 |
+| COMPLETED Updates to the manual and readme files |        |      | 5:51 |
+| CANCELLED Complete the integral work for Linux   |        |      | 0:15 |
+| COMPLETED Fix issues with missing builds         |        |      | 0:57 |
 #+end:
 
 *** COMPLETED Release notes and backlog grooming                       :task:
     CLOSED: [2014-04-19 Sat 23:26]
+    CLOCK: [2014-03-27 Thu 18:29]--[2014-03-27 Thu 18:47] =>  0:18
     CLOCK: [2014-03-27 Thu 07:52]--[2014-03-27 Thu 08:22] =>  0:30
     CLOCK: [2014-03-18 Tue 08:07]--[2014-03-18 Tue 08:12] =>  0:05
     CLOCK: [2014-03-18 Tue 07:52]--[2014-03-18 Tue 08:07] =>  0:15
@@ -65,7 +66,6 @@ integral and get it in a state good enough to be used in production.
 *** COMPLETED Fix issues with missing builds                          :spike:
     CLOSED: [2014-03-19 Wed 18:10]
     CLOCK: [2014-03-18 Tue 22:00]--[2014-03-18 Tue 22:57] =>  0:57
-
 
 We seem to have no builds for the last few days, probably due to the
 changes done while messing around with docker.

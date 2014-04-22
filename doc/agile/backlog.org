@@ -406,7 +406,7 @@ model inheritance by using meta-data:
 There may be some fallout in places where we assume that the
 descendents are all in this model such as serialisation, visitors.
 
-*** Consider Creating a phoney target for header validation           :story:
+*** Consider creating a phoney target for header validation           :story:
     CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
 
 One way of solving the ninja problems may be to stop creating a static
