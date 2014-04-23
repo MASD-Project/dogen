@@ -17,15 +17,38 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+function usage() {
+    echo "USAGE: start_ctest_linux.sh COMPILER MODEL BUILD_TYPE" >&2
+    echo "" >&2
+    echo "WHERE:" >&2
+    echo "    COMPILER: gcc | clang" >&2
+    echo "    MODEL: Continuous | Experimental | Nightly" >&2
+    echo "    BUILD_TYPE: code | doxygen" >&2
+    echo "" >&2
+    echo "EXAMPLE: ./start_ctest_linux.sh gcc Continuous code" >&2
+}
+
 if [ "$#" -ne "3" ]; then
-    echo "linux_gcc.sh MODEL PRODUCT BUILD_TYPE" >&2
-    echo "Example: ./linux_gcc.sh Continuous dogen code"
+    usage
     exit 1
 fi
 
-model="$1"
-product="$2"
+compiler="$1"
+model="$2"
 build_type="$3"
+product="dogen"
+
+if [ "${compiler}" == "gcc" ]; then
+    export CC="gcc"
+    export CXX="g++"
+elif [ "${compiler}" == "clang" ]; then
+    export CC="clang"
+    export CXX="clang++"
+else
+    echo "Invalid compiler: '${compiler}'." >&2
+    usage
+    exit 1
+fi
 
 pid_to_kill=`ps -efww | grep ctest | grep model=${model} | \
     grep product=${product} | \
@@ -46,7 +69,7 @@ if [ "x${pid_to_kill}" != "x" ]; then
 fi
 
 build_dir="/home/${USER}/build"
-ctest_script="/home/${USER}/scripts/CTest.cmake"
+ctest_script="./CTest.cmake"
 
 if [ ! -d "${build_dir}" ]; then
     echo "build directory not found: ${build_dir}" >&2
@@ -92,8 +115,7 @@ grep_result=0;
 ctest_result=0;
 while [ "${grep_result}" == "0" ];
 do
-    ctest --extra-verbose --script "${args}" \
-        --output-log "${build_dir}/${log}" >> /dev/null
+    ctest --extra-verbose --script "${args}" 2&>1 >> ${build_dir}/${log}
     ctest_result=$?
     tail -n1 ${build_dir}/${log} | grep "Failed to update files from git"
     grep_result=$?

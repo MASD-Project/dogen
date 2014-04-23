@@ -13,14 +13,16 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-19 Sat 23:35]
+Clock summary at [2014-04-23 Wed 22:06]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:10* |      |      |
+| *Total time*                                      | *0:52* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:10 |      |
+| Development Stories Implemented                   |        | 0:52 |      |
 | IMPLEMENTATION Release notes and backlog grooming |        |      | 0:10 |
+| IMPLEMENTATION Fix issues with database tests     |        |      | 0:22 |
+| IMPLEMENTATION Create a trivial Linux gcc script  |        |      | 0:20 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -32,21 +34,19 @@ Updates to release notes and backlog.
 
 Use build downtime to update the manual and / or readme file.
 
-*** Create a trivial Linux gcc script                                 :story:
-
-The previous attempts to clean up the build environment were too
-elaborate given the available time. We need to go back to basics with
-a trivial script that works for Linux 32-bit and 64-bit with gcc.
-
-*** Create a trivial Linux clang script                               :story:
-
-We need to be able to build Linux clang 32-bit and 64-bit again.
-
-*** Fix issues with database tests                                    :story:
+*** IMPLEMENTATION Fix issues with database tests                     :story:
 
 Last sprint we solved the delays in nightlies by adding concurrency to
 the tests; however, that broke the database tests. We need to refactor
 the tests to allow them to run concurrently.
+
+**** IMPLEMENTATION Setup erdos to run database tests
+     CLOCK: [2014-04-22 Tue 07:53]--[2014-04-22 Tue 08:15] =>  0:22
+
+Erdos is not using the PFH and as such cannot see the ODB install, so
+the tests are not setup to run there. We need to create a local
+directory with ODB (and EOS while we're at it), setup the =pgpass=
+file and get the tests to run successfully.
 
 **** Re-enable schema updates
 
@@ -60,5 +60,15 @@ We seem to have traffic-lighters in the database tests when executing
 them concurrently. Somewhere they must be trampling on each others
 feet.
 
+*** IMPLEMENTATION Create a trivial Linux gcc script                  :story:
+    CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20
+
+The previous attempts to clean up the build environment were too
+elaborate given the available time. We need to go back to basics with
+a trivial script that works for Linux 32-bit and 64-bit with gcc.
+
+*** Create a trivial Linux clang script                               :story:
+
+We need to be able to build Linux clang 32-bit and 64-bit again.
 
 ** Deprecated Development Stories
