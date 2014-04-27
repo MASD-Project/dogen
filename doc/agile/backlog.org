@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Re-enable schema updates in database model                        :story:
+
+We are deleting the entire DB schema and re-applying it for every
+invocation of the tests. This does not work on a concurrent world. We
+commented it out for now, but we need a proper solution for this.
+
 *** Implement flymake from the EDE project                            :story:
 
 This move of directories highlighted the fragility of the current
