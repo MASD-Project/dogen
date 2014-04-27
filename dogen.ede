@@ -54,6 +54,7 @@
    )
  :system-include-path
  '("/usr/local/pfh/include"
+   "/usr/local/personal"
    "/usr/include/gtkmm-2.4"
    "/usr/include/glibmm-2.4"
    "/usr/include/libxml2"

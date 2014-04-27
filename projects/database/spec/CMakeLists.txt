@@ -29,11 +29,11 @@ set_target_properties(database_spec PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(database_spec
     database
     utility
-    odb-pgsql
-    odb-boost
-    odb
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
+    ${ODB_CORE_LIBRARY}
+    ${ODB_PGSQL_LIBRARY}
+    ${ODB_BOOST_LIBRARY}
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 

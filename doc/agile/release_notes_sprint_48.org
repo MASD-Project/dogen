@@ -13,15 +13,15 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-23 Wed 22:06]
+Clock summary at [2014-04-27 Sun 12:33]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:52* |      |      |
+| *Total time*                                      | *2:48* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:52 |      |
+| Development Stories Implemented                   |        | 2:48 |      |
 | IMPLEMENTATION Release notes and backlog grooming |        |      | 0:10 |
-| IMPLEMENTATION Fix issues with database tests     |        |      | 0:22 |
+| IMPLEMENTATION Fix issues with database tests     |        |      | 2:18 |
 | IMPLEMENTATION Create a trivial Linux gcc script  |        |      | 0:20 |
 #+end:
 
@@ -40,7 +40,7 @@ Last sprint we solved the delays in nightlies by adding concurrency to
 the tests; however, that broke the database tests. We need to refactor
 the tests to allow them to run concurrently.
 
-**** IMPLEMENTATION Setup erdos to run database tests
+**** IMPLEMENTATION Setup erdos to run database tests                  :task:
      CLOCK: [2014-04-22 Tue 07:53]--[2014-04-22 Tue 08:15] =>  0:22
 
 Erdos is not using the PFH and as such cannot see the ODB install, so
@@ -48,13 +48,15 @@ the tests are not setup to run there. We need to create a local
 directory with ODB (and EOS while we're at it), setup the =pgpass=
 file and get the tests to run successfully.
 
-**** Re-enable schema updates
+**** COMPLETED Setup lorenz to run database tests                      :task:
+     CLOSED: [2014-04-27 Sun 12:32]
 
-We are deleting the entire DB schema and re-applying it for every
-invocation of the tests. This does not work on a concurrent world. We
-commented it out for now, but we need a proper solution for this.
+After reinstall we lost the PFH so setup a minimal personal directory
+with ODB and EOS.
 
-**** Investigate errors in tests
+**** COMPLETED Investigate errors in tests                             :task:
+     CLOSED: [2014-04-27 Sun 12:31]
+     CLOCK: [2014-04-27 Sun 10:35]--[2014-04-27 Sun 12:31] =>  1:56
 
 We seem to have traffic-lighters in the database tests when executing
 them concurrently. Somewhere they must be trampling on each others

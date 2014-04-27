@@ -25,5 +25,10 @@ file(GLOB_RECURSE all_files RELATIVE
 add_library(database STATIC ${all_files})
 set_target_properties(database PROPERTIES
     OUTPUT_NAME dogen_database)
+target_link_libraries(database
+    ${Boost_LIBRARIES}
+    ${ODB_CORE_LIBRARY}
+    ${ODB_PGSQL_LIBRARY}
+    ${ODB_BOOST_LIBRARY})
 
 install(TARGETS database ARCHIVE DESTINATION lib COMPONENT libraries)

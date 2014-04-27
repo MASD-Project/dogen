@@ -192,8 +192,13 @@ BOOST_AUTO_TEST_CASE(inserting_foreign_key_objects_requires_other_side_to_exist)
     SETUP_TEST_LOG_SOURCE("inserting_foreign_key_objects_requires_other_side_to_exist");
 
     std::unique_ptr<odb::database> db(create_db());
-    const auto del_rows(delete_rows<dogen::database::primary_key_2>(*db));
-    BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: " << del_rows;
+    auto del_rows(delete_rows<dogen::database::foreign_key>(*db));
+    BOOST_LOG_SEV(lg, debug) << "Deleted rows in foreign_key. Total: "
+                             << del_rows;
+
+    del_rows = delete_rows<dogen::database::primary_key_2>(*db);
+    BOOST_LOG_SEV(lg, debug) << "Deleted rows in primary_key_2. Total: "
+                             << del_rows;
 
     const unsigned int how_many(5);
     const auto v(generate<dogen::database::primary_key_2_generator>(how_many));
