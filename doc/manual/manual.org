@@ -520,8 +520,8 @@ In order to compile Dogen you need:
 **** Building Instructions
 
 Once all dependencies have been installed, and placed in the
-appropriate =INCLUDE= and =LIB= paths (or the equivalent for your
-operative system), follow the following steps:
+appropriate =CMAKE_INCLUDE_PATH= and =CMAKE_LIBRARY_PATH= paths,
+follow the following steps:
 
 : git clone git://github.com/kitanda/dogen.git
 : mkdir output
