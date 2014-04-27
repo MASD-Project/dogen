@@ -548,10 +548,10 @@ If you have setup ODB support, you will need to do the following steps
 first:
 
 - install and configure [[http://www.postgresql.org/][PostgreSQL]];
-- [[https://kb.mediatemple.net/questions/1237/How%2Bdo%2BI%2Benable%2Bremote%2Baccess%2Bto%2Bmy%2BPostgreSQL%2Bserver%253F#dv][configure]] access to local and remote users;
+- [[http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html][configure]] access to local and remote users;
 - create a database called =musseque= and a user called =build= with a
   password of your choice;
-- create a =.pgpass= file as described in [[http://wiki.postgresql.org/wiki/Pgpass][here]] (more details in the
+- create a =.pgpass= file as described [[http://wiki.postgresql.org/wiki/Pgpass][here]] (more details in the
   Postgres manual, section [[http://www.postgresql.org/docs/current/static/libpq-pgpass.html][The Password File]]). Test access to the
   database before proceeding.
 
