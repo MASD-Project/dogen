@@ -54,7 +54,7 @@ const boost::filesystem::path in_dir_above("../data");
 const boost::filesystem::path in_share_data_dir("../share/data");
 const boost::filesystem::path in_share_dogen_versioned_dir(
     "../share/dogen-" DOGEN_VERSION);
-const boost::filesystem::path in_share_dogen_dir("../share/dogen");
+const boost::filesystem::path in_share_dogen_dir("../share/dogen/data");
 
 }
 

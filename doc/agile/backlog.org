@@ -22,20 +22,6 @@ update =cunene=. Ideally what we want is to have a top-level file -
 most ideally =dogen.ede= with some lisp code that would setup the
 dogen paths for flymake. Users would only need to load this up to use it.
 
-*** Remove versioning from packages                                   :story:
-
-We don't seem to have a particularly good story around versioning in
-packages. It's best to remove it for now until we really understand
-how it should work.
-
-In addition, we will be using Docker to test the packages, making
-versioning less of a necessity.
-
-*** Install packages into =/usr=                                      :story:
-
-As we will be using Docker to test the packages, we can now write
-files into =/usr/bin= without fear. Move from =/opt= into =/usr=.
-
 *** Add support to upload packages into GDrive                        :story:
 
 We need to upload the packages created by the build to a public Google

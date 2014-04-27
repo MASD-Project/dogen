@@ -19,5 +19,5 @@
 #
 install(
     FILES CTestConfig.cmake
-    DESTINATION deployment/sanity
+    DESTINATION share/dogen/sanity
     COMPONENT applications)

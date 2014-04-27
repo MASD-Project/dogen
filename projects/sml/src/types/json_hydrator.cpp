@@ -62,7 +62,7 @@ const std::string value_object_type_sequence_container_value(
 
 const std::string tags_key("tags");
 
-const std::string invalid_json_file("Failed to parse JSON file: ");
+const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
 const std::string invalid_path("Failed to find JSON path: ");

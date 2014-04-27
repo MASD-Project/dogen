@@ -13,14 +13,15 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-27 Sun 12:33]
+Clock summary at [2014-04-27 Sun 15:30]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *2:48* |      |      |
+| *Total time*                                      | *5:11* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 2:48 |      |
+| Development Stories Implemented                   |        | 5:11 |      |
 | IMPLEMENTATION Release notes and backlog grooming |        |      | 0:10 |
+| COMPLETED Install packages into =/usr=            |        |      | 2:23 |
 | IMPLEMENTATION Fix issues with database tests     |        |      | 2:18 |
 | IMPLEMENTATION Create a trivial Linux gcc script  |        |      | 0:20 |
 #+end:
@@ -33,6 +34,23 @@ Updates to release notes and backlog.
 *** Updates to the manual and readme files                             :task:
 
 Use build downtime to update the manual and / or readme file.
+
+*** COMPLETED Install packages into =/usr=                            :story:
+    CLOSED: [2014-04-27 Sun 15:29]
+    CLOCK: [2014-04-27 Sun 13:06]--[2014-04-27 Sun 15:29] =>  2:23
+
+As we will be using Docker to test the packages, we can now write
+files into =/usr/bin= without fear. Move from =/opt= into =/usr=.
+
+*** COMPLETED Remove versioning from packages                         :story:
+    CLOSED: [2014-04-27 Sun 15:30]
+
+We don't seem to have a particularly good story around versioning in
+packages. It's best to remove it for now until we really understand
+how it should work.
+
+In addition, we will be using Docker to test the packages, making
+versioning less of a necessity.
 
 *** IMPLEMENTATION Fix issues with database tests                     :story:
 

@@ -19,14 +19,14 @@
 #
 include(InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_NAME "${CMAKE_PROJECT_NAME}_${DOGEN_PATCH_VERSION}")
+set(CPACK_PACKAGE_NAME "${CMAKE_PROJECT_NAME}")
 set(CPACK_PACKAGE_VERSION_MAJOR "${DOGEN_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR "${DOGEN_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${DOGEN_PATCH_VERSION}")
 set(CPACK_PACKAGE_VERSION "${DOGEN_MAJOR_VERSION}.${DOGEN_MINOR_VERSION}.${DOGEN_PATCH_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Dogen - domain generator")
-set(CPACK_PACKAGE_CONTACT "http://kitanda.co.uk/html/index.html")
-set(CPACK_PACKAGE_VENDOR "Kitanda")
+set(CPACK_PACKAGE_CONTACT "https://github.com/DomainDrivenConsulting/dogen")
+set(CPACK_PACKAGE_VENDOR "DomainDrivenConsulting")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
 
@@ -43,15 +43,15 @@ if(DOXYGEN_FOUND)
 endif()
 set(CPACK_COMPONENTS_ALL ${components})
 
-set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen Applications")
+set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen")
 set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
     "The Domain Generator - Generates source code for domain driven development.")
 
-set(CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Libraries")
+set(CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Dogen Libraries")
 set(CPACK_COMPONENT_LIBRARIES_DESCRIPTION
    "Static libraries used to build programs using Dogen")
 
-set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "C++ Headers")
+set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "Dogen C++ Headers")
 set(CPACK_COMPONENT_HEADERS_DESCRIPTION
     "C/C++ header files for use with Dogen libraries")
 
@@ -195,14 +195,14 @@ if(WIN32)
     set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dogen_driver.exe")
     set(CPACK_NSIS_DISPLAY_NAME "Dogen")
     set(CPACK_NSIS_PACKAGE_NAME "Dogen ${DOGEN_VERSION}")
-    set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\http://kitanda.co.uk/html/index.html")
-    set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\http://kitanda.co.uk/html/index.html")
-    set(CPACK_NSIS_CONTACT "info@kitanda.co.uk")
+    set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org")
+    set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org")
+    set(CPACK_NSIS_CONTACT "")
     set(CPACK_NSIS_MODIFY_PATH ON)
 
 elseif(APPLE)
     set(CPACK_SOURCE_GENERATOR "TGZ")
-    set(CPACK_PACKAGE_INSTALL_DIRECTORY "kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in ${stage_dir}/tmp_pkg/macosx/Info.plist)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/start.in ${stage_dir}/tmp_pkg/macosx/start)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen.in
@@ -256,7 +256,7 @@ elseif(UNIX)
         set(CPACK_DEB_PACKAGE_DEBUG "1")
         set(CPACK_GENERATOR "DEB")
         set(CPACK_DEB_COMPONENT_INSTALL ON)
-        set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Kitanda Development Group")
+        set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Domain Driven Consulting")
         set(CPACK_SOURCE_GENERATOR "TGZ")
         set(CPACK_DEBIAN_PACKAGE_PRIORITY "extra")
         set(CPACK_DEBIAN_PACKAGE_SECTION "devel")
@@ -287,7 +287,7 @@ elseif(UNIX)
     endif()
 
     set(CPACK_SET_DESTDIR true)
-    set(CPACK_INSTALL_PREFIX "/opt/kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
+    set(CPACK_INSTALL_PREFIX "/usr")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen.in
         ${stage_dir}/scripts/dogen)
     execute_process(COMMAND chmod +x ${stage_dir}/scripts/dogen)

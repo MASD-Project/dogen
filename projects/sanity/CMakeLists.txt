@@ -19,6 +19,6 @@
 #
 install(
     DIRECTORY sanity/
-    DESTINATION deployment/sanity
+    DESTINATION share/dogen/sanity
     COMPONENT applications
     FILES_MATCHING PATTERN "*")
