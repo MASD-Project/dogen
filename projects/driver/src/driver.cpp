@@ -99,12 +99,12 @@ int main(int argc, char* argv[]) {
             BOOST_LOG_SEV(lg, info) << dogen_product << " started.";
             auto w(workflow_factory(s));
             w.execute();
-            BOOST_LOG_SEV(lg, info) << dogen_product << " finished";
+            BOOST_LOG_SEV(lg, info) << dogen_product << " finished.";
         }
     } catch (const dogen::driver::parser_validation_error& e) {
         BOOST_LOG_SEV(lg, error) << boost::diagnostic_information(e);
         std::cerr << e.what() << std::endl;
-        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors";
+        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors.";
         return 1;
     } catch (const std::exception& e) {
         // FIXME: why don't we just catch boost exception first?
@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: " << e.what() << ". See the log file for details."
                   << std::endl;
 
-        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors";
+        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors.";
     }
     return 0;
 }
