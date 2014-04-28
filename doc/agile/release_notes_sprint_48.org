@@ -13,20 +13,22 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-27 Sun 15:30]
+Clock summary at [2014-04-28 Mon 16:32]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *5:11* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 5:11 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:10 |
-| COMPLETED Install packages into =/usr=            |        |      | 2:23 |
-| IMPLEMENTATION Fix issues with database tests     |        |      | 2:18 |
-| IMPLEMENTATION Create a trivial Linux gcc script  |        |      | 0:20 |
+| Headline                                                  | Time   |      |      |
+|-----------------------------------------------------------+--------+------+------|
+| *Total time*                                              | *5:59* |      |      |
+|-----------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                           |        | 5:59 |      |
+| IMPLEMENTATION Release notes and backlog grooming         |        |      | 0:12 |
+| IMPLEMENTATION Log start and finish of dogen with version |        |      | 0:10 |
+| COMPLETED Install packages into =/usr=                    |        |      | 2:23 |
+| IMPLEMENTATION Fix issues with database tests             |        |      | 2:54 |
+| IMPLEMENTATION Create a trivial Linux gcc script          |        |      | 0:20 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-04-28 Mon 08:28]--[2014-04-28 Mon 08:30] =>  0:02
     CLOCK: [2014-04-19 Sat 23:25]--[2014-04-19 Sat 23:35] =>  0:10
 
 Updates to release notes and backlog.
@@ -34,6 +36,17 @@ Updates to release notes and backlog.
 *** Updates to the manual and readme files                             :task:
 
 Use build downtime to update the manual and / or readme file.
+
+*** COMPLETED Log start and finish of dogen with version              :story:
+    CLOSED: [2014-04-28 Mon 16:33]
+    CLOCK: [2014-04-28 Mon 08:30]--[2014-04-28 Mon 08:40] =>  0:10
+
+The log file of a non-verbose session of dogen provides no information
+whatsoever about the version of dogen, git commit, etc.
+
+: 2014-03-12 18:25:09.053599 [INFO] [engine.workflow] Workflow started.
+: ...
+: 2014-03-12 18:25:09.252724 [INFO] [engine.workflow] Workflow finished.
 
 *** COMPLETED Install packages into =/usr=                            :story:
     CLOSED: [2014-04-27 Sun 15:29]
@@ -52,13 +65,16 @@ how it should work.
 In addition, we will be using Docker to test the packages, making
 versioning less of a necessity.
 
-*** IMPLEMENTATION Fix issues with database tests                     :story:
+*** COMPLETED Fix issues with database tests                          :story:
+    CLOSED: [2014-04-28 Mon 16:32]
 
 Last sprint we solved the delays in nightlies by adding concurrency to
 the tests; however, that broke the database tests. We need to refactor
 the tests to allow them to run concurrently.
 
-**** IMPLEMENTATION Setup erdos to run database tests                  :task:
+**** COMPLETED Setup erdos to run database tests                       :task:
+     CLOSED: [2014-04-28 Mon 16:32]
+     CLOCK: [2014-04-28 Mon 07:52]--[2014-04-28 Mon 08:28] =>  0:36
      CLOCK: [2014-04-22 Tue 07:53]--[2014-04-22 Tue 08:15] =>  0:22
 
 Erdos is not using the PFH and as such cannot see the ODB install, so

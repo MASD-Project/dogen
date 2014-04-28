@@ -132,15 +132,6 @@ model, we get strange compilation errors:
              ^
 We should do a test case for this and fix the errors.
 
-*** Log start and finish of dogen with version                        :story:
-
-The log file of a non-verbose session of dogen provides no information
-whatsoever about the version of dogen, git commit, etc.
-
-: 2014-03-12 18:25:09.053599 [INFO] [engine.workflow] Workflow started.
-: ...
-: 2014-03-12 18:25:09.252724 [INFO] [engine.workflow] Workflow finished.
-
 *** Diagrams used in manual should be in sanity and in docs           :story:
 
 Users should be able to follow the examples in the manual by using a
