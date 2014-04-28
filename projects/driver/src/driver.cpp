@@ -35,6 +35,7 @@ namespace {
 auto lg(logger_factory("dogen"));
 const std::string log_dir("log/dogen");
 const std::string get_help("Use --help option to see usage instructions.");
+const std::string dogen_product("Dogen v" DOGEN_VERSION);
 
 /**
  * @brief Print the program's help text.
@@ -49,7 +50,7 @@ void help(const std::string& d) {
  * @brief Print the program's version details.
  */
 void version() {
-    std::cout << "dogen v" << DOGEN_VERSION << std::endl
+    std::cout << dogen_product << std::endl
               << "Copyright (C) 2012 Kitanda." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
               << "<http://gnu.org/licenses/gpl.html>."
@@ -95,12 +96,15 @@ int main(int argc, char* argv[]) {
         if (o) {
             const auto& s(*o);
             initialise_logging(s);
+            BOOST_LOG_SEV(lg, info) << dogen_product << " started.";
             auto w(workflow_factory(s));
             w.execute();
+            BOOST_LOG_SEV(lg, info) << dogen_product << " finished";
         }
     } catch (const dogen::driver::parser_validation_error& e) {
         BOOST_LOG_SEV(lg, error) << boost::diagnostic_information(e);
         std::cerr << e.what() << std::endl;
+        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors";
         return 1;
     } catch (const std::exception& e) {
         // FIXME: why don't we just catch boost exception first?
@@ -113,7 +117,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: " << e.what() << ". See the log file for details."
                   << std::endl;
 
-        return 1;
+        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors";
     }
     return 0;
 }
