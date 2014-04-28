@@ -13,18 +13,19 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-28 Mon 21:04]
+Clock summary at [2014-04-28 Mon 23:38]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *6:37* |      |      |
+| *Total time*                                         | *7:03* |      |      |
 |------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 6:37 |      |
+| Development Stories Implemented                      |        | 7:03 |      |
 | IMPLEMENTATION Release notes and backlog grooming    |        |      | 0:18 |
 | COMPLETED Log start and finish of dogen with version |        |      | 0:20 |
 | COMPLETED Install packages into =/usr=               |        |      | 2:23 |
 | COMPLETED Fix issues with database tests             |        |      | 2:54 |
 | IMPLEMENTATION Rename =driver= to =knitter=          |        |      | 0:22 |
+| IMPLEMENTATION Rename =engine= to =knit=             |        |      | 0:26 |
 | IMPLEMENTATION Create a trivial Linux gcc script     |        |      | 0:20 |
 #+end:
 
@@ -106,6 +107,12 @@ As part of the naming epic "Naming of libraries and binaries", rename
 driver. We should also get rid of the =dogen= shell script. Finally we
 need to add some blurb to the manual to mention the whole "weaving"
 theme.
+
+*** IMPLEMENTATION Rename =engine= to =knit=                          :story:
+    CLOCK: [2014-04-28 Mon 23:12]--[2014-04-28 Mon 23:38] =>  0:26
+
+As part of the naming epic "Naming of libraries and binaries", rename
+engine.
 
 *** IMPLEMENTATION Create a trivial Linux gcc script                  :story:
     CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20

@@ -26,7 +26,7 @@
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/engine/types/workflow.hpp"
+#include "dogen/knit/types/workflow.hpp"
 
 using namespace dogen::utility::log;
 
@@ -71,12 +71,12 @@ settings_factory(int argc, char* argv[]) {
 /**
  * @brief Given Dogen's settings, creates a code generation workflow.
  */
-dogen::engine::workflow workflow_factory(const dogen::config::settings& s) {
+dogen::knit::workflow workflow_factory(const dogen::config::settings& s) {
     if (!s.output().output_to_stdout())
-        return dogen::engine::workflow(s);
+        return dogen::knit::workflow(s);
 
     auto lambda([]() -> std::ostream& {return std::cout;});
-    return dogen::engine::workflow(s, lambda);
+    return dogen::knit::workflow(s, lambda);
 }
 
 /**

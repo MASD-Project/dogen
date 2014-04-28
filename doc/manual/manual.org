@@ -992,7 +992,7 @@ in handy:
 : $ date
 : Fri 14 Mar 08:32:33 GMT 2014
 : $ tail -n 1 log/dogen.log
-: 2014-03-14 08:32:29.763230 [INFO] [engine.workflow] Workflow finished.
+: 2014-03-14 08:32:29.763230 [INFO] [knit.workflow] Workflow finished.
 
 As you can see, the timestamp of the last thing Dogen wrote to the log
 is very close to now, so we know it executed the code generation.  As

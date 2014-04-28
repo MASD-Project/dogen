@@ -17,22 +17,27 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(knitter_files "")
-file(GLOB_RECURSE knitter_files RELATIVE
+set(knit_files "")
+file(GLOB_RECURSE knit_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(knitter ${knitter_files})
-set(binary_name "dogen_knitter")
-set_target_properties(knitter PROPERTIES OUTPUT_NAME ${binary_name})
-
-target_link_libraries(knitter
-    knit
-    dia
+add_library(knit STATIC ${knit_files})
+target_link_libraries(knit
     sml
+    dia
+    cpp
+    cpp_formatters
+    sml_to_cpp
     config
+    dia_to_sml
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
-install(TARGETS knitter RUNTIME DESTINATION bin COMPONENT applications)
+set_target_properties(knit
+    PROPERTIES OUTPUT_NAME dogen_knit)
+set_target_properties(knit
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+
+install(TARGETS knit ARCHIVE DESTINATION lib COMPONENT libraries)

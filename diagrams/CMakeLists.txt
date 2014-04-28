@@ -157,9 +157,9 @@ if(use_latest_knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
-set(target engine)
+set(target knit)
 add_custom_target(codegen_${target}
-    COMMENT "Generating engine model" VERBATIM
+    COMMENT "Generating knit model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia

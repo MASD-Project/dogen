@@ -189,7 +189,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/sml_to_cpp/include
     ${CMAKE_SOURCE_DIR}/projects/formatters/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
-    ${CMAKE_SOURCE_DIR}/projects/engine/include
+    ${CMAKE_SOURCE_DIR}/projects/knit/include
     ${CMAKE_SOURCE_DIR}/projects/knitter/include
     ${CMAKE_SOURCE_DIR}/projects/test_model_sanitizer/include
 
@@ -258,7 +258,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml_to_cpp/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/engine)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
 
