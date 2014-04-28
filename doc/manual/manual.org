@@ -529,7 +529,8 @@ follow the following steps:
 : cmake ../dogen -G "Unix Makefiles"
 : make -j5 # number of cores available
 
-The dogen binary will be in =output/stage/bin/dogen_driver=.
+The dogen =knitter= binary will be in
+=output/stage/bin/dogen_knitter=.
 
 If you are on a non-Unix platform you need to use the appropriate
 CMake generator (the =-G= parameter above). At present the Ninja
@@ -600,17 +601,17 @@ input; latter sections will deal with these topics exclusively.
 The first thing one should do is to make sure Dogen is operational. To
 do so, run:
 
-: $ dogen_driver --version
+: $ dogen_knitter --version
 
 If you are running it from the build directory =stage/bin= and on
 UNIX, you may need to refer to the current directory:
 
-: $ ./dogen_driver --version
+: $ ./dogen_knitter --version
 
 Alternatively, you may find yourself in a sub-directory of the build
 directory; in that case you should use a relative path to the binary:
 
-: $ ../dogen_driver --version
+: $ ../dogen_knitter --version
 
 If you are in any of these cases, from now on you will have to add the
 required relative path to all of the following examples - e.g. =./=,
@@ -633,7 +634,7 @@ commits there. Ideally you want the most recent version.
 Now that we have confirmed Dogen is operational, lets have a look at
 all the available options. Run:
 
-: $ dogen_driver --help
+: $ dogen_knitter --help
 
 A text similar to the below will come up:
 
@@ -676,7 +677,7 @@ The source directory is created so we can separate our source code
 from the build files, as you'll see in a moment. All that is left is
 to code generate:
 
-: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain
+: $ dogen_knitter --target hello_world.dia --cpp-enable-facet domain
 
 We use the =--target= command line option to tell Dogen about the
 "Hello World" model. The target file must be a UML Dia diagram,
@@ -712,7 +713,7 @@ The =log= directory is where the log file is stored; it is named
 won't be much in the log file to look at. If you wish to increase the
 verbosity of the logging, you can do so using =--verbose=:
 
-: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain --verbose
+: $ dogen_knitter --target hello_world.dia --cpp-enable-facet domain --verbose
 
 See the Advanced Command Line Options section for more details on
 =--verbose=.
@@ -890,7 +891,7 @@ Because we chose to save the diagram in text format, its very easy to
 see what the changes are. We can now code generate, very much the same
 way as we did before:
 
-: $ dogen_driver --target hello_world.dia --cpp-enable-facet domain
+: $ dogen_knitter --target hello_world.dia --cpp-enable-facet domain
 
 Other than the diagram file itself, one would expect to see exactly
 one modified file; and for that file to be =one_property.hpp=. And
@@ -958,7 +959,7 @@ can easily be accomplished with CMake. In your top-level
 : add_custom_target(codegen_hello_world
 :     COMMENT "Generating Hello World model" VERBATIM
 :     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-:     COMMAND ../../dogen_driver
+:     COMMAND ../../dogen_knitter
 :     --target ${CMAKE_SOURCE_DIR}/hello_world.dia
 :     --cpp-enable-facet domain)
 
@@ -1082,7 +1083,7 @@ via the =--delete-extra-files= option. We can add it to the top-level
 : --- a/CMakeLists.txt
 : +++ b/CMakeLists.txt
 : @@ -12,4 +12,5 @@ add_custom_target(codegen_hello_world
-:      COMMAND ../../dogen_driver
+:      COMMAND ../../dogen_knitter
 :      --target ${CMAKE_SOURCE_DIR}/hello_world.dia
 : -    --cpp-enable-facet domain)
 : +    --cpp-enable-facet domain
@@ -1160,7 +1161,7 @@ so:
 : --- a/CMakeLists.txt
 : +++ b/CMakeLists.txt
 : @@ -12,4 +12,5 @@ add_custom_target(codegen_hello_world
-:      COMMAND ../../dogen_driver
+:      COMMAND ../../dogen_knitter
 :      --target ${CMAKE_SOURCE_DIR}/hello_world.dia
 :      --cpp-enable-facet domain
 : -    --delete-extra-files)
@@ -1219,7 +1220,7 @@ lets say create a second model which uses the class we defined in the
 "Hello World" model; to generate this model one would invoke Dogen as
 follows:
 
-: $ dogen_driver --target hello_references.dia --reference hello_world.dia \
+: $ dogen_knitter --target hello_references.dia --reference hello_world.dia \
 :   --cpp-enable-facet domain
 
 "Hello References" can now make use of all the types available in
@@ -1244,7 +1245,7 @@ in handy. This is a way to inject information directly into SML which
 is not obtained via the UML diagram. You can provide as many modules
 as required, separated by =::=. For example:
 
-: $ dogen_driver --target hello_references.dia --external-module-path a::b::c \
+: $ dogen_knitter --target hello_references.dia --external-module-path a::b::c \
 :   --cpp-enable-facet domain
 
 All types in "Hello World" would now be encased inside of namespaces
@@ -1253,7 +1254,7 @@ references in diagrams: we should still refer to the types /without/
 it. However, the =--reference= parameter must then be augmented with
 it so that Dogen places the types in the correct modules:
 
-: $ dogen_driver --target hello_references.dia \
+: $ dogen_knitter --target hello_references.dia \
 : --reference hello_world.dia,a::b::c \
 :   --cpp-enable-facet domain
 
@@ -1435,7 +1436,7 @@ I. FIXME add link.
 example if you copy the Dogen binary from a build directory into
 another location without copying all the associated
 infrastructure. The correct way is to run the binary using a relative
-path to the build directory: =../../dogen_driver=.
+path to the build directory: =../../dogen_knitter=.
 
 This error should not occur if you are using a binary package as the
 binary should be in the system path.

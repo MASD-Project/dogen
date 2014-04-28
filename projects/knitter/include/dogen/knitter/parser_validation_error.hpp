@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DRIVER_PARSER_VALIDATION_ERROR_HPP
-#define DOGEN_DRIVER_PARSER_VALIDATION_ERROR_HPP
+#ifndef DOGEN_KNITTER_PARSER_VALIDATION_ERROR_HPP
+#define DOGEN_KNITTER_PARSER_VALIDATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include "dogen/utility/exception/utility_exception.hpp"
 
 namespace dogen {
-namespace driver {
+namespace knitter {
 
 /**
  * @brief A fatal error has occurred during option parsing.

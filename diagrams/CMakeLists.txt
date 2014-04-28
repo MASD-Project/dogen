@@ -19,9 +19,9 @@
 add_custom_target(codegen)
 
 set(dogen_dir "${CMAKE_BINARY_DIR}/stage/bin/")
-set(dogen_binary "${dogen_dir}/dogen_driver")
+set(dogen_binary "${dogen_dir}/dogen_knitter")
 set(dogen_version "")
-set(use_latest_driver FALSE)
+set(use_latest_knitter FALSE)
 execute_process(
     COMMAND ${dogen_binary} --version
     COMMAND head -n1
@@ -53,8 +53,8 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -76,8 +76,8 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -99,8 +99,8 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -126,8 +126,8 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -152,8 +152,8 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -179,8 +179,8 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -206,8 +206,8 @@ add_custom_target(codegen_${target}
     --verbose
     --delete-extra-files
     --external-module-path dogen)
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -236,8 +236,8 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -265,8 +265,8 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
@@ -297,7 +297,7 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 
-if(use_latest_driver)
-    add_dependencies(codegen_${target} driver)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})

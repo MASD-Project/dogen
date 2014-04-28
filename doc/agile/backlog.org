@@ -143,7 +143,7 @@ sanity. This means we need the same diagrams packaged twice.
 
 The dogen version at present is:
 
-: $ ./dogen_driver --version
+: $ ./dogen_knitter --version
 : dogen v0.0.2233
 : Copyright (C) 2012 Kitanda.
 : License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
@@ -189,10 +189,10 @@ In the help text we make reference to an =--info= option:
 
 However, running it does not work:
 
-: $ ./dogen_driver --info
+: $ ./dogen_knitter --info
 : [2014-03-11 18:22:21.362328] [0x0b6ffc70] [info]    Mandatory parameter target is missing. Try `dogen --help' for more information.
-: [2014-03-11 18:22:21.365440] [0x0b6ffc70] [info]    /home/marco/Development/DomainDrivenConsulting/dogen/projects/driver/src/program_options_parser.cpp(364): Throw in function void dogen::driver::program_options_parser::throw_missing_target() const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen6driver23parser_validation_errorEEE
+: [2014-03-11 18:22:21.365440] [0x0b6ffc70] [info]    /home/marco/Development/DomainDrivenConsulting/dogen/projects/knitter/src/program_options_parser.cpp(364): Throw in function void dogen::knitter::program_options_parser::throw_missing_target() const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen6knitter23parser_validation_errorEEE
 : std::exception::what: Mandatory parameter target is missing. Try `dogen --help' for more information.
 :
 : Mandatory parameter target is missing. Try `dogen --help' for more information.
@@ -463,25 +463,28 @@ group. Group names could be the model name (=std=, etc).
 
 A bit of a nitpick but nice nonetheless.
 
-*** Naming of libraries and binaries                                  :story:
+*** Naming of libraries and binaries                                  :epic:
 
-It is a common problem with certain utilities where we end up with a
-library which should be named after the binary. For example, we should
-really call the engine library "dogen" as all its missing is the
-command line interface. In addition to this, it seems we are going to
-have more than one binary in the code base. In order to solve this we
-should adopt a naming strategy for both libraries and binaries. One
-approach is to choose verbs from a "theme" such as "weaving" - a lot
-of these tools are doing things that look a bit like weaving - and
-then use the noun for the binary and the verb for the library. For
-example:
+We have a common problem with certain combination of utilities and
+libraries; often we end up with a library which should be named after
+the binary. For example, we should really call the "engine" library
+"dogen" as all its missing is the command line interface. In addition
+to this, it seems we are going to have more than one binary in the
+code base. In order to solve this we should adopt a naming strategy
+for both libraries and binaries. One approach is to choose verbs from
+a "theme" such as "weaving" - a lot of these tools are doing things
+that look a bit like weaving - and then use the noun for the library
+and the verb for the binary. Dogen is then a suite of utilities for
+domain generation.
+
+ For example:
 
 - stitch - library that generates formatters
 - stitcher - command line tool for generating formatters
 - knit - library that code generates
 - knitter - command line tool for code generation
-- sew - tool to generate JSON / SML from Dia diagrams
-- tailor - command line tool to generate JSON / SML from Dia
+- tailor - tool to generate JSON / SML from Dia diagrams
+- sew - command line tool to generate JSON / SML from Dia
   diagrams
 - needle: the small library with support for boost and standard
   library (hashing, test data, etc.)
@@ -1049,8 +1052,8 @@ Things the marker can/should have:
 *** Create a new command line parameter for data files directories    :story:
 
 Users should be able to provide directories for their own JSON
-models. We just need to add a new parameter to driver and transport it
-all the way to OM's workflow.
+models. We just need to add a new parameter to the knitter and
+transport it all the way to OM's workflow.
 
 *** Check packaging code for PFH dependencies                         :story:
 
@@ -2979,8 +2982,8 @@ the middle end.
 In order to test models at the engine level one needs to first
 generate the dia input. This can be done as follows:
 
-: ./dogen_driver-0.0.507 --save-dia-model xml
-: --stop-after-merging -t ../../../../dogen/test_data/dia_sml/input/boost_model.dia
+: ./dogen_knitter --save-dia-model xml --stop-after-merging
+: -t ../../../../dogen/test_data/dia_sml/input/boost_model.dia
 
 From the bin directory. We need to make these steps a bit more
 obvious. Why do we even need this?

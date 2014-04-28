@@ -17,16 +17,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(driver_files "")
-file(GLOB_RECURSE driver_files RELATIVE
+set(knitter_files "")
+file(GLOB_RECURSE knitter_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(driver ${driver_files})
-set(binary_name "dogen_driver")
-set_target_properties(driver PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(knitter ${knitter_files})
+set(binary_name "dogen_knitter")
+set_target_properties(knitter PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(driver
+target_link_libraries(knitter
     engine
     dia
     sml
@@ -35,4 +35,4 @@ target_link_libraries(driver
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
-install(TARGETS driver RUNTIME DESTINATION bin COMPONENT applications)
+install(TARGETS knitter RUNTIME DESTINATION bin COMPONENT applications)

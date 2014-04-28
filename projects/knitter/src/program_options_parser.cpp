@@ -30,18 +30,18 @@
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/driver/parser_validation_error.hpp"
-#include "dogen/driver/program_options_parser.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen/knitter/parser_validation_error.hpp"
+#include "dogen/knitter/program_options_parser.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("driver.program_options_parser"));
+auto lg(logger_factory("knitter.program_options_parser"));
 
 const std::string at_least_one_argument(
     "Expected at least one argument for reference");
@@ -118,7 +118,7 @@ const std::string integrated_io_incompatible_with_io_facet(
 }
 
 namespace dogen {
-namespace driver {
+namespace knitter {
 
 program_options_parser::
 program_options_parser(std::vector<std::string> arguments)

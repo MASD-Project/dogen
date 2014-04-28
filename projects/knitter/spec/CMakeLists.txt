@@ -17,8 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(driver_spec_files "")
-file(GLOB_RECURSE driver_spec_files RELATIVE
+set(knitter_spec_files "")
+file(GLOB_RECURSE knitter_spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
@@ -27,25 +27,25 @@ file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/../src"
     "${CMAKE_CURRENT_SOURCE_DIR}/../src/*.cpp")
 
-set(driver_files "")
+set(knitter_files "")
 set(ignore_file false)
 foreach(cpp_file ${all_files})
-    if("${cpp_file}" MATCHES "driver.cpp")
+    if("${cpp_file}" MATCHES "knitter.cpp")
         set(ignore_file true)
     endif()
 
     if(NOT ignore_file)
-        set(driver_files ${driver_files}
+        set(knitter_files ${knitter_files}
             "${CMAKE_CURRENT_SOURCE_DIR}/../src/${cpp_file}")
     endif()
     set(ignore_file false)
 endforeach()
 
-add_executable(driver_spec ${driver_spec_files} ${driver_files})
-set(binary_name "dogen_driver_spec")
-set_target_properties(driver_spec PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(knitter_spec ${knitter_spec_files} ${knitter_files})
+set(binary_name "dogen_knitter_spec")
+set_target_properties(knitter_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(driver_spec
+target_link_libraries(knitter_spec
     utility
     config
     ${LIBXML2_LIBRARIES}
@@ -53,13 +53,13 @@ target_link_libraries(driver_spec
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(driver_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(knitter_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_driver_spec
-    COMMAND ${driver_spec_cmd}
+add_custom_target(run_knitter_spec
+    COMMAND ${knitter_spec_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS driver_spec)
-add_dependencies(run_all_specs run_driver_spec)
+    DEPENDS knitter_spec)
+add_dependencies(run_all_specs run_knitter_spec)
 
-add_boost_tests(driver ${driver_spec_files})
-install(TARGETS driver_spec RUNTIME DESTINATION bin COMPONENT tests)
+add_boost_tests(knitter ${knitter_spec_files})
+install(TARGETS knitter_spec RUNTIME DESTINATION bin COMPONENT tests)

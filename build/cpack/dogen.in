@@ -1,5 +1,0 @@
-#!/bin/bash
-
-export DYLD_LIBRARY_PATH="`dirname "$0"`"
-export LD_LIBRARY_PATH="`dirname "$0"`"
-"`dirname "$0"`"/dogen_driver $*

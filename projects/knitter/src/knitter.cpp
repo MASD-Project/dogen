@@ -23,8 +23,8 @@
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/version.hpp"
-#include "dogen/driver/program_options_parser.hpp"
-#include "dogen/driver/parser_validation_error.hpp"
+#include "dogen/knitter/program_options_parser.hpp"
+#include "dogen/knitter/parser_validation_error.hpp"
 #include "dogen/config/types/settings.hpp"
 #include "dogen/engine/types/workflow.hpp"
 
@@ -62,7 +62,7 @@ void version() {
  */
 boost::optional<dogen::config::settings>
 settings_factory(int argc, char* argv[]) {
-    dogen::driver::program_options_parser p(argc, argv);
+    dogen::knitter::program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
     return p.parse();
@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
             w.execute();
             BOOST_LOG_SEV(lg, info) << dogen_product << " finished.";
         }
-    } catch (const dogen::driver::parser_validation_error& e) {
+    } catch (const dogen::knitter::parser_validation_error& e) {
         BOOST_LOG_SEV(lg, error) << boost::diagnostic_information(e);
         std::cerr << e.what() << std::endl;
         BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors.";

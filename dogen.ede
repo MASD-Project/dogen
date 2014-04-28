@@ -11,7 +11,7 @@
    "/projects/sml/include"
    "/projects/utility/include"
    "/projects/engine/include"
-   "/projects/driver/include"
+   "/projects/knitter/include"
    "/projects/all_primitives/include"
    "/projects/class_in_a_package/include"
    "/projects/class_without_attributes/include"

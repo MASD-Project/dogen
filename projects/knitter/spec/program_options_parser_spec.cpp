@@ -24,15 +24,15 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/config/io/settings_io.hpp"
-#include "dogen/driver/program_options_parser.hpp"
-#include "dogen/driver/parser_validation_error.hpp"
+#include "dogen/knitter/program_options_parser.hpp"
+#include "dogen/knitter/parser_validation_error.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
 const std::string empty;
-const std::string test_module("driver");
+const std::string test_module("knitter");
 const std::string test_suite("program_options_parser_spec");
 const std::string help_sanity_line("General options");
 const std::string missing_target("Mandatory parameter target is missing");
@@ -154,14 +154,14 @@ version_mock version_mock_factory(bool& called) {
     return version_mock(called);
 }
 
-dogen::driver::program_options_parser setup_parser(
+dogen::knitter::program_options_parser setup_parser(
     std::vector<std::string> options,
     bool& help_called,
     bool& version_called) {
 
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "options: " << options;
-    dogen::driver::program_options_parser r(options);
+    dogen::knitter::program_options_parser r(options);
     r.help_function(help_mock_factory(help_called));
     r.version_function(version_mock_factory(version_called));
     return r;
@@ -172,7 +172,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     bool version(false);
     auto parser(setup_parser(options, help, version));
 
-    using dogen::driver::parser_validation_error;
+    using dogen::knitter::parser_validation_error;
     auto lambda([&](const parser_validation_error& e) -> bool {
             const std::string msg(e.what());
             logger lg(logger_factory(test_suite));
@@ -245,7 +245,7 @@ BOOST_AUTO_TEST_CASE(supplying_help_argument_with_no_help_function_results_in_no
     const std::vector<std::string> o = { help_arg };
     BOOST_LOG_SEV(lg, debug) << "options: " << o;
 
-    dogen::driver::program_options_parser parser(o);
+    dogen::knitter::program_options_parser parser(o);
     parser.version_function(version_mock_factory(version));
     const auto r(parser.parse());
 
@@ -264,7 +264,7 @@ BOOST_AUTO_TEST_CASE(supplying_version_argument_with_no_version_function_results
     const std::vector<std::string> o = { version_arg };
     BOOST_LOG_SEV(lg, debug) << "options: " << o;
 
-    dogen::driver::program_options_parser parser(o);
+    dogen::knitter::program_options_parser parser(o);
     parser.help_function(help_mock_factory(help));
     const auto r(parser.parse());
 

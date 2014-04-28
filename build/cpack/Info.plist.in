@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>dogen_driver</string>
+	<string>dogen_knitter</string>
 	<key>CFBundleIconFile</key>
 	<string>application_dogen.icns</string>
 	<key>CFBundleIdentifier</key>

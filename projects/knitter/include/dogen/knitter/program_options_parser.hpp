@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DRIVER_PROGRAM_OPTIONS_PARSER_HPP
-#define DOGEN_DRIVER_PROGRAM_OPTIONS_PARSER_HPP
+#ifndef DOGEN_KNITTER_PROGRAM_OPTIONS_PARSER_HPP
+#define DOGEN_KNITTER_PROGRAM_OPTIONS_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,7 @@
 #include "dogen/config/types/settings.hpp"
 
 namespace dogen {
-namespace driver {
+namespace knitter {
 
 /**
  * @brief Creates the code generator settings given command line
