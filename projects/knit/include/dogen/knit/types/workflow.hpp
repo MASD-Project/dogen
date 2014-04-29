@@ -41,29 +41,31 @@ namespace dogen {
 namespace knit {
 
 /**
- * @brief Core of Dogen. Implements the code generation workflow.
+ * @brief Main workflow of the Knit library. Responsible for
+ * transforming a high-level representation of a domain into code, in
+ * one or more programming languages.
  *
- * The model which one intends to generate is known as the @e target
- * model. The code generator starts by reading in the target model and
- * all of its dependencies, of which there are two types:
+ * The model which one intends to transform is known as the @e target
+ * model. The workflow starts by invoking the correct front-end to
+ * read in the target model and all of its dependencies. There are two
+ * types of dependencies:
  *
  * @li @e explicit: specified by the settings passed in; these are
  * models created by the user and any models that they, in turn,
  * depend on.
  *
- * @li @e implicit: these are added automatically. At present the only
- * implicit dependency is the primitives model, but its expected to be
- * extended further in the future.
+ * @li @e implicit: these are known as the @e system models. They are
+ * added automatically. Examples are primitives, boost, std, etc.
  *
- * Collectively, all these models are referred to as the @e input
- * models. The input models are merged it into a single, unified SML
- * model, called the merged model, and all dependencies are resolved
- * and validated.
+ * Collectively, all implicit and explicit models are referred to as
+ * the @e input models. The input models read the front-end are
+ * converted into the middle end representation - SML. They are then
+ * merged it into a single, unified SML model, called the @e merged
+ * model; all dependencies are resolved and validated.
  *
- * The code generator then instantiates all backends requested by the
+ * The workflow then instantiates all backends requested by the
  * settings passed in. They use the merged model to generate source
- * code into a string. This is then outputted to the desired output
- * destination.
+ * code, and then outputted it to the desired destination.
  */
 class workflow {
 public:

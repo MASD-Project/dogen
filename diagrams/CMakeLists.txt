@@ -145,6 +145,8 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet test_data
     --cpp-enable-facet odb
     --cpp-disable-eos-serialization
+    --cpp-disable-cmakelists
+    --ignore-files-matching-regex .*CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*sql

@@ -33,6 +33,13 @@
 namespace dogen {
 namespace knit {
 
+/**
+ * @brief Performs maintenance tasks on the files managed by knitter.
+ *
+ * The main responsibility of the housekeeper is to delete all the
+ * extra files found in the directories managed by knitter, ignoring
+ * those which match any of the regular expressions provided.
+ */
 class housekeeper {
 public:
     typedef std::function<void (std::list<boost::filesystem::path>)> delete_fn;

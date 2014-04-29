@@ -43,6 +43,8 @@ namespace {
 
 auto lg(logger_factory("knitter.program_options_parser"));
 
+const std::string more_information(
+    "Try `dogen_knitter --help' for more information.");
 const std::string at_least_one_argument(
     "Expected at least one argument for reference");
 const std::string at_most_two_arguments(
@@ -195,11 +197,12 @@ program_options_parser::output_options_factory() const {
     boost::program_options::options_description r("Output options");
     r.add_options()
         ("delete-extra-files,d", "Delete any additional files found in "
-            "directories managed by Dogen.")
+            "directories managed by Knitter.")
         ("ignore-files-matching-regex",
             value<std::vector<std::string> >(),
             "Ignore files matching regex, if they are on the deletion list")
-        ("force-write", "Always write to file even when there are no differences")
+        ("force-write", "Always write to file even when there are"
+            " no differences")
         ("output-to-file", "Create files. Disabled by default if "
             "output-to-stdout is chosen.")
         ("output-to-stdout", " Output generated code to standard output. "
@@ -333,7 +336,7 @@ void program_options_parser::throw_project_dir_with_split() const {
     std::ostringstream stream;
     stream << "Argument project-dir cannot be used in"
            << " conjunction with project splitting. "
-           << " Try `dogen --help' for more information.";
+           << more_information;
     BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
@@ -342,7 +345,7 @@ void program_options_parser::throw_include_source_without_split() const {
     std::ostringstream stream;
     stream << "Arguments source-dir and include-dir"
            << " require project splitting. "
-           << " Try `dogen --help' for more information.";
+           << more_information;
     BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
@@ -351,15 +354,14 @@ void program_options_parser::throw_missing_include_source() const {
     std::ostringstream stream;
     stream << "You must supply both source-dir and include-dir"
            << " or not supply either. "
-           << " Try `dogen --help' for more information.";
+           << more_information;
     BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
 void program_options_parser::throw_missing_target() const {
     std::ostringstream stream;
-    stream << "Mandatory parameter target is missing. "
-           << "Try `dogen --help' for more information.";
+    stream << "Mandatory parameter target is missing. " << more_information;
     BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }

@@ -38,8 +38,8 @@ namespace dogen {
 namespace knitter {
 
 /**
- * @brief Creates the code generator settings given command line
- * arguments.
+ * @brief Creates a configuration from a set of command line arguments
+ * supplied by the user.
  */
 class program_options_parser {
 public:
@@ -79,7 +79,7 @@ private:
     typedef boost::program_options::variables_map variables_map;
     boost::optional<variables_map> variables_map_factory() const;
 
-public:
+private:
     static config::archive_types parse_archive_type(const std::string& s);
     static config::cpp_facet_types parse_facet_types(const std::string& s);
 
@@ -89,7 +89,8 @@ private:
     config::cpp_settings transform_cpp_settings(const variables_map& vm) const;
     config::troubleshooting_settings
     transform_troubleshooting_settings(const variables_map& vm) const;
-    config::output_settings transform_output_settings(const variables_map& vm) const;
+    config::output_settings
+    transform_output_settings(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);

@@ -32,16 +32,16 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("dogen"));
-const std::string log_dir("log/dogen");
+auto lg(logger_factory("knitter"));
+const std::string log_dir("log/dogen_knitter");
 const std::string get_help("Use --help option to see usage instructions.");
-const std::string dogen_product("Dogen v" DOGEN_VERSION);
+const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
 
 /**
  * @brief Print the program's help text.
  */
 void help(const std::string& d) {
-    std::cout << "Dogen - the domain generator." << std::endl
+    std::cout << "Dogen Knitter." << std::endl
               << "Generates domain objects from a Dia diagram."
               << std::endl << std::endl << d << std::endl;
 }
@@ -50,7 +50,7 @@ void help(const std::string& d) {
  * @brief Print the program's version details.
  */
 void version() {
-    std::cout << dogen_product << std::endl
+    std::cout << knitter_product << std::endl
               << "Copyright (C) 2012 Kitanda." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
               << "<http://gnu.org/licenses/gpl.html>."
@@ -69,7 +69,8 @@ settings_factory(int argc, char* argv[]) {
 }
 
 /**
- * @brief Given Dogen's settings, creates a code generation workflow.
+ * @brief Given Knitters's settings, creates a code generation
+ * workflow.
  */
 dogen::knit::workflow workflow_factory(const dogen::config::settings& s) {
     if (!s.output().output_to_stdout())
@@ -96,18 +97,17 @@ int main(int argc, char* argv[]) {
         if (o) {
             const auto& s(*o);
             initialise_logging(s);
-            BOOST_LOG_SEV(lg, info) << dogen_product << " started.";
+            BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
             auto w(workflow_factory(s));
             w.execute();
-            BOOST_LOG_SEV(lg, info) << dogen_product << " finished.";
+            BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
         }
     } catch (const dogen::knitter::parser_validation_error& e) {
         BOOST_LOG_SEV(lg, error) << boost::diagnostic_information(e);
         std::cerr << e.what() << std::endl;
-        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors.";
+        BOOST_LOG_SEV(lg, warn) << knitter_product << " finished with errors.";
         return 1;
     } catch (const std::exception& e) {
-        // FIXME: why don't we just catch boost exception first?
         const auto be(dynamic_cast<const boost::exception* const>(&e));
         if (be) {
             BOOST_LOG_SEV(lg, fatal) << "Error: "
@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: " << e.what() << ". See the log file for details."
                   << std::endl;
 
-        BOOST_LOG_SEV(lg, warn) << dogen_product << " finished with errors.";
+        BOOST_LOG_SEV(lg, warn) << knitter_product << " finished with errors.";
     }
     return 0;
 }

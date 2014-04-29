@@ -28,11 +28,12 @@
 namespace dogen {
 
 /**
- * @brief Core of the code generator
+ * @brief Knit is a dogen library that transforms models into source code.
  *
- * Orchestrates all the other workflows to
- * produce a full code generation workflow across
- * all the supported backends.
+ * Knit orchestrates a number of dogen services into a code generation
+ * pipeline, that is able to take a model in any of the supported input
+ * formats and transform it to code in any of the supported programming
+ * languages.
  *
  */
 namespace knit {

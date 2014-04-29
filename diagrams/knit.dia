@@ -609,7 +609,7 @@
         <dia:point val="57.1875,75.625"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.134999999999998"/>
+        <dia:real val="20.135000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.5999999999999996"/>
@@ -863,7 +863,7 @@
         <dia:point val="59,92.8125"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="24.754999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9"/>
@@ -1843,7 +1843,7 @@
         <dia:point val="-6,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39.385000000000005"/>
+        <dia:real val="39.384999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="13.800000000000001"/>
@@ -4062,7 +4062,7 @@
         <dia:point val="25.5875,4.875"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.369999999999997"/>
+        <dia:real val="24.370000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -4547,10 +4547,10 @@
         <dia:point val="24.8988,-1.62531"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.765000000000004"/>
+        <dia:real val="19.764999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="1.7000000000000002"/>
+        <dia:real val="1.7"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4632,7 +4632,7 @@
         <dia:point val="-5.9125,11.183"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.385000000000002"/>
+        <dia:real val="24.384999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -4882,7 +4882,7 @@ into the filesystem.#</dia:string>
         <dia:point val="-15.0792,-0.00864066"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.1292,-0.0586407;3.5808,6.54136"/>
+        <dia:rectangle val="-15.1292,-0.0586407;12.0508,7.34136"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4891,10 +4891,10 @@ into the filesystem.#</dia:string>
         <dia:point val="-15.0792,-0.00864066"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.610000000000003"/>
+        <dia:real val="27.079999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.5"/>
+        <dia:real val="7.3000000000000007"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4908,11 +4908,12 @@ into the filesystem.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Core of the code generator
+            <dia:string>#Knit is a dogen library that transforms models into source code.
 
-Orchestrates all the other workflows to 
-produce a full code generation workflow across
-all the supported backends.
+Knit orchestrates a number of dogen services into a code generation
+pipeline, that is able to take a model in any of the supported input
+formats and transform it to code in any of the supported programming
+languages.  
 
 #DOGEN dia.comment=true#</dia:string>
           </dia:attribute>

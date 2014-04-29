@@ -101,12 +101,14 @@ them concurrently. Somewhere they must be trampling on each others
 feet.
 
 *** IMPLEMENTATION Rename =driver= to =knitter=                       :story:
+    CLOCK: [2014-04-29 Tue 18:08]--[2014-04-29 Tue 18:32] =>  0:24
+    CLOCK: [2014-04-29 Tue 08:09]--[2014-04-29 Tue 08:48] =>  0:39
     CLOCK: [2014-04-28 Mon 18:38]--[2014-04-28 Mon 19:00] =>  0:22
 
 As part of the naming epic "Naming of libraries and binaries", rename
 driver. We should also get rid of the =dogen= shell script. Finally we
 need to add some blurb to the manual to mention the whole "weaving"
-theme.
+theme and update the command line documentation.
 
 *** IMPLEMENTATION Rename =engine= to =knit=                          :story:
     CLOCK: [2014-04-28 Mon 23:12]--[2014-04-28 Mon 23:38] =>  0:26
@@ -120,6 +122,23 @@ engine.
 The previous attempts to clean up the build environment were too
 elaborate given the available time. We need to go back to basics with
 a trivial script that works for Linux 32-bit and 64-bit with gcc.
+
+*** Consider catching boost exception instead of casting              :story:
+
+In =knitter= we are catching =std::exception= and then casting it to
+=boost::exception=. Seems cleaner to have an additional catch specific
+to =boost::exception=.
+
+*** Consider renaming =config= in light of weaving changes            :story:
+
+It's not clear if the =config= domain is the configuration of =knit=
+only or whether its slightly more generic.
+
+*** Consider renaming =provider_interface=                            :story:
+
+This name is very generic. We need something that reflects the dia to
+sml sub-workflow. In addition we are not even using it for IoC, so
+consider either using IoC or removing the interface.
 
 *** Create a trivial Linux clang script                               :story:
 

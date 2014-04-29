@@ -33,6 +33,9 @@
 namespace dogen {
 namespace knit {
 
+/**
+ * @brief Persists a dia or sml model into file.
+ */
 class persister {
 public:
     persister() = delete;
