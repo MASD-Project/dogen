@@ -28,12 +28,13 @@ it will write itself.
 ** About This Document
 
 This document is the official manual for Dogen. Dogen - the domain
-generator - is a code generation tool designed specifically to target
-domain models. Dogen was created to make the modeling process simpler:
-the user creates a domain model using a UML tool and Dogen uses it to
-generate its source code representation. The generated code contains
-most of the services required from a typical C++ domain object such as
-serialisation, hashing, streaming and so on.
+generator - is a suite of code generation tools designed specifically
+to target domain models. Dogen was created to make the modeling
+process simpler: the user creates a domain model using a UML tool and
+the tools provided by Dogen use it to generate its source code
+representation. The generated code contains most of the services
+required from a typical C++ domain object such as serialisation,
+hashing, streaming and so on.
 
 If you are reading a printed copy of this manual, you can always
 access the latest version online:
@@ -60,7 +61,8 @@ the latest sprint):
 
 - https://github.com/kitanda/dogen/tree/master/doc/agile
 
-The road map is available here (requires [[https://github.com/GNOME/planner][planner]]):
+The road map is available here (requires [[https://github.com/GNOME/planner][planner]] and is updated
+sporadically):
 
 - https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/agile/road_map.planner
 
@@ -101,25 +103,55 @@ humans. For everything else, we aim to add support in Dogen.
 
 *** On Models and Modeling
 
-Before we proceed, we should be a bit clearer on what we mean by a
-model. Programming is the art of refining abstractions. In general,
-the programmer's job is to create a set of constructs that represent
+Before proceeding, it is important to clarify what is meant by a
+model. After all, programming is the art of refining abstractions. It
+is the programmer's job to create a set of constructs that represent
 concepts found in the /problem domain/; and to get those concepts to
 cooperate successfully in producing work that is defined as useful by
-something or someone. Together, these concepts form /a model/ because
-they are a representation inside of the computer of a subset of the
-problem domain.
+something or someone - that is, to solve a /problem/ in a problem
+domain. Together, this collection of concepts /model/ the problem
+domain because they are a representation of a subset of the problem
+domain inside of the computer. One may even further qualify it as a
+"special" kind of model - a /domain model/. /Domain modeling/ is then
+the activity of identifying a set of /domain types/ that describe the
+domain in question via their properties, relationships and behaviours.
 
-We frequently abbreviate problem domain to just /domain/. /Domain
-modeling/ is then the activity of finding a set of /domain types/ that
-describe the domain in question via their properties and their
-relationships.
+Whilst all of this may seem pretty obvious, it is a terrain rife for
+misconceptions. First, in a strict sense, all models are "domain
+models" because they exist as a model of a domain somewhere. However,
+in practice, one tends to make an important distinction between the
+domain we're interested in at a given point in time, and all other
+"helper models" that are there to just give us a hand. It is in this
+context that we say that "domain models" are "special". Second, it is
+important to notice that /the/ domain model is a conceptual entity. It
+manifests itself in a myriad of representations - UML diagrams, source
+code, database schemas and so on - but none of these representations
+/is/ the domain model. For instance, if you were to "write down the
+domain model" (via specifications or otherwise), you would do nothing
+but create yet another such representation, this time expressed in the
+medium of natural language. The logical consequence is twofold: there
+is no such thing as a "complete" representation of the domain model -
+it is only "complete" insofar as the purposes for which it has been
+created are satisfied; and any representation is highly sensitive to
+the properties of the medium it is expressed in.
 
-Many programmers don't dwell too much on the fact that they are
-modeling - its just an implicit activity done as part of
-coding. However, as we shall see, the modern way of looking at
-programming puts a strong emphasis in understanding and introspecting
-about this activity.
+To ram the point home: there is no such thing as the /better/ or
+/best/ representation of a domain model; it only makes sense to make
+comparative statements of this kind when there is an objective task
+against which two or more representations can be evaluated. Any
+non-trivial software system will require several representations -
+each specialising on a particular area - and transformations between
+representations are required.
+
+We should now be able to drop the "domain" prefix and refer to just
+"models" or "modeling" and presume that all of the above is implied.
+
+You may think that we're sliding down the conceptual slippery-slope
+for no good reason. As we shall see, these fundamental ideas are
+important in shaping how you use Dogen. For now you can start to think
+of it as the tooling infrastructure that tries to automate as much as
+possible the transformation of one representation of a model into
+another.
 
 *** On Code Generation and Meta-Models
 
@@ -163,7 +195,7 @@ a model, described in one such representation (the meta-model) into
 another representation (the source code), following the rules laid out
 by the grammar of a programming language. The richer the meta-model,
 the more expressive the generated code can be - and vice-versa. It is
-in this light that certain classes of code generators are called
+in this sense that certain classes of code generators are called
 special purpose, because they have meta-models that are very focused,
 designed only for the task at hand. Don't think of this as a
 disadvantage though: there is a price to pay in complexity for every

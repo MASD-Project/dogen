@@ -13,20 +13,21 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-28 Mon 23:38]
+Clock summary at [2014-04-29 Tue 23:02]
 
-| Headline                                             | Time   |      |      |
-|------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *7:03* |      |      |
-|------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 7:03 |      |
-| IMPLEMENTATION Release notes and backlog grooming    |        |      | 0:18 |
-| COMPLETED Log start and finish of dogen with version |        |      | 0:20 |
-| COMPLETED Install packages into =/usr=               |        |      | 2:23 |
-| COMPLETED Fix issues with database tests             |        |      | 2:54 |
-| IMPLEMENTATION Rename =driver= to =knitter=          |        |      | 0:22 |
-| IMPLEMENTATION Rename =engine= to =knit=             |        |      | 0:26 |
-| IMPLEMENTATION Create a trivial Linux gcc script     |        |      | 0:20 |
+| Headline                                              | Time   |      |      |
+|-------------------------------------------------------+--------+------+------|
+| *Total time*                                          | *9:35* |      |      |
+|-------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                       |        | 9:35 |      |
+| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:18 |
+| IMPLEMENTATION Updates to the manual and readme files |        |      | 1:29 |
+| COMPLETED Log start and finish of dogen with version  |        |      | 0:20 |
+| COMPLETED Install packages into =/usr=                |        |      | 2:23 |
+| COMPLETED Fix issues with database tests              |        |      | 2:54 |
+| COMPLETED Rename =driver= to =knitter=                |        |      | 1:25 |
+| COMPLETED Rename =engine= to =knit=                   |        |      | 0:26 |
+| IMPLEMENTATION Create a trivial Linux gcc script      |        |      | 0:20 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -36,7 +37,9 @@ Clock summary at [2014-04-28 Mon 23:38]
 
 Updates to release notes and backlog.
 
-*** Updates to the manual and readme files                             :task:
+*** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-04-29 Tue 21:45]--[2014-04-29 Tue 23:02] =>  1:17
+    CLOCK: [2014-04-29 Tue 18:32]--[2014-04-29 Tue 18:44] =>  0:12
 
 Use build downtime to update the manual and / or readme file.
 
@@ -100,7 +103,8 @@ We seem to have traffic-lighters in the database tests when executing
 them concurrently. Somewhere they must be trampling on each others
 feet.
 
-*** IMPLEMENTATION Rename =driver= to =knitter=                       :story:
+*** COMPLETED Rename =driver= to =knitter=                            :story:
+    CLOSED: [2014-04-29 Tue 18:39]
     CLOCK: [2014-04-29 Tue 18:08]--[2014-04-29 Tue 18:32] =>  0:24
     CLOCK: [2014-04-29 Tue 08:09]--[2014-04-29 Tue 08:48] =>  0:39
     CLOCK: [2014-04-28 Mon 18:38]--[2014-04-28 Mon 19:00] =>  0:22
@@ -110,7 +114,8 @@ driver. We should also get rid of the =dogen= shell script. Finally we
 need to add some blurb to the manual to mention the whole "weaving"
 theme and update the command line documentation.
 
-*** IMPLEMENTATION Rename =engine= to =knit=                          :story:
+*** COMPLETED Rename =engine= to =knit=                               :story:
+    CLOSED: [2014-04-29 Tue 18:39]
     CLOCK: [2014-04-28 Mon 23:12]--[2014-04-28 Mon 23:38] =>  0:26
 
 As part of the naming epic "Naming of libraries and binaries", rename
