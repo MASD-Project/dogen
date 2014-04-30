@@ -74,25 +74,25 @@ its internal architecture and the development model.
 ** Fundamental Building Blocks
 
 Dogen is largely the result of exploring a simple question: which
-portion of the objects required to model a problem domain are
-generatable by a program, such that the generated code is as good as
-- or even better - than code crafted by humans?
+portion of the objects required to model a problem domain is
+generatable by a program, such that the generated code is as good as,
+or better than, code crafted by humans?
 
 The question stems from many years of looking at object models and
 their limitations. For instance, one of the main problems one often
 finds in production C++ code is a lack of a large number of useful
 "facilities" that all objects on all domain models should have; for
-instance, a simple way of dumping current state to a stream, like
-/toString/ in Java. Developers tend to add facilities like these on a
-haphazard sort of way, because it is laborious and not particularly
-exciting functionality to work on; by the time the domain model has
-matured, its too late to find time for these sort of fundamental
-activities.
+instance, a simple way of dumping current state to a stream, in a
+format that can be understood by external tools. Developers tend to
+add facilities like these on a haphazard sort of manner, because it is
+laborious and not particularly exciting functionality to work on. By
+the time the domain model has matured, it is often too late to find
+time for it.
 
-We further observed that a large portion of the objects required to
-model a problem domain have fairly straightforward behaviours; in many
-cases they are but glorified structs with a few trivial behaviours
-bolted on such as serialisation and hashing. A lot of programmer time
+A further observation is that a large part of the objects required to
+model a problem domain have fairly straightforward behaviour; in many
+cases they are but glorified structs with a few trivial abilities
+bolted on, such as serialisation and hashing. A lot of programmer time
 is taken on generating getters, setters, serialisation code and so
 on. This is also code that is easy to get sloppy with, because its so
 repetitive.
@@ -106,11 +106,11 @@ humans. For everything else, we aim to add support in Dogen.
 Before proceeding, it is important to clarify what is meant by a
 model. After all, programming is the art of refining abstractions. It
 is the programmer's job to create a set of constructs that represent
-concepts found in the /problem domain/; and to get those concepts to
+concepts found in the problem domain; and to get those concepts to
 cooperate successfully in producing work that is defined as useful by
-something or someone - that is, to solve a /problem/ in a problem
-domain. Together, this collection of concepts /model/ the problem
-domain because they are a representation of a subset of the problem
+something or someone - that is, to solve a /problem/ in the problem
+domain. Together, this collection of concepts /models/ the problem
+domain because it is a representation of a subset of the problem
 domain inside of the computer. One may even further qualify it as a
 "special" kind of model - a /domain model/. /Domain modeling/ is then
 the activity of identifying a set of /domain types/ that describe the
@@ -139,8 +139,8 @@ To ram the point home: there is no such thing as the /better/ or
 /best/ representation of a domain model; it only makes sense to make
 comparative statements of this kind when there is an objective task
 against which two or more representations can be evaluated. Any
-non-trivial software system will require several representations -
-each specialising on a particular area - and transformations between
+non-trivial software system requires several representations, each
+specialising on a particular area, and transformations between
 representations are required.
 
 We should now be able to drop the "domain" prefix and refer to just
