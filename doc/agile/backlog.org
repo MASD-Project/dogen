@@ -22,7 +22,7 @@ update =cunene=. Ideally what we want is to have a top-level file -
 most ideally =dogen.ede= with some lisp code that would setup the
 dogen paths for flymake. Users would only need to load this up to use it.
 
-*** Add support to upload packages into GDrive                        :story:
+*** Add support for automatic upload packages into GDrive             :story:
 
 We need to upload the packages created by the build to a public Google
 Drive (GDrive) location.
@@ -112,7 +112,7 @@ tests. In addition, DST's such as thrift provide a wealth of wire
 formats, so if there is no easy-access low-level wire format library,
 it would be very difficult to get this right.
 
-*** The types facet should always be on                               :story:
+*** The =types= facet should always be on                             :story:
 
 At present users are given the option to enable or disable the
 =domain= facet; this is not very wise because all facets depend on
@@ -139,20 +139,6 @@ set of diagrams supplied in the dogen package. However, to ensure
 these samples are actually working we need to test them as part of
 sanity. This means we need the same diagrams packaged twice.
 
-*** Sprint number is not being added to the version                   :story:
-
-The dogen version at present is:
-
-: $ ./dogen_knitter --version
-: dogen v0.0.2233
-: Copyright (C) 2012 Kitanda.
-: License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
-
-It should be v.0.46.2233 to reflect the tags.
-
-Also, we should probably consider removing the leading 0, as we do not
-have a good policy to manage it.
-
 *** Enable support for manual code at the facet level                 :story:
 
 It would be great if we could use the meta-data to enable and disable
@@ -176,29 +162,6 @@ from the project diagram.
 
 The correct solution for this may be to have some tags that state that
 an object only has representations in certain facets.
-
-*** Remove =--info= option from command line                          :story:
-
-In the help text we make reference to an =--info= option:
-
-: General options:
-:  -h [ --help ]         Display this help and exit.
-:  --version             Output version information and exit.
-:  --info                Lists available backends.
-: ...
-
-However, running it does not work:
-
-: $ ./dogen_knitter --info
-: [2014-03-11 18:22:21.362328] [0x0b6ffc70] [info]    Mandatory parameter target is missing. Try `dogen --help' for more information.
-: [2014-03-11 18:22:21.365440] [0x0b6ffc70] [info]    /home/marco/Development/DomainDrivenConsulting/dogen/projects/knitter/src/program_options_parser.cpp(364): Throw in function void dogen::knitter::program_options_parser::throw_missing_target() const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen6knitter23parser_validation_errorEEE
-: std::exception::what: Mandatory parameter target is missing. Try `dogen --help' for more information.
-:
-: Mandatory parameter target is missing. Try `dogen --help' for more information.
-
-This option is not particularly useful for now anyway as we will only
-support C++ for the foreseeable future.
 
 *** Move test model diagrams into main diagrams directory             :story:
 

@@ -13,24 +13,27 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-29 Tue 23:02]
+Clock summary at [2014-04-30 Wed 22:01]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *9:35* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 9:35 |      |
-| IMPLEMENTATION Release notes and backlog grooming     |        |      | 0:18 |
-| IMPLEMENTATION Updates to the manual and readme files |        |      | 1:29 |
-| COMPLETED Log start and finish of dogen with version  |        |      | 0:20 |
-| COMPLETED Install packages into =/usr=                |        |      | 2:23 |
-| COMPLETED Fix issues with database tests              |        |      | 2:54 |
-| COMPLETED Rename =driver= to =knitter=                |        |      | 1:25 |
-| COMPLETED Rename =engine= to =knit=                   |        |      | 0:26 |
-| IMPLEMENTATION Create a trivial Linux gcc script      |        |      | 0:20 |
+| Headline                                                  | Time    |       |      |
+|-----------------------------------------------------------+---------+-------+------|
+| *Total time*                                              | *10:25* |       |      |
+|-----------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                           |         | 10:25 |      |
+| IMPLEMENTATION Release notes and backlog grooming         |         |       | 0:20 |
+| IMPLEMENTATION Updates to the manual and readme files     |         |       | 2:07 |
+| COMPLETED Log start and finish of dogen with version      |         |       | 0:20 |
+| COMPLETED Install packages into =/usr=                    |         |       | 2:23 |
+| COMPLETED Fix issues with database tests                  |         |       | 2:54 |
+| COMPLETED Rename =driver= to =knitter=                    |         |       | 1:25 |
+| COMPLETED Rename =engine= to =knit=                       |         |       | 0:26 |
+| COMPLETED Sprint number is not being added to the version |         |       | 0:06 |
+| COMPLETED Remove =--info= option from command line        |         |       | 0:04 |
+| IMPLEMENTATION Create a trivial Linux gcc script          |         |       | 0:20 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-04-30 Wed 08:30]--[2014-04-30 Wed 08:32] =>  0:02
     CLOCK: [2014-04-28 Mon 18:31]--[2014-04-28 Mon 18:37] =>  0:06
     CLOCK: [2014-04-28 Mon 08:28]--[2014-04-28 Mon 08:30] =>  0:02
     CLOCK: [2014-04-19 Sat 23:25]--[2014-04-19 Sat 23:35] =>  0:10
@@ -38,6 +41,7 @@ Clock summary at [2014-04-29 Tue 23:02]
 Updates to release notes and backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-04-30 Wed 07:52]--[2014-04-30 Wed 08:30] =>  0:38
     CLOCK: [2014-04-29 Tue 21:45]--[2014-04-29 Tue 23:02] =>  1:17
     CLOCK: [2014-04-29 Tue 18:32]--[2014-04-29 Tue 18:44] =>  0:12
 
@@ -121,6 +125,71 @@ theme and update the command line documentation.
 As part of the naming epic "Naming of libraries and binaries", rename
 engine.
 
+*** COMPLETED Sprint number is not being added to the version         :story:
+    CLOSED: [2014-04-30 Wed 08:38]
+    CLOCK: [2014-04-30 Wed 08:32]--[2014-04-30 Wed 08:38] =>  0:06
+
+The dogen version at present is:
+
+: $ ./dogen_knitter --version
+: dogen v0.0.2233
+: Copyright (C) 2012 Kitanda.
+: License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+
+It should be v.0.SPRINT_NUMBER.2233 to reflect the tags, where
+SPRINT_NUMBER is the current sprint.
+
+Also, we should probably consider removing the leading 0, as we do not
+have a good policy to manage it.
+
+*** COMPLETED Remove =--info= option from command line                :story:
+    CLOSED: [2014-04-30 Wed 08:42]
+    CLOCK: [2014-04-30 Wed 08:38]--[2014-04-30 Wed 08:42] =>  0:04
+
+In the help text we make reference to an =--info= option:
+
+: General options:
+:  -h [ --help ]         Display this help and exit.
+:  --version             Output version information and exit.
+:  --info                Lists available backends.
+: ...
+
+However, running it does not work:
+
+: $ ./dogen_knitter --info
+: [2014-03-11 18:22:21.362328] [0x0b6ffc70] [info]    Mandatory parameter target is missing. Try `dogen --help' for more information.
+: [2014-03-11 18:22:21.365440] [0x0b6ffc70] [info]    /home/marco/Development/DomainDrivenConsulting/dogen/projects/knitter/src/program_options_parser.cpp(364): Throw in function void dogen::knitter::program_options_parser::throw_missing_target() const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen6knitter23parser_validation_errorEEE
+: std::exception::what: Mandatory parameter target is missing. Try `dogen --help' for more information.
+:
+: Mandatory parameter target is missing. Try `dogen --help' for more information.
+
+This option is not particularly useful for now anyway as we will only
+support C++ for the foreseeable future.
+
+*** COMPLETED Consider catching boost exception instead of casting    :story:
+    CLOSED: [2014-04-30 Wed 22:01]
+
+In =knitter= we are catching =std::exception= and then casting it to
+=boost::exception=. Seems cleaner to have an additional catch specific
+to =boost::exception=.
+
+*** IMPLEMENTATION Knitter: Only log if logger has been initialised   :story:
+    CLOCK: [2014-04-30 Wed 18:26]
+
+At the moment we are logging when there exceptions before the logger
+has been initialised. This results in a lot of stuff spewed into the
+console:
+
+: [2014-04-30 18:32:37.731027] [0x0b707a70] [info]    unrecognised option '--info'
+: [2014-04-30 18:32:37.731746] [0x0b707a70] [info]    /home/marco/Development/DomainDrivenConsulting/dogen/projects/knitter/src/program_options_parser.cpp(309): Throw in function boost::optional<boost::program_options::variables_map> dogen::knitter::program_options_parser::variables_map_factory() const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen7knitter23parser_validation_errorEEE
+: std::exception::what: unrecognised option '--info'
+: unrecognised option '--info'
+: [2014-04-30 18:32:37.731857] [0x0b707a70] [info]    Dogen Knitter v0.48.2303 finished with errors.
+
+We should check to see if logging was initialised before logging.
+
 *** IMPLEMENTATION Create a trivial Linux gcc script                  :story:
     CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20
 
@@ -128,11 +197,11 @@ The previous attempts to clean up the build environment were too
 elaborate given the available time. We need to go back to basics with
 a trivial script that works for Linux 32-bit and 64-bit with gcc.
 
-*** Consider catching boost exception instead of casting              :story:
+*** Manual: fix Fundamental Building Blocks section                   :story:
 
-In =knitter= we are catching =std::exception= and then casting it to
-=boost::exception=. Seems cleaner to have an additional catch specific
-to =boost::exception=.
+We allowed this section to evolve as a collage of different ideas, but
+now it is no longer making sense as a whole. We need to go back to the
+drawing board and create a structure for it.
 
 *** Consider renaming =config= in light of weaving changes            :story:
 
