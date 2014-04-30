@@ -33,9 +33,14 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("knitter"));
-const std::string log_dir("log/dogen_knitter");
+const std::string log_file("log/dogen_knitter");
 const std::string get_help("Use --help option to see usage instructions.");
 const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
+const std::string usage_error_msg("Usage error: ");
+const std::string fatal_error_msg("Fatal Error: " );
+const std::string log_file_msg("See the log file for details: ");
+const std::string errors_msg(" finished with errors.");
+
 
 /**
  * @brief Print the program's help text.
@@ -86,38 +91,46 @@ dogen::knit::workflow workflow_factory(const dogen::config::settings& s) {
 void initialise_logging(const dogen::config::settings& s) {
     life_cycle_manager lcm;
     const bool v(s.troubleshooting().verbose());
-    lcm.initialise(log_dir, v ? severity_level::debug : severity_level::info);
+    lcm.initialise(log_file, v ? severity_level::debug : severity_level::info);
 }
 
 }
 
 int main(int argc, char* argv[]) {
+    bool can_log(false);
     try {
         const auto o(settings_factory(argc, argv));
         if (o) {
             const auto& s(*o);
             initialise_logging(s);
+            can_log = true;
             BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
             auto w(workflow_factory(s));
             w.execute();
             BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
         }
     } catch (const dogen::knitter::parser_validation_error& e) {
-        BOOST_LOG_SEV(lg, error) << boost::diagnostic_information(e);
-        std::cerr << e.what() << std::endl;
-        BOOST_LOG_SEV(lg, warn) << knitter_product << " finished with errors.";
+        std::cerr << usage_error_msg << e.what() << std::endl;
         return 1;
-    } catch (const std::exception& e) {
-        const auto be(dynamic_cast<const boost::exception* const>(&e));
-        if (be) {
-            BOOST_LOG_SEV(lg, fatal) << "Error: "
-                                     << boost::diagnostic_information(*be);
-        }
-
-        std::cerr << "Error: " << e.what() << ". See the log file for details."
+    } catch (const boost::exception& e) {
+        std::cerr << fatal_error_msg << boost::diagnostic_information(e)
                   << std::endl;
 
-        BOOST_LOG_SEV(lg, warn) << knitter_product << " finished with errors.";
+        if (can_log) {
+            std::cerr << log_file_msg << log_file << ".log" << std::endl;
+            BOOST_LOG_SEV(lg, error) << fatal_error_msg
+                                     << boost::diagnostic_information(e);
+            BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
+        }
+        return 1;
+    } catch (const std::exception& e) {
+        std::cerr << fatal_error_msg << e.what() << std::endl;
+
+        if (can_log) {
+            std::cerr << log_file_msg << log_file << ".log" << std::endl;
+            BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
+        }
+        return 1;
     }
     return 0;
 }

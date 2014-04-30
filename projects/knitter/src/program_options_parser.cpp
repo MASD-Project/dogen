@@ -137,8 +137,7 @@ program_options_parser::general_options_factory() const {
     boost::program_options::options_description r("General options");
     r.add_options()
         ("help,h", "Display this help and exit.")
-        ("version", "Output version information and exit.")
-        ("info", "Lists available backends.");
+        ("version", "Output version information and exit.");
     return r;
 }
 
