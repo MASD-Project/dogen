@@ -30,18 +30,19 @@
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
-#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 
-using namespace dogen::utility::log;
+// Note on logging: we are NOT logging any of the exceptions to the
+// log in this file. This is by design. The logger is only initialised
+// after the options have been parsed; were we to log prior to this,
+// we would dump all the messages into the console. The output is very
+// confusing users that are accustomed to normal console applications.
 
 namespace {
-
-auto lg(logger_factory("knitter.program_options_parser"));
 
 const std::string more_information(
     "Try `dogen_knitter --help' for more information.");
@@ -305,7 +306,6 @@ program_options_parser::variables_map_factory() const {
         store(parser.options(options).run(), r);
         notify(r);
     } catch (const boost::program_options::error& e) {
-        BOOST_LOG_SEV(lg, dogen::utility::log::error) << e.what();
         BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
     }
 
@@ -336,7 +336,6 @@ void program_options_parser::throw_project_dir_with_split() const {
     stream << "Argument project-dir cannot be used in"
            << " conjunction with project splitting. "
            << more_information;
-    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
@@ -345,7 +344,6 @@ void program_options_parser::throw_include_source_without_split() const {
     stream << "Arguments source-dir and include-dir"
            << " require project splitting. "
            << more_information;
-    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
@@ -354,14 +352,12 @@ void program_options_parser::throw_missing_include_source() const {
     stream << "You must supply both source-dir and include-dir"
            << " or not supply either. "
            << more_information;
-    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
 void program_options_parser::throw_missing_target() const {
     std::ostringstream stream;
     stream << "Mandatory parameter target is missing. " << more_information;
-    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
@@ -380,7 +376,6 @@ program_options_parser::parse_archive_type(const std::string& s) {
         return archive_types::binary;
 
     using utility::exception::invalid_enum_value;
-    BOOST_LOG_SEV(lg, error) << invalid_archive_type;
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
 }
 
@@ -395,7 +390,6 @@ program_options_parser::parse_facet_types(const std::string& s) {
     if (s == odb_facet_type) return cpp_facet_types::odb;
 
     using utility::exception::invalid_enum_value;
-    BOOST_LOG_SEV(lg, error) << invalid_facet_type << s;
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_type + s));
 }
 
@@ -469,19 +463,15 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
                     &program_options_parser::parse_facet_types),
                 std::inserter(set, set.end()));
         } catch (const utility::exception::invalid_enum_value& e) {
-            BOOST_LOG_SEV(lg, error) << e.what();
             BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
         }
 
         if (r.use_integrated_io()) {
             const auto f(r.enabled_facets());
             const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
-            if (has_io_facet) {
-                BOOST_LOG_SEV(lg, error)
-                    << integrated_io_incompatible_with_io_facet;
+            if (has_io_facet)
                 BOOST_THROW_EXCEPTION(parser_validation_error(
                         integrated_io_incompatible_with_io_facet));
-            }
         }
     } else {
         set.insert(cpp_facet_types::types);
@@ -520,16 +510,14 @@ program_options_parser::transform_modeling_settings(
             strings_type tokens;
             boost::split(tokens, i, boost::is_any_of(","));
 
-            if (tokens.empty()) {
-                BOOST_LOG_SEV(lg, error) << at_least_one_argument;
+            if (tokens.empty())
                 BOOST_THROW_EXCEPTION(parser_validation_error(
                         at_least_one_argument));
-            }
-            if (tokens.size() > 2) {
-                BOOST_LOG_SEV(lg, error) << at_most_two_arguments;
+
+            if (tokens.size() > 2)
                 BOOST_THROW_EXCEPTION(parser_validation_error(
                         at_most_two_arguments));
-            }
+
             dogen::config::reference ref;
             ref.path(tokens[0]);
             if (tokens.size() > 1)
@@ -560,7 +548,6 @@ transform_troubleshooting_settings(const variables_map& vm) const {
                 try {
                     return parse_archive_type(vm[arg].as<std::string>());
                 } catch (const invalid_enum_value& e) {
-                    BOOST_LOG_SEV(lg, error) << e.what();
                     BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
                 }
             }
