@@ -52,7 +52,8 @@ public:
      * @param file_name path to the XML file the reader will open.
      * @param skip_whitespace if true, reads will skip whitespace
      */
-    text_reader(boost::filesystem::path file_name, bool skip_whitespace = false);
+    text_reader(const boost::filesystem::path& file_name,
+        const bool skip_whitespace = false);
 
     ~text_reader();
 
@@ -106,28 +107,28 @@ public:
      * @brief Returns true if the current element has an attribute
      * with the specified name, false otherwise.
      */
-    bool has_attribute(std::string name) const;
+    bool has_attribute(const std::string& name) const;
 
     /**
      * @brief Returns the value of the specified attribute as a string
      */
-    std::string get_attribute_as_string(std::string name) const;
+    std::string get_attribute_as_string(const std::string& name) const;
 
     /**
      * @brief Returns the value of the specified attribute as boolean
      */
-    bool get_attribute_as_boolean(std::string name) const;
+    bool get_attribute_as_boolean(const std::string& name) const;
 
     /**
      * @brief Returns the value of the specified attribute as int
      */
-    int get_attribute_as_int(std::string name) const;
+    int get_attribute_as_int(const std::string& name) const;
 
     /**
      * @brief Template-based implementation of get_attribute method.
      */
     template<typename Type>
-    Type get_attribute(std::string) const {
+    Type get_attribute(const std::string&) const {
         using dogen::utility::xml::exception;
         BOOST_THROW_EXCEPTION(exception("Value not specialised for this type"));
     }
@@ -212,19 +213,20 @@ template<> inline bool text_reader::value<bool>() const {
 }
 
 template<> inline std::string
-text_reader::get_attribute<std::string>(std::string name) const {
+text_reader::get_attribute<std::string>(const std::string& name) const {
     return get_attribute_as_string(name);
 }
 
 template<> inline bool
-text_reader::get_attribute<bool>(std::string name) const {
+text_reader::get_attribute<bool>(const std::string& name) const {
     return get_attribute_as_boolean(name);
 }
 
 template<> inline int
-text_reader::get_attribute<int>(std::string name) const {
+text_reader::get_attribute<int>(const std::string& name) const {
     return get_attribute_as_int(name);
 }
 
 } } }
+
 #endif

@@ -13,13 +13,13 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-01 Thu 08:22]
+Clock summary at [2014-05-01 Thu 22:58]
 
 | Headline                                                   | Time    |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| *Total time*                                               | *11:27* |       |      |
+| *Total time*                                               | *12:39* |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                            |         | 11:27 |      |
+| Development Stories Implemented                            |         | 12:39 |      |
 | IMPLEMENTATION Release notes and backlog grooming          |         |       | 0:20 |
 | IMPLEMENTATION Updates to the manual and readme files      |         |       | 2:07 |
 | COMPLETED Log start and finish of dogen with version       |         |       | 0:20 |
@@ -30,6 +30,7 @@ Clock summary at [2014-05-01 Thu 08:22]
 | COMPLETED Sprint number is not being added to the version  |         |       | 0:06 |
 | COMPLETED Remove =--info= option from command line         |         |       | 0:04 |
 | COMPLETED Knitter: Only log if logger has been initialised |         |       | 1:02 |
+| COMPLETED XML reader does not log exceptions to file       |         |       | 1:12 |
 | IMPLEMENTATION Create a trivial Linux gcc script           |         |       | 0:20 |
 #+end:
 
@@ -198,7 +199,10 @@ console:
 
 We should check to see if logging was initialised before logging.
 
-*** XML reader does not log exceptions to file                        :story:
+*** COMPLETED XML reader does not log exceptions to file              :story:
+    CLOSED: [2014-05-01 Thu 22:58]
+    CLOCK: [2014-05-01 Thu 22:05]--[2014-05-01 Thu 22:58] =>  0:53
+    CLOCK: [2014-05-01 Thu 08:23]--[2014-05-01 Thu 08:42] =>  0:19
 
 We are throwing exceptions but not logging them to file.
 

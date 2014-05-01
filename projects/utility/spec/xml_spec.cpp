@@ -75,12 +75,16 @@ const std::string label_text_info_nl("\ntext info goes here\n");
 const std::string message_error_convert_int("Error converting int value");
 const std::string message_error_convert_long("Error converting long value");
 const std::string message_error_convert_double("Error converting double value");
-const std::string message_error_convert_boolean("Error converting boolean value");
+const std::string message_error_convert_boolean(
+    "Error converting boolean value");
 const std::string message_error_read_node("Error reading node");
-const std::string message_error_get_attribute("Error getting attribute: non-existent-attribute");
-const std::string message_error_unsupported_type("Value not specialised for this type");
+const std::string message_error_get_attribute(
+    "Error getting attribute: 'non-existent-attribute'");
+const std::string message_error_unsupported_type(
+    "Value not specialised for this type");
 const std::string message_error_file_not_found("File does not exist: ");
-const std::string message_error_file_not_regular("File is not a regular file: ");
+const std::string message_error_file_not_regular(
+    "File is not a regular file: ");
 
 /**
  * @brief Performs n-consecutive reads. Each read must return true.
@@ -329,8 +333,7 @@ BOOST_AUTO_TEST_CASE(text_reader_identifies_nodes_with_values_correctly) {
             BOOST_LOG_SEV(lg, debug) << reader;
             BOOST_CHECK(!(expects_value != reader.has_value()));
             BOOST_CHECK(!(expects_value != !reader.value_as_string().empty()));
-        }
-        );
+        });
 
     check_value(false);
     check_value(true);
@@ -355,16 +358,14 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_boolean_values_correctly) {
     BOOST_CHECK_EXCEPTION(
         reader.value_as_boolean(),
         exception,
-        std::bind(check_xml_exception, _1, message_error_convert_boolean)
-        );
+        std::bind(check_xml_exception, _1, message_error_convert_boolean));
 
     read_n_times(reader, 4);
     BOOST_LOG_SEV(lg, debug) << reader;
     BOOST_CHECK_EXCEPTION(
         reader.value_as_boolean(),
         exception,
-        std::bind(check_xml_exception, _1, message_error_convert_boolean)
-        );
+        std::bind(check_xml_exception, _1, message_error_convert_boolean));
 }
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_double_values_correctly) {
@@ -376,8 +377,7 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_double_values_correctly) {
     auto check_value([&](double expected) {
             read_n_times(reader, 4);
             BOOST_CHECK_CLOSE(reader.value_as_double(), expected, 0.000001);
-        }
-        );
+        });
 
     check_value(3.14159);
     check_value(-12345.6789);
@@ -390,8 +390,7 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_double_values_correctly) {
     BOOST_CHECK_EXCEPTION(
         reader.value_as_double(), // this is a string
         exception,
-        std::bind(check_xml_exception, _1, message_error_convert_double)
-        );
+        std::bind(check_xml_exception, _1, message_error_convert_double));
 }
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_int_values_correctly) {
@@ -403,8 +402,7 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_int_values_correctly) {
     auto check_value([&](int expected) {
             read_n_times(reader, 4);
             BOOST_CHECK(reader.value_as_int() == expected);
-        }
-        );
+        });
 
     check_value(3);
     check_value(-12345);
@@ -418,8 +416,7 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_int_values_correctly) {
                 exception,
                 std::bind(check_xml_exception, _1, message_error_convert_int)
                 );
-        }
-        );
+        });
 
     check_errors(); // 3.14159
     check_errors(); // -12345.6789
@@ -436,8 +433,7 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_long_values_correctly) {
     auto check_value([&](long expected) {
             read_n_times(reader, 4);
             BOOST_CHECK(reader.value_as_int() == expected);
-        }
-        );
+        });
 
     check_value(3);
     check_value(-12345);
@@ -451,8 +447,7 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_long_values_correctly) {
                 exception,
                 std::bind(check_xml_exception, _1, message_error_convert_long)
                 );
-        }
-        );
+        });
 
     check_errors(); // 3.14159
     check_errors(); // -12345.6789
@@ -537,8 +532,7 @@ BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
 
             const bool actual_template(reader.get_attribute<bool>(name));
             BOOST_CHECK(expected == actual_template);
-        }
-        );
+        });
 
     // tests for bool attributes
     read_n_times(reader, 4);
@@ -550,20 +544,17 @@ BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute_as_boolean(label_third_attribute_2),
         exception,
-        std::bind(check_xml_exception, _1, message_error_convert_boolean)
-        );
+        std::bind(check_xml_exception, _1, message_error_convert_boolean));
 
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute<bool>(label_third_attribute_2),
         exception,
-        std::bind(check_xml_exception, _1, message_error_convert_boolean)
-        );
+        std::bind(check_xml_exception, _1, message_error_convert_boolean));
 
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute<std::vector<std::string>>(label_third_attribute_2),
         exception,
-        std::bind(check_xml_exception, _1, message_error_unsupported_type)
-        );
+        std::bind(check_xml_exception, _1, message_error_unsupported_type));
 
     // tests for int attributes
     auto check_int_attribute([&](std::string name, int expected) {
@@ -574,8 +565,7 @@ BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
 
             const int actual_template(reader.get_attribute<int>(name));
             BOOST_CHECK(expected == actual_template);
-        }
-        );
+        });
 
     read_n_times(reader, 4);
     check_int_attribute(label_first_attribute_3, 13);
@@ -586,20 +576,17 @@ BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute_as_int(label_third_attribute_3),
         exception,
-        std::bind(check_xml_exception, _1, message_error_convert_int)
-        );
+        std::bind(check_xml_exception, _1, message_error_convert_int));
 
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute<int>(label_third_attribute_3),
         exception,
-        std::bind(check_xml_exception, _1, message_error_convert_int)
-        );
+        std::bind(check_xml_exception, _1, message_error_convert_int));
 
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute<std::vector<std::string>>(label_third_attribute_3),
         exception,
-        std::bind(check_xml_exception, _1, message_error_unsupported_type)
-        );
+        std::bind(check_xml_exception, _1, message_error_unsupported_type));
 }
 
 BOOST_AUTO_TEST_CASE(getting_non_existent_attributes_throws) {
@@ -615,8 +602,7 @@ BOOST_AUTO_TEST_CASE(getting_non_existent_attributes_throws) {
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute_as_string(label_non_existent_attribute),
         exception,
-        std::bind(check_xml_exception, _1, message_error_get_attribute)
-        );
+        std::bind(check_xml_exception, _1, message_error_get_attribute));
 }
 
 BOOST_AUTO_TEST_CASE(closing_an_open_text_reader_does_not_throw) {
@@ -653,8 +639,7 @@ BOOST_AUTO_TEST_CASE(reading_from_a_closed_text_reader_throws) {
     BOOST_CHECK_EXCEPTION(
         reader.read(),
         exception,
-        std::bind(check_xml_exception, _1, message_error_read_node)
-        );
+        std::bind(check_xml_exception, _1, message_error_read_node));
 }
 
 BOOST_AUTO_TEST_CASE(skipping_root_node_does_not_throw) {
@@ -740,8 +725,7 @@ BOOST_AUTO_TEST_CASE(value_template_method_with_invalid_type_throws) {
     BOOST_CHECK_EXCEPTION(
         reader.value<std::ostringstream>(),
         exception,
-        std::bind(check_xml_exception, _1, message_error_unsupported_type)
-        );
+        std::bind(check_xml_exception, _1, message_error_unsupported_type));
 }
 
 BOOST_AUTO_TEST_CASE(reading_with_skip_whitespace_reads_all_expected_elements) {
@@ -757,8 +741,7 @@ BOOST_AUTO_TEST_CASE(reading_with_skip_whitespace_reads_all_expected_elements) {
             BOOST_LOG_SEV(lg, debug) << reader;
             BOOST_CHECK(reader.name() == name);
             BOOST_CHECK(reader.node_type() == node_type);
-        }
-        );
+        });
 
     check_element(label_root_name, node_types::element);
     check_element(label_one_attribute, node_types::element);
