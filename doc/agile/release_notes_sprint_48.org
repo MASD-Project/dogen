@@ -13,13 +13,13 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-04 Sun 20:28]
+Clock summary at [2014-05-04 Sun 23:00]
 
 | Headline                                                      | Time    |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                  | *16:35* |       |      |
+| *Total time*                                                  | *18:41* |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                               |         | 16:35 |      |
+| Development Stories Implemented                               |         | 18:41 |      |
 | IMPLEMENTATION Release notes and backlog grooming             |         |       | 0:51 |
 | IMPLEMENTATION Updates to the manual and readme files         |         |       | 2:07 |
 | COMPLETED Log start and finish of dogen with version          |         |       | 0:20 |
@@ -31,7 +31,7 @@ Clock summary at [2014-05-04 Sun 20:28]
 | COMPLETED Remove =--info= option from command line            |         |       | 0:04 |
 | COMPLETED Knitter: Only log if logger has been initialised    |         |       | 1:02 |
 | COMPLETED XML reader does not log exceptions to file          |         |       | 1:12 |
-| IMPLEMENTATION Use the =formatters= model in =cpp_formatters= |         |       | 3:25 |
+| IMPLEMENTATION Use the =formatters= model in =cpp_formatters= |         |       | 5:31 |
 | IMPLEMENTATION Create a trivial Linux gcc script              |         |       | 0:20 |
 #+end:
 
@@ -243,32 +243,51 @@ but having a common workflow for all specific formatter models
 simple, very static =cpp_formatters= workflow that makes use of
 =formatters= where required.
 
-**** COMPLETED Remove generic interfaces in =formatters=
+**** COMPLETED Remove generic interfaces in =formatters=               :task:
      CLOSED: [2014-05-04 Sun 20:28]
      CLOCK: [2014-05-04 Sun 20:11]--[2014-05-04 Sun 20:28] =>  0:17
 
 Just bin this code and associated tests.
 
-**** Add entries per type in =project= again
+**** IMPLEMENTATION Merge source file with entity                      :task:
+     CLOCK: [2014-05-04 Sun 20:59]--[2014-05-04 Sun 22:56] =>  1:57
+     CLOCK: [2014-05-04 Sun 20:31]--[2014-05-04 Sun 20:38] =>  0:07
+     CLOCK: [2014-05-04 Sun 20:29]--[2014-05-04 Sun 20:31] =>  0:02
+
+We need to get rid of source file as it serves no purpose any more.
+
+**** =formatter::entity= should be renamed and use composition         :task:
+
+Now that we don't have interfaces any more we can use composition
+between the formatting entity and the c++ entity.
+
+**** Add entries per type in =project= again                           :task:
 
 No need to work at the entity level here. Transformer to populate
 project correctly.
 
-**** Merge source file with entity
+**** Remove =file_formatter_interface=                                 :task:
 
-We need to get rid of source file as it serves no purpose any more. We
-then need to update all C++ formatters to use specific types:
+Update all C++ formatters to use specific types:
 
-- remove factory
+- remove factory; update workflow to call formatters directly
 - remove file formatter interface
 - formatters to have format() for each specific supported entity,
   overloaded as required
-- update workflow to call formatters directly
+
+**** Update formatters to use =formatters::file=                       :task:
+
+Instead of passing in a stream, we just want to receive a file. Update
+all formatters.
 
 **** Make use of boilerplate                                           :task:
 
 Remove all of the manual boilerplate and make use of the new
 class. This will involve bring across some meta-data into C++ model.
+
+*** Remove =cpp_formatters::formatting_error=                         :story:
+
+Use the =formatters::formating_error= instead.
 
 *** Add include files at the formatter level
 
