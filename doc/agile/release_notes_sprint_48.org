@@ -13,14 +13,14 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-01 Thu 22:58]
+Clock summary at [2014-05-04 Sun 13:21]
 
 | Headline                                                   | Time    |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| *Total time*                                               | *12:39* |       |      |
+| *Total time*                                               | *13:10* |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                            |         | 12:39 |      |
-| IMPLEMENTATION Release notes and backlog grooming          |         |       | 0:20 |
+| Development Stories Implemented                            |         | 13:10 |      |
+| IMPLEMENTATION Release notes and backlog grooming          |         |       | 0:51 |
 | IMPLEMENTATION Updates to the manual and readme files      |         |       | 2:07 |
 | COMPLETED Log start and finish of dogen with version       |         |       | 0:20 |
 | COMPLETED Install packages into =/usr=                     |         |       | 2:23 |
@@ -35,6 +35,7 @@ Clock summary at [2014-05-01 Thu 22:58]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-04 Sun 12:50]--[2014-05-04 Sun 13:21] =>  0:31
     CLOCK: [2014-04-30 Wed 08:30]--[2014-04-30 Wed 08:32] =>  0:02
     CLOCK: [2014-04-28 Mon 18:31]--[2014-04-28 Mon 18:37] =>  0:06
     CLOCK: [2014-04-28 Mon 08:28]--[2014-04-28 Mon 08:30] =>  0:02
