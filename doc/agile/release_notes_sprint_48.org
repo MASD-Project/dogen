@@ -13,25 +13,26 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-04 Sun 13:21]
+Clock summary at [2014-05-04 Sun 20:28]
 
-| Headline                                                   | Time    |       |      |
-|------------------------------------------------------------+---------+-------+------|
-| *Total time*                                               | *13:10* |       |      |
-|------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                            |         | 13:10 |      |
-| IMPLEMENTATION Release notes and backlog grooming          |         |       | 0:51 |
-| IMPLEMENTATION Updates to the manual and readme files      |         |       | 2:07 |
-| COMPLETED Log start and finish of dogen with version       |         |       | 0:20 |
-| COMPLETED Install packages into =/usr=                     |         |       | 2:23 |
-| COMPLETED Fix issues with database tests                   |         |       | 2:54 |
-| COMPLETED Rename =driver= to =knitter=                     |         |       | 1:25 |
-| COMPLETED Rename =engine= to =knit=                        |         |       | 0:26 |
-| COMPLETED Sprint number is not being added to the version  |         |       | 0:06 |
-| COMPLETED Remove =--info= option from command line         |         |       | 0:04 |
-| COMPLETED Knitter: Only log if logger has been initialised |         |       | 1:02 |
-| COMPLETED XML reader does not log exceptions to file       |         |       | 1:12 |
-| IMPLEMENTATION Create a trivial Linux gcc script           |         |       | 0:20 |
+| Headline                                                      | Time    |       |      |
+|---------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                  | *16:35* |       |      |
+|---------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                               |         | 16:35 |      |
+| IMPLEMENTATION Release notes and backlog grooming             |         |       | 0:51 |
+| IMPLEMENTATION Updates to the manual and readme files         |         |       | 2:07 |
+| COMPLETED Log start and finish of dogen with version          |         |       | 0:20 |
+| COMPLETED Install packages into =/usr=                        |         |       | 2:23 |
+| COMPLETED Fix issues with database tests                      |         |       | 2:54 |
+| COMPLETED Rename =driver= to =knitter=                        |         |       | 1:25 |
+| COMPLETED Rename =engine= to =knit=                           |         |       | 0:26 |
+| COMPLETED Sprint number is not being added to the version     |         |       | 0:06 |
+| COMPLETED Remove =--info= option from command line            |         |       | 0:04 |
+| COMPLETED Knitter: Only log if logger has been initialised    |         |       | 1:02 |
+| COMPLETED XML reader does not log exceptions to file          |         |       | 1:12 |
+| IMPLEMENTATION Use the =formatters= model in =cpp_formatters= |         |       | 3:25 |
+| IMPLEMENTATION Create a trivial Linux gcc script              |         |       | 0:20 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -206,6 +207,74 @@ We should check to see if logging was initialised before logging.
     CLOCK: [2014-05-01 Thu 08:23]--[2014-05-01 Thu 08:42] =>  0:19
 
 We are throwing exceptions but not logging them to file.
+
+*** IMPLEMENTATION Use the =formatters= model in =cpp_formatters=     :story:
+    CLOCK: [2014-05-04 Sun 19:10]--[2014-05-04 Sun 20:11] =>  1:01
+    CLOCK: [2014-05-04 Sun 13:21]--[2014-05-04 Sun 14:10] =>  0:49
+    CLOCK: [2014-05-04 Sun 14:10]--[2014-05-04 Sun 15:28] =>  1:18
+
+We did a lot of work to split the language-agnostic formatters from
+the c++ formatters but we never hooked the new code. We need to do so
+in order to start using the shinny boilerplate formatters, etc.
+
+After some analysis, it seems =formatters= is a bit too generic, in
+particular the =workflow=, =file_formatter_interface= and
+=transformer_interface=. These seemed like a good idea at the time,
+but with the implementation is looking worse by the minute:
+
+- we need to cast the =formatters= entities to figure out if it
+  applies to the current formatter. In reality, if we kept the
+  formatters with their entities, this would not be required.
+- we need to =visit= the entity to resolve it to a type; this then
+  means we can't have a simple method that returns a file, but instead
+  we need to store the state in a member variable. When time comes to
+  introduce threads, this will make life much harder.
+- we introduce a lot of indirection: registration, interfaces,
+  dispatch and double-dispatch. This can't be good for performance.
+- the entire rationale for this approach was to make the creation of
+  formatters trivial (e.g. just register the formatter and away we
+  go). Whilst this is achieved, the remainder of the code base will
+  become a lot less understandable. The engineering trade-off doesn't
+  appear to be a good one.
+
+In conclusion, creating a generic =formatters= model was a good idea,
+but having a common workflow for all specific formatter models
+(e.g. =cpp_formatters=) was a step too far. What we really want is a
+simple, very static =cpp_formatters= workflow that makes use of
+=formatters= where required.
+
+**** COMPLETED Remove generic interfaces in =formatters=
+     CLOSED: [2014-05-04 Sun 20:28]
+     CLOCK: [2014-05-04 Sun 20:11]--[2014-05-04 Sun 20:28] =>  0:17
+
+Just bin this code and associated tests.
+
+**** Add entries per type in =project= again
+
+No need to work at the entity level here. Transformer to populate
+project correctly.
+
+**** Merge source file with entity
+
+We need to get rid of source file as it serves no purpose any more. We
+then need to update all C++ formatters to use specific types:
+
+- remove factory
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
+- update workflow to call formatters directly
+
+**** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+*** Add include files at the formatter level
+
+We need to remove all the include files from =includer= which are
+related to formatter specific code. We need to inject these
+dependencies inside of the formatters.
 
 *** IMPLEMENTATION Create a trivial Linux gcc script                  :story:
     CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20
