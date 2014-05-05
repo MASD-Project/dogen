@@ -28,6 +28,7 @@
 #include "dogen/formatters/types/editors.hpp"
 #include "dogen/formatters/types/entity.hpp"
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/formatters.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/general_property_sheet.hpp"
 #include "dogen/formatters/types/hydration_error.hpp"

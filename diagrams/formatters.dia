@@ -6654,7 +6654,7 @@ This model is the repository of all formatting related code
 which is not language specific. Language-specific models can
 then make use of it.
 
-#DOGEN COMMENT=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

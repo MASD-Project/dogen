@@ -13,16 +13,17 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-05 Mon 17:37]
+Clock summary at [2014-05-05 Mon 18:01]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *4:07* |      |      |
+| *Total time*                                               | *4:28* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                            |        | 4:07 |      |
+| Development Stories Implemented                            |        | 4:28 |      |
 | IMPLEMENTATION Release notes and backlog grooming          |        |      | 0:39 |
 | COMPLETED Remove the roadmap                               |        |      | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem |        |      | 3:23 |
+| COMPLETED Rename the =COMMENT= tag to =dia.comment=        |        |      | 0:21 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -165,9 +166,25 @@ just need to plug them into the configuration model.
 The remaining tags have behaviour specific to that model and should be
 left alone until one reaches the transformer for that model.
 
-*** Rename the =COMMENTS= tag to =dia.comments=                       :story:
+*** COMPLETED Rename the =COMMENT= tag to =dia.comment=               :story:
+    CLOSED: [2014-05-05 Mon 18:01]
+    CLOCK: [2014-05-05 Mon 17:40]--[2014-05-05 Mon 18:01] =>  0:21
 
-Update all tests and models.
+Actually, we already had started to do this, but it seems a few files
+still use the old name. Remove all remnants of =COMMENT=.
+
+*** Move all the configuration options into tags                      :story:
+
+Parameters as per analysis story. We need to:
+
+- add missing config options such as annotations, etc to =config=
+  model.
+- create a parser that reads a =ptree= and outputs config options;
+- move across all tags related to config options from =sml= to
+  =config= (into the parser only really)
+- delete all command line options related to config options that to be
+  handled by tags.
+- update all models and tests to use the tags.
 
 *** Rename ODB parameters                                             :story:
 
@@ -185,19 +202,6 @@ Update all the JSON files with names in the form
 these.
 
 While we're at it, add support for =family= too.
-
-*** Move all the configuration options into tags                      :story:
-
-Parameters as per analysis story. We need to:
-
-- add missing config options such as annotations, etc to =config=
-  model.
-- create a parser that reads a =ptree= and outputs config options;
-- move across all tags related to config options from =sml= to
-  =config= (into the parser only really)
-- delete all command line options related to config options that to be
-  handled by tags.
-- update all models and tests to use the tags.
 
 *** Delete tag related infrastructure from =sml=                      :story:
 
@@ -255,6 +259,11 @@ Use the =formatters::formating_error= instead.
 We need to remove all the include files from =includer= which are
 related to formatter specific code. We need to inject these
 dependencies inside of the formatters.
+
+- implement includer in terms of json files
+- get includer to work off of object relationships
+- remove relationships from transformer
+- remove helper models boost and std
 
 *** Manual: fix Fundamental Building Blocks section                   :story:
 
