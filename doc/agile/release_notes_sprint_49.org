@@ -1,0 +1,160 @@
+#+title: Release Notes for Sprint 49
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 48.
+
+The *Mission Statement* for this sprint is to integrate tags with the
+inner workings of knitter once and for all.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-05-05 Mon 08:20]
+
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:44* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:44 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:24 |
+| IMPLEMENTATION Create a trivial Linux gcc script  |        |      | 0:20 |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-05 Mon 07:50]--[2014-05-05 Mon 08:14] =>  0:24
+
+Updates to release notes and backlog.
+
+*** Updates to the manual and readme files                             :task:
+
+Use build downtime to update the manual and / or readme file.
+
+*** Remove the roadmap                                                :story:
+
+Originally we thought it would give us a good idea of where we are
+heading, but in reality:
+
+- the backlog already has all the stories for the future. It just
+  doesn't assign them to iterations (and it doesn't do so for very
+  good reasons).
+- the road map is rather waterfall. We realised this when we created
+  it, but didn't think it would be /that/ bad. It is. It gives you the
+  impression of failure because it does not deal with uncertainty.
+- it may give users the false impression that we know when features
+  are going in. It was never designed to do that.
+- we spend time rejigging the road map every iteration. This is time
+  best spent coding.
+
+The intentions were good, but it didn't work out as expected.
+
+*** Create a generic way to propagate tags in tagger                  :story:
+
+We need to get SML tagger to update all objects to have the correct
+tags. This probably requires some kind of minimal object model that
+gets passed in and is used to determine how to copy and paste tags.
+
+*** Rename =property_sheets= to =profile=                             :story:
+
+We need to split the property sheets so that they are more cohesive
+and rename them to profiles (after a lot of name brainstorming this is
+the least bad name). We need the following profiles:
+
+- =file_system_profile=: directory names, file names, etc
+- =annotation_profile=: properties of annotation
+- =extended_file_system_profile=: additional directory, file and
+  extension names, in C++ model.
+- =class_profile=: properties of the class.
+
+The idea is to split:
+
+- the /things/ we want to output - e.g. classes, properties, etc
+- from the options that control their formatting - these go into the
+  profiles and are sourced from the meta-data.
+
+**** Remove =formatter::entity=                                        :task:
+
+This was not a win. Remove inheritance from C++ entity, and make it
+generatable.
+
+**** Split general property sheets                                     :task:
+
+These have two kinds of data:
+
+- =file_system_profile=
+- =annotation_profile=
+
+*** Merge =source_file= with =entity=                                 :story:
+
+We need to get rid of source file as it serves no purpose any more.
+
+**** Copy all useful properties across                                 :task:
+
+At present only includes seems necessary.
+
+**** Add entries per type in =project= again                           :task:
+
+No need to work at the entity level here. Transformer to populate
+project correctly.
+
+*** Remove =file_formatter_interface=                                 :task:
+
+Update all C++ formatters to use specific types:
+
+- remove factory; update workflow to call formatters directly
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
+
+*** Update formatters to use =formatters::file=                       :task:
+
+Instead of passing in a stream, we just want to receive a file. Update
+all formatters.
+
+*** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+*** Remove =cpp_formatters::formatting_error=                         :story:
+
+Use the =formatters::formating_error= instead.
+
+*** Add include files at the formatter level
+
+We need to remove all the include files from =includer= which are
+related to formatter specific code. We need to inject these
+dependencies inside of the formatters.
+
+*** IMPLEMENTATION Create a trivial Linux gcc script                  :story:
+    CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20
+
+The previous attempts to clean up the build environment were too
+elaborate given the available time. We need to go back to basics with
+a trivial script that works for Linux 32-bit and 64-bit with gcc.
+
+*** Manual: fix Fundamental Building Blocks section                   :story:
+
+We allowed this section to evolve as a collage of different ideas, but
+now it is no longer making sense as a whole. We need to go back to the
+drawing board and create a structure for it.
+
+*** Consider renaming =config= in light of weaving changes            :story:
+
+It's not clear if the =config= domain is the configuration of =knit=
+only or whether its slightly more generic.
+
+*** Consider renaming =provider_interface=                            :story:
+
+This name is very generic. We need something that reflects the dia to
+sml sub-workflow. In addition we are not even using it for IoC, so
+consider either using IoC or removing the interface.
+
+*** Create a trivial Linux clang script                               :story:
+
+We need to be able to build Linux clang 32-bit and 64-bit again.
+
+** Deprecated Development Stories
