@@ -13,19 +13,20 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-05 Mon 08:21]
+Clock summary at [2014-05-05 Mon 17:37]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:49* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:49 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:24 |
-| COMPLETED Remove the roadmap                      |        |      | 0:05 |
-| IMPLEMENTATION Create a trivial Linux gcc script  |        |      | 0:20 |
+| Headline                                                   | Time   |      |      |
+|------------------------------------------------------------+--------+------+------|
+| *Total time*                                               | *4:07* |      |      |
+|------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                            |        | 4:07 |      |
+| IMPLEMENTATION Release notes and backlog grooming          |        |      | 0:39 |
+| COMPLETED Remove the roadmap                               |        |      | 0:05 |
+| COMPLETED Design an end-to-end solution to the tag problem |        |      | 3:23 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-05 Mon 17:22]--[2014-05-05 Mon 17:37] =>  0:15
     CLOCK: [2014-05-05 Mon 07:50]--[2014-05-05 Mon 08:14] =>  0:24
 
 Updates to release notes and backlog.
@@ -54,41 +55,164 @@ heading, but in reality:
 
 The intentions were good, but it didn't work out as expected.
 
-*** Create a generic way to propagate tags in tagger                  :story:
+*** COMPLETED Design an end-to-end solution to the tag problem        :story:
+    CLOSED: [2014-05-05 Mon 17:22]
+    CLOCK: [2014-05-05 Mon 16:40]--[2014-05-05 Mon 16:53] =>  0:13
+    CLOCK: [2014-05-05 Mon 11:28]--[2014-05-05 Mon 12:13] =>  0:45
+    CLOCK: [2014-05-05 Mon 10:21]--[2014-05-05 Mon 11:27] =>  1:06
 
-We need to get SML tagger to update all objects to have the correct
-tags. This probably requires some kind of minimal object model that
-gets passed in and is used to determine how to copy and paste tags.
+We have created a new tag structure in Sprint 44; we need to revisit
+it and complete it.
 
-*** Rename =property_sheets= to =profile=                             :story:
+This time we need to get to a point where the tag data is being used
+to ensure we did not come up with yet another solution which does not
+solve the problems entirely.
 
-We need to split the property sheets so that they are more cohesive
-and rename them to profiles (after a lot of name brainstorming this is
-the least bad name). We need the following profiles:
+**** COMPLETED Create a complete list of tags                          :task:
+     CLOSED: [2014-05-05 Mon 16:14]
+     CLOCK: [2014-05-05 Mon 16:14]--[2014-05-05 Mon 16:40] =>  0:26
+     CLOCK: [2014-05-05 Mon 15:21]--[2014-05-05 Mon 16:14] =>  0:53
 
-- =file_system_profile=: directory names, file names, etc
-- =annotation_profile=: properties of annotation
-- =extended_file_system_profile=: additional directory, file and
-  extension names, in C++ model.
-- =class_profile=: properties of the class.
+*Dia Model*
 
-The idea is to split:
+- =dia.comment=: bool. Only on dia notes. Processed by the
+  =dia_to_sml= transformer.
 
-- the /things/ we want to output - e.g. classes, properties, etc
-- from the options that control their formatting - these go into the
-  profiles and are sourced from the meta-data.
+*Config Model*
 
-**** Remove =formatter::entity=                                        :task:
+These can only be present in the =model= itself; no other type can
+have these tags.
 
-This was not a win. Remove inheritance from C++ entity, and make it
-generatable.
+- =annotation.generate_preamble=: bool
+- =annotation.copyright=: string; can be repeated for multiple
+  holders.
+- =annotation.licence=: string; valid licence name.
+- =annotation.modeline_group=: string; valid modeline group
+  name. can be repeated for multiple modelines.
+- =annotation.code_generation_marker.enabled=: bool
+- =annotation.code_generation_marker.add_date_time=: bool
+- =annotation.code_generation_marker.add_warning=: bool
+- =annotation.code_generation_marker.message=: string.
+- =cpp.enabled=: bool
+- =cpp.split_project=: bool
+- =cpp.project_directory=: string
+- =cpp.source_directory=: string
+- =cpp.include_directory=: string
+- =cpp.header_extension=: string
+- =cpp.source_extension=: string
+- =cpp.disable_facet_folders=: bool
+- =cpp.disable_unique_file_names=: bool
+- =cpp.disable_facet_includers=: bool
+- =cpp.use_integrated_io=: bool
+- =cpp.disable_versioning=: bool
+- =cpp.disable_complete_constructor=:
+- =cpp.types.enabled=: bool. remove this option.
+- =cpp.types.facet_folder=: string
+- =cpp.types.facet_folder=: string
+- =cpp.std_hash.enabled=: bool
+- =cpp.std_hash.facet_folder=: string
+- =cpp.boost_serialization.enabled=: bool
+- =cpp.boost_serialization.facet_folder=: string
+- =cpp.boost_serialization.xml.enabled=: bool
+- =cpp.boost_serialization.eos.enabled=: bool
+- =cpp.io.enabled=: bool
+- =cpp.io.facet_folder=: string
+- =cpp.test_data.enabled=: bool
+- =cpp.test_data.facet_folder=: string
+- =cpp.cmake.enabled=: bool
+- =cpp.odb.enabled=: bool
+- =cpp.odb.facet_folder=: string
 
-**** Split general property sheets                                     :task:
+These get transformed into configuration options.
 
-These have two kinds of data:
+*Dia to SML Model*
 
-- =file_system_profile=
-- =annotation_profile=
+- =modeling.is_final=: bool. Can be on any class.
+- =modeling.identity_attribute=: bool. Can be on any property.
+
+These get absorbed by the SML types.
+
+*SML to CPP Model*
+
+Only in Library models, potentially for every type:
+
+- =cpp.include.types.header_file=: string with include path.
+- =cpp.include.std_hash.header_file=: string with include path.
+- =cpp.include.boost_serialization.header_file=: string with include
+  path.
+- =cpp.include.io.header_file=: string with include path.
+- =cpp.include.test_data.header_file=: string with include path.
+- =cpp.include.odb.header_file.file_name=: string with include path.
+- =cpp.odb.pragma=: string; list.
+
+These get transformed into includes.
+
+*CPP Model*
+
+Only in Library models, potentially for every type:
+
+- =cpp.type_family=: string, to convert to enum. e.g.: =smart_pointer=.
+
+These get transformed into CPP types.
+
+*General notes*
+
+Actually by writing these lists it became clear why things were so
+confusing up til now. Most tags are just a configuration
+interface. They have nothing at all to do with the modeling data. We
+just need to plug them into the configuration model.
+
+The remaining tags have behaviour specific to that model and should be
+left alone until one reaches the transformer for that model.
+
+*** Rename the =COMMENTS= tag to =dia.comments=                       :story:
+
+Update all tests and models.
+
+*** Rename ODB parameters                                             :story:
+
+At present we use the following form:
+
+: #DOGEN ODB_PRAGMA=no_id
+
+We need to use the new naming style =cpp.odb.pragma=. We also need to
+rename the opaque_parameters to reflect ODB specific data.
+
+*** Rename the include tags and add them to CPP model                 :story:
+
+Update all the JSON files with names in the form
+=cpp.include.types.header_file=. Add properties in =cpp= to capture
+these.
+
+While we're at it, add support for =family= too.
+
+*** Move all the configuration options into tags                      :story:
+
+Parameters as per analysis story. We need to:
+
+- add missing config options such as annotations, etc to =config=
+  model.
+- create a parser that reads a =ptree= and outputs config options;
+- move across all tags related to config options from =sml= to
+  =config= (into the parser only really)
+- delete all command line options related to config options that to be
+  handled by tags.
+- update all models and tests to use the tags.
+
+*** Delete tag related infrastructure from =sml=                      :story:
+
+With the exception of tag writer, we don't really need any tagging in
+SML. That means:
+
+- no meta data tagger
+- no writer
+- no meta data error
+- no meta data sub-workflow
+
+*** Remove =formatter::entity= and property sheets                    :story:
+
+These is no longer required with the config approach. We can now make
+C++ entity generatable.
 
 *** Merge =source_file= with =entity=                                 :story:
 
@@ -132,32 +256,38 @@ We need to remove all the include files from =includer= which are
 related to formatter specific code. We need to inject these
 dependencies inside of the formatters.
 
-*** IMPLEMENTATION Create a trivial Linux gcc script                  :story:
-    CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20
-
-The previous attempts to clean up the build environment were too
-elaborate given the available time. We need to go back to basics with
-a trivial script that works for Linux 32-bit and 64-bit with gcc.
-
 *** Manual: fix Fundamental Building Blocks section                   :story:
 
 We allowed this section to evolve as a collage of different ideas, but
 now it is no longer making sense as a whole. We need to go back to the
 drawing board and create a structure for it.
 
-*** Consider renaming =config= in light of weaving changes            :story:
-
-It's not clear if the =config= domain is the configuration of =knit=
-only or whether its slightly more generic.
-
-*** Consider renaming =provider_interface=                            :story:
-
-This name is very generic. We need something that reflects the dia to
-sml sub-workflow. In addition we are not even using it for IoC, so
-consider either using IoC or removing the interface.
-
-*** Create a trivial Linux clang script                               :story:
-
-We need to be able to build Linux clang 32-bit and 64-bit again.
-
 ** Deprecated Development Stories
+*** CANCELLED Rename =property_sheets= to =profile=                   :story:
+    CLOSED: [2014-05-05 Mon 17:34]
+
+*Rationale*: These are now understood to be configuration options so
+they will live in the =config= model.
+
+We need to split the property sheets so that they are more cohesive
+and rename them to profiles (after a lot of name brainstorming this is
+the least bad name). We need the following profiles:
+
+- =file_system_profile=: directory names, file names, etc
+- =annotation_profile=: properties of annotation
+- =extended_file_system_profile=: additional directory, file and
+  extension names, in C++ model.
+- =class_profile=: properties of the class.
+
+The idea is to split:
+
+- the /things/ we want to output - e.g. classes, properties, etc
+- from the options that control their formatting - these go into the
+  profiles and are sourced from the meta-data.
+
+**** Split general property sheets                                     :task:
+
+These have two kinds of data:
+
+- =file_system_profile=
+- =annotation_profile=

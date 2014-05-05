@@ -8,6 +8,28 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create a trivial Linux gcc script                                 :story:
+    CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20
+
+The previous attempts to clean up the build environment were too
+elaborate given the available time. We need to go back to basics with
+a trivial script that works for Linux 32-bit and 64-bit with gcc.
+
+*** Consider renaming =config= in light of weaving changes            :story:
+
+It's not clear if the =config= domain is the configuration of =knit=
+only or whether its slightly more generic.
+
+*** Consider renaming =provider_interface=                            :story:
+
+This name is very generic. We need something that reflects the dia to
+sml sub-workflow. In addition we are not even using it for IoC, so
+consider either using IoC or removing the interface.
+
+*** Create a trivial Linux clang script                               :story:
+
+We need to be able to build Linux clang 32-bit and 64-bit again.
+
 *** Fix windows nightly build                                         :story:
 
 The nightly build for windows has been broken for quite a while. The
@@ -199,28 +221,6 @@ directory. This is not an easy undertaking because:
 - there is hard-coding in the test model sets pointing to these
 - the CMake scripts rely on the location of the diagrams to copy them
   across
-
-*** Clean up the tags according to the list defined                   :story:
-
-We have created a new tag structure in Sprint 44; implement it.
-
-**** IMPLEMENTATION Move dia tags into =dia_to_sml= model              :task:
-
-Each model will own its own tags. Move the tags used only by Dia to
-SML into this model. Update the manual with these tags.
-
-**** Remove C++ knowledge from SML tagger                              :task:
-
-We should just:
-
-- copy the features tags according to very simple heuristics;
-- for the moment, convert settings into tags. In the future, we will
-  deprecate all the formatter related settings - they must be done via
-  the tags.
-
-**** Implement a meta-data tranformer in SML to C++                   :story:
-
-We should do the appropriate defaulting when a tag is not found.
 
 *** Update meta-data processing                                       :story:
 
