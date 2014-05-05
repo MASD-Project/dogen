@@ -61,11 +61,6 @@ the latest sprint):
 
 - https://github.com/kitanda/dogen/tree/master/doc/agile
 
-The road map is available here (requires [[https://github.com/GNOME/planner][planner]] and is updated
-sporadically):
-
-- https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/agile/road_map.planner
-
 * PART I - THEORY
 
 In this part we describe the philosophical underpinnings behind Dogen,
