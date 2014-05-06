@@ -13,18 +13,18 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-06 Tue 18:40]
+Clock summary at [2014-05-06 Tue 22:41]
 
 | Headline                                                    | Time   |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *5:48* |      |      |
+| *Total time*                                                | *6:10* |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 5:48 |      |
+| Development Stories Implemented                             |        | 6:10 |      |
 | IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:02 |
 | COMPLETED Remove the roadmap                                |        |      | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem  |        |      | 3:23 |
 | COMPLETED Rename the =COMMENT= tag to =dia.comment=         |        |      | 0:21 |
-| IMPLEMENTATION Move all the configuration options into tags |        |      | 0:57 |
+| IMPLEMENTATION Move all the configuration options into tags |        |      | 1:19 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -175,6 +175,12 @@ left alone until one reaches the transformer for that model.
 Actually, we already had started to do this, but it seems a few files
 still use the old name. Remove all remnants of =COMMENT=.
 
+*** COMPLETED Remove =formatter::entity= and property sheets          :story:
+    CLOSED: [2014-05-06 Tue 22:33]
+
+These is no longer required with the config approach. We can now make
+C++ entity generatable.
+
 *** IMPLEMENTATION Move all the configuration options into tags       :story:
     CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
 
@@ -182,16 +188,20 @@ Parameters as per analysis story.
 
 **** COMPLETED Move the verbose option to top-level settings           :task:
      CLOSED: [2014-05-06 Tue 18:40]
-     CLOCK: [2014-05-06 Tue 18:08]--[2014-05-06 Tue 18:40] =>  0:32
+     CLOCK: [2014-05-06 Tue 18:08]--[2014-05-06 Tue 18:47] =>  0:39
      CLOCK: [2014-05-06 Tue 08:19]--[2014-05-06 Tue 08:40] =>  0:21
 
 We should be using the top-level verbose to initialise the logger and
 not using it after that. We are trying to minimise the usage of the
 settings prior to the target model loading.
 
-**** Add missing config options such as annotations to =config=        :task:
+**** COMPLETED Add missing config options such as annotations to =config= :task:
+     CLOSED: [2014-05-06 Tue 22:41]
+     CLOCK: [2014-05-06 Tue 22:22]--[2014-05-06 Tue 22:37] =>  0:15
 
-We should use the exact same approach, naming conventions etc.
+We should use the exact same approach, naming conventions etc. We
+should also take the opportunity to delete these from formatters since
+they don't belong there (close associated story).
 
 **** Merge provider into workflow in =knit=                            :task:
 
@@ -251,11 +261,6 @@ SML. That means:
 - no writer
 - no meta data error
 - no meta data sub-workflow
-
-*** Remove =formatter::entity= and property sheets                    :story:
-
-These is no longer required with the config approach. We can now make
-C++ entity generatable.
 
 *** Merge =source_file= with =entity=                                 :story:
 

@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/config/serialization/settings_fwd_ser.hpp"
+#include "dogen/config/types/annotation_settings.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/modeling_settings.hpp"
 #include "dogen/config/types/output_settings.hpp"
@@ -50,6 +51,7 @@ public:
         const dogen::config::cpp_settings& cpp,
         const dogen::config::troubleshooting_settings& troubleshooting,
         const dogen::config::output_settings& output,
+        const dogen::config::annotation_settings& annotation,
         const bool verbose);
 
 private:
@@ -101,6 +103,16 @@ public:
     /**@}*/
 
     /**
+     * @brief All settings related to file annotations.
+     */
+    /**@{*/
+    const dogen::config::annotation_settings& annotation() const;
+    dogen::config::annotation_settings& annotation();
+    void annotation(const dogen::config::annotation_settings& v);
+    void annotation(const dogen::config::annotation_settings&& v);
+    /**@}*/
+
+    /**
      * @brief Provide additional diagnostic information in the log file.
      */
     /**@{*/
@@ -123,6 +135,7 @@ private:
     dogen::config::cpp_settings cpp_;
     dogen::config::troubleshooting_settings troubleshooting_;
     dogen::config::output_settings output_;
+    dogen::config::annotation_settings annotation_;
     bool verbose_;
 };
 

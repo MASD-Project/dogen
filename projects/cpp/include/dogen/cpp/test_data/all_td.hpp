@@ -38,5 +38,4 @@
 #include "dogen/cpp/test_data/property_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/source_file_td.hpp"
-#include "dogen/cpp/test_data/specialized_property_sheet_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"

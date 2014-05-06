@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/config/test_data/annotation_settings_td.hpp"
 #include "dogen/config/test_data/cpp_settings_td.hpp"
 #include "dogen/config/test_data/modeling_settings_td.hpp"
 #include "dogen/config/test_data/output_settings_td.hpp"
@@ -46,6 +47,11 @@ create_dogen_config_output_settings(const unsigned int position) {
     return dogen::config::output_settings_generator::create(position);
 }
 
+dogen::config::annotation_settings
+create_dogen_config_annotation_settings(const unsigned int position) {
+    return dogen::config::annotation_settings_generator::create(position);
+}
+
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -63,7 +69,8 @@ populate(const unsigned int position, result_type& v) {
     v.cpp(create_dogen_config_cpp_settings(position + 1));
     v.troubleshooting(create_dogen_config_troubleshooting_settings(position + 2));
     v.output(create_dogen_config_output_settings(position + 3));
-    v.verbose(create_bool(position + 4));
+    v.annotation(create_dogen_config_annotation_settings(position + 4));
+    v.verbose(create_bool(position + 5));
 }
 
 settings_generator::result_type

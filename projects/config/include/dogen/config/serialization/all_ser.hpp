@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/config/serialization/annotation_settings_ser.hpp"
 #include "dogen/config/serialization/archive_types_ser.hpp"
+#include "dogen/config/serialization/code_generation_marker_settings_ser.hpp"
 #include "dogen/config/serialization/cpp_facet_types_ser.hpp"
 #include "dogen/config/serialization/cpp_settings_ser.hpp"
 #include "dogen/config/serialization/modeling_settings_ser.hpp"

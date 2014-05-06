@@ -58,7 +58,6 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const std::unordered_map<std::string, dogen::cpp::specialized_property_sheet>& specialized_property_sheets,
         const std::list<dogen::cpp::property_info>& properties,
         const std::list<dogen::cpp::property_info>& all_properties,
         const bool has_primitive_properties,

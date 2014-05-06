@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/config/hash/annotation_settings_hash.hpp"
 #include "dogen/config/hash/cpp_settings_hash.hpp"
 #include "dogen/config/hash/modeling_settings_hash.hpp"
 #include "dogen/config/hash/output_settings_hash.hpp"
@@ -45,6 +46,7 @@ std::size_t settings_hasher::hash(const settings&v) {
     combine(seed, v.cpp());
     combine(seed, v.troubleshooting());
     combine(seed, v.output());
+    combine(seed, v.annotation());
     combine(seed, v.verbose());
 
     return seed;

@@ -31,11 +31,13 @@ settings::settings(
     const dogen::config::cpp_settings& cpp,
     const dogen::config::troubleshooting_settings& troubleshooting,
     const dogen::config::output_settings& output,
+    const dogen::config::annotation_settings& annotation,
     const bool verbose)
     : modeling_(modeling),
       cpp_(cpp),
       troubleshooting_(troubleshooting),
       output_(output),
+      annotation_(annotation),
       verbose_(verbose) { }
 
 void settings::swap(settings& other) noexcept {
@@ -44,6 +46,7 @@ void settings::swap(settings& other) noexcept {
     swap(cpp_, other.cpp_);
     swap(troubleshooting_, other.troubleshooting_);
     swap(output_, other.output_);
+    swap(annotation_, other.annotation_);
     swap(verbose_, other.verbose_);
 }
 
@@ -52,6 +55,7 @@ bool settings::operator==(const settings& rhs) const {
         cpp_ == rhs.cpp_ &&
         troubleshooting_ == rhs.troubleshooting_ &&
         output_ == rhs.output_ &&
+        annotation_ == rhs.annotation_ &&
         verbose_ == rhs.verbose_;
 }
 
@@ -123,6 +127,22 @@ void settings::output(const dogen::config::output_settings& v) {
 
 void settings::output(const dogen::config::output_settings&& v) {
     output_ = std::move(v);
+}
+
+const dogen::config::annotation_settings& settings::annotation() const {
+    return annotation_;
+}
+
+dogen::config::annotation_settings& settings::annotation() {
+    return annotation_;
+}
+
+void settings::annotation(const dogen::config::annotation_settings& v) {
+    annotation_ = v;
+}
+
+void settings::annotation(const dogen::config::annotation_settings&& v) {
+    annotation_ = std::move(v);
 }
 
 bool settings::verbose() const {

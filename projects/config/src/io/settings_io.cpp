@@ -20,6 +20,7 @@
  */
 #include <boost/io/ios_state.hpp>
 #include <ostream>
+#include "dogen/config/io/annotation_settings_io.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/config/io/modeling_settings_io.hpp"
 #include "dogen/config/io/output_settings_io.hpp"
@@ -42,6 +43,7 @@ std::ostream& operator<<(std::ostream& s, const settings& v) {
       << "\"cpp\": " << v.cpp() << ", "
       << "\"troubleshooting\": " << v.troubleshooting() << ", "
       << "\"output\": " << v.output() << ", "
+      << "\"annotation\": " << v.annotation() << ", "
       << "\"verbose\": " << v.verbose()
       << " }";
     return(s);

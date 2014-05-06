@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include "dogen/config/serialization/annotation_settings_ser.hpp"
 #include "dogen/config/serialization/cpp_settings_ser.hpp"
 #include "dogen/config/serialization/modeling_settings_ser.hpp"
 #include "dogen/config/serialization/output_settings_ser.hpp"
@@ -45,6 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("cpp", v.cpp_);
     ar << make_nvp("troubleshooting", v.troubleshooting_);
     ar << make_nvp("output", v.output_);
+    ar << make_nvp("annotation", v.annotation_);
     ar << make_nvp("verbose", v.verbose_);
 }
 
@@ -56,6 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("cpp", v.cpp_);
     ar >> make_nvp("troubleshooting", v.troubleshooting_);
     ar >> make_nvp("output", v.output_);
+    ar >> make_nvp("annotation", v.annotation_);
     ar >> make_nvp("verbose", v.verbose_);
 }
 

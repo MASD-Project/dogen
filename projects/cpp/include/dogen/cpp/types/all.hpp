@@ -42,5 +42,4 @@
 #include "dogen/cpp/types/property_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/source_file.hpp"
-#include "dogen/cpp/types/specialized_property_sheet.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
