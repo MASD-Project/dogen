@@ -13,18 +13,18 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-06 Tue 22:41]
+Clock summary at [2014-05-06 Tue 23:49]
 
 | Headline                                                    | Time   |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *6:10* |      |      |
+| *Total time*                                                | *7:17* |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 6:10 |      |
+| Development Stories Implemented                             |        | 7:17 |      |
 | IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:02 |
 | COMPLETED Remove the roadmap                                |        |      | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem  |        |      | 3:23 |
 | COMPLETED Rename the =COMMENT= tag to =dia.comment=         |        |      | 0:21 |
-| IMPLEMENTATION Move all the configuration options into tags |        |      | 1:19 |
+| IMPLEMENTATION Move all the configuration options into tags |        |      | 2:26 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -195,7 +195,7 @@ We should be using the top-level verbose to initialise the logger and
 not using it after that. We are trying to minimise the usage of the
 settings prior to the target model loading.
 
-**** COMPLETED Add missing config options such as annotations to =config= :task:
+**** COMPLETED Add missing config options like annotations to =config= :task:
      CLOSED: [2014-05-06 Tue 22:41]
      CLOCK: [2014-05-06 Tue 22:22]--[2014-05-06 Tue 22:37] =>  0:15
 
@@ -203,7 +203,14 @@ We should use the exact same approach, naming conventions etc. We
 should also take the opportunity to delete these from formatters since
 they don't belong there (close associated story).
 
-**** Merge provider into workflow in =knit=                            :task:
+**** COMPLETED Tidy-up knitter main                                   :spike:
+     CLOSED: [2014-05-06 Tue 23:48]
+     CLOCK: [2014-05-06 Tue 22:42]--[2014-05-06 Tue 23:49] =>  1:07
+
+We should really have a small workflow in knitter rather than expose
+the whole thing in main. Should be a quick exercise to fix.
+
+**** IMPLEMENTATION Merge provider into workflow in =knit=             :task:
 
 If we are going to override the settings we must make sure the code is
 as linear as possible. The provider is actually some kind of SML

@@ -46,6 +46,7 @@ set(binary_name "dogen_knitter_spec")
 set_target_properties(knitter_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(knitter_spec
+    knit
     utility
     config
     ${LIBXML2_LIBRARIES}

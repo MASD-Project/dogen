@@ -55,7 +55,7 @@ public:
       current_path_(std::move(rhs.current_path_)) { }
 
     explicit program_options_parser(std::vector<std::string> arguments);
-    program_options_parser(int argc, char** argv);
+    program_options_parser(const int argc, const char* argv[]);
 
 private:
     void throw_project_dir_with_split() const;

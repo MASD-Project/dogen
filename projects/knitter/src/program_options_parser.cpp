@@ -129,7 +129,7 @@ program_options_parser(std::vector<std::string> arguments)
       current_path_(boost::filesystem::current_path()) { }
 
 program_options_parser::
-program_options_parser(int argc, char** argv)
+program_options_parser(const int argc, const char* argv[])
     : arguments_(argv + 1, argv + argc),
       current_path_(boost::filesystem::current_path()) { }
 
