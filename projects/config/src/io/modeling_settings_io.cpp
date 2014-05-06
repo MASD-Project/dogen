@@ -61,7 +61,6 @@ std::ostream& operator<<(std::ostream& s, const modeling_settings& v) {
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"external_module_path\": " << "\"" << tidy_up_string(v.external_module_path()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "
-      << "\"verbose\": " << v.verbose() << ", "
       << "\"disable_model_module\": " << v.disable_model_module()
       << " }";
     return(s);

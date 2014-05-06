@@ -54,7 +54,7 @@ public:
 public:
     housekeeper(const std::vector<std::string>& ignore_patterns,
         std::vector<boost::filesystem::path> managed_directories,
-        std::set<boost::filesystem::path> expected_files, bool verbose_,
+        std::set<boost::filesystem::path> expected_files,
         delete_fn fn = nullptr);
 
 private:
@@ -75,7 +75,6 @@ private:
     const std::vector<std::string> ignore_patterns_;
     const std::vector<boost::filesystem::path> managed_directories_;
     const std::set<boost::filesystem::path> expected_files_;
-    bool verbose_;
     delete_fn delete_fn_;
 };
 

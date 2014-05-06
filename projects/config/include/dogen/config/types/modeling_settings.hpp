@@ -51,7 +51,6 @@ public:
         const boost::filesystem::path& target,
         const std::string& external_module_path,
         const std::vector<dogen::config::reference>& references,
-        const bool verbose,
         const bool disable_model_module);
 
 private:
@@ -94,14 +93,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Print additional diagnostic information to standard output.
-     */
-    /**@{*/
-    bool verbose() const;
-    void verbose(const bool v);
-    /**@}*/
-
-    /**
      * @brief Do not generate a top-level module with the model name.
      */
     /**@{*/
@@ -123,7 +114,6 @@ private:
     boost::filesystem::path target_;
     std::string external_module_path_;
     std::vector<dogen::config::reference> references_;
-    bool verbose_;
     bool disable_model_module_;
 };
 

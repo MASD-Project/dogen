@@ -39,7 +39,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::config::troubleshooting_settings& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("verbose", v.verbose_);
     ar << make_nvp("debug_dir", v.debug_dir_.generic_string());
     ar << make_nvp("save_dia_model", v.save_dia_model_);
     ar << make_nvp("save_sml_model", v.save_sml_model_);
@@ -51,7 +50,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::config::troubleshooting_settings& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("verbose", v.verbose_);
     std::string debug_dir_tmp;
     ar >> make_nvp("debug_dir", debug_dir_tmp);
     v.debug_dir_ = debug_dir_tmp;

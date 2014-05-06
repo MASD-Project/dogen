@@ -35,7 +35,6 @@ std::ostream& operator<<(std::ostream& s, const troubleshooting_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::config::troubleshooting_settings\"" << ", "
-      << "\"verbose\": " << v.verbose() << ", "
       << "\"debug_dir\": " << "\"" << v.debug_dir().generic_string() << "\"" << ", "
       << "\"save_dia_model\": " << v.save_dia_model() << ", "
       << "\"save_sml_model\": " << v.save_sml_model() << ", "

@@ -49,7 +49,6 @@ std::size_t output_settings_hasher::hash(const output_settings&v) {
     combine(seed, v.output_to_file());
     combine(seed, v.delete_extra_files());
     combine(seed, v.force_write());
-    combine(seed, v.verbose());
     combine(seed, hash_std_vector_std_string(v.ignore_patterns()));
 
     return seed;

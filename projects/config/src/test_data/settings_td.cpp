@@ -46,6 +46,10 @@ create_dogen_config_output_settings(const unsigned int position) {
     return dogen::config::output_settings_generator::create(position);
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -59,6 +63,7 @@ populate(const unsigned int position, result_type& v) {
     v.cpp(create_dogen_config_cpp_settings(position + 1));
     v.troubleshooting(create_dogen_config_troubleshooting_settings(position + 2));
     v.output(create_dogen_config_output_settings(position + 3));
+    v.verbose(create_bool(position + 4));
 }
 
 settings_generator::result_type

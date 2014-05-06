@@ -46,7 +46,6 @@ public:
 
 public:
     troubleshooting_settings(
-        const bool verbose,
         const boost::filesystem::path& debug_dir,
         const dogen::config::archive_types& save_dia_model,
         const dogen::config::archive_types& save_sml_model,
@@ -61,14 +60,6 @@ private:
     friend void boost::serialization::load(Archive& ar, troubleshooting_settings& v, unsigned int version);
 
 public:
-    /**
-     * @brief Print additional diagnostic information to standard output.
-     */
-    /**@{*/
-    bool verbose() const;
-    void verbose(const bool v);
-    /**@}*/
-
     /**
      * @brief Directory for debug files.
      */
@@ -126,7 +117,6 @@ public:
     troubleshooting_settings& operator=(troubleshooting_settings other);
 
 private:
-    bool verbose_;
     boost::filesystem::path debug_dir_;
     dogen::config::archive_types save_dia_model_;
     dogen::config::archive_types save_sml_model_;

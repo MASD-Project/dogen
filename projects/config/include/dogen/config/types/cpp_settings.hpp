@@ -51,7 +51,6 @@ public:
 
 public:
     cpp_settings(
-        const bool verbose,
         const bool split_project,
         const boost::filesystem::path& project_directory,
         const boost::filesystem::path& source_directory,
@@ -83,14 +82,6 @@ private:
     friend void boost::serialization::load(Archive& ar, cpp_settings& v, unsigned int version);
 
 public:
-    /**
-     * @brief Print additional diagnostic information to standard output.
-     */
-    /**@{*/
-    bool verbose() const;
-    void verbose(const bool v);
-    /**@}*/
-
     /**
      * @brief If true, project is split into source and include
      * directories, both configurable.
@@ -316,7 +307,6 @@ public:
     cpp_settings& operator=(cpp_settings other);
 
 private:
-    bool verbose_;
     bool split_project_;
     boost::filesystem::path project_directory_;
     boost::filesystem::path source_directory_;

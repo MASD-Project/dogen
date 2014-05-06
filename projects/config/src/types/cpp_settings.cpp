@@ -24,8 +24,7 @@ namespace dogen {
 namespace config {
 
 cpp_settings::cpp_settings()
-    : verbose_(static_cast<bool>(0)),
-      split_project_(static_cast<bool>(0)),
+    : split_project_(static_cast<bool>(0)),
       disable_backend_(static_cast<bool>(0)),
       disable_cmakelists_(static_cast<bool>(0)),
       disable_complete_constructor_(static_cast<bool>(0)),
@@ -37,8 +36,7 @@ cpp_settings::cpp_settings()
       disable_eos_serialization_(static_cast<bool>(0)) { }
 
 cpp_settings::cpp_settings(cpp_settings&& rhs)
-    : verbose_(std::move(rhs.verbose_)),
-      split_project_(std::move(rhs.split_project_)),
+    : split_project_(std::move(rhs.split_project_)),
       project_directory_(std::move(rhs.project_directory_)),
       source_directory_(std::move(rhs.source_directory_)),
       include_directory_(std::move(rhs.include_directory_)),
@@ -62,7 +60,6 @@ cpp_settings::cpp_settings(cpp_settings&& rhs)
       disable_eos_serialization_(std::move(rhs.disable_eos_serialization_)) { }
 
 cpp_settings::cpp_settings(
-    const bool verbose,
     const bool split_project,
     const boost::filesystem::path& project_directory,
     const boost::filesystem::path& source_directory,
@@ -85,8 +82,7 @@ cpp_settings::cpp_settings(
     const bool disable_xml_serialization,
     const bool use_integrated_io,
     const bool disable_eos_serialization)
-    : verbose_(verbose),
-      split_project_(split_project),
+    : split_project_(split_project),
       project_directory_(project_directory),
       source_directory_(source_directory),
       include_directory_(include_directory),
@@ -111,7 +107,6 @@ cpp_settings::cpp_settings(
 
 void cpp_settings::swap(cpp_settings& other) noexcept {
     using std::swap;
-    swap(verbose_, other.verbose_);
     swap(split_project_, other.split_project_);
     swap(project_directory_, other.project_directory_);
     swap(source_directory_, other.source_directory_);
@@ -137,8 +132,7 @@ void cpp_settings::swap(cpp_settings& other) noexcept {
 }
 
 bool cpp_settings::operator==(const cpp_settings& rhs) const {
-    return verbose_ == rhs.verbose_ &&
-        split_project_ == rhs.split_project_ &&
+    return split_project_ == rhs.split_project_ &&
         project_directory_ == rhs.project_directory_ &&
         source_directory_ == rhs.source_directory_ &&
         include_directory_ == rhs.include_directory_ &&
@@ -166,14 +160,6 @@ cpp_settings& cpp_settings::operator=(cpp_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool cpp_settings::verbose() const {
-    return verbose_;
-}
-
-void cpp_settings::verbose(const bool v) {
-    verbose_ = v;
 }
 
 bool cpp_settings::split_project() const {

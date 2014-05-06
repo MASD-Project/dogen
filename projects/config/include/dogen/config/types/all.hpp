@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/config/types/archive_types.hpp"
+#include "dogen/config/types/config.hpp"
 #include "dogen/config/types/configuration_error.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/types/cpp_settings.hpp"

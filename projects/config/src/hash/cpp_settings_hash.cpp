@@ -52,7 +52,6 @@ namespace config {
 std::size_t cpp_settings_hasher::hash(const cpp_settings&v) {
     std::size_t seed(0);
 
-    combine(seed, v.verbose());
     combine(seed, v.split_project());
     combine(seed, hash_boost_filesystem_path(v.project_directory()));
     combine(seed, hash_boost_filesystem_path(v.source_directory()));

@@ -61,7 +61,6 @@ std::ostream& operator<<(std::ostream& s, const output_settings& v) {
       << "\"output_to_file\": " << v.output_to_file() << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"force_write\": " << v.force_write() << ", "
-      << "\"verbose\": " << v.verbose() << ", "
       << "\"ignore_patterns\": " << v.ignore_patterns()
       << " }";
     return(s);

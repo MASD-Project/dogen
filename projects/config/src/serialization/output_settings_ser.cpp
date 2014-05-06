@@ -43,7 +43,6 @@ void save(Archive& ar,
     ar << make_nvp("output_to_file", v.output_to_file_);
     ar << make_nvp("delete_extra_files", v.delete_extra_files_);
     ar << make_nvp("force_write", v.force_write_);
-    ar << make_nvp("verbose", v.verbose_);
     ar << make_nvp("ignore_patterns", v.ignore_patterns_);
 }
 
@@ -55,7 +54,6 @@ void load(Archive& ar,
     ar >> make_nvp("output_to_file", v.output_to_file_);
     ar >> make_nvp("delete_extra_files", v.delete_extra_files_);
     ar >> make_nvp("force_write", v.force_write_);
-    ar >> make_nvp("verbose", v.verbose_);
     ar >> make_nvp("ignore_patterns", v.ignore_patterns_);
 }
 

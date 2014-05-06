@@ -24,29 +24,25 @@ namespace dogen {
 namespace config {
 
 troubleshooting_settings::troubleshooting_settings()
-    : verbose_(static_cast<bool>(0)),
-      save_dia_model_(static_cast<dogen::config::archive_types>(0)),
+    : save_dia_model_(static_cast<dogen::config::archive_types>(0)),
       save_sml_model_(static_cast<dogen::config::archive_types>(0)),
       stop_after_formatting_(static_cast<bool>(0)),
       stop_after_merging_(static_cast<bool>(0)) { }
 
 troubleshooting_settings::troubleshooting_settings(troubleshooting_settings&& rhs)
-    : verbose_(std::move(rhs.verbose_)),
-      debug_dir_(std::move(rhs.debug_dir_)),
+    : debug_dir_(std::move(rhs.debug_dir_)),
       save_dia_model_(std::move(rhs.save_dia_model_)),
       save_sml_model_(std::move(rhs.save_sml_model_)),
       stop_after_formatting_(std::move(rhs.stop_after_formatting_)),
       stop_after_merging_(std::move(rhs.stop_after_merging_)) { }
 
 troubleshooting_settings::troubleshooting_settings(
-    const bool verbose,
     const boost::filesystem::path& debug_dir,
     const dogen::config::archive_types& save_dia_model,
     const dogen::config::archive_types& save_sml_model,
     const bool stop_after_formatting,
     const bool stop_after_merging)
-    : verbose_(verbose),
-      debug_dir_(debug_dir),
+    : debug_dir_(debug_dir),
       save_dia_model_(save_dia_model),
       save_sml_model_(save_sml_model),
       stop_after_formatting_(stop_after_formatting),
@@ -54,7 +50,6 @@ troubleshooting_settings::troubleshooting_settings(
 
 void troubleshooting_settings::swap(troubleshooting_settings& other) noexcept {
     using std::swap;
-    swap(verbose_, other.verbose_);
     swap(debug_dir_, other.debug_dir_);
     swap(save_dia_model_, other.save_dia_model_);
     swap(save_sml_model_, other.save_sml_model_);
@@ -63,8 +58,7 @@ void troubleshooting_settings::swap(troubleshooting_settings& other) noexcept {
 }
 
 bool troubleshooting_settings::operator==(const troubleshooting_settings& rhs) const {
-    return verbose_ == rhs.verbose_ &&
-        debug_dir_ == rhs.debug_dir_ &&
+    return debug_dir_ == rhs.debug_dir_ &&
         save_dia_model_ == rhs.save_dia_model_ &&
         save_sml_model_ == rhs.save_sml_model_ &&
         stop_after_formatting_ == rhs.stop_after_formatting_ &&
@@ -75,14 +69,6 @@ troubleshooting_settings& troubleshooting_settings::operator=(troubleshooting_se
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool troubleshooting_settings::verbose() const {
-    return verbose_;
-}
-
-void troubleshooting_settings::verbose(const bool v) {
-    verbose_ = v;
 }
 
 const boost::filesystem::path& troubleshooting_settings::debug_dir() const {

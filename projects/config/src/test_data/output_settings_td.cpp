@@ -54,8 +54,7 @@ populate(const unsigned int position, result_type& v) {
     v.output_to_file(create_bool(position + 1));
     v.delete_extra_files(create_bool(position + 2));
     v.force_write(create_bool(position + 3));
-    v.verbose(create_bool(position + 4));
-    v.ignore_patterns(create_std_vector_std_string(position + 5));
+    v.ignore_patterns(create_std_vector_std_string(position + 4));
 }
 
 output_settings_generator::result_type

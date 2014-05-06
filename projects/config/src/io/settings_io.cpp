@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/config/io/modeling_settings_io.hpp"
@@ -29,12 +30,19 @@ namespace dogen {
 namespace config {
 
 std::ostream& operator<<(std::ostream& s, const settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::config::settings\"" << ", "
       << "\"modeling\": " << v.modeling() << ", "
       << "\"cpp\": " << v.cpp() << ", "
       << "\"troubleshooting\": " << v.troubleshooting() << ", "
-      << "\"output\": " << v.output()
+      << "\"output\": " << v.output() << ", "
+      << "\"verbose\": " << v.verbose()
       << " }";
     return(s);
 }

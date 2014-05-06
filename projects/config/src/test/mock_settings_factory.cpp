@@ -56,19 +56,8 @@ mock_settings_factory::build_facets(const bool all) {
     };
 }
 
-modeling_settings mock_settings_factory::
-build_modeling_settings(boost::filesystem::path target,
-    std::string module_path, bool verbose) {
-    modeling_settings r;
-    r.verbose(verbose);
-    r.external_module_path(module_path);
-    r.target(target);
-    return r;
-}
-
-output_settings mock_settings_factory::build_output_settings(bool verbose) {
+output_settings mock_settings_factory::build_output_settings() {
     output_settings r;
-    r.verbose(verbose);
     r.output_to_stdout(false);
     r.output_to_file(true);
     r.delete_extra_files(true);
@@ -77,9 +66,8 @@ output_settings mock_settings_factory::build_output_settings(bool verbose) {
 }
 
 troubleshooting_settings
-mock_settings_factory::build_troubleshooting_settings(bool verbose) {
+mock_settings_factory::build_troubleshooting_settings() {
     troubleshooting_settings r;
-    r.verbose(verbose);
     return r;
 }
 
@@ -88,25 +76,14 @@ cpp_settings mock_settings_factory::build_cpp_settings() {
 }
 
 cpp_settings mock_settings_factory::build_cpp_settings(
-    boost::filesystem::path src_dir,
-    boost::filesystem::path include_dir,
-    bool verbose) {
+    const boost::filesystem::path& src_dir,
+    const boost::filesystem::path& include_dir) {
 
     cpp_settings r;
-    r.verbose(verbose);
     r.split_project(true);
     r.source_directory(src_dir);
     r.include_directory(include_dir);
-
-    std::set<cpp_facet_types> f = {
-        cpp_facet_types::types,
-        cpp_facet_types::hash,
-        cpp_facet_types::serialization,
-        cpp_facet_types::io,
-        cpp_facet_types::test_data,
-        cpp_facet_types::odb
-    };
-    r.enabled_facets(f);
+    r.enabled_facets(build_facets());
     r.header_extension(header_extension);
     r.source_extension(source_extension);
     r.domain_facet_folder(domain_facet_folder);
@@ -120,37 +97,49 @@ cpp_settings mock_settings_factory::build_cpp_settings(
 }
 
 cpp_settings mock_settings_factory::build_cpp_settings(
-    boost::filesystem::path project_dir,
-    bool verbose) {
+    const boost::filesystem::path& project_dir) {
 
-    cpp_settings r(build_cpp_settings(empty, empty, verbose));
+    cpp_settings r(build_cpp_settings(empty, empty));
     r.split_project(false);
     r.project_directory(project_dir);
     return r;
 }
 
-settings mock_settings_factory::build_settings(boost::filesystem::path target,
-    boost::filesystem::path src_dir,
-    boost::filesystem::path include_dir,
-    std::string module_path,
-    bool verbose) {
-    settings r;
-    r.modeling(build_modeling_settings(target, module_path, verbose));
-    r.cpp(build_cpp_settings(src_dir, include_dir, verbose));
-    r.troubleshooting(build_troubleshooting_settings(verbose));
-    r.output(build_output_settings(verbose));
+modeling_settings mock_settings_factory::build_modeling_settings(
+    const boost::filesystem::path& target,
+    const std::string& module_path) {
+    modeling_settings r;
+    r.external_module_path(module_path);
+    r.target(target);
     return r;
 }
 
-settings mock_settings_factory::build_settings(boost::filesystem::path target,
-    boost::filesystem::path project_dir,
-    std::string module_path,
-    bool verbose) {
+settings mock_settings_factory::build_settings(
+    const boost::filesystem::path& target,
+    const boost::filesystem::path& src_dir,
+    const boost::filesystem::path& include_dir,
+    const std::string& module_path,
+    const bool verbose) {
     settings r;
-    r.modeling(build_modeling_settings(target, module_path, verbose));
-    r.cpp(build_cpp_settings(project_dir, verbose));
-    r.troubleshooting(build_troubleshooting_settings(verbose));
-    r.output(build_output_settings(verbose));
+    r.verbose(verbose);
+    r.modeling(build_modeling_settings(target, module_path));
+    r.cpp(build_cpp_settings(src_dir, include_dir));
+    r.troubleshooting(build_troubleshooting_settings());
+    r.output(build_output_settings());
+    return r;
+}
+
+settings mock_settings_factory::build_settings(
+    const boost::filesystem::path& target,
+    const boost::filesystem::path& project_dir,
+    const std::string& module_path,
+    const bool verbose) {
+    settings r;
+    r.verbose(verbose);
+    r.modeling(build_modeling_settings(target, module_path));
+    r.cpp(build_cpp_settings(project_dir));
+    r.troubleshooting(build_troubleshooting_settings());
+    r.output(build_output_settings());
     return r;
 }
 

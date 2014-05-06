@@ -23,15 +23,20 @@
 namespace dogen {
 namespace config {
 
+settings::settings()
+    : verbose_(static_cast<bool>(0)) { }
+
 settings::settings(
     const dogen::config::modeling_settings& modeling,
     const dogen::config::cpp_settings& cpp,
     const dogen::config::troubleshooting_settings& troubleshooting,
-    const dogen::config::output_settings& output)
+    const dogen::config::output_settings& output,
+    const bool verbose)
     : modeling_(modeling),
       cpp_(cpp),
       troubleshooting_(troubleshooting),
-      output_(output) { }
+      output_(output),
+      verbose_(verbose) { }
 
 void settings::swap(settings& other) noexcept {
     using std::swap;
@@ -39,13 +44,15 @@ void settings::swap(settings& other) noexcept {
     swap(cpp_, other.cpp_);
     swap(troubleshooting_, other.troubleshooting_);
     swap(output_, other.output_);
+    swap(verbose_, other.verbose_);
 }
 
 bool settings::operator==(const settings& rhs) const {
     return modeling_ == rhs.modeling_ &&
         cpp_ == rhs.cpp_ &&
         troubleshooting_ == rhs.troubleshooting_ &&
-        output_ == rhs.output_;
+        output_ == rhs.output_ &&
+        verbose_ == rhs.verbose_;
 }
 
 settings& settings::operator=(settings other) {
@@ -116,6 +123,14 @@ void settings::output(const dogen::config::output_settings& v) {
 
 void settings::output(const dogen::config::output_settings&& v) {
     output_ = std::move(v);
+}
+
+bool settings::verbose() const {
+    return verbose_;
+}
+
+void settings::verbose(const bool v) {
+    verbose_ = v;
 }
 
 } }

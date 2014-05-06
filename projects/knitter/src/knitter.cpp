@@ -89,9 +89,9 @@ dogen::knit::workflow workflow_factory(const dogen::config::settings& s) {
  * @brief Performs the initialisation of logging system.
  */
 void initialise_logging(const dogen::config::settings& s) {
+    const auto sl(s.verbose() ? severity_level::debug : severity_level::info);
     life_cycle_manager lcm;
-    const bool v(s.troubleshooting().verbose());
-    lcm.initialise(log_file, v ? severity_level::debug : severity_level::info);
+    lcm.initialise(log_file, sl);
 }
 
 }

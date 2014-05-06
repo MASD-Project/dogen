@@ -53,12 +53,11 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_housekeeper_does_not_find_extra_
     e.insert(tds_test_good::expected_empty_file_txt());
 
     const std::vector<boost::filesystem::path> v({tds_test_good::expected()});
-    const bool verbose(true);
     bool called(false);
     const auto lambda([&](std::list<boost::filesystem::path>) {called = true;});
 
     using dogen::knit::housekeeper;
-    housekeeper hk(ignored_files, v, e, verbose, lambda);
+    housekeeper hk(ignored_files, v, e, lambda);
     hk.tidy_up();
     BOOST_CHECK(!called);
 }
@@ -73,7 +72,6 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_housekeeper_finds_the_extra_fi
     e.insert(tds_test_good::expected_empty_file_txt());
 
     const std::vector<boost::filesystem::path> v({tds_test_good::expected()});
-    const bool verbose(true);
     bool called(false);
     const auto lambda([&](std::list<boost::filesystem::path> p) {
             BOOST_CHECK(p.size() == 2);
@@ -86,7 +84,7 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_housekeeper_finds_the_extra_fi
         });
 
     using dogen::knit::housekeeper;
-    housekeeper hk(ignored_files, v, e, verbose, lambda);
+    housekeeper hk(ignored_files, v, e, lambda);
     hk.tidy_up();
     BOOST_CHECK(called);
 }
@@ -101,10 +99,8 @@ BOOST_AUTO_TEST_CASE(housekeeper_deletes_extra_files_and_only_extra_files) {
     f.insert(validating_resolver::resolve(hk_tds_actual_f1));
     f.insert(validating_resolver::resolve(hk_tds_actual_f2));
 
-    const bool verbose(true);
-
     using dogen::knit::housekeeper;
-    housekeeper hk(ignored_files, v, f, verbose);
+    housekeeper hk(ignored_files, v, f);
     hk.tidy_up();
 
     using dogen::utility::test::asserter;
@@ -125,7 +121,6 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
     std::vector<std::string> ignores({".*/file_1.*"});
 
     const std::vector<boost::filesystem::path> v({tds_test_good::expected()});
-    const bool verbose(true);
     bool called(false);
     const auto lambda([&](std::list<boost::filesystem::path> l) {
             for (const auto a : l)
@@ -134,7 +129,7 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
         });
 
     using dogen::knit::housekeeper;
-    housekeeper hk(ignores, v, e, verbose, lambda);
+    housekeeper hk(ignores, v, e, lambda);
     hk.tidy_up();
     BOOST_CHECK(!called);
 }

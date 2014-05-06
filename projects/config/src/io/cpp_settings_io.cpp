@@ -58,7 +58,6 @@ std::ostream& operator<<(std::ostream& s, const cpp_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::config::cpp_settings\"" << ", "
-      << "\"verbose\": " << v.verbose() << ", "
       << "\"split_project\": " << v.split_project() << ", "
       << "\"project_directory\": " << "\"" << v.project_directory().generic_string() << "\"" << ", "
       << "\"source_directory\": " << "\"" << v.source_directory().generic_string() << "\"" << ", "

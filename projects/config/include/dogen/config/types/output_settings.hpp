@@ -48,7 +48,6 @@ public:
         const bool output_to_file,
         const bool delete_extra_files,
         const bool force_write,
-        const bool verbose,
         const std::vector<std::string>& ignore_patterns);
 
 private:
@@ -93,14 +92,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Print additional diagnostic information to standard output.
-     */
-    /**@{*/
-    bool verbose() const;
-    void verbose(const bool v);
-    /**@}*/
-
-    /**
      * @brief List of regular expressions to filter out files to ignore.
      */
     /**@{*/
@@ -125,7 +116,6 @@ private:
     bool output_to_file_;
     bool delete_extra_files_;
     bool force_write_;
-    bool verbose_;
     std::vector<std::string> ignore_patterns_;
 };
 

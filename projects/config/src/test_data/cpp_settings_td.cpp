@@ -63,29 +63,28 @@ cpp_settings_generator::cpp_settings_generator() : position_(0) { }
 
 void cpp_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.verbose(create_bool(position + 0));
-    v.split_project(create_bool(position + 1));
-    v.project_directory(create_boost_filesystem_path(position + 2));
-    v.source_directory(create_boost_filesystem_path(position + 3));
-    v.include_directory(create_boost_filesystem_path(position + 4));
-    v.disable_backend(create_bool(position + 5));
-    v.disable_cmakelists(create_bool(position + 6));
-    v.enabled_facets(create_std_set_dogen_config_cpp_facet_types(position + 7));
-    v.header_extension(create_std_string(position + 8));
-    v.source_extension(create_std_string(position + 9));
-    v.disable_complete_constructor(create_bool(position + 10));
-    v.disable_facet_includers(create_bool(position + 11));
-    v.disable_facet_folders(create_bool(position + 12));
-    v.disable_unique_file_names(create_bool(position + 13));
-    v.domain_facet_folder(create_std_string(position + 14));
-    v.hash_facet_folder(create_std_string(position + 15));
-    v.io_facet_folder(create_std_string(position + 16));
-    v.serialization_facet_folder(create_std_string(position + 17));
-    v.test_data_facet_folder(create_std_string(position + 18));
-    v.odb_facet_folder(create_std_string(position + 19));
-    v.disable_xml_serialization(create_bool(position + 20));
-    v.use_integrated_io(create_bool(position + 21));
-    v.disable_eos_serialization(create_bool(position + 22));
+    v.split_project(create_bool(position + 0));
+    v.project_directory(create_boost_filesystem_path(position + 1));
+    v.source_directory(create_boost_filesystem_path(position + 2));
+    v.include_directory(create_boost_filesystem_path(position + 3));
+    v.disable_backend(create_bool(position + 4));
+    v.disable_cmakelists(create_bool(position + 5));
+    v.enabled_facets(create_std_set_dogen_config_cpp_facet_types(position + 6));
+    v.header_extension(create_std_string(position + 7));
+    v.source_extension(create_std_string(position + 8));
+    v.disable_complete_constructor(create_bool(position + 9));
+    v.disable_facet_includers(create_bool(position + 10));
+    v.disable_facet_folders(create_bool(position + 11));
+    v.disable_unique_file_names(create_bool(position + 12));
+    v.domain_facet_folder(create_std_string(position + 13));
+    v.hash_facet_folder(create_std_string(position + 14));
+    v.io_facet_folder(create_std_string(position + 15));
+    v.serialization_facet_folder(create_std_string(position + 16));
+    v.test_data_facet_folder(create_std_string(position + 17));
+    v.odb_facet_folder(create_std_string(position + 18));
+    v.disable_xml_serialization(create_bool(position + 19));
+    v.use_integrated_io(create_bool(position + 20));
+    v.disable_eos_serialization(create_bool(position + 21));
 }
 
 cpp_settings_generator::result_type

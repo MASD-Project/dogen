@@ -24,26 +24,22 @@ namespace dogen {
 namespace config {
 
 modeling_settings::modeling_settings()
-    : verbose_(static_cast<bool>(0)),
-      disable_model_module_(static_cast<bool>(0)) { }
+    : disable_model_module_(static_cast<bool>(0)) { }
 
 modeling_settings::modeling_settings(modeling_settings&& rhs)
     : target_(std::move(rhs.target_)),
       external_module_path_(std::move(rhs.external_module_path_)),
       references_(std::move(rhs.references_)),
-      verbose_(std::move(rhs.verbose_)),
       disable_model_module_(std::move(rhs.disable_model_module_)) { }
 
 modeling_settings::modeling_settings(
     const boost::filesystem::path& target,
     const std::string& external_module_path,
     const std::vector<dogen::config::reference>& references,
-    const bool verbose,
     const bool disable_model_module)
     : target_(target),
       external_module_path_(external_module_path),
       references_(references),
-      verbose_(verbose),
       disable_model_module_(disable_model_module) { }
 
 void modeling_settings::swap(modeling_settings& other) noexcept {
@@ -51,7 +47,6 @@ void modeling_settings::swap(modeling_settings& other) noexcept {
     swap(target_, other.target_);
     swap(external_module_path_, other.external_module_path_);
     swap(references_, other.references_);
-    swap(verbose_, other.verbose_);
     swap(disable_model_module_, other.disable_model_module_);
 }
 
@@ -59,7 +54,6 @@ bool modeling_settings::operator==(const modeling_settings& rhs) const {
     return target_ == rhs.target_ &&
         external_module_path_ == rhs.external_module_path_ &&
         references_ == rhs.references_ &&
-        verbose_ == rhs.verbose_ &&
         disable_model_module_ == rhs.disable_model_module_;
 }
 
@@ -115,14 +109,6 @@ void modeling_settings::references(const std::vector<dogen::config::reference>& 
 
 void modeling_settings::references(const std::vector<dogen::config::reference>&& v) {
     references_ = std::move(v);
-}
-
-bool modeling_settings::verbose() const {
-    return verbose_;
-}
-
-void modeling_settings::verbose(const bool v) {
-    verbose_ = v;
 }
 
 bool modeling_settings::disable_model_module() const {

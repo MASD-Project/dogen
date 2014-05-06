@@ -125,12 +125,12 @@ namespace knitter {
 
 program_options_parser::
 program_options_parser(std::vector<std::string> arguments)
-    : verbose_(false), arguments_(arguments),
+    : arguments_(arguments),
       current_path_(boost::filesystem::current_path()) { }
 
 program_options_parser::
 program_options_parser(int argc, char** argv)
-    : verbose_(false), arguments_(argv + 1, argv + argc),
+    : arguments_(argv + 1, argv + argc),
       current_path_(boost::filesystem::current_path()) { }
 
 boost::program_options::options_description
@@ -397,7 +397,6 @@ config::cpp_settings program_options_parser::
 transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     config::cpp_settings r;
 
-    r.verbose(verbose_);
     r.split_project(vm.count(cpp_split_project_arg));
 
     if (r.split_project()) {
@@ -492,7 +491,6 @@ program_options_parser::transform_modeling_settings(
     const boost::program_options::variables_map& vm) const {
     config::modeling_settings r;
 
-    r.verbose(verbose_);
     if (!vm.count(target_arg))
         throw_missing_target();
     r.target(vm[target_arg].as<std::string>());
@@ -535,7 +533,6 @@ config::troubleshooting_settings program_options_parser::
 transform_troubleshooting_settings(const variables_map& vm) const {
     config::troubleshooting_settings r;
 
-    r.verbose(verbose_);
     r.stop_after_merging(vm.count(stop_after_merging_arg));
     r.stop_after_formatting(vm.count(stop_after_formatting_arg));
 
@@ -568,7 +565,6 @@ transform_troubleshooting_settings(const variables_map& vm) const {
 config::output_settings program_options_parser::
 transform_output_settings(const variables_map& vm) const {
     config::output_settings r;
-    r.verbose(verbose_);
     r.output_to_stdout(vm.count(output_to_stdout_arg));
     r.output_to_file(vm.count(output_to_file_arg) || !r.output_to_stdout());
     r.delete_extra_files(vm.count(delete_extra_files_arg));
@@ -587,14 +583,14 @@ boost::optional<config::settings> program_options_parser::parse() {
         return boost::optional<config::settings>();
 
     const boost::program_options::variables_map vm(*optional_vm);
-    verbose_ = vm.count(verbose_arg);
+    config::settings r;
+    r.verbose(vm.count(verbose_arg));
+    r.modeling(transform_modeling_settings(vm));
+    r.cpp(transform_cpp_settings(vm));
+    r.troubleshooting(transform_troubleshooting_settings(vm));
+    r.output(transform_output_settings(vm));
 
-    settings_.modeling(transform_modeling_settings(vm));
-    settings_.cpp(transform_cpp_settings(vm));
-    settings_.troubleshooting(transform_troubleshooting_settings(vm));
-    settings_.output(transform_output_settings(vm));
-
-    return boost::optional<config::settings>(settings_);
+    return boost::optional<config::settings>(r);
 }
 
 } }

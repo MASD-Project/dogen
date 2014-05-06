@@ -77,9 +77,7 @@ public:
     typedef std::function<std::ostream& ()> output_fn;
 
 public:
-    workflow(workflow&& rhs)
-    : verbose_(std::move(rhs.verbose_)), settings_(std::move(rhs.settings_)) { }
-
+    workflow(workflow&& rhs) : settings_(std::move(rhs.settings_)) { }
     workflow(const config::settings& s);
     workflow(const config::settings& s, const output_fn& o);
 
@@ -122,7 +120,6 @@ public:
     void execute() const;
 
 private:
-    const bool verbose_;
     const config::settings settings_;
     const output_fn output_;
 };

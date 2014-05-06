@@ -66,12 +66,10 @@ namespace knit {
 housekeeper::housekeeper(
     const std::vector<std::string>& ignore_patterns,
     std::vector<boost::filesystem::path> managed_directories,
-    std::set<boost::filesystem::path> expected_files, bool verbose,
-    delete_fn fn) :
+    std::set<boost::filesystem::path> expected_files, delete_fn fn) :
     ignore_patterns_(ignore_patterns),
     managed_directories_(managed_directories),
     expected_files_(expected_files),
-    verbose_(verbose),
     delete_fn_(fn) {
 
     BOOST_LOG_SEV(lg, info) << "initial configuration: "

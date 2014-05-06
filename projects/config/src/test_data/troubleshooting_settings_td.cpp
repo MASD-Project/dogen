@@ -24,10 +24,6 @@
 
 namespace {
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 boost::filesystem::path
 create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
@@ -40,6 +36,10 @@ create_dogen_config_archive_types(const unsigned int position) {
     return dogen::config::archive_types_generator::create(position);
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -49,12 +49,11 @@ troubleshooting_settings_generator::troubleshooting_settings_generator() : posit
 
 void troubleshooting_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.verbose(create_bool(position + 0));
-    v.debug_dir(create_boost_filesystem_path(position + 1));
-    v.save_dia_model(create_dogen_config_archive_types(position + 2));
-    v.save_sml_model(create_dogen_config_archive_types(position + 3));
-    v.stop_after_formatting(create_bool(position + 4));
-    v.stop_after_merging(create_bool(position + 5));
+    v.debug_dir(create_boost_filesystem_path(position + 0));
+    v.save_dia_model(create_dogen_config_archive_types(position + 1));
+    v.save_sml_model(create_dogen_config_archive_types(position + 2));
+    v.stop_after_formatting(create_bool(position + 3));
+    v.stop_after_merging(create_bool(position + 4));
 }
 
 troubleshooting_settings_generator::result_type

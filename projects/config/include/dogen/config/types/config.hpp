@@ -18,36 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/hash/cpp_settings_hash.hpp"
-#include "dogen/config/hash/modeling_settings_hash.hpp"
-#include "dogen/config/hash/output_settings_hash.hpp"
-#include "dogen/config/hash/settings_hash.hpp"
-#include "dogen/config/hash/troubleshooting_settings_hash.hpp"
+#ifndef DOGEN_CONFIG_TYPES_CONFIG_HPP
+#define DOGEN_CONFIG_TYPES_CONFIG_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
+
+/**
+ * @brief Stores the configuration for Dogen applications.
+ *
+ * The config model provides types to store general configuration
+ * settings for all the different Dogen applications, such as
+ * knitter, etc.
+ *
+ */
 namespace config {
-
-std::size_t settings_hasher::hash(const settings&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.modeling());
-    combine(seed, v.cpp());
-    combine(seed, v.troubleshooting());
-    combine(seed, v.output());
-    combine(seed, v.verbose());
-
-    return seed;
-}
-
 } }
+
+#endif

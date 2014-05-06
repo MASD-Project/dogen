@@ -27,21 +27,18 @@ output_settings::output_settings()
     : output_to_stdout_(static_cast<bool>(0)),
       output_to_file_(static_cast<bool>(0)),
       delete_extra_files_(static_cast<bool>(0)),
-      force_write_(static_cast<bool>(0)),
-      verbose_(static_cast<bool>(0)) { }
+      force_write_(static_cast<bool>(0)) { }
 
 output_settings::output_settings(
     const bool output_to_stdout,
     const bool output_to_file,
     const bool delete_extra_files,
     const bool force_write,
-    const bool verbose,
     const std::vector<std::string>& ignore_patterns)
     : output_to_stdout_(output_to_stdout),
       output_to_file_(output_to_file),
       delete_extra_files_(delete_extra_files),
       force_write_(force_write),
-      verbose_(verbose),
       ignore_patterns_(ignore_patterns) { }
 
 void output_settings::swap(output_settings& other) noexcept {
@@ -50,7 +47,6 @@ void output_settings::swap(output_settings& other) noexcept {
     swap(output_to_file_, other.output_to_file_);
     swap(delete_extra_files_, other.delete_extra_files_);
     swap(force_write_, other.force_write_);
-    swap(verbose_, other.verbose_);
     swap(ignore_patterns_, other.ignore_patterns_);
 }
 
@@ -59,7 +55,6 @@ bool output_settings::operator==(const output_settings& rhs) const {
         output_to_file_ == rhs.output_to_file_ &&
         delete_extra_files_ == rhs.delete_extra_files_ &&
         force_write_ == rhs.force_write_ &&
-        verbose_ == rhs.verbose_ &&
         ignore_patterns_ == rhs.ignore_patterns_;
 }
 
@@ -99,14 +94,6 @@ bool output_settings::force_write() const {
 
 void output_settings::force_write(const bool v) {
     force_write_ = v;
-}
-
-bool output_settings::verbose() const {
-    return verbose_;
-}
-
-void output_settings::verbose(const bool v) {
-    verbose_ = v;
 }
 
 const std::vector<std::string>& output_settings::ignore_patterns() const {

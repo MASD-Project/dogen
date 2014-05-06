@@ -609,7 +609,6 @@ BOOST_AUTO_TEST_CASE(not_supplying_troubleshooting_options_results_in_expected_s
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
     const auto ts(s.troubleshooting());
-    BOOST_CHECK(!ts.verbose());
     BOOST_CHECK(ts.debug_dir().empty());
 
     using dogen::config::archive_types;
@@ -624,7 +623,6 @@ BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_setti
     SETUP_TEST_LOG_SOURCE("supplying_troubleshooting_options_results_in_expected_settings");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        verbose_arg,
         debug_dir_arg, debug_dir_value_arg,
         save_dia_model_arg, save_dia_model_value_arg,
         save_sml_model_arg, save_sml_model_value_arg,
@@ -634,7 +632,6 @@ BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_setti
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
     const auto ts(s.troubleshooting());
-    BOOST_CHECK(ts.verbose());
     BOOST_CHECK(ts.debug_dir().string() == debug_dir_value_arg);
 
     using dogen::config::archive_types;
@@ -713,6 +710,27 @@ BOOST_AUTO_TEST_CASE(supplying_output_to_std_out_disables_output_to_file) {
     const auto fs(s.output());
     BOOST_CHECK(!fs.output_to_file());
     BOOST_CHECK(fs.output_to_stdout());
+}
+
+BOOST_AUTO_TEST_CASE(supplying_verobose_flag_results_in_settings_with_verbose_on) {
+    SETUP_TEST_LOG_SOURCE("supplying_verobose_flag_results_in_settings_with_verbose_on");
+
+    const std::vector<std::string> o = {
+        target_arg, target_value_arg,
+        verbose_arg
+    };
+    const auto s(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_CHECK(s.verbose());
+}
+
+BOOST_AUTO_TEST_CASE(not_supplying_verobose_flag_results_in_settings_with_verbose_off) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_verobose_flag_results_in_settings_with_verbose_off");
+
+    const std::vector<std::string> o = { target_arg, target_value_arg };
+    const auto s(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_CHECK(!s.verbose());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -63,20 +63,18 @@ const std::string code_generation_failure("Code generation failure.");
 namespace dogen {
 namespace knit {
 
-workflow::workflow(const config::settings& s)
-    : verbose_(s.troubleshooting().verbose()), settings_(s) {
+workflow::workflow(const config::settings& s) : settings_(s) {
 
     if (settings_.output().output_to_stdout()) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
     }
-
     config::validator::validate(s);
 }
 
 workflow::
 workflow(const config::settings& s, const output_fn& o)
-    : verbose_(s.troubleshooting().verbose()), settings_(s), output_(o) {
+    : settings_(s), output_(o) {
 
     if (!settings_.output().output_to_stdout() || !output_) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
@@ -126,8 +124,8 @@ void workflow::generate(backends::backend& b) const {
             }),
         std::inserter(expected_files, expected_files.end()));
 
-    housekeeper hk(settings_.output().ignore_patterns(),
-        b.managed_directories(), expected_files, verbose_);
+    const auto& ip(settings_.output().ignore_patterns());
+    housekeeper hk(ip, b.managed_directories(), expected_files);
     hk.tidy_up();
 }
 

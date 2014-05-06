@@ -49,9 +49,7 @@ public:
 
 public:
     program_options_parser(program_options_parser&& rhs)
-    : settings_(std::move(rhs.settings_)),
-      verbose_(std::move(rhs.verbose_)),
-      arguments_(std::move(rhs.arguments_)),
+    : arguments_(std::move(rhs.arguments_)),
       help_function_(std::move(rhs.help_function_)),
       version_function_(std::move(rhs.version_function_)),
       current_path_(std::move(rhs.current_path_)) { }
@@ -100,8 +98,6 @@ public:
     boost::optional<config::settings> parse();
 
 private:
-    config::settings settings_;
-    bool verbose_;
     const std::vector<std::string> arguments_;
     std::function<void(const std::string&)> help_function_;
     std::function<void()>  version_function_;

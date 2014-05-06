@@ -5,7 +5,7 @@
 
 * Release Notes
 
-This file contains all stories that were closed during sprint 48.
+This file contains all stories that were closed during sprint 49.
 
 The *Mission Statement* for this sprint is to integrate tags with the
 inner workings of knitter once and for all.
@@ -13,20 +13,22 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-05 Mon 18:01]
+Clock summary at [2014-05-06 Tue 18:40]
 
-| Headline                                                   | Time   |      |      |
-|------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *4:28* |      |      |
-|------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                            |        | 4:28 |      |
-| IMPLEMENTATION Release notes and backlog grooming          |        |      | 0:39 |
-| COMPLETED Remove the roadmap                               |        |      | 0:05 |
-| COMPLETED Design an end-to-end solution to the tag problem |        |      | 3:23 |
-| COMPLETED Rename the =COMMENT= tag to =dia.comment=        |        |      | 0:21 |
+| Headline                                                    | Time   |      |      |
+|-------------------------------------------------------------+--------+------+------|
+| *Total time*                                                | *5:48* |      |      |
+|-------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                             |        | 5:48 |      |
+| IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:02 |
+| COMPLETED Remove the roadmap                                |        |      | 0:05 |
+| COMPLETED Design an end-to-end solution to the tag problem  |        |      | 3:23 |
+| COMPLETED Rename the =COMMENT= tag to =dia.comment=         |        |      | 0:21 |
+| IMPLEMENTATION Move all the configuration options into tags |        |      | 0:57 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-06 Tue 07:55]--[2014-05-06 Tue 08:18] =>  0:23
     CLOCK: [2014-05-05 Mon 17:22]--[2014-05-05 Mon 17:37] =>  0:15
     CLOCK: [2014-05-05 Mon 07:50]--[2014-05-05 Mon 08:14] =>  0:24
 
@@ -173,18 +175,55 @@ left alone until one reaches the transformer for that model.
 Actually, we already had started to do this, but it seems a few files
 still use the old name. Remove all remnants of =COMMENT=.
 
-*** Move all the configuration options into tags                      :story:
+*** IMPLEMENTATION Move all the configuration options into tags       :story:
+    CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
 
-Parameters as per analysis story. We need to:
+Parameters as per analysis story.
 
-- add missing config options such as annotations, etc to =config=
-  model.
-- create a parser that reads a =ptree= and outputs config options;
-- move across all tags related to config options from =sml= to
-  =config= (into the parser only really)
-- delete all command line options related to config options that to be
-  handled by tags.
-- update all models and tests to use the tags.
+**** COMPLETED Move the verbose option to top-level settings           :task:
+     CLOSED: [2014-05-06 Tue 18:40]
+     CLOCK: [2014-05-06 Tue 18:08]--[2014-05-06 Tue 18:40] =>  0:32
+     CLOCK: [2014-05-06 Tue 08:19]--[2014-05-06 Tue 08:40] =>  0:21
+
+We should be using the top-level verbose to initialise the logger and
+not using it after that. We are trying to minimise the usage of the
+settings prior to the target model loading.
+
+**** Add missing config options such as annotations to =config=        :task:
+
+We should use the exact same approach, naming conventions etc.
+
+**** Merge provider into workflow in =knit=                            :task:
+
+If we are going to override the settings we must make sure the code is
+as linear as possible. The provider is actually some kind of SML
+loading sub-workflow.
+
+**** Create a tags class in =config=                                   :task:
+
+We need to declare all the tags we're exporting.
+
+**** Create a =property_tree_parser= that outputs settings             :task:
+
+The parser should take the existing settings as an input and return
+an overridden version of them.
+
+**** Plug the parser into the SML sub-workflow                         :task:
+
+When we do this we need to make sure everyone is using the same
+settings; there are many places where the settings have been passed in
+by reference. Also, we need to make sure the target model is the first
+one to be processed.
+
+**** Update all models and tests to use the new tags                   :task:
+
+Once the config options are in we need to start making use of them to
+ensure they work exactly as before.
+
+**** Remove all C++ command line settings                              :task:
+
+Once the overrides have been proven to work, we need to remove the
+command line options and make sure nothing breaks.
 
 *** Rename ODB parameters                                             :story:
 

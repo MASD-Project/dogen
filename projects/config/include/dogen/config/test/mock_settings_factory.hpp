@@ -33,6 +33,9 @@ namespace dogen {
 namespace config {
 namespace test {
 
+/**
+ * @brief Creates instances of setting classes for testing.
+ */
 class mock_settings_factory {
 public:
     mock_settings_factory() = delete;
@@ -42,39 +45,72 @@ public:
     mock_settings_factory& operator=(const mock_settings_factory&) = delete;
 
 public:
+    /**
+     * @brief Creates a container of facets.
+     *
+     * @return all facets if @e all is true, @e hash and @e types otherwise.
+     */
     static std::set<cpp_facet_types> build_facets(const bool all = true);
 
-    static output_settings build_output_settings(bool verbose = true);
+    /**
+     * @brief Returns the output settings configured to output to
+     * file.
+     */
+    static output_settings build_output_settings();
 
-    static troubleshooting_settings
-    build_troubleshooting_settings(bool verbose = true);
+    /**
+     * @brief Returns the troubleshooting settings with all options
+     * switched off.
+     */
+    static troubleshooting_settings build_troubleshooting_settings();
 
+    /**
+     * @brief Returns the C++ settings with empty source and include
+     * directories.
+     *
+     * All facets are enabled.
+     */
     static cpp_settings build_cpp_settings();
 
+    /**
+     * @brief Returns the C++ settings with source and include
+     * directory populated.
+     *
+     * All facets are enabled.
+     */
     static cpp_settings build_cpp_settings(
-        boost::filesystem::path src_dir,
-        boost::filesystem::path include_dir,
-        bool verbose = true);
+        const boost::filesystem::path& src_dir,
+        const boost::filesystem::path& include_dir);
 
+    /**
+     * @brief Returns the C++ settings with empty source and include
+     * directories and a project directory populated.
+     *
+     * All facets are enabled.
+     */
     static cpp_settings build_cpp_settings(
-        boost::filesystem::path project_dir,
-        bool verbose = true);
+        const boost::filesystem::path& project_dir);
 
+    /**
+     * @brief Returns the modeling settings with the target and module
+     * path set.
+     */
     static modeling_settings build_modeling_settings(
-        boost::filesystem::path target,
-        std::string module_path,
-        bool verbose = true);
+        const boost::filesystem::path& target,
+        const std::string& module_path);
 
-    static settings build_settings(boost::filesystem::path target,
-        boost::filesystem::path src_dir,
-        boost::filesystem::path include_dir,
-        std::string module_path,
-        bool verbose = true);
+    static settings build_settings(
+        const boost::filesystem::path& target,
+        const boost::filesystem::path& src_dir,
+        const boost::filesystem::path& include_dir,
+        const std::string& module_path,
+        const bool verbose = true);
 
-    static settings build_settings(boost::filesystem::path target,
-        boost::filesystem::path project_dir,
-        std::string module_path,
-        bool verbose = true);
+    static settings build_settings(
+        const boost::filesystem::path& target,
+        const boost::filesystem::path& project_dir,
+        const std::string& module_path,
+        const bool verbose = true);
 };
 
 } } }

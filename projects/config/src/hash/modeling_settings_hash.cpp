@@ -55,7 +55,6 @@ std::size_t modeling_settings_hasher::hash(const modeling_settings&v) {
     combine(seed, hash_boost_filesystem_path(v.target()));
     combine(seed, v.external_module_path());
     combine(seed, hash_std_vector_dogen_config_reference(v.references()));
-    combine(seed, v.verbose());
     combine(seed, v.disable_model_module());
 
     return seed;

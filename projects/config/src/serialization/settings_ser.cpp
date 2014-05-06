@@ -45,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("cpp", v.cpp_);
     ar << make_nvp("troubleshooting", v.troubleshooting_);
     ar << make_nvp("output", v.output_);
+    ar << make_nvp("verbose", v.verbose_);
 }
 
 template<typename Archive>
@@ -55,6 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("cpp", v.cpp_);
     ar >> make_nvp("troubleshooting", v.troubleshooting_);
     ar >> make_nvp("output", v.output_);
+    ar >> make_nvp("verbose", v.verbose_);
 }
 
 } }

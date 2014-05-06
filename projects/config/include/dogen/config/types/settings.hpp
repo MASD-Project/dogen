@@ -37,17 +37,20 @@ namespace config {
 
 class settings final {
 public:
-    settings() = default;
     settings(const settings&) = default;
     settings(settings&&) = default;
     ~settings() = default;
+
+public:
+    settings();
 
 public:
     settings(
         const dogen::config::modeling_settings& modeling,
         const dogen::config::cpp_settings& cpp,
         const dogen::config::troubleshooting_settings& troubleshooting,
-        const dogen::config::output_settings& output);
+        const dogen::config::output_settings& output,
+        const bool verbose);
 
 private:
     template<typename Archive>
@@ -97,6 +100,14 @@ public:
     void output(const dogen::config::output_settings&& v);
     /**@}*/
 
+    /**
+     * @brief Provide additional diagnostic information in the log file.
+     */
+    /**@{*/
+    bool verbose() const;
+    void verbose(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const settings& rhs) const;
     bool operator!=(const settings& rhs) const {
@@ -112,6 +123,7 @@ private:
     dogen::config::cpp_settings cpp_;
     dogen::config::troubleshooting_settings troubleshooting_;
     dogen::config::output_settings output_;
+    bool verbose_;
 };
 
 } }

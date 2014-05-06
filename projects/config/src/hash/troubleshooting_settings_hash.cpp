@@ -44,7 +44,6 @@ namespace config {
 std::size_t troubleshooting_settings_hasher::hash(const troubleshooting_settings&v) {
     std::size_t seed(0);
 
-    combine(seed, v.verbose());
     combine(seed, hash_boost_filesystem_path(v.debug_dir()));
     combine(seed, v.save_dia_model());
     combine(seed, v.save_sml_model());
