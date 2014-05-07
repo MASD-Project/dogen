@@ -313,15 +313,6 @@ doing a lot of this manually anyway.
 Also, if a service has a bunch of attributes that are IOable, we
 should set them up too.
 
-*** Add support for unique log files                                  :story:
-
-At present all of the targets for code generation use the same log
-file, in the output directory. This is a problem if =-jN= where N > 1
-because we now have an unreadable log file. What we really need is
-some kind of command line parameter to name the log file, perhaps
-appending the target name; anything that would create unique,
-identifiable log file names.
-
 *** Remove references to PFH in makefiles                             :story:
 
 Seems like the correct way of finding libraries is to use

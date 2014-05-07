@@ -35,7 +35,7 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("knitter"));
-const std::string log_file("log/dogen_knitter");
+const std::string log_file_prefix("log/dogen_knitter_");
 const std::string get_help("Use --help option to see usage instructions.");
 const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
@@ -82,8 +82,10 @@ workflow::generate_settings_activity(const int argc, const char* argv[]) const {
 
 void workflow::initialise_logging_activity(const config::settings& s) const {
     const auto sev(s.verbose() ? severity_level::debug : severity_level::info);
+    const boost::filesystem::path p(s.modeling().target());
+    const std::string file_name(log_file_prefix + p.stem().filename().string());
     life_cycle_manager lcm;
-    lcm.initialise(log_file, sev);
+    lcm.initialise(file_name, sev);
 }
 
 void workflow::knit_activity(const config::settings& s) const {

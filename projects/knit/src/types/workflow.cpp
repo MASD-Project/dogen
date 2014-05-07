@@ -80,7 +80,6 @@ workflow(const config::settings& s, const output_fn& o)
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
     }
-
     config::validator::validate(s);
 }
 
