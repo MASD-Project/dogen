@@ -36,6 +36,9 @@ namespace knitter {
  * @brief Encapsulates the entire knitter tool workflow.
  */
 class workflow {
+public:
+    workflow();
+
 private:
     /**
      * @brief Sets up the model name from the settings.

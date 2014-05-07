@@ -68,6 +68,8 @@ void version() {
 namespace dogen {
 namespace knitter {
 
+workflow::workflow() : can_log_(false) { }
+
 void workflow::initialise_model_name(const dogen::config::settings& s) {
     const boost::filesystem::path p(s.modeling().target());
     model_name_ = p.stem().filename().string();
@@ -87,9 +89,9 @@ workflow::generate_settings_activity(const int argc, const char* argv[]) const {
 
 void workflow::initialise_logging_activity(const config::settings& s) {
     const auto sev(s.verbose() ? severity_level::debug : severity_level::info);
-    const boost::filesystem::path fn(log_file_prefix + model_name_);
+    log_file_name_ = log_file_prefix + model_name_ + ".log";
     life_cycle_manager lcm;
-    lcm.initialise(fn, sev);
+    lcm.initialise(log_file_name_, sev);
     can_log_ = true;
 }
 
@@ -110,7 +112,8 @@ void workflow::knit_activity(const config::settings& s) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
-        std::cerr << log_file_msg << log_file_name_.string() << std::endl;
+        std::cerr << log_file_msg << "'" << log_file_name_.string()
+                  << "' " << std::endl;
     }
 
     if (model_name_.empty())
