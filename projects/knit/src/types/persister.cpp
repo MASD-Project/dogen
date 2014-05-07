@@ -49,8 +49,7 @@ const std::string invalid_archive_type("Invalid or unexpected archive type");
 namespace dogen {
 namespace knit {
 
-persister::persister(const config::settings& settings) :
-    settings_(settings) {}
+persister::persister(const config::knitting_settings& s) : settings_(s) {}
 
 std::string persister::extension(config::archive_types archive_type,
     const std::string& model) const {

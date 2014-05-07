@@ -32,7 +32,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/utility/serialization/archive_types.hpp"
@@ -78,8 +78,8 @@ public:
 
 public:
     workflow(workflow&& rhs) : settings_(std::move(rhs.settings_)) { }
-    workflow(const config::settings& s);
-    workflow(const config::settings& s, const output_fn& o);
+    workflow(const config::knitting_settings& s);
+    workflow(const config::knitting_settings& s, const output_fn& o);
 
 private:
     /**
@@ -120,7 +120,7 @@ public:
     void execute() const;
 
 private:
-    const config::settings settings_;
+    const config::knitting_settings settings_;
     const output_fn output_;
 };
 

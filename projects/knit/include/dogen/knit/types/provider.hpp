@@ -28,7 +28,7 @@
 #include <list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/knit/types/persister.hpp"
 #include "dogen/knit/types/provider_interface.hpp"
 
@@ -43,7 +43,7 @@ public:
     virtual ~provider() noexcept;
 
 public:
-    explicit provider(const config::settings& settings);
+    explicit provider(const config::knitting_settings& s);
 
 private:
     /**
@@ -67,7 +67,7 @@ public:
         const bool is_target = false) override;
 
 private:
-    const config::settings settings_;
+    const config::knitting_settings settings_;
     const persister persister_;
 };
 

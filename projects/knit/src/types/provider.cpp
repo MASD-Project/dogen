@@ -35,8 +35,8 @@ std::string empty;
 namespace dogen {
 namespace knit {
 
-provider::provider(const config::settings& settings)
-    : settings_(settings), persister_(settings) { }
+provider::provider(const config::knitting_settings& s)
+    : settings_(s), persister_(s) { }
 
 provider::~provider() noexcept { }
 
@@ -53,7 +53,7 @@ sml::model provider::to_sml(const dia::diagram& d,
     const std::string& external_module_path,
     const bool is_target) const {
 
-    const bool dmp(settings_.modeling().disable_model_module());
+    const bool dmp(settings_.input().disable_model_module());
     const std::string name(dmp ? empty : model_name);
 
     dogen::dia_to_sml::workflow w;

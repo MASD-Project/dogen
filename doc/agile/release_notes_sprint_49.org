@@ -13,20 +13,20 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-07 Wed 19:52]
+Clock summary at [2014-05-07 Wed 22:45]
 
-| Headline                                                    | Time   |      |      |
-|-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *9:23* |      |      |
-|-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 9:23 |      |
-| IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:02 |
-| COMPLETED Remove the roadmap                                |        |      | 0:05 |
-| COMPLETED Design an end-to-end solution to the tag problem  |        |      | 3:23 |
-| COMPLETED Rename the =COMMENT= tag to =dia.comment=         |        |      | 0:21 |
-| COMPLETED Add support for unique log files                  |        |      | 0:16 |
-| COMPLETED Print model name to the console on failure        |        |      | 1:23 |
-| IMPLEMENTATION Move all the configuration options into tags |        |      | 2:53 |
+| Headline                                                    | Time    |       |      |
+|-------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                | *10:27* |       |      |
+|-------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                             |         | 10:27 |      |
+| IMPLEMENTATION Release notes and backlog grooming           |         |       | 1:02 |
+| COMPLETED Remove the roadmap                                |         |       | 0:05 |
+| COMPLETED Design an end-to-end solution to the tag problem  |         |       | 3:23 |
+| COMPLETED Rename the =COMMENT= tag to =dia.comment=         |         |       | 0:21 |
+| COMPLETED Add support for unique log files                  |         |       | 0:16 |
+| COMPLETED Print model name to the console on failure        |         |       | 1:23 |
+| IMPLEMENTATION Move all the configuration options into tags |         |       | 3:57 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -235,7 +235,9 @@ they don't belong there (close associated story).
 We should really have a small workflow in knitter rather than expose
 the whole thing in main. Should be a quick exercise to fix.
 
-**** IMPLEMENTATION Split command line settings from model settings   :story:
+**** COMPLETED Split formatting settings from knitting settings       :story:
+     CLOSED: [2014-05-07 Wed 22:44]
+     CLOCK: [2014-05-07 Wed 21:40]--[2014-05-07 Wed 22:44] =>  1:04
      CLOCK: [2014-05-07 Wed 08:07]--[2014-05-07 Wed 08:24] =>  0:17
 
 Its a bit ugly to have a =const= set of settings and then mutate them

@@ -50,10 +50,10 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<archive_types_generator>();
     roundtrip_type<cpp_facet_types_generator>();
     roundtrip_type<cpp_settings_generator>();
-    roundtrip_type<modeling_settings_generator>();
+    roundtrip_type<input_settings_generator>();
     roundtrip_type<output_settings_generator>();
     roundtrip_type<reference_generator>();
-    roundtrip_type<settings_generator>();
+    roundtrip_type<knitting_settings_generator>();
     roundtrip_type<troubleshooting_settings_generator>();
 }
 

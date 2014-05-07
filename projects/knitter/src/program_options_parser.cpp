@@ -486,10 +486,9 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     return r;
 }
 
-config::modeling_settings
-program_options_parser::transform_modeling_settings(
+config::input_settings program_options_parser::transform_input_settings(
     const boost::program_options::variables_map& vm) const {
-    config::modeling_settings r;
+    config::input_settings r;
 
     if (!vm.count(target_arg))
         throw_missing_target();
@@ -576,21 +575,21 @@ transform_output_settings(const variables_map& vm) const {
     return r;
 }
 
-boost::optional<config::settings> program_options_parser::parse() {
+boost::optional<config::knitting_settings> program_options_parser::parse() {
     auto optional_vm(variables_map_factory());
 
     if (!optional_vm)
-        return boost::optional<config::settings>();
+        return boost::optional<config::knitting_settings>();
 
     const boost::program_options::variables_map vm(*optional_vm);
-    config::settings r;
+    config::knitting_settings r;
     r.verbose(vm.count(verbose_arg));
-    r.modeling(transform_modeling_settings(vm));
+    r.input(transform_input_settings(vm));
     r.cpp(transform_cpp_settings(vm));
     r.troubleshooting(transform_troubleshooting_settings(vm));
     r.output(transform_output_settings(vm));
 
-    return boost::optional<config::settings>(r);
+    return boost::optional<config::knitting_settings>(r);
 }
 
 } }

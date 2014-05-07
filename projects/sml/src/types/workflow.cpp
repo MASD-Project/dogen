@@ -47,7 +47,8 @@ const std::string library_dir("library");
 namespace dogen {
 namespace sml {
 
-workflow::workflow(const bool load_library_models, const config::settings& s)
+workflow::
+workflow(const bool load_library_models, const config::knitting_settings& s)
     : load_library_models_(load_library_models), settings_(s) { }
 
 bool workflow::is_generatable(const type& t) const {

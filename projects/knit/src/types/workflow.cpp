@@ -29,8 +29,8 @@
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/config/types/validator.hpp"
-#include "dogen/config/io/settings_io.hpp"
+#include "dogen/config/types/knitting_settings_validator.hpp"
+#include "dogen/config/io/knitting_settings_io.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
 #include "dogen/sml_to_cpp/types/workflow_failure.hpp"
@@ -63,24 +63,24 @@ const std::string code_generation_failure("Code generation failure.");
 namespace dogen {
 namespace knit {
 
-workflow::workflow(const config::settings& s) : settings_(s) {
+workflow::workflow(const config::knitting_settings& s) : settings_(s) {
 
     if (settings_.output().output_to_stdout()) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
     }
-    config::validator::validate(s);
+    config::knitting_settings_validator::validate(s);
 }
 
 workflow::
-workflow(const config::settings& s, const output_fn& o)
+workflow(const config::knitting_settings& s, const output_fn& o)
     : settings_(s), output_(o) {
 
     if (!settings_.output().output_to_stdout() || !output_) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
     }
-    config::validator::validate(s);
+    config::knitting_settings_validator::validate(s);
 }
 
 bool workflow::housekeeping_required() const {
@@ -144,15 +144,15 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
     bool is_target(false);
     provider pro(settings_);
     std::list<sml::model> references;
-    for (const auto ref : settings_.modeling().references()) {
+    for (const auto ref : settings_.input().references()) {
         const auto path(ref.path());
         const auto epp(ref.external_module_path());
         references.push_back(pro.provide(path, epp, is_target));
     }
 
     is_target = true;
-    const auto path(settings_.modeling().target());
-    const auto epp(settings_.modeling().external_module_path());
+    const auto path(settings_.input().target());
+    const auto epp(settings_.input().external_module_path());
     const sml::model target(pro.provide(path, epp, is_target));
 
     const bool add_system_models(true);

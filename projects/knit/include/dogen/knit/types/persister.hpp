@@ -27,7 +27,7 @@
 
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/config/types/archive_types.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     persister& operator=(const persister&) = default;
 
 public:
-    explicit persister(const config::settings& settings);
+    explicit persister(const config::knitting_settings& s);
 
 private:
     /**
@@ -86,7 +86,7 @@ public:
     void persist(const sml::model& m, const std::string& prefix) const;
 
 private:
-    const config::settings settings_;
+    const config::knitting_settings settings_;
 };
 
 } }

@@ -35,7 +35,7 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -75,27 +75,27 @@ file_asserters() {
     return r;
 }
 
-dogen::config::settings
+dogen::config::knitting_settings
 default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
     using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::build_settings(
+    return mock_settings_factory::build_knitting_settings(
         tds.target(), tds.actual(), module_path);
 }
 
-dogen::config::settings debug_dogen_mock_settings() {
+dogen::config::knitting_settings debug_dogen_mock_settings() {
     typedef dogen::utility::test_data::debug_dogen tds;
     using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::build_settings(
+    return mock_settings_factory::build_knitting_settings(
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
         empty_module_path);
 }
 
-dogen::config::settings empty_tds_mock_settings() {
+dogen::config::knitting_settings empty_tds_mock_settings() {
     typedef dogen::utility::test_data::empty_tds tds;
     using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::build_settings(
+    return mock_settings_factory::build_knitting_settings(
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
@@ -200,8 +200,9 @@ BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
 
 BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
     SETUP_TEST_LOG("disable_full_ctor_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.split_project(false);
@@ -216,8 +217,9 @@ BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.disable_facet_folders(true);
@@ -231,17 +233,18 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_model_module_generates_expected_code) {
     SETUP_TEST_LOG("disable_model_module_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.project_directory(cs.project_directory() /= extra_folder);
             s.cpp(cs);
 
-            auto ms(s.modeling());
-            ms.disable_model_module(true);
-            ms.external_module_path(module_path_disabled_model_module);
-            s.modeling(ms);
+            auto is(s.input());
+            is.disable_model_module(true);
+            is.external_module_path(module_path_disabled_model_module);
+            s.input(is);
             return s;
         });
 
@@ -251,8 +254,9 @@ BOOST_AUTO_TEST_CASE(disable_model_module_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.disable_cmakelists(true);
@@ -285,8 +289,9 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_domain_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
@@ -305,8 +310,8 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) ->  settings {
+    using dogen::config::knitting_settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) ->  knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
@@ -325,8 +330,9 @@ BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
@@ -346,8 +352,9 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code");
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
@@ -523,8 +530,9 @@ BOOST_AUTO_TEST_CASE(eos_serialization_model_generates_expected_code) {
     SETUP_TEST_LOG("eos_serialisation_model_generates_expected_code");
     const auto t(dia_sml::input_enable_eos_serialization_dia());
 
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
@@ -565,10 +573,11 @@ BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
 
     // note that we keep the project name just to make the life easier
     // for the rebaselining scripts.
-    using dogen::config::settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
+    using dogen::config::knitting_settings;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_settings {
             using dogen::config::test::mock_settings_factory;
-            return mock_settings_factory::build_settings(
+            return mock_settings_factory::build_knitting_settings(
                 tds.target(),
                 tds.actual() / "split_project/source",
                 tds.actual() / "split_project/dir/inc/dogen",

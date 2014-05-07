@@ -44,10 +44,10 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<archive_types_generator>();
     test_move_assignment_copy<cpp_facet_types_generator>();
     test_move_assignment_copy<cpp_settings_generator>();
-    test_move_assignment_copy<modeling_settings_generator>();
+    test_move_assignment_copy<input_settings_generator>();
     test_move_assignment_copy<output_settings_generator>();
     test_move_assignment_copy<reference_generator>();
-    test_move_assignment_copy<settings_generator>();
+    test_move_assignment_copy<knitting_settings_generator>();
     test_move_assignment_copy<troubleshooting_settings_generator>();
 }
 

@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 
 namespace dogen {
 namespace config {
@@ -92,21 +92,21 @@ public:
         const boost::filesystem::path& project_dir);
 
     /**
-     * @brief Returns the modeling settings with the target and module
+     * @brief Returns the input settings with the target and module
      * path set.
      */
-    static modeling_settings build_modeling_settings(
+    static input_settings build_input_settings(
         const boost::filesystem::path& target,
         const std::string& module_path);
 
-    static settings build_settings(
+    static knitting_settings build_knitting_settings(
         const boost::filesystem::path& target,
         const boost::filesystem::path& src_dir,
         const boost::filesystem::path& include_dir,
         const std::string& module_path,
         const bool verbose = true);
 
-    static settings build_settings(
+    static knitting_settings build_knitting_settings(
         const boost::filesystem::path& target,
         const boost::filesystem::path& project_dir,
         const std::string& module_path,

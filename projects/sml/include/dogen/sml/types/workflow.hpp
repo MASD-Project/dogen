@@ -27,7 +27,7 @@
 
 #include <list>
 #include <utility>
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -42,7 +42,7 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow(const bool load_library_models, const config::settings& s);
+    workflow(const bool load_library_models, const config::knitting_settings& s);
 
 private:
     /**
@@ -108,7 +108,7 @@ public:
 
 private:
     const bool load_library_models_;
-    const config::settings settings_;
+    const config::knitting_settings settings_;
 };
 
 } }

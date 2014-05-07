@@ -105,38 +105,38 @@ cpp_settings mock_settings_factory::build_cpp_settings(
     return r;
 }
 
-modeling_settings mock_settings_factory::build_modeling_settings(
+input_settings mock_settings_factory::build_input_settings(
     const boost::filesystem::path& target,
     const std::string& module_path) {
-    modeling_settings r;
+    input_settings r;
     r.external_module_path(module_path);
     r.target(target);
     return r;
 }
 
-settings mock_settings_factory::build_settings(
+knitting_settings mock_settings_factory::build_knitting_settings(
     const boost::filesystem::path& target,
     const boost::filesystem::path& src_dir,
     const boost::filesystem::path& include_dir,
     const std::string& module_path,
     const bool verbose) {
-    settings r;
+    knitting_settings r;
     r.verbose(verbose);
-    r.modeling(build_modeling_settings(target, module_path));
+    r.input(build_input_settings(target, module_path));
     r.cpp(build_cpp_settings(src_dir, include_dir));
     r.troubleshooting(build_troubleshooting_settings());
     r.output(build_output_settings());
     return r;
 }
 
-settings mock_settings_factory::build_settings(
+knitting_settings mock_settings_factory::build_knitting_settings(
     const boost::filesystem::path& target,
     const boost::filesystem::path& project_dir,
     const std::string& module_path,
     const bool verbose) {
-    settings r;
+    knitting_settings r;
     r.verbose(verbose);
-    r.modeling(build_modeling_settings(target, module_path));
+    r.input(build_input_settings(target, module_path));
     r.cpp(build_cpp_settings(project_dir));
     r.troubleshooting(build_troubleshooting_settings());
     r.output(build_output_settings());

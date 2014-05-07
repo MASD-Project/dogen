@@ -23,7 +23,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/config/io/settings_io.hpp"
+#include "dogen/config/io/knitting_settings_io.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
 
@@ -192,7 +192,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     BOOST_CHECK(!version);
 }
 
-dogen::config::settings
+dogen::config::knitting_settings
 check_valid_arguments(std::vector<std::string> options) {
     bool help(false);
     bool version(false);
@@ -293,12 +293,12 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_settings) {
     const auto s(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
-    const auto ms(s.modeling());
-    BOOST_CHECK(ms.target().string() == target_value_arg);
-    BOOST_CHECK(ms.external_module_path() == external_module_path_value_arg);
-    BOOST_CHECK(ms.disable_model_module());
+    const auto is(s.input());
+    BOOST_CHECK(is.target().string() == target_value_arg);
+    BOOST_CHECK(is.external_module_path() == external_module_path_value_arg);
+    BOOST_CHECK(is.disable_model_module());
 
-    const auto refs(ms.references());
+    const auto refs(is.references());
     BOOST_REQUIRE(refs.size() == 2);
     BOOST_CHECK(refs[0].path().string() == reference_value_1_arg);
     BOOST_CHECK(refs[1].path().string() == reference_value_2_arg);
@@ -320,8 +320,8 @@ BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_mod
     const auto s(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
-    const auto ms(s.modeling());
-    const auto refs(ms.references());
+    const auto is(s.input());
+    const auto refs(is.references());
     BOOST_REQUIRE(refs.size() == 2);
 
     BOOST_CHECK(refs[0].path().string() == reference_value_3_diagram);
@@ -342,10 +342,10 @@ BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in
     const auto s(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
-    const auto ms(s.modeling());
-    BOOST_CHECK(ms.target().string() == target_value_arg);
-    BOOST_CHECK(ms.external_module_path().empty());
-    BOOST_REQUIRE(ms.references().empty());
+    const auto is(s.input());
+    BOOST_CHECK(is.target().string() == target_value_arg);
+    BOOST_CHECK(is.external_module_path().empty());
+    BOOST_REQUIRE(is.references().empty());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_arguments_without_target_throws) {

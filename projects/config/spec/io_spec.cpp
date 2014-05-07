@@ -44,10 +44,10 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<archive_types_generator>();
     test_io<cpp_facet_types_generator>();
     test_io<cpp_settings_generator>();
-    test_io<modeling_settings_generator>();
+    test_io<input_settings_generator>();
     test_io<output_settings_generator>();
     test_io<reference_generator>();
-    test_io<settings_generator>();
+    test_io<knitting_settings_generator>();
     test_io<troubleshooting_settings_generator>();
 }
 

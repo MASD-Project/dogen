@@ -32,7 +32,7 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/program_options.hpp>
 #include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 
 namespace dogen {
 namespace knitter {
@@ -82,8 +82,8 @@ private:
     static config::cpp_facet_types parse_facet_types(const std::string& s);
 
 private:
-    config::modeling_settings
-    transform_modeling_settings(const variables_map& vm) const;
+    config::input_settings
+    transform_input_settings(const variables_map& vm) const;
     config::cpp_settings transform_cpp_settings(const variables_map& vm) const;
     config::troubleshooting_settings
     transform_troubleshooting_settings(const variables_map& vm) const;
@@ -95,7 +95,7 @@ public:
     void version_function(std::function<void()> value);
 
 public:
-    boost::optional<config::settings> parse();
+    boost::optional<config::knitting_settings> parse();
 
 private:
     const std::vector<std::string> arguments_;

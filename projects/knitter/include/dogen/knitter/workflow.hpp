@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 
 namespace dogen {
 namespace knitter {
@@ -43,25 +43,26 @@ private:
     /**
      * @brief Sets up the model name from the settings.
      */
-    void initialise_model_name(const dogen::config::settings& s);
+    void initialise_model_name(const dogen::config::knitting_settings& s);
 
 private:
     /**
      * @brief Given the main arguments, generates the Dogen settings.
      */
-    boost::optional<dogen::config::settings>
-    generate_settings_activity(const int argc, const char* argv[]) const;
+    boost::optional<dogen::config::knitting_settings>
+    generate_knitting_settings_activity(
+        const int argc, const char* argv[]) const;
 
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging_activity(const dogen::config::settings& s);
+    void initialise_logging_activity(const dogen::config::knitting_settings& s);
 
     /**
      * @brief Executes the code generation workflow for the given the
      * application settings.
      */
-     void knit_activity(const dogen::config::settings& s) const;
+    void knit_activity(const dogen::config::knitting_settings& s) const;
 
 private:
      /**
