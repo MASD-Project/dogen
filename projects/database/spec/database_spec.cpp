@@ -93,7 +93,6 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_tab
 
     {
         transaction t(db->begin());
-        typedef odb::query<dogen::database::no_keys> query;
         typedef odb::result<dogen::database::no_keys> result;
 
         result r(db->query<dogen::database::no_keys>());
@@ -126,7 +125,6 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_2_instances_results_in_expected_rows_in_t
 
     {
         transaction t(db->begin());
-        typedef odb::query<dogen::database::no_keys_2> query;
         typedef odb::result<dogen::database::no_keys_2> result;
 
         result r(db->query<dogen::database::no_keys_2>());
@@ -219,7 +217,6 @@ BOOST_AUTO_TEST_CASE(inserting_foreign_key_objects_requires_other_side_to_exist)
 
     {
         transaction t(db->begin());
-        typedef odb::query<dogen::database::foreign_key> query;
         typedef odb::result<dogen::database::foreign_key> result;
 
         result r(db->query<dogen::database::foreign_key>());
