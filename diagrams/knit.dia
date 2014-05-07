@@ -2974,7 +2974,7 @@
             <dia:string>#settings_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#config::settings#</dia:string>
+            <dia:string>#config::knitting_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
