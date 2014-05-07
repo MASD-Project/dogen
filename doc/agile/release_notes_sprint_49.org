@@ -13,18 +13,19 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-07 Wed 09:07]
+Clock summary at [2014-05-07 Wed 19:52]
 
 | Headline                                                    | Time   |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *8:00* |      |      |
+| *Total time*                                                | *9:23* |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                             |        | 8:00 |      |
+| Development Stories Implemented                             |        | 9:23 |      |
 | IMPLEMENTATION Release notes and backlog grooming           |        |      | 1:02 |
 | COMPLETED Remove the roadmap                                |        |      | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem  |        |      | 3:23 |
 | COMPLETED Rename the =COMMENT= tag to =dia.comment=         |        |      | 0:21 |
 | COMPLETED Add support for unique log files                  |        |      | 0:16 |
+| COMPLETED Print model name to the console on failure        |        |      | 1:23 |
 | IMPLEMENTATION Move all the configuration options into tags |        |      | 2:53 |
 #+end:
 
@@ -182,7 +183,7 @@ still use the old name. Remove all remnants of =COMMENT=.
 These is no longer required with the config approach. We can now make
 C++ entity generatable.
 
-*** COMPLETED Add support for unique log files                  :story:spike:
+*** COMPLETED Add support for unique log files                        :spike:
     CLOSED: [2014-05-07 Wed 09:07]
     CLOCK: [2014-05-07 Wed 08:24]--[2014-05-07 Wed 08:40] =>  0:16
 
@@ -195,6 +196,15 @@ because we now have an unreadable log file. What we really need is
 some kind of command line parameter to name the log file, perhaps
 appending the target name; anything that would create unique,
 identifiable log file names.
+
+*** COMPLETED Print model name to the console on failure              :spike:
+    CLOSED: [2014-05-07 Wed 19:52]
+    CLOCK: [2014-05-07 Wed 19:35]--[2014-05-07 Wed 19:52] =>  0:17
+    CLOCK: [2014-05-07 Wed 18:20]--[2014-05-07 Wed 19:10] =>  0:50
+    CLOCK: [2014-05-07 Wed 08:24]--[2014-05-07 Wed 08:40] =>  0:16
+
+At present we cannot tell which model failed when we code generate
+with =-jN=.
 
 *** IMPLEMENTATION Move all the configuration options into tags       :story:
     CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08

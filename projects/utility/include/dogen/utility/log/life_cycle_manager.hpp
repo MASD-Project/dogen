@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/utility/log/severity_level.hpp"
 
 namespace dogen {
@@ -49,8 +50,10 @@ public:
 private:
     /**
      * @brief Creates a boost log file backend.
+     *
+     * @note file_name is non-const by ref by design.
      */
-    void create_file_backend(const std::string& file_name,
+    void create_file_backend(boost::filesystem::path file_name,
         const severity_level severity);
 
     /**
@@ -62,9 +65,16 @@ public:
     /**
      * @brief Initialise logging for the entire application.
      *
-     * Must be done in a thread-safe context.
+     * @note Must be done in a thread-safe context.
+     *
+     * @param file_name log file; can be a relative or absolute path
+     * to it. If it does not have a @e .log extension, it is appended
+     * to it.
+     *
+     * @param severity log level.
+     * @param log_to_console if true, logging is also done to the console.
      */
-    void initialise(const std::string& file_name,
+    void initialise(const boost::filesystem::path& file_name,
         const severity_level severity = severity_level::debug,
         const bool log_to_console = false);
 

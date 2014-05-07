@@ -26,6 +26,7 @@
 #endif
 
 #include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/config/types/settings.hpp"
 
 namespace dogen {
@@ -37,6 +38,12 @@ namespace knitter {
 class workflow {
 private:
     /**
+     * @brief Sets up the model name from the settings.
+     */
+    void initialise_model_name(const dogen::config::settings& s);
+
+private:
+    /**
      * @brief Given the main arguments, generates the Dogen settings.
      */
     boost::optional<dogen::config::settings>
@@ -45,13 +52,29 @@ private:
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging_activity(const dogen::config::settings& s) const;
+    void initialise_logging_activity(const dogen::config::settings& s);
 
     /**
      * @brief Executes the code generation workflow for the given the
      * application settings.
      */
      void knit_activity(const dogen::config::settings& s) const;
+
+private:
+     /**
+      * @brief Exception reporting code that is common amongst methods.
+      */
+     void report_exception_common() const;
+
+    /**
+     * @brief Reports the exception to the appropriate outputs.
+     */
+    void report_exception(const std::exception& e) const;
+
+    /**
+     * @brief Reports an unknown exception to the appropriate outputs.
+     */
+    void report_exception() const;
 
 public:
     /**
@@ -60,7 +83,12 @@ public:
      * @return false if the workflow failed for whatever reason, true
      * otherwise.
      */
-    int execute(const int argc, const char* argv[]) const;
+    int execute(const int argc, const char* argv[]);
+
+private:
+    bool can_log_;
+    std::string model_name_;
+    boost::filesystem::path log_file_name_;
 };
 
 } }

@@ -68,6 +68,11 @@ void version() {
 namespace dogen {
 namespace knitter {
 
+void workflow::initialise_model_name(const dogen::config::settings& s) {
+    const boost::filesystem::path p(s.modeling().target());
+    model_name_ = p.stem().filename().string();
+}
+
 boost::optional<config::settings>
 workflow::generate_settings_activity(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
@@ -80,12 +85,12 @@ workflow::generate_settings_activity(const int argc, const char* argv[]) const {
     return r;
 }
 
-void workflow::initialise_logging_activity(const config::settings& s) const {
+void workflow::initialise_logging_activity(const config::settings& s) {
     const auto sev(s.verbose() ? severity_level::debug : severity_level::info);
-    const boost::filesystem::path p(s.modeling().target());
-    const std::string file_name(log_file_prefix + p.stem().filename().string());
+    const boost::filesystem::path fn(log_file_prefix + model_name_);
     life_cycle_manager lcm;
-    lcm.initialise(file_name, sev);
+    lcm.initialise(fn, sev);
+    can_log_ = true;
 }
 
 void workflow::knit_activity(const config::settings& s) const {
@@ -102,8 +107,41 @@ void workflow::knit_activity(const config::settings& s) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
 }
 
-int workflow::execute(const int argc, const char* argv[]) const {
-    bool can_log(false);
+void workflow::report_exception_common() const {
+    if (can_log_) {
+        BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
+        std::cerr << log_file_msg << log_file_name_.string() << std::endl;
+    }
+
+    if (model_name_.empty())
+        return;
+
+    std::cerr << "Failed to generate model: '" << model_name_ << "'."
+              << std::endl;
+}
+
+void workflow::report_exception(const std::exception& e) const {
+    /* we must catch by std::exception and cast the boost
+     * exception here; if we were to catch boost exception, we
+     * would not have access to the what() method and thus could
+     * not provide a user-friendly message to the console.
+     */
+    const auto be(dynamic_cast<const boost::exception* const>(&e));
+    if (be && can_log_) {
+        BOOST_LOG_SEV(lg, fatal) << "Error: "
+                                 << boost::diagnostic_information(*be);
+    }
+
+    std::cerr << "Error: " << e.what() << "." << std::endl;
+    report_exception_common();
+}
+
+void workflow::report_exception() const {
+    std::cerr << "Knitter was forced to terminate." << std::endl;
+    report_exception_common();
+}
+
+int workflow::execute(const int argc, const char* argv[]) {
     try {
         const auto o(generate_settings_activity(argc, argv));
 
@@ -114,8 +152,8 @@ int workflow::execute(const int argc, const char* argv[]) const {
             return 0;
 
         const auto& s(*o);
+        initialise_model_name(s);
         initialise_logging_activity(s);
-        can_log = true;
         knit_activity(s);
     } catch (const knitter::parser_validation_error& e) {
         /* log known not to be initialised as we are still parsing
@@ -124,31 +162,10 @@ int workflow::execute(const int argc, const char* argv[]) const {
         std::cerr << usage_error_msg << e.what() << std::endl;
         return 1;
     } catch (const std::exception& e) {
-        /* we must catch by std::exception and cast the boost
-         * exception here; if we were to catch boost exception, we
-         * would not have access to the what() method and thus could
-         * not provide a user-friendly message to the console.
-         */
-        const auto be(dynamic_cast<const boost::exception* const>(&e));
-        if (be && can_log) {
-            BOOST_LOG_SEV(lg, fatal) << "Error: "
-                                     << boost::diagnostic_information(*be);
-        }
-
-        std::cerr << "Error: " << e.what() << "." << std::endl;
-
-        if (can_log) {
-            BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
-            std::cerr << log_file_msg << std::endl;
-        }
+        report_exception(e);
         return 1;
     } catch(...) {
-        std::cerr << "Knitter was forced to terminate." << std::endl;
-
-        if (can_log) {
-            BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
-            std::cerr << log_file_msg << std::endl;
-        }
+        report_exception();
         return 1;
     }
     return 0;

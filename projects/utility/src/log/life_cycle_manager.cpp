@@ -32,7 +32,7 @@
 
 namespace {
 
-const std::string postfix(".log");
+const std::string extension(".log");
 const std::string channel_attr("Channel");
 const std::string severity_attr("Severity");
 const std::string time_stamp_attr("TimeStamp");
@@ -46,11 +46,14 @@ namespace utility {
 namespace log {
 
 void life_cycle_manager::create_file_backend(
-    const std::string& file_name, const severity_level severity) {
+    boost::filesystem::path file_name, const severity_level severity) {
     using namespace boost::log;
 
+    if (file_name.extension() != extension)
+        file_name /= extension;
+
     auto backend(boost::make_shared<sinks::text_file_backend>(
-            keywords::file_name = file_name + postfix,
+            keywords::file_name = file_name.string(),
             keywords::rotation_size = 5 * 1024 * 1024,
             keywords::time_based_rotation =
             sinks::file::rotation_at_time_point(12, 0, 0)));
@@ -96,7 +99,8 @@ void life_cycle_manager::create_console_backend(const severity_level severity) {
     core::get()->add_sink(sink);
 }
 
-void life_cycle_manager::initialise(const std::string& file_name,
+void life_cycle_manager::
+initialise(const boost::filesystem::path& file_name,
     const severity_level severity, const bool log_to_console) {
     if (log_to_console)
         create_console_backend(severity);
