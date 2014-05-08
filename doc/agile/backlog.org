@@ -15,17 +15,6 @@ The previous attempts to clean up the build environment were too
 elaborate given the available time. We need to go back to basics with
 a trivial script that works for Linux 32-bit and 64-bit with gcc.
 
-*** Consider renaming =config= in light of weaving changes            :story:
-
-It's not clear if the =config= domain is the configuration of =knit=
-only or whether its slightly more generic.
-
-*** Consider renaming =provider_interface=                            :story:
-
-This name is very generic. We need something that reflects the dia to
-sml sub-workflow. In addition we are not even using it for IoC, so
-consider either using IoC or removing the interface.
-
 *** Create a trivial Linux clang script                               :story:
 
 We need to be able to build Linux clang 32-bit and 64-bit again.
@@ -253,12 +242,6 @@ We also need to generate the following within the formatter:
 - formatter specific includes
 - includes
 
-*** Add formatter workflow to the engine workflow                     :story:
-
-Even though we do not yet have anyone implementing these interfaces,
-we can already add the general workflow into the engine and make sure
-it doesn't break anything.
-
 *** Add tests for annotation factory                                  :story:
 
 Zero coverage on this one for some reason. Some simple tests come to
@@ -291,12 +274,6 @@ Remove uses of old indenter.
 
 Not sure how applicable this would be, but we may be able to scavenge
 some tests.
-
-*** Add comments in =formatters= model                                :story:
-
-We haven't got any documentation at all in the new formatters
-morel. We need a small blurb about the language neutral formatting
-support the model is supposed to provide.
 
 *** Update comments in C++ model                                      :story:
 
@@ -440,8 +417,8 @@ domain generation.
 
 - stitch - library that generates formatters
 - stitcher - command line tool for generating formatters
-- knit - library that code generates
-- knitter - command line tool for code generation
+- knit - library that code generates [done]
+- knitter - command line tool for code generation [done]
 - tailor - tool to generate JSON / SML from Dia diagrams
 - sew - command line tool to generate JSON / SML from Dia
   diagrams

@@ -13,14 +13,14 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-08 Thu 08:30]
+Clock summary at [2014-05-08 Thu 23:03]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *11:01* |       |      |
+| *Total time*                                                | *11:50* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 11:01 |      |
-| IMPLEMENTATION Release notes and backlog grooming           |         |       | 1:02 |
+| Development Stories Implemented                             |         | 11:50 |      |
+| IMPLEMENTATION Release notes and backlog grooming           |         |       | 1:40 |
 | COMPLETED Remove the roadmap                                |         |       | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem  |         |       | 3:23 |
 | COMPLETED Rename the =COMMENT= tag to =dia.comment=         |         |       | 0:21 |
@@ -28,10 +28,11 @@ Clock summary at [2014-05-08 Thu 08:30]
 | COMPLETED Print model name to the console on failure        |         |       | 1:23 |
 | COMPLETED Tidy-up =knitting_settings_validator= specs       |         |       | 0:34 |
 | COMPLETED Tidy-up knitter main                              |         |       | 1:07 |
-| IMPLEMENTATION Move all the configuration options into tags |         |       | 2:50 |
+| IMPLEMENTATION Move all the configuration options into tags |         |       | 3:01 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-08 Thu 21:47]--[2014-05-08 Thu 22:25] =>  0:38
     CLOCK: [2014-05-06 Tue 07:55]--[2014-05-06 Tue 08:18] =>  0:23
     CLOCK: [2014-05-05 Mon 17:22]--[2014-05-05 Mon 17:37] =>  0:15
     CLOCK: [2014-05-05 Mon 07:50]--[2014-05-05 Mon 08:14] =>  0:24
@@ -221,6 +222,13 @@ several things at once.
 
 We should really have a small workflow in knitter rather than expose
 the whole thing in main. Should be a quick exercise to fix.
+
+*** COMPLETED Add comments in =formatters= model                      :story:
+    CLOSED: [2014-05-08 Thu 22:18]
+
+We haven't got any documentation at all in the new formatters
+morel. We need a small blurb about the language neutral formatting
+support the model is supposed to provide.
 
 *** IMPLEMENTATION Move all the configuration options into tags       :story:
     CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
@@ -413,3 +421,29 @@ These have two kinds of data:
 
 - =file_system_profile=
 - =annotation_profile=
+*** CANCELLED Consider renaming =config= in light of weaving changes  :story:
+    CLOSED: [2014-05-08 Thu 22:13]
+
+*Rationale*: with the settings splitting, this is no longer an issue.
+
+It's not clear if the =config= domain is the configuration of =knit=
+only or whether its slightly more generic.
+
+*** CANCELLED Consider renaming =provider_interface=                  :story:
+    CLOSED: [2014-05-08 Thu 22:14]
+
+*Rationale*: Provider will be merged with the =knit= workflow, so the
+interface will be removed.
+
+This name is very generic. We need something that reflects the dia to
+sml sub-workflow. In addition we are not even using it for IoC, so
+consider either using IoC or removing the interface.
+
+*** CANCELLED Add formatter workflow to the engine workflow           :story:
+    CLOSED: [2014-05-08 Thu 22:16]
+
+*Rationale*: seems like a =om= related story. No longer applicable.
+
+Even though we do not yet have anyone implementing these interfaces,
+we can already add the general workflow into the engine and make sure
+it doesn't break anything.
