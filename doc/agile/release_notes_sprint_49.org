@@ -13,19 +13,20 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-07 Wed 22:45]
+Clock summary at [2014-05-08 Thu 08:28]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *10:27* |       |      |
+| *Total time*                                                | *11:01* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 10:27 |      |
+| Development Stories Implemented                             |         | 11:01 |      |
 | IMPLEMENTATION Release notes and backlog grooming           |         |       | 1:02 |
 | COMPLETED Remove the roadmap                                |         |       | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem  |         |       | 3:23 |
 | COMPLETED Rename the =COMMENT= tag to =dia.comment=         |         |       | 0:21 |
 | COMPLETED Add support for unique log files                  |         |       | 0:16 |
 | COMPLETED Print model name to the console on failure        |         |       | 1:23 |
+| COMPLETED Tidy-up =knitting_settings_validator= specs       |         |       | 0:34 |
 | IMPLEMENTATION Move all the configuration options into tags |         |       | 3:57 |
 #+end:
 
@@ -206,6 +207,13 @@ identifiable log file names.
 At present we cannot tell which model failed when we code generate
 with =-jN=.
 
+*** COMPLETED Tidy-up =knitting_settings_validator= specs             :spike:
+    CLOSED: [2014-05-08 Thu 08:28]
+    CLOCK: [2014-05-08 Thu 07:54]--[2014-05-08 Thu 08:28] =>  0:34
+
+Split tests so that each have a single proposition rather than test
+several things at once.
+
 *** IMPLEMENTATION Move all the configuration options into tags       :story:
     CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
 
@@ -349,7 +357,7 @@ class. This will involve bring across some meta-data into C++ model.
 
 Use the =formatters::formating_error= instead.
 
-*** Add include files at the formatter level
+*** Add include files at the formatter level                          :story:
 
 We need to remove all the include files from =includer= which are
 related to formatter specific code. We need to inject these

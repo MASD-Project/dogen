@@ -47,7 +47,7 @@ const std::string missing_project_dir("You must supply the project directory");
 const std::string unexpected_source_include("Source and include directories");
 const std::string unexpected_project_dir("Project directories cannot be");
 
-dogen::config::knitting_settings defaults() {
+dogen::config::knitting_settings target_source_and_include() {
     return dogen::config::test::mock_settings_factory::
         build_knitting_settings(target, src_dir, include_dir, epp);
 }
@@ -102,8 +102,8 @@ using dogen::config::configuration_error;
 
 BOOST_AUTO_TEST_SUITE(knitting_settings_validator)
 
-BOOST_AUTO_TEST_CASE(target_must_be_supplied) {
-    SETUP_TEST_LOG_SOURCE("target_must_be_supplied");
+BOOST_AUTO_TEST_CASE(settings_without_a_target_throw) {
+    SETUP_TEST_LOG_SOURCE("settings_without_a_target_throw");
 
     dogen::config::knitting_settings s;
     BOOST_CHECK(s.input().target().empty());
@@ -111,25 +111,37 @@ BOOST_AUTO_TEST_CASE(target_must_be_supplied) {
     BOOST_CHECK_EXCEPTION(
         dogen::config::knitting_settings_validator::validate(s),
         configuration_error, c);
-
-    dogen::config::knitting_settings_validator::validate(defaults());
 }
 
-BOOST_AUTO_TEST_CASE(non_split_projects_require_project_directory) {
-    SETUP_TEST_LOG_SOURCE("non_split_projects_require_project_directory");
+BOOST_AUTO_TEST_CASE(settings_with_a_target_are_valid) {
+    SETUP_TEST_LOG_SOURCE("settings_with_a_target_are_valid");
+
+    // we cannot test with target only here, as this is not a valid
+    // scenario; for split projects we must supply the include and
+    // source directories and for non-split we need project
+    // directories. so we just chose one of the two.
+    dogen::config::knitting_settings_validator::validate(
+        target_source_and_include());
+}
+
+BOOST_AUTO_TEST_CASE(settings_for_non_split_projects_without_a_project_directory_throw) {
+    SETUP_TEST_LOG_SOURCE("settings_for_non_split_projects_without_a_project_directory_throw");
 
     auto s(split_project(false));
     contains_checker<configuration_error> c(missing_project_dir);
     BOOST_CHECK_EXCEPTION(
         dogen::config::knitting_settings_validator::validate(s),
         configuration_error, c);
+}
 
+BOOST_AUTO_TEST_CASE(settings_for_split_projects_with_a_project_directory_are_valid) {
+    SETUP_TEST_LOG_SOURCE("settings_for_split_projects_with_a_project_directory_are_valid");
     dogen::config::knitting_settings_validator::validate(
         split_project(false, project_dir));
 }
 
-BOOST_AUTO_TEST_CASE(non_split_projects_with_include_or_source_throw) {
-    SETUP_TEST_LOG_SOURCE("non_split_projects_with_include_or_source_throw");
+BOOST_AUTO_TEST_CASE(settings_for_non_split_projects_with_include_or_source_directories_throw) {
+    SETUP_TEST_LOG_SOURCE("settings_for_non_split_projects_with_include_or_source_directories_throw");
 
     auto s(split_project(false, include_dir, src_dir));
     contains_checker<configuration_error> c(unexpected_source_include);
@@ -148,8 +160,8 @@ BOOST_AUTO_TEST_CASE(non_split_projects_with_include_or_source_throw) {
         configuration_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(split_projects_require_source_and_include_directories) {
-    SETUP_TEST_LOG_SOURCE("split_projects_require_source_and_include_directories");
+BOOST_AUTO_TEST_CASE(settings_for_split_projects_without_source_or_include_directories_throw) {
+    SETUP_TEST_LOG_SOURCE("settings_for_split_projects_without_source_or_include_directories_throw");
 
     auto s(split_project(true));
     contains_checker<configuration_error> c(missing_source_include);
@@ -171,8 +183,14 @@ BOOST_AUTO_TEST_CASE(split_projects_require_source_and_include_directories) {
         split_project(true, include_dir, src_dir));
 }
 
-BOOST_AUTO_TEST_CASE(split_projects_with_project_directory_throws) {
-    SETUP_TEST_LOG_SOURCE("split_projects_with_project_directory_throws");
+BOOST_AUTO_TEST_CASE(settings_for_split_projects_with_source_and_include_directories_are_valid) {
+    SETUP_TEST_LOG_SOURCE("settings_for_split_projects_with_source_and_include_directories_are_valid");
+    dogen::config::knitting_settings_validator::validate(
+        split_project(true, include_dir, src_dir));
+}
+
+BOOST_AUTO_TEST_CASE(settings_for_split_projects_with_project_directory_throw) {
+    SETUP_TEST_LOG_SOURCE("settings_for_split_projects_with_project_directory_throw");
 
     const auto s(split_project(true, project_dir));
     contains_checker<configuration_error> c(unexpected_project_dir);
