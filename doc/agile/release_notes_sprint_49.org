@@ -13,7 +13,7 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-08 Thu 08:28]
+Clock summary at [2014-05-08 Thu 08:30]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
@@ -27,7 +27,8 @@ Clock summary at [2014-05-08 Thu 08:28]
 | COMPLETED Add support for unique log files                  |         |       | 0:16 |
 | COMPLETED Print model name to the console on failure        |         |       | 1:23 |
 | COMPLETED Tidy-up =knitting_settings_validator= specs       |         |       | 0:34 |
-| IMPLEMENTATION Move all the configuration options into tags |         |       | 3:57 |
+| COMPLETED Tidy-up knitter main                              |         |       | 1:07 |
+| IMPLEMENTATION Move all the configuration options into tags |         |       | 2:50 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -214,6 +215,13 @@ with =-jN=.
 Split tests so that each have a single proposition rather than test
 several things at once.
 
+*** COMPLETED Tidy-up knitter main                                    :spike:
+    CLOSED: [2014-05-06 Tue 23:48]
+    CLOCK: [2014-05-06 Tue 22:42]--[2014-05-06 Tue 23:49] =>  1:07
+
+We should really have a small workflow in knitter rather than expose
+the whole thing in main. Should be a quick exercise to fix.
+
 *** IMPLEMENTATION Move all the configuration options into tags       :story:
     CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
 
@@ -236,14 +244,7 @@ We should use the exact same approach, naming conventions etc. We
 should also take the opportunity to delete these from formatters since
 they don't belong there (close associated story).
 
-**** COMPLETED Tidy-up knitter main                                   :spike:
-     CLOSED: [2014-05-06 Tue 23:48]
-     CLOCK: [2014-05-06 Tue 22:42]--[2014-05-06 Tue 23:49] =>  1:07
-
-We should really have a small workflow in knitter rather than expose
-the whole thing in main. Should be a quick exercise to fix.
-
-**** COMPLETED Split formatting settings from knitting settings       :story:
+**** COMPLETED Split formatting settings from knitting settings        :task:
      CLOSED: [2014-05-07 Wed 22:44]
      CLOCK: [2014-05-07 Wed 21:40]--[2014-05-07 Wed 22:44] =>  1:04
      CLOCK: [2014-05-07 Wed 08:07]--[2014-05-07 Wed 08:24] =>  0:17
@@ -261,7 +262,16 @@ Actually, these are just library specific settings:
 
 For now the C++ settings belong to both - until we fully transition.
 
+**** IMPLEMENTATION Tidy-up knit workflow                             :spike:
+     CLOCK: [2014-05-08 Thu 08:33]--[2014-05-08 Thu 08:40] =>  0:07
+
+We need to make the method names resemble more the workflow
+terminology, with subworkflows, activities, etc.
+
+- there are two subworkflows: obtain the SML model and generate it.
+
 **** IMPLEMENTATION Merge provider into workflow in =knit=             :task:
+     CLOCK: [2014-05-08 Thu 08:28]--[2014-05-08 Thu 08:32] =>  0:04
      CLOCK: [2014-05-07 Wed 07:56]--[2014-05-07 Wed 08:06] =>  0:10
 
 If we are going to override the settings we must make sure the code is
