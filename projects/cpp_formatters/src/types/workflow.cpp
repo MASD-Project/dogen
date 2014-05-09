@@ -44,8 +44,7 @@ const std::string includer_name("all");
 namespace dogen {
 namespace cpp_formatters {
 
-workflow::
-workflow(const config::cpp_settings& settings) : settings_(settings) { }
+workflow::workflow(const config::formatting_settings& s) : settings_(s) { }
 
 workflow::result_type
 workflow::format_cmakelists_activity(const cpp::project& p) const {
@@ -60,12 +59,12 @@ workflow::format_cmakelists_activity(const cpp::project& p) const {
     r.insert(std::make_pair(src_path, s.str()));
 
     if (p.include_cmakelists()) {
-        const auto f(settings_.enabled_facets());
+        const auto f(settings_.cpp().enabled_facets());
         const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
         s.str("");
 
         cpp_formatters::include_cmakelists inc(s, odb_enabled,
-            settings_.odb_facet_folder());
+            settings_.cpp().odb_facet_folder());
         inc.format(*p.include_cmakelists());
 
         const auto inc_path(p.include_cmakelists()->file_path());
@@ -117,14 +116,14 @@ workflow::result_type workflow::execute(const cpp::project& p) {
     BOOST_LOG_SEV(lg, info) << "C++ formatters workflow started.";
 
     workflow::result_type r(format_source_files_activity(p));
-    if (settings_.disable_cmakelists())
+    if (settings_.cpp().disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else {
         const auto cm(format_cmakelists_activity(p));
         r.insert(cm.begin(), cm.end());
     }
 
-    const auto f(settings_.enabled_facets());
+    const auto f(settings_.cpp().enabled_facets());
     const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
     if (odb_enabled)
         r.insert(format_odb_options_activity(p));

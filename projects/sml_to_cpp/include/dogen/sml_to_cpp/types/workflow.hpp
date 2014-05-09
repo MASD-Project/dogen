@@ -31,7 +31,7 @@
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
@@ -59,7 +59,7 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow(const sml::model& model, const config::cpp_settings& settings);
+    workflow(const sml::model& model, const config::formatting_settings& s);
     virtual ~workflow() noexcept {}
 
 private:
@@ -173,7 +173,7 @@ public:
 private:
     context context_;
     const sml::model& model_;
-    const config::cpp_settings settings_;
+    const config::formatting_settings settings_;
     const locator locator_;
     mutable includer includer_;
     const source_file_factory source_file_factory_;

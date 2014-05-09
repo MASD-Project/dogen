@@ -29,7 +29,7 @@ namespace dogen {
 namespace knit {
 namespace backends {
 
-factory::factory(const sml::model& model, const config::knitting_settings& s)
+factory::factory(const sml::model& model, const config::formatting_settings& s)
     : settings_(s), model_(model) { }
 
 void factory::log_cpp_backend_disabled() const {
@@ -44,7 +44,7 @@ factory::result_type factory::create() const {
     }
 
     result_type r;
-    r.push_back(cpp_backend::create(model_, settings_.cpp()));
+    r.push_back(cpp_backend::create(model_, settings_));
     return r;
 }
 

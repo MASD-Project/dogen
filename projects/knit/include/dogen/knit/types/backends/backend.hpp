@@ -59,7 +59,8 @@ public:
     /**
      * @brief Get all directories managed by this backend.
      */
-    virtual std::vector<boost::filesystem::path> managed_directories() const = 0;
+    virtual std::vector<boost::filesystem::path>
+    managed_directories() const = 0;
 };
 
 } } }

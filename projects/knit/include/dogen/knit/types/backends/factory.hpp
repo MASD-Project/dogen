@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
 
@@ -45,7 +45,7 @@ public:
     typedef std::vector<backend::ptr> result_type;
 
 public:
-    factory(const sml::model& model, const config::knitting_settings& s);
+    factory(const sml::model& model, const config::formatting_settings& s);
 
 private:
     void log_cpp_backend_disabled() const;
@@ -54,7 +54,7 @@ public:
     result_type create() const;
 
 private:
-    const config::knitting_settings& settings_;
+    const config::formatting_settings& settings_;
     const sml::model& model_;
 };
 

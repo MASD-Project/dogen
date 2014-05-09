@@ -31,7 +31,7 @@
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/project.hpp"
 
@@ -50,7 +50,7 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow(const config::cpp_settings& settings);
+    workflow(const config::formatting_settings& s);
     virtual ~workflow() noexcept {}
 
 public:
@@ -80,7 +80,7 @@ public:
     result_type execute(const cpp::project& p);
 
 private:
-    const config::cpp_settings settings_;
+    const config::formatting_settings settings_;
 };
 
 } }

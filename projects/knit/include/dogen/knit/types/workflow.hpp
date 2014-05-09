@@ -33,6 +33,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/utility/serialization/archive_types.hpp"
@@ -77,16 +78,9 @@ public:
     typedef std::function<std::ostream& ()> output_fn;
 
 public:
-    workflow(workflow&& rhs) : settings_(std::move(rhs.settings_)) { }
+    workflow(workflow&& rhs);
     workflow(const config::knitting_settings& s);
     workflow(const config::knitting_settings& s, const output_fn& o);
-
-private:
-    /**
-     * @brief Outputs the pair file name and contents to its output
-     * destination.
-     */
-    void output(const outputters::outputter::value_type& o) const;
 
 public: // public section for testing purposes only
     /**
@@ -95,23 +89,50 @@ public: // public section for testing purposes only
      */
     bool housekeeping_required() const;
 
+private:
     /**
-     * @brief Execute the SML sub-workflow and return a generatable
-     * model - or nothing, if no such model exists.
+     * @brief Performs a housekeeping run for the supplied directories.
      */
-    boost::optional<sml::model> make_generatable_model() const;
+    void housekeep(const std::map<boost::filesystem::path, std::string>& files,
+        const std::vector<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Outputs the pair file name and contents to its output
+     * destination.
+     */
+    void output_files(const outputters::outputter::value_type& o) const;
 
     /**
      * @brief Transforms the model into generated code, according to
      * the backend passed in.
      */
-    void generate(backends::backend& b) const;
+    void create_files_for_backend(backends::backend& b) const;
+
+    /**
+     * @brief Returns true if we should execute the generation
+     * activity, false otherwise.
+     */
+    bool is_generation_required(const boost::optional<sml::model>& m) const;
+
+public:
+    /**
+     * @brief Execute the SML workflow and return a model that can be
+     * generated - or nothing, if no such model exists.
+     */
+    boost::optional<sml::model> obtain_model_activity() const;
+
+    /**
+     * @brief Extracts the formatting settings from the SML model.
+     */
+    config::formatting_settings
+    extract_formatting_settings_activity(const sml::model& m) const;
 
     /**
      * @brief Given a merged model, generates all of its
      * representations.
      */
-    void generate(const sml::model& m) const;
+    void generate_model_activity(const sml::model& m,
+        const config::formatting_settings& fs) const;
 
 public:
     /**
@@ -120,7 +141,7 @@ public:
     void execute() const;
 
 private:
-    const config::knitting_settings settings_;
+    const config::knitting_settings knitting_settings_;
     const output_fn output_;
 };
 

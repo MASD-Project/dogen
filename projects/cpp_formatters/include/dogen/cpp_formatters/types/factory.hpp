@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 
@@ -45,7 +45,7 @@ public:
     typedef file_formatter::shared_ptr result_type;
 
 public:
-    factory(const config::cpp_settings& settings);
+    factory(const config::formatting_settings& s);
 
 private:
     result_type create_main_formatter(std::ostream& s,
@@ -61,7 +61,7 @@ public:
         const cpp::content_descriptor& cd) const;
 
 private:
-    const config::cpp_settings settings_;
+    const config::formatting_settings settings_;
     const bool disable_io_;
     const bool disable_serialization_;
 };

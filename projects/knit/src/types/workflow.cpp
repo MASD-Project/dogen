@@ -60,108 +60,116 @@ const std::string code_generation_failure("Code generation failure.");
 
 }
 
-namespace dogen {
+  namespace dogen {
 namespace knit {
 
-workflow::workflow(const config::knitting_settings& s) : settings_(s) {
-
-    if (settings_.output().output_to_stdout()) {
-        BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
-        BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
-    }
-    config::knitting_settings_validator::validate(s);
-}
+workflow::workflow(workflow&& rhs)
+    : knitting_settings_(std::move(rhs.knitting_settings_)) { }
 
 workflow::
-workflow(const config::knitting_settings& s, const output_fn& o)
-    : settings_(s), output_(o) {
+workflow(const config::knitting_settings& s) : knitting_settings_(s) {
 
-    if (!settings_.output().output_to_stdout() || !output_) {
+    if (knitting_settings_.output().output_to_stdout()) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
     }
-    config::knitting_settings_validator::validate(s);
+    config::knitting_settings_validator::validate(knitting_settings_);
+}
+
+workflow::workflow(const config::knitting_settings& s, const output_fn& o)
+    : knitting_settings_(s), output_(o) {
+
+    if (!knitting_settings_.output().output_to_stdout() || !output_) {
+        BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
+        BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
+    }
+    config::knitting_settings_validator::validate(knitting_settings_);
 }
 
 bool workflow::housekeeping_required() const {
     return
-        !settings_.troubleshooting().stop_after_merging() &&
-        !settings_.troubleshooting().stop_after_formatting() &&
-        settings_.output().delete_extra_files() &&
-        settings_.output().output_to_file();
+        !knitting_settings_.troubleshooting().stop_after_merging() &&
+        !knitting_settings_.troubleshooting().stop_after_formatting() &&
+        knitting_settings_.output().delete_extra_files() &&
+        knitting_settings_.output().output_to_file();
 }
 
-void workflow::output(const outputters::outputter::value_type& o) const {
-    if (settings_.troubleshooting().stop_after_formatting()) {
-        BOOST_LOG_SEV(lg, warn) << "Stopping after formatting so not outputting";
-        return;
-    }
-
-    if (o.empty()) {
-        BOOST_LOG_SEV(lg, warn) << "No files were generated, nothing to output.";
-
-        return;
-    }
-
-    const auto lambda([&](outputters::outputter::ptr p) { p->output(o); });
-    outputters::factory f(settings_.output(), output_);
-    boost::for_each(f.create(), lambda);
-}
-
-void workflow::generate(backends::backend& b) const {
-    const auto r(b.generate());
-    output(r);
-
-    if (!housekeeping_required())
-        return;
-
+void workflow::
+housekeep(const std::map<boost::filesystem::path, std::string>& files,
+    const std::vector<boost::filesystem::path>& dirs) const {
     using boost::adaptors::transformed;
     using boost::filesystem::path;
     std::set<path> expected_files;
-    boost::copy(r | transformed([&](std::pair<path, std::string> p) {
+    boost::copy(files | transformed([&](std::pair<path, std::string> p) {
                 return p.first;
             }),
         std::inserter(expected_files, expected_files.end()));
 
-    const auto& ip(settings_.output().ignore_patterns());
-    housekeeper hk(ip, b.managed_directories(), expected_files);
+    const auto& ip(knitting_settings_.output().ignore_patterns());
+    housekeeper hk(ip, dirs, expected_files);
     hk.tidy_up();
 }
 
-void workflow::generate(const sml::model& m) const {
-    try {
-        const auto lambda([&](backends::backend::ptr p) { generate(*p); });
-        backends::factory f(m, settings_);
-        boost::for_each(f.create(), lambda);
-    } catch(const dogen::cpp_formatters::formatting_error& e) {
-        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
-    } catch(const dogen::sml_to_cpp::workflow_failure& e) {
-        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
+void workflow::output_files(const outputters::outputter::value_type& o) const {
+    if (knitting_settings_.troubleshooting().stop_after_formatting()) {
+        BOOST_LOG_SEV(lg, warn) << "Stopping after formatting, so no output.";
+        return;
     }
+
+    if (o.empty()) {
+        BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
+        return;
+    }
+
+    const auto lambda([&](outputters::outputter::ptr p) { p->output(o); });
+    outputters::factory f(knitting_settings_.output(), output_);
+    boost::for_each(f.create(), lambda);
 }
 
-boost::optional<sml::model> workflow::make_generatable_model() const {
-    bool is_target(false);
-    provider pro(settings_);
-    std::list<sml::model> references;
-    for (const auto ref : settings_.input().references()) {
-        const auto path(ref.path());
-        const auto epp(ref.external_module_path());
-        references.push_back(pro.provide(path, epp, is_target));
+void workflow::create_files_for_backend(backends::backend& b) const {
+    const auto files(b.generate());
+    output_files(files);
+
+    if (!housekeeping_required())
+        return;
+
+    housekeep(files, b.managed_directories());
+}
+
+bool workflow::
+is_generation_required(const boost::optional<sml::model>& m) const {
+    if (knitting_settings_.troubleshooting().stop_after_merging()) {
+        BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
+        return false;
     }
 
-    is_target = true;
-    const auto path(settings_.input().target());
-    const auto epp(settings_.input().external_module_path());
+    if (!m)
+        return false;
+
+    return true;
+}
+
+boost::optional<sml::model> workflow::obtain_model_activity() const {
+    const bool is_target(true);
+    provider pro(knitting_settings_);
+    std::list<sml::model> references;
+    for (const auto ref : knitting_settings_.input().references()) {
+        const auto path(ref.path());
+        const auto epp(ref.external_module_path());
+        references.push_back(pro.provide(path, epp, !is_target));
+    }
+
+    const auto path(knitting_settings_.input().target());
+    const auto epp(knitting_settings_.input().external_module_path());
     const sml::model target(pro.provide(path, epp, is_target));
 
     const bool add_system_models(true);
-    sml::workflow w(add_system_models, settings_);
+    sml::workflow w(add_system_models, knitting_settings_);
     const auto pair(w.execute(target, references));
     const auto& m(pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
-    persister per(settings_);
+    persister per(knitting_settings_);
     per.persist(m, merged);
 
     BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << m.objects().size()
@@ -177,19 +185,38 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
     return boost::optional<sml::model>();
 }
 
+config::formatting_settings workflow::
+extract_formatting_settings_activity(const sml::model&) const {
+    config::formatting_settings r;
+    r.cpp(knitting_settings_.cpp());
+    return r;
+}
+
+void workflow::generate_model_activity(
+    const sml::model& m, const config::formatting_settings& fs) const {
+    try {
+        backends::factory f(m, fs);
+        boost::for_each(f.create(), [&](backends::backend::ptr p) {
+                create_files_for_backend(*p);
+            });
+    } catch(const dogen::cpp_formatters::formatting_error& e) {
+        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
+    } catch(const dogen::sml_to_cpp::workflow_failure& e) {
+        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
+    }
+}
+
 void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Workflow started.";
-    BOOST_LOG_SEV(lg, debug) << "Settings: " << settings_;
+    BOOST_LOG_SEV(lg, debug) << "Knitting settings: " << knitting_settings_;
 
     try {
-        const auto o(make_generatable_model());
-        if (settings_.troubleshooting().stop_after_merging()) {
-            BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
+        const auto m(obtain_model_activity());
+        if (!is_generation_required(m))
             return;
-        }
 
-        if (o)
-            generate(*o);
+        auto fs(extract_formatting_settings_activity(*m));
+        generate_model_activity(*m, fs);
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
         throw;
