@@ -8,6 +8,18 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider adding SWIG and Boost.Python support                     :story:
+
+We could generate the code required to expose the C++ types into ruby
+or python by creating a formatter for it. Boost.Python would be more
+straightforward as it is plain C++ code; SWIG would require generating
+an interface file (IDL-like) and as such is closer to [[*Add%20support%20for%20thrift%20and%20protocol%20buffers][this]] story.
+
+*** Add yuml markup language support                                  :story:
+
+It should be fairly straightforward to add a yuml front end that reads
+a file using their markup language and generates an SML model from it.
+
 *** Create a trivial Linux gcc script                                 :story:
     CLOCK: [2014-04-22 Tue 08:15]--[2014-04-22 Tue 08:35] =>  0:20
 
@@ -210,23 +222,6 @@ directory. This is not an easy undertaking because:
 - there is hard-coding in the test model sets pointing to these
 - the CMake scripts rely on the location of the diagrams to copy them
   across
-
-*** Update meta-data processing                                       :story:
-
-The problem with the meta-data is that there is no single place where
-it is used; instead, we need it in different places. The best way is
-to distribute the responsibility of converting meta-data into the type
-system in the places that know about it:
-
-- in dia transformers (the comment)
-- in SML (is final, etc); copying across the feature graph into the
-  types with no knowledge of its contents;
-- in C++ transformer: transforming all of the meta-data it knows
-  of.
-
-Each model should define the tags that it knows of in a =tags= class.
-
-We also need to create a step in SML that converts settings into tags.
 
 *** Implement the file formatter interface in types formatter         :story:
 
@@ -931,16 +926,16 @@ test data generator. Let =a= be a class with a property =prop= of type
 string. It would be nice to be able to do:
 
 : a_generator g;
-: g.prop([]{const unsigned int seed} {
+: g.prop([](const unsigned int seed) {
 :     std::ostringstream s;
 :     s << "my property " << seed * 10;
 :     return s.str();
-: } );
+: });
 
 And so on, for all member variables. The generators would have some
 default behaviour, but it could be overridden at any point by the
 user. With this, test data generator would be a great starting point
-as a way of generating random data to test systems.
+as a way of generating random data for test systems.
 
 See also [[http://www.json-generator.com/][JSON generator]].
 
@@ -1018,6 +1013,10 @@ doing them and report regressions.
 
 Boost used to provide a nifty little utility class called xtime. It
 appears to have been deprecated by [[http://www.boost.org/doc/libs/1_55_0/doc/html/chrono/users_guide.html#chrono.users_guide.examples.duration.xtime_conversions][chrono]].
+
+We should also provide a command line option that prints a timing
+report. This would be useful so that users can compare timings between
+releases.
 
 *** Use clang to generate json system models                          :story:
 
@@ -1159,20 +1158,6 @@ comprehensive CMake build. All we need is:
 The idea is that with this the user could immediately generate a
 binary without any further configuration required.
 
-*** OM: Add tests for properties and compiler generated functions     :story:
-
-We need to ensure the generation of properties and compiler generated
-functions works correct in types formatter.
-
-*** OM: Add tests for module in model                                 :story:
-
-We need to ensure we handle namespaces correctly in types formatter.
-
-*** OM: Add tests for tagging of abstract objects                     :story:
-
-We should explore the different meta data tags that affect the types
-formatter in the unit tests.
-
 *** Sanitizer: Add tests for empty objects                            :story:
 
 This was mainly in the context of IO but could be useful for other
@@ -1289,14 +1274,6 @@ A first step for this would be to have a language enumeration in SML
 which is a property of the model, and one entry of which is "language
 agnostic".
 
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders. Instead, this story will be handled when we move
-over to using =boost::property_tree::ptree=.
-
 *** Forward declaration is not always correct for services            :story:
 
 In cases where we used a service as a way of declaring a stand alone
@@ -1315,16 +1292,6 @@ other aspects of the model.
 _All_ may be too strong a word as there quite a few. We need good
 coverage around the combinations one can do within the domain
 formatter.
-
-*** Add tagging for propagatable parameters                           :story:
-
-Some implementation specific parameters should be propagated along the
-composition graph (e.g. boost serialisation status disabled). We could
-spot these parameters whilst building the model and do the propagation
-there and then.
-
-We need to create language specific classes to propagate parameters,
-assign proper defaults to them, etc.
 
 *** Add getter and setter prefixes                                    :story:
 

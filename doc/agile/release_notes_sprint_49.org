@@ -13,14 +13,14 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-08 Thu 23:03]
+Clock summary at [2014-05-09 Fri 08:38]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *11:50* |       |      |
+| *Total time*                                                | *12:12* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 11:50 |      |
-| IMPLEMENTATION Release notes and backlog grooming           |         |       | 1:40 |
+| Development Stories Implemented                             |         | 12:12 |      |
+| IMPLEMENTATION Release notes and backlog grooming           |         |       | 2:02 |
 | COMPLETED Remove the roadmap                                |         |       | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem  |         |       | 3:23 |
 | COMPLETED Rename the =COMMENT= tag to =dia.comment=         |         |       | 0:21 |
@@ -32,6 +32,8 @@ Clock summary at [2014-05-08 Thu 23:03]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-09 Fri 08:24]--[2014-05-09 Fri 08:38] =>  0:14
+    CLOCK: [2014-05-09 Fri 07:55]--[2014-05-09 Fri 08:03] =>  0:08
     CLOCK: [2014-05-08 Thu 21:47]--[2014-05-08 Thu 22:25] =>  0:38
     CLOCK: [2014-05-06 Tue 07:55]--[2014-05-06 Tue 08:18] =>  0:23
     CLOCK: [2014-05-05 Mon 17:22]--[2014-05-05 Mon 17:37] =>  0:15
@@ -352,6 +354,14 @@ At present only includes seems necessary.
 No need to work at the entity level here. Transformer to populate
 project correctly.
 
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders. Instead, this story will be handled when we move
+over to using =boost::property_tree::ptree=.
+
 *** Remove =file_formatter_interface=                                 :task:
 
 Update all C++ formatters to use specific types:
@@ -447,3 +457,60 @@ consider either using IoC or removing the interface.
 Even though we do not yet have anyone implementing these interfaces,
 we can already add the general workflow into the engine and make sure
 it doesn't break anything.
+
+*** CANCELLED Update meta-data processing                             :story:
+    CLOSED: [2014-05-09 Fri 07:59]
+
+*Rationale*: covered by settings work.
+
+The problem with the meta-data is that there is no single place where
+it is used; instead, we need it in different places. The best way is
+to distribute the responsibility of converting meta-data into the type
+system in the places that know about it:
+
+- in dia transformers (the comment)
+- in SML (is final, etc); copying across the feature graph into the
+  types with no knowledge of its contents;
+- in C++ transformer: transforming all of the meta-data it knows
+  of.
+
+Each model should define the tags that it knows of in a =tags= class.
+
+We also need to create a step in SML that converts settings into tags.
+
+
+*** CANCELLED OM: Add tests for properties and compiler generated functions :story:
+    CLOSED: [2014-05-09 Fri 08:28]
+
+*Rationale*: seems like a =om= related story. No longer applicable.
+
+We need to ensure the generation of properties and compiler generated
+functions works correct in types formatter.
+
+*** CANCELLED OM: Add tests for module in model                       :story:
+    CLOSED: [2014-05-09 Fri 08:28]
+
+*Rationale*: seems like a =om= related story. No longer applicable.
+
+We need to ensure we handle namespaces correctly in types formatter.
+
+*** CANCELLED OM: Add tests for tagging of abstract objects           :story:
+    CLOSED: [2014-05-09 Fri 08:28]
+
+*Rationale*: seems like a =om= related story. No longer applicable.
+
+We should explore the different meta data tags that affect the types
+formatter in the unit tests.
+
+*** CANCELLED Add tagging for propagatable parameters                 :story:
+    CLOSED: [2014-05-09 Fri 08:31]
+
+*Rationale*: tags will no longer be propagatable.
+
+Some implementation specific parameters should be propagated along the
+composition graph (e.g. boost serialisation status disabled). We could
+spot these parameters whilst building the model and do the propagation
+there and then.
+
+We need to create language specific classes to propagate parameters,
+assign proper defaults to them, etc.
