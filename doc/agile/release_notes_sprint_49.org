@@ -13,22 +13,23 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-09 Fri 08:38]
+Clock summary at [2014-05-09 Fri 22:53]
 
-| Headline                                                    | Time    |       |      |
-|-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *12:12* |       |      |
-|-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 12:12 |      |
-| IMPLEMENTATION Release notes and backlog grooming           |         |       | 2:02 |
-| COMPLETED Remove the roadmap                                |         |       | 0:05 |
-| COMPLETED Design an end-to-end solution to the tag problem  |         |       | 3:23 |
-| COMPLETED Rename the =COMMENT= tag to =dia.comment=         |         |       | 0:21 |
-| COMPLETED Add support for unique log files                  |         |       | 0:16 |
-| COMPLETED Print model name to the console on failure        |         |       | 1:23 |
-| COMPLETED Tidy-up =knitting_settings_validator= specs       |         |       | 0:34 |
-| COMPLETED Tidy-up knitter main                              |         |       | 1:07 |
-| IMPLEMENTATION Move all the configuration options into tags |         |       | 3:01 |
+| Headline                                                        | Time    |       |      |
+|-----------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                    | *14:04* |       |      |
+|-----------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                 |         | 14:04 |      |
+| IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:02 |
+| COMPLETED Remove the roadmap                                    |         |       | 0:05 |
+| COMPLETED Design an end-to-end solution to the tag problem      |         |       | 3:23 |
+| COMPLETED Rename the =COMMENT= tag to =dia.comment=             |         |       | 0:21 |
+| COMPLETED Add support for unique log files                      |         |       | 0:16 |
+| COMPLETED Print model name to the console on failure            |         |       | 1:23 |
+| COMPLETED Tidy-up =knitting_settings_validator= specs           |         |       | 0:34 |
+| COMPLETED Tidy-up knitter main                                  |         |       | 1:07 |
+| IMPLEMENTATION Split formatting settings from knitting settings |         |       | 4:49 |
+| IMPLEMENTATION Move all the configuration options into tags     |         |       | 0:04 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -232,13 +233,15 @@ We haven't got any documentation at all in the new formatters
 morel. We need a small blurb about the language neutral formatting
 support the model is supposed to provide.
 
-*** IMPLEMENTATION Move all the configuration options into tags       :story:
-    CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
+*** IMPLEMENTATION Split formatting settings from knitting settings   :story:
 
-Parameters as per analysis story.
+Since we have one set of settings which are read from the command
+line, and another set which are obtained from parsing the meta-data,
+we should split them. This would mean we can still have const settings
+instead of modifying them mid-way through the pipeline.
 
 **** COMPLETED Move the verbose option to top-level settings           :task:
-     CLOSED: [2014-05-06 Tue 18:40]
+     CLOSED: [2014-05-09 Fri 18:23]
      CLOCK: [2014-05-06 Tue 18:08]--[2014-05-06 Tue 18:47] =>  0:39
      CLOCK: [2014-05-06 Tue 08:19]--[2014-05-06 Tue 08:40] =>  0:21
 
@@ -272,21 +275,39 @@ Actually, these are just library specific settings:
 
 For now the C++ settings belong to both - until we fully transition.
 
-**** IMPLEMENTATION Tidy-up knit workflow                             :spike:
+**** COMPLETED Tidy-up knit workflow                                   :task:
+     CLOSED: [2014-05-09 Fri 22:52]
+     CLOCK: [2014-05-09 Fri 22:17]--[2014-05-09 Fri 22:51] =>  0:34
+     CLOCK: [2014-05-09 Fri 18:21]--[2014-05-09 Fri 18:57] =>  0:36
+     CLOCK: [2014-05-09 Fri 18:20]--[2014-05-09 Fri 18:21] =>  0:01
+     CLOCK: [2014-05-09 Fri 08:39]--[2014-05-09 Fri 09:20] =>  0:41
      CLOCK: [2014-05-08 Thu 08:33]--[2014-05-08 Thu 08:40] =>  0:07
 
 We need to make the method names resemble more the workflow
-terminology, with subworkflows, activities, etc.
+terminology, with subworkflows, activities, etc. Prepare the code to
+slot in the formatting settings.
 
-- there are two subworkflows: obtain the SML model and generate it.
-
-**** IMPLEMENTATION Merge provider into workflow in =knit=             :task:
+**** CANCELLED Merge provider into workflow in =knit=                  :task:
+     CLOSED: [2014-05-09 Fri 09:16]
      CLOCK: [2014-05-08 Thu 08:28]--[2014-05-08 Thu 08:32] =>  0:04
      CLOCK: [2014-05-07 Wed 07:56]--[2014-05-07 Wed 08:06] =>  0:10
+
+*Rationale*: this is not required, we can just extract the formatting
+ settings from the merged model.
 
 If we are going to override the settings we must make sure the code is
 as linear as possible. The provider is actually some kind of SML
 loading sub-workflow.
+
+**** Start using formatting settings in formatters model               :task:
+
+We need to replace the references to the c++ settings directly with
+formatter settings.
+
+*** IMPLEMENTATION Move all the configuration options into tags       :story:
+    CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
+
+Parameters as per analysis story.
 
 **** Create a tags class in =config=                                   :task:
 
