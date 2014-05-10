@@ -446,12 +446,12 @@ fundamental concepts of the problem domain. As part of the
 transformation process, the backend performs an expansion of these
 data structures, providing useful behaviours or "facilities". These
 facilities are aggregated in logical bundles called /facets/. They are
-specific to the backend in question, although there are commonalities
-between backends. A perhaps more intuitive way to look at this is as
-follows: a backend generates a variety of files, of different
-types. It is thus useful to group these files in a logical manner, so
-we can talk about them in aggregate. /Facets/ provide the first level
-of grouping.
+specific to the backend in question, although there are "logical"
+commonalities between backends. A perhaps more intuitive way to look
+at this is as follows: a backend generates a variety of files, of
+different types. It is thus useful to group these files in a logical
+manner, so we can talk about them in aggregate. /Facets/ provide the
+first level of grouping.
 
 Facets are housed in one or more folders in the file system, named
 after the facet. These are composed of files and folders, with the
@@ -483,8 +483,125 @@ Facets, file kinds and aspects are known collectively as
 /features/. The /feature graph/ is a logical device that defines the
 dependencies between all features, allowing us to switch parts of the
 code generation on and off, and ensuring that all dependent features
-are toggled accordingly. The feature graph is expressed as tags,
-allowing the user to interfere with the toggling process.
+are toggled accordingly.
+
+Before we go into the backends specifically, one word on the
+=formatters= model. This is a utility model that contains all
+formatting code generic to all backends, so that we can reuse it. It
+is then used by concrete formatter models such as =cpp_formatters=,
+and so on.
+
+**** The C++ backend
+
+The C++ backend is implemented by three models:
+
+- =cpp=: contains all the types required for formatting.
+- =sml_to_cpp=: transforms an SML model into its corresponding =cpp=
+  representation.
+- =cpp_formatters=: creates C++ source code from the instances of
+  =cpp= types.
+
+These models are hooked up as follows: the =sml= model is transformed
+into the =cpp= model by =sml_to_cpp=; we then use the workflow of the
+=cpp_formatters= model to convert these types into C++ source code.
+
+The C++ backend defines the following facets:
+
+- =types=: definition of domain types.
+- =streaming=: provides =operator<<=, responsible for dumping the
+  contents of the instance of the domain type as a JSON object.
+- =hashing=: provides =std::hash= support.
+- =serialisation=: provides =boost::serialization= support.
+- =test_data=: provides a set of "generators" that create test
+  instances of the domain types. Was originally created for our own
+  tests, but we left it visible to end users since it has proven
+  itself useful.
+- =odb=: provides ODB support; the =odb= compiler can then be executed
+  against the model to generate ORM mappings for it.
+
+***** Design and evolution of the C++ backend
+
+First we must start by saying that the objective of the =cpp= model is
+*not* to model the C++ type system. This approach has been tried: a
+model was created that was extremely faithful to the C++ language and
+where the types where taken directly from the names defined in ISO/IEC
+14882:2011(E). The idea was that one could express all the intricacies
+of the code to generate in this model and then use a simple formatter
+to just dump it as code - Clang infrastructure could easily be used to
+do so. Of course, taking an SML model and converting it into an AST
+was found to be non-trivial, particularly when one considered all the
+required behaviours such as serialisation, hashing and so on. So it
+was that we settled on building a model at a much higher level than
+the AST.
+
+Instead, the =cpp= model is designed to provide =cpp_formatters= with
+/exactly/ the data they need, such that all the complicated logic
+related to the domain is abstracted away from them - entity
+composition, relationships between the entities and so on. Informally,
+we tend to call these high-level C++ types the "view models" and the
+formatters the "views" because the approach is extremely similar to
+the Presentation Model described by Martin Fowler.
+
+The job of a given formatter is to take a specific number of types in
+the C++ model such as =class_info= and generate a C++ source code -
+for example the domain model header file. Ideally one would like a
+=cpp= model that knows nothing about formatters, and formatters that
+take one type and output it to a stream. However, as it turns out, our
+hopes for such a clean model were severely dashed. The problem is that
+in order to build a complete view model, one needs to know what view
+it belongs to.
+
+Take for example the case of an entity =a=, a simple value
+object. From a domain type definition perspective - what we call the
+=types= facet - we have one set of include files; say all the
+properties used by this class that are not simple types. From a
+serialisation perspective we would have another set of include files -
+say the domain type header and the serialisation headers for each type
+of each property. And since C++ has an header and an implementation
+file, these too have different sets of include files. This causes
+problems because the include file list cannot be computed unless we
+know for /whom/ it is being built for, and the /whom/ is, effectively,
+the formatter. Things are made considerably worse by the fact that
+some formatters depend on knowing what files where generated by other
+formatters. So it was that we ended up having to represent these
+somehow in the =cpp= model.
+
+The approach taken was to create a =content_descriptor=, which is a
+crude way of mapping coordinates in the formatting space. It tells:
+
+- to which facet the file belongs: e.g. types, serialisation, etc.
+- within that facet, to which aspect the file belongs to: e.g. the
+  main domain header, forward declarations, etc.
+- if the type is a class, what /kind/ of class it is; we have
+  formatters specifically for plain value object, exceptions,
+  visitors, etc.
+- whether the file is a header file or an implementation file.
+
+This approach is very unfortunate, because it means adding a new
+formatter is not as simple as adding a new type in
+=cpp_formatters=. It requires you to have a deep understanding of core
+things such how the inclusion lists are computed, how the file names
+are generated, what enumerations to update, and so on. Ideally we
+wanted a simple registration process, possibly in the implementation
+file of the formatter, that totally encapsulated the formatter from
+the rest of the code. Intuitively it sounds like this is the right
+approach:
+
+- the formatter knows about what facets and aspects it applies to;
+- the formatter knows what types it will process;
+- the formatter could generate a file name, adding some kind of
+  post-fix/prefix related to the aspect.
+
+However, the downside of all of this is that we now need really
+complex logic in the formatter to be able to build the inclusion
+lists; and this logic actually requires the formatter to know about
+other formatters - for instance, the serialisation example above
+required access to the domain type definition - so they would not be
+encapsulated from each other.
+
+After much, much thinking, it was decided that the current approach is
+the less of all evils, and until something comes up that is
+dramatically easier we will continue with this approach.
 
 * PART II - PRACTICE
 
@@ -1368,23 +1485,7 @@ dia models loaded, and the second saves their equivalent in SML. These
 files can be dumped into a directory of choice via =--debug-dir=. By
 default they come out in the current directory.
 
-** The C++ Backend
-
-In this section we do an overview of the basic facilities provided by
-Dogen in the generated C++ code. In order to understand the
-terminology used here, you should read the section on backends in Part
-I. FIXME add link.
-
-*** Types
-
-
-
-*** Streaming
-*** Hashing
-*** Serialisation
-*** Test Data
-*** ODB
-*** C++ backend options
+** The C++ Backend Options
 
   --cpp-disable-backend                 Do not generate C++ code.
   --cpp-disable-complete-constructor    Do not generate a constructor taking as

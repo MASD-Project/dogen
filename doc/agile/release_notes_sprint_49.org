@@ -13,14 +13,15 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-09 Fri 22:53]
+Clock summary at [2014-05-10 Sat 23:22]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *14:04* |       |      |
+| *Total time*                                                    | *16:38* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                 |         | 14:04 |      |
+| Development Stories Implemented                                 |         | 16:38 |      |
 | IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:02 |
+| IMPLEMENTATION Updates to the manual and readme files           |         |       | 1:14 |
 | COMPLETED Remove the roadmap                                    |         |       | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem      |         |       | 3:23 |
 | COMPLETED Rename the =COMMENT= tag to =dia.comment=             |         |       | 0:21 |
@@ -28,7 +29,7 @@ Clock summary at [2014-05-09 Fri 22:53]
 | COMPLETED Print model name to the console on failure            |         |       | 1:23 |
 | COMPLETED Tidy-up =knitting_settings_validator= specs           |         |       | 0:34 |
 | COMPLETED Tidy-up knitter main                                  |         |       | 1:07 |
-| IMPLEMENTATION Split formatting settings from knitting settings |         |       | 4:49 |
+| IMPLEMENTATION Split formatting settings from knitting settings |         |       | 6:09 |
 | IMPLEMENTATION Move all the configuration options into tags     |         |       | 0:04 |
 #+end:
 
@@ -42,7 +43,9 @@ Clock summary at [2014-05-09 Fri 22:53]
 
 Updates to release notes and backlog.
 
-*** Updates to the manual and readme files                             :task:
+*** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-05-10 Sat 23:08]--[2014-05-10 Sat 23:21] =>  0:13
+    CLOCK: [2014-05-10 Sat 16:01]--[2014-05-10 Sat 17:02] =>  1:01
 
 Use build downtime to update the manual and / or readme file.
 
@@ -299,7 +302,8 @@ If we are going to override the settings we must make sure the code is
 as linear as possible. The provider is actually some kind of SML
 loading sub-workflow.
 
-**** Start using formatting settings in formatters model               :task:
+**** IMPLEMENTATION Start using formatting settings in formatters model :task:
+     CLOCK: [2014-05-10 Sat 14:41]--[2014-05-10 Sat 16:01] =>  1:20
 
 We need to replace the references to the c++ settings directly with
 formatter settings.
