@@ -8,6 +8,10 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add targets to output manual in downloadable formats              :story:
+
+We should build HTML and PDF representations of the manual.
+
 *** Consider adding SWIG and Boost.Python support                     :story:
 
 We could generate the code required to expose the C++ types into ruby
