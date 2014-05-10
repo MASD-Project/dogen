@@ -34,7 +34,7 @@ process simpler: the user creates a domain model using a UML tool and
 the tools provided by Dogen use it to generate its source code
 representation. The generated code contains most of the services
 required from a typical C++ domain object such as serialisation,
-hashing, streaming and so on.
+hashing, io (streaming) and so on.
 
 If you are reading a printed copy of this manual, you can always
 access the latest version online:
@@ -508,7 +508,7 @@ into the =cpp= model by =sml_to_cpp=; we then use the workflow of the
 The C++ backend defines the following facets:
 
 - =types=: definition of domain types.
-- =streaming=: provides =operator<<=, responsible for dumping the
+- =io=: provides =operator<<=, responsible for dumping the
   contents of the instance of the domain type as a JSON object.
 - =hashing=: provides =std::hash= support.
 - =serialisation=: provides =boost::serialization= support.
@@ -1599,7 +1599,7 @@ the reasons behind these choices.
 
 ** RFC 2119
 
-The definitions in RFC 2119 apply to the text of this part. In
+The definitions in [[https://www.ietf.org/rfc/rfc2119.txt][RFC 2119]] apply to the text of this part. In
 particular:
 
 #+begin_quote
@@ -1780,13 +1780,9 @@ version control, folder structure, file names and so on. The words
    compiler version. Unfortunately, these directories must be setup
    manually because target folders contain a full-blown cmake
    environment, independent from the others. Thus, it is not possible
-   to generate this setup directly from CMake. Example complex folder
-   structure:
-
-#+begin_example
-output/linux-amd64-gcc-4_6_1-debug
-output/win32-x86-clang-3_0-release
-#+end_example
+   to generate this setup directly from CMake. Example complex
+   folders: =output/linux-amd64-gcc-4_6_1-debug=,
+   =output/win32-x86-clang-3_0-release=.
 
 6. For each build, the sub-folder =stage= shall contain all the
    binaries, documentation and other artefacts that will be
@@ -1801,9 +1797,9 @@ output/win32-x86-clang-3_0-release
 
 2. In exceptional cases where the third party dependency is both small
    and not readily available in packaged form, it is acceptable to add
-   it to the repository. This is the case with CMake extensions and
-   with the boost portable serialisation library. Once these projects
-   are packaged they shall be removed from the repository.
+   it to the repository. This is the case with CMake extensions. Once
+   a packaged version is available, third-party content should be
+   removed from the repository.
 
 ** C++ Coding Standards
 
@@ -1828,25 +1824,24 @@ C++ domain; the generic aspects of physical layout are dealt with in
 [[File%20and%20Directory%20Standards][File and Directory Standards]].
 
 1. For the purposes of this document, a /project/ is understood to be
-   FIXME: look for the definition of solution and project in visual
-   studio. A component is some logical partitioning of the
-   project. Components manifest themselves as folders and namespaces
-   within the project.
+   as defined in section [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#root-folder][Root Folder]]: anything which generates a
+   shared library, static library or executable or any other such
+   cohesive unit work. A /component/ is some logical partitioning of
+   the project. Components manifest themselves as folders and
+   namespaces within the project.
 
 2. Header files must have the extension =hpp=. /Rationale/: this is as
-   used by boost.
+   used by Boost.
 
 3. Implementation files must have the extension =cpp=. /Rationale/:
-   this is as used by boost.
+   this is as used by Boost.
 
-4. Files are named according to their content:
-
-- files containing a /class/ shall be named after the class;
-- files containing nothing but /namespace/ shall be named after the
-  namespace, and should be used only to document the namespace;
-- files containing one or more free-functions shall be named according
-  to the logical module that these functions constitute
-  (e.g. =utility=, =pricing=, etc).
+4. Files are named according to their content: a) files containing a
+   /class/ shall be named after the class; b) files containing nothing
+   but /namespace/ shall be named after the namespace, and should be
+   used only to document the namespace; c) files containing one or
+   more free-functions shall be named according to the logical module
+   that these functions constitute (e.g. =utility=, etc).
 
 5. Projects are composed of three top-level directories: =include=,
    =src= and =spec=. =include= shall house all the header files. =src=
@@ -1858,16 +1853,17 @@ C++ domain; the generic aspects of physical layout are dealt with in
    =dogen/PROJECT_NAME/COMPONENT_NAME=. The =src= directory must have
    the following directory structure: =COMPONENT_NAME=. /Rationale/:
    by placing the =dogen/PROJECT_NAME= folder in the include directory
-   we can lift it directly into a package installing the development
-   header files. This is not required for the implementation files as
-   they are private. /Examples/:
-   =utility/include/utility/exception/...= and
-   =utility/src/exception/...=.
+   we can: a) use it for the include path (see below) b) lift it
+   directly into a package installing the development header
+   files. This is not required for the implementation files as they
+   are private. /Examples/: =utility/include/utility/exception/...=
+   and =utility/src/exception/...=.
 
 7. All consumers of the API - internal or external - must put the
    =include= folders of each project in the compiler's include path,
    resulting in includes of the form
-   =dogen/PROJECT_NAME/COMPONENT_NAME...=.
+   =dogen/PROJECT_NAME/COMPONENT_NAME...=,
+   e.g. =dogen/utility/log/severity_level.hpp=.
 
 8. Projects have the following standard CMake files: the top-level
    file includes files in =src= and =spec=; The CMake files in =src=
@@ -1903,28 +1899,22 @@ C++ domain; the generic aspects of physical layout are dealt with in
 
 *** Specifications
 
-1. All components in the system have a set of codified behaviours: the
-   /component specification/.
+1. All projects in the system have a set of codified behaviours: the
+   /project specification/. /Notes/: There are only two types of
+   behaviour within the system, specified or unspecified. Specified
+   behaviour is that which is covered by a spec; unspecified behaviour
+   is that which is not.
 
 2. In addition, the system itself may have additional constraints,
    which live in the /system specification/.
 
-3.
-
- In a more general form:
-   there are only two types of behaviour within the
-system, specified or unspecified. Specified behaviour is that which is
-covered by a spec; unspecified behaviour is that which is not.  With
-regards to specs, components may chose to implement it in one of two
-ways:
-
-- by creating a sub-folder called /spec/; or
-- by adding the spec classes directly to the main
-  component folder.
-
-The size of the spec should determine the approach.
+3. Project specifications are contained in the sub-folder =spec=.
 
 *** Language
+
+This section details specifications related to the C++ language
+itself, and to the contents of the files.
+
 **** Preamble
 
 All C++ files shall start with a descriptive text stating copyright
@@ -1935,19 +1925,29 @@ contents of the preamble are as follows:
 #+begin_example
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) YEAR DEVELOPER_NAME <DEVELOPER_EMAIL>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #+end_example
 
-The preamble is available as the [[file:infrastructure/emacs.org][yas snippet]] =preamble=.
-
 **** Header guards
 
-All header files shall have header guards after the [[Preamble][preamble]]. The name
+All header files shall have header guards after the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#preamble][preamble]]. The name
 of the guard shall be composed of the following structure:
 =NAMESPACE_FILENAME_EXTENSION=. Each of these fields has the following
 meaning:
@@ -1967,8 +1967,8 @@ produces a speed boost.
 Example of a complete header guard:
 
 #+begin_example
-#ifndef KITANDA_KITANDA_HPP
-#define KITANDA_KITANDA_HPP
+#ifndef DOGEN_UTILITY_LOG_LIFE_CYCLE_MANAGER_HPP
+#define DOGEN_UTILITY_LOG_LIFE_CYCLE_MANAGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -1987,7 +1987,7 @@ All C++ source code shall be indented with spaces as this ensures the
 same indentation regardless of editor. Tabs shall not be used.
 
 *Note*: This is enforced in emacs via the both whitespace mode and the
-settings in the [[Preamble][preamble]] of every file.
+settings in the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#preamble][preamble]] of every file.
 
 The boost [[http://www.boost.org/development/requirements.html][Tabs rationale]] states:
 
@@ -2009,9 +2009,9 @@ jwz.
 
 Source code must not exceed 80 columns. Continuations on subsequent
 lines should be avoided - the line should read as a complete
-statement. /Rationale/: the human brain is used to scan one line at a
-time in rapid eye movements; making long lines or multi-line
-statements short-circuits this process.
+statement. /Rationale/: the human brain is used to scanning text one
+line at a time, in rapid eye movements; making long lines or
+multi-line statements short-circuits this process.
 
 This also has the beneficial side-effect of making the code readable
 even on text-mode consoles at 80x25, and allowing the editing/viewing
@@ -2033,7 +2033,8 @@ should be documented, except in trivial cases. In particular:
 - *namespace documentation*: Every namespace generating folder must
   have a namespace documentation header; this is a header file whose
   name matches the namespace and contains documentation explaining its
-  purpose.
+  purpose. /Rationale/: If a namespace is not documented, it does not
+  appear on the top-level listing of namespaces in the doxygen docs.
 
 **** General Identifier naming
 
@@ -2055,17 +2056,21 @@ a few kitanda peculiarities:
 
 **** Indentation
 
-In general, all source code must be indented using the /Stroupstrup/
-style (FIXME add link to Wikipedia); there are a few kitanda
-modifications, as follows.
+In general, all source code must be indented using the /[[http://en.wikipedia.org/wiki/Indent_style#Variant:_Stroustrup][Stroupstrup
+style]]/; there are a few dogen modifications, as follows:
 
-*Namespaces* are not indented; the =namespace= keyword must always
-start at column zero. Namespace closing brackets must always close all
-the enclosing namespaces in a single line. Namespace closing brackets
-are never followed by comments such as the name of the namespace being
-closed. /Rationale/: all major editors tell you which namespace the
-bracket is closing so this just adds more maintenance work for no
-reason.
+- *Namespaces* are not indented; the =namespace= keyword must always
+  start at column zero. Namespace closing brackets must always close
+  all the enclosing namespaces in a single line. Namespace closing
+  brackets are never followed by comments such as the name of the
+  namespace being closed. /Rationale/: a) as we use namespaces a lot,
+  it would result in very deeply nested code, which does not play well
+  with the limitations on line width b) closing all the namespaces in
+  one go saves vertical space, with no disadvantages c) all major
+  editors tell you which namespace the bracket is closing so comments
+  add more maintenance work for no reason. /Notes/: we considered
+  merging the namespace opening lines too, but that proved to be less
+  readable - e.g. =namespace A { Namespace B {=.
 
 #+begin_example
 namespace A {
