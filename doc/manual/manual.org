@@ -422,22 +422,30 @@ Dia defines the following tags:
 *** The middle-end
 
 We store the domain model internally as SML - a /meta-model/ largely
-based on Domain Driven Design. A meta-model is simply a model whose
-sole purpose is to describe other models. SML is designed to capture
-all the details of the domain model that are required for code
-generation. SML is not designed for anything else, so it is very terse
-and not a particularly obvious model.
+based on Domain Driven Design. SML is designed to capture all the
+details of the domain model that are required for code generation, but
+in a form that is programming-language-agnostic. It is an intermediate
+model in between the front-ends (specific to a tool, for example) and
+the back-ends (specific to a programming language).
+
+It is important not to confuse SML with other, more generic
+meta-models such as UML or the language-specific Reflection
+meta-models. SML is not designed for modeling in the generic sense
+like UML is; it is instead a special purpose meta-model for code
+generation, so it may appear to be very terse and not particularly
+obvious.
 
 *** The backends
 
 The role of the backend is to express the meta-model as code. We can
-think of this as the transformation of one /representation/ of the
+think of this as the transformation of one representation of the
 domain model - the SML meta-model in memory - to another
-/representation/ - a set of files in the file system. These files are
+representation - a set of files in the file system. These files are
 expected to obey the rules of a well-known /grammar/. Typical grammars
 are those of programming languages such as C++, C# or SQL. In
 practice, a single backend has more than one grammar, as we must also
-generate the supporting infrastructure like CMake files and so on.
+generate the supporting infrastructure like CMake files and so on, but
+conceptually the idea still holds.
 
 SML has a "functionally agnostic" view of domain types. That is to say
 that within SML there is no behaviour, just a pure representation of
@@ -446,19 +454,21 @@ fundamental concepts of the problem domain. As part of the
 transformation process, the backend performs an expansion of these
 data structures, providing useful behaviours or "facilities". These
 facilities are aggregated in logical bundles called /facets/. They are
-specific to the backend in question, although there are "logical"
-commonalities between backends. A perhaps more intuitive way to look
-at this is as follows: a backend generates a variety of files, of
-different types. It is thus useful to group these files in a logical
-manner, so we can talk about them in aggregate. /Facets/ provide the
-first level of grouping.
+specific to the backend in question, although there are commonalities
+between backends - for example, all backends need to provide a
+definition of the domain types.
+
+A perhaps more intuitive way to look at facets is as follows: a
+backend generates a variety of files, of different types. It is thus
+useful to group these files in a logical manner, so we can talk about
+them in aggregate. /Facets/ provide the first level of grouping.
 
 Facets are housed in one or more folders in the file system, named
-after the facet. These are composed of files and folders, with the
-folders representing modules in the programming language in question -
-if such a concept exists. The files are logically grouped into /file
-sets/, according to their /kind/. Files of a given kind share a number
-of /aspects/.
+after the facet. These folders themselves are composed of files and
+folders, with the folders representing modules in the programming
+language in question - if such a concept exists. The files are grouped
+into /file sets/, according to their /kind/. Files of a given kind
+share a number of /aspects/.
 
 A concrete example should make these concepts clearer. Lets look at
 the /types/ facet in the C++ backend, the most fundamental of all C++
@@ -470,9 +480,9 @@ facets.
   for the implementation.
 - *file sets*: in the headers we have /includers/ (an include file
   that includes all files or groups of files for that facet), /domain
-  headers/ (the class definitions themselves), and /forward
-  declarations/. In the implementation we have just one file set which
-  is the /domain implementation/.
+  headers/ (the class declaration), and /forward declarations/. In the
+  implementation we have just one file set which is the /domain
+  implementation/ (the class implementation).
 - *aspects*: both includers and forward declaration have only one
   aspect as they are rather trivial. The domain headers and
   implementation have many aspects, most of which shared; for example:
@@ -495,7 +505,7 @@ and so on.
 
 The C++ backend is implemented by three models:
 
-- =cpp=: contains all the types required for formatting.
+- =cpp=: contains all the types required for generating C++ code.
 - =sml_to_cpp=: transforms an SML model into its corresponding =cpp=
   representation.
 - =cpp_formatters=: creates C++ source code from the instances of
@@ -552,25 +562,26 @@ in order to build a complete view model, one needs to know what view
 it belongs to.
 
 Take for example the case of an entity =a=, a simple value
-object. From a domain type definition perspective - what we call the
-=types= facet - we have one set of include files; say all the
-properties used by this class that are not simple types. From a
-serialisation perspective we would have another set of include files -
-say the domain type header and the serialisation headers for each type
-of each property. And since C++ has an header and an implementation
-file, these too have different sets of include files. This causes
-problems because the include file list cannot be computed unless we
-know for /whom/ it is being built for, and the /whom/ is, effectively,
-the formatter. Things are made considerably worse by the fact that
-some formatters depend on knowing what files where generated by other
-formatters. So it was that we ended up having to represent these
-somehow in the =cpp= model.
+object. From a domain type definition perspective - the =types=
+facet - we have one set of include files: say all the properties used
+by this class that are not simple types. From a serialisation
+perspective we would have another set of include files: say the domain
+type header and the serialisation headers for each type of each
+property. And since C++ has an header and an implementation file,
+these too have different sets of include files. This causes problems
+because the include file list cannot be computed unless we know for
+/whom/ it is being built for, and the /whom/ is, effectively, the
+formatter (not quite, but almost). Things are made considerably worse
+by the fact that some formatters depend on knowing what files were
+generated by other formatters (includers, serialisation registration
+code, etc). So it was that we ended up having to represent these
+notions in the =cpp= model.
 
 The approach taken was to create a =content_descriptor=, which is a
 crude way of mapping coordinates in the formatting space. It tells:
 
 - to which facet the file belongs: e.g. types, serialisation, etc.
-- within that facet, to which aspect the file belongs to: e.g. the
+- within that facet, to which file set the file belongs to: e.g. the
   main domain header, forward declarations, etc.
 - if the type is a class, what /kind/ of class it is; we have
   formatters specifically for plain value object, exceptions,
