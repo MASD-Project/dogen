@@ -1070,9 +1070,8 @@ lot of the Domain Driven Design ideas, we are also morphing them
 considerably. Perhaps a more apt name would be SDML - the Simplified
 Domain Modeling Language?
 
-We should probably call SML =gen= as it is the code generation
-meta-model and =om= could be renamed to =output= as it is the output
-model - its annoying to have a model with model in their name.
+Or instead We could follow the compiler theme and call it the =ir= or
+intermediate representation, or =im= for intermediate model.
 
 *** Add POF serialisation support                                     :story:
 
