@@ -238,6 +238,26 @@ We haven't got any documentation at all in the new formatters
 morel. We need a small blurb about the language neutral formatting
 support the model is supposed to provide.
 
+*** IMPLEMENTATION Tidy-up =sml_to_cpp= model                         :story:
+    CLOCK: [2014-05-12 Mon 18:46]--[2014-05-12 Mon 18:52] =>  0:06
+    CLOCK: [2014-05-12 Mon 18:32]--[2014-05-12 Mon 18:45] =>  0:13
+
+As part of all the deep thinking on the structure of formatters, we
+more or less concluded that the current approach is the best we can
+come up with. However, we should try to make the transformation model
+as clean as possible:
+
+- rename aspects to file sets as per manual and add missing file sets
+  such as includer and forward declarations.
+- consider merging the file types with file sets, e.g. =main_header=,
+  =main_implementation=, etc.
+- make includer a bit tidier: we should be able to figure out what
+  logic applies for what formatter at a glance rather than having the
+  logic scattered.
+- is content descriptor a good name?
+- what exactly is content type? the name is so vague as to be almost
+  completely useless.
+
 *** IMPLEMENTATION Split formatting settings from knitting settings   :story:
 
 Since we have one set of settings which are read from the command
