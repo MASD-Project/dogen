@@ -13,14 +13,14 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-12 Mon 18:33]
+Clock summary at [2014-05-12 Mon 22:35]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *17:36* |       |      |
+| *Total time*                                                    | *18:35* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                 |         | 17:36 |      |
-| IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:02 |
+| Development Stories Implemented                                 |         | 18:35 |      |
+| IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:42 |
 | IMPLEMENTATION Updates to the manual and readme files           |         |       | 2:12 |
 | COMPLETED Remove the roadmap                                    |         |       | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem      |         |       | 3:23 |
@@ -29,11 +29,13 @@ Clock summary at [2014-05-12 Mon 18:33]
 | COMPLETED Print model name to the console on failure            |         |       | 1:23 |
 | COMPLETED Tidy-up =knitting_settings_validator= specs           |         |       | 0:34 |
 | COMPLETED Tidy-up knitter main                                  |         |       | 1:07 |
+| IMPLEMENTATION Tidy-up =sml_to_cpp= model                       |         |       | 0:19 |
 | IMPLEMENTATION Split formatting settings from knitting settings |         |       | 6:09 |
 | IMPLEMENTATION Move all the configuration options into tags     |         |       | 0:04 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-12 Mon 21:55]--[2014-05-12 Mon 22:35] =>  0:40
     CLOCK: [2014-05-09 Fri 08:24]--[2014-05-09 Fri 08:38] =>  0:14
     CLOCK: [2014-05-09 Fri 07:55]--[2014-05-09 Fri 08:03] =>  0:08
     CLOCK: [2014-05-08 Thu 21:47]--[2014-05-08 Thu 22:25] =>  0:38
@@ -361,6 +363,48 @@ ensure they work exactly as before.
 Once the overrides have been proven to work, we need to remove the
 command line options and make sure nothing breaks.
 
+*** Split name from content descriptor                                :story:
+
+The qualified name is not really a part of the content descriptor, it
+was put there for expediency.
+
+*** Merge =source_file= with =entity=                                 :story:
+
+We need to get rid of source file as it serves no purpose any more.
+
+**** Copy all useful properties across                                 :task:
+
+At present only includes seems necessary.
+
+**** Add entries per type in =project= again                           :task:
+
+No need to work at the entity level here. Transformer to populate
+project correctly.
+
+*** Create formatter interfaces for each concrete entity type         :story:
+
+Formatters should have a single format method that takes a concrete
+entity, formatting settings and knitting settings. It returns a file.
+
+**** Remove =file_formatter_interface=                                 :task:
+
+Update all C++ formatters to use specific types:
+
+- remove factory; update workflow to call formatters directly
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
+
+**** Update formatters to use =formatters::file=                       :task:
+
+Instead of passing in a stream, we just want to receive a file. Update
+all formatters.
+
+**** Get formatters to register themselves with workflow              :story:
+
+Copy the code from the deleted registration files. Formatters should
+register against a content descriptor.
+
 *** Rename ODB parameters                                             :story:
 
 At present we use the following form:
@@ -388,19 +432,6 @@ SML. That means:
 - no meta data error
 - no meta data sub-workflow
 
-*** Merge =source_file= with =entity=                                 :story:
-
-We need to get rid of source file as it serves no purpose any more.
-
-**** Copy all useful properties across                                 :task:
-
-At present only includes seems necessary.
-
-**** Add entries per type in =project= again                           :task:
-
-No need to work at the entity level here. Transformer to populate
-project correctly.
-
 *** Copyright holders is scalar when it should be an array            :story:
 
 At present its only possible to specify a single copyright holder. It
@@ -408,20 +439,6 @@ should be handled the same was as odb parameters, but because that is
 done with a massive hack, we are not going to extend the hack to
 copyright holders. Instead, this story will be handled when we move
 over to using =boost::property_tree::ptree=.
-
-*** Remove =file_formatter_interface=                                 :task:
-
-Update all C++ formatters to use specific types:
-
-- remove factory; update workflow to call formatters directly
-- remove file formatter interface
-- formatters to have format() for each specific supported entity,
-  overloaded as required
-
-*** Update formatters to use =formatters::file=                       :task:
-
-Instead of passing in a stream, we just want to receive a file. Update
-all formatters.
 
 *** Make use of boilerplate                                           :task:
 
