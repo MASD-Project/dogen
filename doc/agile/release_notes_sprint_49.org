@@ -13,14 +13,14 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-12 Mon 22:35]
+Clock summary at [2014-05-13 Tue 08:37]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *18:35* |       |      |
+| *Total time*                                                    | *19:16* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                 |         | 18:35 |      |
-| IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:42 |
+| Development Stories Implemented                                 |         | 19:16 |      |
+| IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:56 |
 | IMPLEMENTATION Updates to the manual and readme files           |         |       | 2:12 |
 | COMPLETED Remove the roadmap                                    |         |       | 0:05 |
 | COMPLETED Design an end-to-end solution to the tag problem      |         |       | 3:23 |
@@ -32,9 +32,11 @@ Clock summary at [2014-05-12 Mon 22:35]
 | IMPLEMENTATION Tidy-up =sml_to_cpp= model                       |         |       | 0:19 |
 | IMPLEMENTATION Split formatting settings from knitting settings |         |       | 6:09 |
 | IMPLEMENTATION Move all the configuration options into tags     |         |       | 0:04 |
+| IMPLEMENTATION How to supply concrete entities to formatters    |         |       | 0:27 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-13 Tue 07:56]--[2014-05-13 Tue 08:10] =>  0:14
     CLOCK: [2014-05-12 Mon 21:55]--[2014-05-12 Mon 22:35] =>  0:40
     CLOCK: [2014-05-09 Fri 08:24]--[2014-05-09 Fri 08:38] =>  0:14
     CLOCK: [2014-05-09 Fri 07:55]--[2014-05-09 Fri 08:03] =>  0:08
@@ -259,6 +261,8 @@ as clean as possible:
 - is content descriptor a good name?
 - what exactly is content type? the name is so vague as to be almost
   completely useless.
+- Split name from content descriptor: The qualified name is not really
+  a part of the content descriptor, it was put there for expediency.
 
 *** IMPLEMENTATION Split formatting settings from knitting settings   :story:
 
@@ -363,14 +367,40 @@ ensure they work exactly as before.
 Once the overrides have been proven to work, we need to remove the
 command line options and make sure nothing breaks.
 
-*** Split name from content descriptor                                :story:
+*** IMPLEMENTATION How to supply concrete entities to formatters      :story:
+    CLOCK: [2014-05-13 Tue 08:10]--[2014-05-13 Tue 08:37] =>  0:27
 
-The qualified name is not really a part of the content descriptor, it
-was put there for expediency.
+If we supply abstract entities to formatters, we need to use a visitor
+to resolve them to concrete types. This then results in a lot of state
+machinery passed around as our visitors do not know about files and
+streams, etc. We do not want state because it interferes with
+parallelism. It also means that we are not making invalid states
+unrepresentable - e.g. one can pass a concrete class to the incorrect
+formatter and the type system won't help us detect this.
 
-*** Merge =source_file= with =entity=                                 :story:
+So it would make our life easier if the formatters didn't have to
+resolve types - if they receive concrete entities to format. We have
+several options here:
 
-We need to get rid of source file as it serves no purpose any more.
+- merge =source_file= with =entity=. The downside of that is that an
+  entity is not a file: that is, we re-target the same entity to
+  multiple files according to the content descriptor. The positive
+  side is that we can then perform visitation outside of the formatter
+  (in the workflow) and pass the concrete type to the formatter.
+- convert =source_file= to a template class, instantiated with the
+  concrete entities. The downside is we can no longer code generate
+  it, nor can we generate =project=. Also, templated code is always a
+  bit fiddly. On the plus side, the formatter interfaces can then rely
+  on the instantiated types (source file with the concrete entity).
+- do not use composition of =source_file= and =entity=. We could
+  express this relationship as a tuple for example. We can then have
+  tuples using the concrete entities in =project= and pass those to
+  the formatters. The downside is that the contents of the file
+  (header guards, file names, etc) only make sense for that entity in
+  question. Again we create an opportunity for invalid states (entity
+  with wrong file). Also, the project class will became a bit messy.
+
+If we were to merge =source_file=, the below tasks would be required.
 
 **** Copy all useful properties across                                 :task:
 
@@ -395,12 +425,19 @@ Update all C++ formatters to use specific types:
 - formatters to have format() for each specific supported entity,
   overloaded as required
 
-**** Update formatters to use =formatters::file=                       :task:
+**** Update formatters to output =formatters::file=                    :task:
 
-Instead of passing in a stream, we just want to receive a file. Update
-all formatters.
+Instead of passing in a stream, we just want to return a file.
 
-**** Get formatters to register themselves with workflow              :story:
+**** Update formatters to take settings and entity as input            :task:
+
+We want the formatters to be stateless - well at least as far as
+mutating state goes - so that we can run them in parallel. We also
+want them to have no constructor arguments so we can register them. To
+do so we need to pass in both knitting and formatting settings to
+=format= as well as the entity.
+
+**** Get formatters to register themselves with workflow               :task:
 
 Copy the code from the deleted registration files. Formatters should
 register against a content descriptor.
