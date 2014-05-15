@@ -32,7 +32,7 @@
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
-#include "dogen/sml_to_cpp/types/source_file_factory.hpp"
+#include "dogen/sml_to_cpp/types/file_info_factory.hpp"
 
 using dogen::config::cpp_facet_types;
 using dogen::config::test::mock_settings_factory;
@@ -44,7 +44,7 @@ using dogen::cpp::content_types;
 namespace {
 
 const std::string test_module("sml_to_cpp");
-const std::string test_suite("source_file_factory_spec");
+const std::string test_suite("file_info_factory_spec");
 
 using dogen::sml::test::mock_model_factory;
 const mock_model_factory::flags flags;
@@ -116,10 +116,10 @@ using dogen::utility::test::contains_checker;
 typedef dogen::sml::test::mock_model_factory::object_types object_types;
 typedef dogen::sml::test::mock_model_factory::property_types property_types;
 
-BOOST_AUTO_TEST_SUITE(source_file_factory)
+BOOST_AUTO_TEST_SUITE(file_info_factory)
 
-BOOST_AUTO_TEST_CASE(creating_source_file_for_enumeration_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_source_file_for_enumeration_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_enumeration_produces_expected_results");
 
     const auto ot(object_types::enumeration);
     const auto m(model_factory.build_single_type_model(0, ot));
@@ -128,13 +128,13 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_enumeration_produces_expected_resu
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
-    dogen::sml_to_cpp::source_file_factory f(l);
+    dogen::sml_to_cpp::file_info_factory f(l);
     const auto ei(boost::make_shared<dogen::cpp::enum_info>());
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
     const auto inc((dogen::cpp::includes()));
 
-    std::list<dogen::cpp::source_file> infos;
+    std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ei, cd, inc));
 
@@ -157,8 +157,8 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_enumeration_produces_expected_resu
         BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_source_file_for_exception_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_exception_produces_expected_results");
 
     const auto ot(object_types::exception);
     const auto m(model_factory.build_single_type_model(0, ot));
@@ -167,13 +167,13 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_result
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
-    dogen::sml_to_cpp::source_file_factory f(l);
+    dogen::sml_to_cpp::file_info_factory f(l);
     const auto& ex(m.objects().begin()->second);
     const auto md(mock_descriptors(ex.name()));
     const auto ei(boost::make_shared<dogen::cpp::exception_info>());
     const auto inc((dogen::cpp::includes()));
 
-    std::list<dogen::cpp::source_file> infos;
+    std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ei, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
@@ -195,8 +195,8 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_exception_produces_expected_result
         BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_source_file_for_module_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_source_file_for_module_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_module_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_module_produces_expected_results");
 
     const auto ot(object_types::exception);
     const auto m(model_factory.build_single_type_model_in_module(0, ot, 1));
@@ -205,12 +205,12 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_module_produces_expected_results) 
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
-    dogen::sml_to_cpp::source_file_factory f(l);
+    dogen::sml_to_cpp::file_info_factory f(l);
     const auto p(m.modules().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ni(boost::make_shared<dogen::cpp::namespace_info>());
 
-    std::list<dogen::cpp::source_file> infos;
+    std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ni, cd));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
@@ -233,8 +233,8 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_module_produces_expected_results) 
         BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_source_file_for_object_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_object_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_object_produces_expected_results");
 
     const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -242,13 +242,13 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) 
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
-    dogen::sml_to_cpp::source_file_factory f(l);
+    dogen::sml_to_cpp::file_info_factory f(l);
     const auto& p(m.objects().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ci(boost::make_shared<dogen::cpp::class_info>());
     const auto inc((dogen::cpp::includes()));
 
-    std::list<dogen::cpp::source_file> infos;
+    std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ci, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
@@ -271,8 +271,8 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_object_produces_expected_results) 
         BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_non_empty_includer_source_file_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_non_empty_includer_file_info_produces_expected_results");
 
     const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -281,14 +281,14 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::includer i(m, l, s);
-    dogen::sml_to_cpp::source_file_factory f(l);
+    dogen::sml_to_cpp::file_info_factory f(l);
 
     const auto ft(dogen::config::cpp_facet_types::types);
     i.register_header(ft, model_factory.type_name(0));
     i.register_header(ft, model_factory.type_name(1));
     const auto md(mock_descriptor_for_includer(ft));
 
-    std::list<dogen::cpp::source_file> includer_infos;
+    std::list<dogen::cpp::file_info> includer_infos;
     for (const auto& cd : md) {
         const auto il(i.includes_for_includer_files(cd));
         includer_infos.push_back(f.create_includer(cd, il));
@@ -316,8 +316,8 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_source_file_produces_expected_r
     BOOST_CHECK(found_1);
 }
 
-BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_empty_includer_source_file_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_empty_includer_file_info_produces_expected_results");
 
     const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -326,7 +326,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::includer i(m, l, s);
-    dogen::sml_to_cpp::source_file_factory f(l);
+    dogen::sml_to_cpp::file_info_factory f(l);
 
     const auto ft1(dogen::config::cpp_facet_types::types);
     i.register_header(ft1, model_factory.type_name(0));
@@ -336,7 +336,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
     const auto md(mock_descriptor_for_includer(ft2));
     const auto inc((dogen::cpp::includes()));
 
-    std::list<dogen::cpp::source_file> includer_infos;
+    std::list<dogen::cpp::file_info> includer_infos;
     for (const auto& cd : md)
         includer_infos.push_back(f.create_includer(cd, inc));
     BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
@@ -353,8 +353,8 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_source_file_produces_expected_resul
     BOOST_CHECK(fi.includes().user().empty());
 }
 
-BOOST_AUTO_TEST_CASE(creating_source_file_for_registrar_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_source_file_for_registrar_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_registrar_produces_expected_results");
 
     const auto m(model_factory.build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -362,13 +362,13 @@ BOOST_AUTO_TEST_CASE(creating_source_file_for_registrar_produces_expected_result
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::includer i(m, l, s);
-    dogen::sml_to_cpp::source_file_factory f(l);
+    dogen::sml_to_cpp::file_info_factory f(l);
 
     const auto md(mock_descriptor_for_registrar());
     const auto ri(boost::make_shared<dogen::cpp::registrar_info>());
     const auto inc((dogen::cpp::includes()));
 
-    std::list<dogen::cpp::source_file> infos;
+    std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create_registrar(ri, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;

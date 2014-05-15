@@ -173,7 +173,7 @@ visit(dogen::cpp::exception_info& ei) {
     utility_.blank_line(2);
 }
 
-void types_main_header_file_formatter::format(const cpp::source_file& f) {
+void types_main_header_file_formatter::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

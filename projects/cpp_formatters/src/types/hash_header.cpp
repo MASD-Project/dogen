@@ -25,7 +25,7 @@
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
-#include "dogen/cpp/io/source_file_io.hpp"
+#include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
@@ -112,7 +112,7 @@ void hash_header::hash_class(const cpp::class_info& ci) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::format_enumeration(const cpp::source_file& f) {
+void hash_header::format_enumeration(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -153,7 +153,7 @@ void hash_header::format_enumeration(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void hash_header::format_class(const cpp::source_file& f) {
+void hash_header::format_class(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -181,7 +181,7 @@ void hash_header::format_class(const cpp::source_file& f) {
     utility_.blank_line();
 }
 
-void hash_header::format(const cpp::source_file& f) {
+void hash_header::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

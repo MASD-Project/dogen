@@ -103,7 +103,7 @@ format_domain_class(const cpp::class_info& ci) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_class(const cpp::source_file& f) {
+void forward_declarations_header::format_class(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -124,7 +124,7 @@ void forward_declarations_header::format_class(const cpp::source_file& f) {
 }
 
 void forward_declarations_header::
-format_enumeration(const cpp::source_file& f) {
+format_enumeration(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -143,7 +143,7 @@ format_enumeration(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_exception(const cpp::source_file& f) {
+void forward_declarations_header::format_exception(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::exception_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_exception_info;
@@ -161,7 +161,7 @@ void forward_declarations_header::format_exception(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format(const cpp::source_file& f) {
+void forward_declarations_header::format(const cpp::file_info& f) {
     using cpp::aspect_types;
     if (f.descriptor().aspect_type() != aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;

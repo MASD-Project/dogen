@@ -75,7 +75,7 @@ void io_implementation::io_helper_methods(const cpp::class_info& ci) {
     i.format_helper_methods(ci);
 }
 
-void io_implementation::format_enumeration(const cpp::source_file& f) {
+void io_implementation::format_enumeration(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -139,7 +139,7 @@ void io_implementation::format_enumeration(const cpp::source_file& f) {
     utility_.blank_line();
 }
 
-void io_implementation::format_class(const cpp::source_file& f) {
+void io_implementation::format_class(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -174,7 +174,7 @@ void io_implementation::format_class(const cpp::source_file& f) {
     utility_.blank_line();
 }
 
-void io_implementation::format(const cpp::source_file& f) {
+void io_implementation::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

@@ -52,7 +52,7 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new registrar_header(stream));
 }
 
-void registrar_header::format(const cpp::source_file& f) {
+void registrar_header::format(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::registrar_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;

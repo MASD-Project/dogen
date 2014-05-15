@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/cpp/types/source_file.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 
 namespace dogen {
@@ -46,7 +46,7 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 public:
-    virtual void format(const cpp::source_file& f) override;
+    virtual void format(const cpp::file_info& f) override;
 };
 
 } }

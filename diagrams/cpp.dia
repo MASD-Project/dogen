@@ -1822,7 +1822,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#source_file#</dia:string>
+        <dia:string>#file_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#Documentable#</dia:string>
@@ -5584,13 +5584,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
             <dia:string>#files#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;source_file&gt;#</dia:string>
+            <dia:string>#std::list&lt;file_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#C++ include and source files.#</dia:string>
+            <dia:string>#All C++ files, interfaces and implementation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

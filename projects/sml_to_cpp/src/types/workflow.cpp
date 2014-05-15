@@ -58,7 +58,7 @@ workflow(const sml::model& model, const config::formatting_settings& s) :
     model_(model), settings_(s),
     locator_(model.name().model_name(), settings_.cpp()),
     includer_(model_, locator_, settings_.cpp()),
-    source_file_factory_(locator_),
+    file_info_factory_(locator_),
     transformer_(model_, context_),
     descriptor_factory_(settings_.cpp().enabled_facets()),
     extractor_() {
@@ -85,7 +85,7 @@ void workflow::validate_settings() const {
     }
 }
 
-void workflow::register_header(const cpp::source_file& fi) const {
+void workflow::register_header(const cpp::file_info& fi) const {
     const auto header(cpp::file_types::header);
     const auto cd(fi.descriptor());
     if (cd.file_type() == header)
@@ -178,9 +178,9 @@ void workflow::transformation_sub_workflow() {
     BOOST_LOG_SEV(lg, debug) << "context: " << context_;
 }
 
-std::list<cpp::source_file>
-workflow::generate_source_files_for_classes_activity() const {
-    std::list<cpp::source_file> r;
+std::list<cpp::file_info>
+workflow::generate_file_infos_for_classes_activity() const {
+    std::list<cpp::file_info> r;
     for (const auto& pair : context_.classes()) {
         const auto& qn(pair.first);
         const auto i(context_.relationships().find(qn));
@@ -219,7 +219,7 @@ workflow::generate_source_files_for_classes_activity() const {
 
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto inc(includer_.includes_for_object(cd, rel));
-            auto fi(source_file_factory_.create(ci, cd, inc));
+            auto fi(file_info_factory_.create(ci, cd, inc));
 
             // we want to make sure we do not actually generate code
             // for partial generation, so override the output of the
@@ -242,16 +242,16 @@ workflow::generate_source_files_for_classes_activity() const {
     return r;
 }
 
-std::list<cpp::source_file>
-workflow::generate_source_files_for_namespaces_activity() const {
-    std::list<cpp::source_file> r;
+std::list<cpp::file_info>
+workflow::generate_file_infos_for_namespaces_activity() const {
+    std::list<cpp::file_info> r;
     for (const auto& pair : context_.namespaces()) {
         const auto qn(pair.first);
         const auto ni(pair.second);
 
         const auto ct(cpp::content_types::namespace_doc);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
-            const auto fi(source_file_factory_.create(ni, cd));
+            const auto fi(file_info_factory_.create(ni, cd));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -263,15 +263,15 @@ workflow::generate_source_files_for_namespaces_activity() const {
     return r;
 }
 
-std::list<cpp::source_file> workflow::generate_registrars_activity() const {
-    std::list<cpp::source_file> r;
+std::list<cpp::file_info> workflow::generate_registrars_activity() const {
+    std::list<cpp::file_info> r;
     for (const auto& pair : context_.registrars()) {
         const auto qn(pair.first);
         const auto ri(pair.second);
 
         for (const auto& cd : descriptor_factory_.create_registrar(qn)) {
             const auto inc(includer_.includes_for_registrar(cd));
-            const auto fi(source_file_factory_.create_registrar(ri, cd, inc));
+            const auto fi(file_info_factory_.create_registrar(ri, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -281,22 +281,22 @@ std::list<cpp::source_file> workflow::generate_registrars_activity() const {
     return r;
 }
 
-std::list<cpp::source_file> workflow::generate_includers_activity() const {
+std::list<cpp::file_info> workflow::generate_includers_activity() const {
     sml::qname qn;
     qn.simple_name(includer_name);
     qn.external_module_path(model_.name().external_module_path());
     qn.model_name(model_.name().model_name());
 
-    std::list<cpp::source_file> r;
+    std::list<cpp::file_info> r;
     for (const auto& cd : descriptor_factory_.create_includer(qn)) {
         const auto inc(includer_.includes_for_includer_files(cd));
-        r.push_back(source_file_factory_.create_includer(cd, inc));
+        r.push_back(file_info_factory_.create_includer(cd, inc));
     }
     return r;
 }
 
-std::list<cpp::source_file> workflow::generate_visitors_activity() const {
-    std::list<cpp::source_file> r;
+std::list<cpp::file_info> workflow::generate_visitors_activity() const {
+    std::list<cpp::file_info> r;
     for (const auto& pair : context_.visitors()) {
         const auto& qn(pair.first);
         const auto i(context_.relationships().find(qn));
@@ -310,7 +310,7 @@ std::list<cpp::source_file> workflow::generate_visitors_activity() const {
         const auto vi(pair.second);
         for (const auto& cd : descriptor_factory_.create_visitor(qn)) {
             const auto inc(includer_.includes_for_visitor(cd, rel));
-            const auto fi(source_file_factory_.create_visitor(vi, cd, inc));
+            const auto fi(file_info_factory_.create_visitor(vi, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -320,8 +320,8 @@ std::list<cpp::source_file> workflow::generate_visitors_activity() const {
     return r;
 }
 
-std::list<cpp::source_file> workflow::generate_enums_activity() const {
-    std::list<cpp::source_file> r;
+std::list<cpp::file_info> workflow::generate_enums_activity() const {
+    std::list<cpp::file_info> r;
     for (const auto& pair : context_.enumerations()) {
         const auto& qn(pair.first);
         const auto& ei(pair.second);
@@ -329,7 +329,7 @@ std::list<cpp::source_file> workflow::generate_enums_activity() const {
         const auto ct(cpp::content_types::enumeration);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto inc(includer_.includes_for_enumeration(cd));
-            const auto fi(source_file_factory_.create(ei, cd, inc));
+            const auto fi(file_info_factory_.create(ei, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -339,8 +339,8 @@ std::list<cpp::source_file> workflow::generate_enums_activity() const {
     return r;
 }
 
-std::list<cpp::source_file> workflow::generate_exceptions_activity() const {
-    std::list<cpp::source_file> r;
+std::list<cpp::file_info> workflow::generate_exceptions_activity() const {
+    std::list<cpp::file_info> r;
     for (const auto& pair : context_.exceptions()) {
         const auto& qn(pair.first);
         const auto& ei(pair.second);
@@ -348,7 +348,7 @@ std::list<cpp::source_file> workflow::generate_exceptions_activity() const {
         const auto ct(cpp::content_types::exception);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto inc(includer_.includes_for_exception(cd));
-            const auto fi(source_file_factory_.create(ei, cd, inc));
+            const auto fi(file_info_factory_.create(ei, cd, inc));
             r.push_back(fi);
 
             if (cd.aspect_type() != cpp::aspect_types::forward_decls)
@@ -360,11 +360,11 @@ std::list<cpp::source_file> workflow::generate_exceptions_activity() const {
     return r;
 }
 
-void workflow::generate_source_files_activity(cpp::project& p) const {
+void workflow::generate_file_infos_activity(cpp::project& p) const {
     const auto a(generate_enums_activity());
     const auto b(generate_exceptions_activity());
-    const auto c(generate_source_files_for_classes_activity());
-    const auto d(generate_source_files_for_namespaces_activity());
+    const auto c(generate_file_infos_for_classes_activity());
+    const auto d(generate_file_infos_for_namespaces_activity());
     const auto e(generate_registrars_activity());
     const auto f(generate_visitors_activity());
     const auto g(generate_includers_activity());
@@ -417,7 +417,7 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
 
 cpp::project workflow::generation_sub_workflow() {
     cpp::project r;
-    generate_source_files_activity(r);
+    generate_file_infos_activity(r);
     if (settings_.cpp().disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else

@@ -28,6 +28,7 @@
 #include "dogen/cpp/io/enum_info_io.hpp"
 #include "dogen/cpp/io/enumerator_info_io.hpp"
 #include "dogen/cpp/io/exception_info_io.hpp"
+#include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
 #include "dogen/cpp/io/includes_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
@@ -37,5 +38,4 @@
 #include "dogen/cpp/io/project_io.hpp"
 #include "dogen/cpp/io/property_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
-#include "dogen/cpp/io/source_file_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"

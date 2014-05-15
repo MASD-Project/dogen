@@ -150,7 +150,7 @@ void generator_header::generator_class(const cpp::class_info& ci) {
     stream_ << "};";
 }
 
-void generator_header::format_enumeration(const cpp::source_file& f) {
+void generator_header::format_enumeration(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -169,7 +169,7 @@ void generator_header::format_enumeration(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void generator_header::format_class(const cpp::source_file& f) {
+void generator_header::format_class(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -188,7 +188,7 @@ void generator_header::format_class(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void generator_header::format(const cpp::source_file& f) {
+void generator_header::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

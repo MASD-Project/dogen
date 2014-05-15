@@ -20,8 +20,8 @@
  */
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/entity_hash.hpp"
+#include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/includes_hash.hpp"
-#include "dogen/cpp/hash/source_file_hash.hpp"
 
 namespace {
 
@@ -49,7 +49,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_cpp_entity(const boost::shared_pt
 namespace dogen {
 namespace cpp {
 
-std::size_t source_file_hasher::hash(const source_file&v) {
+std::size_t file_info_hasher::hash(const file_info&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

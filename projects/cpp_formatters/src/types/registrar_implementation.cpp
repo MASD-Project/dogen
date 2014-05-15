@@ -60,7 +60,7 @@ create(std::ostream& stream, const bool disable_xml_serialization,
             disable_eos_serialization));
 }
 
-void registrar_implementation::format(const cpp::source_file& f) {
+void registrar_implementation::format(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::registrar_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;

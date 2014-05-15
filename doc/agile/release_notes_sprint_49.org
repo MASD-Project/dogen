@@ -36,6 +36,7 @@ Clock summary at [2014-05-15 Thu 19:51]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2014-05-15 Thu 22:52]--[2014-05-15 Thu 23:04] =>  0:12
     CLOCK: [2014-05-13 Tue 07:56]--[2014-05-13 Tue 08:10] =>  0:14
     CLOCK: [2014-05-12 Mon 21:55]--[2014-05-12 Mon 22:35] =>  0:40
     CLOCK: [2014-05-09 Fri 08:24]--[2014-05-09 Fri 08:38] =>  0:14
@@ -242,9 +243,13 @@ We haven't got any documentation at all in the new formatters
 morel. We need a small blurb about the language neutral formatting
 support the model is supposed to provide.
 
-*** IMPLEMENTATION Tidy-up =sml_to_cpp= model                         :story:
+*** CANCELLED Tidy-up =sml_to_cpp= model                              :story:
+    CLOSED: [2014-05-15 Thu 22:53]
     CLOCK: [2014-05-12 Mon 18:46]--[2014-05-12 Mon 18:52] =>  0:06
     CLOCK: [2014-05-12 Mon 18:32]--[2014-05-12 Mon 18:45] =>  0:13
+
+*Rationale*: this story has been superseded; what hasn't was copied
+ across.
 
 As part of all the deep thinking on the structure of formatters, we
 more or less concluded that the current approach is the best we can
@@ -264,7 +269,101 @@ as clean as possible:
 - Split name from content descriptor: The qualified name is not really
   a part of the content descriptor, it was put there for expediency.
 
-*** IMPLEMENTATION Split formatting settings from knitting settings   :story:
+*** COMPLETED How to supply concrete entities to formatters           :story:
+    CLOSED: [2014-05-15 Thu 22:52]
+    CLOCK: [2014-05-15 Thu 22:30]--[2014-05-15 Thu 22:52] =>  0:22
+    CLOCK: [2014-05-15 Thu 18:06]--[2014-05-15 Thu 18:51] =>  0:45
+    CLOCK: [2014-05-15 Thu 07:56]--[2014-05-15 Thu 08:43] =>  0:47
+    CLOCK: [2014-05-13 Tue 08:10]--[2014-05-13 Tue 08:37] =>  0:27
+
+*New Understanding*
+
+Actually the solution for this has been staring us in the
+face. Basically:
+
+- add types for each formattable "thing" - e.g. we need to add a new
+  type for includer and forward declaration.
+- remove file types and aspect types
+- create a class to represent a pair of file type and facet. this is
+  what formatters will register on.
+- remove content types; this is now all done via the type system.
+- rename source file back to file info and and info to entity; all the
+  domain types in c++ now have info.
+- formatters to think solely in terms of content; they wont generate
+  files, but just content. this is done by passing in a stream. if
+  the stream is empty there is no content to generate.
+- create a registrar against which the formatters register
+- create a file generator that takes a file info and an entity and
+  formats it using the formatters from the registrar. this will have
+  state and will be spun off as a task in a parallel world.
+- remove factory and repository at least from c++ model until we have
+  a use for it.
+- remove key implementation as it seems we only have spurious
+  differences at the moment
+- if a type is a user defined service set the file override to
+  true. file info could have an override flag for this.
+- make includer a bit tidier: we should be able to figure out what
+  logic applies for what formatter at a glance rather than having the
+  logic scattered.
+- is content descriptor a good name?
+
+*Previous Understanding*
+
+If we supply abstract entities to formatters, we need to use a visitor
+to resolve them to concrete types. This then results in a lot of state
+machinery passed around as our visitors do not know about files and
+streams, etc. We do not want state because it interferes with
+parallelism. It also means that we are not making invalid states
+unrepresentable - e.g. one can pass an entity to a formatter that does
+not support it and the type system won't help us detect this until we
+reach the formatter and cast the entity to a concrete type.
+
+So it would make our life easier if the formatters didn't have to
+resolve types - if they receive concrete entities to format. We have
+several options here:
+
+- merge =source_file= with =entity=. The downside of that is that an
+  entity is not a file: that is, we re-target the same entity to
+  multiple files according to the content descriptor. The positive
+  side is that we can then perform visitation outside of the formatter
+  (in the workflow) and pass the concrete type to the formatter.
+- convert =source_file= to a template class, instantiated with the
+  concrete entities. The downside is we can no longer code generate
+  it, nor can we generate =project=. Also, templated code is always a
+  bit fiddly. On the plus side, the formatter interfaces can then rely
+  on the instantiated types (source file with the concrete entity).
+- do not use composition of =source_file= and =entity=. We could
+  express this relationship as a tuple for example. We can then have
+  tuples using the concrete entities in =project= and pass those to
+  the formatters. This would be trivial to extend to support multiple
+  entities in one file. The downside is that the contents of the file
+  (header guards, file names, etc) at present only make sense for the
+  entity in question. Again we create an opportunity for invalid
+  states (entity with wrong file). Also, the project class will became
+  a bit messy.
+- we could take the hit and accept that invalid states are
+  representable in this case because we could not think of a better
+  idea. In this case we could cast the entity in the formatter and if
+  the cast fails we throw. This is because there is a logic error
+  somewhere for this to happen since the formatter registers for a
+  particular content descriptor and the descriptor implies a concrete
+  type
+- another alternative, is to unpack the source file before we invoke
+  the formatter. We could use the visitor for type resolution.
+
+If we were to merge =source_file=, the below tasks would be required.
+
+**** Copy all useful properties across                                 :task:
+
+At present only includes seems necessary.
+
+**** Add entries per type in =project= again                           :task:
+
+No need to work at the entity level here. Transformer to populate
+project correctly.
+
+*** COMPLETED Split formatting settings from knitting settings        :story:
+    CLOSED: [2014-05-15 Thu 22:54]
 
 Since we have one set of settings which are read from the command
 line, and another set which are obtained from parsing the meta-data,
@@ -330,7 +429,40 @@ If we are going to override the settings we must make sure the code is
 as linear as possible. The provider is actually some kind of SML
 loading sub-workflow.
 
-**** IMPLEMENTATION Start using formatting settings in formatters model :task:
+*** COMPLETED Rename =source_file= back to =file_info=                :story:
+    CLOSED: [2014-05-15 Thu 23:25]
+    CLOCK: [2014-05-15 Thu 23:04]--[2014-05-15 Thu 23:25] =>  0:21
+
+Source file is just confusing and unclear as to what we mean - is this
+just the implementation?
+
+*** Move includes and header guard into entity                        :story:
+
+With this a formatter can now rely only on entities rather than
+requiring a file.
+
+*** Create =includers_info= and =forward_declarations_info=           :story:
+
+We should make sure the type system represents all the inputs to
+formatters. Create these types and update their formatters,
+transformer etc.
+
+*** Delete key implementation formatter                               :story:
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** Delete content types                                              :story:
+
+Now we have the type system representing the content, we can delete
+this enumeration.
+
+*** Delete aspect types                                               :story:
+
+Now we have the type system representing the aspects, we can delete
+this enumeration.
+
+*** IMPLEMENTATION Use formatting settings in formatters model        :story:
      CLOCK: [2014-05-10 Sat 14:41]--[2014-05-10 Sat 16:01] =>  1:20
 
 We need to replace the references to the c++ settings directly with
@@ -366,93 +498,6 @@ ensure they work exactly as before.
 
 Once the overrides have been proven to work, we need to remove the
 command line options and make sure nothing breaks.
-
-*** IMPLEMENTATION How to supply concrete entities to formatters      :story:
-    CLOCK: [2014-05-15 Thu 18:06]--[2014-05-15 Thu 18:51] =>  0:45
-    CLOCK: [2014-05-15 Thu 07:56]--[2014-05-15 Thu 08:43] =>  0:47
-    CLOCK: [2014-05-13 Tue 08:10]--[2014-05-13 Tue 08:37] =>  0:27
-
-If we supply abstract entities to formatters, we need to use a visitor
-to resolve them to concrete types. This then results in a lot of state
-machinery passed around as our visitors do not know about files and
-streams, etc. We do not want state because it interferes with
-parallelism. It also means that we are not making invalid states
-unrepresentable - e.g. one can pass an entity to a formatter that does
-not support it and the type system won't help us detect this until we
-reach the formatter and cast the entity to a concrete type.
-
-So it would make our life easier if the formatters didn't have to
-resolve types - if they receive concrete entities to format. We have
-several options here:
-
-- merge =source_file= with =entity=. The downside of that is that an
-  entity is not a file: that is, we re-target the same entity to
-  multiple files according to the content descriptor. The positive
-  side is that we can then perform visitation outside of the formatter
-  (in the workflow) and pass the concrete type to the formatter.
-- convert =source_file= to a template class, instantiated with the
-  concrete entities. The downside is we can no longer code generate
-  it, nor can we generate =project=. Also, templated code is always a
-  bit fiddly. On the plus side, the formatter interfaces can then rely
-  on the instantiated types (source file with the concrete entity).
-- do not use composition of =source_file= and =entity=. We could
-  express this relationship as a tuple for example. We can then have
-  tuples using the concrete entities in =project= and pass those to
-  the formatters. This would be trivial to extend to support multiple
-  entities in one file. The downside is that the contents of the file
-  (header guards, file names, etc) at present only make sense for the
-  entity in question. Again we create an opportunity for invalid
-  states (entity with wrong file). Also, the project class will became
-  a bit messy.
-- we could take the hit and accept that invalid states are
-  representable in this case because we could not think of a better
-  idea. In this case we could cast the entity in the formatter and if
-  the cast fails we throw. This is because there is a logic error
-  somewhere for this to happen since the formatter registers for a
-  particular content descriptor and the descriptor implies a concrete
-  type
-- another alternative, is to unpack the source file before we invoke
-  the formatter. We could 
-
-content types:
-
-- exception
-- enumeration
-- primitive
-- visitor
-- key_extractor
-- registrar
-- namespace_doc
-- includer
-- class
-
-- value object: identical to value_object
-- keyed_entity: identical to value_object
-- entity: identical to value_object
-- user defined service: we need to set override to false, otherwise
-  its identical to value_object
-- versioned_key:
-- unversioned_key:
-
-- factory?
-- repository?
-
-file sets
-
-- includer -> includer info
-- forward_declaration -> forward_declaration_info
-- registrar -> registrar_info
-
-If we were to merge =source_file=, the below tasks would be required.
-
-**** Copy all useful properties across                                 :task:
-
-At present only includes seems necessary.
-
-**** Add entries per type in =project= again                           :task:
-
-No need to work at the entity level here. Transformer to populate
-project correctly.
 
 *** Create formatter interfaces for each concrete entity type         :story:
 

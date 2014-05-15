@@ -107,7 +107,7 @@ void visitor::format(const cpp::visitor_info& vi) {
     utility_.blank_line(2);
 }
 
-void visitor::format(const cpp::source_file& f) {
+void visitor::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

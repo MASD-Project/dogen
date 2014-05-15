@@ -18,36 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_SOURCE_FILE_TD_HPP
-#define DOGEN_CPP_TEST_DATA_SOURCE_FILE_TD_HPP
+#ifndef DOGEN_CPP_HASH_FILE_INFO_HASH_HPP
+#define DOGEN_CPP_HASH_FILE_INFO_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/source_file.hpp"
+#include <functional>
+#include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class source_file_generator {
+struct file_info_hasher {
 public:
-    source_file_generator();
-
-public:
-    typedef dogen::cpp::source_file result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    static std::size_t hash(const file_info& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::cpp::file_info> {
+public:
+    size_t operator()(const dogen::cpp::file_info& v) const {
+        return dogen::cpp::file_info_hasher::hash(v);
+    }
+};
+
+}
 #endif

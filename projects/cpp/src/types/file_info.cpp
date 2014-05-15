@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/cpp/types/entity.hpp"
-#include "dogen/cpp/types/source_file.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 
 namespace boost {
 
@@ -33,7 +33,7 @@ const boost::shared_ptr<dogen::cpp::entity>& rhs) {
 namespace dogen {
 namespace cpp {
 
-source_file::source_file(source_file&& rhs)
+file_info::file_info(file_info&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       includes_(std::move(rhs.includes_)),
       descriptor_(std::move(rhs.descriptor_)),
@@ -42,7 +42,7 @@ source_file::source_file(source_file&& rhs)
       relative_path_(std::move(rhs.relative_path_)),
       entity_(std::move(rhs.entity_)) { }
 
-source_file::source_file(
+file_info::file_info(
     const std::string& documentation,
     const dogen::cpp::includes& includes,
     const dogen::cpp::content_descriptor& descriptor,
@@ -58,7 +58,7 @@ source_file::source_file(
       relative_path_(relative_path),
       entity_(entity) { }
 
-void source_file::swap(source_file& other) noexcept {
+void file_info::swap(file_info& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(includes_, other.includes_);
@@ -69,7 +69,7 @@ void source_file::swap(source_file& other) noexcept {
     swap(entity_, other.entity_);
 }
 
-bool source_file::operator==(const source_file& rhs) const {
+bool file_info::operator==(const file_info& rhs) const {
     return documentation_ == rhs.documentation_ &&
         includes_ == rhs.includes_ &&
         descriptor_ == rhs.descriptor_ &&
@@ -79,121 +79,121 @@ bool source_file::operator==(const source_file& rhs) const {
         entity_ == rhs.entity_;
 }
 
-source_file& source_file::operator=(source_file other) {
+file_info& file_info::operator=(file_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& source_file::documentation() const {
+const std::string& file_info::documentation() const {
     return documentation_;
 }
 
-std::string& source_file::documentation() {
+std::string& file_info::documentation() {
     return documentation_;
 }
 
-void source_file::documentation(const std::string& v) {
+void file_info::documentation(const std::string& v) {
     documentation_ = v;
 }
 
-void source_file::documentation(const std::string&& v) {
+void file_info::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::cpp::includes& source_file::includes() const {
+const dogen::cpp::includes& file_info::includes() const {
     return includes_;
 }
 
-dogen::cpp::includes& source_file::includes() {
+dogen::cpp::includes& file_info::includes() {
     return includes_;
 }
 
-void source_file::includes(const dogen::cpp::includes& v) {
+void file_info::includes(const dogen::cpp::includes& v) {
     includes_ = v;
 }
 
-void source_file::includes(const dogen::cpp::includes&& v) {
+void file_info::includes(const dogen::cpp::includes&& v) {
     includes_ = std::move(v);
 }
 
-const dogen::cpp::content_descriptor& source_file::descriptor() const {
+const dogen::cpp::content_descriptor& file_info::descriptor() const {
     return descriptor_;
 }
 
-dogen::cpp::content_descriptor& source_file::descriptor() {
+dogen::cpp::content_descriptor& file_info::descriptor() {
     return descriptor_;
 }
 
-void source_file::descriptor(const dogen::cpp::content_descriptor& v) {
+void file_info::descriptor(const dogen::cpp::content_descriptor& v) {
     descriptor_ = v;
 }
 
-void source_file::descriptor(const dogen::cpp::content_descriptor&& v) {
+void file_info::descriptor(const dogen::cpp::content_descriptor&& v) {
     descriptor_ = std::move(v);
 }
 
-const std::string& source_file::header_guard() const {
+const std::string& file_info::header_guard() const {
     return header_guard_;
 }
 
-std::string& source_file::header_guard() {
+std::string& file_info::header_guard() {
     return header_guard_;
 }
 
-void source_file::header_guard(const std::string& v) {
+void file_info::header_guard(const std::string& v) {
     header_guard_ = v;
 }
 
-void source_file::header_guard(const std::string&& v) {
+void file_info::header_guard(const std::string&& v) {
     header_guard_ = std::move(v);
 }
 
-const boost::filesystem::path& source_file::file_path() const {
+const boost::filesystem::path& file_info::file_path() const {
     return file_path_;
 }
 
-boost::filesystem::path& source_file::file_path() {
+boost::filesystem::path& file_info::file_path() {
     return file_path_;
 }
 
-void source_file::file_path(const boost::filesystem::path& v) {
+void file_info::file_path(const boost::filesystem::path& v) {
     file_path_ = v;
 }
 
-void source_file::file_path(const boost::filesystem::path&& v) {
+void file_info::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const boost::filesystem::path& source_file::relative_path() const {
+const boost::filesystem::path& file_info::relative_path() const {
     return relative_path_;
 }
 
-boost::filesystem::path& source_file::relative_path() {
+boost::filesystem::path& file_info::relative_path() {
     return relative_path_;
 }
 
-void source_file::relative_path(const boost::filesystem::path& v) {
+void file_info::relative_path(const boost::filesystem::path& v) {
     relative_path_ = v;
 }
 
-void source_file::relative_path(const boost::filesystem::path&& v) {
+void file_info::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::cpp::entity>& source_file::entity() const {
+const boost::shared_ptr<dogen::cpp::entity>& file_info::entity() const {
     return entity_;
 }
 
-boost::shared_ptr<dogen::cpp::entity>& source_file::entity() {
+boost::shared_ptr<dogen::cpp::entity>& file_info::entity() {
     return entity_;
 }
 
-void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>& v) {
+void file_info::entity(const boost::shared_ptr<dogen::cpp::entity>& v) {
     entity_ = v;
 }
 
-void source_file::entity(const boost::shared_ptr<dogen::cpp::entity>&& v) {
+void file_info::entity(const boost::shared_ptr<dogen::cpp::entity>&& v) {
     entity_ = std::move(v);
 }
 

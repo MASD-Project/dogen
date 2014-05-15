@@ -22,8 +22,8 @@
 #include <ostream>
 #include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/io/entity_io.hpp"
+#include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/includes_io.hpp"
-#include "dogen/cpp/io/source_file_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -52,9 +52,9 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const source_file& v) {
+std::ostream& operator<<(std::ostream& s, const file_info& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::source_file\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::file_info\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"includes\": " << v.includes() << ", "
       << "\"descriptor\": " << v.descriptor() << ", "

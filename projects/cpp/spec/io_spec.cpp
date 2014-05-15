@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<enum_info_generator>();
     test_io<enumerator_info_generator>();
     test_io<exception_info_generator>();
-    test_io<source_file_generator>();
+    test_io<file_info_generator>();
     test_io<namespace_info_generator>();
     test_io<nested_type_info_generator>();
     test_io<odb_options_info_generator>();

@@ -29,7 +29,7 @@
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/source_file.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
@@ -91,11 +91,11 @@ private:
     void default_constructor(const cpp::class_info& ci);
 
 private:
-    void format_class(const cpp::source_file& f);
-    void format_enumeration(const cpp::source_file& f);
+    void format_class(const cpp::file_info& f);
+    void format_enumeration(const cpp::file_info& f);
 
 public:
-    virtual void format(const cpp::source_file& f) override;
+    virtual void format(const cpp::file_info& f) override;
 
 private:
     std::ostream& stream_;

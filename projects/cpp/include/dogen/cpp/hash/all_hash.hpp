@@ -28,6 +28,7 @@
 #include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/enumerator_info_hash.hpp"
 #include "dogen/cpp/hash/exception_info_hash.hpp"
+#include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
 #include "dogen/cpp/hash/includes_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
@@ -37,5 +38,4 @@
 #include "dogen/cpp/hash/project_hash.hpp"
 #include "dogen/cpp/hash/property_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
-#include "dogen/cpp/hash/source_file_hash.hpp"
 #include "dogen/cpp/hash/visitor_info_hash.hpp"

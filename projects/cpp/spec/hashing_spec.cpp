@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<enum_info_generator>();
     test_hashing<enumerator_info_generator>();
     test_hashing<exception_info_generator>();
-    test_hashing<source_file_generator>();
+    test_hashing<file_info_generator>();
     test_hashing<namespace_info_generator>();
     test_hashing<nested_type_info_generator>();
     test_hashing<odb_options_info_generator>();

@@ -5565,19 +5565,19 @@ of relationship information.#</dia:string>
         <dia:point val="73,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,-8.05;81.98,-4.95"/>
+        <dia:rectangle val="72.95,-8.05;80.715,-4.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9299999999999997"/>
+        <dia:real val="7.6650000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#source_file_factory#</dia:string>
+        <dia:string>#file_info_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

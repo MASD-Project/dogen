@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/source_file.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
@@ -55,7 +55,7 @@ public:
         const bool disable_eos_serialization);
 
 public:
-    virtual void format(const cpp::source_file& f) override;
+    virtual void format(const cpp::file_info& f) override;
 
 private:
     std::ostream& stream_;

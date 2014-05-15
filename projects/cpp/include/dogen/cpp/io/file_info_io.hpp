@@ -18,23 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_SOURCE_FILE_FWD_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_SOURCE_FILE_FWD_SER_HPP
+#ifndef DOGEN_CPP_IO_FILE_INFO_IO_HPP
+#define DOGEN_CPP_IO_FILE_INFO_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/source_file_fwd.hpp"
+#include <iosfwd>
+#include "dogen/cpp/types/file_info.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace cpp {
 
-template<class Archive>
-void save(Archive& ar, const dogen::cpp::source_file& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::cpp::source_file& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::file_info& v);
 
 } }
 

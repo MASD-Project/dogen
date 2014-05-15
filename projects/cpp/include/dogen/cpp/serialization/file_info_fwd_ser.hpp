@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SOURCE_FILE_FWD_HPP
-#define DOGEN_CPP_TYPES_SOURCE_FILE_FWD_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FILE_INFO_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FILE_INFO_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace cpp {
+#include "dogen/cpp/types/file_info_fwd.hpp"
 
-class source_file;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::file_info& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::cpp::file_info& v, unsigned int version);
 
 } }
 

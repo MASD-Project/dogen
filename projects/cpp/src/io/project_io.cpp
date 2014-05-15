@@ -20,13 +20,13 @@
  */
 #include <ostream>
 #include "dogen/cpp/io/cmakelists_info_io.hpp"
+#include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/odb_options_info_io.hpp"
 #include "dogen/cpp/io/project_io.hpp"
-#include "dogen/cpp/io/source_file_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::source_file>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::file_info>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -21,8 +21,8 @@
 #include <sstream>
 #include "dogen/cpp/test_data/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/entity_td.hpp"
+#include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/includes_td.hpp"
-#include "dogen/cpp/test_data/source_file_td.hpp"
 
 namespace {
 
@@ -66,9 +66,9 @@ create_boost_shared_ptr_dogen_cpp_entity(unsigned int position) {
 namespace dogen {
 namespace cpp {
 
-source_file_generator::source_file_generator() : position_(0) { }
+file_info_generator::file_info_generator() : position_(0) { }
 
-void source_file_generator::
+void file_info_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.includes(create_dogen_cpp_includes(position + 1));
@@ -79,21 +79,21 @@ populate(const unsigned int position, result_type& v) {
     v.entity(create_boost_shared_ptr_dogen_cpp_entity(position + 6));
 }
 
-source_file_generator::result_type
-source_file_generator::create(const unsigned int position) {
-    source_file r;
-    source_file_generator::populate(position, r);
+file_info_generator::result_type
+file_info_generator::create(const unsigned int position) {
+    file_info r;
+    file_info_generator::populate(position, r);
     return r;
 }
-source_file_generator::result_type*
-source_file_generator::create_ptr(const unsigned int position) {
-    source_file* p = new source_file();
-    source_file_generator::populate(position, *p);
+file_info_generator::result_type*
+file_info_generator::create_ptr(const unsigned int position) {
+    file_info* p = new file_info();
+    file_info_generator::populate(position, *p);
     return p;
 }
 
-source_file_generator::result_type
-source_file_generator::operator()() {
+file_info_generator::result_type
+file_info_generator::operator()() {
     return create(position_++);
 }
 

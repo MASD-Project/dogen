@@ -58,7 +58,7 @@ file_formatter::shared_ptr io_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_header(stream));
 }
 
-void io_header::format_class(const cpp::source_file& f) {
+void io_header::format_class(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -87,7 +87,7 @@ void io_header::format_class(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void io_header::format_enumeration(const cpp::source_file& f) {
+void io_header::format_enumeration(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -106,7 +106,7 @@ void io_header::format_enumeration(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void io_header::format(const cpp::source_file& f) {
+void io_header::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

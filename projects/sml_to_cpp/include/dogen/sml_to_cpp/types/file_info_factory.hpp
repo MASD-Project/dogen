@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TO_CPP_TYPES_SOURCE_FILE_FACTORY_HPP
-#define DOGEN_SML_TO_CPP_TYPES_SOURCE_FILE_FACTORY_HPP
+#ifndef DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_HPP
+#define DOGEN_SML_TO_CPP_TYPES_FILE_INFO_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
-#include "dogen/cpp/types/source_file.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/includes.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 
@@ -45,15 +45,15 @@ namespace sml_to_cpp {
  * @brief Generates the various file info representations for a given
  * SML type.
  */
-class source_file_factory {
+class file_info_factory {
 public:
-    source_file_factory() = delete;
-    source_file_factory(const source_file_factory&) = default;
-    ~source_file_factory() = default;
-    source_file_factory& operator=(const source_file_factory&) = delete;
+    file_info_factory() = delete;
+    file_info_factory(const file_info_factory&) = default;
+    ~file_info_factory() = default;
+    file_info_factory& operator=(const file_info_factory&) = delete;
 
 public:
-    explicit source_file_factory(const locator& l);
+    explicit file_info_factory(const locator& l);
 
 private:
     /**
@@ -66,49 +66,49 @@ private:
     /**
      * @brief Performs the initial setup of the file info.
      */
-    cpp::source_file create(const cpp::content_descriptor& cd) const;
+    cpp::file_info create(const cpp::content_descriptor& cd) const;
 
 public:
     /**
      * @brief Manufacture the file info for the given enum info.
      */
-    cpp::source_file create(boost::shared_ptr<cpp::enum_info> ei,
+    cpp::file_info create(boost::shared_ptr<cpp::enum_info> ei,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given exception.
      */
-    cpp::source_file create(boost::shared_ptr<cpp::exception_info> ei,
+    cpp::file_info create(boost::shared_ptr<cpp::exception_info> ei,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given namespace.
      */
-    cpp::source_file create(boost::shared_ptr<cpp::namespace_info> ni,
+    cpp::file_info create(boost::shared_ptr<cpp::namespace_info> ni,
         const cpp::content_descriptor& cd) const;
 
     /**
      * @brief Manufacture all the file infos for the given class.
      */
-    cpp::source_file create(boost::shared_ptr<cpp::class_info> ci,
+    cpp::file_info create(boost::shared_ptr<cpp::class_info> ci,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture file info for includer.
      */
-    cpp::source_file create_includer(const cpp::content_descriptor& cd,
+    cpp::file_info create_includer(const cpp::content_descriptor& cd,
         const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture file info for registrar.
      */
-    cpp::source_file create_registrar(boost::shared_ptr<cpp::registrar_info> ri,
+    cpp::file_info create_registrar(boost::shared_ptr<cpp::registrar_info> ri,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
     /**
      * @brief Manufacture file info for visitor.
      */
-    cpp::source_file create_visitor(boost::shared_ptr<cpp::visitor_info> vi,
+    cpp::file_info create_visitor(boost::shared_ptr<cpp::visitor_info> vi,
         const cpp::content_descriptor& cd, const cpp::includes& inc) const;
 
 private:

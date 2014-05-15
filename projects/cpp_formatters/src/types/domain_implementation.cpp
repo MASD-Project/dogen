@@ -198,7 +198,7 @@ class_implementation(const cpp::content_descriptor& cd,
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
 }
 
-void domain_implementation::format_class(const cpp::source_file& f) {
+void domain_implementation::format_class(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -218,13 +218,13 @@ void domain_implementation::format_class(const cpp::source_file& f) {
     inserter_operator(ci);
 }
 
-void domain_implementation::format_enumeration(const cpp::source_file&) {
+void domain_implementation::format_enumeration(const cpp::file_info&) {
     BOOST_LOG_SEV(lg, error) << missing_class_info;
     BOOST_THROW_EXCEPTION(
         formatting_error(enum_info_not_supported));
 }
 
-void domain_implementation::format(const cpp::source_file& f) {
+void domain_implementation::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

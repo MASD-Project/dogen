@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TO_CPP_TYPES_SOURCE_FILE_FACTORY_FWD_HPP
-#define DOGEN_SML_TO_CPP_TYPES_SOURCE_FILE_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_TEST_DATA_FILE_INFO_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FILE_INFO_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml_to_cpp {
+#include "dogen/cpp/types/file_info.hpp"
 
-class source_file_factory;
+namespace dogen {
+namespace cpp {
+
+class file_info_generator {
+public:
+    file_info_generator();
+
+public:
+    typedef dogen::cpp::file_info result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

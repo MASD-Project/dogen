@@ -265,7 +265,7 @@ template_instantiations(const cpp::class_info& ci) {
     }
 }
 
-void serialization_implementation::format_class(const cpp::source_file& f) {
+void serialization_implementation::format_class(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -306,13 +306,13 @@ void serialization_implementation::format_class(const cpp::source_file& f) {
 }
 
 void serialization_implementation::
-format_enumeration(const cpp::source_file&) {
+format_enumeration(const cpp::file_info&) {
     BOOST_LOG_SEV(lg, error) << enum_info_not_supported;
     BOOST_THROW_EXCEPTION(
         formatting_error(enum_info_not_supported));
 }
 
-void serialization_implementation::format(const cpp::source_file& f) {
+void serialization_implementation::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

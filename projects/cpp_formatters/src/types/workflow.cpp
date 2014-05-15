@@ -88,7 +88,7 @@ workflow::format_odb_options_activity(const cpp::project& p) const {
 }
 
 workflow::result_type
-workflow::format_source_files_activity(const cpp::project& p) const {
+workflow::format_file_infos_activity(const cpp::project& p) const {
     workflow::result_type r;
 
     std::map<config::cpp_facet_types, std::list<std::string> >
@@ -115,7 +115,7 @@ workflow::format_source_files_activity(const cpp::project& p) const {
 workflow::result_type workflow::execute(const cpp::project& p) {
     BOOST_LOG_SEV(lg, info) << "C++ formatters workflow started.";
 
-    workflow::result_type r(format_source_files_activity(p));
+    workflow::result_type r(format_file_infos_activity(p));
     if (settings_.cpp().disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else {

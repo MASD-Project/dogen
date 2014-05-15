@@ -57,7 +57,7 @@ namespace_documentation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new namespace_documentation(stream));
 }
 
-void namespace_documentation::format_namespace(const cpp::source_file& f) {
+void namespace_documentation::format_namespace(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::namespace_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_namespace_info;
@@ -91,7 +91,7 @@ void namespace_documentation::format_namespace(const cpp::source_file& f) {
     utility_.blank_line(2);
 }
 
-void namespace_documentation::format(const cpp::source_file& f) {
+void namespace_documentation::format(const cpp::file_info& f) {
     licence licence(stream_);
     licence.format();
 

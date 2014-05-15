@@ -32,6 +32,7 @@
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/enumerator_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/includes.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
@@ -41,5 +42,4 @@
 #include "dogen/cpp/types/project.hpp"
 #include "dogen/cpp/types/property_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
-#include "dogen/cpp/types/source_file.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"

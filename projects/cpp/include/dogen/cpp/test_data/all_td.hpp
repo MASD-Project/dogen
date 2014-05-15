@@ -28,6 +28,7 @@
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/enumerator_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
+#include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
 #include "dogen/cpp/test_data/includes_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
@@ -37,5 +38,4 @@
 #include "dogen/cpp/test_data/project_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
-#include "dogen/cpp/test_data/source_file_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"

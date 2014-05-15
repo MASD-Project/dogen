@@ -30,8 +30,8 @@
 #include <list>
 #include "dogen/cpp/serialization/project_fwd_ser.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/odb_options_info.hpp"
-#include "dogen/cpp/types/source_file.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -50,7 +50,7 @@ public:
 
 public:
     project(
-        const std::list<dogen::cpp::source_file>& files,
+        const std::list<dogen::cpp::file_info>& files,
         const dogen::cpp::odb_options_info& odb_options,
         const dogen::cpp::cmakelists_info& src_cmakelists,
         const boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists);
@@ -64,13 +64,13 @@ private:
 
 public:
     /**
-     * @brief C++ include and source files.
+     * @brief All C++ files, interfaces and implementation.
      */
     /**@{*/
-    const std::list<dogen::cpp::source_file>& files() const;
-    std::list<dogen::cpp::source_file>& files();
-    void files(const std::list<dogen::cpp::source_file>& v);
-    void files(const std::list<dogen::cpp::source_file>&& v);
+    const std::list<dogen::cpp::file_info>& files() const;
+    std::list<dogen::cpp::file_info>& files();
+    void files(const std::list<dogen::cpp::file_info>& v);
+    void files(const std::list<dogen::cpp::file_info>&& v);
     /**@}*/
 
     /**
@@ -114,7 +114,7 @@ public:
     project& operator=(project other);
 
 private:
-    std::list<dogen::cpp::source_file> files_;
+    std::list<dogen::cpp::file_info> files_;
     dogen::cpp::odb_options_info odb_options_;
     dogen::cpp::cmakelists_info src_cmakelists_;
     boost::optional<dogen::cpp::cmakelists_info> include_cmakelists_;

@@ -28,6 +28,7 @@
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/enumerator_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/file_info_ser.hpp"
 #include "dogen/cpp/serialization/file_types_ser.hpp"
 #include "dogen/cpp/serialization/includes_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
@@ -38,5 +39,4 @@
 #include "dogen/cpp/serialization/property_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_ser.hpp"
-#include "dogen/cpp/serialization/source_file_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"

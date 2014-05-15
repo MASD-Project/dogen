@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<enum_info_generator>();
     test_swap<enumerator_info_generator>();
     test_swap<exception_info_generator>();
-    test_swap<source_file_generator>();
+    test_swap<file_info_generator>();
     test_swap<namespace_info_generator>();
     test_swap<nested_type_info_generator>();
     test_swap<odb_options_info_generator>();

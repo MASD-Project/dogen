@@ -44,7 +44,7 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new facet_includer(stream));
 }
 
-void facet_includer::format(const cpp::source_file& f) {
+void facet_includer::format(const cpp::file_info& f) {
     auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
     if (o)
         BOOST_THROW_EXCEPTION(formatting_error(unexpected_class_info));
