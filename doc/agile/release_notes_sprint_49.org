@@ -13,13 +13,13 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-13 Tue 08:37]
+Clock summary at [2014-05-15 Thu 19:51]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *19:16* |       |      |
+| *Total time*                                                    | *20:48* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                 |         | 19:16 |      |
+| Development Stories Implemented                                 |         | 20:48 |      |
 | IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:56 |
 | IMPLEMENTATION Updates to the manual and readme files           |         |       | 2:12 |
 | COMPLETED Remove the roadmap                                    |         |       | 0:05 |
@@ -32,7 +32,7 @@ Clock summary at [2014-05-13 Tue 08:37]
 | IMPLEMENTATION Tidy-up =sml_to_cpp= model                       |         |       | 0:19 |
 | IMPLEMENTATION Split formatting settings from knitting settings |         |       | 6:09 |
 | IMPLEMENTATION Move all the configuration options into tags     |         |       | 0:04 |
-| IMPLEMENTATION How to supply concrete entities to formatters    |         |       | 0:27 |
+| IMPLEMENTATION How to supply concrete entities to formatters    |         |       | 1:59 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -368,6 +368,8 @@ Once the overrides have been proven to work, we need to remove the
 command line options and make sure nothing breaks.
 
 *** IMPLEMENTATION How to supply concrete entities to formatters      :story:
+    CLOCK: [2014-05-15 Thu 18:06]--[2014-05-15 Thu 18:51] =>  0:45
+    CLOCK: [2014-05-15 Thu 07:56]--[2014-05-15 Thu 08:43] =>  0:47
     CLOCK: [2014-05-13 Tue 08:10]--[2014-05-13 Tue 08:37] =>  0:27
 
 If we supply abstract entities to formatters, we need to use a visitor
@@ -375,8 +377,9 @@ to resolve them to concrete types. This then results in a lot of state
 machinery passed around as our visitors do not know about files and
 streams, etc. We do not want state because it interferes with
 parallelism. It also means that we are not making invalid states
-unrepresentable - e.g. one can pass a concrete class to the incorrect
-formatter and the type system won't help us detect this.
+unrepresentable - e.g. one can pass an entity to a formatter that does
+not support it and the type system won't help us detect this until we
+reach the formatter and cast the entity to a concrete type.
 
 So it would make our life easier if the formatters didn't have to
 resolve types - if they receive concrete entities to format. We have
@@ -395,10 +398,50 @@ several options here:
 - do not use composition of =source_file= and =entity=. We could
   express this relationship as a tuple for example. We can then have
   tuples using the concrete entities in =project= and pass those to
-  the formatters. The downside is that the contents of the file
-  (header guards, file names, etc) only make sense for that entity in
-  question. Again we create an opportunity for invalid states (entity
-  with wrong file). Also, the project class will became a bit messy.
+  the formatters. This would be trivial to extend to support multiple
+  entities in one file. The downside is that the contents of the file
+  (header guards, file names, etc) at present only make sense for the
+  entity in question. Again we create an opportunity for invalid
+  states (entity with wrong file). Also, the project class will became
+  a bit messy.
+- we could take the hit and accept that invalid states are
+  representable in this case because we could not think of a better
+  idea. In this case we could cast the entity in the formatter and if
+  the cast fails we throw. This is because there is a logic error
+  somewhere for this to happen since the formatter registers for a
+  particular content descriptor and the descriptor implies a concrete
+  type
+- another alternative, is to unpack the source file before we invoke
+  the formatter. We could 
+
+content types:
+
+- exception
+- enumeration
+- primitive
+- visitor
+- key_extractor
+- registrar
+- namespace_doc
+- includer
+- class
+
+- value object: identical to value_object
+- keyed_entity: identical to value_object
+- entity: identical to value_object
+- user defined service: we need to set override to false, otherwise
+  its identical to value_object
+- versioned_key:
+- unversioned_key:
+
+- factory?
+- repository?
+
+file sets
+
+- includer -> includer info
+- forward_declaration -> forward_declaration_info
+- registrar -> registrar_info
 
 If we were to merge =source_file=, the below tasks would be required.
 
