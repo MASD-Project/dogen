@@ -2,7 +2,7 @@
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
 A lot of interesting lessons have been learned during the development
-of Dogen and I'm rather afraid many more are still in store. As it is
+of [[https://github.com/DomainDrivenConsulting/dogen][Dogen]] and I'm rather afraid many more are still in store. As it is
 typical with the agile process, I'm constantly reviewing what went
 right and what went wrong. I thought I'd put pen to paper with some of
 these, In the vain hope of them being of general interest.

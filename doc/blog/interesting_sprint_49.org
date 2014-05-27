@@ -1,0 +1,107 @@
+#+title: Nerd Food: Interesting...
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Some interesting stuff I bumped into these last couple of weeks.
+
+* Arty
+
+- [[http://www.5by.com/art-and-animation/posts/6ej/banksy-webby-awards-video][Banksy - Webby Awards Video]]: Banksy at his usual irreverent
+  best. Hat-tip [[https://twitter.com/elf2k8][Emanuel Ferreira]].
+- [[http://www.openculture.com/2014/04/brian-eno-day.html][Listen to “Brian Eno Day”]]: a 12-Hour Radio Show Spent With Eno &
+  His Music (Recorded in 1988). If you like ambient it's a must
+  listen. Hat-tip [[https://twitter.com/familiareal][Joao Santos]].
+- [[http://en.wikipedia.org/wiki/Snowpiercer][Snowpiercer]]: To be fair, didn't yet get a chance to watch it yet,
+  but the comments from [[https://twitter.com/b_antunes][Bruno Antunes]] were so glowing it went up on my
+  list of must-watch movies.
+- [[http://www.imdb.com/title/tt1931388/][Beware of Mr. Baker]]: Frigging amazing. I just can't believe I had
+  never heard of this guy until I watched the movie. I mean, he played
+  with Fela, Clapton, all the Jazz greats that were still alive. No
+  words to describe it - just watch it. Crazy, crazy guy. [[https://www.youtube.com/watch?v%3DPJJnA6zEcGk][Blind Faith]]
+  are one of the many bands he was in.
+- [[http://www.imdb.com/title/tt0479547/][Surfwise]]: Surf movie, but with a twist - or should I say nine. Crazy
+  family with a crazy dad that decided one day that he'd spent the
+  rest of his life surfing, and the world be damned. Amazing
+  movie. It's also interesting because it outlines the consequences of
+  such "heroic" decisions on the family.
+- [[https://www.youtube.com/watch?v%3DAQceUBc6Cmc][Makthaverskan]]: Started listening to this rocky Swedish band.
+- [[https://www.youtube.com/watch?v%3DcxUuU1jwMgM&feature%3Dyoutu.be][El Empleo / The Employment]]: Great animation. Perfect description of
+  the modern world.
+- [[https://www.youtube.com/watch?v%3DBKorP55Aqvg][The Expert]]: Like El Empleo, a dark take on the modern world, but
+  this time as a dark comedy. Hilarious, but yet again, very painful.
+
+* C++
+
+- *Introduction to QuantLib Development*: Luigi keeps on plugging
+  along with chapter six of the manual. Parts [[http://implementingquantlib.blogspot.com/2014/05/chapter-6-part-1-of-n-random-number.html][one]], [[http://implementingquantlib.blogspot.com/2014/05/chapter-6-part-2-of-n-stochastic.html][two]] and [[http://implementingquantlib.blogspot.com/2014/05/chapter-6-part-3-of-8-black-scholes.html][three]] are
+  out already. On a related note, [[http://www.moneyscience.com/pg/events/Admin/read/647223/introduction-to-quantlib-development-with-luigi-ballabio][their course is back on]] in
+  London. Having done it, I highly recommend it if you need to work
+  with QuantLib.
+- [[http://eli.thegreenplace.net/2014/05/01/modern-source-to-source-transformation-with-clang-and-libtooling/][Modern source-to-source transformation with Clang and libTooling]]: If
+  you are trying to get started with clang, you can do no worse than
+  following this article. Makes it look simple.
+- [[http://blog.bittorrent.com/2014/03/26/tech-talks-c-in-the-21st-century/?utm_content%3Dbuffer64c52&utm_medium%3Dsocial&utm_source%3Dtwitter.com&utm_campaign%3Dbuffer][Tech Talks: C++ in the 21st Century]]: Another talk discussing the
+  revolution going on in the C++ world.
+- [[http://www.kitware.com/blog/home/post/641][CMake 3.0-rc3 now ready for testing!]]: Wasn't aware of the huge
+  amount of work going on in CMake, so it's great to see blog posts
+  like this one. There is also [[http://www.kdab.com/modern-cmake-with-qt-and-boost/][Modern CMake with Qt and Boost]], which
+  is a must for any CMake user.
+- [[https://www.youtube.com/watch?v%3DVOFOj3LLXRk][Designing an Actor Semantic for C++11]]: Having never heard of
+  [[http://libcppa.blogspot.co.uk/][libcppa]], I started by watching this talk and looking through some
+  [[http://matthias.vallentin.net/slides/cppnow14-vast.pdf][slides]] - these ones for [[https://github.com/mavam/vast][Vast]], a distributed database built on
+  libcppa. Sounds extremely interesting - especially the OpenCL
+  support - but the interface looks a bit too weakly typed for my
+  liking. That, or I just haven't learned enough about it yet. Also,
+  can't quite see how this intersects (or not) with [[http://stellar.cct.lsu.edu/tag/hpx/][HPX]]. More analysis
+  to be done on this space.
+- [[https://isocpp.org/files/papers/n4028.pdf][Defining a Portable C++ ABI]]: New paper by Sutter. This would be
+  absolutely *amazing*. Mix and match of binaries from multiple
+  compilers would become a reality. Hat-tip [[https://plus.google.com/u/0/107542604400834772651/posts][Sean Clarke]].
+
+* Other Programming Topics
+
+- [[https://www.igvita.com/2014/05/05/minimum-viable-block-chain/][Minimum Viable Block Chain]]: Gets to the core of BitCoin - the block
+  chain.
+- [[http://wildlyinaccurate.com/a-hackers-guide-to-git][A Hacker’s Guide to Git]]: Very low-level but yet accessible guide to
+  the internals of git. Essential material for any serious user.
+- [[http://idlewords.com/bt14.htm][The Internet With a Human Face]]: The dystopia that the internet has
+  become in it's full splendour. Hat-tip [[https://twitter.com/b_antunes][Bruno Antunes]].
+- [[http://www.infoq.com/author/Kevlin-Henney][The talks of Kevlin-Henney at InfoQ]]. Kevlin is one of my favourite
+  presenters in the nerd community, mainly because he always says so
+  many profound things. For example, [[http://www.infoq.com/presentations/Architecture-Uncertainty][The Architecture of Uncertainty]]
+  is essential watch. I was also lucky enough to be in the audience
+  for [[https://skillsmatter.com/skillscasts/1361-kevlin-henney-rethinking-unit-testing-in-c-plus-plus][Rethinking Unit Testing in C++]], another great talk. So I'll be
+  going through this list. There is also the slides for [[http://sddconf.com/brands/sdd/library/The_meaning_of_Agile.pdf][The Meaning of
+  Agile]], but sadly no video as of yet.
+- [[http://www.buzzfeed.com/chrisstokelwalker/the-internet-is-being-protected-by-two-guys-named-st][The Internet Is Being Protected By Two Guys Named Steve]]: The inside
+  story on heart bleed.
+- [[https://developers.google.com/compute/docs/containers][Containers on the Google Cloud Platform]]: Google now supports
+  containers! Docker FTW really.
+- [[https://coreos.com/blog/cluster-level-container-orchestration/][Cluster-Level Container Deployment with fleet]]: Talking about
+  containers, CoreOS just gets cooler and cooler by the minute.
+- [[http://lwn.net/Articles/597560/][Jolla and Mer]]: Been meaning to buy myself a [[http://jolla.com/][Jolla phone]] for the
+  longest of times - it just looks too cool and nerdy to be true. But
+  was always a bit confused on how the ecosystem hangs together. LWN
+  gives it it's usual through treatment.
+- [[http://blogs.msdn.com/b/dotnet/archive/2014/05/12/the-next-generation-of-net-asp-net-vnext.aspx][The Next Generation of .NET – ASP.NET vNext]]: This is quite
+  amazing. Microsoft is Open Sourcing a lot of their core stuff,
+  making .Net outside of Windows a much more likely prospect. Hat-tip
+  [[https://twitter.com/migueldeicaza][Miguel]].
+
+* Start-ups and Business
+
+- [[http://blog.42floors.com/how-to-start-and-scale-a-full-stack-startup/][How to start and scale a full stack startup]]: A lot of common sense
+  points, but enough interesting ones that make it worth a read.
+- [[https://www.youtube.com/watch?v%3DqlTA3rnpgzU][Solar FREAKIN' Roadways!]]: Ad for a great Indiegogo start-up. Hope
+  they succeed, sounds like a great idea. See also the TechCrunch
+  [[http://techcrunch.com/2014/05/25/the-crazy-genius-behind-solar-roadways/][article]].
+- [[http://www.vanityfair.com/business/2014/06/apple-samsung-smartphone-patent-war.print][The Great Smartphone War]]: The inside story of the war between
+  Samsung and Apple.
+- [[http://www.rdio.com/][Rdio]]: Opened an account but haven't done much as of yet. Bit of a
+  hedge, what with all the expected changes in [[https://soundcloud.com/][SoundCloud]]. Let's hope
+  they change nothing though, SoundCloud rocks.
+
+* Portugues
+
+- [[http://www.wook.pt/ficha/com-os-holandeses/a/id/10966188][Com os Holandeses]]: Encontrei um autor portugues que nunca tinha
+  ouvido falar, mas que parece ser bastante conhecido na holanda. Na
+  lista de livros a ler.
