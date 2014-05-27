@@ -13,30 +13,33 @@ inner workings of knitter once and for all.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-15 Thu 19:51]
+Clock summary at [2014-05-27 Tue 12:45]
 
-| Headline                                                        | Time    |       |      |
-|-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *20:48* |       |      |
-|-----------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                 |         | 20:48 |      |
-| IMPLEMENTATION Release notes and backlog grooming               |         |       | 2:56 |
-| IMPLEMENTATION Updates to the manual and readme files           |         |       | 2:12 |
-| COMPLETED Remove the roadmap                                    |         |       | 0:05 |
-| COMPLETED Design an end-to-end solution to the tag problem      |         |       | 3:23 |
-| COMPLETED Rename the =COMMENT= tag to =dia.comment=             |         |       | 0:21 |
-| COMPLETED Add support for unique log files                      |         |       | 0:16 |
-| COMPLETED Print model name to the console on failure            |         |       | 1:23 |
-| COMPLETED Tidy-up =knitting_settings_validator= specs           |         |       | 0:34 |
-| COMPLETED Tidy-up knitter main                                  |         |       | 1:07 |
-| IMPLEMENTATION Tidy-up =sml_to_cpp= model                       |         |       | 0:19 |
-| IMPLEMENTATION Split formatting settings from knitting settings |         |       | 6:09 |
-| IMPLEMENTATION Move all the configuration options into tags     |         |       | 0:04 |
-| IMPLEMENTATION How to supply concrete entities to formatters    |         |       | 1:59 |
+| Headline                                                   | Time    |       |      |
+|------------------------------------------------------------+---------+-------+------|
+| *Total time*                                               | *24:00* |       |      |
+|------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                            |         | 24:00 |      |
+| IMPLEMENTATION Release notes and backlog grooming          |         |       | 3:44 |
+| IMPLEMENTATION Updates to the manual and readme files      |         |       | 2:12 |
+| COMPLETED Remove the roadmap                               |         |       | 0:05 |
+| COMPLETED Design an end-to-end solution to the tag problem |         |       | 3:23 |
+| COMPLETED Rename the =COMMENT= tag to =dia.comment=        |         |       | 0:21 |
+| COMPLETED Add support for unique log files                 |         |       | 0:16 |
+| COMPLETED Print model name to the console on failure       |         |       | 1:23 |
+| COMPLETED Tidy-up =knitting_settings_validator= specs      |         |       | 0:34 |
+| COMPLETED Tidy-up knitter main                             |         |       | 1:07 |
+| COMPLETED How to supply concrete entities to formatters    |         |       | 2:21 |
+| COMPLETED Split formatting settings from knitting settings |         |       | 4:49 |
+| COMPLETED Rename =source_file= back to =file_info=         |         |       | 0:21 |
+| COMPLETED Blog post for interesting                        |         |       | 1:41 |
+| CANCELLED Tidy-up =sml_to_cpp= model                       |         |       | 0:19 |
+| CANCELLED Use formatting settings in formatters model      |         |       | 1:20 |
+| CANCELLED Move all the configuration options into tags     |         |       | 0:04 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
-    CLOCK: [2014-05-15 Thu 22:52]--[2014-05-15 Thu 23:04] =>  0:12
+    CLOCK: [2014-05-15 Thu 22:52]--[2014-05-15 Thu 23:40] =>  0:48
     CLOCK: [2014-05-13 Tue 07:56]--[2014-05-13 Tue 08:10] =>  0:14
     CLOCK: [2014-05-12 Mon 21:55]--[2014-05-12 Mon 22:35] =>  0:40
     CLOCK: [2014-05-09 Fri 08:24]--[2014-05-09 Fri 08:38] =>  0:14
@@ -243,32 +246,6 @@ We haven't got any documentation at all in the new formatters
 morel. We need a small blurb about the language neutral formatting
 support the model is supposed to provide.
 
-*** CANCELLED Tidy-up =sml_to_cpp= model                              :story:
-    CLOSED: [2014-05-15 Thu 22:53]
-    CLOCK: [2014-05-12 Mon 18:46]--[2014-05-12 Mon 18:52] =>  0:06
-    CLOCK: [2014-05-12 Mon 18:32]--[2014-05-12 Mon 18:45] =>  0:13
-
-*Rationale*: this story has been superseded; what hasn't was copied
- across.
-
-As part of all the deep thinking on the structure of formatters, we
-more or less concluded that the current approach is the best we can
-come up with. However, we should try to make the transformation model
-as clean as possible:
-
-- rename aspects to file sets as per manual and add missing file sets
-  such as includer and forward declarations.
-- consider merging the file types with file sets, e.g. =main_header=,
-  =main_implementation=, etc.
-- make includer a bit tidier: we should be able to figure out what
-  logic applies for what formatter at a glance rather than having the
-  logic scattered.
-- is content descriptor a good name?
-- what exactly is content type? the name is so vague as to be almost
-  completely useless.
-- Split name from content descriptor: The qualified name is not really
-  a part of the content descriptor, it was put there for expediency.
-
 *** COMPLETED How to supply concrete entities to formatters           :story:
     CLOSED: [2014-05-15 Thu 22:52]
     CLOCK: [2014-05-15 Thu 22:30]--[2014-05-15 Thu 22:52] =>  0:22
@@ -436,39 +413,47 @@ loading sub-workflow.
 Source file is just confusing and unclear as to what we mean - is this
 just the implementation?
 
-*** Move includes and header guard into entity                        :story:
+*** COMPLETED Blog post for interesting                               :story:
+    CLOSED: [2014-05-27 Tue 12:43]
+    CLOCK: [2014-05-27 Tue 10:02]--[2014-05-27 Tue 11:43] =>  1:41
 
-With this a formatter can now rely only on entities rather than
-requiring a file.
+Every iteration we should do a blog post with interesting links.
 
-*** Create =includers_info= and =forward_declarations_info=           :story:
+*** CANCELLED Tidy-up =sml_to_cpp= model                              :story:
+    CLOSED: [2014-05-15 Thu 22:53]
+    CLOCK: [2014-05-12 Mon 18:46]--[2014-05-12 Mon 18:52] =>  0:06
+    CLOCK: [2014-05-12 Mon 18:32]--[2014-05-12 Mon 18:45] =>  0:13
 
-We should make sure the type system represents all the inputs to
-formatters. Create these types and update their formatters,
-transformer etc.
+*Rationale*: this story has been superseded; what hasn't was copied
+ across.
 
-*** Delete key implementation formatter                               :story:
+As part of all the deep thinking on the structure of formatters, we
+more or less concluded that the current approach is the best we can
+come up with. However, we should try to make the transformation model
+as clean as possible:
 
-It doesn't seem like there is any good reason to treat the keys in a
-special way so try to remove this.
+- rename aspects to file sets as per manual and add missing file sets
+  such as includer and forward declarations.
+- consider merging the file types with file sets, e.g. =main_header=,
+  =main_implementation=, etc.
+- make includer a bit tidier: we should be able to figure out what
+  logic applies for what formatter at a glance rather than having the
+  logic scattered.
+- is content descriptor a good name?
+- what exactly is content type? the name is so vague as to be almost
+  completely useless.
+- Split name from content descriptor: The qualified name is not really
+  a part of the content descriptor, it was put there for expediency.
 
-*** Delete content types                                              :story:
-
-Now we have the type system representing the content, we can delete
-this enumeration.
-
-*** Delete aspect types                                               :story:
-
-Now we have the type system representing the aspects, we can delete
-this enumeration.
-
-*** IMPLEMENTATION Use formatting settings in formatters model        :story:
+*** CANCELLED Use formatting settings in formatters model             :story:
+    CLOSED: [2014-05-27 Tue 12:44]
      CLOCK: [2014-05-10 Sat 14:41]--[2014-05-10 Sat 16:01] =>  1:20
 
 We need to replace the references to the c++ settings directly with
 formatter settings.
 
-*** IMPLEMENTATION Move all the configuration options into tags       :story:
+*** CANCELLED Move all the configuration options into tags            :story:
+    CLOSED: [2014-05-27 Tue 12:44]
     CLOCK: [2014-05-06 Tue 07:47]--[2014-05-06 Tue 07:51] =>  0:08
 
 Parameters as per analysis story.
@@ -498,98 +483,6 @@ ensure they work exactly as before.
 
 Once the overrides have been proven to work, we need to remove the
 command line options and make sure nothing breaks.
-
-*** Create formatter interfaces for each concrete entity type         :story:
-
-Formatters should have a single format method that takes a concrete
-entity, formatting settings and knitting settings. It returns a file.
-
-**** Remove =file_formatter_interface=                                 :task:
-
-Update all C++ formatters to use specific types:
-
-- remove factory; update workflow to call formatters directly
-- remove file formatter interface
-- formatters to have format() for each specific supported entity,
-  overloaded as required
-
-**** Update formatters to output =formatters::file=                    :task:
-
-Instead of passing in a stream, we just want to return a file.
-
-**** Update formatters to take settings and entity as input            :task:
-
-We want the formatters to be stateless - well at least as far as
-mutating state goes - so that we can run them in parallel. We also
-want them to have no constructor arguments so we can register them. To
-do so we need to pass in both knitting and formatting settings to
-=format= as well as the entity.
-
-**** Get formatters to register themselves with workflow               :task:
-
-Copy the code from the deleted registration files. Formatters should
-register against a content descriptor.
-
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
-
-*** Rename the include tags and add them to CPP model                 :story:
-
-Update all the JSON files with names in the form
-=cpp.include.types.header_file=. Add properties in =cpp= to capture
-these.
-
-While we're at it, add support for =family= too.
-
-*** Delete tag related infrastructure from =sml=                      :story:
-
-With the exception of tag writer, we don't really need any tagging in
-SML. That means:
-
-- no meta data tagger
-- no writer
-- no meta data error
-- no meta data sub-workflow
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders. Instead, this story will be handled when we move
-over to using =boost::property_tree::ptree=.
-
-*** Make use of boilerplate                                           :task:
-
-Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some meta-data into C++ model.
-
-*** Remove =cpp_formatters::formatting_error=                         :story:
-
-Use the =formatters::formating_error= instead.
-
-*** Add include files at the formatter level                          :story:
-
-We need to remove all the include files from =includer= which are
-related to formatter specific code. We need to inject these
-dependencies inside of the formatters.
-
-- implement includer in terms of json files
-- get includer to work off of object relationships
-- remove relationships from transformer
-- remove helper models boost and std
-
-*** Manual: fix Fundamental Building Blocks section                   :story:
-
-We allowed this section to evolve as a collage of different ideas, but
-now it is no longer making sense as a whole. We need to go back to the
-drawing board and create a structure for it.
 
 ** Deprecated Development Stories
 *** CANCELLED Rename =property_sheets= to =profile=                   :story:
@@ -666,7 +559,6 @@ system in the places that know about it:
 Each model should define the tags that it knows of in a =tags= class.
 
 We also need to create a step in SML that converts settings into tags.
-
 
 *** CANCELLED OM: Add tests for properties and compiler generated functions :story:
     CLOSED: [2014-05-09 Fri 08:28]

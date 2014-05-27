@@ -8,6 +8,124 @@
 
 Stories that we intend to look at, at some point.
 
+*** Move includes and header guard into entity                        :story:
+
+With this a formatter can now rely only on entities rather than
+requiring a file.
+
+*** Create =includers_info= and =forward_declarations_info=           :story:
+
+We should make sure the type system represents all the inputs to
+formatters. Create these types and update their formatters,
+transformer etc.
+
+*** Delete key implementation formatter                               :story:
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** Delete content types                                              :story:
+
+Now we have the type system representing the content, we can delete
+this enumeration.
+
+*** Delete aspect types                                               :story:
+
+Now we have the type system representing the aspects, we can delete
+this enumeration.
+
+*** Create formatter interfaces for each concrete entity type         :story:
+
+Formatters should have a single format method that takes a concrete
+entity, formatting settings and knitting settings. It returns a file.
+
+**** Remove =file_formatter_interface=                                 :task:
+
+Update all C++ formatters to use specific types:
+
+- remove factory; update workflow to call formatters directly
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
+
+**** Update formatters to output =formatters::file=                    :task:
+
+Instead of passing in a stream, we just want to return a file.
+
+**** Update formatters to take settings and entity as input            :task:
+
+We want the formatters to be stateless - well at least as far as
+mutating state goes - so that we can run them in parallel. We also
+want them to have no constructor arguments so we can register them. To
+do so we need to pass in both knitting and formatting settings to
+=format= as well as the entity.
+
+**** Get formatters to register themselves with workflow               :task:
+
+Copy the code from the deleted registration files. Formatters should
+register against a content descriptor.
+
+*** Rename ODB parameters                                             :story:
+
+At present we use the following form:
+
+: #DOGEN ODB_PRAGMA=no_id
+
+We need to use the new naming style =cpp.odb.pragma=. We also need to
+rename the opaque_parameters to reflect ODB specific data.
+
+*** Rename the include tags and add them to CPP model                 :story:
+
+Update all the JSON files with names in the form
+=cpp.include.types.header_file=. Add properties in =cpp= to capture
+these.
+
+While we're at it, add support for =family= too.
+
+*** Delete tag related infrastructure from =sml=                      :story:
+
+With the exception of tag writer, we don't really need any tagging in
+SML. That means:
+
+- no meta data tagger
+- no writer
+- no meta data error
+- no meta data sub-workflow
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders. Instead, this story will be handled when we move
+over to using =boost::property_tree::ptree=.
+
+*** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+*** Remove =cpp_formatters::formatting_error=                         :story:
+
+Use the =formatters::formating_error= instead.
+
+*** Add include files at the formatter level                          :story:
+
+We need to remove all the include files from =includer= which are
+related to formatter specific code. We need to inject these
+dependencies inside of the formatters.
+
+- implement includer in terms of json files
+- get includer to work off of object relationships
+- remove relationships from transformer
+- remove helper models boost and std
+
+*** Manual: fix Fundamental Building Blocks section                   :story:
+
+We allowed this section to evolve as a collage of different ideas, but
+now it is no longer making sense as a whole. We need to go back to the
+drawing board and create a structure for it.
+
 *** Add targets to output manual in downloadable formats              :story:
 
 We should build HTML and PDF representations of the manual.
