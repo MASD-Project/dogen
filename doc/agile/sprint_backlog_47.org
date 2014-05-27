@@ -1,9 +1,9 @@
-#+title: Release Notes for Sprint 47
+#+title: Sprint Backlog 47
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 47.
 
@@ -16,27 +16,27 @@ GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-04-22 Tue 07:56]
+Clock summary at [2014-05-27 Tue 13:06]
 
 | Headline                                         | Time   |      |      |
 |--------------------------------------------------+--------+------+------|
 | *Total time*                                     | *8:11* |      |      |
 |--------------------------------------------------+--------+------+------|
 | Development Stories Implemented                  |        | 8:11 |      |
-| COMPLETED Release notes and backlog grooming     |        |      | 1:08 |
+| COMPLETED Sprint and product backlog grooming    |        |      | 1:08 |
 | COMPLETED Updates to the manual and readme files |        |      | 5:51 |
 | CANCELLED Complete the integral work for Linux   |        |      | 0:15 |
 | COMPLETED Fix issues with missing builds         |        |      | 0:57 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2014-04-19 Sat 23:26]
     CLOCK: [2014-03-27 Thu 18:29]--[2014-03-27 Thu 18:47] =>  0:18
     CLOCK: [2014-03-27 Thu 07:52]--[2014-03-27 Thu 08:22] =>  0:30
     CLOCK: [2014-03-18 Tue 08:07]--[2014-03-18 Tue 08:12] =>  0:05
     CLOCK: [2014-03-18 Tue 07:52]--[2014-03-18 Tue 08:07] =>  0:15
 
-Updates to release notes and backlog.
+Updates to sprint and product backlog.
 
 *** COMPLETED Updates to the manual and readme files                   :task:
     CLOSED: [2014-04-19 Sat 23:26]

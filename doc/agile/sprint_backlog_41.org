@@ -1,23 +1,23 @@
-#+title: Release Notes for Sprint 41
+#+title: Sprint Backlog 41
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 41.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-30 Mon 11:05]
+Clock summary at [2014-05-27 Tue 13:05]
 
 | Headline                                                      | Time    |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                  | *44:36* |       |       |
 |---------------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                               |         | 44:36 |       |
-| COMPLETED Release notes and backlog grooming                  |         |       |  1:27 |
+| COMPLETED Sprint and product backlog grooming                 |         |       |  1:27 |
 | COMPLETED Use relationship container for visitors             |         |       |  1:13 |
 | COMPLETED Create an =association_indexer= and add tests       |         |       |  8:20 |
 | COMPLETED Remove model from extractor                         |         |       |  0:16 |
@@ -32,7 +32,7 @@ Clock summary at [2013-12-30 Mon 11:05]
 | COMPLETED Add om's workflow to engine                         |         |       |  8:33 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-12-29 Sun 23:05]
     CLOCK: [2013-12-29 Sun 21:33]--[2013-12-29 Sun 21:43] =>  0:10
     CLOCK: [2013-12-29 Sun 10:22]--[2013-12-29 Sun 10:40] =>  0:18
@@ -44,7 +44,7 @@ Clock summary at [2013-12-30 Mon 11:05]
     CLOCK: [2013-12-18 Wed 07:56]--[2013-12-18 Wed 08:11] =>  0:15
     CLOCK: [2013-12-16 Mon 07:55]--[2013-12-16 Mon 07:59] =>  0:04
 
-Updates to release notes and backlog.
+Updates to sprint and product backlog.
 
 *** COMPLETED Use relationship container for visitors                 :story:
     CLOSED: [2013-12-16 Mon 18:29]

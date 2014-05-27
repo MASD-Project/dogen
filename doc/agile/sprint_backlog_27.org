@@ -1,23 +1,23 @@
-#+title: Release Notes for Sprint 27
+#+title: Sprint Backlog 27
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 27.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-31 Fri 08:43]
+Clock summary at [2014-05-27 Tue 13:02]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
 | *Total time*                                            | *33:33* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                         |         | 33:33 |       |
-| IMPLEMENTATION Release notes and backlog grooming       |         |       |  1:41 |
+| COMPLETED Sprint and product backlog grooming           |         |       |  1:41 |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
@@ -27,10 +27,10 @@ Clock summary at [2013-05-31 Fri 08:43]
 | COMPLETED Update C++ dia model to reflect code changes  |         |       |  1:08 |
 | COMPLETED Tidy-up workflow class                        |         |       |  0:20 |
 | COMPLETED Visitor header file not included in includer  |         |       |  0:24 |
-| IMPLEMENTATION Move services into their own type        |         |       |  0:36 |
+| CANCELLED Move services into their own type             |         |       |  0:36 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-06-02 Sun 22:57]
     CLOCK: [2013-05-30 Thu 08:28]--[2013-05-30 Thu 08:38] =>  0:10
     CLOCK: [2013-05-30 Thu 07:47]--[2013-05-30 Thu 08:18] =>  0:31

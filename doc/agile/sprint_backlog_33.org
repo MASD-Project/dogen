@@ -1,32 +1,33 @@
-g#+title: Release Notes for Sprint 33
+#+title: Sprint Backlog 33
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 33.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-09-08 Sun 21:59]
+Clock summary at [2014-05-27 Tue 13:04]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *24:46* |       |      |
+| *Total time*                                                        | *25:23* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                     |         | 24:46 |      |
-| IMPLEMENTATION Release notes and backlog grooming                   |         |       | 0:14 |
+| Development Stories Implemented                                     |         | 25:23 |      |
+| COMPLETED Sprint and product backlog grooming                       |         |       | 0:14 |
 | COMPLETED Remove prototype model                                    |         |       | 0:04 |
 | COMPLETED Create the initial skeleton for the intermediate model    |         |       | 9:44 |
 | COMPLETED Add a data directory and populate it with main data files |         |       | 4:00 |
 | COMPLETED Implement the preamble factory                            |         |       | 6:58 |
 | COMPLETED Create a modeline formatter                               |         |       | 1:38 |
 | COMPLETED Create a comments formatter                               |         |       | 2:08 |
+| CANCELLED Create a basic C++ workflow in SML to OM model            |         |       | 0:37 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                       :task:
     CLOSED: [2013-09-09 Mon 08:13]
     CLOCK: [2013-08-27 Tue 21:40]--[2013-08-27 Tue 21:41] =>  0:01
     CLOCK: [2013-08-23 Fri 07:59]--[2013-08-23 Fri 08:00] =>  0:01

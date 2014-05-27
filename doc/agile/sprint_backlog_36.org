@@ -1,23 +1,23 @@
-#+title: Release Notes for Sprint 36
+#+title: Sprint Backlog 36
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 36.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-21 Mon 07:53]
+Clock summary at [2014-05-27 Tue 13:04]
 
 | Headline                                                             | Time    |       |      |
 |----------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                         | *11:14* |       |      |
 |----------------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                                      |         | 11:14 |      |
-| COMPLETED Release notes and backlog grooming                         |         |       | 0:48 |
+| COMPLETED Sprint and product backlog grooming                        |         |       | 0:48 |
 | COMPLETED Add tests around model tagging                             |         |       | 0:46 |
 | COMPLETED Add tagging for types                                      |         |       | 2:48 |
 | COMPLETED Add tagging to SML workflow                                |         |       | 0:20 |
@@ -27,7 +27,7 @@ Clock summary at [2013-10-21 Mon 07:53]
 | CANCELLED Remove speculative facet layers for hash and serialization |         |       | 0:07 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-10-21 Mon 07:53]
     CLOCK: [2013-10-21 Mon 07:49]--[2013-10-21 Mon 07:53] =>  0:04
     CLOCK: [2013-10-16 Wed 12:37]--[2013-10-16 Wed 12:49] =>  0:12

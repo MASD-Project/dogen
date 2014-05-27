@@ -1,23 +1,23 @@
-#+title: Release Notes for Sprint 26
+#+title: Sprint Backlog 26
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 26.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-19 Sun 21:52]
+Clock summary at [2014-05-27 Tue 13:02]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                            | *37:31* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                                         |         | 37:31 |       |
-| COMPLETED Release notes and backlog grooming                            |         |       |  1:08 |
+| COMPLETED Sprint and product backlog grooming                           |         |       |  1:08 |
 | COMPLETED Fix build break on visitor tests                              |         |       |  0:32 |
 | COMPLETED Remove workflow aspects from transformer                      |         |       |  2:23 |
 | COMPLETED Add tests for profiler                                        |         |       |  1:56 |
@@ -35,7 +35,7 @@ Clock summary at [2013-05-19 Sun 21:52]
 | CANCELLED Add =extract_key= function                                    |         |       |  0:22 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-05-19 Sun 21:51]
     CLOCK: [2013-05-16 Thu 18:40]--[2013-05-16 Thu 19:05] =>  0:25
     CLOCK: [2013-05-16 Thu 18:26]--[2013-05-16 Thu 18:30] =>  0:04

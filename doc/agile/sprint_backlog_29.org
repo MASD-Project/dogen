@@ -1,23 +1,23 @@
-#+title: Release Notes for Sprint 29
+#+title: Sprint Backlog 29
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 29.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-30 Sun 22:10]
+Clock summary at [2014-05-27 Tue 13:03]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                       | *50:03* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                                    |         | 50:03 |       |
-| COMPLETED Release notes and backlog grooming                       |         |       |  0:53 |
+| COMPLETED Sprint and product backlog grooming                      |         |       |  0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       |  0:52 |
 | COMPLETED Split resolver from merger                               |         |       |  3:18 |
 | COMPLETED Property container should be a list not a vector         |         |       |  0:18 |
@@ -33,7 +33,7 @@ Clock summary at [2013-06-30 Sun 22:10]
 | CANCELLED Create a =key_extractor= service                         |         |       |  0:27 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-06-30 Sun 22:10]
     CLOCK: [2013-06-23 Sun 20:50]--[2013-06-23 Sun 21:11] =>  0:21
     CLOCK: [2013-06-22 Sat 17:06]--[2013-06-22 Sat 17:14] =>  0:08

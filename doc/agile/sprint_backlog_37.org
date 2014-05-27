@@ -1,23 +1,23 @@
-#+title: Release Notes for Sprint 37
+#+title: Sprint Backlog 37
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 37.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-11-04 Mon 07:43]
+Clock summary at [2014-05-27 Tue 13:04]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                        | *18:15* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                                     |         | 18:15 |      |
-| COMPLETED Release notes and backlog grooming                        |         |       | 0:07 |
+| COMPLETED Sprint and product backlog grooming                       |         |       | 0:07 |
 | COMPLETED Add types header formatter to workflow                    |         |       | 4:14 |
 | COMPLETED Add support for =boost::property_tree::ptree=             |         |       | 1:43 |
 | COMPLETED Implement meta-data support as a =ptree=                  |         |       | 2:36 |
@@ -30,7 +30,7 @@ Clock summary at [2013-11-04 Mon 07:43]
 | CANCELLED Add tests for properties and compiler generated functions |         |       | 0:30 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-11-04 Mon 07:43]
     CLOCK: [2013-11-04 Mon 07:41]--[2013-11-04 Mon 07:42] =>  0:01
     CLOCK: [2013-10-21 Mon 07:53]--[2013-10-21 Mon 07:59] =>  0:06

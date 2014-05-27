@@ -1,23 +1,23 @@
-g#+title: Release Notes for Sprint 35
+#+title: Sprint Backlog 35
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 35.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-10-20 Sun 08:22]
+Clock summary at [2014-05-27 Tue 13:04]
 
 | Headline                                                                 | Time    |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                             | *36:54* |       |       |
 |--------------------------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                                          |         | 36:54 |       |
-| COMPLETED Release notes and backlog grooming                             |         |       |  0:39 |
+| COMPLETED Sprint and product backlog grooming                            |         |       |  0:39 |
 | COMPLETED Refactor OM tests to avoid over-inclusion                      |         |       |  0:32 |
 | COMPLETED Convert implementation specific parameters to list             |         |       |  1:06 |
 | COMPLETED Rename implementation specific parameters                      |         |       |  0:50 |
@@ -31,7 +31,7 @@ Clock summary at [2013-10-20 Sun 08:22]
 | CANCELLED Implement the property cache in SML                            |         |       |  1:14 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-10-07 Mon 18:00]
     CLOCK: [2013-09-30 Mon 17:58]--[2013-09-30 Mon 18:25] =>  0:22
     CLOCK: [2013-09-23 Mon 07:50]--[2013-09-23 Mon 08:02] =>  0:12

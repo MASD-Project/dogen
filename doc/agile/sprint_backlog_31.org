@@ -1,28 +1,29 @@
-#+title: Release Notes for Sprint 31
+#+title: Sprint Backlog 31
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 31.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-07-23 Tue 07:48]
+Clock summary at [2014-05-27 Tue 13:03]
 
-| Headline                                                           | Time   |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                       | *4:32* |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                    |        | 4:32 |      |
-| IMPLEMENTATION Release notes and backlog grooming                  |        |      | 0:06 |
-| COMPLETED Update C++ model after latest SML changes                |        |      | 2:39 |
-| IMPLEMENTATION Get all unit tests to pass after latest SML changes |        |      | 1:47 |
+| Headline                                                      | Time   |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| *Total time*                                                  | *4:32* |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                               |        | 4:32 |      |
+| COMPLETED Sprint and product backlog grooming                 |        |      | 0:06 |
+| COMPLETED Update C++ model after latest SML changes           |        |      | 2:39 |
+| COMPLETED Get all unit tests to pass after latest SML changes |        |      | 1:47 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
+    CLOSED: [2014-05-27 Tue 13:03]
     CLOCK: [2013-07-15 Mon 07:50]--[2013-07-15 Mon 07:56] =>  0:06
 
 *** COMPLETED Update C++ model after latest SML changes               :story:

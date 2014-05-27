@@ -1,23 +1,23 @@
-#+title: Release Notes for Sprint 40
+#+title: Sprint Backlog 40
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 40.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-16 Mon 07:26]
+Clock summary at [2014-05-27 Tue 13:05]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                          | *34:32* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
 | Development Stories Implemented                                       |         | 34:32 |       |
-| COMPLETED Release notes and backlog grooming                          |         |       |  1:11 |
+| COMPLETED Sprint and product backlog grooming                         |         |       |  1:11 |
 | COMPLETED Update manual                                               |         |       |  0:19 |
 | COMPLETED Add more tests to =concept_indexer=                         |         |       |  3:22 |
 | COMPLETED Plug =concept_indexer= into workflow                        |         |       |  2:14 |
@@ -31,7 +31,7 @@ Clock summary at [2013-12-16 Mon 07:26]
 | CANCELLED Create a =relationship_indexer= and add tests               |         |       |  0:15 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-12-16 Mon 07:25]
     CLOCK: [2013-12-16 Mon 07:11]--[2013-12-16 Mon 07:25] =>  0:14
     CLOCK: [2013-12-13 Fri 18:17]--[2013-12-13 Fri 18:19] =>  0:02

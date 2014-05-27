@@ -1,30 +1,30 @@
-#+title: Release Notes for Sprint 32
+#+title: Sprint Backlog 32
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 32.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-08-23 Fri 07:49]
+Clock summary at [2014-05-27 Tue 13:03]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *16:53* |       |      |
+| *Total time*                                                          | *17:29* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                       |         | 16:53 |      |
-| COMPLETED Release notes and backlog grooming                          |         |       | 0:35 |
+| Development Stories Implemented                                       |         | 17:29 |      |
+| COMPLETED Sprint and product backlog grooming                         |         |       | 0:35 |
 | COMPLETED Split transformation code from C++ model into its own model |         |       | 2:57 |
 | COMPLETED Create a formatting workflow in C++ formatters model        |         |       | 2:08 |
 | COMPLETED Tidy-up all C++ models                                      |         |       | 2:20 |
-| CANCELLED Make a more truthful C++ model                              |         |       | 8:53 |
+| CANCELLED Make a more truthful C++ model                              |         |       | 9:29 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                       :task:
     CLOSED: [2013-08-23 Fri 07:47]
     CLOCK: [2013-08-15 Thu 18:22]--[2013-08-15 Thu 18:29] =>  0:07
     CLOCK: [2013-08-08 Thu 08:23]--[2013-08-08 Thu 08:25] =>  0:02

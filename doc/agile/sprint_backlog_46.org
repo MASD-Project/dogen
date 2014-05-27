@@ -1,9 +1,9 @@
-#+title: Release Notes for Sprint 46
+#+title: Sprint Backlog 46
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 46.
 
@@ -16,19 +16,19 @@ agents with green builds, and the packages uploaded to GDrive.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-18 Tue 08:03]
+Clock summary at [2014-05-27 Tue 13:06]
 
 | Headline                                                       | Time    |       |      |
 |----------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                   | *14:59* |       |      |
 |----------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                                |         | 14:59 |      |
-| COMPLETED Release notes and backlog grooming                   |         |       | 1:22 |
+| COMPLETED Sprint and product backlog grooming                  |         |       | 1:22 |
 | COMPLETED Updates to the manual and readme files               |         |       | 7:59 |
 | COMPLETED Investigate a =systemd= approach for debian machines |         |       | 5:38 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2014-03-18 Tue 08:02]
     CLOCK: [2014-03-05 Wed 08:04]--[2014-03-05 Wed 08:17] =>  0:13
     CLOCK: [2014-03-05 Wed 08:02]--[2014-03-05 Wed 08:05] =>  0:03
@@ -37,7 +37,7 @@ Clock summary at [2014-03-18 Tue 08:03]
     CLOCK: [2014-03-03 Mon 17:51]--[2014-03-03 Mon 17:57] =>  0:06
     CLOCK: [2014-03-03 Mon 07:58]--[2014-03-03 Mon 08:48] =>  0:50
 
-Updates to release notes and backlog.
+Updates to sprint and product backlog.
 
 *** COMPLETED Updates to the manual and readme files                   :task:
     CLOSED: [2014-03-18 Tue 08:02]

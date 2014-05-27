@@ -1,9 +1,9 @@
-#+title: Release Notes for Sprint 43
+#+title: Sprint Backlog 43
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 43.
 
@@ -34,14 +34,14 @@ the current C++ model infrastructure.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-02-04 Tue 08:05]
+Clock summary at [2014-05-27 Tue 13:06]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                                 | *23:17* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                                              |         | 23:17 |      |
-| COMPLETED Release notes and backlog grooming                                 |         |       | 3:19 |
+| COMPLETED Sprint and product backlog grooming                                |         |       | 3:19 |
 | COMPLETED Start a blog post on dogen's development methodology               |         |       | 1:46 |
 | COMPLETED Update the manual                                                  |         |       | 2:30 |
 | COMPLETED Move all C++ specific code from =formatters= into =cpp_formatters= |         |       | 1:10 |
@@ -57,7 +57,7 @@ Clock summary at [2014-02-04 Tue 08:05]
 | CANCELLED Sync C++ model structure with SML                                  |         |       | 3:32 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2014-02-04 Tue 08:04]
     CLOCK: [2014-02-04 Tue 07:55]--[2014-02-04 Tue 08:04] =>  0:09
     CLOCK: [2014-01-25 Sat 16:11]--[2014-01-25 Sat 16:20] =>  0:09
@@ -73,7 +73,7 @@ Clock summary at [2014-02-04 Tue 08:05]
     CLOCK: [2014-01-13 Mon 07:09]--[2014-01-13 Mon 07:23] =>  0:14
     CLOCK: [2014-01-12 Sun 18:23]--[2014-01-12 Sun 18:43] =>  0:20
 
-Updates to release notes and backlog.
+Updates to sprint and product backlog.
 
 *** COMPLETED Start a blog post on dogen's development methodology    :story:
     CLOSED: [2014-02-04 Tue 07:59]

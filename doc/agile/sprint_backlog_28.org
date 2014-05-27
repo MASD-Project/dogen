@@ -1,16 +1,16 @@
-#+title: Release Notes for Sprint 28
+#+title: Sprint Backlog 28
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 28.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-17 Mon 07:56]
+Clock summary at [2014-05-27 Tue 13:03]
 
 | Headline                                                         | Time    |       |       |
 |------------------------------------------------------------------+---------+-------+-------|
@@ -25,7 +25,7 @@ Clock summary at [2013-06-17 Mon 07:56]
 | COMPLETED Test move constructors in test model                   |         |       |  2:52 |
 | COMPLETED Transformer tests should check that docs are not empty |         |       |  0:28 |
 | COMPLETED Add to the introduction in manual                      |         |       |  1:14 |
-| COMPLETED Release notes and backlog grooming                     |         |       |  1:13 |
+| COMPLETED Sprint and product backlog grooming                    |         |       |  1:13 |
 | COMPLETED Improve modeling of domain driven concepts in SML      |         |       | 14:40 |
 | COMPLETED Break down SML into concepts at the design level       |         |       |  1:27 |
 | COMPLETED Add initial support for concepts at the SML level      |         |       |  1:45 |
@@ -100,7 +100,7 @@ documentation if necessary.
     CLOCK: [2013-06-14 Fri 07:49]--[2013-06-14 Fri 08:22] =>  0:33
     CLOCK: [2013-06-13 Thu 20:29]--[2013-06-13 Thu 21:00] =>  0:31
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-06-17 Mon 07:52]
     CLOCK: [2013-06-17 Mon 07:47]--[2013-06-17 Mon 07:56] =>  0:09
     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25

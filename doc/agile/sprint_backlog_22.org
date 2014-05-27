@@ -1,9 +1,9 @@
-#+title: Release Notes for Sprint 22
+#+title: Sprint Backlog 22
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 22.
 
@@ -82,7 +82,7 @@ With the setup of =bell=, the new test machine, it seems the monitors
 on lorenz stop behaving. The primary monitor became what was the
 secondary monitor. Get everything back to normal.
 
-**** COMPLETED Grooming of release notes across all products           :task:
+**** COMPLETED Grooming of sprint backlogs across all products         :task:
      CLOCK: [2012-12-03 Mon 13:07]--[2012-12-03 Mon 13:20] =>  0:13
 
 **** COMPLETED Setup new sound card on lorenz                         :story:

@@ -1,13 +1,21 @@
-#+title: Release Notes for Sprint 20
+#+title: Sprint Backlog 20
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 20.
 
 ** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-05-27 Tue 13:01]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
 
 *** COMPLETED Add support for boost and STL models                    :story:
     CLOSED: [2012-11-16 Fri 10:03]

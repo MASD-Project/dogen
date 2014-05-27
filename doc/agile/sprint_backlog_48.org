@@ -1,9 +1,9 @@
-#+title: Release Notes for Sprint 48
+#+title: Sprint Backlog 48
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 48.
 
@@ -13,14 +13,14 @@ back up and running. We have stalled over the last few sprints.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-05-05 Mon 07:59]
+Clock summary at [2014-05-27 Tue 13:07]
 
 | Headline                                                   | Time    |       |      |
 |------------------------------------------------------------+---------+-------+------|
 | *Total time*                                               | *18:21* |       |      |
 |------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                            |         | 18:21 |      |
-| COMPLETED Release notes and backlog grooming               |         |       | 0:51 |
+| COMPLETED Sprint and product backlog grooming              |         |       | 0:51 |
 | COMPLETED Updates to the manual and readme files           |         |       | 2:07 |
 | COMPLETED Log start and finish of dogen with version       |         |       | 0:20 |
 | COMPLETED Install packages into =/usr=                     |         |       | 2:23 |
@@ -35,7 +35,7 @@ Clock summary at [2014-05-05 Mon 07:59]
 | COMPLETED Remove generic interfaces in =formatters=        |         |       | 0:17 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2014-05-05 Mon 07:59]
     CLOCK: [2014-05-04 Sun 12:50]--[2014-05-04 Sun 13:21] =>  0:31
     CLOCK: [2014-04-30 Wed 08:30]--[2014-04-30 Wed 08:32] =>  0:02
@@ -43,7 +43,7 @@ Clock summary at [2014-05-05 Mon 07:59]
     CLOCK: [2014-04-28 Mon 08:28]--[2014-04-28 Mon 08:30] =>  0:02
     CLOCK: [2014-04-19 Sat 23:25]--[2014-04-19 Sat 23:35] =>  0:10
 
-Updates to release notes and backlog.
+Updates to sprint and product backlog.
 
 *** COMPLETED Updates to the manual and readme files                   :task:
     CLOSED: [2014-05-05 Mon 07:59]

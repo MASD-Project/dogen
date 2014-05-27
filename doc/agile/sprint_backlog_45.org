@@ -1,9 +1,9 @@
-#+title: Release Notes for Sprint 45
+#+title: Sprint Backlog 45
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 45.
 
@@ -17,14 +17,14 @@ the =formatters= model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-03-18 Tue 22:04]
+Clock summary at [2014-05-27 Tue 13:06]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
 | *Total time*                                         | *8:23* |      |      |
 |------------------------------------------------------+--------+------+------|
 | Development Stories Implemented                      |        | 8:23 |      |
-| COMPLETED Release notes and backlog grooming         |        |      | 0:27 |
+| COMPLETED Sprint and product backlog grooming        |        |      | 0:27 |
 | COMPLETED Updates to the manual and readme files     |        |      | 0:25 |
 | COMPLETED Fix Debian packages to use system boost    |        |      | 1:12 |
 | COMPLETED Integral: test with rspec                  |        |      | 0:12 |
@@ -32,13 +32,13 @@ Clock summary at [2014-03-18 Tue 22:04]
 | COMPLETED Integral: re-implement bash script in ruby |        |      | 5:34 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2014-03-03 Mon 07:58]
     CLOCK: [2014-03-03 Mon 07:51]--[2014-03-03 Mon 07:57] =>  0:06
     CLOCK: [2014-02-18 Tue 08:05]--[2014-02-18 Tue 08:22] =>  0:17
     CLOCK: [2014-02-18 Tue 08:01]--[2014-02-18 Tue 08:05] =>  0:04
 
-Updates to release notes and backlog.
+Updates to sprint and product backlog.
 
 *** COMPLETED Updates to the manual and readme files                   :task:
     CLOSED: [2014-03-03 Mon 07:56]

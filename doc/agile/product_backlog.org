@@ -1,9 +1,9 @@
-#+title: Backlog
+#+title: Product Backlog
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Backlog
+* Stories
 ** Development Stories
 
 Stories that we intend to look at, at some point.

@@ -1,30 +1,30 @@
-#+title: Release Notes for Sprint 39
+#+title: Sprint Backlog 39
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
-* Release Notes
+* Stories
 
 This file contains all stories that were closed during sprint 39.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-12-03 Tue 08:01]
+Clock summary at [2014-05-27 Tue 13:05]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                       | *13:02* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                                    |         | 13:02 |      |
-| COMPLETED Release notes and backlog grooming                       |         |       | 0:36 |
+| COMPLETED Sprint and product backlog grooming                      |         |       | 0:36 |
 | COMPLETED Update manual                                            |         |       | 0:14 |
 | COMPLETED Mock: distinguish between concept names and type names   |         |       | 0:32 |
 | COMPLETED Split indexer into concepts and inheritance              |         |       | 8:03 |
 | COMPLETED Finish implementation of =concept_indexer= and add tests |         |       | 3:37 |
 #+end:
 
-*** COMPLETED Release notes and backlog grooming                       :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
     CLOSED: [2013-12-03 Tue 07:59]
     CLOCK: [2013-12-03 Tue 07:56]--[2013-12-03 Tue 08:01] =>  0:05
     CLOCK: [2013-11-26 Tue 07:20]--[2013-11-26 Tue 07:22] =>  0:02
