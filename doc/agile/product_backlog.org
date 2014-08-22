@@ -8,6 +8,18 @@
 
 Stories that we intend to look at, at some point.
 
+*** Usage of external module path in cmakelists                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all primitives was:
+
+: dogen_all_primitives
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_primitives
+
 *** Rename the =database= test model to =odb=                         :story:
 
 This name is a bit misleading, this is not a generic database model
