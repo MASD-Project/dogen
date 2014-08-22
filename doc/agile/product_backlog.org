@@ -8,6 +8,11 @@
 
 Stories that we intend to look at, at some point.
 
+*** Rename the =database= test model to =odb=                         :story:
+
+This name is a bit misleading, this is not a generic database model
+but its designed to specifically test odb.
+
 *** Add support for BSON                                              :story:
 
 It would be useful to support Mongo DB's BSON. There is a C++ stand
@@ -27,13 +32,6 @@ the project to travis and stop managing the agents.
 
 - https://travis-ci.org/
 - [[http://computer-vision-talks.com/articles/2014-02-23-using-travis-ci/][Using Travis-CI for continuous testing your projects]]
-
-*** Fix doxygen warnings                                              :story:
-
-: Warning: Tag `XML_SCHEMA' at line 213 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
-:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
-: Warning: Tag `XML_DTD' at line 214 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
-:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 
 *** Move includes and header guard into entity                        :story:
 
