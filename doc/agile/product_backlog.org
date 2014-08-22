@@ -3523,6 +3523,14 @@ Old understanding:
 - [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
   support.
 
+*** Fix doxygen warnings                                              :story:
+
+: Warning: Tag `XML_SCHEMA' at line 213 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
+:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+: Warning: Tag `XML_DTD' at line 214 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
+:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+
+
 ** Won't fix
 
 Stories which we do not think we are going to work on.
