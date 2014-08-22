@@ -700,18 +700,43 @@ tests to make sure your system is fully supported.
 In order to ensure your platform is properly supported by Dogen, you
 should run the test suite and ensure that all tests pass.
 
-If you have setup ODB support, you will need to do the following steps
-first:
+***** Setting up PostgreSQL
 
-- install and configure [[http://www.postgresql.org/][PostgreSQL]];
-- [[http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html][configure]] access to local and remote users;
+If you have configured ODB support, you need a PostgreSQL database in
+order to run the unit tests. To do so:
+
+- install and configure a version of [[http://www.postgresql.org/][PostgreSQL]] of your choice.
+- [[http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html][configure]] access to local and remote users.
 - create a database called =musseque= and a user called =build= with a
-  password of your choice;
+  password of your choice.
 - create a =.pgpass= file as described [[http://wiki.postgresql.org/wiki/Pgpass][here]] (more details in the
-  Postgres manual, section [[http://www.postgresql.org/docs/current/static/libpq-pgpass.html][The Password File]]). Test access to the
-  database before proceeding.
+  Postgres manual, section [[http://www.postgresql.org/docs/current/static/libpq-pgpass.html][The Password File]]). Example, replacing
+  /PASSWORD/:
 
-Finally, run:
+: echo localhost:5342:musseque:build:PASSWORD > ~/.pgpass
+: chmod 0600 ~/.pgpass
+
+- Test access to the database before proceeding:
+
+: psql -U build -d musseque -w
+
+- It should ask you for no password. Then in psql run:
+
+: create schema kitanda;
+
+- In file =projects/database/spec/main.cpp=, uncomment the line:
+
+: // odb::schema_catalog::create_schema(*db);
+
+- Run the database tests:
+
+: make run_database_spec
+
+- Comment the line again.
+
+***** Running all tests
+
+To run all tests you can simply do:
 
 : make run_all_specs
 
