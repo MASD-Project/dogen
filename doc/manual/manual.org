@@ -2486,6 +2486,7 @@ information with regards to C++ standards.
 - [[https://github.com/holtgrewe/linty][Linty]]: Style Checking with Python & libclang. Requires v3.0.
 - [[http://www.parashift.com/c%2B%2B-faq-lite/][C++ FAQ]]: large resource on how to use the language
 - [[http://www.doc.ic.ac.uk/lab/cplus/c%2B%2B.rules/][Programming in C++, Rules and Recommendations]]
+- [[http://www.chromium.org/developers/coding-style/cpp-dos-and-donts][C++ Dos and Don'ts]]
 
 **** C++ Reference
 
