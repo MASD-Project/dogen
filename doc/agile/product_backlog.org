@@ -8,6 +8,33 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for BSON                                              :story:
+
+It would be useful to support Mongo DB's BSON. There is a C++ stand
+alone library for this:
+
+https://github.com/jbenet/bson-cpp
+
+For examples on how to use the C++ API see the tutorial:
+
+https://github.com/mongodb/mongo-cxx-driver/wiki/Tutorial
+
+*** Add dogen to travis                                               :story:
+
+We're not doing a very good job of managing the CI support in
+CDash. We are now down to a single build agent on OSX. We should add
+the project to travis and stop managing the agents.
+
+- https://travis-ci.org/
+- [[http://computer-vision-talks.com/articles/2014-02-23-using-travis-ci/][Using Travis-CI for continuous testing your projects]]
+
+*** Fix doxygen warnings                                              :story:
+
+: Warning: Tag `XML_SCHEMA' at line 213 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
+:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+: Warning: Tag `XML_DTD' at line 214 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
+:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+
 *** Move includes and header guard into entity                        :story:
 
 With this a formatter can now rely only on entities rather than
@@ -3522,33 +3549,6 @@ Old understanding:
   will be nonsense.
 - [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
   support.
-
-*** Fix doxygen warnings                                              :story:
-
-: Warning: Tag `XML_SCHEMA' at line 213 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
-:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
-: Warning: Tag `XML_DTD' at line 214 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
-:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
-
-*** Add dogen to travis                                               :story:
-
-We're not doing a very good job of managing the CI support in
-CDash. We are now down to a single build agent on OSX. We should add
-the project to travis and stop managing the agents.
-
-- https://travis-ci.org/
-- [[http://computer-vision-talks.com/articles/2014-02-23-using-travis-ci/][Using Travis-CI for continuous testing your projects]]
-
-*** Add support for BSON                                              :story:
-
-It would be useful to support Mongo DB's BSON. There is a C++ stand
-alone library for this:
-
-https://github.com/jbenet/bson-cpp
-
-For examples on how to use the C++ API see the tutorial:
-
-https://github.com/mongodb/mongo-cxx-driver/wiki/Tutorial
 
 ** Won't fix
 

@@ -1,0 +1,94 @@
+#+title: Sprint Backlog 50
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Stories
+
+This file contains all stories that were closed during sprint 50.
+
+The *Mission Statement* for this sprint is to get dogen development up
+and running again, after a long break.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-08-22 Fri 12:41]
+
+| Headline                                             | Time   |      |      |
+|------------------------------------------------------+--------+------+------|
+| *Total time*                                         | *1:19* |      |      |
+|------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                      |        | 1:19 |      |
+| IMPLEMENTATION Sprint and product backlog grooming   |        |      | 0:29 |
+| COMPLETED Update instructions in manual for Postgres |        |      | 0:50 |
+#+end:
+
+*** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-08-22 Fri 12:10]--[2014-08-22 Fri 12:39] =>  0:29
+
+Updates to sprint and product backlog.
+
+*** COMPLETED Update instructions in manual for Postgres              :story:
+    CLOSED: [2014-08-22 Fri 12:39]
+    CLOCK: [2014-08-22 Fri 11:20]--[2014-08-22 Fri 12:10] =>  0:50
+
+After debian's upgrade of Postgres to 9.4 we need to do a fresh setup
+of the RDBMS. It seems its not quite as easy as expected. Update the
+manual to make this easier in the future.
+
+- Create a new cluster for 9.4 as it seems debian doesn't do it any
+  more:
+
+: pg_createcluster 9.4 main
+
+- Remove old clusters:
+
+: pg_dropcluster 9.3 main
+: pg_dropcluster 9.1 main
+: pg_dropcluster 9.0 main
+
+- Create user =build= and databases as usual.
+
+*** Review where we are with the last refactoring                     :story:
+
+After the long hiatus its not very clear where we left the
+formatters refactoring. We need to go through the last changes and see
+what is left to be done.
+
+*** Use formatting settings in formatters model                       :story:
+
+We need to replace the references to the c++ settings directly with
+formatter settings.
+
+*** Move all the configuration options into tags                      :story:
+
+Parameters as per analysis story.
+
+**** Create a tags class in =config=                                   :task:
+
+We need to declare all the tags we're exporting.
+
+**** Create a =property_tree_parser= that outputs settings             :task:
+
+The parser should take the existing settings as an input and return
+an overridden version of them.
+
+**** Plug the parser into the SML sub-workflow                         :task:
+
+When we do this we need to make sure everyone is using the same
+settings; there are many places where the settings have been passed in
+by reference. Also, we need to make sure the target model is the first
+one to be processed.
+
+**** Update all models and tests to use the new tags                   :task:
+
+Once the config options are in we need to start making use of them to
+ensure they work exactly as before.
+
+**** Remove all C++ command line settings                              :task:
+
+Once the overrides have been proven to work, we need to remove the
+command line options and make sure nothing breaks.
+
+** Deprecated Development Stories
