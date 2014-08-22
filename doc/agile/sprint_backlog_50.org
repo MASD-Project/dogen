@@ -13,15 +13,16 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-08-22 Fri 12:49]
+Clock summary at [2014-08-22 Fri 13:40]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *1:29* |      |      |
+| *Total time*                                         | *2:19* |      |      |
 |------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 1:29 |      |
+| Development Stories Implemented                      |        | 2:19 |      |
 | IMPLEMENTATION Sprint and product backlog grooming   |        |      | 0:39 |
 | COMPLETED Update instructions in manual for Postgres |        |      | 0:50 |
+| IMPLEMENTATION Tidy-up test model folder structure   |        |      | 0:50 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -51,7 +52,16 @@ manual to make this easier in the future.
 
 - Create user =build= and databases as usual.
 
-*** Tidy-up test model folder structure                               :story:
+*** COMPLETED Fix doxygen warnings                                    :story:
+    CLOSED: [2014-08-22 Fri 13:02]
+
+: Warning: Tag `XML_SCHEMA' at line 213 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
+:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+: Warning: Tag `XML_DTD' at line 214 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
+:          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+
+*** IMPLEMENTATION Tidy-up test model folder structure                :story:
+    CLOCK: [2014-08-22 Fri 12:49]--[2014-08-22 Fri 12:53] =>  0:04
 
 *New understanding*:
 
@@ -60,7 +70,8 @@ top-level directory to house the test models and worry about cleverer
 organisation later. At present its difficult to understand the code
 structure due to the proliferation of test models.
 
-*Old understanding*:
+**** COMPLETED Old understanding                                       :note:
+     CLOSED: [2014-08-22 Fri 12:53]
 
 We should take this opportunity to reorganise the test model folders,
 perhaps with a structure similar to this (in projects):
@@ -87,6 +98,26 @@ would not contain the specs and thus be different). We will probably
 need a 03 sanitizer, an 11 sanitizer, etc.
 
 See [[*Add%20C%2B%2B-03%20mode][C++ 03 support]].
+
+**** COMPLETED Add section in manual for test models                   :task:
+     CLOSED: [2014-08-22 Fri 13:40]
+     CLOCK: [2014-08-22 Fri 13:06]--[2014-08-22 Fri 13:40] =>  0:34
+
+We should really describe the purpose of the test models in the manual.
+
+**** IMPLEMENTATION Create =test_models= folder and move all test code to it :task:
+     CLOCK: [2014-08-22 Fri 12:53]--[2014-08-22 Fri 13:05] =>  0:12
+
+Create the folder and move code manually.
+
+**** Fix code generation to generate on new folder                     :task:
+
+Ensure dogen is generating the test models in the right place.
+
+**** Fix unit tests                                                    :task:
+
+Ensure all CMake code that relies on the path to the test models still
+works.
 
 *** Review where we are with the last refactoring                     :story:
 
