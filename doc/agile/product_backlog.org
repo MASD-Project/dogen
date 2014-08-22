@@ -754,6 +754,8 @@ coded to these two types of transformations; this is just due to the
 structure of the meta-data tags, which are not very suitable to
 describe a structure like a graph.
 
+Note: we should consider using [[https://github.com/jamboree/bustache][bustache]] for this.
+
 *** Special purpose formatters                                        :story:
 
 In the future, when the creation of formatters is made easier, we may
