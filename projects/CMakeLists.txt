@@ -47,7 +47,7 @@ endmacro()
 
 #
 # compiler and linker flags
-#
+
 
 # enable as many warnings as possible
 set(warning_flags "-Wall -Wextra")
@@ -132,49 +132,6 @@ endif()
 # parameters for boost tests
 set(boost_test_parameters "")
 
-file(GLOB_RECURSE all_hpp_files RELATIVE
-    "${CMAKE_SOURCE_DIR}/"
-    "${CMAKE_SOURCE_DIR}/projects/*.hpp")
-
-set(header_validation_template "build/templates/cpp/header_validation.cpp.in")
-set(header_validation_files "")
-
-set(ignore_file false)
-set(file_counter "0")
-
-foreach(hpp_file ${all_hpp_files})
-    if(NOT ODB_FOUND)
-        if (hpp_file MATCHES "database")
-            set(ignore_file true)
-        endif()
-    endif()
-
-    if(NOT EOS_FOUND)
-        if (hpp_file MATCHES "eos")
-            set(ignore_file true)
-        endif()
-    endif()
-
-    if(NOT ignore_file)
-        set(input_filename ${CMAKE_SOURCE_DIR}/${header_validation_template})
-        set(output_filename "${CMAKE_BINARY_DIR}/${hpp_file}_hv.cpp")
-        set(DUMMY_FUNCTION "")
-        string(REGEX REPLACE "\\." "_" DUMMY_FUNCTION "dummy_${file_counter}")
-        set(header_validation_target ${CMAKE_SOURCE_DIR}/${hpp_file})
-        configure_file(${input_filename} ${output_filename})
-        set(header_validation_files
-            ${header_validation_files} ${output_filename})
-    endif()
-    set(ignore_file false)
-    math(EXPR file_counter "${file_counter} + 1")
-endforeach()
-
-add_library(header_validation STATIC ${header_validation_files})
-set_target_properties(header_validation
-    PROPERTIES OUTPUT_NAME dogen_header_validation)
-set_target_properties(header_validation
-    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
-
 # user includes
 include_directories(
     # generated header files
@@ -182,6 +139,7 @@ include_directories(
 
     # real code
     ${CMAKE_SOURCE_DIR}/projects/dia/include
+    ${CMAKE_SOURCE_DIR}/projects/dia_to_sml/include
     ${CMAKE_SOURCE_DIR}/projects/sml/include
     ${CMAKE_SOURCE_DIR}/projects/config/include
     ${CMAKE_SOURCE_DIR}/projects/cpp/include
@@ -191,60 +149,15 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/knit/include
     ${CMAKE_SOURCE_DIR}/projects/knitter/include
-    ${CMAKE_SOURCE_DIR}/projects/test_model_sanitizer/include
-
-    # test models
-    ${CMAKE_SOURCE_DIR}/projects/all_primitives/include
-    ${CMAKE_SOURCE_DIR}/projects/classes_in_a_package/include
-    ${CMAKE_SOURCE_DIR}/projects/classes_inout_package/include
-    ${CMAKE_SOURCE_DIR}/projects/classes_without_package/include
-    ${CMAKE_SOURCE_DIR}/projects/class_in_a_package/include
-    ${CMAKE_SOURCE_DIR}/projects/class_without_attributes/include
-    ${CMAKE_SOURCE_DIR}/projects/class_without_package/include
-    ${CMAKE_SOURCE_DIR}/projects/stand_alone_class/include
-    ${CMAKE_SOURCE_DIR}/projects/compressed/include
-    ${CMAKE_SOURCE_DIR}/projects/disable_full_ctor/include
-    ${CMAKE_SOURCE_DIR}/projects/disable_facet_folders/include
-    ${CMAKE_SOURCE_DIR}/projects/disable_cmakelists/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_domain/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_hash/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_io/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_serialization/include
-    ${CMAKE_SOURCE_DIR}/projects/two_layers_with_objects/include
-    ${CMAKE_SOURCE_DIR}/projects/dmp/include
-    ${CMAKE_SOURCE_DIR}/projects/split_project/dir/inc
-    ${CMAKE_SOURCE_DIR}/projects/trivial_inheritance/include
-    ${CMAKE_SOURCE_DIR}/projects/trivial_association/include
-    ${CMAKE_SOURCE_DIR}/projects/std_model/include
-    ${CMAKE_SOURCE_DIR}/projects/boost_model/include
-    ${CMAKE_SOURCE_DIR}/projects/comments/include
-    ${CMAKE_SOURCE_DIR}/projects/enumeration/include
-    ${CMAKE_SOURCE_DIR}/projects/exception/include
-    ${CMAKE_SOURCE_DIR}/projects/stereotypes/include
-    ${CMAKE_SOURCE_DIR}/projects/dia_to_sml/include
     )
-
-#
-# feature specific projects
-#
-if(ODB_FOUND)
-    message(STATUS "Adding ODB feature test project")
-    include_directories(${CMAKE_SOURCE_DIR}/projects/database/include)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
-endif()
-
-if(EOS_FOUND)
-    message(STATUS "Adding EOS feature test project")
-    include_directories(${CMAKE_SOURCE_DIR}/projects/eos_serialization/include)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/eos_serialization)
-endif()
 
 #
 # add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config)
@@ -260,111 +173,44 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_primitives)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_in_a_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_inout_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_without_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_in_a_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_attributes)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stand_alone_class)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_full_ctor)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_facet_folders)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_domain)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dmp)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_association)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/boost_model)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
+# test models
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)
 
-# global targets for codegen
-add_custom_target(rebase_codegen)
-add_custom_target(diff_codegen)
-add_custom_target(clean_codegen)
+file(GLOB_RECURSE all_hpp_files RELATIVE
+    "${CMAKE_SOURCE_DIR}/"
+    "${CMAKE_SOURCE_DIR}/projects/*.hpp")
 
-# targets for each test model
-foreach(dia_model ${all_dia_test_models})
-    set(model_name "")
-    get_filename_component(model_name ${dia_model} NAME_WE)
+set(header_validation_template "build/templates/cpp/header_validation.cpp.in")
+set(header_validation_files "")
 
-    set(top_dir "${stage_test_data_dir}/${model_name}")
+set(ignore_file false)
+set(file_counter "0")
 
-    set(model_folder_name "${model_name}")
-    if (model_name STREQUAL "disable_model_package")
-        set(model_folder_name "dmp")
+foreach(hpp_file ${all_hpp_files})
+    if (hpp_file MATCHES "test_models")
+        set(ignore_file true)
     endif()
 
-    set(actual_dir "${top_dir}/actual/${model_folder_name}")
-    set(expect_dir "${top_dir}/expected/${model_folder_name}")
-    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
+    if(NOT ignore_file)
+        set(input_filename ${CMAKE_SOURCE_DIR}/${header_validation_template})
+        set(output_filename "${CMAKE_BINARY_DIR}/${hpp_file}_hv.cpp")
+        set(DUMMY_FUNCTION "")
+        string(REGEX REPLACE "\\." "_" DUMMY_FUNCTION "dummy_${file_counter}")
 
-    if(EXISTS "${actual_dir}")
-        set(target_name "diff_${model_name}")
-        add_custom_target(${target_name}
-            COMMAND diff -r -u ${expect_dir} ${actual_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(diff_codegen ${target_name})
+        # note: do not remove the line below, it is used by the template
+        set(header_validation_target ${CMAKE_SOURCE_DIR}/${hpp_file})
 
-        set(target_name "rebase_${model_name}")
-        add_custom_target(${target_name}
-            COMMAND rm -rf ${git_dir}
-            COMMAND cp -r ${actual_dir} ${git_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(rebase_codegen ${target_name})
-
-        set(target_name "clean_${model_name}")
-        add_custom_target(${target_name}
-            COMMAND rm -rf ${actual_dir}
-            COMMAND mkdir ${actual_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(clean_codegen ${target_name})
-        message(STATUS "Processed model: ${model_name}")
+        configure_file(${input_filename} ${output_filename})
+        set(header_validation_files
+            ${header_validation_files} ${output_filename})
     endif()
+    set(ignore_file false)
+    math(EXPR file_counter "${file_counter} + 1")
 endforeach()
 
-# copy all generated files into the expected directory of test data
-foreach(dia_model ${all_dia_test_models})
-    set(model_name "")
-    get_filename_component(model_name "${dia_model}" NAME_WE)
-
-    set(top_dir "${stage_test_data_dir}/${model_name}")
-    set(actual_dir "${top_dir}/actual")
-    if(NOT IS_DIRECTORY "${actual_dir}")
-        file(MAKE_DIRECTORY "${actual_dir}")
-    endif()
-
-    set(expected_dir "${top_dir}/expected")
-    if(IS_DIRECTORY "${expected_dir}")
-        file(REMOVE_RECURSE "${expected_dir}")
-    endif()
-
-    set(model_folder_name "${model_name}")
-    if (model_name STREQUAL "disable_model_package")
-        set(model_folder_name "dmp")
-    endif()
-
-    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
-    if(IS_DIRECTORY "${git_dir}")
-        file(COPY "${git_dir}" DESTINATION "${expected_dir}")
-    else()
-        if(NOT EXISTS "${expected_dir}")
-            file(MAKE_DIRECTORY "${expected_dir}")
-        endif()
-    endif()
-
-    message(STATUS "Created data set for model: ${model_name}")
-endforeach()
+add_library(main_header_validation STATIC ${header_validation_files})
+set_target_properties(main_header_validation
+    PROPERTIES OUTPUT_NAME dogen_main_header_validation)
+set_target_properties(main_header_validation
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})

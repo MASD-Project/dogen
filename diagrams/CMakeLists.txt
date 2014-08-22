@@ -137,7 +137,7 @@ add_custom_target(codegen_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/test_models
     --cpp-enable-facet domain
     --cpp-enable-facet io
     --cpp-enable-facet hash
@@ -153,7 +153,7 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*-odb.*
     --verbose
     --delete-extra-files
-    --external-module-path dogen)
+    --external-module-path dogen::test_models)
 if(use_latest_knitter)
     add_dependencies(codegen_${target} knitter)
 endif()

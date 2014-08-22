@@ -13,16 +13,16 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-08-22 Fri 13:40]
+Clock summary at [2014-08-22 Fri 20:20]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *2:19* |      |      |
+| *Total time*                                         | *6:48* |      |      |
 |------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 2:19 |      |
+| Development Stories Implemented                      |        | 6:48 |      |
 | IMPLEMENTATION Sprint and product backlog grooming   |        |      | 0:39 |
 | COMPLETED Update instructions in manual for Postgres |        |      | 0:50 |
-| IMPLEMENTATION Tidy-up test model folder structure   |        |      | 0:50 |
+| IMPLEMENTATION Tidy-up test model folder structure   |        |      | 5:19 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -105,19 +105,36 @@ See [[*Add%20C%2B%2B-03%20mode][C++ 03 support]].
 
 We should really describe the purpose of the test models in the manual.
 
-**** IMPLEMENTATION Create =test_models= folder and move all test code to it :task:
+**** COMPLETED Update all models to generate on the =test_models= namespace :task:
+     CLOSED: [2014-08-22 Fri 20:19]
+     CLOCK: [2014-08-22 Fri 20:13]--[2014-08-22 Fri 20:19] =>  0:06
+     CLOCK: [2014-08-22 Fri 18:20]--[2014-08-22 Fri 19:13] =>  0:53
+     CLOCK: [2014-08-22 Fri 14:21]--[2014-08-22 Fri 17:51] =>  3:30
+
+We first must move the models to the correct namespace before we can
+move them physically. We need to fix all of the compilation errors.
+
+**** COMPLETED Create =test_models= folder and move all test code to it :task:
+     CLOSED: [2014-08-22 Fri 20:19]
      CLOCK: [2014-08-22 Fri 12:53]--[2014-08-22 Fri 13:05] =>  0:12
 
 Create the folder and move code manually.
 
-**** Fix code generation to generate on new folder                     :task:
+**** COMPLETED Fix code generation to generate on new folder           :task:
+     CLOSED: [2014-08-22 Fri 20:19]
 
 Ensure dogen is generating the test models in the right place.
 
-**** Fix unit tests                                                    :task:
+**** COMPLETED Fix unit tests                                          :task:
+     CLOSED: [2014-08-22 Fri 20:19]
 
 Ensure all CMake code that relies on the path to the test models still
 works.
+
+**** Fix commented out code                                            :task:
+
+In order to break the task down, we ended up having to comment out
+some tests. Fix these.
 
 *** Review where we are with the last refactoring                     :story:
 
