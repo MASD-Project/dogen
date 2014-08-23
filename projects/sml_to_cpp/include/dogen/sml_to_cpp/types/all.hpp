@@ -28,6 +28,7 @@
 #include "dogen/sml_to_cpp/types/inclusion_lists.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 #include "dogen/sml_to_cpp/types/relationships.hpp"
+#include "dogen/sml_to_cpp/types/sml_to_cpp.hpp"
 #include "dogen/sml_to_cpp/types/std_model_helper.hpp"
 #include "dogen/sml_to_cpp/types/std_types.hpp"
 #include "dogen/sml_to_cpp/types/transformation_error.hpp"

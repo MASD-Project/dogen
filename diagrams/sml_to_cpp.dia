@@ -5706,7 +5706,7 @@ of relationship information.#</dia:string>
 This model provides the conversion code which transforms an
 instance of SML into its correspondind C++ version.
 
-DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
