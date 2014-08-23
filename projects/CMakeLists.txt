@@ -192,6 +192,13 @@ foreach(hpp_file ${all_hpp_files})
         set(ignore_file true)
     endif()
 
+    # we need to filter eos from utility
+    if(NOT EOS_FOUND)
+        if (hpp_file MATCHES "eos")
+            set(ignore_file true)
+        endif()
+    endif()
+
     if(NOT ignore_file)
         set(input_filename ${CMAKE_SOURCE_DIR}/${header_validation_template})
         set(output_filename "${CMAKE_BINARY_DIR}/${hpp_file}_hv.cpp")
