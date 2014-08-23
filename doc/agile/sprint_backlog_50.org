@@ -13,17 +13,18 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-08-23 Sat 11:56]
+Clock summary at [2014-08-23 Sat 12:27]
 
-| Headline                                                     | Time   |      |      |
-|--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *8:27* |      |      |
-|--------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                              |        | 8:27 |      |
-| IMPLEMENTATION Sprint and product backlog grooming           |        |      | 1:15 |
-| COMPLETED Update instructions in manual for Postgres         |        |      | 0:50 |
-| COMPLETED Tidy-up test model folder structure                |        |      | 6:01 |
-| IMPLEMENTATION Review where we are with the last refactoring |        |      | 0:21 |
+| Headline                                                | Time   |      |      |
+|---------------------------------------------------------+--------+------+------|
+| *Total time*                                            | *8:37* |      |      |
+|---------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                         |        | 8:37 |      |
+| IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
+| COMPLETED Update instructions in manual for Postgres    |        |      | 0:50 |
+| COMPLETED Tidy-up test model folder structure           |        |      | 6:01 |
+| COMPLETED Review where we are with the last refactoring |        |      | 0:21 |
+| COMPLETED Check that dogen builds on C++-14             |        |      | 0:10 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -154,7 +155,8 @@ works.
 In order to break the task down, we ended up having to comment out
 some tests. Fix these.
 
-*** IMPLEMENTATION Review where we are with the last refactoring      :story:
+*** COMPLETED Review where we are with the last refactoring           :story:
+    CLOSED: [2014-08-23 Sat 12:00]
     CLOCK: [2014-08-23 Sat 11:09]--[2014-08-23 Sat 11:30] =>  0:21
 
 After the long hiatus its not very clear where we left the
@@ -168,6 +170,29 @@ Current state:
 - still not using the boilerplate formatting code though.
 - still using the cpp formatters utility rather than the
   formatters. Same with indenter and formatting error.
+
+*** COMPLETED Check that dogen builds on C++-14                       :story:
+    CLOSED: [2014-08-23 Sat 12:27]
+    CLOCK: [2014-08-23 Sat 12:00]--[2014-08-23 Sat 12:10] =>  0:10
+
+We should try to build dogen using clang on c++ 14 mode and see if we
+get any errors.
+
+Code compiled without any changes, other than flags:
+
+: diff --git a/projects/CMakeLists.txt b/projects/CMakeLists.txt
+: index 592d023..5a39206 100644
+: --- a/projects/CMakeLists.txt
+: +++ b/projects/CMakeLists.txt
+: @@ -110,7 +110,7 @@ endif()
+:  if (WIN32)
+:      set(other_flags "-std=gnu++11")
+:  else()
+: -    set(other_flags "-std=c++11")
+: +    set(other_flags "-std=c++1y")
+:  endif()
+:  set(other_flags "${other_flags} -frtti -fvisibility-inlines-hidden")
+:  set(other_flags "${other_flags} -fvisibility=default")
 
 *** Move includes and header guard into entity                        :story:
 
