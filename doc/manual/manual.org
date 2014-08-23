@@ -336,17 +336,17 @@ do so for several reasons:
   speed-up development of Dogen.
 
 Dogen is made up of a large number of domain models. These fall into
-two broad categories: /test models/ and /core models/. Test models are
+two broad categories: /test models/ and /main models/. Test models are
 models we created specifically to test some aspect of code
 generation - such as say inheritance - and whose code is not used by
-the main binary. The core models are what really makes up the
+the main binary. The main models are what really makes up the
 application.
 
 Lets look at each of these in more detail.
 
-*** Core Models
+*** Main Models
 
-The core models are hooked together in a fashion similar to that of
+The main models are hooked together in a fashion similar to that of
 the internals of a compiler. They belong to one of three groups: the
 /front-end/, the /middle-end/ and the /back-end/. The front-end group
 of models allows for different sources of domain information to be

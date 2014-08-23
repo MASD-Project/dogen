@@ -209,8 +209,8 @@ foreach(hpp_file ${all_hpp_files})
     math(EXPR file_counter "${file_counter} + 1")
 endforeach()
 
-add_library(main_header_validation STATIC ${header_validation_files})
-set_target_properties(main_header_validation
+add_library(main_models_header_validation STATIC ${header_validation_files})
+set_target_properties(main_models_header_validation
     PROPERTIES OUTPUT_NAME dogen_main_header_validation)
-set_target_properties(main_header_validation
+set_target_properties(main_models_header_validation
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
