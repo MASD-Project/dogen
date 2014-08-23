@@ -48,7 +48,7 @@ endforeach()
 # we need to add these manually as the point of this test model
 # is not to generate a make file.
 file(GLOB_RECURSE disable_cmakelists_files ABSOLUTE
-    "${CMAKE_SOURCE_DIR}/projects/disable_cmakelists/src/*.cpp")
+    "${CMAKE_SOURCE_DIR}/projects/test_models/disable_cmakelists/src/*.cpp")
 
 add_executable(${spec_name} ${spec_files} ${disable_cmakelists_files})
 set(binary_name "dogen_${spec_name}")

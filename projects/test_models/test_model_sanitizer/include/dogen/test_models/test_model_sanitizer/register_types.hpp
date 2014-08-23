@@ -33,7 +33,7 @@
 #include "dogen/test_models/class_in_a_package/serialization/registrar_ser.hpp"
 #include "dogen/test_models/class_without_package/serialization/registrar_ser.hpp"
 #include "dogen/test_models/compressed/serialization/registrar_ser.hpp"
-// #include "dogen/test_models/disable_cmakelists/serialization/registrar_ser.hpp"
+#include "dogen/test_models/disable_cmakelists/serialization/registrar_ser.hpp"
 #include "dogen/test_models/disable_facet_folders/registrar_ser.hpp"
 #include "dogen/test_models/disable_full_ctor/serialization/registrar_ser.hpp"
 #include "dogen/test_models/dmp/serialization/registrar_ser.hpp"
@@ -55,7 +55,7 @@ template<typename Archive> void register_types(Archive& ar) {
     dogen::test_models::class_in_a_package::register_types<Archive>(ar);
     dogen::test_models::class_without_package::register_types<Archive>(ar);
     dogen::test_models::compressed::register_types<Archive>(ar);
-//    dogen::test_models::disable_cmakelists::register_types<Archive>(ar);
+    dogen::test_models::disable_cmakelists::register_types<Archive>(ar);
     dogen::test_models::disable_facet_folders::register_types<Archive>(ar);
     dogen::test_models::disable_full_ctor::register_types<Archive>(ar);
     dogen::test_models::dmp::register_types<Archive>(ar);

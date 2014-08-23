@@ -13,16 +13,16 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-08-22 Fri 20:20]
+Clock summary at [2014-08-23 Sat 10:12]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *6:48* |      |      |
+| *Total time*                                         | *7:30* |      |      |
 |------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 6:48 |      |
+| Development Stories Implemented                      |        | 7:30 |      |
 | IMPLEMENTATION Sprint and product backlog grooming   |        |      | 0:39 |
 | COMPLETED Update instructions in manual for Postgres |        |      | 0:50 |
-| IMPLEMENTATION Tidy-up test model folder structure   |        |      | 5:19 |
+| COMPLETED Tidy-up test model folder structure        |        |      | 6:01 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -60,7 +60,8 @@ manual to make this easier in the future.
 : Warning: Tag `XML_DTD' at line 214 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
 :          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 
-*** IMPLEMENTATION Tidy-up test model folder structure                :story:
+*** COMPLETED Tidy-up test model folder structure                     :story:
+    CLOSED: [2014-08-23 Sat 10:12]
     CLOCK: [2014-08-22 Fri 12:49]--[2014-08-22 Fri 12:53] =>  0:04
 
 *New understanding*:
@@ -131,7 +132,9 @@ Ensure dogen is generating the test models in the right place.
 Ensure all CMake code that relies on the path to the test models still
 works.
 
-**** Fix commented out code                                            :task:
+**** COMPLETED Fix commented out code                                  :task:
+     CLOSED: [2014-08-23 Sat 10:12]
+     CLOCK: [2014-08-23 Sat 09:30]--[2014-08-23 Sat 10:12] =>  0:42
 
 In order to break the task down, we ended up having to comment out
 some tests. Fix these.
