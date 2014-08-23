@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Move code to C++ 14                                               :story:
+
+Now that the standard is out, we should move to it. Both clang and gcc
+have some kind of support at present, so it should be a matter of
+compiling on this mode. However, as we have gcc 4.7 on OSX and
+Windows, we would have to upgrade these compilers first.
+
 *** Usage of external module path in cmakelists                       :story:
 
 It seems like we are not populating the target names
@@ -45,63 +52,6 @@ the project to travis and stop managing the agents.
 - https://travis-ci.org/
 - [[http://computer-vision-talks.com/articles/2014-02-23-using-travis-ci/][Using Travis-CI for continuous testing your projects]]
 
-*** Move includes and header guard into entity                        :story:
-
-With this a formatter can now rely only on entities rather than
-requiring a file.
-
-*** Create =includers_info= and =forward_declarations_info=           :story:
-
-We should make sure the type system represents all the inputs to
-formatters. Create these types and update their formatters,
-transformer etc.
-
-*** Delete key implementation formatter                               :story:
-
-It doesn't seem like there is any good reason to treat the keys in a
-special way so try to remove this.
-
-*** Delete content types                                              :story:
-
-Now we have the type system representing the content, we can delete
-this enumeration.
-
-*** Delete aspect types                                               :story:
-
-Now we have the type system representing the aspects, we can delete
-this enumeration.
-
-*** Create formatter interfaces for each concrete entity type         :story:
-
-Formatters should have a single format method that takes a concrete
-entity, formatting settings and knitting settings. It returns a file.
-
-**** Remove =file_formatter_interface=                                 :task:
-
-Update all C++ formatters to use specific types:
-
-- remove factory; update workflow to call formatters directly
-- remove file formatter interface
-- formatters to have format() for each specific supported entity,
-  overloaded as required
-
-**** Update formatters to output =formatters::file=                    :task:
-
-Instead of passing in a stream, we just want to return a file.
-
-**** Update formatters to take settings and entity as input            :task:
-
-We want the formatters to be stateless - well at least as far as
-mutating state goes - so that we can run them in parallel. We also
-want them to have no constructor arguments so we can register them. To
-do so we need to pass in both knitting and formatting settings to
-=format= as well as the entity.
-
-**** Get formatters to register themselves with workflow               :task:
-
-Copy the code from the deleted registration files. Formatters should
-register against a content descriptor.
-
 *** Rename ODB parameters                                             :story:
 
 At present we use the following form:
@@ -111,24 +61,6 @@ At present we use the following form:
 We need to use the new naming style =cpp.odb.pragma=. We also need to
 rename the opaque_parameters to reflect ODB specific data.
 
-*** Rename the include tags and add them to CPP model                 :story:
-
-Update all the JSON files with names in the form
-=cpp.include.types.header_file=. Add properties in =cpp= to capture
-these.
-
-While we're at it, add support for =family= too.
-
-*** Delete tag related infrastructure from =sml=                      :story:
-
-With the exception of tag writer, we don't really need any tagging in
-SML. That means:
-
-- no meta data tagger
-- no writer
-- no meta data error
-- no meta data sub-workflow
-
 *** Copyright holders is scalar when it should be an array            :story:
 
 At present its only possible to specify a single copyright holder. It
@@ -137,25 +69,9 @@ done with a massive hack, we are not going to extend the hack to
 copyright holders. Instead, this story will be handled when we move
 over to using =boost::property_tree::ptree=.
 
-*** Make use of boilerplate                                           :task:
-
-Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some meta-data into C++ model.
-
 *** Remove =cpp_formatters::formatting_error=                         :story:
 
 Use the =formatters::formating_error= instead.
-
-*** Add include files at the formatter level                          :story:
-
-We need to remove all the include files from =includer= which are
-related to formatter specific code. We need to inject these
-dependencies inside of the formatters.
-
-- implement includer in terms of json files
-- get includer to work off of object relationships
-- remove relationships from transformer
-- remove helper models boost and std
 
 *** Manual: fix Fundamental Building Blocks section                   :story:
 
@@ -407,28 +323,6 @@ mind:
 - more than one data files directory results in expected load;
 - creating annotation for test model types works as expected.
 
-*** Refactor types header formatter                                   :story:
-
-Make the main types header formatters look like the =om= types formatter.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
-
 *** Update comments in C++ model                                      :story:
 
 We have a very large blurb in this model that is rather old, and
@@ -491,10 +385,7 @@ with ninja.
 Links:
 
 - [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
-
-*** Add warning =-Wunused-private-field=                              :story:
-
-Seems like this warning is not part of =-Wall
+- See [[http://www.cmake.org/cmake/help/v3.0/release/3.0.0.html][CMake 3.0]] INTERFACES too
 
 *** Add a CMake module for git                                        :story:
 
@@ -921,7 +812,10 @@ compile times for header validation.
 See also [[http://public.kitware.com/pipermail/cmake-developers/2011-January/000998.html][this post]] for a more generic discussion on how to run these
 sort of tools in CMake.
 
-*** Add support for Address Sanitizer                                 :story:
+Note: this is still a problem even after splitting header validation
+into two.
+
+*** Add support for Address Sanitizer (ASan)                          :story:
 
 This seems like another interest dynamic analysis tool:
 
@@ -1010,32 +904,32 @@ file. There is a file output for boost log, but its not configurable
 enough to accept a =boost::log= stream. We should send an email to
 mailing list asking for help.
 
-*** Feature models should always be tested by engine                  :story:
+*** Feature models should always be tested by knit                    :story:
 
 We recently implemented features into dogen; these work off of CMake
 detection, where by if a library is not detected, all tests associated
 with it are not built and executed. However, we should still try to
 codegen these models to make sure that a change we did elsewhere did
 not introduce bugs in features we're not interested in. We need to
-check that engine has tests for both EOS and ODB that get executed
+check that knit has tests for both EOS and ODB that get executed
 regardless of these features being on or off.
 
-*** Long term ideas for facets                                        :story:
+*** Automatic generation of C interfaces for C++ code                 :story:
 
-We keep on having random idea for facets, most of them which are blue
-skies. This story aggregates them to avoid having lots of entries in
-the backlog.
+Once we have proper C support, it should be doable to have a C++ facet
+that automatically exposes a C interface.
 
-- automatic generation of C interfaces: once we have proper C support,
-  it should be doable to have a C++ facet that automatically exposes a
-  C interface.
-- even more crazy/interesting is to generate COM/CORBA interfaces.
+*** Support for COM/CORBA                                             :story:
+
+We should investigate how hard it is to add support for these IDLs.
 
 *** Add a utility that converts a dia model into JSON                 :story:
 
 It would be great if one could take a dia model and convert it into a
 JSON representation. This would allow users to take models that are
 not particularly useful in UML and convert them into JSON.
+
+Name according to new convention: tailor.
 
 *** Investigate support for automatic diagram updates                 :story:
 
@@ -1130,7 +1024,7 @@ We are going to take the easy approach as we did for serialisation and
 make all the code artefacts American. Documentation etc is not that
 important.
 
-*** Improve OM's code generation marker                               :story:
+*** Improve formatters code generation marker                         :story:
 
 Things the marker can/should have:
 
@@ -1203,9 +1097,6 @@ we start to use it in anger. In particular:
 - we need an operations indexer
 
 *** Consider using a graph in SML for indexing                        :story:
-    :PROPERTIES:
-    :ORDERED:  t
-    :END:
 
 To keep things simple we created a number of specialised indexers,
 each performing a complete loop, recursion, etc over the merged
@@ -1716,8 +1607,6 @@ the merger. Potentially this could be called =partial_model=.
 
 *** Create a =key_extractor= service                                  :story:
 
-Continuing from Sprint 26.
-
 We need a way to automatically extract a key for a =keyed_entity=.
 The right solution is to create a service to represent this
 concept.
@@ -1727,7 +1616,23 @@ C++ transformer intercepts them and generates the correct view models.
 
 *** Use explicit casting for versioned to unversioned conversions     :story:
 
-Continuing from previous iteration, see description in Sprint 26.
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+: explicit operator std::string() { return "explicit"; }
+
+Actually the real solution for this is to make the versioned key
+contain the unversioned key; then dogen will generate all the
+required code.
+
+At this point in time we do not have enough use cases to make the
+correct design decisions in this area. We need to wait until we start
+using keys in anger in Creris and then design the API around the use
+cases.
+
+It is not possible to use global cast operators so we need to
+introduce a dependency between versioned and unversioned keys in order
+for this to work.
 
 *** Consider not creating unversioned keys for single property        :story:
 
@@ -1770,7 +1675,7 @@ We don't seem to have any. A few come to mind:
 
 *** Rename nested qname to composite qname                            :story:
 
-New understanding:
+*New understanding*:
 
 This story requires further analysis. Blindly following the composite
 pattern was tried but it resulted in a lot of inconsistencies because
@@ -1782,7 +1687,7 @@ type in isolation may have unknown template parameters, presumably, as
 an argument of a function these have been instantiated with real
 types.
 
-Previous understanding:
+*Previous understanding*:
 
 We should just follow the composite pattern in the naming.
 
@@ -1859,20 +1764,6 @@ It would be nice if the code generator created a visitor which has as
 its properties a set of =std::function= which match the signature of
 the visit functions; then the visit functions would just check that
 the functions have been assigned and call them. If not, throw.
-
-*** Improve logging of disconnected inheritance objects               :story:
-
-At present the error message for an inheritance object in dia which
-has less than two connections is less than helpful:
-
-: 2013-06-26 22:58:50.236488 [ERROR] [dia_to_sml.processor] Expected 2 connections but found: 1
-: 2013-06-26 22:58:50.236917 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/dia_to_sml/src/types/processor.cpp(166): Throw in function dogen::dia_to_sml::processed_object dogen::dia_to_sml::processor::process(const dogen::dia::object&)
-: Dynamic exception type: boost::exception_detail::clone_impl<dogen::dia_to_sml::processing_error>
-: std::exception::what: Expected 2 connections but found: 1
-: [tag_workflow*] = Code generation failure.
-
-We should really try to detail which object ID failed, as well as
-details of the connected object if possible, etc.
 
 *** Check concept properties for identity                             :story:
     CLOCK: [2013-06-24 Mon 22:33]--[2013-06-24 Mon 22:36] =>  0:03
@@ -2730,7 +2621,7 @@ other groups if needed.
 
 *** Add support for user supplied test data sets                      :story:
 
-New understanding:
+*New understanding*:
 
 we need to create a test data sets model. it should have an
 enumeration for all of the available test data sets, and an
@@ -2745,7 +2636,7 @@ It should fix the following issues:
 - [[*Adding%20new%20engine%20spec%20tests%20is%20hard][Adding new engine spec tests is hard]]
 - [[*Naming%20of%20saved%20SML/Dia%20files%20is%20incorrect][Naming of saved SML/Dia files is incorrect]]
 
-Old understanding:
+*Old understanding*:
 
 The correct solution for test data and test data sets is as follows:
 
@@ -2936,6 +2827,7 @@ New understanding for this story:
 - create a memcache implementation.
 - create a type to string which converts a key made up of primitives
   into a underscore delimited string, used as a key in the cache.
+- we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
 
 Old text of story:
 
@@ -3077,6 +2969,8 @@ existing files and report if there are any differences. This would be
 useful to make sure the source code matches the latest version of the
 diagram.
 
+We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
+
 *** Option to validate diagram                                        :story:
 
 It would be nice if one could just check if a dia diagram is valid for
@@ -3177,6 +3071,9 @@ When housekeeper finishes deleting all extra files, it should check
 all of the processed directories to see if they are empty. If they
 are, it should delete the directory.
 
+We should probably have a command line option to control this
+behaviour.
+
 *** Header only models shall not generate projects                    :story:
 
 A project with just exceptions does not need a make file, and fails to
@@ -3216,6 +3113,18 @@ the presence of inheritance. If not, issue a warning.
 
 We should throw if a diagram has a disconnected inheritance or
 composition relationship.
+
+At present the error message for an inheritance object in dia which
+has less than two connections is less than helpful:
+
+: 2013-06-26 22:58:50.236488 [ERROR] [dia_to_sml.processor] Expected 2 connections but found: 1
+: 2013-06-26 22:58:50.236917 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/dia_to_sml/src/types/processor.cpp(166): Throw in function dogen::dia_to_sml::processed_object dogen::dia_to_sml::processor::process(const dogen::dia::object&)
+: Dynamic exception type: boost::exception_detail::clone_impl<dogen::dia_to_sml::processing_error>
+: std::exception::what: Expected 2 connections but found: 1
+: [tag_workflow*] = Code generation failure.
+
+We should really try to detail which object ID failed, as well as
+details of the connected object if possible, etc.
 
 *** Add tests for duplicate identifiers in Dia                        :story:
 
@@ -3364,7 +3273,7 @@ At present we treat private properties as if they were public; we
 should ignore them. We need to go through all the models and change
 the private ones to public before we do this.
 
-We should also issue a warning.
+We should also log a warning.
 
 *** Sanity check packages automatically                               :epic:
 

@@ -13,19 +13,22 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-08-23 Sat 10:12]
+Clock summary at [2014-08-23 Sat 11:56]
 
-| Headline                                             | Time   |      |      |
-|------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *7:30* |      |      |
-|------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                      |        | 7:30 |      |
-| IMPLEMENTATION Sprint and product backlog grooming   |        |      | 0:39 |
-| COMPLETED Update instructions in manual for Postgres |        |      | 0:50 |
-| COMPLETED Tidy-up test model folder structure        |        |      | 6:01 |
+| Headline                                                     | Time   |      |      |
+|--------------------------------------------------------------+--------+------+------|
+| *Total time*                                                 | *8:27* |      |      |
+|--------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                              |        | 8:27 |      |
+| IMPLEMENTATION Sprint and product backlog grooming           |        |      | 1:15 |
+| COMPLETED Update instructions in manual for Postgres         |        |      | 0:50 |
+| COMPLETED Tidy-up test model folder structure                |        |      | 6:01 |
+| IMPLEMENTATION Review where we are with the last refactoring |        |      | 0:21 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-08-23 Sat 11:31]--[2014-08-23 Sat 11:56] =>  0:25
+    CLOCK: [2014-08-23 Sat 10:56]--[2014-08-23 Sat 11:07] =>  0:11
     CLOCK: [2014-08-22 Fri 12:39]--[2014-08-22 Fri 12:49] =>  0:10
     CLOCK: [2014-08-22 Fri 12:10]--[2014-08-22 Fri 12:39] =>  0:29
 
@@ -55,24 +58,32 @@ manual to make this easier in the future.
 *** COMPLETED Fix doxygen warnings                                    :story:
     CLOSED: [2014-08-22 Fri 13:02]
 
+We are getting a few annoying warnings when generating the docs:
+
 : Warning: Tag `XML_SCHEMA' at line 213 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
 :          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 : Warning: Tag `XML_DTD' at line 214 of file `/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/doxygen/dogen.doxy' has become obsolete.
 :          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 
+Remove these tags as we are not using them.
+
 *** COMPLETED Tidy-up test model folder structure                     :story:
     CLOSED: [2014-08-23 Sat 10:12]
     CLOCK: [2014-08-22 Fri 12:49]--[2014-08-22 Fri 12:53] =>  0:04
 
-*New understanding*:
-
-Since we only support C++-11 for now, lets just create a single
-top-level directory to house the test models and worry about cleverer
-organisation later. At present its difficult to understand the code
+Create a single top-level directory to house the test models:
+=test_models=. At present its difficult to understand the code
 structure due to the proliferation of test models.
+
+Originally we had spec'd a very elaborate tree structure for this
+directory but since we only support C++-11 at present, lets just
+create a single folder. We can worry about cleverer organisation
+later.
 
 **** COMPLETED Old understanding                                       :note:
      CLOSED: [2014-08-22 Fri 12:53]
+
+Split from story Tidy-up test models:
 
 We should take this opportunity to reorganise the test model folders,
 perhaps with a structure similar to this (in projects):
@@ -98,13 +109,17 @@ the specs were placed in the test models (e.g. the generated code
 would not contain the specs and thus be different). We will probably
 need a 03 sanitizer, an 11 sanitizer, etc.
 
-See [[*Add%20C%2B%2B-03%20mode][C++ 03 support]].
+See also story Add C++-03 mode.
 
 **** COMPLETED Add section in manual for test models                   :task:
      CLOSED: [2014-08-22 Fri 13:40]
      CLOCK: [2014-08-22 Fri 13:06]--[2014-08-22 Fri 13:40] =>  0:34
 
-We should really describe the purpose of the test models in the manual.
+We should really describe the purpose of the test models in the
+manual. Create a section on test models covering all of the existing
+models and explaining the legacy issues.
+
+Added [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#test-models][Test Models]].
 
 **** COMPLETED Update all models to generate on the =test_models= namespace :task:
      CLOSED: [2014-08-22 Fri 20:19]
@@ -139,11 +154,137 @@ works.
 In order to break the task down, we ended up having to comment out
 some tests. Fix these.
 
-*** Review where we are with the last refactoring                     :story:
+*** IMPLEMENTATION Review where we are with the last refactoring      :story:
+    CLOCK: [2014-08-23 Sat 11:09]--[2014-08-23 Sat 11:30] =>  0:21
 
 After the long hiatus its not very clear where we left the
 formatters refactoring. We need to go through the last changes and see
 what is left to be done.
+
+Current state:
+
+- refactoring of the domain class declaration into the types main
+  header formatter done.
+- still not using the boilerplate formatting code though.
+- still using the cpp formatters utility rather than the
+  formatters. Same with indenter and formatting error.
+
+*** Move includes and header guard into entity                        :story:
+
+With this a formatter can now rely only on entities rather than
+requiring a file.
+
+*** Create =includers_info= and =forward_declarations_info=           :story:
+
+We should make sure the type system represents all the inputs to
+formatters. Create these types and update their formatters,
+transformer etc.
+
+*** Delete key implementation formatter                               :story:
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** Delete content types                                              :story:
+
+Now we have the type system representing the content, we can delete
+this enumeration.
+
+*** Delete aspect types                                               :story:
+
+Now we have the type system representing the aspects, we can delete
+this enumeration.
+
+*** Create formatter interfaces for each concrete entity type         :story:
+
+Formatters should have a single format method that takes a concrete
+entity, formatting settings and knitting settings. It returns a file.
+
+**** Remove =file_formatter_interface=                                 :task:
+
+Update all C++ formatters to use specific types:
+
+- remove factory; update workflow to call formatters directly
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
+
+**** Update formatters to output =formatters::file=                    :task:
+
+Instead of passing in a stream, we just want to return a file.
+
+**** Update formatters to take settings and entity as input            :task:
+
+We want the formatters to be stateless - well at least as far as
+mutating state goes - so that we can run them in parallel. We also
+want them to have no constructor arguments so we can register them. To
+do so we need to pass in both knitting and formatting settings to
+=format= as well as the entity.
+
+**** Get formatters to register themselves with workflow               :task:
+
+Copy the code from the deleted registration files. Formatters should
+register against a content descriptor.
+
+*** Rename the include tags and add them to CPP model                 :story:
+
+Update all the JSON files with names in the form
+=cpp.include.types.header_file=. Add properties in =cpp= to capture
+these.
+
+While we're at it, add support for =family= too.
+
+*** Delete tag related infrastructure from =sml=                      :story:
+
+With the exception of tag writer, we don't really need any tagging in
+SML. That means:
+
+- no meta data tagger
+- no writer
+- no meta data error
+- no meta data sub-workflow
+
+*** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+*** Add include files at the formatter level                          :story:
+
+We need to remove all the include files from =includer= which are
+related to formatter specific code. We need to inject these
+dependencies inside of the formatters.
+
+- implement includer in terms of json files
+- get includer to work off of object relationships
+- remove relationships from transformer
+- remove helper models boost and std
+
+*** Refactor types header formatter                                   :story:
+
+Make the main types header formatters look like the =om= types formatter.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** Add warning =-Wunused-private-field=                              :story:
+
+Seems like this warning is not part of =-Wall
 
 *** Use formatting settings in formatters model                       :story:
 
