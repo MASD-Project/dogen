@@ -44,32 +44,32 @@ using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(disable_cmakelists)
 
-BOOST_AUTO_TEST_CASE(validate_equality) {
+BOOST_IGNORE_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<first_class_generator>();
 }
 
-BOOST_AUTO_TEST_CASE(validate_serialisation) {
+BOOST_IGNORE_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     roundtrip_type<first_class_generator>();
 }
 
-BOOST_AUTO_TEST_CASE(validate_hashing) {
+BOOST_IGNORE_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
     test_hashing<first_class_generator>();
 }
-Xo
-BOOST_AUTO_TEST_CASE(validate_swap) {
+
+BOOST_IGNORE_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_hashing");
     test_swap<first_class_generator>();
 }
 
-BOOST_AUTO_TEST_CASE(validate_io) {
+BOOST_IGNORE_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
     test_io<first_class_generator>();
 }
 
-BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
+BOOST_IGNORE_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
     test_move_assignment_copy<first_class_generator>();
 }
