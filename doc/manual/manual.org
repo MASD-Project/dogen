@@ -689,6 +689,36 @@ they got added to dogen):
   binary diff tests would fail - since dogen cannot generate these
   specs.
 
+*** Versions and Build Numbers
+
+Dogen uses a single version number for all of its components. As with
+most version numbers, Dogen's versions are made up of three components
+separated by dots (=.=). For example:
+
+: 0.49.2369
+
+The first component is the major version number, and it is incremented
+whenever we deem that there have been enough changes to warrant
+it. For now, the major version is zero but once dogen reaches it's
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/definition_of_done.org][definition of done]], it will be incremented to one. The middle
+component is the sprint number. It gets updated whenever a new sprint
+is started. The last component is the commit "number"; that is, the
+number of commits done in the master branch, as given by:
+
+: git rev-list master | wc -l
+
+To know how recent this version is, go to the [[https://github.com/DomainDrivenConsulting/dogen][project page]] in GitHub
+and look up the number of commits there.
+
+In addition to the version, Dogen also makes use of a build
+number. Every time a build is done, a new UUID is generated. This
+makes it easier to identify a build with defects for example. It is up
+to the person performing the build to keep track of the properties of
+that build (compiler, operative system, etc). In order to generate
+build numbers you must have the tool [[http://www.linuxcommand.org/man_pages/uuidgen1.html][uuidgen]] in the path. If the tool
+is not available, the default build number is assigned:
+=no_build_number_assigned=.
+
 * PART II - PRACTICE
 
 In this part we describe how to build and install Dogen, and how to
@@ -835,9 +865,9 @@ Bugs can be submitted using [[https://github.com/kitanda/dogen/issues][github Is
 
 **** Submitting Patches
 
-Dogen is an open source project with very little barriers of
-entry. All we ask is for you to use your real name when submitting a
-patch and to use the pull request functionality in GitHub to do so.
+Dogen is an open source project with very few entry barriers. All we
+ask is for you to use your real name when submitting a patch and to
+use the pull request functionality in GitHub to do so.
 
 ** Running Dogen
 
@@ -877,17 +907,15 @@ use relative paths if the binary is not on the path.
 
 If all is well, you should see something along the lines of:
 
-: dogen v0.0.2233
-: Copyright (C) 2012 Kitanda.
+: Dogen Knitter v0.49.2370
+: Build: 794bc01d-7fac-41dc-91eb-11a9f8be70a8
+: Copyright (C) 2012-2014 Marco Craveiro.
 : License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 
-The first line indicates the version of Dogen, the last digit of which
-is the number of commits done in master. To know how recent this
-version is, go to the [[https://github.com/DomainDrivenConsulting/dogen][project page]] in GitHub and look up the number of
-commits there. Ideally you want the most recent version.
-
-Now that we have confirmed Dogen is operational, lets have a look at
-all the available options. Run:
+Ideally you want the most recent dogen version. See the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#versions-and-build-numbers][section]] on
+versions for details on how to interpret the version number. Now that
+we have confirmed Dogen is operational, lets have a look at all the
+available options. Run:
 
 : $ dogen_knitter --help
 

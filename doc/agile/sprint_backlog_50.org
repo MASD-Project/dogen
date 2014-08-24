@@ -13,18 +13,20 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-08-23 Sat 12:27]
+Clock summary at [2014-08-24 Sun 19:47]
 
 | Headline                                                | Time   |      |      |
 |---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *8:37* |      |      |
+| *Total time*                                            | *9:22* |      |      |
 |---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 8:37 |      |
+| Development Stories Implemented                         |        | 9:22 |      |
 | IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
+| IMPLEMENTATION Updates to the manual and readme files   |        |      | 0:38 |
 | COMPLETED Update instructions in manual for Postgres    |        |      | 0:50 |
 | COMPLETED Tidy-up test model folder structure           |        |      | 6:01 |
 | COMPLETED Review where we are with the last refactoring |        |      | 0:21 |
 | COMPLETED Check that dogen builds on C++-14             |        |      | 0:10 |
+| COMPLETED Add a build number to dogen                   |        |      | 0:07 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -34,6 +36,12 @@ Clock summary at [2014-08-23 Sat 12:27]
     CLOCK: [2014-08-22 Fri 12:10]--[2014-08-22 Fri 12:39] =>  0:29
 
 Updates to sprint and product backlog.
+
+*** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-08-24 Sun 19:40]--[2014-08-24 Sun 19:47] =>  0:07
+    CLOCK: [2014-08-24 Sun 19:00]--[2014-08-24 Sun 19:31] =>  0:31
+
+Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Update instructions in manual for Postgres              :story:
     CLOSED: [2014-08-22 Fri 12:39]
@@ -193,6 +201,17 @@ Code compiled without any changes, other than flags:
 :  endif()
 :  set(other_flags "${other_flags} -frtti -fvisibility-inlines-hidden")
 :  set(other_flags "${other_flags} -fvisibility=default")
+
+*** COMPLETED Add a build number to dogen                             :story:
+    CLOSED: [2014-08-24 Sun 19:39]
+    CLOCK: [2014-08-24 Sun 19:32]--[2014-08-24 Sun 19:39] =>  0:07
+
+We should create a UUID based build number for dogen so we can
+distinguish between different builds.
+
+This does mean we now always rebuild because the build number keeps on
+changing. We should try this approach for a bit and see how well it
+works.
 
 *** Move includes and header guard into entity                        :story:
 

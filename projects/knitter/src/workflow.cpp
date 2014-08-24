@@ -57,7 +57,8 @@ void help(const std::string& d) {
  */
 void version() {
     std::cout << knitter_product << std::endl
-              << "Copyright (C) 2012 Kitanda." << std::endl
+              << "Build: " << DOGEN_BUILD_NUMBER << std::endl
+              << "Copyright (C) 2012-2014 Marco Craveiro." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
               << "<http://gnu.org/licenses/gpl.html>."
               << std::endl;
