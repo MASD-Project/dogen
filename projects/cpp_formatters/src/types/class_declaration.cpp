@@ -467,40 +467,24 @@ void class_declaration::swap_and_assignment(const cpp::class_info& ci) {
 }
 
 void class_declaration::format(const cpp::class_info& ci) {
-    if (ci.class_type() != cpp::class_types::unversioned_key &&
-        ci.class_type() != cpp::class_types::versioned_key) {
-
-        open_class(ci);
-        {
-            positive_indenter_scope s(indenter_);
-            compiler_generated_constuctors(ci);
-            hand_crafted_constructors(ci);
-            friends(ci);
+    open_class(ci);
+    {
+        positive_indenter_scope s(indenter_);
+        compiler_generated_constuctors(ci);
+        hand_crafted_constructors(ci);
+        friends(ci);
+        if (ci.class_type() != cpp::class_types::unversioned_key &&
+            ci.class_type() != cpp::class_types::versioned_key)
             visitor_method(ci);
-            if (!disable_io_)
-                to_stream(ci);
-            getters_and_setters(ci);
-            equality(ci);
-            swap_and_assignment(ci);
-            member_variables(ci);
-        }
-        close_class();
-    } else {
-        open_class(ci);
-        {
-            positive_indenter_scope s(indenter_);
-            compiler_generated_constuctors(ci);
-            hand_crafted_constructors(ci);
-            friends(ci);
-            if (!disable_io_)
-                to_stream(ci);
-            getters_and_setters(ci);
-            equality(ci);
-            swap_and_assignment(ci);
-            member_variables(ci);
-        }
-        close_class();
+
+        if (!disable_io_)
+            to_stream(ci);
+        getters_and_setters(ci);
+        equality(ci);
+        swap_and_assignment(ci);
+        member_variables(ci);
     }
+    close_class();
 }
 
 } }
