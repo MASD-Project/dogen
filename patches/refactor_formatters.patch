@@ -1253,10 +1253,52 @@ index b9df8c9..b80e39e 100644
          <dia:point val="-28,26"/>
        </dia:attribute>
 diff --git a/doc/agile/sprint_backlog_50.org b/doc/agile/sprint_backlog_50.org
-index c41da34..c03eb5c 100644
+index c41da34..ef167fd 100644
 --- a/doc/agile/sprint_backlog_50.org
 +++ b/doc/agile/sprint_backlog_50.org
-@@ -213,6 +213,83 @@ This does mean we now always rebuild because the build number keeps on
+@@ -13,23 +13,27 @@ and running again, after a long break.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2014-08-24 Sun 19:47]
+-
+-| Headline                                                | Time   |      |      |
+-|---------------------------------------------------------+--------+------+------|
+-| *Total time*                                            | *9:22* |      |      |
+-|---------------------------------------------------------+--------+------+------|
+-| Development Stories Implemented                         |        | 9:22 |      |
+-| IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
+-| IMPLEMENTATION Updates to the manual and readme files   |        |      | 0:38 |
+-| COMPLETED Update instructions in manual for Postgres    |        |      | 0:50 |
+-| COMPLETED Tidy-up test model folder structure           |        |      | 6:01 |
+-| COMPLETED Review where we are with the last refactoring |        |      | 0:21 |
+-| COMPLETED Check that dogen builds on C++-14             |        |      | 0:10 |
+-| COMPLETED Add a build number to dogen                   |        |      | 0:07 |
++Clock summary at [2014-08-26 Tue 08:34]
++
++| Headline                                                | Time    |       |      |
++|---------------------------------------------------------+---------+-------+------|
++| *Total time*                                            | *12:29* |       |      |
++|---------------------------------------------------------+---------+-------+------|
++| Development Stories Implemented                         |         | 12:29 |      |
++| IMPLEMENTATION Sprint and product backlog grooming      |         |       | 1:26 |
++| IMPLEMENTATION Updates to the manual and readme files   |         |       | 0:38 |
++| COMPLETED Update instructions in manual for Postgres    |         |       | 0:50 |
++| COMPLETED Tidy-up test model folder structure           |         |       | 6:01 |
++| COMPLETED Review where we are with the last refactoring |         |       | 0:21 |
++| COMPLETED Check that dogen builds on C++-14             |         |       | 0:10 |
++| COMPLETED Add a build number to dogen                   |         |       | 0:07 |
++| COMPLETED Analyse formatters architecture               |         |       | 0:39 |
++| IMPLEMENTATION Merge entity with file info              |         |       | 1:10 |
++| IMPLEMENTATION Refactor types header formatter          |         |       | 1:07 |
+ #+end:
+ 
+ *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
++    CLOCK: [2014-08-26 Tue 07:51]--[2014-08-26 Tue 08:02] =>  0:11
+     CLOCK: [2014-08-23 Sat 11:31]--[2014-08-23 Sat 11:56] =>  0:25
+     CLOCK: [2014-08-23 Sat 10:56]--[2014-08-23 Sat 11:07] =>  0:11
+     CLOCK: [2014-08-22 Fri 12:39]--[2014-08-22 Fri 12:49] =>  0:10
+@@ -213,6 +217,100 @@ This does mean we now always rebuild because the build number keeps on
  changing. We should try this approach for a bit and see how well it
  works.
  
@@ -1289,12 +1331,21 @@ index c41da34..c03eb5c 100644
 +  =types_enumeration_main_header_file_formatter=, etc.
 +- cpp projects should be split on type again. this way we avoid type
 +  dispatching, visitors etc.
++- file name and includes must be computed using a pair of strings:
++  (facet, aspect). these are supplied at run time via the registration
++  of the formatters. Each entity in the C++ model also has these pair
++  of strings. Formatters register against an interface
++  (=class_formatter_interface= say) using this pair. Formatting is
++  just a case of looking for the right formatter for triplet (type,
++  facet, aspect). includes are computed dynamically using a key that
++  contains the pair (feature, aspect).
 +
 +These changes are very hard to do incrementally, so we will have to
 +work off of a patch until we get it all to work.
 +
 +*** IMPLEMENTATION Merge entity with file info                        :story:
-+    CLOCK: [2014-08-25 Mon 13:32]
++    CLOCK: [2014-08-26 Tue 08:02]--[2014-08-26 Tue 08:34] =>  0:32
++    CLOCK: [2014-08-25 Mon 13:32]--[2014-08-25 Mon 14:10] =>  0:38
 +
 +As part of the formatters refactoring, we need a single top-level
 +entity against which we can create formatter interfaces. In order to
@@ -1337,10 +1388,18 @@ index c41da34..c03eb5c 100644
 +Not sure how applicable this would be, but we may be able to scavenge
 +some tests.
 +
++*** C++ formatters use of =headers_for_facet_=                        :story:
++
++We seem to be creating a local variable =headers_for_facet_= in
++function =format_file_infos_activity= but not really making use of
++it. We need to investigate what was that we were trying to do here,
++the name of the variable seems to imply it should have been a member
++variable. Probably a remnant from some old refactoring.
++
  *** Move includes and header guard into entity                        :story:
  
  With this a formatter can now rely only on entities rather than
-@@ -304,28 +381,6 @@ dependencies inside of the formatters.
+@@ -304,28 +402,6 @@ dependencies inside of the formatters.
  - remove relationships from transformer
  - remove helper models boost and std
  
@@ -5341,6 +5400,22 @@ index 01a3fe4..d6cb8ca 100644
      virtual void visit(dogen::cpp::class_info& ci) override;
      virtual void visit(dogen::cpp::enum_info& ei) override;
      virtual void visit(dogen::cpp::exception_info& ei) override;
+diff --git a/projects/cpp_formatters/include/dogen/cpp_formatters/types/workflow.hpp b/projects/cpp_formatters/include/dogen/cpp_formatters/types/workflow.hpp
+index 36f7479..3a00654 100644
+--- a/projects/cpp_formatters/include/dogen/cpp_formatters/types/workflow.hpp
++++ b/projects/cpp_formatters/include/dogen/cpp_formatters/types/workflow.hpp
+@@ -69,6 +69,11 @@ private:
+     result_entry_type format_odb_options_activity(const cpp::project& p) const;
+ 
+     /**
++     * @brief Generate a given C++ file.
++     */
++    result_type::value_type format_file_info(const cpp::file_info& f) const;
++
++    /**
+      * @brief Generate all C++ files.
+      */
+     result_type format_file_infos_activity(const cpp::project& p) const;
 diff --git a/projects/cpp_formatters/src/types/domain_implementation.cpp b/projects/cpp_formatters/src/types/domain_implementation.cpp
 index 0b0e1da..80123e2 100644
 --- a/projects/cpp_formatters/src/types/domain_implementation.cpp
@@ -5648,6 +5723,64 @@ index 7701201..41b6389 100644
      if (!o) {
          BOOST_LOG_SEV(lg, error) << missing_visitor_info;
          BOOST_THROW_EXCEPTION(formatting_error(missing_visitor_info));
+diff --git a/projects/cpp_formatters/src/types/workflow.cpp b/projects/cpp_formatters/src/types/workflow.cpp
+index db61da9..7bc0273 100644
+--- a/projects/cpp_formatters/src/types/workflow.cpp
++++ b/projects/cpp_formatters/src/types/workflow.cpp
+@@ -87,6 +87,18 @@ workflow::format_odb_options_activity(const cpp::project& p) const {
+     return std::make_pair(path, s.str());
+ }
+ 
++workflow::result_type::value_type
++workflow::format_file_info(const cpp::file_info& f) const {
++    BOOST_LOG_SEV(lg, debug) << "Formatting:" << f.file_path().string();
++    BOOST_LOG_SEV(lg, debug) << "Descriptor:" << f.descriptor();
++    cpp_formatters::factory factory(settings_);
++    cpp_formatters::file_formatter::shared_ptr ff;
++    std::ostringstream s;
++    ff = factory.create(s, f.descriptor());
++    ff->format(f);
++    return std::make_pair(f.file_path(), s.str());
++}
++
+ workflow::result_type
+ workflow::format_file_infos_activity(const cpp::project& p) const {
+     workflow::result_type r;
+@@ -94,20 +106,20 @@ workflow::format_file_infos_activity(const cpp::project& p) const {
+     std::map<config::cpp_facet_types, std::list<std::string> >
+         headers_for_facet_;
+ 
+-    for (const auto f : p.files()) {
+-        if (f.descriptor().file_type() == cpp::file_types::header)
+-            headers_for_facet_[f.descriptor().facet_type()].
+-                push_back(f.relative_path().generic_string());
+-
+-        BOOST_LOG_SEV(lg, debug) << "Formatting:" << f.file_path().string();
+-        BOOST_LOG_SEV(lg, debug) << "Descriptor:" << f.descriptor();
+-        cpp_formatters::factory factory(settings_);
+-        cpp_formatters::file_formatter::shared_ptr ff;
+-        std::ostringstream s;
+-        ff = factory.create(s, f.descriptor());
+-        ff->format(f);
+-        r.insert(std::make_pair(f.file_path(), s.str()));
+-    }
++    auto lambda([&](const cpp::file_info& f) {
++            if (f.descriptor().file_type() == cpp::file_types::header)
++                headers_for_facet_[f.descriptor().facet_type()].
++                    push_back(f.relative_path().generic_string());
++            r.insert(format_file_info(f));
++        });
++
++    for (const auto& e : p.enumerations()) lambda(e);
++    for (const auto& e : p.exceptions()) lambda(e);
++    for (const auto& c : p.classes()) lambda(c);
++    for (const auto& n : p.namespaces()) lambda(n);
++    for (const auto& r : p.registrars()) lambda(r);
++    for (const auto& v : p.visitors()) lambda(v);
++    for (const auto& i : p.includers()) lambda(i);
+ 
+     return r;
+ }
 diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/workflow.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/workflow.hpp
 index 82b5058..7fad4eb 100644
 --- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/workflow.hpp
@@ -5677,3 +5810,36 @@ index 82b5058..7fad4eb 100644
  
      /**
       * @brief Generate C++ files for enumerations.
+diff --git a/projects/sml_to_cpp/src/types/workflow.cpp b/projects/sml_to_cpp/src/types/workflow.cpp
+index 66ab563..daf0e5f 100644
+--- a/projects/sml_to_cpp/src/types/workflow.cpp
++++ b/projects/sml_to_cpp/src/types/workflow.cpp
+@@ -361,21 +361,13 @@ std::list<cpp::file_info> workflow::generate_exceptions_activity() const {
+ }
+ 
+ void workflow::generate_file_infos_activity(cpp::project& p) const {
+-    const auto a(generate_enums_activity());
+-    const auto b(generate_exceptions_activity());
+-    const auto c(generate_file_infos_for_classes_activity());
+-    const auto d(generate_file_infos_for_namespaces_activity());
+-    const auto e(generate_registrars_activity());
+-    const auto f(generate_visitors_activity());
+-    const auto g(generate_includers_activity());
+-
+-    p.files().insert(p.files().end(), a.begin(), a.end());
+-    p.files().insert(p.files().end(), b.begin(), b.end());
+-    p.files().insert(p.files().end(), c.begin(), c.end());
+-    p.files().insert(p.files().end(), d.begin(), d.end());
+-    p.files().insert(p.files().end(), e.begin(), e.end());
+-    p.files().insert(p.files().end(), f.begin(), f.end());
+-    p.files().insert(p.files().end(), g.begin(), g.end());
++    p.enumerations(generate_enums_activity());
++    p.exceptions(generate_exceptions_activity());
++    p.classes(generate_file_infos_for_classes_activity());
++    p.namespaces(generate_file_infos_for_namespaces_activity());
++    p.registrars(generate_registrars_activity());
++    p.visitors(generate_visitors_activity());
++    p.includers(generate_includers_activity());
+ }
+ 
+ void workflow::generate_cmakelists_activity(cpp::project& p) const {
