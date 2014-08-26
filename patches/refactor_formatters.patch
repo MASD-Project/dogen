@@ -1,5 +1,5 @@
 diff --git a/diagrams/cpp.dia b/diagrams/cpp.dia
-index b9df8c9..b80e39e 100644
+index b9df8c9..bbc9836 100644
 --- a/diagrams/cpp.dia
 +++ b/diagrams/cpp.dia
 @@ -550,13 +550,13 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
@@ -318,15 +318,15 @@ index b9df8c9..b80e39e 100644
      <dia:object type="UML - Class" version="0" id="O19">
        <dia:attribute name="obj_pos">
 -        <dia:point val="26,87"/>
-+        <dia:point val="22.4167,66"/>
++        <dia:point val="14,66"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="25.95,86.95;33.7825,89.25"/>
-+        <dia:rectangle val="22.3667,65.95;30.1992,68.25"/>
++        <dia:rectangle val="13.95,65.95;21.7825,68.25"/>
        </dia:attribute>
        <dia:attribute name="elem_corner">
 -        <dia:point val="26,87"/>
-+        <dia:point val="22.4167,66"/>
++        <dia:point val="14,66"/>
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="7.7324999999999999"/>
@@ -347,66 +347,78 @@ index b9df8c9..b80e39e 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="12.050000000000001"/>
+@@ -4268,7 +4268,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="112,47"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="12.620000000000001"/>
++        <dia:real val="12.619999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
 @@ -4476,16 +4476,16 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
 -        <dia:point val="26,32.2"/>
-+        <dia:point val="26,36.2"/>
++        <dia:point val="26,37.8"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="14.9375,31.45;26.75,47.8"/>
-+        <dia:rectangle val="14.9375,35.45;26.75,47.8"/>
++        <dia:rectangle val="14.9375,37.05;26.75,47.8"/>
        </dia:attribute>
        <dia:attribute name="meta">
          <dia:composite type="dict"/>
        </dia:attribute>
        <dia:attribute name="orth_points">
 -        <dia:point val="26,32.2"/>
-+        <dia:point val="26,36.2"/>
++        <dia:point val="26,37.8"/>
          <dia:point val="26,40"/>
          <dia:point val="14.9875,40"/>
          <dia:point val="14.9875,47"/>
-@@ -4547,16 +4547,16 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+@@ -4547,17 +4547,17 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
 -        <dia:point val="36.4525,32.2"/>
-+        <dia:point val="36.4525,36.2"/>
++        <dia:point val="37.415,37.8"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="35.7025,31.45;39.1875,47.8"/>
-+        <dia:rectangle val="35.7025,35.45;39.1875,47.8"/>
++        <dia:rectangle val="36.665,37.05;39.1875,47.8"/>
        </dia:attribute>
        <dia:attribute name="meta">
          <dia:composite type="dict"/>
        </dia:attribute>
        <dia:attribute name="orth_points">
 -        <dia:point val="36.4525,32.2"/>
-+        <dia:point val="36.4525,36.2"/>
-         <dia:point val="36.4525,40"/>
+-        <dia:point val="36.4525,40"/>
++        <dia:point val="37.415,37.8"/>
++        <dia:point val="37.415,40"/>
          <dia:point val="38.9875,40"/>
          <dia:point val="38.9875,47"/>
+       </dia:attribute>
 @@ -4618,19 +4618,19 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
 -        <dia:point val="46.905,32.2"/>
-+        <dia:point val="46.905,36.2"/>
++        <dia:point val="48.83,37.8"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="46.155,31.45;56.2,47.8"/>
-+        <dia:rectangle val="46.155,35.45;57.2,47.8"/>
++        <dia:rectangle val="48.08,37.05;57.2,47.8"/>
        </dia:attribute>
        <dia:attribute name="meta">
          <dia:composite type="dict"/>
        </dia:attribute>
        <dia:attribute name="orth_points">
 -        <dia:point val="46.905,32.2"/>
-+        <dia:point val="46.905,36.2"/>
-         <dia:point val="46.905,40"/>
+-        <dia:point val="46.905,40"/>
 -        <dia:point val="56,40"/>
 -        <dia:point val="56,47"/>
++        <dia:point val="48.83,37.8"/>
++        <dia:point val="48.83,40"/>
 +        <dia:point val="57,40"/>
 +        <dia:point val="57,47"/>
        </dia:attribute>
@@ -455,7 +467,7 @@ index b9df8c9..b80e39e 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -4927,13 +4927,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+@@ -4927,16 +4927,16 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
      </dia:object>
      <dia:object type="UML - Class" version="0" id="O31">
        <dia:attribute name="obj_pos">
@@ -471,7 +483,11 @@ index b9df8c9..b80e39e 100644
 +        <dia:point val="91.8333,43.25"/>
        </dia:attribute>
        <dia:attribute name="elem_width">
-         <dia:real val="8.5849999999999991"/>
+-        <dia:real val="8.5849999999999991"/>
++        <dia:real val="8.5850000000000009"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="15.600000000000003"/>
 @@ -5442,17 +5442,17 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
@@ -494,21 +510,23 @@ index b9df8c9..b80e39e 100644
          <dia:point val="92.18,40"/>
          <dia:point val="92.18,33"/>
        </dia:attribute>
-@@ -5480,7 +5480,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+@@ -5480,16 +5480,16 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
          <dia:point val="26,27"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="25.95,26.95;46.955,32.25"/>
-+        <dia:rectangle val="25.95,26.95;46.955,36.25"/>
++        <dia:rectangle val="25.95,26.95;48.88,37.85"/>
        </dia:attribute>
        <dia:attribute name="elem_corner">
          <dia:point val="26,27"/>
-@@ -5489,7 +5489,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
-         <dia:real val="20.905000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.905000000000001"/>
++        <dia:real val="22.829999999999998"/>
        </dia:attribute>
        <dia:attribute name="elem_height">
 -        <dia:real val="5.2000000000000011"/>
-+        <dia:real val="9.1999999999999993"/>
++        <dia:real val="10.800000000000001"/>
        </dia:attribute>
        <dia:attribute name="name">
          <dia:string>#project#</dia:string>
@@ -572,7 +590,7 @@ index b9df8c9..b80e39e 100644
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -5650,16 +5650,16 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+@@ -5650,16 +5650,177 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
          </dia:composite>
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
@@ -589,142 +607,28 @@ index b9df8c9..b80e39e 100644
            <dia:attribute name="comment">
 -            <dia:string>#The CMake makefile for the include directory.#</dia:string>
 +            <dia:string>#All namespaces.#</dia:string>
-           </dia:attribute>
-           <dia:attribute name="visibility">
-             <dia:enum val="0"/>
-@@ -5671,133 +5671,110 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
-             <dia:boolean val="false"/>
-           </dia:attribute>
-         </dia:composite>
--      </dia:attribute>
--      <dia:attribute name="operations"/>
--      <dia:attribute name="template">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="templates"/>
--    </dia:object>
--    <dia:object type="UML - Class" version="0" id="O34">
--      <dia:attribute name="obj_pos">
--        <dia:point val="-7,87"/>
--      </dia:attribute>
--      <dia:attribute name="obj_bb">
--        <dia:rectangle val="-7.05,86.95;3.945,90.65"/>
--      </dia:attribute>
--      <dia:attribute name="elem_corner">
--        <dia:point val="-7,87"/>
--      </dia:attribute>
--      <dia:attribute name="elem_width">
--        <dia:real val="10.895"/>
--      </dia:attribute>
--      <dia:attribute name="elem_height">
--        <dia:real val="3.6000000000000001"/>
--      </dia:attribute>
--      <dia:attribute name="name">
--        <dia:string>#Documentable#</dia:string>
--      </dia:attribute>
--      <dia:attribute name="stereotype">
--        <dia:string>#concept#</dia:string>
--      </dia:attribute>
--      <dia:attribute name="comment">
--        <dia:string>#Ability to provide documentation.#</dia:string>
--      </dia:attribute>
--      <dia:attribute name="abstract">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="suppress_attributes">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="suppress_operations">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="visible_attributes">
--        <dia:boolean val="true"/>
--      </dia:attribute>
--      <dia:attribute name="visible_operations">
--        <dia:boolean val="true"/>
--      </dia:attribute>
--      <dia:attribute name="visible_comments">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="wrap_operations">
--        <dia:boolean val="true"/>
--      </dia:attribute>
--      <dia:attribute name="wrap_after_char">
--        <dia:int val="40"/>
--      </dia:attribute>
--      <dia:attribute name="comment_line_length">
--        <dia:int val="17"/>
--      </dia:attribute>
--      <dia:attribute name="comment_tagging">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="line_width">
--        <dia:real val="0.10000000000000001"/>
--      </dia:attribute>
--      <dia:attribute name="line_color">
--        <dia:color val="#000000"/>
--      </dia:attribute>
--      <dia:attribute name="fill_color">
--        <dia:color val="#ffffff"/>
--      </dia:attribute>
--      <dia:attribute name="text_color">
--        <dia:color val="#000000"/>
--      </dia:attribute>
--      <dia:attribute name="normal_font">
--        <dia:font family="monospace" style="0" name="Courier"/>
--      </dia:attribute>
--      <dia:attribute name="abstract_font">
--        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
--      </dia:attribute>
--      <dia:attribute name="polymorphic_font">
--        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
--      </dia:attribute>
--      <dia:attribute name="classname_font">
--        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
--      </dia:attribute>
--      <dia:attribute name="abstract_classname_font">
--        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
--      </dia:attribute>
--      <dia:attribute name="comment_font">
--        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
--      </dia:attribute>
--      <dia:attribute name="normal_font_height">
--        <dia:real val="0.80000000000000004"/>
--      </dia:attribute>
--      <dia:attribute name="polymorphic_font_height">
--        <dia:real val="0.80000000000000004"/>
--      </dia:attribute>
--      <dia:attribute name="abstract_font_height">
--        <dia:real val="0.80000000000000004"/>
--      </dia:attribute>
--      <dia:attribute name="classname_font_height">
--        <dia:real val="1"/>
--      </dia:attribute>
--      <dia:attribute name="abstract_classname_font_height">
--        <dia:real val="1"/>
--      </dia:attribute>
--      <dia:attribute name="comment_font_height">
--        <dia:real val="0.69999999999999996"/>
--      </dia:attribute>
--      <dia:attribute name="attributes">
-         <dia:composite type="umlattribute">
-           <dia:attribute name="name">
--            <dia:string>#documentation#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
 +            <dia:string>#visitors#</dia:string>
-           </dia:attribute>
-           <dia:attribute name="type">
--            <dia:string>#std::string#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
 +            <dia:string>#std::list&lt;visitor_info&gt;#</dia:string>
-           </dia:attribute>
-           <dia:attribute name="value">
-             <dia:string>##</dia:string>
-           </dia:attribute>
-           <dia:attribute name="comment">
--            <dia:string>#Code comments.
--
--These are expected to follow the grammar of the comment processing tools
--of the programming language in question, e.g. Doxygen for C++, JavaDoc
--for Java, etc.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
 +            <dia:string>#All visitors.#</dia:string>
 +          </dia:attribute>
 +          <dia:attribute name="visibility">
@@ -818,37 +722,80 @@ index b9df8c9..b80e39e 100644
 +          </dia:attribute>
 +          <dia:attribute name="comment">
 +            <dia:string>#All registrars.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#forward_declarations#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;forward_declaration_info&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#includers#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;includer_info&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -5816,30 +5793,30 @@ for Java, etc.#</dia:string>
-       </dia:attribute>
-       <dia:attribute name="templates"/>
+@@ -5818,28 +5979,28 @@ for Java, etc.#</dia:string>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O35">
-+    <dia:object type="UML - Class" version="0" id="O34">
+     <dia:object type="UML - Class" version="0" id="O35">
        <dia:attribute name="obj_pos">
 -        <dia:point val="60,72"/>
-+        <dia:point val="-7,87"/>
++        <dia:point val="-21,87"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="59.95,71.95;74.795,75.65"/>
-+        <dia:rectangle val="-7.05,86.95;3.945,90.65"/>
++        <dia:rectangle val="-21.05,86.95;-13.52,90.65"/>
        </dia:attribute>
        <dia:attribute name="elem_corner">
 -        <dia:point val="60,72"/>
-+        <dia:point val="-7,87"/>
++        <dia:point val="-21,87"/>
        </dia:attribute>
        <dia:attribute name="elem_width">
 -        <dia:real val="14.744999999999999"/>
-+        <dia:real val="10.895"/>
++        <dia:real val="7.4299999999999997"/>
        </dia:attribute>
        <dia:attribute name="elem_height">
          <dia:real val="3.6000000000000001"/>
        </dia:attribute>
        <dia:attribute name="name">
 -        <dia:string>#entity#</dia:string>
-+        <dia:string>#Documentable#</dia:string>
++        <dia:string>#Nameable#</dia:string>
        </dia:attribute>
        <dia:attribute name="stereotype">
 -        <dia:string>#visitable, Nameable, Documentable#</dia:string>
@@ -856,16 +803,16 @@ index b9df8c9..b80e39e 100644
        </dia:attribute>
        <dia:attribute name="comment">
 -        <dia:string>#Top-level entity in the model.#</dia:string>
-+        <dia:string>#Ability to provide documentation.#</dia:string>
++        <dia:string>#Represents an entity with a name.#</dia:string>
        </dia:attribute>
        <dia:attribute name="abstract">
          <dia:boolean val="false"/>
-@@ -5922,16 +5899,20 @@ for Java, etc.#</dia:string>
+@@ -5922,16 +6083,18 @@ for Java, etc.#</dia:string>
        <dia:attribute name="attributes">
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#namespaces#</dia:string>
-+            <dia:string>#documentation#</dia:string>
++            <dia:string>#name#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -876,70 +823,256 @@ index b9df8c9..b80e39e 100644
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#List of all namespaces containing the type. Last namespace is the target.#</dia:string>
-+            <dia:string>#Code comments.
++            <dia:string>#Name of the entity.
 +
-+These are expected to follow the grammar of the comment processing tools
-+of the programming language in question, e.g. Doxygen for C++, JavaDoc
-+for Java, etc.#</dia:string>
++Must be valid according to the rules for C++ names.#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -5950,7 +5931,7 @@ for Java, etc.#</dia:string>
+@@ -5950,198 +6113,103 @@ for Java, etc.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O36">
-+    <dia:object type="UML - Class" version="0" id="O35">
-       <dia:attribute name="obj_pos">
-         <dia:point val="-21,87"/>
-       </dia:attribute>
-@@ -6086,21 +6067,21 @@ Must be valid according to the rules for C++ names.#</dia:string>
-       </dia:attribute>
-       <dia:attribute name="templates"/>
-     </dia:object>
--    <dia:object type="UML - Generalization" version="1" id="O37">
 +    <dia:object type="UML - Generalization" version="1" id="O36">
        <dia:attribute name="obj_pos">
--        <dia:point val="67.3725,75.6"/>
+-        <dia:point val="-21,87"/>
 +        <dia:point val="64.7575,54.6"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-21.05,86.95;-13.52,90.65"/>
++        <dia:rectangle val="17.8163,54.55;65.6075,65.9999"/>
+       </dia:attribute>
+-      <dia:attribute name="elem_corner">
+-        <dia:point val="-21,87"/>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
+       </dia:attribute>
+-      <dia:attribute name="elem_width">
+-        <dia:real val="7.4299999999999997"/>
++      <dia:attribute name="orth_points">
++        <dia:point val="64.7575,54.6"/>
++        <dia:point val="64.7575,61"/>
++        <dia:point val="17.8663,61"/>
++        <dia:point val="17.8663,65.9499"/>
+       </dia:attribute>
+-      <dia:attribute name="elem_height">
+-        <dia:real val="3.6000000000000001"/>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#Nameable#</dia:string>
++        <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+-        <dia:string>#concept#</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="comment">
+-        <dia:string>#Represents an entity with a name.#</dia:string>
++        <dia:string>##</dia:string>
+       </dia:attribute>
+-      <dia:attribute name="abstract">
+-        <dia:boolean val="false"/>
++      <dia:connections>
++        <dia:connection handle="0" to="O10" connection="6"/>
++        <dia:connection handle="1" to="O19" connection="8"/>
++      </dia:connections>
++    </dia:object>
++    <dia:object type="UML - Generalization" version="1" id="O37">
++      <dia:attribute name="obj_pos">
++        <dia:point val="64.7575,54.6"/>
+       </dia:attribute>
+-      <dia:attribute name="suppress_attributes">
+-        <dia:boolean val="false"/>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="51.3917,54.55;65.6075,66.05"/>
+       </dia:attribute>
+-      <dia:attribute name="suppress_operations">
+-        <dia:boolean val="false"/>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
+       </dia:attribute>
+-      <dia:attribute name="visible_attributes">
+-        <dia:boolean val="true"/>
++      <dia:attribute name="orth_points">
++        <dia:point val="64.7575,54.6"/>
++        <dia:point val="64.7575,61"/>
++        <dia:point val="51.4417,61"/>
++        <dia:point val="51.4417,66"/>
+       </dia:attribute>
+-      <dia:attribute name="visible_operations">
+-        <dia:boolean val="true"/>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
+       </dia:attribute>
+-      <dia:attribute name="visible_comments">
++      <dia:attribute name="orth_autoroute">
+         <dia:boolean val="false"/>
+       </dia:attribute>
+-      <dia:attribute name="wrap_operations">
+-        <dia:boolean val="true"/>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
+       </dia:attribute>
+-      <dia:attribute name="wrap_after_char">
+-        <dia:int val="40"/>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
+       </dia:attribute>
+-      <dia:attribute name="comment_line_length">
+-        <dia:int val="17"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_tagging">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_width">
+-        <dia:real val="0.10000000000000001"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="fill_color">
+-        <dia:color val="#ffffff"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="normal_font">
+-        <dia:font family="monospace" style="0" name="Courier"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_font">
+-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="polymorphic_font">
+-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="classname_font">
+-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_classname_font">
+-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_font">
+-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="normal_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="polymorphic_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="classname_font_height">
+-        <dia:real val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_classname_font_height">
+-        <dia:real val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_font_height">
+-        <dia:real val="0.69999999999999996"/>
+-      </dia:attribute>
+-      <dia:attribute name="attributes">
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::string#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Name of the entity.
+-
+-Must be valid according to the rules for C++ names.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-      </dia:attribute>
+-      <dia:attribute name="operations"/>
+-      <dia:attribute name="template">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="templates"/>
+-    </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O37">
+-      <dia:attribute name="obj_pos">
+-        <dia:point val="67.3725,75.6"/>
+-      </dia:attribute>
+-      <dia:attribute name="obj_bb">
 -        <dia:rectangle val="29.8163,75.55;68.2225,86.9999"/>
-+        <dia:rectangle val="26.2329,54.55;65.6075,65.9999"/>
-       </dia:attribute>
-       <dia:attribute name="meta">
-         <dia:composite type="dict"/>
-       </dia:attribute>
-       <dia:attribute name="orth_points">
+-      </dia:attribute>
+-      <dia:attribute name="meta">
+-        <dia:composite type="dict"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_points">
 -        <dia:point val="67.3725,75.6"/>
 -        <dia:point val="67.3725,82"/>
 -        <dia:point val="29.8663,82"/>
 -        <dia:point val="29.8663,86.9499"/>
-+        <dia:point val="64.7575,54.6"/>
-+        <dia:point val="64.7575,61"/>
-+        <dia:point val="26.2829,61"/>
-+        <dia:point val="26.2829,65.9499"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_orient">
+-        <dia:enum val="1"/>
+-        <dia:enum val="0"/>
+-        <dia:enum val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_autoroute">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="name">
+-        <dia:string>##</dia:string>
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
        </dia:attribute>
-       <dia:attribute name="orth_orient">
-         <dia:enum val="1"/>
-@@ -6123,25 +6104,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
+       <dia:attribute name="stereotype">
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O35" connection="6"/>
+-        <dia:connection handle="1" to="O19" connection="8"/>
 +        <dia:connection handle="0" to="O10" connection="6"/>
-         <dia:connection handle="1" to="O19" connection="8"/>
++        <dia:connection handle="1" to="O20" connection="1"/>
        </dia:connections>
      </dia:object>
--    <dia:object type="UML - Generalization" version="1" id="O38">
-+    <dia:object type="UML - Generalization" version="1" id="O37">
+     <dia:object type="UML - Generalization" version="1" id="O38">
        <dia:attribute name="obj_pos">
 -        <dia:point val="67.3725,75.6"/>
 +        <dia:point val="64.7575,54.6"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="54.975,75.55;68.2225,87.05"/>
-+        <dia:rectangle val="51.3917,54.55;65.6075,66.05"/>
++        <dia:rectangle val="63.9075,54.55;76.4167,66.05"/>
        </dia:attribute>
        <dia:attribute name="meta">
          <dia:composite type="dict"/>
@@ -951,12 +1084,12 @@ index b9df8c9..b80e39e 100644
 -        <dia:point val="55.025,87"/>
 +        <dia:point val="64.7575,54.6"/>
 +        <dia:point val="64.7575,61"/>
-+        <dia:point val="51.4417,61"/>
-+        <dia:point val="51.4417,66"/>
++        <dia:point val="76.3667,61"/>
++        <dia:point val="76.3667,66"/>
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -6164,96 +6145,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
+@@ -6164,137 +6232,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -1033,40 +1166,46 @@ index b9df8c9..b80e39e 100644
 -      <dia:connections>
          <dia:connection handle="0" to="O10" connection="6"/>
 -        <dia:connection handle="1" to="O35" connection="1"/>
-+        <dia:connection handle="1" to="O20" connection="1"/>
-       </dia:connections>
-     </dia:object>
+-      </dia:connections>
+-    </dia:object>
 -    <dia:object type="UML - Generalization" version="1" id="O40">
-+    <dia:object type="UML - Generalization" version="1" id="O38">
-       <dia:attribute name="obj_pos">
+-      <dia:attribute name="obj_pos">
 -        <dia:point val="67.3725,75.6"/>
-+        <dia:point val="64.7575,54.6"/>
-       </dia:attribute>
-       <dia:attribute name="obj_bb">
+-      </dia:attribute>
+-      <dia:attribute name="obj_bb">
 -        <dia:rectangle val="66.5225,75.55;80,87.05"/>
-+        <dia:rectangle val="63.9075,54.55;76.4167,66.05"/>
-       </dia:attribute>
-       <dia:attribute name="meta">
-         <dia:composite type="dict"/>
-       </dia:attribute>
-       <dia:attribute name="orth_points">
+-      </dia:attribute>
+-      <dia:attribute name="meta">
+-        <dia:composite type="dict"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_points">
 -        <dia:point val="67.3725,75.6"/>
 -        <dia:point val="67.3725,82"/>
 -        <dia:point val="79.95,82"/>
 -        <dia:point val="79.95,87"/>
-+        <dia:point val="64.7575,54.6"/>
-+        <dia:point val="64.7575,61"/>
-+        <dia:point val="76.3667,61"/>
-+        <dia:point val="76.3667,66"/>
-       </dia:attribute>
-       <dia:attribute name="orth_orient">
-         <dia:enum val="1"/>
-@@ -6276,25 +6186,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
-         <dia:string>##</dia:string>
-       </dia:attribute>
-       <dia:connections>
+-      </dia:attribute>
+-      <dia:attribute name="orth_orient">
+-        <dia:enum val="1"/>
+-        <dia:enum val="0"/>
+-        <dia:enum val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_autoroute">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="name">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="stereotype">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:connections>
 -        <dia:connection handle="0" to="O35" connection="6"/>
-+        <dia:connection handle="0" to="O10" connection="6"/>
          <dia:connection handle="1" to="O6" connection="1"/>
        </dia:connections>
      </dia:object>
@@ -1095,7 +1234,7 @@ index b9df8c9..b80e39e 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -6317,25 +6227,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
+@@ -6317,25 +6273,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -1129,7 +1268,7 @@ index b9df8c9..b80e39e 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -6358,25 +6268,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
+@@ -6358,25 +6314,25 @@ Must be valid according to the rules for C++ names.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -1163,7 +1302,7 @@ index b9df8c9..b80e39e 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -6399,11 +6309,11 @@ Must be valid according to the rules for C++ names.#</dia:string>
+@@ -6399,11 +6355,11 @@ Must be valid according to the rules for C++ names.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -1177,7 +1316,7 @@ index b9df8c9..b80e39e 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -6441,17 +6351,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
+@@ -6441,17 +6397,17 @@ Must be valid according to the rules for C++ names.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -1199,7 +1338,7 @@ index b9df8c9..b80e39e 100644
          <dia:point val="85,40"/>
          <dia:point val="85,33"/>
        </dia:attribute>
-@@ -6474,7 +6384,7 @@ Must be valid according to the rules for C++ names.#</dia:string>
+@@ -6474,7 +6430,7 @@ Must be valid according to the rules for C++ names.#</dia:string>
          <dia:connection handle="1" to="O21" connection="5"/>
        </dia:connections>
      </dia:object>
@@ -1208,7 +1347,7 @@ index b9df8c9..b80e39e 100644
        <dia:attribute name="obj_pos">
          <dia:point val="56,27"/>
        </dia:attribute>
-@@ -6645,7 +6555,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
+@@ -6645,7 +6601,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -1217,7 +1356,7 @@ index b9df8c9..b80e39e 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -6683,17 +6593,17 @@ These are expected to use quotes and be on the user path.#</dia:string>
+@@ -6683,17 +6639,17 @@ These are expected to use quotes and be on the user path.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -1239,7 +1378,7 @@ index b9df8c9..b80e39e 100644
          <dia:point val="64.5275,40"/>
          <dia:point val="64.5275,30.6"/>
        </dia:attribute>
-@@ -6713,10 +6623,10 @@ These are expected to use quotes and be on the user path.#</dia:string>
+@@ -6713,10 +6669,10 @@ These are expected to use quotes and be on the user path.#</dia:string>
        </dia:attribute>
        <dia:connections>
          <dia:connection handle="0" to="O10" connection="1"/>
@@ -1252,8 +1391,325 @@ index b9df8c9..b80e39e 100644
        <dia:attribute name="obj_pos">
          <dia:point val="-28,26"/>
        </dia:attribute>
+@@ -6730,7 +6686,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
+         <dia:point val="-28,26"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="30.545000000000002"/>
++        <dia:real val="30.544999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="40.100000000000001"/>
+@@ -6815,5 +6771,307 @@ seems like the least bad approach.
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O46">
++      <dia:attribute name="obj_pos">
++        <dia:point val="18,72"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="17.95,71.95;29.75,74.25"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="18,72"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="11.699999999999999"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="2.1999999999999997"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#forward_declaration_info#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O47">
++      <dia:attribute name="obj_pos">
++        <dia:point val="26,67"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="25.95,66.95;32.3675,69.25"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="26,67"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="6.3174999999999999"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="2.1999999999999997"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#includer_info#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Generalization" version="1" id="O48">
++      <dia:attribute name="obj_pos">
++        <dia:point val="64.7575,54.6"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="23.8,54.55;65.6075,72.05"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="64.7575,54.6"/>
++        <dia:point val="64.7575,61"/>
++        <dia:point val="23.85,61"/>
++        <dia:point val="23.85,72"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O10" connection="6"/>
++        <dia:connection handle="1" to="O46" connection="1"/>
++      </dia:connections>
++    </dia:object>
++    <dia:object type="UML - Generalization" version="1" id="O49">
++      <dia:attribute name="obj_pos">
++        <dia:point val="64.7575,54.6"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="29.1088,54.55;65.6075,67.05"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="64.7575,54.6"/>
++        <dia:point val="64.7575,61"/>
++        <dia:point val="29.1588,61"/>
++        <dia:point val="29.1588,67"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O10" connection="6"/>
++        <dia:connection handle="1" to="O47" connection="1"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
 diff --git a/doc/agile/sprint_backlog_50.org b/doc/agile/sprint_backlog_50.org
-index c41da34..ef167fd 100644
+index c41da34..c810343 100644
 --- a/doc/agile/sprint_backlog_50.org
 +++ b/doc/agile/sprint_backlog_50.org
 @@ -13,23 +13,27 @@ and running again, after a long break.
@@ -1298,7 +1754,7 @@ index c41da34..ef167fd 100644
      CLOCK: [2014-08-23 Sat 11:31]--[2014-08-23 Sat 11:56] =>  0:25
      CLOCK: [2014-08-23 Sat 10:56]--[2014-08-23 Sat 11:07] =>  0:11
      CLOCK: [2014-08-22 Fri 12:39]--[2014-08-22 Fri 12:49] =>  0:10
-@@ -213,6 +217,100 @@ This does mean we now always rebuild because the build number keeps on
+@@ -213,6 +217,137 @@ This does mean we now always rebuild because the build number keeps on
  changing. We should try this approach for a bit and see how well it
  works.
  
@@ -1344,12 +1800,49 @@ index c41da34..ef167fd 100644
 +work off of a patch until we get it all to work.
 +
 +*** IMPLEMENTATION Merge entity with file info                        :story:
++    CLOCK: [2014-08-26 Tue 18:08]--[2014-08-26 Tue 18:55] =>  0:47
 +    CLOCK: [2014-08-26 Tue 08:02]--[2014-08-26 Tue 08:34] =>  0:32
 +    CLOCK: [2014-08-25 Mon 13:32]--[2014-08-25 Mon 14:10] =>  0:38
 +
 +As part of the formatters refactoring, we need a single top-level
 +entity against which we can create formatter interfaces. In order to
 +achieve that we need to remove the file info composition.
++
++We have reached the usual limitations:
++
++- if we merge file info with class info, etc. we now have to take a
++  instance of a type with half of the fields un-populated, make copies
++  of it and populate each copy with the correct values. This is very
++  smelly.
++- if we continue using composition via inheritance, we can no longer
++  distinguish the file formatter interfaces
++  (e.g. =class_formatter_interface= and so on).
++
++We have two options to solve this:
++
++- make file info a template class with the Entity as a
++  concept. Instantiate it with each of the infos (=class_info=,
++  etc.). This means we can now use the type system again in the
++  interfaces.
++- create a loser aggregation of the file details with the infos. For
++  example, we could have a map with a key of (facet, aspect, ) and a
++  value of file info. Each info is associated with one such map at the
++  project level. The formatter interface then takes the file details
++  and the info as two separate parameters.
++
++Rule: takes as an input a triplet, and returns:
++
++- the file name
++- the path to dependent files including forward declarations or not
++
++: types.main.header_file
++: types.main.implementation_file
++: types.forward_declaration.header_file
++: types.includers.header_file
++: ...
++: boost_serialization.main.header_file
++: boost_serialization.main.implementation_file
++
 +
 +*** IMPLEMENTATION Refactor types header formatter                    :story:
 +    CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
@@ -1399,7 +1892,7 @@ index c41da34..ef167fd 100644
  *** Move includes and header guard into entity                        :story:
  
  With this a formatter can now rely only on entities rather than
-@@ -304,28 +402,6 @@ dependencies inside of the formatters.
+@@ -304,28 +439,6 @@ dependencies inside of the formatters.
  - remove relationships from transformer
  - remove helper models boost and std
  
@@ -1429,10 +1922,10 @@ index c41da34..ef167fd 100644
  
  Seems like this warning is not part of =-Wall
 diff --git a/projects/cpp/include/dogen/cpp/hash/all_hash.hpp b/projects/cpp/include/dogen/cpp/hash/all_hash.hpp
-index 9b293e2..91d0df0 100644
+index 9b293e2..e78c92c 100644
 --- a/projects/cpp/include/dogen/cpp/hash/all_hash.hpp
 +++ b/projects/cpp/include/dogen/cpp/hash/all_hash.hpp
-@@ -24,7 +24,6 @@
+@@ -24,12 +24,13 @@
  #include "dogen/cpp/hash/cmakelists_info_hash.hpp"
  #include "dogen/cpp/hash/content_descriptor_hash.hpp"
  #include "dogen/cpp/hash/content_types_hash.hpp"
@@ -1440,6 +1933,13 @@ index 9b293e2..91d0df0 100644
  #include "dogen/cpp/hash/enum_info_hash.hpp"
  #include "dogen/cpp/hash/enumerator_info_hash.hpp"
  #include "dogen/cpp/hash/exception_info_hash.hpp"
+ #include "dogen/cpp/hash/file_info_hash.hpp"
+ #include "dogen/cpp/hash/file_types_hash.hpp"
++#include "dogen/cpp/hash/forward_declaration_info_hash.hpp"
++#include "dogen/cpp/hash/includer_info_hash.hpp"
+ #include "dogen/cpp/hash/includes_hash.hpp"
+ #include "dogen/cpp/hash/namespace_info_hash.hpp"
+ #include "dogen/cpp/hash/nested_type_info_hash.hpp"
 diff --git a/projects/cpp/include/dogen/cpp/hash/entity_hash.hpp b/projects/cpp/include/dogen/cpp/hash/entity_hash.hpp
 deleted file mode 100644
 index 6d5756a..0000000
@@ -1498,11 +1998,127 @@ index 6d5756a..0000000
 -
 -}
 -#endif
+diff --git a/projects/cpp/include/dogen/cpp/hash/forward_declaration_info_hash.hpp b/projects/cpp/include/dogen/cpp/hash/forward_declaration_info_hash.hpp
+new file mode 100644
+index 0000000..75217b2
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/hash/forward_declaration_info_hash.hpp
+@@ -0,0 +1,52 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_HASH_FORWARD_DECLARATION_INFO_HASH_HPP
++#define DOGEN_CPP_HASH_FORWARD_DECLARATION_INFO_HASH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <functional>
++#include "dogen/cpp/types/forward_declaration_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++struct forward_declaration_info_hasher {
++public:
++    static std::size_t hash(const forward_declaration_info& v);
++};
++
++} }
++
++namespace std {
++
++template<>
++struct hash<dogen::cpp::forward_declaration_info> {
++public:
++    size_t operator()(const dogen::cpp::forward_declaration_info& v) const {
++        return dogen::cpp::forward_declaration_info_hasher::hash(v);
++    }
++};
++
++}
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/hash/includer_info_hash.hpp b/projects/cpp/include/dogen/cpp/hash/includer_info_hash.hpp
+new file mode 100644
+index 0000000..69814c7
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/hash/includer_info_hash.hpp
+@@ -0,0 +1,52 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_HASH_INCLUDER_INFO_HASH_HPP
++#define DOGEN_CPP_HASH_INCLUDER_INFO_HASH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <functional>
++#include "dogen/cpp/types/includer_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++struct includer_info_hasher {
++public:
++    static std::size_t hash(const includer_info& v);
++};
++
++} }
++
++namespace std {
++
++template<>
++struct hash<dogen::cpp::includer_info> {
++public:
++    size_t operator()(const dogen::cpp::includer_info& v) const {
++        return dogen::cpp::includer_info_hasher::hash(v);
++    }
++};
++
++}
++#endif
 diff --git a/projects/cpp/include/dogen/cpp/io/all_io.hpp b/projects/cpp/include/dogen/cpp/io/all_io.hpp
-index 4a6941d..6cb2c4e 100644
+index 4a6941d..9f86012 100644
 --- a/projects/cpp/include/dogen/cpp/io/all_io.hpp
 +++ b/projects/cpp/include/dogen/cpp/io/all_io.hpp
-@@ -24,7 +24,6 @@
+@@ -24,12 +24,13 @@
  #include "dogen/cpp/io/cmakelists_info_io.hpp"
  #include "dogen/cpp/io/content_descriptor_io.hpp"
  #include "dogen/cpp/io/content_types_io.hpp"
@@ -1510,6 +2126,13 @@ index 4a6941d..6cb2c4e 100644
  #include "dogen/cpp/io/enum_info_io.hpp"
  #include "dogen/cpp/io/enumerator_info_io.hpp"
  #include "dogen/cpp/io/exception_info_io.hpp"
+ #include "dogen/cpp/io/file_info_io.hpp"
+ #include "dogen/cpp/io/file_types_io.hpp"
++#include "dogen/cpp/io/forward_declaration_info_io.hpp"
++#include "dogen/cpp/io/includer_info_io.hpp"
+ #include "dogen/cpp/io/includes_io.hpp"
+ #include "dogen/cpp/io/namespace_info_io.hpp"
+ #include "dogen/cpp/io/nested_type_info_io.hpp"
 diff --git a/projects/cpp/include/dogen/cpp/io/entity_io.hpp b/projects/cpp/include/dogen/cpp/io/entity_io.hpp
 deleted file mode 100644
 index a4c436d..0000000
@@ -1556,11 +2179,103 @@ index a4c436d..0000000
 -} }
 -
 -#endif
+diff --git a/projects/cpp/include/dogen/cpp/io/forward_declaration_info_io.hpp b/projects/cpp/include/dogen/cpp/io/forward_declaration_info_io.hpp
+new file mode 100644
+index 0000000..fae44cc
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/io/forward_declaration_info_io.hpp
+@@ -0,0 +1,40 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_IO_FORWARD_DECLARATION_INFO_IO_HPP
++#define DOGEN_CPP_IO_FORWARD_DECLARATION_INFO_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/cpp/types/forward_declaration_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++std::ostream&
++operator<<(std::ostream& s,
++     const dogen::cpp::forward_declaration_info& v);
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/io/includer_info_io.hpp b/projects/cpp/include/dogen/cpp/io/includer_info_io.hpp
+new file mode 100644
+index 0000000..6ceb19b
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/io/includer_info_io.hpp
+@@ -0,0 +1,40 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_IO_INCLUDER_INFO_IO_HPP
++#define DOGEN_CPP_IO_INCLUDER_INFO_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/cpp/types/includer_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++std::ostream&
++operator<<(std::ostream& s,
++     const dogen::cpp::includer_info& v);
++
++} }
++
++#endif
 diff --git a/projects/cpp/include/dogen/cpp/serialization/all_ser.hpp b/projects/cpp/include/dogen/cpp/serialization/all_ser.hpp
-index 7a121a1..39258af 100644
+index 7a121a1..ccf1046 100644
 --- a/projects/cpp/include/dogen/cpp/serialization/all_ser.hpp
 +++ b/projects/cpp/include/dogen/cpp/serialization/all_ser.hpp
-@@ -24,7 +24,6 @@
+@@ -24,12 +24,13 @@
  #include "dogen/cpp/serialization/cmakelists_info_ser.hpp"
  #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
  #include "dogen/cpp/serialization/content_types_ser.hpp"
@@ -1568,6 +2283,13 @@ index 7a121a1..39258af 100644
  #include "dogen/cpp/serialization/enum_info_ser.hpp"
  #include "dogen/cpp/serialization/enumerator_info_ser.hpp"
  #include "dogen/cpp/serialization/exception_info_ser.hpp"
+ #include "dogen/cpp/serialization/file_info_ser.hpp"
+ #include "dogen/cpp/serialization/file_types_ser.hpp"
++#include "dogen/cpp/serialization/forward_declaration_info_ser.hpp"
++#include "dogen/cpp/serialization/includer_info_ser.hpp"
+ #include "dogen/cpp/serialization/includes_ser.hpp"
+ #include "dogen/cpp/serialization/namespace_info_ser.hpp"
+ #include "dogen/cpp/serialization/nested_type_info_ser.hpp"
 diff --git a/projects/cpp/include/dogen/cpp/serialization/class_info_ser.hpp b/projects/cpp/include/dogen/cpp/serialization/class_info_ser.hpp
 index fc70a9d..83dfdc6 100644
 --- a/projects/cpp/include/dogen/cpp/serialization/class_info_ser.hpp
@@ -1724,6 +2446,220 @@ index 8c371d4..e33d583 100644
  namespace boost {
  namespace serialization {
  
+diff --git a/projects/cpp/include/dogen/cpp/serialization/forward_declaration_info_fwd_ser.hpp b/projects/cpp/include/dogen/cpp/serialization/forward_declaration_info_fwd_ser.hpp
+new file mode 100644
+index 0000000..d7f1377
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/serialization/forward_declaration_info_fwd_ser.hpp
+@@ -0,0 +1,41 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_SERIALIZATION_FORWARD_DECLARATION_INFO_FWD_SER_HPP
++#define DOGEN_CPP_SERIALIZATION_FORWARD_DECLARATION_INFO_FWD_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/cpp/types/forward_declaration_info_fwd.hpp"
++
++namespace boost {
++namespace serialization {
++
++template<class Archive>
++void save(Archive& ar, const dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++template<class Archive>
++void load(Archive& ar, dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/serialization/forward_declaration_info_ser.hpp b/projects/cpp/include/dogen/cpp/serialization/forward_declaration_info_ser.hpp
+new file mode 100644
+index 0000000..44f888e
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/serialization/forward_declaration_info_ser.hpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_SERIALIZATION_FORWARD_DECLARATION_INFO_SER_HPP
++#define DOGEN_CPP_SERIALIZATION_FORWARD_DECLARATION_INFO_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/split_free.hpp>
++#include <boost/type_traits/is_virtual_base_of.hpp>
++#include "dogen/cpp/types/forward_declaration_info.hpp"
++
++namespace boost {
++
++template<>struct
++is_virtual_base_of<
++    dogen::cpp::file_info,
++    dogen::cpp::forward_declaration_info
++> : public mpl::true_ {};
++
++}
++
++BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::forward_declaration_info)
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar, const dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++template<typename Archive>
++void load(Archive& ar, dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/serialization/includer_info_fwd_ser.hpp b/projects/cpp/include/dogen/cpp/serialization/includer_info_fwd_ser.hpp
+new file mode 100644
+index 0000000..5ca0174
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/serialization/includer_info_fwd_ser.hpp
+@@ -0,0 +1,41 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_SERIALIZATION_INCLUDER_INFO_FWD_SER_HPP
++#define DOGEN_CPP_SERIALIZATION_INCLUDER_INFO_FWD_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/cpp/types/includer_info_fwd.hpp"
++
++namespace boost {
++namespace serialization {
++
++template<class Archive>
++void save(Archive& ar, const dogen::cpp::includer_info& v, unsigned int version);
++
++template<class Archive>
++void load(Archive& ar, dogen::cpp::includer_info& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/serialization/includer_info_ser.hpp b/projects/cpp/include/dogen/cpp/serialization/includer_info_ser.hpp
+new file mode 100644
+index 0000000..0487437
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/serialization/includer_info_ser.hpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_SERIALIZATION_INCLUDER_INFO_SER_HPP
++#define DOGEN_CPP_SERIALIZATION_INCLUDER_INFO_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/split_free.hpp>
++#include <boost/type_traits/is_virtual_base_of.hpp>
++#include "dogen/cpp/types/includer_info.hpp"
++
++namespace boost {
++
++template<>struct
++is_virtual_base_of<
++    dogen::cpp::file_info,
++    dogen::cpp::includer_info
++> : public mpl::true_ {};
++
++}
++
++BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::includer_info)
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar, const dogen::cpp::includer_info& v, unsigned int version);
++
++template<typename Archive>
++void load(Archive& ar, dogen::cpp::includer_info& v, unsigned int version);
++
++} }
++
++#endif
 diff --git a/projects/cpp/include/dogen/cpp/serialization/namespace_info_ser.hpp b/projects/cpp/include/dogen/cpp/serialization/namespace_info_ser.hpp
 index 58452bd..bfc4ef7 100644
 --- a/projects/cpp/include/dogen/cpp/serialization/namespace_info_ser.hpp
@@ -1764,10 +2700,10 @@ index 87407cd..e246f83 100644
  > : public mpl::true_ {};
  
 diff --git a/projects/cpp/include/dogen/cpp/test_data/all_td.hpp b/projects/cpp/include/dogen/cpp/test_data/all_td.hpp
-index d4801c5..bb48bc0 100644
+index d4801c5..4ed593d 100644
 --- a/projects/cpp/include/dogen/cpp/test_data/all_td.hpp
 +++ b/projects/cpp/include/dogen/cpp/test_data/all_td.hpp
-@@ -24,7 +24,6 @@
+@@ -24,12 +24,13 @@
  #include "dogen/cpp/test_data/cmakelists_info_td.hpp"
  #include "dogen/cpp/test_data/content_descriptor_td.hpp"
  #include "dogen/cpp/test_data/content_types_td.hpp"
@@ -1775,6 +2711,13 @@ index d4801c5..bb48bc0 100644
  #include "dogen/cpp/test_data/enum_info_td.hpp"
  #include "dogen/cpp/test_data/enumerator_info_td.hpp"
  #include "dogen/cpp/test_data/exception_info_td.hpp"
+ #include "dogen/cpp/test_data/file_info_td.hpp"
+ #include "dogen/cpp/test_data/file_types_td.hpp"
++#include "dogen/cpp/test_data/forward_declaration_info_td.hpp"
++#include "dogen/cpp/test_data/includer_info_td.hpp"
+ #include "dogen/cpp/test_data/includes_td.hpp"
+ #include "dogen/cpp/test_data/namespace_info_td.hpp"
+ #include "dogen/cpp/test_data/nested_type_info_td.hpp"
 diff --git a/projects/cpp/include/dogen/cpp/test_data/entity_td.hpp b/projects/cpp/include/dogen/cpp/test_data/entity_td.hpp
 deleted file mode 100644
 index c9851c1..0000000
@@ -1845,11 +2788,129 @@ index 875fd10..9308ff3 100644
  public:
      static result_type* create_ptr(const unsigned int position);
  };
+diff --git a/projects/cpp/include/dogen/cpp/test_data/forward_declaration_info_td.hpp b/projects/cpp/include/dogen/cpp/test_data/forward_declaration_info_td.hpp
+new file mode 100644
+index 0000000..d7fb7f9
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/test_data/forward_declaration_info_td.hpp
+@@ -0,0 +1,53 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TEST_DATA_FORWARD_DECLARATION_INFO_TD_HPP
++#define DOGEN_CPP_TEST_DATA_FORWARD_DECLARATION_INFO_TD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/cpp/types/forward_declaration_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++class forward_declaration_info_generator {
++public:
++    forward_declaration_info_generator();
++
++public:
++    typedef dogen::cpp::forward_declaration_info result_type;
++
++public:
++    static void populate(const unsigned int position, result_type& v);
++    static result_type create(const unsigned int position);
++    result_type operator()();
++
++private:
++    unsigned int position_;
++public:
++    static result_type* create_ptr(const unsigned int position);
++};
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/test_data/includer_info_td.hpp b/projects/cpp/include/dogen/cpp/test_data/includer_info_td.hpp
+new file mode 100644
+index 0000000..2dc9dc3
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/test_data/includer_info_td.hpp
+@@ -0,0 +1,53 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TEST_DATA_INCLUDER_INFO_TD_HPP
++#define DOGEN_CPP_TEST_DATA_INCLUDER_INFO_TD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/cpp/types/includer_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++class includer_info_generator {
++public:
++    includer_info_generator();
++
++public:
++    typedef dogen::cpp::includer_info result_type;
++
++public:
++    static void populate(const unsigned int position, result_type& v);
++    static result_type create(const unsigned int position);
++    result_type operator()();
++
++private:
++    unsigned int position_;
++public:
++    static result_type* create_ptr(const unsigned int position);
++};
++
++} }
++
++#endif
 diff --git a/projects/cpp/include/dogen/cpp/types/all.hpp b/projects/cpp/include/dogen/cpp/types/all.hpp
-index 32a00fb..8c6cf6e 100644
+index 32a00fb..76c064c 100644
 --- a/projects/cpp/include/dogen/cpp/types/all.hpp
 +++ b/projects/cpp/include/dogen/cpp/types/all.hpp
-@@ -27,12 +27,11 @@
+@@ -27,13 +27,14 @@
  #include "dogen/cpp/types/content_descriptor_factory.hpp"
  #include "dogen/cpp/types/content_types.hpp"
  #include "dogen/cpp/types/cpp.hpp"
@@ -1861,8 +2922,11 @@ index 32a00fb..8c6cf6e 100644
  #include "dogen/cpp/types/file_info.hpp"
 +#include "dogen/cpp/types/file_info_visitor.hpp"
  #include "dogen/cpp/types/file_types.hpp"
++#include "dogen/cpp/types/forward_declaration_info.hpp"
++#include "dogen/cpp/types/includer_info.hpp"
  #include "dogen/cpp/types/includes.hpp"
  #include "dogen/cpp/types/namespace_info.hpp"
+ #include "dogen/cpp/types/nested_type_info.hpp"
 diff --git a/projects/cpp/include/dogen/cpp/types/class_info.hpp b/projects/cpp/include/dogen/cpp/types/class_info.hpp
 index 9973a1b..6d69d24 100644
 --- a/projects/cpp/include/dogen/cpp/types/class_info.hpp
@@ -2501,10 +3565,10 @@ index 6974fb4..b38eec7 100644
  #endif
 diff --git a/projects/cpp/include/dogen/cpp/types/file_info_visitor.hpp b/projects/cpp/include/dogen/cpp/types/file_info_visitor.hpp
 new file mode 100644
-index 0000000..517f388
+index 0000000..a9ec02e
 --- /dev/null
 +++ b/projects/cpp/include/dogen/cpp/types/file_info_visitor.hpp
-@@ -0,0 +1,108 @@
+@@ -0,0 +1,130 @@
 +/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 + *
 + * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
@@ -2535,6 +3599,8 @@ index 0000000..517f388
 +#include "dogen/cpp/types/class_info_fwd.hpp"
 +#include "dogen/cpp/types/enum_info_fwd.hpp"
 +#include "dogen/cpp/types/exception_info_fwd.hpp"
++#include "dogen/cpp/types/forward_declaration_info_fwd.hpp"
++#include "dogen/cpp/types/includer_info_fwd.hpp"
 +#include "dogen/cpp/types/namespace_info_fwd.hpp"
 +#include "dogen/cpp/types/registrar_info_fwd.hpp"
 +#include "dogen/cpp/types/visitor_info_fwd.hpp"
@@ -2606,9 +3672,343 @@ index 0000000..517f388
 +    virtual void visit(dogen::cpp::visitor_info&) const { }
 +    virtual void visit(dogen::cpp::visitor_info&) { }
 +    /**@}*/
++
++    /**
++     * @brief Accept visits for type dogen::cpp::forward_declaration_info
++     */
++    /**@{*/
++    virtual void visit(const dogen::cpp::forward_declaration_info&) const { }
++    virtual void visit(const dogen::cpp::forward_declaration_info&) { }
++    virtual void visit(dogen::cpp::forward_declaration_info&) const { }
++    virtual void visit(dogen::cpp::forward_declaration_info&) { }
++    /**@}*/
++
++    /**
++     * @brief Accept visits for type dogen::cpp::includer_info
++     */
++    /**@{*/
++    virtual void visit(const dogen::cpp::includer_info&) const { }
++    virtual void visit(const dogen::cpp::includer_info&) { }
++    virtual void visit(dogen::cpp::includer_info&) const { }
++    virtual void visit(dogen::cpp::includer_info&) { }
++    /**@}*/
 +};
 +
 +inline file_info_visitor::~file_info_visitor() noexcept { }
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/forward_declaration_info.hpp b/projects/cpp/include/dogen/cpp/types/forward_declaration_info.hpp
+new file mode 100644
+index 0000000..0bbc695
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/forward_declaration_info.hpp
+@@ -0,0 +1,110 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_FORWARD_DECLARATION_INFO_HPP
++#define DOGEN_CPP_TYPES_FORWARD_DECLARATION_INFO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <algorithm>
++#include <iosfwd>
++#include "dogen/cpp/serialization/forward_declaration_info_fwd_ser.hpp"
++#include "dogen/cpp/types/file_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++class forward_declaration_info final : public dogen::cpp::file_info {
++public:
++    forward_declaration_info() = default;
++    forward_declaration_info(const forward_declaration_info&) = default;
++    forward_declaration_info(forward_declaration_info&&) = default;
++
++    virtual ~forward_declaration_info() noexcept { }
++
++public:
++    forward_declaration_info(
++        const std::string& name,
++        const std::string& documentation,
++        const dogen::cpp::includes& includes,
++        const dogen::cpp::content_descriptor& descriptor,
++        const std::string& header_guard,
++        const boost::filesystem::path& file_path,
++        const boost::filesystem::path& relative_path,
++        const std::list<std::string>& namespaces);
++
++private:
++    template<typename Archive>
++    friend void boost::serialization::save(Archive& ar, const forward_declaration_info& v, unsigned int version);
++
++    template<typename Archive>
++    friend void boost::serialization::load(Archive& ar, forward_declaration_info& v, unsigned int version);
++
++public:
++    virtual void accept(const file_info_visitor& v) const override {
++        v.visit(*this);
++    }
++
++    virtual void accept(file_info_visitor& v) const override {
++        v.visit(*this);
++    }
++
++    virtual void accept(const file_info_visitor& v) override {
++        v.visit(*this);
++    }
++
++    virtual void accept(file_info_visitor& v) override {
++        v.visit(*this);
++    }
++
++public:
++    void to_stream(std::ostream& s) const override;
++
++public:
++    bool operator==(const forward_declaration_info& rhs) const;
++    bool operator!=(const forward_declaration_info& rhs) const {
++        return !this->operator==(rhs);
++    }
++
++public:
++    bool equals(const dogen::cpp::file_info& other) const override;
++
++public:
++    void swap(forward_declaration_info& other) noexcept;
++    forward_declaration_info& operator=(forward_declaration_info other);
++
++};
++
++} }
++
++namespace std {
++
++template<>
++inline void swap(
++    dogen::cpp::forward_declaration_info& lhs,
++    dogen::cpp::forward_declaration_info& rhs) {
++    lhs.swap(rhs);
++}
++
++}
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/forward_declaration_info_fwd.hpp b/projects/cpp/include/dogen/cpp/types/forward_declaration_info_fwd.hpp
+new file mode 100644
+index 0000000..f1e46ca
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/forward_declaration_info_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_FORWARD_DECLARATION_INFO_FWD_HPP
++#define DOGEN_CPP_TYPES_FORWARD_DECLARATION_INFO_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace cpp {
++
++class forward_declaration_info;
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/includer_info.hpp b/projects/cpp/include/dogen/cpp/types/includer_info.hpp
+new file mode 100644
+index 0000000..5deeffa
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/includer_info.hpp
+@@ -0,0 +1,110 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_INCLUDER_INFO_HPP
++#define DOGEN_CPP_TYPES_INCLUDER_INFO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <algorithm>
++#include <iosfwd>
++#include "dogen/cpp/serialization/includer_info_fwd_ser.hpp"
++#include "dogen/cpp/types/file_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++class includer_info final : public dogen::cpp::file_info {
++public:
++    includer_info() = default;
++    includer_info(const includer_info&) = default;
++    includer_info(includer_info&&) = default;
++
++    virtual ~includer_info() noexcept { }
++
++public:
++    includer_info(
++        const std::string& name,
++        const std::string& documentation,
++        const dogen::cpp::includes& includes,
++        const dogen::cpp::content_descriptor& descriptor,
++        const std::string& header_guard,
++        const boost::filesystem::path& file_path,
++        const boost::filesystem::path& relative_path,
++        const std::list<std::string>& namespaces);
++
++private:
++    template<typename Archive>
++    friend void boost::serialization::save(Archive& ar, const includer_info& v, unsigned int version);
++
++    template<typename Archive>
++    friend void boost::serialization::load(Archive& ar, includer_info& v, unsigned int version);
++
++public:
++    virtual void accept(const file_info_visitor& v) const override {
++        v.visit(*this);
++    }
++
++    virtual void accept(file_info_visitor& v) const override {
++        v.visit(*this);
++    }
++
++    virtual void accept(const file_info_visitor& v) override {
++        v.visit(*this);
++    }
++
++    virtual void accept(file_info_visitor& v) override {
++        v.visit(*this);
++    }
++
++public:
++    void to_stream(std::ostream& s) const override;
++
++public:
++    bool operator==(const includer_info& rhs) const;
++    bool operator!=(const includer_info& rhs) const {
++        return !this->operator==(rhs);
++    }
++
++public:
++    bool equals(const dogen::cpp::file_info& other) const override;
++
++public:
++    void swap(includer_info& other) noexcept;
++    includer_info& operator=(includer_info other);
++
++};
++
++} }
++
++namespace std {
++
++template<>
++inline void swap(
++    dogen::cpp::includer_info& lhs,
++    dogen::cpp::includer_info& rhs) {
++    lhs.swap(rhs);
++}
++
++}
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/includer_info_fwd.hpp b/projects/cpp/include/dogen/cpp/types/includer_info_fwd.hpp
+new file mode 100644
+index 0000000..baf09f1
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/includer_info_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_INCLUDER_INFO_FWD_HPP
++#define DOGEN_CPP_TYPES_INCLUDER_INFO_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace cpp {
++
++class includer_info;
 +
 +} }
 +
@@ -2681,10 +4081,10 @@ index d482503..7a9e1f6 100644
  public:
      void swap(namespace_info& other) noexcept;
 diff --git a/projects/cpp/include/dogen/cpp/types/project.hpp b/projects/cpp/include/dogen/cpp/types/project.hpp
-index 05762ed..f19102e 100644
+index 05762ed..b7f9072 100644
 --- a/projects/cpp/include/dogen/cpp/types/project.hpp
 +++ b/projects/cpp/include/dogen/cpp/types/project.hpp
-@@ -29,9 +29,14 @@
+@@ -29,9 +29,16 @@
  #include <boost/optional.hpp>
  #include <list>
  #include "dogen/cpp/serialization/project_fwd_ser.hpp"
@@ -2693,6 +4093,8 @@ index 05762ed..f19102e 100644
 -#include "dogen/cpp/types/file_info.hpp"
 +#include "dogen/cpp/types/enum_info.hpp"
 +#include "dogen/cpp/types/exception_info.hpp"
++#include "dogen/cpp/types/forward_declaration_info.hpp"
++#include "dogen/cpp/types/includer_info.hpp"
 +#include "dogen/cpp/types/namespace_info.hpp"
  #include "dogen/cpp/types/odb_options_info.hpp"
 +#include "dogen/cpp/types/registrar_info.hpp"
@@ -2700,7 +4102,7 @@ index 05762ed..f19102e 100644
  
  namespace dogen {
  namespace cpp {
-@@ -50,10 +55,15 @@ public:
+@@ -50,10 +57,17 @@ public:
  
  public:
      project(
@@ -2714,11 +4116,13 @@ index 05762ed..f19102e 100644
 +        const std::list<dogen::cpp::enum_info>& enumerations,
 +        const std::list<dogen::cpp::class_info>& classes,
 +        const std::list<dogen::cpp::exception_info>& exceptions,
-+        const std::list<dogen::cpp::registrar_info>& registrars);
++        const std::list<dogen::cpp::registrar_info>& registrars,
++        const std::list<dogen::cpp::forward_declaration_info>& forward_declarations,
++        const std::list<dogen::cpp::includer_info>& includers);
  
  private:
      template<typename Archive>
-@@ -64,16 +74,6 @@ private:
+@@ -64,16 +78,6 @@ private:
  
  public:
      /**
@@ -2735,7 +4139,7 @@ index 05762ed..f19102e 100644
       * @brief The ODB options file.
       */
      /**@{*/
-@@ -103,6 +103,66 @@ public:
+@@ -103,6 +107,76 @@ public:
      void include_cmakelists(const boost::optional<dogen::cpp::cmakelists_info>&& v);
      /**@}*/
  
@@ -2799,10 +4203,20 @@ index 05762ed..f19102e 100644
 +    void registrars(const std::list<dogen::cpp::registrar_info>&& v);
 +    /**@}*/
 +
++    const std::list<dogen::cpp::forward_declaration_info>& forward_declarations() const;
++    std::list<dogen::cpp::forward_declaration_info>& forward_declarations();
++    void forward_declarations(const std::list<dogen::cpp::forward_declaration_info>& v);
++    void forward_declarations(const std::list<dogen::cpp::forward_declaration_info>&& v);
++
++    const std::list<dogen::cpp::includer_info>& includers() const;
++    std::list<dogen::cpp::includer_info>& includers();
++    void includers(const std::list<dogen::cpp::includer_info>& v);
++    void includers(const std::list<dogen::cpp::includer_info>&& v);
++
  public:
      bool operator==(const project& rhs) const;
      bool operator!=(const project& rhs) const {
-@@ -114,10 +174,15 @@ public:
+@@ -114,10 +188,17 @@ public:
      project& operator=(project other);
  
  private:
@@ -2816,6 +4230,8 @@ index 05762ed..f19102e 100644
 +    std::list<dogen::cpp::class_info> classes_;
 +    std::list<dogen::cpp::exception_info> exceptions_;
 +    std::list<dogen::cpp::registrar_info> registrars_;
++    std::list<dogen::cpp::forward_declaration_info> forward_declarations_;
++    std::list<dogen::cpp::includer_info> includers_;
  };
  
  } }
@@ -3125,6 +4541,108 @@ index 69d139a..9f90f13 100644
  
      return seed;
  }
+diff --git a/projects/cpp/src/hash/forward_declaration_info_hash.cpp b/projects/cpp/src/hash/forward_declaration_info_hash.cpp
+new file mode 100644
+index 0000000..cb18375
+--- /dev/null
++++ b/projects/cpp/src/hash/forward_declaration_info_hash.cpp
+@@ -0,0 +1,45 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/cpp/hash/file_info_hash.hpp"
++#include "dogen/cpp/hash/forward_declaration_info_hash.hpp"
++
++namespace {
++
++template <typename HashableType>
++inline void combine(std::size_t& seed, const HashableType& value)
++{
++    std::hash<HashableType> hasher;
++    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
++}
++
++}
++
++namespace dogen {
++namespace cpp {
++
++std::size_t forward_declaration_info_hasher::hash(const forward_declaration_info&v) {
++    std::size_t seed(0);
++
++    combine(seed, dynamic_cast<const dogen::cpp::file_info&>(v));
++    return seed;
++}
++
++} }
+diff --git a/projects/cpp/src/hash/includer_info_hash.cpp b/projects/cpp/src/hash/includer_info_hash.cpp
+new file mode 100644
+index 0000000..bcd75bc
+--- /dev/null
++++ b/projects/cpp/src/hash/includer_info_hash.cpp
+@@ -0,0 +1,45 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/cpp/hash/file_info_hash.hpp"
++#include "dogen/cpp/hash/includer_info_hash.hpp"
++
++namespace {
++
++template <typename HashableType>
++inline void combine(std::size_t& seed, const HashableType& value)
++{
++    std::hash<HashableType> hasher;
++    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
++}
++
++}
++
++namespace dogen {
++namespace cpp {
++
++std::size_t includer_info_hasher::hash(const includer_info&v) {
++    std::size_t seed(0);
++
++    combine(seed, dynamic_cast<const dogen::cpp::file_info&>(v));
++    return seed;
++}
++
++} }
 diff --git a/projects/cpp/src/hash/namespace_info_hash.cpp b/projects/cpp/src/hash/namespace_info_hash.cpp
 index 9fb22f4..6e7ebd5 100644
 --- a/projects/cpp/src/hash/namespace_info_hash.cpp
@@ -3148,10 +4666,10 @@ index 9fb22f4..6e7ebd5 100644
  }
  
 diff --git a/projects/cpp/src/hash/project_hash.cpp b/projects/cpp/src/hash/project_hash.cpp
-index 10a9b93..7eb934c 100644
+index 10a9b93..63c090a 100644
 --- a/projects/cpp/src/hash/project_hash.cpp
 +++ b/projects/cpp/src/hash/project_hash.cpp
-@@ -18,10 +18,15 @@
+@@ -18,10 +18,17 @@
   * MA 02110-1301, USA.
   *
   */
@@ -3160,6 +4678,8 @@ index 10a9b93..7eb934c 100644
 -#include "dogen/cpp/hash/file_info_hash.hpp"
 +#include "dogen/cpp/hash/enum_info_hash.hpp"
 +#include "dogen/cpp/hash/exception_info_hash.hpp"
++#include "dogen/cpp/hash/forward_declaration_info_hash.hpp"
++#include "dogen/cpp/hash/includer_info_hash.hpp"
 +#include "dogen/cpp/hash/namespace_info_hash.hpp"
  #include "dogen/cpp/hash/odb_options_info_hash.hpp"
  #include "dogen/cpp/hash/project_hash.hpp"
@@ -3168,7 +4688,7 @@ index 10a9b93..7eb934c 100644
  
  namespace {
  
-@@ -32,7 +37,17 @@ inline void combine(std::size_t& seed, const HashableType& value)
+@@ -32,7 +39,17 @@ inline void combine(std::size_t& seed, const HashableType& value)
      seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
  }
  
@@ -3187,7 +4707,7 @@ index 10a9b93..7eb934c 100644
      std::size_t seed(0);
      for (const auto i : v) {
          combine(seed, i);
-@@ -40,13 +55,43 @@ inline std::size_t hash_std_list_dogen_cpp_file_info(const std::list<dogen::cpp:
+@@ -40,13 +57,59 @@ inline std::size_t hash_std_list_dogen_cpp_file_info(const std::list<dogen::cpp:
      return seed;
  }
  
@@ -3232,10 +4752,26 @@ index 10a9b93..7eb934c 100644
 +    for (const auto i : v) {
 +        combine(seed, i);
 +    }
++    return seed;
++}
++
++inline std::size_t hash_std_list_dogen_cpp_forward_declaration_info(const std::list<dogen::cpp::forward_declaration_info>& v){
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i);
++    }
++    return seed;
++}
++
++inline std::size_t hash_std_list_dogen_cpp_includer_info(const std::list<dogen::cpp::includer_info>& v){
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i);
++    }
      return seed;
  }
  
-@@ -58,10 +103,15 @@ namespace cpp {
+@@ -58,10 +121,17 @@ namespace cpp {
  std::size_t project_hasher::hash(const project&v) {
      std::size_t seed(0);
  
@@ -3249,6 +4785,8 @@ index 10a9b93..7eb934c 100644
 +    combine(seed, hash_std_list_dogen_cpp_class_info(v.classes()));
 +    combine(seed, hash_std_list_dogen_cpp_exception_info(v.exceptions()));
 +    combine(seed, hash_std_list_dogen_cpp_registrar_info(v.registrars()));
++    combine(seed, hash_std_list_dogen_cpp_forward_declaration_info(v.forward_declarations()));
++    combine(seed, hash_std_list_dogen_cpp_includer_info(v.includers()));
  
      return seed;
  }
@@ -3432,6 +4970,86 @@ index 3f55d89..9fcea17 100644
      return(s);
  }
  
+diff --git a/projects/cpp/src/io/forward_declaration_info_io.cpp b/projects/cpp/src/io/forward_declaration_info_io.cpp
+new file mode 100644
+index 0000000..c3afae2
+--- /dev/null
++++ b/projects/cpp/src/io/forward_declaration_info_io.cpp
+@@ -0,0 +1,33 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include "dogen/cpp/io/file_info_io.hpp"
++#include "dogen/cpp/io/forward_declaration_info_io.hpp"
++
++namespace dogen {
++namespace cpp {
++
++std::ostream& operator<<(std::ostream& s, const forward_declaration_info& v) {
++    v.to_stream(s);
++    return(s);
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/cpp/src/io/includer_info_io.cpp b/projects/cpp/src/io/includer_info_io.cpp
+new file mode 100644
+index 0000000..15ce32e
+--- /dev/null
++++ b/projects/cpp/src/io/includer_info_io.cpp
+@@ -0,0 +1,33 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include "dogen/cpp/io/file_info_io.hpp"
++#include "dogen/cpp/io/includer_info_io.hpp"
++
++namespace dogen {
++namespace cpp {
++
++std::ostream& operator<<(std::ostream& s, const includer_info& v) {
++    v.to_stream(s);
++    return(s);
++}
++
++} }
+\ No newline at end of file
 diff --git a/projects/cpp/src/io/namespace_info_io.cpp b/projects/cpp/src/io/namespace_info_io.cpp
 index 737370d..a5b2ac3 100644
 --- a/projects/cpp/src/io/namespace_info_io.cpp
@@ -3446,10 +5064,10 @@ index 737370d..a5b2ac3 100644
  
  namespace dogen {
 diff --git a/projects/cpp/src/io/project_io.cpp b/projects/cpp/src/io/project_io.cpp
-index 16c884c..8bdd47b 100644
+index 16c884c..c842ebd 100644
 --- a/projects/cpp/src/io/project_io.cpp
 +++ b/projects/cpp/src/io/project_io.cpp
-@@ -19,14 +19,34 @@
+@@ -19,14 +19,36 @@
   *
   */
  #include <ostream>
@@ -3458,6 +5076,8 @@ index 16c884c..8bdd47b 100644
 -#include "dogen/cpp/io/file_info_io.hpp"
 +#include "dogen/cpp/io/enum_info_io.hpp"
 +#include "dogen/cpp/io/exception_info_io.hpp"
++#include "dogen/cpp/io/forward_declaration_info_io.hpp"
++#include "dogen/cpp/io/includer_info_io.hpp"
 +#include "dogen/cpp/io/namespace_info_io.hpp"
  #include "dogen/cpp/io/odb_options_info_io.hpp"
  #include "dogen/cpp/io/project_io.hpp"
@@ -3486,7 +5106,7 @@ index 16c884c..8bdd47b 100644
      s << "[ ";
      for (auto i(v.begin()); i != v.end(); ++i) {
          if (i != v.begin()) s << ", ";
-@@ -38,16 +58,71 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::fil
+@@ -38,16 +60,99 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::fil
  
  }
  
@@ -3563,10 +5183,38 @@ index 16c884c..8bdd47b 100644
 +        s << *i;
 +    }
 +    s << "] ";
++    return s;
++}
++
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::forward_declaration_info>& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << *i;
++    }
++    s << "] ";
++    return s;
++}
++
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::includer_info>& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << *i;
++    }
++    s << "] ";
      return s;
  }
  
-@@ -59,10 +134,15 @@ namespace cpp {
+@@ -59,10 +164,17 @@ namespace cpp {
  std::ostream& operator<<(std::ostream& s, const project& v) {
      s << " { "
        << "\"__type__\": " << "\"dogen::cpp::project\"" << ", "
@@ -3580,7 +5228,9 @@ index 16c884c..8bdd47b 100644
 +      << "\"enumerations\": " << v.enumerations() << ", "
 +      << "\"classes\": " << v.classes() << ", "
 +      << "\"exceptions\": " << v.exceptions() << ", "
-+      << "\"registrars\": " << v.registrars()
++      << "\"registrars\": " << v.registrars() << ", "
++      << "\"forward_declarations\": " << v.forward_declarations() << ", "
++      << "\"includers\": " << v.includers()
        << " }";
      return(s);
  }
@@ -3796,10 +5446,10 @@ index 754e45a..977af8f 100644
  
  } }
 diff --git a/projects/cpp/src/serialization/file_info_ser.cpp b/projects/cpp/src/serialization/file_info_ser.cpp
-index aa8f06a..6c43ca9 100644
+index aa8f06a..3566e1f 100644
 --- a/projects/cpp/src/serialization/file_info_ser.cpp
 +++ b/projects/cpp/src/serialization/file_info_ser.cpp
-@@ -26,16 +26,25 @@
+@@ -26,16 +26,27 @@
  #include <boost/archive/text_oarchive.hpp>
  #include <boost/archive/xml_iarchive.hpp>
  #include <boost/archive/xml_oarchive.hpp>
@@ -3813,6 +5463,8 @@ index aa8f06a..6c43ca9 100644
 +#include "dogen/cpp/serialization/enum_info_ser.hpp"
 +#include "dogen/cpp/serialization/exception_info_ser.hpp"
  #include "dogen/cpp/serialization/file_info_ser.hpp"
++#include "dogen/cpp/serialization/forward_declaration_info_ser.hpp"
++#include "dogen/cpp/serialization/includer_info_ser.hpp"
  #include "dogen/cpp/serialization/includes_ser.hpp"
 +#include "dogen/cpp/serialization/namespace_info_ser.hpp"
 +#include "dogen/cpp/serialization/registrar_info_ser.hpp"
@@ -3827,7 +5479,7 @@ index aa8f06a..6c43ca9 100644
  namespace boost {
  namespace serialization {
  
-@@ -43,19 +52,21 @@ template<typename Archive>
+@@ -43,19 +54,21 @@ template<typename Archive>
  void save(Archive& ar,
      const dogen::cpp::file_info& v,
      const unsigned int /*version*/) {
@@ -3850,7 +5502,7 @@ index aa8f06a..6c43ca9 100644
      ar >> make_nvp("documentation", v.documentation_);
      ar >> make_nvp("includes", v.includes_);
      ar >> make_nvp("descriptor", v.descriptor_);
-@@ -66,7 +77,7 @@ void load(Archive& ar,
+@@ -66,7 +79,7 @@ void load(Archive& ar,
      std::string relative_path_tmp;
      ar >> make_nvp("relative_path", relative_path_tmp);
      v.relative_path_ = relative_path_tmp;
@@ -3859,6 +5511,164 @@ index aa8f06a..6c43ca9 100644
  }
  
  } }
+diff --git a/projects/cpp/src/serialization/forward_declaration_info_ser.cpp b/projects/cpp/src/serialization/forward_declaration_info_ser.cpp
+new file mode 100644
+index 0000000..5f851a0
+--- /dev/null
++++ b/projects/cpp/src/serialization/forward_declaration_info_ser.cpp
+@@ -0,0 +1,72 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/archive/binary_iarchive.hpp>
++#include <boost/archive/binary_oarchive.hpp>
++#include <boost/archive/polymorphic_iarchive.hpp>
++#include <boost/archive/polymorphic_oarchive.hpp>
++#include <boost/archive/text_iarchive.hpp>
++#include <boost/archive/text_oarchive.hpp>
++#include <boost/archive/xml_iarchive.hpp>
++#include <boost/archive/xml_oarchive.hpp>
++#include <boost/serialization/nvp.hpp>
++#include "dogen/cpp/serialization/file_info_ser.hpp"
++#include "dogen/cpp/serialization/forward_declaration_info_ser.hpp"
++
++
++BOOST_CLASS_TRACKING(
++    dogen::cpp::forward_declaration_info,
++    boost::serialization::track_selectively)
++
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar,
++    const dogen::cpp::forward_declaration_info& v,
++    const unsigned int /*version*/) {
++    ar << make_nvp("file_info", base_object<dogen::cpp::file_info>(v));
++}
++
++template<typename Archive>
++void load(Archive& ar,
++    dogen::cpp::forward_declaration_info& v,
++    const unsigned int /*version*/) {
++    ar >> make_nvp("file_info", base_object<dogen::cpp::file_info>(v));
++}
++
++} }
++
++namespace boost {
++namespace serialization {
++
++template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::forward_declaration_info& v, unsigned int version);
++template void load(archive::polymorphic_iarchive& ar, dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++template void save(archive::text_oarchive& ar, const dogen::cpp::forward_declaration_info& v, unsigned int version);
++template void load(archive::text_iarchive& ar, dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++template void save(archive::binary_oarchive& ar, const dogen::cpp::forward_declaration_info& v, unsigned int version);
++template void load(archive::binary_iarchive& ar, dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++template void save(archive::xml_oarchive& ar, const dogen::cpp::forward_declaration_info& v, unsigned int version);
++template void load(archive::xml_iarchive& ar, dogen::cpp::forward_declaration_info& v, unsigned int version);
++
++} }
+\ No newline at end of file
+diff --git a/projects/cpp/src/serialization/includer_info_ser.cpp b/projects/cpp/src/serialization/includer_info_ser.cpp
+new file mode 100644
+index 0000000..97a799c
+--- /dev/null
++++ b/projects/cpp/src/serialization/includer_info_ser.cpp
+@@ -0,0 +1,72 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/archive/binary_iarchive.hpp>
++#include <boost/archive/binary_oarchive.hpp>
++#include <boost/archive/polymorphic_iarchive.hpp>
++#include <boost/archive/polymorphic_oarchive.hpp>
++#include <boost/archive/text_iarchive.hpp>
++#include <boost/archive/text_oarchive.hpp>
++#include <boost/archive/xml_iarchive.hpp>
++#include <boost/archive/xml_oarchive.hpp>
++#include <boost/serialization/nvp.hpp>
++#include "dogen/cpp/serialization/file_info_ser.hpp"
++#include "dogen/cpp/serialization/includer_info_ser.hpp"
++
++
++BOOST_CLASS_TRACKING(
++    dogen::cpp::includer_info,
++    boost::serialization::track_selectively)
++
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar,
++    const dogen::cpp::includer_info& v,
++    const unsigned int /*version*/) {
++    ar << make_nvp("file_info", base_object<dogen::cpp::file_info>(v));
++}
++
++template<typename Archive>
++void load(Archive& ar,
++    dogen::cpp::includer_info& v,
++    const unsigned int /*version*/) {
++    ar >> make_nvp("file_info", base_object<dogen::cpp::file_info>(v));
++}
++
++} }
++
++namespace boost {
++namespace serialization {
++
++template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::includer_info& v, unsigned int version);
++template void load(archive::polymorphic_iarchive& ar, dogen::cpp::includer_info& v, unsigned int version);
++
++template void save(archive::text_oarchive& ar, const dogen::cpp::includer_info& v, unsigned int version);
++template void load(archive::text_iarchive& ar, dogen::cpp::includer_info& v, unsigned int version);
++
++template void save(archive::binary_oarchive& ar, const dogen::cpp::includer_info& v, unsigned int version);
++template void load(archive::binary_iarchive& ar, dogen::cpp::includer_info& v, unsigned int version);
++
++template void save(archive::xml_oarchive& ar, const dogen::cpp::includer_info& v, unsigned int version);
++template void load(archive::xml_iarchive& ar, dogen::cpp::includer_info& v, unsigned int version);
++
++} }
+\ No newline at end of file
 diff --git a/projects/cpp/src/serialization/namespace_info_ser.cpp b/projects/cpp/src/serialization/namespace_info_ser.cpp
 index e9baf1a..3619017 100644
 --- a/projects/cpp/src/serialization/namespace_info_ser.cpp
@@ -3890,10 +5700,10 @@ index e9baf1a..3619017 100644
  
  } }
 diff --git a/projects/cpp/src/serialization/project_ser.cpp b/projects/cpp/src/serialization/project_ser.cpp
-index 420ddb5..407eedb 100644
+index 420ddb5..5c09356 100644
 --- a/projects/cpp/src/serialization/project_ser.cpp
 +++ b/projects/cpp/src/serialization/project_ser.cpp
-@@ -29,10 +29,15 @@
+@@ -29,10 +29,17 @@
  #include <boost/serialization/list.hpp>
  #include <boost/serialization/nvp.hpp>
  #include <boost/serialization/optional.hpp>
@@ -3902,6 +5712,8 @@ index 420ddb5..407eedb 100644
 -#include "dogen/cpp/serialization/file_info_ser.hpp"
 +#include "dogen/cpp/serialization/enum_info_ser.hpp"
 +#include "dogen/cpp/serialization/exception_info_ser.hpp"
++#include "dogen/cpp/serialization/forward_declaration_info_ser.hpp"
++#include "dogen/cpp/serialization/includer_info_ser.hpp"
 +#include "dogen/cpp/serialization/namespace_info_ser.hpp"
  #include "dogen/cpp/serialization/odb_options_info_ser.hpp"
  #include "dogen/cpp/serialization/project_ser.hpp"
@@ -3910,7 +5722,7 @@ index 420ddb5..407eedb 100644
  
  
  namespace boost {
-@@ -42,20 +47,30 @@ template<typename Archive>
+@@ -42,20 +49,34 @@ template<typename Archive>
  void save(Archive& ar,
      const dogen::cpp::project& v,
      const unsigned int /*version*/) {
@@ -3924,6 +5736,8 @@ index 420ddb5..407eedb 100644
 +    ar << make_nvp("classes", v.classes_);
 +    ar << make_nvp("exceptions", v.exceptions_);
 +    ar << make_nvp("registrars", v.registrars_);
++    ar << make_nvp("forward_declarations", v.forward_declarations_);
++    ar << make_nvp("includers", v.includers_);
  }
  
  template<typename Archive>
@@ -3940,6 +5754,8 @@ index 420ddb5..407eedb 100644
 +    ar >> make_nvp("classes", v.classes_);
 +    ar >> make_nvp("exceptions", v.exceptions_);
 +    ar >> make_nvp("registrars", v.registrars_);
++    ar >> make_nvp("forward_declarations", v.forward_declarations_);
++    ar >> make_nvp("includers", v.includers_);
  }
  
  } }
@@ -3974,6 +5790,28 @@ index b1e1e05..d0cb993 100644
  
      ar >> make_nvp("leaves", v.leaves_);
      ar >> make_nvp("model_dependencies", v.model_dependencies_);
+diff --git a/projects/cpp/src/serialization/registrar_ser.cpp b/projects/cpp/src/serialization/registrar_ser.cpp
+index 9513b13..dff95b4 100644
+--- a/projects/cpp/src/serialization/registrar_ser.cpp
++++ b/projects/cpp/src/serialization/registrar_ser.cpp
+@@ -30,6 +30,8 @@
+ #include "dogen/cpp/serialization/class_info_ser.hpp"
+ #include "dogen/cpp/serialization/enum_info_ser.hpp"
+ #include "dogen/cpp/serialization/exception_info_ser.hpp"
++#include "dogen/cpp/serialization/forward_declaration_info_ser.hpp"
++#include "dogen/cpp/serialization/includer_info_ser.hpp"
+ #include "dogen/cpp/serialization/namespace_info_ser.hpp"
+ #include "dogen/cpp/serialization/registrar_info_ser.hpp"
+ #include "dogen/cpp/serialization/visitor_info_ser.hpp"
+@@ -46,6 +48,8 @@ void register_types(Archive& ar) {
+     ar.template register_type<dogen::cpp::class_info>();
+     ar.template register_type<dogen::cpp::enum_info>();
+     ar.template register_type<dogen::cpp::exception_info>();
++    ar.template register_type<dogen::cpp::forward_declaration_info>();
++    ar.template register_type<dogen::cpp::includer_info>();
+     ar.template register_type<dogen::cpp::namespace_info>();
+     ar.template register_type<dogen::cpp::registrar_info>();
+     ar.template register_type<dogen::cpp::visitor_info>();
 diff --git a/projects/cpp/src/serialization/visitor_info_ser.cpp b/projects/cpp/src/serialization/visitor_info_ser.cpp
 index 221f99e..7e9a462 100644
 --- a/projects/cpp/src/serialization/visitor_info_ser.cpp
@@ -4156,10 +5994,10 @@ index f249a84..a856358 100644
  
  exception_info_generator::result_type
 diff --git a/projects/cpp/src/test_data/file_info_td.cpp b/projects/cpp/src/test_data/file_info_td.cpp
-index 11e95bf..ef3070d 100644
+index 11e95bf..1ea7970 100644
 --- a/projects/cpp/src/test_data/file_info_td.cpp
 +++ b/projects/cpp/src/test_data/file_info_td.cpp
-@@ -19,10 +19,15 @@
+@@ -19,10 +19,17 @@
   *
   */
  #include <sstream>
@@ -4169,6 +6007,8 @@ index 11e95bf..ef3070d 100644
 +#include "dogen/cpp/test_data/enum_info_td.hpp"
 +#include "dogen/cpp/test_data/exception_info_td.hpp"
  #include "dogen/cpp/test_data/file_info_td.hpp"
++#include "dogen/cpp/test_data/forward_declaration_info_td.hpp"
++#include "dogen/cpp/test_data/includer_info_td.hpp"
  #include "dogen/cpp/test_data/includes_td.hpp"
 +#include "dogen/cpp/test_data/namespace_info_td.hpp"
 +#include "dogen/cpp/test_data/registrar_info_td.hpp"
@@ -4176,7 +6016,7 @@ index 11e95bf..ef3070d 100644
  
  namespace {
  
-@@ -49,15 +54,11 @@ create_boost_filesystem_path(const unsigned int position) {
+@@ -49,15 +56,11 @@ create_boost_filesystem_path(const unsigned int position) {
      return boost::filesystem::path(s.str());
  }
  
@@ -4197,7 +6037,7 @@ index 11e95bf..ef3070d 100644
      return r;
  }
  
-@@ -66,35 +67,33 @@ create_boost_shared_ptr_dogen_cpp_entity(unsigned int position) {
+@@ -66,35 +69,37 @@ create_boost_shared_ptr_dogen_cpp_entity(unsigned int position) {
  namespace dogen {
  namespace cpp {
  
@@ -4233,16 +6073,20 @@ index 11e95bf..ef3070d 100644
 -    file_info* p = new file_info();
 -    file_info_generator::populate(position, *p);
 -    return p;
-+    if ((position % 5) == 0)
++    if ((position % 7) == 0)
 +        return dogen::cpp::enum_info_generator::create_ptr(position);
-+    if ((position % 5) == 1)
++    if ((position % 7) == 1)
 +        return dogen::cpp::exception_info_generator::create_ptr(position);
-+    if ((position % 5) == 2)
++    if ((position % 7) == 2)
 +        return dogen::cpp::registrar_info_generator::create_ptr(position);
-+    if ((position % 5) == 3)
++    if ((position % 7) == 3)
 +        return dogen::cpp::namespace_info_generator::create_ptr(position);
-+    if ((position % 5) == 4)
++    if ((position % 7) == 4)
 +        return dogen::cpp::visitor_info_generator::create_ptr(position);
++    if ((position % 7) == 5)
++        return dogen::cpp::forward_declaration_info_generator::create_ptr(position);
++    if ((position % 7) == 6)
++        return dogen::cpp::includer_info_generator::create_ptr(position);
 +    return dogen::cpp::class_info_generator::create_ptr(position);
  }
  
@@ -4252,6 +6096,126 @@ index 11e95bf..ef3070d 100644
 -}
  
  } }
+diff --git a/projects/cpp/src/test_data/forward_declaration_info_td.cpp b/projects/cpp/src/test_data/forward_declaration_info_td.cpp
+new file mode 100644
+index 0000000..5c6acb8
+--- /dev/null
++++ b/projects/cpp/src/test_data/forward_declaration_info_td.cpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/cpp/test_data/file_info_td.hpp"
++#include "dogen/cpp/test_data/forward_declaration_info_td.hpp"
++
++
++
++namespace dogen {
++namespace cpp {
++
++forward_declaration_info_generator::forward_declaration_info_generator() : position_(0) { }
++
++void forward_declaration_info_generator::
++populate(const unsigned int position, result_type& v) {
++    dogen::cpp::file_info_generator::populate(position, v);
++}
++
++forward_declaration_info_generator::result_type
++forward_declaration_info_generator::create(const unsigned int position) {
++    forward_declaration_info r;
++    forward_declaration_info_generator::populate(position, r);
++    return r;
++}
++forward_declaration_info_generator::result_type*
++forward_declaration_info_generator::create_ptr(const unsigned int position) {
++    forward_declaration_info* p = new forward_declaration_info();
++    forward_declaration_info_generator::populate(position, *p);
++    return p;
++}
++
++forward_declaration_info_generator::result_type
++forward_declaration_info_generator::operator()() {
++    return create(position_++);
++}
++
++} }
+diff --git a/projects/cpp/src/test_data/includer_info_td.cpp b/projects/cpp/src/test_data/includer_info_td.cpp
+new file mode 100644
+index 0000000..e567fe3
+--- /dev/null
++++ b/projects/cpp/src/test_data/includer_info_td.cpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/cpp/test_data/file_info_td.hpp"
++#include "dogen/cpp/test_data/includer_info_td.hpp"
++
++
++
++namespace dogen {
++namespace cpp {
++
++includer_info_generator::includer_info_generator() : position_(0) { }
++
++void includer_info_generator::
++populate(const unsigned int position, result_type& v) {
++    dogen::cpp::file_info_generator::populate(position, v);
++}
++
++includer_info_generator::result_type
++includer_info_generator::create(const unsigned int position) {
++    includer_info r;
++    includer_info_generator::populate(position, r);
++    return r;
++}
++includer_info_generator::result_type*
++includer_info_generator::create_ptr(const unsigned int position) {
++    includer_info* p = new includer_info();
++    includer_info_generator::populate(position, *p);
++    return p;
++}
++
++includer_info_generator::result_type
++includer_info_generator::operator()() {
++    return create(position_++);
++}
++
++} }
 diff --git a/projects/cpp/src/test_data/namespace_info_td.cpp b/projects/cpp/src/test_data/namespace_info_td.cpp
 index 3930522..340e834 100644
 --- a/projects/cpp/src/test_data/namespace_info_td.cpp
@@ -4275,10 +6239,10 @@ index 3930522..340e834 100644
  
  namespace_info_generator::result_type
 diff --git a/projects/cpp/src/test_data/project_td.cpp b/projects/cpp/src/test_data/project_td.cpp
-index 1149a86..ad24ffe 100644
+index 1149a86..71b8ea3 100644
 --- a/projects/cpp/src/test_data/project_td.cpp
 +++ b/projects/cpp/src/test_data/project_td.cpp
-@@ -18,26 +18,18 @@
+@@ -18,26 +18,20 @@
   * MA 02110-1301, USA.
   *
   */
@@ -4287,6 +6251,8 @@ index 1149a86..ad24ffe 100644
 -#include "dogen/cpp/test_data/file_info_td.hpp"
 +#include "dogen/cpp/test_data/enum_info_td.hpp"
 +#include "dogen/cpp/test_data/exception_info_td.hpp"
++#include "dogen/cpp/test_data/forward_declaration_info_td.hpp"
++#include "dogen/cpp/test_data/includer_info_td.hpp"
 +#include "dogen/cpp/test_data/namespace_info_td.hpp"
  #include "dogen/cpp/test_data/odb_options_info_td.hpp"
  #include "dogen/cpp/test_data/project_td.hpp"
@@ -4311,7 +6277,7 @@ index 1149a86..ad24ffe 100644
  dogen::cpp::odb_options_info
  create_dogen_cpp_odb_options_info(const unsigned int position) {
      return dogen::cpp::odb_options_info_generator::create(position);
-@@ -55,6 +47,84 @@ create_boost_optional_dogen_cpp_cmakelists_info(unsigned int position) {
+@@ -55,6 +49,110 @@ create_boost_optional_dogen_cpp_cmakelists_info(unsigned int position) {
      return r;
  }
  
@@ -4393,10 +6359,36 @@ index 1149a86..ad24ffe 100644
 +    return r;
 +}
 +
++dogen::cpp::forward_declaration_info
++create_dogen_cpp_forward_declaration_info(const unsigned int position) {
++    return dogen::cpp::forward_declaration_info_generator::create(position);
++}
++
++std::list<dogen::cpp::forward_declaration_info> create_std_list_dogen_cpp_forward_declaration_info(unsigned int position) {
++    std::list<dogen::cpp::forward_declaration_info> r;
++    for (unsigned int i(0); i < 4; ++i) {
++        r.push_back(create_dogen_cpp_forward_declaration_info(position + i));
++    }
++    return r;
++}
++
++dogen::cpp::includer_info
++create_dogen_cpp_includer_info(const unsigned int position) {
++    return dogen::cpp::includer_info_generator::create(position);
++}
++
++std::list<dogen::cpp::includer_info> create_std_list_dogen_cpp_includer_info(unsigned int position) {
++    std::list<dogen::cpp::includer_info> r;
++    for (unsigned int i(0); i < 4; ++i) {
++        r.push_back(create_dogen_cpp_includer_info(position + i));
++    }
++    return r;
++}
++
  }
  
  namespace dogen {
-@@ -64,10 +134,15 @@ project_generator::project_generator() : position_(0) { }
+@@ -64,10 +162,17 @@ project_generator::project_generator() : position_(0) { }
  
  void project_generator::
  populate(const unsigned int position, result_type& v) {
@@ -4413,6 +6405,8 @@ index 1149a86..ad24ffe 100644
 +    v.classes(create_std_list_dogen_cpp_class_info(position + 6));
 +    v.exceptions(create_std_list_dogen_cpp_exception_info(position + 7));
 +    v.registrars(create_std_list_dogen_cpp_registrar_info(position + 8));
++    v.forward_declarations(create_std_list_dogen_cpp_forward_declaration_info(position + 9));
++    v.includers(create_std_list_dogen_cpp_includer_info(position + 10));
  }
  
  project_generator::result_type
@@ -4970,6 +6964,170 @@ index e375025..92257f8 100644
  
  } }
 \ No newline at end of file
+diff --git a/projects/cpp/src/types/forward_declaration_info.cpp b/projects/cpp/src/types/forward_declaration_info.cpp
+new file mode 100644
+index 0000000..dc2a9ff
+--- /dev/null
++++ b/projects/cpp/src/types/forward_declaration_info.cpp
+@@ -0,0 +1,75 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include "dogen/cpp/io/file_info_io.hpp"
++#include "dogen/cpp/types/forward_declaration_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++forward_declaration_info::forward_declaration_info(
++    const std::string& name,
++    const std::string& documentation,
++    const dogen::cpp::includes& includes,
++    const dogen::cpp::content_descriptor& descriptor,
++    const std::string& header_guard,
++    const boost::filesystem::path& file_path,
++    const boost::filesystem::path& relative_path,
++    const std::list<std::string>& namespaces)
++    : dogen::cpp::file_info(name,
++      documentation,
++      includes,
++      descriptor,
++      header_guard,
++      file_path,
++      relative_path,
++      namespaces) { }
++
++void forward_declaration_info::to_stream(std::ostream& s) const {
++    s << " { "
++      << "\"__type__\": " << "\"dogen::cpp::forward_declaration_info\"" << ", "
++      << "\"__parent_0__\": ";
++    file_info::to_stream(s);
++    s << " }";
++}
++
++void forward_declaration_info::swap(forward_declaration_info& other) noexcept {
++    file_info::swap(other);
++
++}
++
++bool forward_declaration_info::equals(const dogen::cpp::file_info& other) const {
++    const forward_declaration_info* const p(dynamic_cast<const forward_declaration_info* const>(&other));
++    if (!p) return false;
++    return *this == *p;
++}
++
++bool forward_declaration_info::operator==(const forward_declaration_info& rhs) const {
++    return file_info::compare(rhs);
++}
++
++forward_declaration_info& forward_declaration_info::operator=(forward_declaration_info other) {
++    using std::swap;
++    swap(*this, other);
++    return *this;
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/cpp/src/types/includer_info.cpp b/projects/cpp/src/types/includer_info.cpp
+new file mode 100644
+index 0000000..879ca6b
+--- /dev/null
++++ b/projects/cpp/src/types/includer_info.cpp
+@@ -0,0 +1,75 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include "dogen/cpp/io/file_info_io.hpp"
++#include "dogen/cpp/types/includer_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++includer_info::includer_info(
++    const std::string& name,
++    const std::string& documentation,
++    const dogen::cpp::includes& includes,
++    const dogen::cpp::content_descriptor& descriptor,
++    const std::string& header_guard,
++    const boost::filesystem::path& file_path,
++    const boost::filesystem::path& relative_path,
++    const std::list<std::string>& namespaces)
++    : dogen::cpp::file_info(name,
++      documentation,
++      includes,
++      descriptor,
++      header_guard,
++      file_path,
++      relative_path,
++      namespaces) { }
++
++void includer_info::to_stream(std::ostream& s) const {
++    s << " { "
++      << "\"__type__\": " << "\"dogen::cpp::includer_info\"" << ", "
++      << "\"__parent_0__\": ";
++    file_info::to_stream(s);
++    s << " }";
++}
++
++void includer_info::swap(includer_info& other) noexcept {
++    file_info::swap(other);
++
++}
++
++bool includer_info::equals(const dogen::cpp::file_info& other) const {
++    const includer_info* const p(dynamic_cast<const includer_info* const>(&other));
++    if (!p) return false;
++    return *this == *p;
++}
++
++bool includer_info::operator==(const includer_info& rhs) const {
++    return file_info::compare(rhs);
++}
++
++includer_info& includer_info::operator=(includer_info other) {
++    using std::swap;
++    swap(*this, other);
++    return *this;
++}
++
++} }
+\ No newline at end of file
 diff --git a/projects/cpp/src/types/namespace_info.cpp b/projects/cpp/src/types/namespace_info.cpp
 index 36ec8c8..fcc4562 100644
 --- a/projects/cpp/src/types/namespace_info.cpp
@@ -5032,10 +7190,10 @@ index 36ec8c8..fcc4562 100644
  
  namespace_info& namespace_info::operator=(namespace_info other) {
 diff --git a/projects/cpp/src/types/project.cpp b/projects/cpp/src/types/project.cpp
-index 1a3a1e5..11ece9f 100644
+index 1a3a1e5..d5e9df1 100644
 --- a/projects/cpp/src/types/project.cpp
 +++ b/projects/cpp/src/types/project.cpp
-@@ -24,34 +24,59 @@ namespace dogen {
+@@ -24,34 +24,69 @@ namespace dogen {
  namespace cpp {
  
  project::project(project&& rhs)
@@ -5050,7 +7208,9 @@ index 1a3a1e5..11ece9f 100644
 +      enumerations_(std::move(rhs.enumerations_)),
 +      classes_(std::move(rhs.classes_)),
 +      exceptions_(std::move(rhs.exceptions_)),
-+      registrars_(std::move(rhs.registrars_)) { }
++      registrars_(std::move(rhs.registrars_)),
++      forward_declarations_(std::move(rhs.forward_declarations_)),
++      includers_(std::move(rhs.includers_)) { }
  
  project::project(
 -    const std::list<dogen::cpp::file_info>& files,
@@ -5065,7 +7225,9 @@ index 1a3a1e5..11ece9f 100644
 +    const std::list<dogen::cpp::enum_info>& enumerations,
 +    const std::list<dogen::cpp::class_info>& classes,
 +    const std::list<dogen::cpp::exception_info>& exceptions,
-+    const std::list<dogen::cpp::registrar_info>& registrars)
++    const std::list<dogen::cpp::registrar_info>& registrars,
++    const std::list<dogen::cpp::forward_declaration_info>& forward_declarations,
++    const std::list<dogen::cpp::includer_info>& includers)
 +    : odb_options_(odb_options),
        src_cmakelists_(src_cmakelists),
 -      include_cmakelists_(include_cmakelists) { }
@@ -5075,7 +7237,9 @@ index 1a3a1e5..11ece9f 100644
 +      enumerations_(enumerations),
 +      classes_(classes),
 +      exceptions_(exceptions),
-+      registrars_(registrars) { }
++      registrars_(registrars),
++      forward_declarations_(forward_declarations),
++      includers_(includers) { }
  
  void project::swap(project& other) noexcept {
      using std::swap;
@@ -5089,6 +7253,8 @@ index 1a3a1e5..11ece9f 100644
 +    swap(classes_, other.classes_);
 +    swap(exceptions_, other.exceptions_);
 +    swap(registrars_, other.registrars_);
++    swap(forward_declarations_, other.forward_declarations_);
++    swap(includers_, other.includers_);
  }
  
  bool project::operator==(const project& rhs) const {
@@ -5103,11 +7269,13 @@ index 1a3a1e5..11ece9f 100644
 +        enumerations_ == rhs.enumerations_ &&
 +        classes_ == rhs.classes_ &&
 +        exceptions_ == rhs.exceptions_ &&
-+        registrars_ == rhs.registrars_;
++        registrars_ == rhs.registrars_ &&
++        forward_declarations_ == rhs.forward_declarations_ &&
++        includers_ == rhs.includers_;
  }
  
  project& project::operator=(project other) {
-@@ -60,22 +85,6 @@ project& project::operator=(project other) {
+@@ -60,22 +95,6 @@ project& project::operator=(project other) {
      return *this;
  }
  
@@ -5130,7 +7298,7 @@ index 1a3a1e5..11ece9f 100644
  const dogen::cpp::odb_options_info& project::odb_options() const {
      return odb_options_;
  }
-@@ -124,4 +133,100 @@ void project::include_cmakelists(const boost::optional<dogen::cpp::cmakelists_in
+@@ -124,4 +143,132 @@ void project::include_cmakelists(const boost::optional<dogen::cpp::cmakelists_in
      include_cmakelists_ = std::move(v);
  }
  
@@ -5228,6 +7396,38 @@ index 1a3a1e5..11ece9f 100644
 +
 +void project::registrars(const std::list<dogen::cpp::registrar_info>&& v) {
 +    registrars_ = std::move(v);
++}
++
++const std::list<dogen::cpp::forward_declaration_info>& project::forward_declarations() const {
++    return forward_declarations_;
++}
++
++std::list<dogen::cpp::forward_declaration_info>& project::forward_declarations() {
++    return forward_declarations_;
++}
++
++void project::forward_declarations(const std::list<dogen::cpp::forward_declaration_info>& v) {
++    forward_declarations_ = v;
++}
++
++void project::forward_declarations(const std::list<dogen::cpp::forward_declaration_info>&& v) {
++    forward_declarations_ = std::move(v);
++}
++
++const std::list<dogen::cpp::includer_info>& project::includers() const {
++    return includers_;
++}
++
++std::list<dogen::cpp::includer_info>& project::includers() {
++    return includers_;
++}
++
++void project::includers(const std::list<dogen::cpp::includer_info>& v) {
++    includers_ = v;
++}
++
++void project::includers(const std::list<dogen::cpp::includer_info>&& v) {
++    includers_ = std::move(v);
 +}
 +
  } }
