@@ -13,23 +13,27 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-08-24 Sun 19:47]
+Clock summary at [2014-08-27 Wed 08:47]
 
-| Headline                                                | Time   |      |      |
-|---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *9:22* |      |      |
-|---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 9:22 |      |
-| IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
-| IMPLEMENTATION Updates to the manual and readme files   |        |      | 0:38 |
-| COMPLETED Update instructions in manual for Postgres    |        |      | 0:50 |
-| COMPLETED Tidy-up test model folder structure           |        |      | 6:01 |
-| COMPLETED Review where we are with the last refactoring |        |      | 0:21 |
-| COMPLETED Check that dogen builds on C++-14             |        |      | 0:10 |
-| COMPLETED Add a build number to dogen                   |        |      | 0:07 |
+| Headline                                                | Time    |       |      |
+|---------------------------------------------------------+---------+-------+------|
+| *Total time*                                            | *14:11* |       |      |
+|---------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                         |         | 14:11 |      |
+| IMPLEMENTATION Sprint and product backlog grooming      |         |       | 1:26 |
+| IMPLEMENTATION Updates to the manual and readme files   |         |       | 0:38 |
+| COMPLETED Update instructions in manual for Postgres    |         |       | 0:50 |
+| COMPLETED Tidy-up test model folder structure           |         |       | 6:01 |
+| COMPLETED Review where we are with the last refactoring |         |       | 0:21 |
+| COMPLETED Check that dogen builds on C++-14             |         |       | 0:10 |
+| COMPLETED Add a build number to dogen                   |         |       | 0:07 |
+| COMPLETED Analyse formatters architecture               |         |       | 0:39 |
+| IMPLEMENTATION Merge entity with file info              |         |       | 2:52 |
+| IMPLEMENTATION Refactor types header formatter          |         |       | 1:07 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-08-26 Tue 07:51]--[2014-08-26 Tue 08:02] =>  0:11
     CLOCK: [2014-08-23 Sat 11:31]--[2014-08-23 Sat 11:56] =>  0:25
     CLOCK: [2014-08-23 Sat 10:56]--[2014-08-23 Sat 11:07] =>  0:11
     CLOCK: [2014-08-22 Fri 12:39]--[2014-08-22 Fri 12:49] =>  0:10
@@ -213,6 +217,185 @@ This does mean we now always rebuild because the build number keeps on
 changing. We should try this approach for a bit and see how well it
 works.
 
+*** COMPLETED Analyse formatters architecture                         :story:
+    CLOSED: [2014-08-25 Mon 13:24]
+    CLOCK: [2014-08-25 Mon 12:44]--[2014-08-25 Mon 13:23] =>  0:39
+
+At present we do a lot of formatter related decisions during the SML
+to C++ conversion. In reality, we should allow the formatters model to
+do these.
+
+- move generation of includer files into SML to C++
+  transformation. its in workflow at the moment.
+- every formatter model needs to have a formatter registrar on the
+  basis of type.
+- we need to create interfaces for each of the formatters,
+  e.g. =visitor_formatter=, etc. each of these takes in formatter
+  settings and the type to format. they return an optional file
+  (e.g. nothing to do given the settings). or we could have a "can
+  format" method that needs to be called first.
+- there is a registration function that the formatters use to
+  register with the registrar.
+- cpp model will no longer use composition for file infos, but just
+  plain inheritance.
+- main workflow in cpp formatters simply goes through every type,
+  dispatches it to a concrete type, then loops through all the
+  registered formatters for that type. If a file is generated, it is
+  added to the file list.
+- sample names: =types_class_main_header_file_formatter=,
+  =types_enumeration_main_header_file_formatter=, etc.
+- cpp projects should be split on type again. this way we avoid type
+  dispatching, visitors etc.
+- file name and includes must be computed using a pair of strings:
+  (facet, aspect). these are supplied at run time via the registration
+  of the formatters. Each entity in the C++ model also has these pair
+  of strings. Formatters register against an interface
+  (=class_formatter_interface= say) using this pair. Formatting is
+  just a case of looking for the right formatter for triplet (type,
+  facet, aspect). includes are computed dynamically using a key that
+  contains the pair (feature, aspect).
+
+These changes are very hard to do incrementally, so we will have to
+work off of a patch until we get it all to work.
+
+*** IMPLEMENTATION Merge entity with file info                        :story:
+    CLOCK: [2014-08-27 Wed 07:51]--[2014-08-27 Wed 08:46] =>  0:55
+    CLOCK: [2014-08-26 Tue 18:08]--[2014-08-26 Tue 18:55] =>  0:47
+    CLOCK: [2014-08-26 Tue 08:02]--[2014-08-26 Tue 08:34] =>  0:32
+    CLOCK: [2014-08-25 Mon 13:32]--[2014-08-25 Mon 14:10] =>  0:38
+
+As part of the formatters refactoring, we need a single top-level
+entity against which we can create formatter interfaces. In order to
+achieve that we need to remove the file info composition.
+
+We have reached the usual limitations:
+
+- if we merge file info with class info, etc. we now have to take a
+  instance of a type with half of the fields un-populated, make copies
+  of it and populate each copy with the correct values. This is very
+  smelly.
+- if we continue using composition via inheritance, we can no longer
+  distinguish the file formatter interfaces
+  (e.g. =class_formatter_interface= and so on).
+
+We have two options to solve this:
+
+- make file info a template class with the Entity as a
+  concept. Instantiate it with each of the infos (=class_info=,
+  etc.). This means we can now use the type system again in the
+  interfaces.
+- create a loser aggregation of the file details with the infos. For
+  example, we could have a map with a key of (facet, aspect, file type)
+  and a value of file info. Each info is associated with one such map
+  at the project level. The formatter interface then takes the file
+  details and the info as two separate parameters.
+
+Having said all of that, we have now completed the vicious circle:
+
+- we need to process includes during SML to C++ transformation because
+  that is where the relationships with objects are available.
+- however, include processing is dependent on the formatter so we
+  can't do this until we know about the formatters.
+- we can't add all the information required to process includes to the
+  cpp model because it would make it a super-set of SML, putting its
+  need in question (again).
+
+What we really need is a way to transport some formatter knowledge
+into the SML to C++ transformation. For example, we could create some
+kind of =rule= that takes as an input a triplet and a set of SML types
+and returns:
+
+- the file name
+- the path to dependent files including forward declarations, etc.
+
+Rules need to be hooked up in a graph of dependencies. For example:
+
+- =types.forward_declaration.header_file=: no dependencies.
+- =types.main.header_file=: depends on
+  =types.forward_declaration.header_file=.
+- =types.main.implementation_file=: depends on
+  =types.main.header_file=.
+- ...
+
+All of the formatters would have to be covered by this:
+
+: types.main.header_file
+: types.main.implementation_file
+: types.forward_declaration.header_file
+: types.includers.header_file
+: ...
+: boost_serialization.main.header_file
+: boost_serialization.main.implementation_file
+: ...
+
+The rules could be hooked up to populate various tags:
+
+: types.forward_declaration.header_file.file_name
+: types.forward_declaration.header_file.relative_file_path
+: types.forward_declaration.header_file.includes.system
+: types.forward_declaration.header_file.includes.user
+
+These could be then transporter to the C++ model as a type:
+
+: std::unordered_map<string, file_info>
+
+Where the string is the triplet, and file info is made up of the above
+file properties.
+
+Note that in this approach, the content descriptor is encapsulated in
+the triplet (facet, aspect, file type) and the type itself
+(=class_info=, etc). The latter is effectively the content type.
+
+Of course the rule processing could be part of SML proper. Formatters
+would dynamically register against a singleton in SML. The SML model
+would then run through all the rules and populate meta-data. Each
+model would simply just consume it.
+
+*** IMPLEMENTATION Refactor types header formatter                    :story:
+    CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
+    CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
+    CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
+
+Make the main types header formatters look like the =om= types
+formatter. This model was deleted around commit 10157ad.
+
+This is still not quite right. We need to drive the formatting from
+two things:
+
+- user options
+- available formatters
+
+**** IMPLEMENTATION Tidy-up =types_main_header_file_formatter=         :task:
+     CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
+
+Clean up internal functions in file and add documentation.
+
+**** Make use of boilerplate                                           :task:
+
+Generate the licence, etc using boilerplate formatter.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** C++ formatters use of =headers_for_facet_=                        :story:
+
+We seem to be creating a local variable =headers_for_facet_= in
+function =format_file_infos_activity= but not really making use of
+it. We need to investigate what was that we were trying to do here,
+the name of the variable seems to imply it should have been a member
+variable. Probably a remnant from some old refactoring.
+
 *** Move includes and header guard into entity                        :story:
 
 With this a formatter can now rely only on entities rather than
@@ -303,28 +486,6 @@ dependencies inside of the formatters.
 - get includer to work off of object relationships
 - remove relationships from transformer
 - remove helper models boost and std
-
-*** Refactor types header formatter                                   :story:
-
-Make the main types header formatters look like the =om= types formatter.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
 
 *** Add warning =-Wunused-private-field=                              :story:
 
