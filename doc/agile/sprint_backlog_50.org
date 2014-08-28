@@ -258,6 +258,15 @@ do these.
 These changes are very hard to do incrementally, so we will have to
 work off of a patch until we get it all to work.
 
+*** IMPLEMENTATION Redefine terminology around facets in manual       :story:
+    CLOCK: [2014-08-28 Thu 17:53]--[2014-08-28 Thu 18:38] =>  0:45
+
+As part of the analysis on formatters architecture we have concluded
+yet again that the right thing to do is to work with the meta-data for
+all things related to the formatters, including includes. We now need
+to add these concepts to the vocabulary in the manual to make sure the
+language is clear before we start looking into the implementation.
+
 *** IMPLEMENTATION Merge entity with file info                        :story:
     CLOCK: [2014-08-27 Wed 07:51]--[2014-08-27 Wed 08:46] =>  0:55
     CLOCK: [2014-08-26 Tue 18:08]--[2014-08-26 Tue 18:55] =>  0:47
