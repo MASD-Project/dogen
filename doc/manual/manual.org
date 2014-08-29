@@ -876,7 +876,7 @@ order to run the unit tests. To do so:
 
 : create schema kitanda;
 
-- In file =projects/database/spec/main.cpp=, uncomment the line:
+- In file =projects/test_models/database/spec/main.cpp=, uncomment the line:
 
 : // odb::schema_catalog::create_schema(*db);
 
