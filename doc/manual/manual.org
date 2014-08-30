@@ -422,19 +422,20 @@ or the underscore character =_=. Examples:
 
 : 123_abc.12fc.344
 
-The leaf element of a tag is defined to be the element after the last
-separator, if any separators are present; or the only element if the
-tag has no separators. A non-leaf element is called a /group/. A group
-is said to /contain/ another group when it precedes it. The containing
-group is called the /parent group/ and the contained group is called
-the /child group/. When no groups are present, the leaf element is
-said to belong to the /global/ group. Examples:
+The /leaf element/ of a tag is defined to be the element after the
+last separator, if any separators are present; or the only element, if
+the tag has no separators. A non-leaf element is called a /group/. A
+group /contains/ one or more leafs. A group /contains/ another group
+when it precedes it. The containing group is called the /parent group/
+and the contained group is called the /child group/. When no groups
+are present, the leaf element is said to belong to the /global/
+group. Examples:
 
-: parent_group.child_group.leaf
-: group.leaf
-: [global.]leaf
-
-Where =[global.]= is implied.
+| Tag                           | Description                     |
+|-------------------------------+---------------------------------|
+| parent_group.child_group.leaf | parent contains child and leaf. |
+| group.leaf                    | group contains leaf.            |
+| leaf                          | group =[global.]= is implied.   |
 
 A leaf element can be either /transitive/ or /non-transitive/. A
 non-transitive leaf element applies to only the group it is contained
