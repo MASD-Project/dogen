@@ -64,37 +64,37 @@ the latest sprint):
 * PART I - THEORY
 
 In this part we describe the philosophical underpinnings behind Dogen,
-its internal architecture and the development model.
+its internal architecture and assorted aspects around its development.
 
 ** Fundamental Building Blocks
 
-Dogen is largely the result of exploring a simple question: which
+*** The Question
+
+Dogen is largely the result of exploring a simple question: what
 portion of the objects required to model a problem domain is
 generatable by a program, such that the generated code is as good as,
-or better than, code crafted by humans?
+or better than, code crafted by humans? This question stems from many
+years of looking at object models and their limitations, in various
+incarnations.
 
-The question stems from many years of looking at object models and
-their limitations. For instance, one of the main problems one often
-finds in production C++ code is a lack of a large number of useful
-"facilities" that all objects on all domain models should have; for
-instance, a simple way of dumping current state to a stream, in a
-format that can be understood by external tools. Developers tend to
-add facilities like these on a haphazard sort of manner, because it is
-laborious and not particularly exciting functionality to work on. By
-the time the domain model has matured, it is often too late to find
-time for it.
+One of the main problems one often finds in production code is a lack
+of a large number of simple but very useful "facilities", which all
+objects on all domain models should have. For instance, a simple way
+of dumping current state to a stream, in a format that can be
+understood by external tools. Developers tend to add facilities like
+these on a haphazard sort of manner, because it is laborious and not
+particularly exciting functionality to work on. By the time the domain
+model has matured, it is often too late to find time for it.
 
 A further observation is that a large part of the objects required to
 model a problem domain have fairly straightforward behaviour; in many
 cases they are but glorified structs with a few trivial abilities
 bolted on, such as serialisation and hashing. A lot of programmer time
 is taken on generating getters, setters, serialisation code and so
-on. This is also code that is easy to get sloppy with, because its so
+on. It is easy to get sloppy with this kind of code because its so
 repetitive.
 
-Dogen aims to code generate all such code - and /only/ such code;
-anything which is deemed non-trivial is expected to be done by
-humans. For everything else, we aim to add support in Dogen.
+This question took us on a road to 
 
 *** On Models and Modeling
 
@@ -212,6 +212,7 @@ that can generate source code from a UML diagram see:
 - [[http://dia2code.sourceforge.net/][dia2code]]
 - [[http://umbrello.kde.org/][Umbrello]] (see [[http://docs.kde.org/development/en/kdesdk/umbrello/code-import-generation.html][this]] for code generation)
 
+
 In a sense one, one may think of these tools as /general purpose/ code
 generators because they output code that is not tied up to any
 specific purpose, other than to model the problem domain. Unlike the
@@ -318,11 +319,11 @@ started off by trying to implement the vision as a C++ tool; but the
 notions are general enough that they would apply to any programming
 language.
 
-** The Dogen Architecture
+*** Feedback Loops
 
-Almost all code in Dogen is implemented as Dogen domain models; that
-is, we use Dogen to generate the vast majority of Dogen itself, and we
-do so for several reasons:
+Almost all code in Dogen is implemented as Dogen models; that is, we
+use Dogen to generate the vast majority of Dogen itself. We do so for
+several reasons:
 
 - *dog-fooding*: using your own tool frequently is a great way of making
   sure the tool does what it is meant to do and does so in a workable,
@@ -334,6 +335,11 @@ do so for several reasons:
 - *code faster and test our theoretical underpinnings*: if our ideas
   around code generation are correct, Dogen should significantly
   speed-up development of Dogen.
+
+In summary, the Dogen approach is to try to create a positive feedback
+loop in Dogen development.
+
+** The Architecture
 
 Dogen is made up of a large number of domain models. These fall into
 two broad categories: /test models/ and /main models/. Test models are
@@ -384,90 +390,6 @@ to do so as faithfully as possible. It was created to avoid having a
 direct dependency with Dia's code base. Since Dia XML changes very
 infrequently and since we use such a small part of Dia's
 functionality, this turned out to be a good decision.
-
-***** Meta-data and tags
-
-As explained, the SML meta-model is bootstrapped from Dia. We soon
-found the need the pass information to SML for which there was no
-equivalent available in Dia. In some cases these were just limitations
-of Dia's modeling of UML and could be solved by improving the
-application. In some other cases, it just made no sense at all to
-convey this kind of information in Dia. To solve this problem in a
-general manner, we created a set of special "instructions" that are
-interpreted by Dogen. These instructions are passed in to Dogen via
-UML Comments, with a special form:
-
-: #DOGEN KEY=VALUE
-
-All lines starting with the well-known prefix =#DOGEN= are considered
-special instructions. They must follow the key-value-pair form defined
-above.
-
-Initially this was done to fix a couple of minor problems with Dia,
-but this infrastructure has taken a life of its own, and its now used
-through Dogen. Each sub-system takes responsibility of its own keys -
-it defines them and validates to ensure the values for a key are
-valid. In the remainder of this manual you will find sections with a
-name similar to this one, where we will define the tags available for
-that component and their semantics.
-
-These keys within Dogen are known as /tags/ and they are part of the
-meta-data processing sub-system. Well-formed tags must follow a set of
-rules.
-
-A tag is composed by one or more /elements/ and zero or more
-/separators/. A separator is the dot character =.=. Elements are made
-of a sequence characters that can be digits =0-9=, letters =a-z A-Z=
-or the underscore character =_=. Examples:
-
-: 123_abc.12fc.344
-
-The /leaf element/ of a tag is defined to be the element after the
-last separator, if any separators are present; or the only element, if
-the tag has no separators. A non-leaf element is called a /group/. A
-group /contains/ one or more leafs. A group /contains/ another group
-when it precedes it. The containing group is called the /parent group/
-and the contained group is called the /child group/. When no groups
-are present, the leaf element is said to belong to the /global/
-group. Examples:
-
-| Tag                           | Description                     |
-|-------------------------------+---------------------------------|
-| parent_group.child_group.leaf | parent contains child and leaf. |
-| group.leaf                    | group contains leaf.            |
-| leaf                          | group =[global.]= is implied.   |
-
-A leaf element can be either /transitive/ or /non-transitive/. A
-non-transitive leaf element applies to only the group it is contained
-in. A transitive leaf element applies to the group and all of its
-children. A transitive element that belongs to the global group
-applies to all groups. Transitive examples:
-
-| Tag                            | Description                                        |
-|--------------------------------+----------------------------------------------------|
-| leaf_0                         | applies to all groups                              |
-| group_0.leaf_1                 | applies to group and any other of its sub-groups   |
-| group_0.group_1.group_2.leaf_2 | applies to group_2 and any other of its sub-groups |
-
-In this particular case, =group_2= has three leafs, =leaf_0=, =leaf_1=
-and =leaf_2=. Non-transitive examples:
-
-| Tag                            | Description             |
-|--------------------------------+-------------------------|
-| leaf_0                         | applies to global group |
-| group_0.leaf_1                 | applies to group        |
-| group_0.group_1.group_2.leaf_2 | applies to group_2      |
-
-In this example, =group_2= has only one leaf, =leaf_2=.
-
-
-Dia defines the following tags:
-
-- =dia.comment=: Comment provided by user when dia does not allow for
-  it.
-- =dia.identity_attribute=: Attribute that provides this entity its
-  identity.
-- =is_final=: If true, the type cannot be inherited from.
 
 **** The middle-end
 
@@ -664,6 +586,90 @@ After much, much thinking, it was decided that the current approach is
 the less of all evils, and until something comes up that is
 dramatically easier we will continue with this approach.
 
+*** Meta-data and tags
+
+As explained, the SML meta-model is bootstrapped from Dia. We soon
+found the need the pass information to SML for which there was no
+equivalent available in Dia. In some cases these were just limitations
+of Dia's modeling of UML and could be solved by improving the
+application. In some other cases, it just made no sense at all to
+convey this kind of information in Dia. To solve this problem in a
+general manner, we created a set of special "instructions" that are
+interpreted by Dogen. These instructions are passed in to Dogen via
+UML Comments, with a special form:
+
+: #DOGEN KEY=VALUE
+
+All lines starting with the well-known prefix =#DOGEN= are considered
+special instructions. They must follow the key-value-pair form defined
+above.
+
+Initially this was done to fix a couple of minor problems with Dia,
+but this infrastructure has taken a life of its own, and its now used
+through Dogen. Each sub-system takes responsibility of its own keys -
+it defines them and validates to ensure the values for a key are
+valid. In the remainder of this manual you will find sections with a
+name similar to this one, where we will define the tags available for
+that component and their semantics.
+
+These keys within Dogen are known as /tags/ and they are part of the
+meta-data processing sub-system. Well-formed tags must follow a set of
+rules.
+
+A tag is composed by one or more /elements/ and zero or more
+/separators/. A separator is the dot character =.=. Elements are made
+of a sequence characters that can be digits =0-9=, letters =a-z A-Z=
+or the underscore character =_=. Examples:
+
+: 123_abc.12fc.344
+
+The /leaf element/ of a tag is defined to be the element after the
+last separator, if any separators are present; or the only element, if
+the tag has no separators. A non-leaf element is called a /group/. A
+group /contains/ one or more leafs. A group /contains/ another group
+when it precedes it. The containing group is called the /parent group/
+and the contained group is called the /child group/. When no groups
+are present, the leaf element is said to belong to the /global/
+group. Examples:
+
+| Tag                           | Description                     |
+|-------------------------------+---------------------------------|
+| parent_group.child_group.leaf | parent contains child and leaf. |
+| group.leaf                    | group contains leaf.            |
+| leaf                          | group =[global.]= is implied.   |
+
+A leaf element can be either /transitive/ or /non-transitive/. A
+non-transitive leaf element applies to only the group it is contained
+in. A transitive leaf element applies to the group and all of its
+children. A transitive element that belongs to the global group
+applies to all groups. Transitive examples:
+
+| Tag                            | Description                                        |
+|--------------------------------+----------------------------------------------------|
+| leaf_0                         | applies to all groups                              |
+| group_0.leaf_1                 | applies to group and any other of its sub-groups   |
+| group_0.group_1.group_2.leaf_2 | applies to group_2 and any other of its sub-groups |
+
+In this particular case, =group_2= has three leafs, =leaf_0=, =leaf_1=
+and =leaf_2=. Non-transitive examples:
+
+| Tag                            | Description             |
+|--------------------------------+-------------------------|
+| leaf_0                         | applies to global group |
+| group_0.leaf_1                 | applies to group        |
+| group_0.group_1.group_2.leaf_2 | applies to group_2      |
+
+In this example, =group_2= has only one leaf, =leaf_2=.
+
+
+Dia defines the following tags:
+
+- =dia.comment=: Comment provided by user when dia does not allow for
+  it.
+- =dia.identity_attribute=: Attribute that provides this entity its
+  identity.
+- =is_final=: If true, the type cannot be inherited from.
+
 *** Test Models
 
 Each feature we add to dogen is tested via a test model: larger
@@ -736,6 +742,10 @@ they got added to dogen):
   because we cannot add specs directly to test models, or else the
   binary diff tests would fail - since dogen cannot generate these
   specs.
+
+** Development Matters
+
+In this section we cover various aspects of Dogen development.
 
 *** Versions and Build Numbers
 
