@@ -68,6 +68,8 @@ its internal architecture and assorted aspects around its development.
 
 ** Fundamental Building Blocks
 
+This section focuses on the more abstract aspects of Dogen.
+
 *** The Question
 
 Dogen is largely the result of exploring a simple question: what
@@ -94,22 +96,24 @@ is taken on generating getters, setters, serialisation code and so
 on. It is easy to get sloppy with this kind of code because its so
 repetitive.
 
-This question took us on a road to 
+Trying to answer this question led us along a road less travelled by
+regular developers: the world of /meta/.
 
 *** On Models and Modeling
 
-Before proceeding, it is important to clarify what is meant by a
-model. After all, programming is the art of refining abstractions. It
-is the programmer's job to create a set of constructs that represent
-concepts found in the problem domain; and to get those concepts to
-cooperate successfully in producing work that is defined as useful by
-something or someone - that is, to solve a /problem/ in the problem
-domain. Together, this collection of concepts /models/ the problem
-domain because it is a representation of a subset of the problem
-domain inside of the computer. One may even further qualify it as a
-"special" kind of model - a /domain model/. /Domain modeling/ is then
-the activity of identifying a set of /domain types/ that describe the
-domain in question via their properties, relationships and behaviours.
+Before we go too much further, it is important to clarify what is
+meant by a model. After all, programming is the art of refining
+abstractions. It is the programmer's job to create a set of constructs
+that represent concepts found in the problem domain; and to get those
+concepts to cooperate successfully in producing work that is defined
+as useful by something or someone - that is, to solve a /problem/ in
+the problem domain. Together, this collection of concepts /models/ the
+problem domain because it is a representation of a subset of the
+problem domain inside of the computer. One may even further qualify it
+as a "special" kind of model - a /domain model/. /Domain modeling/ is
+then the activity of identifying a set of /domain types/ that describe
+the domain in question via their properties, relationships and
+behaviours.
 
 Whilst all of this may seem pretty obvious, it is a terrain rife for
 misconceptions. First, in a strict sense, all models are "domain
@@ -318,26 +322,6 @@ Dogen is an attempt to create such a tool. As we are C++ developers we
 started off by trying to implement the vision as a C++ tool; but the
 notions are general enough that they would apply to any programming
 language.
-
-*** Feedback Loops
-
-Almost all code in Dogen is implemented as Dogen models; that is, we
-use Dogen to generate the vast majority of Dogen itself. We do so for
-several reasons:
-
-- *dog-fooding*: using your own tool frequently is a great way of making
-  sure the tool does what it is meant to do and does so in a workable,
-  pragmatic manner. You have at least one user to test it.
-- *keeping our feet on the ground*: if we have some crazy ideas and
-  break Dogen, we can no longer develop Dogen. Thus Dogen must always
-  be able to code-generate itself at all points in the development
-  cycle, which forces one to think /extremely/ incrementally.
-- *code faster and test our theoretical underpinnings*: if our ideas
-  around code generation are correct, Dogen should significantly
-  speed-up development of Dogen.
-
-In summary, the Dogen approach is to try to create a positive feedback
-loop in Dogen development.
 
 ** The Architecture
 
@@ -586,7 +570,7 @@ After much, much thinking, it was decided that the current approach is
 the less of all evils, and until something comes up that is
 dramatically easier we will continue with this approach.
 
-*** Meta-data and tags
+**** Meta-data and tags
 
 As explained, the SML meta-model is bootstrapped from Dia. We soon
 found the need the pass information to SML for which there was no
@@ -746,6 +730,26 @@ they got added to dogen):
 ** Development Matters
 
 In this section we cover various aspects of Dogen development.
+
+*** Feedback Loops
+
+Almost all code in Dogen is implemented as Dogen models; that is, we
+use Dogen to generate the vast majority of Dogen itself. We do so for
+several reasons:
+
+- *dog-fooding*: using your own tool frequently is a great way of making
+  sure the tool does what it is meant to do and does so in a workable,
+  pragmatic manner. You have at least one user to test it.
+- *keeping our feet on the ground*: if we have some crazy ideas and
+  break Dogen, we can no longer develop Dogen. Thus Dogen must always
+  be able to code-generate itself at all points in the development
+  cycle, which forces one to think /extremely/ incrementally.
+- *code faster and test our theoretical underpinnings*: if our ideas
+  around code generation are correct, Dogen should significantly
+  speed-up development of Dogen.
+
+In summary, the Dogen approach is to try to create a positive feedback
+loop in Dogen development.
 
 *** Versions and Build Numbers
 
