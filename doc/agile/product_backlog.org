@@ -8,6 +8,181 @@
 
 Stories that we intend to look at, at some point.
 
+*** Refactor types header formatter                                   :story:
+    CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
+    CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
+    CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
+
+Make the main types header formatters look like the =om= types
+formatter. This model was deleted around commit 10157ad.
+
+This is still not quite right. We need to drive the formatting from
+two things:
+
+- user options
+- available formatters
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+     CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
+
+Clean up internal functions in file and add documentation.
+
+**** Make use of boilerplate                                           :task:
+
+Generate the licence, etc using boilerplate formatter.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** C++ formatters use of =headers_for_facet_=                        :story:
+
+We seem to be creating a local variable =headers_for_facet_= in
+function =format_file_infos_activity= but not really making use of
+it. We need to investigate what was that we were trying to do here,
+the name of the variable seems to imply it should have been a member
+variable. Probably a remnant from some old refactoring.
+
+*** Move includes and header guard into entity                        :story:
+
+With this a formatter can now rely only on entities rather than
+requiring a file.
+
+*** Create =includers_info= and =forward_declarations_info=           :story:
+
+We should make sure the type system represents all the inputs to
+formatters. Create these types and update their formatters,
+transformer etc.
+
+*** Delete key implementation formatter                               :story:
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** Delete content types                                              :story:
+
+Now we have the type system representing the content, we can delete
+this enumeration.
+
+*** Delete aspect types                                               :story:
+
+Now we have the type system representing the aspects, we can delete
+this enumeration.
+
+*** Create formatter interfaces for each concrete entity type         :story:
+
+Formatters should have a single format method that takes a concrete
+entity, formatting settings and knitting settings. It returns a file.
+
+**** Remove =file_formatter_interface=                                 :task:
+
+Update all C++ formatters to use specific types:
+
+- remove factory; update workflow to call formatters directly
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
+
+**** Update formatters to output =formatters::file=                    :task:
+
+Instead of passing in a stream, we just want to return a file.
+
+**** Update formatters to take settings and entity as input            :task:
+
+We want the formatters to be stateless - well at least as far as
+mutating state goes - so that we can run them in parallel. We also
+want them to have no constructor arguments so we can register them. To
+do so we need to pass in both knitting and formatting settings to
+=format= as well as the entity.
+
+**** Get formatters to register themselves with workflow               :task:
+
+Copy the code from the deleted registration files. Formatters should
+register against a content descriptor.
+
+*** Rename the include tags and add them to CPP model                 :story:
+
+Update all the JSON files with names in the form
+=cpp.include.types.header_file=. Add properties in =cpp= to capture
+these.
+
+While we're at it, add support for =family= too.
+
+*** Delete tag related infrastructure from =sml=                      :story:
+
+With the exception of tag writer, we don't really need any tagging in
+SML. That means:
+
+- no meta data tagger
+- no writer
+- no meta data error
+- no meta data sub-workflow
+
+*** Make use of boilerplate                                           :task:
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+*** Add include files at the formatter level                          :story:
+
+We need to remove all the include files from =includer= which are
+related to formatter specific code. We need to inject these
+dependencies inside of the formatters.
+
+- implement includer in terms of json files
+- get includer to work off of object relationships
+- remove relationships from transformer
+- remove helper models boost and std
+
+*** Add warning =-Wunused-private-field=                              :story:
+
+Seems like this warning is not part of =-Wall
+
+*** Use formatting settings in formatters model                       :story:
+
+We need to replace the references to the c++ settings directly with
+formatter settings.
+
+*** Move all the configuration options into tags                      :story:
+
+Parameters as per analysis story.
+
+**** Create a tags class in =config=                                   :task:
+
+We need to declare all the tags we're exporting.
+
+**** Create a =property_tree_parser= that outputs settings             :task:
+
+The parser should take the existing settings as an input and return
+an overridden version of them.
+
+**** Plug the parser into the SML sub-workflow                         :task:
+
+When we do this we need to make sure everyone is using the same
+settings; there are many places where the settings have been passed in
+by reference. Also, we need to make sure the target model is the first
+one to be processed.
+
+**** Update all models and tests to use the new tags                   :task:
+
+Once the config options are in we need to start making use of them to
+ensure they work exactly as before.
+
+**** Remove all C++ command line settings                              :task:
+
+Once the overrides have been proven to work, we need to remove the
+command line options and make sure nothing breaks.
+
 *** Move code to C++ 14                                               :story:
 
 Now that the standard is out, we should move to it. Both clang and gcc
