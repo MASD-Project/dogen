@@ -13,13 +13,13 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-02 Tue 23:49]
+Clock summary at [2014-09-03 Wed 08:58]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *17:31* |       |      |
+| *Total time*                                                | *18:11* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 17:31 |      |
+| Development Stories Implemented                             |         | 18:11 |      |
 | IMPLEMENTATION Sprint and product backlog grooming          |         |       | 1:33 |
 | IMPLEMENTATION Updates to the manual and readme files       |         |       | 2:07 |
 | COMPLETED Update instructions in manual for Postgres        |         |       | 0:50 |
@@ -28,7 +28,7 @@ Clock summary at [2014-09-02 Tue 23:49]
 | COMPLETED Check that dogen builds on C++-14                 |         |       | 0:10 |
 | COMPLETED Add a build number to dogen                       |         |       | 0:07 |
 | COMPLETED Analyse formatters architecture                   |         |       | 0:39 |
-| IMPLEMENTATION Redefine terminology around facets in manual |         |       | 1:44 |
+| IMPLEMENTATION Redefine terminology around facets in manual |         |       | 2:24 |
 | CANCELLED Merge entity with file info                       |         |       | 2:52 |
 | CANCELLED Refactor types header formatter                   |         |       | 1:07 |
 #+end:
@@ -262,6 +262,7 @@ These changes are very hard to do incrementally, so we will have to
 work off of a patch until we get it all to work.
 
 *** IMPLEMENTATION Redefine terminology around facets in manual       :story:
+    CLOCK: [2014-09-03 Wed 07:57]--[2014-09-03 Wed 08:37] =>  0:40
     CLOCK: [2014-09-02 Tue 23:07]--[2014-09-02 Tue 23:49] =>  0:42
     CLOCK: [2014-09-01 Mon 22:40]--[2014-09-01 Mon 22:57] =>  0:17
     CLOCK: [2014-08-28 Thu 17:53]--[2014-08-28 Thu 18:38] =>  0:45

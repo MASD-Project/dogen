@@ -580,6 +580,8 @@ The meta-data subsystem has two main responsibilities:
   middle-end, without coupling the middle-end too much to the
   backends.
 
+We shall cover these topics in more detail in the following sections.
+
 ***** Meta-data in the Front-End
 
 As explained, the SML meta-model is bootstrapped from Dia. We soon
@@ -588,19 +590,28 @@ equivalent available in Dia. In some cases these were just limitations
 of Dia's modeling of UML and could be solved by improving the
 application. In some other cases, it just made no sense at all to
 convey this kind of information in Dia. To solve this problem in a
-general manner, we created a set of special "instructions" that are
-interpreted by Dogen. These instructions are passed in to Dogen via
-UML Comments, with a special form:
+general manner, we created a set of /instructions/ that are
+interpreted by Dogen very much like a =#pragma= is interpreted by a
+compiler. These instructions are passed in by adding lines to UML
+Comments that start with the well-known prefix =#DOGEN=:
 
-: #DOGEN KEY=VALUE
+: #DOGEN [KEY]=[VALUE]
 
-All lines starting with the well-known prefix =#DOGEN= are considered
-special instructions. They must follow the key-value-pair form defined
-above.
+There is only one valid form for the instructions, which is the
+key-value-pair shown above. The key-value-pair forms a meta-data
+definition. Note that =[KEY]= and =[VALUE]= are free for the user to
+define within Dia but, of course, only those keys that Dogen is aware
+of will have an effect, and the domain of value is defined by the
+owner of the key in question. Thus it is up to the user to make sure
+he formulates the instruction correctly, according to the information
+present in this manual.
 
-Initially this was done to fix a couple of minor problems with Dia,
-but this infrastructure has taken a life of its own, and its now used
-through Dogen.
+Note that Dia is not the only front-end one envisages for Dogen. For
+instance, one can supply all of the required input information in a
+JSON document using a schema defined by Dogen. Conceivably, there
+could be other ways of providing the input data. These other
+front-ends may or may not require Dogen instructions; if they do not,
+they must provide some other way to create meta-data definitions.
 
 ***** Meta-data in the Middle-End
 
@@ -610,38 +621,51 @@ backends and the middle-end. The core of the problem is that the
 transformation process responsible for converting SML into a backend
 specific representation - say the CPP model - also requires access to
 the C++ formatters. This happens because certain aspects of the
-transformation are formatter-specific. On the other hand, we wanted to
-make the formatters loosely coupled to the rest of the architecture;
-we envisioned a future where one can add formatters at will without
-changing any other code. The solution to this conundrum was to
-leverage the meta-data subsystem to augment the middle-end with
-formatter specific information.
+transformation are formatter-specific, but as it happens they also
+require the full blown expressivity of SML to execute.
 
-This was done by keeping the meta-data itself totally transparent to
-the middle-end. Each sub-system takes responsibility of its own keys:
-it defines them, populates them with defaults and validates to ensure
-the values for a key are valid.
+We could of course split formatter logic during the transformation
+process - this was the original approach. However, we wanted to make
+the formatters loosely coupled to the rest of the architecture; we
+envisioned a future where one can add formatters at will without
+changing core code. The solution to this conundrum was to leverage the
+meta-data subsystem to augment the middle-end with formatter specific
+information. This information is provided by the formatter themselves,
+via a interfaces provided by SML.
+
+This approach allows us to keep the meta-data itself totally
+transparent to the middle-end. Each sub-system takes responsibility of
+its own keys: it defines them, populates them with defaults and
+validates to ensure the values for a key are valid.
 
 This approach also had the benefit that we could expose all the knobs
-to configure formatting directly to the user without having to change
-command line options.
+to configure formatting directly to the user; in the past this had to
+be done by creating new command line options.
 
-***** Tags
+A simple flat structure of key-value-pairs was sufficient for the
+needs of the front-end, but unfortunately it was not good enough to
+express all the complex data structures required by the formatters. So
+we formalised the meta-data definitions to mean paths in a tree, with
+a corresponding value which can be a scalar or an array. In terms of
+implementation we used =boost::ptree= to manage the data.
 
-As mentioned before, the definition of meta-data in the front end is
-done by key-value-pairs. The key are known as /tags/. Well-formed tags
-must follow a set of rules.
+As part of this formalisation, we named the keys as /tags/ because
+they require a well-defined syntax in order to express a valid
+tree.
 
 A tag is composed by one or more /node names/ and zero or more
 /separators/. A separator is the dot character =.=. Node names are
 made of a sequence characters that can be digits =0-9=, letters =a-z
-A-Z= or the underscore character =_=. Examples:
+A-Z= or the underscore character =_=. The /leaf node name/ of a tag is
+defined to be the node name after the last separator, if any
+separators are present; or the only node name, if the tag has no
+separators.
+
+Examples of valid tags:
 
 : 123_abc.12fc.344
 
-The /leaf node name/ of a tag is defined to be the node name after the
-last separator, if any separators are present; or the only node name,
-if the tag has no separators. A non-leaf node name is called a /group/. A
+ A non-leaf node name is called a /group/. A
 group /contains/ one or more leafs. A group /contains/ another group
 when it precedes it. The containing group is called the /parent group/
 and the contained group is called the /child group/. When no groups
