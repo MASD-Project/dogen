@@ -575,83 +575,103 @@ dramatically easier we will continue with this approach.
 The meta-data subsystem has two main responsibilities:
 
 - to augment the front-end, providing a way of expressing middle-end
-  constructs that are not naturally available in the front-end;
+  constructs that are not naturally available in front-end language;
 - to provide a way of storing backend-specific information in the
   middle-end, without coupling the middle-end too much to the
   backends.
 
-We shall cover these topics in more detail in the following sections.
+The meta-data subsystem has the prefix /meta-data/ because it uses
+weakly-typed annotations on top of a strongly typed object model to
+avoid coupling. We will now describe this machinery detail and delve
+into the data structures that implement them, as well as the historic
+context for the decisions made.
 
 ***** Meta-data in the Front-End
 
-As explained, the SML meta-model is bootstrapped from Dia. We soon
-found the need the pass information to SML for which there was no
-equivalent available in Dia. In some cases these were just limitations
-of Dia's modeling of UML and could be solved by improving the
-application. In some other cases, it just made no sense at all to
-convey this kind of information in Dia. To solve this problem in a
-general manner, we created a set of /instructions/ that are
-interpreted by Dogen very much like a =#pragma= is interpreted by a
-compiler. These instructions are passed in by adding lines to UML
-Comments that start with the well-known prefix =#DOGEN=:
+As explained in the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#the-front-end][front-end section]], the SML meta-model is
+bootstrapped from Dia diagrams. We soon found the need to transport
+information into SML that was inexpressible in Dia XML. In some cases
+these were just limitations of Dia's modeling of UML and could be
+solved by improving the application. But it wasn't always the case;
+sometimes the data required by Dogen just made no sense at all in a
+UML-like world. To solve this problem in a general manner, we created
+a set of /instructions/ that are interpreted by Dogen much like a
+=#pragma= is interpreted by a compiler. These instructions are passed
+in by adding lines to UML Comments that start with the well-known
+prefix =#DOGEN=:
 
 : #DOGEN [KEY]=[VALUE]
 
 There is only one valid form for the instructions, which is the
-key-value-pair shown above. The key-value-pair forms a meta-data
-definition. Note that =[KEY]= and =[VALUE]= are free for the user to
-define within Dia but, of course, only those keys that Dogen is aware
-of will have an effect, and the domain of value is defined by the
-owner of the key in question. Thus it is up to the user to make sure
-he formulates the instruction correctly, according to the information
-present in this manual.
+key-value-pair form shown above. The key-value-pair is called a
+/meta-data definition/. Note that =[KEY]= and =[VALUE]= are left to
+the user to define within Dia but, of course, only those keys that
+Dogen is aware of will have an effect, and the domain of =[VALUE]= is
+defined by the owner of the key in question. Thus it is up to the user
+to make sure he formulates the instruction correctly, according to the
+specification provided later on in this manual.
 
-Note that Dia is not the only front-end one envisages for Dogen. For
-instance, one can supply all of the required input information in a
-JSON document using a schema defined by Dogen. Conceivably, there
-could be other ways of providing the input data. These other
-front-ends may or may not require Dogen instructions; if they do not,
-they must provide some other way to create meta-data definitions.
+Of course, Dia is not the only front-end supported (or supportable) by
+Dogen. For instance, one can supply all of the required inputs via a
+JSON document using a schema defined by Dogen. These other front-ends
+may or may not require Dogen instructions; if they do not, they must
+provide some other way to supply the meta-data definitions.
 
 ***** Meta-data in the Middle-End
 
-As explained in the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#design-and-evolution-of-the-c-backend][Design and evolution of the C++ backend]], we have
-found it quite difficult to split the responsibilities between the
-backends and the middle-end. The core of the problem is that the
-transformation process responsible for converting SML into a backend
-specific representation - say the CPP model - also requires access to
-the C++ formatters. This happens because certain aspects of the
-transformation are formatter-specific, but as it happens they also
-require the full blown expressivity of SML to execute.
+As explained in the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#design-and-evolution-of-the-c-backend][Design and evolution of the C++ backend]], it is
+quite difficult to split duties between the middle-end and the
+backends. The gist of the problem is that the transformation process
+that converts SML into a backend-specific representation - say the CPP
+model - also requires information that is only available to the
+backends and more specifically it's formatters. Sadly, certain aspects
+of the transformation process are simultaneously formatter-specific
+/and/ require access to the richness of detail provided by SML, thus
+breaking the nice clean model of a pipeline with isolated elements.
 
-We could of course split formatter logic during the transformation
-process - this was the original approach. However, we wanted to make
-the formatters loosely coupled to the rest of the architecture; we
-envisioned a future where one can add formatters at will without
-changing core code. The solution to this conundrum was to leverage the
-meta-data subsystem to augment the middle-end with formatter specific
-information. This information is provided by the formatter themselves,
-via a interfaces provided by SML.
+At the same time, it is vital that we loosely-couple the formatters to
+the rest of the architecture. It would be easy to move some of the
+formatter logic into transformation process - we originally
+implemented it that way - but this approach carries with it its own
+problems such as a need to understand the guts of SML just to add a
+trivial formatter. It also means that code that belongs logically
+together needs to be scattered in different locations around the code
+base, making maintenance harder. Finally, we had envisioned a future
+where one could add new formatters at will without changing anything
+else - possibly even by supplying a backend as a DLL at run-time, via
+a plug-in system. For this to work, there can't be any backend logic
+manually hard-coded in the transformation process.
 
-This approach allows us to keep the meta-data itself totally
-transparent to the middle-end. Each sub-system takes responsibility of
-its own keys: it defines them, populates them with defaults and
-validates to ensure the values for a key are valid.
+The solution to this conundrum was to leverage the instructions above
+to augment the middle-end with formatter specific information. This
+was done by keeping the required information in SML but storing it in
+a format that is transparent to the middle-end. We call this format
+the /meta-data/. The meta-data provides a generic mechanism to
+decorate objects with very simply structured data. We then allow each
+subsystem to take responsibility of its own keys and values: they
+define them, populate them with defaults, perform validation and
+ultimately consume them. In order to support this, SML defines a set
+of interfaces and a registration process that enables interested
+parties to hook into the transformation process.
 
-This approach also had the benefit that we could expose all the knobs
-to configure formatting directly to the user; in the past this had to
-be done by creating new command line options.
+This approach also has the side-benefit that we can expose all the
+configuration knobs directly to users via the front-end instructions;
+in the past this had to be done by creating new command line options,
+but again that would be far too static in a world of plug-ins and
+run-time decisions.
+
+***** Tags
 
 A simple flat structure of key-value-pairs was sufficient for the
 needs of the front-end, but unfortunately it was not good enough to
 express all the complex data structures required by the formatters. So
-we formalised the meta-data definitions to mean paths in a tree, with
+we interpreted the meta-data definitions to mean paths in a tree, with
 a corresponding value which can be a scalar or an array. In terms of
-implementation we used =boost::ptree= to manage the data.
+implementation we used =boost::ptree= to store the data.
 
-As part of this formalisation, we named the keys as /tags/ because
-they require a well-defined syntax in order to express a valid
-tree.
+So it was that, as part of this formalisation process, we named the
+keys as /tags/ because they require a well-defined syntax in order to
+express a valid tree.
 
 A tag is composed by one or more /node names/ and zero or more
 /separators/. A separator is the dot character =.=. Node names are
@@ -665,30 +685,33 @@ Examples of valid tags:
 
 : 123_abc.12fc.344
 
- A non-leaf node name is called a /group/. A
-group /contains/ one or more leafs. A group /contains/ another group
-when it precedes it. The containing group is called the /parent group/
-and the contained group is called the /child group/. When no groups
-are present, the leaf element is said to belong to the /global/
-group. Examples:
+A non-leaf node name is called a /parent node/. A parent node
+/contains/ one or more leaf nodes. It may also contain other non-leaf
+nodes. A node is called a /child node/ if it has a parent node. When
+no groups are present, the leaf element is said to belong to the
+/global node/. Examples:
 
-| Tag                           | Description                     |
-|-------------------------------+---------------------------------|
-| parent_group.child_group.leaf | parent contains child and leaf. |
-| group.leaf                    | group contains leaf.            |
-| leaf                          | group =[global.]= is implied.   |
+| Tag               | Description                     |
+|-------------------+---------------------------------|
+| parent.child.leaf | parent contains child and leaf. |
+| parent.leaf       | parent contains leaf.           |
+| leaf              | node =[global.]= is implied.    |
 
-***** Meta-data as a Tree
+Whilst SML does not enforce how tags are used, it is expected that
+backends use the following form:
 
-Whilst the tag appears as a flat structure when represented as part of
-a key-value-pair, it can also be thought of as an address to nodes in
-a tree. Each modeling element contains one such tree - called
-=meta_data=. 
+: BACKEND.FACET.ASPECT.TRAIT
+
+For details on the meaning of these terms, see the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#the-backends][backends]]
+section. Example tags: =cpp.types.main.enabled=,
+=cpp.serialisation.main.enabled=.
 
 ***** Complete List of Tags
 
 The following table lists all of the available tags, the model that
-makes them available and describes what the tag controls.
+makes them available and describes what the tag controls. Providers of
+third party backends are expected to have a similar section in their
+documentation.
 
 | Model | Tag                    | Description                                              |
 |-------+------------------------+----------------------------------------------------------|

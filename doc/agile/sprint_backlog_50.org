@@ -262,6 +262,8 @@ These changes are very hard to do incrementally, so we will have to
 work off of a patch until we get it all to work.
 
 *** IMPLEMENTATION Redefine terminology around facets in manual       :story:
+    CLOCK: [2014-09-04 Thu 21:50]--[2014-09-04 Thu 22:44] =>  0:54
+    CLOCK: [2014-09-04 Thu 21:34]--[2014-09-04 Thu 21:49] =>  0:15
     CLOCK: [2014-09-03 Wed 07:57]--[2014-09-03 Wed 08:37] =>  0:40
     CLOCK: [2014-09-02 Tue 23:07]--[2014-09-02 Tue 23:49] =>  0:42
     CLOCK: [2014-09-01 Mon 22:40]--[2014-09-01 Mon 22:57] =>  0:17
