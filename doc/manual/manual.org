@@ -420,36 +420,42 @@ useful to group these files in a logical manner, so we can talk about
 them in aggregate. /Facets/ provide the first level of grouping.
 
 Facets are housed in one or more folders in the file system, named
-after the facet. These folders themselves are composed of files and
-folders, with the folders representing modules in the programming
-language in question - if such a concept exists. The files are grouped
-into /file sets/, according to their /kind/. Files of a given kind
-share a number of /aspects/.
+after the facet. The facet folders are in turn composed of zero or
+more files and folders, with folders representing modules in the
+programming language in question - if it supports such a
+concept. Within a facet, files are grouped into "kinds": in Dogen
+parlance these are known as /features/ because each kind provides a
+new chunk of functionality to the system. A feature is effectively a
+type of file. Within a feature we have atomic chunks which we call
+/aspects/. Aspects can be related to other aspects in a chain of
+dependencies. An aspect may exist in multiple features, with different
+expressions. For example, "constructors" is one such an aspect.
+
+/Traits/ are the final building block. These are points of
+configuration, knobs or dials that control behaviour in the backend. A
+trait may have an effect at the backend level, or it may affect only a
+feature or even an aspect within a feature.
 
 A concrete example should make these concepts clearer. Lets look at
 the /types/ facet in the C++ backend, the most fundamental of all C++
 facets.
 
-- *facet name*: =types=.
-- *facet purpose*: contains the definition of the domain types.
-- *facet folders*: =include/.../types= for the headers and =src/types=
-  for the implementation.
-- *file sets*: in the headers we have /includers/ (an include file
-  that includes all files or groups of files for that facet), /domain
-  headers/ (the class declaration), and /forward declarations/. In the
-  implementation we have just one file set which is the /domain
-  implementation/ (the class implementation).
-- *aspects*: both includers and forward declaration have only one
-  aspect as they are rather trivial. The domain headers and
-  implementation have many aspects, most of which shared; for example:
-  complete constructor, properties (the member variable and associated
-  getters and setters), equality, etc.
+| Term                        | Description                                                                        |
+|-----------------------------+------------------------------------------------------------------------------------|
+| facet name                  | types                                                                              |
+| facet purpose               | contains the definition of the domain types.                                       |
+| facet folders               | "include/.../types" for the headers and "src/types" for the implementation.        |
+| includer feature            | include file that includes all files or groups of files for that facet             |
+| main header feature         | the class declaration                                                              |
+| main implementation feature | the class implementation                                                           |
+| aspect                      | constructors. defines all of the available constructors for the class.             |
+| traits                      | example: complete constructor enabled. if false, disables the complete constuctor. |
 
-Facets, file kinds and aspects are known collectively as
-/features/. The /feature graph/ is a logical device that defines the
-dependencies between all features, allowing us to switch parts of the
-code generation on and off, and ensuring that all dependent features
-are toggled accordingly.
+One can imagine a logical graph that unites backends, facets, features
+and aspects, such that when a trait switches something on or off, all
+other dependent elements are switched on or off accordingly. Note also
+that a facet needs not be specific to a backend: this is the case with
+=types=, which is common to all backends.
 
 Before we go into the backends specifically, one word on the
 =formatters= model. This is a utility model that contains all
@@ -459,9 +465,13 @@ and so on.
 
 ***** The C++ backend
 
-The C++ backend is implemented by three models:
+The objective of the C++ backend =cpp= is to generate a C++
+representation of the domain model. At present only C++-11 is
+supported.
 
-- =cpp=: contains all the types required for generating C++ code.
+It is implemented by three models:
+
+- =cpp=: all the types required for generating C++ code.
 - =sml_to_cpp=: transforms an SML model into its corresponding =cpp=
   representation.
 - =cpp_formatters=: creates C++ source code from the instances of
@@ -473,17 +483,14 @@ into the =cpp= model by =sml_to_cpp=; we then use the workflow of the
 
 The C++ backend defines the following facets:
 
-- =types=: definition of domain types.
-- =io=: provides =operator<<=, responsible for dumping the
-  contents of the instance of the domain type as a JSON object.
-- =hashing=: provides =std::hash= support.
-- =serialisation=: provides =boost::serialization= support.
-- =test_data=: provides a set of "generators" that create test
-  instances of the domain types. Was originally created for our own
-  tests, but we left it visible to end users since it has proven
-  itself useful.
-- =odb=: provides ODB support; the =odb= compiler can then be executed
-  against the model to generate ORM mappings for it.
+| Facet Name    | Description                                                                                           |
+|---------------+-------------------------------------------------------------------------------------------------------|
+| types         | definition of domain types                                                                            |
+| io            | responsible for dumping the contents of the instance of the domain type as a JSON object.             |
+| hashing       | provides std::hash support.                                                                           |
+| serialisation | provides boost::serialization support.                                                                |
+| test_data     | provides a set of "generators" that create test instances of the domain types.                        |
+| odb           | provides ODB support; the odb compiler is executed against the model to generate ORM mappings for it. |
 
 ****** Design and evolution of the C++ backend
 
@@ -509,13 +516,13 @@ formatters the "views" because the approach is extremely similar to
 the Presentation Model described by Martin Fowler.
 
 The job of a given formatter is to take a specific number of types in
-the C++ model such as =class_info= and generate a C++ source code -
-for example the domain model header file. Ideally one would like a
-=cpp= model that knows nothing about formatters, and formatters that
-take one type and output it to a stream. However, as it turns out, our
-hopes for such a clean model were severely dashed. The problem is that
-in order to build a complete view model, one needs to know what view
-it belongs to.
+the C++ model such as =class_info= and generate corresponding C++
+source code - for example the domain model header file. Ideally one
+would like a =cpp= model that knows nothing about formatters, and
+formatters that take one type and output it to a stream. However, as
+it turns out, our hopes for such a clean model were severely
+dashed. The problem is that in order to build a complete view model,
+one needs to know what view it belongs to.
 
 Take for example the case of an entity =a=, a simple value
 object. From a domain type definition perspective - the =types=
@@ -537,16 +544,16 @@ The approach taken was to create a =content_descriptor=, which is a
 crude way of mapping coordinates in the formatting space. It tells:
 
 - to which facet the file belongs: e.g. types, serialisation, etc.
-- within that facet, to which file set the file belongs to: e.g. the
+- within that facet, to which feature the file belongs to: e.g. the
   main domain header, forward declarations, etc.
 - if the type is a class, what /kind/ of class it is; we have
   formatters specifically for plain value object, exceptions,
   visitors, etc.
 - whether the file is a header file or an implementation file.
 
-This approach is very unfortunate, because it means adding a new
-formatter is not as simple as adding a new type in
-=cpp_formatters=. It requires you to have a deep understanding of core
+This approach is very unfortunate, because it meant adding a new
+formatter was not as simple as adding a new type in
+=cpp_formatters=. It required you to have a deep understanding of core
 things such how the inclusion lists are computed, how the file names
 are generated, what enumerations to update, and so on. Ideally we
 wanted a simple registration process, possibly in the implementation
@@ -566,9 +573,9 @@ other formatters - for instance, the serialisation example above
 required access to the domain type definition - so they would not be
 encapsulated from each other.
 
-After much, much thinking, it was decided that the current approach is
-the less of all evils, and until something comes up that is
-dramatically easier we will continue with this approach.
+After much, much thinking, it was decided that the best way to handle
+this was to augment SML with the data required by the formatters. The
+/meta-data subsystem/ was born.
 
 **** The Meta-Data Subsystem
 
