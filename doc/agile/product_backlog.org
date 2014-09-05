@@ -8,6 +8,39 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for deprecation                                       :story:
+
+We should be able to mark classes and properties as deprecated and
+have that reflected in both doxygen and C++-11 deprecated attributes.
+
+*** Control JSON output via traits                                    :story:
+
+Once we add support for JSON we will face the same sort of problems
+that Json.net has already solved: we may want to have keys that do not
+match the property names (for instance we may want to use human
+readable names in the json), we may want to translate enumerations to
+numbers or to human readable descriptions, we may want to collapse a
+class into some less verbose JSON, etc. Some of these are describable
+via traits, very much like Json.Net uses C# attributes. We should look
+into the available attributes and see if they make sense as dogen
+traits to control JSON. Some of these may have wider application and
+be used to control other serialisation formats.
+
+*** Raw JSON vs cooked JSON
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+*** Update manual with detailed model descriptions                    :story:
+
+We should add CRCs for the main classes, with an explanation of what
+each class does; we should also explain the separation of the
+transformation logic between the core model (e.g. =dia=) and the
+transformation model (e.g. =dia_to_sml=). We should describe what the
+workflow does in each model.
+
 *** Refactor types header formatter                                   :story:
     CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
     CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01

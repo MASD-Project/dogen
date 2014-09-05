@@ -34,6 +34,7 @@ Clock summary at [2014-09-04 Thu 23:30]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-05 Fri 08:29]--[2014-09-05 Fri 08:43] =>  0:14
     CLOCK: [2014-09-01 Mon 22:57]--[2014-09-01 Mon 23:04] =>  0:07
     CLOCK: [2014-08-26 Tue 07:51]--[2014-08-26 Tue 08:02] =>  0:11
     CLOCK: [2014-08-23 Sat 11:31]--[2014-08-23 Sat 11:56] =>  0:25
@@ -311,6 +312,7 @@ taggers kick in.
 We should start implementing the interface on a few formatters to
 prove that the approach actually works.
 
+** Deprecated Development Stories
 *** CANCELLED Merge entity with file info                             :story:
     CLOSED: [2014-09-01 Mon 22:57]
     CLOCK: [2014-08-27 Wed 07:51]--[2014-08-27 Wed 08:46] =>  0:55
@@ -423,5 +425,3 @@ two things:
 **** CANCELLED Tidy-up =types_main_header_file_formatter=              :task:
      CLOSED: [2014-09-01 Mon 22:58]
      CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
-
-** Deprecated Development Stories
