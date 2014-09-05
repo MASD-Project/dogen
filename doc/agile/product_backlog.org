@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Concepts cannot be placed inside of packages                      :story:
+
+At present it is not possible to create a concept inside a
+package. This is because the concept qualified name is assumed to be
+at top-level. In the future it may be useful to use scoping for
+concept names in the stereotype. We do not yet have a use case for
+this.
+
 *** Add support for deprecation                                       :story:
 
 We should be able to mark classes and properties as deprecated and
