@@ -151,16 +151,6 @@ these.
 
 While we're at it, add support for =family= too.
 
-*** Delete tag related infrastructure from =sml=                      :story:
-
-With the exception of tag writer, we don't really need any tagging in
-SML. That means:
-
-- no meta data tagger
-- no writer
-- no meta data error
-- no meta data sub-workflow
-
 *** Make use of boilerplate                                           :task:
 
 Remove all of the manual boilerplate and make use of the new
@@ -189,22 +179,6 @@ formatter settings.
 *** Move all the configuration options into tags                      :story:
 
 Parameters as per analysis story.
-
-**** Create a tags class in =config=                                   :task:
-
-We need to declare all the tags we're exporting.
-
-**** Create a =property_tree_parser= that outputs settings             :task:
-
-The parser should take the existing settings as an input and return
-an overridden version of them.
-
-**** Plug the parser into the SML sub-workflow                         :task:
-
-When we do this we need to make sure everyone is using the same
-settings; there are many places where the settings have been passed in
-by reference. Also, we need to make sure the target model is the first
-one to be processed.
 
 **** Update all models and tests to use the new tags                   :task:
 

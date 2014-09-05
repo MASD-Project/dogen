@@ -13,15 +13,17 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-04 Thu 23:30]
+Clock summary at [2014-09-05 Fri 18:38]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *20:04* |       |      |
+| *Total time*                                            | *20:52* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                         |         | 20:04 |      |
-| IMPLEMENTATION Sprint and product backlog grooming      |         |       | 1:33 |
+| Development Stories Implemented                         |         | 20:52 |      |
+| IMPLEMENTATION Sprint and product backlog grooming      |         |       | 2:21 |
 | IMPLEMENTATION Updates to the manual and readme files   |         |       | 2:07 |
+| CANCELLED Merge entity with file info                   |         |       | 2:52 |
+| CANCELLED Refactor types header formatter               |         |       | 1:07 |
 | COMPLETED Update instructions in manual for Postgres    |         |       | 0:50 |
 | COMPLETED Tidy-up test model folder structure           |         |       | 6:01 |
 | COMPLETED Review where we are with the last refactoring |         |       | 0:21 |
@@ -29,11 +31,11 @@ Clock summary at [2014-09-04 Thu 23:30]
 | COMPLETED Add a build number to dogen                   |         |       | 0:07 |
 | COMPLETED Analyse formatters architecture               |         |       | 0:39 |
 | COMPLETED Redefine terminology around facets in manual  |         |       | 4:17 |
-| CANCELLED Merge entity with file info                   |         |       | 2:52 |
-| CANCELLED Refactor types header formatter               |         |       | 1:07 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-05 Fri 18:16]--[2014-09-05 Fri 18:38] =>  0:22
+    CLOCK: [2014-09-05 Fri 18:04]--[2014-09-05 Fri 18:16] =>  0:12
     CLOCK: [2014-09-05 Fri 08:29]--[2014-09-05 Fri 08:43] =>  0:14
     CLOCK: [2014-09-01 Mon 22:57]--[2014-09-01 Mon 23:04] =>  0:07
     CLOCK: [2014-08-26 Tue 07:51]--[2014-08-26 Tue 08:02] =>  0:11
@@ -50,6 +52,119 @@ Updates to sprint and product backlog.
     CLOCK: [2014-08-24 Sun 19:00]--[2014-08-24 Sun 19:31] =>  0:31
 
 Use downtime to update the manual and / or readme file.
+
+*** CANCELLED Merge entity with file info                             :story:
+    CLOSED: [2014-09-01 Mon 22:57]
+    CLOCK: [2014-08-27 Wed 07:51]--[2014-08-27 Wed 08:46] =>  0:55
+    CLOCK: [2014-08-26 Tue 18:08]--[2014-08-26 Tue 18:55] =>  0:47
+    CLOCK: [2014-08-26 Tue 08:02]--[2014-08-26 Tue 08:34] =>  0:32
+    CLOCK: [2014-08-25 Mon 13:32]--[2014-08-25 Mon 14:10] =>  0:38
+
+As part of the formatters refactoring, we need a single top-level
+entity against which we can create formatter interfaces. In order to
+achieve that we need to remove the file info composition.
+
+We have reached the usual limitations:
+
+- if we merge file info with class info, etc. we now have to take a
+  instance of a type with half of the fields un-populated, make copies
+  of it and populate each copy with the correct values. This is very
+  smelly.
+- if we continue using composition via inheritance, we can no longer
+  distinguish the file formatter interfaces
+  (e.g. =class_formatter_interface= and so on).
+
+We have two options to solve this:
+
+- make file info a template class with the Entity as a
+  concept. Instantiate it with each of the infos (=class_info=,
+  etc.). This means we can now use the type system again in the
+  interfaces.
+- create a loser aggregation of the file details with the infos. For
+  example, we could have a map with a key of (facet, aspect, file type)
+  and a value of file info. Each info is associated with one such map
+  at the project level. The formatter interface then takes the file
+  details and the info as two separate parameters.
+
+Having said all of that, we have now completed the vicious circle:
+
+- we need to process includes during SML to C++ transformation because
+  that is where the relationships with objects are available.
+- however, include processing is dependent on the formatter so we
+  can't do this until we know about the formatters.
+- we can't add all the information required to process includes to the
+  cpp model because it would make it a super-set of SML, putting its
+  need in question (again).
+
+What we really need is a way to transport some formatter knowledge
+into the SML to C++ transformation. For example, we could create some
+kind of =rule= that takes as an input a triplet and a set of SML types
+and returns:
+
+- the file name
+- the path to dependent files including forward declarations, etc.
+
+Rules need to be hooked up in a graph of dependencies. For example:
+
+- =types.forward_declaration.header_file=: no dependencies.
+- =types.main.header_file=: depends on
+  =types.forward_declaration.header_file=.
+- =types.main.implementation_file=: depends on
+  =types.main.header_file=.
+- ...
+
+All of the formatters would have to be covered by this:
+
+: types.main.header_file
+: types.main.implementation_file
+: types.forward_declaration.header_file
+: types.includers.header_file
+: ...
+: boost_serialization.main.header_file
+: boost_serialization.main.implementation_file
+: ...
+
+The rules could be hooked up to populate various tags:
+
+: types.forward_declaration.header_file.file_name
+: types.forward_declaration.header_file.relative_file_path
+: types.forward_declaration.header_file.includes.system
+: types.forward_declaration.header_file.includes.user
+
+These could be then transporter to the C++ model as a type:
+
+: std::unordered_map<string, file_info>
+
+Where the string is the triplet, and file info is made up of the above
+file properties.
+
+Note that in this approach, the content descriptor is encapsulated in
+the triplet (facet, aspect, file type) and the type itself
+(=class_info=, etc). The latter is effectively the content type.
+
+Of course the rule processing could be part of SML proper. Formatters
+would dynamically register against a singleton in SML. The SML model
+would then run through all the rules and populate meta-data. Each
+model would simply just consume it.
+
+*** CANCELLED Refactor types header formatter                         :story:
+    CLOSED: [2014-09-01 Mon 22:58]
+    CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
+    CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
+    CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
+
+Make the main types header formatters look like the =om= types
+formatter. This model was deleted around commit 10157ad.
+
+This is still not quite right. We need to drive the formatting from
+two things:
+
+- user options
+- available formatters
+
+**** CANCELLED Tidy-up =types_main_header_file_formatter=              :task:
+     CLOSED: [2014-09-01 Mon 22:58]
+     CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
 
 *** COMPLETED Update instructions in manual for Postgres              :story:
     CLOSED: [2014-08-22 Fri 12:39]
@@ -278,34 +393,76 @@ all things related to the formatters, including includes. We now need
 to add these concepts to the vocabulary in the manual to make sure the
 language is clear before we start looking into the implementation.
 
-*** Create an SML grapher                                             :story:
+*** Make model a simple repository                                    :story:
 
-We need a class responsible for building a graph of SML qnames, and
-associating these with a ptree.
+We should really perform all of the code generation for the model from
+it's module. The model itself should be a dumb container of types. To
+do so remove all the concepts from the model (=Element= etc) and deal
+with the fall out. This is required in order to simplify the graph in
+tagger.
 
 *** Create an interface for meta-data tagging                         :story:
 
 We need to create a simple interface that takes a ptree and a model
-and updates the tags on the ptree.
+and updates the tags on the ptree. We also need a way to register
+against the meta-data tagger.
 
-*** Create a graph of dependencies on meta-data taggers               :story:
+**** Design and implement the interface                                :task:
 
-We need to be able to register the meta-data taggers providing some
-kind of an ID (a string, which is actually the tag for the formatter)
-as well as a list of IDs with dependencies; SML then has to build
-a graph of taggers and make sure they are executed in order.
+- add interface to model;
+- add some tests to make sure the interface is usable.
 
-*** Update the meta-data tagger to make use of new interface          :story:
+*interface*
 
-At present our tagger is all hard-coded in SML. We need to break it
-into some kind of legacy tagger that converts the settings and remove
-all of the formatter specific tagging.
+: name: meta_data_expander
+: identity: string
+: dependencies: list of string
+: expand(const model, const parent module, concept)
+: expand(const model, const parent module, module)
+: expand(const model, const parent module, type)
+
+**** Add static registration to tagger                                 :task:
+
+- create a static method to register instances of the interface and a
+  static container to hold them;
+- add a simple list of shared pointers to keep track of the registered
+  expanders.
+
+*** Implement a grapher in tagger                                     :story:
+
+- create a grapher in tagger that represents the dependencies between
+  instances of the interface
+- once the tagger has been instantiated we need to loop through the list
+  of expanders and build a graph.
+- on execute, iterate through the graph executing all instances of the
+  interface.
+- we should see if we can reuse some code of the dia grapher as we
+  need to build 3 graphers altogether.
 
 *** Implement the tagger interface in the CPP model                   :story:
 
 The CPP model needs to register a top-level tagger that expands all of
 the C++ specific tags. This has to be done before the formatter
-taggers kick in.
+taggers kick in. We need to remove all of the =cpp= related code from
+tagger and add it to =cpp= model. For now we should get details from
+settings.
+
+We should declare all of the traits at the model level, at least those
+that are common to all formatters. Perhaps a traits class or some
+such. SML should also declare the proper global traits such as
+=enabled= and so on.
+
+We should consider if we should declare the formatters this way too,
+since they may depend on each other. This would be in the formatters
+model.
+
+*** Create an SML grapher                                             :story:
+
+We need a class responsible for building a graph of SML qnames, and
+associating these with a ptree.
+
+In order to do this we need to make sure we have a module for the
+model.
 
 *** Implement the tagger interface in formatters                      :story:
 
@@ -313,115 +470,15 @@ We should start implementing the interface on a few formatters to
 prove that the approach actually works.
 
 ** Deprecated Development Stories
-*** CANCELLED Merge entity with file info                             :story:
-    CLOSED: [2014-09-01 Mon 22:57]
-    CLOCK: [2014-08-27 Wed 07:51]--[2014-08-27 Wed 08:46] =>  0:55
-    CLOCK: [2014-08-26 Tue 18:08]--[2014-08-26 Tue 18:55] =>  0:47
-    CLOCK: [2014-08-26 Tue 08:02]--[2014-08-26 Tue 08:34] =>  0:32
-    CLOCK: [2014-08-25 Mon 13:32]--[2014-08-25 Mon 14:10] =>  0:38
+*** CANCELLED Delete tag related infrastructure from =sml=            :story:
+    CLOSED: [2014-09-05 Fri 18:34]
 
-As part of the formatters refactoring, we need a single top-level
-entity against which we can create formatter interfaces. In order to
-achieve that we need to remove the file info composition.
+*Rationale*: no longer applicable after refactor.
 
-We have reached the usual limitations:
+With the exception of tag writer, we don't really need any tagging in
+SML. That means:
 
-- if we merge file info with class info, etc. we now have to take a
-  instance of a type with half of the fields un-populated, make copies
-  of it and populate each copy with the correct values. This is very
-  smelly.
-- if we continue using composition via inheritance, we can no longer
-  distinguish the file formatter interfaces
-  (e.g. =class_formatter_interface= and so on).
-
-We have two options to solve this:
-
-- make file info a template class with the Entity as a
-  concept. Instantiate it with each of the infos (=class_info=,
-  etc.). This means we can now use the type system again in the
-  interfaces.
-- create a loser aggregation of the file details with the infos. For
-  example, we could have a map with a key of (facet, aspect, file type)
-  and a value of file info. Each info is associated with one such map
-  at the project level. The formatter interface then takes the file
-  details and the info as two separate parameters.
-
-Having said all of that, we have now completed the vicious circle:
-
-- we need to process includes during SML to C++ transformation because
-  that is where the relationships with objects are available.
-- however, include processing is dependent on the formatter so we
-  can't do this until we know about the formatters.
-- we can't add all the information required to process includes to the
-  cpp model because it would make it a super-set of SML, putting its
-  need in question (again).
-
-What we really need is a way to transport some formatter knowledge
-into the SML to C++ transformation. For example, we could create some
-kind of =rule= that takes as an input a triplet and a set of SML types
-and returns:
-
-- the file name
-- the path to dependent files including forward declarations, etc.
-
-Rules need to be hooked up in a graph of dependencies. For example:
-
-- =types.forward_declaration.header_file=: no dependencies.
-- =types.main.header_file=: depends on
-  =types.forward_declaration.header_file=.
-- =types.main.implementation_file=: depends on
-  =types.main.header_file=.
-- ...
-
-All of the formatters would have to be covered by this:
-
-: types.main.header_file
-: types.main.implementation_file
-: types.forward_declaration.header_file
-: types.includers.header_file
-: ...
-: boost_serialization.main.header_file
-: boost_serialization.main.implementation_file
-: ...
-
-The rules could be hooked up to populate various tags:
-
-: types.forward_declaration.header_file.file_name
-: types.forward_declaration.header_file.relative_file_path
-: types.forward_declaration.header_file.includes.system
-: types.forward_declaration.header_file.includes.user
-
-These could be then transporter to the C++ model as a type:
-
-: std::unordered_map<string, file_info>
-
-Where the string is the triplet, and file info is made up of the above
-file properties.
-
-Note that in this approach, the content descriptor is encapsulated in
-the triplet (facet, aspect, file type) and the type itself
-(=class_info=, etc). The latter is effectively the content type.
-
-Of course the rule processing could be part of SML proper. Formatters
-would dynamically register against a singleton in SML. The SML model
-would then run through all the rules and populate meta-data. Each
-model would simply just consume it.
-
-*** CANCELLED Refactor types header formatter                         :story:
-    CLOSED: [2014-09-01 Mon 22:58]
-    CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
-    CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
-    CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
-
-Make the main types header formatters look like the =om= types
-formatter. This model was deleted around commit 10157ad.
-
-This is still not quite right. We need to drive the formatting from
-two things:
-
-- user options
-- available formatters
-
-**** CANCELLED Tidy-up =types_main_header_file_formatter=              :task:
-     CLOSED: [2014-09-01 Mon 22:58]
-     CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
+- no meta data tagger
+- no writer
+- no meta data error
+- no meta data sub-workflow
