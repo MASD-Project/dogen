@@ -251,10 +251,11 @@ computer science /applied/ to a specific problem to provide an
 automated solution to the set of people with the problem - the
 /users/. During the process of development, users will provide all
 sorts of insights into what it is they want solved, and these are
-ultimately captured in code. Code will also be made up of reading and
-writing records to a database, socket communication, reading and
-writing to file and so on; the challenge then is to avoid obscuring
-the former while dealing with the latter.
+ultimately captured in code (see [[http://www.developerdotstar.com/mag/articles/PDF/DevDotStar_Reeves_CodeAsDesign.pdf][Jack Reeves' essays]] on this
+topic). Code will also be made up of reading and writing records to a
+database, socket communication, reading and writing to file and so on;
+the challenge then is to avoid obscuring the former while dealing with
+the latter.
 
 Many people have thought deeply about this dichotomy. Arguably, the
 most significant advance was made by Eric Evans with his seminal book
@@ -263,11 +264,11 @@ Software. Domain Driven Design (DDD) is a software engineering
 methodology that places great emphasis on understanding the problem
 domain and, coupled with Agile, it provides a great platform for
 iterative improvements both to the understanding and to its expression
-in code. DDD places great emphasis in defining a clear and concise
-domain model - a set of classes and relationships that model the
-insights provided by the users and domain experts in general. It also
-explains the difference between the conceptual domain model and myriad
-of representations: UML diagrams, specification documents, oral
+in code. DDD focuses on defining a clear and concise domain model - a
+set of classes and relationships that model the insights provided by
+the users and domain experts in general. It also explains the
+difference between the conceptual domain model and myriad of
+representations: UML diagrams, specification documents, oral
 conversations and, most importantly, source code.
 
 *** Adding It All Together
@@ -338,12 +339,12 @@ Lets look at each of these in more detail.
 
 The main models are hooked together in a fashion similar to that of
 the internals of a compiler. They belong to one of three groups: the
-/front-end/, the /middle-end/ and the /back-end/. The front-end group
+/front-end/, the /middle-end/ and the /backend/. The front-end group
 of models allows for different sources of domain information to be
 plugged into Dogen. The middle-end model - as there is only one - is
 where all the language neutral transformations take place; It can be
 thought of as a bridge between domain modeling and code
-generation. Finally, the back-end group of models are responsible for
+generation. Finally, the backend group of models are responsible for
 expressing SML as code.
 
 **** The Front-end
@@ -382,7 +383,7 @@ based on Domain Driven Design. SML is designed to capture all the
 details of the domain model that are required for code generation, but
 in a form that is programming-language-agnostic. It is an intermediate
 model in between the front-ends (specific to a tool, for example) and
-the back-ends (specific to a programming language).
+the backends (specific to a programming language).
 
 It is important not to confuse SML with other, more generic
 meta-models such as UML or the language-specific Reflection
