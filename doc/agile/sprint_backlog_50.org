@@ -13,13 +13,13 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-05 Fri 23:54]
+Clock summary at [2014-09-06 Sat 00:43]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *22:07* |       |      |
+| *Total time*                                            | *22:54* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                         |         | 22:07 |      |
+| Development Stories Implemented                         |         | 22:54 |      |
 | IMPLEMENTATION Sprint and product backlog grooming      |         |       | 2:21 |
 | IMPLEMENTATION Updates to the manual and readme files   |         |       | 2:07 |
 | CANCELLED Merge entity with file info                   |         |       | 2:52 |
@@ -31,7 +31,7 @@ Clock summary at [2014-09-05 Fri 23:54]
 | COMPLETED Add a build number to dogen                   |         |       | 0:07 |
 | COMPLETED Analyse formatters architecture               |         |       | 0:39 |
 | COMPLETED Redefine terminology around facets in manual  |         |       | 4:17 |
-| IMPLEMENTATION Make model a simple repository           |         |       | 1:15 |
+| IMPLEMENTATION Make model a simple repository           |         |       | 2:02 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -409,13 +409,23 @@ tagger.
 We added a way of tracking what a module contains but we never did
 populate it. Without this the graph will not work.
 
-**** IMPLEMENTATION Check to see if we are generating a module for the model :story:
+**** COMPLETED Check to see if we are generating a module for the model :story:
+     CLOSED: [2014-09-05 Fri 23:55]
     CLOCK: [2014-09-05 Fri 22:38]--[2014-09-05 Fri 23:03] =>  0:25
 
 We were under the impression that a module was already being generated
 for the model but it may not be the case. Locate this code.
 
-**** Remove properties from model and deal with fallout               :story:
+**** IMPLEMENTATION Generate a module for model                       :story:
+     CLOCK: [2014-09-06 Sat 00:36]--[2014-09-06 Sat 00:43] =>  0:07
+     CLOCK: [2014-09-05 Fri 23:55]--[2014-09-06 Sat 00:18] =>  0:23
+
+Since we are not generating a module for model, generate one and
+ensure members get populated accordingly.
+
+**** IMPLEMENTATION Remove properties from model and deal with fallout :story:
+     CLOCK: [2014-09-06 Sat 00:29]--[2014-09-06 Sat 00:35] =>  0:06
+     CLOCK: [2014-09-06 Sat 00:18]--[2014-09-06 Sat 00:29] =>  0:11
 
 Try taking away the =Element= concept etc and see what breaks.
 

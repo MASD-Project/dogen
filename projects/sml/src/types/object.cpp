@@ -123,11 +123,11 @@ object::object()
       is_aggregate_root_(static_cast<bool>(0)) { }
 
 object::object(
-    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::property>& all_properties,
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
@@ -145,11 +145,11 @@ object::object(
     const dogen::sml::object_types& object_type,
     const bool is_aggregate_root,
     const std::list<dogen::sml::property>& identity)
-    : dogen::sml::type(origin_type,
-      documentation,
+    : dogen::sml::type(documentation,
       meta_data,
       name,
-      generation_type),
+      generation_type,
+      origin_type),
       all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),

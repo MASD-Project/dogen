@@ -46,11 +46,11 @@ public:
 
 public:
     primitive(
-        const dogen::sml::origin_types& origin_type,
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
-        const dogen::sml::generation_types& generation_type);
+        const dogen::sml::generation_types& generation_type,
+        const dogen::sml::origin_types& origin_type);
 
 private:
     template<typename Archive>

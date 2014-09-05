@@ -56,62 +56,54 @@ namespace dogen {
 namespace sml {
 
 type::type()
-    : origin_type_(static_cast<dogen::sml::origin_types>(0)),
-      generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
+      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
 
 type::type(type&& rhs)
-    : origin_type_(std::move(rhs.origin_type_)),
-      documentation_(std::move(rhs.documentation_)),
+    : documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
-      generation_type_(std::move(rhs.generation_type_)) { }
+      generation_type_(std::move(rhs.generation_type_)),
+      origin_type_(std::move(rhs.origin_type_)) { }
 
 type::type(
-    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
-    const dogen::sml::generation_types& generation_type)
-    : origin_type_(origin_type),
-      documentation_(documentation),
+    const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type)
+    : documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
-      generation_type_(generation_type) { }
+      generation_type_(generation_type),
+      origin_type_(origin_type) { }
 
 void type::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::type\"" << ", "
-      << "\"origin_type\": " << origin_type_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"meta_data\": " << meta_data_ << ", "
       << "\"name\": " << name_ << ", "
-      << "\"generation_type\": " << generation_type_
+      << "\"generation_type\": " << generation_type_ << ", "
+      << "\"origin_type\": " << origin_type_
       << " }";
 }
 
 void type::swap(type& other) noexcept {
     using std::swap;
-    swap(origin_type_, other.origin_type_);
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
+    swap(origin_type_, other.origin_type_);
 }
 
 bool type::compare(const type& rhs) const {
-    return origin_type_ == rhs.origin_type_ &&
-        documentation_ == rhs.documentation_ &&
+    return documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
-        generation_type_ == rhs.generation_type_;
-}
-
-dogen::sml::origin_types type::origin_type() const {
-    return origin_type_;
-}
-
-void type::origin_type(const dogen::sml::origin_types& v) {
-    origin_type_ = v;
+        generation_type_ == rhs.generation_type_ &&
+        origin_type_ == rhs.origin_type_;
 }
 
 const std::string& type::documentation() const {
@@ -168,6 +160,14 @@ dogen::sml::generation_types type::generation_type() const {
 
 void type::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
+}
+
+dogen::sml::origin_types type::origin_type() const {
+    return origin_type_;
+}
+
+void type::origin_type(const dogen::sml::origin_types& v) {
+    origin_type_ = v;
 }
 
 } }

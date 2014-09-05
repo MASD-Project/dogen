@@ -2,7 +2,6 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="10">
 <entity class_id="3" tracking_level="0" version="0">
-	<origin_type>1</origin_type>
 	<documentation>This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
@@ -41,6 +40,7 @@ This comment will be applied to the model namespace itself.
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
+	<origin_type>1</origin_type>
 	<references class_id="8" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
@@ -70,7 +70,6 @@ This comment will be applied to the model namespace itself.
 				<simple_name>package2</simple_name>
 			</first>
 			<second class_id="12" tracking_level="0" version="0">
-				<origin_type>1</origin_type>
 				<documentation>package2
 </documentation>
 				<meta_data>
@@ -108,6 +107,7 @@ This comment will be applied to the model namespace itself.
 					<simple_name>package2</simple_name>
 				</name>
 				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members class_id="13" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -128,7 +128,6 @@ This comment will be applied to the model namespace itself.
 				<simple_name>package</simple_name>
 			</first>
 			<second>
-				<origin_type>1</origin_type>
 				<documentation>package
 </documentation>
 				<meta_data>
@@ -165,6 +164,7 @@ This comment will be applied to the model namespace itself.
 					<simple_name>package</simple_name>
 				</name>
 				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
@@ -219,7 +219,6 @@ This comment will be applied to the model namespace itself.
 			</first>
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
 				<type class_id="19" tracking_level="0" version="0">
-					<origin_type>1</origin_type>
 					<documentation>first line
 
 second line
@@ -251,6 +250,7 @@ third line with &quot;quote&quot;
 						<simple_name>multi_line</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties class_id="20" tracking_level="0" version="0">
 					<count>0</count>
@@ -306,7 +306,6 @@ third line with &quot;quote&quot;
 			</first>
 			<second object_id="_1">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation>this is the brief comment
 </documentation>
 					<meta_data>
@@ -327,6 +326,7 @@ third line with &quot;quote&quot;
 						<simple_name>one_line</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>

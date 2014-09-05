@@ -49,11 +49,11 @@ public:
 
 public:
     enumeration(
-        const dogen::sml::origin_types& origin_type,
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const dogen::sml::origin_types& origin_type,
         const dogen::sml::qname& underlying_type,
         const std::vector<dogen::sml::enumerator>& enumerators);
 

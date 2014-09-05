@@ -44,11 +44,11 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::module& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("meta_data", v.meta_data_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
+    ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("members", v.members_);
 }
 
@@ -56,11 +56,11 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::sml::module& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("meta_data", v.meta_data_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
+    ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("members", v.members_);
 }
 

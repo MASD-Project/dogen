@@ -26,16 +26,16 @@ namespace dogen {
 namespace sml {
 
 primitive::primitive(
-    const dogen::sml::origin_types& origin_type,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
-    const dogen::sml::generation_types& generation_type)
-    : dogen::sml::type(origin_type,
-      documentation,
+    const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type)
+    : dogen::sml::type(documentation,
       meta_data,
       name,
-      generation_type) { }
+      generation_type,
+      origin_type) { }
 
 void primitive::to_stream(std::ostream& s) const {
     s << " { "

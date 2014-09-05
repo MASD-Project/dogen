@@ -82,11 +82,11 @@ public:
 
 public:
     model(
-        const dogen::sml::origin_types& origin_type,
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const dogen::sml::origin_types& origin_type,
         const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& references,
         const std::unordered_set<dogen::sml::qname>& leaves,
         const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
@@ -103,14 +103,6 @@ private:
     friend void boost::serialization::load(Archive& ar, model& v, unsigned int version);
 
 public:
-    /**
-     * @brief How was this model element originated.
-     */
-    /**@{*/
-    dogen::sml::origin_types origin_type() const;
-    void origin_type(const dogen::sml::origin_types& v);
-    /**@}*/
-
     /**
      * @brief Code comments.
      *
@@ -152,6 +144,14 @@ public:
     /**@{*/
     dogen::sml::generation_types generation_type() const;
     void generation_type(const dogen::sml::generation_types& v);
+    /**@}*/
+
+    /**
+     * @brief How was this model element originated.
+     */
+    /**@{*/
+    dogen::sml::origin_types origin_type() const;
+    void origin_type(const dogen::sml::origin_types& v);
     /**@}*/
 
     /**
@@ -237,11 +237,11 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::sml::origin_types origin_type_;
     std::string documentation_;
     boost::property_tree::ptree meta_data_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
+    dogen::sml::origin_types origin_type_;
     std::unordered_map<dogen::sml::qname, dogen::sml::origin_types> references_;
     std::unordered_set<dogen::sml::qname> leaves_;
     std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;

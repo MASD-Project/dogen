@@ -2,7 +2,6 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="10">
 <entity class_id="3" tracking_level="0" version="0">
-	<origin_type>1</origin_type>
 	<documentation></documentation>
 	<meta_data class_id="4" tracking_level="0" version="0">
 		<count>0</count>
@@ -22,6 +21,7 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
+	<origin_type>1</origin_type>
 	<references class_id="7" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
@@ -77,7 +77,6 @@
 				<simple_name>pkg1</simple_name>
 			</first>
 			<second class_id="12" tracking_level="0" version="0">
-				<origin_type>1</origin_type>
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -97,6 +96,7 @@
 					<simple_name>pkg1</simple_name>
 				</name>
 				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members class_id="13" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
@@ -151,7 +151,6 @@
 			</first>
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
 				<type class_id="19" tracking_level="0" version="0">
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -171,6 +170,7 @@
 						<simple_name>some_service</simple_name>
 					</name>
 					<generation_type>2</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties class_id="20" tracking_level="0" version="0">
 					<count>0</count>
@@ -407,7 +407,6 @@
 			</first>
 			<second object_id="_1">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -427,6 +426,7 @@
 						<simple_name>primitives</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -730,7 +730,6 @@
 			</first>
 			<second object_id="_2">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -750,6 +749,7 @@
 						<simple_name>class_b</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1125,7 +1125,6 @@
 			</first>
 			<second object_id="_3">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1145,6 +1144,7 @@
 						<simple_name>class_g</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1516,7 +1516,6 @@
 			</first>
 			<second object_id="_4">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1536,6 +1535,7 @@
 						<simple_name>base</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1660,7 +1660,6 @@
 			</first>
 			<second object_id="_5">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1680,6 +1679,7 @@
 						<simple_name>class_a</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1862,7 +1862,6 @@
 			</first>
 			<second object_id="_6">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1883,6 +1882,7 @@
 						<simple_name>class_c</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2119,7 +2119,6 @@
 			</first>
 			<second object_id="_7">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2139,6 +2138,7 @@
 						<simple_name>class_f</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2402,7 +2402,6 @@
 			</first>
 			<second object_id="_8">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2422,6 +2421,7 @@
 						<simple_name>class_j</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2703,7 +2703,6 @@
 			</first>
 			<second object_id="_9">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2723,6 +2722,7 @@
 						<simple_name>class_d</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -3098,7 +3098,6 @@
 			</first>
 			<second object_id="_10">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -3118,6 +3117,7 @@
 						<simple_name>class_h</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -3274,7 +3274,6 @@
 			</first>
 			<second object_id="_11">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -3294,6 +3293,7 @@
 						<simple_name>class_e</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -3669,7 +3669,6 @@
 			</first>
 			<second object_id="_12">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -3689,6 +3688,7 @@
 						<simple_name>derived</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>

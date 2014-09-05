@@ -185,11 +185,11 @@ namespace sml {
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
-      << "\"origin_type\": " << v.origin_type() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"meta_data\": " << v.meta_data() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
+      << "\"origin_type\": " << v.origin_type() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "

@@ -2,7 +2,6 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="10">
 <entity class_id="3" tracking_level="0" version="0">
-	<origin_type>1</origin_type>
 	<documentation>This model tests all aspects related to inheritance.
 
 It includes the visitable stereotype since it only makes sense
@@ -67,6 +66,7 @@ in the context of inheritance.
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
+	<origin_type>1</origin_type>
 	<references class_id="8" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
@@ -257,7 +257,6 @@ in the context of inheritance.
 				<simple_name>pkg4</simple_name>
 			</first>
 			<second class_id="13" tracking_level="0" version="0">
-				<origin_type>1</origin_type>
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -277,6 +276,7 @@ in the context of inheritance.
 					<simple_name>pkg4</simple_name>
 				</name>
 				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members class_id="14" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
@@ -310,7 +310,6 @@ in the context of inheritance.
 				<simple_name>pkg3</simple_name>
 			</first>
 			<second>
-				<origin_type>1</origin_type>
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -330,6 +329,7 @@ in the context of inheritance.
 					<simple_name>pkg3</simple_name>
 				</name>
 				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
@@ -363,7 +363,6 @@ in the context of inheritance.
 				<simple_name>pkg2</simple_name>
 			</first>
 			<second>
-				<origin_type>1</origin_type>
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -383,6 +382,7 @@ in the context of inheritance.
 					<simple_name>pkg2</simple_name>
 				</name>
 				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
@@ -416,7 +416,6 @@ in the context of inheritance.
 				<simple_name>pkg1</simple_name>
 			</first>
 			<second>
-				<origin_type>1</origin_type>
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -436,6 +435,7 @@ in the context of inheritance.
 					<simple_name>pkg1</simple_name>
 				</name>
 				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>2</count>
 					<item_version>0</item_version>
@@ -503,7 +503,6 @@ in the context of inheritance.
 			</first>
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
 				<type class_id="20" tracking_level="0" version="0">
-					<origin_type>1</origin_type>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<meta_data>
@@ -524,6 +523,7 @@ in the context of inheritance.
 						<simple_name>move_ctor_empty_descendant</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties class_id="21" tracking_level="0" version="0">
 					<count>0</count>
@@ -618,7 +618,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_1">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -639,6 +638,7 @@ in the context of inheritance.
 						<simple_name>child</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -765,7 +765,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_2">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -785,6 +784,7 @@ in the context of inheritance.
 						<simple_name>child_of_a_child1</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -878,7 +878,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_3">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -898,6 +897,7 @@ in the context of inheritance.
 						<simple_name>child_with_members</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1023,7 +1023,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_4">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1044,6 +1043,7 @@ in the context of inheritance.
 						<simple_name>parent</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1150,7 +1150,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_5">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1170,6 +1169,7 @@ in the context of inheritance.
 						<simple_name>second_child_without_members</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1263,7 +1263,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_6">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1283,6 +1282,7 @@ in the context of inheritance.
 						<simple_name>child_without_members</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1377,7 +1377,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_7">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1398,6 +1397,7 @@ in the context of inheritance.
 						<simple_name>child</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1522,7 +1522,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_8">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1542,6 +1541,7 @@ in the context of inheritance.
 						<simple_name>child_of_a_child2</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1666,7 +1666,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_9">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1686,6 +1685,7 @@ in the context of inheritance.
 						<simple_name>parent_with_members</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1815,7 +1815,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_10">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1835,6 +1834,7 @@ in the context of inheritance.
 						<simple_name>parent_without_members</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1922,7 +1922,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_11">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -1943,6 +1942,7 @@ in the context of inheritance.
 						<simple_name>child</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2069,7 +2069,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_12">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2089,6 +2088,7 @@ in the context of inheritance.
 						<simple_name>descendant2</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2213,7 +2213,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_13">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2233,6 +2232,7 @@ in the context of inheritance.
 						<simple_name>parent_outside</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2339,7 +2339,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_14">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2359,6 +2358,7 @@ in the context of inheritance.
 						<simple_name>third_child_with_members</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2514,7 +2514,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_15">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<meta_data>
@@ -2535,6 +2534,7 @@ in the context of inheritance.
 						<simple_name>move_ctor_descendant</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2661,7 +2661,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_16">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2681,6 +2680,7 @@ in the context of inheritance.
 						<simple_name>service_interface</simple_name>
 					</name>
 					<generation_type>2</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2736,7 +2736,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_17">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2756,6 +2755,7 @@ in the context of inheritance.
 						<simple_name>service</simple_name>
 					</name>
 					<generation_type>2</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2811,7 +2811,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_18">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2831,6 +2830,7 @@ in the context of inheritance.
 						<simple_name>base</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2917,7 +2917,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_19">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -2937,6 +2936,7 @@ in the context of inheritance.
 						<simple_name>descendant1</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -3049,7 +3049,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_20">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -3069,6 +3068,7 @@ in the context of inheritance.
 						<simple_name>descendant3</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -3194,7 +3194,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_21">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -3215,6 +3214,7 @@ in the context of inheritance.
 						<simple_name>parent</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -3321,7 +3321,6 @@ in the context of inheritance.
 			</first>
 			<second object_id="_22">
 				<type>
-					<origin_type>1</origin_type>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
 					<meta_data>
@@ -3342,6 +3341,7 @@ in the context of inheritance.
 						<simple_name>move_ctor_base</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<all_properties>
 					<count>0</count>

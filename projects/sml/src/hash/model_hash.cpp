@@ -118,11 +118,11 @@ namespace sml {
 std::size_t model_hasher::hash(const model&v) {
     std::size_t seed(0);
 
-    combine(seed, v.origin_type());
     combine(seed, v.documentation());
     combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
+    combine(seed, v.origin_type());
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));
