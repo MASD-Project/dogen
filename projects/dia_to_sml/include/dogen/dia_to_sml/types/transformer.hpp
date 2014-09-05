@@ -85,10 +85,18 @@ private:
      *
      * @pre n must not be empty.
      * @pre n must be a simple name, not a qualified name.
-     * @pre if supplied pkg_id must be the object ID of a package.
+     */
+    sml::qname to_qname(const std::string& n) const;
+
+    /**
+     * @brief Creates a qname using the name provided, which is
+     * interpreted as belonging to supplied module qname
+     *
+     * @pre n must not be empty.
+     * @pre n must be a simple name, not a qualified name.
      */
     sml::qname to_qname(const std::string& n,
-        const std::string& pkg_id = std::string()) const;
+        const sml::qname& module_qn) const;
 
     /**
      * @brief Creates a nested qname from a string representation of a
@@ -122,15 +130,32 @@ private:
 
 private:
     /**
-     * @brief Update the SML element using the processed object and the
-     * profile.
+     * @brief Returns the module associated with a dia package id.
+     *
+     * @pre pkg_id must be a valid package ID in the diagram.
+     * @pre corresponding module must have already been generated.
+     */
+    sml::module& module_for_id(const std::string& id);
+
+    /**
+     * @brief Update the SML element using the processed object and
+     * the profile. Also adds element's qname to the containing
+     * module, if any.
      */
     template<typename Element>
     void update_element(Element& e, const processed_object& o,
         const profile& p) {
         e.generation_type(generation_type(p));
         e.origin_type(sml::origin_types::user);
-        e.name(to_qname(o.name(), o.child_node_id()));
+
+        const auto pkg_id(o.child_node_id());
+        if (!pkg_id.empty()) {
+            auto& module(module_for_id(pkg_id));
+            e.name(to_qname(o.name(), module.name()));
+            module.members().push_back(e.name());
+        } else
+            e.name(to_qname(o.name()));
+
         context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
 
         const auto pair(comments_parser_->parse(o.comment()));

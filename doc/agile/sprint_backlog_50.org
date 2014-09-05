@@ -13,13 +13,13 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-05 Fri 18:38]
+Clock summary at [2014-09-05 Fri 23:54]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *20:52* |       |      |
+| *Total time*                                            | *22:07* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                         |         | 20:52 |      |
+| Development Stories Implemented                         |         | 22:07 |      |
 | IMPLEMENTATION Sprint and product backlog grooming      |         |       | 2:21 |
 | IMPLEMENTATION Updates to the manual and readme files   |         |       | 2:07 |
 | CANCELLED Merge entity with file info                   |         |       | 2:52 |
@@ -31,6 +31,7 @@ Clock summary at [2014-09-05 Fri 18:38]
 | COMPLETED Add a build number to dogen                   |         |       | 0:07 |
 | COMPLETED Analyse formatters architecture               |         |       | 0:39 |
 | COMPLETED Redefine terminology around facets in manual  |         |       | 4:17 |
+| IMPLEMENTATION Make model a simple repository           |         |       | 1:15 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -393,13 +394,30 @@ all things related to the formatters, including includes. We now need
 to add these concepts to the vocabulary in the manual to make sure the
 language is clear before we start looking into the implementation.
 
-*** Make model a simple repository                                    :story:
+*** IMPLEMENTATION Make model a simple repository                     :story:
 
 We should really perform all of the code generation for the model from
 it's module. The model itself should be a dumb container of types. To
 do so remove all the concepts from the model (=Element= etc) and deal
 with the fall out. This is required in order to simplify the graph in
 tagger.
+
+**** COMPLETED Ensure regular module members are populated            :story:
+     CLOSED: [2014-09-05 Fri 23:53]
+     CLOCK: [2014-09-05 Fri 23:03]--[2014-09-05 Fri 23:53] =>  0:50
+
+We added a way of tracking what a module contains but we never did
+populate it. Without this the graph will not work.
+
+**** IMPLEMENTATION Check to see if we are generating a module for the model :story:
+    CLOCK: [2014-09-05 Fri 22:38]--[2014-09-05 Fri 23:03] =>  0:25
+
+We were under the impression that a module was already being generated
+for the model but it may not be the case. Locate this code.
+
+**** Remove properties from model and deal with fallout               :story:
+
+Try taking away the =Element= concept etc and see what breaks.
 
 *** Create an interface for meta-data tagging                         :story:
 

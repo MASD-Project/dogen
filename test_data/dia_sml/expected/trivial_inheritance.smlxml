@@ -278,8 +278,21 @@ in the context of inheritance.
 				</name>
 				<generation_type>1</generation_type>
 				<members class_id="14" tracking_level="0" version="0">
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg4</item>
+						</module_path>
+						<simple_name>child</simple_name>
+					</item>
 				</members>
 			</second>
 		</item>
@@ -318,8 +331,21 @@ in the context of inheritance.
 				</name>
 				<generation_type>1</generation_type>
 				<members>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg3</item>
+						</module_path>
+						<simple_name>child</simple_name>
+					</item>
 				</members>
 			</second>
 		</item>
@@ -358,8 +384,21 @@ in the context of inheritance.
 				</name>
 				<generation_type>1</generation_type>
 				<members>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg2</item>
+						</module_path>
+						<simple_name>parent</simple_name>
+					</item>
 				</members>
 			</second>
 		</item>
@@ -398,8 +437,34 @@ in the context of inheritance.
 				</name>
 				<generation_type>1</generation_type>
 				<members>
-					<count>0</count>
+					<count>2</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg1</item>
+						</module_path>
+						<simple_name>parent</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg1</item>
+						</module_path>
+						<simple_name>child</simple_name>
+					</item>
 				</members>
 			</second>
 		</item>

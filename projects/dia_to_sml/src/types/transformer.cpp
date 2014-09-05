@@ -47,11 +47,11 @@ const std::string empty;
 const std::string unsigned_int("unsigned int");
 const std::string identity_attribute_key("IDENTITY_ATTRIBUTE");
 const std::string empty_dia_object_name("Dia object name is empty");
+const std::string empty_package_id("Supplied package id is empty");
 const std::string original_parent_not_found("Object has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string empty_parent_container(
     "Object has an entry in child to parent container but its empty: ");
-const std::string missing_module_for_id("Missing module for dia object ID: ");
 const std::string missing_module_for_qname("Missing module for qname: ");
 const std::string missing_qname_for_id("Missing QName for dia object ID: ");
 const std::string type_attribute_expected(
@@ -123,43 +123,49 @@ sml::generation_types transformer::generation_type(const profile& p) const {
     return generation_types::full_generation;
 }
 
-sml::qname transformer::
-to_qname(const std::string& n, const std::string& pkg_id) const {
+sml::qname transformer::to_qname(const std::string& n) const {
     if (n.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
 
-    sml::qname name;
-    name.model_name(context_.model().name().model_name());
-    name.external_module_path(context_.model().name().external_module_path());
-    name.simple_name(n);
+    sml::qname r;
+    r.model_name(context_.model().name().model_name());
+    r.external_module_path(context_.model().name().external_module_path());
+    r.simple_name(n);
 
-    if (pkg_id.empty())
-        return name;
+    return r;
+}
 
-    const auto i(context_.id_to_qname().find(pkg_id));
+sml::qname transformer::to_qname(const std::string& n,
+    const sml::qname& module_qn) const {
+    auto r(to_qname(n));
+    auto pp(module_qn.module_path());
+    pp.push_back(module_qn.simple_name());
+    r.module_path(pp);
+    return r;
+}
+
+sml::module& transformer::module_for_id(const std::string& id) {
+    if (id.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_package_id;
+        BOOST_THROW_EXCEPTION(transformation_error(empty_package_id));
+    }
+
+    const auto i(context_.id_to_qname().find(id));
     if (i == context_.id_to_qname().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_qname_for_id << pkg_id;
-        BOOST_THROW_EXCEPTION(transformation_error(
-                missing_qname_for_id + pkg_id));
+        BOOST_LOG_SEV(lg, error) << missing_qname_for_id << id;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_qname_for_id + id));
     }
 
     auto j(context_.model().modules().find(i->second));
     if (j == context_.model().modules().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_module_for_qname
-                                 << i->second.simple_name();
-
+        const auto sn(i->second.simple_name());
+        BOOST_LOG_SEV(lg, error) << missing_module_for_qname << sn;
         BOOST_THROW_EXCEPTION(
-            transformation_error(missing_module_for_qname +
-                i->second.simple_name()));
+            transformation_error(missing_module_for_qname + sn));
     }
-
-    auto pp(j->second.name().module_path());
-    pp.push_back(j->second.name().simple_name());
-    name.module_path(pp);
-
-    return name;
+    return j->second;
 }
 
 sml::nested_qname transformer::to_nested_qname(const std::string& n) const {
@@ -462,22 +468,7 @@ void transformer::from_note(const processed_object& o) {
         return;
     }
 
-    const auto i(context_.id_to_qname().find(o.child_node_id()));
-    if (i == context_.id_to_qname().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_module_for_id << o.child_node_id();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(missing_module_for_id + o.child_node_id()));
-    }
-
-    auto j(model.modules().find(i->second));
-    if (j == model.modules().end()) {
-        const auto sn(i->second.simple_name());
-        BOOST_LOG_SEV(lg, error) << missing_module_for_qname << sn;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(missing_module_for_qname + sn));
-    }
-
-    sml::module& module(j->second);
+    sml::module& module(module_for_id(o.child_node_id()));
     sml::meta_data_writer writer(module.meta_data());
     const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
     if (added)

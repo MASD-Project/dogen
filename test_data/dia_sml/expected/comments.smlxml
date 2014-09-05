@@ -166,8 +166,21 @@ This comment will be applied to the model namespace itself.
 				</name>
 				<generation_type>1</generation_type>
 				<members>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>comments</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>package</item>
+						</module_path>
+						<simple_name>package2</simple_name>
+					</item>
 				</members>
 			</second>
 		</item>
