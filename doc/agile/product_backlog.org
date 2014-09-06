@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add a configuration class to SML mock factory                     :story:
+
+Every time we need to extend the mock factory we are finding we need
+to modify every single function. This is particularly painful due to
+the fact we rely on defaults. For example, we can't easily add an
+external module path because we need to modify every single method. We
+need to look into patterns for this. One option would be to create a
+factory configuration class that has the super set of all parameters
+required and pass that configuration to each function.
+
 *** Refactor code around model origination                            :story:
 
 In the past we added a number of knobs around generation, all with
