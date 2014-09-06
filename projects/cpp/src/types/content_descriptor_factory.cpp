@@ -169,7 +169,7 @@ create(const sml::qname& qn, const content_types ct) const {
         const auto ft(config::cpp_facet_types::types);
 
         // FIXME: hack to handle model name.
-        if (qn.simple_name().empty()) {
+        if (qn.simple_name() == qn.model_name()) {
             auto new_qn(qn);
             new_qn.simple_name(qn.model_name());
             r.push_back(content_descriptor(header, ft, main, new_qn, ct));

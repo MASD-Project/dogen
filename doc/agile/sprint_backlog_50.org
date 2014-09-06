@@ -13,25 +13,26 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-06 Sat 16:39]
+Clock summary at [2014-09-06 Sat 17:13]
 
-| Headline                                                | Time    |       |      |
-|---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *24:10* |       |      |
-|---------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                         |         | 24:10 |      |
-| IMPLEMENTATION Sprint and product backlog grooming      |         |       | 2:21 |
-| IMPLEMENTATION Updates to the manual and readme files   |         |       | 2:07 |
-| CANCELLED Merge entity with file info                   |         |       | 2:52 |
-| CANCELLED Refactor types header formatter               |         |       | 1:07 |
-| COMPLETED Update instructions in manual for Postgres    |         |       | 0:50 |
-| COMPLETED Tidy-up test model folder structure           |         |       | 6:01 |
-| COMPLETED Review where we are with the last refactoring |         |       | 0:21 |
-| COMPLETED Check that dogen builds on C++-14             |         |       | 0:10 |
-| COMPLETED Add a build number to dogen                   |         |       | 0:07 |
-| COMPLETED Analyse formatters architecture               |         |       | 0:39 |
-| COMPLETED Redefine terminology around facets in manual  |         |       | 4:17 |
-| IMPLEMENTATION Make model a simple repository           |         |       | 3:18 |
+| Headline                                                 | Time    |       |      |
+|----------------------------------------------------------+---------+-------+------|
+| *Total time*                                             | *24:38* |       |      |
+|----------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                          |         | 24:38 |      |
+| IMPLEMENTATION Sprint and product backlog grooming       |         |       | 2:21 |
+| IMPLEMENTATION Updates to the manual and readme files    |         |       | 2:07 |
+| CANCELLED Merge entity with file info                    |         |       | 2:52 |
+| CANCELLED Refactor types header formatter                |         |       | 1:07 |
+| COMPLETED Update instructions in manual for Postgres     |         |       | 0:50 |
+| COMPLETED Tidy-up test model folder structure            |         |       | 6:01 |
+| COMPLETED Review where we are with the last refactoring  |         |       | 0:21 |
+| COMPLETED Check that dogen builds on C++-14              |         |       | 0:10 |
+| COMPLETED Add a build number to dogen                    |         |       | 0:07 |
+| COMPLETED Analyse formatters architecture                |         |       | 0:39 |
+| COMPLETED Redefine terminology around facets in manual   |         |       | 4:17 |
+| COMPLETED Make model =qname= look like a regular =qname= |         |       | 0:28 |
+| IMPLEMENTATION Make model a simple repository            |         |       | 3:18 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -393,6 +394,19 @@ yet again that the right thing to do is to work with the meta-data for
 all things related to the formatters, including includes. We now need
 to add these concepts to the vocabulary in the manual to make sure the
 language is clear before we start looking into the implementation.
+
+*** COMPLETED Make model =qname= look like a regular =qname=          :spike:
+    CLOSED: [2014-09-06 Sat 17:12]
+    CLOCK: [2014-09-06 Sat 16:44]--[2014-09-06 Sat 17:12] =>  0:28
+
+Whilst trying to create a module for the model, it was noticed that
+the qualified name of the model is a bit special: it has a model name
+but no module path and no simple_name. Ideally it should have a simple
+name that is equal to the model name. However, if we did that blindly
+it would result in duplication of the name at the formatting level.
+
+We need to change the formatters to cope with a model qualified name
+that has both a model name and a simple name, with equal values.
 
 *** IMPLEMENTATION Make model a simple repository                     :story:
 

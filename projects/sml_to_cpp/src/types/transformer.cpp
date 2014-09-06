@@ -201,14 +201,21 @@ std::list<std::string>
 transformer::to_namespace_list(const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
+    // if there is no module name, it won't contribute to the namespaces.
     if (!qn.model_name().empty())
         r.push_back(qn.model_name());
 
+    // all modules in the module path contribute to namespaces.
     const auto mp(qn.module_path());
     r.insert(r.end(), mp.begin(), mp.end());
 
+    // if the qname belongs to a module, the simple name will
+    // contribute to the namespaces (since it is a module), unless we
+    // are dealing with the model's synthetic module.
     const auto i(model_.modules().find(qn));
-    if (i != model_.modules().end())
+    const bool is_module(i != model_.modules().end());
+    const bool is_synthetic_module(qn.simple_name() == qn.model_name());
+    if (is_module && !is_synthetic_module)
         r.push_back(qn.simple_name());
 
     return r;

@@ -53,6 +53,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     const auto epp(identifier_parser::parse_scoped_name(external_module_path));
     context_.model().name().external_module_path(epp);
     context_.model().name().model_name(model_name);
+    context_.model().name().simple_name(model_name);
     context_.is_target(is_target);
     context_.model().origin_type(sml::origin_types::user);
 }
