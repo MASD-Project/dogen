@@ -50,7 +50,7 @@ void life_cycle_manager::create_file_backend(
     using namespace boost::log;
 
     if (file_name.extension() != extension)
-        file_name /= extension;
+        file_name += extension;
 
     auto backend(boost::make_shared<sinks::text_file_backend>(
             keywords::file_name = file_name.string(),
