@@ -8,6 +8,26 @@
 
 Stories that we intend to look at, at some point.
 
+*** Improve error message for blank types                             :story:
+
+If the user does not supply a type at all in Dia, dogen spits out a
+message that is not very informative:
+
+: Error: Failed to parse string: .
+
+The log file is not much better:
+
+: 2014-09-06 16:11:54.143249 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: 
+: 2014-09-06 16:11:54.150595 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
+: std::exception::what: Failed to parse string: 
+: [P12tag_workflow] = Code generation failure.
+
+We should instead mention that the string was empty or blank. We also
+need to provide the property and class that contained this string. To
+reproduce this problem create an enumeration but remove the
+=enumeration= stereotype.
+
 *** Concepts cannot be placed inside of packages                      :story:
 
 At present it is not possible to create a concept inside a
