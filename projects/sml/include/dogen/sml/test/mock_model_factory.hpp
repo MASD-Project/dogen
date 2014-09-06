@@ -265,7 +265,12 @@ public:
      */
     bool is_type_name_n_visitor(const unsigned int n, const qname& qn) const;
 
-private:
+    /**
+     * @brief If required, adds a module for the model.
+     */
+    void handle_model_module(const bool add_model_module, sml::model& m) const;
+
+public:
     /**
      * @brief Create a value object.
      */
@@ -303,6 +308,20 @@ private:
     object build_exception(const unsigned int i, const qname& model_qname,
         const unsigned int module_n = 0) const;
 
+    /**
+     * @brief Create a module from a qname.
+     */
+    module build_module(const sml::qname& qn,
+        const std::string& documentation = std::string()) const;
+
+    /**
+     * @brief Create a module from its components.
+     */
+    module build_module(const unsigned int module_n = 0,
+        const std::string& model_name = std::string(),
+        const std::list<std::string>& module_path = std::list<std::string>(),
+        const std::string& documentation = std::string()) const;
+
 public:
     /**
      * @brief Returns a qname derived from the input parameters
@@ -313,14 +332,16 @@ public:
     /**
      * @brief Builds a model with no types, concepts or modules.
      */
-    model build_empty_model(const unsigned int n = 0) const;
+    model build_empty_model(const unsigned int n = 0,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.
      */
     model build_single_type_model(const unsigned int n = 0,
-        const object_types ot = object_types::value_object) const;
+        const object_types ot = object_types::value_object,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a name derived from n, containing a
@@ -328,7 +349,8 @@ public:
      */
     model build_single_type_model_in_module(const unsigned int n = 0,
         const object_types ot = object_types::value_object,
-        const unsigned int mod_n = 0) const;
+        const unsigned int mod_n = 0,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a name derived from n, and a number
@@ -337,32 +359,36 @@ public:
     model build_multi_type_model(const unsigned int n,
         const unsigned int type_n,
         const object_types ot = object_types::value_object,
-        const unsigned int mod_n = 0) const;
+        const unsigned int mod_n = 0,
+        const bool add_model_module = false) const;
 
 public:
     /**
      * @brief Builds a model with a concept, and a type that models
      * it.
      */
-    model build_single_concept_model(const unsigned int n = 0) const;
+    model build_single_concept_model(const unsigned int n = 0,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines another
      * concept, and two types that model each concept.
      */
-    model build_first_degree_concepts_model(const unsigned int n = 0) const;
+    model build_first_degree_concepts_model(const unsigned int n = 0,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    model build_second_degree_concepts_model(const unsigned int n = 0) const;
+    model build_second_degree_concepts_model(const unsigned int n = 0,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with two base concepts and a concept that
      * refines both.
      */
     model build_multiple_inheritance_concepts_model(
-        const unsigned int n = 0) const;
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a base concept, two concepts that
@@ -370,48 +396,49 @@ public:
      * type last concept.
      */
     model build_diamond_inheritance_concepts_model(
-        const unsigned int n = 0) const;
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept.
      */
     model build_object_with_parent_that_models_concept(
-        const unsigned int n = 0) const;
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept that refines a concept.
      */
     model build_object_with_parent_that_models_a_refined_concept(
-        const unsigned int n = 0) const;
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
     model build_concept_that_refines_missing_concept(
-        const unsigned int n = 0) const;
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
     model build_object_that_models_missing_concept(
-        const unsigned int n = 0) const;
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief object that models concept with missing parent.
      */
     model build_object_that_models_concept_with_missing_parent(
-        const unsigned int n = 0) const;
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
 public:
     /**
      * @brief Scenario: object that exercises both weak and regular
      * associations.
      */
-    model object_with_both_regular_and_weak_associations() const;
+    model object_with_both_regular_and_weak_associations(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with single property of a type existent in
@@ -419,61 +446,70 @@ public:
      */
     model object_with_property(
         const object_types ot = object_types::value_object,
-        const property_types pt = property_types::value_object) const;
+        const property_types pt = property_types::value_object,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with single property of a type existent in
      * a second model.
      */
     std::array<model, 2>
-    object_with_property_type_in_different_model() const;
+    object_with_property_type_in_different_model(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with property of missing type.
      */
-    model object_with_missing_property_type() const;
+    model object_with_missing_property_type(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
     model
-    object_with_parent_in_the_same_model(const bool has_property = false) const;
+    object_with_parent_in_the_same_model(const bool has_property = false,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with missing parent in current model.
      */
-    model object_with_missing_parent_in_the_same_model() const;
+    model object_with_missing_parent_in_the_same_model(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with a parent in a second model.
      */
     std::array<model, 2>
-    object_with_parent_in_different_models() const;
+    object_with_parent_in_different_models(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three children.
      */
-    model object_with_three_children_in_same_model() const;
+    model object_with_three_children_in_same_model(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three levels deep in inheritance tree
      * in current model.
      */
     model object_with_third_degree_parent_in_same_model(
-        const bool has_property = false) const;
+        const bool has_property = false, const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three levels deep in inheritance tree
      * has missing parent.
      */
-    model object_with_third_degree_parent_missing() const;
+    model object_with_third_degree_parent_missing(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object three levels deep in inheritance tree,
      * with parents in different models.
      */
     std::array<model, 4>
-    object_with_third_degree_parent_in_different_models() const;
+    object_with_third_degree_parent_in_different_models(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object three levels deep in inheritance tree,
@@ -481,7 +517,8 @@ public:
      * parent.
      */
     std::array<model, 4>
-    object_with_missing_third_degree_parent_in_different_models() const;
+    object_with_missing_third_degree_parent_in_different_models(
+        const bool add_model_module = false) const;
 
 public:
     /**
@@ -492,25 +529,29 @@ public:
      * otherwise just one.
      */
     model object_with_group_of_properties_of_different_types(
-        const bool repeat_group = false) const;
+        const bool repeat_group = false,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Returns a model with a single object that contains one
      * operation with a single parameter.
      */
-    model object_with_operation_with_single_parameter() const;
+    model object_with_operation_with_single_parameter(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Returns a model with a single object that contains one
      * operation with a several parameters.
      */
-    model object_with_operation_with_multiple_parameters() const;
+    model object_with_operation_with_multiple_parameters(
+        const bool add_model_module = false) const;
 
     /**
      * @brief Returns a model with a single object that contains one
      * operation with a return type.
      */
-    model object_with_operation_with_return_type() const;
+    model object_with_operation_with_return_type(
+        const bool add_model_module = false) const;
 
 private:
     const flags flags_;
