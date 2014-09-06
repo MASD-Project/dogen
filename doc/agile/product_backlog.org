@@ -8,6 +8,21 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider adding facet specific types                              :story:
+
+Types in dogen are somewhat "uni-dimensional"; that is, the main focus
+of all work is types and the other facets are thought to either be
+code generated in total (serialisation, hashing, etc) or manually
+generated in total (test for mock factories). However, in some cases
+it may make sense to add a type directly to a facet. For example, we
+may want to add simple value objects to the mock factory. We don't
+want to pollute =types= with these classes, but at the same time we'd
+rather not have to manually generate them. It would be nice to be able
+to associate a type with just a facet via the meta-data. Of course,
+this does mean we would not be able to rely on all other facets such
+as serialisation and even streaming or else things would get a bit
+confusing. But it would still be useful.
+
 *** Add a configuration class to SML mock factory                     :story:
 
 Every time we need to extend the mock factory we are finding we need
