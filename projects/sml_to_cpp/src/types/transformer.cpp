@@ -576,18 +576,6 @@ void transformer::to_namespace_info(const sml::module& m) {
     BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
 }
 
-void transformer::model_to_namespace_info() {
-    const std::string n(model_.name().simple_name());
-    BOOST_LOG_SEV(lg, debug) << "Transforming model into namespace: " << n;
-
-    auto ni(boost::make_shared<cpp::namespace_info>());
-    ni->documentation(model_.documentation());
-    ni->namespaces(to_namespace_list(model_.name()));
-    context_.namespaces().insert(std::make_pair(model_.name(), ni));
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
-}
-
 void transformer::model_to_registrar_info() {
     const std::string n(model_.name().simple_name());
     BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;

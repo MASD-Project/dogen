@@ -4,53 +4,13 @@
 <entity class_id="3" tracking_level="0" version="0">
 	<documentation></documentation>
 	<meta_data class_id="4" tracking_level="0" version="0">
-		<count>4</count>
+		<count>0</count>
 		<item_version>0</item_version>
-		<item class_id="5" tracking_level="0" version="0">
-			<first>dia</first>
-			<second>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>
-					<first>comment</first>
-					<second>
-						<count>0</count>
-						<item_version>0</item_version>
-						<data>true</data>
-					</second>
-				</item>
-				<data></data>
-			</second>
-		</item>
-		<item>
-			<first>LICENCE</first>
-			<second>
-				<count>0</count>
-				<item_version>0</item_version>
-				<data>gpl_v2</data>
-			</second>
-		</item>
-		<item>
-			<first>MODELINE_GROUP</first>
-			<second>
-				<count>0</count>
-				<item_version>0</item_version>
-				<data>emacs</data>
-			</second>
-		</item>
-		<item>
-			<first>COPYRIGHT</first>
-			<second>
-				<count>0</count>
-				<item_version>0</item_version>
-				<data>Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;</data>
-			</second>
-		</item>
 		<data></data>
 	</meta_data>
-	<name class_id="6" tracking_level="0" version="0">
+	<name class_id="5" tracking_level="0" version="0">
 		<model_name>two_layers_with_objects</model_name>
-		<external_module_path class_id="7" tracking_level="0" version="0">
+		<external_module_path class_id="6" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
 		</external_module_path>
@@ -62,21 +22,21 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<references class_id="8" tracking_level="0" version="0">
+	<references class_id="7" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="9" tracking_level="0" version="0">
+	<leaves class_id="8" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="10" tracking_level="0" version="0">
-		<count>2</count>
+	<modules class_id="9" tracking_level="0" version="0">
+		<count>3</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="11" tracking_level="0" version="0">
+		<item class_id="10" tracking_level="0" version="0">
 			<first>
 				<model_name>two_layers_with_objects</model_name>
 				<external_module_path>
@@ -89,7 +49,7 @@
 				</module_path>
 				<simple_name>Package_2</simple_name>
 			</first>
-			<second class_id="12" tracking_level="0" version="0">
+			<second class_id="11" tracking_level="0" version="0">
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -110,7 +70,7 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
-				<members class_id="13" tracking_level="0" version="0">
+				<members class_id="12" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -178,6 +138,110 @@
 							<item>package_1</item>
 						</module_path>
 						<simple_name>class_1</simple_name>
+					</item>
+				</members>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>two_layers_with_objects</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<simple_name>two_layers_with_objects</simple_name>
+			</first>
+			<second>
+				<documentation></documentation>
+				<meta_data>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item class_id="13" tracking_level="0" version="0">
+						<first>dia</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>comment</first>
+								<second>
+									<count>0</count>
+									<item_version>0</item_version>
+									<data>true</data>
+								</second>
+							</item>
+							<data></data>
+						</second>
+					</item>
+					<item>
+						<first>LICENCE</first>
+						<second>
+							<count>0</count>
+							<item_version>0</item_version>
+							<data>gpl_v2</data>
+						</second>
+					</item>
+					<item>
+						<first>MODELINE_GROUP</first>
+						<second>
+							<count>0</count>
+							<item_version>0</item_version>
+							<data>emacs</data>
+						</second>
+					</item>
+					<item>
+						<first>COPYRIGHT</first>
+						<second>
+							<count>0</count>
+							<item_version>0</item_version>
+							<data>Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;</data>
+						</second>
+					</item>
+					<data></data>
+				</meta_data>
+				<name>
+					<model_name>two_layers_with_objects</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<simple_name>two_layers_with_objects</simple_name>
+				</name>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
+				<members>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<model_name>two_layers_with_objects</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>package_1</simple_name>
+					</item>
+					<item>
+						<model_name>two_layers_with_objects</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>Package_2</simple_name>
 					</item>
 				</members>
 			</second>

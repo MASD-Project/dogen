@@ -33,26 +33,66 @@
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="9" tracking_level="0" version="0">
-		<count>0</count>
+		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
+		<item class_id="10" tracking_level="0" version="0">
+			<first>
+				<model_name>empty</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<simple_name>empty</simple_name>
+			</first>
+			<second class_id="11" tracking_level="0" version="0">
+				<documentation></documentation>
+				<meta_data>
+					<count>0</count>
+					<item_version>0</item_version>
+					<data></data>
+				</meta_data>
+				<name>
+					<model_name>empty</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<simple_name>empty</simple_name>
+				</name>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
+				<members class_id="12" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</members>
+			</second>
+		</item>
 	</modules>
-	<concepts class_id="10" tracking_level="0" version="0">
+	<concepts class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="11" tracking_level="0" version="0">
+	<primitives class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="12" tracking_level="0" version="0">
+	<enumerations class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="13" tracking_level="0" version="0">
+	<objects class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

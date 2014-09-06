@@ -130,6 +130,13 @@ private:
 
 private:
     /**
+     * @brief Returns the module associated with a qname.
+     *
+     * @pre module must exist in context.
+     */
+    sml::module& module_for_qname(const sml::qname& qn);
+
+    /**
      * @brief Returns the module associated with a dia package id.
      *
      * @pre pkg_id must be a valid package ID in the diagram.
@@ -153,8 +160,13 @@ private:
             auto& module(module_for_id(pkg_id));
             e.name(to_qname(o.name(), module.name()));
             module.members().push_back(e.name());
-        } else
+        } else {
+            // type belongs to the synthetic module for the model;
+            // do not add it to the qname.
             e.name(to_qname(o.name()));
+            auto& module(module_for_qname(context_.model().name()));
+            module.members().push_back(e.name());
+        }
 
         context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
 

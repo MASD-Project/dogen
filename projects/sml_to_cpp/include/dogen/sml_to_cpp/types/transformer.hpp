@@ -164,13 +164,6 @@ public:
     void to_namespace_info(const sml::module& m);
 
     /**
-     * @brief Transforms a SML model into a namespace info.
-     *
-     * @todo Create an attribute of type module in model.
-     */
-    void model_to_namespace_info();
-
-    /**
      * @brief Transforms a SML model into a registrar info.
      */
     void model_to_registrar_info();

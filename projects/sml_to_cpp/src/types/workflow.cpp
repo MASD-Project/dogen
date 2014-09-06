@@ -163,9 +163,6 @@ void workflow::transformation_sub_workflow() {
     for (const auto& pair : model_.objects())
         transform_object(pair.second);
 
-    if (!model_.documentation().empty())
-        transformer_.model_to_namespace_info();
-
     for (const auto& pair : model_.modules())
         transform_module(pair.second);
 

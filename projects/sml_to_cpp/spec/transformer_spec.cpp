@@ -318,12 +318,19 @@ BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_model_results_in_expected_namespace_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory.build_single_type_model_in_module(0, ot));
+    const auto m(factory.build_single_type_model_in_module(0, ot, 0,
+            true/*add_model_module*/));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    BOOST_REQUIRE(m.modules().size() == 1);
+
+    auto i(m.modules().begin());
+    BOOST_REQUIRE(i != m.modules().end());
+    BOOST_REQUIRE(i->first.simple_name() == m.name().simple_name());
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
-    t.model_to_namespace_info();
+    t.to_namespace_info(i->second);
 
     BOOST_REQUIRE(c.namespaces().size() == 1);
     const auto n(*c.namespaces().begin()->second);
@@ -364,16 +371,39 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_
 
     ++j;
     BOOST_CHECK(factory.is_module_n(0, *j));
+}
 
-    c.namespaces().clear();
-    t.model_to_namespace_info();
+BOOST_AUTO_TEST_CASE(transforming_model_module_in_external_module_results_in_expected_namespace_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_model_module_in_external_module_results_in_expected_namespace_info");
+
+    const auto ot(object_types::value_object);
+    auto m(factory.build_single_type_model_in_module(0, ot, 0,
+            true/*add_model_module*/));
+    m.name().external_module_path().push_back(external_module);
+    BOOST_REQUIRE(m.modules().size() == 1);
+    auto module(m.modules().begin()->second);
+    module.name().external_module_path().push_back(external_module);
+    m.modules().clear();
+    m.modules().insert(std::make_pair(module.name(), module));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::sml_to_cpp::context c;
+    dogen::sml_to_cpp::transformer t(m, c);
+
+    t.to_namespace_info(module);
+
     BOOST_REQUIRE(c.namespaces().size() == 1);
-    const auto n1(*c.namespaces().begin()->second);
-    BOOST_LOG_SEV(lg, debug) << "namespace 1: " << n1;
+    const auto n(*c.namespaces().begin()->second);
+    BOOST_LOG_SEV(lg, debug) << "namespace: " << n;
 
-    BOOST_REQUIRE(n1.namespaces().size() == 2);
-    BOOST_CHECK(n1.namespaces().front() == external_module);
-    BOOST_CHECK(factory.is_model_n(0, n1.namespaces().back()));
+    BOOST_CHECK(!n.documentation().empty());
+    BOOST_REQUIRE(n.namespaces().size() == 2);
+
+    auto j(n.namespaces().begin());
+    BOOST_CHECK(*j == external_module);
+
+    ++j;
+    BOOST_CHECK(factory.is_model_n(0, *j));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {

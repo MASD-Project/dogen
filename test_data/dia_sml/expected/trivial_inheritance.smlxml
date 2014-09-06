@@ -2,60 +2,15 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="10">
 <entity class_id="3" tracking_level="0" version="0">
-	<documentation>This model tests all aspects related to inheritance.
-
-It includes the visitable stereotype since it only makes sense
-in the context of inheritance.
-
-</documentation>
+	<documentation></documentation>
 	<meta_data class_id="4" tracking_level="0" version="0">
-		<count>4</count>
+		<count>0</count>
 		<item_version>0</item_version>
-		<item class_id="5" tracking_level="0" version="0">
-			<first>dia</first>
-			<second>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>
-					<first>comment</first>
-					<second>
-						<count>0</count>
-						<item_version>0</item_version>
-						<data>true</data>
-					</second>
-				</item>
-				<data></data>
-			</second>
-		</item>
-		<item>
-			<first>LICENCE</first>
-			<second>
-				<count>0</count>
-				<item_version>0</item_version>
-				<data>gpl_v2</data>
-			</second>
-		</item>
-		<item>
-			<first>MODELINE_GROUP</first>
-			<second>
-				<count>0</count>
-				<item_version>0</item_version>
-				<data>emacs</data>
-			</second>
-		</item>
-		<item>
-			<first>COPYRIGHT</first>
-			<second>
-				<count>0</count>
-				<item_version>0</item_version>
-				<data>Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;</data>
-			</second>
-		</item>
 		<data></data>
 	</meta_data>
-	<name class_id="6" tracking_level="0" version="0">
+	<name class_id="5" tracking_level="0" version="0">
 		<model_name>trivial_inheritance</model_name>
-		<external_module_path class_id="7" tracking_level="0" version="0">
+		<external_module_path class_id="6" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
 		</external_module_path>
@@ -67,11 +22,11 @@ in the context of inheritance.
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<references class_id="8" tracking_level="0" version="0">
+	<references class_id="7" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="9" tracking_level="0" version="0">
+		<item class_id="8" tracking_level="0" version="0">
 			<first>
 				<model_name>boost</model_name>
 				<external_module_path>
@@ -87,7 +42,7 @@ in the context of inheritance.
 			<second>3</second>
 		</item>
 	</references>
-	<leaves class_id="10" tracking_level="0" version="0">
+	<leaves class_id="9" tracking_level="0" version="0">
 		<count>12</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
@@ -239,11 +194,11 @@ in the context of inheritance.
 			<simple_name>child</simple_name>
 		</item>
 	</leaves>
-	<modules class_id="11" tracking_level="0" version="0">
-		<count>4</count>
+	<modules class_id="10" tracking_level="0" version="0">
+		<count>5</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="12" tracking_level="0" version="0">
+		<item class_id="11" tracking_level="0" version="0">
 			<first>
 				<model_name>trivial_inheritance</model_name>
 				<external_module_path>
@@ -256,7 +211,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>pkg4</simple_name>
 			</first>
-			<second class_id="13" tracking_level="0" version="0">
+			<second class_id="12" tracking_level="0" version="0">
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -277,7 +232,7 @@ in the context of inheritance.
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
-				<members class_id="14" tracking_level="0" version="0">
+				<members class_id="13" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -464,6 +419,355 @@ in the context of inheritance.
 							<item>pkg1</item>
 						</module_path>
 						<simple_name>child</simple_name>
+					</item>
+				</members>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<simple_name>trivial_inheritance</simple_name>
+			</first>
+			<second>
+				<documentation>This model tests all aspects related to inheritance.
+
+It includes the visitable stereotype since it only makes sense
+in the context of inheritance.
+
+</documentation>
+				<meta_data>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item class_id="14" tracking_level="0" version="0">
+						<first>dia</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>comment</first>
+								<second>
+									<count>0</count>
+									<item_version>0</item_version>
+									<data>true</data>
+								</second>
+							</item>
+							<data></data>
+						</second>
+					</item>
+					<item>
+						<first>LICENCE</first>
+						<second>
+							<count>0</count>
+							<item_version>0</item_version>
+							<data>gpl_v2</data>
+						</second>
+					</item>
+					<item>
+						<first>MODELINE_GROUP</first>
+						<second>
+							<count>0</count>
+							<item_version>0</item_version>
+							<data>emacs</data>
+						</second>
+					</item>
+					<item>
+						<first>COPYRIGHT</first>
+						<second>
+							<count>0</count>
+							<item_version>0</item_version>
+							<data>Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;</data>
+						</second>
+					</item>
+					<data></data>
+				</meta_data>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<simple_name>trivial_inheritance</simple_name>
+				</name>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
+				<members>
+					<count>22</count>
+					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>parent_without_members</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>child_without_members</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>parent_with_members</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>second_child_without_members</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>third_child_with_members</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>child_of_a_child1</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>child_of_a_child2</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>pkg1</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>pkg2</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>pkg3</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>parent_outside</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>pkg4</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>child_with_members</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>service_interface</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>service</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>base</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>descendant2</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>descendant1</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>descendant3</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>move_ctor_base</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>move_ctor_descendant</simple_name>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>move_ctor_empty_descendant</simple_name>
 					</item>
 				</members>
 			</second>

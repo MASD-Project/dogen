@@ -13,13 +13,13 @@ and running again, after a long break.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-06 Sat 18:14]
+Clock summary at [2014-09-06 Sat 20:25]
 
 | Headline                                                 | Time    |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| *Total time*                                             | *25:38* |       |      |
+| *Total time*                                             | *27:34* |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                          |         | 25:38 |      |
+| Development Stories Implemented                          |         | 27:34 |      |
 | IMPLEMENTATION Sprint and product backlog grooming       |         |       | 2:21 |
 | IMPLEMENTATION Updates to the manual and readme files    |         |       | 2:07 |
 | CANCELLED Merge entity with file info                    |         |       | 2:52 |
@@ -32,7 +32,7 @@ Clock summary at [2014-09-06 Sat 18:14]
 | COMPLETED Analyse formatters architecture                |         |       | 0:39 |
 | COMPLETED Redefine terminology around facets in manual   |         |       | 4:17 |
 | COMPLETED Make model =qname= look like a regular =qname= |         |       | 0:28 |
-| IMPLEMENTATION Make model a simple repository            |         |       | 4:18 |
+| IMPLEMENTATION Make model a simple repository            |         |       | 6:14 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -430,7 +430,9 @@ populate it. Without this the graph will not work.
 We were under the impression that a module was already being generated
 for the model but it may not be the case. Locate this code.
 
-**** IMPLEMENTATION Generate a module for model                       :story:
+**** COMPLETED Generate a module for model                            :story:
+     CLOSED: [2014-09-06 Sat 20:25]
+     CLOCK: [2014-09-06 Sat 18:29]--[2014-09-06 Sat 20:25] =>  1:56
      CLOCK: [2014-09-06 Sat 17:41]--[2014-09-06 Sat 18:14] =>  0:31
      CLOCK: [2014-09-06 Sat 17:27]--[2014-09-06 Sat 17:41] =>  0:14
      CLOCK: [2014-09-06 Sat 17:12]--[2014-09-06 Sat 17:25] =>  0:13

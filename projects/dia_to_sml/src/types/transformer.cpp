@@ -146,6 +146,17 @@ sml::qname transformer::to_qname(const std::string& n,
     return r;
 }
 
+sml::module& transformer::module_for_qname(const sml::qname& qn) {
+    auto i(context_.model().modules().find(qn));
+    if (i == context_.model().modules().end()) {
+        const auto sn(qn.simple_name());
+        BOOST_LOG_SEV(lg, error) << missing_module_for_qname << sn;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(missing_module_for_qname + sn));
+    }
+    return i->second;
+}
+
 sml::module& transformer::module_for_id(const std::string& id) {
     if (id.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_package_id;
@@ -158,14 +169,7 @@ sml::module& transformer::module_for_id(const std::string& id) {
         BOOST_THROW_EXCEPTION(transformation_error(missing_qname_for_id + id));
     }
 
-    auto j(context_.model().modules().find(i->second));
-    if (j == context_.model().modules().end()) {
-        const auto sn(i->second.simple_name());
-        BOOST_LOG_SEV(lg, error) << missing_module_for_qname << sn;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(missing_module_for_qname + sn));
-    }
-    return j->second;
+    return module_for_qname(i->second);
 }
 
 sml::nested_qname transformer::to_nested_qname(const std::string& n) const {
@@ -461,10 +465,11 @@ void transformer::from_note(const processed_object& o) {
     const auto& kvps(pair.second);
     sml::model& model(context_.model());
     if (o.child_node_id().empty()) {
-        sml::meta_data_writer writer(model.meta_data());
+        auto& module(module_for_qname(model.name()));
+        sml::meta_data_writer writer(module.meta_data());
         const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
         if (added)
-            model.documentation(documentation);
+            module.documentation(documentation);
         return;
     }
 

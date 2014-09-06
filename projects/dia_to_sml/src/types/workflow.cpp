@@ -21,6 +21,7 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/grapher.hpp"
@@ -54,8 +55,20 @@ void workflow::initialise_context_activity(const std::string& model_name,
     context_.model().name().external_module_path(epp);
     context_.model().name().model_name(model_name);
     context_.model().name().simple_name(model_name);
-    context_.is_target(is_target);
     context_.model().origin_type(sml::origin_types::user);
+    context_.is_target(is_target);
+
+    BOOST_LOG_SEV(lg, debug) << "Target model name: "
+                             << context_.model().name();
+
+    sml::module m;
+    m.name(context_.model().name());
+    m.origin_type(sml::origin_types::user);
+    m.generation_type(context_.is_target() ?
+        sml::generation_types::full_generation :
+        sml::generation_types::no_generation);
+
+    context_.model().modules().insert(std::make_pair(m.name(), m));
 }
 
 graph_type workflow::build_graph_activity(const dia::diagram& diagram) {

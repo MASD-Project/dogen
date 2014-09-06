@@ -86,13 +86,22 @@ bool is_type_two(const dogen::sml::qname& qn) {
 dogen::sml::qname mock_model_name(const std::string& mn) {
     dogen::sml::qname r;
     r.model_name(mn);
+    r.simple_name(mn);
+    return r;
+}
+
+dogen::dia_to_sml::context mock_context(const std::string& model_name) {
+    dogen::dia_to_sml::context r;
+    r.model().name(mock_model_name(model_name));
+
+    dogen::sml::module m;
+    m.name(r.model().name());
+    r.model().modules().insert(std::make_pair(m.name(), m));
     return r;
 }
 
 dogen::dia_to_sml::context mock_context() {
-    dogen::dia_to_sml::context r;
-    r.model().name(mock_model_name(model_name));
-    return r;
+    return mock_context(model_name);
 }
 
 bool has_relationship(const relationship_types rt,
@@ -139,9 +148,7 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
 
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_value_object");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
     const auto o(mock_processed_object_factory::build_class());
     dogen::dia_to_sml::transformer t(c);
     t.transform(o, mock_profile(o));
@@ -329,27 +336,29 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_transforms_into_expected_e
 
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_large_package());
     t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().objects().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto p(c.model().modules().begin()->second);
-    BOOST_CHECK(p.name().model_name() == model_name);
-    BOOST_CHECK(!p.name().simple_name().empty());
-    BOOST_CHECK(p.documentation().empty());
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+        }
+    }
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_object");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto a(
@@ -359,12 +368,20 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
 
+    BOOST_REQUIRE(!module_name.empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& obj(c.model().objects().begin()->second);
     BOOST_CHECK(obj.name().model_name() == model_name);
@@ -374,14 +391,13 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
     BOOST_CHECK(obj.object_type() ==
         dogen::sml::object_types::user_defined_value_object);
     BOOST_REQUIRE(obj.name().module_path().size() == 1);
-    BOOST_CHECK(obj.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(obj.name().module_path().front() == module_name);
     BOOST_CHECK(!obj.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(enumeration_stereotype);
@@ -392,25 +408,32 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
 
+    BOOST_REQUIRE(!module_name.empty());
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
     const auto e(c.model().enumerations().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
     BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 1);
-    BOOST_CHECK(e.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(e.name().module_path().front() == module_name);
     BOOST_CHECK(!e.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(exception_stereotype);
@@ -421,11 +444,20 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
+
+    BOOST_REQUIRE(!module_name.empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(c.model().objects().begin()->second);
@@ -433,14 +465,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     BOOST_CHECK(ao.name().model_name() == model_name);
     BOOST_CHECK(!ao.name().simple_name().empty());
     BOOST_REQUIRE(ao.name().module_path().size() == 1);
-    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(ao.name().module_path().front() == module_name);
     BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_into_expected_service) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_package_transforms_into_expected_service");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(service_stereotype);
@@ -451,11 +482,20 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
+
+    BOOST_REQUIRE(!module_name.empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(c.model().objects().begin()->second);
@@ -464,14 +504,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
     BOOST_CHECK(ao.name().model_name() == model_name);
     BOOST_CHECK(!ao.name().simple_name().empty());
     BOOST_REQUIRE(ao.name().module_path().size() == 1);
-    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(ao.name().module_path().front() == module_name);
     BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_package_transforms_into_expected_factory) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_factory_stereotype_in_package_transforms_into_expected_factory");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(factory_stereotype);
@@ -482,11 +521,20 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_package_transforms_int
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
+
+    BOOST_REQUIRE(!module_name.empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(c.model().objects().begin()->second);
@@ -494,14 +542,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_package_transforms_int
     BOOST_CHECK(ao.name().model_name() == model_name);
     BOOST_CHECK(!ao.name().simple_name().empty());
     BOOST_REQUIRE(ao.name().module_path().size() == 1);
-    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(ao.name().module_path().front() == module_name);
     BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_package_transforms_into_expected_repository) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_repository_stereotype_in_package_transforms_into_expected_repository");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(repository_stereotype);
@@ -512,11 +559,20 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_package_transforms_
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
+
+    BOOST_REQUIRE(!module_name.empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(c.model().objects().begin()->second);
@@ -524,14 +580,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_package_transforms_
     BOOST_CHECK(ao.name().model_name() == model_name);
     BOOST_CHECK(!ao.name().simple_name().empty());
     BOOST_REQUIRE(ao.name().module_path().size() == 1);
-    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(ao.name().module_path().front() == module_name);
     BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_package_transforms_into_expected_entity) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_entity_stereotype_in_package_transforms_into_expected_entity");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(entity_stereotype);
@@ -542,11 +597,20 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_package_transforms_into
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
+
+    BOOST_REQUIRE(!module_name.empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(c.model().objects().begin()->second);
@@ -554,14 +618,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_package_transforms_into
     BOOST_CHECK(ao.name().model_name() == model_name);
     BOOST_CHECK(!ao.name().simple_name().empty());
     BOOST_REQUIRE(ao.name().module_path().size() == 1);
-    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(ao.name().module_path().front() == module_name);
     BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_package_transforms_into_expected_keyed_entity) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_keyed_entity_stereotype_in_package_transforms_into_expected_keyed_entity");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(keyed_entity_stereotype);
@@ -572,11 +635,20 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_package_transform
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto pkg(c.model().modules().begin()->second);
-    BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().simple_name().empty());
-    BOOST_CHECK(pkg.name().module_path().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    std::string module_name;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.name().model_name() == model_name);
+            BOOST_CHECK(!module.name().simple_name().empty());
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.name().module_path().empty());
+            module_name = module.name().simple_name();
+        }
+    }
+
+    BOOST_REQUIRE(!module_name.empty());
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& ao(c.model().objects().begin()->second);
@@ -584,14 +656,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_package_transform
     BOOST_CHECK(ao.name().model_name() == model_name);
     BOOST_CHECK(!ao.name().simple_name().empty());
     BOOST_REQUIRE(ao.name().module_path().size() == 1);
-    BOOST_CHECK(ao.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(ao.name().module_path().front() == module_name);
     BOOST_CHECK(!ao.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     auto a(
@@ -622,8 +693,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
 
 BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_object");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto a(
@@ -634,34 +704,40 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) 
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -679,8 +755,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) 
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(enumeration_stereotype);
@@ -692,34 +767,40 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
@@ -734,8 +815,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
 
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(exception_stereotype);
@@ -747,34 +827,40 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -790,8 +876,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 
 BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(service_stereotype);
@@ -803,34 +888,40 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transform
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -847,8 +938,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transform
 
 BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_two_packages_transforms_into_expected_factory) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_factory_stereotype_in_two_packages_transforms_into_expected_factory");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(factory_stereotype);
@@ -860,34 +950,40 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_two_packages_transform
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -903,8 +999,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_two_packages_transform
 
 BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_two_packages_transforms_into_expected_repository) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_repository_stereotype_in_two_packages_transforms_into_expected_repository");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(repository_stereotype);
@@ -916,34 +1011,40 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_two_packages_transf
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -959,8 +1060,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_two_packages_transf
 
 BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_two_packages_transforms_into_expected_entity) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_entity_stereotype_in_two_packages_transforms_into_expected_entity");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(entity_stereotype);
@@ -972,34 +1072,40 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_two_packages_transforms
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -1015,8 +1121,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_two_packages_transforms
 
 BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_two_packages_transforms_into_expected_keyed_entity) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_keyed_entity_stereotype_in_two_packages_transforms_into_expected_keyed_entity");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(keyed_entity_stereotype);
@@ -1028,34 +1133,40 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_two_packages_tran
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    auto i(c.model().modules().begin());
+    BOOST_REQUIRE(c.model().modules().size() == 3);
+    std::list<dogen::sml::module> modules;
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name)
+            modules.push_back(module);
+    }
+    BOOST_REQUIRE(modules.size() == 2);
 
-    const auto pkg1(i->second);
-    BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().simple_name().empty());
+    const auto m1(modules.front());
+    BOOST_CHECK(m1.name().model_name() == model_name);
+    BOOST_CHECK(!m1.name().simple_name().empty());
 
-    const auto pkg2((++i)->second);
-    BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().simple_name().empty());
+    const auto m2(modules.back());
+    BOOST_CHECK(m2.name().model_name() == model_name);
+    BOOST_CHECK(!m2.name().simple_name().empty());
 
     BOOST_CHECK(
-        pkg1.name().module_path().empty() ||
-        pkg2.name().module_path().empty());
+        m1.name().module_path().empty() ||
+        m2.name().module_path().empty());
 
     BOOST_CHECK(
-        !pkg1.name().module_path().empty() ||
-        !pkg2.name().module_path().empty());
+        !m1.name().module_path().empty() ||
+        !m2.name().module_path().empty());
 
     std::string first, second;
-    if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().simple_name();
-        second = pkg2.name().simple_name();
-        BOOST_CHECK(pkg2.name().module_path().front() == first);
+    if (m1.name().module_path().empty()) {
+        first = m1.name().simple_name();
+        second = m2.name().simple_name();
+        BOOST_CHECK(m2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().simple_name();
-        second = pkg1.name().simple_name();
-        BOOST_CHECK(pkg1.name().module_path().front() == first);
+        first = m2.name().simple_name();
+        second = m1.name().simple_name();
+        BOOST_CHECK(m1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -1072,24 +1183,25 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_two_packages_tran
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_marker_transforms_into_model_comments");
 
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_uml_note_with_marker());
     t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_CHECK(!c.model().documentation().empty());
-    BOOST_CHECK(c.model().meta_data().size() == 1);
+
+    BOOST_REQUIRE(c.model().modules().size() == 1);
+    const auto m(c.model().modules().begin()->second);
+    BOOST_CHECK(m.name().model_name() == model_name);
+    BOOST_CHECK(m.name().simple_name() == model_name);
+    BOOST_CHECK(!m.documentation().empty());
+    BOOST_CHECK(m.meta_data().size() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_does_nothing");
 
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_uml_note());
     t.transform(o, mock_profile(o));
@@ -1102,9 +1214,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
 BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_does_nothing");
 
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_empty_uml_note());
     t.transform(o, mock_profile(o));
@@ -1116,9 +1226,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
 
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_marker_inside_package_transforms_into_package_comments");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_uml_note_with_marker_inside_large_package());
@@ -1129,18 +1237,20 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
     BOOST_CHECK(c.model().documentation().empty());
     BOOST_CHECK(c.model().meta_data().empty());
 
-    BOOST_REQUIRE(c.model().modules().size() == 1);
+    BOOST_REQUIRE(c.model().modules().size() == 2);
 
-    const auto p(c.model().modules().begin()->second);
-    BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(!p.meta_data().empty());
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(!module.documentation().empty());
+            BOOST_CHECK(!module.meta_data().empty());
+        }
+    }
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_inside_package_does_nothing");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_uml_note_inside_large_package());
@@ -1150,17 +1260,20 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
     BOOST_CHECK(c.model().meta_data().empty());
-    BOOST_REQUIRE(c.model().modules().size() == 1);
+    BOOST_REQUIRE(c.model().modules().size() == 2);
 
-    const auto p(c.model().modules().begin()->second);
-    BOOST_CHECK(p.documentation().empty());
-    BOOST_CHECK(p.meta_data().empty());
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.meta_data().empty());
+        }
+    }
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_inside_package_does_nothing");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
@@ -1171,18 +1284,19 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
     BOOST_CHECK(c.model().meta_data().empty());
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-
-    const auto p(c.model().modules().begin()->second);
-    BOOST_CHECK(p.documentation().empty());
-    BOOST_CHECK(p.meta_data().empty());
+    BOOST_REQUIRE(c.model().modules().size() == 2);
+    for (const auto& pair : c.model().modules()) {
+        const auto& module(pair.second);
+        if (module.name().simple_name() != model_name) {
+            BOOST_CHECK(module.documentation().empty());
+            BOOST_CHECK(module.meta_data().empty());
+        }
+    }
 }
 
 BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
-
+    auto c(mock_context(model_name));
 
     const auto a(mock_processed_object_factory::build_generalization());
     const auto con(a[0].connection());
@@ -1209,8 +1323,7 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
 
 BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_object");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+    auto c(mock_context(model_name));
 
     const auto a(mock_processed_object_factory::build_generalization());
     const auto con(a[0].connection());
@@ -1225,7 +1338,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
-    BOOST_CHECK(c.model().modules().empty());
+    BOOST_CHECK(c.model().modules().size() == 1);
+    const auto module(c.model().modules().begin()->second);
+    BOOST_CHECK(module.name().simple_name() == model_name);
+
     BOOST_REQUIRE(c.model().objects().size() == 2);
     for (const auto& pair : c.model().objects()) {
         const auto& qn(pair.first);
