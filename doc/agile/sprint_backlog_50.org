@@ -416,21 +416,21 @@ do so remove all the concepts from the model (=Element= etc) and deal
 with the fall out. This is required in order to simplify the graph in
 tagger.
 
-**** COMPLETED Ensure regular module members are populated            :story:
+**** COMPLETED Ensure regular module members are populated             :task:
      CLOSED: [2014-09-05 Fri 23:53]
      CLOCK: [2014-09-05 Fri 23:03]--[2014-09-05 Fri 23:53] =>  0:50
 
 We added a way of tracking what a module contains but we never did
 populate it. Without this the graph will not work.
 
-**** COMPLETED Check to see if we are generating a module for the model :story:
+**** COMPLETED Check to see if we are generating a module for the model :task:
      CLOSED: [2014-09-05 Fri 23:55]
     CLOCK: [2014-09-05 Fri 22:38]--[2014-09-05 Fri 23:03] =>  0:25
 
 We were under the impression that a module was already being generated
 for the model but it may not be the case. Locate this code.
 
-**** COMPLETED Generate a module for model                            :story:
+**** COMPLETED Generate a module for model                            :task:
      CLOSED: [2014-09-06 Sat 20:25]
      CLOCK: [2014-09-06 Sat 18:29]--[2014-09-06 Sat 20:25] =>  1:56
      CLOCK: [2014-09-06 Sat 17:41]--[2014-09-06 Sat 18:14] =>  0:31
@@ -449,7 +449,13 @@ regular qname. The problem we have at the moment is that we do not
 have the model name in the module path (it is blank) resulting in
 special handling.
 
-**** IMPLEMENTATION Remove properties from model and deal with fallout :story:
+**** Add tests to ensure module members are being populated correctly :task:
+
+We started populating the module members but forgot to ensure they
+were populated correctly. We need simple tests to ensure all objects
+are where we expect as we will rely on this for the graph.
+
+**** IMPLEMENTATION Remove properties from model and deal with fallout :task:
      CLOCK: [2014-09-06 Sat 00:29]--[2014-09-06 Sat 00:35] =>  0:06
      CLOCK: [2014-09-06 Sat 00:18]--[2014-09-06 Sat 00:29] =>  0:11
 
