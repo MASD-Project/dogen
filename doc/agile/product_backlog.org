@@ -8,6 +8,26 @@
 
 Stories that we intend to look at, at some point.
 
+*** Refactor code around model origination                            :story:
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and SML should not know
+  anything about it.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
 *** Improve error message for blank types                             :story:
 
 If the user does not supply a type at all in Dia, dogen spits out a
@@ -54,7 +74,7 @@ into the available attributes and see if they make sense as dogen
 traits to control JSON. Some of these may have wider application and
 be used to control other serialisation formats.
 
-*** Raw JSON vs cooked JSON
+*** Raw JSON vs cooked JSON                                           :story:
 
 If we do implement customisable JSON serialisation, we should still
 use the raw format in streaming. We need a way to disable the cooked
@@ -179,7 +199,7 @@ these.
 
 While we're at it, add support for =family= too.
 
-*** Make use of boilerplate                                           :task:
+*** Make use of boilerplate                                           :story:
 
 Remove all of the manual boilerplate and make use of the new
 class. This will involve bring across some meta-data into C++ model.
