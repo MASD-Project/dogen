@@ -15,16 +15,16 @@ formatters.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-07 Sun 09:36]
+Clock summary at [2014-09-07 Sun 13:17]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *30:31* |       |      |
+| *Total time*                                                | *31:53* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 30:31 |      |
+| Development Stories Implemented                             |         | 31:53 |      |
 | IMPLEMENTATION Sprint and product backlog grooming          |         |       | 2:25 |
 | IMPLEMENTATION Updates to the manual and readme files       |         |       | 2:07 |
-| IMPLEMENTATION Publish the extreme incrementalism blog post |         |       | 0:20 |
+| IMPLEMENTATION Publish the extreme incrementalism blog post |         |       | 1:42 |
 | CANCELLED Merge entity with file info                       |         |       | 2:52 |
 | CANCELLED Refactor types header formatter                   |         |       | 1:07 |
 | COMPLETED Update instructions in manual for Postgres        |         |       | 0:50 |
@@ -62,6 +62,8 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** IMPLEMENTATION Publish the extreme incrementalism blog post       :story:
+    CLOCK: [2014-09-07 Sun 12:22]--[2014-09-07 Sun 13:17] =>  0:55
+    CLOCK: [2014-09-07 Sun 11:52]--[2014-09-07 Sun 12:19] =>  0:27
     CLOCK: [2014-09-07 Sun 09:15]--[2014-09-07 Sun 09:35] =>  0:20
 
 This blog post was almost completed so we need to finish it up and

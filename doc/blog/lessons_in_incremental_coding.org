@@ -5,48 +5,69 @@ A lot of interesting lessons have been learned during the development
 of [[https://github.com/DomainDrivenConsulting/dogen][Dogen]] and I'm rather afraid many more are still in store. As it is
 typical with the agile process, I'm constantly reviewing what went
 right and what went wrong. I thought I'd put pen to paper with some of
-these, In the vain hope of them being of general interest.
+these, in the vain hope of them being of general interest.
 
-One of the major wins in terms of development process was to think
-incrementally. Of course, agile already gives you a mental framework
-for that, and we had a perfectly functioning agile process during our
-start up days - the time of the inception of Dogen. However, with the
-tearing down of the start up and the return to gainful employment,
-agile soon revealed itself to be far too coarse grained.
+Dogen is an attempt to create a domain model generator. The [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#fundamental-building-blocks][manual]]
+goes into a bit more detail on what it is that we are trying to
+achieve, but for the purposes of this exercise it suffices to think of
+it as a C++ code generator. The remainder of this post look at what
+what has worked and what has not worked so well over the last few
+years.
 
-When I decided to continue developing Dogen on my spare time, I had
-two conflicting requirements: very little development resources and
-very ambitious ideas that required lots of work. The development
-resource was, well, just me. With a family and a full time job there
-isn't a lot of spare cycles left. In fact, after some analysis, I
-realised I was in a conundrum. Whilst there is was a lot of
-"dead-time" in the average week, it was mostly "low-quality grade
-time": lots of discontinued segments of varying and unpredictable
-lengths. Summed together in a naive way it seemed like a lot, but - as
-every programmer knows - six blocks of ten minutes do not one solid
-hour make.
+* Constrained by Time
+
+Dogen has been developed since 2012, with a few dry periods, and we
+have reached the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_50.org][50th sprint]] recently. The tool was conceived when we
+were trying to do our first start up. Once that ended - around the
+back end of 2012 - I kept working on it in my spare time and it has
+continued that way ever since. It just keeps chugging along, slowly
+but steadily, with no pressures other than to enjoy the sights.
+
+When I decided to continue coding, I had two conflicting requirements:
+very little development resources and very ambitious ideas that
+required lots of work. The development resource was, well, just
+me. With family commitments and a full time job, I soon found out that
+there weren't a lot of spare cycles left.
+
+In fact, after some analysis, I realised I was in a conundrum. Whilst
+there is was a lot of "dead-time" in the average week, it was mostly
+"low-quality grade time": lots of discontinued segments of varying and
+unpredictable lengths. Summed together in a naive way it seemed like a
+lot, but - as every programmer knows - six blocks of ten minutes do
+not one solid hour make.
 
 Nevertheless, one has to play the game with the cards that were dealt.
 Soon I realised that the correct question to ask was: "what kind of
 development environment would be required such that one can be
 productive given these conditions?"
 
-As it turns out, the answer is multi-part - just like MIME.
+Like MIME, the answer turned out to be multi-part.
 
-* DVCS is at the core
+* DVCS to the Core
 
 We had already started to use git during the start-up days, and it had
 proved to be a major win at the time. After all, one never quite knows
-where one will be coding from - and whether internet access is
-available or not - so its important to have a self-contained
+where one will be coding from, and whether internet access is
+available or not, so its important to have a self-contained
 environment. In the end we found out it brought many, many more
 advantages such as great collaborative flows, good managed web
 interfaces/hosting providers ([[http://www.github.com][GitHub]] and, to some extent, [[http://www.bitbucket.com][BitBucket]]),
-amazing raw speed even on low-powered machines, and many other
-wins. Since most of it is covered elsewhere, I won't bore you with it.
+amazing raw speed even on low-powered machines, and a number of other
+wins - all covered by lots and lots of posts around the web, so I
+won't bore you with that.
 
-However, one decision that turned out to be a major win is still not
-the done thing. Ever the trailblazers, we decided to put everything
+On the surface it may seem that DVCS is most useful on a
+multi-developer team. This is not the case. The more discontinued your
+time is, the more you start appreciating its distributed nature. This
+is because each "kind" of time has a more suitable device - perhaps a
+netbook for the train, a desktop at someone's house or even a phone
+while waiting somewhere. With DVCS you can easily to switch devices
+and continue exactly where you left off. With GitHub you can even
+author using the web interface, so a mobile phone suddenly becomes
+useful for reading and writing.
+
+Another decision that turned out to be a major win is still not the
+done thing. Ever the trailblazers, we decided to put everything
 related to the project in version control. And by "everything" I do
 mean *everything*: documentation, bug reports, agile process, blog
 posts, the whole lot. It did seem a bit silly not to use GitHub's Wiki
@@ -63,7 +84,7 @@ versioned controlled place proved to be a major win:
 
 When you have little time, these little advantages are life-savers.
 
-The second and very important lesson learned was to commit early and
+The last but very important lesson learned was to commit early and
 commit often. Its rather obvious in hindsight, really. After all, if
 you have very small blocks of time to do work, you want to make sure
 you don't break anything; last thing you need is to spend a week
@@ -78,7 +99,7 @@ commit comment and the commit diff and make a judgement as to whether
 the change was correct or not. To be fair, its not quite always that
 straightforward, but that has been the overall aim.
 
-* Continuously Integrated
+* Struggling to stay Continuously Integrated
 
 After the commit comes the build, and the proof is in the pudding, as
 they say. When it comes to code, that largely means CI; granted, it
@@ -90,21 +111,31 @@ dynamic analysis, code coverage, packaging and basic sanity tests on
 those packages.
 
 All of these have proven to be major steps in keeping the show on the
-road, and once setup, fairly trivial to maintain. We've had a couple
-of minor issues with [[http://www.cdash.org/][CDash]] - and certainly our setup could do with
-some improvements - but on the main, it just chugs along. However, we
-did hit a stumbling block: finding the time to do large
-infrastructural updates such as new versions of boost, new compilers
-and so on. These are horrendously time consuming across platforms
-because you never know what kinds of issues you are doing to hit. So
-in summary the biggest lesson we learned here is CI is vital, but
-software product with no time at all should not waste time managing
-their own CI. We are looking into [[https://travis-ci.org/][travis]] to make this process easier
-in the future.
+road, and once setup, they were /normally/ fairly trivial to
+maintain. We did have a couple of minor issues with [[http://www.cdash.org/][CDash]] whilst we
+were running our own server. Eventually we moved over to the [[http://my.cdash.org/index.php?project%3DDogen][hosted
+CDash server]] but it has limitations on the number of builds, which
+meant we had to switch some build agents off. In addition to this, the
+main other stumbling block is finding the time to do large
+infrastructural updates to the build agents such as setting up new
+versions of boost, new compilers and so on. These are horrendously
+time consuming across platforms because you never know what kinds of
+issues you are doing to hit and each platform has their own way of
+doing things.
+
+The biggest lesson we learned here is that CI is vital but software
+product with no time at all should not waste time managing their own
+CI. There are just not enough hours in the day. We are looking into
+[[https://travis-ci.org/][travis]] to make this process easier in the future. Also, whilst being
+cross-platform is a very worthy objective, one has to weigh the costs
+with the benefits. If you have a tiny user base, it may make sense to
+stick to one platform and continue to do portable coding without
+"proof"; once users start asking for multiple platforms, its then worth
+considering doing the work required to support them.
 
 The packaging story was also a very good one to start off with - after
 all, most users will probably rely on those - but it turned out to be
-much harder than first thought. We spent quite a bit of time
+*much* harder than first thought. We spent quite a bit of time
 integrating with the GitHub API, uploading packages into their
 downloads section, downloading them from there, testing, and then
 renaming them for user consumption. And, while it lasted, it was very
@@ -117,9 +148,19 @@ always have a plan B - and even a plan C.
 
 The end result is that, at the moment, we don't have any downloads
 available at all - not even a stale ones - nor do we have any sanity
-checks on packages we produce; they basically go to =/dev/null=. But
-the remaining aspects of CI are still in place, and we rely on it
-daily.
+checks on packages we produce; they basically go to =/dev/null=. The
+remaining aspects of CI are still in place, and we rely on it daily.
+
+In summary, all of our pains led us to conclude that one should
+externalise early, externalise often and externalise everything. If
+there is a free (or cheap) provider in the cloud that can take on some
+or all of your infrastructure work away, you should always consider
+using first rather than set up your own infrastructure. Of course, its
+worth ensuring the provider is reliable, has been around for a bit and
+is used by a critical mass; after all, there is nothing worse than
+spending all the effort in migrating only to find out that the
+provider is about to dramatically change its APIs, prices, terms and
+conditions - or even worse, about to be shutdown altogether.
 
 * Loosely Coupled
 
@@ -146,13 +187,16 @@ will think twice when adding dependencies to off-distro libraries.
 
 * Slow Motion Agile
 
-During our start-up days, we had a "normal" agile process: daily
-stand-ups, bi-weekly iterations, pre-iteration planning,
-post-iteration reviews and all of that good stuff. It worked really
-well, and keep us honest. We used a very simple org-mode file to keep
-track of all the open stories, and at one point we even built a simple
-burn-down chart generator to allow us to measure velocity - all in the
-name of keeping everything in git.
+Looking back on over 2.4k commits, one of the major wins in terms of
+development process was to think incrementally. Of course, agile
+already gives you a mental framework for that, and we had a perfectly
+functioning scrum process during our start up days: daily stand-ups,
+bi-weekly iterations, pre-iteration planning, post-iteration reviews
+and all of that good stuff. It worked really well, and keep us honest
+and clean. We used a very simple org-mode file to keep track of all
+the open stories, and at one point we even built a simple burn-down
+chart generator to allow us to measure velocity - all in the name of
+keeping everything in git.
 
 Granted, when you are working by yourself and on your spare time, a
 large chunk of agile makes no sense at all; after all, providing
@@ -166,7 +210,9 @@ on an open source project its very easy to get lost in its
 open-ended-ness and end up giving up altogether, in particular if you
 are not getting (or expecting) any user feedback. Even Linus himself
 has said many times he would have given up the kernel if it wasn't for
-other people bringing him problems to keep him interested.
+other people bringing him problems to keep him interested. Also in
+some ways, the process has converged to a more [[http://blogs.versionone.com/agile_management/2012/01/06/1-kanban-vs-scrum-myths-hype/][Kanban-like]] approach -
+albeit in an extremely informal fashion.
 
 Lacking Linus' ability to attract crowds of interested developers, I
 went for the next best thing: I made them up. Well, at least in
@@ -245,3 +291,4 @@ write endless unit tests that prove that some internal class or other
 works, without any regard for what that class contributes in terms of
 end to end functionality.
 
+* Conclusions
