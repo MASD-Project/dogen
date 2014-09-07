@@ -15,29 +15,29 @@ formatters.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-07 Sun 13:17]
+Clock summary at [2014-09-07 Sun 22:05]
 
-| Headline                                                    | Time    |       |      |
-|-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *31:53* |       |      |
-|-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 31:53 |      |
-| IMPLEMENTATION Sprint and product backlog grooming          |         |       | 2:25 |
-| IMPLEMENTATION Updates to the manual and readme files       |         |       | 2:07 |
-| IMPLEMENTATION Publish the extreme incrementalism blog post |         |       | 1:42 |
-| CANCELLED Merge entity with file info                       |         |       | 2:52 |
-| CANCELLED Refactor types header formatter                   |         |       | 1:07 |
-| COMPLETED Update instructions in manual for Postgres        |         |       | 0:50 |
-| COMPLETED Tidy-up test model folder structure               |         |       | 6:01 |
-| COMPLETED Review where we are with the last refactoring     |         |       | 0:21 |
-| COMPLETED Check that dogen builds on C++-14                 |         |       | 0:10 |
-| COMPLETED Add a build number to dogen                       |         |       | 0:07 |
-| COMPLETED Analyse formatters architecture                   |         |       | 0:39 |
-| COMPLETED Redefine terminology around facets in manual      |         |       | 4:17 |
-| COMPLETED Make model =qname= look like a regular =qname=    |         |       | 0:28 |
-| COMPLETED Ensure we convey model information as a module    |         |       | 7:30 |
-| IMPLEMENTATION Remove unnecessary properties from model     |         |       | 0:17 |
-| IMPLEMENTATION Refactor meta-data processing in SML         |         |       | 1:00 |
+| Headline                                                 | Time    |       |      |
+|----------------------------------------------------------+---------+-------+------|
+| *Total time*                                             | *35:13* |       |      |
+|----------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                          |         | 35:13 |      |
+| IMPLEMENTATION Sprint and product backlog grooming       |         |       | 2:25 |
+| IMPLEMENTATION Updates to the manual and readme files    |         |       | 2:07 |
+| COMPLETED Publish the extreme incrementalism blog post   |         |       | 5:02 |
+| CANCELLED Merge entity with file info                    |         |       | 2:52 |
+| CANCELLED Refactor types header formatter                |         |       | 1:07 |
+| COMPLETED Update instructions in manual for Postgres     |         |       | 0:50 |
+| COMPLETED Tidy-up test model folder structure            |         |       | 6:01 |
+| COMPLETED Review where we are with the last refactoring  |         |       | 0:21 |
+| COMPLETED Check that dogen builds on C++-14              |         |       | 0:10 |
+| COMPLETED Add a build number to dogen                    |         |       | 0:07 |
+| COMPLETED Analyse formatters architecture                |         |       | 0:39 |
+| COMPLETED Redefine terminology around facets in manual   |         |       | 4:17 |
+| COMPLETED Make model =qname= look like a regular =qname= |         |       | 0:28 |
+| COMPLETED Ensure we convey model information as a module |         |       | 7:30 |
+| IMPLEMENTATION Remove unnecessary properties from model  |         |       | 0:17 |
+| IMPLEMENTATION Refactor meta-data processing in SML      |         |       | 1:00 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -61,7 +61,10 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** IMPLEMENTATION Publish the extreme incrementalism blog post       :story:
+*** COMPLETED Publish the extreme incrementalism blog post            :story:
+    CLOSED: [2014-09-07 Sun 22:04]
+    CLOCK: [2014-09-07 Sun 19:55]--[2014-09-07 Sun 22:04] =>  2:09
+    CLOCK: [2014-09-07 Sun 18:43]--[2014-09-07 Sun 19:54] =>  1:11
     CLOCK: [2014-09-07 Sun 12:22]--[2014-09-07 Sun 13:17] =>  0:55
     CLOCK: [2014-09-07 Sun 11:52]--[2014-09-07 Sun 12:19] =>  0:27
     CLOCK: [2014-09-07 Sun 09:15]--[2014-09-07 Sun 09:35] =>  0:20

@@ -1,0 +1,52 @@
+#+title: Nerd Food: Dogen: Make It Work Then Make It Better
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Many moons ago there was a [[http://www.tldp.org/HOWTO/html_single/NET3-4-HOWTO/#ss4.1][discussion]] in kernel-land about the order
+of things: when faced with a problematic code base, should one first
+"make it better" or "make it work"? For me, Alan Cox won the day on
+that debate - you should always make it work first. The gist of the
+argument was that when you inherit a broken code base, you should try
+to get in the head of the previous developers and take their ideas to
+a logical consequence - the point at which the code is actually doing
+/something/ useful; and after that you can start refactoring, very
+carefully, until the code is in a good shape (as defined from the
+perspective of the maintainer).
+
+This debate made a big impression on me, because the core ideas apply
+to a lot more than just inherited code bases; these are fundamental
+principles of development. Of course, Agile then came around and
+formalised a lot of the thinking around it. Nevertheless - as with
+everything in coding - the ideas may be easy to understand but
+extremely difficult to put in practice. One only gets it right after
+getting it wrong many a time.
+
+In truth, it is very easy to have big ideas when it comes to coding,
+but for every N big ideas - where N is very large - only a tiny
+fraction ever actually makes it into a successful project. One reason
+is that people often start aiming their code directly at the big idea,
+adding frameworks, services, layers of abstraction and so on well
+before the system does anything at all. You would have thought that in
+an Agile world this wouldn't happen, but it still often does. I guess
+Agile reduced the scope and frequency of these catastrophes because it
+gives much more visibility to what developers are up to. Having said
+that, I've been involved in a number of Agile projects where the
+"frameworkisation" was still alive and well, and given enough
+resources, there is always something user-facing to demo.
+
+After many years of experiencing this first hand - many times of my
+own making - I came to believe on austere coding. Every project should
+start with a =main= with some console output: "hello world" would
+do. Does that compile and run?  Great, check it in. Then organically
+add the simplest possible bit of code that does something related to
+what you want to do. Eventually it will build up to a point where it
+has some tiny bit of functionality related to your big idea; at that
+point at a "system" or "end-to-end" test. For instance, create a text
+file that contains the string "hello world" and make sure that the
+output is equal. Don't worry too much about internal unit tests -
+that's for when the structure of the program has been proven. Don't
+take me wrong - unit tests are not optional - but "premature testing"
+is at least evil as "premature optimisation" if not more. Just like
+with frameworkisation, "unittestisation" is very common and people
+write endless unit tests that prove that some internal class or other
+works, without any regard for what that class contributes in terms of
+end to end functionality.

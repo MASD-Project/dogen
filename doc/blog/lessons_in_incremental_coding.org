@@ -3,52 +3,161 @@
 
 A lot of interesting lessons have been learned during the development
 of [[https://github.com/DomainDrivenConsulting/dogen][Dogen]] and I'm rather afraid many more are still in store. As it is
-typical with the agile process, I'm constantly reviewing what went
-right and what went wrong. I thought I'd put pen to paper with some of
-these, in the vain hope of them being of general interest.
+typical with agile, I'm constantly reviewing processes in search of
+improvements. One such idea was that putting pen to paper could help
+improving the retrospective process itself. The result is this rather
+long blog post, which hopefully is of use to developers in similar
+circumstances. Unlike the typical bullet-point based retrospective,
+this post it is a rambling narrative as it aims to provide context to
+the reader. Subsequent retrospectives will be a lot smaller and more
+to the point.
 
-Dogen is an attempt to create a domain model generator. The [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#fundamental-building-blocks][manual]]
-goes into a bit more detail on what it is that we are trying to
-achieve, but for the purposes of this exercise it suffices to think of
-it as a C++ code generator. The remainder of this post look at what
-what has worked and what has not worked so well over the last few
-years.
+Talking about context: I haven't spoken very much about Dogen in this
+blog, so a small introduction is in order. Dogen is an attempt to
+create a domain model generator. The [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#fundamental-building-blocks][manual]] goes into quite a bit more
+detail, but for the purposes of this exercise, it suffices to think of
+it as a C++ code generator. Dogen has been developed continuously
+since 2012 - with a few dry spells - and reached its [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_50.org][fiftieth sprint]]
+recently. Having said that, our road to a finished product is still a
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/definition_of_done.org][long one]].
 
-* Constrained by Time
+The remainder of this article looks at what what has worked and what
+has not worked so well thus far into Dogen's development history.
 
-Dogen has been developed since 2012, with a few dry periods, and we
-have reached the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_50.org][50th sprint]] recently. The tool was conceived when we
-were trying to do our first start up. Once that ended - around the
-back end of 2012 - I kept working on it in my spare time and it has
-continued that way ever since. It just keeps chugging along, slowly
-but steadily, with no pressures other than to enjoy the sights.
+* Understanding Time
 
-When I decided to continue coding, I had two conflicting requirements:
-very little development resources and very ambitious ideas that
-required lots of work. The development resource was, well, just
-me. With family commitments and a full time job, I soon found out that
-there weren't a lot of spare cycles left.
+Dogen was conceived when we were trying to do our [[http://kitanda.co.uk/html/index.html][first start up]]. Once
+that ended - around the back end of 2012 - I kept working on the tool
+in my spare time, and this was a setup that has continued ever
+since. There are no other contributors; development just keeps
+chugging along, slowly but steadily, with no pressures other than to
+enjoy the sights.
 
-In fact, after some analysis, I realised I was in a conundrum. Whilst
-there is was a lot of "dead-time" in the average week, it was mostly
-"low-quality grade time": lots of discontinued segments of varying and
-unpredictable lengths. Summed together in a naive way it seemed like a
-lot, but - as every programmer knows - six blocks of ten minutes do
-not one solid hour make.
+Working on my own and in my spare time meant that I had two
+conflicting requirements: very little development resources and very
+ambitious ideas that required lots of work. With family commitments
+and a full time job, I quickly found out that there weren't a lot of
+spare cycles left. In fact, after some analysis, I realised I was in a
+conundrum. Whilst there is was a lot of "dead-time" in the average
+week, it was mostly "low-quality grade time": lots of discontinued
+segments of varying and unpredictable lengths. Summed together in a
+naive way it seemed like a lot, but - as every programmer knows - six
+blocks of ten minutes do not one solid hour make.
 
 Nevertheless, one has to play the game with the cards that were dealt.
-Soon I realised that the correct question to ask was: "what kind of
-development environment would be required such that one can be
-productive given these conditions?"
+I soon realised that the correct question to ask was: "what kind of
+development style makes one productive under these conditions?". The
+answer turned out to be opportunistic coding. This is rooted in having
+a better understanding of the different "qualities" of time and how
+best to exploit them. For example, when you have say five to fifteen
+minutes available, it makes sense to do small updates to the manual or
+fix trivial problems - a typo in the documentation, renaming variables
+in a function, mopping up the backlog and other activities of that
+ilk. A solid block of forty minutes to an hour affords you more: for
+instance, implementing part or the whole of stories for which the
+analysis has been completed, or doing some analysis for existing
+stories. On those rare cases where half-a-day or longer is available,
+one must make the most of it and take on a complex piece of work that
+requires sustained concentration. This sessions proved to be most
+valuable when the output is a set of well defined stories that are
+ready for implementation.
 
-Like MIME, the answer turned out to be multi-part.
+One needs very good processes in order to be able to manage the usage
+of time in this fashion. Luckily, agile provides it.
+
+* Slow Motion Agile
+
+Looking back on ~2.4k commits, one of the major wins in terms of
+development process was to think incrementally. Of course, agile
+already gives you a mental framework for that, and we had a
+functioning scrum process during our start up days: daily stand-ups,
+bi-weekly sprints, pre-sprint planning, post-sprint reviews, demos and
+all of that good stuff. It worked really well, and keep us honest and
+clean. We used a very simple org-mode file to keep track of all the
+open stories, and at one point we even built a simple burn-down chart
+generator to allow us to measure velocity.
+
+Granted, when you are working alone in your spare time, a chunk of
+agile may not make sense; for instance, providing status updates to
+yourself may not be the most productive use of scarce
+time. Surprisingly, I found quite a bit of process to be vital. I've
+kept the bi-weekly sprint cycle, the sprint logs, the product backlog
+and the time-tracking we had originally setup and found them
+*extremely* useful - quite possibly the thing that has kept me going
+for such an extended period of time, to be brutally honest. When you
+are working on an open source project it is very easy to get lost in
+its open-ended-ness and find yourself giving up, particularly if you
+are not getting (or expecting) any user feedback. Even Linus himself
+has said many times he would have given up the kernel if it wasn't for
+other people bringing him problems to keep him interested.
+
+Lacking Linus' ability to attract crowds of interested developers, I
+went for the next best thing: I made them up. Well, at least in
+metaphorical way, I guess, as this is what user stories are when you
+have no external users to drive them. As I am using the product in
+anger, I find it very easy to put myself in the head of a user and
+come up with requirements that push development forward. These stories
+really help, because they transform the cloud of possibilities into
+concrete, simple, measurable deliverables that one can choose to
+deliver or not. Once you have a set of stories, you have no excuse to
+be lazy because you can visualise in your head just how much effort it
+would require you to implement a story - and hey, since nerds are
+terrible at estimating, it's never that much effort at all. As
+everyone knows, it's not quite that easy in the end; but once you've
+started, you get the feeling you have to at least finish the task at
+hand, and so on, one story at a time, one sprint at a time, until a
+body of work starts building up. It's slow, excruciatingly slow, but
+it's steady like water working in geological time; when you look back
+5 sprints, you cannot help but be amazed on how much can be achieved
+in such a incremental way - and how much is still left.
+
+And then you get hooked into measurements. I now love measuring
+everything, from how long it takes me to complete a story, to where
+time goes in an sprint, to how many commits I do a day, to, well,
+everything that can easily be measured without adding any
+overhead. There is no incentive for you to game the system - hell, you
+could create a script that commits 20 times a day, if the commit count
+is all you care about. But it's not, so why bother. Due to this,
+statistics start to actually tell you valuable information about the
+world and to impel you forward. For instance, GitHub streaks mean that
+I always try to at least make one commit per day. Because of this,
+even on days when I'm tired, I always force my self to do /something/
+and sometimes that quick commit morphs into an hour or two of work
+that wouldn't have happened otherwise.
+
+As I mentioned before, it was revealing to find out that there are
+different types of time. In order to to take advantage of this
+heterogeneity, one must make scrupulous use of the product
+backlog. This has proven invaluable, as you can attest by its [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org][current]]
+size. Whether we are part way through a story or just idly
+daydreaming, each and every idea must be added to the product backlog,
+with sufficient detail to allow one to reconstruct one's train of
+thought at that point in time. Once in the backlog, items can be
+continuously refined until eventually we find a suitable sprint to
+tackle them or they get deprecated altogether. But without an healthy
+backlog it is not possible to make the most these illusive time
+slots. Conversely, it is important to try to make each story as small
+and as focused as possible, and to minimise spikes unless they really
+are on the critical path of the story. This is mainly for
+psychological reasons: one needs to mark stories as complete, to feel
+like work has been done. Never-ending stories are just bad for morale.
+
+In general, this extreme incrementalism has served us well. Not all is
+positive though. The worst problem has been a great difficulty in
+tackling complex problems - those that require several hours just to
+load them into your head. These are unavoidable in any sufficiently
+large code base. Having lots of discontinued segments of unpredictable
+duration have reduced efficiency considerably. In particular, I notice
+I have spent a lot more time lost in conceptual circles, and I've
+taken a lot longer to explore alternatives when compared to working
+full time.
 
 * DVCS to the Core
 
 We had already started to use git during the start-up days, and it had
 proved to be a major win at the time. After all, one never quite knows
 where one will be coding from, and whether internet access is
-available or not, so its important to have a self-contained
+available or not, so it's important to have a self-contained
 environment. In the end we found out it brought many, many more
 advantages such as great collaborative flows, good managed web
 interfaces/hosting providers ([[http://www.github.com][GitHub]] and, to some extent, [[http://www.bitbucket.com][BitBucket]]),
@@ -74,29 +183,32 @@ posts, the whole lot. It did seem a bit silly not to use GitHub's Wiki
 and Issues at the time, but, on hindsight, having everything in one
 versioned controlled place proved to be a major win:
 
-- searching is never further than a couple of greps away, and its not
+- searching is never further than a couple of greps away, and it's not
   sensitive to connectivity;
+- all you need is a tiny sliver of connectivity to push or pull, and
+  work can be batched to wait for that moment;
 - updates by other people come in as commits and can be easily
-  reviewed as part of the normal push/pull process;
+  reviewed as part of the normal push/pull process - not that we got
+  any of late, to be fair;
 - changes can easily be diffed;
 - history can be checked using the familiar version control interface,
   which is available wherever you go.
 
-When you have little time, these little advantages are life-savers.
+When you have little time, these advantages are life-savers.
 
 The last but very important lesson learned was to commit early and
-commit often. Its rather obvious in hindsight, really. After all, if
+commit often. It's rather obvious in hindsight, really. After all, if
 you have very small blocks of time to do work, you want to make sure
 you don't break anything; last thing you need is to spend a week
 debugging a tricky problem, with no idea of where you're going or how
-far you still have to travel. So its important to make your commits
+far you still have to travel. So it's important to make your commits
 /very small/ and /very focused/ such that a bisection would almost
 immediately reveal a problem - or at least provide you with an obvious
-rollback strategy. This has proved itself to be invaluable, far too
+rollback strategy. This has proved itself to be invaluable far too
 many times to count. The gist of this approach it is to split changes
 in an almost OCD sort of way, to the point that anyone can look at the
 commit comment and the commit diff and make a judgement as to whether
-the change was correct or not. To be fair, its not quite always that
+the change was correct or not. To be fair, it's not quite always that
 straightforward, but that has been the overall aim.
 
 * Struggling to stay Continuously Integrated
@@ -115,180 +227,88 @@ road, and once setup, they were /normally/ fairly trivial to
 maintain. We did have a couple of minor issues with [[http://www.cdash.org/][CDash]] whilst we
 were running our own server. Eventually we moved over to the [[http://my.cdash.org/index.php?project%3DDogen][hosted
 CDash server]] but it has limitations on the number of builds, which
-meant we had to switch some build agents off. In addition to this, the
+meant I had to switch some build agents off. In addition to this, the
 main other stumbling block is finding the time to do large
 infrastructural updates to the build agents such as setting up new
-versions of boost, new compilers and so on. These are horrendously
-time consuming across platforms because you never know what kinds of
-issues you are doing to hit and each platform has their own way of
-doing things.
+versions of [[http://www.boost.org/users/history/version_1_56_0.html][Boost]], new compilers and so on. These are horrendously
+time consuming across platforms because you never know what issues you
+are going to hit, and each platform has their own way of doing things.
 
 The biggest lesson we learned here is that CI is vital but software
 product with no time at all should not waste time managing their own
-CI. There are just not enough hours in the day. We are looking into
-[[https://travis-ci.org/][travis]] to make this process easier in the future. Also, whilst being
-cross-platform is a very worthy objective, one has to weigh the costs
-with the benefits. If you have a tiny user base, it may make sense to
-stick to one platform and continue to do portable coding without
-"proof"; once users start asking for multiple platforms, its then worth
-considering doing the work required to support them.
+CI. There are just not enough hours in the day. I have been looking
+into [[https://travis-ci.org/][travis]] to make this process easier in the future. Also, whilst
+being cross-platform is a very worthy objective, one has to weigh the
+costs with the benefits. If you have a tiny user base, it may make
+sense to stick to one platform and continue to do portable coding
+without "proof"; once users start asking for multiple platforms, it is
+then worth considering doing the work required to support them.
 
 The packaging story was also a very good one to start off with - after
 all, most users will probably rely on those - but it turned out to be
 *much* harder than first thought. We spent quite a bit of time
 integrating with the GitHub API, uploading packages into their
 downloads section, downloading them from there, testing, and then
-renaming them for user consumption. And, while it lasted, it was very
-useful. Unfortunately it didn't last very long. GitHub decommissioned
-their downloads section. Since most of the upload and download code
-was GitHub specific, we could not readily move over to a different
-location. The lesson here was that this sort of functionality is
-extremely useful, and its worth dedicating time to it, but one should
-always have a plan B - and even a plan C.
-
-The end result is that, at the moment, we don't have any downloads
+renaming them for user consumption. Whilst it lasted, this setup was
+very useful. Unfortunately it didn't last very long as GitHub decided
+to decommission their downloads section. Since most of the upload and
+download code was GitHub specific, we could not readily move over to a
+different location. The lesson here was that this sort of
+functionality is extremely useful, and it is worth dedicating time to
+it, but one should always have a plan B and even a plan C. To make a
+long story short, the end result is that we don't have any downloads
 available at all - not even a stale ones - nor do we have any sanity
-checks on packages we produce; they basically go to =/dev/null=. The
-remaining aspects of CI are still in place, and we rely on it daily.
+checks on packages we produce; they basically go to =/dev/null=.
 
 In summary, all of our pains led us to conclude that one should
 externalise early, externalise often and externalise everything. If
 there is a free (or cheap) provider in the cloud that can take on some
 or all of your infrastructure work away, you should always consider
-using first rather than set up your own infrastructure. Of course, its
-worth ensuring the provider is reliable, has been around for a bit and
-is used by a critical mass; after all, there is nothing worse than
-spending all the effort in migrating only to find out that the
-provider is about to dramatically change its APIs, prices, terms and
-conditions - or even worse, about to be shutdown altogether.
+using them first rather than host your own infrastructure. And
+remember: your time is worth some money, and it is better spent
+coding. Of course, it is important to ensure that the provider is
+reliable, has been around for a while and is used by a critical
+mass. There is nothing worse than spending a lot of effort migrating
+to a platform, only to find out that it is about to dramatically
+change its APIs, prices, terms and conditions - or even worse, to be
+shutdown altogether.
 
 * Loosely Coupled
 
-Another very useful lesson learned was to keep the /off-distro/
-dependencies as low as possible. We started off by requiring a C++
-compiler with good C++ 11 support, and a Boost library with a few
-off-tree libraries - mainly Boost.Log, really. This meant we had to
-have our own little "chroot" with all of these (when we started there
-was no docker to speak of), and we had to build all of these by hand,
-sprinkled with plenty of helper scripts. It was workable when we had
-time, but this is really not the sort of thing you want to spend time
-maintaining if you are working on a project on your spare time.
+Another very useful lesson I learned was to keep the /off-distro/
+dependencies to a minimum. This is rather related to the previous
+points on CI and cross-platform-ness, really. During the start up days
+we started off by requiring a C++ compiler with good C++ 11 support,
+and a Boost library with a few off-tree libraries - mainly
+[[http://www.boost.org/doc/libs/1_56_0/libs/log/doc/html/index.html][Boost.Log]]. This meant we had to have our own little "chroot" with all
+of these, and we had to build them by hand, sprinkled with plenty of
+helper scripts. In those dark days, almost nothing was supplied by the
+distro and life was painful. It was just about workable when we had
+time on our hands, but this is really not the sort of thing you want
+to spend time maintaining if you are working on a project in your
+spare time.
 
-To be fair, we always intended to move to distro-supplied packages
-when they caught up, and as it happens that is soon to happen: both
-default GCC and Clang are more than good enough in Debian unstable,
-and Boost 1.55 hs hit it too. This means we can start thinking of
-creating Debian packages for inclusion in Debian - rather than the
-stand-alone packages we've been doing up to now.
+To be fair, I had always intended to move to distro-supplied packages
+as soon as they caught up, and when that happened the transition was
+smooth enough. As things stand, we have a very small off-distro
+footprint - mainly [[http://www.codesynthesis.com/products/odb/][ODB]] and [[http://epa.codeplex.com/][EOS]]. The additional advantage of not having
+off-distro dependencies is that you can start to consider yourself for
+inclusion on a distro. Even in these days of Docker, being shipped by
+a distro is still a good milestone for any open source project, so it's
+important to aim for it. Once more, it's the old psychological factors.
 
-Going back, it seems to me we took the right decisions as both C++ 11
+All and all, it seems to me we took the right decisions as both C++ 11
 and Boost.Log have proven quite useful; but in the future I certainly
-will think twice when adding dependencies to off-distro libraries.
-
-* Slow Motion Agile
-
-Looking back on over 2.4k commits, one of the major wins in terms of
-development process was to think incrementally. Of course, agile
-already gives you a mental framework for that, and we had a perfectly
-functioning scrum process during our start up days: daily stand-ups,
-bi-weekly iterations, pre-iteration planning, post-iteration reviews
-and all of that good stuff. It worked really well, and keep us honest
-and clean. We used a very simple org-mode file to keep track of all
-the open stories, and at one point we even built a simple burn-down
-chart generator to allow us to measure velocity - all in the name of
-keeping everything in git.
-
-Granted, when you are working by yourself and on your spare time, a
-large chunk of agile makes no sense at all; after all, providing
-status updates to yourself may not be the most productive use of
-scarce time. But, surprisingly, quite a bit of it is vital. I've kept
-the bi-weekly iteration cycle, the iteration logs, the backlog and the
-time-tracking we had originally setup and found them *extremely*
-useful - quite possibly the thing that has kept me going for such an
-extended period of time, to be honest. After all, when you are working
-on an open source project its very easy to get lost in its
-open-ended-ness and end up giving up altogether, in particular if you
-are not getting (or expecting) any user feedback. Even Linus himself
-has said many times he would have given up the kernel if it wasn't for
-other people bringing him problems to keep him interested. Also in
-some ways, the process has converged to a more [[http://blogs.versionone.com/agile_management/2012/01/06/1-kanban-vs-scrum-myths-hype/][Kanban-like]] approach -
-albeit in an extremely informal fashion.
-
-Lacking Linus' ability to attract crowds of interested developers, I
-went for the next best thing: I made them up. Well, at least in
-metaphorical way, I guess, as this is what user stories are when you
-have to external users to drive them. As I am using the product in
-anger, I find it very easy to put myself in the head of a user and
-come up with requirements that drive development forward. These
-stories really help, because they transform the cloud of possibilities
-into concrete, simple, measurable deliverables that one can choose to
-deliver or not. Once you have a set of stories, you have no excuse to
-be lazy because you can visualise in your had just how much effort it
-would require you to implement a story - and hey, since nerds are
-terrible at estimating, its never that much effort at all. Of course,
-it's never quite that easy in the end; but once you've started, you
-get the feeling you have to at least finish the task at hand, and so
-on, one story at a time, one iteration at a time, until a body of work
-starts building up. Its slow, excruciatingly slow, but it's
-steady. Its like water working in geological time; when you look back
-5 iterations, you cannot help but be amazed on how much can be
-achieved in such a incremental way. And how much is still left.
-
-And then you get hooked into measurements. I now love measuring
-everything, from how long it takes me to complete a story, to where
-time goes in an iteration, to how many commits a day, to, well,
-everything that can easily be measured without adding any overhead.
-
-* Make It Work Then Make It Better
-
-Many moons ago there was a discussion in kernel-land about the order
-of things: when faced with a problematic code base, should one first
-"make it better" or "make it work"? For me, Alan Cox won the day on
-that debate - you should always make it work first. The gist of the
-argument was that when you inherit a broken code base, you should try
-to get in the head of the previous developers and take their ideas to
-a logical consequence - the point at which the code is actually doing
-/something/ useful; and after that you can start refactoring, very
-carefully, until the code is in a good shape (as defined from the
-perspective of the maintainer).
-
-This debate made a big impression on me, because the core ideas apply
-to a lot more than just inherited code bases; these are fundamental
-principles of development. Of course, Agile then came around and
-formalised a lot of the thinking around it. Nevertheless - as with
-everything in coding - the ideas may be easy to understand but
-extremely difficult to put in practice. One only gets it right after
-getting it wrong many a time.
-
-In truth, it is very easy to have big ideas when it comes to coding,
-but for every N big ideas - where N is very large - only a tiny
-fraction ever actually makes it into a successful project. One reason
-is that people often start aiming their code directly at the big idea,
-adding frameworks, services, layers of abstraction and so on well
-before the system does anything at all. You would have thought that in
-an Agile world this wouldn't happen, but it still often does. I guess
-Agile reduced the scope and frequency of these catastrophes because it
-gives much more visibility to what developers are up to. Having said
-that, I've been involved in a number of Agile projects where the
-"frameworkisation" was still alive and well, and given enough
-resources, there is always something user-facing to demo.
-
-After many years of experiencing this first hand - many times of my
-own making - I came to believe on austere coding. Every project should
-start with a =main= with some console output: "hello world" would
-do. Does that compile and run?  Great, check it in. Then organically
-add the simplest possible bit of code that does something related to
-what you want to do. Eventually it will build up to a point where it
-has some tiny bit of functionality related to your big idea; at that
-point at a "system" or "end-to-end" test. For instance, create a text
-file that contains the string "hello world" and make sure that the
-output is equal. Don't worry too much about internal unit tests -
-that's for when the structure of the program has been proven. Don't
-take me wrong - unit tests are not optional - but "premature testing"
-is at least evil as "premature optimisation" if not more. Just like
-with frameworkisation, "unittestisation" is very common and people
-write endless unit tests that prove that some internal class or other
-works, without any regard for what that class contributes in terms of
-end to end functionality.
+will think very carefully about adding dependencies to off-distro
+libraries.
 
 * Conclusions
+
+In general, the first fifty iterations of Dogen have been very
+positive. It has been a rather interesting journey, and dealing with
+pure uncertainty is not always easy - after all, one always wants to
+reach a destination. At the same time, much has been learned in the
+process, and a setup has been created that is sustainable given the
+available resources. In the near future I intend to improve the
+visibility of the project as I believe that, for all it's faults, it
+is still useful in its current form.
