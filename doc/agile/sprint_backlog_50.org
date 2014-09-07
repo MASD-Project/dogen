@@ -8,18 +8,20 @@
 This file contains all stories that were closed during sprint 50.
 
 The *Mission Statement* for this sprint is to get dogen development up
-and running again, after a long break.
+and running again, after a long break. In terms of objectives we want
+to get a clear picture once and for all around meta-data and
+formatters.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-06 Sat 20:25]
+Clock summary at [2014-09-07 Sun 01:05]
 
 | Headline                                                 | Time    |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| *Total time*                                             | *27:34* |       |      |
+| *Total time*                                             | *29:07* |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                          |         | 27:34 |      |
+| Development Stories Implemented                          |         | 29:07 |      |
 | IMPLEMENTATION Sprint and product backlog grooming       |         |       | 2:21 |
 | IMPLEMENTATION Updates to the manual and readme files    |         |       | 2:07 |
 | CANCELLED Merge entity with file info                    |         |       | 2:52 |
@@ -32,7 +34,8 @@ Clock summary at [2014-09-06 Sat 20:25]
 | COMPLETED Analyse formatters architecture                |         |       | 0:39 |
 | COMPLETED Redefine terminology around facets in manual   |         |       | 4:17 |
 | COMPLETED Make model =qname= look like a regular =qname= |         |       | 0:28 |
-| IMPLEMENTATION Make model a simple repository            |         |       | 6:14 |
+| COMPLETED Ensure we convey model information as a module |         |       | 7:30 |
+| IMPLEMENTATION Remove unnecessary properties from model  |         |       | 0:17 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -62,9 +65,12 @@ Use downtime to update the manual and / or readme file.
     CLOCK: [2014-08-26 Tue 08:02]--[2014-08-26 Tue 08:34] =>  0:32
     CLOCK: [2014-08-25 Mon 13:32]--[2014-08-25 Mon 14:10] =>  0:38
 
+*Rationale*: This story doesn't make sense any more in light of the
+the latest architecture.
+
 As part of the formatters refactoring, we need a single top-level
 entity against which we can create formatter interfaces. In order to
-achieve that we need to remove the file info composition.
+achieve that, we need to remove the file info composition.
 
 We have reached the usual limitations:
 
@@ -155,6 +161,9 @@ model would simply just consume it.
     CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
     CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
 
+*Rationale*: This story doesn't make sense any more in light of the
+the latest architecture.
+
 Make the main types header formatters look like the =om= types
 formatter. This model was deleted around commit 10157ad.
 
@@ -167,6 +176,8 @@ two things:
 **** CANCELLED Tidy-up =types_main_header_file_formatter=              :task:
      CLOSED: [2014-09-01 Mon 22:58]
      CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
+
+Make use of the new settings available in the =config= model.
 
 *** COMPLETED Update instructions in manual for Postgres              :story:
     CLOSED: [2014-08-22 Fri 12:39]
@@ -408,13 +419,13 @@ it would result in duplication of the name at the formatting level.
 We need to change the formatters to cope with a model qualified name
 that has both a model name and a simple name, with equal values.
 
-*** IMPLEMENTATION Make model a simple repository                     :story:
+*** COMPLETED Ensure we convey model information as a module          :story:
+    CLOSED: [2014-09-07 Sun 01:04]
 
-We should really perform all of the code generation for the model from
-it's module. The model itself should be a dumb container of types. To
-do so remove all the concepts from the model (=Element= etc) and deal
-with the fall out. This is required in order to simplify the graph in
-tagger.
+At present we have a number of hacks to deal with the fact that the
+model is also a module. We should try to generate a module to
+represent the model and perform all of the code generation for the
+model from its module.
 
 **** COMPLETED Ensure regular module members are populated             :task:
      CLOSED: [2014-09-05 Fri 23:53]
@@ -422,6 +433,15 @@ tagger.
 
 We added a way of tracking what a module contains but we never did
 populate it. Without this the graph will not work.
+
+**** COMPLETED Add tests to ensure module members are being populated correctly :task:
+     CLOSED: [2014-09-07 Sun 01:04]
+     CLOCK: [2014-09-06 Sun 23:55]--[2014-09-07 Sun 01:04] =>  1:09
+     CLOCK: [2014-09-06 Sat 22:56]--[2014-09-06 Sat 23:20] =>  0:24
+
+We started populating the module members but forgot to ensure they
+were populated correctly. We need simple tests to ensure all objects
+are where we expect as we will rely on this for the graph.
 
 **** COMPLETED Check to see if we are generating a module for the model :task:
      CLOSED: [2014-09-05 Fri 23:55]
@@ -449,17 +469,15 @@ regular qname. The problem we have at the moment is that we do not
 have the model name in the module path (it is blank) resulting in
 special handling.
 
-**** Add tests to ensure module members are being populated correctly :task:
-
-We started populating the module members but forgot to ensure they
-were populated correctly. We need simple tests to ensure all objects
-are where we expect as we will rely on this for the graph.
-
-**** IMPLEMENTATION Remove properties from model and deal with fallout :task:
+*** IMPLEMENTATION Remove unnecessary properties from model           :story:
      CLOCK: [2014-09-06 Sat 00:29]--[2014-09-06 Sat 00:35] =>  0:06
      CLOCK: [2014-09-06 Sat 00:18]--[2014-09-06 Sat 00:29] =>  0:11
 
-Try taking away the =Element= concept etc and see what breaks.
+The model should be just dumb container of types. We have a few legacy
+properties left behind from the days where the model was also used in
+the transformation process. Remove all the concepts from the model
+(=Element= etc) and deal with the fall out. This is required in order
+to simplify the graph in tagger.
 
 *** Create an interface for meta-data tagging                         :story:
 
