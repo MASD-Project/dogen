@@ -1,4 +1,4 @@
-#+title: Nerd Food: Extreme Incrementalism: A Coding Religion
+#+title: Nerd Food: Dogen: Lessons in Incremental Coding
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
 A lot of interesting lessons have been learned during the development
@@ -90,22 +90,30 @@ dynamic analysis, code coverage, packaging and basic sanity tests on
 those packages.
 
 All of these have proven to be major steps in keeping the show on the
-road, and once setup, very trivial to maintain. We've had a couple of
-minor issues with CDash - and certainly our setup could do with some
-improvements - but on the main, it just chugs along.
+road, and once setup, fairly trivial to maintain. We've had a couple
+of minor issues with [[http://www.cdash.org/][CDash]] - and certainly our setup could do with
+some improvements - but on the main, it just chugs along. However, we
+did hit a stumbling block: finding the time to do large
+infrastructural updates such as new versions of boost, new compilers
+and so on. These are horrendously time consuming across platforms
+because you never know what kinds of issues you are doing to hit. So
+in summary the biggest lesson we learned here is CI is vital, but
+software product with no time at all should not waste time managing
+their own CI. We are looking into [[https://travis-ci.org/][travis]] to make this process easier
+in the future.
 
-The packaging story was also a very good one - after all, most users
-will probably rely on those - but it turned out to be much harder than
-first thought. We spent quite a bit of time integrating with the
-GitHub API, uploading packages into their downloads section,
-downloading them from there, testing, and then renaming them for user
-consumption. And, while it lasted, it was very useful. Unfortunately
-it didn't last very long. GitHub decommissioned their downloads
-section. Since most of the upload and download code was GitHub
-specific, we could not readily move over to a different location. The
-lesson here was that this sort of functionality is extremely useful,
-and its worth dedicating time to it, but one should always have a plan
-B - and even a plan C.
+The packaging story was also a very good one to start off with - after
+all, most users will probably rely on those - but it turned out to be
+much harder than first thought. We spent quite a bit of time
+integrating with the GitHub API, uploading packages into their
+downloads section, downloading them from there, testing, and then
+renaming them for user consumption. And, while it lasted, it was very
+useful. Unfortunately it didn't last very long. GitHub decommissioned
+their downloads section. Since most of the upload and download code
+was GitHub specific, we could not readily move over to a different
+location. The lesson here was that this sort of functionality is
+extremely useful, and its worth dedicating time to it, but one should
+always have a plan B - and even a plan C.
 
 The end result is that, at the moment, we don't have any downloads
 available at all - not even a stale ones - nor do we have any sanity
@@ -237,8 +245,3 @@ write endless unit tests that prove that some internal class or other
 works, without any regard for what that class contributes in terms of
 end to end functionality.
 
-
-I even gave it a name: /Extreme Incrementalism/ or EI for
-short. As you can see, the name fits well with the spirit of
-"overreaching naming conventions", typically used for development
-methodologies. Opportunistic coding.
