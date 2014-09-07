@@ -1,6 +1,6 @@
 #+title: Sprint Backlog 50
 #+options: date:nil toc:nil author:nil num:nil
-#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED POSTPONED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
 * Stories
@@ -15,15 +15,15 @@ formatters.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-07 Sun 22:05]
+Clock summary at [2014-09-07 Sun 22:08]
 
 | Headline                                                 | Time    |       |      |
 |----------------------------------------------------------+---------+-------+------|
 | *Total time*                                             | *35:13* |       |      |
 |----------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                          |         | 35:13 |      |
-| IMPLEMENTATION Sprint and product backlog grooming       |         |       | 2:25 |
-| IMPLEMENTATION Updates to the manual and readme files    |         |       | 2:07 |
+| COMPLETED Sprint and product backlog grooming            |         |       | 2:25 |
+| COMPLETED Updates to the manual and readme files         |         |       | 2:07 |
 | COMPLETED Publish the extreme incrementalism blog post   |         |       | 5:02 |
 | CANCELLED Merge entity with file info                    |         |       | 2:52 |
 | CANCELLED Refactor types header formatter                |         |       | 1:07 |
@@ -36,11 +36,12 @@ Clock summary at [2014-09-07 Sun 22:05]
 | COMPLETED Redefine terminology around facets in manual   |         |       | 4:17 |
 | COMPLETED Make model =qname= look like a regular =qname= |         |       | 0:28 |
 | COMPLETED Ensure we convey model information as a module |         |       | 7:30 |
-| IMPLEMENTATION Remove unnecessary properties from model  |         |       | 0:17 |
-| IMPLEMENTATION Refactor meta-data processing in SML      |         |       | 1:00 |
+| POSTPONED Remove unnecessary properties from model       |         |       | 0:17 |
+| POSTPONED Refactor meta-data processing in SML           |         |       | 1:00 |
 #+end:
 
-*** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
+    CLOSED: [2014-09-07 Sun 22:06]
     CLOCK: [2014-09-07 Sun 02:06]--[2014-09-07 Sun 02:10] =>  0:04
     CLOCK: [2014-09-05 Fri 18:16]--[2014-09-05 Fri 18:38] =>  0:22
     CLOCK: [2014-09-05 Fri 18:04]--[2014-09-05 Fri 18:16] =>  0:12
@@ -54,7 +55,8 @@ Clock summary at [2014-09-07 Sun 22:05]
 
 Updates to sprint and product backlog.
 
-*** IMPLEMENTATION Updates to the manual and readme files              :task:
+*** COMPLETED Updates to the manual and readme files                   :task:
+    CLOSED: [2014-09-07 Sun 22:06]
     CLOCK: [2014-08-31 Sun 09:58]--[2014-08-31 Sun 11:27] =>  1:29
     CLOCK: [2014-08-24 Sun 19:40]--[2014-08-24 Sun 19:47] =>  0:07
     CLOCK: [2014-08-24 Sun 19:00]--[2014-08-24 Sun 19:31] =>  0:31
@@ -484,7 +486,8 @@ regular qname. The problem we have at the moment is that we do not
 have the model name in the module path (it is blank) resulting in
 special handling.
 
-*** IMPLEMENTATION Remove unnecessary properties from model           :story:
+*** POSTPONED Remove unnecessary properties from model                :story:
+    CLOSED: [2014-09-07 Sun 22:07]
      CLOCK: [2014-09-06 Sat 00:29]--[2014-09-06 Sat 00:35] =>  0:06
      CLOCK: [2014-09-06 Sat 00:18]--[2014-09-06 Sat 00:29] =>  0:11
 
@@ -494,7 +497,8 @@ the transformation process. Remove all the concepts from the model
 (=Element= etc) and deal with the fall out. This is required in order
 to simplify the graph in tagger.
 
-*** IMPLEMENTATION Refactor meta-data processing in SML               :story:
+*** POSTPONED Refactor meta-data processing in SML                    :story:
+    CLOSED: [2014-09-07 Sun 22:07]
 
 We need to create a simple interface that takes a ptree and a model
 and updates the tags on the ptree. We also need a way to register
@@ -583,47 +587,6 @@ responsible for their own tags.
 This traversal was designed for tagger but yet it does not resolve
 =type= into one of the sub-classes, forcing tagger to implement
 visitation to resolve the types. We should improve the traversal.
-
-*** Implement a grapher in tagger                                     :story:
-
-- create a grapher in tagger that represents the dependencies between
-  instances of the interface
-- once the tagger has been instantiated we need to loop through the list
-  of expanders and build a graph.
-- on execute, iterate through the graph executing all instances of the
-  interface.
-- we should see if we can reuse some code of the dia grapher as we
-  need to build 3 graphers altogether.
-
-*** Implement the tagger interface in the CPP model                   :story:
-
-The CPP model needs to register a top-level tagger that expands all of
-the C++ specific tags. This has to be done before the formatter
-taggers kick in. We need to remove all of the =cpp= related code from
-tagger and add it to =cpp= model. For now we should get details from
-settings.
-
-We should declare all of the traits at the model level, at least those
-that are common to all formatters. Perhaps a traits class or some
-such. SML should also declare the proper global traits such as
-=enabled= and so on.
-
-We should consider if we should declare the formatters this way too,
-since they may depend on each other. This would be in the formatters
-model.
-
-*** Create an SML grapher                                             :story:
-
-We need a class responsible for building a graph of SML qnames, and
-associating these with a ptree.
-
-In order to do this we need to make sure we have a module for the
-model.
-
-*** Implement the tagger interface in formatters                      :story:
-
-We should start implementing the interface on a few formatters to
-prove that the approach actually works.
 
 ** Deprecated Development Stories
 *** CANCELLED Delete tag related infrastructure from =sml=            :story:

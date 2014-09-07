@@ -8,6 +8,109 @@
 
 Stories that we intend to look at, at some point.
 
+*** Remove unnecessary properties from model                          :story:
+
+The model should be just dumb container of types. We have a few legacy
+properties left behind from the days where the model was also used in
+the transformation process. Remove all the concepts from the model
+(=Element= etc) and deal with the fall out. This is required in order
+to simplify the graph in tagger.
+
+*** Refactor meta-data processing in SML                              :story:
+
+We need to create a simple interface that takes a ptree and a model
+and updates the tags on the ptree. We also need a way to register
+against the meta-data tagger.
+
+**** Rename tagger to processor                                        :task:
+
+As per analysis story, we need to rename =meta_data_tagger= to
+=meta_data_processor=. May be a good time to remove all the existing
+tagging code. We need to re-add it later on in the right places.
+
+**** Design and implement the interface                                :task:
+
+- add interface to model;
+- add some tests to make sure the interface is usable.
+
+*interface*
+
+: name: meta_data_populator_interface
+: identity: string
+: dependencies: list of string
+: populate(const model, const parent module, concept)
+: populate(const model, const parent module, module)
+: populate(const model, const parent module, type)
+
+**** Add static registration to processor                              :task:
+
+- create a static method to register instances of the interface and a
+  static container to hold them;
+- add a simple list of shared pointers to keep track of the registered
+  expanders.
+
+**** Move flat name builder to CPP model                               :task:
+
+It seems this class is used only for tagging so we should have one in
+each model. It may even make more sense in the c++ formatters model.
+
+**** Remove dependency of writer on tags                               :task:
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
+**** Delete tags class in SML                                          :task:
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
+**** All model items traversal should resolve types                    :task:
+
+This traversal was designed for tagger but yet it does not resolve
+=type= into one of the sub-classes, forcing tagger to implement
+visitation to resolve the types. We should improve the traversal.
+
+*** Implement a grapher in tagger                                     :story:
+
+- create a grapher in tagger that represents the dependencies between
+  instances of the interface
+- once the tagger has been instantiated we need to loop through the list
+  of expanders and build a graph.
+- on execute, iterate through the graph executing all instances of the
+  interface.
+- we should see if we can reuse some code of the dia grapher as we
+  need to build 3 graphers altogether.
+
+*** Implement the tagger interface in the CPP model                   :story:
+
+The CPP model needs to register a top-level tagger that expands all of
+the C++ specific tags. This has to be done before the formatter
+taggers kick in. We need to remove all of the =cpp= related code from
+tagger and add it to =cpp= model. For now we should get details from
+settings.
+
+We should declare all of the traits at the model level, at least those
+that are common to all formatters. Perhaps a traits class or some
+such. SML should also declare the proper global traits such as
+=enabled= and so on.
+
+We should consider if we should declare the formatters this way too,
+since they may depend on each other. This would be in the formatters
+model.
+
+*** Create an SML grapher                                             :story:
+
+We need a class responsible for building a graph of SML qnames, and
+associating these with a ptree.
+
+In order to do this we need to make sure we have a module for the
+model.
+
+*** Implement the tagger interface in formatters                      :story:
+
+We should start implementing the interface on a few formatters to
+prove that the approach actually works.
+
 *** Consider adding facet specific types                              :story:
 
 Types in dogen are somewhat "uni-dimensional"; that is, the main focus
