@@ -15,14 +15,14 @@ formatters.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-07 Sun 01:05]
+Clock summary at [2014-09-07 Sun 02:10]
 
 | Headline                                                 | Time    |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| *Total time*                                             | *29:07* |       |      |
+| *Total time*                                             | *30:11* |       |      |
 |----------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                          |         | 29:07 |      |
-| IMPLEMENTATION Sprint and product backlog grooming       |         |       | 2:21 |
+| Development Stories Implemented                          |         | 30:11 |      |
+| IMPLEMENTATION Sprint and product backlog grooming       |         |       | 2:25 |
 | IMPLEMENTATION Updates to the manual and readme files    |         |       | 2:07 |
 | CANCELLED Merge entity with file info                    |         |       | 2:52 |
 | CANCELLED Refactor types header formatter                |         |       | 1:07 |
@@ -36,9 +36,11 @@ Clock summary at [2014-09-07 Sun 01:05]
 | COMPLETED Make model =qname= look like a regular =qname= |         |       | 0:28 |
 | COMPLETED Ensure we convey model information as a module |         |       | 7:30 |
 | IMPLEMENTATION Remove unnecessary properties from model  |         |       | 0:17 |
+| IMPLEMENTATION Refactor meta-data processing in SML      |         |       | 1:00 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-07 Sun 02:06]--[2014-09-07 Sun 02:10] =>  0:04
     CLOCK: [2014-09-05 Fri 18:16]--[2014-09-05 Fri 18:38] =>  0:22
     CLOCK: [2014-09-05 Fri 18:04]--[2014-09-05 Fri 18:16] =>  0:12
     CLOCK: [2014-09-05 Fri 08:29]--[2014-09-05 Fri 08:43] =>  0:14
@@ -479,32 +481,95 @@ the transformation process. Remove all the concepts from the model
 (=Element= etc) and deal with the fall out. This is required in order
 to simplify the graph in tagger.
 
-*** Create an interface for meta-data tagging                         :story:
+*** IMPLEMENTATION Refactor meta-data processing in SML               :story:
 
 We need to create a simple interface that takes a ptree and a model
 and updates the tags on the ptree. We also need a way to register
 against the meta-data tagger.
 
-**** Design and implement the interface                                :task:
+**** COMPLETED Investigate names for the new interface and existing class :task:
+     CLOSED: [2014-09-07 Sun 01:45]
+     CLOCK: [2014-09-07 Sun 01:43]--[2014-09-07 Sun 01:45] =>  0:02
+     CLOCK: [2014-09-07 Sun 01:04]--[2014-09-07 Sun 01:42] =>  0:38
+
+The name =meta_data_tagger= is very suitable for the interface. Also,
+since the "tagger" won't be doing any tagging but coordinating those
+that do the actual work, we should rename it to something more
+sensible. The job of this chap is to take the current state of the
+meta-data and do whatever is required to it ensure it is
+complete. Internally it will collaborate with those that do the actual
+work.
+
+Options investigated:
+
+| Name                   | Comments                                                                   |
+|------------------------+----------------------------------------------------------------------------|
+| meta_data_manager      | a bit too generic                                                          |
+| meta_data_cataloguer   | term related to meta-data, but we won't be doing any cataloguing           |
+| meta_data_orchestrator | there is an element of orchestration but should we tell everyone about it? |
+| meta_data_processor    | we are processing the meta-data...                                         |
+
+Final decision: the class in SML will be renamed to
+=meta_data_processor= and the new interface will be called
+=meta_data_populator=. Rationale:
+
+- tagger is a bit too focused in tags, which is just a flat way of
+  describing the tree.
+- we are augmenting the meta-data - i.e. there may have been a
+  preexisting state; our job is to ensure that regardless of what was
+  there, when we finish the data is in a consistent state with all the
+  missing blanks filled in.
+- the individual classes will be populating the meta-data. this is
+  generic enough that covers copying data across, etc.
+
+**** IMPLEMENTATION Rename tagger to processor                         :task:
+     CLOCK: [2014-09-07 Sun 01:46]--[2014-09-07 Sun 02:06] =>  0:20
+
+As per analysis story, we need to rename =meta_data_tagger= to
+=meta_data_processor=. May be a good time to remove all the existing
+tagging code. We need to re-add it later on in the right places.
+
+**** IMPLEMENTATION Design and implement the interface                 :task:
 
 - add interface to model;
 - add some tests to make sure the interface is usable.
 
 *interface*
 
-: name: meta_data_expander
+: name: meta_data_populator_interface
 : identity: string
 : dependencies: list of string
-: expand(const model, const parent module, concept)
-: expand(const model, const parent module, module)
-: expand(const model, const parent module, type)
+: populate(const model, const parent module, concept)
+: populate(const model, const parent module, module)
+: populate(const model, const parent module, type)
 
-**** Add static registration to tagger                                 :task:
+**** Add static registration to processor                              :task:
 
 - create a static method to register instances of the interface and a
   static container to hold them;
 - add a simple list of shared pointers to keep track of the registered
   expanders.
+
+**** Move flat name builder to CPP model                               :task:
+
+It seems this class is used only for tagging so we should have one in
+each model. It may even make more sense in the c++ formatters model.
+
+**** Remove dependency of writer on tags                               :task:
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
+**** Delete tags class in SML                                          :task:
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
+**** All model items traversal should resolve types                    :task:
+
+This traversal was designed for tagger but yet it does not resolve
+=type= into one of the sub-classes, forcing tagger to implement
+visitation to resolve the types. We should improve the traversal.
 
 *** Implement a grapher in tagger                                     :story:
 
