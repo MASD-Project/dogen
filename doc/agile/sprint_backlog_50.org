@@ -539,14 +539,16 @@ Final decision: the class in SML will be renamed to
 - the individual classes will be populating the meta-data. this is
   generic enough that covers copying data across, etc.
 
-**** IMPLEMENTATION Rename tagger to processor                         :task:
+**** POSTPONED Rename tagger to processor                              :task:
+     CLOSED: [2014-09-08 Mon 08:33]
      CLOCK: [2014-09-07 Sun 01:46]--[2014-09-07 Sun 02:06] =>  0:20
 
 As per analysis story, we need to rename =meta_data_tagger= to
 =meta_data_processor=. May be a good time to remove all the existing
 tagging code. We need to re-add it later on in the right places.
 
-**** IMPLEMENTATION Design and implement the interface                 :task:
+**** POSTPONED Design and implement the interface                      :task:
+     CLOSED: [2014-09-08 Mon 08:33]
 
 - add interface to model;
 - add some tests to make sure the interface is usable.
@@ -559,34 +561,6 @@ tagging code. We need to re-add it later on in the right places.
 : populate(const model, const parent module, concept)
 : populate(const model, const parent module, module)
 : populate(const model, const parent module, type)
-
-**** Add static registration to processor                              :task:
-
-- create a static method to register instances of the interface and a
-  static container to hold them;
-- add a simple list of shared pointers to keep track of the registered
-  expanders.
-
-**** Move flat name builder to CPP model                               :task:
-
-It seems this class is used only for tagging so we should have one in
-each model. It may even make more sense in the c++ formatters model.
-
-**** Remove dependency of writer on tags                               :task:
-
-We seem to be using the tags to detect containers. We need to get rid
-of this dependency.
-
-**** Delete tags class in SML                                          :task:
-
-This class does not make sense any more as each model will be
-responsible for their own tags.
-
-**** All model items traversal should resolve types                    :task:
-
-This traversal was designed for tagger but yet it does not resolve
-=type= into one of the sub-classes, forcing tagger to implement
-visitation to resolve the types. We should improve the traversal.
 
 ** Deprecated Development Stories
 *** CANCELLED Delete tag related infrastructure from =sml=            :story:

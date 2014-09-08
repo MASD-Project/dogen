@@ -8,108 +8,178 @@
 
 Stories that we intend to look at, at some point.
 
-*** Remove unnecessary properties from model                          :story:
+*** Make use of boilerplate                                           :story:
 
-The model should be just dumb container of types. We have a few legacy
-properties left behind from the days where the model was also used in
-the transformation process. Remove all the concepts from the model
-(=Element= etc) and deal with the fall out. This is required in order
-to simplify the graph in tagger.
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
 
-*** Refactor meta-data processing in SML                              :story:
+*** Rename the include tags and add them to CPP model                 :story:
 
-We need to create a simple interface that takes a ptree and a model
-and updates the tags on the ptree. We also need a way to register
-against the meta-data tagger.
+Update all the JSON files with names in the form
+=cpp.include.types.header_file=. Add properties in =cpp= to capture
+these.
 
-**** Rename tagger to processor                                        :task:
+While we're at it, add support for =family= too.
 
-As per analysis story, we need to rename =meta_data_tagger= to
-=meta_data_processor=. May be a good time to remove all the existing
-tagging code. We need to re-add it later on in the right places.
+*** Create formatter interfaces for each concrete entity type         :story:
 
-**** Design and implement the interface                                :task:
+Formatters should have a single format method that takes a concrete
+entity, formatting settings and knitting settings. It returns a file.
 
-- add interface to model;
-- add some tests to make sure the interface is usable.
+**** Remove =file_formatter_interface=                                 :task:
 
-*interface*
+Update all C++ formatters to use specific types:
 
-: name: meta_data_populator_interface
-: identity: string
-: dependencies: list of string
-: populate(const model, const parent module, concept)
-: populate(const model, const parent module, module)
-: populate(const model, const parent module, type)
+- remove factory; update workflow to call formatters directly
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
 
-**** Add static registration to processor                              :task:
+**** Update formatters to output =formatters::file=                    :task:
 
-- create a static method to register instances of the interface and a
-  static container to hold them;
-- add a simple list of shared pointers to keep track of the registered
-  expanders.
+Instead of passing in a stream, we just want to return a file.
 
-**** Move flat name builder to CPP model                               :task:
+**** Update formatters to take settings and entity as input            :task:
 
-It seems this class is used only for tagging so we should have one in
-each model. It may even make more sense in the c++ formatters model.
+We want the formatters to be stateless - well at least as far as
+mutating state goes - so that we can run them in parallel. We also
+want them to have no constructor arguments so we can register them. To
+do so we need to pass in both knitting and formatting settings to
+=format= as well as the entity.
 
-**** Remove dependency of writer on tags                               :task:
+**** Get formatters to register themselves with workflow               :task:
 
-We seem to be using the tags to detect containers. We need to get rid
-of this dependency.
+Copy the code from the deleted registration files. Formatters should
+register against a content descriptor.
 
-**** Delete tags class in SML                                          :task:
+*** Create =includers_info= and =forward_declarations_info=           :story:
 
-This class does not make sense any more as each model will be
-responsible for their own tags.
+We should make sure the type system represents all the inputs to
+formatters. Create these types and update their formatters,
+transformer etc.
 
-**** All model items traversal should resolve types                    :task:
+*** Update manual with detailed model descriptions                    :story:
 
-This traversal was designed for tagger but yet it does not resolve
-=type= into one of the sub-classes, forcing tagger to implement
-visitation to resolve the types. We should improve the traversal.
+We should add CRCs for the main classes, with an explanation of what
+each class does; we should also explain the separation of the
+transformation logic between the core model (e.g. =dia=) and the
+transformation model (e.g. =dia_to_sml=). We should describe what the
+workflow does in each model.
 
-*** Implement a grapher in tagger                                     :story:
+*** Refactor types header formatter                                   :story:
+    CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
+    CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
+    CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
 
-- create a grapher in tagger that represents the dependencies between
-  instances of the interface
-- once the tagger has been instantiated we need to loop through the list
-  of expanders and build a graph.
-- on execute, iterate through the graph executing all instances of the
-  interface.
-- we should see if we can reuse some code of the dia grapher as we
-  need to build 3 graphers altogether.
+Make the main types header formatters look like the =om= types
+formatter. This model was deleted around commit 10157ad.
 
-*** Implement the tagger interface in the CPP model                   :story:
+This is still not quite right. We need to drive the formatting from
+two things:
 
-The CPP model needs to register a top-level tagger that expands all of
-the C++ specific tags. This has to be done before the formatter
-taggers kick in. We need to remove all of the =cpp= related code from
-tagger and add it to =cpp= model. For now we should get details from
-settings.
+- user options
+- available formatters
 
-We should declare all of the traits at the model level, at least those
-that are common to all formatters. Perhaps a traits class or some
-such. SML should also declare the proper global traits such as
-=enabled= and so on.
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+     CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
 
-We should consider if we should declare the formatters this way too,
-since they may depend on each other. This would be in the formatters
-model.
+Clean up internal functions in file and add documentation.
 
-*** Create an SML grapher                                             :story:
+**** Make use of boilerplate                                           :task:
 
-We need a class responsible for building a graph of SML qnames, and
-associating these with a ptree.
+Generate the licence, etc using boilerplate formatter.
 
-In order to do this we need to make sure we have a module for the
-model.
+**** Copy across documentation from =om=                               :task:
 
-*** Implement the tagger interface in formatters                      :story:
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
 
-We should start implementing the interface on a few formatters to
-prove that the approach actually works.
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** Remove =cpp_formatters::formatting_error=                         :story:
+
+Use the =formatters::formating_error= instead.
+
+*** Delete content types                                              :story:
+
+Now we have the type system representing the content, we can delete
+this enumeration.
+
+*** Delete aspect types                                               :story:
+
+Now we have the type system representing the aspects, we can delete
+this enumeration.
+
+*** Delete key implementation formatter                               :story:
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** Towards a more generic use of meta-data parameters                :epic:
+
+We should do an inventory of all dogen features which can be
+reimplemented as meta-data parameters. For example, immutability
+should result in a generic parameter being added to the type at the
+SML level:
+
+: immutable = true
+
+which then gets resolved into a set of language specific parameters:
+
+: cpp.copy_constructor.status = disabled
+: cpp.setters.status = disabled
+: ...
+
+The formatter then looks for these tags to decide whether to add a
+method or not. If we had more languages, they would have equivalent
+formatting commands.
+
+The same would apply to facets. These would have a top-level generic
+parameter such as =hashing=:
+
+: hashing = true
+
+Which then expands to implementation specific hashing:
+
+: cpp.hashing.std_hashing = true
+
+or
+
+: cpp.hashing.boost_hashing = true
+
+The facet is now just a short-hand for a set of implementation
+specific parameters. There is some default mapping applied in this
+grouping. The user can shortcut the process by disabling the mapping
+and supplying implementation specific parameters:
+
+: hashing = false
+: cpp.hashing.boost_hashing = true
+
+Assuming =std_hashing= as a default.
+
+In addition, depending on the parameter, it may be propagatable /
+expandable. For example, if hashing is set to false in a type at the
+bottom of a graph relationship, we must propagate it to all members of
+the graph. Similarly, if hashing is disabled in the model, we must
+propagate it to all types in the model.
+
+*** Refactor Dia to SML transformer                                   :story:
+
+- remove all properties from context which are used only internally in
+  the transformer.
+- split context into inputs and outputs: =transformation_result= as a
+  candidate for the outputs.
+- inputs are passed in at construction time and remain constant.
+- each transformation method returns a value which can be slotted into
+  the model by the workflow, contained in a transformation result.
+- this does mean a lot of concatenation at the workflow level though.
 
 *** Consider adding facet specific types                              :story:
 
@@ -126,6 +196,29 @@ this does mean we would not be able to rely on all other facets such
 as serialisation and even streaming or else things would get a bit
 confusing. But it would still be useful.
 
+Another possible (less clean) approach is this:
+
+#+begin_quote
+It would be great if we could use the meta-data to enable and disable
+facets (there probably already is a story for this). But in addition
+to this, it would also be great if one could override the default name
+for an object in a facet; for instance: one could add an object called
+=serialization_manager=, disable all facets bar serialisation,
+disable the serialisation postfix of this file and disable code
+generation. This way one could add manual code to any of the facets,
+independently.
+
+At present we support this, but only for types as it is hard-coded.
+#+end_quote
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders. Instead, this story will be handled when we move
+over to using =boost::property_tree::ptree=.
+
 *** Add a configuration class to SML mock factory                     :story:
 
 Every time we need to extend the mock factory we are finding we need
@@ -135,6 +228,17 @@ external module path because we need to modify every single method. We
 need to look into patterns for this. One option would be to create a
 factory configuration class that has the super set of all parameters
 required and pass that configuration to each function.
+
+*** Update comments in C++ model                                      :story:
+
+We have a very large blurb in this model that is rather old, and
+reflects a legacy understanding of the role of the C++ model.
+
+*** Dia to SML workflow should post-process model by leaves           :story:
+
+At present in =dia_to_sml::workflow::post_process_model_activity= we
+are post-processing by going through every single object; in reality
+we only need to go through the leaves.
 
 *** Refactor code around model origination                            :story:
 
@@ -155,6 +259,82 @@ their own problems:
 
 These can be replaced by a single enumeration that indicates if the
 type/model is target or not.
+
+*** Tidy-up test models                                               :story:
+
+We have a lot of fine grained test models for historic reasons. A lot
+of these could be collapsed into a smaller number of models, focused
+on testing a set of well defined features.
+
+**** Models that need changing
+
+Merge the following models into a =basic= or =trivial= model (no
+aggregation, no association):
+
+- classes_in_a_package
+- classes_inout_package
+- classes_without_package
+- class_in_a_package
+- class_without_attributes
+- class_without_package
+- stand_alone_class
+
+We should also check the combined model has all the scenarios
+described in [[*Cross%20package%20referencing%20tests][Cross package referencing tests]].
+
+Merge the following models into stereotypes:
+
+- enumeration
+- exception
+
+Consider deleting the comments model and make sure we have comments in
+all models with the same features:
+
+- top-level comment for the model
+- package level comment
+- notes
+
+These models are at the right level of granularity but need renaming:
+
+- all_primitives: primitives or primitives_model to line up with boost
+  and std.
+- trivial_association: association
+- trivial_inheritance: inheritance
+
+**** Models that do not need changing and why
+
+These models test other models, and we cannot remove the postfix
+=_model= to avoid clashes with namespaces:
+
+- boost_model
+- std_model
+
+These models test command line options, which means they cannot be
+merged:
+
+- disable_cmakelists
+- disable_facet_folders
+- disable_full_ctor
+- dmp
+- enable_facet_domain
+- enable_facet_hash
+- enable_facet_io
+- enable_facet_serialization
+- split_project
+
+These models test features which have enough scenarios to justify
+keeping them in isolation:
+
+- database
+
+These models test dia features and must be kept isolated:
+
+- compressed
+- two_layers_with_objects
+
+**** Add objects, enumerations and exceptions to comments model
+
+At present we are only testing packages in comments.
 
 *** Improve error message for blank types                             :story:
 
@@ -209,129 +389,6 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** Update manual with detailed model descriptions                    :story:
-
-We should add CRCs for the main classes, with an explanation of what
-each class does; we should also explain the separation of the
-transformation logic between the core model (e.g. =dia=) and the
-transformation model (e.g. =dia_to_sml=). We should describe what the
-workflow does in each model.
-
-*** Refactor types header formatter                                   :story:
-    CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
-    CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
-    CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
-
-Make the main types header formatters look like the =om= types
-formatter. This model was deleted around commit 10157ad.
-
-This is still not quite right. We need to drive the formatting from
-two things:
-
-- user options
-- available formatters
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-     CLOCK: [2014-08-25 Mon 11:57]--[2014-08-25 Mon 12:16] =>  0:19
-
-Clean up internal functions in file and add documentation.
-
-**** Make use of boilerplate                                           :task:
-
-Generate the licence, etc using boilerplate formatter.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
-
-*** C++ formatters use of =headers_for_facet_=                        :story:
-
-We seem to be creating a local variable =headers_for_facet_= in
-function =format_file_infos_activity= but not really making use of
-it. We need to investigate what was that we were trying to do here,
-the name of the variable seems to imply it should have been a member
-variable. Probably a remnant from some old refactoring.
-
-*** Move includes and header guard into entity                        :story:
-
-With this a formatter can now rely only on entities rather than
-requiring a file.
-
-*** Create =includers_info= and =forward_declarations_info=           :story:
-
-We should make sure the type system represents all the inputs to
-formatters. Create these types and update their formatters,
-transformer etc.
-
-*** Delete key implementation formatter                               :story:
-
-It doesn't seem like there is any good reason to treat the keys in a
-special way so try to remove this.
-
-*** Delete content types                                              :story:
-
-Now we have the type system representing the content, we can delete
-this enumeration.
-
-*** Delete aspect types                                               :story:
-
-Now we have the type system representing the aspects, we can delete
-this enumeration.
-
-*** Create formatter interfaces for each concrete entity type         :story:
-
-Formatters should have a single format method that takes a concrete
-entity, formatting settings and knitting settings. It returns a file.
-
-**** Remove =file_formatter_interface=                                 :task:
-
-Update all C++ formatters to use specific types:
-
-- remove factory; update workflow to call formatters directly
-- remove file formatter interface
-- formatters to have format() for each specific supported entity,
-  overloaded as required
-
-**** Update formatters to output =formatters::file=                    :task:
-
-Instead of passing in a stream, we just want to return a file.
-
-**** Update formatters to take settings and entity as input            :task:
-
-We want the formatters to be stateless - well at least as far as
-mutating state goes - so that we can run them in parallel. We also
-want them to have no constructor arguments so we can register them. To
-do so we need to pass in both knitting and formatting settings to
-=format= as well as the entity.
-
-**** Get formatters to register themselves with workflow               :task:
-
-Copy the code from the deleted registration files. Formatters should
-register against a content descriptor.
-
-*** Rename the include tags and add them to CPP model                 :story:
-
-Update all the JSON files with names in the form
-=cpp.include.types.header_file=. Add properties in =cpp= to capture
-these.
-
-While we're at it, add support for =family= too.
-
-*** Make use of boilerplate                                           :story:
-
-Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some meta-data into C++ model.
-
 *** Add include files at the formatter level                          :story:
 
 We need to remove all the include files from =includer= which are
@@ -372,6 +429,8 @@ Now that the standard is out, we should move to it. Both clang and gcc
 have some kind of support at present, so it should be a matter of
 compiling on this mode. However, as we have gcc 4.7 on OSX and
 Windows, we would have to upgrade these compilers first.
+
+We have already proven that the code builds out of the box in sprint 50.
 
 *** Usage of external module path in cmakelists                       :story:
 
@@ -427,24 +486,6 @@ At present we use the following form:
 
 We need to use the new naming style =cpp.odb.pragma=. We also need to
 rename the opaque_parameters to reflect ODB specific data.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders. Instead, this story will be handled when we move
-over to using =boost::property_tree::ptree=.
-
-*** Remove =cpp_formatters::formatting_error=                         :story:
-
-Use the =formatters::formating_error= instead.
-
-*** Manual: fix Fundamental Building Blocks section                   :story:
-
-We allowed this section to evolve as a collage of different ideas, but
-now it is no longer making sense as a whole. We need to go back to the
-drawing board and create a structure for it.
 
 *** Add targets to output manual in downloadable formats              :story:
 
@@ -622,19 +663,6 @@ set of diagrams supplied in the dogen package. However, to ensure
 these samples are actually working we need to test them as part of
 sanity. This means we need the same diagrams packaged twice.
 
-*** Enable support for manual code at the facet level                 :story:
-
-It would be great if we could use the meta-data to enable and disable
-facets (there probably already is a story for this). But in addition
-to this, it would also be great if one could override the default name
-for an object in a facet; for instance: one could add an object called
-=serialization_manager=, disable all facets bar serialisation,
-disable the serialisation postfix of this file and disable code
-generation. This way one could add manual code to any of the facets,
-independently.
-
-At present we support this, but only for types as it is hard-coded.
-
 *** Move the mock factories into the test_data directory              :story:
 
 There is no good conceptual reason to split the mock factories from
@@ -689,11 +717,6 @@ mind:
 - invalid data files directory results in exception;
 - more than one data files directory results in expected load;
 - creating annotation for test model types works as expected.
-
-*** Update comments in C++ model                                      :story:
-
-We have a very large blurb in this model that is rather old, and
-reflects a legacy understanding of the role of the C++ model.
 
 *** IOable services                                                   :story:
 
@@ -1406,13 +1429,13 @@ Users should be able to provide directories for their own JSON
 models. We just need to add a new parameter to the knitter and
 transport it all the way to OM's workflow.
 
-*** Check packaging code for PFH dependencies                         :story:
+*** Check packaging code for non-distro dependencies                  :story:
 
-We are manually copying a lot of shared objects from PFH when creating
-packages, this should be replaced with appropriate dependencies (at
-least for Debian packages).
+We are manually copying a lot of shared objects from locally built
+third party libraries when creating packages, this should be replaced
+with appropriate dependencies (at least for Debian packages).
 
-*** Fix cp error on cmake without PFH                                 :story:
+*** Fix cp error on cmake with local third-party packages             :story:
 
 We are getting strange errors in cmake:
 
@@ -1446,12 +1469,6 @@ We should be able to create a clang based utility that given a set of
 libraries returns a basic JSON model for dogen for them, with as much
 filled in as possible such as include directories, etc. This would
 save us a lot of time instead of manually adding these.
-
-*** Dia to SML workflow should post-process model by leaves           :story:
-
-At present in =dia_to_sml::workflow::post_process_model_activity= we
-are post-processing by going through every single object; in reality
-we only need to go through the leaves.
 
 *** Operations need to behave more like properties                    :story:
 
@@ -1883,54 +1900,6 @@ them into an associative container. It would be nicer to avoid the
 copying as it adds no value. This should wait until we have a way to
 get performance numbers out.
 
-*** Towards a more generic use of meta-data parameters                :story:
-
-We should do an inventory of all dogen features which can be
-reimplemented as meta-data parameters. For example, immutability
-should result in a generic parameter being added to the type at the
-SML level:
-
-: immutable = true
-
-which then gets resolved into a set of language specific parameters:
-
-: cpp.copy_constructor.status = disabled
-: cpp.setters.status = disabled
-: ...
-
-The formatter then looks for these tags to decide whether to add a
-method or not. If we had more languages, they would have equivalent
-formatting commands.
-
-The same would apply to facets. These would have a top-level generic
-parameter such as =hashing=:
-
-: hashing = true
-
-Which then expands to implementation specific hashing:
-
-: cpp.hashing.std_hashing = true
-
-or
-
-: cpp.hashing.boost_hashing = true
-
-The facet is now just a short-hand for a set of implementation
-specific parameters. There is some default mapping applied in this
-grouping. The user can shortcut the process by disabling the mapping
-and supplying implementation specific parameters:
-
-: hashing = false
-: cpp.hashing.boost_hashing = true
-
-Assuming =std_hashing= as a default.
-
-In addition, depending on the parameter, it may be propagatable /
-expandable. For example, if hashing is set to false in a type at the
-bottom of a graph relationship, we must propagate it to all members of
-the graph. Similarly, if hashing is disabled in the model, we must
-propagate it to all types in the model.
-
 *** Adding linking libraries is not handled                           :story:
 
 At present whenever a model requires additional link library targets
@@ -1939,8 +1908,8 @@ we need to disable CMake generation and do it by hand. However:
 - for well-known dependencies such as boost we could create a
   convention (e.g. assume/require that the CMake boost libraries flags
   are set via find boost)
-- for user level dependencies we should add implementation specific
-  parameters at the model level.
+- for user level dependencies we should add meta-data tags at the
+  model level.
 
 *** Test data generator does not detect cycles in object graph        :story:
 
@@ -2019,17 +1988,6 @@ association. Dogen should validate that children belong to UML
 elements which can have children, and if not issue good error
 messages - perhaps even talking about the possible cause for the
 error.
-
-*** Refactor Dia to SML transformer                                   :story:
-
-- remove all properties from context which are used only internally in
-  the transformer.
-- split context into inputs and outputs: =transformation_result= as a
-  candidate for the outputs.
-- inputs are passed in at construction time and remain constant.
-- each transformation method returns a value which can be slotted into
-  the model by the workflow, contained in a transformation result.
-- this does mean a lot of concatenation at the workflow level though.
 
 *** Add tests for SML workflow                                        :story:
 
@@ -2622,82 +2580,6 @@ would be static public members of a class.
 We should also add a validate method which checks to see if a string
 is a valid value according to the string table. We could have a case
 insensitive validate too.
-
-*** Tidy-up test models                                               :story:
-
-We have a lot of fine grained test models for historic reasons. A lot
-of these could be collapsed into a smaller number of models, focused
-on testing a set of well defined features.
-
-**** Models that need changing
-
-Merge the following models into a =basic= or =trivial= model (no
-aggregation, no association):
-
-- classes_in_a_package
-- classes_inout_package
-- classes_without_package
-- class_in_a_package
-- class_without_attributes
-- class_without_package
-- stand_alone_class
-
-We should also check the combined model has all the scenarios
-described in [[*Cross%20package%20referencing%20tests][Cross package referencing tests]].
-
-Merge the following models into stereotypes:
-
-- enumeration
-- exception
-
-Consider deleting the comments model and make sure we have comments in
-all models with the same features:
-
-- top-level comment for the model
-- package level comment
-- notes
-
-These models are at the right level of granularity but need renaming:
-
-- all_primitives: primitives or primitives_model to line up with boost
-  and std.
-- trivial_association: association
-- trivial_inheritance: inheritance
-
-**** Models that do not need changing and why
-
-These models test other models, and we cannot remove the postfix
-=_model= to avoid clashes with namespaces:
-
-- boost_model
-- std_model
-
-These models test command line options, which means they cannot be
-merged:
-
-- disable_cmakelists
-- disable_facet_folders
-- disable_full_ctor
-- dmp
-- enable_facet_domain
-- enable_facet_hash
-- enable_facet_io
-- enable_facet_serialization
-- split_project
-
-These models test features which have enough scenarios to justify
-keeping them in isolation:
-
-- database
-
-These models test dia features and must be kept isolated:
-
-- compressed
-- two_layers_with_objects
-
-**** Add objects, enumerations and exceptions to comments model
-
-At present we are only testing packages in comments.
 
 *** Enumeration string conversion could be configurable               :story:
 
