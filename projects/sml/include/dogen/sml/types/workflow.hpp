@@ -78,7 +78,7 @@ private:
     /**
      * @brief Add meta-data to merged model.
      */
-    void tag_model_activity(model& merged_model) const;
+    void process_meta_data_activity(model& merged_model) const;
 
     /**
      * @brief Index all concepts in model.

@@ -28,7 +28,7 @@
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
-#include "dogen/sml/types/meta_data_tagger.hpp"
+#include "dogen/sml/types/meta_data_processor.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
@@ -123,9 +123,9 @@ model workflow::create_merged_model_activity(const model& target,
     return mg.merge();
 }
 
-void workflow::tag_model_activity(model& merged_model) const {
-    meta_data_tagger t;
-    t.tag(settings_.cpp(), merged_model);
+void workflow::process_meta_data_activity(model& merged_model) const {
+    meta_data_processor p;
+    p.process(merged_model);
 }
 
 void workflow::resolve_types_activity(model& merged_model) const {
@@ -157,7 +157,7 @@ execute(model target, std::list<model> user_models) const {
     index_concepts_activity(r);
     index_properties_activity(r);
     index_associations_activity(r);
-    tag_model_activity(r);
+    process_meta_data_activity(r);
     return std::pair<bool, model> { has_generatable_types(r), r };
 }
 

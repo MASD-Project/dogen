@@ -14,15 +14,16 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-08 Mon 18:37]
+Clock summary at [2014-09-08 Mon 23:21]
 
 | Headline                                            | Time   |      |      |
 |-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *1:19* |      |      |
+| *Total time*                                        | *2:05* |      |      |
 |-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 1:19 |      |
+| Development Stories Implemented                     |        | 2:05 |      |
 | IMPLEMENTATION Sprint and product backlog grooming  |        |      | 0:46 |
-| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 0:33 |
+| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 0:57 |
+| IMPLEMENTATION Fix windows continuous build         |        |      | 0:22 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -48,7 +49,9 @@ We need to create a simple interface that takes a ptree and a model
 and updates the tags on the ptree. We also need a way to register
 against the meta-data tagger.
 
-**** IMPLEMENTATION Rename tagger to processor                         :task:
+**** COMPLETED Rename tagger to processor                              :task:
+     CLOSED: [2014-09-08 Mon 23:20]
+     CLOCK: [2014-09-08 Mon 22:56]--[2014-09-08 Mon 23:20] =>  0:24
      CLOCK: [2014-09-08 Mon 18:04]--[2014-09-08 Mon 18:37] =>  0:33
 
 As per analysis story, we need to rename =meta_data_tagger= to
@@ -62,7 +65,8 @@ Actions:
 - renamed the type in the model and regenerated;
 - fixed code in workflow.
 
-**** Design and implement the interface                                :task:
+**** COMPLETED Design and implement the interface                      :task:
+     CLOSED: [2014-09-08 Mon 23:21]
 
 - add interface to model;
 - add some tests to make sure the interface is usable.
@@ -103,6 +107,22 @@ responsible for their own tags.
 This traversal was designed for tagger but yet it does not resolve
 =type= into one of the sub-classes, forcing tagger to implement
 visitation to resolve the types. We should improve the traversal.
+
+*** IMPLEMENTATION Fix windows continuous build                       :story:
+    CLOCK: [2014-09-08 Mon 21:45]--[2014-09-08 Mon 22:07] =>  0:22
+
+Ever since we refactored the test models into their own folder, the
+windows build stopped working. This is because we are too deep in the
+directory tree, resulting in paths longer that the maximum supported
+path. We need to move the build to a top-level folder somewhere.
+
+Of course we still have the linking issue but that will be addressed
+later.
+
+Actions:
+
+- hacked scripts to point to root build directory to see if this fixes
+  the issue.
 
 *** Implement a grapher in processor                                  :story:
 
@@ -153,16 +173,6 @@ it. We need to investigate what was that we were trying to do here,
 the name of the variable seems to imply it should have been a member
 variable. Probably a remnant from some old refactoring.
 
-*** Fix windows continuous build                                      :story:
-
-Ever since we refactored the test models into their own folder, the
-windows build stopped working. This is because we are too deep in the
-directory tree, resulting in paths longer that the maximum supported
-path. We need to move the build to a top-level folder somewhere.
-
-Of course we still have the linking issue but that will be addressed
-later.
-
 *** Remove unnecessary properties from model                          :story:
 
 The model should be just dumb container of types. We have a few legacy
@@ -189,6 +199,14 @@ script for the first video of the series is as follows:
 - generate the hello world model.
 - create a hello world main with make files and compile it.
 - give a quick overview of the available facilities.
+
+*** Version number relies on latest commit in master                  :story:
+
+When trying to build off of a tag, we noticed that the version number
+is always of the latest commit in master. This means that trying to
+generate packages for tag =v0.50.2410= results in packages with a
+version after that like say =v0.50.2415=. We should look at the
+current commit in master rather than the latest one.
 
 ** Deprecated Development Stories
 
