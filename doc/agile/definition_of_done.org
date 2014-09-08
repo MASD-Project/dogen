@@ -19,8 +19,6 @@ The following must be attained in order for it to be done:
   licences, etc.
 - All models must have doxygen documentation describing their
   purpose. The key types should be documented too.
-- The test models must be moved to their own folder so that new
-  developers don't get confused.
 - We must run sanity scripts on packages across all platforms to
   ensure we are providing good packages.
 - Unstable packages (e.g latest) must be available for Download off of
