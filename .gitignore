@@ -11,3 +11,6 @@ Thumbs.db
 
 # OSX system configuration files
 .DS_Store
+
+# CLion files
+.idea
