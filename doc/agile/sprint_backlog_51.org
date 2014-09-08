@@ -8,22 +8,25 @@
 This file contains all stories that were closed during sprint 51.
 
 The *Mission Statement* for this sprint is to implement the core of
-the meta-data processing, in both SML and the formatters.
+the meta-data processing, in both SML and the formatters. We also want
+to improve the communication with the outside world.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-08 Mon 08:35]
+Clock summary at [2014-09-08 Mon 18:37]
 
-| Headline                                           | Time   |      |      |
-|----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *0:34* |      |      |
-|----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 0:34 |      |
-| IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:34 |
+| Headline                                            | Time   |      |      |
+|-----------------------------------------------------+--------+------+------|
+| *Total time*                                        | *1:19* |      |      |
+|-----------------------------------------------------+--------+------+------|
+| Development Stories Implemented                     |        | 1:19 |      |
+| IMPLEMENTATION Sprint and product backlog grooming  |        |      | 0:46 |
+| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 0:33 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-08 Mon 17:52]--[2014-09-08 Mon 18:04] =>  0:12
     CLOCK: [2014-09-08 Mon 08:01]--[2014-09-08 Mon 08:35] =>  0:34
 
 Updates to sprint and product backlog.
@@ -39,17 +42,25 @@ We allowed this section to evolve as a collage of different ideas, but
 now it is no longer making sense as a whole. We need to go back to the
 drawing board and create a structure for it.
 
-*** Refactor meta-data processing in SML                              :story:
+*** IMPLEMENTATION Refactor meta-data processing in SML               :story:
 
 We need to create a simple interface that takes a ptree and a model
 and updates the tags on the ptree. We also need a way to register
 against the meta-data tagger.
 
-**** Rename tagger to processor                                        :task:
+**** IMPLEMENTATION Rename tagger to processor                         :task:
+     CLOCK: [2014-09-08 Mon 18:04]--[2014-09-08 Mon 18:37] =>  0:33
 
 As per analysis story, we need to rename =meta_data_tagger= to
 =meta_data_processor=. May be a good time to remove all the existing
 tagging code. We need to re-add it later on in the right places.
+
+Actions:
+
+- created scratch pad for saving this kind of code snippets;
+- copied across the tagger code;
+- renamed the type in the model and regenerated;
+- fixed code in workflow.
 
 **** Design and implement the interface                                :task:
 
@@ -142,12 +153,15 @@ it. We need to investigate what was that we were trying to do here,
 the name of the variable seems to imply it should have been a member
 variable. Probably a remnant from some old refactoring.
 
-*** Fix windows builds                                                :story:
+*** Fix windows continuous build                                      :story:
 
 Ever since we refactored the test models into their own folder, the
 windows build stopped working. This is because we are too deep in the
 directory tree, resulting in paths longer that the maximum supported
 path. We need to move the build to a top-level folder somewhere.
+
+Of course we still have the linking issue but that will be addressed
+later.
 
 *** Remove unnecessary properties from model                          :story:
 
@@ -156,6 +170,25 @@ properties left behind from the days where the model was also used in
 the transformation process. Remove all the concepts from the model
 (=Element= etc) and deal with the fall out. This is required in order
 to simplify the graph in populator.
+
+*** Manually generate packages for previous sprint                    :story:
+
+We should manually generate packages for sprint 50 and upload them to
+Google drive. To do this we should log in to each build agent, git
+clone the repo from scratch, =git checkout= the tag and then do a full
+build. We should also upload the docs too. Ideally we should do this
+for all platforms.
+
+*** Create a demo of installing dogen and generating hello world      :story:
+
+We need to start creating a series of quick videos demoing dogen. The
+script for the first video of the series is as follows:
+
+- download packages from Google Drive and install them.
+- obtain the hello world model from git.
+- generate the hello world model.
+- create a hello world main with make files and compile it.
+- give a quick overview of the available facilities.
 
 ** Deprecated Development Stories
 
