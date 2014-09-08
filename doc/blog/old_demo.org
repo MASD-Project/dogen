@@ -1,0 +1,10 @@
+#+title: Nerd Food: Dogen: Old Demo
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+As part of my attempt to make the work in Dogen a bit more visible, I
+thought I'd repost an old demo here. The interface has changed very
+little since those days so it's still a useful introduction.
+
+#+begin_html
+<iframe width="854" height="510" src="//www.youtube.com/embed/Z7k8qbImXkU" frameborder="0" allowfullscreen></iframe>
+#+end_html
