@@ -14,19 +14,20 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-08 Mon 23:21]
+Clock summary at [2014-09-09 Tue 08:06]
 
 | Headline                                            | Time   |      |      |
 |-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *2:05* |      |      |
+| *Total time*                                        | *2:19* |      |      |
 |-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 2:05 |      |
-| IMPLEMENTATION Sprint and product backlog grooming  |        |      | 0:46 |
+| Development Stories Implemented                     |        | 2:19 |      |
+| IMPLEMENTATION Sprint and product backlog grooming  |        |      | 1:00 |
 | IMPLEMENTATION Refactor meta-data processing in SML |        |      | 0:57 |
 | IMPLEMENTATION Fix windows continuous build         |        |      | 0:22 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-09 Tue 07:51]--[2014-09-09 Tue 08:05] =>  0:14
     CLOCK: [2014-09-08 Mon 17:52]--[2014-09-08 Mon 18:04] =>  0:12
     CLOCK: [2014-09-08 Mon 08:01]--[2014-09-08 Mon 08:35] =>  0:34
 

@@ -8,6 +8,38 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider generation of validators                                 :story:
+
+It would be nice if we could constraint the domain of a type via some
+kind of rules; for example, provide a regular expression or an EBNF
+definition with a string that tells dogen how to validate it. We could
+then construct simple validators. As usual these expressions can be
+supplied via the meta-data.
+
+*** Providing view model hints                                        :story:
+
+Once we start supporting view models, it would be nice to be able to
+take an inheritance tree of objects and collapse it into a list view,
+handling all of the use cases (reorder columns, remove columns, add
+columns, updating rows, etc). All of this code can be inferred from
+the type hierarchy.
+
+*** Meta-data transformation in formatters                            :story:
+
+Once we reach the formatters with the complete set of meta-data
+(e.g. after population), we should be able to do a final
+transformation before formatting. This would make the formatter code
+much easier and type safe, instead of querying the ptree directly. And
+since it would live in the C++ formatters model, we could share code
+between formatters.
+
+*** Merge C++ models                                                  :story:
+
+Once all of the tidy-up for the meta-data is done, the C++ model will
+become quite small. At that point we should merge it with the C++
+formatters model. This is quite nice as we will end up with a cohesive
+model - the separation between these two models was always arbitrary.
+
 *** Make use of boilerplate                                           :story:
 
 Remove all of the manual boilerplate and make use of the new
