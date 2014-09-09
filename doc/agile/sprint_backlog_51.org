@@ -14,19 +14,20 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-09 Tue 08:48]
+Clock summary at [2014-09-09 Tue 18:39]
 
 | Headline                                            | Time   |      |      |
 |-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *2:59* |      |      |
+| *Total time*                                        | *3:48* |      |      |
 |-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 2:59 |      |
-| IMPLEMENTATION Sprint and product backlog grooming  |        |      | 1:00 |
-| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 1:37 |
+| Development Stories Implemented                     |        | 3:48 |      |
+| IMPLEMENTATION Sprint and product backlog grooming  |        |      | 1:05 |
+| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 2:21 |
 | IMPLEMENTATION Fix windows continuous build         |        |      | 0:22 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-09 Tue 17:50]--[2014-09-09 Tue 17:55] =>  0:05
     CLOCK: [2014-09-09 Tue 07:51]--[2014-09-09 Tue 08:05] =>  0:14
     CLOCK: [2014-09-08 Mon 17:52]--[2014-09-08 Mon 18:04] =>  0:12
     CLOCK: [2014-09-08 Mon 08:01]--[2014-09-08 Mon 08:35] =>  0:34
@@ -82,13 +83,17 @@ Actions:
 : populate(const model, const parent module, type)
 
 **** IMPLEMENTATION Create a sub-system for meta-data                  :task:
+     CLOCK: [2014-09-09 Tue 17:55]--[2014-09-09 Tue 18:39] =>  0:44
      CLOCK: [2014-09-09 Tue 08:06]--[2014-09-09 Tue 08:46] =>  0:40
 
 As the names of the meta-data classes became more and more unwieldy,
 it became obvious that they need their own namespace. Move all of them
 there and get rid of the =meta_data= prefixes.
 
-**** Add static registration to processor                              :task:
+Also, we should take this opportunity to rename =populator= to
+=enricher= as it enriches the meta-data.
+
+**** Add static registration to meta-data workflow                     :task:
      CLOSED: [2014-09-09 Tue 08:46]
 
 - create a static method to register instances of the interface and a
@@ -137,19 +142,19 @@ Actions:
 
 - create a grapher in processor that represents the dependencies
   between instances of the interface
-- once the populator has been instantiated we need to loop through the
+- once the enricher has been instantiated we need to loop through the
   list of expanders and build a graph.
 - on execute, iterate through the graph executing all instances of the
   interface.
 - we should see if we can reuse some code of the dia grapher as we
   need to build 3 graphers altogether.
 
-*** Implement the populator interface in the CPP model                :story:
+*** Implement the enricher interface in the CPP model                 :story:
 
-The CPP model needs to register a top-level populator that expands all
+The CPP model needs to register a top-level enricher that expands all
 of the C++ specific tags. This has to be done before the formatter
-populators kick in. We need to remove all of the =cpp= related code
-from populator and add it to =cpp= model. For now we should get
+enrichers kick in. We need to remove all of the =cpp= related code
+from enricher and add it to =cpp= model. For now we should get
 details from settings.
 
 We should declare all of the traits at the model level, at least those
@@ -161,6 +166,19 @@ We should consider if we should declare the formatters this way too,
 since they may depend on each other. This would be in the formatters
 model.
 
+*** Remove all of the config settings that are in meta-data           :story:
+
+We have a number of settings in the =config= model that won't be used
+any longer:
+
+- =formatting_settings=
+- =annotation_settings=
+- =cpp_settings=
+- =code_generation_marker_settings=
+
+These should all be removed, with the corresponding command line
+arguments.
+
 *** Create an SML grapher                                             :story:
 
 We need a class responsible for building a graph of SML qnames, and
@@ -169,7 +187,7 @@ associating these with a ptree.
 In order to do this we need to make sure we have a module for the
 model.
 
-*** Implement the populator interface in formatters                   :story:
+*** Implement the enricher interface in formatters                    :story:
 
 We should start implementing the interface on a few formatters to
 prove that the approach actually works.
@@ -188,7 +206,7 @@ The model should be just dumb container of types. We have a few legacy
 properties left behind from the days where the model was also used in
 the transformation process. Remove all the concepts from the model
 (=Element= etc) and deal with the fall out. This is required in order
-to simplify the graph in populator.
+to simplify the graph in enricher.
 
 *** Manually generate packages for previous sprint                    :story:
 
