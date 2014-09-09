@@ -14,15 +14,15 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-09 Tue 08:06]
+Clock summary at [2014-09-09 Tue 08:48]
 
 | Headline                                            | Time   |      |      |
 |-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *2:19* |      |      |
+| *Total time*                                        | *2:59* |      |      |
 |-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 2:19 |      |
+| Development Stories Implemented                     |        | 2:59 |      |
 | IMPLEMENTATION Sprint and product backlog grooming  |        |      | 1:00 |
-| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 0:57 |
+| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 1:37 |
 | IMPLEMENTATION Fix windows continuous build         |        |      | 0:22 |
 #+end:
 
@@ -81,7 +81,15 @@ Actions:
 : populate(const model, const parent module, module)
 : populate(const model, const parent module, type)
 
+**** IMPLEMENTATION Create a sub-system for meta-data                  :task:
+     CLOCK: [2014-09-09 Tue 08:06]--[2014-09-09 Tue 08:46] =>  0:40
+
+As the names of the meta-data classes became more and more unwieldy,
+it became obvious that they need their own namespace. Move all of them
+there and get rid of the =meta_data= prefixes.
+
 **** Add static registration to processor                              :task:
+     CLOSED: [2014-09-09 Tue 08:46]
 
 - create a static method to register instances of the interface and a
   static container to hold them;
