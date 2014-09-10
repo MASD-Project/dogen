@@ -14,16 +14,17 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-10 Wed 20:02]
+Clock summary at [2014-09-10 Wed 22:30]
 
-| Headline                                           | Time   |      |      |
-|----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *5:13* |      |      |
-|----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 5:13 |      |
-| IMPLEMENTATION Sprint and product backlog grooming |        |      | 1:05 |
-| COMPLETED Fix windows continuous build             |        |      | 0:22 |
-| COMPLETED Create a sub-system for meta-data        |        |      | 3:46 |
+| Headline                                                | Time   |      |      |
+|---------------------------------------------------------+--------+------+------|
+| *Total time*                                            | *5:32* |      |      |
+|---------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                         |        | 5:32 |      |
+| IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:05 |
+| COMPLETED Fix windows continuous build                  |        |      | 0:22 |
+| COMPLETED Create a sub-system for meta-data             |        |      | 3:46 |
+| COMPLETED Add static registration to meta-data workflow |        |      | 0:19 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -114,7 +115,9 @@ there and get rid of the =meta_data= prefixes.
 Also, we should take this opportunity to rename =populator= to
 =enricher= as it enriches the meta-data.
 
-*** Add static registration to meta-data workflow                      :story:
+*** COMPLETED Add static registration to meta-data workflow           :story:
+    CLOSED: [2014-09-10 Wed 22:30]
+    CLOCK: [2014-09-10 Wed 22:11]--[2014-09-10 Wed 22:30] =>  0:19
 
 - create a static method to register instances of the interface and a
   static container to hold them;

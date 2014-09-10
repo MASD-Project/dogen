@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+
+#include <memory>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/meta_data/registrar.hpp"
 
 namespace dogen {
 namespace sml {
@@ -40,7 +43,19 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
+
+    /**
+     * @brief Add enricher to the workflow.
+     */
+    static void register_enricher(std::shared_ptr<enricher_interface> e);
+
+    /**
+     * @brief Execute the meta-data workflow on the supplied model.
+     */
     void execute(model& m) const;
+
+private:
+    static std::unique_ptr<registrar> registrar_;
 };
 
 } } }
