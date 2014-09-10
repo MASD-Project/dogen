@@ -1,0 +1,2363 @@
+diff --git a/doc/agile/sprint_backlog_51.org b/doc/agile/sprint_backlog_51.org
+index 7b3e15f..81dc8dd 100644
+--- a/doc/agile/sprint_backlog_51.org
++++ b/doc/agile/sprint_backlog_51.org
+@@ -14,16 +14,16 @@ to improve the communication with the outside world.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2014-09-10 Wed 15:40]
++Clock summary at [2014-09-10 Wed 18:48]
+ 
+ | Headline                                           | Time   |      |      |
+ |----------------------------------------------------+--------+------+------|
+-| *Total time*                                       | *4:37* |      |      |
++| *Total time*                                       | *5:13* |      |      |
+ |----------------------------------------------------+--------+------+------|
+-| Development Stories Implemented                    |        | 4:37 |      |
++| Development Stories Implemented                    |        | 5:13 |      |
+ | IMPLEMENTATION Sprint and product backlog grooming |        |      | 1:05 |
+-| IMPLEMENTATION Fix windows continuous build        |        |      | 0:22 |
+-| IMPLEMENTATION Create a sub-system for meta-data   |        |      | 3:10 |
++| COMPLETED Fix windows continuous build             |        |      | 0:22 |
++| IMPLEMENTATION Create a sub-system for meta-data   |        |      | 3:46 |
+ #+end:
+ 
+ *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+@@ -45,7 +45,8 @@ We allowed this section to evolve as a collage of different ideas, but
+ now it is no longer making sense as a whole. We need to go back to the
+ drawing board and create a structure for it.
+ 
+-*** IMPLEMENTATION Fix windows continuous build                       :story:
++*** COMPLETED Fix windows continuous build                            :story:
++    CLOSED: [2014-09-10 Wed 18:47]
+     CLOCK: [2014-09-08 Mon 21:45]--[2014-09-08 Mon 22:07] =>  0:22
+ 
+ Ever since we refactored the test models into their own folder, the
+@@ -99,6 +100,7 @@ Actions:
+ : populate(const model, const parent module, type)
+ 
+ **** IMPLEMENTATION Update SML diagram and generate code               :task:
++     CLOCK: [2014-09-10 Wed 18:12]--[2014-09-10 Wed 18:48] =>  0:36
+      CLOCK: [2014-09-10 Wed 07:51]--[2014-09-10 Wed 08:40] =>  0:49
+      CLOCK: [2014-09-09 Tue 17:55]--[2014-09-09 Tue 18:39] =>  0:44
+      CLOCK: [2014-09-09 Tue 08:06]--[2014-09-09 Tue 08:46] =>  0:40
+@@ -110,7 +112,7 @@ there and get rid of the =meta_data= prefixes.
+ Also, we should take this opportunity to rename =populator= to
+ =enricher= as it enriches the meta-data.
+ 
+-**** Add static registration to meta-data workflow                     :task:
++*** Add static registration to meta-data workflow                      :story:
+ 
+ - create a static method to register instances of the interface and a
+   static container to hold them;
+diff --git a/doc/misc/scratch_pad.org b/doc/misc/scratch_pad.org
+index 8552046..e5c83b9 100644
+--- a/doc/misc/scratch_pad.org
++++ b/doc/misc/scratch_pad.org
+@@ -1711,293 +1711,4 @@ BOOST_AUTO_TEST_CASE(tagging_single_type_model_with_all_facets_enabled_results_i
+ 
+ BOOST_AUTO_TEST_SUITE_END()
+ #+end_src
+-** Reader and writer
+ 
+-Reader header:
+-
+-#+begin_src
+-#include <list>
+-#include <boost/property_tree/ptree.hpp>
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_reader {
+-public:
+-    meta_data_reader() = delete;
+-    ~meta_data_reader() noexcept = default;
+-    meta_data_reader(const meta_data_reader&) = default;
+-    meta_data_reader(meta_data_reader&&) = default;
+-
+-public:
+-    meta_data_reader(const boost::property_tree::ptree& meta_data);
+-
+-public:
+-    /**
+-     * @brief Returns true if the key exists, false otherwise.
+-     */
+-    bool has_key(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns true if the key exists and its value is set to
+-     * boolean true.
+-     */
+-    bool is_true(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns the negation of @e is_true.
+-     */
+-    bool is_false(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns the value associated with the key, if it exists.
+-     */
+-    std::string get(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns true if the key exists and its value is set to
+-     * supported.
+-     */
+-    bool is_supported(const std::string& key) const;
+-
+-public:
+-    /**
+-     * @brief Returns the odb pragmas.
+-     *
+-     * @deprecated this method is only needed for the transition to
+-     * OM.
+-     */
+-    std::list<std::pair<std::string,std::string> > odb_pragma() const;
+-
+-private:
+-    const boost::property_tree::ptree& meta_data_;
+-};
+-
+-} }
+-#+end_src
+-
+-Reader implementation:
+-
+-#+begin_src
+-#include "dogen/sml/types/tags.hpp"
+-#include "dogen/sml/types/meta_data_reader.hpp"
+-
+-namespace {
+-
+-const std::string empty;
+-
+-}
+-
+-namespace dogen {
+-namespace sml {
+-
+-meta_data_reader::
+-meta_data_reader(const boost::property_tree::ptree& meta_data)
+-    : meta_data_(meta_data) { }
+-
+-bool meta_data_reader::has_key(const std::string& key) const {
+-    const auto node(meta_data_.get_optional<std::string>(key));
+-    return node;
+-}
+-
+-bool meta_data_reader::is_true(const std::string& key) const {
+-    const auto value(get(key));
+-    return value == tags::bool_true;
+-}
+-
+-bool meta_data_reader::is_false(const std::string& key) const {
+-    return !is_true(key);
+-}
+-
+-std::string meta_data_reader::get(const std::string& key) const {
+-    const auto v(meta_data_.get_optional<std::string>(key));
+-    if (v)
+-        return *v;
+-
+-    return empty;
+-}
+-
+-bool meta_data_reader::is_supported(const std::string& key) const {
+-    const auto value(get(key));
+-    return value == tags::status_supported;
+-}
+-
+-std::list<std::pair<std::string,std::string> >
+-meta_data_reader::odb_pragma() const {
+-    std::list<std::pair<std::string, std::string> > r;
+-
+-    using boost::property_tree::ptree;
+-    const auto child(meta_data_.get_child_optional(tags::odb_pragma));
+-    if (!child)
+-        return r;
+-
+-    for (auto i(child->begin()); i != child->end(); ++i)
+-        r.push_back(std::make_pair(tags::odb_pragma, i->second.data()));
+-
+-    return r;
+-}
+-
+-} }
+-#+end_src
+-
+-Writer header:
+-
+-#+begin_src c++
+-#include <list>
+-#include <boost/property_tree/ptree.hpp>
+-
+-namespace dogen {
+-namespace sml {
+-
+-/**
+- * @brief Given one or more key-value pairs, adds them to the
+- * meta-data container.
+- */
+-class meta_data_writer {
+-public:
+-    meta_data_writer() = delete;
+-    ~meta_data_writer() noexcept = default;
+-    meta_data_writer(const meta_data_writer&) = default;
+-    meta_data_writer(meta_data_writer&&) = default;
+-
+-public:
+-    meta_data_writer(boost::property_tree::ptree& meta_data);
+-
+-private:
+-    /**
+-     * @brief Returns true if the supplied key should have a container
+-     * value.
+-     */
+-    bool is_container(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns true if the key exists, false otherwise.
+-     */
+-    bool has_key(const std::string& key) const;
+-
+-public:
+-    /**
+-     * @brief Adds the key-value pair.
+-     *
+-     * If the key implies a container, generates the appropriate
+-     * structure.
+-     */
+-    void add(const std::string& key, const std::string& value);
+-
+-    /**
+-     * @brief Adds all key-value pairs.
+-     */
+-    void add(const std::list<std::pair<std::string, std::string> >& kvps);
+-
+-    /**
+-     * @brief Adds only if @e marker is found in the input kvp
+-     * container, as a key.
+-     *
+-     * @return true if added, false otherwise.
+-     */
+-    bool add_if_marker_found(const std::string& marker,
+-        const std::list<std::pair<std::string, std::string> >& kvps);
+-
+-    /**
+-     * @brief Adds only if @e key is not in the simple meta_data
+-     * container.
+-     *
+-     * @return true if added, false otherwise.
+-     */
+-    bool add_if_key_not_found(const std::string& key, const std::string& value);
+-
+-private:
+-    boost::property_tree::ptree& meta_data_;
+-};
+-
+-} }
+-#+end_src
+-
+-Writer implementation:
+-
+-#+begin_src
+-#include <boost/throw_exception.hpp>
+-#include <boost/lexical_cast.hpp>
+-#include "dogen/utility/log/logger.hpp"
+-#include "dogen/sml/types/meta_data_error.hpp"
+-#include "dogen/sml/types/tags.hpp"
+-#include "dogen/sml/types/meta_data_writer.hpp"
+-
+-using namespace dogen::utility::log;
+-
+-namespace {
+-
+-auto lg(logger_factory("sml.meta_data_writer"));
+-const std::string duplicated_key(
+-    "Attempt to use a simple tag key which has already been used: ");
+-
+-}
+-
+-namespace dogen {
+-namespace sml {
+-
+-meta_data_writer::meta_data_writer(boost::property_tree::ptree& meta_data)
+-    : meta_data_(meta_data) { }
+-
+-bool meta_data_writer::is_container(const std::string& key) const {
+-    return key == tags::odb_pragma;
+-}
+-
+-bool meta_data_writer::has_key(const std::string& key) const {
+-    const auto node(meta_data_.get_optional<std::string>(key));
+-    return node;
+-}
+-
+-void meta_data_writer::add(const std::string& key, const std::string& value) {
+-    using boost::property_tree::ptree;
+-    if (is_container(key)) {
+-        const auto node(meta_data_.get_child_optional(key));
+-        unsigned int i(0);
+-        if (node)
+-            i = node->size();
+-
+-        const std::string nk(key + "." + boost::lexical_cast<std::string>(i));
+-        meta_data_.put_child(nk, ptree(value));
+-        return;
+-    }
+-
+-    if (has_key(key)) {
+-        BOOST_LOG_SEV(lg, error) << duplicated_key << key;
+-        BOOST_THROW_EXCEPTION(meta_data_error(duplicated_key + key));
+-    }
+-    meta_data_.put(key, value);
+-}
+-
+-void meta_data_writer::
+-add(const std::list<std::pair<std::string, std::string> >& kvps) {
+-    for (const auto& pair : kvps)
+-        add(pair.first, pair.second);
+-}
+-
+-bool meta_data_writer::add_if_marker_found(const std::string& key,
+-    const std::list<std::pair<std::string, std::string> >& kvps) {
+-    bool has_marker(false);
+-    for (const auto& kvp : kvps) {
+-        has_marker = kvp.first == key;
+-        if (has_marker)
+-            break;
+-    }
+-
+-    if (!has_marker)
+-        return false;
+-
+-    add(kvps);
+-    return true;
+-}
+-
+-bool meta_data_writer::
+-add_if_key_not_found(const std::string& key, const std::string& value) {
+-    if (has_key(key))
+-        return false;
+-
+-    add(key, value);
+-    return true;
+-}
+-
+-} }
+-#+end_src
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+index 7f03699..4e89ffc 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+@@ -28,7 +28,7 @@
+ #include <string>
+ #include <memory>
+ #include "dogen/dia/types/object.hpp"
+-#include "dogen/sml/types/meta_data_writer.hpp"
++#include "dogen/sml/types/meta_data/writer.hpp"
+ #include "dogen/sml/types/nested_qname.hpp"
+ #include "dogen/sml/types/object.hpp"
+ #include "dogen/dia_to_sml/types/processed_object.hpp"
+@@ -172,7 +172,7 @@ private:
+ 
+         const auto pair(comments_parser_->parse(o.comment()));
+         e.documentation(pair.first);
+-        sml::meta_data_writer writer(e.meta_data());
++        sml::meta_data::writer writer(e.meta_data());
+         writer.add(pair.second);
+     }
+ 
+diff --git a/projects/dia_to_sml/src/types/transformer.cpp b/projects/dia_to_sml/src/types/transformer.cpp
+index 2aada07..8fb83a6 100644
+--- a/projects/dia_to_sml/src/types/transformer.cpp
++++ b/projects/dia_to_sml/src/types/transformer.cpp
+@@ -26,7 +26,7 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/sml/types/module.hpp"
+ #include "dogen/sml/types/object.hpp"
+-#include "dogen/sml/types/meta_data_reader.hpp"
++#include "dogen/sml/types/meta_data/reader.hpp"
+ #include "dogen/dia/types/composite.hpp"
+ #include "dogen/dia/types/attribute.hpp"
+ #include "dogen/dia_to_sml/types/tags.hpp"
+@@ -193,7 +193,7 @@ sml::property transformer::to_property(const processed_property& p) const {
+ 
+     const auto pair(comments_parser_->parse(p.comment()));
+     r.documentation(pair.first);
+-    sml::meta_data_writer writer(r.meta_data());
++    sml::meta_data::writer writer(r.meta_data());
+     writer.add(pair.second);
+ 
+     return r;
+@@ -365,7 +365,7 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
+     e.is_aggregate_root(p.is_aggregate_root());
+ 
+     for (const auto& p : e.local_properties()) {
+-        sml::meta_data_reader reader(p.meta_data());
++        sml::meta_data::reader reader(p.meta_data());
+         if (reader.has_key(tags::dia::identity_attribute))
+             e.identity().push_back(p);
+     }
+@@ -466,7 +466,7 @@ void transformer::from_note(const processed_object& o) {
+     sml::model& model(context_.model());
+     if (o.child_node_id().empty()) {
+         auto& module(module_for_qname(model.name()));
+-        sml::meta_data_writer writer(module.meta_data());
++        sml::meta_data::writer writer(module.meta_data());
+         const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
+         if (added)
+             module.documentation(documentation);
+@@ -474,7 +474,7 @@ void transformer::from_note(const processed_object& o) {
+     }
+ 
+     sml::module& module(module_for_id(o.child_node_id()));
+-    sml::meta_data_writer writer(module.meta_data());
++    sml::meta_data::writer writer(module.meta_data());
+     const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
+     if (added)
+         module.documentation(documentation);
+diff --git a/projects/sml/include/dogen/sml/types/all.hpp b/projects/sml/include/dogen/sml/types/all.hpp
+index a896306..2756178 100644
+--- a/projects/sml/include/dogen/sml/types/all.hpp
++++ b/projects/sml/include/dogen/sml/types/all.hpp
+@@ -34,11 +34,14 @@
+ #include "dogen/sml/types/json_hydrator.hpp"
+ #include "dogen/sml/types/merger.hpp"
+ #include "dogen/sml/types/merging_error.hpp"
+-#include "dogen/sml/types/meta_data_error.hpp"
+-#include "dogen/sml/types/meta_data_populator_interface.hpp"
+-#include "dogen/sml/types/meta_data_processor.hpp"
+-#include "dogen/sml/types/meta_data_reader.hpp"
+-#include "dogen/sml/types/meta_data_writer.hpp"
++#include "dogen/sml/types/meta_data/enricher_interface.hpp"
++#include "dogen/sml/types/meta_data/enrichment_error.hpp"
++#include "dogen/sml/types/meta_data/grapher.hpp"
++#include "dogen/sml/types/meta_data/read_write_error.hpp"
++#include "dogen/sml/types/meta_data/reader.hpp"
++#include "dogen/sml/types/meta_data/registrar.hpp"
++#include "dogen/sml/types/meta_data/workflow.hpp"
++#include "dogen/sml/types/meta_data/writer.hpp"
+ #include "dogen/sml/types/model.hpp"
+ #include "dogen/sml/types/module.hpp"
+ #include "dogen/sml/types/nested_qname.hpp"
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/enricher_interface.hpp b/projects/sml/include/dogen/sml/types/meta_data/enricher_interface.hpp
+new file mode 100644
+index 0000000..758f519
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/enricher_interface.hpp
+@@ -0,0 +1,86 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_ENRICHER_INTERFACE_HPP
++#define DOGEN_SML_TYPES_META_DATA_ENRICHER_INTERFACE_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <list>
++#include <string>
++#include <boost/optional.hpp>
++#include "dogen/sml/types/type.hpp"
++#include "dogen/sml/types/model.hpp"
++#include "dogen/sml/types/module.hpp"
++#include "dogen/sml/types/concept.hpp"
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++/**
++ * @brief Enriches a subset of the meta-data for a given target.
++ */
++class enricher_interface {
++public:
++    enricher_interface() = default;
++    enricher_interface(const enricher_interface&) = delete;
++    enricher_interface(enricher_interface&&) = default;
++    virtual ~enricher_interface() noexcept = 0;
++
++public:
++    /**
++     * @brief Unique identifier for this enriches.
++     */
++    virtual std::string id() const = 0;
++
++    /**
++     * @brief List of unique identifiers of other enrichers that must
++     * be executed before this enrichers.
++     */
++    virtual std::list<std::string> dependencies() const = 0;
++
++    /**
++     * @brief Enrich concept tags.
++     */
++    virtual void enrich(const model& model,
++        boost::optional<const module> parent_module,
++        concept& target) = 0;
++
++    /**
++     * @brief Enrich module tags.
++     */
++    virtual void enrich(const model& model,
++        boost::optional<const module> parent_module,
++        module& target) = 0;
++
++    /**
++     * @brief Enrich type tags.
++     */
++    virtual void enrich(const model& model,
++        boost::optional<const module> parent_module,
++        type& target) = 0;
++};
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/enricher_interface_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/enricher_interface_fwd.hpp
+new file mode 100644
+index 0000000..8f5624c
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/enricher_interface_fwd.hpp
+@@ -0,0 +1,36 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_ENRICHER_INTERFACE_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_ENRICHER_INTERFACE_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class enricher_interface;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/enrichment_error.hpp b/projects/sml/include/dogen/sml/types/meta_data/enrichment_error.hpp
+new file mode 100644
+index 0000000..37c7e93
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/enrichment_error.hpp
+@@ -0,0 +1,55 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_ENRICHMENT_ERROR_HPP
++#define DOGEN_SML_TYPES_META_DATA_ENRICHMENT_ERROR_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++/**
++ * @brief An error occurred whilst populating the meta-data.
++ */
++class enrichment_error : public virtual std::exception, public virtual boost::exception {
++public:
++    enrichment_error() = default;
++    ~enrichment_error() noexcept = default;
++
++public:
++    enrichment_error(const std::string& message) : message_(message) { }
++
++public:
++    const char* what() const noexcept { return(message_.c_str()); }
++
++private:
++    const std::string message_;
++};
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/enrichment_error_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/enrichment_error_fwd.hpp
+new file mode 100644
+index 0000000..656f14d
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/enrichment_error_fwd.hpp
+@@ -0,0 +1,39 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_ENRICHMENT_ERROR_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_ENRICHMENT_ERROR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class enrichment_error;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/grapher.hpp b/projects/sml/include/dogen/sml/types/meta_data/grapher.hpp
+new file mode 100644
+index 0000000..e69de29
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/grapher_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/grapher_fwd.hpp
+new file mode 100644
+index 0000000..181b421
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/grapher_fwd.hpp
+@@ -0,0 +1,36 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_GRAPHER_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_GRAPHER_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class grapher;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/read_write_error.hpp b/projects/sml/include/dogen/sml/types/meta_data/read_write_error.hpp
+new file mode 100644
+index 0000000..21cba08
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/read_write_error.hpp
+@@ -0,0 +1,55 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_READ_WRITE_ERROR_HPP
++#define DOGEN_SML_TYPES_META_DATA_READ_WRITE_ERROR_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++/**
++ * @brief An error occurred whilst reading or writing meta-data.
++ */
++class read_write_error : public virtual std::exception, public virtual boost::exception {
++public:
++    read_write_error() = default;
++    ~read_write_error() noexcept = default;
++
++public:
++    read_write_error(const std::string& message) : message_(message) { }
++
++public:
++    const char* what() const noexcept { return(message_.c_str()); }
++
++private:
++    const std::string message_;
++};
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/read_write_error_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/read_write_error_fwd.hpp
+new file mode 100644
+index 0000000..fa6472d
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/read_write_error_fwd.hpp
+@@ -0,0 +1,39 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_READ_WRITE_ERROR_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_READ_WRITE_ERROR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class read_write_error;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/reader.hpp b/projects/sml/include/dogen/sml/types/meta_data/reader.hpp
+new file mode 100644
+index 0000000..7852b6f
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/reader.hpp
+@@ -0,0 +1,88 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_READER_HPP
++#define DOGEN_SML_TYPES_META_DATA_READER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <list>
++#include <boost/property_tree/ptree.hpp>
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class reader {
++public:
++    reader() = delete;
++    ~reader() noexcept = default;
++    reader(const reader&) = default;
++    reader(reader&&) = default;
++
++public:
++    reader(const boost::property_tree::ptree& meta_data);
++
++public:
++    /**
++     * @brief Returns true if the key exists, false otherwise.
++     */
++    bool has_key(const std::string& key) const;
++
++    /**
++     * @brief Returns true if the key exists and its value is set to
++     * boolean true.
++     */
++    bool is_true(const std::string& key) const;
++
++    /**
++     * @brief Returns the negation of @e is_true.
++     */
++    bool is_false(const std::string& key) const;
++
++    /**
++     * @brief Returns the value associated with the key, if it exists.
++     */
++    std::string get(const std::string& key) const;
++
++    /**
++     * @brief Returns true if the key exists and its value is set to
++     * supported.
++     */
++    bool is_supported(const std::string& key) const;
++
++public:
++    /**
++     * @brief Returns the odb pragmas.
++     *
++     * @deprecated this method is only needed for the transition to
++     * OM.
++     */
++    std::list<std::pair<std::string,std::string> > odb_pragma() const;
++
++private:
++    const boost::property_tree::ptree& meta_data_;
++};
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/reader_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/reader_fwd.hpp
+new file mode 100644
+index 0000000..7ef4c23
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/reader_fwd.hpp
+@@ -0,0 +1,36 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class reader;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/registrar.hpp b/projects/sml/include/dogen/sml/types/meta_data/registrar.hpp
+new file mode 100644
+index 0000000..e69de29
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/registrar_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/registrar_fwd.hpp
+new file mode 100644
+index 0000000..3e6a3c9
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/registrar_fwd.hpp
+@@ -0,0 +1,36 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_REGISTRAR_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_REGISTRAR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class registrar;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/workflow.hpp b/projects/sml/include/dogen/sml/types/meta_data/workflow.hpp
+new file mode 100644
+index 0000000..3c89635
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/workflow.hpp
+@@ -0,0 +1,48 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/sml/types/model.hpp"
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class workflow {
++public:
++    workflow() = default;
++    workflow(const workflow&) = default;
++    ~workflow() = default;
++    workflow(workflow&&) = default;
++    workflow& operator=(const workflow&) = default;
++
++public:
++    void execute(model& m) const;
++};
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/workflow_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/workflow_fwd.hpp
+new file mode 100644
+index 0000000..4bce7a7
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/workflow_fwd.hpp
+@@ -0,0 +1,36 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class workflow;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/writer.hpp b/projects/sml/include/dogen/sml/types/meta_data/writer.hpp
+new file mode 100644
+index 0000000..c753b79
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/writer.hpp
+@@ -0,0 +1,69 @@
++#include <list>
++#include <boost/property_tree/ptree.hpp>
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++/**
++ * @brief Given one or more key-value pairs, adds them to the
++ * meta-data container.
++ */
++class writer {
++public:
++    writer() = delete;
++    ~writer() noexcept = default;
++    writer(const writer&) = default;
++    writer(writer&&) = default;
++
++public:
++    writer(boost::property_tree::ptree& meta_data);
++
++private:
++    /**
++     * @brief Returns true if the supplied key should have a container
++     * value.
++     */
++    bool is_container(const std::string& key) const;
++
++    /**
++     * @brief Returns true if the key exists, false otherwise.
++     */
++    bool has_key(const std::string& key) const;
++
++public:
++    /**
++     * @brief Adds the key-value pair.
++     *
++     * If the key implies a container, generates the appropriate
++     * structure.
++     */
++    void add(const std::string& key, const std::string& value);
++
++    /**
++     * @brief Adds all key-value pairs.
++     */
++    void add(const std::list<std::pair<std::string, std::string> >& kvps);
++
++    /**
++     * @brief Adds only if @e marker is found in the input kvp
++     * container, as a key.
++     *
++     * @return true if added, false otherwise.
++     */
++    bool add_if_marker_found(const std::string& marker,
++        const std::list<std::pair<std::string, std::string> >& kvps);
++
++    /**
++     * @brief Adds only if @e key is not in the simple meta_data
++     * container.
++     *
++     * @return true if added, false otherwise.
++     */
++    bool add_if_key_not_found(const std::string& key, const std::string& value);
++
++private:
++    boost::property_tree::ptree& meta_data_;
++};
++
++} } }
+diff --git a/projects/sml/include/dogen/sml/types/meta_data/writer_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data/writer_fwd.hpp
+new file mode 100644
+index 0000000..bc7ea93
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/meta_data/writer_fwd.hpp
+@@ -0,0 +1,36 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
++#define DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++class writer;
++
++} } }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_error.hpp b/projects/sml/include/dogen/sml/types/meta_data_error.hpp
+deleted file mode 100644
+index 382b1e7..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_error.hpp
++++ /dev/null
+@@ -1,54 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_ERROR_HPP
+-#define DOGEN_SML_TYPES_META_DATA_ERROR_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <boost/exception/info.hpp>
+-#include <string>
+-
+-namespace dogen {
+-namespace sml {
+-
+-/**
+- * @brief An error has occurred while peforming an operation related to meta data.
+- */
+-class meta_data_error : public virtual std::exception, public virtual boost::exception {
+-public:
+-    meta_data_error() = default;
+-    ~meta_data_error() noexcept = default;
+-
+-public:
+-    meta_data_error(const std::string& message) : message_(message) { }
+-
+-public:
+-    const char* what() const noexcept { return(message_.c_str()); }
+-
+-private:
+-    const std::string message_;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_error_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data_error_fwd.hpp
+deleted file mode 100644
+index 6121dbf..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_error_fwd.hpp
++++ /dev/null
+@@ -1,38 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_ERROR_FWD_HPP
+-#define DOGEN_SML_TYPES_META_DATA_ERROR_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <boost/exception/info.hpp>
+-#include <string>
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_error;
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_populator_interface.hpp b/projects/sml/include/dogen/sml/types/meta_data_populator_interface.hpp
+deleted file mode 100644
+index b990dc7..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_populator_interface.hpp
++++ /dev/null
+@@ -1,86 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_POPULATOR_INTERFACE_HPP
+-#define DOGEN_SML_TYPES_META_DATA_POPULATOR_INTERFACE_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <list>
+-#include <string>
+-#include <boost/optional.hpp>
+-#include "dogen/sml/types/type.hpp"
+-#include "dogen/sml/types/model.hpp"
+-#include "dogen/sml/types/module.hpp"
+-#include "dogen/sml/types/concept.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-/**
+- * @brief Populates a subset of the meta-data for a given target.
+- */
+-class meta_data_populator_interface {
+-public:
+-    meta_data_populator_interface() = default;
+-    meta_data_populator_interface(
+-        const meta_data_populator_interface&) = delete;
+-    meta_data_populator_interface(meta_data_populator_interface&&) = default;
+-    virtual ~meta_data_populator_interface() noexcept = 0;
+-
+-public:
+-    /**
+-     * @brief Unique identifier for this populator.
+-     */
+-    virtual std::string id() const = 0;
+-
+-    /**
+-     * @brief List of unique identifiers of other populators that must
+-     * be executed before this populator.
+-     */
+-    virtual std::list<std::string> dependencies() const = 0;
+-
+-    /**
+-     * @brief Populate concept tags.
+-     */
+-    virtual void populate(const model& model,
+-        boost::optional<const module> parent_module,
+-        concept& target) = 0;
+-
+-    /**
+-     * @brief Populate module tags.
+-     */
+-    virtual void populate(const model& model,
+-        boost::optional<const module> parent_module,
+-        module& target) = 0;
+-
+-    /**
+-     * @brief Populate type tags.
+-     */
+-    virtual void populate(const model& model,
+-        boost::optional<const module> parent_module,
+-        type& target) = 0;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_populator_interface_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data_populator_interface_fwd.hpp
+deleted file mode 100644
+index f7fe037..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_populator_interface_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_POPULATOR_INTERFACE_FWD_HPP
+-#define DOGEN_SML_TYPES_META_DATA_POPULATOR_INTERFACE_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_populator_interface;
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_processor.hpp b/projects/sml/include/dogen/sml/types/meta_data_processor.hpp
+deleted file mode 100644
+index 7317f02..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_processor.hpp
++++ /dev/null
+@@ -1,40 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_PROCESSOR_HPP
+-#define DOGEN_SML_TYPES_META_DATA_PROCESSOR_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include "dogen/sml/types/model.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_processor {
+-public:
+-    void process(model& m) const;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_processor_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data_processor_fwd.hpp
+deleted file mode 100644
+index 3622931..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_processor_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_PROCESSOR_FWD_HPP
+-#define DOGEN_SML_TYPES_META_DATA_PROCESSOR_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_processor;
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_reader.hpp b/projects/sml/include/dogen/sml/types/meta_data_reader.hpp
+deleted file mode 100644
+index 0550f29..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_reader.hpp
++++ /dev/null
+@@ -1,87 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_READER_HPP
+-#define DOGEN_SML_TYPES_META_DATA_READER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <list>
+-#include <boost/property_tree/ptree.hpp>
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_reader {
+-public:
+-    meta_data_reader() = delete;
+-    ~meta_data_reader() noexcept = default;
+-    meta_data_reader(const meta_data_reader&) = default;
+-    meta_data_reader(meta_data_reader&&) = default;
+-
+-public:
+-    meta_data_reader(const boost::property_tree::ptree& meta_data);
+-
+-public:
+-    /**
+-     * @brief Returns true if the key exists, false otherwise.
+-     */
+-    bool has_key(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns true if the key exists and its value is set to
+-     * boolean true.
+-     */
+-    bool is_true(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns the negation of @e is_true.
+-     */
+-    bool is_false(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns the value associated with the key, if it exists.
+-     */
+-    std::string get(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns true if the key exists and its value is set to
+-     * supported.
+-     */
+-    bool is_supported(const std::string& key) const;
+-
+-public:
+-    /**
+-     * @brief Returns the odb pragmas.
+-     *
+-     * @deprecated this method is only needed for the transition to
+-     * OM.
+-     */
+-    std::list<std::pair<std::string,std::string> > odb_pragma() const;
+-
+-private:
+-    const boost::property_tree::ptree& meta_data_;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_reader_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data_reader_fwd.hpp
+deleted file mode 100644
+index bf692e9..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_reader_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
+-#define DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_reader;
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_writer.hpp b/projects/sml/include/dogen/sml/types/meta_data_writer.hpp
+deleted file mode 100644
+index 0f663e7..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_writer.hpp
++++ /dev/null
+@@ -1,97 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_WRITER_HPP
+-#define DOGEN_SML_TYPES_META_DATA_WRITER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <list>
+-#include <boost/property_tree/ptree.hpp>
+-
+-namespace dogen {
+-namespace sml {
+-
+-/**
+- * @brief Given one or more key-value pairs, adds them to the
+- * meta-data container.
+- */
+-class meta_data_writer {
+-public:
+-    meta_data_writer() = delete;
+-    ~meta_data_writer() noexcept = default;
+-    meta_data_writer(const meta_data_writer&) = default;
+-    meta_data_writer(meta_data_writer&&) = default;
+-
+-public:
+-    meta_data_writer(boost::property_tree::ptree& meta_data);
+-
+-private:
+-    /**
+-     * @brief Returns true if the supplied key should have a container
+-     * value.
+-     */
+-    bool is_container(const std::string& key) const;
+-
+-    /**
+-     * @brief Returns true if the key exists, false otherwise.
+-     */
+-    bool has_key(const std::string& key) const;
+-
+-public:
+-    /**
+-     * @brief Adds the key-value pair.
+-     *
+-     * If the key implies a container, generates the appropriate
+-     * structure.
+-     */
+-    void add(const std::string& key, const std::string& value);
+-
+-    /**
+-     * @brief Adds all key-value pairs.
+-     */
+-    void add(const std::list<std::pair<std::string, std::string> >& kvps);
+-
+-    /**
+-     * @brief Adds only if @e marker is found in the input kvp
+-     * container, as a key.
+-     *
+-     * @return true if added, false otherwise.
+-     */
+-    bool add_if_marker_found(const std::string& marker,
+-        const std::list<std::pair<std::string, std::string> >& kvps);
+-
+-    /**
+-     * @brief Adds only if @e key is not in the simple meta_data
+-     * container.
+-     *
+-     * @return true if added, false otherwise.
+-     */
+-    bool add_if_key_not_found(const std::string& key, const std::string& value);
+-
+-private:
+-    boost::property_tree::ptree& meta_data_;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/meta_data_writer_fwd.hpp b/projects/sml/include/dogen/sml/types/meta_data_writer_fwd.hpp
+deleted file mode 100644
+index a3b159c..0000000
+--- a/projects/sml/include/dogen/sml/types/meta_data_writer_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
+-#define DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace sml {
+-
+-class meta_data_writer;
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/src/test/mock_model_factory.cpp b/projects/sml/src/test/mock_model_factory.cpp
+index 329b889..b53619b 100644
+--- a/projects/sml/src/test/mock_model_factory.cpp
++++ b/projects/sml/src/test/mock_model_factory.cpp
+@@ -27,7 +27,7 @@
+ #include "dogen/utility/exception/utility_exception.hpp"
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/sml/types/tags.hpp"
+-#include "dogen/sml/types/meta_data_writer.hpp"
++#include "dogen/sml/types/meta_data/writer.hpp"
+ #include "dogen/sml/types/object.hpp"
+ #include "dogen/sml/test/building_error.hpp"
+ #include "dogen/sml/test/mock_model_factory.hpp"
+@@ -359,7 +359,7 @@ std::string boost_serialization_forward_declaration_filename(
+ 
+ void add_test_tags(boost::property_tree::ptree& meta_data,
+     const dogen::sml::qname& qn) {
+-    dogen::sml::meta_data_writer writer(meta_data);
++    dogen::sml::meta_data::writer writer(meta_data);
+ 
+     writer.add(dogen::sml::tags::cpp::types::header_file::generate,
+         dogen::sml::tags::bool_true);
+diff --git a/projects/sml/src/types/flat_name_builder.cpp b/projects/sml/src/types/flat_name_builder.cpp
+index 362b293..c42a90d 100644
+--- a/projects/sml/src/types/flat_name_builder.cpp
++++ b/projects/sml/src/types/flat_name_builder.cpp
+@@ -21,7 +21,7 @@
+ #include <boost/filesystem/path.hpp>
+ #include <boost/algorithm/string/join.hpp>
+ #include "dogen/sml/types/tags.hpp"
+-#include "dogen/sml/types/meta_data_reader.hpp"
++#include "dogen/sml/types/meta_data/reader.hpp"
+ #include "dogen/sml/types/flat_name_builder.hpp"
+ 
+ namespace {
+@@ -39,7 +39,7 @@ cpp_filename_for_qname(const boost::property_tree::ptree& meta_data,
+     const std::string& facet_directory, const std::string& facet_postfix,
+     const std::string& additional_postfix) const {
+ 
+-    meta_data_reader reader(meta_data);
++    meta_data::reader reader(meta_data);
+     boost::filesystem::path r;
+     if (reader.is_true(tags::cpp::split_project)) {
+         for(auto n : qn.external_module_path())
+diff --git a/projects/sml/src/types/json_hydrator.cpp b/projects/sml/src/types/json_hydrator.cpp
+index 1cd2e51..c60571b 100644
+--- a/projects/sml/src/types/json_hydrator.cpp
++++ b/projects/sml/src/types/json_hydrator.cpp
+@@ -23,7 +23,7 @@
+ #include <boost/throw_exception.hpp>
+ #include <boost/property_tree/json_parser.hpp>
+ #include "dogen/utility/log/logger.hpp"
+-#include "dogen/sml/types/meta_data_writer.hpp"
++#include "dogen/sml/types/meta_data/writer.hpp"
+ #include "dogen/sml/types/primitive.hpp"
+ #include "dogen/sml/types/object.hpp"
+ #include "dogen/sml/types/hydration_error.hpp"
+@@ -114,7 +114,7 @@ void json_hydrator::read_tags(const boost::property_tree::ptree& source,
+     if (i == source.not_found())
+         return;
+ 
+-    meta_data_writer writer(destination);
++    meta_data::writer writer(destination);
+     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
+         const auto field_name(j->first);
+         const auto field_value(j->second.get_value<std::string>());
+diff --git a/projects/sml/src/types/meta_data/enricher_interface.cpp b/projects/sml/src/types/meta_data/enricher_interface.cpp
+new file mode 100644
+index 0000000..ce1af7e
+--- /dev/null
++++ b/projects/sml/src/types/meta_data/enricher_interface.cpp
+@@ -0,0 +1,29 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/sml/types/meta_data/enricher_interface.hpp"
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++enricher_interface::~enricher_interface() noexcept { }
++
++} } }
+diff --git a/projects/sml/src/types/meta_data/grapher.cpp b/projects/sml/src/types/meta_data/grapher.cpp
+new file mode 100644
+index 0000000..0711bf3
+--- /dev/null
++++ b/projects/sml/src/types/meta_data/grapher.cpp
+@@ -0,0 +1,2 @@
++// dummy function to suppress ranlib warnings
++void grapher() { }
+diff --git a/projects/sml/src/types/meta_data/reader.cpp b/projects/sml/src/types/meta_data/reader.cpp
+new file mode 100644
+index 0000000..fea1ce1
+--- /dev/null
++++ b/projects/sml/src/types/meta_data/reader.cpp
+@@ -0,0 +1,58 @@
++#include "dogen/sml/types/tags.hpp"
++#include "dogen/sml/types/meta_data/reader.hpp"
++
++namespace {
++
++const std::string empty;
++
++}
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++reader::reader(const boost::property_tree::ptree& meta_data)
++    : meta_data_(meta_data) { }
++
++bool reader::has_key(const std::string& key) const {
++    const auto node(meta_data_.get_optional<std::string>(key));
++    return node;
++}
++
++bool reader::is_true(const std::string& key) const {
++    const auto value(get(key));
++    return value == tags::bool_true;
++}
++
++bool reader::is_false(const std::string& key) const {
++    return !is_true(key);
++}
++
++std::string reader::get(const std::string& key) const {
++    const auto v(meta_data_.get_optional<std::string>(key));
++    if (v)
++        return *v;
++
++    return empty;
++}
++
++bool reader::is_supported(const std::string& key) const {
++    const auto value(get(key));
++    return value == tags::status_supported;
++}
++
++std::list<std::pair<std::string,std::string> > reader::odb_pragma() const {
++    std::list<std::pair<std::string, std::string> > r;
++
++    using boost::property_tree::ptree;
++    const auto child(meta_data_.get_child_optional(tags::odb_pragma));
++    if (!child)
++        return r;
++
++    for (auto i(child->begin()); i != child->end(); ++i)
++        r.push_back(std::make_pair(tags::odb_pragma, i->second.data()));
++
++    return r;
++}
++
++} } }
+diff --git a/projects/sml/src/types/meta_data/registrar.cpp b/projects/sml/src/types/meta_data/registrar.cpp
+new file mode 100644
+index 0000000..28c4baa
+--- /dev/null
++++ b/projects/sml/src/types/meta_data/registrar.cpp
+@@ -0,0 +1,2 @@
++// dummy function to suppress ranlib warnings
++void registrar() { }
+diff --git a/projects/sml/src/types/meta_data/workflow.cpp b/projects/sml/src/types/meta_data/workflow.cpp
+new file mode 100644
+index 0000000..766691c
+--- /dev/null
++++ b/projects/sml/src/types/meta_data/workflow.cpp
+@@ -0,0 +1,11 @@
++#include "dogen/sml/types/meta_data/workflow.hpp"
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++void workflow::execute(model& /*m*/) const {
++
++}
++
++} } }
+diff --git a/projects/sml/src/types/meta_data/writer.cpp b/projects/sml/src/types/meta_data/writer.cpp
+new file mode 100644
+index 0000000..9535ed8
+--- /dev/null
++++ b/projects/sml/src/types/meta_data/writer.cpp
+@@ -0,0 +1,84 @@
++#include <boost/throw_exception.hpp>
++#include <boost/lexical_cast.hpp>
++#include "dogen/utility/log/logger.hpp"
++#include "dogen/sml/types/meta_data/read_write_error.hpp"
++#include "dogen/sml/types/tags.hpp"
++#include "dogen/sml/types/meta_data/writer.hpp"
++
++using namespace dogen::utility::log;
++
++namespace {
++
++auto lg(logger_factory("sml.meta_data.writer"));
++const std::string duplicated_key(
++    "Attempt to use a simple tag key which has already been used: ");
++
++}
++
++namespace dogen {
++namespace sml {
++namespace meta_data {
++
++writer::writer(boost::property_tree::ptree& meta_data)
++    : meta_data_(meta_data) { }
++
++bool writer::is_container(const std::string& key) const {
++    return key == tags::odb_pragma;
++}
++
++bool writer::has_key(const std::string& key) const {
++    const auto node(meta_data_.get_optional<std::string>(key));
++    return node;
++}
++
++void writer::add(const std::string& key, const std::string& value) {
++    using boost::property_tree::ptree;
++    if (is_container(key)) {
++        const auto node(meta_data_.get_child_optional(key));
++        unsigned int i(0);
++        if (node)
++            i = node->size();
++
++        const std::string nk(key + "." + boost::lexical_cast<std::string>(i));
++        meta_data_.put_child(nk, ptree(value));
++        return;
++    }
++
++    if (has_key(key)) {
++        BOOST_LOG_SEV(lg, error) << duplicated_key << key;
++        BOOST_THROW_EXCEPTION(read_write_error(duplicated_key + key));
++    }
++    meta_data_.put(key, value);
++}
++
++void writer::add(const std::list<std::pair<std::string, std::string> >& kvps) {
++    for (const auto& pair : kvps)
++        add(pair.first, pair.second);
++}
++
++bool writer::add_if_marker_found(const std::string& key,
++    const std::list<std::pair<std::string, std::string> >& kvps) {
++    bool has_marker(false);
++    for (const auto& kvp : kvps) {
++        has_marker = kvp.first == key;
++        if (has_marker)
++            break;
++    }
++
++    if (!has_marker)
++        return false;
++
++    add(kvps);
++    return true;
++}
++
++bool writer::
++add_if_key_not_found(const std::string& key, const std::string& value) {
++    if (has_key(key))
++        return false;
++
++    add(key, value);
++    return true;
++}
++
++} } }
+diff --git a/projects/sml/src/types/meta_data_populator_interface.cpp b/projects/sml/src/types/meta_data_populator_interface.cpp
+deleted file mode 100644
+index be77795..0000000
+--- a/projects/sml/src/types/meta_data_populator_interface.cpp
++++ /dev/null
+@@ -1,2 +0,0 @@
+-// dummy function to suppress ranlib warnings
+-void meta_data_populator_interface() { }
+diff --git a/projects/sml/src/types/meta_data_processor.cpp b/projects/sml/src/types/meta_data_processor.cpp
+deleted file mode 100644
+index 9068a46..0000000
+--- a/projects/sml/src/types/meta_data_processor.cpp
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#include "dogen/sml/types/meta_data_processor.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-void meta_data_processor::process(model& /*m*/) const {
+-}
+-
+-} }
+diff --git a/projects/sml/src/types/meta_data_reader.cpp b/projects/sml/src/types/meta_data_reader.cpp
+deleted file mode 100644
+index 8934180..0000000
+--- a/projects/sml/src/types/meta_data_reader.cpp
++++ /dev/null
+@@ -1,79 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include "dogen/sml/types/tags.hpp"
+-#include "dogen/sml/types/meta_data_reader.hpp"
+-
+-namespace {
+-
+-const std::string empty;
+-
+-}
+-
+-namespace dogen {
+-namespace sml {
+-
+-meta_data_reader::
+-meta_data_reader(const boost::property_tree::ptree& meta_data)
+-    : meta_data_(meta_data) { }
+-
+-bool meta_data_reader::has_key(const std::string& key) const {
+-    const auto node(meta_data_.get_optional<std::string>(key));
+-    return node;
+-}
+-
+-bool meta_data_reader::is_true(const std::string& key) const {
+-    const auto value(get(key));
+-    return value == tags::bool_true;
+-}
+-
+-bool meta_data_reader::is_false(const std::string& key) const {
+-    return !is_true(key);
+-}
+-
+-std::string meta_data_reader::get(const std::string& key) const {
+-    const auto v(meta_data_.get_optional<std::string>(key));
+-    if (v)
+-        return *v;
+-
+-    return empty;
+-}
+-
+-bool meta_data_reader::is_supported(const std::string& key) const {
+-    const auto value(get(key));
+-    return value == tags::status_supported;
+-}
+-
+-std::list<std::pair<std::string,std::string> >
+-meta_data_reader::odb_pragma() const {
+-    std::list<std::pair<std::string, std::string> > r;
+-
+-    using boost::property_tree::ptree;
+-    const auto child(meta_data_.get_child_optional(tags::odb_pragma));
+-    if (!child)
+-        return r;
+-
+-    for (auto i(child->begin()); i != child->end(); ++i)
+-        r.push_back(std::make_pair(tags::odb_pragma, i->second.data()));
+-
+-    return r;
+-}
+-
+-} }
+diff --git a/projects/sml/src/types/meta_data_writer.cpp b/projects/sml/src/types/meta_data_writer.cpp
+deleted file mode 100644
+index 3cee2bc..0000000
+--- a/projects/sml/src/types/meta_data_writer.cpp
++++ /dev/null
+@@ -1,104 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <boost/throw_exception.hpp>
+-#include <boost/lexical_cast.hpp>
+-#include "dogen/utility/log/logger.hpp"
+-#include "dogen/sml/types/meta_data_error.hpp"
+-#include "dogen/sml/types/tags.hpp"
+-#include "dogen/sml/types/meta_data_writer.hpp"
+-
+-using namespace dogen::utility::log;
+-
+-namespace {
+-
+-auto lg(logger_factory("sml.meta_data_writer"));
+-const std::string duplicated_key(
+-    "Attempt to use a simple tag key which has already been used: ");
+-
+-}
+-
+-namespace dogen {
+-namespace sml {
+-
+-meta_data_writer::meta_data_writer(boost::property_tree::ptree& meta_data)
+-    : meta_data_(meta_data) { }
+-
+-bool meta_data_writer::is_container(const std::string& key) const {
+-    return key == tags::odb_pragma;
+-}
+-
+-bool meta_data_writer::has_key(const std::string& key) const {
+-    const auto node(meta_data_.get_optional<std::string>(key));
+-    return node;
+-}
+-
+-void meta_data_writer::add(const std::string& key, const std::string& value) {
+-    using boost::property_tree::ptree;
+-    if (is_container(key)) {
+-        const auto node(meta_data_.get_child_optional(key));
+-        unsigned int i(0);
+-        if (node)
+-            i = node->size();
+-
+-        const std::string nk(key + "." + boost::lexical_cast<std::string>(i));
+-        meta_data_.put_child(nk, ptree(value));
+-        return;
+-    }
+-
+-    if (has_key(key)) {
+-        BOOST_LOG_SEV(lg, error) << duplicated_key << key;
+-        BOOST_THROW_EXCEPTION(meta_data_error(duplicated_key + key));
+-    }
+-    meta_data_.put(key, value);
+-}
+-
+-void meta_data_writer::
+-add(const std::list<std::pair<std::string, std::string> >& kvps) {
+-    for (const auto& pair : kvps)
+-        add(pair.first, pair.second);
+-}
+-
+-bool meta_data_writer::add_if_marker_found(const std::string& key,
+-    const std::list<std::pair<std::string, std::string> >& kvps) {
+-    bool has_marker(false);
+-    for (const auto& kvp : kvps) {
+-        has_marker = kvp.first == key;
+-        if (has_marker)
+-            break;
+-    }
+-
+-    if (!has_marker)
+-        return false;
+-
+-    add(kvps);
+-    return true;
+-}
+-
+-bool meta_data_writer::
+-add_if_key_not_found(const std::string& key, const std::string& value) {
+-    if (has_key(key))
+-        return false;
+-
+-    add(key, value);
+-    return true;
+-}
+-
+-} }
+diff --git a/projects/sml/src/types/workflow.cpp b/projects/sml/src/types/workflow.cpp
+index 4f2b0a7..598bc30 100644
+--- a/projects/sml/src/types/workflow.cpp
++++ b/projects/sml/src/types/workflow.cpp
+@@ -28,7 +28,7 @@
+ #include "dogen/sml/types/json_hydrator.hpp"
+ #include "dogen/sml/types/merger.hpp"
+ #include "dogen/sml/types/resolver.hpp"
+-#include "dogen/sml/types/meta_data_processor.hpp"
++#include "dogen/sml/types/meta_data/workflow.hpp"
+ #include "dogen/sml/types/concept_indexer.hpp"
+ #include "dogen/sml/types/property_indexer.hpp"
+ #include "dogen/sml/types/association_indexer.hpp"
+@@ -124,8 +124,8 @@ model workflow::create_merged_model_activity(const model& target,
+ }
+ 
+ void workflow::process_meta_data_activity(model& merged_model) const {
+-    meta_data_processor p;
+-    p.process(merged_model);
++    meta_data::workflow w;
++    w.execute(merged_model);
+ }
+ 
+ void workflow::resolve_types_activity(model& merged_model) const {
