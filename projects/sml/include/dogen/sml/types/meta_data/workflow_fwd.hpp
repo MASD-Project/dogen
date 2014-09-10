@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_READER_FWD_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
+#define DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,10 @@
 
 namespace dogen {
 namespace sml {
+namespace meta_data {
 
-class meta_data_reader;
+class workflow;
 
-} }
+} } }
 
 #endif

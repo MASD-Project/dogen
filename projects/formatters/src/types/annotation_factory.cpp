@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/meta_data_reader.hpp"
+#include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
@@ -58,7 +58,7 @@ throw_missing_item(const std::string& msg, const std::string& n) const {
 
 boost::optional<licence> annotation_factory::
 extract_licence(const boost::property_tree::ptree& meta_data) const {
-    sml::meta_data_reader reader(meta_data);
+    sml::meta_data::reader reader(meta_data);
     if (!reader.has_key(sml::tags::licence_name))
         return boost::optional<licence>();
 
@@ -77,7 +77,7 @@ extract_licence(const boost::property_tree::ptree& meta_data) const {
 
 boost::optional<modeline> annotation_factory::
 extract_modeline(const boost::property_tree::ptree& meta_data) const {
-    sml::meta_data_reader reader(meta_data);
+    sml::meta_data::reader reader(meta_data);
     if (!reader.has_key(sml::tags::modeline_group_name))
         return boost::optional<modeline>();
 
@@ -96,7 +96,7 @@ extract_modeline(const boost::property_tree::ptree& meta_data) const {
 
 std::string annotation_factory::
 extract_marker(const boost::property_tree::ptree& meta_data) const {
-    sml::meta_data_reader reader(meta_data);
+    sml::meta_data::reader reader(meta_data);
 
     using cgm = sml::tags::code_generation_marker;
     const std::string message(reader.get(cgm::message));

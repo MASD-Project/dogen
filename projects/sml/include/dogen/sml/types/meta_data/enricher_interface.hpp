@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_POPULATOR_INTERFACE_HPP
-#define DOGEN_SML_TYPES_META_DATA_POPULATOR_INTERFACE_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_ENRICHER_INTERFACE_HPP
+#define DOGEN_SML_TYPES_META_DATA_ENRICHER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,52 +35,52 @@
 
 namespace dogen {
 namespace sml {
+namespace meta_data {
 
 /**
- * @brief Populates a subset of the meta-data for a given target.
+ * @brief Enriches a subset of the meta-data for a given target.
  */
-class meta_data_populator_interface {
+class enricher_interface {
 public:
-    meta_data_populator_interface() = default;
-    meta_data_populator_interface(
-        const meta_data_populator_interface&) = delete;
-    meta_data_populator_interface(meta_data_populator_interface&&) = default;
-    virtual ~meta_data_populator_interface() noexcept = 0;
+    enricher_interface() = default;
+    enricher_interface(const enricher_interface&) = delete;
+    enricher_interface(enricher_interface&&) = default;
+    virtual ~enricher_interface() noexcept = 0;
 
 public:
     /**
-     * @brief Unique identifier for this populator.
+     * @brief Unique identifier for this enriches.
      */
     virtual std::string id() const = 0;
 
     /**
-     * @brief List of unique identifiers of other populators that must
-     * be executed before this populator.
+     * @brief List of unique identifiers of other enrichers that must
+     * be executed before this enrichers.
      */
     virtual std::list<std::string> dependencies() const = 0;
 
     /**
-     * @brief Populate concept tags.
+     * @brief Enrich concept tags.
      */
-    virtual void populate(const model& model,
+    virtual void enrich(const model& model,
         boost::optional<const module> parent_module,
         concept& target) = 0;
 
     /**
-     * @brief Populate module tags.
+     * @brief Enrich module tags.
      */
-    virtual void populate(const model& model,
+    virtual void enrich(const model& model,
         boost::optional<const module> parent_module,
         module& target) = 0;
 
     /**
-     * @brief Populate type tags.
+     * @brief Enrich type tags.
      */
-    virtual void populate(const model& model,
+    virtual void enrich(const model& model,
         boost::optional<const module> parent_module,
         type& target) = 0;
 };
 
-} }
+} } }
 
 #endif

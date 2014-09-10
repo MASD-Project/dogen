@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data_reader.hpp"
+#include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -329,7 +329,7 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
 
     nti.complete_name(complete_name);
     pi.type(nti);
-    sml::meta_data_reader reader(p.meta_data());
+    sml::meta_data::reader reader(p.meta_data());
     pi.opaque_parameters(reader.odb_pragma());
 
     return std::make_tuple(pi,
@@ -392,7 +392,7 @@ transformer::to_class_info(const sml::object& o) const {
     r->generation_type(o.generation_type());
     r->class_type(cpp::class_types::user_defined);
 
-    sml::meta_data_reader reader(o.meta_data());
+    sml::meta_data::reader reader(o.meta_data());
     r->opaque_parameters(reader.odb_pragma());
 
     auto i(o.relationships().find(sml::relationship_types::parents));

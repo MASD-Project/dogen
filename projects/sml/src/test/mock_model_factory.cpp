@@ -27,7 +27,7 @@
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/meta_data_writer.hpp"
+#include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
@@ -359,7 +359,7 @@ std::string boost_serialization_forward_declaration_filename(
 
 void add_test_tags(boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& qn) {
-    dogen::sml::meta_data_writer writer(meta_data);
+    dogen::sml::meta_data::writer writer(meta_data);
 
     writer.add(dogen::sml::tags::cpp::types::header_file::generate,
         dogen::sml::tags::bool_true);

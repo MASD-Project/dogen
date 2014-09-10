@@ -28,7 +28,7 @@
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
-#include "dogen/sml/types/meta_data_processor.hpp"
+#include "dogen/sml/types/meta_data/workflow.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
@@ -124,8 +124,8 @@ model workflow::create_merged_model_activity(const model& target,
 }
 
 void workflow::process_meta_data_activity(model& merged_model) const {
-    meta_data_processor p;
-    p.process(merged_model);
+    meta_data::workflow w;
+    w.execute(merged_model);
 }
 
 void workflow::resolve_types_activity(model& merged_model) const {

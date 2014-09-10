@@ -21,7 +21,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/meta_data_reader.hpp"
+#include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/sml/types/flat_name_builder.hpp"
 
 namespace {
@@ -39,7 +39,7 @@ cpp_filename_for_qname(const boost::property_tree::ptree& meta_data,
     const std::string& facet_directory, const std::string& facet_postfix,
     const std::string& additional_postfix) const {
 
-    meta_data_reader reader(meta_data);
+    meta_data::reader reader(meta_data);
     boost::filesystem::path r;
     if (reader.is_true(tags::cpp::split_project)) {
         for(auto n : qn.external_module_path())

@@ -18,32 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_WRITER_HPP
-#define DOGEN_SML_TYPES_META_DATA_WRITER_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
+#define DOGEN_SML_TYPES_META_DATA_WRITER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
 #include <list>
 #include <boost/property_tree/ptree.hpp>
 
 namespace dogen {
 namespace sml {
+namespace meta_data {
 
 /**
  * @brief Given one or more key-value pairs, adds them to the
  * meta-data container.
  */
-class meta_data_writer {
+class writer {
 public:
-    meta_data_writer() = delete;
-    ~meta_data_writer() noexcept = default;
-    meta_data_writer(const meta_data_writer&) = default;
-    meta_data_writer(meta_data_writer&&) = default;
+    writer() = delete;
+    ~writer() noexcept = default;
+    writer(const writer&) = default;
+    writer(writer&&) = default;
 
 public:
-    meta_data_writer(boost::property_tree::ptree& meta_data);
+    writer(boost::property_tree::ptree& meta_data);
 
 private:
     /**
@@ -92,6 +92,6 @@ private:
     boost::property_tree::ptree& meta_data_;
 };
 
-} }
+} } }
 
 #endif

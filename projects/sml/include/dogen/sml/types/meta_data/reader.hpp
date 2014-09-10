@@ -30,16 +30,17 @@
 
 namespace dogen {
 namespace sml {
+namespace meta_data {
 
-class meta_data_reader {
+class reader {
 public:
-    meta_data_reader() = delete;
-    ~meta_data_reader() noexcept = default;
-    meta_data_reader(const meta_data_reader&) = default;
-    meta_data_reader(meta_data_reader&&) = default;
+    reader() = delete;
+    ~reader() noexcept = default;
+    reader(const reader&) = default;
+    reader(reader&&) = default;
 
 public:
-    meta_data_reader(const boost::property_tree::ptree& meta_data);
+    reader(const boost::property_tree::ptree& meta_data);
 
 public:
     /**
@@ -82,6 +83,6 @@ private:
     const boost::property_tree::ptree& meta_data_;
 };
 
-} }
+} } }
 
 #endif

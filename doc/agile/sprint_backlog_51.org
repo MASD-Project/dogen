@@ -14,16 +14,16 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-10 Wed 15:40]
+Clock summary at [2014-09-10 Wed 20:02]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *4:37* |      |      |
+| *Total time*                                       | *5:13* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 4:37 |      |
+| Development Stories Implemented                    |        | 5:13 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 1:05 |
-| IMPLEMENTATION Fix windows continuous build        |        |      | 0:22 |
-| IMPLEMENTATION Create a sub-system for meta-data   |        |      | 3:10 |
+| COMPLETED Fix windows continuous build             |        |      | 0:22 |
+| COMPLETED Create a sub-system for meta-data        |        |      | 3:46 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -45,7 +45,8 @@ We allowed this section to evolve as a collage of different ideas, but
 now it is no longer making sense as a whole. We need to go back to the
 drawing board and create a structure for it.
 
-*** IMPLEMENTATION Fix windows continuous build                       :story:
+*** COMPLETED Fix windows continuous build                            :story:
+    CLOSED: [2014-09-10 Wed 18:47]
     CLOCK: [2014-09-08 Mon 21:45]--[2014-09-08 Mon 22:07] =>  0:22
 
 Ever since we refactored the test models into their own folder, the
@@ -61,7 +62,8 @@ Actions:
 - hacked scripts to point to root build directory to see if this fixes
   the issue.
 
-*** IMPLEMENTATION Create a sub-system for meta-data                  :story:
+*** COMPLETED Create a sub-system for meta-data                       :story:
+    CLOSED: [2014-09-10 Wed 20:01]
 
 We need to create a simple interface that takes a ptree and a model
 and updates the tags on the ptree. We also need a way to register
@@ -98,7 +100,9 @@ Actions:
 : populate(const model, const parent module, module)
 : populate(const model, const parent module, type)
 
-**** IMPLEMENTATION Update SML diagram and generate code               :task:
+**** COMPLETED Update SML diagram and generate code                    :task:
+     CLOSED: [2014-09-10 Wed 20:01]
+     CLOCK: [2014-09-10 Wed 18:12]--[2014-09-10 Wed 18:48] =>  0:36
      CLOCK: [2014-09-10 Wed 07:51]--[2014-09-10 Wed 08:40] =>  0:49
      CLOCK: [2014-09-09 Tue 17:55]--[2014-09-09 Tue 18:39] =>  0:44
      CLOCK: [2014-09-09 Tue 08:06]--[2014-09-09 Tue 08:46] =>  0:40
@@ -110,7 +114,7 @@ there and get rid of the =meta_data= prefixes.
 Also, we should take this opportunity to rename =populator= to
 =enricher= as it enriches the meta-data.
 
-**** Add static registration to meta-data workflow                     :task:
+*** Add static registration to meta-data workflow                      :story:
 
 - create a static method to register instances of the interface and a
   static container to hold them;

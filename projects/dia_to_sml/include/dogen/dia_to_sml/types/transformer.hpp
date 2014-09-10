@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/object.hpp"
-#include "dogen/sml/types/meta_data_writer.hpp"
+#include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -172,7 +172,7 @@ private:
 
         const auto pair(comments_parser_->parse(o.comment()));
         e.documentation(pair.first);
-        sml::meta_data_writer writer(e.meta_data());
+        sml::meta_data::writer writer(e.meta_data());
         writer.add(pair.second);
     }
 

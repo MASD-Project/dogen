@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_ERROR_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_ERROR_FWD_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_ENRICHMENT_ERROR_HPP
+#define DOGEN_SML_TYPES_META_DATA_ENRICHMENT_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,9 +30,26 @@
 
 namespace dogen {
 namespace sml {
+namespace meta_data {
 
-class meta_data_error;
+/**
+ * @brief An error occurred whilst populating the meta-data.
+ */
+class enrichment_error : public virtual std::exception, public virtual boost::exception {
+public:
+    enrichment_error() = default;
+    ~enrichment_error() noexcept = default;
 
-} }
+public:
+    enrichment_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } }
 
 #endif

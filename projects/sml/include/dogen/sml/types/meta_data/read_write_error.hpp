@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_ERROR_HPP
-#define DOGEN_SML_TYPES_META_DATA_ERROR_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_READ_WRITE_ERROR_HPP
+#define DOGEN_SML_TYPES_META_DATA_READ_WRITE_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,17 +30,18 @@
 
 namespace dogen {
 namespace sml {
+namespace meta_data {
 
 /**
- * @brief An error has occurred while peforming an operation related to meta data.
+ * @brief An error occurred whilst reading or writing meta-data.
  */
-class meta_data_error : public virtual std::exception, public virtual boost::exception {
+class read_write_error : public virtual std::exception, public virtual boost::exception {
 public:
-    meta_data_error() = default;
-    ~meta_data_error() noexcept = default;
+    read_write_error() = default;
+    ~read_write_error() noexcept = default;
 
 public:
-    meta_data_error(const std::string& message) : message_(message) { }
+    read_write_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }
@@ -49,6 +50,6 @@ private:
     const std::string message_;
 };
 
-} }
+} } }
 
 #endif

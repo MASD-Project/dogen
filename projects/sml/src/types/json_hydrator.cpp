@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data_writer.hpp"
+#include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
@@ -114,7 +114,7 @@ void json_hydrator::read_tags(const boost::property_tree::ptree& source,
     if (i == source.not_found())
         return;
 
-    meta_data_writer writer(destination);
+    meta_data::writer writer(destination);
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
         const auto field_name(j->first);
         const auto field_value(j->second.get_value<std::string>());
