@@ -14,16 +14,16 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-09 Tue 18:39]
+Clock summary at [2014-09-10 Wed 15:40]
 
-| Headline                                            | Time   |      |      |
-|-----------------------------------------------------+--------+------+------|
-| *Total time*                                        | *3:48* |      |      |
-|-----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                     |        | 3:48 |      |
-| IMPLEMENTATION Sprint and product backlog grooming  |        |      | 1:05 |
-| IMPLEMENTATION Refactor meta-data processing in SML |        |      | 2:21 |
-| IMPLEMENTATION Fix windows continuous build         |        |      | 0:22 |
+| Headline                                           | Time   |      |      |
+|----------------------------------------------------+--------+------+------|
+| *Total time*                                       | *4:37* |      |      |
+|----------------------------------------------------+--------+------+------|
+| Development Stories Implemented                    |        | 4:37 |      |
+| IMPLEMENTATION Sprint and product backlog grooming |        |      | 1:05 |
+| IMPLEMENTATION Fix windows continuous build        |        |      | 0:22 |
+| IMPLEMENTATION Create a sub-system for meta-data   |        |      | 3:10 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -45,7 +45,23 @@ We allowed this section to evolve as a collage of different ideas, but
 now it is no longer making sense as a whole. We need to go back to the
 drawing board and create a structure for it.
 
-*** IMPLEMENTATION Refactor meta-data processing in SML               :story:
+*** IMPLEMENTATION Fix windows continuous build                       :story:
+    CLOCK: [2014-09-08 Mon 21:45]--[2014-09-08 Mon 22:07] =>  0:22
+
+Ever since we refactored the test models into their own folder, the
+windows build stopped working. This is because we are too deep in the
+directory tree, resulting in paths longer that the maximum supported
+path. We need to move the build to a top-level folder somewhere.
+
+Of course we still have the linking issue but that will be addressed
+later.
+
+Actions:
+
+- hacked scripts to point to root build directory to see if this fixes
+  the issue.
+
+*** IMPLEMENTATION Create a sub-system for meta-data                  :story:
 
 We need to create a simple interface that takes a ptree and a model
 and updates the tags on the ptree. We also need a way to register
@@ -82,7 +98,8 @@ Actions:
 : populate(const model, const parent module, module)
 : populate(const model, const parent module, type)
 
-**** IMPLEMENTATION Create a sub-system for meta-data                  :task:
+**** IMPLEMENTATION Update SML diagram and generate code               :task:
+     CLOCK: [2014-09-10 Wed 07:51]--[2014-09-10 Wed 08:40] =>  0:49
      CLOCK: [2014-09-09 Tue 17:55]--[2014-09-09 Tue 18:39] =>  0:44
      CLOCK: [2014-09-09 Tue 08:06]--[2014-09-09 Tue 08:46] =>  0:40
 
@@ -94,49 +111,32 @@ Also, we should take this opportunity to rename =populator= to
 =enricher= as it enriches the meta-data.
 
 **** Add static registration to meta-data workflow                     :task:
-     CLOSED: [2014-09-09 Tue 08:46]
 
 - create a static method to register instances of the interface and a
   static container to hold them;
 - add a simple list of shared pointers to keep track of the registered
   expanders.
 
-**** Move flat name builder to CPP model                               :task:
-
-It seems this class is used only for tagging so we should have one in
-each model. It may even make more sense in the c++ formatters model.
-
-**** Remove dependency of writer on tags                               :task:
+*** Remove dependency of writer on tags                               :story:
 
 We seem to be using the tags to detect containers. We need to get rid
 of this dependency.
 
-**** Delete tags class in SML                                          :task:
-
-This class does not make sense any more as each model will be
-responsible for their own tags.
-
-**** All model items traversal should resolve types                    :task:
+*** All model items traversal should resolve types                    :story:
 
 This traversal was designed for tagger but yet it does not resolve
 =type= into one of the sub-classes, forcing tagger to implement
 visitation to resolve the types. We should improve the traversal.
 
-*** IMPLEMENTATION Fix windows continuous build                       :story:
-    CLOCK: [2014-09-08 Mon 21:45]--[2014-09-08 Mon 22:07] =>  0:22
+*** Delete tags class in SML                                          :story:
 
-Ever since we refactored the test models into their own folder, the
-windows build stopped working. This is because we are too deep in the
-directory tree, resulting in paths longer that the maximum supported
-path. We need to move the build to a top-level folder somewhere.
+This class does not make sense any more as each model will be
+responsible for their own tags.
 
-Of course we still have the linking issue but that will be addressed
-later.
+*** Move flat name builder to CPP model                               :story:
 
-Actions:
-
-- hacked scripts to point to root build directory to see if this fixes
-  the issue.
+It seems this class is used only for tagging so we should have one in
+each model. It may even make more sense in the c++ formatters model.
 
 *** Implement a grapher in processor                                  :story:
 
