@@ -1819,6 +1819,17 @@ default they come out in the current directory.
 
 ** Authoring Diagrams in Dia
 
+FIXME: we need to add a section on the supported object types and the
+handling of unsupported object types.
+
+- uml_large_package
+- uml_class
+- uml_generalization
+- uml_association
+- uml_note
+- uml_message
+- uml_realization
+
 *** Properties
 *** Comments
 *** Packages
@@ -1826,6 +1837,7 @@ default they come out in the current directory.
 *** Inheritance
 *** Enumerations
 *** System Models
+**** JSON format
 **** Standard C++ System Model
 **** Boost System Model
 ** Frequently Asked Questions
