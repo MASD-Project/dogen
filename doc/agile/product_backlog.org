@@ -8,6 +8,18 @@
 
 Stories that we intend to look at, at some point.
 
+*** References to objects in package should assume package            :story:
+
+At present if we define two objects in a package =p=, say =a= and =b=,
+where =b= refers to =a= it must do so using a fully qualified path,
+e.g.: =p::a=. Failure to do so results in an error:
+
+: 2014-09-10 08:27:10.662113 [ERROR] [sml.resolver] Object has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "simple_name": "registrar" }
+: 2014-09-10 08:27:10.665861 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/sml/src/types/resolver.cpp(178): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen3sml16resolution_errorEEE
+: std::exception::what: Object has property with undefined type: registrar
+: [P12tag_workflow] = Code generation failure.
+
 *** Handling of unsupported dia objects                               :story:
 
 At present when we try to use a dia object that dogen knows nothing
@@ -23,6 +35,9 @@ could relax the code in processor (object_types):
 
 :    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
 :    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
+
+We should also consider having a =strict= command line option to
+enable/disable this behaviour.
 
 *** Consider generation of validators                                 :story:
 
