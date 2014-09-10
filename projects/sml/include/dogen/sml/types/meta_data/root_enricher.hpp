@@ -18,43 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
+#define DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-
-#include <memory>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/meta_data/registrar.hpp"
+#include "dogen/sml/types/meta_data/enricher_interface.hpp"
 
 namespace dogen {
 namespace sml {
 namespace meta_data {
 
-class workflow {
+/**
+ * @brief Responsible for enriching the meta-data with SML specific
+ * tags.
+ */
+class root_enricher : public enricher_interface {
 public:
-    workflow() = default;
-    workflow(const workflow&) = default;
-    ~workflow() = default;
-    workflow(workflow&&) = default;
-    workflow& operator=(const workflow&) = default;
+    virtual std::string id() const override;
 
-public:
-    /**
-     * @brief Add enricher to the workflow.
-     */
-    static void register_enricher(std::shared_ptr<enricher_interface> e);
+    virtual std::list<std::string> dependencies() const override;
 
-    /**
-     * @brief Execute the meta-data workflow on the supplied model.
-     */
-    void execute(model& m) const;
+    virtual void enrich(const model& model,
+        boost::optional<const module> parent_module,
+        concept& target) override;
 
-private:
-    static std::unique_ptr<registrar> registrar_;
+    virtual void enrich(const model& model,
+        boost::optional<const module> parent_module,
+        module& target) override;
+
+    virtual void enrich(const model& model,
+        boost::optional<const module> parent_module,
+        type& target) override;
 };
 
 } } }

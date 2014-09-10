@@ -18,43 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_GRAPHING_ERROR_HPP
+#define DOGEN_SML_TYPES_META_DATA_GRAPHING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-
-#include <memory>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/meta_data/registrar.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace sml {
 namespace meta_data {
 
-class workflow {
+/**
+ * @brief An error has occurred whilst building the graph.
+ */
+class graphing_error : public virtual std::exception, public virtual boost::exception {
 public:
-    workflow() = default;
-    workflow(const workflow&) = default;
-    ~workflow() = default;
-    workflow(workflow&&) = default;
-    workflow& operator=(const workflow&) = default;
+    graphing_error() = default;
+    ~graphing_error() noexcept = default;
 
 public:
-    /**
-     * @brief Add enricher to the workflow.
-     */
-    static void register_enricher(std::shared_ptr<enricher_interface> e);
+    graphing_error(const std::string& message) : message_(message) { }
 
-    /**
-     * @brief Execute the meta-data workflow on the supplied model.
-     */
-    void execute(model& m) const;
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
 private:
-    static std::unique_ptr<registrar> registrar_;
+    const std::string message_;
 };
 
 } } }

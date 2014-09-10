@@ -14,17 +14,18 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-10 Wed 22:30]
+Clock summary at [2014-09-10 Wed 23:51]
 
 | Headline                                                | Time   |      |      |
 |---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *5:32* |      |      |
+| *Total time*                                            | *6:53* |      |      |
 |---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 5:32 |      |
+| Development Stories Implemented                         |        | 6:53 |      |
 | IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:05 |
 | COMPLETED Fix windows continuous build                  |        |      | 0:22 |
 | COMPLETED Create a sub-system for meta-data             |        |      | 3:46 |
 | COMPLETED Add static registration to meta-data workflow |        |      | 0:19 |
+| IMPLEMENTATION Implement a grapher in meta_data         |        |      | 1:21 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -124,6 +125,18 @@ Also, we should take this opportunity to rename =populator= to
 - add a simple list of shared pointers to keep track of the registered
   expanders.
 
+*** IMPLEMENTATION Implement a grapher in meta_data                   :story:
+    CLOCK: [2014-09-10 Wed 22:30]--[2014-09-10 Wed 23:51] =>  1:21
+
+- create a grapher in meta_data that represents the dependencies
+  between instances of the interface
+- once the enricher has been instantiated we need to loop through the
+  list of expanders and build a graph.
+- on execute, iterate through the graph executing all instances of the
+  interface.
+- we should see if we can reuse some code of the dia grapher as we
+  need to build 3 graphers altogether.
+
 *** Remove dependency of writer on tags                               :story:
 
 We seem to be using the tags to detect containers. We need to get rid
@@ -144,17 +157,6 @@ responsible for their own tags.
 
 It seems this class is used only for tagging so we should have one in
 each model. It may even make more sense in the c++ formatters model.
-
-*** Implement a grapher in processor                                  :story:
-
-- create a grapher in processor that represents the dependencies
-  between instances of the interface
-- once the enricher has been instantiated we need to loop through the
-  list of expanders and build a graph.
-- on execute, iterate through the graph executing all instances of the
-  interface.
-- we should see if we can reuse some code of the dia grapher as we
-  need to build 3 graphers altogether.
 
 *** Implement the enricher interface in the CPP model                 :story:
 
