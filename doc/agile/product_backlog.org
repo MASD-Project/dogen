@@ -8,6 +8,22 @@
 
 Stories that we intend to look at, at some point.
 
+*** Handling of unsupported dia objects                               :story:
+
+At present when we try to use a dia object that dogen knows nothing
+about we get an error; for example using a standard line results in:
+
+: 2014-09-10 08:09:43.480906 [ERROR] [dia_to_sml.processor] Invalid value for object type: Standard - Line
+: 2014-09-10 08:09:43.487060 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/processor.cpp(124): Throw in function dogen::dia_to_sml::object_types dogen::dia_to_sml::processor::parse_object_type(const std::string &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml16processing_errorEEE
+: std::exception::what: Invalid value for object type: Standard - Line
+
+However, it may make more sense to just ignore these. To do so we
+could relax the code in processor (object_types):
+
+:    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
+:    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
+
 *** Consider generation of validators                                 :story:
 
 It would be nice if we could constraint the domain of a type via some
