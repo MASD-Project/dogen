@@ -42,14 +42,31 @@ public:
     workflow(workflow&&) = default;
     workflow& operator=(const workflow&) = default;
 
+private:
+    /**
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
+     */
+    static registrar& get_registrar();
+
 public:
     /**
-     * @brief Add enricher to the workflow.
+     * @brief Add the root enricher to the workflow.
+     *
+     * @pre the root enricher must not yet be registered.
      */
-    static void register_enricher(std::shared_ptr<enricher_interface> e);
+    static void register_root_enricher(std::shared_ptr<enricher_interface> e);
+
+    /**
+     * @brief Add an ordinary (non-root) enricher to the workflow.
+     */
+    static void register_ordinary_enricher(
+        std::shared_ptr<enricher_interface> e);
 
     /**
      * @brief Execute the meta-data workflow on the supplied model.
+     *
+     * @pre the root enricher must be registered.
      */
     void execute(model& m) const;
 

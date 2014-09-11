@@ -39,17 +39,30 @@ namespace meta_data {
 class registrar {
 public:
     /**
-     * @brief Add an enricher to the registrar.
+     * @brief Add the root enricher to the registrar.
      */
-    void register_enricher(std::shared_ptr<enricher_interface> e);
+    void register_root_enricher(std::shared_ptr<enricher_interface> e);
 
     /**
-     * @brief Returns all of the registered enrichers.
+     * @brief Add an ordinary enricher to the registrar.
      */
-    std::list<std::shared_ptr<enricher_interface>> enrichers();
+    void register_ordinary_enricher(std::shared_ptr<enricher_interface> e);
+
+    /**
+     * @brief Returns the root enricher, if one was registered, or
+     * null otherwise.
+     */
+    std::shared_ptr<enricher_interface> root_enricher();
+
+    /**
+     * @brief Returns all of the registered ordinary enrichers, or an
+     * empty list if none were registered.
+     */
+    std::list<std::shared_ptr<enricher_interface>> ordinary_enrichers();
 
 private:
-    std::list<std::shared_ptr<enricher_interface>> enrichers_;
+    std::shared_ptr<enricher_interface> root_enricher_;
+    std::list<std::shared_ptr<enricher_interface>> ordinary_enrichers_;
 };
 
 } } }

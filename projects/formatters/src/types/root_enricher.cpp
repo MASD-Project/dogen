@@ -20,21 +20,25 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/meta_data/root_enricher.hpp"
+#include "dogen/sml/types/meta_data/workflow.hpp"
+#include "dogen/sml/types/meta_data/scoped_registration.hpp"
+#include "dogen/formatters/types/root_enricher.hpp"
 
 namespace {
 
-std::string root_id("sml.meta_data.root_enricher");
+std::string root_id("formatters.root_enricher");
 std::list<std::string> empty_dependencies;
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(root_id));
 
+dogen::sml::meta_data::root_enricher_scoped_registration<
+    dogen::formatters::root_enricher> sr;
+
 }
 
 namespace dogen {
-namespace sml {
-namespace meta_data {
+namespace formatters {
 
 std::string root_enricher::id() const { return root_id; }
 
@@ -42,22 +46,22 @@ std::list<std::string> root_enricher::dependencies() const {
     return empty_dependencies;
 }
 
-void root_enricher::enrich(const model& /*model*/,
-    boost::optional<const module> /*parent_module*/,
-    concept& target) {
+void root_enricher::enrich(const sml::model& /*model*/,
+    boost::optional<const sml::module> /*parent_module*/,
+    sml::concept& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching concept: " << target.name();
 }
 
-void root_enricher::enrich(const model& /*model*/,
-    boost::optional<const module> /*parent_module*/,
-    module& target) {
+void root_enricher::enrich(const sml::model& /*model*/,
+    boost::optional<const sml::module> /*parent_module*/,
+    sml::module& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching module: " << target.name();
 }
 
-void root_enricher::enrich(const model& /*model*/,
-    boost::optional<const module> /*parent_module*/,
-    type& target) {
+void root_enricher::enrich(const sml::model& /*model*/,
+    boost::optional<const sml::module> /*parent_module*/,
+    sml::type& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching type: " << target.name();
 }
 
-} } }
+} }

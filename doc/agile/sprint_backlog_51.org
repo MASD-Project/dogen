@@ -14,21 +14,23 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-10 Wed 23:51]
+Clock summary at [2014-09-11 Thu 10:36]
 
 | Headline                                                | Time   |      |      |
 |---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *6:53* |      |      |
+| *Total time*                                            | *7:52* |      |      |
 |---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 6:53 |      |
-| IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:05 |
+| Development Stories Implemented                         |        | 7:52 |      |
+| IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
 | COMPLETED Fix windows continuous build                  |        |      | 0:22 |
 | COMPLETED Create a sub-system for meta-data             |        |      | 3:46 |
 | COMPLETED Add static registration to meta-data workflow |        |      | 0:19 |
 | IMPLEMENTATION Implement a grapher in meta_data         |        |      | 1:21 |
+| IMPLEMENTATION Move the root enricher to formatters     |        |      | 0:49 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-11 Thu 07:51]--[2014-09-11 Thu 08:01] =>  0:10
     CLOCK: [2014-09-09 Tue 17:50]--[2014-09-09 Tue 17:55] =>  0:05
     CLOCK: [2014-09-09 Tue 07:51]--[2014-09-09 Tue 08:05] =>  0:14
     CLOCK: [2014-09-08 Mon 17:52]--[2014-09-08 Mon 18:04] =>  0:12
@@ -137,6 +139,56 @@ Also, we should take this opportunity to rename =populator= to
 - we should see if we can reuse some code of the dia grapher as we
   need to build 3 graphers altogether.
 
+*** IMPLEMENTATION Move the root enricher to formatters               :story:
+    CLOCK: [2014-09-11 Thu 08:05]--[2014-09-11 Thu 08:54] =>  0:49
+
+We originally envisioned a root enricher in formatters just to make
+sure the graph had a root. In reality this is a conceptual error: SML
+cannot by definition have any meta-data since it has the type system
+to express itself. If there is anything that needs to be expressed in
+SML it must be expressed as a type.
+
+However, there is indeed an enricher that all enrichers depend on: the
+formatters enricher.
+
+- move the root enricher to formatters;
+- add a way to distinguish the root enricher from other enrichers
+  during registration.
+
+*** Link types and concepts to their containing module                :story:
+
+Instead of keeping track of the previous vertex in the graph we should
+really express the containment relationship via the type system in SML
+since that is exactly its job. Then we can query the model to look for
+the module's qname during enrichment. Suggested name for the property:
+=parent_module=.
+
+*** Enrichment as a two-stage process                                 :story:
+
+We originally thought the graph would allow us to process types in a
+single pass. This is not the case because of circular dependencies. In
+C++ these can be done provided one uses forward declarations; however,
+in SML they are still circular (from the point of view of the
+graph). This means that in addition to a graph we also need to split
+the process into two stages:
+
+- stage 1: entity specific enrichment
+- stage 2: relationship enrichment
+
+*** Create an SML grapher                                             :story:
+
+We need a class responsible for building a graph of SML qnames, and
+associating these with a ptree.
+
+In order to do this we need to make sure we have a module for the
+model.
+
+The main reason why we need a grapher is because of the relationship
+between modules and types - e.g. we want to make sure a type is
+processed after it's module and a module after its parent module. This
+is so that we can copy over tags. However, the same could be achieved
+by recursing the module graph.
+
 *** Remove dependency of writer on tags                               :story:
 
 We seem to be using the tags to detect containers. We need to get rid
@@ -187,14 +239,6 @@ any longer:
 
 These should all be removed, with the corresponding command line
 arguments.
-
-*** Create an SML grapher                                             :story:
-
-We need a class responsible for building a graph of SML qnames, and
-associating these with a ptree.
-
-In order to do this we need to make sure we have a module for the
-model.
 
 *** Implement the enricher interface in formatters                    :story:
 

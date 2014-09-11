@@ -18,28 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/meta_data/registrar.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_ROOT_ENRICHER_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_ROOT_ENRICHER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace sml {
-namespace meta_data {
+namespace formatters {
 
-void registrar::register_root_enricher(std::shared_ptr<enricher_interface> e) {
-    root_enricher_ = e;
-}
+class root_enricher;
 
-void registrar::
-register_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
-    ordinary_enrichers_.push_back(e);
-}
+} }
 
-std::shared_ptr<enricher_interface> registrar::root_enricher() {
-    return root_enricher_;
-}
-
-
-std::list<std::shared_ptr<enricher_interface>> registrar::ordinary_enrichers() {
-    return ordinary_enrichers_;
-}
-
-} } }
+#endif

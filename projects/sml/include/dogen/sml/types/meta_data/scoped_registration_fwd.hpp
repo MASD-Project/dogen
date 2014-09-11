@@ -18,41 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
-#define DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_SCOPED_REGISTRATION_FWD_HPP
+#define DOGEN_SML_TYPES_META_DATA_SCOPED_REGISTRATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/meta_data/enricher_interface.hpp"
-
 namespace dogen {
 namespace sml {
 namespace meta_data {
 
-/**
- * @brief Responsible for enriching the meta-data with SML specific
- * tags.
- */
-class root_enricher : public enricher_interface {
-public:
-    virtual std::string id() const override;
-
-    virtual std::list<std::string> dependencies() const override;
-
-    virtual void enrich(const model& model,
-        boost::optional<const module> parent_module,
-        concept& target) override;
-
-    virtual void enrich(const model& model,
-        boost::optional<const module> parent_module,
-        module& target) override;
-
-    virtual void enrich(const model& model,
-        boost::optional<const module> parent_module,
-        type& target) override;
-};
+class scoped_registration;
 
 } } }
 

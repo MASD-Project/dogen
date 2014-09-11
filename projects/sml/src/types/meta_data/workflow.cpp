@@ -26,11 +26,21 @@ namespace meta_data {
 
 std::unique_ptr<registrar> workflow::registrar_;
 
-void workflow::register_enricher(std::shared_ptr<enricher_interface> e) {
+registrar& workflow::get_registrar() {
     if (registrar_ == nullptr)
         registrar_ = std::unique_ptr<registrar>(new registrar());
 
-    registrar_->register_enricher(e);
+    return *registrar_;
+}
+
+void workflow::
+register_root_enricher(std::shared_ptr<enricher_interface> e) {
+    get_registrar().register_root_enricher(e);
+}
+
+void workflow::
+register_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
+    get_registrar().register_ordinary_enricher(e);
 }
 
 void workflow::execute(model& /*m*/) const {

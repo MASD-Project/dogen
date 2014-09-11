@@ -18,19 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_FWD_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
+#define DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/sml/types/meta_data/enricher_interface.hpp"
+
 namespace dogen {
-namespace sml {
-namespace meta_data {
+namespace formatters {
 
-class root_enricher;
+/**
+ * @brief Responsible for enriching the meta-data with the core
+ * formatter tags.
+ */
+class root_enricher : public sml::meta_data::enricher_interface {
+public:
+    virtual std::string id() const override;
 
-} } }
+    virtual std::list<std::string> dependencies() const override;
+
+    virtual void enrich(const sml::model& model,
+        boost::optional<const sml::module> parent_module,
+        sml::concept& target) override;
+
+    virtual void enrich(const sml::model& model,
+        boost::optional<const sml::module> parent_module,
+        sml::module& target) override;
+
+    virtual void enrich(const sml::model& model,
+        boost::optional<const sml::module> parent_module,
+        sml::type& target) override;
+};
+
+} }
 
 #endif

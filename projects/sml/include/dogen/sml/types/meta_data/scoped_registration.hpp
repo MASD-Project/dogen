@@ -18,28 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/meta_data/registrar.hpp"
+#ifndef DOGEN_SML_TYPES_META_DATA_SCOPED_REGISTRATION_HPP
+#define DOGEN_SML_TYPES_META_DATA_SCOPED_REGISTRATION_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/sml/types/meta_data/workflow.hpp"
 
 namespace dogen {
 namespace sml {
 namespace meta_data {
 
-void registrar::register_root_enricher(std::shared_ptr<enricher_interface> e) {
-    root_enricher_ = e;
-}
+template<typename T>
+class root_enricher_scoped_registration {
+public:
+    root_enricher_scoped_registration() {
+        workflow::register_root_enricher(std::shared_ptr<T>(new T));
+    }
+};
 
-void registrar::
-register_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
-    ordinary_enrichers_.push_back(e);
-}
-
-std::shared_ptr<enricher_interface> registrar::root_enricher() {
-    return root_enricher_;
-}
-
-
-std::list<std::shared_ptr<enricher_interface>> registrar::ordinary_enrichers() {
-    return ordinary_enrichers_;
-}
+template<typename T>
+class ordinary_enricher_scoped_registration {
+public:
+    ordinary_enricher_scoped_registration() {
+        workflow::register_ordinary_enricher(std::shared_ptr<T>(new T));
+    }
+};
 
 } } }
+
+#endif

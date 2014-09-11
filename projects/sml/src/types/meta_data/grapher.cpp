@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data/root_enricher.hpp"
 #include "dogen/sml/types/meta_data/graphing_error.hpp"
 #include "dogen/sml/types/meta_data/grapher.hpp"
 
@@ -39,9 +38,7 @@ namespace dogen {
 namespace sml {
 namespace meta_data {
 
-grapher::grapher() : built_(false), root_vertex_(boost::add_vertex(graph_)),
-                     root_(std::make_shared<root_enricher>()) {
-
+grapher::grapher() : built_(false), root_vertex_(boost::add_vertex(graph_)) {
     graph_[root_vertex_] = root_;
     id_to_vertex_.insert(std::make_pair(root_->id(), root_vertex_));
 }

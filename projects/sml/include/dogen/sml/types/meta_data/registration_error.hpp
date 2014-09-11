@@ -18,28 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/meta_data/registrar.hpp"
+#ifndef DOGEN_SML_TYPES_META_DATA_REGISTRATION_ERROR_HPP
+#define DOGEN_SML_TYPES_META_DATA_REGISTRATION_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace sml {
 namespace meta_data {
 
-void registrar::register_root_enricher(std::shared_ptr<enricher_interface> e) {
-    root_enricher_ = e;
-}
+/**
+ * @brief An error has occurred whilst registering an enricher.
+ */
+class registration_error : public virtual std::exception, public virtual boost::exception {
+public:
+    registration_error() = default;
+    ~registration_error() noexcept = default;
 
-void registrar::
-register_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
-    ordinary_enrichers_.push_back(e);
-}
+public:
+    registration_error(const std::string& message) : message_(message) { }
 
-std::shared_ptr<enricher_interface> registrar::root_enricher() {
-    return root_enricher_;
-}
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
-
-std::list<std::shared_ptr<enricher_interface>> registrar::ordinary_enrichers() {
-    return ordinary_enrichers_;
-}
+private:
+    const std::string message_;
+};
 
 } } }
+
+#endif
