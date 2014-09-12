@@ -46,21 +46,33 @@ std::list<std::string> root_enricher::dependencies() const {
     return empty_dependencies;
 }
 
-void root_enricher::enrich(const sml::model& /*model*/,
-    boost::optional<const sml::module> /*parent_module*/,
-    sml::concept& target) {
+void root_enricher::
+first_stage_enrichment(const sml::model& /*model*/, sml::concept& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching concept: " << target.name();
 }
 
-void root_enricher::enrich(const sml::model& /*model*/,
-    boost::optional<const sml::module> /*parent_module*/,
-    sml::module& target) {
+void root_enricher::
+first_stage_enrichment(const sml::model& /*model*/, sml::module& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching module: " << target.name();
 }
 
-void root_enricher::enrich(const sml::model& /*model*/,
-    boost::optional<const sml::module> /*parent_module*/,
-    sml::type& target) {
+void root_enricher::
+first_stage_enrichment(const sml::model& /*model*/, sml::type& target) {
+    BOOST_LOG_SEV(lg, debug) << "Enriching type: " << target.name();
+}
+
+void root_enricher::
+second_stage_enrichment(const sml::model& /*model*/, sml::concept& target) {
+    BOOST_LOG_SEV(lg, debug) << "Enriching concept: " << target.name();
+}
+
+void root_enricher::
+second_stage_enrichment(const sml::model& /*model*/, sml::module& target) {
+    BOOST_LOG_SEV(lg, debug) << "Enriching module: " << target.name();
+}
+
+void root_enricher::
+second_stage_enrichment(const sml::model& /*model*/, sml::type& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching type: " << target.name();
 }
 

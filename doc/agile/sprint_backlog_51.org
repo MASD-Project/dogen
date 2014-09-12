@@ -162,7 +162,8 @@ formatters enricher.
 - on execute, iterate through the graph executing all instances of the
   interface.
 
-*** IMPLEMENTATION Link types and concepts to their containing module :story:
+*** COMPLETED Link types and concepts to their containing module      :story:
+    CLOSED: [2014-09-12 Fri 20:53]
     CLOCK: [2014-09-12 Fri 19:00]--[2014-09-12 Fri 19:05] =>  0:05
 
 Instead of keeping track of the previous vertex in the graph we should
@@ -193,21 +194,16 @@ package for any given entity.
 By mistake we named the new methods "package", a UML term, rather than
 "module" - the corresponding SML term.
 
-**** Remove parent package from the enricher interface                 :task:
+**** COMPLETED Remove parent package from the enricher interface       :task:
+     CLOSED: [2014-09-12 Fri 20:53]
+     CLOCK: [2014-09-12 Fri 20:49]--[2014-09-12 Fri 20:53] =>  0:04
 
 We no longer need to pass in the parent package; it can be queried
 from the model. Remove it from interface.
 
-*** IMPLEMENTATION Remove unnecessary properties from model           :story:
-    CLOCK: [2014-09-12 Fri 19:16]--[2014-09-12 Fri 19:19] =>  0:03
-
-The model should be just dumb container of types. We have a few legacy
-properties left behind from the days where the model was also used in
-the transformation process. Remove all the concepts from the model
-(=Element= etc) and deal with the fall out. This is required in order
-to simplify the graph in enricher.
-
-*** Enrichment as a two-stage process                                 :story:
+*** COMPLETED Enrichment as a two-stage process                       :story:
+    CLOSED: [2014-09-12 Fri 21:01]
+    CLOCK: [2014-09-12 Fri 20:54]--[2014-09-12 Fri 21:01] =>  0:07
 
 We originally thought the graph would allow us to process types in a
 single pass. This is not the case because of circular dependencies. In
@@ -218,11 +214,6 @@ the process into two stages:
 
 - stage 1: entity specific enrichment
 - stage 2: relationship enrichment
-
-*** Implement the enricher interface in formatters                    :story:
-
-We should start implementing the interface on a few formatters to
-prove that the approach actually works.
 
 *** Create an SML grapher                                             :story:
 
@@ -238,10 +229,10 @@ processed after it's module and a module after its parent module. This
 is so that we can copy over tags. However, the same could be achieved
 by recursing the module graph.
 
-*** Add cycle detection to grapher                                    :story:
+*** Implement the enricher interface in formatters                    :story:
 
-We need to move the cycle dectector code from dia to sml into
-utilities so that we can make use of it in the meta-data grapher.
+We should start implementing the interface on a few formatters to
+prove that the approach actually works.
 
 *** Implement the enricher interface in the CPP model                 :story:
 
@@ -259,6 +250,19 @@ such. SML should also declare the proper global traits such as
 We should consider if we should declare the formatters this way too,
 since they may depend on each other. This would be in the formatters
 model.
+
+*** Remove unnecessary properties from model                          :story:
+
+The model should be just dumb container of types. We have a few legacy
+properties left behind from the days where the model was also used in
+the transformation process. Remove all the concepts from the model
+(=Element= etc) and deal with the fall out. This is required in order
+to simplify the graph in enricher.
+
+*** Add cycle detection to grapher                                    :story:
+
+We need to move the cycle dectector code from dia to sml into
+utilities so that we can make use of it in the meta-data grapher.
 
 *** Refactor hello world example to make it simpler                   :story:
 

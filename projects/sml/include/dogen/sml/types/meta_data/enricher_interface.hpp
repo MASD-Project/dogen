@@ -60,25 +60,34 @@ public:
     virtual std::list<std::string> dependencies() const = 0;
 
     /**
-     * @brief Enrich concept tags.
+     * @brief Perform first stage enrichment to concept.
      */
-    virtual void enrich(const model& model,
-        boost::optional<const module> parent_module,
-        concept& target) = 0;
+    virtual void first_stage_enrichment(const model& model, concept& target) = 0;
 
     /**
-     * @brief Enrich module tags.
+     * @brief Perform first stage enrichment to module.
      */
-    virtual void enrich(const model& model,
-        boost::optional<const module> parent_module,
-        module& target) = 0;
+    virtual void first_stage_enrichment(const model& model, module& target) = 0;
 
     /**
-     * @brief Enrich type tags.
+     * @brief Perform first stage enrichment to type.
      */
-    virtual void enrich(const model& model,
-        boost::optional<const module> parent_module,
-        type& target) = 0;
+    virtual void first_stage_enrichment(const model& model, type& target) = 0;
+
+    /**
+     * @brief Perform second stage enrichment to concept.
+     */
+    virtual void second_stage_enrichment(const model& model, concept& target) = 0;
+
+    /**
+     * @brief Perform second stage enrichment to module.
+     */
+    virtual void second_stage_enrichment(const model& model, module& target) = 0;
+
+    /**
+     * @brief Perform second stage enrichment to type.
+     */
+    virtual void second_stage_enrichment(const model& model, type& target) = 0;
 };
 
 } } }

@@ -40,16 +40,18 @@ public:
 
     virtual std::list<std::string> dependencies() const override;
 
-    virtual void enrich(const sml::model& model,
-        boost::optional<const sml::module> parent_module,
+    virtual void first_stage_enrichment(const sml::model& model,
         sml::concept& target) override;
-
-    virtual void enrich(const sml::model& model,
-        boost::optional<const sml::module> parent_module,
+    virtual void first_stage_enrichment(const sml::model& model,
         sml::module& target) override;
+    virtual void first_stage_enrichment(const sml::model& model,
+        sml::type& target) override;
 
-    virtual void enrich(const sml::model& model,
-        boost::optional<const sml::module> parent_module,
+    virtual void second_stage_enrichment(const sml::model& model,
+        sml::concept& target) override;
+    virtual void second_stage_enrichment(const sml::model& model,
+        sml::module& target) override;
+    virtual void second_stage_enrichment(const sml::model& model,
         sml::type& target) override;
 };
 
