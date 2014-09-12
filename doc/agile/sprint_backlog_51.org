@@ -14,14 +14,15 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-11 Thu 10:36]
+Clock summary at [2014-09-11 Thu 22:51]
 
 | Headline                                                | Time   |      |      |
 |---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *7:52* |      |      |
+| *Total time*                                            | *8:09* |      |      |
 |---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 7:52 |      |
+| Development Stories Implemented                         |        | 8:09 |      |
 | IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
+| IMPLEMENTATION Updates to the manual and readme files   |        |      | 0:17 |
 | COMPLETED Fix windows continuous build                  |        |      | 0:22 |
 | COMPLETED Create a sub-system for meta-data             |        |      | 3:46 |
 | COMPLETED Add static registration to meta-data workflow |        |      | 0:19 |
@@ -38,7 +39,8 @@ Clock summary at [2014-09-11 Thu 10:36]
 
 Updates to sprint and product backlog.
 
-*** Updates to the manual and readme files                             :task:
+*** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-09-11 Thu 22:34]--[2014-09-11 Thu 22:51] =>  0:17
 
 Use downtime to update the manual and / or readme file.
 

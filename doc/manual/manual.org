@@ -1819,6 +1819,23 @@ default they come out in the current directory.
 
 ** Authoring Diagrams in Dia
 
+As described previously, Dia is a an open source tool for creating
+diagrams. Unlike other diagramming tools, Dia does not enforce too
+much domain-specific logic; this turns out to be one of its major
+strengths. In addition, its file format has been quite stable over
+time, making it a perfect candidate for the kind of "domain
+overloading" required by Dogen. Due to this - and its simple user
+interface - we decided to make it Dogen's first front end tool.
+
+This section describes the practical aspects of creating diagrams in
+Dia for code generation in Dogen. It is not, however, an introduction
+to Dia. If you are not familiar with the tool, we recommend reading
+the [[http://dia-installer.de/doc/en/][Dia User Manual]].
+
+*** Hello World
+
+*** Todo
+
 FIXME: we need to add a section on the supported object types and the
 handling of unsupported object types.
 
@@ -1830,16 +1847,14 @@ handling of unsupported object types.
 - uml_message
 - uml_realization
 
-*** Properties
-*** Comments
-*** Packages
-*** Association
-*** Inheritance
-*** Enumerations
-*** System Models
-**** JSON format
-**** Standard C++ System Model
-**** Boost System Model
+- Properties
+- Comments
+- Packages
+- Association
+- Inheritance: same model, across models.
+- Enumerations
+- System Models: JSON format, Standard C++ System Model, Boost System Model
+
 ** Frequently Asked Questions
 
 *Q*: When I tried running Dogen I get the following error message:
