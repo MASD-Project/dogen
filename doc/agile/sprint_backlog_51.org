@@ -14,23 +14,26 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-12 Fri 08:36]
+Clock summary at [2014-09-12 Fri 19:37]
 
-| Headline                                                | Time   |      |      |
-|---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *8:53* |      |      |
-|---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 8:53 |      |
-| IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
-| IMPLEMENTATION Updates to the manual and readme files   |        |      | 0:31 |
-| COMPLETED Fix windows continuous build                  |        |      | 0:22 |
-| COMPLETED Create a sub-system for meta-data             |        |      | 3:46 |
-| COMPLETED Add static registration to meta-data workflow |        |      | 0:19 |
-| COMPLETED Move the root enricher to formatters          |        |      | 0:49 |
-| COMPLETED Implement a grapher in meta_data              |        |      | 1:51 |
+| Headline                                                          | Time   |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                      | *9:24* |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                   |        | 9:24 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                |        |      | 1:19 |
+| IMPLEMENTATION Updates to the manual and readme files             |        |      | 0:31 |
+| COMPLETED Fix windows continuous build                            |        |      | 0:22 |
+| COMPLETED Create a sub-system for meta-data                       |        |      | 3:46 |
+| COMPLETED Add static registration to meta-data workflow           |        |      | 0:19 |
+| COMPLETED Move the root enricher to formatters                    |        |      | 0:49 |
+| COMPLETED Implement a grapher in meta_data                        |        |      | 1:51 |
+| IMPLEMENTATION Link types and concepts to their containing module |        |      | 0:24 |
+| IMPLEMENTATION Remove unnecessary properties from model           |        |      | 0:03 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-12 Fri 19:33]--[2014-09-12 Fri 19:37] =>  0:04
     CLOCK: [2014-09-11 Thu 07:51]--[2014-09-11 Thu 08:01] =>  0:10
     CLOCK: [2014-09-09 Tue 17:50]--[2014-09-09 Tue 17:55] =>  0:05
     CLOCK: [2014-09-09 Tue 07:51]--[2014-09-09 Tue 08:05] =>  0:14
@@ -168,7 +171,9 @@ since that is exactly its job. Then we can query the model to look for
 the module's qname during enrichment. Suggested name for the property:
 =parent_module=.
 
-**** IMPLEMENTATION Add properties to manage these relationships       :task:
+**** COMPLETED Add properties to manage these relationships            :task:
+     CLOSED: [2014-09-12 Fri 19:36]
+     CLOCK: [2014-09-12 Fri 19:19]--[2014-09-12 Fri 19:32] =>  0:13
      CLOCK: [2014-09-12 Fri 19:06]--[2014-09-12 Fri 19:12] =>  0:06
 
 We need to change the affected types, most likely via a concept, to
@@ -184,20 +189,14 @@ package for any given entity.
 We no longer need to pass in the parent package; it can be queried
 from the model. Remove it from interface.
 
-*** Refactor hello world example to make it simpler                   :story:
+*** IMPLEMENTATION Remove unnecessary properties from model           :story:
+    CLOCK: [2014-09-12 Fri 19:16]--[2014-09-12 Fri 19:19] =>  0:03
 
-Whilst we started adding a section on dia in the manual, we noticed
-that the hello world example makes use of =std::string= making it
-unsuitable for a basic example. We need to refactor it to use only
-int.
-
-- change manual sections on hello world
-- change sanity
-
-*** Add cycle detection to grapher                                    :story:
-
-We need to move the cycle dectector code from dia to sml into
-utilities so that we can make use of it in the meta-data grapher.
+The model should be just dumb container of types. We have a few legacy
+properties left behind from the days where the model was also used in
+the transformation process. Remove all the concepts from the model
+(=Element= etc) and deal with the fall out. This is required in order
+to simplify the graph in enricher.
 
 *** Enrichment as a two-stage process                                 :story:
 
@@ -210,6 +209,11 @@ the process into two stages:
 
 - stage 1: entity specific enrichment
 - stage 2: relationship enrichment
+
+*** Implement the enricher interface in formatters                    :story:
+
+We should start implementing the interface on a few formatters to
+prove that the approach actually works.
 
 *** Create an SML grapher                                             :story:
 
@@ -224,6 +228,38 @@ between modules and types - e.g. we want to make sure a type is
 processed after it's module and a module after its parent module. This
 is so that we can copy over tags. However, the same could be achieved
 by recursing the module graph.
+
+*** Add cycle detection to grapher                                    :story:
+
+We need to move the cycle dectector code from dia to sml into
+utilities so that we can make use of it in the meta-data grapher.
+
+*** Implement the enricher interface in the CPP model                 :story:
+
+The CPP model needs to register a top-level enricher that expands all
+of the C++ specific tags. This has to be done before the formatter
+enrichers kick in. We need to remove all of the =cpp= related code
+from enricher and add it to =cpp= model. For now we should get
+details from settings.
+
+We should declare all of the traits at the model level, at least those
+that are common to all formatters. Perhaps a traits class or some
+such. SML should also declare the proper global traits such as
+=enabled= and so on.
+
+We should consider if we should declare the formatters this way too,
+since they may depend on each other. This would be in the formatters
+model.
+
+*** Refactor hello world example to make it simpler                   :story:
+
+Whilst we started adding a section on dia in the manual, we noticed
+that the hello world example makes use of =std::string= making it
+unsuitable for a basic example. We need to refactor it to use only
+int.
+
+- change manual sections on hello world
+- change sanity
 
 *** Remove dependency of writer on tags                               :story:
 
@@ -246,23 +282,6 @@ responsible for their own tags.
 It seems this class is used only for tagging so we should have one in
 each model. It may even make more sense in the c++ formatters model.
 
-*** Implement the enricher interface in the CPP model                 :story:
-
-The CPP model needs to register a top-level enricher that expands all
-of the C++ specific tags. This has to be done before the formatter
-enrichers kick in. We need to remove all of the =cpp= related code
-from enricher and add it to =cpp= model. For now we should get
-details from settings.
-
-We should declare all of the traits at the model level, at least those
-that are common to all formatters. Perhaps a traits class or some
-such. SML should also declare the proper global traits such as
-=enabled= and so on.
-
-We should consider if we should declare the formatters this way too,
-since they may depend on each other. This would be in the formatters
-model.
-
 *** Remove all of the config settings that are in meta-data           :story:
 
 We have a number of settings in the =config= model that won't be used
@@ -276,11 +295,6 @@ any longer:
 These should all be removed, with the corresponding command line
 arguments.
 
-*** Implement the enricher interface in formatters                    :story:
-
-We should start implementing the interface on a few formatters to
-prove that the approach actually works.
-
 *** C++ formatters use of =headers_for_facet_=                        :story:
 
 We seem to be creating a local variable =headers_for_facet_= in
@@ -288,14 +302,6 @@ function =format_file_infos_activity= but not really making use of
 it. We need to investigate what was that we were trying to do here,
 the name of the variable seems to imply it should have been a member
 variable. Probably a remnant from some old refactoring.
-
-*** Remove unnecessary properties from model                          :story:
-
-The model should be just dumb container of types. We have a few legacy
-properties left behind from the days where the model was also used in
-the transformation process. Remove all the concepts from the model
-(=Element= etc) and deal with the fall out. This is required in order
-to simplify the graph in enricher.
 
 *** Manually generate packages for previous sprint                    :story:
 

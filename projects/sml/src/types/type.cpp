@@ -64,19 +64,22 @@ type::type(type&& rhs)
       meta_data_(std::move(rhs.meta_data_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
-      origin_type_(std::move(rhs.origin_type_)) { }
+      origin_type_(std::move(rhs.origin_type_)),
+      parent_package_(std::move(rhs.parent_package_)) { }
 
 type::type(
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type)
+    const dogen::sml::origin_types& origin_type,
+    const dogen::sml::qname& parent_package)
     : documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
       generation_type_(generation_type),
-      origin_type_(origin_type) { }
+      origin_type_(origin_type),
+      parent_package_(parent_package) { }
 
 void type::to_stream(std::ostream& s) const {
     s << " { "
@@ -85,7 +88,8 @@ void type::to_stream(std::ostream& s) const {
       << "\"meta_data\": " << meta_data_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
-      << "\"origin_type\": " << origin_type_
+      << "\"origin_type\": " << origin_type_ << ", "
+      << "\"parent_package\": " << parent_package_
       << " }";
 }
 
@@ -96,6 +100,7 @@ void type::swap(type& other) noexcept {
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
+    swap(parent_package_, other.parent_package_);
 }
 
 bool type::compare(const type& rhs) const {
@@ -103,7 +108,8 @@ bool type::compare(const type& rhs) const {
         meta_data_ == rhs.meta_data_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
-        origin_type_ == rhs.origin_type_;
+        origin_type_ == rhs.origin_type_ &&
+        parent_package_ == rhs.parent_package_;
 }
 
 const std::string& type::documentation() const {
@@ -168,6 +174,22 @@ dogen::sml::origin_types type::origin_type() const {
 
 void type::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
+}
+
+const dogen::sml::qname& type::parent_package() const {
+    return parent_package_;
+}
+
+dogen::sml::qname& type::parent_package() {
+    return parent_package_;
+}
+
+void type::parent_package(const dogen::sml::qname& v) {
+    parent_package_ = v;
+}
+
+void type::parent_package(const dogen::sml::qname&& v) {
+    parent_package_ = std::move(v);
 }
 
 } }

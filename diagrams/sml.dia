@@ -15839,13 +15839,13 @@ to register enrichers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O140">
       <dia:attribute name="obj_pos">
-        <dia:point val="-117,44"/>
+        <dia:point val="-118,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,43.95;-107.98,47.65"/>
+        <dia:rectangle val="-118.05,43.95;-108.98,47.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-117,44"/>
+        <dia:point val="-118,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.9700000000000006"/>
@@ -15970,6 +15970,47 @@ to register enrichers.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
+    </dia:object>
+    <dia:object type="UML - Generalization" version="1" id="O141">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-113.515,47.6"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-114.365,47.55;-72.5825,58.05"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="-113.515,47.6"/>
+        <dia:point val="-113.515,54"/>
+        <dia:point val="-72.6325,54"/>
+        <dia:point val="-72.6325,58"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O140" connection="6"/>
+        <dia:connection handle="1" to="O36" connection="1"/>
+      </dia:connections>
     </dia:object>
   </dia:layer>
 </dia:diagram>

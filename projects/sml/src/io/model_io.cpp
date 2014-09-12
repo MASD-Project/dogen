@@ -190,6 +190,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
+      << "\"parent_package\": " << v.parent_package() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "

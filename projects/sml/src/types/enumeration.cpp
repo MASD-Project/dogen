@@ -47,13 +47,15 @@ enumeration::enumeration(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
+    const dogen::sml::qname& parent_package,
     const dogen::sml::qname& underlying_type,
     const std::vector<dogen::sml::enumerator>& enumerators)
     : dogen::sml::type(documentation,
       meta_data,
       name,
       generation_type,
-      origin_type),
+      origin_type,
+      parent_package),
       underlying_type_(underlying_type),
       enumerators_(enumerators) { }
 

@@ -157,13 +157,14 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));
-    v.references(create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(position + 5));
-    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 6));
-    v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 7));
-    v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 8));
-    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 9));
-    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 10));
-    v.objects(create_std_unordered_map_dogen_sml_qname_dogen_sml_object(position + 11));
+    v.parent_package(create_dogen_sml_qname(position + 5));
+    v.references(create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(position + 6));
+    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 7));
+    v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 8));
+    v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 9));
+    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 10));
+    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 11));
+    v.objects(create_std_unordered_map_dogen_sml_qname_dogen_sml_object(position + 12));
 }
 
 model_generator::result_type

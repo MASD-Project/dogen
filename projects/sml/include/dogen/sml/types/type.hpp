@@ -59,7 +59,8 @@ public:
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
-        const dogen::sml::origin_types& origin_type);
+        const dogen::sml::origin_types& origin_type,
+        const dogen::sml::qname& parent_package);
 
 private:
     template<typename Archive>
@@ -129,6 +130,16 @@ public:
     void origin_type(const dogen::sml::origin_types& v);
     /**@}*/
 
+    /**
+     * @brief Name of the package in which we are contained.
+     */
+    /**@{*/
+    const dogen::sml::qname& parent_package() const;
+    dogen::sml::qname& parent_package();
+    void parent_package(const dogen::sml::qname& v);
+    void parent_package(const dogen::sml::qname&& v);
+    /**@}*/
+
 protected:
     bool compare(const type& rhs) const;
 public:
@@ -143,6 +154,7 @@ private:
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;
+    dogen::sml::qname parent_package_;
 };
 
 inline type::~type() noexcept { }

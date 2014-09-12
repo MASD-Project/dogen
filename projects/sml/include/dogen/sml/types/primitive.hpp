@@ -50,7 +50,8 @@ public:
         const boost::property_tree::ptree& meta_data,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
-        const dogen::sml::origin_types& origin_type);
+        const dogen::sml::origin_types& origin_type,
+        const dogen::sml::qname& parent_package);
 
 private:
     template<typename Archive>

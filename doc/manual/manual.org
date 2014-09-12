@@ -1834,7 +1834,7 @@ the [[http://dia-installer.de/doc/en/][Dia User Manual]].
 
 *** Hello World
 
-We shall start by creating a very simple diagram, similar to the one
+We shall start by creating a very simple diagram, identical to the one
 available in the dia sources here. First create a class called
 =one_property=.
 
@@ -1858,7 +1858,6 @@ Generating Hello World.
 You couldn't fail to notice that we made use of the type
 =std::string=, provided by the C++ Standard Library. This is a type
 that is not
-
 
 *** Todo
 

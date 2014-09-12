@@ -55,6 +55,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
+    ar << make_nvp("parent_package", v.parent_package_);
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("modules", v.modules_);
@@ -73,6 +74,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);
+    ar >> make_nvp("parent_package", v.parent_package_);
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("modules", v.modules_);

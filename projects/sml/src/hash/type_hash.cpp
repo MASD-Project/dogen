@@ -56,6 +56,7 @@ std::size_t type_hasher::hash(const type&v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
+    combine(seed, v.parent_package());
 
     return seed;
 }

@@ -60,6 +60,7 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
+        const dogen::sml::qname& parent_package,
         const std::list<dogen::sml::qname>& members);
 
 private:
@@ -122,6 +123,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Name of the package in which we are contained.
+     */
+    /**@{*/
+    const dogen::sml::qname& parent_package() const;
+    dogen::sml::qname& parent_package();
+    void parent_package(const dogen::sml::qname& v);
+    void parent_package(const dogen::sml::qname&& v);
+    /**@}*/
+
+    /**
      * @brief All the model elements contained in this module.
      */
     /**@{*/
@@ -147,6 +158,7 @@ private:
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;
+    dogen::sml::qname parent_package_;
     std::list<dogen::sml::qname> members_;
 };
 

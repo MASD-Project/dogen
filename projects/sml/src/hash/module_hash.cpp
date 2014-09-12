@@ -64,6 +64,7 @@ std::size_t module_hasher::hash(const module&v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
+    combine(seed, v.parent_package());
     combine(seed, hash_std_list_dogen_sml_qname(v.members()));
 
     return seed;

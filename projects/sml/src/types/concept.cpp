@@ -38,6 +38,7 @@ concept::concept(concept&& rhs)
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
+      parent_package_(std::move(rhs.parent_package_)),
       operations_(std::move(rhs.operations_)),
       refines_(std::move(rhs.refines_)),
       is_parent_(std::move(rhs.is_parent_)),
@@ -52,6 +53,7 @@ concept::concept(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
+    const dogen::sml::qname& parent_package,
     const std::list<dogen::sml::operation>& operations,
     const std::list<dogen::sml::qname>& refines,
     const bool is_parent,
@@ -64,6 +66,7 @@ concept::concept(
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
+      parent_package_(parent_package),
       operations_(operations),
       refines_(refines),
       is_parent_(is_parent),
@@ -79,6 +82,7 @@ void concept::swap(concept& other) noexcept {
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
+    swap(parent_package_, other.parent_package_);
     swap(operations_, other.operations_);
     swap(refines_, other.refines_);
     swap(is_parent_, other.is_parent_);
@@ -94,6 +98,7 @@ bool concept::operator==(const concept& rhs) const {
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
+        parent_package_ == rhs.parent_package_ &&
         operations_ == rhs.operations_ &&
         refines_ == rhs.refines_ &&
         is_parent_ == rhs.is_parent_ &&
@@ -216,6 +221,22 @@ dogen::sml::origin_types concept::origin_type() const {
 
 void concept::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
+}
+
+const dogen::sml::qname& concept::parent_package() const {
+    return parent_package_;
+}
+
+dogen::sml::qname& concept::parent_package() {
+    return parent_package_;
+}
+
+void concept::parent_package(const dogen::sml::qname& v) {
+    parent_package_ = v;
+}
+
+void concept::parent_package(const dogen::sml::qname&& v) {
+    parent_package_ = std::move(v);
 }
 
 const std::list<dogen::sml::operation>& concept::operations() const {

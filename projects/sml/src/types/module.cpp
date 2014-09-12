@@ -33,6 +33,7 @@ module::module(module&& rhs)
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
+      parent_package_(std::move(rhs.parent_package_)),
       members_(std::move(rhs.members_)) { }
 
 module::module(
@@ -41,12 +42,14 @@ module::module(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
+    const dogen::sml::qname& parent_package,
     const std::list<dogen::sml::qname>& members)
     : documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
+      parent_package_(parent_package),
       members_(members) { }
 
 void module::swap(module& other) noexcept {
@@ -56,6 +59,7 @@ void module::swap(module& other) noexcept {
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
+    swap(parent_package_, other.parent_package_);
     swap(members_, other.members_);
 }
 
@@ -65,6 +69,7 @@ bool module::operator==(const module& rhs) const {
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
+        parent_package_ == rhs.parent_package_ &&
         members_ == rhs.members_;
 }
 
@@ -136,6 +141,22 @@ dogen::sml::origin_types module::origin_type() const {
 
 void module::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
+}
+
+const dogen::sml::qname& module::parent_package() const {
+    return parent_package_;
+}
+
+dogen::sml::qname& module::parent_package() {
+    return parent_package_;
+}
+
+void module::parent_package(const dogen::sml::qname& v) {
+    parent_package_ = v;
+}
+
+void module::parent_package(const dogen::sml::qname&& v) {
+    parent_package_ = std::move(v);
 }
 
 const std::list<dogen::sml::qname>& module::members() const {

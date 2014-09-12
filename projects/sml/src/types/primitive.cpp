@@ -30,12 +30,14 @@ primitive::primitive(
     const boost::property_tree::ptree& meta_data,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type)
+    const dogen::sml::origin_types& origin_type,
+    const dogen::sml::qname& parent_package)
     : dogen::sml::type(documentation,
       meta_data,
       name,
       generation_type,
-      origin_type) { }
+      origin_type,
+      parent_package) { }
 
 void primitive::to_stream(std::ostream& s) const {
     s << " { "
