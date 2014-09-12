@@ -73,7 +73,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));
-    v.parent_package(create_dogen_sml_qname(position + 5));
+    v.parent_module(create_dogen_sml_qname(position + 5));
 }
 
 type_generator::result_type*

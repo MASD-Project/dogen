@@ -666,7 +666,7 @@ representation of the primitive type.#</dia:string>
         <dia:point val="-95,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3350000000000009"/>
+        <dia:real val="8.3349999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -1428,7 +1428,7 @@ representation of the primitive type.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.1000000000000005"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1802,7 +1802,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="3,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.684999999999999"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -2373,16 +2373,16 @@ all types in the combined model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="-167,-41"/>
+        <dia:point val="-170,-41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-167.05,-41.05;-134.48,7.15"/>
+        <dia:rectangle val="-170.05,-41.05;-137.48,7.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-167,-41"/>
+        <dia:point val="-170,-41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.469999999999999"/>
@@ -2469,7 +2469,7 @@ All of these steps are encompassed in the SML @ref workflow.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-166.65,-39.755"/>
+            <dia:point val="-169.65,-39.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2491,7 +2491,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="-22,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0925000000000002"/>
+        <dia:real val="7.0924999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6864,7 +6864,7 @@ came from.#</dia:string>
         <dia:point val="-121.397,61.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-122.248,61.55;-81.5825,74.05"/>
+        <dia:rectangle val="-122.247,61.55;-81.5825,74.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8027,7 +8027,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-78,35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.614999999999998"/>
+        <dia:real val="23.615000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -8906,7 +8906,7 @@ not have a need for it.#</dia:string>
         <dia:point val="35,109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.8175000000000008"/>
+        <dia:real val="8.817499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.6"/>
@@ -9813,7 +9813,7 @@ not have a need for it.#</dia:string>
         <dia:point val="52,-12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.459999999999997"/>
+        <dia:real val="22.460000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -11366,7 +11366,7 @@ etc.#</dia:string>
         <dia:point val="-20,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5024999999999995"/>
+        <dia:real val="8.5025000000000013"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11479,7 +11479,7 @@ etc.#</dia:string>
         <dia:point val="-4,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.224999999999998"/>
+        <dia:real val="18.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
@@ -13005,10 +13005,10 @@ of a language.#</dia:string>
         <dia:point val="-118,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.309999999999999"/>
+        <dia:real val="26.310000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.1000000000000005"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -13595,7 +13595,7 @@ sub-system.
         <dia:point val="-100,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.754999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>
@@ -14738,7 +14738,7 @@ sub-system.
         <dia:point val="-110,-33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.994999999999997"/>
+        <dia:real val="18.995000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -14791,10 +14791,10 @@ boost::property_tree::ptree.#</dia:string>
         <dia:point val="-84,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.149999999999999"/>
+        <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.1000000000000005"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -14899,10 +14899,10 @@ the meta-data that it knows about.#</dia:string>
         <dia:point val="-94,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.609999999999999"/>
+        <dia:real val="18.610000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="1.7"/>
+        <dia:real val="1.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -15065,7 +15065,7 @@ enrichers.#</dia:string>
         <dia:point val="-100.502,-30.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-120.585,-30.5615;-100.441,-24.6011"/>
+        <dia:rectangle val="-120.585,-30.5615;-100.44,-24.6011"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15535,7 +15535,7 @@ enrichers.#</dia:string>
         <dia:point val="-98,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-110.784,0.25;-97.25,14.6"/>
+        <dia:rectangle val="-110.784,0.25;-97.25,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15577,7 +15577,7 @@ enrichers.#</dia:string>
         <dia:point val="-82,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.4425000000000008"/>
+        <dia:real val="9.442499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -15718,7 +15718,7 @@ enrichers.#</dia:string>
         <dia:point val="-72.5575,14.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-73.3075,13.35;-56.0004,17.1"/>
+        <dia:rectangle val="-73.3075,13.35;-56.0004,16.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15842,13 +15842,13 @@ to register enrichers.#</dia:string>
         <dia:point val="-118,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-118.05,43.95;-108.98,47.65"/>
+        <dia:rectangle val="-118.05,43.95;-109.365,47.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-118,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9700000000000006"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -15860,7 +15860,7 @@ to register enrichers.#</dia:string>
         <dia:string>#concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#The ability to be contained inside a package.#</dia:string>
+        <dia:string>#The ability to be contained inside a module.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15943,7 +15943,7 @@ to register enrichers.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#parent_package#</dia:string>
+            <dia:string>#parent_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#qname#</dia:string>
@@ -15952,7 +15952,7 @@ to register enrichers.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the package in which we are contained.#</dia:string>
+            <dia:string>#Name of the module in which we are contained.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15973,17 +15973,17 @@ to register enrichers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O141">
       <dia:attribute name="obj_pos">
-        <dia:point val="-113.515,47.6"/>
+        <dia:point val="-113.707,47.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-114.365,47.55;-72.5825,58.05"/>
+        <dia:rectangle val="-114.558,47.55;-72.5825,58.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-113.515,47.6"/>
-        <dia:point val="-113.515,54"/>
+        <dia:point val="-113.707,47.6"/>
+        <dia:point val="-113.707,54"/>
         <dia:point val="-72.6325,54"/>
         <dia:point val="-72.6325,58"/>
       </dia:attribute>

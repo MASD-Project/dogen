@@ -186,6 +186,13 @@ keep track of the parent package.
 During transformation we need some kind of way to determine the parent
 package for any given entity.
 
+**** COMPLETED Rename package to module                               :spike:
+     CLOSED: [2014-09-12 Fri 20:49]
+     CLOCK: [2014-09-12 Fri 20:35]--[2014-09-12 Fri 20:48] =>  0:13
+
+By mistake we named the new methods "package", a UML term, rather than
+"module" - the corresponding SML term.
+
 **** Remove parent package from the enricher interface                 :task:
 
 We no longer need to pass in the parent package; it can be queried

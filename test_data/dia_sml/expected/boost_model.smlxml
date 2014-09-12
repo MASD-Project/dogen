@@ -22,7 +22,7 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<parent_package>
+	<parent_module>
 		<model_name></model_name>
 		<external_module_path>
 			<count>0</count>
@@ -33,7 +33,7 @@
 			<item_version>0</item_version>
 		</module_path>
 		<simple_name></simple_name>
-	</parent_package>
+	</parent_module>
 	<references class_id="7" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
@@ -124,7 +124,7 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
-				<parent_package>
+				<parent_module>
 					<model_name>boost_model</model_name>
 					<external_module_path>
 						<count>0</count>
@@ -135,7 +135,7 @@
 						<item_version>0</item_version>
 					</module_path>
 					<simple_name>boost_model</simple_name>
-				</parent_package>
+				</parent_module>
 				<members class_id="13" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
@@ -189,7 +189,7 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
-				<parent_package>
+				<parent_module>
 					<model_name></model_name>
 					<external_module_path>
 						<count>0</count>
@@ -200,7 +200,7 @@
 						<item_version>0</item_version>
 					</module_path>
 					<simple_name></simple_name>
-				</parent_package>
+				</parent_module>
 				<members>
 					<count>11</count>
 					<item_version>0</item_version>
@@ -394,7 +394,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -405,7 +405,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties class_id="20" tracking_level="0" version="0">
 					<count>0</count>
@@ -890,7 +890,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -901,7 +901,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1008,7 +1008,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -1019,7 +1019,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1344,7 +1344,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -1355,7 +1355,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1463,7 +1463,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -1474,7 +1474,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1600,7 +1600,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -1611,7 +1611,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -1756,7 +1756,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -1767,7 +1767,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2063,7 +2063,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -2074,7 +2074,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2233,7 +2233,7 @@
 					</name>
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -2244,7 +2244,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2422,7 +2422,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -2433,7 +2433,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>pkg1</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -2590,7 +2590,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_package>
+					<parent_module>
 						<model_name>boost_model</model_name>
 						<external_module_path>
 							<count>0</count>
@@ -2601,7 +2601,7 @@
 							<item_version>0</item_version>
 						</module_path>
 						<simple_name>boost_model</simple_name>
-					</parent_package>
+					</parent_module>
 				</type>
 				<all_properties>
 					<count>0</count>

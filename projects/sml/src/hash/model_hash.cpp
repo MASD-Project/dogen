@@ -123,7 +123,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, v.parent_package());
+    combine(seed, v.parent_module());
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));

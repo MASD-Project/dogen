@@ -55,7 +55,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
-    ar << make_nvp("parent_package", v.parent_package_);
+    ar << make_nvp("parent_module", v.parent_module_);
 }
 
 template<typename Archive>
@@ -67,7 +67,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);
-    ar >> make_nvp("parent_package", v.parent_package_);
+    ar >> make_nvp("parent_module", v.parent_module_);
 }
 
 } }

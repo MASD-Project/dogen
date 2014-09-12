@@ -62,7 +62,7 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
-        const dogen::sml::qname& parent_package,
+        const dogen::sml::qname& parent_module,
         const std::list<dogen::sml::property>& all_properties,
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,

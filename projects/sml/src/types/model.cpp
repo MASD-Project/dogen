@@ -33,7 +33,7 @@ model::model(model&& rhs)
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
-      parent_package_(std::move(rhs.parent_package_)),
+      parent_module_(std::move(rhs.parent_module_)),
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
       modules_(std::move(rhs.modules_)),
@@ -48,7 +48,7 @@ model::model(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const dogen::sml::qname& parent_package,
+    const dogen::sml::qname& parent_module,
     const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& references,
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
@@ -61,7 +61,7 @@ model::model(
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
-      parent_package_(parent_package),
+      parent_module_(parent_module),
       references_(references),
       leaves_(leaves),
       modules_(modules),
@@ -77,7 +77,7 @@ void model::swap(model& other) noexcept {
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
-    swap(parent_package_, other.parent_package_);
+    swap(parent_module_, other.parent_module_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
@@ -93,7 +93,7 @@ bool model::operator==(const model& rhs) const {
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
-        parent_package_ == rhs.parent_package_ &&
+        parent_module_ == rhs.parent_module_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
@@ -173,20 +173,20 @@ void model::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
 }
 
-const dogen::sml::qname& model::parent_package() const {
-    return parent_package_;
+const dogen::sml::qname& model::parent_module() const {
+    return parent_module_;
 }
 
-dogen::sml::qname& model::parent_package() {
-    return parent_package_;
+dogen::sml::qname& model::parent_module() {
+    return parent_module_;
 }
 
-void model::parent_package(const dogen::sml::qname& v) {
-    parent_package_ = v;
+void model::parent_module(const dogen::sml::qname& v) {
+    parent_module_ = v;
 }
 
-void model::parent_package(const dogen::sml::qname&& v) {
-    parent_package_ = std::move(v);
+void model::parent_module(const dogen::sml::qname&& v) {
+    parent_module_ = std::move(v);
 }
 
 const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& model::references() const {
