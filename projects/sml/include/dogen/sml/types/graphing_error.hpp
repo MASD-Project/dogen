@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_GRAPHING_ERROR_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_GRAPHING_ERROR_FWD_HPP
+#ifndef DOGEN_SML_TYPES_GRAPHING_ERROR_HPP
+#define DOGEN_SML_TYPES_GRAPHING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,10 +30,25 @@
 
 namespace dogen {
 namespace sml {
-namespace meta_data {
 
-class graphing_error;
+/**
+ * @brief An error has occurred whilst building the graph.
+ */
+class graphing_error : public virtual std::exception, public virtual boost::exception {
+public:
+    graphing_error() = default;
+    ~graphing_error() noexcept = default;
 
-} } }
+public:
+    graphing_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} }
 
 #endif

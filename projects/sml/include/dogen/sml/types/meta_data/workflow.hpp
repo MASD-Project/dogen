@@ -30,6 +30,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/meta_data/grapher.hpp"
 #include "dogen/sml/types/meta_data/registrar.hpp"
+#include "dogen/sml/types/module_containment_graph.hpp"
 
 namespace dogen {
 namespace sml {
@@ -76,7 +77,7 @@ public:
      *
      * @pre the root enricher must be registered.
      */
-    void execute(model& m) const;
+    void execute(const module_containment_graph& graph, model& m) const;
 
 private:
     static std::unique_ptr<registrar> registrar_;

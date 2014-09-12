@@ -32,6 +32,9 @@
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
+#include "dogen/sml/types/module_containment_graph.hpp"
+#include "dogen/sml/types/module_containment_grapher.hpp"
+#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -46,6 +49,28 @@ const std::string library_dir("library");
 
 namespace dogen {
 namespace sml {
+
+class graph_populator {
+public:
+    graph_populator(module_containment_grapher& grapher) : grapher_(grapher) { }
+
+public:
+    void operator()(dogen::sml::type& t) const {
+        grapher_.add(t.name(), t.containing_module());
+    }
+
+    void operator()(dogen::sml::module& m) const {
+        grapher_.add(m.name(), m.containing_module());
+    }
+
+    void operator()(dogen::sml::concept& c) const {
+        grapher_.add(c.name(), c.containing_module());
+    }
+
+private:
+    module_containment_grapher& grapher_;
+};
+
 
 workflow::
 workflow(const bool load_library_models, const config::knitting_settings& s)
@@ -124,8 +149,12 @@ model workflow::create_merged_model_activity(const model& target,
 }
 
 void workflow::process_meta_data_activity(model& merged_model) const {
+    module_containment_grapher g;
+    graph_populator populator(g);
+    all_model_items_traversal(merged_model, populator);
+
     meta_data::workflow w;
-    w.execute(merged_model);
+    w.execute(g.graph(), merged_model);
 }
 
 void workflow::resolve_types_activity(model& merged_model) const {

@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data/graphing_error.hpp"
+#include "dogen/sml/types/graphing_error.hpp"
 #include "dogen/sml/types/meta_data/grapher.hpp"
 
 namespace {
@@ -121,6 +121,7 @@ void grapher::build() {
                                  << "' to '" << pair.first << "'";
         boost::add_edge(root_vertex_, pair.second, graph_);
     }
+    built_ = true;
 }
 
 const graph_type& grapher::graph() const {

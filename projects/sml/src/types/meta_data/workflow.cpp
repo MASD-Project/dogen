@@ -51,7 +51,8 @@ register_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
     get_registrar().register_ordinary_enricher(e);
 }
 
-void workflow::execute(model& /*m*/) const {
+void workflow::
+execute(const module_containment_graph& /*graph*/, model& /*m*/) const {
 
 }
 
