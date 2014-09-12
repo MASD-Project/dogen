@@ -164,7 +164,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));
-    v.parent_module(create_boost_optional_dogen_sml_qname(position + 5));
+    v.containing_module(create_boost_optional_dogen_sml_qname(position + 5));
     v.references(create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(position + 6));
     v.leaves(create_std_unordered_set_dogen_sml_qname(position + 7));
     v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 8));

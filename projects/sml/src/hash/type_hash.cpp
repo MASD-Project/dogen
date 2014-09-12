@@ -66,7 +66,7 @@ std::size_t type_hasher::hash(const type&v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_module()));
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.containing_module()));
 
     return seed;
 }

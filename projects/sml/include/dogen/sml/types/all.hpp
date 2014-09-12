@@ -47,6 +47,8 @@
 #include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
+#include "dogen/sml/types/module_containment_graph.hpp"
+#include "dogen/sml/types/module_containment_grapher.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/object_types.hpp"

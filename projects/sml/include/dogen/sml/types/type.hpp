@@ -61,7 +61,7 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
-        const boost::optional<dogen::sml::qname>& parent_module);
+        const boost::optional<dogen::sml::qname>& containing_module);
 
 private:
     template<typename Archive>
@@ -135,10 +135,10 @@ public:
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
-    const boost::optional<dogen::sml::qname>& parent_module() const;
-    boost::optional<dogen::sml::qname>& parent_module();
-    void parent_module(const boost::optional<dogen::sml::qname>& v);
-    void parent_module(const boost::optional<dogen::sml::qname>&& v);
+    const boost::optional<dogen::sml::qname>& containing_module() const;
+    boost::optional<dogen::sml::qname>& containing_module();
+    void containing_module(const boost::optional<dogen::sml::qname>& v);
+    void containing_module(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
 protected:
@@ -155,7 +155,7 @@ private:
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;
-    boost::optional<dogen::sml::qname> parent_module_;
+    boost::optional<dogen::sml::qname> containing_module_;
 };
 
 inline type::~type() noexcept { }

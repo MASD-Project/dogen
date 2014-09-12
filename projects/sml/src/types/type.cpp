@@ -80,7 +80,7 @@ type::type(type&& rhs)
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
-      parent_module_(std::move(rhs.parent_module_)) { }
+      containing_module_(std::move(rhs.containing_module_)) { }
 
 type::type(
     const std::string& documentation,
@@ -88,13 +88,13 @@ type::type(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const boost::optional<dogen::sml::qname>& parent_module)
+    const boost::optional<dogen::sml::qname>& containing_module)
     : documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
-      parent_module_(parent_module) { }
+      containing_module_(containing_module) { }
 
 void type::to_stream(std::ostream& s) const {
     s << " { "
@@ -104,7 +104,7 @@ void type::to_stream(std::ostream& s) const {
       << "\"name\": " << name_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
-      << "\"parent_module\": " << parent_module_
+      << "\"containing_module\": " << containing_module_
       << " }";
 }
 
@@ -115,7 +115,7 @@ void type::swap(type& other) noexcept {
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
-    swap(parent_module_, other.parent_module_);
+    swap(containing_module_, other.containing_module_);
 }
 
 bool type::compare(const type& rhs) const {
@@ -124,7 +124,7 @@ bool type::compare(const type& rhs) const {
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
-        parent_module_ == rhs.parent_module_;
+        containing_module_ == rhs.containing_module_;
 }
 
 const std::string& type::documentation() const {
@@ -191,20 +191,20 @@ void type::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
 }
 
-const boost::optional<dogen::sml::qname>& type::parent_module() const {
-    return parent_module_;
+const boost::optional<dogen::sml::qname>& type::containing_module() const {
+    return containing_module_;
 }
 
-boost::optional<dogen::sml::qname>& type::parent_module() {
-    return parent_module_;
+boost::optional<dogen::sml::qname>& type::containing_module() {
+    return containing_module_;
 }
 
-void type::parent_module(const boost::optional<dogen::sml::qname>& v) {
-    parent_module_ = v;
+void type::containing_module(const boost::optional<dogen::sml::qname>& v) {
+    containing_module_ = v;
 }
 
-void type::parent_module(const boost::optional<dogen::sml::qname>&& v) {
-    parent_module_ = std::move(v);
+void type::containing_module(const boost::optional<dogen::sml::qname>&& v) {
+    containing_module_ = std::move(v);
 }
 
 } }

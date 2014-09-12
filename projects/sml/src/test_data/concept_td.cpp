@@ -129,7 +129,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qname(position + 5));
     v.generation_type(create_dogen_sml_generation_types(position + 6));
     v.origin_type(create_dogen_sml_origin_types(position + 7));
-    v.parent_module(create_boost_optional_dogen_sml_qname(position + 8));
+    v.containing_module(create_boost_optional_dogen_sml_qname(position + 8));
     v.operations(create_std_list_dogen_sml_operation(position + 9));
     v.refines(create_std_list_dogen_sml_qname(position + 10));
     v.is_parent(create_bool(position + 11));

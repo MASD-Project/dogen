@@ -31,13 +31,13 @@ primitive::primitive(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const boost::optional<dogen::sml::qname>& parent_module)
+    const boost::optional<dogen::sml::qname>& containing_module)
     : dogen::sml::type(documentation,
       meta_data,
       name,
       generation_type,
       origin_type,
-      parent_module) { }
+      containing_module) { }
 
 void primitive::to_stream(std::ostream& s) const {
     s << " { "

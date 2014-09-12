@@ -22,9 +22,9 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<parent_module class_id="7" tracking_level="0" version="0">
+	<containing_module class_id="7" tracking_level="0" version="0">
 		<initialized>0</initialized>
-	</parent_module>
+	</containing_module>
 	<references class_id="8" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
@@ -113,9 +113,9 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
-				<parent_module>
+				<containing_module>
 					<initialized>0</initialized>
-				</parent_module>
+				</containing_module>
 				<members class_id="14" tracking_level="0" version="0">
 					<count>5</count>
 					<item_version>0</item_version>
@@ -237,7 +237,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_module>
+					<containing_module>
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
@@ -252,7 +252,7 @@
 							</module_path>
 							<simple_name>classes_without_package</simple_name>
 						</value>
-					</parent_module>
+					</containing_module>
 				</type>
 				<all_properties class_id="21" tracking_level="0" version="0">
 					<count>0</count>
@@ -359,7 +359,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_module>
+					<containing_module>
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
@@ -374,7 +374,7 @@
 							</module_path>
 							<simple_name>classes_without_package</simple_name>
 						</value>
-					</parent_module>
+					</containing_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -481,7 +481,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_module>
+					<containing_module>
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
@@ -496,7 +496,7 @@
 							</module_path>
 							<simple_name>classes_without_package</simple_name>
 						</value>
-					</parent_module>
+					</containing_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -603,7 +603,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_module>
+					<containing_module>
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
@@ -618,7 +618,7 @@
 							</module_path>
 							<simple_name>classes_without_package</simple_name>
 						</value>
-					</parent_module>
+					</containing_module>
 				</type>
 				<all_properties>
 					<count>0</count>
@@ -725,7 +725,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<parent_module>
+					<containing_module>
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
@@ -740,7 +740,7 @@
 							</module_path>
 							<simple_name>classes_without_package</simple_name>
 						</value>
-					</parent_module>
+					</containing_module>
 				</type>
 				<all_properties>
 					<count>0</count>

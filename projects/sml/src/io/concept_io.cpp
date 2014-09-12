@@ -150,7 +150,7 @@ std::ostream& operator<<(std::ostream& s, const concept& v) {
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
-      << "\"parent_module\": " << v.parent_module() << ", "
+      << "\"containing_module\": " << v.containing_module() << ", "
       << "\"operations\": " << v.operations() << ", "
       << "\"refines\": " << v.refines() << ", "
       << "\"is_parent\": " << v.is_parent() << ", "

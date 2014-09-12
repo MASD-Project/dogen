@@ -50,7 +50,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
-    ar << make_nvp("parent_module", v.parent_module_);
+    ar << make_nvp("containing_module", v.containing_module_);
     ar << make_nvp("members", v.members_);
 }
 
@@ -63,7 +63,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);
-    ar >> make_nvp("parent_module", v.parent_module_);
+    ar >> make_nvp("containing_module", v.containing_module_);
     ar >> make_nvp("members", v.members_);
 }
 

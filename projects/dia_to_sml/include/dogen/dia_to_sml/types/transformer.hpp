@@ -160,14 +160,14 @@ private:
             auto& module(module_for_id(pkg_id));
             e.name(to_qname(o.name(), module.name()));
             module.members().push_back(e.name());
-            e.parent_module(module.name());
+            e.containing_module(module.name());
         } else {
             // type belongs to the synthetic module for the model;
             // do not add it to the qname.
             e.name(to_qname(o.name()));
             auto& module(module_for_qname(context_.model().name()));
             module.members().push_back(e.name());
-            e.parent_module(module.name());
+            e.containing_module(module.name());
         }
 
         context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));

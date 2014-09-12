@@ -92,7 +92,7 @@ std::ostream& operator<<(std::ostream& s, const module& v) {
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
-      << "\"parent_module\": " << v.parent_module() << ", "
+      << "\"containing_module\": " << v.containing_module() << ", "
       << "\"members\": " << v.members()
       << " }";
     return(s);

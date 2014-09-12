@@ -14,22 +14,23 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-12 Fri 19:37]
+Clock summary at [2014-09-12 Fri 22:12]
 
-| Headline                                                          | Time   |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *9:24* |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                   |        | 9:24 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                |        |      | 1:19 |
-| IMPLEMENTATION Updates to the manual and readme files             |        |      | 0:31 |
-| COMPLETED Fix windows continuous build                            |        |      | 0:22 |
-| COMPLETED Create a sub-system for meta-data                       |        |      | 3:46 |
-| COMPLETED Add static registration to meta-data workflow           |        |      | 0:19 |
-| COMPLETED Move the root enricher to formatters                    |        |      | 0:49 |
-| COMPLETED Implement a grapher in meta_data                        |        |      | 1:51 |
-| IMPLEMENTATION Link types and concepts to their containing module |        |      | 0:24 |
-| IMPLEMENTATION Remove unnecessary properties from model           |        |      | 0:03 |
+| Headline                                                     | Time    |       |      |
+|--------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                 | *10:26* |       |      |
+|--------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                              |         | 10:26 |      |
+| IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:19 |
+| IMPLEMENTATION Updates to the manual and readme files        |         |       | 0:31 |
+| COMPLETED Fix windows continuous build                       |         |       | 0:22 |
+| COMPLETED Create a sub-system for meta-data                  |         |       | 3:46 |
+| COMPLETED Add static registration to meta-data workflow      |         |       | 0:19 |
+| COMPLETED Move the root enricher to formatters               |         |       | 0:49 |
+| COMPLETED Implement a grapher in meta_data                   |         |       | 1:51 |
+| COMPLETED Link types and concepts to their containing module |         |       | 0:57 |
+| COMPLETED Enrichment as a two-stage process                  |         |       | 0:07 |
+| IMPLEMENTATION Create an SML grapher                         |         |       | 0:25 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -222,7 +223,9 @@ the process into two stages:
 - stage 1: entity specific enrichment
 - stage 2: relationship enrichment
 
-*** Create an SML grapher                                             :story:
+*** IMPLEMENTATION Create an SML grapher                              :story:
+    CLOCK: [2014-09-12 Fri 22:03]--[2014-09-12 Fri 22:12] =>  0:09
+    CLOCK: [2014-09-12 Fri 21:14]--[2014-09-12 Fri 21:30] =>  0:16
 
 We need a class responsible for building a graph of SML qnames, and
 associating these with a ptree.
