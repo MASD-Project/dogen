@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider merging graphers into a single class                     :story:
+
+After the meta-data work, we ended up with three separate graphers
+doing similar things. We should look into the commonalities of these
+classes to see if we can reuse code.
+
 *** References to objects in package should assume package            :story:
 
 At present if we define two objects in a package =p=, say =a= and =b=,
