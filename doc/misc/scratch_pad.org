@@ -1711,4 +1711,3 @@ BOOST_AUTO_TEST_CASE(tagging_single_type_model_with_all_facets_enabled_results_i
 
 BOOST_AUTO_TEST_SUITE_END()
 #+end_src
-

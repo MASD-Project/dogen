@@ -159,6 +159,31 @@ formatters enricher.
 - on execute, iterate through the graph executing all instances of the
   interface.
 
+*** IMPLEMENTATION Link types and concepts to their containing module :story:
+    CLOCK: [2014-09-12 Fri 19:00]--[2014-09-12 Fri 19:05] =>  0:05
+
+Instead of keeping track of the previous vertex in the graph we should
+really express the containment relationship via the type system in SML
+since that is exactly its job. Then we can query the model to look for
+the module's qname during enrichment. Suggested name for the property:
+=parent_module=.
+
+**** IMPLEMENTATION Add properties to manage these relationships       :task:
+     CLOCK: [2014-09-12 Fri 19:06]--[2014-09-12 Fri 19:12] =>  0:06
+
+We need to change the affected types, most likely via a concept, to
+keep track of the parent package.
+
+**** Populate the new properties                                       :task:
+
+During transformation we need some kind of way to determine the parent
+package for any given entity.
+
+**** Remove parent package from the enricher interface                 :task:
+
+We no longer need to pass in the parent package; it can be queried
+from the model. Remove it from interface.
+
 *** Refactor hello world example to make it simpler                   :story:
 
 Whilst we started adding a section on dia in the manual, we noticed
@@ -173,14 +198,6 @@ int.
 
 We need to move the cycle dectector code from dia to sml into
 utilities so that we can make use of it in the meta-data grapher.
-
-*** Link types and concepts to their containing module                :story:
-
-Instead of keeping track of the previous vertex in the graph we should
-really express the containment relationship via the type system in SML
-since that is exactly its job. Then we can query the model to look for
-the module's qname during enrichment. Suggested name for the property:
-=parent_module=.
 
 *** Enrichment as a two-stage process                                 :story:
 
