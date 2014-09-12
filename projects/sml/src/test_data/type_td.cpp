@@ -60,6 +60,13 @@ create_dogen_sml_origin_types(const unsigned int position) {
     return dogen::sml::origin_types_generator::create(position);
 }
 
+boost::optional<dogen::sml::qname>
+create_boost_optional_dogen_sml_qname(unsigned int position) {
+    boost::optional<dogen::sml::qname> r(
+        create_dogen_sml_qname(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -73,7 +80,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));
-    v.parent_module(create_dogen_sml_qname(position + 5));
+    v.parent_module(create_boost_optional_dogen_sml_qname(position + 5));
 }
 
 type_generator::result_type*

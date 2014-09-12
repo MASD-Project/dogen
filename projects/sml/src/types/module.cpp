@@ -42,7 +42,7 @@ module::module(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const dogen::sml::qname& parent_module,
+    const boost::optional<dogen::sml::qname>& parent_module,
     const std::list<dogen::sml::qname>& members)
     : documentation_(documentation),
       meta_data_(meta_data),
@@ -143,19 +143,19 @@ void module::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
 }
 
-const dogen::sml::qname& module::parent_module() const {
+const boost::optional<dogen::sml::qname>& module::parent_module() const {
     return parent_module_;
 }
 
-dogen::sml::qname& module::parent_module() {
+boost::optional<dogen::sml::qname>& module::parent_module() {
     return parent_module_;
 }
 
-void module::parent_module(const dogen::sml::qname& v) {
+void module::parent_module(const boost::optional<dogen::sml::qname>& v) {
     parent_module_ = v;
 }
 
-void module::parent_module(const dogen::sml::qname&& v) {
+void module::parent_module(const boost::optional<dogen::sml::qname>&& v) {
     parent_module_ = std::move(v);
 }
 

@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <string>
 #include <unordered_map>
@@ -87,7 +88,7 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
-        const dogen::sml::qname& parent_module,
+        const boost::optional<dogen::sml::qname>& parent_module,
         const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& references,
         const std::unordered_set<dogen::sml::qname>& leaves,
         const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
@@ -159,10 +160,10 @@ public:
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
-    const dogen::sml::qname& parent_module() const;
-    dogen::sml::qname& parent_module();
-    void parent_module(const dogen::sml::qname& v);
-    void parent_module(const dogen::sml::qname&& v);
+    const boost::optional<dogen::sml::qname>& parent_module() const;
+    boost::optional<dogen::sml::qname>& parent_module();
+    void parent_module(const boost::optional<dogen::sml::qname>& v);
+    void parent_module(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
     /**
@@ -253,7 +254,7 @@ private:
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;
-    dogen::sml::qname parent_module_;
+    boost::optional<dogen::sml::qname> parent_module_;
     std::unordered_map<dogen::sml::qname, dogen::sml::origin_types> references_;
     std::unordered_set<dogen::sml::qname> leaves_;
     std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;

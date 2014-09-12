@@ -48,7 +48,7 @@ model::model(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const dogen::sml::qname& parent_module,
+    const boost::optional<dogen::sml::qname>& parent_module,
     const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& references,
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
@@ -173,19 +173,19 @@ void model::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
 }
 
-const dogen::sml::qname& model::parent_module() const {
+const boost::optional<dogen::sml::qname>& model::parent_module() const {
     return parent_module_;
 }
 
-dogen::sml::qname& model::parent_module() {
+boost::optional<dogen::sml::qname>& model::parent_module() {
     return parent_module_;
 }
 
-void model::parent_module(const dogen::sml::qname& v) {
+void model::parent_module(const boost::optional<dogen::sml::qname>& v) {
     parent_module_ = v;
 }
 
-void model::parent_module(const dogen::sml::qname&& v) {
+void model::parent_module(const boost::optional<dogen::sml::qname>&& v) {
     parent_module_ = std::move(v);
 }
 

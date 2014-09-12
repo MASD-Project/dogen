@@ -52,6 +52,21 @@ inline std::ostream& operator<<(std::ostream& s, const boost::property_tree::ptr
 
 } }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace sml {
 
@@ -73,7 +88,7 @@ type::type(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const dogen::sml::qname& parent_module)
+    const boost::optional<dogen::sml::qname>& parent_module)
     : documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
@@ -176,19 +191,19 @@ void type::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
 }
 
-const dogen::sml::qname& type::parent_module() const {
+const boost::optional<dogen::sml::qname>& type::parent_module() const {
     return parent_module_;
 }
 
-dogen::sml::qname& type::parent_module() {
+boost::optional<dogen::sml::qname>& type::parent_module() {
     return parent_module_;
 }
 
-void type::parent_module(const dogen::sml::qname& v) {
+void type::parent_module(const boost::optional<dogen::sml::qname>& v) {
     parent_module_ = v;
 }
 
-void type::parent_module(const dogen::sml::qname&& v) {
+void type::parent_module(const boost::optional<dogen::sml::qname>&& v) {
     parent_module_ = std::move(v);
 }
 

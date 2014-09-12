@@ -87,6 +87,21 @@ inline std::ostream& operator<<(std::ostream& s, const boost::property_tree::ptr
 
 } }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::operation>& v) {

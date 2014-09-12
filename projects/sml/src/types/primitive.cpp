@@ -31,7 +31,7 @@ primitive::primitive(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const dogen::sml::qname& parent_module)
+    const boost::optional<dogen::sml::qname>& parent_module)
     : dogen::sml::type(documentation,
       meta_data,
       name,

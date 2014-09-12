@@ -48,6 +48,16 @@ inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::pt
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -123,7 +133,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, v.parent_module());
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_module()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));

@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <iosfwd>
 #include <string>
@@ -60,7 +61,7 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
-        const dogen::sml::qname& parent_module);
+        const boost::optional<dogen::sml::qname>& parent_module);
 
 private:
     template<typename Archive>
@@ -134,10 +135,10 @@ public:
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
-    const dogen::sml::qname& parent_module() const;
-    dogen::sml::qname& parent_module();
-    void parent_module(const dogen::sml::qname& v);
-    void parent_module(const dogen::sml::qname&& v);
+    const boost::optional<dogen::sml::qname>& parent_module() const;
+    boost::optional<dogen::sml::qname>& parent_module();
+    void parent_module(const boost::optional<dogen::sml::qname>& v);
+    void parent_module(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
 protected:
@@ -154,7 +155,7 @@ private:
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;
-    dogen::sml::qname parent_module_;
+    boost::optional<dogen::sml::qname> parent_module_;
 };
 
 inline type::~type() noexcept { }

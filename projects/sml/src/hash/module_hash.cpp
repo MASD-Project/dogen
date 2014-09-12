@@ -43,6 +43,16 @@ inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::pt
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -64,7 +74,7 @@ std::size_t module_hasher::hash(const module&v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, v.parent_module());
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_module()));
     combine(seed, hash_std_list_dogen_sml_qname(v.members()));
 
     return seed;

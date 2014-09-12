@@ -22,23 +22,14 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<parent_module>
-		<model_name></model_name>
-		<external_module_path>
-			<count>0</count>
-			<item_version>0</item_version>
-		</external_module_path>
-		<module_path>
-			<count>0</count>
-			<item_version>0</item_version>
-		</module_path>
-		<simple_name></simple_name>
+	<parent_module class_id="7" tracking_level="0" version="0">
+		<initialized>0</initialized>
 	</parent_module>
-	<references class_id="7" tracking_level="0" version="0">
+	<references class_id="8" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="8" tracking_level="0" version="0">
+		<item class_id="9" tracking_level="0" version="0">
 			<first>
 				<model_name>std</model_name>
 				<external_module_path>
@@ -54,7 +45,7 @@
 			<second>3</second>
 		</item>
 	</references>
-	<leaves class_id="9" tracking_level="0" version="0">
+	<leaves class_id="10" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
@@ -71,11 +62,11 @@
 			<simple_name>derived</simple_name>
 		</item>
 	</leaves>
-	<modules class_id="10" tracking_level="0" version="0">
+	<modules class_id="11" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="11" tracking_level="0" version="0">
+		<item class_id="12" tracking_level="0" version="0">
 			<first>
 				<model_name>std_model</model_name>
 				<external_module_path>
@@ -88,7 +79,7 @@
 				</module_path>
 				<simple_name>pkg1</simple_name>
 			</first>
-			<second class_id="12" tracking_level="0" version="0">
+			<second class_id="13" tracking_level="0" version="0">
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
@@ -110,18 +101,22 @@
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
 				<parent_module>
-					<model_name>std_model</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<simple_name>std_model</simple_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>std_model</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>std_model</simple_name>
+					</value>
 				</parent_module>
-				<members class_id="13" tracking_level="0" version="0">
+				<members class_id="14" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -175,16 +170,7 @@
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
 				<parent_module>
-					<model_name></model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<simple_name></simple_name>
+					<initialized>0</initialized>
 				</parent_module>
 				<members>
 					<count>13</count>
@@ -349,26 +335,26 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="14" tracking_level="0" version="0">
+	<concepts class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="15" tracking_level="0" version="0">
+	<primitives class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="16" tracking_level="0" version="0">
+	<enumerations class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="17" tracking_level="0" version="0">
+	<objects class_id="18" tracking_level="0" version="0">
 		<count>13</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="18" tracking_level="0" version="0">
+		<item class_id="19" tracking_level="0" version="0">
 			<first>
 				<model_name>std_model</model_name>
 				<external_module_path>
@@ -382,7 +368,7 @@
 				<simple_name>some_service</simple_name>
 			</first>
 			<second class_id="1" tracking_level="1" version="0" object_id="_0">
-				<type class_id="19" tracking_level="0" version="0">
+				<type class_id="20" tracking_level="0" version="0">
 					<documentation></documentation>
 					<meta_data>
 						<count>0</count>
@@ -404,26 +390,30 @@
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
-				<all_properties class_id="20" tracking_level="0" version="0">
+				<all_properties class_id="21" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
 					<count>4</count>
 					<item_version>0</item_version>
-					<item class_id="21" tracking_level="0" version="0">
+					<item class_id="22" tracking_level="0" version="0">
 						<documentation></documentation>
 						<meta_data>
 							<count>0</count>
@@ -431,7 +421,7 @@
 							<data></data>
 						</meta_data>
 						<name>prop_0</name>
-						<type class_id="22" tracking_level="0" version="0">
+						<type class_id="23" tracking_level="0" version="0">
 							<type>
 								<model_name>std</model_name>
 								<external_module_path>
@@ -444,7 +434,7 @@
 								</module_path>
 								<simple_name>shared_ptr</simple_name>
 							</type>
-							<children class_id="23" tracking_level="0" version="0">
+							<children class_id="24" tracking_level="0" version="0">
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
@@ -605,12 +595,12 @@
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_properties>
-				<inherited_properties class_id="24" tracking_level="0" version="0">
+				<inherited_properties class_id="25" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<operations class_id="25" tracking_level="0" version="0">
+				<operations class_id="26" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</operations>
@@ -622,7 +612,7 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<relationships class_id="26" tracking_level="0" version="0">
+				<relationships class_id="27" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
@@ -672,16 +662,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -1007,16 +1001,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -1414,16 +1412,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -1817,16 +1819,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -1908,7 +1914,7 @@
 					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item class_id="27" tracking_level="0" version="0">
+					<item class_id="28" tracking_level="0" version="0">
 						<first>5</first>
 						<second>
 							<count>1</count>
@@ -1973,16 +1979,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -1997,7 +2007,7 @@
 						<meta_data>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item class_id="28" tracking_level="0" version="0">
+							<item class_id="29" tracking_level="0" version="0">
 								<first>dia</first>
 								<second>
 									<count>1</count>
@@ -2188,16 +2198,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>pkg1</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>pkg1</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -2456,16 +2470,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -2751,16 +2769,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -3064,16 +3086,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -3471,16 +3497,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -3659,16 +3689,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>
@@ -4066,16 +4100,20 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<parent_module>
-						<model_name>std_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>std_model</simple_name>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<model_name>std_model</model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</module_path>
+							<simple_name>std_model</simple_name>
+						</value>
 					</parent_module>
 				</type>
 				<all_properties>

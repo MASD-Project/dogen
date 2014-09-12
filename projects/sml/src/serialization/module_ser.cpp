@@ -30,6 +30,7 @@
 #include <boost/property_tree/ptree_serialization.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
