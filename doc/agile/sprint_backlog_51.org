@@ -179,7 +179,9 @@ the module's qname during enrichment. Suggested name for the property:
 We need to change the affected types, most likely via a concept, to
 keep track of the parent package.
 
-**** Populate the new properties                                       :task:
+**** COMPLETED Populate the new properties                             :task:
+     CLOSED: [2014-09-12 Fri 19:44]
+     CLOCK: [2014-09-12 Fri 19:32]--[2014-09-12 Fri 19:44] =>  0:12
 
 During transformation we need some kind of way to determine the parent
 package for any given entity.
