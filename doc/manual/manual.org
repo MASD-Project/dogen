@@ -1834,6 +1834,32 @@ the [[http://dia-installer.de/doc/en/][Dia User Manual]].
 
 *** Hello World
 
+We shall start by creating a very simple diagram, similar to the one
+available in the dia sources here. First create a class called
+=one_property=.
+
+FIXME: screenshot
+
+Then add any comment you'd like; for instance, we added "Welcome to
+Dogen!".
+
+FIXME: screenshot
+
+Finally, add a property called =property=. To make things more
+interesting we made the type of the property =std::string=.
+
+FIXME: screenshot
+
+This diagram is now ready for generation, as described in section
+Generating Hello World.
+
+*** Supported Types
+
+You couldn't fail to notice that we made use of the type
+=std::string=, provided by the C++ Standard Library. This is a type
+that is not
+
+
 *** Todo
 
 FIXME: we need to add a section on the supported object types and the
