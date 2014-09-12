@@ -76,14 +76,43 @@ private:
      */
     void require_built() const;
 
+    /**
+     * @brief Ensures the enricher can be used as a root enricher.
+     */
+    void validate_root_enricher(const enricher_interface& e) const;
+
 public:
     /**
-     * @brief Adds an object to the graph.
+     * @brief Adds the root enricher to the graph.
      *
      * @pre The graph must not yet have been built.
-     * @pre The object must be relevant to the graph.
+     * @pre The root enricher must yet have yet been added.
+     * @pre The root enricher must not have dependencies.
      */
-    void add(std::shared_ptr<enricher_interface> e);
+    void add_root_enricher(std::shared_ptr<enricher_interface> e);
+
+    /**
+     * @brief Adds an ordinary enricher to the graph.
+     *
+     * @pre The graph must not yet have been built.
+     */
+    void add_ordinary_enricher(std::shared_ptr<enricher_interface> e);
+
+    /**
+     * @brief Adds a container of objects to the graph.
+     *
+     * @pre The graph must not yet have been built.
+     *
+     * @note Couldn't find a way to constrain the container to
+     * non-associative containers of dia::object. On the plus side, if
+     * you try to pass in some weird container (or a non-container),
+     * you should get a suitably puzzling error message.
+     */
+    template<typename Container>
+    void add_ordinary_enrichers(const Container& c) {
+        for (const auto& o : c)
+            add_ordinary_enricher(o);
+    }
 
     /**
      * @brief Returns true if the graph has been built, false

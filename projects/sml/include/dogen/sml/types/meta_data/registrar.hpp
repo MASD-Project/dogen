@@ -48,6 +48,7 @@ public:
      */
     void register_ordinary_enricher(std::shared_ptr<enricher_interface> e);
 
+public:
     /**
      * @brief Returns the root enricher, if one was registered, or
      * null otherwise.

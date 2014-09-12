@@ -14,20 +14,20 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-11 Thu 22:51]
+Clock summary at [2014-09-12 Fri 08:36]
 
 | Headline                                                | Time   |      |      |
 |---------------------------------------------------------+--------+------+------|
-| *Total time*                                            | *8:09* |      |      |
+| *Total time*                                            | *8:53* |      |      |
 |---------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                         |        | 8:09 |      |
+| Development Stories Implemented                         |        | 8:53 |      |
 | IMPLEMENTATION Sprint and product backlog grooming      |        |      | 1:15 |
-| IMPLEMENTATION Updates to the manual and readme files   |        |      | 0:17 |
+| IMPLEMENTATION Updates to the manual and readme files   |        |      | 0:31 |
 | COMPLETED Fix windows continuous build                  |        |      | 0:22 |
 | COMPLETED Create a sub-system for meta-data             |        |      | 3:46 |
 | COMPLETED Add static registration to meta-data workflow |        |      | 0:19 |
-| IMPLEMENTATION Implement a grapher in meta_data         |        |      | 1:21 |
-| IMPLEMENTATION Move the root enricher to formatters     |        |      | 0:49 |
+| COMPLETED Move the root enricher to formatters          |        |      | 0:49 |
+| COMPLETED Implement a grapher in meta_data              |        |      | 1:51 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -40,6 +40,7 @@ Clock summary at [2014-09-11 Thu 22:51]
 Updates to sprint and product backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-09-12 Fri 08:22]--[2014-09-12 Fri 08:36] =>  0:14
     CLOCK: [2014-09-11 Thu 22:34]--[2014-09-11 Thu 22:51] =>  0:17
 
 Use downtime to update the manual and / or readme file.
@@ -129,19 +130,8 @@ Also, we should take this opportunity to rename =populator= to
 - add a simple list of shared pointers to keep track of the registered
   expanders.
 
-*** IMPLEMENTATION Implement a grapher in meta_data                   :story:
-    CLOCK: [2014-09-10 Wed 22:30]--[2014-09-10 Wed 23:51] =>  1:21
-
-- create a grapher in meta_data that represents the dependencies
-  between instances of the interface
-- once the enricher has been instantiated we need to loop through the
-  list of expanders and build a graph.
-- on execute, iterate through the graph executing all instances of the
-  interface.
-- we should see if we can reuse some code of the dia grapher as we
-  need to build 3 graphers altogether.
-
-*** IMPLEMENTATION Move the root enricher to formatters               :story:
+*** COMPLETED Move the root enricher to formatters                    :story:
+    CLOSED: [2014-09-12 Fri 07:56]
     CLOCK: [2014-09-11 Thu 08:05]--[2014-09-11 Thu 08:54] =>  0:49
 
 We originally envisioned a root enricher in formatters just to make
@@ -156,6 +146,33 @@ formatters enricher.
 - move the root enricher to formatters;
 - add a way to distinguish the root enricher from other enrichers
   during registration.
+
+*** COMPLETED Implement a grapher in meta_data                        :story:
+    CLOSED: [2014-09-12 Fri 08:21]
+    CLOCK: [2014-09-12 Fri 07:51]--[2014-09-12 Fri 08:21] =>  0:30
+    CLOCK: [2014-09-10 Wed 22:30]--[2014-09-10 Wed 23:51] =>  1:21
+
+- create a grapher in meta_data that represents the dependencies
+  between instances of the interface
+- once the enricher has been instantiated we need to loop through the
+  list of expanders and build a graph.
+- on execute, iterate through the graph executing all instances of the
+  interface.
+
+*** Refactor hello world example to make it simpler                   :story:
+
+Whilst we started adding a section on dia in the manual, we noticed
+that the hello world example makes use of =std::string= making it
+unsuitable for a basic example. We need to refactor it to use only
+int.
+
+- change manual sections on hello world
+- change sanity
+
+*** Add cycle detection to grapher                                    :story:
+
+We need to move the cycle dectector code from dia to sml into
+utilities so that we can make use of it in the meta-data grapher.
 
 *** Link types and concepts to their containing module                :story:
 

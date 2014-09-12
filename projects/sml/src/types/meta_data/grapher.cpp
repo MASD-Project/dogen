@@ -30,6 +30,9 @@ static logger lg(logger_factory("sml.meta_data.grapher"));
 const std::string empty;
 const std::string graph_already_built("Graph has already been built");
 const std::string graph_not_yet_built("Graph has not yet been built");
+const std::string root_already_exists("The root enricher already exists");
+const std::string root_has_dependencies(
+    "The root enricher cannot have dependencies");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 }
@@ -38,10 +41,7 @@ namespace dogen {
 namespace sml {
 namespace meta_data {
 
-grapher::grapher() : built_(false), root_vertex_(boost::add_vertex(graph_)) {
-    graph_[root_vertex_] = root_;
-    id_to_vertex_.insert(std::make_pair(root_->id(), root_vertex_));
-}
+grapher::grapher() : built_(false) { }
 
 grapher::vertex_descriptor_type grapher::vertex_for_id(const std::string& id) {
     const auto i(id_to_vertex_.find(id));
@@ -71,7 +71,29 @@ void grapher::require_built() const {
     }
 }
 
-void grapher::add(std::shared_ptr<enricher_interface> e) {
+void grapher::validate_root_enricher(const enricher_interface& e) const {
+    if (!e.dependencies().empty()) {
+        BOOST_LOG_SEV(lg, error) << root_has_dependencies;
+        BOOST_THROW_EXCEPTION(graphing_error(root_has_dependencies));
+    }
+
+    const auto i(id_to_vertex_.find(e.id()));
+    if (i != id_to_vertex_.end()) {
+        BOOST_LOG_SEV(lg, error) << root_already_exists;
+        BOOST_THROW_EXCEPTION(graphing_error(root_already_exists));
+    }
+}
+
+void grapher::add_root_enricher(std::shared_ptr<enricher_interface> e) {
+    require_not_built();
+    validate_root_enricher(*e);
+    root_ = e;
+    root_vertex_ = boost::add_vertex(graph_);
+    graph_[root_vertex_] = root_;
+    id_to_vertex_.insert(std::make_pair(root_->id(), root_vertex_));
+}
+
+void grapher::add_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
     require_not_built();
 
     const auto v(vertex_for_id(e->id()));

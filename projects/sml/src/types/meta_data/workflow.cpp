@@ -33,6 +33,14 @@ registrar& workflow::get_registrar() {
     return *registrar_;
 }
 
+graph_type workflow::build_graph_activity() {
+    grapher g;
+    g.add_root_enricher(registrar_->root_enricher());
+    g.add_ordinary_enrichers(registrar_->ordinary_enrichers());
+    g.build();
+    return g.graph();
+}
+
 void workflow::
 register_root_enricher(std::shared_ptr<enricher_interface> e) {
     get_registrar().register_root_enricher(e);

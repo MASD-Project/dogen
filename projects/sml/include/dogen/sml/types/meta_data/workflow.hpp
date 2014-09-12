@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_WORKFLOW_FWD_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_WORKFLOW_HPP
+#define DOGEN_SML_TYPES_META_DATA_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,6 +28,7 @@
 
 #include <memory>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/meta_data/grapher.hpp"
 #include "dogen/sml/types/meta_data/registrar.hpp"
 
 namespace dogen {
@@ -49,6 +50,12 @@ private:
      */
     static registrar& get_registrar();
 
+private:
+    /**
+     * @brief Setup the DAG of enrichers.
+     */
+    graph_type build_graph_activity();
+
 public:
     /**
      * @brief Add the root enricher to the workflow.
@@ -63,6 +70,7 @@ public:
     static void register_ordinary_enricher(
         std::shared_ptr<enricher_interface> e);
 
+public:
     /**
      * @brief Execute the meta-data workflow on the supplied model.
      *
