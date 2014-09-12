@@ -22,6 +22,18 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
+	<parent_package>
+		<model_name></model_name>
+		<external_module_path>
+			<count>0</count>
+			<item_version>0</item_version>
+		</external_module_path>
+		<module_path>
+			<count>0</count>
+			<item_version>0</item_version>
+		</module_path>
+		<simple_name></simple_name>
+	</parent_package>
 	<references class_id="7" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
@@ -89,6 +101,18 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
+				<parent_package>
+					<model_name>comments</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<simple_name>package</simple_name>
+				</parent_package>
 				<members class_id="13" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -146,6 +170,18 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
+				<parent_package>
+					<model_name>comments</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<simple_name>comments</simple_name>
+				</parent_package>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
@@ -218,6 +254,18 @@ This comment will be applied to the model namespace itself.
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
+				<parent_package>
+					<model_name></model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<simple_name></simple_name>
+				</parent_package>
 				<members>
 					<count>3</count>
 					<item_version>0</item_version>
@@ -327,6 +375,18 @@ third line with &quot;quote&quot;
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<parent_package>
+						<model_name>comments</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>comments</simple_name>
+					</parent_package>
 				</type>
 				<all_properties class_id="20" tracking_level="0" version="0">
 					<count>0</count>
@@ -403,6 +463,18 @@ third line with &quot;quote&quot;
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<parent_package>
+						<model_name>comments</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<simple_name>comments</simple_name>
+					</parent_package>
 				</type>
 				<all_properties>
 					<count>0</count>
