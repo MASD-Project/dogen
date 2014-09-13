@@ -18,21 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/io/concept_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/enumerator_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/meta_data/enrichment_types_io.hpp"
-#include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/module_io.hpp"
-#include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/io/object_io.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/origin_types_io.hpp"
-#include "dogen/sml/io/parameter_io.hpp"
-#include "dogen/sml/io/primitive_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#include "dogen/sml/test_data/meta_data/enrichment_types_td.hpp"
+
+namespace dogen {
+namespace sml {
+namespace meta_data {
+
+enrichment_types_generator::enrichment_types_generator() : position_(0) { }
+void enrichment_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<enrichment_types>(position % 3);
+}
+
+enrichment_types_generator::result_type
+enrichment_types_generator::create(const unsigned int  position) {
+    result_type r;
+    enrichment_types_generator::populate(position, r);
+    return r;
+}
+
+enrichment_types_generator::result_type
+enrichment_types_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

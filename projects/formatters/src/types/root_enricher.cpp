@@ -21,8 +21,17 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/meta_data/workflow.hpp"
-#include "dogen/sml/types/meta_data/scoped_registration.hpp"
+//#include "dogen/sml/types/meta_data/scoped_registration.hpp"
+#include "dogen/sml/types/meta_data/workflow.hpp"
 #include "dogen/formatters/types/root_enricher.hpp"
+
+class root_enricher_scoped_registration {
+public:
+    root_enricher_scoped_registration() {
+        std::cout << "here" << std::endl;
+        dogen::sml::meta_data::workflow::register_root_enricher(std::make_shared<dogen::formatters::root_enricher>());
+    }
+};
 
 namespace {
 
@@ -32,10 +41,8 @@ std::list<std::string> empty_dependencies;
 using namespace dogen::utility::log;
 static logger lg(logger_factory(root_id));
 
-dogen::sml::meta_data::root_enricher_scoped_registration<
-    dogen::formatters::root_enricher> sr;
-
 }
+static auto sr = new root_enricher_scoped_registration();
 
 namespace dogen {
 namespace formatters {
@@ -47,32 +54,23 @@ std::list<std::string> root_enricher::dependencies() const {
 }
 
 void root_enricher::
-first_stage_enrichment(const sml::model& /*model*/, sml::concept& target) {
+enrich(const sml::model& /*model*/,
+    const sml::meta_data::enrichment_types /*enrichment_type*/,
+    sml::concept& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching concept: " << target.name();
 }
 
 void root_enricher::
-first_stage_enrichment(const sml::model& /*model*/, sml::module& target) {
+enrich(const sml::model& /*model*/,
+    const sml::meta_data::enrichment_types /*enrichment_type*/,
+    sml::module& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching module: " << target.name();
 }
 
 void root_enricher::
-first_stage_enrichment(const sml::model& /*model*/, sml::type& target) {
-    BOOST_LOG_SEV(lg, debug) << "Enriching type: " << target.name();
-}
-
-void root_enricher::
-second_stage_enrichment(const sml::model& /*model*/, sml::concept& target) {
-    BOOST_LOG_SEV(lg, debug) << "Enriching concept: " << target.name();
-}
-
-void root_enricher::
-second_stage_enrichment(const sml::model& /*model*/, sml::module& target) {
-    BOOST_LOG_SEV(lg, debug) << "Enriching module: " << target.name();
-}
-
-void root_enricher::
-second_stage_enrichment(const sml::model& /*model*/, sml::type& target) {
+enrich(const sml::model& /*model*/,
+    const sml::meta_data::enrichment_types /*enrichment_type*/,
+    sml::type& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching type: " << target.name();
 }
 

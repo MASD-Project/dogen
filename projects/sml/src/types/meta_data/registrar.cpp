@@ -18,19 +18,57 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/meta_data/registrar_error.hpp"
 #include "dogen/sml/types/meta_data/registrar.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("sml.meta_data.registrar"));
+
+const std::string null_root_enricher("Root enricher is null");
+const std::string null_ordinary_enricher("Ordinary enricher is null");
+
+}
 
 namespace dogen {
 namespace sml {
 namespace meta_data {
 
 void registrar::register_root_enricher(std::shared_ptr<enricher_interface> e) {
+    BOOST_LOG_SEV(lg, debug) << "Registering root enricher: " << e->id();
     root_enricher_ = e;
 }
 
 void registrar::
 register_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
+    BOOST_LOG_SEV(lg, debug) << "Registering ordinary enricher: " << e->id();
     ordinary_enrichers_.push_back(e);
+}
+
+
+void registrar::validate_state() const {
+    BOOST_LOG_SEV(lg, debug) << "Validating state of registrar.";
+
+    if (root_enricher_)
+        BOOST_LOG_SEV(lg, debug) << "Foundry root enricher: "
+                                 << root_enricher_->id();
+    else {
+        BOOST_LOG_SEV(lg, error) << null_root_enricher;
+        BOOST_THROW_EXCEPTION(registrar_error(null_root_enricher));
+    }
+
+    for (const auto oe : ordinary_enrichers_) {
+        if (oe)
+            BOOST_LOG_SEV(lg, debug) << "Foundry ordinary enricher: "
+                                     << oe->id();
+        else {
+            BOOST_LOG_SEV(lg, error) << null_ordinary_enricher;
+            BOOST_THROW_EXCEPTION(registrar_error(null_ordinary_enricher));
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "State of registrar is valid.";
 }
 
 std::shared_ptr<enricher_interface> registrar::root_enricher() {

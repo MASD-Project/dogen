@@ -18,39 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
-#define DOGEN_SML_TYPES_META_DATA_ROOT_ENRICHER_HPP
+#ifndef DOGEN_SML_TYPES_GRAPH_VISITOR_HPP
+#define DOGEN_SML_TYPES_GRAPH_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/meta_data/enricher_interface.hpp"
+#include <functional>
+#include <boost/graph/depth_first_search.hpp>
 
 namespace dogen {
-namespace formatters {
+namespace sml {
 
-/**
- * @brief Responsible for enriching the meta-data with the core
- * formatter tags.
- */
-class root_enricher : public sml::meta_data::enricher_interface {
+template<typename GraphSubject>
+class graph_visitor : public boost::default_dfs_visitor {
 public:
-    virtual std::string id() const override;
+    graph_visitor() = delete;
+    graph_visitor& operator=(const graph_visitor&) = default;
+    graph_visitor(const graph_visitor&) = default;
+    graph_visitor(graph_visitor&&) = default;
 
-    virtual std::list<std::string> dependencies() const override;
+public:
+    typedef std::function<void(const GraphSubject&)> function_type;
 
-    virtual void enrich(const sml::model& model,
-        const sml::meta_data::enrichment_types enrichment_type,
-        sml::concept& target) override;
+public:
+    explicit graph_visitor(const function_type& function)
+        : function_(function) { }
 
-    virtual void enrich(const sml::model& model,
-        const sml::meta_data::enrichment_types enrichment_type,
-        sml::module& target) override;
+public:
+    template<typename Vertex, typename Graph>
+    void finish_vertex(const Vertex& u, const Graph& g) {
+        const auto o(g[u]);
+        function_(std::cref(o));
+    }
 
-    virtual void enrich(const sml::model& model,
-        const sml::meta_data::enrichment_types enrichment_type,
-        sml::type& target) override;
+private:
+    function_type function_;
 };
 
 } }

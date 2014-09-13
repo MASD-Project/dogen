@@ -18,21 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/io/concept_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/enumerator_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
+#include <ostream>
+#include <stdexcept>
 #include "dogen/sml/io/meta_data/enrichment_types_io.hpp"
-#include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/module_io.hpp"
-#include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/io/object_io.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/origin_types_io.hpp"
-#include "dogen/sml/io/parameter_io.hpp"
-#include "dogen/sml/io/primitive_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+
+namespace dogen {
+namespace sml {
+namespace meta_data {
+
+std::ostream& operator<<(std::ostream& s, const enrichment_types& v) {
+    s << "{ " << "\"__type__\": " << "\"enrichment_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case enrichment_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case enrichment_types::first_stage:
+        attr = "\"first_stage\"";
+        break;
+    case enrichment_types::second_stage:
+        attr = "\"second_stage\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for enrichment_types");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} } }

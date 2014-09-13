@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_GRAPHER_HPP
-#define DOGEN_SML_TYPES_META_DATA_GRAPHER_HPP
+#ifndef DOGEN_SML_TYPES_META_DATA_ENRICHER_GRAPHER_HPP
+#define DOGEN_SML_TYPES_META_DATA_ENRICHER_GRAPHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
+#include <memory>
 #include <unordered_map>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/sml/types/meta_data/enricher_interface.hpp"
@@ -40,21 +41,21 @@ namespace meta_data {
 typedef boost::adjacency_list<
     boost::setS, boost::vecS, boost::directedS,
     std::shared_ptr<enricher_interface>
-    > graph_type;
+    > enricher_graph;
 
 /**
  * @brief Builds a DAG of enrichers.
  */
-class grapher {
+class enricher_grapher {
 private:
-    typedef boost::graph_traits<graph_type>::vertex_descriptor
+    typedef boost::graph_traits<enricher_graph>::vertex_descriptor
     vertex_descriptor_type;
 
     typedef std::unordered_map<std::string, vertex_descriptor_type>
     id_to_vertex_type;
 
 public:
-    grapher();
+    enricher_grapher();
 
 private:
     /**
@@ -132,11 +133,11 @@ public:
      *
      * @pre The graph must have already been built.
      */
-    const graph_type& graph() const;
+    const enricher_graph& graph() const;
 
 private:
     bool built_;
-    graph_type graph_;
+    enricher_graph graph_;
     id_to_vertex_type id_to_vertex_;
     id_to_vertex_type orphanage_;
     vertex_descriptor_type root_vertex_;

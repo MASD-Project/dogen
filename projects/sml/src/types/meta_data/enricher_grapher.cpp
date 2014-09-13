@@ -20,12 +20,12 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/graphing_error.hpp"
-#include "dogen/sml/types/meta_data/grapher.hpp"
+#include "dogen/sml/types/meta_data/enricher_grapher.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("sml.meta_data.grapher"));
+static logger lg(logger_factory("sml.meta_data.enricher_grapher"));
 
 const std::string empty;
 const std::string graph_already_built("Graph has already been built");
@@ -41,9 +41,9 @@ namespace dogen {
 namespace sml {
 namespace meta_data {
 
-grapher::grapher() : built_(false) { }
+enricher_grapher::enricher_grapher() : built_(false) { }
 
-grapher::vertex_descriptor_type grapher::vertex_for_id(const std::string& id) {
+enricher_grapher::vertex_descriptor_type enricher_grapher::vertex_for_id(const std::string& id) {
     const auto i(id_to_vertex_.find(id));
     if (i != id_to_vertex_.end()) {
         BOOST_LOG_SEV(lg, debug) << "Vertex already exists: " << id;
@@ -57,21 +57,21 @@ grapher::vertex_descriptor_type grapher::vertex_for_id(const std::string& id) {
     return r;
 }
 
-void grapher::require_not_built() const {
+void enricher_grapher::require_not_built() const {
     if (is_built()) {
         BOOST_LOG_SEV(lg, error) << graph_already_built;
         BOOST_THROW_EXCEPTION(graphing_error(graph_already_built));
     }
 }
 
-void grapher::require_built() const {
+void enricher_grapher::require_built() const {
     if (!is_built()) {
         BOOST_LOG_SEV(lg, error) << graph_not_yet_built;
         BOOST_THROW_EXCEPTION(graphing_error(graph_not_yet_built));
     }
 }
 
-void grapher::validate_root_enricher(const enricher_interface& e) const {
+void enricher_grapher::validate_root_enricher(const enricher_interface& e) const {
     if (!e.dependencies().empty()) {
         BOOST_LOG_SEV(lg, error) << root_has_dependencies;
         BOOST_THROW_EXCEPTION(graphing_error(root_has_dependencies));
@@ -84,7 +84,7 @@ void grapher::validate_root_enricher(const enricher_interface& e) const {
     }
 }
 
-void grapher::add_root_enricher(std::shared_ptr<enricher_interface> e) {
+void enricher_grapher::add_root_enricher(std::shared_ptr<enricher_interface> e) {
     require_not_built();
     validate_root_enricher(*e);
     root_ = e;
@@ -93,7 +93,7 @@ void grapher::add_root_enricher(std::shared_ptr<enricher_interface> e) {
     id_to_vertex_.insert(std::make_pair(root_->id(), root_vertex_));
 }
 
-void grapher::add_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
+void enricher_grapher::add_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
     require_not_built();
 
     const auto v(vertex_for_id(e->id()));
@@ -112,7 +112,7 @@ void grapher::add_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
     }
 }
 
-void grapher::build() {
+void enricher_grapher::build() {
     require_not_built();
 
     BOOST_LOG_SEV(lg, debug) << "Processing orphan vertices.";
@@ -124,7 +124,7 @@ void grapher::build() {
     built_ = true;
 }
 
-const graph_type& grapher::graph() const {
+const enricher_graph& enricher_grapher::graph() const {
     require_built();
     return graph_;
 }

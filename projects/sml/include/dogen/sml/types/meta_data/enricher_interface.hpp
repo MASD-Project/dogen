@@ -32,6 +32,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/concept.hpp"
+#include "dogen/sml/types/meta_data/enrichment_types.hpp"
 
 namespace dogen {
 namespace sml {
@@ -60,34 +61,26 @@ public:
     virtual std::list<std::string> dependencies() const = 0;
 
     /**
-     * @brief Perform first stage enrichment to concept.
+     * @brief Perform enrichment to concept.
      */
-    virtual void first_stage_enrichment(const model& model, concept& target) = 0;
+    virtual void enrich(const model& model,
+        const enrichment_types enrichment_type,
+        concept& target) = 0;
 
     /**
-     * @brief Perform first stage enrichment to module.
+     * @brief Perform enrichment to module.
      */
-    virtual void first_stage_enrichment(const model& model, module& target) = 0;
+    virtual void enrich(const model& model,
+        const enrichment_types enrichment_type,
+        module& target) = 0;
 
     /**
-     * @brief Perform first stage enrichment to type.
+     * @brief Perform enrich to type.
      */
-    virtual void first_stage_enrichment(const model& model, type& target) = 0;
+    virtual void enrich(const model& model,
+        const enrichment_types enrichment_type,
+        type& target) = 0;
 
-    /**
-     * @brief Perform second stage enrichment to concept.
-     */
-    virtual void second_stage_enrichment(const model& model, concept& target) = 0;
-
-    /**
-     * @brief Perform second stage enrichment to module.
-     */
-    virtual void second_stage_enrichment(const model& model, module& target) = 0;
-
-    /**
-     * @brief Perform second stage enrichment to type.
-     */
-    virtual void second_stage_enrichment(const model& model, type& target) = 0;
 };
 
 } } }

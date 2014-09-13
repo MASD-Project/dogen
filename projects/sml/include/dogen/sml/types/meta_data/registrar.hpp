@@ -50,6 +50,13 @@ public:
 
 public:
     /**
+     * @brief Ensures the registrar is in a valid state and ready to
+     * be used.
+     */
+    void validate_state() const;
+
+public:
+    /**
      * @brief Returns the root enricher, if one was registered, or
      * null otherwise.
      */

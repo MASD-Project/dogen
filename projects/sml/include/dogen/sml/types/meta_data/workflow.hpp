@@ -28,9 +28,10 @@
 
 #include <memory>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/meta_data/grapher.hpp"
+#include "dogen/sml/types/meta_data/enricher_grapher.hpp"
 #include "dogen/sml/types/meta_data/registrar.hpp"
 #include "dogen/sml/types/module_containment_graph.hpp"
+#include "dogen/sml/types/meta_data/enrichment_sub_workflow.hpp"
 
 namespace dogen {
 namespace sml {
@@ -55,7 +56,17 @@ private:
     /**
      * @brief Setup the DAG of enrichers.
      */
-    graph_type build_graph_activity();
+    enricher_graph build_enricher_graph_activity();
+
+    /**
+     * @brief Executes the first stage of the enrichment process.
+     */
+    void first_stage_enrichment_activity(const qname& qn);
+
+    /**
+     * @brief Executes the second stage of the enrichment process.
+     */
+    void second_stage_enrichment_activity(const qname& qn);
 
 public:
     /**
@@ -77,10 +88,11 @@ public:
      *
      * @pre the root enricher must be registered.
      */
-    void execute(const module_containment_graph& graph, model& m) const;
+    void execute(const module_containment_graph& g, model& m);
 
 private:
-    static std::unique_ptr<registrar> registrar_;
+    static std::shared_ptr<registrar> registrar_;
+    std::shared_ptr<enrichment_sub_workflow> enrichment_sub_workflow_;
 };
 
 } } }
