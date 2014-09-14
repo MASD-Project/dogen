@@ -1088,8 +1088,7 @@ repository:
 : cd dogen_examples
 : mkdir source
 : cd source
-: wget FILE
-FIXME - path to dia file
+: wget https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/diagrams/hello_world.dia
 
 The source directory is created so we can separate our source code
 from the build files, as you'll see in a moment. All that is left is
@@ -1835,23 +1834,32 @@ the [[http://dia-installer.de/doc/en/][Dia User Manual]].
 *** Hello World
 
 We shall start by creating a very simple diagram, identical to the one
-available in the dia sources here. First create a class called
-=one_property=.
+available in the dia sources [[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/diagrams/hello_world.dia][here]]. If you'd like to use the one in the
+sources, just save the file locally (as described [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#generating-hello-world][previously]]). If
+you'd like to create it from scratch, follow these steps.
 
-FIXME: screenshot
+First create a class called =one_property=. The class should look like
+the screen-shot below.
 
-Then add any comment you'd like; for instance, we added "Welcome to
-Dogen!".
+#+CAPTION: Main Dia window with Hello World model
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/dia_hello_world_diagram.png]]
 
-FIXME: screenshot
+Then add any comment you'd like to the class; for instance, we added
+"Welcome to Dogen!".
 
-Finally, add a property called =property=. To make things more
-interesting we made the type of the property =std::string=.
+#+CAPTION: Properties of UML Class dialog, Class tab.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/dia_hello_world_class.png]]
 
-FIXME: screenshot
+Finally, add a property called =property=, of type =std::string=.
+
+#+CAPTION: Properties of UML Class dialog, Attributes tab.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/dia_hello_world_attributes.png]]
 
 This diagram is now ready for generation, as described in section
-Generating Hello World.
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#generating-hello-world][Generating Hello World]].
 
 *** Supported Types
 

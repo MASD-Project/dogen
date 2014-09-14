@@ -68,13 +68,13 @@
         <dia:point val="29.6833,-0.491667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.6333,-0.541667;36.2283,2.35833"/>
+        <dia:rectangle val="29.6333,-0.541667;38.7033,2.35833"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="29.6833,-0.491667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.4950000000000001"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -176,7 +176,7 @@ level.#</dia:string>
             <dia:string>#property#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#int#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

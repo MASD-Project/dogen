@@ -14,15 +14,15 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-14 Sun 22:51]
+Clock summary at [2014-09-14 Sun 23:06]
 
 | Headline                                                      | Time    |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                  | *19:11* |       |      |
+| *Total time*                                                  | *19:23* |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                               |         | 19:11 |      |
+| Development Stories Implemented                               |         | 19:23 |      |
 | IMPLEMENTATION Sprint and product backlog grooming            |         |       | 1:25 |
-| IMPLEMENTATION Updates to the manual and readme files         |         |       | 0:41 |
+| IMPLEMENTATION Updates to the manual and readme files         |         |       | 0:53 |
 | COMPLETED Fix windows continuous build                        |         |       | 0:22 |
 | COMPLETED Create a sub-system for meta-data                   |         |       | 3:46 |
 | COMPLETED Add static registration to meta-data workflow       |         |       | 0:19 |
@@ -46,6 +46,8 @@ Clock summary at [2014-09-14 Sun 22:51]
 Updates to sprint and product backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-09-14 Sun 23:01]--[2014-09-14 Sun 23:04] =>  0:03
+    CLOCK: [2014-09-14 Sun 22:52]--[2014-09-14 Sun 23:01] =>  0:09
     CLOCK: [2014-09-14 Sun 22:41]--[2014-09-14 Sun 22:51] =>  0:10
     CLOCK: [2014-09-12 Fri 08:22]--[2014-09-12 Fri 08:36] =>  0:14
     CLOCK: [2014-09-11 Thu 22:34]--[2014-09-11 Thu 22:51] =>  0:17
@@ -58,6 +60,20 @@ Use downtime to update the manual and / or readme file.
 We allowed this section to evolve as a collage of different ideas, but
 now it is no longer making sense as a whole. We need to go back to the
 drawing board and create a structure for it.
+
+*** CANCELLED Refactor hello world example to make it simpler         :story:
+    CLOSED: [2014-09-14 Sun 23:05]
+
+*Rationale*: actually, an hello world kind of has to have the string
+ "hello world" so we can't really get away with it. Leave it as it is.
+
+Whilst we started adding a section on dia in the manual, we noticed
+that the hello world example makes use of =std::string= making it
+unsuitable for a basic example. We need to refactor it to use only
+int.
+
+- change manual sections on hello world
+- change sanity
 
 *** COMPLETED Fix windows continuous build                            :story:
     CLOSED: [2014-09-10 Wed 18:47]
@@ -324,16 +340,6 @@ to simplify the graph in enricher.
 
 We need to move the cycle dectector code from dia to sml into
 utilities so that we can make use of it in the meta-data grapher.
-
-*** Refactor hello world example to make it simpler                   :story:
-
-Whilst we started adding a section on dia in the manual, we noticed
-that the hello world example makes use of =std::string= making it
-unsuitable for a basic example. We need to refactor it to use only
-int.
-
-- change manual sections on hello world
-- change sanity
 
 *** Remove dependency of writer on tags                               :story:
 
