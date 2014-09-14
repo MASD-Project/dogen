@@ -1838,21 +1838,22 @@ available in the dia sources [[https://raw.githubusercontent.com/DomainDrivenCon
 sources, just save the file locally (as described [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#generating-hello-world][previously]]). If
 you'd like to create it from scratch, follow these steps.
 
-First create a class called =one_property=. The class should look like
-the screen-shot below.
+In the main Dia window, using the UML shapes, create a class called
+=one_property=.
 
 #+CAPTION: Main Dia window with Hello World model
 #+ATTR_HTML: :align center
 [[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/dia_hello_world_diagram.png]]
 
-Then add any comment you'd like to the class; for instance, we added
-"Welcome to Dogen!".
+Feel free to add any comment you'd like to the class; for instance, we
+added "Welcome to Dogen!".
 
 #+CAPTION: Properties of UML Class dialog, Class tab.
 #+ATTR_HTML: :align center
 [[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/dia_hello_world_class.png]]
 
-Finally, add a property called =property=, of type =std::string=.
+Make sure you add a property called =property= to the class, and give
+it the type =std::string=.
 
 #+CAPTION: Properties of UML Class dialog, Attributes tab.
 #+ATTR_HTML: :align center
