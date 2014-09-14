@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <iostream>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/meta_data/workflow.hpp"
