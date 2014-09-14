@@ -8,6 +8,33 @@
 
 Stories that we intend to look at, at some point.
 
+*** Make features optional at compile time                            :story:
+
+One scenario we haven't accounted for is for compile time
+optionality. For example, say we have several serialisation facets,
+all of them useful to a general model; however, individual users of
+that model may only be interested in one of the several
+alternatives. In these cases, users should be able to opt out from
+compiling some of the facets and only include those that they are
+interested in. This is different from the current optionality we
+support in that we allow the user to determine what to code
+generate. In this case, the mainline project wants to code generate
+all facets, but the users of the model may choose to compile only a
+subset of the facets.
+
+To implement this we need a trait - say =optional= - that when set
+results in a set of macros that get defined to protect the facet. The
+user can then pass in that macro to cmake to disable the facet. This
+is not the same as the "feature" macros we use for ODB and EOS. These
+are actually not Dogen macros, just hand-crafted macros we put in to
+allow users to compile Dogen without support for EOS and ODB.
+
+The macros should follow the standard notation of =MODEL.FACET= or
+perhaps =MODEL.FACET.FEATURE=, e.g. =cpp.boost_serialization= to make
+the whole of serialisation optional or
+=cpp.boost_serialization.main_header= to make the header optional. Not
+sure if the latter has any use.
+
 *** Consider merging graphers into a single class                     :story:
 
 After the meta-data work, we ended up with three separate graphers
