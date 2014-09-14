@@ -6,7 +6,7 @@ likely to avoid having to trek down git history to find it.
 
 ** Meta-data tagger
 
-Header:
+*** Header
 
 #+begin_src c++
 #include <set>
@@ -130,7 +130,7 @@ private:
 } }
 #+end_src
 
-Implementation:
+*** Implementation
 
 #+begin_src c++
 #include <sstream>
@@ -1520,7 +1520,7 @@ void meta_data_tagger::tag(const config::cpp_settings& s, model& m) const {
 } }
 #+end_src
 
-Spec:
+*** Spec
 
 #+begin_src
 #include <array>

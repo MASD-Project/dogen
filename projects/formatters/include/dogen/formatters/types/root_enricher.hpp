@@ -37,7 +37,26 @@ namespace formatters {
  */
 class root_enricher : public sml::meta_data::enricher_interface {
 private:
-    void perform_first_stage_enrichment(boost::property_tree::ptree& pt);
+    /**
+     * @brief Returns true if its the first stage enrichment, false
+     * otherwise.
+     */
+    bool is_first_stage_enrichment(
+        const sml::meta_data::enrichment_types et) const;
+
+    /**
+     * @brief Populates all of the traits of the formatter module,
+     * setting it to default values - if they do not yet exist.
+     */
+    void setup_defaults(boost::property_tree::ptree& target) const;
+
+    /**
+     * @brief Performs the first stage enrichment in the target, using
+     * the parent module.
+     */
+    void perform_first_stage_enrichment(
+        const boost::property_tree::ptree& parent_module,
+        boost::property_tree::ptree& target) const;
 
 public:
     virtual std::string id() const override;

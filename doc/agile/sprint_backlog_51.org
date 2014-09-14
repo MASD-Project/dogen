@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-14 Sun 19:06]
+Clock summary at [2014-09-14 Sun 20:04]
 
 | Headline                                                      | Time    |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                  | *17:55* |       |      |
+| *Total time*                                                  | *18:51* |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                               |         | 17:55 |      |
+| Development Stories Implemented                               |         | 18:51 |      |
 | IMPLEMENTATION Sprint and product backlog grooming            |         |       | 1:25 |
 | IMPLEMENTATION Updates to the manual and readme files         |         |       | 0:31 |
 | COMPLETED Fix windows continuous build                        |         |       | 0:22 |
@@ -31,7 +31,7 @@ Clock summary at [2014-09-14 Sun 19:06]
 | COMPLETED Link types and concepts to their containing module  |         |       | 0:57 |
 | COMPLETED Enrichment as a two-stage process                   |         |       | 0:07 |
 | COMPLETED Create an SML grapher                               |         |       | 7:02 |
-| IMPLEMENTATION Implement the enricher interface in formatters |         |       | 0:46 |
+| IMPLEMENTATION Implement the enricher interface in formatters |         |       | 1:42 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -262,10 +262,28 @@ We need to move all the tags that belong to formatters from the tags
 class into the local formatters' traits. We also need to create
 formatter settings.
 
-**** Populate all of the default traits in enricher                   :story:
+**** COMPLETED Populate all of the default traits in enricher         :story:
+     CLOSED: [2014-09-14 Sun 20:01]
+     CLOCK: [2014-09-14 Sun 19:05]--[2014-09-14 Sun 20:01] =>  0:56
 
 Move across all the code from taggers that belongs in formatters'
 enricher. Formatters only has first stage enrichment.
+
+**** Populate containing module in JSON hydrator                      :spike:
+
+We only added support for this in the dia to sml workflow, so the
+enricher is breaking. Add it to JSON workflow too.
+
+
+**** Ensure the containing module qname is correct                    :spike:
+
+We don't seem to be able to find the qname of the containing model in
+the model. There must be a typo of some kind on the qname.
+
+**** Remove hacks                                                      :task:
+
+Once the spikes have been fixed, we need to remove the commented out
+code and FIXME code.
 
 *** Implement the enricher interface in the CPP model                 :story:
 
