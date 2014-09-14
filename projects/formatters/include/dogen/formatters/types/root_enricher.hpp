@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "boost/property_tree/ptree.hpp"
 #include "dogen/sml/types/meta_data/enricher_interface.hpp"
 
 namespace dogen {
@@ -35,6 +36,9 @@ namespace formatters {
  * formatter tags.
  */
 class root_enricher : public sml::meta_data::enricher_interface {
+private:
+    void perform_first_stage_enrichment(boost::property_tree::ptree& pt);
+
 public:
     virtual std::string id() const override;
 

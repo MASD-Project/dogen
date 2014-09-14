@@ -18,14 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/formatter_settings_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
+#include "dogen/formatters/types/traits.hpp"
+
+namespace dogen {
+namespace formatters {
+
+const std::string traits::bool_true("true");
+const std::string traits::bool_false("false");
+
+const std::string traits::copyright_holder("COPYRIGHT");
+const std::string traits::licence_name("LICENCE");
+const std::string traits::modeline_group_name("MODELINE_GROUP");
+const std::string traits::generate_preamble("generate_preamble");
+
+const std::string traits::code_generation_marker::add_date_time(
+    "code_generation_marker.add_date_time");
+const std::string traits::code_generation_marker::add_warning(
+    "code_generation_marker.add_warning");
+const std::string traits::code_generation_marker::message(
+    "code_generation_marker.message");
+
+} }

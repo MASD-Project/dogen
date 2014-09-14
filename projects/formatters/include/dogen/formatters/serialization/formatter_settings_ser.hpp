@@ -18,14 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/formatter_settings_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_FORMATTER_SETTINGS_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_FORMATTER_SETTINGS_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/formatters/types/formatter_settings.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::formatter_settings)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::formatters::formatter_settings& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::formatters::formatter_settings& v, unsigned int version);
+
+} }
+
+#endif

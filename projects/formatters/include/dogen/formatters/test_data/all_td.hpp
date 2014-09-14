@@ -22,6 +22,7 @@
 #include "dogen/formatters/test_data/comment_styles_td.hpp"
 #include "dogen/formatters/test_data/editors_td.hpp"
 #include "dogen/formatters/test_data/file_td.hpp"
+#include "dogen/formatters/test_data/formatter_settings_td.hpp"
 #include "dogen/formatters/test_data/licence_td.hpp"
 #include "dogen/formatters/test_data/modeline_field_td.hpp"
 #include "dogen/formatters/test_data/modeline_group_td.hpp"

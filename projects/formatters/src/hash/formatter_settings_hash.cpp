@@ -18,18 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_ANNOTATION_FACTORY_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_ANNOTATION_FACTORY_FWD_HPP
+#include "dogen/formatters/hash/annotation_hash.hpp"
+#include "dogen/formatters/hash/formatter_settings_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace formatters {
 
-class annotation_factory;
+std::size_t formatter_settings_hasher::hash(const formatter_settings&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.generate_preamble());
+    combine(seed, v.annotation());
+
+    return seed;
+}
 
 } }
-
-#endif

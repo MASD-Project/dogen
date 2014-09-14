@@ -18,14 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/formatter_settings_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/formatters/io/annotation_io.hpp"
+#include "dogen/formatters/io/formatter_settings_io.hpp"
+
+namespace dogen {
+namespace formatters {
+
+std::ostream& operator<<(std::ostream& s, const formatter_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::formatters::formatter_settings\"" << ", "
+      << "\"generate_preamble\": " << v.generate_preamble() << ", "
+      << "\"annotation\": " << v.annotation()
+      << " }";
+    return(s);
+}
+
+} }

@@ -18,14 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/formatter_settings_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
+#ifndef DOGEN_FORMATTERS_HASH_FORMATTER_SETTINGS_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_FORMATTER_SETTINGS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/formatters/types/formatter_settings.hpp"
+
+namespace dogen {
+namespace formatters {
+
+struct formatter_settings_hasher {
+public:
+    static std::size_t hash(const formatter_settings& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::formatters::formatter_settings> {
+public:
+    size_t operator()(const dogen::formatters::formatter_settings& v) const {
+        return dogen::formatters::formatter_settings_hasher::hash(v);
+    }
+};
+
+}
+#endif

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_ANNOTATION_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_ANNOTATION_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FORMATTER_SETTINGS_FACTORY_HPP
+#define DOGEN_FORMATTERS_TYPES_FORMATTER_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/types/formatter_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
 
@@ -39,23 +39,23 @@ namespace dogen {
 namespace formatters {
 
 /**
- * @brief Creates an annotation by extracting information from
- * meta-data.
+ * @brief Creates the formatter settings by extracting information
+ * from meta-data.
  */
-class annotation_factory {
+class formatter_settings_factory {
 public:
-    annotation_factory() = delete;
-    annotation_factory(const annotation_factory&) = default;
-    annotation_factory(annotation_factory&&) = default;
-    ~annotation_factory() = default;
+    formatter_settings_factory() = delete;
+    formatter_settings_factory(const formatter_settings_factory&) = default;
+    formatter_settings_factory(formatter_settings_factory&&) = default;
+    ~formatter_settings_factory() = default;
 
 public:
     /**
-     * @brief Initialise a new annotation factory.
+     * @brief Initialise a new formatter settings factory.
      *
      * @param data_files_directories where to look for reference data.
      */
-    explicit annotation_factory(
+    explicit formatter_settings_factory(
         const std::list<boost::filesystem::path>& data_files_directories);
 
 private:
@@ -122,11 +122,12 @@ public:
     void load_reference_data();
 
     /**
-     * @brief Generates an annotation from the Taggable's meta-data.
+     * @brief Generates formatter settings from the meta-data.
      *
      * @pre load reference data must have been called.
      */
-    annotation build(const boost::property_tree::ptree& meta_data) const;
+    formatter_settings
+    build(const boost::property_tree::ptree& meta_data) const;
 
 private:
     const std::list<boost::filesystem::path>& data_files_directories_;

@@ -18,14 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/formatter_settings_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
+#ifndef DOGEN_FORMATTERS_IO_FORMATTER_SETTINGS_IO_HPP
+#define DOGEN_FORMATTERS_IO_FORMATTER_SETTINGS_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/formatters/types/formatter_settings.hpp"
+
+namespace dogen {
+namespace formatters {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::formatters::formatter_settings& v);
+
+} }
+
+#endif

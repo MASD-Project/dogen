@@ -19,13 +19,14 @@
  *
  */
 #include "dogen/formatters/types/annotation.hpp"
-#include "dogen/formatters/types/annotation_factory.hpp"
 #include "dogen/formatters/types/building_error.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/comment_styles.hpp"
 #include "dogen/formatters/types/editors.hpp"
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/formatter_settings.hpp"
+#include "dogen/formatters/types/formatter_settings_factory.hpp"
 #include "dogen/formatters/types/formatters.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/hydration_error.hpp"
@@ -42,4 +43,5 @@
 #include "dogen/formatters/types/padding_types.hpp"
 #include "dogen/formatters/types/root_enricher.hpp"
 #include "dogen/formatters/types/static_initializer.hpp"
+#include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/utility.hpp"

@@ -44,6 +44,10 @@ std::list<std::string> root_enricher::dependencies() const {
 }
 
 void root_enricher::
+perform_first_stage_enrichment(boost::property_tree::ptree& /*pt*/) {
+}
+
+void root_enricher::
 enrich(const sml::model& /*model*/,
     const sml::meta_data::enrichment_types /*enrichment_type*/,
     sml::concept& target) {
