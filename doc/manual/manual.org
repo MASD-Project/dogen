@@ -1847,20 +1847,14 @@ In the main Dia window, using the UML shapes, create a class called
 
 Feel free to add any comment you'd like to the class; for instance, we
 added "Welcome to Dogen!", followed by a bit of a blurb about Hello
-World. Whatever you decide to write, you must make sure to type the
-following in the comment box somewhere - ideally at the end:
-
-: #DOGEN dia.comment=true
-
-The meaning of this incantation is explained in detail in section [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#the-meta-data-subsystem][The
-Meta-Data Subsystem]], but you can gloss over this for now.
+World.
 
 #+CAPTION: Properties of UML Class dialog, Class tab.
 #+ATTR_HTML: :align center
 [[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/dia_hello_world_class.png]]
 
-Make sure you add a property called =property= to the class, and give
-it the type =std::string=.
+Also, make sure you add a property called =property= to the class, and
+give it the type =std::string=.
 
 #+CAPTION: Properties of UML Class dialog, Attributes tab.
 #+ATTR_HTML: :align center
