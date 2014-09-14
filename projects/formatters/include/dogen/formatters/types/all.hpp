@@ -41,4 +41,5 @@
 #include "dogen/formatters/types/modeline_locations.hpp"
 #include "dogen/formatters/types/padding_types.hpp"
 #include "dogen/formatters/types/root_enricher.hpp"
+#include "dogen/formatters/types/static_initializer.hpp"
 #include "dogen/formatters/types/utility.hpp"

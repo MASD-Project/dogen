@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include <memory>
-#include <functional>
+#include <sstream>
 #include <iterator>
 #include <algorithm>
+#include <functional>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"

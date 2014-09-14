@@ -18,11 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/static_initializer.hpp"
-#include "dogen/knitter/workflow.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_STATIC_INITIALIZER_HPP
+#define DOGEN_FORMATTERS_TYPES_STATIC_INITIALIZER_HPP
 
-int main(const int argc, const char* argv[]) {
-    dogen::formatters::static_initializer::initialize();
-    dogen::knitter::workflow w;
-    return w.execute(argc, argv);
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace formatters {
+
+/**
+ * @brief Initialises all of the static state in this model.
+ */
+class static_initializer {
+public:
+    static void initialize();
+};
+
+} }
+
+#endif

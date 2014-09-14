@@ -18,16 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/graph_visitor.hpp"
 #include "dogen/sml/types/meta_data/enricher_grapher.hpp"
+#include "dogen/sml/types/workflow_error.hpp"
 #include "dogen/sml/types/meta_data/workflow.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("sml.meta_data.workflow"));
+
+const std::string null_registrar("Registrar is null");
 
 }
 
@@ -37,11 +41,20 @@ namespace meta_data {
 
 std::shared_ptr<registrar> workflow::registrar_;
 
-registrar& workflow::get_registrar() {
+workflow::workflow() {
     if (!registrar_) {
-        BOOST_LOG_SEV(lg, debug) << "Creating registrar.";
-        registrar_ = std::make_shared<registrar>();
+        BOOST_LOG_SEV(lg, error) << null_registrar;
+        BOOST_THROW_EXCEPTION(workflow_error(null_registrar));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrar was initialised as expected.";
+    registrar_->validate();
+    BOOST_LOG_SEV(lg, debug) << "Registrar is valid.";
+}
+
+sml::meta_data::registrar& workflow::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<sml::meta_data::registrar>();
 
     return *registrar_;
 }
@@ -66,34 +79,33 @@ void workflow::second_stage_enrichment_activity(const qname& qn) {
 
 void workflow::
 register_root_enricher(std::shared_ptr<enricher_interface> e) {
-    get_registrar().register_root_enricher(e);
+    registrar().register_root_enricher(e);
 }
 
 void workflow::
 register_ordinary_enricher(std::shared_ptr<enricher_interface> e) {
-    get_registrar().register_ordinary_enricher(e);
+    registrar().register_ordinary_enricher(e);
 }
 
 void workflow::
-execute(const module_containment_graph& /*g*/, model& /*m*/) {
+execute(const module_containment_graph& g, model& m) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-data workflow.";
 
-    // get_registrar().validate_state();
-    // auto enricher_graph(build_enricher_graph_activity());
-    // enrichment_sub_workflow_ =
-    //     std::make_shared<enrichment_sub_workflow>(m, enricher_graph);
+   auto enricher_graph(build_enricher_graph_activity());
+    enrichment_sub_workflow_ =
+        std::make_shared<enrichment_sub_workflow>(m, enricher_graph);
 
-    // const auto first_function(
-    //     std::bind(&workflow::first_stage_enrichment_activity, this,
-    //         std::placeholders::_1));
-    // graph_visitor<qname> first_visitor(first_function);
-    // boost::depth_first_search(g, boost::visitor(first_visitor));
+    const auto first_function(
+        std::bind(&workflow::first_stage_enrichment_activity, this,
+            std::placeholders::_1));
+    graph_visitor<qname> first_visitor(first_function);
+    boost::depth_first_search(g, boost::visitor(first_visitor));
 
-    // const auto second_function(
-    //     std::bind(&workflow::second_stage_enrichment_activity, this,
-    //         std::placeholders::_1));
-    // graph_visitor<qname> second_visitor(second_function);
-    // boost::depth_first_search(g, boost::visitor(second_visitor));
+    const auto second_function(
+        std::bind(&workflow::second_stage_enrichment_activity, this,
+            std::placeholders::_1));
+    graph_visitor<qname> second_visitor(second_function);
+    boost::depth_first_search(g, boost::visitor(second_visitor));
 
     BOOST_LOG_SEV(lg, debug) << "Finished meta-data workflow.";
 }

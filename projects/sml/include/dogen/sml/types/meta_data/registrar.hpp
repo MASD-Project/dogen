@@ -49,13 +49,12 @@ public:
     void register_ordinary_enricher(std::shared_ptr<enricher_interface> e);
 
 public:
-    /**
+    /*
      * @brief Ensures the registrar is in a valid state and ready to
      * be used.
      */
-    void validate_state() const;
+    void validate() const;
 
-public:
     /**
      * @brief Returns the root enricher, if one was registered, or
      * null otherwise.

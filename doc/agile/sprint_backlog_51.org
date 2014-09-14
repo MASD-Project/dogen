@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-13 Sat 02:34]
+Clock summary at [2014-09-14 Sun 03:10]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *14:36* |       |      |
+| *Total time*                                                 | *17:03* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 14:36 |      |
+| Development Stories Implemented                              |         | 17:03 |      |
 | IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:19 |
 | IMPLEMENTATION Updates to the manual and readme files        |         |       | 0:31 |
 | COMPLETED Fix windows continuous build                       |         |       | 0:22 |
@@ -30,7 +30,7 @@ Clock summary at [2014-09-13 Sat 02:34]
 | COMPLETED Implement a grapher in meta_data                   |         |       | 1:51 |
 | COMPLETED Link types and concepts to their containing module |         |       | 0:57 |
 | COMPLETED Enrichment as a two-stage process                  |         |       | 0:07 |
-| IMPLEMENTATION Create an SML grapher                         |         |       | 4:35 |
+| COMPLETED Create an SML grapher                              |         |       | 7:02 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -223,7 +223,11 @@ the process into two stages:
 - stage 1: entity specific enrichment
 - stage 2: relationship enrichment
 
-*** IMPLEMENTATION Create an SML grapher                              :story:
+*** COMPLETED Create an SML grapher                                   :story:
+    CLOSED: [2014-09-14 Sun 03:10]
+    CLOCK: [2014-09-14 Sun 00:57]--[2014-09-14 Sun 03:10] =>  2:13
+    CLOCK: [2014-09-13 Sat 22:09]--[2014-09-13 Sat 22:22] =>  0:13
+    CLOCK: [2014-09-13 Sat 22:08]--[2014-09-13 Sat 22:09] =>  0:01
     CLOCK: [2014-09-13 Sat 02:03]--[2014-09-13 Sat 02:34] =>  0:31
     CLOCK: [2014-09-12 Fri 23:10]--[2014-09-13 Sat 02:03] =>  2:53
     CLOCK: [2014-09-12 Fri 22:13]--[2014-09-12 Fri 22:59] =>  0:46

@@ -26,6 +26,7 @@ add_library(knit STATIC ${knit_files})
 target_link_libraries(knit
     sml
     dia
+    formatters
     cpp
     cpp_formatters
     sml_to_cpp

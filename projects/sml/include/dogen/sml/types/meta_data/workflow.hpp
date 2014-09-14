@@ -39,18 +39,20 @@ namespace meta_data {
 
 class workflow {
 public:
-    workflow() = default;
     workflow(const workflow&) = default;
     ~workflow() = default;
     workflow(workflow&&) = default;
     workflow& operator=(const workflow&) = default;
+
+public:
+    workflow();
 
 private:
     /**
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static registrar& get_registrar();
+    static sml::meta_data::registrar& registrar();
 
 private:
     /**
@@ -91,7 +93,7 @@ public:
     void execute(const module_containment_graph& g, model& m);
 
 private:
-    static std::shared_ptr<registrar> registrar_;
+    static std::shared_ptr<sml::meta_data::registrar> registrar_;
     std::shared_ptr<enrichment_sub_workflow> enrichment_sub_workflow_;
 };
 

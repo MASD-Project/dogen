@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_SCOPED_REGISTRATION_HPP
-#define DOGEN_SML_TYPES_META_DATA_SCOPED_REGISTRATION_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_STATIC_INITIALIZER_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_STATIC_INITIALIZER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/meta_data/workflow.hpp"
-
 namespace dogen {
-namespace sml {
-namespace meta_data {
+namespace formatters {
 
-template<typename T>
-class root_enricher_scoped_registration {
-public:
-    root_enricher_scoped_registration() {
-        workflow::register_root_enricher(std::shared_ptr<T>(new T));
-    }
-};
+class static_initializer;
 
-template<typename T>
-class ordinary_enricher_scoped_registration {
-public:
-    ordinary_enricher_scoped_registration() {
-        workflow::register_ordinary_enricher(std::shared_ptr<T>(new T));
-    }
-};
-
-} } }
+} }
 
 #endif

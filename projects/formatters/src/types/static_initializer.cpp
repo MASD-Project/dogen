@@ -18,11 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/types/meta_data/workflow.hpp"
+#include "dogen/formatters/types/root_enricher.hpp"
 #include "dogen/formatters/types/static_initializer.hpp"
-#include "dogen/knitter/workflow.hpp"
 
-int main(const int argc, const char* argv[]) {
-    dogen::formatters::static_initializer::initialize();
-    dogen::knitter::workflow w;
-    return w.execute(argc, argv);
+namespace dogen {
+namespace formatters {
+
+void static_initializer::initialize() {
+    sml::meta_data::workflow::register_root_enricher(
+        std::make_shared<root_enricher>());
 }
+
+} }

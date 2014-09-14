@@ -46,7 +46,6 @@
 #include "dogen/sml/types/meta_data/registrar.hpp"
 #include "dogen/sml/types/meta_data/registrar_error.hpp"
 #include "dogen/sml/types/meta_data/registration_error.hpp"
-#include "dogen/sml/types/meta_data/scoped_registration.hpp"
 #include "dogen/sml/types/meta_data/workflow.hpp"
 #include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -71,3 +70,4 @@
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/workflow.hpp"
+#include "dogen/sml/types/workflow_error.hpp"

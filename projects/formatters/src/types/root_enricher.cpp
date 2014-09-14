@@ -18,20 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/meta_data/workflow.hpp"
-//#include "dogen/sml/types/meta_data/scoped_registration.hpp"
 #include "dogen/sml/types/meta_data/workflow.hpp"
 #include "dogen/formatters/types/root_enricher.hpp"
-
-class root_enricher_scoped_registration {
-public:
-    root_enricher_scoped_registration() {
-        std::cout << "here" << std::endl;
-        dogen::sml::meta_data::workflow::register_root_enricher(std::make_shared<dogen::formatters::root_enricher>());
-    }
-};
 
 namespace {
 
@@ -42,7 +34,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(root_id));
 
 }
-static auto sr = new root_enricher_scoped_registration();
 
 namespace dogen {
 namespace formatters {
