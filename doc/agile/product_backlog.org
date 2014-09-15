@@ -8,6 +8,11 @@
 
 Stories that we intend to look at, at some point.
 
+*** Setup containing module correctly in mock factory                 :story:
+
+We did not update the SML mock model factory to populate the
+containing type.
+
 *** Consider moving =add_model_module= to flags                       :story:
 
 When we implemented support for =add_model_module= in SML mock factory
