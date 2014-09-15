@@ -392,6 +392,10 @@ need to look into patterns for this. One option would be to create a
 factory configuration class that has the super set of all parameters
 required and pass that configuration to each function.
 
+We did add the flags to the constructor, but it would be better if we
+could pass in the configuration for each method invocation rather than
+for the entire factory.
+
 *** Update comments in C++ model                                      :story:
 
 We have a very large blurb in this model that is rather old, and
