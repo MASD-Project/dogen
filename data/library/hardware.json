@@ -2,7 +2,7 @@
     "model_name" : "hardware",
     "documentation" : "Hardware-provided primitive types.",
     "origin" : "system",
-    "types" : [
+    "elements" : [
         {
             "meta_type" : "primitive",
             "simple_name" : "bool",

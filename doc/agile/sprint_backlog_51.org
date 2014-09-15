@@ -338,6 +338,26 @@ For the hardware model, we need to somehow detect that the types are
 on the global module. This could be done via a module flag in the
 JSON.
 
+**** COMPLETED Rename references to value object and types            :spike:
+     CLOSED: [2014-09-15 Mon 23:02]
+     CLOCK: [2014-09-15 Mon 22:35]--[2014-09-15 Mon 23:02] =>  0:27
+
+It seems the JSON still has some remnants of the value object
+days. Rename them to the new terms and fix JSON files. We also need to
+rename the top-level container from =types= to =elements=. This is not
+the greatest of names but at least it avoids confusion with the =type=
+descendants in SML.
+
+**** IMPLEMENTATION Read modules from JSON                             :task:
+
+
+We need to support module definitions in the JSON file format.
+
+**** Add containing module logic to JSON models                        :task:
+
+We need to ensure types are contained by the correct module, and the
+model module is contained by the global module.
+
 **** Remove hacks in root enricher                                     :task:
 
 Once we are populating the containing module, we need to remove the

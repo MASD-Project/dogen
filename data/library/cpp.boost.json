@@ -2,11 +2,11 @@
     "model_name" : "boost",
     "documentation" : "Boost Library types.",
     "origin" : "system",
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "shared_ptr",
-            "value_object_type" : "smart_pointer",
+            "object_type" : "smart_pointer",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.header_file.file_name" : "boost/shared_ptr.hpp",
@@ -16,9 +16,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "weak_ptr",
-            "value_object_type" : "smart_pointer",
+            "object_type" : "smart_pointer",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.header_file.file_name" : "boost/weak_ptr.hpp",
@@ -28,9 +28,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "scoped_ptr",
-            "value_object_type" : "smart_pointer",
+            "object_type" : "smart_pointer",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.header_file.file_name" : "boost/scoped_ptr.hpp",
@@ -40,7 +40,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "optional",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
@@ -52,7 +52,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "variant",
             "meta_data" : {
                 "cpp.type.requires_manual_move_constructor" : true,
@@ -63,7 +63,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "io_service",
             "module_path" : [
                 "asio"
@@ -76,7 +76,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "socket",
             "module_path" : [
                 "asio", "ip", "tcp"
@@ -89,7 +89,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "acceptor",
             "module_path" : [
                 "asio", "ip", "tcp"
@@ -102,7 +102,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "path",
             "module_path" : [
                 "filesystem"
@@ -114,7 +114,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "date",
             "module_path" : [
                 "gregorian"
@@ -129,7 +129,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "ptime",
             "module_path" : [
                 "posix_time"
@@ -144,7 +144,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "time_duration",
             "module_path" : [
                 "posix_time"
@@ -159,7 +159,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "ptree",
             "module_path" : [
                 "property_tree"

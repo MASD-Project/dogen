@@ -42,25 +42,21 @@ const std::string documentation_key("documentation");
 const std::string origin_key("origin");
 const std::string origin_system_value("system");
 const std::string origin_user_value("user");
-const std::string types_key("types");
+const std::string elements_key("elements");
 
 const std::string meta_type_key("meta_type");
-const std::string meta_type_value_object_value("value_object");
+const std::string meta_type_object_value("object");
 const std::string meta_type_primitive_value("primitive");
 
 const std::string simple_name_key("simple_name");
 const std::string module_path_key("module_path");
 const std::string meta_data_key("meta_data");
 
-const std::string value_object_type_key("value_object_type");
-const std::string value_object_type_smart_pointer_value("smart_pointer");
-const std::string value_object_type_ordered_container_value(
-    "ordered_container");
-const std::string value_object_type_hash_container_value("hash_container");
-const std::string value_object_type_sequence_container_value(
-    "sequence_container");
-
-const std::string tags_key("tags");
+const std::string object_type_key("object_type");
+const std::string object_type_smart_pointer_value("smart_pointer");
+const std::string object_type_ordered_container_value("ordered_container");
+const std::string object_type_hash_container_value("hash_container");
+const std::string object_type_sequence_container_value("sequence_container");
 
 const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
@@ -68,7 +64,7 @@ const std::string invalid_option_in_json_file(
 const std::string invalid_path("Failed to find JSON path: ");
 const std::string invalid_origin("Invalid value for origin: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
-const std::string model_has_no_types("Did not find any types in model");
+const std::string model_has_no_types("Did not find any elements in model");
 
 }
 
@@ -143,23 +139,23 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
-    if (meta_type_value == meta_type_value_object_value) {
+    if (meta_type_value == meta_type_object_value) {
         object vo;
         lambda(vo);
 
-        const auto vot(pt.get_optional<std::string>(value_object_type_key));
+        const auto vot(pt.get_optional<std::string>(object_type_key));
         if (vot) {
             // FIXME: we should read the number of type arguments from file
-            if (*vot == value_object_type_smart_pointer_value) {
+            if (*vot == object_type_smart_pointer_value) {
                 vo.object_type(object_types::smart_pointer);
                 vo.number_of_type_arguments(1);
-            } else if (*vot == value_object_type_ordered_container_value) {
+            } else if (*vot == object_type_ordered_container_value) {
                 vo.object_type(object_types::ordered_container);
                 vo.number_of_type_arguments(2);
-            } else if (*vot == value_object_type_hash_container_value) {
+            } else if (*vot == object_type_hash_container_value) {
                 vo.object_type(object_types::hash_container);
                 vo.number_of_type_arguments(2);
-            } else if (*vot == value_object_type_sequence_container_value) {
+            } else if (*vot == object_type_sequence_container_value) {
                 vo.object_type(object_types::sequence_container);
                 vo.number_of_type_arguments(1);
             }
@@ -205,7 +201,7 @@ model json_hydrator::read_stream(std::istream& s) const {
         BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
     }
 
-    const auto i(pt.find(types_key));
+    const auto i(pt.find(elements_key));
     if (i == pt.not_found() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << model_has_no_types;
         BOOST_THROW_EXCEPTION(hydration_error(model_has_no_types));

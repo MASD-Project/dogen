@@ -61,15 +61,15 @@ const std::string hardware_model_name("hardware");
 const std::string missing_model_name("model_name");
 const std::string missing_type_name("simple_name");
 const std::string missing_origin("origin");
-const std::string missing_types("types");
+const std::string missing_elements("elements");
 
 const std::string trivial_model(R"({
     "model_name" : "a_model",
     "documentation" : "a_doc",
     "origin" : "system",
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "a_type",
             "documentation" : "a_doc"
         }
@@ -85,9 +85,9 @@ const std::string tagged_model(R"({
             "model_key" : "model_value",
             "ODB_PRAGMA" : "odb_pragma_value"
     },
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "a_type",
             "documentation" : "a_doc",
             "meta_data" : {
@@ -102,9 +102,9 @@ const std::string tagged_model(R"({
 const std::string no_documentation_model(R"({
     "model_name" : "a_model",
     "origin" : "system",
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "a_type"
         }
      ]
@@ -113,9 +113,9 @@ const std::string no_documentation_model(R"({
 
 const std::string no_name_model(R"({
     "origin" : "system",
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "a_type"
         }
      ]
@@ -125,9 +125,9 @@ const std::string no_name_model(R"({
 const std::string no_type_name_model(R"({
     "model_name" : "a_model",
     "origin" : "system",
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object"
+            "meta_type" : "object"
         }
      ]
   }
@@ -135,25 +135,25 @@ const std::string no_type_name_model(R"({
 
 const std::string no_origin_model(R"({
     "model_name" : "a_model",
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "a_type"
         }
      ]
   }
 )");
 
-const std::string no_types_model(R"({
+const std::string no_elements_model(R"({
     "model_name" : "a_model",
     "origin" : "system"
   }
 )");
 
-const std::string empty_types_model(R"({
+const std::string empty_elments_model(R"({
     "model_name" : "a_model",
     "origin" : "system",
-    "types" : [ ]
+    "elements" : [ ]
   }
 )");
 
@@ -161,9 +161,9 @@ const std::string module_path_model(R"({
     "model_name" : "a_model",
     "origin" : "system",
     "module_path" : [ "module_1", "module_2", "module_3" ],
-    "types" : [
+    "elements" : [
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "a_type",
             "module_path" : [ "module_1" ]
         }
@@ -289,16 +289,16 @@ BOOST_AUTO_TEST_CASE(no_origin_model_throws) {
     BOOST_CHECK_EXCEPTION(hydrate(no_origin_model), hydration_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(no_types_model_throws) {
-    SETUP_TEST_LOG_SOURCE("no_types_model_throws");
-    contains_checker<hydration_error> c(missing_types);
-    BOOST_CHECK_EXCEPTION(hydrate(no_types_model), hydration_error, c);
+BOOST_AUTO_TEST_CASE(no_elements_model_throws) {
+    SETUP_TEST_LOG_SOURCE("no_elements_model_throws");
+    contains_checker<hydration_error> c(missing_elements);
+    BOOST_CHECK_EXCEPTION(hydrate(no_elements_model), hydration_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(empty_types_model_throws) {
-    SETUP_TEST_LOG_SOURCE("empty_types_model_throws");
-    contains_checker<hydration_error> c(missing_types);
-    BOOST_CHECK_EXCEPTION(hydrate(empty_types_model), hydration_error, c);
+BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
+    SETUP_TEST_LOG_SOURCE("empty_elements_model_throws");
+    contains_checker<hydration_error> c(missing_elements);
+    BOOST_CHECK_EXCEPTION(hydrate(empty_elments_model), hydration_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {

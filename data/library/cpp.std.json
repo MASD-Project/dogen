@@ -2,7 +2,7 @@
     "model_name" : "std",
     "documentation" : "C++ Standard Library types.",
     "origin" : "system",
-    "types" : [
+    "elements" : [
         {
             "meta_type" : "primitive",
             "simple_name" : "int8_t",
@@ -92,7 +92,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "string",
             "meta_data" : {
                 "cpp.type.family" : "string",
@@ -103,9 +103,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "vector",
-            "value_object_type" : "sequence_container",
+            "object_type" : "sequence_container",
             "meta_data" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.header_file.file_name" : "vector",
@@ -115,9 +115,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "deque",
-            "value_object_type" : "sequence_container",
+            "object_type" : "sequence_container",
             "meta_data" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.header_file.file_name" : "deque",
@@ -127,9 +127,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "array",
-            "value_object_type" : "sequence_container",
+            "object_type" : "sequence_container",
             "meta_data" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.header_file.file_name" : "array",
@@ -137,9 +137,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "list",
-            "value_object_type" : "sequence_container",
+            "object_type" : "sequence_container",
             "meta_data" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.header_file.file_name" : "list",
@@ -149,9 +149,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "forward_list",
-            "value_object_type" : "sequence_container",
+            "object_type" : "sequence_container",
             "meta_data" : {
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.header_file.file_name" : "forward_list",
@@ -159,9 +159,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "set",
-            "value_object_type" : "ordered_container",
+            "object_type" : "ordered_container",
             "meta_data" : {
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.header_file.file_name" : "set",
@@ -171,9 +171,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "multiset",
-            "value_object_type" : "ordered_container",
+            "object_type" : "ordered_container",
             "meta_data" : {
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.header_file.file_name" : "multiset",
@@ -183,9 +183,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "unordered_set",
-            "value_object_type" : "hash_container",
+            "object_type" : "hash_container",
             "meta_data" : {
                 "cpp.type.family" : "hash_container",
                 "cpp.types.header_file.file_name" : "unordered_set",
@@ -193,9 +193,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "map",
-            "value_object_type" : "ordered_container",
+            "object_type" : "ordered_container",
             "meta_data" : {
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.header_file.file_name" : "map",
@@ -204,9 +204,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "multimap",
-            "value_object_type" : "ordered_container",
+            "object_type" : "ordered_container",
             "meta_data" : {
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.header_file.file_name" : "multimap",
@@ -216,9 +216,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "unordered_map",
-            "value_object_type" : "hash_container",
+            "object_type" : "hash_container",
             "meta_data" : {
                 "cpp.type.family" : "hash_container",
                 "cpp.types.header_file.file_name" : "unordered_map",
@@ -226,7 +226,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "pair",
             "meta_data" : {
                 "cpp.types.header_file.file_name" : "pair",
@@ -236,9 +236,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "shared_ptr",
-            "value_object_type" : "smart_pointer",
+            "object_type" : "smart_pointer",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.header_file.file_name" : "memory",
@@ -247,9 +247,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "weak_ptr",
-            "value_object_type" : "smart_pointer",
+            "object_type" : "smart_pointer",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.header_file.file_name" : "memory",
@@ -258,9 +258,9 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "unique_ptr",
-            "value_object_type" : "smart_pointer",
+            "object_type" : "smart_pointer",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.header_file.file_name" : "memory",
@@ -269,7 +269,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "function",
             "meta_data" : {
                 "cpp.types.header_file.file_name" : "functional",
@@ -279,7 +279,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "optional",
             "meta_data" : {
                 "cpp.type.family" : "smart_pointer",
@@ -288,7 +288,7 @@
             }
         },
         {
-            "meta_type" : "value_object",
+            "meta_type" : "object",
             "simple_name" : "ostream",
             "meta_data" : {
                 "cpp.types.header_file.file_name" : "ostream",
