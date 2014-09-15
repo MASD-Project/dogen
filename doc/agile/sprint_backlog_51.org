@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-15 Mon 08:04]
+Clock summary at [2014-09-15 Mon 19:34]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *20:07* |       |      |
+| *Total time*                                                 | *21:33* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 20:07 |      |
+| Development Stories Implemented                              |         | 21:33 |      |
 | IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:38 |
 | IMPLEMENTATION Updates to the manual and readme files        |         |       | 1:24 |
 | COMPLETED Fix windows continuous build                       |         |       | 0:22 |
@@ -32,6 +32,7 @@ Clock summary at [2014-09-15 Mon 08:04]
 | COMPLETED Enrichment as a two-stage process                  |         |       | 0:07 |
 | COMPLETED Create an SML grapher                              |         |       | 7:02 |
 | COMPLETED Implement the enricher interface in formatters     |         |       | 1:42 |
+| IMPLEMENTATION Create the global "namespace" module          |         |       | 1:26 |
 | IMPLEMENTATION Populate containing module in JSON hydrator   |         |       | 0:10 |
 #+end:
 
@@ -290,7 +291,8 @@ formatter settings.
 Move across all the code from taggers that belongs in formatters'
 enricher. Formatters only has first stage enrichment.
 
-*** Create the global "namespace" module                              :story:
+*** IMPLEMENTATION Create the global "namespace" module               :story:
+    CLOCK: [2014-09-15 Mon 08:05]--[2014-09-15 Mon 08:19] =>  0:14
 
 Originally we thought the SML containment graph would have a natural
 root: the target model being generated. On hindsight this is not the
@@ -305,11 +307,32 @@ the case with the hardware model. We need to:
 - make all model namespaces depend on it;
 - allow the hardware model to place types directly on it.
 
+**** COMPLETED Add global module to injector                           :task:
+     CLOSED: [2014-09-15 Mon 19:34]
+     CLOCK: [2014-09-15 Mon 18:06]--[2014-09-15 Mon 18:49] =>  0:43
+     CLOCK: [2014-09-15 Mon 17:56]--[2014-09-15 Mon 18:03] =>  0:07
+     CLOCK: [2014-09-15 Mon 08:19]--[2014-09-15 Mon 08:41] =>  0:22
+
+Injector needs to create a module with a blank qname, and make all
+modules, concepts and types that do not have a containing module
+depend on it.
+
+**** Add support for modules in merger                                 :task:
+
+At present we do not merge modules in merger. We need to do so. In
+addition, we need to locate the global module and merge it only once.
+
 *** IMPLEMENTATION Populate containing module in JSON hydrator        :story:
      CLOCK: [2014-09-14 Sun 22:31]--[2014-09-14 Sun 22:41] =>  0:10
 
 We only added support for this in the dia to sml workflow, so the
-enricher is breaking. Add it to JSON workflow too.
+enricher is breaking. Add it to JSON workflow too. We should consider
+adding modules directly to the JSON: the user must define the modules
+in JSON, and if they are missing, the model will fail to import.
+
+For the hardware model, we need to somehow detect that the types are
+on the global module. This could be done via a module flag in the
+JSON.
 
 **** Remove hacks in root enricher                                     :task:
 

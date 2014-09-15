@@ -58,6 +58,7 @@ const std::string visit_operation_doc("Accept visits for type ");
 const std::string unversioned_key_doc("Unversioned key for ");
 const std::string versioned_key_doc("Versioned key for ");
 const std::string versioned_property_doc("Object instance's version.");
+const std::string global_module_doc("Module that represents the global scope.");
 const std::string empty_identity(
     "Identity must have at least one attribute: ");
 const std::string duplicate_qname(
@@ -66,11 +67,24 @@ const std::string zero_leaves("Type marked as visitable but has no leaves: ");
 const std::string unversioned_key_not_found(
     "Object is an entity but has no unversioned key: ");
 const std::string leaf_not_found("Could not find leaf object: ");
+const std::string model_already_has_global_module(
+    "Found a global module in model: ");
 
 }
 
 namespace dogen {
 namespace sml {
+
+template<typename AssociativeContainerOfContainable>
+inline bool add_containing_module_to_non_contained_entities(
+    const qname& container_qn, AssociativeContainerOfContainable& c) {
+    for (auto& pair : c) {
+        auto& c(pair.second);
+        if (!c.containing_module())
+            c.containing_module(container_qn);
+    }
+    return true;
+}
 
 class injector::context {
 public:
@@ -333,11 +347,38 @@ void injector::inject_visitors() {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
 }
 
+void injector::inject_global_module() {
+    qname qn;
+
+    auto& model(context_->model());
+    const auto i(model.modules().find(qn));
+    if (i != model.modules().end()) {
+        const auto sn(model.name().simple_name());
+        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << sn;
+        BOOST_THROW_EXCEPTION(
+            injection_error(model_already_has_global_module + sn));
+    }
+
+    add_containing_module_to_non_contained_entities(qn, model.modules());
+    add_containing_module_to_non_contained_entities(qn, model.concepts());
+    add_containing_module_to_non_contained_entities(qn, model.primitives());
+    add_containing_module_to_non_contained_entities(qn, model.enumerations());
+    add_containing_module_to_non_contained_entities(qn, model.objects());
+
+    module global_module;
+    global_module.name(qn);
+    global_module.generation_type(generation_types::no_generation);
+    global_module.origin_type(origin_types::system);
+    global_module.documentation(global_module_doc);
+    model.modules().insert(std::make_pair(qn, global_module));
+}
+
 void injector::inject(model& m) {
     context_ = std::unique_ptr<context>(new context(m));
     inject_version();
     inject_keys();
     inject_visitors();
+    inject_global_module();
     context_ = std::unique_ptr<context>();
 }
 

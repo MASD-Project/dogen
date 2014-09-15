@@ -163,8 +163,11 @@ void workflow::transformation_sub_workflow() {
     for (const auto& pair : model_.objects())
         transform_object(pair.second);
 
-    for (const auto& pair : model_.modules())
-        transform_module(pair.second);
+    for (const auto& pair : model_.modules()) {
+        // ignore global module
+        if (!pair.first.simple_name().empty())
+            transform_module(pair.second);
+    }
 
     for (const auto& pair : model_.enumerations())
         transform_enumeration(pair.second);

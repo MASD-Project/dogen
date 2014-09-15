@@ -69,16 +69,29 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(injector)
 
-BOOST_AUTO_TEST_CASE(model_that_doesnt_require_any_new_types_is_untouched_by_injector) {
-    SETUP_TEST_LOG_SOURCE("model_that_doesnt_require_any_new_types_is_untouched_by_injector");
+BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
+    SETUP_TEST_LOG_SOURCE("single_type_model_results_in_adding_only_global_module");
 
     auto a(factory.build_single_type_model());
-    const auto e(factory.build_single_type_model());
     BOOST_REQUIRE(a.objects().size() == 1);
+    BOOST_CHECK(!a.objects().begin()->second.containing_module());
+    BOOST_REQUIRE(a.modules().empty());
+    BOOST_REQUIRE(a.primitives().empty());
+    BOOST_REQUIRE(a.enumerations().empty());
+    BOOST_REQUIRE(a.concepts().empty());
 
     dogen::sml::injector i;
     i.inject(a);
-    BOOST_CHECK(asserter::assert_object(e, a));
+
+    BOOST_CHECK(a.objects().size() == 1);
+    BOOST_CHECK(a.modules().size() == 1);
+
+    const auto qn(a.modules().begin()->first);
+    BOOST_REQUIRE(a.objects().begin()->second.containing_module());
+    BOOST_REQUIRE(*a.objects().begin()->second.containing_module() == qn);
+    BOOST_CHECK(a.primitives().empty());
+    BOOST_CHECK(a.enumerations().empty());
+    BOOST_CHECK(a.concepts().empty());
 }
 
 BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
@@ -86,8 +99,9 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
 
     const auto ot(mock_model_factory::object_types::entity);
     auto a(factory.object_with_property(ot));
-    const auto e(factory.object_with_property(ot));
     BOOST_REQUIRE(a.objects().size() == 2);
+    BOOST_REQUIRE(a.modules().empty());
+
     for (const auto& pair : a.objects()) {
         const auto& qn(pair.first);
         if (factory.is_type_name_n(0, qn)) {
@@ -102,7 +116,8 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
 
     dogen::sml::injector i;
     i.inject(a);
-    BOOST_CHECK(asserter::assert_object(e, a));
+    BOOST_CHECK(a.objects().size() == 2);
+    BOOST_CHECK(a.modules().size() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws) {

@@ -138,6 +138,12 @@ private:
      */
     void inject_visitors();
 
+    /**
+     * @brief Injects the global module, and makes all modules that do
+     * not have a containing namespace be contained by it.
+     */
+    void inject_global_module();
+
 public:
 
     /**
