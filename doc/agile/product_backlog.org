@@ -8,6 +8,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Allow placing types in the global module from Dia                 :story:
+
+At present all types in a Dia diagram are placed in the model
+module. However, there may be cases where one may wish to place types
+in the global module. At present this is only done in the hardware
+model, and that is supplied via JSON. However, we may need to do this
+from Dia. Find example use cases for this first.
+
+In terms of implementation, a trait could be added to dia
+=dia.use_global_module=. This would force the type to be contained
+directly in the global module rather than the model module. If the
+trait is used in the model or a package, all types in the containing
+scope will inherit it.
+
 *** Make features optional at compile time                            :story:
 
 One scenario we haven't accounted for is for compile time
