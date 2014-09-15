@@ -8,6 +8,47 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider moving =add_model_module= to flags                       :story:
+
+When we implemented support for =add_model_module= in SML mock factory
+we added the flag to all relevant methods. We could have added it to
+the flags instead. The downside of this approach is that we have
+static factories in specs, so all tests will have the same set of
+flags. Still, intuitively it sounds like all tests should have it
+either on or off for a given class being tested. Patch:
+
+: @@ -82,7 +82,8 @@ public:
+:              const bool resolved = false,
+:              const bool concepts_indexed = false,
+:              const bool properties_indexed = false,
+: -            const bool associations_indexed = false);
+: +            const bool associations_indexed = false,
+: +            const bool add_model_module = false);
+:  
+:      public:
+:          /**
+: @@ -139,6 +140,14 @@ public:
+:          void associations_indexed(const bool v);
+:          /**@}*/
+:  
+: +        /**
+: +         * @brief If true, adds a module for the model.
+: +         */
+: +        /**@{*/
+: +        bool add_model_module() const;
+: +        void add_model_module(const bool v);
+: +        /**@}*/
+: +
+:      private:
+:          bool tagged_;
+:          bool merged_;
+: @@ -146,6 +155,7 @@ public:
+:          bool concepts_indexed_;
+:          bool properties_indexed_;
+:          bool associations_indexed_;
+: +        bool add_model_module_;
+:      };
+
 *** Allow placing types in the global module from Dia                 :story:
 
 At present all types in a Dia diagram are placed in the model
