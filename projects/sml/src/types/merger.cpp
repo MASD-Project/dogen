@@ -162,21 +162,27 @@ void merger::merge_model(const model& m) {
         merged_model_.concepts().insert(c);
     }
 
-    for (const auto& p : m.primitives()) {
+    for (const auto& pair : m.primitives()) {
         // FIXME: mega hack to handle primitive model.
         const auto pmn(mn == hardware_model_name ? empty : mn);
-        check_qname(pmn, p.first, p.second.name());
-        merged_model_.primitives().insert(p);
+        check_qname(pmn, pair.first, pair.second.name());
+        merged_model_.primitives().insert(pair);
     }
 
-    for (const auto& p : m.enumerations()) {
-        check_qname(mn, p.first, p.second.name());
-        merged_model_.enumerations().insert(p);
+    for (const auto& pair : m.enumerations()) {
+        check_qname(mn, pair.first, pair.second.name());
+        merged_model_.enumerations().insert(pair);
     }
 
-    for (const auto& o : m.objects()) {
-        check_qname(mn, o.first, o.second.name());
-        merged_model_.objects().insert(o);
+    for (const auto& pair : m.objects()) {
+        check_qname(mn, pair.first, pair.second.name());
+        merged_model_.objects().insert(pair);
+    }
+
+    for (const auto& pair : m.modules()) {
+        if (!pair.first.simple_name().empty())
+            check_qname(mn, pair.first, pair.second.name());
+        merged_model_.modules().insert(pair);
     }
 }
 

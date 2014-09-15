@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-15 Mon 19:34]
+Clock summary at [2014-09-15 Mon 22:35]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *21:33* |       |      |
+| *Total time*                                                 | *21:55* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 21:33 |      |
+| Development Stories Implemented                              |         | 21:55 |      |
 | IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:38 |
 | IMPLEMENTATION Updates to the manual and readme files        |         |       | 1:24 |
 | COMPLETED Fix windows continuous build                       |         |       | 0:22 |
@@ -32,7 +32,7 @@ Clock summary at [2014-09-15 Mon 19:34]
 | COMPLETED Enrichment as a two-stage process                  |         |       | 0:07 |
 | COMPLETED Create an SML grapher                              |         |       | 7:02 |
 | COMPLETED Implement the enricher interface in formatters     |         |       | 1:42 |
-| IMPLEMENTATION Create the global "namespace" module          |         |       | 1:26 |
+| COMPLETED Create the global "namespace" module               |         |       | 1:48 |
 | IMPLEMENTATION Populate containing module in JSON hydrator   |         |       | 0:10 |
 #+end:
 
@@ -291,7 +291,8 @@ formatter settings.
 Move across all the code from taggers that belongs in formatters'
 enricher. Formatters only has first stage enrichment.
 
-*** IMPLEMENTATION Create the global "namespace" module               :story:
+*** COMPLETED Create the global "namespace" module                    :story:
+    CLOSED: [2014-09-15 Mon 22:23]
     CLOCK: [2014-09-15 Mon 08:05]--[2014-09-15 Mon 08:19] =>  0:14
 
 Originally we thought the SML containment graph would have a natural
@@ -317,7 +318,10 @@ Injector needs to create a module with a blank qname, and make all
 modules, concepts and types that do not have a containing module
 depend on it.
 
-**** Add support for modules in merger                                 :task:
+**** COMPLETED Add support for modules in merger                       :task:
+     CLOSED: [2014-09-15 Mon 22:23]
+     CLOCK: [2014-09-15 Mon 22:23]--[2014-09-15 Mon 22:35] =>  0:12
+     CLOCK: [2014-09-15 Mon 22:13]--[2014-09-15 Mon 22:23] =>  0:10
 
 At present we do not merge modules in merger. We need to do so. In
 addition, we need to locate the global module and merge it only once.

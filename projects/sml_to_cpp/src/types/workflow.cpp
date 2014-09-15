@@ -136,6 +136,9 @@ void workflow::transform_object(const sml::object& ao) {
 }
 
 void workflow::transform_module(const sml::module& m) {
+    if (m.generation_type() == sml::generation_types::no_generation)
+        return;
+
     if (m.documentation().empty())
         return;
 
