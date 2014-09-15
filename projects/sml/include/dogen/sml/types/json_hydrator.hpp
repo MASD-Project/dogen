@@ -80,6 +80,13 @@ private:
      */
     model read_stream(std::istream& s) const;
 
+private:
+    /**
+     * @brief Perform all of the adjustments required to the model
+     * such as generating inferred modules, etc.
+     */
+    void post_process(model& m) const;
+
 public:
     /**
      * @brief Hydrates the model from the JSON stream.

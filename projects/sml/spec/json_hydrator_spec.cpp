@@ -377,7 +377,9 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     }
 
     BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.modules().empty());
+    BOOST_REQUIRE(m.modules().size() == 1);
+    BOOST_REQUIRE(m.modules().begin()->first.simple_name() == "std");
+    BOOST_REQUIRE(m.modules().begin()->first.model_name() == "std");
     BOOST_CHECK(m.references().empty());
     BOOST_CHECK(m.leaves().empty());
     BOOST_CHECK(m.name().external_module_path().empty());

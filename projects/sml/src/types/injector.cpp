@@ -76,14 +76,13 @@ namespace dogen {
 namespace sml {
 
 template<typename AssociativeContainerOfContainable>
-inline bool add_containing_module_to_non_contained_entities(
+inline void add_containing_module_to_non_contained_entities(
     const qname& container_qn, AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
-        auto& c(pair.second);
-        if (!c.containing_module())
-            c.containing_module(container_qn);
+        auto& s(pair.second);
+        if (!s.containing_module())
+            s.containing_module(container_qn);
     }
-    return true;
 }
 
 class injector::context {

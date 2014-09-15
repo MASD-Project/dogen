@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-15 Mon 22:35]
+Clock summary at [2014-09-16 Tue 00:04]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *21:55* |       |      |
+| *Total time*                                                 | *23:22* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 21:55 |      |
+| Development Stories Implemented                              |         | 23:22 |      |
 | IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:38 |
 | IMPLEMENTATION Updates to the manual and readme files        |         |       | 1:24 |
 | COMPLETED Fix windows continuous build                       |         |       | 0:22 |
@@ -33,7 +33,7 @@ Clock summary at [2014-09-15 Mon 22:35]
 | COMPLETED Create an SML grapher                              |         |       | 7:02 |
 | COMPLETED Implement the enricher interface in formatters     |         |       | 1:42 |
 | COMPLETED Create the global "namespace" module               |         |       | 1:48 |
-| IMPLEMENTATION Populate containing module in JSON hydrator   |         |       | 0:10 |
+| IMPLEMENTATION Populate containing module in JSON hydrator   |         |       | 1:37 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -348,15 +348,15 @@ rename the top-level container from =types= to =elements=. This is not
 the greatest of names but at least it avoids confusion with the =type=
 descendants in SML.
 
-**** IMPLEMENTATION Read modules from JSON                             :task:
+**** IMPLEMENTATION Add post-processing logic for module generation    :task:
+     CLOCK: [2014-09-15 Mon 23:04]--[2014-09-16 Tue 00:04] =>  1:00
 
+Once the JSON file has been loaded into an SML model, we should go
+through the model and generate all of the inferred modules given the
+qnames. If a module already exists we should skip this. We should also
+do the containment logic as part of the post processing.
 
-We need to support module definitions in the JSON file format.
-
-**** Add containing module logic to JSON models                        :task:
-
-We need to ensure types are contained by the correct module, and the
-model module is contained by the global module.
+- origin type and generation type are still invalid for some reason.
 
 **** Remove hacks in root enricher                                     :task:
 

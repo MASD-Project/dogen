@@ -71,6 +71,37 @@ const std::string model_has_no_types("Did not find any elements in model");
 namespace dogen {
 namespace sml {
 
+boost::optional<qname> containing_module(model& m, const qname& qn) {
+    if (qn.model_name().empty())
+        return boost::optional<qname>();
+
+    qname module_qn;
+    module_qn.model_name(qn.model_name());
+
+    if (qn.module_path().empty()) {
+        module_qn.simple_name(qn.model_name());
+    } else {
+        module_qn.simple_name(qn.module_path().back());
+        module_qn.module_path(qn.module_path());
+        module_qn.module_path().pop_back();
+    }
+
+    const auto i(m.modules().find(module_qn));
+    if (i != m.modules().end())
+        return module_qn;
+
+    return boost::optional<qname>();;
+}
+
+template<typename AssociativeContainerOfContainable>
+inline void
+update_containing_module(model& m, AssociativeContainerOfContainable& c) {
+    for (auto& pair : c) {
+        auto& s(pair.second);
+        s.containing_module(containing_module(m, s.name()));
+    }
+}
+
 std::string json_hydrator::model_name(const model& m) const {
     if (m.name().model_name() == hardware_model_name)
         return empty;
@@ -201,6 +232,14 @@ model json_hydrator::read_stream(std::istream& s) const {
         BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
     }
 
+    if (!model_name(r).empty()) {
+        module m;
+        m.name().simple_name(r.name().model_name());
+        m.name().model_name(r.name().model_name());
+        m.origin_type(m.origin_type());
+        r.modules().insert(std::make_pair(m.name(), m));
+    }
+
     const auto i(pt.find(elements_key));
     if (i == pt.not_found() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << model_has_no_types;
@@ -213,10 +252,20 @@ model json_hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
+void json_hydrator::post_process(model& m) const {
+    update_containing_module(m, m.objects());
+    update_containing_module(m, m.primitives());
+    update_containing_module(m, m.enumerations());
+    update_containing_module(m, m.concepts());
+    update_containing_module(m, m.modules());
+}
+
 model json_hydrator::hydrate(std::istream& s) const {
     using namespace boost::property_tree;
     try {
-        return read_stream(s);
+        auto m(read_stream(s));
+        post_process(m);
+        return m;
     } catch (const json_parser_error& e) {
         BOOST_LOG_SEV(lg, error) << invalid_json_file << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_json_file + e.what()));
