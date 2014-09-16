@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Load system models on demand                                      :story:
+
+In a distant future one can imagine a very large number of system
+models, each of which with large number of types (say the C# system
+models, the C++ system models, etc). In this world we may need to
+disable the loading of system models: either by programming language
+or more explicitly by choosing individual models in a given language.
+
 *** Failed facet dependencies should be treated as errors             :story:
 
 if a facet is not supported in a system module and the user tries to
