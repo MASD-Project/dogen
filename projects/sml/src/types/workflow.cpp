@@ -123,12 +123,16 @@ std::list<model> workflow::load_library_models_activity() const {
 }
 
 void workflow::inject_system_types_activity(model& target,
-    std::list<model>& user_models) const {
+    std::list<model>& user_models,
+    std::list<model>& library_models) const {
 
     injector i;
     i.inject(target);
 
     for (auto& m : user_models)
+        i.inject(m);
+
+    for (auto& m : library_models)
         i.inject(m);
 }
 
@@ -179,8 +183,8 @@ void workflow::index_associations_activity(model& merged_model) const {
 
 std::pair<bool, model> workflow::
 execute(model target, std::list<model> user_models) const {
-    const auto library_models(load_library_models_activity());
-    inject_system_types_activity(target, user_models);
+    auto library_models(load_library_models_activity());
+    inject_system_types_activity(target, user_models, library_models);
     auto r(create_merged_model_activity(target, library_models, user_models));
     resolve_types_activity(r);
     index_concepts_activity(r);
