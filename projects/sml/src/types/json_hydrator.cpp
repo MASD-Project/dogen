@@ -28,6 +28,7 @@
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 using namespace dogen::utility::log;
 
@@ -73,8 +74,10 @@ namespace dogen {
 namespace sml {
 
 boost::optional<qname> containing_module(model& m, const qname& qn) {
-    if (qn.model_name().empty() || qn.model_name() == m.name().model_name())
+    if (qn.model_name().empty() || qn.simple_name() == m.name().model_name()) {
+        BOOST_LOG_SEV(lg, debug) << "Type has no containing module: " << qn;
         return boost::optional<qname>();
+    }
 
     qname module_qn;
     module_qn.model_name(qn.model_name());
@@ -91,6 +94,8 @@ boost::optional<qname> containing_module(model& m, const qname& qn) {
     if (i != m.modules().end())
         return module_qn;
 
+    BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
+                             << module_qn;
     return boost::optional<qname>();;
 }
 
@@ -110,7 +115,8 @@ update_containing_module(model& m, AssociativeContainerOfContainable& c) {
             BOOST_LOG_SEV(lg, error) << missing_module << sn;
             BOOST_THROW_EXCEPTION(hydration_error(missing_module + sn));
         }
-        BOOST_LOG_SEV(lg, error) << "Adding type to module. Type: '"
+
+        BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
                                  << s.name().simple_name() << "' Module: '"
                                  << i->first.simple_name();
         i->second.members().push_back(s.name());
@@ -121,6 +127,12 @@ std::string json_hydrator::model_name(const model& m) const {
     if (m.name().model_name() == hardware_model_name)
         return empty;
     return m.name().model_name();
+}
+
+generation_types json_hydrator::generation_type(const bool is_target) const {
+    if (is_target)
+        return generation_types::full_generation;
+    return generation_types::no_generation;
 }
 
 void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
@@ -150,7 +162,7 @@ void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
     }
 }
 
-void json_hydrator::read_tags(const boost::property_tree::ptree& source,
+void json_hydrator::copy_meta_data(const boost::property_tree::ptree& source,
     boost::property_tree::ptree& destination) const {
     const auto i(source.find(meta_data_key));
     if (i == source.not_found())
@@ -165,7 +177,7 @@ void json_hydrator::read_tags(const boost::property_tree::ptree& source,
 }
 
 void json_hydrator::
-read_type(const boost::property_tree::ptree& pt, model& m) const {
+read_element(const boost::property_tree::ptree& pt, model& m) const {
     qname qn;
     qn.model_name(model_name(m));
     read_module_path(pt, m, qn);
@@ -177,40 +189,39 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
 
     const auto lambda([&](type& t) {
             t.name(qn);
-            t.generation_type(generation_types::no_generation);
             t.origin_type(m.origin_type());
             t.generation_type(m.generation_type());
 
             if (documentation)
                 t.documentation(*documentation);
-            read_tags(pt, t.meta_data());
+            copy_meta_data(pt, t.meta_data());
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
     if (meta_type_value == meta_type_object_value) {
-        object vo;
-        lambda(vo);
+        object o;
+        lambda(o);
 
-        const auto vot(pt.get_optional<std::string>(object_type_key));
-        if (vot) {
+        const auto ot(pt.get_optional<std::string>(object_type_key));
+        if (ot) {
             // FIXME: we should read the number of type arguments from file
-            if (*vot == object_type_smart_pointer_value) {
-                vo.object_type(object_types::smart_pointer);
-                vo.number_of_type_arguments(1);
-            } else if (*vot == object_type_ordered_container_value) {
-                vo.object_type(object_types::ordered_container);
-                vo.number_of_type_arguments(2);
-            } else if (*vot == object_type_hash_container_value) {
-                vo.object_type(object_types::hash_container);
-                vo.number_of_type_arguments(2);
-            } else if (*vot == object_type_sequence_container_value) {
-                vo.object_type(object_types::sequence_container);
-                vo.number_of_type_arguments(1);
+            if (*ot == object_type_smart_pointer_value) {
+                o.object_type(object_types::smart_pointer);
+                o.number_of_type_arguments(1);
+            } else if (*ot == object_type_ordered_container_value) {
+                o.object_type(object_types::ordered_container);
+                o.number_of_type_arguments(2);
+            } else if (*ot == object_type_hash_container_value) {
+                o.object_type(object_types::hash_container);
+                o.number_of_type_arguments(2);
+            } else if (*ot == object_type_sequence_container_value) {
+                o.object_type(object_types::sequence_container);
+                o.number_of_type_arguments(1);
             }
         } else
-            vo.object_type(object_types::user_defined_value_object);
+            o.object_type(object_types::user_defined_value_object);
 
-        m.objects().insert(std::make_pair(qn, vo));
+        m.objects().insert(std::make_pair(qn, o));
     } else if (meta_type_value == meta_type_primitive_value) {
         primitive p;
         lambda(p);
@@ -223,15 +234,15 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
     }
 }
 
-model json_hydrator::read_stream(std::istream& s) const {
+model json_hydrator::read_stream(std::istream& s, const bool is_target) const {
     model r;
-    r.generation_type(generation_types::no_generation);
+    r.generation_type(generation_type(is_target));
 
     using namespace boost::property_tree;
     ptree pt;
     read_json(s, pt);
 
-    read_tags(pt, r.meta_data());
+    copy_meta_data(pt, r.meta_data());
     r.name().model_name(pt.get<std::string>(model_name_key));
     read_module_path(pt, r, r.name());
 
@@ -249,8 +260,6 @@ model json_hydrator::read_stream(std::istream& s) const {
         BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
     }
 
-    r.generation_type(generation_types::no_generation);
-
     if (!model_name(r).empty()) {
         module m;
         m.name().simple_name(r.name().model_name());
@@ -267,7 +276,7 @@ model json_hydrator::read_stream(std::istream& s) const {
     }
 
     for (auto j(i->second.begin()); j != i->second.end(); ++j)
-        read_type(j->second, r);
+        read_element(j->second, r);
 
     return r;
 }
@@ -283,7 +292,8 @@ void json_hydrator::post_process(model& m) const {
 model json_hydrator::hydrate(std::istream& s) const {
     using namespace boost::property_tree;
     try {
-        auto m(read_stream(s));
+        const bool is_target(false);
+        auto m(read_stream(s, is_target));
         post_process(m);
         return m;
     } catch (const json_parser_error& e) {

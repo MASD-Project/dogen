@@ -14,15 +14,15 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-16 Tue 00:04]
+Clock summary at [2014-09-16 Tue 18:38]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *23:22* |       |      |
+| *Total time*                                                 | *24:55* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 23:22 |      |
+| Development Stories Implemented                              |         | 24:55 |      |
 | IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:38 |
-| IMPLEMENTATION Updates to the manual and readme files        |         |       | 1:24 |
+| IMPLEMENTATION Updates to the manual and readme files        |         |       | 1:39 |
 | COMPLETED Fix windows continuous build                       |         |       | 0:22 |
 | COMPLETED Create a sub-system for meta-data                  |         |       | 3:46 |
 | COMPLETED Add static registration to meta-data workflow      |         |       | 0:19 |
@@ -33,7 +33,7 @@ Clock summary at [2014-09-16 Tue 00:04]
 | COMPLETED Create an SML grapher                              |         |       | 7:02 |
 | COMPLETED Implement the enricher interface in formatters     |         |       | 1:42 |
 | COMPLETED Create the global "namespace" module               |         |       | 1:48 |
-| IMPLEMENTATION Populate containing module in JSON hydrator   |         |       | 1:37 |
+| IMPLEMENTATION Populate containing module in JSON hydrator   |         |       | 2:55 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -350,6 +350,7 @@ the greatest of names but at least it avoids confusion with the =type=
 descendants in SML.
 
 **** IMPLEMENTATION Add post-processing logic for module generation    :task:
+     CLOCK: [2014-09-16 Tue 17:52]--[2014-09-16 Tue 18:38] =>  0:46
      CLOCK: [2014-09-16 Tue 07:53]--[2014-09-16 Tue 08:25] =>  0:32
      CLOCK: [2014-09-15 Mon 23:04]--[2014-09-16 Tue 00:04] =>  1:00
 

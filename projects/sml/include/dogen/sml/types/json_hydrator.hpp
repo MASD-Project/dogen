@@ -45,6 +45,12 @@ public:
 
 private:
     /**
+     * @brief Returns the generation type for the model, depending on
+     * whether it is a target model or not.
+     */
+    generation_types generation_type(const bool is_target) const;
+
+    /**
      * @brief Returns the model name for all qnames other than the
      * model itself.
      *
@@ -64,21 +70,21 @@ private:
         qname& qn) const;
 
     /**
-     * @brief Reads all meta-data tags from the property tree, and
-     * tags the Taggable type with them.
+     * @brief Reads all the meta-data from the source property tree,
+     * and copies it to the destination.
      */
-    void read_tags(const boost::property_tree::ptree& source,
+    void copy_meta_data(const boost::property_tree::ptree& source,
         boost::property_tree::ptree& destination) const;
 
     /**
-     * @brief Reads an SML type from the property tree.
+     * @brief Reads an SML element from the property tree.
      */
-    void read_type(const boost::property_tree::ptree& pt, model& m) const;
+    void read_element(const boost::property_tree::ptree& pt, model& m) const;
 
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    model read_stream(std::istream& s) const;
+    model read_stream(std::istream& s, const bool is_target) const;
 
 private:
     /**
