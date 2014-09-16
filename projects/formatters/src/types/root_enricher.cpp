@@ -139,65 +139,47 @@ std::list<std::string> root_enricher::dependencies() const {
 }
 
 void root_enricher::
-enrich(const sml::model& /*model*/,
+enrich(const sml::model& model,
     const sml::meta_data::enrichment_types enrichment_type,
     sml::concept& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching concept: " << target.name();
     if (!is_first_stage_enrichment(enrichment_type))
         return;
 
-    // FIXME: hack
-    // if (!target.containing_module()) {
-    //     const auto sn(target.name().simple_name());
-    //     BOOST_LOG_SEV(lg, warn) << "No containing module supplied for '" << sn
-    //                             << "'. Setting up defaults instead.";
-    //     setup_defaults(target.meta_data());
-    //     return;
-    // }
-
-    // const auto cm(containing_module(model, target));
-    // perform_first_stage_enrichment(cm.meta_data(), target.meta_data());
+    const auto cm(containing_module(model, target));
+    perform_first_stage_enrichment(cm.meta_data(), target.meta_data());
 }
 
 void root_enricher::
-enrich(const sml::model& /*model*/,
+enrich(const sml::model& model,
     const sml::meta_data::enrichment_types enrichment_type,
     sml::module& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching module: " << target.name();
     if (!is_first_stage_enrichment(enrichment_type))
         return;
 
-    // if (!target.containing_module()) {
-    //     const auto sn(target.name().simple_name());
-    //     BOOST_LOG_SEV(lg, warn) << "No containing module supplied for '" << sn
-    //                             << "'. Setting up defaults instead.";
-    //     setup_defaults(target.meta_data());
-    //     return;
-    // }
+    if (!target.containing_module()) {
+        const auto sn(target.name().simple_name());
+        BOOST_LOG_SEV(lg, debug) << "No containing module supplied for '" << sn
+                                 << "'. Setting up defaults instead.";
+        setup_defaults(target.meta_data());
+        return;
+    }
 
-    // const auto cm(containing_module(model, target));
-    // perform_first_stage_enrichment(cm.meta_data(), target.meta_data());
+    const auto cm(containing_module(model, target));
+    perform_first_stage_enrichment(cm.meta_data(), target.meta_data());
 }
 
 void root_enricher::
-enrich(const sml::model& /*model*/,
+enrich(const sml::model& model,
     const sml::meta_data::enrichment_types enrichment_type,
     sml::type& target) {
     BOOST_LOG_SEV(lg, debug) << "Enriching type: " << target.name();
     if (!is_first_stage_enrichment(enrichment_type))
         return;
 
-    // // FIXME: hack
-    // if (!target.containing_module()) {
-    //     const auto sn(target.name().simple_name());
-    //     BOOST_LOG_SEV(lg, warn) << "No containing module supplied for '" << sn
-    //                             << "'. Setting up defaults instead.";
-    //     setup_defaults(target.meta_data());
-    //     return;
-    // }
-
-    // const auto cm(containing_module(model, target));
-    // perform_first_stage_enrichment(cm.meta_data(), target.meta_data());
+    const auto cm(containing_module(model, target));
+    perform_first_stage_enrichment(cm.meta_data(), target.meta_data());
 }
 
 } }

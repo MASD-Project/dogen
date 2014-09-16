@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-16 Tue 18:38]
+Clock summary at [2014-09-17 Wed 00:31]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *24:55* |       |      |
+| *Total time*                                                 | *25:42* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 24:55 |      |
+| Development Stories Implemented                              |         | 25:42 |      |
 | IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:38 |
 | IMPLEMENTATION Updates to the manual and readme files        |         |       | 1:39 |
 | COMPLETED Fix windows continuous build                       |         |       | 0:22 |
@@ -33,7 +33,7 @@ Clock summary at [2014-09-16 Tue 18:38]
 | COMPLETED Create an SML grapher                              |         |       | 7:02 |
 | COMPLETED Implement the enricher interface in formatters     |         |       | 1:42 |
 | COMPLETED Create the global "namespace" module               |         |       | 1:48 |
-| IMPLEMENTATION Populate containing module in JSON hydrator   |         |       | 2:55 |
+| COMPLETED Populate containing module in JSON hydrator        |         |       | 3:42 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -327,7 +327,8 @@ depend on it.
 At present we do not merge modules in merger. We need to do so. In
 addition, we need to locate the global module and merge it only once.
 
-*** IMPLEMENTATION Populate containing module in JSON hydrator        :story:
+*** COMPLETED Populate containing module in JSON hydrator             :story:
+    CLOSED: [2014-09-17 Wed 00:31]
      CLOCK: [2014-09-14 Sun 22:31]--[2014-09-14 Sun 22:41] =>  0:10
 
 We only added support for this in the dia to sml workflow, so the
@@ -363,7 +364,9 @@ do the containment logic as part of the post processing.
 
 - origin type and generation type are still invalid for some reason.
 
-**** Remove hacks in root enricher                                     :task:
+**** COMPLETED Remove hacks in root enricher                           :task:
+     CLOSED: [2014-09-17 Wed 00:31]
+     CLOCK: [2014-09-17 Wed 00:07]--[2014-09-17 Wed 00:31] =>  0:24
 
 Once we are populating the containing module, we need to remove the
 commented out code and FIXME code.

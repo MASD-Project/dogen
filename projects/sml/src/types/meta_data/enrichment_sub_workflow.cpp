@@ -78,7 +78,7 @@ execute(const qname& qn, const enrichment_types enrichment_type) {
     boost::depth_first_search(graph_, boost::visitor(v));
 
     BOOST_LOG_SEV(lg, debug) << "Finsihed enrichment sub workflow for: " << qn
-                             << "type: " << enrichment_type;
+                             << " enrichment type: " << enrichment_type;
 }
 
 } } }

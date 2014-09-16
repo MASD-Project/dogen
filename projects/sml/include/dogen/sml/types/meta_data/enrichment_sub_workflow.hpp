@@ -69,7 +69,7 @@ private:
     template<typename T>
     bool apply_enrichment(const qname& qn,
         const enrichment_types enrichment_type,
-        std::unordered_map<qname, T> map,
+        std::unordered_map<qname, T>& map,
         enricher_interface& e) {
         auto i(map.find(qn));
         if (i == map.end())
