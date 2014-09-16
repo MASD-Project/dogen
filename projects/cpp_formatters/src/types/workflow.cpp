@@ -91,14 +91,7 @@ workflow::result_type
 workflow::format_file_infos_activity(const cpp::project& p) const {
     workflow::result_type r;
 
-    std::map<config::cpp_facet_types, std::list<std::string> >
-        headers_for_facet_;
-
     for (const auto f : p.files()) {
-        if (f.descriptor().file_type() == cpp::file_types::header)
-            headers_for_facet_[f.descriptor().facet_type()].
-                push_back(f.relative_path().generic_string());
-
         BOOST_LOG_SEV(lg, debug) << "Formatting:" << f.file_path().string();
         BOOST_LOG_SEV(lg, debug) << "Descriptor:" << f.descriptor();
         cpp_formatters::factory factory(settings_);

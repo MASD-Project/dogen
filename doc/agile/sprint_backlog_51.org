@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-17 Wed 00:31]
+Clock summary at [2014-09-17 Wed 00:37]
 
 | Headline                                                     | Time    |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                 | *25:42* |       |      |
+| *Total time*                                                 | *25:47* |       |      |
 |--------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                              |         | 25:42 |      |
+| Development Stories Implemented                              |         | 25:47 |      |
 | IMPLEMENTATION Sprint and product backlog grooming           |         |       | 1:38 |
 | IMPLEMENTATION Updates to the manual and readme files        |         |       | 1:39 |
 | COMPLETED Fix windows continuous build                       |         |       | 0:22 |
@@ -34,6 +34,7 @@ Clock summary at [2014-09-17 Wed 00:31]
 | COMPLETED Implement the enricher interface in formatters     |         |       | 1:42 |
 | COMPLETED Create the global "namespace" module               |         |       | 1:48 |
 | COMPLETED Populate containing module in JSON hydrator        |         |       | 3:42 |
+| COMPLETED C++ formatters use of =headers_for_facet_=         |         |       | 0:05 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -371,6 +372,16 @@ do the containment logic as part of the post processing.
 Once we are populating the containing module, we need to remove the
 commented out code and FIXME code.
 
+*** COMPLETED C++ formatters use of =headers_for_facet_=              :story:
+    CLOSED: [2014-09-17 Wed 00:36]
+    CLOCK: [2014-09-17 Wed 00:31]--[2014-09-17 Wed 00:36] =>  0:05
+
+We seem to be creating a local variable =headers_for_facet_= in
+function =format_file_infos_activity= but not really making use of
+it. We need to investigate what was that we were trying to do here,
+the name of the variable seems to imply it should have been a member
+variable. Probably a remnant from some old refactoring.
+
 *** Implement the enricher interface in the CPP model                 :story:
 
 The CPP model needs to register a top-level enricher that expands all
@@ -434,14 +445,6 @@ any longer:
 
 These should all be removed, with the corresponding command line
 arguments.
-
-*** C++ formatters use of =headers_for_facet_=                        :story:
-
-We seem to be creating a local variable =headers_for_facet_= in
-function =format_file_infos_activity= but not really making use of
-it. We need to investigate what was that we were trying to do here,
-the name of the variable seems to imply it should have been a member
-variable. Probably a remnant from some old refactoring.
 
 *** Manually generate packages for previous sprint                    :story:
 
