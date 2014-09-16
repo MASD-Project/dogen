@@ -49,6 +49,7 @@ Clock summary at [2014-09-16 Tue 00:04]
 Updates to sprint and product backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-09-16 Tue 08:25]--[2014-09-16 Tue 08:40] =>  0:15
     CLOCK: [2014-09-14 Sun 23:04]--[2014-09-14 Sun 23:35] =>  0:31
     CLOCK: [2014-09-14 Sun 23:01]--[2014-09-14 Sun 23:04] =>  0:03
     CLOCK: [2014-09-14 Sun 22:52]--[2014-09-14 Sun 23:01] =>  0:09
@@ -349,6 +350,7 @@ the greatest of names but at least it avoids confusion with the =type=
 descendants in SML.
 
 **** IMPLEMENTATION Add post-processing logic for module generation    :task:
+     CLOCK: [2014-09-16 Tue 07:53]--[2014-09-16 Tue 08:25] =>  0:32
      CLOCK: [2014-09-15 Mon 23:04]--[2014-09-16 Tue 00:04] =>  1:00
 
 Once the JSON file has been loaded into an SML model, we should go

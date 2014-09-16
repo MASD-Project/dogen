@@ -65,6 +65,7 @@ const std::string invalid_path("Failed to find JSON path: ");
 const std::string invalid_origin("Invalid value for origin: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
 const std::string model_has_no_types("Did not find any elements in model");
+const std::string missing_module("Could not find module: ");
 
 }
 
@@ -72,7 +73,7 @@ namespace dogen {
 namespace sml {
 
 boost::optional<qname> containing_module(model& m, const qname& qn) {
-    if (qn.model_name().empty())
+    if (qn.model_name().empty() || qn.model_name() == m.name().model_name())
         return boost::optional<qname>();
 
     qname module_qn;
@@ -99,6 +100,20 @@ update_containing_module(model& m, AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(pair.second);
         s.containing_module(containing_module(m, s.name()));
+
+        if (!s.containing_module())
+            continue;
+
+        auto i(m.modules().find(*s.containing_module()));
+        if (i == m.modules().end()) {
+            const auto sn(s.containing_module()->simple_name());
+            BOOST_LOG_SEV(lg, error) << missing_module << sn;
+            BOOST_THROW_EXCEPTION(hydration_error(missing_module + sn));
+        }
+        BOOST_LOG_SEV(lg, error) << "Adding type to module. Type: '"
+                                 << s.name().simple_name() << "' Module: '"
+                                 << i->first.simple_name();
+        i->second.members().push_back(s.name());
     }
 }
 
@@ -164,6 +179,8 @@ read_type(const boost::property_tree::ptree& pt, model& m) const {
             t.name(qn);
             t.generation_type(generation_types::no_generation);
             t.origin_type(m.origin_type());
+            t.generation_type(m.generation_type());
+
             if (documentation)
                 t.documentation(*documentation);
             read_tags(pt, t.meta_data());
@@ -232,11 +249,14 @@ model json_hydrator::read_stream(std::istream& s) const {
         BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
     }
 
+    r.generation_type(generation_types::no_generation);
+
     if (!model_name(r).empty()) {
         module m;
         m.name().simple_name(r.name().model_name());
         m.name().model_name(r.name().model_name());
-        m.origin_type(m.origin_type());
+        m.origin_type(r.origin_type());
+        m.generation_type(r.generation_type());
         r.modules().insert(std::make_pair(m.name(), m));
     }
 
