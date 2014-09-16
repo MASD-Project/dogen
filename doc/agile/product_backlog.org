@@ -8,6 +8,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Make JSON SML a fully supported frontend                          :story:
+
+At present we are using an SML JSON format to supply Dogen the system
+libraries. However, there is nothing stopping us from having a
+full-blown JSON frontend useful for code generation. For this we need:
+
+- flag to state if its a target model or not;
+- ability to supply external module path;
+- ability to supply all of the missing information for SML types
+  (properties for object, stereotypes, enumerations, etc).
+
+In order to test this we could generate a model from both Dia and JSON
+and make sure we arrive at the same SML.
+
 *** Setup containing module correctly in mock factory                 :story:
 
 We did not update the SML mock model factory to populate the
