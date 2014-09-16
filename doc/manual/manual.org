@@ -1863,6 +1863,54 @@ give it the type =std::string=.
 This diagram is now ready for generation, as described in section
 [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#generating-hello-world][Generating Hello World]].
 
+*** UML Types and Their Roles
+
+Dogen does not support every single UML construct; in fact, it only
+supports a surprisingly small subset of the language, but this subset
+is rich enough to express all of Dogen's internal complexity. The
+supported UML types, according to their Dia names, are:
+
+- *UML Class*: Defines a class, its properties and methods, its
+  documentation, and all of the associated meta-data that allows Dogen
+  to treat it specially. For example, depending on the stereotype you
+  set, a UML Class can be code-generated as a simple value object, an
+  enumeration or an exception.
+- *UML Large Package*: Container of packages and classes. Dogen uses
+  the package to define the appropriate scoping in the backend
+  languages. For example, in C++ it results in the appropriate
+  namespaces being defined, with the types it contains.
+- *UML Generalization*: Defines inheritance relationships. We do not
+  support multiple inheritance at present.
+- *UML Association*: Used for informational purposes only. Dogen
+  ignores all UML Associations (either aggregation or composition)
+  because it does not have enough information to model them. Instead,
+  it relies on the properties defined in the class.
+- *UML Note*: has a dual purpose: it is used for user comments that
+  clarify intent; but it is also used to supplement a few cases where
+  Dia is lacking. At present the main problem we found is a lack of
+  ability to add comments at the model and package level, which means
+  one could not produce documentation for these types. We make use of
+  the UML Note to provide this information.
+- *UML Message*: Dogen has _overloaded_ these messages to allow them
+  to link comments with other types. For instance, it is useful when
+  you have many classes but you need to provide a UML Note specific to
+  a class; in that case you can define a UML Message between the UML
+  Note and the UML Class.
+- *UML realization*: This is ignored by Dogen. It is useful when you
+  want to implement interfaces but you do not want Dogen to generate
+  the usual inheritance infrastructure - as it would do if you use a
+  UML Generalization.
+
+Note that if you attempt to use any other Dia type - UML or
+otherwise - Dogen will fail to process the document and throw an
+error. For example, if you try to use the Standard Line you will see
+the following in the log file:
+
+: 2014-09-10 08:09:43.480906 [ERROR] [dia_to_sml.processor] Invalid value for object type: Standard - Line
+
+This strict behaviour was done to avoid subtle bugs. It may be relaxed
+in the future as use cases demand it.
+
 *** Supported Types
 
 You couldn't fail to notice that we made use of the type
@@ -1874,13 +1922,6 @@ that is not
 FIXME: we need to add a section on the supported object types and the
 handling of unsupported object types.
 
-- uml_large_package
-- uml_class
-- uml_generalization
-- uml_association
-- uml_note
-- uml_message
-- uml_realization
 
 - Properties
 - Comments
@@ -1907,6 +1948,13 @@ path to the build directory: =../../dogen_knitter=.
 
 This error should not occur if you are using a binary package as the
 binary should be in the system path.
+
+*Q*: I get the error "Invalid value for object type" when generating;
+ what does that mean?
+
+You have tried to use a Dia object type that is not supported by
+Dogen. Locate the object type and remove it from your diagram. For a
+list of supported object types see FIXME.
 
 * PART III - SPECIFICATIONS
 
