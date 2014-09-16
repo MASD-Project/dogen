@@ -11,7 +11,7 @@ Stories that we intend to look at, at some point.
 *** Setup containing module correctly in mock factory                 :story:
 
 We did not update the SML mock model factory to populate the
-containing type.
+containing type. We also did not setup the members of the module.
 
 *** Consider moving =add_model_module= to flags                       :story:
 
