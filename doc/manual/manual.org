@@ -1868,38 +1868,85 @@ This diagram is now ready for generation, as described in section
 Dogen does not support every single UML construct; in fact, it only
 supports a surprisingly small subset of the language, but this subset
 is rich enough to express all of Dogen's internal complexity. The
-supported UML types, according to their Dia names, are:
+supported UML types, according to their Dia names, described in the
+following sections.
 
-- *UML Class*: Defines a class, its properties and methods, its
-  documentation, and all of the associated meta-data that allows Dogen
-  to treat it specially. For example, depending on the stereotype you
-  set, a UML Class can be code-generated as a simple value object, an
-  enumeration or an exception.
-- *UML Large Package*: Container of packages and classes. Dogen uses
-  the package to define the appropriate scoping in the backend
-  languages. For example, in C++ it results in the appropriate
-  namespaces being defined, with the types it contains.
-- *UML Generalization*: Defines inheritance relationships. We do not
-  support multiple inheritance at present.
-- *UML Association*: Used for informational purposes only. Dogen
-  ignores all UML Associations (either aggregation or composition)
-  because it does not have enough information to model them. Instead,
-  it relies on the properties defined in the class.
-- *UML Note*: has a dual purpose: it is used for user comments that
-  clarify intent; but it is also used to supplement a few cases where
-  Dia is lacking. At present the main problem we found is a lack of
-  ability to add comments at the model and package level, which means
-  one could not produce documentation for these types. We make use of
-  the UML Note to provide this information.
-- *UML Message*: Dogen has _overloaded_ these messages to allow them
-  to link comments with other types. For instance, it is useful when
-  you have many classes but you need to provide a UML Note specific to
-  a class; in that case you can define a UML Message between the UML
-  Note and the UML Class.
-- *UML realization*: This is ignored by Dogen. It is useful when you
-  want to implement interfaces but you do not want Dogen to generate
-  the usual inheritance infrastructure - as it would do if you use a
-  UML Generalization.
+**** UML Class
+
+Defines a class, its properties and methods, its documentation, and
+all of the associated meta-data that allows Dogen to treat it
+specially. For example, depending on the stereotype you set, a UML
+Class can be code-generated as a simple value object, an enumeration
+or an exception.
+
+**** UML Large Package
+
+Container of packages and classes. Dogen uses the package to define
+the appropriate scoping in the backend languages. For example, in C++
+it results in the appropriate namespaces being defined, with the types
+it contains.
+
+#+CAPTION: Class in a large package.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/class_in_package.png]]
+
+**** UML Generalization
+
+Defines inheritance relationships. We do not support multiple
+inheritance at present.
+
+#+CAPTION: Class inheriting from other class.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/generalization.png]]
+
+**** UML Association
+
+Used for informational purposes only. Dogen ignores all UML
+Associations (either aggregation or composition) because it does not
+have enough information to model them. Instead, it relies on the
+properties defined in the class.
+
+#+CAPTION: Aggregation relationship.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/association_aggregation.png]]
+
+#+CAPTION: Association relationship.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/association_composition.png]]
+
+**** UML Note
+
+Has a dual purpose: it is used for user comments that clarify intent;
+but it is also used to supplement a few cases where Dia is lacking. At
+present the main problem we found is a lack of ability to add comments
+at the model and package level, which means one could not produce
+documentation for these types. We make use of the UML Note to provide
+this information.
+
+#+CAPTION: Note used to add documentation to a model.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/model_level_comment.png]]
+
+#+CAPTION: Note used to add documentation to a package.
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/manual/package_level_comment.png]]
+
+**** UML Message
+
+Dogen has _overloaded_ these messages to allow them to link comments
+with other types. For instance, it is useful when you have many
+classes but you need to provide a UML Note specific to a class; in
+that case you can define a UML Message between the UML Note and the
+UML Class.
+
+**** UML realization
+
+This is ignored by Dogen. It is useful when you
+want to implement interfaces but you do not want Dogen to generate
+the usual inheritance infrastructure - as it would do if you use a
+UML Generalization.
+
+**** Other Dia object types
 
 Note that if you attempt to use any other Dia type - UML or
 otherwise - Dogen will fail to process the document and throw an
