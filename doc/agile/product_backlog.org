@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Failed facet dependencies should be treated as errors             :story:
+
+if a facet is not supported in a system module and the user tries to
+make use of it, we should error. The user must then go and disable
+explicitly the facet on the affected object via the meta data. We
+should not silently disable facets.
+
 *** Make JSON SML a fully supported frontend                          :story:
 
 At present we are using an SML JSON format to supply Dogen the system
