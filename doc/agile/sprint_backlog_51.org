@@ -38,6 +38,7 @@ Clock summary at [2014-09-17 Wed 00:37]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-17 Wed 08:03]--[2014-09-17 Wed 08:21] =>  0:18
     CLOCK: [2014-09-15 Mon 07:51]--[2014-09-15 Mon 08:04] =>  0:13
     CLOCK: [2014-09-14 Sun 18:10]--[2014-09-14 Sun 18:16] =>  0:06
     CLOCK: [2014-09-12 Fri 19:33]--[2014-09-12 Fri 19:37] =>  0:04
@@ -382,7 +383,14 @@ it. We need to investigate what was that we were trying to do here,
 the name of the variable seems to imply it should have been a member
 variable. Probably a remnant from some old refactoring.
 
-*** Implement the enricher interface in the CPP model                 :story:
+*** IMPLEMENTATION Move formatters meta-data types to meta-data namespace :story:
+    CLOCK: [2014-09-17 Wed 08:25]--[2014-09-17 Wed 08:50] =>  0:25
+
+We should follow the SML pattern across other domain models and create
+a specific namespace for all the meta-data related classes.
+
+*** IMPLEMENTATION Implement the enricher interface in the CPP model  :story:
+    CLOCK: [2014-09-17 Wed 08:22]--[2014-09-17 Wed 08:25] =>  0:03
 
 The CPP model needs to register a top-level enricher that expands all
 of the C++ specific tags. This has to be done before the formatter
@@ -472,6 +480,11 @@ is always of the latest commit in master. This means that trying to
 generate packages for tag =v0.50.2410= results in packages with a
 version after that like say =v0.50.2415=. We should look at the
 current commit in master rather than the latest one.
+
+*** Write next interesting instalment in blog                         :story:
+
+We have a number of links backlogged and we need to offload them in an
+"interesting..." post.
 
 ** Deprecated Development Stories
 
