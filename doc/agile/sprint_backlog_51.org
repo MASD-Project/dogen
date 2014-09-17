@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-17 Wed 17:57]
+Clock summary at [2014-09-17 Wed 18:36]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *26:33* |       |      |
+| *Total time*                                                     | *27:11* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 26:33 |      |
+| Development Stories Implemented                                  |         | 27:11 |      |
 | IMPLEMENTATION Sprint and product backlog grooming               |         |       | 1:56 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:39 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
@@ -36,7 +36,7 @@ Clock summary at [2014-09-17 Wed 17:57]
 | COMPLETED Populate containing module in JSON hydrator            |         |       | 3:42 |
 | COMPLETED C++ formatters use of =headers_for_facet_=             |         |       | 0:05 |
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
-| IMPLEMENTATION Implement the enricher interface in the CPP model |         |       | 0:03 |
+| IMPLEMENTATION Implement the enricher interface in the CPP model |         |       | 0:41 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -393,6 +393,7 @@ We should follow the SML pattern across other domain models and create
 a specific namespace for all the meta-data related classes.
 
 *** IMPLEMENTATION Implement the enricher interface in the CPP model  :story:
+    CLOCK: [2014-09-17 Wed 17:58]--[2014-09-17 Wed 18:36] =>  0:38
     CLOCK: [2014-09-17 Wed 08:22]--[2014-09-17 Wed 08:25] =>  0:03
 
 The CPP model needs to register a top-level enricher that expands all
