@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-17 Wed 18:36]
+Clock summary at [2014-09-18 Thu 00:06]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *27:11* |       |      |
+| *Total time*                                                     | *28:23* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 27:11 |      |
+| Development Stories Implemented                                  |         | 28:23 |      |
 | IMPLEMENTATION Sprint and product backlog grooming               |         |       | 1:56 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:39 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
@@ -36,7 +36,8 @@ Clock summary at [2014-09-17 Wed 18:36]
 | COMPLETED Populate containing module in JSON hydrator            |         |       | 3:42 |
 | COMPLETED C++ formatters use of =headers_for_facet_=             |         |       | 0:05 |
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
-| IMPLEMENTATION Implement the enricher interface in the CPP model |         |       | 0:41 |
+| IMPLEMENTATION Merge C++ models                                  |         |       | 1:02 |
+| IMPLEMENTATION Implement the enricher interface in the CPP model |         |       | 0:51 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -392,7 +393,27 @@ variable. Probably a remnant from some old refactoring.
 We should follow the SML pattern across other domain models and create
 a specific namespace for all the meta-data related classes.
 
+*** IMPLEMENTATION Merge C++ models                                   :story:
+    CLOCK: [2014-09-17 Wed 23:02]--[2014-09-18 Thu 00:04] =>  1:02
+
+*New understanding*: We ended up having to take this story on right
+ now as it doesn't make sense to add all this infrastructure to the
+ C++ formatters model, only to move it later on.
+
+Once all of the tidy-up for the meta-data is done, the C++ model will
+become quite small. At that point we should merge it with the C++
+formatters model. This is quite nice as we will end up with a cohesive
+model - the separation between these two models was always arbitrary.
+
+In addition, we should create namespaces:
+
+- =formatters=: general formatting code used by several formatters
+- facet-specific: e.g. =formatters::types= houses all the formatter
+  code for the types facet and so on. This may be a bit messy in terms
+  of the diagram but it will make the code a lot cleaner.
+
 *** IMPLEMENTATION Implement the enricher interface in the CPP model  :story:
+    CLOCK: [2014-09-17 Wed 22:51]--[2014-09-17 Wed 23:01] =>  0:10
     CLOCK: [2014-09-17 Wed 17:58]--[2014-09-17 Wed 18:36] =>  0:38
     CLOCK: [2014-09-17 Wed 08:22]--[2014-09-17 Wed 08:25] =>  0:03
 

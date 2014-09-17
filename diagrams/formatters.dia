@@ -4372,13 +4372,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="-17,-31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-31.05;5.495,-27.35"/>
+        <dia:rectangle val="-17.05,-31.05;4.725,-27.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17,-31"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.445"/>
+        <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -4480,7 +4480,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotation#</dia:string>
+            <dia:string>#settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6586,17 +6586,17 @@ is responsible for.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="5.445,-27.4"/>
+        <dia:point val="4.675,-27.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.695,-28.15;13.2,-22.95"/>
+        <dia:rectangle val="3.925,-28.15;13.2,-22.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="5.445,-27.4"/>
-        <dia:point val="5.445,-23"/>
+        <dia:point val="4.675,-27.4"/>
+        <dia:point val="4.675,-23"/>
         <dia:point val="13,-23"/>
         <dia:point val="13,-28"/>
       </dia:attribute>
@@ -6733,7 +6733,7 @@ is responsible for.#</dia:string>
         <dia:point val="-13.57,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.62,-38.05;-5.0275,-30.2"/>
+        <dia:rectangle val="-13.62,-38.05;-5.4125,-30.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6741,8 +6741,8 @@ is responsible for.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-13.57,-38"/>
         <dia:point val="-13.57,-34.85"/>
-        <dia:point val="-5.7775,-34.85"/>
-        <dia:point val="-5.7775,-31"/>
+        <dia:point val="-6.1625,-34.85"/>
+        <dia:point val="-6.1625,-31"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

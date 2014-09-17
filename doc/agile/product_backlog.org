@@ -215,20 +215,6 @@ much easier and type safe, instead of querying the ptree directly. And
 since it would live in the C++ formatters model, we could share code
 between formatters.
 
-*** Merge C++ models                                                  :story:
-
-Once all of the tidy-up for the meta-data is done, the C++ model will
-become quite small. At that point we should merge it with the C++
-formatters model. This is quite nice as we will end up with a cohesive
-model - the separation between these two models was always arbitrary.
-
-In addition, we should create namespaces:
-
-- =formatters=: general formatting code used by several formatters
-- facet-specific: e.g. =formatters::types= houses all the formatter
-  code for the types facet and so on. This may be a bit messy in terms
-  of the diagram but it will make the code a lot cleaner.
-
 *** Make use of boilerplate                                           :story:
 
 Remove all of the manual boilerplate and make use of the new
