@@ -8,6 +8,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Write blog post on reflexive programming                          :story:
+
+Basic idea is that domain expertise tightens the agile circle,
+allowing for much faster progress. Check Soros definition of
+reflexive.
+
 *** Load system models on demand                                      :story:
 
 In a distant future one can imagine a very large number of system
