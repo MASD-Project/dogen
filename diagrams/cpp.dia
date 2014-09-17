@@ -4268,7 +4268,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="112,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.619999999999999"/>
+        <dia:real val="12.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4936,7 +4936,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="92,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5850000000000009"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15.600000000000003"/>
@@ -6730,7 +6730,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-28,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.544999999999998"/>
+        <dia:real val="30.545000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="40.100000000000001"/>
@@ -6855,16 +6855,16 @@ seems like the least bad approach.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
-        <dia:point val="84,109"/>
+        <dia:point val="73.9501,154.246"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.95,108.95;108.805,127.85"/>
+        <dia:rectangle val="73.9001,154.196;98.7551,173.096"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="84,109"/>
+        <dia:point val="73.9501,154.246"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.754999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="18.800000000000004"/>
@@ -7463,17 +7463,16 @@ All file names will use the domain object name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O48"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O50">
       <dia:attribute name="obj_pos">
-        <dia:point val="93,132"/>
+        <dia:point val="82.9501,177.246"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="92.95,131.95;108.18,139.65"/>
+        <dia:rectangle val="82.9001,177.196;98.1301,184.896"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="93,132"/>
+        <dia:point val="82.9501,177.246"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.130000000000001"/>
@@ -7736,7 +7735,6 @@ All file names will use the domain object name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O48"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O51">
       <dia:attribute name="name">
@@ -7776,19 +7774,19 @@ All file names will use the domain object name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="100.565,132"/>
+        <dia:point val="90.5151,177.246"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="95.6275,127.05;100.765,133.6"/>
+        <dia:rectangle val="85.5776,172.296;90.7151,178.046"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="100.565,132"/>
-        <dia:point val="100.565,130.25"/>
-        <dia:point val="96.3775,130.25"/>
-        <dia:point val="96.3775,127.8"/>
+        <dia:point val="90.5151,177.246"/>
+        <dia:point val="90.5151,175.496"/>
+        <dia:point val="86.3276,175.496"/>
+        <dia:point val="86.3276,173.046"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7796,7 +7794,7 @@ All file names will use the domain object name.#</dia:string>
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -7808,20 +7806,19 @@ All file names will use the domain object name.#</dia:string>
         <dia:connection handle="0" to="O50" connection="1"/>
         <dia:connection handle="1" to="O49" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O48"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O52">
       <dia:attribute name="obj_pos">
-        <dia:point val="118,110"/>
+        <dia:point val="107.95,155.246"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.95,109.95;124.865,112.25"/>
+        <dia:rectangle val="107.9,155.196;114.815,157.496"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="118,110"/>
+        <dia:point val="107.95,155.246"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.8150000000000004"/>
+        <dia:real val="6.8149999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -7919,17 +7916,16 @@ All file names will use the domain object name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O48"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O53">
       <dia:attribute name="obj_pos">
-        <dia:point val="132,110"/>
+        <dia:point val="121.95,155.246"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.95,109.95;139.818,112.25"/>
+        <dia:rectangle val="121.9,155.196;129.768,157.496"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="132,110"/>
+        <dia:point val="121.95,155.246"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.7675000000000001"/>
@@ -8030,7 +8026,6 @@ All file names will use the domain object name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O48"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

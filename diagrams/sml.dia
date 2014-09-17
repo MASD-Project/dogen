@@ -1506,7 +1506,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="85.22,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.47,23.7234;94.5408,30.8"/>
+        <dia:rectangle val="84.47,23.7234;94.5407,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11593,7 +11593,7 @@ to the grammar of a language.#</dia:string>
         <dia:point val="-10.7487,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.1375,26.25;-9.99875,30.8"/>
+        <dia:rectangle val="-34.1375,26.25;-9.9987,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11871,22 +11871,22 @@ to the grammar of a language.#</dia:string>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O103">
       <dia:attribute name="obj_pos">
-        <dia:point val="-136,-61"/>
+        <dia:point val="-136,-49.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-136.05,-62.05;-26.95,25.05"/>
+        <dia:rectangle val="-136.05,-50.55;-26.95,25.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-136,-61"/>
+        <dia:point val="-136,-49.5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="109"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="86"/>
+        <dia:real val="74.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -15053,7 +15053,7 @@ enrichers.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-94.0627,-34.25"/>
+        <dia:point val="-94.063,-34.25"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O121" connection="6"/>
@@ -15819,7 +15819,7 @@ enrichers.#</dia:string>
         <dia:point val="3.92,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.17,-9.99977;13.6913,0.6"/>
+        <dia:rectangle val="3.17,-9.99977;13.6913,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15976,7 +15976,7 @@ based on module containment.#</dia:string>
         <dia:point val="13,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.09,1.95;13.75,14.6"/>
+        <dia:rectangle val="-3.09,1.95;13.75,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16987,7 +16987,7 @@ based on module containment.#</dia:string>
         <dia:point val="-35.725,-41.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.15,-41.65;-35.525,-30.4"/>
+        <dia:rectangle val="-41.15,-41.65;-35.525,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17170,7 +17170,7 @@ based on module containment.#</dia:string>
         <dia:point val="-84.275,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.475,-6.75;-83.525,7.6"/>
+        <dia:rectangle val="-117.475,-6.75;-83.525,6.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17352,7 +17352,7 @@ based on module containment.#</dia:string>
         <dia:point val="-31.32,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-32.07,15.95;-7.16125,22.8"/>
+        <dia:rectangle val="-32.07,15.95;-7.16125,22.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
