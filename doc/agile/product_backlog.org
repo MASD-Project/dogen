@@ -8,6 +8,29 @@
 
 Stories that we intend to look at, at some point.
 
+*** Towards more strongly-typed meta-data                             :epic:
+
+When we introduced the =ptree= based meta-data, we thought that the
+flexibility of the format would provide the required
+decoupling. However, there are downsides to this flexibility:
+
+- we cannot validate the input parameters during dia transformation
+  (or SML JSON hydration); conceivably we could add yet another
+  formatter specific type that validates the inputs but that would
+  make things convoluted. This means users can supply numbers for
+  booleans, collections for scalars etc and we will only find out when
+  it comes to the SML to C++ transformation.
+- we cannot validate the keys passed in: are they actually existing
+  keys or did the user supply keys we do not support? Did the user try
+  to enable a formatter that does not exist? Because the validation is
+  done on a per-formatter basis, we can't say "all the keys that are
+  left are invalid"; we do not know what keys are left.
+- we need to duplicate the copying code in every model (and
+  potentially, in every formatter). We are leaving the copying
+  decisions to the formatters (e.g. copy a kvp from model module or
+  parent module to class, etc). This is because only the formatters
+  know what kvps to copy.
+
 *** Write blog post on reflexive programming                          :story:
 
 Basic idea is that domain expertise tightens the agile circle,
