@@ -18,24 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_FORMATTER_SETTINGS_FWD_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_FORMATTER_SETTINGS_FWD_SER_HPP
+#include "dogen/formatters/hash/annotation_hash.hpp"
+#include "dogen/formatters/hash/settings_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/formatters/types/formatter_settings_fwd.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-namespace boost {
-namespace serialization {
+}
 
-template<class Archive>
-void save(Archive& ar, const dogen::formatters::formatter_settings& v, unsigned int version);
+namespace dogen {
+namespace formatters {
 
-template<class Archive>
-void load(Archive& ar, dogen::formatters::formatter_settings& v, unsigned int version);
+std::size_t settings_hasher::hash(const settings&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.generate_preamble());
+    combine(seed, v.annotation());
+
+    return seed;
+}
 
 } }
-
-#endif

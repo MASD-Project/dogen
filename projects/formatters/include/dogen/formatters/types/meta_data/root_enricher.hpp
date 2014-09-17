@@ -30,6 +30,7 @@
 
 namespace dogen {
 namespace formatters {
+namespace meta_data {
 
 /**
  * @brief Responsible for enriching the meta-data with the core
@@ -76,6 +77,6 @@ public:
         sml::type& target) override;
 };
 
-} }
+} } }
 
 #endif

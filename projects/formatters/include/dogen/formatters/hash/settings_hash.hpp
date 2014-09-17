@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/formatters/io/annotation_io.hpp"
-#include "dogen/formatters/io/formatter_settings_io.hpp"
+#ifndef DOGEN_FORMATTERS_HASH_SETTINGS_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_SETTINGS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/formatters/types/settings.hpp"
 
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const formatter_settings& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
-    s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::formatter_settings\"" << ", "
-      << "\"generate_preamble\": " << v.generate_preamble() << ", "
-      << "\"annotation\": " << v.annotation()
-      << " }";
-    return(s);
-}
+struct settings_hasher {
+public:
+    static std::size_t hash(const settings& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::formatters::settings> {
+public:
+    size_t operator()(const dogen::formatters::settings& v) const {
+        return dogen::formatters::settings_hasher::hash(v);
+    }
+};
+
+}
+#endif

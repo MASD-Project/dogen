@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FORMATTER_SETTINGS_HPP
-#define DOGEN_FORMATTERS_TYPES_FORMATTER_SETTINGS_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_SETTINGS_HPP
+#define DOGEN_FORMATTERS_TYPES_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/formatters/serialization/formatter_settings_fwd_ser.hpp"
+#include "dogen/formatters/serialization/settings_fwd_ser.hpp"
 #include "dogen/formatters/types/annotation.hpp"
 
 namespace dogen {
@@ -35,26 +35,26 @@ namespace formatters {
 /**
  * @brief Collection of generic settings used by all formatters.
  */
-class formatter_settings final {
+class settings final {
 public:
-    formatter_settings(const formatter_settings&) = default;
-    formatter_settings(formatter_settings&&) = default;
-    ~formatter_settings() = default;
+    settings(const settings&) = default;
+    settings(settings&&) = default;
+    ~settings() = default;
 
 public:
-    formatter_settings();
+    settings();
 
 public:
-    formatter_settings(
+    settings(
         const bool generate_preamble,
         const dogen::formatters::annotation& annotation);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const formatter_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, formatter_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, settings& v, unsigned int version);
 
 public:
     /**
@@ -76,14 +76,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const formatter_settings& rhs) const;
-    bool operator!=(const formatter_settings& rhs) const {
+    bool operator==(const settings& rhs) const;
+    bool operator!=(const settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(formatter_settings& other) noexcept;
-    formatter_settings& operator=(formatter_settings other);
+    void swap(settings& other) noexcept;
+    settings& operator=(settings other);
 
 private:
     bool generate_preamble_;
@@ -96,8 +96,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatters::formatter_settings& lhs,
-    dogen::formatters::formatter_settings& rhs) {
+    dogen::formatters::settings& lhs,
+    dogen::formatters::settings& rhs) {
     lhs.swap(rhs);
 }
 

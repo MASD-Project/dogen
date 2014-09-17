@@ -18,24 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/traits.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_META_DATA_TRAITS_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_META_DATA_TRAITS_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace formatters {
+namespace meta_data {
 
-const std::string traits::bool_true("true");
-const std::string traits::bool_false("false");
+class traits;
 
-const std::string traits::copyright_holder("COPYRIGHT");
-const std::string traits::licence_name("LICENCE");
-const std::string traits::modeline_group_name("MODELINE_GROUP");
-const std::string traits::generate_preamble("generate_preamble");
+} } }
 
-const std::string traits::code_generation_marker::add_date_time(
-    "code_generation_marker.add_date_time");
-const std::string traits::code_generation_marker::add_warning(
-    "code_generation_marker.add_warning");
-const std::string traits::code_generation_marker::message(
-    "code_generation_marker.message");
-
-} }
+#endif

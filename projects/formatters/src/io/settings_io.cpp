@@ -18,23 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_IO_FORMATTER_SETTINGS_IO_HPP
-#define DOGEN_FORMATTERS_IO_FORMATTER_SETTINGS_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen/formatters/types/formatter_settings.hpp"
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/formatters/io/annotation_io.hpp"
+#include "dogen/formatters/io/settings_io.hpp"
 
 namespace dogen {
 namespace formatters {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::formatters::formatter_settings& v);
+std::ostream& operator<<(std::ostream& s, const settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::formatters::settings\"" << ", "
+      << "\"generate_preamble\": " << v.generate_preamble() << ", "
+      << "\"annotation\": " << v.annotation()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

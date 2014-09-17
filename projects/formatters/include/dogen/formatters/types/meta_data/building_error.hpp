@@ -18,36 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_DATA_FORMATTER_SETTINGS_TD_HPP
-#define DOGEN_FORMATTERS_TEST_DATA_FORMATTER_SETTINGS_TD_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_META_DATA_BUILDING_ERROR_HPP
+#define DOGEN_FORMATTERS_TYPES_META_DATA_BUILDING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/formatter_settings.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace formatters {
+namespace meta_data {
 
-class formatter_settings_generator {
+/**
+ * @brief An error occurred while the factory was building.
+ */
+class building_error : public virtual std::exception, public virtual boost::exception {
 public:
-    formatter_settings_generator();
+    building_error() = default;
+    ~building_error() noexcept = default;
 
 public:
-    typedef dogen::formatters::formatter_settings result_type;
+    building_error(const std::string& message) : message_(message) { }
 
 public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
+    const char* what() const noexcept { return(message_.c_str()); }
 
 private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    const std::string message_;
 };
 
-} }
+} } }
 
 #endif

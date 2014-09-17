@@ -29,6 +29,7 @@
 
 namespace dogen {
 namespace formatters {
+namespace meta_data {
 
 struct traits {
     /**
@@ -91,6 +92,6 @@ struct traits {
     };
 };
 
-} }
+} } }
 
 #endif

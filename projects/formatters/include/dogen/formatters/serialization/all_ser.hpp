@@ -22,7 +22,6 @@
 #include "dogen/formatters/serialization/comment_styles_ser.hpp"
 #include "dogen/formatters/serialization/editors_ser.hpp"
 #include "dogen/formatters/serialization/file_ser.hpp"
-#include "dogen/formatters/serialization/formatter_settings_ser.hpp"
 #include "dogen/formatters/serialization/licence_ser.hpp"
 #include "dogen/formatters/serialization/modeline_field_ser.hpp"
 #include "dogen/formatters/serialization/modeline_group_ser.hpp"
@@ -30,3 +29,4 @@
 #include "dogen/formatters/serialization/modeline_ser.hpp"
 #include "dogen/formatters/serialization/padding_types_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
+#include "dogen/formatters/serialization/settings_ser.hpp"

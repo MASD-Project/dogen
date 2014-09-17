@@ -25,9 +25,9 @@
 #include "dogen/sml/types/meta_data/read_write_error.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/sml/types/meta_data/writer.hpp"
-#include "dogen/formatters/types/traits.hpp"
+#include "dogen/formatters/types/meta_data/traits.hpp"
 #include "dogen/sml/types/meta_data/enrichment_error.hpp"
-#include "dogen/formatters/types/root_enricher.hpp"
+#include "dogen/formatters/types/meta_data/root_enricher.hpp"
 
 namespace {
 
@@ -46,6 +46,7 @@ const std::string no_containing_module_supplied(
 
 namespace dogen {
 namespace formatters {
+namespace meta_data {
 
 /**
  * @brief Obtains the containing module.
@@ -182,4 +183,4 @@ enrich(const sml::model& model,
     perform_first_stage_enrichment(cm.meta_data(), target.meta_data());
 }
 
-} }
+} } }

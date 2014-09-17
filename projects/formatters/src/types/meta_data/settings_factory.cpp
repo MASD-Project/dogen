@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
-#include "dogen/formatters/types/traits.hpp"
+#include "dogen/formatters/types/meta_data/traits.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
@@ -29,14 +29,14 @@
 #include "dogen/formatters/io/licence_io.hpp"
 #include "dogen/formatters/types/licence_hydrator.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
-#include "dogen/formatters/types/building_error.hpp"
-#include "dogen/formatters/types/formatter_settings_factory.hpp"
+#include "dogen/formatters/types/meta_data/building_error.hpp"
+#include "dogen/formatters/types/meta_data/settings_factory.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatters.formatter_settings_factory"));
+auto lg(logger_factory("formatters.meta_data.settings_factory"));
 const std::string missing_context_ptr("Context pointer is null");
 const std::string modeline_groups_dir("modeline_groups");
 const std::string licence_dir("licences");
@@ -45,18 +45,19 @@ const std::string licence_dir("licences");
 
 namespace dogen {
 namespace formatters {
+namespace meta_data {
 
-formatter_settings_factory::formatter_settings_factory(
+settings_factory::settings_factory(
     const std::list<boost::filesystem::path>& data_files_directories) :
     data_files_directories_(data_files_directories) { }
 
-void formatter_settings_factory::
+void settings_factory::
 throw_missing_item(const std::string& msg, const std::string& n) const {
     BOOST_LOG_SEV(lg, error) << msg << n;
     BOOST_THROW_EXCEPTION(building_error(msg + n));
 }
 
-boost::optional<licence> formatter_settings_factory::
+boost::optional<licence> settings_factory::
 extract_licence(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data::reader reader(meta_data);
     if (!reader.has_key(traits::licence_name))
@@ -75,7 +76,7 @@ extract_licence(const boost::property_tree::ptree& meta_data) const {
     return l;
 }
 
-boost::optional<modeline> formatter_settings_factory::
+boost::optional<modeline> settings_factory::
 extract_modeline(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data::reader reader(meta_data);
     if (!reader.has_key(traits::modeline_group_name))
@@ -94,7 +95,7 @@ extract_modeline(const boost::property_tree::ptree& meta_data) const {
     return j->second;
 }
 
-std::string formatter_settings_factory::
+std::string settings_factory::
 extract_marker(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data::reader reader(meta_data);
 
@@ -110,7 +111,7 @@ extract_marker(const boost::property_tree::ptree& meta_data) const {
     return f.build();
 }
 
-std::list<boost::filesystem::path> formatter_settings_factory::
+std::list<boost::filesystem::path> settings_factory::
 create_directory_list(const std::string& for_whom) const {
     std::list<boost::filesystem::path> r;
     for (const auto& d : data_files_directories_)
@@ -118,7 +119,7 @@ create_directory_list(const std::string& for_whom) const {
     return r;
 }
 
-void formatter_settings_factory::hydrate_modelines() {
+void settings_factory::hydrate_modelines() {
     const auto dirs(create_directory_list(modeline_groups_dir));
     hydration_workflow<modeline_group_hydrator> hw;
     modeline_groups_ = hw.hydrate(dirs);
@@ -133,7 +134,7 @@ void formatter_settings_factory::hydrate_modelines() {
     BOOST_LOG_SEV(lg, debug) << "contents: " << modeline_groups_;
 }
 
-void formatter_settings_factory::hydrate_licences() {
+void settings_factory::hydrate_licences() {
     std::list<std::string> copyright_holders;
     licence_hydrator lh(copyright_holders);
     const auto dirs(create_directory_list(licence_dir));
@@ -149,16 +150,16 @@ void formatter_settings_factory::hydrate_licences() {
     BOOST_LOG_SEV(lg, debug) << "contents: " << licences_;
 }
 
-bool formatter_settings_factory::empty() const {
+bool settings_factory::empty() const {
     return modeline_groups_.empty() && licences_.empty();
 }
 
-void formatter_settings_factory::load_reference_data() {
+void settings_factory::load_reference_data() {
     hydrate_modelines();
     hydrate_licences();
 }
 
-formatter_settings formatter_settings_factory::
+settings settings_factory::
 build(const boost::property_tree::ptree& meta_data) const {
     const auto modeline(extract_modeline(meta_data));
     const auto licence(extract_licence(meta_data));
@@ -166,8 +167,7 @@ build(const boost::property_tree::ptree& meta_data) const {
     const annotation a(modeline, licence, marker);
 
     const bool generate_preamble(false); // FIXME: read from meta_data
-    const formatter_settings r(generate_preamble, a);
-    return r;
+    return settings(generate_preamble, a);
 }
 
-} }
+} } }

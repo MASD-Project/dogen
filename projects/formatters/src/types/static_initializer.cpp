@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/sml/types/meta_data/workflow.hpp"
-#include "dogen/formatters/types/root_enricher.hpp"
+#include "dogen/formatters/types/meta_data/root_enricher.hpp"
 #include "dogen/formatters/types/static_initializer.hpp"
 
 namespace dogen {
@@ -27,7 +27,7 @@ namespace formatters {
 
 void static_initializer::initialize() {
     sml::meta_data::workflow::register_root_enricher(
-        std::make_shared<root_enricher>());
+        std::make_shared<meta_data::root_enricher>());
 }
 
 } }

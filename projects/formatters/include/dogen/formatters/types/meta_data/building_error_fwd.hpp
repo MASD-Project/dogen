@@ -18,18 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FORMATTER_SETTINGS_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_FORMATTER_SETTINGS_FWD_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_META_DATA_BUILDING_ERROR_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_META_DATA_BUILDING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
+#include <string>
+
 namespace dogen {
 namespace formatters {
+namespace meta_data {
 
-class formatter_settings;
+class building_error;
 
-} }
+} } }
 
 #endif
