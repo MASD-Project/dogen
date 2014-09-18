@@ -394,6 +394,7 @@ We should follow the SML pattern across other domain models and create
 a specific namespace for all the meta-data related classes.
 
 *** IMPLEMENTATION Merge C++ models                                   :story:
+    CLOCK: [2014-09-18 Thu 07:52]--[2014-09-18 Thu 08:42] =>  0:50
     CLOCK: [2014-09-17 Wed 23:02]--[2014-09-18 Thu 00:04] =>  1:02
 
 *New understanding*: We ended up having to take this story on right
