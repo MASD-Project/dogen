@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for ignoring types                                    :story:
+
+Sometimes when changing a diagram it may be useful to set some types
+to "ignore", i.e. make dogen pretend they don't exist at all. For
+instance one may want to introduce new types one at a time. It would
+be nice to have a meta-data flag for ignoring.
+
 *** Towards more strongly-typed meta-data                             :epic:
 
 When we introduced the =ptree= based meta-data, we thought that the
