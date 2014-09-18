@@ -1873,11 +1873,24 @@ following sections.
 
 **** UML Class
 
-Defines a class, its properties and methods, its documentation, and
-all of the associated meta-data that allows Dogen to treat it
-specially. For example, depending on the stereotype you set, a UML
-Class can be code-generated as a simple value object, an enumeration
-or an exception.
+The UML Class defines a class, its properties and methods, its
+documentation, and all of the associated meta-data that allows Dogen
+to treat it specially. For example, depending on the stereotype you
+set, a UML Class can be code-generated as a simple value object, an
+enumeration or an exception. The following table lists all of the
+available stereotypes:
+
+| Stereotype     | Description |
+|----------------+-------------|
+| service        |             |
+| enumeration    |             |
+| exception      |             |
+| concept        |             |
+| visitable      |             |
+| entity         |             |
+| aggregate root |             |
+|                |             |
+
 
 **** UML Large Package
 

@@ -54,6 +54,7 @@ Clock summary at [2014-09-18 Thu 18:39]
 Updates to sprint and product backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files              :task:
+    CLOCK: [2014-09-18 Thu 18:39]--[2014-09-18 Thu 18:46] =>  0:07
     CLOCK: [2014-09-16 Tue 08:25]--[2014-09-16 Tue 08:40] =>  0:15
     CLOCK: [2014-09-14 Sun 23:04]--[2014-09-14 Sun 23:35] =>  0:31
     CLOCK: [2014-09-14 Sun 23:01]--[2014-09-14 Sun 23:04] =>  0:03
