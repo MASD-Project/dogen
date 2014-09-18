@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-18 Thu 00:06]
+Clock summary at [2014-09-18 Thu 18:39]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *28:23* |       |      |
+| *Total time*                                                     | *29:49* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 28:23 |      |
+| Development Stories Implemented                                  |         | 29:49 |      |
 | IMPLEMENTATION Sprint and product backlog grooming               |         |       | 1:56 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:39 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
@@ -36,7 +36,7 @@ Clock summary at [2014-09-18 Thu 00:06]
 | COMPLETED Populate containing module in JSON hydrator            |         |       | 3:42 |
 | COMPLETED C++ formatters use of =headers_for_facet_=             |         |       | 0:05 |
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
-| IMPLEMENTATION Merge C++ models                                  |         |       | 1:02 |
+| IMPLEMENTATION Merge C++ models                                  |         |       | 2:28 |
 | IMPLEMENTATION Implement the enricher interface in the CPP model |         |       | 0:51 |
 #+end:
 
@@ -394,6 +394,7 @@ We should follow the SML pattern across other domain models and create
 a specific namespace for all the meta-data related classes.
 
 *** IMPLEMENTATION Merge C++ models                                   :story:
+    CLOCK: [2014-09-18 Thu 18:03]--[2014-09-18 Thu 18:39] =>  0:36
     CLOCK: [2014-09-18 Thu 07:52]--[2014-09-18 Thu 08:42] =>  0:50
     CLOCK: [2014-09-17 Wed 23:02]--[2014-09-18 Thu 00:04] =>  1:02
 
