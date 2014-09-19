@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_META_DATA_SETTINGS_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_META_DATA_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_META_DATA_GENERAL_SETTINGS_FACTORY_HPP
+#define DOGEN_FORMATTERS_TYPES_META_DATA_GENERAL_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen/formatters/types/settings.hpp"
+#include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
 
@@ -40,15 +40,15 @@ namespace formatters {
 namespace meta_data {
 
 /**
- * @brief Creates the formatter settings by extracting information
- * from meta-data.
+ * @brief Creates the general settings by extracting information from
+ * meta-data.
  */
-class settings_factory {
+class general_settings_factory {
 public:
-    settings_factory() = delete;
-    settings_factory(const settings_factory&) = default;
-    settings_factory(settings_factory&&) = default;
-    ~settings_factory() = default;
+    general_settings_factory() = delete;
+    general_settings_factory(const general_settings_factory&) = default;
+    general_settings_factory(general_settings_factory&&) = default;
+    ~general_settings_factory() = default;
 
 public:
     /**
@@ -56,7 +56,7 @@ public:
      *
      * @param data_files_directories where to look for reference data.
      */
-    explicit settings_factory(
+    explicit general_settings_factory(
         const std::list<boost::filesystem::path>& data_files_directories);
 
 private:
@@ -123,11 +123,11 @@ public:
     void load_reference_data();
 
     /**
-     * @brief Generates formatter settings from the meta-data.
+     * @brief Generates general settings from the meta-data.
      *
      * @pre load reference data must have been called.
      */
-    settings build(const boost::property_tree::ptree& meta_data) const;
+    general_settings build(const boost::property_tree::ptree& meta_data) const;
 
 private:
     const std::list<boost::filesystem::path>& data_files_directories_;

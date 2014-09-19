@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/settings_hash.hpp"
+#include "dogen/formatters/hash/general_settings_hash.hpp"
 
 namespace {
 
@@ -35,7 +35,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace formatters {
 
-std::size_t settings_hasher::hash(const settings&v) {
+std::size_t general_settings_hasher::hash(const general_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.generate_preamble());

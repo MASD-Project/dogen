@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/settings_td.hpp"
+#include "dogen/formatters/test_data/general_settings_td.hpp"
 
 namespace {
 
@@ -37,29 +37,29 @@ create_dogen_formatters_annotation(const unsigned int position) {
 namespace dogen {
 namespace formatters {
 
-settings_generator::settings_generator() : position_(0) { }
+general_settings_generator::general_settings_generator() : position_(0) { }
 
-void settings_generator::
+void general_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_preamble(create_bool(position + 0));
     v.annotation(create_dogen_formatters_annotation(position + 1));
 }
 
-settings_generator::result_type
-settings_generator::create(const unsigned int position) {
-    settings r;
-    settings_generator::populate(position, r);
+general_settings_generator::result_type
+general_settings_generator::create(const unsigned int position) {
+    general_settings r;
+    general_settings_generator::populate(position, r);
     return r;
 }
-settings_generator::result_type*
-settings_generator::create_ptr(const unsigned int position) {
-    settings* p = new settings();
-    settings_generator::populate(position, *p);
+general_settings_generator::result_type*
+general_settings_generator::create_ptr(const unsigned int position) {
+    general_settings* p = new general_settings();
+    general_settings_generator::populate(position, *p);
     return p;
 }
 
-settings_generator::result_type
-settings_generator::operator()() {
+general_settings_generator::result_type
+general_settings_generator::operator()() {
     return create(position_++);
 }
 

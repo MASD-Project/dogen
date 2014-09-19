@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_SETTINGS_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_SETTINGS_FWD_HPP
+#ifndef DOGEN_FORMATTERS_IO_GENERAL_SETTINGS_IO_HPP
+#define DOGEN_FORMATTERS_IO_GENERAL_SETTINGS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/formatters/types/general_settings.hpp"
+
 namespace dogen {
 namespace formatters {
 
-class settings;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::formatters::general_settings& v);
 
 } }
 

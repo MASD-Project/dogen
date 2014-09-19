@@ -18,35 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_SETTINGS_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_SETTINGS_HASH_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_GENERAL_SETTINGS_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_GENERAL_SETTINGS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/formatters/types/settings.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/formatters/types/general_settings.hpp"
 
-namespace dogen {
-namespace formatters {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::general_settings)
+namespace boost {
+namespace serialization {
 
-struct settings_hasher {
-public:
-    static std::size_t hash(const settings& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::formatters::general_settings& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::formatters::general_settings& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::formatters::settings> {
-public:
-    size_t operator()(const dogen::formatters::settings& v) const {
-        return dogen::formatters::settings_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -21,12 +21,12 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/formatters/io/annotation_io.hpp"
-#include "dogen/formatters/io/settings_io.hpp"
+#include "dogen/formatters/io/general_settings_io.hpp"
 
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const settings& v) {
+std::ostream& operator<<(std::ostream& s, const general_settings& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -34,7 +34,7 @@ std::ostream& operator<<(std::ostream& s, const settings& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::settings\"" << ", "
+      << "\"__type__\": " << "\"dogen::formatters::general_settings\"" << ", "
       << "\"generate_preamble\": " << v.generate_preamble() << ", "
       << "\"annotation\": " << v.annotation()
       << " }";
