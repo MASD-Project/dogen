@@ -395,6 +395,7 @@ We should follow the SML pattern across other domain models and create
 a specific namespace for all the meta-data related classes.
 
 *** IMPLEMENTATION Merge C++ models                                   :story:
+    CLOCK: [2014-09-19 Fri 07:54]--[2014-09-19 Fri 08:40] =>  0:46
     CLOCK: [2014-09-18 Thu 18:03]--[2014-09-18 Thu 18:39] =>  0:36
     CLOCK: [2014-09-18 Thu 07:52]--[2014-09-18 Thu 08:42] =>  0:50
     CLOCK: [2014-09-17 Wed 23:02]--[2014-09-18 Thu 00:04] =>  1:02
@@ -434,6 +435,13 @@ such. SML should also declare the proper global traits such as
 We should consider if we should declare the formatters this way too,
 since they may depend on each other. This would be in the formatters
 model.
+
+*** Create =includers_info= and =forward_declarations_info=           :story:
+
+We should make sure the type system represents all the inputs to
+formatters. Create these types and update their formatters,
+transformer etc.
+
 
 *** Remove unnecessary properties from model                          :story:
 

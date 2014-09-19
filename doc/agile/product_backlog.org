@@ -266,12 +266,6 @@ do so we need to pass in both knitting and formatting settings to
 Copy the code from the deleted registration files. Formatters should
 register against a content descriptor.
 
-*** Create =includers_info= and =forward_declarations_info=           :story:
-
-We should make sure the type system represents all the inputs to
-formatters. Create these types and update their formatters,
-transformer etc.
-
 *** Update manual with detailed model descriptions                    :story:
 
 We should add CRCs for the main classes, with an explanation of what
