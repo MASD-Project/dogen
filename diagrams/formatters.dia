@@ -2168,7 +2168,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-49,-18.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-58.4738,-19.35;-48.25,1.8"/>
+        <dia:rectangle val="-58.4737,-19.35;-48.25,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4156,7 +4156,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#settings#</dia:string>
+        <dia:string>#general_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -4372,13 +4372,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="-17,-31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-31.05;4.725,-27.35"/>
+        <dia:rectangle val="-17.05,-31.05;7.805,-27.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17,-31"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.675000000000001"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -4480,7 +4480,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings#</dia:string>
+            <dia:string>#general_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5840,7 +5840,7 @@ root enricher.#</dia:string>
         <dia:point val="29.765,-33.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.9354,-33.9705;29.8355,-30.7013"/>
+        <dia:rectangle val="26.9353,-33.9705;29.8355,-30.7013"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6586,17 +6586,17 @@ is responsible for.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="4.675,-27.4"/>
+        <dia:point val="7.755,-27.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.925,-28.15;13.2,-22.95"/>
+        <dia:rectangle val="7.005,-28.15;13.2,-22.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="4.675,-27.4"/>
-        <dia:point val="4.675,-23"/>
+        <dia:point val="7.755,-27.4"/>
+        <dia:point val="7.755,-23"/>
         <dia:point val="13,-23"/>
         <dia:point val="13,-28"/>
       </dia:attribute>
@@ -6733,7 +6733,7 @@ is responsible for.#</dia:string>
         <dia:point val="-13.57,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.62,-38.05;-5.4125,-30.2"/>
+        <dia:rectangle val="-13.62,-38.05;-3.8725,-30.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6741,8 +6741,8 @@ is responsible for.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-13.57,-38"/>
         <dia:point val="-13.57,-34.85"/>
-        <dia:point val="-6.1625,-34.85"/>
-        <dia:point val="-6.1625,-31"/>
+        <dia:point val="-4.6225,-34.85"/>
+        <dia:point val="-4.6225,-31"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
