@@ -8,6 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Use of disabled facets in non-generatable types                   :story:
+
+It would be useful to set facets to disabled on non-generatable types,
+when there are generatable types that depend on them. For example, if
+we create some non-generatable types for which there is only a =types=
+facet, we may still want to create generatable types that make use of
+them. In this case, we would like Dogen to automatically disable all
+facets except for =types=. Also, if a type is non-generatable, all
+facets should be automatically disabled and its up to the user to
+enable the ones he is interested in manually.
+
 *** Serialisable and ioable exceptions                                :story:
 
 At present we only generate the types facet for exceptions. However,
