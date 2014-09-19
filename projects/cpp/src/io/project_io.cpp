@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen/cpp/io/cmakelists_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/odb_options_info_io.hpp"
 #include "dogen/cpp/io/project_io.hpp"
@@ -53,6 +54,36 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::entity>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::cpp::entity> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 
@@ -62,7 +93,8 @@ std::ostream& operator<<(std::ostream& s, const project& v) {
       << "\"files\": " << v.files() << ", "
       << "\"odb_options\": " << v.odb_options() << ", "
       << "\"src_cmakelists\": " << v.src_cmakelists() << ", "
-      << "\"include_cmakelists\": " << v.include_cmakelists()
+      << "\"include_cmakelists\": " << v.include_cmakelists() << ", "
+      << "\"entities\": " << v.entities()
       << " }";
     return(s);
 }

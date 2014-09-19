@@ -34,6 +34,7 @@
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
+#include "dogen/cpp/serialization/new_class_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
 

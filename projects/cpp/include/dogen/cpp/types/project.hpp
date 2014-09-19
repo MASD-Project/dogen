@@ -27,9 +27,11 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
 #include <list>
 #include "dogen/cpp/serialization/project_fwd_ser.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
+#include "dogen/cpp/types/entity_fwd.hpp"
 #include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/odb_options_info.hpp"
 
@@ -53,7 +55,8 @@ public:
         const std::list<dogen::cpp::file_info>& files,
         const dogen::cpp::odb_options_info& odb_options,
         const dogen::cpp::cmakelists_info& src_cmakelists,
-        const boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists);
+        const boost::optional<dogen::cpp::cmakelists_info>& include_cmakelists,
+        const std::list<boost::shared_ptr<dogen::cpp::entity> >& entities);
 
 private:
     template<typename Archive>
@@ -103,6 +106,16 @@ public:
     void include_cmakelists(const boost::optional<dogen::cpp::cmakelists_info>&& v);
     /**@}*/
 
+    /**
+     * @brief All entities in this project.
+     */
+    /**@{*/
+    const std::list<boost::shared_ptr<dogen::cpp::entity> >& entities() const;
+    std::list<boost::shared_ptr<dogen::cpp::entity> >& entities();
+    void entities(const std::list<boost::shared_ptr<dogen::cpp::entity> >& v);
+    void entities(const std::list<boost::shared_ptr<dogen::cpp::entity> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const project& rhs) const;
     bool operator!=(const project& rhs) const {
@@ -118,6 +131,7 @@ private:
     dogen::cpp::odb_options_info odb_options_;
     dogen::cpp::cmakelists_info src_cmakelists_;
     boost::optional<dogen::cpp::cmakelists_info> include_cmakelists_;
+    std::list<boost::shared_ptr<dogen::cpp::entity> > entities_;
 };
 
 } }

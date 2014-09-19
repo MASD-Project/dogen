@@ -31,6 +31,7 @@
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
+#include "dogen/cpp/serialization/new_class_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
@@ -47,6 +48,7 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::cpp::enum_info>();
     ar.template register_type<dogen::cpp::exception_info>();
     ar.template register_type<dogen::cpp::namespace_info>();
+    ar.template register_type<dogen::cpp::new_class_info>();
     ar.template register_type<dogen::cpp::registrar_info>();
     ar.template register_type<dogen::cpp::visitor_info>();
 }

@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/test_data/cmakelists_info_td.hpp"
+#include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/project_td.hpp"
@@ -55,6 +56,26 @@ create_boost_optional_dogen_cpp_cmakelists_info(unsigned int position) {
     return r;
 }
 
+dogen::cpp::entity*
+create_dogen_cpp_entity_ptr(const unsigned int position) {
+    return dogen::cpp::entity_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::cpp::entity>
+create_boost_shared_ptr_dogen_cpp_entity(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::entity> r(
+        create_dogen_cpp_entity_ptr(position));
+    return r;
+}
+
+std::list<boost::shared_ptr<dogen::cpp::entity> > create_std_list_boost_shared_ptr_dogen_cpp_entity_(unsigned int position) {
+    std::list<boost::shared_ptr<dogen::cpp::entity> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_boost_shared_ptr_dogen_cpp_entity(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -68,6 +89,7 @@ populate(const unsigned int position, result_type& v) {
     v.odb_options(create_dogen_cpp_odb_options_info(position + 1));
     v.src_cmakelists(create_dogen_cpp_cmakelists_info(position + 2));
     v.include_cmakelists(create_boost_optional_dogen_cpp_cmakelists_info(position + 3));
+    v.entities(create_std_list_boost_shared_ptr_dogen_cpp_entity_(position + 4));
 }
 
 project_generator::result_type

@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-19 Fri 23:34]
+Clock summary at [2014-09-20 Sat 00:51]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *33:03* |       |      |
+| *Total time*                                                     | *33:33* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 33:03 |      |
+| Development Stories Implemented                                  |         | 33:33 |      |
 | IMPLEMENTATION Sprint and product backlog grooming               |         |       | 1:56 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:46 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
@@ -36,7 +36,7 @@ Clock summary at [2014-09-19 Fri 23:34]
 | COMPLETED Populate containing module in JSON hydrator            |         |       | 3:42 |
 | COMPLETED C++ formatters use of =headers_for_facet_=             |         |       | 0:05 |
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
-| IMPLEMENTATION Merge C++ models                                  |         |       | 5:35 |
+| COMPLETED Merge C++ models                                       |         |       | 6:05 |
 | IMPLEMENTATION Implement the enricher interface in the CPP model |         |       | 0:51 |
 #+end:
 
@@ -394,7 +394,10 @@ variable. Probably a remnant from some old refactoring.
 We should follow the SML pattern across other domain models and create
 a specific namespace for all the meta-data related classes.
 
-*** IMPLEMENTATION Merge C++ models                                   :story:
+*** COMPLETED Merge C++ models                                        :story:
+    CLOSED: [2014-09-20 Sat 00:48]
+    CLOCK: [2014-09-20 Sat 00:48]--[2014-09-20 Sat 00:51] =>  0:03
+    CLOCK: [2014-09-20 Sat 00:30]--[2014-09-20 Sat 00:42] =>  0:12
     CLOCK: [2014-09-20 Sat 00:15]--[2014-09-20 Sat 00:30] =>  0:15
     CLOCK: [2014-09-19 Fri 22:01]--[2014-09-19 Fri 23:33] =>  1:32
     CLOCK: [2014-09-19 Fri 18:36]--[2014-09-19 Fri 19:25] =>  0:49
