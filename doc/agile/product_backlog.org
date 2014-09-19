@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Serialisable and ioable exceptions                                :story:
+
+At present we only generate the types facet for exceptions. However,
+there is nothing stopping us from adding serialisation support for
+exceptions. This would be useful for example for services to convey
+errors on the remote end point. The same logic applies to io.
+
 *** Add support for ignoring types                                    :story:
 
 Sometimes when changing a diagram it may be useful to set some types
