@@ -14,13 +14,13 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-20 Sat 00:51]
+Clock summary at [2014-09-20 Sat 02:13]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *33:33* |       |      |
+| *Total time*                                                     | *34:50* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 33:33 |      |
+| Development Stories Implemented                                  |         | 34:50 |      |
 | IMPLEMENTATION Sprint and product backlog grooming               |         |       | 1:56 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:46 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
@@ -37,7 +37,7 @@ Clock summary at [2014-09-20 Sat 00:51]
 | COMPLETED C++ formatters use of =headers_for_facet_=             |         |       | 0:05 |
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
 | COMPLETED Merge C++ models                                       |         |       | 6:05 |
-| IMPLEMENTATION Implement the enricher interface in the CPP model |         |       | 0:51 |
+| COMPLETED Implement the backend enricher interface in cpp        |         |       | 2:08 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -422,7 +422,9 @@ In addition, we should create namespaces:
   code for the types facet and so on. This may be a bit messy in terms
   of the diagram but it will make the code a lot cleaner.
 
-*** IMPLEMENTATION Implement the enricher interface in the CPP model  :story:
+*** COMPLETED Implement the backend enricher interface in cpp         :story:
+    CLOSED: [2014-09-20 Sat 02:11]
+    CLOCK: [2014-09-20 Sat 00:52]--[2014-09-20 Sat 02:09] =>  1:17
     CLOCK: [2014-09-17 Wed 22:51]--[2014-09-17 Wed 23:01] =>  0:10
     CLOCK: [2014-09-17 Wed 17:58]--[2014-09-17 Wed 18:36] =>  0:38
     CLOCK: [2014-09-17 Wed 08:22]--[2014-09-17 Wed 08:25] =>  0:03
@@ -442,7 +444,8 @@ We should consider if we should declare the formatters this way too,
 since they may depend on each other. This would be in the formatters
 model.
 
-*** Create =includers_info= and =forward_declarations_info=           :story:
+*** COMPLETED Create =includers_info= and =forward_declarations_info= :story:
+    CLOSED: [2014-09-20 Sat 02:12]
 
 We should make sure the type system represents all the inputs to
 formatters. Create these types and update their formatters,

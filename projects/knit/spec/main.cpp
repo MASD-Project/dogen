@@ -25,6 +25,7 @@
 #include <boost/test/unit_test_monitor.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/formatters/types/static_initializer.hpp"
+#include "dogen/cpp/types/static_initializer.hpp"
 
 namespace  {
 
@@ -45,6 +46,7 @@ struct exception_fixture {
 struct initializer {
     initializer() {
         dogen::formatters::static_initializer::initialize();
+        dogen::cpp::static_initializer::initialize();
     }
 };
 

@@ -28,6 +28,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("sml.meta_data.registrar"));
 
+const std::string root_enricher_registerd_more_than_once(
+    "Root enricher was registered more than once");
 const std::string null_root_enricher("Root enricher is null");
 const std::string null_ordinary_enricher("Ordinary enricher is null");
 
@@ -63,6 +65,11 @@ void registrar::validate() const {
 }
 
 void registrar::register_root_enricher(std::shared_ptr<enricher_interface> e) {
+    if (root_enricher_) {
+        // not logging by design as logger is not yet setup.
+        BOOST_THROW_EXCEPTION(
+            registrar_error(root_enricher_registerd_more_than_once));
+    }
     root_enricher_ = e;
 }
 
