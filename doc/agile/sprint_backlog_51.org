@@ -14,14 +14,14 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-20 Sat 02:14]
+Clock summary at [2014-09-21 Sun 13:24]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *34:50* |       |      |
+| *Total time*                                                     | *36:46* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 34:50 |      |
-| IMPLEMENTATION Sprint and product backlog grooming               |         |       | 1:56 |
+| Development Stories Implemented                                  |         | 36:46 |      |
+| IMPLEMENTATION Sprint and product backlog grooming               |         |       | 2:00 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:46 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
 | COMPLETED Create a sub-system for meta-data                      |         |       | 3:46 |
@@ -38,6 +38,7 @@ Clock summary at [2014-09-20 Sat 02:14]
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
 | COMPLETED Merge C++ models                                       |         |       | 6:05 |
 | COMPLETED Implement the backend enricher in cpp                  |         |       | 2:08 |
+| IMPLEMENTATION Analyse use cases for meta-data                   |         |       | 1:52 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -451,6 +452,59 @@ model.
 We should make sure the type system represents all the inputs to
 formatters. Create these types and update their formatters,
 transformer etc.
+
+*** IMPLEMENTATION Analyse use cases for meta-data                    :story:
+    CLOCK: [2014-09-21 Sun 12:06]--[2014-09-21 Sun 12:09] =>  0:03
+    CLOCK: [2014-09-21 Sun 11:40]--[2014-09-21 Sun 11:46] =>  0:06
+    CLOCK: [2014-09-21 Sun 11:21]--[2014-09-21 Sun 11:30] =>  0:09
+    CLOCK: [2014-09-21 Sun 10:34]--[2014-09-21 Sun 11:01] =>  0:27
+    CLOCK: [2014-09-20 Sat 20:33]--[2014-09-20 Sat 21:40] =>  1:07
+
+The meta-data sub-system is becoming awfully complicated. The main
+reason why seems to be that we have a lot of hypothetical use cases
+rather than the actual use cases we are supposed to solve. In order to
+make life easier, this story will list all of the real use cases we
+have and we can then look for the simplest solution that satisfies
+these.
+
+- *annotation settings*: licence, copyright owner, etc. The main use
+  case is that each model may have an associated licence and one or
+  more copyright owners. The subsidiary use case is that a given
+  module or file may have a separate copyright owner. This is really
+  only a problem when we support merging. For now a simple solution
+  that allows setting these properties in the model module is
+  sufficient. So the requirement on the meta-data is that the users
+  should be able to set this in the model module, and should not be
+  able to set it up anywhere else. We could simply locate the model
+  module, produce the strongly typed version of the meta-data using
+  the formatter settings factory and attach it to the workflow. It can
+  then supply it to the formatters. No copying across modules/entities
+  is required.
+- *backend settings*: For now as we only have a single backend it must
+  always be enabled. However, in the future, when we have multiple
+  backends, users will most likely only want one out of a set of
+  backends. It is not very likely that C# users will always want to
+  generate C++ code and so on. For this we need a setting at the model
+  module level that enables/disables a backend. There are other
+  properties at the backend level that can be set. For example, for
+  C++: the header and implementation extensions, whether the project
+  is split, the source and include directory, if facet folders are
+  enabled, if unique file names are enabled, etc. As with annotation
+  settings, this should only be done at the model module level, and
+  nowhere else.
+- *facet settings*: the most obvious case is the enabling and
+  disabling of facets. This must take into account facet dependencies
+  and mandatory facets. For example, disabling types is not
+  possible. No facet depends on another facet other than types at
+  present, but they do need to know which facets are enabled for the
+  cases where there is cross-facet interference (e.g. if serialisation
+  is not enabled, types should not have forward declarations related
+  to it, etc). In addition, users may want to override the name of the
+  folders for the facet the post-fix used if unique file names are
+  on. It also seems these settings should only be set at the model
+  module level, and nowhere else.
+- *formatter settings*: some formatters can be disabled
+
 
 *** Implement the types enricher in cpp                               :story:
 
