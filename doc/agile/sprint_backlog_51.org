@@ -1,7 +1,10 @@
 #+title: Sprint Backlog 51
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED POSTPONED
-#+tags: story(s) epic(e) task(t) note(n) spike(p)
+#+tags: { story(s) epic(e) task(t) note(n) spike(p) }
+#+tags: { refactor(r) bug(b) feature(f) vision(v) }
+#+tags: { meta_data(m) tests(a) formatters(d) packaging(q) media(h) build(u) validation(x) diagrams(w) }
+#+tags: dia(y) sml(l) cpp(k) config(o)
 
 * Stories
 
@@ -14,14 +17,14 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-21 Sun 13:24]
+Clock summary at [2014-09-21 Sun 18:41]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *36:46* |       |      |
+| *Total time*                                                     | *41:28* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 36:46 |      |
-| IMPLEMENTATION Sprint and product backlog grooming               |         |       | 2:00 |
+| Development Stories Implemented                                  |         | 41:28 |      |
+| IMPLEMENTATION Sprint and product backlog grooming               |         |       | 6:10 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:46 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
 | COMPLETED Create a sub-system for meta-data                      |         |       | 3:46 |
@@ -38,10 +41,12 @@ Clock summary at [2014-09-21 Sun 13:24]
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
 | COMPLETED Merge C++ models                                       |         |       | 6:05 |
 | COMPLETED Implement the backend enricher in cpp                  |         |       | 2:08 |
-| IMPLEMENTATION Analyse use cases for meta-data                   |         |       | 1:52 |
+| IMPLEMENTATION Analyse use cases for meta-data                   |         |       | 2:24 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-21 Sun 15:10]--[2014-09-21 Sun 18:40] =>  3:30
+    CLOCK: [2014-09-21 Sun 14:29]--[2014-09-21 Sun 15:09] =>  0:40
     CLOCK: [2014-09-20 Sat 02:11]--[2014-09-20 Sat 02:15] =>  0:04
     CLOCK: [2014-09-17 Wed 08:03]--[2014-09-17 Wed 08:21] =>  0:18
     CLOCK: [2014-09-15 Mon 07:51]--[2014-09-15 Mon 08:04] =>  0:13
@@ -453,6 +458,38 @@ We should make sure the type system represents all the inputs to
 formatters. Create these types and update their formatters,
 transformer etc.
 
+*** COMPLETED Create formatter interfaces for each concrete entity type :task:refactor:formatters:cpp:
+    CLOSED: [2014-09-21 Sun 16:15]
+
+Formatters should have a single format method that takes a concrete
+entity, formatting settings and knitting settings. It returns a file.
+
+**** Remove =file_formatter_interface=
+
+Update all C++ formatters to use specific types:
+
+- remove factory; update workflow to call formatters directly
+- remove file formatter interface
+- formatters to have format() for each specific supported entity,
+  overloaded as required
+
+**** Update formatters to output =formatters::file=
+
+Instead of passing in a stream, we just want to return a file.
+
+**** Update formatters to take settings and entity as input
+
+We want the formatters to be stateless - well at least as far as
+mutating state goes - so that we can run them in parallel. We also
+want them to have no constructor arguments so we can register them. To
+do so we need to pass in both knitting and formatting settings to
+=format= as well as the entity.
+
+**** Get formatters to register themselves with workflow
+
+Copy the code from the deleted registration files. Formatters should
+register against a content descriptor.
+
 *** IMPLEMENTATION Analyse use cases for meta-data                    :story:
     CLOCK: [2014-09-21 Sun 13:55]--[2014-09-21 Sun 14:27] =>  0:32
     CLOCK: [2014-09-21 Sun 12:06]--[2014-09-21 Sun 12:09] =>  0:03
@@ -543,3 +580,32 @@ Stories that do not make sense any longer.
 
 With this a formatter can now rely only on entities rather than
 requiring a file.
+
+*** CANCELLED Meta-data transformation in formatters                  :story:
+    CLOSED: [2014-09-21 Sun 16:10]
+
+#+begin_quote
+*Rationale*: this will be done with the new approach.
+#+end_quote
+
+Once we reach the formatters with the complete set of meta-data
+(e.g. after population), we should be able to do a final
+transformation before formatting. This would make the formatter code
+much easier and type safe, instead of querying the ptree directly. And
+since it would live in the C++ formatters model, we could share code
+between formatters.
+
+*** CANCELLED Implement the file formatter interface in types formatter :story:
+    CLOSED: [2014-09-21 Sun 17:14]
+
+Move across this formatter to the new way of doing things.
+
+We need to cast the formatter entity to a C++ entity and dispatch it
+using the type visitor. We also need to add registration support.
+
+We also need to generate the following within the formatter:
+
+- file name
+- header guards
+- formatter specific includes
+- includes
