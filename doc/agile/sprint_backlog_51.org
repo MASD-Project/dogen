@@ -17,14 +17,14 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-21 Sun 18:41]
+Clock summary at [2014-09-21 Sun 20:56]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *41:28* |       |      |
+| *Total time*                                                     | *43:12* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 41:28 |      |
-| IMPLEMENTATION Sprint and product backlog grooming               |         |       | 6:10 |
+| Development Stories Implemented                                  |         | 43:12 |      |
+| IMPLEMENTATION Sprint and product backlog grooming               |         |       | 7:54 |
 | IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:46 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
 | COMPLETED Create a sub-system for meta-data                      |         |       | 3:46 |
@@ -45,6 +45,11 @@ Clock summary at [2014-09-21 Sun 18:41]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-21 Sun 20:40]--[2014-09-21 Sun 20:46] =>  0:06
+    CLOCK: [2014-09-21 Sun 20:34]--[2014-09-21 Sun 20:37] =>  0:03
+    CLOCK: [2014-09-21 Sun 19:58]--[2014-09-21 Sun 20:30] =>  0:32
+    CLOCK: [2014-09-21 Sun 18:54]--[2014-09-21 Sun 19:51] =>  0:57
+    CLOCK: [2014-09-21 Sun 18:48]--[2014-09-21 Sun 18:54] =>  0:06
     CLOCK: [2014-09-21 Sun 15:10]--[2014-09-21 Sun 18:40] =>  3:30
     CLOCK: [2014-09-21 Sun 14:29]--[2014-09-21 Sun 15:09] =>  0:40
     CLOCK: [2014-09-20 Sat 02:11]--[2014-09-20 Sat 02:15] =>  0:04

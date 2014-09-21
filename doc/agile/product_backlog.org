@@ -2241,7 +2241,7 @@ A first step for this would be to have a language enumeration in SML
 which is a property of the model, and one entry of which is "language
 agnostic".
 
-*** Forward declaration is not always correct for services            :story:
+*** Forward declaration is not always correct for services         :task:bug:
 
 In cases where we used a service as a way of declaring a stand alone
 function (such as the traversals in SML), the forward declarations do
@@ -2249,18 +2249,24 @@ not match the header file at all. In this cases we should use
 =nongeneratable= rather than =service= stereotypes, and perhaps when
 that happens we should switch off forward declarations?
 
-*** Add tests for tagging of modules, primitves and enumerations      :story:
+*** Add tests for tagging of modules, primitves and enumerations :task:tests:
 
 We've tested abstract objects et al quite a lot but forgotten the
 other aspects of the model.
 
-*** Add tests for all permutations of the domain formatter            :story:
+*** Add tests for all permutations of the domain formatter       :task:tests:
 
 _All_ may be too strong a word as there quite a few. We need good
 coverage around the combinations one can do within the domain
 formatter.
 
-*** Add getter and setter prefixes                                    :story:
+*** Add getter and setter prefixes                            :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to change the default getter and
+setter conventions so that I can integrate my code with
+dogen-generated code.
+#+end_quote
 
 External users may have getter and setter prefix conventions such as
 =set_prop= or =SetProp=. It would be nice if we could pass in a
@@ -2270,14 +2276,14 @@ the diagram, e.g. =--getter-prefix=set_=.
 We should check what ODB has done for this and implement the same
 pattern.
 
-*** Formatters should cache qname formatting                          :story:
+*** Formatters should cache qname formatting       :task:refactor:formatters:
 
 We seem to re-format the same qname lots of times. We should just use
 a =std::ostringstream= to format once and reuse the resulting
 string. Probably worth doing this change after the performance tests
 are in.
 
-*** Split floating point stream settings from double                  :story:
+*** Split floating point stream settings from double          :task:refactor:
 
 We had a problem where the output of floating point numbers was being
 truncated due to scientific notation being used. A quick fix was to
@@ -2287,7 +2293,7 @@ distinguish between the two such that we only enable =bool= related
 settings when dealing with bools and floating point settings when
 dealing with =double= or =float=.
 
-*** Split is floating point like from int like in view model          :story:
+*** Split is floating point like from int like in view model  :task:refactor:
 
 At present we only have a single test data generator helper method for
 any numeric type: =is_int_like=. This works ok, but it means we are not
@@ -2298,11 +2304,11 @@ We need a =is_floating_point_like= method to be able to distinguish
 between them, and then the associated changes in the generators to
 create floating point numbers.
 
-*** System models set meta-type to =invalid=                          :story:
+*** System models set meta-type to =invalid=                       :task:bug:
 
 Something is not quite right on the resolution logic
 
-*** Improve the integration of dogen with dia                         :story:
+*** Improve the integration of dogen with dia                   :epic:vision:
 
 It would be great if the model generation in dia was slightly more
 interactive:
@@ -2320,7 +2326,12 @@ running the executable and parsing the command line output, it would
 make more sense to create a C interface that supports these specific
 use cases (and nothing else).
 
-*** Add support for qualified class names in dia                      :story:
+*** Add support for qualified class names in dia     :story:feature:frontend:
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to have to define packages in
+certain cases.
+#+end_quote
 
 It has become apparent that creating large packages in dia and placing
 all classes in a large package is cumbersome:
@@ -2340,13 +2351,13 @@ model. One would still have to define a large package, but it could be
 empty, or contain only the types which only have connections inside
 the package, plus comments for the package, etc.
 
-*** Convert all files in library into JSON                            :story:
+*** Convert all files in library into JSON                    :task:refactor:
 
 We started off by using the INI format, but then subsequently found it
 too inexpressive to be able to carry SML representations and started
 using JSON. However, modeline groups, etc are still in INI format.
 
-*** Consider model as a container of types                            :story:
+*** Consider model as a container of types                :task:refactor:sml:
 
 At present model is composed of objects, primitives, concepts,
 modules, etc. We could bring together all descendants of types into a
@@ -2356,7 +2367,7 @@ primitive types - these would become slower as we'd now be looking at
 the entire type collection. Need to look at all usages of these
 containers in the code to see if this would be a win or not.
 
-*** Consider adding YQL support                                       :story:
+*** Consider adding YQL support                                 :epic:vision:
 
 YQL offers a REST based API with lots of interesting information; an
 example of the information provided is available [[https://github.com/yql/yql-tables/blob/master/yahoo/finance/yahoo.finance.quant.xml][here]]. There should be
@@ -2368,7 +2379,13 @@ More generally, it would be great if dogen was able to create a domain
 model off of an XML schema. However, we already have the Code
 Synthesis [[http://www.codesynthesis.com/products/xsd/][XSD tool]] for that, so maybe this is just scope creep.
 
-*** Consider adding merging code generation support                   :story:
+*** Consider adding merging code generation support            :epic:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to manually change some code in
+generated files so that I can add functionality that is missing in
+dogen.
+#+end_quote
 
 At present it is not possible to manually add methods to a class that
 was code generated; one must stop code generating the class and
@@ -2410,7 +2427,12 @@ possible:
   populated automatically (e.g. grep for the manual attribute) or
   manually.
 
-*** Create includers for value objects only                           :story:
+*** Create includers for value objects only                   :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to include every object in a
+model when I use includers.
+#+end_quote
 
 At present we are using the facet includers in unit tests. This is not
 ideal because it means that every time we do a change in a service
@@ -2425,14 +2447,19 @@ inclusions:
 Perhaps we could have a second type of includer that only has value
 objects, etc.
 
-*** Do not copy models in merger                                      :story:
+*** Do not copy models in merger                              :task:refactor:
 
 At present we are adding the partial models into the merger by copying
 them into an associative container. It would be nicer to avoid the
 copying as it adds no value. This should wait until we have a way to
 get performance numbers out.
 
-*** Adding linking libraries is not handled                           :story:
+*** Adding linking libraries is not handled                   :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to link against libraries without
+having to manually generate CMakeFiles.
+#+end_quote
 
 At present whenever a model requires additional link library targets
 we need to disable CMake generation and do it by hand. However:
@@ -2443,7 +2470,7 @@ we need to disable CMake generation and do it by hand. However:
 - for user level dependencies we should add meta-data tags at the
   model level.
 
-*** Test data generator does not detect cycles in object graph        :story:
+*** Test data generator does not detect cycles in object graph     :task:bug:
 
 At present we handle composition correctly, but not other forms of
 cycles in the object graph.
@@ -2467,13 +2494,13 @@ capacity to see the few elements in the stack. When a pattern emerges
 that involved types of a certain ID, they would stop creating any
 further associations.
 
-*** Split a fully formed model from partial models                    :story:
+*** Split a fully formed model from partial models            :task:refactor:
 
 We should really have two distinct types to represent the model that
 is returned from the dia to sml transformer from the model returned by
 the merger. Potentially this could be called =partial_model=.
 
-*** Create a =key_extractor= service                                  :story:
+*** Create a =key_extractor= service                          :task:refactor:
 
 We need a way to automatically extract a key for a =keyed_entity=.
 The right solution is to create a service to represent this
@@ -2482,7 +2509,7 @@ concept.
 Injector creates objects for these just like it does with keys; the
 C++ transformer intercepts them and generates the correct view models.
 
-*** Use explicit casting for versioned to unversioned conversions     :story:
+*** Use explicit casting for versioned to unversioned conversions :task:refactor:
 
 At present we have to_versioned; in reality this would be dealt much
 better using explicit casts:
@@ -2502,14 +2529,19 @@ It is not possible to use global cast operators so we need to
 introduce a dependency between versioned and unversioned keys in order
 for this to work.
 
-*** Consider not creating unversioned keys for single property        :story:
+*** Consider not creating unversioned keys for single property :task:refactor:
 
 If a key is made up of a single property, its a bit nonsensical to
 create an unversioned key. We should only generate the versioned
 key. However, it does make life easier. Wait for real world use cases
 to decide.
 
-*** Detect invalid child nodes                                        :story:
+*** Detect invalid child nodes                                :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know when there are invalid child
+nodes in diagram so that I can fix them.
+#+end_quote
 
 When copying a set of classes from a diagram, where these classes
 where contained in a package, dia seems to copy across the =childnode=
@@ -2521,7 +2553,7 @@ elements which can have children, and if not issue good error
 messages - perhaps even talking about the possible cause for the
 error.
 
-*** Add tests for SML workflow                                        :story:
+*** Add tests for SML workflow                               :task:tests:sml:
 
 We don't seem to have any. A few come to mind:
 
@@ -2530,7 +2562,7 @@ We don't seem to have any. A few come to mind:
 - multiple models get merged
 - system models get injected
 
-*** Rename nested qname to composite qname                            :story:
+*** Rename nested qname to composite qname                :task:refactor:sml:
 
 *New understanding*:
 
@@ -2548,7 +2580,7 @@ types.
 
 We should just follow the composite pattern in the naming.
 
-*** Injection framework                                               :story:
+*** Injection framework                                       :epic:refactor:
 
 We need a more generic way of handling system types injection into
 models. This is because there is a number of things that can be
@@ -2569,7 +2601,7 @@ So we need to:
   passed in.
 - in the IoC spirit, we should probably create a =injector_interface=.
 
-*** Register types for multiple models is misbehaving                 :story:
+*** Register types for multiple models is misbehaving              :task:bug:
 
 It seems that somehow we're clobbering the type registration of one
 model with another in register types. This is probably because we are
@@ -2582,13 +2614,13 @@ One solution for this problem would be to create serialisers which
 hide the machinery of serialisation internally; one should be able to
 just pass in a stream in and get a type out.
 
-*** Comments seem to be trimmed                                       :story:
+*** Comments seem to be trimmed                                    :task:bug:
 
 For some reason we seem to be munching any blank lines at the end of
 comments. We should only remove the lines with the well known dogen
 marker, all other lines should be left untouched.
 
-*** Type resolution in referenced models                              :story:
+*** Type resolution in referenced models                      :task:refactor:
 
 We did a hack a while ago whereby if a type is of a referenced model,
 we don't bother resolving it. As an optimisation this is probably
@@ -2607,7 +2639,12 @@ due to this are like so:
 : 2013-06-29 23:10:34.831294 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/sml/src/types/resolver.cpp(202): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname&) const
 : Dynamic exception type: boost::exception_detail::clone_impl<dogen::sml::resolution_error>
 
-*** Visitor adaptor for usage in ranges                               :story:
+*** Visitor adaptor for usage in ranges                       :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of visitor in ranges so
+that I generate code that follows the modern C++ approach.
+#+end_quote
 
 It would be great if we automatically generated an adaptor to visitors
 which could be plugged into a range. Internally the adaptor would
@@ -2615,15 +2652,19 @@ perform the accept on its =operator()=. We could also have an adaptor
 for a =std::pair= which would be templatised on the first member of
 the pair. Or should one just use a keys or values range iterator.
 
-*** Visitor with =std::function= for each =visit= method              :story:
+*** Visitor with =std::function= for each =visit= method      :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want an extensible visitor so that I don't
+have to manually generate one.
+#+end_quote
 
 It would be nice if the code generator created a visitor which has as
 its properties a set of =std::function= which match the signature of
 the visit functions; then the visit functions would just check that
 the functions have been assigned and call them. If not, throw.
 
-*** Check concept properties for identity                             :story:
-    CLOCK: [2013-06-24 Mon 22:33]--[2013-06-24 Mon 22:36] =>  0:03
+*** Check concept properties for identity                     :task:refactor:
 
 When we added concepts we didn't had a link to the processing of
 identity attributes. This means that if we get a property via modeling
@@ -2631,13 +2672,13 @@ a concept it is not processed and added to the keys.
 
 Update injector to follow concepts.
 
-*** Sort model dependencies                                           :story:
+*** Sort model dependencies                                   :task:refactor:
 
 It seems the order of registration of models has moved with recent
 builds of dogen (1418). Investigate if we sort the dependencies and if
 not, sort them.
 
-*** Use pimpl for a few "one-shot" services                           :story:
+*** Use pimpl for a few "one-shot" services                   :task:refactor:
 
 We have quite a few services where it would be great to have
 transactional semantics. For example, when building a graph in
@@ -2660,12 +2701,12 @@ not ideal. There are two options:
   does provide a sensible implementation. We used to do this inside
   the =.cpp= files but then they became too big to manage.
 
-*** Assignment operator should be protected in ABC                    :story:
+*** Assignment operator should be protected in ABC            :task:refactor:
 
 As per MEC 33. We should probably do the same for the move and copy
 constructors.
 
-*** SML models could have a model classification                      :story:
+*** SML models could have a model classification                :epic:vision:
 
 Consider creating an enumeration for model classification (e.g. type
 of the model):
@@ -2677,7 +2718,17 @@ of the model):
 
 This still requires a lot of analysis work around the DDD book.
 
-*** Change transformation code to use a type visitor                  :story:
+*Merged with modes of operation story:*
+
+Create "modes" of operation: relational, object-oriented and
+procedural. they limit the types available in SML. relational only
+allows primitives plus relational commands (FK and PK; FK is when
+using a model type, PK is a marker on a property). procedural only
+allows primitives plus model types. we will need pointer support for
+this. object oriented is the current mode. the modes are validated in
+the middle end.
+
+*** Change transformation code to use a type visitor          :task:refactor:
 
 Now we have a base type, we could probably simplify some of the
 transformation code:
@@ -2686,13 +2737,18 @@ transformation code:
 - sml to c++
 - potentially merger
 
-*** Test data generator with immutability looks wrong                 :story:
+*** Test data generator with immutability looks wrong              :task:bug:
 
 We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
 for this.
 
-*** Add support for boost concept                                     :story:
+*** Add support for boost concept                             :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to code-generate boost concepts so
+that I don't have to manually create them.
+#+end_quote
 
 Now dogen supports concepts, the natural thing to do is to express
 them in C++ code. This could easily be done using boost concept, or
@@ -2700,9 +2756,12 @@ the C++-14 concepts light.
 
 See [[http://www.boost.org/doc/libs/1_53_0/libs/concept_check/creating_concepts.htm][Creating Concepts]].
 
-*** Add support for boost and/or std tuple                            :story:
-    CLOCK: [2013-06-04 Tue 18:30]--[2013-06-04 Tue 18:32] =>  0:02
-    CLOCK: [2013-06-04 Tue 18:18]--[2013-06-04 Tue 18:27] =>  0:09
+*** Add support for boost and/or std tuple                    :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of tuples in dogen so
+that I don't have to manually generate code for types that use it.
+#+end_quote
 
 It would be nice to be able to use =std::tuple= and/or =boost::tuple=
 from dogen. The processing would be rather similar to containers. It
@@ -2718,7 +2777,12 @@ rather than
 Using =std::tuple= would mean we'd have to create our own serialisers
 for it most likely.
 
-*** Add support for posix_time_zone                                   :story:
+*** Add support for posix_time_zone                           :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of boost posix_time_zone
+so that I don't have to manually generate code for types that use it.
+#+end_quote
 
 At present we need to use std::string to convey time zone
 information. We should be able to use the time zones available in
@@ -2726,25 +2790,29 @@ boost date time library.
 
 See boost documentation: [[http://www.boost.org/doc/libs/1_53_0/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone][Posix Time Zone]]
 
-*** Add support for GtkBuilder / Glade XML files                       :epic:
+*** Add support for GtkBuilder / Glade XML files       :epic:vision:frontend:
 
 There is nothing stopping us from using a GtkBuilder / Glade XML file
 as an input, create some SML from it and then generate code which
 would do the boiler plate setup of the UI. With a bit more work one
 could potentially even generate the bindings for a presentation model.
 
-*** Consider renaming formatters                                      :story:
+*** Consider renaming formatters                              :task:refactor:
 
 These are not really formatters; not sure what the right name should
 be though; templates?
 
-*** Add support for object cloning                                    :story:
+*** Add support for object cloning                            :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to clone object state so
+that I don't have to do this manually.
+#+end_quote
 
 We should have a clone method which copy constructs all non-pointer
 types, and then creates new objects for pointer types.
 
-*** Remote method invocation                                          :story:
-    CLOCK: [2013-05-24 Fri 07:46]--[2013-05-24 Fri 08:13] =>  0:27
+*** Remote method invocation                                    :epic:vision:
 
 See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]],
 
@@ -2790,21 +2858,21 @@ Now we just need a way of creating some generic interfaces that take a
 wire client and a wire service and plug the framer and the dispatcher
 into it.
 
-*** Inserter for enumerations shouldn't throw                         :story:
+*** Inserter for enumerations shouldn't throw                      :task:bug:
 
 We only use the inserter for debug dumping and it could happen that we
 are about to write the message for an exception when we decide to
 throw. Instead we should just print unexpected/invalid value and cast
 it to a numeric value in brackets.
 
-*** Generate state diagrams                                           :story:
+*** Generate state diagrams                                     :epic:vision:
 
 There is nothing stopping us from reading the UML State Chart objects
 in Dia and generating an FSM off of it, using one (or both) of boost's
 state machines. We could make the state machine contain inheritable
 methods which could be overridden by the user manually.
 
-*** Generate service skeleton                                         :story:
+*** Generate service skeleton                                   :epic:vision:
 
 Since we already have all of the boiler plate code for services such
 as licence, header guards, etc - we could just create a service
@@ -2814,10 +2882,15 @@ declarations.
 In addition to the class definition, it should also define all of the
 automatic constructors, and add a private section at the bottom.
 
-*** Add versioning support                                            :story:
-    CLOCK: [2013-05-13 Mon 08:28]--[2013-05-13 Mon 08:37] =>  0:09
+*** Add versioning support                                    :story:feature:
 
-New understanding:
+#+begin_quote
+*Story*: As a dogen user, I want to make changes to diagrams in a
+backwards compatible way so that I can upgrade the users of my code
+incrementally.
+#+end_quote
+
+*New understanding*:
 
 - Add versioning support by adding versions at the object level and at
   the property level. Properties with 0 version will have no special
@@ -2901,7 +2974,13 @@ separate folders. This would allow the creation of "conversion" apps
 which take types for one version and transform them into the next
 version.
 
-*** Add support for boost parameter                                   :story:
+*** Add support for boost parameter                           :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of boost parameter so
+that I can generate classes with named parameters without having to
+manually create this code.
+#+end_quote
 
 It would be nice to have boost parameter support. [[http://www.boost.org/doc/libs/1_53_0/libs/parameter/doc/html/index.html#named-function-parameters][Documentation here]].
 
@@ -2911,7 +2990,12 @@ parameters. However since it seems one has to add a lot of boiler
 plate code, perhaps its better to have a create function on a separate
 header which internally calls the appropriate setters.
 
-*** Build shared objects instead of dynamic libraries                 :story:
+*** Build shared objects instead of dynamic libraries   :story:feature:build:
+
+#+begin_quote
+*Story*: As a dogen user, I want to generate models as shared objects
+so that I don't have to statically link models all the time.
+#+end_quote
 
 With the increase in tests build speeds have started to suffer,
 especially on low hardware. One potential way to mitigate this is to
@@ -2926,7 +3010,7 @@ build so that users are not forced to always build static / shared
 libraries. We should make sure one of the tests is using a static
 library to make sure this scenario doesn't get borked.
 
-*** Add comments to test model sanitizer                              :story:
+*** Add comments to test model sanitizer                      :task:refactor:
 
 We should explain why we decided to create a test model sanitizer
 instead of just adding specs to the test models themselves. The
@@ -2935,11 +3019,11 @@ rebaselining logic; we would either have to ignore specs on the diff
 or find a way to copy them after code generation. Both options are a
 bit of a hack. So instead we created a model with all the specs.
 
-*** Consider renaming dependencies to references in model             :story:
+*** Consider renaming dependencies to references in model     :task:refactor:
 
 Dependencies is a map of reference; why not call it references?
 
-*** IoC work                                                           :epic:
+*** IoC work                                                    :epic:vision:
 
 All stories related to IoC work are tracked here.
 
@@ -2975,12 +3059,19 @@ old understanding:
   interfaces for these classes and provide mocks for the tests. This
   would make the tests considerably smaller.
 
-*** Refactor node according to composite pattern in dia to sml        :story:
+*** Refactor node according to composite pattern in dia to sml :task:refactor:
 
 This is not required if we decide to [[*Add%20composite%20stereotype][implement]] the composite
 pattern. We should just follow the composite pattern.
 
-*** Create a validator in SML                                         :story:
+*** Create a validator in SML                     :story:refactor:validation:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know exactly why my diagram is not
+correct so that I can fix the issues. I also want dogen to pick up
+errors and generate valid code so that I don't have to figure out what
+went wrong by looking at the generated code and the compiler errors.
+#+end_quote
 
 We need a class responsible for checking the consistency of the SML
 model. There are several things we need to check for non-merged
@@ -3047,7 +3138,17 @@ Validator should provide contextual validation error messages:
 : in object 'my_object (Dia ID: O0)
 : property 'my_property' has empty name.
 
-*** Add composite stereotype                                          :story:
+*Merged with validator command line option:*
+
+It would be nice if one could just check if a dia diagram is valid for
+code generation, e.g. =--validate= or something along those lines.
+
+*** Add composite stereotype                                  :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to code generate composite objects so
+that I don't have to do it manually.
+#+end_quote
 
 It would be nice if one could just mark a object as =composite= and dogen
 automatically created the composite structure. As we only support
@@ -3056,7 +3157,12 @@ this (node, nested qname, etc).
 
 This would be part of the injection framework.
 
-*** Add support for bitsets                                           :story:
+*** Add support for bitsets                                   :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of bitsets in dogen so
+that I don't have to manually generate code for types that use it.
+#+end_quote
 
 We are using a lot of boolean variables in SML. In reality, these all
 could be implemented with =std::bitset=, plus an enumeration. One
@@ -3089,19 +3195,24 @@ Links:
 - [[http://www.java2s.com/Tutorial/Cpp/0360__bitset/Usebitsetwithenumtogether.htm][Use bitset with enum together]]
 - [[http://stackoverflow.com/questions/9857239/c11-and-17-5-2-1-3-bitmask-types][C++11 and {17.5.2.1.3} Bitmask Types]]
 
-*** Vistor is only supported at the base class level                  :story:
+*** Vistor is only supported at the base class level :task:refactor:validation:
 
 Due to implementation constraints, we only support visitable at the
 base class level. Add an exception if users attempt to use visitable
 stereotype in a class that has parents.
 
-*** Create an interface for the text reader                           :story:
+*** Create an interface for the text reader                   :task:refactor:
 
 In order to do performance testing of the dia model we should create
 an interface for text reader and implement it as a mock. This will
 avoid the overhead of reading stuff from the hard drive.
 
-*** Add string table support                                          :story:
+*** Add string table support                                  :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to code-generate "enumerations" of
+strings so that I don't have to create them manually.
+#+end_quote
 
 We need a way of creating "tables" of strings such as for example for
 listing all the valid values for dia field names, etc. We could
@@ -3113,7 +3224,13 @@ We should also add a validate method which checks to see if a string
 is a valid value according to the string table. We could have a case
 insensitive validate too.
 
-*** Enumeration string conversion could be configurable               :story:
+*** Enumeration string conversion could be configurable       :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to configure the input strings that
+get converted into enumerations so that I can adapt it to my
+requirements.
+#+end_quote
 
 It should be possible to pass in one or more string values as implementation
 specific parameters that tells dogen what valid values an enumerator
@@ -3122,14 +3239,23 @@ appropriate conversions.
 
 These should be passed in as implementation specific parameters.
 
-*** Enumeration string dumps could be configurable                    :story:
+*** Enumeration string dumps could be configurable            :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to output user defined strings from
+enumerations so that I can adapt it to my requirements..
+#+end_quote
 
 It should be possible to pass in a string value as an implementation
 specific parameter that tells dogen what string to use for debug
 dumping.
 
-*** Add is comparable to SML                                          :story:
-     CLOCK: [2013-05-10 Fri 07:48]--[2013-05-10 Fri 08:09] =>  0:21
+*** Add is comparable to SML                                  :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to define types as comparable so that
+I can use them in ordered containers.
+#+end_quote
 
 A object can have a stereotype of comparable. If so, then at least one
 property must be marked as comparable. Properties are marked as
@@ -3162,7 +3288,31 @@ If an object itself is marked as comparable, then it is equivalent to mark
 all properties as comparable using their relative position as the
 comparison order.
 
-*** Private and public includes                                       :story:
+*Merged with ordered containers story:*
+
+In order to provide support for ordered containers such as maps and
+sets we need to define =operator<=. However, it makes no sense to code
+generate this operator as its unlikely we'll get it right. We could
+assume the user wants to always sort by key, but that seems like a bad
+assumption. The alternatives are:
+
+- to expect a user-defined =entity_name_less_than.hpp= in domain. we'd
+  automatically ignore any files matching this patter so the user can
+  create them and not lose it. The problem with this approach is that
+  we may have different sort criteria. This is a good YAGNI start.
+- to provide the =Compare= parameter in the template and then expect a
+  user-defined =entity_name_Compare.hpp=. The same ignore
+  applies. This would allow users to provide any number of comparison
+  operations.
+
+Either approach requires [[Ignore%20files%20and%20folders%20based%20on%20regex][Ignore files and folders based on regex]].
+
+*** Private and public includes                               :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to hide some internal types from
+users so that I don't increase coupling for no reason.
+#+end_quote
 
 NOTE: We should use the terms =internal= and =external= to avoid
 confusion with C++ scopes. This follows Microsoft terminology for C#
@@ -3199,7 +3349,7 @@ should improve build times.
   =workflow= will be private; this means we need some kind of factory
   to generate =workflow_interface=.
 
-*** Refactor boost and std helpers and enums                          :story:
+*** Refactor boost and std helpers and enums                  :task:refactor:
 
 We shouldn't really have std and boost enums. These are just a repeat
 of the SML models. We should have a find object by name in a model which
@@ -3214,7 +3364,12 @@ code. This could be done with a config file using boost property
 tree. However, one would need some kind of way of mapping types into
 primitives, sequence containers etc - some kind of "concepts".
 
-*** Type framing                                                      :story:
+*** Type framing                                              :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to send model types over the wire so
+that I can build networked applications.
+#+end_quote
 
 In places such as a cache or a socket, it may be useful to create a
 basic "frame" around serialised types. The minimum requirements for a
@@ -3225,20 +3380,35 @@ frame would be the payload - i.e. the serialised object.
 In order for this to work we probably need the concept of a "model
 group"; the type frame would be done for a group of models.
 
-*** Model and type enums                                              :story:
+*** Model and type enums                                      :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to use reflection on generated models
+so that I can do meta-programming.
+#+end_quote
 
 It may be useful to create enumerations for models, types and
 properties within objects. This would in the future form the basis of
 reflection. One could use implementation specific properties to set
 the model ID and objects IDs.
 
-*** Add pimpl support                                                 :story:
+*** Add pimpl support                                         :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to code generate PIMPL objects so
+that I don't have to do it manually.
+#+end_quote
 
 It may be useful to mark classes as pimpl and generate a private
 implementation. On the public header we could forward declare all
 types.
 
-*** Add C++-03 mode                                                   :story:
+*** Add C++-03 mode                                           :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create models in C++ 03 so that I
+can interface with legacy code.
+#+end_quote
 
 It shouldn't be too hard to generate C++-03 code in addition to
 C++-11. We could follow the gcc/odb convention and have a =-std=
@@ -3246,7 +3416,7 @@ option for this. The only problem would be testing - at present the
 language settings comes from PFH scripts, not cmake, and we'd have to
 make sure the compiler is not in C++-11 mode when compiling 03.
 
-*** Use dogen models to test dogen                                    :story:
+*** Use dogen models to test dogen                             :task:feature:
 
 We should really use the dogen models in the dogen unit tests. The
 rationale is as follows:
@@ -3262,25 +3432,36 @@ mean that some tests will fail until a feature is finished (or that
 the developer will have to continuously rebase the dogen models), but
 the advantages are important.
 
-*** Add a property for the model name as meta-data                    :story:
+*** Add a property for the model name as meta-data            :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user in a constrained environment, I am forced to
+use file names that are not suitable for a model name so that I need
+to supply an override somewhere else.
+#+end_quote
 
 It would be nice to be able to generate a model with a name other than
 the diagram file. We should have a command line option for this that
 overrides the default diagram name.
 
-*** Add camel case option                                             :story:
+*** Add camel case option                                     :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want my models to use camel case so that I
+can integrate dogen code with my code base.
+#+end_quote
 
 It would be nice to have a command line option that switches names
 from underscores into camel case. The default convention would be that
 diagrams are always with underscores and then you can convert them at
 generation time. There should be a regex for this conversion.
 
-*** Warn if value or entity has methods                               :story:
+*** Warn if value or entity has methods                     :task:validation:
 
 We should issue a warning if a user defines methods in value or entity
 objects as its most likely by mistake.
 
-*** Add diff support                                                  :story:
+*** Add diff support                                            :epic:vision:
 
 New understanding: just create a new facet call diff and make these
 classes generate a simple textual representation of differences,
@@ -3313,19 +3494,24 @@ reflection class and field.
 Diff support is injected into the model just like keys. It also
 requires that reflection support gets injected too.
 
-*** Container details in JSON dump                                    :story:
+*** Container details in JSON dump                            :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I would like to know how many elements
+containers have so that I don't have to count it manually.
+#+end_quote
 
 It would be nice to have the container type and size in the JSON
 output.
 
-*** Handling of include cmakelists in split projects is not correct   :story:
+*** Handling of include cmakelists in split projects is not correct :task:bug:
 
 At present we are only generating a cmakelists file for include
 folders on non-split projects. This means that the header files for
 split projects won't be packaged up. It also means that for ODB
 projects we won't get the ODB targets.
 
-*** Partial matching of primitives doesn't work for certain types     :story:
+*** Partial matching of primitives doesn't work for certain types  :task:bug:
 
 We introduced a fix that allows users to create types that partially
 match primitive types such as =in= or =integer=. The fix was copied
@@ -3341,7 +3527,13 @@ However, we still haven't solved the following cases:
 
 As these are not so common they have been left for later.
 
-*** Manual typedef generation                                         :story:
+*** Manual typedef generation                                 :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of manually generated
+typedefs in automated code so that I don't have to manually generate
+all code that makes use of these typedefs when when its trivial code.
+#+end_quote
 
 - We should be able to create a stereotype of =typedef group=. This is
   a object type with lots of attributes. The code generator will take
@@ -3360,7 +3552,12 @@ As these are not so common they have been left for later.
   getters, setters and property would then be declared with the
   typedef.
 
-*** Automatic typedef generation                                      :story:
+*** Automatic typedef generation                              :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want dogen to generate typedefs so that I
+don't have to create them manually.
+#+end_quote
 
 We should generate typedefs for all smart pointers, containers, etc -
 basically anything that has template arguments. This would make
@@ -3381,7 +3578,12 @@ We could also always generate a typedef for smart pointers in the
 class that uses the smart pointer, with a simple convention such as
 =attribute_value_ptr_type= or =shared_attribute_value_type=.
 
-*** Add support for iterable enumerations                             :story:
+*** Add support for iterable enumerations                     :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want enumerations to be iterable so that I
+don't have to manually create code to do this.
+#+end_quote
 
 We should create an additional aspect for each enumerations which
 creates a =std::array= with the enumerators (excluding invalid). This
@@ -3400,7 +3602,12 @@ enumeration groups. Out of the box we have:
 Users could then add implementation specific properties to create
 other groups if needed.
 
-*** Add support for user supplied test data sets                      :story:
+*** Add support for user supplied test data sets              :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of test data without
+having to manually add code for it.
+#+end_quote
 
 *New understanding*:
 
@@ -3463,7 +3670,7 @@ scattered around different places. They should all live under test
 data and be part of a test data set. The test data set should probably
 be the spec name.
 
-*** Add test to check if we are writing when file contents haven't changed :story:
+*** Add test to check if we are writing when file contents haven't changed :task:tests:
 
 We broke the code that detected changes and did not notice because we
 don't have any changes around it. A simple test would be to generate
@@ -3471,7 +3678,12 @@ code for a test model, read the timestamp of a file (or even all
 files), then regenerate the model and compare the timestamps. If there
 are changes, the test would fail.
 
-*** Add support for =std::function= in services                       :story:
+*** Add support for =std::function= in services               :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of =std::function= so
+that I don't have to manually generate code for types that use it.
+#+end_quote
 
 At present its not possible to declare an attribute of type
 =std::function= anywhere in a diagram. It won't really be possible to
@@ -3500,7 +3712,13 @@ This should be sufficient for services. At present we have a hack that
 allows functions without any template arguments, e.g. =std::function=,
 in services.
 
-*** Add support for references and pointers to types                  :story:
+*** Add support for references and pointers to types          :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of references and
+pointers so that I don't have to manually generate code for types that
+use it.
+#+end_quote
 
 At present its not possible to create a type that has a reference to
 another type. This should be a case of updating the parser to cope
@@ -3525,19 +3743,24 @@ make the parser more clever:
 We should try to create tests for all the cases we consider important
 and mark them as ignore until we can find a spirit expert to help out.
 
-*** Add support for default values                                    :story:
+*** Add support for default values                            :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to set default values for certain
+primitives so that I can model my domain more accurately.
+#+end_quote
 
 It would be nice to be able to add a default value in dia and have it
 set on the default constructor, if the type is a primitive or a =std::string=.
 
-*** Add support for interfaces                                        :story:
+*** Add support for interfaces                                  :epic:vision:
 
 This is a very blue-skies story. When dogen starts supporting service
 types it would be useful to generate a service interface from
 dogen. In order to do this we'd have to parse the method definitions
 in dia and use those to construct an abstract base class.
 
-*** Shared pointer to vector fails to build                           :story:
+*** Shared pointer to vector fails to build                        :task:bug:
 
 If one has a property with type
 =boost::shared_ptr<std::vector<std::string>>=, we get the following
@@ -3564,22 +3787,13 @@ vectors:
 :    return r;
 :}
 
-*** Strange logging behaviour in tests                                :story:
+*** Strange logging behaviour in tests                             :task:bug:
 
 As reported by JS for some reason if a test has a null pointer
 de-reference, the next test will log to both files. This means the
 logger is not being switched off properly in the presence of exceptions.
 
-*** Mix-and-match of manual projects                                  :story:
-
-With the ignore by regex feature its now possible to mix and match
-projects. However, dogen generates a makefile which does not include
-any manually generated projects. We need some intelligent logic in the
-src cmakefile that looks for other cmakefiles and adds them
-automatically in its =add_subdirectory=. This could be done by the
-CMake backend when that exists.
-
-*** Use error codes in exceptions                                     :story:
+*** Use error codes in exceptions                              :task:feature:
 
 Avoid breaking tests every time the exception text changes by creating
 a error code property in kitanda exceptions.
@@ -3599,7 +3813,7 @@ machinery of creating an exception with the right code, message etc?
 it could also be responsible for appending more content to an existing
 exception so that we'd have the tags all in one place.
 
-*** Generation of cache code                                          :story:
+*** Generation of cache code                                    :epic:vision:
 
 New understanding for this story:
 
@@ -3657,14 +3871,14 @@ Sample flow:
 - we need to re-read the coherence docs to clarify the roles of
   front/back cache, local/remote cache and near cache.
 
-*** Unordered map of user type in package fails                       :story:
+*** Unordered map of user type in package fails                    :task:bug:
 
 We seem to have a strange bug whereby creating a
 =std::unordered_map<E1,E2>= fails sanity checks if E1 is in a
 package. This appears to be some misunderstanding in namespacing
 rules.
 
-*** Create front-end interfaces                                       :story:
+*** Create front-end interfaces                               :task:refactor:
 
 - create a front end component that defines the front end inteface,
   has a factory that returns a front end based on an enum.
@@ -3673,17 +3887,7 @@ rules.
 - create the JSON front end.
 - engine should rely on the front-end factory.
 
-*** Consider adding "modes of operation"                              :story:
-
-Create "modes" of operation: relational, object-oriented and
-procedural. they limit the types available in SML. relational only
-allows primitives plus relational commands (FK and PK; FK is when
-using a model type, PK is a marker on a property). procedural only
-allows primitives plus model types. we will need pointer support for
-this. object oriented is the current mode. the modes are validated in
-the middle end.
-
-*** Adding new engine spec tests is hard                              :story:
+*** Adding new engine spec tests is hard                :task:refactor:tests:
 
 In order to test models at the engine level one needs to first
 generate the dia input. This can be done as follows:
@@ -3694,7 +3898,7 @@ generate the dia input. This can be done as follows:
 From the bin directory. We need to make these steps a bit more
 obvious. Why do we even need this?
 
-*** Naming of saved SML/Dia files is incorrect                        :story:
+*** Naming of saved SML/Dia files is incorrect                     :task:bug:
 
 For some random reason when we use dogen to save SML/Dia files the
 names look like this:
@@ -3709,7 +3913,7 @@ but our tests expect:
 
 This must be part of a refactoring that wasn't completed properly.
 
-*** Consider renaming specs to tests                                  :story:
+*** Consider renaming specs to tests                          :task:refactor:
 
 We started using the terminology specs to mean specifications because
 our unit tests follow the ideas outlined by Kevlin Henney. However, we
@@ -3724,7 +3928,12 @@ confusing every other developer. This would require:
 - we should also use =_tests= on the test suite name so we can do
   =using XYZ= without name clashes.
 
-*** Support for components and groups                                 :story:
+*** Support for components and groups                         :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I need to integrate the generated models
+with my existing packaging code.
+#+end_quote
 
 We recently added support for creating multiple packages from a single
 source tree. We need generated models to have a new top-level cmake file:
@@ -3742,7 +3951,13 @@ And the =src= cmake file:
 
 : install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
 
-*** Option to diff generated code                                     :story:
+*** Option to diff generated code                             :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what has changed with the
+next code generation so that I can evaluate if the changes are as
+expected or not.
+#+end_quote
 
 It would be useful to have an option that would do everything except
 writing the files to disk; instead, it would diff them with the
@@ -3752,12 +3967,7 @@ diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
-*** Option to validate diagram                                        :story:
-
-It would be nice if one could just check if a dia diagram is valid for
-code generation, e.g. =--validate= or something along those lines.
-
-*** Shared pointers to primitive types                                :story:
+*** Shared pointers to primitive types                             :task:bug:
 
 At present we do not support shared pointers to primitive types. This
 is because they require special handling in serialisation. See:
@@ -3777,14 +3987,19 @@ if there is a shared pointer to primitive; if there is, put in:
 :     ar & static_cast<int &>(ti);
 : }
 
-*** Full constructor parameter comments                               :story:
+*** Full constructor parameter comments                       :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want the complete constructor to be
+documented automatically so that I don't have to do it manually.
+#+end_quote
 
 We could use the comments in properties to populate the comments for
 the full constructor for each parameter. This would require taking the
 first line of the documentation of each property and then stitching
 them together for the full constructor.
 
-*** Serialisation support for C++-11 specific containers              :story:
+*** Serialisation support for C++-11 specific containers           :task:bug:
 
 We can't add =std::array= or =std::forward_list= because there is no
 serialisation support in boost 1.49. A mail was sent to the list to
@@ -3796,38 +4011,19 @@ However, it should be pretty trivial to generate serialisation code by
 hand at least for =std::array= or to use a solution similar to
 =std::unordered_map=.
 
-*** Support for ordered containers                                    :story:
-
-In order to provide support for ordered containers such as maps and
-sets we need to define =operator<=. However, it makes no sense to code
-generate this operator as its unlikely we'll get it right. We could
-assume the user wants to always sort by key, but that seems like a bad
-assumption. The alternatives are:
-
-- to expect a user-defined =entity_name_less_than.hpp= in domain. we'd
-  automatically ignore any files matching this patter so the user can
-  create them and not lose it. The problem with this approach is that
-  we may have different sort criteria. This is a good YAGNI start.
-- to provide the =Compare= parameter in the template and then expect a
-  user-defined =entity_name_Compare.hpp=. The same ignore
-  applies. This would allow users to provide any number of comparison
-  operations.
-
-Either approach requires [[Ignore%20files%20and%20folders%20based%20on%20regex][Ignore files and folders based on regex]].
-
-*** Rename =inserter_implementation=                                  :story:
+*** Rename =inserter_implementation=                          :task:refactor:
 
 We used =inserter_implementation= to provide all sorts of utility
 methods for IO. This class should really be named IO utility or
 something of the sort.
 
-*** Cross model referencing tests                                     :story:
+*** Cross model referencing tests                       :task:refactor:tests:
 
 At present we do not have any tests were a object in one model makes use
 of types defined in another model. This works fine but we should
 really have tests at the dogen level.
 
-*** Cross package referencing tests                                   :story:
+*** Cross package referencing tests                     :task:refactor:tests:
 
 Scenarios:
 
@@ -3846,7 +4042,12 @@ Scenarios:
 - object in package in package refers to object in package in package:
   pkg1::pkg2::A => pkg3::pkg4::B.
 
-*** Empty directories should be deleted                               :story:
+*** Empty directories should be deleted                       :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want empty directories to be removed so
+that I don't have to do it manually.
+#+end_quote
 
 When housekeeper finishes deleting all extra files, it should check
 all of the processed directories to see if they are empty. If they
@@ -3855,42 +4056,57 @@ are, it should delete the directory.
 We should probably have a command line option to control this
 behaviour.
 
-*** Header only models shall not generate projects                    :story:
+*** Header only models shall not generate projects            :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I want to generate models with just headers
+that do not result in full blown projects.
+#+end_quote
 
 A project with just exceptions does not need a make file, and fails to
 compile if a makefile is generated. We need a way to not generate a
 makefile if there are no implementation files generated.
 
-*** Empty features should not show up                                 :story:
+*** Empty features should not show up                              :task:bug:
 
 If there are no files for a feature, we should not generate includers
 and folders for that feature.
 
-*** Add support for configurable enumerations types                   :story:
+*** Add support for configurable enumerations types           :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I need to configure the primitive type of my
+enumerations so that I model my domain accurately.
+#+end_quote
 
 At present our enumerations always use unsigned int as the underlying
 type. It should be possible to override that from dia.
 
-*** Add test model for disabling XML                                  :story:
+*** Add test model for disabling XML                             :task:tests:
 
 At present we are not testing model generation with XML disabled.
 
-*** IO header could depend on domain forward decl                     :story:
+*** IO header could depend on domain forward decl             :task:refactor:
 
 At present we are depending on the domain header but it seems we could
 depend only on the forward declarations.
 
-*** Format doubles, floats and bools properly                         :story:
+*** Format doubles, floats and bools properly                 :task:refactor:
 
 At present we are using IO state savers but not actually setting the
 formatting on the stream depending on the primitive type.
 
-*** Add support for protected attributes                              :story:
+*** Add support for protected attributes                      :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I would like to define properties as
+ protected so that I only expose them to derived types.
+#+end_quote
 
 We need to distinguish between public and protected attributes when in
 the presence of inheritance. If not, issue a warning.
 
-*** Add tests for disconnected connections                            :story:
+*** Add tests for disconnected connections                       :task:tests:
 
 We should throw if a diagram has a disconnected inheritance or
 composition relationship.
@@ -3907,18 +4123,18 @@ has less than two connections is less than helpful:
 We should really try to detail which object ID failed, as well as
 details of the connected object if possible, etc.
 
-*** Add tests for duplicate identifiers in Dia                        :story:
+*** Add tests for duplicate identifiers in Dia                   :task:tests:
 
 Detect if a diagram defines the same class or package multiple
 times. Should throw an exception.
 
-*** Test model sanity checks fail for enable facet serialisation      :story:
+*** Test model sanity checks fail for enable facet serialisation :task:bug:tests:
 
 For some reason we are unable to compile the serialisation test for
 the test model which focuses only on the serialisation facet. Test is
 ignored for the moment.
 
-*** Handle unnamed models properly                                    :story:
+*** Handle unnamed models properly                                 :task:bug:
 
 The option disable model name was meant to allow the generation of
 flat models, without any folders or namespaces for the model
@@ -3932,7 +4148,7 @@ The correct solution for this is to have a flag (or flags) at the SML
 level which state whether to use the model name for folders, packages,
 etc. The view model generation will then take this into account.
 
-*** Add SQL support to Dogen                                           :epic:
+*** Add SQL support to Dogen                                    :epic:vision:
 **** Note on formatters                                                :note:
 
 - Use an attribute with the type to determine if we want only the ID of
@@ -3952,59 +4168,54 @@ Formatters:
 - drop all
 - create all
 
-**** Create SQL backend                                               :story:
-***** Create new backend                                               :task:
-***** Create new location manager                                      :task:
-***** Create aspect and facet types                                    :task:
-***** Create a view model for table and stored procedure               :task:
-***** Create a transformer from SML to view model                      :task:
-***** Add SQL command line options                                     :task:
-**** Add table support                                                :story:
-***** Create table formatter                                           :task:
-***** Drop table formatter                                             :task:
-***** Test formatters                                                  :task:
-
-**** Add load support                                                 :story:
-***** Create load formatter                                            :task:
-***** Drop load formatter                                              :task:
-***** Test formatters                                                  :task:
-
-**** Add save support                                                 :story:
-***** Create save formatter                                            :task:
-***** Drop save formatter                                              :task:
-***** Test formatters                                                  :task:
-
-**** Add delete support                                               :story:
-***** Create delete formatter                                          :task:
-***** Drop delete formatter                                            :task:
-***** Test formatters                                                  :task:
-
-**** Add test support                                                 :story:
-***** Create test formatter                                            :task:
-***** Drop test formatter                                              :task:
-***** Test formatters                                                  :task:
-
-**** Analyse deployment support on CMake                              :story:
+**** Create SQL backend
+***** Create new backend
+***** Create new location manager
+***** Create aspect and facet types
+***** Create a view model for table and stored procedure
+***** Create a transformer from SML to view model
+***** Add SQL command line options
+**** Add table support
+***** Create table formatter
+***** Drop table formatter
+***** Test formatters
+**** Add load support
+***** Create load formatter
+***** Drop load formatter
+***** Test formatters
+**** Add save support
+***** Create save formatter
+***** Drop save formatter
+***** Test formatters
+**** Add delete support
+***** Create delete formatter
+***** Drop delete formatter
+***** Test formatters
+**** Add test support
+***** Create test formatter
+***** Drop test formatter
+***** Test formatters
+**** Analyse deployment support on CMake
 
 Ideally, get a state of affairs that resebles something like this:
 
 - make deploy_database
 - make undeploy_database
 
-***** Review and fix existing targets                                  :task:
+***** Review and fix existing targets
 
 - Rename all =currency= targets to =prototype= targets
 - Ensure the targets have correct dependencies
 
-***** Add support for multiple databases                               :task:
+***** Add support for multiple databases
 
-**** Add database tests for generated code                            :story:
+**** Add database tests for generated code
 **** Test database deployment
 
 We need to setup a build that deploys all the SQL (tables, procs, etc)
 to a clean database, runs all SQL tests and un-deploys all the SQL.
 
-**** Setup a postgres url in cmake file                               :story:
+**** Setup a postgres url in cmake file
 
 The database password is set to trust. We should really have user
 passwords. To make things more secure we should also pass in the
@@ -4031,11 +4242,11 @@ There should be a way of passing in the database name as an
 environment variable into the makefile (not into the cmake as we want
 to be able to change databases without having to rebuild makefiles).
 
-*** Missing =enable_facet_XYZ= tests                                  :story:
+*** Missing =enable_facet_XYZ= tests                             :task:tests:
 
 - test data
 
-*** Log should use path for file names                                :story:
+*** Log should use path for file names                        :task:refactor:
 
 At present we are passing the log file name as a string and
 concatenating using "/". This is not very good for Windows. We should
@@ -4043,12 +4254,12 @@ use =boost::filesystem::path= throughout and do a =.string= at the
 very end if boost log does not support boost filesystem (or use the
 path directly if it does).
 
-*** Create model with invalid primitive type                          :story:
+*** Create model with invalid primitive type                     :task:tests:
 
 At present we are validating that all primitive types work but we
 don't check that an invalid type doesn't work.
 
-*** Private properties should be ignored                              :story:
+*** Private properties should be ignored                       :task:feature:
 
 At present we treat private properties as if they were public; we
 should ignore them. We need to go through all the models and change
@@ -4056,7 +4267,7 @@ the private ones to public before we do this.
 
 We should also log a warning.
 
-*** Sanity check packages automatically                                :epic:
+*** Sanity check packages automatically                         :epic:vision:
 
 This work is also covered by tasks in the PFH backlog so update
 accordingly. This task only refers to the dogen specific parts of the
@@ -4076,14 +4287,20 @@ task.
   on them. To start off with they may contain postgres so we can
   connect locally.
 
-*** Check if we've replaced =assert_object= with =assert_file=        :story:
+*** Check if we've replaced =assert_object= with =assert_file=   :task:tests:
 
 Assert file is now able to do intelligent comparisons based on the
 extension of the file. From a cursory look, all the usages we have of
 assert object can be replaced by assert file. If that's the case we
 can also remove this function.
 
-*** Exception classes should allow inheritance                        :story:
+*** Exception classes should allow inheritance                :story:feature:
+
+#+begin_quote
+*Story*: As a dogen user, I need to generate object graphs for my
+exception classes so that I can model my domain better.
+#+end_quote
+
 
 We need to have a form of inheriting from a base exception for a given
 model. We also need to be able to inherit from other exceptions in a
