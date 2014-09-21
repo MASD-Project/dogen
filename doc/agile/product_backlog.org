@@ -8,6 +8,90 @@
 
 Stories that we intend to look at, at some point.
 
+*** Implement the types enricher in cpp                               :story:
+
+Create the first and second stage enrichment for types. This is a good
+test to see if the overall logic is sound.
+
+*** Remove unnecessary properties from model                          :story:
+
+The model should be just dumb container of types. We have a few legacy
+properties left behind from the days where the model was also used in
+the transformation process. Remove all the concepts from the model
+(=Element= etc) and deal with the fall out. This is required in order
+to simplify the graph in enricher.
+
+*** Add cycle detection to grapher                                    :story:
+
+We need to move the cycle dectector code from dia to sml into
+utilities so that we can make use of it in the meta-data grapher.
+
+*** Remove dependency of writer on tags                               :story:
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
+*** All model items traversal should resolve types                    :story:
+
+This traversal was designed for tagger but yet it does not resolve
+=type= into one of the sub-classes, forcing tagger to implement
+visitation to resolve the types. We should improve the traversal.
+
+*** Delete tags class in SML                                          :story:
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
+*** Move flat name builder to CPP model                               :story:
+
+It seems this class is used only for tagging so we should have one in
+each model. It may even make more sense in the c++ formatters model.
+
+*** Remove all of the config settings that are in meta-data           :story:
+
+We have a number of settings in the =config= model that won't be used
+any longer:
+
+- =formatting_settings=
+- =annotation_settings=
+- =cpp_settings=
+- =code_generation_marker_settings=
+
+These should all be removed, with the corresponding command line
+arguments.
+
+*** Manually generate packages for previous sprint                    :story:
+
+We should manually generate packages for sprint 50 and upload them to
+Google drive. To do this we should log in to each build agent, git
+clone the repo from scratch, =git checkout= the tag and then do a full
+build. We should also upload the docs too. Ideally we should do this
+for all platforms.
+
+*** Create a demo of installing dogen and generating hello world      :story:
+
+We need to start creating a series of quick videos demoing dogen. The
+script for the first video of the series is as follows:
+
+- download packages from Google Drive and install them.
+- obtain the hello world model from git.
+- generate the hello world model.
+- create a hello world main with make files and compile it.
+- give a quick overview of the available facilities.
+
+*** Version number relies on latest commit in master                  :story:
+
+When trying to build off of a tag, we noticed that the version number
+is always of the latest commit in master. This means that trying to
+generate packages for tag =v0.50.2410= results in packages with a
+version after that like say =v0.50.2415=. We should look at the
+current commit in master rather than the latest one.
+
+*** Write next interesting instalment in blog                         :story:
+
+We have a number of links backlogged and we need to offload them in an
+"interesting..." post.
+
 *** Use of disabled facets in non-generatable types                   :story:
 
 It would be useful to set facets to disabled on non-generatable types,

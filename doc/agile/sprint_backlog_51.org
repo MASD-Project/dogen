@@ -454,6 +454,7 @@ formatters. Create these types and update their formatters,
 transformer etc.
 
 *** IMPLEMENTATION Analyse use cases for meta-data                    :story:
+    CLOCK: [2014-09-21 Sun 13:55]--[2014-09-21 Sun 14:27] =>  0:32
     CLOCK: [2014-09-21 Sun 12:06]--[2014-09-21 Sun 12:09] =>  0:03
     CLOCK: [2014-09-21 Sun 11:40]--[2014-09-21 Sun 11:46] =>  0:06
     CLOCK: [2014-09-21 Sun 11:21]--[2014-09-21 Sun 11:30] =>  0:09
@@ -503,92 +504,33 @@ these.
   folders for the facet the post-fix used if unique file names are
   on. It also seems these settings should only be set at the model
   module level, and nowhere else.
-- *formatter settings*: some formatters can be disabled
+- *formatter settings*: some formatters can be disabled independently
+  of the facet: includers and forward declarations mainly. however,
+  the main header and implementation cannot be disabled - one must
+  disable the whole facet. The facet has no meaning without these. In
+  addition we also need to know the file name for inclusion
+  purposes. In a simplified world, these are for each facet since we
+  only include the header file. However, to be strictly correct, one
+  would need these per formatter: main header file, includer, visitor,
+  forward declaration and so on. We never need the main implementation
+  file. We also need to know if the include is for a system type. All
+  of these settings only make sense at the entity level.
 
+In addition to these real requirements for the meta-data subsystem, we
+have also conflated other internal requirements:
 
-*** Implement the types enricher in cpp                               :story:
+- there are class-level properties that are inferred from SML: whether
+  constructors are enabled, etc. They must be supplied for each
+  entity, but we cannot have different values for each facet.
+- we need to name files: in order to generate these names we need
+  access to facet-level and backend-level settings. The names
+  themselves are entity properties, and must be supplied for each
+  formatter.
+- we need to compute the include files from the SML relationships for
+  each formatter. These are entity properties for each formatter.
 
-Create the first and second stage enrichment for types. This is a good
-test to see if the overall logic is sound.
-
-*** Remove unnecessary properties from model                          :story:
-
-The model should be just dumb container of types. We have a few legacy
-properties left behind from the days where the model was also used in
-the transformation process. Remove all the concepts from the model
-(=Element= etc) and deal with the fall out. This is required in order
-to simplify the graph in enricher.
-
-*** Add cycle detection to grapher                                    :story:
-
-We need to move the cycle dectector code from dia to sml into
-utilities so that we can make use of it in the meta-data grapher.
-
-*** Remove dependency of writer on tags                               :story:
-
-We seem to be using the tags to detect containers. We need to get rid
-of this dependency.
-
-*** All model items traversal should resolve types                    :story:
-
-This traversal was designed for tagger but yet it does not resolve
-=type= into one of the sub-classes, forcing tagger to implement
-visitation to resolve the types. We should improve the traversal.
-
-*** Delete tags class in SML                                          :story:
-
-This class does not make sense any more as each model will be
-responsible for their own tags.
-
-*** Move flat name builder to CPP model                               :story:
-
-It seems this class is used only for tagging so we should have one in
-each model. It may even make more sense in the c++ formatters model.
-
-*** Remove all of the config settings that are in meta-data           :story:
-
-We have a number of settings in the =config= model that won't be used
-any longer:
-
-- =formatting_settings=
-- =annotation_settings=
-- =cpp_settings=
-- =code_generation_marker_settings=
-
-These should all be removed, with the corresponding command line
-arguments.
-
-*** Manually generate packages for previous sprint                    :story:
-
-We should manually generate packages for sprint 50 and upload them to
-Google drive. To do this we should log in to each build agent, git
-clone the repo from scratch, =git checkout= the tag and then do a full
-build. We should also upload the docs too. Ideally we should do this
-for all platforms.
-
-*** Create a demo of installing dogen and generating hello world      :story:
-
-We need to start creating a series of quick videos demoing dogen. The
-script for the first video of the series is as follows:
-
-- download packages from Google Drive and install them.
-- obtain the hello world model from git.
-- generate the hello world model.
-- create a hello world main with make files and compile it.
-- give a quick overview of the available facilities.
-
-*** Version number relies on latest commit in master                  :story:
-
-When trying to build off of a tag, we noticed that the version number
-is always of the latest commit in master. This means that trying to
-generate packages for tag =v0.50.2410= results in packages with a
-version after that like say =v0.50.2415=. We should look at the
-current commit in master rather than the latest one.
-
-*** Write next interesting instalment in blog                         :story:
-
-We have a number of links backlogged and we need to offload them in an
-"interesting..." post.
+All of these can be transported in meta-data but only make sense in
+entities and do not require any propagation.
 
 ** Deprecated Development Stories
 
