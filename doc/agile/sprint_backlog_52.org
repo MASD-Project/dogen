@@ -1,0 +1,37 @@
+#+title: Sprint Backlog 52
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) task(t) note(n) spike(p) }
+#+tags: { refactor(r) bug(b) feature(f) vision(v) }
+#+tags: { meta_data(m) tests(a) packaging(q) media(h) build(u) validation(x) diagrams(w) frontend(c) backend(g) }
+#+tags: dia(y) sml(l) cpp(k) config(o) formatters(d)
+
+* Stories
+
+This file contains all stories that were closed during sprint 51.
+
+The *Mission Statement* for this sprint is to implement the core of
+the meta-data processing, in both SML and the formatters. We also want
+to improve the communication with the outside world.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-09-22 Mon 08:27]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
+
+*** Sprint and product backlog grooming                                :task:
+
+Updates to sprint and product backlog.
+
+*** Updates to the manual and readme files                             :task:
+
+Use downtime to update the manual and / or readme file.
+
+** Deprecated Development Stories
+
+Stories that do not make sense any longer.
