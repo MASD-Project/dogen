@@ -17,15 +17,15 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-21 Sun 20:56]
+Clock summary at [2014-09-22 Mon 08:20]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                     | *43:12* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                                  |         | 43:12 |      |
-| IMPLEMENTATION Sprint and product backlog grooming               |         |       | 7:54 |
-| IMPLEMENTATION Updates to the manual and readme files            |         |       | 1:46 |
+| COMPLETED Sprint and product backlog grooming                    |         |       | 7:54 |
+| COMPLETED Updates to the manual and readme files                 |         |       | 1:46 |
 | COMPLETED Fix windows continuous build                           |         |       | 0:22 |
 | COMPLETED Create a sub-system for meta-data                      |         |       | 3:46 |
 | COMPLETED Add static registration to meta-data workflow          |         |       | 0:19 |
@@ -41,10 +41,11 @@ Clock summary at [2014-09-21 Sun 20:56]
 | COMPLETED Move formatters meta-data types to meta-data namespace |         |       | 0:25 |
 | COMPLETED Merge C++ models                                       |         |       | 6:05 |
 | COMPLETED Implement the backend enricher in cpp                  |         |       | 2:08 |
-| IMPLEMENTATION Analyse use cases for meta-data                   |         |       | 2:24 |
+| COMPLETED Analyse use cases for meta-data                        |         |       | 2:24 |
 #+end:
 
-*** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
+    CLOSED: [2014-09-22 Mon 08:20]
     CLOCK: [2014-09-21 Sun 20:40]--[2014-09-21 Sun 20:46] =>  0:06
     CLOCK: [2014-09-21 Sun 20:34]--[2014-09-21 Sun 20:37] =>  0:03
     CLOCK: [2014-09-21 Sun 19:58]--[2014-09-21 Sun 20:30] =>  0:32
@@ -65,7 +66,8 @@ Clock summary at [2014-09-21 Sun 20:56]
 
 Updates to sprint and product backlog.
 
-*** IMPLEMENTATION Updates to the manual and readme files              :task:
+*** COMPLETED Updates to the manual and readme files                   :task:
+    CLOSED: [2014-09-22 Mon 08:20]
     CLOCK: [2014-09-18 Thu 18:39]--[2014-09-18 Thu 18:46] =>  0:07
     CLOCK: [2014-09-16 Tue 08:25]--[2014-09-16 Tue 08:40] =>  0:15
     CLOCK: [2014-09-14 Sun 23:04]--[2014-09-14 Sun 23:35] =>  0:31
@@ -495,7 +497,8 @@ do so we need to pass in both knitting and formatting settings to
 Copy the code from the deleted registration files. Formatters should
 register against a content descriptor.
 
-*** IMPLEMENTATION Analyse use cases for meta-data                    :story:
+*** COMPLETED Analyse use cases for meta-data                         :story:
+    CLOSED: [2014-09-22 Mon 08:20]
     CLOCK: [2014-09-21 Sun 13:55]--[2014-09-21 Sun 14:27] =>  0:32
     CLOCK: [2014-09-21 Sun 12:06]--[2014-09-21 Sun 12:09] =>  0:03
     CLOCK: [2014-09-21 Sun 11:40]--[2014-09-21 Sun 11:46] =>  0:06
