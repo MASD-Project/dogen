@@ -17,21 +17,70 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-22 Mon 08:27]
+Clock summary at [2014-09-23 Tue 21:51]
 
-| Headline     | Time   |
-|--------------+--------|
-| *Total time* | *0:00* |
+| Headline                                                               | Time   |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                           | *1:05* |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                        |        | 1:05 |      |
+| IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |        |      | 1:05 |
 #+end:
 
 *** Sprint and product backlog grooming                                :task:
 
 Updates to sprint and product backlog.
 
-*** Updates to the manual and readme files                             :task:
+*** Updates to the manual and readme files                       :task:media:
 
 Use downtime to update the manual and / or readme file.
 
+*** IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis :task:
+    CLOCK: [2014-09-23 Tue 21:18]--[2014-09-23 Tue 21:27] =>  0:09
+    CLOCK: [2014-09-22 Mon 13:10]--[2014-09-22 Mon 13:44] =>  0:34
+
+After the analysis performed in the actual use cases we have for
+meta-data, it became apparent that the current architecture is far
+more complicated than what is required to fulfil our use cases. We now
+aim to design an architecture that fulfils the use cases and nothing
+more.
+
+**** COMPLETED Consequences of the use case analysis
+     CLOSED: [2014-09-23 Tue 21:50]
+     CLOCK: [2014-09-23 Tue 21:37]--[2014-09-23 Tue 21:50] =>  0:13
+     CLOCK: [2014-09-23 Tue 21:28]--[2014-09-23 Tue 21:37] =>  0:09
+
+There are several points of worthy of note:
+
+- we do not need meta-data for internal purposes. originally we did
+  this because we thought it was easier, but actually it complicates
+  things without any obvious benefits. In reality, it makes more sense
+  to use strongly-typed data structures for all the data that is
+  inferred internally and reserve the meta-data purely for input
+  purposes - data supplied by the user. This means we do not need
+  "enrichers" as such because we want the meta-data to be
+  read-only. However we still need something akin to it.
+- we can built the internal data-structures on the fly as we visit the
+  SML containment graph. These types were previously called enrichers
+  but should be renamed to say "builders" - this is a consequence of
+  the previous point whereby the builders use internal types to keep
+  state rather than pushing it into the meta-data. Another interesting
+  consequence is that the responsibilities of these types may not
+  necessarily be the determinant characteristic in naming the
+  interface. In reality, the interface is just providing us a way to
+  iterate through the SML graph of containment. This is not at all
+  related to meta-data, or to enrichment. The implementers of the
+  interface are responsible for the building. We still need
+  dependencies between the builders and we still need multiple
+  passes. Basically we should move all of these classes away from the
+  meta-data namespace, into the main SML namespace. We need to read up
+  on the right name for this - seems like a variation of visitor, but
+  without double-dispatch. Boost graph may be a good source of
+  inspiration. Compiler terminology may also be of assistance (the
+  iterators of the AST in clang for instance).
+
+**** Find a new name for enrichers
+**** Find a new name for the "builders"
 ** Deprecated Development Stories
 
 Stories that do not make sense any longer.
