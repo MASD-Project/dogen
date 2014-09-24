@@ -17,14 +17,14 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-23 Tue 21:51]
+Clock summary at [2014-09-24 Wed 21:46]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *1:05* |      |      |
+| *Total time*                                                           | *2:06* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 1:05 |      |
-| IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |        |      | 1:05 |
+| Development Stories Implemented                                        |        | 2:06 |      |
+| IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |        |      | 2:06 |
 #+end:
 
 *** Sprint and product backlog grooming                                :task:
@@ -78,6 +78,71 @@ There are several points of worthy of note:
   without double-dispatch. Boost graph may be a good source of
   inspiration. Compiler terminology may also be of assistance (the
   iterators of the AST in clang for instance).
+
+**** IMPLEMENTATION Static initialisation and a cleaner architecture
+     CLOCK: [2014-09-24 Wed 21:45]--[2014-09-24 Wed 21:46] =>  0:01
+     CLOCK: [2014-09-24 Wed 21:27]--[2014-09-24 Wed 21:31] =>  0:04
+     CLOCK: [2014-09-24 Wed 20:30]--[2014-09-24 Wed 21:26] =>  0:56
+
+As a result of the implementation of the enrichers, we found out the
+joys of using static initialisation. It is actually a useful approach
+because it means we can minimise coupling; however, we need to be
+careful on how we set it up to avoid problems with order of
+initialisation, or just plain forgetting to initialise things.
+
+One way of thinking about this is to split =knit= into three:
+frontend, backend and the rest.
+
+Frontend contains just the interface for the front end and a
+workflow. The workflow allows implementers of the frontend interface
+to register. The registration process takes a file extension and a
+shared pointer to the interface. The worfklow receives a list of boost
+file paths, and against each a flag: is target. For each of these, it
+looks for the appropriate frontend in a unordered map, calls the
+frontend with the file name and the flag, and receives back an SML
+model. The result of the workflow is a set of SML models. The SML
+models have a "is target" flag set on them somewhere.
+
+Backend is in some ways similar: It provides a backend interface that
+receives an SML model and a map of qname to formatter settings. It
+returns a list of files (as per =formatters= model).
+
+Knit makes use of these models, effectively creating the complete
+pipeline between frontends and backends. The disabling and enabling of
+the backends is done via the meta-data.
+
+The static initialisation is now more straightforward: we need to
+register backends and frontends against each workflow. These are the
+only two points of static initialisation. The two workflows on
+construction validate their state (e.g. we need at least one frontend
+and one backend). Dia to SML and SML itself implement the two front
+ends; CPP implements the one backend.
+
+The "builders" are as follows:
+
+- one for the formatters model (owned by the backend model, since the
+  formatter settings will be common to all backends). This satisfies
+  use case *annotation settings*. Owned by the =backend= model; its
+  result is provided to the workflow of each individual backend.
+- one for each individual backend (the C++ builder will process
+  generic C++ settings). This satisfies use case *backend settings*.
+- one for each facet (use case *facet settings*). Owned by the
+  individual backend. Result supplied to each formatter.
+- one for each formatter (use case *formatter settings*). These are
+  responsible for naming the files and for determining the inclusion
+  lists. The formatter should own the builder and retrieve its product
+  just prior to formatting.
+
+This means the builders must implement two interfaces: one for
+visiting the SML data structures and one for producing the
+settings. We should also abandon any dependency management between
+formatters for now as the use cases do not show a need for it yet.
+
+Finally, we pass in all of the settings to the formatters. The
+formatters must return =std::optional<formatter:file>= in case the
+formatter is disabled in the formatter settings. The =backend= model
+will return all the files produced by all formatters on all backend
+models. These are then passed to an outputter in =knit=.
 
 **** Find a new name for enrichers
 **** Find a new name for the "builders"
