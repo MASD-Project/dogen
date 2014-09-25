@@ -30,9 +30,16 @@ Clock summary at [2014-09-24 Wed 22:41]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-25 Thu 10:21]--[2014-09-25 Thu 10:40] =>  0:19
     CLOCK: [2014-09-24 Wed 22:15]--[2014-09-24 Wed 22:36] =>  0:21
 
 Updates to sprint and product backlog.
+
+*** Add a =is_target= flag to model                           :task:refactor:
+
+Ideally we should keep track of the "targetness" of the model with the
+model itself instead of passing parameters. This will make the
+frontend move easier.
 
 *** Updates to the manual and readme files                       :task:media:
 
@@ -288,6 +295,19 @@ needs to be replaced by a more general approach.
 
 Create the first and second stage enrichment for types. This is a good
 test to see if the overall logic is sound.
+
+*** Refactor engine's =persister=                             :task:refactor:
+
+- add documentation
+- we put the decision on whether to persist on not based on settings
+  inside of persister. It should really be up to the person calling
+  the persister to decide. Persister should always persist.
+- we should have an argument deciding the file format, perhaps an
+  enumeration, instead of passing in the extension. The extension
+  should be automatically determined.
+- persister should support all archive types. At present it always
+  outputs in XML; it should respect the archive type requested by the
+  user.
 
 ** Deprecated Development Stories
 
