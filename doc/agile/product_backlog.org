@@ -1902,6 +1902,12 @@ Domain Modeling Language?
 Or instead We could follow the compiler theme and call it the =ir= or
 intermediate representation, or =im= for intermediate model.
 
+After more thinking on this, and since we now have a =backend= and a
+=frontend=, it is obvious that SML is the =middleend=. However, this
+is not a very good name for the model as we also do some front-end-y
+things (such as the JSON implementation). =ir= and =im= still seem
+like the more likely candidates.
+
 *** Add POF serialisation support          :story:feature:backend:formatters:
 
 If coherence has open source C++ libraries, we should add support for
