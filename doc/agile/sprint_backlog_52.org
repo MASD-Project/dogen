@@ -17,15 +17,16 @@ to improve the communication with the outside world.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-24 Wed 22:41]
+Clock summary at [2014-09-26 Fri 22:07]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *3:34* |      |      |
+| *Total time*                                                           | *5:46* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 3:34 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:21 |
+| Development Stories Implemented                                        |        | 5:46 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:40 |
 | IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |        |      | 2:06 |
+| IMPLEMENTATION Create the =frontend= model                             |        |      | 1:53 |
 | Refactor types header formatter                                        |        |      | 1:07 |
 #+end:
 
@@ -162,7 +163,9 @@ models. These are then passed to an outputter in =knit=.
 We also need to rename enrichers and delete the graph of dependencies
 between enrichers.
 
-*** Create the =frontend= model                               :task:refactor:
+*** IMPLEMENTATION Create the =frontend= model                :task:refactor:
+    CLOCK: [2014-09-26 Fri 21:59]--[2014-09-26 Fri 22:07] =>  0:08
+    CLOCK: [2014-09-26 Fri 20:07]--[2014-09-26 Fri 21:52] =>  1:45
 
 Create the interface, workflow and registrar for the frontend
 model. Implement it in SML and Dia to SML models.
