@@ -68,16 +68,16 @@
         <dia:point val="25,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,12.95;54.81,20.45"/>
+        <dia:rectangle val="24.95,12.95;56.35,19.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="25,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.760000000000002"/>
+        <dia:real val="31.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.4000000000000004"/>
+        <dia:real val="6.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#workflow#</dia:string>
@@ -271,10 +271,10 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#provider#</dia:string>
+                <dia:string>#source#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;provider_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;source_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -340,23 +340,6 @@
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::list&lt;input_descriptors&gt;&amp;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#ds#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#const debug_settings&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -561,13 +544,13 @@
         <dia:point val="73,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,12.95;109.355,18.85"/>
+        <dia:rectangle val="72.95,12.95;107.815,18.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="36.305"/>
+        <dia:real val="34.765000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.8000000000000007"/>
@@ -662,10 +645,10 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#provider_for_extension_#</dia:string>
+            <dia:string>#source_for_extension_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,std::shared_ptr&lt;provider_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,std::shared_ptr&lt;source_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -952,17 +935,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="109.305,13"/>
+        <dia:point val="107.765,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.555,2.95;118.775,13.8"/>
+        <dia:rectangle val="107.015,2.95;118.775,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="109.305,13"/>
-        <dia:point val="109.305,9"/>
+        <dia:point val="107.765,13"/>
+        <dia:point val="107.765,9"/>
         <dia:point val="118.575,9"/>
         <dia:point val="118.575,3"/>
       </dia:attribute>
@@ -1202,7 +1185,7 @@
         <dia:point val="53,-8.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.13,-8.45;53.2,14.6"/>
+        <dia:rectangle val="39.9,-8.45;53.2,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1210,8 +1193,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="53,-8.4"/>
         <dia:point val="53,-3"/>
-        <dia:point val="39.88,-3"/>
-        <dia:point val="39.88,13"/>
+        <dia:point val="40.65,-3"/>
+        <dia:point val="40.65,13"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1270,17 +1253,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="91.1525,13"/>
+        <dia:point val="90.3825,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.48,-8.45;91.9025,14.6"/>
+        <dia:rectangle val="83.48,-8.45;91.1325,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="91.1525,13"/>
-        <dia:point val="91.1525,-3"/>
+        <dia:point val="90.3825,13"/>
+        <dia:point val="90.3825,-3"/>
         <dia:point val="83.53,-3"/>
         <dia:point val="83.53,-8.4"/>
       </dia:attribute>
@@ -1341,17 +1324,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="54.76,13"/>
+        <dia:point val="56.3,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.01,8.25;73.2,14.6"/>
+        <dia:rectangle val="55.55,8.25;73.2,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="54.76,13"/>
-        <dia:point val="54.76,9"/>
+        <dia:point val="56.3,13"/>
+        <dia:point val="56.3,9"/>
         <dia:point val="73,9"/>
         <dia:point val="73,13"/>
       </dia:attribute>
@@ -1415,7 +1398,7 @@
         <dia:point val="31.795,-7.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,-8.35;32.545,14.6"/>
+        <dia:rectangle val="24.95,-8.35;32.545,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1486,7 +1469,7 @@
         <dia:point val="53,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.745,-17.75;53.75,-10.4"/>
+        <dia:rectangle val="31.745,-17.75;53.75,-11.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1533,13 +1516,13 @@
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#workflow_debug_settings#</dia:string>
+        <dia:string>#workflow_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Settings that control the debug abilities of the workflow.#</dia:string>
+        <dia:string>#Settings that control the abilities of the workflow.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1786,7 +1769,7 @@ an exception is thrown.#</dia:string>
         <dia:point val="83.53,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.78,-17.05;102.765,-10.4"/>
+        <dia:rectangle val="82.78,-17.75;102.765,-11.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1854,17 +1837,17 @@ an exception is thrown.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="39.88,20.4498"/>
+        <dia:point val="40.65,19.6501"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.13,19.6998;50.765,30.6"/>
+        <dia:rectangle val="39.9,18.9001;50.765,29.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.88,20.4498"/>
-        <dia:point val="39.88,25"/>
+        <dia:point val="40.65,19.6501"/>
+        <dia:point val="40.65,25"/>
         <dia:point val="50.565,25"/>
         <dia:point val="50.565,29"/>
       </dia:attribute>
@@ -1904,13 +1887,13 @@ an exception is thrown.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#source_debug_settings#</dia:string>
+        <dia:string>#source_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Settings that control the reading abilities of the source.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2610,7 +2593,7 @@ main.#</dia:string>
 This model defines the general frontend architecture,
 as well as the core frontends supported by the system.
 
-#DOGEN dia.comment#</dia:string>
+#DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
