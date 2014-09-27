@@ -16,16 +16,16 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-27 Sat 10:51]
+Clock summary at [2014-09-27 Sat 12:15]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *6:49* |      |      |
+| *Total time*                                                           | *7:11* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 6:49 |      |
+| Development Stories Implemented                                        |        | 7:11 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:57 |
 | IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |        |      | 2:06 |
-| IMPLEMENTATION Create the =frontend= model                             |        |      | 2:39 |
+| IMPLEMENTATION Create the =frontend= model                             |        |      | 3:01 |
 | Refactor types header formatter                                        |        |      | 1:07 |
 #+end:
 
@@ -157,6 +157,7 @@ In reality these are just some kind of visitors of the SML graph.
 
 **** Find a new name for the "builders"
 *** IMPLEMENTATION Create the =frontend= model                :task:refactor:
+    CLOCK: [2014-09-27 Sat 11:53]--[2014-09-27 Sat 12:15] =>  0:22
     CLOCK: [2014-09-27 Sat 10:01]--[2014-09-27 Sat 10:28] =>  0:27
     CLOCK: [2014-09-27 Sat 09:59]--[2014-09-27 Sat 10:00] =>  0:01
     CLOCK: [2014-09-26 Fri 23:46]--[2014-09-27 Sat 00:04] =>  0:18

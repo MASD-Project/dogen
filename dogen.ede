@@ -10,6 +10,7 @@
    "/projects/dia/include"
    "/projects/dia_to_sml/include"
    "/projects/sml/include"
+   "/projects/frontend/include"
    "/projects/knit/include"
    "/projects/knitter/include"
    "/projects/cpp/include"
@@ -17,8 +18,6 @@
    "/projects/sml_to_cpp/include"
    "/projects/formatters/include"
    "/projects/utility/include"
-
-
 
    "/projects/test_models/all_primitives/include"
    "/projects/test_models/class_in_a_package/include"
