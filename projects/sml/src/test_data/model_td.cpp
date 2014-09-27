@@ -150,6 +150,10 @@ std::unordered_map<dogen::sml::qname, dogen::sml::object> create_std_unordered_m
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -172,6 +176,7 @@ populate(const unsigned int position, result_type& v) {
     v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 10));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 11));
     v.objects(create_std_unordered_map_dogen_sml_qname_dogen_sml_object(position + 12));
+    v.is_target(create_bool(position + 13));
 }
 
 model_generator::result_type

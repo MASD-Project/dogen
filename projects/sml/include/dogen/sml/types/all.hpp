@@ -58,6 +58,8 @@
 #include "dogen/sml/types/operation.hpp"
 #include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/parameter.hpp"
+#include "dogen/sml/types/persistence_error.hpp"
+#include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/property_indexer.hpp"

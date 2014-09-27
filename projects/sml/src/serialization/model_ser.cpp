@@ -64,6 +64,7 @@ void save(Archive& ar,
     ar << make_nvp("primitives", v.primitives_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("objects", v.objects_);
+    ar << make_nvp("is_target", v.is_target_);
 }
 
 template<typename Archive>
@@ -83,6 +84,7 @@ void load(Archive& ar,
     ar >> make_nvp("primitives", v.primitives_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("objects", v.objects_);
+    ar >> make_nvp("is_target", v.is_target_);
 }
 
 } }

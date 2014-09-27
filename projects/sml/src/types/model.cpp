@@ -25,7 +25,8 @@ namespace sml {
 
 model::model()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)),
-      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
+      origin_type_(static_cast<dogen::sml::origin_types>(0)),
+      is_target_(static_cast<bool>(0)) { }
 
 model::model(model&& rhs)
     : documentation_(std::move(rhs.documentation_)),
@@ -40,7 +41,8 @@ model::model(model&& rhs)
       concepts_(std::move(rhs.concepts_)),
       primitives_(std::move(rhs.primitives_)),
       enumerations_(std::move(rhs.enumerations_)),
-      objects_(std::move(rhs.objects_)) { }
+      objects_(std::move(rhs.objects_)),
+      is_target_(std::move(rhs.is_target_)) { }
 
 model::model(
     const std::string& documentation,
@@ -55,7 +57,8 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects)
+    const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects,
+    const bool is_target)
     : documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
@@ -68,7 +71,8 @@ model::model(
       concepts_(concepts),
       primitives_(primitives),
       enumerations_(enumerations),
-      objects_(objects) { }
+      objects_(objects),
+      is_target_(is_target) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -85,6 +89,7 @@ void model::swap(model& other) noexcept {
     swap(primitives_, other.primitives_);
     swap(enumerations_, other.enumerations_);
     swap(objects_, other.objects_);
+    swap(is_target_, other.is_target_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -100,7 +105,8 @@ bool model::operator==(const model& rhs) const {
         concepts_ == rhs.concepts_ &&
         primitives_ == rhs.primitives_ &&
         enumerations_ == rhs.enumerations_ &&
-        objects_ == rhs.objects_;
+        objects_ == rhs.objects_ &&
+        is_target_ == rhs.is_target_;
 }
 
 model& model::operator=(model other) {
@@ -299,6 +305,14 @@ void model::objects(const std::unordered_map<dogen::sml::qname, dogen::sml::obje
 
 void model::objects(const std::unordered_map<dogen::sml::qname, dogen::sml::object>&& v) {
     objects_ = std::move(v);
+}
+
+bool model::is_target() const {
+    return is_target_;
+}
+
+void model::is_target(const bool v) {
+    is_target_ = v;
 }
 
 } }

@@ -18,24 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/types/boolean.hpp"
-#include "dogen/dia/types/child_node.hpp"
-#include "dogen/dia/types/color.hpp"
-#include "dogen/dia/types/composite.hpp"
-#include "dogen/dia/types/connection.hpp"
-#include "dogen/dia/types/diagram.hpp"
-#include "dogen/dia/types/diagram_data.hpp"
-#include "dogen/dia/types/enumeration.hpp"
-#include "dogen/dia/types/font.hpp"
-#include "dogen/dia/types/hydration_error.hpp"
-#include "dogen/dia/types/hydrator.hpp"
-#include "dogen/dia/types/integer.hpp"
-#include "dogen/dia/types/layer.hpp"
-#include "dogen/dia/types/object.hpp"
-#include "dogen/dia/types/persistence_error.hpp"
-#include "dogen/dia/types/persister.hpp"
-#include "dogen/dia/types/point.hpp"
-#include "dogen/dia/types/real.hpp"
-#include "dogen/dia/types/rectangle.hpp"
-#include "dogen/dia/types/string.hpp"
+#ifndef DOGEN_SML_TYPES_PERSISTENCE_ERROR_HPP
+#define DOGEN_SML_TYPES_PERSISTENCE_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
+
+namespace dogen {
+namespace sml {
+
+/**
+ * @brief An error occurred whilst tryng to persist the SML model.
+ */
+class persistence_error : public virtual std::exception, public virtual boost::exception {
+public:
+    persistence_error() = default;
+    ~persistence_error() noexcept = default;
+
+public:
+    persistence_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} }
+
+#endif

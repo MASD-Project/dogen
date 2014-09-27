@@ -18,24 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/types/boolean.hpp"
-#include "dogen/dia/types/child_node.hpp"
-#include "dogen/dia/types/color.hpp"
-#include "dogen/dia/types/composite.hpp"
-#include "dogen/dia/types/connection.hpp"
-#include "dogen/dia/types/diagram.hpp"
-#include "dogen/dia/types/diagram_data.hpp"
-#include "dogen/dia/types/enumeration.hpp"
-#include "dogen/dia/types/font.hpp"
-#include "dogen/dia/types/hydration_error.hpp"
-#include "dogen/dia/types/hydrator.hpp"
-#include "dogen/dia/types/integer.hpp"
-#include "dogen/dia/types/layer.hpp"
-#include "dogen/dia/types/object.hpp"
-#include "dogen/dia/types/persistence_error.hpp"
-#include "dogen/dia/types/persister.hpp"
-#include "dogen/dia/types/point.hpp"
-#include "dogen/dia/types/real.hpp"
-#include "dogen/dia/types/rectangle.hpp"
-#include "dogen/dia/types/string.hpp"
+#ifndef DOGEN_SML_TYPES_PERSISTER_FWD_HPP
+#define DOGEN_SML_TYPES_PERSISTER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace sml {
+
+class persister;
+
+} }
+
+#endif

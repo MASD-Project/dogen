@@ -95,7 +95,8 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects);
+        const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects,
+        const bool is_target);
 
 private:
     template<typename Archive>
@@ -238,6 +239,14 @@ public:
     void objects(const std::unordered_map<dogen::sml::qname, dogen::sml::object>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, this model is the target model.
+     */
+    /**@{*/
+    bool is_target() const;
+    void is_target(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -262,6 +271,7 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::object> objects_;
+    bool is_target_;
 };
 
 } }

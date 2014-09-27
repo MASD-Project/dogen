@@ -2937,6 +2937,7 @@
 			</second>
 		</item>
 	</objects>
+	<is_target>0</is_target>
 </entity>
 </boost_serialization>
 

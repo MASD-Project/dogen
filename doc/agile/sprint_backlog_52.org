@@ -16,7 +16,7 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-27 Sat 20:40]
+Clock summary at [2014-09-27 Sat 20:42]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
