@@ -8,25 +8,24 @@
 
 * Stories
 
-This file contains all stories that were closed during sprint 51.
+This file contains all stories that were closed during sprint 52.
 
-The *Mission Statement* for this sprint is to implement the core of
-the meta-data processing, in both SML and the formatters. We also want
-to improve the communication with the outside world.
+The *Mission Statement* for this sprint is to make inroads in
+implementing the frontend and backend models.
 
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-26 Fri 22:07]
+Clock summary at [2014-09-27 Sat 00:04]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *5:46* |      |      |
+| *Total time*                                                           | *6:04* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 5:46 |      |
+| Development Stories Implemented                                        |        | 6:04 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:40 |
 | IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |        |      | 2:06 |
-| IMPLEMENTATION Create the =frontend= model                             |        |      | 1:53 |
+| IMPLEMENTATION Create the =frontend= model                             |        |      | 2:11 |
 | Refactor types header formatter                                        |        |      | 1:07 |
 #+end:
 
@@ -164,6 +163,8 @@ We also need to rename enrichers and delete the graph of dependencies
 between enrichers.
 
 *** IMPLEMENTATION Create the =frontend= model                :task:refactor:
+    CLOCK: [2014-09-27 Sat 09:59]--[2014-09-27 Sat 10:00] =>  0:01
+    CLOCK: [2014-09-26 Fri 23:46]--[2014-09-27 Sat 00:04] =>  0:18
     CLOCK: [2014-09-26 Fri 21:59]--[2014-09-26 Fri 22:07] =>  0:08
     CLOCK: [2014-09-26 Fri 20:07]--[2014-09-26 Fri 21:52] =>  1:45
 
