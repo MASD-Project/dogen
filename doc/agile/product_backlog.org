@@ -11,6 +11,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Improve error messages around meta-data kvp's              :task:bug:dia:
+
+Consider a meta-data "kvp" without a value, in a dia diagram (model note):
+
+: #DOGEN dia.comment'
+
+At present the following error is triggered:
+
+: 2014-09-27 10:07:32.761795 [ERROR] [dia_to_sml.comments_parser] Expected separator on KVP.
+
+This provides very little context of what went wrong. Also, should we
+allow a "kvp" that has no value, where the value is assumed to be
+true. For cases like comment it would make life easier.
+
 *** Remove unnecessary properties from model              :task:refactor:sml:
 
 The model should be just dumb container of types. We have a few legacy
