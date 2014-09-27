@@ -16,16 +16,16 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-27 Sat 12:15]
+Clock summary at [2014-09-27 Sat 20:40]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *7:11* |      |      |
+| *Total time*                                                           | *9:25* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 7:11 |      |
+| Development Stories Implemented                                        |        | 9:25 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:57 |
 | IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |        |      | 2:06 |
-| IMPLEMENTATION Create the =frontend= model                             |        |      | 3:01 |
+| IMPLEMENTATION Create the =frontend= model                             |        |      | 5:15 |
 | Refactor types header formatter                                        |        |      | 1:07 |
 #+end:
 
@@ -157,6 +157,9 @@ In reality these are just some kind of visitors of the SML graph.
 
 **** Find a new name for the "builders"
 *** IMPLEMENTATION Create the =frontend= model                :task:refactor:
+    CLOCK: [2014-09-27 Sat 19:09]--[2014-09-27 Sat 20:40] =>  1:31
+    CLOCK: [2014-09-27 Sat 16:16]--[2014-09-27 Sat 16:35] =>  0:19
+    CLOCK: [2014-09-27 Sat 15:01]--[2014-09-27 Sat 15:25] =>  0:24
     CLOCK: [2014-09-27 Sat 11:53]--[2014-09-27 Sat 12:15] =>  0:22
     CLOCK: [2014-09-27 Sat 10:01]--[2014-09-27 Sat 10:28] =>  0:27
     CLOCK: [2014-09-27 Sat 09:59]--[2014-09-27 Sat 10:00] =>  0:01

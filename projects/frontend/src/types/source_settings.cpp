@@ -24,23 +24,28 @@ namespace dogen {
 namespace frontend {
 
 source_settings::source_settings()
-    : save_original_input_(static_cast<bool>(0)) { }
+    : save_original_input_(static_cast<bool>(0)),
+      disable_model_module_(static_cast<bool>(0)) { }
 
 source_settings::source_settings(
     const bool save_original_input,
-    const std::string& original_input_extension)
+    const std::string& original_input_extension,
+    const bool disable_model_module)
     : save_original_input_(save_original_input),
-      original_input_extension_(original_input_extension) { }
+      original_input_extension_(original_input_extension),
+      disable_model_module_(disable_model_module) { }
 
 void source_settings::swap(source_settings& other) noexcept {
     using std::swap;
     swap(save_original_input_, other.save_original_input_);
     swap(original_input_extension_, other.original_input_extension_);
+    swap(disable_model_module_, other.disable_model_module_);
 }
 
 bool source_settings::operator==(const source_settings& rhs) const {
     return save_original_input_ == rhs.save_original_input_ &&
-        original_input_extension_ == rhs.original_input_extension_;
+        original_input_extension_ == rhs.original_input_extension_ &&
+        disable_model_module_ == rhs.disable_model_module_;
 }
 
 source_settings& source_settings::operator=(source_settings other) {
@@ -71,6 +76,14 @@ void source_settings::original_input_extension(const std::string& v) {
 
 void source_settings::original_input_extension(const std::string&& v) {
     original_input_extension_ = std::move(v);
+}
+
+bool source_settings::disable_model_module() const {
+    return disable_model_module_;
+}
+
+void source_settings::disable_model_module(const bool v) {
+    disable_model_module_ = v;
 }
 
 } }

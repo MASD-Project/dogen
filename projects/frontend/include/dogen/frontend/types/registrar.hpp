@@ -39,6 +39,15 @@ namespace frontend {
 class registrar {
 public:
     /**
+     * @brief Returns all available sources for each extension.
+     *
+     * Only used for debug purposes.
+     */
+    const std::unordered_map<std::string, std::shared_ptr<source_interface>>&
+        sources_by_extension() const;
+
+public:
+    /**
      * @brief Ensures the registrar is ready to be used.
      */
     void validate() const;
@@ -56,12 +65,11 @@ public:
      *
      * @pre A source must have been registered for this extension.
      */
-    std::shared_ptr<source_interface>
-    source_for_extension(const std::string& ext);
+    source_interface& source_for_extension(const std::string& ext);
 
 private:
     std::unordered_map<std::string, std::shared_ptr<source_interface>>
-        source_for_extension_;
+        sources_by_extension_;
 };
 
 } }

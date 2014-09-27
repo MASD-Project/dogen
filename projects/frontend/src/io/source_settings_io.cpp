@@ -44,7 +44,8 @@ std::ostream& operator<<(std::ostream& s, const source_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::frontend::source_settings\"" << ", "
       << "\"save_original_input\": " << v.save_original_input() << ", "
-      << "\"original_input_extension\": " << "\"" << tidy_up_string(v.original_input_extension()) << "\""
+      << "\"original_input_extension\": " << "\"" << tidy_up_string(v.original_input_extension()) << "\"" << ", "
+      << "\"disable_model_module\": " << v.disable_model_module()
       << " }";
     return(s);
 }

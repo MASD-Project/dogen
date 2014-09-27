@@ -43,6 +43,7 @@ void save(Archive& ar,
     ar << make_nvp("save_intermediate_sml", v.save_intermediate_sml_);
     ar << make_nvp("save_merged_sml", v.save_merged_sml_);
     ar << make_nvp("sml_extension", v.sml_extension_);
+    ar << make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 template<typename Archive>
@@ -54,6 +55,7 @@ void load(Archive& ar,
     ar >> make_nvp("save_intermediate_sml", v.save_intermediate_sml_);
     ar >> make_nvp("save_merged_sml", v.save_merged_sml_);
     ar >> make_nvp("sml_extension", v.sml_extension_);
+    ar >> make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 } }

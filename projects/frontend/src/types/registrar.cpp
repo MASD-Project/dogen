@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("sml.meta_data.registrar"));
+static logger lg(logger_factory("frontend.registrar"));
 
 const std::string exension_registerd_more_than_once(
     "Extension was registered more than once");
@@ -39,11 +39,17 @@ const std::string null_source("Source provided is null");
 namespace dogen {
 namespace frontend {
 
+const std::unordered_map<std::string, std::shared_ptr<source_interface>>&
+    registrar::sources_by_extension() const {
+    return sources_by_extension_;
+}
+
 void registrar::validate() const {
-    if (source_for_extension_.empty()) {
+    if (sources_by_extension_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_sources;
         BOOST_THROW_EXCEPTION(registrar_error(no_sources));
     }
+    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
 void registrar::register_source_for_extension(const std::string& ext,
@@ -54,21 +60,21 @@ void registrar::register_source_for_extension(const std::string& ext,
         BOOST_THROW_EXCEPTION(registrar_error(null_source));
     }
 
-    const auto i(source_for_extension_.insert(std::make_pair(ext, s)));
+    const auto i(sources_by_extension_.insert(std::make_pair(ext, s)));
     if (i.second) {
         BOOST_LOG_SEV(lg, error) << no_sources;
         BOOST_THROW_EXCEPTION(registrar_error(no_sources));
     }
 }
 
-std::shared_ptr<source_interface> registrar::
-source_for_extension(const std::string& ext) {
-    const auto i(source_for_extension_.find(ext));
-    if (i == source_for_extension_.end()) {
-        BOOST_LOG_SEV(lg, error) << no_source_for_extension << ext;
-        BOOST_THROW_EXCEPTION(registrar_error(no_source_for_extension + ext));
+source_interface& registrar::source_for_extension(const std::string& ext) {
+    const auto i(sources_by_extension_.find(ext));
+    if (i != sources_by_extension_.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Found source for extension: " << ext;
+        return *i->second;
     }
-    return i->second;
+    BOOST_LOG_SEV(lg, error) << no_source_for_extension << ext;
+    BOOST_THROW_EXCEPTION(registrar_error(no_source_for_extension + ext));
 }
 
 } }

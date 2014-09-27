@@ -47,6 +47,7 @@ populate(const unsigned int position, result_type& v) {
     v.save_intermediate_sml(create_bool(position + 2));
     v.save_merged_sml(create_bool(position + 3));
     v.sml_extension(create_std_string(position + 4));
+    v.disable_model_module(create_bool(position + 5));
 }
 
 workflow_settings_generator::result_type

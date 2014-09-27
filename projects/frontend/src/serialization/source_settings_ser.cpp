@@ -40,6 +40,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("save_original_input", v.save_original_input_);
     ar << make_nvp("original_input_extension", v.original_input_extension_);
+    ar << make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 template<typename Archive>
@@ -48,6 +49,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("save_original_input", v.save_original_input_);
     ar >> make_nvp("original_input_extension", v.original_input_extension_);
+    ar >> make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 } }

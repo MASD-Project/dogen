@@ -44,6 +44,7 @@ void source_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.save_original_input(create_bool(position + 0));
     v.original_input_extension(create_std_string(position + 1));
+    v.disable_model_module(create_bool(position + 2));
 }
 
 source_settings_generator::result_type

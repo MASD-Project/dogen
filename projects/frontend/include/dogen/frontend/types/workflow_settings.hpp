@@ -50,7 +50,8 @@ public:
         const std::string& original_input_extension,
         const bool save_intermediate_sml,
         const bool save_merged_sml,
-        const std::string& sml_extension);
+        const std::string& sml_extension,
+        const bool disable_model_module);
 
 private:
     template<typename Archive>
@@ -107,6 +108,14 @@ public:
     void sml_extension(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the model module is not generated.
+     */
+    /**@{*/
+    bool disable_model_module() const;
+    void disable_model_module(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const workflow_settings& rhs) const;
     bool operator!=(const workflow_settings& rhs) const {
@@ -123,6 +132,7 @@ private:
     bool save_intermediate_sml_;
     bool save_merged_sml_;
     std::string sml_extension_;
+    bool disable_model_module_;
 };
 
 } }

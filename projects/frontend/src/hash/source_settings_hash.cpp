@@ -39,6 +39,7 @@ std::size_t source_settings_hasher::hash(const source_settings&v) {
 
     combine(seed, v.save_original_input());
     combine(seed, v.original_input_extension());
+    combine(seed, v.disable_model_module());
 
     return seed;
 }

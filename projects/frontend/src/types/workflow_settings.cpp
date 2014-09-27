@@ -26,19 +26,22 @@ namespace frontend {
 workflow_settings::workflow_settings()
     : save_original_input_(static_cast<bool>(0)),
       save_intermediate_sml_(static_cast<bool>(0)),
-      save_merged_sml_(static_cast<bool>(0)) { }
+      save_merged_sml_(static_cast<bool>(0)),
+      disable_model_module_(static_cast<bool>(0)) { }
 
 workflow_settings::workflow_settings(
     const bool save_original_input,
     const std::string& original_input_extension,
     const bool save_intermediate_sml,
     const bool save_merged_sml,
-    const std::string& sml_extension)
+    const std::string& sml_extension,
+    const bool disable_model_module)
     : save_original_input_(save_original_input),
       original_input_extension_(original_input_extension),
       save_intermediate_sml_(save_intermediate_sml),
       save_merged_sml_(save_merged_sml),
-      sml_extension_(sml_extension) { }
+      sml_extension_(sml_extension),
+      disable_model_module_(disable_model_module) { }
 
 void workflow_settings::swap(workflow_settings& other) noexcept {
     using std::swap;
@@ -47,6 +50,7 @@ void workflow_settings::swap(workflow_settings& other) noexcept {
     swap(save_intermediate_sml_, other.save_intermediate_sml_);
     swap(save_merged_sml_, other.save_merged_sml_);
     swap(sml_extension_, other.sml_extension_);
+    swap(disable_model_module_, other.disable_model_module_);
 }
 
 bool workflow_settings::operator==(const workflow_settings& rhs) const {
@@ -54,7 +58,8 @@ bool workflow_settings::operator==(const workflow_settings& rhs) const {
         original_input_extension_ == rhs.original_input_extension_ &&
         save_intermediate_sml_ == rhs.save_intermediate_sml_ &&
         save_merged_sml_ == rhs.save_merged_sml_ &&
-        sml_extension_ == rhs.sml_extension_;
+        sml_extension_ == rhs.sml_extension_ &&
+        disable_model_module_ == rhs.disable_model_module_;
 }
 
 workflow_settings& workflow_settings::operator=(workflow_settings other) {
@@ -117,6 +122,14 @@ void workflow_settings::sml_extension(const std::string& v) {
 
 void workflow_settings::sml_extension(const std::string&& v) {
     sml_extension_ = std::move(v);
+}
+
+bool workflow_settings::disable_model_module() const {
+    return disable_model_module_;
+}
+
+void workflow_settings::disable_model_module(const bool v) {
+    disable_model_module_ = v;
 }
 
 } }

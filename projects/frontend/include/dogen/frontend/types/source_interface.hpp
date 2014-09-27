@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/frontend/types/source_settings.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
@@ -43,6 +44,16 @@ public:
     virtual ~source_interface() noexcept = 0;
 
 public:
+    /**
+     * @brief Unique identifier for the source, for logging purposes.
+     */
+    virtual std::string id() const = 0;
+
+    /**
+     * @brief List of extensions supported by this source.
+     */
+    virtual std::list<std::string> supported_extensions() const = 0;
+
     /**
      * @brief Read an input descriptor and transform it into a partial
      * SML model.

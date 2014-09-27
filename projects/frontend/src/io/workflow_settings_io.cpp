@@ -47,7 +47,8 @@ std::ostream& operator<<(std::ostream& s, const workflow_settings& v) {
       << "\"original_input_extension\": " << "\"" << tidy_up_string(v.original_input_extension()) << "\"" << ", "
       << "\"save_intermediate_sml\": " << v.save_intermediate_sml() << ", "
       << "\"save_merged_sml\": " << v.save_merged_sml() << ", "
-      << "\"sml_extension\": " << "\"" << tidy_up_string(v.sml_extension()) << "\""
+      << "\"sml_extension\": " << "\"" << tidy_up_string(v.sml_extension()) << "\"" << ", "
+      << "\"disable_model_module\": " << v.disable_model_module()
       << " }";
     return(s);
 }

@@ -47,7 +47,8 @@ public:
 public:
     source_settings(
         const bool save_original_input,
-        const std::string& original_input_extension);
+        const std::string& original_input_extension,
+        const bool disable_model_module);
 
 private:
     template<typename Archive>
@@ -75,6 +76,14 @@ public:
     void original_input_extension(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the model module is not generated.
+     */
+    /**@{*/
+    bool disable_model_module() const;
+    void disable_model_module(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const source_settings& rhs) const;
     bool operator!=(const source_settings& rhs) const {
@@ -88,6 +97,7 @@ public:
 private:
     bool save_original_input_;
     std::string original_input_extension_;
+    bool disable_model_module_;
 };
 
 } }

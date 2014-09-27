@@ -42,6 +42,7 @@ std::size_t workflow_settings_hasher::hash(const workflow_settings&v) {
     combine(seed, v.save_intermediate_sml());
     combine(seed, v.save_merged_sml());
     combine(seed, v.sml_extension());
+    combine(seed, v.disable_model_module());
 
     return seed;
 }
