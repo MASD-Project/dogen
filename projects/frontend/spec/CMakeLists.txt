@@ -28,6 +28,7 @@ set_target_properties(frontend_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(frontend_spec
     frontend
+    config
     utility
     dia
     sml

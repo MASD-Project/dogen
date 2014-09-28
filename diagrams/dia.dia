@@ -5356,25 +5356,25 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:point val="2,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,-33.05;10.475,-29.95"/>
+        <dia:rectangle val="1.95,-33.05;9.2825,-29.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="2,-33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.4250000000000007"/>
+        <dia:real val="7.2324999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#persistence_error#</dia:string>
+        <dia:string>#persister_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#An error occurred whilst tryng to persist the SML model.#</dia:string>
+        <dia:string>#An error occurred whilst tryng to persist a Dia diagram.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5573,7 +5573,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:point val="16.185,-20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.1625,-30.05;16.935,-19.2"/>
+        <dia:rectangle val="5.56625,-30.05;16.935,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5581,8 +5581,8 @@ between the class and the slot concepts, we renamed it.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="16.185,-20"/>
         <dia:point val="16.185,-25"/>
-        <dia:point val="6.2125,-25"/>
-        <dia:point val="6.2125,-30"/>
+        <dia:point val="5.61625,-25"/>
+        <dia:point val="5.61625,-30"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -18,23 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_SERIALIZATION_WORKFLOW_SETTINGS_FWD_SER_HPP
-#define DOGEN_FRONTEND_SERIALIZATION_WORKFLOW_SETTINGS_FWD_SER_HPP
+#ifndef DOGEN_SML_TYPES_PERSISTER_ERROR_FWD_HPP
+#define DOGEN_SML_TYPES_PERSISTER_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/frontend/types/workflow_settings_fwd.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace sml {
 
-template<class Archive>
-void save(Archive& ar, const dogen::frontend::workflow_settings& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::frontend::workflow_settings& v, unsigned int version);
+class persister_error;
 
 } }
 

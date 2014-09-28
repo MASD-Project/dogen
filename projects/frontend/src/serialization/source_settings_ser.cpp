@@ -27,8 +27,8 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/string.hpp>
 #include "dogen/frontend/serialization/source_settings_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 
 namespace boost {
@@ -38,8 +38,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::frontend::source_settings& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("save_original_input", v.save_original_input_);
-    ar << make_nvp("original_input_extension", v.original_input_extension_);
+    ar << make_nvp("save_pre_processed_input", v.save_pre_processed_input_);
+    ar << make_nvp("pre_processed_input_path", v.pre_processed_input_path_.generic_string());
     ar << make_nvp("disable_model_module", v.disable_model_module_);
 }
 
@@ -47,8 +47,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::frontend::source_settings& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("save_original_input", v.save_original_input_);
-    ar >> make_nvp("original_input_extension", v.original_input_extension_);
+    ar >> make_nvp("save_pre_processed_input", v.save_pre_processed_input_);
+    std::string pre_processed_input_path_tmp;
+    ar >> make_nvp("pre_processed_input_path", pre_processed_input_path_tmp);
+    v.pre_processed_input_path_ = pre_processed_input_path_tmp;
     ar >> make_nvp("disable_model_module", v.disable_model_module_);
 }
 

@@ -21,4 +21,3 @@
 #include "dogen/frontend/serialization/input_descriptor_ser.hpp"
 #include "dogen/frontend/serialization/registrar_ser.hpp"
 #include "dogen/frontend/serialization/source_settings_ser.hpp"
-#include "dogen/frontend/serialization/workflow_settings_ser.hpp"

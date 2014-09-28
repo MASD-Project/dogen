@@ -28,4 +28,3 @@
 #include "dogen/frontend/types/source_settings.hpp"
 #include "dogen/frontend/types/static_initializer.hpp"
 #include "dogen/frontend/types/workflow.hpp"
-#include "dogen/frontend/types/workflow_settings.hpp"

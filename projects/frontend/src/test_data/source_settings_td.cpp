@@ -27,10 +27,11 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-std::string create_std_string(const unsigned int position) {
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
 }
 
 }
@@ -42,8 +43,8 @@ source_settings_generator::source_settings_generator() : position_(0) { }
 
 void source_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.save_original_input(create_bool(position + 0));
-    v.original_input_extension(create_std_string(position + 1));
+    v.save_pre_processed_input(create_bool(position + 0));
+    v.pre_processed_input_path(create_boost_filesystem_path(position + 1));
     v.disable_model_module(create_bool(position + 2));
 }
 

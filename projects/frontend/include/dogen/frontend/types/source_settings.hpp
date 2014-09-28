@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include <string>
+#include <boost/filesystem/path.hpp>
 #include "dogen/frontend/serialization/source_settings_fwd_ser.hpp"
 
 namespace dogen {
@@ -38,16 +38,18 @@ namespace frontend {
 class source_settings final {
 public:
     source_settings(const source_settings&) = default;
-    source_settings(source_settings&&) = default;
     ~source_settings() = default;
 
 public:
     source_settings();
 
 public:
+    source_settings(source_settings&& rhs);
+
+public:
     source_settings(
-        const bool save_original_input,
-        const std::string& original_input_extension,
+        const bool save_pre_processed_input,
+        const boost::filesystem::path& pre_processed_input_path,
         const bool disable_model_module);
 
 private:
@@ -59,21 +61,24 @@ private:
 
 public:
     /**
-     * @brief If true, the workflow will save the source's original input after parsing.
+     * @brief If true, the source will try to save the original input after initial parsing.
+     *
+     * Note that this option only makes sense if the source is transforming a format
+     * into SML. It is ignored in cases where we are reading an SML representation.
      */
     /**@{*/
-    bool save_original_input() const;
-    void save_original_input(const bool v);
+    bool save_pre_processed_input() const;
+    void save_pre_processed_input(const bool v);
     /**@}*/
 
     /**
-     * @brief Extension to use for the source's original input.
+     * @brief Full path to use for the source's pre-processed input.
      */
     /**@{*/
-    const std::string& original_input_extension() const;
-    std::string& original_input_extension();
-    void original_input_extension(const std::string& v);
-    void original_input_extension(const std::string&& v);
+    const boost::filesystem::path& pre_processed_input_path() const;
+    boost::filesystem::path& pre_processed_input_path();
+    void pre_processed_input_path(const boost::filesystem::path& v);
+    void pre_processed_input_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -95,8 +100,8 @@ public:
     source_settings& operator=(source_settings other);
 
 private:
-    bool save_original_input_;
-    std::string original_input_extension_;
+    bool save_pre_processed_input_;
+    boost::filesystem::path pre_processed_input_path_;
     bool disable_model_module_;
 };
 

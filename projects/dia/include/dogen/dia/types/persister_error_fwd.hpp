@@ -18,22 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_IO_WORKFLOW_SETTINGS_IO_HPP
-#define DOGEN_FRONTEND_IO_WORKFLOW_SETTINGS_IO_HPP
+#ifndef DOGEN_DIA_TYPES_PERSISTER_ERROR_FWD_HPP
+#define DOGEN_DIA_TYPES_PERSISTER_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/frontend/types/workflow_settings.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
-namespace frontend {
+namespace dia {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::frontend::workflow_settings& v);
+class persister_error;
 
 } }
 

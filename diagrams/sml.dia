@@ -17586,25 +17586,25 @@ based on module containment.#</dia:string>
         <dia:point val="3,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,64.95;11.475,68.05"/>
+        <dia:rectangle val="2.95,64.95;10.2825,68.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.4250000000000007"/>
+        <dia:real val="7.2324999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#persistence_error#</dia:string>
+        <dia:string>#persister_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#An error occurred whilst tryng to persist the SML model.#</dia:string>
+        <dia:string>#An error occurred whilst tryng to persist an SML model.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17732,7 +17732,7 @@ based on module containment.#</dia:string>
         <dia:point val="24.6,53.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.85,52.35;36.05,57.5"/>
+        <dia:rectangle val="23.85,52.35;36.05,56.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17803,7 +17803,7 @@ based on module containment.#</dia:string>
         <dia:point val="12.8,55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.1625,54.85;13.55,66.6"/>
+        <dia:rectangle val="6.56625,54.85;13.55,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17811,8 +17811,8 @@ based on module containment.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="12.8,55.6"/>
         <dia:point val="12.8,61"/>
-        <dia:point val="7.2125,61"/>
-        <dia:point val="7.2125,65"/>
+        <dia:point val="6.61625,61"/>
+        <dia:point val="6.61625,65"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

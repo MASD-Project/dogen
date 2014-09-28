@@ -20,4 +20,3 @@
  */
 #include "dogen/frontend/io/input_descriptor_io.hpp"
 #include "dogen/frontend/io/source_settings_io.hpp"
-#include "dogen/frontend/io/workflow_settings_io.hpp"

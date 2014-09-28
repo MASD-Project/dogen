@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_PERSISTENCE_ERROR_HPP
-#define DOGEN_DIA_TYPES_PERSISTENCE_ERROR_HPP
+#ifndef DOGEN_DIA_TYPES_PERSISTER_ERROR_HPP
+#define DOGEN_DIA_TYPES_PERSISTER_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,15 +32,15 @@ namespace dogen {
 namespace dia {
 
 /**
- * @brief An error occurred whilst tryng to persist the SML model.
+ * @brief An error occurred whilst tryng to persist a Dia diagram.
  */
-class persistence_error : public virtual std::exception, public virtual boost::exception {
+class persister_error : public virtual std::exception, public virtual boost::exception {
 public:
-    persistence_error() = default;
-    ~persistence_error() noexcept = default;
+    persister_error() = default;
+    ~persister_error() noexcept = default;
 
 public:
-    persistence_error(const std::string& message) : message_(message) { }
+    persister_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

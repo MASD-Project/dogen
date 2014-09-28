@@ -18,25 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_SERIALIZATION_WORKFLOW_SETTINGS_SER_HPP
-#define DOGEN_FRONTEND_SERIALIZATION_WORKFLOW_SETTINGS_SER_HPP
+#ifndef DOGEN_SML_TYPES_PERSISTER_ERROR_HPP
+#define DOGEN_SML_TYPES_PERSISTER_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/frontend/types/workflow_settings.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::frontend::workflow_settings)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace sml {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::frontend::workflow_settings& v, unsigned int version);
+/**
+ * @brief An error occurred whilst tryng to persist an SML model.
+ */
+class persister_error : public virtual std::exception, public virtual boost::exception {
+public:
+    persister_error() = default;
+    ~persister_error() noexcept = default;
 
-template<typename Archive>
-void load(Archive& ar, dogen::frontend::workflow_settings& v, unsigned int version);
+public:
+    persister_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
 

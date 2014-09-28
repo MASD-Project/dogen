@@ -20,4 +20,3 @@
  */
 #include "dogen/frontend/test_data/input_descriptor_td.hpp"
 #include "dogen/frontend/test_data/source_settings_td.hpp"
-#include "dogen/frontend/test_data/workflow_settings_td.hpp"

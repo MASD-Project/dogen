@@ -18,18 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/frontend/io/source_settings_io.hpp"
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
 
 namespace dogen {
 namespace frontend {
@@ -43,8 +34,8 @@ std::ostream& operator<<(std::ostream& s, const source_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::frontend::source_settings\"" << ", "
-      << "\"save_original_input\": " << v.save_original_input() << ", "
-      << "\"original_input_extension\": " << "\"" << tidy_up_string(v.original_input_extension()) << "\"" << ", "
+      << "\"save_pre_processed_input\": " << v.save_pre_processed_input() << ", "
+      << "\"pre_processed_input_path\": " << "\"" << v.pre_processed_input_path().generic_string() << "\"" << ", "
       << "\"disable_model_module\": " << v.disable_model_module()
       << " }";
     return(s);

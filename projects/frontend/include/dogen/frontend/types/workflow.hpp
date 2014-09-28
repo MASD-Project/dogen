@@ -26,9 +26,8 @@
 #endif
 
 #include "dogen/sml/types/model.hpp"
+#include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/frontend/types/registrar.hpp"
-#include "dogen/frontend/types/source_settings.hpp"
-#include "dogen/frontend/types/workflow_settings.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
 
 namespace dogen {
@@ -39,7 +38,7 @@ namespace frontend {
  */
 class workflow {
 public:
-    workflow(const workflow_settings& ws);
+    workflow(const config::knitting_settings& ts);
 
 private:
     /**
@@ -47,6 +46,21 @@ private:
      * initialised, initialises it.
      */
     static frontend::registrar& registrar();
+
+    /**
+     * @brief Given an archive type and a model name, returns the
+     * appropriate file extension.
+     *
+     * @param archive_type one of the supported boost archive types.
+     */
+    std::string extension(const config::archive_types at) const;
+
+    /**
+     * @brief Generates the source settings given the current
+     * troubleshooting settings and the path supplied.
+     */
+    source_settings
+    create_source_settings(const boost::filesystem::path& p) const;
 
 public:
     static void register_source_for_extension(const std::string& ext,
@@ -62,8 +76,7 @@ public:
 
 private:
     static std::shared_ptr<frontend::registrar> registrar_;
-    const workflow_settings workflow_settings_;
-    const source_settings source_settings_;
+    const config::knitting_settings knitting_settings_;
 };
 
 } }
