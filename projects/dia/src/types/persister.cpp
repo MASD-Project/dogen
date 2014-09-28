@@ -50,7 +50,7 @@ persist(const dia::diagram& d, const boost::filesystem::path& p) const {
     }
 
     using dogen::utility::serialization::xml_serialize;
-    xml_serialize<dia::diagram>(p, d);
+    xml_serialize<diagram>(p, d);
 }
 
 } }

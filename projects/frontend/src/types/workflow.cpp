@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/persister.hpp"
 #include "dogen/frontend/types/source_settings.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/frontend/types/workflow.hpp"
@@ -28,6 +29,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("frontend.workflow"));
 
+std::string empty;
 const std::string null_registrar("Registrar is null");
 const std::string xml_extension(".xml");
 const std::string text_extension(".txt");
@@ -75,37 +77,64 @@ std::string workflow::extension(config::archive_types at) const {
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
 }
 
+boost::filesystem::path workflow::
+create_debug_file_path(const config::archive_types at,
+    const boost::filesystem::path& original_path) const {
+
+    const auto& ts(knitting_settings_.troubleshooting());
+    boost::filesystem::path r(ts.debug_dir());
+    r /= original_path.stem();
+    r.replace_extension(extension(at));
+    return r;
+}
+
 source_settings
 workflow::create_source_settings(const boost::filesystem::path& p) const {
     source_settings r;
 
+    //FIXME: using dia model settings for all sources; mega-hack
     const auto& ts(knitting_settings_.troubleshooting());
-
-    //FIXME: mega-hack
     using config::archive_types;
     archive_types at(ts.save_dia_model());
     if (at == archive_types::invalid)
         return r;
 
     r.save_pre_processed_input(true);
-    boost::filesystem::path path(ts.debug_dir());
-    path /= p.stem();
-    path.replace_extension(extension(at));
-    r.pre_processed_input_path(path);
+    r.pre_processed_input_path(create_debug_file_path(at, p));
 
     const auto& is(knitting_settings_.input());
     r.disable_model_module(is.disable_model_module());
     return r;
 }
 
+sml::model workflow::
+source_sml_model_activity(const input_descriptor& d) const {
+    const auto& extension(d.path().extension().string());
+    auto& source(registrar().source_for_extension(extension));
+    const auto ss(create_source_settings(d.path()));
+    return source.read(d, ss);
+}
+
+void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
+    const sml::model& m) const {
+
+    const auto& ts(knitting_settings_.troubleshooting());
+    using config::archive_types;
+    archive_types at(ts.save_sml_model());
+    if (at == archive_types::invalid)
+        return;
+
+    const auto& dp(create_debug_file_path(at, p));
+    sml::persister persister;
+    persister.persist(m, dp);
+}
+
 std::list<sml::model>
 workflow::execute(const std::list<input_descriptor>& descriptors) {
     std::list<sml::model> r;
     for (const auto& d : descriptors) {
-        const auto& extension(d.path().extension().string());
-        auto& source(registrar().source_for_extension(extension));
-        const auto ss(create_source_settings(d.path()));
-        r.push_back(source.read(d, ss));
+        r.push_back(source_sml_model_activity(d));
+        persist_sml_model_activity(d.path(), r.back());
     }
     return r;
 }

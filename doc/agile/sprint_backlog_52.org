@@ -16,17 +16,17 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-28 Sun 13:46]
+Clock summary at [2014-09-28 Sun 18:21]
 
-| Headline                                                               | Time    |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *10:52* |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 10:52 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:57 |
-| IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
-| IMPLEMENTATION Create the =frontend= model                             |         |       | 6:42 |
-| Refactor types header formatter                                        |         |       | 1:07 |
+| Headline                                                          | Time    |       |      |
+|-------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                      | *11:51* |       |      |
+|-------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                   |         | 11:51 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                |         |       | 0:57 |
+| COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
+| COMPLETED Create the =frontend= model                             |         |       | 7:41 |
+| Refactor types header formatter                                   |         |       | 1:07 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -41,7 +41,8 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** IMPLEMENTATION Rethink meta-data subsystem in light of latest analysis :task:
+*** COMPLETED Rethink meta-data subsystem in light of latest analysis  :task:
+    CLOSED: [2014-09-28 Sun 17:22]
     CLOCK: [2014-09-23 Tue 21:18]--[2014-09-23 Tue 21:27] =>  0:09
     CLOCK: [2014-09-22 Mon 13:10]--[2014-09-22 Mon 13:44] =>  0:34
 
@@ -151,12 +152,9 @@ formatter is disabled in the formatter settings. The =backend= model
 will return all the files produced by all formatters on all backend
 models. These are then passed to an outputter in =knit=.
 
-**** Find a new name for enrichers
-
-In reality these are just some kind of visitors of the SML graph.
-
-**** Find a new name for the "builders"
-*** IMPLEMENTATION Create the =frontend= model                :task:refactor:
+*** COMPLETED Create the =frontend= model                     :task:refactor:
+    CLOSED: [2014-09-28 Sun 18:21]
+    CLOCK: [2014-09-28 Sun 17:21]--[2014-09-28 Sun 18:20] =>  0:59
     CLOCK: [2014-09-28 Sun 13:40]--[2014-09-28 Sun 13:46] =>  0:06
     CLOCK: [2014-09-28 Sun 11:57]--[2014-09-28 Sun 12:45] =>  0:48
     CLOCK: [2014-09-28 Sun 11:09]--[2014-09-28 Sun 11:37] =>  0:28
@@ -173,6 +171,19 @@ In reality these are just some kind of visitors of the SML graph.
 
 Create the interface, workflow and registrar for the frontend
 model. Implement sources for SML and Dia to SML.
+
+*** Replace knit frontend logic with =frontend= model         :task:refactor:
+
+Now that we have created the =frontend= model and implemented all of the
+known use cases, we need to remove the legacy code and replace it with
+the =frontend= model. We need to address all the issues that result from
+such integration.
+
+*** Find a new name for enrichers and builders
+
+In reality these are just some kind of visitors of the SML
+graph. Also, the implementers of this interface are more like
+"builders" since they have state.
 
 *** Add a =is_target= flag to model                           :task:refactor:
 

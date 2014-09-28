@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/sml/types/model.hpp"
+#include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/frontend/types/registrar.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
@@ -61,6 +62,28 @@ private:
      */
     source_settings
     create_source_settings(const boost::filesystem::path& p) const;
+
+    /**
+     * @brief Given the original file path, generates a new file path
+     * for the archive in question.
+     */
+    boost::filesystem::path
+    create_debug_file_path(const config::archive_types at,
+        const boost::filesystem::path& original_path) const;
+
+private:
+    /**
+     * @brief Given an input descriptor, creates the associated SML
+     * model.
+     */
+    sml::model source_sml_model_activity(const input_descriptor& d) const;
+
+    /**
+     * @brief Checks the settings chosen by the user to determine if
+     * the SML model should be persisted; if so, persists it.
+     */
+    void persist_sml_model_activity(const boost::filesystem::path& p,
+        const sml::model& m) const;
 
 public:
     static void register_source_for_extension(const std::string& ext,

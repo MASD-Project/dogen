@@ -32,15 +32,15 @@ namespace dogen {
 namespace dia {
 
 /**
- * @brief Persists a dia model to a file.
+ * @brief Persists a diagram to a file.
  */
 class persister {
 public:
     /**
-     * @brief Saves a Dia model to the filesystem.
+     * @brief Saves a diagram to the filesystem.
      *
-     * @param d Dia model to save.
-     * @param p full path of the file to save.
+     * @param d diagram to save.
+     * @param p full path of the file.
      *
      * The format to use is inferred by the extension supplied. If the
      * extension supplied is not supported, an extension is thrown.
