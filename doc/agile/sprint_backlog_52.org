@@ -16,17 +16,17 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-29 Mon 00:21]
+Clock summary at [2014-09-29 Mon 00:36]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *15:35* |       |      |
+| *Total time*                                                      | *15:41* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 15:35 |      |
+| Development Stories Implemented                                   |         | 15:41 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                |         |       | 0:57 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
-| COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:44 |
+| COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:50 |
 | Refactor types header formatter                                   |         |       | 1:07 |
 #+end:
 
@@ -175,6 +175,7 @@ model. Implement sources for SML and Dia to SML.
 
 *** COMPLETED Replace knit frontend logic with =frontend= model :task:refactor:
     CLOSED: [2014-09-29 Mon 00:20]
+    CLOCK: [2014-09-29 Mon 00:30]--[2014-09-29 Mon 00:36] =>  0:06
     CLOCK: [2014-09-28 Sun 23:22]--[2014-09-29 Mon 00:20] =>  0:58
     CLOCK: [2014-09-28 Sun 21:43]--[2014-09-28 Sun 22:40] =>  0:57
     CLOCK: [2014-09-28 Sun 19:08]--[2014-09-28 Sun 20:40] =>  1:32

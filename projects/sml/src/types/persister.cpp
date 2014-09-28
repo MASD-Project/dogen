@@ -32,7 +32,7 @@ namespace {
 auto lg(logger_factory("dia.persister"));
 
 const std::string empty;
-const std::string sml_xml_extension(".smlxml");
+const std::string sml_xml_extension(".xml");
 const std::string unsupported_extension("Extension is not supported: ");
 
 }
