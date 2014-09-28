@@ -39,17 +39,24 @@ namespace sml {
  * @brief Combines a number of models into a single model.
  *
  * The role of the merger is to aggregate a number of models into a
- * single, coherent model called the @e merged model. There are two
- * types of models that contribute to the aggregation:
+ * single, coherent model called the @e merged model. These initial
+ * models are known as @e partial models.
  *
- * @li the @e target model: the model which the user is focusing on, most
- * likely with the intention of code generating it. There can only be
- * one target model for a given merge.
+ * There are two kinds of partial models:
  *
- * @lie the @e reference models; a model is a reference model if the
- * target model refers to one or more of its types, and thus is not
- * evaluatable without their definition. Merging will fail if one or
- * more of the referenced models have not been supplied.
+ * @li the @e target model: the model which the user is focusing on,
+ * most likely with the intention of code generating it. There can
+ * only be one target model for a given merge.
+ *
+ * @li the @e reference models; a model is a reference model if the
+ * target model refers to one or more of its types - or a
+ * model referred to by the target model refers to its types and so
+ * on.
+ *
+ * In summary, the target model cannot be evaluated without the
+ * definition of all models it references, directly or
+ * indirectly. Merging will fail if one or more of the referenced
+ * models have not been supplied.
  */
 class merger {
 private:
@@ -76,7 +83,7 @@ private:
     void require_not_has_target(const std::string& name) const;
 
     /**
-     * @brief Merge must not yet have taken place.
+     * @brief Merge must @e not yet have taken place.
      */
     void require_not_has_merged() const;
 
@@ -105,19 +112,6 @@ private:
      */
     void merge_models();
 
-public:
-    /**
-     * @brief Returns true if the target model has already been added,
-     * false otherwise.
-     */
-    bool has_target() const { return has_target_; }
-
-    /**
-     * @brief Returns true if the target model has already been added,
-     * false otherwise.
-     */
-    bool has_merged() const { return has_merged_; }
-
     /**
      * @brief Adds the target model.
      *
@@ -126,15 +120,28 @@ public:
      */
     void add_target(const model& target);
 
+public:
     /**
-     * @brief Adds a reference model.
+     * @brief Returns true if the target model has already been added,
+     * false otherwise.
+     */
+    bool has_target() const { return has_target_; }
+
+    /**
+     * @brief Returns true if the merge has already taken place, false
+     * otherwise.
+     */
+    bool has_merged() const { return has_merged_; }
+
+    /**
+     * @brief Adds a partial model.
      *
      * @pre Merge mustn't have taken place already.
      */
     void add(const model& m);
 
     /**
-     * @brief Combines all models into a merged model.
+     * @brief Combines all partial models into a merged model.
      *
      * @pre Merge mustn't have taken place already.
      */

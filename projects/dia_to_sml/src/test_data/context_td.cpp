@@ -25,10 +25,6 @@
 
 namespace {
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -110,14 +106,13 @@ context_generator::context_generator() : position_(0) { }
 
 void context_generator::
 populate(const unsigned int position, result_type& v) {
-    v.is_target(create_bool(position + 0));
-    v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string_(position + 1));
-    v.parent_ids(create_std_unordered_set_std_string(position + 2));
-    v.id_to_qname(create_std_unordered_map_std_string_dogen_sml_qname(position + 3));
-    v.original_parent(create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(position + 4));
-    v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 5));
-    v.top_level_module_names(create_std_unordered_set_std_string(position + 6));
-    v.model(create_dogen_sml_model(position + 7));
+    v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string_(position + 0));
+    v.parent_ids(create_std_unordered_set_std_string(position + 1));
+    v.id_to_qname(create_std_unordered_map_std_string_dogen_sml_qname(position + 2));
+    v.original_parent(create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(position + 3));
+    v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 4));
+    v.top_level_module_names(create_std_unordered_set_std_string(position + 5));
+    v.model(create_dogen_sml_model(position + 6));
 }
 
 context_generator::result_type

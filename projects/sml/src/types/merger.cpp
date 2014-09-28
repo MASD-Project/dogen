@@ -125,7 +125,8 @@ void merger::update_references() {
 }
 
 void merger::add_target(const model& target) {
-    require_not_has_target(target.name().simple_name());
+    const auto sn(target.name().simple_name());
+    require_not_has_target(sn);
 
     has_target_ = true;
     merged_model_.name(target.name());
@@ -135,13 +136,14 @@ void merger::add_target(const model& target) {
     merged_model_.references(target.references());
     merged_model_.meta_data(target.meta_data());
 
-    add(target);
-    BOOST_LOG_SEV(lg, debug) << "added target model: "
-                             << target.name().simple_name();
+    BOOST_LOG_SEV(lg, debug) << "added target model: " << sn;
 }
 
 void merger::add(const model& m) {
     require_not_has_merged();
+
+    if (m.is_target())
+        add_target(m);
 
     BOOST_LOG_SEV(lg, debug) << "adding model: " << m.name().model_name();
     BOOST_LOG_SEV(lg, debug) << "contents: " << m;

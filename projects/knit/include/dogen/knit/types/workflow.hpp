@@ -32,6 +32,8 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/config/types/archive_types.hpp"
+#include "dogen/frontend/types/input_descriptor.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
@@ -114,12 +116,55 @@ private:
      */
     bool is_generation_required(const boost::optional<sml::model>& m) const;
 
-public:
+    /**
+     * @brief Given an archive type and a model name, returns the
+     * appropriate file extension.
+     *
+     * @param archive_type one of the supported boost archive types.
+     */
+    std::string extension(const config::archive_types at) const;
+
+    /**
+     * @brief Given the original file path, generates a new file path
+     * for the archive in question.
+     */
+    boost::filesystem::path
+    create_debug_file_path(const config::archive_types at,
+        const boost::filesystem::path& original_path) const;
+
+    /**
+     * @brief Checks the settings chosen by the user to determine if
+     * the SML model should be persisted; if so, persists it.
+     */
+    void persist_sml_model(const boost::filesystem::path& p,
+        const sml::model& m) const;
+
+private:
+    /**
+     * @brief Create a list of all input descriptors.
+     */
+    std::list<frontend::input_descriptor>
+    obtain_input_descriptors_activity() const;
+
+    /**
+     * @brief Obtains all partial SML models.
+     */
+    std::list<sml::model> obtain_partial_sml_models_activity(
+        const std::list<frontend::input_descriptor>& descriptors) const;
+
+    /**
+     * @brief Returns the path to the target model.
+     */
+    boost::filesystem::path obtain_target_path_activity(
+        const std::list<frontend::input_descriptor>& descriptors) const;
+
     /**
      * @brief Execute the SML workflow and return a model that can be
      * generated - or nothing, if no such model exists.
      */
-    boost::optional<sml::model> obtain_model_activity() const;
+    boost::optional<sml::model>
+    merge_models_activity(const boost::filesystem::path p,
+        const std::list<sml::model>& models) const;
 
     /**
      * @brief Extracts the formatting settings from the SML model.

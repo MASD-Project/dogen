@@ -35,6 +35,7 @@ target_link_libraries(knit_spec
     dia
     sml
     config
+    frontend
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

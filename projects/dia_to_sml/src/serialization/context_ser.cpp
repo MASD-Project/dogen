@@ -43,7 +43,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("is_target", v.is_target_);
     ar << make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
     ar << make_nvp("parent_ids", v.parent_ids_);
     ar << make_nvp("id_to_qname", v.id_to_qname_);
@@ -57,7 +56,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("is_target", v.is_target_);
     ar >> make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
     ar >> make_nvp("parent_ids", v.parent_ids_);
     ar >> make_nvp("id_to_qname", v.id_to_qname_);

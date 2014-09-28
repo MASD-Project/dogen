@@ -99,7 +99,6 @@ namespace dia_to_sml {
 std::size_t context_hasher::hash(const context&v) {
     std::size_t seed(0);
 
-    combine(seed, v.is_target());
     combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.child_id_to_parent_ids()));
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_qname(v.id_to_qname()));

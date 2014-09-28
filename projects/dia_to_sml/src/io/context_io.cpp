@@ -19,7 +19,6 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/dia_to_sml/io/context_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -151,15 +150,8 @@ namespace dogen {
 namespace dia_to_sml {
 
 std::ostream& operator<<(std::ostream& s, const context& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::dia_to_sml::context\"" << ", "
-      << "\"is_target\": " << v.is_target() << ", "
       << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
       << "\"parent_ids\": " << v.parent_ids() << ", "
       << "\"id_to_qname\": " << v.id_to_qname() << ", "

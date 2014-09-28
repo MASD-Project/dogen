@@ -28,7 +28,4 @@
 #include "dogen/knit/types/outputters/file_outputter.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/knit/types/outputters/stream_outputter.hpp"
-#include "dogen/knit/types/persister.hpp"
-#include "dogen/knit/types/provider.hpp"
-#include "dogen/knit/types/provider_interface.hpp"
 #include "dogen/knit/types/workflow.hpp"

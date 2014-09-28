@@ -940,7 +940,7 @@ into its SML representation.#</dia:string>
         <dia:point val="35.1846,52.9802"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.1346,52.9302;66.1496,61.4302"/>
+        <dia:rectangle val="35.1346,52.9302;66.1496,60.6302"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="35.1846,52.9802"/>
@@ -949,7 +949,7 @@ into its SML representation.#</dia:string>
         <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="7.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -1039,29 +1039,6 @@ into its SML representation.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_target#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, this is the target model.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#child_id_to_parent_ids#</dia:string>
@@ -1519,7 +1496,7 @@ into its SML representation.#</dia:string>
         <dia:point val="73.7709,62.2969"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.5921,61.3302;74.5209,64.6958"/>
+        <dia:rectangle val="50.5921,60.5302;74.5209,64.6958"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1528,7 +1505,7 @@ into its SML representation.#</dia:string>
         <dia:point val="73.7709,62.2969"/>
         <dia:point val="73.7709,64.6458"/>
         <dia:point val="50.6421,64.6458"/>
-        <dia:point val="50.6421,61.3802"/>
+        <dia:point val="50.6421,60.5802"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8999,7 +8976,7 @@ the root of an inheritance tree.
         <dia:point val="87.6884,52.9969"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.9384,39.95;93.5675,54.5969"/>
+        <dia:rectangle val="86.9384,39.95;93.5675,53.7969"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

@@ -43,16 +43,13 @@ namespace dia_to_sml {
  */
 class context final {
 public:
+    context() = default;
     context(const context&) = default;
     context(context&&) = default;
     ~context() = default;
 
 public:
-    context();
-
-public:
     context(
-        const bool is_target,
         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
         const std::unordered_set<std::string>& parent_ids,
         const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname,
@@ -69,14 +66,6 @@ private:
     friend void boost::serialization::load(Archive& ar, context& v, unsigned int version);
 
 public:
-    /**
-     * @brief If true, this is the target model.
-     */
-    /**@{*/
-    bool is_target() const;
-    void is_target(const bool v);
-    /**@}*/
-
     /**
      * @brief List of parent object IDs for a given child ID.
      */
@@ -158,7 +147,6 @@ public:
     context& operator=(context other);
 
 private:
-    bool is_target_;
     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_map<std::string, dogen::sml::qname> id_to_qname_;

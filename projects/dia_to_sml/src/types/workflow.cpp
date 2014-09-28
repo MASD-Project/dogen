@@ -56,7 +56,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     context_.model().name().model_name(model_name);
     context_.model().name().simple_name(model_name);
     context_.model().origin_type(sml::origin_types::user);
-    context_.is_target(is_target);
+    context_.model().is_target(is_target);
 
     BOOST_LOG_SEV(lg, debug) << "Target model name: "
                              << context_.model().name();
@@ -64,7 +64,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     sml::module m;
     m.name(context_.model().name());
     m.origin_type(sml::origin_types::user);
-    m.generation_type(context_.is_target() ?
+    m.generation_type(context_.model().is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
 

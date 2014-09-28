@@ -33,6 +33,9 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Responsible for executing a complete SML workflow.
+ */
 class workflow {
 public:
     workflow() = delete;
@@ -42,7 +45,7 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow(const bool load_library_models, const config::knitting_settings& s);
+    explicit workflow(const config::knitting_settings& s);
 
 private:
     /**
@@ -53,23 +56,14 @@ private:
 
 private:
     /**
-     * @brief Loads all models available in the system library.
-     */
-    std::list<model> load_library_models_activity() const;
-
-    /**
      * @brief Injects system types into model.
      */
-    void inject_system_types_activity(model& target,
-        std::list<model>& user_models,
-        std::list<model>& library_models) const;
+    void inject_system_types_activity(std::list<model>& models) const;
 
     /**
      * @brief Create the merged model.
      */
-    model create_merged_model_activity(const model& target,
-        const std::list<model>& library_models,
-        const std::list<model>& user_models) const;
+    model create_merged_model_activity(const std::list<model>& models) const;
 
     /**
      * @brief Resolve all types.
@@ -101,14 +95,17 @@ private:
      * @brief Returns true if there are any types that require code
      * generation, false otherwise.
      */
-    bool has_generatable_types(const sml::model& m) const;
+    bool has_generatable_types(const sml::model& model) const;
 
 public:
-    std::pair<bool, model>
-    execute(model target, std::list<model> user_models) const;
+    /**
+     * @brief Executes the workflow.
+     *
+     * @note parameter copied by design.
+     */
+    std::pair<bool, model> execute(std::list<model> models) const;
 
 private:
-    const bool load_library_models_;
     const config::knitting_settings settings_;
 };
 

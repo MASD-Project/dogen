@@ -23,11 +23,7 @@
 namespace dogen {
 namespace dia_to_sml {
 
-context::context()
-    : is_target_(static_cast<bool>(0)) { }
-
 context::context(
-    const bool is_target,
     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
     const std::unordered_set<std::string>& parent_ids,
     const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname,
@@ -35,8 +31,7 @@ context::context(
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
     const std::unordered_set<std::string>& top_level_module_names,
     const dogen::sml::model& model)
-    : is_target_(is_target),
-      child_id_to_parent_ids_(child_id_to_parent_ids),
+    : child_id_to_parent_ids_(child_id_to_parent_ids),
       parent_ids_(parent_ids),
       id_to_qname_(id_to_qname),
       original_parent_(original_parent),
@@ -46,7 +41,6 @@ context::context(
 
 void context::swap(context& other) noexcept {
     using std::swap;
-    swap(is_target_, other.is_target_);
     swap(child_id_to_parent_ids_, other.child_id_to_parent_ids_);
     swap(parent_ids_, other.parent_ids_);
     swap(id_to_qname_, other.id_to_qname_);
@@ -57,8 +51,7 @@ void context::swap(context& other) noexcept {
 }
 
 bool context::operator==(const context& rhs) const {
-    return is_target_ == rhs.is_target_ &&
-        child_id_to_parent_ids_ == rhs.child_id_to_parent_ids_ &&
+    return child_id_to_parent_ids_ == rhs.child_id_to_parent_ids_ &&
         parent_ids_ == rhs.parent_ids_ &&
         id_to_qname_ == rhs.id_to_qname_ &&
         original_parent_ == rhs.original_parent_ &&
@@ -71,14 +64,6 @@ context& context::operator=(context other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool context::is_target() const {
-    return is_target_;
-}
-
-void context::is_target(const bool v) {
-    is_target_ = v;
 }
 
 const std::unordered_map<std::string, std::list<std::string> >& context::child_id_to_parent_ids() const {

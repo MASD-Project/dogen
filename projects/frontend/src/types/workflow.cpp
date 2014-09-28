@@ -19,9 +19,11 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/persister.hpp"
-#include "dogen/frontend/types/source_settings.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/sml/types/persister.hpp"
+#include "dogen/frontend/io/input_descriptor_io.hpp"
+#include "dogen/frontend/types/source_settings.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 
 namespace {
@@ -41,15 +43,20 @@ const std::string invalid_archive_type("Invalid or unexpected archive type");
 namespace dogen {
 namespace frontend {
 
+std::shared_ptr<frontend::registrar> workflow::registrar_;
+
 workflow::workflow(const config::knitting_settings& ks)
     : knitting_settings_(ks) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialising frontend workflow. ";
     registrar().validate();
-    BOOST_LOG_SEV(lg, debug) << "Registered sources: ";
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << registrar().sources_by_extension().size()
+                             << " registered sources: ";
+
     for (const auto& pair : registrar().sources_by_extension()) {
-        BOOST_LOG_SEV(lg, debug) << "extension: " << pair.first
-                                 << " source: " << pair.second->id();
+        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "'"
+                                 << " source: '" << pair.second->id() << "'";
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished initialising frontend workflow. ";
@@ -92,6 +99,9 @@ source_settings
 workflow::create_source_settings(const boost::filesystem::path& p) const {
     source_settings r;
 
+    const auto& is(knitting_settings_.input());
+    r.disable_model_module(is.disable_model_module());
+
     //FIXME: using dia model settings for all sources; mega-hack
     const auto& ts(knitting_settings_.troubleshooting());
     using config::archive_types;
@@ -102,14 +112,12 @@ workflow::create_source_settings(const boost::filesystem::path& p) const {
     r.save_pre_processed_input(true);
     r.pre_processed_input_path(create_debug_file_path(at, p));
 
-    const auto& is(knitting_settings_.input());
-    r.disable_model_module(is.disable_model_module());
     return r;
 }
 
 sml::model workflow::
 source_sml_model_activity(const input_descriptor& d) const {
-    const auto& extension(d.path().extension().string());
+    const auto extension(d.path().extension().string());
     auto& source(registrar().source_for_extension(extension));
     const auto ss(create_source_settings(d.path()));
     return source.read(d, ss);
@@ -129,13 +137,23 @@ void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
     persister.persist(m, dp);
 }
 
+void workflow::register_source_for_extension(const std::string& ext,
+    std::shared_ptr<source_interface> s) {
+    registrar().register_source_for_extension(ext, s);
+}
+
 std::list<sml::model>
 workflow::execute(const std::list<input_descriptor>& descriptors) {
+    BOOST_LOG_SEV(lg, debug) << "Started executing frontend workflow. "
+                             << "Descriptors: " << descriptors;
+
     std::list<sml::model> r;
     for (const auto& d : descriptors) {
         r.push_back(source_sml_model_activity(d));
         persist_sml_model_activity(d.path(), r.back());
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished executing frontend workflow.";
     return r;
 }
 

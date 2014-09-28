@@ -26,12 +26,13 @@ add_library(knit STATIC ${knit_files})
 target_link_libraries(knit
     sml
     dia
+    dia_to_sml
+    frontend
     formatters
     cpp
     cpp_formatters
     sml_to_cpp
     config
-    dia_to_sml
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

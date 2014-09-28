@@ -103,7 +103,7 @@
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</objects>
-	<is_target>0</is_target>
+	<is_target>1</is_target>
 </entity>
 </boost_serialization>
 

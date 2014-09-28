@@ -113,7 +113,7 @@ void transformer::require_is_transformable(const processed_object& po) const {
 
 sml::generation_types transformer::generation_type(const profile& p) const {
     using sml::generation_types;
-    if (!context_.is_target())
+    if (!context_.model().is_target())
         return generation_types::no_generation;
 
     if (p.is_non_generatable() || p.is_service() || p.is_factory() ||
