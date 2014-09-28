@@ -11,6 +11,21 @@
 
 Stories that we intend to look at, at some point.
 
+*** Generalise persister, remove serialisation helpers                :story:
+
+With the move of the knit persister into each model, it became obvious
+that users need a way to hydrate and dehydrate certain types by just
+supplying a path. The ideal setup would be where each supported
+serialisation mechanism registers a number of extensions with an
+hydrator / dehydrator and the user can supply a path; the path gets
+dispatched to the correct serialisation. In this world we wouldn't
+need the XML serialisation helper (in utilities) because we would code
+generate a complete serialisation solution. This only works for files
+(and not for streams) because we infer the format from the
+extension. Having said that, if there was a way to supply an enum or
+such-like with the stream, we could create a class for streams and
+then implement the file one as an adaptor to the stream class.
+
 *** Improve error messages around meta-data kvp's              :task:bug:dia:
 
 Consider a meta-data "kvp" without a value, in a dia diagram (model note):
