@@ -30,7 +30,17 @@
 namespace dogen {
 namespace frontend {
 
+/**
+ * @brief Source that reads Dia diagrams and generates partial SML
+ * models.
+ */
 class dia_source final : public source_interface {
+public:
+    dia_source() = default;
+    dia_source(const dia_source&) = delete;
+    dia_source(dia_source&&) = default;
+    virtual ~dia_source() noexcept;
+
 public:
     std::string id() const;
     std::list<std::string> supported_extensions() const;

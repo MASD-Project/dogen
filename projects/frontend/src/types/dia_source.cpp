@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/hydrator.hpp"
+#include "dogen/dia/types/persister.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 #include "dogen/frontend/types/dia_source.hpp"
 
@@ -46,14 +47,23 @@ std::list<std::string> dia_source::supported_extensions() const {
     return ::extensions;
 }
 
+dia_source::~dia_source() noexcept { }
+
 sml::model dia_source::
 read(const input_descriptor& id, const source_settings& ss) {
+    BOOST_LOG_SEV(lg, debug) << "Hydrating dia. ";
+
     dia::hydrator h(id.path());
     dia::diagram d(h.hydrate());
 
     const bool dmp(ss.disable_model_module());
     const std::string model_name(id.path().stem().string());
     const std::string name(dmp ? empty : model_name);
+
+    if (ss.save_pre_processed_input()) {
+        dia::persister p;
+        p.persist(d, ss.pre_processed_input_path());
+    }
 
     dogen::dia_to_sml::workflow w;
     return w.execute(d, name, id.external_module_path(), id.is_target());
