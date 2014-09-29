@@ -11,6 +11,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Load only relevant library models                     :task:refactor:
+
+At present we are loading all library models. This is not a problem
+because they are small and there are only a few of them. However, in a
+distant future we will have a very large number of these (many
+supported libraries, across languages, etc) and each will be quite
+large. It would make sense to only load what is needed.
+
 *** Generalise persister, remove serialisation helpers                :story:
 
 With the move of the knit persister into each model, it became obvious

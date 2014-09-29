@@ -213,18 +213,10 @@ model. Implement it in formatters and C++ models.
 We may need to use some kind of adaptor for now to convert the output
 of the =cpp_formatters= model into a =formatters::file=.
 
-*** Update =knit= to use new models                           :task:refactor:
+*** Update =knit= to use the =backend= model                  :task:refactor:
 
 Remove the internal interfaces and code in workflow that perform the
-same role as the new models do.
-
-*** Split library model loading from SML workflow         :task:refactor:sml:
-
-We should really create a library model loader, with tests, instead of
-doing all the work directly in the SML workflow.
-
-We can then start thinking about adding features such as loading only
-libraries the merged model depends on, etc.
+same role as the new =backend= model does.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
     CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
