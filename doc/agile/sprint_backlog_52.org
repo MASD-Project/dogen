@@ -187,18 +187,19 @@ known use cases, we need to remove the legacy code and replace it with
 the =frontend= model. We need to address all the issues that result from
 such integration.
 
-*** Find a new name for enrichers and builders
-
-In reality these are just some kind of visitors of the SML
-graph. Also, the implementers of this interface are more like
-"builders" since they have state.
-
-*** Add a =is_target= flag to model                           :task:refactor:
+*** COMPLETED Add a =is_target= flag to model                 :task:refactor:
+   CLOSED: [2014-09-29 Mon 01:26]
 
 Ideally we should keep track of the "targetness" of the model with the
 model itself instead of passing parameters. This will make the
 frontend move easier.
 
+*** Find a new name for enrichers and builders
+
+In reality these are just some kind of visitors of the SML
+graph. Also, the implementers of this interface are more like
+"builders" since they have state.
+*
 *** Move SML graph visiting code from meta-data into main namespace :task:refactor:
 
 We also need to rename enrichers and delete the graph of dependencies
