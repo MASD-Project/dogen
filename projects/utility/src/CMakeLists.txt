@@ -24,6 +24,7 @@ file(GLOB_RECURSE utility_files RELATIVE
 
 add_library(utility STATIC ${utility_files})
 target_link_libraries(utility
+    ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
