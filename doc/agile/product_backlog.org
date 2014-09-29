@@ -11,6 +11,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Code generation of registrars                             :story:feature:
+
+We are using a lot of static registration and we have converged into
+what appears to be a useful pattern. It would be nice to be able to
+mark a type as registrable and to have the registrar automatically
+generated for it, with a name configurable on the meta-data. We would
+also need to configure the registration method (name, arguments - we
+may want to register against a string or just have a list of
+registered types).
+
 *** Persisters only support XML                                    :task:bug:
 
 Persister should support all archive types. At present it always
