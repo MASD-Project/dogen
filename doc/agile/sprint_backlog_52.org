@@ -16,14 +16,14 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-29 Mon 00:36]
+Clock summary at [2014-09-29 Mon 01:26]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *15:41* |       |      |
+| *Total time*                                                      | *15:56* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 15:41 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                |         |       | 0:57 |
+| Development Stories Implemented                                   |         | 15:56 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:12 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
 | COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:50 |
@@ -31,6 +31,7 @@ Clock summary at [2014-09-29 Mon 00:36]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-29 Mon 01:10]--[2014-09-29 Mon 01:25] =>  0:15
     CLOCK: [2014-09-27 Sat 10:47]--[2014-09-27 Sat 10:50] =>  0:03
     CLOCK: [2014-09-27 Sat 10:33]--[2014-09-27 Sat 10:47] =>  0:14
     CLOCK: [2014-09-25 Thu 10:21]--[2014-09-25 Thu 10:40] =>  0:19
@@ -185,8 +186,6 @@ Now that we have created the =frontend= model and implemented all of the
 known use cases, we need to remove the legacy code and replace it with
 the =frontend= model. We need to address all the issues that result from
 such integration.
-
-- create a librarian to manage library models.
 
 *** Find a new name for enrichers and builders
 
@@ -367,3 +366,15 @@ text.
 ** Deprecated Development Stories
 
 Stories that do not make sense any longer.
+
+*** CANCELLED Create a librarian to manage library models     :task:refactor:
+    CLOSED: [2014-09-29 Mon 01:25]
+
+*Rationale*: Actually, the library models are not an SML artefact; in
+fact SML handles these models in exactly the same way as any other
+model. Knit is the right place for this.
+
+As part of the frontend refactor we moved the loading of library
+models away from the SML workflow. However, SML should at least
+provide a simple way to manage the library models or else we will have
+to duplicate this code wherever these models need to be loaded.
