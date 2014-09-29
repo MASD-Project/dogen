@@ -16,14 +16,14 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-29 Mon 01:26]
+Clock summary at [2014-09-29 Mon 01:36]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *15:56* |       |      |
+| *Total time*                                                      | *16:07* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 15:56 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:12 |
+| Development Stories Implemented                                   |         | 16:07 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:23 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
 | COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:50 |
@@ -31,6 +31,7 @@ Clock summary at [2014-09-29 Mon 01:26]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-09-29 Mon 01:25]--[2014-09-29 Mon 01:36] =>  0:11
     CLOCK: [2014-09-29 Mon 01:10]--[2014-09-29 Mon 01:25] =>  0:15
     CLOCK: [2014-09-27 Sat 10:47]--[2014-09-27 Sat 10:50] =>  0:03
     CLOCK: [2014-09-27 Sat 10:33]--[2014-09-27 Sat 10:47] =>  0:14
@@ -194,16 +195,16 @@ Ideally we should keep track of the "targetness" of the model with the
 model itself instead of passing parameters. This will make the
 frontend move easier.
 
-*** Find a new name for enrichers and builders
+*** COMPLETED Refactor knit's =persister=                     :task:refactor:
+    CLOSED: [2014-09-29 Mon 01:36]
 
-In reality these are just some kind of visitors of the SML
-graph. Also, the implementers of this interface are more like
-"builders" since they have state.
-*
-*** Move SML graph visiting code from meta-data into main namespace :task:refactor:
-
-We also need to rename enrichers and delete the graph of dependencies
-between enrichers.
+- add documentation
+- we put the decision on whether to persist on not based on settings
+  inside of persister. It should really be up to the person calling
+  the persister to decide. Persister should always persist.
+- we should have an argument deciding the file format, perhaps an
+  enumeration, instead of passing in the extension. The extension
+  should be automatically determined.
 
 *** Create the =backend= model                                :task:refactor:
 
@@ -217,6 +218,17 @@ of the =cpp_formatters= model into a =formatters::file=.
 
 Remove the internal interfaces and code in workflow that perform the
 same role as the new =backend= model does.
+
+*** Find a new name for enrichers and builders
+
+In reality these are just some kind of visitors of the SML
+graph. Also, the implementers of this interface are more like
+"builders" since they have state.
+*
+*** Move SML graph visiting code from meta-data into main namespace :task:refactor:
+
+We also need to rename enrichers and delete the graph of dependencies
+between enrichers.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
     CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
@@ -325,19 +337,6 @@ needs to be replaced by a more general approach.
 
 Create the first and second stage enrichment for types. This is a good
 test to see if the overall logic is sound.
-
-*** Refactor knit's =persister=                               :task:refactor:
-
-- add documentation
-- we put the decision on whether to persist on not based on settings
-  inside of persister. It should really be up to the person calling
-  the persister to decide. Persister should always persist.
-- we should have an argument deciding the file format, perhaps an
-  enumeration, instead of passing in the extension. The extension
-  should be automatically determined.
-- persister should support all archive types. At present it always
-  outputs in XML; it should respect the archive type requested by the
-  user.
 
 *** Add frontends and backends to =info= command line option  :story:feature:
 

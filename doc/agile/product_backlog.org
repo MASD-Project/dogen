@@ -11,6 +11,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Persisters only support XML                                    :task:bug:
+
+Persister should support all archive types. At present it always
+outputs in XML; it should respect the archive type requested by the
+user.
+
 *** Load only relevant library models                     :task:refactor:
 
 At present we are loading all library models. This is not a problem
