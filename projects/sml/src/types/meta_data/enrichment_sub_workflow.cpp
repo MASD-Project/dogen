@@ -69,7 +69,8 @@ apply_enricher_activity(std::shared_ptr<enricher_interface> e) {
 void enrichment_sub_workflow::
 execute(const qname& qn, const enrichment_types enrichment_type) {
     BOOST_LOG_SEV(lg, debug) << "Starting enrichment sub workflow for: " << qn
-                             << "type: " << enrichment_type;
+                             << " type: " << enrichment_type;
+
     context_ = std::make_shared<context>(qn, enrichment_type);
 
     const auto f(std::bind(&enrichment_sub_workflow::apply_enricher_activity,
