@@ -16,22 +16,23 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-01 Wed 10:28]
+Clock summary at [2014-10-01 Wed 15:44]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *18:30* |       |      |
+| *Total time*                                                      | *20:03* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 18:30 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:23 |
+| Development Stories Implemented                                   |         | 20:03 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:35 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
 | COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:50 |
-| IMPLEMENTATION Create the =backend= model                         |         |       | 2:23 |
+| COMPLETED Finish the end-to-end architectural analysis            |         |       | 3:44 |
 | Refactor types header formatter                                   |         |       | 1:07 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-10-01 Wed 15:32]--[2014-10-01 Wed 15:44] =>  0:12
     CLOCK: [2014-09-29 Mon 01:25]--[2014-09-29 Mon 01:36] =>  0:11
     CLOCK: [2014-09-29 Mon 01:10]--[2014-09-29 Mon 01:25] =>  0:15
     CLOCK: [2014-09-27 Sat 10:47]--[2014-09-27 Sat 10:50] =>  0:03
@@ -219,18 +220,19 @@ graph. Also, the implementers of this interface are more like
 We need to also move across all of this infrastructure from meta-data,
 since they are not meta-data specific at all.
 
-*** IMPLEMENTATION Create the =backend= model                 :task:refactor:
-    CLOCK: [2014-09-30 Tue 19:03]--[2014-09-30 Tue 19:28] =>  0:25
+*** COMPLETED Finish the end-to-end architectural analysis    :task:refactor:
+    CLOSED: [2014-10-01 Wed 15:37]
 
-Create the interface, workflow and registrar for the backend
-model. Implement it in formatters and C++ models.
+We seem to still have a lot of question marks in terms of the next
+generation architecture. As part of this task we need to clarify where
+we want to go, stitching together all of the different analysis that
+have been performed.
 
-We may need to use some kind of adaptor for now to convert the output
-of the =cpp_formatters= model into a =formatters::file=.
-
-**** IMPLEMENTATION Understand how the backend model fits into the whole
-    CLOCK: [2014-10-01 Wed 00:15]--[2014-10-01 Wed 00:22] =>  0:07
-    CLOCK: [2014-09-30 Tue 22:19]--[2014-10-01 Wed 00:10] =>  1:51
+**** COMPLETED First stab, more focused on the backend model
+     CLOSED: [2014-10-01 Wed 15:36]
+     CLOCK: [2014-10-01 Wed 00:15]--[2014-10-01 Wed 00:22] =>  0:07
+     CLOCK: [2014-09-30 Tue 22:19]--[2014-10-01 Wed 00:10] =>  1:51
+     CLOCK: [2014-09-30 Tue 19:03]--[2014-09-30 Tue 19:28] =>  0:25
 
 In =sml=:
 
@@ -270,15 +272,60 @@ Note that we require a cascade of registrations:
 We no longer need the transformer models (e.g. =sml_to_cpp=) as this
 is done on the fly.
 
+**** COMPLETED Second stab, looking at clang source code
+     CLOSED: [2014-10-01 Wed 15:36]
+     CLOCK: [2014-10-01 Wed 14:31]--[2014-10-01 Wed 15:32] =>  1:01
+     CLOCK: [2014-10-01 Wed 13:31]--[2014-10-01 Wed 13:51] =>  0:20
+
+Further analysis of clang/llvm source code provided some insights:
+
+- we need to have a model consumer and producer. this is akin to the
+  AST consumer. The front ends are model producers, the backends are
+  model consumers. SML workflow binds them all together -
+  i.e. receives a list of producers and a list of consumers; produces
+  all models with the producers, does the existing SML workflow and at
+  the end, uses the graph to consume. Consumers have a number of
+  required passes; SML organises them into some simple container by
+  passes: e.g. all require 1 pass, x require 2 passes and so on.
+- frontend and backend models are responsible for doing the
+  "management" of the consumers and producers -
+  e.g. registration. frontend model is also responsible for
+  specialising producers into file based producers, with a "FileEntry"
+  like class (which we called input descriptor).
+
+*** Refactor the =frontend= model                             :task:refactor:
+
+- create a producer in SML.
+- rename the sources into file producers and inherit from SML producer.
+- return a list of producers from frontend.
+- pass list of producers to SML workflow.
+
+*** Refactor module containment graphing in SML           :task:refactor:sml:
+
+- create a single grapher that generates a graph with both parents and
+  module containment.
+- create a consumer interface for this graph.
+- move the graph itself into the grapher.
+- create a class responsible for managing the consumers, including the
+  passes - integer supplied by the user in consumer interface. plug
+  new class into the workflow (at the very end).
+- delete registrar and static registration logic in meta-data; also
+  delete enricher grapher, etc. all that is left in the meta-data is
+  reader and writer.
+
+*** Implement the =backend= model                             :task:refactor:
+
+Create the interface, workflow and registrar for the backend
+model. Workflow returns list of consumers. Implement it in formatters
+and C++ models. Formatters are consumers too (or provide a consumer).
+
+We may need to use some kind of adaptor for now to convert the output
+of the =cpp_formatters= model into a =formatters::file=.
+
 *** Update =knit= to use the =backend= model                  :task:refactor:
 
 Remove the internal interfaces and code in workflow that perform the
 same role as the new =backend= model does.
-
-*** Move SML graph visiting code from meta-data into main namespace :task:refactor:
-
-We also need to rename enrichers and delete the graph of dependencies
-between enrichers.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
     CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
@@ -383,11 +430,6 @@ was to add yet another flag: =disable_io= which is disabled when the
 IO facet is not present and passed on to the relevant formatters. This
 needs to be replaced by a more general approach.
 
-*** Implement the types enricher in cpp                :task:feature:sml:cpp:
-
-Create the first and second stage enrichment for types. This is a good
-test to see if the overall logic is sound.
-
 *** Add frontends and backends to =info= command line option  :story:feature:
 
 #+begin_quote
@@ -408,6 +450,22 @@ text.
 ** Deprecated Development Stories
 
 Stories that do not make sense any longer.
+
+*** CANCELLED Implement the types enricher in cpp      :task:feature:sml:cpp:
+    CLOSED: [2014-10-01 Wed 15:44]
+
+*Rationale*: superseded by new stories.
+
+Create the first and second stage enrichment for types. This is a good
+test to see if the overall logic is sound.
+
+*** CANCELLED Move SML graph visiting code from meta-data into main namespace :task:refactor:
+    CLOSED: [2014-10-01 Wed 15:43]
+
+*Rationale*: superseded by new stories.
+
+We also need to rename enrichers and delete the graph of dependencies
+between enrichers.
 
 *** CANCELLED Create a librarian to manage library models     :task:refactor:
     CLOSED: [2014-09-29 Mon 01:25]
