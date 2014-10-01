@@ -16,18 +16,18 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-09-30 Tue 20:23]
+Clock summary at [2014-10-01 Wed 10:28]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *16:32* |       |      |
+| *Total time*                                                      | *18:30* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 16:32 |      |
+| Development Stories Implemented                                   |         | 18:30 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:23 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
 | COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:50 |
-| IMPLEMENTATION Create the =backend= model                         |         |       | 0:25 |
+| IMPLEMENTATION Create the =backend= model                         |         |       | 2:23 |
 | Refactor types header formatter                                   |         |       | 1:07 |
 #+end:
 
@@ -207,6 +207,18 @@ frontend move easier.
   enumeration, instead of passing in the extension. The extension
   should be automatically determined.
 
+*** COMPLETED Find a new name for enrichers and builders
+    CLOSED: [2014-10-01 Wed 00:23]
+
+*New understanding*: this was done as part of the backend model work.
+
+In reality these are just some kind of visitors of the SML
+graph. Also, the implementers of this interface are more like
+"builders" since they have state.
+
+We need to also move across all of this infrastructure from meta-data,
+since they are not meta-data specific at all.
+
 *** IMPLEMENTATION Create the =backend= model                 :task:refactor:
     CLOCK: [2014-09-30 Tue 19:03]--[2014-09-30 Tue 19:28] =>  0:25
 
@@ -216,14 +228,47 @@ model. Implement it in formatters and C++ models.
 We may need to use some kind of adaptor for now to convert the output
 of the =cpp_formatters= model into a =formatters::file=.
 
-*** Find a new name for enrichers and builders
+**** IMPLEMENTATION Understand how the backend model fits into the whole
+    CLOCK: [2014-10-01 Wed 00:15]--[2014-10-01 Wed 00:22] =>  0:07
+    CLOCK: [2014-09-30 Tue 22:19]--[2014-10-01 Wed 00:10] =>  1:51
 
-In reality these are just some kind of visitors of the SML
-graph. Also, the implementers of this interface are more like
-"builders" since they have state.
+In =sml=:
 
-We need to also move across all of this infrastructure from meta-data,
-since they are not meta-data specific at all.
+- create a single grapher in SML that does both parent dependencies
+  and module containment.
+- add a flag to modules to allow identification of model module.
+- create a graph visitor that for each vertex receives the model and
+  the type at the vertex.
+- create a class to manage the visitation, including the number of
+  passes. we basically should pass in a list of visitors and the
+  number of passes and it executes a dfs on the graph.
+
+In =backend=:
+
+- =backend= actually receives the merged model.
+- =backend= checks that each backend is enabled by passing the model
+  module to each one. it then produces the subset of the enabled
+  backends.
+- =backend= uses the graph visitor to iterate through the SML
+  model. it passes each element to each enabled backend. the backends
+  internally convert the element into a backend specific
+  representation and generate all the required settings. they also
+  pass in the model and the element to each formatter registered for
+  that backend specific type; the formatters obtain any formatter
+  specific settings.
+- the backend methods return a
+  =std::list<formatters::file>=. =backend= builds up this list and in
+  the end outputs it (or returns it to the caller of the =backend=
+  workflow?). it could make sense for the outputters to be part of the
+  backend model.
+
+Note that we require a cascade of registrations:
+
+- the formatters must register with their backend model (e.g. =cpp=);
+- the individual backend models must register with =backend=;
+
+We no longer need the transformer models (e.g. =sml_to_cpp=) as this
+is done on the fly.
 
 *** Update =knit= to use the =backend= model                  :task:refactor:
 
