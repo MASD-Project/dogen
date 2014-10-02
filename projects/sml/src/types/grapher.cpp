@@ -21,12 +21,12 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/graphing_error.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/module_containment_grapher.hpp"
+#include "dogen/sml/types/grapher.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("sml.module_containment_grapher"));
+static logger lg(logger_factory("sml.grapher"));
 
 const std::string empty;
 const std::string graph_already_built("Graph has already been built");
@@ -41,10 +41,10 @@ const std::string found_cycle_in_graph("Graph has a cycle: ");
 namespace dogen {
 namespace sml {
 
-module_containment_grapher::module_containment_grapher() : built_(false) { }
+grapher::grapher() : built_(false) { }
 
-module_containment_grapher::vertex_descriptor_type
-module_containment_grapher::vertex_for_qname(const qname& qn) {
+grapher::vertex_descriptor_type
+grapher::vertex_for_qname(const qname& qn) {
     const auto i(qname_to_vertex_.find(qn));
     if (i != qname_to_vertex_.end()) {
         BOOST_LOG_SEV(lg, debug) << "Vertex already exists: " << qn;
@@ -58,21 +58,21 @@ module_containment_grapher::vertex_for_qname(const qname& qn) {
     return r;
 }
 
-void module_containment_grapher::require_not_built() const {
+void grapher::require_not_built() const {
     if (is_built()) {
         BOOST_LOG_SEV(lg, error) << graph_already_built;
         BOOST_THROW_EXCEPTION(graphing_error(graph_already_built));
     }
 }
 
-void module_containment_grapher::require_built() const {
+void grapher::require_built() const {
     if (!is_built()) {
         BOOST_LOG_SEV(lg, error) << graph_not_yet_built;
         BOOST_THROW_EXCEPTION(graphing_error(graph_not_yet_built));
     }
 }
 
-void module_containment_grapher::add(const qname& target,
+void grapher::add(const qname& target,
     const boost::optional<qname>& containing_module) {
     require_not_built();
 
@@ -89,13 +89,13 @@ void module_containment_grapher::add(const qname& target,
     }
 }
 
-void module_containment_grapher::build() {
+void grapher::build() {
     require_not_built();
     built_ = true;
     BOOST_LOG_SEV(lg, debug) << "Built graph.";
 }
 
-const module_containment_graph& module_containment_grapher::graph() const {
+const graph_type& grapher::graph() const {
     return graph_;
 }
 

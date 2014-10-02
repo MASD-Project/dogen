@@ -332,6 +332,7 @@ cancel this story.
 - add activity to create SML models in workflow.
 
 *** IMPLEMENTATION Refactor module containment graphing in SML :task:refactor:sml:
+    CLOCK: [2014-10-02 Thu 15:50]--[2014-10-02 Thu 16:22] =>  0:32
     CLOCK: [2014-10-02 Thu 14:36]--[2014-10-02 Thu 14:58] =>  0:22
 
 - create a single grapher that generates a graph with both parents and

@@ -25,12 +25,9 @@
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
-#include "dogen/sml/types/meta_data/workflow.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
-#include "dogen/sml/types/module_containment_graph.hpp"
-#include "dogen/sml/types/module_containment_grapher.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
@@ -42,31 +39,8 @@ auto lg(logger_factory("sml.workflow"));
 
 }
 
-
 namespace dogen {
 namespace sml {
-
-class graph_populator {
-public:
-    graph_populator(module_containment_grapher& grapher) : grapher_(grapher) { }
-
-public:
-    void operator()(dogen::sml::type& t) const {
-        grapher_.add(t.name(), t.containing_module());
-    }
-
-    void operator()(dogen::sml::module& m) const {
-        grapher_.add(m.name(), m.containing_module());
-    }
-
-    void operator()(dogen::sml::concept& c) const {
-        grapher_.add(c.name(), c.containing_module());
-    }
-
-private:
-    module_containment_grapher& grapher_;
-};
-
 
 workflow::workflow(const config::knitting_settings& s) : settings_(s) { }
 
@@ -111,15 +85,6 @@ create_merged_model_activity(const std::list<model>& models) const {
     return mg.merge();
 }
 
-void workflow::process_meta_data_activity(model& merged_model) const {
-    module_containment_grapher g;
-    graph_populator populator(g);
-    all_model_items_traversal(merged_model, populator);
-
-    meta_data::workflow w;
-    w.execute(g.graph(), merged_model);
-}
-
 void workflow::resolve_types_activity(model& merged_model) const {
     resolver res(merged_model);
     res.resolve();
@@ -150,7 +115,6 @@ execute(std::list<model> models) const {
     index_concepts_activity(r);
     index_properties_activity(r);
     index_associations_activity(r);
-    process_meta_data_activity(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished SML workflow.";
 

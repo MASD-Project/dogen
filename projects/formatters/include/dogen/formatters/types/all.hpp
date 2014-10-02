@@ -34,7 +34,6 @@
 #include "dogen/formatters/types/licence_hydrator.hpp"
 #include "dogen/formatters/types/meta_data/building_error.hpp"
 #include "dogen/formatters/types/meta_data/general_settings_factory.hpp"
-#include "dogen/formatters/types/meta_data/root_enricher.hpp"
 #include "dogen/formatters/types/meta_data/traits.hpp"
 #include "dogen/formatters/types/modeline.hpp"
 #include "dogen/formatters/types/modeline_field.hpp"

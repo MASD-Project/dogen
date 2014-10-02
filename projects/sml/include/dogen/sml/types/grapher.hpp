@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_MODULE_CONTAINMENT_GRAPHER_HPP
-#define DOGEN_SML_TYPES_MODULE_CONTAINMENT_GRAPHER_HPP
+#ifndef DOGEN_SML_TYPES_GRAPHER_HPP
+#define DOGEN_SML_TYPES_GRAPHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,22 +29,34 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/graph/adjacency_list.hpp>
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/sml/types/module_containment_graph.hpp"
 
 namespace dogen {
 namespace sml {
 
-class module_containment_grapher {
+/**
+ * @brief Graph of module containment and parenting dependencies of a
+ * model.
+ */
+typedef boost::adjacency_list<
+    boost::setS, boost::vecS, boost::directedS, qname
+    > graph_type;
+
+/**
+ * @brief Builds the graph of module containment and parenting
+ * dependencies for a model.
+ */
+class grapher {
 private:
-    typedef boost::graph_traits<module_containment_graph>::vertex_descriptor
+    typedef boost::graph_traits<graph_type>::vertex_descriptor
     vertex_descriptor_type;
 
     typedef std::unordered_map<qname, vertex_descriptor_type>
     qname_to_vertex_type;
 
 public:
-    module_containment_grapher();
+    grapher();
 
 private:
     /**
@@ -91,11 +103,11 @@ public:
      *
      * @pre The graph must have already been built.
      */
-    const module_containment_graph& graph() const;
+    const graph_type& graph() const;
 
 private:
     bool built_;
-    module_containment_graph graph_;
+    graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;
 };
 

@@ -22,7 +22,6 @@
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/meta_data/enrichment_types_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"

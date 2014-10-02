@@ -18,22 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_META_DATA_REGISTRAR_ERROR_FWD_HPP
-#define DOGEN_SML_TYPES_META_DATA_REGISTRAR_ERROR_FWD_HPP
+#ifndef DOGEN_SML_TYPES_CONSUMER_INTERFACE_FWD_HPP
+#define DOGEN_SML_TYPES_CONSUMER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
 namespace sml {
-namespace meta_data {
 
-class registrar_error;
+class consumer_interface;
 
-} } }
+} }
 
 #endif

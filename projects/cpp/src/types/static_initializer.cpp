@@ -18,16 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/meta_data/workflow.hpp"
-#include "dogen/cpp/types/meta_data/backend_enricher.hpp"
 #include "dogen/cpp/types/static_initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 
 void static_initializer::initialize() {
-    sml::meta_data::workflow::register_ordinary_enricher(
-        std::make_shared<meta_data::backend_enricher>());
 }
 
 } }

@@ -71,11 +71,6 @@ private:
     void resolve_types_activity(model& merged_model) const;
 
     /**
-     * @brief Add meta-data to merged model.
-     */
-    void process_meta_data_activity(model& merged_model) const;
-
-    /**
      * @brief Index all concepts in model.
      */
     void index_concepts_activity(model& merged_model) const;

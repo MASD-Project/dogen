@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_WORKFLOW_ERROR_FWD_HPP
-#define DOGEN_SML_TYPES_WORKFLOW_ERROR_FWD_HPP
+#ifndef DOGEN_SML_TYPES_CONSUMPTION_WORKFLOW_FWD_HPP
+#define DOGEN_SML_TYPES_CONSUMPTION_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
 namespace sml {
 
-class workflow_error;
+class consumption_workflow;
 
 } }
 

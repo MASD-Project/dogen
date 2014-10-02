@@ -111,7 +111,6 @@
 #include "dogen/cpp/types/includers_info.hpp"
 #include "dogen/cpp/types/includes.hpp"
 #include "dogen/cpp/types/inheritance.hpp"
-#include "dogen/cpp/types/meta_data/backend_enricher.hpp"
 #include "dogen/cpp/types/meta_data/building_error.hpp"
 #include "dogen/cpp/types/meta_data/settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/traits.hpp"
