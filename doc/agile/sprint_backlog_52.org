@@ -16,20 +16,20 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-02 Thu 14:58]
+Clock summary at [2014-10-02 Thu 16:52]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *22:41* |       |      |
+| *Total time*                                                      | *23:34* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 22:41 |      |
+| Development Stories Implemented                                   |         | 23:34 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:35 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
 | COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:50 |
 | COMPLETED Finish the end-to-end architectural analysis            |         |       | 3:44 |
 | COMPLETED Refactor the =frontend= model                           |         |       | 2:16 |
-| IMPLEMENTATION Refactor module containment graphing in SML        |         |       | 0:22 |
+| IMPLEMENTATION Refactor module containment graphing in SML        |         |       | 1:15 |
 | Refactor types header formatter                                   |         |       | 1:07 |
 #+end:
 
@@ -332,6 +332,7 @@ cancel this story.
 - add activity to create SML models in workflow.
 
 *** IMPLEMENTATION Refactor module containment graphing in SML :task:refactor:sml:
+    CLOCK: [2014-10-02 Thu 16:30]--[2014-10-02 Thu 16:51] =>  0:21
     CLOCK: [2014-10-02 Thu 15:50]--[2014-10-02 Thu 16:22] =>  0:32
     CLOCK: [2014-10-02 Thu 14:36]--[2014-10-02 Thu 14:58] =>  0:22
 
