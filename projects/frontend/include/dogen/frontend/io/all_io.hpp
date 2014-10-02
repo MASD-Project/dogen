@@ -19,4 +19,4 @@
  *
  */
 #include "dogen/frontend/io/input_descriptor_io.hpp"
-#include "dogen/frontend/io/source_settings_io.hpp"
+#include "dogen/frontend/io/provider_settings_io.hpp"

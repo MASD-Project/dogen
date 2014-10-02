@@ -18,35 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_HASH_SOURCE_SETTINGS_HASH_HPP
-#define DOGEN_FRONTEND_HASH_SOURCE_SETTINGS_HASH_HPP
+#ifndef DOGEN_FRONTEND_SERIALIZATION_PROVIDER_SETTINGS_FWD_SER_HPP
+#define DOGEN_FRONTEND_SERIALIZATION_PROVIDER_SETTINGS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/frontend/types/source_settings.hpp"
+#include "dogen/frontend/types/provider_settings_fwd.hpp"
 
-namespace dogen {
-namespace frontend {
+namespace boost {
+namespace serialization {
 
-struct source_settings_hasher {
-public:
-    static std::size_t hash(const source_settings& v);
-};
+template<class Archive>
+void save(Archive& ar, const dogen::frontend::provider_settings& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::frontend::provider_settings& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::frontend::source_settings> {
-public:
-    size_t operator()(const dogen::frontend::source_settings& v) const {
-        return dogen::frontend::source_settings_hasher::hash(v);
-    }
-};
-
-}
 #endif

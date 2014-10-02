@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_SOURCE_SETTINGS_FWD_HPP
-#define DOGEN_FRONTEND_TYPES_SOURCE_SETTINGS_FWD_HPP
+#ifndef DOGEN_FRONTEND_TYPES_PROVIDER_SETTINGS_FWD_HPP
+#define DOGEN_FRONTEND_TYPES_PROVIDER_SETTINGS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace frontend {
 
-class source_settings;
+class provider_settings;
 
 } }
 

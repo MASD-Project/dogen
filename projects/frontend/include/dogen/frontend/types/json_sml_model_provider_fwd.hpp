@@ -18,34 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_DIA_SOURCE_HPP
-#define DOGEN_FRONTEND_TYPES_DIA_SOURCE_HPP
+#ifndef DOGEN_FRONTEND_TYPES_JSON_SML_MODEL_PROVIDER_FWD_HPP
+#define DOGEN_FRONTEND_TYPES_JSON_SML_MODEL_PROVIDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/frontend/types/source_interface.hpp"
-
 namespace dogen {
 namespace frontend {
 
-/**
- * @brief Source that reads Dia diagrams and generates partial SML
- * models.
- */
-class dia_source final : public source_interface {
-public:
-    dia_source() = default;
-    dia_source(const dia_source&) = delete;
-    dia_source(dia_source&&) = default;
-    virtual ~dia_source() noexcept;
-
-public:
-    std::string id() const;
-    std::list<std::string> supported_extensions() const;
-    sml::model read(const input_descriptor& id, const source_settings& ss);
-};
+class json_sml_model_provider;
 
 } }
 

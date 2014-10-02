@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/frontend/types/source_settings.hpp"
+#include "dogen/frontend/types/provider_settings.hpp"
 
 namespace dogen {
 namespace frontend {
 
-source_settings::source_settings()
+provider_settings::provider_settings()
     : save_pre_processed_input_(static_cast<bool>(0)),
       disable_model_module_(static_cast<bool>(0)) { }
 
-source_settings::source_settings(source_settings&& rhs)
+provider_settings::provider_settings(provider_settings&& rhs)
     : save_pre_processed_input_(std::move(rhs.save_pre_processed_input_)),
       pre_processed_input_path_(std::move(rhs.pre_processed_input_path_)),
       disable_model_module_(std::move(rhs.disable_model_module_)) { }
 
-source_settings::source_settings(
+provider_settings::provider_settings(
     const bool save_pre_processed_input,
     const boost::filesystem::path& pre_processed_input_path,
     const bool disable_model_module)
@@ -40,54 +40,54 @@ source_settings::source_settings(
       pre_processed_input_path_(pre_processed_input_path),
       disable_model_module_(disable_model_module) { }
 
-void source_settings::swap(source_settings& other) noexcept {
+void provider_settings::swap(provider_settings& other) noexcept {
     using std::swap;
     swap(save_pre_processed_input_, other.save_pre_processed_input_);
     swap(pre_processed_input_path_, other.pre_processed_input_path_);
     swap(disable_model_module_, other.disable_model_module_);
 }
 
-bool source_settings::operator==(const source_settings& rhs) const {
+bool provider_settings::operator==(const provider_settings& rhs) const {
     return save_pre_processed_input_ == rhs.save_pre_processed_input_ &&
         pre_processed_input_path_ == rhs.pre_processed_input_path_ &&
         disable_model_module_ == rhs.disable_model_module_;
 }
 
-source_settings& source_settings::operator=(source_settings other) {
+provider_settings& provider_settings::operator=(provider_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool source_settings::save_pre_processed_input() const {
+bool provider_settings::save_pre_processed_input() const {
     return save_pre_processed_input_;
 }
 
-void source_settings::save_pre_processed_input(const bool v) {
+void provider_settings::save_pre_processed_input(const bool v) {
     save_pre_processed_input_ = v;
 }
 
-const boost::filesystem::path& source_settings::pre_processed_input_path() const {
+const boost::filesystem::path& provider_settings::pre_processed_input_path() const {
     return pre_processed_input_path_;
 }
 
-boost::filesystem::path& source_settings::pre_processed_input_path() {
+boost::filesystem::path& provider_settings::pre_processed_input_path() {
     return pre_processed_input_path_;
 }
 
-void source_settings::pre_processed_input_path(const boost::filesystem::path& v) {
+void provider_settings::pre_processed_input_path(const boost::filesystem::path& v) {
     pre_processed_input_path_ = v;
 }
 
-void source_settings::pre_processed_input_path(const boost::filesystem::path&& v) {
+void provider_settings::pre_processed_input_path(const boost::filesystem::path&& v) {
     pre_processed_input_path_ = std::move(v);
 }
 
-bool source_settings::disable_model_module() const {
+bool provider_settings::disable_model_module() const {
     return disable_model_module_;
 }
 
-void source_settings::disable_model_module(const bool v) {
+void provider_settings::disable_model_module(const bool v) {
     disable_model_module_ = v;
 }
 

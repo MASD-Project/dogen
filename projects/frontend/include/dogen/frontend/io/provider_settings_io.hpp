@@ -18,23 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_SERIALIZATION_SOURCE_SETTINGS_FWD_SER_HPP
-#define DOGEN_FRONTEND_SERIALIZATION_SOURCE_SETTINGS_FWD_SER_HPP
+#ifndef DOGEN_FRONTEND_IO_PROVIDER_SETTINGS_IO_HPP
+#define DOGEN_FRONTEND_IO_PROVIDER_SETTINGS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/frontend/types/source_settings_fwd.hpp"
+#include <iosfwd>
+#include "dogen/frontend/types/provider_settings.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace frontend {
 
-template<class Archive>
-void save(Archive& ar, const dogen::frontend::source_settings& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::frontend::source_settings& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::frontend::provider_settings& v);
 
 } }
 

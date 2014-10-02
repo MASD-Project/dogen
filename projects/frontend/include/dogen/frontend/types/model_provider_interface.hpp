@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_SOURCE_INTERFACE_HPP
-#define DOGEN_FRONTEND_TYPES_SOURCE_INTERFACE_HPP
+#ifndef DOGEN_FRONTEND_TYPES_MODEL_PROVIDER_INTERFACE_HPP
+#define DOGEN_FRONTEND_TYPES_MODEL_PROVIDER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,30 +27,31 @@
 
 #include <list>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/frontend/types/source_settings.hpp"
+#include "dogen/frontend/types/provider_settings.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
 
 namespace dogen {
 namespace frontend {
 
 /**
- * @brief Source of partial SML models.
+ * @brief Provides partial SML models.
  */
-class source_interface {
+class model_provider_interface {
 public:
-    source_interface() = default;
-    source_interface(const source_interface&) = delete;
-    source_interface(source_interface&&) = default;
-    virtual ~source_interface() noexcept = 0;
+    model_provider_interface() = default;
+    model_provider_interface(const model_provider_interface&) = delete;
+    model_provider_interface(model_provider_interface&&) = default;
+    virtual ~model_provider_interface() noexcept = 0;
 
 public:
     /**
-     * @brief Unique identifier for the source, for logging purposes.
+     * @brief Unique identifier for the provider, for logging
+     * purposes.
      */
     virtual std::string id() const = 0;
 
     /**
-     * @brief List of extensions supported by this source.
+     * @brief List of extensions supported by this provider.
      */
     virtual std::list<std::string> supported_extensions() const = 0;
 
@@ -59,7 +60,7 @@ public:
      * SML model.
      */
     virtual sml::model
-    read(const input_descriptor& id, const source_settings& ss) = 0;
+    provide(const input_descriptor& d, const provider_settings& s) = 0;
 };
 
 } }

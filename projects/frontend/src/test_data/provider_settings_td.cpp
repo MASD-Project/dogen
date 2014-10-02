@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/frontend/test_data/source_settings_td.hpp"
+#include "dogen/frontend/test_data/provider_settings_td.hpp"
 
 namespace {
 
@@ -39,30 +39,30 @@ create_boost_filesystem_path(const unsigned int position) {
 namespace dogen {
 namespace frontend {
 
-source_settings_generator::source_settings_generator() : position_(0) { }
+provider_settings_generator::provider_settings_generator() : position_(0) { }
 
-void source_settings_generator::
+void provider_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.save_pre_processed_input(create_bool(position + 0));
     v.pre_processed_input_path(create_boost_filesystem_path(position + 1));
     v.disable_model_module(create_bool(position + 2));
 }
 
-source_settings_generator::result_type
-source_settings_generator::create(const unsigned int position) {
-    source_settings r;
-    source_settings_generator::populate(position, r);
+provider_settings_generator::result_type
+provider_settings_generator::create(const unsigned int position) {
+    provider_settings r;
+    provider_settings_generator::populate(position, r);
     return r;
 }
-source_settings_generator::result_type*
-source_settings_generator::create_ptr(const unsigned int position) {
-    source_settings* p = new source_settings();
-    source_settings_generator::populate(position, *p);
+provider_settings_generator::result_type*
+provider_settings_generator::create_ptr(const unsigned int position) {
+    provider_settings* p = new provider_settings();
+    provider_settings_generator::populate(position, *p);
     return p;
 }
 
-source_settings_generator::result_type
-source_settings_generator::operator()() {
+provider_settings_generator::result_type
+provider_settings_generator::operator()() {
     return create(position_++);
 }
 

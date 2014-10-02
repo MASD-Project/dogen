@@ -27,7 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/frontend/serialization/source_settings_ser.hpp"
+#include "dogen/frontend/serialization/provider_settings_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
 
@@ -36,7 +36,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::frontend::source_settings& v,
+    const dogen::frontend::provider_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("save_pre_processed_input", v.save_pre_processed_input_);
     ar << make_nvp("pre_processed_input_path", v.pre_processed_input_path_.generic_string());
@@ -45,7 +45,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::frontend::source_settings& v,
+    dogen::frontend::provider_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("save_pre_processed_input", v.save_pre_processed_input_);
     std::string pre_processed_input_path_tmp;
@@ -59,16 +59,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::frontend::source_settings& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::frontend::source_settings& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::frontend::provider_settings& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::frontend::provider_settings& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::frontend::source_settings& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::frontend::source_settings& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::frontend::provider_settings& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::frontend::provider_settings& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::frontend::source_settings& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::frontend::source_settings& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::frontend::provider_settings& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::frontend::provider_settings& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::frontend::source_settings& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::frontend::source_settings& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::frontend::provider_settings& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::frontend::provider_settings& v, unsigned int version);
 
 } }

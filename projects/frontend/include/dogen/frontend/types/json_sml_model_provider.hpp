@@ -18,41 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/fstream.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/json_hydrator.hpp"
-#include "dogen/frontend/types/sml_source.hpp"
+#ifndef DOGEN_FRONTEND_TYPES_JSON_SML_MODEL_PROVIDER_HPP
+#define DOGEN_FRONTEND_TYPES_JSON_SML_MODEL_PROVIDER_HPP
 
-using namespace dogen::utility::log;
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-namespace {
-
-const std::string id("frontend.sml_source");
-const std::list<std::string> extensions({ ".json" });
-auto lg(logger_factory(id));
-const std::string empty;
-
-}
+#include "dogen/frontend/types/model_provider_interface.hpp"
 
 namespace dogen {
 namespace frontend {
 
-std::string sml_source::id() const {
-    return ::id;
-}
-
-std::list<std::string> sml_source::supported_extensions() const {
-    return ::extensions;
-}
-
-sml::model sml_source::
-read(const input_descriptor& id, const source_settings& /*ss*/) {
-    sml::json_hydrator h;
-    BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << id.path();
-    boost::filesystem::ifstream s(id.path());
-    return h.hydrate(s);
-}
+/**
+ * @brief Provides a partial SML model from a JSON file with a SML
+ * format.
+ */
+class json_sml_model_provider final : public model_provider_interface {
+public:
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    sml::model
+        provide(const input_descriptor& d, const provider_settings& s) override;
+};
 
 } }
+
+#endif

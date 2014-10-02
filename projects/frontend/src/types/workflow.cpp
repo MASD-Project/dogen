@@ -23,7 +23,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/frontend/io/input_descriptor_io.hpp"
-#include "dogen/frontend/types/source_settings.hpp"
+#include "dogen/frontend/types/provider_settings.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 
 namespace {
@@ -51,12 +51,12 @@ workflow::workflow(const config::knitting_settings& ks)
     BOOST_LOG_SEV(lg, debug) << "Initialising frontend workflow. ";
     registrar().validate();
     BOOST_LOG_SEV(lg, debug) << "Found "
-                             << registrar().sources_by_extension().size()
-                             << " registered sources: ";
+                             << registrar().providers_by_extension().size()
+                             << " registered providers: ";
 
-    for (const auto& pair : registrar().sources_by_extension()) {
+    for (const auto& pair : registrar().providers_by_extension()) {
         BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "'"
-                                 << " source: '" << pair.second->id() << "'";
+                                 << " provider: '" << pair.second->id() << "'";
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished initialising frontend workflow. ";
@@ -95,14 +95,14 @@ create_debug_file_path(const config::archive_types at,
     return r;
 }
 
-source_settings
-workflow::create_source_settings(const boost::filesystem::path& p) const {
-    source_settings r;
+provider_settings
+workflow::create_provider_settings(const boost::filesystem::path& p) const {
+    provider_settings r;
 
     const auto& is(knitting_settings_.input());
     r.disable_model_module(is.disable_model_module());
 
-    //FIXME: using dia model settings for all sources; mega-hack
+    //FIXME: using dia model settings for all providers; mega-hack
     const auto& ts(knitting_settings_.troubleshooting());
     using config::archive_types;
     archive_types at(ts.save_dia_model());
@@ -116,11 +116,11 @@ workflow::create_source_settings(const boost::filesystem::path& p) const {
 }
 
 sml::model workflow::
-source_sml_model_activity(const input_descriptor& d) const {
+provide_sml_model_activity(const input_descriptor& d) const {
     const auto extension(d.path().extension().string());
-    auto& source(registrar().source_for_extension(extension));
-    const auto ss(create_source_settings(d.path()));
-    return source.read(d, ss);
+    auto& provider(registrar().provider_for_extension(extension));
+    const auto s(create_provider_settings(d.path()));
+    return provider.provide(d, s);
 }
 
 void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
@@ -137,9 +137,9 @@ void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
     persister.persist(m, dp);
 }
 
-void workflow::register_source_for_extension(const std::string& ext,
-    std::shared_ptr<source_interface> s) {
-    registrar().register_source_for_extension(ext, s);
+void workflow::register_provider_for_extension(const std::string& ext,
+    std::shared_ptr<model_provider_interface> s) {
+    registrar().register_provider_for_extension(ext, s);
 }
 
 std::list<sml::model>
@@ -149,7 +149,7 @@ workflow::execute(const std::list<input_descriptor>& descriptors) {
 
     std::list<sml::model> r;
     for (const auto& d : descriptors) {
-        r.push_back(source_sml_model_activity(d));
+        r.push_back(provide_sml_model_activity(d));
         persist_sml_model_activity(d.path(), r.back());
     }
 

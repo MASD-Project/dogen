@@ -18,11 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/frontend/types/source_interface.hpp"
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/frontend/io/provider_settings_io.hpp"
 
 namespace dogen {
 namespace frontend {
 
-source_interface::~source_interface() noexcept { }
+std::ostream& operator<<(std::ostream& s, const provider_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::frontend::provider_settings\"" << ", "
+      << "\"save_pre_processed_input\": " << v.save_pre_processed_input() << ", "
+      << "\"pre_processed_input_path\": " << "\"" << v.pre_processed_input_path().generic_string() << "\"" << ", "
+      << "\"disable_model_module\": " << v.disable_model_module()
+      << " }";
+    return(s);
+}
 
 } }

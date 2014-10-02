@@ -29,6 +29,7 @@
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/frontend/types/registrar.hpp"
+#include "dogen/frontend/types/model_provider_interface.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
 
 namespace dogen {
@@ -57,11 +58,11 @@ private:
     std::string extension(const config::archive_types at) const;
 
     /**
-     * @brief Generates the source settings given the current
+     * @brief Generates the provider settings given the current
      * troubleshooting settings and the path supplied.
      */
-    source_settings
-    create_source_settings(const boost::filesystem::path& p) const;
+    provider_settings
+    create_provider_settings(const boost::filesystem::path& p) const;
 
     /**
      * @brief Given the original file path, generates a new file path
@@ -76,7 +77,7 @@ private:
      * @brief Given an input descriptor, creates the associated SML
      * model.
      */
-    sml::model source_sml_model_activity(const input_descriptor& d) const;
+    sml::model provide_sml_model_activity(const input_descriptor& d) const;
 
     /**
      * @brief Checks the settings chosen by the user to determine if
@@ -86,13 +87,13 @@ private:
         const sml::model& m) const;
 
 public:
-    static void register_source_for_extension(const std::string& ext,
-        std::shared_ptr<source_interface> s);
+    static void register_provider_for_extension(const std::string& ext,
+        std::shared_ptr<model_provider_interface> s);
 
 public:
     /**
      * @brief Process all of the inputs into models, using the
-     * appropriate SML sources.
+     * appropriate SML providers.
      */
     std::list<sml::model>
     execute(const std::list<input_descriptor>& descriptors);

@@ -18,25 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_SML_SOURCE_HPP
-#define DOGEN_FRONTEND_TYPES_SML_SOURCE_HPP
+#ifndef DOGEN_FRONTEND_HASH_PROVIDER_SETTINGS_HASH_HPP
+#define DOGEN_FRONTEND_HASH_PROVIDER_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/frontend/types/source_interface.hpp"
+#include <functional>
+#include "dogen/frontend/types/provider_settings.hpp"
 
 namespace dogen {
 namespace frontend {
 
-class sml_source final : public source_interface {
+struct provider_settings_hasher {
 public:
-    std::string id() const;
-    std::list<std::string> supported_extensions() const;
-    sml::model read(const input_descriptor& id, const source_settings& ss);
+    static std::size_t hash(const provider_settings& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::frontend::provider_settings> {
+public:
+    size_t operator()(const dogen::frontend::provider_settings& v) const {
+        return dogen::frontend::provider_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

@@ -18,36 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/frontend/hash/source_settings_hash.hpp"
+#ifndef DOGEN_FRONTEND_SERIALIZATION_PROVIDER_SETTINGS_SER_HPP
+#define DOGEN_FRONTEND_SERIALIZATION_PROVIDER_SETTINGS_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/frontend/types/provider_settings.hpp"
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::frontend::provider_settings)
+namespace boost {
+namespace serialization {
 
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::frontend::provider_settings& v, unsigned int version);
 
-namespace dogen {
-namespace frontend {
-
-std::size_t source_settings_hasher::hash(const source_settings&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.save_pre_processed_input());
-    combine(seed, hash_boost_filesystem_path(v.pre_processed_input_path()));
-    combine(seed, v.disable_model_module());
-
-    return seed;
-}
+template<typename Archive>
+void load(Archive& ar, dogen::frontend::provider_settings& v, unsigned int version);
 
 } }
+
+#endif

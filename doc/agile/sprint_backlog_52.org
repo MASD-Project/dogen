@@ -16,18 +16,19 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-01 Wed 15:44]
+Clock summary at [2014-10-02 Thu 14:32]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *20:03* |       |      |
+| *Total time*                                                      | *22:19* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 20:03 |      |
+| Development Stories Implemented                                   |         | 22:19 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:35 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
 | COMPLETED Replace knit frontend logic with =frontend= model       |         |       | 3:50 |
 | COMPLETED Finish the end-to-end architectural analysis            |         |       | 3:44 |
+| COMPLETED Refactor the =frontend= model                           |         |       | 2:16 |
 | Refactor types header formatter                                   |         |       | 1:07 |
 #+end:
 
@@ -208,7 +209,7 @@ frontend move easier.
   enumeration, instead of passing in the extension. The extension
   should be automatically determined.
 
-*** COMPLETED Find a new name for enrichers and builders
+*** COMPLETED Find a new name for enrichers and builders      :task:refactor:
     CLOSED: [2014-10-01 Wed 00:23]
 
 *New understanding*: this was done as part of the backend model work.
@@ -293,12 +294,41 @@ Further analysis of clang/llvm source code provided some insights:
   specialising producers into file based producers, with a "FileEntry"
   like class (which we called input descriptor).
 
-*** Refactor the =frontend= model                             :task:refactor:
+*** COMPLETED Refactor the =frontend= model                   :task:refactor:
+    CLOSED: [2014-10-02 Thu 14:28]
+    CLOCK: [2014-10-02 Thu 13:58]--[2014-10-02 Thu 14:28] =>  0:30
 
-- create a producer in SML.
-- rename the sources into file producers and inherit from SML producer.
-- return a list of producers from frontend.
-- pass list of producers to SML workflow.
+- rename source to provider
+- rename source settings to provider settings
+
+**** CANCELLED Bring in frontend generation into SML
+     CLOSED: [2014-10-02 Thu 13:57]
+     CLOCK: [2014-10-02 Thu 13:28]--[2014-10-02 Thu 13:51] =>  0:23
+     CLOCK: [2014-10-02 Thu 11:55]--[2014-10-02 Thu 12:41] =>  0:46
+     CLOCK: [2014-10-01 Wed 19:08]--[2014-10-01 Wed 19:45] =>  0:37
+
+*New Understanding*
+
+This story sounded like a great idea: to add frontend work to the SML
+workflow. However, the more we investigated it the more complicated it
+turned out. The last straw was a need to create some kind of abstract
+factory to instantiate the providers inside of the SML workflow; this
+is because the frontend model has the input/file descriptors, so it
+either clones each of the providers for each descriptor or it provides
+some kind of factory. All and all, it seems like a lot of effort, and
+for something that was a "nice to have". We still have a dynamic way
+to add frontend providers as things stand, which was the feature we
+were really after. As such we have taken the executive decision to
+cancel this story.
+
+*Old Understanding*
+
+- create a model provider in SML.
+- rename the sources into file providers and inherit/implement SML
+  provider.
+- return a list of providers from frontend.
+- pass list of providers to SML workflow.
+- add activity to create SML models in workflow.
 
 *** Refactor module containment graphing in SML           :task:refactor:sml:
 

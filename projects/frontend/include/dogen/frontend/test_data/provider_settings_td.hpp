@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TEST_DATA_SOURCE_SETTINGS_TD_HPP
-#define DOGEN_FRONTEND_TEST_DATA_SOURCE_SETTINGS_TD_HPP
+#ifndef DOGEN_FRONTEND_TEST_DATA_PROVIDER_SETTINGS_TD_HPP
+#define DOGEN_FRONTEND_TEST_DATA_PROVIDER_SETTINGS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/frontend/types/source_settings.hpp"
+#include "dogen/frontend/types/provider_settings.hpp"
 
 namespace dogen {
 namespace frontend {
 
-class source_settings_generator {
+class provider_settings_generator {
 public:
-    source_settings_generator();
+    provider_settings_generator();
 
 public:
-    typedef dogen::frontend::source_settings result_type;
+    typedef dogen::frontend::provider_settings result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

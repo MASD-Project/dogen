@@ -18,25 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_SERIALIZATION_SOURCE_SETTINGS_SER_HPP
-#define DOGEN_FRONTEND_SERIALIZATION_SOURCE_SETTINGS_SER_HPP
+#ifndef DOGEN_FRONTEND_TYPES_DIA_MODEL_PROVIDER_FWD_HPP
+#define DOGEN_FRONTEND_TYPES_DIA_MODEL_PROVIDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/frontend/types/source_settings.hpp"
+namespace dogen {
+namespace frontend {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::frontend::source_settings)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::frontend::source_settings& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::frontend::source_settings& v, unsigned int version);
+class dia_model_provider;
 
 } }
 

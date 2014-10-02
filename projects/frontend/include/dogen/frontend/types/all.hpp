@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/frontend/types/dia_source.hpp"
+#include "dogen/frontend/types/dia_model_provider.hpp"
 #include "dogen/frontend/types/frontend.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
+#include "dogen/frontend/types/json_sml_model_provider.hpp"
+#include "dogen/frontend/types/model_provider_interface.hpp"
+#include "dogen/frontend/types/provider_settings.hpp"
 #include "dogen/frontend/types/registrar.hpp"
 #include "dogen/frontend/types/registrar_error.hpp"
-#include "dogen/frontend/types/sml_source.hpp"
-#include "dogen/frontend/types/source_interface.hpp"
-#include "dogen/frontend/types/source_settings.hpp"
 #include "dogen/frontend/types/static_initializer.hpp"
 #include "dogen/frontend/types/workflow.hpp"
