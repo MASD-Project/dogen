@@ -1,7 +1,3 @@
-#+CAPTION: Dogen Logo
-#+ATTR_HTML: :align center :width 50% :height 50%
-[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/images/application_dogen.png]]
-
 * Overview
 
 *Dogen* is a code generator designed to target domain models, inspired
@@ -37,3 +33,9 @@ the instructions [[https://github.com/DomainDrivenConsulting/dogen/blob/master/d
 If you would like to submit a patch for inclusion, please fork us on
 github and submit a pull request. If you are unable to do so, please
 create an issue and append the patch to it.
+
+* Logo
+
+#+CAPTION: Dogen Logo
+#+ATTR_HTML: :align center
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/images/application_dogen.png]]
