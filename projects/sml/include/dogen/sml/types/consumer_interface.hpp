@@ -68,31 +68,31 @@ public:
      * @brief Consume concept.
      */
     virtual void consume(const model& model, const unsigned int pass,
-        const concept& target) = 0;
+        const concept& target) const = 0;
 
     /**
      * @brief Consume module.
      */
     virtual void consume(const model& model, const unsigned int pass,
-        const module& target) = 0;
+        const module& target) const = 0;
 
     /**
      * @brief Consume enumeration.
      */
     virtual void consume(const model& model, const unsigned int pass,
-        const enumeration& target) = 0;
+        const enumeration& target) const = 0;
 
     /**
      * @brief Consume primitive.
      */
     virtual void consume(const model& model, const unsigned int pass,
-        const primitive& target) = 0;
+        const primitive& target) const = 0;
 
     /**
      * @brief Consume object.
      */
     virtual void consume(const model& model, const unsigned int pass,
-        const object& target) = 0;
+        const object& target) const = 0;
 };
 
 } }

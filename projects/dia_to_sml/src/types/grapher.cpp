@@ -247,6 +247,7 @@ top_level_module_names() const {
 }
 
 void grapher::build() {
+    BOOST_LOG_SEV(lg, debug) << "Building graph.";
     require_not_built();
 
     BOOST_LOG_SEV(lg, debug) << "Processing orphan vertices.";
@@ -259,6 +260,8 @@ void grapher::build() {
     boost::depth_first_search(graph_, boost::visitor(v));
     BOOST_LOG_SEV(lg, debug) << "Graph has no cycles. Sexp: " << v.sexp();
     built_ = true;
+
+    BOOST_LOG_SEV(lg, debug) << "Built graph.";
 }
 
 } }
