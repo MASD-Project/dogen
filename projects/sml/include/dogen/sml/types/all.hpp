@@ -27,7 +27,6 @@
 #include "dogen/sml/types/consumption_workflow.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
-#include "dogen/sml/types/flat_name_builder.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/grapher.hpp"
 #include "dogen/sml/types/graphing_error.hpp"

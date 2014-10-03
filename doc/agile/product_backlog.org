@@ -93,11 +93,6 @@ visitation to resolve the types. We should improve the traversal.
 This class does not make sense any more as each model will be
 responsible for their own tags.
 
-*** Move flat name builder to CPP model               :task:refactor:sml:cpp:
-
-It seems this class is used only for tagging so we should have one in
-each model. It may even make more sense in the c++ formatters model.
-
 *** Remove all of the config settings that are in meta-data :task:refactor:config:
 
 We have a number of settings in the =config= model that won't be used
