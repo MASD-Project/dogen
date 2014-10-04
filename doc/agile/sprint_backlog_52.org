@@ -16,13 +16,13 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-03 Fri 17:38]
+Clock summary at [2014-10-04 Sat 22:57]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                      | *25:50* |       |      |
+| *Total time*                                                      | *27:26* |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                   |         | 25:50 |      |
+| Development Stories Implemented                                   |         | 27:26 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                |         |       | 1:35 |
 | COMPLETED Rethink meta-data subsystem in light of latest analysis |         |       | 2:06 |
 | COMPLETED Create the =frontend= model                             |         |       | 7:41 |
@@ -30,7 +30,7 @@ Clock summary at [2014-10-03 Fri 17:38]
 | COMPLETED Finish the end-to-end architectural analysis            |         |       | 3:44 |
 | COMPLETED Refactor the =frontend= model                           |         |       | 2:16 |
 | COMPLETED Move flat name builder to CPP model                     |         |       | 0:11 |
-| IMPLEMENTATION Refactor module containment graphing in SML        |         |       | 3:20 |
+| IMPLEMENTATION Refactor module containment graphing in SML        |         |       | 4:56 |
 | Refactor types header formatter                                   |         |       | 1:07 |
 #+end:
 
@@ -340,6 +340,7 @@ It seems this class is used only for tagging so we should have one in
 each model. It may even make more sense in the c++ formatters model.
 
 *** IMPLEMENTATION Refactor module containment graphing in SML :task:refactor:sml:
+    CLOCK: [2014-10-04 Sat 21:37]--[2014-10-04 Sat 22:43] =>  1:06
     CLOCK: [2014-10-04 Sat 16:55]--[2014-10-04 Sat 17:25] =>  0:30
     CLOCK: [2014-10-03 Fri 17:08]--[2014-10-03 Fri 17:37] =>  0:29
     CLOCK: [2014-10-03 Fri 14:44]--[2014-10-03 Fri 16:19] =>  1:35
