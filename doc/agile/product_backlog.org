@@ -3323,7 +3323,7 @@ code. This could be done with a config file using boost property
 tree. However, one would need some kind of way of mapping types into
 primitives, sequence containers etc - some kind of "concepts".
 
-*** Type framing                                              :story:feature:
+*** Add support for type framing                              :story:feature:
 
 #+begin_quote
 *Story*: As a dogen user, I want to send model types over the wire so
@@ -3338,6 +3338,11 @@ frame would be the payload - i.e. the serialised object.
 
 In order for this to work we probably need the concept of a "model
 group"; the type frame would be done for a group of models.
+
+This can be done with or without boost fusion. See this presentation
+for details on a boost fusion approach:
+
+- [[https://www.youtube.com/watch?v%3DwbZdZKpUVeg][CppCon 2014: Thomas Rodgers "Implementing Wire Protocols with Boost Fusion"]]
 
 *** Model and type enums                                      :story:feature:
 
