@@ -340,6 +340,7 @@ It seems this class is used only for tagging so we should have one in
 each model. It may even make more sense in the c++ formatters model.
 
 *** IMPLEMENTATION Refactor module containment graphing in SML :task:refactor:sml:
+    CLOCK: [2014-10-04 Sat 16:55]--[2014-10-04 Sat 17:25] =>  0:30
     CLOCK: [2014-10-03 Fri 17:08]--[2014-10-03 Fri 17:37] =>  0:29
     CLOCK: [2014-10-03 Fri 14:44]--[2014-10-03 Fri 16:19] =>  1:35
     CLOCK: [2014-10-03 Fri 14:36]--[2014-10-03 Fri 14:37] =>  0:01
