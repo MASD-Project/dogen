@@ -276,12 +276,8 @@ endif()
 # aggregate targets
 #
 add_custom_target(run_all_specs)
-
 add_custom_target(rebase)
-add_dependencies(rebase rebase_codegen rebase_dataset)
-
 add_custom_target(diff)
-add_dependencies(diff diff_codegen diff_dataset)
 
 #
 # include all sub directories
@@ -291,3 +287,9 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
 add_subdirectory(${CMAKE_SOURCE_DIR}/diagrams)
+
+#
+# dependencies for aggregate targets
+#
+add_dependencies(rebase rebase_test_models rebase_dataset)
+add_dependencies(diff diff_test_models diff_dataset)
