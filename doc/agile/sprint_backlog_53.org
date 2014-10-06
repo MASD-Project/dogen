@@ -17,14 +17,15 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-06 Mon 08:19]
+Clock summary at [2014-10-06 Mon 09:16]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *0:27* |      |      |
+| *Total time*                                       | *0:53* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 0:27 |      |
+| Development Stories Implemented                    |        | 0:53 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:27 |
+| IMPLEMENTATION Implement the =backend= model       |        |      | 0:26 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -50,7 +51,7 @@ agent, git clone the repo from scratch, =git checkout= the tag and
 then do a full build. We should also upload the docs too. Ideally we
 should do this for all platforms.
 
-*** Implement the =backend= model                             :task:refactor:
+*** IMPLEMENTATION Implement the =backend= model              :task:refactor:
 
 Create the interface, workflow and registrar for the backend
 model. Workflow returns list of consumers. Implement it in formatters
@@ -58,6 +59,11 @@ and C++ models. Formatters are consumers too (or provide a consumer).
 
 We may need to use some kind of adaptor for now to convert the output
 of the =cpp_formatters= model into a =formatters::file=.
+
+**** IMPLEMENTATION Code generate the =backend= model
+     CLOCK: [2014-10-06 Mon 08:20]--[2014-10-06 Mon 08:46] =>  0:26
+
+Add model to CMake, fix all code generation errors, etc.
 
 *** Update =knit= to use the =backend= model                  :task:refactor:
 
