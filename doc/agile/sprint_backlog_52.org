@@ -16,7 +16,7 @@ implementing the frontend and backend models.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-06 Mon 08:03]
+Clock summary at [2014-10-06 Mon 08:19]
 
 | Headline                                                          | Time    |       |      |
 |-------------------------------------------------------------------+---------+-------+------|
@@ -32,7 +32,7 @@ Clock summary at [2014-10-06 Mon 08:03]
 | COMPLETED Move flat name builder to CPP model                     |         |       | 0:11 |
 | COMPLETED Refactor module containment graphing in SML             |         |       | 3:20 |
 | POSTPONED Implement the =backend= model                           |         |       | 2:49 |
-| CANCELLED Refactor types header formatter                         |         |       | 1:07 |
+| POSTPONED Refactor types header formatter                         |         |       | 1:07 |
 #+end:
 
 *** COMPLETED Sprint and product backlog grooming                      :task:
@@ -362,6 +362,12 @@ each model. It may even make more sense in the c++ formatters model.
   delete enricher grapher, etc. all that is left in the meta-data is
   reader and writer.
 
+*** COMPLETED Add cycle detection to grapher               :task:feature:sml:
+    CLOSED: [2014-10-06 Mon 08:12]
+
+We need to move the cycle dectector code from dia to sml into
+utilities so that we can make use of it in the meta-data grapher.
+
 *** POSTPONED Implement the =backend= model                   :task:refactor:
     CLOSED: [2014-10-06 Mon 08:01]
     CLOCK: [2014-10-04 Sat 23:00]--[2014-10-05 Sun 00:13] =>  1:13
@@ -375,15 +381,15 @@ and C++ models. Formatters are consumers too (or provide a consumer).
 We may need to use some kind of adaptor for now to convert the output
 of the =cpp_formatters= model into a =formatters::file=.
 
-*** CANCELLED Refactor types header formatter  :task:refactor:formatters:cpp:
+*** POSTPONED Refactor types header formatter  :task:refactor:formatters:cpp:
     CLOSED: [2014-10-06 Mon 08:02]
     CLOCK: [2014-08-25 Mon 12:01]--[2014-08-25 Mon 12:40] =>  0:39
     CLOCK: [2014-08-25 Mon 11:56]--[2014-08-25 Mon 11:57] =>  0:01
     CLOCK: [2014-08-25 Mon 11:35]--[2014-08-25 Mon 11:43] =>  0:08
 
-*Rationale*: this story no longer matches the current state of the
+*Note*: this story no longer matches the current state of the
 world. Whilst the refactoring is needed, this description is no
-longer accurate. We need to raise a new story for this.
+longer accurate.
 
 Make the main types header formatters look like the =om= types
 formatter. This model was deleted around commit 10157ad.

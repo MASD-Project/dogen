@@ -72,11 +72,6 @@ the transformation process. Remove all the concepts from the model
 (=Element= etc) and deal with the fall out. This is required in order
 to simplify the graph in enricher.
 
-*** Add cycle detection to grapher                         :task:feature:sml:
-
-We need to move the cycle dectector code from dia to sml into
-utilities so that we can make use of it in the meta-data grapher.
-
 *** Remove dependency of writer on tags                   :task:refactor:sml:
 
 We seem to be using the tags to detect containers. We need to get rid
@@ -106,19 +101,6 @@ any longer:
 These should all be removed, with the corresponding command line
 arguments.
 
-*** Manually generate packages for previous sprint          :story:packaging:
-
-#+begin_quote
-*Story*: As a dogen user, I want to install dogen so that I don't have
-to compile it.
-#+end_quote
-
-We should manually generate packages for sprint 50 and upload them to
-Google drive. To do this we should log in to each build agent, git
-clone the repo from scratch, =git checkout= the tag and then do a full
-build. We should also upload the docs too. Ideally we should do this
-for all platforms.
-
 *** Create a demo of installing dogen and generating hello world :story:media:
 
 #+begin_quote
@@ -142,6 +124,9 @@ is always of the latest commit in master. This means that trying to
 generate packages for tag =v0.50.2410= results in packages with a
 version after that like say =v0.50.2415=. We should look at the
 current commit in master rather than the latest one.
+
+The current workaround is to manually sett the minor version just
+before closing the sprint and then reset it back.
 
 *** Write next interesting instalment in blog                    :task:media:
 
@@ -366,9 +351,9 @@ sure if the latter has any use.
 
 *** Consider merging graphers into a single class         :task:refactor:sml:
 
-After the meta-data work, we ended up with three separate graphers
-doing similar things. We should look into the commonalities of these
-classes to see if we can reuse code.
+After the meta-data work, we ended up with two separate graphers doing
+similar things. We should look into the commonalities of these classes
+to see if we can reuse code.
 
 *** References to objects in package should assume package    :story:bug:sml:
 
@@ -429,7 +414,7 @@ handling all of the use cases (reorder columns, remove columns, add
 columns, updating rows, etc). All of this code can be inferred from
 the type hierarchy.
 
-*** Use boilerplate to generate annotations    :story:feature:formatters:cpp:
+*** Use boilerplate to generate annotations    :epic:feature:formatters:cpp:
 
 #+begin_quote
 *Story*: As a dogen user, I want to be able to use my own licence and
@@ -439,14 +424,6 @@ project choices.
 
 Remove all of the manual boilerplate and make use of the new
 class. This will involve bring across some meta-data into C++ model.
-
-*** Rename the include tags and add them to CPP model          :task:bug:sml:
-
-Update all the JSON files with names in the form
-=cpp.include.types.header_file=. Add properties in =cpp= to capture
-these.
-
-While we're at it, add support for =family= too.
 
 *** Update manual with detailed model descriptions              :story:media:
 
