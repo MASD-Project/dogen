@@ -11,6 +11,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Automatically detect test models for include path         :task:refactor:
+
+In the CMakeLists for the test models we are already looping through
+all the diagrams:
+
+: foreach(dia_model ${all_dia_test_models})
+
+We should take advantage of this to define =include_directories= and
+=add_subdirectory=. At present we are doing these manually.
+
 *** Code generation of registrars                             :story:feature:
 
 We are using a lot of static registration and we have converged into
