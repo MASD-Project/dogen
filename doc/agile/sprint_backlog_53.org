@@ -17,16 +17,16 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-06 Mon 19:26]
+Clock summary at [2014-10-06 Mon 19:39]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *1:17* |      |      |
+| *Total time*                                       | *1:30* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 1:17 |      |
+| Development Stories Implemented                    |        | 1:30 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:27 |
 | COMPLETED Fix CMake 3.0 warnings                   |        |      | 0:14 |
-| IMPLEMENTATION Implement the =backend= model       |        |      | 0:36 |
+| IMPLEMENTATION Implement the =backend= model       |        |      | 0:49 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -74,6 +74,11 @@ of the =cpp_formatters= model into a =formatters::file=.
      CLOCK: [2014-10-06 Mon 08:20]--[2014-10-06 Mon 08:46] =>  0:26
 
 Add model to CMake, fix all code generation errors, etc.
+
+**** IMPLEMENTATION Implement the main classes
+     CLOCK: [2014-10-06 Mon 19:26]--[2014-10-06 Mon 19:39] =>  0:13
+
+Add code for interface, registrar and workflow.
 
 *** Update =knit= to use the =backend= model                  :task:refactor:
 
