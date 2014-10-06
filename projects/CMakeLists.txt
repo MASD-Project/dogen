@@ -141,6 +141,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dia/include
     ${CMAKE_SOURCE_DIR}/projects/dia_to_sml/include
     ${CMAKE_SOURCE_DIR}/projects/frontend/include
+    ${CMAKE_SOURCE_DIR}/projects/backend/include
     ${CMAKE_SOURCE_DIR}/projects/sml/include
     ${CMAKE_SOURCE_DIR}/projects/config/include
     ${CMAKE_SOURCE_DIR}/projects/cpp/include
@@ -161,6 +162,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/frontend/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/frontend/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config)
