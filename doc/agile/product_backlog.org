@@ -771,9 +771,11 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** Add warning =-Wunused-private-field=                    :task:feature:build:
+*** Add new warnings to compilation                      :task:feature:build:
 
-Seems like this warning is not part of =-Wall
+- =-Wunused-private-field=: Seems like this warning is not part of
+  =-Wall=
+- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 
 *** Use formatting settings in formatters model    :task:refactor:formatters:
 
