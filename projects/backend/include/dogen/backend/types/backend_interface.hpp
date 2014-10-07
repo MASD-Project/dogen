@@ -49,6 +49,11 @@ public:
 
 public:
     /**
+     * @brief Unique identifier for the backend, for logging purposes.
+     */
+    virtual std::string id() const = 0;
+
+    /**
      * @brief Generates the source code for the backend.
      *
      * @param gs General settings for the SML types.

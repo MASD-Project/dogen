@@ -11,6 +11,7 @@
    "/projects/dia_to_sml/include"
    "/projects/sml/include"
    "/projects/frontend/include"
+   "/projects/backend/include"
    "/projects/knit/include"
    "/projects/knitter/include"
    "/projects/cpp/include"
