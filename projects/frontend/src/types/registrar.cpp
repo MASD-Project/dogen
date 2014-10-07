@@ -51,7 +51,7 @@ const std::unordered_map<std::string,
 
 void registrar::validate() const {
     if (providers_by_extension_.empty()) {
-        // not logging by design
+        BOOST_LOG_SEV(lg, debug) << no_providers;
         BOOST_THROW_EXCEPTION(registrar_error(no_providers));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
@@ -59,18 +59,15 @@ void registrar::validate() const {
 
 void registrar::register_provider_for_extension(const std::string& ext,
     std::shared_ptr<model_provider_interface> s) {
+    // note: not logging by design
 
-    if (!s) {
-        BOOST_LOG_SEV(lg, error) << null_provider;
+    if (!s)
         BOOST_THROW_EXCEPTION(registrar_error(null_provider));
-    }
 
     const auto i(providers_by_extension_.insert(std::make_pair(ext, s)));
-    if (!i.second) {
-        BOOST_LOG_SEV(lg, error) << extension_already_registered << ext;
+    if (!i.second)
         BOOST_THROW_EXCEPTION(
             registrar_error(extension_already_registered + ext));
-    }
 }
 
 model_provider_interface& registrar::

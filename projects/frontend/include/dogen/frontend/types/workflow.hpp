@@ -40,7 +40,7 @@ namespace frontend {
  */
 class workflow {
 public:
-    explicit workflow(const config::knitting_settings& ts);
+    explicit workflow(const config::knitting_settings& ks);
 
 private:
     /**

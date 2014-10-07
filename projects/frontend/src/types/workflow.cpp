@@ -32,7 +32,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("frontend.workflow"));
 
 std::string empty;
-const std::string null_registrar("Registrar is null");
 const std::string xml_extension(".xml");
 const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
