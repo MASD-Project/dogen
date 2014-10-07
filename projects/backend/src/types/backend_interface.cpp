@@ -23,6 +23,6 @@
 namespace dogen {
 namespace backend {
 
-backend_interface::~backend_interface() { }
+backend_interface::~backend_interface() noexcept { }
 
 } }

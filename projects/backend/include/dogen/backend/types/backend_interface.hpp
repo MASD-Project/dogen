@@ -55,7 +55,7 @@ public:
      * @param m Model to generate.
      */
     virtual std::list<formatters::file> generate(
-        const std::unordered_map<sml::qname, general_settings>& gs,
+        const std::unordered_map<sml::qname, formatters::general_settings>& gs,
         const sml::model& m) const = 0;
 
     /**
