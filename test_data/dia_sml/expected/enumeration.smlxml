@@ -106,6 +106,7 @@
 						<simple_name>shape_types</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -197,6 +198,7 @@
 						<simple_name>a_class</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 	</modules>

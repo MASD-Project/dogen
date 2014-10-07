@@ -268,6 +268,7 @@
 						<simple_name>child</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -337,6 +338,7 @@
 						<simple_name>child</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -406,6 +408,7 @@
 						<simple_name>parent</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -488,6 +491,7 @@
 						<simple_name>child</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -840,6 +844,7 @@ in the context of inheritance.
 						<simple_name>move_ctor_empty_descendant</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 	</modules>

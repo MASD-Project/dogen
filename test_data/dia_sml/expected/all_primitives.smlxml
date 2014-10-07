@@ -92,6 +92,7 @@
 						<simple_name>a_class</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 	</modules>

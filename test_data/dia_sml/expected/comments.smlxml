@@ -112,6 +112,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -198,6 +199,7 @@
 						<simple_name>package2</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -296,6 +298,7 @@ This comment will be applied to the model namespace itself.
 						<simple_name>package</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 	</modules>

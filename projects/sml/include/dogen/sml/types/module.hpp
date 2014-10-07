@@ -62,7 +62,8 @@ public:
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
         const boost::optional<dogen::sml::qname>& containing_module,
-        const std::list<dogen::sml::qname>& members);
+        const std::list<dogen::sml::qname>& members,
+        const bool is_model_module);
 
 private:
     template<typename Archive>
@@ -143,6 +144,14 @@ public:
     void members(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, this module represents the model itself.
+     */
+    /**@{*/
+    bool is_model_module() const;
+    void is_model_module(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const module& rhs) const;
     bool operator!=(const module& rhs) const {
@@ -161,6 +170,7 @@ private:
     dogen::sml::origin_types origin_type_;
     boost::optional<dogen::sml::qname> containing_module_;
     std::list<dogen::sml::qname> members_;
+    bool is_model_module_;
 };
 
 } }

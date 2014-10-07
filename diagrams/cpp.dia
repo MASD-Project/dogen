@@ -9579,7 +9579,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="282,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="281.95,81.95;314.12,95.85"/>
+        <dia:rectangle val="281.95,81.95;314.12,96.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="282,82"/>
@@ -9588,7 +9588,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="32.07"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.800000000000001"/>
+        <dia:real val="14.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#backend_workflow#</dia:string>
@@ -10247,7 +10247,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
                 <dia:string>#gs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;qname,general_settings&gt;&amp;#</dia:string>
+                <dia:string>#const std::unordered_map&lt;qname,formatters::general_settings&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10492,7 +10492,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="76.6125,76.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.7625,76.15;159.113,87.05"/>
+        <dia:rectangle val="75.7625,76.15;159.112,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18273,7 +18273,7 @@ to the grammar of a language.#</dia:string>
         <dia:point val="339,82.65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="334.413,82.5953;339.055,83.575"/>
+        <dia:rectangle val="334.412,82.5953;339.055,83.575"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21619,7 +21619,7 @@ main.#</dia:string>
         <dia:point val="282,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="252.492,77.95;282.75,83.6"/>
+        <dia:rectangle val="252.492,77.25;282.75,82.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21800,7 +21800,7 @@ main.#</dia:string>
         <dia:point val="314.07,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="313.32,70.95;320.2,83.6"/>
+        <dia:rectangle val="313.32,70.95;320.2,82.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21871,7 +21871,7 @@ main.#</dia:string>
         <dia:point val="325.925,71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="325.175,70.25;330.451,83.6"/>
+        <dia:rectangle val="325.175,70.25;330.451,82.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22122,7 +22122,7 @@ main.#</dia:string>
         <dia:point val="191,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.25,74.35;197.84,86.6"/>
+        <dia:rectangle val="190.25,74.35;197.84,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22193,7 +22193,7 @@ main.#</dia:string>
         <dia:point val="209.595,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="208.845,77.55;219.727,86.6"/>
+        <dia:rectangle val="208.845,77.55;219.727,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

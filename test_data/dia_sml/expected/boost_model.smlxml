@@ -148,6 +148,7 @@
 						<simple_name>class_c</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 		<item>
@@ -323,6 +324,7 @@
 						<simple_name>class_h</simple_name>
 					</item>
 				</members>
+				<is_model_module>0</is_model_module>
 			</second>
 		</item>
 	</modules>
