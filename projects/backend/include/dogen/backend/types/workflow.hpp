@@ -30,6 +30,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/backend/types/registrar.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 
@@ -49,6 +50,13 @@ private:
      * initialised, initialises it.
      */
     static backend::registrar& registrar();
+
+private:
+    /**
+     * @brief Creates the general settings container.
+     */
+    std::unordered_map<sml::qname, formatters::general_settings>
+    create_general_settings_by_qname_activity(const sml::model& m) const;
 
 public:
     /**

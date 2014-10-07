@@ -6674,7 +6674,7 @@ is responsible for.#</dia:string>
         <dia:point val="-21.0613,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.8113,-27.45;-13.8,-12.4"/>
+        <dia:rectangle val="-21.8113,-27.45;-13.8,-13.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6745,7 +6745,7 @@ is responsible for.#</dia:string>
         <dia:point val="-21.0613,-10.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.8113,-11.15;9.07,-6.2"/>
+        <dia:rectangle val="-21.8113,-11.15;9.07,-6.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

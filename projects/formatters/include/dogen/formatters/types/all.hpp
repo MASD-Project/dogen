@@ -27,6 +27,7 @@
 #include "dogen/formatters/types/formatters.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/general_settings_handler.hpp"
 #include "dogen/formatters/types/hydration_error.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"

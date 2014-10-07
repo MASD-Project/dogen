@@ -17,17 +17,18 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-07 Tue 22:04]
+Clock summary at [2014-10-07 Tue 22:46]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *2:28* |      |      |
+| *Total time*                                                        | *3:07* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 2:28 |      |
+| Development Stories Implemented                                     |        | 3:07 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:27 |
 | COMPLETED Fix CMake 3.0 warnings                                    |        |      | 0:14 |
 | COMPLETED Rename =model_provider_interface= to =frontend_interface= |        |      | 0:18 |
-| IMPLEMENTATION Implement the =backend= model                        |        |      | 1:29 |
+| COMPLETED Implement the =backend= model                             |        |      | 1:31 |
+| IMPLEMENTATION Implement the general settings handler               |        |      | 0:37 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -69,7 +70,8 @@ for all the backend instances, it only seems logical to call
 =frontend_interface= to its equivalent in the =frontend= model. This
 may be a case of "over-symmetry" but seems to make sense.
 
-*** IMPLEMENTATION Implement the =backend= model              :task:refactor:
+*** COMPLETED Implement the =backend= model                   :task:refactor:
+    CLOSED: [2014-10-07 Tue 22:08]
 
 Create the interface, workflow and registrar for the backend
 model. Workflow returns list of consumers. Implement it in formatters
@@ -85,11 +87,20 @@ of the =cpp_formatters= model into a =formatters::file=.
 
 Add model to CMake, fix all code generation errors, etc.
 
-**** IMPLEMENTATION Implement the main classes
+**** COMPLETED Implement the main classes
+     CLOSED: [2014-10-07 Tue 22:07]
+     CLOCK: [2014-10-07 Tue 22:05]--[2014-10-07 Tue 22:07] =>  0:02
      CLOCK: [2014-10-07 Tue 21:04]--[2014-10-07 Tue 21:44] =>  0:40
      CLOCK: [2014-10-06 Mon 19:26]--[2014-10-06 Mon 19:39] =>  0:13
 
 Add code for interface, registrar and workflow.
+
+*** IMPLEMENTATION Implement the general settings handler     :task:refactor:
+    CLOCK: [2014-10-07 Tue 22:09]--[2014-10-07 Tue 22:46] =>  0:37
+
+We need to implement the model consumer interface, perform the
+override heuristics, and return the general settings container to its
+owner. We should also plug it in to the backend workflow.
 
 *** Update =knit= to use the =backend= model                  :task:refactor:
 

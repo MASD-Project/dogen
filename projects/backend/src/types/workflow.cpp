@@ -19,6 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/consumption_workflow.hpp"
+#include "dogen/formatters/types/general_settings_handler.hpp"
 #include "dogen/backend/types/workflow.hpp"
 
 namespace {
@@ -54,11 +56,21 @@ backend::registrar& workflow::registrar() {
     return *registrar_;
 }
 
+std::unordered_map<sml::qname, formatters::general_settings>
+workflow::create_general_settings_by_qname_activity(const sml::model& m) const {
+    auto h(std::make_shared<formatters::general_settings_handler>());
+    std::list<std::shared_ptr<sml::consumer_interface>> l({h});
+    sml::consumption_workflow w;
+    w.execute(m, l);
+    return h->general_settings_by_qname();
+}
+
 void workflow::register_backend(std::shared_ptr<backend_interface> b) {
     registrar().register_backend(b);
 }
 
-std::list<formatters::file> workflow::execute(const sml::model& /*m*/) const {
+std::list<formatters::file> workflow::execute(const sml::model& m) const {
+    create_general_settings_by_qname_activity(m);
     std::list<formatters::file> r;
     return r;
 }

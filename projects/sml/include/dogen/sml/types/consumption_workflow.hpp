@@ -53,7 +53,7 @@ namespace sml {
  */
 class consumption_workflow {
 public:
-    consumption_workflow() = delete;
+    consumption_workflow() = default;
     consumption_workflow(const consumption_workflow&) = default;
     ~consumption_workflow() = default;
     consumption_workflow(consumption_workflow&&) = default;

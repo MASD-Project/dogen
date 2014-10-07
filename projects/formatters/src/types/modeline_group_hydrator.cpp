@@ -26,10 +26,9 @@
 #include "dogen/formatters/types/hydration_error.hpp"
 #include "dogen/formatters/types/modeline_group_hydrator.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("formatters.modeline_group_hydrator"));
 
 const std::string empty;
