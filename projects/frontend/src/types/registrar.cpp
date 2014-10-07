@@ -30,13 +30,13 @@ static logger lg(logger_factory("frontend.registrar"));
 
 const std::string exension_registerd_more_than_once(
     "Extension was registered more than once");
-const std::string no_providers("No providers provided.");
-const std::string no_provider_for_extension(
-    "No provider available for extension:");
+const std::string no_frontends("No frontends provided.");
+const std::string no_frontend_for_extension(
+    "No frontend available for extension:");
 const std::string extension_already_registered(
     "Extension has already been registered: ");
 
-const std::string null_provider("Provider supplied is null");
+const std::string null_frontend("Frontends supplied is null");
 
 }
 
@@ -44,44 +44,44 @@ namespace dogen {
 namespace frontend {
 
 const std::unordered_map<std::string,
-                         std::shared_ptr<model_provider_interface>>&
-    registrar::providers_by_extension() const {
-    return providers_by_extension_;
+                         std::shared_ptr<frontend_interface>>&
+    registrar::frontends_by_extension() const {
+    return frontends_by_extension_;
 }
 
 void registrar::validate() const {
-    if (providers_by_extension_.empty()) {
-        BOOST_LOG_SEV(lg, debug) << no_providers;
-        BOOST_THROW_EXCEPTION(registrar_error(no_providers));
+    if (frontends_by_extension_.empty()) {
+        BOOST_LOG_SEV(lg, debug) << no_frontends;
+        BOOST_THROW_EXCEPTION(registrar_error(no_frontends));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-void registrar::register_provider_for_extension(const std::string& ext,
-    std::shared_ptr<model_provider_interface> s) {
+void registrar::register_frontend_for_extension(const std::string& ext,
+    std::shared_ptr<frontend_interface> s) {
     // note: not logging by design
 
     if (!s)
-        BOOST_THROW_EXCEPTION(registrar_error(null_provider));
+        BOOST_THROW_EXCEPTION(registrar_error(null_frontend));
 
-    const auto i(providers_by_extension_.insert(std::make_pair(ext, s)));
+    const auto i(frontends_by_extension_.insert(std::make_pair(ext, s)));
     if (!i.second)
         BOOST_THROW_EXCEPTION(
             registrar_error(extension_already_registered + ext));
 }
 
-model_provider_interface& registrar::
-provider_for_extension(const std::string& ext) {
-    BOOST_LOG_SEV(lg, debug) << "Looking for provider for extension: " << ext;
-    const auto i(providers_by_extension_.find(ext));
-    if (i != providers_by_extension_.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found provider for extension. Extension '"
-                                 << ext << "' provider: '" << i->second->id()
+frontend_interface& registrar::
+frontend_for_extension(const std::string& ext) {
+    BOOST_LOG_SEV(lg, debug) << "Looking for frontend for extension: " << ext;
+    const auto i(frontends_by_extension_.find(ext));
+    if (i != frontends_by_extension_.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Found frontend for extension. Extension '"
+                                 << ext << "' frontend: '" << i->second->id()
                                  << "'";
         return *i->second;
     }
-    BOOST_LOG_SEV(lg, error) << no_provider_for_extension << ext;
-    BOOST_THROW_EXCEPTION(registrar_error(no_provider_for_extension + ext));
+    BOOST_LOG_SEV(lg, error) << no_frontend_for_extension << ext;
+    BOOST_THROW_EXCEPTION(registrar_error(no_frontend_for_extension + ext));
 }
 
 } }

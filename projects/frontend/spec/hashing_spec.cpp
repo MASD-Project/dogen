@@ -43,6 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
     test_hashing<input_descriptor_generator>();
+    test_hashing<frontend_settings_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

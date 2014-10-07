@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_HASH_PROVIDER_SETTINGS_HASH_HPP
-#define DOGEN_FRONTEND_HASH_PROVIDER_SETTINGS_HASH_HPP
+#ifndef DOGEN_FRONTEND_TYPES_FRONTEND_SETTINGS_FWD_HPP
+#define DOGEN_FRONTEND_TYPES_FRONTEND_SETTINGS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/frontend/types/provider_settings.hpp"
-
 namespace dogen {
 namespace frontend {
 
-struct provider_settings_hasher {
-public:
-    static std::size_t hash(const provider_settings& v);
-};
+class frontend_settings;
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::frontend::provider_settings> {
-public:
-    size_t operator()(const dogen::frontend::provider_settings& v) const {
-        return dogen::frontend::provider_settings_hasher::hash(v);
-    }
-};
-
-}
 #endif

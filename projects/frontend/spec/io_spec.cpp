@@ -42,6 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
     test_io<input_descriptor_generator>();
+    test_io<frontend_settings_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

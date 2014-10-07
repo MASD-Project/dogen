@@ -42,6 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
     test_swap<input_descriptor_generator>();
+    test_swap<frontend_settings_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

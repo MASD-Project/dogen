@@ -18,27 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/frontend/io/provider_settings_io.hpp"
+#ifndef DOGEN_FRONTEND_SERIALIZATION_FRONTEND_SETTINGS_FWD_SER_HPP
+#define DOGEN_FRONTEND_SERIALIZATION_FRONTEND_SETTINGS_FWD_SER_HPP
 
-namespace dogen {
-namespace frontend {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const provider_settings& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+#include "dogen/frontend/types/frontend_settings_fwd.hpp"
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::frontend::provider_settings\"" << ", "
-      << "\"save_pre_processed_input\": " << v.save_pre_processed_input() << ", "
-      << "\"pre_processed_input_path\": " << "\"" << v.pre_processed_input_path().generic_string() << "\"" << ", "
-      << "\"disable_model_module\": " << v.disable_model_module()
-      << " }";
-    return(s);
-}
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::frontend::frontend_settings& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::frontend::frontend_settings& v, unsigned int version);
 
 } }
+
+#endif

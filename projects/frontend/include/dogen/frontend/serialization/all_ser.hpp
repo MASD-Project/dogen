@@ -18,6 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/frontend/serialization/frontend_settings_ser.hpp"
 #include "dogen/frontend/serialization/input_descriptor_ser.hpp"
-#include "dogen/frontend/serialization/provider_settings_ser.hpp"
 #include "dogen/frontend/serialization/registrar_ser.hpp"

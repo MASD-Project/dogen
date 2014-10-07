@@ -17,16 +17,17 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-07 Tue 21:44]
+Clock summary at [2014-10-07 Tue 22:04]
 
-| Headline                                           | Time   |      |      |
-|----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *2:10* |      |      |
-|----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 2:10 |      |
-| IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:27 |
-| COMPLETED Fix CMake 3.0 warnings                   |        |      | 0:14 |
-| IMPLEMENTATION Implement the =backend= model       |        |      | 1:29 |
+| Headline                                                            | Time   |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                        | *2:28* |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                     |        | 2:28 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:27 |
+| COMPLETED Fix CMake 3.0 warnings                                    |        |      | 0:14 |
+| COMPLETED Rename =model_provider_interface= to =frontend_interface= |        |      | 0:18 |
+| IMPLEMENTATION Implement the =backend= model                        |        |      | 1:29 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -59,6 +60,15 @@ should do this for all platforms.
 After the latest CMake update we started to see a lot of warnings. We
 need to fix these.
 
+*** COMPLETED Rename =model_provider_interface= to =frontend_interface= :task:refactor:
+    CLOSED: [2014-10-07 Tue 22:04]
+    CLOCK: [2014-10-07 Tue 21:46]--[2014-10-07 Tue 22:04] =>  0:18
+
+Since we called =backend_interface= to the =backend= model interface
+for all the backend instances, it only seems logical to call
+=frontend_interface= to its equivalent in the =frontend= model. This
+may be a case of "over-symmetry" but seems to make sense.
+
 *** IMPLEMENTATION Implement the =backend= model              :task:refactor:
 
 Create the interface, workflow and registrar for the backend
@@ -80,13 +90,6 @@ Add model to CMake, fix all code generation errors, etc.
      CLOCK: [2014-10-06 Mon 19:26]--[2014-10-06 Mon 19:39] =>  0:13
 
 Add code for interface, registrar and workflow.
-
-*** Rename =model_provider_interface= to =frontend_interface= :task:refactor:
-
-Since we called =backend_interface= to the =backend= model interface
-for all the backend instances, it only seems logical to call
-=frontend_interface= to its equivalent in the =frontend= model. This
-may be a case of "over-symmetry" but seems to make sense.
 
 *** Update =knit= to use the =backend= model                  :task:refactor:
 

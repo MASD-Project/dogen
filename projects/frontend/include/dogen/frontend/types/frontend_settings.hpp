@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_PROVIDER_SETTINGS_HPP
-#define DOGEN_FRONTEND_TYPES_PROVIDER_SETTINGS_HPP
+#ifndef DOGEN_FRONTEND_TYPES_FRONTEND_SETTINGS_HPP
+#define DOGEN_FRONTEND_TYPES_FRONTEND_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,44 +27,44 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/frontend/serialization/provider_settings_fwd_ser.hpp"
+#include "dogen/frontend/serialization/frontend_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace frontend {
 
 /**
- * @brief Settings that control the reading abilities of the provider.
+ * @brief Settings that control the reading abilities of the frontend.
  */
-class provider_settings final {
+class frontend_settings final {
 public:
-    provider_settings(const provider_settings&) = default;
-    ~provider_settings() = default;
+    frontend_settings(const frontend_settings&) = default;
+    ~frontend_settings() = default;
 
 public:
-    provider_settings();
+    frontend_settings();
 
 public:
-    provider_settings(provider_settings&& rhs);
+    frontend_settings(frontend_settings&& rhs);
 
 public:
-    provider_settings(
+    frontend_settings(
         const bool save_pre_processed_input,
         const boost::filesystem::path& pre_processed_input_path,
         const bool disable_model_module);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const provider_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const frontend_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, provider_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, frontend_settings& v, unsigned int version);
 
 public:
     /**
-     * @brief If true, the provider will try to save the original input after
+     * @brief If true, the frontend will try to save the original input after
      * initial parsing.
      *
-     * Note that this option only makes sense if the provider is
+     * Note that this option only makes sense if the frontend is
      * transforming a format into SML. It is ignored in cases where
      * we are reading an SML representation.
      */
@@ -74,7 +74,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Full path to use for the provider's pre-processed input.
+     * @brief Full path to use for the frontend's pre-processed input.
      */
     /**@{*/
     const boost::filesystem::path& pre_processed_input_path() const;
@@ -92,14 +92,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const provider_settings& rhs) const;
-    bool operator!=(const provider_settings& rhs) const {
+    bool operator==(const frontend_settings& rhs) const;
+    bool operator!=(const frontend_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(provider_settings& other) noexcept;
-    provider_settings& operator=(provider_settings other);
+    void swap(frontend_settings& other) noexcept;
+    frontend_settings& operator=(frontend_settings other);
 
 private:
     bool save_pre_processed_input_;
@@ -113,8 +113,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::frontend::provider_settings& lhs,
-    dogen::frontend::provider_settings& rhs) {
+    dogen::frontend::frontend_settings& lhs,
+    dogen::frontend::frontend_settings& rhs) {
     lhs.swap(rhs);
 }
 

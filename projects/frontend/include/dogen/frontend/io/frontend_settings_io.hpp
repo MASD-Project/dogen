@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_PROVIDER_SETTINGS_FWD_HPP
-#define DOGEN_FRONTEND_TYPES_PROVIDER_SETTINGS_FWD_HPP
+#ifndef DOGEN_FRONTEND_IO_FRONTEND_SETTINGS_IO_HPP
+#define DOGEN_FRONTEND_IO_FRONTEND_SETTINGS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/frontend/types/frontend_settings.hpp"
+
 namespace dogen {
 namespace frontend {
 
-class provider_settings;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::frontend::frontend_settings& v);
 
 } }
 

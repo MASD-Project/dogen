@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/frontend/hash/frontend_settings_hash.hpp"
 #include "dogen/frontend/hash/input_descriptor_hash.hpp"
-#include "dogen/frontend/hash/provider_settings_hash.hpp"

@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_DIA_MODEL_PROVIDER_FWD_HPP
-#define DOGEN_FRONTEND_TYPES_DIA_MODEL_PROVIDER_FWD_HPP
+#ifndef DOGEN_FRONTEND_TYPES_DIA_FRONTEND_HPP
+#define DOGEN_FRONTEND_TYPES_DIA_FRONTEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/frontend/types/frontend_interface.hpp"
+
 namespace dogen {
 namespace frontend {
 
-class dia_model_provider;
+/**
+ * @brief Frontend that reads Dia diagrams and generates partial SML
+ * models.
+ */
+class dia_frontend final : public frontend_interface {
+public:
+    dia_frontend() = default;
+    dia_frontend(const dia_frontend&) = delete;
+    dia_frontend(dia_frontend&&) = default;
+    virtual ~dia_frontend() noexcept;
+
+public:
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    sml::model generate(const input_descriptor& d,
+        const frontend_settings& s) override;
+};
 
 } }
 

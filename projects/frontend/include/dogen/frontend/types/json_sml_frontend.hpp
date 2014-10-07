@@ -18,34 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TEST_DATA_PROVIDER_SETTINGS_TD_HPP
-#define DOGEN_FRONTEND_TEST_DATA_PROVIDER_SETTINGS_TD_HPP
+#ifndef DOGEN_FRONTEND_TYPES_JSON_SML_FRONTEND_HPP
+#define DOGEN_FRONTEND_TYPES_JSON_SML_FRONTEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/frontend/types/provider_settings.hpp"
+#include "dogen/frontend/types/frontend_interface.hpp"
 
 namespace dogen {
 namespace frontend {
 
-class provider_settings_generator {
+/**
+ * @brief Generates a partial SML model from a JSON file with a SML
+ * format.
+ */
+class json_sml_frontend final : public frontend_interface {
 public:
-    provider_settings_generator();
-
-public:
-    typedef dogen::frontend::provider_settings result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    sml::model generate(const input_descriptor& d,
+        const frontend_settings& s) override;
 };
 
 } }

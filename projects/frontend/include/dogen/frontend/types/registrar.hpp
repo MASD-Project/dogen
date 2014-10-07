@@ -28,24 +28,24 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen/frontend/types/model_provider_interface.hpp"
+#include "dogen/frontend/types/frontend_interface.hpp"
 
 namespace dogen {
 namespace frontend {
 
 /**
- * @brief Keeps track of all the available providers.
+ * @brief Keeps track of all the available frontends.
  */
 class registrar {
 public:
     /**
-     * @brief Returns all available providers for each extension.
+     * @brief Returns all available frontends for each extension.
      *
      * Only used for debug purposes.
      */
     const std::unordered_map<std::string,
-                             std::shared_ptr<model_provider_interface>>&
-        providers_by_extension() const;
+                             std::shared_ptr<frontend_interface>>&
+        frontends_by_extension() const;
 
 public:
     /**
@@ -54,24 +54,24 @@ public:
     void validate() const;
 
     /*
-     * @brief Registers a given provider for a file extension.
+     * @brief Registers a given frontend for a file extension.
      *
      * @pre Extension is not yet registered.
      */
-    void register_provider_for_extension(const std::string& ext,
-        std::shared_ptr<model_provider_interface> s);
+    void register_frontend_for_extension(const std::string& ext,
+        std::shared_ptr<frontend_interface> s);
 
     /**
-     * @brief Returns the provider that handles the supplied
+     * @brief Returns the frontend that handles the supplied
      * extension.
      *
-     * @pre A provider must have been registered for this extension.
+     * @pre A frontend must have been registered for this extension.
      */
-    model_provider_interface& provider_for_extension(const std::string& ext);
+    frontend_interface& frontend_for_extension(const std::string& ext);
 
 private:
-    std::unordered_map<std::string, std::shared_ptr<model_provider_interface>>
-        providers_by_extension_;
+    std::unordered_map<std::string, std::shared_ptr<frontend_interface>>
+        frontends_by_extension_;
 };
 
 } }

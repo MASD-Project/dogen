@@ -31,7 +31,7 @@ namespace dogen {
  * @brief Dogen's frontend model.
  *
  * This model defines the general frontend architecture,
- * as well as the core providers supported by the system.
+ * as well as the core frontends supported by the system.
  *
  */
 namespace frontend {

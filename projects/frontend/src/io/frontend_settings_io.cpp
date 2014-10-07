@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_JSON_SML_MODEL_PROVIDER_FWD_HPP
-#define DOGEN_FRONTEND_TYPES_JSON_SML_MODEL_PROVIDER_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/frontend/io/frontend_settings_io.hpp"
 
 namespace dogen {
 namespace frontend {
 
-class json_sml_model_provider;
+std::ostream& operator<<(std::ostream& s, const frontend_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::frontend::frontend_settings\"" << ", "
+      << "\"save_pre_processed_input\": " << v.save_pre_processed_input() << ", "
+      << "\"pre_processed_input_path\": " << "\"" << v.pre_processed_input_path().generic_string() << "\"" << ", "
+      << "\"disable_model_module\": " << v.disable_model_module()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

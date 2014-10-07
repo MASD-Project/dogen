@@ -48,6 +48,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
     roundtrip_type<input_descriptor_generator>();
+    roundtrip_type<frontend_settings_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

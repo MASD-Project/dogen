@@ -68,13 +68,13 @@
         <dia:point val="25,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,13.95;57.89,20.65"/>
+        <dia:rectangle val="24.95,13.95;56.35,20.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="25,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="31.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.6000000000000005"/>
@@ -242,7 +242,7 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register_provider_for_extension#</dia:string>
+            <dia:string>#register_frontend_for_extension#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -271,10 +271,10 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#provider#</dia:string>
+                <dia:string>#frontend#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;model_provider_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;frontend_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -544,13 +544,13 @@
         <dia:point val="73,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,13.95;112.435,22.25"/>
+        <dia:rectangle val="72.95,13.95;110.125,22.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39.385000000000005"/>
+        <dia:real val="37.075000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.1999999999999993"/>
@@ -645,10 +645,10 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#providers_by_extension_#</dia:string>
+            <dia:string>#frontend_by_extension_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,std::shared_ptr&lt;model_provider_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,std::shared_ptr&lt;frontend_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -670,13 +670,13 @@
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#providers_by_extension#</dia:string>
+            <dia:string>#frontend_by_extension#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const std::unordered_map&lt;std::string,std::shared_ptr&lt;model_provider_interface&gt;&gt;&amp;#</dia:string>
+            <dia:string>#const std::unordered_map&lt;std::string,std::shared_ptr&lt;frontend_interface&gt;&gt;&amp;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -730,7 +730,7 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register_provider_for_extension#</dia:string>
+            <dia:string>#register_frontend_for_extension#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -759,10 +759,10 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#provider#</dia:string>
+                <dia:string>#frontend#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;model_provider_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;frontend_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -795,13 +795,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#provider_for_extension#</dia:string>
+            <dia:string>#frontend_for_extension#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::shared_ptr&lt;model_provider_interface&gt;#</dia:string>
+            <dia:string>#std::shared_ptr&lt;frontend_interface&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -995,17 +995,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="112.385,14"/>
+        <dia:point val="110.075,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.635,2.95;122.775,14.8"/>
+        <dia:rectangle val="109.325,2.95;122.775,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="112.385,14"/>
-        <dia:point val="112.385,10"/>
+        <dia:point val="110.075,14"/>
+        <dia:point val="110.075,10"/>
         <dia:point val="122.575,10"/>
         <dia:point val="122.575,3"/>
       </dia:attribute>
@@ -1033,19 +1033,19 @@
         <dia:point val="53,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,-12.05;82.81,-6.75"/>
+        <dia:rectangle val="52.95,-12.05;83.195,-6.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="53,-12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.760000000000002"/>
+        <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_provider_interface#</dia:string>
+        <dia:string>#frontend_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -1195,7 +1195,7 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#provide#</dia:string>
+            <dia:string>#generate#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -1244,7 +1244,7 @@
                 <dia:string>#ss#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const provider_settings&amp;#</dia:string>
+                <dia:string>#const frontend_settings&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1305,7 +1305,7 @@
         <dia:point val="53,-6.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.67,-6.85;53.2,14.8"/>
+        <dia:rectangle val="39.9,-6.85;53.2,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1313,8 +1313,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="53,-6.8"/>
         <dia:point val="53,-2"/>
-        <dia:point val="41.42,-2"/>
-        <dia:point val="41.42,14"/>
+        <dia:point val="40.65,-2"/>
+        <dia:point val="40.65,14"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1373,19 +1373,19 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="92.6925,14"/>
+        <dia:point val="91.5375,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.71,-6.85;93.4425,14.8"/>
+        <dia:rectangle val="83.095,-6.85;92.2875,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="92.6925,14"/>
-        <dia:point val="92.6925,-2"/>
-        <dia:point val="82.76,-2"/>
-        <dia:point val="82.76,-6.8"/>
+        <dia:point val="91.5375,14"/>
+        <dia:point val="91.5375,-2"/>
+        <dia:point val="83.145,-2"/>
+        <dia:point val="83.145,-6.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1408,7 +1408,7 @@
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O8">
       <dia:attribute name="name">
-        <dia:string>#manages providers via &gt;#</dia:string>
+        <dia:string>#manages frontends via &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -1444,17 +1444,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="57.84,14"/>
+        <dia:point val="56.3,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.09,9.25;73.2,14.8"/>
+        <dia:rectangle val="55.55,9.25;73.2,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="57.84,14"/>
-        <dia:point val="57.84,10"/>
+        <dia:point val="56.3,14"/>
+        <dia:point val="56.3,10"/>
         <dia:point val="73,10"/>
         <dia:point val="73,14"/>
       </dia:attribute>
@@ -1657,17 +1657,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="82.76,-12"/>
+        <dia:point val="83.145,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.01,-17.75;105.075,-11.2"/>
+        <dia:rectangle val="82.395,-17.75;105.075,-11.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="82.76,-12"/>
-        <dia:point val="82.76,-17"/>
+        <dia:point val="83.145,-12"/>
+        <dia:point val="83.145,-17"/>
         <dia:point val="104.875,-17"/>
         <dia:point val="104.875,-12"/>
       </dia:attribute>
@@ -1707,13 +1707,13 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#provider_settings#</dia:string>
+        <dia:string>#frontend_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Settings that control the reading abilities of the provider.#</dia:string>
+        <dia:string>#Settings that control the reading abilities of the frontend.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1805,10 +1805,10 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the provider will try to save the original input after
+            <dia:string>#If true, the frontend will try to save the original input after
 initial parsing.
 
-Note that this option only makes sense if the provider is
+Note that this option only makes sense if the frontend is
 transforming a format into SML. It is ignored in cases where
 we are reading an SML representation.#</dia:string>
           </dia:attribute>
@@ -1833,7 +1833,7 @@ we are reading an SML representation.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Full path to use for the provider's pre-processed input.#</dia:string>
+            <dia:string>#Full path to use for the frontend's pre-processed input.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1880,19 +1880,19 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="55,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,2.95;64.335,6.05"/>
+        <dia:rectangle val="54.95,2.95;61.2675,6.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="55,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.2850000000000001"/>
+        <dia:real val="6.2174999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dia_model_provider#</dia:string>
+        <dia:string>#dia_frontend#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -1990,19 +1990,19 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="73,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,2.95;84.825,6.05"/>
+        <dia:rectangle val="72.95,2.95;81.7325,6.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.775"/>
+        <dia:real val="8.682500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#json_sml_model_provider#</dia:string>
+        <dia:string>#json_sml_frontend#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -2097,19 +2097,19 @@ we are reading an SML representation.#</dia:string>
     </dia:object>
     <dia:object type="UML - Realizes" version="1" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="67.88,-6.8"/>
+        <dia:point val="68.0725,-6.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.5925,-6.85;68.73,3.05"/>
+        <dia:rectangle val="58.0587,-6.85;68.9225,3.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67.88,-6.8"/>
-        <dia:point val="67.88,-2"/>
-        <dia:point val="59.6425,-2"/>
-        <dia:point val="59.6425,3"/>
+        <dia:point val="68.0725,-6.8"/>
+        <dia:point val="68.0725,-2"/>
+        <dia:point val="58.1088,-2"/>
+        <dia:point val="58.1088,3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2138,19 +2138,19 @@ we are reading an SML representation.#</dia:string>
     </dia:object>
     <dia:object type="UML - Realizes" version="1" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="67.88,-6.8"/>
+        <dia:point val="68.0725,-6.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.03,-6.85;78.9375,3.05"/>
+        <dia:rectangle val="67.2225,-6.85;77.3912,3.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67.88,-6.8"/>
-        <dia:point val="67.88,-2"/>
-        <dia:point val="78.8875,-2"/>
-        <dia:point val="78.8875,3"/>
+        <dia:point val="68.0725,-6.8"/>
+        <dia:point val="68.0725,-2"/>
+        <dia:point val="77.3413,-2"/>
+        <dia:point val="77.3413,3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2439,7 +2439,7 @@ main.#</dia:string>
             <dia:string>#Dogen's frontend model.
 
 This model defines the general frontend architecture,
-as well as the core providers supported by the system.
+as well as the core frontends supported by the system.
 
 #DOGEN dia.comment=true#</dia:string>
           </dia:attribute>

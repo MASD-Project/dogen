@@ -42,6 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
     test_equality<input_descriptor_generator>();
+    test_equality<frontend_settings_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

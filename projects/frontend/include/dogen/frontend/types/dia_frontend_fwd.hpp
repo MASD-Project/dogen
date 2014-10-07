@@ -18,11 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/frontend/types/model_provider_interface.hpp"
+#ifndef DOGEN_FRONTEND_TYPES_DIA_FRONTEND_FWD_HPP
+#define DOGEN_FRONTEND_TYPES_DIA_FRONTEND_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace frontend {
 
-model_provider_interface::~model_provider_interface() noexcept { }
+class dia_frontend;
 
 } }
+
+#endif

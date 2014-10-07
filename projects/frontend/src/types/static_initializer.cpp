@@ -20,23 +20,23 @@
  */
 #include <memory>
 #include "dogen/frontend/types/workflow.hpp"
-#include "dogen/frontend/types/dia_model_provider.hpp"
-#include "dogen/frontend/types/json_sml_model_provider.hpp"
+#include "dogen/frontend/types/dia_frontend.hpp"
+#include "dogen/frontend/types/json_sml_frontend.hpp"
 #include "dogen/frontend/types/static_initializer.hpp"
 
 namespace dogen {
 namespace frontend {
 
-template<typename Provider>
-inline void register_provider() {
-    auto s(std::make_shared<Provider>());
+template<typename Frontend>
+inline void register_frontend() {
+    auto s(std::make_shared<Frontend>());
     for (const auto& se : s->supported_extensions())
-        workflow::register_provider_for_extension(se, s);
+        workflow::register_frontend_for_extension(se, s);
 }
 
 void static_initializer::initialize() {
-    register_provider<dia_model_provider>();
-    register_provider<json_sml_model_provider>();
+    register_frontend<dia_frontend>();
+    register_frontend<json_sml_frontend>();
 }
 
 } }
