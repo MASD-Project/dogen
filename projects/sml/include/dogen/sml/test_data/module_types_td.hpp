@@ -18,21 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/io/concept_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/enumerator_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/module_io.hpp"
-#include "dogen/sml/io/module_types_io.hpp"
-#include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/io/object_io.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/origin_types_io.hpp"
-#include "dogen/sml/io/parameter_io.hpp"
-#include "dogen/sml/io/primitive_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/relationship_types_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#ifndef DOGEN_SML_TEST_DATA_MODULE_TYPES_TD_HPP
+#define DOGEN_SML_TEST_DATA_MODULE_TYPES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/sml/types/module_types.hpp"
+
+namespace dogen {
+namespace sml {
+
+class module_types_generator {
+public:
+    module_types_generator();
+
+public:
+    typedef dogen::sml::module_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
+#endif

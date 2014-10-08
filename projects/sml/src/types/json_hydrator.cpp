@@ -157,6 +157,7 @@ void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
             module mod;
             mod.name(module_qn);
             mod.origin_type(m.origin_type());
+            mod.type(module_types::regular);
             m.modules().insert(std::make_pair(module_qn, mod));
         }
     }
@@ -265,6 +266,7 @@ model json_hydrator::read_stream(std::istream& s, const bool is_target) const {
         m.name().simple_name(r.name().model_name());
         m.name().model_name(r.name().model_name());
         m.origin_type(r.origin_type());
+        m.type(module_types::model);
         m.generation_type(r.generation_type());
         r.modules().insert(std::make_pair(m.name(), m));
     }

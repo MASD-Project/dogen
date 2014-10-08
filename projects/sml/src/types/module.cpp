@@ -26,7 +26,7 @@ namespace sml {
 module::module()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)),
       origin_type_(static_cast<dogen::sml::origin_types>(0)),
-      is_model_module_(static_cast<bool>(0)) { }
+      type_(static_cast<dogen::sml::module_types>(0)) { }
 
 module::module(module&& rhs)
     : documentation_(std::move(rhs.documentation_)),
@@ -36,7 +36,7 @@ module::module(module&& rhs)
       origin_type_(std::move(rhs.origin_type_)),
       containing_module_(std::move(rhs.containing_module_)),
       members_(std::move(rhs.members_)),
-      is_model_module_(std::move(rhs.is_model_module_)) { }
+      type_(std::move(rhs.type_)) { }
 
 module::module(
     const std::string& documentation,
@@ -46,7 +46,7 @@ module::module(
     const dogen::sml::origin_types& origin_type,
     const boost::optional<dogen::sml::qname>& containing_module,
     const std::list<dogen::sml::qname>& members,
-    const bool is_model_module)
+    const dogen::sml::module_types& type)
     : documentation_(documentation),
       meta_data_(meta_data),
       name_(name),
@@ -54,7 +54,7 @@ module::module(
       origin_type_(origin_type),
       containing_module_(containing_module),
       members_(members),
-      is_model_module_(is_model_module) { }
+      type_(type) { }
 
 void module::swap(module& other) noexcept {
     using std::swap;
@@ -65,7 +65,7 @@ void module::swap(module& other) noexcept {
     swap(origin_type_, other.origin_type_);
     swap(containing_module_, other.containing_module_);
     swap(members_, other.members_);
-    swap(is_model_module_, other.is_model_module_);
+    swap(type_, other.type_);
 }
 
 bool module::operator==(const module& rhs) const {
@@ -76,7 +76,7 @@ bool module::operator==(const module& rhs) const {
         origin_type_ == rhs.origin_type_ &&
         containing_module_ == rhs.containing_module_ &&
         members_ == rhs.members_ &&
-        is_model_module_ == rhs.is_model_module_;
+        type_ == rhs.type_;
 }
 
 module& module::operator=(module other) {
@@ -181,12 +181,12 @@ void module::members(const std::list<dogen::sml::qname>&& v) {
     members_ = std::move(v);
 }
 
-bool module::is_model_module() const {
-    return is_model_module_;
+dogen::sml::module_types module::type() const {
+    return type_;
 }
 
-void module::is_model_module(const bool v) {
-    is_model_module_ = v;
+void module::type(const dogen::sml::module_types& v) {
+    type_ = v;
 }
 
 } }

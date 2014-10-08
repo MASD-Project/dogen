@@ -24,6 +24,7 @@
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
+#include "dogen/sml/serialization/module_types_ser.hpp"
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/object_types_ser.hpp"

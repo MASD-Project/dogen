@@ -96,6 +96,8 @@ Add model to CMake, fix all code generation errors, etc.
 Add code for interface, registrar and workflow.
 
 *** IMPLEMENTATION Implement the general settings handler     :task:refactor:
+    CLOCK: [2014-10-08 Wed 22:45]--[2014-10-08 Wed 23:04] =>  0:19
+    CLOCK: [2014-10-08 Wed 22:24]--[2014-10-08 Wed 22:31] =>  0:07
     CLOCK: [2014-10-07 Tue 22:09]--[2014-10-07 Tue 22:46] =>  0:37
 
 We need to implement the model consumer interface, perform the

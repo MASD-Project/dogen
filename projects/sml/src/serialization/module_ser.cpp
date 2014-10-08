@@ -34,6 +34,7 @@
 #include <boost/serialization/string.hpp>
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
+#include "dogen/sml/serialization/module_types_ser.hpp"
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 
@@ -52,7 +53,7 @@ void save(Archive& ar,
     ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("containing_module", v.containing_module_);
     ar << make_nvp("members", v.members_);
-    ar << make_nvp("is_model_module", v.is_model_module_);
+    ar << make_nvp("type", v.type_);
 }
 
 template<typename Archive>
@@ -66,7 +67,7 @@ void load(Archive& ar,
     ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("containing_module", v.containing_module_);
     ar >> make_nvp("members", v.members_);
-    ar >> make_nvp("is_model_module", v.is_model_module_);
+    ar >> make_nvp("type", v.type_);
 }
 
 } }

@@ -106,7 +106,7 @@
 						<simple_name>class_2</simple_name>
 					</item>
 				</members>
-				<is_model_module>0</is_model_module>
+				<type>3</type>
 			</second>
 		</item>
 		<item>
@@ -176,7 +176,7 @@
 						<simple_name>class_1</simple_name>
 					</item>
 				</members>
-				<is_model_module>0</is_model_module>
+				<type>3</type>
 			</second>
 		</item>
 		<item>
@@ -284,7 +284,7 @@
 						<simple_name>Package_2</simple_name>
 					</item>
 				</members>
-				<is_model_module>0</is_model_module>
+				<type>2</type>
 			</second>
 		</item>
 	</modules>

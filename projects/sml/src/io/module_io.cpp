@@ -19,12 +19,12 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include <sstream>
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
+#include "dogen/sml/io/module_types_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
@@ -86,12 +86,6 @@ namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const module& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::module\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
@@ -101,7 +95,7 @@ std::ostream& operator<<(std::ostream& s, const module& v) {
       << "\"origin_type\": " << v.origin_type() << ", "
       << "\"containing_module\": " << v.containing_module() << ", "
       << "\"members\": " << v.members() << ", "
-      << "\"is_model_module\": " << v.is_model_module()
+      << "\"type\": " << v.type()
       << " }";
     return(s);
 }

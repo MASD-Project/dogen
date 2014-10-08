@@ -64,6 +64,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     sml::module m;
     m.name(context_.model().name());
     m.origin_type(sml::origin_types::user);
+    m.type(sml::module_types::model);
     m.generation_type(context_.model().is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);

@@ -369,6 +369,7 @@ void injector::inject_global_module() {
     global_module.generation_type(generation_types::no_generation);
     global_module.origin_type(origin_types::system);
     global_module.documentation(global_module_doc);
+    global_module.type(module_types::global);
     model.modules().insert(std::make_pair(qn, global_module));
 }
 

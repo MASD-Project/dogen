@@ -24,6 +24,7 @@
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
+#include "dogen/sml/hash/module_types_hash.hpp"
 #include "dogen/sml/hash/nested_qname_hash.hpp"
 #include "dogen/sml/hash/object_hash.hpp"
 #include "dogen/sml/hash/object_types_hash.hpp"
