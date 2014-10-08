@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"

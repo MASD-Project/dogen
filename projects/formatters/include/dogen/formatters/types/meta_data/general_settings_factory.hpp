@@ -52,7 +52,7 @@ public:
 
 public:
     /**
-     * @brief Initialise a new formatter settings factory.
+     * @brief Initialise a new general settings factory.
      *
      * @param data_files_directories where to look for reference data.
      */

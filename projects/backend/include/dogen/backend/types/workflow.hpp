@@ -27,6 +27,7 @@
 
 #include <list>
 #include <memory>
+#include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -42,7 +43,14 @@ namespace backend {
  */
 class workflow {
 public:
-    explicit workflow(const config::knitting_settings& ts);
+    /**
+     * @brief Initialises the workflow.
+     *
+     * @param ks the knitting settings
+     * @param data_files_directories where to look for reference data.
+     */
+    workflow(const config::knitting_settings& ks,
+        const std::list<boost::filesystem::path>& data_files_directories);
 
 private:
     /**
@@ -53,10 +61,10 @@ private:
 
 private:
     /**
-     * @brief Creates the general settings container.
+     * @brief Creates the general settings.
      */
-    std::unordered_map<sml::qname, formatters::general_settings>
-    create_general_settings_by_qname_activity(const sml::model& m) const;
+    formatters::general_settings
+    create_general_settings_activity(const sml::model& m) const;
 
 public:
     /**
@@ -73,6 +81,7 @@ public:
 private:
     static std::shared_ptr<backend::registrar> registrar_;
     const config::knitting_settings knitting_settings_;
+    const std::list<boost::filesystem::path> data_files_directories_;
 };
 
 } }

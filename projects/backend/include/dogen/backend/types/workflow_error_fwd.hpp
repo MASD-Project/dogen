@@ -18,8 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/backend/types/backend_interface.hpp"
-#include "dogen/backend/types/registrar.hpp"
-#include "dogen/backend/types/registrar_error.hpp"
-#include "dogen/backend/types/workflow.hpp"
-#include "dogen/backend/types/workflow_error.hpp"
+#ifndef DOGEN_BACKEND_TYPES_WORKFLOW_ERROR_FWD_HPP
+#define DOGEN_BACKEND_TYPES_WORKFLOW_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
+
+namespace dogen {
+namespace backend {
+
+class workflow_error;
+
+} }
+
+#endif

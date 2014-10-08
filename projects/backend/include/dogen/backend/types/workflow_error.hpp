@@ -18,17 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_HANDLER_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_HANDLER_FWD_HPP
+#ifndef DOGEN_BACKEND_TYPES_WORKFLOW_ERROR_HPP
+#define DOGEN_BACKEND_TYPES_WORKFLOW_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatters {
+#include <boost/exception/info.hpp>
+#include <string>
 
-class general_settings_handler;
+namespace dogen {
+namespace backend {
+
+/**
+ * @brief There was an error in the workflow.
+ */
+class workflow_error : public virtual std::exception, public virtual boost::exception {
+public:
+    workflow_error() = default;
+    ~workflow_error() noexcept = default;
+
+public:
+    workflow_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
 

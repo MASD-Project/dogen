@@ -2187,3 +2187,168 @@ void backend_enricher::enrich(const sml::model& model,
 
 } } }
 #+end_src c++
+** General settings handler
+
+*** Header
+#+begin_src
+namespace dogen {
+namespace formatters {
+
+/**
+ * @brief Generates a map of general settings for qnames, taking into
+ * account the general settings heuristics.
+ */
+class general_settings_handler : public sml::consumer_interface {
+private:
+    typedef std::unordered_map<sml::qname, general_settings>
+    general_settings_by_qname_type;
+
+public:
+    /**
+     * @brief Initialise a new handler.
+     *
+     * @param data_files_directories where to look for reference data.
+     */
+    explicit general_settings_handler(
+        const std::list<boost::filesystem::path>& data_files_directories);
+
+public:
+    std::string id() const override;
+    unsigned int required_passes() const override;
+    bool consume_last() const override;
+    void consume(const sml::model& model, const unsigned int pass,
+        const sml::concept& target) const override;
+    void consume(const sml::model& model, const unsigned int pass,
+        const sml::module& target) const override;
+    void consume(const sml::model& model, const unsigned int pass,
+        const sml::enumeration& target) const override;
+    void consume(const sml::model& model, const unsigned int pass,
+        const sml::primitive& target) const override;
+    void consume(const sml::model& model, const unsigned int pass,
+        const sml::object& target) const override;
+
+public:
+    /**
+     * @brief Returns the general settings by qname container, built
+     * from an SML model.
+     */
+    const std::unordered_map<sml::qname, general_settings>&
+    general_settings_by_qname() const;
+
+private:
+    mutable general_settings_by_qname_type general_settings_by_qname_;
+    const meta_data::general_settings_factory factory_;
+};
+
+} }
+#+end_src
+
+*** Implementation
+
+#+begin_src
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/module_types_io.hpp"
+#include "dogen/formatters/types/handling_error.hpp"
+#include "dogen/formatters/types/general_settings_handler.hpp"
+
+namespace {
+
+const std::string id("formatters.general_settings_handler");
+using namespace dogen::utility::log;
+auto lg(logger_factory(id));
+const std::string unexpected_module_type("Unexpected module type: ");
+const std::string qname_not_found("Could not find settings for qname: ");
+const std::string uncontained_element(
+    "Element does not have a containing module: ");
+
+}
+namespace dogen {
+namespace formatters {
+
+general_settings_handler::general_settings_handler(
+    const std::list<boost::filesystem::path>& data_files_directories)
+    : factory_(data_files_directories) { }
+
+std::string general_settings_handler::id() const {
+    return ::id;
+}
+
+unsigned int general_settings_handler::required_passes() const {
+    return 1;
+}
+
+bool general_settings_handler::consume_last() const {
+    return false;
+}
+
+void general_settings_handler::
+consume(const sml::model& /*model*/, const unsigned int /*pass*/,
+    const sml::concept& target) const {
+
+    if (target.generation_type() == sml::generation_types::no_generation)
+        return;
+}
+
+void general_settings_handler::
+consume(const sml::model& /*model*/, const unsigned int /*pass*/,
+    const sml::module& target) const {
+
+    if (target.generation_type() == sml::generation_types::no_generation)
+        return;
+
+    if (target.type() != sml::module_types::model &&
+        target.type() != sml::module_types::regular) {
+        const auto t(boost::lexical_cast<std::string>(target.type()));
+        BOOST_LOG_SEV(lg, error) << unexpected_module_type << t;
+        BOOST_THROW_EXCEPTION(handling_error(unexpected_module_type + t));
+    }
+
+    if (target.type() == sml::module_types::model) {
+        const auto gs(factory_.build(target.meta_data()));
+        general_settings_by_qname_.insert(std::make_pair(target.name(), gs));
+    }
+
+    if (!target.containing_module()) {
+        const auto sn(target.name().simple_name());
+        BOOST_LOG_SEV(lg, error) << uncontained_element << sn;
+        BOOST_THROW_EXCEPTION(handling_error(uncontained_element + sn));
+    }
+
+    const auto cm(*target.containing_module());
+    const auto i(general_settings_by_qname_.find(cm));
+    if (i == general_settings_by_qname_.end()) {
+        BOOST_LOG_SEV(lg, error) << qname_not_found << target.name();
+        const auto sn(target.name().simple_name());
+        BOOST_THROW_EXCEPTION(handling_error(qname_not_found + sn));
+    }
+}
+
+void general_settings_handler::
+consume(const sml::model& /*model*/, const unsigned int /*pass*/,
+    const sml::enumeration& target) const {
+
+    if (target.generation_type() == sml::generation_types::no_generation)
+        return;
+}
+
+void general_settings_handler::
+consume(const sml::model& /*model*/, const unsigned int /*pass*/,
+    const sml::primitive& target) const {
+
+    if (target.generation_type() == sml::generation_types::no_generation)
+        return;
+}
+
+void general_settings_handler::
+consume(const sml::model& /*model*/, const unsigned int /*pass*/,
+    const sml::object& target) const {
+
+    if (target.generation_type() == sml::generation_types::no_generation)
+        return;
+}
+
+} }
+#+end_src
