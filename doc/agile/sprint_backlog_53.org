@@ -17,18 +17,18 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-09 Thu 00:09]
+Clock summary at [2014-10-10 Fri 23:43]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *4:35* |      |      |
+| *Total time*                                                        | *4:37* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 4:35 |      |
+| Development Stories Implemented                                     |        | 4:37 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:27 |
 | COMPLETED Fix CMake 3.0 warnings                                    |        |      | 0:14 |
 | COMPLETED Rename =model_provider_interface= to =frontend_interface= |        |      | 0:18 |
 | COMPLETED Implement the =backend= model                             |        |      | 1:31 |
-| IMPLEMENTATION Implement general settings handling                  |        |      | 2:05 |
+| IMPLEMENTATION Implement general settings handling                  |        |      | 2:07 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -96,6 +96,7 @@ Add model to CMake, fix all code generation errors, etc.
 Add code for interface, registrar and workflow.
 
 *** IMPLEMENTATION Implement general settings handling        :task:refactor:
+    CLOCK: [2014-10-10 Fri 23:40]--[2014-10-10 Fri 23:42] =>  0:02
     CLOCK: [2014-10-08 Wed 23:05]--[2014-10-09 Thu 00:07] =>  1:02
     CLOCK: [2014-10-08 Wed 22:45]--[2014-10-08 Wed 23:04] =>  0:19
     CLOCK: [2014-10-08 Wed 22:24]--[2014-10-08 Wed 22:31] =>  0:07

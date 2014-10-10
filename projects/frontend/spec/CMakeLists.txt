@@ -46,5 +46,5 @@ add_custom_target(run_frontend_spec
     DEPENDS frontend_spec)
 add_dependencies(run_all_specs run_frontend_spec)
 
-add_boost_tests(cpp ${frontend_spec_files})
+add_boost_tests(frontend ${frontend_spec_files})
 install(TARGETS frontend_spec RUNTIME DESTINATION bin COMPONENT tests)

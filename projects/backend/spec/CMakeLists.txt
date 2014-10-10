@@ -42,5 +42,5 @@ add_custom_target(run_backend_spec
     DEPENDS backend_spec)
 add_dependencies(run_all_specs run_backend_spec)
 
-add_boost_tests(cpp ${backend_spec_files})
+add_boost_tests(backend ${backend_spec_files})
 install(TARGETS backend_spec RUNTIME DESTINATION bin COMPONENT tests)
