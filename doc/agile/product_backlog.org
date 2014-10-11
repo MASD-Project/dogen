@@ -11,6 +11,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for CSV serialisation                                 :story:
+
+It would be nice to be able to serialise some simpler types into CSV
+files, and to be able to read them from CSV files. We should use a
+third-party library to perform the serialisation. We should check that
+the types only have simple types. We should also provide some
+meta-data for options such as "use quoted strings", etc.
+
 *** Automatically detect test models for include path         :task:refactor:
 
 In the CMakeLists for the test models we are already looping through
