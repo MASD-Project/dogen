@@ -19,7 +19,7 @@ third-party library to perform the serialisation. We should check that
 the types only have simple types. We should also provide some
 meta-data for options such as "use quoted strings", etc.
 
-*** Automatically detect test models for include path         :task:refactor:
+*** Use diagram files to setup test models in cmakefile       :task:refactor:
 
 In the CMakeLists for the test models we are already looping through
 all the diagrams:
@@ -2770,7 +2770,7 @@ types, and then creates new objects for pointer types.
 
 *** Remote method invocation                                    :epic:vision:
 
-See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]],
+See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]].
 
 It seems fairly straightforward to add remote method invocation to a
 few select types. The following would have to be done:
@@ -2983,7 +2983,7 @@ Dependencies is a map of reference; why not call it references?
 
 All stories related to IoC work are tracked here.
 
-new understanding:
+*New Understanding*:
 
 in reality, there is really only one place where IoC makes sense: in
 the workflows. It would be great if one could pass in something akin
@@ -3007,7 +3007,7 @@ However:
   automatically as this would require a lot of manual work for little
   gain.
 
-old understanding:
+*Old understanding*:
 
 - add workflow_interface to SML.
 - we should be doing a bit more IoC, particularly with inclusion
@@ -3177,8 +3177,8 @@ string name and the default value is the string value. All strings
 would be static public members of a class.
 
 We should also add a validate method which checks to see if a string
-is a valid value according to the string table. We could have a case
-insensitive validate too.
+is a valid value according to the string table. We could have a "case
+insensitive" validate too.
 
 *** Enumeration string conversion could be configurable       :story:feature:
 
@@ -3193,7 +3193,7 @@ specific parameters that tells dogen what valid values an enumerator
 can have. We can then generate a from string method that does the
 appropriate conversions.
 
-These should be passed in as implementation specific parameters.
+These should be passed in as meta-data.
 
 *** Enumeration string dumps could be configurable            :story:feature:
 
@@ -3202,9 +3202,8 @@ These should be passed in as implementation specific parameters.
 enumerations so that I can adapt it to my requirements..
 #+end_quote
 
-It should be possible to pass in a string value as an implementation
-specific parameter that tells dogen what string to use for debug
-dumping.
+It should be possible to pass in a string value as meta-data that
+tells dogen what string to use for debug dumping.
 
 *** Add is comparable to SML                                  :story:feature:
 
@@ -3341,7 +3340,7 @@ for details on a boost fusion approach:
 
 - [[https://www.youtube.com/watch?v%3DwbZdZKpUVeg][CppCon 2014: Thomas Rodgers "Implementing Wire Protocols with Boost Fusion"]]
 
-*** Model and type enums                                      :story:feature:
+*** Add reflection support by using model and type enums      :story:feature:
 
 #+begin_quote
 *Story*: As a dogen user, I want to use reflection on generated models
@@ -3424,13 +3423,15 @@ objects as its most likely by mistake.
 
 *** Add diff support                                            :epic:vision:
 
-New understanding: just create a new facet call diff and make these
-classes generate a simple textual representation of differences,
-inspired in =diff=. Where the object is an entity provide its ID. In
-general just provide some "path" to the difference,
-e.g. model/object/member variable/etc.
+*New understanding*:
 
-Old understanding:
+Just create a new facet call diff and make these classes generate a
+simple textual representation of differences, inspired in
+=diff=. Where the object is an entity provide its ID. In general just
+provide some "path" to the difference, e.g. model/object/member
+variable/etc.
+
+*Old understanding*:
 
 Dogen should have a =diff= option. When switched on, it would generate
 =diff= classes. These are system types like keys and live in a
@@ -3776,7 +3777,7 @@ exception so that we'd have the tags all in one place.
 
 *** Generation of cache code                                    :epic:vision:
 
-New understanding for this story:
+*New understanding*:
 
 - create a cache interface in types;  all types marked as =cacheable=
   have gets, puts  etc.
@@ -3785,7 +3786,7 @@ New understanding for this story:
   into a underscore delimited string, used as a key in the cache.
 - we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
 
-Old text of story:
+*Old Understanding*:
 
 Some thought on adding caching to dogen:
 
@@ -3839,15 +3840,6 @@ We seem to have a strange bug whereby creating a
 package. This appears to be some misunderstanding in namespacing
 rules.
 
-*** Create front-end interfaces                               :task:refactor:
-
-- create a front end component that defines the front end inteface,
-  has a factory that returns a front end based on an enum.
-- create the dia front end which contains the dia to SML code from
-  modeling.
-- create the JSON front end.
-- engine should rely on the front-end factory.
-
 *** Adding new engine spec tests is hard                :task:refactor:tests:
 
 In order to test models at the engine level one needs to first
@@ -3889,7 +3881,7 @@ confusing every other developer. This would require:
 - we should also use =_tests= on the test suite name so we can do
   =using XYZ= without name clashes.
 
-*** Support for components and groups                         :story:feature:
+*** Support for cmake components and groups                   :story:feature:
 
 #+begin_quote
 *Story*: As a dogen user, I need to integrate the generated models
@@ -4028,11 +4020,6 @@ A project with just exceptions does not need a make file, and fails to
 compile if a makefile is generated. We need a way to not generate a
 makefile if there are no implementation files generated.
 
-*** Empty features should not show up                              :task:bug:
-
-If there are no files for a feature, we should not generate includers
-and folders for that feature.
-
 *** Add support for configurable enumerations types           :story:feature:
 
 #+begin_quote
@@ -4041,7 +4028,8 @@ enumerations so that I model my domain accurately.
 #+end_quote
 
 At present our enumerations always use unsigned int as the underlying
-type. It should be possible to override that from dia.
+type. It should be possible to override that from dia. We could do
+this by supplying a type on the meta-data.
 
 *** Add test model for disabling XML                             :task:tests:
 
@@ -4056,6 +4044,9 @@ depend only on the forward declarations.
 
 At present we are using IO state savers but not actually setting the
 formatting on the stream depending on the primitive type.
+
+Ideally we should pass in some meta-data to determine the
+formatting. We should also consider using =boost::format= for this.
 
 *** Add support for protected attributes                      :story:feature:
 
@@ -4087,7 +4078,8 @@ details of the connected object if possible, etc.
 *** Add tests for duplicate identifiers in Dia                   :task:tests:
 
 Detect if a diagram defines the same class or package multiple
-times. Should throw an exception.
+times. Should throw an exception. We should also detect multiple
+properties with the same name.
 
 *** Test model sanity checks fail for enable facet serialisation :task:bug:tests:
 
@@ -4129,33 +4121,6 @@ Formatters:
 - drop all
 - create all
 
-**** Create SQL backend
-***** Create new backend
-***** Create new location manager
-***** Create aspect and facet types
-***** Create a view model for table and stored procedure
-***** Create a transformer from SML to view model
-***** Add SQL command line options
-**** Add table support
-***** Create table formatter
-***** Drop table formatter
-***** Test formatters
-**** Add load support
-***** Create load formatter
-***** Drop load formatter
-***** Test formatters
-**** Add save support
-***** Create save formatter
-***** Drop save formatter
-***** Test formatters
-**** Add delete support
-***** Create delete formatter
-***** Drop delete formatter
-***** Test formatters
-**** Add test support
-***** Create test formatter
-***** Drop test formatter
-***** Test formatters
 **** Analyse deployment support on CMake
 
 Ideally, get a state of affairs that resebles something like this:
@@ -4163,14 +4128,6 @@ Ideally, get a state of affairs that resebles something like this:
 - make deploy_database
 - make undeploy_database
 
-***** Review and fix existing targets
-
-- Rename all =currency= targets to =prototype= targets
-- Ensure the targets have correct dependencies
-
-***** Add support for multiple databases
-
-**** Add database tests for generated code
 **** Test database deployment
 
 We need to setup a build that deploys all the SQL (tables, procs, etc)
@@ -4206,14 +4163,6 @@ to be able to change databases without having to rebuild makefiles).
 *** Missing =enable_facet_XYZ= tests                             :task:tests:
 
 - test data
-
-*** Log should use path for file names                        :task:refactor:
-
-At present we are passing the log file name as a string and
-concatenating using "/". This is not very good for Windows. We should
-use =boost::filesystem::path= throughout and do a =.string= at the
-very end if boost log does not support boost filesystem (or use the
-path directly if it does).
 
 *** Create model with invalid primitive type                     :task:tests:
 
@@ -4376,6 +4325,10 @@ only builds the performance binary, and a =run_performance= target
 that executes it.
 
 Perhaps we could use a ruby script to generate the test models?
+
+Also, investigate nonius:
+
+https://github.com/rmartinho/nonius
 
 *Old understanding*:
 

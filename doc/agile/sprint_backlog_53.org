@@ -32,6 +32,7 @@ Clock summary at [2014-10-10 Fri 23:43]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-10-13 Mon 21:41]--[2014-10-13 Mon 22:06] =>  0:25
     CLOCK: [2014-10-06 Mon 08:10]--[2014-10-06 Mon 08:18] =>  0:08
     CLOCK: [2014-10-06 Mon 07:51]--[2014-10-06 Mon 08:10] =>  0:19
 
@@ -94,6 +95,31 @@ Add model to CMake, fix all code generation errors, etc.
      CLOCK: [2014-10-06 Mon 19:26]--[2014-10-06 Mon 19:39] =>  0:13
 
 Add code for interface, registrar and workflow.
+
+*** COMPLETED Log should use path for file names              :task:refactor:
+    CLOSED: [2014-10-13 Mon 21:50]
+
+At present we are passing the log file name as a string and
+concatenating using "/". This is not very good for Windows. We should
+use =boost::filesystem::path= throughout and do a =.string= at the
+very end if boost log does not support boost filesystem (or use the
+path directly if it does).
+
+*** COMPLETED Empty features should not show up                    :task:bug:
+    CLOSED: [2014-10-13 Mon 21:54]
+
+If there are no files for a feature, we should not generate includers
+and folders for that feature.
+
+*** COMPLETED Create front-end interfaces                     :task:refactor:
+    CLOSED: [2014-10-13 Mon 21:56]
+
+- create a front end component that defines the front end inteface,
+  has a factory that returns a front end based on an enum.
+- create the dia front end which contains the dia to SML code from
+  modeling.
+- create the JSON front end.
+- engine should rely on the front-end factory.
 
 *** IMPLEMENTATION Implement general settings handling        :task:refactor:
     CLOCK: [2014-10-10 Fri 23:40]--[2014-10-10 Fri 23:42] =>  0:02
