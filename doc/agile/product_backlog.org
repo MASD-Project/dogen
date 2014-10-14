@@ -967,7 +967,7 @@ Drive (GDrive) location.
   and tag as this would require no complex logic: if tag create new
   folder, if latest, delete then create.
 
-*** Enable package sanity tests for Linux                        :task:build:
+*** Enable package sanity tests for Linux                        :epic:build:
 
 Now that we will be using docker, we could create a simple =systemd=
 ctest script that runs as root in a docker container:
@@ -979,7 +979,7 @@ ctest script that runs as root in a docker container:
 - it then uninstalls it and makes sure the docker image is identical
   to how we started (however that is done in docker)
 
-*** Add support for thrift and protocol buffers    :story:feature:formatters:
+*** Add support for thrift and protocol buffers      :epic:vision:formatters:
 
 #+begin_quote
 *Story*: As a dogen user, I want to expose dogen models to other
@@ -1107,7 +1107,7 @@ directory. This is not an easy undertaking because:
 - the CMake scripts rely on the location of the diagrams to copy them
   across
 
-*** Add tests for annotation factory                  :task:tests:formatters:
+*** Add tests for general settings factory            :task:tests:formatters:
 
 Zero coverage on this one for some reason. Some simple tests come to
 mind:
@@ -1119,6 +1119,11 @@ mind:
 - creating annotation for test model types works as expected.
 
 *** IOable services                                :story:feature:formatters:
+
+#+begin_quote
+*Story*: As a dogen user, I want to output all the state of my
+services without having to manually create code for it.
+#+end_quote
 
 Even though we do not code generate services, it would be nice if we
 could still setup their IO infrastructure - something basic just
@@ -1654,7 +1659,7 @@ Links:
 - [[http://codeplanet.io/principles-good-restful-api-design/][REST API Design]]
 - [[http://www.drdobbs.com/tools/json-and-the-microsoft-c-rest-sdk/240164821][Using Microsoft REST SDK]]
 
-*** Investigate the integration of =boost::log= with throw exception   :task:
+*** Investigate the integration of =boost::log= with throw exception :task:refactor:
 
 At present we write a lot of code like this:
 
@@ -1697,7 +1702,7 @@ not introduce bugs in features we're not interested in. We need to
 check that knit has tests for both EOS and ODB that get executed
 regardless of these features being on or off.
 
-*** Automatic generation of C interfaces for C++ code :story:feature:formatters:
+*** Automatic generation of C interfaces for C++ code :epic:vision:formatters:
 
 #+begin_quote
 *Story*: As a dogen user, I want to make use of c++ models from C so
@@ -1707,7 +1712,7 @@ that I can create "bridge" APIs.
 Once we have proper C support, it should be doable to have a C++ facet
 that automatically exposes a C interface.
 
-*** Support for COM/CORBA                  :story:feature:backend:formatters:
+*** Support for COM/CORBA                            :epic:vision:formatters:
 
 #+begin_quote
 *Story*: As a dogen user, I want to make use of COM/CORBA so that I
