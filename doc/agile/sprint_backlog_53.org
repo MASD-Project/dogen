@@ -32,6 +32,7 @@ Clock summary at [2014-10-14 Tue 22:53]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-10-15 Wed 21:51]--[2014-10-15 Wed 22:03] =>  0:12
     CLOCK: [2014-10-14 Tue 22:41]--[2014-10-14 Tue 22:53] =>  0:12
     CLOCK: [2014-10-13 Mon 21:41]--[2014-10-13 Mon 22:06] =>  0:25
     CLOCK: [2014-10-06 Mon 08:10]--[2014-10-06 Mon 08:18] =>  0:08

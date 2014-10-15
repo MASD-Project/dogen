@@ -29,7 +29,7 @@ all the diagrams:
 We should take advantage of this to define =include_directories= and
 =add_subdirectory=. At present we are doing these manually.
 
-*** Code generation of registrars                             :story:feature:
+*** Code generation of registrars for static registration     :story:feature:
 
 We are using a lot of static registration and we have converged into
 what appears to be a useful pattern. It would be nice to be able to
@@ -45,15 +45,7 @@ Persister should support all archive types. At present it always
 outputs in XML; it should respect the archive type requested by the
 user.
 
-*** Load only relevant library models                     :task:refactor:
-
-At present we are loading all library models. This is not a problem
-because they are small and there are only a few of them. However, in a
-distant future we will have a very large number of these (many
-supported libraries, across languages, etc) and each will be quite
-large. It would make sense to only load what is needed.
-
-*** Generalise persister, remove serialisation helpers                :story:
+*** Generalise persister and remove serialisation helpers             :story:
 
 With the move of the knit persister into each model, it became obvious
 that users need a way to hydrate and dehydrate certain types by just
@@ -194,6 +186,9 @@ to "ignore", i.e. make dogen pretend they don't exist at all. For
 instance one may want to introduce new types one at a time. It would
 be nice to have a meta-data flag for ignoring.
 
+We should probably have some kind of warning to ensure users are aware
+of the types being ignored.
+
 *** Towards more strongly-typed meta-data                :task:meta_data:sml:
 
 When we introduced the =ptree= based meta-data, we thought that the
@@ -223,7 +218,7 @@ Basic idea is that domain expertise tightens the agile circle,
 allowing for much faster progress. Check Soros definition of
 reflexive.
 
-*** Load system models on demand                               :story:vision:
+*** Load system models intelligently                           :story:vision:
 
 #+begin_quote
 *Story*: As a dogen user, I want to load only the system models
@@ -231,11 +226,18 @@ required for the model I want to generate so that generation is as
 quick as possible.
 #+end_quote
 
-In a distant future one can imagine a very large number of system
-models, each of which with large number of types (say the C# system
-models, the C++ system models, etc). In this world we may need to
-disable the loading of system models: either by programming language
-or more explicitly by choosing individual models in a given language.
+At present we are loading all library models. This is not a problem
+because they are small and there are only a few of them. However, in a
+distant future, one can imagine a very large number of system models,
+each of which with large number of types (say the C# system models,
+the C++ system models, etc). In this world we may need to disable the
+loading of some system models: either by programming language or more
+explicitly by choosing individual models in a given language.
+
+It may even make more sense to load just what is required: load the
+target model, infer all of its dependencies (including at the
+programming language level) and then load only the system models that
+are required for those languages.
 
 *** Failed facet dependencies should be treated as errors :story:feature:meta_data:
 
@@ -290,13 +292,13 @@ either on or off for a given class being tested. Patch:
 : -            const bool associations_indexed = false);
 : +            const bool associations_indexed = false,
 : +            const bool add_model_module = false);
-:  
+: 
 :      public:
 :          /**
 : @@ -139,6 +140,14 @@ public:
 :          void associations_indexed(const bool v);
 :          /**@}*/
-:  
+: 
 : +        /**
 : +         * @brief If true, adds a module for the model.
 : +         */
@@ -315,7 +317,7 @@ either on or off for a given class being tested. Patch:
 : +        bool add_model_module_;
 :      };
 
-*** Allow placing types in the global module from Dia :story:feature:meta_data:
+*** Allow placing types in the global module in Dia  :story:feature:meta_data:
 
 #+begin_quote
 *Story*: As a dogen user, I want to code-generate certain types in the
@@ -456,6 +458,9 @@ each class does; we should also explain the separation of the
 transformation logic between the core model (e.g. =dia=) and the
 transformation model (e.g. =dia_to_sml=). We should describe what the
 workflow does in each model.
+
+We should only implement this story when all of the major refactoring
+has been done.
 
 *** Remove =cpp_formatters::formatting_error=             :task:refactor:cpp:
 
