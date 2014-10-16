@@ -55,6 +55,12 @@ also need to configure the registration method (name, arguments - we
 may want to register against a string or just have a list of
 registered types).
 
+The next logical step would be to code-generate the static
+initialisers too. For this we would have to be aware of all types to
+register in a given model (perhaps by looking at inheritance across
+models) and for each of these generate the appropriate initialiser
+code. This is more tricky but it would be really useful.
+
 *** Persisters only support XML                                    :task:bug:
 
 Persister should support all archive types. At present it always
