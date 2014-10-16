@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen/cpp/io/abilities_io.hpp"
+#include "dogen/cpp/io/class_aspects_io.hpp"
 #include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/inheritance_io.hpp"
 #include "dogen/cpp/io/new_class_info_io.hpp"

@@ -41,6 +41,8 @@ const std::string multiple_generatable_model_modules(
 namespace dogen {
 namespace backend {
 
+std::shared_ptr<backend::registrar> workflow::registrar_;
+
 workflow::workflow(const config::knitting_settings& ks,
     const std::list<boost::filesystem::path>& data_files_directories)
     : knitting_settings_(ks), data_files_directories_(data_files_directories) {

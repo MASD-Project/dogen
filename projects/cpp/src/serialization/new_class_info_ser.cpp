@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/cpp/serialization/abilities_ser.hpp"
+#include "dogen/cpp/serialization/class_aspects_ser.hpp"
 #include "dogen/cpp/serialization/entity_ser.hpp"
 #include "dogen/cpp/serialization/inheritance_ser.hpp"
 #include "dogen/cpp/serialization/new_class_info_ser.hpp"
@@ -50,6 +51,7 @@ void save(Archive& ar,
     ar << make_nvp("state", v.state_);
     ar << make_nvp("inheritance", v.inheritance_);
     ar << make_nvp("abilities", v.abilities_);
+    ar << make_nvp("aspects", v.aspects_);
 }
 
 template<typename Archive>
@@ -61,6 +63,7 @@ void load(Archive& ar,
     ar >> make_nvp("state", v.state_);
     ar >> make_nvp("inheritance", v.inheritance_);
     ar >> make_nvp("abilities", v.abilities_);
+    ar >> make_nvp("aspects", v.aspects_);
 }
 
 } }

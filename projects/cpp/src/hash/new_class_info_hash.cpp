@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/abilities_hash.hpp"
+#include "dogen/cpp/hash/class_aspects_hash.hpp"
 #include "dogen/cpp/hash/entity_hash.hpp"
 #include "dogen/cpp/hash/inheritance_hash.hpp"
 #include "dogen/cpp/hash/new_class_info_hash.hpp"
@@ -46,6 +47,7 @@ std::size_t new_class_info_hasher::hash(const new_class_info&v) {
     combine(seed, v.state());
     combine(seed, v.inheritance());
     combine(seed, v.abilities());
+    combine(seed, v.aspects());
 
     return seed;
 }

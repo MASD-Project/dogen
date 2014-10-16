@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/entity_io.hpp"
+#include "dogen/cpp/io/includes_io.hpp"
 
 namespace dogen {
 namespace cpp {

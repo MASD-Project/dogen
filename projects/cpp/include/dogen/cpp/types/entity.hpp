@@ -26,11 +26,14 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include <iosfwd>
 #include <list>
 #include <string>
+#include <unordered_map>
 #include "dogen/cpp/serialization/entity_fwd_ser.hpp"
 #include "dogen/cpp/types/entity_visitor.hpp"
+#include "dogen/cpp/types/includes.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -50,7 +53,9 @@ public:
     entity(
         const std::string& name,
         const std::string& documentation,
-        const std::list<std::string>& namespaces);
+        const std::list<std::string>& namespaces,
+        const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter,
+        const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter);
 
 private:
     template<typename Archive>
@@ -105,6 +110,16 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
+    const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter() const;
+    std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter();
+    void relative_path_for_formatter(const std::unordered_map<std::string, boost::filesystem::path>& v);
+    void relative_path_for_formatter(const std::unordered_map<std::string, boost::filesystem::path>&& v);
+
+    const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter() const;
+    std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter();
+    void includes_for_formatter(const std::unordered_map<std::string, dogen::cpp::includes>& v);
+    void includes_for_formatter(const std::unordered_map<std::string, dogen::cpp::includes>&& v);
+
 protected:
     bool compare(const entity& rhs) const;
 public:
@@ -117,6 +132,8 @@ private:
     std::string name_;
     std::string documentation_;
     std::list<std::string> namespaces_;
+    std::unordered_map<std::string, boost::filesystem::path> relative_path_for_formatter_;
+    std::unordered_map<std::string, dogen::cpp::includes> includes_for_formatter_;
 };
 
 inline entity::~entity() noexcept { }

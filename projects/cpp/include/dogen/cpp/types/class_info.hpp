@@ -58,6 +58,8 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
+        const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter,
+        const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter,
         const std::list<dogen::cpp::property_info>& properties,
         const std::list<dogen::cpp::property_info>& all_properties,
         const bool has_primitive_properties,

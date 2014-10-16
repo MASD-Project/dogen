@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/cpp/io/includes_io.hpp"
 #include "dogen/cpp/types/entity.hpp"
 
 
@@ -44,23 +45,65 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::filesystem::path>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::includes>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 
 entity::entity(
     const std::string& name,
     const std::string& documentation,
-    const std::list<std::string>& namespaces)
+    const std::list<std::string>& namespaces,
+    const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter,
+    const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter)
     : name_(name),
       documentation_(documentation),
-      namespaces_(namespaces) { }
+      namespaces_(namespaces),
+      relative_path_for_formatter_(relative_path_for_formatter),
+      includes_for_formatter_(includes_for_formatter) { }
 
 void entity::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::entity\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-      << "\"namespaces\": " << namespaces_
+      << "\"namespaces\": " << namespaces_ << ", "
+      << "\"relative_path_for_formatter\": " << relative_path_for_formatter_ << ", "
+      << "\"includes_for_formatter\": " << includes_for_formatter_
       << " }";
 }
 
@@ -69,12 +112,16 @@ void entity::swap(entity& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(namespaces_, other.namespaces_);
+    swap(relative_path_for_formatter_, other.relative_path_for_formatter_);
+    swap(includes_for_formatter_, other.includes_for_formatter_);
 }
 
 bool entity::compare(const entity& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
-        namespaces_ == rhs.namespaces_;
+        namespaces_ == rhs.namespaces_ &&
+        relative_path_for_formatter_ == rhs.relative_path_for_formatter_ &&
+        includes_for_formatter_ == rhs.includes_for_formatter_;
 }
 
 const std::string& entity::name() const {
@@ -123,6 +170,38 @@ void entity::namespaces(const std::list<std::string>& v) {
 
 void entity::namespaces(const std::list<std::string>&& v) {
     namespaces_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::filesystem::path>& entity::relative_path_for_formatter() const {
+    return relative_path_for_formatter_;
+}
+
+std::unordered_map<std::string, boost::filesystem::path>& entity::relative_path_for_formatter() {
+    return relative_path_for_formatter_;
+}
+
+void entity::relative_path_for_formatter(const std::unordered_map<std::string, boost::filesystem::path>& v) {
+    relative_path_for_formatter_ = v;
+}
+
+void entity::relative_path_for_formatter(const std::unordered_map<std::string, boost::filesystem::path>&& v) {
+    relative_path_for_formatter_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::cpp::includes>& entity::includes_for_formatter() const {
+    return includes_for_formatter_;
+}
+
+std::unordered_map<std::string, dogen::cpp::includes>& entity::includes_for_formatter() {
+    return includes_for_formatter_;
+}
+
+void entity::includes_for_formatter(const std::unordered_map<std::string, dogen::cpp::includes>& v) {
+    includes_for_formatter_ = v;
+}
+
+void entity::includes_for_formatter(const std::unordered_map<std::string, dogen::cpp::includes>&& v) {
+    includes_for_formatter_ = std::move(v);
 }
 
 } }

@@ -53,11 +53,15 @@ enum_info::enum_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
+    const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter,
+    const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter,
     const std::list<dogen::cpp::enumerator_info>& enumerators,
     const std::string& type)
     : dogen::cpp::entity(name,
       documentation,
-      namespaces),
+      namespaces,
+      relative_path_for_formatter,
+      includes_for_formatter),
       enumerators_(enumerators),
       type_(type) { }
 

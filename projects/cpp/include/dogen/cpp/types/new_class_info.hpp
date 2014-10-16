@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include "dogen/cpp/serialization/new_class_info_fwd_ser.hpp"
 #include "dogen/cpp/types/abilities.hpp"
+#include "dogen/cpp/types/class_aspects.hpp"
 #include "dogen/cpp/types/entity.hpp"
 #include "dogen/cpp/types/inheritance.hpp"
 #include "dogen/cpp/types/state.hpp"
@@ -49,9 +50,12 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
+        const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter,
+        const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter,
         const dogen::cpp::state& state,
         const dogen::cpp::inheritance& inheritance,
-        const dogen::cpp::abilities& abilities);
+        const dogen::cpp::abilities& abilities,
+        const dogen::cpp::class_aspects& aspects);
 
 private:
     template<typename Archive>
@@ -96,6 +100,11 @@ public:
     void abilities(const dogen::cpp::abilities& v);
     void abilities(const dogen::cpp::abilities&& v);
 
+    const dogen::cpp::class_aspects& aspects() const;
+    dogen::cpp::class_aspects& aspects();
+    void aspects(const dogen::cpp::class_aspects& v);
+    void aspects(const dogen::cpp::class_aspects&& v);
+
 public:
     bool operator==(const new_class_info& rhs) const;
     bool operator!=(const new_class_info& rhs) const {
@@ -113,6 +122,7 @@ private:
     dogen::cpp::state state_;
     dogen::cpp::inheritance inheritance_;
     dogen::cpp::abilities abilities_;
+    dogen::cpp::class_aspects aspects_;
 };
 
 } }

@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/test_data/abilities_td.hpp"
+#include "dogen/cpp/test_data/class_aspects_td.hpp"
 #include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/inheritance_td.hpp"
 #include "dogen/cpp/test_data/new_class_info_td.hpp"
@@ -41,6 +42,11 @@ create_dogen_cpp_abilities(const unsigned int position) {
     return dogen::cpp::abilities_generator::create(position);
 }
 
+dogen::cpp::class_aspects
+create_dogen_cpp_class_aspects(const unsigned int position) {
+    return dogen::cpp::class_aspects_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -54,6 +60,7 @@ populate(const unsigned int position, result_type& v) {
     v.state(create_dogen_cpp_state(position + 0));
     v.inheritance(create_dogen_cpp_inheritance(position + 1));
     v.abilities(create_dogen_cpp_abilities(position + 2));
+    v.aspects(create_dogen_cpp_class_aspects(position + 3));
 }
 
 new_class_info_generator::result_type

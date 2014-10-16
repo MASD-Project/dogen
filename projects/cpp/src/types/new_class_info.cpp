@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen/cpp/io/abilities_io.hpp"
+#include "dogen/cpp/io/class_aspects_io.hpp"
 #include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/inheritance_io.hpp"
 #include "dogen/cpp/io/state_io.hpp"
@@ -32,15 +33,21 @@ new_class_info::new_class_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
+    const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter,
+    const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter,
     const dogen::cpp::state& state,
     const dogen::cpp::inheritance& inheritance,
-    const dogen::cpp::abilities& abilities)
+    const dogen::cpp::abilities& abilities,
+    const dogen::cpp::class_aspects& aspects)
     : dogen::cpp::entity(name,
       documentation,
-      namespaces),
+      namespaces,
+      relative_path_for_formatter,
+      includes_for_formatter),
       state_(state),
       inheritance_(inheritance),
-      abilities_(abilities) { }
+      abilities_(abilities),
+      aspects_(aspects) { }
 
 void new_class_info::to_stream(std::ostream& s) const {
     s << " { "
@@ -50,7 +57,8 @@ void new_class_info::to_stream(std::ostream& s) const {
     s << ", "
       << "\"state\": " << state_ << ", "
       << "\"inheritance\": " << inheritance_ << ", "
-      << "\"abilities\": " << abilities_
+      << "\"abilities\": " << abilities_ << ", "
+      << "\"aspects\": " << aspects_
       << " }";
 }
 
@@ -61,6 +69,7 @@ void new_class_info::swap(new_class_info& other) noexcept {
     swap(state_, other.state_);
     swap(inheritance_, other.inheritance_);
     swap(abilities_, other.abilities_);
+    swap(aspects_, other.aspects_);
 }
 
 bool new_class_info::equals(const dogen::cpp::entity& other) const {
@@ -73,7 +82,8 @@ bool new_class_info::operator==(const new_class_info& rhs) const {
     return entity::compare(rhs) &&
         state_ == rhs.state_ &&
         inheritance_ == rhs.inheritance_ &&
-        abilities_ == rhs.abilities_;
+        abilities_ == rhs.abilities_ &&
+        aspects_ == rhs.aspects_;
 }
 
 new_class_info& new_class_info::operator=(new_class_info other) {
@@ -128,6 +138,22 @@ void new_class_info::abilities(const dogen::cpp::abilities& v) {
 
 void new_class_info::abilities(const dogen::cpp::abilities&& v) {
     abilities_ = std::move(v);
+}
+
+const dogen::cpp::class_aspects& new_class_info::aspects() const {
+    return aspects_;
+}
+
+dogen::cpp::class_aspects& new_class_info::aspects() {
+    return aspects_;
+}
+
+void new_class_info::aspects(const dogen::cpp::class_aspects& v) {
+    aspects_ = v;
+}
+
+void new_class_info::aspects(const dogen::cpp::class_aspects&& v) {
+    aspects_ = std::move(v);
 }
 
 } }
