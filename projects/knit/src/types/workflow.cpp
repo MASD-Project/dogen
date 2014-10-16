@@ -43,6 +43,7 @@
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -271,6 +272,11 @@ extract_formatting_settings_activity(const sml::model&) const {
 void workflow::generate_model_activity(
     const sml::model& m, const config::formatting_settings& fs) const {
     try {
+        using namespace dogen::utility::filesystem;
+        const std::list<boost::filesystem::path> dirs({data_files_directory()});
+        backend::workflow w(knitting_settings_, dirs);
+        w.execute(m);
+
         backends::factory f(m, fs);
         boost::for_each(f.create(), [&](backends::backend::ptr p) {
                 create_files_for_backend(*p);

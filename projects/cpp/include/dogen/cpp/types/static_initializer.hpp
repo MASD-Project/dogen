@@ -28,6 +28,9 @@
 namespace dogen {
 namespace cpp {
 
+/**
+ * @brief Initialises all of the static state in this model.
+ */
 class static_initializer {
 public:
     static void initialize();

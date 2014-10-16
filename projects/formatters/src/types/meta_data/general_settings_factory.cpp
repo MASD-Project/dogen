@@ -36,7 +36,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatters.meta_data.settings_factory"));
+auto lg(logger_factory("formatters.meta_data.general_settings_factory"));
 const std::string missing_context_ptr("Context pointer is null");
 const std::string modeline_groups_dir("modeline_groups");
 const std::string licence_dir("licences");

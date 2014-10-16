@@ -17,18 +17,19 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-16 Thu 22:13]
+Clock summary at [2014-10-16 Thu 22:57]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *6:03* |      |      |
+| *Total time*                                                        | *6:45* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 6:03 |      |
+| Development Stories Implemented                                     |        | 6:45 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 1:16 |
 | COMPLETED Fix CMake 3.0 warnings                                    |        |      | 0:14 |
 | COMPLETED Rename =model_provider_interface= to =frontend_interface= |        |      | 0:18 |
 | COMPLETED Implement the =backend= model                             |        |      | 1:31 |
-| IMPLEMENTATION Implement general settings handling                  |        |      | 2:44 |
+| COMPLETED Implement general settings handling                       |        |      | 2:44 |
+| COMPLETED Update =knit= to use the =backend= model                  |        |      | 0:42 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -123,7 +124,8 @@ and folders for that feature.
 - create the JSON front end.
 - engine should rely on the front-end factory.
 
-*** IMPLEMENTATION Implement general settings handling        :task:refactor:
+*** COMPLETED Implement general settings handling             :task:refactor:
+    CLOSED: [2014-10-16 Thu 22:55]
     CLOCK: [2014-10-16 Thu 22:01]--[2014-10-16 Thu 22:13] =>  0:12
     CLOCK: [2014-10-16 Thu 21:35]--[2014-10-16 Thu 22:00] =>  0:25
     CLOCK: [2014-10-10 Fri 23:40]--[2014-10-10 Fri 23:42] =>  0:02
@@ -144,10 +146,11 @@ We need to implement the model consumer interface, perform the
 override heuristics, and return the general settings container to its
 owner. We should also plug it in to the backend workflow.
 
-*** Update =knit= to use the =backend= model                  :task:refactor:
+*** COMPLETED Update =knit= to use the =backend= model        :task:refactor:
+    CLOSED: [2014-10-16 Thu 22:56]
+    CLOCK: [2014-10-16 Thu 22:13]--[2014-10-16 Thu 22:55] =>  0:42
 
-Remove the internal interfaces and code in workflow that perform the
-same role as the new =backend= model does.
+Hook up =knit= to use the new =backend= model.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
 

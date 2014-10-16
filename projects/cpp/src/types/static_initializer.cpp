@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/backend/types/workflow.hpp"
+#include "dogen/cpp/types/workflow.hpp"
 #include "dogen/cpp/types/static_initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 
 void static_initializer::initialize() {
+    backend::workflow::register_backend(std::make_shared<workflow>());
 }
 
 } }

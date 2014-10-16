@@ -18,13 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/static_initializer.hpp"
 #include "dogen/frontend/types/static_initializer.hpp"
 #include "dogen/cpp/types/static_initializer.hpp"
 #include "dogen/knitter/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
-    dogen::formatters::static_initializer::initialize();
     dogen::frontend::static_initializer::initialize();
     dogen::cpp::static_initializer::initialize();
     dogen::knitter::workflow w;

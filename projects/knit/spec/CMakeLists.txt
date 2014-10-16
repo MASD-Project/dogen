@@ -36,6 +36,7 @@ target_link_libraries(knit_spec
     sml
     config
     frontend
+    backend
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

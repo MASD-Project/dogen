@@ -25,6 +25,7 @@ file(GLOB_RECURSE all_files RELATIVE
 add_library(cpp STATIC ${all_files})
 target_link_libraries(cpp
     formatters
+    backend
     ${Boost_LIBRARIES})
 
 set_target_properties(cpp PROPERTIES

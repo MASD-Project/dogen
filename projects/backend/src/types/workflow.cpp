@@ -50,10 +50,10 @@ workflow::workflow(const config::knitting_settings& ks,
     BOOST_LOG_SEV(lg, debug) << "Initialising backend workflow. ";
     registrar().validate();
     BOOST_LOG_SEV(lg, debug) << "Found " << registrar().backends().size()
-                             << " registered backends: ";
+                             << " registered backend(s): ";
 
     for (const auto& b : registrar().backends())
-        BOOST_LOG_SEV(lg, debug) << " backend: '" << b->id() << "'";
+        BOOST_LOG_SEV(lg, debug) << "Backend: '" << b->id() << "'";
 
     BOOST_LOG_SEV(lg, debug) << "Finished initialising backend workflow. ";
 }
@@ -67,9 +67,12 @@ backend::registrar& workflow::registrar() {
 
 formatters::general_settings
 workflow::create_general_settings_activity(const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating general settings.";
+
     boost::optional<formatters::general_settings> r;
     using formatters::meta_data::general_settings_factory;
-    const general_settings_factory f(data_files_directories_);
+    general_settings_factory f(data_files_directories_);
+    f.load_reference_data();
 
     for (const auto pair : m.modules()) {
         const auto mod(pair.second);
@@ -92,6 +95,8 @@ workflow::create_general_settings_activity(const sml::model& m) const {
         BOOST_LOG_SEV(lg, error) << no_generatable_model_modules;
         BOOST_THROW_EXCEPTION(workflow_error(no_generatable_model_modules));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating general settings.";
     return *r;
 }
 
