@@ -11,6 +11,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** XML serialisation for interoperability                      :epic:vision:
+
+A very good point raised by Boris on his [[https://www.youtube.com/watch?v%3DAuamDUrG5ZU][XML talk]] is that XML is
+useful as an interchange format, mainly for interoperability and
+future-proofing. It would be nice if we could use dogen to generate a
+"controlled" XML, using a well defined schema (also
+code-generated). This would be a stable format that could allow
+third-parties to hook into the serialisation - as opposed to boost
+serialisation's XML.
+
 *** Add support for CSV serialisation                                 :story:
 
 It would be nice to be able to serialise some simpler types into CSV
@@ -255,8 +265,8 @@ should not silently disable facets.
 *** Make JSON SML a fully supported frontend         :story:feature:frontend:
 
 #+begin_quote
-*Story*: As a dogen user, I want to read and write objects from JSON
-so that I can interoperate with other systems/languages.
+*Story*: As a dogen user, I want to be able to write my domain models
+in JSON since I don't have any need for UML visualisation.
 #+end_quote
 
 At present we are using an SML JSON format to supply Dogen the system
