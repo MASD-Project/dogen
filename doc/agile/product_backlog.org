@@ -11,6 +11,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create top-level initialisers                             :task:refactor:
+
+It would be nice if top-level models such as =knit= had their own
+static initialiser and consumers of that model didn't have to manually
+initialise every dependent model.
+
 *** XML serialisation for interoperability                      :epic:vision:
 
 A very good point raised by Boris on his [[https://www.youtube.com/watch?v%3DAuamDUrG5ZU][XML talk]] is that XML is
