@@ -143,19 +143,6 @@ void workflow::create_files_for_backend(backends::backend& b) const {
     housekeep(files, b.managed_directories());
 }
 
-bool workflow::
-is_generation_required(const boost::optional<sml::model>& m) const {
-    if (knitting_settings_.troubleshooting().stop_after_merging()) {
-        BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
-        return false;
-    }
-
-    if (!m)
-        return false;
-
-    return true;
-}
-
 std::string workflow::extension(config::archive_types at) const {
     using config::archive_types;
     switch (at) {
@@ -180,20 +167,6 @@ create_debug_file_path(const config::archive_types at,
     r /= original_path.stem().string() + target_postfix;
     r.replace_extension(extension(at));
     return r;
-}
-
-void workflow::persist_sml_model(const boost::filesystem::path& p,
-    const sml::model& m) const {
-
-    const auto& ts(knitting_settings_.troubleshooting());
-    using config::archive_types;
-    archive_types at(ts.save_sml_model());
-    if (at == archive_types::invalid)
-        return;
-
-    const auto& dp(create_debug_file_path(at, p));
-    sml::persister persister;
-    persister.persist(m, dp);
 }
 
 std::list<frontend::input_descriptor>
@@ -258,13 +231,11 @@ boost::filesystem::path workflow::obtain_target_path_activity(
     return boost::filesystem::path();
 }
 
-boost::optional<sml::model> workflow::
-merge_models_activity(const boost::filesystem::path p,
-    const std::list<sml::model>& models) const {
+std::pair<bool, sml::model> workflow::
+merge_models_activity(const std::list<sml::model>& models) const {
     sml::workflow w(knitting_settings_);
     const auto pair(w.execute(models));
     const auto& m(pair.second);
-    persist_sml_model(p, m);
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
     BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << m.objects().size()
@@ -273,12 +244,21 @@ merge_models_activity(const boost::filesystem::path p,
                              << " enumerations: " << m.enumerations().size()
                              << " primitives: " << m.primitives().size();
 
-    const auto has_generatable_types(pair.first);
-    if ((has_generatable_types))
-        return boost::optional<sml::model>(m);
+    return pair;
+}
 
-    BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-    return boost::optional<sml::model>();
+void workflow::persist_model_activity(const boost::filesystem::path p,
+    const sml::model& m) const {
+
+    const auto& ts(knitting_settings_.troubleshooting());
+    using config::archive_types;
+    archive_types at(ts.save_sml_model());
+    if (at == archive_types::invalid)
+        return;
+
+    const auto& dp(create_debug_file_path(at, p));
+    sml::persister persister;
+    persister.persist(m, dp);
 }
 
 config::formatting_settings workflow::
@@ -310,13 +290,23 @@ void workflow::execute() const {
         const auto d(obtain_input_descriptors_activity());
         const auto tp(obtain_target_path_activity(d));
         const auto pm(obtain_partial_sml_models_activity(d));
-        const auto m(merge_models_activity(tp, pm));
+        const auto pair(merge_models_activity(pm));
+        const auto& m(pair.second);
+        const auto has_generatable_types(pair.first);
+        persist_model_activity(tp, m);
 
-        if (!is_generation_required(m))
+        if (knitting_settings_.troubleshooting().stop_after_merging()) {
+            BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
             return;
+        }
 
-        auto fs(extract_formatting_settings_activity(*m));
-        generate_model_activity(*m, fs);
+        if (!has_generatable_types) {
+            BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
+            return;
+        }
+
+        auto fs(extract_formatting_settings_activity(m));
+        generate_model_activity(m, fs);
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
         throw;

@@ -28,6 +28,7 @@ target_link_libraries(knit
     dia
     dia_to_sml
     frontend
+    backend
     formatters
     cpp
     cpp_formatters

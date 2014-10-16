@@ -29,7 +29,6 @@
 #include <string>
 #include <utility>
 #include <functional>
-#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
@@ -111,12 +110,6 @@ private:
     void create_files_for_backend(backends::backend& b) const;
 
     /**
-     * @brief Returns true if we should execute the generation
-     * activity, false otherwise.
-     */
-    bool is_generation_required(const boost::optional<sml::model>& m) const;
-
-    /**
      * @brief Given an archive type and a model name, returns the
      * appropriate file extension.
      *
@@ -131,13 +124,6 @@ private:
     boost::filesystem::path
     create_debug_file_path(const config::archive_types at,
         const boost::filesystem::path& original_path) const;
-
-    /**
-     * @brief Checks the settings chosen by the user to determine if
-     * the SML model should be persisted; if so, persists it.
-     */
-    void persist_sml_model(const boost::filesystem::path& p,
-        const sml::model& m) const;
 
 private:
     /**
@@ -159,12 +145,20 @@ private:
         const std::list<frontend::input_descriptor>& descriptors) const;
 
     /**
-     * @brief Execute the SML workflow and return a model that can be
-     * generated - or nothing, if no such model exists.
+     * @brief Execute the SML workflow.
+     *
+     * @return pair with the model and a flag; if true, the model is
+     * generatable.
      */
-    boost::optional<sml::model>
-    merge_models_activity(const boost::filesystem::path p,
-        const std::list<sml::model>& models) const;
+    std::pair<bool, sml::model>
+    merge_models_activity(const std::list<sml::model>& models) const;
+
+    /**
+     * @brief Checks the settings chosen by the user to determine if
+     * the SML model should be persisted; if so, persists it.
+     */
+    void persist_model_activity(const boost::filesystem::path p,
+        const sml::model& m) const;
 
     /**
      * @brief Extracts the formatting settings from the SML model.
