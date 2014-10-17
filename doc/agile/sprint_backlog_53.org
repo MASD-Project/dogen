@@ -17,14 +17,14 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-16 Thu 22:57]
+Clock summary at [2014-10-17 Fri 22:32]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *6:45* |      |      |
+| *Total time*                                                        | *6:55* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 6:45 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 1:16 |
+| Development Stories Implemented                                     |        | 6:55 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 1:26 |
 | COMPLETED Fix CMake 3.0 warnings                                    |        |      | 0:14 |
 | COMPLETED Rename =model_provider_interface= to =frontend_interface= |        |      | 0:18 |
 | COMPLETED Implement the =backend= model                             |        |      | 1:31 |
@@ -33,6 +33,7 @@ Clock summary at [2014-10-16 Thu 22:57]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-10-17 Fri 22:22]--[2014-10-17 Fri 22:32] =>  0:10
     CLOCK: [2014-10-15 Wed 21:51]--[2014-10-15 Wed 22:03] =>  0:12
     CLOCK: [2014-10-14 Tue 22:41]--[2014-10-14 Tue 22:53] =>  0:12
     CLOCK: [2014-10-13 Mon 21:41]--[2014-10-13 Mon 22:06] =>  0:25

@@ -918,7 +918,7 @@ have the ability to print them.
 
 We should build HTML and PDF representations of the manual.
 
-*** Consider adding SWIG and Boost.Python support :story:feature:backend:formatters:
+*** Consider adding SWIG and Boost.Python support :epic:vision:backend:formatters:
 
 #+begin_quote
 *Story*: As a dogen user, I want to expose models to other languages
@@ -1965,7 +1965,7 @@ vertex. We could also have dependencies between the indexers (for
 example concept indexing must take place before property indexing and
 so on).
 
-*** Consider renaming SML                                 :task:refactor:sml:
+*** Consider renaming SML                                          :task:sml:
 
 Originally we intended to rename SML - the Simplified Modeling
 Language - to DDL - the Domain Driven Language. This was because we
@@ -1985,10 +1985,14 @@ is not a very good name for the model as we also do some front-end-y
 things (such as the JSON implementation). =ir= and =im= still seem
 like the more likely candidates.
 
-*** Add POF serialisation support          :story:feature:backend:formatters:
+*** Add POF serialisation support            :epic:vision:backend:formatters:
 
 If coherence has open source C++ libraries, we should add support for
 serialisation to and from POF.
+
+Links:
+
+- [[http://docs.oracle.com/cd/E24290_01/coh.371/e22839/cpp_api.htm][Understanding the Coherence for C++ API]]
 
 *** Types that share one file                             :story:feature:sml:
 
