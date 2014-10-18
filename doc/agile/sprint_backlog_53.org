@@ -17,19 +17,20 @@ formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-17 Fri 22:32]
+Clock summary at [2014-10-19 Sun 00:09]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *6:55* |      |      |
+| *Total time*                                                        | *7:35* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 6:55 |      |
+| Development Stories Implemented                                     |        | 7:35 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 1:26 |
 | COMPLETED Fix CMake 3.0 warnings                                    |        |      | 0:14 |
 | COMPLETED Rename =model_provider_interface= to =frontend_interface= |        |      | 0:18 |
 | COMPLETED Implement the =backend= model                             |        |      | 1:31 |
 | COMPLETED Implement general settings handling                       |        |      | 2:44 |
-| COMPLETED Update =knit= to use the =backend= model                  |        |      | 0:42 |
+| COMPLETED Update =knit= to use the =backend= model                  |        |      | 0:46 |
+| IMPLEMENTATION Add transformer to =cpp= model                       |        |      | 0:36 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -153,6 +154,12 @@ owner. We should also plug it in to the backend workflow.
     CLOCK: [2014-10-16 Thu 22:13]--[2014-10-16 Thu 22:55] =>  0:42
 
 Hook up =knit= to use the new =backend= model.
+
+*** IMPLEMENTATION Add transformer to =cpp= model             :task:refactor:
+    CLOCK: [2014-10-18 Sat 23:26]--[2014-10-19 Sun 00:02] =>  0:36
+
+We need to copy across the transformer into the C++ model in order to
+start working on formatter code.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
 

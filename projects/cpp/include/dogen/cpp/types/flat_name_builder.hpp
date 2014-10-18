@@ -46,7 +46,7 @@ public:
     flat_name_builder(flat_name_builder&&) = default;
     ~flat_name_builder() noexcept = default;
 
-private:
+public:
     /**
      * @brief Flattens all the SML namespace information stored in qname
      * into a list of strings with C++ namespaces.
@@ -54,7 +54,6 @@ private:
     std::list<std::string>
     to_namespace_list(const sml::model& m, const sml::qname& qn) const;
 
-public:
     /**
      * @brief Returns the file name for the given qualified name and facet.
      */
