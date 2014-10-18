@@ -26,10 +26,12 @@
 #endif
 
 #include "dogen/cpp/types/class_info_fwd.hpp"
+#include "dogen/cpp/types/concept_fwd.hpp"
 #include "dogen/cpp/types/enum_info_fwd.hpp"
 #include "dogen/cpp/types/exception_info_fwd.hpp"
 #include "dogen/cpp/types/namespace_info_fwd.hpp"
 #include "dogen/cpp/types/new_class_info_fwd.hpp"
+#include "dogen/cpp/types/primitive_fwd.hpp"
 #include "dogen/cpp/types/registrar_info_fwd.hpp"
 #include "dogen/cpp/types/visitor_info_fwd.hpp"
 
@@ -109,6 +111,26 @@ public:
     virtual void visit(const dogen::cpp::new_class_info&) { }
     virtual void visit(dogen::cpp::new_class_info&) const { }
     virtual void visit(dogen::cpp::new_class_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::concept
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::concept&) const { }
+    virtual void visit(const dogen::cpp::concept&) { }
+    virtual void visit(dogen::cpp::concept&) const { }
+    virtual void visit(dogen::cpp::concept&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::primitive
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::primitive&) const { }
+    virtual void visit(const dogen::cpp::primitive&) { }
+    virtual void visit(dogen::cpp::primitive&) const { }
+    virtual void visit(dogen::cpp::primitive&) { }
     /**@}*/
 };
 
