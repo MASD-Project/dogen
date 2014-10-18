@@ -149,6 +149,7 @@ owner. We should also plug it in to the backend workflow.
 
 *** COMPLETED Update =knit= to use the =backend= model        :task:refactor:
     CLOSED: [2014-10-16 Thu 22:56]
+    CLOCK: [2014-10-18 Sat 23:20]--[2014-10-18 Sat 23:24] =>  0:04
     CLOCK: [2014-10-16 Thu 22:13]--[2014-10-16 Thu 22:55] =>  0:42
 
 Hook up =knit= to use the new =backend= model.

@@ -42,13 +42,13 @@ public:
 public:
     std::string id() const override;
 
+    std::vector<boost::filesystem::path>
+    managed_directories() const override;
+
     std::list<dogen::formatters::file> generate(
         const std::unordered_map<sml::qname,
                                  dogen::formatters::general_settings>& gs,
         const sml::model& m) const override;
-
-    std::vector<boost::filesystem::path>
-    managed_directories() const override;
 };
 
 } }

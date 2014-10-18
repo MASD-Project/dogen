@@ -54,6 +54,12 @@ public:
     virtual std::string id() const = 0;
 
     /**
+     * @brief Returns all directories managed by this backend.
+     */
+    virtual std::vector<boost::filesystem::path>
+    managed_directories() const = 0;
+
+    /**
      * @brief Generates the source code for the backend.
      *
      * @param gs General settings for the SML types.
@@ -62,12 +68,6 @@ public:
     virtual std::list<formatters::file> generate(
         const std::unordered_map<sml::qname, formatters::general_settings>& gs,
         const sml::model& m) const = 0;
-
-    /**
-     * @brief Returns all directories managed by this backend.
-     */
-    virtual std::vector<boost::filesystem::path>
-    managed_directories() const = 0;
 };
 
 } }
