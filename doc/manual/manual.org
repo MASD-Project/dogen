@@ -1868,8 +1868,8 @@ This diagram is now ready for generation, as described in section
 Dogen does not support every single UML construct; in fact, it only
 supports a surprisingly small subset of the language, but this subset
 is rich enough to express all of Dogen's internal complexity. The
-supported UML types, according to their Dia names, described in the
-following sections.
+supported UML types, according to their Dia names, are described in
+the following sections.
 
 **** UML Class
 
@@ -1880,24 +1880,32 @@ set, a UML Class can be code-generated as a simple value object, an
 enumeration or an exception. The following table lists all of the
 available stereotypes:
 
-| Stereotype     | Description |
-|----------------+-------------|
-| service        |             |
-| enumeration    |             |
-| exception      |             |
-| concept        |             |
-| visitable      |             |
-| entity         |             |
-| aggregate root |             |
-|                |             |
+| Stereotype     | Description                                     |
+|----------------+-------------------------------------------------|
+| service        | No code is generated for the class.             |
+| enumeration    | The class is generated as an enumeration.       |
+| exception      | The class is generated as an exception class    |
+| concept        | The class is a "meta-class"                     |
+| visitable      | An associated visitor is created for the class. |
+| entity         | The class is expected to have an identity.      |
+| aggregate root | The class is the root of an aggregate.          |
+|                |                                                 |
 
+Some of the above meanings are taken from Domain Driven Design:
+service, entity, aggregate root. The remaining ones are convenience
+facilities that were added to Dogen. Note that =visitable= only makes
+sense in the presence of inheritance, as explained [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#uml-generalization][below]], and must be
+applied to the base class of an inheritance tree.
 
 **** UML Large Package
 
-Container of packages and classes. Dogen uses the package to define
-the appropriate scoping in the backend languages. For example, in C++
-it results in the appropriate namespaces being defined, with the types
-it contains.
+A large package is a container of packages and classes. Dogen uses the
+package to define the appropriate scoping in the backend
+languages. For example, in C++ it results in placing the contained
+types in namespaces.
+
+Note that in Dia it is not possible to add documentation to a
+package. This is solved by extending the UML Note, as explained [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#uml-note][below]].
 
 #+CAPTION: Class in a large package.
 #+ATTR_HTML: :align center
@@ -1905,7 +1913,8 @@ it contains.
 
 **** UML Generalization
 
-Defines inheritance relationships. We do not support multiple
+The UML Generalization is used to define inheritance relationships. A
+class can have many descendents; however, we do not support multiple
 inheritance at present.
 
 #+CAPTION: Class inheriting from other class.
@@ -1914,10 +1923,12 @@ inheritance at present.
 
 **** UML Association
 
-Used for informational purposes only. Dogen ignores all UML
-Associations (either aggregation or composition) because it does not
-have enough information to model them. Instead, it relies on the
-properties defined in the class.
+The UML Association is used for informational purposes only; Dogen
+ignores all UML Associations (either aggregation or composition)
+because it does not have enough information to model them. Instead, it
+relies on the properties defined in the class to determine
+relationships between classes. However, we still find it very useful
+to convey graphical meaning to other users of the diagram.
 
 #+CAPTION: Aggregation relationship.
 #+ATTR_HTML: :align center
@@ -1929,12 +1940,13 @@ properties defined in the class.
 
 **** UML Note
 
-Has a dual purpose: it is used for user comments that clarify intent;
-but it is also used to supplement a few cases where Dia is lacking. At
-present the main problem we found is a lack of ability to add comments
-at the model and package level, which means one could not produce
-documentation for these types. We make use of the UML Note to provide
-this information.
+As with standard UML diagrams, the UML Note is used to provide user
+comments that clarify intent, add deeper explanations to design
+choices and so on. In Dogen, we have overloaded it to supplement
+Dia. The main use case is a lack of comments at the model and package
+level, which means one could not produce documentation for these
+types. We make use of the UML Note to provide this information, by
+marking it with meta-data.
 
 #+CAPTION: Note used to add documentation to a model.
 #+ATTR_HTML: :align center
@@ -1946,18 +1958,18 @@ this information.
 
 **** UML Message
 
-Dogen has _overloaded_ these messages to allow them to link comments
-with other types. For instance, it is useful when you have many
-classes but you need to provide a UML Note specific to a class; in
-that case you can define a UML Message between the UML Note and the
-UML Class.
+The UML Message has, somewhat incorrectly, been overloaded by Dogen as
+a way to link comments with classes and other UML types. For instance,
+it is useful when you have many classes but you need to provide a UML
+Note specific to a class; in that case you can define a UML Message
+between the UML Note and the UML Class.
 
 **** UML realization
 
-This is ignored by Dogen. It is useful when you
-want to implement interfaces but you do not want Dogen to generate
-the usual inheritance infrastructure - as it would do if you use a
-UML Generalization.
+The UML realization is ignored by Dogen. It is useful when you want to
+implement interfaces but you do not want Dogen to generate the usual
+inheritance infrastructure - as it would do if you use a UML
+Generalization.
 
 **** Other Dia object types
 
@@ -2062,6 +2074,7 @@ and papers on the subject we have read, or intend to read.
 - [[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3883.html][Code checkers and generators]]: adding AngularJS-like capabilities to
   C++.
 - [[http://stackoverflow.com/questions/355650/c-html-template-framework-templatizing-library-html-generator-library][Text Template libraries for C++]]: T4 like implementations for C++.
+
 ** Appendix B - FIXME Assorted Text
 
 The main objective of creating a domain generator is to avoid having
