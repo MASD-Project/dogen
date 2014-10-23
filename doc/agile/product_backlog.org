@@ -11,6 +11,11 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider using spirit JSON                                         :task:
+
+We could use a full-blow JSON parser rather than the property tree
+one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+
 *** Create top-level initialisers                             :task:refactor:
 
 It would be nice if top-level models such as =knit= had their own
@@ -1495,6 +1500,9 @@ structure of the meta-data tags, which are not very suitable to
 describe a structure like a graph.
 
 Note: we should consider using [[https://github.com/jamboree/bustache][bustache]] for this.
+
+There is also [[https://www.youtube.com/watch?v%3DhTnoEjqUZjI][boostache]] but I could not find any code in github for
+it.
 
 *** Special purpose formatters                       :epic:vision:formatters:
 
