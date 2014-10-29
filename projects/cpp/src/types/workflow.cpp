@@ -45,7 +45,7 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
 }
 
 std::list<formatters::file> workflow::generate(
-    const std::unordered_map<sml::qname, formatters::general_settings>& /*gs*/,
+    const formatters::general_settings& /*gs*/,
     const sml::model& /*m*/) const {
     std::list<formatters::file> r;
     return r;

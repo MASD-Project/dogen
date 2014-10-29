@@ -27,7 +27,6 @@
 
 #include <list>
 #include <vector>
-#include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -66,7 +65,7 @@ public:
      * @param m Model to generate.
      */
     virtual std::list<formatters::file> generate(
-        const std::unordered_map<sml::qname, formatters::general_settings>& gs,
+        const formatters::general_settings& gs,
         const sml::model& m) const = 0;
 };
 

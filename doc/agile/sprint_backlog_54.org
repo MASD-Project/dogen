@@ -17,18 +17,20 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-22 Wed 23:08]
+Clock summary at [2014-10-29 Wed 23:21]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *0:20* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 0:20 |      |
-| IMPLEMENTATION Sprint and product backlog grooming    |        |      | 0:07 |
-| IMPLEMENTATION Updates to the manual and readme files |        |      | 0:13 |
+| Headline                                                         | Time   |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                     | *0:38* |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                  |        | 0:38 |      |
+| IMPLEMENTATION Sprint and product backlog grooming               |        |      | 0:16 |
+| IMPLEMENTATION Updates to the manual and readme files            |        |      | 0:13 |
+| COMPLETED Remove map from backend interface for general settings |        |      | 0:09 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-10-29 Wed 23:01]--[2014-10-29 Wed 23:10] =>  0:09
     CLOCK: [2014-10-21 Tue 22:55]--[2014-10-21 Tue 23:02] =>  0:07
 
 Updates to sprint and product backlog.
@@ -37,6 +39,14 @@ Updates to sprint and product backlog.
     CLOCK: [2014-10-22 Wed 22:55]--[2014-10-22 Wed 23:08] =>  0:13
 
 Use downtime to update the manual and / or readme file.
+
+*** COMPLETED Remove map from backend interface for general settings :task:refactor:
+    CLOSED: [2014-10-29 Wed 23:19]
+    CLOCK: [2014-10-29 Wed 23:10]--[2014-10-29 Wed 23:19] =>  0:09
+
+We still have a map in the backend interface for general settings even
+though we decided to simplify things and only allow a single general
+settings for a project. Update interface.
 
 *** Add transformer to =cpp= model                            :task:refactor:
 
