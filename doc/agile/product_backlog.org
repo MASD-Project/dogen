@@ -11,6 +11,21 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider adding XML schema as a front-end                   :epic:vision:
+
+Tools like =Xsd= and =ejc= use the XML schema to provide the input to
+the code generator. There is a simple mapping between the XML schema
+and the language. [[http://en.wikipedia.org/wiki/Java_Architecture_for_XML_Binding][JAXB]] is a good example of this. As we already have a
+dependency on libxml, we can already load XML schemas.
+
+Note though that the idea is not to generate another xsd tool since we
+already have a good [[http://www.codesynthesis.com/products/xsd/][C++ xsd tool]]. The point is to figure out if a XML
+schema based front-end to Dogen is more convenient than Dia XML or
+JSON.
+
+It may also be worth looking at the [[https://jaxb.java.net/2.2.4/docs/xjc.html][xjc]] command line tool interface to
+pick up ideas for Dogen.
+
 *** Consider using spirit JSON                                         :task:
 
 We could use a full-blow JSON parser rather than the property tree
