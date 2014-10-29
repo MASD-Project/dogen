@@ -275,7 +275,7 @@ void workflow::generate_model_activity(
         using namespace dogen::utility::filesystem;
         const std::list<boost::filesystem::path> dirs({data_files_directory()});
         backend::workflow w(knitting_settings_, dirs);
-        w.execute(m);
+        w.execute(m); // FIXME: throw away results for now
 
         backends::factory f(m, fs);
         boost::for_each(f.create(), [&](backends::backend::ptr p) {

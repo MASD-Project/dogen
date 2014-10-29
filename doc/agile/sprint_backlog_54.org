@@ -17,16 +17,17 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-29 Wed 23:21]
+Clock summary at [2014-10-29 Wed 23:34]
 
-| Headline                                                         | Time   |      |      |
-|------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                     | *0:38* |      |      |
-|------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                  |        | 0:38 |      |
-| IMPLEMENTATION Sprint and product backlog grooming               |        |      | 0:16 |
-| IMPLEMENTATION Updates to the manual and readme files            |        |      | 0:13 |
-| COMPLETED Remove map from backend interface for general settings |        |      | 0:09 |
+| Headline                                              | Time   |      |      |
+|-------------------------------------------------------+--------+------+------|
+| *Total time*                                          | *0:52* |      |      |
+|-------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                       |        | 0:52 |      |
+| IMPLEMENTATION Sprint and product backlog grooming    |        |      | 0:16 |
+| IMPLEMENTATION Updates to the manual and readme files |        |      | 0:13 |
+| COMPLETED Remove map from backend interface           |        |      | 0:09 |
+| COMPLETED Generate all backends in workflow           |        |      | 0:14 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -40,13 +41,21 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** COMPLETED Remove map from backend interface for general settings :task:refactor:
+*** COMPLETED Remove map from backend interface               :task:refactor:
     CLOSED: [2014-10-29 Wed 23:19]
     CLOCK: [2014-10-29 Wed 23:10]--[2014-10-29 Wed 23:19] =>  0:09
 
 We still have a map in the backend interface for general settings even
 though we decided to simplify things and only allow a single general
 settings for a project. Update interface.
+
+*** COMPLETED Generate all backends in workflow                       :story:
+    CLOSED: [2014-10-29 Wed 23:34]
+    CLOCK: [2014-10-29 Wed 23:21]--[2014-10-29 Wed 23:34] =>  0:13
+    CLOCK: [2014-10-29 Wed 23:20]--[2014-10-29 Wed 23:21] =>  0:01
+
+Even though the backends don't actually do anything at the moment, we
+need to make sure we have an end-to-end pipeline.
 
 *** Add transformer to =cpp= model                            :task:refactor:
 

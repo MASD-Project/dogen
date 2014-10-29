@@ -105,8 +105,18 @@ void workflow::register_backend(std::shared_ptr<backend_interface> b) {
 }
 
 std::list<formatters::file> workflow::execute(const sml::model& m) const {
-    create_general_settings_activity(m);
+    const auto gs(create_general_settings_activity(m));
+
     std::list<formatters::file> r;
+    for(const auto b : registrar().backends()) {
+        const auto id(b->id());
+        BOOST_LOG_SEV(lg, debug) << "Generating files backend '" << id << "'";
+        auto files(b->generate(gs, m));
+        BOOST_LOG_SEV(lg, debug) << "Files for backend '" << id << "': "
+                                 << files.size();
+        r.splice(r.end(), files);
+    }
+
     return r;
 }
 

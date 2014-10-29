@@ -47,7 +47,9 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
 std::list<formatters::file> workflow::generate(
     const formatters::general_settings& /*gs*/,
     const sml::model& /*m*/) const {
+    BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
     std::list<formatters::file> r;
+    BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;
 }
 
