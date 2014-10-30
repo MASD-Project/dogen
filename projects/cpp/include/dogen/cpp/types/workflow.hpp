@@ -25,11 +25,17 @@
 #pragma once
 #endif
 
+#include <memory>
+#include "dogen/cpp/types/registrar.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
+#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 
+/**
+ * @brief Manages the c++ backend workflow.
+ */
 class workflow : public backend::backend_interface {
 public:
     workflow() = default;
@@ -39,14 +45,33 @@ public:
 public:
     ~workflow() noexcept;
 
+private:
+    /**
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
+     */
+    static cpp::registrar& registrar();
+
+public:
+    /**
+     * @brief Registers a formatter with the workflow.
+     */
+    static void register_formatter(
+        std::shared_ptr<formatters::class_formatter_interface> f);
+
 public:
     std::string id() const override;
 
     std::vector<boost::filesystem::path> managed_directories() const override;
 
+    void validate() const override;
+
     std::list<dogen::formatters::file> generate(
         const dogen::formatters::general_settings& gs,
         const sml::model& m) const override;
+
+private:
+    static std::shared_ptr<cpp::registrar> registrar_;
 };
 
 } }

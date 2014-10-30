@@ -59,6 +59,11 @@ public:
     managed_directories() const = 0;
 
     /**
+     * @brief Ensures the backend is in a valid state to operate.
+     */
+    virtual void validate() const = 0;
+
+    /**
      * @brief Generates the source code for the backend.
      *
      * @param gs General settings for the SML types.

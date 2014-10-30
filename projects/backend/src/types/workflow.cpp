@@ -45,24 +45,26 @@ std::shared_ptr<backend::registrar> workflow::registrar_;
 
 workflow::workflow(const config::knitting_settings& ks,
     const std::list<boost::filesystem::path>& data_files_directories)
-    : knitting_settings_(ks), data_files_directories_(data_files_directories) {
-
-    BOOST_LOG_SEV(lg, debug) << "Initialising backend workflow. ";
-    registrar().validate();
-    BOOST_LOG_SEV(lg, debug) << "Found " << registrar().backends().size()
-                             << " registered backend(s): ";
-
-    for (const auto& b : registrar().backends())
-        BOOST_LOG_SEV(lg, debug) << "Backend: '" << b->id() << "'";
-
-    BOOST_LOG_SEV(lg, debug) << "Finished initialising backend workflow. ";
-}
+    : knitting_settings_(ks), data_files_directories_(data_files_directories) { }
 
 backend::registrar& workflow::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<backend::registrar>();
 
     return *registrar_;
+}
+
+void workflow::validate_backends_activity() const {
+    BOOST_LOG_SEV(lg, debug) << "Validating backend workflow.";
+    registrar().validate();
+    BOOST_LOG_SEV(lg, debug) << "Found " << registrar().backends().size()
+                             << " registered backend(s): ";
+
+    for (const auto& b : registrar().backends()) {
+        BOOST_LOG_SEV(lg, debug) << "Backend: '" << b->id() << "'";
+        b->validate();
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished validating backend workflow.";
 }
 
 formatters::general_settings
@@ -105,6 +107,7 @@ void workflow::register_backend(std::shared_ptr<backend_interface> b) {
 }
 
 std::list<formatters::file> workflow::execute(const sml::model& m) const {
+    validate_backends_activity();
     const auto gs(create_general_settings_activity(m));
 
     std::list<formatters::file> r;

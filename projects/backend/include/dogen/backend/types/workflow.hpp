@@ -61,6 +61,11 @@ private:
 
 private:
     /**
+     * @brief Ensures are backends have been initialised correctly.
+     */
+    void validate_backends_activity() const;
+
+    /**
      * @brief Creates the general settings.
      */
     formatters::general_settings

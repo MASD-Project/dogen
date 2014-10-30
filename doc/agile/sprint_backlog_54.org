@@ -58,7 +58,9 @@ settings for a project. Update interface.
 Even though the backends don't actually do anything at the moment, we
 need to make sure we have an end-to-end pipeline.
 
-*** IMPLEMENTATION Add registrar to =cpp= with class formatter support :story:
+*** COMPLETED Add registrar to =cpp= with class formatter support     :story:
+    CLOSED: [2014-10-30 Thu 08:17]
+    CLOCK: [2014-10-30 Thu 07:30]--[2014-10-30 Thu 08:17] =>  0:47
     CLOCK: [2014-10-29 Wed 23:34]--[2014-10-30 Thu 00:00] =>  0:26
 
 Add the basic skeleton of the registrar in =cpp= model with only

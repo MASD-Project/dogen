@@ -20,13 +20,18 @@
  */
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
+#include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/static_initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 
+using namespace formatters::types;
+
 void static_initializer::initialize() {
-    backend::workflow::register_backend(std::make_shared<workflow>());
+    auto w(std::make_shared<workflow>());
+    w->register_formatter(std::make_shared<class_header_formatter>());
+    backend::workflow::register_backend(w);
 }
 
 } }

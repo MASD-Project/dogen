@@ -33,7 +33,21 @@ static logger lg(logger_factory(id));
 namespace dogen {
 namespace cpp {
 
+std::shared_ptr<cpp::registrar> workflow::registrar_;
+
 workflow::~workflow() noexcept { }
+
+cpp::registrar& workflow::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<cpp::registrar>();
+
+    return *registrar_;
+}
+
+void workflow::register_formatter(
+    std::shared_ptr<formatters::class_formatter_interface> f) {
+    registrar().register_formatter(f);
+}
 
 std::string workflow::id() const {
     return ::id;
@@ -44,11 +58,26 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
     return r;
 }
 
-std::list<formatters::file> workflow::generate(
-    const formatters::general_settings& /*gs*/,
+void workflow::validate() const {
+    BOOST_LOG_SEV(lg, debug) << "Validating c++ backend workflow.";
+
+    registrar().validate();
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << registrar().class_formatters().size()
+                             << " registered class formatter(s): ";
+
+    BOOST_LOG_SEV(lg, debug) << "Listing all class formatter.";
+    for (const auto& f : registrar().class_formatters())
+        BOOST_LOG_SEV(lg, debug) << "Id: '" << f->formatter_id() << "'";
+
+    BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
+}
+
+std::list<dogen::formatters::file> workflow::generate(
+    const dogen::formatters::general_settings& /*gs*/,
     const sml::model& /*m*/) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
-    std::list<formatters::file> r;
+    std::list<dogen::formatters::file> r;
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;
 }
