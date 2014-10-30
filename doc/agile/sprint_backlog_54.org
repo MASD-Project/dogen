@@ -17,19 +17,20 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-30 Thu 18:46]
+Clock summary at [2014-10-30 Thu 19:04]
 
 | Headline                                                      | Time   |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *2:45* |      |      |
+| *Total time*                                                  | *3:01* |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 2:45 |      |
+| Development Stories Implemented                               |        | 3:01 |      |
 | IMPLEMENTATION Sprint and product backlog grooming            |        |      | 0:16 |
 | IMPLEMENTATION Updates to the manual and readme files         |        |      | 0:13 |
 | COMPLETED Remove map from backend interface                   |        |      | 0:09 |
 | COMPLETED Generate all backends in workflow                   |        |      | 0:14 |
 | COMPLETED Add registrar to =cpp= with class formatter support |        |      | 1:13 |
 | COMPLETED Add formatter dispatcher to =cpp= model             |        |      | 0:40 |
+| IMPLEMENTATION Add transformer to =cpp= workflow              |        |      | 0:16 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -74,7 +75,8 @@ support for class formatters.
 Create a class to dispatch to the correct formatters and retrieve a
 list of files. Plug it to the workflow.
 
-*** Add transformer to =cpp= model                            :task:refactor:
+*** IMPLEMENTATION Add transformer to =cpp= workflow          :task:refactor:
+    CLOCK: [2014-10-30 Thu 18:48]--[2014-10-30 Thu 19:04] =>  0:16
 
 We need to copy across the transformer into the C++ model in order to
 start working on formatter code.

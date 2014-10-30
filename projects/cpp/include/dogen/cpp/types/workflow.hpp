@@ -29,6 +29,7 @@
 #include "dogen/cpp/types/registrar.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/cpp/types/transformer.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -60,6 +61,20 @@ public:
         std::shared_ptr<formatters::class_formatter_interface> f);
 
 private:
+    /**
+     * @brief Transforms the supplied SML elements into C++ entities.
+     */
+    template<typename AssociativeContainerOfElement>
+    std::list<std::shared_ptr<entity>>
+    transform_sml_elements_activity(const sml::model& m,
+        const AssociativeContainerOfElement& c) const {
+        std::list<std::shared_ptr<entity> > r;
+        transformer t(m);
+        for (const auto& pair : c)
+            r.push_back(t.transform(pair.second));
+        return r;
+    }
+
     /**
      * @brief Generates all files for the entity.
      */

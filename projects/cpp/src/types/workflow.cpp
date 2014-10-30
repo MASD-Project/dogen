@@ -84,6 +84,13 @@ std::list<dogen::formatters::file> workflow::generate(
     const dogen::formatters::general_settings& /*gs*/,
     const sml::model& /*m*/) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
+    settings_bundle b;
+
+    /*
+    const auto entities(transform_sml_elements_activity(m, m.modules()));
+    const auto files(generate_entity_activity(b));
+    */
+
     std::list<dogen::formatters::file> r;
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;
