@@ -18,47 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_REGISTRAR_ERROR_HPP
+#define DOGEN_CPP_TYPES_REGISTRAR_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
 #include <string>
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/new_class_info.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
 
-class class_formatter_interface {
+/**
+ * @brief There was an error in the registrar.
+ */
+class registrar_error : public virtual std::exception, public virtual boost::exception {
 public:
-    class_formatter_interface() = default;
-    class_formatter_interface(const class_formatter_interface&) = delete;
-    class_formatter_interface(class_formatter_interface&&) = default;
-    virtual ~class_formatter_interface() noexcept = 0;
+    registrar_error() = default;
+    ~registrar_error() noexcept = default;
 
 public:
-    /**
-     * @brief Unique identifier for the facet.
-     */
-    virtual std::string facet_id() const = 0;
+    registrar_error(const std::string& message) : message_(message) { }
 
-    /**
-     * @brief Unique identifier for the formatter, for logging purposes.
-     */
-    virtual std::string formatter_id() const = 0;
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
-    /**
-     * @brief Generate a c++ representation for the type.
-     */
-    virtual dogen::formatters::file
-    format(const new_class_info& c, const settings_bundle s) const = 0;
+private:
+    const std::string message_;
 };
 
-} } }
+} }
 
 #endif

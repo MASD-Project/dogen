@@ -18,45 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_REGISTRAR_HPP
-#define DOGEN_CPP_TYPES_REGISTRAR_HPP
+#ifndef DOGEN_CPP_TYPES_REGISTRAR_ERROR_FWD_HPP
+#define DOGEN_CPP_TYPES_REGISTRAR_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <memory>
-#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace cpp {
 
-class registrar {
-public:
-    typedef std::list<std::shared_ptr<formatters::class_formatter_interface>>
-    class_formatters_type;
-
-public:
-    /**
-     * @brief Ensures the registrar is ready to be used.
-     */
-    void validate() const;
-
-    /**
-     * @brief Registers a class formatter.
-     */
-    void register_formatter(
-        std::shared_ptr<formatters::class_formatter_interface> f);
-
-    /**
-     * @brief Returns all available class formatters.
-     */
-    const class_formatters_type& class_formatters() const;
-
-private:
-    class_formatters_type class_formatters_;
-};
+class registrar_error;
 
 } }
 

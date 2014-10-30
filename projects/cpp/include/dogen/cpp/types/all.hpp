@@ -126,6 +126,7 @@
 #include "dogen/cpp/types/project.hpp"
 #include "dogen/cpp/types/property_info.hpp"
 #include "dogen/cpp/types/registrar.hpp"
+#include "dogen/cpp/types/registrar_error.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
 #include "dogen/cpp/types/state.hpp"

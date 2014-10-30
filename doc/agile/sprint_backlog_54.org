@@ -17,17 +17,18 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-29 Wed 23:34]
+Clock summary at [2014-10-30 Thu 00:01]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *0:52* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 0:52 |      |
-| IMPLEMENTATION Sprint and product backlog grooming    |        |      | 0:16 |
-| IMPLEMENTATION Updates to the manual and readme files |        |      | 0:13 |
-| COMPLETED Remove map from backend interface           |        |      | 0:09 |
-| COMPLETED Generate all backends in workflow           |        |      | 0:14 |
+| Headline                                                           | Time   |      |      |
+|--------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                       | *1:18* |      |      |
+|--------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                    |        | 1:18 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                 |        |      | 0:16 |
+| IMPLEMENTATION Updates to the manual and readme files              |        |      | 0:13 |
+| COMPLETED Remove map from backend interface                        |        |      | 0:09 |
+| COMPLETED Generate all backends in workflow                        |        |      | 0:14 |
+| IMPLEMENTATION Add registrar to =cpp= with class formatter support |        |      | 0:26 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -56,6 +57,12 @@ settings for a project. Update interface.
 
 Even though the backends don't actually do anything at the moment, we
 need to make sure we have an end-to-end pipeline.
+
+*** IMPLEMENTATION Add registrar to =cpp= with class formatter support :story:
+    CLOCK: [2014-10-29 Wed 23:34]--[2014-10-30 Thu 00:00] =>  0:26
+
+Add the basic skeleton of the registrar in =cpp= model with only
+support for class formatters.
 
 *** Add transformer to =cpp= model                            :task:refactor:
 
