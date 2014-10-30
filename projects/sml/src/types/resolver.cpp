@@ -174,6 +174,19 @@ qname resolver::resolve_partial_type(const qname& n) const {
             return r;
     }
 
+    // handle the case where a model has a package with the same name
+    // as a reference model. FIXME: big hack.
+    {
+        qname qn;
+        qn.simple_name(r.simple_name());
+        qn.model_name(r.module_path().front());
+        qn.external_module_path(r.external_module_path());
+
+        i = objects.find(qn);
+        if (i != objects.end())
+            return qn;
+    }
+
     BOOST_LOG_SEV(lg, error) << undefined_type << n;
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.simple_name()));
 }

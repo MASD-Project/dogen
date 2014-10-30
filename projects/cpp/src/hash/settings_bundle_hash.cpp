@@ -21,6 +21,7 @@
 #include "dogen/cpp/hash/cpp_settings_hash.hpp"
 #include "dogen/cpp/hash/facet_settings_hash.hpp"
 #include "dogen/cpp/hash/settings_bundle_hash.hpp"
+#include "dogen/formatters/hash/general_settings_hash.hpp"
 
 namespace {
 
@@ -41,6 +42,7 @@ std::size_t settings_bundle_hasher::hash(const settings_bundle&v) {
 
     combine(seed, v.facet_settings());
     combine(seed, v.cpp_settings());
+    combine(seed, v.general_settings());
 
     return seed;
 }

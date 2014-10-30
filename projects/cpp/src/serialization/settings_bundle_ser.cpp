@@ -30,6 +30,7 @@
 #include "dogen/cpp/serialization/cpp_settings_ser.hpp"
 #include "dogen/cpp/serialization/facet_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings_bundle_ser.hpp"
+#include "dogen/formatters/serialization/general_settings_ser.hpp"
 
 
 namespace boost {
@@ -41,6 +42,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("facet_settings", v.facet_settings_);
     ar << make_nvp("cpp_settings", v.cpp_settings_);
+    ar << make_nvp("general_settings", v.general_settings_);
 }
 
 template<typename Archive>
@@ -49,6 +51,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("facet_settings", v.facet_settings_);
     ar >> make_nvp("cpp_settings", v.cpp_settings_);
+    ar >> make_nvp("general_settings", v.general_settings_);
 }
 
 } }

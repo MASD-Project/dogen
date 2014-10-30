@@ -29,6 +29,7 @@
 #include "dogen/cpp/serialization/settings_bundle_fwd_ser.hpp"
 #include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/cpp/types/facet_settings.hpp"
+#include "dogen/formatters/types/general_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -43,7 +44,8 @@ public:
 public:
     settings_bundle(
         const dogen::cpp::facet_settings& facet_settings,
-        const dogen::cpp::cpp_settings& cpp_settings);
+        const dogen::cpp::cpp_settings& cpp_settings,
+        const dogen::formatters::general_settings& general_settings);
 
 private:
     template<typename Archive>
@@ -63,6 +65,11 @@ public:
     void cpp_settings(const dogen::cpp::cpp_settings& v);
     void cpp_settings(const dogen::cpp::cpp_settings&& v);
 
+    const dogen::formatters::general_settings& general_settings() const;
+    dogen::formatters::general_settings& general_settings();
+    void general_settings(const dogen::formatters::general_settings& v);
+    void general_settings(const dogen::formatters::general_settings&& v);
+
 public:
     bool operator==(const settings_bundle& rhs) const;
     bool operator!=(const settings_bundle& rhs) const {
@@ -76,6 +83,7 @@ public:
 private:
     dogen::cpp::facet_settings facet_settings_;
     dogen::cpp::cpp_settings cpp_settings_;
+    dogen::formatters::general_settings general_settings_;
 };
 
 } }
