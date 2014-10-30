@@ -17,18 +17,19 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-30 Thu 00:01]
+Clock summary at [2014-10-30 Thu 18:46]
 
-| Headline                                                           | Time   |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                       | *1:18* |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                    |        | 1:18 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                 |        |      | 0:16 |
-| IMPLEMENTATION Updates to the manual and readme files              |        |      | 0:13 |
-| COMPLETED Remove map from backend interface                        |        |      | 0:09 |
-| COMPLETED Generate all backends in workflow                        |        |      | 0:14 |
-| IMPLEMENTATION Add registrar to =cpp= with class formatter support |        |      | 0:26 |
+| Headline                                                      | Time   |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| *Total time*                                                  | *2:45* |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                               |        | 2:45 |      |
+| IMPLEMENTATION Sprint and product backlog grooming            |        |      | 0:16 |
+| IMPLEMENTATION Updates to the manual and readme files         |        |      | 0:13 |
+| COMPLETED Remove map from backend interface                   |        |      | 0:09 |
+| COMPLETED Generate all backends in workflow                   |        |      | 0:14 |
+| COMPLETED Add registrar to =cpp= with class formatter support |        |      | 1:13 |
+| COMPLETED Add formatter dispatcher to =cpp= model             |        |      | 0:40 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -65,6 +66,13 @@ need to make sure we have an end-to-end pipeline.
 
 Add the basic skeleton of the registrar in =cpp= model with only
 support for class formatters.
+
+*** COMPLETED Add formatter dispatcher to =cpp= model                 :story:
+    CLOSED: [2014-10-30 Thu 18:46]
+    CLOCK: [2014-10-30 Thu 18:06]--[2014-10-30 Thu 18:46] =>  0:40
+
+Create a class to dispatch to the correct formatters and retrieve a
+list of files. Plug it to the workflow.
 
 *** Add transformer to =cpp= model                            :task:refactor:
 

@@ -59,6 +59,13 @@ public:
     static void register_formatter(
         std::shared_ptr<formatters::class_formatter_interface> f);
 
+private:
+    /**
+     * @brief Generates all files for the entity.
+     */
+    std::list<dogen::formatters::file> generate_entity_activity(
+        const settings_bundle& s, const entity& e) const;
+
 public:
     std::string id() const override;
 

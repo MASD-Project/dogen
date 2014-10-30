@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/formatter_dispatcher.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 namespace {
@@ -47,6 +48,12 @@ cpp::registrar& workflow::registrar() {
 void workflow::register_formatter(
     std::shared_ptr<formatters::class_formatter_interface> f) {
     registrar().register_formatter(f);
+}
+
+std::list<dogen::formatters::file> workflow::generate_entity_activity(
+    const settings_bundle& s, const entity& e) const {
+    formatter_dispatcher d(*registrar_, s);
+    return d.format(e);
 }
 
 std::string workflow::id() const {

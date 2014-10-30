@@ -91,7 +91,7 @@ public:
     std::shared_ptr<entity> transform(const sml::object& e) const;
 
 private:
-    const sml::model model_;
+    const sml::model& model_;
 };
 
 } }
