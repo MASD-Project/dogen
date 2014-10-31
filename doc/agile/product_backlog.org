@@ -11,6 +11,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for =std::forward_list=                       :story:feature:
+
+We have been using =std::list= quite liberally. However, on hindsight,
+for the vast majority of cases, we don't require a full blown list; a
+simple forward list would do. Problem is Dogen does not support
+forward lists just yet. We need to add support for these, including
+solving the missing boost serialisation problem.
+
 *** Improve resolution of partial types in resolver           :task:refactor:
 
 At present the code in =resolve_partial_type= is one big hack. We
