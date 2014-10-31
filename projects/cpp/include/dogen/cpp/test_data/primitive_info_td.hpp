@@ -18,28 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/entity_hash.hpp"
-#include "dogen/cpp/hash/primitive_hash.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_PRIMITIVE_INFO_TD_HPP
+#define DOGEN_CPP_TEST_DATA_PRIMITIVE_INFO_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/cpp/types/primitive_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::size_t primitive_hasher::hash(const primitive&v) {
-    std::size_t seed(0);
+class primitive_info_generator {
+public:
+    primitive_info_generator();
 
-    combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
-    return seed;
-}
+public:
+    typedef dogen::cpp::primitive_info result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

@@ -18,36 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_CONCEPT_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_CONCEPT_SER_HPP
+#ifndef DOGEN_CPP_TEST_DATA_CONCEPT_INFO_TD_HPP
+#define DOGEN_CPP_TEST_DATA_CONCEPT_INFO_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/cpp/types/concept.hpp"
+#include "dogen/cpp/types/concept_info.hpp"
 
-namespace boost {
+namespace dogen {
+namespace cpp {
 
-template<>struct
-is_virtual_base_of<
-    dogen::cpp::entity,
-    dogen::cpp::concept
-> : public mpl::true_ {};
+class concept_info_generator {
+public:
+    concept_info_generator();
 
-}
+public:
+    typedef dogen::cpp::concept_info result_type;
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::concept)
-namespace boost {
-namespace serialization {
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
-template<typename Archive>
-void save(Archive& ar, const dogen::cpp::concept& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::cpp::concept& v, unsigned int version);
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

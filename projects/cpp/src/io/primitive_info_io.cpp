@@ -19,14 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/io/concept_io.hpp"
 #include "dogen/cpp/io/entity_io.hpp"
-#include "dogen/cpp/io/state_io.hpp"
+#include "dogen/cpp/io/primitive_info_io.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const concept& v) {
+std::ostream& operator<<(std::ostream& s, const primitive_info& v) {
     v.to_stream(s);
     return(s);
 }

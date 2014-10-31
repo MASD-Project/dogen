@@ -18,35 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_PRIMITIVE_HASH_HPP
-#define DOGEN_CPP_HASH_PRIMITIVE_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <functional>
-#include "dogen/cpp/types/primitive.hpp"
+#include <ostream>
+#include "dogen/cpp/io/concept_info_io.hpp"
+#include "dogen/cpp/io/entity_io.hpp"
+#include "dogen/cpp/io/state_io.hpp"
 
 namespace dogen {
 namespace cpp {
 
-struct primitive_hasher {
-public:
-    static std::size_t hash(const primitive& v);
-};
+std::ostream& operator<<(std::ostream& s, const concept_info& v) {
+    v.to_stream(s);
+    return(s);
+}
 
 } }
-
-namespace std {
-
-template<>
-struct hash<dogen::cpp::primitive> {
-public:
-    size_t operator()(const dogen::cpp::primitive& v) const {
-        return dogen::cpp::primitive_hasher::hash(v);
-    }
-};
-
-}
-#endif

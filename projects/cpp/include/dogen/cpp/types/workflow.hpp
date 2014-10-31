@@ -66,7 +66,7 @@ private:
      */
     template<typename AssociativeContainerOfElement>
     std::list<std::shared_ptr<entity>>
-    transform_sml_elements_activity(const sml::model& m,
+    transform_sml_elements(const sml::model& m,
         const AssociativeContainerOfElement& c) const {
         std::list<std::shared_ptr<entity> > r;
         transformer t(m);
@@ -76,10 +76,34 @@ private:
     }
 
     /**
-     * @brief Generates all files for the entity.
+     * @brief Formats all files for the entity.
      */
-    std::list<dogen::formatters::file> generate_entity_activity(
+    std::list<dogen::formatters::file> format_entity(
         const settings_bundle& s, const entity& e) const;
+
+private:
+    /**
+     * @brief Create a settings bundle
+     */
+    settings_bundle create_settings_bundle_activity(
+        const dogen::formatters::general_settings& gs) const;
+
+    /**
+     * @brief Creates all the files for a given container of SML
+     * elements.
+     */
+    template<typename AssociativeContainerOfElement>
+    std::list<dogen::formatters::file>
+    create_files_from_sml_container_activity(const sml::model& m,
+        const settings_bundle& s,
+        const AssociativeContainerOfElement& c) const {
+        const auto entities(transform_sml_elements(m, c));
+        std::list<dogen::formatters::file> r;
+        for (const auto e : entities)
+            r.splice(r.end(), format_entity(s, *e));
+        return r;
+    }
+
 
 public:
     std::string id() const override;

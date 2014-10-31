@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_CONCEPT_HASH_HPP
-#define DOGEN_CPP_HASH_CONCEPT_HASH_HPP
+#ifndef DOGEN_CPP_HASH_CONCEPT_INFO_HASH_HPP
+#define DOGEN_CPP_HASH_CONCEPT_INFO_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/cpp/types/concept.hpp"
+#include "dogen/cpp/types/concept_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-struct concept_hasher {
+struct concept_info_hasher {
 public:
-    static std::size_t hash(const concept& v);
+    static std::size_t hash(const concept_info& v);
 };
 
 } }
@@ -41,10 +41,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::cpp::concept> {
+struct hash<dogen::cpp::concept_info> {
 public:
-    size_t operator()(const dogen::cpp::concept& v) const {
-        return dogen::cpp::concept_hasher::hash(v);
+    size_t operator()(const dogen::cpp::concept_info& v) const {
+        return dogen::cpp::concept_info_hasher::hash(v);
     }
 };
 

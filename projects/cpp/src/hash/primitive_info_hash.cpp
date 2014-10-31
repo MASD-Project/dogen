@@ -18,18 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_PRIMITIVE_FWD_HPP
-#define DOGEN_CPP_TYPES_PRIMITIVE_FWD_HPP
+#include "dogen/cpp/hash/entity_hash.hpp"
+#include "dogen/cpp/hash/primitive_info_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
-class primitive;
+std::size_t primitive_info_hasher::hash(const primitive_info&v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
+    return seed;
+}
 
 } }
-
-#endif

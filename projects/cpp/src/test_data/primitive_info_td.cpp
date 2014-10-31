@@ -18,36 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_CONCEPT_TD_HPP
-#define DOGEN_CPP_TEST_DATA_CONCEPT_TD_HPP
+#include "dogen/cpp/test_data/entity_td.hpp"
+#include "dogen/cpp/test_data/primitive_info_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
 
-#include "dogen/cpp/types/concept.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class concept_generator {
-public:
-    concept_generator();
+primitive_info_generator::primitive_info_generator() : position_(0) { }
 
-public:
-    typedef dogen::cpp::concept result_type;
+void primitive_info_generator::
+populate(const unsigned int position, result_type& v) {
+    dogen::cpp::entity_generator::populate(position, v);
+}
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
+primitive_info_generator::result_type
+primitive_info_generator::create(const unsigned int position) {
+    primitive_info r;
+    primitive_info_generator::populate(position, r);
+    return r;
+}
+primitive_info_generator::result_type*
+primitive_info_generator::create_ptr(const unsigned int position) {
+    primitive_info* p = new primitive_info();
+    primitive_info_generator::populate(position, *p);
+    return p;
+}
 
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+primitive_info_generator::result_type
+primitive_info_generator::operator()() {
+    return create(position_++);
+}
 
 } }
-
-#endif

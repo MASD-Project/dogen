@@ -18,36 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/test_data/concept_info_td.hpp"
 #include "dogen/cpp/test_data/entity_td.hpp"
-#include "dogen/cpp/test_data/primitive_td.hpp"
+#include "dogen/cpp/test_data/state_td.hpp"
 
+namespace {
 
+dogen::cpp::state
+create_dogen_cpp_state(const unsigned int position) {
+    return dogen::cpp::state_generator::create(position);
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
-primitive_generator::primitive_generator() : position_(0) { }
+concept_info_generator::concept_info_generator() : position_(0) { }
 
-void primitive_generator::
+void concept_info_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::entity_generator::populate(position, v);
+    v.state(create_dogen_cpp_state(position + 0));
 }
 
-primitive_generator::result_type
-primitive_generator::create(const unsigned int position) {
-    primitive r;
-    primitive_generator::populate(position, r);
+concept_info_generator::result_type
+concept_info_generator::create(const unsigned int position) {
+    concept_info r;
+    concept_info_generator::populate(position, r);
     return r;
 }
-primitive_generator::result_type*
-primitive_generator::create_ptr(const unsigned int position) {
-    primitive* p = new primitive();
-    primitive_generator::populate(position, *p);
+concept_info_generator::result_type*
+concept_info_generator::create_ptr(const unsigned int position) {
+    concept_info* p = new concept_info();
+    concept_info_generator::populate(position, *p);
     return p;
 }
 
-primitive_generator::result_type
-primitive_generator::operator()() {
+concept_info_generator::result_type
+concept_info_generator::operator()() {
     return create(position_++);
 }
 

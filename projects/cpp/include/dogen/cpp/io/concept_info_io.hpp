@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_CONCEPT_IO_HPP
-#define DOGEN_CPP_IO_CONCEPT_IO_HPP
+#ifndef DOGEN_CPP_IO_CONCEPT_INFO_IO_HPP
+#define DOGEN_CPP_IO_CONCEPT_INFO_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/cpp/types/concept.hpp"
+#include "dogen/cpp/types/concept_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::cpp::concept& v);
+     const dogen::cpp::concept_info& v);
 
 } }
 

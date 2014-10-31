@@ -18,31 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/concept_hash.hpp"
-#include "dogen/cpp/hash/entity_hash.hpp"
-#include "dogen/cpp/hash/state_hash.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_CONCEPT_INFO_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_CONCEPT_INFO_FWD_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include "dogen/cpp/types/concept_info_fwd.hpp"
 
-}
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace cpp {
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::concept_info& v, unsigned int version);
 
-std::size_t concept_hasher::hash(const concept&v) {
-    std::size_t seed(0);
-
-    combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
-
-    combine(seed, v.state());
-    return seed;
-}
+template<class Archive>
+void load(Archive& ar, dogen::cpp::concept_info& v, unsigned int version);
 
 } }
+
+#endif

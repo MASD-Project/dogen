@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_PRIMITIVE_HPP
-#define DOGEN_CPP_TYPES_PRIMITIVE_HPP
+#ifndef DOGEN_CPP_TYPES_PRIMITIVE_INFO_HPP
+#define DOGEN_CPP_TYPES_PRIMITIVE_INFO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,22 +27,22 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/cpp/serialization/primitive_fwd_ser.hpp"
+#include "dogen/cpp/serialization/primitive_info_fwd_ser.hpp"
 #include "dogen/cpp/types/entity.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class primitive final : public dogen::cpp::entity {
+class primitive_info final : public dogen::cpp::entity {
 public:
-    primitive() = default;
-    primitive(const primitive&) = default;
-    primitive(primitive&&) = default;
+    primitive_info() = default;
+    primitive_info(const primitive_info&) = default;
+    primitive_info(primitive_info&&) = default;
 
-    virtual ~primitive() noexcept { }
+    virtual ~primitive_info() noexcept { }
 
 public:
-    primitive(
+    primitive_info(
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
@@ -51,10 +51,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const primitive& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const primitive_info& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, primitive& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, primitive_info& v, unsigned int version);
 
 public:
     virtual void accept(const entity_visitor& v) const override {
@@ -77,8 +77,8 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    bool operator==(const primitive& rhs) const;
-    bool operator!=(const primitive& rhs) const {
+    bool operator==(const primitive_info& rhs) const;
+    bool operator!=(const primitive_info& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -86,8 +86,8 @@ public:
     bool equals(const dogen::cpp::entity& other) const override;
 
 public:
-    void swap(primitive& other) noexcept;
-    primitive& operator=(primitive other);
+    void swap(primitive_info& other) noexcept;
+    primitive_info& operator=(primitive_info other);
 
 };
 
@@ -97,8 +97,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::primitive& lhs,
-    dogen::cpp::primitive& rhs) {
+    dogen::cpp::primitive_info& lhs,
+    dogen::cpp::primitive_info& rhs) {
     lhs.swap(rhs);
 }
 

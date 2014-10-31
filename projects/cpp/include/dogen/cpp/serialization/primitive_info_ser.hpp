@@ -18,16 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/cpp/io/entity_io.hpp"
-#include "dogen/cpp/io/primitive_io.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_PRIMITIVE_INFO_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_PRIMITIVE_INFO_SER_HPP
 
-namespace dogen {
-namespace cpp {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const primitive& v) {
-    v.to_stream(s);
-    return(s);
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/cpp/types/primitive_info.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::cpp::entity,
+    dogen::cpp::primitive_info
+> : public mpl::true_ {};
+
 }
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::primitive_info)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::primitive_info& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::primitive_info& v, unsigned int version);
+
 } }
+
+#endif

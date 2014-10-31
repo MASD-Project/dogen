@@ -21,12 +21,12 @@
 #include <ostream>
 #include "dogen/cpp/io/entity_io.hpp"
 #include "dogen/cpp/io/state_io.hpp"
-#include "dogen/cpp/types/concept.hpp"
+#include "dogen/cpp/types/concept_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-concept::concept(
+concept_info::concept_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
@@ -40,9 +40,9 @@ concept::concept(
       includes_for_formatter),
       state_(state) { }
 
-void concept::to_stream(std::ostream& s) const {
+void concept_info::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::concept\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::concept_info\"" << ", "
       << "\"__parent_0__\": ";
     entity::to_stream(s);
     s << ", "
@@ -50,43 +50,43 @@ void concept::to_stream(std::ostream& s) const {
       << " }";
 }
 
-void concept::swap(concept& other) noexcept {
+void concept_info::swap(concept_info& other) noexcept {
     entity::swap(other);
 
     using std::swap;
     swap(state_, other.state_);
 }
 
-bool concept::equals(const dogen::cpp::entity& other) const {
-    const concept* const p(dynamic_cast<const concept* const>(&other));
+bool concept_info::equals(const dogen::cpp::entity& other) const {
+    const concept_info* const p(dynamic_cast<const concept_info* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool concept::operator==(const concept& rhs) const {
+bool concept_info::operator==(const concept_info& rhs) const {
     return entity::compare(rhs) &&
         state_ == rhs.state_;
 }
 
-concept& concept::operator=(concept other) {
+concept_info& concept_info::operator=(concept_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::cpp::state& concept::state() const {
+const dogen::cpp::state& concept_info::state() const {
     return state_;
 }
 
-dogen::cpp::state& concept::state() {
+dogen::cpp::state& concept_info::state() {
     return state_;
 }
 
-void concept::state(const dogen::cpp::state& v) {
+void concept_info::state(const dogen::cpp::state& v) {
     state_ = v;
 }
 
-void concept::state(const dogen::cpp::state&& v) {
+void concept_info::state(const dogen::cpp::state&& v) {
     state_ = std::move(v);
 }
 

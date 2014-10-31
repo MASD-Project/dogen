@@ -50,8 +50,8 @@ public:
     void visit(const dogen::cpp::namespace_info& n) override;
     void visit(const dogen::cpp::visitor_info& v) override;
     void visit(const dogen::cpp::new_class_info& c) override;
-    void visit(const dogen::cpp::concept& c) override;
-    void visit(const dogen::cpp::primitive& p) override;
+    void visit(const dogen::cpp::concept_info& c) override;
+    void visit(const dogen::cpp::primitive_info& p) override;
 
 public:
     /**

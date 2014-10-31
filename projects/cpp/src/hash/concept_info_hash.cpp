@@ -18,23 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_PRIMITIVE_IO_HPP
-#define DOGEN_CPP_IO_PRIMITIVE_IO_HPP
+#include "dogen/cpp/hash/concept_info_hash.hpp"
+#include "dogen/cpp/hash/entity_hash.hpp"
+#include "dogen/cpp/hash/state_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <iosfwd>
-#include "dogen/cpp/types/primitive.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::primitive& v);
+std::size_t concept_info_hasher::hash(const concept_info&v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::cpp::entity&>(v));
+
+    combine(seed, v.state());
+    return seed;
+}
 
 } }
-
-#endif

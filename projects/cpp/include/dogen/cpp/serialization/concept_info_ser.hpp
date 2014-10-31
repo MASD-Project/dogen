@@ -18,23 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_PRIMITIVE_FWD_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_PRIMITIVE_FWD_SER_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_CONCEPT_INFO_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_CONCEPT_INFO_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/primitive_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/cpp/types/concept_info.hpp"
 
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::cpp::entity,
+    dogen::cpp::concept_info
+> : public mpl::true_ {};
+
+}
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::concept_info)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::cpp::primitive& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::concept_info& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::cpp::primitive& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::concept_info& v, unsigned int version);
 
 } }
 

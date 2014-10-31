@@ -22372,19 +22372,19 @@ main.#</dia:string>
         <dia:point val="143,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.95,86.95;148.555,89.85"/>
+        <dia:rectangle val="142.95,86.95;149.26,89.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="143,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.5049999999999999"/>
+        <dia:real val="6.21"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#concept_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -22506,7 +22506,7 @@ main.#</dia:string>
         <dia:point val="76.6125,76.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.7625,76.15;145.803,87.05"/>
+        <dia:rectangle val="75.7625,76.15;146.155,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22514,8 +22514,8 @@ main.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="76.6125,76.2"/>
         <dia:point val="76.6125,82"/>
-        <dia:point val="145.752,82"/>
-        <dia:point val="145.752,87"/>
+        <dia:point val="146.105,82"/>
+        <dia:point val="146.105,87"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -22580,17 +22580,17 @@ main.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="145.752,89.8"/>
+        <dia:point val="146.105,89.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.95,89.05;146.502,99.8"/>
+        <dia:rectangle val="130.95,89.05;146.855,99.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="145.752,89.8"/>
-        <dia:point val="145.752,96"/>
+        <dia:point val="146.105,89.8"/>
+        <dia:point val="146.105,96"/>
         <dia:point val="131,96"/>
         <dia:point val="131,99"/>
       </dia:attribute>
@@ -22618,19 +22618,19 @@ main.#</dia:string>
         <dia:point val="62,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.95,94.95;66.6225,97.25"/>
+        <dia:rectangle val="61.95,94.95;68.765,97.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="62,95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.5724999999999998"/>
+        <dia:real val="6.7149999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#primitive_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -22728,7 +22728,7 @@ main.#</dia:string>
         <dia:point val="76.6125,76.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.2362,76.15;77.4625,95.05"/>
+        <dia:rectangle val="65.3075,76.15;77.4625,95.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22736,8 +22736,8 @@ main.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="76.6125,76.2"/>
         <dia:point val="76.6125,82"/>
-        <dia:point val="64.2862,82"/>
-        <dia:point val="64.2862,95"/>
+        <dia:point val="65.3575,82"/>
+        <dia:point val="65.3575,95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -17,13 +17,13 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-30 Thu 23:01]
+Clock summary at [2014-10-31 Fri 19:05]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *4:00* |      |      |
+| *Total time*                                                        | *4:54* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 4:00 |      |
+| Development Stories Implemented                                     |        | 4:54 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:16 |
 | IMPLEMENTATION Updates to the manual and readme files               |        |      | 0:13 |
 | COMPLETED Remove map from backend interface                         |        |      | 0:09 |
@@ -31,7 +31,7 @@ Clock summary at [2014-10-30 Thu 23:01]
 | COMPLETED Add registrar to =cpp= with class formatter support       |        |      | 1:13 |
 | COMPLETED Add formatter dispatcher to =cpp= model                   |        |      | 0:40 |
 | COMPLETED Models that share sub-package names fail to resolve types |        |      | 0:59 |
-| IMPLEMENTATION Add transformer to =cpp= workflow                    |        |      | 0:16 |
+| COMPLETED Add transformer to =cpp= workflow                         |        |      | 1:10 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -85,11 +85,19 @@ formatters model (it is the model package). Due to this, we do not
 seem to be able to resolve types in the formatters model such as
 =general_settings=. We need to tweak resolution code to deal with this scenario.
 
-*** IMPLEMENTATION Add transformer to =cpp= workflow          :task:refactor:
+*** COMPLETED Add transformer to =cpp= workflow               :task:refactor:
+    CLOSED: [2014-10-31 Fri 19:05]
+    CLOCK: [2014-10-31 Fri 18:58]--[2014-10-31 Fri 19:04] =>  0:06
+    CLOCK: [2014-10-31 Fri 18:08]--[2014-10-31 Fri 18:56] =>  0:48
     CLOCK: [2014-10-30 Thu 18:48]--[2014-10-30 Thu 19:04] =>  0:16
 
 We need to copy across the transformer into the C++ model in order to
 start working on formatter code.
+
+*** Change list of files to forward list                      :task:refactor:
+
+We are paying the cost of a full list for no reason. Use a forward
+list instead.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
 

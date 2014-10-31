@@ -20,14 +20,14 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/class_info_td.hpp"
-#include "dogen/cpp/test_data/concept_td.hpp"
+#include "dogen/cpp/test_data/concept_info_td.hpp"
 #include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 #include "dogen/cpp/test_data/includes_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/new_class_info_td.hpp"
-#include "dogen/cpp/test_data/primitive_td.hpp"
+#include "dogen/cpp/test_data/primitive_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
 
@@ -105,9 +105,9 @@ entity_generator::create_ptr(const unsigned int position) {
     if ((position % 8) == 5)
         return dogen::cpp::new_class_info_generator::create_ptr(position);
     if ((position % 8) == 6)
-        return dogen::cpp::concept_generator::create_ptr(position);
+        return dogen::cpp::concept_info_generator::create_ptr(position);
     if ((position % 8) == 7)
-        return dogen::cpp::primitive_generator::create_ptr(position);
+        return dogen::cpp::primitive_info_generator::create_ptr(position);
     return dogen::cpp::class_info_generator::create_ptr(position);
 }
 

@@ -88,4 +88,16 @@ std::shared_ptr<entity> transformer::transform(const sml::module& m) const {
     return to_namespace_info(m);
 }
 
+std::shared_ptr<entity> transformer::transform(const sml::concept& /*e*/) const {
+    return std::make_shared<concept_info>();
+}
+
+std::shared_ptr<entity> transformer::transform(const sml::primitive& /*e*/) const {
+    return std::make_shared<primitive_info>();
+}
+
+std::shared_ptr<entity> transformer::transform(const sml::object& /*e*/) const {
+    return std::make_shared<new_class_info>();
+}
+
 } }

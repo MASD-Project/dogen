@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_CONCEPT_FWD_HPP
-#define DOGEN_CPP_TYPES_CONCEPT_FWD_HPP
+#ifndef DOGEN_CPP_HASH_PRIMITIVE_INFO_HASH_HPP
+#define DOGEN_CPP_HASH_PRIMITIVE_INFO_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/cpp/types/primitive_info.hpp"
+
 namespace dogen {
 namespace cpp {
 
-class concept;
+struct primitive_info_hasher {
+public:
+    static std::size_t hash(const primitive_info& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::cpp::primitive_info> {
+public:
+    size_t operator()(const dogen::cpp::primitive_info& v) const {
+        return dogen::cpp::primitive_info_hasher::hash(v);
+    }
+};
+
+}
 #endif

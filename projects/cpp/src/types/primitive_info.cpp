@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include "dogen/cpp/io/entity_io.hpp"
-#include "dogen/cpp/types/primitive.hpp"
+#include "dogen/cpp/types/primitive_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-primitive::primitive(
+primitive_info::primitive_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
@@ -37,30 +37,30 @@ primitive::primitive(
       relative_path_for_formatter,
       includes_for_formatter) { }
 
-void primitive::to_stream(std::ostream& s) const {
+void primitive_info::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::primitive\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::primitive_info\"" << ", "
       << "\"__parent_0__\": ";
     entity::to_stream(s);
     s << " }";
 }
 
-void primitive::swap(primitive& other) noexcept {
+void primitive_info::swap(primitive_info& other) noexcept {
     entity::swap(other);
 
 }
 
-bool primitive::equals(const dogen::cpp::entity& other) const {
-    const primitive* const p(dynamic_cast<const primitive* const>(&other));
+bool primitive_info::equals(const dogen::cpp::entity& other) const {
+    const primitive_info* const p(dynamic_cast<const primitive_info* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool primitive::operator==(const primitive& rhs) const {
+bool primitive_info::operator==(const primitive_info& rhs) const {
     return entity::compare(rhs);
 }
 
-primitive& primitive::operator=(primitive other) {
+primitive_info& primitive_info::operator=(primitive_info other) {
     using std::swap;
     swap(*this, other);
     return *this;

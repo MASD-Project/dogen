@@ -37,6 +37,9 @@
 #include "dogen/cpp/types/entity.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
+#include "dogen/cpp/types/concept_info.hpp"
+#include "dogen/cpp/types/primitive_info.hpp"
+#include "dogen/cpp/types/new_class_info.hpp"
 
 namespace dogen {
 namespace cpp {

@@ -30,14 +30,14 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/class_info_ser.hpp"
-#include "dogen/cpp/serialization/concept_ser.hpp"
+#include "dogen/cpp/serialization/concept_info_ser.hpp"
 #include "dogen/cpp/serialization/entity_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/includes_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/new_class_info_ser.hpp"
-#include "dogen/cpp/serialization/primitive_ser.hpp"
+#include "dogen/cpp/serialization/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"

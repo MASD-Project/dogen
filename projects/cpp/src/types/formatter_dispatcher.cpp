@@ -50,12 +50,11 @@ void formatter_dispatcher::visit(const dogen::cpp::new_class_info& c) {
         files_.push_back(f->format(c, settings_bundle_));
 }
 
-void formatter_dispatcher::visit(const dogen::cpp::concept& /*c*/) {
+void formatter_dispatcher::visit(const dogen::cpp::concept_info& /*c*/) {
 }
 
-void formatter_dispatcher::visit(const dogen::cpp::primitive& /*p*/) {
+void formatter_dispatcher::visit(const dogen::cpp::primitive_info& /*p*/) {
 }
-
 
 std::list<dogen::formatters::file> formatter_dispatcher::format(const entity& e) {
     e.accept(*this);
