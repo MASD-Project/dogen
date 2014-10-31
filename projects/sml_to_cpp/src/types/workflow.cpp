@@ -414,7 +414,8 @@ void workflow::generate_odb_options_activity(cpp::project& p) const {
     p.odb_options(ooi);
 }
 
-std::vector<boost::filesystem::path> workflow::managed_directories() const {
+std::forward_list<boost::filesystem::path> workflow::
+managed_directories() const {
     return locator_.managed_directories();
 }
 

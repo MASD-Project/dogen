@@ -26,8 +26,8 @@
 #endif
 
 #include <set>
-#include <vector>
 #include <functional>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 
 namespace dogen {
@@ -42,7 +42,9 @@ namespace knit {
  */
 class housekeeper {
 public:
-    typedef std::function<void (std::list<boost::filesystem::path>)> delete_fn;
+    typedef std::function<
+    void(const std::forward_list<boost::filesystem::path>&)>
+    delete_fn;
 
 public:
     housekeeper() = delete;
@@ -52,28 +54,52 @@ public:
     housekeeper& operator=(const housekeeper&) = delete;
 
 public:
-    housekeeper(const std::vector<std::string>& ignore_patterns,
-        std::vector<boost::filesystem::path> managed_directories,
+    /**
+     * @brief Initialise the housekeeper.
+     *
+     * @param ignore_patterns regular expressions for files to ignore
+     * @param managed_directories directories to housekeep
+     * @param expected_files files that should exist in managed directories.
+     * @param fn function to execute when deleting files.
+     */
+    housekeeper(const std::forward_list<std::string>& ignore_patterns,
+        std::forward_list<boost::filesystem::path> managed_directories,
         std::set<boost::filesystem::path> expected_files,
         delete_fn fn = nullptr);
 
 private:
-    void log_removing_file(boost::filesystem::path);
-
-private:
+    /**
+     * @brief Returns all the files in the supplied directory.
+     *
+     * @pre dir must be a valid directory.
+     */
     std::set<boost::filesystem::path>
-    files_in_directory(boost::filesystem::path dir) const;
-    std::set<boost::filesystem::path> find_actual_files() const;
-    std::list<boost::filesystem::path>
-    remove_ignores(std::list<boost::filesystem::path> files) const;
-    void delete_files(std::list<boost::filesystem::path> files) const;
+    files_in_directory(const boost::filesystem::path& d) const;
+
+    /**
+     * @brief Returns all files in all managed directories.
+     */
+    std::set<boost::filesystem::path> find_files_in_managed_directories() const;
+
+    /**
+     * @brief Remove files from list based on regular expressions
+     * supplied on construction.
+     */
+    std::forward_list<boost::filesystem::path> remove_ignores(
+        const std::forward_list<boost::filesystem::path>& files) const;
+
+    /**
+     * @brief Delete files from the filesystem.
+     */
+    void delete_files(
+        const std::forward_list<boost::filesystem::path>& files) const;
 
 public:
     void tidy_up() const;
 
 private:
-    const std::vector<std::string> ignore_patterns_;
-    const std::vector<boost::filesystem::path> managed_directories_;
+    const std::forward_list<std::string> ignore_patterns_;
+    const std::forward_list<boost::filesystem::path> managed_directories_;
     const std::set<boost::filesystem::path> expected_files_;
     delete_fn delete_fn_;
 };

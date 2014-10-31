@@ -26,9 +26,10 @@
 #endif
 
 #include <map>
-#include <utility>
 #include <string>
+#include <utility>
 #include <sstream>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/formatting_settings.hpp"
@@ -168,7 +169,7 @@ public:
      *
      * This method is only exposed for testing purposes.
      */
-    std::vector<boost::filesystem::path> managed_directories() const;
+    std::forward_list<boost::filesystem::path> managed_directories() const;
 
 private:
     context context_;

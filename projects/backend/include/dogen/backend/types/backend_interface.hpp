@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <vector>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -69,7 +69,7 @@ public:
      * @param gs General settings for the SML types.
      * @param m Model to generate.
      */
-    virtual std::list<formatters::file> generate(
+    virtual std::forward_list<formatters::file> generate(
         const formatters::general_settings& gs,
         const sml::model& m) const = 0;
 };

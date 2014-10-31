@@ -65,20 +65,20 @@ private:
      * @brief Transforms the supplied SML elements into C++ entities.
      */
     template<typename AssociativeContainerOfElement>
-    std::list<std::shared_ptr<entity>>
+    std::forward_list<std::shared_ptr<entity>>
     transform_sml_elements(const sml::model& m,
         const AssociativeContainerOfElement& c) const {
-        std::list<std::shared_ptr<entity> > r;
+        std::forward_list<std::shared_ptr<entity> > r;
         transformer t(m);
         for (const auto& pair : c)
-            r.push_back(t.transform(pair.second));
+            r.push_front(t.transform(pair.second));
         return r;
     }
 
     /**
      * @brief Formats all files for the entity.
      */
-    std::list<dogen::formatters::file> format_entity(
+    std::forward_list<dogen::formatters::file> format_entity(
         const settings_bundle& s, const entity& e) const;
 
 private:
@@ -93,14 +93,14 @@ private:
      * elements.
      */
     template<typename AssociativeContainerOfElement>
-    std::list<dogen::formatters::file>
+    std::forward_list<dogen::formatters::file>
     create_files_from_sml_container_activity(const sml::model& m,
         const settings_bundle& s,
         const AssociativeContainerOfElement& c) const {
         const auto entities(transform_sml_elements(m, c));
-        std::list<dogen::formatters::file> r;
+        std::forward_list<dogen::formatters::file> r;
         for (const auto e : entities)
-            r.splice(r.end(), format_entity(s, *e));
+            r.splice_after(r.before_begin(), format_entity(s, *e));
         return r;
     }
 
@@ -112,7 +112,7 @@ public:
 
     void validate() const override;
 
-    std::list<dogen::formatters::file> generate(
+    std::forward_list<dogen::formatters::file> generate(
         const dogen::formatters::general_settings& gs,
         const sml::model& m) const override;
 

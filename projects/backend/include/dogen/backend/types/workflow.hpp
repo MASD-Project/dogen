@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <memory>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
@@ -50,7 +50,7 @@ public:
      * @param data_files_directories where to look for reference data.
      */
     workflow(const config::knitting_settings& ks,
-        const std::list<boost::filesystem::path>& data_files_directories);
+        const std::forward_list<boost::filesystem::path>& data_files_dirs);
 
 private:
     /**
@@ -81,12 +81,12 @@ public:
      * @brief Generates files for the supplied model using all
      * registered backends.
      */
-    std::list<formatters::file> execute(const sml::model& m) const;
+    std::forward_list<formatters::file> execute(const sml::model& m) const;
 
 private:
     static std::shared_ptr<backend::registrar> registrar_;
     const config::knitting_settings knitting_settings_;
-    const std::list<boost::filesystem::path> data_files_directories_;
+    const std::forward_list<boost::filesystem::path> data_files_directories_;
 };
 
 } }

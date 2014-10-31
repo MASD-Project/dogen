@@ -239,16 +239,15 @@ locator::absolute_path(const std::string& name) const {
     return settings_.project_directory() / model_name_ / name;
 }
 
-std::vector<boost::filesystem::path>
+std::forward_list<boost::filesystem::path>
 locator::managed_directories() const {
-    std::vector<boost::filesystem::path> r;
+    std::forward_list<boost::filesystem::path> r;
 
     if (settings_.split_project()) {
-        r.reserve(2);
-        r.push_back(source_directory_ / model_name_);
-        r.push_back(include_directory_ / model_name_);
+        r.push_front(source_directory_ / model_name_);
+        r.push_front(include_directory_ / model_name_);
     } else {
-        r.push_back(settings_.project_directory() / model_name_);
+        r.push_front(settings_.project_directory() / model_name_);
     }
 
     return r;

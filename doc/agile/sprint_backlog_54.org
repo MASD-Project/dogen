@@ -17,13 +17,13 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-31 Fri 19:05]
+Clock summary at [2014-10-31 Fri 23:29]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *4:54* |      |      |
+| *Total time*                                                        | *6:57* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 4:54 |      |
+| Development Stories Implemented                                     |        | 6:57 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:16 |
 | IMPLEMENTATION Updates to the manual and readme files               |        |      | 0:13 |
 | COMPLETED Remove map from backend interface                         |        |      | 0:09 |
@@ -32,6 +32,7 @@ Clock summary at [2014-10-31 Fri 19:05]
 | COMPLETED Add formatter dispatcher to =cpp= model                   |        |      | 0:40 |
 | COMPLETED Models that share sub-package names fail to resolve types |        |      | 0:59 |
 | COMPLETED Add transformer to =cpp= workflow                         |        |      | 1:10 |
+| COMPLETED Change list of files to forward list                      |        |      | 2:03 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -94,7 +95,10 @@ seem to be able to resolve types in the formatters model such as
 We need to copy across the transformer into the C++ model in order to
 start working on formatter code.
 
-*** Change list of files to forward list                      :task:refactor:
+*** COMPLETED Change list of files to forward list            :task:refactor:
+    CLOSED: [2014-10-31 Fri 23:29]
+    CLOCK: [2014-10-31 Fri 23:25]--[2014-10-31 Fri 23:27] =>  0:02
+    CLOCK: [2014-10-31 Fri 21:23]--[2014-10-31 Fri 23:24] =>  2:01
 
 We are paying the cost of a full list for no reason. Use a forward
 list instead.

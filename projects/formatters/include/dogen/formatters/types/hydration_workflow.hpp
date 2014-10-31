@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -65,7 +65,7 @@ public:
      * supplied.
      */
     std::unordered_map<std::string, typename Hydrator::value_type>
-    hydrate(const std::list<boost::filesystem::path>& dirs) {
+    hydrate(const std::forward_list<boost::filesystem::path>& dirs) {
         std::unordered_map<std::string, typename Hydrator::value_type> r;
         const auto files(dogen::utility::filesystem::find_files(dirs));
         for (const auto& f : files)

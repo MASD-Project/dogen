@@ -25,7 +25,7 @@
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -54,7 +54,7 @@ inline void log_no_extra_files() {
     BOOST_LOG_SEV(lg, info) << "no extra files found.";
 }
 
-inline void log_extra_files(std::list<path> delta) {
+inline void log_extra_files(std::forward_list<path> delta) {
     BOOST_LOG_SEV(lg, debug) << "Found extra files: " << delta;
 }
 
@@ -64,8 +64,8 @@ namespace dogen {
 namespace knit {
 
 housekeeper::housekeeper(
-    const std::vector<std::string>& ignore_patterns,
-    std::vector<boost::filesystem::path> managed_directories,
+    const std::forward_list<std::string>& ignore_patterns,
+    std::forward_list<boost::filesystem::path> managed_directories,
     std::set<boost::filesystem::path> expected_files, delete_fn fn) :
     ignore_patterns_(ignore_patterns),
     managed_directories_(managed_directories),
@@ -84,11 +84,11 @@ housekeeper::housekeeper(
 }
 
 std::set<boost::filesystem::path>
-housekeeper::files_in_directory(boost::filesystem::path dir) const {
+housekeeper::files_in_directory(const boost::filesystem::path& d) const {
     using namespace boost::filesystem;
     std::set<path> r;
 
-    for (recursive_directory_iterator end, i(dir); i != end; ++i) {
+    for (recursive_directory_iterator end, i(d); i != end; ++i) {
         const path p(*i);
         if (is_regular_file(p))
             r.insert(p);
@@ -97,7 +97,8 @@ housekeeper::files_in_directory(boost::filesystem::path dir) const {
     return r;
 }
 
-std::set<boost::filesystem::path> housekeeper::find_actual_files() const {
+std::set<boost::filesystem::path> housekeeper::
+find_files_in_managed_directories() const {
     std::set<boost::filesystem::path> r;
 
     for (const auto d : managed_directories_) {
@@ -108,16 +109,17 @@ std::set<boost::filesystem::path> housekeeper::find_actual_files() const {
     return r;
 }
 
-void housekeeper::delete_files(std::list<boost::filesystem::path> files) const {
+void housekeeper::
+delete_files(const std::forward_list<boost::filesystem::path>& files) const {
     for (const auto f : files) {
         log_deleting_extra_file(f);
         boost::filesystem::remove(f);
     }
 }
 
-std::list<boost::filesystem::path> housekeeper::
-remove_ignores(std::list<boost::filesystem::path> files) const {
-    std::list<boost::filesystem::path> r;
+std::forward_list<boost::filesystem::path> housekeeper::
+remove_ignores(const std::forward_list<boost::filesystem::path>& files) const {
+    std::forward_list<boost::filesystem::path> r;
     for (const auto f : files) {
         bool ignore(false);
         for (auto ip : ignore_patterns_) {
@@ -136,18 +138,18 @@ remove_ignores(std::list<boost::filesystem::path> files) const {
             log_ignoring_file(f);
         else {
             BOOST_LOG_SEV(lg, debug) << "Not ignoring file: " << f;
-            r.push_back(f);
+            r.push_front(f);
         }
     }
     return r;
 }
 
 void housekeeper::tidy_up() const {
-    const auto af(find_actual_files());
-    log_expected_actual(expected_files_, af);
+    const auto actual(find_files_in_managed_directories());
+    log_expected_actual(expected_files_, actual);
 
-    std::list<boost::filesystem::path> delta;
-    boost::set_difference(af, expected_files_, std::back_inserter(delta));
+    std::forward_list<boost::filesystem::path> delta;
+    boost::set_difference(actual, expected_files_, std::front_inserter(delta));
 
     if (delta.empty()) {
         log_no_extra_files();

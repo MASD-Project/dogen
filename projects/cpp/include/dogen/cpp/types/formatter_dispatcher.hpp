@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
+#include <forward_list>
 #include "dogen/cpp/types/registrar.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/entity_visitor.hpp"
@@ -58,12 +58,12 @@ public:
      * @brief Converts the supplied entity into all supported
      * representations.
      */
-    std::list<dogen::formatters::file> format(const entity& e);
+    std::forward_list<dogen::formatters::file> format(const entity& e);
 
 private:
     const registrar& registrar_;
     const settings_bundle settings_bundle_;
-    std::list<dogen::formatters::file> files_;
+    std::forward_list<dogen::formatters::file> files_;
 };
 
 } }

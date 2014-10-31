@@ -104,7 +104,7 @@ bool workflow::housekeeping_required() const {
 
 void workflow::
 housekeep(const std::map<boost::filesystem::path, std::string>& files,
-    const std::vector<boost::filesystem::path>& dirs) const {
+    const std::forward_list<boost::filesystem::path>& dirs) const {
     using boost::adaptors::transformed;
     using boost::filesystem::path;
     std::set<path> expected_files;
@@ -114,7 +114,8 @@ housekeep(const std::map<boost::filesystem::path, std::string>& files,
         std::inserter(expected_files, expected_files.end()));
 
     const auto& ip(knitting_settings_.output().ignore_patterns());
-    housekeeper hk(ip, dirs, expected_files);
+    std::forward_list<std::string> ignore_patterns(ip.begin(), ip.end());
+    housekeeper hk(ignore_patterns, dirs, expected_files);
     hk.tidy_up();
 }
 
@@ -273,7 +274,8 @@ void workflow::generate_model_activity(
     const sml::model& m, const config::formatting_settings& fs) const {
     try {
         using namespace dogen::utility::filesystem;
-        const std::list<boost::filesystem::path> dirs({data_files_directory()});
+        const std::forward_list<boost::filesystem::path>
+            dirs({data_files_directory()});
         backend::workflow w(knitting_settings_, dirs);
         w.execute(m); // FIXME: throw away results for now
 

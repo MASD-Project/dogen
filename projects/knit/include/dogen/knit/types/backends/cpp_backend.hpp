@@ -26,8 +26,8 @@
 #endif
 
 #include <map>
-#include <utility>
 #include <string>
+#include <utility>
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
@@ -57,7 +57,8 @@ public:
 
 public:
     backend::value_type generate() override;
-    std::vector<boost::filesystem::path> managed_directories() const override;
+    std::forward_list<boost::filesystem::path>
+    managed_directories() const override;
 
 private:
     sml_to_cpp::workflow transformer_;

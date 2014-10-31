@@ -48,8 +48,8 @@ namespace formatters {
 namespace meta_data {
 
 general_settings_factory::general_settings_factory(
-    const std::list<boost::filesystem::path>& data_files_directories) :
-    data_files_directories_(data_files_directories) { }
+    const std::forward_list<boost::filesystem::path>& data_files_dirs) :
+    data_files_directories_(data_files_dirs) { }
 
 void general_settings_factory::
 throw_missing_item(const std::string& msg, const std::string& n) const {
@@ -111,11 +111,11 @@ extract_marker(const boost::property_tree::ptree& meta_data) const {
     return f.build();
 }
 
-std::list<boost::filesystem::path> general_settings_factory::
+std::forward_list<boost::filesystem::path> general_settings_factory::
 create_directory_list(const std::string& for_whom) const {
-    std::list<boost::filesystem::path> r;
+    std::forward_list<boost::filesystem::path> r;
     for (const auto& d : data_files_directories_)
-        r.push_back(d / for_whom);
+        r.push_front(d / for_whom);
     return r;
 }
 

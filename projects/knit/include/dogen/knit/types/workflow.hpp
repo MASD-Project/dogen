@@ -29,6 +29,7 @@
 #include <string>
 #include <utility>
 #include <functional>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
@@ -95,7 +96,7 @@ private:
      * @brief Performs a housekeeping run for the supplied directories.
      */
     void housekeep(const std::map<boost::filesystem::path, std::string>& files,
-        const std::vector<boost::filesystem::path>& dirs) const;
+        const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
      * @brief Outputs the pair file name and contents to its output

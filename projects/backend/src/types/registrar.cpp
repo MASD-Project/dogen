@@ -49,10 +49,10 @@ void registrar::register_backend(std::shared_ptr<backend_interface> b) {
     if (!b)
         BOOST_THROW_EXCEPTION(registrar_error(null_backend));
 
-    backends_.push_back(b);
+    backends_.push_front(b);
 }
 
-const std::list<std::shared_ptr<backend_interface>>& registrar::
+const registrar::backends_type& registrar::
 backends() const {
     return backends_;
 }

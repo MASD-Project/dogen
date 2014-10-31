@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <forward_list>
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
@@ -57,7 +57,7 @@ public:
      * @param data_files_directories where to look for reference data.
      */
     explicit general_settings_factory(
-        const std::list<boost::filesystem::path>& data_files_directories);
+        const std::forward_list<boost::filesystem::path>& data_files_dirs);
 
 private:
     /*
@@ -89,7 +89,7 @@ private:
      * @brief Creates the actual list of directories used by hydrators
      * to load data.
      */
-    std::list<boost::filesystem::path>
+    std::forward_list<boost::filesystem::path>
     create_directory_list(const std::string& for_whom) const;
 
     /**
@@ -130,7 +130,7 @@ public:
     general_settings build(const boost::property_tree::ptree& meta_data) const;
 
 private:
-    const std::list<boost::filesystem::path>& data_files_directories_;
+    const std::forward_list<boost::filesystem::path>& data_files_directories_;
     std::unordered_map<std::string, modeline_group> modeline_groups_;
     std::unordered_map<std::string, licence> licences_;
 };

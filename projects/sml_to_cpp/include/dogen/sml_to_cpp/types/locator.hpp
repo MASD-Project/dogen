@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
@@ -139,7 +140,7 @@ public:
      * @brief Returns the list of directories this location manager is
      * managing.
      */
-    std::vector<boost::filesystem::path> managed_directories() const;
+    std::forward_list<boost::filesystem::path> managed_directories() const;
 
 private:
     const std::string model_name_;

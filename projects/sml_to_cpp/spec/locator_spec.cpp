@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <iterator>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/range/algorithm/for_each.hpp>
@@ -150,14 +151,16 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     const auto md(lm.managed_directories());
-    BOOST_CHECK(md.size() == 2);
-
-    e = "source directory/test";
-    a = md[0];
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(std::distance(md.begin(), md.end()) == 2);
 
     e = "include directory/test";
-    a = md[1];
+    auto i(md.begin());
+    a = *i;
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "source directory/test";
+    ++i;
+    a = *i;
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     cd = mock_descriptor(dogen::config::cpp_facet_types::io,
@@ -208,10 +211,10 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     const auto md(lm.managed_directories());
-    BOOST_CHECK(md.size() == 1);
+    BOOST_CHECK(std::distance(md.begin(), md.end()) == 1);
 
     e = "project directory/test";
-    a = md[0];
+    a = md.front();
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     cd = mock_descriptor(dogen::config::cpp_facet_types::io,

@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(hydrating_modeline_groups_in_data_directory_produces_expect
     SETUP_TEST_LOG_SOURCE("hydrating_modeline_groups_in_data_directory_produces_expected_result");
 
     using namespace dogen::utility::filesystem;
-    const std::list<boost::filesystem::path> d = {
+    const std::forward_list<boost::filesystem::path> d = {
         data_files_directory() / modeline_groups_dir
     };
 

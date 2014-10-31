@@ -40,7 +40,8 @@ backend::value_type cpp_backend::generate() {
     return r;
 }
 
-std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
+std::forward_list<boost::filesystem::path>
+cpp_backend::managed_directories() const {
     return transformer_.managed_directories();
 }
 

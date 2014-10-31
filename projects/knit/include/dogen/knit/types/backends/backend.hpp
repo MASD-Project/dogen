@@ -27,8 +27,8 @@
 
 #include <map>
 #include <string>
-#include <ostream>
 #include <memory>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 
 namespace dogen {
@@ -59,7 +59,7 @@ public:
     /**
      * @brief Get all directories managed by this backend.
      */
-    virtual std::vector<boost::filesystem::path>
+    virtual std::forward_list<boost::filesystem::path>
     managed_directories() const = 0;
 };
 

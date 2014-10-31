@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iterator>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"
@@ -44,8 +45,8 @@ namespace backend {
 std::shared_ptr<backend::registrar> workflow::registrar_;
 
 workflow::workflow(const config::knitting_settings& ks,
-    const std::list<boost::filesystem::path>& data_files_directories)
-    : knitting_settings_(ks), data_files_directories_(data_files_directories) { }
+    const std::forward_list<boost::filesystem::path>& data_files_dirs)
+    : knitting_settings_(ks), data_files_directories_(data_files_dirs) { }
 
 backend::registrar& workflow::registrar() {
     if (!registrar_)
@@ -57,10 +58,12 @@ backend::registrar& workflow::registrar() {
 void workflow::validate_backends_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Validating backend workflow.";
     registrar().validate();
-    BOOST_LOG_SEV(lg, debug) << "Found " << registrar().backends().size()
+    const auto& backends(registrar().backends());
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << std::distance(backends.begin(), backends.end())
                              << " registered backend(s): ";
 
-    for (const auto& b : registrar().backends()) {
+    for (const auto& b : backends) {
         BOOST_LOG_SEV(lg, debug) << "Backend: '" << b->id() << "'";
         b->validate();
     }
@@ -106,18 +109,19 @@ void workflow::register_backend(std::shared_ptr<backend_interface> b) {
     registrar().register_backend(b);
 }
 
-std::list<formatters::file> workflow::execute(const sml::model& m) const {
+std::forward_list<formatters::file>
+workflow::execute(const sml::model& m) const {
     validate_backends_activity();
     const auto gs(create_general_settings_activity(m));
 
-    std::list<formatters::file> r;
+    std::forward_list<formatters::file> r;
     for(const auto b : registrar().backends()) {
         const auto id(b->id());
         BOOST_LOG_SEV(lg, debug) << "Generating files backend '" << id << "'";
         auto files(b->generate(gs, m));
         BOOST_LOG_SEV(lg, debug) << "Files for backend '" << id << "': "
-                                 << files.size();
-        r.splice(r.end(), files);
+                                 << std::distance(files.begin(), files.end());
+        r.splice_after(r.before_begin(), files);
     }
 
     return r;

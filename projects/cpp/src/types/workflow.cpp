@@ -50,7 +50,7 @@ void workflow::register_formatter(
     registrar().register_formatter(f);
 }
 
-std::list<dogen::formatters::file> workflow::format_entity(
+std::forward_list<dogen::formatters::file> workflow::format_entity(
     const settings_bundle& s, const entity& e) const {
     formatter_dispatcher d(*registrar_, s);
     return d.format(e);
@@ -87,23 +87,23 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
 }
 
-std::list<dogen::formatters::file> workflow::generate(
+std::forward_list<dogen::formatters::file> workflow::generate(
     const dogen::formatters::general_settings& gs,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto b(create_settings_bundle_activity(gs));
 
-    std::list<dogen::formatters::file> r;
-    r.splice(r.begin(),
+    std::forward_list<dogen::formatters::file> r;
+    r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(m, b, m.modules()));
-    r.splice(r.begin(),
+    r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(m, b, m.concepts()));
-    r.splice(r.begin(),
+    r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(m, b, m.primitives()));
-    r.splice(r.begin(),
+    r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(m, b, m.enumerations()));
-    r.splice(r.begin(),
+    r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(m, b, m.objects()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

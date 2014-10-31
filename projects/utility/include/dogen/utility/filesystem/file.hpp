@@ -27,6 +27,7 @@
 
 #include <set>
 #include <string>
+#include <forward_list>
 #include <boost/filesystem/path.hpp>
 
 namespace dogen {
@@ -64,7 +65,7 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d);
  * on once in the set.
  */
 std::set<boost::filesystem::path>
-find_files(const std::list<boost::filesystem::path>& dirs);
+find_files(const std::forward_list<boost::filesystem::path>& dirs);
 
 } } }
 

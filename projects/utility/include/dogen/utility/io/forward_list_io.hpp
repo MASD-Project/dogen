@@ -18,47 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_BACKEND_TYPES_REGISTRAR_HPP
-#define DOGEN_BACKEND_TYPES_REGISTRAR_HPP
+#ifndef DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
+#define DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <memory>
+#include <ostream>
 #include <forward_list>
-#include "dogen/backend/types/backend_interface.hpp"
+#include "dogen/utility/io/jsonify_io.hpp"
 
-namespace dogen {
-namespace backend {
+namespace std {
 
-/**
- * @brief Keeps track of all the available backends.
- */
-class registrar {
-public:
-    typedef std::forward_list<std::shared_ptr<backend_interface>> backends_type;
+template<typename Containee>
+inline ostream& operator<<(ostream& s, const forward_list<Containee>& l) {
+    s << "[ ";
+    for(auto i(l.cbegin()); i != l.cend(); ++i) {
+        if (i != l.cbegin()) s << ", ";
+        s << dogen::utility::streaming::jsonify(*i);
+    }
+    s << " ]";
+    return(s);
+}
 
-public:
-    /**
-     * @brief Ensures the registrar is ready to be used.
-     */
-    void validate() const;
-
-    /**
-     * @brief Registers a backend.
-     */
-    void register_backend(std::shared_ptr<backend_interface> b);
-
-    /**
-     * @brief Returns all available backends.
-     */
-    const backends_type& backends() const;
-
-private:
-    backends_type backends_;
-};
-
-} }
+}
 
 #endif
