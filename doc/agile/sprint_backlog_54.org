@@ -17,13 +17,13 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-01 Sat 08:55]
+Clock summary at [2014-11-01 Sat 09:03]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *7:47* |      |      |
+| *Total time*                                                        | *7:55* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 7:47 |      |
+| Development Stories Implemented                                     |        | 7:55 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:16 |
 | IMPLEMENTATION Updates to the manual and readme files               |        |      | 0:32 |
 | COMPLETED Remove map from backend interface                         |        |      | 0:09 |
@@ -34,6 +34,7 @@ Clock summary at [2014-11-01 Sat 08:55]
 | COMPLETED Add transformer to =cpp= workflow                         |        |      | 1:10 |
 | COMPLETED Change list of files to forward list                      |        |      | 2:03 |
 | COMPLETED Module generation type is invalid for library models      |        |      | 0:31 |
+| COMPLETED Fix broken gcc build                                      |        |      | 0:08 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -112,6 +113,12 @@ list instead.
 
 We are relying on generation types to filter in the new workflow but
 it seems the library modules all have an invalid generation types.
+
+*** COMPLETED Fix broken gcc build                                :spike:bug:
+    CLOSED: [2014-11-01 Sat 09:03]
+    CLOCK: [2014-11-01 Sat 08:55]--[2014-11-01 Sat 09:03] =>  0:08
+
+Seems like we borked the gcc build with the formatter dispatcher.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
 

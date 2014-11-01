@@ -43,6 +43,7 @@ public:
     formatter_dispatcher(const registrar& r, const settings_bundle& s);
 
 public:
+    using entity_visitor::visit;
     void visit(const dogen::cpp::class_info& c) override;
     void visit(const dogen::cpp::enum_info& e) override;
     void visit(const dogen::cpp::exception_info& e) override;
