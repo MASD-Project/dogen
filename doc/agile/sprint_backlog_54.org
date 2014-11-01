@@ -17,15 +17,15 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-01 Sat 00:00]
+Clock summary at [2014-11-01 Sat 08:55]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *7:28* |      |      |
+| *Total time*                                                        | *7:47* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 7:28 |      |
+| Development Stories Implemented                                     |        | 7:47 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:16 |
-| IMPLEMENTATION Updates to the manual and readme files               |        |      | 0:13 |
+| IMPLEMENTATION Updates to the manual and readme files               |        |      | 0:32 |
 | COMPLETED Remove map from backend interface                         |        |      | 0:09 |
 | COMPLETED Generate all backends in workflow                         |        |      | 0:14 |
 | COMPLETED Add registrar to =cpp= with class formatter support       |        |      | 1:13 |
@@ -43,6 +43,7 @@ Clock summary at [2014-11-01 Sat 00:00]
 Updates to sprint and product backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files        :task:media:
+    CLOCK: [2014-11-01 Sat 08:36]--[2014-11-01 Sat 08:55] =>  0:19
     CLOCK: [2014-10-22 Wed 22:55]--[2014-10-22 Wed 23:08] =>  0:13
 
 Use downtime to update the manual and / or readme file.

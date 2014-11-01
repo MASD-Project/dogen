@@ -226,10 +226,10 @@ message(STATUS "Found uuidgen (${CTEST_UUIDGEN_COMMAND})...")
 message(STATUS "Build number ${DOGEN_BUILD_NUMBER}")
 
 if(WITH_DEBUG)
-    message(STATUS "Building with DEBUG symbols...")
+    message(STATUS "Building WITH DEBUG symbols...")
     set(DOGEN_VERSION "${DOGEN_VERSION}d")
 else()
-    message(STATUS "Building WITHOUT debug symbols...")
+    message(STATUS "Building WITHOUT DEBUG symbols...")
 endif()
 message(STATUS "Product version: ${DOGEN_VERSION}")
 

@@ -914,9 +914,7 @@ In order to compile Dogen you need:
 
 **** Building Instructions
 
-Once all dependencies have been installed, and placed in the
-appropriate =CMAKE_INCLUDE_PATH= and =CMAKE_LIBRARY_PATH= paths,
-follow the following steps:
+Once all dependencies have been installed, follow the following steps:
 
 : git clone git://github.com/kitanda/dogen.git
 : mkdir output
@@ -925,7 +923,8 @@ follow the following steps:
 : make -j5 # number of cores available
 
 The dogen =knitter= binary will be in
-=output/stage/bin/dogen_knitter=.
+=output/stage/bin/dogen_knitter=. For more complex builds, see More
+Complex Build Setups below.
 
 If you are on a non-Unix platform you need to use the appropriate
 CMake generator (the =-G= parameter above). At present the Ninja
@@ -982,6 +981,86 @@ To run all tests you can simply do:
 
 If there are no failures, you are good to go. If there are failures,
 you should report them to help improve Dogen.
+
+**** More Complex Build Setups
+
+The [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#building-instructions][Building Instructions]] described the most vanilla use case for
+building Dogen. However, over time we have spotted a few others. These
+are described in this section.
+
+***** Personal Libraries Directory
+
+It may be that you have compiled and installed some libraries that
+Dogen depends on. To make them visible to Dogen add the following to
+the CMake line:
+
+: CMAKE_INCLUDE_PATH=/usr/local/personal/include CMAKE_LIBRARY_PATH=/usr/local/personal/lib cmake ../dogen -G "Unix Makefiles"
+
+Ensure that the expected libraries are detected. For example, in this
+case we were looking for ODB and EOS in the CMake output
+
+: -- Found ODB Include folder (ODB_INCLUDE_DIR = /usr/local/personal/include)
+: -- Found ODB Core Libraries (ODB_LIBRARIES = /usr/local/personal/lib/libodb.so;/usr/local/personal/lib/libodb-boost.so)
+: -- Found ODB PostgreSQL Library (ODB_PGSQL_LIBRARY = /usr/local/personal/lib/libodb-pgsql.so)
+: -- Found odb...
+: -- Found EOS Include folder (EOS_INCLUDE_DIR = /usr/local/personal/include)
+: -- Found eos...
+: <snip>
+
+***** Multi-Compiler Setup
+
+If you are actually developing Dogen, we recommend the creation of
+sub-directories in the =output= directory, by purpose. A common use
+case is the multi-compiler setup, where one builds on both Clang and
+GCC. This can be achieved as follows (assuming GCC at the expected
+version is the default compiler):
+
+: cd output
+: mkdir clang_3.5 gcc_4.9
+: cd clang_3.5
+: CC=clang-3.5 CXX=clang++-3.5 cmake ../../dogen/ -G "Unix Makefiles"
+: make -j5 # number of cores available
+: <build finishes>
+: cd ../gcc_4.9
+: cmake ../../dogen/ -G "Unix Makefiles"
+: make -j5 # number of cores available
+
+In this setup, directories =output/clang_3.5= and =output/gcc_4.9=
+have a complete build of Dogen. We tend to use Clang as our
+development compiler and GCC as out official platform compiler; before
+doing a push one should always check that GCC builds.
+
+***** Debugging
+
+It is also useful to have debug builds side by side release builds. To
+do so we follow the same approach as the multi-compiler setup:
+
+: cd output
+: mkdir clang_3.5 clang_3.5_debug
+: cd clang_3.5
+: CC=clang-3.5 CXX=clang++-3.5 cmake ../../dogen/ -G "Unix Makefiles"
+: make -j5 # number of cores available
+: <build finishes>
+: cd ../clang_3.5_debug
+: CC=clang-3.5 CXX=clang++-3.5 cmake ../../dogen/ -DWITH_DEBUG=on -G "Unix Makefiles": cmake ../../dogen/ -G "Unix Makefiles"
+: make -j5 # number of cores available
+
+Note the =-DWITH_DEBUG=on= on the second invocation of CMake. Also,
+make sure CMake did recognise the option. When debug is off, you
+should see:
+
+: -- Building WITHOUT DEBUG symbols...
+
+When debug is on, you should see:
+
+: -- Building WITH DEBUG symbols...
+
+Debugging with GDB is pretty straightforward. Assuming you are
+currently in =clang_3.5_debug= and you want to debug the =knit= unit
+tests, do:
+
+: cd stage/bin
+: gdb dogen_knit_spec
 
 **** Submitting Bug Reports
 
