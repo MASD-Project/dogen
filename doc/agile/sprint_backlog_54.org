@@ -44,6 +44,7 @@ Clock summary at [2014-11-01 Sat 09:03]
 Updates to sprint and product backlog.
 
 *** IMPLEMENTATION Updates to the manual and readme files        :task:media:
+    CLOCK: [2014-11-01 Sat 21:40]--[2014-11-01 Sat 21:45] =>  0:05
     CLOCK: [2014-11-01 Sat 08:36]--[2014-11-01 Sat 08:55] =>  0:19
     CLOCK: [2014-10-22 Wed 22:55]--[2014-10-22 Wed 23:08] =>  0:13
 

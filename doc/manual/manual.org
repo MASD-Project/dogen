@@ -991,13 +991,14 @@ are described in this section.
 ***** Personal Libraries Directory
 
 It may be that you have compiled and installed some libraries that
-Dogen depends on. To make them visible to Dogen add the following to
-the CMake line:
+Dogen depends on. Assuming your files have been installed in
+=/usr/local/personal/lib=, To make them visible to Dogen add the
+following to the CMake line:
 
 : CMAKE_INCLUDE_PATH=/usr/local/personal/include CMAKE_LIBRARY_PATH=/usr/local/personal/lib cmake ../dogen -G "Unix Makefiles"
 
 Ensure that the expected libraries are detected. For example, in this
-case we were looking for ODB and EOS in the CMake output
+case we were looking for ODB and EOS in the CMake output:
 
 : -- Found ODB Include folder (ODB_INCLUDE_DIR = /usr/local/personal/include)
 : -- Found ODB Core Libraries (ODB_LIBRARIES = /usr/local/personal/lib/libodb.so;/usr/local/personal/lib/libodb-boost.so)
@@ -1009,11 +1010,12 @@ case we were looking for ODB and EOS in the CMake output
 
 ***** Multi-Compiler Setup
 
-If you are actually developing Dogen, we recommend the creation of
-sub-directories in the =output= directory, by purpose. A common use
-case is the multi-compiler setup, where one builds on both Clang and
-GCC. This can be achieved as follows (assuming GCC at the expected
-version is the default compiler):
+If you are developing Dogen - rather than just trying to use it - we
+recommend the creation of sub-directories in the =output= directory,
+each with their own purpose. A common use case is the multi-compiler
+setup, where one builds on both Clang and GCC. This can be achieved as
+follows (assuming GCC at the expected version is the default
+compiler):
 
 : cd output
 : mkdir clang_3.5 gcc_4.9
@@ -1032,8 +1034,8 @@ doing a push one should always check that GCC builds.
 
 ***** Debugging
 
-It is also useful to have debug builds side by side release builds. To
-do so we follow the same approach as the multi-compiler setup:
+It is also useful to have debug builds side-by-side release builds. To
+do so we follow a similar approach to the multi-compiler setup:
 
 : cd output
 : mkdir clang_3.5 clang_3.5_debug
