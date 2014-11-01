@@ -157,6 +157,7 @@ void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
             module mod;
             mod.name(module_qn);
             mod.origin_type(m.origin_type());
+            mod.generation_type(m.generation_type());
             mod.type(module_types::regular);
             m.modules().insert(std::make_pair(module_qn, mod));
         }

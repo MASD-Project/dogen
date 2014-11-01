@@ -17,13 +17,13 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-10-31 Fri 23:29]
+Clock summary at [2014-11-01 Sat 00:00]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *6:57* |      |      |
+| *Total time*                                                        | *7:28* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 6:57 |      |
+| Development Stories Implemented                                     |        | 7:28 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:16 |
 | IMPLEMENTATION Updates to the manual and readme files               |        |      | 0:13 |
 | COMPLETED Remove map from backend interface                         |        |      | 0:09 |
@@ -33,6 +33,7 @@ Clock summary at [2014-10-31 Fri 23:29]
 | COMPLETED Models that share sub-package names fail to resolve types |        |      | 0:59 |
 | COMPLETED Add transformer to =cpp= workflow                         |        |      | 1:10 |
 | COMPLETED Change list of files to forward list                      |        |      | 2:03 |
+| COMPLETED Module generation type is invalid for library models      |        |      | 0:31 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -102,6 +103,14 @@ start working on formatter code.
 
 We are paying the cost of a full list for no reason. Use a forward
 list instead.
+
+*** COMPLETED Module generation type is invalid for library models :spike:bug:
+    CLOSED: [2014-11-01 Sat 00:00]
+    CLOCK: [2014-10-31 Fri 23:53]--[2014-11-01 Sat 00:00] =>  0:07
+    CLOCK: [2014-10-31 Fri 23:29]--[2014-10-31 Fri 23:53] =>  0:24
+
+We are relying on generation types to filter in the new workflow but
+it seems the library modules all have an invalid generation types.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
 

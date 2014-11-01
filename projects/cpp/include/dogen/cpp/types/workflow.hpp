@@ -70,8 +70,13 @@ private:
         const AssociativeContainerOfElement& c) const {
         std::forward_list<std::shared_ptr<entity> > r;
         transformer t(m);
-        for (const auto& pair : c)
+        for (const auto& pair : c) {
+            const auto ng(sml::generation_types::no_generation);
+            if (pair.second.generation_type() == ng)
+                continue;
+
             r.push_front(t.transform(pair.second));
+        }
         return r;
     }
 
