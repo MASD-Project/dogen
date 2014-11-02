@@ -40,6 +40,9 @@ namespace cpp {
 
 class formatter_dispatcher : public entity_visitor {
 public:
+    ~formatter_dispatcher() noexcept = default;
+
+public:
     formatter_dispatcher(const registrar& r, const settings_bundle& s);
 
 public:
