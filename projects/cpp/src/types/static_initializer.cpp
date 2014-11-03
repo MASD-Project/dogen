@@ -29,9 +29,8 @@ namespace cpp {
 using namespace formatters::types;
 
 void static_initializer::initialize() {
-    auto w(std::make_shared<workflow>());
-    w->register_formatter(std::make_shared<class_header_formatter>());
-    backend::workflow::register_backend(w);
+    workflow::register_formatter(std::make_shared<class_header_formatter>());
+    backend::workflow::register_backend(std::make_shared<workflow>());
 }
 
 } }

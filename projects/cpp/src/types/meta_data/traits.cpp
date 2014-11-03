@@ -38,4 +38,8 @@ const std::string traits::enable_facet_folders("cpp.enable_facet_folders");
 const std::string traits::enable_unique_file_names(
     "cpp.enable_unique_file_names");
 
+const std::string traits::facet::enabled("enabled");
+const std::string traits::facet::directory("directory");
+const std::string traits::facet::postfix("postfix");
+
 } } }

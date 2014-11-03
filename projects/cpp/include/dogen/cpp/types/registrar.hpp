@@ -27,6 +27,8 @@
 
 #include <list>
 #include <memory>
+#include <unordered_map>
+#include "dogen/cpp/types/facet_settings.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
@@ -44,6 +46,12 @@ public:
     void validate() const;
 
     /**
+     * @brief Registers default facet settings for a given facet.
+     */
+    void register_default_facet_settings(const std::string& facet_id,
+        const facet_settings& s);
+
+    /**
      * @brief Registers a class formatter.
      */
     void register_formatter(
@@ -54,8 +62,15 @@ public:
      */
     const class_formatters_type& class_formatters() const;
 
+    /**
+     * @brief Returns all default settings for all facets.
+     */
+    const std::unordered_map<std::string, facet_settings>&
+    default_settings_for_facet() const;
+
 private:
     class_formatters_type class_formatters_;
+    std::unordered_map<std::string, facet_settings> default_settings_for_facet_;
 };
 
 } }

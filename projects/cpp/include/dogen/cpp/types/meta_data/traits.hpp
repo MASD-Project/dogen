@@ -98,6 +98,26 @@ struct traits {
      * This is achieved by using the facet's postfix.
      */
     static const std::string enable_unique_file_names;
+
+    /**
+     * @brief Tags related to facets.
+     */
+    struct facet {
+        /**
+         * @brief If set to false, the facet will not be generated.
+         */
+        static const std::string enabled;
+
+        /**
+         * @brief Directory in which to place files for this facet.
+         */
+        static const std::string directory;
+
+        /**
+         * @brief Post-fix to apply to file names for this facet.
+         */
+        static const std::string postfix;
+    };
 };
 
 } } }

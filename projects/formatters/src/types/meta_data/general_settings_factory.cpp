@@ -32,11 +32,11 @@
 #include "dogen/formatters/types/meta_data/building_error.hpp"
 #include "dogen/formatters/types/meta_data/general_settings_factory.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("formatters.meta_data.general_settings_factory"));
+
 const std::string missing_context_ptr("Context pointer is null");
 const std::string modeline_groups_dir("modeline_groups");
 const std::string licence_dir("licences");
