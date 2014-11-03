@@ -17,20 +17,53 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-03 Mon 08:08]
+Clock summary at [2014-11-03 Mon 18:14]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *0:09* |      |      |
+| *Total time*                                       | *0:55* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 0:09 |      |
-| IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:09 |
+| Development Stories Implemented                    |        | 0:55 |      |
+| IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
+| IMPLEMENTATION Add support for facet settings      |        |      | 0:03 |
+| COMPLETED Sort out postgres update problems        |        |      | 0:36 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-03 Mon 08:09]--[2014-11-03 Mon 08:16] =>  0:07
     CLOCK: [2014-11-03 Mon 07:59]--[2014-11-03 Mon 08:08] =>  0:09
 
 Updates to sprint and product backlog.
+
+*** IMPLEMENTATION Add support for facet settings                     :story:
+    CLOCK: [2014-11-03 Mon 08:23]--[2014-11-03 Mon 08:26] =>  0:03
+
+- create a "manager" or "initialiser" for each facet, responsible for
+  registering all the formatters and the default settings.
+- find all distinct facets supplied by formatters
+- create a facet settings factory, given a facet
+- apply factory to all facets in workflow
+- supply all settings to formatter dispatcher, including map of facet
+  settings by facet
+- build the settings bundle in dispatcher
+
+*** COMPLETED Sort out postgres update problems                       :spike:
+    CLOSED: [2014-11-03 Mon 18:14]
+    CLOCK: [2014-11-03 Mon 18:02]--[2014-11-03 Mon 18:14] =>  0:12
+    CLOCK: [2014-11-03 Mon 08:26]--[2014-11-03 Mon 08:43] =>  0:17
+    CLOCK: [2014-11-03 Mon 08:16]--[2014-11-03 Mon 08:23] =>  0:07
+
+The latest dist-upgrade failed due to a format change on postgres
+9.4. We need to drop and recreate the cluster or else we can't run
+unit tests.
+
+- dropped cluster 9.4 main
+- created new cluster
+- created user build with permissions to create dabatases
+- altered it's password
+- changed hba conf to use md5
+- created databases from user build and added schemas
+- un-commented create schema from database tests
 
 *** Updates to the manual and readme files                       :task:media:
 
