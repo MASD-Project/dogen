@@ -17,13 +17,13 @@ at least one formatter in the C++ model.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-03 Mon 07:59]
+Clock summary at [2014-11-03 Mon 08:12]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *8:08* |      |      |
+| *Total time*                                                        | *9:26* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 8:08 |      |
+| Development Stories Implemented                                     |        | 9:26 |      |
 | COMPLETED Sprint and product backlog grooming                       |        |      | 0:24 |
 | COMPLETED Updates to the manual and readme files                    |        |      | 0:37 |
 | COMPLETED Remove map from backend interface                         |        |      | 0:09 |
@@ -35,6 +35,7 @@ Clock summary at [2014-11-03 Mon 07:59]
 | COMPLETED Change list of files to forward list                      |        |      | 2:03 |
 | COMPLETED Module generation type is invalid for library models      |        |      | 0:31 |
 | COMPLETED Fix broken gcc build                                      |        |      | 0:08 |
+| POSTPONED Add support for facet settings                            |        |      | 1:18 |
 #+end:
 
 *** COMPLETED Sprint and product backlog grooming                      :task:
@@ -123,6 +124,19 @@ it seems the library modules all have an invalid generation types.
     CLOCK: [2014-11-01 Sat 08:55]--[2014-11-01 Sat 09:03] =>  0:08
 
 Seems like we borked the gcc build with the formatter dispatcher.
+
+*** POSTPONED Add support for facet settings                          :story:
+    CLOSED: [2014-11-03 Mon 08:12]
+    CLOCK: [2014-11-01 Sat 22:29]--[2014-11-01 Sat 23:47] =>  1:18
+
+- create a "manager" or "initialiser" for each facet, responsible for
+  registering all the formatters and the default settings.
+- find all distinct facets supplied by formatters
+- create a facet settings factory, given a facet
+- apply factory to all facets in workflow
+- supply all settings to formatter dispatcher, including map of facet
+  settings by facet
+- build the settings bundle in dispatcher
 
 ** Deprecated Development Stories
 
