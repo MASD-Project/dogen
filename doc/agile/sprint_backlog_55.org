@@ -17,17 +17,17 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-03 Mon 22:26]
+Clock summary at [2014-11-03 Mon 23:21]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *2:03* |      |      |
+| *Total time*                                       | *2:48* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 2:03 |      |
+| Development Stories Implemented                    |        | 2:48 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
 | COMPLETED Sort out postgres update problems        |        |      | 0:36 |
 | COMPLETED Refactor static data initialisation      |        |      | 1:08 |
-| IMPLEMENTATION Add support for facet settings      |        |      | 0:03 |
+| IMPLEMENTATION Add support for facet settings      |        |      | 0:48 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -102,11 +102,15 @@ In general, we want to wait until C++ supports reflection properly
 appear. For now we just want the bare minimum.
 
 *** IMPLEMENTATION Add support for facet settings                     :story:
+    CLOCK: [2014-11-03 Mon 23:16]--[2014-11-03 Mon 23:20] =>  0:04
+    CLOCK: [2014-11-03 Mon 22:56]--[2014-11-03 Mon 23:09] =>  0:13
+    CLOCK: [2014-11-03 Mon 22:28]--[2014-11-03 Mon 22:56] =>  0:28
     CLOCK: [2014-11-03 Mon 08:23]--[2014-11-03 Mon 08:26] =>  0:03
 
-- find all distinct facets supplied by formatters
-- create a facet settings factory, given a facet
-- apply factory to all facets in workflow
+- create default settings in facet initialisers.
+- create a facet settings factory: given a facet id, locates the
+  meta-data for the facet.
+- apply factory to all facets in workflow.
 - supply all settings to formatter dispatcher, including map of facet
   settings by facet
 - build the settings bundle in dispatcher

@@ -19,15 +19,33 @@
  *
  */
 #include <memory>
+#include "dogen/cpp/types/facet_settings.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
+
+namespace {
+
+const std::string default_directory_name("types");
+const std::string default_postfix;
+
+}
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
+facet_settings default_settings() {
+    facet_settings r;
+    r.enabled(true);
+    r.directory_name(default_directory_name);
+    r.postfix(default_postfix);
+    return r;
+}
+
 void initializer::initialize(registrar& r) {
+    r.register_default_facet_settings(traits::facet_id, default_settings());
     r.register_formatter(std::make_shared<class_header_formatter>());
 }
 

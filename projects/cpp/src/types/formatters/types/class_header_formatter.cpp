@@ -19,11 +19,11 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
 
-const std::string facet_id("cpp.types");
 const std::string formatter_id("cpp.formatters.types.class_header_formatter");
 
 using namespace dogen::utility::log;
@@ -37,7 +37,7 @@ namespace formatters {
 namespace types {
 
 std::string class_header_formatter::facet_id() const {
-    return ::facet_id;
+    return traits::facet_id;
 }
 
 std::string class_header_formatter::formatter_id() const {
