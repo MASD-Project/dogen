@@ -1886,7 +1886,7 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="55,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2174999999999994"/>
+        <dia:real val="6.2175000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1996,7 +1996,7 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="73,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.682500000000001"/>
+        <dia:real val="8.6824999999999992"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2100,7 +2100,7 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="68.0725,-6.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.0587,-6.85;68.9225,3.05"/>
+        <dia:rectangle val="58.0588,-6.85;68.9225,3.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2141,7 +2141,7 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="68.0725,-6.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.2225,-6.85;77.3912,3.05"/>
+        <dia:rectangle val="67.2225,-6.85;77.3913,3.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2182,19 +2182,19 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="33,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.95,30.95;40.75,34.65"/>
+        <dia:rectangle val="32.95,30.95;38.555,34.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="33,31"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.7000000000000002"/>
+        <dia:real val="5.5049999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#static_initializer#</dia:string>
+        <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -2376,14 +2376,14 @@ main.#</dia:string>
         <dia:point val="32.5725,27.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.502,27.2295;37.1495,31.3352"/>
+        <dia:rectangle val="32.502,27.2295;36.0884,31.2986"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="32.5725,27.3"/>
-        <dia:point val="36.85,31"/>
+        <dia:point val="35.7525,31"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2398,7 +2398,7 @@ main.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="34.7113,29.65"/>
+        <dia:point val="34.1625,29.65"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O18" connection="6"/>
@@ -2419,7 +2419,7 @@ main.#</dia:string>
         <dia:point val="-5,-17"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.690000000000001"/>
+        <dia:real val="21.689999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.7000000000000002"/>

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_STATIC_INITIALIZER_HPP
-#define DOGEN_CPP_TYPES_STATIC_INITIALIZER_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_INITIALIZER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_IO_INITIALIZER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,15 +27,11 @@
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
+namespace io {
 
-/**
- * @brief Initialises all of the static state in this model.
- */
-class static_initializer {
-public:
-    static void initialize();
-};
+class initializer;
 
-} }
+} } } }
 
 #endif

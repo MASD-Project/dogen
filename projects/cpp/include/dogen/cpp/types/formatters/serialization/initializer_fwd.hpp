@@ -18,19 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/backend/types/workflow.hpp"
-#include "dogen/cpp/types/workflow.hpp"
-#include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
-#include "dogen/cpp/types/static_initializer.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_INITIALIZER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_INITIALIZER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
+namespace serialization {
 
-using namespace formatters::types;
+class initializer;
 
-void static_initializer::initialize() {
-    workflow::register_formatter(std::make_shared<class_header_formatter>());
-    backend::workflow::register_backend(std::make_shared<workflow>());
-}
+} } } }
 
-} }
+#endif

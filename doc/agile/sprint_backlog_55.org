@@ -17,16 +17,17 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-03 Mon 18:14]
+Clock summary at [2014-11-03 Mon 19:24]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *0:55* |      |      |
+| *Total time*                                       | *1:38* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 0:55 |      |
+| Development Stories Implemented                    |        | 1:38 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
-| IMPLEMENTATION Add support for facet settings      |        |      | 0:03 |
 | COMPLETED Sort out postgres update problems        |        |      | 0:36 |
+| COMPLETED Refactor static data initialisation      |        |      | 0:43 |
+| IMPLEMENTATION Add support for facet settings      |        |      | 0:03 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -35,17 +36,9 @@ Clock summary at [2014-11-03 Mon 18:14]
 
 Updates to sprint and product backlog.
 
-*** IMPLEMENTATION Add support for facet settings                     :story:
-    CLOCK: [2014-11-03 Mon 08:23]--[2014-11-03 Mon 08:26] =>  0:03
+*** Updates to the manual and readme files                       :task:media:
 
-- create a "manager" or "initialiser" for each facet, responsible for
-  registering all the formatters and the default settings.
-- find all distinct facets supplied by formatters
-- create a facet settings factory, given a facet
-- apply factory to all facets in workflow
-- supply all settings to formatter dispatcher, including map of facet
-  settings by facet
-- build the settings bundle in dispatcher
+Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Sort out postgres update problems                       :spike:
     CLOSED: [2014-11-03 Mon 18:14]
@@ -65,9 +58,58 @@ unit tests.
 - created databases from user build and added schemas
 - un-commented create schema from database tests
 
-*** Updates to the manual and readme files                       :task:media:
+*** COMPLETED Refactor static data initialisation             :task:refactor:
+    CLOSED: [2014-11-03 Mon 19:24]
+    CLOCK: [2014-11-03 Mon 19:13]--[2014-11-03 Mon 19:24] =>  0:11
+    CLOCK: [2014-11-03 Mon 18:26]--[2014-11-03 Mon 18:46] =>  0:20
+    CLOCK: [2014-11-03 Mon 18:14]--[2014-11-03 Mon 18:26] =>  0:12
 
-Use downtime to update the manual and / or readme file.
+The objective of this story is to consider if there is any advantage
+in aligning our names a bit more to C# IoC names, and/or to decide if
+we should rename =static_initializer=.
+
+We created registrar as a poor man's DI (dependency injection)
+container. It had only the bare minimum functionality required to
+allow dynamic discovery of backends and formatters. We also decided to
+call it "registrar" rather than "container" because the latter would
+be meaningless to pretty much any C++ programmer that is not familiar
+with DI terminology in C#. We then created static data
+initialisers. These are similar to installers in say Windsor Castle,
+in that they are responsible for setting up the container. As with
+Castle, it makes sense to create a chain of installers, and to have a
+top level installer that calls all dependent installers so that a user
+of a library does not have to worry about setting up its
+dependencies. The next logical step after this is within the library
+itself. For example, each facet is responsible for setting itself up
+(in the future by creating its default facet settings). It would be
+natural to create a facet-level installer and call it from the
+model-level installer. however, the name =static_initializer= starts
+becoming a bit cumbersome when one has so many of these lying around.
+
+Conclusions:
+
+- the names container and installer are confusing (container in
+  particular);
+- registrar is a good name since it manages registration;
+- it is a shame that we interface with the registrar via the workflow
+  though. However it is not worth spending too much time on this for
+  now.
+- we should rename =static_initializer= to just =initializer= and have
+  an =initializer= per facet.
+
+In general, we want to wait until C++ supports reflection properly
+(C++ 17 hopefully) at which point proper DI libraries will start to
+appear. For now we just want the bare minimum.
+
+*** IMPLEMENTATION Add support for facet settings                     :story:
+    CLOCK: [2014-11-03 Mon 08:23]--[2014-11-03 Mon 08:26] =>  0:03
+
+- find all distinct facets supplied by formatters
+- create a facet settings factory, given a facet
+- apply factory to all facets in workflow
+- supply all settings to formatter dispatcher, including map of facet
+  settings by facet
+- build the settings bundle in dispatcher
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
 

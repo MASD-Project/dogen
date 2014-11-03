@@ -22,7 +22,7 @@
 #include "dogen/frontend/types/workflow.hpp"
 #include "dogen/frontend/types/dia_frontend.hpp"
 #include "dogen/frontend/types/json_sml_frontend.hpp"
-#include "dogen/frontend/types/static_initializer.hpp"
+#include "dogen/frontend/types/initializer.hpp"
 
 namespace dogen {
 namespace frontend {
@@ -34,7 +34,7 @@ inline void register_frontend() {
         workflow::register_frontend_for_extension(se, s);
 }
 
-void static_initializer::initialize() {
+void initializer::initialize() {
     register_frontend<dia_frontend>();
     register_frontend<json_sml_frontend>();
 }

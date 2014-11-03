@@ -18,13 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/frontend/types/dia_frontend.hpp"
-#include "dogen/frontend/types/frontend.hpp"
-#include "dogen/frontend/types/frontend_interface.hpp"
-#include "dogen/frontend/types/frontend_settings.hpp"
-#include "dogen/frontend/types/initializer.hpp"
-#include "dogen/frontend/types/input_descriptor.hpp"
-#include "dogen/frontend/types/json_sml_frontend.hpp"
-#include "dogen/frontend/types/registrar.hpp"
-#include "dogen/frontend/types/registrar_error.hpp"
-#include "dogen/frontend/types/workflow.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_INITIALIZER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_INITIALIZER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace cpp {
+namespace formatters {
+namespace types {
+
+class initializer;
+
+} } } }
+
+#endif
