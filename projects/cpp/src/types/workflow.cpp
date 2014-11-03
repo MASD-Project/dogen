@@ -45,11 +45,6 @@ cpp::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-void workflow::register_formatter(
-    std::shared_ptr<formatters::class_formatter_interface> f) {
-    registrar().register_formatter(f);
-}
-
 std::forward_list<dogen::formatters::file> workflow::format_entity(
     const settings_bundle& s, const entity& e) const {
     formatter_dispatcher d(*registrar_, s);

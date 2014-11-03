@@ -46,19 +46,12 @@ public:
 public:
     ~workflow() noexcept;
 
-private:
+public:
     /**
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
     static cpp::registrar& registrar();
-
-public:
-    /**
-     * @brief Registers a formatter with the workflow.
-     */
-    static void register_formatter(
-        std::shared_ptr<formatters::class_formatter_interface> f);
 
 private:
     /**

@@ -31,7 +31,7 @@ template<typename Frontend>
 inline void register_frontend() {
     auto s(std::make_shared<Frontend>());
     for (const auto& se : s->supported_extensions())
-        workflow::register_frontend_for_extension(se, s);
+        workflow::registrar().register_frontend_for_extension(se, s);
 }
 
 void initializer::initialize() {

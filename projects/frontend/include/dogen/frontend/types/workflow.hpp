@@ -42,13 +42,14 @@ class workflow {
 public:
     explicit workflow(const config::knitting_settings& ks);
 
-private:
+public:
     /**
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
     static frontend::registrar& registrar();
 
+private:
     /**
      * @brief Given an archive type and a model name, returns the
      * appropriate file extension.
@@ -85,10 +86,6 @@ private:
      */
     void persist_sml_model_activity(const boost::filesystem::path& p,
         const sml::model& m) const;
-
-public:
-    static void register_frontend_for_extension(const std::string& ext,
-        std::shared_ptr<frontend_interface> s);
 
 public:
     /**

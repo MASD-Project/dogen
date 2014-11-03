@@ -62,6 +62,7 @@
 #include "dogen/cpp/types/formatters/include_formatter.hpp"
 #include "dogen/cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/cpp/types/formatters/includers_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/initializer.hpp"
 #include "dogen/cpp/types/formatters/io/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/enricher.hpp"

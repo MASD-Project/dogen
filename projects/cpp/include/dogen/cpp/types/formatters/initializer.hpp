@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_INITIALIZER_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_INITIALIZER_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_INITIALIZER_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,16 +30,15 @@
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace types {
 
 /**
- * @brief Initialises the types facet.
+ * @brief Initialises all facets.
  */
 class initializer {
 public:
     static void initialize(registrar& r);
 };
 
-} } } }
+} } }
 
 #endif

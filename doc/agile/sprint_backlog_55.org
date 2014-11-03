@@ -17,16 +17,16 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-03 Mon 19:24]
+Clock summary at [2014-11-03 Mon 22:26]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *1:38* |      |      |
+| *Total time*                                       | *2:03* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 1:38 |      |
+| Development Stories Implemented                    |        | 2:03 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
 | COMPLETED Sort out postgres update problems        |        |      | 0:36 |
-| COMPLETED Refactor static data initialisation      |        |      | 0:43 |
+| COMPLETED Refactor static data initialisation      |        |      | 1:08 |
 | IMPLEMENTATION Add support for facet settings      |        |      | 0:03 |
 #+end:
 
@@ -59,7 +59,8 @@ unit tests.
 - un-commented create schema from database tests
 
 *** COMPLETED Refactor static data initialisation             :task:refactor:
-    CLOSED: [2014-11-03 Mon 19:24]
+    CLOSED: [2014-11-03 Mon 22:23]
+    CLOCK: [2014-11-03 Mon 22:01]--[2014-11-03 Mon 22:26] =>  0:25
     CLOCK: [2014-11-03 Mon 19:13]--[2014-11-03 Mon 19:24] =>  0:11
     CLOCK: [2014-11-03 Mon 18:26]--[2014-11-03 Mon 18:46] =>  0:20
     CLOCK: [2014-11-03 Mon 18:14]--[2014-11-03 Mon 18:26] =>  0:12
@@ -92,8 +93,7 @@ Conclusions:
   particular);
 - registrar is a good name since it manages registration;
 - it is a shame that we interface with the registrar via the workflow
-  though. However it is not worth spending too much time on this for
-  now.
+  though. Removed the delegation and made the registrar visible.
 - we should rename =static_initializer= to just =initializer= and have
   an =initializer= per facet.
 

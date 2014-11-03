@@ -136,11 +136,6 @@ void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
     persister.persist(m, dp);
 }
 
-void workflow::register_frontend_for_extension(const std::string& ext,
-    std::shared_ptr<frontend_interface> s) {
-    registrar().register_frontend_for_extension(ext, s);
-}
-
 std::list<sml::model>
 workflow::execute(const std::list<input_descriptor>& descriptors) {
     BOOST_LOG_SEV(lg, debug) << "Started executing frontend workflow. "
