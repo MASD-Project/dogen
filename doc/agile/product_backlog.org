@@ -11,6 +11,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Adding types to package namespace                         :story:feature:
+
+Whilst it is possible to document a namespace, it is not possible to
+add any classes etc to that namespace. For example, it may make sense
+to add some constants at the namespace level. This is not possible
+with the current setup.
+
 *** Add support for =std::forward_list=                       :story:feature:
 
 We have been using =std::list= quite liberally. However, on hindsight,
