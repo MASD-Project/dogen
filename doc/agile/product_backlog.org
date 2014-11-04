@@ -11,6 +11,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Determining the model module should be in SML             :task:refactor:
+
+At present we have a number of methods looking for the model
+module. However, =merger= already knows who the "main" model module
+is. We need to either provide a method to find it in SML or a property
+in model to record it.
+
 *** Handling missing default facet settings                           :story:
 
 At present we are just logging a warning when the user supplies
