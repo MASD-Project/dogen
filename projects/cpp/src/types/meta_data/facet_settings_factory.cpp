@@ -28,15 +28,55 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("cpp.meta_data.facet_settings_factory"));
 
+const std::string dot(".");
+
+/**
+ * @brief Given a facet and a trait, returns the fully qualified
+ * version of the trait.
+ */
+inline std::string
+qualify(const std::string& facet_id, const std::string& trait) {
+    return facet_id + dot + trait;
+}
+
 }
 
 namespace dogen {
 namespace cpp {
 namespace meta_data {
 
-facet_settings facet_settings_factory::build(const std::string& /*facet_id*/,
-    const boost::property_tree::ptree& /*meta_data*/) const {
-    facet_settings r;
+facet_settings facet_settings_factory::build(
+    const std::unordered_map<std::string, facet_settings>& default_settings,
+    const std::string& facet_id,
+    const boost::property_tree::ptree& meta_data) const {
+
+    const auto i(default_settings.find(facet_id));
+    const bool has_default_settings(i != default_settings.end());
+    if (!has_default_settings) {
+        BOOST_LOG_SEV(lg, warn) << "Could not find default settings for facet: "
+                                << facet_id;
+    }
+
+    facet_settings r(has_default_settings ? i->second : facet_settings());
+    sml::meta_data::reader reader(meta_data);
+    const auto enabled_trait(qualify(facet_id, traits::facet::enabled));
+    if (reader.has_key(enabled_trait)) {
+        const auto value(reader.get(enabled_trait));
+        r.enabled(value == traits::bool_true);
+    }
+
+    const auto directory_trait(qualify(facet_id, traits::facet::directory));
+    if (reader.has_key(directory_trait)) {
+        const auto value(reader.get(directory_trait));
+        r.directory(value);
+    }
+
+    const std::string postfix_trait(qualify(facet_id, traits::facet::postfix));
+    if (reader.has_key(postfix_trait)) {
+        const auto value(reader.get(postfix_trait));
+        r.postfix(value);
+    }
+
     return r;
 }
 

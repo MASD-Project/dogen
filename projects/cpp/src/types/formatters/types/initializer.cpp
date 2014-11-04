@@ -26,7 +26,7 @@
 
 namespace {
 
-const std::string default_directory_name("types");
+const std::string default_directory("types");
 const std::string default_postfix;
 
 }
@@ -39,7 +39,7 @@ namespace types {
 facet_settings default_settings() {
     facet_settings r;
     r.enabled(true);
-    r.directory_name(default_directory_name);
+    r.directory(default_directory);
     r.postfix(default_postfix);
     return r;
 }

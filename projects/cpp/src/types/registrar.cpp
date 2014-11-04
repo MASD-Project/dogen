@@ -28,8 +28,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.registrar"));
 
-const std::string duplicate_formatter_id(
-    "Attempt to register settings for the same formatter more than once");
+const std::string duplicate_facet_id(
+    "Attempt to register settings for the same facet more than once");
 const std::string no_formatters("No formatters provided.");
 const std::string null_formatter("Formatter supplied is null");
 
@@ -51,8 +51,8 @@ void registrar::register_default_facet_settings(const std::string& facet_id,
     const auto pair(std::make_pair(facet_id, s));
     const auto result(default_settings_for_facet_.insert(pair));
     if (!result.second) {
-        BOOST_LOG_SEV(lg, error) << duplicate_formatter_id;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_id));
+        BOOST_LOG_SEV(lg, error) << duplicate_facet_id;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_facet_id));
     }
 }
 

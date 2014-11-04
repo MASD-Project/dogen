@@ -39,7 +39,7 @@ void save(Archive& ar,
     const dogen::cpp::facet_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
-    ar << make_nvp("directory_name", v.directory_name_);
+    ar << make_nvp("directory", v.directory_);
     ar << make_nvp("postfix", v.postfix_);
 }
 
@@ -48,7 +48,7 @@ void load(Archive& ar,
     dogen::cpp::facet_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
-    ar >> make_nvp("directory_name", v.directory_name_);
+    ar >> make_nvp("directory", v.directory_);
     ar >> make_nvp("postfix", v.postfix_);
 }
 

@@ -47,7 +47,7 @@ public:
 public:
     facet_settings(
         const bool enabled,
-        const std::string& directory_name,
+        const std::string& directory,
         const std::string& postfix);
 
 private:
@@ -66,10 +66,10 @@ public:
     void enabled(const bool v);
     /**@}*/
 
-    const std::string& directory_name() const;
-    std::string& directory_name();
-    void directory_name(const std::string& v);
-    void directory_name(const std::string&& v);
+    const std::string& directory() const;
+    std::string& directory();
+    void directory(const std::string& v);
+    void directory(const std::string&& v);
 
     const std::string& postfix() const;
     std::string& postfix();
@@ -88,7 +88,7 @@ public:
 
 private:
     bool enabled_;
-    std::string directory_name_;
+    std::string directory_;
     std::string postfix_;
 };
 

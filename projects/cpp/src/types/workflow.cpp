@@ -52,7 +52,29 @@ std::forward_list<dogen::formatters::file> workflow::format_entity(
 }
 
 settings_bundle workflow::create_settings_bundle_activity(
+    const sml::model& /*m*/,
     const dogen::formatters::general_settings& gs) const {
+
+/*    bool found(false);
+    for (const auto pair : m.modules()) {
+        const auto mod(pair.second);
+        if (mod.generation_type() != sml::generation_types::full_generation ||
+            mod.type() != sml::module_types::model)
+            continue;
+
+        if (found) {
+            BOOST_LOG_SEV(lg, error) << multiple_generatable_model_modules
+                                     << mod.name();
+
+            const auto sn(mod.name().simple_name());
+            BOOST_THROW_EXCEPTION(workflow_error(
+                    multiple_generatable_model_modules + sn));
+        }
+        found = true;
+        r = f.build(mod.meta_data());
+    }
+
+*/
     settings_bundle r;
     r.general_settings(gs);
     return r;
@@ -87,7 +109,7 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
-    const auto b(create_settings_bundle_activity(gs));
+    const auto b(create_settings_bundle_activity(m, gs));
 
     std::forward_list<dogen::formatters::file> r;
     r.splice_after(r.before_begin(),

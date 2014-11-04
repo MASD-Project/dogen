@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <unordered_map>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/cpp/types/facet_settings.hpp"
 
@@ -44,7 +45,9 @@ public:
     /**
      * @brief Builds the facet settings for facet from the meta data.
      */
-    facet_settings build(const std::string& facet_id,
+    facet_settings build(
+        const std::unordered_map<std::string, facet_settings>& default_settings,
+        const std::string& facet_id,
         const boost::property_tree::ptree& meta_data) const;
 };
 

@@ -28,22 +28,22 @@ facet_settings::facet_settings()
 
 facet_settings::facet_settings(
     const bool enabled,
-    const std::string& directory_name,
+    const std::string& directory,
     const std::string& postfix)
     : enabled_(enabled),
-      directory_name_(directory_name),
+      directory_(directory),
       postfix_(postfix) { }
 
 void facet_settings::swap(facet_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
-    swap(directory_name_, other.directory_name_);
+    swap(directory_, other.directory_);
     swap(postfix_, other.postfix_);
 }
 
 bool facet_settings::operator==(const facet_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
-        directory_name_ == rhs.directory_name_ &&
+        directory_ == rhs.directory_ &&
         postfix_ == rhs.postfix_;
 }
 
@@ -61,20 +61,20 @@ void facet_settings::enabled(const bool v) {
     enabled_ = v;
 }
 
-const std::string& facet_settings::directory_name() const {
-    return directory_name_;
+const std::string& facet_settings::directory() const {
+    return directory_;
 }
 
-std::string& facet_settings::directory_name() {
-    return directory_name_;
+std::string& facet_settings::directory() {
+    return directory_;
 }
 
-void facet_settings::directory_name(const std::string& v) {
-    directory_name_ = v;
+void facet_settings::directory(const std::string& v) {
+    directory_ = v;
 }
 
-void facet_settings::directory_name(const std::string&& v) {
-    directory_name_ = std::move(v);
+void facet_settings::directory(const std::string&& v) {
+    directory_ = std::move(v);
 }
 
 const std::string& facet_settings::postfix() const {

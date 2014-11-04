@@ -44,7 +44,7 @@ std::ostream& operator<<(std::ostream& s, const facet_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::facet_settings\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
-      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
+      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
       << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
       << " }";
     return(s);

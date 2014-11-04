@@ -84,6 +84,7 @@ private:
      * @brief Create a settings bundle
      */
     settings_bundle create_settings_bundle_activity(
+        const sml::model& m,
         const dogen::formatters::general_settings& gs) const;
 
     /**

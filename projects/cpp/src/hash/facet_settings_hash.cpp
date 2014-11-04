@@ -38,7 +38,7 @@ std::size_t facet_settings_hasher::hash(const facet_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());
-    combine(seed, v.directory_name());
+    combine(seed, v.directory());
     combine(seed, v.postfix());
 
     return seed;

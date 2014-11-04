@@ -43,7 +43,7 @@ facet_settings_generator::facet_settings_generator() : position_(0) { }
 void facet_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.directory_name(create_std_string(position + 1));
+    v.directory(create_std_string(position + 1));
     v.postfix(create_std_string(position + 2));
 }
 
