@@ -11,6 +11,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Handling missing default facet settings                           :story:
+
+At present we are just logging a warning when the user supplies
+meta-data for a facet that we do not have defaults for. However, it
+may make more sense to just throw if someone is assuming support for
+something which we do not support. We need to think about this use
+case properly.
+
 *** Adding types to package namespace                         :story:feature:
 
 Whilst it is possible to document a namespace, it is not possible to
