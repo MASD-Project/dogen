@@ -27,6 +27,7 @@ namespace cpp {
 class dispatcher : public entity_visitor {
 public:
     dispatcher(const std::forward_list<formatter_facade::facet>& f);
+    ~dispatcher() noexcept { }
 
 public:
     using entity_visitor::visit;

@@ -68,9 +68,6 @@ public:
         const std::unordered_map<std::string, facet_settings>& fs) const;
 
 public:
-    ~formatter_facade() noexcept = default;
-
-public:
     formatter_facade(const registrar& reg,
         const dogen::formatters::general_settings& gs,
         const cpp_settings& cs,
