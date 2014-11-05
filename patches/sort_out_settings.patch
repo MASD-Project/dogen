@@ -1,0 +1,756 @@
+diff --git a/diagrams/cpp.dia b/diagrams/cpp.dia
+index 2b19da6..3c2631c 100644
+--- a/diagrams/cpp.dia
++++ b/diagrams/cpp.dia
+@@ -24000,5 +24000,186 @@ main.#</dia:string>
+       <dia:attribute name="templates"/>
+       <dia:childnode parent="O54"/>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O188">
++      <dia:attribute name="obj_pos">
++        <dia:point val="292,105"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="291.95,104.95;299.327,108.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="292,105"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="7.2774999999999999"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#workflow_error#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#exception#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O189">
++      <dia:attribute name="name">
++        <dia:string>#&lt; on error throws#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="308.035,96.6"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="295.589,95.85;308.785,106.6"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="308.035,96.6"/>
++        <dia:point val="308.035,101"/>
++        <dia:point val="295.639,101"/>
++        <dia:point val="295.639,105"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O67" connection="6"/>
++        <dia:connection handle="1" to="O188" connection="1"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/doc/agile/sprint_backlog_55.org b/doc/agile/sprint_backlog_55.org
+index 8af8719..0a39973 100644
+--- a/doc/agile/sprint_backlog_55.org
++++ b/doc/agile/sprint_backlog_55.org
+@@ -17,17 +17,17 @@ pipeline for at least one formatter.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2014-11-04 Tue 08:46]
++Clock summary at [2014-11-05 Wed 18:49]
+ 
+ | Headline                                           | Time   |      |      |
+ |----------------------------------------------------+--------+------+------|
+-| *Total time*                                       | *3:39* |      |      |
++| *Total time*                                       | *5:31* |      |      |
+ |----------------------------------------------------+--------+------+------|
+-| Development Stories Implemented                    |        | 3:39 |      |
++| Development Stories Implemented                    |        | 5:31 |      |
+ | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
+ | COMPLETED Sort out postgres update problems        |        |      | 0:36 |
+ | COMPLETED Refactor static data initialisation      |        |      | 1:08 |
+-| IMPLEMENTATION Add support for facet settings      |        |      | 1:39 |
++| IMPLEMENTATION Add support for facet settings      |        |      | 3:31 |
+ #+end:
+ 
+ *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+@@ -102,6 +102,9 @@ In general, we want to wait until C++ supports reflection properly
+ appear. For now we just want the bare minimum.
+ 
+ *** IMPLEMENTATION Add support for facet settings                     :story:
++    CLOCK: [2014-11-05 Wed 18:05]--[2014-11-05 Wed 18:49] =>  0:44
++    CLOCK: [2014-11-05 Wed 07:54]--[2014-11-05 Wed 08:51] =>  0:57
++    CLOCK: [2014-11-04 Tue 19:53]--[2014-11-04 Tue 20:04] =>  0:11
+     CLOCK: [2014-11-04 Tue 07:55]--[2014-11-04 Tue 08:46] =>  0:51
+     CLOCK: [2014-11-03 Mon 23:16]--[2014-11-03 Mon 23:20] =>  0:04
+     CLOCK: [2014-11-03 Mon 22:56]--[2014-11-03 Mon 23:09] =>  0:13
+diff --git a/projects/backend/src/types/workflow.cpp b/projects/backend/src/types/workflow.cpp
+index 2d6e8a4..4c7823b 100644
+--- a/projects/backend/src/types/workflow.cpp
++++ b/projects/backend/src/types/workflow.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ #include <iterator>
++#include <boost/throw_exception.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/sml/types/consumption_workflow.hpp"
+diff --git a/projects/cpp/include/dogen/cpp/types/all.hpp b/projects/cpp/include/dogen/cpp/types/all.hpp
+index 3b6f71f..95f2d0f 100644
+--- a/projects/cpp/include/dogen/cpp/types/all.hpp
++++ b/projects/cpp/include/dogen/cpp/types/all.hpp
+@@ -142,3 +142,4 @@
+ #include "dogen/cpp/types/transformer.hpp"
+ #include "dogen/cpp/types/visitor_info.hpp"
+ #include "dogen/cpp/types/workflow.hpp"
++#include "dogen/cpp/types/workflow_error.hpp"
+diff --git a/projects/cpp/include/dogen/cpp/types/formatter_dispatcher.hpp b/projects/cpp/include/dogen/cpp/types/formatter_dispatcher.hpp
+index 2618772..21b1bb6 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatter_dispatcher.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatter_dispatcher.hpp
+@@ -26,24 +26,53 @@
+ #endif
+ 
+ #include <forward_list>
++#include <unordered_map>
+ #include "dogen/cpp/types/registrar.hpp"
+ #include "dogen/formatters/types/file.hpp"
++#include "dogen/formatters/types/general_settings.hpp"
++#include "dogen/cpp/types/facet_settings.hpp"
+ #include "dogen/cpp/types/entity_visitor.hpp"
+-#include "dogen/cpp/types/settings_bundle.hpp"
++#include "dogen/cpp/types/facet_settings.hpp"
++#include "dogen/cpp/types/cpp_settings.hpp"
++#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+ 
+ namespace dogen {
+ namespace cpp {
+ 
+ /**
+- * @brief Responsible for disp
++ * @brief Responsible for dispatching the entity to the appropriate
++ * formatters.
+  */
+-
+ class formatter_dispatcher : public entity_visitor {
++private:
++    /**
++     * @brief Utility container to hold together all of the facet
++     * related bits.
++     */
++    struct facet {
++        std::string id;
++        settings_bundle bundle;
++        std::forward_list<
++            std::shared_ptr<formatters::class_formatter_interface>
++            > class_formatters;
++    };
++
++    /**
++     * @brief Reads all the information in the facet settings and
++     * registrar to build the list of facets.
++     */
++    std::forward_list<facet> build_facets(
++        const registrar& reg,
++        const std::unordered_map<std::string, facet_settings>& fs) const;
++
+ public:
+     ~formatter_dispatcher() noexcept = default;
+ 
+ public:
+-    formatter_dispatcher(const registrar& r, const settings_bundle& s);
++    formatter_dispatcher(const registrar& r,
++        const dogen::formatters::general_settings& gs,
++        const cpp_settings& cs,
++        const std::unordered_map<std::string, facet_settings>& fs);
+ 
+ public:
+     using entity_visitor::visit;
+@@ -65,8 +94,9 @@ public:
+     std::forward_list<dogen::formatters::file> format(const entity& e);
+ 
+ private:
+-    const registrar& registrar_;
+-    const settings_bundle settings_bundle_;
++    const dogen::formatters::general_settings general_settings_;
++    const cpp_settings cpp_settings_;
++    const std::forward_list<facet> facets_;
+     std::forward_list<dogen::formatters::file> files_;
+ };
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/meta_data/facet_settings_factory.hpp b/projects/cpp/include/dogen/cpp/types/meta_data/facet_settings_factory.hpp
+index 335d2cc..7012725 100644
+--- a/projects/cpp/include/dogen/cpp/types/meta_data/facet_settings_factory.hpp
++++ b/projects/cpp/include/dogen/cpp/types/meta_data/facet_settings_factory.hpp
+@@ -36,19 +36,30 @@ namespace meta_data {
+ 
+ class facet_settings_factory {
+ public:
+-    facet_settings_factory() = delete;
++    facet_settings_factory() = default;
+     facet_settings_factory(const facet_settings_factory&) = default;
+     facet_settings_factory(facet_settings_factory&&) = default;
+     ~facet_settings_factory() = default;
+ 
+-public:
++private:
+     /**
+-     * @brief Builds the facet settings for facet from the meta data.
++     * @brief Reads the settings from the meta-data for the supplied
++     * facet id.
++     *
++     * @pre facet id is not qualified.
+      */
+-    facet_settings build(
+-        const std::unordered_map<std::string, facet_settings>& default_settings,
++    facet_settings read_settings(const facet_settings& default_settings,
+         const std::string& facet_id,
+         const boost::property_tree::ptree& meta_data) const;
++
++public:
++    /**
++     * @brief Builds the facet settings from the meta data.
++     */
++    std::unordered_map<std::string, facet_settings> build(
++        const std::unordered_map<std::string, facet_settings>&
++        default_facet_settings_by_facet_id,
++        const boost::property_tree::ptree& meta_data) const;
+ };
+ 
+ } } }
+diff --git a/projects/cpp/include/dogen/cpp/types/registrar.hpp b/projects/cpp/include/dogen/cpp/types/registrar.hpp
+index c7e6660..d198af8 100644
+--- a/projects/cpp/include/dogen/cpp/types/registrar.hpp
++++ b/projects/cpp/include/dogen/cpp/types/registrar.hpp
+@@ -25,8 +25,8 @@
+ #pragma once
+ #endif
+ 
+-#include <list>
+ #include <memory>
++#include <forward_list>
+ #include <unordered_map>
+ #include "dogen/cpp/types/facet_settings.hpp"
+ #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+@@ -36,8 +36,9 @@ namespace cpp {
+ 
+ class registrar {
+ public:
+-    typedef std::list<std::shared_ptr<formatters::class_formatter_interface>>
+-    class_formatters_type;
++    typedef std::forward_list<
++        std::shared_ptr<formatters::class_formatter_interface>
++    > class_formatters_type;
+ 
+ public:
+     /**
+@@ -66,11 +67,12 @@ public:
+      * @brief Returns all default settings for all facets.
+      */
+     const std::unordered_map<std::string, facet_settings>&
+-    default_settings_for_facet() const;
++    default_facet_settings_by_facet_id() const;
+ 
+ private:
+     class_formatters_type class_formatters_;
+-    std::unordered_map<std::string, facet_settings> default_settings_for_facet_;
++    std::unordered_map<std::string, facet_settings>
++    default_facet_settings_by_facet_id_;
+ };
+ 
+ } }
+diff --git a/projects/cpp/include/dogen/cpp/types/workflow.hpp b/projects/cpp/include/dogen/cpp/types/workflow.hpp
+index 733c0f6..5093c8e 100644
+--- a/projects/cpp/include/dogen/cpp/types/workflow.hpp
++++ b/projects/cpp/include/dogen/cpp/types/workflow.hpp
+@@ -26,6 +26,7 @@
+ #endif
+ 
+ #include <memory>
++#include <unordered_map>
+ #include "dogen/cpp/types/registrar.hpp"
+ #include "dogen/backend/types/backend_interface.hpp"
+ #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+@@ -81,11 +82,17 @@ private:
+ 
+ private:
+     /**
+-     * @brief Create a settings bundle
++     * @brief Returns the model's module.
++     *
++     * @pre there must exacly one model module
+      */
+-    settings_bundle create_settings_bundle_activity(
+-        const sml::model& m,
+-        const dogen::formatters::general_settings& gs) const;
++    sml::module obtain_model_module_activity(const sml::model& m) const;
++
++    /**
++     * @brief Create the facet settings
++     */
++    std::unordered_map<std::string, facet_settings>
++    create_facet_settings_activity(const sml::module& m) const;
+ 
+     /**
+      * @brief Creates all the files for a given container of SML
+@@ -103,7 +110,6 @@ private:
+         return r;
+     }
+ 
+-
+ public:
+     std::string id() const override;
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/workflow_error.hpp b/projects/cpp/include/dogen/cpp/types/workflow_error.hpp
+new file mode 100644
+index 0000000..6769ba0
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/workflow_error.hpp
+@@ -0,0 +1,51 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_WORKFLOW_ERROR_HPP
++#define DOGEN_CPP_TYPES_WORKFLOW_ERROR_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace cpp {
++
++class workflow_error : public virtual std::exception, public virtual boost::exception {
++public:
++    workflow_error() = default;
++    ~workflow_error() noexcept = default;
++
++public:
++    workflow_error(const std::string& message) : message_(message) { }
++
++public:
++    const char* what() const noexcept { return(message_.c_str()); }
++
++private:
++    const std::string message_;
++};
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/workflow_error_fwd.hpp b/projects/cpp/include/dogen/cpp/types/workflow_error_fwd.hpp
+new file mode 100644
+index 0000000..0099cc9
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/workflow_error_fwd.hpp
+@@ -0,0 +1,38 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_WORKFLOW_ERROR_FWD_HPP
++#define DOGEN_CPP_TYPES_WORKFLOW_ERROR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace cpp {
++
++class workflow_error;
++
++} }
++
++#endif
+diff --git a/projects/cpp/src/types/formatter_dispatcher.cpp b/projects/cpp/src/types/formatter_dispatcher.cpp
+index 2653e7a..24fadb0 100644
+--- a/projects/cpp/src/types/formatter_dispatcher.cpp
++++ b/projects/cpp/src/types/formatter_dispatcher.cpp
+@@ -23,9 +23,32 @@
+ namespace dogen {
+ namespace cpp {
+ 
+-formatter_dispatcher::
+-formatter_dispatcher(const registrar& r, const settings_bundle& s)
+-    : registrar_(r), settings_bundle_(s) { }
++formatter_dispatcher::formatter_dispatcher(const registrar& r,
++    const dogen::formatters::general_settings& gs,
++    const cpp_settings& cs,
++    const std::unordered_map<std::string, facet_settings>& fs)
++    : general_settings_(gs), cpp_settings_(cs), facets_(build_facets(r, fs)) { }
++
++std::forward_list<formatter_dispatcher::facet>
++formatter_dispatcher::build_facets(const registrar& reg,
++    const std::unordered_map<std::string, facet_settings>& fs) const {
++
++    std::unordered_map<std::string, facet> facet_by_id;
++    for (auto f : reg.class_formatters())
++        facet_by_id[f->facet_id()].class_formatters.push_front(f);
++
++    for (auto pair : fs)
++        facet_by_id[pair.first].settings = pair.second;
++
++    std::forward_list<formatter_dispatcher::facet> r;
++    for (const auto& pair : facet_by_id) {
++        auto f(pair.second);
++        f.id = pair.first;
++        r.push_front(f);
++    }
++
++    return r;
++}
+ 
+ void formatter_dispatcher::visit(const dogen::cpp::class_info& /*c*/) {
+ }
+@@ -46,8 +69,9 @@ void formatter_dispatcher::visit(const dogen::cpp::visitor_info& /*v*/) {
+ }
+ 
+ void formatter_dispatcher::visit(const dogen::cpp::new_class_info& c) {
+-    for (const auto f : registrar_.class_formatters())
+-        files_.push_front(f->format(c, settings_bundle_));
++    for (const auto& fct : facets_)
++        for (const auto fmt : fct.class_formatters()) {}
++            files_.push_front(f->format(c, settings_bundle_));
+ }
+ 
+ void formatter_dispatcher::visit(const dogen::cpp::concept_info& /*c*/) {
+diff --git a/projects/cpp/src/types/meta_data/facet_settings_factory.cpp b/projects/cpp/src/types/meta_data/facet_settings_factory.cpp
+index 586f493..1b9eccd 100644
+--- a/projects/cpp/src/types/meta_data/facet_settings_factory.cpp
++++ b/projects/cpp/src/types/meta_data/facet_settings_factory.cpp
+@@ -45,19 +45,12 @@ namespace dogen {
+ namespace cpp {
+ namespace meta_data {
+ 
+-facet_settings facet_settings_factory::build(
+-    const std::unordered_map<std::string, facet_settings>& default_settings,
++facet_settings facet_settings_factory::read_settings(
++    const facet_settings& default_settings,
+     const std::string& facet_id,
+     const boost::property_tree::ptree& meta_data) const {
+ 
+-    const auto i(default_settings.find(facet_id));
+-    const bool has_default_settings(i != default_settings.end());
+-    if (!has_default_settings) {
+-        BOOST_LOG_SEV(lg, warn) << "Could not find default settings for facet: "
+-                                << facet_id;
+-    }
+-
+-    facet_settings r(has_default_settings ? i->second : facet_settings());
++    facet_settings r(default_settings);
+     sml::meta_data::reader reader(meta_data);
+     const auto enabled_trait(qualify(facet_id, traits::facet::enabled));
+     if (reader.has_key(enabled_trait)) {
+@@ -76,7 +69,21 @@ facet_settings facet_settings_factory::build(
+         const auto value(reader.get(postfix_trait));
+         r.postfix(value);
+     }
++    return r;
++}
+ 
++std::unordered_map<std::string, facet_settings> facet_settings_factory::build(
++    const std::unordered_map<std::string, facet_settings>&
++    default_facet_settings_by_facet_id,
++    const boost::property_tree::ptree& meta_data) const {
++
++    std::unordered_map<std::string, facet_settings> r;
++    for (const auto& pair : default_facet_settings_by_facet_id) {
++        const auto& facet_id(pair.first);
++        const auto& default_settings(pair.second);
++        const auto s(read_settings(default_settings, facet_id, meta_data));
++        r.insert(std::make_pair(facet_id, s));
++    }
+     return r;
+ }
+ 
+diff --git a/projects/cpp/src/types/registrar.cpp b/projects/cpp/src/types/registrar.cpp
+index 0525d99..7707fff 100644
+--- a/projects/cpp/src/types/registrar.cpp
++++ b/projects/cpp/src/types/registrar.cpp
+@@ -49,7 +49,7 @@ void registrar::validate() const {
+ void registrar::register_default_facet_settings(const std::string& facet_id,
+     const facet_settings& s) {
+     const auto pair(std::make_pair(facet_id, s));
+-    const auto result(default_settings_for_facet_.insert(pair));
++    const auto result(default_facet_settings_by_facet_id_.insert(pair));
+     if (!result.second) {
+         BOOST_LOG_SEV(lg, error) << duplicate_facet_id;
+         BOOST_THROW_EXCEPTION(registrar_error(duplicate_facet_id));
+@@ -69,4 +69,9 @@ const registrar::class_formatters_type& registrar::class_formatters() const {
+     return class_formatters_;
+ }
+ 
++const std::unordered_map<std::string, facet_settings>&
++registrar::default_facet_settings_by_facet_id() const {
++    return default_facet_settings_by_facet_id_;
++}
++
+ } }
+diff --git a/projects/cpp/src/types/workflow.cpp b/projects/cpp/src/types/workflow.cpp
+index 1f78ae3..2485c2b 100644
+--- a/projects/cpp/src/types/workflow.cpp
++++ b/projects/cpp/src/types/workflow.cpp
+@@ -18,8 +18,11 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include <boost/throw_exception.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/cpp/types/formatter_dispatcher.hpp"
++#include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
++#include "dogen/cpp/types/workflow_error.hpp"
+ #include "dogen/cpp/types/workflow.hpp"
+ 
+ namespace {
+@@ -29,6 +32,11 @@ const std::string id("cpp.workflow");
+ using namespace dogen::utility::log;
+ static logger lg(logger_factory(id));
+ 
++const std::string model_modules_not_found(
++    "Could not find model module for model: ");
++const std::string multiple_generatable_model_modules(
++    "More than one model module is generatable: ");
++
+ }
+ 
+ namespace dogen {
+@@ -51,11 +59,9 @@ std::forward_list<dogen::formatters::file> workflow::format_entity(
+     return d.format(e);
+ }
+ 
+-settings_bundle workflow::create_settings_bundle_activity(
+-    const sml::model& /*m*/,
+-    const dogen::formatters::general_settings& gs) const {
+-
+-/*    bool found(false);
++sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
++    sml::module r;
++    bool found(false);
+     for (const auto pair : m.modules()) {
+         const auto mod(pair.second);
+         if (mod.generation_type() != sml::generation_types::full_generation ||
+@@ -70,16 +76,28 @@ settings_bundle workflow::create_settings_bundle_activity(
+             BOOST_THROW_EXCEPTION(workflow_error(
+                     multiple_generatable_model_modules + sn));
+         }
++        r = pair.second;
+         found = true;
+-        r = f.build(mod.meta_data());
+     }
+ 
+-*/
+-    settings_bundle r;
+-    r.general_settings(gs);
++    if (!found) {
++        BOOST_LOG_SEV(lg, error) << model_modules_not_found
++                                 << r.name();
++
++        const auto sn(r.name().simple_name());
++        BOOST_THROW_EXCEPTION(workflow_error(model_modules_not_found + sn));
++    }
+     return r;
+ }
+ 
++std::unordered_map<std::string, facet_settings>
++workflow::create_facet_settings_activity(const sml::module& m) const {
++    meta_data::facet_settings_factory f;
++    return f.build(
++        registrar_->default_facet_settings_by_facet_id(),
++        m.meta_data());
++}
++
+ std::string workflow::id() const {
+     return ::id;
+ }
+@@ -109,7 +127,8 @@ std::forward_list<dogen::formatters::file> workflow::generate(
+     const sml::model& m) const {
+     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
+ 
+-    const auto b(create_settings_bundle_activity(m, gs));
++    const auto mod(obtain_model_module_activity(m));
++    create_facet_settings_activity(mod);
+ 
+     std::forward_list<dogen::formatters::file> r;
+     r.splice_after(r.before_begin(),
