@@ -20,6 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -45,7 +46,8 @@ std::string class_header_formatter::formatter_id() const {
 }
 
 dogen::formatters::file class_header_formatter::
-format(const new_class_info& c, const settings_bundle /*s*/) const {
+format(const new_class_info& c, const settings_bundle& /*s*/) const {
+    boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
     dogen::formatters::file r;
 

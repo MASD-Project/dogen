@@ -32,6 +32,9 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
+/**
+ * @brief Creates the C++ domain representation for a class.
+ */
 class class_header_formatter : public formatters::class_formatter_interface {
 public:
     class_header_formatter() = default;
@@ -45,7 +48,7 @@ public:
     std::string formatter_id() const override;
 
     dogen::formatters::file
-    format(const new_class_info& c, const settings_bundle s) const override;
+    format(const new_class_info& c, const settings_bundle& s) const override;
 };
 
 } } } }

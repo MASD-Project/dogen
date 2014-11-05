@@ -17,18 +17,19 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-05 Wed 21:10]
+Clock summary at [2014-11-05 Wed 22:45]
 
-| Headline                                           | Time   |      |      |
-|----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *6:30* |      |      |
-|----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 6:30 |      |
-| IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
-| COMPLETED Sort out postgres update problems        |        |      | 0:36 |
-| COMPLETED Refactor static data initialisation      |        |      | 1:08 |
-| COMPLETED Add support for facet settings           |        |      | 4:10 |
-| COMPLETED Implement factory for c++ settings       |        |      | 0:20 |
+| Headline                                              | Time   |      |      |
+|-------------------------------------------------------+--------+------+------|
+| *Total time*                                          | *7:08* |      |      |
+|-------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                       |        | 7:08 |      |
+| IMPLEMENTATION Sprint and product backlog grooming    |        |      | 0:16 |
+| COMPLETED Sort out postgres update problems           |        |      | 0:36 |
+| COMPLETED Refactor static data initialisation         |        |      | 1:08 |
+| COMPLETED Add support for facet settings              |        |      | 4:10 |
+| COMPLETED Implement factory for c++ settings          |        |      | 0:20 |
+| COMPLETED Copy across boilerplate formatter and specs |        |      | 0:38 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -129,16 +130,19 @@ appear. For now we just want the bare minimum.
 
 Add support for all of the main C++ properties in factory.
 
-*** Refactor types header formatter            :task:refactor:formatters:cpp:
+*** COMPLETED Copy across boilerplate formatter and specs     :task:refactor:
+    CLOSED: [2014-11-05 Wed 22:44]
+    CLOCK: [2014-11-05 Wed 22:24]--[2014-11-05 Wed 22:44] =>  0:20
+    CLOCK: [2014-11-05 Wed 22:05]--[2014-11-05 Wed 22:23] =>  0:18
 
-Make the main types header formatters look like the =om= types
-formatter. This model was deleted around commit 10157ad.
+Seems like we didn't move across the boilerplate formatter and
+associated classes. Move it now from =cpp_formatters=.
 
-This is still not quite right. We need to drive the formatting from
-two things:
+*** Implement class header formatter           :task:refactor:formatters:cpp:
 
-- user options
-- available formatters
+- look at the old =om= types formatter implementation to see if there
+  is any code to scavenge. This model was deleted around commit
+  10157ad.
 
 **** Tidy-up =types_main_header_file_formatter=                        :task:
 

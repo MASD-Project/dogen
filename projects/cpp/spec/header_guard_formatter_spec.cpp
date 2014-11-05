@@ -20,25 +20,30 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/cpp_formatters/types/include_formatter.hpp"
+#include "dogen/cpp/types/formatters/header_guard_formatter.hpp"
 
 namespace {
 
-const std::string empty;
 const std::string test_module("cpp_formatters");
-const std::string test_suite("include_formatter_spec");
-const dogen::cpp::includes empty_includes = dogen::cpp::includes();
+const std::string test_suite("header_guard_formatter_spec");
+const std::string empty;
+const boost::filesystem::path empty_path;
+const boost::filesystem::path non_empty_path("a/file.hpp");
 
-const std::string with_includes(R"(#include <win32/system_inc_1>
-#include <unix/system_inc_2>
-#include "user_inc_1"
-#include "user_inc_2"
+const std::string with_guard(R"(#ifndef A_FILE_HPP
+#define A_FILE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#endif
 )");
 
 }
@@ -46,34 +51,27 @@ const std::string with_includes(R"(#include <win32/system_inc_1>
 using namespace dogen::utility::test;
 using dogen::utility::test::asserter;
 
-BOOST_AUTO_TEST_SUITE(include_formatter)
+BOOST_AUTO_TEST_SUITE(header_guard_formatter)
 
-BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes) {
-    SETUP_TEST_LOG_SOURCE("non_empty_includes_produces_expected_preprocessor_includes");
+BOOST_AUTO_TEST_CASE(non_empty_path_produces_expected_header_guards) {
+    SETUP_TEST_LOG_SOURCE("non_empty_path_produces_expected_header_guards");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-    dogen::cpp::includes i;
-    // FIXME: not using windows formatting for now, problems with
-    // FIXME: boost path.
-    // i.system().push_back("win32\\system_inc_1");
-    i.system().push_back("win32/system_inc_1");
-    i.system().push_back("unix/system_inc_2");
-    i.user().push_back("user_inc_1");
-    i.user().push_back("user_inc_2");
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::cpp_formatters::include_formatter f;
-    f.format(fo, i);
-    BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
+    dogen::cpp::formatters::header_guard_formatter f;
+    f.format_begin(fo, non_empty_path);
+    f.format_end(fo, non_empty_path);
+    const auto r(s.str());
+    BOOST_CHECK(asserter::assert_equals_marker(with_guard, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
-BOOST_AUTO_TEST_CASE(empty_includes_produces_no_preprocessor_includes) {
-    SETUP_TEST_LOG_SOURCE("empty_includes_produces_no_preprocessor_includes");
+BOOST_AUTO_TEST_CASE(empty_path_produces_no_header_guards) {
+    SETUP_TEST_LOG_SOURCE("empty_path_produces_no_header_guards");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     std::ostringstream s;
@@ -81,9 +79,11 @@ BOOST_AUTO_TEST_CASE(empty_includes_produces_no_preprocessor_includes) {
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::cpp_formatters::include_formatter f;
-    f.format(fo, empty_includes);
-    BOOST_CHECK(asserter::assert_equals_marker(empty, s.str()));
+    dogen::cpp::formatters::header_guard_formatter f;
+    f.format_begin(s, empty_path);
+    f.format_end(s, empty_path);
+    const auto r(s.str());
+    BOOST_CHECK(asserter::assert_equals_marker(empty, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 

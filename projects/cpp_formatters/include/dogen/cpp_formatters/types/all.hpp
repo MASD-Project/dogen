@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp_formatters/types/boilerplate_formatter.hpp"
 #include "dogen/cpp_formatters/types/class_declaration.hpp"
 #include "dogen/cpp_formatters/types/class_implementation.hpp"
 #include "dogen/cpp_formatters/types/cpp_formatters.hpp"
@@ -36,10 +35,8 @@
 #include "dogen/cpp_formatters/types/generator_implementation.hpp"
 #include "dogen/cpp_formatters/types/hash_header.hpp"
 #include "dogen/cpp_formatters/types/hash_implementation.hpp"
-#include "dogen/cpp_formatters/types/header_guard_formatter.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
 #include "dogen/cpp_formatters/types/include_cmakelists.hpp"
-#include "dogen/cpp_formatters/types/include_formatter.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/inserter_implementation.hpp"
