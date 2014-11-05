@@ -2168,7 +2168,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-48,-18.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.4738,-19.35;-47.25,1.8"/>
+        <dia:rectangle val="-57.4737,-19.35;-47.25,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2667,7 +2667,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#contents#</dia:string>
+            <dia:string>#content#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -2676,7 +2676,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Contents of the file.#</dia:string>
+            <dia:string>#Content of the file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -41,7 +41,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("relative_path", v.relative_path_.generic_string());
     ar << make_nvp("absolute_path", v.absolute_path_.generic_string());
-    ar << make_nvp("contents", v.contents_);
+    ar << make_nvp("content", v.content_);
     ar << make_nvp("overwrite", v.overwrite_);
 }
 
@@ -55,7 +55,7 @@ void load(Archive& ar,
     std::string absolute_path_tmp;
     ar >> make_nvp("absolute_path", absolute_path_tmp);
     v.absolute_path_ = absolute_path_tmp;
-    ar >> make_nvp("contents", v.contents_);
+    ar >> make_nvp("content", v.content_);
     ar >> make_nvp("overwrite", v.overwrite_);
 }
 

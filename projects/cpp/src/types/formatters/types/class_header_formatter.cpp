@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
@@ -29,6 +31,10 @@ const std::string formatter_id("cpp.formatters.types.class_header_formatter");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(formatter_id));
+
+// FIXME
+const dogen::cpp::includes empty_includes = dogen::cpp::includes();
+const boost::filesystem::path empty_path;
 
 }
 
@@ -46,12 +52,25 @@ std::string class_header_formatter::formatter_id() const {
 }
 
 dogen::formatters::file class_header_formatter::
-format(const new_class_info& c, const settings_bundle& /*s*/) const {
+format(const new_class_info& c, const settings_bundle& sb) const {
     boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
-    dogen::formatters::file r;
+
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::formatters::indent_filter::push(fo, 4);
+    fo.push(s);
+
+    dogen::cpp::formatters::boilerplate_formatter f;
+    const auto a(sb.general_settings().annotation());
+    f.format_begin(fo, a, empty_includes, empty_path);
+    f.format_end(fo, a, empty_path);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
+    dogen::formatters::file r;
+    r.content(s.str());
+
+    BOOST_LOG_SEV(lg, debug) << "content: " << r.content();
     return r;
 }
 

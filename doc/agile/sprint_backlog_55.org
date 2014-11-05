@@ -17,19 +17,20 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-05 Wed 22:45]
+Clock summary at [2014-11-05 Wed 22:59]
 
 | Headline                                              | Time   |      |      |
 |-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *7:08* |      |      |
+| *Total time*                                          | *7:21* |      |      |
 |-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 7:08 |      |
+| Development Stories Implemented                       |        | 7:21 |      |
 | IMPLEMENTATION Sprint and product backlog grooming    |        |      | 0:16 |
 | COMPLETED Sort out postgres update problems           |        |      | 0:36 |
 | COMPLETED Refactor static data initialisation         |        |      | 1:08 |
 | COMPLETED Add support for facet settings              |        |      | 4:10 |
 | COMPLETED Implement factory for c++ settings          |        |      | 0:20 |
 | COMPLETED Copy across boilerplate formatter and specs |        |      | 0:38 |
+| IMPLEMENTATION Implement class header formatter       |        |      | 0:13 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -138,7 +139,8 @@ Add support for all of the main C++ properties in factory.
 Seems like we didn't move across the boilerplate formatter and
 associated classes. Move it now from =cpp_formatters=.
 
-*** Implement class header formatter           :task:refactor:formatters:cpp:
+*** IMPLEMENTATION Implement class header formatter :task:refactor:formatters:cpp:
+    CLOCK: [2014-11-05 Wed 22:46]--[2014-11-05 Wed 22:59] =>  0:13
 
 - look at the old =om= types formatter implementation to see if there
   is any code to scavenge. This model was deleted around commit

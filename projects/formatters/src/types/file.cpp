@@ -29,31 +29,31 @@ file::file()
 file::file(file&& rhs)
     : relative_path_(std::move(rhs.relative_path_)),
       absolute_path_(std::move(rhs.absolute_path_)),
-      contents_(std::move(rhs.contents_)),
+      content_(std::move(rhs.content_)),
       overwrite_(std::move(rhs.overwrite_)) { }
 
 file::file(
     const boost::filesystem::path& relative_path,
     const boost::filesystem::path& absolute_path,
-    const std::string& contents,
+    const std::string& content,
     const bool overwrite)
     : relative_path_(relative_path),
       absolute_path_(absolute_path),
-      contents_(contents),
+      content_(content),
       overwrite_(overwrite) { }
 
 void file::swap(file& other) noexcept {
     using std::swap;
     swap(relative_path_, other.relative_path_);
     swap(absolute_path_, other.absolute_path_);
-    swap(contents_, other.contents_);
+    swap(content_, other.content_);
     swap(overwrite_, other.overwrite_);
 }
 
 bool file::operator==(const file& rhs) const {
     return relative_path_ == rhs.relative_path_ &&
         absolute_path_ == rhs.absolute_path_ &&
-        contents_ == rhs.contents_ &&
+        content_ == rhs.content_ &&
         overwrite_ == rhs.overwrite_;
 }
 
@@ -95,20 +95,20 @@ void file::absolute_path(const boost::filesystem::path&& v) {
     absolute_path_ = std::move(v);
 }
 
-const std::string& file::contents() const {
-    return contents_;
+const std::string& file::content() const {
+    return content_;
 }
 
-std::string& file::contents() {
-    return contents_;
+std::string& file::content() {
+    return content_;
 }
 
-void file::contents(const std::string& v) {
-    contents_ = v;
+void file::content(const std::string& v) {
+    content_ = v;
 }
 
-void file::contents(const std::string&& v) {
-    contents_ = std::move(v);
+void file::content(const std::string&& v) {
+    content_ = std::move(v);
 }
 
 bool file::overwrite() const {

@@ -51,7 +51,7 @@ void file_generator::
 populate(const unsigned int position, result_type& v) {
     v.relative_path(create_boost_filesystem_path(position + 0));
     v.absolute_path(create_boost_filesystem_path(position + 1));
-    v.contents(create_std_string(position + 2));
+    v.content(create_std_string(position + 2));
     v.overwrite(create_bool(position + 3));
 }
 

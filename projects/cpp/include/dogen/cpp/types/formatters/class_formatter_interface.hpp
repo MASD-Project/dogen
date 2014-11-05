@@ -56,7 +56,7 @@ public:
      * @brief Generate a c++ representation for the type.
      */
     virtual dogen::formatters::file
-    format(const new_class_info& c, const settings_bundle& s) const = 0;
+    format(const new_class_info& c, const settings_bundle& sb) const = 0;
 };
 
 } } }

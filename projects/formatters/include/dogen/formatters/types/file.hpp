@@ -51,7 +51,7 @@ public:
     file(
         const boost::filesystem::path& relative_path,
         const boost::filesystem::path& absolute_path,
-        const std::string& contents,
+        const std::string& content,
         const bool overwrite);
 
 private:
@@ -83,13 +83,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Contents of the file.
+     * @brief Content of the file.
      */
     /**@{*/
-    const std::string& contents() const;
-    std::string& contents();
-    void contents(const std::string& v);
-    void contents(const std::string&& v);
+    const std::string& content() const;
+    std::string& content();
+    void content(const std::string& v);
+    void content(const std::string&& v);
     /**@}*/
 
     /**
@@ -116,7 +116,7 @@ public:
 private:
     boost::filesystem::path relative_path_;
     boost::filesystem::path absolute_path_;
-    std::string contents_;
+    std::string content_;
     bool overwrite_;
 };
 
