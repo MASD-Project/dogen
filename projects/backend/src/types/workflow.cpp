@@ -19,6 +19,7 @@
  *
  */
 #include <iterator>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"

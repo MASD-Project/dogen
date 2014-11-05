@@ -36,18 +36,29 @@ namespace meta_data {
 
 class facet_settings_factory {
 public:
-    facet_settings_factory() = delete;
+    facet_settings_factory() = default;
     facet_settings_factory(const facet_settings_factory&) = default;
     facet_settings_factory(facet_settings_factory&&) = default;
     ~facet_settings_factory() = default;
 
+private:
+    /**
+     * @brief Reads the settings from the meta-data for the supplied
+     * facet id.
+     *
+     * @pre facet id is not qualified.
+     */
+    facet_settings read_settings(const facet_settings& default_settings,
+        const std::string& facet_id,
+        const boost::property_tree::ptree& meta_data) const;
+
 public:
     /**
-     * @brief Builds the facet settings for facet from the meta data.
+     * @brief Builds the facet settings from the meta data.
      */
-    facet_settings build(
-        const std::unordered_map<std::string, facet_settings>& default_settings,
-        const std::string& facet_id,
+    std::unordered_map<std::string, facet_settings> build(
+        const std::unordered_map<std::string, facet_settings>&
+        default_facet_settings_by_facet_id,
         const boost::property_tree::ptree& meta_data) const;
 };
 

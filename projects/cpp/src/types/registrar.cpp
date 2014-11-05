@@ -49,7 +49,7 @@ void registrar::validate() const {
 void registrar::register_default_facet_settings(const std::string& facet_id,
     const facet_settings& s) {
     const auto pair(std::make_pair(facet_id, s));
-    const auto result(default_settings_for_facet_.insert(pair));
+    const auto result(default_facet_settings_by_facet_id_.insert(pair));
     if (!result.second) {
         BOOST_LOG_SEV(lg, error) << duplicate_facet_id;
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_facet_id));
@@ -62,11 +62,16 @@ void registrar::register_formatter(
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    class_formatters_.push_back(f);
+    class_formatters_.push_front(f);
 }
 
 const registrar::class_formatters_type& registrar::class_formatters() const {
     return class_formatters_;
+}
+
+const std::unordered_map<std::string, facet_settings>&
+registrar::default_facet_settings_by_facet_id() const {
+    return default_facet_settings_by_facet_id_;
 }
 
 } }

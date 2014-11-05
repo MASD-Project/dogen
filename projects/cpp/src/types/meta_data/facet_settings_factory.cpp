@@ -45,19 +45,12 @@ namespace dogen {
 namespace cpp {
 namespace meta_data {
 
-facet_settings facet_settings_factory::build(
-    const std::unordered_map<std::string, facet_settings>& default_settings,
+facet_settings facet_settings_factory::read_settings(
+    const facet_settings& default_settings,
     const std::string& facet_id,
     const boost::property_tree::ptree& meta_data) const {
 
-    const auto i(default_settings.find(facet_id));
-    const bool has_default_settings(i != default_settings.end());
-    if (!has_default_settings) {
-        BOOST_LOG_SEV(lg, warn) << "Could not find default settings for facet: "
-                                << facet_id;
-    }
-
-    facet_settings r(has_default_settings ? i->second : facet_settings());
+    facet_settings r(default_settings);
     sml::meta_data::reader reader(meta_data);
     const auto enabled_trait(qualify(facet_id, traits::facet::enabled));
     if (reader.has_key(enabled_trait)) {
@@ -76,7 +69,21 @@ facet_settings facet_settings_factory::build(
         const auto value(reader.get(postfix_trait));
         r.postfix(value);
     }
+    return r;
+}
 
+std::unordered_map<std::string, facet_settings> facet_settings_factory::build(
+    const std::unordered_map<std::string, facet_settings>&
+    default_facet_settings_by_facet_id,
+    const boost::property_tree::ptree& meta_data) const {
+
+    std::unordered_map<std::string, facet_settings> r;
+    for (const auto& pair : default_facet_settings_by_facet_id) {
+        const auto& facet_id(pair.first);
+        const auto& default_settings(pair.second);
+        const auto s(read_settings(default_settings, facet_id, meta_data));
+        r.insert(std::make_pair(facet_id, s));
+    }
     return r;
 }
 

@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <memory>
+#include <forward_list>
 #include <unordered_map>
 #include "dogen/cpp/types/facet_settings.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
@@ -36,8 +36,9 @@ namespace cpp {
 
 class registrar {
 public:
-    typedef std::list<std::shared_ptr<formatters::class_formatter_interface>>
-    class_formatters_type;
+    typedef std::forward_list<
+        std::shared_ptr<formatters::class_formatter_interface>
+    > class_formatters_type;
 
 public:
     /**
@@ -66,11 +67,12 @@ public:
      * @brief Returns all default settings for all facets.
      */
     const std::unordered_map<std::string, facet_settings>&
-    default_settings_for_facet() const;
+    default_facet_settings_by_facet_id() const;
 
 private:
     class_formatters_type class_formatters_;
-    std::unordered_map<std::string, facet_settings> default_settings_for_facet_;
+    std::unordered_map<std::string, facet_settings>
+    default_facet_settings_by_facet_id_;
 };
 
 } }

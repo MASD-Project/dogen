@@ -17,17 +17,17 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-04 Tue 08:46]
+Clock summary at [2014-11-05 Wed 20:47]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *3:39* |      |      |
+| *Total time*                                       | *6:10* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 3:39 |      |
+| Development Stories Implemented                    |        | 6:10 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
 | COMPLETED Sort out postgres update problems        |        |      | 0:36 |
 | COMPLETED Refactor static data initialisation      |        |      | 1:08 |
-| IMPLEMENTATION Add support for facet settings      |        |      | 1:39 |
+| COMPLETED Add support for facet settings           |        |      | 4:10 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -101,7 +101,13 @@ In general, we want to wait until C++ supports reflection properly
 (C++ 17 hopefully) at which point proper DI libraries will start to
 appear. For now we just want the bare minimum.
 
-*** IMPLEMENTATION Add support for facet settings                     :story:
+*** COMPLETED Add support for facet settings                          :story:
+    CLOSED: [2014-11-05 Wed 20:47]
+    CLOCK: [2014-11-05 Wed 20:21]--[2014-11-05 Wed 20:47] =>  0:26
+    CLOCK: [2014-11-05 Wed 19:46]--[2014-11-05 Wed 19:59] =>  0:13
+    CLOCK: [2014-11-05 Wed 18:05]--[2014-11-05 Wed 18:49] =>  0:44
+    CLOCK: [2014-11-05 Wed 07:54]--[2014-11-05 Wed 08:51] =>  0:57
+    CLOCK: [2014-11-04 Tue 19:53]--[2014-11-04 Tue 20:04] =>  0:11
     CLOCK: [2014-11-04 Tue 07:55]--[2014-11-04 Tue 08:46] =>  0:51
     CLOCK: [2014-11-03 Mon 23:16]--[2014-11-03 Mon 23:20] =>  0:04
     CLOCK: [2014-11-03 Mon 22:56]--[2014-11-03 Mon 23:09] =>  0:13

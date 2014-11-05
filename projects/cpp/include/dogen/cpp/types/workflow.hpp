@@ -26,10 +26,13 @@
 #endif
 
 #include <memory>
-#include "dogen/cpp/types/registrar.hpp"
+#include <unordered_map>
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/cpp/types/formatter_facade.hpp"
+#include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/cpp/types/transformer.hpp"
+#include "dogen/cpp/types/registrar.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -77,15 +80,26 @@ private:
      * @brief Formats all files for the entity.
      */
     std::forward_list<dogen::formatters::file> format_entity(
-        const settings_bundle& s, const entity& e) const;
+        const formatter_facade& ff, const entity& e) const;
 
 private:
     /**
-     * @brief Create a settings bundle
+     * @brief Returns the model's module.
+     *
+     * @pre there must exacly one model module
      */
-    settings_bundle create_settings_bundle_activity(
-        const sml::model& m,
-        const dogen::formatters::general_settings& gs) const;
+    sml::module obtain_model_module_activity(const sml::model& m) const;
+
+    /**
+     * @brief Create the facet settings
+     */
+    std::unordered_map<std::string, facet_settings>
+    create_facet_settings_activity(const sml::module& m) const;
+
+    /**
+     * @brief Create the c++ settings
+     */
+    cpp_settings create_cpp_settings_activity(const sml::module& m) const;
 
     /**
      * @brief Creates all the files for a given container of SML
@@ -94,15 +108,14 @@ private:
     template<typename AssociativeContainerOfElement>
     std::forward_list<dogen::formatters::file>
     create_files_from_sml_container_activity(const sml::model& m,
-        const settings_bundle& s,
+        const formatter_facade& ff,
         const AssociativeContainerOfElement& c) const {
         const auto entities(transform_sml_elements(m, c));
         std::forward_list<dogen::formatters::file> r;
         for (const auto e : entities)
-            r.splice_after(r.before_begin(), format_entity(s, *e));
+            r.splice_after(r.before_begin(), format_entity(ff, *e));
         return r;
     }
-
 
 public:
     std::string id() const override;

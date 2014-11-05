@@ -40,7 +40,7 @@
 #include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/flat_name_builder.hpp"
-#include "dogen/cpp/types/formatter_dispatcher.hpp"
+#include "dogen/cpp/types/formatter_facade.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
@@ -142,3 +142,4 @@
 #include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/cpp/types/workflow.hpp"
+#include "dogen/cpp/types/workflow_error.hpp"
