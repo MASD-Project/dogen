@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -99,9 +100,9 @@ workflow::create_facet_settings_activity(const sml::module& m) const {
 }
 
 cpp_settings
-workflow::create_cpp_settings_activity(const sml::module& /*m*/) const {
-    cpp_settings r;
-    return r;
+workflow::create_cpp_settings_activity(const sml::module& m) const {
+    meta_data::cpp_settings_factory f;
+    return f.build(m.meta_data());
 }
 
 std::string workflow::id() const {

@@ -43,7 +43,8 @@ std::ostream& operator<<(std::ostream& s, const cpp_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::cpp_settings\"" << ", "
-      << "\"split_project\": " << "\"" << tidy_up_string(v.split_project()) << "\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"split_project\": " << v.split_project() << ", "
       << "\"source_directory\": " << "\"" << tidy_up_string(v.source_directory()) << "\"" << ", "
       << "\"include_directory\": " << "\"" << tidy_up_string(v.include_directory()) << "\"" << ", "
       << "\"header_file_extension\": " << "\"" << tidy_up_string(v.header_file_extension()) << "\"" << ", "

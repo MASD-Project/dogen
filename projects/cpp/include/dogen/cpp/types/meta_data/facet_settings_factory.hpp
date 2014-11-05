@@ -34,6 +34,9 @@ namespace dogen {
 namespace cpp {
 namespace meta_data {
 
+/**
+ * @brief Constructs settings for all facets.
+ */
 class facet_settings_factory {
 public:
     facet_settings_factory() = default;

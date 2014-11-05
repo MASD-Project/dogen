@@ -23,14 +23,14 @@
 
 namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
-}
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
 }
 
 }
@@ -42,13 +42,14 @@ cpp_settings_generator::cpp_settings_generator() : position_(0) { }
 
 void cpp_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.split_project(create_std_string(position + 0));
-    v.source_directory(create_std_string(position + 1));
-    v.include_directory(create_std_string(position + 2));
-    v.header_file_extension(create_std_string(position + 3));
-    v.implementation_file_extension(create_std_string(position + 4));
-    v.enable_facet_folders(create_bool(position + 5));
-    v.enable_unique_file_names(create_bool(position + 6));
+    v.enabled(create_bool(position + 0));
+    v.split_project(create_bool(position + 1));
+    v.source_directory(create_std_string(position + 2));
+    v.include_directory(create_std_string(position + 3));
+    v.header_file_extension(create_std_string(position + 4));
+    v.implementation_file_extension(create_std_string(position + 5));
+    v.enable_facet_folders(create_bool(position + 6));
+    v.enable_unique_file_names(create_bool(position + 7));
 }
 
 cpp_settings_generator::result_type

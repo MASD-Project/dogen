@@ -38,6 +38,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::cpp_settings& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("split_project", v.split_project_);
     ar << make_nvp("source_directory", v.source_directory_);
     ar << make_nvp("include_directory", v.include_directory_);
@@ -51,6 +52,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::cpp_settings& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("split_project", v.split_project_);
     ar >> make_nvp("source_directory", v.source_directory_);
     ar >> make_nvp("include_directory", v.include_directory_);

@@ -17,17 +17,18 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-05 Wed 20:47]
+Clock summary at [2014-11-05 Wed 21:10]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *6:10* |      |      |
+| *Total time*                                       | *6:30* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 6:10 |      |
+| Development Stories Implemented                    |        | 6:30 |      |
 | IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:16 |
 | COMPLETED Sort out postgres update problems        |        |      | 0:36 |
 | COMPLETED Refactor static data initialisation      |        |      | 1:08 |
 | COMPLETED Add support for facet settings           |        |      | 4:10 |
+| COMPLETED Implement factory for c++ settings       |        |      | 0:20 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -121,6 +122,12 @@ appear. For now we just want the bare minimum.
 - supply all settings to formatter dispatcher, including map of facet
   settings by facet
 - build the settings bundle in dispatcher
+
+*** COMPLETED Implement factory for c++ settings                      :story:
+    CLOSED: [2014-11-05 Wed 21:10]
+    CLOCK: [2014-11-05 Wed 20:50]--[2014-11-05 Wed 21:10] =>  0:20
+
+Add support for all of the main C++ properties in factory.
 
 *** Refactor types header formatter            :task:refactor:formatters:cpp:
 

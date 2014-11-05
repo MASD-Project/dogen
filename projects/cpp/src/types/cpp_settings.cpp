@@ -24,18 +24,22 @@ namespace dogen {
 namespace cpp {
 
 cpp_settings::cpp_settings()
-    : enable_facet_folders_(static_cast<bool>(0)),
+    : enabled_(static_cast<bool>(0)),
+      split_project_(static_cast<bool>(0)),
+      enable_facet_folders_(static_cast<bool>(0)),
       enable_unique_file_names_(static_cast<bool>(0)) { }
 
 cpp_settings::cpp_settings(
-    const std::string& split_project,
+    const bool enabled,
+    const bool split_project,
     const std::string& source_directory,
     const std::string& include_directory,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
     const bool enable_facet_folders,
     const bool enable_unique_file_names)
-    : split_project_(split_project),
+    : enabled_(enabled),
+      split_project_(split_project),
       source_directory_(source_directory),
       include_directory_(include_directory),
       header_file_extension_(header_file_extension),
@@ -45,6 +49,7 @@ cpp_settings::cpp_settings(
 
 void cpp_settings::swap(cpp_settings& other) noexcept {
     using std::swap;
+    swap(enabled_, other.enabled_);
     swap(split_project_, other.split_project_);
     swap(source_directory_, other.source_directory_);
     swap(include_directory_, other.include_directory_);
@@ -55,7 +60,8 @@ void cpp_settings::swap(cpp_settings& other) noexcept {
 }
 
 bool cpp_settings::operator==(const cpp_settings& rhs) const {
-    return split_project_ == rhs.split_project_ &&
+    return enabled_ == rhs.enabled_ &&
+        split_project_ == rhs.split_project_ &&
         source_directory_ == rhs.source_directory_ &&
         include_directory_ == rhs.include_directory_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
@@ -70,20 +76,20 @@ cpp_settings& cpp_settings::operator=(cpp_settings other) {
     return *this;
 }
 
-const std::string& cpp_settings::split_project() const {
+bool cpp_settings::enabled() const {
+    return enabled_;
+}
+
+void cpp_settings::enabled(const bool v) {
+    enabled_ = v;
+}
+
+bool cpp_settings::split_project() const {
     return split_project_;
 }
 
-std::string& cpp_settings::split_project() {
-    return split_project_;
-}
-
-void cpp_settings::split_project(const std::string& v) {
+void cpp_settings::split_project(const bool v) {
     split_project_ = v;
-}
-
-void cpp_settings::split_project(const std::string&& v) {
-    split_project_ = std::move(v);
 }
 
 const std::string& cpp_settings::source_directory() const {

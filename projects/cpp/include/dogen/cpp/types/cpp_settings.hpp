@@ -43,7 +43,8 @@ public:
 
 public:
     cpp_settings(
-        const std::string& split_project,
+        const bool enabled,
+        const bool split_project,
         const std::string& source_directory,
         const std::string& include_directory,
         const std::string& header_file_extension,
@@ -59,10 +60,11 @@ private:
     friend void boost::serialization::load(Archive& ar, cpp_settings& v, unsigned int version);
 
 public:
-    const std::string& split_project() const;
-    std::string& split_project();
-    void split_project(const std::string& v);
-    void split_project(const std::string&& v);
+    bool enabled() const;
+    void enabled(const bool v);
+
+    bool split_project() const;
+    void split_project(const bool v);
 
     const std::string& source_directory() const;
     std::string& source_directory();
@@ -101,7 +103,8 @@ public:
     cpp_settings& operator=(cpp_settings other);
 
 private:
-    std::string split_project_;
+    bool enabled_;
+    bool split_project_;
     std::string source_directory_;
     std::string include_directory_;
     std::string header_file_extension_;

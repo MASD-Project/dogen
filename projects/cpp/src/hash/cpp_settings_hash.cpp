@@ -37,6 +37,7 @@ namespace cpp {
 std::size_t cpp_settings_hasher::hash(const cpp_settings&v) {
     std::size_t seed(0);
 
+    combine(seed, v.enabled());
     combine(seed, v.split_project());
     combine(seed, v.source_directory());
     combine(seed, v.include_directory());
