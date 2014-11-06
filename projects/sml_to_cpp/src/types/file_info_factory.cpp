@@ -30,7 +30,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.file_info_factory"));
+auto lg(logger_factory("sml_to_cpp.file_info_factory"));
 
 const std::string empty;
 const std::string dot(".");

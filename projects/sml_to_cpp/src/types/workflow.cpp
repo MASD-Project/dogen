@@ -34,7 +34,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.workflow"));
+auto lg(logger_factory("sml_to_cpp.workflow"));
 
 const std::string includer_name("all");
 const std::string registrar_name("registrar");
