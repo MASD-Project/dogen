@@ -27,9 +27,9 @@ namespace meta_data {
 const std::string traits::bool_true("true");
 const std::string traits::bool_false("false");
 
-const std::string traits::copyright_holder("COPYRIGHT");
-const std::string traits::licence_name("LICENCE");
-const std::string traits::modeline_group_name("MODELINE_GROUP");
+const std::string traits::copyright_holder("copyright");
+const std::string traits::licence_name("licence");
+const std::string traits::modeline_group_name("modeline_group");
 const std::string traits::generate_preamble("generate_preamble");
 
 const std::string traits::code_generation_marker::add_date_time(
