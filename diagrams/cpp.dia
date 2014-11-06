@@ -4268,7 +4268,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="112,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.620000000000001"/>
+        <dia:real val="12.619999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4936,7 +4936,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="92,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.5850000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15.600000000000003"/>
@@ -6790,7 +6790,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-28,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.05,25.95;2.595,66.15"/>
+        <dia:rectangle val="-28.05,25.95;2.595,68.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6799,10 +6799,10 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-28,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.545000000000002"/>
+        <dia:real val="30.544999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="40.100000000000001"/>
+        <dia:real val="42.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6864,7 +6864,10 @@ the heavy use of inheritance.
 This is why we settled on something which duplicates quite a bit of SML; it
 seems like the least bad approach.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN licence=gpl_v3
+#DOGEN copyright=Copyright(C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#DOGEN modeline_group=emacs#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -8474,7 +8477,7 @@ is responsible for.#</dia:string>
         <dia:point val="306,157"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="24.754999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -12269,7 +12272,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="119,95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.7924999999999995"/>
+        <dia:real val="6.7925000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -12571,7 +12574,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="144,157.083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.254999999999999"/>
+        <dia:real val="13.255000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -12904,7 +12907,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="165,163.083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.580000000000002"/>
+        <dia:real val="18.579999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -13015,7 +13018,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="144,169.083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.919999999999998"/>
+        <dia:real val="13.92"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -13237,7 +13240,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="165,169.083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.684999999999999"/>
+        <dia:real val="15.685"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -14155,7 +14158,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="210,157"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.580000000000002"/>
+        <dia:real val="18.579999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -14749,7 +14752,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="257,157"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.580000000000002"/>
+        <dia:real val="18.579999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -15343,7 +15346,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="305,183"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.580000000000002"/>
+        <dia:real val="18.579999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16243,7 +16246,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="210,183"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.580000000000002"/>
+        <dia:real val="18.579999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16726,7 +16729,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="277,124"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="22.829999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -17731,7 +17734,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="142,115"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.380000000000003"/>
+        <dia:real val="19.379999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.5"/>
@@ -17792,7 +17795,7 @@ grammar of the C++-11 programming language.
         <dia:real val="15.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -17847,7 +17850,7 @@ C++ language.
         <dia:real val="14.76"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -17902,7 +17905,7 @@ C++ language.
         <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -17957,7 +17960,7 @@ of the C++ language.
         <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -18012,7 +18015,7 @@ C++ language.
         <dia:real val="14.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -18067,7 +18070,7 @@ C++ language.
         <dia:real val="15.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -18116,7 +18119,7 @@ facet of the C++ language.
         <dia:point val="335,82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5025000000000013"/>
+        <dia:real val="8.5024999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -20126,7 +20129,7 @@ main.#</dia:string>
         <dia:point val="229,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.807500000000001"/>
+        <dia:real val="9.8074999999999992"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -20449,7 +20452,7 @@ main.#</dia:string>
         <dia:point val="223.528,71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="223.477,55.25;234.654,71.8"/>
+        <dia:rectangle val="223.478,55.25;234.654,71.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23308,7 +23311,7 @@ main.#</dia:string>
         <dia:point val="165,175.083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7700000000000005"/>
+        <dia:real val="4.7699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23419,7 +23422,7 @@ main.#</dia:string>
         <dia:point val="190,162"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7700000000000005"/>
+        <dia:real val="4.7699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23530,7 +23533,7 @@ main.#</dia:string>
         <dia:point val="190,188"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7700000000000005"/>
+        <dia:real val="4.7699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23641,7 +23644,7 @@ main.#</dia:string>
         <dia:point val="235,188"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7700000000000005"/>
+        <dia:real val="4.7699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23752,7 +23755,7 @@ main.#</dia:string>
         <dia:point val="236,162"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7700000000000005"/>
+        <dia:real val="4.7699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23863,7 +23866,7 @@ main.#</dia:string>
         <dia:point val="284,188"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7700000000000005"/>
+        <dia:real val="4.7699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23974,7 +23977,7 @@ main.#</dia:string>
         <dia:point val="311,115"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7700000000000005"/>
+        <dia:real val="4.7699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24085,7 +24088,7 @@ main.#</dia:string>
         <dia:point val="292,105"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.2775000000000007"/>
+        <dia:real val="7.2774999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
