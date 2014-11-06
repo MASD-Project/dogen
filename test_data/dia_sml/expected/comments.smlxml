@@ -410,6 +410,7 @@ third line with &quot;quote&quot;
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="24" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
@@ -599,6 +600,7 @@ a second line
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>11</bucket_count>

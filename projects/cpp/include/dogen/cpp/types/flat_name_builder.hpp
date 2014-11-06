@@ -52,7 +52,7 @@ public:
      * into a list of strings with C++ namespaces.
      */
     std::list<std::string>
-    to_namespace_list(const sml::model& m, const sml::qname& qn) const;
+    namespace_list(const sml::model& m, const sml::qname& qn) const;
 
     /**
      * @brief Returns the file name for the given qualified name and facet.

@@ -317,6 +317,7 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="26" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
@@ -410,6 +411,7 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>11</bucket_count>
@@ -502,6 +504,7 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>11</bucket_count>

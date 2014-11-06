@@ -945,6 +945,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="25" tracking_level="0" version="0">
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -1107,6 +1108,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -1238,6 +1240,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -1398,6 +1401,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -1560,6 +1564,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>11</bucket_count>
@@ -1671,6 +1676,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -1800,6 +1806,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -1962,6 +1969,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -2122,6 +2130,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -2282,6 +2291,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>11</bucket_count>
@@ -2416,6 +2426,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>11</bucket_count>
@@ -2571,6 +2582,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -2733,6 +2745,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -2893,6 +2906,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>11</bucket_count>
@@ -3035,6 +3049,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>3</count>
 					<bucket_count>11</bucket_count>
@@ -3229,6 +3244,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -3358,6 +3374,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>11</bucket_count>
@@ -3449,6 +3466,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>11</bucket_count>
@@ -3540,6 +3558,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>11</bucket_count>
@@ -3662,6 +3681,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>3</count>
 					<bucket_count>11</bucket_count>
@@ -3841,6 +3861,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>2</count>
 					<bucket_count>11</bucket_count>
@@ -4003,6 +4024,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>11</bucket_count>
@@ -4148,6 +4170,7 @@ in the context of inheritance.
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>11</bucket_count>

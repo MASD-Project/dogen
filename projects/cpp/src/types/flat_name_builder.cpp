@@ -87,7 +87,7 @@ filename_for_qname(const boost::property_tree::ptree& meta_data,
 }
 
 std::list<std::string> flat_name_builder::
-to_namespace_list(const sml::model& m, const sml::qname& qn) const {
+namespace_list(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
     // if there is no module name, it won't contribute to the namespaces.
@@ -109,7 +109,7 @@ to_namespace_list(const sml::model& m, const sml::qname& qn) const {
 
 std::string flat_name_builder::
 qualified_name(const sml::model& m, const sml::qname& qn) const {
-    std::list<std::string> l(to_namespace_list(m, qn));
+    std::list<std::string> l(namespace_list(m, qn));
     l.push_back(qn.simple_name());
     return boost::algorithm::join(l, scope_operator);
 }
@@ -141,7 +141,7 @@ complete_name(const sml::model& m, const sml::nested_qname& nqn,
     lambda('>');
 }
 
-std::string identifiable_name(const std::string& n) {
+std::string flat_name_builder::identifiable_name(const std::string& n) const {
     std::string r(n);
 
     boost::replace_all(r, scope_operator, separator);

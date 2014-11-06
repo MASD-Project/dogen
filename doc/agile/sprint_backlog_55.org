@@ -17,20 +17,21 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-05 Wed 22:59]
+Clock summary at [2014-11-06 Thu 22:19]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *7:21* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                       |        | 7:21 |      |
-| IMPLEMENTATION Sprint and product backlog grooming    |        |      | 0:16 |
-| COMPLETED Sort out postgres update problems           |        |      | 0:36 |
-| COMPLETED Refactor static data initialisation         |        |      | 1:08 |
-| COMPLETED Add support for facet settings              |        |      | 4:10 |
-| COMPLETED Implement factory for c++ settings          |        |      | 0:20 |
-| COMPLETED Copy across boilerplate formatter and specs |        |      | 0:38 |
-| IMPLEMENTATION Implement class header formatter       |        |      | 0:13 |
+| Headline                                                               | Time   |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                           | *9:04* |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                        |        | 9:04 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:16 |
+| COMPLETED Sort out postgres update problems                            |        |      | 0:36 |
+| COMPLETED Refactor static data initialisation                          |        |      | 1:08 |
+| COMPLETED Add support for facet settings                               |        |      | 4:10 |
+| COMPLETED Implement factory for c++ settings                           |        |      | 0:20 |
+| COMPLETED Copy across boilerplate formatter and specs                  |        |      | 0:38 |
+| COMPLETED Implement transformation for class info objects in cpp model |        |      | 1:30 |
+| IMPLEMENTATION Implement class header formatter                        |        |      | 0:26 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -139,7 +140,18 @@ Add support for all of the main C++ properties in factory.
 Seems like we didn't move across the boilerplate formatter and
 associated classes. Move it now from =cpp_formatters=.
 
+*** COMPLETED Implement transformation for class info objects in cpp model :story:
+    CLOSED: [2014-11-06 Thu 22:19]
+    CLOCK: [2014-11-06 Thu 22:10]--[2014-11-06 Thu 22:19] =>  0:09
+    CLOCK: [2014-11-06 Thu 19:05]--[2014-11-06 Thu 19:50] =>  0:45
+    CLOCK: [2014-11-06 Thu 08:08]--[2014-11-06 Thu 08:44] =>  0:36
+
+In order to implement the class header formatter we need classes to
+format. Copy across the code from the legacy transformer and refactor
+it to fit the new class info.
+
 *** IMPLEMENTATION Implement class header formatter :task:refactor:formatters:cpp:
+    CLOCK: [2014-11-06 Thu 07:54]--[2014-11-06 Thu 08:07] =>  0:13
     CLOCK: [2014-11-05 Wed 22:46]--[2014-11-05 Wed 22:59] =>  0:13
 
 - look at the old =om= types formatter implementation to see if there
@@ -167,6 +179,12 @@ Remove uses of old indenter.
 
 Not sure how applicable this would be, but we may be able to scavenge
 some tests.
+
+*** Populate property =is_original_parent_visitable= in SML   :task:refactor:
+
+To make life easier in C++ model, we've added a new SML property:
+=is_original_parent_visitable=. We need to look at the SML
+transformation and ensure this property is populated correctly.
 
 *** Add include files at the formatter level    :task:refactor:meta_data:cpp:
 

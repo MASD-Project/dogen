@@ -139,6 +139,7 @@
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
 #include "dogen/cpp/types/state.hpp"
+#include "dogen/cpp/types/transformation_error.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/cpp/types/workflow.hpp"

@@ -63,6 +63,7 @@ void save(Archive& ar,
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("is_child", v.is_child_);
+    ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
     ar << make_nvp("relationships", v.relationships_);
     ar << make_nvp("is_inheritance_root", v.is_inheritance_root_);
     ar << make_nvp("object_type", v.object_type_);
@@ -88,6 +89,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("is_child", v.is_child_);
+    ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
     ar >> make_nvp("relationships", v.relationships_);
     ar >> make_nvp("is_inheritance_root", v.is_inheritance_root_);
     ar >> make_nvp("object_type", v.object_type_);

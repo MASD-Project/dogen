@@ -99,6 +99,7 @@ std::size_t object_hasher::hash(const object&v) {
     combine(seed, v.is_comparable());
     combine(seed, v.is_fluent());
     combine(seed, v.is_child());
+    combine(seed, v.is_original_parent_visitable());
     combine(seed, hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(v.relationships()));
     combine(seed, v.is_inheritance_root());
     combine(seed, v.object_type());

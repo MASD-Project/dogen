@@ -118,6 +118,7 @@ object::object()
       is_comparable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)),
+      is_original_parent_visitable_(static_cast<bool>(0)),
       is_inheritance_root_(static_cast<bool>(0)),
       object_type_(static_cast<dogen::sml::object_types>(0)),
       is_aggregate_root_(static_cast<bool>(0)) { }
@@ -141,6 +142,7 @@ object::object(
     const bool is_comparable,
     const bool is_fluent,
     const bool is_child,
+    const bool is_original_parent_visitable,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const bool is_inheritance_root,
     const dogen::sml::object_types& object_type,
@@ -164,6 +166,7 @@ object::object(
       is_comparable_(is_comparable),
       is_fluent_(is_fluent),
       is_child_(is_child),
+      is_original_parent_visitable_(is_original_parent_visitable),
       relationships_(relationships),
       is_inheritance_root_(is_inheritance_root),
       object_type_(object_type),
@@ -194,6 +197,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_comparable\": " << is_comparable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
+      << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
       << "\"relationships\": " << relationships_ << ", "
       << "\"is_inheritance_root\": " << is_inheritance_root_ << ", "
       << "\"object_type\": " << object_type_ << ", "
@@ -218,6 +222,7 @@ void object::swap(object& other) noexcept {
     swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
     swap(is_child_, other.is_child_);
+    swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
     swap(relationships_, other.relationships_);
     swap(is_inheritance_root_, other.is_inheritance_root_);
     swap(object_type_, other.object_type_);
@@ -245,6 +250,7 @@ bool object::operator==(const object& rhs) const {
         is_comparable_ == rhs.is_comparable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         is_child_ == rhs.is_child_ &&
+        is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
         relationships_ == rhs.relationships_ &&
         is_inheritance_root_ == rhs.is_inheritance_root_ &&
         object_type_ == rhs.object_type_ &&
@@ -384,6 +390,14 @@ bool object::is_child() const {
 
 void object::is_child(const bool v) {
     is_child_ = v;
+}
+
+bool object::is_original_parent_visitable() const {
+    return is_original_parent_visitable_;
+}
+
+void object::is_original_parent_visitable(const bool v) {
+    is_original_parent_visitable_ = v;
 }
 
 const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& object::relationships() const {

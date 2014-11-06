@@ -666,7 +666,7 @@ representation of the primitive type.#</dia:string>
         <dia:point val="-95,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3349999999999991"/>
+        <dia:real val="8.3350000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -1428,7 +1428,7 @@ representation of the primitive type.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1802,7 +1802,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="13,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="31.684999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -2491,7 +2491,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:point val="29,-13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0924999999999994"/>
+        <dia:real val="7.0925000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5765,7 +5765,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="48,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,84.95;75.885,98.25"/>
+        <dia:rectangle val="47.95,84.95;75.885,99.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,85"/>
@@ -5774,7 +5774,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000001"/>
+        <dia:real val="14.000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -6042,6 +6042,31 @@ or other comparable model types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, the type has at least one parent.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_original_parent_visitable#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Is the original parent of this object a visitable type?
+
+Set to false if no parent exists, or if the parent is not visitable. #</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8073,7 +8098,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-78,35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.615000000000002"/>
+        <dia:real val="23.614999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -8952,7 +8977,7 @@ not have a need for it.#</dia:string>
         <dia:point val="40,109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.817499999999999"/>
+        <dia:real val="8.8175000000000008"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.6"/>
@@ -9343,16 +9368,16 @@ not have a need for it.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="48,98.2"/>
+        <dia:point val="48,99"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.3587,97.45;48.75,109.8"/>
+        <dia:rectangle val="44.3587,98.25;48.75,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="48,98.2"/>
+        <dia:point val="48,99"/>
         <dia:point val="48,104"/>
         <dia:point val="44.4087,104"/>
         <dia:point val="44.4087,109"/>
@@ -9859,7 +9884,7 @@ not have a need for it.#</dia:string>
         <dia:point val="77,-10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.460000000000001"/>
+        <dia:real val="22.459999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -11368,16 +11393,16 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="75.835,98.2"/>
+        <dia:point val="75.835,99"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.085,97.45;79.455,109.8"/>
+        <dia:rectangle val="75.085,98.25;79.455,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="75.835,98.2"/>
+        <dia:point val="75.835,99"/>
         <dia:point val="75.835,104"/>
         <dia:point val="79.255,104"/>
         <dia:point val="79.255,109"/>
@@ -11628,10 +11653,10 @@ etc.#</dia:string>
         <dia:point val="-89.1303,-19.1667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.310000000000002"/>
+        <dia:real val="26.309999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -12107,7 +12132,7 @@ sub-system.
         <dia:point val="-56.1303,-4.16667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="24.754999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>
@@ -12819,7 +12844,7 @@ sub-system.
         <dia:point val="-66.1303,-12.1667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.995000000000001"/>
+        <dia:real val="18.994999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -12939,7 +12964,7 @@ boost::property_tree::ptree.#</dia:string>
         <dia:point val="-124,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="16.670000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13991,7 +14016,7 @@ parenting.#</dia:string>
         <dia:point val="-24,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.064999999999998"/>
+        <dia:real val="27.065000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.1999999999999993"/>
@@ -15059,7 +15084,7 @@ parenting.#</dia:string>
         <dia:point val="23.255,74.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.3187,73.65;24.005,86.6"/>
+        <dia:rectangle val="10.3188,73.65;24.005,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

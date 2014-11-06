@@ -75,6 +75,7 @@ public:
         const bool is_comparable,
         const bool is_fluent,
         const bool is_child,
+        const bool is_original_parent_visitable,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const bool is_inheritance_root,
         const dogen::sml::object_types& object_type,
@@ -227,6 +228,16 @@ public:
     void is_child(const bool v);
     /**@}*/
 
+    /**
+     * @brief Is the original parent of this object a visitable type?
+     *
+     * Set to false if no parent exists, or if the parent is not visitable.
+     */
+    /**@{*/
+    bool is_original_parent_visitable() const;
+    void is_original_parent_visitable(const bool v);
+    /**@}*/
+
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships() const;
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships();
     void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v);
@@ -294,6 +305,7 @@ private:
     bool is_comparable_;
     bool is_fluent_;
     bool is_child_;
+    bool is_original_parent_visitable_;
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
     bool is_inheritance_root_;
     dogen::sml::object_types object_type_;
