@@ -151,6 +151,7 @@ format. Copy across the code from the legacy transformer and refactor
 it to fit the new class info.
 
 *** IMPLEMENTATION Implement class header formatter :task:refactor:formatters:cpp:
+    CLOCK: [2014-11-06 Thu 22:19]--[2014-11-06 Thu 22:36] =>  0:17
     CLOCK: [2014-11-06 Thu 07:54]--[2014-11-06 Thu 08:07] =>  0:13
     CLOCK: [2014-11-05 Wed 22:46]--[2014-11-05 Wed 22:59] =>  0:13
 

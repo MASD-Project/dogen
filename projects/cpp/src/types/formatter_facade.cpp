@@ -53,10 +53,13 @@ private:
     const std::forward_list<formatter_facade::facet>& facets_;
 };
 
-dispatcher::
-dispatcher(const std::forward_list<formatter_facade::facet>& f) : facets_(f) { }
+dispatcher::dispatcher(const std::forward_list<formatter_facade::facet>& f)
+  : facets_(f) { }
 
-void dispatcher::visit(const dogen::cpp::class_info& /*c*/) {
+void dispatcher::visit(const dogen::cpp::class_info& c) {
+    for (const auto& fct : facets_)
+        for (const auto fmt : fct.class_formatters)
+            files_.push_front(fmt->format(c, fct.bundle));
 }
 
 void dispatcher::visit(const dogen::cpp::enum_info& /*e*/) {
@@ -74,10 +77,7 @@ void dispatcher::visit(const dogen::cpp::namespace_info& /*n*/) {
 void dispatcher::visit(const dogen::cpp::visitor_info& /*v*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::new_class_info& c) {
-    for (const auto& fct : facets_)
-        for (const auto fmt : fct.class_formatters)
-            files_.push_front(fmt->format(c, fct.bundle));
+void dispatcher::visit(const dogen::cpp::new_class_info& /*c*/) {
 }
 
 void dispatcher::visit(const dogen::cpp::concept_info& /*c*/) {

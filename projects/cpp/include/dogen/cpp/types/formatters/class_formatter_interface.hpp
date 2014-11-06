@@ -28,7 +28,7 @@
 #include <string>
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/new_class_info.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -56,7 +56,7 @@ public:
      * @brief Generate a c++ representation for the type.
      */
     virtual dogen::formatters::file
-    format(const new_class_info& c, const settings_bundle& sb) const = 0;
+    format(const class_info& c, const settings_bundle& sb) const = 0;
 };
 
 } } }

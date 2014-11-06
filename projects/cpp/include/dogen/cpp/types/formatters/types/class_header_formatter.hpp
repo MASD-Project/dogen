@@ -48,7 +48,7 @@ public:
     std::string formatter_id() const override;
 
     dogen::formatters::file
-    format(const new_class_info& c, const settings_bundle& sb) const override;
+    format(const class_info& c, const settings_bundle& sb) const override;
 };
 
 } } } }
