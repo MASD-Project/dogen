@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-06 Thu 22:19]
+Clock summary at [2014-11-06 Thu 22:51]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *9:04* |      |      |
+| *Total time*                                                           | *9:34* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 9:04 |      |
+| Development Stories Implemented                                        |        | 9:34 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:16 |
 | COMPLETED Sort out postgres update problems                            |        |      | 0:36 |
 | COMPLETED Refactor static data initialisation                          |        |      | 1:08 |
@@ -31,7 +31,7 @@ Clock summary at [2014-11-06 Thu 22:19]
 | COMPLETED Implement factory for c++ settings                           |        |      | 0:20 |
 | COMPLETED Copy across boilerplate formatter and specs                  |        |      | 0:38 |
 | COMPLETED Implement transformation for class info objects in cpp model |        |      | 1:30 |
-| IMPLEMENTATION Implement class header formatter                        |        |      | 0:26 |
+| IMPLEMENTATION Implement class header formatter                        |        |      | 0:56 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -159,13 +159,19 @@ it to fit the new class info.
   is any code to scavenge. This model was deleted around commit
   10157ad.
 
+**** COMPLETED Make use of boilerplate                                 :task:
+     CLOSED: [2014-11-06 Thu 22:38]
+
+Generate the licence, etc using boilerplate formatter.
+
+**** IMPLEMENTATION Populate file name in formatter                    :task:
+     CLOCK: [2014-11-06 Thu 22:38]--[2014-11-06 Thu 22:51] =>  0:13
+
+In order to get the includers to work we need to populate the file name.
+
 **** Tidy-up =types_main_header_file_formatter=                        :task:
 
 Clean up internal functions in file and add documentation.
-
-**** Make use of boilerplate                                           :task:
-
-Generate the licence, etc using boilerplate formatter.
 
 **** Copy across documentation from =om=                               :task:
 

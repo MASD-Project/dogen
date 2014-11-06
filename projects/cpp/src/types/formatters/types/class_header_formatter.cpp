@@ -34,7 +34,6 @@ static logger lg(logger_factory(formatter_id));
 
 // FIXME
 const dogen::cpp::includes empty_includes = dogen::cpp::includes();
-const boost::filesystem::path empty_path;
 
 }
 
@@ -51,6 +50,13 @@ std::string class_header_formatter::formatter_id() const {
     return ::formatter_id;
 }
 
+boost::filesystem::path class_header_formatter::
+compute_relative_path(const class_info& /*c*/,
+    const settings_bundle& /*sb*/) const {
+    boost::filesystem::path r;
+    return r;
+}
+
 dogen::formatters::file class_header_formatter::
 format(const class_info& c, const settings_bundle& sb) const {
     boilerplate_formatter boilerplate_;
@@ -61,15 +67,19 @@ format(const class_info& c, const settings_bundle& sb) const {
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(s);
 
+    const auto rp(compute_relative_path(c, sb));
     dogen::cpp::formatters::boilerplate_formatter f;
     const auto a(sb.general_settings().annotation());
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, rp);
+    f.format_end(fo, a, rp);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;
     r.content(s.str());
+    r.relative_path(rp);
 
+    BOOST_LOG_SEV(lg, debug) << "filename: "
+                             << r.relative_path().generic_string();
     BOOST_LOG_SEV(lg, debug) << "content: " << r.content();
     return r;
 }

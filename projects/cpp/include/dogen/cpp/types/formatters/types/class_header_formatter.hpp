@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
@@ -41,6 +42,14 @@ public:
     class_header_formatter(const class_header_formatter&) = delete;
     class_header_formatter(class_header_formatter&&) = default;
     ~class_header_formatter() noexcept = default;
+
+private:
+    /**
+     * @brief Given the settings and the class properties, computes
+     * the relative path for the file.
+     */
+    boost::filesystem::path
+    compute_relative_path(const class_info& c, const settings_bundle& sb) const;
 
 public:
     std::string facet_id() const override;
