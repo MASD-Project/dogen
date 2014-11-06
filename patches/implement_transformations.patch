@@ -1,0 +1,1430 @@
+diff --git a/diagrams/cpp.dia b/diagrams/cpp.dia
+index fd966f3..a71dbc0 100644
+--- a/diagrams/cpp.dia
++++ b/diagrams/cpp.dia
+@@ -19825,13 +19825,13 @@ main.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O157">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="215,71"/>
++        <dia:point val="215,70"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="214.95,70.95;232.105,79.45"/>
++        <dia:rectangle val="214.95,69.95;232.105,78.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="215,71"/>
++        <dia:point val="215,70"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="17.055"/>
+@@ -20449,16 +20449,16 @@ main.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="223.528,71"/>
++        <dia:point val="223.528,70"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="223.478,55.25;234.654,71.8"/>
++        <dia:rectangle val="223.477,55.25;234.654,70.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="223.528,71"/>
++        <dia:point val="223.528,70"/>
+         <dia:point val="223.528,62"/>
+         <dia:point val="233.904,62"/>
+         <dia:point val="233.904,56"/>
+@@ -22219,16 +22219,16 @@ main.#</dia:string>
+         <dia:point val="209.595,85"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="208.845,79.35;223.727,85.8"/>
++        <dia:rectangle val="208.845,78.35;223.727,85.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="209.595,85"/>
+-        <dia:point val="209.595,81.85"/>
+-        <dia:point val="223.528,81.85"/>
+-        <dia:point val="223.528,79.4"/>
++        <dia:point val="209.595,81.35"/>
++        <dia:point val="223.528,81.35"/>
++        <dia:point val="223.528,78.4"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -24258,5 +24258,186 @@ main.#</dia:string>
+         <dia:connection handle="1" to="O188" connection="1"/>
+       </dia:connections>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O190">
++      <dia:attribute name="obj_pos">
++        <dia:point val="308,47"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="307.95,46.95;318.033,50.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="308,47"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="9.9824999999999999"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#transformation_error#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#exception#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#A transformation error occurred.#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O191">
++      <dia:attribute name="name">
++        <dia:string>#&lt; throws on error#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="331.962,62"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="312.941,49.95;332.712,62.8"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="331.962,62"/>
++        <dia:point val="331.962,56"/>
++        <dia:point val="312.991,56"/>
++        <dia:point val="312.991,50"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O164" connection="1"/>
++        <dia:connection handle="1" to="O190" connection="6"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index db343ec..73d8d99 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -666,7 +666,7 @@ representation of the primitive type.#</dia:string>
+         <dia:point val="-95,30"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="8.3349999999999991"/>
++        <dia:real val="8.3350000000000009"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -1428,7 +1428,7 @@ representation of the primitive type.#</dia:string>
+         <dia:real val="24.77"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.0999999999999996"/>
++        <dia:real val="4.1000000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000149011612"/>
+@@ -1802,7 +1802,7 @@ all types in the combined model.#</dia:string>
+         <dia:point val="13,13"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="31.685000000000002"/>
++        <dia:real val="31.684999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="7.5999999999999996"/>
+@@ -2491,7 +2491,7 @@ All of these steps are encompassed in the SML @ref workflow.
+         <dia:point val="29,-13"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.0924999999999994"/>
++        <dia:real val="7.0925000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -5765,7 +5765,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         <dia:point val="48,85"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="47.95,84.95;75.885,98.25"/>
++        <dia:rectangle val="47.95,84.95;75.885,99.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="48,85"/>
+@@ -5774,7 +5774,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         <dia:real val="27.835000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="13.200000000000001"/>
++        <dia:real val="14.000000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#object#</dia:string>
+@@ -6055,6 +6055,31 @@ or other comparable model types.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
++            <dia:string>#is_original_parent_visitable#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#bool#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Is the original parent of this object a visitable type?
++
++Set to false if no parent exists, or if the parent is not visitable. #</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
+             <dia:string>#relationships#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -8073,7 +8098,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
+         <dia:point val="-78,35"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="23.615000000000002"/>
++        <dia:real val="23.614999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -8952,7 +8977,7 @@ not have a need for it.#</dia:string>
+         <dia:point val="40,109"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="8.817499999999999"/>
++        <dia:real val="8.8175000000000008"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="11.6"/>
+@@ -9343,16 +9368,16 @@ not have a need for it.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="48,98.2"/>
++        <dia:point val="48,99"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="44.3587,97.45;48.75,109.8"/>
++        <dia:rectangle val="44.3587,98.25;48.75,109.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="48,98.2"/>
++        <dia:point val="48,99"/>
+         <dia:point val="48,104"/>
+         <dia:point val="44.4087,104"/>
+         <dia:point val="44.4087,109"/>
+@@ -9859,7 +9884,7 @@ not have a need for it.#</dia:string>
+         <dia:point val="77,-10"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="22.460000000000001"/>
++        <dia:real val="22.459999999999997"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -11368,16 +11393,16 @@ etc.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="75.835,98.2"/>
++        <dia:point val="75.835,99"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="75.085,97.45;79.455,109.8"/>
++        <dia:rectangle val="75.085,98.25;79.455,109.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="75.835,98.2"/>
++        <dia:point val="75.835,99"/>
+         <dia:point val="75.835,104"/>
+         <dia:point val="79.255,104"/>
+         <dia:point val="79.255,109"/>
+@@ -11628,10 +11653,10 @@ etc.#</dia:string>
+         <dia:point val="-89.1303,-19.1667"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="26.310000000000002"/>
++        <dia:real val="26.309999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.0999999999999996"/>
++        <dia:real val="4.1000000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000000000001"/>
+@@ -12107,7 +12132,7 @@ sub-system.
+         <dia:point val="-56.1303,-4.16667"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="24.755000000000003"/>
++        <dia:real val="24.754999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="9.8000000000000007"/>
+@@ -12819,7 +12844,7 @@ sub-system.
+         <dia:point val="-66.1303,-12.1667"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="18.995000000000001"/>
++        <dia:real val="18.994999999999997"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -12939,7 +12964,7 @@ boost::property_tree::ptree.#</dia:string>
+         <dia:point val="-124,44"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="16.669999999999998"/>
++        <dia:real val="16.670000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+@@ -13991,7 +14016,7 @@ parenting.#</dia:string>
+         <dia:point val="-24,13"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="27.064999999999998"/>
++        <dia:real val="27.065000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="9.1999999999999993"/>
+@@ -15059,7 +15084,7 @@ parenting.#</dia:string>
+         <dia:point val="23.255,74.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="10.3187,73.65;24.005,86.6"/>
++        <dia:rectangle val="10.3188,73.65;24.005,85.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+diff --git a/doc/agile/sprint_backlog_55.org b/doc/agile/sprint_backlog_55.org
+index c5ad852..710a9a7 100644
+--- a/doc/agile/sprint_backlog_55.org
++++ b/doc/agile/sprint_backlog_55.org
+@@ -17,20 +17,21 @@ pipeline for at least one formatter.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2014-11-05 Wed 22:59]
+-
+-| Headline                                              | Time   |      |      |
+-|-------------------------------------------------------+--------+------+------|
+-| *Total time*                                          | *7:21* |      |      |
+-|-------------------------------------------------------+--------+------+------|
+-| Development Stories Implemented                       |        | 7:21 |      |
+-| IMPLEMENTATION Sprint and product backlog grooming    |        |      | 0:16 |
+-| COMPLETED Sort out postgres update problems           |        |      | 0:36 |
+-| COMPLETED Refactor static data initialisation         |        |      | 1:08 |
+-| COMPLETED Add support for facet settings              |        |      | 4:10 |
+-| COMPLETED Implement factory for c++ settings          |        |      | 0:20 |
+-| COMPLETED Copy across boilerplate formatter and specs |        |      | 0:38 |
+-| IMPLEMENTATION Implement class header formatter       |        |      | 0:13 |
++Clock summary at [2014-11-06 Thu 08:45]
++
++| Headline                                                                    | Time   |      |      |
++|-----------------------------------------------------------------------------+--------+------+------|
++| *Total time*                                                                | *8:10* |      |      |
++|-----------------------------------------------------------------------------+--------+------+------|
++| Development Stories Implemented                                             |        | 8:10 |      |
++| IMPLEMENTATION Sprint and product backlog grooming                          |        |      | 0:16 |
++| COMPLETED Sort out postgres update problems                                 |        |      | 0:36 |
++| COMPLETED Refactor static data initialisation                               |        |      | 1:08 |
++| COMPLETED Add support for facet settings                                    |        |      | 4:10 |
++| COMPLETED Implement factory for c++ settings                                |        |      | 0:20 |
++| COMPLETED Copy across boilerplate formatter and specs                       |        |      | 0:38 |
++| IMPLEMENTATION Implement transformation for class info objects in cpp model |        |      | 0:36 |
++| IMPLEMENTATION Implement class header formatter                             |        |      | 0:26 |
+ #+end:
+ 
+ *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+@@ -139,7 +140,16 @@ Add support for all of the main C++ properties in factory.
+ Seems like we didn't move across the boilerplate formatter and
+ associated classes. Move it now from =cpp_formatters=.
+ 
++*** IMPLEMENTATION Implement transformation for class info objects in cpp model :story:
++    CLOCK: [2014-11-06 Thu 19:05]
++    CLOCK: [2014-11-06 Thu 08:08]--[2014-11-06 Thu 08:44] =>  0:36
++
++In order to implement the class header formatter we need classes to
++format. Copy across the code from the legacy transformer and refactor
++it to fit the new class info.
++
+ *** IMPLEMENTATION Implement class header formatter :task:refactor:formatters:cpp:
++    CLOCK: [2014-11-06 Thu 07:54]--[2014-11-06 Thu 08:07] =>  0:13
+     CLOCK: [2014-11-05 Wed 22:46]--[2014-11-05 Wed 22:59] =>  0:13
+ 
+ - look at the old =om= types formatter implementation to see if there
+@@ -168,6 +178,12 @@ Remove uses of old indenter.
+ Not sure how applicable this would be, but we may be able to scavenge
+ some tests.
+ 
++*** Populate property =is_original_parent_visitable= in SML   :task:refactor:
++
++To make life easier in C++ model, we've added a new SML property:
++=is_original_parent_visitable=. We need to look at the SML
++transformation and ensure this property is populated correctly.
++
+ *** Add include files at the formatter level    :task:refactor:meta_data:cpp:
+ 
+ We need to remove all the include files from =includer= which are
+diff --git a/projects/cpp/include/dogen/cpp/types/all.hpp b/projects/cpp/include/dogen/cpp/types/all.hpp
+index f0d60b1..9513154 100644
+--- a/projects/cpp/include/dogen/cpp/types/all.hpp
++++ b/projects/cpp/include/dogen/cpp/types/all.hpp
+@@ -139,6 +139,7 @@
+ #include "dogen/cpp/types/registrar_info.hpp"
+ #include "dogen/cpp/types/settings_bundle.hpp"
+ #include "dogen/cpp/types/state.hpp"
++#include "dogen/cpp/types/transformation_error.hpp"
+ #include "dogen/cpp/types/transformer.hpp"
+ #include "dogen/cpp/types/visitor_info.hpp"
+ #include "dogen/cpp/types/workflow.hpp"
+diff --git a/projects/cpp/include/dogen/cpp/types/flat_name_builder.hpp b/projects/cpp/include/dogen/cpp/types/flat_name_builder.hpp
+index c4b059d..7fc40f3 100644
+--- a/projects/cpp/include/dogen/cpp/types/flat_name_builder.hpp
++++ b/projects/cpp/include/dogen/cpp/types/flat_name_builder.hpp
+@@ -52,7 +52,7 @@ public:
+      * into a list of strings with C++ namespaces.
+      */
+     std::list<std::string>
+-    to_namespace_list(const sml::model& m, const sml::qname& qn) const;
++    namespace_list(const sml::model& m, const sml::qname& qn) const;
+ 
+     /**
+      * @brief Returns the file name for the given qualified name and facet.
+diff --git a/projects/cpp/include/dogen/cpp/types/transformation_error.hpp b/projects/cpp/include/dogen/cpp/types/transformation_error.hpp
+new file mode 100644
+index 0000000..dd1f319
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/transformation_error.hpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_TRANSFORMATION_ERROR_HPP
++#define DOGEN_CPP_TYPES_TRANSFORMATION_ERROR_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace cpp {
++
++/**
++ * @brief A transformation error occurred.
++ */
++class transformation_error : public virtual std::exception, public virtual boost::exception {
++public:
++    transformation_error() = default;
++    ~transformation_error() noexcept = default;
++
++public:
++    transformation_error(const std::string& message) : message_(message) { }
++
++public:
++    const char* what() const noexcept { return(message_.c_str()); }
++
++private:
++    const std::string message_;
++};
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/transformation_error_fwd.hpp b/projects/cpp/include/dogen/cpp/types/transformation_error_fwd.hpp
+new file mode 100644
+index 0000000..6d789ab
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/transformation_error_fwd.hpp
+@@ -0,0 +1,38 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_TRANSFORMATION_ERROR_FWD_HPP
++#define DOGEN_CPP_TYPES_TRANSFORMATION_ERROR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace cpp {
++
++class transformation_error;
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/transformer.hpp b/projects/cpp/include/dogen/cpp/types/transformer.hpp
+index b82a10c..b314a43 100644
+--- a/projects/cpp/include/dogen/cpp/types/transformer.hpp
++++ b/projects/cpp/include/dogen/cpp/types/transformer.hpp
+@@ -25,35 +25,69 @@
+ #pragma once
+ #endif
+ 
++#include <tuple>
+ #include <memory>
+ #include "dogen/sml/types/qname.hpp"
+-#include "dogen/sml/types/nested_qname.hpp"
+ #include "dogen/sml/types/model.hpp"
+ #include "dogen/sml/types/module.hpp"
+ #include "dogen/sml/types/concept.hpp"
+ #include "dogen/sml/types/object.hpp"
+ #include "dogen/sml/types/primitive.hpp"
+ #include "dogen/sml/types/enumeration.hpp"
++#include "dogen/sml/types/nested_qname.hpp"
+ #include "dogen/cpp/types/entity.hpp"
+ #include "dogen/cpp/types/enum_info.hpp"
+-#include "dogen/cpp/types/namespace_info.hpp"
+ #include "dogen/cpp/types/concept_info.hpp"
++#include "dogen/cpp/types/visitor_info.hpp"
++#include "dogen/cpp/types/property_info.hpp"
++#include "dogen/cpp/types/exception_info.hpp"
++#include "dogen/cpp/types/namespace_info.hpp"
+ #include "dogen/cpp/types/primitive_info.hpp"
+-#include "dogen/cpp/types/new_class_info.hpp"
++#include "dogen/cpp/types/class_info.hpp"
+ 
+ namespace dogen {
+ namespace cpp {
+ 
++/**
++ * @brief Transforms an SML type into its corresponding C++ type.
++ */
+ class transformer {
+ public:
+     explicit transformer(const sml::model& m);
+ 
+ private:
+     /**
++     * @brief Transforms the SML nested qname into a nested type info.
++     */
++    void to_nested_type_info(const sml::nested_qname& nqn,
++        nested_type_info& nti, std::string& complete_name,
++        bool& requires_stream_manipulators) const;
++
++    /**
++     * @brief Transforms an SML property into a property info.
++     *
++     * The four Boolean values on the tuple work as follows:
++     *
++     * @li position 1: if true, the property has a top-level primitive
++     * type.
++     *
++     * @li position 2: if true, the property requires stream
++     * manipulators.
++     *
++     * @li position 3: if true, the property invalidates the compiler
++     * generated move constructor.
++     *
++     * @li position 4: if true, the property invalidates the compiler
++     * generated default constructor.
++     */
++    std::tuple<property_info, bool, bool, bool, bool>
++    to_property_info(const sml::property p, const bool is_immutable,
++        const bool is_fluent) const;
++
++    /**
+      * @brief Transforms an SML property to an enumerator info.
+      */
+-    enumerator_info
+-    to_enumerator_info(const sml::enumerator& e) const;
++    enumerator_info to_enumerator_info(const sml::enumerator& e) const;
+ 
+     /**
+      * @brief Transforms a SML value containing an enumeration into an
+@@ -67,6 +101,29 @@ private:
+     std::shared_ptr<namespace_info>
+     to_namespace_info(const sml::module& m) const;
+ 
++    /**
++     * @brief Transforms a SML value containing an exception into an
++     * exception info.
++     */
++    std::shared_ptr<exception_info>
++    to_exception_info(const sml::object& o) const;
++
++    /**
++     * @brief Transform a SML object into a class info.
++     *
++     * @param ao object to transform.
++     */
++    std::shared_ptr<class_info> to_class_info(const sml::object& o,
++        const class_types ct) const;
++
++    /**
++     * @brief Transform a SML object representing a visitor into a
++     * visitor info.
++     *
++     * @pre value object must have a visitor type.
++     */
++    std::shared_ptr<visitor_info> to_visitor_info(const sml::object& o) const;
++
+ public:
+     /**
+      * @brief Transform an SML enumeration into a C++ entity.
+@@ -81,17 +138,17 @@ public:
+     /**
+      * @brief Transform an SML concept into a C++ entity.
+      */
+-    std::shared_ptr<entity> transform(const sml::concept& e) const;
++    std::shared_ptr<entity> transform(const sml::concept& c) const;
+ 
+     /**
+      * @brief Transform an SML primitive into a C++ entity.
+      */
+-    std::shared_ptr<entity> transform(const sml::primitive& e) const;
++    std::shared_ptr<entity> transform(const sml::primitive& p) const;
+ 
+     /**
+      * @brief Transform an SML object into a C++ entity.
+      */
+-    std::shared_ptr<entity> transform(const sml::object& e) const;
++    std::shared_ptr<entity> transform(const sml::object& o) const;
+ 
+ private:
+     const sml::model& model_;
+diff --git a/projects/cpp/src/types/transformer.cpp b/projects/cpp/src/types/transformer.cpp
+index b968138..f2fa7e8 100644
+--- a/projects/cpp/src/types/transformer.cpp
++++ b/projects/cpp/src/types/transformer.cpp
+@@ -18,9 +18,12 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include <boost/lexical_cast.hpp>
++#include <boost/algorithm/string/join.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/cpp/types/flat_name_builder.hpp"
++#include "dogen/cpp/types/transformation_error.hpp"
+ #include "dogen/cpp/types/transformer.hpp"
+ 
+ using namespace dogen::utility::log;
+@@ -29,6 +32,137 @@ namespace {
+ 
+ auto lg(logger_factory("cpp.transformer"));
+ 
++const std::string empty;
++const std::string dot(".");
++const std::string comma(",");
++const std::string space(" ");
++const std::string less_than("<");
++const std::string more_than(">");
++const std::string separator("_");
++const std::string extension("HPP");
++const std::string namespace_separator("::");
++
++const std::string bool_type("bool");
++const std::string string_type("std::string");
++const std::string char_type("char");
++const std::string uchar_type("unsigned char");
++const std::string short_type("short");
++const std::string ushort_type("unsigned short");
++const std::string int_type("int");
++const std::string uint_type("unsigned int");
++const std::string long_type("long");
++const std::string ulong_type("unsigned long");
++const std::string long_long_type("long long");
++const std::string ulong_long_type("unsigned long long");
++const std::string double_type("double");
++const std::string float_type("float");
++const std::string optional_type("boost::optional");
++const std::string variant_type("boost::variant");
++const std::string filesystem_path_type("boost::filesystem::path");
++const std::string gregorian_date_type("boost::gregorian::date");
++const std::string ptime_type("boost::posix_time::ptime");
++const std::string time_duration_type("boost::posix_time::time_duration");
++const std::string ptree_type("boost::property_tree::ptree");
++const std::string pair_type("std::pair");
++const std::string registrar_name("registrar");
++
++const std::string int8_t_type("std::int8_t");
++const std::string int16_t_type("std::int16_t");
++const std::string int32_t_type("std::int32_t");
++const std::string int64_t_type("std::int64_t");
++const std::string uint8_t_type("std::uint8_t");
++const std::string uint16_t_type("std::uint16_t");
++const std::string uint32_t_type("std::uint32_t");
++const std::string uint64_t_type("std::uint64_t");
++
++const std::string unsupported_object_type("Object type is not supported: ");
++const std::string concept_not_found("Concept not found in concept container: ");
++const std::string parent_class_info_not_found(
++    "Type has a parent but no parent class info found: ");
++
++const std::string too_many_parents(
++    "Type has more than one parent but multiple inheritance not supported: ");
++
++const std::string no_visitees("Visitor is not visiting any types: ");
++
++bool is_char_like(const std::string& type_name) {
++    return
++        type_name == char_type || type_name == uchar_type ||
++        type_name == int8_t_type || type_name == uint8_t_type;
++}
++
++bool is_string_like(const std::string& type_name) {
++    return is_char_like(type_name) || type_name == string_type;
++}
++
++bool is_optional_like(const std::string& type_name) {
++    return type_name == optional_type;
++}
++
++bool is_pair(const std::string& type_name) {
++    return type_name == pair_type;
++}
++
++bool is_filesystem_path(const std::string& type_name) {
++    return type_name == filesystem_path_type;
++}
++
++bool is_gregorian_date(const std::string& type_name) {
++    return type_name == gregorian_date_type;
++}
++
++bool is_ptime(const std::string& type_name) {
++    return type_name == ptime_type;
++}
++
++bool is_time_duration(const std::string& type_name) {
++    return type_name == time_duration_type;
++}
++
++bool is_ptree(const std::string& type_name) {
++    return type_name == ptree_type;
++}
++
++bool is_variant_like(const std::string& type_name) {
++    return type_name == variant_type;
++}
++
++bool is_int_like(const std::string& type_name) {
++    return
++        type_name == short_type ||
++        type_name == ushort_type ||
++        type_name == int_type ||
++        type_name == uint_type ||
++        type_name == long_type ||
++        type_name == ulong_type ||
++        type_name == long_long_type ||
++        type_name == ulong_long_type ||
++        type_name == double_type ||
++        type_name == float_type ||
++        type_name == int16_t_type ||
++        type_name == int32_t_type ||
++        type_name == int64_t_type ||
++        type_name == uint16_t_type ||
++        type_name == uint32_t_type ||
++        type_name == uint64_t_type;
++}
++
++bool requires_stream_manipulators(const std::string type_name) {
++    return
++        type_name == bool_type ||
++        type_name == double_type ||
++        type_name == float_type;
++}
++
++bool requires_manual_move_constructor(const std::string type_name) {
++    return
++        type_name == "optional" ||
++        type_name == "path" ||
++        type_name == "variant" ||
++        type_name == "time_duration" ||
++        type_name == "ptree";
++}
++
+ }
+ 
+ namespace dogen {
+@@ -36,6 +170,126 @@ namespace cpp {
+ 
+ transformer::transformer(const sml::model& m) : model_(m) { }
+ 
++void transformer::to_nested_type_info(const sml::nested_qname& nqn,
++    nested_type_info& nti, std::string& complete_name,
++    bool& requires_stream_manipulators) const {
++
++    const auto qn(nqn.type());
++    flat_name_builder b;
++    const auto qualified_name(b.qualified_name(model_, qn));
++    nti.name(qualified_name);
++    nti.namespaces(b.namespace_list(model_, qn));
++
++    const auto i(model_.enumerations().find(qn));
++    const bool is_enumeration(i != model_.enumerations().end());
++    nti.is_enumeration(is_enumeration);
++
++    const auto j(model_.primitives().find(qn));
++    const bool is_primitive(j != model_.primitives().end());
++    nti.is_primitive(is_primitive);
++
++    if (nti.is_primitive()) {
++        if (::requires_stream_manipulators(nti.name()))
++            requires_stream_manipulators = true;
++
++        nti.is_char_like(is_char_like(nti.name()));
++        nti.is_int_like(is_int_like(nti.name()));
++    }
++    nti.is_string_like(is_string_like(nti.name()));
++    nti.is_optional_like(is_optional_like(nti.name()));
++    nti.is_pair(is_pair(nti.name()));
++    nti.is_variant_like(is_variant_like(nti.name()));
++    nti.is_filesystem_path(is_filesystem_path(nti.name()));
++    nti.is_date(is_gregorian_date(nti.name()));
++    nti.is_ptime(is_ptime(nti.name()));
++    nti.is_time_duration(is_time_duration(nti.name()));
++    nti.is_ptree(is_ptree(nti.name()));
++
++    const auto k(model_.objects().find(qn));
++    if (k != model_.objects().end()) {
++        const auto ot(k->second.object_type());
++        using sml::object_types;
++        nti.is_sequence_container(ot == object_types::sequence_container);
++        nti.is_associative_container(ot == object_types::ordered_container ||
++            ot == object_types::hash_container);
++        nti.is_smart_pointer(ot == object_types::smart_pointer);
++    }
++
++    const auto nqn_children(nqn.children());
++
++    std::string my_complete_name(nti.name());
++    auto lambda([&](char c) {
++            if (!nqn_children.empty()) {
++                if (my_complete_name[my_complete_name.length() - 1] == c)
++                    my_complete_name += " ";
++                my_complete_name += c;
++            }
++        });
++
++    std::list<nested_type_info> children;
++    lambda('<');
++    bool is_first(true);
++    for (const auto c : nqn.children()) {
++        if (!is_first)
++            my_complete_name += ", ";
++
++        nested_type_info ci;
++        to_nested_type_info(c, ci, my_complete_name,
++            requires_stream_manipulators);
++        children.push_back(ci);
++        is_first = false;
++    }
++    lambda('>');
++
++    nti.identifiable_name(b.identifiable_name(qualified_name));
++    nti.complete_identifiable_name(b.identifiable_name(my_complete_name));
++    nti.complete_name(my_complete_name);
++    nti.children(children);
++    complete_name += my_complete_name;
++}
++
++std::tuple<property_info, bool, bool, bool, bool>
++transformer::to_property_info(const sml::property p, const bool is_immutable,
++    const bool is_fluent) const {
++
++    property_info pi;
++    pi.name(p.name());
++    pi.documentation(p.documentation());
++    pi.is_immutable(is_immutable);
++    pi.is_fluent(is_fluent);
++
++    bool has_primitive_properties(false);
++    bool requires_stream_manipulators(false);
++    bool requires_manual_move_constructor(false);
++    bool requires_manual_default_constructor(false);
++
++    nested_type_info nti;
++    std::string complete_name;
++    const auto t(p.type());
++    if (::requires_manual_move_constructor(t.type().simple_name()))
++        requires_manual_move_constructor = true;
++
++    to_nested_type_info(t, nti, complete_name, requires_stream_manipulators);
++    if (nti.is_primitive()) {
++        has_primitive_properties = true;
++        requires_manual_default_constructor = true;
++    } else if (nti.is_enumeration())
++        requires_manual_default_constructor = true;
++
++    nti.complete_name(complete_name);
++    pi.type(nti);
++
++    // FIXME: to move to formatter
++    // sml::meta_data::reader reader(p.meta_data());
++    // pi.opaque_parameters(reader.odb_pragma());
++
++    return std::make_tuple(pi,
++        has_primitive_properties,
++        requires_stream_manipulators,
++        requires_manual_move_constructor,
++        requires_manual_default_constructor);
++}
++
+ enumerator_info
+ transformer::to_enumerator_info(const sml::enumerator& e) const {
+     enumerator_info r;
+@@ -55,7 +309,7 @@ transformer::to_enum_info(const sml::enumeration& e) const {
+     r->type(e.underlying_type().simple_name());
+ 
+     flat_name_builder b;
+-    r->namespaces(b.to_namespace_list(model_, e.name()));
++    r->namespaces(b.namespace_list(model_, e.name()));
+ 
+     for (const auto& en : e.enumerators())
+         r->enumerators().push_back(to_enumerator_info(en));
+@@ -73,12 +327,140 @@ to_namespace_info(const sml::module& m) const {
+     r->documentation(m.documentation());
+ 
+     flat_name_builder b;
+-    r->namespaces(b.to_namespace_list(model_, m.name()));
++    r->namespaces(b.namespace_list(model_, m.name()));
+ 
+     BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
+     return r;
+ }
+ 
++std::shared_ptr<exception_info>
++transformer::to_exception_info(const sml::object& o) const {
++    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << o.name();
++
++    auto r(std::make_shared<exception_info>());
++    r->name(o.name().simple_name());
++    r->documentation(o.documentation());
++
++    flat_name_builder b;
++    r->namespaces(b.namespace_list(model_, o.name()));
++
++    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << o.name();
++    return r;
++}
++
++std::shared_ptr<class_info>
++transformer::to_class_info(const sml::object& o, const class_types ct) const {
++    auto r(std::make_shared<class_info>());
++
++    r->name(o.name().simple_name());
++
++    flat_name_builder b;
++    r->namespaces(b.namespace_list(model_, o.name()));
++    r->documentation(o.documentation());
++    r->is_immutable(o.is_immutable());
++    r->is_visitable(o.is_visitable());
++    r->is_parent(o.is_parent());
++    r->generation_type(o.generation_type());
++    r->class_type(ct);
++
++    // FIXME: move to formatter
++    // sml::meta_data::reader reader(o.meta_data());
++    // r->opaque_parameters(reader.odb_pragma());
++
++    auto i(o.relationships().find(sml::relationship_types::parents));
++    if (i != o.relationships().end()) {
++        for (const auto& qn : i->second) {
++            parent_info pi;
++            pi.name(qn.simple_name());
++            pi.namespaces(b.namespace_list(model_, qn));
++
++            const auto j(o.inherited_properties().find(qn));
++            if (j != o.inherited_properties().end()) {
++                for (const auto& prop : j->second) {
++                    const auto tuple(to_property_info(
++                            prop, o.is_immutable(), o.is_fluent()));
++                    pi.properties().push_back(std::get<0>(tuple));
++                }
++            }
++            r->parents().push_back(pi);
++        }
++    }
++
++    i = o.relationships().find(sml::relationship_types::original_parents);
++    if (i != o.relationships().end() && !i->second.empty()) {
++        if (i->second.size() > 1) {
++            const auto& sn(o.name().simple_name());
++            BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
++            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
++        }
++
++        const auto opn(i->second.front());
++        std::list<std::string> ns(b.namespace_list(model_, opn));
++        ns.push_back(opn.simple_name());
++
++        using boost::join;
++        r->original_parent_name_qualified(join(ns, namespace_separator));
++        r->original_parent_name(opn.simple_name());
++        r->is_original_parent_visitable(o.is_original_parent_visitable());
++    }
++
++    for (const auto& prop : o.all_properties()) {
++        const auto tuple(to_property_info(
++                prop, o.is_immutable(), o.is_fluent()));
++        r->all_properties().push_back(std::get<0>(tuple));
++    }
++
++    for (const auto& prop : o.local_properties()) {
++        const auto tuple(to_property_info(
++                prop, o.is_immutable(), o.is_fluent()));
++
++        r->properties().push_back(std::get<0>(tuple));
++
++        if (std::get<1>(tuple))
++            r->has_primitive_properties(true);
++
++        if (std::get<2>(tuple))
++            r->requires_stream_manipulators(true);
++
++        if (std::get<3>(tuple))
++            r->requires_manual_move_constructor(true);
++
++        if (std::get<4>(tuple))
++            r->requires_manual_default_constructor(true);
++    }
++
++    i = o.relationships().find(sml::relationship_types::leaves);
++    if (i != o.relationships().end()) {
++        for (const auto l : i->second)
++            r->leaves().push_back(b.qualified_name(model_, l));
++    }
++
++    return r;
++}
++
++std::shared_ptr<visitor_info>
++transformer::to_visitor_info(const sml::object& o) const {
++    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << o.name();
++
++    auto r(std::make_shared<visitor_info>());
++    r->name(o.name().simple_name());
++
++    flat_name_builder b;
++    r->namespaces(b.namespace_list(model_, o.name()));
++
++    auto i(o.relationships().find(sml::relationship_types::visits));
++    if (i == o.relationships().end() || i->second.empty()) {
++        const auto& sn(o.name().simple_name());
++        BOOST_LOG_SEV(lg, error) << no_visitees << sn;
++        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + sn));
++    }
++
++    for (const auto qn : i->second)
++        r->types().push_back(b.qualified_name(model_, qn));
++
++    return r;
++}
++
+ std::shared_ptr<entity>
+ transformer::transform(const sml::enumeration& e) const {
+     return to_enum_info(e);
+@@ -88,16 +470,41 @@ std::shared_ptr<entity> transformer::transform(const sml::module& m) const {
+     return to_namespace_info(m);
+ }
+ 
+-std::shared_ptr<entity> transformer::transform(const sml::concept& /*e*/) const {
++std::shared_ptr<entity>
++transformer::transform(const sml::concept& /*c*/) const {
+     return std::make_shared<concept_info>();
+ }
+ 
+-std::shared_ptr<entity> transformer::transform(const sml::primitive& /*e*/) const {
++std::shared_ptr<entity>
++transformer::transform(const sml::primitive& /*p*/) const {
+     return std::make_shared<primitive_info>();
+ }
+ 
+-std::shared_ptr<entity> transformer::transform(const sml::object& /*e*/) const {
+-    return std::make_shared<new_class_info>();
++std::shared_ptr<entity> transformer::transform(const sml::object& o) const {
++    BOOST_LOG_SEV(lg, debug) << "Transforming object: " << o.name();
++
++    switch(o.object_type()) {
++    case sml::object_types::factory: // FIXME: mega-hack
++    case sml::object_types::user_defined_service:
++        return to_class_info(o, class_types::service);
++    case sml::object_types::visitor:
++        return to_visitor_info(o);
++    case sml::object_types::user_defined_value_object:
++    case sml::object_types::entity:
++    case sml::object_types::keyed_entity:
++        return to_class_info(o, class_types::user_defined);
++    case sml::object_types::exception:
++        return to_exception_info(o);
++    case sml::object_types::versioned_key:
++        return to_class_info(o, class_types::versioned_key);
++    case sml::object_types::unversioned_key:
++        return to_class_info(o, class_types::unversioned_key);
++    default:
++        BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
++                                 << " name: " << o.name();
++        BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +
++                boost::lexical_cast<std::string>(o.object_type())));
++    };
+ }
+ 
+ } }
+diff --git a/projects/sml/include/dogen/sml/types/object.hpp b/projects/sml/include/dogen/sml/types/object.hpp
+index 9bb7366..6b674e5 100644
+--- a/projects/sml/include/dogen/sml/types/object.hpp
++++ b/projects/sml/include/dogen/sml/types/object.hpp
+@@ -75,6 +75,7 @@ public:
+         const bool is_comparable,
+         const bool is_fluent,
+         const bool is_child,
++        const bool is_original_parent_visitable,
+         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+         const bool is_inheritance_root,
+         const dogen::sml::object_types& object_type,
+@@ -227,6 +228,16 @@ public:
+     void is_child(const bool v);
+     /**@}*/
+ 
++    /**
++     * @brief Is the original parent of this object a visitable type?
++     *
++     * Set to false if no parent exists, or if the parent is not visitable.
++     */
++    /**@{*/
++    bool is_original_parent_visitable() const;
++    void is_original_parent_visitable(const bool v);
++    /**@}*/
++
+     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships() const;
+     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships();
+     void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& v);
+@@ -294,6 +305,7 @@ private:
+     bool is_comparable_;
+     bool is_fluent_;
+     bool is_child_;
++    bool is_original_parent_visitable_;
+     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
+     bool is_inheritance_root_;
+     dogen::sml::object_types object_type_;
+diff --git a/projects/sml/src/hash/object_hash.cpp b/projects/sml/src/hash/object_hash.cpp
+index 6a1ec31..41cdff7 100644
+--- a/projects/sml/src/hash/object_hash.cpp
++++ b/projects/sml/src/hash/object_hash.cpp
+@@ -99,6 +99,7 @@ std::size_t object_hasher::hash(const object&v) {
+     combine(seed, v.is_comparable());
+     combine(seed, v.is_fluent());
+     combine(seed, v.is_child());
++    combine(seed, v.is_original_parent_visitable());
+     combine(seed, hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(v.relationships()));
+     combine(seed, v.is_inheritance_root());
+     combine(seed, v.object_type());
+diff --git a/projects/sml/src/serialization/object_ser.cpp b/projects/sml/src/serialization/object_ser.cpp
+index 5be9578..b919c63 100644
+--- a/projects/sml/src/serialization/object_ser.cpp
++++ b/projects/sml/src/serialization/object_ser.cpp
+@@ -63,6 +63,7 @@ void save(Archive& ar,
+     ar << make_nvp("is_comparable", v.is_comparable_);
+     ar << make_nvp("is_fluent", v.is_fluent_);
+     ar << make_nvp("is_child", v.is_child_);
++    ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+     ar << make_nvp("relationships", v.relationships_);
+     ar << make_nvp("is_inheritance_root", v.is_inheritance_root_);
+     ar << make_nvp("object_type", v.object_type_);
+@@ -88,6 +89,7 @@ void load(Archive& ar,
+     ar >> make_nvp("is_comparable", v.is_comparable_);
+     ar >> make_nvp("is_fluent", v.is_fluent_);
+     ar >> make_nvp("is_child", v.is_child_);
++    ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+     ar >> make_nvp("relationships", v.relationships_);
+     ar >> make_nvp("is_inheritance_root", v.is_inheritance_root_);
+     ar >> make_nvp("object_type", v.object_type_);
+diff --git a/projects/sml/src/test_data/object_td.cpp b/projects/sml/src/test_data/object_td.cpp
+index f177229..a6d5756 100644
+--- a/projects/sml/src/test_data/object_td.cpp
++++ b/projects/sml/src/test_data/object_td.cpp
+@@ -123,11 +123,12 @@ populate(const unsigned int position, result_type& v) {
+     v.is_comparable(create_bool(position + 9));
+     v.is_fluent(create_bool(position + 10));
+     v.is_child(create_bool(position + 11));
+-    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 12));
+-    v.is_inheritance_root(create_bool(position + 13));
+-    v.object_type(create_dogen_sml_object_types(position + 14));
+-    v.is_aggregate_root(create_bool(position + 15));
+-    v.identity(create_std_list_dogen_sml_property(position + 16));
++    v.is_original_parent_visitable(create_bool(position + 12));
++    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 13));
++    v.is_inheritance_root(create_bool(position + 14));
++    v.object_type(create_dogen_sml_object_types(position + 15));
++    v.is_aggregate_root(create_bool(position + 16));
++    v.identity(create_std_list_dogen_sml_property(position + 17));
+ }
+ 
+ object_generator::result_type
+diff --git a/projects/sml/src/types/object.cpp b/projects/sml/src/types/object.cpp
+index d9c0a53..28c2fe5 100644
+--- a/projects/sml/src/types/object.cpp
++++ b/projects/sml/src/types/object.cpp
+@@ -118,6 +118,7 @@ object::object()
+       is_comparable_(static_cast<bool>(0)),
+       is_fluent_(static_cast<bool>(0)),
+       is_child_(static_cast<bool>(0)),
++      is_original_parent_visitable_(static_cast<bool>(0)),
+       is_inheritance_root_(static_cast<bool>(0)),
+       object_type_(static_cast<dogen::sml::object_types>(0)),
+       is_aggregate_root_(static_cast<bool>(0)) { }
+@@ -141,6 +142,7 @@ object::object(
+     const bool is_comparable,
+     const bool is_fluent,
+     const bool is_child,
++    const bool is_original_parent_visitable,
+     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
+     const bool is_inheritance_root,
+     const dogen::sml::object_types& object_type,
+@@ -164,6 +166,7 @@ object::object(
+       is_comparable_(is_comparable),
+       is_fluent_(is_fluent),
+       is_child_(is_child),
++      is_original_parent_visitable_(is_original_parent_visitable),
+       relationships_(relationships),
+       is_inheritance_root_(is_inheritance_root),
+       object_type_(object_type),
+@@ -194,6 +197,7 @@ void object::to_stream(std::ostream& s) const {
+       << "\"is_comparable\": " << is_comparable_ << ", "
+       << "\"is_fluent\": " << is_fluent_ << ", "
+       << "\"is_child\": " << is_child_ << ", "
++      << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
+       << "\"relationships\": " << relationships_ << ", "
+       << "\"is_inheritance_root\": " << is_inheritance_root_ << ", "
+       << "\"object_type\": " << object_type_ << ", "
+@@ -218,6 +222,7 @@ void object::swap(object& other) noexcept {
+     swap(is_comparable_, other.is_comparable_);
+     swap(is_fluent_, other.is_fluent_);
+     swap(is_child_, other.is_child_);
++    swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
+     swap(relationships_, other.relationships_);
+     swap(is_inheritance_root_, other.is_inheritance_root_);
+     swap(object_type_, other.object_type_);
+@@ -245,6 +250,7 @@ bool object::operator==(const object& rhs) const {
+         is_comparable_ == rhs.is_comparable_ &&
+         is_fluent_ == rhs.is_fluent_ &&
+         is_child_ == rhs.is_child_ &&
++        is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
+         relationships_ == rhs.relationships_ &&
+         is_inheritance_root_ == rhs.is_inheritance_root_ &&
+         object_type_ == rhs.object_type_ &&
+@@ -386,6 +392,14 @@ void object::is_child(const bool v) {
+     is_child_ = v;
+ }
+ 
++bool object::is_original_parent_visitable() const {
++    return is_original_parent_visitable_;
++}
++
++void object::is_original_parent_visitable(const bool v) {
++    is_original_parent_visitable_ = v;
++}
++
+ const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& object::relationships() const {
+     return relationships_;
+ }
