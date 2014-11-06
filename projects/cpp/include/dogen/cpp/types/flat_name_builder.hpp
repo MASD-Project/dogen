@@ -74,6 +74,13 @@ public:
      */
     void complete_name(const sml::model& m, const sml::nested_qname& nqn,
         std::string& complete_name) const;
+
+
+    /**
+     * @brief Returns a string representation of the name supplied
+     * that can be used as a c++ identifier.
+     */
+    std::string identifiable_name(const std::string& n) const;
 };
 
 } }

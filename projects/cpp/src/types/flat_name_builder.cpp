@@ -19,13 +19,23 @@
  *
  */
 #include <boost/filesystem/path.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/cpp/types/flat_name_builder.hpp"
 
 namespace {
 
+const std::string empty;
+const std::string dot(".");
+const std::string comma(",");
+const std::string space(" ");
+const std::string less_than("<");
+const std::string more_than(">");
+const std::string separator("_");
+const std::string extension("HPP");
 const std::string scope_operator("::");
 
 }
@@ -80,12 +90,16 @@ std::list<std::string> flat_name_builder::
 to_namespace_list(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
+    // if there is no module name, it won't contribute to the namespaces.
     if (!qn.model_name().empty())
         r.push_back(qn.model_name());
 
+    // all modules in the module path contribute to namespaces.
     const auto mp(qn.module_path());
     r.insert(r.end(), mp.begin(), mp.end());
 
+    // if the qname belongs to a module, the simple name will
+    // contribute to the namespaces (since it is a module).
     const auto i(m.modules().find(qn));
     if (i != m.modules().end())
         r.push_back(qn.simple_name());
@@ -125,6 +139,18 @@ complete_name(const sml::model& m, const sml::nested_qname& nqn,
         is_first = false;
     }
     lambda('>');
+}
+
+std::string identifiable_name(const std::string& n) {
+    std::string r(n);
+
+    boost::replace_all(r, scope_operator, separator);
+    boost::replace_all(r, space, separator);
+    boost::replace_all(r, comma, empty);
+    boost::replace_all(r, less_than, separator);
+    boost::replace_all(r, more_than, empty);
+
+    return r;
 }
 
 } }
