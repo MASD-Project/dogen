@@ -150,6 +150,26 @@ In order to implement the class header formatter we need classes to
 format. Copy across the code from the legacy transformer and refactor
 it to fit the new class info.
 
+*** IMPLEMENTATION Populate file name and includes                    :task:
+    CLOCK: [2014-11-07 Fri 17:25]--[2014-11-07 Fri 18:07] =>  0:42
+    CLOCK: [2014-11-07 Fri 07:54]--[2014-11-07 Fri 08:45] =>  0:51
+    CLOCK: [2014-11-06 Thu 22:38]--[2014-11-06 Thu 22:51] =>  0:13
+
+Overall objectives:
+
+- formatters must be able to populate the meta-data for the file name
+  and system/user include files during SML workflow;
+- transformer must be able to read this information using registrar to
+  access all available formatters.
+
+After reading all that has been written on this subject, it seems like
+we have taken a wrong turn in the transition of =enricher= to
+=consumer_interface=. We thought we could accumulate state rather than
+mutate the meta-data in the model; however, if we accumulate state by
+=qname= we then need to store it somewhere. It can't be stored in SML
+(since we do not want to mutate the model) nor can we store it in C++
+(we are).
+
 *** IMPLEMENTATION Implement class header formatter :task:refactor:formatters:cpp:
     CLOCK: [2014-11-06 Thu 22:19]--[2014-11-06 Thu 22:36] =>  0:17
     CLOCK: [2014-11-06 Thu 07:54]--[2014-11-06 Thu 08:07] =>  0:13
@@ -163,11 +183,6 @@ it to fit the new class info.
      CLOSED: [2014-11-06 Thu 22:38]
 
 Generate the licence, etc using boilerplate formatter.
-
-**** IMPLEMENTATION Populate file name in formatter                    :task:
-     CLOCK: [2014-11-06 Thu 22:38]--[2014-11-06 Thu 22:51] =>  0:13
-
-In order to get the includers to work we need to populate the file name.
 
 **** Tidy-up =types_main_header_file_formatter=                        :task:
 

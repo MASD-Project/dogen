@@ -86,20 +86,6 @@ We allowed this section to evolve as a collage of different ideas, but
 now it is no longer making sense as a whole. We need to go back to the
 drawing board and create a structure for it.
 
-*** CANCELLED Refactor hello world example to make it simpler         :story:
-    CLOSED: [2014-09-14 Sun 23:05]
-
-*Rationale*: actually, an hello world kind of has to have the string
- "hello world" so we can't really get away with it. Leave it as it is.
-
-Whilst we started adding a section on dia in the manual, we noticed
-that the hello world example makes use of =std::string= making it
-unsuitable for a basic example. We need to refactor it to use only
-int.
-
-- change manual sections on hello world
-- change sanity
-
 *** COMPLETED Fix windows continuous build                            :story:
     CLOSED: [2014-09-10 Wed 18:47]
     CLOCK: [2014-09-08 Mon 21:45]--[2014-09-08 Mon 22:07] =>  0:22
@@ -580,6 +566,20 @@ entities and do not require any propagation.
 ** Deprecated Development Stories
 
 Stories that do not make sense any longer.
+
+*** CANCELLED Refactor hello world example to make it simpler         :story:
+    CLOSED: [2014-09-14 Sun 23:05]
+
+*Rationale*: actually, an hello world kind of has to have the string
+ "hello world" so we can't really get away with it. Leave it as it is.
+
+Whilst we started adding a section on dia in the manual, we noticed
+that the hello world example makes use of =std::string= making it
+unsuitable for a basic example. We need to refactor it to use only
+int.
+
+- change manual sections on hello world
+- change sanity
 
 *** CANCELLED Move includes and header guard into entity              :story:
     CLOSED: [2014-09-08 Mon 08:10]
