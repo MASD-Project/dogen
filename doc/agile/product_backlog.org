@@ -4440,6 +4440,7 @@ https://github.com/rmartinho/nonius
   will be nonsense.
 - [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
   support.
+- some tips on using chrono to benchmark [[http://www.cookandcommit.eu/2014/11/simple-macro-for-algorithms-time.html][here]].
 
 ** Won't fix
 
