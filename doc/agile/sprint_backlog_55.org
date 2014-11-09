@@ -17,21 +17,22 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-06 Thu 22:51]
+Clock summary at [2014-11-09 Sun 21:09]
 
-| Headline                                                               | Time   |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *9:34* |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 9:34 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:16 |
-| COMPLETED Sort out postgres update problems                            |        |      | 0:36 |
-| COMPLETED Refactor static data initialisation                          |        |      | 1:08 |
-| COMPLETED Add support for facet settings                               |        |      | 4:10 |
-| COMPLETED Implement factory for c++ settings                           |        |      | 0:20 |
-| COMPLETED Copy across boilerplate formatter and specs                  |        |      | 0:38 |
-| COMPLETED Implement transformation for class info objects in cpp model |        |      | 1:30 |
-| IMPLEMENTATION Implement class header formatter                        |        |      | 0:56 |
+| Headline                                                               | Time    |       |      |
+|------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                           | *12:41* |       |      |
+|------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                        |         | 12:41 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:16 |
+| COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
+| COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
+| COMPLETED Add support for facet settings                               |         |       | 4:10 |
+| COMPLETED Implement factory for c++ settings                           |         |       | 0:20 |
+| COMPLETED Copy across boilerplate formatter and specs                  |         |       | 0:38 |
+| COMPLETED Implement transformation for class info objects in cpp model |         |       | 1:30 |
+| IMPLEMENTATION Populate file name and includes                         |         |       | 3:20 |
+| IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -151,6 +152,8 @@ format. Copy across the code from the legacy transformer and refactor
 it to fit the new class info.
 
 *** IMPLEMENTATION Populate file name and includes                    :task:
+    CLOCK: [2014-11-09 Sun 20:28]--[2014-11-09 Sun 21:08] =>  0:40
+    CLOCK: [2014-11-09 Sun 18:44]--[2014-11-09 Sun 19:38] =>  0:54
     CLOCK: [2014-11-07 Fri 17:25]--[2014-11-07 Fri 18:07] =>  0:42
     CLOCK: [2014-11-07 Fri 07:54]--[2014-11-07 Fri 08:45] =>  0:51
     CLOCK: [2014-11-06 Thu 22:38]--[2014-11-06 Thu 22:51] =>  0:13
