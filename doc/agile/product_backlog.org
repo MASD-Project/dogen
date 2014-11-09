@@ -377,6 +377,12 @@ formatter requires it). It is also required when a given
 facet/formatter is not supported (for example when an STL type does
 not support serialisation out of the box).
 
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
 *** Failed facet dependencies should be treated as errors :story:feature:meta_data:
 
 #+begin_quote
