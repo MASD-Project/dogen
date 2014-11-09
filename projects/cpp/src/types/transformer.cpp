@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/cpp/types/flat_name_builder.hpp"
+#include "dogen/cpp/types/identifier_name_builder.hpp"
 #include "dogen/cpp/types/transformation_error.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 
@@ -176,7 +176,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
     bool& requires_stream_manipulators) const {
 
     const auto qn(nqn.type());
-    flat_name_builder b;
+    identifier_name_builder b;
     const auto qualified_name(b.qualified_name(model_, qn));
     nti.name(qualified_name);
     nti.namespaces(b.namespace_list(model_, qn));
@@ -309,7 +309,7 @@ transformer::to_enum_info(const sml::enumeration& e) const {
     r->documentation(e.documentation());
     r->type(e.underlying_type().simple_name());
 
-    flat_name_builder b;
+    identifier_name_builder b;
     r->namespaces(b.namespace_list(model_, e.name()));
 
     for (const auto& en : e.enumerators())
@@ -327,7 +327,7 @@ to_namespace_info(const sml::module& m) const {
     auto r(std::make_shared<namespace_info>());
     r->documentation(m.documentation());
 
-    flat_name_builder b;
+    identifier_name_builder b;
     r->namespaces(b.namespace_list(model_, m.name()));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
@@ -342,7 +342,7 @@ transformer::to_exception_info(const sml::object& o) const {
     r->name(o.name().simple_name());
     r->documentation(o.documentation());
 
-    flat_name_builder b;
+    identifier_name_builder b;
     r->namespaces(b.namespace_list(model_, o.name()));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << o.name();
@@ -355,7 +355,7 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
 
     r->name(o.name().simple_name());
 
-    flat_name_builder b;
+    identifier_name_builder b;
     r->namespaces(b.namespace_list(model_, o.name()));
     r->documentation(o.documentation());
     r->is_immutable(o.is_immutable());
@@ -446,7 +446,7 @@ transformer::to_visitor_info(const sml::object& o) const {
     auto r(std::make_shared<visitor_info>());
     r->name(o.name().simple_name());
 
-    flat_name_builder b;
+    identifier_name_builder b;
     r->namespaces(b.namespace_list(model_, o.name()));
 
     auto i(o.relationships().find(sml::relationship_types::visits));

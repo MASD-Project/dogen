@@ -45,6 +45,8 @@
 #include "dogen/cpp/io/new_class_info_io.hpp"
 #include "dogen/cpp/io/odb_options_info_io.hpp"
 #include "dogen/cpp/io/parent_info_io.hpp"
+#include "dogen/cpp/io/path_spec_details_io.hpp"
+#include "dogen/cpp/io/path_spec_key_io.hpp"
 #include "dogen/cpp/io/primitive_info_io.hpp"
 #include "dogen/cpp/io/project_io.hpp"
 #include "dogen/cpp/io/property_info_io.hpp"

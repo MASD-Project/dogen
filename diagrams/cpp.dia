@@ -19426,13 +19426,13 @@ to the grammar of the C++ language.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O153">
       <dia:attribute name="obj_pos">
-        <dia:point val="278,39"/>
+        <dia:point val="294,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="277.95,38.95;283.555,42.65"/>
+        <dia:rectangle val="293.95,43.95;299.555,47.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="278,39"/>
+        <dia:point val="294,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.5049999999999999"/>
@@ -19567,16 +19567,16 @@ to the grammar of the C++ language.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O154">
       <dia:attribute name="obj_pos">
-        <dia:point val="291,39"/>
+        <dia:point val="289,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="290.95,38.95;306.195,42.35"/>
+        <dia:rectangle val="288.95,35.95;304.195,39.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="291,39"/>
+        <dia:point val="289,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.145"/>
@@ -19607,7 +19607,7 @@ main.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="291.35,40.245"/>
+            <dia:point val="289.35,37.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -19620,17 +19620,17 @@ main.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O155">
       <dia:attribute name="obj_pos">
-        <dia:point val="291,40.65"/>
+        <dia:point val="296.572,39.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="283.426,39.6974;291.054,41.075"/>
+        <dia:rectangle val="296.351,39.2481;297.154,44.0653"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="291,40.65"/>
-        <dia:point val="283.505,40.1"/>
+        <dia:point val="296.572,39.3"/>
+        <dia:point val="296.752,44"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -19645,11 +19645,11 @@ main.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="287.252,40.875"/>
+        <dia:point val="296.662,42.15"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O154" connection="3"/>
-        <dia:connection handle="1" to="O153" connection="4"/>
+        <dia:connection handle="0" to="O154" connection="6"/>
+        <dia:connection handle="1" to="O153" connection="1"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O156">
@@ -20688,7 +20688,7 @@ main.#</dia:string>
             <dia:string>#default_facet_settings_by_facet_id_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, facet_settings&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,facet_settings&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -21665,13 +21665,13 @@ main.#</dia:string>
         <dia:point val="325,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="324.95,56.95;358.66,66.85"/>
+        <dia:rectangle val="324.95,56.95;355.965,66.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="325,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.609999999999999"/>
+        <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>
@@ -21792,7 +21792,7 @@ main.#</dia:string>
             <dia:string>#path_spec_details_by_key_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const std::unordered_map&lt;path_spec_key,path_spec_details&gt;&amp;#</dia:string>
+            <dia:string>#std::unordered_map&lt;path_spec_key,path_spec_details&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -22215,17 +22215,17 @@ main.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="341.805,57"/>
+        <dia:point val="340.457,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="341.055,45.55;354.197,57.8"/>
+        <dia:rectangle val="339.707,45.55;354.197,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="341.805,57"/>
-        <dia:point val="341.805,52"/>
+        <dia:point val="340.457,57"/>
+        <dia:point val="340.457,52"/>
         <dia:point val="353.998,52"/>
         <dia:point val="353.998,45.6"/>
       </dia:attribute>
@@ -24295,13 +24295,13 @@ main.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O184">
       <dia:attribute name="obj_pos">
-        <dia:point val="313,44"/>
+        <dia:point val="310,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="312.95,43.95;323.033,47.05"/>
+        <dia:rectangle val="309.95,43.95;320.033,47.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="313,44"/>
+        <dia:point val="310,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
@@ -24444,7 +24444,7 @@ main.#</dia:string>
         <dia:point val="325,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="317.941,46.95;325.75,57.8"/>
+        <dia:rectangle val="314.941,46.95;325.75,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24452,8 +24452,8 @@ main.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="325,57"/>
         <dia:point val="325,52"/>
-        <dia:point val="317.991,52"/>
-        <dia:point val="317.991,47"/>
+        <dia:point val="314.991,52"/>
+        <dia:point val="314.991,47"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -25060,16 +25060,16 @@ main.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O192">
       <dia:attribute name="obj_pos">
-        <dia:point val="341,72"/>
+        <dia:point val="343,72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="340.95,71.95;352.73,74.55"/>
+        <dia:rectangle val="342.95,71.95;354.73,74.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="341,72"/>
+        <dia:point val="343,72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.68"/>
@@ -25099,7 +25099,7 @@ C++ model type.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="341.35,73.245"/>
+            <dia:point val="343.35,73.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -25112,17 +25112,17 @@ C++ model type.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O193">
       <dia:attribute name="obj_pos">
-        <dia:point val="345.826,71.9509"/>
+        <dia:point val="347.152,71.9509"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="341.459,66.5145;345.896,72.021"/>
+        <dia:rectangle val="340.174,66.4525;347.222,72.021"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="345.826,71.9509"/>
-        <dia:point val="341.805,66.8"/>
+        <dia:point val="347.152,71.9509"/>
+        <dia:point val="340.457,66.8"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -25137,7 +25137,7 @@ C++ model type.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="343.814,69.8754"/>
+        <dia:point val="343.804,69.8754"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O192" connection="8"/>
@@ -25844,17 +25844,17 @@ data such as the facet settings.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="358.61,66.8"/>
+        <dia:point val="355.915,66.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="357.86,60.55;371.2,72.05"/>
+        <dia:rectangle val="355.165,60.55;371.2,72.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="358.61,66.8"/>
-        <dia:point val="358.61,72"/>
+        <dia:point val="355.915,66.8"/>
+        <dia:point val="355.915,72"/>
         <dia:point val="371,72"/>
         <dia:point val="371,60.6"/>
       </dia:attribute>
@@ -25986,17 +25986,17 @@ data such as the facet settings.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="358.61,57"/>
+        <dia:point val="355.915,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="357.86,51.25;427.71,79.6"/>
+        <dia:rectangle val="355.165,51.25;427.71,79.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="358.61,57"/>
-        <dia:point val="358.61,52"/>
+        <dia:point val="355.915,57"/>
+        <dia:point val="355.915,52"/>
         <dia:point val="427.51,52"/>
         <dia:point val="427.51,78"/>
       </dia:attribute>

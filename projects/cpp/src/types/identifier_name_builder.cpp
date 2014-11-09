@@ -24,7 +24,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
-#include "dogen/cpp/types/flat_name_builder.hpp"
+#include "dogen/cpp/types/identifier_name_builder.hpp"
 
 namespace {
 
@@ -43,7 +43,7 @@ const std::string scope_operator("::");
 namespace dogen {
 namespace cpp {
 
-std::string flat_name_builder::
+std::string identifier_name_builder::
 filename_for_qname(const boost::property_tree::ptree& meta_data,
     const bool is_header, const sml::qname& qn,
     const std::string& facet_directory, const std::string& facet_postfix,
@@ -86,7 +86,7 @@ filename_for_qname(const boost::property_tree::ptree& meta_data,
     return r.generic_string();
 }
 
-std::list<std::string> flat_name_builder::
+std::list<std::string> identifier_name_builder::
 namespace_list(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
@@ -107,14 +107,14 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
     return r;
 }
 
-std::string flat_name_builder::
+std::string identifier_name_builder::
 qualified_name(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> l(namespace_list(m, qn));
     l.push_back(qn.simple_name());
     return boost::algorithm::join(l, scope_operator);
 }
 
-void flat_name_builder::
+void identifier_name_builder::
 complete_name(const sml::model& m, const sml::nested_qname& nqn,
     std::string& complete_name) const {
     const auto qualified_name(this->qualified_name(m, nqn.type()));
@@ -141,7 +141,7 @@ complete_name(const sml::model& m, const sml::nested_qname& nqn,
     lambda('>');
 }
 
-std::string flat_name_builder::identifiable_name(const std::string& n) const {
+std::string identifier_name_builder::identifiable_name(const std::string& n) const {
     std::string r(n);
 
     boost::replace_all(r, scope_operator, separator);

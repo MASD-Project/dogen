@@ -45,6 +45,8 @@
 #include "dogen/cpp/hash/new_class_info_hash.hpp"
 #include "dogen/cpp/hash/odb_options_info_hash.hpp"
 #include "dogen/cpp/hash/parent_info_hash.hpp"
+#include "dogen/cpp/hash/path_spec_details_hash.hpp"
+#include "dogen/cpp/hash/path_spec_key_hash.hpp"
 #include "dogen/cpp/hash/primitive_info_hash.hpp"
 #include "dogen/cpp/hash/project_hash.hpp"
 #include "dogen/cpp/hash/property_info_hash.hpp"
