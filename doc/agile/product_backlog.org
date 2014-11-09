@@ -11,6 +11,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Control the emission of pragma once with meta-data        :task:refactor:
+
+At present we are always adding =#pragrma once= to the header guard:
+
+: #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+: #pragma once
+: #endif
+
+This should really be optional and controlled via meta-data, probably
+at the c++ model level.
+
 *** Determining the model module should be in SML             :task:refactor:
 
 At present we have a number of methods looking for the model
