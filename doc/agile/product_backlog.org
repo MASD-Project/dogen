@@ -11,6 +11,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for spaces in template types                  :task:refactor:
+
+At present we do not allow any spaces when declaring a type that has
+template parameters:
+
+: std::exception::what: Failed to parse string: std::unordered_map<std::string, facet_settings>
+
+We need to look into how to add this to the spirit parsing rules as it
+causes a lot of pain.
+
 *** Improve errors in dia objects                             :task:refactor:
 
 At present when adding blank spaces in a dia object we get the
