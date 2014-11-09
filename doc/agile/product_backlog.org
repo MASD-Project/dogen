@@ -332,6 +332,19 @@ target model, infer all of its dependencies (including at the
 programming language level) and then load only the system models that
 are required for those languages.
 
+*** Add support for formatter and facet dependencies                   :task:
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
 *** Failed facet dependencies should be treated as errors :story:feature:meta_data:
 
 #+begin_quote
