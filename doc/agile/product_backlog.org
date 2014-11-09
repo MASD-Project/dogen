@@ -11,6 +11,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for disabling formatters                               :task:
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+the meta-data. We can either implement it in the backend or make all
+the formatters return an =std::optional<dogen::formatters::file>= and
+internally look for a =enabled= trait.
+
 *** Control the emission of pragma once with meta-data        :task:refactor:
 
 At present we are always adding =#pragrma once= to the header guard:
