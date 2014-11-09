@@ -11,6 +11,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider adding support for inline hashing                :task:refactor:
+
+At present we have an entire facet for hashing. However, it is
+conceivable that some users may find it a bit of an overkill and would
+rather have it added to the types facet instead. We already do
+something similar for the =operator<<=. We need to consider a more
+generic mechanism for allowing the inlining of certain features when
+they are more core.
+
 *** Add support for spaces in template types                  :task:refactor:
 
 At present we do not allow any spaces when declaring a type that has
