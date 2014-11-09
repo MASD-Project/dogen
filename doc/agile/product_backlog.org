@@ -11,6 +11,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider a more selective hashing generation              :task:refactor:
+
+At present we either generate hashing for all types or none at all. In
+practice, most users only need hashing for a few types. It would be
+great if we could have certain facets like hashing with a "disabled
+for all types except" approach. Users would then enable the types that
+they need.
+
 *** Consider adding support for inline hashing                :task:refactor:
 
 At present we have an entire facet for hashing. However, it is
