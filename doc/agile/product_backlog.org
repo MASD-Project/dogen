@@ -11,6 +11,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Improve errors in dia objects                             :task:refactor:
+
+At present when adding blank spaces in a dia object we get the
+following error:
+
+: 2014-11-09 23:05:58.936785 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: std::unordered_map<std::string, facet_settings>
+: 2014-11-09 23:05:58.938301 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
+: std::exception::what: Failed to parse string: std::unordered_map<std::string, facet_settings>
+: [P12tag_workflow] = Code generation failure.
+
+There is no clue as to which object caused the error. Add a class name
+and dia object ID to the exception.
+
 *** Add support for disabling formatters                               :task:
 
 We should be able to disable some formatters such as forward
