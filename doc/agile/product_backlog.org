@@ -381,6 +381,13 @@ target model, infer all of its dependencies (including at the
 programming language level) and then load only the system models that
 are required for those languages.
 
+This may not be as hard as it seems: we already infer that all models
+the target depends on are present by looking at the list of distinct
+model names required by the target qualified names. We could use the
+same logic to determine what system models to load. The only exception
+is the hardware model, which must always be loaded (or we need some
+kind of mapping between "empty" model name and the hardware model).
+
 *** Add support for formatter and facet dependencies                   :task:
 
 Once we are finished with the refactoring of the C++ model, we should
