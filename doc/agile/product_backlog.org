@@ -11,7 +11,7 @@
 
 Stories that we intend to look at, at some point.
 
-*** Consider a more selective hashing generation              :task:refactor:
+*** Consider a more selective hashing generation                :epic:vision:
 
 At present we either generate hashing for all types or none at all. In
 practice, most users only need hashing for a few types. It would be
@@ -19,7 +19,7 @@ great if we could have certain facets like hashing with a "disabled
 for all types except" approach. Users would then enable the types that
 they need.
 
-*** Consider adding support for inline hashing                :task:refactor:
+*** Consider adding support for inline hashing                  :epic:vision:
 
 At present we have an entire facet for hashing. However, it is
 conceivable that some users may find it a bit of an overkill and would
@@ -27,6 +27,19 @@ rather have it added to the types facet instead. We already do
 something similar for the =operator<<=. We need to consider a more
 generic mechanism for allowing the inlining of certain features when
 they are more core.
+
+In fact, one wonders if we are not getting towards a multi-option
+implementation for certain things:
+
+- as a facet;
+- as a formatter;
+- as a toggleable aspect of an existing formatter.
+
+Where the user gets to choose one of the three possible
+implementations. In some cases we may not support all of these
+options; for example, for operators we could support the second and
+the third option and so on.
+
 
 *** Add support for spaces in template types                  :task:refactor:
 
