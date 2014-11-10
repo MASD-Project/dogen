@@ -35,7 +35,6 @@
 #include "dogen/cpp/io/facet_settings_io.hpp"
 #include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/cpp/io/formatters/includers_formatter_io.hpp"
 #include "dogen/cpp/io/formatters/odb/settings_io.hpp"
 #include "dogen/cpp/io/formatters/serialization/settings_io.hpp"
 #include "dogen/cpp/io/includes_io.hpp"

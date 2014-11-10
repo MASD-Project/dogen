@@ -18,36 +18,49 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_FORMATTERS_INCLUDERS_FORMATTER_HASH_HPP
-#define DOGEN_CPP_HASH_FORMATTERS_INCLUDERS_FORMATTER_HASH_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/cpp/types/formatters/includers_formatter.hpp"
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/settings_bundle.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-struct includers_formatter_hasher {
+class formatter_interface {
 public:
-    static std::size_t hash(const includers_formatter& v);
+    formatter_interface() = default;
+    formatter_interface(const formatter_interface&) = delete;
+    formatter_interface(formatter_interface&&) = default;
+    virtual ~formatter_interface() noexcept = 0;
+
+public:
+    /**
+     * @brief Unique identifier for the facet.
+     */
+    virtual std::string facet_id() const = 0;
+
+    /**
+     * @brief Unique identifier for the formatter.
+     */
+    virtual std::string formatter_id() const = 0;
+
+    /**
+     * @brief Create the file name for this formatter, given a
+     * qualified name and the current settings.
+     */
+    virtual boost::filesystem::path
+    make_file_name(const settings_bundle& sb, const sml::qname& qn) const = 0;
 };
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::cpp::formatters::includers_formatter> {
-public:
-    size_t operator()(const dogen::cpp::formatters::includers_formatter& v) const {
-        return dogen::cpp::formatters::includers_formatter_hasher::hash(v);
-    }
-};
-
-}
 #endif

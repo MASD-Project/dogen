@@ -18,24 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_FORMATTERS_INCLUDERS_FORMATTER_IO_HPP
-#define DOGEN_CPP_IO_FORMATTERS_INCLUDERS_FORMATTER_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen/cpp/types/formatters/includers_formatter.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::formatters::includers_formatter& v);
+formatter_interface::~formatter_interface() noexcept { }
 
 } } }
-
-#endif

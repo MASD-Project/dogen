@@ -24,8 +24,4 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-bool includers_formatter::operator==(const includers_formatter& /*rhs*/) const {
-    return true;
-}
-
 } } }

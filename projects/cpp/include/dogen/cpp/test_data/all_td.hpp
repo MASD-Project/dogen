@@ -35,7 +35,6 @@
 #include "dogen/cpp/test_data/facet_settings_td.hpp"
 #include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
-#include "dogen/cpp/test_data/formatters/includers_formatter_td.hpp"
 #include "dogen/cpp/test_data/formatters/odb/settings_td.hpp"
 #include "dogen/cpp/test_data/formatters/serialization/settings_td.hpp"
 #include "dogen/cpp/test_data/includes_td.hpp"

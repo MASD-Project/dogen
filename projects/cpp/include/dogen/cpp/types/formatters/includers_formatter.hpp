@@ -25,34 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include "dogen/cpp/serialization/formatters/includers_formatter_fwd_ser.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class includers_formatter final {
-public:
-    includers_formatter() = default;
-    includers_formatter(const includers_formatter&) = default;
-    includers_formatter(includers_formatter&&) = default;
-    ~includers_formatter() = default;
-    includers_formatter& operator=(const includers_formatter&) = default;
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const includers_formatter& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, includers_formatter& v, unsigned int version);
-
-public:
-    bool operator==(const includers_formatter& rhs) const;
-    bool operator!=(const includers_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+class includers_formatter {
+    
 };
 
 } } }

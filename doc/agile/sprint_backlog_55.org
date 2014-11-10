@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-10 Mon 18:43]
+Clock summary at [2014-11-10 Mon 22:50]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *14:48* |       |      |
+| *Total time*                                                           | *15:05* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 14:48 |      |
+| Development Stories Implemented                                        |         | 15:05 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:25 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -33,7 +33,7 @@ Clock summary at [2014-11-10 Mon 18:43]
 | COMPLETED Implement transformation for class info objects in cpp model |         |       | 1:30 |
 | COMPLETED Determine the architecture for include generation            |         |       | 4:00 |
 | COMPLETED Implement the new file name method in class header formatter |         |       | 0:36 |
-| IMPLEMENTATION Create a base interface for all formatters              |         |       | 0:26 |
+| COMPLETED Create a base interface for all formatters                   |         |       | 0:43 |
 | IMPLEMENTATION Implement include builder for class header              |         |       | 0:16 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
@@ -194,7 +194,9 @@ relative path inside the formatter.
 - refactor file name generation in identifier name builder;
 - make use of identifier name builder in formatter.
 
-*** IMPLEMENTATION Create a base interface for all formatters :task:refactor:
+*** COMPLETED Create a base interface for all formatters      :task:refactor:
+    CLOSED: [2014-11-10 Mon 22:50]
+    CLOCK: [2014-11-10 Mon 22:33]--[2014-11-10 Mon 22:50] =>  0:17
     CLOCK: [2014-11-10 Mon 18:22]--[2014-11-10 Mon 18:43] =>  0:21
     CLOCK: [2014-11-10 Mon 18:16]--[2014-11-10 Mon 18:21] =>  0:05
 

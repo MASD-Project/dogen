@@ -25,10 +25,7 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 
@@ -36,7 +33,7 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class class_formatter_interface {
+class class_formatter_interface : public formatter_interface {
 public:
     class_formatter_interface() = default;
     class_formatter_interface(const class_formatter_interface&) = delete;
@@ -45,27 +42,10 @@ public:
 
 public:
     /**
-     * @brief Unique identifier for the facet.
-     */
-    virtual std::string facet_id() const = 0;
-
-    /**
-     * @brief Unique identifier for the formatter.
-     */
-    virtual std::string formatter_id() const = 0;
-
-    /**
      * @brief Generate a c++ representation for the type.
      */
     virtual dogen::formatters::file
     format(const class_info& c, const settings_bundle& sb) const = 0;
-
-    /**
-     * @brief Create the file name for this formatter, given a
-     * qualified name and the current settings.
-     */
-    virtual boost::filesystem::path
-    make_file_name(const settings_bundle& sb, const sml::qname& qn) const = 0;
 };
 
 } } }
