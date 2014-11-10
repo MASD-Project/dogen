@@ -22,8 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/cpp/types/identifier_name_builder.hpp"
 
 namespace {
@@ -43,20 +41,17 @@ const std::string scope_operator("::");
 namespace dogen {
 namespace cpp {
 
-std::string identifier_name_builder::
-filename_for_qname(const boost::property_tree::ptree& meta_data,
-    const bool is_header, const sml::qname& qn,
-    const std::string& facet_directory, const std::string& facet_postfix,
+std::string identifier_name_builder::file_name(
+    const settings_bundle& sb, const bool is_header, const sml::qname& qn,
     const std::string& additional_postfix) const {
 
-    sml::meta_data::reader reader(meta_data);
     boost::filesystem::path r;
-    if (reader.is_true(sml::tags::cpp::split_project)) {
+    if (sb.cpp_settings().split_project()) {
         for(auto n : qn.external_module_path())
             r /= n;
     }
 
-    if (reader.is_true(sml::tags::cpp::split_project))
+    if (sb.cpp_settings().split_project())
         r /= qn.model_name();
     else if (is_header) {
         for(auto n : qn.external_module_path())
@@ -64,8 +59,8 @@ filename_for_qname(const boost::property_tree::ptree& meta_data,
         r /= qn.model_name();
     }
 
-    if (reader.is_true(sml::tags::cpp::enable_facet_folders))
-        r /= facet_directory;
+    if (sb.cpp_settings().enable_facet_folders())
+        r /= sb.facet_settings().directory();
 
     for(auto n : qn.module_path())
         r /= n;
@@ -73,13 +68,13 @@ filename_for_qname(const boost::property_tree::ptree& meta_data,
     std::ostringstream stream;
     stream << qn.simple_name() << additional_postfix;
 
-    if (reader.is_true(sml::tags::cpp::enable_unique_file_names))
-        stream << facet_postfix;
+    if (sb.cpp_settings().enable_unique_file_names())
+        stream << sb.facet_settings().postfix();
 
     if (is_header)
-        stream << reader.get(sml::tags::cpp::header_file_extension);
+        stream << sb.cpp_settings().header_file_extension();
     else
-        stream << reader.get(sml::tags::cpp::implementation_file_extension);
+        stream << sb.cpp_settings().implementation_file_extension();
 
     r /= stream.str();
 
@@ -105,6 +100,17 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
         r.push_back(qn.simple_name());
 
     return r;
+}
+
+std::string identifier_name_builder::header_file_name(const settings_bundle& sb,
+    const sml::qname& qn, const std::string& additional_postfix) const {
+    return file_name(sb, true/*is_header*/, qn, additional_postfix);
+}
+
+std::string identifier_name_builder::implementation_file_name(
+    const settings_bundle& sb, const sml::qname& qn,
+    const std::string& additional_postfix) const {
+    return file_name(sb, false/*is_header*/, qn, additional_postfix);
 }
 
 std::string identifier_name_builder::

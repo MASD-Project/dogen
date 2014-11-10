@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/cpp/types/identifier_name_builder.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
@@ -85,9 +86,9 @@ format(const class_info& c, const settings_bundle& sb) const {
 }
 
 boost::filesystem::path class_header_formatter::
-make_file_name(const settings_bundle& /*sb*/, const sml::qname& /*qn*/) const {
-    boost::filesystem::path r;
-    return r;
+make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
+    identifier_name_builder b;
+    return b.header_file_name(sb, qn);
 }
 
 } } } }

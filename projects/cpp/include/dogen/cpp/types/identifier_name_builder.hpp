@@ -27,10 +27,10 @@
 
 #include <list>
 #include <string>
-#include <boost/property_tree/ptree.hpp>
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/cpp/types/settings_bundle.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -46,6 +46,14 @@ public:
     identifier_name_builder(identifier_name_builder&&) = default;
     ~identifier_name_builder() noexcept = default;
 
+private:
+    /**
+     * @brief Returns the file name for the given qualified name and settings.
+     */
+    std::string file_name(
+        const settings_bundle& sb, const bool is_header, const sml::qname& qn,
+        const std::string& additional_postfix) const;
+
 public:
     /**
      * @brief Flattens all the SML namespace information stored in qname
@@ -55,13 +63,20 @@ public:
     namespace_list(const sml::model& m, const sml::qname& qn) const;
 
     /**
-     * @brief Returns the file name for the given qualified name and facet.
+     * @brief Returns the header file name for the given qualified
+     * name and settings.
      */
-    std::string filename_for_qname(
-        const boost::property_tree::ptree& meta_data,
-        const bool is_header, const sml::qname& qn,
-        const std::string& facet_directory, const std::string& facet_postfix,
-        const std::string& additional_postfix) const;
+    std::string header_file_name(const settings_bundle& sb,
+        const sml::qname& qn,
+        const std::string& additional_postfix = std::string()) const;
+
+    /**
+     * @brief Returns the implementation file name for the given
+     * qualified name and settings.
+     */
+    std::string implementation_file_name(const settings_bundle& sb,
+        const sml::qname& qn,
+        const std::string& additional_postfix = std::string()) const;
 
     /**
      * @brief Flat representation of the qualified name.
