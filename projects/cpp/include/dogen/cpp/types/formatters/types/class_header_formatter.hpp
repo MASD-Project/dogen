@@ -58,6 +58,9 @@ public:
 
     dogen::formatters::file
     format(const class_info& c, const settings_bundle& sb) const override;
+
+    boost::filesystem::path make_file_name(const settings_bundle& sb,
+        const sml::qname& qn) const override;
 };
 
 } } } }

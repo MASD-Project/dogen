@@ -26,6 +26,8 @@
 #endif
 
 #include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
 #include "dogen/cpp/types/class_info.hpp"
@@ -48,7 +50,7 @@ public:
     virtual std::string facet_id() const = 0;
 
     /**
-     * @brief Unique identifier for the formatter, for logging purposes.
+     * @brief Unique identifier for the formatter.
      */
     virtual std::string formatter_id() const = 0;
 
@@ -57,6 +59,13 @@ public:
      */
     virtual dogen::formatters::file
     format(const class_info& c, const settings_bundle& sb) const = 0;
+
+    /**
+     * @brief Create the file name for this formatter, given a
+     * qualified name and the current settings.
+     */
+    virtual boost::filesystem::path
+    make_file_name(const settings_bundle& sb, const sml::qname& qn) const = 0;
 };
 
 } } }

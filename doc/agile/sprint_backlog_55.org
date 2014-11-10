@@ -17,23 +17,24 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-10 Mon 08:29]
+Clock summary at [2014-11-10 Mon 08:41]
 
-| Headline                                                               | Time    |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *13:46* |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 13:46 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:25 |
-| COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
-| COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
-| COMPLETED Add support for facet settings                               |         |       | 4:10 |
-| COMPLETED Implement factory for c++ settings                           |         |       | 0:20 |
-| COMPLETED Copy across boilerplate formatter and specs                  |         |       | 0:38 |
-| COMPLETED Implement transformation for class info objects in cpp model |         |       | 1:30 |
-| COMPLETED Determine the architecture for include generation            |         |       | 4:00 |
-| IMPLEMENTATION Implement include builder for class header              |         |       | 0:16 |
-| IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *13:57* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                             |         | 13:57 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                          |         |       | 0:25 |
+| COMPLETED Sort out postgres update problems                                 |         |       | 0:36 |
+| COMPLETED Refactor static data initialisation                               |         |       | 1:08 |
+| COMPLETED Add support for facet settings                                    |         |       | 4:10 |
+| COMPLETED Implement factory for c++ settings                                |         |       | 0:20 |
+| COMPLETED Copy across boilerplate formatter and specs                       |         |       | 0:38 |
+| COMPLETED Implement transformation for class info objects in cpp model      |         |       | 1:30 |
+| COMPLETED Determine the architecture for include generation                 |         |       | 4:00 |
+| IMPLEMENTATION Implement the new file name method in class header formatter |         |       | 0:11 |
+| IMPLEMENTATION Implement include builder for class header                   |         |       | 0:16 |
+| IMPLEMENTATION Implement class header formatter                             |         |       | 0:43 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -180,15 +181,16 @@ mutate the meta-data in the model; however, if we accumulate state by
 
 Update the diagrams with all the required infrastructure.
 
+*** IMPLEMENTATION Implement the new file name method in class header formatter :task:
+    CLOCK: [2014-11-10 Mon 08:29]--[2014-11-10 Mon 08:40] =>  0:11
+
+We need to look at all the settings and the qname and generate the
+relative path inside the formatter.
+
 *** IMPLEMENTATION Implement include builder for class header          :task:
     CLOCK: [2014-11-10 Mon 08:04]--[2014-11-10 Mon 08:20] =>  0:16
 
 We need to implement the interface for include builder.
-
-*** Implement the new file name method in class header formatter       :task:
-
-We need to look at all the settings and the qname and generate the
-relative path inside the formatter.
 
 *** Implement the path spec workflow and associated classes            :task:
 

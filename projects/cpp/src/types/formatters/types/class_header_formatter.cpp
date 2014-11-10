@@ -84,4 +84,10 @@ format(const class_info& c, const settings_bundle& sb) const {
     return r;
 }
 
+boost::filesystem::path class_header_formatter::
+make_file_name(const settings_bundle& /*sb*/, const sml::qname& /*qn*/) const {
+    boost::filesystem::path r;
+    return r;
+}
+
 } } } }
