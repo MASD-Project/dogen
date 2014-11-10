@@ -18,15 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/path_spec_workflow.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ERROR_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
-std::unordered_map<path_spec_key, path_spec_details> path_spec_workflow::
-execute(const registrar& /*rg*/, const sml::model& /*m*/) const {
-    std::unordered_map<path_spec_key, path_spec_details> r;
-    return r;
-}
+class formatting_error;
 
-} }
+} } }
+
+#endif

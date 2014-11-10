@@ -18,15 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/path_spec_workflow.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
-std::unordered_map<path_spec_key, path_spec_details> path_spec_workflow::
-execute(const registrar& /*rg*/, const sml::model& /*m*/) const {
-    std::unordered_map<path_spec_key, path_spec_details> r;
-    return r;
-}
+/**
+ * @brief An error occurred whilst formatting.
+ */
+class formatting_error : public virtual std::exception, public virtual boost::exception {
+public:
+    formatting_error() = default;
+    ~formatting_error() noexcept = default;
 
-} }
+public:
+    formatting_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } }
+
+#endif

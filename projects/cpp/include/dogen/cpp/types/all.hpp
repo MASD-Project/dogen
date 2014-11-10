@@ -47,6 +47,7 @@
 #include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/formatters.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/hash/class_header_formatter.hpp"

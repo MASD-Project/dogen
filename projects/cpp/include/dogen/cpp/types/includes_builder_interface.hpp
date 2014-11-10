@@ -53,14 +53,6 @@ public:
     virtual std::string formatter_id() const = 0;
 
     /**
-     * @brief Provides all the relative paths the system knows of,
-     * keyed by qualified name and formatter id.
-     */
-    virtual void setup_relative_paths(
-        const std::unordered_map<path_spec_key, boost::filesystem::path>&
-        relative_paths) = 0;
-
-    /**
      * @brief Provides the result of the building process. Expected to
      * be called after the consumption workflow has finished executing.
      */

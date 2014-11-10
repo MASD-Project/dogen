@@ -45,22 +45,25 @@ public:
 
 private:
     /**
-     * @brief Given the settings and the class properties, computes
-     * the relative path for the file.
+     * @brief Gets the relative path for the current formatter.
      */
-    boost::filesystem::path
-    compute_relative_path(const class_info& c, const settings_bundle& sb) const;
+    boost::filesystem::path get_relative_path(const class_info& c) const;
 
 public:
     std::string facet_id() const override;
 
     std::string formatter_id() const override;
 
-    dogen::formatters::file
-    format(const class_info& c, const settings_bundle& sb) const override;
-
     boost::filesystem::path make_file_name(const settings_bundle& sb,
         const sml::qname& qn) const override;
+
+    std::shared_ptr<includes_builder_interface> make_includes_builder(
+        const std::unordered_map<path_spec_key, boost::filesystem::path>&
+        relative_paths) const override;
+
+public:
+    dogen::formatters::file
+    format(const class_info& c, const settings_bundle& sb) const override;
 };
 
 } } } }

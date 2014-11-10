@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-10 Mon 22:50]
+Clock summary at [2014-11-10 Mon 23:41]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *15:05* |       |      |
+| *Total time*                                                           | *15:57* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 15:05 |      |
+| Development Stories Implemented                                        |         | 15:57 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:25 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -34,7 +34,7 @@ Clock summary at [2014-11-10 Mon 22:50]
 | COMPLETED Determine the architecture for include generation            |         |       | 4:00 |
 | COMPLETED Implement the new file name method in class header formatter |         |       | 0:36 |
 | COMPLETED Create a base interface for all formatters                   |         |       | 0:43 |
-| IMPLEMENTATION Implement include builder for class header              |         |       | 0:16 |
+| IMPLEMENTATION Implement include builder for class header              |         |       | 1:08 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
 
@@ -213,6 +213,7 @@ However, we can't think of a better name for now, so it will stay
 =formatter_interface=. This can be refactored later.
 
 *** IMPLEMENTATION Implement include builder for class header          :task:
+    CLOCK: [2014-11-10 Mon 22:50]--[2014-11-10 Mon 23:42] =>  0:52
     CLOCK: [2014-11-10 Mon 08:04]--[2014-11-10 Mon 08:20] =>  0:16
 
 We need to implement the interface for include builder.
