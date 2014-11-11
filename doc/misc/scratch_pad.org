@@ -2352,3 +2352,72 @@ consume(const sml::model& /*model*/, const unsigned int /*pass*/,
 
 } }
 #+end_src
+** All formatters support
+
+#+begin_src
+diff --git a/projects/cpp/include/dogen/cpp/types/registrar.hpp b/projects/cpp/include/dogen/cpp/types/registrar.hpp
+index d198af8..36ba8ba 100644
+--- a/projects/cpp/include/dogen/cpp/types/registrar.hpp
++++ b/projects/cpp/include/dogen/cpp/types/registrar.hpp
+@@ -29,6 +29,7 @@
+ #include <forward_list>
+ #include <unordered_map>
+ #include "dogen/cpp/types/facet_settings.hpp"
++#include "dogen/cpp/types/formatters/formatter_interface.hpp"
+ #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+ 
+ namespace dogen {
+@@ -40,6 +41,10 @@ public:
+         std::shared_ptr<formatters::class_formatter_interface>
+     > class_formatters_type;
+ 
++    typedef std::forward_list<
++        std::shared_ptr<formatters::formatter_interface>
++        > formatters_type;
++
+ public:
+     /**
+      * @brief Ensures the registrar is ready to be used.
+@@ -64,6 +69,11 @@ public:
+     const class_formatters_type& class_formatters() const;
+ 
+     /**
++     * @brief Returns all available formatters.
++     */
++    const formatters_type& all_formatters() const;
++
++    /**
+      * @brief Returns all default settings for all facets.
+      */
+     const std::unordered_map<std::string, facet_settings>&
+@@ -73,6 +83,7 @@ private:
+     class_formatters_type class_formatters_;
+     std::unordered_map<std::string, facet_settings>
+     default_facet_settings_by_facet_id_;
++    formatters_type all_formatters_;
+ };
+ 
+ } }
+#+end_src
+
+#+begin_src
+	Modified   projects/cpp/src/types/registrar.cpp
+diff --git a/projects/cpp/src/types/registrar.cpp b/projects/cpp/src/types/registrar.cpp
+index 923686d..5216597 100644
+--- a/projects/cpp/src/types/registrar.cpp
++++ b/projects/cpp/src/types/registrar.cpp
+@@ -63,12 +63,17 @@ void registrar::register_formatter(
+         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+ 
+     class_formatters_.push_front(f);
++    all_formatters_.push_front(f);
+ }
+ 
+ const registrar::class_formatters_type& registrar::class_formatters() const {
+     return class_formatters_;
+ }
+ 
++const registrar::formatters_type& registrar::all_formatters() const {
++    return all_formatters_;
++}
+#+end_src
