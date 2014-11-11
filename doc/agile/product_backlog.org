@@ -36,6 +36,14 @@ constant. This means we could then use pointers to the objects to
 create a synthetic element container and use this for looping over all
 entities.
 
+In an ideal world, this would be a property of the model:
+e.g. =std::forward_list<entity*>=. However, we do not support pointer
+containers and this is a non-trivial change to the spirit parser so we
+won't be able to do it quickly. The alternative is to generate the
+container from within the backend workflow for now and pass it to each
+workflow. Once we are done with the refactoring we can then replace
+this with a model property.
+
 *** Populate property =is_original_parent_visitable= in SML   :task:refactor:
 
 To make life easier in C++ model, we've added a new SML property:
