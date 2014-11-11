@@ -11,6 +11,31 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create a single container of element in model             :task:refactor:
+
+We did an experiment to figure out if it would be more efficient to
+have separate containers of elements in SML's model, the idea being
+that we would avoid using the heap, dispatching etc. We would also
+create code that is more type-safe (e.g. avoid cases where we pass in
+elements but we want a specific descendant only).
+
+However, predictably, the code now has lots of loops across the
+different collections. This pattern is scattered everywhere we use
+SML. In almost all cases this could be handled by a single loop
+without loss of type-safety (e.g. loop and visit where we need
+specific types; just loop where an element suffices). Using the
+traversals (all types traversals, etc) didn't help because we then
+need to create all the associated machinery (overload =operator()=
+etc.) and that is not much different from having a visitor on
+element. We should consider this experiment at an end and just add a
+single container of element in model and deal with the fallout.
+
+Alternatively, we need a "view" over the different containers. In
+truth after the SML workflow has finished executing the model is
+constant. This means we could then use pointers to the objects to
+create a synthetic element container and use this for looping over all
+entities.
+
 *** Populate property =is_original_parent_visitable= in SML   :task:refactor:
 
 To make life easier in C++ model, we've added a new SML property:
