@@ -1,0 +1,146 @@
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/class_formatter_interface.hpp b/projects/cpp/include/dogen/cpp/types/formatters/class_formatter_interface.hpp
+index 1276cc6..c63cae1 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/class_formatter_interface.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/class_formatter_interface.hpp
+@@ -45,7 +45,7 @@ public:
+      * @brief Generate a c++ representation for the type.
+      */
+     virtual dogen::formatters::file
+-    format(const class_info& c, const settings_bundle& sb) const = 0;
++    format(const settings_bundle& sb, const class_info& c) const = 0;
+ };
+ 
+ } } }
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/types/class_header_formatter.hpp b/projects/cpp/include/dogen/cpp/types/formatters/types/class_header_formatter.hpp
+index 463a482..483c6b2 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/types/class_header_formatter.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/types/class_header_formatter.hpp
+@@ -63,7 +63,7 @@ public:
+ 
+ public:
+     dogen::formatters::file
+-    format(const class_info& c, const settings_bundle& sb) const override;
++    format(const settings_bundle& sb, const class_info& c) const override;
+ };
+ 
+ } } } }
+diff --git a/projects/cpp/include/dogen/cpp/types/path_spec_workflow.hpp b/projects/cpp/include/dogen/cpp/types/path_spec_workflow.hpp
+index 15c0e88..bc0046a 100644
+--- a/projects/cpp/include/dogen/cpp/types/path_spec_workflow.hpp
++++ b/projects/cpp/include/dogen/cpp/types/path_spec_workflow.hpp
+@@ -26,9 +26,11 @@
+ #endif
+ 
+ #include <unordered_map>
++#include <boost/filesystem/path.hpp>
+ #include "dogen/sml/types/model.hpp"
+ #include "dogen/cpp/types/registrar.hpp"
+ #include "dogen/cpp/types/path_spec_key.hpp"
++#include "dogen/cpp/types/settings_bundle.hpp"
+ #include "dogen/cpp/hash/path_spec_key_hash.hpp"
+ #include "dogen/cpp/types/path_spec_details.hpp"
+ 
+@@ -42,9 +44,16 @@ public:
+     path_spec_workflow(path_spec_workflow&&) = default;
+     ~path_spec_workflow() noexcept = default;
+ 
++private:
++    std::unordered_map<path_spec_key, boost::filesystem::path>
++    obtain_relative_file_names_for_key_activity(const registrar& rg,
++        const settings_bundle& sb,
++        const sml::model& m) const;
++
+ public:
+     std::unordered_map<path_spec_key, path_spec_details>
+-    execute(const registrar& rg, const sml::model& m) const;
++    execute(const registrar& rg, const settings_bundle& sb,
++        const sml::model& m) const;
+ };
+ 
+ } }
+diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.cpp b/projects/cpp/src/types/formatters/types/class_header_formatter.cpp
+index 8ddf5ca..84471a4 100644
+--- a/projects/cpp/src/types/formatters/types/class_header_formatter.cpp
++++ b/projects/cpp/src/types/formatters/types/class_header_formatter.cpp
+@@ -119,8 +119,21 @@ std::string class_header_formatter::formatter_id() const {
+     return ::formatter_id;
+ }
+ 
++boost::filesystem::path class_header_formatter::
++make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
++    identifier_name_builder b;
++    return b.header_file_name(sb, qn);
++}
++
++std::shared_ptr<includes_builder_interface>
++class_header_formatter::make_includes_builder(
++    const std::unordered_map<path_spec_key, boost::filesystem::path>&
++    relative_paths) const {
++    return std::make_shared<includes_builder>(relative_paths);
++}
++
+ dogen::formatters::file class_header_formatter::
+-format(const class_info& c, const settings_bundle& sb) const {
++format(const settings_bundle& sb, const class_info& c) const {
+     boilerplate_formatter boilerplate_;
+     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
+ 
+@@ -146,17 +159,4 @@ format(const class_info& c, const settings_bundle& sb) const {
+     return r;
+ }
+ 
+-boost::filesystem::path class_header_formatter::
+-make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
+-    identifier_name_builder b;
+-    return b.header_file_name(sb, qn);
+-}
+-
+-std::shared_ptr<includes_builder_interface>
+-class_header_formatter::make_includes_builder(
+-    const std::unordered_map<path_spec_key, boost::filesystem::path>&
+-    relative_paths) const {
+-    return std::make_shared<includes_builder>(relative_paths);
+-}
+-
+ } } } }
+diff --git a/projects/cpp/src/types/path_spec_workflow.cpp b/projects/cpp/src/types/path_spec_workflow.cpp
+index 05c1283..f39a0c8 100644
+--- a/projects/cpp/src/types/path_spec_workflow.cpp
++++ b/projects/cpp/src/types/path_spec_workflow.cpp
+@@ -23,8 +23,35 @@
+ namespace dogen {
+ namespace cpp {
+ 
++std::unordered_map<path_spec_key, boost::filesystem::path>
++path_spec_workflow::obtain_relative_file_names_for_key_activity(
++    const registrar& rg, const settings_bundle& sb,
++    const sml::model& m) const {
++
++    std::unordered_map<path_spec_key, boost::filesystem::path> r;
++    for (const auto f : rg.all_formatters()) {
++        for (const auto& pair : m.modules()) {
++            path_spec_key key(f.formatter_id(), pair.first);
++            r.insert(std::make_pair(key, f.make_file_name(sb, pair.first)));
++        }
++
++        for (const auto& pair : m.objects()) {
++            path_spec_key key(f.formatter_id(), pair.first);
++            r.insert(std::make_pair(key, f.make_file_name(sb, pair.first)));
++        }
++
++
++
++
++
++    }
++    return r;
++}
++
+ std::unordered_map<path_spec_key, path_spec_details> path_spec_workflow::
+-execute(const registrar& /*rg*/, const sml::model& /*m*/) const {
++execute(const registrar& rg, const settings_bundle& sb,
++    const sml::model& m) const {
++    obtain_relative_file_names_for_key_activity(rg, sb, m);
+     std::unordered_map<path_spec_key, path_spec_details> r;
+     return r;
+ }
