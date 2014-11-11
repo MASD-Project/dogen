@@ -17,14 +17,14 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-10 Mon 23:41]
+Clock summary at [2014-11-11 Tue 20:25]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *15:57* |       |      |
+| *Total time*                                                           | *17:20* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 15:57 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:25 |
+| Development Stories Implemented                                        |         | 17:20 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:31 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
 | COMPLETED Add support for facet settings                               |         |       | 4:10 |
@@ -34,11 +34,13 @@ Clock summary at [2014-11-10 Mon 23:41]
 | COMPLETED Determine the architecture for include generation            |         |       | 4:00 |
 | COMPLETED Implement the new file name method in class header formatter |         |       | 0:36 |
 | COMPLETED Create a base interface for all formatters                   |         |       | 0:43 |
-| IMPLEMENTATION Implement include builder for class header              |         |       | 1:08 |
+| IMPLEMENTATION Implement include builder for class header              |         |       | 1:11 |
+| IMPLEMENTATION Implement the path spec workflow and associated classes |         |       | 1:14 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-11 Tue 18:35]--[2014-11-11 Tue 18:41] =>  0:06
     CLOCK: [2014-11-10 Mon 08:20]--[2014-11-10 Mon 08:29] =>  0:09
     CLOCK: [2014-11-03 Mon 08:09]--[2014-11-03 Mon 08:16] =>  0:07
     CLOCK: [2014-11-03 Mon 07:59]--[2014-11-03 Mon 08:08] =>  0:09
@@ -213,15 +215,48 @@ However, we can't think of a better name for now, so it will stay
 =formatter_interface=. This can be refactored later.
 
 *** IMPLEMENTATION Implement include builder for class header          :task:
+    CLOCK: [2014-11-11 Tue 07:54]--[2014-11-11 Tue 07:57] =>  0:03
     CLOCK: [2014-11-10 Mon 22:50]--[2014-11-10 Mon 23:42] =>  0:52
     CLOCK: [2014-11-10 Mon 08:04]--[2014-11-10 Mon 08:20] =>  0:16
 
 We need to implement the interface for include builder.
 
-*** Implement the path spec workflow and associated classes            :task:
+*** IMPLEMENTATION Implement the path spec workflow and associated classes :task:
+    CLOCK: [2014-11-11 Tue 18:57]--[2014-11-11 Tue 19:20] =>  0:23
+    CLOCK: [2014-11-11 Tue 18:41]--[2014-11-11 Tue 18:49] =>  0:08
+    CLOCK: [2014-11-11 Tue 07:57]--[2014-11-11 Tue 08:40] =>  0:43
 
 Create the minimal infrastructure required to prove that the path spec
 approach works.
+
+*Implementation problem*: the path spec workflow presumes that we will
+get relative paths and includes for the cross-product of SML entities
+and formatters. This is not correct. Formatters are expected to only
+work on specific C++ types, so by implication, we need to have a
+"inverse transformation" function that returns the SML type
+corresponding to the C++ type supported by the formatter; that is the
+type for which we should be computing relative paths and includes. We
+do not have any such machinery.
+
+We could create a mapping between SML types and formatters but it
+wouldn't be trivial since the same SML type can have different
+formatters depending on its state.
+
+Perhaps the right thing to do is to have the transformer receive the
+"formatter interfaces" and make the decision on which one to call. We
+still need some type information though.
+
+*** Create a transformation and formatting sub-workflow       :task:refactor:
+
+At present we have two template functions in the main workflow,
+linking the different steps of transformation and formatting. However,
+it would make more sense to plug in to the all types traversal. For
+this we need a sub-workflow that owns the model and the transformer
+and which overloads =operator()=. It produces files.
+
+It can receive a formatter dispatcher and a transformer on
+construction and keep references these. Execute returns the list of
+files.
 
 *** Tidy-up sml consumer interface                            :task:refactor:
 
