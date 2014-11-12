@@ -59,7 +59,7 @@ dispatcher::dispatcher(const std::forward_list<formatter_facade::facet>& f)
 void dispatcher::visit(const dogen::cpp::class_info& c) {
     for (const auto& fct : facets_)
         for (const auto fmt : fct.class_formatters)
-            files_.push_front(fmt->format(c, fct.bundle));
+            files_.push_front(fmt->format(fct.bundle, c));
 }
 
 void dispatcher::visit(const dogen::cpp::enum_info& /*e*/) {
@@ -101,7 +101,6 @@ std::forward_list<formatter_facade::facet>
 formatter_facade::build_facets(const registrar& reg,
     const dogen::formatters::general_settings& gs,
     const cpp_settings& cs,
-
     const std::unordered_map<std::string, facet_settings>& fs) const {
 
     std::unordered_map<std::string, facet> facet_by_id;

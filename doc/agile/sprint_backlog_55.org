@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-11 Tue 20:25]
+Clock summary at [2014-11-12 Wed 23:21]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *17:20* |       |      |
+| *Total time*                                                           | *19:34* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 17:20 |      |
+| Development Stories Implemented                                        |         | 19:34 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:31 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -35,7 +35,7 @@ Clock summary at [2014-11-11 Tue 20:25]
 | COMPLETED Implement the new file name method in class header formatter |         |       | 0:36 |
 | COMPLETED Create a base interface for all formatters                   |         |       | 0:43 |
 | IMPLEMENTATION Implement include builder for class header              |         |       | 1:11 |
-| IMPLEMENTATION Implement the path spec workflow and associated classes |         |       | 1:14 |
+| IMPLEMENTATION Implement the path spec workflow and associated classes |         |       | 3:28 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
 
@@ -222,6 +222,9 @@ However, we can't think of a better name for now, so it will stay
 We need to implement the interface for include builder.
 
 *** IMPLEMENTATION Implement the path spec workflow and associated classes :task:
+    CLOCK: [2014-11-12 Wed 22:17]--[2014-11-12 Wed 23:21] =>  1:04
+    CLOCK: [2014-11-12 Wed 20:20]--[2014-11-12 Wed 21:02] =>  0:42
+    CLOCK: [2014-11-12 Wed 18:07]--[2014-11-12 Wed 18:35] =>  0:28
     CLOCK: [2014-11-11 Tue 18:57]--[2014-11-11 Tue 19:20] =>  0:23
     CLOCK: [2014-11-11 Tue 18:41]--[2014-11-11 Tue 18:49] =>  0:08
     CLOCK: [2014-11-11 Tue 07:57]--[2014-11-11 Tue 08:40] =>  0:43
@@ -245,6 +248,23 @@ formatters depending on its state.
 Perhaps the right thing to do is to have the transformer receive the
 "formatter interfaces" and make the decision on which one to call. We
 still need some type information though.
+
+Actually, the "formatter interface" is not sufficient - we need to
+know the type. Transformer needs to know of the registrar and of the
+settings bundle.
+
+*Final understanding*: it is much easier to copy the meta-function
+that maps SML types to C++ types into the path spec workflow. This is
+very simple code that changes infrequently.
+
+- move formatter facade to formatters and call it entity
+  formatter. could also be the =formatters::workflow= as a
+  sub-workflow.
+- find a way to create the bundles upfront and pass them to the entity
+  formatter as well as path spec details builder.
+
+
+
 
 *** Create a transformation and formatting sub-workflow       :task:refactor:
 

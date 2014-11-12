@@ -18,11 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/includes_builder_interface.hpp"
+#ifndef DOGEN_CPP_HASH_FORMATTERS_FORMATTER_TYPES_HASH_HPP
+#define DOGEN_CPP_HASH_FORMATTERS_FORMATTER_TYPES_HASH_HPP
 
-namespace dogen {
-namespace cpp {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-includes_builder_interface::~includes_builder_interface() noexcept { }
+#include <functional>
+#include "dogen/cpp/types/formatters/formatter_types.hpp"
 
-} }
+namespace std {
+
+template<>
+struct hash<dogen::cpp::formatters::formatter_types> {
+public:
+    size_t operator()(const dogen::cpp::formatters::formatter_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
+
+#endif

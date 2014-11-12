@@ -18,15 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/path_spec_workflow.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTERS_FORMATTER_TYPES_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTERS_FORMATTER_TYPES_SER_HPP
 
-namespace dogen {
-namespace cpp {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::unordered_map<path_spec_key, path_spec_details> path_spec_workflow::
-execute(const registrar& /*rg*/, const sml::model& /*m*/) const {
-    std::unordered_map<path_spec_key, path_spec_details> r;
-    return r;
+#include <boost/serialization/nvp.hpp>
+#include "dogen/cpp/types/formatters/formatter_types.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::cpp::formatters::formatter_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("formatter_types", v);
 }
 
-} }
+#endif

@@ -27,12 +27,19 @@
 
 #include <memory>
 #include <unordered_map>
+#include <boost/filesystem/path.hpp>
 #include "dogen/backend/types/backend_interface.hpp"
-#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
-#include "dogen/cpp/types/formatter_facade.hpp"
-#include "dogen/cpp/types/cpp_settings.hpp"
-#include "dogen/cpp/types/transformer.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/registrar.hpp"
+#include "dogen/cpp/types/transformer.hpp"
+#include "dogen/cpp/types/cpp_settings.hpp"
+#include "dogen/cpp/types/path_spec_key.hpp"
+#include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/formatter_facade.hpp"
+#include "dogen/cpp/hash/path_spec_key_hash.hpp"
+#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/formatters/formatter_types.hpp"
+#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -57,6 +64,13 @@ public:
     static cpp::registrar& registrar();
 
 private:
+    /**
+     * @brief Given an SML object type, returns its corresponding
+     * formatter type.
+     */
+    formatters::formatter_types
+    formatter_type_for_object_type(const sml::object_types ot) const;
+
     /**
      * @brief Transforms the supplied SML elements into C++ entities.
      */
@@ -83,6 +97,7 @@ private:
         const formatter_facade& ff, const entity& e) const;
 
 private:
+
     /**
      * @brief Returns the model's module.
      *
@@ -100,6 +115,23 @@ private:
      * @brief Create the c++ settings
      */
     cpp_settings create_cpp_settings_activity(const sml::module& m) const;
+
+    /**
+     * @brief Gets the relative file name for all path keys.
+     */
+    std::unordered_map<path_spec_key, boost::filesystem::path>
+    obtain_relative_file_names_for_key_activity(const cpp::registrar& rg,
+        const settings_bundle& sb,
+        const sml::model& m) const;
+
+    /**
+     * @brief Creates all path spec details for a model.
+     */
+    std::unordered_map<path_spec_key, path_spec_details>
+    obtain_path_spec_details_for_key_activity(
+        const cpp::registrar& rg, const sml::model& m,
+        const std::unordered_map<path_spec_key, boost::filesystem::path>&
+        relative_file_names_for_key) const;
 
     /**
      * @brief Creates all the files for a given container of SML

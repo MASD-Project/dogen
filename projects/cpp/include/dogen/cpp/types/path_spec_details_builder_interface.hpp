@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_INCLUDES_BUILDER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_INCLUDES_BUILDER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_BUILDER_INTERFACE_HPP
+#define DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_BUILDER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,37 +27,40 @@
 
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/consumer_interface.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/includes.hpp"
 #include "dogen/cpp/types/path_spec_key.hpp"
 #include "dogen/cpp/hash/path_spec_key_hash.hpp"
+#include "dogen/cpp/types/path_spec_details.hpp"
 
 namespace dogen {
 namespace cpp {
 
 /**
- * @brief Builds all of the includes for a given formatter.
+ * @brief Builds a subset of the path spec details for a model.
  */
-class includes_builder_interface : public sml::consumer_interface {
+class path_spec_details_builder_interface  {
 public:
-    includes_builder_interface() = default;
-    includes_builder_interface(const includes_builder_interface&) = delete;
-    includes_builder_interface(includes_builder_interface&&) = default;
-    virtual ~includes_builder_interface() noexcept = 0;
+    path_spec_details_builder_interface() = default;
+    path_spec_details_builder_interface(
+        const path_spec_details_builder_interface &) = delete;
+    path_spec_details_builder_interface(
+        path_spec_details_builder_interface &&) = default;
+    virtual ~path_spec_details_builder_interface () noexcept = 0;
 
 public:
     /**
-     * @brief Unique identifier for the formatter we are building
-     * includes for.
+     * @brief Build the details.
+     *
+     * @param m model for which to build the details.
+     *
+     * @param relative_paths relative paths the system knows of, keyed
+     * by qualified name and formatter id.
      */
-    virtual std::string formatter_id() const = 0;
-
-    /**
-     * @brief Provides the result of the building process. Expected to
-     * be called after the consumption workflow has finished executing.
-     */
-    virtual std::unordered_map<path_spec_key, includes>
-    includes_for_path_spec_key() const = 0;
+    virtual std::unordered_map<path_spec_key, path_spec_details> build(
+        const sml::model& m,
+        const std::unordered_map<path_spec_key, boost::filesystem::path>&
+        relative_file_names_for_key) const = 0;
 };
 
 } }

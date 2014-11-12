@@ -32,9 +32,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/path_spec_key.hpp"
-#include "dogen/cpp/hash/path_spec_key_hash.hpp"
-#include "dogen/cpp/types/includes_builder_interface.hpp"
+#include "dogen/cpp/types/path_spec_details_builder_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -66,15 +64,11 @@ public:
     make_file_name(const settings_bundle& sb, const sml::qname& qn) const = 0;
 
     /**
-     * @brief Creates an instance of the includes builder for this
+     * @brief Creates an instance of the path spec builder for this
      * formatter.
-     *
-     * @param relative_paths relative paths the system knows of, keyed
-     * by qualified name and formatter id.
      */
-    virtual std::shared_ptr<includes_builder_interface> make_includes_builder(
-        const std::unordered_map<path_spec_key, boost::filesystem::path>&
-        relative_paths) const = 0;
+    virtual std::shared_ptr<path_spec_details_builder_interface>
+    make_path_spec_details_builder() const = 0;
 };
 
 } } }

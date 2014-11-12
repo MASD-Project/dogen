@@ -18,34 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_TYPES_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class class_formatter_interface : public formatter_interface {
-public:
-    class_formatter_interface() = default;
-    class_formatter_interface(const class_formatter_interface&) = delete;
-    class_formatter_interface(class_formatter_interface&&) = default;
-    virtual ~class_formatter_interface() noexcept = 0;
-
-public:
-    /**
-     * @brief Generate a c++ representation for the type.
-     */
-    virtual dogen::formatters::file
-    format(const settings_bundle& sb, const class_info& c) const = 0;
+/**
+ * @brief Describes all of the formatter interfaces.
+ */
+enum class formatter_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    class_formatter = 1,
+    visitor_formatter = 2,
+    enum_formatter = 3,
+    registrar_formatter = 4,
+    namespace_formatter = 5,
+    exception_formatter = 6,
+    forward_declarations_formatter = 7,
+    includers_formatter = 8,
+    odb_options_formatter = 9,
+    cmakelists_formatter = 10
 };
 
 } } }

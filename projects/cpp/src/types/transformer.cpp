@@ -19,6 +19,7 @@
  *
  */
 #include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"

@@ -18,18 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_INCLUDES_BUILDER_INTERFACE_FWD_HPP
-#define DOGEN_CPP_TYPES_INCLUDES_BUILDER_INTERFACE_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/cpp/types/path_spec_details_builder_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class includes_builder_interface;
+path_spec_details_builder_interface::
+~path_spec_details_builder_interface() noexcept { }
 
 } }
-
-#endif

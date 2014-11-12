@@ -57,13 +57,12 @@ public:
     boost::filesystem::path make_file_name(const settings_bundle& sb,
         const sml::qname& qn) const override;
 
-    std::shared_ptr<includes_builder_interface> make_includes_builder(
-        const std::unordered_map<path_spec_key, boost::filesystem::path>&
-        relative_paths) const override;
+    std::shared_ptr<path_spec_details_builder_interface>
+    make_path_spec_details_builder() const override;
 
 public:
     dogen::formatters::file
-    format(const class_info& c, const settings_bundle& sb) const override;
+    format(const settings_bundle& sb, const class_info& c) const override;
 };
 
 } } } }

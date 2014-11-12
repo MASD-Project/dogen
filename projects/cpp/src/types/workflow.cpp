@@ -19,12 +19,16 @@
  *
  */
 #include <iterator>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/object_types_io.hpp"
+#include "dogen/cpp/types/workflow_error.hpp"
+#include "dogen/cpp/types/workflow_error.hpp"
+#include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
-#include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 namespace {
@@ -38,6 +42,9 @@ const std::string model_modules_not_found(
     "Could not find model module for model: ");
 const std::string multiple_generatable_model_modules(
     "More than one model module is generatable: ");
+const std::string unsupported_object_type("Object type is not supported: ");
+const std::string unsupported_formatter_type(
+    "Formatter type is not supported: ");
 
 }
 
@@ -53,6 +60,27 @@ cpp::registrar& workflow::registrar() {
         registrar_ = std::make_shared<cpp::registrar>();
 
     return *registrar_;
+}
+
+formatters::formatter_types workflow::
+formatter_type_for_object_type(const sml::object_types ot) const {
+    switch(ot) {
+    case sml::object_types::factory:
+    case sml::object_types::user_defined_service:
+    case sml::object_types::user_defined_value_object:
+    case sml::object_types::entity:
+    case sml::object_types::keyed_entity:
+    case sml::object_types::versioned_key:
+    case sml::object_types::unversioned_key:
+    case sml::object_types::visitor:
+        return formatters::formatter_types::class_formatter;
+        break;
+
+    default:
+        BOOST_LOG_SEV(lg, error) << unsupported_object_type << ot;
+        BOOST_THROW_EXCEPTION(workflow_error(unsupported_object_type +
+                boost::lexical_cast<std::string>(ot)));
+    };
 }
 
 std::forward_list<dogen::formatters::file> workflow::format_entity(
@@ -105,6 +133,50 @@ workflow::create_cpp_settings_activity(const sml::module& m) const {
     return f.build(m.meta_data());
 }
 
+std::unordered_map<path_spec_key, boost::filesystem::path>
+workflow::obtain_relative_file_names_for_key_activity(
+    const cpp::registrar& rg, const settings_bundle& sb,
+    const sml::model& m) const {
+
+    std::unordered_map<path_spec_key, boost::filesystem::path> r;
+    for (const auto& pair : m.objects()) {
+        const auto qn(pair.first);
+        const auto o(pair.second);
+
+        const auto ft(formatter_type_for_object_type(o.object_type()));
+        switch(ft) {
+        case formatters::formatter_types::class_formatter:
+            for (const auto f : rg.class_formatters()) {
+                path_spec_key key(f->formatter_id(), qn);
+                r.insert(std::make_pair(key, f->make_file_name(sb, qn)));
+            }
+            break;
+
+        default:
+            BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
+                                     << " name: " << o.name();
+            BOOST_THROW_EXCEPTION(workflow_error(unsupported_formatter_type +
+                    boost::lexical_cast<std::string>(ft)));
+        };
+    }
+    return r;
+}
+
+std::unordered_map<path_spec_key, path_spec_details> workflow::
+obtain_path_spec_details_for_key_activity(
+    const cpp::registrar& rg, const sml::model& m,
+    const std::unordered_map<path_spec_key, boost::filesystem::path>&
+    relative_file_names_for_key) const {
+
+    std::unordered_map<path_spec_key, path_spec_details> r;
+    for (const auto f : rg.class_formatters()) {
+        auto b(f->make_path_spec_details_builder());
+        auto psd(b->build(m, relative_file_names_for_key));
+        r.insert(psd.begin(), psd.end());
+    }
+    return r;
+}
+
 std::string workflow::id() const {
     return ::id;
 }
@@ -139,6 +211,9 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     const auto mod(obtain_model_module_activity(m));
     const auto cs(create_cpp_settings_activity(mod));
     const auto fs(create_facet_settings_activity(mod));
+    // const auto& rg(registrar());
+    // const auto rel(obtain_relative_file_names_for_key_activity(rg, sb, m));
+    // const auto det(obtain_path_spec_details_for_key_activity(rg, m, rel));
 
     const formatter_facade ff(registrar(), gs, cs, fs);
     std::forward_list<dogen::formatters::file> r;

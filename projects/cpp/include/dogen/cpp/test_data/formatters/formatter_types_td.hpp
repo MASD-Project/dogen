@@ -18,34 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TEST_DATA_FORMATTERS_FORMATTER_TYPES_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FORMATTERS_FORMATTER_TYPES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/formatters/formatter_types.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class class_formatter_interface : public formatter_interface {
+class formatter_types_generator {
 public:
-    class_formatter_interface() = default;
-    class_formatter_interface(const class_formatter_interface&) = delete;
-    class_formatter_interface(class_formatter_interface&&) = default;
-    virtual ~class_formatter_interface() noexcept = 0;
+    formatter_types_generator();
 
 public:
-    /**
-     * @brief Generate a c++ representation for the type.
-     */
-    virtual dogen::formatters::file
-    format(const settings_bundle& sb, const class_info& c) const = 0;
+    typedef dogen::cpp::formatters::formatter_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
 
 } } }

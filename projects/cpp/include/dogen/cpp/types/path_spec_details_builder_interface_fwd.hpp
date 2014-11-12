@@ -18,36 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CLASS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_BUILDER_INTERFACE_FWD_HPP
+#define DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_BUILDER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-
 namespace dogen {
 namespace cpp {
-namespace formatters {
 
-class class_formatter_interface : public formatter_interface {
-public:
-    class_formatter_interface() = default;
-    class_formatter_interface(const class_formatter_interface&) = delete;
-    class_formatter_interface(class_formatter_interface&&) = default;
-    virtual ~class_formatter_interface() noexcept = 0;
+class path_spec_details_builder_interface;
 
-public:
-    /**
-     * @brief Generate a c++ representation for the type.
-     */
-    virtual dogen::formatters::file
-    format(const settings_bundle& sb, const class_info& c) const = 0;
-};
-
-} } }
+} }
 
 #endif

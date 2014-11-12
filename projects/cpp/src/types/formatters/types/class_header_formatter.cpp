@@ -47,49 +47,19 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class includes_builder : public includes_builder_interface {
+class path_spec_details_builder : public path_spec_details_builder_interface {
 public:
-    explicit includes_builder(
+    std::unordered_map<path_spec_key, path_spec_details> build(
+        const sml::model& m,
         const std::unordered_map<path_spec_key, boost::filesystem::path>&
-        relative_paths);
-
-public:
-    std::string id() const override { return ::formatter_id; }
-    unsigned int required_passes() const override { return 1; }
-    bool consume_last() const override { return false; }
-    void consume(const sml::model& /*model*/, const unsigned int /*pass*/,
-        const sml::concept& /*target*/) const override { }
-    void consume(const sml::model& /*model*/, const unsigned int /*pass*/,
-        const sml::module& /*target*/) const override { }
-    void consume(const sml::model& /*model*/, const unsigned int /*pass*/,
-        const sml::enumeration& /*target*/) const override { }
-    virtual void consume(const sml::model& /*model*/,
-        const unsigned int /*pass*/,
-        const sml::primitive& /*target*/) const override { }
-    void consume(const sml::model& model, const unsigned int pass,
-        const sml::object& target) const override;
-
-public:
-    std::string formatter_id() const override { return ::formatter_id; }
-    std::unordered_map<path_spec_key, includes>
-    includes_for_path_spec_key() const override;
-
-private:
-    /*const std::unordered_map<path_spec_key, boost::filesystem::path>&
-      relative_paths_;*/
+        relative_file_names_for_key) const override;
 };
 
-includes_builder::includes_builder(
+std::unordered_map<path_spec_key, path_spec_details> path_spec_details_builder::
+build(const sml::model& /*m*/,
     const std::unordered_map<path_spec_key, boost::filesystem::path>&
-    /*relative_paths*/) /*: relative_paths_(relative_paths)*/ { }
-
-void includes_builder::consume(const sml::model& /*model*/,
-    const unsigned int /*pass*/, const sml::object& /*target*/) const {
-}
-
-std::unordered_map<path_spec_key, includes> includes_builder::
-includes_for_path_spec_key() const {
-    std::unordered_map<path_spec_key, includes> r;
+    /*relative_file_names_for_key*/) const {
+    std::unordered_map<path_spec_key, path_spec_details> r;
     return r;
 }
 
@@ -119,8 +89,19 @@ std::string class_header_formatter::formatter_id() const {
     return ::formatter_id;
 }
 
+boost::filesystem::path class_header_formatter::
+make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
+    identifier_name_builder b;
+    return b.header_file_name(sb, qn);
+}
+
+std::shared_ptr<path_spec_details_builder_interface>
+class_header_formatter::make_path_spec_details_builder() const {
+    return std::make_shared<path_spec_details_builder>();
+}
+
 dogen::formatters::file class_header_formatter::
-format(const class_info& c, const settings_bundle& sb) const {
+format(const settings_bundle& sb, const class_info& c) const {
     boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
 
@@ -144,19 +125,6 @@ format(const class_info& c, const settings_bundle& sb) const {
                              << r.relative_path().generic_string();
     BOOST_LOG_SEV(lg, debug) << "content: " << r.content();
     return r;
-}
-
-boost::filesystem::path class_header_formatter::
-make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
-    identifier_name_builder b;
-    return b.header_file_name(sb, qn);
-}
-
-std::shared_ptr<includes_builder_interface>
-class_header_formatter::make_includes_builder(
-    const std::unordered_map<path_spec_key, boost::filesystem::path>&
-    relative_paths) const {
-    return std::make_shared<includes_builder>(relative_paths);
 }
 
 } } } }
