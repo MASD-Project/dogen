@@ -11,6 +11,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider renaming registrar in boost serialisation        :task:refactor:
+
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful.
+
 *** Create a single container of element in model             :task:refactor:
 
 We did an experiment to figure out if it would be more efficient to
