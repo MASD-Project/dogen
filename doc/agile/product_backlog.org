@@ -51,6 +51,12 @@ container from within the backend workflow for now and pass it to each
 workflow. Once we are done with the refactoring we can then replace
 this with a model property.
 
+We need to have a look at all instances of the code where we loop
+across all elements and see if this is a win or not. Also, we can move
+=Element= from a concept to a type (e.g. =element=) and make it the
+base class for all elements. Validator would have to make sure the
+model is not nonsensical (object inheriting from a primitive, etc).
+
 *** Populate property =is_original_parent_visitable= in SML   :task:refactor:
 
 To make life easier in C++ model, we've added a new SML property:
