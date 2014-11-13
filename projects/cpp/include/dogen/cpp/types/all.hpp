@@ -21,6 +21,7 @@
 #include "dogen/cpp/types/abilities.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/building_error.hpp"
+#include "dogen/cpp/types/bundler.hpp"
 #include "dogen/cpp/types/class_aspects.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/class_types.hpp"
