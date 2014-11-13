@@ -11,6 +11,39 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create a compact form of qname io                                 :story:
+
+#+begin_quote
+*Story*: As a dogen developer and user, I want to quickly identify an
+instance of an SML type that is causing problems.
+#+end_quote
+
+At present we are using the JSON-based qname IO to dump qnames to the
+log. For exceptions we use the simple name. There are downsides to
+both of these approaches. With JSON we have a lot of moving parts that
+obscure the vital information. With the simple name we miss all the
+context for the type.
+
+What we really need is a second type of IO for qnames that is
+compacted to the absolute minimum. For example we could use dots to
+concatenate all of the qname properties: =a.b.c=.
+
+This will make the log files a lot smaller as well. Before:
+
+: 2014-11-06 19:50:35.253844 [DEBUG] [sml.json_hydrator] Type has no containing module:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "simple_name": "long double" }
+
+After:
+
+: 2014-11-06 19:50:35.253844 [DEBUG] [sml.json_hydrator] Type has no containing module:  "long double"
+
+We should add an SML utility function that does this work. We should
+then do a grep for all instances of qname IO includes and for each,
+replace it with the new utility function.
+
+Finally we should raise a vision jira to make this either an extension
+method (if these are supported in C++-17) or a manually generated
+method on qname when we have a merging code generator.
+
 *** Consider renaming registrar in boost serialisation        :task:refactor:
 
 At present we have a registrar formatter that does the boost
