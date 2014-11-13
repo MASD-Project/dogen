@@ -92,28 +92,21 @@ std::forward_list<dogen::formatters::file> dispatcher::format(const entity& e) {
 }
 
 formatter_facade::formatter_facade(const registrar& reg,
-    const dogen::formatters::general_settings& gs,
-    const cpp_settings& cs,
-    const std::unordered_map<std::string, facet_settings>& fs)
-    : facets_(build_facets(reg, gs, cs, fs)) { }
+    const std::unordered_map<std::string, settings_bundle>&
+    settings_bundle_for_facet)
+    : facets_(build_facets(reg, settings_bundle_for_facet)) { }
 
 std::forward_list<formatter_facade::facet>
 formatter_facade::build_facets(const registrar& reg,
-    const dogen::formatters::general_settings& gs,
-    const cpp_settings& cs,
-    const std::unordered_map<std::string, facet_settings>& fs) const {
+    const std::unordered_map<std::string, settings_bundle>&
+    settings_bundle_for_facet) const {
 
     std::unordered_map<std::string, facet> facet_by_id;
     for (auto f : reg.class_formatters())
         facet_by_id[f->facet_id()].class_formatters.push_front(f);
 
-    for (auto pair : fs) {
-        settings_bundle b;
-        b.general_settings(gs);
-        b.cpp_settings(cs);
-        b.facet_settings(pair.second);
-        facet_by_id[pair.first].bundle = b;
-    }
+    for (auto pair : settings_bundle_for_facet)
+        facet_by_id[pair.first].bundle = pair.second;
 
     std::forward_list<formatter_facade::facet> r;
     for (const auto& pair : facet_by_id) {

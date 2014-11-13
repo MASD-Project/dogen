@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-13 Thu 08:39]
+Clock summary at [2014-11-13 Thu 19:39]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *20:20* |       |      |
+| *Total time*                                                           | *21:01* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 20:20 |      |
+| Development Stories Implemented                                        |         | 21:01 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:49 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -35,7 +35,7 @@ Clock summary at [2014-11-13 Thu 08:39]
 | COMPLETED Implement the new file name method in class header formatter |         |       | 0:36 |
 | COMPLETED Create a base interface for all formatters                   |         |       | 0:43 |
 | COMPLETED Implement the path spec workflow and associated classes      |         |       | 3:28 |
-| IMPLEMENTATION Add a class responsible for creating settings bundles   |         |       | 0:27 |
+| IMPLEMENTATION Add a class responsible for creating settings bundles   |         |       | 1:08 |
 | IMPLEMENTATION Refactor formatter facade                               |         |       | 0:01 |
 | IMPLEMENTATION Implement path spec details builder for class header    |         |       | 1:11 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
@@ -255,6 +255,7 @@ that maps SML types to C++ types into the path spec workflow. This is
 very simple code that changes infrequently.
 
 *** IMPLEMENTATION Add a class responsible for creating settings bundles :task:refactor:
+    CLOCK: [2014-11-13 Thu 18:58]--[2014-11-13 Thu 19:39] =>  0:41
     CLOCK: [2014-11-13 Thu 08:12]--[2014-11-13 Thu 08:39] =>  0:27
 
 We need to find a way to create the bundles upfront and pass them to

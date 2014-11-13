@@ -29,6 +29,7 @@
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
+#include "dogen/cpp/types/bundler.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 namespace {
@@ -119,18 +120,13 @@ sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
     return r;
 }
 
-std::unordered_map<std::string, facet_settings>
-workflow::create_facet_settings_activity(const sml::module& m) const {
-    meta_data::facet_settings_factory f;
-    return f.build(
-        registrar().default_facet_settings_by_facet_id(),
-        m.meta_data());
-}
-
-cpp_settings
-workflow::create_cpp_settings_activity(const sml::module& m) const {
-    meta_data::cpp_settings_factory f;
-    return f.build(m.meta_data());
+std::unordered_map<std::string, settings_bundle> workflow::
+settings_bundle_for_facet_activty(
+    const dogen::formatters::general_settings& gs,
+    const sml::module& model_module) const {
+    bundler b;
+    return b.bundle(registrar().default_facet_settings_by_facet_id(),
+        gs, model_module);
 }
 
 std::unordered_map<path_spec_key, boost::filesystem::path>
@@ -209,13 +205,12 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto mod(obtain_model_module_activity(m));
-    const auto cs(create_cpp_settings_activity(mod));
-    const auto fs(create_facet_settings_activity(mod));
+    const auto sb(settings_bundle_for_facet_activty(gs, mod));
     // const auto& rg(registrar());
     // const auto rel(obtain_relative_file_names_for_key_activity(rg, sb, m));
     // const auto det(obtain_path_spec_details_for_key_activity(rg, m, rel));
 
-    const formatter_facade ff(registrar(), gs, cs, fs);
+    const formatter_facade ff(registrar(), sb);
     std::forward_list<dogen::formatters::file> r;
     r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(m, ff, m.modules()));

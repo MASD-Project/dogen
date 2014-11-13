@@ -25,14 +25,12 @@
 #pragma once
 #endif
 
+#include <string>
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/cpp/types/registrar.hpp"
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/facet_settings.hpp"
-#include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
@@ -61,17 +59,14 @@ public:
      * @brief Reads all the information in the facet settings and
      * registrar to build the list of facets.
      */
-    std::forward_list<facet> build_facets(
-        const registrar& reg,
-        const dogen::formatters::general_settings& gs,
-        const cpp_settings& cs,
-        const std::unordered_map<std::string, facet_settings>& fs) const;
+    std::forward_list<facet> build_facets(const registrar& reg,
+        const std::unordered_map<std::string, settings_bundle>&
+        settings_bundle_for_facet) const;
 
 public:
     formatter_facade(const registrar& reg,
-        const dogen::formatters::general_settings& gs,
-        const cpp_settings& cs,
-        const std::unordered_map<std::string, facet_settings>& fs);
+        const std::unordered_map<std::string, settings_bundle>&
+        settings_bundle_for_facet);
 
 public:
     /**

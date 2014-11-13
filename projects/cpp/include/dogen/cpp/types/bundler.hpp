@@ -46,7 +46,7 @@ private:
     create_facet_settings(
         const std::unordered_map<std::string, facet_settings>&
         default_facet_settings_by_facet_id,
-        const sml::module& m) const;
+        const sml::module& model_module) const;
 
     /**
      * @brief Create the c++ settings
@@ -60,8 +60,8 @@ public:
     std::unordered_map<std::string, settings_bundle>
     bundle(const std::unordered_map<std::string, facet_settings>&
         default_facet_settings_by_facet_id,
-        const dogen::formatters::general_settings gs,
-        const sml::module& m) const;
+        const dogen::formatters::general_settings& gs,
+        const sml::module& model_module) const;
 };
 
 } }

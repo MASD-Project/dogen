@@ -30,9 +30,10 @@ namespace cpp {
 std::unordered_map<std::string, facet_settings>
 bundler::create_facet_settings(
     const std::unordered_map<std::string, facet_settings>&
-    default_facet_settings_by_facet_id, const sml::module& m) const {
+    default_facet_settings_by_facet_id, const sml::module& model_module) const {
     meta_data::facet_settings_factory f;
-    return f.build(default_facet_settings_by_facet_id, m.meta_data());
+    return f.build(default_facet_settings_by_facet_id,
+        model_module.meta_data());
 }
 
 cpp_settings bundler::create_cpp_settings(const sml::module& m) const {
@@ -43,10 +44,12 @@ cpp_settings bundler::create_cpp_settings(const sml::module& m) const {
 std::unordered_map<std::string, settings_bundle> bundler::
 bundle(const std::unordered_map<std::string, facet_settings>&
     default_facet_settings_by_facet_id,
-    const dogen::formatters::general_settings gs, const sml::module& m) const {
+    const dogen::formatters::general_settings& gs,
+    const sml::module& model_module) const {
 
-    const auto cs(create_cpp_settings(m));
-    const auto fs(create_facet_settings(default_facet_settings_by_facet_id, m));
+    const auto cs(create_cpp_settings(model_module));
+    const auto fs(create_facet_settings(
+            default_facet_settings_by_facet_id, model_module));
 
     std::unordered_map<std::string, settings_bundle> r;
     for (auto pair : fs) {

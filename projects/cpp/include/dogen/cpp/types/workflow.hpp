@@ -97,7 +97,6 @@ private:
         const formatter_facade& ff, const entity& e) const;
 
 private:
-
     /**
      * @brief Returns the model's module.
      *
@@ -106,15 +105,12 @@ private:
     sml::module obtain_model_module_activity(const sml::model& m) const;
 
     /**
-     * @brief Create the facet settings
+     * @brief Create the settings bundle for all facets.
      */
-    std::unordered_map<std::string, facet_settings>
-    create_facet_settings_activity(const sml::module& m) const;
-
-    /**
-     * @brief Create the c++ settings
-     */
-    cpp_settings create_cpp_settings_activity(const sml::module& m) const;
+    std::unordered_map<std::string, settings_bundle>
+    settings_bundle_for_facet_activty(
+        const dogen::formatters::general_settings& gs,
+        const sml::module& model_module) const;
 
     /**
      * @brief Gets the relative file name for all path keys.
