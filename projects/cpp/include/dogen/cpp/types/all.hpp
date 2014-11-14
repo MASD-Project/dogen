@@ -44,6 +44,8 @@
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formatters/container_splitter.hpp"
 #include "dogen/cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
