@@ -1,0 +1,220 @@
+diff --git a/doc/agile/sprint_backlog_55.org b/doc/agile/sprint_backlog_55.org
+index 65699b4..1f27c3d 100644
+--- a/doc/agile/sprint_backlog_55.org
++++ b/doc/agile/sprint_backlog_55.org
+@@ -266,6 +266,7 @@ the entity formatter as well as path spec details builder. The class
+ should be called =bundler=.
+ 
+ *** IMPLEMENTATION Create a formatter container to house the formatters :task:refactor:
++    CLOCK: [2014-11-14 Fri 08:27]--[2014-11-14 Fri 08:42] =>  0:15
+     CLOCK: [2014-11-14 Fri 08:02]--[2014-11-14 Fri 08:26] =>  0:24
+ 
+ - create a class that contains all the different formatters
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/container.hpp b/projects/cpp/include/dogen/cpp/types/formatters/container.hpp
+index e69de29..d29b420 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/container.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/container.hpp
+@@ -0,0 +1,56 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_FORMATTERS_CONTAINER_HPP
++#define DOGEN_CPP_TYPES_FORMATTERS_CONTAINER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <memory>
++#include <forward_list>
++#include <unordered_map>
++#include "dogen/cpp/types/facet_settings.hpp"
++#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
++
++namespace dogen {
++namespace cpp {
++namespace formatters {
++
++/**
++ * @brief Simple container for all formatter types.
++ */
++class container {
++public:
++    /**
++     * @brief Returns all available class formatters.
++     */
++    std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>&
++    class_formatters() const;
++
++private:
++    std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>
++    class_formatters_;
++};
++
++} } }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/registrar.hpp b/projects/cpp/include/dogen/cpp/types/registrar.hpp
+index d198af8..d12e8c9 100644
+--- a/projects/cpp/include/dogen/cpp/types/registrar.hpp
++++ b/projects/cpp/include/dogen/cpp/types/registrar.hpp
+@@ -29,6 +29,7 @@
+ #include <forward_list>
+ #include <unordered_map>
+ #include "dogen/cpp/types/facet_settings.hpp"
++#include "dogen/cpp/types/formatters/container.hpp"
+ #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+ 
+ namespace dogen {
+@@ -36,11 +37,6 @@ namespace cpp {
+ 
+ class registrar {
+ public:
+-    typedef std::forward_list<
+-        std::shared_ptr<formatters::class_formatter_interface>
+-    > class_formatters_type;
+-
+-public:
+     /**
+      * @brief Ensures the registrar is ready to be used.
+      */
+@@ -59,9 +55,9 @@ public:
+         std::shared_ptr<formatters::class_formatter_interface> f);
+ 
+     /**
+-     * @brief Returns all available class formatters.
++     * @brief Returns all available formatters.
+      */
+-    const class_formatters_type& class_formatters() const;
++    const formatters::container& formatter_container() const;
+ 
+     /**
+      * @brief Returns all default settings for all facets.
+@@ -70,7 +66,7 @@ public:
+     default_facet_settings_by_facet_id() const;
+ 
+ private:
+-    class_formatters_type class_formatters_;
++    formatters::container formatter_container_;
+     std::unordered_map<std::string, facet_settings>
+     default_facet_settings_by_facet_id_;
+ };
+diff --git a/projects/cpp/src/types/formatters/container.cpp b/projects/cpp/src/types/formatters/container.cpp
+index 9927630..94a462d 100644
+--- a/projects/cpp/src/types/formatters/container.cpp
++++ b/projects/cpp/src/types/formatters/container.cpp
+@@ -1,2 +1,32 @@
+-// dummy function to suppress ranlib warnings
+-void container() { }
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/cpp/types/formatters/container.hpp"
++
++namespace dogen {
++namespace cpp {
++namespace formatters {
++
++std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>&
++container::class_formatters() const {
++    return class_formatters_;
++}
++
++} } }
+diff --git a/projects/cpp/src/types/registrar.cpp b/projects/cpp/src/types/registrar.cpp
+index 923686d..90dc7fa 100644
+--- a/projects/cpp/src/types/registrar.cpp
++++ b/projects/cpp/src/types/registrar.cpp
+@@ -62,11 +62,11 @@ void registrar::register_formatter(
+     if (!f)
+         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+ 
+-    class_formatters_.push_front(f);
++    formatter_container_.class_formatters().push_front(f);
+ }
+ 
+-const registrar::class_formatters_type& registrar::class_formatters() const {
+-    return class_formatters_;
++const formatters::container& registrar::formatter_container() const {
++    return formatter_container__;
+ }
+ 
+ const std::unordered_map<std::string, facet_settings>&
+diff --git a/projects/cpp/src/types/workflow.cpp b/projects/cpp/src/types/workflow.cpp
+index a361dc8..3a7c83a 100644
+--- a/projects/cpp/src/types/workflow.cpp
++++ b/projects/cpp/src/types/workflow.cpp
+@@ -142,7 +142,7 @@ workflow::obtain_relative_file_names_for_key_activity(
+         const auto ft(formatter_type_for_object_type(o.object_type()));
+         switch(ft) {
+         case formatters::formatter_types::class_formatter:
+-            for (const auto f : rg.class_formatters()) {
++            for (const auto f : rg.formatter_container().class_formatters()) {
+                 path_spec_key key(f->formatter_id(), qn);
+                 r.insert(std::make_pair(key, f->make_file_name(sb, qn)));
+             }
+@@ -165,7 +165,7 @@ obtain_path_spec_details_for_key_activity(
+     relative_file_names_for_key) const {
+ 
+     std::unordered_map<path_spec_key, path_spec_details> r;
+-    for (const auto f : rg.class_formatters()) {
++    for (const auto f : rg.formatter_container().class_formatters()) {
+         auto b(f->make_path_spec_details_builder());
+         auto psd(b->build(m, relative_file_names_for_key));
+         r.insert(psd.begin(), psd.end());
+@@ -185,15 +185,16 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
+ void workflow::validate() const {
+     BOOST_LOG_SEV(lg, debug) << "Validating c++ backend workflow.";
+ 
+-    const auto reg(registrar());
+-    reg.validate();
++    registrar().validate();
++    const auto& container(registrar().formatter_container());
+     BOOST_LOG_SEV(lg, debug) << "Found "
+-                             << std::distance(reg.class_formatters().begin(),
+-                                 reg.class_formatters().end())
++                             << std::distance(
++                                 container.class_formatters().begin(),
++                                 container.class_formatters().end())
+                              << " registered class formatter(s): ";
+ 
+     BOOST_LOG_SEV(lg, debug) << "Listing all class formatter.";
+-    for (const auto& f : reg.class_formatters())
++    for (const auto& f : container.class_formatters())
+         BOOST_LOG_SEV(lg, debug) << "Id: '" << f->formatter_id() << "'";
+ 
+     BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
