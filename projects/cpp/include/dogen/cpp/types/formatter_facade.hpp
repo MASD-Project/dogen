@@ -59,7 +59,7 @@ public:
      * @brief Reads all the information in the facet settings and
      * registrar to build the list of facets.
      */
-    std::forward_list<facet> build_facets(const registrar& reg,
+    std::forward_list<facet> build_facets(const registrar& rg,
         const std::unordered_map<std::string, settings_bundle>&
         settings_bundle_for_facet) const;
 

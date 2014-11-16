@@ -39,7 +39,7 @@ namespace dogen {
 namespace cpp {
 
 void registrar::validate() const {
-    if (class_formatters_.empty()) {
+    if (formatter_container_.class_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_formatters;
         BOOST_THROW_EXCEPTION(registrar_error(no_formatters));
     }
@@ -62,11 +62,11 @@ void registrar::register_formatter(
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    class_formatters_.push_front(f);
+    formatter_container_.class_formatters().push_front(f);
 }
 
-const registrar::class_formatters_type& registrar::class_formatters() const {
-    return class_formatters_;
+const formatters::container& registrar::formatter_container() const {
+    return formatter_container_;
 }
 
 const std::unordered_map<std::string, facet_settings>&

@@ -29,17 +29,13 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/cpp/types/facet_settings.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 
 class registrar {
-public:
-    typedef std::forward_list<
-        std::shared_ptr<formatters::class_formatter_interface>
-    > class_formatters_type;
-
 public:
     /**
      * @brief Ensures the registrar is ready to be used.
@@ -59,9 +55,9 @@ public:
         std::shared_ptr<formatters::class_formatter_interface> f);
 
     /**
-     * @brief Returns all available class formatters.
+     * @brief Returns all available formatters.
      */
-    const class_formatters_type& class_formatters() const;
+    const formatters::container& formatter_container() const;
 
     /**
      * @brief Returns all default settings for all facets.
@@ -70,7 +66,7 @@ public:
     default_facet_settings_by_facet_id() const;
 
 private:
-    class_formatters_type class_formatters_;
+    formatters::container formatter_container_;
     std::unordered_map<std::string, facet_settings>
     default_facet_settings_by_facet_id_;
 };

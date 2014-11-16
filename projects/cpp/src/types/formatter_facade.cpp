@@ -97,12 +97,12 @@ formatter_facade::formatter_facade(const registrar& reg,
     : facets_(build_facets(reg, settings_bundle_for_facet)) { }
 
 std::forward_list<formatter_facade::facet>
-formatter_facade::build_facets(const registrar& reg,
+formatter_facade::build_facets(const registrar& rg,
     const std::unordered_map<std::string, settings_bundle>&
     settings_bundle_for_facet) const {
 
     std::unordered_map<std::string, facet> facet_by_id;
-    for (auto f : reg.class_formatters())
+    for (auto f : rg.formatter_container().class_formatters())
         facet_by_id[f->facet_id()].class_formatters.push_front(f);
 
     for (auto pair : settings_bundle_for_facet)

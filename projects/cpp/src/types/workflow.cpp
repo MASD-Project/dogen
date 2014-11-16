@@ -142,7 +142,7 @@ workflow::obtain_relative_file_names_for_key_activity(
         const auto ft(formatter_type_for_object_type(o.object_type()));
         switch(ft) {
         case formatters::formatter_types::class_formatter:
-            for (const auto f : rg.class_formatters()) {
+            for (const auto f : rg.formatter_container().class_formatters()) {
                 path_spec_key key(f->formatter_id(), qn);
                 r.insert(std::make_pair(key, f->make_file_name(sb, qn)));
             }
@@ -165,7 +165,7 @@ obtain_path_spec_details_for_key_activity(
     relative_file_names_for_key) const {
 
     std::unordered_map<path_spec_key, path_spec_details> r;
-    for (const auto f : rg.class_formatters()) {
+    for (const auto f : rg.formatter_container().class_formatters()) {
         auto b(f->make_path_spec_details_builder());
         auto psd(b->build(m, relative_file_names_for_key));
         r.insert(psd.begin(), psd.end());
@@ -185,15 +185,16 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
 void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Validating c++ backend workflow.";
 
-    const auto reg(registrar());
-    reg.validate();
+    registrar().validate();
+    const auto& c(registrar().formatter_container());
     BOOST_LOG_SEV(lg, debug) << "Found "
-                             << std::distance(reg.class_formatters().begin(),
-                                 reg.class_formatters().end())
+                             << std::distance(
+                                 c.class_formatters().begin(),
+                                 c.class_formatters().end())
                              << " registered class formatter(s): ";
 
     BOOST_LOG_SEV(lg, debug) << "Listing all class formatter.";
-    for (const auto& f : reg.class_formatters())
+    for (const auto& f : c.class_formatters())
         BOOST_LOG_SEV(lg, debug) << "Id: '" << f->formatter_id() << "'";
 
     BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
