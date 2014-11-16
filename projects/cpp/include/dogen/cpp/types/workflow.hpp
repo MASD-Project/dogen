@@ -35,7 +35,7 @@
 #include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/cpp/types/path_spec_key.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/formatter_facade.hpp"
+#include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/hash/path_spec_key_hash.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
@@ -95,7 +95,7 @@ private:
      * @brief Formats all files for the entity.
      */
     std::forward_list<dogen::formatters::file> format_entity(
-        const formatter_facade& ff, const entity& e) const;
+        const formatters::workflow& fw, const entity& e) const;
 
 private:
     /**
@@ -144,12 +144,12 @@ private:
     template<typename AssociativeContainerOfElement>
     std::forward_list<dogen::formatters::file>
     create_files_from_sml_container_activity(const sml::model& m,
-        const formatter_facade& ff,
+        const formatters::workflow& fw,
         const AssociativeContainerOfElement& c) const {
         const auto entities(transform_sml_elements(m, c));
         std::forward_list<dogen::formatters::file> r;
         for (const auto e : entities)
-            r.splice_after(r.before_begin(), format_entity(ff, *e));
+            r.splice_after(r.before_begin(), format_entity(fw, *e));
         return r;
     }
 

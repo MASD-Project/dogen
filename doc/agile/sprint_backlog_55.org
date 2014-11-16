@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-16 Sun 18:56]
+Clock summary at [2014-11-16 Sun 19:14]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *22:39* |       |      |
+| *Total time*                                                           | *22:55* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 22:39 |      |
+| Development Stories Implemented                                        |         | 22:55 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:59 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -38,7 +38,7 @@ Clock summary at [2014-11-16 Sun 18:56]
 | COMPLETED Add a class responsible for creating settings bundles        |         |       | 1:08 |
 | COMPLETED Create a formatter container to house the formatters         |         |       | 0:50 |
 | COMPLETED Create a splitter class to split the formatter container     |         |       | 0:38 |
-| IMPLEMENTATION Refactor formatter facade                               |         |       | 0:01 |
+| COMPLETED Refactor formatter facade                                    |         |       | 0:17 |
 | IMPLEMENTATION Implement path spec details builder for class header    |         |       | 1:11 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
@@ -284,7 +284,9 @@ should be called =bundler=.
 - add splitting to the workflow
 - pass the new container to the path spec activities.
 
-*** IMPLEMENTATION Refactor formatter facade                  :task:refactor:
+*** COMPLETED Refactor formatter facade                       :task:refactor:
+    CLOSED: [2014-11-16 Sun 19:14]
+    CLOCK: [2014-11-16 Sun 18:58]--[2014-11-16 Sun 19:14] =>  0:16
     CLOCK: [2014-11-13 Thu 08:10]--[2014-11-13 Thu 08:11] =>  0:01
 
 Move formatter facade to formatters and call it entity

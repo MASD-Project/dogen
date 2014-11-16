@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTER_FACADE_HPP
-#define DOGEN_CPP_TYPES_FORMATTER_FACADE_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,12 +36,13 @@
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
 /**
  * @brief Responsible for dispatching the entity to the appropriate
  * formatters.
  */
-class formatter_facade {
+class workflow {
 private:
     friend class dispatcher;
 
@@ -52,7 +53,7 @@ private:
     struct facet {
         std::string id;
         settings_bundle bundle;
-        formatters::container container;
+        container container;
     };
 
 private:
@@ -61,16 +62,14 @@ private:
      * registrar to build the list of facets.
      */
     std::forward_list<facet> build_facets(
-        const std::unordered_map<std::string, formatters::container>&
-        formatters_by_facet,
+        const std::unordered_map<std::string, container>& formatters_by_facet,
         const std::unordered_map<std::string, settings_bundle>&
         settings_bundle_for_facet) const;
 
 
 public:
-    formatter_facade(
-        const std::unordered_map<std::string, formatters::container>&
-        formatters_by_facet,
+    workflow(
+        const std::unordered_map<std::string, container>& formatters_by_facet,
         const std::unordered_map<std::string, settings_bundle>&
         settings_bundle_for_facet);
 
@@ -85,6 +84,6 @@ private:
     const std::forward_list<facet> facets_;
 };
 
-} }
+} } }
 
 #endif

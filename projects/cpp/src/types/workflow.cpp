@@ -25,7 +25,6 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
@@ -86,8 +85,8 @@ formatter_type_for_object_type(const sml::object_types ot) const {
 }
 
 std::forward_list<dogen::formatters::file> workflow::format_entity(
-    const formatter_facade& ff, const entity& e) const {
-    return ff.format(e);
+    const formatters::workflow& fw, const entity& e) const {
+    return fw.format(e);
 }
 
 sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
@@ -222,18 +221,18 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     // const auto rel(obtain_relative_file_names_for_key_activity(rg, sb, m));
     // const auto det(obtain_path_spec_details_for_key_activity(rg, m, rel));
 
-    const formatter_facade ff(fc, sb);
+    const formatters::workflow fw(fc, sb);
     std::forward_list<dogen::formatters::file> r;
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, ff, m.modules()));
+        create_files_from_sml_container_activity(m, fw, m.modules()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, ff, m.concepts()));
+        create_files_from_sml_container_activity(m, fw, m.concepts()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, ff, m.primitives()));
+        create_files_from_sml_container_activity(m, fw, m.primitives()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, ff, m.enumerations()));
+        create_files_from_sml_container_activity(m, fw, m.enumerations()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, ff, m.objects()));
+        create_files_from_sml_container_activity(m, fw, m.objects()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

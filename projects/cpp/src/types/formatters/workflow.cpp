@@ -19,14 +19,15 @@
  *
  */
 #include "dogen/cpp/types/entity_visitor.hpp"
-#include "dogen/cpp/types/formatter_facade.hpp"
+#include "dogen/cpp/types/formatters/workflow.hpp"
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
 class dispatcher : public entity_visitor {
 public:
-    dispatcher(const std::forward_list<formatter_facade::facet>& f);
+    dispatcher(const std::forward_list<workflow::facet>& f);
     ~dispatcher() noexcept { }
 
 public:
@@ -49,11 +50,11 @@ public:
     std::forward_list<dogen::formatters::file> format(const entity& e);
 
 private:
-    const std::forward_list<formatter_facade::facet>& facets_;
+    const std::forward_list<workflow::facet>& facets_;
     std::forward_list<dogen::formatters::file> files_;
 };
 
-dispatcher::dispatcher(const std::forward_list<formatter_facade::facet>& f)
+dispatcher::dispatcher(const std::forward_list<workflow::facet>& f)
     : facets_(f) { }
 
 void dispatcher::visit(const dogen::cpp::class_info& c) {
@@ -91,15 +92,14 @@ std::forward_list<dogen::formatters::file> dispatcher::format(const entity& e) {
     return files_;
 }
 
-formatter_facade::formatter_facade(
-    const std::unordered_map<std::string, formatters::container>&
-    formatters_by_facet,
+workflow::workflow(
+    const std::unordered_map<std::string, container>& formatters_by_facet,
     const std::unordered_map<std::string, settings_bundle>&
     settings_bundle_for_facet)
     : facets_(build_facets(formatters_by_facet, settings_bundle_for_facet)) { }
 
-std::forward_list<formatter_facade::facet> formatter_facade::
-build_facets(const std::unordered_map<std::string, formatters::container>&
+std::forward_list<workflow::facet> workflow::
+build_facets(const std::unordered_map<std::string, container>&
     formatters_by_facet,
     const std::unordered_map<std::string, settings_bundle>&
     settings_bundle_for_facet) const {
@@ -111,7 +111,7 @@ build_facets(const std::unordered_map<std::string, formatters::container>&
     for (auto pair : settings_bundle_for_facet)
         facet_by_id[pair.first].bundle = pair.second;
 
-    std::forward_list<formatter_facade::facet> r;
+    std::forward_list<workflow::facet> r;
     for (const auto& pair : facet_by_id) {
         auto f(pair.second);
         f.id = pair.first;
@@ -122,9 +122,9 @@ build_facets(const std::unordered_map<std::string, formatters::container>&
 }
 
 std::forward_list<dogen::formatters::file>
-formatter_facade::format(const entity& e) const {
+workflow::format(const entity& e) const {
     dispatcher d(facets_);
     return d.format(e);
 }
 
-} }
+} } }
