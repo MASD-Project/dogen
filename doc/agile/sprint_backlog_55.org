@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-16 Sun 19:14]
+Clock summary at [2014-11-16 Sun 19:56]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *22:55* |       |      |
+| *Total time*                                                           | *23:36* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 22:55 |      |
+| Development Stories Implemented                                        |         | 23:36 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:59 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -39,6 +39,7 @@ Clock summary at [2014-11-16 Sun 19:14]
 | COMPLETED Create a formatter container to house the formatters         |         |       | 0:50 |
 | COMPLETED Create a splitter class to split the formatter container     |         |       | 0:38 |
 | COMPLETED Refactor formatter facade                                    |         |       | 0:17 |
+| COMPLETED Create a top-level facet class and facet factory             |         |       | 0:41 |
 | IMPLEMENTATION Implement path spec details builder for class header    |         |       | 1:11 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
@@ -291,6 +292,14 @@ should be called =bundler=.
 
 Move formatter facade to formatters and call it entity
 formatter. Could also be the =formatters::workflow= as a sub-workflow.
+
+*** COMPLETED Create a top-level facet class and facet factory :task:refactor:
+    CLOSED: [2014-11-16 Sun 19:55]
+    CLOCK: [2014-11-16 Sun 19:14]--[2014-11-16 Sun 19:55] =>  0:41
+
+Actually, what both path spec activities and formatter workflow really
+need is the concept of a facet, with all the information preprocessed
+ready to use. Add classes for these.
 
 *** IMPLEMENTATION Implement path spec details builder for class header :task:
     CLOCK: [2014-11-11 Tue 07:54]--[2014-11-11 Tue 07:57] =>  0:03

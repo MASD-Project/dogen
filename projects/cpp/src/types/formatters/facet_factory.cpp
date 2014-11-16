@@ -18,44 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include <forward_list>
-#include <unordered_map>
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formatters/facet.hpp"
+#include "dogen/cpp/types/formatters/facet_factory.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-/**
- * @brief Responsible for dispatching the entity to the appropriate
- * formatters.
- */
-class workflow {
-public:
-    workflow(const std::forward_list<facet>& facets);
+std::forward_list<facet> facet_factory::build(
+        const std::unordered_map<std::string, container>& formatters_by_facet,
+        const std::unordered_map<std::string, settings_bundle>&
+        settings_bundle_for_facet) const {
 
-public:
-    /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
-     */
-    std::forward_list<dogen::formatters::file> format(const entity& e) const;
+    std::unordered_map<std::string, facet> facet_by_id;
+    for (const auto pair : formatters_by_facet)
+        facet_by_id[pair.first].container(pair.second);
 
-private:
-    const std::forward_list<facet>& facets_;
-};
+    for (auto pair : settings_bundle_for_facet)
+        facet_by_id[pair.first].bundle(pair.second);
+
+    std::forward_list<facet> r;
+    for (const auto& pair : facet_by_id) {
+        auto f(pair.second);
+        f.id(pair.first);
+        r.push_front(f);
+    }
+
+    return r;
+}
 
 } } }
-
-#endif

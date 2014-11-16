@@ -35,6 +35,7 @@
 #include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/cpp/types/path_spec_key.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/hash/path_spec_key_hash.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
@@ -119,6 +120,16 @@ private:
     std::unordered_map<std::string, formatters::container>
     formatter_container_for_facet_activty(
         const formatters::container& c) const;
+
+    /**
+     * @brief Creates all the facets
+     */
+    std::forward_list<formatters::facet>
+    create_facets_activty(
+        const std::unordered_map<std::string, formatters::container>&
+        formatters_by_facet,
+        const std::unordered_map<std::string, settings_bundle>&
+        settings_bundle_for_facet) const;
 
     /**
      * @brief Gets the relative file name for all path keys.

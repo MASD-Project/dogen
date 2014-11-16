@@ -18,42 +18,52 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FACET_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FACET_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include <forward_list>
-#include <unordered_map>
-#include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formatters/facet.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 /**
- * @brief Responsible for dispatching the entity to the appropriate
- * formatters.
+ * @brief Represents a dogen facet.
  */
-class workflow {
-public:
-    workflow(const std::forward_list<facet>& facets);
-
+class facet {
 public:
     /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
+     * @brief Facet Id.
      */
-    std::forward_list<dogen::formatters::file> format(const entity& e) const;
+    /**@{*/
+    std::string id() const;
+    void id(const std::string& v);
+    /**@}*/
+
+    /**
+     * @brief Bundle of settings for this facet.
+     */
+    /**@{*/
+    settings_bundle bundle() const;
+    void bundle(const settings_bundle& v);
+    /**@}*/
+
+    /**
+     * @brief Formatter container for the facet.
+     */
+    const formatters::container& container() const;
+    void container(const formatters::container& v);
 
 private:
-    const std::forward_list<facet>& facets_;
+    std::string id_;
+    settings_bundle bundle_;
+    formatters::container container_;
 };
 
 } } }

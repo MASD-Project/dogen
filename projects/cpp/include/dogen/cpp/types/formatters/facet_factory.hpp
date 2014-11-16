@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FACET_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FACET_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,32 +28,26 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 /**
- * @brief Responsible for dispatching the entity to the appropriate
- * formatters.
+ * @brief Builds a list of facets.
  */
-class workflow {
-public:
-    workflow(const std::forward_list<facet>& facets);
-
+class facet_factory {
 public:
     /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
+     * @brief Generates the list of facets from the given inputs.
      */
-    std::forward_list<dogen::formatters::file> format(const entity& e) const;
-
-private:
-    const std::forward_list<facet>& facets_;
+    std::forward_list<facet> build(
+        const std::unordered_map<std::string, container>& formatters_by_facet,
+        const std::unordered_map<std::string, settings_bundle>&
+        settings_bundle_for_facet) const;
 };
 
 } } }

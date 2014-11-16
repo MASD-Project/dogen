@@ -18,44 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include <forward_list>
-#include <unordered_map>
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-/**
- * @brief Responsible for dispatching the entity to the appropriate
- * formatters.
- */
-class workflow {
-public:
-    workflow(const std::forward_list<facet>& facets);
+std::string facet::id() const { return id_; }
+void facet::id(const std::string& v) { id_ = v; }
 
-public:
-    /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
-     */
-    std::forward_list<dogen::formatters::file> format(const entity& e) const;
+settings_bundle facet::bundle() const { return bundle_; }
+void facet::bundle(const settings_bundle& v) { bundle_ = v; }
 
-private:
-    const std::forward_list<facet>& facets_;
-};
+const formatters::container& facet::container() const { return container_; }
+void facet::container(const formatters::container& v) { container_ = v; }
 
 } } }
-
-#endif

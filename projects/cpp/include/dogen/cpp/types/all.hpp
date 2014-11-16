@@ -47,6 +47,8 @@
 #include "dogen/cpp/types/formatters/container_splitter.hpp"
 #include "dogen/cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/facet.hpp"
+#include "dogen/cpp/types/formatters/facet_factory.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/formatters/formatters.hpp"
