@@ -31,6 +31,7 @@
 #include "dogen/cpp/types/registrar.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
@@ -41,7 +42,9 @@ namespace cpp {
  * formatters.
  */
 class formatter_facade {
-public:
+private:
+    friend class dispatcher;
+
     /**
      * @brief Utility container to hold together all of the facet
      * related bits.
@@ -49,22 +52,25 @@ public:
     struct facet {
         std::string id;
         settings_bundle bundle;
-        std::forward_list<
-            std::shared_ptr<formatters::class_formatter_interface>
-            > class_formatters;
+        formatters::container container;
     };
 
-public:
+private:
     /**
      * @brief Reads all the information in the facet settings and
      * registrar to build the list of facets.
      */
-    std::forward_list<facet> build_facets(const registrar& rg,
+    std::forward_list<facet> build_facets(
+        const std::unordered_map<std::string, formatters::container>&
+        formatters_by_facet,
         const std::unordered_map<std::string, settings_bundle>&
         settings_bundle_for_facet) const;
 
+
 public:
-    formatter_facade(const registrar& reg,
+    formatter_facade(
+        const std::unordered_map<std::string, formatters::container>&
+        formatters_by_facet,
         const std::unordered_map<std::string, settings_bundle>&
         settings_bundle_for_facet);
 

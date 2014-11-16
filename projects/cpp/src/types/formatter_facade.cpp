@@ -49,16 +49,16 @@ public:
     std::forward_list<dogen::formatters::file> format(const entity& e);
 
 private:
-    std::forward_list<dogen::formatters::file> files_;
     const std::forward_list<formatter_facade::facet>& facets_;
+    std::forward_list<dogen::formatters::file> files_;
 };
 
 dispatcher::dispatcher(const std::forward_list<formatter_facade::facet>& f)
-  : facets_(f) { }
+    : facets_(f) { }
 
 void dispatcher::visit(const dogen::cpp::class_info& c) {
     for (const auto& fct : facets_)
-        for (const auto fmt : fct.class_formatters)
+        for (const auto fmt : fct.container.class_formatters())
             files_.push_front(fmt->format(fct.bundle, c));
 }
 
@@ -91,19 +91,22 @@ std::forward_list<dogen::formatters::file> dispatcher::format(const entity& e) {
     return files_;
 }
 
-formatter_facade::formatter_facade(const registrar& reg,
+formatter_facade::formatter_facade(
+    const std::unordered_map<std::string, formatters::container>&
+    formatters_by_facet,
     const std::unordered_map<std::string, settings_bundle>&
     settings_bundle_for_facet)
-    : facets_(build_facets(reg, settings_bundle_for_facet)) { }
+    : facets_(build_facets(formatters_by_facet, settings_bundle_for_facet)) { }
 
-std::forward_list<formatter_facade::facet>
-formatter_facade::build_facets(const registrar& rg,
+std::forward_list<formatter_facade::facet> formatter_facade::
+build_facets(const std::unordered_map<std::string, formatters::container>&
+    formatters_by_facet,
     const std::unordered_map<std::string, settings_bundle>&
     settings_bundle_for_facet) const {
 
     std::unordered_map<std::string, facet> facet_by_id;
-    for (auto f : rg.formatter_container().class_formatters())
-        facet_by_id[f->facet_id()].class_formatters.push_front(f);
+    for (const auto pair : formatters_by_facet)
+        facet_by_id[pair.first].container = pair.second;
 
     for (auto pair : settings_bundle_for_facet)
         facet_by_id[pair.first].bundle = pair.second;

@@ -38,6 +38,7 @@
 #include "dogen/cpp/types/formatter_facade.hpp"
 #include "dogen/cpp/hash/path_spec_key_hash.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
@@ -111,6 +112,13 @@ private:
     settings_bundle_for_facet_activty(
         const dogen::formatters::general_settings& gs,
         const sml::module& model_module) const;
+
+    /**
+     * @brief Create the settings bundle for all facets.
+     */
+    std::unordered_map<std::string, formatters::container>
+    formatter_container_for_facet_activty(
+        const formatters::container& c) const;
 
     /**
      * @brief Gets the relative file name for all path keys.

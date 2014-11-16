@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-16 Sun 18:18]
+Clock summary at [2014-11-16 Sun 18:56]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *22:01* |       |      |
+| *Total time*                                                           | *22:39* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 22:01 |      |
+| Development Stories Implemented                                        |         | 22:39 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:59 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -37,6 +37,7 @@ Clock summary at [2014-11-16 Sun 18:18]
 | COMPLETED Implement the path spec workflow and associated classes      |         |       | 3:28 |
 | COMPLETED Add a class responsible for creating settings bundles        |         |       | 1:08 |
 | COMPLETED Create a formatter container to house the formatters         |         |       | 0:50 |
+| COMPLETED Create a splitter class to split the formatter container     |         |       | 0:38 |
 | IMPLEMENTATION Refactor formatter facade                               |         |       | 0:01 |
 | IMPLEMENTATION Implement path spec details builder for class header    |         |       | 1:11 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
@@ -274,7 +275,9 @@ should be called =bundler=.
 - create a class that contains all the different formatters
 - implement registrar using the new class
 
-*** Create a splitter class to split the formatter container  :task:refactor:
+*** COMPLETED Create a splitter class to split the formatter container :task:refactor:
+    CLOSED: [2014-11-16 Sun 18:56]
+    CLOCK: [2014-11-16 Sun 18:18]--[2014-11-16 Sun 18:56] =>  0:38
 
 - create a class responsible for splitting an existing container into
   a set of containers by facet

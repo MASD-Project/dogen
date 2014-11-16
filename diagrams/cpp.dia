@@ -26731,16 +26731,16 @@ the meta-data.
         <dia:point val="242,92.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="241.25,91.65;261.935,120.75"/>
+        <dia:rectangle val="241.25,91.65;261.935,120.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="242,92.4"/>
-        <dia:point val="242,106.525"/>
-        <dia:point val="261.735,106.525"/>
-        <dia:point val="261.735,119.95"/>
+        <dia:point val="242,106.55"/>
+        <dia:point val="261.735,106.55"/>
+        <dia:point val="261.735,120"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -26758,7 +26758,7 @@ the meta-data.
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O160" connection="5"/>
-        <dia:connection handle="1" to="O215" connection="28"/>
+        <dia:connection handle="1" to="O215" connection="1"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O218">

@@ -30,6 +30,7 @@
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
 #include "dogen/cpp/types/bundler.hpp"
+#include "dogen/cpp/types/formatters/container_splitter.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 namespace {
@@ -129,6 +130,13 @@ settings_bundle_for_facet_activty(
         gs, model_module);
 }
 
+std::unordered_map<std::string, formatters::container> workflow::
+formatter_container_for_facet_activty(
+    const formatters::container& c) const {
+    formatters::container_splitter s;
+    return s.split_by_facet(c);
+}
+
 std::unordered_map<path_spec_key, boost::filesystem::path>
 workflow::obtain_relative_file_names_for_key_activity(
     const cpp::registrar& rg, const settings_bundle& sb,
@@ -207,11 +215,14 @@ std::forward_list<dogen::formatters::file> workflow::generate(
 
     const auto mod(obtain_model_module_activity(m));
     const auto sb(settings_bundle_for_facet_activty(gs, mod));
+
+    const auto& c(registrar().formatter_container());
+    const auto fc(formatter_container_for_facet_activty(c));
     // const auto& rg(registrar());
     // const auto rel(obtain_relative_file_names_for_key_activity(rg, sb, m));
     // const auto det(obtain_path_spec_details_for_key_activity(rg, m, rel));
 
-    const formatter_facade ff(registrar(), sb);
+    const formatter_facade ff(fc, sb);
     std::forward_list<dogen::formatters::file> r;
     r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(m, ff, m.modules()));
