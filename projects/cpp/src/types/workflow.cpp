@@ -78,6 +78,10 @@ formatter_type_for_object_type(const sml::object_types ot) const {
         return formatters::formatter_types::class_formatter;
         break;
 
+    case sml::object_types::exception:
+        return formatters::formatter_types::exception_formatter;
+        break;
+
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << ot;
         BOOST_THROW_EXCEPTION(workflow_error(unsupported_object_type +
@@ -149,7 +153,7 @@ std::forward_list<formatters::facet> workflow::create_facets_activty(
 
 std::unordered_map<path_spec_key, boost::filesystem::path>
 workflow::obtain_relative_file_names_for_key_activity(
-    const cpp::registrar& rg, const settings_bundle& sb,
+    const std::forward_list<formatters::facet>& facets,
     const sml::model& m) const {
 
     std::unordered_map<path_spec_key, boost::filesystem::path> r;
@@ -157,13 +161,24 @@ workflow::obtain_relative_file_names_for_key_activity(
         const auto qn(pair.first);
         const auto o(pair.second);
 
+        const auto ng(sml::generation_types::no_generation);
+        if (o.generation_type() == ng)
+            continue;
+
         const auto ft(formatter_type_for_object_type(o.object_type()));
         switch(ft) {
         case formatters::formatter_types::class_formatter:
-            for (const auto f : rg.formatter_container().class_formatters()) {
-                path_spec_key key(f->formatter_id(), qn);
-                r.insert(std::make_pair(key, f->make_file_name(sb, qn)));
+            for (const auto fct : facets) {
+                for (const auto fmt : fct.container().class_formatters()) {
+                    path_spec_key key(fmt->formatter_id(), qn);
+                    const auto fn(fmt->make_file_name(fct.bundle(), qn));
+                    r.insert(std::make_pair(key, fn));
+                }
             }
+            break;
+
+        case formatters::formatter_types::exception_formatter:
+            // FIXME
             break;
 
         default:
@@ -178,15 +193,17 @@ workflow::obtain_relative_file_names_for_key_activity(
 
 std::unordered_map<path_spec_key, path_spec_details> workflow::
 obtain_path_spec_details_for_key_activity(
-    const cpp::registrar& rg, const sml::model& m,
+    const std::forward_list<formatters::facet>& facets, const sml::model& m,
     const std::unordered_map<path_spec_key, boost::filesystem::path>&
     relative_file_names_for_key) const {
 
     std::unordered_map<path_spec_key, path_spec_details> r;
-    for (const auto f : rg.formatter_container().class_formatters()) {
-        auto b(f->make_path_spec_details_builder());
-        auto psd(b->build(m, relative_file_names_for_key));
-        r.insert(psd.begin(), psd.end());
+    for (const auto fct : facets) {
+        for (const auto fmt : fct.container().class_formatters()) {
+            auto b(fmt->make_path_spec_details_builder());
+            auto psd(b->build(m, relative_file_names_for_key));
+            r.insert(psd.begin(), psd.end());
+        }
     }
     return r;
 }
@@ -229,22 +246,21 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     const auto& c(registrar().formatter_container());
     const auto fc(formatter_container_for_facet_activty(c));
     const auto facets(create_facets_activty(fc, sb));
-    // const auto& rg(registrar());
-    // const auto rel(obtain_relative_file_names_for_key_activity(rg, sb, m));
-    // const auto det(obtain_path_spec_details_for_key_activity(rg, m, rel));
+    const auto rel(obtain_relative_file_names_for_key_activity(facets, m));
+    const auto det(obtain_path_spec_details_for_key_activity(facets, m, rel));
 
     const formatters::workflow fw(facets);
     std::forward_list<dogen::formatters::file> r;
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, fw, m.modules()));
+        create_files_from_sml_container_activity(det, m, fw, m.modules()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, fw, m.concepts()));
+        create_files_from_sml_container_activity(det, m, fw, m.concepts()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, fw, m.primitives()));
+        create_files_from_sml_container_activity(det, m, fw, m.primitives()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, fw, m.enumerations()));
+        create_files_from_sml_container_activity(det, m, fw, m.enumerations()));
     r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(m, fw, m.objects()));
+        create_files_from_sml_container_activity(det, m, fw, m.objects()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

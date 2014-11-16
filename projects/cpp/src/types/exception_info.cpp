@@ -29,13 +29,11 @@ exception_info::exception_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, boost::filesystem::path>& relative_path_for_formatter,
-    const std::unordered_map<std::string, dogen::cpp::includes>& includes_for_formatter)
+    const std::unordered_map<std::string, dogen::cpp::path_spec_details>& path_spec_details_for_formatter)
     : dogen::cpp::entity(name,
       documentation,
       namespaces,
-      relative_path_for_formatter,
-      includes_for_formatter) { }
+      path_spec_details_for_formatter) { }
 
 void exception_info::to_stream(std::ostream& s) const {
     s << " { "

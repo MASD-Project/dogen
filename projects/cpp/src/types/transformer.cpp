@@ -170,7 +170,10 @@ bool requires_manual_move_constructor(const std::string type_name) {
 namespace dogen {
 namespace cpp {
 
-transformer::transformer(const sml::model& m) : model_(m) { }
+transformer::transformer(
+    const std::unordered_map<path_spec_key, path_spec_details>&
+    path_spec_details_for_key, const sml::model& m)
+    : path_spec_details_for_key_(path_spec_details_for_key), model_(m) { }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,
     nested_type_info& nti, std::string& complete_name,
@@ -364,6 +367,8 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     r->is_parent(o.is_parent());
     r->generation_type(o.generation_type());
     r->class_type(ct);
+
+    path_spec_details_for_key_.begin();
 
     // FIXME: move to formatter
     // sml::meta_data::reader reader(o.meta_data());

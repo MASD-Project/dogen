@@ -64,21 +64,24 @@ build(const sml::model& /*m*/,
 }
 
 boost::filesystem::path class_header_formatter::
-get_relative_path(const class_info& c) const {
+get_relative_path(const class_info& /*c*/) const {
+    return boost::filesystem::path();
+    /* FIXME
     const auto i(c.relative_path_for_formatter().find(::formatter_id));
     if (i == c.relative_path_for_formatter().end()) {
-        return boost::filesystem::path();
-        /*
-          FIXME
+        
+
+          
         BOOST_LOG_SEV(lg, error) << relative_path_for_formatter_not_found
                                  << ::formatter_id;
 
         BOOST_THROW_EXCEPTION(formatting_error(
                 relative_path_for_formatter_not_found +
                 ::formatter_id));
-        */
+
     }
     return i->second;
+    */
 }
 
 std::string class_header_formatter::facet_id() const {

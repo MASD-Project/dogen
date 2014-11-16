@@ -180,7 +180,9 @@ qname resolver::resolve_partial_type(const qname& n) const {
         qname qn;
         qn.simple_name(r.simple_name());
         qn.model_name(r.module_path().front());
-        qn.external_module_path(r.external_module_path());
+        qn.external_module_path(model_.name().external_module_path());
+
+        std::cout << "here:" << qn << std::endl;
 
         i = objects.find(qn);
         if (i != objects.end())

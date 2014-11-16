@@ -78,10 +78,12 @@ private:
      */
     template<typename AssociativeContainerOfElement>
     std::forward_list<std::shared_ptr<entity>>
-    transform_sml_elements(const sml::model& m,
+    transform_sml_elements(
+        const std::unordered_map<path_spec_key, path_spec_details>& details,
+        const sml::model& m,
         const AssociativeContainerOfElement& c) const {
         std::forward_list<std::shared_ptr<entity> > r;
-        transformer t(m);
+        transformer t(details, m);
         for (const auto& pair : c) {
             const auto ng(sml::generation_types::no_generation);
             if (pair.second.generation_type() == ng)
@@ -135,8 +137,8 @@ private:
      * @brief Gets the relative file name for all path keys.
      */
     std::unordered_map<path_spec_key, boost::filesystem::path>
-    obtain_relative_file_names_for_key_activity(const cpp::registrar& rg,
-        const settings_bundle& sb,
+    obtain_relative_file_names_for_key_activity(
+        const std::forward_list<formatters::facet>& facets,
         const sml::model& m) const;
 
     /**
@@ -144,7 +146,7 @@ private:
      */
     std::unordered_map<path_spec_key, path_spec_details>
     obtain_path_spec_details_for_key_activity(
-        const cpp::registrar& rg, const sml::model& m,
+        const std::forward_list<formatters::facet>& facets, const sml::model& m,
         const std::unordered_map<path_spec_key, boost::filesystem::path>&
         relative_file_names_for_key) const;
 
@@ -154,10 +156,12 @@ private:
      */
     template<typename AssociativeContainerOfElement>
     std::forward_list<dogen::formatters::file>
-    create_files_from_sml_container_activity(const sml::model& m,
+    create_files_from_sml_container_activity(
+        const std::unordered_map<path_spec_key, path_spec_details>& details,
+        const sml::model& m,
         const formatters::workflow& fw,
         const AssociativeContainerOfElement& c) const {
-        const auto entities(transform_sml_elements(m, c));
+        const auto entities(transform_sml_elements(details, m, c));
         std::forward_list<dogen::formatters::file> r;
         for (const auto e : entities)
             r.splice_after(r.before_begin(), format_entity(fw, *e));

@@ -27,6 +27,7 @@
 
 #include <tuple>
 #include <memory>
+#include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
@@ -44,6 +45,9 @@
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/primitive_info.hpp"
 #include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/path_spec_key.hpp"
+#include "dogen/cpp/hash/path_spec_key_hash.hpp"
+#include "dogen/cpp/types/path_spec_details.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -53,7 +57,9 @@ namespace cpp {
  */
 class transformer {
 public:
-    explicit transformer(const sml::model& m);
+    transformer(
+        const std::unordered_map<path_spec_key, path_spec_details>&
+        path_spec_details_for_key, const sml::model& m);
 
 private:
     /**
@@ -151,6 +157,8 @@ public:
     std::shared_ptr<entity> transform(const sml::object& o) const;
 
 private:
+    const std::unordered_map<path_spec_key, path_spec_details>&
+    path_spec_details_for_key_;
     const sml::model& model_;
 };
 

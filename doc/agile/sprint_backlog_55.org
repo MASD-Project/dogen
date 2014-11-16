@@ -17,13 +17,13 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-16 Sun 19:56]
+Clock summary at [2014-11-16 Sun 23:05]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *23:36* |       |      |
+| *Total time*                                                           | *24:38* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 23:36 |      |
+| Development Stories Implemented                                        |         | 24:38 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:59 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
@@ -40,7 +40,7 @@ Clock summary at [2014-11-16 Sun 19:56]
 | COMPLETED Create a splitter class to split the formatter container     |         |       | 0:38 |
 | COMPLETED Refactor formatter facade                                    |         |       | 0:17 |
 | COMPLETED Create a top-level facet class and facet factory             |         |       | 0:41 |
-| IMPLEMENTATION Implement path spec details builder for class header    |         |       | 1:11 |
+| IMPLEMENTATION Implement path spec details builder for class header    |         |       | 2:13 |
 | IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
 #+end:
 
@@ -302,6 +302,8 @@ need is the concept of a facet, with all the information preprocessed
 ready to use. Add classes for these.
 
 *** IMPLEMENTATION Implement path spec details builder for class header :task:
+    CLOCK: [2014-11-16 Sun 22:15]--[2014-11-16 Sun 23:03] =>  0:48
+    CLOCK: [2014-11-16 Sun 20:47]--[2014-11-16 Sun 21:01] =>  0:14
     CLOCK: [2014-11-11 Tue 07:54]--[2014-11-11 Tue 07:57] =>  0:03
     CLOCK: [2014-11-10 Mon 22:50]--[2014-11-10 Mon 23:42] =>  0:52
     CLOCK: [2014-11-10 Mon 08:04]--[2014-11-10 Mon 08:20] =>  0:16
@@ -312,9 +314,9 @@ We need to implement the interface for path spec details builder.
 
 At present we have two template functions in the main workflow,
 linking the different steps of transformation and formatting. However,
-it would make more sense to plug in to the all types traversal. For
-this we need a sub-workflow that owns the model and the transformer
-and which overloads =operator()=. It produces files.
+it may make more sense to plug in to the all types traversal. For this
+we need a sub-workflow that owns the model and the transformer and
+which overloads =operator()=. It produces files.
 
 It can receive a formatter dispatcher and a transformer on
 construction and keep references these. Execute returns the list of

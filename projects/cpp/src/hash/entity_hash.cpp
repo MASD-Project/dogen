@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/entity_hash.hpp"
-#include "dogen/cpp/hash/includes_hash.hpp"
+#include "dogen/cpp/hash/path_spec_details_hash.hpp"
 
 namespace {
 
@@ -38,22 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_boost_filesystem_path(const std::unordered_map<std::string, boost::filesystem::path>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_boost_filesystem_path(i.second));
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_includes(const std::unordered_map<std::string, dogen::cpp::includes>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_path_spec_details(const std::unordered_map<std::string, dogen::cpp::path_spec_details>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -73,8 +58,7 @@ std::size_t entity_hasher::hash(const entity&v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_string(v.namespaces()));
-    combine(seed, hash_std_unordered_map_std_string_boost_filesystem_path(v.relative_path_for_formatter()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_includes(v.includes_for_formatter()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_path_spec_details(v.path_spec_details_for_formatter()));
 
     return seed;
 }
