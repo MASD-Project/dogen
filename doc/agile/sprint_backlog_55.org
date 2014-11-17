@@ -17,14 +17,14 @@ pipeline for at least one formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-16 Sun 23:05]
+Clock summary at [2014-11-17 Mon 07:48]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                           | *24:38* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
 | Development Stories Implemented                                        |         | 24:38 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:59 |
+| COMPLETED Sprint and product backlog grooming                          |         |       | 0:59 |
 | COMPLETED Sort out postgres update problems                            |         |       | 0:36 |
 | COMPLETED Refactor static data initialisation                          |         |       | 1:08 |
 | COMPLETED Add support for facet settings                               |         |       | 4:10 |
@@ -40,11 +40,12 @@ Clock summary at [2014-11-16 Sun 23:05]
 | COMPLETED Create a splitter class to split the formatter container     |         |       | 0:38 |
 | COMPLETED Refactor formatter facade                                    |         |       | 0:17 |
 | COMPLETED Create a top-level facet class and facet factory             |         |       | 0:41 |
-| IMPLEMENTATION Implement path spec details builder for class header    |         |       | 2:13 |
-| IMPLEMENTATION Implement class header formatter                        |         |       | 0:43 |
+| POSTPONED Implement path spec details builder for class header         |         |       | 2:13 |
+| POSTPONED Implement class header formatter                             |         |       | 0:43 |
 #+end:
 
-*** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
+    CLOSED: [2014-11-17 Mon 07:47]
     CLOCK: [2014-11-14 Fri 07:52]--[2014-11-14 Fri 08:02] =>  0:10
     CLOCK: [2014-11-13 Thu 07:51]--[2014-11-13 Thu 08:09] =>  0:18
     CLOCK: [2014-11-11 Tue 18:35]--[2014-11-11 Tue 18:41] =>  0:06
@@ -53,10 +54,6 @@ Clock summary at [2014-11-16 Sun 23:05]
     CLOCK: [2014-11-03 Mon 07:59]--[2014-11-03 Mon 08:08] =>  0:09
 
 Updates to sprint and product backlog.
-
-*** Updates to the manual and readme files                       :task:media:
-
-Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Sort out postgres update problems                       :spike:
     CLOSED: [2014-11-03 Mon 18:14]
@@ -301,7 +298,8 @@ Actually, what both path spec activities and formatter workflow really
 need is the concept of a facet, with all the information preprocessed
 ready to use. Add classes for these.
 
-*** IMPLEMENTATION Implement path spec details builder for class header :task:
+*** POSTPONED Implement path spec details builder for class header     :task:
+    CLOSED: [2014-11-17 Mon 07:47]
     CLOCK: [2014-11-16 Sun 22:15]--[2014-11-16 Sun 23:03] =>  0:48
     CLOCK: [2014-11-16 Sun 20:47]--[2014-11-16 Sun 21:01] =>  0:14
     CLOCK: [2014-11-11 Tue 07:54]--[2014-11-11 Tue 07:57] =>  0:03
@@ -310,25 +308,8 @@ ready to use. Add classes for these.
 
 We need to implement the interface for path spec details builder.
 
-*** Create a transformation and formatting sub-workflow       :task:refactor:
-
-At present we have two template functions in the main workflow,
-linking the different steps of transformation and formatting. However,
-it may make more sense to plug in to the all types traversal. For this
-we need a sub-workflow that owns the model and the transformer and
-which overloads =operator()=. It produces files.
-
-It can receive a formatter dispatcher and a transformer on
-construction and keep references these. Execute returns the list of
-files.
-
-*** Tidy-up sml consumer interface                            :task:refactor:
-
-After implementing the includes for the class header formatter we
-should figure out if we need the multiple passes machinery. Most
-likely all of that should be scraped.
-
-*** IMPLEMENTATION Implement class header formatter :task:refactor:formatters:cpp:
+*** POSTPONED Implement class header formatter :task:refactor:formatters:cpp:
+    CLOSED: [2014-11-17 Mon 07:48]
     CLOCK: [2014-11-06 Thu 22:19]--[2014-11-06 Thu 22:36] =>  0:17
     CLOCK: [2014-11-06 Thu 07:54]--[2014-11-06 Thu 08:07] =>  0:13
     CLOCK: [2014-11-05 Wed 22:46]--[2014-11-05 Wed 22:59] =>  0:13
