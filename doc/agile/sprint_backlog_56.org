@@ -1,0 +1,87 @@
+#+title: Sprint Backlog 56
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) task(t) note(n) spike(p) }
+#+tags: { refactor(r) bug(b) feature(f) vision(v) }
+#+tags: { meta_data(m) tests(a) packaging(q) media(h) build(u) validation(x) diagrams(w) frontend(c) backend(g) }
+#+tags: dia(y) sml(l) cpp(k) config(o) formatters(d)
+
+* Stories
+
+This file contains all stories that were closed during sprint 56.
+
+The *Mission Statement* for this sprint is to finish implementing the
+C++ model workflow skeleton, moving across all of the formatting code
+for the class formatter.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-11-17 Mon 07:53]
+
+| Headline                                           | Time   |      |      |
+|----------------------------------------------------+--------+------+------|
+| *Total time*                                       | *0:08* |      |      |
+|----------------------------------------------------+--------+------+------|
+| Development Stories Implemented                    |        | 0:08 |      |
+| IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:08 |
+#+end:
+
+*** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-17 Mon 07:45]--[2014-11-17 Mon 07:53] =>  0:08
+
+Updates to sprint and product backlog.
+
+*** Updates to the manual and readme files                       :task:media:
+
+Use downtime to update the manual and / or readme file.
+
+*** IMPLEMENTATION Implement path spec details builder for class header :task:
+
+We need to implement the interface for path spec details builder.
+
+*** Create a transformation and formatting sub-workflow       :task:refactor:
+
+At present we have two template functions in the main workflow,
+linking the different steps of transformation and formatting. However,
+it may make more sense to plug in to the all types traversal. For this
+we need a sub-workflow that owns the model and the transformer and
+which overloads =operator()=. It produces files.
+
+It can receive a formatter dispatcher and a transformer on
+construction and keep references these. Execute returns the list of
+files.
+
+*** Tidy-up sml consumer interface                            :task:refactor:
+
+After implementing the includes for the class header formatter we
+should figure out if we need the multiple passes machinery. Most
+likely all of that should be scraped.
+
+*** Implement class header formatter           :task:refactor:formatters:cpp:
+
+- look at the old =om= types formatter implementation to see if there
+  is any code to scavenge. This model was deleted around commit
+  10157ad.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+** Deprecated Development Stories
+
+Stories that do not make sense any longer.
