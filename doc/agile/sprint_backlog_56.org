@@ -37,8 +37,16 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** IMPLEMENTATION Implement path spec details builder for class header :task:
+    CLOCK: [2014-11-17 Mon 07:53]--[2014-11-17 Mon 08:13] =>  0:20
 
 We need to implement the interface for path spec details builder.
+
+*** Names in C++ namespaces                                   :task:refactor:
+
+It appears we are not using the entity name for a C++ namespace. If
+that is the case, this is wrong and needs to be fixed. We are probably
+inferring the name by looking at the =front= (or =back=) of the
+namespaces list. Investigate this.
 
 *** Create a transformation and formatting sub-workflow       :task:refactor:
 

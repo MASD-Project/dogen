@@ -175,6 +175,19 @@ transformer::transformer(
     path_spec_details_for_key, const sml::model& m)
     : path_spec_details_for_key_(path_spec_details_for_key), model_(m) { }
 
+void transformer::populate_entity_properties(const sml::qname& qn,
+    const std::string& documentation, entity& e) const {
+
+    e.name(qn.simple_name());
+    e.documentation(documentation);
+
+    identifier_name_builder b;
+    e.namespaces(b.namespace_list(model_, qn));
+
+    // FIXME
+    path_spec_details_for_key_.begin();
+}
+
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,
     nested_type_info& nti, std::string& complete_name,
     bool& requires_stream_manipulators) const {
@@ -309,12 +322,8 @@ transformer::to_enum_info(const sml::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
     auto r(std::make_shared<enum_info>());
-    r->name(e.name().simple_name());
-    r->documentation(e.documentation());
+    populate_entity_properties(e.name(), e.documentation(), *r);
     r->type(e.underlying_type().simple_name());
-
-    identifier_name_builder b;
-    r->namespaces(b.namespace_list(model_, e.name()));
 
     for (const auto& en : e.enumerators())
         r->enumerators().push_back(to_enumerator_info(en));
@@ -329,10 +338,7 @@ to_namespace_info(const sml::module& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming module: " << m.name();
 
     auto r(std::make_shared<namespace_info>());
-    r->documentation(m.documentation());
-
-    identifier_name_builder b;
-    r->namespaces(b.namespace_list(model_, m.name()));
+    populate_entity_properties(m.name(), m.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
     return r;
@@ -343,11 +349,7 @@ transformer::to_exception_info(const sml::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << o.name();
 
     auto r(std::make_shared<exception_info>());
-    r->name(o.name().simple_name());
-    r->documentation(o.documentation());
-
-    identifier_name_builder b;
-    r->namespaces(b.namespace_list(model_, o.name()));
+    populate_entity_properties(o.name(), o.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << o.name();
     return r;
@@ -356,24 +358,19 @@ transformer::to_exception_info(const sml::object& o) const {
 std::shared_ptr<class_info>
 transformer::to_class_info(const sml::object& o, const class_types ct) const {
     auto r(std::make_shared<class_info>());
+    populate_entity_properties(o.name(), o.documentation(), *r);
 
-    r->name(o.name().simple_name());
-
-    identifier_name_builder b;
-    r->namespaces(b.namespace_list(model_, o.name()));
-    r->documentation(o.documentation());
     r->is_immutable(o.is_immutable());
     r->is_visitable(o.is_visitable());
     r->is_parent(o.is_parent());
     r->generation_type(o.generation_type());
     r->class_type(ct);
 
-    path_spec_details_for_key_.begin();
-
     // FIXME: move to formatter
     // sml::meta_data::reader reader(o.meta_data());
     // r->opaque_parameters(reader.odb_pragma());
 
+    identifier_name_builder b;
     auto i(o.relationships().find(sml::relationship_types::parents));
     if (i != o.relationships().end()) {
         for (const auto& qn : i->second) {

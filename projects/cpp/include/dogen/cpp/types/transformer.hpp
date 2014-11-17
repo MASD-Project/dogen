@@ -63,6 +63,13 @@ public:
 
 private:
     /**
+     * @brief Populates all properties at the entity base class level.
+     */
+    void populate_entity_properties(const sml::qname& qn,
+        const std::string& documentation, entity& e) const;
+
+private:
+    /**
      * @brief Transforms the SML nested qname into a nested type info.
      */
     void to_nested_type_info(const sml::nested_qname& nqn,
