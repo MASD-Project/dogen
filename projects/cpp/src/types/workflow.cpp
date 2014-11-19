@@ -151,12 +151,12 @@ std::forward_list<formatters::facet> workflow::create_facets_activty(
     return f.build(formatters_by_facet, settings_bundle_for_facet);
 }
 
-std::unordered_map<path_spec_key, boost::filesystem::path>
+std::unordered_map<sml::qname, workflow::path_by_formatter_type>
 workflow::obtain_relative_file_names_for_key_activity(
     const std::forward_list<formatters::facet>& facets,
     const sml::model& m) const {
 
-    std::unordered_map<path_spec_key, boost::filesystem::path> r;
+    std::unordered_map<sml::qname, path_by_formatter_type> r;
     for (const auto& pair : m.objects()) {
         const auto qn(pair.first);
         const auto o(pair.second);
@@ -170,9 +170,9 @@ workflow::obtain_relative_file_names_for_key_activity(
         case formatters::formatter_types::class_formatter:
             for (const auto fct : facets) {
                 for (const auto fmt : fct.container().class_formatters()) {
-                    path_spec_key key(fmt->formatter_id(), qn);
-                    const auto fn(fmt->make_file_name(fct.bundle(), qn));
-                    r.insert(std::make_pair(key, fn));
+                    const auto& id(fmt->formatter_id());
+                    const auto& fn(fmt->make_file_name(fct.bundle(), qn));
+                    r[qn].insert(std::make_pair(id, fn));
                 }
             }
             break;
@@ -191,13 +191,16 @@ workflow::obtain_relative_file_names_for_key_activity(
     return r;
 }
 
-std::unordered_map<path_spec_key, path_spec_details> workflow::
+std::unordered_map<sml::qname,
+                   workflow::path_spec_details_by_formatter_type> workflow::
 obtain_path_spec_details_for_key_activity(
     const std::forward_list<formatters::facet>& facets, const sml::model& m,
-    const std::unordered_map<path_spec_key, boost::filesystem::path>&
+    const std::unordered_map<sml::qname, path_by_formatter_type>&
     relative_file_names_for_key) const {
 
-    std::unordered_map<path_spec_key, path_spec_details> r;
+    std::unordered_map<sml::qname,
+                       workflow::path_spec_details_by_formatter_type> r;
+
     for (const auto fct : facets) {
         for (const auto fmt : fct.container().class_formatters()) {
             auto b(fmt->make_path_spec_details_builder());

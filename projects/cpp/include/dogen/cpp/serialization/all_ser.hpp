@@ -46,7 +46,6 @@
 #include "dogen/cpp/serialization/odb_options_info_ser.hpp"
 #include "dogen/cpp/serialization/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/path_spec_details_ser.hpp"
-#include "dogen/cpp/serialization/path_spec_key_ser.hpp"
 #include "dogen/cpp/serialization/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/project_ser.hpp"
 #include "dogen/cpp/serialization/property_info_ser.hpp"

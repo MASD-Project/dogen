@@ -27,10 +27,10 @@
 
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/includes.hpp"
-#include "dogen/cpp/types/path_spec_key.hpp"
-#include "dogen/cpp/hash/path_spec_key_hash.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
 
 namespace dogen {
@@ -40,6 +40,12 @@ namespace cpp {
  * @brief Builds a subset of the path spec details for a model.
  */
 class path_spec_details_builder_interface  {
+public:
+    typedef std::unordered_map<std::string, path_spec_details>
+    path_spec_details_by_formatter_type;
+    typedef std::unordered_map<std::string, boost::filesystem::path>
+    path_by_formatter_type;
+
 public:
     path_spec_details_builder_interface() = default;
     path_spec_details_builder_interface(
@@ -57,9 +63,9 @@ public:
      * @param relative_paths relative paths the system knows of, keyed
      * by qualified name and formatter id.
      */
-    virtual std::unordered_map<path_spec_key, path_spec_details> build(
-        const sml::model& m,
-        const std::unordered_map<path_spec_key, boost::filesystem::path>&
+    virtual std::unordered_map<sml::qname, path_spec_details_by_formatter_type>
+    build(const sml::model& m,
+        const std::unordered_map<sml::qname, path_by_formatter_type>&
         relative_file_names_for_key) const = 0;
 };
 

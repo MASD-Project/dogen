@@ -17,14 +17,15 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-17 Mon 07:53]
+Clock summary at [2014-11-19 Wed 18:21]
 
-| Headline                                           | Time   |      |      |
-|----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *0:08* |      |      |
-|----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 0:08 |      |
-| IMPLEMENTATION Sprint and product backlog grooming |        |      | 0:08 |
+| Headline                                                            | Time   |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                        | *1:42* |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                     |        | 1:42 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:08 |
+| IMPLEMENTATION Implement path spec details builder for class header |        |      | 1:34 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -37,6 +38,8 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** IMPLEMENTATION Implement path spec details builder for class header :task:
+    CLOCK: [2014-11-19 Wed 17:54]--[2014-11-19 Wed 18:21] =>  0:27
+    CLOCK: [2014-11-17 Mon 17:54]--[2014-11-17 Mon 18:41] =>  0:47
     CLOCK: [2014-11-17 Mon 07:53]--[2014-11-17 Mon 08:13] =>  0:20
 
 We need to implement the interface for path spec details builder.

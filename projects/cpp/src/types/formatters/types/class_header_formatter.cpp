@@ -49,17 +49,26 @@ namespace types {
 
 class path_spec_details_builder : public path_spec_details_builder_interface {
 public:
-    std::unordered_map<path_spec_key, path_spec_details> build(
-        const sml::model& m,
-        const std::unordered_map<path_spec_key, boost::filesystem::path>&
+    std::unordered_map<sml::qname,
+                       path_spec_details_builder_interface::
+                       path_spec_details_by_formatter_type>
+    build(const sml::model& m,
+        const std::unordered_map<sml::qname,
+        path_spec_details_builder_interface::path_by_formatter_type>&
         relative_file_names_for_key) const override;
 };
 
-std::unordered_map<path_spec_key, path_spec_details> path_spec_details_builder::
+std::unordered_map<sml::qname,
+                   path_spec_details_builder_interface::
+                   path_spec_details_by_formatter_type>
+path_spec_details_builder::
 build(const sml::model& /*m*/,
-    const std::unordered_map<path_spec_key, boost::filesystem::path>&
+    const std::unordered_map<sml::qname, path_spec_details_builder_interface::
+                             path_by_formatter_type>&
     /*relative_file_names_for_key*/) const {
-    std::unordered_map<path_spec_key, path_spec_details> r;
+    std::unordered_map<sml::qname,
+                       path_spec_details_builder_interface::
+                       path_spec_details_by_formatter_type> r;
     return r;
 }
 

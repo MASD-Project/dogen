@@ -142,7 +142,6 @@
 #include "dogen/cpp/types/parent_info.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
 #include "dogen/cpp/types/path_spec_details_builder_interface.hpp"
-#include "dogen/cpp/types/path_spec_key.hpp"
 #include "dogen/cpp/types/primitive_info.hpp"
 #include "dogen/cpp/types/project.hpp"
 #include "dogen/cpp/types/property_info.hpp"

@@ -171,9 +171,8 @@ namespace dogen {
 namespace cpp {
 
 transformer::transformer(
-    const std::unordered_map<path_spec_key, path_spec_details>&
-    path_spec_details_for_key, const sml::model& m)
-    : path_spec_details_for_key_(path_spec_details_for_key), model_(m) { }
+    const std::unordered_map<sml::qname, path_spec_details_by_formatter_type>&
+    details, const sml::model& m) : details_(details), model_(m) { }
 
 void transformer::populate_entity_properties(const sml::qname& qn,
     const std::string& documentation, entity& e) const {
@@ -185,7 +184,7 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     e.namespaces(b.namespace_list(model_, qn));
 
     // FIXME
-    path_spec_details_for_key_.begin();
+    details_.begin();
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,

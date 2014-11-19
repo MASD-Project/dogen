@@ -46,7 +46,6 @@
 #include "dogen/cpp/test_data/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/parent_info_td.hpp"
 #include "dogen/cpp/test_data/path_spec_details_td.hpp"
-#include "dogen/cpp/test_data/path_spec_key_td.hpp"
 #include "dogen/cpp/test_data/primitive_info_td.hpp"
 #include "dogen/cpp/test_data/project_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"

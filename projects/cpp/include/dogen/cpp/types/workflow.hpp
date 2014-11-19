@@ -33,15 +33,12 @@
 #include "dogen/cpp/types/registrar.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/cpp_settings.hpp"
-#include "dogen/cpp/types/path_spec_key.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/hash/path_spec_key_hash.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
-#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -50,6 +47,12 @@ namespace cpp {
  * @brief Manages the c++ backend workflow.
  */
 class workflow : public backend::backend_interface {
+public:
+    typedef std::unordered_map<std::string, path_spec_details>
+    path_spec_details_by_formatter_type;
+    typedef std::unordered_map<std::string, boost::filesystem::path>
+    path_by_formatter_type;
+
 public:
     workflow() = default;
     workflow(const workflow&) = delete;
@@ -79,8 +82,8 @@ private:
     template<typename AssociativeContainerOfElement>
     std::forward_list<std::shared_ptr<entity>>
     transform_sml_elements(
-        const std::unordered_map<path_spec_key, path_spec_details>& details,
-        const sml::model& m,
+        const std::unordered_map<sml::qname,
+        path_spec_details_by_formatter_type>& details, const sml::model& m,
         const AssociativeContainerOfElement& c) const {
         std::forward_list<std::shared_ptr<entity> > r;
         transformer t(details, m);
@@ -136,7 +139,7 @@ private:
     /**
      * @brief Gets the relative file name for all path keys.
      */
-    std::unordered_map<path_spec_key, boost::filesystem::path>
+    std::unordered_map<sml::qname, path_by_formatter_type>
     obtain_relative_file_names_for_key_activity(
         const std::forward_list<formatters::facet>& facets,
         const sml::model& m) const;
@@ -144,10 +147,10 @@ private:
     /**
      * @brief Creates all path spec details for a model.
      */
-    std::unordered_map<path_spec_key, path_spec_details>
+    std::unordered_map<sml::qname, path_spec_details_by_formatter_type>
     obtain_path_spec_details_for_key_activity(
         const std::forward_list<formatters::facet>& facets, const sml::model& m,
-        const std::unordered_map<path_spec_key, boost::filesystem::path>&
+        const std::unordered_map<sml::qname, path_by_formatter_type>&
         relative_file_names_for_key) const;
 
     /**
@@ -157,7 +160,8 @@ private:
     template<typename AssociativeContainerOfElement>
     std::forward_list<dogen::formatters::file>
     create_files_from_sml_container_activity(
-        const std::unordered_map<path_spec_key, path_spec_details>& details,
+        const std::unordered_map<sml::qname,
+                                 path_spec_details_by_formatter_type>& details,
         const sml::model& m,
         const formatters::workflow& fw,
         const AssociativeContainerOfElement& c) const {

@@ -29,6 +29,7 @@
 #include <memory>
 #include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/concept.hpp"
@@ -45,8 +46,6 @@
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/primitive_info.hpp"
 #include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/path_spec_key.hpp"
-#include "dogen/cpp/hash/path_spec_key_hash.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
 
 namespace dogen {
@@ -57,9 +56,14 @@ namespace cpp {
  */
 class transformer {
 public:
+    typedef std::unordered_map<std::string, path_spec_details>
+    path_spec_details_by_formatter_type;
+
+public:
     transformer(
-        const std::unordered_map<path_spec_key, path_spec_details>&
-        path_spec_details_for_key, const sml::model& m);
+        const std::unordered_map<sml::qname,
+                                 path_spec_details_by_formatter_type>& details,
+        const sml::model& m);
 
 private:
     /**
@@ -164,8 +168,8 @@ public:
     std::shared_ptr<entity> transform(const sml::object& o) const;
 
 private:
-    const std::unordered_map<path_spec_key, path_spec_details>&
-    path_spec_details_for_key_;
+    const std::unordered_map<sml::qname,
+                             path_spec_details_by_formatter_type>& details_;
     const sml::model& model_;
 };
 
