@@ -38,6 +38,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** IMPLEMENTATION Implement path spec details builder for class header :task:
+    CLOCK: [2014-11-19 Wed 19:39]--[2014-11-19 Wed 19:49] =>  0:10
     CLOCK: [2014-11-19 Wed 17:54]--[2014-11-19 Wed 18:21] =>  0:27
     CLOCK: [2014-11-17 Mon 17:54]--[2014-11-17 Mon 18:41] =>  0:47
     CLOCK: [2014-11-17 Mon 07:53]--[2014-11-17 Mon 08:13] =>  0:20

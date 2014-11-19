@@ -85,6 +85,9 @@ const std::string parent_class_info_not_found(
 const std::string too_many_parents(
     "Type has more than one parent but multiple inheritance not supported: ");
 
+const std::string type_has_no_path_spec(
+    "Could not find path spec details for type: ");
+
 const std::string no_visitees("Visitor is not visiting any types: ");
 
 bool is_char_like(const std::string& type_name) {
@@ -183,8 +186,13 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     identifier_name_builder b;
     e.namespaces(b.namespace_list(model_, qn));
 
-    // FIXME
-    details_.begin();
+    const auto i(details_.find(qn));
+    if (i == details_.end()) {
+        const auto& sn(qn.simple_name());
+        BOOST_LOG_SEV(lg, error) << type_has_no_path_spec << sn;
+        // BOOST_THROW_EXCEPTION(transformation_error(type_has_no_path_spec + sn));
+    }
+    // e.path_spec_details_for_formatter(i->second);
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,
