@@ -17,15 +17,17 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-20 Thu 08:09]
+Clock summary at [2014-11-20 Thu 08:35]
 
 | Headline                                                       | Time   |      |      |
 |----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                   | *2:08* |      |      |
+| *Total time*                                                   | *2:34* |      |      |
 |----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                |        | 2:08 |      |
+| Development Stories Implemented                                |        | 2:34 |      |
 | IMPLEMENTATION Sprint and product backlog grooming             |        |      | 0:13 |
 | COMPLETED Implement path spec details builder for class header |        |      | 1:55 |
+| IMPLEMENTATION Make use of path spec details in formatter      |        |      | 0:13 |
+| IMPLEMENTATION Create a compact form of qname io               |        |      | 0:13 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -48,7 +50,15 @@ Use downtime to update the manual and / or readme file.
 
 We need to implement the interface for path spec details builder.
 
-*** Create a compact form of qname io                                 :story:
+*** IMPLEMENTATION Make use of path spec details in formatter          :task:
+    CLOCK: [2014-11-20 Thu 08:09]--[2014-11-20 Thu 08:22] =>  0:13
+
+Now that we have finished generating the path spec details, we should
+use them in the class formatter. This may also require some tidy-up in
+the path spec details generation.
+
+*** IMPLEMENTATION Create a compact form of qname io                  :story:
+    CLOCK: [2014-11-20 Thu 08:22]--[2014-11-20 Thu 08:35] =>  0:13
 
 #+begin_quote
 *Story*: As a dogen developer and user, I want to quickly identify an
@@ -81,11 +91,10 @@ Finally we should raise a vision jira to make this either an extension
 method (if these are supported in C++-17) or a manually generated
 method on qname when we have a merging code generator.
 
-*** Make use of path spec details in formatter                         :task:
+*** Rename =identifier_name_builder= to =name_builder=        :task:refactor:
 
-Now that we have finished generating the path spec details, we should
-use them in the class formatter. This may also require some tidy-up in
-the path spec details generation.
+We now build identifier names as well as file names so the class name
+is no longer right. Make it more generic.
 
 *** Create a transformation and formatting sub-workflow       :task:refactor:
 
