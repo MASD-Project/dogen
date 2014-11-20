@@ -22,9 +22,8 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/graphing_error.hpp"
-#include "dogen/sml/types/graphing_error.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/grapher.hpp"
 
 namespace {
@@ -112,13 +111,15 @@ grapher::vertex_descriptor_type
 grapher::vertex_for_qname(const qname& qn) {
     const auto i(qname_to_vertex_.find(qn));
     if (i != qname_to_vertex_.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Vertex already exists: " << qn;
+        BOOST_LOG_SEV(lg, debug) << "Vertex already exists: "
+                                 << sml::string_converter::convert(qn);
         return i->second;
     }
 
     const auto r(boost::add_vertex(graph_));
     qname_to_vertex_.insert(std::make_pair(qn, r));
-    BOOST_LOG_SEV(lg, debug) << "Created vertex: " << qn;
+    BOOST_LOG_SEV(lg, debug) << "Created vertex: "
+                             << sml::string_converter::convert(qn);
 
     return r;
 }
@@ -145,12 +146,15 @@ void grapher::add(const qname& target,
     graph_[v] = target;
 
     if (containing_module) {
-        const vertex_descriptor_type cmv(vertex_for_qname(*containing_module));
+        const auto& cm(*containing_module);
+        const vertex_descriptor_type cmv(vertex_for_qname(cm));
         boost::add_edge(v, cmv, graph_);
 
+        using sml::string_converter;
         BOOST_LOG_SEV(lg, debug) << "Creating edge between '"
-                                 << target.simple_name() << "' and '"
-                                 << containing_module->simple_name() << "'";
+                                 << string_converter::convert(target)
+                                 << "' and '" << string_converter::convert(cm)
+                                 << "'";
     }
 }
 

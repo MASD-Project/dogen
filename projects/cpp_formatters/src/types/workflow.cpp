@@ -21,9 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/object.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/cpp_formatters/types/factory.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 #include "dogen/cpp_formatters/types/src_cmakelists.hpp"

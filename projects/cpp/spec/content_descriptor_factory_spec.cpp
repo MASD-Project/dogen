@@ -22,8 +22,8 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
@@ -55,7 +55,8 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_all_facets_enabled_produce
     SETUP_TEST_LOG_SOURCE("creating_content_descriptor_with_all_facets_enabled_produces_expected_results");
 
     const auto qn(model_factory.build_qname());
-    BOOST_LOG_SEV(lg, debug) << "qname: " << qn;
+    BOOST_LOG_SEV(lg, debug) << "qname: "
+                             << dogen::sml::string_converter::convert(qn);
 
     const auto ft(mock_settings_factory::build_facets());
     dogen::cpp::content_descriptor_factory f(ft);
@@ -74,7 +75,8 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_some_facets_enabled_produc
     SETUP_TEST_LOG_SOURCE("creating_content_descriptor_with_some_facets_enabled_produces_expected_results");
 
     const auto qn(model_factory.build_qname());
-    BOOST_LOG_SEV(lg, debug) << "qname: " << qn;
+    BOOST_LOG_SEV(lg, debug) << "qname: "
+                             << dogen::sml::string_converter::convert(qn);
 
     const auto ft(mock_settings_factory::build_facets(false));
     dogen::cpp::content_descriptor_factory f(ft);

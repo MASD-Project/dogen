@@ -21,7 +21,7 @@
 #include <iterator>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"
 #include "dogen/formatters/types/meta_data/general_settings_factory.hpp"
 #include "dogen/backend/types/workflow_error.hpp"
@@ -87,12 +87,10 @@ workflow::create_general_settings_activity(const sml::model& m) const {
             continue;
 
         if (r) {
-            BOOST_LOG_SEV(lg, error) << multiple_generatable_model_modules
-                                     << mod.name();
-
-            const auto sn(mod.name().simple_name());
+            const auto n(sml::string_converter::convert(mod.name()));
+            BOOST_LOG_SEV(lg, error) << multiple_generatable_model_modules << n;
             BOOST_THROW_EXCEPTION(workflow_error(
-                    multiple_generatable_model_modules + sn));
+                    multiple_generatable_model_modules + n));
         }
         r = f.build(mod.meta_data());
     }

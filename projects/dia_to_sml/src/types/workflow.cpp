@@ -20,8 +20,8 @@
  */
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/dia/types/diagram.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/grapher.hpp"
@@ -58,8 +58,9 @@ void workflow::initialise_context_activity(const std::string& model_name,
     context_.model().origin_type(sml::origin_types::user);
     context_.model().is_target(is_target);
 
-    BOOST_LOG_SEV(lg, debug) << "Target model name: "
-                             << context_.model().name();
+    BOOST_LOG_SEV(lg, debug)
+        << "Target model name: "
+        << sml::string_converter::convert(context_.model().name());
 
     sml::module m;
     m.name(context_.model().name());

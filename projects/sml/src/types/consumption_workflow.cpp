@@ -22,8 +22,8 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/grapher.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/graphing_error.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"
 
@@ -136,9 +136,9 @@ public:
             if (consumed)
                 return;
 
-            BOOST_LOG_SEV(lg, error) << could_not_find_qname << qn;
-            BOOST_THROW_EXCEPTION(graphing_error(could_not_find_qname +
-                    qn.simple_name()));
+            const auto n(sml::string_converter::convert(qn));
+            BOOST_LOG_SEV(lg, error) << could_not_find_qname << n;
+            BOOST_THROW_EXCEPTION(graphing_error(could_not_find_qname + n));
         }
     }
 

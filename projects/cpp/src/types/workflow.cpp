@@ -22,7 +22,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
@@ -104,23 +104,19 @@ sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
             continue;
 
         if (found) {
-            BOOST_LOG_SEV(lg, error) << multiple_generatable_model_modules
-                                     << mod.name();
-
-            const auto sn(mod.name().simple_name());
+            const auto n(sml::string_converter::convert(mod.name()));
+            BOOST_LOG_SEV(lg, error) << multiple_generatable_model_modules << n;
             BOOST_THROW_EXCEPTION(workflow_error(
-                    multiple_generatable_model_modules + sn));
+                    multiple_generatable_model_modules + n));
         }
         r = pair.second;
         found = true;
     }
 
     if (!found) {
-        BOOST_LOG_SEV(lg, error) << model_modules_not_found
-                                 << r.name();
-
-        const auto sn(r.name().simple_name());
-        BOOST_THROW_EXCEPTION(workflow_error(model_modules_not_found + sn));
+        const auto n(sml::string_converter::convert(r.name()));
+        BOOST_LOG_SEV(lg, error) << model_modules_not_found << n;
+        BOOST_THROW_EXCEPTION(workflow_error(model_modules_not_found + n));
     }
     return r;
 }
@@ -181,12 +177,13 @@ workflow::obtain_relative_file_names_for_key_activity(
             // FIXME
             break;
 
-        default:
+        default: {
+            const auto n(sml::string_converter::convert(o.name()));
             BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
-                                     << " name: " << o.name();
+                                     << " name: " << n;
             BOOST_THROW_EXCEPTION(workflow_error(unsupported_formatter_type +
                     boost::lexical_cast<std::string>(ft)));
-        };
+        } };
     }
     return r;
 }

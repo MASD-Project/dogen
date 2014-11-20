@@ -21,9 +21,9 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/cpp/io/content_types_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
@@ -159,7 +159,8 @@ bool content_descriptor_factory::has_forward_decls(
 
 std::list<content_descriptor> content_descriptor_factory::
 create(const sml::qname& qn, const content_types ct) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating descriptors: " << qn
+    BOOST_LOG_SEV(lg, debug) << "Creating descriptors: "
+                             << sml::string_converter::convert(qn)
                              << " content type: " << ct;
 
     std::list<content_descriptor> r;

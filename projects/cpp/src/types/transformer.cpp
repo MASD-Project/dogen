@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/cpp/types/identifier_name_builder.hpp"
 #include "dogen/cpp/types/transformation_error.hpp"
@@ -328,7 +328,8 @@ transformer::to_enumerator_info(const sml::enumerator& e) const {
 
 std::shared_ptr<enum_info>
 transformer::to_enum_info(const sml::enumeration& e) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: "
+                             << sml::string_converter::convert(e.name());
 
     auto r(std::make_shared<enum_info>());
     populate_entity_properties(e.name(), e.documentation(), *r);
@@ -337,30 +338,34 @@ transformer::to_enum_info(const sml::enumeration& e) const {
     for (const auto& en : e.enumerators())
         r->enumerators().push_back(to_enumerator_info(en));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
-
+    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: "
+                             << sml::string_converter::convert(e.name());
     return r;
 }
 
 std::shared_ptr<namespace_info> transformer::
 to_namespace_info(const sml::module& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming module: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming module: "
+                             << sml::string_converter::convert(m.name());
 
     auto r(std::make_shared<namespace_info>());
     populate_entity_properties(m.name(), m.documentation(), *r);
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed module: "
+                             << sml::string_converter::convert(m.name());
     return r;
 }
 
 std::shared_ptr<exception_info>
 transformer::to_exception_info(const sml::object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming exception: "
+                             << sml::string_converter::convert(o.name());
 
     auto r(std::make_shared<exception_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed exception: "
+                             << sml::string_converter::convert(o.name());
     return r;
 }
 
@@ -453,7 +458,8 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
 
 std::shared_ptr<visitor_info>
 transformer::to_visitor_info(const sml::object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: "
+                             << sml::string_converter::convert(o.name());
 
     auto r(std::make_shared<visitor_info>());
     r->name(o.name().simple_name());
@@ -471,6 +477,8 @@ transformer::to_visitor_info(const sml::object& o) const {
     for (const auto qn : i->second)
         r->types().push_back(b.qualified_name(model_, qn));
 
+    BOOST_LOG_SEV(lg, debug) << "Transformed visitor: "
+                             << sml::string_converter::convert(o.name());
     return r;
 }
 
@@ -494,7 +502,8 @@ transformer::transform(const sml::primitive& /*p*/) const {
 }
 
 std::shared_ptr<entity> transformer::transform(const sml::object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming object: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming object: "
+                             << sml::string_converter::convert(o.name());
 
     switch(o.object_type()) {
     case sml::object_types::factory: // FIXME: mega-hack
@@ -512,12 +521,16 @@ std::shared_ptr<entity> transformer::transform(const sml::object& o) const {
         return to_class_info(o, class_types::versioned_key);
     case sml::object_types::unversioned_key:
         return to_class_info(o, class_types::unversioned_key);
-    default:
+    default: {
+        const auto n(sml::string_converter::convert(o.name()));
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
-                                 << " name: " << o.name();
+                                 << " name: " << n;
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +
                 boost::lexical_cast<std::string>(o.object_type())));
-    };
+    } };
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed object: "
+                             << sml::string_converter::convert(o.name());
 }
 
 } }

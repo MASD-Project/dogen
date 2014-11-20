@@ -58,6 +58,7 @@ use them in the class formatter. This may also require some tidy-up in
 the path spec details generation.
 
 *** IMPLEMENTATION Create a compact form of qname io                  :story:
+    CLOCK: [2014-11-20 Thu 17:37]--[2014-11-20 Thu 18:25] =>  0:48
     CLOCK: [2014-11-20 Thu 08:22]--[2014-11-20 Thu 08:35] =>  0:13
 
 #+begin_quote
@@ -90,6 +91,19 @@ replace it with the new utility function.
 Finally we should raise a vision jira to make this either an extension
 method (if these are supported in C++-17) or a manually generated
 method on qname when we have a merging code generator.
+
+*** Perform lexical casts once only for error reporting       :task:refactor:
+
+There are a number of places in the code where we do lexical casts for
+enumerations for the exception part:
+
+: BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
+:                          << " name: " << o.name();
+: BOOST_THROW_EXCEPTION(workflow_error(unsupported_formatter_type +
+:    boost::lexical_cast<std::string>(ft)));
+
+We should just do the lexical cast once at the top and use it for both
+logging and the exception message.
 
 *** Rename =identifier_name_builder= to =name_builder=        :task:refactor:
 

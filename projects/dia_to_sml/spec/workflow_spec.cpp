@@ -30,7 +30,6 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dia/test/diagram_serialization_helper.hpp"

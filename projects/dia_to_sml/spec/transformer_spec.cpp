@@ -22,8 +22,8 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/asserter.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
@@ -1496,7 +1496,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
             BOOST_REQUIRE(has_one_parent(o));
             BOOST_CHECK(is_type_one(get_parent_name(o)));
         } else {
-            BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << qn;
+            BOOST_LOG_SEV(lg, error)
+                << "Unexpected type name: "
+                << dogen::sml::string_converter::convert(qn);
             BOOST_FAIL("Unexpected type name");
         }
     }

@@ -22,9 +22,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/merging_error.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/types/merger.hpp"
@@ -52,7 +51,8 @@ void merger::require_not_has_target(const std::string& name) const {
 
     std::ostringstream stream;
     stream << "Only one target expected. Last target model name: '"
-           << merged_model_.name() << "'. New target model name: "
+           << sml::string_converter::convert(merged_model_.name())
+           << "'. New target model name: "
            << name;
 
     BOOST_LOG_SEV(lg, error) << stream.str();
@@ -84,7 +84,8 @@ void merger::check_qname(const std::string& model_name, const qname& key,
     if (key.model_name() != model_name) {
         std::ostringstream s;
         s << "Type does not belong to this model. Model name: '"
-          << model_name << "'. Type qname: " << key;
+          << model_name << "'. Type qname: "
+          << sml::string_converter::convert(key);
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
     }
@@ -92,7 +93,8 @@ void merger::check_qname(const std::string& model_name, const qname& key,
     if (key != value) {
         std::ostringstream s;
         s << "Inconsistency between key and value qnames: "
-          << " key: " << key << " value: " << value;
+          << " key: " << sml::string_converter::convert(key)
+          << " value: " << sml::string_converter::convert(value);
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
     }
@@ -145,14 +147,15 @@ void merger::add(const model& m) {
     if (m.is_target())
         add_target(m);
 
-    BOOST_LOG_SEV(lg, debug) << "adding model: " << m.name().model_name();
+    BOOST_LOG_SEV(lg, debug) << "adding model: "
+                             << sml::string_converter::convert(m.name());
     BOOST_LOG_SEV(lg, debug) << "contents: " << m;
     models_.insert(std::make_pair(m.name(), m));
 }
 
 void merger::merge_model(const model& m) {
-    const auto mn(m.name().model_name());
-    BOOST_LOG_SEV(lg, info) << "Merging model: '" << mn
+    BOOST_LOG_SEV(lg, info) << "Merging model: '"
+                            << sml::string_converter::convert(m.name())
                             << " modules: " << m.modules().size()
                             << " concepts: " << m.concepts().size()
                             << " primitives: " << m.primitives().size()
@@ -164,6 +167,7 @@ void merger::merge_model(const model& m) {
         merged_model_.concepts().insert(c);
     }
 
+    const auto mn(m.name().model_name());
     for (const auto& pair : m.primitives()) {
         // FIXME: mega hack to handle primitive model.
         const auto pmn(mn == hardware_model_name ? empty : mn);

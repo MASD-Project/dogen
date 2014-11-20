@@ -25,8 +25,8 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
 
@@ -99,9 +99,9 @@ void association_indexer::recurse_nested_qnames(object& o,
 
     const auto k(context_->model().objects().find(qn));
     if (k == context_->model().objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
-                boost::lexical_cast<std::string>(qn)));
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << object_not_found << n;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
     }
 
     const auto sp(sml::object_types::smart_pointer);
@@ -119,7 +119,8 @@ void association_indexer::recurse_nested_qnames(object& o,
 }
 
 void association_indexer::index_object(object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().simple_name();
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
+                             << sml::string_converter::convert(o.name());
 
     for (const auto& p : o.local_properties()) {
         const auto nqn(p.type());

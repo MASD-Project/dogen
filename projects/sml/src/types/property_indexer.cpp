@@ -26,8 +26,8 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 
@@ -50,9 +50,9 @@ namespace sml {
 object& property_indexer::find_object(const qname& qn, model& m) {
     auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
-                boost::lexical_cast<std::string>(qn)));
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << object_not_found << n;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
     }
     return i->second;
 }
@@ -61,11 +61,10 @@ std::list<qname>& property_indexer::
 find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
-        BOOST_LOG_SEV(lg, error) << relationship_not_found << o.name()
+        const auto n(sml::string_converter::convert(o.name()));
+        BOOST_LOG_SEV(lg, error) << relationship_not_found << n
                                  << " relationship: " << rt;
-
-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found +
-                boost::lexical_cast<std::string>(o.name())));
+        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + n));
     }
     return i->second;
 }
@@ -82,10 +81,12 @@ concept& property_indexer::find_concept(const qname& qn, model& m) {
 
 void property_indexer::index_object(object& o, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().simple_name();
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
+                             << sml::string_converter::convert(o.name());
 
     if (processed_qnames.find(o.name()) != processed_qnames.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Already processed.";
+        BOOST_LOG_SEV(lg, debug) << "Object already processed: "
+                                 << sml::string_converter::convert(o.name());
         return;
     }
 
@@ -139,10 +140,12 @@ void property_indexer::index_objects(model& m) {
 
 void property_indexer::index_concept(concept& c, model& m,
     std::unordered_set<sml::qname>& processed_qnames) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().simple_name();
+    BOOST_LOG_SEV(lg, debug) << "Indexing concept: "
+                             << sml::string_converter::convert(c.name());
 
     if (processed_qnames.find(c.name()) != processed_qnames.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Already processed.";
+        BOOST_LOG_SEV(lg, debug) << "Object already processed:"
+                                 << sml::string_converter::convert(c.name());
         return;
     }
 
