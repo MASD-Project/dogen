@@ -17,15 +17,15 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-19 Wed 18:21]
+Clock summary at [2014-11-20 Thu 08:05]
 
-| Headline                                                            | Time   |      |      |
-|---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *1:42* |      |      |
-|---------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                     |        | 1:42 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                  |        |      | 0:08 |
-| IMPLEMENTATION Implement path spec details builder for class header |        |      | 1:34 |
+| Headline                                                       | Time   |      |      |
+|----------------------------------------------------------------+--------+------+------|
+| *Total time*                                                   | *2:03* |      |      |
+|----------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                |        | 2:03 |      |
+| IMPLEMENTATION Sprint and product backlog grooming             |        |      | 0:08 |
+| COMPLETED Implement path spec details builder for class header |        |      | 1:55 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -37,7 +37,9 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** IMPLEMENTATION Implement path spec details builder for class header :task:
+*** COMPLETED Implement path spec details builder for class header     :task:
+    CLOSED: [2014-11-20 Thu 08:04]
+    CLOCK: [2014-11-20 Thu 07:53]--[2014-11-20 Thu 08:04] =>  0:11
     CLOCK: [2014-11-19 Wed 19:39]--[2014-11-19 Wed 19:49] =>  0:10
     CLOCK: [2014-11-19 Wed 17:54]--[2014-11-19 Wed 18:21] =>  0:27
     CLOCK: [2014-11-17 Mon 17:54]--[2014-11-17 Mon 18:41] =>  0:47

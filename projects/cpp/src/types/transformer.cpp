@@ -186,13 +186,15 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     identifier_name_builder b;
     e.namespaces(b.namespace_list(model_, qn));
 
+    // FIXME: for now we are only supporting objects, so we need this
+    // hack. logging is causing an expected slow down.
     const auto i(details_.find(qn));
     if (i == details_.end()) {
         const auto& sn(qn.simple_name());
         BOOST_LOG_SEV(lg, error) << type_has_no_path_spec << sn;
         // BOOST_THROW_EXCEPTION(transformation_error(type_has_no_path_spec + sn));
-    }
-    // e.path_spec_details_for_formatter(i->second);
+    } else
+        e.path_spec_details_for_formatter(i->second);
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,
