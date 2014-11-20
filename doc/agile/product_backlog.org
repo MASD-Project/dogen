@@ -11,6 +11,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider renaming module path to internal module path     :task:refactor:
+
+Since we have got a external module path, it would make sense for the
+other to be the internal module path. This may be taking the symmetry
+too far, so we need to have a think.
+
 *** Names in C++ namespaces                                   :task:refactor:
 
 It appears we are not using the entity name for a C++ namespace. If
