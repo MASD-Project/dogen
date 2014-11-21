@@ -23,12 +23,12 @@
 #include <boost/throw_exception.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data/writer.hpp"
-#include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/object.hpp"
+#include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
+#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 
 using namespace dogen::utility::log;
 
@@ -75,7 +75,8 @@ namespace sml {
 
 boost::optional<qname> containing_module(model& m, const qname& qn) {
     if (qn.model_name().empty() || qn.simple_name() == m.name().model_name()) {
-        BOOST_LOG_SEV(lg, debug) << "Type has no containing module: " << qn;
+        BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
+                                 << string_converter::convert(qn);
         return boost::optional<qname>();
     }
 
@@ -95,7 +96,7 @@ boost::optional<qname> containing_module(model& m, const qname& qn) {
         return module_qn;
 
     BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
-                             << module_qn;
+                             << string_converter::convert(module_qn);
     return boost::optional<qname>();;
 }
 
@@ -117,8 +118,9 @@ update_containing_module(model& m, AssociativeContainerOfContainable& c) {
         }
 
         BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
-                                 << s.name().simple_name() << "' Module: '"
-                                 << i->first.simple_name();
+                                 << string_converter::convert(s.name())
+                                 << "' Module: '"
+                                 << string_converter::convert(i->first);
         i->second.members().push_back(s.name());
     }
 }

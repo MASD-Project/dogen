@@ -27,6 +27,7 @@
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -56,6 +57,7 @@ const mock_model_factory factory(flags);
 
 }
 
+using dogen::sml::string_converter;
 using dogen::utility::test::contains_checker;
 using dogen::sml::indexing_error;
 using dogen::utility::test::asserter;
@@ -166,7 +168,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(1, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
 
         i = o.relationships().find(par);
         BOOST_REQUIRE(i == o.relationships().end());
@@ -183,7 +185,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     dogen::sml::concept_indexer ind;
@@ -199,7 +201,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         } else if (factory.is_concept_name_n(1, qn)) {
             BOOST_CHECK(c.refines().size() == 1);
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -215,7 +217,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         else if (factory.is_type_name_n(1, qn)) {
             BOOST_CHECK(i->second.size() == 2);
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -245,7 +247,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(2, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
 
         i = o.relationships().find(par);
         BOOST_REQUIRE(i == o.relationships().end());
@@ -265,7 +267,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(1, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     dogen::sml::concept_indexer ind;
@@ -283,7 +285,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
         } else if (factory.is_concept_name_n(2, qn)) {
             BOOST_CHECK(c.refines().size() == 2);
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 3);
@@ -301,7 +303,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
         } else if (factory.is_type_name_n(2, qn)) {
                 BOOST_CHECK(i->second.size() == 3);
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -329,7 +331,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             i = o.relationships().find(par);
             BOOST_REQUIRE(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.concepts().size() == 4);
@@ -354,7 +356,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
                 factory.is_concept_name_n(1, c.refines().back()) ||
                 factory.is_concept_name_n(2, c.refines().back()));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     dogen::sml::concept_indexer ind;
@@ -385,7 +387,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_CHECK(found_one);
             BOOST_CHECK(found_two);
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -448,7 +450,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
         if (factory.is_concept_name_n(0, qn))
             BOOST_REQUIRE(c.refines().empty());
         else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     using dogen::sml::relationship_types;
@@ -473,7 +475,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     dogen::sml::concept_indexer ind;
@@ -499,7 +501,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     using dogen::sml::relationship_types;
@@ -524,7 +526,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     dogen::sml::concept_indexer ind;
@@ -542,7 +544,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -567,7 +569,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -585,7 +587,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
@@ -605,7 +607,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     {
         const auto& qn(m.objects().begin()->first);
         if (!factory.is_type_name_n(0, qn))
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
 
         const auto& o(m.objects().begin()->second);
         using dogen::sml::relationship_types;
@@ -637,7 +639,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
         if (factory.is_concept_name_n(0, qn))
             BOOST_REQUIRE(c.refines().empty());
         else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -660,7 +662,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;

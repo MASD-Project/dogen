@@ -28,7 +28,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -65,8 +65,8 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         const auto j(model_.objects().find(pqn));
         if (j == model_.objects().end()) {
             std::ostringstream s;
-            s << orphan_object << ": " << ao.name().simple_name()
-              << ". parent: " << pqn.simple_name();
+            s << orphan_object << ": " << string_converter::convert(ao.name())
+              << ". parent: " << string_converter::convert(pqn);
 
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -81,8 +81,8 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         const auto j(model_.objects().find(pqn));
         if (j == model_.objects().end()) {
             std::ostringstream s;
-            s << orphan_object << ": " << ao.name().simple_name()
-              << ". original parent: " << pqn.simple_name();
+            s << orphan_object << ": " << string_converter::convert(ao.name())
+              << ". original parent: " << string_converter::convert(pqn);
 
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -96,8 +96,8 @@ void resolver::validate_refinements(const concept& c) const {
         if (i == model_.concepts().end()) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "
-                   << c.name().simple_name() << ". refined concept: "
-                   << qn.simple_name();
+                   << string_converter::convert(c.name())
+                   << ". refined concept: " << string_converter::convert(qn);
 
             BOOST_LOG_SEV(lg, error) << stream.str();
             BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
@@ -106,7 +106,8 @@ void resolver::validate_refinements(const concept& c) const {
 }
 
 qname resolver::resolve_partial_type(const qname& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n;
+    BOOST_LOG_SEV(lg, debug) << "Resolving type:"
+                             << string_converter::convert(n);
 
     qname r(n);
 
@@ -187,8 +188,9 @@ qname resolver::resolve_partial_type(const qname& n) const {
             return qn;
     }
 
-    BOOST_LOG_SEV(lg, error) << undefined_type << n;
-    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.simple_name()));
+    BOOST_LOG_SEV(lg, error) << undefined_type << string_converter::convert(n);
+    BOOST_THROW_EXCEPTION(resolution_error(
+            undefined_type + string_converter::convert(n)));
 }
 
 void resolver::resolve_partial_type(nested_qname& n) const {
@@ -196,8 +198,9 @@ void resolver::resolve_partial_type(nested_qname& n) const {
         resolve_partial_type(c);
 
     qname qn(resolve_partial_type(n.type()));
-    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type()
-                             << ". Result: " << qn;
+    BOOST_LOG_SEV(lg, debug) << "Resolved type "
+                             << string_converter::convert(n.type())
+                             << ". Result: " << string_converter::convert(qn);
     n.type(qn);
 }
 
@@ -208,7 +211,7 @@ resolve_properties(const qname& owner, std::list<property>& p) const {
             resolve_partial_type(prop.type());
         } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Owner type name: " << owner.simple_name()
+            s << "Owner type name: " << string_converter::convert(owner)
               << " Property name: " << prop.name()
               << " Property type: " << prop.type();
             e << errmsg_info(s.str());
@@ -227,7 +230,7 @@ resolve_operations(const qname& owner, std::list<operation>& op) const {
             resolve_partial_type(*operation.type());
         } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Owner type name: " << owner.simple_name()
+            s << "Owner type name: " << string_converter::convert(owner)
               << " Operation name: " << operation.name()
               << " Operation type: " << operation.type();
             e << errmsg_info(s.str());
@@ -261,7 +264,8 @@ void resolver::resolve_objects() {
 
     for (auto& pair : model_.objects()) {
         auto& o(pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Resolving type " << o.name();
+        BOOST_LOG_SEV(lg, debug) << "Resolving type "
+                                 << string_converter::convert(o.name());
 
         if (o.generation_type() == generation_types::no_generation)
             continue;

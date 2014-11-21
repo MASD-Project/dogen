@@ -58,6 +58,8 @@ use them in the class formatter. This may also require some tidy-up in
 the path spec details generation.
 
 *** IMPLEMENTATION Create a compact form of qname io                  :story:
+    CLOCK: [2014-11-21 Fri 08:56]--[2014-11-21 Fri 09:08] =>  0:12
+    CLOCK: [2014-11-21 Fri 07:52]--[2014-11-21 Fri 08:35] =>  0:43
     CLOCK: [2014-11-20 Thu 17:37]--[2014-11-20 Thu 18:25] =>  0:48
     CLOCK: [2014-11-20 Thu 08:22]--[2014-11-20 Thu 08:35] =>  0:13
 
@@ -91,6 +93,13 @@ replace it with the new utility function.
 Finally we should raise a vision jira to make this either an extension
 method (if these are supported in C++-17) or a manually generated
 method on qname when we have a merging code generator.
+
+*** Remove references to namespace in namespace               :task:refactor:
+
+Due to moving classes around, we seem to have lots of cases where code
+in a namespace (say =sml=) refers to types in that namespace with
+qualification (say =sml::qname=). We need to do a grep in each project
+to look for instances of a namespace and ensure they are valid.
 
 *** Perform lexical casts once only for error reporting       :task:refactor:
 

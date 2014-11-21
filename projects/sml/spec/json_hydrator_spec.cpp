@@ -28,7 +28,7 @@
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -180,6 +180,7 @@ dogen::sml::model hydrate(const std::string content) {
 }
 
 using dogen::utility::test::contains_checker;
+using dogen::sml::string_converter;
 using dogen::sml::hydration_error;
 
 BOOST_AUTO_TEST_SUITE(json_hydrator)
@@ -434,7 +435,7 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
 
             if (!module_found)
                 BOOST_LOG_SEV(lg, error) << "Object has undefined module: "
-                                         << qn;
+                                         << string_converter::convert(qn);
             BOOST_CHECK(module_found);
         }
     }

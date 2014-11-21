@@ -27,7 +27,7 @@
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
@@ -56,6 +56,7 @@ const mock_model_factory factory(flags);
 
 using dogen::utility::test::contains_checker;
 using dogen::sml::indexing_error;
+using dogen::sml::string_converter;
 using dogen::utility::test::asserter;
 using object_types = dogen::sml::test::mock_model_factory::object_types;
 using property_types = dogen::sml::test::mock_model_factory::property_types;
@@ -162,7 +163,7 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -332,7 +333,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_single_parameter_resu
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -400,7 +401,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_return_type_results_i
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
     BOOST_CHECK(found);
 }
@@ -437,7 +438,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -473,7 +474,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -511,7 +512,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -589,7 +590,8 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
 
         if (factory.is_type_name_n(0, pair.first)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            BOOST_LOG_SEV(lg, debug) << "found object: "
+                                     << string_converter::convert(qn);
 
             using dogen::sml::relationship_types;
             const auto ra(relationship_types::regular_associations);
@@ -676,7 +678,8 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
 
         if (factory.is_type_name_n(0, pair.first)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            BOOST_LOG_SEV(lg, debug) << "found object: "
+                                     << string_converter::convert(qn);
 
             using dogen::sml::relationship_types;
             const auto ra(relationship_types::regular_associations);
@@ -715,7 +718,8 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
 
         if (factory.is_type_name_n(0, pair.first)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            BOOST_LOG_SEV(lg, debug) << "found object: "
+                                     << string_converter::convert(qn);
 
             using dogen::sml::relationship_types;
             const auto ra(relationship_types::regular_associations);

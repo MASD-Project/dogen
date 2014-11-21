@@ -28,11 +28,13 @@
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
+
+using dogen::sml::string_converter;
 
 namespace {
 
@@ -66,7 +68,7 @@ bool has_duplicate_property_names(const Stateful& s,
 
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "Inherited/local properties for "
-                             << s.name().simple_name() << ": "
+                             << string_converter::convert(s.name()) << ": "
                              << count;
 
     for (const auto& pair : count)
@@ -78,7 +80,7 @@ bool has_duplicate_property_names(const Stateful& s,
         count[p.name()]++;
 
     BOOST_LOG_SEV(lg, debug) << "All properties for "
-                             << s.name().simple_name() << ": "
+                             << string_converter::convert(s.name()) << ": "
                              << count;
 
     for (const auto& pair : count)
@@ -199,7 +201,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -217,7 +219,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_CHECK(o.local_properties().size() == 3);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -260,7 +262,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_CHECK(c.refines().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 3);
@@ -283,7 +285,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_CHECK(o.all_properties().size() == 4);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -330,7 +332,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_CHECK(c.all_properties().size() == 4);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -421,7 +423,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
             BOOST_CHECK(o.all_properties().size() == 4);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -445,7 +447,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties() == c.local_properties());
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -465,7 +467,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_CHECK(o.local_properties().empty());
             BOOST_CHECK(o.all_properties().size() == 1);
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
@@ -497,7 +499,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_CHECK(c.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << qn);
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -519,7 +521,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_CHECK(o.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << qn);
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
     }
 }
 
