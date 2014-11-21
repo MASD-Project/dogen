@@ -17,17 +17,17 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-20 Thu 08:35]
+Clock summary at [2014-11-21 Fri 20:40]
 
 | Headline                                                       | Time   |      |      |
 |----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                   | *2:34* |      |      |
+| *Total time*                                                   | *4:50* |      |      |
 |----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                |        | 2:34 |      |
+| Development Stories Implemented                                |        | 4:50 |      |
 | IMPLEMENTATION Sprint and product backlog grooming             |        |      | 0:13 |
 | COMPLETED Implement path spec details builder for class header |        |      | 1:55 |
+| COMPLETED Create a compact form of qname io                    |        |      | 2:29 |
 | IMPLEMENTATION Make use of path spec details in formatter      |        |      | 0:13 |
-| IMPLEMENTATION Create a compact form of qname io               |        |      | 0:13 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -50,14 +50,10 @@ Use downtime to update the manual and / or readme file.
 
 We need to implement the interface for path spec details builder.
 
-*** IMPLEMENTATION Make use of path spec details in formatter          :task:
-    CLOCK: [2014-11-20 Thu 08:09]--[2014-11-20 Thu 08:22] =>  0:13
-
-Now that we have finished generating the path spec details, we should
-use them in the class formatter. This may also require some tidy-up in
-the path spec details generation.
-
-*** IMPLEMENTATION Create a compact form of qname io                  :story:
+*** COMPLETED Create a compact form of qname io                       :story:
+    CLOSED: [2014-11-21 Fri 20:34]
+    CLOCK: [2014-11-21 Fri 20:22]--[2014-11-21 Fri 20:40] =>  0:18
+    CLOCK: [2014-11-21 Fri 19:58]--[2014-11-21 Fri 20:13] =>  0:15
     CLOCK: [2014-11-21 Fri 08:56]--[2014-11-21 Fri 09:08] =>  0:12
     CLOCK: [2014-11-21 Fri 07:52]--[2014-11-21 Fri 08:35] =>  0:43
     CLOCK: [2014-11-20 Thu 17:37]--[2014-11-20 Thu 18:25] =>  0:48
@@ -93,6 +89,13 @@ replace it with the new utility function.
 Finally we should raise a vision jira to make this either an extension
 method (if these are supported in C++-17) or a manually generated
 method on qname when we have a merging code generator.
+
+*** IMPLEMENTATION Make use of path spec details in formatter          :task:
+    CLOCK: [2014-11-20 Thu 08:09]--[2014-11-20 Thu 08:22] =>  0:13
+
+Now that we have finished generating the path spec details, we should
+use them in the class formatter. This may also require some tidy-up in
+the path spec details generation.
 
 *** Remove references to namespace in namespace               :task:refactor:
 

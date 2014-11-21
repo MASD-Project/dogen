@@ -27,7 +27,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
@@ -350,7 +350,8 @@ transformer::to_enumerator_info(const sml::enumerator& e) const {
 
 boost::shared_ptr<cpp::enum_info>
 transformer::to_enumeration_info(const sml::enumeration& e) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: "
+                             << sml::string_converter::convert(e.name());
 
     auto r(boost::make_shared<cpp::enum_info>());
     r->name(e.name().simple_name());
@@ -361,21 +362,21 @@ transformer::to_enumeration_info(const sml::enumeration& e) const {
     for (const auto& en : e.enumerators())
         r->enumerators().push_back(to_enumerator_info(en));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
-
+    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration.";
     return r;
 }
 
 boost::shared_ptr<cpp::exception_info>
 transformer::to_exception_info(const sml::object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming exception: "
+                             << sml::string_converter::convert(o.name());
 
     auto r(boost::make_shared<cpp::exception_info>());
     r->name(o.name().simple_name());
     r->namespaces(to_namespace_list(o.name()));
     r->documentation(o.documentation());
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed exception.";
     return r;
 }
 
@@ -477,7 +478,8 @@ transformer::to_class_info(const sml::object& o) const {
 
 boost::shared_ptr<cpp::visitor_info>
 transformer::to_visitor(const sml::object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: "
+                             << sml::string_converter::convert(o.name());
 
     auto r(boost::make_shared<cpp::visitor_info>());
     r->name(o.name().simple_name());
@@ -493,6 +495,7 @@ transformer::to_visitor(const sml::object& o) const {
     for (const auto qn : i->second)
         r->types().push_back(to_qualified_name(qn));
 
+    BOOST_LOG_SEV(lg, debug) << "Transformed visitor.";
     return r;
 }
 
@@ -502,14 +505,16 @@ add_class(const sml::qname& qn, boost::shared_ptr<cpp::class_info> ci) {
 }
 
 void transformer::visit(const dogen::sml::enumeration& e) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: "
+                             << sml::string_converter::convert(e.name());
     auto ei(to_enumeration_info(e));
     context_.enumerations().insert(std::make_pair(e.name(), ei));
-    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration.";
 }
 
 void transformer::visit(const dogen::sml::object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming object: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming object: "
+                             << sml::string_converter::convert(o.name());
 
     auto ci(to_class_info(o));
     switch(o.object_type()) {
@@ -551,14 +556,15 @@ void transformer::visit(const dogen::sml::object& o) {
         add_class(o.name(), ci);
         break;
     }
-    default:
+    default: {
+        const auto n(sml::string_converter::convert(o.name()));
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
-                                 << " name: " << o.name();
-        BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +
-                boost::lexical_cast<std::string>(o.object_type())));
-    };
+                                 << " name: " << n;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unsupported_object_type + n));
+    } };
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed object: " << o.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed object.";
 }
 
 void transformer::from_type(const sml::type& t) {
@@ -566,19 +572,20 @@ void transformer::from_type(const sml::type& t) {
 }
 
 void transformer::to_namespace_info(const sml::module& m) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming module: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Transforming module: "
+                             << sml::string_converter::convert(m.name());
 
     auto ni(boost::make_shared<cpp::namespace_info>());
     ni->documentation(m.documentation());
     ni->namespaces(to_namespace_list(m.name()));
     context_.namespaces().insert(std::make_pair(m.name(), ni));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed module.";
 }
 
 void transformer::model_to_registrar_info() {
-    const std::string n(model_.name().simple_name());
-    BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;
+    BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: "
+                             << sml::string_converter::convert(model_.name());
 
     auto ri(boost::make_shared<cpp::registrar_info>());
     ri->namespaces(to_namespace_list(model_.name()));
@@ -598,7 +605,7 @@ void transformer::model_to_registrar_info() {
     qn.external_module_path(model_.name().external_module_path());
     context_.registrars().insert(std::make_pair(qn, ri));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
+    BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar.";
 }
 
 } }

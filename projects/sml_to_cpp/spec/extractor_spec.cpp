@@ -24,12 +24,13 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml_to_cpp/io/relationships_io.hpp"
 #include "dogen/sml_to_cpp/types/extraction_error.hpp"
 #include "dogen/sml_to_cpp/types/extractor.hpp"
 
 using dogen::sml::test::mock_model_factory;
+using dogen::sml::string_converter;
 typedef mock_model_factory::object_types object_types;
 typedef mock_model_factory::property_types property_types;
 
@@ -87,7 +88,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
     std::array<bool, 2> found({{ false, false }});
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found child object: "
+                                     << string_converter::convert(pair.first);
 
             found[0] = true;
             const auto r(x.extract_dependency_graph(pair.second));
@@ -105,7 +107,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
             BOOST_CHECK(!r.requires_stream_manipulators());
             BOOST_CHECK(!r.has_std_pair());
         } else if (factory.is_type_name_n(1, pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found parent object: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found parent object: "
+                                     << string_converter::convert(pair.first);
 
             found[1] = true;
             const auto r(x.extract_dependency_graph(pair.second));
@@ -195,7 +198,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
     bool found(false);
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found child object: "
+                                     << string_converter::convert(pair.first);
             BOOST_REQUIRE(pair.second.local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(pair.second));
 
@@ -232,7 +236,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_
     dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found child object: "
+                                     << string_converter::convert(pair.first);
             BOOST_REQUIRE(pair.second.local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
@@ -266,7 +271,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expect
     dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found object: "
+                                     << string_converter::convert(pair.first);
             BOOST_REQUIRE(pair.second.local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
@@ -300,7 +306,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_exp
     dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found object: "
+                                     << string_converter::convert(pair.first);
             BOOST_REQUIRE(pair.second.local_properties().size() == 1);
             const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
@@ -335,7 +342,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_h
     dogen::sml_to_cpp::extractor x;
     for (const auto& pair : m.objects()) {
         if (factory.is_type_name_n(0, pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found object: "
+                                     << string_converter::convert(pair.first);
             BOOST_REQUIRE(pair.second.local_properties().size() == 1);
 
             found = true;

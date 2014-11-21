@@ -21,11 +21,12 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/object.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/sml_to_cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/io/class_types_io.hpp"
+#include "dogen/sml/types/object.hpp"
+#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml_to_cpp/types/workflow_failure.hpp"
 #include "dogen/sml_to_cpp/io/context_io.hpp"
 #include "dogen/sml_to_cpp/types/extractor.hpp"
 #include "dogen/sml_to_cpp/types/workflow.hpp"
@@ -107,9 +108,9 @@ void workflow::transform_object(const sml::object& ao) {
 
                 const auto j(model_.objects().find(qn));
                 if (j == model_.objects().end()) {
-                    BOOST_LOG_SEV(lg, error) << missing_object << qn;
-                    BOOST_THROW_EXCEPTION(workflow_failure(missing_object +
-                            boost::lexical_cast<std::string>(qn)));
+                    const auto n(sml::string_converter::convert(qn));
+                    BOOST_LOG_SEV(lg, error) << missing_object << n;
+                    BOOST_THROW_EXCEPTION(workflow_failure(missing_object + n));
                 }
 
                 const auto& ao(j->second);
@@ -188,9 +189,9 @@ workflow::generate_file_infos_for_classes_activity() const {
         const auto& qn(pair.first);
         const auto i(context_.relationships().find(qn));
         if (i == context_.relationships().end()) {
-            BOOST_LOG_SEV(lg, error) << missing_relationship << qn;
-            BOOST_THROW_EXCEPTION(workflow_failure(missing_relationship +
-                    boost::lexical_cast<std::string>(qn)));
+            const auto n(sml::string_converter::convert(qn));
+            BOOST_LOG_SEV(lg, error) << missing_relationship << n;
+            BOOST_THROW_EXCEPTION(workflow_failure(missing_relationship + n));
         }
 
         const auto& rel(i->second);
@@ -304,9 +305,9 @@ std::list<cpp::file_info> workflow::generate_visitors_activity() const {
         const auto& qn(pair.first);
         const auto i(context_.relationships().find(qn));
         if (i == context_.relationships().end()) {
-            BOOST_LOG_SEV(lg, error) << missing_relationship << qn;
-            BOOST_THROW_EXCEPTION(workflow_failure(missing_relationship +
-                    boost::lexical_cast<std::string>(qn)));
+            const auto n(sml::string_converter::convert(qn));
+            BOOST_LOG_SEV(lg, error) << missing_relationship << n;
+            BOOST_THROW_EXCEPTION(workflow_failure(missing_relationship + n ));
         }
 
         const auto& rel(i->second);

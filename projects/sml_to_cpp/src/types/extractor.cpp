@@ -22,7 +22,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml_to_cpp/types/extraction_error.hpp"
 #include "dogen/sml_to_cpp/types/extractor.hpp"
 
@@ -44,7 +44,8 @@ namespace sml_to_cpp {
 extractor::extractor() : boost_(), std_() { }
 
 relationships extractor::extract_dependency_graph(const sml::object& ao) const {
-    BOOST_LOG_SEV(lg, debug) << "Extracting dependency graph for " << ao.name();
+    BOOST_LOG_SEV(lg, debug) << "Extracting dependency graph for "
+                             << sml::string_converter::convert(ao.name());
 
     relationships r;
 
@@ -134,7 +135,7 @@ relationships extractor::extract_dependency_graph(const sml::object& ao) const {
             r.forward_decls().erase(n);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Extracted dependency graph for " << ao.name();
+    BOOST_LOG_SEV(lg, debug) << "Extracted dependency graph.";
     return r;
 }
 

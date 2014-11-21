@@ -338,8 +338,7 @@ transformer::to_enum_info(const sml::enumeration& e) const {
     for (const auto& en : e.enumerators())
         r->enumerators().push_back(to_enumerator_info(en));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: "
-                             << sml::string_converter::convert(e.name());
+    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration.";
     return r;
 }
 
@@ -351,8 +350,7 @@ to_namespace_info(const sml::module& m) const {
     auto r(std::make_shared<namespace_info>());
     populate_entity_properties(m.name(), m.documentation(), *r);
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed module: "
-                             << sml::string_converter::convert(m.name());
+    BOOST_LOG_SEV(lg, debug) << "Transformed module.";
     return r;
 }
 
@@ -364,8 +362,7 @@ transformer::to_exception_info(const sml::object& o) const {
     auto r(std::make_shared<exception_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed exception: "
-                             << sml::string_converter::convert(o.name());
+    BOOST_LOG_SEV(lg, debug) << "Transformed exception.";
     return r;
 }
 
@@ -477,8 +474,7 @@ transformer::to_visitor_info(const sml::object& o) const {
     for (const auto qn : i->second)
         r->types().push_back(b.qualified_name(model_, qn));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed visitor: "
-                             << sml::string_converter::convert(o.name());
+    BOOST_LOG_SEV(lg, debug) << "Transformed visitor.";
     return r;
 }
 
@@ -529,8 +525,7 @@ std::shared_ptr<entity> transformer::transform(const sml::object& o) const {
                 boost::lexical_cast<std::string>(o.object_type())));
     } };
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed object: "
-                             << sml::string_converter::convert(o.name());
+    BOOST_LOG_SEV(lg, debug) << "Transformed object.";
 }
 
 } }
