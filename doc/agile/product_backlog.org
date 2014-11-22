@@ -11,6 +11,20 @@
 
 Stories that we intend to look at, at some point.
 
+*** Allow manual overrides to facets                                  :story:
+
+#+begin_quote
+*Story*: As a dogen user, I sometimes want to provide my own
+implementation for a given facet.
+#+end_quote
+
+Sometimes it may make sense to provide a user-supplied implementation
+for a given facet. For example for qname it may make sense to use
+the string converter approach to do the actual JSON
+serialisation. However its not possible to just disable code
+generation of a given type's inserters and then provide a manual
+implementation. This could easily be achieved via meta-data.
+
 *** Consider renaming module path to internal module path     :task:refactor:
 
 Since we have got a external module path, it would make sense for the
