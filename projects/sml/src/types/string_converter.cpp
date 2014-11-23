@@ -27,16 +27,16 @@ namespace sml {
 std::string string_converter::convert(const qname& qn) {
     std::ostringstream s;
     for (const auto& m : qn.external_module_path())
-        s << m << ".";
+        s << "<" << m << ">";
 
     if (!qn.model_name().empty())
-        s << qn.model_name() << ".";
+        s << "<" << qn.model_name() << ">";
 
-    for (const auto& m : qn.external_module_path())
-        s << m;
+    for (const auto& m : qn.module_path())
+        s << "<" << m << ">";
 
     if (!qn.simple_name().empty())
-        s << "." << qn.simple_name();
+        s << "<" << qn.simple_name() << ">";
 
     return s.str();
 }
