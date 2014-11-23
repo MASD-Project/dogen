@@ -42,3 +42,10 @@ script:
   - cmake ${GIT_REPO}
   - make
   - make run_all_specs
+
+notifications:
+  email:
+    recipients:
+      - marco.craveiro:gmail.com
+    on_success: [change]
+    on_failure: [always]
