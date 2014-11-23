@@ -418,18 +418,18 @@ transformer::to_class_info(const sml::object& o) const {
     i = o.relationships().find(sml::relationship_types::original_parents);
     if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
-            const auto& sn(o.name().simple_name());
-            BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
-            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
+            const auto n(sml::string_converter::convert(o.name()));
+            BOOST_LOG_SEV(lg, error) << too_many_parents << n;
+            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + n));
         }
 
         const auto opn(i->second.front());
         const auto j(context_.classes().find(opn));
         if (j == context_.classes().end()) {
-            const auto& sn(opn.simple_name());
-            BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
+            const auto n(sml::string_converter::convert(opn));
+            BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << n;
             BOOST_THROW_EXCEPTION(transformation_error(
-                    parent_class_info_not_found + sn));
+                    parent_class_info_not_found + n));
         }
 
         const auto opci(j->second);
@@ -487,9 +487,9 @@ transformer::to_visitor(const sml::object& o) const {
 
     auto i(o.relationships().find(sml::relationship_types::visits));
     if (i == o.relationships().end() || i->second.empty()) {
-        const auto& sn(o.name().simple_name());
-        BOOST_LOG_SEV(lg, error) << no_visitees << sn;
-        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + sn));
+        const auto n(sml::string_converter::convert(o.name()));
+        BOOST_LOG_SEV(lg, error) << no_visitees << n;
+        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + n));
     }
 
     for (const auto qn : i->second)

@@ -190,9 +190,9 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     // hack. logging is causing an expected slow down.
     const auto i(details_.find(qn));
     if (i == details_.end()) {
-        const auto& sn(qn.simple_name());
-        BOOST_LOG_SEV(lg, error) << type_has_no_path_spec << sn;
-        // BOOST_THROW_EXCEPTION(transformation_error(type_has_no_path_spec + sn));
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << type_has_no_path_spec << n;
+        // BOOST_THROW_EXCEPTION(transformation_error(type_has_no_path_spec + n));
     } else
         e.path_spec_details_for_formatter(i->second);
 }
@@ -404,9 +404,9 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     i = o.relationships().find(sml::relationship_types::original_parents);
     if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
-            const auto& sn(o.name().simple_name());
-            BOOST_LOG_SEV(lg, error) << too_many_parents << sn;
-            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + sn));
+            const auto n(sml::string_converter::convert(o.name()));
+            BOOST_LOG_SEV(lg, error) << too_many_parents << n;
+            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + n));
         }
 
         const auto opn(i->second.front());
