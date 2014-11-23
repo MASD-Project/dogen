@@ -17,14 +17,14 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-23 Sun 19:30]
+Clock summary at [2014-11-23 Sun 19:51]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *9:33* |      |      |
+| *Total time*                                                           | *9:44* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 9:33 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:13 |
+| Development Stories Implemented                                        |        | 9:44 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:24 |
 | COMPLETED Implement path spec details builder for class header         |        |      | 1:55 |
 | COMPLETED Create a compact form of qname io                            |        |      | 2:29 |
 | COMPLETED Organise include builders by formatter id                    |        |      | 0:51 |
@@ -35,6 +35,7 @@ Clock summary at [2014-11-23 Sun 19:30]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-23 Sun 19:40]--[2014-11-23 Sun 19:51] =>  0:11
     CLOCK: [2014-11-20 Thu 08:04]--[2014-11-20 Thu 08:09] =>  0:05
     CLOCK: [2014-11-17 Mon 07:45]--[2014-11-17 Mon 07:53] =>  0:08
 
@@ -139,6 +140,13 @@ It is also a good time to add the "markers" to the readme page. For an
 example see:
 
 https://raw.githubusercontent.com/flycheck/flycheck/master/README.rst
+
+*** Settings bundles should include facets                    :task:refactor:
+
+We created a single bundle for a given facet. However, in practice,
+formatters need to access other facets in order to determine what to
+enable / disable. This is related to cross facet interference, already
+in the backlog.
 
 *** IMPLEMENTATION Implement include generation for class header formatter :task:
     CLOCK: [2014-11-23 Sun 00:52]--[2014-11-23 Sun 00:57] =>  0:05
