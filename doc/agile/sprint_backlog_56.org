@@ -17,20 +17,20 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-23 Sun 17:24]
+Clock summary at [2014-11-23 Sun 18:18]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *8:26* |      |      |
+| *Total time*                                                           | *9:19* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 8:26 |      |
+| Development Stories Implemented                                        |        | 9:19 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:13 |
 | COMPLETED Implement path spec details builder for class header         |        |      | 1:55 |
 | COMPLETED Create a compact form of qname io                            |        |      | 2:29 |
 | COMPLETED Organise include builders by formatter id                    |        |      | 0:51 |
 | COMPLETED Rename =identifier_name_builder= to =name_builder=           |        |      | 0:04 |
 | COMPLETED Ensure relative path works correctly end to end              |        |      | 1:46 |
-| COMPLETED Add dogen to travis                                          |        |      | 1:03 |
+| COMPLETED Add dogen to travis                                          |        |      | 1:56 |
 | IMPLEMENTATION Implement include generation for class header formatter |        |      | 0:05 |
 #+end:
 
@@ -122,6 +122,8 @@ generated correctly, end to end.
 
 *** COMPLETED Add dogen to travis                                :task:build:
     CLOSED: [2014-11-23 Sun 17:24]
+    CLOCK: [2014-11-23 Sun 18:06]--[2014-11-23 Sun 18:18] =>  0:12
+    CLOCK: [2014-11-23 Sun 17:25]--[2014-11-23 Sun 18:06] =>  0:41
     CLOCK: [2014-11-23 Sun 17:00]--[2014-11-23 Sun 17:24] =>  0:24
     CLOCK: [2014-11-23 Sun 16:20]--[2014-11-23 Sun 16:59] =>  0:39
 
