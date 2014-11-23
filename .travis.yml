@@ -1,7 +1,7 @@
 language: cpp
 
 compiler:
-  - clang
+  # - clang # disabled due to gcc STL
   - gcc
 
 before_install:
