@@ -27,6 +27,7 @@
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
+#include "dogen/cpp/io/settings_bundle_io.hpp"
 #include "dogen/cpp/io/path_spec_details_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
@@ -130,9 +131,13 @@ std::unordered_map<std::string, settings_bundle> workflow::
 settings_bundle_for_facet_activty(
     const dogen::formatters::general_settings& gs,
     const sml::module& model_module) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating settings bundles by facet.";
     bundler b;
-    return b.bundle(registrar().default_facet_settings_by_facet_id(),
-        gs, model_module);
+    const auto& defaults(registrar().default_facet_settings_by_facet_id());
+    const auto r(b.bundle(defaults, gs, model_module));
+    BOOST_LOG_SEV(lg, debug) << "Bundles: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finsihed creating settings bundles by facet.";
+    return r;
 }
 
 std::unordered_map<std::string, formatters::container> workflow::

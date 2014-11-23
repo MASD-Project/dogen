@@ -45,6 +45,7 @@ cpp_settings cpp_settings_factory::create_default_settings() const {
     r.split_project(true);
     r.source_directory(default_source_directory);
     r.include_directory(default_include_directory);
+    r.header_file_extension(default_header_file_extension);
     r.implementation_file_extension(default_implementation_file_extension);
     r.enable_facet_folders(true);
     r.enable_unique_file_names(true);

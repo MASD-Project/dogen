@@ -71,13 +71,9 @@ get_relative_path(const class_info& c) const {
     if (i == details.end()) {
         BOOST_LOG_SEV(lg, error) << path_spec_details_for_formatter_not_found
                                  << formatter_id();
-
-        /* FIXME
         BOOST_THROW_EXCEPTION(formatting_error(
-        path_spec_details_for_formatter_not_found +
+                path_spec_details_for_formatter_not_found +
                 formatter_id()));
-        */
-        return boost::filesystem::path();
     }
     return i->second.relative_path();
 }
