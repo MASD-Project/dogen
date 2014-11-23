@@ -17,19 +17,20 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-23 Sun 00:49]
+Clock summary at [2014-11-23 Sun 00:58]
 
-| Headline                                                       | Time   |      |      |
-|----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                   | *7:18* |      |      |
-|----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                |        | 7:18 |      |
-| IMPLEMENTATION Sprint and product backlog grooming             |        |      | 0:13 |
-| COMPLETED Implement path spec details builder for class header |        |      | 1:55 |
-| COMPLETED Create a compact form of qname io                    |        |      | 2:29 |
-| COMPLETED Organise include builders by formatter id            |        |      | 0:51 |
-| COMPLETED Rename =identifier_name_builder= to =name_builder=   |        |      | 0:04 |
-| COMPLETED Ensure relative path works correctly end to end      |        |      | 1:46 |
+| Headline                                                               | Time   |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                           | *7:23* |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                        |        | 7:23 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:13 |
+| COMPLETED Implement path spec details builder for class header         |        |      | 1:55 |
+| COMPLETED Create a compact form of qname io                            |        |      | 2:29 |
+| COMPLETED Organise include builders by formatter id                    |        |      | 0:51 |
+| COMPLETED Rename =identifier_name_builder= to =name_builder=           |        |      | 0:04 |
+| COMPLETED Ensure relative path works correctly end to end              |        |      | 1:46 |
+| IMPLEMENTATION Implement include generation for class header formatter |        |      | 0:05 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -117,6 +118,22 @@ Now that we have finished generating the path spec details, we should
 start making use of its properties. We first start with the relative
 path. We need to make sure the file name, header guards, etc are being
 generated correctly, end to end.
+
+*** IMPLEMENTATION Implement include generation for class header formatter :task:
+    CLOCK: [2014-11-23 Sun 00:52]--[2014-11-23 Sun 00:57] =>  0:05
+
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
+
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via meta-data, so we can start using STL, Boost
+  etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
 
 *** Remove references to namespace in namespace               :task:refactor:
 
