@@ -11,6 +11,12 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider hosting documentation in read the docs                   :story:
+
+We should consider hosting the documentation here:
+
+- https://readthedocs.org/
+
 *** Allow manual overrides to facets                                  :story:
 
 #+begin_quote
@@ -1211,24 +1217,6 @@ https://github.com/jbenet/bson-cpp
 For examples on how to use the C++ API see the tutorial:
 
 https://github.com/mongodb/mongo-cxx-driver/wiki/Tutorial
-
-*** Add dogen to travis                                          :task:build:
-
-We're not doing a very good job of managing the CI support in
-CDash. We are now down to a single build agent on OSX. We should add
-the project to travis and stop managing the agents.
-
-- https://travis-ci.org/
-- [[http://computer-vision-talks.com/articles/2014-02-23-using-travis-ci/][Using Travis-CI for continuous testing your projects]]
-
-We should also consider hosting the documentation here:
-
-- https://readthedocs.org/
-
-It is also a good time to add the "markers" to the readme page. For an
-example see:
-
-https://raw.githubusercontent.com/flycheck/flycheck/master/README.rst
 
 *** Rename ODB parameters                                     :task:refactor:
 
