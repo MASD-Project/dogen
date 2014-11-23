@@ -32,7 +32,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings_bundle.hpp"
-#include "dogen/cpp/types/path_spec_details_builder_interface.hpp"
+#include "dogen/cpp/types/includes_builder_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -67,8 +67,8 @@ public:
      * @brief Creates an instance of the path spec builder for this
      * formatter.
      */
-    virtual std::shared_ptr<path_spec_details_builder_interface>
-    make_path_spec_details_builder() const = 0;
+    virtual std::shared_ptr<includes_builder_interface>
+    make_includes_builder() const = 0;
 };
 
 } } }

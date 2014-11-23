@@ -31,8 +31,8 @@
 namespace {
 
 const std::string formatter_id("cpp.formatters.types.class_header_formatter");
-const std::string relative_path_for_formatter_not_found(
-    "Relative path for formatter not found. Formatter: ");
+const std::string path_spec_details_for_formatter_not_found(
+    "Path spec details for formatter not found. Formatter: ");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(formatter_id));
@@ -47,50 +47,39 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class path_spec_details_builder : public path_spec_details_builder_interface {
+class includes_builder : public includes_builder_interface {
 public:
-    std::unordered_map<sml::qname,
-                       path_spec_details_builder_interface::
-                       path_spec_details_by_formatter_type>
-    build(const sml::model& m,
+    includes build(const sml::model& m, const sml::qname qn,
         const std::unordered_map<sml::qname,
-        path_spec_details_builder_interface::path_by_formatter_type>&
-        relative_file_names_for_key) const override;
+        includes_builder_interface::path_by_formatter_type>&
+        relative_file_names_by_formatter_by_qname) const override;
 };
 
-std::unordered_map<sml::qname,
-                   path_spec_details_builder_interface::
-                   path_spec_details_by_formatter_type>
-path_spec_details_builder::
-build(const sml::model& /*m*/,
-    const std::unordered_map<sml::qname, path_spec_details_builder_interface::
+includes includes_builder::build(const sml::model& /*m*/,
+    const sml::qname /*qn*/,
+    const std::unordered_map<sml::qname, includes_builder_interface::
                              path_by_formatter_type>&
-    /*relative_file_names_for_key*/) const {
-    std::unordered_map<sml::qname,
-                       path_spec_details_builder_interface::
-                       path_spec_details_by_formatter_type> r;
+    /*relative_file_names_by_formatter_by_qname*/) const {
+    includes r;
     return r;
 }
 
 boost::filesystem::path class_header_formatter::
-get_relative_path(const class_info& /*c*/) const {
-    return boost::filesystem::path();
-    /* FIXME
-    const auto i(c.relative_path_for_formatter().find(::formatter_id));
-    if (i == c.relative_path_for_formatter().end()) {
-        
+get_relative_path(const class_info& c) const {
+    const auto& details(c.path_spec_details_for_formatter());
+    const auto i(details.find(formatter_id()));
+    if (i == details.end()) {
+        BOOST_LOG_SEV(lg, error) << path_spec_details_for_formatter_not_found
+                                 << formatter_id();
 
-          
-        BOOST_LOG_SEV(lg, error) << relative_path_for_formatter_not_found
-                                 << ::formatter_id;
-
+        /* FIXME
         BOOST_THROW_EXCEPTION(formatting_error(
-                relative_path_for_formatter_not_found +
-                ::formatter_id));
-
+        path_spec_details_for_formatter_not_found +
+                formatter_id()));
+        */
+        return boost::filesystem::path();
     }
-    return i->second;
-    */
+    return i->second.relative_path();
 }
 
 std::string class_header_formatter::facet_id() const {
@@ -107,9 +96,9 @@ make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
     return b.header_file_name(sb, qn);
 }
 
-std::shared_ptr<path_spec_details_builder_interface>
-class_header_formatter::make_path_spec_details_builder() const {
-    return std::make_shared<path_spec_details_builder>();
+std::shared_ptr<includes_builder_interface>
+class_header_formatter::make_includes_builder() const {
+    return std::make_shared<includes_builder>();
 }
 
 dogen::formatters::file class_header_formatter::

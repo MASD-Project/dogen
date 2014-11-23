@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_BUILDER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_BUILDER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_INCLUDES_BUILDER_INTERFACE_HPP
+#define DOGEN_CPP_TYPES_INCLUDES_BUILDER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/includes.hpp"
-#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/includes.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -39,34 +39,30 @@ namespace cpp {
 /**
  * @brief Builds a subset of the path spec details for a model.
  */
-class path_spec_details_builder_interface  {
+class includes_builder_interface  {
 public:
-    typedef std::unordered_map<std::string, path_spec_details>
-    path_spec_details_by_formatter_type;
     typedef std::unordered_map<std::string, boost::filesystem::path>
     path_by_formatter_type;
 
 public:
-    path_spec_details_builder_interface() = default;
-    path_spec_details_builder_interface(
-        const path_spec_details_builder_interface &) = delete;
-    path_spec_details_builder_interface(
-        path_spec_details_builder_interface &&) = default;
-    virtual ~path_spec_details_builder_interface () noexcept = 0;
+    includes_builder_interface() = default;
+    includes_builder_interface(const includes_builder_interface &) = delete;
+    includes_builder_interface(includes_builder_interface &&) = default;
+    virtual ~includes_builder_interface () noexcept = 0;
 
 public:
     /**
-     * @brief Build the details.
+     * @brief Build the includes.
      *
-     * @param m model for which to build the details.
-     *
-     * @param relative_paths relative paths the system knows of, keyed
-     * by qualified name and formatter id.
+     * @param m model to query for relationship information.
+     * @param qn type for which to build the includes.
+     * @param relative_file_names_by_formatter_by_qname relative paths
+     * the system knows of, keyed by qualified name and formatter id.
      */
-    virtual std::unordered_map<sml::qname, path_spec_details_by_formatter_type>
-    build(const sml::model& m,
+    virtual includes
+    build(const sml::model& m, const sml::qname qn,
         const std::unordered_map<sml::qname, path_by_formatter_type>&
-        relative_file_names_for_key) const = 0;
+        relative_file_names_by_formatter_by_qname) const = 0;
 };
 
 } }

@@ -22,9 +22,12 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
+#include "dogen/cpp/io/path_spec_details_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
@@ -47,6 +50,8 @@ const std::string multiple_generatable_model_modules(
 const std::string unsupported_object_type("Object type is not supported: ");
 const std::string unsupported_formatter_type(
     "Formatter type is not supported: ");
+const std::string duplicate_formatter_id("Formatter id already inserted: ");
+const std::string formatter_not_found("Formatter not found: ");
 
 }
 
@@ -147,10 +152,32 @@ std::forward_list<formatters::facet> workflow::create_facets_activty(
     return f.build(formatters_by_facet, settings_bundle_for_facet);
 }
 
+workflow::includes_builder_by_formatter_id
+workflow::create_includes_builder_by_formatter_id_activity(
+    const formatters::container& c) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating a map of includes builders by id.";
+    workflow::includes_builder_by_formatter_id r;
+    for (const auto f : c.class_formatters()) {
+        auto b(f->make_includes_builder());
+        const auto pair(r.insert(std::make_pair(f->formatter_id(), b)));
+        if (!pair.second) {
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_id
+                                     << f->formatter_id();
+            BOOST_THROW_EXCEPTION(workflow_error(duplicate_formatter_id +
+                    f->formatter_id()));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug)
+        << "Finished creating a map of includes builders by id.";
+    return r;
+}
+
 std::unordered_map<sml::qname, workflow::path_by_formatter_type>
 workflow::obtain_relative_file_names_for_key_activity(
     const std::forward_list<formatters::facet>& facets,
     const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Obtaining relative file names.";
 
     std::unordered_map<sml::qname, path_by_formatter_type> r;
     for (const auto& pair : m.objects()) {
@@ -185,26 +212,49 @@ workflow::obtain_relative_file_names_for_key_activity(
                     boost::lexical_cast<std::string>(ft)));
         } };
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Relative file names: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining relative file names.";
     return r;
 }
 
 std::unordered_map<sml::qname,
                    workflow::path_spec_details_by_formatter_type> workflow::
-obtain_path_spec_details_for_key_activity(
-    const std::forward_list<formatters::facet>& facets, const sml::model& m,
+obtain_path_spec_details_activity(
+    const includes_builder_by_formatter_id& includes_builders,
+    const sml::model& m,
     const std::unordered_map<sml::qname, path_by_formatter_type>&
-    relative_file_names_for_key) const {
+    relative_file_names_by_formatter_by_qname) const {
+    BOOST_LOG_SEV(lg, debug) << "Obtaining path spec details.";
 
     std::unordered_map<sml::qname,
                        workflow::path_spec_details_by_formatter_type> r;
 
-    for (const auto fct : facets) {
-        for (const auto fmt : fct.container().class_formatters()) {
-            auto b(fmt->make_path_spec_details_builder());
-            auto psd(b->build(m, relative_file_names_for_key));
-            r.insert(psd.begin(), psd.end());
+    for (const auto pair : relative_file_names_by_formatter_by_qname) {
+        const auto& qn(pair.first);
+        workflow::path_spec_details_by_formatter_type details;
+        for (const auto other_pair : pair.second) {
+            path_spec_details psd;
+            psd.relative_path(other_pair.second);
+
+            const auto& formatter_id(other_pair.first);
+            const auto i(includes_builders.find(formatter_id));
+            if (i == includes_builders.end()) {
+                BOOST_LOG_SEV(lg, error) << formatter_not_found << formatter_id;
+                BOOST_THROW_EXCEPTION(workflow_error(formatter_not_found +
+                        formatter_id));
+            }
+
+            const auto& b(*(i->second));
+            auto inc(b.build(m, qn, relative_file_names_by_formatter_by_qname));
+            psd.includes(inc);
+            details[formatter_id] = psd;
         }
+        r[qn] = details;
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Path spec details names: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining path spec details.";
     return r;
 }
 
@@ -247,7 +297,9 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     const auto fc(formatter_container_for_facet_activty(c));
     const auto facets(create_facets_activty(fc, sb));
     const auto rel(obtain_relative_file_names_for_key_activity(facets, m));
-    const auto det(obtain_path_spec_details_for_key_activity(facets, m, rel));
+
+    const auto builders(create_includes_builder_by_formatter_id_activity(c));
+    const auto det(obtain_path_spec_details_activity(builders, m, rel));
 
     const formatters::workflow fw(facets);
     std::forward_list<dogen::formatters::file> r;

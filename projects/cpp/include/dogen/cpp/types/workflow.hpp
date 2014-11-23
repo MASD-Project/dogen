@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/path_spec_details.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
+#include "dogen/cpp/types/includes_builder_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,6 +53,9 @@ public:
     path_spec_details_by_formatter_type;
     typedef std::unordered_map<std::string, boost::filesystem::path>
     path_by_formatter_type;
+    typedef std::unordered_map<std::string,
+                               std::shared_ptr<includes_builder_interface>
+                               > includes_builder_by_formatter_id;
 
 public:
     workflow() = default;
@@ -137,6 +141,13 @@ private:
         settings_bundle_for_facet) const;
 
     /**
+     * @brief Creates a map of includes builders by formatter id.
+     */
+    includes_builder_by_formatter_id
+    create_includes_builder_by_formatter_id_activity(
+        const formatters::container& c) const;
+
+    /**
      * @brief Gets the relative file name for all path keys.
      */
     std::unordered_map<sml::qname, path_by_formatter_type>
@@ -148,10 +159,11 @@ private:
      * @brief Creates all path spec details for a model.
      */
     std::unordered_map<sml::qname, path_spec_details_by_formatter_type>
-    obtain_path_spec_details_for_key_activity(
-        const std::forward_list<formatters::facet>& facets, const sml::model& m,
+    obtain_path_spec_details_activity(
+        const includes_builder_by_formatter_id& includes_builders,
+        const sml::model& m,
         const std::unordered_map<sml::qname, path_by_formatter_type>&
-        relative_file_names_for_key) const;
+        relative_file_names_by_formatter_by_qname) const;
 
     /**
      * @brief Creates all the files for a given container of SML
