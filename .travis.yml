@@ -40,9 +40,9 @@ script:
   - mkdir output
   - cd output
   - cmake ${GIT_REPO}
-  - make package
-  - make run_all_specs
-
+  # for now lets not make -j2 package
+  - make -j2 run_all_specs
+  
 notifications:
   email:
     recipients:
