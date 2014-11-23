@@ -1,0 +1,44 @@
+language: cpp
+
+compiler:
+  - clang
+  - gcc
+
+before_install:
+  # boost
+  - sudo add-apt-repository -y ppa:boost-latest/ppa
+  
+  # cmake
+  - sudo add-apt-repository -y ppa:kalakris/cmake
+
+  # g++4.8.1
+  - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
+
+  # clang 3.4
+  - if [ "$CXX" == "clang++" ]; then sudo add-apt-repository -y ppa:h-rayflood/llvm; fi
+
+  - sudo apt-get update -qq
+
+install:
+  # boost. install all for now.
+  - sudo apt-get install libboost1.55-all-dev 
+  
+  # cmake
+  - sudo apt-get install cmake
+
+  # g++4.8.1
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
+
+  # clang 3.4
+  - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
+
+script: 
+  - export GIT_REPO="`pwd`"
+  - cd ..
+  - mkdir output
+  - cd output
+  - cmake ${GIT_REPO}
+  - make
+  - make run_all_specs

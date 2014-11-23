@@ -17,13 +17,13 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-23 Sun 00:58]
+Clock summary at [2014-11-23 Sun 16:59]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *7:23* |      |      |
+| *Total time*                                                           | *8:02* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                        |        | 7:23 |      |
+| Development Stories Implemented                                        |        | 8:02 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |        |      | 0:13 |
 | COMPLETED Implement path spec details builder for class header         |        |      | 1:55 |
 | COMPLETED Create a compact form of qname io                            |        |      | 2:29 |
@@ -31,6 +31,7 @@ Clock summary at [2014-11-23 Sun 00:58]
 | COMPLETED Rename =identifier_name_builder= to =name_builder=           |        |      | 0:04 |
 | COMPLETED Ensure relative path works correctly end to end              |        |      | 1:46 |
 | IMPLEMENTATION Implement include generation for class header formatter |        |      | 0:05 |
+| IMPLEMENTATION Add dogen to travis                                     |        |      | 0:39 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -134,6 +135,21 @@ We also need to deal with:
   etc classes.
 - includes of STL, Boost etc that are formatter level dependencies -
   this needs to be handled via traits.
+
+*** IMPLEMENTATION Add dogen to travis                           :task:build:
+    CLOCK: [2014-11-23 Sun 16:20]--[2014-11-23 Sun 16:59] =>  0:39
+
+We're not doing a very good job of managing the CI support in
+CDash. We are now down to a single build agent on OSX. We should add
+the project to travis and stop managing the agents.
+
+- https://travis-ci.org/
+- [[http://computer-vision-talks.com/articles/2014-02-23-using-travis-ci/][Using Travis-CI for continuous testing your projects]]
+
+It is also a good time to add the "markers" to the readme page. For an
+example see:
+
+https://raw.githubusercontent.com/flycheck/flycheck/master/README.rst
 
 *** Remove references to namespace in namespace               :task:refactor:
 
