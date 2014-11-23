@@ -1,6 +1,6 @@
 #+CAPTION: Project Licence
 #+ATTR_HTML: :align center
-[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/LICENCE]][[https://img.shields.io/badge/license-GPL_3-green.svg?dummy]]
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/LICENCE][https://img.shields.io/badge/license-GPL_3-green.svg?dummy]]
 
 * Overview
 
