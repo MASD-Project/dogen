@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
-#include "dogen/cpp/types/identifier_name_builder.hpp"
+#include "dogen/cpp/types/name_builder.hpp"
 #include "dogen/cpp/types/transformation_error.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 
@@ -183,7 +183,7 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     e.name(qn.simple_name());
     e.documentation(documentation);
 
-    identifier_name_builder b;
+    name_builder b;
     e.namespaces(b.namespace_list(model_, qn));
 
     // FIXME: for now we are only supporting objects, so we need this
@@ -202,7 +202,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
     bool& requires_stream_manipulators) const {
 
     const auto qn(nqn.type());
-    identifier_name_builder b;
+    name_builder b;
     const auto qualified_name(b.qualified_name(model_, qn));
     nti.name(qualified_name);
     nti.namespaces(b.namespace_list(model_, qn));
@@ -381,7 +381,7 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     // sml::meta_data::reader reader(o.meta_data());
     // r->opaque_parameters(reader.odb_pragma());
 
-    identifier_name_builder b;
+    name_builder b;
     auto i(o.relationships().find(sml::relationship_types::parents));
     if (i != o.relationships().end()) {
         for (const auto& qn : i->second) {
@@ -461,7 +461,7 @@ transformer::to_visitor_info(const sml::object& o) const {
     auto r(std::make_shared<visitor_info>());
     r->name(o.name().simple_name());
 
-    identifier_name_builder b;
+    name_builder b;
     r->namespaces(b.namespace_list(model_, o.name()));
 
     auto i(o.relationships().find(sml::relationship_types::visits));

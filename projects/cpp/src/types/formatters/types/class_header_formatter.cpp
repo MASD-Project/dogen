@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/cpp/types/identifier_name_builder.hpp"
+#include "dogen/cpp/types/name_builder.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
@@ -92,7 +92,7 @@ std::string class_header_formatter::formatter_id() const {
 
 boost::filesystem::path class_header_formatter::
 make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
-    identifier_name_builder b;
+    name_builder b;
     return b.header_file_name(sb, qn);
 }
 

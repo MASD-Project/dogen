@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_IDENTIFIER_NAME_BUILDER_HPP
-#define DOGEN_CPP_TYPES_IDENTIFIER_NAME_BUILDER_HPP
+#ifndef DOGEN_CPP_TYPES_NAME_BUILDER_HPP
+#define DOGEN_CPP_TYPES_NAME_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,12 +39,12 @@ namespace cpp {
  * @brief Builds string representations of names, according to the
  * grammar of C++.
  */
-class identifier_name_builder {
+class name_builder {
 public:
-    identifier_name_builder() = default;
-    identifier_name_builder(const identifier_name_builder&) = default;
-    identifier_name_builder(identifier_name_builder&&) = default;
-    ~identifier_name_builder() noexcept = default;
+    name_builder() = default;
+    name_builder(const name_builder&) = default;
+    name_builder(name_builder&&) = default;
+    ~name_builder() noexcept = default;
 
 private:
     /**

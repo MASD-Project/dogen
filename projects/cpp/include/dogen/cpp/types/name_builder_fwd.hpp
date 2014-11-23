@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_IDENTIFIER_NAME_BUILDER_FWD_HPP
-#define DOGEN_CPP_TYPES_IDENTIFIER_NAME_BUILDER_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_NAME_BUILDER_FWD_HPP
+#define DOGEN_CPP_TYPES_NAME_BUILDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace cpp {
 
-class identifier_name_builder;
+class name_builder;
 
 } }
 

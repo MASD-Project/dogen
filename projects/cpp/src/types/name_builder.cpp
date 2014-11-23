@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/cpp/types/identifier_name_builder.hpp"
+#include "dogen/cpp/types/name_builder.hpp"
 
 namespace {
 
@@ -41,7 +41,7 @@ const std::string scope_operator("::");
 namespace dogen {
 namespace cpp {
 
-std::string identifier_name_builder::file_name(
+std::string name_builder::file_name(
     const settings_bundle& sb, const bool is_header, const sml::qname& qn,
     const std::string& additional_postfix) const {
 
@@ -81,7 +81,7 @@ std::string identifier_name_builder::file_name(
     return r.generic_string();
 }
 
-std::list<std::string> identifier_name_builder::
+std::list<std::string> name_builder::
 namespace_list(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
@@ -102,25 +102,25 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
     return r;
 }
 
-std::string identifier_name_builder::header_file_name(const settings_bundle& sb,
+std::string name_builder::header_file_name(const settings_bundle& sb,
     const sml::qname& qn, const std::string& additional_postfix) const {
     return file_name(sb, true/*is_header*/, qn, additional_postfix);
 }
 
-std::string identifier_name_builder::implementation_file_name(
+std::string name_builder::implementation_file_name(
     const settings_bundle& sb, const sml::qname& qn,
     const std::string& additional_postfix) const {
     return file_name(sb, false/*is_header*/, qn, additional_postfix);
 }
 
-std::string identifier_name_builder::
+std::string name_builder::
 qualified_name(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> l(namespace_list(m, qn));
     l.push_back(qn.simple_name());
     return boost::algorithm::join(l, scope_operator);
 }
 
-void identifier_name_builder::
+void name_builder::
 complete_name(const sml::model& m, const sml::nested_qname& nqn,
     std::string& complete_name) const {
     const auto qualified_name(this->qualified_name(m, nqn.type()));
@@ -147,7 +147,7 @@ complete_name(const sml::model& m, const sml::nested_qname& nqn,
     lambda('>');
 }
 
-std::string identifier_name_builder::identifiable_name(const std::string& n) const {
+std::string name_builder::identifiable_name(const std::string& n) const {
     std::string r(n);
 
     boost::replace_all(r, scope_operator, separator);

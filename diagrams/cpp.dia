@@ -17097,13 +17097,13 @@ facet of the C++ language.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O140">
       <dia:attribute name="obj_pos">
-        <dia:point val="337,34"/>
+        <dia:point val="338,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="336.95,33.95;371.045,45.65"/>
+        <dia:rectangle val="337.95,33.95;372.045,45.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="337,34"/>
+        <dia:point val="338,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="33.994999999999997"/>
@@ -17112,7 +17112,7 @@ facet of the C++ language.
         <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#identifier_name_builder#</dia:string>
+        <dia:string>#name_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -17657,14 +17657,14 @@ to the grammar of the C++ language.#</dia:string>
         <dia:point val="353.188,29.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="353.13,29.2422;354.401,34.1172"/>
+        <dia:rectangle val="353.123,29.2354;355.389,34.1904"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="353.188,29.3"/>
-        <dia:point val="353.998,34"/>
+        <dia:point val="354.998,34"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -17679,7 +17679,7 @@ to the grammar of the C++ language.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="353.591,32.15"/>
+        <dia:point val="354.091,32.15"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O141" connection="6"/>
@@ -21044,7 +21044,7 @@ main.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O164">
       <dia:attribute name="name">
-        <dia:string>#builds identifiers using &gt;#</dia:string>
+        <dia:string>#builds names using &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -21083,7 +21083,7 @@ main.#</dia:string>
         <dia:point val="343.767,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="343.017,45.55;354.198,57.8"/>
+        <dia:rectangle val="343.017,45.55;355.197,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21091,8 +21091,8 @@ main.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="343.767,57"/>
         <dia:point val="343.767,52"/>
-        <dia:point val="353.998,52"/>
-        <dia:point val="353.998,45.6"/>
+        <dia:point val="354.998,52"/>
+        <dia:point val="354.998,45.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

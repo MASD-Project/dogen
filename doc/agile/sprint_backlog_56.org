@@ -17,17 +17,19 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-22 Sat 22:31]
+Clock summary at [2014-11-23 Sun 00:31]
 
 | Headline                                                       | Time   |      |      |
 |----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                   | *5:28* |      |      |
+| *Total time*                                                   | *7:00* |      |      |
 |----------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                |        | 5:28 |      |
+| Development Stories Implemented                                |        | 7:00 |      |
 | IMPLEMENTATION Sprint and product backlog grooming             |        |      | 0:13 |
 | COMPLETED Implement path spec details builder for class header |        |      | 1:55 |
 | COMPLETED Create a compact form of qname io                    |        |      | 2:29 |
-| IMPLEMENTATION Make use of path spec details in formatter      |        |      | 0:51 |
+| COMPLETED Organise include builders by formatter id            |        |      | 0:51 |
+| COMPLETED Rename =identifier_name_builder= to =name_builder=   |        |      | 0:04 |
+| IMPLEMENTATION Make use of path spec details in formatter      |        |      | 1:28 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
@@ -97,6 +99,13 @@ method on qname when we have a merging code generator.
 We need to create a map of include builders interface by formatter id
 in order to make path spec details generation slightly more sensible.
 
+*** COMPLETED Rename =identifier_name_builder= to =name_builder= :task:refactor:
+    CLOSED: [2014-11-23 Sun 00:30]
+    CLOCK: [2014-11-23 Sun 00:26]--[2014-11-23 Sun 00:30] =>  0:04
+
+We now build identifier names as well as file names so the class name
+is no longer right. Make it more generic.
+
 *** IMPLEMENTATION Make use of path spec details in formatter          :task:
     CLOCK: [2014-11-22 Sat 22:50]--[2014-11-22 Sat 23:27] =>  0:37
     CLOCK: [2014-11-22 Sat 21:53]--[2014-11-22 Sat 22:31] =>  0:38
@@ -125,11 +134,6 @@ enumerations for the exception part:
 
 We should just do the lexical cast once at the top and use it for both
 logging and the exception message.
-
-*** Rename =identifier_name_builder= to =name_builder=        :task:refactor:
-
-We now build identifier names as well as file names so the class name
-is no longer right. Make it more generic.
 
 *** Create a transformation and formatting sub-workflow       :task:refactor:
 
