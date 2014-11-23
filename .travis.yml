@@ -40,7 +40,7 @@ script:
   - mkdir output
   - cd output
   - cmake ${GIT_REPO}
-  - make
+  - make package
   - make run_all_specs
 
 notifications:
