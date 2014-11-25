@@ -36,6 +36,7 @@ Clock summary at [2014-11-24 Mon 18:35]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-25 Tue 08:39]--[2014-11-25 Tue 08:42] =>  0:03
     CLOCK: [2014-11-23 Sun 19:40]--[2014-11-23 Sun 19:51] =>  0:11
     CLOCK: [2014-11-20 Thu 08:04]--[2014-11-20 Thu 08:09] =>  0:05
     CLOCK: [2014-11-17 Mon 07:45]--[2014-11-17 Mon 07:53] =>  0:08
@@ -144,6 +145,9 @@ https://raw.githubusercontent.com/flycheck/flycheck/master/README.rst
 
 *** COMPLETED Analysis on how to best represent settings      :task:refactor:
     CLOSED: [2014-11-24 Mon 18:34]
+    CLOCK: [2014-11-25 Tue 08:17]--[2014-11-25 Tue 08:39] =>  0:22
+    CLOCK: [2014-11-25 Tue 08:10]--[2014-11-25 Tue 08:17] =>  0:07
+    CLOCK: [2014-11-25 Tue 07:51]--[2014-11-25 Tue 08:10] =>  0:19
     CLOCK: [2014-11-24 Mon 17:52]--[2014-11-24 Mon 18:34] =>  0:42
     CLOCK: [2014-11-24 Mon 07:51]--[2014-11-24 Mon 08:40] =>  0:49
 
@@ -196,6 +200,25 @@ expected to be configured at the model module level.
   contain opaque settings. Formatters can then provide an optional
   opaque settings factory which returns opaque settings if any are
   found, or defaults, or nothing - as required.
+- actually calling the local/global settings factories "factories" is
+  slightly misleading as they are more like sub-workflows. They rely
+  on lots of other objects with complex behaviours, rather than just
+  value objects (with possibly complex data structures).
+- the local settings "factory" must generate the formatter settings
+  overrides before it generates the file settings; it must supply the
+  overridden formatter settings to the formatter.
+- we should consider creating a file name builder interface. Similar
+  to what we did with include builder interface, this would mean that
+  the local settings factory will only be coupled to the file name
+  builder rather than the whole formatter, which it needs not know
+  about.
+- for the cases where we have "integrated" functionality - at this
+  point integrated IO only in types, but conceivably integrated
+  hashing in the future - we need to ensure that the original facet
+  is not also enabled (e.g. IO). This means the validation of the
+  opaque settings can only be done within the formatter itself. We
+  probably need to have a "opaque settings validator" that is passed
+  in to a settings validator.
 
 *Final Understanding*
 
@@ -227,6 +250,39 @@ expected to be configured at the model module level.
 - when formatting, cast opaque settings (if available) and throw if
   cast fails. For formatters without opaque settings, throw if any
   supplied.
+- create a settings class that has a map of formatter id to global
+  settings. It could also have a map of c++ entity name (produced with
+  name builder to include namespaces). to formatter id to local
+  settings. With this we can now move the settings away from entity
+  because we no longer require the qname.
+
+*** Capture settings validation rules                                  :task:
+
+Once all settings have been built (global and local) we must pass them
+to a validator class that makes sure they all make sense. This story
+captures all the rules we need to check for. We must also check the
+SML validator story in backlog for rules that apply to settings.
+
+- integrated IO must not be enabled if IO is enabled and vice-versa
+  (opaque settings validator). actually it seems this is possible, we
+  need to investigate the current implementation.
+- types must be enabled
+- if serialisation is enabled, types forward declaration of the
+  serialisation classes must be enabled (opaque settings validator)
+
+*** Perform the global settings refactor                      :task:refactor:
+
+- rename settings bundle to global settings
+- rename bundler to global settings factory or workflow. This class
+  will return a map of formatter id to global settings.
+
+*** Create the formatter settings                                      :task:
+
+- add formatter settings with enable and postfix. add it to global settings.
+- create a formatter settings factory. it takes a list of formatter
+  id's and uses these to look-up formatter traits in meta-data to
+  generate formatter settings.
+- use factory in global settings factory/workflow.
 
 *** IMPLEMENTATION Implement include generation for class header formatter :task:
     CLOCK: [2014-11-23 Sun 00:52]--[2014-11-23 Sun 00:57] =>  0:05
