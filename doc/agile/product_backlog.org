@@ -11,6 +11,54 @@
 
 Stories that we intend to look at, at some point.
 
+*** Remove most of the existing tags we have in the backlogs           :task:
+
+We have been messing around with org mode tags on backlogs for a bit,
+trying to figure out what is the best way to make use of them. We now
+have a lot of tags:
+
+: #+tags: { story(s) epic(e) task(t) note(n) spike(p) }
+: #+tags: { refactor(r) bug(b) feature(f) vision(v) }
+: #+tags: { meta_data(m) tests(a) packaging(q) media(h) build(u) validation(x) diagrams(w) frontend(c) backend(g) }
+: #+tags: dia(y) sml(l) cpp(k) config(o) formatters(d)
+
+In reality, we don't really make proper use of any of these other than
+=vision=. It is useful to distinguish between the stories that are
+almost ready for implementation from the stories that won't be for a
+long while. We should probably remove all tags all leave =vision= and
+=task= or =story=. The problem with =story= is that we then feel like
+we always have to provide the story text, which is not always
+possible. Task is suitable vague.
+
+In the future if we do find a use for tags like =dia=, etc, we should
+implement them as properties.
+
+*** Remove references to namespace when within namespace      :task:refactor:
+
+Due to moving classes around, we seem to have lots of cases where code
+in a namespace (say =sml=) refers to types in that namespace with
+qualification (say =sml::qname=). We need to do a grep in each project
+to look for instances of a namespace and ensure they are valid.
+
+*** Perform lexical casts once only for error reporting       :task:refactor:
+
+There are a number of places in the code where we do lexical casts for
+enumerations for the exception part:
+
+: BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
+:                          << " name: " << o.name();
+: BOOST_THROW_EXCEPTION(workflow_error(unsupported_formatter_type +
+:    boost::lexical_cast<std::string>(ft)));
+
+We should just do the lexical cast once at the top and use it for both
+logging and the exception message.
+
+*** Tidy-up sml consumer interface                            :task:refactor:
+
+After implementing the includes for the class header formatter we
+should figure out if we need the multiple passes machinery. Most
+likely all of that should be scraped.
+
 *** Consider hosting documentation in read the docs                   :story:
 
 We should consider hosting the documentation here:
@@ -1720,6 +1768,13 @@ This variable is then expanded by stitch itself.
 Conceivably one could pair the formatter templates into =hpp= and
 =cpp= files. The header file could be entirely static, and the cpp
 file could contain the =insert_code= command.
+
+*Note*: with time, the formatters have grown in complexity, so the
+header files can no longer be static and the implementation files are
+also quite complex. In order to get them to compile by flymake we
+should change the template to have a comment in the insert code:
+
+: //<#= @insert_code #>
 
 The workflow would be as follows: first expand the original text
 template into code; then expand the formatter templates using this

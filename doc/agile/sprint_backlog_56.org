@@ -17,35 +17,33 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-24 Mon 18:35]
+Clock summary at [2014-11-27 Thu 08:39]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *11:15* |       |      |
+| *Total time*                                                           | *13:04* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 11:15 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 0:24 |
+| Development Stories Implemented                                        |         | 13:04 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:14 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
 | COMPLETED Organise include builders by formatter id                    |         |       | 0:51 |
 | COMPLETED Rename =identifier_name_builder= to =name_builder=           |         |       | 0:04 |
 | COMPLETED Ensure relative path works correctly end to end              |         |       | 1:46 |
 | COMPLETED Add dogen to travis                                          |         |       | 2:10 |
-| COMPLETED Analysis on how to best represent settings                   |         |       | 1:31 |
+| COMPLETED Analysis on how to best represent settings                   |         |       | 2:19 |
+| IMPLEMENTATION Rename bundle to global settings                        |         |       | 0:11 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-27 Thu 07:51]--[2014-11-27 Thu 08:38] =>  0:47
     CLOCK: [2014-11-25 Tue 08:39]--[2014-11-25 Tue 08:42] =>  0:03
     CLOCK: [2014-11-23 Sun 19:40]--[2014-11-23 Sun 19:51] =>  0:11
     CLOCK: [2014-11-20 Thu 08:04]--[2014-11-20 Thu 08:09] =>  0:05
     CLOCK: [2014-11-17 Mon 07:45]--[2014-11-17 Mon 07:53] =>  0:08
 
 Updates to sprint and product backlog.
-
-*** Updates to the manual and readme files                       :task:media:
-
-Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Implement path spec details builder for class header     :task:
     CLOSED: [2014-11-20 Thu 08:04]
@@ -256,6 +254,81 @@ expected to be configured at the model module level.
   settings. With this we can now move the settings away from entity
   because we no longer require the qname.
 
+*** IMPLEMENTATION Rename bundle to global settings           :task:refactor:
+    CLOCK: [2014-11-27 Thu 08:19]--[2014-11-27 Thu 08:30] =>  0:11
+
+- rename settings bundle to global settings
+- rename bundler to global settings factory or workflow. This class
+  will return a map of formatter id to global settings.
+
+*** Rename path spec details to file settings
+
+- rename path spec details to file settings and all associated
+  references (mainly workflow methods)
+
+*** Create the formatter settings                                      :task:
+
+- add formatter settings with enable and postfix. add it to global settings.
+- create a formatter settings factory. it takes a list of formatter
+  id's and uses these to look-up formatter traits in meta-data to
+  generate formatter settings.
+- use factory in global settings factory/workflow.
+
+*** Add support for opaque settings                                    :task:
+
+- create an empty opaque settings class. Create a opaque settings
+  factory interface class. Formatter interface to return an optional
+  opaque settings factory interface.
+- add opaque settings to global settings.
+- when formatting, cast opaque settings (if available) and throw if
+  cast fails. For formatters without opaque settings, throw if any
+  supplied.
+
+*** Add support for local settings                                     :task:
+
+- create a local settings class that is made up of file settings,
+  opaque settings and formatter settings. Entity to have a container
+  of local settings (map of formatter id to local settings).
+- create a local settings factory that takes on the work from workflow
+  in generating the file settings. It also takes on a container of
+  opaque settings factory by formatter id to generate the opaque
+  settings. Finally, it uses the formatter settings factory for the
+  overrides. These should be optional. If populated, they should take
+  on the global settings as defaults so that we don't have to worry
+  about global settings for formatters any more. This means the local
+  settings factory must have access to the global settings.
+
+*** Create a settings class                                            :task:
+
+- create a settings class that has a map of formatter id to global
+  settings. It could also have a map of c++ entity name (produced with
+  name builder to include namespaces), to formatter id to local
+  settings. With this we can now move the settings away from entity
+  because we no longer require the qname.
+- pass the settings class to the includes builder.
+
+*** Consider using an abstract factory in formatters                   :task:
+
+At present we have a number of interfaces (or quasi-interfaces) coming
+out of formatter:
+
+- file name generation
+- includes generation
+- opaque settings generation
+- opaque settings validator
+
+Perhaps it makes more sense to aggregate them all into a factory of
+factories. We should look into the abstract factory pattern as it
+seems particularly suitable for this. The factory should remember the
+id of the formatter it comes from.
+
+In terms of names, it is difficult to find a name for such an
+aggregate:
+
+- formatter components, e.g. =formatter_components_factory_interface=
+- formatter properties
+- formatter parts
+
 *** Capture settings validation rules                                  :task:
 
 Once all settings have been built (global and local) we must pass them
@@ -269,37 +342,6 @@ SML validator story in backlog for rules that apply to settings.
 - types must be enabled
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled (opaque settings validator)
-
-*** Perform the global settings refactor                      :task:refactor:
-
-- rename settings bundle to global settings
-- rename bundler to global settings factory or workflow. This class
-  will return a map of formatter id to global settings.
-
-*** Create the formatter settings                                      :task:
-
-- add formatter settings with enable and postfix. add it to global settings.
-- create a formatter settings factory. it takes a list of formatter
-  id's and uses these to look-up formatter traits in meta-data to
-  generate formatter settings.
-- use factory in global settings factory/workflow.
-
-*** Add support for opaque settings
-
-- create an empty opaque settings class. Create a opaque settings
-  factory interface class. Formatter interface to return an optional
-  opaque settings factory interface.
-- create a local settings class that is made up of file settings,
-  opaque settings and formatter settings. Entity to have a container
-  of local settings (map of formatter id to local settings).
-- create a local settings factory that takes on the work from workflow
-  in generating the file settings. It also takes on a container of
-  opaque settings factory by formatter id to generate the opaque
-  settings. Finally, it uses the formatter settings factory for the
-  overrides. These should be optional. If populated, they should take
-  on the global settings as defaults so that we don't have to worry
-  about global settings for formatters any more. This means the local
-  settings factory must have access to the global settings.
 
 *** IMPLEMENTATION Implement include generation for class header formatter :task:
     CLOCK: [2014-11-23 Sun 00:52]--[2014-11-23 Sun 00:57] =>  0:05
@@ -317,26 +359,6 @@ We also need to deal with:
 - includes of STL, Boost etc that are formatter level dependencies -
   this needs to be handled via traits.
 
-*** Remove references to namespace in namespace               :task:refactor:
-
-Due to moving classes around, we seem to have lots of cases where code
-in a namespace (say =sml=) refers to types in that namespace with
-qualification (say =sml::qname=). We need to do a grep in each project
-to look for instances of a namespace and ensure they are valid.
-
-*** Perform lexical casts once only for error reporting       :task:refactor:
-
-There are a number of places in the code where we do lexical casts for
-enumerations for the exception part:
-
-: BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
-:                          << " name: " << o.name();
-: BOOST_THROW_EXCEPTION(workflow_error(unsupported_formatter_type +
-:    boost::lexical_cast<std::string>(ft)));
-
-We should just do the lexical cast once at the top and use it for both
-logging and the exception message.
-
 *** Create a transformation and formatting sub-workflow       :task:refactor:
 
 At present we have two template functions in the main workflow,
@@ -348,12 +370,6 @@ which overloads =operator()=. It produces files.
 It can receive a formatter dispatcher and a transformer on
 construction and keep references these. Execute returns the list of
 files.
-
-*** Tidy-up sml consumer interface                            :task:refactor:
-
-After implementing the includes for the class header formatter we
-should figure out if we need the multiple passes machinery. Most
-likely all of that should be scraped.
 
 *** Implement class header formatter           :task:refactor:formatters:cpp:
 
