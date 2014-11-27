@@ -42,16 +42,16 @@ namespace dogen {
 namespace cpp {
 
 std::string name_builder::file_name(
-    const settings_bundle& sb, const bool is_header, const sml::qname& qn,
+    const global_settings& gs, const bool is_header, const sml::qname& qn,
     const std::string& additional_postfix) const {
 
     boost::filesystem::path r;
-    if (sb.cpp_settings().split_project()) {
+    if (gs.cpp_settings().split_project()) {
         for(auto n : qn.external_module_path())
             r /= n;
     }
 
-    if (sb.cpp_settings().split_project())
+    if (gs.cpp_settings().split_project())
         r /= qn.model_name();
     else if (is_header) {
         for(auto n : qn.external_module_path())
@@ -59,8 +59,8 @@ std::string name_builder::file_name(
         r /= qn.model_name();
     }
 
-    if (sb.cpp_settings().enable_facet_folders())
-        r /= sb.facet_settings().directory();
+    if (gs.cpp_settings().enable_facet_folders())
+        r /= gs.facet_settings().directory();
 
     for(auto n : qn.module_path())
         r /= n;
@@ -68,13 +68,13 @@ std::string name_builder::file_name(
     std::ostringstream stream;
     stream << qn.simple_name() << additional_postfix;
 
-    if (sb.cpp_settings().enable_unique_file_names())
-        stream << sb.facet_settings().postfix();
+    if (gs.cpp_settings().enable_unique_file_names())
+        stream << gs.facet_settings().postfix();
 
     if (is_header)
-        stream << sb.cpp_settings().header_file_extension();
+        stream << gs.cpp_settings().header_file_extension();
     else
-        stream << sb.cpp_settings().implementation_file_extension();
+        stream << gs.cpp_settings().implementation_file_extension();
 
     r /= stream.str();
 
@@ -102,15 +102,15 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
     return r;
 }
 
-std::string name_builder::header_file_name(const settings_bundle& sb,
+std::string name_builder::header_file_name(const global_settings& gs,
     const sml::qname& qn, const std::string& additional_postfix) const {
-    return file_name(sb, true/*is_header*/, qn, additional_postfix);
+    return file_name(gs, true/*is_header*/, qn, additional_postfix);
 }
 
 std::string name_builder::implementation_file_name(
-    const settings_bundle& sb, const sml::qname& qn,
+    const global_settings& gs, const sml::qname& qn,
     const std::string& additional_postfix) const {
-    return file_name(sb, false/*is_header*/, qn, additional_postfix);
+    return file_name(gs, false/*is_header*/, qn, additional_postfix);
 }
 
 std::string name_builder::

@@ -18,33 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/cpp_settings_hash.hpp"
-#include "dogen/cpp/hash/facet_settings_hash.hpp"
-#include "dogen/cpp/hash/settings_bundle_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
+#ifndef DOGEN_CPP_TYPES_GLOBAL_SETTINGS_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_GLOBAL_SETTINGS_FACTORY_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 
-std::size_t settings_bundle_hasher::hash(const settings_bundle&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.facet_settings());
-    combine(seed, v.cpp_settings());
-    combine(seed, v.general_settings());
-
-    return seed;
-}
+class global_settings_factory;
 
 } }
+
+#endif

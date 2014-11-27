@@ -27,12 +27,12 @@
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/io/settings_bundle_io.hpp"
+#include "dogen/cpp/io/global_settings_io.hpp"
 #include "dogen/cpp/io/path_spec_details_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
-#include "dogen/cpp/types/bundler.hpp"
+#include "dogen/cpp/types/global_settings_factory.hpp"
 #include "dogen/cpp/types/formatters/facet_factory.hpp"
 #include "dogen/cpp/types/formatters/container_splitter.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -127,16 +127,16 @@ sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
     return r;
 }
 
-std::unordered_map<std::string, settings_bundle> workflow::
-settings_bundle_for_facet_activty(
+std::unordered_map<std::string, global_settings> workflow::
+global_settings_for_facet_activty(
     const dogen::formatters::general_settings& gs,
     const sml::module& model_module) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating settings bundles by facet.";
-    bundler b;
+    BOOST_LOG_SEV(lg, debug) << "Creating global settings by facet.";
+    global_settings_factory f;
     const auto& defaults(registrar().default_facet_settings_by_facet_id());
-    const auto r(b.bundle(defaults, gs, model_module));
-    BOOST_LOG_SEV(lg, debug) << "Bundles: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finsihed creating settings bundles by facet.";
+    const auto r(f.build(defaults, gs, model_module));
+    BOOST_LOG_SEV(lg, debug) << "Global settings: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finsihed creating global settings by facet.";
     return r;
 }
 
@@ -150,11 +150,11 @@ formatter_container_for_facet_activty(
 std::forward_list<formatters::facet> workflow::create_facets_activty(
     const std::unordered_map<std::string, formatters::container>&
     formatters_by_facet,
-    const std::unordered_map<std::string, settings_bundle>&
-    settings_bundle_for_facet) const {
+    const std::unordered_map<std::string, global_settings>&
+    global_settings_for_facet) const {
 
     formatters::facet_factory f;
-    return f.build(formatters_by_facet, settings_bundle_for_facet);
+    return f.build(formatters_by_facet, global_settings_for_facet);
 }
 
 workflow::includes_builder_by_formatter_id
@@ -199,7 +199,8 @@ workflow::obtain_relative_file_names_for_key_activity(
             for (const auto fct : facets) {
                 for (const auto fmt : fct.container().class_formatters()) {
                     const auto& id(fmt->formatter_id());
-                    const auto& fn(fmt->make_file_name(fct.bundle(), qn));
+                    const auto& gs(fct.global_settings());
+                    const auto& fn(fmt->make_file_name(gs, qn));
                     r[qn].insert(std::make_pair(id, fn));
                 }
             }
@@ -296,11 +297,11 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto mod(obtain_model_module_activity(m));
-    const auto sb(settings_bundle_for_facet_activty(gs, mod));
+    const auto glob(global_settings_for_facet_activty(gs, mod));
 
     const auto& c(registrar().formatter_container());
     const auto fc(formatter_container_for_facet_activty(c));
-    const auto facets(create_facets_activty(fc, sb));
+    const auto facets(create_facets_activty(fc, glob));
     const auto rel(obtain_relative_file_names_for_key_activity(facets, m));
 
     const auto builders(create_includes_builder_by_formatter_id_activity(c));

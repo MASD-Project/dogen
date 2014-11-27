@@ -18,22 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_SETTINGS_BUNDLE_IO_HPP
-#define DOGEN_CPP_IO_SETTINGS_BUNDLE_IO_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_GLOBAL_SETTINGS_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_GLOBAL_SETTINGS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/settings_bundle.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/global_settings.hpp"
 
-namespace dogen {
-namespace cpp {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::global_settings)
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::settings_bundle& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::global_settings& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::global_settings& v, unsigned int version);
 
 } }
 

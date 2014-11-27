@@ -20,7 +20,7 @@
  */
 #include "dogen/cpp/test_data/cpp_settings_td.hpp"
 #include "dogen/cpp/test_data/facet_settings_td.hpp"
-#include "dogen/cpp/test_data/settings_bundle_td.hpp"
+#include "dogen/cpp/test_data/global_settings_td.hpp"
 #include "dogen/formatters/test_data/general_settings_td.hpp"
 
 namespace {
@@ -45,30 +45,30 @@ create_dogen_formatters_general_settings(const unsigned int position) {
 namespace dogen {
 namespace cpp {
 
-settings_bundle_generator::settings_bundle_generator() : position_(0) { }
+global_settings_generator::global_settings_generator() : position_(0) { }
 
-void settings_bundle_generator::
+void global_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.facet_settings(create_dogen_cpp_facet_settings(position + 0));
     v.cpp_settings(create_dogen_cpp_cpp_settings(position + 1));
     v.general_settings(create_dogen_formatters_general_settings(position + 2));
 }
 
-settings_bundle_generator::result_type
-settings_bundle_generator::create(const unsigned int position) {
-    settings_bundle r;
-    settings_bundle_generator::populate(position, r);
+global_settings_generator::result_type
+global_settings_generator::create(const unsigned int position) {
+    global_settings r;
+    global_settings_generator::populate(position, r);
     return r;
 }
-settings_bundle_generator::result_type*
-settings_bundle_generator::create_ptr(const unsigned int position) {
-    settings_bundle* p = new settings_bundle();
-    settings_bundle_generator::populate(position, *p);
+global_settings_generator::result_type*
+global_settings_generator::create_ptr(const unsigned int position) {
+    global_settings* p = new global_settings();
+    global_settings_generator::populate(position, *p);
     return p;
 }
 
-settings_bundle_generator::result_type
-settings_bundle_generator::operator()() {
+global_settings_generator::result_type
+global_settings_generator::operator()() {
     return create(position_++);
 }
 

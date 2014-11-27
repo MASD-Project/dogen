@@ -87,9 +87,9 @@ std::string class_header_formatter::formatter_id() const {
 }
 
 boost::filesystem::path class_header_formatter::
-make_file_name(const settings_bundle& sb, const sml::qname& qn) const {
+make_file_name(const global_settings& gs, const sml::qname& qn) const {
     name_builder b;
-    return b.header_file_name(sb, qn);
+    return b.header_file_name(gs, qn);
 }
 
 std::shared_ptr<includes_builder_interface>
@@ -98,7 +98,7 @@ class_header_formatter::make_includes_builder() const {
 }
 
 dogen::formatters::file class_header_formatter::
-format(const settings_bundle& sb, const class_info& c) const {
+format(const global_settings& gs, const class_info& c) const {
     boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
 
@@ -109,7 +109,7 @@ format(const settings_bundle& sb, const class_info& c) const {
 
     const auto rp(get_relative_path(c));
     dogen::cpp::formatters::boilerplate_formatter f;
-    const auto a(sb.general_settings().annotation());
+    const auto a(gs.general_settings().annotation());
     f.format_begin(fo, a, empty_includes, rp);
     f.format_end(fo, a, rp);
 

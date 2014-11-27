@@ -33,7 +33,7 @@
 #include "dogen/cpp/types/registrar.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/cpp_settings.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/global_settings.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/path_spec_details.hpp"
@@ -116,15 +116,15 @@ private:
     sml::module obtain_model_module_activity(const sml::model& m) const;
 
     /**
-     * @brief Create the settings bundle for all facets.
+     * @brief Create the global settings for all facets.
      */
-    std::unordered_map<std::string, settings_bundle>
-    settings_bundle_for_facet_activty(
+    std::unordered_map<std::string, global_settings>
+    global_settings_for_facet_activty(
         const dogen::formatters::general_settings& gs,
         const sml::module& model_module) const;
 
     /**
-     * @brief Create the settings bundle for all facets.
+     * @brief Create the global settings for all facets.
      */
     std::unordered_map<std::string, formatters::container>
     formatter_container_for_facet_activty(
@@ -137,8 +137,8 @@ private:
     create_facets_activty(
         const std::unordered_map<std::string, formatters::container>&
         formatters_by_facet,
-        const std::unordered_map<std::string, settings_bundle>&
-        settings_bundle_for_facet) const;
+        const std::unordered_map<std::string, global_settings>&
+        global_settings_for_facet) const;
 
     /**
      * @brief Creates a map of includes builders by formatter id.

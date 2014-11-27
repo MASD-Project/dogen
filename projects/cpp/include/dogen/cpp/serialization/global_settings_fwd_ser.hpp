@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_BUNDLER_FWD_HPP
-#define DOGEN_CPP_TYPES_BUNDLER_FWD_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_GLOBAL_SETTINGS_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_GLOBAL_SETTINGS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace cpp {
+#include "dogen/cpp/types/global_settings_fwd.hpp"
 
-class bundler;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::global_settings& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::cpp::global_settings& v, unsigned int version);
 
 } }
 

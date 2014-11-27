@@ -17,13 +17,13 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-27 Thu 08:39]
+Clock summary at [2014-11-27 Thu 22:31]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *13:04* |       |      |
+| *Total time*                                                           | *13:51* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 13:04 |      |
+| Development Stories Implemented                                        |         | 13:51 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:14 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
@@ -32,7 +32,7 @@ Clock summary at [2014-11-27 Thu 08:39]
 | COMPLETED Ensure relative path works correctly end to end              |         |       | 1:46 |
 | COMPLETED Add dogen to travis                                          |         |       | 2:10 |
 | COMPLETED Analysis on how to best represent settings                   |         |       | 2:19 |
-| IMPLEMENTATION Rename bundle to global settings                        |         |       | 0:11 |
+| IMPLEMENTATION Rename bundle to global settings                        |         |       | 0:58 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
@@ -255,6 +255,9 @@ expected to be configured at the model module level.
   because we no longer require the qname.
 
 *** IMPLEMENTATION Rename bundle to global settings           :task:refactor:
+    CLOCK: [2014-11-27 Thu 22:23]--[2014-11-27 Thu 22:31] =>  0:08
+    CLOCK: [2014-11-27 Thu 19:11]--[2014-11-27 Thu 19:39] =>  0:28
+    CLOCK: [2014-11-27 Thu 18:51]--[2014-11-27 Thu 19:02] =>  0:22
     CLOCK: [2014-11-27 Thu 08:19]--[2014-11-27 Thu 08:30] =>  0:11
 
 - rename settings bundle to global settings

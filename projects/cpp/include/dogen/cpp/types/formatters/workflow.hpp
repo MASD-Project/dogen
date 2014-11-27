@@ -29,7 +29,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 

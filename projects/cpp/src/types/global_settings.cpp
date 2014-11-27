@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/global_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-settings_bundle::settings_bundle(
+global_settings::global_settings(
     const dogen::cpp::facet_settings& facet_settings,
     const dogen::cpp::cpp_settings& cpp_settings,
     const dogen::formatters::general_settings& general_settings)
@@ -31,70 +31,70 @@ settings_bundle::settings_bundle(
       cpp_settings_(cpp_settings),
       general_settings_(general_settings) { }
 
-void settings_bundle::swap(settings_bundle& other) noexcept {
+void global_settings::swap(global_settings& other) noexcept {
     using std::swap;
     swap(facet_settings_, other.facet_settings_);
     swap(cpp_settings_, other.cpp_settings_);
     swap(general_settings_, other.general_settings_);
 }
 
-bool settings_bundle::operator==(const settings_bundle& rhs) const {
+bool global_settings::operator==(const global_settings& rhs) const {
     return facet_settings_ == rhs.facet_settings_ &&
         cpp_settings_ == rhs.cpp_settings_ &&
         general_settings_ == rhs.general_settings_;
 }
 
-settings_bundle& settings_bundle::operator=(settings_bundle other) {
+global_settings& global_settings::operator=(global_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::cpp::facet_settings& settings_bundle::facet_settings() const {
+const dogen::cpp::facet_settings& global_settings::facet_settings() const {
     return facet_settings_;
 }
 
-dogen::cpp::facet_settings& settings_bundle::facet_settings() {
+dogen::cpp::facet_settings& global_settings::facet_settings() {
     return facet_settings_;
 }
 
-void settings_bundle::facet_settings(const dogen::cpp::facet_settings& v) {
+void global_settings::facet_settings(const dogen::cpp::facet_settings& v) {
     facet_settings_ = v;
 }
 
-void settings_bundle::facet_settings(const dogen::cpp::facet_settings&& v) {
+void global_settings::facet_settings(const dogen::cpp::facet_settings&& v) {
     facet_settings_ = std::move(v);
 }
 
-const dogen::cpp::cpp_settings& settings_bundle::cpp_settings() const {
+const dogen::cpp::cpp_settings& global_settings::cpp_settings() const {
     return cpp_settings_;
 }
 
-dogen::cpp::cpp_settings& settings_bundle::cpp_settings() {
+dogen::cpp::cpp_settings& global_settings::cpp_settings() {
     return cpp_settings_;
 }
 
-void settings_bundle::cpp_settings(const dogen::cpp::cpp_settings& v) {
+void global_settings::cpp_settings(const dogen::cpp::cpp_settings& v) {
     cpp_settings_ = v;
 }
 
-void settings_bundle::cpp_settings(const dogen::cpp::cpp_settings&& v) {
+void global_settings::cpp_settings(const dogen::cpp::cpp_settings&& v) {
     cpp_settings_ = std::move(v);
 }
 
-const dogen::formatters::general_settings& settings_bundle::general_settings() const {
+const dogen::formatters::general_settings& global_settings::general_settings() const {
     return general_settings_;
 }
 
-dogen::formatters::general_settings& settings_bundle::general_settings() {
+dogen::formatters::general_settings& global_settings::general_settings() {
     return general_settings_;
 }
 
-void settings_bundle::general_settings(const dogen::formatters::general_settings& v) {
+void global_settings::general_settings(const dogen::formatters::general_settings& v) {
     general_settings_ = v;
 }
 
-void settings_bundle::general_settings(const dogen::formatters::general_settings&& v) {
+void global_settings::general_settings(const dogen::formatters::general_settings&& v) {
     general_settings_ = std::move(v);
 }
 

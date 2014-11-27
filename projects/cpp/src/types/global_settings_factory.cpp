@@ -22,13 +22,13 @@
 #include "dogen/cpp/types/facet_settings.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
-#include "dogen/cpp/types/bundler.hpp"
+#include "dogen/cpp/types/global_settings_factory.hpp"
 
 namespace dogen {
 namespace cpp {
 
 std::unordered_map<std::string, facet_settings>
-bundler::create_facet_settings(
+global_settings_factory::create_facet_settings(
     const std::unordered_map<std::string, facet_settings>&
     default_facet_settings_by_facet_id, const sml::module& model_module) const {
     meta_data::facet_settings_factory f;
@@ -36,13 +36,14 @@ bundler::create_facet_settings(
         model_module.meta_data());
 }
 
-cpp_settings bundler::create_cpp_settings(const sml::module& m) const {
+cpp_settings global_settings_factory::
+create_cpp_settings(const sml::module& m) const {
     meta_data::cpp_settings_factory f;
     return f.build(m.meta_data());
 }
 
-std::unordered_map<std::string, settings_bundle> bundler::
-bundle(const std::unordered_map<std::string, facet_settings>&
+std::unordered_map<std::string, global_settings> global_settings_factory::
+build(const std::unordered_map<std::string, facet_settings>&
     default_facet_settings_by_facet_id,
     const dogen::formatters::general_settings& gs,
     const sml::module& model_module) const {
@@ -51,13 +52,13 @@ bundle(const std::unordered_map<std::string, facet_settings>&
     const auto fs(create_facet_settings(
             default_facet_settings_by_facet_id, model_module));
 
-    std::unordered_map<std::string, settings_bundle> r;
+    std::unordered_map<std::string, global_settings> r;
     for (auto pair : fs) {
-        settings_bundle b;
-        b.general_settings(gs);
-        b.cpp_settings(cs);
-        b.facet_settings(pair.second);
-        r[pair.first] = b;
+        global_settings glob;
+        glob.general_settings(gs);
+        glob.cpp_settings(cs);
+        glob.facet_settings(pair.second);
+        r[pair.first] = glob;
     }
     return r;
 }

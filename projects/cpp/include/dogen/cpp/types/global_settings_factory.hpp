@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_BUNDLER_HPP
-#define DOGEN_CPP_TYPES_BUNDLER_HPP
+#ifndef DOGEN_CPP_TYPES_GLOBAL_SETTINGS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_GLOBAL_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,15 +29,15 @@
 #include <unordered_map>
 #include "dogen/sml/types/module.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/global_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
 /**
- * @brief Creates all the settings bundles for all facets.
+ * @brief Creates all the global settings for all facets.
  */
-class bundler {
+class global_settings_factory {
 private:
     /**
      * @brief Create the facet settings
@@ -55,10 +55,10 @@ private:
 
 public:
     /**
-     * @brief Builds the bundle of settings for all facets.
+     * @brief Builds the global settings for all facets.
      */
-    std::unordered_map<std::string, settings_bundle>
-    bundle(const std::unordered_map<std::string, facet_settings>&
+    std::unordered_map<std::string, global_settings>
+    build(const std::unordered_map<std::string, facet_settings>&
         default_facet_settings_by_facet_id,
         const dogen::formatters::general_settings& gs,
         const sml::module& model_module) const;

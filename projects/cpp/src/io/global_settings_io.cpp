@@ -21,15 +21,15 @@
 #include <ostream>
 #include "dogen/cpp/io/cpp_settings_io.hpp"
 #include "dogen/cpp/io/facet_settings_io.hpp"
-#include "dogen/cpp/io/settings_bundle_io.hpp"
+#include "dogen/cpp/io/global_settings_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const settings_bundle& v) {
+std::ostream& operator<<(std::ostream& s, const global_settings& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings_bundle\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::global_settings\"" << ", "
       << "\"facet_settings\": " << v.facet_settings() << ", "
       << "\"cpp_settings\": " << v.cpp_settings() << ", "
       << "\"general_settings\": " << v.general_settings()

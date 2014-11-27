@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_SETTINGS_BUNDLE_HASH_HPP
-#define DOGEN_CPP_HASH_SETTINGS_BUNDLE_HASH_HPP
+#ifndef DOGEN_CPP_HASH_GLOBAL_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_GLOBAL_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/global_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-struct settings_bundle_hasher {
+struct global_settings_hasher {
 public:
-    static std::size_t hash(const settings_bundle& v);
+    static std::size_t hash(const global_settings& v);
 };
 
 } }
@@ -41,10 +41,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::cpp::settings_bundle> {
+struct hash<dogen::cpp::global_settings> {
 public:
-    size_t operator()(const dogen::cpp::settings_bundle& v) const {
-        return dogen::cpp::settings_bundle_hasher::hash(v);
+    size_t operator()(const dogen::cpp::global_settings& v) const {
+        return dogen::cpp::global_settings_hasher::hash(v);
     }
 };
 

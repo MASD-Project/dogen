@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_SETTINGS_BUNDLE_TD_HPP
-#define DOGEN_CPP_TEST_DATA_SETTINGS_BUNDLE_TD_HPP
+#ifndef DOGEN_CPP_TEST_DATA_GLOBAL_SETTINGS_TD_HPP
+#define DOGEN_CPP_TEST_DATA_GLOBAL_SETTINGS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/settings_bundle.hpp"
+#include "dogen/cpp/types/global_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class settings_bundle_generator {
+class global_settings_generator {
 public:
-    settings_bundle_generator();
+    global_settings_generator();
 
 public:
-    typedef dogen::cpp::settings_bundle result_type;
+    typedef dogen::cpp::global_settings result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);
