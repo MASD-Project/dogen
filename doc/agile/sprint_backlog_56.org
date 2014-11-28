@@ -17,13 +17,13 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-28 Fri 08:20]
+Clock summary at [2014-11-28 Fri 08:40]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *14:29* |       |      |
+| *Total time*                                                           | *14:50* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 14:29 |      |
+| Development Stories Implemented                                        |         | 14:50 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:23 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
@@ -34,6 +34,7 @@ Clock summary at [2014-11-28 Fri 08:20]
 | COMPLETED Analysis on how to best represent settings                   |         |       | 2:19 |
 | COMPLETED Rename bundle to global settings                             |         |       | 0:58 |
 | COMPLETED Rename path spec details to file settings                    |         |       | 0:29 |
+| IMPLEMENTATION Determine the correct name for formatter settings       |         |       | 0:21 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
@@ -267,30 +268,59 @@ expected to be configured at the model module level.
 - rename bundler to global settings factory or workflow. This class
   will return a map of formatter id to global settings.
 
-*** COMPLETED Rename path spec details to file settings
+*** COMPLETED Rename path spec details to file settings                :task:
     CLOSED: [2014-11-28 Fri 08:20]
     CLOCK: [2014-11-28 Fri 07:51]--[2014-11-28 Fri 08:20] =>  0:29
 
 Rename path spec details to file settings and all associated
 references (mainly workflow methods)
 
+*** IMPLEMENTATION Determine the correct name for formatter settings   :task:
+    CLOCK: [2014-11-28 Fri 08:31]--[2014-11-28 Fri 08:40] =>  0:09
+    CLOCK: [2014-11-28 Fri 08:19]--[2014-11-28 Fri 08:31] =>  0:12
+
+*Random Thoughts*
+
+Firstly, one could argue that all settings are formatter settings
+because they have all been created to allow us to switch formatter
+behaviour. Therefore the name "formatter settings" is already
+incorrect.
+
+Ignoring this for a moment, our design showed that there are two kinds
+of formatter settings: those that are understood by the entirety of
+the C++ model and those that are only understood by the formatter
+itself. Thus we should choose a pair of names that reflect this
+relationship:
+
+- internal and external: but the external formatter settings are not
+  very external.
+- generalised and specialised: the names reflect what is happening but
+  sound overly verbose: =generalised_formatter_settings=. We can't use
+  =general= because we already have =general_settings= and besides the
+  name general formatter settings would be even more vague and
+  meaningless.
+- common and additional: do not sound like a very sensible pair.
+- private and public: perhaps confusing due to the overloading of c++
+  terminology?
+
 *** Create the formatter settings                                      :task:
 
-- add formatter settings with enable and postfix. add it to global settings.
-- create a formatter settings factory. it takes a list of formatter
-  id's and uses these to look-up formatter traits in meta-data to
-  generate formatter settings.
-- use factory in global settings factory/workflow.
+- add common formatter settings with enable and postfix. add it to
+  global settings.
+- create a common formatter settings factory. it takes a list of
+  formatter id's and uses these to look-up formatter traits in
+  meta-data to generate formatter settings.
+- use common formatter settings factory in global settings factory.
 
-*** Add support for opaque settings                                    :task:
+*** Add support for additional formatter settings                      :task:
 
-- create an empty opaque settings class. Create a opaque settings
-  factory interface class. Formatter interface to return an optional
-  opaque settings factory interface.
-- add opaque settings to global settings.
-- when formatting, cast opaque settings (if available) and throw if
-  cast fails. For formatters without opaque settings, throw if any
-  supplied.
+- create an empty additional formatter settings class. Create a
+  additional formatter settings factory interface class. Formatter
+  interface to return an additional formatter settings factory interface.
+- add additional formatter settings to global settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
 
 *** Add support for local settings                                     :task:
 
