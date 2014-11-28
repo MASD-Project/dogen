@@ -31,8 +31,8 @@
 namespace {
 
 const std::string formatter_id("cpp.formatters.types.class_header_formatter");
-const std::string path_spec_details_for_formatter_not_found(
-    "Path spec details for formatter not found. Formatter: ");
+const std::string file_settings_for_formatter_not_found(
+    "File settings for formatter not found. Formatter: ");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(formatter_id));
@@ -66,13 +66,13 @@ includes includes_builder::build(const sml::model& /*m*/,
 
 boost::filesystem::path class_header_formatter::
 get_relative_path(const class_info& c) const {
-    const auto& details(c.path_spec_details_for_formatter());
-    const auto i(details.find(formatter_id()));
-    if (i == details.end()) {
-        BOOST_LOG_SEV(lg, error) << path_spec_details_for_formatter_not_found
+    const auto& fs(c.file_settings_for_formatter());
+    const auto i(fs.find(formatter_id()));
+    if (i == fs.end()) {
+        BOOST_LOG_SEV(lg, error) << file_settings_for_formatter_not_found
                                  << formatter_id();
         BOOST_THROW_EXCEPTION(formatting_error(
-                path_spec_details_for_formatter_not_found +
+                file_settings_for_formatter_not_found +
                 formatter_id()));
     }
     return i->second.relative_path();

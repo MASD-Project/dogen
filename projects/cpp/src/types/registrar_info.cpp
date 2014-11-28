@@ -52,13 +52,13 @@ registrar_info::registrar_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::path_spec_details>& path_spec_details_for_formatter,
+    const std::unordered_map<std::string, dogen::cpp::file_settings>& file_settings_for_formatter,
     const std::list<std::string>& leaves,
     const std::list<std::string>& model_dependencies)
     : dogen::cpp::entity(name,
       documentation,
       namespaces,
-      path_spec_details_for_formatter),
+      file_settings_for_formatter),
       leaves_(leaves),
       model_dependencies_(model_dependencies) { }
 

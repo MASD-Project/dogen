@@ -24,9 +24,9 @@
 #include "dogen/cpp/test_data/entity_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
+#include "dogen/cpp/test_data/file_settings_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/new_class_info_td.hpp"
-#include "dogen/cpp/test_data/path_spec_details_td.hpp"
 #include "dogen/cpp/test_data/primitive_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
@@ -47,15 +47,15 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::cpp::path_spec_details
-create_dogen_cpp_path_spec_details(const unsigned int position) {
-    return dogen::cpp::path_spec_details_generator::create(position);
+dogen::cpp::file_settings
+create_dogen_cpp_file_settings(const unsigned int position) {
+    return dogen::cpp::file_settings_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::cpp::path_spec_details> create_std_unordered_map_std_string_dogen_cpp_path_spec_details(unsigned int position) {
-    std::unordered_map<std::string, dogen::cpp::path_spec_details> r;
+std::unordered_map<std::string, dogen::cpp::file_settings> create_std_unordered_map_std_string_dogen_cpp_file_settings(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::file_settings> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_path_spec_details(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_file_settings(position + i)));
     }
     return r;
 }
@@ -71,7 +71,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.documentation(create_std_string(position + 1));
     v.namespaces(create_std_list_std_string(position + 2));
-    v.path_spec_details_for_formatter(create_std_unordered_map_std_string_dogen_cpp_path_spec_details(position + 3));
+    v.file_settings_for_formatter(create_std_unordered_map_std_string_dogen_cpp_file_settings(position + 3));
 }
 
 entity_generator::result_type*

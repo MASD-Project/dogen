@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_PATH_SPEC_DETAILS_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_PATH_SPEC_DETAILS_SER_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FILE_SETTINGS_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FILE_SETTINGS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/file_settings.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::path_spec_details)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::file_settings)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::cpp::path_spec_details& v, unsigned int version);
+void save(Archive& ar, const dogen::cpp::file_settings& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::cpp::path_spec_details& v, unsigned int version);
+void load(Archive& ar, dogen::cpp::file_settings& v, unsigned int version);
 
 } }
 

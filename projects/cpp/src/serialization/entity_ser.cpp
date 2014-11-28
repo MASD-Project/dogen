@@ -34,9 +34,9 @@
 #include "dogen/cpp/serialization/entity_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/file_settings_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/new_class_info_ser.hpp"
-#include "dogen/cpp/serialization/path_spec_details_ser.hpp"
 #include "dogen/cpp/serialization/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
@@ -57,7 +57,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("namespaces", v.namespaces_);
-    ar << make_nvp("path_spec_details_for_formatter", v.path_spec_details_for_formatter_);
+    ar << make_nvp("file_settings_for_formatter", v.file_settings_for_formatter_);
 }
 
 template<typename Archive>
@@ -67,7 +67,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("namespaces", v.namespaces_);
-    ar >> make_nvp("path_spec_details_for_formatter", v.path_spec_details_for_formatter_);
+    ar >> make_nvp("file_settings_for_formatter", v.file_settings_for_formatter_);
 }
 
 } }

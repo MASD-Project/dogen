@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/file_settings_td.hpp"
 #include "dogen/cpp/test_data/includes_td.hpp"
-#include "dogen/cpp/test_data/path_spec_details_td.hpp"
 
 namespace {
 
@@ -41,29 +41,29 @@ create_dogen_cpp_includes(const unsigned int position) {
 namespace dogen {
 namespace cpp {
 
-path_spec_details_generator::path_spec_details_generator() : position_(0) { }
+file_settings_generator::file_settings_generator() : position_(0) { }
 
-void path_spec_details_generator::
+void file_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.relative_path(create_boost_filesystem_path(position + 0));
     v.includes(create_dogen_cpp_includes(position + 1));
 }
 
-path_spec_details_generator::result_type
-path_spec_details_generator::create(const unsigned int position) {
-    path_spec_details r;
-    path_spec_details_generator::populate(position, r);
+file_settings_generator::result_type
+file_settings_generator::create(const unsigned int position) {
+    file_settings r;
+    file_settings_generator::populate(position, r);
     return r;
 }
-path_spec_details_generator::result_type*
-path_spec_details_generator::create_ptr(const unsigned int position) {
-    path_spec_details* p = new path_spec_details();
-    path_spec_details_generator::populate(position, *p);
+file_settings_generator::result_type*
+file_settings_generator::create_ptr(const unsigned int position) {
+    file_settings* p = new file_settings();
+    file_settings_generator::populate(position, *p);
     return p;
 }
 
-path_spec_details_generator::result_type
-path_spec_details_generator::operator()() {
+file_settings_generator::result_type
+file_settings_generator::operator()() {
     return create(position_++);
 }
 

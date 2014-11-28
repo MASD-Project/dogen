@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_PATH_SPEC_DETAILS_HASH_HPP
-#define DOGEN_CPP_HASH_PATH_SPEC_DETAILS_HASH_HPP
+#ifndef DOGEN_CPP_HASH_FILE_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_FILE_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/file_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-struct path_spec_details_hasher {
+struct file_settings_hasher {
 public:
-    static std::size_t hash(const path_spec_details& v);
+    static std::size_t hash(const file_settings& v);
 };
 
 } }
@@ -41,10 +41,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::cpp::path_spec_details> {
+struct hash<dogen::cpp::file_settings> {
 public:
-    size_t operator()(const dogen::cpp::path_spec_details& v) const {
-        return dogen::cpp::path_spec_details_hasher::hash(v);
+    size_t operator()(const dogen::cpp::file_settings& v) const {
+        return dogen::cpp::file_settings_hasher::hash(v);
     }
 };
 

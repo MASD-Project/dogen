@@ -17,14 +17,14 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-27 Thu 22:31]
+Clock summary at [2014-11-28 Fri 08:20]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *13:51* |       |      |
+| *Total time*                                                           | *14:29* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 13:51 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:14 |
+| Development Stories Implemented                                        |         | 14:29 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:23 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
 | COMPLETED Organise include builders by formatter id                    |         |       | 0:51 |
@@ -32,11 +32,13 @@ Clock summary at [2014-11-27 Thu 22:31]
 | COMPLETED Ensure relative path works correctly end to end              |         |       | 1:46 |
 | COMPLETED Add dogen to travis                                          |         |       | 2:10 |
 | COMPLETED Analysis on how to best represent settings                   |         |       | 2:19 |
-| IMPLEMENTATION Rename bundle to global settings                        |         |       | 0:58 |
+| COMPLETED Rename bundle to global settings                             |         |       | 0:58 |
+| COMPLETED Rename path spec details to file settings                    |         |       | 0:29 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-28 Fri 08:10]--[2014-11-28 Fri 08:19] =>  0:09
     CLOCK: [2014-11-27 Thu 07:51]--[2014-11-27 Thu 08:38] =>  0:47
     CLOCK: [2014-11-25 Tue 08:39]--[2014-11-25 Tue 08:42] =>  0:03
     CLOCK: [2014-11-23 Sun 19:40]--[2014-11-23 Sun 19:51] =>  0:11
@@ -254,7 +256,8 @@ expected to be configured at the model module level.
   settings. With this we can now move the settings away from entity
   because we no longer require the qname.
 
-*** IMPLEMENTATION Rename bundle to global settings           :task:refactor:
+*** COMPLETED Rename bundle to global settings                :task:refactor:
+    CLOSED: [2014-11-28 Fri 07:54]
     CLOCK: [2014-11-27 Thu 22:23]--[2014-11-27 Thu 22:31] =>  0:08
     CLOCK: [2014-11-27 Thu 19:11]--[2014-11-27 Thu 19:39] =>  0:28
     CLOCK: [2014-11-27 Thu 18:51]--[2014-11-27 Thu 19:02] =>  0:22
@@ -264,10 +267,12 @@ expected to be configured at the model module level.
 - rename bundler to global settings factory or workflow. This class
   will return a map of formatter id to global settings.
 
-*** Rename path spec details to file settings
+*** COMPLETED Rename path spec details to file settings
+    CLOSED: [2014-11-28 Fri 08:20]
+    CLOCK: [2014-11-28 Fri 07:51]--[2014-11-28 Fri 08:20] =>  0:29
 
-- rename path spec details to file settings and all associated
-  references (mainly workflow methods)
+Rename path spec details to file settings and all associated
+references (mainly workflow methods)
 
 *** Create the formatter settings                                      :task:
 
@@ -361,6 +366,15 @@ We also need to deal with:
   etc classes.
 - includes of STL, Boost etc that are formatter level dependencies -
   this needs to be handled via traits.
+
+*** Consider renaming general settings                                 :task:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
 
 *** Create a transformation and formatting sub-workflow       :task:refactor:
 

@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include "dogen/cpp/serialization/entity_fwd_ser.hpp"
 #include "dogen/cpp/types/entity_visitor.hpp"
-#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/file_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -53,7 +53,7 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const std::unordered_map<std::string, dogen::cpp::path_spec_details>& path_spec_details_for_formatter);
+        const std::unordered_map<std::string, dogen::cpp::file_settings>& file_settings_for_formatter);
 
 private:
     template<typename Archive>
@@ -108,10 +108,10 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::cpp::path_spec_details>& path_spec_details_for_formatter() const;
-    std::unordered_map<std::string, dogen::cpp::path_spec_details>& path_spec_details_for_formatter();
-    void path_spec_details_for_formatter(const std::unordered_map<std::string, dogen::cpp::path_spec_details>& v);
-    void path_spec_details_for_formatter(const std::unordered_map<std::string, dogen::cpp::path_spec_details>&& v);
+    const std::unordered_map<std::string, dogen::cpp::file_settings>& file_settings_for_formatter() const;
+    std::unordered_map<std::string, dogen::cpp::file_settings>& file_settings_for_formatter();
+    void file_settings_for_formatter(const std::unordered_map<std::string, dogen::cpp::file_settings>& v);
+    void file_settings_for_formatter(const std::unordered_map<std::string, dogen::cpp::file_settings>&& v);
 
 protected:
     bool compare(const entity& rhs) const;
@@ -125,7 +125,7 @@ private:
     std::string name_;
     std::string documentation_;
     std::list<std::string> namespaces_;
-    std::unordered_map<std::string, dogen::cpp::path_spec_details> path_spec_details_for_formatter_;
+    std::unordered_map<std::string, dogen::cpp::file_settings> file_settings_for_formatter_;
 };
 
 inline entity::~entity() noexcept { }

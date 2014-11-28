@@ -5968,10 +5968,10 @@ for Java, etc.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#path_spec_details_for_formatter#</dia:string>
+            <dia:string>#file_settings_for_formatter#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,path_spec_details&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,file_settings&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20657,7 +20657,7 @@ main.#</dia:string>
             <dia:string>#details_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,path_spec_details&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,file_settings&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20711,7 +20711,7 @@ main.#</dia:string>
                 <dia:string>#ps#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,path_spec_details&gt;&gt;&amp;#</dia:string>
+                <dia:string>#const std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,file_settings&gt;&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23027,7 +23027,7 @@ main.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#path_spec_details#</dia:string>
+        <dia:string>#file_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

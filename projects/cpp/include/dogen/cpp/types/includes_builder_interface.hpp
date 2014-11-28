@@ -37,7 +37,7 @@ namespace dogen {
 namespace cpp {
 
 /**
- * @brief Builds a subset of the path spec details for a model.
+ * @brief Builds the includes for a given type.
  */
 class includes_builder_interface  {
 public:

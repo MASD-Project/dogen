@@ -18,36 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/includes_hash.hpp"
-#include "dogen/cpp/hash/path_spec_details_hash.hpp"
-
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-}
+#include <ostream>
+#include "dogen/cpp/io/file_settings_io.hpp"
+#include "dogen/cpp/io/includes_io.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::size_t path_spec_details_hasher::hash(const path_spec_details&v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_boost_filesystem_path(v.relative_path()));
-    combine(seed, v.includes());
-
-    return seed;
+std::ostream& operator<<(std::ostream& s, const file_settings& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::file_settings\"" << ", "
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
+      << "\"includes\": " << v.includes()
+      << " }";
+    return(s);
 }
 
 } }

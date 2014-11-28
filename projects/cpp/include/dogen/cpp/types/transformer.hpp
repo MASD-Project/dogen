@@ -46,7 +46,7 @@
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/primitive_info.hpp"
 #include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/file_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -56,13 +56,14 @@ namespace cpp {
  */
 class transformer {
 public:
-    typedef std::unordered_map<std::string, path_spec_details>
-    path_spec_details_by_formatter_type;
+    typedef std::unordered_map<std::string, file_settings>
+    file_settings_by_formatter_type;
 
 public:
     transformer(
         const std::unordered_map<sml::qname,
-                                 path_spec_details_by_formatter_type>& details,
+                                 file_settings_by_formatter_type>&
+        file_settings_by_qname_by_formatter_type,
         const sml::model& m);
 
 private:
@@ -168,8 +169,8 @@ public:
     std::shared_ptr<entity> transform(const sml::object& o) const;
 
 private:
-    const std::unordered_map<sml::qname,
-                             path_spec_details_by_formatter_type>& details_;
+    const std::unordered_map<sml::qname, file_settings_by_formatter_type>&
+    file_settings_by_qname_by_formatter_type_;
     const sml::model& model_;
 };
 

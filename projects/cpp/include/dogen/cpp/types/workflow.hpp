@@ -33,10 +33,10 @@
 #include "dogen/cpp/types/registrar.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/cpp_settings.hpp"
+#include "dogen/cpp/types/file_settings.hpp"
 #include "dogen/cpp/types/global_settings.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/path_spec_details.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/includes_builder_interface.hpp"
@@ -49,8 +49,8 @@ namespace cpp {
  */
 class workflow : public backend::backend_interface {
 public:
-    typedef std::unordered_map<std::string, path_spec_details>
-    path_spec_details_by_formatter_type;
+    typedef std::unordered_map<std::string, file_settings>
+    file_settings_by_formatter_type;
     typedef std::unordered_map<std::string, boost::filesystem::path>
     path_by_formatter_type;
     typedef std::unordered_map<std::string,
@@ -87,10 +87,11 @@ private:
     std::forward_list<std::shared_ptr<entity>>
     transform_sml_elements(
         const std::unordered_map<sml::qname,
-        path_spec_details_by_formatter_type>& details, const sml::model& m,
+        file_settings_by_formatter_type>&
+        file_settings_by_qname_by_formatter_type, const sml::model& m,
         const AssociativeContainerOfElement& c) const {
         std::forward_list<std::shared_ptr<entity> > r;
-        transformer t(details, m);
+        transformer t(file_settings_by_qname_by_formatter_type, m);
         for (const auto& pair : c) {
             const auto ng(sml::generation_types::no_generation);
             if (pair.second.generation_type() == ng)
@@ -156,10 +157,10 @@ private:
         const sml::model& m) const;
 
     /**
-     * @brief Creates all path spec details for a model.
+     * @brief Creates all file settings for a model.
      */
-    std::unordered_map<sml::qname, path_spec_details_by_formatter_type>
-    obtain_path_spec_details_activity(
+    std::unordered_map<sml::qname, file_settings_by_formatter_type>
+    obtain_file_settings_activity(
         const includes_builder_by_formatter_id& includes_builders,
         const sml::model& m,
         const std::unordered_map<sml::qname, path_by_formatter_type>&
@@ -173,11 +174,13 @@ private:
     std::forward_list<dogen::formatters::file>
     create_files_from_sml_container_activity(
         const std::unordered_map<sml::qname,
-                                 path_spec_details_by_formatter_type>& details,
+                                 file_settings_by_formatter_type>&
+        file_settings_by_qname_by_formatter_type,
         const sml::model& m,
         const formatters::workflow& fw,
         const AssociativeContainerOfElement& c) const {
-        const auto entities(transform_sml_elements(details, m, c));
+        const auto entities(transform_sml_elements(
+                file_settings_by_qname_by_formatter_type, m, c));
         std::forward_list<dogen::formatters::file> r;
         for (const auto e : entities)
             r.splice_after(r.before_begin(), format_entity(fw, *e));

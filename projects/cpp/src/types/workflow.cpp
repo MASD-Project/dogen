@@ -28,7 +28,7 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/io/global_settings_io.hpp"
-#include "dogen/cpp/io/path_spec_details_io.hpp"
+#include "dogen/cpp/io/file_settings_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
@@ -225,22 +225,22 @@ workflow::obtain_relative_file_names_for_key_activity(
 }
 
 std::unordered_map<sml::qname,
-                   workflow::path_spec_details_by_formatter_type> workflow::
-obtain_path_spec_details_activity(
+                   workflow::file_settings_by_formatter_type> workflow::
+obtain_file_settings_activity(
     const includes_builder_by_formatter_id& includes_builders,
     const sml::model& m,
     const std::unordered_map<sml::qname, path_by_formatter_type>&
     relative_file_names_by_formatter_by_qname) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining path spec details.";
+    BOOST_LOG_SEV(lg, debug) << "Obtaining file settings.";
 
     std::unordered_map<sml::qname,
-                       workflow::path_spec_details_by_formatter_type> r;
+                       workflow::file_settings_by_formatter_type> r;
 
     for (const auto pair : relative_file_names_by_formatter_by_qname) {
         const auto& qn(pair.first);
-        workflow::path_spec_details_by_formatter_type details;
+        workflow::file_settings_by_formatter_type fs;
         for (const auto other_pair : pair.second) {
-            path_spec_details psd;
+            file_settings psd;
             psd.relative_path(other_pair.second);
 
             const auto& formatter_id(other_pair.first);
@@ -254,13 +254,13 @@ obtain_path_spec_details_activity(
             const auto& b(*(i->second));
             auto inc(b.build(m, qn, relative_file_names_by_formatter_by_qname));
             psd.includes(inc);
-            details[formatter_id] = psd;
+            fs[formatter_id] = psd;
         }
-        r[qn] = details;
+        r[qn] = fs;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Path spec details names: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining path spec details.";
+    BOOST_LOG_SEV(lg, debug) << "File settings names: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining file settings.";
     return r;
 }
 
@@ -305,7 +305,7 @@ std::forward_list<dogen::formatters::file> workflow::generate(
     const auto rel(obtain_relative_file_names_for_key_activity(facets, m));
 
     const auto builders(create_includes_builder_by_formatter_id_activity(c));
-    const auto det(obtain_path_spec_details_activity(builders, m, rel));
+    const auto det(obtain_file_settings_activity(builders, m, rel));
 
     const formatters::workflow fw(facets);
     std::forward_list<dogen::formatters::file> r;

@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_PATH_SPEC_DETAILS_TD_HPP
-#define DOGEN_CPP_TEST_DATA_PATH_SPEC_DETAILS_TD_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FILE_SETTINGS_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FILE_SETTINGS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/file_settings_fwd.hpp"
 
-namespace dogen {
-namespace cpp {
+namespace boost {
+namespace serialization {
 
-class path_spec_details_generator {
-public:
-    path_spec_details_generator();
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::file_settings& v, unsigned int version);
 
-public:
-    typedef dogen::cpp::path_spec_details result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<class Archive>
+void load(Archive& ar, dogen::cpp::file_settings& v, unsigned int version);
 
 } }
 

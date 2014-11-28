@@ -18,20 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/cpp/io/includes_io.hpp"
-#include "dogen/cpp/io/path_spec_details_io.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_FILE_SETTINGS_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FILE_SETTINGS_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/cpp/types/file_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const path_spec_details& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::path_spec_details\"" << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"includes\": " << v.includes()
-      << " }";
-    return(s);
-}
+class file_settings_generator {
+public:
+    file_settings_generator();
+
+public:
+    typedef dogen::cpp::file_settings result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

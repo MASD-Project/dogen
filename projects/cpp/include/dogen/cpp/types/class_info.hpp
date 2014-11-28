@@ -58,7 +58,7 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const std::unordered_map<std::string, dogen::cpp::path_spec_details>& path_spec_details_for_formatter,
+        const std::unordered_map<std::string, dogen::cpp::file_settings>& file_settings_for_formatter,
         const std::list<dogen::cpp::property_info>& properties,
         const std::list<dogen::cpp::property_info>& all_properties,
         const bool has_primitive_properties,

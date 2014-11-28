@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/path_spec_details_io.hpp"
+#include "dogen/cpp/io/file_settings_io.hpp"
 #include "dogen/cpp/types/entity.hpp"
 
 
@@ -47,7 +47,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::path_spec_details>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::file_settings>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -70,11 +70,11 @@ entity::entity(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::path_spec_details>& path_spec_details_for_formatter)
+    const std::unordered_map<std::string, dogen::cpp::file_settings>& file_settings_for_formatter)
     : name_(name),
       documentation_(documentation),
       namespaces_(namespaces),
-      path_spec_details_for_formatter_(path_spec_details_for_formatter) { }
+      file_settings_for_formatter_(file_settings_for_formatter) { }
 
 void entity::to_stream(std::ostream& s) const {
     s << " { "
@@ -82,7 +82,7 @@ void entity::to_stream(std::ostream& s) const {
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"namespaces\": " << namespaces_ << ", "
-      << "\"path_spec_details_for_formatter\": " << path_spec_details_for_formatter_
+      << "\"file_settings_for_formatter\": " << file_settings_for_formatter_
       << " }";
 }
 
@@ -91,14 +91,14 @@ void entity::swap(entity& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(namespaces_, other.namespaces_);
-    swap(path_spec_details_for_formatter_, other.path_spec_details_for_formatter_);
+    swap(file_settings_for_formatter_, other.file_settings_for_formatter_);
 }
 
 bool entity::compare(const entity& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         namespaces_ == rhs.namespaces_ &&
-        path_spec_details_for_formatter_ == rhs.path_spec_details_for_formatter_;
+        file_settings_for_formatter_ == rhs.file_settings_for_formatter_;
 }
 
 const std::string& entity::name() const {
@@ -149,20 +149,20 @@ void entity::namespaces(const std::list<std::string>&& v) {
     namespaces_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::cpp::path_spec_details>& entity::path_spec_details_for_formatter() const {
-    return path_spec_details_for_formatter_;
+const std::unordered_map<std::string, dogen::cpp::file_settings>& entity::file_settings_for_formatter() const {
+    return file_settings_for_formatter_;
 }
 
-std::unordered_map<std::string, dogen::cpp::path_spec_details>& entity::path_spec_details_for_formatter() {
-    return path_spec_details_for_formatter_;
+std::unordered_map<std::string, dogen::cpp::file_settings>& entity::file_settings_for_formatter() {
+    return file_settings_for_formatter_;
 }
 
-void entity::path_spec_details_for_formatter(const std::unordered_map<std::string, dogen::cpp::path_spec_details>& v) {
-    path_spec_details_for_formatter_ = v;
+void entity::file_settings_for_formatter(const std::unordered_map<std::string, dogen::cpp::file_settings>& v) {
+    file_settings_for_formatter_ = v;
 }
 
-void entity::path_spec_details_for_formatter(const std::unordered_map<std::string, dogen::cpp::path_spec_details>&& v) {
-    path_spec_details_for_formatter_ = std::move(v);
+void entity::file_settings_for_formatter(const std::unordered_map<std::string, dogen::cpp::file_settings>&& v) {
+    file_settings_for_formatter_ = std::move(v);
 }
 
 } }

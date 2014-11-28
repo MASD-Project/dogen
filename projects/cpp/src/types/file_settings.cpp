@@ -18,67 +18,67 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/path_spec_details.hpp"
+#include "dogen/cpp/types/file_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-path_spec_details::path_spec_details(path_spec_details&& rhs)
+file_settings::file_settings(file_settings&& rhs)
     : relative_path_(std::move(rhs.relative_path_)),
       includes_(std::move(rhs.includes_)) { }
 
-path_spec_details::path_spec_details(
+file_settings::file_settings(
     const boost::filesystem::path& relative_path,
     const dogen::cpp::includes& includes)
     : relative_path_(relative_path),
       includes_(includes) { }
 
-void path_spec_details::swap(path_spec_details& other) noexcept {
+void file_settings::swap(file_settings& other) noexcept {
     using std::swap;
     swap(relative_path_, other.relative_path_);
     swap(includes_, other.includes_);
 }
 
-bool path_spec_details::operator==(const path_spec_details& rhs) const {
+bool file_settings::operator==(const file_settings& rhs) const {
     return relative_path_ == rhs.relative_path_ &&
         includes_ == rhs.includes_;
 }
 
-path_spec_details& path_spec_details::operator=(path_spec_details other) {
+file_settings& file_settings::operator=(file_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::filesystem::path& path_spec_details::relative_path() const {
+const boost::filesystem::path& file_settings::relative_path() const {
     return relative_path_;
 }
 
-boost::filesystem::path& path_spec_details::relative_path() {
+boost::filesystem::path& file_settings::relative_path() {
     return relative_path_;
 }
 
-void path_spec_details::relative_path(const boost::filesystem::path& v) {
+void file_settings::relative_path(const boost::filesystem::path& v) {
     relative_path_ = v;
 }
 
-void path_spec_details::relative_path(const boost::filesystem::path&& v) {
+void file_settings::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
 }
 
-const dogen::cpp::includes& path_spec_details::includes() const {
+const dogen::cpp::includes& file_settings::includes() const {
     return includes_;
 }
 
-dogen::cpp::includes& path_spec_details::includes() {
+dogen::cpp::includes& file_settings::includes() {
     return includes_;
 }
 
-void path_spec_details::includes(const dogen::cpp::includes& v) {
+void file_settings::includes(const dogen::cpp::includes& v) {
     includes_ = v;
 }
 
-void path_spec_details::includes(const dogen::cpp::includes&& v) {
+void file_settings::includes(const dogen::cpp::includes&& v) {
     includes_ = std::move(v);
 }
 

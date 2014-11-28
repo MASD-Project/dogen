@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_HPP
-#define DOGEN_CPP_TYPES_PATH_SPEC_DETAILS_HPP
+#ifndef DOGEN_CPP_TYPES_FILE_SETTINGS_HPP
+#define DOGEN_CPP_TYPES_FILE_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,32 +27,32 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/serialization/path_spec_details_fwd_ser.hpp"
+#include "dogen/cpp/serialization/file_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/includes.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class path_spec_details final {
+class file_settings final {
 public:
-    path_spec_details() = default;
-    path_spec_details(const path_spec_details&) = default;
-    ~path_spec_details() = default;
+    file_settings() = default;
+    file_settings(const file_settings&) = default;
+    ~file_settings() = default;
 
 public:
-    path_spec_details(path_spec_details&& rhs);
+    file_settings(file_settings&& rhs);
 
 public:
-    path_spec_details(
+    file_settings(
         const boost::filesystem::path& relative_path,
         const dogen::cpp::includes& includes);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const path_spec_details& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const file_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, path_spec_details& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, file_settings& v, unsigned int version);
 
 public:
     const boost::filesystem::path& relative_path() const;
@@ -66,14 +66,14 @@ public:
     void includes(const dogen::cpp::includes&& v);
 
 public:
-    bool operator==(const path_spec_details& rhs) const;
-    bool operator!=(const path_spec_details& rhs) const {
+    bool operator==(const file_settings& rhs) const;
+    bool operator!=(const file_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(path_spec_details& other) noexcept;
-    path_spec_details& operator=(path_spec_details other);
+    void swap(file_settings& other) noexcept;
+    file_settings& operator=(file_settings other);
 
 private:
     boost::filesystem::path relative_path_;
@@ -86,8 +86,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::path_spec_details& lhs,
-    dogen::cpp::path_spec_details& rhs) {
+    dogen::cpp::file_settings& lhs,
+    dogen::cpp::file_settings& rhs) {
     lhs.swap(rhs);
 }
 
