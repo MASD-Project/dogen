@@ -2797,6 +2797,19 @@ possible:
   populated automatically (e.g. grep for the manual attribute) or
   manually.
 
+*Random Thoughts*
+
+- include management with be a mix of manual versus automatically
+  generated. This is not possible because there will be no way to
+  determine which one is which. To solve this problem we need to allow
+  users to add include files from the meta-data and get those
+  processed like all the other includes. In the new world this means
+  adding includes to the formatter settings. These are local
+  settings. As at present, we cannot identify a use case for adding an
+  include file for all types, there is no need to support this feature
+  at the global settings level, so this fits nicely with the existing
+  settings infrastructure.
+
 *** Create includers for value objects only                   :story:feature:
 
 #+begin_quote
