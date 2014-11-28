@@ -11,6 +11,27 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider representing namespaces in file names rather than directories :task:
+
+Languages like .Net represent namespacing using dots rather than
+separate folders. Perhaps we should support a mode of operation where
+all files are placed in a single folder but have the namespacing
+encoded in the file name. For example:
+
+: /a_project/types/a.cpp
+: /a_project/io/a_io.cpp
+
+would become:
+
+: /a_project/types_a.cpp
+: /a_project/io_a_io.cpp
+
+or, using dot notation, so we can distinguish namespaces from
+"composite" names:
+
+: /a_project/types.a.cpp
+: /a_project/io.a_io.cpp
+
 *** Remove most of the existing tags we have in the backlogs           :task:
 
 We have been messing around with org mode tags on backlogs for a bit,

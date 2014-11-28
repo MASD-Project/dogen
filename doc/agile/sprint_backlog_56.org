@@ -17,14 +17,14 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-28 Fri 08:40]
+Clock summary at [2014-11-28 Fri 18:23]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *14:50* |       |      |
+| *Total time*                                                           | *14:57* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 14:50 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:23 |
+| Development Stories Implemented                                        |         | 14:57 |      |
+| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:30 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
 | COMPLETED Organise include builders by formatter id                    |         |       | 0:51 |
@@ -39,6 +39,7 @@ Clock summary at [2014-11-28 Fri 08:40]
 #+end:
 
 *** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+    CLOCK: [2014-11-28 Fri 18:15]--[2014-11-28 Fri 18:22] =>  0:07
     CLOCK: [2014-11-28 Fri 08:10]--[2014-11-28 Fri 08:19] =>  0:09
     CLOCK: [2014-11-27 Thu 07:51]--[2014-11-27 Thu 08:38] =>  0:47
     CLOCK: [2014-11-25 Tue 08:39]--[2014-11-25 Tue 08:42] =>  0:03
