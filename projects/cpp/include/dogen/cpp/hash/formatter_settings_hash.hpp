@@ -18,35 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/cpp_settings_hash.hpp"
-#include "dogen/cpp/hash/facet_settings_hash.hpp"
-#include "dogen/cpp/hash/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/global_settings_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
+#ifndef DOGEN_CPP_HASH_FORMATTER_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_FORMATTER_SETTINGS_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <functional>
+#include "dogen/cpp/types/formatter_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::size_t global_settings_hasher::hash(const global_settings&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.facet_settings());
-    combine(seed, v.cpp_settings());
-    combine(seed, v.formatter_settings());
-    combine(seed, v.general_settings());
-
-    return seed;
-}
+struct formatter_settings_hasher {
+public:
+    static std::size_t hash(const formatter_settings& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::cpp::formatter_settings> {
+public:
+    size_t operator()(const dogen::cpp::formatter_settings& v) const {
+        return dogen::cpp::formatter_settings_hasher::hash(v);
+    }
+};
+
+}
+#endif

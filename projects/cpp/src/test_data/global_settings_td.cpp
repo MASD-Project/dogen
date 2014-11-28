@@ -20,6 +20,7 @@
  */
 #include "dogen/cpp/test_data/cpp_settings_td.hpp"
 #include "dogen/cpp/test_data/facet_settings_td.hpp"
+#include "dogen/cpp/test_data/formatter_settings_td.hpp"
 #include "dogen/cpp/test_data/global_settings_td.hpp"
 #include "dogen/formatters/test_data/general_settings_td.hpp"
 
@@ -33,6 +34,11 @@ create_dogen_cpp_facet_settings(const unsigned int position) {
 dogen::cpp::cpp_settings
 create_dogen_cpp_cpp_settings(const unsigned int position) {
     return dogen::cpp::cpp_settings_generator::create(position);
+}
+
+dogen::cpp::formatter_settings
+create_dogen_cpp_formatter_settings(const unsigned int position) {
+    return dogen::cpp::formatter_settings_generator::create(position);
 }
 
 dogen::formatters::general_settings
@@ -51,7 +57,8 @@ void global_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.facet_settings(create_dogen_cpp_facet_settings(position + 0));
     v.cpp_settings(create_dogen_cpp_cpp_settings(position + 1));
-    v.general_settings(create_dogen_formatters_general_settings(position + 2));
+    v.formatter_settings(create_dogen_cpp_formatter_settings(position + 2));
+    v.general_settings(create_dogen_formatters_general_settings(position + 3));
 }
 
 global_settings_generator::result_type

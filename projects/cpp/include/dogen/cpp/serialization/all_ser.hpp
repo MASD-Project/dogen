@@ -36,6 +36,7 @@
 #include "dogen/cpp/serialization/file_info_ser.hpp"
 #include "dogen/cpp/serialization/file_settings_ser.hpp"
 #include "dogen/cpp/serialization/file_types_ser.hpp"
+#include "dogen/cpp/serialization/formatter_settings_ser.hpp"
 #include "dogen/cpp/serialization/formatters/formatter_types_ser.hpp"
 #include "dogen/cpp/serialization/formatters/odb/settings_ser.hpp"
 #include "dogen/cpp/serialization/formatters/serialization/settings_ser.hpp"

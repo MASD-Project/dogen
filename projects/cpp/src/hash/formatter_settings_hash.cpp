@@ -18,11 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/cpp_settings_hash.hpp"
-#include "dogen/cpp/hash/facet_settings_hash.hpp"
 #include "dogen/cpp/hash/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/global_settings_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
 
 namespace {
 
@@ -38,13 +34,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace cpp {
 
-std::size_t global_settings_hasher::hash(const global_settings&v) {
+std::size_t formatter_settings_hasher::hash(const formatter_settings&v) {
     std::size_t seed(0);
 
-    combine(seed, v.facet_settings());
-    combine(seed, v.cpp_settings());
-    combine(seed, v.formatter_settings());
-    combine(seed, v.general_settings());
+    combine(seed, v.enabled());
+    combine(seed, v.postfix());
 
     return seed;
 }

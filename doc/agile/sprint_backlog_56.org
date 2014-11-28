@@ -17,13 +17,13 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-28 Fri 18:46]
+Clock summary at [2014-11-28 Fri 18:55]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *15:14* |       |      |
+| *Total time*                                                           | *15:24* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 15:14 |      |
+| Development Stories Implemented                                        |         | 15:24 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:30 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
@@ -35,6 +35,7 @@ Clock summary at [2014-11-28 Fri 18:46]
 | COMPLETED Rename bundle to global settings                             |         |       | 0:58 |
 | COMPLETED Rename path spec details to file settings                    |         |       | 0:29 |
 | COMPLETED Determine the correct name for formatter settings            |         |       | 0:38 |
+| IMPLEMENTATION Create the formatter settings                           |         |       | 0:10 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
@@ -329,7 +330,8 @@ The names to use are:
 - formatter settings for the main settings for the formatter
 - opaque formatter settings for the formatter specific settings
 
-*** Create the formatter settings                                      :task:
+*** IMPLEMENTATION Create the formatter settings                       :task:
+    CLOCK: [2014-11-28 Fri 18:45]--[2014-11-28 Fri 18:55] =>  0:10
 
 - add common formatter settings with enable and postfix. add it to
   global settings.
@@ -338,12 +340,12 @@ The names to use are:
   meta-data to generate formatter settings.
 - use common formatter settings factory in global settings factory.
 
-*** Add support for additional formatter settings                      :task:
+*** Add support for opaque formatter settings                          :task:
 
-- create an empty additional formatter settings class. Create a
-  additional formatter settings factory interface class. Formatter
-  interface to return an additional formatter settings factory interface.
-- add additional formatter settings to global settings.
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to global settings.
 - when formatting, cast additional formatter settings (if available)
   and throw if cast fails. For formatters without opaque settings,
   throw if any supplied.

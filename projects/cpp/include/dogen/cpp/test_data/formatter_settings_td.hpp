@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/cpp_settings_hash.hpp"
-#include "dogen/cpp/hash/facet_settings_hash.hpp"
-#include "dogen/cpp/hash/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/global_settings_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_FORMATTER_SETTINGS_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FORMATTER_SETTINGS_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/cpp/types/formatter_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::size_t global_settings_hasher::hash(const global_settings&v) {
-    std::size_t seed(0);
+class formatter_settings_generator {
+public:
+    formatter_settings_generator();
 
-    combine(seed, v.facet_settings());
-    combine(seed, v.cpp_settings());
-    combine(seed, v.formatter_settings());
-    combine(seed, v.general_settings());
+public:
+    typedef dogen::cpp::formatter_settings result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

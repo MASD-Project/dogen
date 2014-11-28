@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/cpp/io/cpp_settings_io.hpp"
 #include "dogen/cpp/io/facet_settings_io.hpp"
+#include "dogen/cpp/io/formatter_settings_io.hpp"
 #include "dogen/cpp/io/global_settings_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
 
@@ -32,6 +33,7 @@ std::ostream& operator<<(std::ostream& s, const global_settings& v) {
       << "\"__type__\": " << "\"dogen::cpp::global_settings\"" << ", "
       << "\"facet_settings\": " << v.facet_settings() << ", "
       << "\"cpp_settings\": " << v.cpp_settings() << ", "
+      << "\"formatter_settings\": " << v.formatter_settings() << ", "
       << "\"general_settings\": " << v.general_settings()
       << " }";
     return(s);

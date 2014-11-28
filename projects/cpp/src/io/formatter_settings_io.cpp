@@ -18,35 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/cpp_settings_hash.hpp"
-#include "dogen/cpp/hash/facet_settings_hash.hpp"
-#include "dogen/cpp/hash/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/global_settings_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
+#include <boost/algorithm/string.hpp>
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/cpp/io/formatter_settings_io.hpp"
 
-namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
 }
 
 namespace dogen {
 namespace cpp {
 
-std::size_t global_settings_hasher::hash(const global_settings&v) {
-    std::size_t seed(0);
+std::ostream& operator<<(std::ostream& s, const formatter_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-    combine(seed, v.facet_settings());
-    combine(seed, v.cpp_settings());
-    combine(seed, v.formatter_settings());
-    combine(seed, v.general_settings());
-
-    return seed;
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::formatter_settings\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
+      << " }";
+    return(s);
 }
 
 } }

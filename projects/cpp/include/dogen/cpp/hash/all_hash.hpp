@@ -36,6 +36,7 @@
 #include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/file_settings_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
+#include "dogen/cpp/hash/formatter_settings_hash.hpp"
 #include "dogen/cpp/hash/formatters/formatter_types_hash.hpp"
 #include "dogen/cpp/hash/formatters/odb/settings_hash.hpp"
 #include "dogen/cpp/hash/formatters/serialization/settings_hash.hpp"

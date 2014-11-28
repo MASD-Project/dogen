@@ -29,6 +29,7 @@
 #include "dogen/cpp/serialization/global_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/cpp/types/facet_settings.hpp"
+#include "dogen/cpp/types/formatter_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 
 namespace dogen {
@@ -48,6 +49,7 @@ public:
     global_settings(
         const dogen::cpp::facet_settings& facet_settings,
         const dogen::cpp::cpp_settings& cpp_settings,
+        const dogen::cpp::formatter_settings& formatter_settings,
         const dogen::formatters::general_settings& general_settings);
 
 private:
@@ -68,6 +70,11 @@ public:
     void cpp_settings(const dogen::cpp::cpp_settings& v);
     void cpp_settings(const dogen::cpp::cpp_settings&& v);
 
+    const dogen::cpp::formatter_settings& formatter_settings() const;
+    dogen::cpp::formatter_settings& formatter_settings();
+    void formatter_settings(const dogen::cpp::formatter_settings& v);
+    void formatter_settings(const dogen::cpp::formatter_settings&& v);
+
     const dogen::formatters::general_settings& general_settings() const;
     dogen::formatters::general_settings& general_settings();
     void general_settings(const dogen::formatters::general_settings& v);
@@ -86,6 +93,7 @@ public:
 private:
     dogen::cpp::facet_settings facet_settings_;
     dogen::cpp::cpp_settings cpp_settings_;
+    dogen::cpp::formatter_settings formatter_settings_;
     dogen::formatters::general_settings general_settings_;
 };
 

@@ -18,35 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/cpp_settings_hash.hpp"
-#include "dogen/cpp/hash/facet_settings_hash.hpp"
-#include "dogen/cpp/hash/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/global_settings_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTER_SETTINGS_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTER_SETTINGS_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/formatter_settings.hpp"
 
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::formatter_settings)
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace cpp {
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::formatter_settings& v, unsigned int version);
 
-std::size_t global_settings_hasher::hash(const global_settings&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.facet_settings());
-    combine(seed, v.cpp_settings());
-    combine(seed, v.formatter_settings());
-    combine(seed, v.general_settings());
-
-    return seed;
-}
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::formatter_settings& v, unsigned int version);
 
 } }
+
+#endif
