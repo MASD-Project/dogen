@@ -17,13 +17,13 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-28 Fri 18:23]
+Clock summary at [2014-11-28 Fri 18:46]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *14:57* |       |      |
+| *Total time*                                                           | *15:14* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 14:57 |      |
+| Development Stories Implemented                                        |         | 15:14 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:30 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
@@ -34,7 +34,7 @@ Clock summary at [2014-11-28 Fri 18:23]
 | COMPLETED Analysis on how to best represent settings                   |         |       | 2:19 |
 | COMPLETED Rename bundle to global settings                             |         |       | 0:58 |
 | COMPLETED Rename path spec details to file settings                    |         |       | 0:29 |
-| IMPLEMENTATION Determine the correct name for formatter settings       |         |       | 0:21 |
+| COMPLETED Determine the correct name for formatter settings            |         |       | 0:38 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
@@ -276,7 +276,10 @@ expected to be configured at the model module level.
 Rename path spec details to file settings and all associated
 references (mainly workflow methods)
 
-*** IMPLEMENTATION Determine the correct name for formatter settings   :task:
+*** COMPLETED Determine the correct name for formatter settings        :task:
+    CLOSED: [2014-11-28 Fri 18:45]
+    CLOCK: [2014-11-28 Fri 18:33]--[2014-11-28 Fri 18:45] =>  0:12
+    CLOCK: [2014-11-28 Fri 18:22]--[2014-11-28 Fri 18:27] =>  0:05
     CLOCK: [2014-11-28 Fri 08:31]--[2014-11-28 Fri 08:40] =>  0:09
     CLOCK: [2014-11-28 Fri 08:19]--[2014-11-28 Fri 08:31] =>  0:12
 
@@ -285,7 +288,8 @@ references (mainly workflow methods)
 Firstly, one could argue that all settings are formatter settings
 because they have all been created to allow us to switch formatter
 behaviour. Therefore the name "formatter settings" is already
-incorrect.
+incorrect. Having said that, since the enabled flag is part of
+formatter settings the naming makes some vague sense.
 
 Ignoring this for a moment, our design showed that there are two kinds
 of formatter settings: those that are understood by the entirety of
@@ -303,6 +307,27 @@ relationship:
 - common and additional: do not sound like a very sensible pair.
 - private and public: perhaps confusing due to the overloading of c++
   terminology?
+
+Alternatively, we can consider not pairing the names. The main
+settings are called formatter settings and the other settings could be
+called:
+
+- additional formatter settings: in addition to the existing formatter
+  settings
+- opaque formatter settings: because you cannot see their contents
+- extended formatter settings: an extension to the basic formatter
+  settings
+- formatter specific settings: whilst it conveys the notion that the
+  settings are only meaningful for a given formatter, the name just
+  causes confusion - aren't formatter settings specific to a formatter
+  too?
+
+*Final Understanding*
+
+The names to use are:
+
+- formatter settings for the main settings for the formatter
+- opaque formatter settings for the formatter specific settings
 
 *** Create the formatter settings                                      :task:
 
