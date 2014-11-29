@@ -1587,20 +1587,6 @@ model inheritance by using meta-data:
 There may be some fallout in places where we assume that the
 descendents are all in this model such as serialisation, visitors.
 
-*** Consider creating a phoney target for header validation      :task:build:
-    CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
-
-One way of solving the ninja problems may be to stop creating a static
-library for header validation. We did it simply because it was easier
-but there is no real reason for it. We may be able to save a bit on
-archiving, and as an added bonus, it may fix the issues we're having
-with ninja.
-
-Links:
-
-- [[http://cmake.3232098.n2.nabble.com/adding-extra-target-to-CMakeLists-txt-td4550492.html][Adding extra target to CMakeLists.txt]]
-- See [[http://www.cmake.org/cmake/help/v3.0/release/3.0.0.html][CMake 3.0]] INTERFACES too
-
 *** Add a CMake module for git                                   :task:build:
 
 We are finding git manually at the moment, which means we are probably
