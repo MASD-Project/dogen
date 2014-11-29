@@ -17,13 +17,13 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-28 Fri 18:55]
+Clock summary at [2014-11-29 Sat 21:49]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *15:24* |       |      |
+| *Total time*                                                           | *16:01* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 15:24 |      |
+| Development Stories Implemented                                        |         | 16:01 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:30 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
@@ -35,7 +35,7 @@ Clock summary at [2014-11-28 Fri 18:55]
 | COMPLETED Rename bundle to global settings                             |         |       | 0:58 |
 | COMPLETED Rename path spec details to file settings                    |         |       | 0:29 |
 | COMPLETED Determine the correct name for formatter settings            |         |       | 0:38 |
-| IMPLEMENTATION Create the formatter settings                           |         |       | 0:10 |
+| COMPLETED Create the formatter settings                                |         |       | 0:47 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
