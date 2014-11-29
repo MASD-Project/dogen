@@ -27,4 +27,7 @@ namespace types {
 
 const std::string traits::facet_id("cpp.types");
 
+const std::string traits::types_formatter_id(
+    "cpp.types.class_header_formatter");
+
 } } } }

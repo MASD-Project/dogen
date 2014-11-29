@@ -330,7 +330,9 @@ The names to use are:
 - formatter settings for the main settings for the formatter
 - opaque formatter settings for the formatter specific settings
 
-*** IMPLEMENTATION Create the formatter settings                       :task:
+*** COMPLETED Create the formatter settings                            :task:
+    CLOSED: [2014-11-29 Sat 17:10]
+    CLOCK: [2014-11-29 Sat 16:33]--[2014-11-29 Sat 17:10] =>  0:37
     CLOCK: [2014-11-28 Fri 18:45]--[2014-11-28 Fri 18:55] =>  0:10
 
 - add common formatter settings with enable and postfix. add it to
@@ -339,6 +341,11 @@ The names to use are:
   formatter id's and uses these to look-up formatter traits in
   meta-data to generate formatter settings.
 - use common formatter settings factory in global settings factory.
+
+*** Global settings factory must produce settings by formatter         :task:
+
+We seem to be returning settings by facet. In the new world of
+formatter settings this is a problem.
 
 *** Add support for opaque formatter settings                          :task:
 
