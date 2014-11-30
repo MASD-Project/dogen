@@ -54,6 +54,15 @@ possible. Task is suitable vague.
 In the future if we do find a use for tags like =dia=, etc, we should
 implement them as properties.
 
+In effect, we just want to distinguish between two cases:
+
+- stories that are small enough that can be tackled within a sprint
+  (where we thin the analysis has been done, sufficiently to start
+  working on them)
+- stories that are still too vague to be worked on.
+
+We need to find two names that fit these descriptions.
+
 *** Remove references to namespace when within namespace      :task:refactor:
 
 Due to moving classes around, we seem to have lots of cases where code
