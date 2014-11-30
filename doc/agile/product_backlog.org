@@ -1975,38 +1975,6 @@ service. This would stop us from having to create noddy translation
 units with dummy functions just to avoid having to define exclusion
 regexes.
 
-*** Fix Ninja build                                              :task:build:
-
-When compiling with [[http://martine.github.io/ninja/][Ninja]], we get a strange compilation error in
-header validation. This is because there are too many object files in
-the archiver command line:
-
-: Argument list too long
-: ninja: build stopped: subcommand failed.
-
-We need to look at the CMake source to try to understand why this
-happens, as it appears someone has already did a fix for large command
-lines. See [[https://github.com/martine/ninja/issues/53][this]] issue and [[http://webcache.googleusercontent.com/search?q%3Dcache:_7Sj_3WKZIQJ:www.itk.org/Bug/bug_relationship_graph.php%253Fbug_id%253D13385%2526graph%253Ddependency%2B&cd%3D2&hl%3Den&ct%3Dclnk&gl%3Duk][this]] bug report.
-
-For notes on how to use Ninja from CMake see [[http://www.kitware.com/blog/home/post/434][this]] article.
-
-This is not related to the version of CMake we're using in the PFH
-(2.8.8 instead of the debian unstable 2.8.12.1), as running with the
-later did not fix the problem.
-
-The correct solution for this appears to be to create targets that
-check syntax only rather than generate object files, link static
-libraries, etc. Google has made some changes to CMake to support
-targets such as syntax only. We need to investigate how to use them
-since this would most likely fix the Ninja build and would decrease
-compile times for header validation.
-
-See also [[http://public.kitware.com/pipermail/cmake-developers/2011-January/000998.html][this post]] for a more generic discussion on how to run these
-sort of tools in CMake.
-
-Note: this is still a problem even after splitting header validation
-into two.
-
 *** Add support for Address Sanitizer (ASan)                     :task:build:
 
 This seems like another interest dynamic analysis tool:

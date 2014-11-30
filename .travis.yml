@@ -22,7 +22,10 @@ before_install:
 install:
   # boost. install all for now.
   - sudo apt-get install libboost1.55-all-dev 
-  
+
+  # ninja
+  - sudo apt-get install ninja-build
+
   # cmake
   - sudo apt-get install cmake
 
@@ -39,8 +42,8 @@ script:
   - cd ..
   - mkdir output
   - cd output
-  - cmake ${GIT_REPO}
-  # for now lets not make -j2 package
+  - cmake ${GIT_REPO} -G Ninja
+  - make -j2 package
   - make -j2 run_all_specs
   
 notifications:

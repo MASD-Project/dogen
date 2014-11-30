@@ -17,26 +17,26 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-29 Sat 23:46]
+Clock summary at [2014-11-30 Sun 00:20]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *17:01* |       |      |
+| *Total time*                                                           | *17:34* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 17:01 |      |
+| Development Stories Implemented                                        |         | 17:34 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:30 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
 | COMPLETED Organise include builders by formatter id                    |         |       | 0:51 |
 | COMPLETED Rename =identifier_name_builder= to =name_builder=           |         |       | 0:04 |
 | COMPLETED Ensure relative path works correctly end to end              |         |       | 1:46 |
-| COMPLETED Add dogen to travis                                          |         |       | 2:10 |
+| COMPLETED Add dogen to travis                                          |         |       | 2:28 |
 | COMPLETED Analysis on how to best represent settings                   |         |       | 2:19 |
 | COMPLETED Rename bundle to global settings                             |         |       | 0:58 |
 | COMPLETED Rename path spec details to file settings                    |         |       | 0:29 |
 | COMPLETED Determine the correct name for formatter settings            |         |       | 0:38 |
 | COMPLETED Create the formatter settings                                |         |       | 0:47 |
-| IMPLEMENTATION Remove header validation from build                     |         |       | 1:00 |
+| COMPLETED Remove header validation from build                          |         |       | 1:15 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
@@ -129,6 +129,7 @@ generated correctly, end to end.
 
 *** COMPLETED Add dogen to travis                                :task:build:
     CLOSED: [2014-11-23 Sun 17:24]
+    CLOCK: [2014-11-29 Sat 23:46]--[2014-11-30 Sun 00:04] =>  0:18
     CLOCK: [2014-11-23 Sun 18:18]--[2014-11-23 Sun 18:32] =>  0:14
     CLOCK: [2014-11-23 Sun 18:06]--[2014-11-23 Sun 18:18] =>  0:12
     CLOCK: [2014-11-23 Sun 17:25]--[2014-11-23 Sun 18:06] =>  0:41
@@ -343,7 +344,49 @@ The names to use are:
   meta-data to generate formatter settings.
 - use common formatter settings factory in global settings factory.
 
-*** IMPLEMENTATION Remove header validation from build           :task:build:
+*** COMPLETED Fix Ninja build                                    :task:build:
+    CLOSED: [2014-11-30 Sun 00:13]
+
+*New Understanding*
+
+With the removal of header validation this is no longer a problem.
+
+*Previous Understanding*
+
+When compiling with [[http://martine.github.io/ninja/][Ninja]], we get a strange compilation error in
+header validation. This is because there are too many object files in
+the archiver command line:
+
+: Argument list too long
+: ninja: build stopped: subcommand failed.
+
+We need to look at the CMake source to try to understand why this
+happens, as it appears someone has already did a fix for large command
+lines. See [[https://github.com/martine/ninja/issues/53][this]] issue and [[http://webcache.googleusercontent.com/search?q%3Dcache:_7Sj_3WKZIQJ:www.itk.org/Bug/bug_relationship_graph.php%253Fbug_id%253D13385%2526graph%253Ddependency%2B&cd%3D2&hl%3Den&ct%3Dclnk&gl%3Duk][this]] bug report.
+
+For notes on how to use Ninja from CMake see [[http://www.kitware.com/blog/home/post/434][this]] article.
+
+This is not related to the version of CMake we're using in the PFH
+(2.8.8 instead of the debian unstable 2.8.12.1), as running with the
+later did not fix the problem.
+
+The correct solution for this appears to be to create targets that
+check syntax only rather than generate object files, link static
+libraries, etc. Google has made some changes to CMake to support
+targets such as syntax only. We need to investigate how to use them
+since this would most likely fix the Ninja build and would decrease
+compile times for header validation.
+
+See also [[http://public.kitware.com/pipermail/cmake-developers/2011-January/000998.html][this post]] for a more generic discussion on how to run these
+sort of tools in CMake.
+
+*Note*: this is still a problem even after splitting header validation
+into two.
+
+*** COMPLETED Remove header validation from build                :task:build:
+    CLOSED: [2014-11-30 Sun 00:20]
+    CLOCK: [2014-11-30 Sun 00:14]--[2014-11-30 Sun 00:20] =>  0:06
+    CLOCK: [2014-11-30 Sun 00:05]--[2014-11-30 Sun 00:14] =>  0:09
     CLOCK: [2014-11-29 Sat 23:01]--[2014-11-29 Sat 23:46] =>  0:45
     CLOCK: [2014-01-14 Tue 07:11]--[2014-01-14 Tue 07:26] =>  0:15
 
