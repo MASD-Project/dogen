@@ -11,6 +11,23 @@
 
 Stories that we intend to look at, at some point.
 
+*** Usage of rev-list in version causes problems                       :task:
+
+Now we are using travis, we have found problems with the way we are
+using the number of git commits to assign versions. The problem stems
+from the git clone command:
+
+:  git clone --depth=50 --branch=master git://github.com/DomainDrivenConsulting/dogen.git DomainDrivenConsulting/dogen
+
+This means we are always at version 50/51:
+
+: -- Product version: 0.56.51
+
+This is in addition to the problems we had with tagging (where we have
+to manually stamp the version) and branching (where we are using the
+number of commits in master rather than the branch). We need a better
+solution than using rev-list for this.
+
 *** Consider representing namespaces in file names rather than directories :task:
 
 Languages like .Net represent namespacing using dots rather than
