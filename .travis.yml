@@ -47,8 +47,14 @@ notifications:
   email:
     recipients:
       - marco.craveiro:gmail.com
-    on_success: [change]
-    on_failure: [always]
+    on_success: change
+    on_failure: always
+
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/db7439afa782608b5654
+    on_success: change
+    on_failure: always
 
 deploy:
   provider: releases
@@ -59,10 +65,3 @@ deploy:
   on:
     tags: true
     all_branches: true
-
-webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/db7439afa782608b5654
-    on_success: change
-    on_failure: always
-    on_start: false
