@@ -42,4 +42,7 @@ const std::string traits::facet::enabled("enabled");
 const std::string traits::facet::directory("directory");
 const std::string traits::facet::postfix("postfix");
 
+const std::string traits::formatter::enabled("enabled");
+const std::string traits::formatter::additional_postfix("additional_postfix");
+
 } } }

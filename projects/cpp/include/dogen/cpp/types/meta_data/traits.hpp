@@ -118,6 +118,19 @@ struct traits {
          */
         static const std::string postfix;
     };
+
+    struct formatter {
+        /**
+         * @brief If set to false, the formatter will not be generated.
+         */
+        static const std::string enabled;
+
+        /**
+         * @brief Post-fix to apply to file names for this formatter.
+         */
+        static const std::string additional_postfix;
+    };
+
 };
 
 } } }
