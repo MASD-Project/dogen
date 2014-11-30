@@ -17,13 +17,13 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-30 Sun 00:20]
+Clock summary at [2014-11-30 Sun 20:48]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *17:34* |       |      |
+| *Total time*                                                           | *19:19* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 17:34 |      |
+| Development Stories Implemented                                        |         | 19:19 |      |
 | IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:30 |
 | COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
 | COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
@@ -37,6 +37,7 @@ Clock summary at [2014-11-30 Sun 00:20]
 | COMPLETED Determine the correct name for formatter settings            |         |       | 0:38 |
 | COMPLETED Create the formatter settings                                |         |       | 0:47 |
 | COMPLETED Remove header validation from build                          |         |       | 1:15 |
+| COMPLETED Fix travis build                                             |         |       | 1:45 |
 | IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
@@ -418,6 +419,16 @@ Links:
   header file.
 - See [[http://www.cmake.org/cmake/help/v3.0/release/3.0.0.html][CMake 3.0]] INTERFACES too. Actually this does not help because it
   cannot be used with source files.
+
+*** COMPLETED Fix travis build                                         :task:
+    CLOSED: [2014-11-30 Sun 20:48]
+    CLOCK: [2014-11-30 Sun 16:01]--[2014-11-30 Sun 17:46] =>  1:45
+
+We seem to have borked the travis build since this commit:
+
+https://travis-ci.org/DomainDrivenConsulting/dogen/builds/42514577
+
+We need to manually bisect since then to figure out what caused it.
 
 *** Global settings factory must produce settings by formatter         :task:
 
