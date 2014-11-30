@@ -43,7 +43,7 @@ script:
   - mkdir output
   - cd output
   - cmake ${GIT_REPO} -G Ninja
-  - make -j2 package
+  - ninja -j2 package
   - make -j2 run_all_specs
   
 notifications:
