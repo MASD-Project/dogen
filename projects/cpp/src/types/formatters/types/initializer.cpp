@@ -26,8 +26,8 @@
 
 namespace {
 
-const std::string default_facet_directory("types");
-const std::string default_facet_postfix;
+const std::string default_directory("types");
+const std::string default_postfix;
 
 }
 
@@ -36,26 +36,17 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-void initialise_facet(registrar& rg) {
-    facet_settings default_settings;
-    default_settings.enabled(true);
-    default_settings.directory(default_facet_directory);
-    default_settings.postfix(default_facet_postfix);
-    rg.register_default_facet_settings(traits::facet_id, default_settings);
+facet_settings default_settings() {
+    facet_settings r;
+    r.enabled(true);
+    r.directory(default_directory);
+    r.postfix(default_postfix);
+    return r;
 }
 
-void initialise_class_header_formatter(registrar& rg) {
-    formatter_settings default_settings;
-    default_settings.enabled(true);
-
-    const auto id(traits::types_formatter_id);
-    rg.register_default_formatter_settings(id, default_settings);
-    rg.register_formatter(std::make_shared<class_header_formatter>());
-}
-
-void initializer::initialize(registrar& rg) {
-    initialise_facet(rg);
-    initialise_class_header_formatter(rg);
+void initializer::initialize(registrar& r) {
+    r.register_default_facet_settings(traits::facet_id, default_settings());
+    r.register_formatter(std::make_shared<class_header_formatter>());
 }
 
 } } } }

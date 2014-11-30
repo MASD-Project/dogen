@@ -29,7 +29,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/cpp/types/facet_settings.hpp"
-#include "dogen/cpp/types/formatter_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
@@ -48,12 +47,6 @@ public:
      */
     void register_default_facet_settings(const std::string& facet_id,
         const facet_settings& s);
-
-    /**
-     * @brief Registers default formatter settings for a given formatter.
-     */
-    void register_default_formatter_settings(const std::string& formatter_id,
-        const formatter_settings& s);
 
     /**
      * @brief Registers a class formatter.
@@ -76,8 +69,6 @@ private:
     formatters::container formatter_container_;
     std::unordered_map<std::string, facet_settings>
     default_facet_settings_by_facet_id_;
-    std::unordered_map<std::string, formatter_settings>
-    default_formatter_settings_by_formatter_id_;
 };
 
 } }

@@ -30,8 +30,6 @@ static logger lg(logger_factory("cpp.registrar"));
 
 const std::string duplicate_facet_id(
     "Attempt to register settings for the same facet more than once");
-const std::string duplicate_formatter_id(
-    "Attempt to register settings for the same formatter more than once");
 const std::string no_formatters("No formatters provided.");
 const std::string null_formatter("Formatter supplied is null");
 
@@ -55,16 +53,6 @@ void registrar::register_default_facet_settings(const std::string& facet_id,
     if (!result.second) {
         BOOST_LOG_SEV(lg, error) << duplicate_facet_id;
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_facet_id));
-    }
-}
-
-void registrar::register_default_formatter_settings(
-    const std::string& formatter_id, const formatter_settings& s) {
-    const auto pair(std::make_pair(formatter_id, s));
-    const auto result(default_formatter_settings_by_formatter_id_.insert(pair));
-    if (!result.second) {
-        BOOST_LOG_SEV(lg, error) << duplicate_formatter_id;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_id));
     }
 }
 

@@ -28,11 +28,8 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/sml/types/module.hpp"
-#include "dogen/cpp/types/cpp_settings.hpp"
-#include "dogen/cpp/types/global_settings.hpp"
-#include "dogen/cpp/types/facet_settings.hpp"
-#include "dogen/cpp/types/formatter_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/cpp/types/global_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,15 +49,6 @@ private:
         const sml::module& model_module) const;
 
     /**
-     * @brief Create the formatter settings
-     */
-    std::unordered_map<std::string, formatter_settings>
-    create_formatter_settings(
-        const std::unordered_map<std::string, formatter_settings>&
-        default_formatter_settings_by_formatter_id,
-        const sml::module& model_module) const;
-
-    /**
      * @brief Create the c++ settings
      */
     cpp_settings create_cpp_settings(const sml::module& m) const;
@@ -72,8 +60,6 @@ public:
     std::unordered_map<std::string, global_settings>
     build(const std::unordered_map<std::string, facet_settings>&
         default_facet_settings_by_facet_id,
-        /*const std::unordered_map<std::string, formatter_settings>&
-          default_formatter_settings_by_formatter_id, FIXME*/
         const dogen::formatters::general_settings& gs,
         const sml::module& model_module) const;
 };

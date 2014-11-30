@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_TRAITS_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_TRAITS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,12 +37,6 @@ struct traits {
      * @brief Unique identifier for facet.
      */
     static const std::string facet_id;
-
-    /**
-     * @brief Unique identifier for class header formatter.
-     */
-    static const std::string types_formatter_id;
-
 };
 
 } } } }
