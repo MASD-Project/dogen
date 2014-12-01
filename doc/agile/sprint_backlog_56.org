@@ -17,31 +17,32 @@ for the class formatter.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-11-30 Sun 20:52]
+Clock summary at [2014-12-01 Mon 07:57]
 
-| Headline                                                               | Time    |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *19:30* |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 19:30 |      |
-| IMPLEMENTATION Sprint and product backlog grooming                     |         |       | 1:30 |
-| COMPLETED Implement path spec details builder for class header         |         |       | 1:55 |
-| COMPLETED Create a compact form of qname io                            |         |       | 2:29 |
-| COMPLETED Organise include builders by formatter id                    |         |       | 0:51 |
-| COMPLETED Rename =identifier_name_builder= to =name_builder=           |         |       | 0:04 |
-| COMPLETED Ensure relative path works correctly end to end              |         |       | 1:46 |
-| COMPLETED Add dogen to travis                                          |         |       | 2:28 |
-| COMPLETED Analysis on how to best represent settings                   |         |       | 2:19 |
-| COMPLETED Rename bundle to global settings                             |         |       | 0:58 |
-| COMPLETED Rename path spec details to file settings                    |         |       | 0:29 |
-| COMPLETED Determine the correct name for formatter settings            |         |       | 0:38 |
-| COMPLETED Create the formatter settings                                |         |       | 0:47 |
-| COMPLETED Remove header validation from build                          |         |       | 1:15 |
-| COMPLETED Fix travis build                                             |         |       | 1:56 |
-| IMPLEMENTATION Implement include generation for class header formatter |         |       | 0:05 |
+| Headline                                                          | Time    |       |      |
+|-------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                      | *19:30* |       |      |
+|-------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                   |         | 19:30 |      |
+| COMPLETED Sprint and product backlog grooming                     |         |       | 1:30 |
+| COMPLETED Implement path spec details builder for class header    |         |       | 1:55 |
+| COMPLETED Create a compact form of qname io                       |         |       | 2:29 |
+| COMPLETED Organise include builders by formatter id               |         |       | 0:51 |
+| COMPLETED Rename =identifier_name_builder= to =name_builder=      |         |       | 0:04 |
+| COMPLETED Ensure relative path works correctly end to end         |         |       | 1:46 |
+| COMPLETED Add dogen to travis                                     |         |       | 2:28 |
+| COMPLETED Analysis on how to best represent settings              |         |       | 2:19 |
+| COMPLETED Rename bundle to global settings                        |         |       | 0:58 |
+| COMPLETED Rename path spec details to file settings               |         |       | 0:29 |
+| COMPLETED Determine the correct name for formatter settings       |         |       | 0:38 |
+| COMPLETED Create the formatter settings                           |         |       | 0:47 |
+| COMPLETED Remove header validation from build                     |         |       | 1:15 |
+| COMPLETED Fix travis build                                        |         |       | 1:56 |
+| POSTPONED Implement include generation for class header formatter |         |       | 0:05 |
 #+end:
 
-*** IMPLEMENTATION Sprint and product backlog grooming                 :task:
+*** COMPLETED Sprint and product backlog grooming                      :task:
+    CLOSED: [2014-12-01 Mon 07:55]
     CLOCK: [2014-11-28 Fri 18:15]--[2014-11-28 Fri 18:22] =>  0:07
     CLOCK: [2014-11-28 Fri 08:10]--[2014-11-28 Fri 08:19] =>  0:09
     CLOCK: [2014-11-27 Thu 07:51]--[2014-11-27 Thu 08:38] =>  0:47
@@ -448,81 +449,8 @@ and
 Traits should really be static methods in a class rather than static
 variables.
 
-*** Global settings factory must produce settings by formatter         :task:
-
-We seem to be returning settings by facet. In the new world of
-formatter settings this is a problem.
-
-*** Add support for opaque formatter settings                          :task:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to global settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-
-*** Add support for local settings                                     :task:
-
-- create a local settings class that is made up of file settings,
-  opaque settings and formatter settings. Entity to have a container
-  of local settings (map of formatter id to local settings).
-- create a local settings factory that takes on the work from workflow
-  in generating the file settings. It also takes on a container of
-  opaque settings factory by formatter id to generate the opaque
-  settings. Finally, it uses the formatter settings factory for the
-  overrides. These should be optional. If populated, they should take
-  on the global settings as defaults so that we don't have to worry
-  about global settings for formatters any more. This means the local
-  settings factory must have access to the global settings.
-
-*** Create a settings class                                            :task:
-
-- create a settings class that has a map of formatter id to global
-  settings. It could also have a map of c++ entity name (produced with
-  name builder to include namespaces), to formatter id to local
-  settings. With this we can now move the settings away from entity
-  because we no longer require the qname.
-- pass the settings class to the includes builder.
-
-*** Consider using an abstract factory in formatters                   :task:
-
-At present we have a number of interfaces (or quasi-interfaces) coming
-out of formatter:
-
-- file name generation
-- includes generation
-- opaque settings generation
-- opaque settings validator
-
-Perhaps it makes more sense to aggregate them all into a factory of
-factories. We should look into the abstract factory pattern as it
-seems particularly suitable for this. The factory should remember the
-id of the formatter it comes from.
-
-In terms of names, it is difficult to find a name for such an
-aggregate:
-
-- formatter components, e.g. =formatter_components_factory_interface=
-- formatter properties
-- formatter parts
-
-*** Capture settings validation rules                                  :task:
-
-Once all settings have been built (global and local) we must pass them
-to a validator class that makes sure they all make sense. This story
-captures all the rules we need to check for. We must also check the
-SML validator story in backlog for rules that apply to settings.
-
-- integrated IO must not be enabled if IO is enabled and vice-versa
-  (opaque settings validator). actually it seems this is possible, we
-  need to investigate the current implementation.
-- types must be enabled
-- if serialisation is enabled, types forward declaration of the
-  serialisation classes must be enabled (opaque settings validator)
-
-*** IMPLEMENTATION Implement include generation for class header formatter :task:
+*** POSTPONED Implement include generation for class header formatter  :task:
+    CLOSED: [2014-12-01 Mon 07:57]
     CLOCK: [2014-11-23 Sun 00:52]--[2014-11-23 Sun 00:57] =>  0:05
 
 Now that we have finished generating the path spec details, we need to
@@ -537,51 +465,6 @@ We also need to deal with:
   etc classes.
 - includes of STL, Boost etc that are formatter level dependencies -
   this needs to be handled via traits.
-
-*** Consider renaming general settings                                 :task:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-*** Create a transformation and formatting sub-workflow       :task:refactor:
-
-At present we have two template functions in the main workflow,
-linking the different steps of transformation and formatting. However,
-it may make more sense to plug in to the all types traversal. For this
-we need a sub-workflow that owns the model and the transformer and
-which overloads =operator()=. It produces files.
-
-It can receive a formatter dispatcher and a transformer on
-construction and keep references these. Execute returns the list of
-files.
-
-*** Implement class header formatter           :task:refactor:formatters:cpp:
-
-- look at the old =om= types formatter implementation to see if there
-  is any code to scavenge. This model was deleted around commit
-  10157ad.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
 
 ** Deprecated Development Stories
 
