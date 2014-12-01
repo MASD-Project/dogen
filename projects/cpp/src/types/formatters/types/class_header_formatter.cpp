@@ -30,12 +30,13 @@
 
 namespace {
 
-const std::string formatter_id("cpp.formatters.types.class_header_formatter");
 const std::string file_settings_for_formatter_not_found(
     "File settings for formatter not found. Formatter: ");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(formatter_id));
+using namespace dogen::cpp::formatters::types;
+static logger lg(logger_factory(traits::types_formatter_id()));
+
 
 // FIXME
 const dogen::cpp::includes empty_includes = dogen::cpp::includes();
@@ -79,11 +80,11 @@ get_relative_path(const class_info& c) const {
 }
 
 std::string class_header_formatter::facet_id() const {
-    return traits::facet_id;
+    return traits::facet_id();
 }
 
 std::string class_header_formatter::formatter_id() const {
-    return ::formatter_id;
+    return traits::types_formatter_id();
 }
 
 boost::filesystem::path class_header_formatter::

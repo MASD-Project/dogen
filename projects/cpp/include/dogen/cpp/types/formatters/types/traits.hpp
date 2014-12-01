@@ -36,12 +36,12 @@ struct traits {
     /**
      * @brief Unique identifier for facet.
      */
-    static const std::string facet_id;
+    static std::string facet_id();
 
     /**
      * @brief Unique identifier for class header formatter.
      */
-    static const std::string types_formatter_id;
+    static std::string types_formatter_id();
 
 };
 

@@ -31,6 +31,7 @@ Clock summary at [2014-12-01 Mon 09:27]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2014-12-01 Mon 17:48]--[2014-12-01 Mon 17:53] =>  0:05
     CLOCK: [2014-12-01 Mon 08:30]--[2014-12-01 Mon 08:35] =>  0:05
     CLOCK: [2014-12-01 Mon 07:51]--[2014-12-01 Mon 07:56] =>  0:05
 
@@ -81,6 +82,7 @@ We need to find two names that fit these descriptions.
   postponed.
 
 *** STARTED Traits to use static methods                              :story:
+    CLOCK: [2014-12-01 Mon 17:53]--[2014-12-01 Mon 18:10] =>  0:17
     CLOCK: [2014-12-01 Mon 08:36]--[2014-12-01 Mon 08:47] =>  0:11
 
 As per analysis in the previous sprint, we need to start using static
@@ -89,6 +91,12 @@ the static variable initialisation fiasco. In order to fix this we
 should add methods to the structs that contain static variables
 internally. This should ensure the correct order of initialisation. We
 should also do a bit of a refresher on the fiasco to refresh it.
+
+*** Travis deployment of tags fails                                   :story:
+
+As per issue 2577 in travis, it does not support wildcards at the
+moment. We need to find another way to upload packages into GitHub
+without using wildcards.
 
 *** Global settings factory must produce settings by formatter        :story:
 

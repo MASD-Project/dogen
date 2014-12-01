@@ -25,9 +25,14 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-const std::string traits::facet_id("cpp.types");
+std::string traits::facet_id() {
+    static std::string r("cpp.types");
+    return r;
+}
 
-const std::string traits::types_formatter_id(
-    "cpp.types.class_header_formatter");
+std::string traits::types_formatter_id() {
+    static std::string r("cpp.types.class_header_formatter");
+    return r;
+}
 
 } } } }
