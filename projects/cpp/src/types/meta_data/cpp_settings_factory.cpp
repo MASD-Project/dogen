@@ -57,44 +57,44 @@ build(const boost::property_tree::ptree& meta_data) const {
     cpp_settings r(create_default_settings());
 
     sml::meta_data::reader reader(meta_data);
-    if (reader.has_key(traits::enabled)) {
-        const auto value(reader.get(traits::enabled));
-        r.enabled(value == traits::bool_true);
+    if (reader.has_key(traits::enabled())) {
+        const auto value(reader.get(traits::enabled()));
+        r.enabled(value == traits::bool_true());
     }
 
-    if (reader.has_key(traits::split_project)) {
-        const auto value(reader.get(traits::split_project));
-        r.split_project(value == traits::bool_true);
+    if (reader.has_key(traits::split_project())) {
+        const auto value(reader.get(traits::split_project()));
+        r.split_project(value == traits::bool_true());
     }
 
-    if (reader.has_key(traits::source_directory)) {
-        const auto value(reader.get(traits::source_directory));
+    if (reader.has_key(traits::source_directory())) {
+        const auto value(reader.get(traits::source_directory()));
         r.source_directory(value);
     }
 
-    if (reader.has_key(traits::include_directory)) {
-        const auto value(reader.get(traits::include_directory));
+    if (reader.has_key(traits::include_directory())) {
+        const auto value(reader.get(traits::include_directory()));
         r.include_directory(value);
     }
 
-    if (reader.has_key(traits::header_file_extension)) {
-        const auto value(reader.get(traits::header_file_extension));
+    if (reader.has_key(traits::header_file_extension())) {
+        const auto value(reader.get(traits::header_file_extension()));
         r.header_file_extension(value);
     }
 
-    if (reader.has_key(traits::implementation_file_extension)) {
-        const auto value(reader.get(traits::implementation_file_extension));
+    if (reader.has_key(traits::implementation_file_extension())) {
+        const auto value(reader.get(traits::implementation_file_extension()));
         r.implementation_file_extension(value);
     }
 
-    if (reader.has_key(traits::enable_facet_folders)) {
-        const auto value(reader.get(traits::enable_facet_folders));
-        r.enable_facet_folders(value == traits::bool_true);
+    if (reader.has_key(traits::enable_facet_folders())) {
+        const auto value(reader.get(traits::enable_facet_folders()));
+        r.enable_facet_folders(value == traits::bool_true());
     }
 
-    if (reader.has_key(traits::enable_unique_file_names)) {
-        const auto value(reader.get(traits::enable_unique_file_names));
-        r.enable_unique_file_names(value == traits::bool_true);
+    if (reader.has_key(traits::enable_unique_file_names())) {
+        const auto value(reader.get(traits::enable_unique_file_names()));
+        r.enable_unique_file_names(value == traits::bool_true());
     }
 
     return r;

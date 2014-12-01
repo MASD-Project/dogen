@@ -52,14 +52,15 @@ formatter_settings formatter_settings_factory::read_settings(
 
     formatter_settings r(default_settings);
     sml::meta_data::reader reader(meta_data);
-    const auto enabled_trait(qualify(formatter_id, traits::formatter::enabled));
+    const auto enabled_trait(qualify(formatter_id,
+            traits::formatter::enabled()));
     if (reader.has_key(enabled_trait)) {
         const auto value(reader.get(enabled_trait));
-        r.enabled(value == traits::bool_true);
+        r.enabled(value == traits::bool_true());
     }
 
     const std::string postfix_trait(
-        qualify(formatter_id, traits::formatter::additional_postfix));
+        qualify(formatter_id, traits::formatter::additional_postfix()));
     if (reader.has_key(postfix_trait)) {
         const auto value(reader.get(postfix_trait));
         r.postfix(value);

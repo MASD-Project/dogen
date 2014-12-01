@@ -52,19 +52,19 @@ facet_settings facet_settings_factory::read_settings(
 
     facet_settings r(default_settings);
     sml::meta_data::reader reader(meta_data);
-    const auto enabled_trait(qualify(facet_id, traits::facet::enabled));
+    const auto enabled_trait(qualify(facet_id, traits::facet::enabled()));
     if (reader.has_key(enabled_trait)) {
         const auto value(reader.get(enabled_trait));
-        r.enabled(value == traits::bool_true);
+        r.enabled(value == traits::bool_true());
     }
 
-    const auto directory_trait(qualify(facet_id, traits::facet::directory));
+    const auto directory_trait(qualify(facet_id, traits::facet::directory()));
     if (reader.has_key(directory_trait)) {
         const auto value(reader.get(directory_trait));
         r.directory(value);
     }
 
-    const std::string postfix_trait(qualify(facet_id, traits::facet::postfix));
+    const auto postfix_trait(qualify(facet_id, traits::facet::postfix()));
     if (reader.has_key(postfix_trait)) {
         const auto value(reader.get(postfix_trait));
         r.postfix(value);

@@ -40,34 +40,34 @@ struct traits {
      * @brief Valid values for Boolean types.
      */
     /*@{*/
-    static const std::string bool_true;
-    static const std::string bool_false;
+    static std::string bool_true();
+    static std::string bool_false();
     /*@}*/
 
     /**
      * @brief If set to false, the C++ backend will not
      * be generated.
      */
-    static const std::string enabled;
+    static std::string enabled();
 
     /**
      * @brief If true, the project will be split.
      *
      * @deprecated used only for backwards compatibility.
      */
-    static const std::string split_project;
+    static std::string split_project();
 
     /**
      * @brief Name of the directory in which to place the
      * implementation files.
      */
-    static const std::string source_directory;
+    static std::string source_directory();
 
     /**
      * @brief Name of the directory in which to place the header
      * files.
      */
-    static const std::string include_directory;
+    static std::string include_directory();
 
     /**
      * @brief Extension to use for header files, including the
@@ -75,7 +75,7 @@ struct traits {
      *
      * Example: @e .hpp, @e .hxx
      */
-    static const std::string header_file_extension;
+    static std::string header_file_extension();
 
     /**
      * @brief Extension to use for implementation files, including
@@ -83,13 +83,13 @@ struct traits {
      *
      * Example: @e .cpp, @e .cxx.
      */
-    static const std::string implementation_file_extension;
+    static std::string implementation_file_extension();
 
     /**
      * @brief If true, files for each facet will be placed in a
      * folder for the facet.
      */
-    static const std::string enable_facet_folders;
+    static std::string enable_facet_folders();
 
     /**
      * @brief If true, each file in each facet will have a name
@@ -97,7 +97,7 @@ struct traits {
      *
      * This is achieved by using the facet's postfix.
      */
-    static const std::string enable_unique_file_names;
+    static std::string enable_unique_file_names();
 
     /**
      * @brief Tags related to facets.
@@ -106,29 +106,29 @@ struct traits {
         /**
          * @brief If set to false, the facet will not be generated.
          */
-        static const std::string enabled;
+        static std::string enabled();
 
         /**
          * @brief Directory in which to place files for this facet.
          */
-        static const std::string directory;
+        static std::string directory();
 
         /**
          * @brief Post-fix to apply to file names for this facet.
          */
-        static const std::string postfix;
+        static std::string postfix();
     };
 
     struct formatter {
         /**
          * @brief If set to false, the formatter will not be generated.
          */
-        static const std::string enabled;
+        static std::string enabled();
 
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static const std::string additional_postfix;
+        static std::string additional_postfix();
     };
 
 };

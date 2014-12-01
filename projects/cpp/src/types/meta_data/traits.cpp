@@ -24,25 +24,79 @@ namespace dogen {
 namespace cpp {
 namespace meta_data {
 
-const std::string traits::bool_true("true");
-const std::string traits::bool_false("false");
+std::string traits::bool_true() {
+    static std::string r("true");
+    return r;
+}
 
-const std::string traits::enabled("cpp.enabled");
-const std::string traits::split_project("cpp.split_project");
-const std::string traits::source_directory("cpp.source_directory");
-const std::string traits::include_directory("cpp.include_directory");
-const std::string traits::header_file_extension("cpp.header_file_extension");
-const std::string traits::implementation_file_extension(
-    "cpp.implementation_file_extension");
-const std::string traits::enable_facet_folders("cpp.enable_facet_folders");
-const std::string traits::enable_unique_file_names(
-    "cpp.enable_unique_file_names");
+std::string traits::bool_false() {
+    static std::string r("false");
+    return r;
+}
 
-const std::string traits::facet::enabled("enabled");
-const std::string traits::facet::directory("directory");
-const std::string traits::facet::postfix("postfix");
+std::string traits::enabled() {
+    static std::string r("cpp.enabled");
+    return r;
+}
 
-const std::string traits::formatter::enabled("enabled");
-const std::string traits::formatter::additional_postfix("additional_postfix");
+std::string traits::split_project() {
+    static std::string r("cpp.split_project");
+    return r;
+}
+
+std::string traits::source_directory() {
+    static std::string r("cpp.source_directory");
+    return r;
+}
+
+std::string traits::include_directory() {
+    static std::string r("cpp.include_directory");
+    return r;
+}
+
+std::string traits::header_file_extension() {
+    static std::string r("cpp.header_file_extension");
+    return r;
+}
+
+std::string traits::implementation_file_extension() {
+    static std::string r("cpp.implementation_file_extension");
+    return r;
+}
+
+std::string traits::enable_facet_folders() {
+    static std::string r("cpp.enable_facet_folders");
+    return r;
+}
+
+std::string traits::enable_unique_file_names() {
+    static std::string r("cpp.enable_unique_file_names");
+    return r;
+}
+
+std::string traits::facet::enabled() {
+    static std::string r("enabled");
+    return r;
+}
+
+std::string traits::facet::directory() {
+    static std::string r("directory");
+    return r;
+}
+
+std::string traits::facet::postfix() {
+    static std::string r("postfix");
+    return r;
+}
+
+std::string traits::formatter::enabled() {
+    static std::string r("enabled");
+    return r;
+}
+
+std::string traits::formatter::additional_postfix() {
+    static std::string r("additional_postfix");
+    return r;
+}
 
 } } }

@@ -18,18 +18,20 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-01 Mon 08:30]
+Clock summary at [2014-12-01 Mon 09:27]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *0:39* |      |      |
+| *Total time*                                                    | *0:55* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 0:39 |      |
-| STARTED Sprint and product backlog grooming                     |        |      | 0:05 |
+| Active                                                          |        | 0:55 |      |
+| STARTED Sprint and product backlog grooming                     |        |      | 0:10 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
+| STARTED Traits to use static methods                            |        |      | 0:11 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2014-12-01 Mon 08:30]--[2014-12-01 Mon 08:35] =>  0:05
     CLOCK: [2014-12-01 Mon 07:51]--[2014-12-01 Mon 07:56] =>  0:05
 
 Updates to sprint and product backlog.
@@ -77,6 +79,16 @@ We need to find two names that fit these descriptions.
 - add section for retrospective.
 - remove all statuses except for started, completed, cancelled and
   postponed.
+
+*** STARTED Traits to use static methods                              :story:
+    CLOCK: [2014-12-01 Mon 08:36]--[2014-12-01 Mon 08:47] =>  0:11
+
+As per analysis in the previous sprint, we need to start using static
+methods in traits rather than static variables. We had forgotten about
+the static variable initialisation fiasco. In order to fix this we
+should add methods to the structs that contain static variables
+internally. This should ensure the correct order of initialisation. We
+should also do a bit of a refresher on the fiasco to refresh it.
 
 *** Global settings factory must produce settings by formatter        :story:
 
