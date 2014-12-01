@@ -24,19 +24,48 @@ namespace dogen {
 namespace formatters {
 namespace meta_data {
 
-const std::string traits::bool_true("true");
-const std::string traits::bool_false("false");
+std::string traits::bool_true() {
+    static std::string r("true");
+    return r;
+}
 
-const std::string traits::copyright_holder("copyright");
-const std::string traits::licence_name("licence");
-const std::string traits::modeline_group_name("modeline_group");
-const std::string traits::generate_preamble("generate_preamble");
+std::string traits::bool_false() {
+    static std::string r("false");
+    return r;
+};
 
-const std::string traits::code_generation_marker::add_date_time(
-    "code_generation_marker.add_date_time");
-const std::string traits::code_generation_marker::add_warning(
-    "code_generation_marker.add_warning");
-const std::string traits::code_generation_marker::message(
-    "code_generation_marker.message");
+std::string traits::copyright_holder() {
+    static std::string r("copyright");
+    return r;
+}
+std::string traits::licence_name() {
+    static std::string r("licence");
+    return r;
+}
+
+std::string traits::modeline_group_name() {
+    static std::string r("modeline_group");
+    return r;
+}
+
+std::string traits::generate_preamble() {
+    static std::string r("generate_preamble");
+    return r;
+}
+
+std::string traits::code_generation_marker::add_date_time() {
+    static std::string r("code_generation_marker.add_date_time");
+    return r;
+}
+
+std::string traits::code_generation_marker::add_warning() {
+    static std::string r("code_generation_marker.add_warning");
+    return r;
+}
+
+std::string traits::code_generation_marker::message() {
+    static std::string r("code_generation_marker.message");
+    return r;
+}
 
 } } }

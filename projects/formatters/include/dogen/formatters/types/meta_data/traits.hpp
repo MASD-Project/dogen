@@ -36,8 +36,8 @@ struct traits {
      * @brief Valid values for Boolean types.
      */
     /*@{*/
-    static const std::string bool_true;
-    static const std::string bool_false;
+    static std::string bool_true();
+    static std::string bool_false();
     /*@}*/
 
     /**
@@ -46,21 +46,21 @@ struct traits {
      * It is expected to be repeated in a model; order is kept as
      * provided by user.
      */
-    static const std::string copyright_holder;
+    static std::string copyright_holder();
 
     /**
      * @brief Name of the legal licence to use.
      *
      * Must match licences available in library.
      */
-    static const std::string licence_name;
+    static std::string licence_name();
 
     /**
      * @brief Name of the modeline group to use.
      *
      * Must match licences available in library.
      */
-    static const std::string modeline_group_name;
+    static std::string modeline_group_name();
 
     /**
      * @brief If set to true, the preamble will be generated.
@@ -68,7 +68,7 @@ struct traits {
      * The preamble is made up of a modeline, copyright
      * information and licensing details.
      */
-    static const std::string generate_preamble;
+    static std::string generate_preamble();
 
     /**
      * @brief Tags related to the code generation marker.
@@ -77,18 +77,18 @@ struct traits {
         /**
          * @brief If true, add the generation date and time to the marker.
          */
-        static const std::string add_date_time;
+        static std::string add_date_time();
 
         /**
          * @brief If true, adds a warning not to modify
          * code-generated files.
          */
-        static const std::string add_warning;
+        static std::string add_warning();
 
         /**
          * @brief Message to place on all code-generated files.
          */
-        static const std::string message;
+        static std::string message();
     };
 };
 

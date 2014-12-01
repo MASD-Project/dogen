@@ -18,16 +18,16 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-01 Mon 09:27]
+Clock summary at [2014-12-01 Mon 18:29]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *0:55* |      |      |
+| *Total time*                                                    | *1:35* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 0:55 |      |
-| STARTED Sprint and product backlog grooming                     |        |      | 0:10 |
+| Active                                                          |        | 1:35 |      |
+| STARTED Sprint and product backlog grooming                     |        |      | 0:15 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
-| STARTED Traits to use static methods                            |        |      | 0:11 |
+| COMPLETED Traits to use static methods                          |        |      | 0:46 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -81,7 +81,9 @@ We need to find two names that fit these descriptions.
 - remove all statuses except for started, completed, cancelled and
   postponed.
 
-*** STARTED Traits to use static methods                              :story:
+*** COMPLETED Traits to use static methods                            :story:
+    CLOSED: [2014-12-01 Mon 18:29]
+    CLOCK: [2014-12-01 Mon 18:10]--[2014-12-01 Mon 18:28] =>  0:18
     CLOCK: [2014-12-01 Mon 17:53]--[2014-12-01 Mon 18:10] =>  0:17
     CLOCK: [2014-12-01 Mon 08:36]--[2014-12-01 Mon 08:47] =>  0:11
 

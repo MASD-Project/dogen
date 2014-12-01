@@ -60,17 +60,17 @@ throw_missing_item(const std::string& msg, const std::string& n) const {
 boost::optional<licence> general_settings_factory::
 extract_licence(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data::reader reader(meta_data);
-    if (!reader.has_key(traits::licence_name))
+    if (!reader.has_key(traits::licence_name()))
         return boost::optional<licence>();
 
-    const auto licence_name(reader.get(traits::licence_name));
+    const auto licence_name(reader.get(traits::licence_name()));
     const auto i(licences_.find(licence_name));
     if (i == licences_.end())
         throw_missing_item("Licence not found: ", licence_name);
 
     licence l(i->second);
-    if (reader.has_key(traits::copyright_holder)) {
-        const auto copyright_holder(reader.get(traits::copyright_holder));
+    if (reader.has_key(traits::copyright_holder())) {
+        const auto copyright_holder(reader.get(traits::copyright_holder()));
         l.copyright_holders().push_back(copyright_holder);
     }
     return l;
@@ -79,10 +79,10 @@ extract_licence(const boost::property_tree::ptree& meta_data) const {
 boost::optional<modeline> general_settings_factory::
 extract_modeline(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data::reader reader(meta_data);
-    if (!reader.has_key(traits::modeline_group_name))
+    if (!reader.has_key(traits::modeline_group_name()))
         return boost::optional<modeline>();
 
-    const auto name(reader.get(traits::modeline_group_name));
+    const auto name(reader.get(traits::modeline_group_name()));
     const auto i(modeline_groups_.find(name));
     if (i == modeline_groups_.end())
         throw_missing_item("Modeline group not found: ", name);
@@ -100,12 +100,12 @@ extract_marker(const boost::property_tree::ptree& meta_data) const {
     sml::meta_data::reader reader(meta_data);
 
     using cgm = traits::code_generation_marker;
-    const std::string message(reader.get(cgm::message));
+    const std::string message(reader.get(cgm::message()));
     if (message.empty())
         return std::string();
 
-    const bool add_date_time(reader.is_true(cgm::add_date_time));
-    const bool add_warning(reader.is_true(cgm::add_warning));
+    const bool add_date_time(reader.is_true(cgm::add_date_time()));
+    const bool add_warning(reader.is_true(cgm::add_warning()));
     code_generation_marker_factory f(add_date_time, add_warning, message);
 
     return f.build();
