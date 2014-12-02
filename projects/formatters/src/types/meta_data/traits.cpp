@@ -32,7 +32,7 @@ std::string traits::bool_true() {
 std::string traits::bool_false() {
     static std::string r("false");
     return r;
-};
+}
 
 std::string traits::copyright_holder() {
     static std::string r("copyright");
