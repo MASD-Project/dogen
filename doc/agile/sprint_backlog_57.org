@@ -18,16 +18,17 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-01 Mon 18:29]
+Clock summary at [2014-12-02 Tue 08:49]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *1:35* |      |      |
+| *Total time*                                                    | *2:21* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 1:35 |      |
+| Active                                                          |        | 2:21 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:15 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
+| STARTED Analysis on returning global settings by formatter      |        |      | 0:46 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -94,16 +95,52 @@ should add methods to the structs that contain static variables
 internally. This should ensure the correct order of initialisation. We
 should also do a bit of a refresher on the fiasco to refresh it.
 
-*** Travis deployment of tags fails                                   :story:
-
-As per issue 2577 in travis, it does not support wildcards at the
-moment. We need to find another way to upload packages into GitHub
-without using wildcards.
-
-*** Global settings factory must produce settings by formatter        :story:
+*** STARTED Analysis on returning global settings by formatter        :story:
+    CLOCK: [2014-12-02 Tue 08:03]--[2014-12-02 Tue 08:49] =>  0:46
 
 We seem to be returning settings by facet. In the new world of
 formatter settings this is a problem.
+
+*Random Thoughts*
+
+- we need to create a class like =facet= that has the local and global
+  settings for a formatter plus the formatter itself. However, this
+  will force us to have a =format= method in the formatter interface
+  as well as performing casting in its implementations. In addition,
+  formatters must return the enumeration for the entity type they
+  support (perhaps misleadingly called =formatter_types=).
+- in this world, facet, facet factory, container and container
+  splitter are not required. Formatters can register against a single
+  container in registrar: a map of =formatter_types= to formatter
+  interface.
+- one of the problems we have is that there is an element of recursion
+  here: we need to construct file settings but for that we need the
+  global settings as well as the local formatter settings and possibly
+  the opaque settings too.
+- in effect we have a =settings_workflow= or =settings_factory=; it
+  will generate the local settings, including the file settings. For
+  the file settings we loop through SML entities; for each qname we
+  ask for their =formatter_types=
+  (e.g. =formatter_types::class_formatter=); then ideally we would
+  query a map of =formatter_types= to pair of (formatter interface,
+  global settings). Then we'd generate the local settings for that
+  qname and pack them into the =settings= class by formatter id.
+- for formatting we need a container by formatter types that for each
+  formatter has the global settings and the local settings per qname
+
+transformer no longer
+the workflow
+ that requires a pair of container of
+  global settings by formatter id,
+- the other thing to bear in mind is how this will be used. there are
+  two use cases: the generation of settings and formatting.
+
+Eventually
+  we will be iterating by qname; for a given qname we will want all of
+  the applicable formatters; for these, we will want their global and
+  local settings (local to the qname).
+
+*Final Understanding*
 
 *** Add support for opaque formatter settings                         :story:
 
@@ -137,6 +174,12 @@ formatter settings this is a problem.
   settings. With this we can now move the settings away from entity
   because we no longer require the qname.
 - pass the settings class to the includes builder.
+
+*** Travis deployment of tags fails                                   :story:
+
+As per issue 2577 in travis, it does not support wildcards at the
+moment. We need to find another way to upload packages into GitHub
+without using wildcards.
 
 *** Consider using an abstract factory in formatters                  :story:
 
