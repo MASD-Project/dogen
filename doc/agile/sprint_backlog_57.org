@@ -18,17 +18,17 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-02 Tue 08:49]
+Clock summary at [2014-12-02 Tue 19:58]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *2:21* |      |      |
+| *Total time*                                                    | *3:05* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 2:21 |      |
+| Active                                                          |        | 3:05 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:15 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
-| STARTED Analysis on returning global settings by formatter      |        |      | 0:46 |
+| STARTED Analysis on returning global settings by formatter      |        |      | 1:30 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -96,6 +96,7 @@ internally. This should ensure the correct order of initialisation. We
 should also do a bit of a refresher on the fiasco to refresh it.
 
 *** STARTED Analysis on returning global settings by formatter        :story:
+    CLOCK: [2014-12-02 Tue 19:14]--[2014-12-02 Tue 19:58] =>  0:44
     CLOCK: [2014-12-02 Tue 08:03]--[2014-12-02 Tue 08:49] =>  0:46
 
 We seem to be returning settings by facet. In the new world of
@@ -108,7 +109,8 @@ formatter settings this is a problem.
   will force us to have a =format= method in the formatter interface
   as well as performing casting in its implementations. In addition,
   formatters must return the enumeration for the entity type they
-  support (perhaps misleadingly called =formatter_types=).
+  support (perhaps misleadingly called =formatter_types=). We can use
+  tuples for this.
 - in this world, facet, facet factory, container and container
   splitter are not required. Formatters can register against a single
   container in registrar: a map of =formatter_types= to formatter
@@ -120,27 +122,66 @@ formatter settings this is a problem.
 - in effect we have a =settings_workflow= or =settings_factory=; it
   will generate the local settings, including the file settings. For
   the file settings we loop through SML entities; for each qname we
-  ask for their =formatter_types=
+  ask for their =formatter_types=.
   (e.g. =formatter_types::class_formatter=); then ideally we would
   query a map of =formatter_types= to pair of (formatter interface,
   global settings). Then we'd generate the local settings for that
-  qname and pack them into the =settings= class by formatter id.
-- for formatting we need a container by formatter types that for each
-  formatter has the global settings and the local settings per qname
-
-transformer no longer
-the workflow
- that requires a pair of container of
-  global settings by formatter id,
-- the other thing to bear in mind is how this will be used. there are
-  two use cases: the generation of settings and formatting.
-
-Eventually
-  we will be iterating by qname; for a given qname we will want all of
-  the applicable formatters; for these, we will want their global and
-  local settings (local to the qname).
+  entity (opaque and formatter settings) and with these we can now
+  generate the file name. Once all of the local settings are done we
+  can then pack them into the =settings= class, perhaps by formatter
+  id?
+- use case inventory:
+  - in order to build the file names we need the
+    global settings plus some of the local settings, by formatter id.
+  - in order to format we need a tuple with: entity, local settings,
+    global settings and formatter. If we were able to pass this to the
+    formatter workflow, all it would have to do is to invoke the
+    formatter.
+  - in the formatting process we need to know what facets and
+    formatters are enabled.
+- instead of using =formatter_types= we should be relying on
+  RTTI. After all, we are just creating a proxy for type information
+  and there is always the possibility that we get it wrong (enum not
+  matching the type). Its better to rely on the type system.
+- the file name generation must take into account file name overrides
+  coming in from the meta-data. e.g. for a STL class we will provide
+  our own serialisation files.
+- the settings workflow must take into account the SML dependency
+  graph; if it finds a type for which the formatter is disabled, then
+  all types that have properties of that type must also have their
+  formatter disabled. In effect there are three levels of formatter
+  settings: a) did we enable the formatter for the model? b) did we
+  enable the formatter for the type? c) can the formatter be enabled
+  given all of the types' dependencies? By the time we come up with
+  the local formatter settings it has gone through all these three
+  levels.
+- the above means the includes builder can be fairly simple, all it
+  has to do is to look at it's formatter settings; if they are enabled
+  that implies that all types it depends on are also enabled.
+- cross facet interference is still an issue. Ideally we want to check
+  in the settings factory if a facet or formatter is enabled
+  (e.g. serialisation) and determine what flags to toggle for a given
+  formatter (ideally in opaque formatter settings). However, this
+  requires making the opaque settings not so opaque or to provide yet
+  another interface from the formatter to do this job: for example we
+  could provide global and local settings to an opaque settings
+  factory and it could then determine how to toggle its state.
 
 *Final Understanding*
+
+- change the formatter interface to format on entity rather than
+  concrete classes. Add validation for the dynamic casting.
+- change registrar to have a single container of formatters.
+- remove settings from entity and from transformation.
+- change formatters workflow to work off of a entity, local
+  settings, global settings and formatter.
+- change formatter interface to return the RTTI of the entity
+  descendant it can process.
+- change splitter and container to work off of RTTI instead: container
+  is just a map of RTTI to formatter interface, splitter does this
+  splitting.
+- create a settings workflow that outputs a settings class 
+
 
 *** Add support for opaque formatter settings                         :story:
 
