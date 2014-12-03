@@ -7,7 +7,18 @@
 
 Stories that we intend to look at, at some point.
 
-*** Usage of rev-list in version causes problems                       :task:
+*** Utility meta-data factory                                         :story:
+
+Now that we have a number of meta-data factories that produce settings
+we should be able to factor out all their commonalities and add a
+utility factory to the =formatters= model that handles all use
+cases. Each factory then uses the utility factory instead of calling
+reader etc directly.
+
+We can't create a single factory because we need to generate multiple
+products that are model dependent.
+
+*** Usage of rev-list in version causes problems                      :story:
 
 Now we are using travis, we have found problems with the way we are
 using the number of git commits to assign versions. The problem stems
