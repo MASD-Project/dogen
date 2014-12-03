@@ -592,7 +592,7 @@ be nice to have a meta-data flag for ignoring.
 We should probably have some kind of warning to ensure users are aware
 of the types being ignored.
 
-*** Towards more strongly-typed meta-data                             :story:
+*** Towards more strongly-typed meta-data                              :epic:
 
 When we introduced the =ptree= based meta-data, we thought that the
 flexibility of the format would provide the required
@@ -614,6 +614,25 @@ decoupling. However, there are downsides to this flexibility:
   decisions to the formatters (e.g. copy a kvp from model module or
   parent module to class, etc). This is because only the formatters
   know what kvps to copy.
+
+A better solution for this would be to create a meta-data model. It
+has the following components:
+
+- a set of strong types to describe the ptree: string, bool, etc.
+- a set of _field definitions_; field name, field type and so
+  on. These are used to read _fields_ from the meta-data.
+- a container for fields, perhaps _object_.
+- a _reader_ that takes the ptree and the field definitions and
+  instantiates the object.
+
+We could almost copy and paste a JSON implementation, except we need
+something like a schema.
+
+In this new world, each model simply provides their set of field
+definitions. Further, the meta-data model could even handle "local"
+and "global" settings - that is, overrides. We just need to supply
+both ptrees and it will do the right thing. The final object it
+outputs already takes into account any local overrides.
 
 *** Write blog post on reflexive programming                          :story:
 
