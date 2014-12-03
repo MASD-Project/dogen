@@ -18,17 +18,17 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-02 Tue 19:58]
+Clock summary at [2014-12-03 Wed 08:51]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *3:05* |      |      |
+| *Total time*                                                    | *3:53* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 3:05 |      |
+| Active                                                          |        | 3:53 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:15 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
-| STARTED Analysis on returning global settings by formatter      |        |      | 1:30 |
+| STARTED Analysis on returning global settings by formatter      |        |      | 2:18 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -96,6 +96,7 @@ internally. This should ensure the correct order of initialisation. We
 should also do a bit of a refresher on the fiasco to refresh it.
 
 *** STARTED Analysis on returning global settings by formatter        :story:
+    CLOCK: [2014-12-03 Wed 08:03]--[2014-12-03 Wed 08:51] =>  0:48
     CLOCK: [2014-12-02 Tue 19:14]--[2014-12-02 Tue 19:58] =>  0:44
     CLOCK: [2014-12-02 Tue 08:03]--[2014-12-02 Tue 08:49] =>  0:46
 
@@ -166,22 +167,30 @@ formatter settings this is a problem.
   another interface from the formatter to do this job: for example we
   could provide global and local settings to an opaque settings
   factory and it could then determine how to toggle its state.
+- file settings seems to violate the rule that settings are generated
+  off of the meta-data. All other settings are obtained from meta-data
+  factories. It could be argued that we will in the future also read
+  file settings from the meta-data; However, the key point is that the
+  main source of file settings is internal even though there may be
+  meta-data overrides. This is not the case with everything else. This
+  raises the question as to whether we should have file settings for
+  meta-data and something else for the generated data.
 
 *Final Understanding*
 
 - change the formatter interface to format on entity rather than
-  concrete classes. Add validation for the dynamic casting.
+  concrete classes. Add validation for the dynamic casting of the
+  entity.
+- change formatter interface to return the RTTI of the entity
+  descendant it can process.
 - change registrar to have a single container of formatters.
 - remove settings from entity and from transformation.
 - change formatters workflow to work off of a entity, local
   settings, global settings and formatter.
-- change formatter interface to return the RTTI of the entity
-  descendant it can process.
 - change splitter and container to work off of RTTI instead: container
   is just a map of RTTI to formatter interface, splitter does this
   splitting.
-- create a settings workflow that outputs a settings class 
-
+- create a settings workflow
 
 *** Add support for opaque formatter settings                         :story:
 
