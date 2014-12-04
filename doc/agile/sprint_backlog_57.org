@@ -18,18 +18,18 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-04 Thu 19:55]
+Clock summary at [2014-12-04 Thu 20:48]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *4:26* |      |      |
+| *Total time*                                                    | *4:51* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 4:26 |      |
+| Active                                                          |        | 4:51 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:15 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
-| STARTED Analysis towards more strongly-typed meta-data          |        |      | 0:29 |
+| STARTED Analysis towards more strongly-typed meta-data          |        |      | 0:54 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -195,7 +195,10 @@ formatter settings this is a problem.
 - create a settings workflow
 
 *** STARTED Analysis towards more strongly-typed meta-data             :epic:
+    CLOCK: [2014-12-04 Thu 20:20]--[2014-12-04 Thu 20:45] =>  0:25
     CLOCK: [2014-12-04 Thu 19:26]--[2014-12-04 Thu 19:55] =>  0:29
+
+*Random Thoughts*
 
 When we introduced the =ptree= based meta-data, we thought that the
 flexibility of the format would provide the required
@@ -247,10 +250,13 @@ How it will work:
 - field definitions should state if they are local or global or both
   (e.g. only model module, only entity or can be on both via
   overrides). This allows us to validate that the user has placed
-  settings in the right place.
+  settings in the right place. This could be called _scope_.
 - during SML merging we process the overrides: the relevant fields of
   the model module are replicated to every single SML object, and
   local settings take precedence.
+- we should expand the meta-data object with every entity to contain
+  all of the global settings. This is ok, even though we have
+  scopes. The expansion should be in SML.
 - we should use the meta-data object directly rather than construct
   local settings for the following purposes:
   - generating the file name: cpp settings, facet settings, formatter
@@ -271,6 +277,21 @@ How it will work:
   there is additional processing that needs to be done.
 - existing settings factories take the meta-data object rather than
   the ptree.
+- things we need to do workflow:
+  - determine which formatters are on for each qname, using the
+    meta-data. Need a name for this. Must take into account the fact
+    that some qnames may have formatters disabled: process dependency
+    graph.
+  - namer: generate all the file names for all qnames, taking
+    meta-data into account. Requires a full SML model, or just
+    meta-data object and qname.
+  - includer: generate all the includes for all the target qnames
+    using the file names container and the enabled
+    formatters. Requires a full SML model.
+  - formatter properties: we need to process the model to generate
+    type specific formatter properties for each type. May require
+    meta-data. Requires a full SML model.
+  - call the formatter with all of these.
 
 *** Consider renaming model module to root module                     :story:
 
