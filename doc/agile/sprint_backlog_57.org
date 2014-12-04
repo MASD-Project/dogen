@@ -18,14 +18,14 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-04 Thu 20:48]
+Clock summary at [2014-12-04 Thu 21:44]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *4:51* |      |      |
+| *Total time*                                                    | *5:00* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 4:51 |      |
-| STARTED Sprint and product backlog grooming                     |        |      | 0:15 |
+| Active                                                          |        | 5:00 |      |
+| STARTED Sprint and product backlog grooming                     |        |      | 0:24 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
@@ -33,6 +33,7 @@ Clock summary at [2014-12-04 Thu 20:48]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2014-12-04 Thu 21:35]--[2014-12-04 Thu 21:44] =>  0:09
     CLOCK: [2014-12-01 Mon 17:48]--[2014-12-01 Mon 17:53] =>  0:05
     CLOCK: [2014-12-01 Mon 08:30]--[2014-12-01 Mon 08:35] =>  0:05
     CLOCK: [2014-12-01 Mon 07:51]--[2014-12-01 Mon 07:56] =>  0:05
@@ -334,9 +335,52 @@ make it easier to locate.
 
 *** Travis deployment of tags fails                                   :story:
 
-As per issue 2577 in travis, it does not support wildcards at the
+As per [[https://github.com/travis-ci/travis-ci/issues/2577][issue 2577]] in travis, it does not support wildcards at the
 moment. We need to find another way to upload packages into GitHub
 without using wildcards.
+
+Error:
+
+: dpl.1
+: Installing deploy dependencies
+: Fetching: addressable-2.3.6.gem (100%)
+: Successfully installed addressable-2.3.6
+: Fetching: multipart-post-2.0.0.gem (100%)
+: Successfully installed multipart-post-2.0.0
+: Fetching: faraday-0.9.0.gem (100%)
+: Successfully installed faraday-0.9.0
+: Fetching: sawyer-0.5.5.gem (100%)
+: Successfully installed sawyer-0.5.5
+: Fetching: octokit-3.5.2.gem (100%)
+: Successfully installed octokit-3.5.2
+: 5 gems installed
+: Fetching: mime-types-2.4.3.gem (100%)
+: Successfully installed mime-types-2.4.3
+: 1 gem installed
+: error: could not lock config file .git/config: No such file or directory
+: error: could not lock config file .git/config: No such file or directory
+: dpl.2
+: Preparing deploy
+: Logged in as Marco Craveiro
+: Deploying to repo: DomainDrivenConsulting/dogen
+: Current tag is: v0.56.2767
+: dpl.3
+: Deploying application
+: /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `initialize': No such file or directory - stage/pkg/*.deb (Errno::ENOENT)
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `new'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `upload_asset'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:118:in `block in push_app'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `each'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `push_app'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `block in deploy'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:41:in `fold'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `deploy'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:32:in `run'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:7:in `run'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/bin/dpl:5:in `<top (required)>'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `load'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `<main>'
+: failed to deploy
 
 *** Consider using an abstract factory in formatters                  :story:
 
