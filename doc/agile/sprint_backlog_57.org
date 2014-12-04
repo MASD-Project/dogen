@@ -272,6 +272,12 @@ How it will work:
 - existing settings factories take the meta-data object rather than
   the ptree.
 
+*** Consider renaming model module to root module                     :story:
+
+It would be more sensible to call it root module rather than model
+module. We should also create a root module property in the model to
+make it easier to locate.
+
 *** Add support for opaque formatter settings                         :story:
 
 - create an empty opaque formatter settings class. Create a opaque
