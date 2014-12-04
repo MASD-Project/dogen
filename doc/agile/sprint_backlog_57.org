@@ -18,17 +18,18 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-03 Wed 08:51]
+Clock summary at [2014-12-04 Thu 19:55]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *3:53* |      |      |
+| *Total time*                                                    | *4:26* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 3:53 |      |
+| Active                                                          |        | 4:26 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:15 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
-| STARTED Analysis on returning global settings by formatter      |        |      | 2:18 |
+| STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
+| STARTED Analysis towards more strongly-typed meta-data          |        |      | 0:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -96,6 +97,7 @@ internally. This should ensure the correct order of initialisation. We
 should also do a bit of a refresher on the fiasco to refresh it.
 
 *** STARTED Analysis on returning global settings by formatter        :story:
+    CLOCK: [2014-12-04 Thu 19:21]--[2014-12-04 Thu 19:25] =>  0:04
     CLOCK: [2014-12-03 Wed 08:03]--[2014-12-03 Wed 08:51] =>  0:48
     CLOCK: [2014-12-02 Tue 19:14]--[2014-12-02 Tue 19:58] =>  0:44
     CLOCK: [2014-12-02 Tue 08:03]--[2014-12-02 Tue 08:49] =>  0:46
@@ -191,6 +193,84 @@ formatter settings this is a problem.
   is just a map of RTTI to formatter interface, splitter does this
   splitting.
 - create a settings workflow
+
+*** STARTED Analysis towards more strongly-typed meta-data             :epic:
+    CLOCK: [2014-12-04 Thu 19:26]--[2014-12-04 Thu 19:55] =>  0:29
+
+When we introduced the =ptree= based meta-data, we thought that the
+flexibility of the format would provide the required
+decoupling. However, there are downsides to this flexibility:
+
+- we cannot validate the input parameters during dia transformation
+  (or SML JSON hydration); conceivably we could add yet another
+  formatter specific type that validates the inputs but that would
+  make things convoluted. This means users can supply numbers for
+  booleans, collections for scalars etc and we will only find out when
+  it comes to the SML to C++ transformation.
+- we cannot validate the keys passed in: are they actually existing
+  keys or did the user supply keys we do not support? Did the user try
+  to enable a formatter that does not exist? Because the validation is
+  done on a per-formatter basis, we can't say "all the keys that are
+  left are invalid"; we do not know what keys are left.
+- we need to duplicate the copying code in every model (and
+  potentially, in every formatter). We are leaving the copying
+  decisions to the formatters (e.g. copy a kvp from model module or
+  parent module to class, etc). This is because only the formatters
+  know what kvps to copy.
+
+A better solution for this would be to create a meta-data model. It
+has the following components:
+
+- a set of strong types to describe the ptree: string, bool, etc.
+- a set of _field definitions_; field name, field type and so
+  on. These are used to read _fields_ from the meta-data.
+- a container for fields, perhaps _object_.
+- a _reader_ that takes the ptree and the field definitions and
+  instantiates the object.
+
+We could almost copy and paste a JSON implementation, except we need
+something like a "schema".
+
+In this new world, each model simply provides their set of field
+definitions. Further, the meta-data model could even handle "local"
+and "global" settings - that is, overrides. We just need to supply
+both ptrees and it will do the right thing. The final object it
+outputs already takes into account any local overrides.
+
+How it will work:
+
+- SML objects now have a meta-data object.
+- during dia to SML transformation (or JSON transformation) we ask the
+  register for all registered fields. We then use the definitions to
+  create the meta-data object. We validate the fields: ensure they
+  have a matching field definition, the type of data is correct, etc.
+- field definitions should state if they are local or global or both
+  (e.g. only model module, only entity or can be on both via
+  overrides). This allows us to validate that the user has placed
+  settings in the right place.
+- during SML merging we process the overrides: the relevant fields of
+  the model module are replicated to every single SML object, and
+  local settings take precedence.
+- we should use the meta-data object directly rather than construct
+  local settings for the following purposes:
+  - generating the file name: cpp settings, facet settings, formatter
+    settings;
+  - determining what formatters are enabled, globally and locally: cpp
+    settngs, facet settings, formatter settings. The globally disabled
+    formatters should be filtered out from the list of registered
+    formatters.
+- even better: we should somehow associate all of the arguments for
+  the formatter with the entity, _including_ the formatters
+  themselves. If locally disabled we can just not associate it.
+- in C++ model, we have formatter settings. We can now call these
+  formatter settings because there will be no other
+  settings. Formatter settings have a component that is formatter
+  specific and another component that is common to all
+  formatters. We could use the existing structure
+- Settings are populated either directly from the meta-data object, or
+  there is additional processing that needs to be done.
+- existing settings factories take the meta-data object rather than
+  the ptree.
 
 *** Add support for opaque formatter settings                         :story:
 

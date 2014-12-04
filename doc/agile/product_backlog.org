@@ -592,48 +592,6 @@ be nice to have a meta-data flag for ignoring.
 We should probably have some kind of warning to ensure users are aware
 of the types being ignored.
 
-*** Towards more strongly-typed meta-data                              :epic:
-
-When we introduced the =ptree= based meta-data, we thought that the
-flexibility of the format would provide the required
-decoupling. However, there are downsides to this flexibility:
-
-- we cannot validate the input parameters during dia transformation
-  (or SML JSON hydration); conceivably we could add yet another
-  formatter specific type that validates the inputs but that would
-  make things convoluted. This means users can supply numbers for
-  booleans, collections for scalars etc and we will only find out when
-  it comes to the SML to C++ transformation.
-- we cannot validate the keys passed in: are they actually existing
-  keys or did the user supply keys we do not support? Did the user try
-  to enable a formatter that does not exist? Because the validation is
-  done on a per-formatter basis, we can't say "all the keys that are
-  left are invalid"; we do not know what keys are left.
-- we need to duplicate the copying code in every model (and
-  potentially, in every formatter). We are leaving the copying
-  decisions to the formatters (e.g. copy a kvp from model module or
-  parent module to class, etc). This is because only the formatters
-  know what kvps to copy.
-
-A better solution for this would be to create a meta-data model. It
-has the following components:
-
-- a set of strong types to describe the ptree: string, bool, etc.
-- a set of _field definitions_; field name, field type and so
-  on. These are used to read _fields_ from the meta-data.
-- a container for fields, perhaps _object_.
-- a _reader_ that takes the ptree and the field definitions and
-  instantiates the object.
-
-We could almost copy and paste a JSON implementation, except we need
-something like a schema.
-
-In this new world, each model simply provides their set of field
-definitions. Further, the meta-data model could even handle "local"
-and "global" settings - that is, overrides. We just need to supply
-both ptrees and it will do the right thing. The final object it
-outputs already takes into account any local overrides.
-
 *** Write blog post on reflexive programming                          :story:
 
 Basic idea is that domain expertise tightens the agile circle,
