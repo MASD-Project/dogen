@@ -18,18 +18,18 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-05 Fri 08:44]
+Clock summary at [2014-12-05 Fri 19:25]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *5:53* |      |      |
+| *Total time*                                                    | *6:34* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 5:53 |      |
+| Active                                                          |        | 6:34 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:24 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
-| STARTED Analysis towards more strongly-typed meta-data          |        |      | 1:47 |
+| STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -196,6 +196,7 @@ formatter settings this is a problem.
 - create a settings workflow
 
 *** STARTED Analysis towards more strongly-typed meta-data            :story:
+    CLOCK: [2014-12-05 Fri 18:44]--[2014-12-05 Fri 19:25] =>  0:41
     CLOCK: [2014-12-05 Fri 07:51]--[2014-12-05 Fri 08:44] =>  0:53
     CLOCK: [2014-12-04 Thu 20:20]--[2014-12-04 Thu 20:45] =>  0:25
     CLOCK: [2014-12-04 Thu 19:26]--[2014-12-04 Thu 19:55] =>  0:29
@@ -318,30 +319,55 @@ How it will work:
   - Finally we can call the formatter workflow with a structure that
     contains all of these bits of data: a formatter, its properties,
     the name, the includes.
--  things we need in the meta-data model:
-   - object has fields.
-   - fields have a value. This is a =boost::any= like class that can
-     be a string, unsigned int or bool. It may also be a collection of
-     these.
-   - fields have a name and a fully qualified name.
-   - fields have a field descriptor (meta-field, field kind).
-   - field descriptors have a name and a fully qualified name. The
-     qualified name must match the key on the ptree.
-   - fields have a path. This is all but the name in the fully
-     qualified name. We should probably create a =name= or
-     =field_name= class to encapsulate all of these.
-   - field descriptors have a type: text, number, boolean. The value
-     of the ptree must be valid according to this type.
-   - field descriptors has a flag that tells whether it the value is a
-     collection or not.
-   - field descriptors have an optional default value. It is of the
-     same type as field's value.
-   - field descriptors have a scope: any, root module, any module,
-     property or method, property, method, entity. This could perhaps
-     be represented by a bitset, supporting permutations much easily.
-   - actually we do not need the ptree at all. We can just use the
-     kvps from the inputs directly, splitting it into two things: the
-     name and the path.
+- things we need in the meta-data model:
+  - an object has fields.
+  - fields have a value pointer. This is a base class that has
+    descendants: text, number, boolean or a collection (forward list)
+    of these. Collections must be homogeneous. Value is visitable.
+  - fields have a name and a fully qualified name.
+  - fields have a field definition (meta-field, field kind).
+  - field definitions have a name and a fully qualified name. The
+    qualified name must match the key on the ptree.
+  - fields have a path. This is all but the name in the fully
+    qualified name. We should probably create a =name= or
+    =field_name= class to encapsulate all of these.
+  - field definitions have a type: text, number, boolean or a
+    collection (forward list) of these. The value of the original
+    container must be valid according to this type.
+  - field definitions have an optional default value. It is of the
+    same type as field's value. This only applies to the
+    non-collection values.
+  - field definitions have a scope: any, root module, any module,
+    property, method, entity. This could perhaps be represented by a
+    bitset, supporting permutations much easily. However, this does
+    mean we need good validation to ensure invalid permutations are
+    not supplied. Can this be even defined?
+  - in this world, we do not need the ptree at all. We can just use
+    the kvps from the inputs directly, splitting it into two things:
+    the name and the path. A forward list of pair of strings is
+    sufficient as an input to some kind of meta-data workflow.
+- meta-data workflow:
+  - receives a forward list of pair of strings, returns an object.
+  - initialised with a registrar reference.
+  - obtains field definitions from registrar.
+  - calls a validator to ensure each kvp is valid. Collections must be
+    validated by the workflow itself (e.g. should we have one or more
+    than one value against a given key).
+  - calls a factory of fields with the definition and the kvp to
+    obtain a field. Constructs an object by adding fields to it.
+  - loops through field definition collection and adds default values
+    for fields that have not been supplied.
+- in addition to workflow we need a class that takes two objects and
+  merges them. For example the root module meta-data object and any
+  type. Could be called merger. Should have a lhs and a rhs and
+  produce a result.
+
+*** Add support for coveralls
+
+Seems like all we need to do to have code coverage from travis is to
+enable it in the YML file. We should look into copying it from the
+Boost.DLL example. We also need to enable coverage on all builds,
+separately from nightlies.
 
 *** Consider renaming model module to root module                     :story:
 
