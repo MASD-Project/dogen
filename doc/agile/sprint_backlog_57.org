@@ -18,18 +18,18 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-04 Thu 21:44]
+Clock summary at [2014-12-05 Fri 08:44]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *5:00* |      |      |
+| *Total time*                                                    | *5:53* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 5:00 |      |
+| Active                                                          |        | 5:53 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:24 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
-| STARTED Analysis towards more strongly-typed meta-data          |        |      | 0:54 |
+| STARTED Analysis towards more strongly-typed meta-data          |        |      | 1:47 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -195,7 +195,8 @@ formatter settings this is a problem.
   splitting.
 - create a settings workflow
 
-*** STARTED Analysis towards more strongly-typed meta-data             :epic:
+*** STARTED Analysis towards more strongly-typed meta-data            :story:
+    CLOCK: [2014-12-05 Fri 07:51]--[2014-12-05 Fri 08:44] =>  0:53
     CLOCK: [2014-12-04 Thu 20:20]--[2014-12-04 Thu 20:45] =>  0:25
     CLOCK: [2014-12-04 Thu 19:26]--[2014-12-04 Thu 19:55] =>  0:29
 
@@ -250,14 +251,22 @@ How it will work:
   have a matching field definition, the type of data is correct, etc.
 - field definitions should state if they are local or global or both
   (e.g. only model module, only entity or can be on both via
-  overrides). This allows us to validate that the user has placed
-  settings in the right place. This could be called _scope_.
+  overrides). We must also be able to specify property-specific fields
+  and even method-specific fields. This allows us to validate that the
+  user has placed settings in the right place. This could be called
+  _scope_.
 - during SML merging we process the overrides: the relevant fields of
   the model module are replicated to every single SML object, and
   local settings take precedence.
 - we should expand the meta-data object with every entity to contain
   all of the global settings. This is ok, even though we have
-  scopes. The expansion should be in SML.
+  scopes. The expansion should be in SML, using facilities provided by
+  the meta-data model. However, we should not expand the
+  property/method meta-data objects. There is no reason to duplicate
+  all of the meta-data here. This means we need a way to distinguish
+  between expandable and non-expandable objects. The meta-data model
+  gets told what's expandable by SML (e.g. meta-data object in a class
+  is, but not in a property).
 - we should use the meta-data object directly rather than construct
   local settings for the following purposes:
   - generating the file name: cpp settings, facet settings, formatter
@@ -279,20 +288,60 @@ How it will work:
 - existing settings factories take the meta-data object rather than
   the ptree.
 - things we need to do workflow:
-  - determine which formatters are on for each qname, using the
-    meta-data. Need a name for this. Must take into account the fact
-    that some qnames may have formatters disabled: process dependency
-    graph.
-  - namer: generate all the file names for all qnames, taking
-    meta-data into account. Requires a full SML model, or just
-    meta-data object and qname.
+  - switchboard: determine which formatters are on for each qname
+    including those not in the target model. Uses the meta-data
+    object. Must take into account the fact that some qnames may have
+    formatters disabled: processes dependency graph. We need to do
+    some work on naming here. Switchboard should be the name of the
+    class that answers questions like "what formatters are on for a
+    given type" and "for a given formatter and type, is the formatter
+    on" and so on. There must be a class responsible for creating the
+    switchboard (perhaps switchboard_factory?).
+  - namer: generate all the file names for all qnames (including those
+    not in the target model). Uses the meta-data object. Requires a
+    full SML model, or perhaps just meta-data object and qname.
   - includer: generate all the includes for all the target qnames
     using the file names container and the enabled
-    formatters. Requires a full SML model.
-  - formatter properties: we need to process the model to generate
-    type specific formatter properties for each type. May require
-    meta-data. Requires a full SML model.
-  - call the formatter with all of these.
+    formatters (the switchboard). Requires a full SML model.
+  - formatter properties: we need to process the SML model to generate
+    type-specific and formatter-specific properties. May require
+    meta-data. Requires a full SML model. These need to be
+    "opaque". As with include builders, formatters must supply a
+    formatter property builder. At present these live in the C++ class
+    but that is incorrect because not all formatters need
+    them. However, we may end up having to share logic between two or
+    more formatters because it seems some formatters do share
+    properties (for example header and implementation of types). In
+    order to generate the formatter properties, we will ne
+  - transformation: we need to generate the C++ representation of the
+    SML model.
+  - Finally we can call the formatter workflow with a structure that
+    contains all of these bits of data: a formatter, its properties,
+    the name, the includes.
+-  things we need in the meta-data model:
+   - object has fields.
+   - fields have a value. This is a =boost::any= like class that can
+     be a string, unsigned int or bool. It may also be a collection of
+     these.
+   - fields have a name and a fully qualified name.
+   - fields have a field descriptor (meta-field, field kind).
+   - field descriptors have a name and a fully qualified name. The
+     qualified name must match the key on the ptree.
+   - fields have a path. This is all but the name in the fully
+     qualified name. We should probably create a =name= or
+     =field_name= class to encapsulate all of these.
+   - field descriptors have a type: text, number, boolean. The value
+     of the ptree must be valid according to this type.
+   - field descriptors has a flag that tells whether it the value is a
+     collection or not.
+   - field descriptors have an optional default value. It is of the
+     same type as field's value.
+   - field descriptors have a scope: any, root module, any module,
+     property or method, property, method, entity. This could perhaps
+     be represented by a bitset, supporting permutations much easily.
+   - actually we do not need the ptree at all. We can just use the
+     kvps from the inputs directly, splitting it into two things: the
+     name and the path.
 
 *** Consider renaming model module to root module                     :story:
 
