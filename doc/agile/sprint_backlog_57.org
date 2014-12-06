@@ -33,6 +33,8 @@ Clock summary at [2014-12-05 Fri 19:25]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2014-12-06 Sat 20:35]--[2014-12-06 Sat 20:40] =>  0:05
+    CLOCK: [2014-12-06 Sat 20:20]--[2014-12-06 Sat 20:34] =>  0:14
     CLOCK: [2014-12-04 Thu 21:35]--[2014-12-04 Thu 21:44] =>  0:09
     CLOCK: [2014-12-01 Mon 17:48]--[2014-12-01 Mon 17:53] =>  0:05
     CLOCK: [2014-12-01 Mon 08:30]--[2014-12-01 Mon 08:35] =>  0:05
@@ -362,12 +364,41 @@ How it will work:
   type. Could be called merger. Should have a lhs and a rhs and
   produce a result.
 
-*** Add support for coveralls
+*** Add support for coveralls                                         :story:
 
 Seems like all we need to do to have code coverage from travis is to
 enable it in the YML file. We should look into copying it from the
-Boost.DLL example. We also need to enable coverage on all builds,
-separately from nightlies.
+[[https://github.com/apolukhin/Boost.DLL][Boost.DLL]] [[https://github.com/apolukhin/Boost.DLL/blob/master/.travis.yml][example]]. We also need to enable coverage on all builds,
+separately from nightlies. The key parts appear to be these:
+
+:  - ../../../b2 cxxflags="--coverage -std=$CXX_STANDARD" linkflags="--coverage"
+
+and
+
+: after_success:
+:    - find ../../../bin.v2/ -name "*.gcda" -exec cp "{}" ./ \;
+:    - find ../../../bin.v2/ -name "*.gcno" -exec cp "{}" ./ \;
+:    - sudo apt-get install -qq python-yaml lcov
+:    - lcov --directory ./ --base-directory ./ --capture --output-file coverage.info
+:    - lcov --remove coverage.info '/usr*' '*/filesystem*' '*/container*' '*/core/*' '*/exception/*' '*/intrusive/*' '*/smart_ptr/*' '*/move/*' '*/fusion/*' '*/io/*' '*/function/*' '*/iterator/*' '*/preprocessor/*' '*/system/*' '*/boost/test/*' '*/boost/detail/*' '*/utility/*' '*/dll/example/*' '*/dll/test/*' '*/pe_info.hpp' '*/macho_info.hpp' -o coverage.info
+:    - gem install coveralls-lcov
+:    - cd .. && coveralls-lcov test/coverage.info
+
+*** Resolve the breaches of maximum build time                        :story:
+
+We seem to be missing the build window of 50 minutes on
+occasion.
+
+Since the packages cannot be uploaded anyway, we should consider
+disabling them for now. However, if there is anything else that we
+could do to save on build time, it would be best to do that first
+before we disable packages.
+
+*** Sanity check packages in travis                                   :story:
+
+Since we have a full VM in travis at our disposal, nothing stops us
+from installing the packages we generate and then running the sanity
+checks on them.
 
 *** Consider renaming model module to root module                     :story:
 
