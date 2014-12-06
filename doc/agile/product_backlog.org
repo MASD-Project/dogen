@@ -3,9 +3,62 @@
 #+tags: { story(s) epic(e) }
 
 * Stories
+
 ** Active
 
 Stories that we intend to look at, at some point.
+
+*** Multi-purpose models per language                                  :epic:
+
+This story is a very vague story that keeps track of ideas on making
+dogen useful for code generators of other kinds.
+
+One of the stories in the backlog covers other targets of code generation:
+
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-thrift-and-protocol-buffers%20][Add support for thrift and protocol buffers]]
+
+Originally we thought about adding support for these within a model;
+that is to say, one would have additional serialisation "kinds"
+available with a given dogen model. However, there is another way to
+look at this; one could make other kinds of code generators using the
+dogen infrastructure.
+
+That is, contrary to it's name, dogen isn't just for "domain model
+generation". Nothing stops one from building a protocol buffers or
+thrift compiler using dogen infrastructure that outputs *exactly* the
+same code as the original tools. All that would be required to do so
+is:
+
+- create a front-end that reads in their specification;
+- to ensure SML is expressive enough to cover all of the aspects of
+  the code that needs to be generated;
+- to create the formatters.
+
+In this view of the world, we have two options:
+
+- create groups of facets within the =cpp= model; for example,
+  the thrift group, the domain generation group etc. These are
+  mutually incompatible sets of formatters and only one of them can be
+  enabled for a given execution.
+- create models at the same level of the =cpp= model. We could group
+  them by language (e.g. the =cpp= namespace). However, this seems
+  less practical because these models would probably have a lot in
+  common. This is yet to be seen as we need to finish the large
+  formatters refactor before we can answer this question.
+
+Taking this to its logical consequence, even a tool as complex as ODB
+could potentially be implementable in this way: one can conceive a
+clang front-end that reads in source code and generates an SML model;
+this model then can be used to generate C++ code that is identical to
+the code produced by ODB (again assuming that SML is extended to be
+expressive enough to represent all the constructs required by ODB).
+
+This would be a compelling proposition if we had =stitch= because it
+would make the generation of formatters quite trivial and would also
+mean that people that want to create code generators don't have to
+worry about a lot of the boilerplate code. However, the biggest
+problem is that we'd be imposing a large and complex "framework" on
+them with all the evilness that that entails.
 
 *** Utility meta-data factory                                         :story:
 
