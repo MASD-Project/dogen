@@ -18,13 +18,13 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-06 Sat 21:40]
+Clock summary at [2014-12-06 Sat 21:52]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *7:52* |      |      |
+| *Total time*                                                    | *8:04* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 7:52 |      |
+| Active                                                          |        | 8:04 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:43 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
@@ -32,6 +32,7 @@ Clock summary at [2014-12-06 Sat 21:40]
 | STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:28 |
 | STARTED Add support for coveralls                               |        |      | 0:25 |
 | STARTED Resolve the breaches of maximum build time              |        |      | 0:34 |
+| STARTED Sanity check packages in travis                         |        |      | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -406,7 +407,8 @@ before we disable packages.
 - add flags to produce only minimal packaging
 - package and run tests in the same invocation of ninja
 
-*** Sanity check packages in travis                                   :story:
+*** STARTED Sanity check packages in travis                           :story:
+    CLOCK: [2014-12-06 Sat 21:40]--[2014-12-06 Sat 21:52] =>  0:12
 
 Since we have a full VM in travis at our disposal, nothing stops us
 from installing the packages we generate and then running the sanity

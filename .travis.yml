@@ -49,6 +49,9 @@ script:
   - cd output
   - cmake ${GIT_REPO} -DWITH_COVERAGE=on -DWITH_MINIMAL_PACKAGING=on -G Ninja
   - ninja -j2 package run_all_specs
+  - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
+  - cd /tmp
+  - /usr/bin/dogen_knitter --version
 
 after_success:
     - find . -name "*.gcda" -exec cp "{}" ./ \;
