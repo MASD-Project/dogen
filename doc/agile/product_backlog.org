@@ -10,10 +10,10 @@ Stories that we intend to look at, at some point.
 
 *** Multi-purpose models per language                                  :epic:
 
-#begin_quote
+#+begin_quote
 This story is a very vague story that keeps track of ideas on making
 dogen useful for code generators of other kinds.
-#end_quote
+#+end_quote
 
 One of the stories in the backlog covers other targets of code generation:
 
