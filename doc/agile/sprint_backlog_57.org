@@ -18,18 +18,20 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-05 Fri 19:25]
+Clock summary at [2014-12-06 Sat 21:40]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *6:34* |      |      |
+| *Total time*                                                    | *7:52* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 6:34 |      |
-| STARTED Sprint and product backlog grooming                     |        |      | 0:24 |
+| Active                                                          |        | 7:52 |      |
+| STARTED Sprint and product backlog grooming                     |        |      | 0:43 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
 | STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:28 |
+| STARTED Add support for coveralls                               |        |      | 0:25 |
+| STARTED Resolve the breaches of maximum build time              |        |      | 0:34 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -364,11 +366,12 @@ How it will work:
   type. Could be called merger. Should have a lhs and a rhs and
   produce a result.
 
-*** Add support for coveralls                                         :story:
+*** STARTED Add support for coveralls                                 :story:
+    CLOCK: [2014-12-06 Sat 20:40]--[2014-12-06 Sat 21:05] =>  0:25
 
 Seems like all we need to do to have code coverage from travis is to
 enable it in the YML file. We should look into copying it from the
-[[https://github.com/apolukhin/Boost.DLL][Boost.DLL]] [[https://github.com/apolukhin/Boost.DLL/blob/master/.travis.yml][example]]. We also need to enable coverage on all builds,
+[[https://github.com/apolukhin/Boost.DLL][Boost.DLL]] [[https://raw.githubusercontent.com/apolukhin/Boost.DLL/master/.travis.yml][example]]. We also need to enable coverage on all builds,
 separately from nightlies. The key parts appear to be these:
 
 :  - ../../../b2 cxxflags="--coverage -std=$CXX_STANDARD" linkflags="--coverage"
@@ -384,7 +387,11 @@ and
 :    - gem install coveralls-lcov
 :    - cd .. && coveralls-lcov test/coverage.info
 
-*** Resolve the breaches of maximum build time                        :story:
+*** STARTED Resolve the breaches of maximum build time                :story:
+    CLOCK: [2014-12-06 Sat 21:14]--[2014-12-06 Sat 21:39] =>  0:25
+    CLOCK: [2014-12-06 Sat 21:05]--[2014-12-06 Sat 21:14] =>  0:09
+
+*Initial Understanding*
 
 We seem to be missing the build window of 50 minutes on
 occasion.
@@ -393,6 +400,11 @@ Since the packages cannot be uploaded anyway, we should consider
 disabling them for now. However, if there is anything else that we
 could do to save on build time, it would be best to do that first
 before we disable packages.
+
+*Final Understanding*
+
+- add flags to produce only minimal packaging
+- package and run tests in the same invocation of ninja
 
 *** Sanity check packages in travis                                   :story:
 

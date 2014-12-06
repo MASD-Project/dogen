@@ -37,48 +37,59 @@ endif()
 #
 # Component configuration
 #
-set(components applications libraries headers tests)
-if(DOXYGEN_FOUND)
-    set(components ${components} documentation)
+if(WITH_MINIMAL_PACKAGING)
+    set(components applications)
+    set(CPACK_COMPONENTS_ALL ${components})
+
+    set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen")
+    set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
+        "The Domain Generator - Generates source code for domain driven development.")
+    set(CPACK_COMPONENT_APPLICATIONS_GROUP "Runtime")
+
+else()
+    set(components applications libraries headers tests)
+    if(DOXYGEN_FOUND)
+        set(components ${components} documentation)
+    endif()
+    set(CPACK_COMPONENTS_ALL ${components})
+
+    set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen")
+    set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
+        "The Domain Generator - Generates source code for domain driven development.")
+
+    set(CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Dogen Libraries")
+    set(CPACK_COMPONENT_LIBRARIES_DESCRIPTION
+        "Static libraries used to build programs using Dogen")
+
+    set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "Dogen C++ Headers")
+    set(CPACK_COMPONENT_HEADERS_DESCRIPTION
+        "C/C++ header files for use with Dogen libraries")
+
+    set(CPACK_COMPONENT_TESTS_DISPLAY_NAME "Dogen unit tests")
+    set(CPACK_COMPONENT_TESTS_DESCRIPTION
+        "Unit tests used to test Dogen")
+
+    if(DOXYGEN_FOUND)
+        set(CPACK_COMPONENT_DOCUMENTATION_DISPLAY_NAME "Dogen documentation")
+        set(CPACK_COMPONENT_DOCUMENTATION_DESCRIPTION
+            "Dogen documentation")
+    endif()
+
+    set(CPACK_COMPONENT_HEADERS_DEPENDS libraries)
+    set(CPACK_COMPONENT_TESTS_DEPENDS applications)
+
+    set(CPACK_COMPONENT_APPLICATIONS_GROUP "Runtime")
+    set(CPACK_COMPONENT_LIBRARIES_GROUP "Development")
+    set(CPACK_COMPONENT_HEADERS_GROUP "Development")
+    set(CPACK_COMPONENT_TESTS_GROUP "Development")
+
+    if(DOXYGEN_FOUND)
+        set(CPACK_COMPONENT_DOCUMENTATION_GROUP "Development")
+    endif()
+
+    set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
+        "Tools needed to develop applications using Dogen")
 endif()
-set(CPACK_COMPONENTS_ALL ${components})
-
-set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen")
-set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
-    "The Domain Generator - Generates source code for domain driven development.")
-
-set(CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Dogen Libraries")
-set(CPACK_COMPONENT_LIBRARIES_DESCRIPTION
-   "Static libraries used to build programs using Dogen")
-
-set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "Dogen C++ Headers")
-set(CPACK_COMPONENT_HEADERS_DESCRIPTION
-    "C/C++ header files for use with Dogen libraries")
-
-set(CPACK_COMPONENT_TESTS_DISPLAY_NAME "Dogen unit tests")
-set(CPACK_COMPONENT_TESTS_DESCRIPTION
-    "Unit tests used to test Dogen")
-
-if(DOXYGEN_FOUND)
-    set(CPACK_COMPONENT_DOCUMENTATION_DISPLAY_NAME "Dogen documentation")
-    set(CPACK_COMPONENT_DOCUMENTATION_DESCRIPTION
-        "Dogen documentation")
-endif()
-
-set(CPACK_COMPONENT_HEADERS_DEPENDS libraries)
-set(CPACK_COMPONENT_TESTS_DEPENDS applications)
-
-set(CPACK_COMPONENT_APPLICATIONS_GROUP "Runtime")
-set(CPACK_COMPONENT_LIBRARIES_GROUP "Development")
-set(CPACK_COMPONENT_HEADERS_GROUP "Development")
-set(CPACK_COMPONENT_TESTS_GROUP "Development")
-
-if(DOXYGEN_FOUND)
-    set(CPACK_COMPONENT_DOCUMENTATION_GROUP "Development")
-endif()
-
-set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
-    "Tools needed to develop applications using Dogen")
 
 set(CPACK_COMPONENTS_IGNORE_GROUPS TRUE)
 set(CPACK_ARCHIVE_COMPONENT_INSTALL TRUE)

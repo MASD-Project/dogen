@@ -103,6 +103,10 @@ if(WITH_PROFILING)
             "${profiling_flags} -Xclang -coverage-version='407*'")
 
     endif()
+else()
+    if(WITH_COVERAGE)
+        set(profiling_flags "--coverage")
+    endif()
 endif()
 
 # enable RTTI

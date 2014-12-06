@@ -42,6 +42,8 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 # options
 option(WITH_DEBUG "Build the project with debug symbols" off)
 option(WITH_PROFILING "Build the project with profiling support" off)
+option(WITH_COVERAGE "Build the project with code coverage support" off)
+option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 
 #
 # check for dependencies
@@ -109,6 +111,20 @@ elseif(UNIX)
     else()
         message(STATUS "eos not found.")
     endif()
+endif()
+
+# coverage
+if(WITH_COVERAGE)
+    message(STATUS "Build the project WITH code coverage support")
+else()
+    message(STATUS "Build the project WITHOUT code coverage support")
+endif()
+
+# packaging type
+if(WITH_MINIMAL_PACKAGING)
+    message(STATUS "Packaging just the main application")
+else()
+    message(STATUS "Packaging everything main application")
 endif()
 
 # profiling
@@ -205,7 +221,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${stage_bin_dir})
 
 # version info
 set(DOGEN_MAJOR_VERSION 0)
-set(DOGEN_MINOR_VERSION 57)
+set(DOGEN_MINOR_VERSION 56)
 set(DOGEN_PATCH_VERSION ${GIT_COMMIT_COUNT})
 set(DOGEN_VERSION "${DOGEN_MAJOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")

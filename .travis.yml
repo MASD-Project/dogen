@@ -37,14 +37,25 @@ install:
   - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
 
+  # coverage
+  - sudo apt-get install lcov
+  - sudo apt-get install -qq python-yaml lcov
+  - gem install coveralls-lcov
+
 script: 
   - export GIT_REPO="`pwd`"
   - cd ..
   - mkdir output
   - cd output
-  - cmake ${GIT_REPO} -G Ninja
-  - ninja -j2 package
-  - ninja -j2 run_all_specs
+  - cmake ${GIT_REPO} -DWITH_COVERAGE=on -DWITH_MINIMAL_PACKAGING=on -G Ninja
+  - ninja -j2 package run_all_specs
+
+after_success:
+    - find . -name "*.gcda" -exec cp "{}" ./ \;
+    - find . -name "*.gcno" -exec cp "{}" ./ \;
+    - lcov --directory ./ --base-directory ./ --capture --output-file coverage.info
+    - lcov --remove coverage.info '/usr*' -o coverage.info
+    - coveralls-lcov coverage.info
   
 notifications:
   email:
