@@ -354,6 +354,16 @@ How it will work:
   - Finally we can call the formatter workflow with a structure that
     contains all of these bits of data: a formatter, its properties,
     the name, the includes.
+- SML model needs a registrar - or perhaps it should actually be part
+  of the meta-data model itself - for the field
+  definitions. Formatters etc inject definitions into it.
+- SML objects have meta-data object instead of the ptree; Taggable is
+  perhaps not the best name for the concept but we need to think of a
+  better alternative. Extensible perhaps?
+- Note: meta-data is not a great name. In a way, SML is meta-data and
+  pretty much everything in dogen is a meta-model. This is more like a
+  set of dynamic extensions to meta-models so perhaps we could call it
+  =dynamic=?
 - things we need in the meta-data model:
   - an object has fields.
   - fields have a value pointer. This is a base class that has
@@ -381,6 +391,11 @@ How it will work:
     the kvps from the inputs directly, splitting it into two things:
     the name and the path. A forward list of pair of strings is
     sufficient as an input to some kind of meta-data workflow.
+  - field definitions could support a "mandatory" attribute, in which
+    case the user must supply a value.
+  - field definitions could support a "domain" of values, e.g. an
+    enumeration, in which case user must supply one of a set of
+    values.
 - meta-data workflow:
   - receives a forward list of pair of strings, returns an object.
   - initialised with a registrar reference.
