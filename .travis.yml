@@ -65,7 +65,7 @@ script:
   - mkdir output
   - cd output
   - export CTEST_OUTPUT_ON_FAILURE=1
-  - cmake ${GIT_REPO} -DWITH_DEBUG=on -DWITH_PROFILING=on -DWITH_MINIMAL_PACKAGING=on -G Ninja
+  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   - ninja -j2 package run_all_specs
   - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   - cd /tmp
