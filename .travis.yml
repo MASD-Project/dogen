@@ -31,35 +31,28 @@ install:
 
   # g++4.9
   - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.9; fi
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.9"; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9" GCOV="gcov-4.9"; fi
 
   # clang 3.4
   - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
-  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4" CC="clang-3.4"; fi
 
   # coverage
-  - sudo apt-get install lcov
-  - sudo apt-get install -qq python-yaml lcov
-  - gem install coveralls-lcov
+  - sudo pip install cpp-coveralls
 
 script: 
   - export GIT_REPO="`pwd`"
   - cd ..
   - mkdir output
   - cd output
-  - cmake ${GIT_REPO} -DWITH_COVERAGE=on -DWITH_MINIMAL_PACKAGING=on -G Ninja
+  - export CTEST_OUTPUT_ON_FAILURE=1
+  - cmake ${GIT_REPO} -DWITH_DEBUG=on -DWITH_PROFILING=on -DWITH_MINIMAL_PACKAGING=on -G Ninja
   - ninja -j2 package run_all_specs
+  - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e /usr
   - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   - cd /tmp
   - /usr/bin/dogen_knitter --version
 
-after_success:
-    - find . -name "*.gcda" -exec cp "{}" ./ \;
-    - find . -name "*.gcno" -exec cp "{}" ./ \;
-    - lcov --directory ./ --base-directory ./ --capture --output-file coverage.info
-    - lcov --remove coverage.info '/usr*' -o coverage.info
-    - coveralls-lcov coverage.info
-  
 notifications:
   email:
     recipients:

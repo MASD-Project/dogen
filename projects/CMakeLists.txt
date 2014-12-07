@@ -101,11 +101,6 @@ if(WITH_PROFILING)
         # 407 for gcc 4.7 compatibility of the gcov format.
         set(profiling_flags
             "${profiling_flags} -Xclang -coverage-version='407*'")
-
-    endif()
-else()
-    if(WITH_COVERAGE)
-        set(profiling_flags "--coverage")
     endif()
 endif()
 

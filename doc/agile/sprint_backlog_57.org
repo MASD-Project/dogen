@@ -18,19 +18,19 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-06 Sat 21:52]
+Clock summary at [2014-12-07 Sun 01:44]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *8:04* |      |      |
+| *Total time*                                                    | *8:35* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 8:04 |      |
+| Active                                                          |        | 8:35 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:43 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
 | STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:28 |
-| STARTED Add support for coveralls                               |        |      | 0:25 |
+| STARTED Add support for coveralls                               |        |      | 0:56 |
 | STARTED Resolve the breaches of maximum build time              |        |      | 0:34 |
 | STARTED Sanity check packages in travis                         |        |      | 0:12 |
 #+end:
@@ -368,6 +368,7 @@ How it will work:
   produce a result.
 
 *** STARTED Add support for coveralls                                 :story:
+    CLOCK: [2014-12-07 Sun 01:12]--[2014-12-07 Sun 01:43] =>  0:31
     CLOCK: [2014-12-06 Sat 20:40]--[2014-12-06 Sat 21:05] =>  0:25
 
 Seems like all we need to do to have code coverage from travis is to
@@ -387,6 +388,19 @@ and
 :    - lcov --remove coverage.info '/usr*' '*/filesystem*' '*/container*' '*/core/*' '*/exception/*' '*/intrusive/*' '*/smart_ptr/*' '*/move/*' '*/fusion/*' '*/io/*' '*/function/*' '*/iterator/*' '*/preprocessor/*' '*/system/*' '*/boost/test/*' '*/boost/detail/*' '*/utility/*' '*/dll/example/*' '*/dll/test/*' '*/pe_info.hpp' '*/macho_info.hpp' -o coverage.info
 :    - gem install coveralls-lcov
 :    - cd .. && coveralls-lcov test/coverage.info
+
+Another way seems to be using gcov, as per [[https://github.com/fabianschuiki/Maxwell][Maxwell]] [[https://raw.githubusercontent.com/fabianschuiki/Maxwell/master/.travis.yml][travis.yml]]:
+
+: - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
+:  - sudo pip install cpp-coveralls
+
+and
+
+: script:
+:  - export CTEST_OUTPUT_ON_FAILURE=1
+:  - cmake -DCMAKE_BUILD_TYPE=gcov . && make && make test
+: after_success:
+:  - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e CMakeFiles -E ".*/test/.*" -E ".*/mock/.*" -e maxwell/gen -e language -e thirdparty -e maxwell/ast/nodes -e maxwell/driver/gramdiag.c -e maxwell/driver/Parser.cpp -e maxwell/driver/Parser.hpp -e maxwell/driver/Scanner.cpp -e maxwell/driver/position.hh -e maxwell/driver/stack.hh -e maxwell/driver/location.hh
 
 *** STARTED Resolve the breaches of maximum build time                :story:
     CLOCK: [2014-12-06 Sat 21:14]--[2014-12-06 Sat 21:39] =>  0:25
