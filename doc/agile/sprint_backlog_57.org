@@ -18,19 +18,19 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-07 Sun 01:44]
+Clock summary at [2014-12-07 Sun 14:56]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *8:35* |      |      |
+| *Total time*                                                    | *8:45* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 8:35 |      |
+| Active                                                          |        | 8:45 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:43 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
 | STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:28 |
-| STARTED Add support for coveralls                               |        |      | 0:56 |
+| STARTED Add support for coveralls                               |        |      | 1:06 |
 | STARTED Resolve the breaches of maximum build time              |        |      | 0:34 |
 | STARTED Sanity check packages in travis                         |        |      | 0:12 |
 #+end:
@@ -368,8 +368,22 @@ How it will work:
   produce a result.
 
 *** STARTED Add support for coveralls                                 :story:
+    CLOCK: [2014-12-07 Sun 14:44]--[2014-12-07 Sun 14:54] =>  0:10
     CLOCK: [2014-12-07 Sun 01:12]--[2014-12-07 Sun 01:43] =>  0:31
     CLOCK: [2014-12-06 Sat 20:40]--[2014-12-06 Sat 21:05] =>  0:25
+
+Seems like all we need to do to have code coverage from travis is to
+enable it in the YML file.
+
+*Direct use of Coveralls failed*
+
+We had to remove coveralls:
+
+: - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e /usr
+
+This was generating over 10 MB of logging so the build got terminated.
+
+*Travis Examples*
 
 Seems like all we need to do to have code coverage from travis is to
 enable it in the YML file. We should look into copying it from the
@@ -401,6 +415,9 @@ and
 :  - cmake -DCMAKE_BUILD_TYPE=gcov . && make && make test
 : after_success:
 :  - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e CMakeFiles -E ".*/test/.*" -E ".*/mock/.*" -e maxwell/gen -e language -e thirdparty -e maxwell/ast/nodes -e maxwell/driver/gramdiag.c -e maxwell/driver/Parser.cpp -e maxwell/driver/Parser.hpp -e maxwell/driver/Scanner.cpp -e maxwell/driver/position.hh -e maxwell/driver/stack.hh -e maxwell/driver/location.hh
+
+Yet another way seems to be creating a script to do coverage, as per
+[[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
 
 *** STARTED Resolve the breaches of maximum build time                :story:
     CLOCK: [2014-12-06 Sat 21:14]--[2014-12-06 Sat 21:39] =>  0:25
