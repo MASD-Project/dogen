@@ -18,24 +18,25 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-07 Sun 14:56]
+Clock summary at [2014-12-07 Sun 16:00]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *8:45* |      |      |
+| *Total time*                                                    | *8:53* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 8:45 |      |
-| STARTED Sprint and product backlog grooming                     |        |      | 0:43 |
+| Active                                                          |        | 8:53 |      |
+| STARTED Sprint and product backlog grooming                     |        |      | 0:51 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
+| COMPLETED Resolve the breaches of maximum build time            |        |      | 0:34 |
+| COMPLETED Install packages in travis after building             |        |      | 0:12 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
 | STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:28 |
 | STARTED Add support for coveralls                               |        |      | 1:06 |
-| STARTED Resolve the breaches of maximum build time              |        |      | 0:34 |
-| STARTED Sanity check packages in travis                         |        |      | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2014-12-07 Sun 15:50]--[2014-12-07 Sun 15:58] =>  0:08
     CLOCK: [2014-12-06 Sat 20:35]--[2014-12-06 Sat 20:40] =>  0:05
     CLOCK: [2014-12-06 Sat 20:20]--[2014-12-06 Sat 20:34] =>  0:14
     CLOCK: [2014-12-04 Thu 21:35]--[2014-12-04 Thu 21:44] =>  0:09
@@ -101,6 +102,35 @@ the static variable initialisation fiasco. In order to fix this we
 should add methods to the structs that contain static variables
 internally. This should ensure the correct order of initialisation. We
 should also do a bit of a refresher on the fiasco to refresh it.
+
+*** COMPLETED Resolve the breaches of maximum build time              :story:
+    CLOSED: [2014-12-07 Sun 15:57]
+    CLOCK: [2014-12-06 Sat 21:14]--[2014-12-06 Sat 21:39] =>  0:25
+    CLOCK: [2014-12-06 Sat 21:05]--[2014-12-06 Sat 21:14] =>  0:09
+
+*Initial Understanding*
+
+We seem to be missing the build window of 50 minutes on
+occasion.
+
+Since the packages cannot be uploaded anyway, we should consider
+disabling them for now. However, if there is anything else that we
+could do to save on build time, it would be best to do that first
+before we disable packages.
+
+*Final Understanding*
+
+- add flags to produce only minimal packaging
+- package and run tests in the same invocation of ninja
+
+*** COMPLETED Install packages in travis after building               :story:
+    CLOSED: [2014-12-07 Sun 15:58]
+    CLOCK: [2014-12-06 Sat 21:40]--[2014-12-06 Sat 21:52] =>  0:12
+
+Since we have a full VM in travis at our disposal, nothing stops us
+from installing the packages we generate and then running the sanity
+checks on them. For this story we just need to prove that the install
+works. We then need to pick up the sanity work where we left off.
 
 *** STARTED Analysis on returning global settings by formatter        :story:
     CLOCK: [2014-12-04 Thu 19:21]--[2014-12-04 Thu 19:25] =>  0:04
@@ -383,6 +413,16 @@ We had to remove coveralls:
 
 This was generating over 10 MB of logging so the build got terminated.
 
+Note also that we must add coverage after the script executes or else
+we risk doing coverage whilst the build is taking place. Hopefully
+this is the reason for these errors:
+
+: /home/travis/build/DomainDrivenConsulting/output/projects/test_models/class_without_attributes/src/CMakeFiles/class_without_attributes.dir/io/package_1/class_1_io.cpp.gcda:cannot open data file, assuming not executed
+: File '/usr/include/c++/4.9/bits/basic_ios.h'
+: No executable lines
+
+We should read up on the [[http://docs.travis-ci.com/user/build-lifecycle/][life-cycle]] properly.
+
 *Travis Examples*
 
 Seems like all we need to do to have code coverage from travis is to
@@ -418,32 +458,6 @@ and
 
 Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
-
-*** STARTED Resolve the breaches of maximum build time                :story:
-    CLOCK: [2014-12-06 Sat 21:14]--[2014-12-06 Sat 21:39] =>  0:25
-    CLOCK: [2014-12-06 Sat 21:05]--[2014-12-06 Sat 21:14] =>  0:09
-
-*Initial Understanding*
-
-We seem to be missing the build window of 50 minutes on
-occasion.
-
-Since the packages cannot be uploaded anyway, we should consider
-disabling them for now. However, if there is anything else that we
-could do to save on build time, it would be best to do that first
-before we disable packages.
-
-*Final Understanding*
-
-- add flags to produce only minimal packaging
-- package and run tests in the same invocation of ninja
-
-*** STARTED Sanity check packages in travis                           :story:
-    CLOCK: [2014-12-06 Sat 21:40]--[2014-12-06 Sat 21:52] =>  0:12
-
-Since we have a full VM in travis at our disposal, nothing stops us
-from installing the packages we generate and then running the sanity
-checks on them.
 
 *** Consider renaming model module to root module                     :story:
 
