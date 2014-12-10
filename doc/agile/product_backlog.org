@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider generating dependency injection code                     :story:
+
+If one could mark constructors as =injectable= in a diagram, we could
+then generate something like a castle windsor container and do all of
+the management of dependency injection from generated code. We also
+have access to all interfaces and their implementations so a lot of
+the clever logic done at run time by castle/guice etc could be done in
+the generated code.
+
 *** Consider using Given-When-Then for unit tests                     :story:
 
 We should check the Martin Fowler article on [[http://martinfowler.com/bliki/GivenWhenThen.html][Given-When-Then]] as a way
