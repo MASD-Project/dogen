@@ -8,6 +8,25 @@
 
 Stories that we intend to look at, at some point.
 
+*** Evaluate all of our data structures based on usage                :story:
+
+This presentation is very interesting:
+
+[[https://www.youtube.com/watch?v%3DrX0ItVEVjHc][CppCon 2014: Mike Acton "Data-Oriented Design and C++"]]
+
+The presenter makes a lot of points that are directly applicable to
+Dogen. The main one is that we need to look at all the data structures
+to see how they are used, and to try to extract deeply nested if's
+that in many cases can easily be extracted from the bottom and moved
+to the top. There are many other excellent points, we probably need to
+watch the presentation again and write each of them down.
+
+The key point though is that the re-engineering exercise should only
+be done after we finished all of the current refactorings - we must
+make sure the code does all that it is intended to do first and then
+tackle the Acton's suggestions. This is to ensure that we have
+captured all the main use cases. Data analysis can be done after this.
+
 *** Consider generating dependency injection code                     :story:
 
 If one could mark constructors as =injectable= in a diagram, we could
