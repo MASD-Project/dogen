@@ -132,7 +132,8 @@ from installing the packages we generate and then running the sanity
 checks on them. For this story we just need to prove that the install
 works. We then need to pick up the sanity work where we left off.
 
-*** STARTED Analysis on returning global settings by formatter        :story:
+*** COMPLETED Analysis on returning global settings by formatter      :story:
+    CLOSED: [2014-12-13 Sat 14:51]
     CLOCK: [2014-12-04 Thu 19:21]--[2014-12-04 Thu 19:25] =>  0:04
     CLOCK: [2014-12-03 Wed 08:03]--[2014-12-03 Wed 08:51] =>  0:48
     CLOCK: [2014-12-02 Tue 19:14]--[2014-12-02 Tue 19:58] =>  0:44
@@ -228,9 +229,11 @@ formatter settings this is a problem.
 - change splitter and container to work off of RTTI instead: container
   is just a map of RTTI to formatter interface, splitter does this
   splitting.
-- create a settings workflow
 
-*** STARTED Analysis towards more strongly-typed meta-data            :story:
+This story will be revisited after we implement =dynamic=.
+
+*** COMPLETED Analysis towards more strongly-typed meta-data          :story:
+    CLOSED: [2014-12-13 Sat 13:32]
     CLOCK: [2014-12-13 Sat 13:14]--[2014-12-13 Sat 13:30] =>  0:16
     CLOCK: [2014-12-05 Fri 18:44]--[2014-12-05 Fri 19:25] =>  0:41
     CLOCK: [2014-12-05 Fri 07:51]--[2014-12-05 Fri 08:44] =>  0:53
@@ -367,7 +370,7 @@ How it will work:
   definitions. Formatters etc inject definitions into it.
 - SML objects have meta-data object instead of the ptree; Taggable is
   perhaps not the best name for the concept but we need to think of a
-  better alternative. =Extensible= perhaps?
+  better alternative. =Extensible= perhaps? =DynamicallyExtensible=.
 - Note: meta-data is not a great name. In a way, SML is meta-data and
   pretty much everything in dogen is a meta-model. This is more like a
   set of dynamic extensions to meta-models so perhaps we could call it
@@ -494,5 +497,10 @@ and
 
 Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
+
+*** STARTED Create the =dynamic= model                                :story:
+    CLOCK: [2014-12-13 Sat 13:30]--[2014-12-13 Sat 14:50] =>  1:20
+
+Implement the dynamic model As per analysis story.
 
 ** Deprecated
