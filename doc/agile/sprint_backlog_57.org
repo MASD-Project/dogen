@@ -499,9 +499,17 @@ Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
 
 *** STARTED Create the =dynamic= model                                :story:
+    CLOCK: [2014-12-13 Sat 18:15]--[2014-12-13 Sat 19:06] =>  0:51
     CLOCK: [2014-12-13 Sat 14:50]--[2014-12-13 Sat 15:11] =>  0:21
     CLOCK: [2014-12-13 Sat 13:30]--[2014-12-13 Sat 14:50] =>  1:20
 
 Implement the dynamic model As per analysis story.
+
+Notes:
+
+- we should handle the "value-less" value case such as for instance
+  =dia.comment=. We don't care about the value so the right thing to
+  do is to have a field that has no value (and can't have one; if
+  supplied, we throw).
 
 ** Deprecated

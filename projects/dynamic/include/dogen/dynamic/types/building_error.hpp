@@ -18,39 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_FIELD_FACTORY_HPP
-#define DOGEN_DYNAMIC_TYPES_FIELD_FACTORY_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
+#define DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
+#include <boost/exception/info.hpp>
 #include <string>
-#include <utility>
-#include "dogen/dynamic/types/field.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
 namespace dynamic {
 
 /**
- * @brief Builds a field from its constituent parts.
+ * @brief An error occurred while the factory was building.
  */
-class field_factory {
+class building_error : public virtual std::exception, public virtual boost::exception {
 public:
-    /**
-     * @brief Builds a field given a definition, the original key and
-     * zero or more values.
-     *
-     * @pre If values has more than one element, the field's value
-     * type must be a collection.
-     *
-     * @pre Values must be valid according to the type in the field
-     * definition.
-     */
-    field build(const field_definition& fd, const std::string& key,
-        const std::list<std::string>& values) const;
+    building_error() = default;
+    ~building_error() noexcept = default;
+
+public:
+    building_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } }

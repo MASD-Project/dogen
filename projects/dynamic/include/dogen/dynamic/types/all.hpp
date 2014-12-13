@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dynamic/types/aggregator.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/boolean_collection.hpp"
+#include "dogen/dynamic/types/building_error.hpp"
 #include "dogen/dynamic/types/dynamic.hpp"
 #include "dogen/dynamic/types/field.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
@@ -30,10 +32,10 @@
 #include "dogen/dynamic/types/number_collection.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/registrar.hpp"
+#include "dogen/dynamic/types/registrar_error.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
-#include "dogen/dynamic/types/validator.hpp"
 #include "dogen/dynamic/types/value.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
 #include "dogen/dynamic/types/value_visitor.hpp"
