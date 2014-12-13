@@ -3875,6 +3875,13 @@ It would be nice to be able to generate a model with a name other than
 the diagram file. We should have a command line option for this that
 overrides the default diagram name.
 
+This could also be supplied as part of the meta-data. The command line
+option is useful when we want to use the same diagram to test
+different aspects of the generation, as we do with the tests. The
+meta-data option is useful when we don't want the file name to have
+the full name of the model. Can't think of a good reason for this so
+perhaps this is not a valid use case.
+
 *** Add camel case option                                             :story:
 
 #+begin_quote
