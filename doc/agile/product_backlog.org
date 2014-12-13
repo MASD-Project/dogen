@@ -8,6 +8,25 @@
 
 Stories that we intend to look at, at some point.
 
+*** Create a class for the return type of =comments_parser=           :story:
+
+In dia to sml; At present we are returning:
+
+: std::pair<std::string,
+:    std::list<
+:       std::pair<std::string, std::string>
+:    >
+: >
+
+Where the first string is the comments (sans kvps) and the second are
+the kvps. This is a bit confusing. We should probably have a class
+with fields that reflect this, e.g.:
+
+- =original_comments=
+- =key_value_pair=
+
+We need to reflect on these names.
+
 *** Returning optional of base class results in invalid code          :story:
 
 When defining a model with a type with a field of =boost::optional<x>=
