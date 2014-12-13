@@ -360,3 +360,28 @@ if(use_latest_knitter)
     add_dependencies(codegen_${target} knitter)
 endif()
 add_dependencies(codegen codegen_${target})
+
+set(target dynamic)
+add_custom_target(codegen_${target}
+    COMMENT "Generating Dynamic model" VERBATIM
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${dogen_binary}
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-enable-facet domain
+    --cpp-enable-facet io
+    --cpp-enable-facet hash
+    --cpp-enable-facet serialization
+    --cpp-enable-facet test_data
+    --cpp-disable-cmakelists
+    --cpp-disable-eos-serialization
+    --ignore-files-matching-regex .*/CMakeLists.txt
+    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/test/.*
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
+if(use_latest_knitter)
+    add_dependencies(codegen_${target} knitter)
+endif()
+add_dependencies(codegen codegen_${target})
