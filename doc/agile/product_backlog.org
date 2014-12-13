@@ -8,6 +8,17 @@
 
 Stories that we intend to look at, at some point.
 
+*** Returning optional of base class results in invalid code          :story:
+
+When defining a model with a type with a field of =boost::optional<x>=
+where =x= is an abstract base class, we get compilation errors in test
+data. The problem appears to be that our test data factories try to
+instantiate =x= rather than go through the abstract base class
+machinery. We need to build a test model for this and fix the code.
+
+We should also question if this is a valid scenario - if not we must
+add it to the validation rules.
+
 *** Add support for coveralls                                         :story:
 
 Seems like all we need to do to have code coverage from travis is to
