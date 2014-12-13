@@ -8,6 +8,261 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for coveralls                                         :story:
+
+Seems like all we need to do to have code coverage from travis is to
+enable it in the YML file.
+
+*Direct use of Coveralls failed*
+
+We had to remove coveralls:
+
+: - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e /usr
+
+This was generating over 10 MB of logging so the build got terminated.
+
+We also add to remove debug builds:
+
+: -DWITH_DEBUG=on -DWITH_PROFILING=on
+
+We were getting a lot of internal compiler errors:
+
+: FAILED: /usr/bin/g++-4.9   -DBOOST_ALL_DYN_LINK -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=c++11 -frtti -fvisibility-inlines-hidden -fvisibility=default -isystem /usr/include/libxml2 -Istage/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia_to_sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/frontend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/backend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/config/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp_formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/utility/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knit/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knitter/include -MMD -MT projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -MF "projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o.d" -o projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -c /home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/src/types/transformer.cpp
+: g++-4.9: internal compiler error: Killed (program cc1plus)
+: Please submit a full bug report,
+: with preprocessed source if appropriate.
+: See <file:///usr/share/doc/gcc-4.9/README.Bugs> for instructions.
+
+Finally note also that we must add coverage _after_ the script
+executes or else we risk doing coverage whilst the build is taking
+place. Hopefully this is the reason for these errors:
+
+: /home/travis/build/DomainDrivenConsulting/output/projects/test_models/class_without_attributes/src/CMakeFiles/class_without_attributes.dir/io/package_1/class_1_io.cpp.gcda:cannot open data file, assuming not executed
+: File '/usr/include/c++/4.9/bits/basic_ios.h'
+: No executable lines
+
+We should read up on the [[http://docs.travis-ci.com/user/build-lifecycle/][life-cycle]] properly.
+
+*Travis Examples*
+
+Seems like all we need to do to have code coverage from travis is to
+enable it in the YML file. We should look into copying it from the
+[[https://github.com/apolukhin/Boost.DLL][Boost.DLL]] [[https://raw.githubusercontent.com/apolukhin/Boost.DLL/master/.travis.yml][example]]. We also need to enable coverage on all builds,
+separately from nightlies. The key parts appear to be these:
+
+:  - ../../../b2 cxxflags="--coverage -std=$CXX_STANDARD" linkflags="--coverage"
+
+and
+
+: after_success:
+:    - find ../../../bin.v2/ -name "*.gcda" -exec cp "{}" ./ \;
+:    - find ../../../bin.v2/ -name "*.gcno" -exec cp "{}" ./ \;
+:    - sudo apt-get install -qq python-yaml lcov
+:    - lcov --directory ./ --base-directory ./ --capture --output-file coverage.info
+:    - lcov --remove coverage.info '/usr*' '*/filesystem*' '*/container*' '*/core/*' '*/exception/*' '*/intrusive/*' '*/smart_ptr/*' '*/move/*' '*/fusion/*' '*/io/*' '*/function/*' '*/iterator/*' '*/preprocessor/*' '*/system/*' '*/boost/test/*' '*/boost/detail/*' '*/utility/*' '*/dll/example/*' '*/dll/test/*' '*/pe_info.hpp' '*/macho_info.hpp' -o coverage.info
+:    - gem install coveralls-lcov
+:    - cd .. && coveralls-lcov test/coverage.info
+
+Another way seems to be using gcov, as per [[https://github.com/fabianschuiki/Maxwell][Maxwell]] [[https://raw.githubusercontent.com/fabianschuiki/Maxwell/master/.travis.yml][travis.yml]]:
+
+: - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
+:  - sudo pip install cpp-coveralls
+
+and
+
+: script:
+:  - export CTEST_OUTPUT_ON_FAILURE=1
+:  - cmake -DCMAKE_BUILD_TYPE=gcov . && make && make test
+: after_success:
+:  - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e CMakeFiles -E ".*/test/.*" -E ".*/mock/.*" -e maxwell/gen -e language -e thirdparty -e maxwell/ast/nodes -e maxwell/driver/gramdiag.c -e maxwell/driver/Parser.cpp -e maxwell/driver/Parser.hpp -e maxwell/driver/Scanner.cpp -e maxwell/driver/position.hh -e maxwell/driver/stack.hh -e maxwell/driver/location.hh
+
+Yet another way seems to be creating a script to do coverage, as per
+[[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
+
+*** Consider renaming model module to root module                     :story:
+
+It would be more sensible to call it root module rather than model
+module. We should also create a root module property in the model to
+make it easier to locate.
+
+*** Add support for opaque formatter settings                         :story:
+
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to global settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
+
+*** Add support for local settings                                    :story:
+
+- create a local settings class that is made up of file settings,
+  opaque settings and formatter settings. Entity to have a container
+  of local settings (map of formatter id to local settings).
+- create a local settings factory that takes on the work from workflow
+  in generating the file settings. It also takes on a container of
+  opaque settings factory by formatter id to generate the opaque
+  settings. Finally, it uses the formatter settings factory for the
+  overrides. These should be optional. If populated, they should take
+  on the global settings as defaults so that we don't have to worry
+  about global settings for formatters any more. This means the local
+  settings factory must have access to the global settings.
+
+*** Create a settings class                                           :story:
+
+- create a settings class that has a map of formatter id to global
+  settings. It could also have a map of c++ entity name (produced with
+  name builder to include namespaces), to formatter id to local
+  settings. With this we can now move the settings away from entity
+  because we no longer require the qname.
+- pass the settings class to the includes builder.
+
+*** Travis deployment of tags fails                                   :story:
+
+As per [[https://github.com/travis-ci/travis-ci/issues/2577][issue 2577]] in travis, it does not support wildcards at the
+moment. We need to find another way to upload packages into GitHub
+without using wildcards.
+
+Error:
+
+: dpl.1
+: Installing deploy dependencies
+: Fetching: addressable-2.3.6.gem (100%)
+: Successfully installed addressable-2.3.6
+: Fetching: multipart-post-2.0.0.gem (100%)
+: Successfully installed multipart-post-2.0.0
+: Fetching: faraday-0.9.0.gem (100%)
+: Successfully installed faraday-0.9.0
+: Fetching: sawyer-0.5.5.gem (100%)
+: Successfully installed sawyer-0.5.5
+: Fetching: octokit-3.5.2.gem (100%)
+: Successfully installed octokit-3.5.2
+: 5 gems installed
+: Fetching: mime-types-2.4.3.gem (100%)
+: Successfully installed mime-types-2.4.3
+: 1 gem installed
+: error: could not lock config file .git/config: No such file or directory
+: error: could not lock config file .git/config: No such file or directory
+: dpl.2
+: Preparing deploy
+: Logged in as Marco Craveiro
+: Deploying to repo: DomainDrivenConsulting/dogen
+: Current tag is: v0.56.2767
+: dpl.3
+: Deploying application
+: /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `initialize': No such file or directory - stage/pkg/*.deb (Errno::ENOENT)
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `new'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `upload_asset'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:118:in `block in push_app'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `each'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `push_app'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `block in deploy'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:41:in `fold'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `deploy'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:32:in `run'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:7:in `run'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/bin/dpl:5:in `<top (required)>'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `load'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `<main>'
+: failed to deploy
+
+*** Consider using an abstract factory in formatters                  :story:
+
+At present we have a number of interfaces (or quasi-interfaces) coming
+out of formatter:
+
+- file name generation
+- includes generation
+- opaque settings generation
+- opaque settings validator
+
+Perhaps it makes more sense to aggregate them all into a factory of
+factories. We should look into the abstract factory pattern as it
+seems particularly suitable for this. The factory should remember the
+id of the formatter it comes from.
+
+In terms of names, it is difficult to find a name for such an
+aggregate:
+
+- formatter components, e.g. =formatter_components_factory_interface=
+- formatter properties
+- formatter parts
+
+*** Capture settings validation rules                                 :story:
+
+Once all settings have been built (global and local) we must pass them
+to a validator class that makes sure they all make sense. This story
+captures all the rules we need to check for. We must also check the
+SML validator story in backlog for rules that apply to settings.
+
+- integrated IO must not be enabled if IO is enabled and vice-versa
+  (opaque settings validator). actually it seems this is possible, we
+  need to investigate the current implementation.
+- types must be enabled
+- if serialisation is enabled, types forward declaration of the
+  serialisation classes must be enabled (opaque settings validator)
+
+*** Implement include generation for class header formatter           :story:
+
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
+
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via meta-data, so we can start using STL, Boost
+  etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+*** Create a transformation and formatting sub-workflow               :story:
+
+At present we have two template functions in the main workflow,
+linking the different steps of transformation and formatting. However,
+it may make more sense to plug in to the all types traversal. For this
+we need a sub-workflow that owns the model and the transformer and
+which overloads =operator()=. It produces files.
+
+It can receive a formatter dispatcher and a transformer on
+construction and keep references these. Execute returns the list of
+files.
+
+*** Implement class header formatter                                  :story:
+
+- look at the old =om= types formatter implementation to see if there
+  is any code to scavenge. This model was deleted around commit
+  10157ad.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
 *** Evaluate all of our data structures based on usage                :story:
 
 This presentation is very interesting:

@@ -18,21 +18,21 @@ formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-07 Sun 16:00]
+Clock summary at [2014-12-13 Sat 13:32]
 
 | Headline                                                        | Time   |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| *Total time*                                                    | *8:53* |      |      |
+| *Total time*                                                    | *9:09* |      |      |
 |-----------------------------------------------------------------+--------+------+------|
-| Active                                                          |        | 8:53 |      |
+| Active                                                          |        | 9:09 |      |
 | STARTED Sprint and product backlog grooming                     |        |      | 0:51 |
 | COMPLETED Refactor tags and todos in sprint and product backlog |        |      | 0:34 |
 | COMPLETED Traits to use static methods                          |        |      | 0:46 |
 | COMPLETED Resolve the breaches of maximum build time            |        |      | 0:34 |
 | COMPLETED Install packages in travis after building             |        |      | 0:12 |
 | STARTED Analysis on returning global settings by formatter      |        |      | 2:22 |
-| STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:28 |
-| STARTED Add support for coveralls                               |        |      | 1:06 |
+| STARTED Analysis towards more strongly-typed meta-data          |        |      | 2:44 |
+| POSTPONED Add support for coveralls                             |        |      | 1:06 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -231,6 +231,7 @@ formatter settings this is a problem.
 - create a settings workflow
 
 *** STARTED Analysis towards more strongly-typed meta-data            :story:
+    CLOCK: [2014-12-13 Sat 13:14]--[2014-12-13 Sat 13:30] =>  0:16
     CLOCK: [2014-12-05 Fri 18:44]--[2014-12-05 Fri 19:25] =>  0:41
     CLOCK: [2014-12-05 Fri 07:51]--[2014-12-05 Fri 08:44] =>  0:53
     CLOCK: [2014-12-04 Thu 20:20]--[2014-12-04 Thu 20:45] =>  0:25
@@ -248,9 +249,9 @@ decoupling. However, there are downsides to this flexibility:
   make things convoluted. This means users can supply numbers for
   booleans, collections for scalars etc and we will only find out when
   it comes to the SML to C++ transformation.
-- we cannot validate the keys passed in: are they actually existing
-  keys or did the user supply keys we do not support? Did the user try
-  to enable a formatter that does not exist? Because the validation is
+- we cannot validate the keys passed in: are they actually valid keys
+  or did the user supply keys we do not support? Did the user try to
+  enable a formatter that does not exist? Because the validation is
   done on a per-formatter basis, we can't say "all the keys that are
   left are invalid"; we do not know what keys are left.
 - we need to duplicate the copying code in every model (and
@@ -262,7 +263,8 @@ decoupling. However, there are downsides to this flexibility:
 A better solution for this would be to create a meta-data model. It
 has the following components:
 
-- a set of strong types to describe the ptree: string, bool, etc.
+- a set of strong types to describe the ptree: string, boolean,
+  number, etc.
 - a set of _field definitions_; field name, field type and so
   on. These are used to read _fields_ from the meta-data.
 - a container for fields, perhaps _object_.
@@ -270,17 +272,20 @@ has the following components:
   instantiates the object.
 
 We could almost copy and paste a JSON implementation, except we need
-something like a "schema".
+something like a "schema" (the definitions).
 
 In this new world, each model simply provides their set of field
 definitions. Further, the meta-data model could even handle "local"
 and "global" settings - that is, overrides. We just need to supply
-both ptrees and it will do the right thing. The final object it
-outputs already takes into account any local overrides.
+both ptrees (or both objects) and it will do the right thing. The
+final object it outputs already takes into account any local
+overrides.
 
 How it will work:
 
-- SML objects now have a meta-data object.
+- SML objects now have a meta-data object instead of a ptree
+  (=Taggable= concept). This applies to both properties and
+  operations.
 - during dia to SML transformation (or JSON transformation) we ask the
   register for all registered fields. We then use the definitions to
   create the meta-data object. We validate the fields: ensure they
@@ -290,7 +295,7 @@ How it will work:
   overrides). We must also be able to specify property-specific fields
   and even method-specific fields. This allows us to validate that the
   user has placed settings in the right place. This could be called
-  _scope_.
+  =scope= or =locality=.
 - during SML merging we process the overrides: the relevant fields of
   the model module are replicated to every single SML object, and
   local settings take precedence.
@@ -302,7 +307,8 @@ How it will work:
   all of the meta-data here. This means we need a way to distinguish
   between expandable and non-expandable objects. The meta-data model
   gets told what's expandable by SML (e.g. meta-data object in a class
-  is, but not in a property).
+  is, but not in a property). We need a top-level flag for this in the
+  workflow.
 - we should use the meta-data object directly rather than construct
   local settings for the following purposes:
   - generating the file name: cpp settings, facet settings, formatter
@@ -311,14 +317,16 @@ How it will work:
     settngs, facet settings, formatter settings. The globally disabled
     formatters should be filtered out from the list of registered
     formatters.
+  - this will do away with most of the meta-data factories and their
+    related objects.
 - even better: we should somehow associate all of the arguments for
   the formatter with the entity, _including_ the formatters
   themselves. If locally disabled we can just not associate it.
-- in C++ model, we have formatter settings. We can now call these
-  formatter settings because there will be no other
-  settings. Formatter settings have a component that is formatter
-  specific and another component that is common to all
-  formatters. We could use the existing structure
+- in C++ model, we have lots of settings. We can now call these
+  formatter settings because there will be no other settings (we will
+  consume the data from the meta-data object). Formatter settings have
+  a component that is formatter specific and another component that is
+  common to all formatters.
 - Settings are populated either directly from the meta-data object, or
   there is additional processing that needs to be done.
 - existing settings factories take the meta-data object rather than
@@ -359,7 +367,7 @@ How it will work:
   definitions. Formatters etc inject definitions into it.
 - SML objects have meta-data object instead of the ptree; Taggable is
   perhaps not the best name for the concept but we need to think of a
-  better alternative. Extensible perhaps?
+  better alternative. =Extensible= perhaps?
 - Note: meta-data is not a great name. In a way, SML is meta-data and
   pretty much everything in dogen is a meta-model. This is more like a
   set of dynamic extensions to meta-models so perhaps we could call it
@@ -412,7 +420,8 @@ How it will work:
   type. Could be called merger. Should have a lhs and a rhs and
   produce a result.
 
-*** STARTED Add support for coveralls                                 :story:
+*** POSTPONED Add support for coveralls                               :story:
+    CLOSED: [2014-12-13 Sat 13:31]
     CLOCK: [2014-12-07 Sun 14:44]--[2014-12-07 Sun 14:54] =>  0:10
     CLOCK: [2014-12-07 Sun 01:12]--[2014-12-07 Sun 01:43] =>  0:31
     CLOCK: [2014-12-06 Sat 20:40]--[2014-12-06 Sat 21:05] =>  0:25
@@ -485,189 +494,5 @@ and
 
 Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
-
-*** Consider renaming model module to root module                     :story:
-
-It would be more sensible to call it root module rather than model
-module. We should also create a root module property in the model to
-make it easier to locate.
-
-*** Add support for opaque formatter settings                         :story:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to global settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-
-*** Add support for local settings                                    :story:
-
-- create a local settings class that is made up of file settings,
-  opaque settings and formatter settings. Entity to have a container
-  of local settings (map of formatter id to local settings).
-- create a local settings factory that takes on the work from workflow
-  in generating the file settings. It also takes on a container of
-  opaque settings factory by formatter id to generate the opaque
-  settings. Finally, it uses the formatter settings factory for the
-  overrides. These should be optional. If populated, they should take
-  on the global settings as defaults so that we don't have to worry
-  about global settings for formatters any more. This means the local
-  settings factory must have access to the global settings.
-
-*** Create a settings class                                           :story:
-
-- create a settings class that has a map of formatter id to global
-  settings. It could also have a map of c++ entity name (produced with
-  name builder to include namespaces), to formatter id to local
-  settings. With this we can now move the settings away from entity
-  because we no longer require the qname.
-- pass the settings class to the includes builder.
-
-*** Travis deployment of tags fails                                   :story:
-
-As per [[https://github.com/travis-ci/travis-ci/issues/2577][issue 2577]] in travis, it does not support wildcards at the
-moment. We need to find another way to upload packages into GitHub
-without using wildcards.
-
-Error:
-
-: dpl.1
-: Installing deploy dependencies
-: Fetching: addressable-2.3.6.gem (100%)
-: Successfully installed addressable-2.3.6
-: Fetching: multipart-post-2.0.0.gem (100%)
-: Successfully installed multipart-post-2.0.0
-: Fetching: faraday-0.9.0.gem (100%)
-: Successfully installed faraday-0.9.0
-: Fetching: sawyer-0.5.5.gem (100%)
-: Successfully installed sawyer-0.5.5
-: Fetching: octokit-3.5.2.gem (100%)
-: Successfully installed octokit-3.5.2
-: 5 gems installed
-: Fetching: mime-types-2.4.3.gem (100%)
-: Successfully installed mime-types-2.4.3
-: 1 gem installed
-: error: could not lock config file .git/config: No such file or directory
-: error: could not lock config file .git/config: No such file or directory
-: dpl.2
-: Preparing deploy
-: Logged in as Marco Craveiro
-: Deploying to repo: DomainDrivenConsulting/dogen
-: Current tag is: v0.56.2767
-: dpl.3
-: Deploying application
-: /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `initialize': No such file or directory - stage/pkg/*.deb (Errno::ENOENT)
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `new'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `upload_asset'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:118:in `block in push_app'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `each'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `push_app'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `block in deploy'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:41:in `fold'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `deploy'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:32:in `run'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:7:in `run'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/bin/dpl:5:in `<top (required)>'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `load'
-:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `<main>'
-: failed to deploy
-
-*** Consider using an abstract factory in formatters                  :story:
-
-At present we have a number of interfaces (or quasi-interfaces) coming
-out of formatter:
-
-- file name generation
-- includes generation
-- opaque settings generation
-- opaque settings validator
-
-Perhaps it makes more sense to aggregate them all into a factory of
-factories. We should look into the abstract factory pattern as it
-seems particularly suitable for this. The factory should remember the
-id of the formatter it comes from.
-
-In terms of names, it is difficult to find a name for such an
-aggregate:
-
-- formatter components, e.g. =formatter_components_factory_interface=
-- formatter properties
-- formatter parts
-
-*** Capture settings validation rules                                 :story:
-
-Once all settings have been built (global and local) we must pass them
-to a validator class that makes sure they all make sense. This story
-captures all the rules we need to check for. We must also check the
-SML validator story in backlog for rules that apply to settings.
-
-- integrated IO must not be enabled if IO is enabled and vice-versa
-  (opaque settings validator). actually it seems this is possible, we
-  need to investigate the current implementation.
-- types must be enabled
-- if serialisation is enabled, types forward declaration of the
-  serialisation classes must be enabled (opaque settings validator)
-
-*** Implement include generation for class header formatter           :story:
-
-Now that we have finished generating the path spec details, we need to
-make sure includes generation works as expected. Add both formatter
-level includes as well as model level includes.
-
-We also need to deal with:
-
-- exposing formatter id as a static property so we can create
-  dependencies between formatters;
-- includes overrides via meta-data, so we can start using STL, Boost
-  etc classes.
-- includes of STL, Boost etc that are formatter level dependencies -
-  this needs to be handled via traits.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-*** Create a transformation and formatting sub-workflow               :story:
-
-At present we have two template functions in the main workflow,
-linking the different steps of transformation and formatting. However,
-it may make more sense to plug in to the all types traversal. For this
-we need a sub-workflow that owns the model and the transformer and
-which overloads =operator()=. It produces files.
-
-It can receive a formatter dispatcher and a transformer on
-construction and keep references these. Execute returns the list of
-files.
-
-*** Implement class header formatter                                  :story:
-
-- look at the old =om= types formatter implementation to see if there
-  is any code to scavenge. This model was deleted around commit
-  10157ad.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
 
 ** Deprecated
