@@ -28,9 +28,11 @@
 #include <list>
 #include <string>
 #include <utility>
+#include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/registrar.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -47,6 +49,30 @@ public:
     static dynamic::registrar& registrar();
 
 public:
+    workflow();
+
+private:
+    /**
+     * @brief Organises field definitions by complete field name.
+     */
+    std::unordered_map<std::string, field_definition>
+    obtain_field_definitions_by_complete_name_activity() const;
+
+    /**
+     * @brief Aggregate raw data by key.
+     */
+    std::list<std::pair<std::string, std::list<std::string> > >
+    aggregate_activity(
+        const std::list<std::pair<std::string, std::string>>& raw_data) const;
+
+    /**
+     * @brief Converts the raw data into a set of fields.
+     */
+    std::list<field> build_fields_activity(
+        const std::list<std::pair<std::string, std::list<std::string> > >&
+        raw_data) const;
+
+public:
     /**
      * @brief Produce a dynamic object.
      */
@@ -55,6 +81,8 @@ public:
 
 private:
     static std::shared_ptr<dynamic::registrar> registrar_;
+    const std::unordered_map<std::string, field_definition>
+    field_definitions_by_complete_name_;
 };
 
 } }

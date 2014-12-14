@@ -18,38 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/registrar_error.hpp"
-#include "dogen/dynamic/types/registrar.hpp"
+#ifndef DOGEN_DYNAMIC_TYPES_WORKFLOW_ERROR_HPP
+#define DOGEN_DYNAMIC_TYPES_WORKFLOW_ERROR_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-using namespace dogen::utility::log;
-static logger lg(logger_factory("dynamic.registrar"));
-
-const std::string no_definitions("No field definitions provided.");
-
-}
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace dynamic {
 
-void registrar::validate() const {
-    if (field_definitions_.empty()) {
-        BOOST_LOG_SEV(lg, error) << no_definitions;
-        BOOST_THROW_EXCEPTION(registrar_error(no_definitions));
-    }
-    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
-}
+/**
+ * @brief An error occurred while the factory was building.
+ */
+class workflow_error : public virtual std::exception, public virtual boost::exception {
+public:
+    workflow_error() = default;
+    ~workflow_error() noexcept = default;
 
-void registrar::register_field_definition(const field_definition& fd) {
-    field_definitions_.push_front(fd);
-}
+public:
+    workflow_error(const std::string& message) : message_(message) { }
 
-const std::forward_list<field_definition>&
-registrar::field_definitions() const {
-    return field_definitions_;
-}
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
+
+#endif

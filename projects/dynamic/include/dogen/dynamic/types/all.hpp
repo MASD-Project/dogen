@@ -40,3 +40,4 @@
 #include "dogen/dynamic/types/value_types.hpp"
 #include "dogen/dynamic/types/value_visitor.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/types/workflow_error.hpp"
