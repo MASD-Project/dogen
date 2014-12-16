@@ -1,0 +1,39 @@
+#+title: Sprint Backlog 58
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Commentary
+
+** Mission
+
+Implement dynamic and start making use of it in SML.
+
+** Retrospective
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2014-12-16 Tue 15:58]
+
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *0:08* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 0:08 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:08 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2014-12-16 Tue 15:50]--[2014-12-16 Tue 16:01] =>  0:08
+
+Updates to sprint and product backlog.
+
+*** STARTED Implement dynamic's workflow                              :story:
+
+We have started the basic skeleton for the dynamic classes; continue
+this work by implementing the workflow and it's dependent classes.
+
+** Deprecated
