@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <utility>
+#include <forward_list>
 #include "dogen/dynamic/types/field.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 
@@ -49,8 +49,8 @@ public:
      * @pre Values must be valid according to the type in the field
      * definition.
      */
-    field build(const field_definition& fd, const std::string& key,
-        const std::list<std::string>& values) const;
+    field build(const field_definition& fd,
+        const std::forward_list<std::string>& values) const;
 };
 
 } }

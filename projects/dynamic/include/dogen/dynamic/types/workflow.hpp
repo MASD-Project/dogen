@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <utility>
+#include <forward_list>
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/registrar.hpp"
@@ -61,23 +61,25 @@ private:
     /**
      * @brief Aggregate raw data by key.
      */
-    std::list<std::pair<std::string, std::list<std::string> > >
+    std::unordered_map<std::string, std::forward_list<std::string> >
     aggregate_activity(
-        const std::list<std::pair<std::string, std::string>>& raw_data) const;
+        const std::forward_list<std::pair<std::string, std::string> >&
+        raw_data) const;
 
     /**
      * @brief Converts the raw data into a set of fields.
      */
-    std::list<field> build_fields_activity(
-        const std::list<std::pair<std::string, std::list<std::string> > >&
-        raw_data) const;
+    std::forward_list<field> build_fields_activity(
+        const std::unordered_map<std::string, std::forward_list<std::string> >&
+            aggregated_raw_data) const;
 
 public:
     /**
      * @brief Produce a dynamic object.
      */
     object execute(const scope_types scope,
-        const std::list<std::pair<std::string, std::string>>& raw_data) const;
+        const std::forward_list<std::pair<std::string, std::string>>&
+        raw_data) const;
 
 private:
     static std::shared_ptr<dynamic::registrar> registrar_;

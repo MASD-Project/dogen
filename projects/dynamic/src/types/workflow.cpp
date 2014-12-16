@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/types/field_factory.hpp"
 #include "dogen/dynamic/types/workflow_error.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 
@@ -30,6 +31,8 @@ static logger lg(logger_factory("dynamic.workflow"));
 
 const std::string duplicate_field_definition(
     "Field definition already inserted: ");
+const std::string field_definition_not_found(
+    "Field definition not found: ");
 
 }
 
@@ -63,6 +66,37 @@ obtain_field_definitions_by_complete_name_activity() const {
                     duplicate_field_definition + cn));
         }
     }
+    return r;
+}
+
+std::forward_list<field> workflow::build_fields_activity(
+    const std::unordered_map<std::string, std::forward_list<std::string> >&
+    aggregated_raw_data) const {
+    std::forward_list<field> r;
+    field_factory f;
+    for (auto pair : aggregated_raw_data) {
+        const auto cn(pair.first);
+        const auto i(field_definitions_by_complete_name_.find(cn));
+        if (i == field_definitions_by_complete_name_.end()) {
+            BOOST_LOG_SEV(lg, error) << field_definition_not_found << cn;
+            BOOST_THROW_EXCEPTION(workflow_error(
+                    field_definition_not_found + cn));
+        }
+
+        const auto& fd(i->second);
+        const auto& values(pair.second);
+        r.push_front(f.build(fd, values));
+    }
+    return r;
+}
+
+object workflow::execute(const scope_types /*scope*/,
+    const std::forward_list<std::pair<std::string, std::string>>&
+    /*raw_data*/) const {
+    // auto aggregated_raw_data(aggregate_activity(raw_data));
+    // auto fields(build_fields_activity(aggregated_raw_data));
+
+    object r;
     return r;
 }
 
