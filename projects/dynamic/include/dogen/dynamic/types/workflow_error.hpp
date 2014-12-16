@@ -32,7 +32,7 @@ namespace dogen {
 namespace dynamic {
 
 /**
- * @brief An error occurred while the factory was building.
+ * @brief An error occurred while the workflow was executing.
  */
 class workflow_error : public virtual std::exception, public virtual boost::exception {
 public:

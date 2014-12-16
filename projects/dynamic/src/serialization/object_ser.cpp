@@ -26,10 +26,11 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/dynamic/serialization/field_ser.hpp"
 #include "dogen/dynamic/serialization/object_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 
 namespace boost {

@@ -18,20 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/dynamic/test_data/field_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 
 namespace {
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
 
 dogen::dynamic::field
 create_dogen_dynamic_field(const unsigned int position) {
     return dogen::dynamic::field_generator::create(position);
 }
 
-std::list<dogen::dynamic::field> create_std_list_dogen_dynamic_field(unsigned int position) {
-    std::list<dogen::dynamic::field> r;
+std::unordered_map<std::string, dogen::dynamic::field> create_std_unordered_map_std_string_dogen_dynamic_field(unsigned int position) {
+    std::unordered_map<std::string, dogen::dynamic::field> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_dynamic_field(position + i));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_dynamic_field(position + i)));
     }
     return r;
 }
@@ -45,7 +52,7 @@ object_generator::object_generator() : position_(0) { }
 
 void object_generator::
 populate(const unsigned int position, result_type& v) {
-    v.fields(create_std_list_dogen_dynamic_field(position + 0));
+    v.fields(create_std_unordered_map_std_string_dogen_dynamic_field(position + 0));
 }
 
 object_generator::result_type

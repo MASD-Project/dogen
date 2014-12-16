@@ -16,14 +16,15 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-16 Tue 15:58]
+Clock summary at [2014-12-16 Tue 16:13]
 
 | Headline                                    | Time   |      |      |
 |---------------------------------------------+--------+------+------|
-| *Total time*                                | *0:08* |      |      |
+| *Total time*                                | *0:23* |      |      |
 |---------------------------------------------+--------+------+------|
-| Active                                      |        | 0:08 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:08 |
+| Active                                      |        | 0:23 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:11 |
+| STARTED Implement dynamic's workflow        |        |      | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -32,6 +33,7 @@ Clock summary at [2014-12-16 Tue 15:58]
 Updates to sprint and product backlog.
 
 *** STARTED Implement dynamic's workflow                              :story:
+    CLOCK: [2014-12-16 Tue 16:01]--[2014-12-16 Tue 16:13] =>  0:12
 
 We have started the basic skeleton for the dynamic classes; continue
 this work by implementing the workflow and it's dependent classes.

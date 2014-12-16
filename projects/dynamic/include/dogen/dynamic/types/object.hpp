@@ -26,13 +26,17 @@
 #endif
 
 #include <algorithm>
-#include <list>
+#include <string>
+#include <unordered_map>
 #include "dogen/dynamic/serialization/object_fwd_ser.hpp"
 #include "dogen/dynamic/types/field.hpp"
 
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Represents an object with dynamic structure.
+ */
 class object final {
 public:
     object() = default;
@@ -41,7 +45,7 @@ public:
     ~object() = default;
 
 public:
-    explicit object(const std::list<dogen::dynamic::field>& fields);
+    explicit object(const std::unordered_map<std::string, dogen::dynamic::field>& fields);
 
 private:
     template<typename Archive>
@@ -51,10 +55,15 @@ private:
     friend void boost::serialization::load(Archive& ar, object& v, unsigned int version);
 
 public:
-    const std::list<dogen::dynamic::field>& fields() const;
-    std::list<dogen::dynamic::field>& fields();
-    void fields(const std::list<dogen::dynamic::field>& v);
-    void fields(const std::list<dogen::dynamic::field>&& v);
+    /**
+     * @brief All the fields associated with this object, by complete field name.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::dynamic::field>& fields() const;
+    std::unordered_map<std::string, dogen::dynamic::field>& fields();
+    void fields(const std::unordered_map<std::string, dogen::dynamic::field>& v);
+    void fields(const std::unordered_map<std::string, dogen::dynamic::field>&& v);
+    /**@}*/
 
 public:
     bool operator==(const object& rhs) const;
@@ -67,7 +76,7 @@ public:
     object& operator=(object other);
 
 private:
-    std::list<dogen::dynamic::field> fields_;
+    std::unordered_map<std::string, dogen::dynamic::field> fields_;
 };
 
 } }
