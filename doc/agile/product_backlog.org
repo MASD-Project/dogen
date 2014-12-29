@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Investigate ModelQ for ideas                                      :story:
+
+We need to mine this project for potential ideas - see how their
+approach compares to ours, see if we can learn any lessons from it:
+
+*ModelQ*: ModelQ is a code generator for creating Golang codes/models
+to access RDBMS database/tables (only MySQL supported for now).
+
+ModelQ: https://github.com/mijia/modelq
+
 *** Create a class for the return type of =comments_parser=           :story:
 
 In dia to sml; At present we are returning:
