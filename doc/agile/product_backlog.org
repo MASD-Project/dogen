@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Investigate the emblems used by Bit7z                             :story:
+
+This project uses emblems for version, platform and compiler:
+
+https://github.com/rikyoz/Bit7z
+
+This may or may not be useful to dogen.
+
 *** Investigate ModelQ for ideas                                      :story:
 
 We need to mine this project for potential ideas - see how their
