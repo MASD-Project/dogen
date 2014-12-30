@@ -48,12 +48,11 @@ dynamic::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-workflow::workflow() :
-    field_definitions_by_complete_name_(
-        obtain_field_definitions_by_complete_name_activity()) { }
+workflow::workflow() : field_definitions_by_complete_name_(
+    create_field_definitions_by_complete_name()) { }
 
 std::unordered_map<std::string, field_definition> workflow::
-obtain_field_definitions_by_complete_name_activity() const {
+create_field_definitions_by_complete_name() const {
     std::unordered_map<std::string, field_definition> r;
 
     registrar().validate();
@@ -71,10 +70,10 @@ obtain_field_definitions_by_complete_name_activity() const {
 
 std::forward_list<field> workflow::build_fields_activity(
     const std::unordered_map<std::string, std::forward_list<std::string> >&
-    aggregated_raw_data) const {
+    aggregated_data) const {
     std::forward_list<field> r;
     field_factory f;
-    for (auto pair : aggregated_raw_data) {
+    for (auto pair : aggregated_data) {
         const auto cn(pair.first);
         const auto i(field_definitions_by_complete_name_.find(cn));
         if (i == field_definitions_by_complete_name_.end()) {
@@ -95,6 +94,7 @@ object workflow::execute(const scope_types /*scope*/,
     /*raw_data*/) const {
     // auto aggregated_raw_data(aggregate_activity(raw_data));
     // auto fields(build_fields_activity(aggregated_raw_data));
+    // create activity to validate mandatory fields (!is_optional)
 
     object r;
     return r;

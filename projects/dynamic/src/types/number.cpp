@@ -28,10 +28,8 @@ namespace dynamic {
 number::number()
     : content_(static_cast<int>(0)) { }
 
-number::number(
-    const dogen::dynamic::value_types& type,
-    const int content)
-    : dogen::dynamic::value(type),
+number::number(const int content)
+    : dogen::dynamic::value(),
       content_(content) { }
 
 void number::to_stream(std::ostream& s) const {

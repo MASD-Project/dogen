@@ -44,9 +44,7 @@ public:
     virtual ~boolean() noexcept { }
 
 public:
-    boolean(
-        const dogen::dynamic::value_types& type,
-        const bool content);
+    explicit boolean(const bool content);
 
 private:
     template<typename Archive>

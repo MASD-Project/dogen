@@ -44,9 +44,7 @@ public:
     virtual ~number_collection() noexcept { }
 
 public:
-    number_collection(
-        const dogen::dynamic::value_types& type,
-        const std::list<dogen::dynamic::number>& content);
+    explicit number_collection(const std::list<dogen::dynamic::number>& content);
 
 private:
     template<typename Archive>

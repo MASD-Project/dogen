@@ -26,12 +26,9 @@
 #endif
 
 #include <algorithm>
-#include <boost/optional.hpp>
-#include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/serialization/field_definition_fwd_ser.hpp"
 #include "dogen/dynamic/types/name.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
-#include "dogen/dynamic/types/value_fwd.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
 
 namespace dogen {
@@ -43,21 +40,18 @@ namespace dynamic {
 class field_definition final {
 public:
     field_definition(const field_definition&) = default;
+    field_definition(field_definition&&) = default;
     ~field_definition() = default;
 
 public:
     field_definition();
 
 public:
-    field_definition(field_definition&& rhs);
-
-public:
     field_definition(
         const dogen::dynamic::name& name,
         const dogen::dynamic::value_types& type,
         const dogen::dynamic::scope_types& scope,
-        const boost::optional<boost::shared_ptr<dogen::dynamic::value> >& default_value,
-        const bool is_optional);
+        const bool is_mandatory);
 
 private:
     template<typename Archive>
@@ -94,21 +88,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If set and no value is supplied by the user, the field will use this value.
+     * @brief If true, not supplying this field will result in an error.
      */
     /**@{*/
-    const boost::optional<boost::shared_ptr<dogen::dynamic::value> >& default_value() const;
-    boost::optional<boost::shared_ptr<dogen::dynamic::value> >& default_value();
-    void default_value(const boost::optional<boost::shared_ptr<dogen::dynamic::value> >& v);
-    void default_value(const boost::optional<boost::shared_ptr<dogen::dynamic::value> >&& v);
-    /**@}*/
-
-    /**
-     * @brief If false, not supplying this field will result in an error.
-     */
-    /**@{*/
-    bool is_optional() const;
-    void is_optional(const bool v);
+    bool is_mandatory() const;
+    void is_mandatory(const bool v);
     /**@}*/
 
 public:
@@ -125,8 +109,7 @@ private:
     dogen::dynamic::name name_;
     dogen::dynamic::value_types type_;
     dogen::dynamic::scope_types scope_;
-    boost::optional<boost::shared_ptr<dogen::dynamic::value> > default_value_;
-    bool is_optional_;
+    bool is_mandatory_;
 };
 
 } }

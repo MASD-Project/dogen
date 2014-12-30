@@ -29,10 +29,8 @@ namespace dynamic {
 boolean::boolean()
     : content_(static_cast<bool>(0)) { }
 
-boolean::boolean(
-    const dogen::dynamic::value_types& type,
-    const bool content)
-    : dogen::dynamic::value(type),
+boolean::boolean(const bool content)
+    : dogen::dynamic::value(),
       content_(content) { }
 
 void boolean::to_stream(std::ostream& s) const {

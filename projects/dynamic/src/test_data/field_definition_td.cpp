@@ -21,7 +21,6 @@
 #include "dogen/dynamic/test_data/field_definition_td.hpp"
 #include "dogen/dynamic/test_data/name_td.hpp"
 #include "dogen/dynamic/test_data/scope_types_td.hpp"
-#include "dogen/dynamic/test_data/value_td.hpp"
 #include "dogen/dynamic/test_data/value_types_td.hpp"
 
 namespace {
@@ -41,25 +40,6 @@ create_dogen_dynamic_scope_types(const unsigned int position) {
     return dogen::dynamic::scope_types_generator::create(position);
 }
 
-dogen::dynamic::value*
-create_dogen_dynamic_value_ptr(const unsigned int position) {
-    return dogen::dynamic::value_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::dynamic::value>
-create_boost_shared_ptr_dogen_dynamic_value(unsigned int position) {
-    boost::shared_ptr<dogen::dynamic::value> r(
-        create_dogen_dynamic_value_ptr(position));
-    return r;
-}
-
-boost::optional<boost::shared_ptr<dogen::dynamic::value> >
-create_boost_optional_boost_shared_ptr_dogen_dynamic_value_(unsigned int position) {
-    boost::optional<boost::shared_ptr<dogen::dynamic::value> > r(
-        create_boost_shared_ptr_dogen_dynamic_value(position));
-    return r;
-}
-
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -76,8 +56,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_dynamic_name(position + 0));
     v.type(create_dogen_dynamic_value_types(position + 1));
     v.scope(create_dogen_dynamic_scope_types(position + 2));
-    v.default_value(create_boost_optional_boost_shared_ptr_dogen_dynamic_value_(position + 3));
-    v.is_optional(create_bool(position + 4));
+    v.is_mandatory(create_bool(position + 3));
 }
 
 field_definition_generator::result_type

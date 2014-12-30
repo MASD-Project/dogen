@@ -27,12 +27,9 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/optional.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include "dogen/dynamic/serialization/field_definition_ser.hpp"
 #include "dogen/dynamic/serialization/name_ser.hpp"
 #include "dogen/dynamic/serialization/scope_types_ser.hpp"
-#include "dogen/dynamic/serialization/value_ser.hpp"
 #include "dogen/dynamic/serialization/value_types_ser.hpp"
 
 
@@ -46,8 +43,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("type", v.type_);
     ar << make_nvp("scope", v.scope_);
-    ar << make_nvp("default_value", v.default_value_);
-    ar << make_nvp("is_optional", v.is_optional_);
+    ar << make_nvp("is_mandatory", v.is_mandatory_);
 }
 
 template<typename Archive>
@@ -57,8 +53,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("type", v.type_);
     ar >> make_nvp("scope", v.scope_);
-    ar >> make_nvp("default_value", v.default_value_);
-    ar >> make_nvp("is_optional", v.is_optional_);
+    ar >> make_nvp("is_mandatory", v.is_mandatory_);
 }
 
 } }

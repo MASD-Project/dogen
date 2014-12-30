@@ -56,8 +56,9 @@ private:
      * @brief Organises field definitions by complete field name.
      */
     std::unordered_map<std::string, field_definition>
-    obtain_field_definitions_by_complete_name_activity() const;
+    create_field_definitions_by_complete_name() const;
 
+private:
     /**
      * @brief Aggregate raw data by key.
      */
@@ -71,7 +72,7 @@ private:
      */
     std::forward_list<field> build_fields_activity(
         const std::unordered_map<std::string, std::forward_list<std::string> >&
-            aggregated_raw_data) const;
+        aggregated_data) const;
 
 public:
     /**

@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/dynamic/io/value_io.hpp"
-#include "dogen/dynamic/io/value_types_io.hpp"
 
 namespace dogen {
 namespace dynamic {

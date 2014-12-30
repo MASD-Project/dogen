@@ -23,39 +23,7 @@
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/dynamic/io/name_io.hpp"
 #include "dogen/dynamic/io/scope_types_io.hpp"
-#include "dogen/dynamic/io/value_io.hpp"
 #include "dogen/dynamic/io/value_types_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::dynamic::value>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s<< " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<boost::shared_ptr<dogen::dynamic::value> >& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace dynamic {
@@ -72,8 +40,7 @@ std::ostream& operator<<(std::ostream& s, const field_definition& v) {
       << "\"name\": " << v.name() << ", "
       << "\"type\": " << v.type() << ", "
       << "\"scope\": " << v.scope() << ", "
-      << "\"default_value\": " << v.default_value() << ", "
-      << "\"is_optional\": " << v.is_optional()
+      << "\"is_mandatory\": " << v.is_mandatory()
       << " }";
     return(s);
 }

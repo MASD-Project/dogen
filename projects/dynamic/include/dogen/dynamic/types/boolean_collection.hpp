@@ -44,9 +44,7 @@ public:
     virtual ~boolean_collection() noexcept { }
 
 public:
-    boolean_collection(
-        const dogen::dynamic::value_types& type,
-        const std::list<dogen::dynamic::boolean>& content);
+    explicit boolean_collection(const std::list<dogen::dynamic::boolean>& content);
 
 private:
     template<typename Archive>

@@ -34,7 +34,6 @@
 #include "dogen/dynamic/serialization/text_collection_ser.hpp"
 #include "dogen/dynamic/serialization/text_ser.hpp"
 #include "dogen/dynamic/serialization/value_ser.hpp"
-#include "dogen/dynamic/serialization/value_types_ser.hpp"
 
 
 BOOST_CLASS_TRACKING(
@@ -45,17 +44,15 @@ namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar,
-    const dogen::dynamic::value& v,
+void save(Archive& /*ar*/,
+    const dogen::dynamic::value& /*v*/,
     const unsigned int /*version*/) {
-    ar << make_nvp("type", v.type_);
 }
 
 template<typename Archive>
-void load(Archive& ar,
-    dogen::dynamic::value& v,
+void load(Archive& /*ar*/,
+    dogen::dynamic::value& /*v*/,
     const unsigned int /*version*/) {
-    ar >> make_nvp("type", v.type_);
 }
 
 } }

@@ -19,40 +19,21 @@
  *
  */
 #include <ostream>
-#include "dogen/dynamic/io/value_types_io.hpp"
 #include "dogen/dynamic/types/value.hpp"
 
 namespace dogen {
 namespace dynamic {
 
-value::value()
-    : type_(static_cast<dogen::dynamic::value_types>(0)) { }
-
-value::value(const dogen::dynamic::value_types& type)
-    : type_(type) { }
-
 void value::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::dynamic::value\"" << ", "
-      << "\"type\": " << type_
-      << " }";
+      << "\"__type__\": " << "\"dogen::dynamic::value\"" << " }";
 }
 
-void value::swap(value& other) noexcept {
-    using std::swap;
-    swap(type_, other.type_);
+void value::swap(value&) noexcept {
 }
 
-bool value::compare(const value& rhs) const {
-    return type_ == rhs.type_;
-}
-
-dogen::dynamic::value_types value::type() const {
-    return type_;
-}
-
-void value::type(const dogen::dynamic::value_types& v) {
-    type_ = v;
+bool value::compare(const value& /*rhs*/) const {
+    return true;
 }
 
 } }

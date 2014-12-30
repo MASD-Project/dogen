@@ -40,10 +40,8 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::dynamic:
 namespace dogen {
 namespace dynamic {
 
-number_collection::number_collection(
-    const dogen::dynamic::value_types& type,
-    const std::list<dogen::dynamic::number>& content)
-    : dogen::dynamic::value(type),
+number_collection::number_collection(const std::list<dogen::dynamic::number>& content)
+    : dogen::dynamic::value(),
       content_(content) { }
 
 void number_collection::to_stream(std::ostream& s) const {

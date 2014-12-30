@@ -44,9 +44,7 @@ public:
     virtual ~number() noexcept { }
 
 public:
-    number(
-        const dogen::dynamic::value_types& type,
-        const int content);
+    explicit number(const int content);
 
 private:
     template<typename Archive>

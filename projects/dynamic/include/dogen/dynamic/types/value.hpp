@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/dynamic/serialization/value_fwd_ser.hpp"
-#include "dogen/dynamic/types/value_types.hpp"
 #include "dogen/dynamic/types/value_visitor.hpp"
 
 namespace dogen {
@@ -36,16 +35,12 @@ namespace dynamic {
 
 class value {
 public:
+    value() = default;
     value(const value&) = default;
     value(value&&) = default;
-
-public:
-    value();
+    value& operator=(const value&) = default;
 
     virtual ~value() noexcept = 0;
-
-public:
-    explicit value(const dogen::dynamic::value_types& type);
 
 private:
     template<typename Archive>
@@ -63,10 +58,6 @@ public:
 public:
     virtual void to_stream(std::ostream& s) const;
 
-public:
-    dogen::dynamic::value_types type() const;
-    void type(const dogen::dynamic::value_types& v);
-
 protected:
     bool compare(const value& rhs) const;
 public:
@@ -75,8 +66,6 @@ public:
 protected:
     void swap(value& other) noexcept;
 
-private:
-    dogen::dynamic::value_types type_;
 };
 
 inline value::~value() noexcept { }
@@ -86,7 +75,5 @@ inline bool operator==(const value& lhs, const value& rhs) {
 }
 
 } }
-
-
 
 #endif

@@ -43,9 +43,7 @@ public:
     virtual ~text() noexcept { }
 
 public:
-    text(
-        const dogen::dynamic::value_types& type,
-        const std::string& content);
+    explicit text(const std::string& content);
 
 private:
     template<typename Archive>

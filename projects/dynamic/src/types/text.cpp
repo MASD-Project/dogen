@@ -34,10 +34,8 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 namespace dynamic {
 
-text::text(
-    const dogen::dynamic::value_types& type,
-    const std::string& content)
-    : dogen::dynamic::value(type),
+text::text(const std::string& content)
+    : dogen::dynamic::value(),
       content_(content) { }
 
 void text::to_stream(std::ostream& s) const {

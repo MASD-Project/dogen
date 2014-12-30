@@ -25,24 +25,15 @@
 #include "dogen/dynamic/test_data/text_collection_td.hpp"
 #include "dogen/dynamic/test_data/text_td.hpp"
 #include "dogen/dynamic/test_data/value_td.hpp"
-#include "dogen/dynamic/test_data/value_types_td.hpp"
 
-namespace {
 
-dogen::dynamic::value_types
-create_dogen_dynamic_value_types(const unsigned int position) {
-    return dogen::dynamic::value_types_generator::create(position);
-}
-
-}
 
 namespace dogen {
 namespace dynamic {
 
 
 void value_generator::
-populate(const unsigned int position, result_type& v) {
-    v.type(create_dogen_dynamic_value_types(position + 0));
+populate(const unsigned int /*position*/, result_type& /*v*/) {
 }
 
 value_generator::result_type*

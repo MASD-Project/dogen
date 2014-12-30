@@ -44,9 +44,7 @@ public:
     virtual ~text_collection() noexcept { }
 
 public:
-    text_collection(
-        const dogen::dynamic::value_types& type,
-        const std::list<dogen::dynamic::text>& content);
+    explicit text_collection(const std::list<dogen::dynamic::text>& content);
 
 private:
     template<typename Archive>

@@ -28,6 +28,7 @@
 #include <string>
 #include <utility>
 #include <forward_list>
+#include "dogen/dynamic/types/value.hpp"
 #include "dogen/dynamic/types/field.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 
@@ -38,6 +39,26 @@ namespace dynamic {
  * @brief Builds a field from its constituent parts.
  */
 class field_factory {
+private:
+    /**
+     * @brief Throws if the collection has more than one element.
+     */
+    void ensure_at_most_one_element(
+        const std::forward_list<std::string>& raw_values) const;
+
+private:
+    /**
+     * @brief Creates a stand alone text value.
+     */
+    boost::shared_ptr<value>
+    create_text_value(const std::string& raw_value) const;
+
+    /**
+     * @brief Creates a collection of text values.
+     */
+    boost::shared_ptr<value> create_text_values(
+        const std::forward_list<std::string>& raw_values) const;
+
 public:
     /**
      * @brief Builds a field given a definition, the original key and
@@ -50,7 +71,7 @@ public:
      * definition.
      */
     field build(const field_definition& fd,
-        const std::forward_list<std::string>& values) const;
+        const std::forward_list<std::string>& raw_values) const;
 };
 
 } }

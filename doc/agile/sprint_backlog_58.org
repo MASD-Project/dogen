@@ -16,27 +16,40 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-16 Tue 16:33]
+Clock summary at [2014-12-30 Tue 00:01]
 
 | Headline                                    | Time   |      |      |
 |---------------------------------------------+--------+------+------|
-| *Total time*                                | *0:42* |      |      |
+| *Total time*                                | *2:28* |      |      |
 |---------------------------------------------+--------+------+------|
-| Active                                      |        | 0:42 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:11 |
-| STARTED Implement dynamic's workflow        |        |      | 0:31 |
+| Active                                      |        | 2:28 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:21 |
+| STARTED Implement dynamic's workflow        |        |      | 2:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2014-12-29 Mon 22:15]--[2014-12-29 Mon 22:25] =>  0:10
     CLOCK: [2014-12-16 Tue 15:50]--[2014-12-16 Tue 16:01] =>  0:08
 
 Updates to sprint and product backlog.
 
 *** STARTED Implement dynamic's workflow                              :story:
+    CLOCK: [2014-12-29 Mon 23:53]--[2014-12-30 Tue 00:01] =>  0:08
+    CLOCK: [2014-12-29 Mon 22:25]--[2014-12-29 Mon 23:53] =>  1:28
     CLOCK: [2014-12-16 Tue 16:14]--[2014-12-16 Tue 16:33] =>  0:19
     CLOCK: [2014-12-16 Tue 16:01]--[2014-12-16 Tue 16:13] =>  0:12
 
 We have started the basic skeleton for the dynamic classes; continue
 this work by implementing the workflow and it's dependent classes.
+
+*Random Thoughts*
+
+- we should remove default values for now. We do not have a good story
+  on how it will work, and we can default things by hard-coding them
+  for now. It is not clear that making defaults dynamic will give any
+  benefits and it is already clear it is not trivial to get right. As
+  part of this change we renamed =is_optional= to =is_mandatory=. Also
+  removed the =value_types= in value as it is not clear how it will be
+  used yet.
 
 ** Deprecated
