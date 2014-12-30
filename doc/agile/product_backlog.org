@@ -8,6 +8,16 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider adding NuGet support                                     :story:
+
+Seems like AppVeyor supports deployment into nugget. Example:
+
+http://www.nuget.org/packages/RxCpp/
+
+It also comes with a couple of useful emblems:
+
+https://github.com/Reactive-Extensions/RxCpp
+
 *** Investigate AppVeyor's windows support for builds                 :story:
 
 These guys seem to have good windows support:
