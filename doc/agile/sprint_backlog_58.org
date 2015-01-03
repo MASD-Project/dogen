@@ -56,11 +56,16 @@ this work by implementing the workflow and it's dependent classes.
   removed the =value_types= in value as it is not clear how it will be
   used yet.
 
-*** Rename =Taggable= to =DynamicallyExtensible=                      :story:
+*** COMPLETED Rename =Taggable= to =Extensible=                       :story:
+    CLOSED: [2015-01-03 Sat 15:07]
+    CLOCK: [2015-01-03 Sat 15:07]--[2015-01-03 Sat 15:11] =>  0:04
+    CLOCK: [2015-01-03 Sat 15:03]--[2015-01-03 Sat 15:07] =>  0:04
 
 SML objects have meta-data object instead of the ptree; Taggable is
 perhaps not the best name for the concept but we need to think of a
-better alternative. =Extensible= perhaps? =DynamicallyExtensible=.
+better alternative. =Extensible= perhaps? =DynamicallyExtensible=?
+
+Final decision: =Extensible=.
 
 *** Add dynamic object to =DynamicallyExtensible=                     :story:
 
