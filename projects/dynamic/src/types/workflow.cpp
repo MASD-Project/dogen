@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/io/scope_types_io.hpp"
 #include "dogen/dynamic/types/field_factory.hpp"
 #include "dogen/dynamic/types/workflow_error.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
@@ -33,6 +35,8 @@ const std::string duplicate_field_definition(
     "Field definition already inserted: ");
 const std::string field_definition_not_found(
     "Field definition not found: ");
+const std::string field_used_in_invalid_scope(
+    "Field used in invalid scope: ");
 
 }
 
@@ -68,36 +72,59 @@ create_field_definitions_by_complete_name() const {
     return r;
 }
 
-std::forward_list<field> workflow::build_fields_activity(
+field_definition workflow::
+obtain_field_definition(const std::string& complete_name,
+    const scope_types current_scope) const {
+
+    const auto i(field_definitions_by_complete_name_.find(complete_name));
+    if (i == field_definitions_by_complete_name_.end()) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << complete_name;
+        BOOST_THROW_EXCEPTION(workflow_error(
+                field_definition_not_found + complete_name));
+    }
+
+    const auto& fd(i->second);
+    if (fd.scope() != scope_types::any && fd.scope() != current_scope) {
+        const auto s(boost::lexical_cast<std::string>(current_scope));
+        BOOST_LOG_SEV(lg, error) << field_used_in_invalid_scope << s;
+        BOOST_THROW_EXCEPTION(workflow_error(field_used_in_invalid_scope + s));
+    }
+
+    return fd;
+}
+
+std::unordered_map<std::string, std::forward_list<std::string> >
+workflow::aggregate_raw_data_activity(
+    const std::forward_list<std::pair<std::string, std::string> >&
+    raw_data) const {
+    std::unordered_map<std::string, std::forward_list<std::string> > r;
+
+    for (const auto& rd : raw_data)
+        r[rd.first].push_front(rd.second);
+
+    return r;
+}
+
+std::unordered_map<std::string, field> workflow::build_fields_activity(
     const std::unordered_map<std::string, std::forward_list<std::string> >&
-    aggregated_data) const {
-    std::forward_list<field> r;
+    aggregated_data, const scope_types current_scope) const {
+    std::unordered_map<std::string, field> r;
     field_factory f;
     for (auto pair : aggregated_data) {
-        const auto cn(pair.first);
-        const auto i(field_definitions_by_complete_name_.find(cn));
-        if (i == field_definitions_by_complete_name_.end()) {
-            BOOST_LOG_SEV(lg, error) << field_definition_not_found << cn;
-            BOOST_THROW_EXCEPTION(workflow_error(
-                    field_definition_not_found + cn));
-        }
-
-        const auto& fd(i->second);
+        const auto& complete_name(pair.first);
+        const auto& fd(obtain_field_definition(complete_name, current_scope));
         const auto& values(pair.second);
-        r.push_front(f.build(fd, values));
+        r[complete_name] = f.build(fd, values);
     }
     return r;
 }
 
-object workflow::execute(const scope_types /*scope*/,
+object workflow::execute(const scope_types current_scope,
     const std::forward_list<std::pair<std::string, std::string>>&
-    /*raw_data*/) const {
-    // auto aggregated_raw_data(aggregate_activity(raw_data));
-    // auto fields(build_fields_activity(aggregated_raw_data));
-    // create activity to validate mandatory fields (!is_optional)
-
-    object r;
-    return r;
+    raw_data) const {
+    auto aggregated_raw_data(aggregate_raw_data_activity(raw_data));
+    auto fields(build_fields_activity(aggregated_raw_data, current_scope));
+    return object(fields);
 }
 
 } }

@@ -48,6 +48,21 @@ private:
 
 private:
     /**
+     * @brief Converts s to integer.
+     *
+     * @pre s must be a valid integer.
+     */
+    int to_int(const std::string& s) const;
+
+    /**
+     * @brief Converts s to bool.
+     *
+     * @pre s must be a valid bool.
+     */
+    bool to_bool(const std::string& s) const;
+
+    private:
+    /**
      * @brief Creates a stand alone text value.
      */
     boost::shared_ptr<value>
@@ -57,6 +72,30 @@ private:
      * @brief Creates a collection of text values.
      */
     boost::shared_ptr<value> create_text_values(
+        const std::forward_list<std::string>& raw_values) const;
+
+    /**
+     * @brief Creates a stand alone number value.
+     */
+    boost::shared_ptr<value>
+    create_number_value(const std::string& raw_value) const;
+
+    /**
+     * @brief Creates a collection of number values.
+     */
+    boost::shared_ptr<value> create_number_values(
+        const std::forward_list<std::string>& raw_values) const;
+
+    /**
+     * @brief Creates a stand alone boolean value.
+     */
+    boost::shared_ptr<value>
+    create_boolean_value(const std::string& raw_value) const;
+
+    /**
+     * @brief Creates a collection of boolean values.
+     */
+    boost::shared_ptr<value> create_boolean_values(
         const std::forward_list<std::string>& raw_values) const;
 
 public:

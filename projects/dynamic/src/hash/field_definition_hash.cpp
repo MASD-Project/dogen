@@ -43,7 +43,6 @@ std::size_t field_definition_hasher::hash(const field_definition&v) {
     combine(seed, v.name());
     combine(seed, v.type());
     combine(seed, v.scope());
-    combine(seed, v.is_mandatory());
 
     return seed;
 }

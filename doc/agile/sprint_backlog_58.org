@@ -33,7 +33,10 @@ Clock summary at [2014-12-30 Tue 00:01]
 
 Updates to sprint and product backlog.
 
-*** STARTED Implement dynamic's workflow                              :story:
+*** COMPLETED Implement dynamic's workflow                            :story:
+    CLOSED: [2015-01-03 Sat 14:33]
+    CLOCK: [2015-01-03 Sat 14:12]--[2015-01-03 Sat 14:33] =>  0:21
+    CLOCK: [2015-01-03 Sat 13:42]--[2015-01-03 Sat 14:10] =>  0:28
     CLOCK: [2014-12-29 Mon 23:53]--[2014-12-30 Tue 00:01] =>  0:08
     CLOCK: [2014-12-29 Mon 22:25]--[2014-12-29 Mon 23:53] =>  1:28
     CLOCK: [2014-12-16 Tue 16:14]--[2014-12-16 Tue 16:33] =>  0:19

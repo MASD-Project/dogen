@@ -43,7 +43,6 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("type", v.type_);
     ar << make_nvp("scope", v.scope_);
-    ar << make_nvp("is_mandatory", v.is_mandatory_);
 }
 
 template<typename Archive>
@@ -53,7 +52,6 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("type", v.type_);
     ar >> make_nvp("scope", v.scope_);
-    ar >> make_nvp("is_mandatory", v.is_mandatory_);
 }
 
 } }

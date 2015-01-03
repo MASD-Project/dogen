@@ -50,8 +50,7 @@ public:
     field_definition(
         const dogen::dynamic::name& name,
         const dogen::dynamic::value_types& type,
-        const dogen::dynamic::scope_types& scope,
-        const bool is_mandatory);
+        const dogen::dynamic::scope_types& scope);
 
 private:
     template<typename Archive>
@@ -87,14 +86,6 @@ public:
     void scope(const dogen::dynamic::scope_types& v);
     /**@}*/
 
-    /**
-     * @brief If true, not supplying this field will result in an error.
-     */
-    /**@{*/
-    bool is_mandatory() const;
-    void is_mandatory(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const field_definition& rhs) const;
     bool operator!=(const field_definition& rhs) const {
@@ -109,7 +100,6 @@ private:
     dogen::dynamic::name name_;
     dogen::dynamic::value_types type_;
     dogen::dynamic::scope_types scope_;
-    bool is_mandatory_;
 };
 
 } }

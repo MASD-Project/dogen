@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/dynamic/io/name_io.hpp"
@@ -29,18 +28,11 @@ namespace dogen {
 namespace dynamic {
 
 std::ostream& operator<<(std::ostream& s, const field_definition& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::dynamic::field_definition\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"type\": " << v.type() << ", "
-      << "\"scope\": " << v.scope() << ", "
-      << "\"is_mandatory\": " << v.is_mandatory()
+      << "\"scope\": " << v.scope()
       << " }";
     return(s);
 }

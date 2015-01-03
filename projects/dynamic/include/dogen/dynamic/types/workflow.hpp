@@ -58,21 +58,33 @@ private:
     std::unordered_map<std::string, field_definition>
     create_field_definitions_by_complete_name() const;
 
+    /**
+     * @brief Returns the complete field definition for the complete
+     * name.
+     *
+     * @pre Throws if there isn't a field definition for the complete
+     * name.
+     * @pre Current scope must be valid according to the field
+     * definition's scope.
+     */
+    field_definition obtain_field_definition(const std::string& complete_name,
+        const scope_types current_scope) const;
+
 private:
     /**
      * @brief Aggregate raw data by key.
      */
     std::unordered_map<std::string, std::forward_list<std::string> >
-    aggregate_activity(
+    aggregate_raw_data_activity(
         const std::forward_list<std::pair<std::string, std::string> >&
         raw_data) const;
 
     /**
      * @brief Converts the raw data into a set of fields.
      */
-    std::forward_list<field> build_fields_activity(
+    std::unordered_map<std::string, field> build_fields_activity(
         const std::unordered_map<std::string, std::forward_list<std::string> >&
-        aggregated_data) const;
+        aggregated_data, const scope_types current_scope) const;
 
 public:
     /**

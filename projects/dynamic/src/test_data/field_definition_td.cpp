@@ -40,10 +40,6 @@ create_dogen_dynamic_scope_types(const unsigned int position) {
     return dogen::dynamic::scope_types_generator::create(position);
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 }
 
 namespace dogen {
@@ -56,7 +52,6 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_dynamic_name(position + 0));
     v.type(create_dogen_dynamic_value_types(position + 1));
     v.scope(create_dogen_dynamic_scope_types(position + 2));
-    v.is_mandatory(create_bool(position + 3));
 }
 
 field_definition_generator::result_type

@@ -25,32 +25,27 @@ namespace dynamic {
 
 field_definition::field_definition()
     : type_(static_cast<dogen::dynamic::value_types>(0)),
-      scope_(static_cast<dogen::dynamic::scope_types>(0)),
-      is_mandatory_(static_cast<bool>(0)) { }
+      scope_(static_cast<dogen::dynamic::scope_types>(0)) { }
 
 field_definition::field_definition(
     const dogen::dynamic::name& name,
     const dogen::dynamic::value_types& type,
-    const dogen::dynamic::scope_types& scope,
-    const bool is_mandatory)
+    const dogen::dynamic::scope_types& scope)
     : name_(name),
       type_(type),
-      scope_(scope),
-      is_mandatory_(is_mandatory) { }
+      scope_(scope) { }
 
 void field_definition::swap(field_definition& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(scope_, other.scope_);
-    swap(is_mandatory_, other.is_mandatory_);
 }
 
 bool field_definition::operator==(const field_definition& rhs) const {
     return name_ == rhs.name_ &&
         type_ == rhs.type_ &&
-        scope_ == rhs.scope_ &&
-        is_mandatory_ == rhs.is_mandatory_;
+        scope_ == rhs.scope_;
 }
 
 field_definition& field_definition::operator=(field_definition other) {
@@ -89,14 +84,6 @@ dogen::dynamic::scope_types field_definition::scope() const {
 
 void field_definition::scope(const dogen::dynamic::scope_types& v) {
     scope_ = v;
-}
-
-bool field_definition::is_mandatory() const {
-    return is_mandatory_;
-}
-
-void field_definition::is_mandatory(const bool v) {
-    is_mandatory_ = v;
 }
 
 } }
