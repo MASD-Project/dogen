@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="10">
-<entity class_id="3" tracking_level="0" version="0">
+<entity class_id="9" tracking_level="0" version="0">
 	<documentation></documentation>
-	<meta_data class_id="4" tracking_level="0" version="0">
+	<meta_data class_id="10" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 		<data></data>
 	</meta_data>
-	<name class_id="5" tracking_level="0" version="0">
+	<extensions class_id="11" tracking_level="0" version="0">
+		<fields class_id="12" tracking_level="0" version="0">
+			<count>0</count>
+			<bucket_count>11</bucket_count>
+			<item_version>0</item_version>
+		</fields>
+	</extensions>
+	<name class_id="13" tracking_level="0" version="0">
 		<model_name>trivial_inheritance</model_name>
-		<external_module_path class_id="6" tracking_level="0" version="0">
+		<external_module_path class_id="14" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
 		</external_module_path>
@@ -22,14 +29,14 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<containing_module class_id="7" tracking_level="0" version="0">
+	<containing_module class_id="15" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</containing_module>
-	<references class_id="8" tracking_level="0" version="0">
+	<references class_id="16" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="9" tracking_level="0" version="0">
+		<item class_id="17" tracking_level="0" version="0">
 			<first>
 				<model_name>boost</model_name>
 				<external_module_path>
@@ -45,7 +52,7 @@
 			<second>3</second>
 		</item>
 	</references>
-	<leaves class_id="10" tracking_level="0" version="0">
+	<leaves class_id="18" tracking_level="0" version="0">
 		<count>12</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
@@ -197,11 +204,11 @@
 			<simple_name>child</simple_name>
 		</item>
 	</leaves>
-	<modules class_id="11" tracking_level="0" version="0">
+	<modules class_id="19" tracking_level="0" version="0">
 		<count>5</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="12" tracking_level="0" version="0">
+		<item class_id="20" tracking_level="0" version="0">
 			<first>
 				<model_name>trivial_inheritance</model_name>
 				<external_module_path>
@@ -214,13 +221,20 @@
 				</module_path>
 				<simple_name>pkg4</simple_name>
 			</first>
-			<second class_id="13" tracking_level="0" version="0">
+			<second class_id="21" tracking_level="0" version="0">
 				<documentation></documentation>
 				<meta_data>
 					<count>0</count>
 					<item_version>0</item_version>
 					<data></data>
 				</meta_data>
+				<extensions>
+					<fields>
+						<count>0</count>
+						<bucket_count>11</bucket_count>
+						<item_version>0</item_version>
+					</fields>
+				</extensions>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -251,7 +265,7 @@
 						<simple_name>trivial_inheritance</simple_name>
 					</value>
 				</containing_module>
-				<members class_id="14" tracking_level="0" version="0">
+				<members class_id="22" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -291,6 +305,13 @@
 					<item_version>0</item_version>
 					<data></data>
 				</meta_data>
+				<extensions>
+					<fields>
+						<count>0</count>
+						<bucket_count>11</bucket_count>
+						<item_version>0</item_version>
+					</fields>
+				</extensions>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -361,6 +382,13 @@
 					<item_version>0</item_version>
 					<data></data>
 				</meta_data>
+				<extensions>
+					<fields>
+						<count>0</count>
+						<bucket_count>11</bucket_count>
+						<item_version>0</item_version>
+					</fields>
+				</extensions>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -431,6 +459,13 @@
 					<item_version>0</item_version>
 					<data></data>
 				</meta_data>
+				<extensions>
+					<fields>
+						<count>0</count>
+						<bucket_count>11</bucket_count>
+						<item_version>0</item_version>
+					</fields>
+				</extensions>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -517,7 +552,7 @@ in the context of inheritance.
 				<meta_data>
 					<count>4</count>
 					<item_version>0</item_version>
-					<item class_id="15" tracking_level="0" version="0">
+					<item class_id="23" tracking_level="0" version="0">
 						<first>dia</first>
 						<second>
 							<count>1</count>
@@ -559,6 +594,13 @@ in the context of inheritance.
 					</item>
 					<data></data>
 				</meta_data>
+				<extensions>
+					<fields>
+						<count>0</count>
+						<bucket_count>11</bucket_count>
+						<item_version>0</item_version>
+					</fields>
+				</extensions>
 				<name>
 					<model_name>trivial_inheritance</model_name>
 					<external_module_path>
@@ -848,26 +890,26 @@ in the context of inheritance.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="16" tracking_level="0" version="0">
+	<concepts class_id="24" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="17" tracking_level="0" version="0">
+	<primitives class_id="25" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="18" tracking_level="0" version="0">
+	<enumerations class_id="26" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="19" tracking_level="0" version="0">
+	<objects class_id="27" tracking_level="0" version="0">
 		<count>23</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="20" tracking_level="0" version="0">
+		<item class_id="28" tracking_level="0" version="0">
 			<first>
 				<model_name>trivial_inheritance</model_name>
 				<external_module_path>
@@ -880,8 +922,8 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>move_ctor_empty_descendant</simple_name>
 			</first>
-			<second class_id="1" tracking_level="1" version="0" object_id="_0">
-				<type class_id="21" tracking_level="0" version="0">
+			<second class_id="7" tracking_level="1" version="0" object_id="_0">
+				<type class_id="29" tracking_level="0" version="0">
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<meta_data>
@@ -889,6 +931,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -920,7 +969,7 @@ in the context of inheritance.
 						</value>
 					</containing_module>
 				</type>
-				<all_properties class_id="22" tracking_level="0" version="0">
+				<all_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
@@ -928,12 +977,12 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_properties>
-				<inherited_properties class_id="23" tracking_level="0" version="0">
+				<inherited_properties class_id="31" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<operations class_id="24" tracking_level="0" version="0">
+				<operations class_id="32" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</operations>
@@ -946,11 +995,11 @@ in the context of inheritance.
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="25" tracking_level="0" version="0">
+				<relationships class_id="33" tracking_level="0" version="0">
 					<count>2</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item class_id="26" tracking_level="0" version="0">
+					<item class_id="34" tracking_level="0" version="0">
 						<first>1</first>
 						<second>
 							<count>1</count>
@@ -1020,6 +1069,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -1059,15 +1115,22 @@ in the context of inheritance.
 				<local_properties>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="27" tracking_level="0" version="0">
+					<item class_id="35" tracking_level="0" version="0">
 						<documentation></documentation>
 						<meta_data>
 							<count>0</count>
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_1</name>
-						<type class_id="28" tracking_level="0" version="0">
+						<type class_id="36" tracking_level="0" version="0">
 							<type>
 								<model_name></model_name>
 								<external_module_path>
@@ -1080,7 +1143,7 @@ in the context of inheritance.
 								</module_path>
 								<simple_name>int</simple_name>
 							</type>
-							<children class_id="29" tracking_level="0" version="0">
+							<children class_id="37" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -1184,6 +1247,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -1314,6 +1384,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -1359,6 +1436,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
@@ -1476,6 +1560,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -1522,6 +1613,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
@@ -1620,6 +1718,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -1750,6 +1855,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -1881,6 +1993,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -1927,6 +2046,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_1</name>
 						<type>
 							<type>
@@ -2043,6 +2169,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -2088,6 +2221,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_2</name>
 						<type>
 							<type>
@@ -2204,6 +2344,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -2249,6 +2396,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
@@ -2370,6 +2524,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -2494,6 +2655,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -2540,6 +2708,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_1</name>
 						<type>
 							<type>
@@ -2658,6 +2833,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -2703,6 +2885,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
@@ -2819,6 +3008,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -2864,6 +3060,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
@@ -2962,6 +3165,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3007,6 +3217,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_1</name>
 						<type>
 							<type>
@@ -3155,6 +3372,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3201,6 +3425,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_1</name>
 						<type>
 							<type>
@@ -3318,6 +3549,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3410,6 +3648,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3502,6 +3747,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3625,6 +3877,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3774,6 +4033,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3819,6 +4085,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
@@ -3936,6 +4209,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -3982,6 +4262,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
@@ -4081,6 +4368,13 @@ in the context of inheritance.
 						<item_version>0</item_version>
 						<data></data>
 					</meta_data>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
 					<name>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
@@ -4127,6 +4421,13 @@ in the context of inheritance.
 							<item_version>0</item_version>
 							<data></data>
 						</meta_data>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>

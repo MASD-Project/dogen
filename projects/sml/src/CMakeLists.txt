@@ -25,6 +25,7 @@ file(GLOB_RECURSE all_files RELATIVE
 add_library(sml STATIC ${all_files})
 target_link_libraries(sml
     config
+    dynamic
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

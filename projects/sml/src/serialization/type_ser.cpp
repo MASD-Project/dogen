@@ -31,6 +31,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
@@ -53,6 +54,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("meta_data", v.meta_data_);
+    ar << make_nvp("extensions", v.extensions_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
@@ -65,6 +67,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("meta_data", v.meta_data_);
+    ar >> make_nvp("extensions", v.extensions_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);

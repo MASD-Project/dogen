@@ -22,6 +22,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include <sstream>
+#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -77,6 +78,7 @@ type::type()
 type::type(type&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
+      extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
@@ -85,12 +87,14 @@ type::type(type&& rhs)
 type::type(
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
+    const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
     const boost::optional<dogen::sml::qname>& containing_module)
     : documentation_(documentation),
       meta_data_(meta_data),
+      extensions_(extensions),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -101,6 +105,7 @@ void type::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::sml::type\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"meta_data\": " << meta_data_ << ", "
+      << "\"extensions\": " << extensions_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
@@ -112,6 +117,7 @@ void type::swap(type& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
+    swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -121,6 +127,7 @@ void type::swap(type& other) noexcept {
 bool type::compare(const type& rhs) const {
     return documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
+        extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -157,6 +164,22 @@ void type::meta_data(const boost::property_tree::ptree& v) {
 
 void type::meta_data(const boost::property_tree::ptree&& v) {
     meta_data_ = std::move(v);
+}
+
+const dogen::dynamic::object& type::extensions() const {
+    return extensions_;
+}
+
+dogen::dynamic::object& type::extensions() {
+    return extensions_;
+}
+
+void type::extensions(const dogen::dynamic::object& v) {
+    extensions_ = v;
+}
+
+void type::extensions(const dogen::dynamic::object&& v) {
+    extensions_ = std::move(v);
 }
 
 const dogen::sml::qname& type::name() const {

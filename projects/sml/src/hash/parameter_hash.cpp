@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/sml/hash/nested_qname_hash.hpp"
 #include "dogen/sml/hash/parameter_hash.hpp"
 
@@ -51,6 +52,7 @@ std::size_t parameter_hasher::hash(const parameter&v) {
 
     combine(seed, v.documentation());
     combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
+    combine(seed, v.extensions());
     combine(seed, v.name());
     combine(seed, v.type());
 

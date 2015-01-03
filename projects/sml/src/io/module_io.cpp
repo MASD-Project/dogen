@@ -22,6 +22,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include <sstream>
+#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/module_types_io.hpp"
@@ -90,6 +91,7 @@ std::ostream& operator<<(std::ostream& s, const module& v) {
       << "\"__type__\": " << "\"dogen::sml::module\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"meta_data\": " << v.meta_data() << ", "
+      << "\"extensions\": " << v.extensions() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "

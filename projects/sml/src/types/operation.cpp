@@ -26,6 +26,7 @@ namespace sml {
 operation::operation(operation&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
+      extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       parameters_(std::move(rhs.parameters_)),
       type_(std::move(rhs.type_)) { }
@@ -33,11 +34,13 @@ operation::operation(operation&& rhs)
 operation::operation(
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
+    const dogen::dynamic::object& extensions,
     const std::string& name,
     const std::list<dogen::sml::parameter>& parameters,
     const boost::optional<dogen::sml::nested_qname>& type)
     : documentation_(documentation),
       meta_data_(meta_data),
+      extensions_(extensions),
       name_(name),
       parameters_(parameters),
       type_(type) { }
@@ -46,6 +49,7 @@ void operation::swap(operation& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
+    swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(parameters_, other.parameters_);
     swap(type_, other.type_);
@@ -54,6 +58,7 @@ void operation::swap(operation& other) noexcept {
 bool operation::operator==(const operation& rhs) const {
     return documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
+        extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         parameters_ == rhs.parameters_ &&
         type_ == rhs.type_;
@@ -95,6 +100,22 @@ void operation::meta_data(const boost::property_tree::ptree& v) {
 
 void operation::meta_data(const boost::property_tree::ptree&& v) {
     meta_data_ = std::move(v);
+}
+
+const dogen::dynamic::object& operation::extensions() const {
+    return extensions_;
+}
+
+dogen::dynamic::object& operation::extensions() {
+    return extensions_;
+}
+
+void operation::extensions(const dogen::dynamic::object& v) {
+    extensions_ = v;
+}
+
+void operation::extensions(const dogen::dynamic::object&& v) {
+    extensions_ = std::move(v);
 }
 
 const std::string& operation::name() const {

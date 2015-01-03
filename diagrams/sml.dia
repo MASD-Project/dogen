@@ -68,13 +68,13 @@
         <dia:point val="-13,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,69.95;2.565,76.85"/>
+        <dia:rectangle val="-13.05,69.95;-1.67,76.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-13,70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.515000000000001"/>
+        <dia:real val="11.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -4086,7 +4086,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-72,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.05,43.95;-56.435,47.65"/>
+        <dia:rectangle val="-72.05,43.95;-56.435,48.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-72,44"/>
@@ -4095,7 +4095,7 @@ for Java, etc.#</dia:string>
         <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Extensible#</dia:string>
@@ -4197,6 +4197,29 @@ for Java, etc.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Meta-data associated with the object, opaque to SML.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#extensions#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#dynamic::object#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Dynamic extensions for this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4392,16 +4415,16 @@ for Java, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="-64.2425,47.6"/>
+        <dia:point val="-64.2425,48.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.6825,47.55;-63.3925,58.05"/>
+        <dia:rectangle val="-72.6825,48.35;-63.3925,58.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-64.2425,47.6"/>
+        <dia:point val="-64.2425,48.4"/>
         <dia:point val="-64.2425,54"/>
         <dia:point val="-72.6325,54"/>
         <dia:point val="-72.6325,58"/>
@@ -6976,13 +6999,13 @@ came from.#</dia:string>
         <dia:point val="-142,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-142.05,43.95;-126.435,49.25"/>
+        <dia:rectangle val="-142.05,43.95;-127.59,49.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-142,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.515000000000001"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -7484,13 +7507,13 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-143,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-143.05,29.95;-127.435,34.45"/>
+        <dia:rectangle val="-143.05,29.95;-131.67,34.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-143,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.515000000000001"/>
+        <dia:real val="11.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>

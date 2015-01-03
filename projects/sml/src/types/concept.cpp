@@ -35,6 +35,7 @@ concept::concept(concept&& rhs)
       inherited_properties_(std::move(rhs.inherited_properties_)),
       documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
+      extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
@@ -50,6 +51,7 @@ concept::concept(
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
+    const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -63,6 +65,7 @@ concept::concept(
       inherited_properties_(inherited_properties),
       documentation_(documentation),
       meta_data_(meta_data),
+      extensions_(extensions),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -79,6 +82,7 @@ void concept::swap(concept& other) noexcept {
     swap(inherited_properties_, other.inherited_properties_);
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
+    swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -95,6 +99,7 @@ bool concept::operator==(const concept& rhs) const {
         inherited_properties_ == rhs.inherited_properties_ &&
         documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
+        extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -189,6 +194,22 @@ void concept::meta_data(const boost::property_tree::ptree& v) {
 
 void concept::meta_data(const boost::property_tree::ptree&& v) {
     meta_data_ = std::move(v);
+}
+
+const dogen::dynamic::object& concept::extensions() const {
+    return extensions_;
+}
+
+dogen::dynamic::object& concept::extensions() {
+    return extensions_;
+}
+
+void concept::extensions(const dogen::dynamic::object& v) {
+    extensions_ = v;
+}
+
+void concept::extensions(const dogen::dynamic::object&& v) {
+    extensions_ = std::move(v);
 }
 
 const dogen::sml::qname& concept::name() const {

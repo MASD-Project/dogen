@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
 #include "dogen/sml/test_data/parameter_td.hpp"
 
@@ -40,6 +41,11 @@ create_boost_property_tree_ptree(const unsigned int position) {
     return r;
 }
 
+dogen::dynamic::object
+create_dogen_dynamic_object(const unsigned int position) {
+    return dogen::dynamic::object_generator::create(position);
+}
+
 dogen::sml::nested_qname
 create_dogen_sml_nested_qname(const unsigned int position) {
     return dogen::sml::nested_qname_generator::create(position);
@@ -56,8 +62,9 @@ void parameter_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.meta_data(create_boost_property_tree_ptree(position + 1));
-    v.name(create_std_string(position + 2));
-    v.type(create_dogen_sml_nested_qname(position + 3));
+    v.extensions(create_dogen_dynamic_object(position + 2));
+    v.name(create_std_string(position + 3));
+    v.type(create_dogen_sml_nested_qname(position + 4));
 }
 
 parameter_generator::result_type

@@ -31,6 +31,7 @@ model::model()
 model::model(model&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
+      extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
@@ -47,6 +48,7 @@ model::model(model&& rhs)
 model::model(
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
+    const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -61,6 +63,7 @@ model::model(
     const bool is_target)
     : documentation_(documentation),
       meta_data_(meta_data),
+      extensions_(extensions),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -78,6 +81,7 @@ void model::swap(model& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
+    swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -95,6 +99,7 @@ void model::swap(model& other) noexcept {
 bool model::operator==(const model& rhs) const {
     return documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
+        extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -145,6 +150,22 @@ void model::meta_data(const boost::property_tree::ptree& v) {
 
 void model::meta_data(const boost::property_tree::ptree&& v) {
     meta_data_ = std::move(v);
+}
+
+const dogen::dynamic::object& model::extensions() const {
+    return extensions_;
+}
+
+dogen::dynamic::object& model::extensions() {
+    return extensions_;
+}
+
+void model::extensions(const dogen::dynamic::object& v) {
+    extensions_ = v;
+}
+
+void model::extensions(const dogen::dynamic::object&& v) {
+    extensions_ = std::move(v);
 }
 
 const dogen::sml::qname& model::name() const {

@@ -59,6 +59,7 @@ public:
     object(
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
+        const dogen::dynamic::object& extensions,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,

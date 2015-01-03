@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/operation_hash.hpp"
@@ -101,6 +102,7 @@ std::size_t concept_hasher::hash(const concept&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
     combine(seed, v.documentation());
     combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
+    combine(seed, v.extensions());
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());

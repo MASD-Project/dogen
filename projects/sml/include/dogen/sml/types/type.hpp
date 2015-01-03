@@ -30,6 +30,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <iosfwd>
 #include <string>
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/sml/serialization/type_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/origin_types.hpp"
@@ -58,6 +59,7 @@ public:
     type(
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
+        const dogen::dynamic::object& extensions,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
@@ -102,6 +104,16 @@ public:
     boost::property_tree::ptree& meta_data();
     void meta_data(const boost::property_tree::ptree& v);
     void meta_data(const boost::property_tree::ptree&& v);
+    /**@}*/
+
+    /**
+     * @brief Dynamic extensions for this element.
+     */
+    /**@{*/
+    const dogen::dynamic::object& extensions() const;
+    dogen::dynamic::object& extensions();
+    void extensions(const dogen::dynamic::object& v);
+    void extensions(const dogen::dynamic::object&& v);
     /**@}*/
 
     /**
@@ -152,6 +164,7 @@ protected:
 private:
     std::string documentation_;
     boost::property_tree::ptree meta_data_;
+    dogen::dynamic::object extensions_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;

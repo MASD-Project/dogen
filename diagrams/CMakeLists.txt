@@ -39,6 +39,7 @@ add_custom_target(codegen_${target}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io

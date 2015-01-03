@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/operation_td.hpp"
@@ -68,6 +69,11 @@ create_boost_property_tree_ptree(const unsigned int position) {
     ptree r;
     r.push_back(ptree::value_type("key_1", c));
     return r;
+}
+
+dogen::dynamic::object
+create_dogen_dynamic_object(const unsigned int position) {
+    return dogen::dynamic::object_generator::create(position);
 }
 
 dogen::sml::generation_types
@@ -126,14 +132,15 @@ populate(const unsigned int position, result_type& v) {
     v.inherited_properties(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(position + 2));
     v.documentation(create_std_string(position + 3));
     v.meta_data(create_boost_property_tree_ptree(position + 4));
-    v.name(create_dogen_sml_qname(position + 5));
-    v.generation_type(create_dogen_sml_generation_types(position + 6));
-    v.origin_type(create_dogen_sml_origin_types(position + 7));
-    v.containing_module(create_boost_optional_dogen_sml_qname(position + 8));
-    v.operations(create_std_list_dogen_sml_operation(position + 9));
-    v.refines(create_std_list_dogen_sml_qname(position + 10));
-    v.is_parent(create_bool(position + 11));
-    v.is_child(create_bool(position + 12));
+    v.extensions(create_dogen_dynamic_object(position + 5));
+    v.name(create_dogen_sml_qname(position + 6));
+    v.generation_type(create_dogen_sml_generation_types(position + 7));
+    v.origin_type(create_dogen_sml_origin_types(position + 8));
+    v.containing_module(create_boost_optional_dogen_sml_qname(position + 9));
+    v.operations(create_std_list_dogen_sml_operation(position + 10));
+    v.refines(create_std_list_dogen_sml_qname(position + 11));
+    v.is_parent(create_bool(position + 12));
+    v.is_child(create_bool(position + 13));
 }
 
 concept_generator::result_type

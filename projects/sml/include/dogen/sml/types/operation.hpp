@@ -30,6 +30,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <list>
 #include <string>
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/sml/serialization/operation_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/parameter.hpp"
@@ -53,6 +54,7 @@ public:
     operation(
         const std::string& documentation,
         const boost::property_tree::ptree& meta_data,
+        const dogen::dynamic::object& extensions,
         const std::string& name,
         const std::list<dogen::sml::parameter>& parameters,
         const boost::optional<dogen::sml::nested_qname>& type);
@@ -87,6 +89,16 @@ public:
     boost::property_tree::ptree& meta_data();
     void meta_data(const boost::property_tree::ptree& v);
     void meta_data(const boost::property_tree::ptree&& v);
+    /**@}*/
+
+    /**
+     * @brief Dynamic extensions for this element.
+     */
+    /**@{*/
+    const dogen::dynamic::object& extensions() const;
+    dogen::dynamic::object& extensions();
+    void extensions(const dogen::dynamic::object& v);
+    void extensions(const dogen::dynamic::object&& v);
     /**@}*/
 
     /**
@@ -132,6 +144,7 @@ public:
 private:
     std::string documentation_;
     boost::property_tree::ptree meta_data_;
+    dogen::dynamic::object extensions_;
     std::string name_;
     std::list<dogen::sml::parameter> parameters_;
     boost::optional<dogen::sml::nested_qname> type_;

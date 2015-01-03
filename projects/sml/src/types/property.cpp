@@ -30,6 +30,7 @@ property::property()
 property::property(property&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       meta_data_(std::move(rhs.meta_data_)),
+      extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       type_(std::move(rhs.type_)),
       default_value_(std::move(rhs.default_value_)),
@@ -39,6 +40,7 @@ property::property(property&& rhs)
 property::property(
     const std::string& documentation,
     const boost::property_tree::ptree& meta_data,
+    const dogen::dynamic::object& extensions,
     const std::string& name,
     const dogen::sml::nested_qname& type,
     const std::string& default_value,
@@ -46,6 +48,7 @@ property::property(
     const bool is_fluent)
     : documentation_(documentation),
       meta_data_(meta_data),
+      extensions_(extensions),
       name_(name),
       type_(type),
       default_value_(default_value),
@@ -56,6 +59,7 @@ void property::swap(property& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(meta_data_, other.meta_data_);
+    swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(default_value_, other.default_value_);
@@ -66,6 +70,7 @@ void property::swap(property& other) noexcept {
 bool property::operator==(const property& rhs) const {
     return documentation_ == rhs.documentation_ &&
         meta_data_ == rhs.meta_data_ &&
+        extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
         default_value_ == rhs.default_value_ &&
@@ -109,6 +114,22 @@ void property::meta_data(const boost::property_tree::ptree& v) {
 
 void property::meta_data(const boost::property_tree::ptree&& v) {
     meta_data_ = std::move(v);
+}
+
+const dogen::dynamic::object& property::extensions() const {
+    return extensions_;
+}
+
+dogen::dynamic::object& property::extensions() {
+    return extensions_;
+}
+
+void property::extensions(const dogen::dynamic::object& v) {
+    extensions_ = v;
+}
+
+void property::extensions(const dogen::dynamic::object&& v) {
+    extensions_ = std::move(v);
 }
 
 const std::string& property::name() const {

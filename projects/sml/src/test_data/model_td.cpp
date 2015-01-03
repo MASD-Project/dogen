@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
@@ -45,6 +46,11 @@ create_boost_property_tree_ptree(const unsigned int position) {
     ptree r;
     r.push_back(ptree::value_type("key_1", c));
     return r;
+}
+
+dogen::dynamic::object
+create_dogen_dynamic_object(const unsigned int position) {
+    return dogen::dynamic::object_generator::create(position);
 }
 
 dogen::sml::qname
@@ -165,18 +171,19 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.meta_data(create_boost_property_tree_ptree(position + 1));
-    v.name(create_dogen_sml_qname(position + 2));
-    v.generation_type(create_dogen_sml_generation_types(position + 3));
-    v.origin_type(create_dogen_sml_origin_types(position + 4));
-    v.containing_module(create_boost_optional_dogen_sml_qname(position + 5));
-    v.references(create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(position + 6));
-    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 7));
-    v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 8));
-    v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 9));
-    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 10));
-    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 11));
-    v.objects(create_std_unordered_map_dogen_sml_qname_dogen_sml_object(position + 12));
-    v.is_target(create_bool(position + 13));
+    v.extensions(create_dogen_dynamic_object(position + 2));
+    v.name(create_dogen_sml_qname(position + 3));
+    v.generation_type(create_dogen_sml_generation_types(position + 4));
+    v.origin_type(create_dogen_sml_origin_types(position + 5));
+    v.containing_module(create_boost_optional_dogen_sml_qname(position + 6));
+    v.references(create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(position + 7));
+    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 8));
+    v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 9));
+    v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 10));
+    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 11));
+    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 12));
+    v.objects(create_std_unordered_map_dogen_sml_qname_dogen_sml_object(position + 13));
+    v.is_target(create_bool(position + 14));
 }
 
 model_generator::result_type

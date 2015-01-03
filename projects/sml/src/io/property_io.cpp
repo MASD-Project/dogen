@@ -23,6 +23,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include <sstream>
+#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 
@@ -65,6 +66,7 @@ std::ostream& operator<<(std::ostream& s, const property& v) {
       << "\"__type__\": " << "\"dogen::sml::property\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"meta_data\": " << v.meta_data() << ", "
+      << "\"extensions\": " << v.extensions() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type\": " << v.type() << ", "
       << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
