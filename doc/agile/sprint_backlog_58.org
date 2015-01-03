@@ -30,6 +30,7 @@ Clock summary at [2015-01-03 Sat 15:23]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-03 Sat 15:22]--[2015-01-03 Sat 15:30] =>  0:08
     CLOCK: [2015-01-03 Sat 14:33]--[2015-01-03 Sat 15:02] =>  0:14
     CLOCK: [2014-12-29 Mon 22:15]--[2014-12-29 Mon 22:25] =>  0:10
     CLOCK: [2014-12-16 Tue 15:50]--[2014-12-16 Tue 16:01] =>  0:08
@@ -76,11 +77,11 @@ Final decision: =Extensible=.
 Add a new property for the dynamic extensions. For now we keep =ptree=
 side-by-side with dynamic.
 
-*** Add field definitions for existing fields                         :story:
+*** Add support for =dia.comment=                                     :story:
 
-We need to start generating the field definitions for the fields we
-need to consume. Create these using the existing static data
-machinery.
+We need to implement dia.comment in terms of the dynamic object. We
+need to add the field definition and make sure we can replace the
+transformer processing with the new approach.
 
 *** Replace uses of meta-data with dynamic object                     :story:
 
@@ -124,6 +125,8 @@ of this dependency.
 
 This class does not make sense any more as each model will be
 responsible for their own tags.
+
+Can only be done once we delete writer and reader.
 
 ** Deprecated
 
