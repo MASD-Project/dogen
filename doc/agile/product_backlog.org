@@ -424,17 +424,6 @@ worry about a lot of the boilerplate code. However, the biggest
 problem is that we'd be imposing a large and complex "framework" on
 them with all the evilness that that entails.
 
-*** Utility meta-data factory                                         :story:
-
-Now that we have a number of meta-data factories that produce settings
-we should be able to factor out all their commonalities and add a
-utility factory to the =formatters= model that handles all use
-cases. Each factory then uses the utility factory instead of calling
-reader etc directly.
-
-We can't create a single factory because we need to generate multiple
-products that are model dependent.
-
 *** Usage of rev-list in version causes problems                      :story:
 
 Now we are using travis, we have found problems with the way we are
@@ -596,6 +585,17 @@ dependencies inside of the formatters.
 - remove helper models boost and std
 
 *** Includer generation should be done from meta-data                 :story:
+
+*New Understanding*
+
+The true use case of this story is not to allow users to add includes
+at random; it is actually only useful in one scenario:
+
+- *merging code generation*: users add code which requires additional
+  includes. Without support for this, merging code generation would
+  have limited usefulness.
+
+*Previous Understanding*
 
 It would be nice if we could determine which includer files to create
 by looking at the meta-data. For this we need a notion of an inclusion
@@ -902,21 +902,11 @@ the transformation process. Remove all the concepts from the model
 (=Element= etc) and deal with the fall out. This is required in order
 to simplify the graph in enricher.
 
-*** Remove dependency of writer on tags                               :story:
-
-We seem to be using the tags to detect containers. We need to get rid
-of this dependency.
-
 *** All model items traversal should resolve types                    :story:
 
 This traversal was designed for tagger but yet it does not resolve
 =type= into one of the sub-classes, forcing tagger to implement
 visitation to resolve the types. We should improve the traversal.
-
-*** Delete tags class in SML                                          :story:
-
-This class does not make sense any more as each model will be
-responsible for their own tags.
 
 *** Remove all of the config settings that are in meta-data           :story:
 
@@ -1192,12 +1182,6 @@ the whole of serialisation optional or
 =cpp.boost_serialization.main_header= to make the header optional. Not
 sure if the latter has any use.
 
-*** Consider merging graphers into a single class                     :story:
-
-After the meta-data work, we ended up with two separate graphers doing
-similar things. We should look into the commonalities of these classes
-to see if we can reuse code.
-
 *** References to objects in package should assume package            :story:
 
 #+begin_quote
@@ -1305,6 +1289,13 @@ It doesn't seem like there is any good reason to treat the keys in a
 special way so try to remove this.
 
 *** Towards a more generic use of meta-data parameters                 :epic:
+
+*New Understanding*: We have decided to limit the meta-data usage to
+extensibility. Where required parameters will be made visible via the
+meta-data but this should be kept to just those parameters that users
+can sensibly control.
+
+*Previous Understanding*
 
 We should do an inventory of all dogen features which can be
 reimplemented as meta-data parameters. For example, immutability
@@ -2754,7 +2745,7 @@ cases it may be useful to have multiple types sharing the same
 file. For instance, one may want to have all enumerations in one file,
 or all exceptions, etc.
 
-We could easily implement this using meta-data.
+We could implement this using meta-data.
 
 *** Canned tests rely on copy constructors rather than cloning        :story:
 

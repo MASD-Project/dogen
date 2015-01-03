@@ -16,18 +16,19 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2014-12-30 Tue 00:01]
+Clock summary at [2015-01-03 Sat 15:02]
 
 | Headline                                    | Time   |      |      |
 |---------------------------------------------+--------+------+------|
-| *Total time*                                | *2:28* |      |      |
+| *Total time*                                | *3:46* |      |      |
 |---------------------------------------------+--------+------+------|
-| Active                                      |        | 2:28 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:21 |
-| STARTED Implement dynamic's workflow        |        |      | 2:07 |
+| Active                                      |        | 3:46 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:50 |
+| COMPLETED Implement dynamic's workflow      |        |      | 2:56 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-03 Sat 14:33]--[2015-01-03 Sat 15:02] =>  0:14
     CLOCK: [2014-12-29 Mon 22:15]--[2014-12-29 Mon 22:25] =>  0:10
     CLOCK: [2014-12-16 Tue 15:50]--[2014-12-16 Tue 16:01] =>  0:08
 
@@ -55,4 +56,86 @@ this work by implementing the workflow and it's dependent classes.
   removed the =value_types= in value as it is not clear how it will be
   used yet.
 
+*** Rename =Taggable= to =DynamicallyExtensible=                      :story:
+
+SML objects have meta-data object instead of the ptree; Taggable is
+perhaps not the best name for the concept but we need to think of a
+better alternative. =Extensible= perhaps? =DynamicallyExtensible=.
+
+*** Add dynamic object to =DynamicallyExtensible=                     :story:
+
+For now we keep =ptree= side-by-side with dynamic.
+
+*** Add field definitions for existing fields                         :story:
+
+We need to start generating the field definitions for the fields we
+need to consume. Create these using the existing static data
+machinery.
+
+*** Replace uses of meta-data with dynamic object                     :story:
+
+Find all places where we are using ptree and use the dynamic object
+instead. This should be mainly in meta-data factories.
+
+*** Rename namespace =meta-data= to =dynamic=                         :story:
+
+We have created a number of "meta-data extension" namespaces, which is
+where we transform the ptree into a strongly typed object. These
+should be renamed to =dynamic= to make it consistent.
+
+*** Remove all references to =ptree=                                  :story:
+
+Delete reader and writer classes and remove meta-data from
+=DynamicallyExtensible=.
+
+*** Add merger to dynamic                                             :story:
+
+We need a class that takes two objects and merges them. For example
+the root module meta-data object and any type. Could be called
+merger. Should have a lhs and a rhs and produce a result.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
+
+*** Add dynamic merging to SML workflow                               :story:
+
+We need an extra activity in the SML workflow that makes use of the
+=dynamic::merger= to produce the final dynamic object.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
+
+*** Remove dependency of writer on tags                               :story:
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
+*** Delete tags class in SML                                          :story:
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
 ** Deprecated
+
+*** CANCELLED Utility meta-data factory                               :story:
+    CLOSED: [2015-01-03 Sat 15:00]
+
+*Rationale*: This won't make sense after the dynamic refactor.
+
+Now that we have a number of meta-data factories that produce settings
+we should be able to factor out all their commonalities and add a
+utility factory to the =formatters= model that handles all use
+cases. Each factory then uses the utility factory instead of calling
+reader etc directly.
+
+We can't create a single factory because we need to generate multiple
+products that are model dependent.
+
+*** CANCELLED Consider merging graphers into a single class           :story:
+    CLOSED: [2015-01-03 Sat 15:00]
+
+*Rationale*: Graphers got removed some time ago.
+
+After the meta-data work, we ended up with two separate graphers doing
+similar things. We should look into the commonalities of these classes
+to see if we can reuse code.
