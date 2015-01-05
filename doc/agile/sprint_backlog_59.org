@@ -1,0 +1,108 @@
+#+title: Sprint Backlog 59
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Commentary
+
+** Mission
+
+Implement dynamic and start making use of it in SML.
+
+** Retrospective
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2015-01-05 Mon 23:18]
+
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *0:08* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 0:08 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:08 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-05 Mon 23:10]--[2015-01-05 Mon 23:18] =>  0:08
+
+Updates to sprint and product backlog.
+
+*** Add support for =dia.comment=                                     :story:
+
+We need to implement dia.comment in terms of the dynamic object. We
+need to add the field definition and make sure we can replace the
+transformer processing with the new approach.
+
+*** Replace uses of meta-data with dynamic object                     :story:
+
+Find all places where we are using ptree and use the dynamic object
+instead. This should be mainly in meta-data factories.
+
+*** Rename namespace =meta-data= to =dynamic=                         :story:
+
+We have created a number of "meta-data extension" namespaces, which is
+where we transform the ptree into a strongly typed object. These
+should be renamed to =dynamic= to make it consistent.
+
+*** Remove all references to =ptree=                                  :story:
+
+Delete reader and writer classes and remove meta-data from
+=Extensible=.
+
+*** Add merger to dynamic                                             :story:
+
+We need a class that takes two objects and merges them. For example
+the root module meta-data object and any type. Could be called
+merger. Should have a lhs and a rhs and produce a result.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
+
+*** Add dynamic merging to SML workflow                               :story:
+
+We need an extra activity in the SML workflow that makes use of the
+=dynamic::merger= to produce the final dynamic object.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
+
+*** Remove dependency of writer on tags                               :story:
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
+*** Delete tags class in SML                                          :story:
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
+Can only be done once we delete writer and reader.
+
+** Deprecated
+
+*** CANCELLED Utility meta-data factory                               :story:
+    CLOSED: [2015-01-03 Sat 15:00]
+
+*Rationale*: This won't make sense after the dynamic refactor.
+
+Now that we have a number of meta-data factories that produce settings
+we should be able to factor out all their commonalities and add a
+utility factory to the =formatters= model that handles all use
+cases. Each factory then uses the utility factory instead of calling
+reader etc directly.
+
+We can't create a single factory because we need to generate multiple
+products that are model dependent.
+
+*** CANCELLED Consider merging graphers into a single class           :story:
+    CLOSED: [2015-01-03 Sat 15:00]
+
+*Rationale*: Graphers got removed some time ago.
+
+After the meta-data work, we ended up with two separate graphers doing
+similar things. We should look into the commonalities of these classes
+to see if we can reuse code.
