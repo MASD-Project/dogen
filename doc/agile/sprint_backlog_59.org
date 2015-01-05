@@ -16,20 +16,56 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-05 Mon 23:18]
+Clock summary at [2015-01-05 Mon 23:39]
 
-| Headline                                    | Time   |      |      |
-|---------------------------------------------+--------+------+------|
-| *Total time*                                | *0:08* |      |      |
-|---------------------------------------------+--------+------+------|
-| Active                                      |        | 0:08 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:08 |
+| Headline                                                        | Time   |      |      |
+|-----------------------------------------------------------------+--------+------+------|
+| *Total time*                                                    | *0:19* |      |      |
+|-----------------------------------------------------------------+--------+------+------|
+| Active                                                          |        | 0:19 |      |
+| STARTED Sprint and product backlog grooming                     |        |      | 0:12 |
+| STARTED Create a class for the return type of =comments_parser= |        |      | 0:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-05 Mon 23:28]--[2015-01-05 Mon 23:32] =>  0:04
     CLOCK: [2015-01-05 Mon 23:10]--[2015-01-05 Mon 23:18] =>  0:08
 
 Updates to sprint and product backlog.
+
+*** STARTED Create a class for the return type of =comments_parser=   :story:
+    CLOCK: [2015-01-05 Mon 23:32]--[2015-01-05 Mon 23:39] =>  0:07
+
+*New Understanding*
+
+- the comments parser job should be to convert the comments section
+  into the value of the =dia.comment= key, as well as parse any other
+  kvps.
+- the transformer should ensure only zero or one notes can exist for a
+  module.
+- the setting of the documentation should be done as a separate step
+  in transformation - i.e. look for =dia.comment= field, if set, use
+  its value to populate documentation. This could be done to all types
+  for completeness.
+
+*Previous Understanding*
+
+In dia to sml; At present we are returning:
+
+: std::pair<std::string,
+:    std::list<
+:       std::pair<std::string, std::string>
+:    >
+: >
+
+Where the first string is the comments (sans kvps) and the second are
+the kvps. This is a bit confusing. We should probably have a class
+with fields that reflect this, e.g.:
+
+- =original_comments=
+- =key_value_pair=
+
+We need to reflect on these names.
 
 *** Add support for =dia.comment=                                     :story:
 
@@ -83,26 +119,3 @@ responsible for their own tags.
 Can only be done once we delete writer and reader.
 
 ** Deprecated
-
-*** CANCELLED Utility meta-data factory                               :story:
-    CLOSED: [2015-01-03 Sat 15:00]
-
-*Rationale*: This won't make sense after the dynamic refactor.
-
-Now that we have a number of meta-data factories that produce settings
-we should be able to factor out all their commonalities and add a
-utility factory to the =formatters= model that handles all use
-cases. Each factory then uses the utility factory instead of calling
-reader etc directly.
-
-We can't create a single factory because we need to generate multiple
-products that are model dependent.
-
-*** CANCELLED Consider merging graphers into a single class           :story:
-    CLOSED: [2015-01-03 Sat 15:00]
-
-*Rationale*: Graphers got removed some time ago.
-
-After the meta-data work, we ended up with two separate graphers doing
-similar things. We should look into the commonalities of these classes
-to see if we can reuse code.
