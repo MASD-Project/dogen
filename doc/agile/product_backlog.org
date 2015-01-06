@@ -1334,6 +1334,24 @@ propagate it to all types in the model.
 - each transformation method returns a value which can be slotted into
   the model by the workflow, contained in a transformation result.
 - this does mean a lot of concatenation at the workflow level though.
+- the only problem with this approach is that we do not have a common
+  base class in SML for all the types that transformer generates. If
+  we did we could just return it and let workflow visit the base class
+  to dispatch it to the correct type. This may be the right solution
+  (to create such a base class).
+- population of model references should be distinct step in workflow,
+  after transformation (=update_model_references=).
+- post-processing of leaves should have its own step in workflow. See
+  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket.
+- similar with original parent name. In effect all of the relationship
+  population seems like a separate step.
+- actually the right thing to do may even be to take away dispatching
+  from the transformer and have specific methods to call from the
+  outside world: transform large package, etc. These return the
+  expected SML type. The only exception is transform note, which
+  returns some kind of =dia_to_sml= intermediate object.
+- in workflow =transformation_activity= we should move the logic of
+  defaulting to value object into the profiler.
 
 *** Consider adding facet specific types                               :epic:
 
