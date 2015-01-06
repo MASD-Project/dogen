@@ -24,6 +24,7 @@
 #include "dogen/dia_to_sml/types/grapher.hpp"
 #include "dogen/dia_to_sml/types/graphing_error.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
+#include "dogen/dia_to_sml/types/initializer.hpp"
 #include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
 #include "dogen/dia_to_sml/types/node.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"

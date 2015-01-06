@@ -36,6 +36,9 @@ std::ostream& operator<<(std::ostream& s, const scope_types& v) {
     case scope_types::any:
         attr = "\"any\"";
         break;
+    case scope_types::not_applicable:
+        attr = "\"not_applicable\"";
+        break;
     case scope_types::root_module:
         attr = "\"root_module\"";
         break;

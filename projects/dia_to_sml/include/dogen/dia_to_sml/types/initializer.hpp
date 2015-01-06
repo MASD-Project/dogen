@@ -18,25 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_SCOPE_TYPES_HPP
-#define DOGEN_DYNAMIC_TYPES_SCOPE_TYPES_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_INITIALIZER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace dynamic {
+namespace dia_to_sml {
 
-enum class scope_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    any = 1, ///< Field can appear anywhere.
-    not_applicable = 2, ///< The notion of scopes does not apply to field.
-    root_module = 3, ///< Field can only appear in the root module.
-    any_module = 4, ///< Field can appear in any module.
-    entity = 5, ///< Field can only appear on an entity.
-    property = 6, ///< Field can only appear on a property of an entity.
-    operation = 7 ///< Field can only appear on an operation in an entity.
+/**
+ * @brief Initialises the model.
+ */
+class initializer {
+public:
+    static void initialize();
 };
 
 } }

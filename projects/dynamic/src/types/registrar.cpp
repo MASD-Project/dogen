@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iterator>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/registrar_error.hpp"
@@ -40,6 +41,9 @@ void registrar::validate() const {
         BOOST_LOG_SEV(lg, error) << no_definitions;
         BOOST_THROW_EXCEPTION(registrar_error(no_definitions));
     }
+    BOOST_LOG_SEV(lg, debug) << "Total field definitions found: "
+                             << std::distance(field_definitions_.begin(),
+                                 field_definitions_.end());
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 

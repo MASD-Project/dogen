@@ -26,7 +26,7 @@ namespace dynamic {
 scope_types_generator::scope_types_generator() : position_(0) { }
 void scope_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<scope_types>(position % 7);
+    v = static_cast<scope_types>(position % 8);
 }
 
 scope_types_generator::result_type

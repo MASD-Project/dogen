@@ -464,7 +464,7 @@ void transformer::from_note(const processed_object& o) {
     const auto pair(comments_parser_->parse(o.text()));
     const auto& documentation(pair.first);
     const auto& kvps(pair.second);
-    sml::model& model(context_.model());
+    const sml::model& model(context_.model());
     if (o.child_node_id().empty()) {
         auto& module(module_for_qname(model.name()));
         sml::meta_data::writer writer(module.meta_data());

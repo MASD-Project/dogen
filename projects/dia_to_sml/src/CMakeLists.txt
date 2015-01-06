@@ -24,6 +24,7 @@ file(GLOB_RECURSE dia_to_sml_files RELATIVE
 
 add_library(dia_to_sml STATIC ${dia_to_sml_files})
 target_link_libraries(dia_to_sml
+    dynamic
     sml
     dia
     utility

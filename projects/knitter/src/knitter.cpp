@@ -18,11 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dia_to_sml/types/initializer.hpp"
 #include "dogen/frontend/types/initializer.hpp"
 #include "dogen/cpp/types/initializer.hpp"
 #include "dogen/knitter/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
+    dogen::dia_to_sml::initializer::initialize();
     dogen::frontend::initializer::initialize();
     dogen::cpp::initializer::initialize();
     dogen::knitter::workflow w;
