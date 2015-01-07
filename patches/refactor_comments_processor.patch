@@ -1,0 +1,4717 @@
+diff --git a/diagrams/dia_to_sml.dia b/diagrams/dia_to_sml.dia
+index 7a488cf..56bcbc9 100644
+--- a/diagrams/dia_to_sml.dia
++++ b/diagrams/dia_to_sml.dia
+@@ -1678,10 +1678,10 @@ into its SML representation.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#comments_parser_#</dia:string>
++            <dia:string>#comment_processor_#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string># std::shared_ptr&lt;comments_parser&gt;#</dia:string>
++            <dia:string># std::shared_ptr&lt;comment_processor&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -3032,19 +3032,19 @@ off of them.#</dia:string>
+         <dia:point val="116.915,81.0197"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="116.865,80.9697;137.1,86.2697"/>
++        <dia:rectangle val="116.865,80.9697;135.945,84.6697"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="116.915,81.0197"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.134999999999998"/>
++        <dia:real val="18.98"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="5.2000000000000002"/>
++        <dia:real val="3.6000000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#comments_parser#</dia:string>
++        <dia:string>#comment_processor#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>#service#</dia:string>
+@@ -3134,13 +3134,13 @@ off of them.#</dia:string>
+       <dia:attribute name="operations">
+         <dia:composite type="umloperation">
+           <dia:attribute name="name">
+-            <dia:string>#parse#</dia:string>
++            <dia:string>#process#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="stereotype">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::pair&lt;std::string,std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
++            <dia:string>#processed_comment#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -3259,22 +3259,22 @@ off of them.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Note" version="0" id="O18">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="142.785,82.0955"/>
++        <dia:point val="142,83"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="142.735,82.0455;163.37,86.2455"/>
++        <dia:rectangle val="141.95,82.95;163.355,86.35"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="142.785,82.0955"/>
++        <dia:point val="142,83"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.535"/>
++        <dia:real val="21.305000000000003"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.0999999999999996"/>
++        <dia:real val="3.3000000000000003"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000000000001"/>
+@@ -3288,10 +3288,9 @@ off of them.#</dia:string>
+       <dia:attribute name="text">
+         <dia:composite type="text">
+           <dia:attribute name="string">
+-            <dia:string>#Parses a dia comment and returns the documentation
++            <dia:string>#Processes a dia comment and returns the documentation
+ as a string, as well as an array of key value pairs
+-for any implementation specific parameters it
+-finds.#</dia:string>
++that make up dogen instructions.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="font">
+             <dia:font family="monospace" style="0" name="Courier"/>
+@@ -3300,7 +3299,7 @@ finds.#</dia:string>
+             <dia:real val="0.80000000000000004"/>
+           </dia:attribute>
+           <dia:attribute name="pos">
+-            <dia:point val="143.135,83.3405"/>
++            <dia:point val="142.35,84.245"/>
+           </dia:attribute>
+           <dia:attribute name="color">
+             <dia:color val="#000000"/>
+@@ -3313,17 +3312,17 @@ finds.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Message" version="0" id="O19">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="142.785,84.1455"/>
++        <dia:point val="142,84.65"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="136.998,83.7195;142.835,84.8327"/>
++        <dia:rectangle val="135.811,83.7169;142.054,85.085"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="conn_endpoints">
+-        <dia:point val="142.785,84.1455"/>
+-        <dia:point val="137.05,84.1197"/>
++        <dia:point val="142,84.65"/>
++        <dia:point val="135.895,84.1197"/>
+       </dia:attribute>
+       <dia:attribute name="text_colour">
+         <dia:color val="#000000"/>
+@@ -3338,7 +3337,7 @@ finds.#</dia:string>
+         <dia:enum val="0"/>
+       </dia:attribute>
+       <dia:attribute name="text_pos">
+-        <dia:point val="139.918,84.6327"/>
++        <dia:point val="138.948,84.885"/>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O18" connection="3"/>
+@@ -3457,7 +3456,7 @@ finds.#</dia:string>
+         <dia:point val="101.606,65.9969"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="100.856,65.2469;127.182,81.8197"/>
++        <dia:rectangle val="100.856,65.2469;126.605,81.8197"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -3465,8 +3464,8 @@ finds.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="101.606,65.9969"/>
+         <dia:point val="101.606,70.9918"/>
+-        <dia:point val="126.982,70.9918"/>
+-        <dia:point val="126.982,81.0197"/>
++        <dia:point val="126.405,70.9918"/>
++        <dia:point val="126.405,81.0197"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -3554,7 +3553,7 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O28" connection="0"/>
++        <dia:connection handle="0" to="O26" connection="0"/>
+         <dia:connection handle="1" to="O4" connection="1"/>
+       </dia:connections>
+     </dia:object>
+@@ -3625,7 +3624,7 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O28" connection="5"/>
++        <dia:connection handle="0" to="O26" connection="5"/>
+         <dia:connection handle="1" to="O1" connection="2"/>
+       </dia:connections>
+     </dia:object>
+@@ -3696,7 +3695,7 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O28" connection="4"/>
++        <dia:connection handle="0" to="O26" connection="4"/>
+         <dia:connection handle="1" to="O3" connection="1"/>
+       </dia:connections>
+     </dia:object>
+@@ -3767,280 +3766,12 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O28" connection="2"/>
++        <dia:connection handle="0" to="O26" connection="2"/>
+         <dia:connection handle="1" to="O6" connection="0"/>
+       </dia:connections>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O26">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="9.67707,11.1386"/>
+-      </dia:attribute>
+-      <dia:attribute name="obj_bb">
+-        <dia:rectangle val="9.62707,11.0886;33.7121,16.3886"/>
+-      </dia:attribute>
+-      <dia:attribute name="elem_corner">
+-        <dia:point val="9.67707,11.1386"/>
+-      </dia:attribute>
+-      <dia:attribute name="elem_width">
+-        <dia:real val="23.984999999999999"/>
+-      </dia:attribute>
+-      <dia:attribute name="elem_height">
+-        <dia:real val="5.2000000000000002"/>
+-      </dia:attribute>
+-      <dia:attribute name="name">
+-        <dia:string>#workflow_interface#</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="stereotype">
+-        <dia:string>#service#</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="comment">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="abstract">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="suppress_attributes">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="suppress_operations">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_attributes">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_operations">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_comments">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="wrap_operations">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="wrap_after_char">
+-        <dia:int val="40"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_line_length">
+-        <dia:int val="17"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_tagging">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_width">
+-        <dia:real val="0.10000000000000001"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="fill_color">
+-        <dia:color val="#ffffff"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="normal_font">
+-        <dia:font family="monospace" style="0" name="Courier"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_font">
+-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="polymorphic_font">
+-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="classname_font">
+-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_classname_font">
+-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_font">
+-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+-      </dia:attribute>
+-      <dia:attribute name="normal_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="polymorphic_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="classname_font_height">
+-        <dia:real val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_classname_font_height">
+-        <dia:real val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_font_height">
+-        <dia:real val="0.69999999999999996"/>
+-      </dia:attribute>
+-      <dia:attribute name="attributes"/>
+-      <dia:attribute name="operations">
+-        <dia:composite type="umloperation">
+-          <dia:attribute name="name">
+-            <dia:string>#execute#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="stereotype">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#sml::model#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="true"/>
+-          </dia:attribute>
+-          <dia:attribute name="inheritance_type">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="query">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="parameters">
+-            <dia:composite type="umlparameter">
+-              <dia:attribute name="name">
+-                <dia:string>#d#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="type">
+-                <dia:string>#const dia::diagram&amp;#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="value">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="comment">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="kind">
+-                <dia:enum val="0"/>
+-              </dia:attribute>
+-            </dia:composite>
+-            <dia:composite type="umlparameter">
+-              <dia:attribute name="name">
+-                <dia:string>#model_name#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="type">
+-                <dia:string>#const std::string&amp;#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="value">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="comment">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="kind">
+-                <dia:enum val="0"/>
+-              </dia:attribute>
+-            </dia:composite>
+-            <dia:composite type="umlparameter">
+-              <dia:attribute name="name">
+-                <dia:string>#external_module_path#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="type">
+-                <dia:string>#const std::string&amp;#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="value">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="comment">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="kind">
+-                <dia:enum val="0"/>
+-              </dia:attribute>
+-            </dia:composite>
+-            <dia:composite type="umlparameter">
+-              <dia:attribute name="name">
+-                <dia:string>#is_target#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="type">
+-                <dia:string>#bool#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="value">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="comment">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="kind">
+-                <dia:enum val="0"/>
+-              </dia:attribute>
+-            </dia:composite>
+-            <dia:composite type="umlparameter">
+-              <dia:attribute name="name">
+-                <dia:string>#verbose#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="type">
+-                <dia:string>#bool#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="value">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="comment">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="kind">
+-                <dia:enum val="0"/>
+-              </dia:attribute>
+-            </dia:composite>
+-          </dia:attribute>
+-        </dia:composite>
+-      </dia:attribute>
+-      <dia:attribute name="template">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="templates"/>
+-    </dia:object>
+-    <dia:object type="UML - Realizes" version="1" id="O27">
+-      <dia:attribute name="obj_pos">
+-        <dia:point val="21.6696,16.3386"/>
+-      </dia:attribute>
+-      <dia:attribute name="obj_bb">
+-        <dia:rectangle val="13.9559,16.2886;22.5196,27.1291"/>
+-      </dia:attribute>
+-      <dia:attribute name="meta">
+-        <dia:composite type="dict"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_points">
+-        <dia:point val="21.6696,16.3386"/>
+-        <dia:point val="21.6696,22.1409"/>
+-        <dia:point val="14.0059,22.1409"/>
+-        <dia:point val="14.0059,27.0791"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_orient">
+-        <dia:enum val="1"/>
+-        <dia:enum val="0"/>
+-        <dia:enum val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_autoroute">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="name">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="stereotype">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:connections>
+-        <dia:connection handle="0" to="O26" connection="6"/>
+-        <dia:connection handle="1" to="O28" connection="1"/>
+-      </dia:connections>
+-    </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O28">
+-      <dia:attribute name="obj_pos">
+         <dia:point val="2.01339,27.0791"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+@@ -4663,7 +4394,7 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O29">
++    <dia:object type="UML - Class" version="0" id="O27">
+       <dia:attribute name="obj_pos">
+         <dia:point val="96.0379,98.9907"/>
+       </dia:attribute>
+@@ -5216,7 +4947,7 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O30">
++    <dia:object type="UML - Class" version="0" id="O28">
+       <dia:attribute name="obj_pos">
+         <dia:point val="91,123"/>
+       </dia:attribute>
+@@ -5396,7 +5127,7 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O31">
++    <dia:object type="UML - Association" version="2" id="O29">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -5463,11 +5194,11 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O30" connection="1"/>
+-        <dia:connection handle="1" to="O29" connection="6"/>
++        <dia:connection handle="0" to="O28" connection="1"/>
++        <dia:connection handle="1" to="O27" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O32">
++    <dia:object type="UML - Association" version="2" id="O30">
+       <dia:attribute name="name">
+         <dia:string>#&lt; converts strings into qnames for#</dia:string>
+       </dia:attribute>
+@@ -5535,10 +5266,10 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O12" connection="7"/>
+-        <dia:connection handle="1" to="O29" connection="1"/>
++        <dia:connection handle="1" to="O27" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O33">
++    <dia:object type="UML - Association" version="2" id="O31">
+       <dia:attribute name="name">
+         <dia:string>#creates a graph of &gt;#</dia:string>
+       </dia:attribute>
+@@ -5606,10 +5337,10 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O1" connection="6"/>
+-        <dia:connection handle="1" to="O43" connection="0"/>
++        <dia:connection handle="1" to="O41" connection="0"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O34">
++    <dia:object type="UML - Association" version="2" id="O32">
+       <dia:attribute name="name">
+         <dia:string>#&lt; transforms into sml objects#</dia:string>
+       </dia:attribute>
+@@ -5677,10 +5408,10 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O6" connection="5"/>
+-        <dia:connection handle="1" to="O43" connection="2"/>
++        <dia:connection handle="1" to="O41" connection="2"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O35">
++    <dia:object type="UML - Class" version="0" id="O33">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-10.9812,64.0603"/>
+       </dia:attribute>
+@@ -5790,7 +5521,7 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O36">
++    <dia:object type="UML - Association" version="2" id="O34">
+       <dia:attribute name="name">
+         <dia:string>#&lt; throws on error#</dia:string>
+       </dia:attribute>
+@@ -5831,7 +5562,7 @@ finds.#</dia:string>
+         <dia:point val="-6.94123,64.0603"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-7.69123,56.7378;2.36366,64.8603"/>
++        <dia:rectangle val="-7.69123,56.55;3.2,64.8603"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5839,8 +5570,8 @@ finds.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-6.94123,64.0603"/>
+         <dia:point val="-6.94123,59.9409"/>
+-        <dia:point val="2.16366,59.9409"/>
+-        <dia:point val="2.16366,56.7878"/>
++        <dia:point val="3,59.9409"/>
++        <dia:point val="3,56.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -5857,19 +5588,19 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O35" connection="1"/>
+-        <dia:connection handle="1" to="O37" connection="5"/>
++        <dia:connection handle="0" to="O33" connection="1"/>
++        <dia:connection handle="1" to="O35" connection="5"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O37">
++    <dia:object type="UML - Class" version="0" id="O35">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="2.16366,53.1878"/>
++        <dia:point val="3,53"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="2.11366,53.1378;18.4987,56.8378"/>
++        <dia:rectangle val="2.95,52.95;19.335,56.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="2.16366,53.1878"/>
++        <dia:point val="3,53"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="16.285"/>
+@@ -5878,7 +5609,7 @@ finds.#</dia:string>
+         <dia:real val="3.6000000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#processor#</dia:string>
++        <dia:string>#object_processor#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>#service#</dia:string>
+@@ -6020,7 +5751,7 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O38">
++    <dia:object type="UML - Association" version="2" id="O36">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -6061,7 +5792,7 @@ finds.#</dia:string>
+         <dia:point val="14.0059,41.6791"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="10.2562,40.9291;14.7559,53.9878"/>
++        <dia:rectangle val="11.0925,40.9291;14.7559,53.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -6069,8 +5800,8 @@ finds.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="14.0059,41.6791"/>
+         <dia:point val="14.0059,46.017"/>
+-        <dia:point val="10.3062,46.017"/>
+-        <dia:point val="10.3062,53.1878"/>
++        <dia:point val="11.1425,46.017"/>
++        <dia:point val="11.1425,53"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6087,11 +5818,11 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O28" connection="6"/>
+-        <dia:connection handle="1" to="O37" connection="1"/>
++        <dia:connection handle="0" to="O26" connection="6"/>
++        <dia:connection handle="1" to="O35" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O39">
++    <dia:object type="UML - Class" version="0" id="O37">
+       <dia:attribute name="obj_pos">
+         <dia:point val="7.1079,98.8947"/>
+       </dia:attribute>
+@@ -6271,7 +6002,7 @@ finds.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O40">
++    <dia:object type="UML - Association" version="2" id="O38">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -6338,11 +6069,11 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O43" connection="6"/>
+-        <dia:connection handle="1" to="O39" connection="1"/>
++        <dia:connection handle="0" to="O41" connection="6"/>
++        <dia:connection handle="1" to="O37" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O41">
++    <dia:object type="UML - Association" version="2" id="O39">
+       <dia:attribute name="name">
+         <dia:string>#&lt; processes dia objects into#</dia:string>
+       </dia:attribute>
+@@ -6380,17 +6111,17 @@ finds.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="18.4487,56.7878"/>
++        <dia:point val="19.285,56.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="4.67458,56.0378;19.1987,81.7016"/>
++        <dia:rectangle val="4.67458,55.85;20.035,81.7016"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="18.4487,56.7878"/>
+-        <dia:point val="18.4487,71.9873"/>
++        <dia:point val="19.285,56.6"/>
++        <dia:point val="19.285,71.9873"/>
+         <dia:point val="4.72458,71.9873"/>
+         <dia:point val="4.72458,80.9016"/>
+       </dia:attribute>
+@@ -6409,11 +6140,11 @@ finds.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O37" connection="7"/>
+-        <dia:connection handle="1" to="O43" connection="1"/>
++        <dia:connection handle="0" to="O35" connection="7"/>
++        <dia:connection handle="1" to="O41" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O42">
++    <dia:object type="UML - Class" version="0" id="O40">
+       <dia:attribute name="obj_pos">
+         <dia:point val="62.9579,114.041"/>
+       </dia:attribute>
+@@ -7074,7 +6805,7 @@ to SML concepts at a later stage.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O43">
++    <dia:object type="UML - Class" version="0" id="O41">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-7.84542,80.9016"/>
+       </dia:attribute>
+@@ -7392,7 +7123,7 @@ to SML concepts at a later stage.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O44">
++    <dia:object type="UML - Class" version="0" id="O42">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-16.1384,99.0093"/>
+       </dia:attribute>
+@@ -7664,7 +7395,7 @@ to SML concepts at a later stage.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O45">
++    <dia:object type="UML - Association" version="2" id="O43">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -7731,11 +7462,11 @@ to SML concepts at a later stage.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O43" connection="5"/>
+-        <dia:connection handle="1" to="O44" connection="1"/>
++        <dia:connection handle="0" to="O41" connection="5"/>
++        <dia:connection handle="1" to="O42" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O46">
++    <dia:object type="UML - Class" version="0" id="O44">
+       <dia:attribute name="obj_pos">
+         <dia:point val="36.9612,99.1496"/>
+       </dia:attribute>
+@@ -7894,7 +7625,7 @@ to SML concepts at a later stage.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O47">
++    <dia:object type="UML - Association" version="2" id="O45">
+       <dia:attribute name="name">
+         <dia:string>#parses csv stereotypes with &gt;#</dia:string>
+       </dia:attribute>
+@@ -7961,11 +7692,11 @@ to SML concepts at a later stage.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O46" connection="2"/>
++        <dia:connection handle="0" to="O44" connection="2"/>
+         <dia:connection handle="1" to="O12" connection="5"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O48">
++    <dia:object type="UML - Association" version="2" id="O46">
+       <dia:attribute name="name">
+         <dia:string>#summarises type information into &gt;#</dia:string>
+       </dia:attribute>
+@@ -8032,11 +7763,11 @@ to SML concepts at a later stage.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O46" connection="6"/>
+-        <dia:connection handle="1" to="O42" connection="1"/>
++        <dia:connection handle="0" to="O44" connection="6"/>
++        <dia:connection handle="1" to="O40" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O49">
++    <dia:object type="UML - Association" version="2" id="O47">
+       <dia:attribute name="name">
+         <dia:string>#&lt; creates a type profile of#</dia:string>
+       </dia:attribute>
+@@ -8103,11 +7834,11 @@ to SML concepts at a later stage.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O46" connection="0"/>
+-        <dia:connection handle="1" to="O43" connection="7"/>
++        <dia:connection handle="0" to="O44" connection="0"/>
++        <dia:connection handle="1" to="O41" connection="7"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O50">
++    <dia:object type="UML - Class" version="0" id="O48">
+       <dia:attribute name="obj_pos">
+         <dia:point val="35,143"/>
+       </dia:attribute>
+@@ -8266,7 +7997,7 @@ to SML concepts at a later stage.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O51">
++    <dia:object type="UML - Association" version="2" id="O49">
+       <dia:attribute name="name">
+         <dia:string>#ensures the type options are valid &gt;#</dia:string>
+       </dia:attribute>
+@@ -8333,11 +8064,11 @@ to SML concepts at a later stage.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O50" connection="10"/>
+-        <dia:connection handle="1" to="O42" connection="6"/>
++        <dia:connection handle="0" to="O48" connection="10"/>
++        <dia:connection handle="1" to="O40" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O52">
++    <dia:object type="UML - Class" version="0" id="O50">
+       <dia:attribute name="obj_pos">
+         <dia:point val="26.3125,155.973"/>
+       </dia:attribute>
+@@ -8447,7 +8178,7 @@ to SML concepts at a later stage.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O53">
++    <dia:object type="UML - Association" version="2" id="O51">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -8514,11 +8245,11 @@ to SML concepts at a later stage.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O50" connection="6"/>
+-        <dia:connection handle="1" to="O52" connection="1"/>
++        <dia:connection handle="0" to="O48" connection="6"/>
++        <dia:connection handle="1" to="O50" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O54">
++    <dia:object type="UML - Note" version="0" id="O52">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-99,10"/>
+       </dia:attribute>
+@@ -8669,7 +8400,7 @@ the root of an inheritance tree.
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O55">
++    <dia:object type="UML - Association" version="2" id="O53">
+       <dia:attribute name="name">
+         <dia:string>#&lt; creates object profiles for#</dia:string>
+       </dia:attribute>
+@@ -8736,11 +8467,11 @@ the root of an inheritance tree.
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O28" connection="7"/>
+-        <dia:connection handle="1" to="O46" connection="1"/>
++        <dia:connection handle="0" to="O26" connection="7"/>
++        <dia:connection handle="1" to="O44" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O56">
++    <dia:object type="UML - Note" version="0" id="O54">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-36,46"/>
+       </dia:attribute>
+@@ -8791,7 +8522,7 @@ the root of an inheritance tree.
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Message" version="0" id="O57">
++    <dia:object type="UML - Message" version="0" id="O55">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-29.1975,47.7"/>
+       </dia:attribute>
+@@ -8821,11 +8552,11 @@ the root of an inheritance tree.
+         <dia:point val="-29.6396,50.85"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O56" connection="6"/>
++        <dia:connection handle="0" to="O54" connection="6"/>
+         <dia:connection handle="1" to="O1" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O58">
++    <dia:object type="UML - Class" version="0" id="O56">
+       <dia:attribute name="obj_pos">
+         <dia:point val="91,37"/>
+       </dia:attribute>
+@@ -8935,7 +8666,7 @@ the root of an inheritance tree.
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O59">
++    <dia:object type="UML - Association" version="2" id="O57">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -9003,10 +8734,10 @@ the root of an inheritance tree.
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O6" connection="1"/>
+-        <dia:connection handle="1" to="O58" connection="6"/>
++        <dia:connection handle="1" to="O56" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O60">
++    <dia:object type="UML - Note" version="0" id="O58">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-22,3"/>
+       </dia:attribute>
+@@ -9059,7 +8790,7 @@ main.#</dia:string>
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Message" version="0" id="O61">
++    <dia:object type="UML - Message" version="0" id="O59">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-14.4275,6.3"/>
+       </dia:attribute>
+@@ -9089,11 +8820,11 @@ main.#</dia:string>
+         <dia:point val="-14.3375,9.15"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O60" connection="6"/>
+-        <dia:connection handle="1" to="O62" connection="1"/>
++        <dia:connection handle="0" to="O58" connection="6"/>
++        <dia:connection handle="1" to="O60" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O62">
++    <dia:object type="UML - Class" version="0" id="O60">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-17,11"/>
+       </dia:attribute>
+@@ -9234,5 +8965,256 @@ main.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O61">
++      <dia:attribute name="obj_pos">
++        <dia:point val="132,99"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="131.95,98.95;156.805,103.45"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="132,99"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="24.755000000000003"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="4.4000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#processed_comment#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Contains the same content as the original dia comment, but split by type of data.#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes">
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#documentation#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::string#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Text of the comment, excluding all Dogen instructions.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#key_value_pairs#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Dogen instructions, in the key-value-pair form.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#applicable_to_parent_object#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#bool#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#If true, the comment should be attached to the dia object containing it.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++      </dia:attribute>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O62">
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="126.405,84.6197"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="125.655,83.8697;144.577,100.55"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="126.405,84.6197"/>
++        <dia:point val="126.405,92.1347"/>
++        <dia:point val="144.377,92.1347"/>
++        <dia:point val="144.377,98.9497"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O16" connection="6"/>
++        <dia:connection handle="1" to="O61" connection="14"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/doc/agile/sprint_backlog_59.org b/doc/agile/sprint_backlog_59.org
+index eceda05..4c0d6b9 100644
+--- a/doc/agile/sprint_backlog_59.org
++++ b/doc/agile/sprint_backlog_59.org
+@@ -16,15 +16,15 @@ Implement dynamic and start making use of it in SML.
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2015-01-06 Tue 23:36]
++Clock summary at [2015-01-07 Wed 23:29]
+ 
+ | Headline                                                                 | Time   |      |      |
+ |--------------------------------------------------------------------------+--------+------+------|
+-| *Total time*                                                             | *1:41* |      |      |
++| *Total time*                                                             | *3:18* |      |      |
+ |--------------------------------------------------------------------------+--------+------+------|
+-| Active                                                                   |        | 1:41 |      |
++| Active                                                                   |        | 3:18 |      |
+ | STARTED Sprint and product backlog grooming                              |        |      | 0:12 |
+-| STARTED Create a class for the return type of =comments_parser=          |        |      | 0:14 |
++| STARTED Create a class for the return type of =comments_parser=          |        |      | 1:51 |
+ | STARTED Inject dia fields =comment=, =is_final= and =identity_attribute= |        |      | 1:15 |
+ #+end:
+ 
+@@ -35,6 +35,7 @@ Clock summary at [2015-01-06 Tue 23:36]
+ Updates to sprint and product backlog.
+ 
+ *** STARTED Create a class for the return type of =comments_parser=   :story:
++    CLOCK: [2015-01-07 Wed 21:52]--[2015-01-07 Wed 23:29] =>  1:37
+     CLOCK: [2015-01-06 Tue 22:14]--[2015-01-06 Tue 22:21] =>  0:07
+     CLOCK: [2015-01-05 Mon 23:32]--[2015-01-05 Mon 23:39] =>  0:07
+ 
+@@ -51,6 +52,8 @@ Updates to sprint and product backlog.
+   for completeness.
+ - the identity processing is similar in that it should be done as a
+   post-processing step rather than during transformation.
++- tests need to be cleaned up - we need to check for text of the
++  exception being thrown.
+ 
+ *Previous Understanding*
+ 
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/hash/all_hash.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/hash/all_hash.hpp
+index 36e3048..b6114d6 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/hash/all_hash.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/hash/all_hash.hpp
+@@ -21,6 +21,7 @@
+ #include "dogen/dia_to_sml/hash/context_hash.hpp"
+ #include "dogen/dia_to_sml/hash/node_hash.hpp"
+ #include "dogen/dia_to_sml/hash/object_types_hash.hpp"
++#include "dogen/dia_to_sml/hash/processed_comment_hash.hpp"
+ #include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
+ #include "dogen/dia_to_sml/hash/processed_property_hash.hpp"
+ #include "dogen/dia_to_sml/hash/profile_hash.hpp"
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/hash/processed_comment_hash.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/hash/processed_comment_hash.hpp
+new file mode 100644
+index 0000000..2a6c8a1
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/hash/processed_comment_hash.hpp
+@@ -0,0 +1,52 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_HASH_PROCESSED_COMMENT_HASH_HPP
++#define DOGEN_DIA_TO_SML_HASH_PROCESSED_COMMENT_HASH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <functional>
++#include "dogen/dia_to_sml/types/processed_comment.hpp"
++
++namespace dogen {
++namespace dia_to_sml {
++
++struct processed_comment_hasher {
++public:
++    static std::size_t hash(const processed_comment& v);
++};
++
++} }
++
++namespace std {
++
++template<>
++struct hash<dogen::dia_to_sml::processed_comment> {
++public:
++    size_t operator()(const dogen::dia_to_sml::processed_comment& v) const {
++        return dogen::dia_to_sml::processed_comment_hasher::hash(v);
++    }
++};
++
++}
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/io/all_io.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/io/all_io.hpp
+index c7adb97..5fee923 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/io/all_io.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/io/all_io.hpp
+@@ -21,6 +21,7 @@
+ #include "dogen/dia_to_sml/io/context_io.hpp"
+ #include "dogen/dia_to_sml/io/node_io.hpp"
+ #include "dogen/dia_to_sml/io/object_types_io.hpp"
++#include "dogen/dia_to_sml/io/processed_comment_io.hpp"
+ #include "dogen/dia_to_sml/io/processed_object_io.hpp"
+ #include "dogen/dia_to_sml/io/processed_property_io.hpp"
+ #include "dogen/dia_to_sml/io/profile_io.hpp"
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/io/processed_comment_io.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/io/processed_comment_io.hpp
+new file mode 100644
+index 0000000..5f3256a
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/io/processed_comment_io.hpp
+@@ -0,0 +1,40 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_IO_PROCESSED_COMMENT_IO_HPP
++#define DOGEN_DIA_TO_SML_IO_PROCESSED_COMMENT_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/dia_to_sml/types/processed_comment.hpp"
++
++namespace dogen {
++namespace dia_to_sml {
++
++std::ostream&
++operator<<(std::ostream& s,
++     const dogen::dia_to_sml::processed_comment& v);
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/all_ser.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/all_ser.hpp
+index bca9958..d8a6b56 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/all_ser.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/all_ser.hpp
+@@ -21,6 +21,7 @@
+ #include "dogen/dia_to_sml/serialization/context_ser.hpp"
+ #include "dogen/dia_to_sml/serialization/node_ser.hpp"
+ #include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
++#include "dogen/dia_to_sml/serialization/processed_comment_ser.hpp"
+ #include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
+ #include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
+ #include "dogen/dia_to_sml/serialization/profile_ser.hpp"
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/processed_comment_fwd_ser.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/processed_comment_fwd_ser.hpp
+new file mode 100644
+index 0000000..74e2950
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/processed_comment_fwd_ser.hpp
+@@ -0,0 +1,41 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_COMMENT_FWD_SER_HPP
++#define DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_COMMENT_FWD_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/dia_to_sml/types/processed_comment_fwd.hpp"
++
++namespace boost {
++namespace serialization {
++
++template<class Archive>
++void save(Archive& ar, const dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++template<class Archive>
++void load(Archive& ar, dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/processed_comment_ser.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/processed_comment_ser.hpp
+new file mode 100644
+index 0000000..3c0c0bf
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/serialization/processed_comment_ser.hpp
+@@ -0,0 +1,43 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
++#define DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/split_free.hpp>
++#include "dogen/dia_to_sml/types/processed_comment.hpp"
++
++BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia_to_sml::processed_comment)
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar, const dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++template<typename Archive>
++void load(Archive& ar, dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/test_data/all_td.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/test_data/all_td.hpp
+index b69c7f4..086c8a8 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/test_data/all_td.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/test_data/all_td.hpp
+@@ -21,6 +21,7 @@
+ #include "dogen/dia_to_sml/test_data/context_td.hpp"
+ #include "dogen/dia_to_sml/test_data/node_td.hpp"
+ #include "dogen/dia_to_sml/test_data/object_types_td.hpp"
++#include "dogen/dia_to_sml/test_data/processed_comment_td.hpp"
+ #include "dogen/dia_to_sml/test_data/processed_object_td.hpp"
+ #include "dogen/dia_to_sml/test_data/processed_property_td.hpp"
+ #include "dogen/dia_to_sml/test_data/profile_td.hpp"
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/test_data/processed_comment_td.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/test_data/processed_comment_td.hpp
+new file mode 100644
+index 0000000..325fd84
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/test_data/processed_comment_td.hpp
+@@ -0,0 +1,53 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_TEST_DATA_PROCESSED_COMMENT_TD_HPP
++#define DOGEN_DIA_TO_SML_TEST_DATA_PROCESSED_COMMENT_TD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/dia_to_sml/types/processed_comment.hpp"
++
++namespace dogen {
++namespace dia_to_sml {
++
++class processed_comment_generator {
++public:
++    processed_comment_generator();
++
++public:
++    typedef dogen::dia_to_sml::processed_comment result_type;
++
++public:
++    static void populate(const unsigned int position, result_type& v);
++    static result_type create(const unsigned int position);
++    result_type operator()();
++
++private:
++    unsigned int position_;
++public:
++    static result_type* create_ptr(const unsigned int position);
++};
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/all.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/all.hpp
+index 649887a..47b5efa 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/all.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/all.hpp
+@@ -18,7 +18,7 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#include "dogen/dia_to_sml/types/comments_parser.hpp"
++#include "dogen/dia_to_sml/types/comment_processor.hpp"
+ #include "dogen/dia_to_sml/types/context.hpp"
+ #include "dogen/dia_to_sml/types/dia_to_sml.hpp"
+ #include "dogen/dia_to_sml/types/grapher.hpp"
+@@ -27,12 +27,13 @@
+ #include "dogen/dia_to_sml/types/initializer.hpp"
+ #include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
+ #include "dogen/dia_to_sml/types/node.hpp"
++#include "dogen/dia_to_sml/types/object_processor.hpp"
+ #include "dogen/dia_to_sml/types/object_types.hpp"
+ #include "dogen/dia_to_sml/types/parsing_error.hpp"
++#include "dogen/dia_to_sml/types/processed_comment.hpp"
+ #include "dogen/dia_to_sml/types/processed_object.hpp"
+ #include "dogen/dia_to_sml/types/processed_property.hpp"
+ #include "dogen/dia_to_sml/types/processing_error.hpp"
+-#include "dogen/dia_to_sml/types/processor.hpp"
+ #include "dogen/dia_to_sml/types/profile.hpp"
+ #include "dogen/dia_to_sml/types/profiler.hpp"
+ #include "dogen/dia_to_sml/types/tags.hpp"
+@@ -42,4 +43,3 @@
+ #include "dogen/dia_to_sml/types/validator.hpp"
+ #include "dogen/dia_to_sml/types/visitor.hpp"
+ #include "dogen/dia_to_sml/types/workflow.hpp"
+-#include "dogen/dia_to_sml/types/workflow_interface.hpp"
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comment_processor.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comment_processor.hpp
+new file mode 100644
+index 0000000..961d534
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comment_processor.hpp
+@@ -0,0 +1,70 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_HPP
++#define DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <list>
++#include <string>
++#include <utility>
++#include "dogen/dia_to_sml/types/processed_comment.hpp"
++
++namespace dogen {
++namespace dia_to_sml {
++
++/**
++ * @brief Processes comments in dia diagrams.
++ *
++ * Comments can be stored in class objects, member functions, note
++ * objects, etc.
++ *
++ * Any line starting with the well defined marker @e #DOGEN - known as
++ * the instruction marker - will be interpreted as carrying an
++ * instruction in a key-value pair form, where the key and the
++ * value are separated by the assignment operator @e =.
++ */
++class comment_processor {
++public:
++    comment_processor() = default;
++    comment_processor(const comment_processor&) = default;
++    ~comment_processor() = default;
++    comment_processor(comment_processor&&) = default;
++    comment_processor& operator=(const comment_processor&) = default;
++
++public:
++    /**
++     * @brief Parses a string carrying the comments in the dia object.
++     *
++     * Note that the @e # markers used by dia are expected to have
++     * already been removed.
++     *
++     * @pre lines starting with the instruction marker must follow the
++     * defined syntax or else a parsing_error is thrown.
++     */
++    processed_comment process(const std::string& c) const;
++};
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comment_processor_fwd.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comment_processor_fwd.hpp
+new file mode 100644
+index 0000000..28aebd2
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comment_processor_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_FWD_HPP
++#define DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace dia_to_sml {
++
++class comment_processor;
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser.hpp
+deleted file mode 100644
+index 583d3e3..0000000
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser.hpp
++++ /dev/null
+@@ -1,79 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_HPP
+-#define DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <list>
+-#include <string>
+-#include <utility>
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-/**
+- * @brief Parses comments in dia diagrams.
+- *
+- * Comments can be stored in class objects, member functions, note
+- * objects, etc.
+- *
+- * Any line starting with the well defined marker @e #DOGEN - known as
+- * the opaque parameter marker - will be interpreted as carrying an
+- * opaque parameter in a key-value pair form, where the key and the
+- * value are separated by the assignment operator @e =.
+- */
+-class comments_parser {
+-public:
+-    comments_parser() = default;
+-    comments_parser(const comments_parser&) = default;
+-    ~comments_parser() = default;
+-    comments_parser(comments_parser&&) = default;
+-    comments_parser& operator=(const comments_parser&) = default;
+-
+-public:
+-    typedef std::list<std::pair<std::string, std::string> > kvp_container_type;
+-
+-public:
+-    /**
+-     * @brief Parses a string carrying the comments in the dia object.
+-     *
+-     * Note that the @e # markers used by dia are expected to have
+-     * already been removed.
+-     *
+-     * @return pair where the first element contains all the text
+-     * which does not start with the opaque parameter marker, and the
+-     * second element is a key-value pair container with all of the
+-     * keys and values of the lines that start with the opaque
+-     * parameter marker.
+-     *
+-     * @pre lines starting with the opaque parameter marker must
+-     * follow the defined syntax or else a parsing_error is thrown.
+-     */
+-    std::pair<std::string, kvp_container_type>
+-    parse(const std::string& c) const;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser_fwd.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser_fwd.hpp
+deleted file mode 100644
+index 7306888..0000000
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/comments_parser_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_FWD_HPP
+-#define DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-class comments_parser;
+-
+-} }
+-
+-#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/object_processor.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/object_processor.hpp
+new file mode 100644
+index 0000000..cb6dab3
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/object_processor.hpp
+@@ -0,0 +1,69 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_HPP
++#define DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <string>
++#include "dogen/dia/types/attribute_fwd.hpp"
++#include "dogen/dia/types/object_fwd.hpp"
++#include "dogen/dia/types/attribute_fwd.hpp"
++#include "dogen/dia/types/composite_fwd.hpp"
++#include "dogen/dia_to_sml/types/object_types.hpp"
++#include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
++
++namespace dogen {
++namespace dia_to_sml {
++
++/**
++ * @brief Processes dia objects into an intermediate format.
++ */
++class object_processor {
++public:
++    object_processor() = default;
++    object_processor(const object_processor&) = delete;
++    object_processor(object_processor&&) = default;
++
++private:
++    /**
++     * @brief Parses the dia attribute as a string, returning its value.
++     */
++    std::string parse_string_attribute(const dia::attribute& a) const;
++
++    /**
++     * @brief Given a string with a dia object type, returns the
++     * appropriate enum.
++     */
++    object_types parse_object_type(const std::string& ot) const;
++
++public:
++    /**
++     * @brief Process the object.
++     */
++    processed_object process(const dia::object& o);
++};
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/object_processor_fwd.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/object_processor_fwd.hpp
+new file mode 100644
+index 0000000..5645e5d
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/object_processor_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_FWD_HPP
++#define DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace dia_to_sml {
++
++class object_processor;
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/processed_comment.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/processed_comment.hpp
+new file mode 100644
+index 0000000..612e187
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/processed_comment.hpp
+@@ -0,0 +1,120 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSED_COMMENT_HPP
++#define DOGEN_DIA_TO_SML_TYPES_PROCESSED_COMMENT_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <algorithm>
++#include <list>
++#include <string>
++#include <utility>
++#include "dogen/dia_to_sml/serialization/processed_comment_fwd_ser.hpp"
++
++namespace dogen {
++namespace dia_to_sml {
++
++/**
++ * @brief Contains the same content as the original dia comment, but split by type of data.
++ */
++class processed_comment final {
++public:
++    processed_comment(const processed_comment&) = default;
++    processed_comment(processed_comment&&) = default;
++    ~processed_comment() = default;
++
++public:
++    processed_comment();
++
++public:
++    processed_comment(
++        const std::string& documentation,
++        const std::list<std::pair<std::string, std::string> >& key_value_pairs,
++        const bool applicable_to_parent_object);
++
++private:
++    template<typename Archive>
++    friend void boost::serialization::save(Archive& ar, const processed_comment& v, unsigned int version);
++
++    template<typename Archive>
++    friend void boost::serialization::load(Archive& ar, processed_comment& v, unsigned int version);
++
++public:
++    /**
++     * @brief Text of the comment, excluding all Dogen instructions.
++     */
++    /**@{*/
++    const std::string& documentation() const;
++    std::string& documentation();
++    void documentation(const std::string& v);
++    void documentation(const std::string&& v);
++    /**@}*/
++
++    /**
++     * @brief Dogen instructions, in the key-value-pair form.
++     */
++    /**@{*/
++    const std::list<std::pair<std::string, std::string> >& key_value_pairs() const;
++    std::list<std::pair<std::string, std::string> >& key_value_pairs();
++    void key_value_pairs(const std::list<std::pair<std::string, std::string> >& v);
++    void key_value_pairs(const std::list<std::pair<std::string, std::string> >&& v);
++    /**@}*/
++
++    /**
++     * @brief If true, the comment should be attached to the dia object containing it.
++     */
++    /**@{*/
++    bool applicable_to_parent_object() const;
++    void applicable_to_parent_object(const bool v);
++    /**@}*/
++
++public:
++    bool operator==(const processed_comment& rhs) const;
++    bool operator!=(const processed_comment& rhs) const {
++        return !this->operator==(rhs);
++    }
++
++public:
++    void swap(processed_comment& other) noexcept;
++    processed_comment& operator=(processed_comment other);
++
++private:
++    std::string documentation_;
++    std::list<std::pair<std::string, std::string> > key_value_pairs_;
++    bool applicable_to_parent_object_;
++};
++
++} }
++
++namespace std {
++
++template<>
++inline void swap(
++    dogen::dia_to_sml::processed_comment& lhs,
++    dogen::dia_to_sml::processed_comment& rhs) {
++    lhs.swap(rhs);
++}
++
++}
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/processed_comment_fwd.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/processed_comment_fwd.hpp
+new file mode 100644
+index 0000000..12bb71d
+--- /dev/null
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/processed_comment_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSED_COMMENT_FWD_HPP
++#define DOGEN_DIA_TO_SML_TYPES_PROCESSED_COMMENT_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace dia_to_sml {
++
++class processed_comment;
++
++} }
++
++#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/processor.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/processor.hpp
+deleted file mode 100644
+index 9b49e4b..0000000
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/processor.hpp
++++ /dev/null
+@@ -1,69 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSOR_HPP
+-#define DOGEN_DIA_TO_SML_TYPES_PROCESSOR_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <string>
+-#include "dogen/dia/types/attribute_fwd.hpp"
+-#include "dogen/dia/types/object_fwd.hpp"
+-#include "dogen/dia/types/attribute_fwd.hpp"
+-#include "dogen/dia/types/composite_fwd.hpp"
+-#include "dogen/dia_to_sml/types/object_types.hpp"
+-#include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-/**
+- * @brief Processes dia objects into an intermediate format.
+- */
+-class processor {
+-public:
+-    processor() = default;
+-    processor(const processor&) = delete;
+-    processor(processor&&) = default;
+-
+-private:
+-    /**
+-     * @brief Parses the dia attribute as a string, returning its value.
+-     */
+-    std::string parse_string_attribute(const dia::attribute& a) const;
+-
+-    /**
+-     * @brief Given a string with a dia object type, returns the
+-     * appropriate enum.
+-     */
+-    object_types parse_object_type(const std::string& ot) const;
+-
+-public:
+-    /**
+-     * @brief Process the object.
+-     */
+-    processed_object process(const dia::object& o);
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/processor_fwd.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/processor_fwd.hpp
+deleted file mode 100644
+index 5f2c223..0000000
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/processor_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSOR_FWD_HPP
+-#define DOGEN_DIA_TO_SML_TYPES_PROCESSOR_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-class processor;
+-
+-} }
+-
+-#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+index 430f816..740b7b8 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+@@ -34,7 +34,7 @@
+ #include "dogen/dia_to_sml/types/processed_object.hpp"
+ #include "dogen/dia_to_sml/types/processed_property.hpp"
+ #include "dogen/dia_to_sml/types/identifier_parser.hpp"
+-#include "dogen/dia_to_sml/types/comments_parser.hpp"
++#include "dogen/dia_to_sml/types/comment_processor.hpp"
+ #include "dogen/dia_to_sml/types/context.hpp"
+ #include "dogen/dia_to_sml/types/profile.hpp"
+ 
+@@ -172,10 +172,10 @@ private:
+ 
+         context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
+ 
+-        const auto pair(comments_parser_->parse(o.comment()));
+-        e.documentation(pair.first);
++        const auto pc(comment_processor_->process(o.comment()));
++        e.documentation(pc.documentation());
+         sml::meta_data::writer writer(e.meta_data());
+-        writer.add(pair.second);
++        writer.add(pc.key_value_pairs());
+     }
+ 
+     /**
+@@ -300,7 +300,7 @@ public:
+ private:
+     context& context_;
+     std::shared_ptr<identifier_parser> identifier_parser_;
+-    std::shared_ptr<comments_parser> comments_parser_;
++    std::shared_ptr<comment_processor> comment_processor_;
+ };
+ 
+ } }
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp
+index 10bde6b..677dac0 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp
+@@ -27,24 +27,23 @@
+ 
+ #include <string>
+ #include <memory>
++#include "dogen/dia/types/diagram_fwd.hpp"
++#include "dogen/sml/types/model_fwd.hpp"
+ #include "dogen/dia_to_sml/types/context.hpp"
+ #include "dogen/dia_to_sml/types/profiler.hpp"
+ #include "dogen/dia_to_sml/types/validator.hpp"
+ #include "dogen/dia_to_sml/types/transformer.hpp"
+ #include "dogen/dia_to_sml/types/grapher.hpp"
+-#include "dogen/dia_to_sml/types/workflow_interface.hpp"
+ 
+ namespace dogen {
+ namespace dia_to_sml {
+ 
+-class workflow : public workflow_interface {
++class workflow {
+ public:
+     workflow(const workflow&) = delete;
+     workflow(workflow&&) = default;
+-    virtual ~workflow() noexcept;
+-
+-public:
+-    workflow();
++    ~workflow() noexcept = default;
++    workflow() = default;
+ 
+ private:
+     /**
+@@ -76,10 +75,10 @@ private:
+     void post_process_model_activity();
+ 
+ public:
+-    virtual sml::model execute(const dia::diagram& diagram,
++    sml::model execute(const dia::diagram& diagram,
+         const std::string& model_name,
+         const std::string& external_module_path,
+-        bool is_target) override;
++        bool is_target);
+ 
+ private:
+     context context_;
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow_interface.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow_interface.hpp
+deleted file mode 100644
+index db78d2a..0000000
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow_interface.hpp
++++ /dev/null
+@@ -1,57 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_DIA_TO_SML_TYPES_WORKFLOW_INTERFACE_HPP
+-#define DOGEN_DIA_TO_SML_TYPES_WORKFLOW_INTERFACE_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <string>
+-#include "dogen/dia/types/diagram_fwd.hpp"
+-#include "dogen/sml/types/model_fwd.hpp"
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-/**
+- * @brief Transform a dia diagram into an sml model.
+- */
+-class workflow_interface {
+-public:
+-    workflow_interface() = default;
+-    workflow_interface(const workflow_interface&) = delete;
+-    workflow_interface(workflow_interface&&) = default;
+-    virtual ~workflow_interface() noexcept = 0;
+-
+-public:
+-    /**
+-     * @brief Runs the transformation.
+-     */
+-    virtual sml::model execute(const dia::diagram& diagram,
+-        const std::string& model_name,
+-        const std::string& external_module_path,
+-        bool is_target) = 0;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow_interface_fwd.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow_interface_fwd.hpp
+deleted file mode 100644
+index c9d084a..0000000
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow_interface_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_DIA_TO_SML_TYPES_WORKFLOW_INTERFACE_FWD_HPP
+-#define DOGEN_DIA_TO_SML_TYPES_WORKFLOW_INTERFACE_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-class workflow_interface;
+-
+-} }
+-
+-#endif
+diff --git a/projects/dia_to_sml/spec/comment_processor_spec.cpp b/projects/dia_to_sml/spec/comment_processor_spec.cpp
+new file mode 100644
+index 0000000..909d2ae
+--- /dev/null
++++ b/projects/dia_to_sml/spec/comment_processor_spec.cpp
+@@ -0,0 +1,367 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include <boost/test/unit_test.hpp>
++#include "dogen/utility/test/logging.hpp"
++#include "dogen/utility/test/asserter.hpp"
++#include "dogen/utility/io/pair_io.hpp"
++#include "dogen/utility/io/list_io.hpp"
++#include "dogen/sml/types/model.hpp"
++#include "dogen/dia_to_sml/types/parsing_error.hpp"
++#include "dogen/dia_to_sml/io/processed_comment_io.hpp"
++#include "dogen/dia_to_sml/types/comment_processor.hpp"
++#include "dogen/utility/test/exception_checkers.hpp"
++
++using dogen::utility::test::asserter;
++
++namespace  {
++
++const std::string empty;
++const std::string test_module("dia_to_sml");
++const std::string test_suite("comment_processor_spec");
++
++const std::string line_1("line 1");
++const std::string line_2("line 2");
++const std::string line_3("line 3");
++
++const std::string instruction_1("#DOGEN KEY=VALUE");
++const std::string key_1("KEY");
++const std::string value_1("VALUE");
++
++const std::string instruction_2(
++    "#DOGEN a strange key = some really complicated value 1234");
++const std::string key_2("a strange key ");
++const std::string value_2(" some really complicated value 1234");
++
++const std::string instruction_3("#DOGEN KEY3=VALUE3");
++const std::string key_3("KEY3");
++const std::string value_3("VALUE3");
++
++const std::string instruction_with_no_key(
++    "#DOGEN some really complicated value 1234");
++const std::string instruction_with_no_value("#DOGEN KEY=");
++const std::string unknown_marker("#UNKNOWN a=b");
++const std::string marker_without_space("#DOGENa=b");
++const std::string marker_with_leading_space(" #DOGEN a=b");
++const std::string marker_in_lower_case("dogen a=b");
++const std::string empty_instruction("#DOGEN ");
++
++const std::string no_sep_msg("Expected separator");
++
++}
++
++using dogen::dia_to_sml::parsing_error;
++
++BOOST_AUTO_TEST_SUITE(comment_processor)
++
++BOOST_AUTO_TEST_CASE(empty_comments_result_in_empty_documentation_and_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("empty_comments_result_in_empty_documentation_and_key_value_pairs");
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(empty));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    BOOST_CHECK(r.documentation().empty());
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_CHECK(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << line_1;
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(line_1));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    std::istringstream is(r.documentation());
++    std::string line;
++
++    std::getline(is, line);
++    BOOST_LOG_SEV(lg, info) << "first line: " << line;
++    BOOST_CHECK(line == line_1);
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_CHECK(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs");
++
++    std::ostringstream os;
++    os << line_1 << std::endl;
++    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
++
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(os.str()));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    std::istringstream is(r.documentation());
++    std::string line;
++
++    std::getline(is, line);
++    BOOST_LOG_SEV(lg, info) << "first line: " << line;
++    BOOST_CHECK(line == line_1);
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_CHECK(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(multi_line_comment_results_in_expected_documentation_and_emtpy_key_value_pair) {
++    SETUP_TEST_LOG_SOURCE("multi_line_comment_results_in_expected_documentation_and_emtpy_key_value_pair");
++
++    std::ostringstream os;
++    os << line_1 << std::endl
++       << line_2 << std::endl << std::endl
++       << line_3 << std::endl;
++
++    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(os.str()));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    BOOST_CHECK(!r.documentation().empty());
++
++    std::istringstream is(r.documentation());
++    std::string line;
++
++    std::getline(is, line);
++    BOOST_CHECK(line == line_1);
++
++    std::getline(is, line);
++    BOOST_CHECK(line == line_2);
++
++    std::getline(is, line);
++    BOOST_CHECK(line.empty());
++
++    std::getline(is, line);
++    BOOST_CHECK(line == line_3);
++
++    BOOST_CHECK(!std::getline(is, line));
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_CHECK(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_no_end_line_results_in_empty_documentation_and_expected_key_value_pair) {
++    SETUP_TEST_LOG_SOURCE("comment_with_valid_instruction_and_no_end_line_results_in_empty_documentation_and_expected_key_value_pair");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << instruction_1;
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(instruction_1));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    BOOST_CHECK(r.documentation().empty());
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().size() == 1);
++
++    const auto& pair(*r.key_value_pairs().begin());
++    BOOST_CHECK(pair.first == key_1);
++    BOOST_CHECK(pair.second == value_1);
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_end_line_results_in_empty_documentation_and_expected_key_value_pair) {
++    SETUP_TEST_LOG_SOURCE("comment_with_valid_instruction_and_end_line_results_in_empty_documentation_and_expected_key_value_pair");
++
++    std::ostringstream os;
++    os << instruction_1 << std::endl;
++    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
++
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(os.str()));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    BOOST_CHECK(r.documentation().empty());
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().size() == 1);
++
++    const auto& pair(*r.key_value_pairs().begin());
++    BOOST_CHECK(pair.first == key_1);
++    BOOST_CHECK(pair.second == value_1);
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_key_throws) {
++    SETUP_TEST_LOG_SOURCE("comment_with_instruction_with_no_key_throws");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << instruction_with_no_key;
++    dogen::dia_to_sml::comment_processor cp;
++    BOOST_CHECK_THROW(cp.process(instruction_with_no_key), parsing_error);
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_value_throws) {
++    SETUP_TEST_LOG_SOURCE("comment_with_instruction_with_no_value_throws");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << instruction_with_no_value;
++    dogen::dia_to_sml::comment_processor cp;
++    BOOST_CHECK_THROW(cp.process(instruction_with_no_key), parsing_error);
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_but_no_key_value_pair_throws) {
++    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_but_no_key_value_pair_throws");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << empty_instruction;
++    dogen::dia_to_sml::comment_processor cp;
++    BOOST_CHECK_THROW(cp.process(empty_instruction), parsing_error);
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_key_value_pairs");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << marker_without_space;
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(marker_without_space));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    std::string line;
++    std::istringstream is(r.documentation());
++    std::getline(is, line);
++
++    BOOST_LOG_SEV(lg, info) << "first line: " << line;
++    BOOST_CHECK(line == marker_without_space);
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_preceded_by_leading_space_creates_documentation_and_empty_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_preceded_by_leading_space_creates_documentation_and_empty_key_value_pairs");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << marker_with_leading_space;
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(marker_with_leading_space));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    std::string line;
++    std::istringstream is(r.documentation());
++    std::getline(is, line);
++
++    BOOST_LOG_SEV(lg, info) << "first line: " << line;
++    BOOST_CHECK(line == marker_with_leading_space);
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_in_lower_case_creates_documentation_and_empty_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_in_lower_case_creates_documentation_and_empty_key_value_pairs");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << marker_in_lower_case;
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(marker_in_lower_case));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    std::string line;
++    std::istringstream is(r.documentation());
++    std::getline(is, line);
++
++    BOOST_LOG_SEV(lg, info) << "first line: " << line;
++    BOOST_CHECK(line == marker_in_lower_case);
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation_and_empty_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("comment_with_unknown_marker_creates_documentation_and_empty_key_value_pairs");
++
++    BOOST_LOG_SEV(lg, info) << "input: " << unknown_marker;
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(unknown_marker));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    std::string line;
++    std::istringstream is(r.documentation());
++    std::getline(is, line);
++
++    BOOST_LOG_SEV(lg, info) << "first line: " << line;
++    BOOST_CHECK(line == unknown_marker);
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().empty());
++}
++
++BOOST_AUTO_TEST_CASE(multi_line_comment_with_instruction_results_in_expected_documentation_and_expected_key_value_pair) {
++    SETUP_TEST_LOG_SOURCE("multi_line_comment_with_instruction_results_in_expected_documentation_and_expected_key_value_pair");
++
++    std::ostringstream os;
++    os << line_1 << std::endl
++       << instruction_1 << std::endl << std::endl
++       << line_3 << std::endl;
++
++    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(os.str()));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    BOOST_CHECK(!r.documentation().empty());
++
++    std::istringstream is(r.documentation());
++    std::string line;
++
++    std::getline(is, line);
++    BOOST_CHECK(line == line_1);
++
++    std::getline(is, line);
++    BOOST_CHECK(line.empty());
++
++    std::getline(is, line);
++    BOOST_CHECK(line == line_3);
++
++    BOOST_CHECK(!std::getline(is, line));
++
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().size() == 1);
++    const auto& pair(*r.key_value_pairs().begin());
++    BOOST_CHECK(pair.first == key_1);
++    BOOST_CHECK(pair.second == value_1);
++}
++
++BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documentation_and_expected_key_value_pairs) {
++    SETUP_TEST_LOG_SOURCE("comment_with_multiple_instructions_results_in_empty_documentation_and_expected_key_value_pairs");
++
++    std::ostringstream os;
++    os << instruction_1 << std::endl << instruction_2 << std::endl
++       << instruction_3 << std::endl << instruction_1 << std::endl;
++
++    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
++    dogen::dia_to_sml::comment_processor cp;
++    const auto r(cp.process(os.str()));
++    BOOST_LOG_SEV(lg, info) << "result: " << r;
++
++    BOOST_CHECK(r.documentation().empty());
++    BOOST_CHECK(!r.applicable_to_parent_object());
++    BOOST_REQUIRE(r.key_value_pairs().size() == 4);
++
++    auto i(r.key_value_pairs().begin());
++    BOOST_CHECK(i->first == key_1);
++    BOOST_CHECK(i->second == value_1);
++
++    BOOST_CHECK((++i)->first == key_2);
++    BOOST_CHECK(i->second == value_2);
++
++    BOOST_CHECK((++i)->first == key_3);
++    BOOST_CHECK(i->second == value_3);
++
++    // test duplicate keys
++    BOOST_CHECK((++i)->first == key_1);
++    BOOST_CHECK(i->second == value_1);
++}
++
++BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/dia_to_sml/spec/comments_parser_spec.cpp b/projects/dia_to_sml/spec/comments_parser_spec.cpp
+deleted file mode 100644
+index 66a350f..0000000
+--- a/projects/dia_to_sml/spec/comments_parser_spec.cpp
++++ /dev/null
+@@ -1,358 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <sstream>
+-#include <boost/test/unit_test.hpp>
+-#include "dogen/utility/test/logging.hpp"
+-#include "dogen/utility/test/asserter.hpp"
+-#include "dogen/utility/io/pair_io.hpp"
+-#include "dogen/utility/io/list_io.hpp"
+-#include "dogen/sml/types/model.hpp"
+-#include "dogen/dia_to_sml/types/parsing_error.hpp"
+-#include "dogen/dia_to_sml/types/comments_parser.hpp"
+-#include "dogen/utility/test/exception_checkers.hpp"
+-
+-using dogen::utility::test::asserter;
+-
+-namespace  {
+-
+-const std::string empty;
+-const std::string test_module("dia_to_sml");
+-const std::string test_suite("comments_parser_spec");
+-
+-const std::string line_1("line 1");
+-const std::string line_2("line 2");
+-const std::string line_3("line 3");
+-
+-const std::string kvp_1("#DOGEN KEY=VALUE");
+-const std::string key_1("KEY");
+-const std::string value_1("VALUE");
+-
+-const std::string kvp_2(
+-    "#DOGEN a strange key = some really complicated value 1234");
+-const std::string key_2("a strange key ");
+-const std::string value_2(" some really complicated value 1234");
+-
+-const std::string kvp_3("#DOGEN KEY3=VALUE3");
+-const std::string key_3("KEY3");
+-const std::string value_3("VALUE3");
+-
+-const std::string kvp_no_key("#DOGEN some really complicated value 1234");
+-const std::string kvp_no_value("#DOGEN KEY=");
+-const std::string unknown_marker("#UNKNOWN a=b");
+-const std::string marker_without_space("#DOGENa=b");
+-const std::string marker_with_leading_space(" #DOGEN a=b");
+-const std::string marker_in_lower_case("dogen a=b");
+-const std::string empty_kvp("#DOGEN ");
+-
+-const std::string no_sep_msg("Expected separator");
+-
+-}
+-
+-using dogen::dia_to_sml::parsing_error;
+-
+-BOOST_AUTO_TEST_SUITE(comments_parser)
+-
+-BOOST_AUTO_TEST_CASE(empty_comments_result_in_empty_documentation_and_parameters) {
+-    SETUP_TEST_LOG_SOURCE("empty_comments_result_in_empty_documentation_and_parameters");
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(empty));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    BOOST_CHECK(r.first.empty());
+-    BOOST_CHECK(r.second.empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_parameters) {
+-    SETUP_TEST_LOG_SOURCE("single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_parameters");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << line_1;
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(line_1));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    std::istringstream is(r.first);
+-    std::string line;
+-
+-    std::getline(is, line);
+-    BOOST_LOG_SEV(lg, info) << "first line: " << line;
+-    BOOST_CHECK(line == line_1);
+-
+-    BOOST_CHECK(r.second.empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_parameters) {
+-    SETUP_TEST_LOG_SOURCE("single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_parameters");
+-
+-    std::ostringstream os;
+-    os << line_1 << std::endl;
+-    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
+-
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(os.str()));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    std::istringstream is(r.first);
+-    std::string line;
+-
+-    std::getline(is, line);
+-    BOOST_LOG_SEV(lg, info) << "first line: " << line;
+-    BOOST_CHECK(line == line_1);
+-
+-    BOOST_CHECK(r.second.empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(multi_line_comment_results_in_expected_documentation_and_emtpy_parameters) {
+-    SETUP_TEST_LOG_SOURCE("multi_line_comment_results_in_expected_documentation_and_emtpy_parameters");
+-
+-    std::ostringstream os;
+-    os << line_1 << std::endl
+-       << line_2 << std::endl << std::endl
+-       << line_3 << std::endl;
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(os.str()));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    BOOST_CHECK(!r.first.empty());
+-
+-    std::istringstream is(r.first);
+-    std::string line;
+-
+-    std::getline(is, line);
+-    BOOST_CHECK(line == line_1);
+-
+-    std::getline(is, line);
+-    BOOST_CHECK(line == line_2);
+-
+-    std::getline(is, line);
+-    BOOST_CHECK(line.empty());
+-
+-    std::getline(is, line);
+-    BOOST_CHECK(line == line_3);
+-
+-    BOOST_CHECK(!std::getline(is, line));
+-
+-    BOOST_CHECK(r.second.empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_no_end_line_results_in_empty_documentation_and_expected_parameter) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_valid_kvp_and_no_end_line_results_in_empty_documentation_and_expected_parameter");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << kvp_1;
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(kvp_1));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    BOOST_CHECK(r.first.empty());
+-    BOOST_REQUIRE(r.second.size() == 1);
+-    const auto& pair(*r.second.begin());
+-    BOOST_CHECK(pair.first == key_1);
+-    BOOST_CHECK(pair.second == value_1);
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_valid_kvp_and_end_line_results_in_empty_documentation_and_expected_parameter) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_valid_kvp_and_end_line_results_in_empty_documentation_and_expected_parameter");
+-
+-    std::ostringstream os;
+-    os << kvp_1 << std::endl;
+-    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
+-
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(os.str()));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    BOOST_CHECK(r.first.empty());
+-    BOOST_REQUIRE(r.second.size() == 1);
+-    const auto& pair(*r.second.begin());
+-    BOOST_CHECK(pair.first == key_1);
+-    BOOST_CHECK(pair.second == value_1);
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_complex_kvp_results_in_empty_documentation_and_expected_parameter) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_complex_kvp_results_in_empty_documentation_and_expected_parameter");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << kvp_2;
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(kvp_2));
+-
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-    BOOST_CHECK(r.first.empty());
+-    BOOST_REQUIRE(r.second.size() == 1);
+-    const auto& pair(*r.second.begin());
+-    BOOST_CHECK(pair.first == key_2);
+-    BOOST_CHECK(pair.second == value_2);
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_kvp_with_no_key_throws) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_kvp_with_no_key_throws");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << kvp_no_key;
+-    dogen::dia_to_sml::comments_parser cp;
+-    BOOST_CHECK_THROW(cp.parse(kvp_no_key), parsing_error);
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_kvp_marker_but_no_kvp_throws) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_kvp_marker_but_no_kvp_throws");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << empty_kvp;
+-    dogen::dia_to_sml::comments_parser cp;
+-    BOOST_CHECK_THROW(cp.parse(empty_kvp), parsing_error);
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_kvp_marker_glued_to_key_and_value_creates_documentation) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_kvp_marker_glued_to_key_and_value_creates_documentation");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << marker_without_space;
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(marker_without_space));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    std::string line;
+-    std::istringstream is(r.first);
+-    std::getline(is, line);
+-
+-    BOOST_LOG_SEV(lg, info) << "first line: " << line;
+-    BOOST_CHECK(line == marker_without_space);
+-
+-    BOOST_REQUIRE(r.second.empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_kvp_marker_preceded_by_leading_space_creates_documentation) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_kvp_marker_preceded_by_leading_space_creates_documentation");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << marker_with_leading_space;
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(marker_with_leading_space));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    std::string line;
+-    std::istringstream is(r.first);
+-    std::getline(is, line);
+-
+-    BOOST_LOG_SEV(lg, info) << "first line: " << line;
+-    BOOST_CHECK(line == marker_with_leading_space);
+-
+-    BOOST_REQUIRE(r.second.empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_kvp_marker_in_lower_case_creates_documentation) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_kvp_marker_in_lower_case_creates_documentation");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << marker_in_lower_case;
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(marker_in_lower_case));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    std::string line;
+-    std::istringstream is(r.first);
+-    std::getline(is, line);
+-
+-    BOOST_LOG_SEV(lg, info) << "first line: " << line;
+-    BOOST_CHECK(line == marker_in_lower_case);
+-
+-    BOOST_REQUIRE(r.second.empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_unknown_marker_creates_documentation");
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << unknown_marker;
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(unknown_marker));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    std::string line;
+-    std::istringstream is(r.first);
+-    std::getline(is, line);
+-
+-    BOOST_LOG_SEV(lg, info) << "first line: " << line;
+-    BOOST_CHECK(line == unknown_marker);
+-
+-    BOOST_REQUIRE(r.second.empty());
+-}
+-
+-
+-BOOST_AUTO_TEST_CASE(multi_line_comment_with_kvp_results_in_expected_documentation_and_expected_parameter) {
+-    SETUP_TEST_LOG_SOURCE("multi_line_comment_with_kvp_results_in_expected_documentation_and_expected_parameter");
+-
+-    std::ostringstream os;
+-    os << line_1 << std::endl
+-       << kvp_1 << std::endl << std::endl
+-       << line_3 << std::endl;
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(os.str()));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    BOOST_CHECK(!r.first.empty());
+-
+-    std::istringstream is(r.first);
+-    std::string line;
+-
+-    std::getline(is, line);
+-    BOOST_CHECK(line == line_1);
+-
+-    std::getline(is, line);
+-    BOOST_CHECK(line.empty());
+-
+-    std::getline(is, line);
+-    BOOST_CHECK(line == line_3);
+-
+-    BOOST_CHECK(!std::getline(is, line));
+-
+-    BOOST_REQUIRE(r.second.size() == 1);
+-    const auto& pair(*r.second.begin());
+-    BOOST_CHECK(pair.first == key_1);
+-    BOOST_CHECK(pair.second == value_1);
+-}
+-
+-BOOST_AUTO_TEST_CASE(comment_with_multiple_kvps_results_in_empty_documentation_and_expected_parameters) {
+-    SETUP_TEST_LOG_SOURCE("comment_with_multiple_kvps_results_in_empty_documentation_and_expected_parameters");
+-
+-    std::ostringstream os;
+-    os << kvp_1 << std::endl << kvp_2 << std::endl
+-       << kvp_3 << std::endl << kvp_1 << std::endl;
+-
+-    BOOST_LOG_SEV(lg, info) << "input: " << os.str();
+-    dogen::dia_to_sml::comments_parser cp;
+-    const auto r(cp.parse(os.str()));
+-    BOOST_LOG_SEV(lg, info) << "result: " << r;
+-
+-    BOOST_CHECK(r.first.empty());
+-    BOOST_REQUIRE(r.second.size() == 4);
+-
+-    auto i(r.second.begin());
+-    BOOST_CHECK(i->first == key_1);
+-    BOOST_CHECK(i->second == value_1);
+-
+-    BOOST_CHECK((++i)->first == key_2);
+-    BOOST_CHECK(i->second == value_2);
+-
+-    BOOST_CHECK((++i)->first == key_3);
+-    BOOST_CHECK(i->second == value_3);
+-
+-    // test duplicate keys
+-    BOOST_CHECK((++i)->first == key_1);
+-    BOOST_CHECK(i->second == value_1);
+-}
+-BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/dia_to_sml/spec/object_processor_spec.cpp b/projects/dia_to_sml/spec/object_processor_spec.cpp
+new file mode 100644
+index 0000000..267907c
+--- /dev/null
++++ b/projects/dia_to_sml/spec/object_processor_spec.cpp
+@@ -0,0 +1,151 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include <boost/test/unit_test.hpp>
++#include <boost/algorithm/string/predicate.hpp>
++#include "dogen/utility/test/asserter.hpp"
++#include "dogen/utility/test/logging.hpp"
++#include "dogen/dia_to_sml/types/processed_object.hpp"
++#include "dogen/dia_to_sml/types/object_processor.hpp"
++#include "dogen/dia_to_sml/types/processing_error.hpp"
++#include "dogen/dia_to_sml/io/context_io.hpp"
++#include "dogen/dia_to_sml/io/processed_object_io.hpp"
++#include "dogen/dia/test/mock_object_factory.hpp"
++#include "dogen/utility/test/exception_checkers.hpp"
++
++using namespace dogen::dia_to_sml;
++using dogen::utility::test::asserter;
++
++namespace  {
++
++const std::string test_module("dia_to_sml");
++const std::string test_suite("object_processor_spec");
++const std::string model_name("test");
++const std::string missing_name("Could not find name");
++const std::string empty_name("Dia object name is empty");
++
++const std::string dia_enumeration_stereotype("#enumeration#");
++const std::string dia_exception_stereotype("#exception#");
++
++const std::string enumeration_stereotype("enumeration");
++const std::string exception_stereotype("exception");
++
++}
++
++using dogen::utility::test::contains_checker;
++using dogen::dia::test::mock_object_factory;
++using dogen::dia_to_sml::object_types;
++
++BOOST_AUTO_TEST_SUITE(object_processor)
++
++BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_object");
++    dogen::dia_to_sml::object_processor op;
++    const auto po(op.process(mock_object_factory::build_class(0)));
++    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
++    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
++    BOOST_CHECK(!po.name().empty());
++    BOOST_CHECK(po.object_type() == object_types::uml_class);
++    BOOST_CHECK(po.stereotype().empty());
++}
++
++BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_processed_object");
++    dogen::dia_to_sml::object_processor op;
++    const std::string st(dia_enumeration_stereotype);
++    const auto o(mock_object_factory::build_stereotyped_class(st, 0));
++    const auto po(op.process(o));
++    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
++    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
++    BOOST_CHECK(!po.name().empty());
++    BOOST_CHECK(po.object_type() == object_types::uml_class);
++    BOOST_CHECK(po.stereotype() == enumeration_stereotype);
++}
++
++BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_processed_object");
++    dogen::dia_to_sml::object_processor op;
++    const std::string st(dia_exception_stereotype);
++    const auto o(mock_object_factory::build_stereotyped_class(st, 0));
++    const auto po(op.process(o));
++    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
++    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
++    BOOST_CHECK(!po.name().empty());
++    BOOST_CHECK(po.object_type() == object_types::uml_class);
++    BOOST_CHECK(po.stereotype() == exception_stereotype);
++}
++
++BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_processed_object");
++
++    dogen::dia_to_sml::object_processor op;
++    const auto o(mock_object_factory::build_large_package(0));
++    const auto po(op.process(o));
++    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
++    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
++    BOOST_CHECK(!po.name().empty());
++    BOOST_CHECK(po.object_type() == object_types::uml_large_package);
++    BOOST_CHECK(po.stereotype().empty());
++}
++
++BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_processed_object");
++
++    dogen::dia_to_sml::object_processor op;
++    const auto o(mock_object_factory::build_class_inside_large_package(0));
++    const auto po(op.process(o[1]));
++    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
++    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(1));
++    BOOST_CHECK(!po.name().empty());
++    BOOST_CHECK(po.object_type() == object_types::uml_class);
++    BOOST_CHECK(po.stereotype().empty());
++    BOOST_CHECK(po.child_node_id() == o[0].id());
++}
++
++BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_generalization_transforms_into_expected_processed_object");
++    dogen::dia_to_sml::object_processor op;
++    const auto o(mock_object_factory::build_generalization(0));
++    const auto po(op.process(o[0]));
++    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
++    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
++    BOOST_CHECK(po.name().empty());
++    BOOST_CHECK(po.object_type() == object_types::uml_generalization);
++    BOOST_CHECK(po.stereotype().empty());
++    BOOST_REQUIRE(po.connection());
++    BOOST_REQUIRE(po.connection()->first == o[1].id());
++    BOOST_REQUIRE(po.connection()->second == o[2].id());
++}
++
++BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_note_transforms_into_expected_processed_object");
++    dogen::dia_to_sml::object_processor op;
++    const auto o(mock_object_factory::build_uml_note(0));
++    const auto po(op.process(o));
++    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
++    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
++    BOOST_CHECK(po.name().empty());
++    BOOST_CHECK(po.object_type() == object_types::uml_note);
++    BOOST_CHECK(po.stereotype().empty());
++    BOOST_CHECK(!po.text().empty());
++}
++
++BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/dia_to_sml/spec/processor_spec.cpp b/projects/dia_to_sml/spec/processor_spec.cpp
+deleted file mode 100644
+index 0c0d7fe..0000000
+--- a/projects/dia_to_sml/spec/processor_spec.cpp
++++ /dev/null
+@@ -1,151 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <sstream>
+-#include <boost/test/unit_test.hpp>
+-#include <boost/algorithm/string/predicate.hpp>
+-#include "dogen/utility/test/asserter.hpp"
+-#include "dogen/utility/test/logging.hpp"
+-#include "dogen/dia_to_sml/types/processed_object.hpp"
+-#include "dogen/dia_to_sml/types/processor.hpp"
+-#include "dogen/dia_to_sml/types/processing_error.hpp"
+-#include "dogen/dia_to_sml/io/context_io.hpp"
+-#include "dogen/dia_to_sml/io/processed_object_io.hpp"
+-#include "dogen/dia/test/mock_object_factory.hpp"
+-#include "dogen/utility/test/exception_checkers.hpp"
+-
+-using namespace dogen::dia_to_sml;
+-using dogen::utility::test::asserter;
+-
+-namespace  {
+-
+-const std::string test_module("dia_to_sml");
+-const std::string test_suite("processor_spec");
+-const std::string model_name("test");
+-const std::string missing_name("Could not find name");
+-const std::string empty_name("Dia object name is empty");
+-
+-const std::string dia_enumeration_stereotype("#enumeration#");
+-const std::string dia_exception_stereotype("#exception#");
+-
+-const std::string enumeration_stereotype("enumeration");
+-const std::string exception_stereotype("exception");
+-
+-}
+-
+-using dogen::utility::test::contains_checker;
+-using dogen::dia::test::mock_object_factory;
+-using dogen::dia_to_sml::object_types;
+-
+-BOOST_AUTO_TEST_SUITE(processor)
+-
+-BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_processed_object) {
+-    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_object");
+-    dogen::dia_to_sml::processor p;
+-    const auto o(p.process(mock_object_factory::build_class(0)));
+-    BOOST_LOG_SEV(lg, debug) << "actual:" << o;
+-    BOOST_CHECK(o.id() == mock_object_factory::to_oject_id(0));
+-    BOOST_CHECK(!o.name().empty());
+-    BOOST_CHECK(o.object_type() == object_types::uml_class);
+-    BOOST_CHECK(o.stereotype().empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_processed_object) {
+-    SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_processed_object");
+-    dogen::dia_to_sml::processor p;
+-    const std::string st(dia_enumeration_stereotype);
+-    const auto o(mock_object_factory::build_stereotyped_class(st, 0));
+-    const auto po(p.process(o));
+-    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
+-    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
+-    BOOST_CHECK(!po.name().empty());
+-    BOOST_CHECK(po.object_type() == object_types::uml_class);
+-    BOOST_CHECK(po.stereotype() == enumeration_stereotype);
+-}
+-
+-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_processed_object) {
+-    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_processed_object");
+-    dogen::dia_to_sml::processor p;
+-    const std::string st(dia_exception_stereotype);
+-    const auto o(mock_object_factory::build_stereotyped_class(st, 0));
+-    const auto po(p.process(o));
+-    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
+-    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
+-    BOOST_CHECK(!po.name().empty());
+-    BOOST_CHECK(po.object_type() == object_types::uml_class);
+-    BOOST_CHECK(po.stereotype() == exception_stereotype);
+-}
+-
+-BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_processed_object) {
+-    SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_processed_object");
+-
+-    dogen::dia_to_sml::processor p;
+-    const auto o(mock_object_factory::build_large_package(0));
+-    const auto po(p.process(o));
+-    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
+-    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
+-    BOOST_CHECK(!po.name().empty());
+-    BOOST_CHECK(po.object_type() == object_types::uml_large_package);
+-    BOOST_CHECK(po.stereotype().empty());
+-}
+-
+-BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_processed_object) {
+-    SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_processed_object");
+-
+-    dogen::dia_to_sml::processor p;
+-    const auto o(mock_object_factory::build_class_inside_large_package(0));
+-    const auto po(p.process(o[1]));
+-    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
+-    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(1));
+-    BOOST_CHECK(!po.name().empty());
+-    BOOST_CHECK(po.object_type() == object_types::uml_class);
+-    BOOST_CHECK(po.stereotype().empty());
+-    BOOST_CHECK(po.child_node_id() == o[0].id());
+-}
+-
+-BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_processed_object) {
+-    SETUP_TEST_LOG_SOURCE("uml_generalization_transforms_into_expected_processed_object");
+-    dogen::dia_to_sml::processor p;
+-    const auto o(mock_object_factory::build_generalization(0));
+-    const auto po(p.process(o[0]));
+-    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
+-    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
+-    BOOST_CHECK(po.name().empty());
+-    BOOST_CHECK(po.object_type() == object_types::uml_generalization);
+-    BOOST_CHECK(po.stereotype().empty());
+-    BOOST_REQUIRE(po.connection());
+-    BOOST_REQUIRE(po.connection()->first == o[1].id());
+-    BOOST_REQUIRE(po.connection()->second == o[2].id());
+-}
+-
+-BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_processed_object) {
+-    SETUP_TEST_LOG_SOURCE("uml_note_transforms_into_expected_processed_object");
+-    dogen::dia_to_sml::processor p;
+-    const auto o(mock_object_factory::build_uml_note(0));
+-    const auto po(p.process(o));
+-    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
+-    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
+-    BOOST_CHECK(po.name().empty());
+-    BOOST_CHECK(po.object_type() == object_types::uml_note);
+-    BOOST_CHECK(po.stereotype().empty());
+-    BOOST_CHECK(!po.text().empty());
+-}
+-
+-BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/dia_to_sml/src/hash/processed_comment_hash.cpp b/projects/dia_to_sml/src/hash/processed_comment_hash.cpp
+new file mode 100644
+index 0000000..450d638
+--- /dev/null
++++ b/projects/dia_to_sml/src/hash/processed_comment_hash.cpp
+@@ -0,0 +1,63 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/dia_to_sml/hash/processed_comment_hash.hpp"
++
++namespace {
++
++template <typename HashableType>
++inline void combine(std::size_t& seed, const HashableType& value)
++{
++    std::hash<HashableType> hasher;
++    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
++}
++
++inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
++    std::size_t seed(0);
++
++    combine(seed, v.first);
++    combine(seed, v.second);
++    return seed;
++}
++
++inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v){
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, hash_std_pair_std_string_std_string(i));
++    }
++    return seed;
++}
++
++}
++
++namespace dogen {
++namespace dia_to_sml {
++
++std::size_t processed_comment_hasher::hash(const processed_comment&v) {
++    std::size_t seed(0);
++
++    combine(seed, v.documentation());
++    combine(seed, hash_std_list_std_pair_std_string_std_string_(v.key_value_pairs()));
++    combine(seed, v.applicable_to_parent_object());
++
++    return seed;
++}
++
++} }
+diff --git a/projects/dia_to_sml/src/io/processed_comment_io.cpp b/projects/dia_to_sml/src/io/processed_comment_io.cpp
+new file mode 100644
+index 0000000..af2adb7
+--- /dev/null
++++ b/projects/dia_to_sml/src/io/processed_comment_io.cpp
+@@ -0,0 +1,80 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/algorithm/string.hpp>
++#include <boost/io/ios_state.hpp>
++#include <ostream>
++#include "dogen/dia_to_sml/io/processed_comment_io.hpp"
++
++
++inline std::string tidy_up_string(std::string s) {
++    boost::replace_all(s, "\r\n", "<new_line>");
++    boost::replace_all(s, "\n", "<new_line>");
++    boost::replace_all(s, "\"", "<quote>");
++    return s;
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
++    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
++
++    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
++    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
++    s << " }";
++    return s;
++}
++
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << *i;
++    }
++    s << "] ";
++    return s;
++}
++
++}
++
++namespace dogen {
++namespace dia_to_sml {
++
++std::ostream& operator<<(std::ostream& s, const processed_comment& v) {
++    boost::io::ios_flags_saver ifs(s);
++    s.setf(std::ios_base::boolalpha);
++    s.setf(std::ios::fixed, std::ios::floatfield);
++    s.precision(6);
++    s.setf(std::ios::showpoint);
++
++    s << " { "
++      << "\"__type__\": " << "\"dogen::dia_to_sml::processed_comment\"" << ", "
++      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
++      << "\"key_value_pairs\": " << v.key_value_pairs() << ", "
++      << "\"applicable_to_parent_object\": " << v.applicable_to_parent_object()
++      << " }";
++    return(s);
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/dia_to_sml/src/serialization/processed_comment_ser.cpp b/projects/dia_to_sml/src/serialization/processed_comment_ser.cpp
+new file mode 100644
+index 0000000..7c04205
+--- /dev/null
++++ b/projects/dia_to_sml/src/serialization/processed_comment_ser.cpp
+@@ -0,0 +1,74 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/archive/binary_iarchive.hpp>
++#include <boost/archive/binary_oarchive.hpp>
++#include <boost/archive/polymorphic_iarchive.hpp>
++#include <boost/archive/polymorphic_oarchive.hpp>
++#include <boost/archive/text_iarchive.hpp>
++#include <boost/archive/text_oarchive.hpp>
++#include <boost/archive/xml_iarchive.hpp>
++#include <boost/archive/xml_oarchive.hpp>
++#include <boost/serialization/list.hpp>
++#include <boost/serialization/nvp.hpp>
++#include <boost/serialization/string.hpp>
++#include <boost/serialization/utility.hpp>
++#include "dogen/dia_to_sml/serialization/processed_comment_ser.hpp"
++
++
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar,
++    const dogen::dia_to_sml::processed_comment& v,
++    const unsigned int /*version*/) {
++    ar << make_nvp("documentation", v.documentation_);
++    ar << make_nvp("key_value_pairs", v.key_value_pairs_);
++    ar << make_nvp("applicable_to_parent_object", v.applicable_to_parent_object_);
++}
++
++template<typename Archive>
++void load(Archive& ar,
++    dogen::dia_to_sml::processed_comment& v,
++    const unsigned int /*version*/) {
++    ar >> make_nvp("documentation", v.documentation_);
++    ar >> make_nvp("key_value_pairs", v.key_value_pairs_);
++    ar >> make_nvp("applicable_to_parent_object", v.applicable_to_parent_object_);
++}
++
++} }
++
++namespace boost {
++namespace serialization {
++
++template void save(archive::polymorphic_oarchive& ar, const dogen::dia_to_sml::processed_comment& v, unsigned int version);
++template void load(archive::polymorphic_iarchive& ar, dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++template void save(archive::text_oarchive& ar, const dogen::dia_to_sml::processed_comment& v, unsigned int version);
++template void load(archive::text_iarchive& ar, dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++template void save(archive::binary_oarchive& ar, const dogen::dia_to_sml::processed_comment& v, unsigned int version);
++template void load(archive::binary_iarchive& ar, dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++template void save(archive::xml_oarchive& ar, const dogen::dia_to_sml::processed_comment& v, unsigned int version);
++template void load(archive::xml_iarchive& ar, dogen::dia_to_sml::processed_comment& v, unsigned int version);
++
++} }
+\ No newline at end of file
+diff --git a/projects/dia_to_sml/src/test_data/processed_comment_td.cpp b/projects/dia_to_sml/src/test_data/processed_comment_td.cpp
+new file mode 100644
+index 0000000..e9cb7e3
+--- /dev/null
++++ b/projects/dia_to_sml/src/test_data/processed_comment_td.cpp
+@@ -0,0 +1,84 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include "dogen/dia_to_sml/test_data/processed_comment_td.hpp"
++
++namespace {
++
++std::string create_std_string(const unsigned int position) {
++    std::ostringstream s;
++    s << "a_string_" << position;
++    return s.str();
++}
++
++std::pair<std::string, std::string>
++create_std_pair_std_string_std_string(unsigned int position) {
++    std::pair<std::string, std::string> r(
++        create_std_string(position),
++        create_std_string(position));
++    return r;
++}
++
++std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_string_std_string_(unsigned int position) {
++    std::list<std::pair<std::string, std::string> > r;
++    for (unsigned int i(0); i < 4; ++i) {
++        r.push_back(create_std_pair_std_string_std_string(position + i));
++    }
++    return r;
++}
++
++bool create_bool(const unsigned int position) {
++    return (position % 2) == 0;
++}
++
++}
++
++namespace dogen {
++namespace dia_to_sml {
++
++processed_comment_generator::processed_comment_generator() : position_(0) { }
++
++void processed_comment_generator::
++populate(const unsigned int position, result_type& v) {
++    v.documentation(create_std_string(position + 0));
++    v.key_value_pairs(create_std_list_std_pair_std_string_std_string_(position + 1));
++    v.applicable_to_parent_object(create_bool(position + 2));
++}
++
++processed_comment_generator::result_type
++processed_comment_generator::create(const unsigned int position) {
++    processed_comment r;
++    processed_comment_generator::populate(position, r);
++    return r;
++}
++processed_comment_generator::result_type*
++processed_comment_generator::create_ptr(const unsigned int position) {
++    processed_comment* p = new processed_comment();
++    processed_comment_generator::populate(position, *p);
++    return p;
++}
++
++processed_comment_generator::result_type
++processed_comment_generator::operator()() {
++    return create(position_++);
++}
++
++} }
+diff --git a/projects/dia_to_sml/src/types/comment_processor.cpp b/projects/dia_to_sml/src/types/comment_processor.cpp
+new file mode 100644
+index 0000000..73edb4b
+--- /dev/null
++++ b/projects/dia_to_sml/src/types/comment_processor.cpp
+@@ -0,0 +1,79 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include <boost/throw_exception.hpp>
++#include <boost/algorithm/string.hpp>
++#include <boost/algorithm/string/predicate.hpp>
++#include "dogen/utility/log/logger.hpp"
++#include "dogen/dia_to_sml/types/parsing_error.hpp"
++#include "dogen/dia_to_sml/types/comment_processor.hpp"
++
++using namespace dogen::utility::log;
++
++namespace {
++
++auto lg(logger_factory("dia_to_sml.comment_processor"));
++
++const std::string empty;
++const std::string instruction_marker("#DOGEN ");
++const std::string equals("=");
++const std::string separator_not_found("Expected separator on KVP.");
++const std::string dia_comment("dia.comment");
++
++}
++
++namespace dogen {
++namespace dia_to_sml {
++
++processed_comment comment_processor::process(const std::string& c) const {
++    processed_comment r;
++
++    if (c.empty())
++        return r;
++
++    std::istringstream comments_stream(c);
++    std::ostringstream documentation_stream;
++    std::string line;
++    bool applicable_to_parent_object(false);
++    while (std::getline(comments_stream, line)) {
++        if (boost::starts_with(line, instruction_marker)) {
++            boost::replace_all(line, instruction_marker, empty);
++
++            const auto pos(line.find_first_of(equals));
++            if (pos == std::string::npos) {
++                BOOST_LOG_SEV(lg, error) << separator_not_found;
++                BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
++            }
++
++            const auto key(line.substr(0, pos));
++            const auto value(line.substr(pos + 1));
++            applicable_to_parent_object |= (key == dia_comment);
++            r.key_value_pairs().push_back(std::make_pair(key, value));
++        } else
++            documentation_stream << line << std::endl;
++    }
++
++    r.documentation(documentation_stream.str());
++    r.applicable_to_parent_object(applicable_to_parent_object);
++    return r;
++}
++
++} }
+diff --git a/projects/dia_to_sml/src/types/comments_parser.cpp b/projects/dia_to_sml/src/types/comments_parser.cpp
+deleted file mode 100644
+index b11403a..0000000
+--- a/projects/dia_to_sml/src/types/comments_parser.cpp
++++ /dev/null
+@@ -1,77 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <sstream>
+-#include <boost/throw_exception.hpp>
+-#include <boost/algorithm/string.hpp>
+-#include <boost/algorithm/string/predicate.hpp>
+-#include "dogen/utility/log/logger.hpp"
+-#include "dogen/dia_to_sml/types/parsing_error.hpp"
+-#include "dogen/dia_to_sml/types/comments_parser.hpp"
+-
+-using namespace dogen::utility::log;
+-
+-namespace {
+-
+-auto lg(logger_factory("dia_to_sml.comments_parser"));
+-
+-const std::string empty;
+-const std::string prefix("#DOGEN ");
+-const std::string equals("=");
+-const std::string separator_not_found("Expected separator on KVP.");
+-const std::string duplicated_key("Duplicated key: ");
+-
+-}
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-std::pair<std::string, comments_parser::kvp_container_type>
+-comments_parser::parse(const std::string& c) const {
+-    std::pair<std::string, kvp_container_type> r;
+-
+-    if (c.empty())
+-        return r;
+-
+-    std::istringstream comments_stream(c);
+-    std::ostringstream documentation_stream;
+-    std::string line;
+-    while (std::getline(comments_stream, line)) {
+-        if (boost::starts_with(line, prefix)) {
+-            boost::replace_all(line, prefix, empty);
+-
+-            const auto pos(line.find_first_of(equals));
+-            if (pos == std::string::npos) {
+-                BOOST_LOG_SEV(lg, error) << separator_not_found;
+-                BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
+-            }
+-
+-            const auto key(line.substr(0, pos));
+-            const auto value(line.substr(pos + 1));
+-            r.second.push_back(std::make_pair(key, value));
+-        } else
+-            documentation_stream << line << std::endl;
+-    }
+-
+-    r.first = documentation_stream.str();
+-    return r;
+-}
+-
+-} }
+diff --git a/projects/dia_to_sml/src/types/object_processor.cpp b/projects/dia_to_sml/src/types/object_processor.cpp
+new file mode 100644
+index 0000000..0b51808
+--- /dev/null
++++ b/projects/dia_to_sml/src/types/object_processor.cpp
+@@ -0,0 +1,256 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/lexical_cast.hpp>
++#include <boost/throw_exception.hpp>
++#include <boost/algorithm/string/trim.hpp>
++#include <boost/algorithm/string/erase.hpp>
++#include "dogen/utility/log/logger.hpp"
++#include "dogen/dia/types/object.hpp"
++#include "dogen/dia/types/attribute.hpp"
++#include "dogen/dia/types/composite.hpp"
++#include "dogen/dia_to_sml/types/processing_error.hpp"
++#include "dogen/dia_to_sml/types/object_processor.hpp"
++#include "dogen/dia_to_sml/types/processed_object.hpp"
++
++namespace {
++
++using namespace dogen::utility::log;
++static logger lg(logger_factory("dia_to_sml.object_processor"));
++
++const std::string dia_string("string");
++const std::string dia_name("name");
++const std::string dia_type("type");
++const std::string dia_text("text");
++const std::string dia_comment("comment");
++const std::string dia_stereotype("stereotype");
++const std::string dia_attributes("attributes");
++const std::string dia_composite("composite");
++const std::string dia_uml_attribute("umlattribute");
++const std::string hash_character("#");
++
++const std::string uml_large_package("UML - LargePackage");
++const std::string uml_class("UML - Class");
++const std::string uml_generalization("UML - Generalization");
++const std::string uml_association("UML - Association");
++const std::string uml_note("UML - Note");
++const std::string uml_message("UML - Message");
++const std::string uml_realization("UML - Realizes");
++const std::string invalid_object_type("Invalid value for object type: ");
++
++const std::string error_parsing_object_type("Fail to parse object type: ");
++const std::string empty_dia_object_name("Dia object name is empty");
++const std::string uml_attribute_expected("UML atttribute expected");
++const std::string text_attribute_expected("Text attribute expected");
++const std::string one_value_expected(
++    "Attribute should have exactly one value");
++const std::string name_attribute_expected(
++    "Could not find name attribute. ID: ");
++const std::string type_attribute_expected(
++    "Could not find type attribute. ID: ");
++const std::string unexpected_attribute_value_type(
++    "Did not find expected attribute value type: ");
++const std::string unexpected_attribute_value_size(
++    "Unexpected attribute value size: ");
++const std::string invalid_type_string(
++    "String provided with type did not parse into SML qnames: ");
++const std::string object_has_invalid_type("Invalid dia type: ");
++const std::string unexpected_number_of_connections(
++    "Expected 2 connections but found: ");
++
++template<typename AttributeValue, typename Variant>
++AttributeValue
++attribute_value(const Variant& v, const std::string& desc) {
++
++    AttributeValue r;
++    try {
++        r = boost::get<AttributeValue>(v);
++    } catch (const boost::bad_get&) {
++        BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
++
++        using dogen::dia_to_sml::processing_error;
++        BOOST_THROW_EXCEPTION(
++            processing_error(unexpected_attribute_value_type + desc));
++    }
++    return r;
++}
++
++}
++
++namespace dogen {
++namespace dia_to_sml {
++
++object_types object_processor::parse_object_type(const std::string& ot) const {
++    if (ot == uml_large_package)
++        return object_types::uml_large_package;
++
++    if (ot == uml_class)
++        return object_types::uml_class;
++
++    if (ot == uml_generalization)
++        return object_types::uml_generalization;
++
++    if (ot == uml_association)
++        return object_types::uml_association;
++
++    if (ot == uml_note)
++        return object_types::uml_note;
++
++    if (ot == uml_message)
++        return object_types::uml_message;
++
++    if (ot == uml_realization)
++        return object_types::uml_realization;
++
++    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
++    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
++}
++
++std::string object_processor::
++parse_string_attribute(const dia::attribute& a) const {
++    const auto values(a.values());
++    if (values.size() != 1) {
++        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
++                                 << " value but found " << values.size();
++        BOOST_THROW_EXCEPTION(
++            processing_error(unexpected_attribute_value_size +
++                boost::lexical_cast<std::string>(values.size())));
++    }
++
++    using dia::string;
++    const auto v(attribute_value<string>(values.front(), dia_string));
++    std::string name(v.value());
++    boost::erase_first(name, hash_character);
++    boost::erase_last(name, hash_character);
++    boost::trim(name);
++    return name;
++}
++
++processed_object object_processor::process(const dia::object& o) {
++    processed_object r;
++    r.id(o.id());
++    r.object_type(parse_object_type(o.type()));
++
++    if (o.child_node())
++        r.child_node_id(o.child_node()->parent());
++
++    // FIXME: we should issue warnings here
++    if (!o.connections().empty() && (
++            r.object_type() == object_types::uml_generalization/* ||
++            r.object_type() == object_types::uml_association ||
++            r.object_type() == object_types::uml_realization*/)) {
++
++        const auto s(o.connections().size());
++        if (s != 2) {
++            const auto size(boost::lexical_cast<std::string>(s));
++            BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << s;
++            BOOST_THROW_EXCEPTION(
++                processing_error(unexpected_number_of_connections + size));
++        }
++
++        BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
++                                 << o.id() << "' of type: '" << o.type() << "'";
++
++        const auto parent(o.connections().front());
++        const auto child(o.connections().back());
++        r.connection(std::make_pair(parent.to(), child.to()));
++    }
++
++    for (auto a : o.attributes()) {
++        if (a.name() == dia_name)
++            r.name(parse_string_attribute(a));
++        else if (a.name() == dia_stereotype)
++            r.stereotype(parse_string_attribute(a));
++        else if (a.name() == dia_comment)
++            r.comment(parse_string_attribute(a));
++        else if (a.name() ==  dia_text) {
++            if (a.values().size() != 1) {
++                BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
++                                         << "have a single value but found "
++                                         << a.values().size();
++                BOOST_THROW_EXCEPTION(processing_error(one_value_expected));
++            }
++
++            // FIXME: do not use exceptions for flow control.
++            using dia::composite;
++            composite c;
++            try {
++                c = attribute_value<composite>(a.values().front(),
++                    dia_composite);
++            } catch (const processing_error& e) {
++                continue;
++            }
++
++            if (c.type() != dia_text) {
++                BOOST_LOG_SEV(lg, error) << "Expected composite type "
++                                         << "to be " << dia_text
++                                         << "but was " << c.type();
++                BOOST_THROW_EXCEPTION(processing_error(text_attribute_expected));
++            }
++            BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
++
++            for (const auto a : c.value()) {
++                if (a->name() == dia_string)
++                    r.text(parse_string_attribute(*a));
++                else
++                    BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
++                                            << a->name();
++            }
++        } else if (a.name() == dia_attributes) {
++            const auto& values(a.values());
++            if (values.empty()) {
++                BOOST_LOG_SEV(lg, debug) << "Object " << o.id()
++                                         << " has no UML attributes.";
++                continue;
++            }
++
++            for (const auto& v : values) {
++                using dia::composite;
++                const auto& c(attribute_value<composite>(v, dia_composite));
++                if (c.type() != dia_uml_attribute) {
++                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
++                                             << " to be " << dia_uml_attribute
++                                             << "but was " << c.type();
++                    BOOST_THROW_EXCEPTION(
++                        processing_error(uml_attribute_expected));
++                }
++                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
++                                         << c.type();
++
++                processed_property p;
++                for (const auto a : c.value()) {
++                    if (a->name() == dia_name)
++                        p.name(parse_string_attribute(*a));
++                    else if (a->name() == dia_type)
++                        p.type(parse_string_attribute(*a));
++                    else if (a->name() == dia_comment)
++                        p.comment(parse_string_attribute(*a));
++                    else
++                        BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
++                                                << a->name();
++                }
++                r.properties().push_back(p);
++            }
++        }
++    }
++    return r;
++}
++
++} }
+diff --git a/projects/dia_to_sml/src/types/processed_comment.cpp b/projects/dia_to_sml/src/types/processed_comment.cpp
+new file mode 100644
+index 0000000..a0e03cb
+--- /dev/null
++++ b/projects/dia_to_sml/src/types/processed_comment.cpp
+@@ -0,0 +1,96 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/dia_to_sml/types/processed_comment.hpp"
++
++namespace dogen {
++namespace dia_to_sml {
++
++processed_comment::processed_comment()
++    : applicable_to_parent_object_(static_cast<bool>(0)) { }
++
++processed_comment::processed_comment(
++    const std::string& documentation,
++    const std::list<std::pair<std::string, std::string> >& key_value_pairs,
++    const bool applicable_to_parent_object)
++    : documentation_(documentation),
++      key_value_pairs_(key_value_pairs),
++      applicable_to_parent_object_(applicable_to_parent_object) { }
++
++void processed_comment::swap(processed_comment& other) noexcept {
++    using std::swap;
++    swap(documentation_, other.documentation_);
++    swap(key_value_pairs_, other.key_value_pairs_);
++    swap(applicable_to_parent_object_, other.applicable_to_parent_object_);
++}
++
++bool processed_comment::operator==(const processed_comment& rhs) const {
++    return documentation_ == rhs.documentation_ &&
++        key_value_pairs_ == rhs.key_value_pairs_ &&
++        applicable_to_parent_object_ == rhs.applicable_to_parent_object_;
++}
++
++processed_comment& processed_comment::operator=(processed_comment other) {
++    using std::swap;
++    swap(*this, other);
++    return *this;
++}
++
++const std::string& processed_comment::documentation() const {
++    return documentation_;
++}
++
++std::string& processed_comment::documentation() {
++    return documentation_;
++}
++
++void processed_comment::documentation(const std::string& v) {
++    documentation_ = v;
++}
++
++void processed_comment::documentation(const std::string&& v) {
++    documentation_ = std::move(v);
++}
++
++const std::list<std::pair<std::string, std::string> >& processed_comment::key_value_pairs() const {
++    return key_value_pairs_;
++}
++
++std::list<std::pair<std::string, std::string> >& processed_comment::key_value_pairs() {
++    return key_value_pairs_;
++}
++
++void processed_comment::key_value_pairs(const std::list<std::pair<std::string, std::string> >& v) {
++    key_value_pairs_ = v;
++}
++
++void processed_comment::key_value_pairs(const std::list<std::pair<std::string, std::string> >&& v) {
++    key_value_pairs_ = std::move(v);
++}
++
++bool processed_comment::applicable_to_parent_object() const {
++    return applicable_to_parent_object_;
++}
++
++void processed_comment::applicable_to_parent_object(const bool v) {
++    applicable_to_parent_object_ = v;
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/dia_to_sml/src/types/processor.cpp b/projects/dia_to_sml/src/types/processor.cpp
+deleted file mode 100644
+index 29472e4..0000000
+--- a/projects/dia_to_sml/src/types/processor.cpp
++++ /dev/null
+@@ -1,257 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <boost/lexical_cast.hpp>
+-#include <boost/throw_exception.hpp>
+-#include <boost/algorithm/string/trim.hpp>
+-#include <boost/algorithm/string/erase.hpp>
+-#include "dogen/utility/log/logger.hpp"
+-#include "dogen/dia/types/object.hpp"
+-#include "dogen/dia/types/attribute.hpp"
+-#include "dogen/dia/types/composite.hpp"
+-#include "dogen/dia_to_sml/types/processing_error.hpp"
+-#include "dogen/dia_to_sml/types/processor.hpp"
+-#include "dogen/dia_to_sml/types/processed_object.hpp"
+-
+-namespace {
+-
+-using namespace dogen::utility::log;
+-static logger lg(logger_factory("dia_to_sml.processor"));
+-
+-const std::string dia_string("string");
+-const std::string dia_name("name");
+-const std::string dia_type("type");
+-const std::string dia_text("text");
+-const std::string dia_comment("comment");
+-const std::string dia_stereotype("stereotype");
+-const std::string dia_attributes("attributes");
+-const std::string dia_composite("composite");
+-const std::string dia_uml_attribute("umlattribute");
+-const std::string hash_character("#");
+-
+-const std::string uml_large_package("UML - LargePackage");
+-const std::string uml_class("UML - Class");
+-const std::string uml_generalization("UML - Generalization");
+-const std::string uml_association("UML - Association");
+-const std::string uml_note("UML - Note");
+-const std::string uml_message("UML - Message");
+-const std::string uml_realization("UML - Realizes");
+-const std::string invalid_object_type("Invalid value for object type: ");
+-
+-const std::string error_parsing_object_type("Fail to parse object type: ");
+-const std::string empty_dia_object_name("Dia object name is empty");
+-const std::string uml_attribute_expected("UML atttribute expected");
+-const std::string text_attribute_expected("Text attribute expected");
+-const std::string one_value_expected(
+-    "Attribute should have exactly one value");
+-const std::string name_attribute_expected(
+-    "Could not find name attribute. ID: ");
+-const std::string type_attribute_expected(
+-    "Could not find type attribute. ID: ");
+-const std::string unexpected_attribute_value_type(
+-    "Did not find expected attribute value type: ");
+-const std::string unexpected_attribute_value_size(
+-    "Unexpected attribute value size: ");
+-const std::string invalid_type_string(
+-    "String provided with type did not parse into SML qnames: ");
+-const std::string object_has_invalid_type("Invalid dia type: ");
+-const std::string unexpected_number_of_connections(
+-    "Expected 2 connections but found: ");
+-
+-template<typename AttributeValue, typename Variant>
+-AttributeValue
+-attribute_value(const Variant& v, const std::string& desc) {
+-
+-    AttributeValue r;
+-    try {
+-        r = boost::get<AttributeValue>(v);
+-    } catch (const boost::bad_get&) {
+-        BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
+-
+-        using dogen::dia_to_sml::processing_error;
+-        BOOST_THROW_EXCEPTION(
+-            processing_error(unexpected_attribute_value_type + desc));
+-    }
+-    return r;
+-}
+-
+-}
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-object_types
+-processor::parse_object_type(const std::string& ot) const {
+-    if (ot == uml_large_package)
+-        return object_types::uml_large_package;
+-
+-    if (ot == uml_class)
+-        return object_types::uml_class;
+-
+-    if (ot == uml_generalization)
+-        return object_types::uml_generalization;
+-
+-    if (ot == uml_association)
+-        return object_types::uml_association;
+-
+-    if (ot == uml_note)
+-        return object_types::uml_note;
+-
+-    if (ot == uml_message)
+-        return object_types::uml_message;
+-
+-    if (ot == uml_realization)
+-        return object_types::uml_realization;
+-
+-    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
+-    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
+-}
+-
+-std::string processor::
+-parse_string_attribute(const dia::attribute& a) const {
+-    const auto values(a.values());
+-    if (values.size() != 1) {
+-        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
+-                                 << " value but found " << values.size();
+-        BOOST_THROW_EXCEPTION(
+-            processing_error(unexpected_attribute_value_size +
+-                boost::lexical_cast<std::string>(values.size())));
+-    }
+-
+-    using dia::string;
+-    const auto v(attribute_value<string>(values.front(), dia_string));
+-    std::string name(v.value());
+-    boost::erase_first(name, hash_character);
+-    boost::erase_last(name, hash_character);
+-    boost::trim(name);
+-    return name;
+-}
+-
+-processed_object processor::process(const dia::object& o) {
+-    processed_object r;
+-    r.id(o.id());
+-    r.object_type(parse_object_type(o.type()));
+-
+-    if (o.child_node())
+-        r.child_node_id(o.child_node()->parent());
+-
+-    // FIXME: we should issue warnings here
+-    if (!o.connections().empty() && (
+-            r.object_type() == object_types::uml_generalization/* ||
+-            r.object_type() == object_types::uml_association ||
+-            r.object_type() == object_types::uml_realization*/)) {
+-
+-        const auto s(o.connections().size());
+-        if (s != 2) {
+-            const auto size(boost::lexical_cast<std::string>(s));
+-            BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << s;
+-            BOOST_THROW_EXCEPTION(
+-                processing_error(unexpected_number_of_connections + size));
+-        }
+-
+-        BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
+-                                 << o.id() << "' of type: '" << o.type() << "'";
+-
+-        const auto parent(o.connections().front());
+-        const auto child(o.connections().back());
+-        r.connection(std::make_pair(parent.to(), child.to()));
+-    }
+-
+-    for (auto a : o.attributes()) {
+-        if (a.name() == dia_name)
+-            r.name(parse_string_attribute(a));
+-        else if (a.name() == dia_stereotype)
+-            r.stereotype(parse_string_attribute(a));
+-        else if (a.name() == dia_comment)
+-            r.comment(parse_string_attribute(a));
+-        else if (a.name() ==  dia_text) {
+-            if (a.values().size() != 1) {
+-                BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
+-                                         << "have a single value but found "
+-                                         << a.values().size();
+-                BOOST_THROW_EXCEPTION(processing_error(one_value_expected));
+-            }
+-
+-            // FIXME: do not use exceptions for flow control.
+-            using dia::composite;
+-            composite c;
+-            try {
+-                c = attribute_value<composite>(a.values().front(),
+-                    dia_composite);
+-            } catch (const processing_error& e) {
+-                continue;
+-            }
+-
+-            if (c.type() != dia_text) {
+-                BOOST_LOG_SEV(lg, error) << "Expected composite type "
+-                                         << "to be " << dia_text
+-                                         << "but was " << c.type();
+-                BOOST_THROW_EXCEPTION(processing_error(text_attribute_expected));
+-            }
+-            BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
+-
+-            for (const auto a : c.value()) {
+-                if (a->name() == dia_string)
+-                    r.text(parse_string_attribute(*a));
+-                else
+-                    BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
+-                                            << a->name();
+-            }
+-        } else if (a.name() == dia_attributes) {
+-            const auto& values(a.values());
+-            if (values.empty()) {
+-                BOOST_LOG_SEV(lg, debug) << "Object " << o.id()
+-                                         << " has no UML attributes.";
+-                continue;
+-            }
+-
+-            for (const auto& v : values) {
+-                using dia::composite;
+-                const auto& c(attribute_value<composite>(v, dia_composite));
+-                if (c.type() != dia_uml_attribute) {
+-                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
+-                                             << " to be " << dia_uml_attribute
+-                                             << "but was " << c.type();
+-                    BOOST_THROW_EXCEPTION(
+-                        processing_error(uml_attribute_expected));
+-                }
+-                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
+-                                         << c.type();
+-
+-                processed_property p;
+-                for (const auto a : c.value()) {
+-                    if (a->name() == dia_name)
+-                        p.name(parse_string_attribute(*a));
+-                    else if (a->name() == dia_type)
+-                        p.type(parse_string_attribute(*a));
+-                    else if (a->name() == dia_comment)
+-                        p.comment(parse_string_attribute(*a));
+-                    else
+-                        BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
+-                                                << a->name();
+-                }
+-                r.properties().push_back(p);
+-            }
+-        }
+-    }
+-    return r;
+-}
+-
+-} }
+diff --git a/projects/dia_to_sml/src/types/transformer.cpp b/projects/dia_to_sml/src/types/transformer.cpp
+index 4d9d2ce..59fb32f 100644
+--- a/projects/dia_to_sml/src/types/transformer.cpp
++++ b/projects/dia_to_sml/src/types/transformer.cpp
+@@ -76,7 +76,7 @@ transformer::transformer(context& c)
+           new identifier_parser(c.top_level_module_names(),
+               c.model().name().external_module_path(),
+               c.model().name().model_name())),
+-      comments_parser_(new comments_parser()) {
++      comment_processor_(new comment_processor()) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
+ }
+@@ -191,10 +191,10 @@ sml::property transformer::to_property(const processed_property& p) const {
+     r.name(p.name());
+     r.type(to_nested_qname(p.type()));
+ 
+-    const auto pair(comments_parser_->parse(p.comment()));
+-    r.documentation(pair.first);
++    const auto pc(comment_processor_->process(p.comment()));
++    r.documentation(pc.documentation());
+     sml::meta_data::writer writer(r.meta_data());
+-    writer.add(pair.second);
++    writer.add(pc.key_value_pairs());
+ 
+     return r;
+ }
+@@ -203,9 +203,9 @@ sml::enumerator transformer::to_enumerator(const processed_property& p,
+     const unsigned int position) const {
+     sml::enumerator r;
+     r.name(p.name());
+-    const auto pair(comments_parser_->parse(p.comment()));
++    const auto pc(comment_processor_->process(p.comment()));
+     r.value(boost::lexical_cast<std::string>(position));
+-    r.documentation(pair.first);
++    r.documentation(pc.documentation());
+ 
+     if (r.name().empty()) {
+         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+@@ -461,9 +461,9 @@ void transformer::from_note(const processed_object& o) {
+     if (o.text().empty())
+         return;
+ 
+-    const auto pair(comments_parser_->parse(o.text()));
+-    const auto& documentation(pair.first);
+-    const auto& kvps(pair.second);
++    const auto pc(comment_processor_->process(o.text()));
++    const auto& documentation(pc.documentation());
++    const auto& kvps(pc.key_value_pairs());
+     const sml::model& model(context_.model());
+     if (o.child_node_id().empty()) {
+         auto& module(module_for_qname(model.name()));
+diff --git a/projects/dia_to_sml/src/types/workflow.cpp b/projects/dia_to_sml/src/types/workflow.cpp
+index ced3983..7771cb0 100644
+--- a/projects/dia_to_sml/src/types/workflow.cpp
++++ b/projects/dia_to_sml/src/types/workflow.cpp
+@@ -29,7 +29,7 @@
+ #include "dogen/dia_to_sml/types/visitor.hpp"
+ #include "dogen/dia_to_sml/types/transformer.hpp"
+ #include "dogen/dia_to_sml/types/identifier_parser.hpp"
+-#include "dogen/dia_to_sml/types/processor.hpp"
++#include "dogen/dia_to_sml/types/object_processor.hpp"
+ #include "dogen/dia_to_sml/types/workflow.hpp"
+ 
+ namespace {
+@@ -42,10 +42,6 @@ static logger lg(logger_factory("dia_to_sml.workflow"));
+ namespace dogen {
+ namespace dia_to_sml {
+ 
+-workflow::workflow() { }
+-
+-workflow::~workflow() noexcept { }
+-
+ void workflow::initialise_context_activity(const std::string& model_name,
+     const std::string& external_module_path, bool is_target) {
+ 
+@@ -75,10 +71,10 @@ void workflow::initialise_context_activity(const std::string& model_name,
+ 
+ graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
+     grapher g;
+-    processor p;
++    object_processor op;
+     for (const auto& l : diagram.layers()) {
+         for (const auto& o : l.objects()) {
+-            const auto po(p.process(o));
++            const auto po(op.process(o));
+             if (g.is_relevant(po))
+                 g.add(po);
+         }
+diff --git a/projects/dia_to_sml/src/types/workflow_interface.cpp b/projects/dia_to_sml/src/types/workflow_interface.cpp
+deleted file mode 100644
+index 30070b3..0000000
+--- a/projects/dia_to_sml/src/types/workflow_interface.cpp
++++ /dev/null
+@@ -1,28 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include "dogen/dia_to_sml/types/workflow_interface.hpp"
+-
+-namespace dogen {
+-namespace dia_to_sml {
+-
+-workflow_interface::~workflow_interface() noexcept { }
+-
+-} }
