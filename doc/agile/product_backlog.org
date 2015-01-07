@@ -3981,7 +3981,9 @@ specific parameters that tells dogen what valid values an enumerator
 can have. We can then generate a from string method that does the
 appropriate conversions.
 
-These should be passed in as meta-data.
+These should be passed in as meta-data. At present enumerators do not
+have meta-data support so we need to add it too (e.g. add the concept
+to them).
 
 *** Enumeration string dumps could be configurable                    :story:
 
@@ -3991,7 +3993,9 @@ enumerations so that I can adapt it to my requirements..
 #+end_quote
 
 It should be possible to pass in a string value as meta-data that
-tells dogen what string to use for debug dumping.
+tells dogen what string to use for debug dumping. At present
+enumerators do not have meta-data support so we need to add it too
+(e.g. add the concept to them).
 
 *** Add is comparable to SML                                          :story:
 
