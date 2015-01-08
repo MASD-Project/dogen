@@ -32,6 +32,7 @@
 #include "dogen/dia/types/composite_fwd.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
+#include "dogen/dia_to_sml/types/comment_processor.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -41,15 +42,24 @@ namespace dia_to_sml {
  */
 class object_processor {
 public:
-    object_processor() = default;
     object_processor(const object_processor&) = delete;
     object_processor(object_processor&&) = default;
+
+public:
+    object_processor();
 
 private:
     /**
      * @brief Parses the dia attribute as a string, returning its value.
      */
     std::string parse_string_attribute(const dia::attribute& a) const;
+
+    /**
+     * @brief Makes a processed comment from the input attribute.
+     *
+     * @pre Attribute must be of type string.
+     */
+    processed_comment create_processed_comment(const dia::attribute& a) const;
 
     /**
      * @brief Given a string with a dia object type, returns the
@@ -62,6 +72,9 @@ public:
      * @brief Process the object.
      */
     processed_object process(const dia::object& o);
+
+private:
+    const comment_processor comment_processor_;
 };
 
 } }

@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/dia_to_sml/serialization/processed_comment_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
 
 

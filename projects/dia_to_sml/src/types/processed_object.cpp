@@ -34,19 +34,17 @@ processed_object::processed_object(processed_object&& rhs)
       comment_(std::move(rhs.comment_)),
       child_node_id_(std::move(rhs.child_node_id_)),
       connection_(std::move(rhs.connection_)),
-      properties_(std::move(rhs.properties_)),
-      text_(std::move(rhs.text_)) { }
+      properties_(std::move(rhs.properties_)) { }
 
 processed_object::processed_object(
     const std::string& id,
     const std::string& name,
     const dogen::dia_to_sml::object_types& object_type,
     const std::string& stereotype,
-    const std::string& comment,
+    const dogen::dia_to_sml::processed_comment& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
-    const std::list<dogen::dia_to_sml::processed_property>& properties,
-    const std::string& text)
+    const std::list<dogen::dia_to_sml::processed_property>& properties)
     : id_(id),
       name_(name),
       object_type_(object_type),
@@ -54,8 +52,7 @@ processed_object::processed_object(
       comment_(comment),
       child_node_id_(child_node_id),
       connection_(connection),
-      properties_(properties),
-      text_(text) { }
+      properties_(properties) { }
 
 void processed_object::swap(processed_object& other) noexcept {
     using std::swap;
@@ -67,7 +64,6 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(child_node_id_, other.child_node_id_);
     swap(connection_, other.connection_);
     swap(properties_, other.properties_);
-    swap(text_, other.text_);
 }
 
 bool processed_object::operator==(const processed_object& rhs) const {
@@ -78,8 +74,7 @@ bool processed_object::operator==(const processed_object& rhs) const {
         comment_ == rhs.comment_ &&
         child_node_id_ == rhs.child_node_id_ &&
         connection_ == rhs.connection_ &&
-        properties_ == rhs.properties_ &&
-        text_ == rhs.text_;
+        properties_ == rhs.properties_;
 }
 
 processed_object& processed_object::operator=(processed_object other) {
@@ -144,19 +139,19 @@ void processed_object::stereotype(const std::string&& v) {
     stereotype_ = std::move(v);
 }
 
-const std::string& processed_object::comment() const {
+const dogen::dia_to_sml::processed_comment& processed_object::comment() const {
     return comment_;
 }
 
-std::string& processed_object::comment() {
+dogen::dia_to_sml::processed_comment& processed_object::comment() {
     return comment_;
 }
 
-void processed_object::comment(const std::string& v) {
+void processed_object::comment(const dogen::dia_to_sml::processed_comment& v) {
     comment_ = v;
 }
 
-void processed_object::comment(const std::string&& v) {
+void processed_object::comment(const dogen::dia_to_sml::processed_comment&& v) {
     comment_ = std::move(v);
 }
 
@@ -206,22 +201,6 @@ void processed_object::properties(const std::list<dogen::dia_to_sml::processed_p
 
 void processed_object::properties(const std::list<dogen::dia_to_sml::processed_property>&& v) {
     properties_ = std::move(v);
-}
-
-const std::string& processed_object::text() const {
-    return text_;
-}
-
-std::string& processed_object::text() {
-    return text_;
-}
-
-void processed_object::text(const std::string& v) {
-    text_ = v;
-}
-
-void processed_object::text(const std::string&& v) {
-    text_ = std::move(v);
 }
 
 } }

@@ -16,15 +16,15 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-08 Thu 22:40]
+Clock summary at [2015-01-08 Thu 23:45]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *4:24* |      |      |
+| *Total time*                                                             | *5:28* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Active                                                                   |        | 4:24 |      |
+| Active                                                                   |        | 5:28 |      |
 | STARTED Sprint and product backlog grooming                              |        |      | 0:12 |
-| STARTED Create a class for the return type of =comments_parser=          |        |      | 2:57 |
+| COMPLETED Refactor comments processing code in dia to sml                |        |      | 4:01 |
 | STARTED Inject dia fields =comment=, =is_final= and =identity_attribute= |        |      | 1:15 |
 #+end:
 
@@ -34,7 +34,9 @@ Clock summary at [2015-01-08 Thu 22:40]
 
 Updates to sprint and product backlog.
 
-*** STARTED Create a class for the return type of =comments_parser=   :story:
+*** COMPLETED Refactor comments processing code in dia to sml         :story:
+    CLOSED: [2015-01-08 Thu 23:44]
+    CLOCK: [2015-01-08 Thu 22:40]--[2015-01-08 Thu 23:44] =>  1:04
     CLOCK: [2015-01-08 Thu 22:29]--[2015-01-08 Thu 22:40] =>  0:11
     CLOCK: [2015-01-08 Thu 21:34]--[2015-01-08 Thu 22:29] =>  0:55
     CLOCK: [2015-01-07 Wed 21:52]--[2015-01-07 Wed 23:29] =>  1:37

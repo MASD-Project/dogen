@@ -50,7 +50,8 @@ public:
     processed_comment(
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& key_value_pairs,
-        const bool applicable_to_parent_object);
+        const bool applicable_to_parent_object,
+        const std::string& original_content);
 
 private:
     template<typename Archive>
@@ -88,6 +89,16 @@ public:
     void applicable_to_parent_object(const bool v);
     /**@}*/
 
+    /**
+     * @brief Content of the field as it was read from the dia object.
+     */
+    /**@{*/
+    const std::string& original_content() const;
+    std::string& original_content();
+    void original_content(const std::string& v);
+    void original_content(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const processed_comment& rhs) const;
     bool operator!=(const processed_comment& rhs) const {
@@ -102,6 +113,7 @@ private:
     std::string documentation_;
     std::list<std::pair<std::string, std::string> > key_value_pairs_;
     bool applicable_to_parent_object_;
+    std::string original_content_;
 };
 
 } }

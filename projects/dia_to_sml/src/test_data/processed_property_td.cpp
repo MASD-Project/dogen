@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/dia_to_sml/test_data/processed_comment_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_property_td.hpp"
 
 namespace {
@@ -27,6 +28,11 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+dogen::dia_to_sml::processed_comment
+create_dogen_dia_to_sml_processed_comment(const unsigned int position) {
+    return dogen::dia_to_sml::processed_comment_generator::create(position);
 }
 
 }
@@ -40,7 +46,7 @@ void processed_property_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.type(create_std_string(position + 1));
-    v.comment(create_std_string(position + 2));
+    v.comment(create_dogen_dia_to_sml_processed_comment(position + 2));
 }
 
 processed_property_generator::result_type

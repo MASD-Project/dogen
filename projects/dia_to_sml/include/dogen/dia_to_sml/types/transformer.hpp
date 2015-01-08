@@ -34,7 +34,6 @@
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
-#include "dogen/dia_to_sml/types/comment_processor.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/profile.hpp"
 
@@ -172,10 +171,9 @@ private:
 
         context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
 
-        const auto pc(comment_processor_->process(o.comment()));
-        e.documentation(pc.documentation());
+        e.documentation(o.comment().documentation());
         sml::meta_data::writer writer(e.meta_data());
-        writer.add(pc.key_value_pairs());
+        writer.add(o.comment().key_value_pairs());
     }
 
     /**
@@ -300,7 +298,6 @@ public:
 private:
     context& context_;
     std::shared_ptr<identifier_parser> identifier_parser_;
-    std::shared_ptr<comment_processor> comment_processor_;
 };
 
 } }

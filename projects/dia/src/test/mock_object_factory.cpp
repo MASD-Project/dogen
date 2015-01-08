@@ -42,6 +42,8 @@ const std::string uml_realization("UML - Realizes");
 const std::string dia_stereotype("stereotype");
 const std::string dia_name("name");
 const std::string dia_text("text");
+const std::string dia_comment("comment");
+const std::string dia_comment_value("this is a comment");
 const std::string dia_string("string");
 const std::string enumeration_stereotype("#enumeration#");
 const std::string invalid_stereotype("Invalid stereotype: ");
@@ -51,8 +53,11 @@ create_string_attribute(const std::string& name, const std::string& value) {
     dogen::dia::attribute r;
     r.name(name);
 
+    std::ostringstream s;
+    s << "#" << value << "#";
+
     dogen::dia::string v;
-    v.value(value);
+    v.value(s.str());
     r.values().push_back(v);
 
     return r;
@@ -67,15 +72,18 @@ create_object(const std::string& type, const unsigned int number) {
 }
 
 void create_name_attribute(dogen::dia::object& o, const std::string& value) {
-    std::ostringstream s;
-    s << "#" << value << "#";
-    o.attributes().push_back(create_string_attribute(dia_name, s.str()));
+    o.attributes().push_back(create_string_attribute(dia_name, value));
 }
 
 void create_name_attribute(dogen::dia::object& o, const unsigned int number) {
     std::ostringstream s;
     s << "name_" << number;
     create_name_attribute(o, s.str());
+}
+
+void create_comment_attribute(dogen::dia::object& o) {
+    const auto sa(create_string_attribute(dia_comment, dia_comment_value));
+    o.attributes().push_back(sa);
 }
 
 void create_stereotype_attribute(dogen::dia::object& o, const std::string st) {
@@ -131,6 +139,7 @@ object mock_object_factory::build_uml_note(const unsigned int number) {
 
 object mock_object_factory::build_class(const unsigned int number) {
     object r(create_named_object(uml_class, number));
+    create_comment_attribute(r);
     create_stereotype_attribute(r, empty);
     return r;
 }
@@ -184,6 +193,7 @@ build_class_inside_two_large_packages(unsigned int number)  {
 object mock_object_factory::build_stereotyped_class(
     const std::string& st, const unsigned int number) {
     object r(create_named_object(uml_class, number));
+    create_comment_attribute(r);
     create_stereotype_attribute(r, st);
     return r;
 }

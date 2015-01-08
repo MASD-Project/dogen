@@ -31,6 +31,9 @@ static logger lg(logger_factory("dia.mock_processed_object_factory"));
 const std::string empty;
 const std::string object_prefix("O");
 const std::string doxygen_comment("this is a doxygen brief");
+const std::string note_text("this is a comment");
+const std::string instruction_key("dia.comment");
+const std::string instruction_value("true");
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
 const std::string uml_generalization("UML - Generalization");
@@ -70,7 +73,8 @@ create_processed_property(const unsigned int n) {
     processed_property r;
     r.name(name(n));
     r.type(unsigned_int);
-    r.comment(doxygen_comment);
+    r.comment().documentation(doxygen_comment);
+    r.comment().original_content(doxygen_comment);
     return r;
 }
 
@@ -99,9 +103,8 @@ processed_object mock_processed_object_factory::
 build_uml_note(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
 
-    std::ostringstream s;
-    s << "this is a comment";
-    r.text(s.str());
+    r.comment().documentation(note_text);
+    r.comment().original_content(note_text);
     return r;
 }
 
@@ -111,7 +114,11 @@ build_uml_note_with_marker(const unsigned int n) {
     std::ostringstream s;
     s << "#DOGEN dia.comment=true" << std::endl << std::endl
       << doxygen_comment;
-    r.text(s.str());
+    r.comment().documentation(doxygen_comment);
+    r.comment().original_content(s.str());
+    r.comment().applicable_to_parent_object(true);
+    const auto pair(std::make_pair(instruction_key, instruction_value));
+    r.comment().key_value_pairs().push_back(pair);
     return r;
 }
 
@@ -158,7 +165,8 @@ processed_object mock_processed_object_factory::
 build_class(const unsigned int n, const std::string& st) {
     auto r(create_named_object(object_types::uml_class, n));
     r.stereotype(st);
-    r.comment(doxygen_comment);
+    r.comment().documentation(doxygen_comment);
+    r.comment().original_content(doxygen_comment);
     return r;
 }
 

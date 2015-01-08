@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
+#include "dogen/dia_to_sml/io/processed_comment_io.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/io/processed_property_io.hpp"
 
@@ -84,11 +85,10 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"object_type\": " << v.object_type() << ", "
       << "\"stereotype\": " << "\"" << tidy_up_string(v.stereotype()) << "\"" << ", "
-      << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\"" << ", "
+      << "\"comment\": " << v.comment() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "
-      << "\"properties\": " << v.properties() << ", "
-      << "\"text\": " << "\"" << tidy_up_string(v.text()) << "\""
+      << "\"properties\": " << v.properties()
       << " }";
     return(s);
 }

@@ -26,7 +26,7 @@ namespace dia_to_sml {
 processed_property::processed_property(
     const std::string& name,
     const std::string& type,
-    const std::string& comment)
+    const dogen::dia_to_sml::processed_comment& comment)
     : name_(name),
       type_(type),
       comment_(comment) { }
@@ -82,19 +82,19 @@ void processed_property::type(const std::string&& v) {
     type_ = std::move(v);
 }
 
-const std::string& processed_property::comment() const {
+const dogen::dia_to_sml::processed_comment& processed_property::comment() const {
     return comment_;
 }
 
-std::string& processed_property::comment() {
+dogen::dia_to_sml::processed_comment& processed_property::comment() {
     return comment_;
 }
 
-void processed_property::comment(const std::string& v) {
+void processed_property::comment(const dogen::dia_to_sml::processed_comment& v) {
     comment_ = v;
 }
 
-void processed_property::comment(const std::string&& v) {
+void processed_property::comment(const dogen::dia_to_sml::processed_comment&& v) {
     comment_ = std::move(v);
 }
 

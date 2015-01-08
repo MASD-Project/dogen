@@ -29,22 +29,26 @@ processed_comment::processed_comment()
 processed_comment::processed_comment(
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& key_value_pairs,
-    const bool applicable_to_parent_object)
+    const bool applicable_to_parent_object,
+    const std::string& original_content)
     : documentation_(documentation),
       key_value_pairs_(key_value_pairs),
-      applicable_to_parent_object_(applicable_to_parent_object) { }
+      applicable_to_parent_object_(applicable_to_parent_object),
+      original_content_(original_content) { }
 
 void processed_comment::swap(processed_comment& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(key_value_pairs_, other.key_value_pairs_);
     swap(applicable_to_parent_object_, other.applicable_to_parent_object_);
+    swap(original_content_, other.original_content_);
 }
 
 bool processed_comment::operator==(const processed_comment& rhs) const {
     return documentation_ == rhs.documentation_ &&
         key_value_pairs_ == rhs.key_value_pairs_ &&
-        applicable_to_parent_object_ == rhs.applicable_to_parent_object_;
+        applicable_to_parent_object_ == rhs.applicable_to_parent_object_ &&
+        original_content_ == rhs.original_content_;
 }
 
 processed_comment& processed_comment::operator=(processed_comment other) {
@@ -91,6 +95,22 @@ bool processed_comment::applicable_to_parent_object() const {
 
 void processed_comment::applicable_to_parent_object(const bool v) {
     applicable_to_parent_object_ = v;
+}
+
+const std::string& processed_comment::original_content() const {
+    return original_content_;
+}
+
+std::string& processed_comment::original_content() {
+    return original_content_;
+}
+
+void processed_comment::original_content(const std::string& v) {
+    original_content_ = v;
+}
+
+void processed_comment::original_content(const std::string&& v) {
+    original_content_ = std::move(v);
 }
 
 } }

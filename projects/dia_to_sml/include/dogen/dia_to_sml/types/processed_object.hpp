@@ -32,6 +32,7 @@
 #include <utility>
 #include "dogen/dia_to_sml/serialization/processed_object_fwd_ser.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/types/processed_comment.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 
 namespace dogen {
@@ -57,11 +58,10 @@ public:
         const std::string& name,
         const dogen::dia_to_sml::object_types& object_type,
         const std::string& stereotype,
-        const std::string& comment,
+        const dogen::dia_to_sml::processed_comment& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
-        const std::list<dogen::dia_to_sml::processed_property>& properties,
-        const std::string& text);
+        const std::list<dogen::dia_to_sml::processed_property>& properties);
 
 private:
     template<typename Archive>
@@ -110,13 +110,15 @@ public:
     /**@}*/
 
     /**
-     * @brief Any comments associated with object.
+     * @brief Any comments associated with the object.
+     *
+     * On the case of a UML note, represents the text of the note.
      */
     /**@{*/
-    const std::string& comment() const;
-    std::string& comment();
-    void comment(const std::string& v);
-    void comment(const std::string&& v);
+    const dogen::dia_to_sml::processed_comment& comment() const;
+    dogen::dia_to_sml::processed_comment& comment();
+    void comment(const dogen::dia_to_sml::processed_comment& v);
+    void comment(const dogen::dia_to_sml::processed_comment&& v);
     /**@}*/
 
     /**
@@ -149,16 +151,6 @@ public:
     void properties(const std::list<dogen::dia_to_sml::processed_property>&& v);
     /**@}*/
 
-    /**
-     * @brief Text contents of a UML note.
-     */
-    /**@{*/
-    const std::string& text() const;
-    std::string& text();
-    void text(const std::string& v);
-    void text(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const processed_object& rhs) const;
     bool operator!=(const processed_object& rhs) const {
@@ -174,11 +166,10 @@ private:
     std::string name_;
     dogen::dia_to_sml::object_types object_type_;
     std::string stereotype_;
-    std::string comment_;
+    dogen::dia_to_sml::processed_comment comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
     std::list<dogen::dia_to_sml::processed_property> properties_;
-    std::string text_;
 };
 
 } }

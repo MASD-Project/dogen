@@ -75,8 +75,7 @@ transformer::transformer(context& c)
       identifier_parser_(
           new identifier_parser(c.top_level_module_names(),
               c.model().name().external_module_path(),
-              c.model().name().model_name())),
-      comment_processor_(new comment_processor()) {
+              c.model().name().model_name())) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
@@ -191,10 +190,9 @@ sml::property transformer::to_property(const processed_property& p) const {
     r.name(p.name());
     r.type(to_nested_qname(p.type()));
 
-    const auto pc(comment_processor_->process(p.comment()));
-    r.documentation(pc.documentation());
+    r.documentation(p.comment().documentation());
     sml::meta_data::writer writer(r.meta_data());
-    writer.add(pc.key_value_pairs());
+    writer.add(p.comment().key_value_pairs());
 
     return r;
 }
@@ -203,9 +201,8 @@ sml::enumerator transformer::to_enumerator(const processed_property& p,
     const unsigned int position) const {
     sml::enumerator r;
     r.name(p.name());
-    const auto pc(comment_processor_->process(p.comment()));
     r.value(boost::lexical_cast<std::string>(position));
-    r.documentation(pc.documentation());
+    r.documentation(p.comment().documentation());
 
     if (r.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
@@ -456,14 +453,14 @@ void transformer::to_module(const processed_object& o, const profile& p) {
 
 void transformer::from_note(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is a note: " << o.id()
-                             << ". Note text: '" << o.text() << "'";
+                             << ". Note text: '"
+                             << o.comment().original_content() << "'";
 
-    if (o.text().empty())
+    if (o.comment().original_content().empty())
         return;
 
-    const auto pc(comment_processor_->process(o.text()));
-    const auto& documentation(pc.documentation());
-    const auto& kvps(pc.key_value_pairs());
+    const auto& documentation(o.comment().documentation());
+    const auto& kvps(o.comment().key_value_pairs());
     const sml::model& model(context_.model());
     if (o.child_node_id().empty()) {
         auto& module(module_for_qname(model.name()));

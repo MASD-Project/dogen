@@ -49,6 +49,7 @@ processed_comment comment_processor::process(const std::string& c) const {
     if (c.empty())
         return r;
 
+    r.original_content(c);
     std::istringstream comments_stream(c);
     std::ostringstream documentation_stream;
     std::string line;

@@ -27,8 +27,8 @@
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia_to_sml/types/processing_error.hpp"
-#include "dogen/dia_to_sml/types/object_processor.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
+#include "dogen/dia_to_sml/types/object_processor.hpp"
 
 namespace {
 
@@ -97,6 +97,34 @@ attribute_value(const Variant& v, const std::string& desc) {
 namespace dogen {
 namespace dia_to_sml {
 
+object_processor::object_processor() : comment_processor_() { }
+
+std::string object_processor::
+parse_string_attribute(const dia::attribute& a) const {
+    const auto values(a.values());
+    if (values.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
+                                 << " value but found " << values.size();
+        BOOST_THROW_EXCEPTION(
+            processing_error(unexpected_attribute_value_size +
+                boost::lexical_cast<std::string>(values.size())));
+    }
+
+    using dia::string;
+    const auto v(attribute_value<string>(values.front(), dia_string));
+    std::string name(v.value());
+    boost::erase_first(name, hash_character);
+    boost::erase_last(name, hash_character);
+    boost::trim(name);
+    return name;
+}
+
+processed_comment object_processor::
+create_processed_comment(const dia::attribute& a) const {
+    const auto s(parse_string_attribute(a));
+    return comment_processor_.process(s);
+}
+
 object_types object_processor::parse_object_type(const std::string& ot) const {
     if (ot == uml_large_package)
         return object_types::uml_large_package;
@@ -121,26 +149,6 @@ object_types object_processor::parse_object_type(const std::string& ot) const {
 
     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
     BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
-}
-
-std::string object_processor::
-parse_string_attribute(const dia::attribute& a) const {
-    const auto values(a.values());
-    if (values.size() != 1) {
-        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
-                                 << " value but found " << values.size();
-        BOOST_THROW_EXCEPTION(
-            processing_error(unexpected_attribute_value_size +
-                boost::lexical_cast<std::string>(values.size())));
-    }
-
-    using dia::string;
-    const auto v(attribute_value<string>(values.front(), dia_string));
-    std::string name(v.value());
-    boost::erase_first(name, hash_character);
-    boost::erase_last(name, hash_character);
-    boost::trim(name);
-    return name;
 }
 
 processed_object object_processor::process(const dia::object& o) {
@@ -179,7 +187,7 @@ processed_object object_processor::process(const dia::object& o) {
         else if (a.name() == dia_stereotype)
             r.stereotype(parse_string_attribute(a));
         else if (a.name() == dia_comment)
-            r.comment(parse_string_attribute(a));
+            r.comment(create_processed_comment(a));
         else if (a.name() ==  dia_text) {
             if (a.values().size() != 1) {
                 BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
@@ -208,7 +216,7 @@ processed_object object_processor::process(const dia::object& o) {
 
             for (const auto a : c.value()) {
                 if (a->name() == dia_string)
-                    r.text(parse_string_attribute(*a));
+                    r.comment(create_processed_comment(*a));
                 else
                     BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
                                             << a->name();
@@ -241,7 +249,7 @@ processed_object object_processor::process(const dia::object& o) {
                     else if (a->name() == dia_type)
                         p.type(parse_string_attribute(*a));
                     else if (a->name() == dia_comment)
-                        p.comment(parse_string_attribute(*a));
+                        p.comment(create_processed_comment(*a));
                     else
                         BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
                                                 << a->name();

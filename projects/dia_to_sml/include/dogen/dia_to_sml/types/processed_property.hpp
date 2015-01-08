@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <string>
 #include "dogen/dia_to_sml/serialization/processed_property_fwd_ser.hpp"
+#include "dogen/dia_to_sml/types/processed_comment.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -43,7 +44,7 @@ public:
     processed_property(
         const std::string& name,
         const std::string& type,
-        const std::string& comment);
+        const dogen::dia_to_sml::processed_comment& comment);
 
 private:
     template<typename Archive>
@@ -53,20 +54,35 @@ private:
     friend void boost::serialization::load(Archive& ar, processed_property& v, unsigned int version);
 
 public:
+    /**
+     * @brief Name of the property.
+     */
+    /**@{*/
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Type of the property.
+     */
+    /**@{*/
     const std::string& type() const;
     std::string& type();
     void type(const std::string& v);
     void type(const std::string&& v);
+    /**@}*/
 
-    const std::string& comment() const;
-    std::string& comment();
-    void comment(const std::string& v);
-    void comment(const std::string&& v);
+    /**
+     * @brief Any comments associated with the property.
+     */
+    /**@{*/
+    const dogen::dia_to_sml::processed_comment& comment() const;
+    dogen::dia_to_sml::processed_comment& comment();
+    void comment(const dogen::dia_to_sml::processed_comment& v);
+    void comment(const dogen::dia_to_sml::processed_comment&& v);
+    /**@}*/
 
 public:
     bool operator==(const processed_property& rhs) const;
@@ -81,7 +97,7 @@ public:
 private:
     std::string name_;
     std::string type_;
-    std::string comment_;
+    dogen::dia_to_sml::processed_comment comment_;
 };
 
 } }

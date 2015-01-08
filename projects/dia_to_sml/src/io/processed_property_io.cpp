@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/dia_to_sml/io/processed_comment_io.hpp"
 #include "dogen/dia_to_sml/io/processed_property_io.hpp"
 
 
@@ -38,7 +39,7 @@ std::ostream& operator<<(std::ostream& s, const processed_property& v) {
       << "\"__type__\": " << "\"dogen::dia_to_sml::processed_property\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
-      << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\""
+      << "\"comment\": " << v.comment()
       << " }";
     return(s);
 }
