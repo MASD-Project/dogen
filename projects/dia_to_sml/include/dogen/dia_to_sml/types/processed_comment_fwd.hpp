@@ -18,11 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/workflow_interface.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSED_COMMENT_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_PROCESSED_COMMENT_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace dia_to_sml {
 
-workflow_interface::~workflow_interface() noexcept { }
+class processed_comment;
 
 } }
+
+#endif

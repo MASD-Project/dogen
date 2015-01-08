@@ -29,7 +29,7 @@
 #include "dogen/dia_to_sml/types/visitor.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
-#include "dogen/dia_to_sml/types/processor.hpp"
+#include "dogen/dia_to_sml/types/object_processor.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 
 namespace {
@@ -41,10 +41,6 @@ static logger lg(logger_factory("dia_to_sml.workflow"));
 
 namespace dogen {
 namespace dia_to_sml {
-
-workflow::workflow() { }
-
-workflow::~workflow() noexcept { }
 
 void workflow::initialise_context_activity(const std::string& model_name,
     const std::string& external_module_path, bool is_target) {
@@ -75,10 +71,10 @@ void workflow::initialise_context_activity(const std::string& model_name,
 
 graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
     grapher g;
-    processor p;
+    object_processor op;
     for (const auto& l : diagram.layers()) {
         for (const auto& o : l.objects()) {
-            const auto po(p.process(o));
+            const auto po(op.process(o));
             if (g.is_relevant(po))
                 g.add(po);
         }

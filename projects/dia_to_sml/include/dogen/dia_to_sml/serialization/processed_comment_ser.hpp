@@ -18,39 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_WORKFLOW_INTERFACE_HPP
-#define DOGEN_DIA_TO_SML_TYPES_WORKFLOW_INTERFACE_HPP
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/dia/types/diagram_fwd.hpp"
-#include "dogen/sml/types/model_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dia_to_sml/types/processed_comment.hpp"
 
-namespace dogen {
-namespace dia_to_sml {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia_to_sml::processed_comment)
+namespace boost {
+namespace serialization {
 
-/**
- * @brief Transform a dia diagram into an sml model.
- */
-class workflow_interface {
-public:
-    workflow_interface() = default;
-    workflow_interface(const workflow_interface&) = delete;
-    workflow_interface(workflow_interface&&) = default;
-    virtual ~workflow_interface() noexcept = 0;
+template<typename Archive>
+void save(Archive& ar, const dogen::dia_to_sml::processed_comment& v, unsigned int version);
 
-public:
-    /**
-     * @brief Runs the transformation.
-     */
-    virtual sml::model execute(const dia::diagram& diagram,
-        const std::string& model_name,
-        const std::string& external_module_path,
-        bool is_target) = 0;
-};
+template<typename Archive>
+void load(Archive& ar, dogen::dia_to_sml::processed_comment& v, unsigned int version);
 
 } }
 

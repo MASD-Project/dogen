@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_FWD_HPP
-#define DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_FWD_HPP
+#ifndef DOGEN_DIA_TO_SML_HASH_PROCESSED_COMMENT_HASH_HPP
+#define DOGEN_DIA_TO_SML_HASH_PROCESSED_COMMENT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/dia_to_sml/types/processed_comment.hpp"
+
 namespace dogen {
 namespace dia_to_sml {
 
-class comments_parser;
+struct processed_comment_hasher {
+public:
+    static std::size_t hash(const processed_comment& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::dia_to_sml::processed_comment> {
+public:
+    size_t operator()(const dogen::dia_to_sml::processed_comment& v) const {
+        return dogen::dia_to_sml::processed_comment_hasher::hash(v);
+    }
+};
+
+}
 #endif

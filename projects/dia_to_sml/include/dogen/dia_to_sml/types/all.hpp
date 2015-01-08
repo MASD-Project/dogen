@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/comments_parser.hpp"
+#include "dogen/dia_to_sml/types/comment_processor.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/dia_to_sml.hpp"
 #include "dogen/dia_to_sml/types/grapher.hpp"
@@ -27,12 +27,13 @@
 #include "dogen/dia_to_sml/types/initializer.hpp"
 #include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
 #include "dogen/dia_to_sml/types/node.hpp"
+#include "dogen/dia_to_sml/types/object_processor.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
+#include "dogen/dia_to_sml/types/processed_comment.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/processing_error.hpp"
-#include "dogen/dia_to_sml/types/processor.hpp"
 #include "dogen/dia_to_sml/types/profile.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/tags.hpp"
@@ -42,4 +43,3 @@
 #include "dogen/dia_to_sml/types/validator.hpp"
 #include "dogen/dia_to_sml/types/visitor.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
-#include "dogen/dia_to_sml/types/workflow_interface.hpp"

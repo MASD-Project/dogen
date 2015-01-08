@@ -24,28 +24,27 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
-#include "dogen/dia_to_sml/types/comments_parser.hpp"
+#include "dogen/dia_to_sml/types/comment_processor.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("dia_to_sml.comments_parser"));
+auto lg(logger_factory("dia_to_sml.comment_processor"));
 
 const std::string empty;
-const std::string prefix("#DOGEN ");
+const std::string instruction_marker("#DOGEN ");
 const std::string equals("=");
 const std::string separator_not_found("Expected separator on KVP.");
-const std::string duplicated_key("Duplicated key: ");
+const std::string dia_comment("dia.comment");
 
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-std::pair<std::string, comments_parser::kvp_container_type>
-comments_parser::parse(const std::string& c) const {
-    std::pair<std::string, kvp_container_type> r;
+processed_comment comment_processor::process(const std::string& c) const {
+    processed_comment r;
 
     if (c.empty())
         return r;
@@ -53,9 +52,10 @@ comments_parser::parse(const std::string& c) const {
     std::istringstream comments_stream(c);
     std::ostringstream documentation_stream;
     std::string line;
+    bool applicable_to_parent_object(false);
     while (std::getline(comments_stream, line)) {
-        if (boost::starts_with(line, prefix)) {
-            boost::replace_all(line, prefix, empty);
+        if (boost::starts_with(line, instruction_marker)) {
+            boost::replace_all(line, instruction_marker, empty);
 
             const auto pos(line.find_first_of(equals));
             if (pos == std::string::npos) {
@@ -65,12 +65,14 @@ comments_parser::parse(const std::string& c) const {
 
             const auto key(line.substr(0, pos));
             const auto value(line.substr(pos + 1));
-            r.second.push_back(std::make_pair(key, value));
+            applicable_to_parent_object |= (key == dia_comment);
+            r.key_value_pairs().push_back(std::make_pair(key, value));
         } else
             documentation_stream << line << std::endl;
     }
 
-    r.first = documentation_stream.str();
+    r.documentation(documentation_stream.str());
+    r.applicable_to_parent_object(applicable_to_parent_object);
     return r;
 }
 

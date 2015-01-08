@@ -16,15 +16,15 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-06 Tue 23:36]
+Clock summary at [2015-01-08 Thu 22:40]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *1:41* |      |      |
+| *Total time*                                                             | *4:24* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Active                                                                   |        | 1:41 |      |
+| Active                                                                   |        | 4:24 |      |
 | STARTED Sprint and product backlog grooming                              |        |      | 0:12 |
-| STARTED Create a class for the return type of =comments_parser=          |        |      | 0:14 |
+| STARTED Create a class for the return type of =comments_parser=          |        |      | 2:57 |
 | STARTED Inject dia fields =comment=, =is_final= and =identity_attribute= |        |      | 1:15 |
 #+end:
 
@@ -35,6 +35,9 @@ Clock summary at [2015-01-06 Tue 23:36]
 Updates to sprint and product backlog.
 
 *** STARTED Create a class for the return type of =comments_parser=   :story:
+    CLOCK: [2015-01-08 Thu 22:29]--[2015-01-08 Thu 22:40] =>  0:11
+    CLOCK: [2015-01-08 Thu 21:34]--[2015-01-08 Thu 22:29] =>  0:55
+    CLOCK: [2015-01-07 Wed 21:52]--[2015-01-07 Wed 23:29] =>  1:37
     CLOCK: [2015-01-06 Tue 22:14]--[2015-01-06 Tue 22:21] =>  0:07
     CLOCK: [2015-01-05 Mon 23:32]--[2015-01-05 Mon 23:39] =>  0:07
 
@@ -51,6 +54,9 @@ Updates to sprint and product backlog.
   for completeness.
 - the identity processing is similar in that it should be done as a
   post-processing step rather than during transformation.
+- tests need to be cleaned up - we need to check for text of the
+  exception being thrown.
+- use processed comment in processed object
 
 *Previous Understanding*
 

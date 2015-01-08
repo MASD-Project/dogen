@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_HPP
-#define DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_HPP
+#define DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,31 +28,29 @@
 #include <list>
 #include <string>
 #include <utility>
+#include "dogen/dia_to_sml/types/processed_comment.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
 /**
- * @brief Parses comments in dia diagrams.
+ * @brief Processes comments in dia diagrams.
  *
  * Comments can be stored in class objects, member functions, note
  * objects, etc.
  *
  * Any line starting with the well defined marker @e #DOGEN - known as
- * the opaque parameter marker - will be interpreted as carrying an
- * opaque parameter in a key-value pair form, where the key and the
+ * the instruction marker - will be interpreted as carrying an
+ * instruction in a key-value pair form, where the key and the
  * value are separated by the assignment operator @e =.
  */
-class comments_parser {
+class comment_processor {
 public:
-    comments_parser() = default;
-    comments_parser(const comments_parser&) = default;
-    ~comments_parser() = default;
-    comments_parser(comments_parser&&) = default;
-    comments_parser& operator=(const comments_parser&) = default;
-
-public:
-    typedef std::list<std::pair<std::string, std::string> > kvp_container_type;
+    comment_processor() = default;
+    comment_processor(const comment_processor&) = default;
+    ~comment_processor() = default;
+    comment_processor(comment_processor&&) = default;
+    comment_processor& operator=(const comment_processor&) = default;
 
 public:
     /**
@@ -61,17 +59,10 @@ public:
      * Note that the @e # markers used by dia are expected to have
      * already been removed.
      *
-     * @return pair where the first element contains all the text
-     * which does not start with the opaque parameter marker, and the
-     * second element is a key-value pair container with all of the
-     * keys and values of the lines that start with the opaque
-     * parameter marker.
-     *
-     * @pre lines starting with the opaque parameter marker must
-     * follow the defined syntax or else a parsing_error is thrown.
+     * @pre lines starting with the instruction marker must follow the
+     * defined syntax or else a parsing_error is thrown.
      */
-    std::pair<std::string, kvp_container_type>
-    parse(const std::string& c) const;
+    processed_comment process(const std::string& c) const;
 };
 
 } }

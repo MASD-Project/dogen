@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSOR_HPP
-#define DOGEN_DIA_TO_SML_TYPES_PROCESSOR_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_HPP
+#define DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,11 +39,11 @@ namespace dia_to_sml {
 /**
  * @brief Processes dia objects into an intermediate format.
  */
-class processor {
+class object_processor {
 public:
-    processor() = default;
-    processor(const processor&) = delete;
-    processor(processor&&) = default;
+    object_processor() = default;
+    object_processor(const object_processor&) = delete;
+    object_processor(object_processor&&) = default;
 
 private:
     /**

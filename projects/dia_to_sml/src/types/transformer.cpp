@@ -76,7 +76,7 @@ transformer::transformer(context& c)
           new identifier_parser(c.top_level_module_names(),
               c.model().name().external_module_path(),
               c.model().name().model_name())),
-      comments_parser_(new comments_parser()) {
+      comment_processor_(new comment_processor()) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
@@ -191,10 +191,10 @@ sml::property transformer::to_property(const processed_property& p) const {
     r.name(p.name());
     r.type(to_nested_qname(p.type()));
 
-    const auto pair(comments_parser_->parse(p.comment()));
-    r.documentation(pair.first);
+    const auto pc(comment_processor_->process(p.comment()));
+    r.documentation(pc.documentation());
     sml::meta_data::writer writer(r.meta_data());
-    writer.add(pair.second);
+    writer.add(pc.key_value_pairs());
 
     return r;
 }
@@ -203,9 +203,9 @@ sml::enumerator transformer::to_enumerator(const processed_property& p,
     const unsigned int position) const {
     sml::enumerator r;
     r.name(p.name());
-    const auto pair(comments_parser_->parse(p.comment()));
+    const auto pc(comment_processor_->process(p.comment()));
     r.value(boost::lexical_cast<std::string>(position));
-    r.documentation(pair.first);
+    r.documentation(pc.documentation());
 
     if (r.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
@@ -461,9 +461,9 @@ void transformer::from_note(const processed_object& o) {
     if (o.text().empty())
         return;
 
-    const auto pair(comments_parser_->parse(o.text()));
-    const auto& documentation(pair.first);
-    const auto& kvps(pair.second);
+    const auto pc(comment_processor_->process(o.text()));
+    const auto& documentation(pc.documentation());
+    const auto& kvps(pc.key_value_pairs());
     const sml::model& model(context_.model());
     if (o.child_node_id().empty()) {
         auto& module(module_for_qname(model.name()));

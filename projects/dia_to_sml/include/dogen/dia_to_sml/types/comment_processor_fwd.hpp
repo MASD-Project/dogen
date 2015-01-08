@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSOR_FWD_HPP
-#define DOGEN_DIA_TO_SML_TYPES_PROCESSOR_FWD_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_COMMENT_PROCESSOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace dia_to_sml {
 
-class processor;
+class comment_processor;
 
 } }
 

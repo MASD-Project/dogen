@@ -27,24 +27,23 @@
 
 #include <string>
 #include <memory>
+#include "dogen/dia/types/diagram_fwd.hpp"
+#include "dogen/sml/types/model_fwd.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/grapher.hpp"
-#include "dogen/dia_to_sml/types/workflow_interface.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-class workflow : public workflow_interface {
+class workflow {
 public:
     workflow(const workflow&) = delete;
     workflow(workflow&&) = default;
-    virtual ~workflow() noexcept;
-
-public:
-    workflow();
+    ~workflow() noexcept = default;
+    workflow() = default;
 
 private:
     /**
@@ -76,10 +75,10 @@ private:
     void post_process_model_activity();
 
 public:
-    virtual sml::model execute(const dia::diagram& diagram,
+    sml::model execute(const dia::diagram& diagram,
         const std::string& model_name,
         const std::string& external_module_path,
-        bool is_target) override;
+        bool is_target);
 
 private:
     context context_;
