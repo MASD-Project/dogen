@@ -40,10 +40,10 @@ namespace dia_to_sml {
 
 class workflow {
 public:
+    workflow() = default;
     workflow(const workflow&) = delete;
     workflow(workflow&&) = default;
-    ~workflow() noexcept = default;
-    workflow() = default;
+    ~workflow() = default;
 
 private:
     /**
