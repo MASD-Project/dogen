@@ -56,22 +56,6 @@ void writer::add(const std::list<std::pair<std::string, std::string> >& kvps) {
         add(pair.first, pair.second);
 }
 
-bool writer::add_if_marker_found(const std::string& key,
-    const std::list<std::pair<std::string, std::string> >& kvps) {
-    bool has_marker(false);
-    for (const auto& kvp : kvps) {
-        has_marker = kvp.first == key;
-        if (has_marker)
-            break;
-    }
-
-    if (!has_marker)
-        return false;
-
-    add(kvps);
-    return true;
-}
-
 bool writer::
 add_if_key_not_found(const std::string& key, const std::string& value) {
     if (has_key(key))

@@ -72,15 +72,6 @@ public:
     void add(const std::list<std::pair<std::string, std::string> >& kvps);
 
     /**
-     * @brief Adds only if @e marker is found in the input kvp
-     * container, as a key.
-     *
-     * @return true if added, false otherwise.
-     */
-    bool add_if_marker_found(const std::string& marker,
-        const std::list<std::pair<std::string, std::string> >& kvps);
-
-    /**
      * @brief Adds only if @e key is not in the simple meta_data
      * container.
      *

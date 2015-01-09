@@ -456,7 +456,8 @@ void transformer::from_note(const processed_object& o) {
                              << ". Note text: '"
                              << o.comment().original_content() << "'";
 
-    if (o.comment().original_content().empty())
+    if (o.comment().original_content().empty() ||
+        !o.comment().applicable_to_parent_object())
         return;
 
     const auto& documentation(o.comment().documentation());
@@ -465,17 +466,15 @@ void transformer::from_note(const processed_object& o) {
     if (o.child_node_id().empty()) {
         auto& module(module_for_qname(model.name()));
         sml::meta_data::writer writer(module.meta_data());
-        const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
-        if (added)
-            module.documentation(documentation);
+        writer.add(kvps);
+        module.documentation(documentation);
         return;
     }
 
     sml::module& module(module_for_id(o.child_node_id()));
     sml::meta_data::writer writer(module.meta_data());
-    const bool added(writer.add_if_marker_found(tags::dia::comment, kvps));
-    if (added)
-        module.documentation(documentation);
+    writer.add(kvps);
+    module.documentation(documentation);
 }
 
 void transformer::to_concept(const processed_object& o, const profile& p) {
