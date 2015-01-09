@@ -1352,6 +1352,16 @@ propagate it to all types in the model.
   returns some kind of =dia_to_sml= intermediate object.
 - in workflow =transformation_activity= we should move the logic of
   defaulting to value object into the profiler.
+- the transformer should ensure only zero or one notes can exist for a
+  module.
+- the setting of the documentation should be done as a separate step
+  in transformation - i.e. look for =dia.comment= field, if set, use
+  its value to populate documentation. This could be done to all types
+  for completeness.
+- the identity processing is similar in that it should be done as a
+  post-processing step rather than during transformation.
+- tests need to be cleaned up - we need to check for text of the
+  exception being thrown.
 
 *** Consider adding facet specific types                               :epic:
 
