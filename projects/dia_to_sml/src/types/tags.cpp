@@ -24,6 +24,5 @@ namespace dogen {
 namespace dia_to_sml {
 
 const std::string tags::dia::identity_attribute("dia.identity_attribute");
-const std::string tags::dia::is_final("dia.is_final");
 
 } }

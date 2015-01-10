@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for user defined final types                          :story:
+
+At some point we started talking about the possibility of having types
+defined as final by the user, via the meta-data. This was to be done
+using =dia.is_final=. We never did implement it properly.
+
+- define attribute in dia to sml
+- propagate it to sml
+
 *** Consider adding NuGet support                                     :story:
 
 Seems like AppVeyor supports deployment into nugget. Example:

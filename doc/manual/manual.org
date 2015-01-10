@@ -725,7 +725,6 @@ documentation.
 |-------+------------------------+----------------------------------------------------------|
 | Dia   | dia.comment            | Comment provided by user when dia does not allow for it. |
 | Dia   | dia.identity_attribute | Attribute that provides this entity its identity.        |
-| Dia   | dia.is_final           | If true, the type cannot be inherited from.              |
 
 *** Test Models
 

@@ -43,11 +43,6 @@ struct tags {
          * @brief Attribute that provides this entity its identity.
          */
         static const std::string identity_attribute;
-
-        /**
-         * @brief If true, the type cannot be inherited from.
-         */
-        static const std::string is_final;
     };
 };
 
