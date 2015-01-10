@@ -16,16 +16,16 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-09 Fri 23:40]
+Clock summary at [2015-01-10 Sat 00:48]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *5:50* |      |      |
+| *Total time*                                                             | *6:56* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Active                                                                   |        | 5:50 |      |
+| Active                                                                   |        | 6:56 |      |
 | STARTED Sprint and product backlog grooming                              |        |      | 0:12 |
 | COMPLETED Refactor comments processing code in dia to sml                |        |      | 4:01 |
-| STARTED Inject dia fields =comment=, =is_final= and =identity_attribute= |        |      | 1:37 |
+| STARTED Inject dia fields =comment=, =is_final= and =identity_attribute= |        |      | 2:43 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -35,7 +35,7 @@ Clock summary at [2015-01-09 Fri 23:40]
 Updates to sprint and product backlog.
 
 *** COMPLETED Refactor comments processing code in dia to sml         :story:
-    CLOSED: [2015-01-08 Thu 23:44]
+    CLOSED: [2015-01-09 Fri 23:46]
     CLOCK: [2015-01-08 Thu 22:40]--[2015-01-08 Thu 23:44] =>  1:04
     CLOCK: [2015-01-08 Thu 22:29]--[2015-01-08 Thu 22:40] =>  0:11
     CLOCK: [2015-01-08 Thu 21:34]--[2015-01-08 Thu 22:29] =>  0:55
@@ -48,16 +48,6 @@ Updates to sprint and product backlog.
 - the comments parser job should be to convert the comments section
   into the value of the =dia.comment= key, as well as parse any other
   kvps.
-- the transformer should ensure only zero or one notes can exist for a
-  module.
-- the setting of the documentation should be done as a separate step
-  in transformation - i.e. look for =dia.comment= field, if set, use
-  its value to populate documentation. This could be done to all types
-  for completeness.
-- the identity processing is similar in that it should be done as a
-  post-processing step rather than during transformation.
-- tests need to be cleaned up - we need to check for text of the
-  exception being thrown.
 - use processed comment in processed object
 
 *Previous Understanding*
@@ -80,6 +70,7 @@ with fields that reflect this, e.g.:
 We need to reflect on these names.
 
 *** STARTED Inject dia fields =comment=, =is_final= and =identity_attribute= :story:
+    CLOCK: [2015-01-09 Fri 23:42]--[2015-01-10 Sat 00:48] =>  1:06
     CLOCK: [2015-01-09 Fri 23:22]--[2015-01-09 Fri 23:40] =>  0:18
     CLOCK: [2015-01-09 Fri 23:18]--[2015-01-09 Fri 23:22] =>  0:04
     CLOCK: [2015-01-06 Tue 22:21]--[2015-01-06 Tue 23:36] =>  1:15
@@ -87,6 +78,12 @@ We need to reflect on these names.
 We need to implement dia.comment in terms of the dynamic object. We
 need to add the field definition and make sure we can replace the
 transformer processing with the new approach.
+
+Perhaps throwing whenever we find field that has no field definition
+is a bit excessive, at least for now. This means we need to add all
+the field definitions in one go rather than a few at a time. As a
+quick fix we can skip over undefined fields and re-evaluate this
+later.
 
 *** Add a dynamic workflow to dia to sml transformer                  :story:
 

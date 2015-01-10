@@ -46,6 +46,26 @@ const std::string invalid_numeric_value(
 const std::string invalid_boolean_value(
     "Invalid boolean value: ");
 
+/**
+ * @brief Provides support for "true" and "false" as Boolean values.
+ */
+class locale_bool {
+public:
+    locale_bool() {}
+    locale_bool(bool data) : data(data) {}
+
+public:
+    operator bool() const { return data; }
+
+    friend std::istream& operator>>(std::istream &s, locale_bool &b) {
+        s >> std::boolalpha >> b.data;
+        return s;
+    }
+
+private:
+    bool data;
+};
+
 }
 
 namespace dogen {
@@ -62,15 +82,15 @@ int field_factory::to_int(const std::string& s) const {
 
 bool field_factory::to_bool(const std::string& s) const {
     try {
-        return boost::lexical_cast<bool>(s);
+        return boost::lexical_cast<locale_bool>(s);
     } catch (boost::bad_lexical_cast& e) {
         BOOST_LOG_SEV(lg, error) << invalid_boolean_value << s;
-        BOOST_THROW_EXCEPTION(building_error(invalid_numeric_value + s));
+        BOOST_THROW_EXCEPTION(building_error(invalid_boolean_value + s));
     }
 }
 
 void field_factory::ensure_at_most_one_element(
-    const std::forward_list<std::string>& raw_values) const {
+    const std::list<std::string>& raw_values) const {
 
     if (raw_values.empty())
         return;
@@ -88,7 +108,7 @@ boost::shared_ptr<value> field_factory::create_text_value(
 }
 
 boost::shared_ptr<value> field_factory::create_text_values(
-    const std::forward_list<std::string>& raw_values) const {
+    const std::list<std::string>& raw_values) const {
     auto r(boost::make_shared<text_collection>());
     for (const auto& rv : raw_values)
         r->content().push_front(text(rv));
@@ -102,7 +122,7 @@ boost::shared_ptr<value> field_factory::create_number_value(
 }
 
 boost::shared_ptr<value> field_factory::create_number_values(
-    const std::forward_list<std::string>& raw_values) const {
+    const std::list<std::string>& raw_values) const {
     auto r(boost::make_shared<number_collection>());
     for (const auto& rv : raw_values)
         r->content().push_front(number(to_int(rv)));
@@ -116,7 +136,7 @@ boost::shared_ptr<value> field_factory::create_boolean_value(
 }
 
 boost::shared_ptr<value> field_factory::create_boolean_values(
-    const std::forward_list<std::string>& raw_values) const {
+    const std::list<std::string>& raw_values) const {
     auto r(boost::make_shared<boolean_collection>());
     for (const auto& rv : raw_values)
         r->content().push_front(boolean(to_bool(rv)));
@@ -125,7 +145,7 @@ boost::shared_ptr<value> field_factory::create_boolean_values(
 }
 
 field field_factory::build(const field_definition& fd,
-    const std::forward_list<std::string>& raw_values) const {
+    const std::list<std::string>& raw_values) const {
     field r;
 
     r.name(fd.name());
@@ -141,20 +161,20 @@ field field_factory::build(const field_definition& fd,
 
     case value_types::number:
         ensure_at_most_one_element(raw_values);
-        r.value(create_text_values(raw_values));
+        r.value(create_number_value(raw_values.front()));
         break;
 
     case value_types::number_collection:
-        r.value(create_text_values(raw_values));
+        r.value(create_number_values(raw_values));
         break;
 
     case value_types::boolean:
         ensure_at_most_one_element(raw_values);
-        r.value(create_text_values(raw_values));
+        r.value(create_boolean_value(raw_values.front()));
         break;
 
     case value_types::boolean_collection:
-        r.value(create_text_values(raw_values));
+        r.value(create_boolean_values(raw_values));
         break;
 
     default:

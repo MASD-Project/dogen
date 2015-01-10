@@ -86,9 +86,25 @@
 				</meta_data>
 				<extensions>
 					<fields>
-						<count>0</count>
+						<count>1</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
+						<item class_id="22" tracking_level="0" version="0">
+							<first>dia.comment</first>
+							<second class_id="23" tracking_level="0" version="0">
+								<value class_id="24" tracking_level="0" version="1">
+									<px class_id="0" tracking_level="1" version="0" object_id="_0">
+										<value class_id="25" tracking_level="0" version="0"></value>
+										<content>1</content>
+									</px>
+								</value>
+								<name class_id="26" tracking_level="0" version="0">
+									<simple_name>comment</simple_name>
+									<owner>dia</owner>
+									<complete_name>dia.comment</complete_name>
+								</name>
+							</second>
+						</item>
 					</fields>
 				</extensions>
 				<name>
@@ -122,7 +138,7 @@
 						<simple_name>package</simple_name>
 					</value>
 				</containing_module>
-				<members class_id="22" tracking_level="0" version="0">
+				<members class_id="27" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -168,9 +184,25 @@
 				</meta_data>
 				<extensions>
 					<fields>
-						<count>0</count>
+						<count>1</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
+						<item>
+							<first>dia.comment</first>
+							<second>
+								<value>
+									<px class_id_reference="0" object_id="_1">
+										<value></value>
+										<content>1</content>
+									</px>
+								</value>
+								<name>
+									<simple_name>comment</simple_name>
+									<owner>dia</owner>
+									<complete_name>dia.comment</complete_name>
+								</name>
+							</second>
+						</item>
 					</fields>
 				</extensions>
 				<name>
@@ -264,9 +296,25 @@ This comment will be applied to the model namespace itself.
 				</meta_data>
 				<extensions>
 					<fields>
-						<count>0</count>
+						<count>1</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
+						<item>
+							<first>dia.comment</first>
+							<second>
+								<value>
+									<px class_id_reference="0" object_id="_2">
+										<value></value>
+										<content>1</content>
+									</px>
+								</value>
+								<name>
+									<simple_name>comment</simple_name>
+									<owner>dia</owner>
+									<complete_name>dia.comment</complete_name>
+								</name>
+							</second>
+						</item>
 					</fields>
 				</extensions>
 				<name>
@@ -330,26 +378,26 @@ This comment will be applied to the model namespace itself.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="23" tracking_level="0" version="0">
+	<concepts class_id="28" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="24" tracking_level="0" version="0">
+	<primitives class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="25" tracking_level="0" version="0">
+	<enumerations class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="26" tracking_level="0" version="0">
+	<objects class_id="31" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="27" tracking_level="0" version="0">
+		<item class_id="32" tracking_level="0" version="0">
 			<first>
 				<model_name>comments</model_name>
 				<external_module_path>
@@ -362,8 +410,8 @@ This comment will be applied to the model namespace itself.
 				</module_path>
 				<simple_name>multi_line</simple_name>
 			</first>
-			<second class_id="7" tracking_level="1" version="0" object_id="_0">
-				<type class_id="28" tracking_level="0" version="0">
+			<second class_id="7" tracking_level="1" version="0" object_id="_3">
+				<type class_id="33" tracking_level="0" version="0">
 					<documentation>first line
 
 second line
@@ -420,7 +468,7 @@ third line with &quot;quote&quot;
 						</value>
 					</containing_module>
 				</type>
-				<all_properties class_id="29" tracking_level="0" version="0">
+				<all_properties class_id="34" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
@@ -428,12 +476,12 @@ third line with &quot;quote&quot;
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_properties>
-				<inherited_properties class_id="30" tracking_level="0" version="0">
+				<inherited_properties class_id="35" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<operations class_id="31" tracking_level="0" version="0">
+				<operations class_id="36" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</operations>
@@ -446,7 +494,7 @@ third line with &quot;quote&quot;
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="32" tracking_level="0" version="0">
+				<relationships class_id="37" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
@@ -473,7 +521,7 @@ third line with &quot;quote&quot;
 				</module_path>
 				<simple_name>one_line</simple_name>
 			</first>
-			<second object_id="_1">
+			<second object_id="_4">
 				<type>
 					<documentation>this is the brief comment
 </documentation>
@@ -527,7 +575,7 @@ third line with &quot;quote&quot;
 				<local_properties>
 					<count>3</count>
 					<item_version>0</item_version>
-					<item class_id="33" tracking_level="0" version="0">
+					<item class_id="38" tracking_level="0" version="0">
 						<documentation>another brief comment
 </documentation>
 						<meta_data>
@@ -543,7 +591,7 @@ third line with &quot;quote&quot;
 							</fields>
 						</extensions>
 						<name>prop_0</name>
-						<type class_id="34" tracking_level="0" version="0">
+						<type class_id="39" tracking_level="0" version="0">
 							<type>
 								<model_name></model_name>
 								<external_module_path>
@@ -556,7 +604,7 @@ third line with &quot;quote&quot;
 								</module_path>
 								<simple_name>int</simple_name>
 							</type>
-							<children class_id="35" tracking_level="0" version="0">
+							<children class_id="40" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>

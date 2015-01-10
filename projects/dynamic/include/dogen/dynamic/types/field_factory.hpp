@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <utility>
-#include <forward_list>
 #include "dogen/dynamic/types/value.hpp"
 #include "dogen/dynamic/types/field.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
@@ -44,7 +44,7 @@ private:
      * @brief Throws if the collection has more than one element.
      */
     void ensure_at_most_one_element(
-        const std::forward_list<std::string>& raw_values) const;
+        const std::list<std::string>& raw_values) const;
 
 private:
     /**
@@ -72,7 +72,7 @@ private:
      * @brief Creates a collection of text values.
      */
     boost::shared_ptr<value> create_text_values(
-        const std::forward_list<std::string>& raw_values) const;
+        const std::list<std::string>& raw_values) const;
 
     /**
      * @brief Creates a stand alone number value.
@@ -84,7 +84,7 @@ private:
      * @brief Creates a collection of number values.
      */
     boost::shared_ptr<value> create_number_values(
-        const std::forward_list<std::string>& raw_values) const;
+        const std::list<std::string>& raw_values) const;
 
     /**
      * @brief Creates a stand alone boolean value.
@@ -96,7 +96,7 @@ private:
      * @brief Creates a collection of boolean values.
      */
     boost::shared_ptr<value> create_boolean_values(
-        const std::forward_list<std::string>& raw_values) const;
+        const std::list<std::string>& raw_values) const;
 
 public:
     /**
@@ -110,7 +110,7 @@ public:
      * definition.
      */
     field build(const field_definition& fd,
-        const std::forward_list<std::string>& raw_values) const;
+        const std::list<std::string>& raw_values) const;
 };
 
 } }

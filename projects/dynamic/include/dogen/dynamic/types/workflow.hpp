@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <utility>
-#include <forward_list>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/registrar.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
@@ -59,31 +60,30 @@ private:
     create_field_definitions_by_complete_name() const;
 
     /**
-     * @brief Returns the complete field definition for the complete
-     * name.
+     * @brief Returns the field definition for the complete
+     * name, if one exists.
      *
-     * @pre Throws if there isn't a field definition for the complete
-     * name.
      * @pre Current scope must be valid according to the field
      * definition's scope.
      */
-    field_definition obtain_field_definition(const std::string& complete_name,
+    boost::optional<field_definition>
+    obtain_field_definition(const std::string& complete_name,
         const scope_types current_scope) const;
 
 private:
     /**
      * @brief Aggregate raw data by key.
      */
-    std::unordered_map<std::string, std::forward_list<std::string> >
+    std::unordered_map<std::string, std::list<std::string> >
     aggregate_raw_data_activity(
-        const std::forward_list<std::pair<std::string, std::string> >&
+        const std::list<std::pair<std::string, std::string> >&
         raw_data) const;
 
     /**
      * @brief Converts the raw data into a set of fields.
      */
     std::unordered_map<std::string, field> build_fields_activity(
-        const std::unordered_map<std::string, std::forward_list<std::string> >&
+        const std::unordered_map<std::string, std::list<std::string> >&
         aggregated_data, const scope_types current_scope) const;
 
 public:
@@ -91,7 +91,7 @@ public:
      * @brief Produce a dynamic object.
      */
     object execute(const scope_types scope,
-        const std::forward_list<std::pair<std::string, std::string>>&
+        const std::list<std::pair<std::string, std::string>>&
         raw_data) const;
 
 private:

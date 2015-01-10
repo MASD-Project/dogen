@@ -596,9 +596,25 @@ in the context of inheritance.
 				</meta_data>
 				<extensions>
 					<fields>
-						<count>0</count>
+						<count>1</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
+						<item class_id="24" tracking_level="0" version="0">
+							<first>dia.comment</first>
+							<second class_id="25" tracking_level="0" version="0">
+								<value class_id="26" tracking_level="0" version="1">
+									<px class_id="0" tracking_level="1" version="0" object_id="_0">
+										<value class_id="27" tracking_level="0" version="0"></value>
+										<content>1</content>
+									</px>
+								</value>
+								<name class_id="28" tracking_level="0" version="0">
+									<simple_name>comment</simple_name>
+									<owner>dia</owner>
+									<complete_name>dia.comment</complete_name>
+								</name>
+							</second>
+						</item>
 					</fields>
 				</extensions>
 				<name>
@@ -890,26 +906,26 @@ in the context of inheritance.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="24" tracking_level="0" version="0">
+	<concepts class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="25" tracking_level="0" version="0">
+	<primitives class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="26" tracking_level="0" version="0">
+	<enumerations class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="27" tracking_level="0" version="0">
+	<objects class_id="32" tracking_level="0" version="0">
 		<count>23</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="28" tracking_level="0" version="0">
+		<item class_id="33" tracking_level="0" version="0">
 			<first>
 				<model_name>trivial_inheritance</model_name>
 				<external_module_path>
@@ -922,8 +938,8 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>move_ctor_empty_descendant</simple_name>
 			</first>
-			<second class_id="7" tracking_level="1" version="0" object_id="_0">
-				<type class_id="29" tracking_level="0" version="0">
+			<second class_id="7" tracking_level="1" version="0" object_id="_1">
+				<type class_id="34" tracking_level="0" version="0">
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<meta_data>
@@ -969,7 +985,7 @@ in the context of inheritance.
 						</value>
 					</containing_module>
 				</type>
-				<all_properties class_id="30" tracking_level="0" version="0">
+				<all_properties class_id="35" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
@@ -977,12 +993,12 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_properties>
-				<inherited_properties class_id="31" tracking_level="0" version="0">
+				<inherited_properties class_id="36" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<operations class_id="32" tracking_level="0" version="0">
+				<operations class_id="37" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</operations>
@@ -995,11 +1011,11 @@ in the context of inheritance.
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="33" tracking_level="0" version="0">
+				<relationships class_id="38" tracking_level="0" version="0">
 					<count>2</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item class_id="34" tracking_level="0" version="0">
+					<item class_id="39" tracking_level="0" version="0">
 						<first>1</first>
 						<second>
 							<count>1</count>
@@ -1061,7 +1077,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child</simple_name>
 			</first>
-			<second object_id="_1">
+			<second object_id="_2">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -1115,7 +1131,7 @@ in the context of inheritance.
 				<local_properties>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="35" tracking_level="0" version="0">
+					<item class_id="40" tracking_level="0" version="0">
 						<documentation></documentation>
 						<meta_data>
 							<count>0</count>
@@ -1130,7 +1146,7 @@ in the context of inheritance.
 							</fields>
 						</extensions>
 						<name>prop_1</name>
-						<type class_id="36" tracking_level="0" version="0">
+						<type class_id="41" tracking_level="0" version="0">
 							<type>
 								<model_name></model_name>
 								<external_module_path>
@@ -1143,7 +1159,7 @@ in the context of inheritance.
 								</module_path>
 								<simple_name>int</simple_name>
 							</type>
-							<children class_id="37" tracking_level="0" version="0">
+							<children class_id="42" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -1239,7 +1255,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_of_a_child1</simple_name>
 			</first>
-			<second object_id="_2">
+			<second object_id="_3">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -1376,7 +1392,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_with_members</simple_name>
 			</first>
-			<second object_id="_3">
+			<second object_id="_4">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -1552,7 +1568,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent</simple_name>
 			</first>
-			<second object_id="_4">
+			<second object_id="_5">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -1710,7 +1726,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>second_child_without_members</simple_name>
 			</first>
-			<second object_id="_5">
+			<second object_id="_6">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -1847,7 +1863,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_without_members</simple_name>
 			</first>
-			<second object_id="_6">
+			<second object_id="_7">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -1985,7 +2001,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child</simple_name>
 			</first>
-			<second object_id="_7">
+			<second object_id="_8">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -2161,7 +2177,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_of_a_child2</simple_name>
 			</first>
-			<second object_id="_8">
+			<second object_id="_9">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -2336,7 +2352,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent_with_members</simple_name>
 			</first>
-			<second object_id="_9">
+			<second object_id="_10">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -2516,7 +2532,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent_without_members</simple_name>
 			</first>
-			<second object_id="_10">
+			<second object_id="_11">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -2647,7 +2663,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child</simple_name>
 			</first>
-			<second object_id="_11">
+			<second object_id="_12">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -2825,7 +2841,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>descendant2</simple_name>
 			</first>
-			<second object_id="_12">
+			<second object_id="_13">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -3000,7 +3016,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent_outside</simple_name>
 			</first>
-			<second object_id="_13">
+			<second object_id="_14">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -3157,7 +3173,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>third_child_with_members</simple_name>
 			</first>
-			<second object_id="_14">
+			<second object_id="_15">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -3363,7 +3379,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>move_ctor_descendant</simple_name>
 			</first>
-			<second object_id="_15">
+			<second object_id="_16">
 				<type>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
@@ -3541,7 +3557,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>service_interface</simple_name>
 			</first>
-			<second object_id="_16">
+			<second object_id="_17">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -3640,7 +3656,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>service</simple_name>
 			</first>
-			<second object_id="_17">
+			<second object_id="_18">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -3739,7 +3755,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>base</simple_name>
 			</first>
-			<second object_id="_18">
+			<second object_id="_19">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -3869,7 +3885,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>descendant1</simple_name>
 			</first>
-			<second object_id="_19">
+			<second object_id="_20">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -4025,7 +4041,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>descendant3</simple_name>
 			</first>
-			<second object_id="_20">
+			<second object_id="_21">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -4201,7 +4217,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent</simple_name>
 			</first>
-			<second object_id="_21">
+			<second object_id="_22">
 				<type>
 					<documentation></documentation>
 					<meta_data>
@@ -4359,7 +4375,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>move_ctor_base</simple_name>
 			</first>
-			<second object_id="_22">
+			<second object_id="_23">
 				<type>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>

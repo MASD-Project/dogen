@@ -36,6 +36,7 @@
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/profile.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -172,8 +173,13 @@ private:
         context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
 
         e.documentation(o.comment().documentation());
+
+        const auto& kvps(o.comment().key_value_pairs());
         sml::meta_data::writer writer(e.meta_data());
-        writer.add(o.comment().key_value_pairs());
+        writer.add(kvps);
+
+        const auto scope(dynamic::scope_types::entity);
+        e.extensions(dynamic_workflow_->execute(scope, kvps));
     }
 
     /**
@@ -298,6 +304,7 @@ public:
 private:
     context& context_;
     std::shared_ptr<identifier_parser> identifier_parser_;
+    std::shared_ptr<dynamic::workflow> dynamic_workflow_;
 };
 
 } }
