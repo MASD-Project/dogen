@@ -45,7 +45,6 @@ static logger lg(logger_factory("dia_to_sml.transformer"));
 
 const std::string empty;
 const std::string unsigned_int("unsigned int");
-const std::string identity_attribute_key("IDENTITY_ATTRIBUTE");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string empty_package_id("Supplied package id is empty");
 const std::string original_parent_not_found("Object has no original parent: ");
