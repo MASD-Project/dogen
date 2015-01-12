@@ -16,19 +16,21 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-11 Sun 23:35]
+Clock summary at [2015-01-12 Mon 23:40]
 
 | Headline                                                     | Time   |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| *Total time*                                                 | *7:12* |      |      |
+| *Total time*                                                 | *7:51* |      |      |
 |--------------------------------------------------------------+--------+------+------|
-| Active                                                       |        | 7:12 |      |
-| STARTED Sprint and product backlog grooming                  |        |      | 0:24 |
+| Active                                                       |        | 7:51 |      |
+| STARTED Sprint and product backlog grooming                  |        |      | 0:34 |
 | COMPLETED Refactor comments processing code in dia to sml    |        |      | 4:01 |
 | STARTED Inject dia fields =comment= and =identity_attribute= |        |      | 2:47 |
+| STARTED Create a class to store the field definitions        |        |      | 0:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-12 Mon 23:00]--[2015-01-12 Mon 23:10] =>  0:10
     CLOCK: [2015-01-11 Sun 23:22]--[2015-01-11 Sun 23:34] =>  0:12
     CLOCK: [2015-01-05 Mon 23:28]--[2015-01-05 Mon 23:32] =>  0:04
     CLOCK: [2015-01-05 Mon 23:10]--[2015-01-05 Mon 23:18] =>  0:08
@@ -87,7 +89,8 @@ the field definitions in one go rather than a few at a time. As a
 quick fix we can skip over undefined fields and re-evaluate this
 later.
 
-*** Create a class to store the field definitions                     :story:
+*** STARTED Create a class to store the field definitions             :story:
+    CLOCK: [2015-01-12 Mon 23:10]--[2015-01-12 Mon 23:39] =>  0:29
 
 When querying for a field we need to have it's complete name. Instead
 of duplicating the complete name, we should probably have a central
@@ -96,13 +99,24 @@ the =tags= theme but this time with the field definitions. We can then
 use them like so:
 
 #+begin_example
-const auto s(o[field_definitions::identity_attribute().complete_name()]);
+const auto s(o[field_definitions::identity_attribute().name().complete_name()]);
 #+end_example
 
 Its a tad verbose. A static variable is used in each of the static
 methods. Initialiser also uses this code to populate the
 registrar. Each model that defines fields has one of these classes (a
 la =tags=).
+
+To help with the verbosity we need a utility class in dynamic that
+takes a field definition and queries the object with it.
+
+*** Rename =dia.comment=                                              :story:
+
+This field hasn't got a sensible name. We need to continue thinking
+about the right name for this - as we have already started doing with
+processed comment; =applicable_to_parent_object= is not quite the
+right name but it is moving on the right direction. Once we settle on
+a good name we need to rename all usages of =dia.comment=.
 
 *** Add a dynamic workflow to dia to sml transformer                  :story:
 
