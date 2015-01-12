@@ -18,17 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/dia_to_sml/types/field_definitions.hpp"
-#include "dogen/dia_to_sml/types/initializer.hpp"
+#include "dogen/dynamic/types/object_extensions.hpp"
 
 namespace dogen {
-namespace dia_to_sml {
+namespace dynamic {
 
-void initializer::initialize() {
-    auto& reg(dynamic::workflow::registrar());
-    reg.register_field_definition(field_definitions::comment());
-    reg.register_field_definition(field_definitions::identity_attribute());
+bool has_field(const object& o, const field_definition& fd) {
+    const auto i(o.fields().find(fd.name().complete_name()));
+    return (i != o.fields().end());
 }
 
 } }

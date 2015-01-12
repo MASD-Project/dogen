@@ -18,11 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/tags.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_FIELD_DEFINITIONS_HPP
+#define DOGEN_DIA_TO_SML_TYPES_FIELD_DEFINITIONS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-const std::string tags::dia::identity_attribute("dia.identity_attribute");
+/**
+ * @brief Fields supported by the Dia to SML translator.
+ */
+class field_definitions {
+public:
+    /**
+     * @brief Comment provided by user when dia does not allow for it.
+     *
+     * For meta-types where comments are available in Dia (e.g. class,
+     * properties, etc), this parameter is ignored. For types where
+     * they are not (e.g. model, package), it will be used to populate
+     * the meta-type's documentation.
+     */
+    static const dynamic::field_definition& comment();
+
+    /**
+     * @brief Attribute that provides this entity its identity.
+     */
+    static const dynamic::field_definition&  identity_attribute();
+};
 
 } }
+
+#endif

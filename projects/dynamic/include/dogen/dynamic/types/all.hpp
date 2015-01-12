@@ -31,6 +31,7 @@
 #include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/number_collection.hpp"
 #include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/object_extensions.hpp"
 #include "dogen/dynamic/types/registrar.hpp"
 #include "dogen/dynamic/types/registrar_error.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"

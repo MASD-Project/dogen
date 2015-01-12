@@ -18,17 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/dia_to_sml/types/field_definitions.hpp"
-#include "dogen/dia_to_sml/types/initializer.hpp"
+#ifndef DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_HPP
+#define DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/types/object.hpp"
 
 namespace dogen {
-namespace dia_to_sml {
+namespace dynamic {
 
-void initializer::initialize() {
-    auto& reg(dynamic::workflow::registrar());
-    reg.register_field_definition(field_definitions::comment());
-    reg.register_field_definition(field_definitions::identity_attribute());
-}
+/**
+ * @brief Returns true if a field exists in an object.
+ */
+bool has_field(const object& o, const field_definition& fd);
 
 } }
+
+#endif

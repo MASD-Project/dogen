@@ -24,12 +24,13 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/types/object_extensions.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia_to_sml/types/tags.hpp"
+#include "dogen/dia_to_sml/types/field_definitions.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -367,8 +368,8 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
     e.is_aggregate_root(p.is_aggregate_root());
 
     for (const auto& p : e.local_properties()) {
-        sml::meta_data::reader reader(p.meta_data());
-        if (reader.has_key(tags::dia::identity_attribute))
+        using dynamic::has_field;
+        if (has_field(p.extensions(), field_definitions::identity_attribute()))
             e.identity().push_back(p);
     }
 

@@ -18,33 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_TAGS_FWD_HPP
-#define DOGEN_DIA_TO_SML_TYPES_TAGS_FWD_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_FWD_HPP
+#define DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-
 namespace dogen {
-namespace dia_to_sml {
+namespace dynamic {
 
-/**
- * @brief Constants for all keys in meta-data that we're responsible
- * for.
- */
-struct tags {
-    /**
-     * @brief Tags that supplement missing information in Dia.
-     */
-    struct dia {
-        /**
-         * @brief Attribute that provides this entity its identity.
-         */
-        static const std::string identity_attribute;
-    };
-};
+class object_extensions;
 
 } }
 
