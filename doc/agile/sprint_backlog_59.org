@@ -127,6 +127,50 @@ a closed story.
 We need to process the output of the comments parser using the dynamic
 workflow.
 
+*** STARTED Inject all missing fields to object                       :story:
+
+Log whenever we are skipping a field because there is no associated
+field definition. Add all required field definitions. Remove
+optionality from =obtain_field_definition=.
+
+**** COMPLETED Determine what fields need to be injected
+     CLOSED: [2015-01-13 Tue 00:01]
+     CLOCK: [2015-01-12 Mon 23:52]--[2015-01-13 Tue 00:01] =>  0:09
+
+From main models:
+
+#+begin_example
+$ cd ../output/dogen/clang-3.5/log
+$ grep -nH -e "Field definition not found" * | gawk '{print $NF}' | sort | uniq
+ODB_PRAGMA
+copyright
+licence
+modeline_group
+#+end_example
+
+And for unit tests:
+
+#+begin_example
+find . -iname '*log' -exec grep -nH -e "Field definition not found" {} \; | gawk '{print $NF}' | sort | uniq
+COPYRIGHT
+LICENCE
+MODELINE_GROUP
+key
+#+end_example
+
+Seems like we have a mix of cases on annotation fields.
+
+**** Inject annotation fields
+
+We need to inject:
+
+- copyright
+- licence
+- modeline_group
+
+We also need to sort out the upper case/lower case naming of these
+fields in various diagrams.
+
 *** Rename =dia.comment=                                              :story:
 
 This field hasn't got a sensible name. We need to continue thinking
