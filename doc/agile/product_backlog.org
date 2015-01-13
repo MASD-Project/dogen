@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider adding issues emblem                                     :story:
+
+Boost.DI seems to have a new emblem for issues:
+
+https://github.com/krzysztof-jusiak/di
+
+In the future, this may be useful if users submit issues.
+
 *** Add support for user defined final types                          :story:
 
 At some point we started talking about the possibility of having types
