@@ -414,6 +414,26 @@ worry about a lot of the boilerplate code. However, the biggest
 problem is that we'd be imposing a large and complex "framework" on
 them with all the evilness that that entails.
 
+Food for thought:
+
+- in this light, a better name for dogen would be =codegen= (or =cogen=
+  to make it a bit more unique in google). The tag line is then The
+  Generic Code Generator. Unfortunately there are already a few
+  projects with the name =cogen= so we may need to find a better
+  name. Alternatively we can maintain the name dogen, but take away
+  its meaning (i.e. no longer "The Domain Generator").
+- the merge of =cpp= and =cpp_formatters= may not have been for the
+  best in this case; it would make more sense to have a =cpp::dogen=
+  where we collect all of the formatters related to domain
+  generation - after the =cogen= rename; if no rename then we need
+  some other name to imply domain generation. At this level we could
+  then have =cogen::cpp::odb=, =cogen::cpp::protobuf= and so on. They
+  all make use of the core types defined in =cogen::cpp=. The problem
+  with this approach is that dogen is not really designed to share a
+  namespace in this way. We won't be able to have a =cpp= project as
+  well as placing other projects inside of the =cpp= namespace. We can
+  have one or the other in the current setup, but not both.
+
 *** Usage of rev-list in version causes problems                      :story:
 
 Now we are using travis, we have found problems with the way we are
