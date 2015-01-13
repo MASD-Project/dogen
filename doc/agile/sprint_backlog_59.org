@@ -244,4 +244,9 @@ At present we are duplicating the initialisation dependencies
 everywhere where knit is being used. We should just declare a knit
 initialiser that does the job and call that from the outside world.
 
+*** Update meta-data section in manual                                :story:
+
+Once we are done with all of the meta-data refactoring, we need to
+update the manual.
+
 ** Deprecated
