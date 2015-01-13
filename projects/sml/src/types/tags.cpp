@@ -24,11 +24,7 @@ namespace dogen {
 namespace sml {
 
 const std::string tags::odb_pragma("ODB_PRAGMA");
-const std::string tags::copyright_holder("COPYRIGHT");
-const std::string tags::licence_name("LICENCE");
-const std::string tags::modeline_group_name("MODELINE_GROUP");
 
-const std::string tags::generate_preamble("generate_preamble");
 const std::string tags::original_parent_name("original_parent_name");
 const std::string tags::is_original_parent_visitable(
     "is_original_parent_visitable");
@@ -38,13 +34,6 @@ const std::string tags::bool_false("false");
 
 const std::string tags::status_unsupported("unsupported");
 const std::string tags::status_supported("supported");
-
-const std::string tags::code_generation_marker::add_date_time(
-    "code_generation_marker.add_date_time");
-const std::string tags::code_generation_marker::add_warning(
-    "code_generation_marker.add_warning");
-const std::string tags::code_generation_marker::message(
-    "code_generation_marker.message");
 
 const std::string tags::cpp::split_project("cpp.split_project");
 const std::string tags::cpp::source_directory("cpp.source_directory");

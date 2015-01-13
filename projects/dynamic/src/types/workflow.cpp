@@ -22,6 +22,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/dynamic/io/scope_types_io.hpp"
 #include "dogen/dynamic/types/field_factory.hpp"
 #include "dogen/dynamic/types/workflow_error.hpp"
@@ -62,6 +64,9 @@ create_field_definitions_by_complete_name() const {
     std::unordered_map<std::string, field_definition> r;
 
     registrar().validate();
+    BOOST_LOG_SEV(lg, debug) << "Field definitions: "
+                             << registrar().field_definitions();
+
     for (const auto& fd : registrar().field_definitions()) {
         const auto cn(fd.name().complete_name());
         const auto result(r.insert(std::make_pair(cn, fd)));

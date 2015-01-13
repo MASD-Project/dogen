@@ -7502,7 +7502,7 @@ factories.#</dia:string>
         <dia:point val="383.342,108.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="381.968,108.239;383.404,112.15"/>
+        <dia:rectangle val="381.968,108.239;383.403,112.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18970,7 +18970,7 @@ to the grammar of the C++ language.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Responsible for initialising all
 static variables. Must be called from
-main.#</dia:string>
+main, or from another initialiser.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -18995,7 +18995,7 @@ main.#</dia:string>
         <dia:point val="296.572,39.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="296.35,39.2481;297.154,44.0653"/>
+        <dia:rectangle val="296.35,39.2481;297.154,44.0652"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23811,7 +23811,7 @@ data such as the facet settings.#</dia:string>
         <dia:point val="340.765,82.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="340.015,82.05;373.007,112.8"/>
+        <dia:rectangle val="340.015,82.05;373.008,112.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27525,7 +27525,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="315.298,122.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="314.548,121.45;356.671,144.8"/>
+        <dia:rectangle val="314.548,121.45;356.671,144.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

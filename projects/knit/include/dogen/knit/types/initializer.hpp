@@ -18,15 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/knit/types/backends/backend.hpp"
-#include "dogen/knit/types/backends/cpp_backend.hpp"
-#include "dogen/knit/types/backends/factory.hpp"
-#include "dogen/knit/types/generation_failure.hpp"
-#include "dogen/knit/types/housekeeper.hpp"
-#include "dogen/knit/types/initializer.hpp"
-#include "dogen/knit/types/knit.hpp"
-#include "dogen/knit/types/outputters/factory.hpp"
-#include "dogen/knit/types/outputters/file_outputter.hpp"
-#include "dogen/knit/types/outputters/outputter.hpp"
-#include "dogen/knit/types/outputters/stream_outputter.hpp"
-#include "dogen/knit/types/workflow.hpp"
+#ifndef DOGEN_KNIT_TYPES_INITIALIZER_HPP
+#define DOGEN_KNIT_TYPES_INITIALIZER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace knit {
+
+/**
+ * @brief Initialises the model.
+ */
+struct initializer {
+    static void initialize();
+};
+
+} }
+
+#endif

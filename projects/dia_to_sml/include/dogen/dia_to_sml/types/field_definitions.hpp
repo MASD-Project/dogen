@@ -33,8 +33,7 @@ namespace dia_to_sml {
 /**
  * @brief Fields supported by the Dia to SML translator.
  */
-class field_definitions {
-public:
+struct field_definitions {
     /**
      * @brief Comment provided by user when dia does not allow for it.
      *

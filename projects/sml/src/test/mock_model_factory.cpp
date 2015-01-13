@@ -58,10 +58,16 @@ const std::string types_forward_declaration("types_fwd_");
 const std::string serialization_main_header("serialization_");
 const std::string serialization_forward_declaration("serialization_fwd_");
 
-const std::string licence_name("gpl_v2");
-const std::string modeline_group_name("emacs");
-const std::string marker("SAMPLE_MARKER");
-const std::string copyright_holders(
+const std::string licence_name_key("licence_name");
+const std::string licence_name_value("gpl_v2");
+const std::string modeline_group_name_key("modeline_group_name");
+const std::string modeline_group_name_value("emacs");
+const std::string generate_preamble_key("generate_preamble");
+const std::string code_generation_marker_message_key(
+    "code_generation_marker.message");
+const std::string code_generation_marker_message_value("sample message");
+const std::string copyright_holders_key("copyright_holders");
+const std::string copyright_holders_value(
     "Copyright (C) 2012 Person <name@company.co.uk>");
 
 const std::string header_extension(".hpp");
@@ -379,12 +385,12 @@ void add_test_tags(boost::property_tree::ptree& meta_data,
         forward_declarations_file::file_name,
         boost_serialization_forward_declaration_filename(qn));
 
-    writer.add(dogen::sml::tags::licence_name, licence_name);
-    writer.add(dogen::sml::tags::copyright_holder, copyright_holders);
-    writer.add(dogen::sml::tags::modeline_group_name, modeline_group_name);
-    writer.add(dogen::sml::tags::code_generation_marker::message, marker);
-    writer.add(dogen::sml::tags::generate_preamble,
-        dogen::sml::tags::bool_true);
+    writer.add(licence_name_key, licence_name_value);
+    writer.add(copyright_holders_key, copyright_holders_value);
+    writer.add(modeline_group_name_key, modeline_group_name_value);
+    writer.add(code_generation_marker_message_key,
+        code_generation_marker_message_value);
+    writer.add(generate_preamble_key, dogen::sml::tags::bool_true);
 }
 
 }

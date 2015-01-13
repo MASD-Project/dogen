@@ -44,36 +44,6 @@ struct tags {
     static const std::string odb_pragma;
 
     /**
-     * @brief Key used to denote copyright holders.
-     *
-     * It is expected to be repeated in a model; order is kept as
-     * provided by user.
-     */
-    static const std::string copyright_holder;
-
-    /**
-     * @brief Name of the legal licence to use.
-     *
-     * Must match licences available in library.
-     */
-    static const std::string licence_name;
-
-    /**
-     * @brief Name of the modeline group to use.
-     *
-     * Must match licences available in library.
-     */
-    static const std::string modeline_group_name;
-
-    /**
-     * @brief If set to true, the preamble will be generated.
-     *
-     * The preamble is made up of a modeline, copyright
-     * information and licensing details.
-     */
-    static const std::string generate_preamble;
-
-    /**
      * @brief Name of the top-level parent of the inheritance
      * hierarchy.
      */
@@ -96,27 +66,6 @@ struct tags {
      */
     static const std::string status_unsupported;
     static const std::string status_supported;
-
-    /**
-     * @brief Tags related to the code generation marker.
-     */
-    struct code_generation_marker {
-        /**
-         * @brief If true, add the generation date and time to the marker.
-         */
-        static const std::string add_date_time;
-
-        /**
-         * @brief If true, adds a warning not to modify
-         * code-generated files.
-         */
-        static const std::string add_warning;
-
-        /**
-         * @brief Message to place on all code-generated files.
-         */
-        static const std::string message;
-    };
 
     /**
      * @brief All parameters specific to the C++ language.

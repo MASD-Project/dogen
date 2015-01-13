@@ -18,15 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/knit/types/backends/backend.hpp"
-#include "dogen/knit/types/backends/cpp_backend.hpp"
-#include "dogen/knit/types/backends/factory.hpp"
-#include "dogen/knit/types/generation_failure.hpp"
-#include "dogen/knit/types/housekeeper.hpp"
+#include "dogen/formatters/types/initializer.hpp"
+#include "dogen/dia_to_sml/types/initializer.hpp"
+#include "dogen/frontend/types/initializer.hpp"
+#include "dogen/cpp/types/initializer.hpp"
+
 #include "dogen/knit/types/initializer.hpp"
-#include "dogen/knit/types/knit.hpp"
-#include "dogen/knit/types/outputters/factory.hpp"
-#include "dogen/knit/types/outputters/file_outputter.hpp"
-#include "dogen/knit/types/outputters/outputter.hpp"
-#include "dogen/knit/types/outputters/stream_outputter.hpp"
-#include "dogen/knit/types/workflow.hpp"
+
+namespace dogen {
+namespace knit {
+
+void initializer::initialize() {
+    dogen::dia_to_sml::initializer::initialize();
+    dogen::frontend::initializer::initialize();
+    dogen::formatters::initializer::initialize();
+    dogen::cpp::initializer::initialize();
+}
+
+} }
