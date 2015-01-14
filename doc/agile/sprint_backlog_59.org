@@ -16,18 +16,19 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-13 Tue 23:54]
+Clock summary at [2015-01-14 Wed 00:03]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *9:50* |      |      |
+| *Total time*                                                           | *9:55* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Active                                                                 |        | 9:50 |      |
+| Active                                                                 |        | 9:55 |      |
 | STARTED Sprint and product backlog grooming                            |        |      | 0:43 |
 | COMPLETED Refactor comments processing code in dia to sml              |        |      | 4:01 |
 | COMPLETED Create a class to store the field definitions                |        |      | 0:36 |
 | COMPLETED Inject dia fields =comment= and =identity_attribute=         |        |      | 2:47 |
 | COMPLETED Determine what fields need to be injected                    |        |      | 0:09 |
+| COMPLETED Remove build number                                          |        |      | 0:05 |
 | STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 1:34 |
 #+end:
 
@@ -167,7 +168,9 @@ At present we are duplicating the initialisation dependencies
 everywhere where knit is being used. We should just declare a knit
 initialiser that does the job and call that from the outside world.
 
-*** Remove build number                                               :story:
+*** COMPLETED Remove build number                                     :story:
+    CLOSED: [2015-01-14 Wed 00:02]
+    CLOCK: [2015-01-13 Tue 23:57]--[2015-01-14 Wed 00:02] =>  0:05
 
 In sprint 50 we added the build number so we could distinguish between
 different builds. We have not yet found a case where this was useful

@@ -219,20 +219,6 @@ set(DOGEN_VERSION "${DOGEN_MAJOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
 
-find_program(CTEST_UUIDGEN_COMMAND NAMES uuidgen)
-if(NOT DEFINED CTEST_UUIDGEN_COMMAND)
-    message(WARNING "uuidgen not found, using default build number.")
-    set(DOGEN_BUILD_NUMBER "no_build_number_assigned")
-else()
-    message(STATUS "Found uuidgen (${CTEST_UUIDGEN_COMMAND})...")
-    execute_process(COMMAND ${CTEST_UUIDGEN_COMMAND}
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE DOGEN_BUILD_NUMBER
-    RESULT_VARIABLE ret_var
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-endif()
-message(STATUS "Build number ${DOGEN_BUILD_NUMBER}")
-
 if(WITH_DEBUG)
     message(STATUS "Building WITH DEBUG symbols...")
     set(DOGEN_VERSION "${DOGEN_VERSION}d")
