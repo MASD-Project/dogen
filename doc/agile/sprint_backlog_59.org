@@ -16,23 +16,24 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-14 Wed 00:03]
+Clock summary at [2015-01-20 Tue 22:53]
 
-| Headline                                                               | Time   |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *9:55* |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| Active                                                                 |        | 9:55 |      |
-| STARTED Sprint and product backlog grooming                            |        |      | 0:43 |
-| COMPLETED Refactor comments processing code in dia to sml              |        |      | 4:01 |
-| COMPLETED Create a class to store the field definitions                |        |      | 0:36 |
-| COMPLETED Inject dia fields =comment= and =identity_attribute=         |        |      | 2:47 |
-| COMPLETED Determine what fields need to be injected                    |        |      | 0:09 |
-| COMPLETED Remove build number                                          |        |      | 0:05 |
-| STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 1:34 |
+| Headline                                                                 | Time   |      |      |
+|--------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                             | *9:55* |      |      |
+|--------------------------------------------------------------------------+--------+------+------|
+| Active                                                                   |        | 9:55 |      |
+| COMPLETED Sprint and product backlog grooming                            |        |      | 0:43 |
+| COMPLETED Refactor comments processing code in dia to sml                |        |      | 4:01 |
+| COMPLETED Create a class to store the field definitions                  |        |      | 0:36 |
+| COMPLETED Inject dia fields =comment= and =identity_attribute=           |        |      | 2:47 |
+| COMPLETED Determine what fields need to be injected                      |        |      | 0:09 |
+| COMPLETED Remove build number                                            |        |      | 0:05 |
+| POSTPONED Add annotation fields and remove meta-data usage in formatters |        |      | 1:34 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-01-20 Tue 22:53]
     CLOCK: [2015-01-13 Tue 00:13]--[2015-01-13 Tue 00:22] =>  0:09
     CLOCK: [2015-01-12 Mon 23:00]--[2015-01-12 Mon 23:10] =>  0:10
     CLOCK: [2015-01-11 Sun 23:22]--[2015-01-11 Sun 23:34] =>  0:12
@@ -177,7 +178,8 @@ different builds. We have not yet found a case where this was useful
 and in the mean time, every time we rebuild, we need to re-link the
 work. Remove this until we have a use case.
 
-*** STARTED Add annotation fields and remove meta-data usage in formatters :story:
+*** POSTPONED Add annotation fields and remove meta-data usage in formatters :story:
+    CLOSED: [2015-01-20 Tue 22:53]
     CLOCK: [2015-01-13 Tue 22:20]--[2015-01-13 Tue 23:54] =>  1:34
 
 Add all required field definitions for the formatters field; rename
@@ -192,74 +194,5 @@ We need to inject:
 
 We also need to sort out the upper case/lower case naming of these
 fields in various diagrams.
-
-*** Remove optionality from =obtain_field_definition=                 :story:
-
-In order to progress in stages we made fields optional in dynamic
-workflow; if a definition is not found we skip it. We need to remove
-this once all field definitions have been added.
-
-*** Rename =dia.comment=                                              :story:
-
-This field hasn't got a sensible name. We need to continue thinking
-about the right name for this - as we have already started doing with
-processed comment; =applicable_to_parent_object= is not quite the
-right name but it is moving on the right direction. Once we settle on
-a good name we need to rename all usages of =dia.comment=.
-
-*** Replace uses of meta-data with dynamic object                     :story:
-
-Find all places where we are using ptree and use the dynamic object
-instead. This should be mainly in meta-data factories.
-
-*** Rename namespace =meta-data= to =dynamic=                         :story:
-
-We have created a number of "meta-data extension" namespaces, which is
-where we transform the ptree into a strongly typed object. These
-should be renamed to =dynamic= to make it consistent.
-
-*** Remove all references to =ptree=                                  :story:
-
-Delete reader and writer classes and remove meta-data from
-=Extensible=.
-
-*** Add merger to dynamic                                             :story:
-
-We need a class that takes two objects and merges them. For example
-the root module meta-data object and any type. Could be called
-merger. Should have a lhs and a rhs and produce a result.
-
-*Note*: we still need to prove the use case; it may be that we do not
-need merging at all.
-
-*** Add dynamic merging to SML workflow                               :story:
-
-We need an extra activity in the SML workflow that makes use of the
-=dynamic::merger= to produce the final dynamic object.
-
-*Note*: we still need to prove the use case; it may be that we do not
-need merging at all.
-
-*** Remove dependency of writer on tags                               :story:
-
-We seem to be using the tags to detect containers. We need to get rid
-of this dependency.
-
-*** Delete tags class in SML                                          :story:
-
-This class does not make sense any more as each model will be
-responsible for their own tags.
-
-Can only be done once we delete writer and reader.
-
-*** Protect against double-initialisation                             :story:
-
-We need to look into static initialisation and make sure the code can
-cope with it being called several times.
-
-*** Update meta-data section in manual                                :story:
-
-Once we are done with all of the meta-data refactoring, we need to
-update the manual.
 
 ** Deprecated
