@@ -8,6 +8,14 @@
 
 Stories that we intend to look at, at some point.
 
+*** Consider c++ itself as a front-end                                :story:
+
+One can imagine a clang-based front-end that reads C++ code suitably
+annotated, perhaps with =Generatable= or some such attributes -
+basically all attributes required to build a sensible SML model. The
+frontend will parse the code and generate SML. We can then generate
+serialisation, hashing etc for the hand-crafted code.
+
 *** Consider adding issues emblem                                     :story:
 
 Boost.DI seems to have a new emblem for issues:
