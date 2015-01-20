@@ -1,0 +1,118 @@
+#+title: Sprint Backlog 60
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Commentary
+
+** Mission
+
+Implement dynamic and start making use of it in SML.
+
+** Retrospective
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2015-01-20 Tue 22:55]
+
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *0:15* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 0:15 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:15 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-20 Tue 22:40]--[2015-01-20 Tue 22:55] =>  0:15
+
+Updates to sprint and product backlog.
+
+*** STARTED Add annotation fields and remove meta-data usage in formatters :story:
+
+Add all required field definitions for the formatters field; rename
+meta-data namespace to dynamic and re-implement factory using dynamic
+fields instead of =ptree=.
+
+We need to inject:
+
+- copyright
+- licence
+- modeline_group
+
+We also need to sort out the upper case/lower case naming of these
+fields in various diagrams.
+
+*** Remove optionality from =obtain_field_definition=                 :story:
+
+In order to progress in stages we made fields optional in dynamic
+workflow; if a definition is not found we skip it. We need to remove
+this once all field definitions have been added.
+
+*** Rename =dia.comment=                                              :story:
+
+This field hasn't got a sensible name. We need to continue thinking
+about the right name for this - as we have already started doing with
+processed comment; =applicable_to_parent_object= is not quite the
+right name but it is moving on the right direction. Once we settle on
+a good name we need to rename all usages of =dia.comment=.
+
+*** Replace uses of meta-data with dynamic object                     :story:
+
+Find all places where we are using ptree and use the dynamic object
+instead. This should be mainly in meta-data factories.
+
+*** Rename namespace =meta-data= to =dynamic=                         :story:
+
+We have created a number of "meta-data extension" namespaces, which is
+where we transform the ptree into a strongly typed object. These
+should be renamed to =dynamic= to make it consistent.
+
+*** Remove all references to =ptree=                                  :story:
+
+Delete reader and writer classes and remove meta-data from
+=Extensible=.
+
+*** Add merger to dynamic                                             :story:
+
+We need a class that takes two objects and merges them. For example
+the root module meta-data object and any type. Could be called
+merger. Should have a lhs and a rhs and produce a result.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
+
+*** Add dynamic merging to SML workflow                               :story:
+
+We need an extra activity in the SML workflow that makes use of the
+=dynamic::merger= to produce the final dynamic object.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
+
+*** Remove dependency of writer on tags                               :story:
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
+*** Delete tags class in SML                                          :story:
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
+Can only be done once we delete writer and reader.
+
+*** Protect against double-initialisation                             :story:
+
+We need to look into static initialisation and make sure the code can
+cope with it being called several times.
+
+*** Update meta-data section in manual                                :story:
+
+Once we are done with all of the meta-data refactoring, we need to
+update the manual.
+
+** Deprecated
