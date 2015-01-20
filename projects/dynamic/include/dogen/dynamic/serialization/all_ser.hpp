@@ -18,12 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/serialization/boolean_collection_ser.hpp"
 #include "dogen/dynamic/serialization/boolean_ser.hpp"
 #include "dogen/dynamic/serialization/field_definition_ser.hpp"
 #include "dogen/dynamic/serialization/field_ser.hpp"
 #include "dogen/dynamic/serialization/name_ser.hpp"
-#include "dogen/dynamic/serialization/number_collection_ser.hpp"
 #include "dogen/dynamic/serialization/number_ser.hpp"
 #include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"

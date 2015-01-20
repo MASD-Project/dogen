@@ -28,8 +28,8 @@
 #include <algorithm>
 #include <iosfwd>
 #include <list>
+#include <string>
 #include "dogen/dynamic/serialization/text_collection_fwd_ser.hpp"
-#include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/value.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     virtual ~text_collection() noexcept { }
 
 public:
-    explicit text_collection(const std::list<dogen::dynamic::text>& content);
+    explicit text_collection(const std::list<std::string>& content);
 
 private:
     template<typename Archive>
@@ -74,10 +74,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::list<dogen::dynamic::text>& content() const;
-    std::list<dogen::dynamic::text>& content();
-    void content(const std::list<dogen::dynamic::text>& v);
-    void content(const std::list<dogen::dynamic::text>&& v);
+    const std::list<std::string>& content() const;
+    std::list<std::string>& content();
+    void content(const std::list<std::string>& v);
+    void content(const std::list<std::string>&& v);
 
 public:
     bool operator==(const text_collection& rhs) const;
@@ -93,7 +93,7 @@ public:
     text_collection& operator=(text_collection other);
 
 private:
-    std::list<dogen::dynamic::text> content_;
+    std::list<std::string> content_;
 };
 
 } }

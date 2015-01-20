@@ -18,12 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/test_data/boolean_collection_td.hpp"
 #include "dogen/dynamic/test_data/boolean_td.hpp"
 #include "dogen/dynamic/test_data/field_definition_td.hpp"
 #include "dogen/dynamic/test_data/field_td.hpp"
 #include "dogen/dynamic/test_data/name_td.hpp"
-#include "dogen/dynamic/test_data/number_collection_td.hpp"
 #include "dogen/dynamic/test_data/number_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/dynamic/test_data/scope_types_td.hpp"

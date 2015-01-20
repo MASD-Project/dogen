@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/test_data/boolean_collection_td.hpp"
 #include "dogen/dynamic/test_data/boolean_td.hpp"
-#include "dogen/dynamic/test_data/number_collection_td.hpp"
 #include "dogen/dynamic/test_data/number_td.hpp"
 #include "dogen/dynamic/test_data/text_collection_td.hpp"
 #include "dogen/dynamic/test_data/text_td.hpp"
@@ -38,16 +36,12 @@ populate(const unsigned int /*position*/, result_type& /*v*/) {
 
 value_generator::result_type*
 value_generator::create_ptr(const unsigned int position) {
-    if ((position % 5) == 0)
+    if ((position % 3) == 0)
         return dogen::dynamic::text_collection_generator::create_ptr(position);
-    if ((position % 5) == 1)
+    if ((position % 3) == 1)
         return dogen::dynamic::number_generator::create_ptr(position);
-    if ((position % 5) == 2)
+    if ((position % 3) == 2)
         return dogen::dynamic::boolean_generator::create_ptr(position);
-    if ((position % 5) == 3)
-        return dogen::dynamic::number_collection_generator::create_ptr(position);
-    if ((position % 5) == 4)
-        return dogen::dynamic::boolean_collection_generator::create_ptr(position);
     return dogen::dynamic::text_generator::create_ptr(position);
 }
 

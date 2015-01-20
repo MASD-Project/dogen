@@ -18,12 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/hash/boolean_collection_hash.hpp"
 #include "dogen/dynamic/hash/boolean_hash.hpp"
 #include "dogen/dynamic/hash/field_definition_hash.hpp"
 #include "dogen/dynamic/hash/field_hash.hpp"
 #include "dogen/dynamic/hash/name_hash.hpp"
-#include "dogen/dynamic/hash/number_collection_hash.hpp"
 #include "dogen/dynamic/hash/number_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/dynamic/hash/scope_types_hash.hpp"

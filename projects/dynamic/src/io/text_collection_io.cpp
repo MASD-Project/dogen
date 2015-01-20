@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/dynamic/io/text_collection_io.hpp"
-#include "dogen/dynamic/io/text_io.hpp"
 #include "dogen/dynamic/io/value_io.hpp"
 
 namespace dogen {

@@ -33,9 +33,7 @@ enum class value_types : unsigned int {
     text = 1,
     text_collection = 2,
     number = 3,
-    number_collection = 4,
-    boolean = 5,
-    boolean_collection = 6
+    boolean = 4
 };
 
 } }

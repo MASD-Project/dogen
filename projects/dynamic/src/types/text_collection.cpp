@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/dynamic/io/text_io.hpp"
 #include "dogen/dynamic/io/value_io.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
 
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::dynamic::text>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -40,7 +48,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::dynamic:
 namespace dogen {
 namespace dynamic {
 
-text_collection::text_collection(const std::list<dogen::dynamic::text>& content)
+text_collection::text_collection(const std::list<std::string>& content)
     : dogen::dynamic::value(),
       content_(content) { }
 
@@ -78,19 +86,19 @@ text_collection& text_collection::operator=(text_collection other) {
     return *this;
 }
 
-const std::list<dogen::dynamic::text>& text_collection::content() const {
+const std::list<std::string>& text_collection::content() const {
     return content_;
 }
 
-std::list<dogen::dynamic::text>& text_collection::content() {
+std::list<std::string>& text_collection::content() {
     return content_;
 }
 
-void text_collection::content(const std::list<dogen::dynamic::text>& v) {
+void text_collection::content(const std::list<std::string>& v) {
     content_ = v;
 }
 
-void text_collection::content(const std::list<dogen::dynamic::text>&& v) {
+void text_collection::content(const std::list<std::string>&& v) {
     content_ = std::move(v);
 }
 

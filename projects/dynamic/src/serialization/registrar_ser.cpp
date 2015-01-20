@@ -26,9 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include "dogen/dynamic/serialization/boolean_collection_ser.hpp"
 #include "dogen/dynamic/serialization/boolean_ser.hpp"
-#include "dogen/dynamic/serialization/number_collection_ser.hpp"
 #include "dogen/dynamic/serialization/number_ser.hpp"
 #include "dogen/dynamic/serialization/text_collection_ser.hpp"
 #include "dogen/dynamic/serialization/text_ser.hpp"
@@ -39,9 +37,7 @@ namespace dynamic {
 template<typename Archive>
 void register_types(Archive& ar) {
     ar.template register_type<dogen::dynamic::boolean>();
-    ar.template register_type<dogen::dynamic::boolean_collection>();
     ar.template register_type<dogen::dynamic::number>();
-    ar.template register_type<dogen::dynamic::number_collection>();
     ar.template register_type<dogen::dynamic::text>();
     ar.template register_type<dogen::dynamic::text_collection>();
 }

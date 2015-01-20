@@ -28,8 +28,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/dynamic/serialization/text_collection_ser.hpp"
-#include "dogen/dynamic/serialization/text_ser.hpp"
 #include "dogen/dynamic/serialization/value_ser.hpp"
 
 

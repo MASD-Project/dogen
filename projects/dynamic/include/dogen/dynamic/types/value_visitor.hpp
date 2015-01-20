@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/boolean_collection_fwd.hpp"
 #include "dogen/dynamic/types/boolean_fwd.hpp"
-#include "dogen/dynamic/types/number_collection_fwd.hpp"
 #include "dogen/dynamic/types/number_fwd.hpp"
 #include "dogen/dynamic/types/text_collection_fwd.hpp"
 #include "dogen/dynamic/types/text_fwd.hpp"
@@ -78,26 +76,6 @@ public:
     virtual void visit(const dogen::dynamic::boolean&) { }
     virtual void visit(dogen::dynamic::boolean&) const { }
     virtual void visit(dogen::dynamic::boolean&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::dynamic::number_collection
-     */
-    /**@{*/
-    virtual void visit(const dogen::dynamic::number_collection&) const { }
-    virtual void visit(const dogen::dynamic::number_collection&) { }
-    virtual void visit(dogen::dynamic::number_collection&) const { }
-    virtual void visit(dogen::dynamic::number_collection&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::dynamic::boolean_collection
-     */
-    /**@{*/
-    virtual void visit(const dogen::dynamic::boolean_collection&) const { }
-    virtual void visit(const dogen::dynamic::boolean_collection&) { }
-    virtual void visit(dogen::dynamic::boolean_collection&) const { }
-    virtual void visit(dogen::dynamic::boolean_collection&) { }
     /**@}*/
 };
 

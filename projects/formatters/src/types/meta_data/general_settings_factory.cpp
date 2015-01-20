@@ -117,22 +117,23 @@ extract_marker(const boost::property_tree::ptree& meta_data) const {
 
 boost::optional<licence>
 general_settings_factory::extract_licence(const dynamic::object& o) const {
-    const auto& fd(field_definitions::licence_name());
     using namespace dynamic;
-    if (!has_field(o, fd))
+    typedef field_definitions fd;
+
+    if (!has_field(o, fd::licence_name()))
         return boost::optional<licence>();
 
-    const auto licence_name(get_text_field_content(o, fd));
-    const auto i(licences_.find(licence_name));
+    const auto ln(get_text_content(o, fd::licence_name()));
+    const auto i(licences_.find(ln));
     if (i == licences_.end())
-        throw_missing_item("Licence not found: ", licence_name);
+        throw_missing_item("Licence not found: ", ln);
+
+    if (!has_field(o, fd::copyright_holder()))
+        return i->second;
 
     licence l(i->second);
-/*    if (reader.has_key(traits::copyright_holder())) {
-        const auto copyright_holder(reader.get(traits::copyright_holder()));
-        l.copyright_holders().push_back(copyright_holder);
-    }
-*/
+    const auto ch(get_text_collection_content(o, fd::copyright_holder()));
+    l.copyright_holders(ch);
     return l;
 }
 

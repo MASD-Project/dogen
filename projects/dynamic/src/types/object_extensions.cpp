@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/text_collection.hpp"
 #include "dogen/dynamic/types/field_access_error.hpp"
 #include "dogen/dynamic/types/object_extensions.hpp"
 
@@ -56,7 +57,7 @@ const field& get_field(const object& o, const field_definition& fd) {
 }
 
 std::string
-get_text_field_content(const object& o, const field_definition& fd) {
+get_text_content(const object& o, const field_definition& fd) {
     const auto& f(get_field(o, fd));
     const auto& v(*f.value());
 
@@ -69,5 +70,21 @@ get_text_field_content(const object& o, const field_definition& fd) {
         BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
     }
 }
+
+std::list<std::string>
+get_text_collection_content(const object& o, const field_definition& fd) {
+    const auto& f(get_field(o, fd));
+    const auto& v(*f.value());
+
+    try {
+        const auto& t(dynamic_cast<const text_collection&>(v));
+        return t.content();
+    } catch(const std::bad_cast& e) {
+        const auto n(fd.name().complete_name());
+        BOOST_LOG_SEV(lg, error) << unexpected_field_type << n;
+        BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
+    }
+}
+
 
 } }

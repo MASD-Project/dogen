@@ -18,21 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/dynamic/test_data/text_collection_td.hpp"
-#include "dogen/dynamic/test_data/text_td.hpp"
 #include "dogen/dynamic/test_data/value_td.hpp"
 
 namespace {
 
-dogen::dynamic::text
-create_dogen_dynamic_text(const unsigned int position) {
-    return dogen::dynamic::text_generator::create(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
-std::list<dogen::dynamic::text> create_std_list_dogen_dynamic_text(unsigned int position) {
-    std::list<dogen::dynamic::text> r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_dynamic_text(position + i));
+        r.push_back(create_std_string(position + i));
     }
     return r;
 }
@@ -47,7 +48,7 @@ text_collection_generator::text_collection_generator() : position_(0) { }
 void text_collection_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::dynamic::value_generator::populate(position, v);
-    v.content(create_std_list_dogen_dynamic_text(position + 0));
+    v.content(create_std_list_std_string(position + 0));
 }
 
 text_collection_generator::result_type

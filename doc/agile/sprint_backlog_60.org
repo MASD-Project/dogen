@@ -33,6 +33,7 @@ Clock summary at [2015-01-20 Tue 23:31]
 Updates to sprint and product backlog.
 
 *** STARTED Add annotation fields and remove meta-data usage in formatters :story:
+    CLOCK: [2015-01-20 Tue 23:31]--[2015-01-20 Tue 23:56] =>  0:25
     CLOCK: [2015-01-20 Tue 22:55]--[2015-01-20 Tue 23:31] =>  0:36
 
 Add all required field definitions for the formatters field; rename

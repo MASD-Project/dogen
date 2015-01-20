@@ -81,22 +81,10 @@ private:
     create_number_value(const std::string& raw_value) const;
 
     /**
-     * @brief Creates a collection of number values.
-     */
-    boost::shared_ptr<value> create_number_values(
-        const std::list<std::string>& raw_values) const;
-
-    /**
      * @brief Creates a stand alone boolean value.
      */
     boost::shared_ptr<value>
     create_boolean_value(const std::string& raw_value) const;
-
-    /**
-     * @brief Creates a collection of boolean values.
-     */
-    boost::shared_ptr<value> create_boolean_values(
-        const std::list<std::string>& raw_values) const;
 
 public:
     /**

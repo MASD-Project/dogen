@@ -26,7 +26,7 @@ namespace dynamic {
 value_types_generator::value_types_generator() : position_(0) { }
 void value_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<value_types>(position % 7);
+    v = static_cast<value_types>(position % 5);
 }
 
 value_types_generator::result_type

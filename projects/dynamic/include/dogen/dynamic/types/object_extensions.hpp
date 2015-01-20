@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/field.hpp"
@@ -48,11 +50,20 @@ const field& get_field(const object& o, const field_definition& fd);
  * @brief Returns the content for the field, assuming it is a text field.
  *
  * @pre has_field must be true.
- * @pre Field value type must match be text.
+ * @pre Field value type must be text.
  */
-std::string get_text_field_content(const object& o, const field_definition& fd);
+std::string get_text_content(const object& o, const field_definition& fd);
+
+/**
+ * @brief Returns the content for the field, assuming it is a text
+ * collection field.
+ *
+ * @pre has_field must be true.
+ * @pre Field value type must be text collection.
+ */
+std::list<std::string>
+get_text_collection_content(const object& o, const field_definition& fd);
 
 } }
 
 #endif
-

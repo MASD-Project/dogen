@@ -27,9 +27,7 @@
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
 #include "dogen/dynamic/types/number.hpp"
-#include "dogen/dynamic/types/number_collection.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
-#include "dogen/dynamic/types/boolean_collection.hpp"
 #include "dogen/dynamic/types/field_factory.hpp"
 
 namespace {
@@ -111,7 +109,7 @@ boost::shared_ptr<value> field_factory::create_text_values(
     const std::list<std::string>& raw_values) const {
     auto r(boost::make_shared<text_collection>());
     for (const auto& rv : raw_values)
-        r->content().push_front(text(rv));
+        r->content().push_front(rv);
 
     return r;
 }
@@ -121,27 +119,9 @@ boost::shared_ptr<value> field_factory::create_number_value(
     return boost::make_shared<number>(to_int(raw_value));
 }
 
-boost::shared_ptr<value> field_factory::create_number_values(
-    const std::list<std::string>& raw_values) const {
-    auto r(boost::make_shared<number_collection>());
-    for (const auto& rv : raw_values)
-        r->content().push_front(number(to_int(rv)));
-
-    return r;
-}
-
 boost::shared_ptr<value> field_factory::create_boolean_value(
     const std::string& raw_value) const {
     return boost::make_shared<boolean>(to_bool(raw_value));
-}
-
-boost::shared_ptr<value> field_factory::create_boolean_values(
-    const std::list<std::string>& raw_values) const {
-    auto r(boost::make_shared<boolean_collection>());
-    for (const auto& rv : raw_values)
-        r->content().push_front(boolean(to_bool(rv)));
-
-    return r;
 }
 
 field field_factory::build(const field_definition& fd,
@@ -164,17 +144,9 @@ field field_factory::build(const field_definition& fd,
         r.value(create_number_value(raw_values.front()));
         break;
 
-    case value_types::number_collection:
-        r.value(create_number_values(raw_values));
-        break;
-
     case value_types::boolean:
         ensure_at_most_one_element(raw_values);
         r.value(create_boolean_value(raw_values.front()));
-        break;
-
-    case value_types::boolean_collection:
-        r.value(create_boolean_values(raw_values));
         break;
 
     default:

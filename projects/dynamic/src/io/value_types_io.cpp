@@ -42,14 +42,8 @@ std::ostream& operator<<(std::ostream& s, const value_types& v) {
     case value_types::number:
         attr = "\"number\"";
         break;
-    case value_types::number_collection:
-        attr = "\"number_collection\"";
-        break;
     case value_types::boolean:
         attr = "\"boolean\"";
-        break;
-    case value_types::boolean_collection:
-        attr = "\"boolean_collection\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for value_types");

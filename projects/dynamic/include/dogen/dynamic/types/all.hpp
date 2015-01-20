@@ -20,7 +20,6 @@
  */
 #include "dogen/dynamic/types/aggregator.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
-#include "dogen/dynamic/types/boolean_collection.hpp"
 #include "dogen/dynamic/types/building_error.hpp"
 #include "dogen/dynamic/types/dynamic.hpp"
 #include "dogen/dynamic/types/field.hpp"
@@ -30,7 +29,6 @@
 #include "dogen/dynamic/types/merger.hpp"
 #include "dogen/dynamic/types/name.hpp"
 #include "dogen/dynamic/types/number.hpp"
-#include "dogen/dynamic/types/number_collection.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/object_extensions.hpp"
 #include "dogen/dynamic/types/registrar.hpp"

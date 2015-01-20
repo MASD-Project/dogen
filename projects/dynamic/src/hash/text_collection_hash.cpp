@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/dynamic/hash/text_collection_hash.hpp"
-#include "dogen/dynamic/hash/text_hash.hpp"
 #include "dogen/dynamic/hash/value_hash.hpp"
 
 namespace {
@@ -31,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_dynamic_text(const std::list<dogen::dynamic::text>& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -49,7 +48,7 @@ std::size_t text_collection_hasher::hash(const text_collection&v) {
 
     combine(seed, dynamic_cast<const dogen::dynamic::value&>(v));
 
-    combine(seed, hash_std_list_dogen_dynamic_text(v.content()));
+    combine(seed, hash_std_list_std_string(v.content()));
     return seed;
 }
 

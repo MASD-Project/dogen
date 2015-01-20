@@ -33,7 +33,7 @@ dogen::dynamic::field_definition create_copyright_holder() {
 
     dogen::dynamic::field_definition r;
     r.name(n);
-    r.type(dogen::dynamic::value_types::text);
+    r.type(dogen::dynamic::value_types::text_collection);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
 }
