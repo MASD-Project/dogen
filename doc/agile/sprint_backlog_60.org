@@ -16,14 +16,15 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-20 Tue 22:55]
+Clock summary at [2015-01-20 Tue 23:31]
 
-| Headline                                    | Time   |      |      |
-|---------------------------------------------+--------+------+------|
-| *Total time*                                | *0:15* |      |      |
-|---------------------------------------------+--------+------+------|
-| Active                                      |        | 0:15 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:15 |
+| Headline                                                               | Time   |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                           | *0:51* |      |      |
+|------------------------------------------------------------------------+--------+------+------|
+| Active                                                                 |        | 0:51 |      |
+| STARTED Sprint and product backlog grooming                            |        |      | 0:15 |
+| STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 0:36 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -32,6 +33,7 @@ Clock summary at [2015-01-20 Tue 22:55]
 Updates to sprint and product backlog.
 
 *** STARTED Add annotation fields and remove meta-data usage in formatters :story:
+    CLOCK: [2015-01-20 Tue 22:55]--[2015-01-20 Tue 23:31] =>  0:36
 
 Add all required field definitions for the formatters field; rename
 meta-data namespace to dynamic and re-implement factory using dynamic
@@ -114,5 +116,16 @@ cope with it being called several times.
 
 Once we are done with all of the meta-data refactoring, we need to
 update the manual.
+
+*** Add field definition description                                  :story:
+
+It would be useful to have a description of the purpose of the field
+so that we could print it to the command line.
+
+*** Add field definition group                                        :story:
+
+Fields should be grouped. This could conceivably be achieved by the
+owner, or maybe we need a high-level entity to do this
+aggregation. This is useful when printing fields out to the shell.
 
 ** Deprecated

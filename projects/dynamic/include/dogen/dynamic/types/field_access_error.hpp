@@ -18,41 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_HPP
-#define DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_FIELD_ACCESS_ERROR_HPP
+#define DOGEN_DYNAMIC_TYPES_FIELD_ACCESS_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/field.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace dynamic {
 
 /**
- * @brief Returns true if a field exists in an object.
+ * @brief An error occurred while trying to acces a field.
  */
-bool has_field(const object& o, const field_definition& fd);
+class field_access_error : public virtual std::exception, public virtual boost::exception {
+public:
+    field_access_error() = default;
+    ~field_access_error() noexcept = default;
 
-/**
- * @brief Returns a field from an object.
- *
- * @pre has_field must be true.
- */
-const field& get_field(const object& o, const field_definition& fd);
+public:
+    field_access_error(const std::string& message) : message_(message) { }
 
-/**
- * @brief Returns the content for the field, assuming it is a text field.
- *
- * @pre has_field must be true.
- * @pre Field value type must match be text.
- */
-std::string get_text_field_content(const object& o, const field_definition& fd);
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
 
 #endif
-

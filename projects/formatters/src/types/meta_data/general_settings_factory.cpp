@@ -18,9 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
+#include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/object_extensions.hpp"
+#include "dogen/formatters/types/meta_data/field_definitions.hpp"
 #include "dogen/formatters/types/meta_data/traits.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
@@ -111,6 +115,64 @@ extract_marker(const boost::property_tree::ptree& meta_data) const {
     return f.build();
 }
 
+boost::optional<licence>
+general_settings_factory::extract_licence(const dynamic::object& o) const {
+    const auto& fd(field_definitions::licence_name());
+    using namespace dynamic;
+    if (!has_field(o, fd))
+        return boost::optional<licence>();
+
+    const auto licence_name(get_text_field_content(o, fd));
+    const auto i(licences_.find(licence_name));
+    if (i == licences_.end())
+        throw_missing_item("Licence not found: ", licence_name);
+
+    licence l(i->second);
+/*    if (reader.has_key(traits::copyright_holder())) {
+        const auto copyright_holder(reader.get(traits::copyright_holder()));
+        l.copyright_holders().push_back(copyright_holder);
+    }
+*/
+    return l;
+}
+
+boost::optional<modeline>
+general_settings_factory::extract_modeline(const dynamic::object& /*o*/) const {
+    // sml::meta_data::reader reader(meta_data);
+    // if (!reader.has_key(traits::modeline_group_name()))
+    //     return boost::optional<modeline>();
+
+    // const auto name(reader.get(traits::modeline_group_name()));
+    // const auto i(modeline_groups_.find(name));
+    // if (i == modeline_groups_.end())
+    //     throw_missing_item("Modeline group not found: ", name);
+
+    // const auto modeline_group(i->second);
+    // const auto j(modeline_group.modelines().find("c++"));
+    // if (j == modeline_group.modelines().end())
+    //     throw_missing_item("Modeline not found: ", name);
+
+    // return j->second;
+    return boost::optional<modeline>();
+}
+
+std::string
+general_settings_factory::extract_marker(const dynamic::object& /*o*/) const {
+    // sml::meta_data::reader reader(meta_data);
+
+    // using cgm = traits::code_generation_marker;
+    // const std::string message(reader.get(cgm::message()));
+    // if (message.empty())
+    //     return std::string();
+
+    // const bool add_date_time(reader.is_true(cgm::add_date_time()));
+    // const bool add_warning(reader.is_true(cgm::add_warning()));
+    // code_generation_marker_factory f(add_date_time, add_warning, message);
+
+    // return f.build();
+    return std::string();
+}
+
 std::forward_list<boost::filesystem::path> general_settings_factory::
 create_directory_list(const std::string& for_whom) const {
     std::forward_list<boost::filesystem::path> r;
@@ -164,6 +226,17 @@ build(const boost::property_tree::ptree& meta_data) const {
     const auto modeline(extract_modeline(meta_data));
     const auto licence(extract_licence(meta_data));
     const auto marker(extract_marker(meta_data));
+    const annotation a(modeline, licence, marker);
+
+    const bool generate_preamble(false); // FIXME: read from meta_data
+    return general_settings(generate_preamble, a);
+}
+
+general_settings
+general_settings_factory::build(const dynamic::object& o) const {
+    const auto modeline(extract_modeline(o));
+    const auto licence(extract_licence(o));
+    const auto marker(extract_marker(o));
     const annotation a(modeline, licence, marker);
 
     const bool generate_preamble(false); // FIXME: read from meta_data

@@ -24,6 +24,7 @@
 #include "dogen/dynamic/types/building_error.hpp"
 #include "dogen/dynamic/types/dynamic.hpp"
 #include "dogen/dynamic/types/field.hpp"
+#include "dogen/dynamic/types/field_access_error.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/dynamic/types/field_factory.hpp"
 #include "dogen/dynamic/types/merger.hpp"

@@ -16,20 +16,20 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-20 Tue 22:53]
+Clock summary at [2015-01-20 Tue 23:32]
 
-| Headline                                                                 | Time   |      |      |
-|--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *9:55* |      |      |
-|--------------------------------------------------------------------------+--------+------+------|
-| Active                                                                   |        | 9:55 |      |
-| COMPLETED Sprint and product backlog grooming                            |        |      | 0:43 |
-| COMPLETED Refactor comments processing code in dia to sml                |        |      | 4:01 |
-| COMPLETED Create a class to store the field definitions                  |        |      | 0:36 |
-| COMPLETED Inject dia fields =comment= and =identity_attribute=           |        |      | 2:47 |
-| COMPLETED Determine what fields need to be injected                      |        |      | 0:09 |
-| COMPLETED Remove build number                                            |        |      | 0:05 |
-| POSTPONED Add annotation fields and remove meta-data usage in formatters |        |      | 1:34 |
+| Headline                                                                 | Time    |       |      |
+|--------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                             | *10:28* |       |      |
+|--------------------------------------------------------------------------+---------+-------+------|
+| Active                                                                   |         | 10:28 |      |
+| COMPLETED Sprint and product backlog grooming                            |         |       | 0:43 |
+| COMPLETED Refactor comments processing code in dia to sml                |         |       | 4:01 |
+| COMPLETED Create a class to store the field definitions                  |         |       | 0:36 |
+| COMPLETED Inject dia fields =comment= and =identity_attribute=           |         |       | 2:47 |
+| COMPLETED Determine what fields need to be injected                      |         |       | 0:09 |
+| COMPLETED Remove build number                                            |         |       | 0:05 |
+| POSTPONED Add annotation fields and remove meta-data usage in formatters |         |       | 2:07 |
 #+end:
 
 *** COMPLETED Sprint and product backlog grooming                     :story:
@@ -180,6 +180,8 @@ work. Remove this until we have a use case.
 
 *** POSTPONED Add annotation fields and remove meta-data usage in formatters :story:
     CLOSED: [2015-01-20 Tue 22:53]
+    CLOCK: [2015-01-15 Thu 12:10]--[2015-01-15 Thu 12:20] =>  0:10
+    CLOCK: [2015-01-14 Wed 21:23]--[2015-01-14 Wed 21:46] =>  0:23
     CLOCK: [2015-01-13 Tue 22:20]--[2015-01-13 Tue 23:54] =>  1:34
 
 Add all required field definitions for the formatters field; rename

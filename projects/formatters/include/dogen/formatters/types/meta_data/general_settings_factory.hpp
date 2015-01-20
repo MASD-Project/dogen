@@ -31,6 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
@@ -65,24 +66,40 @@ private:
      */
     void throw_missing_item(const std::string& msg, const std::string& n) const;
 
+private:
     /**
-     * @brief Extracts a licence using meta-data in the Taggable.
+     * @brief Extracts a licence from the meta-data.
      */
     boost::optional<licence> extract_licence(
         const boost::property_tree::ptree& md) const;
 
     /**
-     * @brief Extracts a modeline using meta-data in the Taggable.
+     * @brief Extracts a modeline from the meta-data.
      */
     boost::optional<modeline> extract_modeline(
         const boost::property_tree::ptree& meta_data) const;
 
     /**
-     * @brief Extracts a code generation marker using meta-data in the
-     * Taggable.
+     * @brief Extracts a code generation marker from the meta-data.
      */
     std::string extract_marker(
         const boost::property_tree::ptree& meta_data) const;
+
+private:
+    /**
+     * @brief Extracts a licence from the dynamic object.
+     */
+    boost::optional<licence> extract_licence(const dynamic::object& o) const;
+
+    /**
+     * @brief Extracts a modeline the dynamic object.
+     */
+    boost::optional<modeline> extract_modeline(const dynamic::object& o) const;
+
+    /**
+     * @brief Extracts a code generation marker the dynamic object.
+     */
+    std::string extract_marker(const dynamic::object& o) const;
 
 private:
     /**
@@ -101,11 +118,6 @@ private:
      * @brief Hydrates all the licences available in the library.
      */
     void hydrate_licences();
-
-    /**
-     * @brief Creates the code generation marker.
-     */
-    void create_marker(const boost::property_tree::ptree& meta_data);
 
 public:
     /**
@@ -128,6 +140,13 @@ public:
      * @pre load reference data must have been called.
      */
     general_settings build(const boost::property_tree::ptree& meta_data) const;
+
+    /**
+     * @brief Generates general settings from the dynamic object.
+     *
+     * @pre load reference data must have been called.
+     */
+    general_settings build(const dynamic::object& o) const;
 
 private:
     const std::forward_list<boost::filesystem::path>& data_files_directories_;
