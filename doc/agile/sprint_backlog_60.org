@@ -16,15 +16,16 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 21:03]
+Clock summary at [2015-01-21 Wed 21:33]
 
-| Headline                                                               | Time   |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *3:06* |      |      |
-|------------------------------------------------------------------------+--------+------+------|
-| Active                                                                 |        | 3:06 |      |
-| STARTED Sprint and product backlog grooming                            |        |      | 1:11 |
-| STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 1:55 |
+| Headline                                                   | Time   |      |      |
+|------------------------------------------------------------+--------+------+------|
+| *Total time*                                               | *3:34* |      |      |
+|------------------------------------------------------------+--------+------+------|
+| Active                                                     |        | 3:34 |      |
+| STARTED Sprint and product backlog grooming                |        |      | 1:11 |
+| COMPLETED Add annotation fields and remove meta-data usage |        |      | 1:55 |
+| STARTED Add field definition to odb formatters             |        |      | 0:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -55,7 +56,8 @@ but this is not available on mingw at the moment. Support has been
 32-bits too. See also: [[http://sourceforge.net/p/mingw-w64/bugs/341/][#341 Too many sections aka /bigobj replacement
 flag]].
 
-*** STARTED Add annotation fields and remove meta-data usage in formatters :story:
+*** COMPLETED Add annotation fields and remove meta-data usage        :story:
+    CLOSED: [2015-01-21 Wed 21:05]
     CLOCK: [2015-01-21 Wed 20:45]--[2015-01-21 Wed 21:02] =>  0:17
     CLOCK: [2015-01-21 Wed 20:00]--[2015-01-21 Wed 20:37] =>  0:37
     CLOCK: [2015-01-20 Tue 23:31]--[2015-01-20 Tue 23:56] =>  0:25
@@ -74,7 +76,8 @@ We need to inject:
 We also need to sort out the upper case/lower case naming of these
 fields in various diagrams, as well as the licence vs licence name.
 
-*** Add field definition to odb formatters                            :story:
+*** STARTED Add field definition to odb formatters                    :story:
+    CLOCK: [2015-01-21 Wed 21:05]--[2015-01-21 Wed 21:33] =>  0:28
 
 We need a hack in order to cope with ODB pragmas. The easiest way is
 to define the field definitions in the formatters - this is the right

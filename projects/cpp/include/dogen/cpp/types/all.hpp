@@ -82,6 +82,7 @@
 #include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/odb/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb/enricher.hpp"
+#include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
 #include "dogen/cpp/types/formatters/odb/odb.hpp"
 #include "dogen/cpp/types/formatters/odb/odb_options_formatter.hpp"

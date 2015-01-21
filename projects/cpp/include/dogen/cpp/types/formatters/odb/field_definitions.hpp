@@ -18,17 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/types/initializer.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ODB_FIELD_DEFINITIONS_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ODB_FIELD_DEFINITIONS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace odb {
 
-void initializer::initialize(registrar& r) {
-    types::initializer::initialize(r);
-    odb::initializer::initialize(r);
-}
+/**
+ * @brief Fields supported by the ODB facet.
+ */
+struct field_definitions {
+    /**
+     * @brief The pragma used by the ODB compiler.
+     */
+    static const dynamic::field_definition& odb_pragma();
+};
 
-} } }
+} } } }
+
+#endif

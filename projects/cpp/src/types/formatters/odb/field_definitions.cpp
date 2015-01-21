@@ -18,17 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/types/initializer.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
+#include "dogen/dynamic/types/scope_types.hpp"
+#include "dogen/dynamic/types/value_types.hpp"
+#include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
+
+namespace {
+
+dogen::dynamic::field_definition create_odb_pragma() {
+    dogen::dynamic::name n;
+    n.simple_name("odb_pragma");
+    n.complete_name(n.simple_name());
+
+    dogen::dynamic::field_definition r;
+    r.name(n);
+    r.type(dogen::dynamic::value_types::text_collection);
+    r.scope(dogen::dynamic::scope_types::any);
+    return r;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace odb {
 
-void initializer::initialize(registrar& r) {
-    types::initializer::initialize(r);
-    odb::initializer::initialize(r);
+const dynamic::field_definition& field_definitions::odb_pragma() {
+    static auto r(create_odb_pragma());
+    return r;
 }
 
-} } }
+} } } }

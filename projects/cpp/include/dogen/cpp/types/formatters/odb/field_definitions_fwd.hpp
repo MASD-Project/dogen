@@ -18,17 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/types/initializer.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ODB_FIELD_DEFINITIONS_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ODB_FIELD_DEFINITIONS_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace odb {
 
-void initializer::initialize(registrar& r) {
-    types::initializer::initialize(r);
-    odb::initializer::initialize(r);
-}
+class field_definitions;
 
-} } }
+} } } }
+
+#endif
