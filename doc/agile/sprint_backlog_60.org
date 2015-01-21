@@ -17,16 +17,17 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 23:13]
+Clock summary at [2015-01-21 Wed 23:22]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *4:57* |      |      |
+| *Total time*                                               | *5:02* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 4:57 |      |
+| Active                                                     |        | 5:02 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:17 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
+| COMPLETED Consider defaulting doxygen docs to false        |        |      | 0:05 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:16 |
 #+end:
 
@@ -92,6 +93,15 @@ to define the field definitions in the formatters - this is the right
 way at any rate - but then do some kind of hack to extract the field
 from the meta-data. For example we could call the field definition
 directly from the =cpp_formatters= model.
+
+*** COMPLETED Consider defaulting doxygen docs to false               :story:
+    CLOSED: [2015-01-21 Wed 23:21]
+    CLOCK: [2015-01-21 Wed 23:16]--[2015-01-21 Wed 23:21] =>  0:05
+
+At present we do build all quite a lot, but never really look at the
+docs. We should not have to pay the cost of doxygenation. It would be
+better to default it to false even in the presence of the doxygen
+binary.
 
 *** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
     CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
@@ -180,13 +190,6 @@ so that we could print it to the command line.
 Fields should be grouped. This could conceivably be achieved by the
 owner, or maybe we need a high-level entity to do this
 aggregation. This is useful when printing fields out to the shell.
-
-*** Consider defaulting doxygen docs to false                         :story:
-
-At present we do build all quite a lot, but never really look at the
-docs. We should not have to pay the cost of doxygenation. It would be
-better to default it to false even in the presence of the doxygen
-binary.
 
 *** Rename ODB parameters                                             :story:
 

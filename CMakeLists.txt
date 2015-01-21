@@ -41,6 +41,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 
 # options
 option(WITH_DEBUG "Build the project with debug symbols" off)
+option(WITH_DOXYGEN "Build the project documentation" off)
 option(WITH_PROFILING "Build the project with profiling support" off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 
@@ -230,40 +231,46 @@ message(STATUS "Product version: ${DOGEN_VERSION}")
 #
 # doxygen
 #
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-    # input directories (used in doxygen template)
-    set(DOGEN_CPP_CODE_DIR ${CMAKE_SOURCE_DIR}/projects)
-    set(DOGEN_DOX_DIR ${stage_doxygen_dir}/dox)
+if (WITH_DOXYGEN)
+    find_package(Doxygen)
 
-    # output directory (used in doxygen template)
-    set(DOGEN_DOXYGEN_DIR ${stage_doxygen_dir})
+    if(DOXYGEN_FOUND)
+        message(STATUS "Doxygen enabled - generating API documentation")
+        # input directories (used in doxygen template)
+        set(DOGEN_CPP_CODE_DIR ${CMAKE_SOURCE_DIR}/projects)
+        set(DOGEN_DOX_DIR ${stage_doxygen_dir}/dox)
 
-    # input file
-    set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
-    add_custom_target(doxy ALL
-        COMMAND rm -rf ${stage_doxygen_dir}/html
-        COMMAND ${DOXYGEN_EXECUTABLE} ${doxy_file}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Generating API documentation with Doxygen" VERBATIM)
+        # output directory (used in doxygen template)
+        set(DOGEN_DOXYGEN_DIR ${stage_doxygen_dir})
 
-    set(target_dir "/usr/share/cdash/doxygen/dogen")
-    add_custom_target(deploy_doxy
-        COMMAND rm -rf ${target_dir}.new
-        COMMAND mkdir ${target_dir}.new
-        COMMAND cp -r ${stage_dir}/doxygen/html ${target_dir}.new/
-        COMMAND rm -rf ${target_dir}
-        COMMAND mv ${target_dir}.new ${target_dir}
-        )
-    add_dependencies(deploy_doxy doxy)
+        # input file
+        set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
+        add_custom_target(doxy ALL
+            COMMAND rm -rf ${stage_doxygen_dir}/html
+            COMMAND ${DOXYGEN_EXECUTABLE} ${doxy_file}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Generating API documentation with Doxygen" VERBATIM)
 
-    install(
-        DIRECTORY ${stage_doxygen_dir}/html/
-        DESTINATION share/doc/${DOGEN_VERSION}/
-        COMPONENT documentation
-        )
+        set(target_dir "/usr/share/cdash/doxygen/dogen")
+        add_custom_target(deploy_doxy
+            COMMAND rm -rf ${target_dir}.new
+            COMMAND mkdir ${target_dir}.new
+            COMMAND cp -r ${stage_dir}/doxygen/html ${target_dir}.new/
+            COMMAND rm -rf ${target_dir}
+            COMMAND mv ${target_dir}.new ${target_dir}
+            )
+        add_dependencies(deploy_doxy doxy)
+
+        install(
+            DIRECTORY ${stage_doxygen_dir}/html/
+            DESTINATION share/doc/${DOGEN_VERSION}/
+            COMPONENT documentation
+            )
+    else()
+        message(STATUS "Could not find Doxygen.")
+    endif()
 else()
-    message(STATUS "Not generating API documentation.")
+    message(STATUS "Doxygen not enabled (set WITH_DOXYGEN=on).")
 endif()
 
 #
