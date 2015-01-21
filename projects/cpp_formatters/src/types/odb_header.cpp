@@ -42,7 +42,7 @@ auto lg(logger_factory("cpp_formatters.odb_header"));
 
 const std::string std_ns("std");
 const std::string odb_pragma("#pragma db");
-const std::string odb_key("ODB_PRAGMA");
+const std::string odb_key("odb_pragma");
 
 const std::string missing_class_info("Class info is empty");
 const std::string missing_enum_info("Enumeration info is empty");

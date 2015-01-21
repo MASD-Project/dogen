@@ -87,8 +87,8 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Simple value class with no primary keys, etc.
-#DOGEN ODB_PRAGMA=no_id
-#DOGEN ODB_PRAGMA=schema("kitanda")#</dia:string>
+#DOGEN odb_pragma=no_id
+#DOGEN odb_pragma=schema("kitanda")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -291,8 +291,8 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN ODB_PRAGMA=no_id
-#DOGEN ODB_PRAGMA=schema("kitanda")#</dia:string>
+        <dia:string>##DOGEN odb_pragma=no_id
+#DOGEN odb_pragma=schema("kitanda")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -426,7 +426,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN ODB_PRAGMA=schema("kitanda")#</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("kitanda")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -518,7 +518,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN ODB_PRAGMA=id#</dia:string>
+            <dia:string>##DOGEN odb_pragma=id#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -583,8 +583,8 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN ODB_PRAGMA=schema("kitanda")
-#DOGEN ODB_PRAGMA=no_id#</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("kitanda")
+#DOGEN odb_pragma=no_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -812,7 +812,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN ODB_PRAGMA=schema("kitanda")#</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("kitanda")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -904,7 +904,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN ODB_PRAGMA=id#</dia:string>
+            <dia:string>##DOGEN odb_pragma=id#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

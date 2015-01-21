@@ -23,7 +23,7 @@
 namespace dogen {
 namespace sml {
 
-const std::string tags::odb_pragma("ODB_PRAGMA");
+const std::string tags::odb_pragma("odb_pragma");
 
 const std::string tags::original_parent_name("original_parent_name");
 const std::string tags::is_original_parent_visitable(

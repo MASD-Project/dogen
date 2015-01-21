@@ -229,9 +229,9 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN dia.comment=true
-#DOGEN LICENCE=gpl_v2
-#DOGEN MODELINE_GROUP=emacs
-#DOGEN COPYRIGHT=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
+#DOGEN licence=gpl_v2
+#DOGEN modeline_group=emacs
+#DOGEN copyright=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

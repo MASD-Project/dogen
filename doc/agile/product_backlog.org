@@ -1769,15 +1769,6 @@ For examples on how to use the C++ API see the tutorial:
 
 https://github.com/mongodb/mongo-cxx-driver/wiki/Tutorial
 
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
-
 *** Add targets to output manual in downloadable formats              :story:
 
 #+begin_quote
