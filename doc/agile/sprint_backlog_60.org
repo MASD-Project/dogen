@@ -16,18 +16,19 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-20 Tue 23:31]
+Clock summary at [2015-01-21 Wed 00:02]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *0:51* |      |      |
+| *Total time*                                                           | *1:22* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Active                                                                 |        | 0:51 |      |
-| STARTED Sprint and product backlog grooming                            |        |      | 0:15 |
-| STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 0:36 |
+| Active                                                                 |        | 1:22 |      |
+| STARTED Sprint and product backlog grooming                            |        |      | 0:21 |
+| STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 1:01 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-20 Tue 23:56]--[2015-01-21 Wed 00:02] =>  0:06
     CLOCK: [2015-01-20 Tue 22:40]--[2015-01-20 Tue 22:55] =>  0:15
 
 Updates to sprint and product backlog.
@@ -128,5 +129,12 @@ so that we could print it to the command line.
 Fields should be grouped. This could conceivably be achieved by the
 owner, or maybe we need a high-level entity to do this
 aggregation. This is useful when printing fields out to the shell.
+
+*** Consider defaulting doxygen docs to false                         :story:
+
+At present we do build all quite a lot, but never really look at the
+docs. We should not have to pay the cost of doxygenation. It would be
+better to default it to false even in the presence of the doxygen
+binary.
 
 ** Deprecated
