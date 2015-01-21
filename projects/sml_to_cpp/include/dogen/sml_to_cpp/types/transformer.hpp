@@ -67,6 +67,16 @@ public:
 
 private:
     /**
+     * @brief Given a dynamic object, generates the opaque parameters.
+     *
+     * @note: temporary hack for now whilst we plug in the new dynamic
+     * API.
+     */
+    std::list<std::pair<std::string, std::string> >
+    obtain_opaque_parameters(const dynamic::object& o) const;
+
+private:
+    /**
      * @brief Converts an SML qname into a C++ qualified name.
      */
     std::string to_qualified_name(const sml::qname& qn) const;

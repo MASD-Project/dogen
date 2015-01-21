@@ -7,7 +7,8 @@
 
 ** Mission
 
-Implement dynamic and start making use of it in SML.
+Replace all uses of meta-data with dynamic across the entire code
+base.
 
 ** Retrospective
 
@@ -16,16 +17,16 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 21:56]
+Clock summary at [2015-01-21 Wed 22:51]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *3:54* |      |      |
+| *Total time*                                               | *4:35* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 3:54 |      |
+| Active                                                     |        | 4:35 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:11 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
-| STARTED Add field definition to odb formatters             |        |      | 0:28 |
+| COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -78,7 +79,10 @@ We also need to sort out the upper case/lower case naming of these
 fields in various diagrams, as well as the licence vs licence name,
 etc.
 
-*** STARTED Add field definition to odb formatters                    :story:
+*** COMPLETED Add field definition to odb formatters                  :story:
+    CLOSED: [2015-01-21 Wed 22:45]
+    CLOCK: [2015-01-21 Wed 22:45]--[2015-01-21 Wed 22:51] =>  0:06
+    CLOCK: [2015-01-21 Wed 22:10]--[2015-01-21 Wed 22:45] =>  0:35
     CLOCK: [2015-01-21 Wed 21:05]--[2015-01-21 Wed 21:33] =>  0:28
 
 We need a hack in order to cope with ODB pragmas. The easiest way is
@@ -87,30 +91,21 @@ way at any rate - but then do some kind of hack to extract the field
 from the meta-data. For example we could call the field definition
 directly from the =cpp_formatters= model.
 
-*** Remove copyright notices from licence hydrator                    :story:
-
-At present there seems to be no use case for adding a copyright notice
-when hydrating a licence; these only make sense in the context of a
-model. We should remove this.
-
 *** Inject unit test field definitions                                :story:
 
 We need to inject fields like =KEY= etc used by unit tests in the unit
 tests themselves.
+
+*** Update mock factory to generate dynamic fields                    :story:
+
+At present the mock factory is generating meta-data fields. We need it
+to generate dynamic fields.
 
 *** Remove optionality from =obtain_field_definition=                 :story:
 
 In order to progress in stages we made fields optional in dynamic
 workflow; if a definition is not found we skip it. We need to remove
 this once all field definitions have been added.
-
-*** Rename =dia.comment=                                              :story:
-
-This field hasn't got a sensible name. We need to continue thinking
-about the right name for this - as we have already started doing with
-processed comment; =applicable_to_parent_object= is not quite the
-right name but it is moving on the right direction. Once we settle on
-a good name we need to rename all usages of =dia.comment=.
 
 *** Replace uses of meta-data with dynamic object                     :story:
 
@@ -193,5 +188,19 @@ At present we use the following form:
 
 We need to use the new naming style =cpp.odb.pragma=. We also need to
 rename the opaque_parameters to reflect ODB specific data.
+
+*** Rename =dia.comment=                                              :story:
+
+This field hasn't got a sensible name. We need to continue thinking
+about the right name for this - as we have already started doing with
+processed comment; =applicable_to_parent_object= is not quite the
+right name but it is moving on the right direction. Once we settle on
+a good name we need to rename all usages of =dia.comment=.
+
+*** Remove copyright notices from licence hydrator                    :story:
+
+At present there seems to be no use case for adding a copyright notice
+when hydrating a licence; these only make sense in the context of a
+model. We should remove this.
 
 ** Deprecated

@@ -26,7 +26,8 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data/reader.hpp"
+#include "dogen/dynamic/types/object_extensions.hpp"
+#include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -191,6 +192,23 @@ namespace sml_to_cpp {
 transformer::transformer(const sml::model& m, context& c)
     : model_(m), context_(c) { }
 
+std::list<std::pair<std::string, std::string> >
+transformer::obtain_opaque_parameters(const dynamic::object& o) const {
+    std::list<std::pair<std::string, std::string> > r;
+
+    using namespace dynamic;
+    using fd = cpp::formatters::odb::field_definitions;
+    if (!has_field(o, fd::odb_pragma()))
+        return r;
+
+    const auto sn(fd::odb_pragma().name().simple_name());
+    const auto tc(get_text_collection_content(o, fd::odb_pragma()));
+    for (const auto& e : tc)
+        r.push_back(std::make_pair(sn, e));
+
+    return r;
+}
+
 std::string transformer::to_qualified_name(const sml::qname& qn) const {
     std::list<std::string> l(to_namespace_list(qn));
     l.push_back(qn.simple_name());
@@ -329,8 +347,7 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
 
     nti.complete_name(complete_name);
     pi.type(nti);
-    sml::meta_data::reader reader(p.meta_data());
-    pi.opaque_parameters(reader.odb_pragma());
+    pi.opaque_parameters(obtain_opaque_parameters(p.extensions()));
 
     return std::make_tuple(pi,
         has_primitive_properties,
@@ -392,9 +409,7 @@ transformer::to_class_info(const sml::object& o) const {
     r->is_parent(o.is_parent());
     r->generation_type(o.generation_type());
     r->class_type(cpp::class_types::user_defined);
-
-    sml::meta_data::reader reader(o.meta_data());
-    r->opaque_parameters(reader.odb_pragma());
+    r->opaque_parameters(obtain_opaque_parameters(o.extensions()));
 
     auto i(o.relationships().find(sml::relationship_types::parents));
     if (i != o.relationships().end()) {
