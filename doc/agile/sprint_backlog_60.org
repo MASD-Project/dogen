@@ -17,20 +17,21 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 23:07]
+Clock summary at [2015-01-21 Wed 23:13]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *4:51* |      |      |
+| *Total time*                                               | *4:57* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 4:51 |      |
-| STARTED Sprint and product backlog grooming                |        |      | 1:11 |
+| Active                                                     |        | 4:57 |      |
+| STARTED Sprint and product backlog grooming                |        |      | 1:17 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:16 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-21 Wed 23:07]--[2015-01-21 Wed 23:13] =>  0:06
     CLOCK: [2015-01-21 Wed 19:10]--[2015-01-21 Wed 20:00] =>  0:50
     CLOCK: [2015-01-20 Tue 23:56]--[2015-01-21 Wed 00:02] =>  0:06
     CLOCK: [2015-01-20 Tue 22:40]--[2015-01-20 Tue 22:55] =>  0:15
@@ -99,6 +100,16 @@ We have created a number of "meta-data extension" namespaces, which is
 where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
+*** Create field definitions for all c++ fields                       :story:
+
+We need to go through all of the fields used by the C++ factories and
+create definitions for them.
+
+*** Replace uses of meta-data with dynamic object                     :story:
+
+Find all places where we are using ptree and use the dynamic object
+instead. This should be mainly in meta-data factories.
+
 *** Inject unit test field definitions                                :story:
 
 We need to inject fields like =KEY= etc used by unit tests in the unit
@@ -114,11 +125,6 @@ to generate dynamic fields.
 In order to progress in stages we made fields optional in dynamic
 workflow; if a definition is not found we skip it. We need to remove
 this once all field definitions have been added.
-
-*** Replace uses of meta-data with dynamic object                     :story:
-
-Find all places where we are using ptree and use the dynamic object
-instead. This should be mainly in meta-data factories.
 
 *** Remove all references to =ptree=                                  :story:
 
