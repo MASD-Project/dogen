@@ -92,7 +92,7 @@ workflow::create_general_settings_activity(const sml::model& m) const {
             BOOST_THROW_EXCEPTION(workflow_error(
                     multiple_generatable_model_modules + n));
         }
-        r = f.build(mod.meta_data());
+        r = f.build(mod.extensions());
     }
 
     if (!r) {

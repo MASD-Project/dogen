@@ -16,15 +16,15 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 00:02]
+Clock summary at [2015-01-21 Wed 20:37]
 
 | Headline                                                               | Time   |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                           | *1:22* |      |      |
+| *Total time*                                                           | *2:49* |      |      |
 |------------------------------------------------------------------------+--------+------+------|
-| Active                                                                 |        | 1:22 |      |
-| STARTED Sprint and product backlog grooming                            |        |      | 0:21 |
-| STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 1:01 |
+| Active                                                                 |        | 2:49 |      |
+| STARTED Sprint and product backlog grooming                            |        |      | 1:11 |
+| STARTED Add annotation fields and remove meta-data usage in formatters |        |      | 1:38 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -56,6 +56,7 @@ but this is not available on mingw at the moment. Support has been
 flag]].
 
 *** STARTED Add annotation fields and remove meta-data usage in formatters :story:
+    CLOCK: [2015-01-21 Wed 20:00]--[2015-01-21 Wed 20:37] =>  0:37
     CLOCK: [2015-01-20 Tue 23:31]--[2015-01-20 Tue 23:56] =>  0:25
     CLOCK: [2015-01-20 Tue 22:55]--[2015-01-20 Tue 23:31] =>  0:36
 

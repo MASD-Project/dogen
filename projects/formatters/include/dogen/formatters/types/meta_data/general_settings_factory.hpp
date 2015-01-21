@@ -30,7 +30,6 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
@@ -65,25 +64,6 @@ private:
      * @brief Throws an exception due to a missing item.
      */
     void throw_missing_item(const std::string& msg, const std::string& n) const;
-
-private:
-    /**
-     * @brief Extracts a licence from the meta-data.
-     */
-    boost::optional<licence> extract_licence(
-        const boost::property_tree::ptree& md) const;
-
-    /**
-     * @brief Extracts a modeline from the meta-data.
-     */
-    boost::optional<modeline> extract_modeline(
-        const boost::property_tree::ptree& meta_data) const;
-
-    /**
-     * @brief Extracts a code generation marker from the meta-data.
-     */
-    std::string extract_marker(
-        const boost::property_tree::ptree& meta_data) const;
 
 private:
     /**
@@ -133,13 +113,6 @@ public:
      * system.
      */
     void load_reference_data();
-
-    /**
-     * @brief Generates general settings from the meta-data.
-     *
-     * @pre load reference data must have been called.
-     */
-    general_settings build(const boost::property_tree::ptree& meta_data) const;
 
     /**
      * @brief Generates general settings from the dynamic object.

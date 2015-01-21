@@ -64,6 +64,15 @@ std::string get_text_content(const object& o, const field_definition& fd);
 std::list<std::string>
 get_text_collection_content(const object& o, const field_definition& fd);
 
+/**
+ * @brief Returns the content for the field, assuming it is a boolean
+ * field.
+ *
+ * @pre has_field must be true.
+ * @pre Field value type must be boolean.
+ */
+bool get_boolean_content(const object& o, const field_definition& fd);
+
 } }
 
 #endif
