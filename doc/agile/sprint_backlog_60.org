@@ -17,14 +17,14 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 23:22]
+Clock summary at [2015-01-21 Wed 23:37]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *5:02* |      |      |
+| *Total time*                                               | *5:08* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 5:02 |      |
-| STARTED Sprint and product backlog grooming                |        |      | 1:17 |
+| Active                                                     |        | 5:08 |      |
+| STARTED Sprint and product backlog grooming                |        |      | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |        |      | 0:05 |
@@ -32,6 +32,7 @@ Clock summary at [2015-01-21 Wed 23:22]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-21 Wed 23:30]--[2015-01-21 Wed 23:36] =>  0:06
     CLOCK: [2015-01-21 Wed 23:07]--[2015-01-21 Wed 23:13] =>  0:06
     CLOCK: [2015-01-21 Wed 19:10]--[2015-01-21 Wed 20:00] =>  0:50
     CLOCK: [2015-01-20 Tue 23:56]--[2015-01-21 Wed 00:02] =>  0:06
@@ -123,12 +124,7 @@ instead. This should be mainly in meta-data factories.
 *** Inject unit test field definitions                                :story:
 
 We need to inject fields like =KEY= etc used by unit tests in the unit
-tests themselves.
-
-*** Update mock factory to generate dynamic fields                    :story:
-
-At present the mock factory is generating meta-data fields. We need it
-to generate dynamic fields.
+tests themselves. Take the opportunity to lower-case them.
 
 *** Remove optionality from =obtain_field_definition=                 :story:
 
@@ -136,10 +132,34 @@ In order to progress in stages we made fields optional in dynamic
 workflow; if a definition is not found we skip it. We need to remove
 this once all field definitions have been added.
 
+*** Remove uses of meta-data in tests                                 :story:
+
+Where we are checking for the presence of meta-data fields, we need to
+look for dynamic fields instead.
+
+*** Update mock factory to generate dynamic fields                    :story:
+
+At present the mock factory is generating meta-data fields. We need it
+to generate dynamic fields. We should hard-code the field names using
+local constants - and not add dependencies on the different models due
+to field definitions.
+
 *** Remove all references to =ptree=                                  :story:
 
 Delete reader and writer classes and remove meta-data from
 =Extensible=.
+
+*** Remove dependency of writer on tags                               :story:
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
+*** Delete tags class in SML                                          :story:
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
+Can only be done once we delete writer and reader.
 
 *** Add merger to dynamic                                             :story:
 
@@ -157,18 +177,6 @@ We need an extra activity in the SML workflow that makes use of the
 
 *Note*: we still need to prove the use case; it may be that we do not
 need merging at all.
-
-*** Remove dependency of writer on tags                               :story:
-
-We seem to be using the tags to detect containers. We need to get rid
-of this dependency.
-
-*** Delete tags class in SML                                          :story:
-
-This class does not make sense any more as each model will be
-responsible for their own tags.
-
-Can only be done once we delete writer and reader.
 
 *** Protect against double-initialisation                             :story:
 
