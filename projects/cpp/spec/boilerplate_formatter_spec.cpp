@@ -105,7 +105,7 @@ const std::string licence_no_text(R"(/* -*- a_field: a_value -*-
  */
 )");
 
-const std::string licence_no_holders(R"(/* -*- a_field: a_value -*-
+const std::string licence_no_copyright_notices(R"(/* -*- a_field: a_value -*-
  *
  * this is a marker
  *
@@ -229,9 +229,9 @@ mock_modeline(const dogen::formatters::modeline_locations l) {
 dogen::formatters::licence mock_licence(const bool multiline = false) {
     dogen::formatters::licence r;
 
-    r.copyright_holders().push_back("a_holder");
+    r.copyright_notices().push_back("a_holder");
     if (multiline)
-        r.copyright_holders().push_back("another_holder");
+        r.copyright_notices().push_back("another_holder");
 
     if (multiline) {
         std::ostringstream s;
@@ -371,7 +371,7 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
 
     const auto m(mock_modeline(modeline_locations::top));
     licence l;
-    l.copyright_holders().push_back("a_holder");
+    l.copyright_notices().push_back("a_holder");
     const annotation a(m, l, marker);
 
     std::ostringstream s;
@@ -387,8 +387,8 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 
-BOOST_AUTO_TEST_CASE(licence_with_text_but_no_holders_is_formatted_correctly) {
-    SETUP_TEST_LOG_SOURCE("licence_with_text_but_no_holders_is_formatted_correctly");
+BOOST_AUTO_TEST_CASE(licence_with_text_but_no_copyright_notices_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("licence_with_text_but_no_copyright_notices_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
     const auto m(mock_modeline(modeline_locations::top));
@@ -405,7 +405,8 @@ BOOST_AUTO_TEST_CASE(licence_with_text_but_no_holders_is_formatted_correctly) {
     f.format_begin(fo, a, empty_includes, empty_path);
     f.format_end(fo, a, empty_path);
     const auto r(s.str());
-    BOOST_CHECK(asserter::assert_equals_marker(licence_no_holders, r));
+    BOOST_CHECK(
+        asserter::assert_equals_marker(licence_no_copyright_notices, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
 

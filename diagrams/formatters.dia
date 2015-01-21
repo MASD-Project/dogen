@@ -396,7 +396,7 @@ separator is @e ;.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#copyright_holders#</dia:string>
+            <dia:string>#copyright_notices#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -405,7 +405,7 @@ separator is @e ;.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All holders of copyright for the current file and associated period.
+            <dia:string>#All copyright notices for the current file.
 
 A Copyright holder is a pair of name and email address.#</dia:string>
           </dia:attribute>
@@ -633,7 +633,7 @@ A Copyright holder is a pair of name and email address.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#copyright_holders#</dia:string>
+                <dia:string>#copyright_notices#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::list&lt;std::string&gt;&amp;#</dia:string>
@@ -6099,7 +6099,7 @@ then make use of it.
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#copyright_holder#</dia:string>
+            <dia:string>#copyright_notice#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>

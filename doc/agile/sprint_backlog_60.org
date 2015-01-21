@@ -16,15 +16,15 @@ Implement dynamic and start making use of it in SML.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 21:33]
+Clock summary at [2015-01-21 Wed 21:56]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *3:34* |      |      |
+| *Total time*                                               | *3:54* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 3:34 |      |
+| Active                                                     |        | 3:54 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:11 |
-| COMPLETED Add annotation fields and remove meta-data usage |        |      | 1:55 |
+| COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | STARTED Add field definition to odb formatters             |        |      | 0:28 |
 #+end:
 
@@ -58,6 +58,7 @@ flag]].
 
 *** COMPLETED Add annotation fields and remove meta-data usage        :story:
     CLOSED: [2015-01-21 Wed 21:05]
+    CLOCK: [2015-01-21 Wed 21:36]--[2015-01-21 Wed 21:56] =>  0:20
     CLOCK: [2015-01-21 Wed 20:45]--[2015-01-21 Wed 21:02] =>  0:17
     CLOCK: [2015-01-21 Wed 20:00]--[2015-01-21 Wed 20:37] =>  0:37
     CLOCK: [2015-01-20 Tue 23:31]--[2015-01-20 Tue 23:56] =>  0:25
@@ -74,7 +75,8 @@ We need to inject:
 - modeline_group
 
 We also need to sort out the upper case/lower case naming of these
-fields in various diagrams, as well as the licence vs licence name.
+fields in various diagrams, as well as the licence vs licence name,
+etc.
 
 *** STARTED Add field definition to odb formatters                    :story:
     CLOCK: [2015-01-21 Wed 21:05]--[2015-01-21 Wed 21:33] =>  0:28
@@ -84,6 +86,12 @@ to define the field definitions in the formatters - this is the right
 way at any rate - but then do some kind of hack to extract the field
 from the meta-data. For example we could call the field definition
 directly from the =cpp_formatters= model.
+
+*** Remove copyright notices from licence hydrator                    :story:
+
+At present there seems to be no use case for adding a copyright notice
+when hydrating a licence; these only make sense in the context of a
+model. We should remove this.
 
 *** Inject unit test field definitions                                :story:
 

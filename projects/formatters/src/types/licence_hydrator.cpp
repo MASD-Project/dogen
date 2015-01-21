@@ -25,13 +25,13 @@ namespace dogen {
 namespace formatters {
 
 licence_hydrator::
-licence_hydrator(const std::list<std::string>& copyright_holders)
-    : copyright_holders_(copyright_holders) { }
+licence_hydrator(const std::list<std::string>& copyright_notices)
+    : copyright_notices_(copyright_notices) { }
 
 licence_hydrator::value_type licence_hydrator::hydrate(std::istream& s) const {
     value_type r;
     r.text(dogen::utility::filesystem::read_file_content(s));
-    r.copyright_holders(copyright_holders_);
+    r.copyright_notices(copyright_notices_);
     return r;
 }
 

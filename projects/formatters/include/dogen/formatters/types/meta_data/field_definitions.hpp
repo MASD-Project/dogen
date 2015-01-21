@@ -36,12 +36,12 @@ namespace meta_data {
  */
 struct field_definitions {
     /**
-     * @brief Key used to denote copyright holders.
+     * @brief Key used to denote copyright notices.
      *
      * It is expected to be repeated in a model; order is kept as
      * provided by user.
      */
-    static const dynamic::field_definition& copyright_holder();
+    static const dynamic::field_definition& copyright_notices();
 
     /**
      * @brief Name of the legal licence to use.

@@ -45,7 +45,7 @@ public:
 
 public:
     licence(
-        const std::list<std::string>& copyright_holders,
+        const std::list<std::string>& copyright_notices,
         const std::string& text);
 
 private:
@@ -57,15 +57,15 @@ private:
 
 public:
     /**
-     * @brief All holders of copyright for the current file and associated period.
+     * @brief All copyright notices for the current file.
      *
      * A Copyright holder is a pair of name and email address.
      */
     /**@{*/
-    const std::list<std::string>& copyright_holders() const;
-    std::list<std::string>& copyright_holders();
-    void copyright_holders(const std::list<std::string>& v);
-    void copyright_holders(const std::list<std::string>&& v);
+    const std::list<std::string>& copyright_notices() const;
+    std::list<std::string>& copyright_notices();
+    void copyright_notices(const std::list<std::string>& v);
+    void copyright_notices(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -89,7 +89,7 @@ public:
     licence& operator=(licence other);
 
 private:
-    std::list<std::string> copyright_holders_;
+    std::list<std::string> copyright_notices_;
     std::string text_;
 };
 

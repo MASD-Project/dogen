@@ -1106,9 +1106,9 @@
 															<which>6</which>
 															<value>
 																<value>##DOGEN dia.comment=true
-#DOGEN licence=gpl_v2
-#DOGEN modeline_group=emacs
-#DOGEN copyright=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</value>
+#DOGEN licence_name=gpl_v2
+#DOGEN modeline_group_name=emacs
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</value>
 															</value>
 														</item>
 													</values>

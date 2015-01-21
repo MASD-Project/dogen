@@ -50,7 +50,7 @@ namespace formatters {
 std::ostream& operator<<(std::ostream& s, const licence& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::licence\"" << ", "
-      << "\"copyright_holders\": " << v.copyright_holders() << ", "
+      << "\"copyright_notices\": " << v.copyright_notices() << ", "
       << "\"text\": " << "\"" << tidy_up_string(v.text()) << "\""
       << " }";
     return(s);

@@ -66,8 +66,8 @@ const std::string generate_preamble_key("generate_preamble");
 const std::string code_generation_marker_message_key(
     "code_generation_marker.message");
 const std::string code_generation_marker_message_value("sample message");
-const std::string copyright_holders_key("copyright_holders");
-const std::string copyright_holders_value(
+const std::string copyright_notices_key("copyright_notices");
+const std::string copyright_notices_value(
     "Copyright (C) 2012 Person <name@company.co.uk>");
 
 const std::string header_extension(".hpp");
@@ -386,7 +386,7 @@ void add_test_tags(boost::property_tree::ptree& meta_data,
         boost_serialization_forward_declaration_filename(qn));
 
     writer.add(licence_name_key, licence_name_value);
-    writer.add(copyright_holders_key, copyright_holders_value);
+    writer.add(copyright_notices_key, copyright_notices_value);
     writer.add(modeline_group_name_key, modeline_group_name_value);
     writer.add(code_generation_marker_message_key,
         code_generation_marker_message_value);

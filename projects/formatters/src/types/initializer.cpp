@@ -29,7 +29,7 @@ void initializer::initialize() {
     auto& reg(dynamic::workflow::registrar());
 
     using meta_data::field_definitions;
-    reg.register_field_definition(field_definitions::copyright_holder());
+    reg.register_field_definition(field_definitions::copyright_notices());
     reg.register_field_definition(field_definitions::licence_name());
     reg.register_field_definition(field_definitions::modeline_group_name());
     reg.register_field_definition(field_definitions::generate_preamble());

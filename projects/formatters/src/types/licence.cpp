@@ -24,19 +24,19 @@ namespace dogen {
 namespace formatters {
 
 licence::licence(
-    const std::list<std::string>& copyright_holders,
+    const std::list<std::string>& copyright_notices,
     const std::string& text)
-    : copyright_holders_(copyright_holders),
+    : copyright_notices_(copyright_notices),
       text_(text) { }
 
 void licence::swap(licence& other) noexcept {
     using std::swap;
-    swap(copyright_holders_, other.copyright_holders_);
+    swap(copyright_notices_, other.copyright_notices_);
     swap(text_, other.text_);
 }
 
 bool licence::operator==(const licence& rhs) const {
-    return copyright_holders_ == rhs.copyright_holders_ &&
+    return copyright_notices_ == rhs.copyright_notices_ &&
         text_ == rhs.text_;
 }
 
@@ -46,20 +46,20 @@ licence& licence::operator=(licence other) {
     return *this;
 }
 
-const std::list<std::string>& licence::copyright_holders() const {
-    return copyright_holders_;
+const std::list<std::string>& licence::copyright_notices() const {
+    return copyright_notices_;
 }
 
-std::list<std::string>& licence::copyright_holders() {
-    return copyright_holders_;
+std::list<std::string>& licence::copyright_notices() {
+    return copyright_notices_;
 }
 
-void licence::copyright_holders(const std::list<std::string>& v) {
-    copyright_holders_ = v;
+void licence::copyright_notices(const std::list<std::string>& v) {
+    copyright_notices_ = v;
 }
 
-void licence::copyright_holders(const std::list<std::string>&& v) {
-    copyright_holders_ = std::move(v);
+void licence::copyright_notices(const std::list<std::string>&& v) {
+    copyright_notices_ = std::move(v);
 }
 
 const std::string& licence::text() const {

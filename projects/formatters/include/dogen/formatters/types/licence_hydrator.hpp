@@ -51,10 +51,10 @@ public:
      *
      * Initialises the hydrator.
      *
-     * @param copyright_holders holders to apply to every licence
-     * hydrated.
+     * @param copyright_notices copyright notices to apply to hydrated
+     * licences.
      */
-    explicit licence_hydrator(const std::list<std::string>& copyright_holders);
+    explicit licence_hydrator(const std::list<std::string>& copyright_notices);
 
     /**
      * @brief Hydrate a licence based on the contents of the stream.
@@ -62,7 +62,7 @@ public:
     value_type hydrate(std::istream& s) const;
 
 private:
-    const std::list<std::string>& copyright_holders_;
+    const std::list<std::string>& copyright_notices_;
 };
 
 } }

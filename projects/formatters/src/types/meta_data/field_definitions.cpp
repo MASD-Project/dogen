@@ -24,11 +24,9 @@
 
 namespace {
 
-dogen::dynamic::field_definition create_copyright_holder() {
+dogen::dynamic::field_definition create_copyright_notices() {
     dogen::dynamic::name n;
-    // n.simple_name("copyright_holder");
-    // FIXME: hack to match existing definitions
-    n.simple_name("copyright");
+    n.simple_name("copyright_notice");
     n.complete_name(n.simple_name());
 
     dogen::dynamic::field_definition r;
@@ -40,9 +38,7 @@ dogen::dynamic::field_definition create_copyright_holder() {
 
 dogen::dynamic::field_definition create_licence_name() {
     dogen::dynamic::name n;
-    // n.simple_name("licence_name");
-    // FIXME: hack to match existing definitions
-    n.simple_name("licence");
+    n.simple_name("licence_name");
     n.complete_name(n.simple_name());
 
     dogen::dynamic::field_definition r;
@@ -54,9 +50,7 @@ dogen::dynamic::field_definition create_licence_name() {
 
 dogen::dynamic::field_definition create_modeline_group_name() {
     dogen::dynamic::name n;
-    // n.simple_name("modeline_group_name");
-    // FIXME: hack to match existing definitions
-    n.simple_name("modeline_group");
+    n.simple_name("modeline_group_name");
     n.complete_name(n.simple_name());
 
     dogen::dynamic::field_definition r;
@@ -124,8 +118,8 @@ namespace dogen {
 namespace formatters {
 namespace meta_data {
 
-const dynamic::field_definition& field_definitions::copyright_holder() {
-    static auto r(create_copyright_holder());
+const dynamic::field_definition& field_definitions::copyright_notices() {
+    static auto r(create_copyright_notices());
     return r;
 }
 

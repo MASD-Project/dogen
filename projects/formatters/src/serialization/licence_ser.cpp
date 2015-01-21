@@ -39,7 +39,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::formatters::licence& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("copyright_holders", v.copyright_holders_);
+    ar << make_nvp("copyright_notices", v.copyright_notices_);
     ar << make_nvp("text", v.text_);
 }
 
@@ -47,7 +47,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::formatters::licence& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("copyright_holders", v.copyright_holders_);
+    ar >> make_nvp("copyright_notices", v.copyright_notices_);
     ar >> make_nvp("text", v.text_);
 }
 

@@ -67,12 +67,12 @@ void boilerplate_formatter::
 add_licence(std::list<std::string>& content,
     const dogen::formatters::licence& l) const {
     std::ostringstream s;
-    for (const auto h : l.copyright_holders())
+    for (const auto h : l.copyright_notices())
         s << h << std::endl;
 
-    const auto holders(s.str());
-    if (!holders.empty())
-        content.push_back(holders);
+    const auto notices(s.str());
+    if (!notices.empty())
+        content.push_back(notices);
 
     if (!l.text().empty())
         content.push_back(l.text());

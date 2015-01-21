@@ -73,12 +73,12 @@ general_settings_factory::extract_licence(const dynamic::object& o) const {
     if (i == licences_.end())
         throw_missing_item("Licence not found: ", ln);
 
-    if (!has_field(o, fd::copyright_holder()))
+    if (!has_field(o, fd::copyright_notices()))
         return i->second;
 
     licence l(i->second);
-    const auto ch(get_text_collection_content(o, fd::copyright_holder()));
-    l.copyright_holders(ch);
+    const auto ch(get_text_collection_content(o, fd::copyright_notices()));
+    l.copyright_notices(ch);
     return l;
 }
 
@@ -147,8 +147,8 @@ void general_settings_factory::hydrate_modelines() {
 }
 
 void general_settings_factory::hydrate_licences() {
-    std::list<std::string> copyright_holders;
-    licence_hydrator lh(copyright_holders);
+    std::list<std::string> copyright_notices;
+    licence_hydrator lh(copyright_notices);
     const auto dirs(create_directory_list(licence_dir));
     hydration_workflow<licence_hydrator> hw(lh);
     licences_ = hw.hydrate(dirs);

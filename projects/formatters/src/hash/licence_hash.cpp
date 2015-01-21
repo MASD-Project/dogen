@@ -45,7 +45,7 @@ namespace formatters {
 std::size_t licence_hasher::hash(const licence&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_string(v.copyright_holders()));
+    combine(seed, hash_std_list_std_string(v.copyright_notices()));
     combine(seed, v.text());
 
     return seed;
