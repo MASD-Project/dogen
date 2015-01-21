@@ -8,7 +8,23 @@
 
 Stories that we intend to look at, at some point.
 
-*** Consider c++ itself as a front-end                                :story:
+
+*** Remove new lines from all text to be logged                       :story:
+
+We should strive to write to the log one line per "record". This makes
+grepping etc much easier. We should create a method to convert new
+lines to a marker (say =<new_line>= or whatever we are already doing
+for JSON output). This should be applied to all cases where there is a
+potential to have new lines (comments, etc).
+
+*** Handling of modelines is incorrect in general settings            :story:
+
+At present the general settings are hard-coded to look for a C++
+modeline. This will not work for CMake files, etc. We need to think
+how multiple modelines will be supported. See general settings factory
+in formatters.
+
+*** Consider c++ itself as a front-end                                 :epic:
 
 One can imagine a clang-based front-end that reads C++ code suitably
 annotated, perhaps with =Generatable= or some such attributes -
@@ -281,6 +297,9 @@ SML validator story in backlog for rules that apply to settings.
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled (opaque settings validator)
 
+Actually what we need is a rules engine that infers all of this. It
+does validation at the same time.
+
 *** Implement include generation for class header formatter           :story:
 
 Now that we have finished generating the path spec details, we need to
@@ -341,7 +360,7 @@ Remove uses of old indenter.
 Not sure how applicable this would be, but we may be able to scavenge
 some tests.
 
-*** Evaluate all of our data structures based on usage                :story:
+*** Evaluate all of our data structures based on usage                 :epic:
 
 This presentation is very interesting:
 
@@ -360,7 +379,7 @@ make sure the code does all that it is intended to do first and then
 tackle the Acton's suggestions. This is to ensure that we have
 captured all the main use cases. Data analysis can be done after this.
 
-*** Consider generating dependency injection code                     :story:
+*** Consider generating dependency injection code                      :epic:
 
 If one could mark constructors as =injectable= in a diagram, we could
 then generate something like a castle windsor container and do all of
@@ -369,7 +388,7 @@ have access to all interfaces and their implementations so a lot of
 the clever logic done at run time by castle/guice etc could be done in
 the generated code.
 
-*** Consider using Given-When-Then for unit tests                     :story:
+*** Consider using Given-When-Then for unit tests                      :epic:
 
 We should check the Martin Fowler article on [[http://martinfowler.com/bliki/GivenWhenThen.html][Given-When-Then]] as a way
 of specifying unit tests, to see if it would make our tests
@@ -448,7 +467,26 @@ Food for thought:
   with this approach is that dogen is not really designed to share a
   namespace in this way. We won't be able to have a =cpp= project as
   well as placing other projects inside of the =cpp= namespace. We can
-  have one or the other in the current setup, but not both.
+  have one or the other in the current setup, but not both. We could
+  take the same approach as we did for test models: create a cpp
+  folder and then put the model under a different name such as =model=
+  or =domain= etc. Note that we still have to define all of the
+  formatter interfaces in the "main" model, as well as workflows
+  etc. However, some interfaces may not make sense for other models:
+  what is a registrar in protocol buffers? If it exists at all, its
+  probably something very different from boost serialisation and as
+  such will require other data.
+
+We should bear in mind [[http://st-www.cs.illinois.edu/users/droberts/evolve.html][this quote]]:
+
+#+begin_quote
+People develop abstractions by generalizing from concrete
+examples. Every attempt to determine the correct abstractions on paper
+without actually developing a running system is doomed to failure. No
+one is that smart. A framework is a reusable design, so you develop it
+by looking at the things it is supposed to be a design of. The more
+examples you look at, the more general your framework will be.
+#+end_quote
 
 *** Usage of rev-list in version causes problems                      :story:
 
@@ -1627,6 +1665,9 @@ them.
 We should be able to mark classes and properties as deprecated and
 have that reflected in both doxygen and C++-11 deprecated attributes.
 
+Note that at present nothing stops the users from adding the marker
+themselves.
+
 *** Control JSON output via traits                                    :story:
 
 #+begin_quote
@@ -1777,24 +1818,6 @@ a trivial script that works for Linux 32-bit and 64-bit with gcc.
 *** Create a trivial Linux clang script                               :story:
 
 We need to be able to build Linux clang 32-bit and 64-bit again.
-
-*** Fix windows nightly build                                         :story:
-
-The nightly build for windows has been broken for quite a while. The
-problem is we have hit a limit in COFF in the serialisation of context
-(=sml_to_cpp=):
-
-: cd /E/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/build/projects/sml_to_cpp/src && /e/mingw/bin/g++.exe   -DBOOST_ALL_DYN_LINK -isystem /e/usr/local/pfh/include -std=gnu++0x -D_WIN32_WINNT=0x0501 -DBOOST_TEST_SOURCE  -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=gnu++11 -frtti -fvisibility-inlines-hidden -fvisibility=default @CMakeFiles/sml_to_cpp.dir/includes_CXX.rsp   -o CMakeFiles/sml_to_cpp.dir/io/std_types_io.cpp.obj -c /e/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/source/projects/sml_to_cpp/src/io/std_types_io.cpp
-: /e/cmake/bin/cmake.exe -E cmake_progress_report /E/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/build/CMakeFiles 
-: [ 77%] Building CXX object projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/serialization/context_ser.cpp.obj
-: cd /E/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/build/projects/sml_to_cpp/src && /e/mingw/bin/g++.exe   -DBOOST_ALL_DYN_LINK -isystem /e/usr/local/pfh/include -std=gnu++0x -D_WIN32_WINNT=0x0501 -DBOOST_TEST_SOURCE  -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=gnu++11 -frtti -fvisibility-inlines-hidden -fvisibility=default @CMakeFiles/sml_to_cpp.dir/includes_CXX.rsp   -o CMakeFiles/sml_to_cpp.dir/serialization/context_ser.cpp.obj -c /e/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/source/projects/sml_to_cpp/src/serialization/context_ser.cpp
-: e:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/as.exe: CMakeFiles/sml_to_cpp.dir/serialization/context_ser.cpp.obj: too many sections (32795)
-
-This problem is solved with visual studio using the =/bigobj= flag,
-but this is not available on mingw at the moment. Support has been
-[[https://sourceware.org/ml/binutils/2014-03/msg00114.html][checked in]] to mingw64 trunk, so hopefully it will make its way to
-32-bits too. See also: [[http://sourceforge.net/p/mingw-w64/bugs/341/][#341 Too many sections aka /bigobj replacement
-flag]].
 
 *** Re-enable schema updates in database model                        :story:
 
@@ -1962,6 +1985,8 @@ directory. This is not an easy undertaking because:
 - the CMake scripts rely on the location of the diagrams to copy them
   across
 
+We should create =production= and =test= sub-directories for diagrams.
+
 *** Add tests for general settings factory                            :story:
 
 Zero coverage on this one for some reason. Some simple tests come to
@@ -1972,6 +1997,7 @@ mind:
 - invalid data files directory results in exception;
 - more than one data files directory results in expected load;
 - creating annotation for test model types works as expected.
+- missing fields result in expected exceptions.
 
 *** IOable services                                                   :story:
 
@@ -2369,7 +2395,7 @@ For some reason the log file is full of errors like this:
 Presumably the errors are not fatal as code generation still
 works. Investigate the errors and tidy-up the log.
 
-*** Add tests for =flat_name_builder=                                 :story:
+*** Add tests for =name_builder=                                      :story:
 
 We refactored tagger code related to flattening names into this class
 but added no tests. We need good coverage, hopefully available from

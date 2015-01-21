@@ -28,10 +28,32 @@ Clock summary at [2015-01-21 Wed 00:02]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-21 Wed 19:10]--[2015-01-21 Wed 20:00] =>  0:50
     CLOCK: [2015-01-20 Tue 23:56]--[2015-01-21 Wed 00:02] =>  0:06
     CLOCK: [2015-01-20 Tue 22:40]--[2015-01-20 Tue 22:55] =>  0:15
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Fix windows nightly build                               :story:
+    CLOSED: [2015-01-21 Wed 08:43]
+
+Note: this was fixed some time ago.
+
+The nightly build for windows has been broken for quite a while. The
+problem is we have hit a limit in COFF in the serialisation of context
+(=sml_to_cpp=):
+
+: cd /E/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/build/projects/sml_to_cpp/src && /e/mingw/bin/g++.exe   -DBOOST_ALL_DYN_LINK -isystem /e/usr/local/pfh/include -std=gnu++0x -D_WIN32_WINNT=0x0501 -DBOOST_TEST_SOURCE  -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=gnu++11 -frtti -fvisibility-inlines-hidden -fvisibility=default @CMakeFiles/sml_to_cpp.dir/includes_CXX.rsp   -o CMakeFiles/sml_to_cpp.dir/io/std_types_io.cpp.obj -c /e/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/source/projects/sml_to_cpp/src/io/std_types_io.cpp
+: /e/cmake/bin/cmake.exe -E cmake_progress_report /E/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/build/CMakeFiles 
+: [ 77%] Building CXX object projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/serialization/context_ser.cpp.obj
+: cd /E/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/build/projects/sml_to_cpp/src && /e/mingw/bin/g++.exe   -DBOOST_ALL_DYN_LINK -isystem /e/usr/local/pfh/include -std=gnu++0x -D_WIN32_WINNT=0x0501 -DBOOST_TEST_SOURCE  -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=gnu++11 -frtti -fvisibility-inlines-hidden -fvisibility=default @CMakeFiles/sml_to_cpp.dir/includes_CXX.rsp   -o CMakeFiles/sml_to_cpp.dir/serialization/context_ser.cpp.obj -c /e/mingw/msys/1.0/home/ctest/build/Nightly/dogen/mingw-1.0.17-i686-gcc-4.7/source/projects/sml_to_cpp/src/serialization/context_ser.cpp
+: e:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/as.exe: CMakeFiles/sml_to_cpp.dir/serialization/context_ser.cpp.obj: too many sections (32795)
+
+This problem is solved with visual studio using the =/bigobj= flag,
+but this is not available on mingw at the moment. Support has been
+[[https://sourceware.org/ml/binutils/2014-03/msg00114.html][checked in]] to mingw64 trunk, so hopefully it will make its way to
+32-bits too. See also: [[http://sourceforge.net/p/mingw-w64/bugs/341/][#341 Too many sections aka /bigobj replacement
+flag]].
 
 *** STARTED Add annotation fields and remove meta-data usage in formatters :story:
     CLOCK: [2015-01-20 Tue 23:31]--[2015-01-20 Tue 23:56] =>  0:25
@@ -48,7 +70,20 @@ We need to inject:
 - modeline_group
 
 We also need to sort out the upper case/lower case naming of these
-fields in various diagrams.
+fields in various diagrams, as well as the licence vs licence name.
+
+*** Add field definition to odb formatters                            :story:
+
+We need a hack in order to cope with ODB pragmas. The easiest way is
+to define the field definitions in the formatters - this is the right
+way at any rate - but then do some kind of hack to extract the field
+from the meta-data. For example we could call the field definition
+directly from the =cpp_formatters= model.
+
+*** Inject unit test field definitions                                :story:
+
+We need to inject fields like =KEY= etc used by unit tests in the unit
+tests themselves.
 
 *** Remove optionality from =obtain_field_definition=                 :story:
 
