@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_META_DATA_GENERAL_SETTINGS_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_META_DATA_GENERAL_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_FACTORY_HPP
+#define DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,6 @@
 
 namespace dogen {
 namespace formatters {
-namespace meta_data {
 
 /**
  * @brief Creates the general settings by extracting information from
@@ -127,6 +126,6 @@ private:
     std::unordered_map<std::string, licence> licences_;
 };
 
-} } }
+} }
 
 #endif

@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"
-#include "dogen/formatters/types/meta_data/general_settings_factory.hpp"
+#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/backend/types/workflow_error.hpp"
 #include "dogen/backend/types/workflow.hpp"
 
@@ -76,7 +76,7 @@ workflow::create_general_settings_activity(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Creating general settings.";
 
     boost::optional<formatters::general_settings> r;
-    using formatters::meta_data::general_settings_factory;
+    using formatters::general_settings_factory;
     general_settings_factory f(data_files_directories_);
     f.load_reference_data();
 

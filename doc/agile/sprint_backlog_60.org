@@ -17,16 +17,17 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 22:51]
+Clock summary at [2015-01-21 Wed 23:07]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *4:35* |      |      |
+| *Total time*                                               | *4:51* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 4:35 |      |
+| Active                                                     |        | 4:51 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:11 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
+| STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:16 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -91,6 +92,13 @@ way at any rate - but then do some kind of hack to extract the field
 from the meta-data. For example we could call the field definition
 directly from the =cpp_formatters= model.
 
+*** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
+    CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
+
+We have created a number of "meta-data extension" namespaces, which is
+where we transform the ptree into a strongly typed object. These
+should be renamed to =dynamic= to make it consistent.
+
 *** Inject unit test field definitions                                :story:
 
 We need to inject fields like =KEY= etc used by unit tests in the unit
@@ -111,12 +119,6 @@ this once all field definitions have been added.
 
 Find all places where we are using ptree and use the dynamic object
 instead. This should be mainly in meta-data factories.
-
-*** Rename namespace =meta-data= to =dynamic=                         :story:
-
-We have created a number of "meta-data extension" namespaces, which is
-where we transform the ptree into a strongly typed object. These
-should be renamed to =dynamic= to make it consistent.
 
 *** Remove all references to =ptree=                                  :story:
 

@@ -23,7 +23,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/object_extensions.hpp"
-#include "dogen/formatters/types/meta_data/field_definitions.hpp"
+#include "dogen/formatters/types/field_definitions.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
@@ -31,13 +31,13 @@
 #include "dogen/formatters/io/licence_io.hpp"
 #include "dogen/formatters/types/licence_hydrator.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
-#include "dogen/formatters/types/meta_data/building_error.hpp"
-#include "dogen/formatters/types/meta_data/general_settings_factory.hpp"
+#include "dogen/formatters/types/building_error.hpp"
+#include "dogen/formatters/types/general_settings_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("formatters.meta_data.general_settings_factory"));
+auto lg(logger_factory("formatters.general_settings_factory"));
 
 const std::string missing_context_ptr("Context pointer is null");
 const std::string modeline_groups_dir("modeline_groups");
@@ -48,7 +48,6 @@ const std::string cpp_modeline("c++");
 
 namespace dogen {
 namespace formatters {
-namespace meta_data {
 
 general_settings_factory::general_settings_factory(
     const std::forward_list<boost::filesystem::path>& data_files_dirs) :
@@ -178,8 +177,8 @@ general_settings_factory::build(const dynamic::object& o) const {
     const auto marker(extract_marker(o));
     const annotation a(modeline, licence, marker);
 
-    const bool generate_preamble(false); // FIXME: read from meta_data
+    const bool generate_preamble(false); // FIXME: read from dynamic object
     return general_settings(generate_preamble, a);
 }
 
-} } }
+} }

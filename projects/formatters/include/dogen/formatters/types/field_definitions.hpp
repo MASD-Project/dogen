@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_META_DATA_FIELD_DEFINITIONS_HPP
-#define DOGEN_FORMATTERS_TYPES_META_DATA_FIELD_DEFINITIONS_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FIELD_DEFINITIONS_HPP
+#define DOGEN_FORMATTERS_TYPES_FIELD_DEFINITIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,6 @@
 
 namespace dogen {
 namespace formatters {
-namespace meta_data {
 
 /**
  * @brief Fields supported by the generic formatters model.
@@ -88,6 +87,6 @@ struct field_definitions {
     };
 };
 
-} } }
+} }
 
 #endif

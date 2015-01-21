@@ -19,26 +19,24 @@
  *
  */
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/formatters/types/meta_data/field_definitions.hpp"
+#include "dogen/formatters/types/field_definitions.hpp"
 #include "dogen/formatters/types/initializer.hpp"
 
 namespace dogen {
 namespace formatters {
 
 void initializer::initialize() {
-    auto& reg(dynamic::workflow::registrar());
+    auto& rg(dynamic::workflow::registrar());
 
-    using meta_data::field_definitions;
-    reg.register_field_definition(field_definitions::copyright_notices());
-    reg.register_field_definition(field_definitions::licence_name());
-    reg.register_field_definition(field_definitions::modeline_group_name());
-    reg.register_field_definition(field_definitions::generate_preamble());
-    reg.register_field_definition(
-        field_definitions::code_generation_marker::add_date_time());
-    reg.register_field_definition(
-        field_definitions::code_generation_marker::add_warning());
-    reg.register_field_definition(
-        field_definitions::code_generation_marker::message());
+    rg.register_field_definition(field_definitions::copyright_notices());
+    rg.register_field_definition(field_definitions::licence_name());
+    rg.register_field_definition(field_definitions::modeline_group_name());
+    rg.register_field_definition(field_definitions::generate_preamble());
+
+    using cgm = field_definitions::code_generation_marker;
+    rg.register_field_definition(cgm::add_date_time());
+    rg.register_field_definition(cgm::add_warning());
+    rg.register_field_definition(cgm::message());
 }
 
 } }

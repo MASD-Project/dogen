@@ -20,7 +20,7 @@
  */
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
-#include "dogen/formatters/types/meta_data/field_definitions.hpp"
+#include "dogen/formatters/types/field_definitions.hpp"
 
 namespace {
 
@@ -116,7 +116,6 @@ dogen::dynamic::field_definition create_message() {
 
 namespace dogen {
 namespace formatters {
-namespace meta_data {
 
 const dynamic::field_definition& field_definitions::copyright_notices() {
     static auto r(create_copyright_notices());
@@ -156,4 +155,4 @@ field_definitions::code_generation_marker::message() {
     return r;
 }
 
-} } }
+} }
