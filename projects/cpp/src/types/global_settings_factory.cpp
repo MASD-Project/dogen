@@ -20,9 +20,9 @@
  */
 #include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/cpp/types/facet_settings.hpp"
-#include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
-#include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
-#include "dogen/cpp/types/meta_data/formatter_settings_factory.hpp"
+#include "dogen/cpp/types/cpp_settings_factory.hpp"
+#include "dogen/cpp/types/facet_settings_factory.hpp"
+#include "dogen/cpp/types/formatter_settings_factory.hpp"
 #include "dogen/cpp/types/global_settings_factory.hpp"
 
 namespace dogen {
@@ -32,7 +32,7 @@ std::unordered_map<std::string, facet_settings>
 global_settings_factory::create_facet_settings(
     const std::unordered_map<std::string, facet_settings>&
     default_facet_settings_by_facet_id, const sml::module& model_module) const {
-    meta_data::facet_settings_factory f;
+    facet_settings_factory f;
     return f.build(default_facet_settings_by_facet_id,
         model_module.meta_data());
 }
@@ -42,14 +42,14 @@ global_settings_factory::create_formatter_settings(
     const std::unordered_map<std::string, formatter_settings>&
     default_formatter_settings_by_formatter_id,
     const sml::module& model_module) const {
-    meta_data::formatter_settings_factory f;
+    formatter_settings_factory f;
     return f.build(default_formatter_settings_by_formatter_id,
         model_module.meta_data());
 }
 
 cpp_settings global_settings_factory::
 create_cpp_settings(const sml::module& m) const {
-    meta_data::cpp_settings_factory f;
+    cpp_settings_factory f;
     return f.build(m.meta_data());
 }
 

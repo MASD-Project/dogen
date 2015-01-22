@@ -18,22 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_META_DATA_BUILDING_ERROR_FWD_HPP
-#define DOGEN_CPP_TYPES_META_DATA_BUILDING_ERROR_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FACET_SETTINGS_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_FACET_SETTINGS_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
 namespace cpp {
-namespace meta_data {
 
-class building_error;
+class facet_settings_factory;
 
-} } }
+} }
 
 #endif

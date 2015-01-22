@@ -20,13 +20,13 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
-#include "dogen/cpp/types/meta_data/traits.hpp"
-#include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
+#include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/cpp_settings_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("cpp.meta_data.cpp_settings_factory"));
+auto lg(logger_factory("cpp.cpp_settings_factory"));
 
 const std::string default_source_directory("src");
 const std::string default_include_directory("include");
@@ -37,7 +37,6 @@ const std::string default_implementation_file_extension(".cpp");
 
 namespace dogen {
 namespace cpp {
-namespace meta_data {
 
 cpp_settings cpp_settings_factory::create_default_settings() const {
     cpp_settings r;
@@ -100,4 +99,4 @@ build(const boost::property_tree::ptree& meta_data) const {
     return r;
 }
 
-} } }
+} }

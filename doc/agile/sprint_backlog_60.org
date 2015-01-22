@@ -17,18 +17,18 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-21 Wed 23:37]
+Clock summary at [2015-01-22 Thu 19:25]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *5:08* |      |      |
+| *Total time*                                               | *5:18* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 5:08 |      |
+| Active                                                     |        | 5:18 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |        |      | 0:05 |
-| STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:16 |
+| STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:26 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -105,6 +105,7 @@ better to default it to false even in the presence of the doxygen
 binary.
 
 *** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
+    CLOCK: [2015-01-22 Thu 19:15]--[2015-01-22 Thu 19:25] =>  0:10
     CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
 
 We have created a number of "meta-data extension" namespaces, which is

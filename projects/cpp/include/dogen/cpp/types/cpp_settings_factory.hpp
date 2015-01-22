@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_META_DATA_CPP_SETTINGS_FACTORY_HPP
-#define DOGEN_CPP_TYPES_META_DATA_CPP_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_CPP_SETTINGS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_CPP_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,6 @@
 
 namespace dogen {
 namespace cpp {
-namespace meta_data {
 
 /**
  * @brief Generates the C++ settings from meta-data.
@@ -56,6 +55,6 @@ public:
     cpp_settings build(const boost::property_tree::ptree& meta_data) const;
 };
 
-} } }
+} }
 
 #endif

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_META_DATA_FACET_SETTINGS_FACTORY_HPP
-#define DOGEN_CPP_TYPES_META_DATA_FACET_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTER_SETTINGS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTER_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,43 +28,39 @@
 #include <string>
 #include <unordered_map>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen/cpp/types/facet_settings.hpp"
+#include "dogen/cpp/types/formatter_settings.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace meta_data {
 
-/**
- * @brief Constructs settings for all facets.
- */
-class facet_settings_factory {
+class formatter_settings_factory {
 public:
-    facet_settings_factory() = default;
-    facet_settings_factory(const facet_settings_factory&) = default;
-    facet_settings_factory(facet_settings_factory&&) = default;
-    ~facet_settings_factory() = default;
+    formatter_settings_factory() = default;
+    formatter_settings_factory(const formatter_settings_factory&) = default;
+    formatter_settings_factory(formatter_settings_factory&&) = default;
+    ~formatter_settings_factory() = default;
 
 private:
     /**
      * @brief Reads the settings from the meta-data for the supplied
-     * facet id.
+     * formatter id.
      *
-     * @pre facet id is not qualified.
+     * @pre formatter id is not qualified.
      */
-    facet_settings read_settings(const facet_settings& default_settings,
-        const std::string& facet_id,
+    formatter_settings read_settings(const formatter_settings& default_settings,
+        const std::string& formatter_id,
         const boost::property_tree::ptree& meta_data) const;
 
 public:
     /**
-     * @brief Builds the facet settings from the meta data.
+     * @brief Builds the formatter settings from the meta data.
      */
-    std::unordered_map<std::string, facet_settings> build(
-        const std::unordered_map<std::string, facet_settings>&
-        default_facet_settings_by_facet_id,
+    std::unordered_map<std::string, formatter_settings> build(
+        const std::unordered_map<std::string, formatter_settings>&
+        default_formatter_settings_by_formatter_id,
         const boost::property_tree::ptree& meta_data) const;
 };
 
-} } }
+} }
 
 #endif

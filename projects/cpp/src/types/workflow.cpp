@@ -30,8 +30,6 @@
 #include "dogen/cpp/io/global_settings_io.hpp"
 #include "dogen/cpp/io/file_settings_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
-#include "dogen/cpp/types/meta_data/cpp_settings_factory.hpp"
-#include "dogen/cpp/types/meta_data/facet_settings_factory.hpp"
 #include "dogen/cpp/types/global_settings_factory.hpp"
 #include "dogen/cpp/types/formatters/facet_factory.hpp"
 #include "dogen/cpp/types/formatters/container_splitter.hpp"

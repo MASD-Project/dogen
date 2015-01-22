@@ -18,11 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/meta_data/traits.hpp"
+#include "dogen/cpp/types/traits.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace meta_data {
 
 std::string traits::bool_true() {
     static std::string r("true");
@@ -99,4 +98,4 @@ std::string traits::formatter::additional_postfix() {
     return r;
 }
 
-} } }
+} }

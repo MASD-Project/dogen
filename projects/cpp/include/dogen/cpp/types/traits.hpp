@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_META_DATA_TRAITS_HPP
-#define DOGEN_CPP_TYPES_META_DATA_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_TRAITS_HPP
+#define DOGEN_CPP_TYPES_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,6 @@
 
 namespace dogen {
 namespace cpp {
-namespace meta_data {
 
 /**
  * @brief Constants for all the top-level meta-data keys for the C++
@@ -133,6 +132,6 @@ struct traits {
 
 };
 
-} } }
+} }
 
 #endif
