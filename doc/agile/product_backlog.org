@@ -8,6 +8,18 @@
 
 Stories that we intend to look at, at some point.
 
+*** Add support for inner classes                                     :story:
+
+Inner classes could be expressed in the same way as the short-hand for
+namespaces. For example, given a class =a=, an inner class =b= could
+be declared as =a::b=. The system would have to recognise that =a= is
+a class and then treat it accordingly in SML. The formatters would
+have to be taught to express inner classes when formatting the main
+class. This probably requires merging two SML entities into a single
+cpp entity. Finally some meta-data support would be required to
+determine if the inner class is public or private.
+
+We just need a use case for where inner classes would be useful.
 
 *** Remove new lines from all text to be logged                       :story:
 
