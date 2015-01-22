@@ -18,55 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_TRAITS_HPP
-#define DOGEN_CPP_TYPES_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_FIELD_DEFINITIONS_HPP
+#define DOGEN_CPP_TYPES_FIELD_DEFINITIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
+#include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
 namespace cpp {
 
 /**
- * @brief Constants for all the top-level meta-data keys for the C++
- * backend.
+ * @brief Fields supported by the cpp model.
  */
-struct traits {
-    /**
-     * @brief Valid values for Boolean types.
-     */
-    /*@{*/
-    static std::string bool_true();
-    static std::string bool_false();
-    /*@}*/
-
+struct field_definitions {
     /**
      * @brief If set to false, the C++ backend will not
      * be generated.
      */
-    static std::string enabled();
+    static const dynamic::field_definition& enabled();
 
     /**
      * @brief If true, the project will be split.
      *
      * @deprecated used only for backwards compatibility.
      */
-    static std::string split_project();
+    static const dynamic::field_definition& split_project();
 
     /**
      * @brief Name of the directory in which to place the
      * implementation files.
      */
-    static std::string source_directory();
+    static const dynamic::field_definition& source_directory();
 
     /**
      * @brief Name of the directory in which to place the header
      * files.
      */
-    static std::string include_directory();
+    static const dynamic::field_definition& include_directory();
 
     /**
      * @brief Extension to use for header files, including the
@@ -74,7 +65,7 @@ struct traits {
      *
      * Example: @e .hpp, @e .hxx
      */
-    static std::string header_file_extension();
+    static const dynamic::field_definition& header_file_extension();
 
     /**
      * @brief Extension to use for implementation files, including
@@ -82,13 +73,13 @@ struct traits {
      *
      * Example: @e .cpp, @e .cxx.
      */
-    static std::string implementation_file_extension();
+    static const dynamic::field_definition& implementation_file_extension();
 
     /**
      * @brief If true, files for each facet will be placed in a
      * folder for the facet.
      */
-    static std::string enable_facet_folders();
+    static const dynamic::field_definition& enable_facet_folders();
 
     /**
      * @brief If true, each file in each facet will have a name
@@ -96,39 +87,7 @@ struct traits {
      *
      * This is achieved by using the facet's postfix.
      */
-    static std::string enable_unique_file_names();
-
-    /**
-     * @brief Tags related to facets.
-     */
-    struct facet {
-        /**
-         * @brief If set to false, the facet will not be generated.
-         */
-        static std::string enabled();
-
-        /**
-         * @brief Directory in which to place files for this facet.
-         */
-        static std::string directory();
-
-        /**
-         * @brief Post-fix to apply to file names for this facet.
-         */
-        static std::string postfix();
-    };
-
-    struct formatter {
-        /**
-         * @brief If set to false, the formatter will not be generated.
-         */
-        static std::string enabled();
-
-        /**
-         * @brief Post-fix to apply to file names for this formatter.
-         */
-        static std::string additional_postfix();
-    };
+    static const dynamic::field_definition& enable_unique_file_names();
 };
 
 } }

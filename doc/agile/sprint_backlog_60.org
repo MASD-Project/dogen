@@ -17,18 +17,19 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-22 Thu 19:25]
+Clock summary at [2015-01-22 Thu 23:25]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *5:18* |      |      |
+| *Total time*                                               | *7:40* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 5:18 |      |
+| Active                                                     |        | 7:40 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |        |      | 0:05 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:26 |
+| STARTED Create field definitions for all c++ fields        |        |      | 2:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -112,10 +113,40 @@ We have created a number of "meta-data extension" namespaces, which is
 where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
-*** Create field definitions for all c++ fields                       :story:
+*** STARTED Create field definitions for all c++ fields               :story:
+    CLOCK: [2015-01-22 Thu 21:43]--[2015-01-22 Thu 23:25] =>  1:42
+    CLOCK: [2015-01-22 Thu 20:50]--[2015-01-22 Thu 21:30] =>  0:40
 
 We need to go through all of the fields used by the C++ factories and
-create definitions for them.
+create definitions for them. We also need to remove the traits class.
+
+This is actually a lot more complicated than expected. We need to do
+the following:
+
+- create a proper hierarchical structure for fields rather than a flat
+  owner. This is to cope with the fields that belong to facets or
+  formatters. Update all of the existing field definitions.
+- add a class header file name field. This is so we can override it
+  for STL, boost, etc. We only need it for class header file names (by
+  convention).
+- create all of the field definitions for all of the formatters and
+  inject them via the initialisers.
+
+*** Update c++ factories to use dynamic object                        :story:
+
+This requires a bit of cleverness because we need to make use of the
+hierarchical properties for ownership. We also need to add default
+values to field definitions and remove the default facet properties.
+
+*** Create a container of field definitions in field definition       :story:
+
+It would be good if we could just return all field definitions in one
+go from within the field definition class itself instead of calling
+each of them in the initialiser; it is more likely that one would
+remember to add the field to the list when adding new fields. It would
+also mean there is only one file to change.
+
+We could use =std::reference_wrapper= for this.
 
 *** Replace uses of meta-data with dynamic object                     :story:
 
