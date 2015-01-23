@@ -8,6 +8,13 @@
 
 Stories that we intend to look at, at some point.
 
+*** Investigate NeoVim's emblems                                      :story:
+
+They appear to have emblems for issues, connected to waffle as well as
+clang's analysis checks:
+
+https://github.com/neovim/neovim
+
 *** Add support for inner classes                                     :story:
 
 Inner classes could be expressed in the same way as the short-hand for
