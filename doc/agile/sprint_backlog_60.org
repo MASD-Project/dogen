@@ -17,20 +17,20 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-24 Sat 20:34]
+Clock summary at [2015-01-24 Sat 20:37]
 
 | Headline                                                   | Time    |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| *Total time*                                               | *11:05* |       |      |
+| *Total time*                                               | *11:08* |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| Active                                                     |         | 11:05 |      |
+| Active                                                     |         | 11:08 |      |
 | STARTED Sprint and product backlog grooming                |         |       | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters           |         |       | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |         |       | 0:05 |
 | COMPLETED Refactor hierarchy ownership of fields           |         |       | 1:03 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |         |       | 0:26 |
-| STARTED Create field definitions for all c++ fields        |         |       | 4:44 |
+| STARTED Create field definitions for all c++ fields        |         |       | 4:47 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -124,6 +124,7 @@ where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
 *** STARTED Create field definitions for all c++ fields               :story:
+    CLOCK: [2015-01-24 Sat 20:34]--[2015-01-24 Sat 20:37] =>  0:03
     CLOCK: [2015-01-24 Sat 20:32]--[2015-01-24 Sat 20:34] =>  0:02
     CLOCK: [2015-01-24 Sat 20:28]--[2015-01-24 Sat 20:32] =>  0:04
     CLOCK: [2015-01-24 Sat 20:06]--[2015-01-24 Sat 20:28] =>  0:22
