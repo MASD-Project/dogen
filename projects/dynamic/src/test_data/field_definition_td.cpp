@@ -22,6 +22,7 @@
 #include "dogen/dynamic/test_data/name_td.hpp"
 #include "dogen/dynamic/test_data/ownership_hierarchy_td.hpp"
 #include "dogen/dynamic/test_data/scope_types_td.hpp"
+#include "dogen/dynamic/test_data/value_td.hpp"
 #include "dogen/dynamic/test_data/value_types_td.hpp"
 
 namespace {
@@ -46,6 +47,18 @@ create_dogen_dynamic_ownership_hierarchy(const unsigned int position) {
     return dogen::dynamic::ownership_hierarchy_generator::create(position);
 }
 
+dogen::dynamic::value*
+create_dogen_dynamic_value_ptr(const unsigned int position) {
+    return dogen::dynamic::value_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::dynamic::value>
+create_boost_shared_ptr_dogen_dynamic_value(unsigned int position) {
+    boost::shared_ptr<dogen::dynamic::value> r(
+        create_dogen_dynamic_value_ptr(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -59,6 +72,7 @@ populate(const unsigned int position, result_type& v) {
     v.type(create_dogen_dynamic_value_types(position + 1));
     v.scope(create_dogen_dynamic_scope_types(position + 2));
     v.ownership_hierarchy(create_dogen_dynamic_ownership_hierarchy(position + 3));
+    v.default_value(create_boost_shared_ptr_dogen_dynamic_value(position + 4));
 }
 
 field_definition_generator::result_type

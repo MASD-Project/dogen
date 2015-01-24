@@ -1642,7 +1642,7 @@ shape of this data.
         <dia:point val="48,-13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,-13.05;64.335,-7.75"/>
+        <dia:rectangle val="47.95,-13.05;64.335,-6.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,-13"/>
@@ -1651,7 +1651,7 @@ shape of this data.
         <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#field_definition#</dia:string>
@@ -1833,6 +1833,29 @@ shape of this data.
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#default_value#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::shared_ptr&lt;value&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Default value for the field, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -1878,16 +1901,16 @@ shape of this data.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="64.285,-7.8"/>
+        <dia:point val="64.285,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.535,-8.55;67.2,1.8"/>
+        <dia:rectangle val="63.535,-7.75;67.2,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="64.285,-7.8"/>
+        <dia:point val="64.285,-7"/>
         <dia:point val="64.285,-4"/>
         <dia:point val="67,-4"/>
         <dia:point val="67,1"/>
@@ -1952,7 +1975,7 @@ shape of this data.
         <dia:point val="40.33,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.58,-7.85;48.2,1.8"/>
+        <dia:rectangle val="39.58,-7.05;48.2,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1961,7 +1984,7 @@ shape of this data.
         <dia:point val="40.33,1"/>
         <dia:point val="40.33,-4"/>
         <dia:point val="48,-4"/>
-        <dia:point val="48,-7.8"/>
+        <dia:point val="48,-7"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2497,16 +2520,16 @@ shape of this data.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="56.1425,-7.8"/>
+        <dia:point val="56.1425,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.0875,-8.55;56.8925,1.8"/>
+        <dia:rectangle val="54.0875,-7.75;56.8925,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="56.1425,-7.8"/>
+        <dia:point val="56.1425,-7"/>
         <dia:point val="56.1425,-4"/>
         <dia:point val="54.1375,-4"/>
         <dia:point val="54.1375,1"/>

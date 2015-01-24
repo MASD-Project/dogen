@@ -27,10 +27,12 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include "dogen/dynamic/serialization/field_definition_ser.hpp"
 #include "dogen/dynamic/serialization/name_ser.hpp"
 #include "dogen/dynamic/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/dynamic/serialization/scope_types_ser.hpp"
+#include "dogen/dynamic/serialization/value_ser.hpp"
 #include "dogen/dynamic/serialization/value_types_ser.hpp"
 
 
@@ -45,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("type", v.type_);
     ar << make_nvp("scope", v.scope_);
     ar << make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
+    ar << make_nvp("default_value", v.default_value_);
 }
 
 template<typename Archive>
@@ -55,6 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("type", v.type_);
     ar >> make_nvp("scope", v.scope_);
     ar >> make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
+    ar >> make_nvp("default_value", v.default_value_);
 }
 
 } }

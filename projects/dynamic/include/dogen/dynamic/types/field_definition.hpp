@@ -26,10 +26,12 @@
 #endif
 
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/serialization/field_definition_fwd_ser.hpp"
 #include "dogen/dynamic/types/name.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
+#include "dogen/dynamic/types/value_fwd.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
 
 namespace dogen {
@@ -52,7 +54,8 @@ public:
         const dogen::dynamic::name& name,
         const dogen::dynamic::value_types& type,
         const dogen::dynamic::scope_types& scope,
-        const dogen::dynamic::ownership_hierarchy& ownership_hierarchy);
+        const dogen::dynamic::ownership_hierarchy& ownership_hierarchy,
+        const boost::shared_ptr<dogen::dynamic::value>& default_value);
 
 private:
     template<typename Archive>
@@ -98,6 +101,16 @@ public:
     void ownership_hierarchy(const dogen::dynamic::ownership_hierarchy&& v);
     /**@}*/
 
+    /**
+     * @brief Default value for the field, if any.
+     */
+    /**@{*/
+    const boost::shared_ptr<dogen::dynamic::value>& default_value() const;
+    boost::shared_ptr<dogen::dynamic::value>& default_value();
+    void default_value(const boost::shared_ptr<dogen::dynamic::value>& v);
+    void default_value(const boost::shared_ptr<dogen::dynamic::value>&& v);
+    /**@}*/
+
 public:
     bool operator==(const field_definition& rhs) const;
     bool operator!=(const field_definition& rhs) const {
@@ -113,6 +126,7 @@ private:
     dogen::dynamic::value_types type_;
     dogen::dynamic::scope_types scope_;
     dogen::dynamic::ownership_hierarchy ownership_hierarchy_;
+    boost::shared_ptr<dogen::dynamic::value> default_value_;
 };
 
 } }

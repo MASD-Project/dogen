@@ -22,6 +22,7 @@
 #include "dogen/dynamic/hash/name_hash.hpp"
 #include "dogen/dynamic/hash/ownership_hierarchy_hash.hpp"
 #include "dogen/dynamic/hash/scope_types_hash.hpp"
+#include "dogen/dynamic/hash/value_hash.hpp"
 #include "dogen/dynamic/hash/value_types_hash.hpp"
 
 namespace {
@@ -31,6 +32,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_shared_ptr_dogen_dynamic_value(const boost::shared_ptr<dogen::dynamic::value>& v){
+    std::size_t seed(0);
+    combine(seed, *v);
+    return seed;
 }
 
 }
@@ -45,6 +52,7 @@ std::size_t field_definition_hasher::hash(const field_definition&v) {
     combine(seed, v.type());
     combine(seed, v.scope());
     combine(seed, v.ownership_hierarchy());
+    combine(seed, hash_boost_shared_ptr_dogen_dynamic_value(v.default_value()));
 
     return seed;
 }

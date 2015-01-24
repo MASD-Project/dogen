@@ -23,7 +23,24 @@
 #include "dogen/dynamic/io/name_io.hpp"
 #include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 #include "dogen/dynamic/io/scope_types_io.hpp"
+#include "dogen/dynamic/io/value_io.hpp"
 #include "dogen/dynamic/io/value_types_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::dynamic::value>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace dynamic {
@@ -34,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const field_definition& v) {
       << "\"name\": " << v.name() << ", "
       << "\"type\": " << v.type() << ", "
       << "\"scope\": " << v.scope() << ", "
-      << "\"ownership_hierarchy\": " << v.ownership_hierarchy()
+      << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
+      << "\"default_value\": " << v.default_value()
       << " }";
     return(s);
 }
