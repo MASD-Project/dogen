@@ -23,7 +23,7 @@
 namespace {
 
 const std::string model_name("cpp");
-const std::string facet_name("types");
+const std::string facet_name("hash");
 const std::string class_header_formatter_name("class_header_formatter");
 const std::string class_implementation_formatter_name(
     "class_implementation_formatter");
