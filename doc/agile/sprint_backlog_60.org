@@ -17,19 +17,19 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-22 Thu 23:25]
+Clock summary at [2015-01-24 Sat 00:05]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *7:40* |      |      |
+| *Total time*                                               | *8:29* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 7:40 |      |
+| Active                                                     |        | 8:29 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |        |      | 0:05 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:26 |
-| STARTED Create field definitions for all c++ fields        |        |      | 2:22 |
+| STARTED Create field definitions for all c++ fields        |        |      | 3:11 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -114,6 +114,7 @@ where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
 *** STARTED Create field definitions for all c++ fields               :story:
+    CLOCK: [2015-01-23 Fri 23:15]--[2015-01-24 Sat 00:04] =>  0:49
     CLOCK: [2015-01-22 Thu 21:43]--[2015-01-22 Thu 23:25] =>  1:42
     CLOCK: [2015-01-22 Thu 20:50]--[2015-01-22 Thu 21:30] =>  0:40
 
@@ -131,6 +132,13 @@ the following:
   convention).
 - create all of the field definitions for all of the formatters and
   inject them via the initialisers.
+
+*** Dynamic workflow is recreated for every model                     :story:
+
+We should create the dynamic workflow once and pass it to the dia to
+sml instances. Instead we are recreating it in every transformer
+instance. Since the workflow is const, we should be able to pass
+references to it around.
 
 *** Update c++ factories to use dynamic object                        :story:
 
