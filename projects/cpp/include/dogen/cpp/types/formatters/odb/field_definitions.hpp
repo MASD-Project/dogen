@@ -37,9 +37,39 @@ namespace odb {
  */
 struct field_definitions {
     /**
+     * @brief If set to false, the facet will not be generated.
+     */
+    static const dynamic::field_definition& enabled();
+
+    /**
+     * @brief Directory in which to place files for this facet.
+     */
+    static const dynamic::field_definition& directory();
+
+    /**
+     * @brief Post-fix to apply to file names for this facet.
+     */
+    static const dynamic::field_definition& postfix();
+
+    /**
      * @brief The pragma used by the ODB compiler.
      */
     static const dynamic::field_definition& odb_pragma();
+
+    /**
+     * @brief Fields supported by the class header formatter.
+     */
+    struct class_header_formatter {
+        /**
+         * @brief If set to false, the formatter will not be generated.
+         */
+        static const dynamic::field_definition& enabled();
+
+        /**
+         * @brief Post-fix to apply to file names for this formatter.
+         */
+        static const dynamic::field_definition& postfix();
+    };
 };
 
 } } } }

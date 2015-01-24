@@ -17,20 +17,20 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-24 Sat 20:37]
+Clock summary at [2015-01-24 Sat 20:47]
 
 | Headline                                                   | Time    |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| *Total time*                                               | *11:08* |       |      |
+| *Total time*                                               | *11:16* |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| Active                                                     |         | 11:08 |      |
+| Active                                                     |         | 11:16 |      |
 | STARTED Sprint and product backlog grooming                |         |       | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters           |         |       | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |         |       | 0:05 |
 | COMPLETED Refactor hierarchy ownership of fields           |         |       | 1:03 |
+| COMPLETED Create field definitions for all c++ fields      |         |       | 4:55 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |         |       | 0:26 |
-| STARTED Create field definitions for all c++ fields        |         |       | 4:47 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -115,15 +115,9 @@ need a way to pull out all fields for a given formatter when building
 the formatter settings. We need to model this kind of hierarchical
 information so we can query fields by it.
 
-*** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
-    CLOCK: [2015-01-22 Thu 19:15]--[2015-01-22 Thu 19:25] =>  0:10
-    CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
-
-We have created a number of "meta-data extension" namespaces, which is
-where we transform the ptree into a strongly typed object. These
-should be renamed to =dynamic= to make it consistent.
-
-*** STARTED Create field definitions for all c++ fields               :story:
+*** COMPLETED Create field definitions for all c++ fields             :story:
+    CLOSED: [2015-01-24 Sat 20:46]
+    CLOCK: [2015-01-24 Sat 20:38]--[2015-01-24 Sat 20:46] =>  0:08
     CLOCK: [2015-01-24 Sat 20:34]--[2015-01-24 Sat 20:37] =>  0:03
     CLOCK: [2015-01-24 Sat 20:32]--[2015-01-24 Sat 20:34] =>  0:02
     CLOCK: [2015-01-24 Sat 20:28]--[2015-01-24 Sat 20:32] =>  0:04
@@ -148,6 +142,14 @@ the following:
   convention).
 - create all of the field definitions for all of the formatters and
   inject them via the initialisers.
+
+*** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
+    CLOCK: [2015-01-22 Thu 19:15]--[2015-01-22 Thu 19:25] =>  0:10
+    CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
+
+We have created a number of "meta-data extension" namespaces, which is
+where we transform the ptree into a strongly typed object. These
+should be renamed to =dynamic= to make it consistent.
 
 *** Dynamic workflow is recreated for every model                     :story:
 

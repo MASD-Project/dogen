@@ -23,6 +23,72 @@
 #include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 
 namespace {
+const std::string model_name("cpp");
+const std::string facet_name("odb");
+const std::string class_header_formatter_name("class_header_formatter");
+const std::string class_implementation_formatter_name(
+    "class_implementation_formatter");
+const std::string enumeration_header_formatter_name(
+    "enumeration_header_formatter");
+const std::string enumeration_implementation_formatter_name(
+    "enumeration_implementation_formatter");
+
+dogen::dynamic::field_definition create_enabled() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("enabled");
+    r.name().qualified("cpp.odb.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition create_directory() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("directory");
+    r.name().qualified("cpp.odb.directory");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition create_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.odb.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition create_class_header_formatter_enabled() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("enabled");
+    r.name().qualified("cpp.odb.class_header_formatter.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_header_formatter_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition create_class_header_formatter_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.odb.class_header_formatter.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_header_formatter_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
 
 dogen::dynamic::field_definition create_odb_pragma() {
     dogen::dynamic::field_definition r;
@@ -41,6 +107,33 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace odb {
+
+const dynamic::field_definition& field_definitions::enabled() {
+    static auto r(create_enabled());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::directory() {
+    static auto r(create_directory());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::postfix() {
+    static auto r(create_postfix());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_header_formatter::enabled() {
+    static auto r(create_class_header_formatter_enabled());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_header_formatter::postfix() {
+    static auto r(create_class_header_formatter_postfix());
+    return r;
+}
 
 const dynamic::field_definition& field_definitions::odb_pragma() {
     static auto r(create_odb_pragma());
