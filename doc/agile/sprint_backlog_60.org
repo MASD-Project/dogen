@@ -17,20 +17,20 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-24 Sat 20:06]
+Clock summary at [2015-01-24 Sat 20:28]
 
 | Headline                                                   | Time    |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| *Total time*                                               | *10:37* |       |      |
+| *Total time*                                               | *10:59* |       |      |
 |------------------------------------------------------------+---------+-------+------|
-| Active                                                     |         | 10:37 |      |
+| Active                                                     |         | 10:59 |      |
 | STARTED Sprint and product backlog grooming                |         |       | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters           |         |       | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |         |       | 0:05 |
 | COMPLETED Refactor hierarchy ownership of fields           |         |       | 1:03 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |         |       | 0:26 |
-| STARTED Create field definitions for all c++ fields        |         |       | 4:16 |
+| STARTED Create field definitions for all c++ fields        |         |       | 4:38 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -124,6 +124,7 @@ where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
 *** STARTED Create field definitions for all c++ fields               :story:
+    CLOCK: [2015-01-24 Sat 20:06]--[2015-01-24 Sat 20:28] =>  0:22
     CLOCK: [2015-01-24 Sat 19:01]--[2015-01-24 Sat 20:06] =>  1:05
     CLOCK: [2015-01-23 Fri 23:15]--[2015-01-24 Sat 00:04] =>  0:49
     CLOCK: [2015-01-22 Thu 21:43]--[2015-01-22 Thu 23:25] =>  1:42
@@ -151,6 +152,10 @@ We should create the dynamic workflow once and pass it to the dia to
 sml instances. Instead we are recreating it in every transformer
 instance. Since the workflow is const, we should be able to pass
 references to it around.
+
+*** Add default value support to dynamic field definitions            :story:
+
+We need to add a default value to the field definition.
 
 *** Update c++ factories to use dynamic object                        :story:
 

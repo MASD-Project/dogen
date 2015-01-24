@@ -27,6 +27,14 @@ const std::string facet_name("types");
 const std::string class_header_formatter_name("class_header_formatter");
 const std::string class_implementation_formatter_name(
     "class_implementation_formatter");
+const std::string enumeration_header_formatter_name(
+    "enumeration_header_formatter");
+const std::string exception_header_formatter_name(
+    "exception_header_formatter_name");
+const std::string namespace_header_formatter_name(
+    "namespace_header_formatter_name");
+const std::string visitor_header_formatter_name(
+    "visitor_header_formatter_name");
 
 dogen::dynamic::field_definition create_enabled() {
     dogen::dynamic::field_definition r;
@@ -130,7 +138,7 @@ create_enumeration_header_formatter_enabled() {
     r.name().qualified("cpp.types.enumeration_header_formatter.enabled");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(enumeration_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
@@ -143,7 +151,7 @@ create_enumeration_header_formatter_postfix() {
     r.name().qualified("cpp.types.enumeration_header_formatter.postfix");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(enumeration_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
@@ -156,7 +164,7 @@ create_exception_header_formatter_enabled() {
     r.name().qualified("cpp.types.exception_header_formatter.enabled");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(exception_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
@@ -169,7 +177,7 @@ create_exception_header_formatter_postfix() {
     r.name().qualified("cpp.types.exception_header_formatter.postfix");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(exception_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
@@ -182,7 +190,7 @@ create_namespace_header_formatter_enabled() {
     r.name().qualified("cpp.types.namespace_header_formatter.enabled");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(namespace_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
@@ -195,7 +203,7 @@ create_namespace_header_formatter_postfix() {
     r.name().qualified("cpp.types.namespace_header_formatter.postfix");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(namespace_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
@@ -208,7 +216,7 @@ create_visitor_header_formatter_enabled() {
     r.name().qualified("cpp.types.visitor_header_formatter.enabled");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(visitor_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
@@ -221,7 +229,7 @@ create_visitor_header_formatter_postfix() {
     r.name().qualified("cpp.types.visitor_header_formatter.postfix");
     r.ownership_hierarchy().model(model_name);
     r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.ownership_hierarchy().formatter(visitor_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;

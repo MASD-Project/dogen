@@ -23,7 +23,6 @@
 #include "dogen/cpp/types/facet_settings.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/initializer.hpp"
 #include "dogen/cpp/types/formatters/types/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
 
