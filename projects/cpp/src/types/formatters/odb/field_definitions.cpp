@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
 #include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
@@ -41,6 +44,7 @@ dogen::dynamic::field_definition create_enabled() {
     r.ownership_hierarchy().facet(facet_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -52,6 +56,7 @@ dogen::dynamic::field_definition create_directory() {
     r.ownership_hierarchy().facet(facet_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::text>("odb"));
     return r;
 }
 
@@ -63,6 +68,7 @@ dogen::dynamic::field_definition create_postfix() {
     r.ownership_hierarchy().facet(facet_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::text>("odb"));
     return r;
 }
 
@@ -75,6 +81,7 @@ dogen::dynamic::field_definition create_class_header_formatter_enabled() {
     r.ownership_hierarchy().formatter(class_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 

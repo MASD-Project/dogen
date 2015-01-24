@@ -17,20 +17,21 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-24 Sat 20:47]
+Clock summary at [2015-01-24 Sat 21:22]
 
-| Headline                                                   | Time    |       |      |
-|------------------------------------------------------------+---------+-------+------|
-| *Total time*                                               | *11:16* |       |      |
-|------------------------------------------------------------+---------+-------+------|
-| Active                                                     |         | 11:16 |      |
-| STARTED Sprint and product backlog grooming                |         |       | 1:23 |
-| COMPLETED Add annotation fields and remove meta-data usage |         |       | 2:15 |
-| COMPLETED Add field definition to odb formatters           |         |       | 1:09 |
-| COMPLETED Consider defaulting doxygen docs to false        |         |       | 0:05 |
-| COMPLETED Refactor hierarchy ownership of fields           |         |       | 1:03 |
-| COMPLETED Create field definitions for all c++ fields      |         |       | 4:55 |
-| STARTED Rename namespace =meta-data= to =dynamic=          |         |       | 0:26 |
+| Headline                                                         | Time    |       |      |
+|------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                     | *11:51* |       |      |
+|------------------------------------------------------------------+---------+-------+------|
+| Active                                                           |         | 11:51 |      |
+| STARTED Sprint and product backlog grooming                      |         |       | 1:23 |
+| COMPLETED Add annotation fields and remove meta-data usage       |         |       | 2:15 |
+| COMPLETED Add field definition to odb formatters                 |         |       | 1:09 |
+| COMPLETED Consider defaulting doxygen docs to false              |         |       | 0:05 |
+| COMPLETED Refactor hierarchy ownership of fields                 |         |       | 1:03 |
+| COMPLETED Create field definitions for all c++ fields            |         |       | 4:55 |
+| COMPLETED Add default value support to dynamic field definitions |         |       | 0:35 |
+| STARTED Rename namespace =meta-data= to =dynamic=                |         |       | 0:26 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -143,6 +144,14 @@ the following:
 - create all of the field definitions for all of the formatters and
   inject them via the initialisers.
 
+*** COMPLETED Add default value support to dynamic field definitions  :story:
+    CLOSED: [2015-01-24 Sat 21:21]
+    CLOCK: [2015-01-24 Sat 20:46]--[2015-01-24 Sat 21:21] =>  0:35
+
+We need to add a default value to the field definition. We also need
+to go through all the existing fields and add default values where
+required.
+
 *** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
     CLOCK: [2015-01-22 Thu 19:15]--[2015-01-22 Thu 19:25] =>  0:10
     CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
@@ -157,10 +166,6 @@ We should create the dynamic workflow once and pass it to the dia to
 sml instances. Instead we are recreating it in every transformer
 instance. Since the workflow is const, we should be able to pass
 references to it around.
-
-*** Add default value support to dynamic field definitions            :story:
-
-We need to add a default value to the field definition.
 
 *** Update c++ factories to use dynamic object                        :story:
 

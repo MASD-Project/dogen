@@ -26424,7 +26424,7 @@ factories.#</dia:string>
         <dia:point val="410.342,89.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="406.058,89.2293;410.413,93.3269"/>
+        <dia:rectangle val="406.059,89.2293;410.413,93.3268"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27325,7 +27325,7 @@ factories.#</dia:string>
         <dia:point val="310,103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="309.25,102.25;314.438,114.6"/>
+        <dia:rectangle val="309.25,102.25;314.438,113.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27396,7 +27396,7 @@ factories.#</dia:string>
         <dia:point val="328.538,103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="327.788,102.25;332.477,114.6"/>
+        <dia:rectangle val="327.788,102.25;332.477,113.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27467,7 +27467,7 @@ factories.#</dia:string>
         <dia:point val="347.075,103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="346.325,102.25;351.104,114.6"/>
+        <dia:rectangle val="346.325,102.25;351.104,113.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27538,7 +27538,7 @@ factories.#</dia:string>
         <dia:point val="314.238,116"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="313.488,115.25;322.2,128.6"/>
+        <dia:rectangle val="313.488,115.25;322.2,127.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27609,7 +27609,7 @@ factories.#</dia:string>
         <dia:point val="332.277,116.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="331.527,115.3;333.808,128.6"/>
+        <dia:rectangle val="331.527,115.3;333.808,127.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27680,7 +27680,7 @@ factories.#</dia:string>
         <dia:point val="350.904,116"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="345.165,115.25;351.654,128.6"/>
+        <dia:rectangle val="345.165,115.25;351.654,127.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27751,7 +27751,7 @@ factories.#</dia:string>
         <dia:point val="370,98.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="364.627,97.45;370.75,114.6"/>
+        <dia:rectangle val="364.628,97.45;370.75,113.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27822,7 +27822,7 @@ factories.#</dia:string>
         <dia:point val="379.298,98.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="378.548,97.45;381.671,114.6"/>
+        <dia:rectangle val="378.548,97.45;381.671,113.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27893,7 +27893,7 @@ factories.#</dia:string>
         <dia:point val="388.595,98.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="387.845,97.45;398.727,114.6"/>
+        <dia:rectangle val="387.845,97.45;398.727,113.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27964,7 +27964,7 @@ factories.#</dia:string>
         <dia:point val="364.678,117.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="363.928,116.65;379.2,132.6"/>
+        <dia:rectangle val="363.928,116.65;379.2,131.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28035,7 +28035,7 @@ factories.#</dia:string>
         <dia:point val="381.471,116.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="380.721,115.85;382.63,132.6"/>
+        <dia:rectangle val="380.721,115.85;382.63,131.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28106,7 +28106,7 @@ factories.#</dia:string>
         <dia:point val="398.527,121.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="385.81,120.65;399.277,132.6"/>
+        <dia:rectangle val="385.81,120.65;399.277,131.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

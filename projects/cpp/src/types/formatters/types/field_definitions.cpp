@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/cpp/types/formatters/types/field_definitions.hpp"
 
 namespace {
@@ -44,6 +47,7 @@ dogen::dynamic::field_definition create_enabled() {
     r.ownership_hierarchy().facet(facet_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -55,6 +59,7 @@ dogen::dynamic::field_definition create_directory() {
     r.ownership_hierarchy().facet(facet_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::text>("types"));
     return r;
 }
 
@@ -78,6 +83,7 @@ dogen::dynamic::field_definition create_class_header_formatter_enabled() {
     r.ownership_hierarchy().formatter(class_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -115,6 +121,7 @@ create_class_implementation_formatter_enabled() {
     r.ownership_hierarchy().formatter(class_implementation_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -141,6 +148,7 @@ create_enumeration_header_formatter_enabled() {
     r.ownership_hierarchy().formatter(enumeration_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -167,6 +175,7 @@ create_exception_header_formatter_enabled() {
     r.ownership_hierarchy().formatter(exception_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -180,6 +189,7 @@ create_exception_header_formatter_postfix() {
     r.ownership_hierarchy().formatter(exception_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -193,6 +203,7 @@ create_namespace_header_formatter_enabled() {
     r.ownership_hierarchy().formatter(namespace_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -219,6 +230,7 @@ create_visitor_header_formatter_enabled() {
     r.ownership_hierarchy().formatter(visitor_header_formatter_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -232,6 +244,7 @@ create_visitor_header_formatter_postfix() {
     r.ownership_hierarchy().formatter(visitor_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::text>("visitor"));
     return r;
 }
 
