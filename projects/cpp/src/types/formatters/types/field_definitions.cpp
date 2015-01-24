@@ -19,73 +19,312 @@
  *
  */
 #include "dogen/cpp/types/formatters/types/field_definitions.hpp"
-/*
+
 namespace {
 
-dogen::dynamic::field_definition create_facet_enabled() {
-    dogen::dynamic::name n;
-    n.simple_name("enabled");
-    n.owner("cpp.types");
-    n.complete_name("cpp.types.enabled");
+const std::string model_name("cpp");
+const std::string facet_name("types");
+const std::string class_header_formatter_name("class_header_formatter");
+const std::string class_implementation_formatter_name(
+    "class_implementation_formatter");
 
+dogen::dynamic::field_definition create_enabled() {
     dogen::dynamic::field_definition r;
-    r.name(n);
-    r.type(dogen::dynamic::value_types::text);
+    r.name().simple("enabled");
+    r.name().qualified("cpp.types.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_directory() {
-    dogen::dynamic::name n;
-    n.simple_name("licence_name");
-    n.owner("cpp");
-    n.complete_name(n.simple_name());
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("directory");
+    r.name().qualified("cpp.types.directory");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_postfix() {
-    dogen::dynamic::name n;
-    n.simple_name("licence_name");
-    n.owner("cpp");
-    n.complete_name(n.simple_name());
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("postfix");
+    r.name().qualified("cpp.types.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
-dogen::dynamic::field_definition create_enabled() {
-    dogen::dynamic::name n;
-    n.simple_name("licence_name");
-    n.owner("cpp");
-    n.complete_name(n.simple_name());
-
+dogen::dynamic::field_definition create_class_header_formatter_enabled() {
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("enabled");
+    r.name().qualified("cpp.types.class_header_formatter.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_header_formatter_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition create_class_header_formatter_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.types.class_header_formatter.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
-dogen::dynamic::field_definition create_additional_postfix() {
-    dogen::dynamic::name n;
-    n.simple_name("licence_name");
-    n.owner("cpp");
-    n.complete_name(n.simple_name());
-
+dogen::dynamic::field_definition create_class_header_formatter_file_name() {
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("file_name");
+    r.name().qualified("cpp.types.class_header_formatter.file_name");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_header_formatter_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_class_implementation_formatter_enabled() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("enabled");
+    r.name().qualified("cpp.types.class_implementation_formatter.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_class_implementation_formatter_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.types.class_implementation_formatter.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_enumeration_header_formatter_enabled() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("enabled");
+    r.name().qualified("cpp.types.enumeration_header_formatter.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_enumeration_header_formatter_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.types.enumeration_header_formatter.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_exception_header_formatter_enabled() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("enabled");
+    r.name().qualified("cpp.types.exception_header_formatter.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_exception_header_formatter_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.types.exception_header_formatter.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_namespace_header_formatter_enabled() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("enabled");
+    r.name().qualified("cpp.types.namespace_header_formatter.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_namespace_header_formatter_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.types.namespace_header_formatter.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_visitor_header_formatter_enabled() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("enabled");
+    r.name().qualified("cpp.types.visitor_header_formatter.enabled");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::root_module);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_visitor_header_formatter_postfix() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("postfix");
+    r.name().qualified("cpp.types.visitor_header_formatter.postfix");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 }
-*/
+
+namespace dogen {
+namespace cpp {
+namespace formatters {
+namespace types {
+
+const dynamic::field_definition& field_definitions::enabled() {
+    static auto r(create_enabled());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::directory() {
+    static auto r(create_directory());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::postfix() {
+    static auto r(create_postfix());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_header_formatter::enabled() {
+    static auto r(create_class_header_formatter_enabled());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_header_formatter::postfix() {
+    static auto r(create_class_header_formatter_postfix());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_header_formatter::file_name() {
+    static auto r(create_class_header_formatter_file_name());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_implementation_formatter::enabled() {
+    static auto r(create_class_implementation_formatter_enabled());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_implementation_formatter::postfix() {
+    static auto r(create_class_implementation_formatter_postfix());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::enumeration_header_formatter::enabled() {
+    static auto r(create_enumeration_header_formatter_enabled());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::enumeration_header_formatter::postfix() {
+    static auto r(create_enumeration_header_formatter_postfix());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::exception_header_formatter::enabled() {
+    static auto r(create_exception_header_formatter_enabled());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::exception_header_formatter::postfix() {
+    static auto r(create_exception_header_formatter_postfix());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::namespace_header_formatter::enabled() {
+    static auto r(create_namespace_header_formatter_enabled());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::namespace_header_formatter::postfix() {
+    static auto r(create_namespace_header_formatter_postfix());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::visitor_header_formatter::enabled() {
+    static auto r(create_visitor_header_formatter_enabled());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::visitor_header_formatter::postfix() {
+    static auto r(create_visitor_header_formatter_postfix());
+    return r;
+}
+
+} } } }

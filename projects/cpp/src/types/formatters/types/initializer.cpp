@@ -19,9 +19,12 @@
  *
  */
 #include <memory>
+#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/cpp/types/facet_settings.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/types/initializer.hpp"
+#include "dogen/cpp/types/formatters/types/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
 
 namespace {
@@ -53,9 +56,44 @@ void initialise_class_header_formatter(registrar& rg) {
     rg.register_formatter(std::make_shared<class_header_formatter>());
 }
 
+void register_field_definitions() {
+    auto& reg(dynamic::workflow::registrar());
+
+    using fd = field_definitions;
+    reg.register_field_definition(fd::enabled());
+    reg.register_field_definition(fd::directory());
+    reg.register_field_definition(fd::postfix());
+
+    using chf = fd::class_header_formatter;
+    reg.register_field_definition(chf::enabled());
+    reg.register_field_definition(chf::postfix());
+    reg.register_field_definition(chf::file_name());
+
+    using cif = fd::class_implementation_formatter;
+    reg.register_field_definition(cif::postfix());
+    reg.register_field_definition(cif::enabled());
+
+    using ehf = fd::enumeration_header_formatter;
+    reg.register_field_definition(ehf::postfix());
+    reg.register_field_definition(ehf::enabled());
+
+    using exhf = fd::exception_header_formatter;
+    reg.register_field_definition(exhf::postfix());
+    reg.register_field_definition(exhf::enabled());
+
+    using nhf = fd::namespace_header_formatter;
+    reg.register_field_definition(nhf::postfix());
+    reg.register_field_definition(nhf::enabled());
+
+    using vhf = fd::visitor_header_formatter;
+    reg.register_field_definition(vhf::postfix());
+    reg.register_field_definition(vhf::enabled());
+}
+
 void initializer::initialize(registrar& rg) {
     initialise_facet(rg);
     initialise_class_header_formatter(rg);
+    register_field_definitions();
 }
 
 } } } }

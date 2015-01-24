@@ -17,20 +17,20 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-24 Sat 18:56]
+Clock summary at [2015-01-24 Sat 20:06]
 
-| Headline                                                   | Time   |      |      |
-|------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *9:32* |      |      |
-|------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 9:32 |      |
-| STARTED Sprint and product backlog grooming                |        |      | 1:23 |
-| COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
-| COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
-| COMPLETED Consider defaulting doxygen docs to false        |        |      | 0:05 |
-| COMPLETED Refactor hierarchy ownership of fields           |        |      | 1:03 |
-| STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:26 |
-| STARTED Create field definitions for all c++ fields        |        |      | 3:11 |
+| Headline                                                   | Time    |       |      |
+|------------------------------------------------------------+---------+-------+------|
+| *Total time*                                               | *10:37* |       |      |
+|------------------------------------------------------------+---------+-------+------|
+| Active                                                     |         | 10:37 |      |
+| STARTED Sprint and product backlog grooming                |         |       | 1:23 |
+| COMPLETED Add annotation fields and remove meta-data usage |         |       | 2:15 |
+| COMPLETED Add field definition to odb formatters           |         |       | 1:09 |
+| COMPLETED Consider defaulting doxygen docs to false        |         |       | 0:05 |
+| COMPLETED Refactor hierarchy ownership of fields           |         |       | 1:03 |
+| STARTED Rename namespace =meta-data= to =dynamic=          |         |       | 0:26 |
+| STARTED Create field definitions for all c++ fields        |         |       | 4:16 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -124,6 +124,7 @@ where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
 *** STARTED Create field definitions for all c++ fields               :story:
+    CLOCK: [2015-01-24 Sat 19:01]--[2015-01-24 Sat 20:06] =>  1:05
     CLOCK: [2015-01-23 Fri 23:15]--[2015-01-24 Sat 00:04] =>  0:49
     CLOCK: [2015-01-22 Thu 21:43]--[2015-01-22 Thu 23:25] =>  1:42
     CLOCK: [2015-01-22 Thu 20:50]--[2015-01-22 Thu 21:30] =>  0:40
@@ -136,7 +137,8 @@ the following:
 
 - create a proper hierarchical structure for fields rather than a flat
   owner. This is to cope with the fields that belong to facets or
-  formatters. Update all of the existing field definitions.
+  formatters. Update all of the existing field definitions. Split
+  into its own story.
 - add a class header file name field. This is so we can override it
   for STL, boost, etc. We only need it for class header file names (by
   convention).

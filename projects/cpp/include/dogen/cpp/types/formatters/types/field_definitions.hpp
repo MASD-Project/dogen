@@ -63,12 +63,87 @@ struct field_definitions {
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static const dynamic::field_definition& additional_postfix();
+        static const dynamic::field_definition& postfix();
 
         /**
          * @brief File name override to apply.
          */
         static const dynamic::field_definition& file_name();
+    };
+
+    /**
+     * @brief Fields supported by the class implementation formatter.
+     */
+    struct class_implementation_formatter {
+        /**
+         * @brief If set to false, the formatter will not be generated.
+         */
+        static const dynamic::field_definition& enabled();
+
+        /**
+         * @brief Post-fix to apply to file names for this formatter.
+         */
+        static const dynamic::field_definition& postfix();
+    };
+
+    /**
+     * @brief Fields supported by the enumeration header formatter.
+     */
+    struct enumeration_header_formatter {
+        /**
+         * @brief If set to false, the formatter will not be generated.
+         */
+        static const dynamic::field_definition& enabled();
+
+        /**
+         * @brief Post-fix to apply to file names for this formatter.
+         */
+        static const dynamic::field_definition& postfix();
+    };
+
+    /**
+     * @brief Fields supported by the exception header formatter.
+     */
+    struct exception_header_formatter {
+        /**
+         * @brief If set to false, the formatter will not be generated.
+         */
+        static const dynamic::field_definition& enabled();
+
+        /**
+         * @brief Post-fix to apply to file names for this formatter.
+         */
+        static const dynamic::field_definition& postfix();
+    };
+
+    /**
+     * @brief Fields supported by the namespace header formatter.
+     */
+    struct namespace_header_formatter {
+        /**
+         * @brief If set to false, the formatter will not be generated.
+         */
+        static const dynamic::field_definition& enabled();
+
+        /**
+         * @brief Post-fix to apply to file names for this formatter.
+         */
+        static const dynamic::field_definition& postfix();
+    };
+
+    /**
+     * @brief Fields supported by the visitor header formatter.
+     */
+    struct visitor_header_formatter {
+        /**
+         * @brief If set to false, the formatter will not be generated.
+         */
+        static const dynamic::field_definition& enabled();
+
+        /**
+         * @brief Post-fix to apply to file names for this formatter.
+         */
+        static const dynamic::field_definition& postfix();
     };
 };
 
