@@ -9,6 +9,13 @@
 Stories that we intend to look at, at some point.
 
 
+*** Allow for generation of class with the same name as package       :story:
+
+At present its not possible to generate a class inside a package with
+the same name of that package, if the package documentation is being
+generated. This is because they will both have the exact same file
+name.
+
 *** Consider renaming qname                                           :story:
 
 As part of dynamic we came up with a better way of modeling names:
