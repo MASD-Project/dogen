@@ -17,17 +17,18 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-24 Sat 00:05]
+Clock summary at [2015-01-24 Sat 18:56]
 
 | Headline                                                   | Time   |      |      |
 |------------------------------------------------------------+--------+------+------|
-| *Total time*                                               | *8:29* |      |      |
+| *Total time*                                               | *9:32* |      |      |
 |------------------------------------------------------------+--------+------+------|
-| Active                                                     |        | 8:29 |      |
+| Active                                                     |        | 9:32 |      |
 | STARTED Sprint and product backlog grooming                |        |      | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage |        |      | 2:15 |
 | COMPLETED Add field definition to odb formatters           |        |      | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false        |        |      | 0:05 |
+| COMPLETED Refactor hierarchy ownership of fields           |        |      | 1:03 |
 | STARTED Rename namespace =meta-data= to =dynamic=          |        |      | 0:26 |
 | STARTED Create field definitions for all c++ fields        |        |      | 3:11 |
 #+end:
@@ -104,6 +105,15 @@ At present we do build all quite a lot, but never really look at the
 docs. We should not have to pay the cost of doxygenation. It would be
 better to default it to false even in the presence of the doxygen
 binary.
+
+*** COMPLETED Refactor hierarchy ownership of fields                  :story:
+    CLOSED: [2015-01-24 Sat 18:53]
+    CLOCK: [2015-01-24 Sat 17:49]--[2015-01-24 Sat 18:52] =>  1:03
+
+Since we cannot know the name of the fields for each formatter, we
+need a way to pull out all fields for a given formatter when building
+the formatter settings. We need to model this kind of hierarchical
+information so we can query fields by it.
 
 *** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
     CLOCK: [2015-01-22 Thu 19:15]--[2015-01-22 Thu 19:25] =>  0:10

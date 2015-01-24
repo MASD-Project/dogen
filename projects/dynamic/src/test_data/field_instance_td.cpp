@@ -18,8 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/test_data/field_td.hpp"
-#include "dogen/dynamic/test_data/name_td.hpp"
+#include "dogen/dynamic/test_data/field_instance_td.hpp"
 #include "dogen/dynamic/test_data/value_td.hpp"
 
 namespace {
@@ -36,39 +35,33 @@ create_boost_shared_ptr_dogen_dynamic_value(unsigned int position) {
     return r;
 }
 
-dogen::dynamic::name
-create_dogen_dynamic_name(const unsigned int position) {
-    return dogen::dynamic::name_generator::create(position);
-}
-
 }
 
 namespace dogen {
 namespace dynamic {
 
-field_generator::field_generator() : position_(0) { }
+field_instance_generator::field_instance_generator() : position_(0) { }
 
-void field_generator::
+void field_instance_generator::
 populate(const unsigned int position, result_type& v) {
     v.value(create_boost_shared_ptr_dogen_dynamic_value(position + 0));
-    v.name(create_dogen_dynamic_name(position + 1));
 }
 
-field_generator::result_type
-field_generator::create(const unsigned int position) {
-    field r;
-    field_generator::populate(position, r);
+field_instance_generator::result_type
+field_instance_generator::create(const unsigned int position) {
+    field_instance r;
+    field_instance_generator::populate(position, r);
     return r;
 }
-field_generator::result_type*
-field_generator::create_ptr(const unsigned int position) {
-    field* p = new field();
-    field_generator::populate(position, *p);
+field_instance_generator::result_type*
+field_instance_generator::create_ptr(const unsigned int position) {
+    field_instance* p = new field_instance();
+    field_instance_generator::populate(position, *p);
     return p;
 }
 
-field_generator::result_type
-field_generator::operator()() {
+field_instance_generator::result_type
+field_instance_generator::operator()() {
     return create(position_++);
 }
 

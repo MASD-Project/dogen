@@ -2270,11 +2270,6 @@
 												<content>1</content>
 											</px>
 										</value>
-										<name class_id="40" tracking_level="0" version="0">
-											<simple_name>identity_attribute</simple_name>
-											<owner>dia</owner>
-											<complete_name>dia.identity_attribute</complete_name>
-										</name>
 									</second>
 								</item>
 							</fields>
@@ -2406,11 +2401,6 @@
 										<value>
 											<px class_id_reference="0" object_id_reference="_6"></px>
 										</value>
-										<name>
-											<simple_name>identity_attribute</simple_name>
-											<owner>dia</owner>
-											<complete_name>dia.identity_attribute</complete_name>
-										</name>
 									</second>
 								</item>
 							</fields>

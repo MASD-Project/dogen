@@ -27,10 +27,9 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/string.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include "dogen/dynamic/serialization/field_instance_ser.hpp"
-#include "dogen/dynamic/serialization/object_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
+#include "dogen/dynamic/serialization/value_ser.hpp"
 
 
 namespace boost {
@@ -38,16 +37,16 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::dynamic::object& v,
+    const dogen::dynamic::field_instance& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("fields", v.fields_);
+    ar << make_nvp("value", v.value_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::dynamic::object& v,
+    dogen::dynamic::field_instance& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("fields", v.fields_);
+    ar >> make_nvp("value", v.value_);
 }
 
 } }
@@ -55,16 +54,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::dynamic::object& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::dynamic::object& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::dynamic::field_instance& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::dynamic::field_instance& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::dynamic::object& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::dynamic::object& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::dynamic::field_instance& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::dynamic::field_instance& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::dynamic::object& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::dynamic::object& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::dynamic::field_instance& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::dynamic::field_instance& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::dynamic::object& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::dynamic::object& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::dynamic::field_instance& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::dynamic::field_instance& v, unsigned int version);
 
 } }

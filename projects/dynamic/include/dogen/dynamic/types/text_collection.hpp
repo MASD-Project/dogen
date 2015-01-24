@@ -35,6 +35,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Field can hold a collection of text values.
+ */
 class text_collection final : public dogen::dynamic::value {
 public:
     text_collection() = default;
@@ -74,10 +77,15 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief Collection of text values.
+     */
+    /**@{*/
     const std::list<std::string>& content() const;
     std::list<std::string>& content();
     void content(const std::list<std::string>& v);
     void content(const std::list<std::string>&& v);
+    /**@}*/
 
 public:
     bool operator==(const text_collection& rhs) const;

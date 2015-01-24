@@ -24,89 +24,73 @@
 
 namespace {
 
-dogen::dynamic::field_definition create_copyright_notices() {
-    dogen::dynamic::name n;
-    n.simple_name("copyright_notice");
-    n.complete_name(n.simple_name());
+const std::string model_name("formatters");
 
+dogen::dynamic::field_definition create_copyright_notices() {
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("copyright_notice");
+    r.name().qualified(r.name().simple());
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text_collection);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
 }
 
 dogen::dynamic::field_definition create_licence_name() {
-    dogen::dynamic::name n;
-    n.simple_name("licence_name");
-    n.complete_name(n.simple_name());
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("licence_name");
+    r.name().qualified(r.name().simple());
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
 }
 
 dogen::dynamic::field_definition create_modeline_group_name() {
-    dogen::dynamic::name n;
-    n.simple_name("modeline_group_name");
-    n.complete_name(n.simple_name());
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("modeline_group_name");
+    r.name().qualified(r.name().simple());
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
 }
 
 dogen::dynamic::field_definition create_generate_preamble() {
-    dogen::dynamic::name n;
-    n.simple_name("generate_preamble");
-    n.owner("code_generation_marker");
-    n.complete_name("code_generation_marker.generate_preamble");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("generate_preamble");
+    r.name().qualified("code_generation_marker.generate_preamble");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
 }
 
 dogen::dynamic::field_definition create_add_date_time() {
-    dogen::dynamic::name n;
-    n.simple_name("add_date_time");
-    n.owner("code_generation_marker");
-    n.complete_name("code_generation_marker.add_date_time");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("add_date_time");
+    r.name().qualified("code_generation_marker.add_date_time");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
 }
 
 dogen::dynamic::field_definition create_add_warning() {
-    dogen::dynamic::name n;
-    n.simple_name("add_warning");
-    n.owner("code_generation_marker");
-    n.complete_name("code_generation_marker.add_warning");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("add_warning");
+    r.name().qualified("code_generation_marker.add_warning");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
 }
 
 dogen::dynamic::field_definition create_message() {
-    dogen::dynamic::name n;
-    n.simple_name("message");
-    n.owner("code_generation_marker");
-    n.complete_name("code_generation_marker.message");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("message");
+    r.name().qualified("code_generation_marker.message");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::any);
     return r;

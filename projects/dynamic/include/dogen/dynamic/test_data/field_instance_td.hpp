@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_FIELD_FWD_HPP
-#define DOGEN_DYNAMIC_TYPES_FIELD_FWD_HPP
+#ifndef DOGEN_DYNAMIC_TEST_DATA_FIELD_INSTANCE_TD_HPP
+#define DOGEN_DYNAMIC_TEST_DATA_FIELD_INSTANCE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/dynamic/types/field_instance.hpp"
+
 namespace dogen {
 namespace dynamic {
 
-class field;
+class field_instance_generator {
+public:
+    field_instance_generator();
+
+public:
+    typedef dogen::dynamic::field_instance result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

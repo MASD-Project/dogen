@@ -28,6 +28,7 @@
 #include <algorithm>
 #include "dogen/dynamic/serialization/field_definition_fwd_ser.hpp"
 #include "dogen/dynamic/types/name.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
 
@@ -50,7 +51,8 @@ public:
     field_definition(
         const dogen::dynamic::name& name,
         const dogen::dynamic::value_types& type,
-        const dogen::dynamic::scope_types& scope);
+        const dogen::dynamic::scope_types& scope,
+        const dogen::dynamic::ownership_hierarchy& ownership_hierarchy);
 
 private:
     template<typename Archive>
@@ -86,6 +88,16 @@ public:
     void scope(const dogen::dynamic::scope_types& v);
     /**@}*/
 
+    /**
+     * @brief The ownership hierarchy information for this field.
+     */
+    /**@{*/
+    const dogen::dynamic::ownership_hierarchy& ownership_hierarchy() const;
+    dogen::dynamic::ownership_hierarchy& ownership_hierarchy();
+    void ownership_hierarchy(const dogen::dynamic::ownership_hierarchy& v);
+    void ownership_hierarchy(const dogen::dynamic::ownership_hierarchy&& v);
+    /**@}*/
+
 public:
     bool operator==(const field_definition& rhs) const;
     bool operator!=(const field_definition& rhs) const {
@@ -100,6 +112,7 @@ private:
     dogen::dynamic::name name_;
     dogen::dynamic::value_types type_;
     dogen::dynamic::scope_types scope_;
+    dogen::dynamic::ownership_hierarchy ownership_hierarchy_;
 };
 
 } }

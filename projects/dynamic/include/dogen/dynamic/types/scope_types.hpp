@@ -28,6 +28,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Where can a field appear.
+ */
 enum class scope_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     any = 1, ///< Field can appear anywhere.

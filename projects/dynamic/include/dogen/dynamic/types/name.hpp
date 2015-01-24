@@ -32,6 +32,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Name of the field description or field.
+ */
 class name final {
 public:
     name() = default;
@@ -41,9 +44,8 @@ public:
 
 public:
     name(
-        const std::string& simple_name,
-        const std::string& owner,
-        const std::string& complete_name);
+        const std::string& simple,
+        const std::string& qualified);
 
 private:
     template<typename Archive>
@@ -53,20 +55,25 @@ private:
     friend void boost::serialization::load(Archive& ar, name& v, unsigned int version);
 
 public:
-    const std::string& simple_name() const;
-    std::string& simple_name();
-    void simple_name(const std::string& v);
-    void simple_name(const std::string&& v);
+    /**
+     * @brief Non-qualified name of the field.
+     */
+    /**@{*/
+    const std::string& simple() const;
+    std::string& simple();
+    void simple(const std::string& v);
+    void simple(const std::string&& v);
+    /**@}*/
 
-    const std::string& owner() const;
-    std::string& owner();
-    void owner(const std::string& v);
-    void owner(const std::string&& v);
-
-    const std::string& complete_name() const;
-    std::string& complete_name();
-    void complete_name(const std::string& v);
-    void complete_name(const std::string&& v);
+    /**
+     * @brief Qualified name of the field, using dots to separate the hierarchy.
+     */
+    /**@{*/
+    const std::string& qualified() const;
+    std::string& qualified();
+    void qualified(const std::string& v);
+    void qualified(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const name& rhs) const;
@@ -79,9 +86,8 @@ public:
     name& operator=(name other);
 
 private:
-    std::string simple_name_;
-    std::string owner_;
-    std::string complete_name_;
+    std::string simple_;
+    std::string qualified_;
 };
 
 } }

@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_HASH_FIELD_HASH_HPP
-#define DOGEN_DYNAMIC_HASH_FIELD_HASH_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_FIELD_INSTANCE_FWD_HPP
+#define DOGEN_DYNAMIC_TYPES_FIELD_INSTANCE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/dynamic/types/field.hpp"
-
 namespace dogen {
 namespace dynamic {
 
-struct field_hasher {
-public:
-    static std::size_t hash(const field& v);
-};
+class field_instance;
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::dynamic::field> {
-public:
-    size_t operator()(const dogen::dynamic::field& v) const {
-        return dogen::dynamic::field_hasher::hash(v);
-    }
-};
-
-}
 #endif

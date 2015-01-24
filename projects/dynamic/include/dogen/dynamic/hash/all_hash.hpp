@@ -20,10 +20,11 @@
  */
 #include "dogen/dynamic/hash/boolean_hash.hpp"
 #include "dogen/dynamic/hash/field_definition_hash.hpp"
-#include "dogen/dynamic/hash/field_hash.hpp"
+#include "dogen/dynamic/hash/field_instance_hash.hpp"
 #include "dogen/dynamic/hash/name_hash.hpp"
 #include "dogen/dynamic/hash/number_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
+#include "dogen/dynamic/hash/ownership_hierarchy_hash.hpp"
 #include "dogen/dynamic/hash/scope_types_hash.hpp"
 #include "dogen/dynamic/hash/text_collection_hash.hpp"
 #include "dogen/dynamic/hash/text_hash.hpp"

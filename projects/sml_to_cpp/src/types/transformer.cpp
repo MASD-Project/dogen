@@ -201,7 +201,7 @@ transformer::obtain_opaque_parameters(const dynamic::object& o) const {
     if (!has_field(o, fd::odb_pragma()))
         return r;
 
-    const auto sn(fd::odb_pragma().name().simple_name());
+    const auto sn(fd::odb_pragma().name().simple());
     const auto tc(get_text_collection_content(o, fd::odb_pragma()));
     for (const auto& e : tc)
         r.push_back(std::make_pair(sn, e));

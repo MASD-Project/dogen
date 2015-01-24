@@ -23,7 +23,7 @@
 namespace dogen {
 namespace dynamic {
 
-object::object(const std::unordered_map<std::string, dogen::dynamic::field>& fields)
+object::object(const std::unordered_map<std::string, dogen::dynamic::field_instance>& fields)
     : fields_(fields) { }
 
 void object::swap(object& other) noexcept {
@@ -41,19 +41,19 @@ object& object::operator=(object other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::dynamic::field>& object::fields() const {
+const std::unordered_map<std::string, dogen::dynamic::field_instance>& object::fields() const {
     return fields_;
 }
 
-std::unordered_map<std::string, dogen::dynamic::field>& object::fields() {
+std::unordered_map<std::string, dogen::dynamic::field_instance>& object::fields() {
     return fields_;
 }
 
-void object::fields(const std::unordered_map<std::string, dogen::dynamic::field>& v) {
+void object::fields(const std::unordered_map<std::string, dogen::dynamic::field_instance>& v) {
     fields_ = v;
 }
 
-void object::fields(const std::unordered_map<std::string, dogen::dynamic::field>&& v) {
+void object::fields(const std::unordered_map<std::string, dogen::dynamic::field_instance>&& v) {
     fields_ = std::move(v);
 }
 

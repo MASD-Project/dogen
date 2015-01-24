@@ -33,6 +33,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Field can hold a Boolean value.
+ */
 class boolean final : public dogen::dynamic::value {
 public:
     boolean(const boolean&) = default;

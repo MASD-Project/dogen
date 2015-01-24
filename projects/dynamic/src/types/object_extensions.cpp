@@ -41,12 +41,12 @@ namespace dogen {
 namespace dynamic {
 
 bool has_field(const object& o, const field_definition& fd) {
-    const auto i(o.fields().find(fd.name().complete_name()));
+    const auto i(o.fields().find(fd.name().qualified()));
     return (i != o.fields().end());
 }
 
-const field& get_field(const object& o, const field_definition& fd) {
-    const auto n(fd.name().complete_name());
+const field_instance& get_field(const object& o, const field_definition& fd) {
+    const auto n(fd.name().qualified());
     const auto i(o.fields().find(n));
 
     if (i == o.fields().end()) {
@@ -66,7 +66,7 @@ get_text_content(const object& o, const field_definition& fd) {
         const auto& t(dynamic_cast<const text&>(v));
         return t.content();
     } catch(const std::bad_cast& e) {
-        const auto n(fd.name().complete_name());
+        const auto n(fd.name().qualified());
         BOOST_LOG_SEV(lg, error) << unexpected_field_type << n;
         BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
     }
@@ -81,7 +81,7 @@ get_text_collection_content(const object& o, const field_definition& fd) {
         const auto& tc(dynamic_cast<const text_collection&>(v));
         return tc.content();
     } catch(const std::bad_cast& e) {
-        const auto n(fd.name().complete_name());
+        const auto n(fd.name().qualified());
         BOOST_LOG_SEV(lg, error) << unexpected_field_type << n;
         BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
     }
@@ -95,7 +95,7 @@ bool get_boolean_content(const object& o, const field_definition& fd) {
         const auto& b(dynamic_cast<const boolean&>(v));
         return b.content();
     } catch(const std::bad_cast& e) {
-        const auto n(fd.name().complete_name());
+        const auto n(fd.name().qualified());
         BOOST_LOG_SEV(lg, error) << unexpected_field_type << n;
         BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
     }

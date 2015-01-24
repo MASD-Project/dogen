@@ -33,6 +33,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Field can hold a numeric value.
+ */
 class number final : public dogen::dynamic::value {
 public:
     number(const number&) = default;

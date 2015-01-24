@@ -37,9 +37,8 @@ namespace dynamic {
 std::size_t name_hasher::hash(const name&v) {
     std::size_t seed(0);
 
-    combine(seed, v.simple_name());
-    combine(seed, v.owner());
-    combine(seed, v.complete_name());
+    combine(seed, v.simple());
+    combine(seed, v.qualified());
 
     return seed;
 }

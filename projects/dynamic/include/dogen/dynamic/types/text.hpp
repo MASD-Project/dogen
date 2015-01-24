@@ -34,6 +34,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Field can hold text.
+ */
 class text final : public dogen::dynamic::value {
 public:
     text() = default;
@@ -73,10 +76,15 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief Text value.
+     */
+    /**@{*/
     const std::string& content() const;
     std::string& content();
     void content(const std::string& v);
     void content(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const text& rhs) const;

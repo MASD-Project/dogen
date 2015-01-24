@@ -124,11 +124,10 @@ boost::shared_ptr<value> field_factory::create_boolean_value(
     return boost::make_shared<boolean>(to_bool(raw_value));
 }
 
-field field_factory::build(const field_definition& fd,
+field_instance field_factory::build(const field_definition& fd,
     const std::list<std::string>& raw_values) const {
-    field r;
+    field_instance r;
 
-    r.name(fd.name());
     switch (fd.type()) {
     case value_types::text:
         ensure_at_most_one_element(raw_values);

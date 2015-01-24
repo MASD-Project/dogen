@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SERIALIZATION_FIELD_FWD_SER_HPP
-#define DOGEN_DYNAMIC_SERIALIZATION_FIELD_FWD_SER_HPP
+#ifndef DOGEN_DYNAMIC_SERIALIZATION_FIELD_INSTANCE_SER_HPP
+#define DOGEN_DYNAMIC_SERIALIZATION_FIELD_INSTANCE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/field_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dynamic/types/field_instance.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dynamic::field_instance)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::dynamic::field& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::dynamic::field_instance& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::dynamic::field& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::dynamic::field_instance& v, unsigned int version);
 
 } }
 

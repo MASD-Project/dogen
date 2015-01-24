@@ -68,12 +68,12 @@ create_field_definitions_by_complete_name() const {
                              << registrar().field_definitions();
 
     for (const auto& fd : registrar().field_definitions()) {
-        const auto cn(fd.name().complete_name());
-        const auto result(r.insert(std::make_pair(cn, fd)));
+        const auto qn(fd.name().qualified());
+        const auto result(r.insert(std::make_pair(qn, fd)));
         if (!result.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_field_definition << cn;
+            BOOST_LOG_SEV(lg, error) << duplicate_field_definition << qn;
             BOOST_THROW_EXCEPTION(workflow_error(
-                    duplicate_field_definition + cn));
+                    duplicate_field_definition + qn));
         }
     }
     return r;
@@ -120,10 +120,10 @@ workflow::aggregate_raw_data_activity(
     return r;
 }
 
-std::unordered_map<std::string, field> workflow::build_fields_activity(
+std::unordered_map<std::string, field_instance> workflow::build_fields_activity(
     const std::unordered_map<std::string, std::list<std::string> >&
     aggregated_data, const scope_types current_scope) const {
-    std::unordered_map<std::string, field> r;
+    std::unordered_map<std::string, field_instance> r;
     field_factory f;
     for (auto pair : aggregated_data) {
         const auto& complete_name(pair.first);

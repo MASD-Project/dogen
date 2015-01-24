@@ -18,37 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
-#define DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
 
-#include <boost/exception/info.hpp>
-#include <string>
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace dynamic {
 
-/**
- * @brief An error occurred while the field factory was building.
- */
-class building_error : public virtual std::exception, public virtual boost::exception {
-public:
-    building_error() = default;
-    ~building_error() noexcept = default;
-
-public:
-    building_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+std::ostream& operator<<(std::ostream& s, const ownership_hierarchy& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dynamic::ownership_hierarchy\"" << ", "
+      << "\"model\": " << "\"" << tidy_up_string(v.model()) << "\"" << ", "
+      << "\"facet\": " << "\"" << tidy_up_string(v.facet()) << "\"" << ", "
+      << "\"formatter\": " << "\"" << tidy_up_string(v.formatter()) << "\""
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

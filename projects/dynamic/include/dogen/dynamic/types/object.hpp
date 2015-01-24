@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/serialization/object_fwd_ser.hpp"
-#include "dogen/dynamic/types/field.hpp"
+#include "dogen/dynamic/types/field_instance.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -45,7 +45,7 @@ public:
     ~object() = default;
 
 public:
-    explicit object(const std::unordered_map<std::string, dogen::dynamic::field>& fields);
+    explicit object(const std::unordered_map<std::string, dogen::dynamic::field_instance>& fields);
 
 private:
     template<typename Archive>
@@ -56,13 +56,13 @@ private:
 
 public:
     /**
-     * @brief All the fields associated with this object, by complete field name.
+     * @brief All field instances associated with this object, by qualified name.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::dynamic::field>& fields() const;
-    std::unordered_map<std::string, dogen::dynamic::field>& fields();
-    void fields(const std::unordered_map<std::string, dogen::dynamic::field>& v);
-    void fields(const std::unordered_map<std::string, dogen::dynamic::field>&& v);
+    const std::unordered_map<std::string, dogen::dynamic::field_instance>& fields() const;
+    std::unordered_map<std::string, dogen::dynamic::field_instance>& fields();
+    void fields(const std::unordered_map<std::string, dogen::dynamic::field_instance>& v);
+    void fields(const std::unordered_map<std::string, dogen::dynamic::field_instance>&& v);
     /**@}*/
 
 public:
@@ -76,7 +76,7 @@ public:
     object& operator=(object other);
 
 private:
-    std::unordered_map<std::string, dogen::dynamic::field> fields_;
+    std::unordered_map<std::string, dogen::dynamic::field_instance> fields_;
 };
 
 } }

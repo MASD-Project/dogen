@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_FIELD_HPP
-#define DOGEN_DYNAMIC_TYPES_FIELD_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_FIELD_INSTANCE_HPP
+#define DOGEN_DYNAMIC_TYPES_FIELD_INSTANCE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,31 +27,31 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/dynamic/serialization/field_fwd_ser.hpp"
-#include "dogen/dynamic/types/name.hpp"
+#include "dogen/dynamic/serialization/field_instance_fwd_ser.hpp"
 #include "dogen/dynamic/types/value_fwd.hpp"
 
 namespace dogen {
 namespace dynamic {
 
-class field final {
+/**
+ * @brief Represents an instance of a field in an object.
+ */
+class field_instance final {
 public:
-    field() = default;
-    field(const field&) = default;
-    field(field&&) = default;
-    ~field() = default;
+    field_instance() = default;
+    field_instance(const field_instance&) = default;
+    field_instance(field_instance&&) = default;
+    ~field_instance() = default;
 
 public:
-    field(
-        const boost::shared_ptr<dogen::dynamic::value>& value,
-        const dogen::dynamic::name& name);
+    explicit field_instance(const boost::shared_ptr<dogen::dynamic::value>& value);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const field& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const field_instance& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, field& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, field_instance& v, unsigned int version);
 
 public:
     const boost::shared_ptr<dogen::dynamic::value>& value() const;
@@ -59,24 +59,18 @@ public:
     void value(const boost::shared_ptr<dogen::dynamic::value>& v);
     void value(const boost::shared_ptr<dogen::dynamic::value>&& v);
 
-    const dogen::dynamic::name& name() const;
-    dogen::dynamic::name& name();
-    void name(const dogen::dynamic::name& v);
-    void name(const dogen::dynamic::name&& v);
-
 public:
-    bool operator==(const field& rhs) const;
-    bool operator!=(const field& rhs) const {
+    bool operator==(const field_instance& rhs) const;
+    bool operator!=(const field_instance& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(field& other) noexcept;
-    field& operator=(field other);
+    void swap(field_instance& other) noexcept;
+    field_instance& operator=(field_instance other);
 
 private:
     boost::shared_ptr<dogen::dynamic::value> value_;
-    dogen::dynamic::name name_;
 };
 
 } }
@@ -85,8 +79,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dynamic::field& lhs,
-    dogen::dynamic::field& rhs) {
+    dogen::dynamic::field_instance& lhs,
+    dogen::dynamic::field_instance& rhs) {
     lhs.swap(rhs);
 }
 

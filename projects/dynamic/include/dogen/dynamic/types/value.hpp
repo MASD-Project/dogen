@@ -33,6 +33,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Base class of all value types.
+ */
 class value {
 public:
     value() = default;

@@ -8,6 +8,19 @@
 
 Stories that we intend to look at, at some point.
 
+
+*** Consider renaming qname                                           :story:
+
+As part of dynamic we came up with a better way of modeling names:
+type is name, fields:
+
+- simple
+- qualified
+
+This is a better way of modeling, as opposed to the SML way with a
+=qname= which then contains a =simple_name=. We should use this
+approach in SML to.
+
 *** Investigate NeoVim's emblems                                      :story:
 
 They appear to have emblems for issues, connected to waffle as well as

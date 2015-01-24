@@ -22,105 +22,83 @@
 
 namespace {
 
-dogen::dynamic::field_definition create_enabled() {
-    dogen::dynamic::name n;
-    n.simple_name("enabled");
-    n.owner("cpp");
-    n.complete_name("cpp.enabled");
+const std::string model_name("cpp");
 
+dogen::dynamic::field_definition create_enabled() {
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("enabled");
+    r.name().qualified("cpp.enabled");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_split_project() {
-    dogen::dynamic::name n;
-    n.simple_name("split_project");
-    n.owner("cpp");
-    n.complete_name("cpp.split_project");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("split_project");
+    r.name().qualified("cpp.split_project");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_source_directory() {
-    dogen::dynamic::name n;
-    n.simple_name("source_directory");
-    n.owner("cpp");
-    n.complete_name("cpp.source_directory");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("source_directory");
+    r.name().qualified("cpp.source_directory");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_include_directory() {
-    dogen::dynamic::name n;
-    n.simple_name("include_directory");
-    n.owner("cpp");
-    n.complete_name("cpp.include_directory");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("include_directory");
+    r.name().qualified("cpp.include_directory");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_header_file_extension() {
-    dogen::dynamic::name n;
-    n.simple_name("header_file_extension");
-    n.owner("cpp");
-    n.complete_name("cpp.header_file_extension");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("header_file_extension");
+    r.name().qualified("cpp.header_file_extension");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_implementation_file_extension() {
-    dogen::dynamic::name n;
-    n.simple_name("implementation_file_extension");
-    n.owner("cpp");
-    n.complete_name("cpp.implementation_file_extension");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("implementation_file_extension");
+    r.name().qualified("cpp.implementation_file_extension");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_enable_facet_folders() {
-    dogen::dynamic::name n;
-    n.simple_name("enable_facet_folders");
-    n.owner("cpp");
-    n.complete_name("cpp.enable_facet_folders");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("enable_facet_folders");
+    r.name().qualified("cpp.enable_facet_folders");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;
 }
 
 dogen::dynamic::field_definition create_enable_unique_file_names() {
-    dogen::dynamic::name n;
-    n.simple_name("enable_unique_file_names");
-    n.owner("cpp");
-    n.complete_name("cpp.enable_unique_file_names");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("enable_unique_file_names");
+    r.name().qualified("cpp.enable_unique_file_names");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
     return r;

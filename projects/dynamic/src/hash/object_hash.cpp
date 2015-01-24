@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/hash/field_hash.hpp"
+#include "dogen/dynamic/hash/field_instance_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
 
 namespace {
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field(const std::unordered_map<std::string, dogen::dynamic::field>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field_instance(const std::unordered_map<std::string, dogen::dynamic::field_instance>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -47,7 +47,7 @@ namespace dynamic {
 std::size_t object_hasher::hash(const object&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_field(v.fields()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_field_instance(v.fields()));
     return seed;
 }
 

@@ -29,7 +29,7 @@
 #include <string>
 #include <utility>
 #include "dogen/dynamic/types/value.hpp"
-#include "dogen/dynamic/types/field.hpp"
+#include "dogen/dynamic/types/field_instance.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
@@ -88,8 +88,8 @@ private:
 
 public:
     /**
-     * @brief Builds a field given a definition, the original key and
-     * zero or more values.
+     * @brief Builds a field instance given a definition, the original
+     * key and zero or more values.
      *
      * @pre If values has more than one element, the field's value
      * type must be a collection.
@@ -97,7 +97,7 @@ public:
      * @pre Values must be valid according to the type in the field
      * definition.
      */
-    field build(const field_definition& fd,
+    field_instance build(const field_definition& fd,
         const std::list<std::string>& raw_values) const;
 };
 

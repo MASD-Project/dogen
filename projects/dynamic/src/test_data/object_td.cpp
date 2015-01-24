@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/test_data/field_td.hpp"
+#include "dogen/dynamic/test_data/field_instance_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 
 namespace {
@@ -30,15 +30,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::dynamic::field
-create_dogen_dynamic_field(const unsigned int position) {
-    return dogen::dynamic::field_generator::create(position);
+dogen::dynamic::field_instance
+create_dogen_dynamic_field_instance(const unsigned int position) {
+    return dogen::dynamic::field_instance_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::dynamic::field> create_std_unordered_map_std_string_dogen_dynamic_field(unsigned int position) {
-    std::unordered_map<std::string, dogen::dynamic::field> r;
+std::unordered_map<std::string, dogen::dynamic::field_instance> create_std_unordered_map_std_string_dogen_dynamic_field_instance(unsigned int position) {
+    std::unordered_map<std::string, dogen::dynamic::field_instance> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_dynamic_field(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_dynamic_field_instance(position + i)));
     }
     return r;
 }
@@ -52,7 +52,7 @@ object_generator::object_generator() : position_(0) { }
 
 void object_generator::
 populate(const unsigned int position, result_type& v) {
-    v.fields(create_std_unordered_map_std_string_dogen_dynamic_field(position + 0));
+    v.fields(create_std_unordered_map_std_string_dogen_dynamic_field_instance(position + 0));
 }
 
 object_generator::result_type

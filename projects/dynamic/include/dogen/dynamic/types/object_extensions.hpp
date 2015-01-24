@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/types/field_instance.hpp"
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/field.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -44,7 +44,7 @@ bool has_field(const object& o, const field_definition& fd);
  *
  * @pre has_field must be true.
  */
-const field& get_field(const object& o, const field_definition& fd);
+const field_instance& get_field(const object& o, const field_definition& fd);
 
 /**
  * @brief Returns the content for the field, assuming it is a text field.

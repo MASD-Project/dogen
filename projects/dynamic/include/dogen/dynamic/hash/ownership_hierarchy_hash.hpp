@@ -18,37 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
-#define DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
+#ifndef DOGEN_DYNAMIC_HASH_OWNERSHIP_HIERARCHY_HASH_HPP
+#define DOGEN_DYNAMIC_HASH_OWNERSHIP_HIERARCHY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
+#include <functional>
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 
 namespace dogen {
 namespace dynamic {
 
-/**
- * @brief An error occurred while the field factory was building.
- */
-class building_error : public virtual std::exception, public virtual boost::exception {
+struct ownership_hierarchy_hasher {
 public:
-    building_error() = default;
-    ~building_error() noexcept = default;
-
-public:
-    building_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
+    static std::size_t hash(const ownership_hierarchy& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::dynamic::ownership_hierarchy> {
+public:
+    size_t operator()(const dogen::dynamic::ownership_hierarchy& v) const {
+        return dogen::dynamic::ownership_hierarchy_hasher::hash(v);
+    }
+};
+
+}
 #endif

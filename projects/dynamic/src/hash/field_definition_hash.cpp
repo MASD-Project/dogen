@@ -20,6 +20,7 @@
  */
 #include "dogen/dynamic/hash/field_definition_hash.hpp"
 #include "dogen/dynamic/hash/name_hash.hpp"
+#include "dogen/dynamic/hash/ownership_hierarchy_hash.hpp"
 #include "dogen/dynamic/hash/scope_types_hash.hpp"
 #include "dogen/dynamic/hash/value_types_hash.hpp"
 
@@ -43,6 +44,7 @@ std::size_t field_definition_hasher::hash(const field_definition&v) {
     combine(seed, v.name());
     combine(seed, v.type());
     combine(seed, v.scope());
+    combine(seed, v.ownership_hierarchy());
 
     return seed;
 }

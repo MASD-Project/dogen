@@ -24,24 +24,20 @@ namespace dogen {
 namespace dynamic {
 
 name::name(
-    const std::string& simple_name,
-    const std::string& owner,
-    const std::string& complete_name)
-    : simple_name_(simple_name),
-      owner_(owner),
-      complete_name_(complete_name) { }
+    const std::string& simple,
+    const std::string& qualified)
+    : simple_(simple),
+      qualified_(qualified) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
-    swap(simple_name_, other.simple_name_);
-    swap(owner_, other.owner_);
-    swap(complete_name_, other.complete_name_);
+    swap(simple_, other.simple_);
+    swap(qualified_, other.qualified_);
 }
 
 bool name::operator==(const name& rhs) const {
-    return simple_name_ == rhs.simple_name_ &&
-        owner_ == rhs.owner_ &&
-        complete_name_ == rhs.complete_name_;
+    return simple_ == rhs.simple_ &&
+        qualified_ == rhs.qualified_;
 }
 
 name& name::operator=(name other) {
@@ -50,52 +46,36 @@ name& name::operator=(name other) {
     return *this;
 }
 
-const std::string& name::simple_name() const {
-    return simple_name_;
+const std::string& name::simple() const {
+    return simple_;
 }
 
-std::string& name::simple_name() {
-    return simple_name_;
+std::string& name::simple() {
+    return simple_;
 }
 
-void name::simple_name(const std::string& v) {
-    simple_name_ = v;
+void name::simple(const std::string& v) {
+    simple_ = v;
 }
 
-void name::simple_name(const std::string&& v) {
-    simple_name_ = std::move(v);
+void name::simple(const std::string&& v) {
+    simple_ = std::move(v);
 }
 
-const std::string& name::owner() const {
-    return owner_;
+const std::string& name::qualified() const {
+    return qualified_;
 }
 
-std::string& name::owner() {
-    return owner_;
+std::string& name::qualified() {
+    return qualified_;
 }
 
-void name::owner(const std::string& v) {
-    owner_ = v;
+void name::qualified(const std::string& v) {
+    qualified_ = v;
 }
 
-void name::owner(const std::string&& v) {
-    owner_ = std::move(v);
-}
-
-const std::string& name::complete_name() const {
-    return complete_name_;
-}
-
-std::string& name::complete_name() {
-    return complete_name_;
-}
-
-void name::complete_name(const std::string& v) {
-    complete_name_ = v;
-}
-
-void name::complete_name(const std::string&& v) {
-    complete_name_ = std::move(v);
+void name::qualified(const std::string&& v) {
+    qualified_ = std::move(v);
 }
 
 } }

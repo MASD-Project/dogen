@@ -38,18 +38,16 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::dynamic::name& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("simple_name", v.simple_name_);
-    ar << make_nvp("owner", v.owner_);
-    ar << make_nvp("complete_name", v.complete_name_);
+    ar << make_nvp("simple", v.simple_);
+    ar << make_nvp("qualified", v.qualified_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::dynamic::name& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("simple_name", v.simple_name_);
-    ar >> make_nvp("owner", v.owner_);
-    ar >> make_nvp("complete_name", v.complete_name_);
+    ar >> make_nvp("simple", v.simple_);
+    ar >> make_nvp("qualified", v.qualified_);
 }
 
 } }

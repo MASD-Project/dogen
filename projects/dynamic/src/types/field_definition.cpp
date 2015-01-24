@@ -30,22 +30,26 @@ field_definition::field_definition()
 field_definition::field_definition(
     const dogen::dynamic::name& name,
     const dogen::dynamic::value_types& type,
-    const dogen::dynamic::scope_types& scope)
+    const dogen::dynamic::scope_types& scope,
+    const dogen::dynamic::ownership_hierarchy& ownership_hierarchy)
     : name_(name),
       type_(type),
-      scope_(scope) { }
+      scope_(scope),
+      ownership_hierarchy_(ownership_hierarchy) { }
 
 void field_definition::swap(field_definition& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(scope_, other.scope_);
+    swap(ownership_hierarchy_, other.ownership_hierarchy_);
 }
 
 bool field_definition::operator==(const field_definition& rhs) const {
     return name_ == rhs.name_ &&
         type_ == rhs.type_ &&
-        scope_ == rhs.scope_;
+        scope_ == rhs.scope_ &&
+        ownership_hierarchy_ == rhs.ownership_hierarchy_;
 }
 
 field_definition& field_definition::operator=(field_definition other) {
@@ -84,6 +88,22 @@ dogen::dynamic::scope_types field_definition::scope() const {
 
 void field_definition::scope(const dogen::dynamic::scope_types& v) {
     scope_ = v;
+}
+
+const dogen::dynamic::ownership_hierarchy& field_definition::ownership_hierarchy() const {
+    return ownership_hierarchy_;
+}
+
+dogen::dynamic::ownership_hierarchy& field_definition::ownership_hierarchy() {
+    return ownership_hierarchy_;
+}
+
+void field_definition::ownership_hierarchy(const dogen::dynamic::ownership_hierarchy& v) {
+    ownership_hierarchy_ = v;
+}
+
+void field_definition::ownership_hierarchy(const dogen::dynamic::ownership_hierarchy&& v) {
+    ownership_hierarchy_ = std::move(v);
 }
 
 } }

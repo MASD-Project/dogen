@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/test_data/name_td.hpp"
+#include "dogen/dynamic/test_data/ownership_hierarchy_td.hpp"
 
 namespace {
 
@@ -34,29 +34,30 @@ std::string create_std_string(const unsigned int position) {
 namespace dogen {
 namespace dynamic {
 
-name_generator::name_generator() : position_(0) { }
+ownership_hierarchy_generator::ownership_hierarchy_generator() : position_(0) { }
 
-void name_generator::
+void ownership_hierarchy_generator::
 populate(const unsigned int position, result_type& v) {
-    v.simple(create_std_string(position + 0));
-    v.qualified(create_std_string(position + 1));
+    v.model(create_std_string(position + 0));
+    v.facet(create_std_string(position + 1));
+    v.formatter(create_std_string(position + 2));
 }
 
-name_generator::result_type
-name_generator::create(const unsigned int position) {
-    name r;
-    name_generator::populate(position, r);
+ownership_hierarchy_generator::result_type
+ownership_hierarchy_generator::create(const unsigned int position) {
+    ownership_hierarchy r;
+    ownership_hierarchy_generator::populate(position, r);
     return r;
 }
-name_generator::result_type*
-name_generator::create_ptr(const unsigned int position) {
-    name* p = new name();
-    name_generator::populate(position, *p);
+ownership_hierarchy_generator::result_type*
+ownership_hierarchy_generator::create_ptr(const unsigned int position) {
+    ownership_hierarchy* p = new ownership_hierarchy();
+    ownership_hierarchy_generator::populate(position, *p);
     return p;
 }
 
-name_generator::result_type
-name_generator::operator()() {
+ownership_hierarchy_generator::result_type
+ownership_hierarchy_generator::operator()() {
     return create(position_++);
 }
 

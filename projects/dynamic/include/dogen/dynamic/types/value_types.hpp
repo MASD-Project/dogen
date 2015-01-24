@@ -28,6 +28,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief What values can a field hold.
+ */
 enum class value_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     text = 1,

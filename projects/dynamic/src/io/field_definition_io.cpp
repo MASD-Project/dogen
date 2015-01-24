@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/dynamic/io/name_io.hpp"
+#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 #include "dogen/dynamic/io/scope_types_io.hpp"
 #include "dogen/dynamic/io/value_types_io.hpp"
 
@@ -32,7 +33,8 @@ std::ostream& operator<<(std::ostream& s, const field_definition& v) {
       << "\"__type__\": " << "\"dogen::dynamic::field_definition\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"type\": " << v.type() << ", "
-      << "\"scope\": " << v.scope()
+      << "\"scope\": " << v.scope() << ", "
+      << "\"ownership_hierarchy\": " << v.ownership_hierarchy()
       << " }";
     return(s);
 }

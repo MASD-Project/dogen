@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/types/field.hpp"
+#include "dogen/dynamic/types/field_instance.hpp"
 #include "dogen/dynamic/types/value.hpp"
 
 namespace boost {
@@ -33,59 +33,38 @@ const boost::shared_ptr<dogen::dynamic::value>& rhs) {
 namespace dogen {
 namespace dynamic {
 
-field::field(
-    const boost::shared_ptr<dogen::dynamic::value>& value,
-    const dogen::dynamic::name& name)
-    : value_(value),
-      name_(name) { }
+field_instance::field_instance(const boost::shared_ptr<dogen::dynamic::value>& value)
+    : value_(value) { }
 
-void field::swap(field& other) noexcept {
+void field_instance::swap(field_instance& other) noexcept {
     using std::swap;
     swap(value_, other.value_);
-    swap(name_, other.name_);
 }
 
-bool field::operator==(const field& rhs) const {
-    return value_ == rhs.value_ &&
-        name_ == rhs.name_;
+bool field_instance::operator==(const field_instance& rhs) const {
+    return value_ == rhs.value_;
 }
 
-field& field::operator=(field other) {
+field_instance& field_instance::operator=(field_instance other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::shared_ptr<dogen::dynamic::value>& field::value() const {
+const boost::shared_ptr<dogen::dynamic::value>& field_instance::value() const {
     return value_;
 }
 
-boost::shared_ptr<dogen::dynamic::value>& field::value() {
+boost::shared_ptr<dogen::dynamic::value>& field_instance::value() {
     return value_;
 }
 
-void field::value(const boost::shared_ptr<dogen::dynamic::value>& v) {
+void field_instance::value(const boost::shared_ptr<dogen::dynamic::value>& v) {
     value_ = v;
 }
 
-void field::value(const boost::shared_ptr<dogen::dynamic::value>&& v) {
+void field_instance::value(const boost::shared_ptr<dogen::dynamic::value>&& v) {
     value_ = std::move(v);
-}
-
-const dogen::dynamic::name& field::name() const {
-    return name_;
-}
-
-dogen::dynamic::name& field::name() {
-    return name_;
-}
-
-void field::name(const dogen::dynamic::name& v) {
-    name_ = v;
-}
-
-void field::name(const dogen::dynamic::name&& v) {
-    name_ = std::move(v);
 }
 
 } }

@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/dynamic/io/field_io.hpp"
+#include "dogen/dynamic/io/field_instance_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
 
 
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::dynamic::field>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::dynamic::field_instance>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

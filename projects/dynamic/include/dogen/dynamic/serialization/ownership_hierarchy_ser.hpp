@@ -18,36 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
-#define DOGEN_DYNAMIC_TYPES_BUILDING_ERROR_HPP
+#ifndef DOGEN_DYNAMIC_SERIALIZATION_OWNERSHIP_HIERARCHY_SER_HPP
+#define DOGEN_DYNAMIC_SERIALIZATION_OWNERSHIP_HIERARCHY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 
-namespace dogen {
-namespace dynamic {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dynamic::ownership_hierarchy)
+namespace boost {
+namespace serialization {
 
-/**
- * @brief An error occurred while the field factory was building.
- */
-class building_error : public virtual std::exception, public virtual boost::exception {
-public:
-    building_error() = default;
-    ~building_error() noexcept = default;
+template<typename Archive>
+void save(Archive& ar, const dogen::dynamic::ownership_hierarchy& v, unsigned int version);
 
-public:
-    building_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+template<typename Archive>
+void load(Archive& ar, dogen::dynamic::ownership_hierarchy& v, unsigned int version);
 
 } }
 

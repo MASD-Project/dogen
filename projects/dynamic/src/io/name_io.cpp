@@ -36,9 +36,8 @@ namespace dynamic {
 std::ostream& operator<<(std::ostream& s, const name& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::dynamic::name\"" << ", "
-      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\"" << ", "
-      << "\"owner\": " << "\"" << tidy_up_string(v.owner()) << "\"" << ", "
-      << "\"complete_name\": " << "\"" << tidy_up_string(v.complete_name()) << "\""
+      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
+      << "\"qualified\": " << "\"" << tidy_up_string(v.qualified()) << "\""
       << " }";
     return(s);
 }

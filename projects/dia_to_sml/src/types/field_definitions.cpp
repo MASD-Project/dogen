@@ -24,27 +24,23 @@
 
 namespace {
 
-dogen::dynamic::field_definition create_comment() {
-    dogen::dynamic::name n;
-    n.simple_name("comment");
-    n.owner("dia");
-    n.complete_name("dia.comment");
+const std::string model_name("dia");
 
+dogen::dynamic::field_definition create_comment() {
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("comment");
+    r.name().qualified("dia.comment");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::not_applicable);
     return r;
 }
 
 dogen::dynamic::field_definition create_identity_attribute() {
-    dogen::dynamic::name n;
-    n.simple_name("identity_attribute");
-    n.owner("dia");
-    n.complete_name("dia.identity_attribute");
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("identity_attribute");
+    r.name().qualified("dia.identity_attribute");
+    r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::property);
     return r;

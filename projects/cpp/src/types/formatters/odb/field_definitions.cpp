@@ -25,12 +25,11 @@
 namespace {
 
 dogen::dynamic::field_definition create_odb_pragma() {
-    dogen::dynamic::name n;
-    n.simple_name("odb_pragma");
-    n.complete_name(n.simple_name());
-
     dogen::dynamic::field_definition r;
-    r.name(n);
+    r.name().simple("odb_pragma");
+    r.name().qualified(r.name().simple());
+    r.ownership_hierarchy().model("cpp");
+    r.ownership_hierarchy().facet("odb");
     r.type(dogen::dynamic::value_types::text_collection);
     r.scope(dogen::dynamic::scope_types::any);
     return r;

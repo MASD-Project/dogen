@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SERIALIZATION_FIELD_SER_HPP
-#define DOGEN_DYNAMIC_SERIALIZATION_FIELD_SER_HPP
+#include <ostream>
+#include "dogen/dynamic/io/field_instance_io.hpp"
+#include "dogen/dynamic/io/value_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/serialization/split_free.hpp>
-#include "dogen/dynamic/types/field.hpp"
-
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::dynamic::field)
 namespace boost {
-namespace serialization {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::dynamic::field& v, unsigned int version);
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::dynamic::value>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
-template<typename Archive>
-void load(Archive& ar, dogen::dynamic::field& v, unsigned int version);
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace dynamic {
+
+std::ostream& operator<<(std::ostream& s, const field_instance& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dynamic::field_instance\"" << ", "
+      << "\"value\": " << v.value()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

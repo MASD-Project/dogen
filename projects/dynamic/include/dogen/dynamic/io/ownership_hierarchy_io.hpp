@@ -18,37 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/dynamic/io/field_io.hpp"
-#include "dogen/dynamic/io/name_io.hpp"
-#include "dogen/dynamic/io/value_io.hpp"
+#ifndef DOGEN_DYNAMIC_IO_OWNERSHIP_HIERARCHY_IO_HPP
+#define DOGEN_DYNAMIC_IO_OWNERSHIP_HIERARCHY_IO_HPP
 
-namespace boost {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::dynamic::value>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s<< " }";
-    return s;
-}
-
-}
+#include <iosfwd>
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 
 namespace dogen {
 namespace dynamic {
 
-std::ostream& operator<<(std::ostream& s, const field& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::dynamic::field\"" << ", "
-      << "\"value\": " << v.value() << ", "
-      << "\"name\": " << v.name()
-      << " }";
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dynamic::ownership_hierarchy& v);
 
 } }
+
+#endif
