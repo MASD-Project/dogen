@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-25 Sun 18:33]
+Clock summary at [2015-01-25 Sun 19:03]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *13:03* |       |      |
+| *Total time*                                                     | *13:16* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Active                                                           |         | 13:03 |      |
+| Active                                                           |         | 13:16 |      |
 | STARTED Sprint and product backlog grooming                      |         |       | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage       |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                 |         |       | 1:09 |
@@ -32,7 +32,7 @@ Clock summary at [2015-01-25 Sun 18:33]
 | COMPLETED Create field definitions for all c++ fields            |         |       | 4:55 |
 | COMPLETED Add default value support to dynamic field definitions |         |       | 0:35 |
 | STARTED Rename namespace =meta-data= to =dynamic=                |         |       | 0:26 |
-| STARTED Update c++ factories to use dynamic object               |         |       | 1:12 |
+| STARTED Update c++ settings factory to use dynamic object        |         |       | 1:25 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -161,10 +161,16 @@ We have created a number of "meta-data extension" namespaces, which is
 where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
-*** STARTED Update c++ factories to use dynamic object                :story:
+*** STARTED Update c++ settings factory to use dynamic object         :story:
+    CLOCK: [2015-01-25 Sun 18:50]--[2015-01-25 Sun 19:03] =>  0:13
     CLOCK: [2015-01-25 Sun 18:20]--[2015-01-25 Sun 18:33] =>  0:13
     CLOCK: [2015-01-25 Sun 17:14]--[2015-01-25 Sun 17:50] =>  0:36
     CLOCK: [2015-01-24 Sat 23:47]--[2015-01-25 Sun 00:10] =>  0:23
+
+Make use of default values in dynamic's field definitions and read
+fields from the dynamic object.
+
+*** Update facet settings factory to use dynamic object               :story:
 
 This requires a bit of cleverness because we need to make use of the
 hierarchical properties for ownership. We also need to add default

@@ -27,6 +27,7 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/cpp/types/cpp_settings.hpp"
+#include "dogen/dynamic/types/object.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -55,6 +56,13 @@ public:
      * C++ settings. The missing values are defaulted.
      */
     cpp_settings build(const boost::property_tree::ptree& meta_data) const;
+
+public:
+    /**
+     * @brief Given a dynamic object, returns the corresponding C++
+     * settings. The missing values are defaulted.
+     */
+    cpp_settings build(const dynamic::object& o) const;
 
 private:
     cpp_settings default_settings_;
