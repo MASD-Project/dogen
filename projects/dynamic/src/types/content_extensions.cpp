@@ -25,15 +25,20 @@
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
 #include "dogen/dynamic/types/field_access_error.hpp"
-#include "dogen/dynamic/types/object_extensions.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("dynamic.object_extensions.cpp"));
+auto lg(logger_factory("dynamic.content_extensions.cpp"));
 
 const std::string field_not_found("Field not found: ");
+const std::string unexpected_value_type("Unexpected value type.");
+const std::string field("Field: ");
+const std::string not_boolean_field("Field does not have boolean content: ");
+const std::string not_text_field("Field does not have text content: ");
 const std::string unexpected_field_type("Field has an unexpected type: ");
+typedef boost::error_info<struct tag_errmsg, std::string> extension_error_info;
 
 }
 
@@ -57,18 +62,28 @@ const field_instance& get_field(const object& o, const field_definition& fd) {
     return i->second;
 }
 
+std::string get_text_content(const dogen::dynamic::value& v) {
+    try {
+        const auto& b(dynamic_cast<const text&>(v));
+        return b.content();
+    } catch(const std::bad_cast& e) {
+        BOOST_LOG_SEV(lg, error) << unexpected_value_type;
+        BOOST_THROW_EXCEPTION(field_access_error(unexpected_value_type));
+    }
+}
+
 std::string
 get_text_content(const object& o, const field_definition& fd) {
     const auto& f(get_field(o, fd));
     const auto& v(*f.value());
 
     try {
-        const auto& t(dynamic_cast<const text&>(v));
-        return t.content();
-    } catch(const std::bad_cast& e) {
+        return get_text_content(v);
+    } catch(boost::exception& e) {
         const auto n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << unexpected_field_type << n;
-        BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
+        BOOST_LOG_SEV(lg, error) << not_text_field << n;
+        e << extension_error_info(field + n);
+        throw;
     }
 }
 
@@ -87,17 +102,26 @@ get_text_collection_content(const object& o, const field_definition& fd) {
     }
 }
 
-bool get_boolean_content(const object& o, const field_definition& fd) {
-    const auto& f(get_field(o, fd));
-    const auto& v(*f.value());
-
+bool get_boolean_content(const dogen::dynamic::value& v) {
     try {
         const auto& b(dynamic_cast<const boolean&>(v));
         return b.content();
     } catch(const std::bad_cast& e) {
+        BOOST_LOG_SEV(lg, error) << unexpected_value_type;
+        BOOST_THROW_EXCEPTION(field_access_error(unexpected_value_type));
+    }
+}
+
+bool get_boolean_content(const object& o, const field_definition& fd) {
+    const auto& f(get_field(o, fd));
+    const auto& v(*f.value());
+    try {
+        return get_boolean_content(v);
+    } catch(boost::exception& e) {
         const auto n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << unexpected_field_type << n;
-        BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
+        BOOST_LOG_SEV(lg, error) << not_boolean_field << n;
+        e << extension_error_info(field + n);
+        throw;
     }
 }
 

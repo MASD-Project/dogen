@@ -36,10 +36,12 @@ namespace cpp {
  */
 class cpp_settings_factory {
 public:
-    cpp_settings_factory() = default;
     cpp_settings_factory(const cpp_settings_factory&) = default;
     cpp_settings_factory(cpp_settings_factory&&) = default;
     ~cpp_settings_factory() = default;
+
+public:
+    cpp_settings_factory();
 
 private:
     /**
@@ -53,6 +55,9 @@ public:
      * C++ settings. The missing values are defaulted.
      */
     cpp_settings build(const boost::property_tree::ptree& meta_data) const;
+
+private:
+    cpp_settings default_settings_;
 };
 
 } }

@@ -19,8 +19,10 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/field_definitions.hpp"
 #include "dogen/cpp/types/cpp_settings_factory.hpp"
 
 namespace {
@@ -39,21 +41,33 @@ namespace dogen {
 namespace cpp {
 
 cpp_settings cpp_settings_factory::create_default_settings() const {
+    using namespace dynamic;
+    using fd = dogen::cpp::field_definitions;
+
     cpp_settings r;
-    r.enabled(true);
-    r.split_project(true);
-    r.source_directory(default_source_directory);
-    r.include_directory(default_include_directory);
-    r.header_file_extension(default_header_file_extension);
-    r.implementation_file_extension(default_implementation_file_extension);
-    r.enable_facet_folders(true);
-    r.enable_unique_file_names(true);
+    r.enabled(get_boolean_content(*fd::enabled().default_value()));
+    r.split_project(get_boolean_content(*fd::split_project().default_value()));
+    r.source_directory(
+        get_text_content(*fd::source_directory().default_value()));
+    r.include_directory(
+        get_text_content(*fd::include_directory().default_value()));
+    r.header_file_extension(
+        get_text_content(*fd::header_file_extension().default_value()));
+    r.implementation_file_extension(
+        get_text_content(*fd::implementation_file_extension().default_value()));
+    r.enable_facet_folders(
+        get_boolean_content(*fd::enable_facet_folders().default_value()));
+    r.enable_unique_file_names(
+        get_boolean_content(*fd::enable_unique_file_names().default_value()));
     return r;
 }
 
+cpp_settings_factory::cpp_settings_factory()
+    : default_settings_(create_default_settings()) { }
+
 cpp_settings cpp_settings_factory::
 build(const boost::property_tree::ptree& meta_data) const {
-    cpp_settings r(create_default_settings());
+    cpp_settings r(default_settings_);
 
     sml::meta_data::reader reader(meta_data);
     if (reader.has_key(traits::enabled())) {

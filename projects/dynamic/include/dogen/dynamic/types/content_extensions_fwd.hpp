@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_FWD_HPP
-#define DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_FWD_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_CONTENT_EXTENSIONS_FWD_HPP
+#define DOGEN_DYNAMIC_TYPES_CONTENT_EXTENSIONS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace dynamic {
 
-class object_extensions;
+class content_extensions;
 
 } }
 

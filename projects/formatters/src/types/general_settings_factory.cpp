@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/text.hpp"
-#include "dogen/dynamic/types/object_extensions.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/formatters/types/field_definitions.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"

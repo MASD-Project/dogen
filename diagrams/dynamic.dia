@@ -4346,19 +4346,19 @@ shape of this data.
         <dia:point val="91,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.95,39.95;99.645,43.05"/>
+        <dia:rectangle val="90.95,39.95;100.32,43.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="91,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5950000000000006"/>
+        <dia:real val="9.2699999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#object_extensions#</dia:string>
+        <dia:string>#content_extensions#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -4453,22 +4453,22 @@ shape of this data.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="64,39"/>
+        <dia:point val="67,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,38.95;85.355,43.95"/>
+        <dia:rectangle val="66.95,39.95;85.66,42.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="64,39"/>
+        <dia:point val="67,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.305000000000003"/>
+        <dia:real val="18.610000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.8999999999999995"/>
+        <dia:real val="2.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4482,11 +4482,8 @@ shape of this data.
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#"Extension methods" for the object class,
-mainly dealing with field definition support.
-We do not want object to have field definition
-as a key, but at the same time, we also do not
-want client code to have to look up by complete name.#</dia:string>
+            <dia:string>#"Extension methods"to facilitate access to the
+content of fields.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -4495,7 +4492,7 @@ want client code to have to look up by complete name.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="64.35,40.245"/>
+            <dia:point val="67.35,41.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4544,17 +4541,17 @@ want client code to have to look up by complete name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="95.2975,40"/>
+        <dia:point val="95.635,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.5475,31.75;107.038,40.8"/>
+        <dia:rectangle val="94.885,31.75;107.038,40.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="95.2975,40"/>
-        <dia:point val="95.2975,36"/>
+        <dia:point val="95.635,40"/>
+        <dia:point val="95.635,36"/>
         <dia:point val="106.838,36"/>
         <dia:point val="106.838,31.8"/>
       </dia:attribute>
@@ -4579,16 +4576,16 @@ want client code to have to look up by complete name.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="85.305,41.45"/>
+        <dia:point val="85.61,41.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.252,40.6977;91.0744,41.975"/>
+        <dia:rectangle val="85.5586,40.6988;91.0611,41.875"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="85.305,41.45"/>
+        <dia:point val="85.61,41.25"/>
         <dia:point val="91,41.1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -4604,7 +4601,7 @@ want client code to have to look up by complete name.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="88.1525,41.775"/>
+        <dia:point val="88.305,41.675"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O41" connection="4"/>
@@ -4759,17 +4756,17 @@ want client code to have to look up by complete name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="95.2975,43"/>
+        <dia:point val="95.635,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.5475,42.25;105.471,50.8"/>
+        <dia:rectangle val="94.885,42.25;105.471,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="95.2975,43"/>
-        <dia:point val="95.2975,47"/>
+        <dia:point val="95.635,43"/>
+        <dia:point val="95.635,47"/>
         <dia:point val="105.271,47"/>
         <dia:point val="105.271,50"/>
       </dia:attribute>
@@ -5017,7 +5014,7 @@ any.#</dia:string>
         <dia:point val="48,-12.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.8875,-17.05;48.75,-10.7"/>
+        <dia:rectangle val="34.8875,-17.75;48.75,-11.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

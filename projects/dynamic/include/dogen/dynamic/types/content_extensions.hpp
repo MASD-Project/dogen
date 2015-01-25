@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_HPP
-#define DOGEN_DYNAMIC_TYPES_OBJECT_EXTENSIONS_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_CONTENT_EXTENSIONS_HPP
+#define DOGEN_DYNAMIC_TYPES_CONTENT_EXTENSIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -49,6 +49,13 @@ const field_instance& get_field(const object& o, const field_definition& fd);
 /**
  * @brief Returns the content for the field, assuming it is a text field.
  *
+ * @pre Field value type must be text.
+ */
+std::string get_text_content(const dogen::dynamic::value& v);
+
+/**
+ * @brief Returns the content for the field, assuming it is a text field.
+ *
  * @pre has_field must be true.
  * @pre Field value type must be text.
  */
@@ -63,6 +70,14 @@ std::string get_text_content(const object& o, const field_definition& fd);
  */
 std::list<std::string>
 get_text_collection_content(const object& o, const field_definition& fd);
+
+/**
+ * @brief Returns the content for the field, assuming it is a boolean
+ * field.
+ *
+ * @pre Field value type must be boolean.
+ */
+bool get_boolean_content(const dogen::dynamic::value& v);
 
 /**
  * @brief Returns the content for the field, assuming it is a boolean

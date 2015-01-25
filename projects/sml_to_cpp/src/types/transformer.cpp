@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/object_extensions.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"

@@ -24,7 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/object_extensions.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/meta_data/reader.hpp"
