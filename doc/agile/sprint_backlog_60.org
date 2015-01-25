@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-25 Sun 22:50]
+Clock summary at [2015-01-25 Sun 23:11]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *13:25* |       |      |
+| *Total time*                                                     | *13:43* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Active                                                           |         | 13:25 |      |
+| Active                                                           |         | 13:43 |      |
 | STARTED Sprint and product backlog grooming                      |         |       | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage       |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                 |         |       | 1:09 |
@@ -33,6 +33,7 @@ Clock summary at [2015-01-25 Sun 22:50]
 | COMPLETED Add default value support to dynamic field definitions |         |       | 0:35 |
 | COMPLETED Update c++ settings factory to use dynamic object      |         |       | 1:34 |
 | STARTED Rename namespace =meta-data= to =dynamic=                |         |       | 0:26 |
+| STARTED Update mock factory to generate dynamic fields           |         |       | 0:18 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -172,6 +173,14 @@ We have created a number of "meta-data extension" namespaces, which is
 where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
+*** STARTED Update mock factory to generate dynamic fields            :story:
+    CLOCK: [2015-01-25 Sun 22:53]--[2015-01-25 Sun 23:11] =>  0:18
+
+At present the mock factory is generating meta-data fields. We need it
+to generate dynamic fields. We should hard-code the field names using
+local constants - and not add dependencies on the different models due
+to field definitions.
+
 *** Update facet settings factory to use dynamic object               :story:
 
 This requires a bit of cleverness because we need to make use of the
@@ -218,13 +227,6 @@ this once all field definitions have been added.
 
 Where we are checking for the presence of meta-data fields, we need to
 look for dynamic fields instead.
-
-*** Update mock factory to generate dynamic fields                    :story:
-
-At present the mock factory is generating meta-data fields. We need it
-to generate dynamic fields. We should hard-code the field names using
-local constants - and not add dependencies on the different models due
-to field definitions.
 
 *** Remove all references to =ptree=                                  :story:
 
