@@ -113,7 +113,7 @@ build(const boost::property_tree::ptree& meta_data) const {
     return r;
 }
 
-cpp_settings cpp_settings_factory::build(const dynamic::object& o) const {
+cpp_settings cpp_settings_factory::build(const dynamic::object& /*o*/) const {
     cpp_settings r(default_settings_);
 
 /*    sml::meta_data::reader reader(meta_data);
