@@ -18,11 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/cpp/types/field_definitions.hpp"
 
 namespace {
 
 const std::string model_name("cpp");
+const std::string source_directory("src");
+const std::string include_directory("include");
+const std::string header_file_extension(".hpp");
+const std::string implementation_file_extension(".cpp");
 
 dogen::dynamic::field_definition create_enabled() {
     dogen::dynamic::field_definition r;
@@ -31,6 +38,7 @@ dogen::dynamic::field_definition create_enabled() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -41,6 +49,7 @@ dogen::dynamic::field_definition create_split_project() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -51,6 +60,7 @@ dogen::dynamic::field_definition create_source_directory() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::text>(source_directory));
     return r;
 }
 
@@ -61,6 +71,8 @@ dogen::dynamic::field_definition create_include_directory() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(
+        boost::make_shared<dogen::dynamic::text>(include_directory));
     return r;
 }
 
@@ -71,6 +83,8 @@ dogen::dynamic::field_definition create_header_file_extension() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(
+        boost::make_shared<dogen::dynamic::text>(header_file_extension));
     return r;
 }
 
@@ -81,6 +95,8 @@ dogen::dynamic::field_definition create_implementation_file_extension() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::text>(
+            implementation_file_extension));
     return r;
 }
 
@@ -91,6 +107,7 @@ dogen::dynamic::field_definition create_enable_facet_folders() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 
@@ -101,6 +118,7 @@ dogen::dynamic::field_definition create_enable_unique_file_names() {
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::root_module);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
     return r;
 }
 

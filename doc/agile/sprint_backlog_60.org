@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-24 Sat 21:22]
+Clock summary at [2015-01-25 Sun 00:10]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *11:51* |       |      |
+| *Total time*                                                     | *12:14* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Active                                                           |         | 11:51 |      |
+| Active                                                           |         | 12:14 |      |
 | STARTED Sprint and product backlog grooming                      |         |       | 1:23 |
 | COMPLETED Add annotation fields and remove meta-data usage       |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                 |         |       | 1:09 |
@@ -32,6 +32,7 @@ Clock summary at [2015-01-24 Sat 21:22]
 | COMPLETED Create field definitions for all c++ fields            |         |       | 4:55 |
 | COMPLETED Add default value support to dynamic field definitions |         |       | 0:35 |
 | STARTED Rename namespace =meta-data= to =dynamic=                |         |       | 0:26 |
+| STARTED Update c++ factories to use dynamic object               |         |       | 0:23 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -160,18 +161,22 @@ We have created a number of "meta-data extension" namespaces, which is
 where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
+*** STARTED Update c++ factories to use dynamic object                :story:
+    CLOCK: [2015-01-24 Sat 23:47]--[2015-01-25 Sun 00:10] =>  0:23
+
+This requires a bit of cleverness because we need to make use of the
+hierarchical properties for ownership. We also need to add default
+values to field definitions and remove the default facet properties.
+
+- group by facet where formatter is null
+- in each group, locate the facet settings and copy them over
+
 *** Dynamic workflow is recreated for every model                     :story:
 
 We should create the dynamic workflow once and pass it to the dia to
 sml instances. Instead we are recreating it in every transformer
 instance. Since the workflow is const, we should be able to pass
 references to it around.
-
-*** Update c++ factories to use dynamic object                        :story:
-
-This requires a bit of cleverness because we need to make use of the
-hierarchical properties for ownership. We also need to add default
-values to field definitions and remove the default facet properties.
 
 *** Create a container of field definitions in field definition       :story:
 

@@ -21291,18 +21291,18 @@ main, or from another initialiser.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="305,79.7"/>
+        <dia:point val="305,82.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="281.37,78.95;305.75,125.8"/>
+        <dia:rectangle val="281.37,82.05;305.75,125.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="305,79.7"/>
-        <dia:point val="305,80"/>
-        <dia:point val="281.42,80"/>
+        <dia:point val="305,82.8"/>
+        <dia:point val="305,88"/>
+        <dia:point val="281.42,88"/>
         <dia:point val="281.42,125"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -21320,7 +21320,7 @@ main, or from another initialiser.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O62" connection="8"/>
+        <dia:connection handle="0" to="O62" connection="5"/>
         <dia:connection handle="1" to="O195" connection="1"/>
       </dia:connections>
     </dia:object>
