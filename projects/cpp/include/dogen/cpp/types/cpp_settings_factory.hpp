@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <boost/property_tree/ptree.hpp>
 #include "dogen/cpp/types/cpp_settings.hpp"
 #include "dogen/dynamic/types/object.hpp"
 
@@ -33,7 +32,7 @@ namespace dogen {
 namespace cpp {
 
 /**
- * @brief Generates the C++ settings from meta-data.
+ * @brief Generates the C++ settings from dynamic extensions.
  */
 class cpp_settings_factory {
 public:
@@ -49,13 +48,6 @@ private:
      * @brief Returns a default value version of the C++ settings.
      */
     cpp_settings create_default_settings() const;
-
-public:
-    /**
-     * @brief Given the supplied meta-data, returns the corresponding
-     * C++ settings. The missing values are defaulted.
-     */
-    cpp_settings build(const boost::property_tree::ptree& meta_data) const;
 
 public:
     /**

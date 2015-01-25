@@ -18,24 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/content_extensions.hpp"
-#include "dogen/sml/types/meta_data/reader.hpp"
-#include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/field_definitions.hpp"
 #include "dogen/cpp/types/cpp_settings_factory.hpp"
-
-namespace {
-
-using namespace dogen::utility::log;
-auto lg(logger_factory("cpp.cpp_settings_factory"));
-
-const std::string default_source_directory("src");
-const std::string default_include_directory("include");
-const std::string default_header_file_extension(".hpp");
-const std::string default_implementation_file_extension(".cpp");
-
-}
 
 namespace dogen {
 namespace cpp {
@@ -65,63 +50,40 @@ cpp_settings cpp_settings_factory::create_default_settings() const {
 cpp_settings_factory::cpp_settings_factory()
     : default_settings_(create_default_settings()) { }
 
-cpp_settings cpp_settings_factory::
-build(const boost::property_tree::ptree& meta_data) const {
+cpp_settings cpp_settings_factory::build(const dynamic::object& o) const {
     cpp_settings r(default_settings_);
 
-    sml::meta_data::reader reader(meta_data);
-    if (reader.has_key(traits::enabled())) {
-        const auto value(reader.get(traits::enabled()));
-        r.enabled(value == traits::bool_true());
-    }
+    using namespace dynamic;
+    using fd = field_definitions;
 
-    if (reader.has_key(traits::split_project())) {
-        const auto value(reader.get(traits::split_project()));
-        r.split_project(value == traits::bool_true());
-    }
+    if (has_field(o, fd::enabled()))
+        r.enabled(get_boolean_content(o, fd::enabled()));
 
-    if (reader.has_key(traits::source_directory())) {
-        const auto value(reader.get(traits::source_directory()));
-        r.source_directory(value);
-    }
+    if (has_field(o, fd::split_project()))
+        r.enabled(get_boolean_content(o, fd::split_project()));
 
-    if (reader.has_key(traits::include_directory())) {
-        const auto value(reader.get(traits::include_directory()));
-        r.include_directory(value);
-    }
+    if (has_field(o, fd::source_directory()))
+        r.source_directory(get_text_content(o, fd::source_directory()));
 
-    if (reader.has_key(traits::header_file_extension())) {
-        const auto value(reader.get(traits::header_file_extension()));
-        r.header_file_extension(value);
-    }
+    if (has_field(o, fd::include_directory()))
+        r.include_directory(get_text_content(o, fd::include_directory()));
 
-    if (reader.has_key(traits::implementation_file_extension())) {
-        const auto value(reader.get(traits::implementation_file_extension()));
-        r.implementation_file_extension(value);
-    }
+    if (has_field(o, fd::header_file_extension()))
+        r.header_file_extension(
+            get_text_content(o, fd::header_file_extension()));
 
-    if (reader.has_key(traits::enable_facet_folders())) {
-        const auto value(reader.get(traits::enable_facet_folders()));
-        r.enable_facet_folders(value == traits::bool_true());
-    }
+    if (has_field(o, fd::implementation_file_extension()))
+        r.implementation_file_extension(
+            get_text_content(o, fd::implementation_file_extension()));
 
-    if (reader.has_key(traits::enable_unique_file_names())) {
-        const auto value(reader.get(traits::enable_unique_file_names()));
-        r.enable_unique_file_names(value == traits::bool_true());
-    }
+    if (has_field(o, fd::enable_facet_folders()))
+        r.enable_facet_folders(
+            get_boolean_content(o, fd::enable_facet_folders()));
 
-    return r;
-}
+    if (has_field(o, fd::enable_unique_file_names()))
+        r.enable_unique_file_names(
+            get_boolean_content(o, fd::enable_unique_file_names()));
 
-cpp_settings cpp_settings_factory::build(const dynamic::object& /*o*/) const {
-    cpp_settings r(default_settings_);
-
-/*    sml::meta_data::reader reader(meta_data);
-    if (reader.has_key(traits::enabled())) {
-        const auto value(reader.get(traits::enabled()));
-        r.enabled(value == traits::bool_true());
-    }
-*/
     return r;
 }
 

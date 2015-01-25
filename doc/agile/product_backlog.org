@@ -8,7 +8,6 @@
 
 Stories that we intend to look at, at some point.
 
-
 *** Allow for generation of class with the same name as package       :story:
 
 At present its not possible to generate a class inside a package with

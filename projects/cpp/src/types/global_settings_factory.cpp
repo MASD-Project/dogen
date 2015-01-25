@@ -50,7 +50,7 @@ global_settings_factory::create_formatter_settings(
 cpp_settings global_settings_factory::
 create_cpp_settings(const sml::module& m) const {
     cpp_settings_factory f;
-    return f.build(m.meta_data());
+    return f.build(m.extensions());
 }
 
 std::unordered_map<std::string, global_settings> global_settings_factory::
