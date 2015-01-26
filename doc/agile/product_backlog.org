@@ -8,13 +8,6 @@
 
 Stories that we intend to look at, at some point.
 
-*** Allow for generation of class with the same name as package       :story:
-
-At present its not possible to generate a class inside a package with
-the same name of that package, if the package documentation is being
-generated. This is because they will both have the exact same file
-name.
-
 *** Consider renaming qname                                           :story:
 
 As part of dynamic we came up with a better way of modeling names:
@@ -26,6 +19,407 @@ type is name, fields:
 This is a better way of modeling, as opposed to the SML way with a
 =qname= which then contains a =simple_name=. We should use this
 approach in SML to.
+
+*** Handling of modelines is incorrect in general settings            :story:
+
+At present the general settings are hard-coded to look for a C++
+modeline. This will not work for CMake files, etc. We need to think
+how multiple modelines will be supported. See general settings factory
+in formatters.
+
+*** Consider renaming model module to root module                     :story:
+
+It would be more sensible to call it root module rather than model
+module. We should also create a root module property in the model to
+make it easier to locate.
+
+*** Add support for opaque formatter settings                         :story:
+
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to global settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
+
+*** Add support for local settings                                    :story:
+
+- create a local settings class that is made up of file settings,
+  opaque settings and formatter settings. Entity to have a container
+  of local settings (map of formatter id to local settings).
+- create a local settings factory that takes on the work from workflow
+  in generating the file settings. It also takes on a container of
+  opaque settings factory by formatter id to generate the opaque
+  settings. Finally, it uses the formatter settings factory for the
+  overrides. These should be optional. If populated, they should take
+  on the global settings as defaults so that we don't have to worry
+  about global settings for formatters any more. This means the local
+  settings factory must have access to the global settings.
+
+*** Create a settings class                                           :story:
+
+- create a settings class that has a map of formatter id to global
+  settings. It could also have a map of c++ entity name (produced with
+  name builder to include namespaces), to formatter id to local
+  settings. With this we can now move the settings away from entity
+  because we no longer require the qname.
+- pass the settings class to the includes builder.
+
+*** Consider using an abstract factory in formatters                  :story:
+
+At present we have a number of interfaces (or quasi-interfaces) coming
+out of formatter:
+
+- file name generation
+- includes generation
+- opaque settings generation
+- opaque settings validator
+
+Perhaps it makes more sense to aggregate them all into a factory of
+factories. We should look into the abstract factory pattern as it
+seems particularly suitable for this. The factory should remember the
+id of the formatter it comes from.
+
+In terms of names, it is difficult to find a name for such an
+aggregate:
+
+- formatter components, e.g. =formatter_components_factory_interface=
+- formatter properties
+- formatter parts
+
+*** Capture settings validation rules                                 :story:
+
+Once all settings have been built (global and local) we must pass them
+to a validator class that makes sure they all make sense. This story
+captures all the rules we need to check for. We must also check the
+SML validator story in backlog for rules that apply to settings.
+
+- integrated IO must not be enabled if IO is enabled and vice-versa
+  (opaque settings validator). actually it seems this is possible, we
+  need to investigate the current implementation.
+- types must be enabled
+- if serialisation is enabled, types forward declaration of the
+  serialisation classes must be enabled (opaque settings validator)
+
+Actually what we need is a rules engine that infers all of this. It
+does validation at the same time.
+
+*** Implement include generation for class header formatter           :story:
+
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
+
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via meta-data, so we can start using STL, Boost
+  etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+*** Create a transformation and formatting sub-workflow               :story:
+
+At present we have two template functions in the main workflow,
+linking the different steps of transformation and formatting. However,
+it may make more sense to plug in to the all types traversal. For this
+we need a sub-workflow that owns the model and the transformer and
+which overloads =operator()=. It produces files.
+
+It can receive a formatter dispatcher and a transformer on
+construction and keep references these. Execute returns the list of
+files.
+
+*** Implement class header formatter                                  :story:
+
+- look at the old =om= types formatter implementation to see if there
+  is any code to scavenge. This model was deleted around commit
+  10157ad.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** Tidy-up sml consumer interface                                    :story:
+
+After implementing the includes for the class header formatter we
+should figure out if we need the multiple passes machinery. Most
+likely all of that should be scraped.
+
+*** Add include files at the formatter level                          :story:
+
+We need to remove all the include files from =includer= which are
+related to formatter specific code. We need to inject these
+dependencies inside of the formatters.
+
+- implement includer in terms of json files
+- get includer to work off of object relationships
+- remove relationships from transformer
+- remove helper models boost and std
+
+*** Includer generation should be done from meta-data                 :story:
+
+*New Understanding*
+
+The true use case of this story is not to allow users to add includes
+at random; it is actually only useful in one scenario:
+
+- *merging code generation*: users add code which requires additional
+  includes. Without support for this, merging code generation would
+  have limited usefulness.
+
+*Previous Understanding*
+
+It would be nice if we could determine which includer files to create
+by looking at the meta-data. For this we need a notion of an inclusion
+group, defined at the model level:
+
+- =cpp.types.includers.general=
+- =cpp.types.includers.value_objects=
+- ...
+
+Under each of these one would configure the aspect:
+
+- =cpp.types.includers.general.generate=: =true=
+- =cpp.types.includers.general.file_name=: =a/b/c=
+- =cpp.types.includers.general.is_system=: =false=
+
+Then, each type, module etc would declare its membership (as a list):
+
+- =cpp.includers.member=: =cpp.types.includers.general=
+- =cpp.includers.member=: =cpp.types.includers.value_objects=
+- ...
+
+*Previous understanding*
+
+We should simply go through all the types in the SML model and for
+each type and each facet create the corresponding inclusion
+path. locator can be used to generate standard paths, and a model
+specific mapping is required for other models such as std.
+
+Include then takes the relationships extracted by extractor, the
+mappings generated by this mapper and simply appends to the inclusion
+list the file names. it also appends the implementation specific
+headers.
+
+*** Support "cross-facet interference"                                :story:
+
+In a few cases its useful to disable bits of a facet when another
+facet is switched off because those bits do not belong to the main
+facet the formatter is working on. At present this happens in the
+following cases:
+
+- Forward declaration of serialisation in domain when serialisation is
+  off
+- Friend of serialisation in domain when serialisation is
+  off
+- declaration and implementation of to_stream when IO is off
+- declaration and implementation of inserter when IO is off and
+  integrated IO is on.
+
+We need a way of accessing the on/off state of all facets from any
+formatter so that they can make cross facet decisions. A quick hack
+was to add yet another flag: =disable_io= which is disabled when the
+IO facet is not present and passed on to the relevant formatters. This
+needs to be replaced by a more general approach.
+
+*** Add frontends and backends to =info= command line option          :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what frontends and backends
+are available in my dogen version so that I don't try to use features
+that are not present.
+#+end_quote
+
+With the static registration of frontends and backends, we should add
+some kind of mechanism to display whats on offer in the command line,
+via the =--info= option. This is slightly tricky because the
+=frontend= and =backend= models do not know of the command line. We
+need a method in the frontends that returns a description and a method
+in the workflow that returns all descriptions. These must be
+static. The knitter can then call these methods and build the info
+text.
+
+*** Rename the include tags and add them to CPP model                 :story:
+
+Update all the JSON files with names in the form
+=cpp.include.types.header_file=. Add properties in =cpp= to capture
+these.
+
+While we're at it, add support for =family= too.
+
+
+*** Add support for disabling formatters                              :story:
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+the meta-data. We can either implement it in the backend or make all
+the formatters return an =std::optional<dogen::formatters::file>= and
+internally look for a =enabled= trait.
+
+We need to be able to distinguish "optional" formatters - those that
+can be disabled - and "mandatory" formatters - those that cannot. If a
+user requests the disabling of a mandatory formatter, we must throw.
+
+This story was merged with a previous one: Parameter to disable cpp
+file.
+
+#+begin_quote
+*Story*: As a dogen user, I want to disable cpp files so that I don't
+generate files with dummy content when I'm not using them.
+#+end_quote
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
+
+*** Use boilerplate to generate annotations                           :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to use my own licence and
+copyright attribution so that the generated code matches the general
+project choices.
+#+end_quote
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some meta-data into C++ model.
+
+*** Remove =cpp_formatters::formatting_error=                         :story:
+
+Use the =formatters::formating_error= instead.
+
+*** Delete content types                                              :story:
+
+Now we have the type system representing the content, we can delete
+this enumeration.
+
+*** Delete aspect types                                               :story:
+
+Now we have the type system representing the aspects, we can delete
+this enumeration.
+
+*** Delete key implementation formatter                               :story:
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** Towards a more generic use of meta-data parameters                 :epic:
+
+*New Understanding*: We have decided to limit the meta-data usage to
+extensibility. Where required parameters will be made visible via the
+meta-data but this should be kept to just those parameters that users
+can sensibly control.
+
+*Previous Understanding*
+
+We should do an inventory of all dogen features which can be
+reimplemented as meta-data parameters. For example, immutability
+should result in a generic parameter being added to the type at the
+SML level:
+
+: immutable = true
+
+which then gets resolved into a set of language specific parameters:
+
+: cpp.copy_constructor.status = disabled
+: cpp.setters.status = disabled
+: ...
+
+The formatter then looks for these tags to decide whether to add a
+method or not. If we had more languages, they would have equivalent
+formatting commands.
+
+The same would apply to facets. These would have a top-level generic
+parameter such as =hashing=:
+
+: hashing = true
+
+Which then expands to implementation specific hashing:
+
+: cpp.hashing.std_hashing = true
+
+or
+
+: cpp.hashing.boost_hashing = true
+
+The facet is now just a short-hand for a set of implementation
+specific parameters. There is some default mapping applied in this
+grouping. The user can shortcut the process by disabling the mapping
+and supplying implementation specific parameters:
+
+: hashing = false
+: cpp.hashing.boost_hashing = true
+
+Assuming =std_hashing= as a default.
+
+In addition, depending on the parameter, it may be propagatable /
+expandable. For example, if hashing is set to false in a type at the
+bottom of a graph relationship, we must propagate it to all members of
+the graph. Similarly, if hashing is disabled in the model, we must
+propagate it to all types in the model.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+*** Use formatting settings in formatters model                       :story:
+
+We need to replace the references to the c++ settings directly with
+formatter settings.
+
+*** Move all the fundamental configuration options into meta-data     :story:
+
+#+begin_quote
+*Story*: As a dogen user, I do not want to have to specify fundamental
+model options from the command line so that I do not forget to specify
+them and generate invalid models.
+#+end_quote
+
+There are a set of options that must not be supplied as command line
+arguments, such as backend and facet related properties etc. These
+should be attached to the diagram itself so that one does not need to
+supply it every time one code generates.
+
+**** Update all models and tests to use the new tags
+
+Once the config options are in we need to start making use of them to
+ensure they work exactly as before.
+
+**** Remove all C++ command line settings
+
+Once the overrides have been proven to work, we need to remove the
+command line options and make sure nothing breaks.
+
 
 *** Investigate NeoVim's emblems                                      :story:
 
@@ -54,13 +448,6 @@ grepping etc much easier. We should create a method to convert new
 lines to a marker (say =<new_line>= or whatever we are already doing
 for JSON output). This should be applied to all cases where there is a
 potential to have new lines (comments, etc).
-
-*** Handling of modelines is incorrect in general settings            :story:
-
-At present the general settings are hard-coded to look for a C++
-modeline. This will not work for CMake files, etc. We need to think
-how multiple modelines will be supported. See general settings factory
-in formatters.
 
 *** Consider c++ itself as a front-end                                 :epic:
 
@@ -211,45 +598,6 @@ and
 Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
 
-*** Consider renaming model module to root module                     :story:
-
-It would be more sensible to call it root module rather than model
-module. We should also create a root module property in the model to
-make it easier to locate.
-
-*** Add support for opaque formatter settings                         :story:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to global settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-
-*** Add support for local settings                                    :story:
-
-- create a local settings class that is made up of file settings,
-  opaque settings and formatter settings. Entity to have a container
-  of local settings (map of formatter id to local settings).
-- create a local settings factory that takes on the work from workflow
-  in generating the file settings. It also takes on a container of
-  opaque settings factory by formatter id to generate the opaque
-  settings. Finally, it uses the formatter settings factory for the
-  overrides. These should be optional. If populated, they should take
-  on the global settings as defaults so that we don't have to worry
-  about global settings for formatters any more. This means the local
-  settings factory must have access to the global settings.
-
-*** Create a settings class                                           :story:
-
-- create a settings class that has a map of formatter id to global
-  settings. It could also have a map of c++ entity name (produced with
-  name builder to include namespaces), to formatter id to local
-  settings. With this we can now move the settings away from entity
-  because we no longer require the qname.
-- pass the settings class to the includes builder.
-
 *** Travis deployment of tags fails                                   :story:
 
 As per [[https://github.com/travis-ci/travis-ci/issues/2577][issue 2577]] in travis, it does not support wildcards at the
@@ -298,105 +646,6 @@ Error:
 :     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `load'
 :     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `<main>'
 : failed to deploy
-
-*** Consider using an abstract factory in formatters                  :story:
-
-At present we have a number of interfaces (or quasi-interfaces) coming
-out of formatter:
-
-- file name generation
-- includes generation
-- opaque settings generation
-- opaque settings validator
-
-Perhaps it makes more sense to aggregate them all into a factory of
-factories. We should look into the abstract factory pattern as it
-seems particularly suitable for this. The factory should remember the
-id of the formatter it comes from.
-
-In terms of names, it is difficult to find a name for such an
-aggregate:
-
-- formatter components, e.g. =formatter_components_factory_interface=
-- formatter properties
-- formatter parts
-
-*** Capture settings validation rules                                 :story:
-
-Once all settings have been built (global and local) we must pass them
-to a validator class that makes sure they all make sense. This story
-captures all the rules we need to check for. We must also check the
-SML validator story in backlog for rules that apply to settings.
-
-- integrated IO must not be enabled if IO is enabled and vice-versa
-  (opaque settings validator). actually it seems this is possible, we
-  need to investigate the current implementation.
-- types must be enabled
-- if serialisation is enabled, types forward declaration of the
-  serialisation classes must be enabled (opaque settings validator)
-
-Actually what we need is a rules engine that infers all of this. It
-does validation at the same time.
-
-*** Implement include generation for class header formatter           :story:
-
-Now that we have finished generating the path spec details, we need to
-make sure includes generation works as expected. Add both formatter
-level includes as well as model level includes.
-
-We also need to deal with:
-
-- exposing formatter id as a static property so we can create
-  dependencies between formatters;
-- includes overrides via meta-data, so we can start using STL, Boost
-  etc classes.
-- includes of STL, Boost etc that are formatter level dependencies -
-  this needs to be handled via traits.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-*** Create a transformation and formatting sub-workflow               :story:
-
-At present we have two template functions in the main workflow,
-linking the different steps of transformation and formatting. However,
-it may make more sense to plug in to the all types traversal. For this
-we need a sub-workflow that owns the model and the transformer and
-which overloads =operator()=. It produces files.
-
-It can receive a formatter dispatcher and a transformer on
-construction and keep references these. Execute returns the list of
-files.
-
-*** Implement class header formatter                                  :story:
-
-- look at the old =om= types formatter implementation to see if there
-  is any code to scavenge. This model was deleted around commit
-  10157ad.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
 
 *** Evaluate all of our data structures based on usage                 :epic:
 
@@ -584,12 +833,6 @@ enumerations for the exception part:
 We should just do the lexical cast once at the top and use it for both
 logging and the exception message.
 
-*** Tidy-up sml consumer interface                                    :story:
-
-After implementing the includes for the class header formatter we
-should figure out if we need the multiple passes machinery. Most
-likely all of that should be scraped.
-
 *** Consider hosting documentation in read the docs                   :story:
 
 We should consider hosting the documentation here:
@@ -675,108 +918,6 @@ To make life easier in C++ model, we've added a new SML property:
 =is_original_parent_visitable=. We need to look at the SML
 transformation and ensure this property is populated correctly.
 
-*** Add include files at the formatter level                          :story:
-
-We need to remove all the include files from =includer= which are
-related to formatter specific code. We need to inject these
-dependencies inside of the formatters.
-
-- implement includer in terms of json files
-- get includer to work off of object relationships
-- remove relationships from transformer
-- remove helper models boost and std
-
-*** Includer generation should be done from meta-data                 :story:
-
-*New Understanding*
-
-The true use case of this story is not to allow users to add includes
-at random; it is actually only useful in one scenario:
-
-- *merging code generation*: users add code which requires additional
-  includes. Without support for this, merging code generation would
-  have limited usefulness.
-
-*Previous Understanding*
-
-It would be nice if we could determine which includer files to create
-by looking at the meta-data. For this we need a notion of an inclusion
-group, defined at the model level:
-
-- =cpp.types.includers.general=
-- =cpp.types.includers.value_objects=
-- ...
-
-Under each of these one would configure the aspect:
-
-- =cpp.types.includers.general.generate=: =true=
-- =cpp.types.includers.general.file_name=: =a/b/c=
-- =cpp.types.includers.general.is_system=: =false=
-
-Then, each type, module etc would declare its membership (as a list):
-
-- =cpp.includers.member=: =cpp.types.includers.general=
-- =cpp.includers.member=: =cpp.types.includers.value_objects=
-- ...
-
-*Previous understanding*
-
-We should simply go through all the types in the SML model and for
-each type and each facet create the corresponding inclusion
-path. locator can be used to generate standard paths, and a model
-specific mapping is required for other models such as std.
-
-Include then takes the relationships extracted by extractor, the
-mappings generated by this mapper and simply appends to the inclusion
-list the file names. it also appends the implementation specific
-headers.
-
-*** Support "cross-facet interference"                                :story:
-
-In a few cases its useful to disable bits of a facet when another
-facet is switched off because those bits do not belong to the main
-facet the formatter is working on. At present this happens in the
-following cases:
-
-- Forward declaration of serialisation in domain when serialisation is
-  off
-- Friend of serialisation in domain when serialisation is
-  off
-- declaration and implementation of to_stream when IO is off
-- declaration and implementation of inserter when IO is off and
-  integrated IO is on.
-
-We need a way of accessing the on/off state of all facets from any
-formatter so that they can make cross facet decisions. A quick hack
-was to add yet another flag: =disable_io= which is disabled when the
-IO facet is not present and passed on to the relevant formatters. This
-needs to be replaced by a more general approach.
-
-*** Add frontends and backends to =info= command line option          :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know what frontends and backends
-are available in my dogen version so that I don't try to use features
-that are not present.
-#+end_quote
-
-With the static registration of frontends and backends, we should add
-some kind of mechanism to display whats on offer in the command line,
-via the =--info= option. This is slightly tricky because the
-=frontend= and =backend= models do not know of the command line. We
-need a method in the frontends that returns a description and a method
-in the workflow that returns all descriptions. These must be
-static. The knitter can then call these methods and build the info
-text.
-
-*** Rename the include tags and add them to CPP model                 :story:
-
-Update all the JSON files with names in the form
-=cpp.include.types.header_file=. Add properties in =cpp= to capture
-these.
-
-While we're at it, add support for =family= too.
-
 *** Consider a more selective hashing generation                       :epic:
 
 At present we either generate hashing for all types or none at all. In
@@ -831,14 +972,6 @@ following error:
 
 There is no clue as to which object caused the error. Add a class name
 and dia object ID to the exception.
-
-*** Add support for disabling formatters                              :story:
-
-We should be able to disable some formatters such as forward
-declarations. Some users may not require them. We can do this using
-the meta-data. We can either implement it in the backend or make all
-the formatters return an =std::optional<dogen::formatters::file>= and
-internally look for a =enabled= trait.
 
 *** Control the emission of pragma once with meta-data                :story:
 
@@ -1343,17 +1476,6 @@ handling all of the use cases (reorder columns, remove columns, add
 columns, updating rows, etc). All of this code can be inferred from
 the type hierarchy.
 
-*** Use boilerplate to generate annotations                           :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to use my own licence and
-copyright attribution so that the generated code matches the general
-project choices.
-#+end_quote
-
-Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some meta-data into C++ model.
-
 *** Update manual with detailed model descriptions                    :story:
 
 #+begin_quote
@@ -1370,80 +1492,6 @@ workflow does in each model.
 
 We should only implement this story when all of the major refactoring
 has been done.
-
-*** Remove =cpp_formatters::formatting_error=                         :story:
-
-Use the =formatters::formating_error= instead.
-
-*** Delete content types                                              :story:
-
-Now we have the type system representing the content, we can delete
-this enumeration.
-
-*** Delete aspect types                                               :story:
-
-Now we have the type system representing the aspects, we can delete
-this enumeration.
-
-*** Delete key implementation formatter                               :story:
-
-It doesn't seem like there is any good reason to treat the keys in a
-special way so try to remove this.
-
-*** Towards a more generic use of meta-data parameters                 :epic:
-
-*New Understanding*: We have decided to limit the meta-data usage to
-extensibility. Where required parameters will be made visible via the
-meta-data but this should be kept to just those parameters that users
-can sensibly control.
-
-*Previous Understanding*
-
-We should do an inventory of all dogen features which can be
-reimplemented as meta-data parameters. For example, immutability
-should result in a generic parameter being added to the type at the
-SML level:
-
-: immutable = true
-
-which then gets resolved into a set of language specific parameters:
-
-: cpp.copy_constructor.status = disabled
-: cpp.setters.status = disabled
-: ...
-
-The formatter then looks for these tags to decide whether to add a
-method or not. If we had more languages, they would have equivalent
-formatting commands.
-
-The same would apply to facets. These would have a top-level generic
-parameter such as =hashing=:
-
-: hashing = true
-
-Which then expands to implementation specific hashing:
-
-: cpp.hashing.std_hashing = true
-
-or
-
-: cpp.hashing.boost_hashing = true
-
-The facet is now just a short-hand for a set of implementation
-specific parameters. There is some default mapping applied in this
-grouping. The user can shortcut the process by disabling the mapping
-and supplying implementation specific parameters:
-
-: hashing = false
-: cpp.hashing.boost_hashing = true
-
-Assuming =std_hashing= as a default.
-
-In addition, depending on the parameter, it may be propagatable /
-expandable. For example, if hashing is set to false in a type at the
-bottom of a graph relationship, we must propagate it to all members of
-the graph. Similarly, if hashing is disabled in the model, we must
-propagate it to all types in the model.
 
 *** Refactor Dia to SML transformer                                   :story:
 
@@ -1518,13 +1566,6 @@ independently.
 
 At present we support this, but only for types as it is hard-coded.
 #+end_quote
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
 
 *** Add a configuration class to SML mock factory                     :story:
 
@@ -1737,34 +1778,6 @@ this JSON mode.
   =-Wall=
 - =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 
-*** Use formatting settings in formatters model                       :story:
-
-We need to replace the references to the c++ settings directly with
-formatter settings.
-
-*** Move all the fundamental configuration options into meta-data     :story:
-
-#+begin_quote
-*Story*: As a dogen user, I do not want to have to specify fundamental
-model options from the command line so that I do not forget to specify
-them and generate invalid models.
-#+end_quote
-
-There are a set of options that must not be supplied as command line
-arguments, such as backend and facet related properties etc. These
-should be attached to the diagram itself so that one does not need to
-supply it every time one code generates.
-
-**** Update all models and tests to use the new tags
-
-Once the config options are in we need to start making use of them to
-ensure they work exactly as before.
-
-**** Remove all C++ command line settings
-
-Once the overrides have been proven to work, we need to remove the
-command line options and make sure nothing breaks.
-
 *** Move code to C++ 14                                               :story:
 
 #+begin_quote
@@ -1966,6 +1979,13 @@ it. It must always be on. We should remove these options.
 In addition the facet is incorrectly named: when we performed the
 rename of =domain= to =types= we left the command-line facet. We
 should rename it to =types= too.
+
+*** Allow for generation of class with the same name as package       :story:
+
+At present its not possible to generate a class inside a package with
+the same name of that package, if the package documentation is being
+generated. This is because they will both have the exact same file
+name.
 
 *** Type with the same name as the project does not compile           :story:
 
@@ -2457,19 +2477,6 @@ serialization. However, in keeping with the (often violated) rule that
 we never add code without a use case, we need to remove this.
 
 Instead of =serialization= we need to call it =boost_serialization=.
-
-*** Parameter to disable cpp file                                     :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to disable cpp files so that I don't
-generate files with dummy content when I'm not using them.
-#+end_quote
-
-It would be really useful to define a implementation specific
-parameter which disables the generation of a cpp file for a
-service. This would stop us from having to create noddy translation
-units with dummy functions just to avoid having to define exclusion
-regexes.
 
 *** Add support for Address Sanitizer (ASan)                          :story:
 
