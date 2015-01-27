@@ -23,21 +23,12 @@
 namespace dogen {
 namespace sml {
 
-parameter::parameter(parameter&& rhs)
-    : documentation_(std::move(rhs.documentation_)),
-      meta_data_(std::move(rhs.meta_data_)),
-      extensions_(std::move(rhs.extensions_)),
-      name_(std::move(rhs.name_)),
-      type_(std::move(rhs.type_)) { }
-
 parameter::parameter(
     const std::string& documentation,
-    const boost::property_tree::ptree& meta_data,
     const dogen::dynamic::object& extensions,
     const std::string& name,
     const dogen::sml::nested_qname& type)
     : documentation_(documentation),
-      meta_data_(meta_data),
       extensions_(extensions),
       name_(name),
       type_(type) { }
@@ -45,7 +36,6 @@ parameter::parameter(
 void parameter::swap(parameter& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(meta_data_, other.meta_data_);
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(type_, other.type_);
@@ -53,7 +43,6 @@ void parameter::swap(parameter& other) noexcept {
 
 bool parameter::operator==(const parameter& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        meta_data_ == rhs.meta_data_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_;
@@ -79,22 +68,6 @@ void parameter::documentation(const std::string& v) {
 
 void parameter::documentation(const std::string&& v) {
     documentation_ = std::move(v);
-}
-
-const boost::property_tree::ptree& parameter::meta_data() const {
-    return meta_data_;
-}
-
-boost::property_tree::ptree& parameter::meta_data() {
-    return meta_data_;
-}
-
-void parameter::meta_data(const boost::property_tree::ptree& v) {
-    meta_data_ = v;
-}
-
-void parameter::meta_data(const boost::property_tree::ptree&& v) {
-    meta_data_ = std::move(v);
 }
 
 const dogen::dynamic::object& parameter::extensions() const {

@@ -17,23 +17,24 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-27 Tue 18:40]
+Clock summary at [2015-01-27 Tue 23:20]
 
-| Headline                                                         | Time    |       |       |
-|------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                     | *34:44* |       |       |
-|------------------------------------------------------------------+---------+-------+-------|
-| Active                                                           |         | 34:44 |       |
-| STARTED Sprint and product backlog grooming                      |         |       |  1:46 |
-| COMPLETED Add annotation fields and remove meta-data usage       |         |       |  2:15 |
-| COMPLETED Add field definition to odb formatters                 |         |       |  1:09 |
-| COMPLETED Consider defaulting doxygen docs to false              |         |       |  0:05 |
-| COMPLETED Refactor hierarchy ownership of fields                 |         |       |  1:03 |
-| COMPLETED Create field definitions for all c++ fields            |         |       |  4:55 |
-| COMPLETED Add default value support to dynamic field definitions |         |       |  0:35 |
-| COMPLETED Update c++ settings factory to use dynamic object      |         |       |  1:34 |
-| COMPLETED Update mock factory to generate dynamic fields         |         |       | 20:56 |
-| STARTED Rename namespace =meta-data= to =dynamic=                |         |       |  0:26 |
+| Headline                                                         | Time    |       |      |
+|------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                     | *17:01* |       |      |
+|------------------------------------------------------------------+---------+-------+------|
+| Active                                                           |         | 17:01 |      |
+| STARTED Sprint and product backlog grooming                      |         |       | 1:46 |
+| COMPLETED Add annotation fields and remove meta-data usage       |         |       | 2:15 |
+| COMPLETED Add field definition to odb formatters                 |         |       | 1:09 |
+| COMPLETED Consider defaulting doxygen docs to false              |         |       | 0:05 |
+| COMPLETED Refactor hierarchy ownership of fields                 |         |       | 1:03 |
+| COMPLETED Create field definitions for all c++ fields            |         |       | 4:55 |
+| COMPLETED Add default value support to dynamic field definitions |         |       | 0:35 |
+| COMPLETED Update c++ settings factory to use dynamic object      |         |       | 1:34 |
+| COMPLETED Update mock factory to generate dynamic fields         |         |       | 1:56 |
+| COMPLETED Rename namespace =meta-data= to =dynamic=              |         |       | 0:26 |
+| COMPLETED Update facet settings factory to use dynamic object    |         |       | 1:17 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -168,7 +169,7 @@ fields from the dynamic object.
 
 *** COMPLETED Update mock factory to generate dynamic fields          :story:
     CLOSED: [2015-01-27 Tue 18:39]
-    CLOCK: [2015-01-26 Mon 22:01]--[2015-01-27 Tue 18:39] => 20:38
+    CLOCK: [2015-01-26 Mon 22:01]--[2015-01-26 Mon 23:39] =>  1:38
     CLOCK: [2015-01-25 Sun 22:53]--[2015-01-25 Sun 23:11] =>  0:18
 
 At present the mock factory is generating meta-data fields. We need it
@@ -176,7 +177,8 @@ to generate dynamic fields. We should hard-code the field names using
 local constants - and not add dependencies on the different models due
 to field definitions.
 
-*** STARTED Rename namespace =meta-data= to =dynamic=                 :story:
+*** COMPLETED Rename namespace =meta-data= to =dynamic=               :story:
+    CLOSED: [2015-01-27 Tue 23:18]
     CLOCK: [2015-01-22 Thu 19:15]--[2015-01-22 Thu 19:25] =>  0:10
     CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
 
@@ -184,7 +186,16 @@ We have created a number of "meta-data extension" namespaces, which is
 where we transform the ptree into a strongly typed object. These
 should be renamed to =dynamic= to make it consistent.
 
-*** Update facet settings factory to use dynamic object               :story:
+*** COMPLETED Update facet settings factory to use dynamic object     :story:
+    CLOSED: [2015-01-27 Tue 23:18]
+    CLOCK: [2015-01-27 Tue 22:01]--[2015-01-27 Tue 23:18] =>  1:17
+
+*New Understanding*
+
+Actually we don't need to tackle default values just yet - simply
+replace usages of meta_data for now.
+
+*Previous Understanding*
 
 This requires a bit of cleverness because we need to make use of the
 hierarchical properties for ownership. We also need to add default
@@ -193,12 +204,53 @@ values to field definitions and remove the default facet properties.
 - group by facet where formatter is null
 - in each group, locate the facet settings and copy them over
 
+*** COMPLETED Update formatter settings factory to use dynamic object :story:
+    CLOSED: [2015-01-27 Tue 23:17]
+
+We don't need to tackle default values just yet - simply
+replace usages of meta_data for now.
+
+*** COMPLETED Replace uses of meta-data with dynamic object           :story:
+    CLOSED: [2015-01-27 Tue 23:18]
+
+Find all places where we are using ptree and use the dynamic object
+instead. This should be mainly in meta-data factories.
+
+The exception is =json_hydrator= since we use property tree to parse
+the JSON.
+
+*** COMPLETED Inject unit test field definitions                      :story:
+    CLOSED: [2015-01-27 Tue 23:18]
+
+We need to inject fields like =KEY= etc used by unit tests in the unit
+tests themselves. Take the opportunity to lower-case them.
+
+*** COMPLETED Remove uses of meta-data in tests                       :story:
+    CLOSED: [2015-01-27 Tue 23:18]
+
+Where we are checking for the presence of meta-data fields, we need to
+look for dynamic fields instead.
+
+*** COMPLETED Remove all references to =ptree=                        :story:
+    CLOSED: [2015-01-27 Tue 23:18]
+
+Delete reader and writer classes and remove meta-data from
+=Extensible=.
+
+*** COMPLETED Remove dependency of writer on tags                     :story:
+    CLOSED: [2015-01-27 Tue 23:19]
+
+We seem to be using the tags to detect containers. We need to get rid
+of this dependency.
+
 *** Dynamic workflow is recreated for every model                     :story:
 
 We should create the dynamic workflow once and pass it to the dia to
 sml instances. Instead we are recreating it in every transformer
 instance. Since the workflow is const, we should be able to pass
 references to it around.
+
+Same problem applies to json hydrator.
 
 *** Create a container of field definitions in field definition       :story:
 
@@ -210,36 +262,11 @@ also mean there is only one file to change.
 
 We could use =std::reference_wrapper= for this.
 
-*** Replace uses of meta-data with dynamic object                     :story:
-
-Find all places where we are using ptree and use the dynamic object
-instead. This should be mainly in meta-data factories.
-
-*** Inject unit test field definitions                                :story:
-
-We need to inject fields like =KEY= etc used by unit tests in the unit
-tests themselves. Take the opportunity to lower-case them.
-
 *** Remove optionality from =obtain_field_definition=                 :story:
 
 In order to progress in stages we made fields optional in dynamic
 workflow; if a definition is not found we skip it. We need to remove
 this once all field definitions have been added.
-
-*** Remove uses of meta-data in tests                                 :story:
-
-Where we are checking for the presence of meta-data fields, we need to
-look for dynamic fields instead.
-
-*** Remove all references to =ptree=                                  :story:
-
-Delete reader and writer classes and remove meta-data from
-=Extensible=.
-
-*** Remove dependency of writer on tags                               :story:
-
-We seem to be using the tags to detect containers. We need to get rid
-of this dependency.
 
 *** Delete tags class in SML                                          :story:
 

@@ -28,7 +28,8 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/object.hpp"
-#include "dogen/sml/types/meta_data/writer.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -36,7 +37,6 @@
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/profile.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -175,9 +175,6 @@ private:
         e.documentation(o.comment().documentation());
 
         const auto& kvps(o.comment().key_value_pairs());
-        sml::meta_data::writer writer(e.meta_data());
-        writer.add(kvps);
-
         const auto scope(dynamic::scope_types::entity);
         e.extensions(dynamic_workflow_->execute(scope, kvps));
     }

@@ -20,9 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <ostream>
-#include <sstream>
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
@@ -41,23 +39,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     return s;
 }
-
-namespace boost {
-namespace property_tree {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::property_tree::ptree& v) {
-    std::ostringstream ss;
-    boost::property_tree::write_json(ss, v);
-
-    std::string content(ss.str());
-    boost::replace_all(content, "\r\n", "");
-    boost::replace_all(content, "\n", "");
-
-    s << content;
-    return s;
-}
-
-} }
 
 namespace boost {
 
@@ -209,7 +190,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"meta_data\": " << v.meta_data() << ", "
       << "\"extensions\": " << v.extensions() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "

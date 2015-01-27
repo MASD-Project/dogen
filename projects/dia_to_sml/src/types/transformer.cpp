@@ -27,7 +27,6 @@
 #include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/meta_data/reader.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia_to_sml/types/field_definitions.hpp"
@@ -194,9 +193,6 @@ sml::property transformer::to_property(const processed_property& p) const {
     r.documentation(p.comment().documentation());
 
     const auto& kvps(p.comment().key_value_pairs());
-    sml::meta_data::writer writer(r.meta_data());
-    writer.add(kvps);
-
     const auto scope(dynamic::scope_types::property);
     r.extensions(dynamic_workflow_->execute(scope, kvps));
 
@@ -471,8 +467,6 @@ void transformer::from_note(const processed_object& o) {
     const sml::model& model(context_.model());
     if (o.child_node_id().empty()) {
         auto& module(module_for_qname(model.name()));
-        sml::meta_data::writer writer(module.meta_data());
-        writer.add(kvps);
         module.documentation(documentation);
 
         const auto scope(dynamic::scope_types::root_module);
@@ -482,8 +476,6 @@ void transformer::from_note(const processed_object& o) {
     }
 
     sml::module& module(module_for_id(o.child_node_id()));
-    sml::meta_data::writer writer(module.meta_data());
-    writer.add(kvps);
     module.documentation(documentation);
 
     const auto scope(dynamic::scope_types::any_module);

@@ -31,17 +31,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::ptree& v) {
-    std::size_t seed(0);
-    for (const auto& node : v) {
-        combine(seed, node.first);
-        combine(seed, node.second.data());
-        combine(seed, hash_boost_property_tree_ptree(node.second));
-    }
-
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -51,7 +40,6 @@ std::size_t property_hasher::hash(const property&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.extensions());
     combine(seed, v.name());
     combine(seed, v.type());

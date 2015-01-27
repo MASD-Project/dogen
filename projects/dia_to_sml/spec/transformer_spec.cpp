@@ -1293,7 +1293,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
     BOOST_CHECK(m.name().simple_name() == model_name);
     BOOST_CHECK(!m.documentation().empty());
     BOOST_CHECK(m.members().empty());
-    BOOST_CHECK(m.meta_data().size() == 1);
+    BOOST_CHECK(m.extensions().fields().size() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
@@ -1311,7 +1311,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
     BOOST_CHECK(m.name().simple_name() == model_name);
     BOOST_CHECK(m.documentation().empty());
     BOOST_CHECK(m.members().empty());
-    BOOST_CHECK(m.meta_data().empty());
+    BOOST_CHECK(m.extensions().fields().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
@@ -1328,7 +1328,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     BOOST_CHECK(m.name().simple_name() == model_name);
     BOOST_CHECK(m.documentation().empty());
     BOOST_CHECK(m.members().empty());
-    BOOST_CHECK(m.meta_data().empty());
+    BOOST_CHECK(m.extensions().fields().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
@@ -1342,7 +1342,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().meta_data().empty());
+    BOOST_CHECK(c.model().extensions().fields().empty());
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
     std::string model_member, module_name;
@@ -1355,11 +1355,11 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.members().size() == 1);
             model_member = m.members().front().simple_name();
-            BOOST_CHECK(m.meta_data().empty());
+            BOOST_CHECK(m.extensions().fields().empty());
         } else {
             module_name = m.name().simple_name();
             BOOST_CHECK(!m.documentation().empty());
-            BOOST_CHECK(!m.meta_data().empty());
+            BOOST_CHECK(!m.extensions().fields().empty());
             BOOST_CHECK(m.members().empty());
         }
     }
@@ -1377,7 +1377,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().meta_data().empty());
+    BOOST_CHECK(c.model().extensions().fields().empty());
     BOOST_REQUIRE(c.model().modules().size() == 2);
 
     std::string model_member, module_name;
@@ -1389,11 +1389,11 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.members().size() == 1);
             model_member = m.members().front().simple_name();
-            BOOST_CHECK(m.meta_data().empty());
+            BOOST_CHECK(m.extensions().fields().empty());
         } else {
             module_name = m.name().simple_name();
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.meta_data().empty());
+            BOOST_CHECK(m.extensions().fields().empty());
             BOOST_CHECK(m.members().empty());
         }
     }
@@ -1412,7 +1412,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().meta_data().empty());
+    BOOST_CHECK(c.model().extensions().fields().empty());
     BOOST_REQUIRE(c.model().modules().size() == 2);
     std::string model_member, module_name;
     for (const auto& pair : c.model().modules()) {
@@ -1423,11 +1423,11 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.members().size() == 1);
             model_member = m.members().front().simple_name();
-            BOOST_CHECK(m.meta_data().empty());
+            BOOST_CHECK(m.extensions().fields().empty());
         } else {
             module_name = m.name().simple_name();
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.meta_data().empty());
+            BOOST_CHECK(m.extensions().fields().empty());
         }
     }
     BOOST_CHECK(model_member == module_name);

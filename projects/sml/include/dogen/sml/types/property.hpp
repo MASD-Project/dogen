@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <boost/property_tree/ptree.hpp>
 #include <string>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/sml/serialization/property_fwd_ser.hpp"
@@ -41,18 +40,15 @@ namespace sml {
 class property final {
 public:
     property(const property&) = default;
+    property(property&&) = default;
     ~property() = default;
 
 public:
     property();
 
 public:
-    property(property&& rhs);
-
-public:
     property(
         const std::string& documentation,
-        const boost::property_tree::ptree& meta_data,
         const dogen::dynamic::object& extensions,
         const std::string& name,
         const dogen::sml::nested_qname& type,
@@ -80,16 +76,6 @@ public:
     std::string& documentation();
     void documentation(const std::string& v);
     void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Meta-data associated with the object, opaque to SML.
-     */
-    /**@{*/
-    const boost::property_tree::ptree& meta_data() const;
-    boost::property_tree::ptree& meta_data();
-    void meta_data(const boost::property_tree::ptree& v);
-    void meta_data(const boost::property_tree::ptree&& v);
     /**@}*/
 
     /**
@@ -165,7 +151,6 @@ public:
 
 private:
     std::string documentation_;
-    boost::property_tree::ptree meta_data_;
     dogen::dynamic::object extensions_;
     std::string name_;
     dogen::sml::nested_qname type_;

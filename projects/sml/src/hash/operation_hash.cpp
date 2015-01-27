@@ -32,17 +32,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_property_tree_ptree(const boost::property_tree::ptree& v) {
-    std::size_t seed(0);
-    for (const auto& node : v) {
-        combine(seed, node.first);
-        combine(seed, node.second.data());
-        combine(seed, hash_boost_property_tree_ptree(node.second));
-    }
-
-    return seed;
-}
-
 inline std::size_t hash_std_list_dogen_sml_parameter(const std::list<dogen::sml::parameter>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -70,7 +59,6 @@ std::size_t operation_hasher::hash(const operation&v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_boost_property_tree_ptree(v.meta_data()));
     combine(seed, v.extensions());
     combine(seed, v.name());
     combine(seed, hash_std_list_dogen_sml_parameter(v.parameters()));

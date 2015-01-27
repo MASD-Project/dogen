@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include <list>
 #include <string>
 #include "dogen/dynamic/types/object.hpp"
@@ -53,7 +52,6 @@ public:
 public:
     operation(
         const std::string& documentation,
-        const boost::property_tree::ptree& meta_data,
         const dogen::dynamic::object& extensions,
         const std::string& name,
         const std::list<dogen::sml::parameter>& parameters,
@@ -79,16 +77,6 @@ public:
     std::string& documentation();
     void documentation(const std::string& v);
     void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Meta-data associated with the object, opaque to SML.
-     */
-    /**@{*/
-    const boost::property_tree::ptree& meta_data() const;
-    boost::property_tree::ptree& meta_data();
-    void meta_data(const boost::property_tree::ptree& v);
-    void meta_data(const boost::property_tree::ptree&& v);
     /**@}*/
 
     /**
@@ -143,7 +131,6 @@ public:
 
 private:
     std::string documentation_;
-    boost::property_tree::ptree meta_data_;
     dogen::dynamic::object extensions_;
     std::string name_;
     std::list<dogen::sml::parameter> parameters_;

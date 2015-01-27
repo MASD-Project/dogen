@@ -26,8 +26,6 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/property_tree/ptree_serialization.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
@@ -48,7 +46,6 @@ void save(Archive& ar,
     const dogen::sml::module& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("meta_data", v.meta_data_);
     ar << make_nvp("extensions", v.extensions_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
@@ -63,7 +60,6 @@ void load(Archive& ar,
     dogen::sml::module& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("meta_data", v.meta_data_);
     ar >> make_nvp("extensions", v.extensions_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);

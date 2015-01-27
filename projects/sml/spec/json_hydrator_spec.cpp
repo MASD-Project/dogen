@@ -24,6 +24,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -43,9 +46,10 @@ const std::string documentation("a_doc");
 const std::string type_name("a_type");
 const std::string model_key("model_key");
 const std::string model_value("model_value");
-const std::string odb_pragma_value("odb_pragma_value");
+const std::string some_key("some_key");
+const std::string some_value("some_value");
 const std::string type_key("type_key");
-const std::string type_value("true");
+const bool type_value(true);
 const std::string module_path_key("module_path");
 const std::string module_path_value_1("module_1");
 const std::string module_path_value_2("module_2");
@@ -81,18 +85,18 @@ const std::string tagged_model(R"({
     "model_name" : "a_model",
     "documentation" : "a_doc",
     "origin" : "system",
-    "meta_data" : {
+    "extensions" : {
             "model_key" : "model_value",
-            "odb_pragma" : "odb_pragma_value"
+            "some_key" : "some_value"
     },
     "elements" : [
         {
             "meta_type" : "object",
             "simple_name" : "a_type",
             "documentation" : "a_doc",
-            "meta_data" : {
+            "extensions" : {
                     "type_key" : true,
-                    "odb_pragma" : "odb_pragma_value"
+                    "some_key" : "some_value"
             }
        }
    ]
@@ -177,11 +181,33 @@ dogen::sml::model hydrate(const std::string content) {
     return h.hydrate(s);
 }
 
+dogen::dynamic::field_definition create_field_definition(const std::string n,
+    dogen::dynamic::value_types vt = dogen::dynamic::value_types::text) {
+    dogen::dynamic::field_definition r;
+    r.name().simple(n);
+    r.name().qualified(n);
+    r.type(vt);
+    r.scope(dogen::dynamic::scope_types::any);
+    return r;
+}
+
+struct register_fields {
+    register_fields() {
+        auto& reg(dogen::dynamic::workflow::registrar());
+        reg.register_field_definition(create_field_definition(model_key));
+        reg.register_field_definition(create_field_definition(some_key));
+        reg.register_field_definition(create_field_definition(type_key,
+                dogen::dynamic::value_types::boolean));
+    }
+};
+
 }
 
 using dogen::utility::test::contains_checker;
 using dogen::sml::string_converter;
 using dogen::sml::hydration_error;
+
+BOOST_GLOBAL_FIXTURE(register_fields)
 
 BOOST_AUTO_TEST_SUITE(json_hydrator)
 
@@ -218,19 +244,17 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().module_path().empty());
     BOOST_CHECK(m.name().external_module_path().empty());
     BOOST_CHECK(m.documentation() == documentation);
-    BOOST_CHECK(m.meta_data().size() == 2);
 
+    const auto& dyn(m.extensions());
+    BOOST_CHECK(dyn.fields().size() == 2);
+
+    using namespace dogen::dynamic;
     {
-        auto i(m.meta_data().find(dogen::sml::tags::odb_pragma));
-        BOOST_REQUIRE(i != m.meta_data().not_found());
-        BOOST_REQUIRE(i->second.size() == 1);
-        const auto j(i->second.begin());
-        BOOST_CHECK(j->second.data() == odb_pragma_value);
+        BOOST_REQUIRE(has_field(dyn, some_key));
+        BOOST_REQUIRE(get_text_content(dyn, some_key) == some_value);
 
-        i = m.meta_data().find(model_key);
-        BOOST_REQUIRE(i != m.meta_data().not_found());
-        BOOST_REQUIRE(i->second.size() == 0);
-        BOOST_CHECK(i->second.data() == model_value);
+        BOOST_REQUIRE(has_field(dyn, model_key));
+        BOOST_REQUIRE(get_text_content(dyn, model_key) == model_value);
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -247,16 +271,12 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
 
     {
         const auto& o(pair.second);
-        auto i(o.meta_data().find(dogen::sml::tags::odb_pragma));
-        BOOST_REQUIRE(i != m.meta_data().not_found());
-        BOOST_REQUIRE(i->second.size() == 1);
-        const auto j(i->second.begin());
-        BOOST_CHECK(j->second.data() == odb_pragma_value);
+        const auto& dyn(o.extensions());
+        BOOST_REQUIRE(has_field(dyn, some_key));
+        BOOST_REQUIRE(get_text_content(dyn, some_key) == some_value);
 
-        i = o.meta_data().find(type_key);
-        BOOST_REQUIRE(i != m.meta_data().not_found());
-        BOOST_REQUIRE(i->second.size() == 0);
-        BOOST_CHECK(i->second.data() == type_value);
+        BOOST_REQUIRE(has_field(dyn, type_key));
+        BOOST_REQUIRE(get_boolean_content(dyn, type_key) == type_value);
     }
 }
 
@@ -304,7 +324,6 @@ BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
 
 BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("module_path_model_hydrates_into_expected_model");
-
     const auto m(hydrate(module_path_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -449,7 +468,6 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
 
 BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("hardware_model_hydrates_into_expected_model");
-
     using namespace dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / hardware_model_path);
     boost::filesystem::ifstream s(p);

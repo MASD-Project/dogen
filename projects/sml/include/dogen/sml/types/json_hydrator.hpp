@@ -27,6 +27,9 @@
 
 #include <iosfwd>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
 
@@ -38,10 +41,12 @@ namespace sml {
  */
 class json_hydrator {
 public:
-    json_hydrator() = default;
     json_hydrator(const json_hydrator&) = default;
     json_hydrator(json_hydrator&&) = default;
     ~json_hydrator() noexcept = default;
+
+public:
+    json_hydrator();
 
 private:
     /**
@@ -70,11 +75,12 @@ private:
         qname& qn) const;
 
     /**
-     * @brief Reads all the meta-data from the source property tree,
-     * and copies it to the destination.
+     * @brief Creates the dynamic extensions by reading meta-data from
+     * the property tree.
      */
-    void copy_meta_data(const boost::property_tree::ptree& source,
-        boost::property_tree::ptree& destination) const;
+    dynamic::object
+    create_dynamic_extensions(const boost::property_tree::ptree& pt,
+        const dynamic::scope_types st) const;
 
     /**
      * @brief Reads an SML element from the property tree.
@@ -98,6 +104,9 @@ public:
      * @brief Hydrates the model from the JSON stream.
      */
     model hydrate(std::istream& s) const;
+
+private:
+    const dynamic::workflow dynamic_workflow_;
 };
 
 } }

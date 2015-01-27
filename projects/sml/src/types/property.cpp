@@ -27,19 +27,8 @@ property::property()
     : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)) { }
 
-property::property(property&& rhs)
-    : documentation_(std::move(rhs.documentation_)),
-      meta_data_(std::move(rhs.meta_data_)),
-      extensions_(std::move(rhs.extensions_)),
-      name_(std::move(rhs.name_)),
-      type_(std::move(rhs.type_)),
-      default_value_(std::move(rhs.default_value_)),
-      is_immutable_(std::move(rhs.is_immutable_)),
-      is_fluent_(std::move(rhs.is_fluent_)) { }
-
 property::property(
     const std::string& documentation,
-    const boost::property_tree::ptree& meta_data,
     const dogen::dynamic::object& extensions,
     const std::string& name,
     const dogen::sml::nested_qname& type,
@@ -47,7 +36,6 @@ property::property(
     const bool is_immutable,
     const bool is_fluent)
     : documentation_(documentation),
-      meta_data_(meta_data),
       extensions_(extensions),
       name_(name),
       type_(type),
@@ -58,7 +46,6 @@ property::property(
 void property::swap(property& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(meta_data_, other.meta_data_);
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(type_, other.type_);
@@ -69,7 +56,6 @@ void property::swap(property& other) noexcept {
 
 bool property::operator==(const property& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        meta_data_ == rhs.meta_data_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
@@ -98,22 +84,6 @@ void property::documentation(const std::string& v) {
 
 void property::documentation(const std::string&& v) {
     documentation_ = std::move(v);
-}
-
-const boost::property_tree::ptree& property::meta_data() const {
-    return meta_data_;
-}
-
-boost::property_tree::ptree& property::meta_data() {
-    return meta_data_;
-}
-
-void property::meta_data(const boost::property_tree::ptree& v) {
-    meta_data_ = v;
-}
-
-void property::meta_data(const boost::property_tree::ptree&& v) {
-    meta_data_ = std::move(v);
 }
 
 const dogen::dynamic::object& property::extensions() const {

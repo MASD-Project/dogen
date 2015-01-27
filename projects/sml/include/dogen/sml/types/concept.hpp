@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include <list>
 #include <string>
 #include <unordered_map>
@@ -63,7 +62,6 @@ public:
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::string& documentation,
-        const boost::property_tree::ptree& meta_data,
         const dogen::dynamic::object& extensions,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
@@ -133,16 +131,6 @@ public:
     std::string& documentation();
     void documentation(const std::string& v);
     void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Meta-data associated with the object, opaque to SML.
-     */
-    /**@{*/
-    const boost::property_tree::ptree& meta_data() const;
-    boost::property_tree::ptree& meta_data();
-    void meta_data(const boost::property_tree::ptree& v);
-    void meta_data(const boost::property_tree::ptree&& v);
     /**@}*/
 
     /**
@@ -243,7 +231,6 @@ private:
     std::list<dogen::sml::property> local_properties_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
     std::string documentation_;
-    boost::property_tree::ptree meta_data_;
     dogen::dynamic::object extensions_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;

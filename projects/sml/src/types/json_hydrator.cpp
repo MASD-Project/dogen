@@ -27,7 +27,6 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
 
 using namespace dogen::utility::log;
@@ -51,7 +50,7 @@ const std::string meta_type_primitive_value("primitive");
 
 const std::string simple_name_key("simple_name");
 const std::string module_path_key("module_path");
-const std::string meta_data_key("meta_data");
+const std::string extensions_key("extensions");
 
 const std::string object_type_key("object_type");
 const std::string object_type_smart_pointer_value("smart_pointer");
@@ -72,6 +71,8 @@ const std::string missing_module("Could not find module: ");
 
 namespace dogen {
 namespace sml {
+
+json_hydrator::json_hydrator() : dynamic_workflow_() { }
 
 boost::optional<qname> containing_module(model& m, const qname& qn) {
     if (qn.model_name().empty() || qn.simple_name() == m.name().model_name()) {
@@ -166,18 +167,21 @@ void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
     }
 }
 
-void json_hydrator::copy_meta_data(const boost::property_tree::ptree& source,
-    boost::property_tree::ptree& destination) const {
-    const auto i(source.find(meta_data_key));
-    if (i == source.not_found())
-        return;
+dynamic::object json_hydrator::
+create_dynamic_extensions(const boost::property_tree::ptree& pt,
+    const dynamic::scope_types st) const {
+    const auto i(pt.find(extensions_key));
+    if (i == pt.not_found())
+        return dynamic::object();
 
-    meta_data::writer writer(destination);
+    dynamic::object r;
+    std::list<std::pair<std::string, std::string> > kvps;
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
         const auto field_name(j->first);
         const auto field_value(j->second.get_value<std::string>());
-        writer.add(field_name, field_value);
+        kvps.push_back(std::make_pair(field_name, field_value));
     }
+    return dynamic_workflow_.execute(st, kvps);
 }
 
 void json_hydrator::
@@ -198,7 +202,9 @@ read_element(const boost::property_tree::ptree& pt, model& m) const {
 
             if (documentation)
                 t.documentation(*documentation);
-            copy_meta_data(pt, t.meta_data());
+
+            const auto scope(dynamic::scope_types::entity);
+            t.extensions(create_dynamic_extensions(pt, scope));
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
@@ -246,7 +252,8 @@ model json_hydrator::read_stream(std::istream& s, const bool is_target) const {
     ptree pt;
     read_json(s, pt);
 
-    copy_meta_data(pt, r.meta_data());
+    const auto scope(dynamic::scope_types::root_module);
+    r.extensions(create_dynamic_extensions(pt, scope));
     r.name().model_name(pt.get<std::string>(model_name_key));
     read_module_path(pt, r, r.name());
 
