@@ -27,10 +27,10 @@
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/tags.hpp"
-#include "dogen/sml/types/meta_data/writer.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
+#include "dogen/dynamic/types/value_factory.hpp"
 
 namespace {
 
@@ -63,6 +63,7 @@ const std::string licence_name_value("gpl_v2");
 const std::string modeline_group_name_key("modeline_group_name");
 const std::string modeline_group_name_value("emacs");
 const std::string generate_preamble_key("generate_preamble");
+const std::string generate_preamble_value("true");
 const std::string code_generation_marker_message_key(
     "code_generation_marker.message");
 const std::string code_generation_marker_message_value("sample message");
@@ -363,34 +364,25 @@ std::string boost_serialization_forward_declaration_filename(
     return serialization_forward_declaration + name_for_file_name(qn);
 }
 
-void add_test_tags(boost::property_tree::ptree& meta_data,
-    const dogen::sml::qname& qn) {
-    dogen::sml::meta_data::writer writer(meta_data);
+void add_test_dynamic_extensions(dogen::dynamic::object& o) {
+    using namespace dogen::dynamic;
 
-    writer.add(dogen::sml::tags::cpp::types::header_file::generate,
-        dogen::sml::tags::bool_true);
-    writer.add(dogen::sml::tags::cpp::types::header_file::
-        generate_header_guards, dogen::sml::tags::bool_true);
-    writer.add(dogen::sml::tags::cpp::types::header_file::file_name,
-        types_header_filename(qn));
-    writer.add(
-        dogen::sml::tags::cpp::types::forward_declarations_file::file_name,
-        types_forward_declaration_filename(qn));
+    value_factory f;
+    o.fields().insert(std::make_pair(licence_name_key,
+            field_instance(f.create_text(licence_name_value))));
 
-    writer.add(
-        dogen::sml::tags::cpp::serialization::boost::header_file::file_name,
-        boost_serialization_header_filename(qn));
-    writer.add(
-        dogen::sml::tags::cpp::serialization::boost::
-        forward_declarations_file::file_name,
-        boost_serialization_forward_declaration_filename(qn));
+    o.fields().insert(std::make_pair(copyright_notices_key,
+            field_instance(f.create_text(copyright_notices_value))));
 
-    writer.add(licence_name_key, licence_name_value);
-    writer.add(copyright_notices_key, copyright_notices_value);
-    writer.add(modeline_group_name_key, modeline_group_name_value);
-    writer.add(code_generation_marker_message_key,
-        code_generation_marker_message_value);
-    writer.add(generate_preamble_key, dogen::sml::tags::bool_true);
+    o.fields().insert(std::make_pair(modeline_group_name_key,
+            field_instance(f.create_text(modeline_group_name_value))));
+
+    o.fields().insert(std::make_pair(code_generation_marker_message_key,
+            field_instance(
+                f.create_text(code_generation_marker_message_value))));
+
+    o.fields().insert(std::make_pair(generate_preamble_key,
+            field_instance(f.create_text(generate_preamble_value))));
 }
 
 }
@@ -439,12 +431,9 @@ void mock_model_factory::flags::associations_indexed(const bool v) {
 }
 
 mock_model_factory::
-mock_model_factory(const flags& f, tagging_function_type tf) : flags_(f) {
-    if (tf)
-        tagging_function_ = tf;
-    else
-        tagging_function_ = add_test_tags;
-}
+mock_model_factory(const flags& f, dynamic_extension_function_type fn)
+    : flags_(f),
+      dynamic_extension_function_(fn ? fn : add_test_dynamic_extensions) { }
 
 std::string mock_model_factory::model_name(const unsigned int n) const {
     return ::model_name(n);
@@ -556,7 +545,7 @@ object mock_model_factory::build_value_object(const unsigned int i,
     r.object_type(dogen::sml::object_types::user_defined_value_object);
 
     if (flags_.tagged())
-        tagging_function_(r.meta_data(), r.name());
+        dynamic_extension_function_(r.extensions());
 
     return r;
 }
@@ -579,7 +568,7 @@ concept mock_model_factory::build_concept(const unsigned int i,
     r.origin_type(origin_types::user);
 
     if (flags_.tagged())
-        tagging_function_(r.meta_data(), r.name());
+        dynamic_extension_function_(r.extensions());
 
     return r;
 }
@@ -598,7 +587,7 @@ object mock_model_factory::build_entity(const property& prop, const bool keyed,
     r.identity().push_back(prop);
 
     if (flags_.tagged())
-        tagging_function_(r.meta_data(), r.name());
+        dynamic_extension_function_(r.extensions());
 
     return r;
 }
@@ -633,7 +622,7 @@ build_enumeration(const unsigned int i, const qname& model_qname,
     r.enumerators().push_back(lambda(1));
 
     if (flags_.tagged())
-        tagging_function_(r.meta_data(), r.name());
+        dynamic_extension_function_(r.extensions());
 
     return r;
 }
@@ -654,7 +643,7 @@ object mock_model_factory::build_exception(const unsigned int i,
     r.object_type(dogen::sml::object_types::exception);
 
     if (flags_.tagged())
-        tagging_function_(r.meta_data(), r.name());
+        dynamic_extension_function_(r.extensions());
 
     return r;
 }
@@ -695,7 +684,7 @@ model mock_model_factory::build_empty_model(const unsigned int n,
     handle_model_module(add_model_module, r);
 
     if (flags_.tagged())
-        tagging_function_(r.meta_data(), r.name());
+        dynamic_extension_function_(r.extensions());
 
     return r;
 }

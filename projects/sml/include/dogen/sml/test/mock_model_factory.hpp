@@ -28,9 +28,9 @@
 #include <array>
 #include <functional>
 #include <boost/optional.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/dynamic/types/object.hpp"
 
 namespace dogen {
 namespace sml {
@@ -149,9 +149,8 @@ public:
     };
 
 public:
-    typedef std::function<void(
-        boost::property_tree::ptree& meta_data,
-        const dogen::sml::qname& qn)> tagging_function_type;
+    typedef std::function<void(dynamic::object& o)>
+    dynamic_extension_function_type;
 
 public:
     /**
@@ -159,7 +158,7 @@ public:
      * SML pipeline, as given by the flags supplied.
      */
     explicit mock_model_factory(const flags& f,
-         tagging_function_type tf = tagging_function_type());
+        dynamic_extension_function_type fn = dynamic_extension_function_type());
 
 public:
     /**
@@ -494,7 +493,8 @@ public:
      * in current model.
      */
     model object_with_third_degree_parent_in_same_model(
-        const bool has_property = false, const bool add_model_module = false) const;
+        const bool has_property = false,
+        const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three levels deep in inheritance tree
@@ -555,7 +555,7 @@ public:
 
 private:
     const flags flags_;
-    tagging_function_type tagging_function_;
+    dynamic_extension_function_type dynamic_extension_function_;
 };
 
 } } }
