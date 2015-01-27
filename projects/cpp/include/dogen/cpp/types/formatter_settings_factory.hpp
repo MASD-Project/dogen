@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include <boost/property_tree/ptree.hpp>
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/cpp/types/formatter_settings.hpp"
 
 namespace dogen {
@@ -48,8 +48,7 @@ private:
      * @pre formatter id is not qualified.
      */
     formatter_settings read_settings(const formatter_settings& default_settings,
-        const std::string& formatter_id,
-        const boost::property_tree::ptree& meta_data) const;
+        const std::string& formatter_id, const dynamic::object& o) const;
 
 public:
     /**
@@ -58,7 +57,7 @@ public:
     std::unordered_map<std::string, formatter_settings> build(
         const std::unordered_map<std::string, formatter_settings>&
         default_formatter_settings_by_formatter_id,
-        const boost::property_tree::ptree& meta_data) const;
+        const dynamic::object& o) const;
 };
 
 } }

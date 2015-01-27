@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>

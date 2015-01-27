@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data/reader.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/facet_settings_factory.hpp"
 
@@ -45,42 +45,37 @@ namespace dogen {
 namespace cpp {
 
 facet_settings facet_settings_factory::read_settings(
-    const facet_settings& default_settings,
-    const std::string& facet_id,
-    const boost::property_tree::ptree& meta_data) const {
+    const facet_settings& default_settings, const std::string& facet_id,
+    const dynamic::object& o) const {
 
     facet_settings r(default_settings);
-    sml::meta_data::reader reader(meta_data);
+    using namespace dynamic;
+
     const auto enabled_trait(qualify(facet_id, traits::facet::enabled()));
-    if (reader.has_key(enabled_trait)) {
-        const auto value(reader.get(enabled_trait));
-        r.enabled(value == traits::bool_true());
-    }
+    if (has_field(o, enabled_trait))
+        r.enabled(get_boolean_content(o, enabled_trait));
 
     const auto directory_trait(qualify(facet_id, traits::facet::directory()));
-    if (reader.has_key(directory_trait)) {
-        const auto value(reader.get(directory_trait));
-        r.directory(value);
-    }
+    if (has_field(o, directory_trait))
+        r.directory(get_text_content(o, directory_trait));
 
     const auto postfix_trait(qualify(facet_id, traits::facet::postfix()));
-    if (reader.has_key(postfix_trait)) {
-        const auto value(reader.get(postfix_trait));
-        r.postfix(value);
-    }
+    if (has_field(o, postfix_trait))
+        r.postfix(get_text_content(o, postfix_trait));
+
     return r;
 }
 
 std::unordered_map<std::string, facet_settings> facet_settings_factory::build(
     const std::unordered_map<std::string, facet_settings>&
     default_facet_settings_by_facet_id,
-    const boost::property_tree::ptree& meta_data) const {
+    const dynamic::object& o) const {
 
     std::unordered_map<std::string, facet_settings> r;
     for (const auto& pair : default_facet_settings_by_facet_id) {
         const auto& facet_id(pair.first);
         const auto& default_settings(pair.second);
-        const auto s(read_settings(default_settings, facet_id, meta_data));
+        const auto s(read_settings(default_settings, facet_id, o));
         r.insert(std::make_pair(facet_id, s));
     }
     return r;

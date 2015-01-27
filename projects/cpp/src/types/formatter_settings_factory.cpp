@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/meta_data/reader.hpp"
+#include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatter_settings_factory.hpp"
 
@@ -47,23 +47,20 @@ namespace cpp {
 formatter_settings formatter_settings_factory::read_settings(
     const formatter_settings& default_settings,
     const std::string& formatter_id,
-    const boost::property_tree::ptree& meta_data) const {
+    const dynamic::object& o) const {
+    using namespace dynamic;
 
     formatter_settings r(default_settings);
-    sml::meta_data::reader reader(meta_data);
     const auto enabled_trait(qualify(formatter_id,
             traits::formatter::enabled()));
-    if (reader.has_key(enabled_trait)) {
-        const auto value(reader.get(enabled_trait));
-        r.enabled(value == traits::bool_true());
-    }
+    if (has_field(o, enabled_trait))
+        r.enabled(get_boolean_content(o, enabled_trait));
 
     const std::string postfix_trait(
         qualify(formatter_id, traits::formatter::additional_postfix()));
-    if (reader.has_key(postfix_trait)) {
-        const auto value(reader.get(postfix_trait));
-        r.postfix(value);
-    }
+    if (has_field(o, postfix_trait))
+        r.postfix(get_text_content(o, postfix_trait));
+
     return r;
 }
 
@@ -71,13 +68,13 @@ std::unordered_map<std::string, formatter_settings>
 formatter_settings_factory::build(
     const std::unordered_map<std::string, formatter_settings>&
     default_formatter_settings_by_formatter_id,
-    const boost::property_tree::ptree& meta_data) const {
+    const dynamic::object& o) const {
 
     std::unordered_map<std::string, formatter_settings> r;
     for (const auto& pair : default_formatter_settings_by_formatter_id) {
         const auto& formatter_id(pair.first);
         const auto& default_settings(pair.second);
-        const auto s(read_settings(default_settings, formatter_id, meta_data));
+        const auto s(read_settings(default_settings, formatter_id, o));
         r.insert(std::make_pair(formatter_id, s));
     }
     return r;

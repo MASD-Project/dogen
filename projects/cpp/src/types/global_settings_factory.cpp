@@ -34,7 +34,7 @@ global_settings_factory::create_facet_settings(
     default_facet_settings_by_facet_id, const sml::module& model_module) const {
     facet_settings_factory f;
     return f.build(default_facet_settings_by_facet_id,
-        model_module.meta_data());
+        model_module.extensions());
 }
 
 std::unordered_map<std::string, formatter_settings>
@@ -44,7 +44,7 @@ global_settings_factory::create_formatter_settings(
     const sml::module& model_module) const {
     formatter_settings_factory f;
     return f.build(default_formatter_settings_by_formatter_id,
-        model_module.meta_data());
+        model_module.extensions());
 }
 
 cpp_settings global_settings_factory::

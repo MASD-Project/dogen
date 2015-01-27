@@ -28,6 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/cpp/types/facet_settings.hpp"
 
 namespace dogen {
@@ -45,23 +46,22 @@ public:
 
 private:
     /**
-     * @brief Reads the settings from the meta-data for the supplied
-     * facet id.
+     * @brief Reads the settings from the dynamic object for the
+     * supplied facet id.
      *
      * @pre facet id is not qualified.
      */
     facet_settings read_settings(const facet_settings& default_settings,
-        const std::string& facet_id,
-        const boost::property_tree::ptree& meta_data) const;
+        const std::string& facet_id, const dynamic::object& o) const;
 
 public:
     /**
-     * @brief Builds the facet settings from the meta data.
+     * @brief Builds the facet settings from the dynamic object.
      */
     std::unordered_map<std::string, facet_settings> build(
         const std::unordered_map<std::string, facet_settings>&
         default_facet_settings_by_facet_id,
-        const boost::property_tree::ptree& meta_data) const;
+        const dynamic::object& o) const;
 };
 
 } }
