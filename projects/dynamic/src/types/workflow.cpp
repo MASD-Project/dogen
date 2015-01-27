@@ -25,7 +25,7 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/dynamic/io/scope_types_io.hpp"
-#include "dogen/dynamic/types/field_factory.hpp"
+#include "dogen/dynamic/types/field_instance_factory.hpp"
 #include "dogen/dynamic/types/workflow_error.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 
@@ -124,7 +124,7 @@ std::unordered_map<std::string, field_instance> workflow::build_fields_activity(
     const std::unordered_map<std::string, std::list<std::string> >&
     aggregated_data, const scope_types current_scope) const {
     std::unordered_map<std::string, field_instance> r;
-    field_factory f;
+    field_instance_factory f;
     for (auto pair : aggregated_data) {
         const auto& complete_name(pair.first);
         const auto fd(obtain_field_definition(complete_name, current_scope));

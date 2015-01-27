@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_TYPES_FIELD_FACTORY_HPP
-#define DOGEN_DYNAMIC_TYPES_FIELD_FACTORY_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_VALUE_FACTORY_HPP
+#define DOGEN_DYNAMIC_TYPES_VALUE_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,25 +27,16 @@
 
 #include <list>
 #include <string>
-#include <utility>
+#include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/types/value.hpp"
-#include "dogen/dynamic/types/field_instance.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
 namespace dynamic {
 
 /**
- * @brief Builds a field from its constituent parts.
+ * @brief Builds a value from raw data.
  */
-class field_factory {
-private:
-    /**
-     * @brief Throws if the collection has more than one element.
-     */
-    void ensure_at_most_one_element(
-        const std::list<std::string>& raw_values) const;
-
+class value_factory {
 private:
     /**
      * @brief Converts s to integer.
@@ -61,44 +52,27 @@ private:
      */
     bool to_bool(const std::string& s) const;
 
-    private:
+public:
     /**
      * @brief Creates a stand alone text value.
      */
-    boost::shared_ptr<value>
-    create_text_value(const std::string& raw_value) const;
+    boost::shared_ptr<value> create_text(const std::string& v) const;
 
     /**
      * @brief Creates a collection of text values.
      */
-    boost::shared_ptr<value> create_text_values(
-        const std::list<std::string>& raw_values) const;
+    boost::shared_ptr<value>
+    create_text_collection(const std::list<std::string>& v) const;
 
     /**
      * @brief Creates a stand alone number value.
      */
-    boost::shared_ptr<value>
-    create_number_value(const std::string& raw_value) const;
+    boost::shared_ptr<value> create_number(const std::string& v) const;
 
     /**
      * @brief Creates a stand alone boolean value.
      */
-    boost::shared_ptr<value>
-    create_boolean_value(const std::string& raw_value) const;
-
-public:
-    /**
-     * @brief Builds a field instance given a definition, the original
-     * key and zero or more values.
-     *
-     * @pre If values has more than one element, the field's value
-     * type must be a collection.
-     *
-     * @pre Values must be valid according to the type in the field
-     * definition.
-     */
-    field_instance build(const field_definition& fd,
-        const std::list<std::string>& raw_values) const;
+    boost::shared_ptr<value> create_boolean(const std::string& v) const;
 };
 
 } }

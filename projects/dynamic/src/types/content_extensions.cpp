@@ -45,21 +45,28 @@ typedef boost::error_info<struct tag_errmsg, std::string> extension_error_info;
 namespace dogen {
 namespace dynamic {
 
-bool has_field(const object& o, const field_definition& fd) {
-    const auto i(o.fields().find(fd.name().qualified()));
+bool has_field(const object& o, const std::string& k) {
+    const auto i(o.fields().find(k));
     return (i != o.fields().end());
 }
 
-const field_instance& get_field(const object& o, const field_definition& fd) {
-    const auto n(fd.name().qualified());
-    const auto i(o.fields().find(n));
+bool has_field(const object& o, const field_definition& fd) {
+    return has_field(o, fd.name().qualified());
+}
+
+const field_instance& get_field(const object& o, const std::string& k) {
+    const auto i(o.fields().find(k));
 
     if (i == o.fields().end()) {
-        BOOST_LOG_SEV(lg, error) << field_not_found << n;
-        BOOST_THROW_EXCEPTION(field_access_error(field_not_found + n));
+        BOOST_LOG_SEV(lg, error) << field_not_found << k;
+        BOOST_THROW_EXCEPTION(field_access_error(field_not_found + k));
     }
 
     return i->second;
+}
+
+const field_instance& get_field(const object& o, const field_definition& fd) {
+    return get_field(o, fd.name().qualified());
 }
 
 std::string get_text_content(const dogen::dynamic::value& v) {
@@ -73,33 +80,41 @@ std::string get_text_content(const dogen::dynamic::value& v) {
 }
 
 std::string
-get_text_content(const object& o, const field_definition& fd) {
-    const auto& f(get_field(o, fd));
+get_text_content(const object& o, const std::string& k) {
+    const auto& f(get_field(o, k));
     const auto& v(*f.value());
 
     try {
         return get_text_content(v);
     } catch(boost::exception& e) {
-        const auto n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << not_text_field << n;
-        e << extension_error_info(field + n);
+        BOOST_LOG_SEV(lg, error) << not_text_field << k;
+        e << extension_error_info(field + k);
         throw;
     }
 }
 
+std::string
+get_text_content(const object& o, const field_definition& fd) {
+    return get_text_content(o, fd.name().qualified());
+}
+
 std::list<std::string>
-get_text_collection_content(const object& o, const field_definition& fd) {
-    const auto& f(get_field(o, fd));
+get_text_collection_content(const object& o, const std::string& k) {
+    const auto& f(get_field(o, k));
     const auto& v(*f.value());
 
     try {
         const auto& tc(dynamic_cast<const text_collection&>(v));
         return tc.content();
     } catch(const std::bad_cast& e) {
-        const auto n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << unexpected_field_type << n;
-        BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + n));
+        BOOST_LOG_SEV(lg, error) << unexpected_field_type << k;
+        BOOST_THROW_EXCEPTION(field_access_error(unexpected_field_type + k));
     }
+}
+
+std::list<std::string>
+get_text_collection_content(const object& o, const field_definition& fd) {
+    return get_text_collection_content(o, fd.name().qualified());
 }
 
 bool get_boolean_content(const dogen::dynamic::value& v) {
@@ -112,17 +127,21 @@ bool get_boolean_content(const dogen::dynamic::value& v) {
     }
 }
 
-bool get_boolean_content(const object& o, const field_definition& fd) {
-    const auto& f(get_field(o, fd));
+bool get_boolean_content(const object& o, const std::string& k) {
+    const auto& f(get_field(o, k));
     const auto& v(*f.value());
     try {
         return get_boolean_content(v);
     } catch(boost::exception& e) {
-        const auto n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << not_boolean_field << n;
-        e << extension_error_info(field + n);
+        BOOST_LOG_SEV(lg, error) << not_boolean_field << k;
+        e << extension_error_info(field + k);
         throw;
     }
+}
+
+
+bool get_boolean_content(const object& o, const field_definition& fd) {
+    return get_boolean_content(o, fd.name().qualified());
 }
 
 } }

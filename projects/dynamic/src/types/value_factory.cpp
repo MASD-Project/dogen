@@ -28,17 +28,13 @@
 #include "dogen/dynamic/types/text_collection.hpp"
 #include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
-#include "dogen/dynamic/types/field_factory.hpp"
+#include "dogen/dynamic/types/value_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dynamic.field_factory"));
+static logger lg(logger_factory("dynamic.value_factory"));
 
-const std::string value_type_not_supported(
-    "Value type is not supported by factory: ");
-const std::string expected_at_most_one_element(
-    "Expected at most one element");
 const std::string invalid_numeric_value(
     "Invalid numeric value: ");
 const std::string invalid_boolean_value(
@@ -69,7 +65,7 @@ private:
 namespace dogen {
 namespace dynamic {
 
-int field_factory::to_int(const std::string& s) const {
+int value_factory::to_int(const std::string& s) const {
     try {
         return boost::lexical_cast<int>(s);
     } catch (boost::bad_lexical_cast& e) {
@@ -78,7 +74,7 @@ int field_factory::to_int(const std::string& s) const {
     }
 }
 
-bool field_factory::to_bool(const std::string& s) const {
+bool value_factory::to_bool(const std::string& s) const {
     try {
         return boost::lexical_cast<locale_bool>(s);
     } catch (boost::bad_lexical_cast& e) {
@@ -87,74 +83,28 @@ bool field_factory::to_bool(const std::string& s) const {
     }
 }
 
-void field_factory::ensure_at_most_one_element(
-    const std::list<std::string>& raw_values) const {
-
-    if (raw_values.empty())
-        return;
-
-    const auto i(++raw_values.begin());
-    if (i != raw_values.end()) {
-        BOOST_LOG_SEV(lg, error) << expected_at_most_one_element;
-        BOOST_THROW_EXCEPTION(building_error(expected_at_most_one_element));
-    }
+boost::shared_ptr<value> value_factory::create_text(
+    const std::string& v) const {
+    return boost::make_shared<text>(v);
 }
 
-boost::shared_ptr<value> field_factory::create_text_value(
-    const std::string& raw_value) const {
-    return boost::make_shared<text>(raw_value);
-}
-
-boost::shared_ptr<value> field_factory::create_text_values(
-    const std::list<std::string>& raw_values) const {
+boost::shared_ptr<value> value_factory::create_text_collection(
+    const std::list<std::string>& v) const {
     auto r(boost::make_shared<text_collection>());
-    for (const auto& rv : raw_values)
-        r->content().push_front(rv);
+    for (const auto& i : v)
+        r->content().push_front(i);
 
     return r;
 }
 
-boost::shared_ptr<value> field_factory::create_number_value(
-    const std::string& raw_value) const {
-    return boost::make_shared<number>(to_int(raw_value));
+boost::shared_ptr<value>
+value_factory::create_number(const std::string& v) const {
+    return boost::make_shared<number>(to_int(v));
 }
 
-boost::shared_ptr<value> field_factory::create_boolean_value(
-    const std::string& raw_value) const {
-    return boost::make_shared<boolean>(to_bool(raw_value));
-}
-
-field_instance field_factory::build(const field_definition& fd,
-    const std::list<std::string>& raw_values) const {
-    field_instance r;
-
-    switch (fd.type()) {
-    case value_types::text:
-        ensure_at_most_one_element(raw_values);
-        r.value(create_text_value(raw_values.front()));
-        break;
-
-    case value_types::text_collection:
-        r.value(create_text_values(raw_values));
-        break;
-
-    case value_types::number:
-        ensure_at_most_one_element(raw_values);
-        r.value(create_number_value(raw_values.front()));
-        break;
-
-    case value_types::boolean:
-        ensure_at_most_one_element(raw_values);
-        r.value(create_boolean_value(raw_values.front()));
-        break;
-
-    default:
-        BOOST_LOG_SEV(lg, error) << value_type_not_supported << fd.type();
-        BOOST_THROW_EXCEPTION(building_error(
-                value_type_not_supported +
-                boost::lexical_cast<std::string>(fd.type())));
-    }
-    return r;
+boost::shared_ptr<value>
+value_factory::create_boolean(const std::string& v) const {
+    return boost::make_shared<boolean>(to_bool(v));
 }
 
 } }

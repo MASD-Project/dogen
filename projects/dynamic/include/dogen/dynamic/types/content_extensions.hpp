@@ -37,14 +37,20 @@ namespace dynamic {
 /**
  * @brief Returns true if a field exists in an object.
  */
+/**@{*/
+bool has_field(const object& o, const std::string& k);
 bool has_field(const object& o, const field_definition& fd);
+/**@}*/
 
 /**
  * @brief Returns a field from an object.
  *
  * @pre has_field must be true.
  */
+/**@{*/
+const field_instance& get_field(const object& o, const std::string& k);
 const field_instance& get_field(const object& o, const field_definition& fd);
+/**@}*/
 
 /**
  * @brief Returns the content for the field, assuming it is a text field.
@@ -59,7 +65,10 @@ std::string get_text_content(const dogen::dynamic::value& v);
  * @pre has_field must be true.
  * @pre Field value type must be text.
  */
+/**@{*/
+std::string get_text_content(const object& o, const std::string& k);
 std::string get_text_content(const object& o, const field_definition& fd);
+/**@}*/
 
 /**
  * @brief Returns the content for the field, assuming it is a text
@@ -68,8 +77,12 @@ std::string get_text_content(const object& o, const field_definition& fd);
  * @pre has_field must be true.
  * @pre Field value type must be text collection.
  */
+/**@{*/
+std::list<std::string>
+get_text_collection_content(const object& o, const std::string& k);
 std::list<std::string>
 get_text_collection_content(const object& o, const field_definition& fd);
+/**@}*/
 
 /**
  * @brief Returns the content for the field, assuming it is a boolean
@@ -86,7 +99,10 @@ bool get_boolean_content(const dogen::dynamic::value& v);
  * @pre has_field must be true.
  * @pre Field value type must be boolean.
  */
+/**@{*/
+bool get_boolean_content(const object& o, const std::string& k);
 bool get_boolean_content(const object& o, const field_definition& fd);
+/**@}*/
 
 } }
 
