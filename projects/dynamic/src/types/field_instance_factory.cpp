@@ -24,7 +24,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/io/value_types_io.hpp"
 #include "dogen/dynamic/types/text.hpp"
-#include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/building_error.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
@@ -72,11 +71,6 @@ field_instance field_instance_factory::build(const field_definition& fd,
 
     case value_types::text_collection:
         r.value(value_factory_.create_text_collection(v));
-        break;
-
-    case value_types::number:
-        ensure_at_most_one_element(v);
-        r.value(value_factory_.create_number(v.front()));
         break;
 
     case value_types::boolean:

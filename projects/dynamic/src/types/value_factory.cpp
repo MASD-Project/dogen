@@ -26,7 +26,6 @@
 #include "dogen/dynamic/types/building_error.hpp"
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
-#include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/value_factory.hpp"
 
@@ -95,11 +94,6 @@ boost::shared_ptr<value> value_factory::create_text_collection(
         r->content().push_front(i);
 
     return r;
-}
-
-boost::shared_ptr<value>
-value_factory::create_number(const std::string& v) const {
-    return boost::make_shared<number>(to_int(v));
 }
 
 boost::shared_ptr<value>

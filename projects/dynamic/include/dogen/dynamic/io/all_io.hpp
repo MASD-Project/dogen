@@ -22,7 +22,6 @@
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/dynamic/io/field_instance_io.hpp"
 #include "dogen/dynamic/io/name_io.hpp"
-#include "dogen/dynamic/io/number_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 #include "dogen/dynamic/io/scope_types_io.hpp"

@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/dynamic/types/boolean_fwd.hpp"
-#include "dogen/dynamic/types/number_fwd.hpp"
 #include "dogen/dynamic/types/text_collection_fwd.hpp"
 #include "dogen/dynamic/types/text_fwd.hpp"
 
@@ -56,16 +55,6 @@ public:
     virtual void visit(const dogen::dynamic::text_collection&) { }
     virtual void visit(dogen::dynamic::text_collection&) const { }
     virtual void visit(dogen::dynamic::text_collection&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::dynamic::number
-     */
-    /**@{*/
-    virtual void visit(const dogen::dynamic::number&) const { }
-    virtual void visit(const dogen::dynamic::number&) { }
-    virtual void visit(dogen::dynamic::number&) const { }
-    virtual void visit(dogen::dynamic::number&) { }
     /**@}*/
 
     /**

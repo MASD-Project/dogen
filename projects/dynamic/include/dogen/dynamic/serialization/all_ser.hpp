@@ -22,7 +22,6 @@
 #include "dogen/dynamic/serialization/field_definition_ser.hpp"
 #include "dogen/dynamic/serialization/field_instance_ser.hpp"
 #include "dogen/dynamic/serialization/name_ser.hpp"
-#include "dogen/dynamic/serialization/number_ser.hpp"
 #include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/dynamic/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"

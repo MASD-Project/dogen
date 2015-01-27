@@ -65,11 +65,6 @@ public:
     create_text_collection(const std::list<std::string>& v) const;
 
     /**
-     * @brief Creates a stand alone number value.
-     */
-    boost::shared_ptr<value> create_number(const std::string& v) const;
-
-    /**
      * @brief Creates a stand alone boolean value.
      */
     boost::shared_ptr<value> create_boolean(const std::string& v) const;
