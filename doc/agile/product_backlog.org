@@ -273,7 +273,6 @@ these.
 
 While we're at it, add support for =family= too.
 
-
 *** Add support for disabling formatters                              :story:
 
 We should be able to disable some formatters such as forward
@@ -420,6 +419,12 @@ ensure they work exactly as before.
 Once the overrides have been proven to work, we need to remove the
 command line options and make sure nothing breaks.
 
+*** SML json hydrator =read_module_path= needs refactoring            :story:
+
+We have a very misleading function =read_module_path= which reads
+modules but also creates modules that do not exist. We need to split
+this into a =read= function without side-effects and a =create=
+function that creates the missing modules.
 
 *** Investigate NeoVim's emblems                                      :story:
 
