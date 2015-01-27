@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-27 Tue 23:20]
+Clock summary at [2015-01-27 Tue 23:41]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *17:01* |       |      |
+| *Total time*                                                     | *17:23* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Active                                                           |         | 17:01 |      |
+| Active                                                           |         | 17:23 |      |
 | STARTED Sprint and product backlog grooming                      |         |       | 1:46 |
 | COMPLETED Add annotation fields and remove meta-data usage       |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                 |         |       | 1:09 |
@@ -35,6 +35,7 @@ Clock summary at [2015-01-27 Tue 23:20]
 | COMPLETED Update mock factory to generate dynamic fields         |         |       | 1:56 |
 | COMPLETED Rename namespace =meta-data= to =dynamic=              |         |       | 0:26 |
 | COMPLETED Update facet settings factory to use dynamic object    |         |       | 1:17 |
+| COMPLETED Delete tags class in SML                               |         |       | 0:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -243,6 +244,15 @@ Delete reader and writer classes and remove meta-data from
 We seem to be using the tags to detect containers. We need to get rid
 of this dependency.
 
+*** COMPLETED Delete tags class in SML                                :story:
+    CLOSED: [2015-01-27 Tue 23:41]
+    CLOCK: [2015-01-27 Tue 23:19]--[2015-01-27 Tue 23:41] =>  0:22
+
+This class does not make sense any more as each model will be
+responsible for their own tags.
+
+Can only be done once we delete writer and reader.
+
 *** Dynamic workflow is recreated for every model                     :story:
 
 We should create the dynamic workflow once and pass it to the dia to
@@ -267,13 +277,6 @@ We could use =std::reference_wrapper= for this.
 In order to progress in stages we made fields optional in dynamic
 workflow; if a definition is not found we skip it. We need to remove
 this once all field definitions have been added.
-
-*** Delete tags class in SML                                          :story:
-
-This class does not make sense any more as each model will be
-responsible for their own tags.
-
-Can only be done once we delete writer and reader.
 
 *** Add merger to dynamic                                             :story:
 

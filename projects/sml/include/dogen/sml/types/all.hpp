@@ -57,7 +57,6 @@
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/sml.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/workflow.hpp"

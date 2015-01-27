@@ -26,7 +26,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"

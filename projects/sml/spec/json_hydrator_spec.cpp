@@ -27,7 +27,6 @@
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/dynamic/types/content_extensions.hpp"
-#include "dogen/sml/types/tags.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
