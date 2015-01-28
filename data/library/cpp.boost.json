@@ -10,7 +10,7 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "boost/shared_ptr.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/serialization/shared_ptr.hpp"
+                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/shared_ptr.hpp"
             }
         },
         {
@@ -20,7 +20,7 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "boost/weak_ptr.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/serialization/weak_ptr.hpp"
+                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/weak_ptr.hpp"
             }
         },
         {
@@ -30,7 +30,7 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "boost/scoped_ptr.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/serialization/scoped_ptr.hpp"
+                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/scoped_ptr.hpp"
             }
         },
         {
@@ -40,7 +40,7 @@
                 "cpp.type.family" : "smart_pointer",
                 "cpp.type.requires_manual_move_constructor" : true,
                 "cpp.types.class_header_formatter.file_name" : "boost/optional.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/serialization/optional.hpp"
+                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/optional.hpp"
             }
         },
         {
@@ -49,7 +49,7 @@
             "extensions" : {
                 "cpp.type.requires_manual_move_constructor" : true,
                 "cpp.types.class_header_formatter.file_name" : "boost/variant.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/serialization/variant.hpp"
+                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/variant.hpp"
             }
         },
         {
@@ -105,7 +105,7 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/gregorian/gregorian_types.hpp",
                 "cpp.io.header_file.file_name" : "boost/date_time/gregorian/gregorian.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/date_time/gregorian/greg_serialize.hpp"
+                "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/gregorian/greg_serialize.hpp"
             }
         },
         {
@@ -116,7 +116,7 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
+                "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
                 "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
@@ -128,7 +128,7 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
+                "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
                 "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
@@ -140,7 +140,7 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/property_tree/ptree.hpp",
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/property_tree/ptree_serialization.hpp",
+                "cpp.serialization.class_header_formatter.file_name" : "boost/property_tree/ptree_serialization.hpp",
                 "cpp.io.header_file.file_name" : "boost/property_tree/json_parser.hpp"
             }
         }
