@@ -104,11 +104,8 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/gregorian/gregorian_types.hpp",
-                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.io.header_file.file_name" : "boost/date_time/gregorian/gregorian.hpp",
-                "cpp.io.header_file.is_system" : true,
-                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/date_time/gregorian/greg_serialize.hpp",
-                "cpp.serialization.class_header_formatter.header_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/date_time/gregorian/greg_serialize.hpp"
             }
         },
         {
@@ -119,11 +116,8 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
-                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
-                "cpp.serialization.class_header_formatter.header_file.is_system" : true,
-                "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp",
-                "cpp.io.header_file.is_system" : true
+                "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
         {
@@ -134,11 +128,8 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
-                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
-                "cpp.serialization.class_header_formatter.header_file.is_system" : true,
-                "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp",
-                "cpp.io.header_file.is_system" : true
+                "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
         {
@@ -149,11 +140,8 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/property_tree/ptree.hpp",
-                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/property_tree/ptree_serialization.hpp",
-                "cpp.serialization.class_header_formatter.header_file.is_system" : true,
-                "cpp.io.header_file.file_name" : "boost/property_tree/json_parser.hpp",
-                "cpp.io.header_file.is_system" : true
+                "cpp.io.header_file.file_name" : "boost/property_tree/json_parser.hpp"
             }
         }
     ]

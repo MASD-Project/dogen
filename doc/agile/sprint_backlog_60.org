@@ -298,6 +298,7 @@ Notes:
   processing.
 
 *** STARTED Add "model types"                                         :story:
+    CLOCK: [2015-01-28 Wed 22:29]--[2015-01-28 Wed 22:34] =>  0:05
     CLOCK: [2015-01-28 Wed 22:27]--[2015-01-28 Wed 22:28] =>  0:01
 
 At present we have a number of dynamic extensions that exist purely to
