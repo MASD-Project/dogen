@@ -34,7 +34,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dynamic.workflow"));
 
-const std::string scope(" scope: ");
+const std::string expected_scope(" Expected scope: ");
+const std::string actual_scope(" Actual scope: ");
 const std::string duplicate_field_definition(
     "Field definition already inserted: ");
 const std::string field_definition_not_found(
@@ -100,7 +101,8 @@ obtain_field_definition(const std::string& complete_name,
 
         std::stringstream s;
         s << field_used_in_invalid_scope << complete_name
-          << scope << current_scope;
+          << expected_scope << fd.scope()
+          << actual_scope << current_scope;
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(workflow_error(s.str()));
     }
