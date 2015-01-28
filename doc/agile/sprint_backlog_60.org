@@ -274,6 +274,7 @@ expected to be initialised once and reused for the life time of the
 run, this is probably not needed just yet.
 
 *** STARTED Remove optionality from =obtain_field_definition=         :story:
+    CLOCK: [2015-01-28 Wed 21:57]--[2015-01-28 Wed 22:23] =>  0:26
     CLOCK: [2015-01-28 Wed 21:19]--[2015-01-28 Wed 21:55] =>  0:36
     CLOCK: [2015-01-28 Wed 18:09]--[2015-01-28 Wed 18:32] =>  0:23
     CLOCK: [2015-01-28 Wed 08:23]--[2015-01-28 Wed 08:27] =>  0:04
@@ -285,15 +286,32 @@ this once all field definitions have been added.
 
 Missing fields:
 
-- cpp.type.family
+- cpp.type.family: we need a "choice" value type for this.
 - cpp.type.requires_manual_default_constructor
-- cpp.serialization.boost.header_file.is_system
+- cpp.*.is_system: done
 
 Notes:
 
 - need more context when a field has an invalid field definition or
   when the scope is invalid, e.g. which field are we currently
   processing.
+
+*** Add "model types"                                                 :story:
+
+At present we have a number of dynamic extensions that exist purely to
+deal with non-dogen models:
+
+- supported: is the facet supported by the external model
+- file_name: what is the external model naming for files for this
+  facet
+- is_system: is the file name a system include file or not?
+
+In reality, all of this could be avoided if we had a way of
+distinguishing between models that follow dogen conventions and those
+who do not; a "model type" of sorts such as "external" and "dogen" -
+naming needs more thought. With this we could infer the rest: if no
+file name is supplied then a given formatter/facet is not supported;
+if the model is_system then all types are system and so on.
 
 *** Rename the include tags and add them to CPP model                 :story:
 
