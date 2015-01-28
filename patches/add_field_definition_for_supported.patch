@@ -1,0 +1,288 @@
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/hash/field_definitions.hpp b/projects/cpp/include/dogen/cpp/types/formatters/hash/field_definitions.hpp
+index 78f7184..3bdc5cf 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/hash/field_definitions.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/hash/field_definitions.hpp
+@@ -50,6 +50,12 @@ struct field_definitions {
+     static const dynamic::field_definition& enabled();
+ 
+     /**
++     * @brief If set to false, the type does not support the current
++     * facet.
++     */
++    static const dynamic::field_definition& supported();
++
++    /**
+      * @brief Directory in which to place files for this facet.
+      */
+     static const dynamic::field_definition& directory();
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/io/field_definitions.hpp b/projects/cpp/include/dogen/cpp/types/formatters/io/field_definitions.hpp
+index 66cf8d0..5895111 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/io/field_definitions.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/io/field_definitions.hpp
+@@ -50,6 +50,12 @@ struct field_definitions {
+     static const dynamic::field_definition& enabled();
+ 
+     /**
++     * @brief If set to false, the type does not support the current
++     * facet.
++     */
++    static const dynamic::field_definition& supported();
++
++    /**
+      * @brief Directory in which to place files for this facet.
+      */
+     static const dynamic::field_definition& directory();
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/serialization/field_definitions.hpp b/projects/cpp/include/dogen/cpp/types/formatters/serialization/field_definitions.hpp
+index f2395af..8bfd6d7 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/serialization/field_definitions.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/serialization/field_definitions.hpp
+@@ -50,6 +50,12 @@ struct field_definitions {
+     static const dynamic::field_definition& enabled();
+ 
+     /**
++     * @brief If set to false, the type does not support the current
++     * facet.
++     */
++    static const dynamic::field_definition& supported();
++
++    /**
+      * @brief Directory in which to place files for this facet.
+      */
+     static const dynamic::field_definition& directory();
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/test_data/field_definitions.hpp b/projects/cpp/include/dogen/cpp/types/formatters/test_data/field_definitions.hpp
+index d6bf538..e1c2abc 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/test_data/field_definitions.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/test_data/field_definitions.hpp
+@@ -50,6 +50,12 @@ struct field_definitions {
+     static const dynamic::field_definition& enabled();
+ 
+     /**
++     * @brief If set to false, the type does not support the current
++     * facet.
++     */
++    static const dynamic::field_definition& supported();
++
++    /**
+      * @brief Directory in which to place files for this facet.
+      */
+     static const dynamic::field_definition& directory();
+diff --git a/projects/cpp/include/dogen/cpp/types/formatters/types/field_definitions.hpp b/projects/cpp/include/dogen/cpp/types/formatters/types/field_definitions.hpp
+index fc27687..e6e1d50 100644
+--- a/projects/cpp/include/dogen/cpp/types/formatters/types/field_definitions.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formatters/types/field_definitions.hpp
+@@ -50,6 +50,12 @@ struct field_definitions {
+     static const dynamic::field_definition& enabled();
+ 
+     /**
++     * @brief If set to false, the type does not support the current
++     * facet.
++     */
++    static const dynamic::field_definition& supported();
++
++    /**
+      * @brief Directory in which to place files for this facet.
+      */
+     static const dynamic::field_definition& directory();
+diff --git a/projects/cpp/src/types/formatters/hash/field_definitions.cpp b/projects/cpp/src/types/formatters/hash/field_definitions.cpp
+index ca0fef6..837ce18 100644
+--- a/projects/cpp/src/types/formatters/hash/field_definitions.cpp
++++ b/projects/cpp/src/types/formatters/hash/field_definitions.cpp
+@@ -47,6 +47,18 @@ dogen::dynamic::field_definition create_enabled() {
+     return r;
+ }
+ 
++dogen::dynamic::field_definition create_supported() {
++    dogen::dynamic::field_definition r;
++    r.name().simple("supported");
++    r.name().qualified("cpp.hash.supported");
++    r.ownership_hierarchy().model(model_name);
++    r.ownership_hierarchy().facet(facet_name);
++    r.type(dogen::dynamic::value_types::boolean);
++    r.scope(dogen::dynamic::scope_types::entity);
++    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
++    return r;
++}
++
+ dogen::dynamic::field_definition create_directory() {
+     dogen::dynamic::field_definition r;
+     r.name().simple("directory");
+@@ -208,6 +220,7 @@ create_all_field_definitions() {
+ 
+     using fd = dogen::cpp::formatters::hash::field_definitions;
+     r.push_front(fd::enabled());
++    r.push_front(fd::supported());
+     r.push_front(fd::directory());
+     r.push_front(fd::postfix());
+ 
+@@ -249,6 +262,11 @@ const dynamic::field_definition& field_definitions::enabled() {
+     return r;
+ }
+ 
++const dynamic::field_definition& field_definitions::supported() {
++    static auto r(create_supported());
++    return r;
++}
++
+ const dynamic::field_definition& field_definitions::directory() {
+     static auto r(create_directory());
+     return r;
+diff --git a/projects/cpp/src/types/formatters/io/field_definitions.cpp b/projects/cpp/src/types/formatters/io/field_definitions.cpp
+index 42c4bad..1c15634 100644
+--- a/projects/cpp/src/types/formatters/io/field_definitions.cpp
++++ b/projects/cpp/src/types/formatters/io/field_definitions.cpp
+@@ -47,6 +47,18 @@ dogen::dynamic::field_definition create_enabled() {
+     return r;
+ }
+ 
++dogen::dynamic::field_definition create_supported() {
++    dogen::dynamic::field_definition r;
++    r.name().simple("supported");
++    r.name().qualified("cpp.io.supported");
++    r.ownership_hierarchy().model(model_name);
++    r.ownership_hierarchy().facet(facet_name);
++    r.type(dogen::dynamic::value_types::boolean);
++    r.scope(dogen::dynamic::scope_types::entity);
++    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
++    return r;
++}
++
+ dogen::dynamic::field_definition create_directory() {
+     dogen::dynamic::field_definition r;
+     r.name().simple("directory");
+diff --git a/projects/cpp/src/types/formatters/serialization/field_definitions.cpp b/projects/cpp/src/types/formatters/serialization/field_definitions.cpp
+index e77cc90..0fb0751 100644
+--- a/projects/cpp/src/types/formatters/serialization/field_definitions.cpp
++++ b/projects/cpp/src/types/formatters/serialization/field_definitions.cpp
+@@ -47,6 +47,18 @@ dogen::dynamic::field_definition create_enabled() {
+     return r;
+ }
+ 
++dogen::dynamic::field_definition create_supported() {
++    dogen::dynamic::field_definition r;
++    r.name().simple("supported");
++    r.name().qualified("cpp.serialization.supported");
++    r.ownership_hierarchy().model(model_name);
++    r.ownership_hierarchy().facet(facet_name);
++    r.type(dogen::dynamic::value_types::boolean);
++    r.scope(dogen::dynamic::scope_types::entity);
++    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
++    return r;
++}
++
+ dogen::dynamic::field_definition create_directory() {
+     dogen::dynamic::field_definition r;
+     r.name().simple("directory");
+@@ -117,6 +129,7 @@ dogen::dynamic::field_definition create_class_header_formatter_is_system() {
+     r.ownership_hierarchy().formatter(class_header_formatter_name);
+     r.type(dogen::dynamic::value_types::text);
+     r.scope(dogen::dynamic::scope_types::entity);
++    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+     return r;
+ }
+ 
+@@ -210,6 +223,7 @@ create_all_field_definitions() {
+ 
+     using fd = dogen::cpp::formatters::serialization::field_definitions;
+     r.push_front(fd::enabled());
++    r.push_front(fd::supported());
+     r.push_front(fd::directory());
+     r.push_front(fd::postfix());
+ 
+@@ -252,6 +266,11 @@ const dynamic::field_definition& field_definitions::enabled() {
+     return r;
+ }
+ 
++const dynamic::field_definition& field_definitions::supported() {
++    static auto r(create_supported());
++    return r;
++}
++
+ const dynamic::field_definition& field_definitions::directory() {
+     static auto r(create_directory());
+     return r;
+diff --git a/projects/cpp/src/types/formatters/test_data/field_definitions.cpp b/projects/cpp/src/types/formatters/test_data/field_definitions.cpp
+index e958c93..2f33934 100644
+--- a/projects/cpp/src/types/formatters/test_data/field_definitions.cpp
++++ b/projects/cpp/src/types/formatters/test_data/field_definitions.cpp
+@@ -47,6 +47,18 @@ dogen::dynamic::field_definition create_enabled() {
+     return r;
+ }
+ 
++dogen::dynamic::field_definition create_supported() {
++    dogen::dynamic::field_definition r;
++    r.name().simple("supported");
++    r.name().qualified("cpp.test_data.supported");
++    r.ownership_hierarchy().model(model_name);
++    r.ownership_hierarchy().facet(facet_name);
++    r.type(dogen::dynamic::value_types::boolean);
++    r.scope(dogen::dynamic::scope_types::entity);
++    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
++    return r;
++}
++
+ dogen::dynamic::field_definition create_directory() {
+     dogen::dynamic::field_definition r;
+     r.name().simple("directory");
+@@ -210,6 +222,7 @@ create_all_field_definitions() {
+ 
+     using fd = dogen::cpp::formatters::test_data::field_definitions;
+     r.push_front(fd::enabled());
++    r.push_front(fd::supported());
+     r.push_front(fd::directory());
+     r.push_front(fd::postfix());
+ 
+@@ -252,6 +265,11 @@ const dynamic::field_definition& field_definitions::enabled() {
+     return r;
+ }
+ 
++const dynamic::field_definition& field_definitions::supported() {
++    static auto r(create_supported());
++    return r;
++}
++
+ const dynamic::field_definition& field_definitions::directory() {
+     static auto r(create_directory());
+     return r;
+diff --git a/projects/cpp/src/types/formatters/types/field_definitions.cpp b/projects/cpp/src/types/formatters/types/field_definitions.cpp
+index 7f2dd6e..98c4eac 100644
+--- a/projects/cpp/src/types/formatters/types/field_definitions.cpp
++++ b/projects/cpp/src/types/formatters/types/field_definitions.cpp
+@@ -51,6 +51,18 @@ dogen::dynamic::field_definition create_enabled() {
+     return r;
+ }
+ 
++dogen::dynamic::field_definition create_supported() {
++    dogen::dynamic::field_definition r;
++    r.name().simple("supported");
++    r.name().qualified("cpp.types.supported");
++    r.ownership_hierarchy().model(model_name);
++    r.ownership_hierarchy().facet(facet_name);
++    r.type(dogen::dynamic::value_types::boolean);
++    r.scope(dogen::dynamic::scope_types::entity);
++    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
++    return r;
++}
++
+ dogen::dynamic::field_definition create_directory() {
+     dogen::dynamic::field_definition r;
+     r.name().simple("directory");
+@@ -267,6 +279,7 @@ create_all_field_definitions() {
+ 
+     using fd = dogen::cpp::formatters::types::field_definitions;
+     r.push_front(fd::enabled());
++    r.push_front(fd::supported());
+     r.push_front(fd::directory());
+     r.push_front(fd::postfix());
+ 
+@@ -317,6 +330,11 @@ const dynamic::field_definition& field_definitions::enabled() {
+     return r;
+ }
+ 
++const dynamic::field_definition& field_definitions::supported() {
++    static auto r(create_supported());
++    return r;
++}
++
+ const dynamic::field_definition& field_definitions::directory() {
+     static auto r(create_directory());
+     return r;
