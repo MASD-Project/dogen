@@ -29,16 +29,8 @@ namespace {
 
 void register_field_definitions() {
     auto& rg(dogen::dynamic::workflow::registrar());
-
     using fd = dogen::cpp::field_definitions;
-    rg.register_field_definition(fd::enabled());
-    rg.register_field_definition(fd::split_project());
-    rg.register_field_definition(fd::source_directory());
-    rg.register_field_definition(fd::include_directory());
-    rg.register_field_definition(fd::header_file_extension());
-    rg.register_field_definition(fd::implementation_file_extension());
-    rg.register_field_definition(fd::enable_facet_folders());
-    rg.register_field_definition(fd::enable_unique_file_names());
+    rg.register_field_definitions(fd::all_field_definitions());
 }
 
 }

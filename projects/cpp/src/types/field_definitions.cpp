@@ -122,10 +122,33 @@ dogen::dynamic::field_definition create_enable_unique_file_names() {
     return r;
 }
 
+std::forward_list<dogen::dynamic::field_definition>
+create_all_field_definitions() {
+    using dogen::dynamic::field_definition;
+    std::forward_list<field_definition> r;
+
+    using dogen::cpp::field_definitions;
+    r.push_front(field_definitions::enabled());
+    r.push_front(field_definitions::split_project());
+    r.push_front(field_definitions::source_directory());
+    r.push_front(field_definitions::include_directory());
+    r.push_front(field_definitions::header_file_extension());
+    r.push_front(field_definitions::implementation_file_extension());
+    r.push_front(field_definitions::enable_facet_folders());
+    r.push_front(field_definitions::enable_unique_file_names());
+    return r;
+}
+
 }
 
 namespace dogen {
 namespace cpp {
+
+const std::forward_list<dynamic::field_definition>&
+field_definitions::all_field_definitions() {
+    static auto r(create_all_field_definitions());
+    return r;
+}
 
 const dynamic::field_definition& field_definitions::enabled() {
     static auto r(create_enabled());

@@ -46,10 +46,28 @@ dogen::dynamic::field_definition create_identity_attribute() {
     return r;
 }
 
+std::forward_list<dogen::dynamic::field_definition>
+create_all_field_definitions() {
+    using dogen::dynamic::field_definition;
+    std::forward_list<field_definition> r;
+
+    using dogen::dia_to_sml::field_definitions;
+    r.push_front(field_definitions::comment());
+    r.push_front(field_definitions::identity_attribute());
+    return r;
+}
+
+
 }
 
 namespace dogen {
 namespace dia_to_sml {
+
+const std::forward_list<dynamic::field_definition>&
+field_definitions::all_field_definitions() {
+    static auto r(create_all_field_definitions());
+    return r;
+}
 
 const dynamic::field_definition& field_definitions::comment() {
     static auto r(create_comment());

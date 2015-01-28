@@ -44,6 +44,12 @@ public:
      */
     void register_field_definition(const field_definition& fd);
 
+    /**
+     * @brief Registers a list of field definitions.
+     */
+    void register_field_definitions(
+        const std::forward_list<field_definition>& fds);
+
 public:
     /**
      * @brief Returns all registered field definitions.

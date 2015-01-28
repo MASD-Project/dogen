@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <forward_list>
 #include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
@@ -34,6 +35,13 @@ namespace dia_to_sml {
  * @brief Fields supported by the Dia to SML translator.
  */
 struct field_definitions {
+    /**
+     * @brief Returns all the field definitions available in this
+     * class.
+     */
+    static const std::forward_list<dynamic::field_definition>&
+    all_field_definitions();
+
     /**
      * @brief Comment provided by user when dia does not allow for it.
      *

@@ -51,6 +51,13 @@ void registrar::register_field_definition(const field_definition& fd) {
     field_definitions_.push_front(fd);
 }
 
+void registrar::register_field_definitions(
+    const std::forward_list<field_definition>& fds) {
+    for (const auto& fd : fds)
+        field_definitions_.push_front(fd);
+}
+
+
 const std::forward_list<field_definition>&
 registrar::field_definitions() const {
     return field_definitions_;
