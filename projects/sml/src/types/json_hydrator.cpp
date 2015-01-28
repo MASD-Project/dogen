@@ -27,6 +27,7 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/hydration_error.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
 
 using namespace dogen::utility::log;
@@ -196,6 +197,8 @@ read_element(const boost::property_tree::ptree& pt, model& m) const {
     const auto documentation(pt.get_optional<std::string>(documentation_key));
 
     const auto lambda([&](type& t) {
+            BOOST_LOG_SEV(lg, debug) << "Processing type: "
+                                     << sml::string_converter::convert(qn);
             t.name(qn);
             t.origin_type(m.origin_type());
             t.generation_type(m.generation_type());
@@ -252,10 +255,13 @@ model json_hydrator::read_stream(std::istream& s, const bool is_target) const {
     ptree pt;
     read_json(s, pt);
 
+    r.name().model_name(pt.get<std::string>(model_name_key));
+    BOOST_LOG_SEV(lg, debug) << "Processing model: "
+                             << sml::string_converter::convert(r.name());
+
+    read_module_path(pt, r, r.name());
     const auto scope(dynamic::scope_types::root_module);
     r.extensions(create_dynamic_extensions(pt, scope));
-    r.name().model_name(pt.get<std::string>(model_name_key));
-    read_module_path(pt, r, r.name());
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)
