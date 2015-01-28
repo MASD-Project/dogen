@@ -98,8 +98,8 @@
                 "cpp.type.family" : "string",
                 "cpp.types.class_header_formatter.file_name" : "string",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file.file_name" : "boost/serialization/string.hpp",
-                "cpp.serialization.boost.header_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/serialization/string.hpp",
+                "cpp.serialization.class_header_formatter.header_file.is_system" : true
             }
         },
         {
@@ -110,8 +110,8 @@
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.file_name" : "vector",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file.file_name" : "boost/serialization/vector.hpp",
-                "cpp.serialization.boost.header_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file.file_name" : "boost/serialization/vector.hpp",
+                "cpp.serialization.class_header_formatter.header_file.is_system" : true
             }
         },
         {
@@ -122,8 +122,8 @@
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.file_name" : "deque",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/deque.hpp",
-                "cpp.serialization.boost.header_file_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file_file.file_name" : "boost/serialization/deque.hpp",
+                "cpp.serialization.class_header_formatter.header_file_file.is_system" : true
             }
         },
         {
@@ -144,8 +144,8 @@
                 "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.file_name" : "list",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/list.hpp",
-                "cpp.serialization.boost.header_file_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file_file.file_name" : "boost/serialization/list.hpp",
+                "cpp.serialization.class_header_formatter.header_file_file.is_system" : true
             }
         },
         {
@@ -166,8 +166,8 @@
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.file_name" : "set",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/set.hpp",
-                "cpp.serialization.boost.header_file_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file_file.file_name" : "boost/serialization/set.hpp",
+                "cpp.serialization.class_header_formatter.header_file_file.is_system" : true
             }
         },
         {
@@ -178,8 +178,8 @@
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.file_name" : "multiset",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/multiset.hpp",
-                "cpp.serialization.boost.header_file_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file_file.file_name" : "boost/serialization/multiset.hpp",
+                "cpp.serialization.class_header_formatter.header_file_file.is_system" : true
             }
         },
         {
@@ -199,8 +199,8 @@
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.file_name" : "map",
-                "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/map.hpp",
-                "cpp.serialization.boost.header_file_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file_file.file_name" : "boost/serialization/map.hpp",
+                "cpp.serialization.class_header_formatter.header_file_file.is_system" : true
             }
         },
         {
@@ -211,8 +211,8 @@
                 "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.file_name" : "multimap",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/multimap.hpp",
-                "cpp.serialization.boost.header_file_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file_file.file_name" : "boost/serialization/multimap.hpp",
+                "cpp.serialization.class_header_formatter.header_file_file.is_system" : true
             }
         },
         {
@@ -231,8 +231,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "pair",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/pair.hpp",
-                "cpp.serialization.boost.header_file_file.is_system" : true
+                "cpp.serialization.class_header_formatter.header_file_file.file_name" : "boost/serialization/pair.hpp",
+                "cpp.serialization.class_header_formatter.header_file_file.is_system" : true
             }
         },
         {
@@ -243,7 +243,7 @@
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "memory",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.status" : "unsupported"
+                "cpp.serialization.class_header_formatter.status" : "unsupported"
             }
         },
         {
@@ -254,7 +254,7 @@
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "memory",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.status" : "unsupported"
+                "cpp.serialization.class_header_formatter.status" : "unsupported"
             }
         },
         {
@@ -265,7 +265,7 @@
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "memory",
                 "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.boost.status" : "unsupported"
+                "cpp.serialization.class_header_formatter.status" : "unsupported"
             }
         },
         {
@@ -275,7 +275,7 @@
                 "cpp.types.class_header_formatter.file_name" : "functional",
                 "cpp.hash.standard.status" : "unsupported",
                 "cpp.test_data.status" : "unsupported",
-                "cpp.serialization.boost.status" : "unsupported"
+                "cpp.serialization.class_header_formatter.status" : "unsupported"
             }
         },
         {
@@ -284,7 +284,7 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "functional",
-                "cpp.serialization.boost.status" : "unsupported"
+                "cpp.serialization.class_header_formatter.status" : "unsupported"
             }
         },
         {
@@ -292,7 +292,7 @@
             "simple_name" : "ostream",
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "ostream",
-                "cpp.serialization.boost.status" : "unsupported"
+                "cpp.serialization.class_header_formatter.status" : "unsupported"
             }
         }
     ]
