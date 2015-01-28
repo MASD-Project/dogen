@@ -8,6 +8,15 @@
 
 Stories that we intend to look at, at some point.
 
+*** Improve support for modules in JSON                               :story:
+
+At present we are implying the existence of modules in JSON by looking
+at the types qname. This is not ideal because it means one cannot
+supply meta-data for modules. We should probably revisit the layout to
+have a nested structure with namespaces containing types.
+
+See also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#sml-json-hydrator-read_module_path-needs-refactoring][SML json hydrator =read_module_path= needs refactoring]].
+
 *** Consider renaming qname                                           :story:
 
 As part of dynamic we came up with a better way of modeling names:
@@ -264,14 +273,6 @@ need a method in the frontends that returns a description and a method
 in the workflow that returns all descriptions. These must be
 static. The knitter can then call these methods and build the info
 text.
-
-*** Rename the include tags and add them to CPP model                 :story:
-
-Update all the JSON files with names in the form
-=cpp.include.types.header_file=. Add properties in =cpp= to capture
-these.
-
-While we're at it, add support for =family= too.
 
 *** Add support for disabling formatters                              :story:
 
