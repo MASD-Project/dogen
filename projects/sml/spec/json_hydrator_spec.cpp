@@ -174,10 +174,21 @@ const std::string module_path_model(R"({
   }
 )");
 
+dogen::sml::model hydrate(std::istream& s) {
+    // Note: we don't want to throw here as we know we are missing all
+    // of the c++ field definitions and so on. It safe to ignore those.
+    dogen::sml::json_hydrator h(false/*throw_on_missing_field_definition*/);
+    return h.hydrate(s);
+}
+
+dogen::sml::model hydrate(const boost::filesystem::path& p) {
+    boost::filesystem::ifstream s(p);
+    return hydrate(s);
+}
+
 dogen::sml::model hydrate(const std::string content) {
     std::istringstream s(content);
-    dogen::sml::json_hydrator h;
-    return h.hydrate(s);
+    return hydrate(s);
 }
 
 dogen::dynamic::field_definition create_field_definition(const std::string n,
@@ -355,9 +366,7 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
 
     using namespace dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / cpp_std_model_path);
-    boost::filesystem::ifstream s(p);
-    dogen::sml::json_hydrator h;
-    const auto m(h.hydrate(s));
+    const auto m(hydrate(p));
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.name().model_name() == cpp_std_model_name);
@@ -409,9 +418,7 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
 
     using namespace dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / cpp_boost_model_path);
-    boost::filesystem::ifstream s(p);
-    dogen::sml::json_hydrator h;
-    const auto m(h.hydrate(s));
+    const auto m(hydrate(p));
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.name().model_name() == cpp_boost_model_name);
@@ -469,9 +476,7 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("hardware_model_hydrates_into_expected_model");
     using namespace dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / hardware_model_path);
-    boost::filesystem::ifstream s(p);
-    dogen::sml::json_hydrator h;
-    const auto m(h.hydrate(s));
+    const auto m(hydrate(p));
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_CHECK(m.name().model_name() == hardware_model_name);

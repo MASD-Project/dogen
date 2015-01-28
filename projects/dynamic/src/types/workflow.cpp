@@ -57,8 +57,10 @@ dynamic::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-workflow::workflow() : field_definitions_by_complete_name_(
-    create_field_definitions_by_complete_name()) { }
+workflow::workflow(const bool throw_on_missing_field_definition)
+    : throw_on_missing_field_definition_(throw_on_missing_field_definition),
+      field_definitions_by_complete_name_(
+          create_field_definitions_by_complete_name()) { }
 
 std::unordered_map<std::string, field_definition> workflow::
 create_field_definitions_by_complete_name() const {
@@ -86,11 +88,17 @@ obtain_field_definition(const std::string& complete_name,
 
     const auto i(field_definitions_by_complete_name_.find(complete_name));
     if (i == field_definitions_by_complete_name_.end()) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << complete_name;
+        if (throw_on_missing_field_definition_) {
+            BOOST_LOG_SEV(lg, error) << field_definition_not_found
+                                     << complete_name;
 
-        // FIXME: commented for now
-        // BOOST_THROW_EXCEPTION(workflow_error(
-        //         field_definition_not_found + complete_name));
+            // FIXME
+            // BOOST_THROW_EXCEPTION(workflow_error(
+            //         field_definition_not_found + complete_name));
+            return boost::optional<field_definition>();
+        }
+
+        BOOST_LOG_SEV(lg, warn) << field_definition_not_found << complete_name;
         return boost::optional<field_definition>();
     }
 

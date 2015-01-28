@@ -50,7 +50,7 @@ public:
     static dynamic::registrar& registrar();
 
 public:
-    workflow();
+    explicit workflow(const bool throw_on_missing_field_definition = true);
 
 private:
     /**
@@ -95,6 +95,7 @@ public:
         raw_data) const;
 
 private:
+    const bool throw_on_missing_field_definition_;
     static std::shared_ptr<dynamic::registrar> registrar_;
     const std::unordered_map<std::string, field_definition>
     field_definitions_by_complete_name_;

@@ -73,7 +73,8 @@ const std::string missing_module("Could not find module: ");
 namespace dogen {
 namespace sml {
 
-json_hydrator::json_hydrator() : dynamic_workflow_() { }
+json_hydrator::json_hydrator(const bool throw_on_missing_field_definition)
+    : dynamic_workflow_(throw_on_missing_field_definition) { }
 
 boost::optional<qname> containing_module(model& m, const qname& qn) {
     if (qn.model_name().empty() || qn.simple_name() == m.name().model_name()) {
