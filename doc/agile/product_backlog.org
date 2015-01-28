@@ -115,8 +115,8 @@ We also need to deal with:
 
 - exposing formatter id as a static property so we can create
   dependencies between formatters;
-- includes overrides via meta-data, so we can start using STL, Boost
-  etc classes.
+- includes overrides via dynamic extensions, so we can start using
+  STL, Boost etc classes.
 - includes of STL, Boost etc that are formatter level dependencies -
   this needs to be handled via traits.
 
@@ -182,7 +182,7 @@ dependencies inside of the formatters.
 - remove relationships from transformer
 - remove helper models boost and std
 
-*** Includer generation should be done from meta-data                 :story:
+*** Includer generation should be done from dynamic extensions        :story:
 
 *New Understanding*
 
@@ -196,8 +196,8 @@ at random; it is actually only useful in one scenario:
 *Previous Understanding*
 
 It would be nice if we could determine which includer files to create
-by looking at the meta-data. For this we need a notion of an inclusion
-group, defined at the model level:
+by looking at the dynamic extensions. For this we need a notion of an
+inclusion group, defined at the model level:
 
 - =cpp.types.includers.general=
 - =cpp.types.includers.value_objects=
@@ -277,9 +277,9 @@ While we're at it, add support for =family= too.
 
 We should be able to disable some formatters such as forward
 declarations. Some users may not require them. We can do this using
-the meta-data. We can either implement it in the backend or make all
-the formatters return an =std::optional<dogen::formatters::file>= and
-internally look for a =enabled= trait.
+dynamic extensions. We can either implement it in the backend or make
+all the formatters return an =std::optional<dogen::formatters::file>=
+and internally look for a =enabled= trait.
 
 We need to be able to distinguish "optional" formatters - those that
 can be disabled - and "mandatory" formatters - those that cannot. If a
@@ -308,7 +308,8 @@ project choices.
 #+end_quote
 
 Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some meta-data into C++ model.
+class. This will involve bring across some dynamic extensions into the
+C++ model.
 
 *** Remove =cpp_formatters::formatting_error=                         :story:
 
@@ -329,19 +330,19 @@ this enumeration.
 It doesn't seem like there is any good reason to treat the keys in a
 special way so try to remove this.
 
-*** Towards a more generic use of meta-data parameters                 :epic:
+*** Towards a more generic use of dynamic extensions                   :epic:
 
-*New Understanding*: We have decided to limit the meta-data usage to
-extensibility. Where required parameters will be made visible via the
-meta-data but this should be kept to just those parameters that users
-can sensibly control.
+*New Understanding*: We have decided to limit the dynamic extensions
+usage to extensibility. Where required parameters will be made visible
+via dynamic extensions but this should be kept to just those
+parameters that users can sensibly control.
 
 *Previous Understanding*
 
 We should do an inventory of all dogen features which can be
-reimplemented as meta-data parameters. For example, immutability
-should result in a generic parameter being added to the type at the
-SML level:
+reimplemented as dynamic extensions. For example, immutability should
+result in a generic parameter being added to the type at the SML
+level:
 
 : immutable = true
 
@@ -396,7 +397,7 @@ copyright holders.
 We need to replace the references to the c++ settings directly with
 formatter settings.
 
-*** Move all the fundamental configuration options into meta-data     :story:
+*** Move all the fundamental configuration options into dynamic extensions  :story:
 
 #+begin_quote
 *Story*: As a dogen user, I do not want to have to specify fundamental
@@ -418,6 +419,19 @@ ensure they work exactly as before.
 
 Once the overrides have been proven to work, we need to remove the
 command line options and make sure nothing breaks.
+
+**** Remove all of the config classes
+
+We have a number of settings in the =config= model that won't be used
+any longer:
+
+- =formatting_settings=
+- =annotation_settings=
+- =cpp_settings=
+- =code_generation_marker_settings=
+
+These should all be removed, with the corresponding command line
+arguments.
 
 *** SML json hydrator =read_module_path= needs refactoring            :story:
 
@@ -441,8 +455,8 @@ be declared as =a::b=. The system would have to recognise that =a= is
 a class and then treat it accordingly in SML. The formatters would
 have to be taught to express inner classes when formatting the main
 class. This probably requires merging two SML entities into a single
-cpp entity. Finally some meta-data support would be required to
-determine if the inner class is public or private.
+cpp entity. Finally some dynamic extension support would be required
+to determine if the inner class is public or private.
 
 We just need a use case for where inner classes would be useful.
 
@@ -473,8 +487,8 @@ In the future, this may be useful if users submit issues.
 *** Add support for user defined final types                          :story:
 
 At some point we started talking about the possibility of having types
-defined as final by the user, via the meta-data. This was to be done
-using =dia.is_final=. We never did implement it properly.
+defined as final by the user, via dynamic extensions. This was to be
+done using =dia.is_final=. We never did implement it properly.
 
 - define attribute in dia to sml
 - propagate it to sml
@@ -852,11 +866,11 @@ implementation for a given facet.
 #+end_quote
 
 Sometimes it may make sense to provide a user-supplied implementation
-for a given facet. For example for qname it may make sense to use
-the string converter approach to do the actual JSON
-serialisation. However its not possible to just disable code
-generation of a given type's inserters and then provide a manual
-implementation. This could easily be achieved via meta-data.
+for a given facet. For example for qname it may make sense to use the
+string converter approach to do the actual JSON serialisation. However
+its not possible to just disable code generation of a given type's
+inserters and then provide a manual implementation. This could easily
+be achieved via dynamic extensions.
 
 *** Consider renaming module path to internal module path             :story:
 
@@ -978,7 +992,7 @@ following error:
 There is no clue as to which object caused the error. Add a class name
 and dia object ID to the exception.
 
-*** Control the emission of pragma once with meta-data                :story:
+*** Control the emission of pragma once with dynamic extensions       :story:
 
 At present we are always adding =#pragrma once= to the header guard:
 
@@ -986,8 +1000,8 @@ At present we are always adding =#pragrma once= to the header guard:
 : #pragma once
 : #endif
 
-This should really be optional and controlled via meta-data, probably
-at the c++ model level.
+This should really be optional and controlled via dynamic extensions,
+probably at the c++ model level.
 
 *** Determining the model module should be in SML                     :story:
 
@@ -999,10 +1013,10 @@ in model to record it.
 *** Handling missing default facet settings                           :story:
 
 At present we are just logging a warning when the user supplies
-meta-data for a facet that we do not have defaults for. However, it
-may make more sense to just throw if someone is assuming support for
-something which we do not support. We need to think about this use
-case properly.
+dynamic extensions for a facet that we do not have defaults
+for. However, it may make more sense to just throw if someone is
+assuming support for something which we do not support. We need to
+think about this use case properly.
 
 *** Adding types to package namespace                                 :story:
 
@@ -1070,8 +1084,8 @@ serialisation's XML.
 It would be nice to be able to serialise some simpler types into CSV
 files, and to be able to read them from CSV files. We should use a
 third-party library to perform the serialisation. We should check that
-the types only have simple types. We should also provide some
-meta-data for options such as "use quoted strings", etc.
+the types only have simple types. We should also provide some dynamic
+extensions for options such as "use quoted strings", etc.
 
 *** Use diagram files to setup test models in cmakefile               :story:
 
@@ -1088,10 +1102,10 @@ We should take advantage of this to define =include_directories= and
 We are using a lot of static registration and we have converged into
 what appears to be a useful pattern. It would be nice to be able to
 mark a type as registrable and to have the registrar automatically
-generated for it, with a name configurable on the meta-data. We would
-also need to configure the registration method (name, arguments - we
-may want to register against a string or just have a list of
-registered types).
+generated for it, with a name configurable via dynamic extensions. We
+would also need to configure the registration method (name,
+arguments - we may want to register against a string or just have a
+list of registered types).
 
 The next logical step would be to code-generate the static
 initialisers too. For this we would have to be aware of all types to
@@ -1120,9 +1134,10 @@ extension. Having said that, if there was a way to supply an enum or
 such-like with the stream, we could create a class for streams and
 then implement the file one as an adaptor to the stream class.
 
-*** Improve error messages around meta-data kvp's                     :story:
+*** Improve error messages around dynamic extensions kvp's            :story:
 
-Consider a meta-data "kvp" without a value, in a dia diagram (model note):
+Consider a dynamic extension "kvp" without a value, in a dia diagram
+(model note):
 
 : #DOGEN dia.comment'
 
@@ -1147,19 +1162,6 @@ to simplify the graph in enricher.
 This traversal was designed for tagger but yet it does not resolve
 =type= into one of the sub-classes, forcing tagger to implement
 visitation to resolve the types. We should improve the traversal.
-
-*** Remove all of the config settings that are in meta-data           :story:
-
-We have a number of settings in the =config= model that won't be used
-any longer:
-
-- =formatting_settings=
-- =annotation_settings=
-- =cpp_settings=
-- =code_generation_marker_settings=
-
-These should all be removed, with the corresponding command line
-arguments.
 
 *** Create a demo of installing dogen and generating hello world      :story:
 
@@ -1234,7 +1236,7 @@ to commit it.
 Sometimes when changing a diagram it may be useful to set some types
 to "ignore", i.e. make dogen pretend they don't exist at all. For
 instance one may want to introduce new types one at a time. It would
-be nice to have a meta-data flag for ignoring.
+be nice to have a dynamic extension flag for ignoring.
 
 We should probably have some kind of warning to ensure users are aware
 of the types being ignored.
@@ -1471,7 +1473,7 @@ It would be nice if we could constraint the domain of a type via some
 kind of rules; for example, provide a regular expression or an EBNF
 definition with a string that tells dogen how to validate it. We could
 then construct simple validators. As usual these expressions can be
-supplied via the meta-data.
+supplied via dynamic extensions.
 
 *** Providing view model hints                                         :epic:
 
@@ -1552,22 +1554,22 @@ it may make sense to add a type directly to a facet. For example, we
 may want to add simple value objects to the mock factory. We don't
 want to pollute =types= with these classes, but at the same time we'd
 rather not have to manually generate them. It would be nice to be able
-to associate a type with just a facet via the meta-data. Of course,
-this does mean we would not be able to rely on all other facets such
-as serialisation and even streaming or else things would get a bit
-confusing. But it would still be useful.
+to associate a type with just a facet via dynamic extensions. Of
+course, this does mean we would not be able to rely on all other
+facets such as serialisation and even streaming or else things would
+get a bit confusing. But it would still be useful.
 
 Another possible (less clean) approach is this:
 
 #+begin_quote
-It would be great if we could use the meta-data to enable and disable
-facets (there probably already is a story for this). But in addition
-to this, it would also be great if one could override the default name
-for an object in a facet; for instance: one could add an object called
-=serialization_manager=, disable all facets bar serialisation,
-disable the serialisation postfix of this file and disable code
-generation. This way one could add manual code to any of the facets,
-independently.
+It would be great if we could use dynamic extensions to enable and
+disable facets (there probably already is a story for this). But in
+addition to this, it would also be great if one could override the
+default name for an object in a facet; for instance: one could add an
+object called =serialization_manager=, disable all facets bar
+serialisation, disable the serialisation postfix of this file and
+disable code generation. This way one could add manual code to any of
+the facets, independently.
 
 At present we support this, but only for types as it is hard-coded.
 #+end_quote
@@ -2096,13 +2098,13 @@ parent is part of that diagram or it is not, and if it's not we have
 no way of connecting the generalisation relationship to it.
 
 Having said that, it would actually be quite simple to allow cross
-model inheritance by using meta-data:
+model inheritance by using dynamic extensions:
 
-- create a tag that forces a type to behave like a parent, regardless
-  of whether there are any children or not;
-- create a tag that contains a qualified name of a parent, regardless
-  of whether it's in this model or not;
-- change the transformer to convert these tags into SML inheritance
+- create a field that forces a type to behave like a parent,
+  regardless of whether there are any children or not;
+- create a field that contains a qualified name of a parent,
+  regardless of whether it's in this model or not;
+- change the transformer to convert these fields into SML inheritance
   relationships;
 
 There may be some fallout in places where we assume that the
@@ -2326,23 +2328,23 @@ format method. There are a few advantages to this approach:
   create some kind of static registration of formatters such that
   literally the user would have to change no code at all to add a new
   template other than the template itself.
-- we could propagate the meta-data into the C++ model at the formatter
-  level such that users could use it without any changes to the code
-  generation engine.
+- we could propagate dynamic extensions into the C++ model at the
+  formatter level such that users could use it without any changes to
+  the code generation engine.
 - we could derive the location of the output file from the formatter
   itself, neatly separating groups of formatters. The Dogen formatters
   could be placed under "core" and then we could have others such as
   "qt", etc.
 - new templates with use cases we havent foreseen could be done, but
-  if they need more meta-data the user would have to add types to the
-  C++ model.
+  if they need more dynamic extensions the user would have to add
+  types to the C++ model.
 
 We could create a totally separate tool for this that would make use
 of existing infrastructure: =stitch=. The tool could be made up of a
 library and a binary - it could be useful outside Dogen.
 
 Inside Dogen, one can imagine a stereotype =Formatter= that requires a
-few meta-data tags to locate the formatter template and the text
+few dynamic extensions to locate the formatter template and the text
 template, and then internally Dogen can instantiate the =stitch=
 library to generate the files. The stitch invocation could also have
 "variables" used by the formatter template such as say the class name,
@@ -2362,10 +2364,10 @@ formatters, create a dynamic library and then have some kind of
 loading mechanism in Dogen. The interesting thing is that with static
 factories, dogen could make use of this without any code changes at
 all (e.g. loading the library into the process is sufficient to
-trigger registration, and then its up to the meta-data to decide
-whether to use the formatters or not). So a user could create a model
-with formatters, add its own text templates, compile and link it and
-then add it to Dogen and then make use of the new formatters. The
+trigger registration, and then its up to the dynamic extensions to
+decide whether to use the formatters or not). So a user could create a
+model with formatters, add its own text templates, compile and link it
+and then add it to Dogen and then make use of the new formatters. The
 usual constraints apply such as ABI (ensure one is using the same
 compiler as used to compile Dogen, flags, etc).
 
@@ -2392,7 +2394,7 @@ useful transformations in the future.
 
 The Dogen interface with the stitch library will also be flat, hard
 coded to these two types of transformations; this is just due to the
-structure of the meta-data tags, which are not very suitable to
+structure of the dynamic extensions, which are not very suitable to
 describe a structure like a graph.
 
 Note: we should consider using [[https://github.com/jamboree/bustache][bustache]] for this.
@@ -2866,7 +2868,7 @@ cases it may be useful to have multiple types sharing the same
 file. For instance, one may want to have all enumerations in one file,
 or all exceptions, etc.
 
-We could implement this using meta-data.
+We could implement this using dynamic extensions.
 
 *** Canned tests rely on copy constructors rather than cloning        :story:
 
@@ -2916,7 +2918,8 @@ We should add export macros for shared objects/DLLs:
 
 There is also a GCC equivalent explained [[http://pic.dhe.ibm.com/infocenter/tpfhelp/current/index.jsp?topic%3D%252Fcom.ibm.ztpf-ztpfdf.doc_put.cur%252Fgtpl2%252Fexport.html][here]].
 
-We should have some meta-data to control the outputting of these.
+We should have some dynamic extensions to control the outputting of
+these.
 
 *** Generate Visual Studio solutions                                  :story:
 
@@ -3006,7 +3009,7 @@ enumerations because they do not model my problem domain accurately.
 
 At present all enumerations must have an invalid value. One can
 conceive cases where that is not a useful thing. We should have a
-meta-data flag that disables it.
+dynamic extension flag that disables it.
 
 *** Bitmask enumeration                                               :story:
 
@@ -3015,9 +3018,9 @@ meta-data flag that disables it.
 dogen so that I don't have to create it manually.
 #+end_quote
 
-We should have a meta-data flag that generates enumerators with values
-that are powers of two. These can then be used for flags, as per the
-[[*Add%20support%20for%20bitsets][bitset story]].
+We should have a dynamic extension flag that generates enumerators
+with values that are powers of two. These can then be used for flags,
+as per the [[*Add%20support%20for%20bitsets][bitset story]].
 
 *** Replace Boolean attributes with flags                             :story:
 
@@ -3027,7 +3030,7 @@ set of utility methods to access the values.
 
 This story has a dependency on [[*Add%20support%20for%20bitsets][bitset support]].
 
-*** Support for file level comments via meta-data                     :story:
+*** Support for file level comments via dynamic extensions            :story:
 
 #+begin_quote
 *Story*: As a dogen user, I may want to add comments at the file level
@@ -3083,7 +3086,7 @@ However, one day we will have a system model which is a Language
 Agnostic Model (LAM). The system model will provide a base set of
 functionality across languages such as containers, and for each type
 it will have mappings to language specific types. The mapping is
-declared as meta-data in the appropriate section
+declared as dynamic extensions in the appropriate section
 (i.e. =tags::cpp::mapped_type= or something of that ilk). If a model
 depends only on LAMs, it is itself a LAM and can be used to generate
 code on any supported language (presumably a supported language is
@@ -3275,9 +3278,9 @@ possible:
   mode). We could then say to clang: read current state of the file,
   grab every non-generated method and copy them across to the newly
   code generated file. Merging could be the final stage before
-  writing. In addition, we should also have some meta-data to
-  determine which files require merging. The meta-data could be
-  populated automatically (e.g. grep for the manual attribute) or
+  writing. In addition, we should also have some dynamic extensions to
+  determine which files require merging. The dynamic extension could
+  be populated automatically (e.g. grep for the manual attribute) or
   manually.
 
 *Random Thoughts*
@@ -3285,7 +3288,7 @@ possible:
 - include management with be a mix of manual versus automatically
   generated. This is not possible because there will be no way to
   determine which one is which. To solve this problem we need to allow
-  users to add include files from the meta-data and get those
+  users to add include files from the dynamic extensions and get those
   processed like all the other includes. In the new world this means
   adding includes to the formatter settings. These are local
   settings. As at present, we cannot identify a use case for adding an
@@ -3333,7 +3336,7 @@ we need to disable CMake generation and do it by hand. However:
 - for well-known dependencies such as boost we could create a
   convention (e.g. assume/require that the CMake boost libraries flags
   are set via find boost)
-- for user level dependencies we should add meta-data tags at the
+- for user level dependencies we should add dynamic extensions at the
   model level.
 
 *** Test data generator does not detect cycles in object graph        :story:
@@ -4103,9 +4106,9 @@ specific parameters that tells dogen what valid values an enumerator
 can have. We can then generate a from string method that does the
 appropriate conversions.
 
-These should be passed in as meta-data. At present enumerators do not
-have meta-data support so we need to add it too (e.g. add the concept
-to them).
+These should be passed in as dynamic extensions. At present
+enumerators do not have dynamic extensions support so we need to add
+it too (e.g. add the concept to them).
 
 *** Enumeration string dumps could be configurable                    :story:
 
@@ -4114,10 +4117,10 @@ to them).
 enumerations so that I can adapt it to my requirements..
 #+end_quote
 
-It should be possible to pass in a string value as meta-data that
-tells dogen what string to use for debug dumping. At present
-enumerators do not have meta-data support so we need to add it too
-(e.g. add the concept to them).
+It should be possible to pass in a string value as a dynamic extension
+that tells dogen what string to use for debug dumping. At present
+enumerators do not have dynamic extensions support so we need to add
+it too (e.g. add the concept to them).
 
 *** Add is comparable to SML                                          :story:
 
@@ -4306,7 +4309,7 @@ mean that some tests will fail until a feature is finished (or that
 the developer will have to continuously rebase the dogen models), but
 the advantages are important.
 
-*** Add a property for the model name as meta-data                    :story:
+*** Add a property for the model name as dynamic extensions           :story:
 
 #+begin_quote
 *Story*: As a dogen user in a constrained environment, I am forced to
@@ -4318,12 +4321,12 @@ It would be nice to be able to generate a model with a name other than
 the diagram file. We should have a command line option for this that
 overrides the default diagram name.
 
-This could also be supplied as part of the meta-data. The command line
-option is useful when we want to use the same diagram to test
+This could also be supplied as part of dynamic extensions. The command
+line option is useful when we want to use the same diagram to test
 different aspects of the generation, as we do with the tests. The
-meta-data option is useful when we don't want the file name to have
-the full name of the model. Can't think of a good reason for this so
-perhaps this is not a valid use case.
+dynamic extensions option is useful when we don't want the file name
+to have the full name of the model. Can't think of a good reason for
+this so perhaps this is not a valid use case.
 
 *** Add camel case option                                             :story:
 
@@ -4429,11 +4432,11 @@ all code that makes use of these typedefs when when its trivial code.
   another type of relationship to model this, as well as another type
   of file in tags; the file would then have several Boolean flags one
   can tick such as =std_shared_ptr=, =boost_shared_ptr= and so on.
-- it should also be possible to add some meta-data to an attribute and
-  get it to generate a typedef, e.g. cpp.typedef = "xyz" would result
-  in the creation of typedef xyz using the type of the attribute;
-  getters, setters and property would then be declared with the
-  typedef.
+- it should also be possible to add some dynamic extensions to an
+  attribute and get it to generate a typedef, e.g. cpp.typedef = "xyz"
+  would result in the creation of typedef xyz using the type of the
+  attribute; getters, setters and property would then be declared with
+  the typedef.
 
 *** Automatic typedef generation                                      :story:
 
@@ -4950,7 +4953,7 @@ enumerations so that I model my domain accurately.
 
 At present our enumerations always use unsigned int as the underlying
 type. It should be possible to override that from dia. We could do
-this by supplying a type on the meta-data.
+this by supplying a type via dynamic extensions.
 
 *** Add test model for disabling XML                                  :story:
 
@@ -4966,7 +4969,7 @@ depend only on the forward declarations.
 At present we are using IO state savers but not actually setting the
 formatting on the stream depending on the primitive type.
 
-Ideally we should pass in some meta-data to determine the
+Ideally we should pass in some dynamic extensions to determine the
 formatting. We should also consider using =boost::format= for this.
 
 *** Add support for protected attributes                              :story:

@@ -17,14 +17,14 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-27 Tue 23:41]
+Clock summary at [2015-01-28 Wed 00:01]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *17:23* |       |      |
+| *Total time*                                                     | *17:38* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Active                                                           |         | 17:23 |      |
-| STARTED Sprint and product backlog grooming                      |         |       | 1:46 |
+| Active                                                           |         | 17:38 |      |
+| STARTED Sprint and product backlog grooming                      |         |       | 2:01 |
 | COMPLETED Add annotation fields and remove meta-data usage       |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                 |         |       | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false              |         |       | 0:05 |
@@ -39,6 +39,7 @@ Clock summary at [2015-01-27 Tue 23:41]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-27 Tue 23:46]--[2015-01-28 Wed 00:01] =>  0:15
     CLOCK: [2015-01-26 Mon 19:36]--[2015-01-26 Mon 19:59] =>  0:23
     CLOCK: [2015-01-21 Wed 23:30]--[2015-01-21 Wed 23:36] =>  0:06
     CLOCK: [2015-01-21 Wed 23:07]--[2015-01-21 Wed 23:13] =>  0:06
