@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-28 Wed 21:55]
+Clock summary at [2015-01-28 Wed 22:29]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *20:00* |       |      |
+| *Total time*                                                          | *20:27* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 20:00 |      |
+| Active                                                                |         | 20:27 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 2:01 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                      |         |       | 1:09 |
@@ -37,7 +37,8 @@ Clock summary at [2015-01-28 Wed 21:55]
 | COMPLETED Update facet settings factory to use dynamic object         |         |       | 1:17 |
 | COMPLETED Delete tags class in SML                                    |         |       | 0:22 |
 | COMPLETED Create a container of field definitions in field definition |         |       | 1:15 |
-| STARTED Remove optionality from =obtain_field_definition=             |         |       | 1:07 |
+| STARTED Remove optionality from =obtain_field_definition=             |         |       | 1:33 |
+| STARTED Add "model types"                                             |         |       | 0:01 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -296,7 +297,8 @@ Notes:
   when the scope is invalid, e.g. which field are we currently
   processing.
 
-*** Add "model types"                                                 :story:
+*** STARTED Add "model types"                                         :story:
+    CLOCK: [2015-01-28 Wed 22:27]--[2015-01-28 Wed 22:28] =>  0:01
 
 At present we have a number of dynamic extensions that exist purely to
 deal with non-dogen models:

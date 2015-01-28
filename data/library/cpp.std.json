@@ -242,8 +242,7 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "memory",
-                "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
@@ -253,8 +252,7 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "memory",
-                "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
@@ -264,18 +262,14 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.file_name" : "memory",
-                "cpp.types.class_header_formatter.is_system" : true,
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "function",
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "functional",
-                "cpp.hash.standard.status" : "unsupported",
-                "cpp.test_data.status" : "unsupported",
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.file_name" : "functional"
             }
         },
         {
@@ -283,16 +277,14 @@
             "simple_name" : "optional",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.file_name" : "functional",
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.file_name" : "functional"
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "ostream",
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "ostream",
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.file_name" : "ostream"
             }
         }
     ]

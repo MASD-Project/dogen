@@ -72,10 +72,7 @@
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/asio/ip/tcp.hpp",
-                "cpp.hash.standard.status" : "unsupported",
-                "cpp.test_data.status" : "unsupported",
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.file_name" : "boost/asio/ip/tcp.hpp"
             }
         },
         {
@@ -85,10 +82,7 @@
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/asio/ip/tcp.hpp",
-                "cpp.hash.standard.status" : "unsupported",
-                "cpp.test_data.status" : "unsupported",
-                "cpp.serialization.class_header_formatter.status" : "unsupported"
+                "cpp.types.class_header_formatter.file_name" : "boost/asio/ip/tcp.hpp"
             }
         },
         {
