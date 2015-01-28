@@ -77,6 +77,12 @@ struct field_definitions {
          * @brief File name override to apply.
          */
         static const dynamic::field_definition& file_name();
+
+        /**
+         * @brief If true, the overridden file name is in system
+         * includes.
+         */
+        static const dynamic::field_definition& is_system();
     };
 
     /**

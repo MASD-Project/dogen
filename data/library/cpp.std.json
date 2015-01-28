@@ -10,8 +10,8 @@
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
@@ -21,8 +21,8 @@
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
@@ -31,8 +31,8 @@
             "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -42,8 +42,8 @@
             "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -53,8 +53,8 @@
             "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -64,8 +64,8 @@
             "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -75,8 +75,8 @@
             "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -86,8 +86,8 @@
             "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.header_file.file_name" : "cstdint",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "cstdint",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -96,8 +96,8 @@
             "simple_name" : "string",
             "extensions" : {
                 "cpp.type.family" : "string",
-                "cpp.types.header_file.file_name" : "string",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "string",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file.file_name" : "boost/serialization/string.hpp",
                 "cpp.serialization.boost.header_file.is_system" : true
             }
@@ -108,8 +108,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.header_file.file_name" : "vector",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "vector",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file.file_name" : "boost/serialization/vector.hpp",
                 "cpp.serialization.boost.header_file.is_system" : true
             }
@@ -120,8 +120,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.header_file.file_name" : "deque",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "deque",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/deque.hpp",
                 "cpp.serialization.boost.header_file_file.is_system" : true
             }
@@ -132,8 +132,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.header_file.file_name" : "array",
-                "cpp.types.header_file.is_system" : true
+                "cpp.types.class_header_formatter.file_name" : "array",
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
@@ -142,8 +142,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.header_file.file_name" : "list",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "list",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/list.hpp",
                 "cpp.serialization.boost.header_file_file.is_system" : true
             }
@@ -154,8 +154,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.header_file.file_name" : "forward_list",
-                "cpp.types.header_file.is_system" : true
+                "cpp.types.class_header_formatter.file_name" : "forward_list",
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
@@ -164,8 +164,8 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.header_file.file_name" : "set",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "set",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/set.hpp",
                 "cpp.serialization.boost.header_file_file.is_system" : true
             }
@@ -176,8 +176,8 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.header_file.file_name" : "multiset",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "multiset",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/multiset.hpp",
                 "cpp.serialization.boost.header_file_file.is_system" : true
             }
@@ -188,8 +188,8 @@
             "object_type" : "hash_container",
             "extensions" : {
                 "cpp.type.family" : "hash_container",
-                "cpp.types.header_file.file_name" : "unordered_set",
-                "cpp.types.header_file.is_system" : true
+                "cpp.types.class_header_formatter.file_name" : "unordered_set",
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
@@ -198,7 +198,7 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.header_file.file_name" : "map",
+                "cpp.types.class_header_formatter.file_name" : "map",
                 "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/map.hpp",
                 "cpp.serialization.boost.header_file_file.is_system" : true
             }
@@ -209,8 +209,8 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.header_file.file_name" : "multimap",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "multimap",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/multimap.hpp",
                 "cpp.serialization.boost.header_file_file.is_system" : true
             }
@@ -221,16 +221,16 @@
             "object_type" : "hash_container",
             "extensions" : {
                 "cpp.type.family" : "hash_container",
-                "cpp.types.header_file.file_name" : "unordered_map",
-                "cpp.types.header_file.is_system" : true
+                "cpp.types.class_header_formatter.file_name" : "unordered_map",
+                "cpp.types.class_header_formatter.is_system" : true
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "pair",
             "extensions" : {
-                "cpp.types.header_file.file_name" : "pair",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "pair",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.header_file_file.file_name" : "boost/serialization/pair.hpp",
                 "cpp.serialization.boost.header_file_file.is_system" : true
             }
@@ -241,8 +241,8 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.header_file.file_name" : "memory",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "memory",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.status" : "unsupported"
             }
         },
@@ -252,8 +252,8 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.header_file.file_name" : "memory",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "memory",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.status" : "unsupported"
             }
         },
@@ -263,8 +263,8 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.header_file.file_name" : "memory",
-                "cpp.types.header_file.is_system" : true,
+                "cpp.types.class_header_formatter.file_name" : "memory",
+                "cpp.types.class_header_formatter.is_system" : true,
                 "cpp.serialization.boost.status" : "unsupported"
             }
         },
@@ -272,7 +272,7 @@
             "meta_type" : "object",
             "simple_name" : "function",
             "extensions" : {
-                "cpp.types.header_file.file_name" : "functional",
+                "cpp.types.class_header_formatter.file_name" : "functional",
                 "cpp.hash.standard.status" : "unsupported",
                 "cpp.test_data.status" : "unsupported",
                 "cpp.serialization.boost.status" : "unsupported"
@@ -283,7 +283,7 @@
             "simple_name" : "optional",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.header_file.file_name" : "functional",
+                "cpp.types.class_header_formatter.file_name" : "functional",
                 "cpp.serialization.boost.status" : "unsupported"
             }
         },
@@ -291,7 +291,7 @@
             "meta_type" : "object",
             "simple_name" : "ostream",
             "extensions" : {
-                "cpp.types.header_file.file_name" : "ostream",
+                "cpp.types.class_header_formatter.file_name" : "ostream",
                 "cpp.serialization.boost.status" : "unsupported"
             }
         }

@@ -104,7 +104,19 @@ dogen::dynamic::field_definition create_class_header_formatter_file_name() {
     r.ownership_hierarchy().facet(facet_name);
     r.ownership_hierarchy().formatter(class_header_formatter_name);
     r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
+    r.scope(dogen::dynamic::scope_types::entity);
+    return r;
+}
+
+dogen::dynamic::field_definition create_class_header_formatter_is_system() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("is_system");
+    r.name().qualified("cpp.hash.class_header_formatter.is_system");
+    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().facet(facet_name);
+    r.ownership_hierarchy().formatter(class_header_formatter_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::entity);
     return r;
 }
 
@@ -203,6 +215,7 @@ create_all_field_definitions() {
     r.push_front(chf::enabled());
     r.push_front(chf::postfix());
     r.push_front(chf::file_name());
+    r.push_front(chf::is_system());
 
     using cif = fd::class_implementation_formatter;
     r.push_front(cif::postfix());
@@ -261,6 +274,12 @@ field_definitions::class_header_formatter::postfix() {
 const dynamic::field_definition&
 field_definitions::class_header_formatter::file_name() {
     static auto r(create_class_header_formatter_file_name());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::class_header_formatter::is_system() {
+    static auto r(create_class_header_formatter_is_system());
     return r;
 }
 
