@@ -122,6 +122,28 @@ dogen::dynamic::field_definition create_enable_unique_file_names() {
     return r;
 }
 
+dogen::dynamic::field_definition create_type_family() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("family");
+    r.name().qualified("cpp.type.family");
+    r.ownership_hierarchy().model(model_name);
+    r.type(dogen::dynamic::value_types::text);
+    r.scope(dogen::dynamic::scope_types::entity);
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_type_requires_manual_default_constructor() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("requires_manual_default_constructor");
+    r.name().qualified("cpp.types.requires_manual_default_constructor");
+    r.ownership_hierarchy().model(model_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::entity);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(false));
+    return r;
+}
+
 std::forward_list<dogen::dynamic::field_definition>
 create_all_field_definitions() {
     using dogen::dynamic::field_definition;
@@ -188,6 +210,17 @@ const dynamic::field_definition& field_definitions::enable_facet_folders() {
 
 const dynamic::field_definition& field_definitions::enable_unique_file_names() {
     static auto r(create_enable_unique_file_names());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::type::family() {
+    static auto r(create_type_family());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::type::requires_manual_default_constructor() {
+    static auto r(create_type_requires_manual_default_constructor());
     return r;
 }
 

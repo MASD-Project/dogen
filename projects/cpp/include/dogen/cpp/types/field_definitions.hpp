@@ -96,6 +96,23 @@ struct field_definitions {
      * This is achieved by using the facet's postfix.
      */
     static const dynamic::field_definition& enable_unique_file_names();
+
+    /**
+     * @brief Dynamic properties that belong to the type itself.
+     */
+    struct type {
+        /**
+         * @brief To which family does the type belong to.
+         */
+        static const dynamic::field_definition& family();
+
+        /**
+         * @brief If true, a manual default constructor must be
+         * generated for this type.
+         */
+        static const dynamic::field_definition&
+        requires_manual_default_constructor();
+    };
 };
 
 } }
