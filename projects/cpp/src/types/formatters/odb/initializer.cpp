@@ -28,18 +28,8 @@ namespace formatters {
 namespace odb {
 
 void register_field_definitions() {
-    auto& reg(dynamic::workflow::registrar());
-
-    using fd = field_definitions;
-    reg.register_field_definition(fd::enabled());
-    reg.register_field_definition(fd::directory());
-    reg.register_field_definition(fd::postfix());
-
-    using chf = fd::class_header_formatter;
-    reg.register_field_definition(chf::enabled());
-    reg.register_field_definition(chf::postfix());
-
-    reg.register_field_definition(fd::odb_pragma());
+    auto& rg(dynamic::workflow::registrar());
+    rg.register_field_definitions(field_definitions::all_field_definitions());
 }
 
 void initializer::initialize(registrar& /*rg*/) {

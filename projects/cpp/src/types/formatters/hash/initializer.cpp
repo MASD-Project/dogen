@@ -29,9 +29,8 @@ namespace formatters {
 namespace hash {
 
 void register_field_definitions() {
-    auto& reg(dynamic::workflow::registrar());
-    using fd = field_definitions;
-    reg.register_field_definitions(fd::all_field_definitions());
+    auto& rg(dynamic::workflow::registrar());
+    rg.register_field_definitions(field_definitions::all_field_definitions());
 }
 
 void initializer::initialize(registrar& /*rg*/) {

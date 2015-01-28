@@ -26,17 +26,9 @@ namespace dogen {
 namespace formatters {
 
 void initializer::initialize() {
-    auto& rg(dynamic::workflow::registrar());
-
-    rg.register_field_definition(field_definitions::copyright_notices());
-    rg.register_field_definition(field_definitions::licence_name());
-    rg.register_field_definition(field_definitions::modeline_group_name());
-    rg.register_field_definition(field_definitions::generate_preamble());
-
-    using cgm = field_definitions::code_generation_marker;
-    rg.register_field_definition(cgm::add_date_time());
-    rg.register_field_definition(cgm::add_warning());
-    rg.register_field_definition(cgm::message());
+    auto& reg(dynamic::workflow::registrar());
+    using fd = field_definitions;
+    reg.register_field_definitions(fd::all_field_definitions());
 }
 
 } }

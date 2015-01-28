@@ -108,12 +108,35 @@ dogen::dynamic::field_definition create_odb_pragma() {
     return r;
 }
 
+std::forward_list<dogen::dynamic::field_definition>
+create_all_field_definitions() {
+    using dogen::dynamic::field_definition;
+    std::forward_list<field_definition> r;
+
+    using fd = dogen::cpp::formatters::odb::field_definitions;
+    r.push_front(fd::enabled());
+    r.push_front(fd::directory());
+    r.push_front(fd::postfix());
+
+    using chf = fd::class_header_formatter;
+    r.push_front(chf::enabled());
+    r.push_front(chf::postfix());
+    r.push_front(fd::odb_pragma());
+    return r;
+}
+
 }
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace odb {
+
+const std::forward_list<dynamic::field_definition>&
+field_definitions::all_field_definitions() {
+    static auto r(create_all_field_definitions());
+    return r;
+}
 
 const dynamic::field_definition& field_definitions::enabled() {
     static auto r(create_enabled());

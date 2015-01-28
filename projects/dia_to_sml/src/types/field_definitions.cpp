@@ -57,7 +57,6 @@ create_all_field_definitions() {
     return r;
 }
 
-
 }
 
 namespace dogen {

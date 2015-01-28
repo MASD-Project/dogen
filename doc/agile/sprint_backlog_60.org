@@ -17,27 +17,27 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-28 Wed 10:15]
+Clock summary at [2015-01-28 Wed 12:56]
 
-| Headline                                                            | Time    |       |      |
-|---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *18:38* |       |      |
-|---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 18:38 |      |
-| STARTED Sprint and product backlog grooming                         |         |       | 2:01 |
-| COMPLETED Add annotation fields and remove meta-data usage          |         |       | 2:15 |
-| COMPLETED Add field definition to odb formatters                    |         |       | 1:09 |
-| COMPLETED Consider defaulting doxygen docs to false                 |         |       | 0:05 |
-| COMPLETED Refactor hierarchy ownership of fields                    |         |       | 1:03 |
-| COMPLETED Create field definitions for all c++ fields               |         |       | 4:55 |
-| COMPLETED Add default value support to dynamic field definitions    |         |       | 0:35 |
-| COMPLETED Update c++ settings factory to use dynamic object         |         |       | 1:34 |
-| COMPLETED Update mock factory to generate dynamic fields            |         |       | 1:56 |
-| COMPLETED Rename namespace =meta-data= to =dynamic=                 |         |       | 0:26 |
-| COMPLETED Update facet settings factory to use dynamic object       |         |       | 1:17 |
-| COMPLETED Delete tags class in SML                                  |         |       | 0:22 |
-| STARTED Remove optionality from =obtain_field_definition=           |         |       | 0:08 |
-| STARTED Create a container of field definitions in field definition |         |       | 0:52 |
+| Headline                                                              | Time    |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                          | *19:01* |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| Active                                                                |         | 19:01 |      |
+| STARTED Sprint and product backlog grooming                           |         |       | 2:01 |
+| COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
+| COMPLETED Add field definition to odb formatters                      |         |       | 1:09 |
+| COMPLETED Consider defaulting doxygen docs to false                   |         |       | 0:05 |
+| COMPLETED Refactor hierarchy ownership of fields                      |         |       | 1:03 |
+| COMPLETED Create field definitions for all c++ fields                 |         |       | 4:55 |
+| COMPLETED Add default value support to dynamic field definitions      |         |       | 0:35 |
+| COMPLETED Update c++ settings factory to use dynamic object           |         |       | 1:34 |
+| COMPLETED Update mock factory to generate dynamic fields              |         |       | 1:56 |
+| COMPLETED Rename namespace =meta-data= to =dynamic=                   |         |       | 0:26 |
+| COMPLETED Update facet settings factory to use dynamic object         |         |       | 1:17 |
+| COMPLETED Delete tags class in SML                                    |         |       | 0:22 |
+| COMPLETED Create a container of field definitions in field definition |         |       | 1:15 |
+| STARTED Remove optionality from =obtain_field_definition=             |         |       | 0:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -256,15 +256,9 @@ responsible for their own tags.
 
 Can only be done once we delete writer and reader.
 
-*** STARTED Remove optionality from =obtain_field_definition=         :story:
-    CLOCK: [2015-01-28 Wed 08:23]--[2015-01-28 Wed 08:27] =>  0:04
-    CLOCK: [2015-01-27 Tue 23:42]--[2015-01-27 Tue 23:46] =>  0:04
-
-In order to progress in stages we made fields optional in dynamic
-workflow; if a definition is not found we skip it. We need to remove
-this once all field definitions have been added.
-
-*** STARTED Create a container of field definitions in field definition :story:
+*** COMPLETED Create a container of field definitions in field definition :story:
+    CLOSED: [2015-01-28 Wed 12:56]
+    CLOCK: [2015-01-28 Wed 12:33]--[2015-01-28 Wed 12:56] =>  0:23
     CLOCK: [2015-01-28 Wed 08:27]--[2015-01-28 Wed 09:19] =>  0:52
 
 It would be good if we could just return all field definitions in one
@@ -278,6 +272,14 @@ We could use =std::reference_wrapper= for this.
 Note: reference wrapper was just too cumbersome. As the fields are
 expected to be initialised once and reused for the life time of the
 run, this is probably not needed just yet.
+
+*** STARTED Remove optionality from =obtain_field_definition=         :story:
+    CLOCK: [2015-01-28 Wed 08:23]--[2015-01-28 Wed 08:27] =>  0:04
+    CLOCK: [2015-01-27 Tue 23:42]--[2015-01-27 Tue 23:46] =>  0:04
+
+In order to progress in stages we made fields optional in dynamic
+workflow; if a definition is not found we skip it. We need to remove
+this once all field definitions have been added.
 
 *** Dynamic workflow is recreated for every model                     :story:
 

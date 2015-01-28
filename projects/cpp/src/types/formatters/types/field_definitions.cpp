@@ -248,12 +248,56 @@ create_visitor_header_formatter_postfix() {
     return r;
 }
 
+std::forward_list<dogen::dynamic::field_definition>
+create_all_field_definitions() {
+    using dogen::dynamic::field_definition;
+    std::forward_list<field_definition> r;
+
+    using fd = dogen::cpp::formatters::types::field_definitions;
+    r.push_front(fd::enabled());
+    r.push_front(fd::directory());
+    r.push_front(fd::postfix());
+
+    using chf = fd::class_header_formatter;
+    r.push_front(chf::enabled());
+    r.push_front(chf::postfix());
+    r.push_front(chf::file_name());
+
+    using cif = fd::class_implementation_formatter;
+    r.push_front(cif::postfix());
+    r.push_front(cif::enabled());
+
+    using ehf = fd::enumeration_header_formatter;
+    r.push_front(ehf::postfix());
+    r.push_front(ehf::enabled());
+
+    using exhf = fd::exception_header_formatter;
+    r.push_front(exhf::postfix());
+    r.push_front(exhf::enabled());
+
+    using nhf = fd::namespace_header_formatter;
+    r.push_front(nhf::postfix());
+    r.push_front(nhf::enabled());
+
+    using vhf = fd::visitor_header_formatter;
+    r.push_front(vhf::postfix());
+    r.push_front(vhf::enabled());
+
+    return r;
+}
+
 }
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+const std::forward_list<dynamic::field_definition>&
+field_definitions::all_field_definitions() {
+    static auto r(create_all_field_definitions());
+    return r;
+}
 
 const dynamic::field_definition& field_definitions::enabled() {
     static auto r(create_enabled());

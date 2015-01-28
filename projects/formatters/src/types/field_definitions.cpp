@@ -96,10 +96,35 @@ dogen::dynamic::field_definition create_message() {
     return r;
 }
 
+std::forward_list<dogen::dynamic::field_definition>
+create_all_field_definitions() {
+    using dogen::dynamic::field_definition;
+    std::forward_list<field_definition> r;
+
+    using fd = dogen::formatters::field_definitions;
+    r.push_front(fd::copyright_notices());
+    r.push_front(fd::licence_name());
+    r.push_front(fd::modeline_group_name());
+    r.push_front(fd::generate_preamble());
+
+    using cgm = fd::code_generation_marker;
+    r.push_front(cgm::add_date_time());
+    r.push_front(cgm::add_warning());
+    r.push_front(cgm::message());
+
+    return r;
+}
+
 }
 
 namespace dogen {
 namespace formatters {
+
+const std::forward_list<dynamic::field_definition>&
+field_definitions::all_field_definitions() {
+    static auto r(create_all_field_definitions());
+    return r;
+}
 
 const dynamic::field_definition& field_definitions::copyright_notices() {
     static auto r(create_copyright_notices());

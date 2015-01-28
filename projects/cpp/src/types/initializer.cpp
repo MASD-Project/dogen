@@ -25,18 +25,13 @@
 #include "dogen/cpp/types/formatters/initializer.hpp"
 #include "dogen/cpp/types/initializer.hpp"
 
-namespace {
+namespace dogen {
+namespace cpp {
 
 void register_field_definitions() {
     auto& rg(dogen::dynamic::workflow::registrar());
-    using fd = dogen::cpp::field_definitions;
-    rg.register_field_definitions(fd::all_field_definitions());
+    rg.register_field_definitions(field_definitions::all_field_definitions());
 }
-
-}
-
-namespace dogen {
-namespace cpp {
 
 void initializer::initialize() {
     register_field_definitions();

@@ -26,8 +26,8 @@ namespace dogen {
 namespace dia_to_sml {
 
 void initializer::initialize() {
-    auto& reg(dynamic::workflow::registrar());
-    reg.register_field_definitions(field_definitions::all_field_definitions());
+    auto& rg(dynamic::workflow::registrar());
+    rg.register_field_definitions(field_definitions::all_field_definitions());
 }
 
 } }

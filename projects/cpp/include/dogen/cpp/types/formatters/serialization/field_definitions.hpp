@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <forward_list>
 #include "dogen/dynamic/types/field_definition.hpp"
 
 namespace dogen {
@@ -36,6 +37,13 @@ namespace serialization {
  * @brief Fields supported by the serialization facet and its formatters.
  */
 struct field_definitions {
+    /**
+     * @brief Returns all the field definitions available in this
+     * class.
+     */
+    static const std::forward_list<dynamic::field_definition>&
+    all_field_definitions();
+
     /**
      * @brief If set to false, the facet will not be generated.
      */
