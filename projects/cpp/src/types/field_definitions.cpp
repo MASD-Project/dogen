@@ -149,15 +149,20 @@ create_all_field_definitions() {
     using dogen::dynamic::field_definition;
     std::forward_list<field_definition> r;
 
-    using dogen::cpp::field_definitions;
-    r.push_front(field_definitions::enabled());
-    r.push_front(field_definitions::split_project());
-    r.push_front(field_definitions::source_directory());
-    r.push_front(field_definitions::include_directory());
-    r.push_front(field_definitions::header_file_extension());
-    r.push_front(field_definitions::implementation_file_extension());
-    r.push_front(field_definitions::enable_facet_folders());
-    r.push_front(field_definitions::enable_unique_file_names());
+    using fd = dogen::cpp::field_definitions;
+    r.push_front(fd::enabled());
+    r.push_front(fd::split_project());
+    r.push_front(fd::source_directory());
+    r.push_front(fd::include_directory());
+    r.push_front(fd::header_file_extension());
+    r.push_front(fd::implementation_file_extension());
+    r.push_front(fd::enable_facet_folders());
+    r.push_front(fd::enable_unique_file_names());
+
+    using type = dogen::cpp::field_definitions::type;
+    r.push_front(type::family());
+    r.push_front(type::requires_manual_default_constructor());
+
     return r;
 }
 
