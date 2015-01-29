@@ -92,9 +92,8 @@ obtain_field_definition(const std::string& complete_name,
             BOOST_LOG_SEV(lg, error) << field_definition_not_found
                                      << complete_name;
 
-            // FIXME
-            // BOOST_THROW_EXCEPTION(workflow_error(
-            //         field_definition_not_found + complete_name));
+            BOOST_THROW_EXCEPTION(workflow_error(
+                    field_definition_not_found + complete_name));
             return boost::optional<field_definition>();
         }
 

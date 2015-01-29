@@ -112,6 +112,14 @@ struct field_definitions {
          */
         static const dynamic::field_definition&
         requires_manual_default_constructor();
+
+
+        /**
+         * @brief If true, a manual move constructor must be generated
+         * for this type.
+         */
+        static const dynamic::field_definition&
+        requires_manual_move_constructor();
     };
 };
 

@@ -59,10 +59,7 @@
                 "asio"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/asio/io_service.hpp",
-                "cpp.hash.supported" : false,
-                "cpp.test_data.supported" : false,
-                "cpp.serialization.supported" : false
+                "cpp.types.class_header_formatter.file_name" : "boost/asio/io_service.hpp"
             }
         },
         {
@@ -104,7 +101,7 @@
             ],
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/gregorian/gregorian_types.hpp",
-                "cpp.io.header_file.file_name" : "boost/date_time/gregorian/gregorian.hpp",
+                "cpp.io.class_header_formatter.file_name" : "boost/date_time/gregorian/gregorian.hpp",
                 "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/gregorian/greg_serialize.hpp"
             }
         },
@@ -117,7 +114,7 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
                 "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
-                "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp"
+                "cpp.io.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
         {
@@ -129,7 +126,7 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
                 "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
-                "cpp.io.header_file.file_name" : "boost/date_time/posix_time/posix_time.hpp"
+                "cpp.io.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
         {
@@ -141,7 +138,7 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.file_name" : "boost/property_tree/ptree.hpp",
                 "cpp.serialization.class_header_formatter.file_name" : "boost/property_tree/ptree_serialization.hpp",
-                "cpp.io.header_file.file_name" : "boost/property_tree/json_parser.hpp"
+                "cpp.io.class_header_formatter.file_name" : "boost/property_tree/json_parser.hpp"
             }
         }
     ]

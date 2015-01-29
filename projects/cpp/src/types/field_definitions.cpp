@@ -136,7 +136,19 @@ dogen::dynamic::field_definition
 create_type_requires_manual_default_constructor() {
     dogen::dynamic::field_definition r;
     r.name().simple("requires_manual_default_constructor");
-    r.name().qualified("cpp.types.requires_manual_default_constructor");
+    r.name().qualified("cpp.type.requires_manual_default_constructor");
+    r.ownership_hierarchy().model(model_name);
+    r.type(dogen::dynamic::value_types::boolean);
+    r.scope(dogen::dynamic::scope_types::entity);
+    r.default_value(boost::make_shared<dogen::dynamic::boolean>(false));
+    return r;
+}
+
+dogen::dynamic::field_definition
+create_type_requires_manual_move_constructor() {
+    dogen::dynamic::field_definition r;
+    r.name().simple("requires_manual_move_constructor");
+    r.name().qualified("cpp.type.requires_manual_move_constructor");
     r.ownership_hierarchy().model(model_name);
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::entity);
@@ -162,6 +174,7 @@ create_all_field_definitions() {
     using type = dogen::cpp::field_definitions::type;
     r.push_front(type::family());
     r.push_front(type::requires_manual_default_constructor());
+    r.push_front(type::requires_manual_move_constructor());
 
     return r;
 }
@@ -226,6 +239,12 @@ const dynamic::field_definition& field_definitions::type::family() {
 const dynamic::field_definition&
 field_definitions::type::requires_manual_default_constructor() {
     static auto r(create_type_requires_manual_default_constructor());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::type::requires_manual_move_constructor() {
+    static auto r(create_type_requires_manual_move_constructor());
     return r;
 }
 
