@@ -495,26 +495,30 @@ The C++ backend defines the following facets:
 
 ****** Design and evolution of the C++ backend
 
-First we must start by saying that the objective of the =cpp= model is
-*not* to model the C++ type system. This approach has been tried: a
-model was created that was extremely faithful to the C++ language and
-where the types where taken directly from the names defined in ISO/IEC
-14882:2011(E). The idea was that one could express all the intricacies
-of the code to generate in this model and then use a simple formatter
-to just dump it as code - Clang infrastructure could easily be used to
-do so. Of course, taking an SML model and converting it into an AST
-was found to be non-trivial, particularly when one considered all the
-required behaviours such as serialisation, hashing and so on. So it
-was that we settled on building a model at a much higher level than
-the AST.
+Whilst the purpose of the C++ backend is to generate standard's
+compliant C++ code, it is important to note that the Dogen's =cpp=
+model is *not* a model of the C++ type system. This approach was
+indeed tried, with a model that had types taken directly from =ISO/IEC
+14882:2011(E)= - an approach rather close to an AST representation of
+the language. The idea was that one could express all the intricacies
+of the code to generate via the constructs of this model and then,
+using a single formatter, write it according to the grammar of the
+language. The Clang infrastructure was a suitable candidate for
+implementing this kind of formatter.
 
-Instead, the =cpp= model is designed to provide =cpp_formatters= with
-/exactly/ the data they need, such that all the complicated logic
-related to the domain is abstracted away from them - entity
-composition, relationships between the entities and so on. Informally,
-we tend to call these high-level C++ types the "view models" and the
-formatters the "views" because the approach is extremely similar to
-the Presentation Model described by Martin Fowler.
+In practice, we found that expressing code in such low-level fashion
+was non-trivial, particularly when one considered all required
+behaviours such as serialisation, hashing and so on. Instead, we
+settled on building a model at a much higher level than the AST,
+where - borrowing terminology from Microsoft's T4 - formatters are
+seen as "text templates" and the =cpp= model is designed to provide
+these text templates with /exactly/ the data they need. With this
+approach, one can abstract away all of the domain-related logic:
+entity composition, relationships between the entities and so
+on. These high-level C++ types are informally known as "view models"
+and the formatters can be thought of as "views"; the approach is
+extremely similar to MVVM or the Presentation Model as described by
+Martin Fowler.
 
 The job of a given formatter is to take a specific number of types in
 the C++ model such as =class_info= and generate corresponding C++

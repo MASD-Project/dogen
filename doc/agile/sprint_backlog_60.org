@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-29 Thu 14:32]
+Clock summary at [2015-01-29 Thu 20:50]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *23:16* |       |      |
+| *Total time*                                                          | *24:05* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 23:16 |      |
+| Active                                                                |         | 24:05 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 2:01 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                      |         |       | 1:09 |
@@ -39,6 +39,7 @@ Clock summary at [2015-01-29 Thu 14:32]
 | COMPLETED Create a container of field definitions in field definition |         |       | 1:15 |
 | COMPLETED Dynamic workflow is recreated for every model               |         |       | 1:27 |
 | COMPLETED Remove optionality from =obtain_field_definition=           |         |       | 2:50 |
+| STARTED Update meta-data section in manual                            |         |       | 0:49 |
 | STARTED Add "model types"                                             |         |       | 0:06 |
 #+end:
 
@@ -322,6 +323,12 @@ Notes:
   of work, its easier to solve the dynamic workflow re-creation story
   and just pass it in rather than the flag.
 
+*** STARTED Update meta-data section in manual                        :story:
+    CLOCK: [2015-01-29 Thu 20:01]--[2015-01-29 Thu 20:50] =>  0:49
+
+Once we are done with all of the meta-data refactoring, we need to
+update the manual.
+
 *** STARTED Add "model types"                                         :story:
     CLOCK: [2015-01-28 Wed 22:29]--[2015-01-28 Wed 22:34] =>  0:05
     CLOCK: [2015-01-28 Wed 22:27]--[2015-01-28 Wed 22:28] =>  0:01
@@ -378,10 +385,8 @@ need merging at all.
 We need to look into static initialisation and make sure the code can
 cope with it being called several times.
 
-*** Update meta-data section in manual                                :story:
-
-Once we are done with all of the meta-data refactoring, we need to
-update the manual.
+At present it seems we would re-register fields, backends, etc so
+multiple initialisation would fail.
 
 *** Add field definition description                                  :story:
 
