@@ -18,30 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_JSON_SML_FRONTEND_HPP
-#define DOGEN_FRONTEND_TYPES_JSON_SML_FRONTEND_HPP
+#ifndef DOGEN_DYNAMIC_TEST_MOCK_WORKFLOW_FACTORY_HPP
+#define DOGEN_DYNAMIC_TEST_MOCK_WORKFLOW_FACTORY_HPP
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/frontend/types/frontend_interface.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
 
 namespace dogen {
-namespace frontend {
+namespace dynamic {
+namespace test {
 
 /**
- * @brief Generates a partial SML model from a JSON file with a SML
- * format.
+ * @brief Generates "mock" workflows. In reality these are just
+ * instances of the workflow used for testing.
  */
-class json_sml_frontend final : public frontend_interface {
+class mock_workflow_factory {
 public:
-    std::string id() const override;
-    std::list<std::string> supported_extensions() const override;
-    sml::model generate(const dynamic::workflow& w, const input_descriptor& d,
-        const frontend_settings& s) override;
+    /**
+     * @brief Creates a workflow that does not throw if field
+     * instances do not have a corresponding field definition.
+     *
+     * This behaviour is useful when we do not have all of the c++
+     * field definitions and so on and it safe to ignore those.
+     */
+    static const workflow& non_validating_workflow();
 };
 
-} }
+} } }
 
 #endif

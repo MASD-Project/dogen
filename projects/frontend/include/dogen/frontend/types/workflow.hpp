@@ -28,6 +28,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/frontend/types/registrar.hpp"
 #include "dogen/frontend/types/frontend_interface.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
@@ -78,7 +79,7 @@ private:
      * @brief Given an input descriptor, creates the associated SML
      * model.
      */
-    sml::model frontend_sml_model_activity(const input_descriptor& d) const;
+    sml::model create_sml_model_activity(const input_descriptor& d) const;
 
     /**
      * @brief Checks the settings chosen by the user to determine if
@@ -98,6 +99,7 @@ public:
 private:
     static std::shared_ptr<frontend::registrar> registrar_;
     const config::knitting_settings knitting_settings_;
+    const dynamic::workflow dynamic_workflow_;
 };
 
 } }

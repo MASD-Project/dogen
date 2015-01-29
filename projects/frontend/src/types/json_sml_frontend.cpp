@@ -48,8 +48,9 @@ std::list<std::string> json_sml_frontend::supported_extensions() const {
 }
 
 sml::model json_sml_frontend::
-generate(const input_descriptor& id, const frontend_settings& /*s*/) {
-    sml::json_hydrator h;
+generate(const dynamic::workflow& w, const input_descriptor& id,
+    const frontend_settings& /*s*/) {
+    sml::json_hydrator h(w);
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << id.path();
     boost::filesystem::ifstream s(id.path());
     return h.hydrate(s);

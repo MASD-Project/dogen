@@ -56,7 +56,7 @@ public:
         const std::string model_name);
 
 public:
-    sml::nested_qname parse_qname(const std::string& n);
+    sml::nested_qname parse_qname(const std::string& n) const;
     static std::list<std::string> parse_scoped_name(const std::string& n);
     static std::list<std::string> parse_csv_string(const std::string& n);
 

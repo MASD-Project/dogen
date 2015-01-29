@@ -180,8 +180,7 @@ identifier_parser(const std::unordered_set<std::string>& modules,
     : modules_(modules), external_module_path_(external_module_path),
       model_name_(model_name) { }
 
-sml::nested_qname identifier_parser::
-parse_qname(const std::string& n) {
+sml::nested_qname identifier_parser::parse_qname(const std::string& n) const {
     std::string::const_iterator it(n.begin());
     std::string::const_iterator end(n.end());
 

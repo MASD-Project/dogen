@@ -24,7 +24,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/test/mock_workflow_factory.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -174,10 +174,13 @@ const std::string module_path_model(R"({
   }
 )");
 
+const dogen::dynamic::workflow& dynamic_workflow() {
+    using dogen::dynamic::test::mock_workflow_factory;
+    return mock_workflow_factory::non_validating_workflow();
+}
+
 dogen::sml::model hydrate(std::istream& s) {
-    // Note: we don't want to throw here as we know we are missing all
-    // of the c++ field definitions and so on. It safe to ignore those.
-    dogen::sml::json_hydrator h(false/*throw_on_missing_field_definition*/);
+    dogen::sml::json_hydrator h(dynamic_workflow());
     return h.hydrate(s);
 }
 

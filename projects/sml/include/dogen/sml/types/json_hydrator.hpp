@@ -46,14 +46,7 @@ public:
     ~json_hydrator() noexcept = default;
 
 public:
-    /**
-     * @brief Creates a new hydrator.
-     *
-     * @param throw_on_missing_field_definition If true, any dynamic
-     * extensions for which a field definition does not exist will
-     * result in an exception. If false, they will be ignored.
-     */
-    explicit json_hydrator(const bool throw_on_missing_field_definition = true);
+    explicit json_hydrator(const dynamic::workflow& dynamic_workflow);
 
 private:
     /**

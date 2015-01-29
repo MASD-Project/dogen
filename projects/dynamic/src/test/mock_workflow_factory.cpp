@@ -18,30 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_JSON_SML_FRONTEND_HPP
-#define DOGEN_FRONTEND_TYPES_JSON_SML_FRONTEND_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/frontend/types/frontend_interface.hpp"
+#include "dogen/dynamic/test/mock_workflow_factory.hpp"
 
 namespace dogen {
-namespace frontend {
+namespace dynamic {
+namespace test {
 
-/**
- * @brief Generates a partial SML model from a JSON file with a SML
- * format.
- */
-class json_sml_frontend final : public frontend_interface {
-public:
-    std::string id() const override;
-    std::list<std::string> supported_extensions() const override;
-    sml::model generate(const dynamic::workflow& w, const input_descriptor& d,
-        const frontend_settings& s) override;
-};
+const workflow& mock_workflow_factory::non_validating_workflow() {
+    static workflow r(false/*throw_on_missing_field_definition*/);
+    return r;
+}
 
-} }
-
-#endif
+} } }

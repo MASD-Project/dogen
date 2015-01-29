@@ -21,9 +21,10 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/test/asserter.hpp"
+#include "dogen/dynamic/test/mock_workflow_factory.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
@@ -130,6 +131,11 @@ dogen::sml::qname get_parent_name(const dogen::sml::object& o) {
     return i->second.front();
 }
 
+const dogen::dynamic::workflow& dynamic_workflow() {
+    using dogen::dynamic::test::mock_workflow_factory;
+    return mock_workflow_factory::non_validating_workflow();
+}
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -140,7 +146,7 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     SETUP_TEST_LOG_SOURCE("empty_named_uml_class_throws");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::build_empty_named_class());
     contains_checker<transformation_error> cc(empty_name);
     BOOST_CHECK_EXCEPTION(t.transform(po, mock_profile(po)),
@@ -151,7 +157,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_value_object");
     auto c(mock_context(model_name));
     const auto po(mock_processed_object_factory::build_class());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     t.transform(po, mock_profile(po));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
@@ -178,7 +184,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expe
     SETUP_TEST_LOG_SOURCE("uml_class_with_value_object_stereotype_transforms_into_expected_value_object");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(value_object_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -208,7 +214,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(enumeration_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -236,7 +242,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_value_object");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(exception_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -265,7 +271,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_transforms_into_expected_service");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(service_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -295,7 +301,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_transforms_into_expected_
     SETUP_TEST_LOG_SOURCE("uml_class_with_factory_stereotype_transforms_into_expected_factory");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(factory_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -324,7 +330,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_transforms_into_expect
     SETUP_TEST_LOG_SOURCE("uml_class_with_repository_stereotype_transforms_into_expected_repository");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(repository_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -353,7 +359,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_transforms_into_expe
     SETUP_TEST_LOG_SOURCE("uml_class_with_keyed_entity_stereotype_transforms_into_expected_keyed_entity");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(keyed_entity_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -382,7 +388,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_transforms_into_expected_e
     SETUP_TEST_LOG_SOURCE("uml_class_with_entity_stereotype_transforms_into_expected_entity");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(entity_stereotype);
     const auto po(mock_processed_object_factory::build_class(0, st));
     t.transform(po, mock_profile(po));
@@ -410,7 +416,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_transforms_into_expected_e
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
     auto c(mock_context(model_name));
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::build_large_package());
     t.transform(po, mock_profile(po));
 
@@ -437,7 +443,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_object");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(
         mock_processed_object_factory::build_class_inside_large_package());
     t.transform(po[0], mock_profile(po[0]));
@@ -485,7 +491,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(enumeration_stereotype);
     const auto po(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
@@ -530,7 +536,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(exception_stereotype);
     const auto po(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
@@ -576,7 +582,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_package_transforms_into_expected_service");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(service_stereotype);
     const auto po(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
@@ -623,7 +629,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_package_transforms_int
     SETUP_TEST_LOG_SOURCE("uml_class_with_factory_stereotype_in_package_transforms_into_expected_factory");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(factory_stereotype);
     const auto po(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
@@ -670,7 +676,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_package_transforms_into
     SETUP_TEST_LOG_SOURCE("uml_class_with_entity_stereotype_in_package_transforms_into_expected_entity");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(entity_stereotype);
     const auto po(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
@@ -715,7 +721,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_package_transform
     SETUP_TEST_LOG_SOURCE("uml_class_with_keyed_entity_stereotype_in_package_transforms_into_expected_keyed_entity");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(keyed_entity_stereotype);
     const auto po(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
@@ -762,7 +768,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     auto po(mock_processed_object_factory::build_class_inside_large_package());
     contains_checker<transformation_error> cc(missing_qname);
     BOOST_CHECK_EXCEPTION(t.transform(po[1], mock_profile(po[1])),
@@ -788,7 +794,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) 
     SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_object");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(
         mock_processed_object_factory::build_class_inside_two_large_packages());
     t.transform(po[0], mock_profile(po[0]));
@@ -850,7 +856,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(enumeration_stereotype);
     const auto po(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
@@ -910,7 +916,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(exception_stereotype);
     const auto po(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
@@ -971,7 +977,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transform
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(service_stereotype);
     const auto po(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
@@ -1033,7 +1039,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_factory_stereotype_in_two_packages_transform
     SETUP_TEST_LOG_SOURCE("uml_class_with_factory_stereotype_in_two_packages_transforms_into_expected_factory");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(factory_stereotype);
     const auto po(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
@@ -1095,7 +1101,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_repository_stereotype_in_two_packages_transf
     SETUP_TEST_LOG_SOURCE("uml_class_with_repository_stereotype_in_two_packages_transforms_into_expected_repository");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(repository_stereotype);
     const auto po(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
@@ -1157,7 +1163,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_entity_stereotype_in_two_packages_transforms
     SETUP_TEST_LOG_SOURCE("uml_class_with_entity_stereotype_in_two_packages_transforms_into_expected_entity");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(entity_stereotype);
     const auto po(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
@@ -1219,7 +1225,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_keyed_entity_stereotype_in_two_packages_tran
     SETUP_TEST_LOG_SOURCE("uml_class_with_keyed_entity_stereotype_in_two_packages_transforms_into_expected_keyed_entity");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto st(keyed_entity_stereotype);
     const auto po(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
@@ -1281,7 +1287,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_marker_transforms_into_model_comments");
 
     auto c(mock_context(model_name));
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::build_uml_note_with_marker());
     t.transform(po, mock_profile(po));
 
@@ -1300,7 +1306,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_does_nothing");
 
     auto c(mock_context(model_name));
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::build_uml_note());
     t.transform(po, mock_profile(po));
 
@@ -1318,7 +1324,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_does_nothing");
 
     auto c(mock_context(model_name));
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::build_empty_uml_note());
     t.transform(po, mock_profile(po));
 
@@ -1334,7 +1340,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_marker_inside_package_transforms_into_package_comments");
     auto c(mock_context(model_name));
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::
         build_uml_note_with_marker_inside_large_package());
     t.transform(po[0], mock_profile(po[0]));
@@ -1369,7 +1375,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_inside_package_does_nothing");
     auto c(mock_context(model_name));
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::
         build_uml_note_inside_large_package());
     t.transform(po[0], mock_profile(po[0]));
@@ -1404,7 +1410,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_inside_package_does_nothing");
     auto c(mock_context(model_name));
 
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::
         build_empty_uml_note_inside_large_package());
     t.transform(po[0], mock_profile(po[0]));
@@ -1443,7 +1449,7 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     const auto parents = std::list<std::string> { con->first };
     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
 
-    dogen::dia_to_sml::transformer t1(c);
+    dogen::dia_to_sml::transformer t1(dynamic_workflow(), c);
     t1.transform(po[1], mock_profile(po[1]));
     auto po1(po[2]);
     po1.stereotype(immutable_stereotype);
@@ -1453,7 +1459,7 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
 
     c.child_id_to_parent_ids().clear();
     c.parent_ids().insert(con->first);
-    dogen::dia_to_sml::transformer t2(c);
+    dogen::dia_to_sml::transformer t2(dynamic_workflow(), c);
     auto po2(po[1]);
     po2.stereotype(immutable_stereotype);
     const auto op2(mock_profile(po2));
@@ -1471,7 +1477,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
     c.parent_ids().insert(con->first);
 
-    dogen::dia_to_sml::transformer t1(c);
+    dogen::dia_to_sml::transformer t1(dynamic_workflow(), c);
     t1.transform(po[1], mock_profile(po[1]));
     t1.transform(po[2], mock_profile(po[2]));
 
@@ -1508,7 +1514,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_property_transforms_into_value_object_wi
     SETUP_TEST_LOG_SOURCE("uml_class_with_one_property_transforms_into_value_object_with_one_property");
 
     auto c(mock_context());
-    dogen::dia_to_sml::transformer t(c);
+    dogen::dia_to_sml::transformer t(dynamic_workflow(), c);
     const auto po(mock_processed_object_factory::build_class_with_property());
     t.transform(po, mock_profile(po));
 

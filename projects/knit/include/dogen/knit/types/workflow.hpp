@@ -81,7 +81,7 @@ public:
 
 public:
     workflow(workflow&& rhs);
-    workflow(const config::knitting_settings& s);
+    explicit workflow(const config::knitting_settings& s);
     workflow(const config::knitting_settings& s, const output_fn& o);
 
 public: // public section for testing purposes only

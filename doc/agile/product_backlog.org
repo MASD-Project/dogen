@@ -1539,6 +1539,8 @@ has been done.
   post-processing step rather than during transformation.
 - tests need to be cleaned up - we need to check for text of the
   exception being thrown.
+- the workflow should not be creating transformers half-way
+  through. They should be as stateless as possible.
 
 *** Consider adding facet specific types                               :epic:
 

@@ -57,7 +57,7 @@ public:
      *
      * @pre model in context must be populated.
      */
-    explicit transformer(context& c);
+    transformer(const dynamic::workflow& dynamic_workflow, context& c);
 
 private:
     /**
@@ -176,7 +176,7 @@ private:
 
         const auto& kvps(o.comment().key_value_pairs());
         const auto scope(dynamic::scope_types::entity);
-        e.extensions(dynamic_workflow_->execute(scope, kvps));
+        e.extensions(dynamic_workflow_.execute(scope, kvps));
     }
 
     /**
@@ -301,7 +301,7 @@ public:
 private:
     context& context_;
     std::shared_ptr<identifier_parser> identifier_parser_;
-    std::shared_ptr<dynamic::workflow> dynamic_workflow_;
+    const dynamic::workflow& dynamic_workflow_;
 };
 
 } }
