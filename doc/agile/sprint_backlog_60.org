@@ -333,6 +333,77 @@ these.
 
 While we're at it, add support for =family= too.
 
+*** COMPLETED Perform an analysis on the current state of formatters  :story:
+    CLOSED: [2015-01-30 Fri 12:02]
+    CLOCK: [2015-01-30 Fri 11:33]--[2015-01-30 Fri 12:02] =>  0:29
+    CLOCK: [2015-01-30 Fri 08:50]--[2015-01-30 Fri 10:20] =>  1:30
+
+We need to get up to speed of where the formatting code is, and what
+were the problems we had faced previously, before we embarked on the
+dynamic refactoring.
+
+*Random Thoughts*
+
+- we need to create default facet and formatter settings from dynamic
+- add =opaque_settings= to both facet and formatter settings.
+- create a top-level interface: =opaque_settings_factory=. These
+  generate =opaque_settings=. Each facet or formatter can register
+  factories for these in the registrar. When the facet/formatter
+  settings factory is about to execute, it checks the registrar for
+  any opaque settings factories that apply; if any are found, they are
+  used to generate opaque settings.
+- formatters can query global settings for facet and formatter
+  settings. They can dynamic cast opaque settings.
+- generation of file names no longer needs to be done from within the
+  formatter. We can now use global settings to query for all of the
+  required data.
+- naming file_header after the formatter was not a win. In reality,
+  these are two separate concepts. This should probably be some kind
+  of facet level property, quite distinct from the formatter; file
+  name overrides of some kind.
+
+*Final Understanding*
+
+- generate a settings namespace to contain all the settings related
+  machinery. It is basically a translation of dynamic extensions into
+  the c++ model. Nothing else should leave there.
+- create a top-level class - current name: =settings= - that contains
+  both local and global settings.
+- global settings are as they currently exist.
+- local settings have: general, file name settings (for the file name
+  overrides), type settings, additional includes. Presumably all of
+  these need to be optional. We need to ensure general settings have a
+  scope of any.
+- update formatter and facet settings to split them by qname, by
+  formatter. This includes the work required to split the default
+  settings too. Change global settings to have facet/formatter
+  settings by qname, by formatter. We should probably also generate
+  local overrides for general settings immediately. This means the
+  formatter can go straight to the local settings.
+- create a "file name generator" (name needs thinking) that will
+  receive the settings as input and generate file names per formatter
+  for each qname. It will use the postfixes for facet/formatter
+  settings to generate the file name. It will take into account file
+  name overrides in file name settings. We no longer need help from
+  the formatter - the algorithm just uses the settings. Remove all
+  file name related code from formatters.
+- create an "includes generator" (name needs thinking) that will
+  receive the file names from the "file name generator" as well as the
+  settings and produce includes per qname per formatter. It will
+  delegate to each formatter for the includes generation. Formatters
+  to take into account the additional includes settings.
+- rename file settings to file properties because these are not a
+  direct translation from dynamic.
+- create a file properties factory that merges the output of the
+  includes generator and file name generator and spits out file
+  properties per qname, per formatter.
+- use the file properties factory in transformer.
+- transformer also needs a way of populating the class aspects via the
+  type settings and via information obtained in the SML model. We may
+  want to create a class to handle this logic.
+- remove merger from dynamic as we don't need it for now.
+- formatter to check for local overrides to global settings.
+
 *** STARTED Update meta-data section in manual                        :story:
     CLOCK: [2015-01-29 Thu 20:01]--[2015-01-29 Thu 20:50] =>  0:49
 
@@ -364,6 +435,14 @@ example, it makes no sense to supply =cpp.type.family= in a dogen
 model but it may make sense to do so in an external model. However,
 this would mean that if a user manually adds a type to a dogen model
 it cannot be extended. Requires a bit of thinking.
+
+*** Create default facet and formatter settings from dynamic          :story:
+
+At present we are manually generating default settings for both facets
+and formatters. We should do these from dynamic's field definitions.
+
+Dynamic could provide field definition aggregation services for
+formatter and facet.
 
 *** Add merger to dynamic                                             :story:
 
