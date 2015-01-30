@@ -746,6 +746,13 @@ Food for thought:
   what is a registrar in protocol buffers? If it exists at all, its
   probably something very different from boost serialisation and as
   such will require other data.
+- note that this kind of grouping is not necessarily at the language
+  level. For example, domain generation should be common to a set of
+  languages, and so would protocol buffers. This means that rather
+  than a facet or formatter grouping, we need a higher level construct
+  to aggregate things; "domain generation" is made up of languages,
+  languages are made of of facets, facets have formatters. We need a
+  name/classification for "domain generation" in this context.
 
 We should bear in mind [[http://st-www.cs.illinois.edu/users/droberts/evolve.html][this quote]]:
 
