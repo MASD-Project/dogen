@@ -17,14 +17,14 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-29 Thu 20:50]
+Clock summary at [2015-01-30 Fri 08:50]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *24:05* |       |      |
+| *Total time*                                                          | *24:15* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 24:05 |      |
-| STARTED Sprint and product backlog grooming                           |         |       | 2:01 |
+| Active                                                                |         | 24:15 |      |
+| STARTED Sprint and product backlog grooming                           |         |       | 2:11 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                      |         |       | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false                   |         |       | 0:05 |
@@ -44,6 +44,7 @@ Clock summary at [2015-01-29 Thu 20:50]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-30 Fri 08:40]--[2015-01-30 Fri 08:50] =>  0:08
     CLOCK: [2015-01-27 Tue 23:46]--[2015-01-28 Wed 00:01] =>  0:15
     CLOCK: [2015-01-26 Mon 19:36]--[2015-01-26 Mon 19:59] =>  0:23
     CLOCK: [2015-01-21 Wed 23:30]--[2015-01-21 Wed 23:36] =>  0:06
@@ -323,6 +324,15 @@ Notes:
   of work, its easier to solve the dynamic workflow re-creation story
   and just pass it in rather than the flag.
 
+*** COMPLETED Rename the include tags and add them to CPP model       :story:
+    CLOSED: [2015-01-30 Fri 08:48]
+
+Update all the JSON files with names in the form
+=cpp.include.types.header_file=. Add properties in =cpp= to capture
+these.
+
+While we're at it, add support for =family= too.
+
 *** STARTED Update meta-data section in manual                        :story:
     CLOCK: [2015-01-29 Thu 20:01]--[2015-01-29 Thu 20:50] =>  0:49
 
@@ -355,14 +365,6 @@ model but it may make sense to do so in an external model. However,
 this would mean that if a user manually adds a type to a dogen model
 it cannot be extended. Requires a bit of thinking.
 
-*** Rename the include tags and add them to CPP model                 :story:
-
-Update all the JSON files with names in the form
-=cpp.include.types.header_file=. Add properties in =cpp= to capture
-these.
-
-While we're at it, add support for =family= too.
-
 *** Add merger to dynamic                                             :story:
 
 We need a class that takes two objects and merges them. For example
@@ -380,46 +382,83 @@ We need an extra activity in the SML workflow that makes use of the
 *Note*: we still need to prove the use case; it may be that we do not
 need merging at all.
 
-*** Protect against double-initialisation                             :story:
+*** Add support for opaque formatter settings                         :story:
 
-We need to look into static initialisation and make sure the code can
-cope with it being called several times.
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to global settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
 
-At present it seems we would re-register fields, backends, etc so
-multiple initialisation would fail.
+*** Add support for local settings                                    :story:
 
-*** Add field definition description                                  :story:
+- create a local settings class that is made up of file settings,
+  opaque settings and formatter settings. Entity to have a container
+  of local settings (map of formatter id to local settings).
+- create a local settings factory that takes on the work from workflow
+  in generating the file settings. It also takes on a container of
+  opaque settings factory by formatter id to generate the opaque
+  settings. Finally, it uses the formatter settings factory for the
+  overrides. These should be optional. If populated, they should take
+  on the global settings as defaults so that we don't have to worry
+  about global settings for formatters any more. This means the local
+  settings factory must have access to the global settings.
 
-It would be useful to have a description of the purpose of the field
-so that we could print it to the command line.
+*** Create a settings class                                           :story:
 
-*** Add field definition group                                        :story:
+- create a settings class that has a map of formatter id to global
+  settings. It could also have a map of c++ entity name (produced with
+  name builder to include namespaces), to formatter id to local
+  settings. With this we can now move the settings away from entity
+  because we no longer require the qname.
+- pass the settings class to the includes builder.
 
-Fields should be grouped. This could conceivably be achieved by the
-owner, or maybe we need a high-level entity to do this
-aggregation. This is useful when printing fields out to the shell.
+*** Consider using an abstract factory in formatters                  :story:
 
-*** Rename ODB parameters                                             :story:
+At present we have a number of interfaces (or quasi-interfaces) coming
+out of formatter:
 
-At present we use the following form:
+- file name generation
+- includes generation
+- opaque settings generation
+- opaque settings validator
 
-: #DOGEN ODB_PRAGMA=no_id
+Perhaps it makes more sense to aggregate them all into a factory of
+factories. We should look into the abstract factory pattern as it
+seems particularly suitable for this. The factory should remember the
+id of the formatter it comes from.
 
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
+In terms of names, it is difficult to find a name for such an
+aggregate:
 
-*** Rename =dia.comment=                                              :story:
+- formatter components, e.g. =formatter_components_factory_interface=
+- formatter properties
+- formatter parts
 
-This field hasn't got a sensible name. We need to continue thinking
-about the right name for this - as we have already started doing with
-processed comment; =applicable_to_parent_object= is not quite the
-right name but it is moving on the right direction. Once we settle on
-a good name we need to rename all usages of =dia.comment=.
+*** Implement include generation for class header formatter           :story:
 
-*** Remove copyright notices from licence hydrator                    :story:
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
 
-At present there seems to be no use case for adding a copyright notice
-when hydrating a licence; these only make sense in the context of a
-model. We should remove this.
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via dynamic extensions, so we can start using
+  STL, Boost etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
 
 ** Deprecated
