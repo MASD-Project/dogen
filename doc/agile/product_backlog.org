@@ -3071,6 +3071,10 @@ not match the header file at all. In this cases we should use
 =nongeneratable= rather than =service= stereotypes, and perhaps when
 that happens we should switch off forward declarations?
 
+In addition, in some cases we may want to use a =struct= rather than a
+=class=. At present we are always forward declaring as =class= but
+sometimes declaring as =struct=.
+
 *** Add tests for tagging of modules, primitves and enumerations      :story:
 
 We've tested abstract objects et al quite a lot but forgotten the
