@@ -4066,6 +4066,7 @@ Links:
 
 - [[http://www.java2s.com/Tutorial/Cpp/0360__bitset/Usebitsetwithenumtogether.htm][Use bitset with enum together]]
 - [[http://stackoverflow.com/questions/9857239/c11-and-17-5-2-1-3-bitmask-types][C++11 and {17.5.2.1.3} Bitmask Types]]
+- [[https://www.justsoftwaresolutions.co.uk/cplusplus/using-enum-classes-as-bitfields.html][Using Enum Classes as Bitfields]]
 
 *** Vistor is only supported at the base class level                  :story:
 
